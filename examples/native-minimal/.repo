@@ -1,0 +1,52 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared", "verified"]
+notes = "Maintainer-controlled source of truth."
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+homepage = "https://example.com/orbit"
+license = "MIT"
+status = "active"
+visibility = "public"
+languages = ["rust"]
+build = "cargo build"
+test = "cargo test"
+topics = ["sync", "cli", "local-first"]
+
+[owners]
+maintainers = ["@alice", "@bob"]
+team = "platform"
+security_contact = "security@example.com"
+
+[docs]
+root = "docs/"
+getting_started = "docs/getting-started.md"
+architecture = "docs/architecture.md"
+
+[readme]
+title = "Orbit"
+tagline = "Fast local-first sync engine"
+sections = ["overview", "docs", "quickstart", "security"]
+
+[readme.custom_sections.quickstart]
+content = "Run `cargo build` and `cargo test` to validate the local development setup."
+
+[compat.github]
+codeowners = "generate"
+security = "generate"
+contributing = "skip"
+pull_request_template = "skip"
+
+[relations]
+references = []
+
+[x.example]
+internal_id = "orbit-prod"
