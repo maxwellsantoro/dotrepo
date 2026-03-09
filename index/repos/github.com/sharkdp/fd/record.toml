@@ -1,0 +1,29 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/sharkdp/fd"
+generated_at = "2026-03-09T00:00:00Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Imported from the upstream README and security policy; not maintainer-verified."
+
+[repo]
+name = "fd"
+description = "A simple, fast and user-friendly alternative to 'find'."
+homepage = "https://github.com/sharkdp/fd"
+license = "Apache-2.0 OR MIT"
+visibility = "public"
+languages = ["rust"]
+build = "cargo build"
+test = "cargo test"
+
+[owners]
+maintainers = ["@sharkdp", "@tmccombs", "@tavianator"]
+security_contact = "https://github.com/sharkdp/fd/security/advisories/new"
+
+[relations]
+references = []

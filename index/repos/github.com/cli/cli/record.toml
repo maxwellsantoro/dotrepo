@@ -1,0 +1,28 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/cli/cli"
+generated_at = "2026-03-09T00:00:00Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Imported from the upstream README, install documentation, Makefile, and security policy; not maintainer-verified."
+
+[repo]
+name = "GitHub CLI"
+description = "GitHub's official command line tool"
+homepage = "https://github.com/cli/cli"
+license = "MIT"
+visibility = "public"
+languages = ["go"]
+build = "make install"
+test = "make test"
+
+[owners]
+security_contact = "https://github.com/cli/cli/security/policy"
+
+[relations]
+references = []

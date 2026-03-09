@@ -3,7 +3,8 @@
 ## v0.1
 - Canonical root `.repo` file format
 - Overlay record format for the index
-- `init`, `validate`, `validate-index`, `query`, `generate`, `doctor`, and `trust` commands
+- `init`, `import`, `validate`, `validate-index`, `query`, `generate`, `doctor`, and `trust` commands
+- First stdio MCP server wrapping `dotrepo-core`
 - Mode-aware validation
 - Basic generated README and compatibility surfaces
 - Seed `index/` tree plus index validation checks
@@ -11,9 +12,8 @@
 
 ## v0.2
 - Managed-region sync rules
+- Richer import heuristics for README, CODEOWNERS, and SECURITY.md
 - LSP and VS Code extension
-- MCP server
-- Import helpers for README, CODEOWNERS, and SECURITY.md
 
 ## v0.3+
 - Bundle mode

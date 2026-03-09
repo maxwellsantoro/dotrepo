@@ -1,0 +1,29 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/sharkdp/bat"
+generated_at = "2026-03-09T00:00:00Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Imported from the upstream README and security policy; not maintainer-verified."
+
+[repo]
+name = "bat"
+description = "A cat(1) clone with syntax highlighting and Git integration."
+homepage = "https://github.com/sharkdp/bat"
+license = "Apache-2.0 OR MIT"
+visibility = "public"
+languages = ["rust"]
+build = "cargo build --bins"
+test = "cargo test"
+
+[owners]
+maintainers = ["@sharkdp", "@eth-p", "@keith-hall", "@Enselic"]
+security_contact = "https://github.com/sharkdp/bat/security/policy"
+
+[relations]
+references = []

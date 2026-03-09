@@ -1,0 +1,3 @@
+# Beacon
+
+Repository release dashboard.

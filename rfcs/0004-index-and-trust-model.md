@@ -44,13 +44,67 @@ For the v0.1 seed index, CI should also require:
 - `record.source` to resolve to the same `<host>/<owner>/<repo>` identity as the index path
 - `repo.homepage`, when it is also a repository URL, to match that same identity
 
+Seed-index CI should also lint for contribution quality without making the core protocol artificially rigid. Day-one warnings should cover:
+- non-reference `record.trust.confidence` vocabulary
+- non-reference `record.trust.provenance` vocabulary
+- evidence that does not explain imported or inferred claims clearly
+- evidence that does not explain where build and test commands came from
+- unexplained `unknown` placeholders for fields like security contacts
+
 ## Contribution workflow
 
 1. A contributor or agent proposes a record.
-2. CI validates schema, trust fields, and required provenance metadata.
-3. Review checks ensure the record distinguishes declared, imported, and inferred claims.
+2. CI validates schema, identity alignment, and required evidence files.
+3. CI and review checks ensure the record distinguishes declared, imported, and inferred claims, and that evidence is specific enough for future maintainers to trust the overlay.
 4. Approved records merge.
 5. Maintainers may later claim or supersede a record with a canonical in-repo `.repo`.
+
+## Claim and supersede semantics
+
+The seed index needs authority handoff semantics before it needs a productized
+claim workflow.
+
+For v0.1 and the near-term roadmap:
+- **claim** means a maintainer-controlled canonical `.repo` record asserts that it
+  represents the same repository identity as an existing overlay or draft index entry
+- **supersede** means that a higher-authority record becomes the default record for
+  that repository identity without erasing the older overlay's history or evidence
+
+Claim and supersede are identity-level operations. They should only apply when the
+repository identity surface matches:
+- the canonical upstream host, owner, and repo path
+- the record's `record.source`
+- the index path used by any corresponding overlay or canonical mirror
+
+The contract implication is simple:
+- when a maintainer-controlled canonical record exists for the same identity, consumers
+  should prefer it by default over imported or inferred overlays
+- overlays remain useful as historical evidence, third-party curation, or pre-adoption
+  records, but they should not continue to masquerade as the best available authority
+- a future maintainer claim workflow may automate this handoff, but the precedence rule
+  does not depend on that workflow existing yet
+
+## Conflict surfacing rules
+
+The protocol should not silently flatten disagreement once multiple records exist for
+the same repository identity.
+
+Consumers should treat conflicts this way:
+- if a canonical record and an overlay disagree, prefer the canonical value by default
+  while preserving the conflicting overlay claim as visible context
+- if multiple overlays disagree and no canonical record exists, do not merge them into a
+  synthetic fact without surfacing the disagreement and each record's trust metadata
+- if a field remains `unknown` intentionally, treat that as an explicit absence of
+  authority, not as a conflict by itself
+
+At minimum, conflict surfacing should preserve:
+- `record.mode`
+- `record.status`
+- `record.source`
+- `record.trust`
+
+That makes it possible for downstream tools to say not only *what* conflicts, but
+also *why* one record is preferred and what kind of evidence supports the other.
 
 ## Trust surfacing
 

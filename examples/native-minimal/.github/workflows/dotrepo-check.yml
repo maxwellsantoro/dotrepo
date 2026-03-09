@@ -15,4 +15,7 @@ jobs:
       - name: Run dotrepo checks
         run: |
           cargo run -p dotrepo-cli -- --root examples/native-minimal validate
+          cargo run -p dotrepo-cli -- --root examples/native-minimal query repo.build --raw
+          cargo run -p dotrepo-cli -- --root examples/native-minimal trust
+          cargo run -p dotrepo-cli -- --root examples/native-minimal doctor
           cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check

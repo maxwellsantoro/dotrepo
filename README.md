@@ -16,7 +16,7 @@ At day one, dotrepo has three inseparable parts:
 1. **A protocol**
    A versioned `.repo` schema for essential repository metadata, provenance, trust, and synchronization hints.
 2. **A reference toolchain**
-   A Rust CLI and related integrations for validating, querying, syncing, and generating compatible repository surfaces.
+   A Rust CLI, stdio MCP server, and related integrations for importing, validating, querying, syncing, and generating compatible repository surfaces.
 3. **An index**
    A public, Git-backed collection of canonical records and overlays that makes public repositories mechanically visible whether or not maintainers have adopted dotrepo yet.
 
@@ -55,7 +55,9 @@ A structured `.repo` record does not replace code or good documentation. It prov
 
 ## What this scaffold includes
 
-- a Rust workspace with `dotrepo-schema`, `dotrepo-core`, and `dotrepo-cli`
+- a Rust workspace with `dotrepo-schema`, `dotrepo-core`, `dotrepo-cli`, and `dotrepo-mcp`
+- a thin import path for bootstrapping records from `README.md`, `CODEOWNERS`, and `SECURITY.md`
+- a thin stdio MCP server exposing trust-aware validate/query/trust/generate-check/import tools
 - updated RFCs that reflect the protocol + toolchain + index model
 - example native and overlay records
 - a seeded `index/` tree with real overlay layout and validation rules
@@ -64,10 +66,11 @@ A structured `.repo` record does not replace code or good documentation. It prov
 
 ## What this scaffold does not claim yet
 
-This scaffold is a planning and architecture package. It is not a production implementation. The Rust crates contain meaningful structure and APIs, but this repo is still a starting point for real development.
+This repo is an early implementation of the dotrepo protocol and toolchain. It is not yet production-hardened, but it is beyond a pure architecture scaffold: the crates implement import, validation, querying, generated-surface checks, index validation, and a first MCP server.
 
 ## First docs to read
 
+- [`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md)
 - [`docs/vision.md`](docs/vision.md)
 - [`docs/public-messaging.md`](docs/public-messaging.md)
 - [`docs/trust-model.md`](docs/trust-model.md)
@@ -75,3 +78,4 @@ This scaffold is a planning and architecture package. It is not a production imp
 - [`rfcs/0001-protocol-and-ecosystem.md`](rfcs/0001-protocol-and-ecosystem.md)
 - [`rfcs/0004-index-and-trust-model.md`](rfcs/0004-index-and-trust-model.md)
 - [`rfcs/0003-cli-and-query-contract.md`](rfcs/0003-cli-and-query-contract.md)
+- [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md)

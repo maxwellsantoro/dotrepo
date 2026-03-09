@@ -8,8 +8,8 @@ generated_at = "2026-03-08T00:00:00Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported"]
-notes = "Imported from public repository materials; not maintainer-verified."
+provenance = ["imported", "inferred"]
+notes = "Imported from public repository materials; build and test commands are inferred from the Cargo project layout; not maintainer-verified."
 
 [repo]
 name = "ripgrep"

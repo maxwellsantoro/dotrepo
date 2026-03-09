@@ -22,6 +22,23 @@ pub struct Manifest {
     legacy_trust: Option<Trust>,
 }
 
+impl Manifest {
+    pub fn new(record: Record, repo: Repo) -> Self {
+        Self {
+            schema: "dotrepo/v0.1".into(),
+            record,
+            repo,
+            owners: None,
+            docs: None,
+            readme: None,
+            compat: None,
+            relations: None,
+            x: BTreeMap::new(),
+            legacy_trust: None,
+        }
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Record {
     pub mode: RecordMode,
@@ -197,9 +214,8 @@ pub fn render_manifest(manifest: &Manifest) -> Result<String, RenderError> {
 }
 
 pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
-    render_manifest(&Manifest {
-        schema: "dotrepo/v0.1".into(),
-        record: Record {
+    let mut manifest = Manifest::new(
+        Record {
             mode: RecordMode::Native,
             status: RecordStatus::Draft,
             source: None,
@@ -210,7 +226,7 @@ pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
                 notes: Some("Maintainer-authored scaffold.".into()),
             }),
         },
-        repo: Repo {
+        Repo {
             name: repo_name.into(),
             description: "TODO: describe this repository".into(),
             homepage: None,
@@ -222,30 +238,27 @@ pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
             test: None,
             topics: Vec::new(),
         },
-        owners: Some(Owners {
-            maintainers: Vec::new(),
-            team: None,
-            security_contact: None,
+    );
+    manifest.owners = Some(Owners {
+        maintainers: Vec::new(),
+        team: None,
+        security_contact: None,
+    });
+    manifest.readme = Some(Readme {
+        title: Some(repo_name.into()),
+        tagline: None,
+        sections: vec!["overview".into(), "security".into()],
+        custom_sections: BTreeMap::new(),
+    });
+    manifest.compat = Some(Compat {
+        github: Some(GitHubCompat {
+            codeowners: Some(CompatMode::Skip),
+            security: Some(CompatMode::Skip),
+            contributing: Some(CompatMode::Skip),
+            pull_request_template: Some(CompatMode::Skip),
         }),
-        docs: None,
-        readme: Some(Readme {
-            title: Some(repo_name.into()),
-            tagline: None,
-            sections: vec!["overview".into(), "security".into()],
-            custom_sections: BTreeMap::new(),
-        }),
-        compat: Some(Compat {
-            github: Some(GitHubCompat {
-                codeowners: Some(CompatMode::Skip),
-                security: Some(CompatMode::Skip),
-                contributing: Some(CompatMode::Skip),
-                pull_request_template: Some(CompatMode::Skip),
-            }),
-        }),
-        relations: None,
-        x: BTreeMap::new(),
-        legacy_trust: None,
-    })
+    });
+    render_manifest(&manifest)
 }
 
 #[cfg(test)]

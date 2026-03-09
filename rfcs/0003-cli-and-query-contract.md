@@ -8,6 +8,15 @@ Draft
 ### `dotrepo init`
 Create a starter `.repo` file for an existing repository.
 
+### `dotrepo import`
+Bootstrap a draft `.repo` or overlay `record.toml` from conventional repository surfaces.
+
+The v0.1 command should:
+- read `README.md`, `CODEOWNERS`, and `SECURITY.md` when present
+- default to a native draft `.repo` import
+- support `--mode overlay --source <url>` to write `record.toml` plus `evidence.md`
+- preserve the trust story by recording imported sources and inferred fallbacks in record metadata or evidence text
+
 ### `dotrepo validate`
 Validate the record and return actionable diagnostics.
 
@@ -18,6 +27,7 @@ The v0.1 command should:
 - discover `record.toml` files under `repos/<host>/<owner>/<repo>/`
 - require a sibling `evidence.md`
 - enforce source/path identity alignment for overlay entries
+- warn when public-index records use non-reference trust vocabulary or evidence that does not explain imported, inferred, build, test, or `unknown` claims clearly
 
 ### `dotrepo query <path>`
 Return a structured value for a dot path such as:
@@ -65,6 +75,8 @@ Display the record's status, provenance, confidence, and source context in one p
 - `0`: success
 - `1`: invalid input or runtime error
 - `2`: check-mode drift or actionable mismatch detected
+
+`validate-index` should return `0` when it only emits warnings.
 
 ## Query stability
 

@@ -1,0 +1,3 @@
+* @maintainer @org/release-team security@example.com
+/docs/ @docs-team
+*.rs @maintainer # duplicate maintainer to exercise deduping

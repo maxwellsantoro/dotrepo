@@ -166,8 +166,20 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "dotrepo-schema",
+ "serde",
  "serde_json",
  "sha2",
+]
+
+[[package]]
+name = "dotrepo-mcp"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "dotrepo-core",
+ "dotrepo-schema",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

@@ -31,3 +31,8 @@ Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `mediu
 - Agents and tools should prefer canonical records when available.
 - Imported and inferred overlays are useful, but should be consumed with awareness of their status.
 - Conflicts between sources should surface explicitly rather than being quietly flattened.
+- Claim and supersede are authority handoff semantics, not a requirement for a full
+  productized maintainer workflow before precedence can be defined.
+- When a canonical record and an overlay disagree for the same repository identity,
+  consumers should prefer the canonical value by default and preserve the overlay's
+  conflicting claim as visible trust context.

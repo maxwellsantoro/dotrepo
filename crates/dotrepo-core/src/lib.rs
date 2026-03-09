@@ -1,5 +1,9 @@
 use anyhow::{anyhow, bail, Result};
-use dotrepo_schema::{parse_manifest, CompatMode, Manifest, ReadmeCustomSection, RecordMode};
+use dotrepo_schema::{
+    parse_manifest, render_manifest, Compat, CompatMode, GitHubCompat, Manifest, Owners, Readme,
+    ReadmeCustomSection, Record, RecordMode, RecordStatus, Relations, Repo, Trust,
+};
+use serde::Serialize;
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 use std::fs;
@@ -16,9 +20,130 @@ pub struct DoctorFinding {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ValidationDiagnostic {
+    pub severity: ValidationDiagnosticSeverity,
+    pub source: &'static str,
+    pub message: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ValidationDiagnosticSeverity {
+    Error,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct IndexFinding {
     pub path: PathBuf,
+    pub severity: IndexFindingSeverity,
     pub message: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum IndexFindingSeverity {
+    Warning,
+    Error,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ImportMode {
+    Native,
+    Overlay,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct RepositoryDiagnostic {
+    pub severity: &'static str,
+    pub source: String,
+    pub message: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub manifest_path: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct RecordSummary {
+    pub mode: RecordMode,
+    pub status: RecordStatus,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub source: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub trust: Option<Trust>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ValidateReport {
+    pub valid: bool,
+    pub root: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub manifest_path: Option<String>,
+    pub diagnostics: Vec<RepositoryDiagnostic>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub record: Option<RecordSummary>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct QueryReport {
+    pub root: String,
+    pub manifest_path: String,
+    pub path: String,
+    pub value: Value,
+    pub record: RecordSummary,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TrustReport {
+    pub root: String,
+    pub manifest_path: String,
+    pub record: RecordSummary,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct GenerateCheckOutput {
+    pub path: String,
+    pub stale: bool,
+    pub expected: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub current: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GenerateCheckReport {
+    pub root: String,
+    pub checked: usize,
+    pub stale: Vec<String>,
+    pub outputs: Vec<GenerateCheckOutput>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ImportPreviewReport {
+    pub root: String,
+    pub mode: &'static str,
+    pub manifest_path: String,
+    pub manifest: Manifest,
+    pub manifest_text: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub evidence_path: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub evidence_text: Option<String>,
+    pub imported_sources: Vec<String>,
+    pub inferred_fields: Vec<String>,
+    pub record: RecordSummary,
+}
+
+#[derive(Debug, Clone)]
+pub struct ImportPlan {
+    pub manifest_path: PathBuf,
+    pub manifest: Manifest,
+    pub manifest_text: String,
+    pub evidence_path: Option<PathBuf>,
+    pub evidence_text: Option<String>,
+    pub imported_sources: Vec<String>,
+    pub inferred_fields: Vec<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -45,41 +170,387 @@ pub fn load_manifest_from_root(root: &Path) -> Result<Manifest> {
     Ok(load_manifest_document(root)?.manifest)
 }
 
+pub fn display_path(root: &Path, path: &Path) -> String {
+    path.strip_prefix(root)
+        .unwrap_or(path)
+        .display()
+        .to_string()
+}
+
+pub fn record_summary(manifest: &Manifest) -> RecordSummary {
+    RecordSummary {
+        mode: manifest.record.mode.clone(),
+        status: manifest.record.status.clone(),
+        source: manifest.record.source.clone(),
+        trust: manifest.record.trust.clone(),
+    }
+}
+
+pub fn validate_repository(root: &Path) -> ValidateReport {
+    match load_manifest_document(root) {
+        Ok(document) => {
+            let diagnostics = validate_manifest_diagnostics(root, &document.manifest)
+                .into_iter()
+                .map(|item| RepositoryDiagnostic {
+                    severity: "error",
+                    source: item.source.to_string(),
+                    message: item.message,
+                    manifest_path: Some(display_path(root, &document.path)),
+                })
+                .collect::<Vec<_>>();
+
+            ValidateReport {
+                valid: diagnostics.is_empty(),
+                root: root.display().to_string(),
+                manifest_path: Some(display_path(root, &document.path)),
+                diagnostics,
+                record: Some(record_summary(&document.manifest)),
+            }
+        }
+        Err(err) => ValidateReport {
+            valid: false,
+            root: root.display().to_string(),
+            manifest_path: None,
+            diagnostics: vec![RepositoryDiagnostic {
+                severity: "error",
+                source: "load_manifest_document".into(),
+                message: err.to_string(),
+                manifest_path: None,
+            }],
+            record: None,
+        },
+    }
+}
+
+pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
+    let document = load_manifest_document(root)?;
+    validate_manifest(root, &document.manifest)?;
+    let value = query_manifest_value(&document.manifest, path)?;
+    Ok(QueryReport {
+        root: root.display().to_string(),
+        manifest_path: display_path(root, &document.path),
+        path: path.to_string(),
+        value,
+        record: record_summary(&document.manifest),
+    })
+}
+
+pub fn trust_repository(root: &Path) -> Result<TrustReport> {
+    let document = load_manifest_document(root)?;
+    validate_manifest(root, &document.manifest)?;
+    Ok(TrustReport {
+        root: root.display().to_string(),
+        manifest_path: display_path(root, &document.path),
+        record: record_summary(&document.manifest),
+    })
+}
+
+pub fn generate_check_repository(root: &Path) -> Result<GenerateCheckReport> {
+    let document = load_manifest_document(root)?;
+    validate_manifest(root, &document.manifest)?;
+    let outputs = managed_outputs(root, &document.manifest, &document.raw)?;
+
+    let mut rendered_outputs = Vec::new();
+    let mut stale = Vec::new();
+
+    for (path, expected) in outputs {
+        let current = fs::read_to_string(&path).unwrap_or_default();
+        let relative = display_path(root, &path);
+        let is_stale = current != expected;
+        if is_stale {
+            stale.push(relative.clone());
+        }
+        rendered_outputs.push(GenerateCheckOutput {
+            path: relative,
+            stale: is_stale,
+            expected,
+            current: if is_stale { Some(current) } else { None },
+        });
+    }
+
+    Ok(GenerateCheckReport {
+        root: root.display().to_string(),
+        checked: rendered_outputs.len(),
+        stale,
+        outputs: rendered_outputs,
+    })
+}
+
+pub fn import_preview_repository(
+    root: &Path,
+    mode: ImportMode,
+    source: Option<&str>,
+) -> Result<ImportPreviewReport> {
+    let plan = import_repository(root, mode, source)?;
+    Ok(ImportPreviewReport {
+        root: root.display().to_string(),
+        mode: import_mode_name(mode),
+        manifest_path: display_path(root, &plan.manifest_path),
+        manifest: plan.manifest.clone(),
+        manifest_text: plan.manifest_text.clone(),
+        evidence_path: plan.evidence_path.as_ref().map(|path| display_path(root, path)),
+        evidence_text: plan.evidence_text.clone(),
+        imported_sources: plan.imported_sources.clone(),
+        inferred_fields: plan.inferred_fields.clone(),
+        record: record_summary(&plan.manifest),
+    })
+}
+
+pub fn import_repository(
+    root: &Path,
+    mode: ImportMode,
+    source: Option<&str>,
+) -> Result<ImportPlan> {
+    let readme = load_first_existing_file(root, &["README.md"])?;
+    let codeowners = load_first_existing_file(root, &[".github/CODEOWNERS", "CODEOWNERS"])?;
+    let security = load_first_existing_file(root, &[".github/SECURITY.md", "SECURITY.md"])?;
+
+    let readme_metadata = readme
+        .as_ref()
+        .map(|file| parse_readme_metadata(&file.contents))
+        .unwrap_or_default();
+    let codeowners_metadata = codeowners
+        .as_ref()
+        .map(|file| parse_codeowners_metadata(&file.contents))
+        .unwrap_or_default();
+    let security_contact = security
+        .as_ref()
+        .and_then(|file| parse_security_contact(&file.contents))
+        .or_else(|| security.as_ref().map(|_| "unknown".into()));
+
+    let mut imported_sources = Vec::new();
+    let mut inferred_fields = Vec::new();
+
+    let repo_name = match readme_metadata.title {
+        Some(ref title) => {
+            note_import(
+                &mut imported_sources,
+                readme.as_ref().expect("readme exists").path,
+            );
+            title.clone()
+        }
+        None => {
+            inferred_fields.push("repo.name".into());
+            root.file_name()
+                .and_then(|name| name.to_str())
+                .filter(|name| !name.is_empty())
+                .unwrap_or("repository")
+                .to_string()
+        }
+    };
+
+    let description = match readme_metadata.description {
+        Some(ref description) => {
+            note_import(
+                &mut imported_sources,
+                readme.as_ref().expect("readme exists").path,
+            );
+            description.clone()
+        }
+        None => {
+            inferred_fields.push("repo.description".into());
+            "Imported repository metadata; review and refine before relying on it.".into()
+        }
+    };
+
+    if !codeowners_metadata.owners.is_empty() || codeowners_metadata.team.is_some() {
+        if let Some(file) = &codeowners {
+            note_import(&mut imported_sources, file.path);
+        }
+    }
+
+    if security_contact.is_some() {
+        if let Some(file) = &security {
+            note_import(&mut imported_sources, file.path);
+        }
+    }
+
+    let provenance = import_provenance(&imported_sources, &inferred_fields);
+    let confidence = if provenance.iter().any(|value| value == "imported") {
+        "medium"
+    } else {
+        "low"
+    };
+
+    let status = match mode {
+        ImportMode::Native => RecordStatus::Draft,
+        ImportMode::Overlay if inferred_fields.is_empty() => RecordStatus::Imported,
+        ImportMode::Overlay => RecordStatus::Inferred,
+    };
+
+    let mut manifest = Manifest::new(
+        Record {
+            mode: match mode {
+                ImportMode::Native => RecordMode::Native,
+                ImportMode::Overlay => RecordMode::Overlay,
+            },
+            status,
+            source: match mode {
+                ImportMode::Native => None,
+                ImportMode::Overlay => Some(
+                    source
+                        .map(str::trim)
+                        .filter(|value| !value.is_empty())
+                        .ok_or_else(|| anyhow!("--source is required for overlay imports"))?
+                        .to_string(),
+                ),
+            },
+            generated_at: None,
+            trust: Some(Trust {
+                confidence: Some(confidence.into()),
+                provenance,
+                notes: Some(import_notes(mode, &imported_sources, &inferred_fields)),
+            }),
+        },
+        Repo {
+            name: repo_name.clone(),
+            description,
+            homepage: match mode {
+                ImportMode::Native => None,
+                ImportMode::Overlay => source.map(|value| value.trim().to_string()),
+            },
+            license: None,
+            status: None,
+            visibility: None,
+            languages: Vec::new(),
+            build: None,
+            test: None,
+            topics: Vec::new(),
+        },
+    );
+    manifest.owners = build_imported_owners(
+        codeowners_metadata.owners,
+        codeowners_metadata.team,
+        security_contact,
+    );
+    manifest.readme = match mode {
+        ImportMode::Native => Some(Readme {
+            title: Some(repo_name),
+            tagline: None,
+            sections: vec!["overview".into(), "security".into()],
+            custom_sections: Default::default(),
+        }),
+        ImportMode::Overlay => None,
+    };
+    manifest.compat = match mode {
+        ImportMode::Native => Some(Compat {
+            github: Some(GitHubCompat {
+                codeowners: Some(CompatMode::Skip),
+                security: Some(CompatMode::Skip),
+                contributing: Some(CompatMode::Skip),
+                pull_request_template: Some(CompatMode::Skip),
+            }),
+        }),
+        ImportMode::Overlay => None,
+    };
+    manifest.relations = match mode {
+        ImportMode::Native => None,
+        ImportMode::Overlay => Some(Relations {
+            references: Vec::new(),
+        }),
+    };
+    validate_manifest(root, &manifest)?;
+    let manifest_text = render_manifest(&manifest)?;
+
+    let (evidence_path, evidence_text) = match mode {
+        ImportMode::Native => (None, None),
+        ImportMode::Overlay => (
+            Some(root.join("evidence.md")),
+            Some(render_import_evidence(
+                &imported_sources,
+                &inferred_fields,
+                &security,
+            )),
+        ),
+    };
+
+    Ok(ImportPlan {
+        manifest_path: root.join(match mode {
+            ImportMode::Native => ".repo",
+            ImportMode::Overlay => "record.toml",
+        }),
+        manifest,
+        manifest_text,
+        evidence_path,
+        evidence_text,
+        imported_sources,
+        inferred_fields,
+    })
+}
+
 pub fn validate_manifest(root: &Path, manifest: &Manifest) -> Result<()> {
+    let diagnostics = validate_manifest_diagnostics(root, manifest);
+    if diagnostics.is_empty() {
+        return Ok(());
+    }
+
+    bail!(
+        "{}",
+        diagnostics
+            .into_iter()
+            .map(|diagnostic| diagnostic.message)
+            .collect::<Vec<_>>()
+            .join("\n")
+    )
+}
+
+pub fn validate_manifest_diagnostics(
+    root: &Path,
+    manifest: &Manifest,
+) -> Vec<ValidationDiagnostic> {
+    let mut diagnostics = Vec::new();
+
     if manifest.schema.trim() != SUPPORTED_SCHEMA {
-        bail!("unsupported schema: {}", manifest.schema);
+        diagnostics.push(validation_error(
+            "validate_manifest",
+            format!("unsupported schema: {}", manifest.schema),
+        ));
     }
 
     if manifest.repo.name.trim().is_empty() {
-        bail!("repo.name must not be empty");
+        diagnostics.push(validation_error(
+            "validate_manifest",
+            "repo.name must not be empty",
+        ));
     }
 
-    validate_readme_sections(manifest)?;
+    diagnostics.extend(validate_readme_sections(manifest));
 
     if matches!(manifest.record.mode, RecordMode::Native) {
-        validate_native_paths(root, manifest)?;
+        diagnostics.extend(validate_native_paths(root, manifest));
     }
 
     if matches!(manifest.record.mode, RecordMode::Overlay) {
         let source = manifest.record.source.as_deref().unwrap_or("").trim();
         if source.is_empty() {
-            bail!("record.source must be set for overlay records");
+            diagnostics.push(validation_error(
+                "validate_manifest",
+                "record.source must be set for overlay records",
+            ));
         }
 
-        let trust = manifest
-            .record
-            .trust
-            .as_ref()
-            .ok_or_else(|| anyhow!("record.trust must be set for overlay records"))?;
-        if trust.provenance.is_empty() {
-            bail!("record.trust.provenance must list at least one provenance entry for overlay records");
+        match manifest.record.trust.as_ref() {
+            Some(trust) => {
+                if trust.provenance.is_empty() {
+                    diagnostics.push(validation_error(
+                        "validate_manifest",
+                        "record.trust.provenance must list at least one provenance entry for overlay records",
+                    ));
+                }
+            }
+            None => diagnostics.push(validation_error(
+                "validate_manifest",
+                "record.trust must be set for overlay records",
+            )),
         }
     }
 
-    Ok(())
+    diagnostics
 }
 
-fn validate_native_paths(root: &Path, manifest: &Manifest) -> Result<()> {
+fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiagnostic> {
+    let mut diagnostics = Vec::new();
+
     if let Some(docs) = &manifest.docs {
         for path in [
             &docs.root,
@@ -92,7 +563,10 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Result<()> {
         {
             let target = root.join(path);
             if !target.exists() {
-                bail!("referenced path does not exist: {}", target.display());
+                diagnostics.push(validation_error(
+                    "validate_native_paths",
+                    format!("referenced path does not exist: {}", target.display()),
+                ));
             }
         }
     }
@@ -102,17 +576,545 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Result<()> {
             if let Some(path) = &section.path {
                 let target = root.join(path);
                 if !target.exists() {
-                    bail!(
-                        "custom README section `{}` references a missing path: {}",
-                        name,
-                        target.display()
-                    );
+                    diagnostics.push(validation_error(
+                        "validate_native_paths",
+                        format!(
+                            "custom README section `{}` references a missing path: {}",
+                            name,
+                            target.display()
+                        ),
+                    ));
                 }
             }
         }
     }
 
-    Ok(())
+    diagnostics
+}
+
+#[derive(Default)]
+struct ReadmeMetadata {
+    title: Option<String>,
+    description: Option<String>,
+}
+
+struct ImportedFile {
+    path: &'static str,
+    contents: String,
+}
+
+#[derive(Default)]
+struct CodeownersMetadata {
+    owners: Vec<String>,
+    team: Option<String>,
+}
+
+fn load_first_existing_file(
+    root: &Path,
+    candidates: &[&'static str],
+) -> Result<Option<ImportedFile>> {
+    for candidate in candidates {
+        let path = root.join(candidate);
+        if path.exists() {
+            let contents = fs::read_to_string(&path)
+                .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+            return Ok(Some(ImportedFile {
+                path: candidate,
+                contents,
+            }));
+        }
+    }
+
+    Ok(None)
+}
+
+fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
+    let mut metadata = ReadmeMetadata::default();
+    let lines = contents.lines().collect::<Vec<_>>();
+    let mut in_code_block = false;
+    let mut idx = 0;
+
+    while idx < lines.len() {
+        let trimmed = lines[idx].trim();
+        if trimmed.starts_with("```") {
+            in_code_block = !in_code_block;
+            idx += 1;
+            continue;
+        }
+        if in_code_block {
+            idx += 1;
+            continue;
+        }
+
+        if metadata.title.is_none() {
+            if let Some(title) = parse_readme_title_line(trimmed) {
+                metadata.title = Some(title);
+                idx += 1;
+                continue;
+            }
+            if let Some(title) = parse_setext_heading(&lines, idx) {
+                metadata.title = Some(title);
+                idx += 2;
+                continue;
+            }
+        }
+
+        if metadata.description.is_none() {
+            if let Some((description, next_idx)) = parse_readme_description(&lines, idx) {
+                metadata.description = Some(description);
+                idx = next_idx;
+                if metadata.title.is_some() {
+                    break;
+                }
+                continue;
+            }
+        }
+
+        if metadata.title.is_some() && metadata.description.is_some() {
+            break;
+        }
+
+        idx += 1;
+    }
+
+    metadata
+}
+
+fn parse_readme_title_line(line: &str) -> Option<String> {
+    if line.starts_with('#') {
+        let title = line.trim_start_matches('#').trim();
+        return normalize_readme_text(title);
+    }
+
+    parse_html_heading(line)
+}
+
+fn parse_setext_heading(lines: &[&str], idx: usize) -> Option<String> {
+    let line = lines.get(idx)?.trim();
+    let underline = lines.get(idx + 1)?.trim();
+    if line.is_empty() || !is_setext_underline(underline) {
+        return None;
+    }
+
+    normalize_readme_text(line)
+}
+
+fn is_setext_underline(line: &str) -> bool {
+    line.len() >= 3 && line.chars().all(|ch| ch == '=' || ch == '-')
+}
+
+fn parse_html_heading(line: &str) -> Option<String> {
+    let trimmed = line.trim();
+    let lower = trimmed.to_ascii_lowercase();
+    if !matches!(
+        lower.as_bytes().get(0..3),
+        Some(prefix)
+            if prefix == b"<h1"
+                || prefix == b"<h2"
+                || prefix == b"<h3"
+                || prefix == b"<h4"
+                || prefix == b"<h5"
+                || prefix == b"<h6"
+    ) {
+        return None;
+    }
+
+    normalize_readme_text(trimmed)
+}
+
+fn parse_readme_description(lines: &[&str], start: usize) -> Option<(String, usize)> {
+    let mut parts = Vec::new();
+    let mut idx = start;
+
+    while idx < lines.len() {
+        let trimmed = lines[idx].trim();
+        if trimmed.starts_with("```") {
+            break;
+        }
+        if trimmed.is_empty() {
+            if parts.is_empty() {
+                idx += 1;
+                continue;
+            }
+            break;
+        }
+        if parse_readme_title_line(trimmed).is_some() || parse_setext_heading(lines, idx).is_some() {
+            if parts.is_empty() {
+                return None;
+            }
+            break;
+        }
+
+        let normalized = match normalize_description_line(trimmed) {
+            Some(normalized) => normalized,
+            None => {
+                if parts.is_empty() {
+                    idx += 1;
+                    continue;
+                }
+                break;
+            }
+        };
+
+        parts.push(normalized);
+        idx += 1;
+    }
+
+    if parts.is_empty() {
+        None
+    } else {
+        Some((parts.join(" "), idx))
+    }
+}
+
+fn normalize_description_line(line: &str) -> Option<String> {
+    if line.is_empty()
+        || line.starts_with('#')
+        || line.starts_with("![")
+        || line.starts_with("[![")
+        || line.starts_with("<!--")
+        || line == "---"
+        || line.starts_with("- ")
+        || line.starts_with("* ")
+        || starts_with_ordered_list_item(line)
+    {
+        return None;
+    }
+
+    let description = line.trim_start_matches('>').trim();
+    normalize_readme_text(description).filter(|value| value.chars().any(|ch| ch.is_alphanumeric()))
+}
+
+fn normalize_readme_text(line: &str) -> Option<String> {
+    let stripped = strip_html_tags(line);
+    let collapsed = stripped.split_whitespace().collect::<Vec<_>>().join(" ");
+    let cleaned = collapsed.trim().trim_matches('`').trim();
+    if cleaned.is_empty() {
+        None
+    } else {
+        Some(cleaned.to_string())
+    }
+}
+
+fn strip_html_tags(line: &str) -> String {
+    let mut out = String::new();
+    let mut in_tag = false;
+
+    for ch in line.chars() {
+        match ch {
+            '<' => in_tag = true,
+            '>' => in_tag = false,
+            _ if !in_tag => out.push(ch),
+            _ => {}
+        }
+    }
+
+    out
+}
+
+fn starts_with_ordered_list_item(line: &str) -> bool {
+    let digits = line.chars().take_while(|ch| ch.is_ascii_digit()).count();
+    digits > 0
+        && line
+            .chars()
+            .nth(digits)
+            .is_some_and(|ch| matches!(ch, '.' | ')'))
+}
+
+fn parse_codeowners_metadata(contents: &str) -> CodeownersMetadata {
+    let mut owners = Vec::new();
+    let mut teams = Vec::new();
+
+    for line in contents.lines() {
+        let trimmed = line.split('#').next().unwrap_or("").trim();
+        if trimmed.is_empty() {
+            continue;
+        }
+
+        let mut tokens = trimmed.split_whitespace();
+        let _pattern = tokens.next();
+        for token in tokens {
+            let cleaned = trim_contact_token(token);
+            if cleaned.starts_with('@') || looks_like_email(cleaned) {
+                push_unique(&mut owners, cleaned.to_string());
+                if is_team_handle(cleaned) {
+                    push_unique(&mut teams, cleaned.to_string());
+                }
+            }
+        }
+    }
+
+    CodeownersMetadata {
+        owners,
+        team: match teams.as_slice() {
+            [only] => Some(only.clone()),
+            _ => None,
+        },
+    }
+}
+
+fn parse_security_contact(contents: &str) -> Option<String> {
+    find_mailto_or_email(contents).or_else(|| find_first_url(contents))
+}
+
+fn find_mailto_or_email(contents: &str) -> Option<String> {
+    for token in contents.split_whitespace() {
+        let cleaned = trim_contact_token(token);
+        if let Some(value) = cleaned.strip_prefix("mailto:") {
+            let value = trim_contact_token(value);
+            if looks_like_email(value) {
+                return Some(value.to_string());
+            }
+        }
+        if looks_like_email(cleaned) {
+            return Some(cleaned.to_string());
+        }
+    }
+
+    for destination in markdown_link_destinations(contents) {
+        let cleaned = trim_contact_token(&destination);
+        if let Some(value) = cleaned.strip_prefix("mailto:") {
+            let value = trim_contact_token(value);
+            if looks_like_email(value) {
+                return Some(value.to_string());
+            }
+        }
+        if looks_like_email(cleaned) {
+            return Some(cleaned.to_string());
+        }
+    }
+
+    None
+}
+
+fn find_first_url(contents: &str) -> Option<String> {
+    for token in contents.split_whitespace() {
+        let cleaned = trim_contact_token(token);
+        if cleaned.starts_with("https://") || cleaned.starts_with("http://") {
+            return Some(cleaned.to_string());
+        }
+    }
+
+    for destination in markdown_link_destinations(contents) {
+        let cleaned = trim_contact_token(&destination);
+        if cleaned.starts_with("https://") || cleaned.starts_with("http://") {
+            return Some(cleaned.to_string());
+        }
+    }
+
+    None
+}
+
+fn markdown_link_destinations(contents: &str) -> Vec<String> {
+    let mut destinations = Vec::new();
+    let mut rest = contents;
+
+    while let Some(start) = rest.find("](") {
+        let after = &rest[start + 2..];
+        let Some(end) = after.find(')') else {
+            break;
+        };
+        let destination = after[..end].trim();
+        if !destination.is_empty() {
+            destinations.push(destination.to_string());
+        }
+        rest = &after[end + 1..];
+    }
+
+    destinations
+}
+
+fn is_team_handle(token: &str) -> bool {
+    token.starts_with('@') && token[1..].contains('/')
+}
+
+fn trim_contact_token(token: &str) -> &str {
+    token.trim_matches(|ch: char| {
+        matches!(
+            ch,
+            '<' | '>' | '(' | ')' | '[' | ']' | '{' | '}' | ',' | ';' | ':' | '.' | '"' | '\''
+        )
+    })
+}
+
+fn looks_like_email(token: &str) -> bool {
+    let mut parts = token.split('@');
+    let local = parts.next().unwrap_or("");
+    let domain = parts.next().unwrap_or("");
+    !local.is_empty()
+        && !domain.is_empty()
+        && parts.next().is_none()
+        && token.chars().all(|ch| {
+            ch.is_ascii_alphanumeric() || matches!(ch, '.' | '_' | '%' | '+' | '-' | '@')
+        })
+        && domain.contains('.')
+        && !token.starts_with("http://")
+        && !token.starts_with("https://")
+}
+
+fn push_unique(values: &mut Vec<String>, value: String) {
+    if !values.iter().any(|existing| existing == &value) {
+        values.push(value);
+    }
+}
+
+fn note_import(imported_sources: &mut Vec<String>, path: &'static str) {
+    push_unique(imported_sources, path.to_string());
+}
+
+fn import_mode_name(mode: ImportMode) -> &'static str {
+    match mode {
+        ImportMode::Native => "native",
+        ImportMode::Overlay => "overlay",
+    }
+}
+
+fn import_provenance(imported_sources: &[String], inferred_fields: &[String]) -> Vec<String> {
+    let mut provenance = Vec::new();
+    if !imported_sources.is_empty() {
+        provenance.push("imported".into());
+    }
+    if !inferred_fields.is_empty() {
+        provenance.push("inferred".into());
+    }
+    if provenance.is_empty() {
+        provenance.push("inferred".into());
+    }
+    provenance
+}
+
+fn import_notes(
+    mode: ImportMode,
+    imported_sources: &[String],
+    inferred_fields: &[String],
+) -> String {
+    let mut notes = if imported_sources.is_empty() {
+        "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported."
+            .to_string()
+    } else {
+        format!("Bootstrapped from {}.", human_join(imported_sources))
+    };
+
+    if !inferred_fields.is_empty() {
+        notes.push_str(&format!(
+            " Filled {} with inferred defaults.",
+            human_join(inferred_fields)
+        ));
+    }
+
+    if matches!(mode, ImportMode::Overlay) {
+        notes.push_str(
+            " This is an overlay bootstrap, not a maintainer-controlled canonical record.",
+        );
+    }
+
+    notes
+}
+
+fn build_imported_owners(
+    maintainers: Vec<String>,
+    team: Option<String>,
+    security_contact: Option<String>,
+) -> Option<Owners> {
+    if maintainers.is_empty() && team.is_none() && security_contact.is_none() {
+        None
+    } else {
+        Some(Owners {
+            maintainers,
+            team,
+            security_contact,
+        })
+    }
+}
+
+fn render_import_evidence(
+    imported_sources: &[String],
+    inferred_fields: &[String],
+    security: &Option<ImportedFile>,
+) -> String {
+    let mut bullets = Vec::new();
+
+    if imported_sources.is_empty() {
+        bullets.push(
+            "No README.md, CODEOWNERS, or SECURITY.md content was imported; this record needs manual completion."
+                .to_string(),
+        );
+    }
+
+    if imported_sources.iter().any(|path| path == "README.md") {
+        bullets.push(readme_import_evidence_bullet(inferred_fields));
+    }
+    if imported_sources
+        .iter()
+        .any(|path| path == ".github/CODEOWNERS" || path == "CODEOWNERS")
+    {
+        bullets.push("Imported maintainer handles from CODEOWNERS.".to_string());
+    }
+    if imported_sources
+        .iter()
+        .any(|path| path == ".github/SECURITY.md" || path == "SECURITY.md")
+    {
+        if security
+            .as_ref()
+            .and_then(|file| parse_security_contact(&file.contents))
+            .is_some()
+        {
+            bullets.push("Imported the security contact from SECURITY.md.".to_string());
+        } else {
+            bullets.push(
+                "Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = \"unknown\" is intentional."
+                    .to_string(),
+            );
+        }
+    }
+
+    if !inferred_fields.is_empty() {
+        bullets.push(format!(
+            "Inferred fallback values for {} because the imported files did not provide enough structured metadata.",
+            human_join(inferred_fields)
+        ));
+    }
+
+    bullets.push("This is an overlay record, not a maintainer-controlled canonical record.".into());
+
+    let mut out = String::from("# Evidence\n\n");
+    for bullet in bullets {
+        out.push_str("- ");
+        out.push_str(&bullet);
+        out.push('\n');
+    }
+    out
+}
+
+fn readme_import_evidence_bullet(inferred_fields: &[String]) -> String {
+    let imported_name = !inferred_fields.iter().any(|field| field == "repo.name");
+    let imported_description = !inferred_fields
+        .iter()
+        .any(|field| field == "repo.description");
+
+    match (imported_name, imported_description) {
+        (true, true) => "Imported repository name and description from README.md.".to_string(),
+        (true, false) => "Imported repository name from README.md.".to_string(),
+        (false, true) => "Imported repository description from README.md.".to_string(),
+        (false, false) => "Imported repository metadata from README.md.".to_string(),
+    }
+}
+
+fn human_join(values: &[String]) -> String {
+    match values {
+        [] => String::new(),
+        [only] => format!("`{}`", only),
+        [first, second] => format!("`{}` and `{}`", first, second),
+        _ => {
+            let last = values.last().expect("non-empty");
+            let leading = values[..values.len() - 1]
+                .iter()
+                .map(|value| format!("`{}`", value))
+                .collect::<Vec<_>>()
+                .join(", ");
+            format!("{}, and `{}`", leading, last)
+        }
+    }
 }
 
 pub fn query_manifest_value(manifest: &Manifest, key: &str) -> Result<Value> {
@@ -354,19 +1356,16 @@ pub fn validate_index_root(index_root: &Path) -> Result<Vec<IndexFinding>> {
         let document = match load_manifest_document(&record_dir) {
             Ok(document) => document,
             Err(err) => {
-                findings.push(IndexFinding {
-                    path: display_path,
-                    message: err.to_string(),
-                });
+                findings.push(index_error(display_path, err.to_string()));
                 continue;
             }
         };
 
-        if let Err(err) = validate_manifest(&record_dir, &document.manifest) {
-            findings.push(IndexFinding {
-                path: display_path.clone(),
-                message: err.to_string(),
-            });
+        for diagnostic in validate_manifest_diagnostics(&record_dir, &document.manifest) {
+            findings.push(index_error(
+                display_path.clone(),
+                format!("[{}] {}", diagnostic.source, diagnostic.message),
+            ));
         }
 
         findings.extend(validate_index_entry(
@@ -385,7 +1384,8 @@ pub fn source_digest(source_bytes: &[u8]) -> String {
     format!("{:x}", hasher.finalize())
 }
 
-fn validate_readme_sections(manifest: &Manifest) -> Result<()> {
+fn validate_readme_sections(manifest: &Manifest) -> Vec<ValidationDiagnostic> {
+    let mut diagnostics = Vec::new();
     if let Some(readme) = &manifest.readme {
         for (name, section) in &readme.custom_sections {
             let has_content = section
@@ -401,23 +1401,29 @@ fn validate_readme_sections(manifest: &Manifest) -> Result<()> {
 
             match (has_content, has_path) {
                 (false, false) => {
-                    bail!(
-                        "custom README section `{}` must declare either `content` or `path`",
-                        name
-                    );
+                    diagnostics.push(validation_error(
+                        "validate_readme_sections",
+                        format!(
+                            "custom README section `{}` must declare either `content` or `path`",
+                            name
+                        ),
+                    ));
                 }
                 (true, true) => {
-                    bail!(
-                        "custom README section `{}` must not declare both `content` and `path`",
-                        name
-                    );
+                    diagnostics.push(validation_error(
+                        "validate_readme_sections",
+                        format!(
+                            "custom README section `{}` must not declare both `content` and `path`",
+                            name
+                        ),
+                    ));
                 }
                 _ => {}
             }
         }
     }
 
-    Ok(())
+    diagnostics
 }
 
 fn validate_index_entry(
@@ -436,8 +1442,10 @@ fn validate_index_entry(
         Err(_) => {
             findings.push(IndexFinding {
                 path: relative_record,
-                message: "index records must live under index_root/repos/<host>/<owner>/<repo>/record.toml"
-                    .into(),
+                severity: IndexFindingSeverity::Error,
+                message:
+                    "index records must live under index_root/repos/<host>/<owner>/<repo>/record.toml"
+                        .into(),
             });
             return findings;
         }
@@ -450,33 +1458,38 @@ fn validate_index_entry(
     if segments.len() != 3 {
         findings.push(IndexFinding {
             path: relative_record.clone(),
+            severity: IndexFindingSeverity::Error,
             message: "index path must be exactly repos/<host>/<owner>/<repo>/record.toml".into(),
         });
         return findings;
     }
 
     if manifest.record.mode != RecordMode::Overlay {
-        findings.push(IndexFinding {
-            path: relative_record.clone(),
-            message: "v0.1 index entries must use record.mode = \"overlay\"".into(),
-        });
+        findings.push(index_error(
+            relative_record.clone(),
+            "v0.1 index entries must use record.mode = \"overlay\"",
+        ));
     }
 
     let evidence_path = record_dir.join("evidence.md");
-    match fs::read_to_string(&evidence_path) {
+    let evidence = match fs::read_to_string(&evidence_path) {
         Ok(contents) => {
             if contents.trim().is_empty() {
-                findings.push(IndexFinding {
-                    path: relative_record.clone(),
-                    message: "evidence.md must not be empty".into(),
-                });
+                findings.push(index_error(
+                    relative_record.clone(),
+                    "evidence.md must not be empty",
+                ));
             }
+            Some(contents)
         }
-        Err(_) => findings.push(IndexFinding {
-            path: relative_record.clone(),
-            message: "index entries must include a sibling evidence.md file".into(),
-        }),
-    }
+        Err(_) => {
+            findings.push(index_error(
+                relative_record.clone(),
+                "index entries must include a sibling evidence.md file",
+            ));
+            None
+        }
+    };
 
     let expected = (
         segments[0].clone(),
@@ -486,34 +1499,38 @@ fn validate_index_entry(
 
     match repository_identity(manifest.record.source.as_deref().unwrap_or_default()) {
         Some(identity) if identity == expected => {}
-        Some(identity) => findings.push(IndexFinding {
-            path: relative_record.clone(),
-            message: format!(
+        Some(identity) => findings.push(index_error(
+            relative_record.clone(),
+            format!(
                 "record.source resolves to {}/{}/{}, but index path is {}/{}/{}",
                 identity.0, identity.1, identity.2, expected.0, expected.1, expected.2
             ),
-        }),
-        None => findings.push(IndexFinding {
-            path: relative_record.clone(),
-            message:
-                "record.source must be an absolute repository URL with host/owner/repo segments"
-                    .into(),
-        }),
+        )),
+        None => findings.push(index_error(
+            relative_record.clone(),
+            "record.source must be an absolute repository URL with host/owner/repo segments",
+        )),
     }
 
     if let Some(homepage) = &manifest.repo.homepage {
         if let Some(identity) = repository_identity(homepage) {
             if identity != expected {
-                findings.push(IndexFinding {
-                    path: relative_record,
-                    message: format!(
+                findings.push(index_error(
+                    relative_record.clone(),
+                    format!(
                         "repo.homepage resolves to {}/{}/{}, but index path is {}/{}/{}",
                         identity.0, identity.1, identity.2, expected.0, expected.1, expected.2
                     ),
-                });
+                ));
             }
         }
     }
+
+    findings.extend(lint_index_entry(
+        relative_record,
+        manifest,
+        evidence.as_deref().unwrap_or(""),
+    ));
 
     findings
 }
@@ -728,6 +1745,154 @@ fn repository_identity(url: &str) -> Option<(String, String, String)> {
     Some((host, owner, repo))
 }
 
+fn lint_index_entry(path: PathBuf, manifest: &Manifest, evidence: &str) -> Vec<IndexFinding> {
+    let mut findings = Vec::new();
+    let evidence_lower = evidence.to_lowercase();
+
+    if let Some(confidence) = manifest
+        .record
+        .trust
+        .as_ref()
+        .and_then(|trust| trust.confidence.as_deref())
+    {
+        if !matches!(confidence, "low" | "medium" | "high") {
+            findings.push(index_warning(
+                path.clone(),
+                format!(
+                    "record.trust.confidence uses non-reference vocabulary `{}`; preserve it, but prefer low/medium/high in the public index",
+                    confidence
+                ),
+            ));
+        }
+    }
+
+    if let Some(trust) = &manifest.record.trust {
+        for provenance in &trust.provenance {
+            if !matches!(
+                provenance.as_str(),
+                "declared" | "imported" | "inferred" | "verified"
+            ) {
+                findings.push(index_warning(
+                    path.clone(),
+                    format!(
+                        "record.trust.provenance includes non-reference value `{}`; preserve it, but prefer declared/imported/inferred/verified in the public index",
+                        provenance
+                    ),
+                ));
+            }
+        }
+    }
+
+    for expected in expected_provenance_for_status(&manifest.record.status) {
+        let has_expected = manifest
+            .record
+            .trust
+            .as_ref()
+            .map(|trust| trust.provenance.iter().any(|value| value == expected))
+            .unwrap_or(false);
+        if !has_expected {
+            findings.push(index_warning(
+                path.clone(),
+                format!(
+                    "record.status = {:?} should usually be accompanied by `{}` in record.trust.provenance",
+                    manifest.record.status, expected
+                ),
+            ));
+        }
+    }
+
+    for keyword in manifest
+        .record
+        .trust
+        .as_ref()
+        .map(|trust| trust.provenance.clone())
+        .unwrap_or_default()
+    {
+        if matches!(
+            keyword.as_str(),
+            "declared" | "imported" | "inferred" | "verified"
+        ) && !evidence_mentions(&evidence_lower, &keyword)
+        {
+            findings.push(index_warning(
+                path.clone(),
+                format!(
+                    "evidence.md should mention `{}` so the trust story is visible to reviewers",
+                    keyword
+                ),
+            ));
+        }
+    }
+
+    if manifest.repo.build.is_some() && !evidence_mentions(&evidence_lower, "build") {
+        findings.push(index_warning(
+            path.clone(),
+            "evidence.md should explain where the build command came from",
+        ));
+    }
+
+    if manifest.repo.test.is_some() && !evidence_mentions(&evidence_lower, "test") {
+        findings.push(index_warning(
+            path.clone(),
+            "evidence.md should explain where the test command came from",
+        ));
+    }
+
+    if manifest
+        .owners
+        .as_ref()
+        .and_then(|owners| owners.security_contact.as_deref())
+        == Some("unknown")
+        && !evidence_mentions(&evidence_lower, "unknown")
+    {
+        findings.push(index_warning(
+            path,
+            "evidence.md should explain why security_contact = \"unknown\" is intentional",
+        ));
+    }
+
+    findings
+}
+
+fn expected_provenance_for_status(
+    status: &dotrepo_schema::RecordStatus,
+) -> &'static [&'static str] {
+    match status {
+        dotrepo_schema::RecordStatus::Imported => &["imported"],
+        dotrepo_schema::RecordStatus::Inferred => &["inferred"],
+        dotrepo_schema::RecordStatus::Verified => &["verified"],
+        dotrepo_schema::RecordStatus::Canonical => &["declared"],
+        _ => &[],
+    }
+}
+
+fn validation_error(source: &'static str, message: impl Into<String>) -> ValidationDiagnostic {
+    ValidationDiagnostic {
+        severity: ValidationDiagnosticSeverity::Error,
+        source,
+        message: message.into(),
+    }
+}
+
+fn evidence_mentions(evidence_lower: &str, keyword: &str) -> bool {
+    evidence_lower.contains(&keyword.to_lowercase())
+}
+
+fn index_error(path: PathBuf, message: impl Into<String>) -> IndexFinding {
+    IndexFinding {
+        path,
+        severity: IndexFindingSeverity::Error,
+        message: message.into(),
+    }
+}
+
+fn index_warning(path: PathBuf, message: impl Into<String>) -> IndexFinding {
+    IndexFinding {
+        path,
+        severity: IndexFindingSeverity::Warning,
+        message: message.into(),
+    }
+}
+
 enum CommentStyle {
     Html,
     Hash,
@@ -923,6 +2088,125 @@ pull_request_template = "generate"
     }
 
     #[test]
+    fn import_repository_bootstraps_native_manifest_from_conventional_files() {
+        let root = temp_dir("import-native");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nFast local-first sync engine.\n",
+        )
+        .expect("README written");
+        fs::create_dir_all(root.join(".github")).expect(".github created");
+        fs::write(root.join(".github/CODEOWNERS"), "* @orbit-maintainer\n")
+            .expect("CODEOWNERS written");
+        fs::write(
+            root.join(".github/SECURITY.md"),
+            "Report vulnerabilities to security@example.com.\n",
+        )
+        .expect("SECURITY written");
+
+        let plan =
+            import_repository(&root, ImportMode::Native, None).expect("native import succeeds");
+
+        assert_eq!(plan.manifest.record.mode, RecordMode::Native);
+        assert_eq!(plan.manifest.record.status, RecordStatus::Draft);
+        assert_eq!(plan.manifest.repo.name, "Orbit");
+        assert_eq!(
+            plan.manifest.repo.description,
+            "Fast local-first sync engine."
+        );
+        assert_eq!(
+            plan.manifest
+                .owners
+                .as_ref()
+                .expect("owners imported")
+                .maintainers,
+            vec!["@orbit-maintainer"]
+        );
+        assert_eq!(
+            plan.manifest
+                .owners
+                .as_ref()
+                .and_then(|owners| owners.security_contact.as_deref()),
+            Some("security@example.com")
+        );
+        assert_eq!(plan.imported_sources.len(), 3);
+        assert!(plan.evidence_text.is_none());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_marks_overlay_fallbacks_as_inferred() {
+        let root = temp_dir("import-overlay");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/project"),
+        )
+        .expect("overlay import succeeds");
+
+        assert_eq!(plan.manifest.record.mode, RecordMode::Overlay);
+        assert_eq!(plan.manifest.record.status, RecordStatus::Inferred);
+        assert_eq!(
+            plan.manifest
+                .record
+                .trust
+                .as_ref()
+                .expect("trust present")
+                .provenance,
+            vec!["inferred"]
+        );
+        assert!(plan
+            .evidence_text
+            .as_deref()
+            .expect("evidence present")
+            .contains("Inferred fallback values"));
+        assert!(plan
+            .inferred_fields
+            .iter()
+            .any(|field| field == "repo.name"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn validate_manifest_diagnostics_accumulates_multiple_errors() {
+        let root = temp_dir("validate-many");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v9.9"
+
+[record]
+mode = "overlay"
+status = "imported"
+
+[repo]
+name = "   "
+description = "Broken overlay"
+"#,
+        )
+        .expect("manifest parses");
+
+        let diagnostics = validate_manifest_diagnostics(&root, &manifest);
+        assert!(diagnostics.len() >= 3);
+        assert!(diagnostics
+            .iter()
+            .any(|diagnostic| diagnostic.message.contains("unsupported schema")));
+        assert!(diagnostics
+            .iter()
+            .any(|diagnostic| diagnostic.message.contains("repo.name must not be empty")));
+        assert!(diagnostics
+            .iter()
+            .any(|diagnostic| diagnostic.message.contains("record.source must be set")));
+        assert!(diagnostics
+            .iter()
+            .any(|diagnostic| diagnostic.message.contains("record.trust must be set")));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
     fn validate_index_root_accepts_seed_overlay_layout() {
         let root = temp_dir("index");
         let record_dir = root.join("repos/github.com/BurntSushi/ripgrep");
@@ -948,7 +2232,11 @@ homepage = "https://github.com/BurntSushi/ripgrep"
 "#,
         )
         .expect("record written");
-        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+        fs::write(
+            record_dir.join("evidence.md"),
+            "# Evidence\n\n- imported from the upstream repository homepage.\n",
+        )
+        .expect("evidence written");
 
         let findings = validate_index_root(&root).expect("index validates");
         assert!(findings.is_empty());
@@ -984,7 +2272,11 @@ homepage = "https://github.com/BurntSushi/ripgrep"
         .expect("record written");
 
         let findings = validate_index_root(&root).expect("index validates");
-        assert_eq!(findings.len(), 3);
+        let error_count = findings
+            .iter()
+            .filter(|finding| finding.severity == IndexFindingSeverity::Error)
+            .count();
+        assert_eq!(error_count, 3);
         assert!(findings
             .iter()
             .any(|finding| finding.message.contains("evidence.md")));
@@ -994,6 +2286,73 @@ homepage = "https://github.com/BurntSushi/ripgrep"
         assert!(findings
             .iter()
             .any(|finding| finding.message.contains("repo.homepage resolves")));
+        assert!(findings
+            .iter()
+            .any(|finding| finding.severity == IndexFindingSeverity::Warning));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn validate_index_root_emits_quality_warnings_for_non_reference_vocab() {
+        let root = temp_dir("index-warn");
+        let record_dir = root.join("repos/github.com/sharkdp/bat");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/sharkdp/bat"
+
+[record.trust]
+confidence = "very-high"
+provenance = ["imported", "maintainer-reviewed"]
+
+[repo]
+name = "bat"
+description = "A cat clone with wings"
+homepage = "https://github.com/sharkdp/bat"
+build = "cargo build --locked"
+test = "cargo test --locked"
+
+[owners]
+security_contact = "unknown"
+"#,
+        )
+        .expect("record written");
+        fs::write(
+            record_dir.join("evidence.md"),
+            "# Evidence\n\n- Imported from the upstream repository.\n",
+        )
+        .expect("evidence written");
+
+        let findings = validate_index_root(&root).expect("index validates");
+        assert!(findings
+            .iter()
+            .all(|finding| finding.severity == IndexFindingSeverity::Warning));
+        assert!(findings.iter().any(|finding| {
+            finding
+                .message
+                .contains("record.trust.confidence uses non-reference vocabulary")
+        }));
+        assert!(findings.iter().any(|finding| {
+            finding
+                .message
+                .contains("record.trust.provenance includes non-reference value")
+        }));
+        assert!(findings
+            .iter()
+            .any(|finding| finding.message.contains("build command")));
+        assert!(findings
+            .iter()
+            .any(|finding| finding.message.contains("test command")));
+        assert!(findings
+            .iter()
+            .any(|finding| finding.message.contains("security_contact = \"unknown\"")));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
