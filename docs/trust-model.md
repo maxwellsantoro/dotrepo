@@ -36,3 +36,20 @@ Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `mediu
 - When a canonical record and an overlay disagree for the same repository identity,
   consumers should prefer the canonical value by default and preserve the overlay's
   conflicting claim as visible trust context.
+
+## Authority handoff implications
+
+- Claim and supersede are identity-level operations. They only apply when the
+  repository identity surface matches across the canonical upstream path, any overlay
+  `record.source`, and any corresponding index path.
+- The default precedence ladder is: canonical `.repo`, canonical mirror, verified
+  overlay, reviewed overlay, imported overlay, inferred overlay, then draft.
+- Precedence chooses a default record; it does not authorize silent field-level
+  blending across records.
+- A missing or intentionally `unknown` field in a higher-authority record should stay
+  missing or `unknown` by default unless a consumer explicitly opts into layered
+  fallback and preserves provenance.
+
+See [`RFC 0004`](../rfcs/0004-index-and-trust-model.md) and the worked examples in
+[`authority-handoff-examples.md`](./authority-handoff-examples.md) for the normative
+contract and reference scenarios.

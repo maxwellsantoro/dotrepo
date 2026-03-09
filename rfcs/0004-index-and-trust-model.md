@@ -69,12 +69,74 @@ For v0.1 and the near-term roadmap:
   represents the same repository identity as an existing overlay or draft index entry
 - **supersede** means that a higher-authority record becomes the default record for
   that repository identity without erasing the older overlay's history or evidence
+- **canonical mirror** means an index entry derived from a maintainer-controlled
+  canonical `.repo`; it carries canonical authority for index consumers, but does not
+  outrank the source `.repo` itself
+
+### Repository identity matching
 
 Claim and supersede are identity-level operations. They should only apply when the
-repository identity surface matches:
+repository identity surface matches across every available surface:
 - the canonical upstream host, owner, and repo path
 - the record's `record.source`
 - the index path used by any corresponding overlay or canonical mirror
+- `repo.homepage`, when it is also a repository URL for the same repository
+
+Consumers should not auto-claim across redirects, mirrors, renamed repositories, or
+partial matches. Those cases need explicit human review or a future maintainer-claim
+workflow; they are not safe to infer from URL similarity alone.
+
+### Precedence ladder
+
+When multiple records describe the same repository identity, consumers should choose a
+default record using this precedence order:
+
+1. maintainer-controlled canonical `.repo`
+2. canonical mirror derived from that `.repo`
+3. verified overlay
+4. reviewed overlay
+5. imported overlay
+6. inferred overlay
+7. draft record
+
+Within the same precedence level, consumers should not synthesize or silently resolve
+the disagreement. Equal-authority records remain parallel claims until a maintainer,
+reviewer, or future workflow makes the relationship explicit.
+
+Precedence is a record-selection rule for default presentation. It is not permission to
+blend fields across records. A missing or intentionally `unknown` field in a
+higher-authority record should remain missing or `unknown` by default. Consumers should
+not silently backfill it from lower-authority records unless they explicitly opt into a
+layered fallback mode and preserve the lower-authority provenance as visible context.
+
+### What claim means
+
+Claim has these contract implications:
+- the canonical record becomes the preferred representation for that repository identity
+- the claim may target one overlay, several overlays, or a draft entry, as long as the
+  identity surface matches
+- claim does not import overlay facts into the canonical record automatically
+- claim does not erase overlay evidence, review notes, or provenance
+
+### What supersede means
+
+Supersede has these contract implications:
+- the higher-authority record becomes the default record for that repository identity
+- superseded records remain queryable and inspectable as historical evidence,
+  third-party curation, or pre-adoption records
+- overlay status alone does not imply that the superseded record was malicious or even
+  incorrect; it only means a stronger authority is now available
+- when no canonical record exists, a higher-status overlay may supersede a lower-status
+  overlay for default presentation
+- equal-status overlays do not supersede each other automatically
+
+At minimum, superseded records should remain inspectable with:
+- `record.mode`
+- `record.status`
+- `record.source`
+- `record.trust`
+- the index path or equivalent locator
+- the evidence location or equivalent review trail when one exists
 
 The contract implication is simple:
 - when a maintainer-controlled canonical record exists for the same identity, consumers
@@ -102,9 +164,15 @@ At minimum, conflict surfacing should preserve:
 - `record.status`
 - `record.source`
 - `record.trust`
+- the reason one record was preferred over another
+- the index path or equivalent locator for each conflicting record
+- the evidence location or equivalent review trail when one exists
 
 That makes it possible for downstream tools to say not only *what* conflicts, but
 also *why* one record is preferred and what kind of evidence supports the other.
+
+Worked examples for these rules live in
+[`docs/authority-handoff-examples.md`](../docs/authority-handoff-examples.md).
 
 ## Trust surfacing
 
