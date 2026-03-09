@@ -42,8 +42,8 @@ content = "Run `cargo build` and `cargo test` to validate the local development 
 [compat.github]
 codeowners = "generate"
 security = "generate"
-contributing = "skip"
-pull_request_template = "skip"
+contributing = "generate"
+pull_request_template = "generate"
 
 [relations]
 references = []

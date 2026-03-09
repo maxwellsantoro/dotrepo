@@ -1,9 +1,10 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand};
 use dotrepo_core::{
-    detect_unmanaged_files, load_manifest_from_root, managed_outputs, query_manifest,
-    validate_manifest,
+    detect_unmanaged_files, load_manifest_document, load_manifest_from_root, managed_outputs,
+    query_manifest_value, validate_manifest,
 };
+use serde_json::Value;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process;
@@ -28,6 +29,10 @@ enum Command {
     Validate,
     Query {
         path: String,
+        #[arg(long, conflicts_with = "raw")]
+        json: bool,
+        #[arg(long, conflicts_with = "json")]
+        raw: bool,
     },
     Generate {
         #[arg(long)]
@@ -60,7 +65,7 @@ fn run() -> Result<()> {
     match cli.command {
         Command::Init { force } => cmd_init(cli.root, force),
         Command::Validate => cmd_validate(cli.root),
-        Command::Query { path } => cmd_query(cli.root, &path),
+        Command::Query { path, json, raw } => cmd_query(cli.root, &path, json, raw),
         Command::Generate { check } => cmd_generate(cli.root, check),
         Command::Doctor => cmd_doctor(cli.root),
         Command::Trust => cmd_trust(cli.root),
@@ -89,17 +94,17 @@ fn cmd_init(root: PathBuf, force: bool) -> Result<()> {
     Ok(())
 }
 
-fn cmd_query(root: PathBuf, path: &str) -> Result<()> {
+fn cmd_query(root: PathBuf, path: &str, json: bool, raw: bool) -> Result<()> {
     let manifest = load_manifest_from_root(&root)?;
-    println!("{}", query_manifest(&manifest, path)?);
+    let value = query_manifest_value(&manifest, path)?;
+    println!("{}", format_query_value(&value, json, raw)?);
     Ok(())
 }
 
 fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
-    let source = fs::read(root.join(".repo"))?;
-    let manifest = load_manifest_from_root(&root)?;
-    validate_manifest(&root, &manifest)?;
-    let outputs = managed_outputs(&root, &manifest, &source)?;
+    let document = load_manifest_document(&root)?;
+    validate_manifest(&root, &document.manifest)?;
+    let outputs = managed_outputs(&root, &document.manifest, &document.raw)?;
 
     if check {
         let stale = outputs
@@ -197,4 +202,59 @@ fn display_path(root: &Path, path: &Path) -> String {
         .unwrap_or(path)
         .display()
         .to_string()
+}
+
+fn format_query_value(value: &Value, json: bool, raw: bool) -> Result<String> {
+    if json {
+        return Ok(serde_json::to_string_pretty(value)?);
+    }
+
+    match value {
+        Value::String(text) => Ok(text.clone()),
+        Value::Null => {
+            if raw {
+                Ok(String::new())
+            } else {
+                Ok("null".into())
+            }
+        }
+        Value::Bool(flag) => Ok(flag.to_string()),
+        Value::Number(number) => Ok(number.to_string()),
+        Value::Array(_) | Value::Object(_) => {
+            if raw {
+                bail!("--raw is only supported for scalar query results");
+            }
+            Ok(serde_json::to_string_pretty(value)?)
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn format_query_value_defaults_to_human_readable_strings() {
+        let rendered =
+            format_query_value(&Value::String("orbit".into()), false, false).expect("formats");
+        assert_eq!(rendered, "orbit");
+    }
+
+    #[test]
+    fn format_query_value_supports_json_mode() {
+        let rendered = format_query_value(&Value::String("orbit".into()), true, false)
+            .expect("formats as json");
+        assert_eq!(rendered, "\"orbit\"");
+    }
+
+    #[test]
+    fn format_query_value_rejects_raw_composite_values() {
+        let err = format_query_value(
+            &Value::Array(vec![Value::String("orbit".into())]),
+            false,
+            true,
+        )
+        .expect_err("raw composite values should fail");
+        assert!(err.to_string().contains("--raw"));
+    }
 }

@@ -15,11 +15,28 @@ pub struct DoctorFinding {
     pub message: String,
 }
 
-pub fn load_manifest_from_root(root: &Path) -> Result<Manifest> {
+#[derive(Debug, Clone)]
+pub struct LoadedManifest {
+    pub path: PathBuf,
+    pub raw: Vec<u8>,
+    pub manifest: Manifest,
+}
+
+pub fn load_manifest_document(root: &Path) -> Result<LoadedManifest> {
     let path = manifest_path(root);
-    let raw = fs::read_to_string(&path)
-        .map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
-    Ok(parse_manifest(&raw)?)
+    let raw = fs::read(&path).map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
+    let text = std::str::from_utf8(&raw)
+        .map_err(|e| anyhow!("failed to decode {} as UTF-8: {}", path.display(), e))?;
+    let manifest = parse_manifest(text)?;
+    Ok(LoadedManifest {
+        path,
+        raw,
+        manifest,
+    })
+}
+
+pub fn load_manifest_from_root(root: &Path) -> Result<Manifest> {
+    Ok(load_manifest_document(root)?.manifest)
 }
 
 pub fn validate_manifest(root: &Path, manifest: &Manifest) -> Result<()> {
@@ -92,7 +109,7 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Result<()> {
     Ok(())
 }
 
-pub fn query_manifest(manifest: &Manifest, key: &str) -> Result<String> {
+pub fn query_manifest_value(manifest: &Manifest, key: &str) -> Result<Value> {
     let document = serde_json::to_value(manifest)?;
     let canonical_key = normalize_query_path(key);
     let value = query_value(&document, &canonical_key).or_else(|_| {
@@ -102,7 +119,13 @@ pub fn query_manifest(manifest: &Manifest, key: &str) -> Result<String> {
             bail!("query path not found: {}", key)
         }
     })?;
-    Ok(serde_json::to_string_pretty(value)?)
+    Ok(value.clone())
+}
+
+pub fn query_manifest(manifest: &Manifest, key: &str) -> Result<String> {
+    Ok(serde_json::to_string_pretty(&query_manifest_value(
+        manifest, key,
+    )?)?)
 }
 
 pub fn render_readme(root: &Path, manifest: &Manifest, source_bytes: &[u8]) -> Result<String> {
@@ -243,13 +266,25 @@ pub fn github_outputs(manifest: &Manifest, source_bytes: &[u8]) -> Vec<(PathBuf,
                     ),
                 ));
             }
+            if matches!(github.contributing, Some(CompatMode::Generate)) {
+                outputs.push((
+                    PathBuf::from("CONTRIBUTING.md"),
+                    render_contributing(manifest, &digest),
+                ));
+            }
+            if matches!(github.pull_request_template, Some(CompatMode::Generate)) {
+                outputs.push((
+                    PathBuf::from(".github/pull_request_template.md"),
+                    render_pull_request_template(manifest, &digest),
+                ));
+            }
         }
     }
     outputs
 }
 
 pub fn detect_unmanaged_files(root: &Path) -> Vec<DoctorFinding> {
-    const CANDIDATES: [&str; 7] = [
+    const CANDIDATES: [&str; 11] = [
         "README.md",
         "CODEOWNERS",
         ".github/CODEOWNERS",
@@ -257,6 +292,10 @@ pub fn detect_unmanaged_files(root: &Path) -> Vec<DoctorFinding> {
         ".github/SECURITY.md",
         "CONTRIBUTING.md",
         ".github/CONTRIBUTING.md",
+        "PULL_REQUEST_TEMPLATE.md",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        "pull_request_template.md",
+        ".github/pull_request_template.md",
     ];
 
     let mut findings = Vec::new();
@@ -428,6 +467,65 @@ fn generated_banner(style: CommentStyle, manifest: &Manifest, digest: &str) -> S
     }
 }
 
+fn render_contributing(manifest: &Manifest, digest: &str) -> String {
+    let mut out = String::new();
+    out.push_str(&generated_banner(CommentStyle::Html, manifest, digest));
+    out.push('\n');
+    out.push_str("# Contributing\n\n");
+    out.push_str(&format!(
+        "Thanks for contributing to {}.\n\n",
+        manifest.repo.name
+    ));
+    out.push_str("## Before you open a change\n\n");
+    out.push_str("- Review the repository documentation and policies.\n");
+    if let Some(build) = &manifest.repo.build {
+        out.push_str(&format!("- Run `{}` before submitting changes.\n", build));
+    }
+    if let Some(test) = &manifest.repo.test {
+        out.push_str(&format!("- Run `{}` before submitting changes.\n", test));
+    }
+    out.push('\n');
+    out.push_str("## Security\n\n");
+    if let Some(contact) = manifest
+        .owners
+        .as_ref()
+        .and_then(|owners| owners.security_contact.as_ref())
+    {
+        out.push_str(&format!(
+            "Report suspected vulnerabilities to {} instead of opening a public issue.\n",
+            contact
+        ));
+    } else {
+        out.push_str(
+            "Report suspected vulnerabilities privately to the maintainers instead of opening a public issue.\n",
+        );
+    }
+    out
+}
+
+fn render_pull_request_template(manifest: &Manifest, digest: &str) -> String {
+    let mut out = String::new();
+    out.push_str(&generated_banner(CommentStyle::Html, manifest, digest));
+    out.push('\n');
+    out.push_str("## Summary\n\n");
+    out.push_str("- Describe the user-visible change.\n\n");
+    out.push_str("## Validation\n\n");
+    if let Some(build) = &manifest.repo.build {
+        out.push_str(&format!("- [ ] `{}`\n", build));
+    }
+    if let Some(test) = &manifest.repo.test {
+        out.push_str(&format!("- [ ] `{}`\n", test));
+    }
+    if manifest.repo.build.is_none() && manifest.repo.test.is_none() {
+        out.push_str("- [ ] Describe how you validated this change.\n");
+    }
+    out.push('\n');
+    out.push_str("## Checklist\n\n");
+    out.push_str("- [ ] Documentation updated where needed.\n");
+    out.push_str("- [ ] Ownership, policy, and security impacts considered.\n");
+    out
+}
+
 fn is_dotrepo_generated(contents: &str) -> bool {
     contents.lines().next().map(is_banner_line).unwrap_or(false)
 }
@@ -480,6 +578,10 @@ internal_id = "orbit-prod"
         assert_eq!(
             query_manifest(&manifest, "trust.provenance").expect("legacy trust alias works"),
             "[\n  \"declared\",\n  \"verified\"\n]"
+        );
+        assert_eq!(
+            query_manifest_value(&manifest, "repo.name").expect("value query succeeds"),
+            Value::String("orbit".into())
         );
     }
 
@@ -562,6 +664,70 @@ description = "Fast local-first sync engine"
         assert_eq!(manifest.repo.name, "orbit");
 
         fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn load_manifest_document_returns_path_and_raw_bytes() {
+        let root = temp_dir("document");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest written");
+
+        let document = load_manifest_document(&root).expect("document loads");
+        assert_eq!(document.path, root.join(".repo"));
+        assert!(!document.raw.is_empty());
+        assert_eq!(document.manifest.repo.name, "orbit");
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn github_outputs_generate_remaining_compat_files() {
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+build = "cargo build"
+test = "cargo test"
+
+[owners]
+security_contact = "security@example.com"
+
+[compat.github]
+codeowners = "skip"
+security = "skip"
+contributing = "generate"
+pull_request_template = "generate"
+"#,
+        )
+        .expect("manifest parses");
+
+        let outputs = github_outputs(&manifest, b"schema = \"dotrepo/v0.1\"");
+        assert!(outputs
+            .iter()
+            .any(|(path, _)| path == Path::new("CONTRIBUTING.md")));
+        assert!(outputs
+            .iter()
+            .any(|(path, _)| path == Path::new(".github/pull_request_template.md")));
     }
 
     fn temp_dir(label: &str) -> PathBuf {

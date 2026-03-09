@@ -19,13 +19,25 @@ Return a structured value for a dot path such as:
 - `record.trust.provenance`
 - `x.example.internal_id`
 
-The command should support human-readable output and `--json`.
+The command should support:
+- human-readable output by default
+- `--json` for deterministic JSON output
+- `--raw` for scalar values when scripts want unquoted strings
+
 All serialized fields should be queryable by default through dot-path traversal.
 
 ### `dotrepo generate`
 Generate synchronized repository surfaces such as README or GitHub compatibility files.
 
+Day-one compatibility outputs may include:
+- `CODEOWNERS`
+- `SECURITY.md`
+- `CONTRIBUTING.md`
+- pull request templates
+
 `--check` should fail if generated outputs are stale and report the full stale set in one run.
+
+The command should resolve the manifest through the same root lookup used by validation and query commands.
 
 ### `dotrepo doctor`
 Surface unmanaged files, ambiguous sync conditions, and migration hints.
@@ -35,6 +47,7 @@ At minimum, v0.1 should inspect conventional repository surfaces such as:
 - `CODEOWNERS`
 - `SECURITY.md`
 - `CONTRIBUTING.md`
+- pull request templates
 
 ### `dotrepo trust`
 Display the record's status, provenance, confidence, and source context in one place.
