@@ -12,6 +12,12 @@ The v0.1 stance is:
 - preserve provenance and version metadata in generated files
 - reserve deeper bidirectional sync rules for later versions
 
+The v0.2 stance extends that with managed regions:
+- keep `.repo` as the only source of truth
+- allow explicit sections inside selected Markdown surfaces to be dotrepo-managed
+- preserve user-authored prose outside managed regions
+- refuse malformed or ambiguous marker layouts instead of guessing
+
 ## Generated file metadata
 
 Generated files should include:
@@ -34,6 +40,149 @@ Before managed regions land, v0.1 may support lightweight custom README sections
 
 In v0.1, `dotrepo generate` treats `README.md` as a first-class managed output. Per-surface enable/disable controls for README generation are a future compatibility feature rather than part of the day-one contract.
 
-## Managed sync
+## Managed-region sync in v0.2
 
-A future version may support managed regions for files like README, SECURITY.md, or CONTRIBUTING.md. That requires explicit structure and should not be implied by v0.1.
+Managed-region sync is the v0.2 bridge between fully generated surfaces and fully
+unmanaged prose. It is intentionally narrow.
+
+### Supported surfaces
+
+v0.2 managed regions apply only to Markdown files:
+- `README.md`
+- `SECURITY.md` or `.github/SECURITY.md`
+- `CONTRIBUTING.md` or `.github/CONTRIBUTING.md`
+
+These surfaces may be:
+- fully generated, where dotrepo owns the whole file
+- partially managed, where dotrepo owns only marked regions
+- unmanaged, where dotrepo leaves the file alone
+
+v0.2 does **not** define managed-region sync for:
+- `CODEOWNERS`
+- workflow YAML
+- issue or PR templates
+- arbitrary inline spans inside prose
+- nested or overlapping region ownership
+
+### Marker format
+
+Managed regions use paired HTML comment markers so the same format works across the
+supported Markdown surfaces.
+
+```text
+<!-- dotrepo:begin id=readme.summary -->
+... dotrepo-managed content ...
+<!-- dotrepo:end id=readme.summary -->
+```
+
+Rules:
+- `id` is a stable region identifier chosen by the renderer for that file surface
+- markers must appear as a matched begin/end pair with the same `id`
+- regions are block-level, not inline
+- regions must not overlap or nest
+- a file may contain multiple managed regions, but each `id` may appear at most once
+
+The exact inventory of region ids is renderer-specific, but they should remain stable
+across minor tool releases so hand-authored prose around them does not churn.
+
+### File-state model
+
+Each supported file should be interpreted as exactly one of these states:
+
+1. **fully generated**
+   The file is owned end-to-end by dotrepo and identified by the generated banner.
+2. **partially managed**
+   The file contains a valid set of managed-region markers.
+3. **unmanaged**
+   The file exists without a generated banner or managed-region markers.
+4. **malformed managed**
+   The file appears to opt into managed regions, but the markers are invalid or
+   ambiguous.
+
+dotrepo must not silently reinterpret one state as another.
+
+### Behavior rules
+
+#### Missing markers
+
+If a supported file exists without managed-region markers, dotrepo should treat it as
+unmanaged, not as a broken managed file.
+
+Implications:
+- `generate` should not inject managed regions into an existing unmanaged file implicitly
+- `generate --check` should not fail merely because an unmanaged file exists
+- `doctor` should report that the file is unmanaged and eligible for import,
+  normalization, or future managed-region adoption
+
+If the file does not exist, `generate` may create a new dotrepo-owned file in either
+fully generated or partially managed form, depending on the renderer's chosen default.
+
+#### Malformed markers
+
+Malformed managed files are an error state. Examples include:
+- begin marker without a matching end marker
+- end marker without a matching begin marker
+- mismatched ids
+- duplicate ids
+- nested regions
+- overlapping regions
+
+Implications:
+- `generate` must refuse to rewrite the file
+- `generate --check` must fail
+- `doctor` must report the file as malformed managed state with actionable diagnostics
+
+#### User-edited unmanaged content
+
+User edits outside dotrepo management are preserved.
+
+Implications:
+- dotrepo does not rewrite unmanaged files during `generate`
+- `generate --check` ignores drift in unmanaged files
+- maintainers may keep unmanaged prose intentionally, but `doctor` should make that
+  status visible
+
+#### User-edited managed content
+
+Changes inside a managed region count as drift unless they match the current `.repo`
+rendering.
+
+Implications:
+- `generate --check` must fail when managed regions differ from rendered output
+- `generate` should rewrite only the managed regions, preserving surrounding unmanaged
+  prose
+- trust or provenance banners outside the managed regions should remain stable unless
+  the renderer itself changes
+
+### Interaction with `doctor`
+
+`doctor` should distinguish at least these cases for supported files:
+- unmanaged
+- fully generated
+- partially managed
+- malformed managed
+
+It should not collapse these into a generic "managed/unmanaged" result, because the
+maintainer action differs in each case.
+
+### Interaction with `generate --check`
+
+`generate --check` should remain a CI-friendly drift detector.
+
+For v0.2:
+- fully generated files fail when the full rendered file differs
+- partially managed files fail when any managed region differs
+- unmanaged files do not fail solely because they exist
+- malformed managed files fail immediately with a marker diagnostic
+
+This keeps `.repo` authoritative without pretending dotrepo can safely round-trip
+arbitrary prose.
+
+## Explicit deferrals
+
+v0.2 managed-region sync does **not** promise:
+- arbitrary prose merging
+- semantic conflict resolution between user prose and generated prose
+- auto-conversion of unmanaged files into managed files
+- cross-file synchronization rules
+- editor or LSP assistance for placing markers

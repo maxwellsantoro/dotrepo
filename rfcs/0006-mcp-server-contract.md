@@ -38,11 +38,15 @@ Inputs:
 Returns:
 - `path`
 - the queried `value`
-- the enclosing record identity surface:
-  - `record.mode`
-  - `record.status`
-  - `record.source`
-  - `record.trust`
+- `selection`, containing:
+  - the preferred record summary
+  - a locator for the preferred record, such as `manifestPath` or index path
+  - the reason that record was selected
+- `conflicts`, containing zero or more competing claims with:
+  - the competing `value` when it differs for the queried field
+  - the competing record summary
+  - the relationship to the preferred record (`superseded` or `parallel`)
+  - the reason that competing record was not preferred
 
 The server should not return a bare value without trust context. dotrepo's query contract is useful precisely because a consumer can see whether a value came from a draft, imported overlay, inferred record, verified record, or canonical record.
 
@@ -52,12 +56,18 @@ Inputs:
 - `root`
 
 Returns:
-- `record.status`
-- `record.mode`
-- `record.source`
-- `record.trust.confidence`
-- `record.trust.provenance`
-- `record.trust.notes`
+- `selection`, containing:
+  - the preferred record summary
+  - a locator for the preferred record, such as `manifestPath` or index path
+  - the reason that record was selected
+- `conflicts`, containing zero or more competing or superseded records with:
+  - the competing record summary
+  - the relationship to the preferred record (`superseded` or `parallel`)
+  - the reason that competing record was not preferred
+
+The trust tool should mirror the same conflict-aware selection model as query. It is
+the inspection surface that explains why a canonical record won, why a reviewed
+overlay beat an imported overlay, or why equal-authority overlays remain unresolved.
 
 ### `dotrepo.generate_check`
 
@@ -103,24 +113,121 @@ This write tool is optional for the first server iteration. A preview-only impor
 
 The server should return plain structured objects. It should not require consumers to parse CLI text.
 
-Example query response:
+The recommended shared model is:
+
+- `selection.reason`:
+  - `only_matching_record`
+  - `canonical_preferred`
+  - `higher_status_overlay`
+  - `equal_authority_conflict`
+- `conflicts[].relationship`:
+  - `superseded`
+  - `parallel`
+
+Example query response with no conflict:
+
+```json
+{
+  "root": "/repo",
+  "manifestPath": "/repo/.repo",
+  "path": "repo.build",
+  "value": "cargo test",
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "/repo/.repo",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/BurntSushi/ripgrep",
+        "trust": {
+          "confidence": "medium",
+          "provenance": ["imported", "inferred"],
+          "notes": "Imported from public repository materials; build and test commands are inferred from the Cargo project layout; not maintainer-verified."
+        }
+      }
+    }
+  },
+  "conflicts": []
+}
+```
+
+Example query response when a canonical record beats an overlay:
 
 ```json
 {
   "path": "repo.build",
-  "value": "cargo test",
-  "record": {
-    "mode": "overlay",
-    "status": "imported",
-    "source": "https://github.com/BurntSushi/ripgrep",
-    "trust": {
-      "confidence": "medium",
-      "provenance": ["imported", "inferred"],
-      "notes": "Imported from public repository materials; build and test commands are inferred from the Cargo project layout; not maintainer-verified."
+  "value": "cargo build --workspace",
+  "selection": {
+    "reason": "canonical_preferred",
+    "record": {
+      "manifestPath": "/repo/.repo",
+      "record": {
+        "mode": "native",
+        "status": "canonical",
+        "trust": {
+          "confidence": "high",
+          "provenance": ["declared"]
+        }
+      }
     }
-  }
+  },
+  "conflicts": [
+    {
+      "relationship": "superseded",
+      "reason": "canonical_preferred",
+      "value": "cargo test",
+      "record": {
+        "manifestPath": "/index/repos/github.com/acme/widget/record.toml",
+        "record": {
+          "mode": "overlay",
+          "status": "reviewed",
+          "source": "https://github.com/acme/widget",
+          "trust": {
+            "confidence": "medium",
+            "provenance": ["imported", "verified"]
+          }
+        }
+      }
+    }
+  ]
 }
 ```
+
+Example trust response when equal-authority overlays conflict:
+
+```json
+{
+  "selection": {
+    "reason": "equal_authority_conflict",
+    "record": {
+      "manifestPath": "/index/repos/github.com/acme/widget-a/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "reviewed",
+        "source": "https://github.com/acme/widget"
+      }
+    }
+  },
+  "conflicts": [
+    {
+      "relationship": "parallel",
+      "reason": "equal_authority_conflict",
+      "record": {
+        "manifestPath": "/index/repos/github.com/acme/widget-b/record.toml",
+        "record": {
+          "mode": "overlay",
+          "status": "reviewed",
+          "source": "https://github.com/acme/widget"
+        }
+      }
+    }
+  ]
+}
+```
+
+Worked examples for these shapes live in
+[`docs/conflict-surfacing-examples.md`](../docs/conflict-surfacing-examples.md).
 
 ## Relationship to the CLI
 

@@ -95,8 +95,12 @@ fn import_fixture_pack_supports_native_and_overlay_bootstrap() {
 
 #[test]
 fn import_fixture_pack_captures_readme_title_and_description_edge_cases() {
-    let setext = import_repository(&fixture_case("setext-heading-readme"), ImportMode::Native, None)
-        .expect("setext README imports");
+    let setext = import_repository(
+        &fixture_case("setext-heading-readme"),
+        ImportMode::Native,
+        None,
+    )
+    .expect("setext README imports");
     assert_eq!(setext.manifest.repo.name, "Forge");
     assert_eq!(
         setext.manifest.repo.description,
@@ -104,8 +108,12 @@ fn import_fixture_pack_captures_readme_title_and_description_edge_cases() {
     );
     assert!(setext.inferred_fields.is_empty());
 
-    let html = import_repository(&fixture_case("html-heading-readme"), ImportMode::Native, None)
-        .expect("HTML heading README imports");
+    let html = import_repository(
+        &fixture_case("html-heading-readme"),
+        ImportMode::Native,
+        None,
+    )
+    .expect("HTML heading README imports");
     assert_eq!(html.manifest.repo.name, "Nimbus");
     assert_eq!(
         html.manifest.repo.description,
@@ -130,7 +138,11 @@ fn import_fixture_pack_captures_readme_title_and_description_edge_cases() {
 fn import_fixture_pack_strengthens_owner_and_security_extraction() {
     let codeowners = import_repository(&fixture_case("mixed-codeowners"), ImportMode::Native, None)
         .expect("mixed CODEOWNERS fixture imports");
-    let owners = codeowners.manifest.owners.as_ref().expect("owners imported");
+    let owners = codeowners
+        .manifest
+        .owners
+        .as_ref()
+        .expect("owners imported");
     assert_eq!(owners.team.as_deref(), Some("@org/release-team"));
     assert_eq!(
         owners.maintainers,

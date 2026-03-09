@@ -33,9 +33,38 @@ cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
 What each command answers:
 - `validate` confirms that the current `.repo` is structurally valid.
 - `query` gives scripts and tools a stable way to read specific fields from the manifest.
-- `trust` surfaces status, provenance, confidence, and source context in one place.
+- `trust` is the human-facing inspection surface for status, provenance, authority handoff, and competing records.
 - `doctor` tells you whether conventional surfaces exist outside dotrepo management.
 - `generate --check` fails when generated files have drifted from the canonical `.repo`.
+
+## Inspect authority handoff and conflicts
+
+Use `trust` when you need to understand why one record won:
+
+```bash
+cargo run -p dotrepo-cli -- --root <repo-or-index-scope> trust
+cargo run -p dotrepo-cli -- --root <repo-or-index-scope> trust --json
+```
+
+The human-facing output should tell you:
+- which record was selected
+- why it won
+- which competing records remain visible
+- whether those competing records are `superseded` or `parallel`
+- the source, confidence, provenance, and notes attached to each record
+
+Use `trust --json` when MCP clients, scripts, or tests need the same
+conflict-aware structure returned by `dotrepo-core`.
+
+If you need one field together with the same selection context, use:
+
+```bash
+cargo run -p dotrepo-cli -- --root <repo-or-index-scope> query repo.build --json
+```
+
+`query --raw` remains available for single-record scalar lookups, but it now
+refuses when competing records exist so scripts do not silently discard trust
+context.
 
 ## Source-of-truth rule
 
@@ -64,6 +93,6 @@ cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
 That is the intended v0.1 contract for a native repo:
 - validate the canonical record
 - make one or more machine-facing queries succeed
-- surface trust metadata explicitly
+- surface trust metadata and any authority conflicts explicitly
 - confirm there are no unmanaged conventional files
 - fail the build if generated surfaces drift

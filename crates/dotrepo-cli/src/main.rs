@@ -1,12 +1,13 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    detect_unmanaged_files, generate_check_repository, import_repository,
-    load_manifest_document, load_manifest_from_root, managed_outputs, query_repository,
-    trust_repository, validate_index_root, validate_manifest, validate_repository, ImportMode,
-    IndexFindingSeverity,
+    detect_unmanaged_files, generate_check_repository, import_repository, load_manifest_document,
+    load_manifest_from_root, managed_outputs, query_repository, trust_repository,
+    validate_index_root, validate_manifest, validate_repository, ConflictRelationship, ImportMode,
+    IndexFindingSeverity, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
+use dotrepo_schema::Trust;
 use serde_json::Value;
 use std::fs;
 use std::path::PathBuf;
@@ -17,6 +18,7 @@ use thiserror::Error;
 #[command(name = "dotrepo")]
 #[command(about = "reference cli for the dotrepo protocol")]
 struct Cli {
+    /// Repository root containing `.repo` or overlay records.
     #[arg(long, default_value = ".")]
     root: PathBuf,
     #[command(subcommand)]
@@ -25,36 +27,57 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// Initialize a canonical root `.repo` scaffold.
     Init {
+        /// Overwrite an existing root `.repo`.
         #[arg(long)]
         force: bool,
     },
+    /// Import conventional repository surfaces into a dotrepo record.
     Import {
+        /// Record mode for the imported manifest.
         #[arg(long, value_enum, default_value_t = ImportModeArg::Native)]
         mode: ImportModeArg,
+        /// Explicit repository source URL for overlays.
         #[arg(long)]
         source: Option<String>,
+        /// Overwrite previously imported artifacts.
         #[arg(long)]
         force: bool,
     },
+    /// Validate the manifest at the selected repository root.
     Validate,
+    /// Validate a public index tree rooted at `index/`.
     ValidateIndex {
+        /// Index root to validate.
         #[arg(long, default_value = "index")]
         index_root: PathBuf,
     },
+    /// Query one field from the selected record, preserving trust-aware selection in `--json`.
     Query {
+        /// Dot-path such as `repo.name` or `record.trust.provenance`.
         path: String,
+        /// Emit the full conflict-aware query report as JSON.
         #[arg(long, conflicts_with = "raw")]
         json: bool,
+        /// Emit only the selected scalar value. Refuses when competing records exist.
         #[arg(long, conflicts_with = "json")]
         raw: bool,
     },
+    /// Render generated compatibility surfaces or fail when they drift.
     Generate {
+        /// Check generated surfaces for drift without writing files.
         #[arg(long)]
         check: bool,
     },
+    /// Inspect unmanaged conventional files at the repository root.
     Doctor,
-    Trust,
+    /// Inspect trust, authority handoff, and competing records for one repository identity.
+    Trust {
+        /// Emit the full conflict-aware trust report as JSON.
+        #[arg(long)]
+        json: bool,
+    },
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, ValueEnum)]
@@ -104,7 +127,7 @@ fn run() -> Result<()> {
         Command::Query { path, json, raw } => cmd_query(cli.root, &path, json, raw),
         Command::Generate { check } => cmd_generate(cli.root, check),
         Command::Doctor => cmd_doctor(cli.root),
-        Command::Trust => cmd_trust(cli.root),
+        Command::Trust { json } => cmd_trust(cli.root, json),
     }
 }
 
@@ -193,7 +216,14 @@ fn cmd_import(
 
 fn cmd_query(root: PathBuf, path: &str, json: bool, raw: bool) -> Result<()> {
     let report = query_repository(&root, path)?;
-    println!("{}", format_query_value(&report.value, json, raw)?);
+    if json {
+        println!("{}", serde_json::to_string_pretty(&report)?);
+    } else {
+        if raw && !report.conflicts.is_empty() {
+            bail!("--raw is only supported when query selection has no competing records");
+        }
+        println!("{}", format_query_value(&report.value, raw)?);
+    }
     Ok(())
 }
 
@@ -302,30 +332,67 @@ fn cmd_doctor(root: PathBuf) -> Result<()> {
     Ok(())
 }
 
-fn cmd_trust(root: PathBuf) -> Result<()> {
+fn cmd_trust(root: PathBuf, json: bool) -> Result<()> {
     let report = trust_repository(&root)?;
-    println!("status: {:?}", report.record.status);
-    println!("mode: {:?}", report.record.mode);
-    if let Some(source) = report.record.source {
-        println!("source: {:?}", source);
+    if json {
+        println!("{}", serde_json::to_string_pretty(&report)?);
+        return Ok(());
     }
-    if let Some(trust) = report.record.trust {
-        println!("confidence: {:?}", trust.confidence);
-        println!("provenance: {:?}", trust.provenance);
-        println!("notes: {:?}", trust.notes);
-    } else {
-        println!("confidence: None");
-        println!("provenance: []");
-        println!("notes: None");
-    }
+
+    println!("{}", format_trust_report(&report));
     Ok(())
 }
 
-fn format_query_value(value: &Value, json: bool, raw: bool) -> Result<String> {
-    if json {
-        return Ok(serde_json::to_string_pretty(value)?);
+fn format_trust_report(report: &TrustReport) -> String {
+    let selected = &report.selection.record;
+    let mut lines = vec![
+        format!(
+            "selected: {} ({:?}, {:?})",
+            selected.manifest_path, selected.record.mode, selected.record.status
+        ),
+        format!(
+            "selection reason: {}",
+            format_selection_reason(report.selection.reason)
+        ),
+    ];
+
+    append_record_details(
+        &mut lines,
+        "",
+        selected.record.source.as_deref(),
+        selected.record.trust.as_ref(),
+    );
+
+    if !report.conflicts.is_empty() {
+        lines.push("conflicts:".into());
+        for conflict in &report.conflicts {
+            lines.push(format!(
+                "- {} ({:?}, {:?})",
+                conflict.record.manifest_path,
+                conflict.record.record.mode,
+                conflict.record.record.status
+            ));
+            lines.push(format!(
+                "  relationship: {}",
+                format_conflict_relationship(conflict.relationship)
+            ));
+            lines.push(format!(
+                "  reason: {}",
+                format_selection_reason(conflict.reason)
+            ));
+            append_record_details(
+                &mut lines,
+                "  ",
+                conflict.record.record.source.as_deref(),
+                conflict.record.record.trust.as_ref(),
+            );
+        }
     }
 
+    lines.join("\n")
+}
+
+fn format_query_value(value: &Value, raw: bool) -> Result<String> {
     match value {
         Value::String(text) => Ok(text.clone()),
         Value::Null => {
@@ -346,6 +413,66 @@ fn format_query_value(value: &Value, json: bool, raw: bool) -> Result<String> {
     }
 }
 
+fn append_record_details(
+    lines: &mut Vec<String>,
+    indent: &str,
+    source: Option<&str>,
+    trust: Option<&Trust>,
+) {
+    lines.push(format!("{}source: {}", indent, source.unwrap_or("none")));
+    if let Some(trust) = trust {
+        lines.push(format!(
+            "{}confidence: {}",
+            indent,
+            trust.confidence.as_deref().unwrap_or("none")
+        ));
+        lines.push(format!(
+            "{}provenance: {}",
+            indent,
+            format_provenance(&trust.provenance)
+        ));
+        lines.push(format!(
+            "{}notes: {}",
+            indent,
+            trust.notes.as_deref().unwrap_or("none")
+        ));
+    } else {
+        lines.push(format!("{}confidence: none", indent));
+        lines.push(format!("{}provenance: none", indent));
+        lines.push(format!("{}notes: none", indent));
+    }
+}
+
+fn format_selection_reason(reason: SelectionReason) -> &'static str {
+    match reason {
+        SelectionReason::OnlyMatchingRecord => "only matching record",
+        SelectionReason::CanonicalPreferred => {
+            "canonical record preferred over lower-authority competing records"
+        }
+        SelectionReason::HigherStatusOverlay => {
+            "higher-status overlay preferred over lower-status competing overlays"
+        }
+        SelectionReason::EqualAuthorityConflict => {
+            "equal-authority conflict; selected by stable path ordering while preserving competing records"
+        }
+    }
+}
+
+fn format_conflict_relationship(relationship: ConflictRelationship) -> &'static str {
+    match relationship {
+        ConflictRelationship::Superseded => "superseded",
+        ConflictRelationship::Parallel => "parallel",
+    }
+}
+
+fn format_provenance(provenance: &[String]) -> String {
+    if provenance.is_empty() {
+        "none".into()
+    } else {
+        provenance.join(", ")
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -353,27 +480,192 @@ mod tests {
 
     #[test]
     fn format_query_value_defaults_to_human_readable_strings() {
-        let rendered =
-            format_query_value(&Value::String("orbit".into()), false, false).expect("formats");
+        let rendered = format_query_value(&Value::String("orbit".into()), false).expect("formats");
         assert_eq!(rendered, "orbit");
     }
 
     #[test]
-    fn format_query_value_supports_json_mode() {
-        let rendered = format_query_value(&Value::String("orbit".into()), true, false)
-            .expect("formats as json");
-        assert_eq!(rendered, "\"orbit\"");
+    fn format_query_value_rejects_raw_composite_values() {
+        let err = format_query_value(&Value::Array(vec![Value::String("orbit".into())]), true)
+            .expect_err("raw composite values should fail");
+        assert!(err.to_string().contains("--raw"));
     }
 
     #[test]
-    fn format_query_value_rejects_raw_composite_values() {
-        let err = format_query_value(
-            &Value::Array(vec![Value::String("orbit".into())]),
-            false,
-            true,
+    fn query_raw_should_refuse_competing_records() {
+        let root = temp_dir("query-raw-conflict");
+        fs::write(
+            root.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "selected"
+"#,
         )
-        .expect_err("raw composite values should fail");
-        assert!(err.to_string().contains("--raw"));
+        .expect("root overlay written");
+        let alt = root.join("alt");
+        fs::create_dir_all(&alt).expect("alt dir created");
+        fs::write(
+            alt.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "competing"
+"#,
+        )
+        .expect("competing overlay written");
+
+        let err = cmd_query(root.clone(), "repo.description", false, true)
+            .expect_err("raw conflict should fail");
+        assert!(err.to_string().contains("competing records"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn format_trust_report_explains_canonical_handoff_plainly() {
+        let root = temp_dir("trust-conflict-report");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared"]
+notes = "Maintainer-authored root record."
+
+[repo]
+name = "orbit"
+description = "Canonical project record"
+homepage = "https://github.com/example/orbit"
+"#,
+        )
+        .expect("canonical manifest written");
+        let overlay_dir = root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&overlay_dir).expect("overlay dir created");
+        fs::write(
+            overlay_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+notes = "Reviewed overlay retained for audit history."
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("overlay manifest written");
+
+        let report = trust_repository(&root).expect("trust report");
+        let rendered = format_trust_report(&report);
+        assert!(rendered.contains("selected: .repo (Native, Canonical)"));
+        assert!(rendered.contains(
+            "selection reason: canonical record preferred over lower-authority competing records"
+        ));
+        assert!(rendered.contains("conflicts:"));
+        assert!(
+            rendered.contains("- repos/github.com/example/orbit/record.toml (Overlay, Reviewed)")
+        );
+        assert!(rendered.contains("relationship: superseded"));
+        assert!(rendered
+            .contains("reason: canonical record preferred over lower-authority competing records"));
+        assert!(rendered.contains("provenance: imported, verified"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn format_trust_report_explains_equal_authority_conflicts() {
+        let root = temp_dir("trust-equal-authority-report");
+        let first = root.join("a");
+        let second = root.join("b");
+        fs::create_dir_all(&first).expect("first dir created");
+        fs::create_dir_all(&second).expect("second dir created");
+        fs::write(
+            first.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "First reviewed overlay"
+"#,
+        )
+        .expect("first manifest written");
+        fs::write(
+            second.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Second reviewed overlay"
+"#,
+        )
+        .expect("second manifest written");
+
+        let report = trust_repository(&root).expect("trust report");
+        let rendered = format_trust_report(&report);
+        assert!(rendered.contains(
+            "selection reason: equal-authority conflict; selected by stable path ordering while preserving competing records"
+        ));
+        assert!(rendered.contains("relationship: parallel"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
     }
 
     #[test]

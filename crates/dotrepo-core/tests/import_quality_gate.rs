@@ -54,7 +54,9 @@ fn assert_common_plan_fields(plan: &ImportPlan, expectation: &FixtureExpectation
 
     let owners = plan.manifest.owners.as_ref();
     assert_eq!(
-        owners.map(|owners| owners.maintainers.clone()).unwrap_or_default(),
+        owners
+            .map(|owners| owners.maintainers.clone())
+            .unwrap_or_default(),
         expectation.maintainers
     );
     assert_eq!(

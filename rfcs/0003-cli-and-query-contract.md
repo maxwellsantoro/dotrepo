@@ -44,6 +44,30 @@ The command should support:
 
 All serialized fields should be queryable by default through dot-path traversal.
 
+Conflict-aware query responses should preserve both the preferred value and the
+authority decision behind it.
+
+For machine-readable surfaces, the query response should include:
+- `path`
+- the preferred `value`
+- `selection`, containing:
+  - the preferred record summary
+  - the reason that record was selected
+  - a locator for the preferred record, such as `manifestPath` or index path
+- `conflicts`, containing zero or more competing claims with:
+  - the competing value when the queried field differs
+  - the competing record summary
+  - the relationship to the preferred record (`superseded` or `parallel`)
+  - the reason it did not become the preferred record
+
+The query contract should always include `selection`. It should include `conflicts`
+whenever competing records exist for the same repository identity.
+
+`--json` should serialize the full query report object, not only the scalar value.
+`--raw` remains useful for scripts, but it should refuse conflictful results rather
+than silently discarding trust context. A future explicit lossy mode may relax that,
+but conflict-aware query output should be safe by default.
+
 ### `dotrepo generate`
 Generate synchronized repository surfaces such as README or GitHub compatibility files.
 
@@ -70,6 +94,19 @@ At minimum, v0.1 should inspect conventional repository surfaces such as:
 ### `dotrepo trust`
 Display the record's status, provenance, confidence, and source context in one place.
 
+Conflict-aware trust responses should use the same `selection` and `conflicts`
+structure as query responses, but without a queried field value.
+
+For machine-readable surfaces, the trust response should include:
+- the preferred record summary
+- the reason it is preferred
+- zero or more competing or superseded records
+- enough locator information to inspect the preferred and competing records
+
+The trust contract should not require downstream consumers to infer precedence only
+from `record.status`. The response should say explicitly why one record won and which
+records remain visible as lower-authority or parallel context.
+
 ## Exit codes
 
 - `0`: success
@@ -82,6 +119,19 @@ Display the record's status, provenance, confidence, and source context in one p
 
 The query contract should be stable enough for scripts, agents, and editor tooling.
 
+`selection.reason` should use a small stable vocabulary for day-one consumers:
+- `only_matching_record`
+- `canonical_preferred`
+- `higher_status_overlay`
+- `equal_authority_conflict`
+
+`conflicts[].relationship` should use:
+- `superseded`
+- `parallel`
+
 ## Output guidance
 
 Human output should be readable. Machine output should be deterministic and schema-aware.
+
+Worked examples for the conflict-aware response shape live in
+[`docs/conflict-surfacing-examples.md`](../docs/conflict-surfacing-examples.md).

@@ -70,6 +70,46 @@ pub struct RecordSummary {
     pub trust: Option<Trust>,
 }
 
+#[derive(Debug, Clone, Copy, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum SelectionReason {
+    OnlyMatchingRecord,
+    CanonicalPreferred,
+    HigherStatusOverlay,
+    EqualAuthorityConflict,
+}
+
+#[derive(Debug, Clone, Copy, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ConflictRelationship {
+    Superseded,
+    Parallel,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SelectedRecord {
+    pub manifest_path: String,
+    pub record: RecordSummary,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SelectionReport {
+    pub reason: SelectionReason,
+    pub record: SelectedRecord,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ConflictReport {
+    pub relationship: ConflictRelationship,
+    pub reason: SelectionReason,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub value: Option<Value>,
+    pub record: SelectedRecord,
+}
+
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ValidateReport {
@@ -89,7 +129,8 @@ pub struct QueryReport {
     pub manifest_path: String,
     pub path: String,
     pub value: Value,
-    pub record: RecordSummary,
+    pub selection: SelectionReport,
+    pub conflicts: Vec<ConflictReport>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -97,7 +138,8 @@ pub struct QueryReport {
 pub struct TrustReport {
     pub root: String,
     pub manifest_path: String,
-    pub record: RecordSummary,
+    pub selection: SelectionReport,
+    pub conflicts: Vec<ConflictReport>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -153,14 +195,33 @@ pub struct LoadedManifest {
     pub manifest: Manifest,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct RepositoryIdentity {
+    host: String,
+    owner: String,
+    repo: String,
+}
+
+#[derive(Debug, Clone)]
+struct CandidateManifest {
+    manifest_path: String,
+    manifest: Manifest,
+    identity: Option<RepositoryIdentity>,
+    rank: u8,
+}
+
 pub fn load_manifest_document(root: &Path) -> Result<LoadedManifest> {
     let path = manifest_path(root);
+    load_manifest_file(&path)
+}
+
+fn load_manifest_file(path: &Path) -> Result<LoadedManifest> {
     let raw = fs::read(&path).map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
     let text = std::str::from_utf8(&raw)
         .map_err(|e| anyhow!("failed to decode {} as UTF-8: {}", path.display(), e))?;
     let manifest = parse_manifest(text)?;
     Ok(LoadedManifest {
-        path,
+        path: path.to_path_buf(),
         raw,
         manifest,
     })
@@ -184,6 +245,235 @@ pub fn record_summary(manifest: &Manifest) -> RecordSummary {
         source: manifest.record.source.clone(),
         trust: manifest.record.trust.clone(),
     }
+}
+
+fn selected_record(candidate: &CandidateManifest) -> SelectedRecord {
+    SelectedRecord {
+        manifest_path: candidate.manifest_path.clone(),
+        record: record_summary(&candidate.manifest),
+    }
+}
+
+fn resolve_selection_reason(
+    candidates: &[CandidateManifest],
+    selected: &CandidateManifest,
+) -> SelectionReason {
+    if candidates.len() == 1 {
+        return SelectionReason::OnlyMatchingRecord;
+    }
+
+    if candidates.iter().any(|candidate| {
+        candidate.manifest_path != selected.manifest_path && candidate.rank == selected.rank
+    }) {
+        return SelectionReason::EqualAuthorityConflict;
+    }
+
+    if matches!(selected.manifest.record.status, RecordStatus::Canonical) {
+        SelectionReason::CanonicalPreferred
+    } else {
+        SelectionReason::HigherStatusOverlay
+    }
+}
+
+fn resolve_conflict_reason(
+    selected_reason: SelectionReason,
+    selected: &CandidateManifest,
+    competing: &CandidateManifest,
+) -> SelectionReason {
+    match selected_reason {
+        SelectionReason::OnlyMatchingRecord => SelectionReason::OnlyMatchingRecord,
+        SelectionReason::CanonicalPreferred | SelectionReason::HigherStatusOverlay => {
+            selected_reason
+        }
+        SelectionReason::EqualAuthorityConflict => {
+            if competing.rank == selected.rank {
+                SelectionReason::EqualAuthorityConflict
+            } else {
+                SelectionReason::HigherStatusOverlay
+            }
+        }
+    }
+}
+
+fn resolve_competing_value(manifest: &Manifest, path: &str) -> Option<Value> {
+    query_manifest_value(manifest, path).ok()
+}
+
+fn resolve_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
+    let mut candidates = load_direct_candidates(root)?;
+    if !candidates.is_empty() {
+        let direct_identities = unique_identities(
+            candidates
+                .iter()
+                .filter_map(|candidate| candidate.identity.clone()),
+        );
+        if direct_identities.len() > 1 {
+            bail!("multiple root candidates describe different repository identities");
+        }
+
+        if let Some(identity) = direct_identities.first() {
+            for candidate in load_descendant_candidates(root)? {
+                if candidate.identity.as_ref() == Some(identity) {
+                    candidates.push(candidate);
+                }
+            }
+        }
+
+        sort_candidates(&mut candidates);
+        return Ok(candidates);
+    }
+
+    let descendants = load_descendant_candidates(root)?;
+    if descendants.is_empty() {
+        bail!(
+            "failed to read {}: no .repo, record.toml, or descendant record.toml candidates found",
+            manifest_path(root).display()
+        );
+    }
+
+    let identities = unique_identities(
+        descendants
+            .iter()
+            .filter_map(|candidate| candidate.identity.clone()),
+    );
+    let mut candidates = if identities.len() == 1 {
+        let identity = &identities[0];
+        descendants
+            .into_iter()
+            .filter(|candidate| candidate.identity.as_ref() == Some(identity))
+            .collect::<Vec<_>>()
+    } else if identities.is_empty() && descendants.len() == 1 {
+        descendants
+    } else if identities.is_empty() {
+        bail!("multiple candidate overlays were found, but none expose a resolvable repository identity");
+    } else {
+        bail!("multiple repository identities were found under the query root; point query/trust at one repository scope");
+    };
+
+    sort_candidates(&mut candidates);
+    Ok(candidates)
+}
+
+fn load_direct_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
+    let mut candidates = Vec::new();
+    for name in [".repo", "record.toml"] {
+        let path = root.join(name);
+        if !path.exists() {
+            continue;
+        }
+
+        let document = load_manifest_file(&path)?;
+        validate_manifest(root, &document.manifest)?;
+        candidates.push(candidate_from_document(root, &document));
+    }
+    Ok(candidates)
+}
+
+fn load_descendant_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
+    let mut record_dirs = Vec::new();
+    collect_record_dirs(root, &mut record_dirs)?;
+    record_dirs.sort();
+
+    let root_record = root.join("record.toml");
+    let mut candidates = Vec::new();
+    for record_dir in record_dirs {
+        let path = record_dir.join("record.toml");
+        if path == root_record {
+            continue;
+        }
+        let document = load_manifest_file(&path)?;
+        validate_manifest(root, &document.manifest)?;
+        candidates.push(candidate_from_document(root, &document));
+    }
+    Ok(candidates)
+}
+
+fn candidate_from_document(root: &Path, document: &LoadedManifest) -> CandidateManifest {
+    CandidateManifest {
+        manifest_path: display_path(root, &document.path),
+        rank: precedence_rank(&document.manifest),
+        identity: manifest_identity(root, document),
+        manifest: document.manifest.clone(),
+    }
+}
+
+fn precedence_rank(manifest: &Manifest) -> u8 {
+    match (&manifest.record.mode, &manifest.record.status) {
+        (RecordMode::Native, RecordStatus::Canonical) => 7,
+        (_, RecordStatus::Canonical) => 6,
+        (_, RecordStatus::Verified) => 5,
+        (_, RecordStatus::Reviewed) => 4,
+        (_, RecordStatus::Imported) => 3,
+        (_, RecordStatus::Inferred) => 2,
+        (_, RecordStatus::Draft) => 1,
+    }
+}
+
+fn manifest_identity(root: &Path, document: &LoadedManifest) -> Option<RepositoryIdentity> {
+    document
+        .manifest
+        .record
+        .source
+        .as_deref()
+        .and_then(repository_identity)
+        .map(repository_identity_parts)
+        .or_else(|| {
+            document
+                .manifest
+                .repo
+                .homepage
+                .as_deref()
+                .and_then(repository_identity)
+                .map(repository_identity_parts)
+        })
+        .or_else(|| index_manifest_identity(root, &document.path))
+}
+
+fn index_manifest_identity(root: &Path, path: &Path) -> Option<RepositoryIdentity> {
+    let relative = path.strip_prefix(root).ok()?;
+    let segments = relative
+        .iter()
+        .map(|segment| segment.to_string_lossy().to_string())
+        .collect::<Vec<_>>();
+    let repos_index = segments.iter().position(|segment| segment == "repos")?;
+    let tail = &segments[repos_index + 1..];
+    if tail.len() != 4 || tail[3] != "record.toml" {
+        return None;
+    }
+    Some(RepositoryIdentity {
+        host: tail[0].clone(),
+        owner: tail[1].clone(),
+        repo: tail[2].clone(),
+    })
+}
+
+fn unique_identities(
+    identities: impl Iterator<Item = RepositoryIdentity>,
+) -> Vec<RepositoryIdentity> {
+    let mut unique = Vec::new();
+    for identity in identities {
+        if !unique.iter().any(|existing| existing == &identity) {
+            unique.push(identity);
+        }
+    }
+    unique
+}
+
+fn repository_identity_parts(parts: (String, String, String)) -> RepositoryIdentity {
+    RepositoryIdentity {
+        host: parts.0,
+        owner: parts.1,
+        repo: parts.2,
+    }
+}
+
+fn sort_candidates(candidates: &mut [CandidateManifest]) {
+    candidates.sort_by(|left, right| {
+        right
+            .rank
+            .cmp(&left.rank)
+            .then_with(|| left.manifest_path.cmp(&right.manifest_path))
+    });
 }
 
 pub fn validate_repository(root: &Path) -> ValidateReport {
@@ -223,25 +513,61 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
 }
 
 pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
-    let document = load_manifest_document(root)?;
-    validate_manifest(root, &document.manifest)?;
-    let value = query_manifest_value(&document.manifest, path)?;
+    let candidates = resolve_candidates(root)?;
+    let selected = &candidates[0];
+    let value = query_manifest_value(&selected.manifest, path)?;
+    let reason = resolve_selection_reason(&candidates, selected);
     Ok(QueryReport {
         root: root.display().to_string(),
-        manifest_path: display_path(root, &document.path),
+        manifest_path: selected.manifest_path.clone(),
         path: path.to_string(),
         value,
-        record: record_summary(&document.manifest),
+        selection: SelectionReport {
+            reason,
+            record: selected_record(selected),
+        },
+        conflicts: candidates
+            .iter()
+            .skip(1)
+            .map(|candidate| ConflictReport {
+                relationship: if candidate.rank == selected.rank {
+                    ConflictRelationship::Parallel
+                } else {
+                    ConflictRelationship::Superseded
+                },
+                reason: resolve_conflict_reason(reason, selected, candidate),
+                value: resolve_competing_value(&candidate.manifest, path),
+                record: selected_record(candidate),
+            })
+            .collect(),
     })
 }
 
 pub fn trust_repository(root: &Path) -> Result<TrustReport> {
-    let document = load_manifest_document(root)?;
-    validate_manifest(root, &document.manifest)?;
+    let candidates = resolve_candidates(root)?;
+    let selected = &candidates[0];
+    let reason = resolve_selection_reason(&candidates, selected);
     Ok(TrustReport {
         root: root.display().to_string(),
-        manifest_path: display_path(root, &document.path),
-        record: record_summary(&document.manifest),
+        manifest_path: selected.manifest_path.clone(),
+        selection: SelectionReport {
+            reason,
+            record: selected_record(selected),
+        },
+        conflicts: candidates
+            .iter()
+            .skip(1)
+            .map(|candidate| ConflictReport {
+                relationship: if candidate.rank == selected.rank {
+                    ConflictRelationship::Parallel
+                } else {
+                    ConflictRelationship::Superseded
+                },
+                reason: resolve_conflict_reason(reason, selected, candidate),
+                value: None,
+                record: selected_record(candidate),
+            })
+            .collect(),
     })
 }
 
@@ -288,7 +614,10 @@ pub fn import_preview_repository(
         manifest_path: display_path(root, &plan.manifest_path),
         manifest: plan.manifest.clone(),
         manifest_text: plan.manifest_text.clone(),
-        evidence_path: plan.evidence_path.as_ref().map(|path| display_path(root, path)),
+        evidence_path: plan
+            .evidence_path
+            .as_ref()
+            .map(|path| display_path(root, path)),
         evidence_text: plan.evidence_text.clone(),
         imported_sources: plan.imported_sources.clone(),
         inferred_fields: plan.inferred_fields.clone(),
@@ -738,7 +1067,8 @@ fn parse_readme_description(lines: &[&str], start: usize) -> Option<(String, usi
             }
             break;
         }
-        if parse_readme_title_line(trimmed).is_some() || parse_setext_heading(lines, idx).is_some() {
+        if parse_readme_title_line(trimmed).is_some() || parse_setext_heading(lines, idx).is_some()
+        {
             if parts.is_empty() {
                 return None;
             }
@@ -944,9 +1274,9 @@ fn looks_like_email(token: &str) -> bool {
     !local.is_empty()
         && !domain.is_empty()
         && parts.next().is_none()
-        && token.chars().all(|ch| {
-            ch.is_ascii_alphanumeric() || matches!(ch, '.' | '_' | '%' | '+' | '-' | '@')
-        })
+        && token
+            .chars()
+            .all(|ch| ch.is_ascii_alphanumeric() || matches!(ch, '.' | '_' | '%' | '+' | '-' | '@'))
         && domain.contains('.')
         && !token.starts_with("http://")
         && !token.starts_with("https://")
@@ -1940,6 +2270,314 @@ internal_id = "orbit-prod"
             query_manifest_value(&manifest, "repo.name").expect("value query succeeds"),
             Value::String("orbit".into())
         );
+    }
+
+    #[test]
+    fn query_repository_serializes_selection_and_conflicts() {
+        let root = temp_dir("query-report");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared"]
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest written");
+
+        let report = query_repository(&root, "repo.name").expect("query report");
+        let json = serde_json::to_value(report).expect("report serializes");
+        assert_eq!(
+            json["selection"]["reason"],
+            Value::String("only_matching_record".into())
+        );
+        assert_eq!(
+            json["selection"]["record"]["record"]["status"],
+            Value::String("canonical".into())
+        );
+        assert_eq!(json["conflicts"], Value::Array(Vec::new()));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn trust_repository_serializes_selection_and_conflicts() {
+        let root = temp_dir("trust-report");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://example.com/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest written");
+
+        let report = trust_repository(&root).expect("trust report");
+        let json = serde_json::to_value(report).expect("report serializes");
+        assert_eq!(
+            json["selection"]["reason"],
+            Value::String("only_matching_record".into())
+        );
+        assert_eq!(
+            json["selection"]["record"]["record"]["mode"],
+            Value::String("overlay".into())
+        );
+        assert_eq!(json["conflicts"], Value::Array(Vec::new()));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn query_repository_prefers_canonical_over_matching_overlay() {
+        let root = temp_dir("query-canonical-preferred");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared"]
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+homepage = "https://github.com/example/orbit"
+build = "cargo build --workspace"
+"#,
+        )
+        .expect("canonical manifest written");
+        let overlay_dir = root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&overlay_dir).expect("overlay dir created");
+        fs::write(
+            overlay_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "orbit"
+description = "Curated overlay"
+build = "cargo test"
+"#,
+        )
+        .expect("overlay manifest written");
+
+        let report = query_repository(&root, "repo.build").expect("query report");
+        let json = serde_json::to_value(report).expect("query report serializes");
+        assert_eq!(
+            json["selection"]["reason"],
+            Value::String("canonical_preferred".into())
+        );
+        assert_eq!(
+            json["value"],
+            Value::String("cargo build --workspace".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["relationship"],
+            Value::String("superseded".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["reason"],
+            Value::String("canonical_preferred".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["value"],
+            Value::String("cargo test".into())
+        );
+
+        let trust = trust_repository(&root).expect("trust report");
+        let trust_json = serde_json::to_value(trust).expect("trust report serializes");
+        assert_eq!(
+            trust_json["selection"]["reason"],
+            Value::String("canonical_preferred".into())
+        );
+        assert_eq!(
+            trust_json["conflicts"][0]["relationship"],
+            Value::String("superseded".into())
+        );
+        assert_eq!(trust_json["conflicts"][0].get("value"), None);
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn query_repository_prefers_higher_status_overlay() {
+        let root = temp_dir("query-higher-status-overlay");
+        let imported_dir = root.join("imported");
+        let reviewed_dir = root.join("reviewed");
+        fs::create_dir_all(&imported_dir).expect("imported dir created");
+        fs::create_dir_all(&reviewed_dir).expect("reviewed dir created");
+        fs::write(
+            imported_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "low"
+provenance = ["imported"]
+
+[repo]
+name = "orbit"
+description = "Imported overlay"
+build = "cargo build"
+"#,
+        )
+        .expect("imported overlay written");
+        fs::write(
+            reviewed_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+build = "cargo build --locked"
+"#,
+        )
+        .expect("reviewed overlay written");
+
+        let report = query_repository(&root, "repo.build").expect("query report");
+        let json = serde_json::to_value(report).expect("query report serializes");
+        assert_eq!(
+            json["selection"]["reason"],
+            Value::String("higher_status_overlay".into())
+        );
+        assert_eq!(json["value"], Value::String("cargo build --locked".into()));
+        assert_eq!(
+            json["conflicts"][0]["relationship"],
+            Value::String("superseded".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["reason"],
+            Value::String("higher_status_overlay".into())
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn query_repository_surfaces_equal_authority_overlay_conflicts() {
+        let root = temp_dir("query-equal-authority-overlay");
+        let first_dir = root.join("a");
+        let second_dir = root.join("b");
+        fs::create_dir_all(&first_dir).expect("first dir created");
+        fs::create_dir_all(&second_dir).expect("second dir created");
+        fs::write(
+            first_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "orbit"
+description = "First reviewed overlay"
+build = "cargo build"
+"#,
+        )
+        .expect("first overlay written");
+        fs::write(
+            second_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "orbit"
+description = "Second reviewed overlay"
+build = "cargo test"
+"#,
+        )
+        .expect("second overlay written");
+
+        let report = query_repository(&root, "repo.build").expect("query report");
+        let json = serde_json::to_value(report).expect("query report serializes");
+        assert_eq!(
+            json["selection"]["reason"],
+            Value::String("equal_authority_conflict".into())
+        );
+        assert_eq!(
+            json["selection"]["record"]["manifestPath"],
+            Value::String("a/record.toml".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["relationship"],
+            Value::String("parallel".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["reason"],
+            Value::String("equal_authority_conflict".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["value"],
+            Value::String("cargo test".into())
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
     }
 
     #[test]

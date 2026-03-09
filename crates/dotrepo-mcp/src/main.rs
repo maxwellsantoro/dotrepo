@@ -572,8 +572,16 @@ description = "Fast local-first sync engine"
             Value::String("orbit".into())
         );
         assert_eq!(
-            response["result"]["structuredContent"]["record"]["status"],
+            response["result"]["structuredContent"]["selection"]["reason"],
+            Value::String("only_matching_record".into())
+        );
+        assert_eq!(
+            response["result"]["structuredContent"]["selection"]["record"]["record"]["status"],
             Value::String("canonical".into())
+        );
+        assert_eq!(
+            response["result"]["structuredContent"]["conflicts"],
+            Value::Array(Vec::new())
         );
 
         fs::remove_dir_all(root).expect("temp dir removed");
@@ -913,8 +921,8 @@ pull_request_template = "skip"
         .expect("manifest written");
 
         let document = dotrepo_core::load_manifest_document(root).expect("manifest loads");
-        let outputs =
-            dotrepo_core::managed_outputs(root, &document.manifest, &document.raw).expect("outputs");
+        let outputs = dotrepo_core::managed_outputs(root, &document.manifest, &document.raw)
+            .expect("outputs");
         for (path, contents) in outputs {
             if let Some(parent) = path.parent() {
                 fs::create_dir_all(parent).expect("output parent exists");
