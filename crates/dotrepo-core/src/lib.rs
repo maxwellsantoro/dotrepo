@@ -15,6 +15,12 @@ pub struct DoctorFinding {
     pub message: String,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct IndexFinding {
+    pub path: PathBuf,
+    pub message: String,
+}
+
 #[derive(Debug, Clone)]
 pub struct LoadedManifest {
     pub path: PathBuf,
@@ -325,6 +331,54 @@ pub fn detect_unmanaged_files(root: &Path) -> Vec<DoctorFinding> {
     findings
 }
 
+pub fn validate_index_root(index_root: &Path) -> Result<Vec<IndexFinding>> {
+    let repos_root = index_root.join("repos");
+    if !repos_root.exists() {
+        bail!(
+            "index root does not contain a repos/ directory: {}",
+            repos_root.display()
+        );
+    }
+
+    let mut record_dirs = Vec::new();
+    collect_record_dirs(&repos_root, &mut record_dirs)?;
+    record_dirs.sort();
+
+    let mut findings = Vec::new();
+    for record_dir in record_dirs {
+        let display_path = record_dir
+            .strip_prefix(index_root)
+            .unwrap_or(&record_dir)
+            .join("record.toml");
+
+        let document = match load_manifest_document(&record_dir) {
+            Ok(document) => document,
+            Err(err) => {
+                findings.push(IndexFinding {
+                    path: display_path,
+                    message: err.to_string(),
+                });
+                continue;
+            }
+        };
+
+        if let Err(err) = validate_manifest(&record_dir, &document.manifest) {
+            findings.push(IndexFinding {
+                path: display_path.clone(),
+                message: err.to_string(),
+            });
+        }
+
+        findings.extend(validate_index_entry(
+            index_root,
+            &record_dir,
+            &document.manifest,
+        ));
+    }
+
+    Ok(findings)
+}
+
 pub fn source_digest(source_bytes: &[u8]) -> String {
     let mut hasher = Sha256::new();
     hasher.update(source_bytes);
@@ -364,6 +418,104 @@ fn validate_readme_sections(manifest: &Manifest) -> Result<()> {
     }
 
     Ok(())
+}
+
+fn validate_index_entry(
+    index_root: &Path,
+    record_dir: &Path,
+    manifest: &Manifest,
+) -> Vec<IndexFinding> {
+    let mut findings = Vec::new();
+    let relative_record = record_dir
+        .strip_prefix(index_root)
+        .unwrap_or(record_dir)
+        .join("record.toml");
+
+    let relative = match record_dir.strip_prefix(index_root.join("repos")) {
+        Ok(relative) => relative,
+        Err(_) => {
+            findings.push(IndexFinding {
+                path: relative_record,
+                message: "index records must live under index_root/repos/<host>/<owner>/<repo>/record.toml"
+                    .into(),
+            });
+            return findings;
+        }
+    };
+
+    let segments = relative
+        .iter()
+        .map(|segment| segment.to_string_lossy().to_string())
+        .collect::<Vec<_>>();
+    if segments.len() != 3 {
+        findings.push(IndexFinding {
+            path: relative_record.clone(),
+            message: "index path must be exactly repos/<host>/<owner>/<repo>/record.toml".into(),
+        });
+        return findings;
+    }
+
+    if manifest.record.mode != RecordMode::Overlay {
+        findings.push(IndexFinding {
+            path: relative_record.clone(),
+            message: "v0.1 index entries must use record.mode = \"overlay\"".into(),
+        });
+    }
+
+    let evidence_path = record_dir.join("evidence.md");
+    match fs::read_to_string(&evidence_path) {
+        Ok(contents) => {
+            if contents.trim().is_empty() {
+                findings.push(IndexFinding {
+                    path: relative_record.clone(),
+                    message: "evidence.md must not be empty".into(),
+                });
+            }
+        }
+        Err(_) => findings.push(IndexFinding {
+            path: relative_record.clone(),
+            message: "index entries must include a sibling evidence.md file".into(),
+        }),
+    }
+
+    let expected = (
+        segments[0].clone(),
+        segments[1].clone(),
+        segments[2].clone(),
+    );
+
+    match repository_identity(manifest.record.source.as_deref().unwrap_or_default()) {
+        Some(identity) if identity == expected => {}
+        Some(identity) => findings.push(IndexFinding {
+            path: relative_record.clone(),
+            message: format!(
+                "record.source resolves to {}/{}/{}, but index path is {}/{}/{}",
+                identity.0, identity.1, identity.2, expected.0, expected.1, expected.2
+            ),
+        }),
+        None => findings.push(IndexFinding {
+            path: relative_record.clone(),
+            message:
+                "record.source must be an absolute repository URL with host/owner/repo segments"
+                    .into(),
+        }),
+    }
+
+    if let Some(homepage) = &manifest.repo.homepage {
+        if let Some(identity) = repository_identity(homepage) {
+            if identity != expected {
+                findings.push(IndexFinding {
+                    path: relative_record,
+                    message: format!(
+                        "repo.homepage resolves to {}/{}/{}, but index path is {}/{}/{}",
+                        identity.0, identity.1, identity.2, expected.0, expected.1, expected.2
+                    ),
+                });
+            }
+        }
+    }
+
+    findings
 }
 
 fn manifest_path(root: &Path) -> PathBuf {
@@ -534,6 +686,46 @@ fn is_banner_line(line: &str) -> bool {
     let trimmed = line.trim_start();
     trimmed.starts_with("<!-- generated by dotrepo")
         || trimmed.starts_with("# generated by dotrepo")
+}
+
+fn collect_record_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
+    for entry in
+        fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
+    {
+        let entry = entry?;
+        let path = entry.path();
+        let file_type = entry.file_type()?;
+        if file_type.is_dir() {
+            collect_record_dirs(&path, out)?;
+        } else if file_type.is_file()
+            && path.file_name().and_then(|name| name.to_str()) == Some("record.toml")
+        {
+            if let Some(parent) = path.parent() {
+                out.push(parent.to_path_buf());
+            }
+        }
+    }
+    Ok(())
+}
+
+fn repository_identity(url: &str) -> Option<(String, String, String)> {
+    let trimmed = url.trim();
+    let without_scheme = trimmed
+        .strip_prefix("https://")
+        .or_else(|| trimmed.strip_prefix("http://"))?;
+    let mut parts = without_scheme.split('/');
+    let host = parts.next()?.trim().trim_end_matches(':').to_string();
+    if host.is_empty() {
+        return None;
+    }
+
+    let owner = parts.next()?.trim().to_string();
+    let repo = parts.next()?.trim().trim_end_matches(".git").to_string();
+    if owner.is_empty() || repo.is_empty() {
+        return None;
+    }
+
+    Some((host, owner, repo))
 }
 
 enum CommentStyle {
@@ -728,6 +920,82 @@ pull_request_template = "generate"
         assert!(outputs
             .iter()
             .any(|(path, _)| path == Path::new(".github/pull_request_template.md")));
+    }
+
+    #[test]
+    fn validate_index_root_accepts_seed_overlay_layout() {
+        let root = temp_dir("index");
+        let record_dir = root.join("repos/github.com/BurntSushi/ripgrep");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/BurntSushi/ripgrep"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+
+[repo]
+name = "ripgrep"
+description = "Line-oriented search tool"
+homepage = "https://github.com/BurntSushi/ripgrep"
+"#,
+        )
+        .expect("record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+
+        let findings = validate_index_root(&root).expect("index validates");
+        assert!(findings.is_empty());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn validate_index_root_reports_path_mismatches_and_missing_evidence() {
+        let root = temp_dir("index-bad");
+        let record_dir = root.join("repos/github.com/ripgrep/ripgrep");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/BurntSushi/ripgrep"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+
+[repo]
+name = "ripgrep"
+description = "Line-oriented search tool"
+homepage = "https://github.com/BurntSushi/ripgrep"
+"#,
+        )
+        .expect("record written");
+
+        let findings = validate_index_root(&root).expect("index validates");
+        assert_eq!(findings.len(), 3);
+        assert!(findings
+            .iter()
+            .any(|finding| finding.message.contains("evidence.md")));
+        assert!(findings
+            .iter()
+            .any(|finding| finding.message.contains("record.source resolves")));
+        assert!(findings
+            .iter()
+            .any(|finding| finding.message.contains("repo.homepage resolves")));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
     }
 
     fn temp_dir(label: &str) -> PathBuf {

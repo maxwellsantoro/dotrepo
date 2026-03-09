@@ -56,6 +56,8 @@ The v0.1 reference tool accepts `dotrepo/v0.1` exactly. Future tooling should tr
 - `test`
 - `topics`
 
+`build` and `test` are shell command strings intended to be run from the repository root.
+
 ### `[owners]`
 - `maintainers`
 - `team`
@@ -91,6 +93,10 @@ Future values may include `merge` or `template:<name>`.
 - `confidence`
 - `provenance`
 - `notes`
+
+For v0.1, `confidence` remains an open string field. The reference vocabulary is `low`, `medium`, and `high`, but tools should preserve unknown values even if they do not interpret them specially.
+
+`provenance` is also open-ended in v0.1. The reference vocabulary is `declared`, `imported`, `inferred`, and `verified`; consumers may reason about those values but should preserve unknown entries.
 
 ### `[relations]`
 Reserved namespace for future cross-repo and workspace semantics.

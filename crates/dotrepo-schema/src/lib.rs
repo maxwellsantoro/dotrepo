@@ -16,7 +16,7 @@ pub struct Manifest {
     pub compat: Option<Compat>,
     #[serde(default)]
     pub relations: Option<Relations>,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub x: BTreeMap<String, toml::Value>,
     #[serde(default, rename = "trust", skip_serializing)]
     legacy_trust: Option<Trust>,
@@ -36,6 +36,7 @@ pub struct Record {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
+#[derive(PartialEq, Eq)]
 pub enum RecordMode {
     Native,
     Overlay,
@@ -43,6 +44,7 @@ pub enum RecordMode {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
+#[derive(PartialEq, Eq)]
 pub enum RecordStatus {
     Draft,
     Imported,
@@ -104,7 +106,7 @@ pub struct Readme {
     pub tagline: Option<String>,
     #[serde(default)]
     pub sections: Vec<String>,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub custom_sections: BTreeMap<String, ReadmeCustomSection>,
 }
 
@@ -136,6 +138,7 @@ pub struct GitHubCompat {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
+#[derive(PartialEq, Eq)]
 pub enum CompatMode {
     Generate,
     Skip,
@@ -167,6 +170,12 @@ pub enum ParseError {
     ConflictingTrustPlacement,
 }
 
+#[derive(thiserror::Error, Debug)]
+pub enum RenderError {
+    #[error("failed to serialize manifest: {0}")]
+    Toml(#[from] toml::ser::Error),
+}
+
 pub fn parse_manifest(input: &str) -> Result<Manifest, ParseError> {
     let mut manifest = toml::from_str::<Manifest>(input)?;
 
@@ -181,6 +190,62 @@ pub fn parse_manifest(input: &str) -> Result<Manifest, ParseError> {
         }
         _ => Ok(manifest),
     }
+}
+
+pub fn render_manifest(manifest: &Manifest) -> Result<String, RenderError> {
+    Ok(toml::to_string_pretty(manifest)?)
+}
+
+pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
+    render_manifest(&Manifest {
+        schema: "dotrepo/v0.1".into(),
+        record: Record {
+            mode: RecordMode::Native,
+            status: RecordStatus::Draft,
+            source: None,
+            generated_at: None,
+            trust: Some(Trust {
+                confidence: Some("high".into()),
+                provenance: vec!["declared".into()],
+                notes: Some("Maintainer-authored scaffold.".into()),
+            }),
+        },
+        repo: Repo {
+            name: repo_name.into(),
+            description: "TODO: describe this repository".into(),
+            homepage: None,
+            license: None,
+            status: None,
+            visibility: None,
+            languages: Vec::new(),
+            build: None,
+            test: None,
+            topics: Vec::new(),
+        },
+        owners: Some(Owners {
+            maintainers: Vec::new(),
+            team: None,
+            security_contact: None,
+        }),
+        docs: None,
+        readme: Some(Readme {
+            title: Some(repo_name.into()),
+            tagline: None,
+            sections: vec!["overview".into(), "security".into()],
+            custom_sections: BTreeMap::new(),
+        }),
+        compat: Some(Compat {
+            github: Some(GitHubCompat {
+                codeowners: Some(CompatMode::Skip),
+                security: Some(CompatMode::Skip),
+                contributing: Some(CompatMode::Skip),
+                pull_request_template: Some(CompatMode::Skip),
+            }),
+        }),
+        relations: None,
+        x: BTreeMap::new(),
+        legacy_trust: None,
+    })
 }
 
 #[cfg(test)]
@@ -242,5 +307,31 @@ provenance = ["imported"]
         .expect_err("split trust placement should fail");
 
         assert!(matches!(err, ParseError::ConflictingTrustPlacement));
+    }
+
+    #[test]
+    fn scaffold_manifest_renders_parseable_manifest() {
+        let scaffold = scaffold_manifest("orbit").expect("scaffold renders");
+        let manifest = parse_manifest(&scaffold).expect("scaffold parses");
+
+        assert_eq!(manifest.record.mode, RecordMode::Native);
+        assert_eq!(manifest.record.status, RecordStatus::Draft);
+        assert_eq!(manifest.repo.name, "orbit");
+        assert_eq!(
+            manifest
+                .record
+                .trust
+                .as_ref()
+                .and_then(|trust| trust.confidence.as_deref()),
+            Some("high")
+        );
+        assert_eq!(
+            manifest
+                .compat
+                .as_ref()
+                .and_then(|compat| compat.github.as_ref())
+                .and_then(|github| github.codeowners.as_ref()),
+            Some(&CompatMode::Skip)
+        );
     }
 }

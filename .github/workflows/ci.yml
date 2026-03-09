@@ -6,13 +6,16 @@ on:
     branches: [main]
 
 jobs:
-  rust-and-docs:
+  rust-and-index:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
-      - name: Check formatting and compile
+      - name: Check formatting, tests, and seeded flows
         run: |
           cargo fmt --all -- --check
-          cargo check --workspace
+          cargo test --workspace
+          cargo run -p dotrepo-cli -- --root examples/native-minimal validate
+          cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
+          cargo run -p dotrepo-cli -- validate-index

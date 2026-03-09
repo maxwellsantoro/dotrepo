@@ -3,9 +3,10 @@
 ## v0.1
 - Canonical root `.repo` file format
 - Overlay record format for the index
-- `init`, `validate`, `query`, `generate`, `doctor`, and `trust` commands
+- `init`, `validate`, `validate-index`, `query`, `generate`, `doctor`, and `trust` commands
 - Mode-aware validation
 - Basic generated README and compatibility surfaces
+- Seed `index/` tree plus index validation checks
 - Starter GitHub Action
 
 ## v0.2

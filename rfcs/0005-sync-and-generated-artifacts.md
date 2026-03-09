@@ -32,6 +32,8 @@ In v0.1, the source digest is computed from the raw manifest bytes. Formatting-o
 
 Before managed regions land, v0.1 may support lightweight custom README sections through `[readme.custom_sections]` so repositories with non-standard section layouts do not hit a generation dead end immediately.
 
+In v0.1, `dotrepo generate` treats `README.md` as a first-class managed output. Per-surface enable/disable controls for README generation are a future compatibility feature rather than part of the day-one contract.
+
 ## Managed sync
 
 A future version may support managed regions for files like README, SECURITY.md, or CONTRIBUTING.md. That requires explicit structure and should not be implied by v0.1.

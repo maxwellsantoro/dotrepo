@@ -38,6 +38,12 @@ That supports:
 
 Host, owner, and repository path segments should match the canonical upstream origin exactly. Index paths are part of the record identity surface, so path drift should be treated as a correctness issue rather than a cosmetic detail.
 
+For the v0.1 seed index, CI should also require:
+- a sibling `evidence.md` for every `record.toml`
+- `record.mode = "overlay"`
+- `record.source` to resolve to the same `<host>/<owner>/<repo>` identity as the index path
+- `repo.homepage`, when it is also a repository URL, to match that same identity
+
 ## Contribution workflow
 
 1. A contributor or agent proposes a record.

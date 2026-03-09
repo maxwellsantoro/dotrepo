@@ -11,6 +11,14 @@ Create a starter `.repo` file for an existing repository.
 ### `dotrepo validate`
 Validate the record and return actionable diagnostics.
 
+### `dotrepo validate-index`
+Validate a seed/public index tree rooted at `index/`.
+
+The v0.1 command should:
+- discover `record.toml` files under `repos/<host>/<owner>/<repo>/`
+- require a sibling `evidence.md`
+- enforce source/path identity alignment for overlay entries
+
 ### `dotrepo query <path>`
 Return a structured value for a dot path such as:
 - `repo.name`

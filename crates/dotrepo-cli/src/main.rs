@@ -2,8 +2,9 @@ use anyhow::{bail, Result};
 use clap::{Parser, Subcommand};
 use dotrepo_core::{
     detect_unmanaged_files, load_manifest_document, load_manifest_from_root, managed_outputs,
-    query_manifest_value, validate_manifest,
+    query_manifest_value, validate_index_root, validate_manifest,
 };
+use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use serde_json::Value;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -27,6 +28,10 @@ enum Command {
         force: bool,
     },
     Validate,
+    ValidateIndex {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+    },
     Query {
         path: String,
         #[arg(long, conflicts_with = "raw")]
@@ -65,6 +70,7 @@ fn run() -> Result<()> {
     match cli.command {
         Command::Init { force } => cmd_init(cli.root, force),
         Command::Validate => cmd_validate(cli.root),
+        Command::ValidateIndex { index_root } => cmd_validate_index(index_root),
         Command::Query { path, json, raw } => cmd_query(cli.root, &path, json, raw),
         Command::Generate { check } => cmd_generate(cli.root, check),
         Command::Doctor => cmd_doctor(cli.root),
@@ -88,7 +94,12 @@ fn cmd_init(root: PathBuf, force: bool) -> Result<()> {
         );
     }
 
-    let manifest = scaffold_manifest(&root);
+    let repo_name = root
+        .file_name()
+        .and_then(|name| name.to_str())
+        .filter(|name| !name.is_empty())
+        .unwrap_or("repository");
+    let manifest = render_scaffold_manifest(repo_name)?;
     fs::write(&manifest_path, manifest)?;
     println!("initialized {}", manifest_path.display());
     Ok(())
@@ -99,6 +110,27 @@ fn cmd_query(root: PathBuf, path: &str, json: bool, raw: bool) -> Result<()> {
     let value = query_manifest_value(&manifest, path)?;
     println!("{}", format_query_value(&value, json, raw)?);
     Ok(())
+}
+
+fn cmd_validate_index(index_root: PathBuf) -> Result<()> {
+    let findings = validate_index_root(&index_root)?;
+    if findings.is_empty() {
+        println!("index valid");
+        return Ok(());
+    }
+
+    Err(CliExit {
+        code: 1,
+        message: format!(
+            "index validation failed:\n{}",
+            findings
+                .into_iter()
+                .map(|finding| format!("- {}: {}", finding.path.display(), finding.message))
+                .collect::<Vec<_>>()
+                .join("\n")
+        ),
+    }
+    .into())
 }
 
 fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
@@ -182,19 +214,6 @@ fn cmd_trust(root: PathBuf) -> Result<()> {
         println!("notes: None");
     }
     Ok(())
-}
-
-fn scaffold_manifest(root: &Path) -> String {
-    let repo_name = root
-        .file_name()
-        .and_then(|name| name.to_str())
-        .filter(|name| !name.is_empty())
-        .unwrap_or("repository");
-
-    format!(
-        "schema = \"dotrepo/v0.1\"\n\n[record]\nmode = \"native\"\nstatus = \"draft\"\n\n[record.trust]\nconfidence = \"high\"\nprovenance = [\"declared\"]\nnotes = \"Maintainer-authored scaffold.\"\n\n[repo]\nname = \"{}\"\ndescription = \"TODO: describe this repository\"\nlanguages = []\ntopics = []\n\n[owners]\nmaintainers = []\n\n[readme]\ntitle = \"{}\"\nsections = [\"overview\", \"security\"]\n\n[compat.github]\ncodeowners = \"skip\"\nsecurity = \"skip\"\ncontributing = \"skip\"\npull_request_template = \"skip\"\n",
-        repo_name, repo_name
-    )
 }
 
 fn display_path(root: &Path, path: &Path) -> String {

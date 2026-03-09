@@ -22,6 +22,10 @@ In the schema, that means trust metadata belongs to the record itself: `record.s
 - **inferred**: derived from heuristics, code inspection, or LLM interpretation
 - **verified**: confirmed through human review or explicit maintainer validation
 
+These are the reference provenance values for v0.1, not a closed enum. Tools should preserve unknown provenance strings even if they only interpret the reference vocabulary directly.
+
+Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `medium`, and `high` in v0.1, but remains an open string so the protocol can evolve without forcing an immediate schema break.
+
 ## Trust implications
 
 - Agents and tools should prefer canonical records when available.

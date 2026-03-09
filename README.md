@@ -58,6 +58,7 @@ A structured `.repo` record does not replace code or good documentation. It prov
 - a Rust workspace with `dotrepo-schema`, `dotrepo-core`, and `dotrepo-cli`
 - updated RFCs that reflect the protocol + toolchain + index model
 - example native and overlay records
+- a seeded `index/` tree with real overlay layout and validation rules
 - starter GitHub Actions templates
 - public-facing docs with a balanced tone around ambition, safety, and practicality
 
@@ -70,6 +71,7 @@ This scaffold is a planning and architecture package. It is not a production imp
 - [`docs/vision.md`](docs/vision.md)
 - [`docs/public-messaging.md`](docs/public-messaging.md)
 - [`docs/trust-model.md`](docs/trust-model.md)
+- [`index/README.md`](index/README.md)
 - [`rfcs/0001-protocol-and-ecosystem.md`](rfcs/0001-protocol-and-ecosystem.md)
 - [`rfcs/0004-index-and-trust-model.md`](rfcs/0004-index-and-trust-model.md)
 - [`rfcs/0003-cli-and-query-contract.md`](rfcs/0003-cli-and-query-contract.md)

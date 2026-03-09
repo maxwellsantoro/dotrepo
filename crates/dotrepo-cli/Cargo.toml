@@ -14,5 +14,6 @@ path = "src/main.rs"
 anyhow.workspace = true
 clap.workspace = true
 dotrepo-core = { path = "../dotrepo-core" }
+dotrepo-schema = { path = "../dotrepo-schema" }
 serde_json.workspace = true
 thiserror.workspace = true
