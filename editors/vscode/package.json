@@ -1,0 +1,110 @@
+{
+  "name": "dotrepo-vscode",
+  "displayName": "dotrepo",
+  "description": "Thin VS Code extension for dotrepo manifest authoring.",
+  "version": "0.1.0",
+  "publisher": "dotrepo",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "dotrepo",
+    "toml",
+    "metadata",
+    "repository"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dotrepo/dotrepo"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:dotrepo",
+    "onLanguage:dotrepo-overlay",
+    "onCommand:dotrepo.validateCurrentManifest",
+    "onCommand:dotrepo.trustCurrentManifest",
+    "onCommand:dotrepo.doctorCurrentManifest",
+    "onCommand:dotrepo.generateCheckCurrentManifest"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "dotrepo",
+        "aliases": [
+          "dotrepo"
+        ],
+        "filenames": [
+          ".repo"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "dotrepo-overlay",
+        "aliases": [
+          "dotrepo overlay"
+        ],
+        "filenames": [
+          "record.toml"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "dotrepo.validateCurrentManifest",
+        "title": "dotrepo: Validate Current Manifest"
+      },
+      {
+        "command": "dotrepo.trustCurrentManifest",
+        "title": "dotrepo: Trust Current Manifest"
+      },
+      {
+        "command": "dotrepo.doctorCurrentManifest",
+        "title": "dotrepo: Doctor Current Root"
+      },
+      {
+        "command": "dotrepo.generateCheckCurrentManifest",
+        "title": "dotrepo: Generate Check Current Root"
+      }
+    ],
+    "configuration": {
+      "title": "dotrepo",
+      "properties": {
+        "dotrepo.languageServer.command": {
+          "type": "string",
+          "default": "dotrepo-lsp",
+          "description": "Command used to launch the dotrepo language server."
+        },
+        "dotrepo.languageServer.args": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Arguments passed to the dotrepo language server command."
+        },
+        "dotrepo.cli.command": {
+          "type": "string",
+          "default": "dotrepo",
+          "description": "Command used for thin VS Code shell commands such as validate, trust, doctor, and generate --check."
+        },
+        "dotrepo.cli.args": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Arguments passed before the dotrepo CLI subcommand and root arguments."
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  }
+}

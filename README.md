@@ -56,6 +56,7 @@ A structured `.repo` record does not replace code or good documentation. It prov
 ## What this scaffold includes
 
 - a Rust workspace with `dotrepo-schema`, `dotrepo-core`, `dotrepo-cli`, `dotrepo-mcp`, and `dotrepo-lsp`
+- a first VS Code extension shell under [`editors/vscode/`](editors/vscode/)
 - a thin import path for bootstrapping records from `README.md`, `CODEOWNERS`, and `SECURITY.md`
 - a thin stdio MCP server exposing trust-aware validate/query/trust/generate-check/import tools
 - updated RFCs that reflect the protocol + toolchain + index model
@@ -83,3 +84,4 @@ This repo is an early implementation of the dotrepo protocol and toolchain. It i
 - [`rfcs/0003-cli-and-query-contract.md`](rfcs/0003-cli-and-query-contract.md)
 - [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md)
 - [`rfcs/0007-lsp-and-vscode-scope.md`](rfcs/0007-lsp-and-vscode-scope.md)
+- [`editors/vscode/README.md`](editors/vscode/README.md)
