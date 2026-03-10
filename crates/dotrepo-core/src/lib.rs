@@ -728,10 +728,26 @@ pub fn import_repository(
         .as_ref()
         .map(|file| parse_codeowners_metadata(&file.contents))
         .unwrap_or_default();
-    let security_contact = security
+    let parsed_security = security
         .as_ref()
-        .and_then(|file| parse_security_contact(&file.contents))
+        .map(|file| parse_security_import_metadata(&file.contents))
+        .unwrap_or_default();
+    let security_contact = parsed_security
+        .contact
+        .clone()
         .or_else(|| security.as_ref().map(|_| "unknown".into()));
+    let security_note = if security.is_some() {
+        if parsed_security.contact.is_some() {
+            parsed_security.note.clone()
+        } else {
+            Some(
+                "SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional."
+                    .to_string(),
+            )
+        }
+    } else {
+        None
+    };
 
     let mut imported_sources = Vec::new();
     let mut inferred_fields = Vec::new();
@@ -824,6 +840,7 @@ pub fn import_repository(
                     &imported_sources,
                     &inferred_fields,
                     codeowners_metadata.note.as_deref(),
+                    security_note.as_deref(),
                 )),
             }),
         },
@@ -846,7 +863,7 @@ pub fn import_repository(
     manifest.owners = build_imported_owners(
         codeowners_metadata.owners,
         codeowners_metadata.team,
-        security_contact,
+        security_contact.clone(),
     );
     manifest.docs = imported_docs.clone();
     manifest.readme = match mode {
@@ -892,8 +909,9 @@ pub fn import_repository(
             Some(render_import_evidence(
                 &imported_sources,
                 &inferred_fields,
-                &security,
+                security_contact.as_deref(),
                 codeowners_metadata.note.as_deref(),
+                security_note.as_deref(),
                 imported_docs.is_some(),
             )),
         ),
@@ -1058,6 +1076,12 @@ struct CodeownersRule {
     pattern: String,
     owners: Vec<String>,
     teams: Vec<String>,
+}
+
+#[derive(Default)]
+struct SecurityImportMetadata {
+    contact: Option<String>,
+    note: Option<String>,
 }
 
 fn load_first_existing_file(
@@ -1520,30 +1544,33 @@ fn parse_security_contact(contents: &str) -> Option<String> {
     find_mailto_or_email(contents).or_else(|| find_first_url(contents))
 }
 
+fn parse_security_import_metadata(contents: &str) -> SecurityImportMetadata {
+    match parse_security_contact(contents) {
+        Some(contact) if looks_like_email(&contact) => SecurityImportMetadata {
+            contact: Some(contact),
+            note: None,
+        },
+        Some(contact) => SecurityImportMetadata {
+            contact: Some(contact),
+            note: Some(
+                "SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL."
+                    .to_string(),
+            ),
+        },
+        None => SecurityImportMetadata::default(),
+    }
+}
+
 fn find_mailto_or_email(contents: &str) -> Option<String> {
     for token in contents.split_whitespace() {
-        let cleaned = trim_contact_token(token);
-        if let Some(value) = cleaned.strip_prefix("mailto:") {
-            let value = trim_contact_token(value);
-            if looks_like_email(value) {
-                return Some(value.to_string());
-            }
-        }
-        if looks_like_email(cleaned) {
-            return Some(cleaned.to_string());
+        if let Some(email) = extract_email_candidate(token) {
+            return Some(email);
         }
     }
 
-    for destination in markdown_link_destinations(contents) {
-        let cleaned = trim_contact_token(&destination);
-        if let Some(value) = cleaned.strip_prefix("mailto:") {
-            let value = trim_contact_token(value);
-            if looks_like_email(value) {
-                return Some(value.to_string());
-            }
-        }
-        if looks_like_email(cleaned) {
-            return Some(cleaned.to_string());
+    for destination in security_link_destinations(contents) {
+        if let Some(email) = extract_email_candidate(&destination) {
+            return Some(email);
         }
     }
 
@@ -1552,20 +1579,66 @@ fn find_mailto_or_email(contents: &str) -> Option<String> {
 
 fn find_first_url(contents: &str) -> Option<String> {
     for token in contents.split_whitespace() {
-        let cleaned = trim_contact_token(token);
-        if cleaned.starts_with("https://") || cleaned.starts_with("http://") {
-            return Some(cleaned.to_string());
+        if let Some(url) = extract_url_candidate(token) {
+            return Some(url);
         }
     }
 
-    for destination in markdown_link_destinations(contents) {
-        let cleaned = trim_contact_token(&destination);
-        if cleaned.starts_with("https://") || cleaned.starts_with("http://") {
-            return Some(cleaned.to_string());
+    for destination in security_link_destinations(contents) {
+        if let Some(url) = extract_url_candidate(&destination) {
+            return Some(url);
         }
     }
 
     None
+}
+
+fn extract_email_candidate(token: &str) -> Option<String> {
+    if let Some(address) = extract_mailto_address(token) {
+        return Some(address);
+    }
+
+    let cleaned = trim_contact_token(token);
+    looks_like_email(cleaned).then(|| cleaned.to_string())
+}
+
+fn extract_mailto_address(token: &str) -> Option<String> {
+    let cleaned = trim_contact_token(token);
+    if cleaned.len() < 7 || !cleaned[..7].eq_ignore_ascii_case("mailto:") {
+        return None;
+    }
+
+    let value = cleaned[7..]
+        .split(['?', '#'])
+        .next()
+        .map(trim_contact_token)
+        .unwrap_or("");
+    looks_like_email(value).then(|| value.to_string())
+}
+
+fn extract_url_candidate(token: &str) -> Option<String> {
+    let cleaned = trim_contact_token(token);
+    if cleaned.starts_with("https://") || cleaned.starts_with("http://") {
+        Some(cleaned.to_string())
+    } else {
+        None
+    }
+}
+
+fn security_link_destinations(contents: &str) -> Vec<String> {
+    let mut destinations = Vec::new();
+
+    for destination in markdown_link_destinations(contents) {
+        push_unique(&mut destinations, destination);
+    }
+    for destination in markdown_reference_destinations(contents) {
+        push_unique(&mut destinations, destination);
+    }
+    for destination in html_href_destinations(contents) {
+        push_unique(&mut destinations, destination);
+    }
+
+    destinations
 }
 
 fn markdown_link_destinations(contents: &str) -> Vec<String> {
@@ -1577,14 +1650,91 @@ fn markdown_link_destinations(contents: &str) -> Vec<String> {
         let Some(end) = after.find(')') else {
             break;
         };
-        let destination = after[..end].trim();
-        if !destination.is_empty() {
-            destinations.push(destination.to_string());
+        if let Some(destination) = extract_link_destination(&after[..end]) {
+            destinations.push(destination);
         }
         rest = &after[end + 1..];
     }
 
     destinations
+}
+
+fn markdown_reference_destinations(contents: &str) -> Vec<String> {
+    let mut destinations = Vec::new();
+
+    for line in contents.lines() {
+        let trimmed = line.trim();
+        if !trimmed.starts_with('[') {
+            continue;
+        }
+        let Some(split_idx) = trimmed.find("]:") else {
+            continue;
+        };
+        if let Some(destination) = extract_link_destination(&trimmed[split_idx + 2..]) {
+            destinations.push(destination);
+        }
+    }
+
+    destinations
+}
+
+fn html_href_destinations(contents: &str) -> Vec<String> {
+    let mut destinations = Vec::new();
+    let lower = contents.to_ascii_lowercase();
+    let bytes = contents.as_bytes();
+    let mut idx = 0;
+
+    while let Some(rel) = lower[idx..].find("href=") {
+        let mut start = idx + rel + 5;
+        while start < bytes.len() && bytes[start].is_ascii_whitespace() {
+            start += 1;
+        }
+        if start >= bytes.len() {
+            break;
+        }
+
+        let (raw_start, raw_end) = match bytes[start] {
+            b'"' | b'\'' => {
+                let quote = bytes[start] as char;
+                let raw_start = start + 1;
+                let Some(rel_end) = contents[raw_start..].find(quote) else {
+                    break;
+                };
+                (raw_start, raw_start + rel_end)
+            }
+            _ => {
+                let raw_start = start;
+                let raw_end = contents[raw_start..]
+                    .find(|ch: char| ch.is_whitespace() || ch == '>')
+                    .map(|rel_end| raw_start + rel_end)
+                    .unwrap_or(contents.len());
+                (raw_start, raw_end)
+            }
+        };
+
+        if let Some(destination) = extract_link_destination(&contents[raw_start..raw_end]) {
+            destinations.push(destination);
+        }
+
+        idx = raw_end;
+    }
+
+    destinations
+}
+
+fn extract_link_destination(raw: &str) -> Option<String> {
+    let trimmed = raw.trim();
+    if trimmed.is_empty() {
+        return None;
+    }
+
+    let destination = if let Some(stripped) = trimmed.strip_prefix('<') {
+        stripped.split('>').next().unwrap_or("")
+    } else {
+        trimmed.split_whitespace().next().unwrap_or("")
+    };
+    let cleaned = trim_contact_token(destination);
+    (!cleaned.is_empty()).then(|| cleaned.to_string())
 }
 
 fn is_team_handle(token: &str) -> bool {
@@ -1651,6 +1801,7 @@ fn import_notes(
     imported_sources: &[String],
     inferred_fields: &[String],
     codeowners_note: Option<&str>,
+    security_note: Option<&str>,
 ) -> String {
     let mut notes = if imported_sources.is_empty() {
         "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported."
@@ -1669,6 +1820,11 @@ fn import_notes(
     if let Some(codeowners_note) = codeowners_note {
         notes.push(' ');
         notes.push_str(codeowners_note);
+    }
+
+    if let Some(security_note) = security_note {
+        notes.push(' ');
+        notes.push_str(security_note);
     }
 
     if matches!(mode, ImportMode::Overlay) {
@@ -1712,8 +1868,9 @@ fn build_imported_docs(root: Option<String>, getting_started: Option<String>) ->
 fn render_import_evidence(
     imported_sources: &[String],
     inferred_fields: &[String],
-    security: &Option<ImportedFile>,
+    security_contact: Option<&str>,
     codeowners_note: Option<&str>,
+    security_note: Option<&str>,
     imported_docs: bool,
 ) -> String {
     let mut bullets = Vec::new();
@@ -1746,12 +1903,14 @@ fn render_import_evidence(
         .iter()
         .any(|path| path == ".github/SECURITY.md" || path == "SECURITY.md")
     {
-        if security
-            .as_ref()
-            .and_then(|file| parse_security_contact(&file.contents))
-            .is_some()
-        {
-            bullets.push("Imported the security contact from SECURITY.md.".to_string());
+        if security_contact.is_some_and(|contact| contact != "unknown") {
+            let mut bullet =
+                "Imported the security reporting channel from SECURITY.md.".to_string();
+            if let Some(security_note) = security_note {
+                bullet.push(' ');
+                bullet.push_str(security_note);
+            }
+            bullets.push(bullet);
         } else {
             bullets.push(
                 "Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = \"unknown\" is intentional."
@@ -4086,6 +4245,46 @@ pull_request_template = "generate"
             .note
             .as_deref()
             .is_some_and(|note| note.contains("`owners.team` was left unset")));
+    }
+
+    #[test]
+    fn parse_security_contact_supports_reference_links_html_anchors_and_mailto_queries() {
+        assert_eq!(
+            parse_security_contact(
+                "Please report vulnerabilities through our [security mailbox][security-mailbox].\n\n[security-mailbox]: mailto:security@example.com\n",
+            )
+            .as_deref(),
+            Some("security@example.com")
+        );
+        assert_eq!(
+            parse_security_contact(
+                "For responsible disclosure, contact <a href=\"mailto:security@example.com\">the security team</a>.\n",
+            )
+            .as_deref(),
+            Some("security@example.com")
+        );
+        assert_eq!(
+            parse_security_contact(
+                "Report vulnerabilities through our [security desk](mailto:security@example.com?subject=Security%20Report).\n",
+            )
+            .as_deref(),
+            Some("security@example.com")
+        );
+    }
+
+    #[test]
+    fn parse_security_import_metadata_marks_policy_urls_as_partial_security_channels() {
+        let metadata = parse_security_import_metadata(
+            "Please use https://example.com/security for coordinated disclosure.\n",
+        );
+
+        assert_eq!(
+            metadata.contact.as_deref(),
+            Some("https://example.com/security")
+        );
+        assert!(metadata.note.as_deref().is_some_and(
+            |note| note.contains("policy or reporting URL rather than a direct mailbox")
+        ));
     }
 
     #[test]

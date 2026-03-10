@@ -12,6 +12,9 @@ Cases:
 - `root-conventional-files`: root-level `CODEOWNERS` and `SECURITY.md`, with title imported but description inferred.
 - `description-only-readme`: README description with no heading, so name is inferred from the directory.
 - `security-markdown-link`: `SECURITY.md` exposes a contact channel through markdown link syntax rather than raw tokens.
+- `security-reference-link`: `SECURITY.md` exposes a reporting mailbox through reference-style markdown links.
+- `security-html-anchor`: `SECURITY.md` exposes a reporting mailbox through an HTML anchor tag.
+- `security-mailto-query`: `SECURITY.md` uses a `mailto:` link with query parameters that should still resolve to the mailbox.
 - `security-contact-unknown`: `SECURITY.md` exists but does not expose a parseable email or URL.
 - `no-conventional-surfaces`: no importable conventional files, so the plan falls back entirely to inferred defaults.
 - `mixed-codeowners`: repo-wide `CODEOWNERS` ownership plus narrower team overrides, preserving a primary team signal without flattening narrower owners.

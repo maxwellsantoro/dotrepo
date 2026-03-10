@@ -13,7 +13,7 @@
     "trust_provenance": ["imported"],
     "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/CODEOWNERS`", "`.github/SECURITY.md`"],
     "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/CODEOWNERS`", "`.github/SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer candidates from CODEOWNERS.", "Imported the security contact from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer candidates from CODEOWNERS.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
   },
   {
     "fixture": "badge-heavy-readme",
@@ -27,9 +27,9 @@
     "native_status": "draft",
     "overlay_status": "imported",
     "trust_provenance": ["imported"],
-    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
-    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security contact from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "policy or reporting URL rather than a direct mailbox"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "policy or reporting URL rather than a direct mailbox", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "policy or reporting URL rather than a direct mailbox", "This is an overlay record, not a maintainer-controlled canonical record."]
   },
   {
     "fixture": "setext-heading-readme",
@@ -127,9 +127,9 @@
     "native_status": "draft",
     "overlay_status": "inferred",
     "trust_provenance": ["imported", "inferred"],
-    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`SECURITY.md`", "Filled `repo.description` with inferred defaults."],
-    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`SECURITY.md`", "Filled `repo.description` with inferred defaults.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name from README.md.", "Imported maintainer candidates from CODEOWNERS.", "Imported the security contact from SECURITY.md.", "Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`SECURITY.md`", "Filled `repo.description` with inferred defaults.", "policy or reporting URL rather than a direct mailbox"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`SECURITY.md`", "Filled `repo.description` with inferred defaults.", "policy or reporting URL rather than a direct mailbox", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name from README.md.", "Imported maintainer candidates from CODEOWNERS.", "Imported the security reporting channel from SECURITY.md.", "policy or reporting URL rather than a direct mailbox", "Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
   },
   {
     "fixture": "description-only-readme",
@@ -161,7 +161,55 @@
     "trust_provenance": ["imported"],
     "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
     "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security contact from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "security-reference-link",
+    "repo_name": "Watchtower",
+    "repo_description": "Release integrity tracking for self-hosted deployments.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "security@example.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "security-html-anchor",
+    "repo_name": "Porthole",
+    "repo_description": "Coordinated disclosure workflow for release automation services.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "security@example.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "security-mailto-query",
+    "repo_name": "Signal Harbor",
+    "repo_description": "Security triage coordination for automated release systems.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "security@example.com",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
   },
   {
     "fixture": "security-contact-unknown",

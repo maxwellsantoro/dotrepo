@@ -17,6 +17,8 @@
 
 See [`docs/sync-boundaries.md`](./sync-boundaries.md) for the current
 implementation boundary around managed sync and non-round-trippable cases.
+See [`rfcs/0007-lsp-and-vscode-scope.md`](../rfcs/0007-lsp-and-vscode-scope.md)
+for the first editor feature set and thin-extension model.
 
 ## v0.3+
 - Bundle mode

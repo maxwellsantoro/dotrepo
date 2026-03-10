@@ -255,6 +255,51 @@ fn import_fixture_pack_strengthens_owner_and_security_extraction() {
         Some("security@example.com")
     );
 
+    let reference_link = import_repository(
+        &fixture_case("security-reference-link"),
+        ImportMode::Native,
+        None,
+    )
+    .expect("reference-style SECURITY fixture imports");
+    assert_eq!(
+        reference_link
+            .manifest
+            .owners
+            .as_ref()
+            .and_then(|owners| owners.security_contact.as_deref()),
+        Some("security@example.com")
+    );
+
+    let html_anchor = import_repository(
+        &fixture_case("security-html-anchor"),
+        ImportMode::Native,
+        None,
+    )
+    .expect("html anchor SECURITY fixture imports");
+    assert_eq!(
+        html_anchor
+            .manifest
+            .owners
+            .as_ref()
+            .and_then(|owners| owners.security_contact.as_deref()),
+        Some("security@example.com")
+    );
+
+    let mailto_query = import_repository(
+        &fixture_case("security-mailto-query"),
+        ImportMode::Native,
+        None,
+    )
+    .expect("mailto query SECURITY fixture imports");
+    assert_eq!(
+        mailto_query
+            .manifest
+            .owners
+            .as_ref()
+            .and_then(|owners| owners.security_contact.as_deref()),
+        Some("security@example.com")
+    );
+
     let unknown = import_repository(
         &fixture_case("security-contact-unknown"),
         ImportMode::Native,

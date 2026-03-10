@@ -4,6 +4,7 @@ members = [
   "crates/dotrepo-core",
   "crates/dotrepo-cli",
   "crates/dotrepo-mcp",
+  "crates/dotrepo-lsp",
 ]
 resolver = "2"
 
