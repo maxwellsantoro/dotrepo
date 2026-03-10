@@ -367,6 +367,50 @@ pub struct ClaimEventInspection {
     pub to: Option<ClaimState>,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ClaimScaffoldInput {
+    pub host: String,
+    pub owner: String,
+    pub repo: String,
+    pub claim_id: String,
+    pub claimant_display_name: String,
+    pub asserted_role: String,
+    pub contact: Option<String>,
+    pub record_sources: Vec<String>,
+    pub canonical_repo_url: Option<String>,
+    pub create_review_md: bool,
+    pub timestamp: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ClaimScaffoldPlan {
+    pub claim_dir: PathBuf,
+    pub claim_path: PathBuf,
+    pub claim_text: String,
+    pub review_path: Option<PathBuf>,
+    pub review_text: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ClaimEventAppendInput {
+    pub kind: ClaimEventKind,
+    pub actor: String,
+    pub summary: String,
+    pub timestamp: String,
+    pub canonical_record_path: Option<String>,
+    pub canonical_mirror_path: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ClaimEventAppendPlan {
+    pub claim_dir: PathBuf,
+    pub claim_path: PathBuf,
+    pub claim_text: String,
+    pub event_path: PathBuf,
+    pub event_text: String,
+    pub next_state: ClaimState,
+}
+
 #[derive(Debug, Clone, Serialize)]
 pub struct GenerateCheckOutput {
     pub path: String,
@@ -550,6 +594,203 @@ pub fn inspect_claim_directory(root: &Path, claim_dir: &Path) -> Result<ClaimIns
     Ok(claim_inspection_report(&loaded))
 }
 
+pub fn scaffold_claim_directory(root: &Path, input: &ClaimScaffoldInput) -> Result<ClaimScaffoldPlan> {
+    require_path_segment("identity.host", &input.host)?;
+    require_path_segment("identity.owner", &input.owner)?;
+    require_path_segment("identity.repo", &input.repo)?;
+    require_path_segment("claim.id", &input.claim_id)?;
+    require_non_empty("claimant.display_name", &input.claimant_display_name)?;
+    require_non_empty("claimant.asserted_role", &input.asserted_role)?;
+    require_non_empty("claim.created_at", &input.timestamp)?;
+
+    let repo_dir = root
+        .join("repos")
+        .join(&input.host)
+        .join(&input.owner)
+        .join(&input.repo);
+    let record_path = repo_dir.join("record.toml");
+    if !record_path.is_file() {
+        bail!(
+            "no index record found at {}; claims can only be scaffolded for existing index repositories",
+            record_path.display()
+        );
+    }
+
+    let claim_dir = repo_dir.join("claims").join(&input.claim_id);
+    let claim_path = claim_dir.join("claim.toml");
+    let review_path = input.create_review_md.then(|| claim_dir.join("review.md"));
+    let record_source_values = input
+        .record_sources
+        .iter()
+        .map(|value| value.trim())
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned)
+        .collect::<Vec<_>>();
+    let contact = input
+        .contact
+        .as_ref()
+        .map(|value| value.trim())
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned);
+    let canonical_repo_url = input
+        .canonical_repo_url
+        .as_ref()
+        .map(|value| value.trim())
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned);
+    let claim = ClaimRecord {
+        schema: SUPPORTED_CLAIM_SCHEMA.into(),
+        claim: ClaimMetadata {
+            id: format!(
+                "{}/{}/{}/{}",
+                input.host, input.owner, input.repo, input.claim_id
+            ),
+            kind: ClaimKind::MaintainerAuthority,
+            state: ClaimState::Draft,
+            created_at: input.timestamp.clone(),
+            updated_at: input.timestamp.clone(),
+        },
+        identity: ClaimIdentity {
+            host: input.host.clone(),
+            owner: input.owner.clone(),
+            repo: input.repo.clone(),
+        },
+        claimant: Claimant {
+            display_name: input.claimant_display_name.clone(),
+            asserted_role: input.asserted_role.clone(),
+            contact,
+        },
+        target: ClaimTarget {
+            index_paths: vec![format!(
+                "repos/{}/{}/{}/record.toml",
+                input.host, input.owner, input.repo
+            )],
+            record_sources: record_source_values,
+            canonical_repo_url,
+        },
+        resolution: None,
+    };
+    validate_claim_record(&claim)?;
+    let claim_text =
+        toml::to_string_pretty(&claim).map_err(|e| anyhow!("failed to render claim.toml: {e}"))?;
+    let review_text = review_path
+        .as_ref()
+        .map(|_| render_claim_review_template(&claim));
+
+    Ok(ClaimScaffoldPlan {
+        claim_dir,
+        claim_path,
+        claim_text,
+        review_path,
+        review_text,
+    })
+}
+
+pub fn append_claim_event(
+    root: &Path,
+    claim_dir: &Path,
+    input: &ClaimEventAppendInput,
+) -> Result<ClaimEventAppendPlan> {
+    require_non_empty("event.actor", &input.actor)?;
+    require_non_empty("summary.text", &input.summary)?;
+    require_non_empty("event.timestamp", &input.timestamp)?;
+
+    let loaded = load_claim_directory(root, claim_dir)?;
+    let next_sequence = loaded
+        .events
+        .last()
+        .map(|event| event.event.event.sequence + 1)
+        .unwrap_or(1);
+    let current_state = loaded.claim.claim.state.clone();
+    let next_state = next_claim_state(&current_state, &input.kind, !loaded.events.is_empty())?;
+    let transition = event_transition_for(&current_state, &next_state, &input.kind);
+    let canonical_record_path = input
+        .canonical_record_path
+        .as_ref()
+        .map(|value| value.trim())
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned);
+    let canonical_mirror_path = input
+        .canonical_mirror_path
+        .as_ref()
+        .map(|value| value.trim())
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned);
+    let records_canonical_handoff =
+        canonical_record_path.is_some() || canonical_mirror_path.is_some();
+    if records_canonical_handoff && next_state != ClaimState::Accepted {
+        bail!(
+            "canonical handoff links are only valid when the resulting claim state is accepted"
+        );
+    }
+    let event = ClaimEvent {
+        schema: SUPPORTED_CLAIM_EVENT_SCHEMA.into(),
+        event: ClaimEventMetadata {
+            sequence: next_sequence,
+            kind: input.kind.clone(),
+            timestamp: input.timestamp.clone(),
+            actor: input.actor.clone(),
+        },
+        transition,
+        summary: ClaimSummary {
+            text: input.summary.clone(),
+        },
+        links: Some(ClaimEventLinks {
+            claim: Some("../claim.toml".into()),
+            review_notes: loaded.review_path.as_ref().map(|_| "../review.md".into()),
+            canonical_record_path: canonical_record_path.clone(),
+        }),
+    };
+    validate_claim_event(&event)?;
+
+    let mut updated_claim = loaded.claim.clone();
+    updated_claim.claim.updated_at = input.timestamp.clone();
+    updated_claim.claim.state = next_state.clone();
+    let result_event = format!("events/{next_sequence:04}-{}.toml", claim_event_kind_slug(&input.kind));
+    updated_claim.resolution = update_claim_resolution(
+        &loaded.claim,
+        &input.kind,
+        &next_state,
+        canonical_record_path.clone(),
+        canonical_mirror_path.clone(),
+        &result_event,
+    )?;
+    validate_claim_record(&updated_claim)?;
+
+    let event_label = claim_event_kind_slug(&input.kind);
+    let event_file_name = format!("{next_sequence:04}-{event_label}.toml");
+    let event_path = claim_dir.join("events").join(&event_file_name);
+    let event_text =
+        toml::to_string_pretty(&event).map_err(|e| anyhow!("failed to render claim event: {e}"))?;
+    let claim_text = toml::to_string_pretty(&updated_claim)
+        .map_err(|e| anyhow!("failed to render updated claim.toml: {e}"))?;
+
+    let mut simulated_events = loaded.events.clone();
+    simulated_events.push(LoadedClaimEvent {
+        path: display_path(root, &event_path),
+        event: event.clone(),
+    });
+    let relative_claim = PathBuf::from(&loaded.claim_path);
+    let history_findings =
+        validate_claim_event_history(&relative_claim, &updated_claim, &simulated_events);
+    if let Some(finding) = history_findings.first() {
+        bail!("{}", finding.message);
+    }
+    let resolution_findings = validate_claim_resolution_consistency(&relative_claim, &updated_claim);
+    if let Some(finding) = resolution_findings.first() {
+        bail!("{}", finding.message);
+    }
+
+    Ok(ClaimEventAppendPlan {
+        claim_dir: claim_dir.to_path_buf(),
+        claim_path: claim_dir.join("claim.toml"),
+        claim_text,
+        event_path,
+        event_text,
+        next_state,
+    })
+}
+
 fn load_manifest_file(path: &Path) -> Result<LoadedManifest> {
     let raw = fs::read(&path).map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
     let text = std::str::from_utf8(&raw)
@@ -672,6 +913,138 @@ fn derived_claim_handoff(claim: &ClaimRecord) -> Option<ClaimHandoffOutcome> {
         ClaimState::Rejected => Some(ClaimHandoffOutcome::Rejected),
         ClaimState::Withdrawn => Some(ClaimHandoffOutcome::Withdrawn),
         ClaimState::Disputed => Some(ClaimHandoffOutcome::Disputed),
+    }
+}
+
+fn render_claim_review_template(claim: &ClaimRecord) -> String {
+    format!(
+        "# Claim review\n\n- Claim: `{}`\n- Repository: `{}/{}/{}`\n- Status: `{:?}`\n- Reviewer:\n- Decision:\n- Notes:\n",
+        claim.claim.id,
+        claim.identity.host,
+        claim.identity.owner,
+        claim.identity.repo,
+        claim.claim.state
+    )
+}
+
+fn next_claim_state(
+    current: &ClaimState,
+    kind: &ClaimEventKind,
+    has_events: bool,
+) -> Result<ClaimState> {
+    match kind {
+        ClaimEventKind::Submitted => {
+            if *current != ClaimState::Draft || has_events {
+                bail!("submitted events are only valid for draft claims without prior history");
+            }
+            Ok(ClaimState::Submitted)
+        }
+        ClaimEventKind::ReviewStarted => {
+            if *current != ClaimState::Submitted {
+                bail!("review_started events are only valid for submitted claims");
+            }
+            Ok(ClaimState::InReview)
+        }
+        ClaimEventKind::Accepted => {
+            if !matches!(current, ClaimState::Submitted | ClaimState::InReview) {
+                bail!("accepted events are only valid for submitted or in_review claims");
+            }
+            Ok(ClaimState::Accepted)
+        }
+        ClaimEventKind::Rejected => {
+            if !matches!(current, ClaimState::Submitted | ClaimState::InReview) {
+                bail!("rejected events are only valid for submitted or in_review claims");
+            }
+            Ok(ClaimState::Rejected)
+        }
+        ClaimEventKind::Withdrawn => {
+            if !matches!(current, ClaimState::Draft | ClaimState::Submitted | ClaimState::InReview)
+            {
+                bail!("withdrawn events are only valid before terminal review outcomes");
+            }
+            Ok(ClaimState::Withdrawn)
+        }
+        ClaimEventKind::Disputed => {
+            if !matches!(current, ClaimState::Submitted | ClaimState::InReview) {
+                bail!("disputed events are only valid for submitted or in_review claims");
+            }
+            Ok(ClaimState::Disputed)
+        }
+        ClaimEventKind::Corrected => {
+            if !has_events {
+                bail!("corrected events require prior claim history");
+            }
+            Ok(current.clone())
+        }
+    }
+}
+
+fn event_transition_for(
+    current: &ClaimState,
+    next: &ClaimState,
+    kind: &ClaimEventKind,
+) -> Option<ClaimTransition> {
+    if matches!(kind, ClaimEventKind::Corrected) {
+        return None;
+    }
+
+    Some(ClaimTransition {
+        from: current.clone(),
+        to: next.clone(),
+    })
+}
+
+fn claim_event_kind_slug(kind: &ClaimEventKind) -> &'static str {
+    match kind {
+        ClaimEventKind::Submitted => "submitted",
+        ClaimEventKind::ReviewStarted => "review-started",
+        ClaimEventKind::Accepted => "accepted",
+        ClaimEventKind::Rejected => "rejected",
+        ClaimEventKind::Withdrawn => "withdrawn",
+        ClaimEventKind::Disputed => "disputed",
+        ClaimEventKind::Corrected => "corrected",
+    }
+}
+
+fn update_claim_resolution(
+    existing: &ClaimRecord,
+    kind: &ClaimEventKind,
+    next_state: &ClaimState,
+    canonical_record_path: Option<String>,
+    canonical_mirror_path: Option<String>,
+    result_event: &str,
+) -> Result<Option<ClaimResolution>> {
+    if *next_state != ClaimState::Accepted {
+        return Ok(None);
+    }
+
+    let provided_links = canonical_record_path.is_some() || canonical_mirror_path.is_some();
+    match kind {
+        ClaimEventKind::Accepted => {
+            if !provided_links {
+                return Ok(None);
+            }
+            Ok(Some(ClaimResolution {
+                canonical_record_path,
+                canonical_mirror_path,
+                result_event: Some(result_event.into()),
+            }))
+        }
+        ClaimEventKind::Corrected => {
+            if !provided_links {
+                return Ok(existing.resolution.clone());
+            }
+            let mut resolution = existing.resolution.clone().unwrap_or(ClaimResolution {
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+                result_event: None,
+            });
+            resolution.canonical_record_path = canonical_record_path;
+            resolution.canonical_mirror_path = canonical_mirror_path;
+            resolution.result_event = Some(result_event.into());
+            Ok(Some(resolution))
+        }
+        _ => Ok(existing.resolution.clone()),
     }
 }
 
@@ -825,6 +1198,15 @@ fn validate_claim_event(event: &ClaimEvent) -> Result<()> {
 fn require_non_empty(field: &str, value: &str) -> Result<()> {
     if value.trim().is_empty() {
         bail!("{field} must not be empty");
+    }
+    Ok(())
+}
+
+fn require_path_segment(field: &str, value: &str) -> Result<()> {
+    require_non_empty(field, value)?;
+    let path = Path::new(value);
+    if path.components().count() != 1 {
+        bail!("{field} must be a single path segment");
     }
     Ok(())
 }
@@ -4680,6 +5062,395 @@ text = "Rejected claim."
             "rejected claims should stay in dedicated claim inspection, not normal trust visibility"
         );
 
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn scaffold_claim_directory_renders_valid_draft_claim() {
+        let root = temp_dir("claim-scaffold");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+
+        let plan = scaffold_claim_directory(
+            &root,
+            &ClaimScaffoldInput {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-02".into(),
+                claimant_display_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: Some("maintainers@acme.dev".into()),
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: Some("https://github.com/acme/widget".into()),
+                create_review_md: true,
+                timestamp: "2026-03-10T18:00:00Z".into(),
+            },
+        )
+        .expect("claim plan");
+
+        assert_eq!(
+            display_path(&root, &plan.claim_path),
+            "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-02/claim.toml"
+        );
+        let claim = parse_claim_record(&plan.claim_text).expect("claim parses");
+        assert_eq!(claim.claim.state, ClaimState::Draft);
+        assert_eq!(
+            claim.claim.id,
+            "github.com/acme/widget/2026-03-10-maintainer-claim-02"
+        );
+        assert_eq!(
+            claim.target.index_paths,
+            vec!["repos/github.com/acme/widget/record.toml"]
+        );
+        assert!(plan.review_text.as_ref().expect("review template").contains("# Claim review"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn scaffold_claim_directory_requires_existing_index_record() {
+        let root = temp_dir("claim-scaffold-missing-record");
+        let err = scaffold_claim_directory(
+            &root,
+            &ClaimScaffoldInput {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-02".into(),
+                claimant_display_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: Vec::new(),
+                canonical_repo_url: None,
+                create_review_md: false,
+                timestamp: "2026-03-10T18:00:00Z".into(),
+            },
+        )
+        .expect_err("missing record should fail");
+
+        assert!(err.to_string().contains("no index record found"));
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn append_claim_event_advances_draft_claim_to_submitted() {
+        let root = temp_dir("claim-event-submit");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+        let scaffold = scaffold_claim_directory(
+            &root,
+            &ClaimScaffoldInput {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-04".into(),
+                claimant_display_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: None,
+                create_review_md: true,
+                timestamp: "2026-03-10T18:00:00Z".into(),
+            },
+        )
+        .expect("claim scaffold");
+        fs::create_dir_all(scaffold.claim_dir.join("events")).expect("events dir created");
+        fs::write(&scaffold.claim_path, scaffold.claim_text).expect("claim written");
+        fs::write(
+            scaffold.review_path.as_ref().expect("review path"),
+            scaffold.review_text.as_ref().expect("review text"),
+        )
+        .expect("review written");
+
+        let plan = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Submitted,
+                actor: "claimant".into(),
+                summary: "Submitted maintainer claim.".into(),
+                timestamp: "2026-03-10T18:05:00Z".into(),
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
+        )
+        .expect("submit event");
+
+        assert_eq!(
+            display_path(&root, &plan.event_path),
+            "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-04/events/0001-submitted.toml"
+        );
+        let updated_claim = parse_claim_record(&plan.claim_text).expect("updated claim parses");
+        assert_eq!(updated_claim.claim.state, ClaimState::Submitted);
+        let event = parse_claim_event(&plan.event_text).expect("event parses");
+        assert_eq!(event.event.sequence, 1);
+        assert_eq!(event.transition.expect("transition").to, ClaimState::Submitted);
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn append_claim_event_rejects_invalid_acceptance_from_draft() {
+        let root = temp_dir("claim-event-invalid");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+        let scaffold = scaffold_claim_directory(
+            &root,
+            &ClaimScaffoldInput {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-05".into(),
+                claimant_display_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: None,
+                create_review_md: false,
+                timestamp: "2026-03-10T18:00:00Z".into(),
+            },
+        )
+        .expect("claim scaffold");
+        fs::create_dir_all(scaffold.claim_dir.join("events")).expect("events dir created");
+        fs::write(&scaffold.claim_path, scaffold.claim_text).expect("claim written");
+
+        let err = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Accepted,
+                actor: "index-reviewer".into(),
+                summary: "Accepted maintainer claim.".into(),
+                timestamp: "2026-03-10T18:05:00Z".into(),
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
+        )
+        .expect_err("draft claim should not accept");
+
+        assert!(err
+            .to_string()
+            .contains("accepted events are only valid for submitted or in_review claims"));
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn append_claim_event_records_canonical_links_for_accepted_handoff() {
+        let root = temp_dir("claim-event-accepted-handoff");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+        let scaffold = scaffold_claim_directory(
+            &root,
+            &ClaimScaffoldInput {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-06".into(),
+                claimant_display_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: Some("https://github.com/acme/widget".into()),
+                create_review_md: false,
+                timestamp: "2026-03-10T18:00:00Z".into(),
+            },
+        )
+        .expect("claim scaffold");
+        fs::create_dir_all(scaffold.claim_dir.join("events")).expect("events dir created");
+        fs::write(&scaffold.claim_path, scaffold.claim_text).expect("claim written");
+
+        let submitted = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Submitted,
+                actor: "claimant".into(),
+                summary: "Submitted maintainer claim.".into(),
+                timestamp: "2026-03-10T18:05:00Z".into(),
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
+        )
+        .expect("submitted event");
+        fs::write(&submitted.event_path, submitted.event_text).expect("submitted event written");
+        fs::write(&submitted.claim_path, submitted.claim_text).expect("submitted claim written");
+
+        let accepted = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Accepted,
+                actor: "index-reviewer".into(),
+                summary: "Accepted maintainer claim after review.".into(),
+                timestamp: "2026-03-10T18:10:00Z".into(),
+                canonical_record_path: Some(".repo".into()),
+                canonical_mirror_path: Some("repos/github.com/acme/widget/record.toml".into()),
+            },
+        )
+        .expect("accepted event");
+
+        let updated_claim = parse_claim_record(&accepted.claim_text).expect("updated claim parses");
+        let resolution = updated_claim.resolution.expect("resolution recorded");
+        assert_eq!(updated_claim.claim.state, ClaimState::Accepted);
+        assert_eq!(resolution.canonical_record_path.as_deref(), Some(".repo"));
+        assert_eq!(
+            resolution.canonical_mirror_path.as_deref(),
+            Some("repos/github.com/acme/widget/record.toml")
+        );
+        assert_eq!(resolution.result_event.as_deref(), Some("events/0002-accepted.toml"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn append_claim_event_allows_corrected_handoff_adjustments() {
+        let root = temp_dir("claim-event-corrected-handoff");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+        let scaffold = scaffold_claim_directory(
+            &root,
+            &ClaimScaffoldInput {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-07".into(),
+                claimant_display_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: Some("https://github.com/acme/widget".into()),
+                create_review_md: false,
+                timestamp: "2026-03-10T18:00:00Z".into(),
+            },
+        )
+        .expect("claim scaffold");
+        fs::create_dir_all(scaffold.claim_dir.join("events")).expect("events dir created");
+        fs::write(&scaffold.claim_path, scaffold.claim_text).expect("claim written");
+
+        let submitted = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Submitted,
+                actor: "claimant".into(),
+                summary: "Submitted maintainer claim.".into(),
+                timestamp: "2026-03-10T18:05:00Z".into(),
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
+        )
+        .expect("submitted event");
+        fs::write(&submitted.event_path, submitted.event_text).expect("submitted event written");
+        fs::write(&submitted.claim_path, submitted.claim_text).expect("submitted claim written");
+
+        let accepted = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Accepted,
+                actor: "index-reviewer".into(),
+                summary: "Accepted maintainer claim without canonical links yet.".into(),
+                timestamp: "2026-03-10T18:10:00Z".into(),
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
+        )
+        .expect("accepted event");
+        fs::write(&accepted.event_path, accepted.event_text).expect("accepted event written");
+        fs::write(&accepted.claim_path, accepted.claim_text).expect("accepted claim written");
+
+        let corrected = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Corrected,
+                actor: "index-reviewer".into(),
+                summary: "Linked accepted claim to canonical artifacts.".into(),
+                timestamp: "2026-03-10T18:15:00Z".into(),
+                canonical_record_path: Some(".repo".into()),
+                canonical_mirror_path: Some("repos/github.com/acme/widget/record.toml".into()),
+            },
+        )
+        .expect("corrected event");
+
+        let updated_claim = parse_claim_record(&corrected.claim_text).expect("updated claim parses");
+        let resolution = updated_claim.resolution.expect("resolution recorded");
+        assert_eq!(updated_claim.claim.state, ClaimState::Accepted);
+        assert_eq!(resolution.result_event.as_deref(), Some("events/0003-corrected.toml"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn append_claim_event_rejects_canonical_links_for_non_accepted_states() {
+        let root = temp_dir("claim-event-invalid-handoff");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+        let scaffold = scaffold_claim_directory(
+            &root,
+            &ClaimScaffoldInput {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-08".into(),
+                claimant_display_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: None,
+                create_review_md: false,
+                timestamp: "2026-03-10T18:00:00Z".into(),
+            },
+        )
+        .expect("claim scaffold");
+        fs::create_dir_all(scaffold.claim_dir.join("events")).expect("events dir created");
+        fs::write(&scaffold.claim_path, scaffold.claim_text).expect("claim written");
+        let submitted = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Submitted,
+                actor: "claimant".into(),
+                summary: "Submitted maintainer claim.".into(),
+                timestamp: "2026-03-10T18:05:00Z".into(),
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
+        )
+        .expect("submitted event");
+        fs::write(&submitted.event_path, submitted.event_text).expect("event written");
+        fs::write(&submitted.claim_path, submitted.claim_text).expect("claim written");
+
+        let err = append_claim_event(
+            &root,
+            &scaffold.claim_dir,
+            &ClaimEventAppendInput {
+                kind: ClaimEventKind::Rejected,
+                actor: "index-reviewer".into(),
+                summary: "Rejected maintainer claim.".into(),
+                timestamp: "2026-03-10T18:10:00Z".into(),
+                canonical_record_path: Some(".repo".into()),
+                canonical_mirror_path: None,
+            },
+        )
+        .expect_err("non-accepted states should reject canonical links");
+
+        assert!(err
+            .to_string()
+            .contains("canonical handoff links are only valid when the resulting claim state is accepted"));
         fs::remove_dir_all(root).expect("temp dir removed");
     }
 

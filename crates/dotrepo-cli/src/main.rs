@@ -1,11 +1,12 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    generate_check_repository, import_repository, inspect_claim_directory, inspect_surface_states,
-    load_manifest_document, load_manifest_from_root, managed_outputs, query_repository,
-    trust_repository, validate_index_root, validate_manifest, validate_repository,
-    ClaimHandoffOutcome, ClaimInspectionReport, ConflictRelationship, ImportMode,
-    IndexFindingSeverity, ManagedFileState, SelectionReason, TrustReport,
+    append_claim_event, generate_check_repository, import_repository, inspect_claim_directory,
+    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
+    query_repository, scaffold_claim_directory, trust_repository, validate_index_root,
+    validate_manifest, validate_repository, ClaimEventAppendInput, ClaimEventKind,
+    ClaimHandoffOutcome, ClaimInspectionReport, ClaimScaffoldInput, ConflictRelationship,
+    ImportMode, IndexFindingSeverity, ManagedFileState, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::Trust;
@@ -14,6 +15,8 @@ use std::fs;
 use std::path::PathBuf;
 use std::process;
 use thiserror::Error;
+use time::format_description::well_known::Rfc3339;
+use time::OffsetDateTime;
 
 #[derive(Parser)]
 #[command(name = "dotrepo")]
@@ -87,6 +90,62 @@ enum Command {
         #[arg(long)]
         json: bool,
     },
+    /// Scaffold a draft maintainer-claim directory for one index repository.
+    ClaimInit {
+        /// Repository host under index_root/repos/<host>/<owner>/<repo>/.
+        #[arg(long)]
+        host: String,
+        /// Repository owner under index_root/repos/<host>/<owner>/<repo>/.
+        #[arg(long)]
+        owner: String,
+        /// Repository name under index_root/repos/<host>/<owner>/<repo>/.
+        #[arg(long)]
+        repo: String,
+        /// Claim directory name under claims/<claim-id>/.
+        #[arg(long)]
+        claim_id: String,
+        /// Claimant display name recorded in claim.toml.
+        #[arg(long)]
+        claimant_name: String,
+        /// Claimed repository role, such as `maintainer`.
+        #[arg(long)]
+        asserted_role: String,
+        /// Optional claimant contact detail.
+        #[arg(long)]
+        contact: Option<String>,
+        /// Additional record source URLs tied to this claim.
+        #[arg(long = "record-source")]
+        record_sources: Vec<String>,
+        /// Optional canonical repository URL for the claim target.
+        #[arg(long)]
+        canonical_repo_url: Option<String>,
+        /// Create a placeholder review.md next to claim.toml.
+        #[arg(long)]
+        review_md: bool,
+        /// Replace an existing empty scaffold, but never overwrite event history.
+        #[arg(long)]
+        force: bool,
+    },
+    /// Append a new claim event and update the current claim state.
+    ClaimEvent {
+        /// Claim directory relative to --root or an absolute path.
+        path: PathBuf,
+        /// Event kind to append.
+        #[arg(long, value_enum)]
+        kind: ClaimEventKindArg,
+        /// Actor label recorded in the event.
+        #[arg(long)]
+        actor: String,
+        /// Short event summary recorded in the audit trail.
+        #[arg(long)]
+        summary: String,
+        /// Optional canonical `.repo` path recorded for accepted handoff.
+        #[arg(long)]
+        canonical_record_path: Option<String>,
+        /// Optional canonical mirror record path recorded for accepted handoff.
+        #[arg(long)]
+        canonical_mirror_path: Option<String>,
+    },
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, ValueEnum)]
@@ -95,11 +154,36 @@ enum ImportModeArg {
     Overlay,
 }
 
+#[derive(Clone, Debug, Eq, PartialEq, ValueEnum)]
+enum ClaimEventKindArg {
+    Submitted,
+    ReviewStarted,
+    Accepted,
+    Rejected,
+    Withdrawn,
+    Disputed,
+    Corrected,
+}
+
 impl From<ImportModeArg> for ImportMode {
     fn from(value: ImportModeArg) -> Self {
         match value {
             ImportModeArg::Native => ImportMode::Native,
             ImportModeArg::Overlay => ImportMode::Overlay,
+        }
+    }
+}
+
+impl From<ClaimEventKindArg> for ClaimEventKind {
+    fn from(value: ClaimEventKindArg) -> Self {
+        match value {
+            ClaimEventKindArg::Submitted => ClaimEventKind::Submitted,
+            ClaimEventKindArg::ReviewStarted => ClaimEventKind::ReviewStarted,
+            ClaimEventKindArg::Accepted => ClaimEventKind::Accepted,
+            ClaimEventKindArg::Rejected => ClaimEventKind::Rejected,
+            ClaimEventKindArg::Withdrawn => ClaimEventKind::Withdrawn,
+            ClaimEventKindArg::Disputed => ClaimEventKind::Disputed,
+            ClaimEventKindArg::Corrected => ClaimEventKind::Corrected,
         }
     }
 }
@@ -138,6 +222,48 @@ fn run() -> Result<()> {
         Command::Doctor => cmd_doctor(cli.root),
         Command::Trust { json } => cmd_trust(cli.root, json),
         Command::Claim { path, json } => cmd_claim(cli.root, path, json),
+        Command::ClaimInit {
+            host,
+            owner,
+            repo,
+            claim_id,
+            claimant_name,
+            asserted_role,
+            contact,
+            record_sources,
+            canonical_repo_url,
+            review_md,
+            force,
+        } => cmd_claim_init(
+            cli.root,
+            host,
+            owner,
+            repo,
+            claim_id,
+            claimant_name,
+            asserted_role,
+            contact,
+            record_sources,
+            canonical_repo_url,
+            review_md,
+            force,
+        ),
+        Command::ClaimEvent {
+            path,
+            kind,
+            actor,
+            summary,
+            canonical_record_path,
+            canonical_mirror_path,
+        } => cmd_claim_event(
+            cli.root,
+            path,
+            kind,
+            actor,
+            summary,
+            canonical_record_path,
+            canonical_mirror_path,
+        ),
     }
 }
 
@@ -382,6 +508,137 @@ fn cmd_claim(root: PathBuf, path: PathBuf, json: bool) -> Result<()> {
     }
 
     println!("{}", format_claim_report(&report));
+    Ok(())
+}
+
+fn cmd_claim_init(
+    root: PathBuf,
+    host: String,
+    owner: String,
+    repo: String,
+    claim_id: String,
+    claimant_name: String,
+    asserted_role: String,
+    contact: Option<String>,
+    record_sources: Vec<String>,
+    canonical_repo_url: Option<String>,
+    review_md: bool,
+    force: bool,
+) -> Result<()> {
+    let plan = scaffold_claim_directory(
+        &root,
+        &ClaimScaffoldInput {
+            host,
+            owner,
+            repo,
+            claim_id,
+            claimant_display_name: claimant_name,
+            asserted_role,
+            contact,
+            record_sources,
+            canonical_repo_url,
+            create_review_md: review_md,
+            timestamp: current_timestamp()?,
+        },
+    )?;
+
+    if plan.claim_dir.exists() {
+        if !force {
+            bail!(
+                "{} already exists; rerun with --force to replace an empty scaffold",
+                plan.claim_dir.display()
+            );
+        }
+        ensure_replaceable_claim_scaffold(&plan.claim_dir)?;
+        fs::remove_dir_all(&plan.claim_dir)?;
+    }
+
+    fs::create_dir_all(plan.claim_dir.join("events"))?;
+    fs::write(&plan.claim_path, &plan.claim_text)?;
+    println!("initialized {}", plan.claim_path.display());
+    if let (Some(review_path), Some(review_text)) = (&plan.review_path, &plan.review_text) {
+        fs::write(review_path, review_text)?;
+        println!("initialized {}", review_path.display());
+    }
+    Ok(())
+}
+
+fn cmd_claim_event(
+    root: PathBuf,
+    path: PathBuf,
+    kind: ClaimEventKindArg,
+    actor: String,
+    summary: String,
+    canonical_record_path: Option<String>,
+    canonical_mirror_path: Option<String>,
+) -> Result<()> {
+    let claim_dir = if path.is_absolute() {
+        path
+    } else {
+        root.join(path)
+    };
+    let plan = append_claim_event(
+        &root,
+        &claim_dir,
+        &ClaimEventAppendInput {
+            kind: kind.into(),
+            actor,
+            summary,
+            timestamp: current_timestamp()?,
+            canonical_record_path,
+            canonical_mirror_path,
+        },
+    )?;
+
+    fs::create_dir_all(claim_dir.join("events"))?;
+    fs::write(&plan.event_path, &plan.event_text)?;
+    fs::write(&plan.claim_path, &plan.claim_text)?;
+    println!("updated {}", plan.claim_path.display());
+    println!("appended {}", plan.event_path.display());
+    Ok(())
+}
+
+fn current_timestamp() -> Result<String> {
+    Ok(OffsetDateTime::now_utc()
+        .format(&Rfc3339)
+        .map_err(|err| anyhow::anyhow!("failed to render current timestamp: {err}"))?)
+}
+
+fn ensure_replaceable_claim_scaffold(claim_dir: &std::path::Path) -> Result<()> {
+    if !claim_dir.is_dir() {
+        bail!(
+            "{} exists but is not a claim directory",
+            claim_dir.display()
+        );
+    }
+
+    for entry in fs::read_dir(claim_dir)? {
+        let entry = entry?;
+        let path = entry.path();
+        let name = entry.file_name();
+        let name = name.to_string_lossy();
+        match name.as_ref() {
+            "claim.toml" | "review.md" => {}
+            "events" => {
+                if !path.is_dir() {
+                    bail!("{} must be a directory before it can be replaced", path.display());
+                }
+                if fs::read_dir(&path)?.next().is_some() {
+                    bail!(
+                        "refusing to overwrite existing claim history in {}",
+                        path.display()
+                    );
+                }
+            }
+            _ => {
+                bail!(
+                    "refusing to overwrite unexpected claim scaffold contents in {}",
+                    path.display()
+                );
+            }
+        }
+    }
+
     Ok(())
 }
 
@@ -683,6 +940,257 @@ mod tests {
         assert!(rendered.contains("target index paths:"));
         assert!(rendered.contains("events:"));
         assert!(rendered.contains("Accepted"));
+    }
+
+    #[test]
+    fn claim_init_scaffolds_valid_claim_directory() {
+        let root = temp_dir("claim-init");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+
+        cmd_claim_init(
+            root.clone(),
+            "github.com".into(),
+            "acme".into(),
+            "widget".into(),
+            "2026-03-10-maintainer-claim-03".into(),
+            "Acme maintainers".into(),
+            "maintainer".into(),
+            Some("maintainers@acme.dev".into()),
+            vec!["https://github.com/acme/widget".into()],
+            Some("https://github.com/acme/widget".into()),
+            true,
+            false,
+        )
+        .expect("claim scaffold succeeds");
+
+        let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        assert!(claim_dir.join("claim.toml").exists());
+        assert!(claim_dir.join("review.md").exists());
+        assert!(claim_dir.join("events").is_dir());
+
+        let report = inspect_claim_directory(&root, &claim_dir).expect("claim inspection works");
+        assert_eq!(report.state, dotrepo_core::ClaimState::Draft);
+        assert_eq!(report.events.len(), 0);
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn claim_init_refuses_existing_claim_dir_without_force() {
+        let root = temp_dir("claim-init-no-force");
+        let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim dir created");
+        fs::create_dir_all(root.join("repos/github.com/acme/widget")).expect("repo dir created");
+        fs::write(
+            root.join("repos/github.com/acme/widget/record.toml"),
+            "schema = \"dotrepo/v0.1\"\n",
+        )
+        .expect("record written");
+        fs::write(claim_dir.join("claim.toml"), "schema = \"dotrepo-claim/v0\"\n")
+            .expect("claim scaffold written");
+
+        let err = cmd_claim_init(
+            root.clone(),
+            "github.com".into(),
+            "acme".into(),
+            "widget".into(),
+            "2026-03-10-maintainer-claim-03".into(),
+            "Acme maintainers".into(),
+            "maintainer".into(),
+            None,
+            Vec::new(),
+            None,
+            false,
+            false,
+        )
+        .expect_err("existing claim dir should fail");
+        assert!(err.to_string().contains("already exists"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn claim_init_force_refuses_existing_event_history() {
+        let root = temp_dir("claim-init-history");
+        let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim dir created");
+        fs::create_dir_all(root.join("repos/github.com/acme/widget")).expect("repo dir created");
+        fs::write(
+            root.join("repos/github.com/acme/widget/record.toml"),
+            "schema = \"dotrepo/v0.1\"\n",
+        )
+        .expect("record written");
+        fs::write(
+            claim_dir.join("events/0001-submitted.toml"),
+            "schema = \"dotrepo-claim-event/v0\"\n",
+        )
+        .expect("event written");
+
+        let err = cmd_claim_init(
+            root.clone(),
+            "github.com".into(),
+            "acme".into(),
+            "widget".into(),
+            "2026-03-10-maintainer-claim-03".into(),
+            "Acme maintainers".into(),
+            "maintainer".into(),
+            None,
+            Vec::new(),
+            None,
+            false,
+            true,
+        )
+        .expect_err("existing event history should fail");
+        assert!(err.to_string().contains("refusing to overwrite existing claim history"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn claim_event_appends_submitted_history_and_updates_claim_state() {
+        let root = temp_dir("claim-event");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+        cmd_claim_init(
+            root.clone(),
+            "github.com".into(),
+            "acme".into(),
+            "widget".into(),
+            "2026-03-10-maintainer-claim-03".into(),
+            "Acme maintainers".into(),
+            "maintainer".into(),
+            None,
+            vec!["https://github.com/acme/widget".into()],
+            None,
+            true,
+            false,
+        )
+        .expect("claim scaffold succeeds");
+
+        let claim_dir =
+            root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        cmd_claim_event(
+            root.clone(),
+            claim_dir.clone(),
+            ClaimEventKindArg::Submitted,
+            "claimant".into(),
+            "Submitted maintainer claim.".into(),
+            None,
+            None,
+        )
+        .expect("claim event succeeds");
+
+        let report = inspect_claim_directory(&root, &claim_dir).expect("claim inspection works");
+        assert_eq!(report.state, dotrepo_core::ClaimState::Submitted);
+        assert_eq!(report.events.len(), 1);
+        assert_eq!(report.events[0].kind, dotrepo_core::ClaimEventKind::Submitted);
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn claim_event_refuses_invalid_transition() {
+        let root = temp_dir("claim-event-invalid");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+        cmd_claim_init(
+            root.clone(),
+            "github.com".into(),
+            "acme".into(),
+            "widget".into(),
+            "2026-03-10-maintainer-claim-03".into(),
+            "Acme maintainers".into(),
+            "maintainer".into(),
+            None,
+            vec!["https://github.com/acme/widget".into()],
+            None,
+            false,
+            false,
+        )
+        .expect("claim scaffold succeeds");
+
+        let claim_dir =
+            root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        let err = cmd_claim_event(
+            root.clone(),
+            claim_dir,
+            ClaimEventKindArg::Accepted,
+            "index-reviewer".into(),
+            "Accepted maintainer claim.".into(),
+            None,
+            None,
+        )
+        .expect_err("draft claim should not accept directly");
+        assert!(err
+            .to_string()
+            .contains("accepted events are only valid for submitted or in_review claims"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn claim_event_records_canonical_handoff_links() {
+        let root = temp_dir("claim-event-handoff");
+        let repo_dir = root.join("repos/github.com/acme/widget");
+        fs::create_dir_all(&repo_dir).expect("repo dir created");
+        fs::write(repo_dir.join("record.toml"), "schema = \"dotrepo/v0.1\"\n")
+            .expect("record written");
+        cmd_claim_init(
+            root.clone(),
+            "github.com".into(),
+            "acme".into(),
+            "widget".into(),
+            "2026-03-10-maintainer-claim-03".into(),
+            "Acme maintainers".into(),
+            "maintainer".into(),
+            None,
+            vec!["https://github.com/acme/widget".into()],
+            Some("https://github.com/acme/widget".into()),
+            false,
+            false,
+        )
+        .expect("claim scaffold succeeds");
+
+        let claim_dir =
+            root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        cmd_claim_event(
+            root.clone(),
+            claim_dir.clone(),
+            ClaimEventKindArg::Submitted,
+            "claimant".into(),
+            "Submitted maintainer claim.".into(),
+            None,
+            None,
+        )
+        .expect("submitted event succeeds");
+        cmd_claim_event(
+            root.clone(),
+            claim_dir.clone(),
+            ClaimEventKindArg::Accepted,
+            "index-reviewer".into(),
+            "Accepted maintainer claim after review.".into(),
+            Some(".repo".into()),
+            Some("repos/github.com/acme/widget/record.toml".into()),
+        )
+        .expect("accepted handoff succeeds");
+
+        let report = inspect_claim_directory(&root, &claim_dir).expect("claim inspection works");
+        assert_eq!(report.target.handoff, Some(ClaimHandoffOutcome::Superseded));
+        let resolution = report.resolution.expect("resolution recorded");
+        assert_eq!(resolution.canonical_record_path.as_deref(), Some(".repo"));
+        assert_eq!(
+            resolution.canonical_mirror_path.as_deref(),
+            Some("repos/github.com/acme/widget/record.toml")
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
     }
 
     #[test]
