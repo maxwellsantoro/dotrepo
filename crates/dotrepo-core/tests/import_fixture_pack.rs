@@ -132,6 +132,51 @@ fn import_fixture_pack_captures_readme_title_and_description_edge_cases() {
         "Lightweight release notes generator for Git repositories."
     );
     assert_eq!(description_only.inferred_fields, vec!["repo.name"]);
+
+    let inline_html = import_repository(
+        &fixture_case("inline-html-wrapper-readme"),
+        ImportMode::Native,
+        None,
+    )
+    .expect("inline HTML wrapper README imports");
+    assert_eq!(inline_html.manifest.repo.name, "Skyhook");
+    assert_eq!(
+        inline_html.manifest.repo.description,
+        "Builds deployable release manifests for edge services."
+    );
+    assert!(inline_html.inferred_fields.is_empty());
+}
+
+#[test]
+fn import_fixture_pack_extracts_docs_entry_points_and_skips_nav_lines() {
+    let docs_nav = import_repository(&fixture_case("docs-nav-readme"), ImportMode::Native, None)
+        .expect("docs nav README imports");
+    assert_eq!(docs_nav.manifest.repo.name, "Tidelift");
+    assert_eq!(
+        docs_nav.manifest.repo.description,
+        "Policy-aware release orchestration for multi-service deploys."
+    );
+    let docs = docs_nav.manifest.docs.as_ref().expect("docs imported");
+    assert_eq!(docs.root.as_deref(), Some("./docs/"));
+    assert_eq!(
+        docs.getting_started.as_deref(),
+        Some("./docs/getting-started.md")
+    );
+
+    let docs_label =
+        import_repository(&fixture_case("docs-label-readme"), ImportMode::Native, None)
+            .expect("docs label README imports");
+    assert_eq!(docs_label.manifest.repo.name, "Lantern Dock");
+    assert_eq!(
+        docs_label.manifest.repo.description,
+        "Source-aware release promotion for multi-environment deploys."
+    );
+    let docs = docs_label.manifest.docs.as_ref().expect("docs imported");
+    assert_eq!(docs.root.as_deref(), Some("./docs/"));
+    assert_eq!(
+        docs.getting_started.as_deref(),
+        Some("./docs/quickstart.md")
+    );
 }
 
 #[test]

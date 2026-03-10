@@ -74,6 +74,7 @@ This repo is an early implementation of the dotrepo protocol and toolchain. It i
 - [`docs/vision.md`](docs/vision.md)
 - [`docs/public-messaging.md`](docs/public-messaging.md)
 - [`docs/trust-model.md`](docs/trust-model.md)
+- [`docs/sync-boundaries.md`](docs/sync-boundaries.md)
 - [`docs/authority-handoff-examples.md`](docs/authority-handoff-examples.md)
 - [`docs/conflict-surfacing-examples.md`](docs/conflict-surfacing-examples.md)
 - [`index/README.md`](index/README.md)

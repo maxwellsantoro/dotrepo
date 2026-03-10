@@ -6,6 +6,9 @@ Cases:
 - `badge-heavy-readme`: README badges and images before the first real title and description, plus a root `SECURITY.md` URL.
 - `setext-heading-readme`: setext-style README heading plus a wrapped paragraph description.
 - `html-heading-readme`: centered HTML heading and paragraph tags that still carry real project metadata.
+- `inline-html-wrapper-readme`: inline HTML wrapper around the heading and description on the same line.
+- `docs-nav-readme`: title followed by a docs/getting-started nav line that should not become the repo description.
+- `docs-label-readme`: explicit documentation/getting-started label lines that should become docs entry points rather than prose description.
 - `root-conventional-files`: root-level `CODEOWNERS` and `SECURITY.md`, with title imported but description inferred.
 - `description-only-readme`: README description with no heading, so name is inferred from the directory.
 - `security-markdown-link`: `SECURITY.md` exposes a contact channel through markdown link syntax rather than raw tokens.

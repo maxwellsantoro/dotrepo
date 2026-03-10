@@ -9,6 +9,10 @@ struct FixtureExpectation {
     fixture: String,
     repo_name: String,
     repo_description: String,
+    #[serde(default)]
+    docs_root: Option<String>,
+    #[serde(default)]
+    docs_getting_started: Option<String>,
     imported_sources: Vec<String>,
     inferred_fields: Vec<String>,
     maintainers: Vec<String>,
@@ -49,6 +53,20 @@ fn status_name(status: &RecordStatus) -> &'static str {
 fn assert_common_plan_fields(plan: &ImportPlan, expectation: &FixtureExpectation) {
     assert_eq!(plan.manifest.repo.name, expectation.repo_name);
     assert_eq!(plan.manifest.repo.description, expectation.repo_description);
+    assert_eq!(
+        plan.manifest
+            .docs
+            .as_ref()
+            .and_then(|docs| docs.root.as_deref()),
+        expectation.docs_root.as_deref()
+    );
+    assert_eq!(
+        plan.manifest
+            .docs
+            .as_ref()
+            .and_then(|docs| docs.getting_started.as_deref()),
+        expectation.docs_getting_started.as_deref()
+    );
     assert_eq!(plan.imported_sources, expectation.imported_sources);
     assert_eq!(plan.inferred_fields, expectation.inferred_fields);
 

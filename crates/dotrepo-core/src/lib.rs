@@ -1,7 +1,7 @@
 use anyhow::{anyhow, bail, Result};
 use dotrepo_schema::{
-    parse_manifest, render_manifest, Compat, CompatMode, GitHubCompat, Manifest, Owners, Readme,
-    ReadmeCustomSection, Record, RecordMode, RecordStatus, Relations, Repo, Trust,
+    parse_manifest, render_manifest, Compat, CompatMode, Docs, GitHubCompat, Manifest, Owners,
+    Readme, ReadmeCustomSection, Record, RecordMode, RecordStatus, Relations, Repo, Trust,
 };
 use serde::Serialize;
 use serde_json::Value;
@@ -768,6 +768,11 @@ pub fn import_repository(
         }
     };
 
+    let imported_docs = build_imported_docs(
+        readme_metadata.docs_root.clone(),
+        readme_metadata.docs_getting_started.clone(),
+    );
+
     if !codeowners_metadata.owners.is_empty() || codeowners_metadata.team.is_some() {
         if let Some(file) = &codeowners {
             note_import(&mut imported_sources, file.path);
@@ -838,11 +843,19 @@ pub fn import_repository(
         codeowners_metadata.team,
         security_contact,
     );
+    manifest.docs = imported_docs.clone();
     manifest.readme = match mode {
         ImportMode::Native => Some(Readme {
             title: Some(repo_name),
             tagline: None,
-            sections: vec!["overview".into(), "security".into()],
+            sections: {
+                let mut sections = vec!["overview".into()];
+                if imported_docs.is_some() {
+                    sections.push("docs".into());
+                }
+                sections.push("security".into());
+                sections
+            },
             custom_sections: Default::default(),
         }),
         ImportMode::Overlay => None,
@@ -875,6 +888,7 @@ pub fn import_repository(
                 &imported_sources,
                 &inferred_fields,
                 &security,
+                imported_docs.is_some(),
             )),
         ),
     };
@@ -1011,6 +1025,14 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
 struct ReadmeMetadata {
     title: Option<String>,
     description: Option<String>,
+    docs_root: Option<String>,
+    docs_getting_started: Option<String>,
+}
+
+#[derive(Default)]
+struct ReadmeDocsMetadata {
+    root: Option<String>,
+    getting_started: Option<String>,
 }
 
 struct ImportedFile {
@@ -1092,6 +1114,10 @@ fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
         idx += 1;
     }
 
+    let docs = parse_readme_docs_metadata(&lines);
+    metadata.docs_root = docs.root;
+    metadata.docs_getting_started = docs.getting_started;
+
     metadata
 }
 
@@ -1121,16 +1147,10 @@ fn is_setext_underline(line: &str) -> bool {
 fn parse_html_heading(line: &str) -> Option<String> {
     let trimmed = line.trim();
     let lower = trimmed.to_ascii_lowercase();
-    if !matches!(
-        lower.as_bytes().get(0..3),
-        Some(prefix)
-            if prefix == b"<h1"
-                || prefix == b"<h2"
-                || prefix == b"<h3"
-                || prefix == b"<h4"
-                || prefix == b"<h5"
-                || prefix == b"<h6"
-    ) {
+    if !["<h1", "<h2", "<h3", "<h4", "<h5", "<h6"]
+        .iter()
+        .any(|needle| lower.contains(needle))
+    {
         return None;
     }
 
@@ -1193,6 +1213,8 @@ fn normalize_description_line(line: &str) -> Option<String> {
         || line.starts_with("- ")
         || line.starts_with("* ")
         || starts_with_ordered_list_item(line)
+        || is_probable_readme_nav_line(line)
+        || is_probable_docs_signal_line(line)
     {
         return None;
     }
@@ -1226,6 +1248,134 @@ fn strip_html_tags(line: &str) -> String {
     }
 
     out
+}
+
+fn parse_readme_docs_metadata(lines: &[&str]) -> ReadmeDocsMetadata {
+    let mut docs = ReadmeDocsMetadata::default();
+    let mut in_code_block = false;
+
+    for line in lines {
+        let trimmed = line.trim();
+        if trimmed.starts_with("```") {
+            in_code_block = !in_code_block;
+            continue;
+        }
+        if in_code_block {
+            continue;
+        }
+
+        let signal = parse_readme_docs_signal(trimmed);
+        if docs.root.is_none() {
+            docs.root = signal.root;
+        }
+        if docs.getting_started.is_none() {
+            docs.getting_started = signal.getting_started;
+        }
+
+        if docs.root.is_some() && docs.getting_started.is_some() {
+            break;
+        }
+    }
+
+    docs
+}
+
+fn parse_readme_docs_signal(line: &str) -> ReadmeDocsMetadata {
+    let mut docs = ReadmeDocsMetadata::default();
+    let lower_line = strip_html_tags(line).to_ascii_lowercase();
+
+    for (label, url) in extract_markdown_links(line) {
+        let lower_label = label.to_ascii_lowercase();
+        let lower_url = url.to_ascii_lowercase();
+
+        let is_getting_started = lower_label.contains("getting started")
+            || lower_label.contains("quickstart")
+            || lower_line.starts_with("getting started:")
+            || lower_line.starts_with("quickstart:")
+            || lower_url.contains("getting-started")
+            || lower_url.contains("quickstart");
+
+        if docs.getting_started.is_none() && is_getting_started {
+            docs.getting_started = Some(url.clone());
+        }
+
+        let is_docs_root = !is_getting_started
+            && (lower_label == "docs"
+                || lower_label == "documentation"
+                || lower_label.contains("reference")
+                || lower_line.starts_with("docs:")
+                || lower_line.starts_with("documentation:")
+                || lower_line.starts_with("documentation ")
+                || lower_url == "./docs/"
+                || lower_url == "docs/"
+                || lower_url.ends_with("/docs/")
+                || lower_url.ends_with("/docs"));
+
+        if docs.root.is_none() && is_docs_root {
+            docs.root = Some(url);
+        }
+    }
+
+    docs
+}
+
+fn extract_markdown_links(line: &str) -> Vec<(String, String)> {
+    let bytes = line.as_bytes();
+    let mut links = Vec::new();
+    let mut idx = 0;
+
+    while idx < bytes.len() {
+        let Some(open_label_rel) = line[idx..].find('[') else {
+            break;
+        };
+        let open_label = idx + open_label_rel;
+        let Some(close_label_rel) = line[open_label + 1..].find("](") else {
+            idx = open_label + 1;
+            continue;
+        };
+        let close_label = open_label + 1 + close_label_rel;
+        let url_start = close_label + 2;
+        let Some(close_url_rel) = line[url_start..].find(')') else {
+            idx = url_start;
+            continue;
+        };
+        let close_url = url_start + close_url_rel;
+
+        let label = normalize_readme_text(&line[open_label + 1..close_label]);
+        let url = line[url_start..close_url].trim();
+        if let Some(label) = label.filter(|_| !url.is_empty()) {
+            links.push((label, url.to_string()));
+        }
+        idx = close_url + 1;
+    }
+
+    links
+}
+
+fn is_probable_readme_nav_line(line: &str) -> bool {
+    if extract_markdown_links(line).len() < 2 {
+        return false;
+    }
+
+    let lowered = strip_html_tags(line).to_ascii_lowercase();
+    lowered.contains("docs")
+        || lowered.contains("getting started")
+        || lowered.contains("quickstart")
+        || lowered.contains("api")
+        || lowered.contains("guide")
+        || lowered.contains("reference")
+}
+
+fn is_probable_docs_signal_line(line: &str) -> bool {
+    let lowered = strip_html_tags(line)
+        .trim_start_matches('*')
+        .trim_start_matches('_')
+        .trim()
+        .to_ascii_lowercase();
+    lowered.starts_with("docs:")
+        || lowered.starts_with("documentation:")
+        || lowered.starts_with("getting started:")
+        || lowered.starts_with("quickstart:")
 }
 
 fn starts_with_ordered_list_item(line: &str) -> bool {
@@ -1443,10 +1593,24 @@ fn build_imported_owners(
     }
 }
 
+fn build_imported_docs(root: Option<String>, getting_started: Option<String>) -> Option<Docs> {
+    if root.is_none() && getting_started.is_none() {
+        None
+    } else {
+        Some(Docs {
+            root,
+            getting_started,
+            architecture: None,
+            api: None,
+        })
+    }
+}
+
 fn render_import_evidence(
     imported_sources: &[String],
     inferred_fields: &[String],
     security: &Option<ImportedFile>,
+    imported_docs: bool,
 ) -> String {
     let mut bullets = Vec::new();
 
@@ -1458,7 +1622,10 @@ fn render_import_evidence(
     }
 
     if imported_sources.iter().any(|path| path == "README.md") {
-        bullets.push(readme_import_evidence_bullet(inferred_fields));
+        bullets.push(readme_import_evidence_bullet(
+            inferred_fields,
+            imported_docs,
+        ));
     }
     if imported_sources
         .iter()
@@ -1502,17 +1669,32 @@ fn render_import_evidence(
     out
 }
 
-fn readme_import_evidence_bullet(inferred_fields: &[String]) -> String {
+fn readme_import_evidence_bullet(inferred_fields: &[String], imported_docs: bool) -> String {
     let imported_name = !inferred_fields.iter().any(|field| field == "repo.name");
     let imported_description = !inferred_fields
         .iter()
         .any(|field| field == "repo.description");
 
-    match (imported_name, imported_description) {
-        (true, true) => "Imported repository name and description from README.md.".to_string(),
-        (true, false) => "Imported repository name from README.md.".to_string(),
-        (false, true) => "Imported repository description from README.md.".to_string(),
-        (false, false) => "Imported repository metadata from README.md.".to_string(),
+    match (imported_name, imported_description, imported_docs) {
+        (true, true, true) => {
+            "Imported repository name, description, and docs entry points from README.md."
+                .to_string()
+        }
+        (true, false, true) => {
+            "Imported repository name and docs entry points from README.md.".to_string()
+        }
+        (false, true, true) => {
+            "Imported repository description and docs entry points from README.md.".to_string()
+        }
+        (false, false, true) => {
+            "Imported repository metadata and docs entry points from README.md.".to_string()
+        }
+        (true, true, false) => {
+            "Imported repository name and description from README.md.".to_string()
+        }
+        (true, false, false) => "Imported repository name from README.md.".to_string(),
+        (false, true, false) => "Imported repository description from README.md.".to_string(),
+        (false, false, false) => "Imported repository metadata from README.md.".to_string(),
     }
 }
 
@@ -3173,6 +3355,51 @@ content = "Run `cargo build`."
     }
 
     #[test]
+    fn parse_readme_docs_metadata_extracts_docs_and_getting_started_links() {
+        let signal = parse_readme_docs_signal(
+            "[Docs](./docs/) · [Getting Started](./docs/getting-started.md) · [API](./docs/api.md)",
+        );
+        assert_eq!(signal.root.as_deref(), Some("./docs/"));
+        assert_eq!(
+            signal.getting_started.as_deref(),
+            Some("./docs/getting-started.md")
+        );
+
+        let links = extract_markdown_links(
+            "[Docs](./docs/) · [Getting Started](./docs/getting-started.md) · [API](./docs/api.md)",
+        );
+        assert_eq!(
+            links,
+            vec![
+                ("Docs".to_string(), "./docs/".to_string()),
+                (
+                    "Getting Started".to_string(),
+                    "./docs/getting-started.md".to_string()
+                ),
+                ("API".to_string(), "./docs/api.md".to_string())
+            ]
+        );
+
+        let metadata = parse_readme_metadata(
+            r#"# Tidelift
+
+[Docs](./docs/) · [Getting Started](./docs/getting-started.md) · [API](./docs/api.md)
+
+Policy-aware release orchestration for multi-service deploys.
+"#,
+        );
+        assert_eq!(metadata.docs_root.as_deref(), Some("./docs/"));
+        assert_eq!(
+            metadata.docs_getting_started.as_deref(),
+            Some("./docs/getting-started.md")
+        );
+        assert_eq!(
+            metadata.description.as_deref(),
+            Some("Policy-aware release orchestration for multi-service deploys.")
+        );
+    }
+
+    #[test]
     fn managed_outputs_preserve_unmanaged_readme_content_outside_markers() {
         let root = temp_dir("managed-readme");
         let manifest = parse_manifest(
@@ -3488,11 +3715,7 @@ description = "Fast local-first sync engine"
         let root = temp_dir("doctor");
         fs::write(root.join("README.md"), "# Existing README\n").expect("README written");
         fs::create_dir_all(root.join(".github")).expect(".github created");
-        fs::write(
-            root.join(".github/CODEOWNERS"),
-            "* @alice\n",
-        )
-        .expect("CODEOWNERS written");
+        fs::write(root.join(".github/CODEOWNERS"), "* @alice\n").expect("CODEOWNERS written");
 
         let findings = inspect_surface_states(&root).expect("doctor findings");
         assert_eq!(findings.len(), 2);

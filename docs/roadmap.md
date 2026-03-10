@@ -15,6 +15,9 @@
 - Richer import heuristics for README, CODEOWNERS, and SECURITY.md
 - LSP and VS Code extension
 
+See [`docs/sync-boundaries.md`](./sync-boundaries.md) for the current
+implementation boundary around managed sync and non-round-trippable cases.
+
 ## v0.3+
 - Bundle mode
 - First-class workspace and relations support

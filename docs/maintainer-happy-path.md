@@ -84,6 +84,10 @@ repository. It now distinguishes:
 That makes it possible to adopt managed regions incrementally without treating
 every existing Markdown file as drift.
 
+For the concrete boundary between supported sync, unmanaged files, malformed
+markers, and unsupported layouts, see
+[`sync-boundaries.md`](./sync-boundaries.md).
+
 ## CI
 
 The example workflow runs the same maintainer path in CI:
