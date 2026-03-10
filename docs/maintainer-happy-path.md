@@ -34,8 +34,8 @@ What each command answers:
 - `validate` confirms that the current `.repo` is structurally valid.
 - `query` gives scripts and tools a stable way to read specific fields from the manifest.
 - `trust` is the human-facing inspection surface for status, provenance, authority handoff, and competing records.
-- `doctor` tells you whether conventional surfaces exist outside dotrepo management.
-- `generate --check` fails when generated files have drifted from the canonical `.repo`.
+- `doctor` reports whether supported conventional surfaces are `fully_generated`, `partially_managed`, `unmanaged`, `malformed_managed`, or in an unsupported state.
+- `generate --check` fails on drift inside fully generated or partially managed surfaces, but does not fail solely because an unmanaged file exists.
 
 ## Inspect authority handoff and conflicts
 
@@ -75,8 +75,14 @@ surface. If `generate --check` fails, update the generated files from `.repo`
 rather than patching them by hand.
 
 `doctor` is the guardrail before enabling more generated surfaces in an existing
-repository. It tells you whether you still have unmanaged conventional files
-that should be imported, normalized, or left alone deliberately.
+repository. It now distinguishes:
+- `fully_generated`: the whole file is dotrepo-owned
+- `partially_managed`: only the marked region is dotrepo-owned
+- `unmanaged`: the file exists outside dotrepo management
+- `malformed_managed`: markers are broken and must be fixed
+
+That makes it possible to adopt managed regions incrementally without treating
+every existing Markdown file as drift.
 
 ## CI
 
@@ -94,5 +100,5 @@ That is the intended v0.1 contract for a native repo:
 - validate the canonical record
 - make one or more machine-facing queries succeed
 - surface trust metadata and any authority conflicts explicitly
-- confirm there are no unmanaged conventional files
-- fail the build if generated surfaces drift
+- inspect conventional surface states explicitly
+- fail the build if fully generated or partially managed surfaces drift

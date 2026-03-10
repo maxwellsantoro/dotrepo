@@ -6,6 +6,7 @@ use dotrepo_schema::{
 use serde::Serialize;
 use serde_json::Value;
 use sha2::{Digest, Sha256};
+use std::collections::BTreeSet;
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -13,9 +14,21 @@ const SUPPORTED_SCHEMA: &str = "dotrepo/v0.1";
 const GENERATOR_NAME: &str = "dotrepo";
 const GENERATOR_VERSION: &str = env!("CARGO_PKG_VERSION");
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ManagedFileState {
+    Missing,
+    FullyGenerated,
+    PartiallyManaged,
+    Unmanaged,
+    MalformedManaged,
+    Unsupported,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct DoctorFinding {
     pub path: PathBuf,
+    pub state: ManagedFileState,
     pub message: String,
 }
 
@@ -145,10 +158,13 @@ pub struct TrustReport {
 #[derive(Debug, Clone, Serialize)]
 pub struct GenerateCheckOutput {
     pub path: String,
+    pub state: ManagedFileState,
     pub stale: bool,
     pub expected: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub current: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub message: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -193,6 +209,34 @@ pub struct LoadedManifest {
     pub path: PathBuf,
     pub raw: Vec<u8>,
     pub manifest: Manifest,
+}
+
+#[derive(Debug, Clone, Copy)]
+enum ManagedSurface {
+    Readme,
+    Security,
+    Contributing,
+}
+
+#[derive(Debug, Clone)]
+struct ManagedOutput {
+    path: PathBuf,
+    contents: String,
+}
+
+#[derive(Debug, Clone)]
+struct ManagedSurfaceStatus {
+    path: PathBuf,
+    state: ManagedFileState,
+    current: Option<String>,
+    message: Option<String>,
+}
+
+#[derive(Debug, Clone)]
+struct ManagedRegion {
+    id: String,
+    content_start: usize,
+    content_end: usize,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -574,24 +618,66 @@ pub fn trust_repository(root: &Path) -> Result<TrustReport> {
 pub fn generate_check_repository(root: &Path) -> Result<GenerateCheckReport> {
     let document = load_manifest_document(root)?;
     validate_manifest(root, &document.manifest)?;
-    let outputs = managed_outputs(root, &document.manifest, &document.raw)?;
-
     let mut rendered_outputs = Vec::new();
     let mut stale = Vec::new();
 
-    for (path, expected) in outputs {
-        let current = fs::read_to_string(&path).unwrap_or_default();
-        let relative = display_path(root, &path);
-        let is_stale = current != expected;
-        if is_stale {
-            stale.push(relative.clone());
+    rendered_outputs.push(generate_check_managed_surface(
+        root,
+        ManagedSurface::Readme,
+        &document.manifest,
+        &document.raw,
+    )?);
+
+    let digest = source_digest(&document.raw);
+    if let Some(compat) = &document.manifest.compat {
+        if let Some(github) = &compat.github {
+            if matches!(github.codeowners, Some(CompatMode::Generate)) {
+                let owners = document
+                    .manifest
+                    .owners
+                    .as_ref()
+                    .map(|o| o.maintainers.join(" "))
+                    .unwrap_or_else(|| "@maintainers".into());
+                rendered_outputs.push(generate_check_output(
+                    root,
+                    root.join(".github/CODEOWNERS"),
+                    format!(
+                        "{}\n* {}\n",
+                        generated_banner(CommentStyle::Hash, &document.manifest, &digest),
+                        owners
+                    ),
+                )?);
+            }
+            if matches!(github.security, Some(CompatMode::Generate)) {
+                rendered_outputs.push(generate_check_managed_surface(
+                    root,
+                    ManagedSurface::Security,
+                    &document.manifest,
+                    &document.raw,
+                )?);
+            }
+            if matches!(github.contributing, Some(CompatMode::Generate)) {
+                rendered_outputs.push(generate_check_managed_surface(
+                    root,
+                    ManagedSurface::Contributing,
+                    &document.manifest,
+                    &document.raw,
+                )?);
+            }
+            if matches!(github.pull_request_template, Some(CompatMode::Generate)) {
+                rendered_outputs.push(generate_check_output(
+                    root,
+                    root.join(".github/pull_request_template.md"),
+                    render_pull_request_template(&document.manifest, &digest),
+                )?);
+            }
         }
-        rendered_outputs.push(GenerateCheckOutput {
-            path: relative,
-            stale: is_stale,
-            expected,
-            current: if is_stale { Some(current) } else { None },
-        });
+    }
+
+    for output in &rendered_outputs {
+        if output.stale {
+            stale.push(output.path.clone());
+        }
     }
 
     Ok(GenerateCheckReport {
@@ -1466,12 +1552,8 @@ pub fn query_manifest(manifest: &Manifest, key: &str) -> Result<String> {
     )?)?)
 }
 
-pub fn render_readme(root: &Path, manifest: &Manifest, source_bytes: &[u8]) -> Result<String> {
+fn render_readme_body(root: &Path, manifest: &Manifest) -> Result<String> {
     let mut out = String::new();
-    let digest = source_digest(source_bytes);
-
-    out.push_str(&generated_banner(CommentStyle::Html, manifest, &digest));
-    out.push('\n');
 
     let title = manifest
         .readme
@@ -1554,19 +1636,74 @@ pub fn render_readme(root: &Path, manifest: &Manifest, source_bytes: &[u8]) -> R
     Ok(out)
 }
 
+pub fn render_readme(root: &Path, manifest: &Manifest, source_bytes: &[u8]) -> Result<String> {
+    let digest = source_digest(source_bytes);
+    Ok(render_managed_markdown(
+        generated_banner(CommentStyle::Html, manifest, &digest),
+        &render_readme_body(root, manifest)?,
+    ))
+}
+
 pub fn managed_outputs(
     root: &Path,
     manifest: &Manifest,
     source_bytes: &[u8],
 ) -> Result<Vec<(PathBuf, String)>> {
-    let mut outputs = vec![(
-        root.join("README.md"),
-        render_readme(root, manifest, source_bytes)?,
-    )];
-    for (relative, contents) in github_outputs(manifest, source_bytes) {
-        outputs.push((root.join(relative), contents));
+    let mut outputs = Vec::new();
+    if let Some(output) =
+        render_managed_output(root, ManagedSurface::Readme, manifest, source_bytes)?
+    {
+        outputs.push(output);
     }
-    Ok(outputs)
+
+    let digest = source_digest(source_bytes);
+    if let Some(compat) = &manifest.compat {
+        if let Some(github) = &compat.github {
+            if matches!(github.codeowners, Some(CompatMode::Generate)) {
+                let owners = manifest
+                    .owners
+                    .as_ref()
+                    .map(|o| o.maintainers.join(" "))
+                    .unwrap_or_else(|| "@maintainers".into());
+                outputs.push(ManagedOutput {
+                    path: root.join(".github/CODEOWNERS"),
+                    contents: format!(
+                        "{}\n* {}\n",
+                        generated_banner(CommentStyle::Hash, manifest, &digest),
+                        owners
+                    ),
+                });
+            }
+            if matches!(github.security, Some(CompatMode::Generate)) {
+                if let Some(output) =
+                    render_managed_output(root, ManagedSurface::Security, manifest, source_bytes)?
+                {
+                    outputs.push(output);
+                }
+            }
+            if matches!(github.contributing, Some(CompatMode::Generate)) {
+                if let Some(output) = render_managed_output(
+                    root,
+                    ManagedSurface::Contributing,
+                    manifest,
+                    source_bytes,
+                )? {
+                    outputs.push(output);
+                }
+            }
+            if matches!(github.pull_request_template, Some(CompatMode::Generate)) {
+                outputs.push(ManagedOutput {
+                    path: root.join(".github/pull_request_template.md"),
+                    contents: render_pull_request_template(manifest, &digest),
+                });
+            }
+        }
+    }
+
+    Ok(outputs
+        .into_iter()
+        .map(|output| (output.path, output.contents))
+        .collect())
 }
 
 pub fn github_outputs(manifest: &Manifest, source_bytes: &[u8]) -> Vec<(PathBuf, String)> {
@@ -1590,17 +1727,11 @@ pub fn github_outputs(manifest: &Manifest, source_bytes: &[u8]) -> Vec<(PathBuf,
                 ));
             }
             if matches!(github.security, Some(CompatMode::Generate)) {
-                let contact = manifest
-                    .owners
-                    .as_ref()
-                    .and_then(|o| o.security_contact.clone())
-                    .unwrap_or_else(|| "the maintainers".into());
                 outputs.push((
                     PathBuf::from(".github/SECURITY.md"),
-                    format!(
-                        "{}\n# Security\n\nPlease report vulnerabilities to {}.\n",
+                    render_managed_markdown(
                         generated_banner(CommentStyle::Html, manifest, &digest),
-                        contact
+                        &render_security_body(manifest),
                     ),
                 ));
             }
@@ -1621,46 +1752,58 @@ pub fn github_outputs(manifest: &Manifest, source_bytes: &[u8]) -> Vec<(PathBuf,
     outputs
 }
 
-pub fn detect_unmanaged_files(root: &Path) -> Vec<DoctorFinding> {
-    const CANDIDATES: [&str; 11] = [
-        "README.md",
+pub fn inspect_surface_states(root: &Path) -> Result<Vec<DoctorFinding>> {
+    let mut findings = Vec::new();
+
+    for surface in [
+        ManagedSurface::Readme,
+        ManagedSurface::Security,
+        ManagedSurface::Contributing,
+    ] {
+        let status = inspect_managed_surface(root, surface)?;
+        if status.state == ManagedFileState::Missing {
+            continue;
+        }
+        findings.push(DoctorFinding {
+            path: relative_or_absolute(root, &status.path),
+            state: status.state,
+            message: status
+                .message
+                .unwrap_or_else(|| default_state_message(status.state)),
+        });
+    }
+
+    for relative in [
         "CODEOWNERS",
         ".github/CODEOWNERS",
-        "SECURITY.md",
-        ".github/SECURITY.md",
-        "CONTRIBUTING.md",
-        ".github/CONTRIBUTING.md",
         "PULL_REQUEST_TEMPLATE.md",
         ".github/PULL_REQUEST_TEMPLATE.md",
         "pull_request_template.md",
         ".github/pull_request_template.md",
-    ];
-
-    let mut findings = Vec::new();
-    for relative in CANDIDATES {
+    ] {
         let path = root.join(relative);
         if !path.exists() {
             continue;
         }
-
         match fs::read_to_string(&path) {
             Ok(contents) => {
                 if !is_dotrepo_generated(&contents) {
                     findings.push(DoctorFinding {
                         path: PathBuf::from(relative),
-                        message: "conventional surface is not managed by dotrepo; import or normalize it before enabling sync"
-                            .into(),
+                        state: ManagedFileState::Unsupported,
+                        message: "conventional surface exists outside the managed-region contract for this file; keep it unmanaged or convert it to a fully generated dotrepo surface".into(),
                     });
                 }
             }
             Err(err) => findings.push(DoctorFinding {
                 path: PathBuf::from(relative),
+                state: ManagedFileState::Unsupported,
                 message: format!("could not be read during doctor scan: {}", err),
             }),
         }
     }
 
-    findings
+    Ok(findings)
 }
 
 pub fn validate_index_root(index_root: &Path) -> Result<Vec<IndexFinding>> {
@@ -1967,9 +2110,14 @@ fn generated_banner(style: CommentStyle, manifest: &Manifest, digest: &str) -> S
 }
 
 fn render_contributing(manifest: &Manifest, digest: &str) -> String {
+    render_managed_markdown(
+        generated_banner(CommentStyle::Html, manifest, digest),
+        &render_contributing_body(manifest),
+    )
+}
+
+fn render_contributing_body(manifest: &Manifest) -> String {
     let mut out = String::new();
-    out.push_str(&generated_banner(CommentStyle::Html, manifest, digest));
-    out.push('\n');
     out.push_str("# Contributing\n\n");
     out.push_str(&format!(
         "Thanks for contributing to {}.\n\n",
@@ -2002,6 +2150,18 @@ fn render_contributing(manifest: &Manifest, digest: &str) -> String {
     out
 }
 
+fn render_security_body(manifest: &Manifest) -> String {
+    let contact = manifest
+        .owners
+        .as_ref()
+        .and_then(|o| o.security_contact.clone())
+        .unwrap_or_else(|| "the maintainers".into());
+    format!(
+        "# Security\n\nPlease report vulnerabilities to {}.\n",
+        contact
+    )
+}
+
 fn render_pull_request_template(manifest: &Manifest, digest: &str) -> String {
     let mut out = String::new();
     out.push_str(&generated_banner(CommentStyle::Html, manifest, digest));
@@ -2027,6 +2187,405 @@ fn render_pull_request_template(manifest: &Manifest, digest: &str) -> String {
 
 fn is_dotrepo_generated(contents: &str) -> bool {
     contents.lines().next().map(is_banner_line).unwrap_or(false)
+}
+
+fn render_managed_output(
+    root: &Path,
+    surface: ManagedSurface,
+    manifest: &Manifest,
+    source_bytes: &[u8],
+) -> Result<Option<ManagedOutput>> {
+    let digest = source_digest(source_bytes);
+    let status = inspect_managed_surface(root, surface)?;
+    let full_contents = match surface {
+        ManagedSurface::Readme => render_readme(root, manifest, source_bytes)?,
+        ManagedSurface::Security => render_managed_markdown(
+            generated_banner(CommentStyle::Html, manifest, &digest),
+            &render_security_body(manifest),
+        ),
+        ManagedSurface::Contributing => render_contributing(manifest, &digest),
+    };
+
+    let body = match surface {
+        ManagedSurface::Readme => render_readme_body(root, manifest)?,
+        ManagedSurface::Security => render_security_body(manifest),
+        ManagedSurface::Contributing => render_contributing_body(manifest),
+    };
+
+    let output_path = status.path;
+    let contents = match status.state {
+        ManagedFileState::Missing | ManagedFileState::FullyGenerated => full_contents,
+        ManagedFileState::PartiallyManaged => {
+            let current = status
+                .current
+                .as_deref()
+                .expect("partially managed file retains current contents");
+            merge_managed_region(&output_path, surface, current, &body)?
+        }
+        ManagedFileState::Unmanaged => return Ok(None),
+        ManagedFileState::MalformedManaged | ManagedFileState::Unsupported => {
+            bail!(
+                "{}",
+                status
+                    .message
+                    .unwrap_or_else(|| default_state_message(status.state))
+            );
+        }
+    };
+
+    Ok(Some(ManagedOutput {
+        path: output_path,
+        contents,
+    }))
+}
+
+fn render_managed_markdown(banner: String, body: &str) -> String {
+    let mut out = String::new();
+    out.push_str(&banner);
+    out.push('\n');
+    out.push_str(body);
+    out
+}
+
+fn inspect_managed_surface(root: &Path, surface: ManagedSurface) -> Result<ManagedSurfaceStatus> {
+    let candidate_paths = managed_surface_paths(surface)
+        .iter()
+        .map(|relative| root.join(relative))
+        .filter(|path| path.exists())
+        .collect::<Vec<_>>();
+
+    if candidate_paths.len() > 1 {
+        let paths = candidate_paths
+            .iter()
+            .map(|path| display_path(root, path))
+            .collect::<Vec<_>>()
+            .join(", ");
+        return Ok(ManagedSurfaceStatus {
+            path: candidate_paths[0].clone(),
+            state: ManagedFileState::Unsupported,
+            current: None,
+            message: Some(format!(
+                "multiple candidate files exist for this surface ({paths}); keep one authoritative path before enabling sync"
+            )),
+        });
+    }
+
+    let Some(path) = candidate_paths.first() else {
+        return Ok(ManagedSurfaceStatus {
+            path: root.join(managed_surface_paths(surface)[0]),
+            state: ManagedFileState::Missing,
+            current: None,
+            message: Some("managed surface is missing".into()),
+        });
+    };
+
+    let current = fs::read_to_string(path)
+        .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+    if contains_managed_region_markers(&current) {
+        return classify_marker_managed_surface(root, path, surface, current);
+    }
+    if is_dotrepo_generated(&current) {
+        return Ok(ManagedSurfaceStatus {
+            path: path.clone(),
+            state: ManagedFileState::FullyGenerated,
+            current: Some(current),
+            message: Some("fully generated by dotrepo".into()),
+        });
+    }
+    Ok(ManagedSurfaceStatus {
+        path: path.clone(),
+        state: ManagedFileState::Unmanaged,
+        current: Some(current),
+        message: Some(
+            "file exists outside dotrepo management; unmanaged prose is preserved and does not fail generate --check by itself"
+                .into(),
+        ),
+    })
+}
+
+fn classify_marker_managed_surface(
+    root: &Path,
+    path: &Path,
+    surface: ManagedSurface,
+    current: String,
+) -> Result<ManagedSurfaceStatus> {
+    match parse_managed_regions(path, &current) {
+        Ok(regions) => {
+            let required = managed_region_id(surface);
+            if regions.len() != 1 || regions[0].id != required {
+                let found = regions
+                    .iter()
+                    .map(|region| region.id.as_str())
+                    .collect::<Vec<_>>()
+                    .join(", ");
+                return Ok(ManagedSurfaceStatus {
+                    path: path.to_path_buf(),
+                    state: ManagedFileState::Unsupported,
+                    current: Some(current),
+                    message: Some(format!(
+                        "{} uses unsupported managed-region ids for this surface; expected only `{}`, found [{}]",
+                        display_path(root, path),
+                        required,
+                        found
+                    )),
+                });
+            }
+            Ok(ManagedSurfaceStatus {
+                path: path.to_path_buf(),
+                state: ManagedFileState::PartiallyManaged,
+                current: Some(current),
+                message: Some(
+                    "managed regions are valid; unmanaged content outside the markers is preserved"
+                        .into(),
+                ),
+            })
+        }
+        Err(err) => Ok(ManagedSurfaceStatus {
+            path: path.to_path_buf(),
+            state: ManagedFileState::MalformedManaged,
+            current: Some(current),
+            message: Some(err.to_string()),
+        }),
+    }
+}
+
+fn managed_surface_paths(surface: ManagedSurface) -> &'static [&'static str] {
+    match surface {
+        ManagedSurface::Readme => &["README.md"],
+        ManagedSurface::Security => &[".github/SECURITY.md", "SECURITY.md"],
+        ManagedSurface::Contributing => &["CONTRIBUTING.md", ".github/CONTRIBUTING.md"],
+    }
+}
+
+fn managed_region_id(surface: ManagedSurface) -> &'static str {
+    match surface {
+        ManagedSurface::Readme => "readme.body",
+        ManagedSurface::Security => "security.body",
+        ManagedSurface::Contributing => "contributing.body",
+    }
+}
+
+fn contains_managed_region_markers(contents: &str) -> bool {
+    contents.lines().any(|line| {
+        let trimmed = line.trim();
+        trimmed.starts_with("<!-- dotrepo:begin id=") || trimmed.starts_with("<!-- dotrepo:end id=")
+    })
+}
+
+fn merge_managed_region(
+    path: &Path,
+    surface: ManagedSurface,
+    current: &str,
+    body: &str,
+) -> Result<String> {
+    let regions = parse_managed_regions(path, current)?;
+    let region = regions
+        .iter()
+        .find(|region| region.id == managed_region_id(surface))
+        .ok_or_else(|| {
+            anyhow!(
+                "{} contains managed-region markers, but not the required `{}` region",
+                path.display(),
+                managed_region_id(surface)
+            )
+        })?;
+
+    let mut out = String::with_capacity(current.len() + body.len());
+    out.push_str(&current[..region.content_start]);
+    out.push_str(&ensure_trailing_newline(body));
+    out.push_str(&current[region.content_end..]);
+    Ok(out)
+}
+
+fn parse_managed_regions(path: &Path, contents: &str) -> Result<Vec<ManagedRegion>> {
+    let mut regions = Vec::new();
+    let mut seen = BTreeSet::new();
+    let mut active: Option<(String, usize, usize)> = None;
+    let mut offset = 0;
+
+    for line in contents.split_inclusive('\n') {
+        let line_start = offset;
+        let line_end = offset + line.len();
+        offset = line_end;
+
+        let trimmed = line.trim();
+        if let Some(id) = parse_managed_marker(trimmed, "begin") {
+            if active.is_some() {
+                bail!(
+                    "{} contains nested or overlapping managed regions; close the current region before opening `{}`",
+                    path.display(),
+                    id
+                );
+            }
+            if !seen.insert(id.to_string()) {
+                bail!(
+                    "{} declares the managed region `{}` more than once",
+                    path.display(),
+                    id
+                );
+            }
+            active = Some((id.to_string(), line_start, line_end));
+            continue;
+        }
+
+        if let Some(id) = parse_managed_marker(trimmed, "end") {
+            let (active_id, _begin_start, begin_end) = active.take().ok_or_else(|| {
+                anyhow!(
+                    "{} closes managed region `{}` without a matching begin marker",
+                    path.display(),
+                    id
+                )
+            })?;
+            if active_id != id {
+                bail!(
+                    "{} closes managed region `{}`, but the open region is `{}`",
+                    path.display(),
+                    id,
+                    active_id
+                );
+            }
+            regions.push(ManagedRegion {
+                id: active_id,
+                content_start: begin_end,
+                content_end: line_start,
+            });
+        }
+    }
+
+    if let Some((id, _, _)) = active {
+        bail!(
+            "{} opens managed region `{}` without a matching end marker",
+            path.display(),
+            id
+        );
+    }
+
+    Ok(regions)
+}
+
+fn parse_managed_marker(line: &str, kind: &str) -> Option<String> {
+    let prefix = format!("<!-- dotrepo:{} id=", kind);
+    let value = line.strip_prefix(&prefix)?.strip_suffix(" -->")?;
+    if value.is_empty() {
+        None
+    } else {
+        Some(value.to_string())
+    }
+}
+
+fn ensure_trailing_newline(body: &str) -> String {
+    if body.ends_with('\n') {
+        body.to_string()
+    } else {
+        format!("{body}\n")
+    }
+}
+
+fn relative_or_absolute(root: &Path, path: &Path) -> PathBuf {
+    path.strip_prefix(root)
+        .map(PathBuf::from)
+        .unwrap_or_else(|_| path.to_path_buf())
+}
+
+fn default_state_message(state: ManagedFileState) -> String {
+    match state {
+        ManagedFileState::Missing => "managed surface is missing".into(),
+        ManagedFileState::FullyGenerated => "fully generated by dotrepo".into(),
+        ManagedFileState::PartiallyManaged => {
+            "managed regions are valid; unmanaged content outside the markers is preserved".into()
+        }
+        ManagedFileState::Unmanaged => {
+            "file exists outside dotrepo management; unmanaged prose is preserved and does not fail generate --check by itself".into()
+        }
+        ManagedFileState::MalformedManaged => {
+            "managed-region markers are malformed and must be fixed before sync can proceed".into()
+        }
+        ManagedFileState::Unsupported => {
+            "file is in an unsupported managed-sync state for this surface".into()
+        }
+    }
+}
+
+fn generate_check_output(
+    root: &Path,
+    path: PathBuf,
+    expected: String,
+) -> Result<GenerateCheckOutput> {
+    let current = fs::read_to_string(&path).unwrap_or_default();
+    let relative = display_path(root, &path);
+    let is_stale = current != expected;
+    Ok(GenerateCheckOutput {
+        path: relative,
+        state: if current.is_empty() && !path.exists() {
+            ManagedFileState::Missing
+        } else {
+            ManagedFileState::FullyGenerated
+        },
+        stale: is_stale,
+        expected,
+        current: if is_stale { Some(current) } else { None },
+        message: None,
+    })
+}
+
+fn generate_check_managed_surface(
+    root: &Path,
+    surface: ManagedSurface,
+    manifest: &Manifest,
+    source_bytes: &[u8],
+) -> Result<GenerateCheckOutput> {
+    let digest = source_digest(source_bytes);
+    let status = inspect_managed_surface(root, surface)?;
+    let body = match surface {
+        ManagedSurface::Readme => render_readme_body(root, manifest)?,
+        ManagedSurface::Security => render_security_body(manifest),
+        ManagedSurface::Contributing => render_contributing_body(manifest),
+    };
+    let full_expected = match surface {
+        ManagedSurface::Readme => render_readme(root, manifest, source_bytes)?,
+        ManagedSurface::Security => render_managed_markdown(
+            generated_banner(CommentStyle::Html, manifest, &digest),
+            &body,
+        ),
+        ManagedSurface::Contributing => render_managed_markdown(
+            generated_banner(CommentStyle::Html, manifest, &digest),
+            &body,
+        ),
+    };
+    let expected = match status.state {
+        ManagedFileState::PartiallyManaged => merge_managed_region(
+            &status.path,
+            surface,
+            status
+                .current
+                .as_deref()
+                .expect("partially managed file retains current contents"),
+            &body,
+        )?,
+        ManagedFileState::Unmanaged => status
+            .current
+            .clone()
+            .expect("unmanaged file retains current contents"),
+        _ => full_expected,
+    };
+    let current = status.current.clone();
+    let stale = match status.state {
+        ManagedFileState::Missing => true,
+        ManagedFileState::FullyGenerated | ManagedFileState::PartiallyManaged => {
+            current.as_deref().unwrap_or_default() != expected
+        }
+        ManagedFileState::Unmanaged => false,
+        ManagedFileState::MalformedManaged | ManagedFileState::Unsupported => true,
+    };
+
+    Ok(GenerateCheckOutput {
+        path: display_path(root, &status.path),
+        state: status.state,
+        stale,
+        expected,
+        current: if stale { current } else { None },
+        message: status.message,
+    })
 }
 
 fn is_banner_line(line: &str) -> bool {
@@ -2614,19 +3173,364 @@ content = "Run `cargo build`."
     }
 
     #[test]
-    fn detect_unmanaged_files_finds_conventional_surfaces() {
+    fn managed_outputs_preserve_unmanaged_readme_content_outside_markers() {
+        let root = temp_dir("managed-readme");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest parses");
+        fs::write(
+            root.join("README.md"),
+            r#"# Local README
+
+This introduction stays.
+
+<!-- dotrepo:begin id=readme.body -->
+Old managed section
+<!-- dotrepo:end id=readme.body -->
+
+This footer stays too.
+"#,
+        )
+        .expect("README written");
+
+        let outputs = managed_outputs(&root, &manifest, b"schema = \"dotrepo/v0.1\"")
+            .expect("managed outputs render");
+        let readme = outputs
+            .iter()
+            .find(|(path, _)| path == &root.join("README.md"))
+            .expect("README output present")
+            .1
+            .clone();
+
+        assert!(readme.contains("# Local README"));
+        assert!(readme.contains("This introduction stays."));
+        assert!(readme.contains("<!-- dotrepo:begin id=readme.body -->"));
+        assert!(readme.contains("## Overview"));
+        assert!(readme.contains("Fast local-first sync engine"));
+        assert!(readme.contains("This footer stays too."));
+        assert!(!readme.contains("Old managed section"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn managed_outputs_do_not_overwrite_unmanaged_readme_without_markers() {
+        let root = temp_dir("unmanaged-readme-skip");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest parses");
+        fs::write(root.join("README.md"), "# Keep my hand-written README\n")
+            .expect("README written");
+
+        let outputs = managed_outputs(&root, &manifest, b"schema = \"dotrepo/v0.1\"")
+            .expect("managed outputs render");
+        assert!(!outputs
+            .iter()
+            .any(|(path, _)| path == &root.join("README.md")));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn managed_outputs_preserve_unmanaged_security_content_outside_markers() {
+        let root = temp_dir("managed-security");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+
+[owners]
+security_contact = "security@example.com"
+
+[compat.github]
+security = "generate"
+"#,
+        )
+        .expect("manifest parses");
+        fs::create_dir_all(root.join(".github")).expect(".github dir created");
+        fs::write(
+            root.join(".github/SECURITY.md"),
+            r#"Intro stays.
+
+<!-- dotrepo:begin id=security.body -->
+old security block
+<!-- dotrepo:end id=security.body -->
+
+Footer stays.
+"#,
+        )
+        .expect("SECURITY written");
+
+        let outputs = managed_outputs(&root, &manifest, b"schema = \"dotrepo/v0.1\"")
+            .expect("managed outputs render");
+        let security = outputs
+            .iter()
+            .find(|(path, _)| path == &root.join(".github/SECURITY.md"))
+            .expect("SECURITY output present")
+            .1
+            .clone();
+
+        assert!(security.contains("Intro stays."));
+        assert!(security.contains("# Security"));
+        assert!(security.contains("Please report vulnerabilities to security@example.com."));
+        assert!(security.contains("Footer stays."));
+        assert!(!security.contains("old security block"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn managed_outputs_preserve_unmanaged_contributing_content_outside_markers() {
+        let root = temp_dir("managed-contributing");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+build = "cargo build"
+test = "cargo test"
+
+[owners]
+security_contact = "security@example.com"
+
+[compat.github]
+contributing = "generate"
+"#,
+        )
+        .expect("manifest parses");
+        fs::write(
+            root.join("CONTRIBUTING.md"),
+            r#"Local preface.
+
+<!-- dotrepo:begin id=contributing.body -->
+old contributing block
+<!-- dotrepo:end id=contributing.body -->
+
+Local footer.
+"#,
+        )
+        .expect("CONTRIBUTING written");
+
+        let outputs = managed_outputs(&root, &manifest, b"schema = \"dotrepo/v0.1\"")
+            .expect("managed outputs render");
+        let contributing = outputs
+            .iter()
+            .find(|(path, _)| path == &root.join("CONTRIBUTING.md"))
+            .expect("CONTRIBUTING output present")
+            .1
+            .clone();
+
+        assert!(contributing.contains("Local preface."));
+        assert!(contributing.contains("# Contributing"));
+        assert!(contributing.contains("Run `cargo build` before submitting changes."));
+        assert!(contributing.contains("Run `cargo test` before submitting changes."));
+        assert!(contributing.contains("Local footer."));
+        assert!(!contributing.contains("old contributing block"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn managed_outputs_fail_on_malformed_nested_regions() {
+        let root = temp_dir("managed-malformed");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest parses");
+        fs::write(
+            root.join("README.md"),
+            r#"<!-- dotrepo:begin id=readme.body -->
+<!-- dotrepo:begin id=security.body -->
+bad nesting
+<!-- dotrepo:end id=security.body -->
+<!-- dotrepo:end id=readme.body -->
+"#,
+        )
+        .expect("README written");
+
+        let err = managed_outputs(&root, &manifest, b"schema = \"dotrepo/v0.1\"")
+            .expect_err("nested regions should fail");
+        assert!(err
+            .to_string()
+            .contains("nested or overlapping managed regions"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn generate_check_repository_detects_drift_inside_managed_regions() {
+        let root = temp_dir("managed-stale");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest written");
+        fs::write(
+            root.join("README.md"),
+            r#"Preface.
+
+<!-- dotrepo:begin id=readme.body -->
+stale managed content
+<!-- dotrepo:end id=readme.body -->
+"#,
+        )
+        .expect("README written");
+
+        let report = generate_check_repository(&root).expect("generate check succeeds");
+        assert!(report.stale.iter().any(|path| path == "README.md"));
+        let readme = report
+            .outputs
+            .iter()
+            .find(|output| output.path == "README.md")
+            .expect("README output present");
+        assert!(readme.stale);
+        assert!(readme.expected.contains("## Overview"));
+        assert!(readme
+            .current
+            .as_ref()
+            .expect("current content included")
+            .contains("stale managed content"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn generate_check_repository_does_not_flag_unmanaged_readme() {
+        let root = temp_dir("unmanaged-generate-check");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest written");
+        fs::write(root.join("README.md"), "# Keep my hand-written README\n")
+            .expect("README written");
+
+        let report = generate_check_repository(&root).expect("generate check succeeds");
+        let readme = report
+            .outputs
+            .iter()
+            .find(|output| output.path == "README.md")
+            .expect("README output present");
+        assert_eq!(readme.state, ManagedFileState::Unmanaged);
+        assert!(!readme.stale);
+        assert!(report.stale.is_empty());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn inspect_surface_states_reports_supported_and_unsupported_surfaces() {
         let root = temp_dir("doctor");
         fs::write(root.join("README.md"), "# Existing README\n").expect("README written");
         fs::create_dir_all(root.join(".github")).expect(".github created");
         fs::write(
             root.join(".github/CODEOWNERS"),
-            "# generated by dotrepo 0.1.0 | schema: dotrepo/v0.1 | source: sha256:abc\n* @alice\n",
+            "* @alice\n",
         )
         .expect("CODEOWNERS written");
 
-        let findings = detect_unmanaged_files(&root);
-        assert_eq!(findings.len(), 1);
+        let findings = inspect_surface_states(&root).expect("doctor findings");
+        assert_eq!(findings.len(), 2);
         assert_eq!(findings[0].path, PathBuf::from("README.md"));
+        assert_eq!(findings[0].state, ManagedFileState::Unmanaged);
+        assert_eq!(findings[1].path, PathBuf::from(".github/CODEOWNERS"));
+        assert_eq!(findings[1].state, ManagedFileState::Unsupported);
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn inspect_surface_states_reports_partially_managed_and_malformed_files() {
+        let root = temp_dir("doctor-partial");
+        fs::create_dir_all(root.join(".github")).expect(".github created");
+        fs::write(
+            root.join("README.md"),
+            r#"Intro
+
+<!-- dotrepo:begin id=readme.body -->
+managed
+<!-- dotrepo:end id=readme.body -->
+"#,
+        )
+        .expect("README written");
+        fs::write(
+            root.join(".github/SECURITY.md"),
+            r#"<!-- dotrepo:begin id=security.body -->
+broken
+"#,
+        )
+        .expect("SECURITY written");
+
+        let findings = inspect_surface_states(&root).expect("doctor findings");
+        assert_eq!(findings[0].path, PathBuf::from("README.md"));
+        assert_eq!(findings[0].state, ManagedFileState::PartiallyManaged);
+        assert_eq!(findings[1].path, PathBuf::from(".github/SECURITY.md"));
+        assert_eq!(findings[1].state, ManagedFileState::MalformedManaged);
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

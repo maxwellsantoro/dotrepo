@@ -1,10 +1,10 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    detect_unmanaged_files, generate_check_repository, import_repository, load_manifest_document,
+    generate_check_repository, import_repository, inspect_surface_states, load_manifest_document,
     load_manifest_from_root, managed_outputs, query_repository, trust_repository,
     validate_index_root, validate_manifest, validate_repository, ConflictRelationship, ImportMode,
-    IndexFindingSeverity, SelectionReason, TrustReport,
+    IndexFindingSeverity, ManagedFileState, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::Trust;
@@ -287,9 +287,20 @@ fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
                 message: format!(
                     "generated files are out of date:\n{}",
                     report
-                        .stale
+                        .outputs
                         .into_iter()
-                        .map(|path| format!("- {}", path))
+                        .filter(|output| output.stale)
+                        .map(|output| {
+                            let mut line = format!(
+                                "- {} [{}]",
+                                output.path,
+                                format_managed_file_state(output.state)
+                            );
+                            if let Some(message) = output.message {
+                                line.push_str(&format!(": {}", message));
+                            }
+                            line
+                        })
                         .collect::<Vec<_>>()
                         .join("\n")
                 ),
@@ -317,16 +328,21 @@ fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
 fn cmd_doctor(root: PathBuf) -> Result<()> {
     let manifest = load_manifest_from_root(&root)?;
     validate_manifest(&root, &manifest)?;
-    let findings = detect_unmanaged_files(&root);
+    let findings = inspect_surface_states(&root)?;
     println!("dotrepo doctor");
     println!("- mode: {:?}", manifest.record.mode);
     println!("- status: {:?}", manifest.record.status);
     if findings.is_empty() {
-        println!("- no unmanaged conventional files detected");
+        println!("- no managed-surface findings detected");
     } else {
-        println!("- unmanaged conventional files:");
+        println!("- conventional surface states:");
         for finding in findings {
-            println!("  - {}: {}", finding.path.display(), finding.message);
+            println!(
+                "  - {} [{}]: {}",
+                finding.path.display(),
+                format_managed_file_state(finding.state),
+                finding.message
+            );
         }
     }
     Ok(())
@@ -470,6 +486,17 @@ fn format_provenance(provenance: &[String]) -> String {
         "none".into()
     } else {
         provenance.join(", ")
+    }
+}
+
+fn format_managed_file_state(state: ManagedFileState) -> &'static str {
+    match state {
+        ManagedFileState::Missing => "missing",
+        ManagedFileState::FullyGenerated => "fully_generated",
+        ManagedFileState::PartiallyManaged => "partially_managed",
+        ManagedFileState::Unmanaged => "unmanaged",
+        ManagedFileState::MalformedManaged => "malformed_managed",
+        ManagedFileState::Unsupported => "unsupported",
     }
 }
 
