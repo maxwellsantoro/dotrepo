@@ -55,7 +55,7 @@ A structured `.repo` record does not replace code or good documentation. It prov
 
 ## What this scaffold includes
 
-- a Rust workspace with `dotrepo-schema`, `dotrepo-core`, `dotrepo-cli`, `dotrepo-mcp`, and `dotrepo-lsp`
+- a Rust workspace with `dotrepo-schema`, `dotrepo-core`, `dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, and the shared internal `dotrepo-transport`
 - a first VS Code extension shell under [`editors/vscode/`](editors/vscode/)
 - a thin import path for bootstrapping records from `README.md`, `CODEOWNERS`, and `SECURITY.md`
 - a thin stdio MCP server exposing trust-aware validate/query/trust/generate-check/import tools
@@ -72,6 +72,7 @@ This repo is an early implementation of the dotrepo protocol and toolchain. It i
 ## First docs to read
 
 - [`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md)
+- [`docs/current-status.md`](docs/current-status.md)
 - [`docs/vision.md`](docs/vision.md)
 - [`docs/public-messaging.md`](docs/public-messaging.md)
 - [`docs/trust-model.md`](docs/trust-model.md)

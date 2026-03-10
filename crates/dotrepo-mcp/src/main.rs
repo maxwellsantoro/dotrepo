@@ -1,12 +1,15 @@
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
     display_path, generate_check_repository, import_preview_repository, import_repository,
     query_repository, record_summary, trust_repository, validate_repository, ImportMode,
 };
+use dotrepo_transport::{
+    read_jsonrpc_message as read_message, write_jsonrpc_message as write_message,
+};
 use serde::Deserialize;
 use serde_json::{json, to_value, Value};
 use std::fs;
-use std::io::{self, BufRead, BufReader, Write};
+use std::io::{self, BufReader};
 use std::path::{Path, PathBuf};
 
 const JSONRPC_VERSION: &str = "2.0";
@@ -468,50 +471,6 @@ fn error_response(id: Value, code: i64, message: String, data: Option<Value>) ->
         "id": id,
         "error": error
     })
-}
-
-fn read_message(reader: &mut impl BufRead) -> Result<Option<Vec<u8>>> {
-    let mut content_length = None;
-    let mut saw_header = false;
-
-    loop {
-        let mut line = String::new();
-        let bytes_read = reader.read_line(&mut line)?;
-        if bytes_read == 0 {
-            if saw_header {
-                bail!("unexpected EOF while reading MCP headers");
-            }
-            return Ok(None);
-        }
-
-        let trimmed = line.trim_end_matches(['\r', '\n']);
-        if trimmed.is_empty() {
-            break;
-        }
-
-        saw_header = true;
-        if let Some(value) = trimmed.strip_prefix("Content-Length:") {
-            content_length = Some(
-                value
-                    .trim()
-                    .parse::<usize>()
-                    .context("invalid Content-Length header")?,
-            );
-        }
-    }
-
-    let length = content_length.ok_or_else(|| anyhow!("missing Content-Length header"))?;
-    let mut payload = vec![0; length];
-    reader.read_exact(&mut payload)?;
-    Ok(Some(payload))
-}
-
-fn write_message(writer: &mut impl Write, message: &Value) -> Result<()> {
-    let payload = serde_json::to_vec(message)?;
-    write!(writer, "Content-Length: {}\r\n\r\n", payload.len())?;
-    writer.write_all(&payload)?;
-    writer.flush()?;
-    Ok(())
 }
 
 #[cfg(test)]

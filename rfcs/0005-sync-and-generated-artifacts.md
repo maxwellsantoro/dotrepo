@@ -81,6 +81,8 @@ Rules:
 - regions are block-level, not inline
 - regions must not overlap or nest
 - a file may contain multiple managed regions, but each `id` may appear at most once
+- harmless whitespace inside the HTML comment may vary, but the marker payload
+  must still consist only of `dotrepo:begin` / `dotrepo:end` plus a single `id`
 
 The exact inventory of region ids is renderer-specific, but they should remain stable
 across minor tool releases so hand-authored prose around them does not churn.

@@ -90,6 +90,10 @@ If `README.md` contains:
 
 then dotrepo treats it as `partially_managed`.
 
+The parser tolerates harmless whitespace variation inside the HTML comment, such
+as `<!--   dotrepo:begin   id = readme.body   -->`, but the marker payload must
+still be only `dotrepo:begin` / `dotrepo:end` plus a single `id`.
+
 - prose before and after the managed region is preserved
 - only the managed block is rewritten
 - `generate --check` compares only the managed block, not the surrounding prose

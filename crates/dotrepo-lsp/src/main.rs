@@ -1,14 +1,18 @@
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{anyhow, Context, Result};
 use dotrepo_core::{
     validate_manifest_diagnostics, ValidationDiagnostic, ValidationDiagnosticSeverity,
 };
 use dotrepo_schema::{parse_manifest, ParseError};
+use dotrepo_transport::{
+    read_jsonrpc_message as read_message, write_jsonrpc_message as write_message,
+};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::collections::BTreeMap;
 use std::fs;
-use std::io::{self, BufRead, BufReader, Write};
+use std::io::{self, BufReader};
 use std::path::{Path, PathBuf};
+use toml_span::{parse as parse_toml_spanned, Span as TomlSpan, Value as TomlValue};
 use url::Url;
 
 const JSONRPC_VERSION: &str = "2.0";
@@ -206,6 +210,7 @@ struct CatalogEntry {
 #[derive(Default)]
 struct DocumentIndex {
     fields: BTreeMap<String, LspRange>,
+    values: BTreeMap<String, LspRange>,
     sections: BTreeMap<String, LspRange>,
     lines: Vec<String>,
 }
@@ -539,58 +544,27 @@ fn range_for_missing_path(index: &DocumentIndex, root: &Path, target: &Path) -> 
 
 impl DocumentIndex {
     fn from_text(text: &str) -> Self {
-        let mut fields = BTreeMap::new();
-        let mut sections = BTreeMap::new();
-        let lines = text.lines().map(str::to_string).collect::<Vec<_>>();
-        let mut current_section: Option<String> = None;
+        let mut index = Self {
+            fields: BTreeMap::new(),
+            values: BTreeMap::new(),
+            sections: BTreeMap::new(),
+            lines: text.lines().map(str::to_string).collect::<Vec<_>>(),
+        };
 
-        for (line_idx, line) in lines.iter().enumerate() {
-            let trimmed = line.trim();
-            if trimmed.starts_with('[') && trimmed.ends_with(']') && !trimmed.starts_with("[[") {
-                let section = trimmed.trim_matches(|ch| ch == '[' || ch == ']').trim();
-                if !section.is_empty() {
-                    current_section = Some(section.to_string());
-                    sections.insert(section.to_string(), whole_line_range(line_idx as u32, line));
-                }
-                continue;
-            }
-
-            let Some(eq_idx) = line.find('=') else {
-                continue;
-            };
-            let key = line[..eq_idx].trim();
-            if key.is_empty() || key.contains(' ') {
-                continue;
-            }
-            let full_path = match &current_section {
-                Some(section) => format!("{section}.{key}"),
-                None => key.to_string(),
-            };
-            let key_col = line.find(key).unwrap_or(0);
-            fields.insert(
-                full_path,
-                LspRange {
-                    start: LspPosition {
-                        line: line_idx as u32,
-                        character: utf16_len(&line[..key_col]),
-                    },
-                    end: LspPosition {
-                        line: line_idx as u32,
-                        character: utf16_len(&line[..key_col + key.len()]),
-                    },
-                },
-            );
+        match parse_toml_spanned(text) {
+            Ok(parsed) => index.populate_from_spanned(text, None, &parsed),
+            Err(_) => index.populate_from_line_scan(),
         }
 
-        Self {
-            fields,
-            sections,
-            lines,
-        }
+        index
     }
 
     fn field_range(&self, path: &str) -> Option<LspRange> {
         self.fields.get(path).copied()
+    }
+
+    fn value_range(&self, path: &str) -> Option<LspRange> {
+        self.values.get(path).copied()
     }
 
     fn section_range(&self, path: &str) -> Option<LspRange> {
@@ -622,19 +596,156 @@ impl DocumentIndex {
     }
 
     fn range_for_path(&self, path: &str) -> Option<LspRange> {
-        self.field_range(path).or_else(|| self.section_range(path))
+        self.field_range(path)
+            .or_else(|| self.section_range(path))
+            .or_else(|| self.value_range(path))
     }
 
     fn path_at(&self, position: LspPosition) -> Option<&str> {
-        self.fields
-            .iter()
-            .find_map(|(path, range)| position_in_range(position, *range).then_some(path.as_str()))
-            .or_else(|| {
-                self.sections.iter().find_map(|(path, range)| {
-                    position_in_range(position, *range).then_some(path.as_str())
-                })
-            })
+        narrowest_path_match(&self.fields, position)
+            .or_else(|| narrowest_path_match(&self.values, position))
+            .or_else(|| narrowest_path_match(&self.sections, position))
     }
+
+    fn section_path_at(&self, position: LspPosition) -> Option<&str> {
+        narrowest_path_match(&self.sections, position)
+    }
+
+    fn field_path_at(&self, position: LspPosition) -> Option<&str> {
+        narrowest_path_match(&self.fields, position)
+    }
+
+    fn value_path_at(&self, position: LspPosition) -> Option<&str> {
+        narrowest_path_match(&self.values, position)
+    }
+
+    fn populate_from_spanned<'a>(
+        &mut self,
+        text: &str,
+        prefix: Option<&str>,
+        value: &TomlValue<'a>,
+    ) {
+        let Some(table) = value.as_table() else {
+            return;
+        };
+
+        for (key, child) in table {
+            let path = prefix
+                .map(|prefix| format!("{prefix}.{}", key.name))
+                .unwrap_or_else(|| key.name.to_string());
+
+            self.fields
+                .entry(path.clone())
+                .or_insert_with(|| byte_span_to_range(text, key.span.start, key.span.end));
+            self.values
+                .entry(path.clone())
+                .or_insert_with(|| byte_span_to_range(text, child.span.start, child.span.end));
+
+            if child.as_table().is_some() {
+                if let Some(range) = section_header_range(text, key.span, child.span) {
+                    self.sections.entry(path.clone()).or_insert(range);
+                }
+                self.populate_from_spanned(text, Some(&path), child);
+            }
+        }
+    }
+
+    fn populate_from_line_scan(&mut self) {
+        let mut current_section: Option<String> = None;
+
+        for (line_idx, line) in self.lines.iter().enumerate() {
+            let trimmed = line.trim();
+            if trimmed.starts_with('[') && trimmed.ends_with(']') && !trimmed.starts_with("[[") {
+                let section = trimmed.trim_matches(|ch| ch == '[' || ch == ']').trim();
+                if !section.is_empty() {
+                    current_section = Some(section.to_string());
+                    self.sections
+                        .insert(section.to_string(), whole_line_range(line_idx as u32, line));
+                }
+                continue;
+            }
+
+            let Some(eq_idx) = line.find('=') else {
+                continue;
+            };
+            let key = line[..eq_idx].trim();
+            if key.is_empty() || key.contains(' ') {
+                continue;
+            }
+            let full_path = match &current_section {
+                Some(section) => format!("{section}.{key}"),
+                None => key.to_string(),
+            };
+            let key_col = line.find(key).unwrap_or(0);
+            let value_start = eq_idx.saturating_add(1);
+            self.fields.insert(
+                full_path.clone(),
+                LspRange {
+                    start: LspPosition {
+                        line: line_idx as u32,
+                        character: utf16_len(&line[..key_col]),
+                    },
+                    end: LspPosition {
+                        line: line_idx as u32,
+                        character: utf16_len(&line[..key_col + key.len()]),
+                    },
+                },
+            );
+            self.values.insert(
+                full_path,
+                LspRange {
+                    start: LspPosition {
+                        line: line_idx as u32,
+                        character: utf16_len(&line[..value_start]),
+                    },
+                    end: LspPosition {
+                        line: line_idx as u32,
+                        character: utf16_len(line),
+                    },
+                },
+            );
+        }
+    }
+}
+
+fn section_header_range(text: &str, key_span: TomlSpan, value_span: TomlSpan) -> Option<LspRange> {
+    if value_span.start > key_span.start {
+        return None;
+    }
+
+    let line_start = text[..key_span.start]
+        .rfind('\n')
+        .map(|idx| idx + 1)
+        .unwrap_or(0);
+    let line_end = text[key_span.end..]
+        .find('\n')
+        .map(|idx| key_span.end + idx)
+        .unwrap_or(text.len());
+    let line = &text[line_start..line_end];
+    let trimmed = line.trim();
+    if trimmed.starts_with('[') && trimmed.ends_with(']') {
+        Some(byte_span_to_range(text, line_start, line_end))
+    } else {
+        None
+    }
+}
+
+fn narrowest_path_match<'a>(
+    paths: &'a BTreeMap<String, LspRange>,
+    position: LspPosition,
+) -> Option<&'a str> {
+    paths
+        .iter()
+        .filter(|(_, range)| position_in_range(position, **range))
+        .min_by_key(|(_, range)| range_weight(**range))
+        .map(|(path, _)| path.as_str())
+}
+
+fn range_weight(range: LspRange) -> (u32, u32) {
+    (
+        range.end.line.saturating_sub(range.start.line),
+        range.end.character.saturating_sub(range.start.character),
+    )
 }
 
 fn whole_line_range(line: u32, contents: &str) -> LspRange {
@@ -724,6 +835,35 @@ enum CompletionContext {
 }
 
 fn completion_context(
+    index: &DocumentIndex,
+    line_number: u32,
+    line: &str,
+    character: u32,
+) -> CompletionContext {
+    let position = LspPosition {
+        line: line_number,
+        character,
+    };
+    if index.section_path_at(position).is_some()
+        && prefix_at_utf16(line, character)
+            .trim_start()
+            .starts_with('[')
+    {
+        return CompletionContext::Section;
+    }
+    if index.field_path_at(position).is_some() {
+        return CompletionContext::Key;
+    }
+    if let Some(path) = index.value_path_at(position) {
+        return CompletionContext::Value {
+            path: Some(path.to_string()),
+        };
+    }
+
+    legacy_completion_context(index, line_number, line, character)
+}
+
+fn legacy_completion_context(
     index: &DocumentIndex,
     line_number: u32,
     line: &str,
@@ -1211,50 +1351,6 @@ fn error_response(id: Value, code: i64, message: String) -> Value {
     })
 }
 
-fn read_message(reader: &mut impl BufRead) -> Result<Option<Vec<u8>>> {
-    let mut content_length = None;
-    let mut saw_header = false;
-
-    loop {
-        let mut line = String::new();
-        let bytes_read = reader.read_line(&mut line)?;
-        if bytes_read == 0 {
-            if saw_header {
-                bail!("unexpected EOF while reading LSP headers");
-            }
-            return Ok(None);
-        }
-
-        let trimmed = line.trim_end_matches(['\r', '\n']);
-        if trimmed.is_empty() {
-            break;
-        }
-
-        saw_header = true;
-        if let Some(value) = trimmed.strip_prefix("Content-Length:") {
-            content_length = Some(
-                value
-                    .trim()
-                    .parse::<usize>()
-                    .context("invalid Content-Length header")?,
-            );
-        }
-    }
-
-    let length = content_length.ok_or_else(|| anyhow!("missing Content-Length header"))?;
-    let mut payload = vec![0; length];
-    reader.read_exact(&mut payload)?;
-    Ok(Some(payload))
-}
-
-fn write_message(writer: &mut impl Write, message: &Value) -> Result<()> {
-    let payload = serde_json::to_vec(message)?;
-    write!(writer, "Content-Length: {}\r\n\r\n", payload.len())?;
-    writer.write_all(&payload)?;
-    writer.flush()?;
-    Ok(())
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1457,6 +1553,83 @@ status = "draft"
 
         assert!(hover.contents.value.contains("`record.status`"));
         assert!(hover.contents.value.contains("authority and review level"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn hover_resolves_nested_inline_table_fields() {
+        let root = temp_dir("lsp-inline-hover");
+        let path = root.join(".repo");
+        let uri = Url::from_file_path(&path)
+            .expect("file path uri")
+            .to_string();
+        let mut state = ServerState::default();
+        open_document(
+            &mut state,
+            &uri,
+            r#"
+schema = "dotrepo/v0.1"
+
+owners = { security_contact = "security@example.com" }
+"#,
+        );
+
+        let hover = hover_response(
+            &state,
+            &TextDocumentPositionParams {
+                text_document: TextDocumentIdentifier { uri },
+                position: LspPosition {
+                    line: 3,
+                    character: 14,
+                },
+            },
+        )
+        .expect("hover succeeds")
+        .expect("hover present");
+
+        assert!(hover.contents.value.contains("`owners.security_contact`"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn hover_ignores_fake_toml_structure_inside_multiline_strings() {
+        let root = temp_dir("lsp-multiline-hover");
+        let path = root.join(".repo");
+        let uri = Url::from_file_path(&path)
+            .expect("file path uri")
+            .to_string();
+        let mut state = ServerState::default();
+        open_document(
+            &mut state,
+            &uri,
+            r#"
+schema = "dotrepo/v0.1"
+
+[repo]
+description = """
+[record]
+status = "draft"
+"""
+"#,
+        );
+
+        let hover = hover_response(
+            &state,
+            &TextDocumentPositionParams {
+                text_document: TextDocumentIdentifier { uri },
+                position: LspPosition {
+                    line: 5,
+                    character: 2,
+                },
+            },
+        )
+        .expect("hover succeeds")
+        .expect("hover present");
+
+        assert!(hover.contents.value.contains("`repo.description`"));
+        assert!(!hover.contents.value.contains("### `[record]`"));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

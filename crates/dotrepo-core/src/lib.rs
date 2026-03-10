@@ -2818,7 +2818,8 @@ fn managed_region_id(surface: ManagedSurface) -> &'static str {
 fn contains_managed_region_markers(contents: &str) -> bool {
     contents.lines().any(|line| {
         let trimmed = line.trim();
-        trimmed.starts_with("<!-- dotrepo:begin id=") || trimmed.starts_with("<!-- dotrepo:end id=")
+        parse_managed_marker(trimmed, "begin").is_some()
+            || parse_managed_marker(trimmed, "end").is_some()
     })
 }
 
@@ -2914,12 +2915,17 @@ fn parse_managed_regions(path: &Path, contents: &str) -> Result<Vec<ManagedRegio
 }
 
 fn parse_managed_marker(line: &str, kind: &str) -> Option<String> {
-    let prefix = format!("<!-- dotrepo:{} id=", kind);
-    let value = line.strip_prefix(&prefix)?.strip_suffix(" -->")?;
-    if value.is_empty() {
+    let body = line.strip_prefix("<!--")?.strip_suffix("-->")?.trim();
+    let body = body.strip_prefix("dotrepo:")?;
+    let body = body.trim_start();
+    let body = body.strip_prefix(kind)?.trim_start();
+    let body = body.strip_prefix("id")?.trim_start();
+    let body = body.strip_prefix('=')?.trim();
+
+    if body.is_empty() || body.split_whitespace().count() != 1 {
         None
     } else {
-        Some(value.to_string())
+        Some(body.to_string())
     }
 }
 
@@ -3895,6 +3901,73 @@ bad nesting
             .contains("nested or overlapping managed regions"));
 
         fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn managed_outputs_accept_whitespace_variation_in_markers() {
+        let root = temp_dir("managed-whitespace");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest parses");
+        fs::write(
+            root.join("README.md"),
+            r#"Local preface.
+
+<!--   dotrepo:begin   id = readme.body   -->
+stale managed content
+<!--dotrepo:end id = readme.body-->
+
+Local footer.
+"#,
+        )
+        .expect("README written");
+
+        let outputs = managed_outputs(&root, &manifest, b"schema = \"dotrepo/v0.1\"")
+            .expect("managed outputs render");
+        let readme = outputs
+            .iter()
+            .find(|(path, _)| path == &root.join("README.md"))
+            .expect("README output present")
+            .1
+            .clone();
+
+        assert!(readme.contains("Local preface."));
+        assert!(readme.contains("## Overview"));
+        assert!(readme.contains("Local footer."));
+        assert!(!readme.contains("stale managed content"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn parse_managed_marker_rejects_extra_tokens() {
+        assert_eq!(
+            parse_managed_marker("<!-- dotrepo:begin id=readme.body -->", "begin").as_deref(),
+            Some("readme.body")
+        );
+        assert_eq!(
+            parse_managed_marker("<!-- dotrepo:begin id = readme.body -->", "begin").as_deref(),
+            Some("readme.body")
+        );
+        assert_eq!(
+            parse_managed_marker("<!-- dotrepo:begin id=readme.body trailing -->", "begin"),
+            None
+        );
+        assert_eq!(
+            parse_managed_marker("<!-- dotrepo:begin -->", "begin"),
+            None
+        );
     }
 
     #[test]

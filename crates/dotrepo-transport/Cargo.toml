@@ -1,19 +1,12 @@
 [package]
-name = "dotrepo-mcp"
+name = "dotrepo-transport"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
 
-[[bin]]
-name = "dotrepo-mcp"
-path = "src/main.rs"
-
 [dependencies]
 anyhow.workspace = true
-dotrepo-core = { path = "../dotrepo-core" }
-dotrepo-schema = { path = "../dotrepo-schema" }
-dotrepo-transport = { path = "../dotrepo-transport" }
 serde.workspace = true
 serde_json.workspace = true

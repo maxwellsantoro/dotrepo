@@ -189,8 +189,10 @@ dependencies = [
  "anyhow",
  "dotrepo-core",
  "dotrepo-schema",
+ "dotrepo-transport",
  "serde",
  "serde_json",
+ "toml-span",
  "url",
 ]
 
@@ -201,6 +203,7 @@ dependencies = [
  "anyhow",
  "dotrepo-core",
  "dotrepo-schema",
+ "dotrepo-transport",
  "serde",
  "serde_json",
 ]
@@ -212,6 +215,15 @@ dependencies = [
  "serde",
  "thiserror",
  "toml",
+]
+
+[[package]]
+name = "dotrepo-transport"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -575,6 +587,15 @@ dependencies = [
  "serde_spanned",
  "toml_datetime",
  "toml_edit",
+]
+
+[[package]]
+name = "toml-span"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f22ba417d437b5fa5dcba6c27dbd6c14f38845315b724d89fed73b7a426451b7"
+dependencies = [
+ "smallvec",
 ]
 
 [[package]]

@@ -21,7 +21,15 @@ See [`rfcs/0007-lsp-and-vscode-scope.md`](../rfcs/0007-lsp-and-vscode-scope.md)
 for the first editor feature set and thin-extension model.
 
 ## v0.3+
+- Maintainer claim workflow and index-side authority handoff
 - Bundle mode
 - First-class workspace and relations support
 - Public index site and query API
-- Maintainer claim workflow
+
+The next strategic track after the current v0.2 execution loop is maintainer
+claim workflow and index-side handoff. That work should turn the existing claim,
+supersede, and conflict semantics into a maintainer-controlled product flow
+before broader public index surfaces become the center of gravity.
+
+See [`RFC 0008`](../rfcs/0008-maintainer-claim-lifecycle.md) for the first
+lifecycle draft.
