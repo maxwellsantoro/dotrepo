@@ -37,6 +37,8 @@ The protocol exists to create a shared metadata layer that can be used by mainta
 For v0.1, the only canonical in-repo form is a single root `.repo` file.
 
 Bundle mode is reserved for a future version.
+The first bundle-mode design note lives in
+[`RFC 0014`](./0014-bundle-mode-design.md).
 
 ## Relationship to the index
 

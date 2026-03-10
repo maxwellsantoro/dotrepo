@@ -224,3 +224,18 @@ Follow-on design work should refine:
 - dispute, rejection, withdrawal, and correction rules
 - claim-history visibility in index and machine-facing outputs
 - phased implementation planning
+
+The first claim-request record draft lives in
+[`RFC 0009`](./0009-claim-request-and-audit-trail.md).
+
+Overlay-to-canonical handoff outcomes are refined further in
+[`RFC 0010`](./0010-overlay-to-canonical-handoff.md).
+
+Failure-path and correction rules are refined further in
+[`RFC 0011`](./0011-claim-failure-and-correction-rules.md).
+
+Claim-history and superseded-overlay visibility rules are refined further in
+[`RFC 0012`](./0012-claim-history-and-superseded-overlay-visibility.md).
+
+Phased implementation planning is refined further in
+[`RFC 0013`](./0013-phased-maintainer-claim-implementation-plan.md).

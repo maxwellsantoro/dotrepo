@@ -33,3 +33,12 @@ before broader public index surfaces become the center of gravity.
 
 See [`RFC 0008`](../rfcs/0008-maintainer-claim-lifecycle.md) for the first
 lifecycle draft.
+See [`RFC 0013`](../rfcs/0013-phased-maintainer-claim-implementation-plan.md)
+for the phased implementation order from index artifacts to reviewer workflow
+and later public claim surfaces.
+See [`RFC 0014`](../rfcs/0014-bundle-mode-design.md) for the first bundle-mode
+design note.
+See [`RFC 0015`](../rfcs/0015-workspace-and-relations-model.md) for the first
+workspace and relations design direction.
+See [`RFC 0016`](../rfcs/0016-public-index-site-and-query-api.md) for the first
+public index site and query-API design direction.

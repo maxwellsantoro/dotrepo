@@ -100,6 +100,8 @@ For v0.1, `confidence` remains an open string field. The reference vocabulary is
 
 ### `[relations]`
 Reserved namespace for future cross-repo and workspace semantics.
+The first design direction for that namespace lives in
+[`RFC 0015`](./0015-workspace-and-relations-model.md).
 
 ### `[x]`
 Reserved extension namespace preserved by tooling but not validated as part of the core schema.
