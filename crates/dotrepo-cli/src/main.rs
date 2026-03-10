@@ -1,9 +1,10 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    generate_check_repository, import_repository, inspect_surface_states, load_manifest_document,
-    load_manifest_from_root, managed_outputs, query_repository, trust_repository,
-    validate_index_root, validate_manifest, validate_repository, ConflictRelationship, ImportMode,
+    generate_check_repository, import_repository, inspect_claim_directory, inspect_surface_states,
+    load_manifest_document, load_manifest_from_root, managed_outputs, query_repository,
+    trust_repository, validate_index_root, validate_manifest, validate_repository,
+    ClaimHandoffOutcome, ClaimInspectionReport, ConflictRelationship, ImportMode,
     IndexFindingSeverity, ManagedFileState, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
@@ -78,6 +79,14 @@ enum Command {
         #[arg(long)]
         json: bool,
     },
+    /// Inspect one maintainer-claim directory from the index.
+    Claim {
+        /// Claim directory relative to --root or an absolute path.
+        path: PathBuf,
+        /// Emit the full claim inspection report as JSON.
+        #[arg(long)]
+        json: bool,
+    },
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, ValueEnum)]
@@ -128,6 +137,7 @@ fn run() -> Result<()> {
         Command::Generate { check } => cmd_generate(cli.root, check),
         Command::Doctor => cmd_doctor(cli.root),
         Command::Trust { json } => cmd_trust(cli.root, json),
+        Command::Claim { path, json } => cmd_claim(cli.root, path, json),
     }
 }
 
@@ -359,6 +369,22 @@ fn cmd_trust(root: PathBuf, json: bool) -> Result<()> {
     Ok(())
 }
 
+fn cmd_claim(root: PathBuf, path: PathBuf, json: bool) -> Result<()> {
+    let claim_dir = if path.is_absolute() {
+        path
+    } else {
+        root.join(path)
+    };
+    let report = inspect_claim_directory(&root, &claim_dir)?;
+    if json {
+        println!("{}", serde_json::to_string_pretty(&report)?);
+        return Ok(());
+    }
+
+    println!("{}", format_claim_report(&report));
+    Ok(())
+}
+
 fn format_trust_report(report: &TrustReport) -> String {
     let selected = &report.selection.record;
     let mut lines = vec![
@@ -377,6 +403,7 @@ fn format_trust_report(report: &TrustReport) -> String {
         "",
         selected.record.source.as_deref(),
         selected.record.trust.as_ref(),
+        selected.claim.as_ref(),
     );
 
     if !report.conflicts.is_empty() {
@@ -401,7 +428,76 @@ fn format_trust_report(report: &TrustReport) -> String {
                 "  ",
                 conflict.record.record.source.as_deref(),
                 conflict.record.record.trust.as_ref(),
+                conflict.record.claim.as_ref(),
             );
+        }
+    }
+
+    lines.join("\n")
+}
+
+fn format_claim_report(report: &ClaimInspectionReport) -> String {
+    let mut lines = vec![
+        format!("claim: {}", report.claim_path),
+        format!("state: {:?}", report.state),
+        format!("kind: {:?}", report.kind),
+        format!(
+            "identity: {}/{}/{}",
+            report.identity.host, report.identity.owner, report.identity.repo
+        ),
+        format!(
+            "claimant: {} ({})",
+            report.claimant.display_name, report.claimant.asserted_role
+        ),
+    ];
+
+    if let Some(contact) = &report.claimant.contact {
+        lines.push(format!("contact: {}", contact));
+    }
+    if let Some(review_path) = &report.review_path {
+        lines.push(format!("review: {}", review_path));
+    }
+    if let Some(handoff) = report.target.handoff {
+        lines.push(format!("handoff: {}", format_claim_handoff(handoff)));
+    }
+    if !report.target.index_paths.is_empty() {
+        lines.push("target index paths:".into());
+        for path in &report.target.index_paths {
+            lines.push(format!("- {}", path));
+        }
+    }
+    if !report.target.record_sources.is_empty() {
+        lines.push("target record sources:".into());
+        for source in &report.target.record_sources {
+            lines.push(format!("- {}", source));
+        }
+    }
+    if let Some(url) = &report.target.canonical_repo_url {
+        lines.push(format!("canonical repo url: {}", url));
+    }
+    if let Some(resolution) = &report.resolution {
+        if let Some(path) = &resolution.canonical_record_path {
+            lines.push(format!("canonical record path: {}", path));
+        }
+        if let Some(path) = &resolution.canonical_mirror_path {
+            lines.push(format!("canonical mirror path: {}", path));
+        }
+        if let Some(path) = &resolution.result_event {
+            lines.push(format!("result event: {}", path));
+        }
+    }
+    if !report.events.is_empty() {
+        lines.push("events:".into());
+        for event in &report.events {
+            let mut line = format!(
+                "- [{}] {:?} at {} by {}",
+                event.sequence, event.kind, event.timestamp, event.actor
+            );
+            if let (Some(from), Some(to)) = (&event.from, &event.to) {
+                line.push_str(&format!(" ({from:?} -> {to:?})"));
+            }
+            lines.push(line);
+            lines.push(format!("  {}", event.summary));
         }
     }
 
@@ -434,6 +530,7 @@ fn append_record_details(
     indent: &str,
     source: Option<&str>,
     trust: Option<&Trust>,
+    claim: Option<&dotrepo_core::RecordClaimContext>,
 ) {
     lines.push(format!("{}source: {}", indent, source.unwrap_or("none")));
     if let Some(trust) = trust {
@@ -457,6 +554,15 @@ fn append_record_details(
         lines.push(format!("{}provenance: none", indent));
         lines.push(format!("{}notes: none", indent));
     }
+    if let Some(claim) = claim {
+        lines.push(format!(
+            "{}claim: {:?} ({})",
+            indent,
+            claim.state,
+            format_claim_handoff(claim.handoff)
+        ));
+        lines.push(format!("{}claim path: {}", indent, claim.claim_path));
+    }
 }
 
 fn format_selection_reason(reason: SelectionReason) -> &'static str {
@@ -478,6 +584,17 @@ fn format_conflict_relationship(relationship: ConflictRelationship) -> &'static 
     match relationship {
         ConflictRelationship::Superseded => "superseded",
         ConflictRelationship::Parallel => "parallel",
+    }
+}
+
+fn format_claim_handoff(handoff: ClaimHandoffOutcome) -> &'static str {
+    match handoff {
+        ClaimHandoffOutcome::PendingCanonical => "pending_canonical",
+        ClaimHandoffOutcome::Superseded => "superseded",
+        ClaimHandoffOutcome::Parallel => "parallel",
+        ClaimHandoffOutcome::Rejected => "rejected",
+        ClaimHandoffOutcome::Withdrawn => "withdrawn",
+        ClaimHandoffOutcome::Disputed => "disputed",
     }
 }
 
@@ -516,6 +633,56 @@ mod tests {
         let err = format_query_value(&Value::Array(vec![Value::String("orbit".into())]), true)
             .expect_err("raw composite values should fail");
         assert!(err.to_string().contains("--raw"));
+    }
+
+    #[test]
+    fn format_claim_report_surfaces_handoff_and_events() {
+        let report = ClaimInspectionReport {
+            claim_path: "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/claim.toml".into(),
+            state: dotrepo_core::ClaimState::Accepted,
+            kind: dotrepo_core::ClaimKind::MaintainerAuthority,
+            identity: dotrepo_core::ClaimIdentity {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+            },
+            claimant: dotrepo_core::Claimant {
+                display_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: Some("maintainers@acme.dev".into()),
+            },
+            target: dotrepo_core::ClaimTargetInspection {
+                index_paths: vec!["repos/github.com/acme/widget/record.toml".into()],
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: Some("https://github.com/acme/widget".into()),
+                handoff: Some(ClaimHandoffOutcome::Superseded),
+            },
+            resolution: Some(dotrepo_core::ClaimResolution {
+                canonical_record_path: Some(".repo".into()),
+                canonical_mirror_path: Some("repos/github.com/acme/widget/record.toml".into()),
+                result_event: Some("events/0002-accepted.toml".into()),
+            }),
+            review_path: Some(
+                "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/review.md"
+                    .into(),
+            ),
+            events: vec![dotrepo_core::ClaimEventInspection {
+                path: "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/events/0002-accepted.toml".into(),
+                sequence: 2,
+                kind: dotrepo_core::ClaimEventKind::Accepted,
+                timestamp: "2026-03-12T09:15:00Z".into(),
+                actor: "index-reviewer".into(),
+                summary: "Accepted claim.".into(),
+                from: Some(dotrepo_core::ClaimState::Submitted),
+                to: Some(dotrepo_core::ClaimState::Accepted),
+            }],
+        };
+
+        let rendered = format_claim_report(&report);
+        assert!(rendered.contains("handoff: superseded"));
+        assert!(rendered.contains("target index paths:"));
+        assert!(rendered.contains("events:"));
+        assert!(rendered.contains("Accepted"));
     }
 
     #[test]

@@ -1,0 +1,17 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/acme/widget"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "widget"
+description = "Reviewed overlay for claim fixtures"
+homepage = "https://github.com/acme/widget"
+build = "cargo build --workspace"
+test = "cargo test --workspace"

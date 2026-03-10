@@ -1,0 +1,58 @@
+[
+  {
+    "fixture": "accepted-clean",
+    "claim_id": "2026-03-10-maintainer-claim-01",
+    "state": "accepted",
+    "event_count": 2,
+    "handoff": "superseded",
+    "valid_index": true
+  },
+  {
+    "fixture": "pending-canonical",
+    "claim_id": "2026-03-11-maintainer-claim-01",
+    "state": "accepted",
+    "event_count": 2,
+    "handoff": "pending_canonical",
+    "valid_index": true
+  },
+  {
+    "fixture": "disputed",
+    "claim_id": "2026-03-12-maintainer-claim-01",
+    "state": "disputed",
+    "event_count": 2,
+    "handoff": "disputed",
+    "valid_index": true
+  },
+  {
+    "fixture": "rejected",
+    "claim_id": "2026-03-13-maintainer-claim-01",
+    "state": "rejected",
+    "event_count": 2,
+    "handoff": "rejected",
+    "valid_index": true
+  },
+  {
+    "fixture": "withdrawn",
+    "claim_id": "2026-03-14-maintainer-claim-01",
+    "state": "withdrawn",
+    "event_count": 2,
+    "handoff": "withdrawn",
+    "valid_index": true
+  },
+  {
+    "fixture": "corrected",
+    "claim_id": "2026-03-15-maintainer-claim-01",
+    "state": "accepted",
+    "event_count": 3,
+    "handoff": "pending_canonical",
+    "valid_index": true
+  },
+  {
+    "fixture": "invalid-history",
+    "claim_id": "2026-03-16-maintainer-claim-01",
+    "state": "accepted",
+    "event_count": 1,
+    "handoff": "pending_canonical",
+    "valid_index": false
+  }
+]

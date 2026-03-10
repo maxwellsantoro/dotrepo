@@ -1,0 +1,14 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "disputed"
+timestamp = "2026-03-13T09:00:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "disputed"
+
+[summary]
+text = "Claim remains disputed pending additional evidence."

@@ -1,0 +1,14 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "withdrawn"
+timestamp = "2026-03-14T10:00:00Z"
+actor = "claimant"
+
+[transition]
+from = "submitted"
+to = "withdrawn"
+
+[summary]
+text = "Claim withdrawn by claimant."

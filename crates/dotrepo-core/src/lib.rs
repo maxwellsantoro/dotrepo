@@ -3,7 +3,7 @@ use dotrepo_schema::{
     parse_manifest, render_manifest, Compat, CompatMode, Docs, GitHubCompat, Manifest, Owners,
     Readme, ReadmeCustomSection, Record, RecordMode, RecordStatus, Relations, Repo, Trust,
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 use std::collections::BTreeSet;
@@ -11,6 +11,8 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 const SUPPORTED_SCHEMA: &str = "dotrepo/v0.1";
+const SUPPORTED_CLAIM_SCHEMA: &str = "dotrepo-claim/v0";
+const SUPPORTED_CLAIM_EVENT_SCHEMA: &str = "dotrepo-claim-event/v0";
 const GENERATOR_NAME: &str = "dotrepo";
 const GENERATOR_VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -104,6 +106,8 @@ pub enum ConflictRelationship {
 pub struct SelectedRecord {
     pub manifest_path: String,
     pub record: RecordSummary,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub claim: Option<RecordClaimContext>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -153,6 +157,214 @@ pub struct TrustReport {
     pub manifest_path: String,
     pub selection: SelectionReport,
     pub conflicts: Vec<ConflictReport>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct RecordClaimContext {
+    pub id: String,
+    pub state: ClaimState,
+    pub handoff: ClaimHandoffOutcome,
+    pub claim_path: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub latest_event: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub review_path: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimRecord {
+    pub schema: String,
+    pub claim: ClaimMetadata,
+    pub identity: ClaimIdentity,
+    pub claimant: Claimant,
+    pub target: ClaimTarget,
+    #[serde(default)]
+    pub resolution: Option<ClaimResolution>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimMetadata {
+    pub id: String,
+    pub kind: ClaimKind,
+    pub state: ClaimState,
+    pub created_at: String,
+    pub updated_at: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum ClaimKind {
+    MaintainerAuthority,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum ClaimState {
+    Draft,
+    Submitted,
+    InReview,
+    Accepted,
+    Rejected,
+    Withdrawn,
+    Disputed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimIdentity {
+    pub host: String,
+    pub owner: String,
+    pub repo: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct Claimant {
+    pub display_name: String,
+    pub asserted_role: String,
+    #[serde(default)]
+    pub contact: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimTarget {
+    #[serde(default)]
+    pub index_paths: Vec<String>,
+    #[serde(default)]
+    pub record_sources: Vec<String>,
+    #[serde(default)]
+    pub canonical_repo_url: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimResolution {
+    #[serde(default)]
+    pub canonical_record_path: Option<String>,
+    #[serde(default)]
+    pub canonical_mirror_path: Option<String>,
+    #[serde(default)]
+    pub result_event: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimEvent {
+    pub schema: String,
+    pub event: ClaimEventMetadata,
+    #[serde(default)]
+    pub transition: Option<ClaimTransition>,
+    pub summary: ClaimSummary,
+    #[serde(default)]
+    pub links: Option<ClaimEventLinks>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimEventMetadata {
+    pub sequence: u32,
+    pub kind: ClaimEventKind,
+    pub timestamp: String,
+    pub actor: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum ClaimEventKind {
+    Submitted,
+    ReviewStarted,
+    Accepted,
+    Rejected,
+    Withdrawn,
+    Disputed,
+    Corrected,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimTransition {
+    pub from: ClaimState,
+    pub to: ClaimState,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimSummary {
+    pub text: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ClaimEventLinks {
+    #[serde(default)]
+    pub claim: Option<String>,
+    #[serde(default)]
+    pub review_notes: Option<String>,
+    #[serde(default)]
+    pub canonical_record_path: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct LoadedClaimEvent {
+    pub path: String,
+    pub event: ClaimEvent,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct LoadedClaimDirectory {
+    pub claim_path: String,
+    pub claim: ClaimRecord,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub review_path: Option<String>,
+    pub events: Vec<LoadedClaimEvent>,
+}
+
+#[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum ClaimHandoffOutcome {
+    PendingCanonical,
+    Superseded,
+    Parallel,
+    Rejected,
+    Withdrawn,
+    Disputed,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct ClaimInspectionReport {
+    pub claim_path: String,
+    pub state: ClaimState,
+    pub kind: ClaimKind,
+    pub identity: ClaimIdentity,
+    pub claimant: Claimant,
+    pub target: ClaimTargetInspection,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub resolution: Option<ClaimResolution>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub review_path: Option<String>,
+    pub events: Vec<ClaimEventInspection>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct ClaimTargetInspection {
+    pub index_paths: Vec<String>,
+    pub record_sources: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub canonical_repo_url: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub handoff: Option<ClaimHandoffOutcome>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct ClaimEventInspection {
+    pub path: String,
+    pub sequence: u32,
+    pub kind: ClaimEventKind,
+    pub timestamp: String,
+    pub actor: String,
+    pub summary: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub from: Option<ClaimState>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub to: Option<ClaimState>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -249,14 +461,93 @@ struct RepositoryIdentity {
 #[derive(Debug, Clone)]
 struct CandidateManifest {
     manifest_path: String,
+    path: PathBuf,
     manifest: Manifest,
     identity: Option<RepositoryIdentity>,
     rank: u8,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct ClaimDirectoryIdentity {
+    host: String,
+    owner: String,
+    repo: String,
+    claim_id: String,
+}
+
 pub fn load_manifest_document(root: &Path) -> Result<LoadedManifest> {
     let path = manifest_path(root);
     load_manifest_file(&path)
+}
+
+pub fn parse_claim_record(input: &str) -> Result<ClaimRecord> {
+    let claim = toml::from_str::<ClaimRecord>(input)
+        .map_err(|e| anyhow!("failed to parse claim record: {}", e))?;
+    validate_claim_record(&claim)?;
+    Ok(claim)
+}
+
+pub fn parse_claim_event(input: &str) -> Result<ClaimEvent> {
+    let event =
+        toml::from_str::<ClaimEvent>(input).map_err(|e| anyhow!("failed to parse claim event: {}", e))?;
+    validate_claim_event(&event)?;
+    Ok(event)
+}
+
+pub fn load_claim_directory(root: &Path, claim_dir: &Path) -> Result<LoadedClaimDirectory> {
+    let claim_path = claim_dir.join("claim.toml");
+    if !claim_path.is_file() {
+        bail!("claim directory is missing claim.toml: {}", claim_path.display());
+    }
+
+    let claim_text = fs::read_to_string(&claim_path)
+        .map_err(|e| anyhow!("failed to read {}: {}", claim_path.display(), e))?;
+    let claim = parse_claim_record(&claim_text)
+        .map_err(|e| anyhow!("{}: {}", claim_path.display(), e))?;
+
+    let review_path = claim_dir.join("review.md");
+    let review = review_path
+        .is_file()
+        .then(|| display_path(root, &review_path));
+
+    let events_dir = claim_dir.join("events");
+    let mut event_paths = Vec::new();
+    if events_dir.is_dir() {
+        for entry in fs::read_dir(&events_dir)
+            .map_err(|e| anyhow!("failed to read {}: {}", events_dir.display(), e))?
+        {
+            let entry = entry
+                .map_err(|e| anyhow!("failed to inspect {}: {}", events_dir.display(), e))?;
+            let path = entry.path();
+            if path.extension().and_then(|ext| ext.to_str()) == Some("toml") {
+                event_paths.push(path);
+            }
+        }
+        event_paths.sort();
+    }
+
+    let mut events = Vec::new();
+    for path in event_paths {
+        let text = fs::read_to_string(&path)
+            .map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
+        let event = parse_claim_event(&text).map_err(|e| anyhow!("{}: {}", path.display(), e))?;
+        events.push(LoadedClaimEvent {
+            path: display_path(root, &path),
+            event,
+        });
+    }
+
+    Ok(LoadedClaimDirectory {
+        claim_path: display_path(root, &claim_path),
+        claim,
+        review_path: review,
+        events,
+    })
+}
+
+pub fn inspect_claim_directory(root: &Path, claim_dir: &Path) -> Result<ClaimInspectionReport> {
+    let loaded = load_claim_directory(root, claim_dir)?;
+    Ok(claim_inspection_report(&loaded))
 }
 
 fn load_manifest_file(path: &Path) -> Result<LoadedManifest> {
@@ -291,10 +582,11 @@ pub fn record_summary(manifest: &Manifest) -> RecordSummary {
     }
 }
 
-fn selected_record(candidate: &CandidateManifest) -> SelectedRecord {
+fn selected_record(root: &Path, candidate: &CandidateManifest) -> SelectedRecord {
     SelectedRecord {
         manifest_path: candidate.manifest_path.clone(),
         record: record_summary(&candidate.manifest),
+        claim: candidate_claim_context(root, candidate),
     }
 }
 
@@ -317,6 +609,224 @@ fn resolve_selection_reason(
     } else {
         SelectionReason::HigherStatusOverlay
     }
+}
+
+fn claim_inspection_report(loaded: &LoadedClaimDirectory) -> ClaimInspectionReport {
+    ClaimInspectionReport {
+        claim_path: loaded.claim_path.clone(),
+        state: loaded.claim.claim.state.clone(),
+        kind: loaded.claim.claim.kind.clone(),
+        identity: loaded.claim.identity.clone(),
+        claimant: loaded.claim.claimant.clone(),
+        target: ClaimTargetInspection {
+            index_paths: loaded.claim.target.index_paths.clone(),
+            record_sources: loaded.claim.target.record_sources.clone(),
+            canonical_repo_url: loaded.claim.target.canonical_repo_url.clone(),
+            handoff: derived_claim_handoff(&loaded.claim),
+        },
+        resolution: loaded.claim.resolution.clone(),
+        review_path: loaded.review_path.clone(),
+        events: loaded
+            .events
+            .iter()
+            .map(|loaded_event| ClaimEventInspection {
+                path: loaded_event.path.clone(),
+                sequence: loaded_event.event.event.sequence,
+                kind: loaded_event.event.event.kind.clone(),
+                timestamp: loaded_event.event.event.timestamp.clone(),
+                actor: loaded_event.event.event.actor.clone(),
+                summary: loaded_event.event.summary.text.clone(),
+                from: loaded_event
+                    .event
+                    .transition
+                    .as_ref()
+                    .map(|transition| transition.from.clone()),
+                to: loaded_event
+                    .event
+                    .transition
+                    .as_ref()
+                    .map(|transition| transition.to.clone()),
+            })
+            .collect(),
+    }
+}
+
+fn derived_claim_handoff(claim: &ClaimRecord) -> Option<ClaimHandoffOutcome> {
+    match claim.claim.state {
+        ClaimState::Draft | ClaimState::Submitted | ClaimState::InReview => None,
+        ClaimState::Accepted => {
+            let has_canonical_link = claim
+                .resolution
+                .as_ref()
+                .map(|resolution| {
+                    resolution.canonical_record_path.is_some()
+                        || resolution.canonical_mirror_path.is_some()
+                })
+                .unwrap_or(false);
+            Some(if has_canonical_link {
+                ClaimHandoffOutcome::Superseded
+            } else {
+                ClaimHandoffOutcome::PendingCanonical
+            })
+        }
+        ClaimState::Rejected => Some(ClaimHandoffOutcome::Rejected),
+        ClaimState::Withdrawn => Some(ClaimHandoffOutcome::Withdrawn),
+        ClaimState::Disputed => Some(ClaimHandoffOutcome::Disputed),
+    }
+}
+
+fn candidate_claim_context(root: &Path, candidate: &CandidateManifest) -> Option<RecordClaimContext> {
+    let handoff_root = match candidate.path.parent() {
+        Some(parent) => parent.join("claims"),
+        None => return None,
+    };
+    if !handoff_root.is_dir() {
+        return None;
+    }
+
+    let mut claim_dirs = fs::read_dir(&handoff_root)
+        .ok()?
+        .filter_map(|entry| entry.ok())
+        .filter_map(|entry| entry.file_type().ok().filter(|ty| ty.is_dir()).map(|_| entry.path()))
+        .collect::<Vec<_>>();
+    claim_dirs.sort();
+
+    let manifest_path = candidate.manifest_path.as_str();
+    let mut matching = claim_dirs
+        .into_iter()
+        .filter_map(|claim_dir| load_claim_directory(root, &claim_dir).ok())
+        .filter_map(|loaded| {
+            let handoff = derived_claim_handoff(&loaded.claim)?;
+            if matches!(
+                handoff,
+                ClaimHandoffOutcome::Rejected | ClaimHandoffOutcome::Withdrawn
+            ) {
+                return None;
+            }
+            if !claim_matches_candidate(&loaded.claim, manifest_path, candidate) {
+                return None;
+            }
+            Some((loaded, handoff))
+        })
+        .collect::<Vec<_>>();
+
+    matching.sort_by(|left, right| {
+        right
+            .0
+            .claim
+            .claim
+            .updated_at
+            .cmp(&left.0.claim.claim.updated_at)
+            .then_with(|| left.0.claim_path.cmp(&right.0.claim_path))
+    });
+
+    let (loaded, handoff) = matching.into_iter().next()?;
+    Some(RecordClaimContext {
+        id: loaded.claim.claim.id,
+        state: loaded.claim.claim.state,
+        handoff,
+        claim_path: loaded.claim_path,
+        latest_event: loaded.events.last().map(|event| event.path.clone()),
+        review_path: loaded.review_path,
+    })
+}
+
+fn claim_matches_candidate(
+    claim: &ClaimRecord,
+    manifest_path: &str,
+    candidate: &CandidateManifest,
+) -> bool {
+    if claim
+        .target
+        .index_paths
+        .iter()
+        .any(|path| path == manifest_path)
+    {
+        return true;
+    }
+
+    if claim
+        .resolution
+        .as_ref()
+        .and_then(|resolution| resolution.canonical_mirror_path.as_deref())
+        .is_some_and(|path| path == manifest_path)
+    {
+        return true;
+    }
+
+    if claim
+        .resolution
+        .as_ref()
+        .and_then(|resolution| resolution.canonical_record_path.as_deref())
+        .is_some_and(|path| path == manifest_path)
+    {
+        return true;
+    }
+
+    if candidate.manifest.record.source.as_deref().is_some_and(|source| {
+        claim.target.record_sources.iter().any(|record_source| record_source == source)
+    }) {
+        return true;
+    }
+
+    candidate.identity.as_ref().is_some_and(|identity| {
+        claim.identity.host == identity.host
+            && claim.identity.owner == identity.owner
+            && claim.identity.repo == identity.repo
+    })
+}
+
+fn validate_claim_record(claim: &ClaimRecord) -> Result<()> {
+    if claim.schema != SUPPORTED_CLAIM_SCHEMA {
+        bail!(
+            "unsupported claim schema `{}`; expected {}",
+            claim.schema,
+            SUPPORTED_CLAIM_SCHEMA
+        );
+    }
+
+    require_non_empty("claim.id", &claim.claim.id)?;
+    require_non_empty("claim.created_at", &claim.claim.created_at)?;
+    require_non_empty("claim.updated_at", &claim.claim.updated_at)?;
+    require_non_empty("identity.host", &claim.identity.host)?;
+    require_non_empty("identity.owner", &claim.identity.owner)?;
+    require_non_empty("identity.repo", &claim.identity.repo)?;
+    require_non_empty("claimant.display_name", &claim.claimant.display_name)?;
+    require_non_empty("claimant.asserted_role", &claim.claimant.asserted_role)?;
+    if claim.target.index_paths.is_empty()
+        && claim.target.record_sources.is_empty()
+        && claim.target.canonical_repo_url.is_none()
+    {
+        bail!(
+            "claim.target must include at least one index path, record source, or canonical repo url"
+        );
+    }
+    Ok(())
+}
+
+fn validate_claim_event(event: &ClaimEvent) -> Result<()> {
+    if event.schema != SUPPORTED_CLAIM_EVENT_SCHEMA {
+        bail!(
+            "unsupported claim event schema `{}`; expected {}",
+            event.schema,
+            SUPPORTED_CLAIM_EVENT_SCHEMA
+        );
+    }
+
+    if event.event.sequence == 0 {
+        bail!("event.sequence must be greater than zero");
+    }
+    require_non_empty("event.timestamp", &event.event.timestamp)?;
+    require_non_empty("event.actor", &event.event.actor)?;
+    require_non_empty("summary.text", &event.summary.text)?;
+    Ok(())
+}
+
+fn require_non_empty(field: &str, value: &str) -> Result<()> {
+    if value.trim().is_empty() {
+        bail!("{field} must not be empty");
+    }
+    Ok(())
 }
 
 fn resolve_conflict_reason(
@@ -435,6 +945,7 @@ fn load_descendant_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
 fn candidate_from_document(root: &Path, document: &LoadedManifest) -> CandidateManifest {
     CandidateManifest {
         manifest_path: display_path(root, &document.path),
+        path: document.path.clone(),
         rank: precedence_rank(&document.manifest),
         identity: manifest_identity(root, document),
         manifest: document.manifest.clone(),
@@ -568,7 +1079,7 @@ pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
         value,
         selection: SelectionReport {
             reason,
-            record: selected_record(selected),
+            record: selected_record(root, selected),
         },
         conflicts: candidates
             .iter()
@@ -581,7 +1092,7 @@ pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
                 },
                 reason: resolve_conflict_reason(reason, selected, candidate),
                 value: resolve_competing_value(&candidate.manifest, path),
-                record: selected_record(candidate),
+                record: selected_record(root, candidate),
             })
             .collect(),
     })
@@ -596,7 +1107,7 @@ pub fn trust_repository(root: &Path) -> Result<TrustReport> {
         manifest_path: selected.manifest_path.clone(),
         selection: SelectionReport {
             reason,
-            record: selected_record(selected),
+            record: selected_record(root, selected),
         },
         conflicts: candidates
             .iter()
@@ -609,7 +1120,7 @@ pub fn trust_repository(root: &Path) -> Result<TrustReport> {
                 },
                 reason: resolve_conflict_reason(reason, selected, candidate),
                 value: None,
-                record: selected_record(candidate),
+                record: selected_record(root, candidate),
             })
             .collect(),
     })
@@ -2268,6 +2779,9 @@ pub fn validate_index_root(index_root: &Path) -> Result<Vec<IndexFinding>> {
     let mut record_dirs = Vec::new();
     collect_record_dirs(&repos_root, &mut record_dirs)?;
     record_dirs.sort();
+    let mut claim_dirs = Vec::new();
+    collect_claim_dirs(&repos_root, &mut claim_dirs)?;
+    claim_dirs.sort();
 
     let mut findings = Vec::new();
     for record_dir in record_dirs {
@@ -2296,6 +2810,10 @@ pub fn validate_index_root(index_root: &Path) -> Result<Vec<IndexFinding>> {
             &record_dir,
             &document.manifest,
         ));
+    }
+
+    for claim_dir in claim_dirs {
+        findings.extend(validate_claim_directory(index_root, &claim_dir));
     }
 
     Ok(findings)
@@ -2453,6 +2971,48 @@ fn validate_index_entry(
         relative_record,
         manifest,
         evidence.as_deref().unwrap_or(""),
+    ));
+
+    findings
+}
+
+fn validate_claim_directory(index_root: &Path, claim_dir: &Path) -> Vec<IndexFinding> {
+    let mut findings = Vec::new();
+    let claim_path = claim_dir.join("claim.toml");
+    let relative_claim = claim_path
+        .strip_prefix(index_root)
+        .unwrap_or(&claim_path)
+        .to_path_buf();
+
+    let directory_identity = match claim_directory_identity(index_root, claim_dir) {
+        Ok(identity) => identity,
+        Err(message) => {
+            findings.push(index_error(relative_claim, message.to_string()));
+            return findings;
+        }
+    };
+
+    let loaded = match load_claim_directory(index_root, claim_dir) {
+        Ok(loaded) => loaded,
+        Err(err) => {
+            findings.push(index_error(relative_claim, err.to_string()));
+            return findings;
+        }
+    };
+
+    findings.extend(validate_claim_identity_alignment(
+        &relative_claim,
+        &directory_identity,
+        &loaded.claim,
+    ));
+    findings.extend(validate_claim_event_history(
+        &relative_claim,
+        &loaded.claim,
+        &loaded.events,
+    ));
+    findings.extend(validate_claim_resolution_consistency(
+        &relative_claim,
+        &loaded.claim,
     ));
 
     findings
@@ -3070,6 +3630,344 @@ fn collect_record_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
     Ok(())
 }
 
+fn collect_claim_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
+    for entry in
+        fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
+    {
+        let entry = entry?;
+        let path = entry.path();
+        let file_type = entry.file_type()?;
+        if file_type.is_dir() {
+            if path.file_name().and_then(|name| name.to_str()) == Some("claims") {
+                for claim_entry in fs::read_dir(&path)
+                    .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?
+                {
+                    let claim_entry = claim_entry?;
+                    if claim_entry.file_type()?.is_dir() {
+                        out.push(claim_entry.path());
+                    }
+                }
+            } else {
+                collect_claim_dirs(&path, out)?;
+            }
+        }
+    }
+    Ok(())
+}
+
+fn claim_directory_identity(index_root: &Path, claim_dir: &Path) -> Result<ClaimDirectoryIdentity> {
+    let relative = claim_dir
+        .strip_prefix(index_root)
+        .map_err(|_| anyhow!("claim directories must live under index_root/repos/<host>/<owner>/<repo>/claims/<id>/"))?;
+    let segments = relative
+        .iter()
+        .map(|segment| segment.to_string_lossy().to_string())
+        .collect::<Vec<_>>();
+    if segments.len() != 6
+        || segments[0] != "repos"
+        || segments[4] != "claims"
+        || segments[5].trim().is_empty()
+    {
+        bail!(
+            "claim directories must live under repos/<host>/<owner>/<repo>/claims/<claim-id>/"
+        );
+    }
+
+    Ok(ClaimDirectoryIdentity {
+        host: segments[1].clone(),
+        owner: segments[2].clone(),
+        repo: segments[3].clone(),
+        claim_id: segments[5].clone(),
+    })
+}
+
+fn validate_claim_identity_alignment(
+    relative_claim: &Path,
+    expected: &ClaimDirectoryIdentity,
+    claim: &ClaimRecord,
+) -> Vec<IndexFinding> {
+    let mut findings = Vec::new();
+
+    if claim.identity.host != expected.host
+        || claim.identity.owner != expected.owner
+        || claim.identity.repo != expected.repo
+    {
+        findings.push(index_error(
+            relative_claim.to_path_buf(),
+            format!(
+                "claim.identity resolves to {}/{}/{}, but claim path is repos/{}/{}/{}/claims/{}/claim.toml",
+                claim.identity.host,
+                claim.identity.owner,
+                claim.identity.repo,
+                expected.host,
+                expected.owner,
+                expected.repo,
+                expected.claim_id
+            ),
+        ));
+    }
+
+    if claim.claim.id.trim().is_empty() {
+        findings.push(index_error(
+            relative_claim.to_path_buf(),
+            "claim.id must not be empty",
+        ));
+    } else {
+        let expected_prefix = format!("{}/{}/{}/", expected.host, expected.owner, expected.repo);
+        if !claim.claim.id.starts_with(&expected_prefix) {
+            findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "claim.id must start with {expected_prefix} to match the containing repository identity"
+                ),
+            ));
+        }
+    }
+
+    for index_path in &claim.target.index_paths {
+        match parse_index_record_identity(index_path) {
+            Some(identity)
+                if identity.host == expected.host
+                    && identity.owner == expected.owner
+                    && identity.repo == expected.repo => {}
+            Some(identity) => findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "target.index_paths includes {}, which resolves to {}/{}/{}, but claim path is repos/{}/{}/{}",
+                    index_path, identity.host, identity.owner, identity.repo, expected.host, expected.owner, expected.repo
+                ),
+            )),
+            None => findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "target.index_paths includes `{}`; expected repos/<host>/<owner>/<repo>/record.toml",
+                    index_path
+                ),
+            )),
+        }
+    }
+
+    for record_source in &claim.target.record_sources {
+        match repository_identity(record_source) {
+            Some((host, owner, repo))
+                if host == expected.host && owner == expected.owner && repo == expected.repo => {}
+            Some((host, owner, repo)) => findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "target.record_sources includes {}, which resolves to {}/{}/{}, but claim path is repos/{}/{}/{}",
+                    record_source, host, owner, repo, expected.host, expected.owner, expected.repo
+                ),
+            )),
+            None => findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "target.record_sources includes `{}`; expected an absolute repository URL",
+                    record_source
+                ),
+            )),
+        }
+    }
+
+    if let Some(canonical_repo_url) = &claim.target.canonical_repo_url {
+        match repository_identity(canonical_repo_url) {
+            Some((host, owner, repo))
+                if host == expected.host && owner == expected.owner && repo == expected.repo => {}
+            Some((host, owner, repo)) => findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "target.canonical_repo_url resolves to {}/{}/{}, but claim path is repos/{}/{}/{}",
+                    host, owner, repo, expected.host, expected.owner, expected.repo
+                ),
+            )),
+            None => findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "target.canonical_repo_url `{}` must be an absolute repository URL",
+                    canonical_repo_url
+                ),
+            )),
+        }
+    }
+
+    findings
+}
+
+fn validate_claim_event_history(
+    relative_claim: &Path,
+    claim: &ClaimRecord,
+    events: &[LoadedClaimEvent],
+) -> Vec<IndexFinding> {
+    let mut findings = Vec::new();
+
+    if events.is_empty() {
+        if claim.claim.state != ClaimState::Draft {
+            findings.push(index_error(
+                relative_claim.to_path_buf(),
+                "non-draft claims must include at least one event in events/",
+            ));
+        }
+        return findings;
+    }
+
+    let mut expected_sequence = 1_u32;
+    for loaded in events {
+        let event = &loaded.event;
+        if event.event.sequence != expected_sequence {
+            findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "claim events must use contiguous sequence numbers starting at 1; expected {}, found {} in {}",
+                    expected_sequence, event.event.sequence, loaded.path
+                ),
+            ));
+            expected_sequence = event.event.sequence.saturating_add(1);
+        } else {
+            expected_sequence += 1;
+        }
+
+        let requires_transition = !matches!(event.event.kind, ClaimEventKind::Corrected);
+        if requires_transition && event.transition.is_none() {
+            findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "{} must include a transition block for event kind {:?}",
+                    loaded.path, event.event.kind
+                ),
+            ));
+        }
+        if let Some(transition) = &event.transition {
+            if transition.from == transition.to {
+                findings.push(index_error(
+                    relative_claim.to_path_buf(),
+                    format!("{} has a transition where from and to are both {:?}", loaded.path, transition.to),
+                ));
+            }
+            if !transition_matches_event_kind(transition.to.clone(), &event.event.kind) {
+                findings.push(index_error(
+                    relative_claim.to_path_buf(),
+                    format!(
+                        "{} transitions to {:?}, which does not match event kind {:?}",
+                        loaded.path, transition.to, event.event.kind
+                    ),
+                ));
+            }
+        }
+    }
+
+    if let Some(last) = events.last() {
+        let terminal_state = last
+            .event
+            .transition
+            .as_ref()
+            .map(|transition| transition.to.clone())
+            .unwrap_or_else(|| claim.claim.state.clone());
+        if terminal_state != claim.claim.state {
+            findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!(
+                    "claim.state is {:?}, but the last event in {} resolves to {:?}",
+                    claim.claim.state, last.path, terminal_state
+                ),
+            ));
+        }
+    }
+
+    findings
+}
+
+fn validate_claim_resolution_consistency(
+    relative_claim: &Path,
+    claim: &ClaimRecord,
+) -> Vec<IndexFinding> {
+    let mut findings = Vec::new();
+    let resolution = claim.resolution.as_ref();
+    let has_canonical_link = resolution
+        .map(|resolution| {
+            resolution.canonical_record_path.is_some() || resolution.canonical_mirror_path.is_some()
+        })
+        .unwrap_or(false);
+
+    match claim.claim.state {
+        ClaimState::Rejected | ClaimState::Withdrawn => {
+            if has_canonical_link {
+                findings.push(index_error(
+                    relative_claim.to_path_buf(),
+                    "rejected or withdrawn claims must not record canonical handoff links",
+                ));
+            }
+        }
+        ClaimState::Disputed => {
+            if has_canonical_link {
+                findings.push(index_error(
+                    relative_claim.to_path_buf(),
+                    "disputed claims must not record completed canonical handoff links",
+                ));
+            }
+        }
+        ClaimState::Accepted => {
+            if let Some(resolution) = resolution {
+                if resolution.result_event.is_none() {
+                    findings.push(index_error(
+                        relative_claim.to_path_buf(),
+                        "accepted claims with a resolution block must include resolution.result_event",
+                    ));
+                }
+                if let Some(canonical_mirror_path) = &resolution.canonical_mirror_path {
+                    if parse_index_record_identity(canonical_mirror_path).is_none() {
+                        findings.push(index_error(
+                            relative_claim.to_path_buf(),
+                            format!(
+                                "resolution.canonical_mirror_path `{}` must match repos/<host>/<owner>/<repo>/record.toml",
+                                canonical_mirror_path
+                            ),
+                        ));
+                    }
+                }
+            }
+        }
+        _ => {}
+    }
+
+    findings
+}
+
+fn transition_matches_event_kind(target: ClaimState, kind: &ClaimEventKind) -> bool {
+    if matches!(kind, ClaimEventKind::Corrected) {
+        return true;
+    }
+    matches!(
+        (target, kind),
+        (ClaimState::Submitted, ClaimEventKind::Submitted)
+            | (ClaimState::InReview, ClaimEventKind::ReviewStarted)
+            | (ClaimState::Accepted, ClaimEventKind::Accepted)
+            | (ClaimState::Rejected, ClaimEventKind::Rejected)
+            | (ClaimState::Withdrawn, ClaimEventKind::Withdrawn)
+            | (ClaimState::Disputed, ClaimEventKind::Disputed)
+    )
+}
+
+fn parse_index_record_identity(path: &str) -> Option<RepositoryIdentity> {
+    let segments = Path::new(path)
+        .iter()
+        .map(|segment| segment.to_string_lossy().to_string())
+        .collect::<Vec<_>>();
+    if segments.len() != 5
+        || segments[0] != "repos"
+        || segments[4] != "record.toml"
+        || segments[1].trim().is_empty()
+        || segments[2].trim().is_empty()
+        || segments[3].trim().is_empty()
+    {
+        return None;
+    }
+
+    Some(RepositoryIdentity {
+        host: segments[1].clone(),
+        owner: segments[2].clone(),
+        repo: segments[3].clone(),
+    })
+}
+
 fn repository_identity(url: &str) -> Option<(String, String, String)> {
     let trimmed = url.trim();
     let without_scheme = trimmed
@@ -3390,6 +4288,8 @@ build = "cargo build --workspace"
         .expect("canonical manifest written");
         let overlay_dir = root.join("repos/github.com/example/orbit");
         fs::create_dir_all(&overlay_dir).expect("overlay dir created");
+        let claim_dir = overlay_dir.join("claims/2026-03-10-maintainer-claim-01");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim dir created");
         fs::write(
             overlay_dir.join("record.toml"),
             r#"
@@ -3411,6 +4311,79 @@ build = "cargo test"
 "#,
         )
         .expect("overlay manifest written");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            r#"
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/example/orbit/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "accepted"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-12T09:15:00Z"
+
+[identity]
+host = "github.com"
+owner = "example"
+repo = "orbit"
+
+[claimant]
+display_name = "Orbit maintainers"
+asserted_role = "maintainer"
+
+[target]
+index_paths = ["repos/github.com/example/orbit/record.toml"]
+record_sources = ["https://github.com/example/orbit"]
+canonical_repo_url = "https://github.com/example/orbit"
+
+[resolution]
+canonical_record_path = ".repo"
+canonical_mirror_path = "repos/github.com/example/orbit/record.toml"
+result_event = "events/0002-accepted.toml"
+"#,
+        )
+        .expect("claim written");
+        fs::write(
+            claim_dir.join("events/0001-submitted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 1
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted claim."
+"#,
+        )
+        .expect("submitted event written");
+        fs::write(
+            claim_dir.join("events/0002-accepted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "accepted"
+timestamp = "2026-03-12T09:15:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "accepted"
+
+[summary]
+text = "Accepted claim."
+"#,
+        )
+        .expect("accepted event written");
 
         let report = query_repository(&root, "repo.build").expect("query report");
         let json = serde_json::to_value(report).expect("query report serializes");
@@ -3434,6 +4407,14 @@ build = "cargo test"
             json["conflicts"][0]["value"],
             Value::String("cargo test".into())
         );
+        assert_eq!(
+            json["conflicts"][0]["record"]["claim"]["state"],
+            Value::String("accepted".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["record"]["claim"]["handoff"],
+            Value::String("superseded".into())
+        );
 
         let trust = trust_repository(&root).expect("trust report");
         let trust_json = serde_json::to_value(trust).expect("trust report serializes");
@@ -3446,6 +4427,10 @@ build = "cargo test"
             Value::String("superseded".into())
         );
         assert_eq!(trust_json["conflicts"][0].get("value"), None);
+        assert_eq!(
+            trust_json["conflicts"][0]["record"]["claim"]["id"],
+            Value::String("github.com/example/orbit/2026-03-10-maintainer-claim-01".into())
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -3590,6 +4575,285 @@ build = "cargo test"
         assert_eq!(
             json["conflicts"][0]["value"],
             Value::String("cargo test".into())
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn trust_repository_omits_rejected_claim_context_from_normal_visibility() {
+        let root = temp_dir("query-rejected-claim");
+        fs::write(
+            root.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        let claim_dir = root.join("claims/2026-03-10-maintainer-claim-01");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim dir created");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            r#"
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/example/orbit/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "rejected"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-10T15:00:00Z"
+
+[identity]
+host = "github.com"
+owner = "example"
+repo = "orbit"
+
+[claimant]
+display_name = "Orbit maintainers"
+asserted_role = "maintainer"
+
+[target]
+record_sources = ["https://github.com/example/orbit"]
+"#,
+        )
+        .expect("claim written");
+        fs::write(
+            claim_dir.join("events/0001-submitted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 1
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted claim."
+"#,
+        )
+        .expect("submitted event written");
+        fs::write(
+            claim_dir.join("events/0002-rejected.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "rejected"
+timestamp = "2026-03-10T15:00:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "rejected"
+
+[summary]
+text = "Rejected claim."
+"#,
+        )
+        .expect("rejected event written");
+
+        let report = trust_repository(&root).expect("trust report");
+        let json = serde_json::to_value(report).expect("trust report serializes");
+        assert_eq!(
+            json["selection"]["record"].get("claim"),
+            None,
+            "rejected claims should stay in dedicated claim inspection, not normal trust visibility"
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn parse_claim_record_rejects_unknown_schema() {
+        let err = parse_claim_record(
+            r#"
+schema = "dotrepo-claim/v9"
+
+[claim]
+id = "github.com/acme/widget/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "submitted"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-10T14:30:00Z"
+
+[identity]
+host = "github.com"
+owner = "acme"
+repo = "widget"
+
+[claimant]
+display_name = "Acme maintainers"
+asserted_role = "maintainer"
+
+[target]
+record_sources = ["https://github.com/acme/widget"]
+"#,
+        )
+        .expect_err("claim schema should fail");
+
+        assert!(
+            err.to_string().contains("unsupported claim schema"),
+            "unexpected error: {err}"
+        );
+    }
+
+    #[test]
+    fn parse_claim_event_rejects_zero_sequence() {
+        let err = parse_claim_event(
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 0
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[summary]
+text = "Submitted claim."
+"#,
+        )
+        .expect_err("zero sequence should fail");
+
+        assert!(
+            err.to_string().contains("event.sequence must be greater than zero"),
+            "unexpected error: {err}"
+        );
+    }
+
+    #[test]
+    fn load_claim_directory_reads_claim_and_events() {
+        let root = temp_dir("claim-directory");
+        let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim events dir created");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            r#"
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/acme/widget/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "accepted"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-12T09:15:00Z"
+
+[identity]
+host = "github.com"
+owner = "acme"
+repo = "widget"
+
+[claimant]
+display_name = "Acme maintainers"
+asserted_role = "maintainer"
+contact = "maintainers@acme.dev"
+
+[target]
+index_paths = ["repos/github.com/acme/widget/record.toml"]
+record_sources = ["https://github.com/acme/widget"]
+canonical_repo_url = "https://github.com/acme/widget"
+
+[resolution]
+canonical_record_path = ".repo"
+canonical_mirror_path = "repos/github.com/acme/widget/record.toml"
+result_event = "events/0002-accepted.toml"
+"#,
+        )
+        .expect("claim written");
+        fs::write(claim_dir.join("review.md"), "Reviewed.").expect("review written");
+        fs::write(
+            claim_dir.join("events/0001-submitted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 1
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted maintainer claim."
+"#,
+        )
+        .expect("submitted event written");
+        fs::write(
+            claim_dir.join("events/0002-accepted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "accepted"
+timestamp = "2026-03-12T09:15:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "in_review"
+to = "accepted"
+
+[summary]
+text = "Accepted maintainer claim."
+
+[links]
+claim = "../claim.toml"
+review_notes = "../review.md"
+canonical_record_path = ".repo"
+"#,
+        )
+        .expect("accepted event written");
+
+        let loaded = load_claim_directory(&root, &claim_dir).expect("claim directory loads");
+        assert_eq!(
+            loaded.claim.claim.state,
+            ClaimState::Accepted,
+            "current state should parse"
+        );
+        assert_eq!(loaded.events.len(), 2, "events should be loaded");
+        assert_eq!(
+            loaded.events[0].event.event.kind,
+            ClaimEventKind::Submitted,
+            "events should be ordered by filename"
+        );
+        assert_eq!(
+            loaded.review_path.as_deref(),
+            Some(
+                "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/review.md"
+            )
+        );
+
+        let json = serde_json::to_value(&loaded).expect("claim directory serializes");
+        assert_eq!(
+            json["claim"]["claim"]["state"],
+            Value::String("accepted".into())
+        );
+        assert_eq!(
+            json["events"][1]["event"]["event"]["kind"],
+            Value::String("accepted".into())
         );
 
         fs::remove_dir_all(root).expect("temp dir removed");
@@ -4543,6 +5807,263 @@ security_contact = "unknown"
         assert!(findings
             .iter()
             .any(|finding| finding.message.contains("security_contact = \"unknown\"")));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn validate_index_root_accepts_well_formed_claim_directory() {
+        let root = temp_dir("index-claims-ok");
+        let record_dir = root.join("repos/github.com/acme/widget");
+        let claim_dir = record_dir.join("claims/2026-03-10-maintainer-claim-01");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim events dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/acme/widget"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "widget"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        fs::write(
+            record_dir.join("evidence.md"),
+            "Imported from README and validated against repository surfaces.\n",
+        )
+        .expect("evidence written");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            r#"
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/acme/widget/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "accepted"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-12T09:15:00Z"
+
+[identity]
+host = "github.com"
+owner = "acme"
+repo = "widget"
+
+[claimant]
+display_name = "Acme maintainers"
+asserted_role = "maintainer"
+contact = "maintainers@acme.dev"
+
+[target]
+index_paths = ["repos/github.com/acme/widget/record.toml"]
+record_sources = ["https://github.com/acme/widget"]
+canonical_repo_url = "https://github.com/acme/widget"
+
+[resolution]
+canonical_record_path = ".repo"
+canonical_mirror_path = "repos/github.com/acme/widget/record.toml"
+result_event = "events/0002-accepted.toml"
+"#,
+        )
+        .expect("claim written");
+        fs::write(claim_dir.join("review.md"), "Reviewed.").expect("review written");
+        fs::write(
+            claim_dir.join("events/0001-submitted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 1
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted claim."
+"#,
+        )
+        .expect("submitted event written");
+        fs::write(
+            claim_dir.join("events/0002-accepted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "accepted"
+timestamp = "2026-03-12T09:15:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "accepted"
+
+[summary]
+text = "Accepted claim."
+
+[links]
+claim = "../claim.toml"
+review_notes = "../review.md"
+canonical_record_path = ".repo"
+"#,
+        )
+        .expect("accepted event written");
+
+        let findings = validate_index_root(&root).expect("index validates");
+        assert!(
+            findings
+                .iter()
+                .all(|finding| finding.severity != IndexFindingSeverity::Error),
+            "unexpected findings: {findings:#?}"
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn validate_index_root_reports_claim_identity_mismatch() {
+        let root = temp_dir("index-claims-identity");
+        let record_dir = root.join("repos/github.com/acme/widget");
+        let claim_dir = record_dir.join("claims/2026-03-10-maintainer-claim-01");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim events dir created");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            r#"
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/acme/widget/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "submitted"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-10T14:30:00Z"
+
+[identity]
+host = "github.com"
+owner = "acme"
+repo = "other-widget"
+
+[claimant]
+display_name = "Acme maintainers"
+asserted_role = "maintainer"
+
+[target]
+record_sources = ["https://github.com/acme/widget"]
+"#,
+        )
+        .expect("claim written");
+        fs::write(
+            claim_dir.join("events/0001-submitted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 1
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted claim."
+"#,
+        )
+        .expect("submitted event written");
+
+        let findings = validate_index_root(&root).expect("index validates");
+        assert!(
+            findings.iter().any(|finding| finding
+                .message
+                .contains("claim.identity resolves to github.com/acme/other-widget")),
+            "expected claim identity mismatch, found: {findings:#?}"
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn validate_index_root_reports_claim_event_history_errors() {
+        let root = temp_dir("index-claims-history");
+        let record_dir = root.join("repos/github.com/acme/widget");
+        let claim_dir = record_dir.join("claims/2026-03-10-maintainer-claim-01");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim events dir created");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            r#"
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/acme/widget/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "accepted"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-12T09:15:00Z"
+
+[identity]
+host = "github.com"
+owner = "acme"
+repo = "widget"
+
+[claimant]
+display_name = "Acme maintainers"
+asserted_role = "maintainer"
+
+[target]
+record_sources = ["https://github.com/acme/widget"]
+"#,
+        )
+        .expect("claim written");
+        fs::write(
+            claim_dir.join("events/0002-submitted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted claim."
+"#,
+        )
+        .expect("submitted event written");
+
+        let findings = validate_index_root(&root).expect("index validates");
+        assert!(
+            findings.iter().any(|finding| finding
+                .message
+                .contains("claim events must use contiguous sequence numbers starting at 1")),
+            "expected sequence error, found: {findings:#?}"
+        );
+        assert!(
+            findings
+                .iter()
+                .any(|finding| finding.message.contains("claim.state is Accepted")),
+            "expected claim state mismatch, found: {findings:#?}"
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

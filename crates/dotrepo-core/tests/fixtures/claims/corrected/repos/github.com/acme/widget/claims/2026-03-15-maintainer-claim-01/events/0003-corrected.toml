@@ -1,0 +1,10 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 3
+kind = "corrected"
+timestamp = "2026-03-15T15:00:00Z"
+actor = "index-reviewer"
+
+[summary]
+text = "Corrected earlier rejection after evidence review."

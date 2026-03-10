@@ -1,0 +1,14 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 1
+kind = "submitted"
+timestamp = "2026-03-12T09:00:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted maintainer claim."

@@ -1,7 +1,8 @@
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
     display_path, generate_check_repository, import_preview_repository, import_repository,
-    query_repository, record_summary, trust_repository, validate_repository, ImportMode,
+    inspect_claim_directory, query_repository, record_summary, trust_repository,
+    validate_repository, ImportMode,
 };
 use dotrepo_transport::{
     read_jsonrpc_message as read_message, write_jsonrpc_message as write_message,
@@ -158,6 +159,7 @@ fn handle_tool_call(params: Value) -> Result<Value> {
         "dotrepo.validate" => tool_validate(arguments),
         "dotrepo.query" => tool_query(arguments),
         "dotrepo.trust" => tool_trust(arguments),
+        "dotrepo.claim_inspect" => tool_claim_inspect(arguments),
         "dotrepo.generate_check" => tool_generate_check(arguments),
         "dotrepo.import_preview" => tool_import_preview(arguments),
         "dotrepo.import_write" => tool_import_write(arguments),
@@ -195,6 +197,18 @@ fn tool_trust(arguments: Value) -> Result<(String, Value)> {
     let root = resolve_root(&arguments);
     let report = trust_repository(&root)?;
     Ok(("trust metadata loaded".into(), to_value(report)?))
+}
+
+fn tool_claim_inspect(arguments: Value) -> Result<(String, Value)> {
+    let root = resolve_root(&arguments);
+    let claim_path = required_string(&arguments, "claimPath")?;
+    let claim_dir = if Path::new(claim_path).is_absolute() {
+        PathBuf::from(claim_path)
+    } else {
+        root.join(claim_path)
+    };
+    let report = inspect_claim_directory(&root, &claim_dir)?;
+    Ok(("claim history loaded".into(), to_value(report)?))
 }
 
 fn tool_generate_check(arguments: Value) -> Result<(String, Value)> {
@@ -371,6 +385,20 @@ fn tool_definitions() -> Vec<Value> {
             }
         }),
         json!({
+            "name": "dotrepo.claim_inspect",
+            "title": "Inspect maintainer claim",
+            "description": "Inspect one maintainer-claim directory and return current state, target context, derived handoff, and ordered event history.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "root": { "type": "string", "description": "Index root containing repos/<host>/<owner>/<repo>/claims/..." },
+                    "claimPath": { "type": "string", "description": "Claim directory relative to root or an absolute path." }
+                },
+                "required": ["claimPath"],
+                "additionalProperties": false
+            }
+        }),
+        json!({
             "name": "dotrepo.generate_check",
             "title": "Preview generated outputs",
             "description": "Check dotrepo-managed outputs and report which generated files are stale without writing files.",
@@ -494,6 +522,9 @@ mod tests {
         assert!(tools
             .iter()
             .any(|tool| tool["name"] == Value::String("dotrepo.import_preview".into())));
+        assert!(tools
+            .iter()
+            .any(|tool| tool["name"] == Value::String("dotrepo.claim_inspect".into())));
     }
 
     #[test]
@@ -715,6 +746,102 @@ description = "Missing source and trust"
             generate["result"]["structuredContent"],
             to_value(generate_check_repository(&root).expect("generate-check report"))
                 .expect("generate-check report serializes")
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn claim_inspect_tool_matches_core_report() {
+        let root = temp_dir("claim-inspect");
+        let record_dir = root.join("repos/github.com/acme/widget");
+        let claim_dir = record_dir.join("claims/2026-03-10-maintainer-claim-01");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim events dir created");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            r#"
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/acme/widget/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "accepted"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-12T09:15:00Z"
+
+[identity]
+host = "github.com"
+owner = "acme"
+repo = "widget"
+
+[claimant]
+display_name = "Acme maintainers"
+asserted_role = "maintainer"
+
+[target]
+index_paths = ["repos/github.com/acme/widget/record.toml"]
+record_sources = ["https://github.com/acme/widget"]
+canonical_repo_url = "https://github.com/acme/widget"
+
+[resolution]
+canonical_record_path = ".repo"
+canonical_mirror_path = "repos/github.com/acme/widget/record.toml"
+result_event = "events/0002-accepted.toml"
+"#,
+        )
+        .expect("claim written");
+        fs::write(
+            claim_dir.join("events/0001-submitted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 1
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted claim."
+"#,
+        )
+        .expect("submitted event written");
+        fs::write(
+            claim_dir.join("events/0002-accepted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "accepted"
+timestamp = "2026-03-12T09:15:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "accepted"
+
+[summary]
+text = "Accepted claim."
+"#,
+        )
+        .expect("accepted event written");
+
+        let response = call_tool(
+            "dotrepo.claim_inspect",
+            json!({
+                "root": root.display().to_string(),
+                "claimPath": "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01"
+            }),
+        );
+        assert_eq!(
+            response["result"]["structuredContent"],
+            to_value(inspect_claim_directory(&root, &claim_dir).expect("claim report"))
+                .expect("claim report serializes")
         );
 
         fs::remove_dir_all(root).expect("temp dir removed");

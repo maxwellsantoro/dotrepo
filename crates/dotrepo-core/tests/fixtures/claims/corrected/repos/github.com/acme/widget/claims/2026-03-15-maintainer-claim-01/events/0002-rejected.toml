@@ -1,0 +1,14 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "rejected"
+timestamp = "2026-03-15T11:00:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "rejected"
+
+[summary]
+text = "Rejected claim pending additional evidence."

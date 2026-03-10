@@ -1,0 +1,14 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "accepted"
+timestamp = "2026-03-11T10:30:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "accepted"
+
+[summary]
+text = "Accepted claim pending canonical publication."
