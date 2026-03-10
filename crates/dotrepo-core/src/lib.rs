@@ -819,7 +819,12 @@ pub fn import_repository(
             trust: Some(Trust {
                 confidence: Some(confidence.into()),
                 provenance,
-                notes: Some(import_notes(mode, &imported_sources, &inferred_fields)),
+                notes: Some(import_notes(
+                    mode,
+                    &imported_sources,
+                    &inferred_fields,
+                    codeowners_metadata.note.as_deref(),
+                )),
             }),
         },
         Repo {
@@ -888,6 +893,7 @@ pub fn import_repository(
                 &imported_sources,
                 &inferred_fields,
                 &security,
+                codeowners_metadata.note.as_deref(),
                 imported_docs.is_some(),
             )),
         ),
@@ -1044,6 +1050,14 @@ struct ImportedFile {
 struct CodeownersMetadata {
     owners: Vec<String>,
     team: Option<String>,
+    note: Option<String>,
+}
+
+#[derive(Debug, Clone)]
+struct CodeownersRule {
+    pattern: String,
+    owners: Vec<String>,
+    teams: Vec<String>,
 }
 
 fn load_first_existing_file(
@@ -1389,7 +1403,7 @@ fn starts_with_ordered_list_item(line: &str) -> bool {
 
 fn parse_codeowners_metadata(contents: &str) -> CodeownersMetadata {
     let mut owners = Vec::new();
-    let mut teams = Vec::new();
+    let mut rules = Vec::new();
 
     for line in contents.lines() {
         let trimmed = line.split('#').next().unwrap_or("").trim();
@@ -1398,25 +1412,108 @@ fn parse_codeowners_metadata(contents: &str) -> CodeownersMetadata {
         }
 
         let mut tokens = trimmed.split_whitespace();
-        let _pattern = tokens.next();
+        let Some(pattern) = tokens.next() else {
+            continue;
+        };
+        let mut rule_owners = Vec::new();
+        let mut rule_teams = Vec::new();
         for token in tokens {
             let cleaned = trim_contact_token(token);
             if cleaned.starts_with('@') || looks_like_email(cleaned) {
                 push_unique(&mut owners, cleaned.to_string());
-                if is_team_handle(cleaned) {
-                    push_unique(&mut teams, cleaned.to_string());
-                }
+                push_unique(&mut rule_owners, cleaned.to_string());
             }
+            if is_team_handle(cleaned) {
+                push_unique(&mut rule_teams, cleaned.to_string());
+            }
+        }
+
+        if !rule_owners.is_empty() {
+            rules.push(CodeownersRule {
+                pattern: pattern.to_string(),
+                owners: rule_owners,
+                teams: rule_teams,
+            });
         }
     }
 
-    CodeownersMetadata {
-        owners,
-        team: match teams.as_slice() {
+    let all_teams = collect_codeowners_teams(&rules);
+    let repo_wide_rules = rules
+        .iter()
+        .filter(|rule| is_repo_wide_codeowners_pattern(&rule.pattern))
+        .cloned()
+        .collect::<Vec<_>>();
+    let repo_wide_teams = collect_codeowners_teams(&repo_wide_rules);
+    let team = if repo_wide_teams.len() == 1 {
+        Some(repo_wide_teams[0].clone())
+    } else {
+        match all_teams.as_slice() {
             [only] => Some(only.clone()),
             _ => None,
-        },
+        }
+    };
+
+    CodeownersMetadata {
+        owners,
+        team: team.clone(),
+        note: codeowners_import_note(&rules, team.as_deref()),
     }
+}
+
+fn collect_codeowners_teams(rules: &[CodeownersRule]) -> Vec<String> {
+    let mut teams = Vec::new();
+    for rule in rules {
+        for team in &rule.teams {
+            push_unique(&mut teams, team.clone());
+        }
+    }
+    teams
+}
+
+fn is_repo_wide_codeowners_pattern(pattern: &str) -> bool {
+    matches!(pattern.trim(), "*" | "/*" | "**" | "/**" | "**/*" | "/**/*")
+}
+
+fn codeowners_import_note(rules: &[CodeownersRule], selected_team: Option<&str>) -> Option<String> {
+    if rules.len() <= 1 {
+        return None;
+    }
+
+    let repo_wide_rules = rules
+        .iter()
+        .filter(|rule| is_repo_wide_codeowners_pattern(&rule.pattern))
+        .cloned()
+        .collect::<Vec<_>>();
+    let repo_wide_teams = collect_codeowners_teams(&repo_wide_rules);
+    let all_teams = collect_codeowners_teams(rules);
+
+    if let Some(team) = selected_team {
+        if repo_wide_teams.len() == 1 && all_teams.len() > 1 {
+            return Some(format!(
+                "Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `{}` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.",
+                team
+            ));
+        }
+
+        if rules
+            .iter()
+            .any(|rule| !is_repo_wide_codeowners_pattern(&rule.pattern) && !rule.owners.is_empty())
+        {
+            return Some(format!(
+                "Maintainer information was imported from CODEOWNERS; `owners.team` is `{}` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.",
+                team
+            ));
+        }
+    }
+
+    if all_teams.len() > 1 {
+        return Some(
+            "Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates."
+                .to_string(),
+        );
+    }
+
+    None
 }
 
 fn parse_security_contact(contents: &str) -> Option<String> {
@@ -1553,6 +1650,7 @@ fn import_notes(
     mode: ImportMode,
     imported_sources: &[String],
     inferred_fields: &[String],
+    codeowners_note: Option<&str>,
 ) -> String {
     let mut notes = if imported_sources.is_empty() {
         "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported."
@@ -1566,6 +1664,11 @@ fn import_notes(
             " Filled {} with inferred defaults.",
             human_join(inferred_fields)
         ));
+    }
+
+    if let Some(codeowners_note) = codeowners_note {
+        notes.push(' ');
+        notes.push_str(codeowners_note);
     }
 
     if matches!(mode, ImportMode::Overlay) {
@@ -1610,6 +1713,7 @@ fn render_import_evidence(
     imported_sources: &[String],
     inferred_fields: &[String],
     security: &Option<ImportedFile>,
+    codeowners_note: Option<&str>,
     imported_docs: bool,
 ) -> String {
     let mut bullets = Vec::new();
@@ -1631,7 +1735,12 @@ fn render_import_evidence(
         .iter()
         .any(|path| path == ".github/CODEOWNERS" || path == "CODEOWNERS")
     {
-        bullets.push("Imported maintainer handles from CODEOWNERS.".to_string());
+        let mut bullet = "Imported maintainer candidates from CODEOWNERS.".to_string();
+        if let Some(codeowners_note) = codeowners_note {
+            bullet.push(' ');
+            bullet.push_str(codeowners_note);
+        }
+        bullets.push(bullet);
     }
     if imported_sources
         .iter()
@@ -3933,6 +4042,50 @@ pull_request_template = "generate"
             .any(|field| field == "repo.name"));
 
         fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn parse_codeowners_metadata_prefers_repo_wide_team_over_narrower_team_rules() {
+        let metadata = parse_codeowners_metadata(
+            "* @maintainer @org/release-team security@example.com\n/docs/ @org/docs-team\n*.rs @maintainer\n",
+        );
+
+        assert_eq!(
+            metadata.owners,
+            vec![
+                "@maintainer",
+                "@org/release-team",
+                "security@example.com",
+                "@org/docs-team",
+            ]
+        );
+        assert_eq!(metadata.team.as_deref(), Some("@org/release-team"));
+        assert!(metadata.note.as_deref().is_some_and(
+            |note| note.contains("prefers `@org/release-team` from the repo-wide rule")
+        ));
+    }
+
+    #[test]
+    fn parse_codeowners_metadata_keeps_team_unset_when_broad_ownership_is_ambiguous() {
+        let metadata = parse_codeowners_metadata(
+            "* @org/platform-team @org/release-team @alice\n/docs/ @org/docs-team\n/services/payments/ @org/payments-team\n",
+        );
+
+        assert_eq!(
+            metadata.owners,
+            vec![
+                "@org/platform-team",
+                "@org/release-team",
+                "@alice",
+                "@org/docs-team",
+                "@org/payments-team",
+            ]
+        );
+        assert_eq!(metadata.team, None);
+        assert!(metadata
+            .note
+            .as_deref()
+            .is_some_and(|note| note.contains("`owners.team` was left unset")));
     }
 
     #[test]

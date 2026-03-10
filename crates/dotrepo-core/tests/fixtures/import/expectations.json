@@ -13,7 +13,7 @@
     "trust_provenance": ["imported"],
     "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/CODEOWNERS`", "`.github/SECURITY.md`"],
     "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`.github/CODEOWNERS`", "`.github/SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer handles from CODEOWNERS.", "Imported the security contact from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer candidates from CODEOWNERS.", "Imported the security contact from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
   },
   {
     "fixture": "badge-heavy-readme",
@@ -129,7 +129,7 @@
     "trust_provenance": ["imported", "inferred"],
     "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`SECURITY.md`", "Filled `repo.description` with inferred defaults."],
     "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`SECURITY.md`", "Filled `repo.description` with inferred defaults.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name from README.md.", "Imported maintainer handles from CODEOWNERS.", "Imported the security contact from SECURITY.md.", "Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "overlay_evidence_contains": ["Imported repository name from README.md.", "Imported maintainer candidates from CODEOWNERS.", "Imported the security contact from SECURITY.md.", "Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
   },
   {
     "fixture": "description-only-readme",
@@ -201,14 +201,30 @@
     "repo_description": "Repository metadata linter.",
     "imported_sources": ["README.md", "CODEOWNERS"],
     "inferred_fields": [],
-    "maintainers": ["@maintainer", "@org/release-team", "security@example.com", "@docs-team"],
+    "maintainers": ["@maintainer", "@org/release-team", "security@example.com", "@org/docs-team"],
     "team": "@org/release-team",
     "security_contact": null,
     "native_status": "draft",
     "overlay_status": "imported",
     "trust_provenance": ["imported"],
-    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`"],
-    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer handles from CODEOWNERS.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "prefers `@org/release-team` from the repo-wide rule"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "prefers `@org/release-team` from the repo-wide rule", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer candidates from CODEOWNERS.", "prefers `@org/release-team` from the repo-wide rule", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "team-heavy-codeowners",
+    "repo_name": "Bramble",
+    "repo_description": "Policy-aware deployment ownership map for large service estates.",
+    "imported_sources": ["README.md", "CODEOWNERS"],
+    "inferred_fields": [],
+    "maintainers": ["@org/platform-team", "@org/release-team", "@alice", "@org/docs-team", "@org/payments-team"],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`owners.team` was left unset"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`CODEOWNERS`", "`owners.team` was left unset", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported maintainer candidates from CODEOWNERS.", "`owners.team` was left unset", "This is an overlay record, not a maintainer-controlled canonical record."]
   }
 ]

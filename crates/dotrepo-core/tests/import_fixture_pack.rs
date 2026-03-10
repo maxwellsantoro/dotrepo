@@ -195,8 +195,49 @@ fn import_fixture_pack_strengthens_owner_and_security_extraction() {
             "@maintainer",
             "@org/release-team",
             "security@example.com",
-            "@docs-team",
+            "@org/docs-team",
         ]
+    );
+    assert!(
+        codeowners
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(
+                |note| note.contains("prefers `@org/release-team` from the repo-wide rule")
+            ),
+        "mixed CODEOWNERS fixture should explain the repo-wide team preference",
+    );
+
+    let ambiguous = import_repository(
+        &fixture_case("team-heavy-codeowners"),
+        ImportMode::Native,
+        None,
+    )
+    .expect("team-heavy CODEOWNERS fixture imports");
+    let owners = ambiguous.manifest.owners.as_ref().expect("owners imported");
+    assert_eq!(owners.team, None);
+    assert_eq!(
+        owners.maintainers,
+        vec![
+            "@org/platform-team",
+            "@org/release-team",
+            "@alice",
+            "@org/docs-team",
+            "@org/payments-team",
+        ]
+    );
+    assert!(
+        ambiguous
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(|note| note.contains("`owners.team` was left unset")),
+        "team-heavy CODEOWNERS fixture should explain why owners.team stayed unset",
     );
 
     let security = import_repository(

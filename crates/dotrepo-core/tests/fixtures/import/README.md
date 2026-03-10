@@ -14,4 +14,5 @@ Cases:
 - `security-markdown-link`: `SECURITY.md` exposes a contact channel through markdown link syntax rather than raw tokens.
 - `security-contact-unknown`: `SECURITY.md` exists but does not expose a parseable email or URL.
 - `no-conventional-surfaces`: no importable conventional files, so the plan falls back entirely to inferred defaults.
-- `mixed-codeowners`: deduped `CODEOWNERS` handles and emails without a `SECURITY.md`.
+- `mixed-codeowners`: repo-wide `CODEOWNERS` ownership plus narrower team overrides, preserving a primary team signal without flattening narrower owners.
+- `team-heavy-codeowners`: broad multi-team `CODEOWNERS` patterns that should preserve owner candidates while leaving `owners.team` unset.
