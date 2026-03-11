@@ -222,3 +222,6 @@ Follow-on work should refine:
 - concrete issue breakdown for each phase
 - validation fixtures and examples for claim artifacts
 - the first claim-inspection report shapes in core, CLI, and MCP
+
+The current operator-facing reviewer loop is documented in
+[`docs/maintainer-claim-review-workflow.md`](../docs/maintainer-claim-review-workflow.md).

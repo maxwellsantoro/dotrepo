@@ -23,3 +23,7 @@ Each fixture is a standalone index root with:
 `expectations.json` is the checked-in summary of the current state and validity
 expectation for each fixture. Later claim-inspection and workflow work should
 reuse these cases rather than rebuilding ad hoc examples.
+
+The workflow helper regression tests also treat `pending-canonical`,
+`accepted-clean`, and `corrected` as golden outputs for the current
+`claim-init` + `claim-event` command sequence.

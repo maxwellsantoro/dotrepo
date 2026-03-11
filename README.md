@@ -79,6 +79,7 @@ This repo is an early implementation of the dotrepo protocol and toolchain. It i
 - [`docs/sync-boundaries.md`](docs/sync-boundaries.md)
 - [`docs/authority-handoff-examples.md`](docs/authority-handoff-examples.md)
 - [`docs/conflict-surfacing-examples.md`](docs/conflict-surfacing-examples.md)
+- [`docs/maintainer-claim-review-workflow.md`](docs/maintainer-claim-review-workflow.md)
 - [`index/README.md`](index/README.md)
 - [`rfcs/0001-protocol-and-ecosystem.md`](rfcs/0001-protocol-and-ecosystem.md)
 - [`rfcs/0004-index-and-trust-model.md`](rfcs/0004-index-and-trust-model.md)

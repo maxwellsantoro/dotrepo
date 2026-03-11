@@ -36,6 +36,8 @@ lifecycle draft.
 See [`RFC 0013`](../rfcs/0013-phased-maintainer-claim-implementation-plan.md)
 for the phased implementation order from index artifacts to reviewer workflow
 and later public claim surfaces.
+See [`docs/maintainer-claim-review-workflow.md`](./maintainer-claim-review-workflow.md)
+for the first operator-facing maintainer-claim loop built on the current CLI.
 See [`RFC 0014`](../rfcs/0014-bundle-mode-design.md) for the first bundle-mode
 design note.
 See [`RFC 0015`](../rfcs/0015-workspace-and-relations-model.md) for the first

@@ -397,6 +397,7 @@ pub struct ClaimEventAppendInput {
     pub actor: String,
     pub summary: String,
     pub timestamp: String,
+    pub corrected_state: Option<ClaimState>,
     pub canonical_record_path: Option<String>,
     pub canonical_mirror_path: Option<String>,
 }
@@ -702,7 +703,12 @@ pub fn append_claim_event(
         .map(|event| event.event.event.sequence + 1)
         .unwrap_or(1);
     let current_state = loaded.claim.claim.state.clone();
-    let next_state = next_claim_state(&current_state, &input.kind, !loaded.events.is_empty())?;
+    let next_state = next_claim_state(
+        &current_state,
+        &input.kind,
+        !loaded.events.is_empty(),
+        input.corrected_state.as_ref(),
+    )?;
     let transition = event_transition_for(&current_state, &next_state, &input.kind);
     let canonical_record_path = input
         .canonical_record_path
@@ -723,6 +729,22 @@ pub fn append_claim_event(
             "canonical handoff links are only valid when the resulting claim state is accepted"
         );
     }
+    let review_notes_link = if loaded.review_path.is_some()
+        && matches!(input.kind, ClaimEventKind::Accepted | ClaimEventKind::Corrected)
+    {
+        Some("../review.md".into())
+    } else {
+        None
+    };
+    let links = if review_notes_link.is_some() || canonical_record_path.is_some() {
+        Some(ClaimEventLinks {
+            claim: Some("../claim.toml".into()),
+            review_notes: review_notes_link,
+            canonical_record_path: canonical_record_path.clone(),
+        })
+    } else {
+        None
+    };
     let event = ClaimEvent {
         schema: SUPPORTED_CLAIM_EVENT_SCHEMA.into(),
         event: ClaimEventMetadata {
@@ -735,11 +757,7 @@ pub fn append_claim_event(
         summary: ClaimSummary {
             text: input.summary.clone(),
         },
-        links: Some(ClaimEventLinks {
-            claim: Some("../claim.toml".into()),
-            review_notes: loaded.review_path.as_ref().map(|_| "../review.md".into()),
-            canonical_record_path: canonical_record_path.clone(),
-        }),
+        links,
     };
     validate_claim_event(&event)?;
 
@@ -931,6 +949,7 @@ fn next_claim_state(
     current: &ClaimState,
     kind: &ClaimEventKind,
     has_events: bool,
+    corrected_state: Option<&ClaimState>,
 ) -> Result<ClaimState> {
     match kind {
         ClaimEventKind::Submitted => {
@@ -974,7 +993,14 @@ fn next_claim_state(
             if !has_events {
                 bail!("corrected events require prior claim history");
             }
-            Ok(current.clone())
+            if let Some(state) = corrected_state {
+                if *state == ClaimState::Draft {
+                    bail!("corrected events must not reset a claim back to draft");
+                }
+                Ok(state.clone())
+            } else {
+                Ok(current.clone())
+            }
         }
     }
 }
@@ -5175,6 +5201,7 @@ text = "Rejected claim."
                 actor: "claimant".into(),
                 summary: "Submitted maintainer claim.".into(),
                 timestamp: "2026-03-10T18:05:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: None,
                 canonical_mirror_path: None,
             },
@@ -5229,6 +5256,7 @@ text = "Rejected claim."
                 actor: "index-reviewer".into(),
                 summary: "Accepted maintainer claim.".into(),
                 timestamp: "2026-03-10T18:05:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: None,
                 canonical_mirror_path: None,
             },
@@ -5276,6 +5304,7 @@ text = "Rejected claim."
                 actor: "claimant".into(),
                 summary: "Submitted maintainer claim.".into(),
                 timestamp: "2026-03-10T18:05:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: None,
                 canonical_mirror_path: None,
             },
@@ -5292,6 +5321,7 @@ text = "Rejected claim."
                 actor: "index-reviewer".into(),
                 summary: "Accepted maintainer claim after review.".into(),
                 timestamp: "2026-03-10T18:10:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: Some(".repo".into()),
                 canonical_mirror_path: Some("repos/github.com/acme/widget/record.toml".into()),
             },
@@ -5346,6 +5376,7 @@ text = "Rejected claim."
                 actor: "claimant".into(),
                 summary: "Submitted maintainer claim.".into(),
                 timestamp: "2026-03-10T18:05:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: None,
                 canonical_mirror_path: None,
             },
@@ -5362,6 +5393,7 @@ text = "Rejected claim."
                 actor: "index-reviewer".into(),
                 summary: "Accepted maintainer claim without canonical links yet.".into(),
                 timestamp: "2026-03-10T18:10:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: None,
                 canonical_mirror_path: None,
             },
@@ -5378,6 +5410,7 @@ text = "Rejected claim."
                 actor: "index-reviewer".into(),
                 summary: "Linked accepted claim to canonical artifacts.".into(),
                 timestamp: "2026-03-10T18:15:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: Some(".repo".into()),
                 canonical_mirror_path: Some("repos/github.com/acme/widget/record.toml".into()),
             },
@@ -5426,6 +5459,7 @@ text = "Rejected claim."
                 actor: "claimant".into(),
                 summary: "Submitted maintainer claim.".into(),
                 timestamp: "2026-03-10T18:05:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: None,
                 canonical_mirror_path: None,
             },
@@ -5442,6 +5476,7 @@ text = "Rejected claim."
                 actor: "index-reviewer".into(),
                 summary: "Rejected maintainer claim.".into(),
                 timestamp: "2026-03-10T18:10:00Z".into(),
+                corrected_state: None,
                 canonical_record_path: Some(".repo".into()),
                 canonical_mirror_path: None,
             },

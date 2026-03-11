@@ -139,6 +139,9 @@ enum Command {
         /// Short event summary recorded in the audit trail.
         #[arg(long)]
         summary: String,
+        /// Optional corrected current state when kind=corrected.
+        #[arg(long, value_enum)]
+        corrected_state: Option<CorrectedClaimStateArg>,
         /// Optional canonical `.repo` path recorded for accepted handoff.
         #[arg(long)]
         canonical_record_path: Option<String>,
@@ -165,6 +168,16 @@ enum ClaimEventKindArg {
     Corrected,
 }
 
+#[derive(Clone, Debug, Eq, PartialEq, ValueEnum)]
+enum CorrectedClaimStateArg {
+    Submitted,
+    InReview,
+    Accepted,
+    Rejected,
+    Withdrawn,
+    Disputed,
+}
+
 impl From<ImportModeArg> for ImportMode {
     fn from(value: ImportModeArg) -> Self {
         match value {
@@ -184,6 +197,19 @@ impl From<ClaimEventKindArg> for ClaimEventKind {
             ClaimEventKindArg::Withdrawn => ClaimEventKind::Withdrawn,
             ClaimEventKindArg::Disputed => ClaimEventKind::Disputed,
             ClaimEventKindArg::Corrected => ClaimEventKind::Corrected,
+        }
+    }
+}
+
+impl From<CorrectedClaimStateArg> for dotrepo_core::ClaimState {
+    fn from(value: CorrectedClaimStateArg) -> Self {
+        match value {
+            CorrectedClaimStateArg::Submitted => dotrepo_core::ClaimState::Submitted,
+            CorrectedClaimStateArg::InReview => dotrepo_core::ClaimState::InReview,
+            CorrectedClaimStateArg::Accepted => dotrepo_core::ClaimState::Accepted,
+            CorrectedClaimStateArg::Rejected => dotrepo_core::ClaimState::Rejected,
+            CorrectedClaimStateArg::Withdrawn => dotrepo_core::ClaimState::Withdrawn,
+            CorrectedClaimStateArg::Disputed => dotrepo_core::ClaimState::Disputed,
         }
     }
 }
@@ -253,6 +279,7 @@ fn run() -> Result<()> {
             kind,
             actor,
             summary,
+            corrected_state,
             canonical_record_path,
             canonical_mirror_path,
         } => cmd_claim_event(
@@ -261,6 +288,7 @@ fn run() -> Result<()> {
             kind,
             actor,
             summary,
+            corrected_state,
             canonical_record_path,
             canonical_mirror_path,
         ),
@@ -569,6 +597,7 @@ fn cmd_claim_event(
     kind: ClaimEventKindArg,
     actor: String,
     summary: String,
+    corrected_state: Option<CorrectedClaimStateArg>,
     canonical_record_path: Option<String>,
     canonical_mirror_path: Option<String>,
 ) -> Result<()> {
@@ -585,6 +614,7 @@ fn cmd_claim_event(
             actor,
             summary,
             timestamp: current_timestamp()?,
+            corrected_state: corrected_state.map(Into::into),
             canonical_record_path,
             canonical_mirror_path,
         },
@@ -1082,6 +1112,7 @@ mod tests {
             "Submitted maintainer claim.".into(),
             None,
             None,
+            None,
         )
         .expect("claim event succeeds");
 
@@ -1126,6 +1157,7 @@ mod tests {
             "Accepted maintainer claim.".into(),
             None,
             None,
+            None,
         )
         .expect_err("draft claim should not accept directly");
         assert!(err
@@ -1168,6 +1200,7 @@ mod tests {
             "Submitted maintainer claim.".into(),
             None,
             None,
+            None,
         )
         .expect("submitted event succeeds");
         cmd_claim_event(
@@ -1176,6 +1209,7 @@ mod tests {
             ClaimEventKindArg::Accepted,
             "index-reviewer".into(),
             "Accepted maintainer claim after review.".into(),
+            None,
             Some(".repo".into()),
             Some("repos/github.com/acme/widget/record.toml".into()),
         )
