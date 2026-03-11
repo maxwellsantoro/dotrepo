@@ -15,6 +15,8 @@ const SUPPORTED_CLAIM_SCHEMA: &str = "dotrepo-claim/v0";
 const SUPPORTED_CLAIM_EVENT_SCHEMA: &str = "dotrepo-claim-event/v0";
 const GENERATOR_NAME: &str = "dotrepo";
 const GENERATOR_VERSION: &str = env!("CARGO_PKG_VERSION");
+const PUBLIC_API_VERSION: &str = "v0";
+const PUBLIC_STATIC_STRATEGY: &str = "static_summary_and_trust";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -157,6 +159,138 @@ pub struct TrustReport {
     pub manifest_path: String,
     pub selection: SelectionReport,
     pub conflicts: Vec<ConflictReport>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicFreshness {
+    pub generated_at: String,
+    pub snapshot_digest: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stale_after: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRepositoryIdentity {
+    pub host: String,
+    pub owner: String,
+    pub repo: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub source: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRepositoryFields {
+    pub name: String,
+    pub description: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub homepage: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub docs_root: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub getting_started: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub owners_team: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub security_contact: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRecordArtifacts {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub evidence_path: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicSelectedRecord {
+    pub manifest_path: String,
+    pub record: RecordSummary,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub claim: Option<RecordClaimContext>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub artifacts: Option<PublicRecordArtifacts>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicSelectionReport {
+    pub reason: SelectionReason,
+    pub record: PublicSelectedRecord,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicConflictReport {
+    pub relationship: ConflictRelationship,
+    pub reason: SelectionReason,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub value: Option<Value>,
+    pub record: PublicSelectedRecord,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRepositoryLinks {
+    #[serde(rename = "self")]
+    pub self_link: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub repository: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub trust: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub query_template: Option<String>,
+    pub index_path: String,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRepositorySummaryResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub identity: PublicRepositoryIdentity,
+    pub repository: PublicRepositoryFields,
+    pub selection: PublicSelectionReport,
+    pub conflicts: Vec<PublicConflictReport>,
+    pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicTrustResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub identity: PublicRepositoryIdentity,
+    pub selection: PublicSelectionReport,
+    pub conflicts: Vec<PublicConflictReport>,
+    pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicQueryResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub identity: PublicRepositoryIdentity,
+    pub path: String,
+    pub value: Value,
+    pub selection: PublicSelectionReport,
+    pub conflicts: Vec<PublicConflictReport>,
+    pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicSnapshotMetadata {
+    pub api_version: &'static str,
+    pub generated_at: String,
+    pub snapshot_digest: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stale_after: Option<String>,
+    pub strategy: &'static str,
 }
 
 #[derive(Debug, Clone, Serialize, PartialEq, Eq)]
@@ -849,6 +983,156 @@ fn selected_record(root: &Path, candidate: &CandidateManifest) -> SelectedRecord
     }
 }
 
+fn public_selected_record(display_root: &Path, candidate: &CandidateManifest) -> PublicSelectedRecord {
+    PublicSelectedRecord {
+        manifest_path: display_path(display_root, &candidate.path),
+        record: record_summary(&candidate.manifest),
+        claim: candidate_claim_context(display_root, candidate),
+        artifacts: public_record_artifacts(display_root, candidate),
+    }
+}
+
+fn public_record_artifacts(
+    display_root: &Path,
+    candidate: &CandidateManifest,
+) -> Option<PublicRecordArtifacts> {
+    let evidence_path = candidate.path.parent().map(|parent| parent.join("evidence.md"));
+    let evidence_path = evidence_path
+        .filter(|path| path.is_file())
+        .map(|path| display_path(display_root, &path));
+
+    if evidence_path.is_none() {
+        return None;
+    }
+
+    Some(PublicRecordArtifacts { evidence_path })
+}
+
+#[derive(Debug, Clone, Copy)]
+enum PublicLinkKind {
+    Repository,
+    Trust,
+    Query,
+}
+
+fn index_repository_scope(index_root: &Path, host: &str, owner: &str, repo: &str) -> Result<PathBuf> {
+    let scope_root = index_root.join("repos").join(host).join(owner).join(repo);
+    let manifest_path = scope_root.join("record.toml");
+    if !manifest_path.is_file() {
+        bail!(
+            "repository not found in index: repos/{}/{}/{}/record.toml",
+            host,
+            owner,
+            repo
+        );
+    }
+    Ok(scope_root)
+}
+
+fn public_identity(
+    host: &str,
+    owner: &str,
+    repo: &str,
+    selected: &CandidateManifest,
+) -> PublicRepositoryIdentity {
+    let source = selected
+        .manifest
+        .record
+        .source
+        .clone()
+        .or_else(|| {
+            selected
+                .manifest
+                .repo
+                .homepage
+                .clone()
+                .filter(|homepage| {
+                    repository_identity(homepage)
+                        .map(|identity| identity == (host.to_string(), owner.to_string(), repo.to_string()))
+                        .unwrap_or(false)
+                })
+        });
+
+    PublicRepositoryIdentity {
+        host: host.to_string(),
+        owner: owner.to_string(),
+        repo: repo.to_string(),
+        source,
+    }
+}
+
+fn public_repository_fields(manifest: &Manifest) -> PublicRepositoryFields {
+    PublicRepositoryFields {
+        name: manifest.repo.name.clone(),
+        description: manifest.repo.description.clone(),
+        homepage: non_empty_value(manifest.repo.homepage.as_deref()),
+        docs_root: manifest
+            .docs
+            .as_ref()
+            .and_then(|docs| non_empty_value(docs.root.as_deref())),
+        getting_started: manifest
+            .docs
+            .as_ref()
+            .and_then(|docs| non_empty_value(docs.getting_started.as_deref())),
+        owners_team: manifest
+            .owners
+            .as_ref()
+            .and_then(|owners| non_empty_value(owners.team.as_deref())),
+        security_contact: manifest
+            .owners
+            .as_ref()
+            .and_then(|owners| non_empty_value(owners.security_contact.as_deref()))
+            .filter(|value| value != "unknown"),
+    }
+}
+
+fn public_links(
+    host: &str,
+    owner: &str,
+    repo: &str,
+    kind: PublicLinkKind,
+    query_path: Option<&str>,
+) -> PublicRepositoryLinks {
+    let repository = format!("/v0/repos/{host}/{owner}/{repo}");
+    let trust = format!("{repository}/trust");
+    let query_template = format!("{repository}/query?path={{dot_path}}");
+    let index_path = format!("repos/{host}/{owner}/{repo}/");
+
+    match kind {
+        PublicLinkKind::Repository => PublicRepositoryLinks {
+            self_link: repository,
+            repository: None,
+            trust: Some(trust),
+            query_template: Some(query_template),
+            index_path,
+        },
+        PublicLinkKind::Trust => PublicRepositoryLinks {
+            self_link: trust,
+            repository: Some(repository),
+            trust: None,
+            query_template: Some(query_template),
+            index_path,
+        },
+        PublicLinkKind::Query => PublicRepositoryLinks {
+            self_link: format!(
+                "{repository}/query?path={}",
+                query_path.unwrap_or("{dot_path}")
+            ),
+            repository: Some(repository),
+            trust: Some(trust),
+            query_template: Some(query_template),
+            index_path,
+        },
+    }
+}
+
+fn non_empty_value(value: Option<&str>) -> Option<String> {
+    value
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned)
+}
+
 fn resolve_selection_reason(
     candidates: &[CandidateManifest],
     selected: &CandidateManifest,
@@ -1532,6 +1816,243 @@ pub fn trust_repository(root: &Path) -> Result<TrustReport> {
             })
             .collect(),
     })
+}
+
+pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
+    let mut files = Vec::new();
+    collect_files(index_root, &mut files)?;
+    files.sort();
+
+    let mut hasher = Sha256::new();
+    for path in files {
+        let relative = path.strip_prefix(index_root).unwrap_or(&path);
+        hasher.update(relative.to_string_lossy().as_bytes());
+        hasher.update([0]);
+        hasher.update(
+            fs::read(&path)
+                .map_err(|err| anyhow!("failed to read {} for snapshot digest: {}", path.display(), err))?,
+        );
+        hasher.update([0xff]);
+    }
+
+    Ok(format!("{:x}", hasher.finalize()))
+}
+
+pub fn public_snapshot_metadata(freshness: PublicFreshness) -> PublicSnapshotMetadata {
+    PublicSnapshotMetadata {
+        api_version: PUBLIC_API_VERSION,
+        generated_at: freshness.generated_at,
+        snapshot_digest: freshness.snapshot_digest,
+        stale_after: freshness.stale_after,
+        strategy: PUBLIC_STATIC_STRATEGY,
+    }
+}
+
+pub fn list_index_repository_identities(index_root: &Path) -> Result<Vec<PublicRepositoryIdentity>> {
+    let repos_root = index_root.join("repos");
+    if !repos_root.is_dir() {
+        bail!(
+            "index root does not contain a repos/ directory: {}",
+            repos_root.display()
+        );
+    }
+
+    let mut record_dirs = Vec::new();
+    collect_record_dirs(&repos_root, &mut record_dirs)?;
+    record_dirs.sort();
+
+    let mut identities = Vec::new();
+    for record_dir in record_dirs {
+        let relative = match record_dir.strip_prefix(&repos_root) {
+            Ok(relative) => relative,
+            Err(_) => continue,
+        };
+        let segments = relative
+            .iter()
+            .map(|segment| segment.to_string_lossy().to_string())
+            .collect::<Vec<_>>();
+        if segments.len() != 3 {
+            continue;
+        }
+        let identity = PublicRepositoryIdentity {
+            host: segments[0].clone(),
+            owner: segments[1].clone(),
+            repo: segments[2].clone(),
+            source: None,
+        };
+        if !identities.iter().any(|existing: &PublicRepositoryIdentity| {
+            existing.host == identity.host
+                && existing.owner == identity.owner
+                && existing.repo == identity.repo
+        }) {
+            identities.push(identity);
+        }
+    }
+
+    Ok(identities)
+}
+
+pub fn public_repository_summary(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+) -> Result<PublicRepositorySummaryResponse> {
+    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
+    let candidates = resolve_candidates(&scope_root)?;
+    let selected = &candidates[0];
+    let reason = resolve_selection_reason(&candidates, selected);
+
+    Ok(PublicRepositorySummaryResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        identity: public_identity(host, owner, repo, selected),
+        repository: public_repository_fields(&selected.manifest),
+        selection: PublicSelectionReport {
+            reason,
+            record: public_selected_record(index_root, selected),
+        },
+        conflicts: candidates
+            .iter()
+            .skip(1)
+            .map(|candidate| PublicConflictReport {
+                relationship: if candidate.rank == selected.rank {
+                    ConflictRelationship::Parallel
+                } else {
+                    ConflictRelationship::Superseded
+                },
+                reason: resolve_conflict_reason(reason, selected, candidate),
+                value: None,
+                record: public_selected_record(index_root, candidate),
+            })
+            .collect(),
+        links: public_links(host, owner, repo, PublicLinkKind::Repository, None),
+    })
+}
+
+pub fn public_repository_trust(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+) -> Result<PublicTrustResponse> {
+    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
+    let candidates = resolve_candidates(&scope_root)?;
+    let selected = &candidates[0];
+    let reason = resolve_selection_reason(&candidates, selected);
+
+    Ok(PublicTrustResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        identity: public_identity(host, owner, repo, selected),
+        selection: PublicSelectionReport {
+            reason,
+            record: public_selected_record(index_root, selected),
+        },
+        conflicts: candidates
+            .iter()
+            .skip(1)
+            .map(|candidate| PublicConflictReport {
+                relationship: if candidate.rank == selected.rank {
+                    ConflictRelationship::Parallel
+                } else {
+                    ConflictRelationship::Superseded
+                },
+                reason: resolve_conflict_reason(reason, selected, candidate),
+                value: None,
+                record: public_selected_record(index_root, candidate),
+            })
+            .collect(),
+        links: public_links(host, owner, repo, PublicLinkKind::Trust, None),
+    })
+}
+
+pub fn public_repository_query(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    path: &str,
+    freshness: PublicFreshness,
+) -> Result<PublicQueryResponse> {
+    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
+    let candidates = resolve_candidates(&scope_root)?;
+    let selected = &candidates[0];
+    let value = query_manifest_value(&selected.manifest, path)?;
+    let reason = resolve_selection_reason(&candidates, selected);
+
+    Ok(PublicQueryResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        identity: public_identity(host, owner, repo, selected),
+        path: path.to_string(),
+        value,
+        selection: PublicSelectionReport {
+            reason,
+            record: public_selected_record(index_root, selected),
+        },
+        conflicts: candidates
+            .iter()
+            .skip(1)
+            .map(|candidate| PublicConflictReport {
+                relationship: if candidate.rank == selected.rank {
+                    ConflictRelationship::Parallel
+                } else {
+                    ConflictRelationship::Superseded
+                },
+                reason: resolve_conflict_reason(reason, selected, candidate),
+                value: resolve_competing_value(&candidate.manifest, path),
+                record: public_selected_record(index_root, candidate),
+            })
+            .collect(),
+        links: public_links(host, owner, repo, PublicLinkKind::Query, Some(path)),
+    })
+}
+
+pub fn export_public_index_static(
+    index_root: &Path,
+    out_root: &Path,
+    freshness: PublicFreshness,
+) -> Result<Vec<(PathBuf, String)>> {
+    let mut outputs = Vec::new();
+    outputs.push((
+        out_root.join("v0/meta.json"),
+        serde_json::to_string_pretty(&public_snapshot_metadata(freshness.clone()))?,
+    ));
+
+    for identity in list_index_repository_identities(index_root)? {
+        let repo_base = out_root
+            .join("v0/repos")
+            .join(&identity.host)
+            .join(&identity.owner)
+            .join(&identity.repo);
+        let summary = public_repository_summary(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            freshness.clone(),
+        )?;
+        let trust = public_repository_trust(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            freshness.clone(),
+        )?;
+        outputs.push((
+            repo_base.join("index.json"),
+            serde_json::to_string_pretty(&summary)?,
+        ));
+        outputs.push((
+            repo_base.join("trust.json"),
+            serde_json::to_string_pretty(&trust)?,
+        ));
+    }
+
+    Ok(outputs)
 }
 
 pub fn generate_check_repository(root: &Path) -> Result<GenerateCheckReport> {
@@ -4038,6 +4559,22 @@ fn collect_record_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
     Ok(())
 }
 
+fn collect_files(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
+    for entry in
+        fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
+    {
+        let entry = entry?;
+        let path = entry.path();
+        let file_type = entry.file_type()?;
+        if file_type.is_dir() {
+            collect_files(&path, out)?;
+        } else if file_type.is_file() {
+            out.push(path);
+        }
+    }
+    Ok(())
+}
+
 fn collect_claim_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
     for entry in
         fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
@@ -5087,6 +5624,327 @@ text = "Rejected claim."
             None,
             "rejected claims should stay in dedicated claim inspection, not normal trust visibility"
         );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn public_repository_summary_includes_freshness_links_and_artifacts() {
+        let root = temp_dir("public-summary");
+        let record_dir = root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+notes = "Reviewed overlay."
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+homepage = "https://github.com/example/orbit"
+
+[owners]
+team = "@example/orbit-team"
+security_contact = "security@example.com"
+
+[docs]
+root = "https://example.com/orbit/docs"
+getting_started = "https://example.com/orbit/docs/start"
+"#,
+        )
+        .expect("record written");
+        fs::write(
+            record_dir.join("evidence.md"),
+            "# Evidence\n\n- imported from the upstream repository\n",
+        )
+        .expect("evidence written");
+
+        let response = public_repository_summary(
+            &root,
+            "github.com",
+            "example",
+            "orbit",
+            sample_public_freshness(),
+        )
+        .expect("public summary builds");
+        let json = serde_json::to_value(response).expect("summary serializes");
+        assert_eq!(json["apiVersion"], Value::String("v0".into()));
+        assert_eq!(
+            json["freshness"]["generatedAt"],
+            Value::String("2026-03-10T18:30:00Z".into())
+        );
+        assert_eq!(
+            json["freshness"]["snapshotDigest"],
+            Value::String("snapshot-123".into())
+        );
+        assert_eq!(
+            json["repository"]["gettingStarted"],
+            Value::String("https://example.com/orbit/docs/start".into())
+        );
+        assert_eq!(
+            json["selection"]["record"]["artifacts"]["evidencePath"],
+            Value::String("repos/github.com/example/orbit/evidence.md".into())
+        );
+        assert_eq!(
+            json["links"]["self"],
+            Value::String("/v0/repos/github.com/example/orbit".into())
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn public_repository_query_preserves_competing_values() {
+        let root = temp_dir("public-query");
+        let record_dir = root.join("repos/github.com/example/orbit");
+        let alt_dir = record_dir.join("alt");
+        fs::create_dir_all(&alt_dir).expect("alt dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Selected description"
+"#,
+        )
+        .expect("selected record written");
+        fs::write(
+            alt_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Competing description"
+"#,
+        )
+        .expect("competing record written");
+
+        let response = public_repository_query(
+            &root,
+            "github.com",
+            "example",
+            "orbit",
+            "repo.description",
+            sample_public_freshness(),
+        )
+        .expect("public query builds");
+        let json = serde_json::to_value(response).expect("query serializes");
+        assert_eq!(
+            json["selection"]["reason"],
+            Value::String("equal_authority_conflict".into())
+        );
+        assert_eq!(
+            json["value"],
+            Value::String("Competing description".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["relationship"],
+            Value::String("parallel".into())
+        );
+        assert_eq!(
+            json["conflicts"][0]["value"],
+            Value::String("Selected description".into())
+        );
+        assert_eq!(
+            json["links"]["self"],
+            Value::String("/v0/repos/github.com/example/orbit/query?path=repo.description".into())
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn public_repository_summary_omits_rejected_claim_context() {
+        let root = temp_dir("public-rejected-claim");
+        let record_dir = root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+        let claim_dir = record_dir.join("claims/2026-03-10-maintainer-claim-01");
+        fs::create_dir_all(claim_dir.join("events")).expect("claim dir created");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            r#"
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/example/orbit/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "rejected"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-10T15:00:00Z"
+
+[identity]
+host = "github.com"
+owner = "example"
+repo = "orbit"
+
+[claimant]
+display_name = "Orbit maintainers"
+asserted_role = "maintainer"
+
+[target]
+record_sources = ["https://github.com/example/orbit"]
+"#,
+        )
+        .expect("claim written");
+        fs::write(
+            claim_dir.join("events/0001-submitted.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 1
+kind = "submitted"
+timestamp = "2026-03-10T14:30:00Z"
+actor = "claimant"
+
+[transition]
+from = "draft"
+to = "submitted"
+
+[summary]
+text = "Submitted claim."
+"#,
+        )
+        .expect("submitted event written");
+        fs::write(
+            claim_dir.join("events/0002-rejected.toml"),
+            r#"
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "rejected"
+timestamp = "2026-03-10T15:00:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "rejected"
+
+[summary]
+text = "Rejected claim."
+"#,
+        )
+        .expect("rejected event written");
+
+        let response = public_repository_summary(
+            &root,
+            "github.com",
+            "example",
+            "orbit",
+            sample_public_freshness(),
+        )
+        .expect("public summary builds");
+        let json = serde_json::to_value(response).expect("summary serializes");
+        assert_eq!(
+            json["selection"]["record"].get("claim"),
+            None,
+            "rejected claims should stay out of ordinary public repository responses"
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn export_public_index_static_emits_meta_summary_and_trust_files() {
+        let root = temp_dir("public-export");
+        let record_dir = root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+
+        let out = root.join("public");
+        let outputs =
+            export_public_index_static(&root, &out, sample_public_freshness()).expect("export");
+        let rendered = outputs
+            .iter()
+            .map(|(path, contents)| (path.strip_prefix(&root).unwrap().display().to_string(), contents.clone()))
+            .collect::<Vec<_>>();
+
+        assert!(rendered
+            .iter()
+            .any(|(path, _)| path == "public/v0/meta.json"));
+        assert!(rendered
+            .iter()
+            .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/index.json"));
+        assert!(rendered
+            .iter()
+            .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/trust.json"));
+        assert!(rendered.iter().any(|(path, contents)| {
+            path == "public/v0/meta.json"
+                && contents.contains("\"strategy\": \"static_summary_and_trust\"")
+        }));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -6887,5 +7745,13 @@ text = "Submitted claim."
         ));
         fs::create_dir_all(&path).expect("temp dir created");
         path
+    }
+
+    fn sample_public_freshness() -> PublicFreshness {
+        PublicFreshness {
+            generated_at: "2026-03-10T18:30:00Z".into(),
+            snapshot_digest: "snapshot-123".into(),
+            stale_after: Some("2026-03-11T18:30:00Z".into()),
+        }
     }
 }

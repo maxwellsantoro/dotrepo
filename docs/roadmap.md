@@ -22,14 +22,15 @@ for the first editor feature set and thin-extension model.
 
 ## v0.3+
 - Maintainer claim workflow and index-side authority handoff
+- Public index site and query API
 - Bundle mode
 - First-class workspace and relations support
-- Public index site and query API
 
-The next strategic track after the current v0.2 execution loop is maintainer
-claim workflow and index-side handoff. That work should turn the existing claim,
-supersede, and conflict semantics into a maintainer-controlled product flow
-before broader public index surfaces become the center of gravity.
+The current downstream track after the v0.2 execution loop and first
+maintainer-claim workflow tranche is public index serving. That work should
+turn the existing index, trust, conflict, and claim-visibility semantics into a
+read-only, identity-first repository inspection surface before bundle or
+workspace semantics expand the protocol again.
 
 See [`RFC 0008`](../rfcs/0008-maintainer-claim-lifecycle.md) for the first
 lifecycle draft.
@@ -38,9 +39,15 @@ for the phased implementation order from index artifacts to reviewer workflow
 and later public claim surfaces.
 See [`docs/maintainer-claim-review-workflow.md`](./maintainer-claim-review-workflow.md)
 for the first operator-facing maintainer-claim loop built on the current CLI.
+See [`RFC 0016`](../rfcs/0016-public-index-site-and-query-api.md) for the first
+public index site and query-API design direction.
+See [`RFC 0017`](../rfcs/0017-public-repository-summary-response.md) for the
+first concrete public repository-summary response shape.
+See [`RFC 0018`](../rfcs/0018-static-public-serving-and-freshness.md) for the
+first static-serving and freshness-metadata strategy.
+See [`RFC 0019`](../rfcs/0019-public-trust-and-query-wrappers.md) for the
+public trust/query wrappers and claim-aware public visibility rules.
 See [`RFC 0014`](../rfcs/0014-bundle-mode-design.md) for the first bundle-mode
 design note.
 See [`RFC 0015`](../rfcs/0015-workspace-and-relations-model.md) for the first
 workspace and relations design direction.
-See [`RFC 0016`](../rfcs/0016-public-index-site-and-query-api.md) for the first
-public index site and query-API design direction.

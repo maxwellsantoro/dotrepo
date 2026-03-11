@@ -15,6 +15,8 @@ is no longer just an architecture sketch.
   by a checked-in fixture pack and regression gate
 - A seed `index/` tree with evidence rules, showcase overlays, and validation checks
 - Contract-level claim, supersede, and conflict surfacing semantics
+- Git-backed maintainer-claim artifacts, read-only claim inspection, and a first
+  reviewer workflow over append-only claim events
 
 ## What dotrepo does not promise yet
 
@@ -39,10 +41,13 @@ is no longer just an architecture sketch.
 
 ## What the next strategic constraint is
 
-The next meaningful constraint is no longer import quality or initial editor
-ergonomics. It is maintainer authority handoff at the product and index level:
-how maintainers claim representation, how overlays transition cleanly to canonical
-records, and how conflict visibility remains trustworthy as adoption grows.
+The next meaningful constraint is no longer import quality, initial editor
+ergonomics, or basic maintainer-claim workflow. It is public, read-only index
+serving: how dotrepo exposes repository identity, preferred-record summary,
+trust context, and competing claims without inventing a second public truth
+model.
 
-That is why the next strategic track should focus on maintainer claim workflow and
-index-side handoff, not on widening the editor surface further.
+That is why the next strategic track should focus on the identity-first public
+index site and query API described in RFC 0016 and its follow-on response-shape
+work, not on widening the editor surface or expanding bundle/workspace semantics
+first.

@@ -3,10 +3,12 @@ use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
     append_claim_event, generate_check_repository, import_repository, inspect_claim_directory,
     inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
-    query_repository, scaffold_claim_directory, trust_repository, validate_index_root,
-    validate_manifest, validate_repository, ClaimEventAppendInput, ClaimEventKind,
-    ClaimHandoffOutcome, ClaimInspectionReport, ClaimScaffoldInput, ConflictRelationship,
-    ImportMode, IndexFindingSeverity, ManagedFileState, SelectionReason, TrustReport,
+    export_public_index_static, index_snapshot_digest, public_repository_query,
+    public_repository_summary, public_repository_trust, query_repository,
+    scaffold_claim_directory, trust_repository, validate_index_root, validate_manifest,
+    validate_repository, ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome,
+    ClaimInspectionReport, ClaimScaffoldInput, ConflictRelationship, ImportMode,
+    IndexFindingSeverity, ManagedFileState, PublicFreshness, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::Trust;
@@ -16,7 +18,7 @@ use std::path::PathBuf;
 use std::process;
 use thiserror::Error;
 use time::format_description::well_known::Rfc3339;
-use time::OffsetDateTime;
+use time::{Duration, OffsetDateTime};
 
 #[derive(Parser)]
 #[command(name = "dotrepo")]
@@ -148,6 +150,59 @@ enum Command {
         /// Optional canonical mirror record path recorded for accepted handoff.
         #[arg(long)]
         canonical_mirror_path: Option<String>,
+    },
+    /// Inspect or export public read-only index responses.
+    Public {
+        #[command(subcommand)]
+        command: PublicCommand,
+    },
+}
+
+#[derive(Subcommand)]
+enum PublicCommand {
+    /// Render one public repository summary response as JSON.
+    Summary {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        host: String,
+        owner: String,
+        repo: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
+    /// Render one public trust response as JSON.
+    Trust {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        host: String,
+        owner: String,
+        repo: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
+    /// Render one public query response as JSON.
+    Query {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        host: String,
+        owner: String,
+        repo: String,
+        path: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
+    /// Export the static-first public JSON tree for repository summary and trust.
+    Export {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        #[arg(long, default_value = "public")]
+        out_dir: PathBuf,
+        /// Advisory staleness window in hours for exported responses.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
     },
 }
 
@@ -292,6 +347,7 @@ fn run() -> Result<()> {
             canonical_record_path,
             canonical_mirror_path,
         ),
+        Command::Public { command } => cmd_public(command),
     }
 }
 
@@ -628,10 +684,90 @@ fn cmd_claim_event(
     Ok(())
 }
 
+fn cmd_public(command: PublicCommand) -> Result<()> {
+    match command {
+        PublicCommand::Summary {
+            index_root,
+            host,
+            owner,
+            repo,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let response = public_repository_summary(&index_root, &host, &owner, &repo, freshness)?;
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Ok(())
+        }
+        PublicCommand::Trust {
+            index_root,
+            host,
+            owner,
+            repo,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let response = public_repository_trust(&index_root, &host, &owner, &repo, freshness)?;
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Ok(())
+        }
+        PublicCommand::Query {
+            index_root,
+            host,
+            owner,
+            repo,
+            path,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let response =
+                public_repository_query(&index_root, &host, &owner, &repo, &path, freshness)?;
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Ok(())
+        }
+        PublicCommand::Export {
+            index_root,
+            out_dir,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let outputs = export_public_index_static(&index_root, &out_dir, freshness)?;
+            for (path, contents) in outputs {
+                if let Some(parent) = path.parent() {
+                    fs::create_dir_all(parent)?;
+                }
+                fs::write(&path, contents)?;
+                println!("exported {}", path.display());
+            }
+            Ok(())
+        }
+    }
+}
+
 fn current_timestamp() -> Result<String> {
     Ok(OffsetDateTime::now_utc()
         .format(&Rfc3339)
         .map_err(|err| anyhow::anyhow!("failed to render current timestamp: {err}"))?)
+}
+
+fn current_public_freshness(index_root: &std::path::Path, stale_after_hours: Option<i64>) -> Result<PublicFreshness> {
+    let generated_at = OffsetDateTime::now_utc();
+    let stale_after = stale_after_hours
+        .map(Duration::hours)
+        .map(|offset| generated_at + offset)
+        .map(|timestamp| {
+            timestamp
+                .format(&Rfc3339)
+                .map_err(|err| anyhow::anyhow!("failed to render stale-after timestamp: {err}"))
+        })
+        .transpose()?;
+
+    Ok(PublicFreshness {
+        generated_at: generated_at
+            .format(&Rfc3339)
+            .map_err(|err| anyhow::anyhow!("failed to render public freshness timestamp: {err}"))?,
+        snapshot_digest: index_snapshot_digest(index_root)?,
+        stale_after,
+    })
 }
 
 fn ensure_replaceable_claim_scaffold(claim_dir: &std::path::Path) -> Result<()> {
@@ -1535,6 +1671,90 @@ description = "Broken overlay"
         assert!(exit.message.contains("repo.name must not be empty"));
         assert!(exit.message.contains("record.source must be set"));
         assert!(exit.message.contains("record.trust must be set"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn public_export_writes_static_repository_and_trust_json() {
+        let root = temp_dir("public-export");
+        let index_root = root.join("index");
+        let record_dir = index_root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+
+        let out_dir = root.join("public");
+        cmd_public(PublicCommand::Export {
+            index_root: index_root.clone(),
+            out_dir: out_dir.clone(),
+            stale_after_hours: Some(24),
+        })
+        .expect("public export succeeds");
+
+        assert!(out_dir.join("v0/meta.json").exists());
+        assert!(out_dir
+            .join("v0/repos/github.com/example/orbit/index.json")
+            .exists());
+        assert!(out_dir
+            .join("v0/repos/github.com/example/orbit/trust.json")
+            .exists());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn public_freshness_reuses_snapshot_digest() {
+        let root = temp_dir("public-freshness");
+        let index_root = root.join("index");
+        let record_dir = index_root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+
+        let digest = index_snapshot_digest(&index_root).expect("snapshot digest");
+        let freshness =
+            current_public_freshness(&index_root, Some(24)).expect("public freshness builds");
+        assert_eq!(freshness.snapshot_digest, digest);
+        assert!(freshness.stale_after.is_some());
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

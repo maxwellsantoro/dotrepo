@@ -86,4 +86,8 @@ This repo is an early implementation of the dotrepo protocol and toolchain. It i
 - [`rfcs/0003-cli-and-query-contract.md`](rfcs/0003-cli-and-query-contract.md)
 - [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md)
 - [`rfcs/0007-lsp-and-vscode-scope.md`](rfcs/0007-lsp-and-vscode-scope.md)
+- [`rfcs/0016-public-index-site-and-query-api.md`](rfcs/0016-public-index-site-and-query-api.md)
+- [`rfcs/0017-public-repository-summary-response.md`](rfcs/0017-public-repository-summary-response.md)
+- [`rfcs/0018-static-public-serving-and-freshness.md`](rfcs/0018-static-public-serving-and-freshness.md)
+- [`rfcs/0019-public-trust-and-query-wrappers.md`](rfcs/0019-public-trust-and-query-wrappers.md)
 - [`editors/vscode/README.md`](editors/vscode/README.md)

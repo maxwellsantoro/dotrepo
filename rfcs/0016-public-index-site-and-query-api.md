@@ -241,8 +241,8 @@ claim workflow to be productized prematurely.
 This RFC defines the direction for public read-only serving of index data.
 
 Follow-on work should refine:
-- first repository-summary response shape
-- first trust/query API response wrappers
-- static-vs-dynamic serving strategy
+- first repository-summary response shape (see RFC 0017)
+- first trust/query API response wrappers (see RFC 0019)
+- static-vs-dynamic serving strategy (see RFC 0018)
 - how claim-aware visibility appears in public responses once claim workflow
   lands
