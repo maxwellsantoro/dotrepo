@@ -1,0 +1,24 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+notes = "Reviewed overlay from public repository materials."
+
+[repo]
+name = "orbit"
+description = "Reviewed orbital tooling metadata."
+homepage = "https://github.com/example/orbit"
+
+[owners]
+team = "@example/orbit-team"
+security_contact = "security@example.com"
+
+[docs]
+root = "https://docs.example.com/orbit"
+getting_started = "https://docs.example.com/orbit/getting-started"

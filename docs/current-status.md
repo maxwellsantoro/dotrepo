@@ -51,3 +51,8 @@ That is why the next strategic track should focus on the identity-first public
 index site and query API described in RFC 0016 and its follow-on response-shape
 work, not on widening the editor surface or expanding bundle/workspace semantics
 first.
+
+For the current operator/reviewer loop over the exported public JSON tree, see
+[`docs/public-export-workflow.md`](./public-export-workflow.md).
+For the current outward-facing proof vehicle built on that export tree, see
+[`docs/public-proof-surface.md`](./public-proof-surface.md).

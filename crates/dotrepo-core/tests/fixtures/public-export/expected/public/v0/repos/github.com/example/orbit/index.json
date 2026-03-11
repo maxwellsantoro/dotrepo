@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "8cc5a42d31fc8c6494caaa0bcc1c4fbdf0887992d95834d809be6289a3f9e6fb",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "example",
+    "repo": "orbit",
+    "source": "https://github.com/example/orbit"
+  },
+  "repository": {
+    "name": "orbit",
+    "description": "Reviewed orbital tooling metadata.",
+    "homepage": "https://github.com/example/orbit",
+    "docsRoot": "https://docs.example.com/orbit",
+    "gettingStarted": "https://docs.example.com/orbit/getting-started",
+    "ownersTeam": "@example/orbit-team",
+    "securityContact": "security@example.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/example/orbit/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "reviewed",
+        "source": "https://github.com/example/orbit",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Reviewed overlay from public repository materials."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/example/orbit/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/example/orbit",
+    "trust": "/v0/repos/github.com/example/orbit/trust",
+    "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
+    "indexPath": "repos/github.com/example/orbit/"
+  }
+}

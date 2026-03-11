@@ -47,6 +47,10 @@ See [`RFC 0018`](../rfcs/0018-static-public-serving-and-freshness.md) for the
 first static-serving and freshness-metadata strategy.
 See [`RFC 0019`](../rfcs/0019-public-trust-and-query-wrappers.md) for the
 public trust/query wrappers and claim-aware public visibility rules.
+See [`docs/public-export-workflow.md`](./public-export-workflow.md) for the
+current local-review and CI-artifact loop over the exported public JSON tree.
+See [`docs/public-proof-surface.md`](./public-proof-surface.md) for the chosen
+release-style proof surface built on the exported JSON tree.
 See [`RFC 0014`](../rfcs/0014-bundle-mode-design.md) for the first bundle-mode
 design note.
 See [`RFC 0015`](../rfcs/0015-workspace-and-relations-model.md) for the first

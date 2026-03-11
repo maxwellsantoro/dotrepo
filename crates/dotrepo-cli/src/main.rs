@@ -203,6 +203,12 @@ enum PublicCommand {
         /// Advisory staleness window in hours for exported responses.
         #[arg(long)]
         stale_after_hours: Option<i64>,
+        /// Fixed RFC 3339 generation timestamp for deterministic export review.
+        #[arg(long)]
+        generated_at: Option<String>,
+        /// Fixed RFC 3339 staleness timestamp for deterministic export review.
+        #[arg(long)]
+        stale_after: Option<String>,
     },
 }
 
@@ -728,8 +734,15 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
             index_root,
             out_dir,
             stale_after_hours,
+            generated_at,
+            stale_after,
         } => {
-            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let freshness = build_public_freshness(
+                &index_root,
+                stale_after_hours,
+                generated_at.as_deref(),
+                stale_after.as_deref(),
+            )?;
             let outputs = export_public_index_static(&index_root, &out_dir, freshness)?;
             for (path, contents) in outputs {
                 if let Some(parent) = path.parent() {
@@ -749,25 +762,56 @@ fn current_timestamp() -> Result<String> {
         .map_err(|err| anyhow::anyhow!("failed to render current timestamp: {err}"))?)
 }
 
-fn current_public_freshness(index_root: &std::path::Path, stale_after_hours: Option<i64>) -> Result<PublicFreshness> {
-    let generated_at = OffsetDateTime::now_utc();
-    let stale_after = stale_after_hours
-        .map(Duration::hours)
-        .map(|offset| generated_at + offset)
-        .map(|timestamp| {
-            timestamp
-                .format(&Rfc3339)
-                .map_err(|err| anyhow::anyhow!("failed to render stale-after timestamp: {err}"))
-        })
-        .transpose()?;
+fn render_rfc3339(label: &str, timestamp: OffsetDateTime) -> Result<String> {
+    timestamp
+        .format(&Rfc3339)
+        .map_err(|err| anyhow::anyhow!("failed to render {label}: {err}"))
+}
+
+fn parse_rfc3339(label: &str, value: &str) -> Result<OffsetDateTime> {
+    OffsetDateTime::parse(value, &Rfc3339)
+        .map_err(|err| anyhow::anyhow!("failed to parse {label} as RFC3339: {err}"))
+}
+
+fn build_public_freshness(
+    index_root: &std::path::Path,
+    stale_after_hours: Option<i64>,
+    generated_at: Option<&str>,
+    stale_after: Option<&str>,
+) -> Result<PublicFreshness> {
+    if stale_after.is_some() && stale_after_hours.is_some() {
+        bail!("--stale-after conflicts with --stale-after-hours");
+    }
+    if stale_after.is_some() && generated_at.is_none() {
+        bail!("--stale-after requires --generated-at");
+    }
+
+    let generated_at = match generated_at {
+        Some(value) => parse_rfc3339("--generated-at", value)?,
+        None => OffsetDateTime::now_utc(),
+    };
+    let stale_after = match (stale_after, stale_after_hours) {
+        (Some(value), None) => Some(render_rfc3339(
+            "--stale-after",
+            parse_rfc3339("--stale-after", value)?,
+        )?),
+        (None, Some(hours)) => Some(render_rfc3339(
+            "stale-after timestamp",
+            generated_at + Duration::hours(hours),
+        )?),
+        (None, None) => None,
+        (Some(_), Some(_)) => unreachable!("validated above"),
+    };
 
     Ok(PublicFreshness {
-        generated_at: generated_at
-            .format(&Rfc3339)
-            .map_err(|err| anyhow::anyhow!("failed to render public freshness timestamp: {err}"))?,
+        generated_at: render_rfc3339("public freshness timestamp", generated_at)?,
         snapshot_digest: index_snapshot_digest(index_root)?,
         stale_after,
     })
+}
+
+fn current_public_freshness(index_root: &std::path::Path, stale_after_hours: Option<i64>) -> Result<PublicFreshness> {
+    build_public_freshness(index_root, stale_after_hours, None, None)
 }
 
 fn ensure_replaceable_claim_scaffold(claim_dir: &std::path::Path) -> Result<()> {
@@ -1708,6 +1752,8 @@ description = "Reviewed overlay"
             index_root: index_root.clone(),
             out_dir: out_dir.clone(),
             stale_after_hours: Some(24),
+            generated_at: None,
+            stale_after: None,
         })
         .expect("public export succeeds");
 
@@ -1757,6 +1803,138 @@ description = "Reviewed overlay"
         assert!(freshness.stale_after.is_some());
 
         fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn deterministic_public_export_repeats_byte_for_byte() {
+        let root = temp_dir("public-export-deterministic");
+        let index_root = root.join("index");
+        let record_dir = index_root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+
+        let out_a = root.join("public-a");
+        let out_b = root.join("public-b");
+        let generated_at = "2026-03-10T18:30:00Z".to_string();
+        let stale_after = "2026-03-11T18:30:00Z".to_string();
+
+        cmd_public(PublicCommand::Export {
+            index_root: index_root.clone(),
+            out_dir: out_a.clone(),
+            stale_after_hours: None,
+            generated_at: Some(generated_at.clone()),
+            stale_after: Some(stale_after.clone()),
+        })
+        .expect("first deterministic export succeeds");
+        cmd_public(PublicCommand::Export {
+            index_root: index_root.clone(),
+            out_dir: out_b.clone(),
+            stale_after_hours: None,
+            generated_at: Some(generated_at),
+            stale_after: Some(stale_after),
+        })
+        .expect("second deterministic export succeeds");
+
+        assert_eq!(read_tree(&out_a), read_tree(&out_b));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn deterministic_public_export_requires_generated_at_for_fixed_stale_after() {
+        let root = temp_dir("public-export-invalid");
+        let index_root = root.join("index");
+        let record_dir = index_root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+
+        let err = cmd_public(PublicCommand::Export {
+            index_root: index_root.clone(),
+            out_dir: root.join("public"),
+            stale_after_hours: None,
+            generated_at: None,
+            stale_after: Some("2026-03-11T18:30:00Z".into()),
+        })
+        .expect_err("fixed stale-after without generated-at should fail");
+        assert!(
+            err.to_string().contains("--stale-after requires --generated-at"),
+            "unexpected error: {err}"
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    fn read_tree(root: &PathBuf) -> Vec<(String, String)> {
+        let mut paths = Vec::new();
+        collect_files(root, &mut paths);
+        paths.into_iter()
+            .map(|path| {
+                (
+                    path.strip_prefix(root)
+                        .expect("relative path")
+                        .display()
+                        .to_string(),
+                    fs::read_to_string(&path).expect("file is readable"),
+                )
+            })
+            .collect()
+    }
+
+    fn collect_files(root: &PathBuf, out: &mut Vec<PathBuf>) {
+        let mut entries = fs::read_dir(root)
+            .expect("directory exists")
+            .filter_map(|entry| entry.ok())
+            .map(|entry| entry.path())
+            .collect::<Vec<_>>();
+        entries.sort();
+
+        for path in entries {
+            if path.is_dir() {
+                collect_files(&path, out);
+            } else {
+                out.push(path);
+            }
+        }
     }
 
     fn temp_dir(label: &str) -> PathBuf {

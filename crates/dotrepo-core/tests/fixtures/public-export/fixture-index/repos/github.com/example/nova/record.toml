@@ -1,0 +1,16 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/nova"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+notes = "Reviewed overlay awaiting maintainer-controlled canonical handoff."
+
+[repo]
+name = "nova"
+description = "Reviewed metadata with an accepted pending maintainer claim."
+homepage = "https://github.com/example/nova"

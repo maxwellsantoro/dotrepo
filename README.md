@@ -77,6 +77,8 @@ This repo is an early implementation of the dotrepo protocol and toolchain. It i
 - [`docs/public-messaging.md`](docs/public-messaging.md)
 - [`docs/trust-model.md`](docs/trust-model.md)
 - [`docs/sync-boundaries.md`](docs/sync-boundaries.md)
+- [`docs/public-export-workflow.md`](docs/public-export-workflow.md)
+- [`docs/public-proof-surface.md`](docs/public-proof-surface.md)
 - [`docs/authority-handoff-examples.md`](docs/authority-handoff-examples.md)
 - [`docs/conflict-surfacing-examples.md`](docs/conflict-surfacing-examples.md)
 - [`docs/maintainer-claim-review-workflow.md`](docs/maintainer-claim-review-workflow.md)

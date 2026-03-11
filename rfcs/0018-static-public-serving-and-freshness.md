@@ -156,6 +156,21 @@ stale enough to revalidate or refetch.
 
 This is an operational hint, not a real-time guarantee.
 
+## Deterministic export review mode
+
+The reference CLI may offer a deterministic export mode for fixture generation,
+golden-output review, and CI.
+
+That mode may fix `generatedAt` and `staleAfter` explicitly while still
+recomputing `snapshotDigest` from the index snapshot being exported.
+
+This is a tooling affordance, not a second public contract:
+- ordinary export runs should still emit real generation timestamps
+- deterministic runs should preserve the exact same response shapes and
+  selection/trust semantics
+- `snapshotDigest` should continue to reflect the exported input tree rather
+  than an injected placeholder value
+
 ## Snapshot-wide metadata
 
 The static export should also produce one snapshot-wide metadata document such

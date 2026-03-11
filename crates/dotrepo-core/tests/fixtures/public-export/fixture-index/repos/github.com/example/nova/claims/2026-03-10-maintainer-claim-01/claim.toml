@@ -1,0 +1,23 @@
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/example/nova/2026-03-10-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "accepted"
+created_at = "2026-03-10T14:30:00Z"
+updated_at = "2026-03-10T15:15:00Z"
+
+[identity]
+host = "github.com"
+owner = "example"
+repo = "nova"
+
+[claimant]
+display_name = "Nova maintainers"
+asserted_role = "maintainer"
+contact = "maintainers@example.com"
+
+[target]
+index_paths = ["repos/github.com/example/nova/record.toml"]
+record_sources = ["https://github.com/example/nova"]
+canonical_repo_url = "https://github.com/example/nova"

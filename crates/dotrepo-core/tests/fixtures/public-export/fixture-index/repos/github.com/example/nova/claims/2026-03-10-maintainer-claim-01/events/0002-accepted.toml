@@ -1,0 +1,14 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "accepted"
+timestamp = "2026-03-10T15:15:00Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "accepted"
+
+[summary]
+text = "Accepted maintainer claim; canonical handoff remains pending."
