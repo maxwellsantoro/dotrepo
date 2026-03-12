@@ -92,6 +92,7 @@ public/
   v0/
     meta.json
     repos/
+      index.json
       github.com/
         acme/
           widget/
@@ -100,6 +101,8 @@ public/
 ```
 
 Recommended meanings:
+- `repos/index.json` -> bundle-level inventory of repository identities and
+  repository/trust locators for the exported tree
 - `index.json` -> repository summary response for `GET /v0/repos/{host}/{owner}/{repo}`
 - `trust.json` -> trust response for `GET /v0/repos/{host}/{owner}/{repo}/trust`
 - `meta.json` -> snapshot-wide export metadata

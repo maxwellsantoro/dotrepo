@@ -29,7 +29,9 @@ The second option is the better first move because it:
 ### For humans
 
 - the CI artifact `public-export-v0`
+- the CI artifact `public-export-v0-bundle`
 - the operator loop in [`docs/public-export-workflow.md`](./public-export-workflow.md)
+- the release-style note in [`docs/public-proof-release-note.md`](./public-proof-release-note.md)
 - the current public response contracts in RFCs 0017, 0018, and 0019
 
 ### For agents

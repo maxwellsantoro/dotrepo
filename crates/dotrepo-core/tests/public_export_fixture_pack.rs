@@ -151,4 +151,24 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
                 .into()
         )
     );
+
+    let inventory = serde_json::from_str::<Value>(
+        generated
+            .get("v0/repos/index.json")
+            .expect("inventory output"),
+    )
+    .expect("inventory parses");
+    assert_eq!(inventory["repositoryCount"], Value::from(2));
+    let entries = inventory["repositories"]
+        .as_array()
+        .expect("inventory entries");
+    assert!(entries.iter().any(|entry| {
+        entry["identity"]["repo"] == Value::String("orbit".into())
+            && entry["links"]["self"] == Value::String("/v0/repos/github.com/example/orbit".into())
+    }));
+    assert!(entries.iter().any(|entry| {
+        entry["identity"]["repo"] == Value::String("nova".into())
+            && entry["links"]["trust"]
+                == Value::String("/v0/repos/github.com/example/nova/trust".into())
+    }));
 }

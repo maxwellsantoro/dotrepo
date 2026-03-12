@@ -16,6 +16,7 @@ public/
   v0/
     meta.json
     repos/
+      index.json
       <host>/
         <owner>/
           <repo>/
@@ -25,6 +26,7 @@ public/
 
 Today this surface proves:
 - the seed index can be rendered into a stable, identity-first public artifact
+- the exported tree includes one bundle-level repository inventory for inspection
 - repository summary and trust responses reuse the same local selection,
   conflict, and claim-visibility semantics
 - operators and reviewers can inspect one concrete exported tree without
@@ -54,8 +56,8 @@ cargo test -p dotrepo-core --test public_export_fixture_pack -- --nocapture
 
 That test fixes `generatedAt` and `staleAfter`, recomputes `snapshotDigest` from
 the checked-in fixture index, and compares the exported `meta.json`,
-`index.json`, and `trust.json` files byte-for-byte against the checked-in
-golden tree.
+bundle-level `repos/index.json`, and per-repository `index.json` / `trust.json`
+files byte-for-byte against the checked-in golden tree.
 
 Use this when reviewing response-shape changes, claim-visibility changes, link
 changes, or artifact-path changes.
@@ -91,11 +93,13 @@ You may also add `--stale-after-hours <hours>` for an advisory staleness window.
 ## CI artifact
 
 The main CI workflow now builds the public tree from the seed `index/` and
-uploads it as a workflow artifact named `public-export-v0`.
+uploads it as workflow artifacts named `public-export-v0` and
+`public-export-v0-bundle`.
 
 Current behavior:
 - the artifact is generated from the real `index/` tree
 - CI uses fixed review timestamps for inspectable, stable output
+- CI also packages a versioned review bundle from the exported tree
 - artifact retention is 14 days
 - export generation failures fail CI directly rather than being downgraded to
   warnings
@@ -107,6 +111,7 @@ rebuilding locally.
 
 Stable for the same input tree and fixed review timestamps:
 - file layout under `public/v0/`
+- bundle-level repository inventory
 - field names and response envelopes
 - selection/conflict and claim-visibility semantics
 - link structure and artifact locators
@@ -127,6 +132,13 @@ When the public export changes, ask:
 
 The fixture pack is best for contract review. The CI artifact is best for
 inspecting the current seed index output as a whole.
+
+For a release-style summary of the current proof surface, see
+[`docs/public-proof-release-note.md`](./public-proof-release-note.md).
+For concrete usage snippets, see
+[`docs/public-export-examples.md`](./public-export-examples.md).
+For a cut/review checklist, see
+[`docs/public-proof-release-checklist.md`](./public-proof-release-checklist.md).
 
 ## Related docs
 

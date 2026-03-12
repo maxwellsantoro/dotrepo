@@ -248,6 +248,24 @@ pub struct PublicRepositoryLinks {
 
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct PublicRepositoryInventoryEntry {
+    pub identity: PublicRepositoryIdentity,
+    pub name: String,
+    pub description: String,
+    pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRepositoryInventoryResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub repository_count: usize,
+    pub repositories: Vec<PublicRepositoryInventoryEntry>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct PublicRepositorySummaryResponse {
     pub api_version: &'static str,
     pub freshness: PublicFreshness,
@@ -2022,6 +2040,7 @@ pub fn export_public_index_static(
         serde_json::to_string_pretty(&public_snapshot_metadata(freshness.clone()))?,
     ));
 
+    let mut inventory = Vec::new();
     for identity in list_index_repository_identities(index_root)? {
         let repo_base = out_root
             .join("v0/repos")
@@ -2042,6 +2061,12 @@ pub fn export_public_index_static(
             &identity.repo,
             freshness.clone(),
         )?;
+        inventory.push(PublicRepositoryInventoryEntry {
+            identity: summary.identity.clone(),
+            name: summary.repository.name.clone(),
+            description: summary.repository.description.clone(),
+            links: summary.links.clone(),
+        });
         outputs.push((
             repo_base.join("index.json"),
             serde_json::to_string_pretty(&summary)?,
@@ -2051,6 +2076,15 @@ pub fn export_public_index_static(
             serde_json::to_string_pretty(&trust)?,
         ));
     }
+    outputs.push((
+        out_root.join("v0/repos/index.json"),
+        serde_json::to_string_pretty(&PublicRepositoryInventoryResponse {
+            api_version: PUBLIC_API_VERSION,
+            freshness,
+            repository_count: inventory.len(),
+            repositories: inventory,
+        })?,
+    ));
 
     Ok(outputs)
 }
@@ -5937,10 +5971,18 @@ description = "Reviewed overlay"
             .any(|(path, _)| path == "public/v0/meta.json"));
         assert!(rendered
             .iter()
+            .any(|(path, _)| path == "public/v0/repos/index.json"));
+        assert!(rendered
+            .iter()
             .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/index.json"));
         assert!(rendered
             .iter()
             .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/trust.json"));
+        assert!(rendered.iter().any(|(path, contents)| {
+            path == "public/v0/repos/index.json"
+                && contents.contains("\"repositoryCount\": 1")
+                && contents.contains("\"repo\": \"orbit\"")
+        }));
         assert!(rendered.iter().any(|(path, contents)| {
             path == "public/v0/meta.json"
                 && contents.contains("\"strategy\": \"static_summary_and_trust\"")

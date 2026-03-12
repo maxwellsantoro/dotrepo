@@ -56,3 +56,6 @@ For the current operator/reviewer loop over the exported public JSON tree, see
 [`docs/public-export-workflow.md`](./public-export-workflow.md).
 For the current outward-facing proof vehicle built on that export tree, see
 [`docs/public-proof-surface.md`](./public-proof-surface.md).
+For the current release-style note and usage examples around that proof surface,
+see [`docs/public-proof-release-note.md`](./public-proof-release-note.md) and
+[`docs/public-export-examples.md`](./public-export-examples.md).

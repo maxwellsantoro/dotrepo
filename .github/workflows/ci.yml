@@ -26,11 +26,21 @@ jobs:
             --out-dir public \
             --generated-at 2026-03-10T18:30:00Z \
             --stale-after 2026-03-11T18:30:00Z
+      - name: Package versioned public export bundle
+        run: |
+          python3 scripts/package_public_export.py --input public --output-dir dist
       - name: Upload static public export artifact
         uses: actions/upload-artifact@v4
         with:
           name: public-export-v0
           path: public/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload public export bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-export-v0-bundle
+          path: dist/*.tar.gz
           if-no-files-found: error
           retention-days: 14
       - name: Smoke test MCP stdio server

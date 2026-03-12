@@ -1,0 +1,43 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "8cc5a42d31fc8c6494caaa0bcc1c4fbdf0887992d95834d809be6289a3f9e6fb",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "repositoryCount": 2,
+  "repositories": [
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "example",
+        "repo": "nova",
+        "source": "https://github.com/example/nova"
+      },
+      "name": "nova",
+      "description": "Reviewed metadata with an accepted pending maintainer claim.",
+      "links": {
+        "self": "/v0/repos/github.com/example/nova",
+        "trust": "/v0/repos/github.com/example/nova/trust",
+        "queryTemplate": "/v0/repos/github.com/example/nova/query?path={dot_path}",
+        "indexPath": "repos/github.com/example/nova/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "example",
+        "repo": "orbit",
+        "source": "https://github.com/example/orbit"
+      },
+      "name": "orbit",
+      "description": "Reviewed orbital tooling metadata.",
+      "links": {
+        "self": "/v0/repos/github.com/example/orbit",
+        "trust": "/v0/repos/github.com/example/orbit/trust",
+        "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
+        "indexPath": "repos/github.com/example/orbit/"
+      }
+    }
+  ]
+}
