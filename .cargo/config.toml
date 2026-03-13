@@ -1,0 +1,4 @@
+[patch.crates-io]
+dotrepo-core = { path = "crates/dotrepo-core" }
+dotrepo-schema = { path = "crates/dotrepo-schema" }
+dotrepo-transport = { path = "crates/dotrepo-transport" }

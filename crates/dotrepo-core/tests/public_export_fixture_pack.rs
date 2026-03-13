@@ -52,7 +52,8 @@ fn collect_files(root: &Path, out: &mut Vec<PathBuf>) {
 fn read_tree(root: &Path) -> BTreeMap<String, String> {
     let mut files = Vec::new();
     collect_files(root, &mut files);
-    files.into_iter()
+    files
+        .into_iter()
         .map(|path| {
             (
                 path.strip_prefix(root)

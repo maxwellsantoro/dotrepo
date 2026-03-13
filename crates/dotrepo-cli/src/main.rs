@@ -1,17 +1,17 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    append_claim_event, generate_check_repository, import_repository, inspect_claim_directory,
-    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
-    export_public_index_static, index_snapshot_digest, public_repository_query,
-    public_repository_summary, public_repository_trust, query_repository,
-    scaffold_claim_directory, trust_repository, validate_index_root, validate_manifest,
-    validate_repository, ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome,
-    ClaimInspectionReport, ClaimScaffoldInput, ConflictRelationship, ImportMode,
-    IndexFindingSeverity, ManagedFileState, PublicFreshness, SelectionReason, TrustReport,
+    append_claim_event, export_public_index_static, generate_check_repository, import_repository,
+    index_snapshot_digest, inspect_claim_directory, inspect_surface_states, load_manifest_document,
+    load_manifest_from_root, managed_outputs, public_repository_query, public_repository_summary,
+    public_repository_trust, query_repository, scaffold_claim_directory, trust_repository,
+    validate_index_root, validate_manifest, validate_repository, ClaimEventAppendInput,
+    ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport, ClaimScaffoldInput,
+    ConflictRelationship, ImportMode, IndexFindingSeverity, ManagedFileState, PublicFreshness,
+    SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
-use dotrepo_schema::Trust;
+use dotrepo_schema::{RecordMode, Trust};
 use serde_json::Value;
 use std::fs;
 use std::path::PathBuf;
@@ -506,6 +506,9 @@ fn cmd_validate_index(index_root: PathBuf) -> Result<()> {
 
 fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
     if check {
+        let manifest = load_manifest_from_root(&root)?;
+        validate_manifest(&root, &manifest)?;
+        ensure_native_managed_surface_command(&manifest.record.mode, "generate-check")?;
         let report = generate_check_repository(&root)?;
         if !report.stale.is_empty() {
             return Err(CliExit {
@@ -538,6 +541,7 @@ fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
 
     let document = load_manifest_document(&root)?;
     validate_manifest(&root, &document.manifest)?;
+    ensure_native_managed_surface_command(&document.manifest.record.mode, "generate")?;
     let outputs = managed_outputs(&root, &document.manifest, &document.raw)?;
 
     for (path, contents) in outputs {
@@ -554,6 +558,7 @@ fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
 fn cmd_doctor(root: PathBuf) -> Result<()> {
     let manifest = load_manifest_from_root(&root)?;
     validate_manifest(&root, &manifest)?;
+    ensure_native_managed_surface_command(&manifest.record.mode, "doctor")?;
     let findings = inspect_surface_states(&root)?;
     println!("dotrepo doctor");
     println!("- mode: {:?}", manifest.record.mode);
@@ -571,6 +576,21 @@ fn cmd_doctor(root: PathBuf) -> Result<()> {
             );
         }
     }
+    Ok(())
+}
+
+fn ensure_native_managed_surface_command(mode: &RecordMode, command: &str) -> Result<()> {
+    if *mode == RecordMode::Overlay {
+        return Err(CliExit {
+            code: 2,
+            message: format!(
+                "{} is only supported for native records; found record.mode = \"overlay\"",
+                command
+            ),
+        }
+        .into());
+    }
+
     Ok(())
 }
 
@@ -810,7 +830,10 @@ fn build_public_freshness(
     })
 }
 
-fn current_public_freshness(index_root: &std::path::Path, stale_after_hours: Option<i64>) -> Result<PublicFreshness> {
+fn current_public_freshness(
+    index_root: &std::path::Path,
+    stale_after_hours: Option<i64>,
+) -> Result<PublicFreshness> {
     build_public_freshness(index_root, stale_after_hours, None, None)
 }
 
@@ -831,7 +854,10 @@ fn ensure_replaceable_claim_scaffold(claim_dir: &std::path::Path) -> Result<()> 
             "claim.toml" | "review.md" => {}
             "events" => {
                 if !path.is_dir() {
-                    bail!("{} must be a directory before it can be replaced", path.display());
+                    bail!(
+                        "{} must be a directory before it can be replaced",
+                        path.display()
+                    );
                 }
                 if fs::read_dir(&path)?.next().is_some() {
                     bail!(
@@ -1176,7 +1202,8 @@ mod tests {
         )
         .expect("claim scaffold succeeds");
 
-        let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        let claim_dir =
+            root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
         assert!(claim_dir.join("claim.toml").exists());
         assert!(claim_dir.join("review.md").exists());
         assert!(claim_dir.join("events").is_dir());
@@ -1191,7 +1218,8 @@ mod tests {
     #[test]
     fn claim_init_refuses_existing_claim_dir_without_force() {
         let root = temp_dir("claim-init-no-force");
-        let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        let claim_dir =
+            root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
         fs::create_dir_all(claim_dir.join("events")).expect("claim dir created");
         fs::create_dir_all(root.join("repos/github.com/acme/widget")).expect("repo dir created");
         fs::write(
@@ -1199,8 +1227,11 @@ mod tests {
             "schema = \"dotrepo/v0.1\"\n",
         )
         .expect("record written");
-        fs::write(claim_dir.join("claim.toml"), "schema = \"dotrepo-claim/v0\"\n")
-            .expect("claim scaffold written");
+        fs::write(
+            claim_dir.join("claim.toml"),
+            "schema = \"dotrepo-claim/v0\"\n",
+        )
+        .expect("claim scaffold written");
 
         let err = cmd_claim_init(
             root.clone(),
@@ -1225,7 +1256,8 @@ mod tests {
     #[test]
     fn claim_init_force_refuses_existing_event_history() {
         let root = temp_dir("claim-init-history");
-        let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+        let claim_dir =
+            root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
         fs::create_dir_all(claim_dir.join("events")).expect("claim dir created");
         fs::create_dir_all(root.join("repos/github.com/acme/widget")).expect("repo dir created");
         fs::write(
@@ -1254,7 +1286,9 @@ mod tests {
             true,
         )
         .expect_err("existing event history should fail");
-        assert!(err.to_string().contains("refusing to overwrite existing claim history"));
+        assert!(err
+            .to_string()
+            .contains("refusing to overwrite existing claim history"));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -1299,7 +1333,10 @@ mod tests {
         let report = inspect_claim_directory(&root, &claim_dir).expect("claim inspection works");
         assert_eq!(report.state, dotrepo_core::ClaimState::Submitted);
         assert_eq!(report.events.len(), 1);
-        assert_eq!(report.events[0].kind, dotrepo_core::ClaimEventKind::Submitted);
+        assert_eq!(
+            report.events[0].kind,
+            dotrepo_core::ClaimEventKind::Submitted
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -1691,6 +1728,108 @@ homepage = "https://github.com/example/project"
     }
 
     #[test]
+    fn generate_refuses_overlay_records() {
+        let root = temp_dir("generate-overlay");
+        fs::write(
+            root.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/project"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+
+[repo]
+name = "project"
+description = "Example project"
+"#,
+        )
+        .expect("record written");
+
+        let err = cmd_generate(root.clone(), false).expect_err("overlay generate should fail");
+        let exit = err.downcast_ref::<CliExit>().expect("returns a CliExit");
+        assert_eq!(exit.code, 2);
+        assert!(exit
+            .message
+            .contains("generate is only supported for native records"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn generate_check_refuses_overlay_records() {
+        let root = temp_dir("generate-check-overlay");
+        fs::write(
+            root.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/project"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+
+[repo]
+name = "project"
+description = "Example project"
+"#,
+        )
+        .expect("record written");
+
+        let err = cmd_generate(root.clone(), true).expect_err("overlay generate-check should fail");
+        let exit = err.downcast_ref::<CliExit>().expect("returns a CliExit");
+        assert_eq!(exit.code, 2);
+        assert!(exit
+            .message
+            .contains("generate-check is only supported for native records"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn doctor_refuses_overlay_records() {
+        let root = temp_dir("doctor-overlay");
+        fs::write(
+            root.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/project"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "project"
+description = "Example project"
+"#,
+        )
+        .expect("record written");
+
+        let err = cmd_doctor(root.clone()).expect_err("overlay doctor should fail");
+        let exit = err.downcast_ref::<CliExit>().expect("returns a CliExit");
+        assert_eq!(exit.code, 2);
+        assert!(exit
+            .message
+            .contains("doctor is only supported for native records"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
     fn validate_reports_multiple_diagnostics() {
         let root = temp_dir("validate-many");
         fs::write(
@@ -1897,7 +2036,8 @@ description = "Reviewed overlay"
         })
         .expect_err("fixed stale-after without generated-at should fail");
         assert!(
-            err.to_string().contains("--stale-after requires --generated-at"),
+            err.to_string()
+                .contains("--stale-after requires --generated-at"),
             "unexpected error: {err}"
         );
 
@@ -1907,7 +2047,8 @@ description = "Reviewed overlay"
     fn read_tree(root: &PathBuf) -> Vec<(String, String)> {
         let mut paths = Vec::new();
         collect_files(root, &mut paths);
-        paths.into_iter()
+        paths
+            .into_iter()
             .map(|path| {
                 (
                     path.strip_prefix(root)

@@ -23,10 +23,10 @@ function activate(context) {
       runCliCommand('trust', ['trust'])
     ),
     vscode.commands.registerCommand('dotrepo.doctorCurrentManifest', () =>
-      runCliCommand('doctor', ['doctor'])
+      runCliCommand('doctor', ['doctor'], { requiresNativeManifest: true })
     ),
     vscode.commands.registerCommand('dotrepo.generateCheckCurrentManifest', () =>
-      runCliCommand('generate --check', ['generate', '--check'])
+      runCliCommand('generate --check', ['generate', '--check'], { requiresNativeManifest: true })
     )
   );
 }
@@ -67,25 +67,33 @@ function createLanguageClient() {
   );
 }
 
-async function runCliCommand(label, subcommandArgs) {
-  let root;
+async function runCliCommand(label, subcommandArgs, options = {}) {
+  let context;
   try {
-    root = resolveDotrepoRoot();
+    context = resolveDotrepoContext();
   } catch (error) {
     vscode.window.showErrorMessage(String(error.message || error));
+    return;
+  }
+
+  if (options.requiresNativeManifest && context.mode === 'overlay') {
+    const message = `dotrepo ${label} is only supported for native .repo manifests.`;
+    outputChannel.show(true);
+    outputChannel.appendLine(message);
+    vscode.window.showErrorMessage(message);
     return;
   }
 
   const configuration = vscode.workspace.getConfiguration('dotrepo');
   const command = configuration.get('cli.command', 'dotrepo');
   const args = configuration.get('cli.args', []);
-  const invocation = [...args, '--root', root, ...subcommandArgs];
+  const invocation = [...args, '--root', context.root, ...subcommandArgs];
 
   outputChannel.show(true);
   outputChannel.appendLine(`$ ${formatCommand(command, invocation)}`);
 
   try {
-    const result = await execFile(command, invocation, { cwd: root });
+    const result = await execFile(command, invocation, { cwd: context.root });
     if (result.stdout.trim()) {
       outputChannel.appendLine(result.stdout.trimEnd());
     }
@@ -110,23 +118,46 @@ async function runCliCommand(label, subcommandArgs) {
   }
 }
 
-function resolveDotrepoRoot() {
+function resolveDotrepoContext() {
   const editor = vscode.window.activeTextEditor;
-  if (editor && isManifestDocument(editor.document)) {
-    return path.dirname(editor.document.uri.fsPath);
+  if (editor) {
+    const context = manifestContextFromDocument(editor.document);
+    if (context) {
+      return context;
+    }
+
+    if (isDotrepoNamedDocument(editor.document)) {
+      throw new Error('dotrepo overlay manifests must live under repos/<host>/<owner>/<repo>/record.toml.');
+    }
   }
 
   const folder = vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders[0];
   if (folder) {
-    return folder.uri.fsPath;
+    return { root: folder.uri.fsPath, mode: 'workspace' };
   }
 
-  throw new Error('Open a .repo or record.toml file, or open a workspace containing one.');
+  throw new Error('Open a .repo file, an overlay record under repos/<host>/<owner>/<repo>/record.toml, or a workspace containing one.');
 }
 
-function isManifestDocument(document) {
+function manifestContextFromDocument(document) {
+  const basename = path.basename(document.uri.fsPath);
+  if (basename === '.repo') {
+    return { root: path.dirname(document.uri.fsPath), mode: 'native' };
+  }
+  if (basename === 'record.toml' && isOverlayManifestPath(document.uri.fsPath)) {
+    return { root: path.dirname(document.uri.fsPath), mode: 'overlay' };
+  }
+  return null;
+}
+
+function isDotrepoNamedDocument(document) {
   const basename = path.basename(document.uri.fsPath);
   return basename === '.repo' || basename === 'record.toml';
+}
+
+function isOverlayManifestPath(fsPath) {
+  const normalized = fsPath.split(path.sep).join('/');
+  return /(?:^|\/)repos\/[^/]+\/[^/]+\/[^/]+\/record\.toml$/.test(normalized);
 }
 
 function execFile(command, args, options) {

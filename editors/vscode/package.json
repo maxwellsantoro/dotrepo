@@ -48,8 +48,8 @@
         "aliases": [
           "dotrepo overlay"
         ],
-        "filenames": [
-          "record.toml"
+        "filenamePatterns": [
+          "**/repos/*/*/*/record.toml"
         ],
         "configuration": "./language-configuration.json"
       }

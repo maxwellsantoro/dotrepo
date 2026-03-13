@@ -685,8 +685,8 @@ pub fn parse_claim_record(input: &str) -> Result<ClaimRecord> {
 }
 
 pub fn parse_claim_event(input: &str) -> Result<ClaimEvent> {
-    let event =
-        toml::from_str::<ClaimEvent>(input).map_err(|e| anyhow!("failed to parse claim event: {}", e))?;
+    let event = toml::from_str::<ClaimEvent>(input)
+        .map_err(|e| anyhow!("failed to parse claim event: {}", e))?;
     validate_claim_event(&event)?;
     Ok(event)
 }
@@ -694,13 +694,16 @@ pub fn parse_claim_event(input: &str) -> Result<ClaimEvent> {
 pub fn load_claim_directory(root: &Path, claim_dir: &Path) -> Result<LoadedClaimDirectory> {
     let claim_path = claim_dir.join("claim.toml");
     if !claim_path.is_file() {
-        bail!("claim directory is missing claim.toml: {}", claim_path.display());
+        bail!(
+            "claim directory is missing claim.toml: {}",
+            claim_path.display()
+        );
     }
 
     let claim_text = fs::read_to_string(&claim_path)
         .map_err(|e| anyhow!("failed to read {}: {}", claim_path.display(), e))?;
-    let claim = parse_claim_record(&claim_text)
-        .map_err(|e| anyhow!("{}: {}", claim_path.display(), e))?;
+    let claim =
+        parse_claim_record(&claim_text).map_err(|e| anyhow!("{}: {}", claim_path.display(), e))?;
 
     let review_path = claim_dir.join("review.md");
     let review = review_path
@@ -713,8 +716,8 @@ pub fn load_claim_directory(root: &Path, claim_dir: &Path) -> Result<LoadedClaim
         for entry in fs::read_dir(&events_dir)
             .map_err(|e| anyhow!("failed to read {}: {}", events_dir.display(), e))?
         {
-            let entry = entry
-                .map_err(|e| anyhow!("failed to inspect {}: {}", events_dir.display(), e))?;
+            let entry =
+                entry.map_err(|e| anyhow!("failed to inspect {}: {}", events_dir.display(), e))?;
             let path = entry.path();
             if path.extension().and_then(|ext| ext.to_str()) == Some("toml") {
                 event_paths.push(path);
@@ -747,7 +750,10 @@ pub fn inspect_claim_directory(root: &Path, claim_dir: &Path) -> Result<ClaimIns
     Ok(claim_inspection_report(&loaded))
 }
 
-pub fn scaffold_claim_directory(root: &Path, input: &ClaimScaffoldInput) -> Result<ClaimScaffoldPlan> {
+pub fn scaffold_claim_directory(
+    root: &Path,
+    input: &ClaimScaffoldInput,
+) -> Result<ClaimScaffoldPlan> {
     require_path_segment("identity.host", &input.host)?;
     require_path_segment("identity.owner", &input.owner)?;
     require_path_segment("identity.repo", &input.repo)?;
@@ -877,13 +883,13 @@ pub fn append_claim_event(
     let records_canonical_handoff =
         canonical_record_path.is_some() || canonical_mirror_path.is_some();
     if records_canonical_handoff && next_state != ClaimState::Accepted {
-        bail!(
-            "canonical handoff links are only valid when the resulting claim state is accepted"
-        );
+        bail!("canonical handoff links are only valid when the resulting claim state is accepted");
     }
     let review_notes_link = if loaded.review_path.is_some()
-        && matches!(input.kind, ClaimEventKind::Accepted | ClaimEventKind::Corrected)
-    {
+        && matches!(
+            input.kind,
+            ClaimEventKind::Accepted | ClaimEventKind::Corrected
+        ) {
         Some("../review.md".into())
     } else {
         None
@@ -916,7 +922,10 @@ pub fn append_claim_event(
     let mut updated_claim = loaded.claim.clone();
     updated_claim.claim.updated_at = input.timestamp.clone();
     updated_claim.claim.state = next_state.clone();
-    let result_event = format!("events/{next_sequence:04}-{}.toml", claim_event_kind_slug(&input.kind));
+    let result_event = format!(
+        "events/{next_sequence:04}-{}.toml",
+        claim_event_kind_slug(&input.kind)
+    );
     updated_claim.resolution = update_claim_resolution(
         &loaded.claim,
         &input.kind,
@@ -946,7 +955,8 @@ pub fn append_claim_event(
     if let Some(finding) = history_findings.first() {
         bail!("{}", finding.message);
     }
-    let resolution_findings = validate_claim_resolution_consistency(&relative_claim, &updated_claim);
+    let resolution_findings =
+        validate_claim_resolution_consistency(&relative_claim, &updated_claim);
     if let Some(finding) = resolution_findings.first() {
         bail!("{}", finding.message);
     }
@@ -1001,7 +1011,10 @@ fn selected_record(root: &Path, candidate: &CandidateManifest) -> SelectedRecord
     }
 }
 
-fn public_selected_record(display_root: &Path, candidate: &CandidateManifest) -> PublicSelectedRecord {
+fn public_selected_record(
+    display_root: &Path,
+    candidate: &CandidateManifest,
+) -> PublicSelectedRecord {
     PublicSelectedRecord {
         manifest_path: display_path(display_root, &candidate.path),
         record: record_summary(&candidate.manifest),
@@ -1014,7 +1027,10 @@ fn public_record_artifacts(
     display_root: &Path,
     candidate: &CandidateManifest,
 ) -> Option<PublicRecordArtifacts> {
-    let evidence_path = candidate.path.parent().map(|parent| parent.join("evidence.md"));
+    let evidence_path = candidate
+        .path
+        .parent()
+        .map(|parent| parent.join("evidence.md"));
     let evidence_path = evidence_path
         .filter(|path| path.is_file())
         .map(|path| display_path(display_root, &path));
@@ -1033,7 +1049,12 @@ enum PublicLinkKind {
     Query,
 }
 
-fn index_repository_scope(index_root: &Path, host: &str, owner: &str, repo: &str) -> Result<PathBuf> {
+fn index_repository_scope(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+) -> Result<PathBuf> {
     let scope_root = index_root.join("repos").join(host).join(owner).join(repo);
     let manifest_path = scope_root.join("record.toml");
     if !manifest_path.is_file() {
@@ -1053,23 +1074,13 @@ fn public_identity(
     repo: &str,
     selected: &CandidateManifest,
 ) -> PublicRepositoryIdentity {
-    let source = selected
-        .manifest
-        .record
-        .source
-        .clone()
-        .or_else(|| {
-            selected
-                .manifest
-                .repo
-                .homepage
-                .clone()
-                .filter(|homepage| {
-                    repository_identity(homepage)
-                        .map(|identity| identity == (host.to_string(), owner.to_string(), repo.to_string()))
-                        .unwrap_or(false)
-                })
-        });
+    let source = selected.manifest.record.source.clone().or_else(|| {
+        selected.manifest.repo.homepage.clone().filter(|homepage| {
+            repository_identity(homepage)
+                .map(|identity| identity == (host.to_string(), owner.to_string(), repo.to_string()))
+                .unwrap_or(false)
+        })
+    });
 
     PublicRepositoryIdentity {
         host: host.to_string(),
@@ -1279,8 +1290,10 @@ fn next_claim_state(
             Ok(ClaimState::Rejected)
         }
         ClaimEventKind::Withdrawn => {
-            if !matches!(current, ClaimState::Draft | ClaimState::Submitted | ClaimState::InReview)
-            {
+            if !matches!(
+                current,
+                ClaimState::Draft | ClaimState::Submitted | ClaimState::InReview
+            ) {
                 bail!("withdrawn events are only valid before terminal review outcomes");
             }
             Ok(ClaimState::Withdrawn)
@@ -1376,7 +1389,10 @@ fn update_claim_resolution(
     }
 }
 
-fn candidate_claim_context(root: &Path, candidate: &CandidateManifest) -> Option<RecordClaimContext> {
+fn candidate_claim_context(
+    root: &Path,
+    candidate: &CandidateManifest,
+) -> Option<RecordClaimContext> {
     let handoff_root = match candidate.path.parent() {
         Some(parent) => parent.join("claims"),
         None => return None,
@@ -1388,7 +1404,13 @@ fn candidate_claim_context(root: &Path, candidate: &CandidateManifest) -> Option
     let mut claim_dirs = fs::read_dir(&handoff_root)
         .ok()?
         .filter_map(|entry| entry.ok())
-        .filter_map(|entry| entry.file_type().ok().filter(|ty| ty.is_dir()).map(|_| entry.path()))
+        .filter_map(|entry| {
+            entry
+                .file_type()
+                .ok()
+                .filter(|ty| ty.is_dir())
+                .map(|_| entry.path())
+        })
         .collect::<Vec<_>>();
     claim_dirs.sort();
 
@@ -1464,9 +1486,19 @@ fn claim_matches_candidate(
         return true;
     }
 
-    if candidate.manifest.record.source.as_deref().is_some_and(|source| {
-        claim.target.record_sources.iter().any(|record_source| record_source == source)
-    }) {
+    if candidate
+        .manifest
+        .record
+        .source
+        .as_deref()
+        .is_some_and(|source| {
+            claim
+                .target
+                .record_sources
+                .iter()
+                .any(|record_source| record_source == source)
+        })
+    {
         return true;
     }
 
@@ -1846,10 +1878,13 @@ pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
         let relative = path.strip_prefix(index_root).unwrap_or(&path);
         hasher.update(relative.to_string_lossy().as_bytes());
         hasher.update([0]);
-        hasher.update(
-            fs::read(&path)
-                .map_err(|err| anyhow!("failed to read {} for snapshot digest: {}", path.display(), err))?,
-        );
+        hasher.update(fs::read(&path).map_err(|err| {
+            anyhow!(
+                "failed to read {} for snapshot digest: {}",
+                path.display(),
+                err
+            )
+        })?);
         hasher.update([0xff]);
     }
 
@@ -1866,7 +1901,9 @@ pub fn public_snapshot_metadata(freshness: PublicFreshness) -> PublicSnapshotMet
     }
 }
 
-pub fn list_index_repository_identities(index_root: &Path) -> Result<Vec<PublicRepositoryIdentity>> {
+pub fn list_index_repository_identities(
+    index_root: &Path,
+) -> Result<Vec<PublicRepositoryIdentity>> {
     let repos_root = index_root.join("repos");
     if !repos_root.is_dir() {
         bail!(
@@ -1898,11 +1935,14 @@ pub fn list_index_repository_identities(index_root: &Path) -> Result<Vec<PublicR
             repo: segments[2].clone(),
             source: None,
         };
-        if !identities.iter().any(|existing: &PublicRepositoryIdentity| {
-            existing.host == identity.host
-                && existing.owner == identity.owner
-                && existing.repo == identity.repo
-        }) {
+        if !identities
+            .iter()
+            .any(|existing: &PublicRepositoryIdentity| {
+                existing.host == identity.host
+                    && existing.owner == identity.owner
+                    && existing.repo == identity.repo
+            })
+        {
             identities.push(identity);
         }
     }
@@ -2092,6 +2132,7 @@ pub fn export_public_index_static(
 pub fn generate_check_repository(root: &Path) -> Result<GenerateCheckReport> {
     let document = load_manifest_document(root)?;
     validate_manifest(root, &document.manifest)?;
+    ensure_native_managed_surface_record(&document.manifest, "generate-check")?;
     let mut rendered_outputs = Vec::new();
     let mut stale = Vec::new();
 
@@ -3573,6 +3614,7 @@ pub fn managed_outputs(
     manifest: &Manifest,
     source_bytes: &[u8],
 ) -> Result<Vec<(PathBuf, String)>> {
+    ensure_native_managed_surface_record(manifest, "generate")?;
     let mut outputs = Vec::new();
     if let Some(output) =
         render_managed_output(root, ManagedSurface::Readme, manifest, source_bytes)?
@@ -3628,6 +3670,17 @@ pub fn managed_outputs(
         .into_iter()
         .map(|output| (output.path, output.contents))
         .collect())
+}
+
+fn ensure_native_managed_surface_record(manifest: &Manifest, action: &str) -> Result<()> {
+    if manifest.record.mode == RecordMode::Overlay {
+        bail!(
+            "{} is only supported for native records; found record.mode = \"overlay\"",
+            action
+        );
+    }
+
+    Ok(())
 }
 
 pub fn github_outputs(manifest: &Manifest, source_bytes: &[u8]) -> Vec<(PathBuf, String)> {
@@ -4635,9 +4688,11 @@ fn collect_claim_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
 }
 
 fn claim_directory_identity(index_root: &Path, claim_dir: &Path) -> Result<ClaimDirectoryIdentity> {
-    let relative = claim_dir
-        .strip_prefix(index_root)
-        .map_err(|_| anyhow!("claim directories must live under index_root/repos/<host>/<owner>/<repo>/claims/<id>/"))?;
+    let relative = claim_dir.strip_prefix(index_root).map_err(|_| {
+        anyhow!(
+            "claim directories must live under index_root/repos/<host>/<owner>/<repo>/claims/<id>/"
+        )
+    })?;
     let segments = relative
         .iter()
         .map(|segment| segment.to_string_lossy().to_string())
@@ -4647,9 +4702,7 @@ fn claim_directory_identity(index_root: &Path, claim_dir: &Path) -> Result<Claim
         || segments[4] != "claims"
         || segments[5].trim().is_empty()
     {
-        bail!(
-            "claim directories must live under repos/<host>/<owner>/<repo>/claims/<claim-id>/"
-        );
+        bail!("claim directories must live under repos/<host>/<owner>/<repo>/claims/<claim-id>/");
     }
 
     Ok(ClaimDirectoryIdentity {
@@ -4818,7 +4871,10 @@ fn validate_claim_event_history(
             if transition.from == transition.to {
                 findings.push(index_error(
                     relative_claim.to_path_buf(),
-                    format!("{} has a transition where from and to are both {:?}", loaded.path, transition.to),
+                    format!(
+                        "{} has a transition where from and to are both {:?}",
+                        loaded.path, transition.to
+                    ),
                 ));
             }
             if !transition_matches_event_kind(transition.to.clone(), &event.event.kind) {
@@ -5798,10 +5854,7 @@ description = "Competing description"
             json["selection"]["reason"],
             Value::String("equal_authority_conflict".into())
         );
-        assert_eq!(
-            json["value"],
-            Value::String("Competing description".into())
-        );
+        assert_eq!(json["value"], Value::String("Competing description".into()));
         assert_eq!(
             json["conflicts"][0]["relationship"],
             Value::String("parallel".into())
@@ -5963,7 +6016,12 @@ description = "Reviewed overlay"
             export_public_index_static(&root, &out, sample_public_freshness()).expect("export");
         let rendered = outputs
             .iter()
-            .map(|(path, contents)| (path.strip_prefix(&root).unwrap().display().to_string(), contents.clone()))
+            .map(|(path, contents)| {
+                (
+                    path.strip_prefix(&root).unwrap().display().to_string(),
+                    contents.clone(),
+                )
+            })
             .collect::<Vec<_>>();
 
         assert!(rendered
@@ -6031,7 +6089,11 @@ description = "Reviewed overlay"
             claim.target.index_paths,
             vec!["repos/github.com/acme/widget/record.toml"]
         );
-        assert!(plan.review_text.as_ref().expect("review template").contains("# Claim review"));
+        assert!(plan
+            .review_text
+            .as_ref()
+            .expect("review template")
+            .contains("# Claim review"));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -6116,7 +6178,10 @@ description = "Reviewed overlay"
         assert_eq!(updated_claim.claim.state, ClaimState::Submitted);
         let event = parse_claim_event(&plan.event_text).expect("event parses");
         assert_eq!(event.event.sequence, 1);
-        assert_eq!(event.transition.expect("transition").to, ClaimState::Submitted);
+        assert_eq!(
+            event.transition.expect("transition").to,
+            ClaimState::Submitted
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -6236,7 +6301,10 @@ description = "Reviewed overlay"
             resolution.canonical_mirror_path.as_deref(),
             Some("repos/github.com/acme/widget/record.toml")
         );
-        assert_eq!(resolution.result_event.as_deref(), Some("events/0002-accepted.toml"));
+        assert_eq!(
+            resolution.result_event.as_deref(),
+            Some("events/0002-accepted.toml")
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -6317,10 +6385,14 @@ description = "Reviewed overlay"
         )
         .expect("corrected event");
 
-        let updated_claim = parse_claim_record(&corrected.claim_text).expect("updated claim parses");
+        let updated_claim =
+            parse_claim_record(&corrected.claim_text).expect("updated claim parses");
         let resolution = updated_claim.resolution.expect("resolution recorded");
         assert_eq!(updated_claim.claim.state, ClaimState::Accepted);
-        assert_eq!(resolution.result_event.as_deref(), Some("events/0003-corrected.toml"));
+        assert_eq!(
+            resolution.result_event.as_deref(),
+            Some("events/0003-corrected.toml")
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -6383,9 +6455,9 @@ description = "Reviewed overlay"
         )
         .expect_err("non-accepted states should reject canonical links");
 
-        assert!(err
-            .to_string()
-            .contains("canonical handoff links are only valid when the resulting claim state is accepted"));
+        assert!(err.to_string().contains(
+            "canonical handoff links are only valid when the resulting claim state is accepted"
+        ));
         fs::remove_dir_all(root).expect("temp dir removed");
     }
 
@@ -6442,7 +6514,8 @@ text = "Submitted claim."
         .expect_err("zero sequence should fail");
 
         assert!(
-            err.to_string().contains("event.sequence must be greater than zero"),
+            err.to_string()
+                .contains("event.sequence must be greater than zero"),
             "unexpected error: {err}"
         );
     }
@@ -6450,7 +6523,8 @@ text = "Submitted claim."
     #[test]
     fn load_claim_directory_reads_claim_and_events() {
         let root = temp_dir("claim-directory");
-        let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01");
+        let claim_dir =
+            root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01");
         fs::create_dir_all(claim_dir.join("events")).expect("claim events dir created");
         fs::write(
             claim_dir.join("claim.toml"),
@@ -6547,9 +6621,7 @@ canonical_record_path = ".repo"
         );
         assert_eq!(
             loaded.review_path.as_deref(),
-            Some(
-                "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/review.md"
-            )
+            Some("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-01/review.md")
         );
 
         let json = serde_json::to_value(&loaded).expect("claim directory serializes");
@@ -6921,6 +6993,38 @@ Local footer.
     }
 
     #[test]
+    fn managed_outputs_reject_overlay_records() {
+        let root = temp_dir("overlay-managed-outputs");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest parses");
+
+        let err = managed_outputs(&root, &manifest, b"schema = \"dotrepo/v0.1\"")
+            .expect_err("overlay records should not render managed outputs");
+        assert!(err
+            .to_string()
+            .contains("generate is only supported for native records"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
     fn parse_managed_marker_rejects_extra_tokens() {
         assert_eq!(
             parse_managed_marker("<!-- dotrepo:begin id=readme.body -->", "begin").as_deref(),
@@ -7017,6 +7121,39 @@ description = "Fast local-first sync engine"
         assert_eq!(readme.state, ManagedFileState::Unmanaged);
         assert!(!readme.stale);
         assert!(report.stale.is_empty());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn generate_check_repository_rejects_overlay_records() {
+        let root = temp_dir("overlay-generate-check");
+        fs::write(
+            root.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("record written");
+
+        let err = generate_check_repository(&root)
+            .expect_err("overlay records should not run generate-check");
+        assert!(err
+            .to_string()
+            .contains("generate-check is only supported for native records"));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

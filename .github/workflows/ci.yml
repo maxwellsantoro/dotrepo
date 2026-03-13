@@ -19,6 +19,14 @@ jobs:
           cargo run -p dotrepo-cli -- --root examples/native-minimal validate
           cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
           cargo run -p dotrepo-cli -- validate-index
+      - name: Verify publishable crates package and dry-run cleanly
+        run: |
+          cargo publish --dry-run -p dotrepo-schema
+          cargo publish --dry-run -p dotrepo-transport
+          cargo publish --dry-run -p dotrepo-core
+          cargo publish --dry-run -p dotrepo-cli
+          cargo publish --dry-run -p dotrepo-lsp
+          cargo publish --dry-run -p dotrepo-mcp
       - name: Build static public export artifact
         run: |
           cargo run -p dotrepo-cli -- public export \

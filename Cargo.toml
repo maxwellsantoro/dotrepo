@@ -19,6 +19,9 @@ repository = "https://github.com/dotrepo/dotrepo"
 [workspace.dependencies]
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
+dotrepo-core = { version = "0.1.0", path = "crates/dotrepo-core" }
+dotrepo-schema = { version = "0.1.0", path = "crates/dotrepo-schema" }
+dotrepo-transport = { version = "0.1.0", path = "crates/dotrepo-transport" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"

@@ -5,6 +5,8 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+description = "Schema types and manifest parsing for the dotrepo protocol."
+readme = "../../README.md"
 
 [dependencies]
 serde.workspace = true

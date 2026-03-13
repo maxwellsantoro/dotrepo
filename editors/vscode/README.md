@@ -4,7 +4,7 @@ This is the first thin VS Code shell for dotrepo.
 
 It does three things:
 
-- launches `dotrepo-lsp` for `.repo` and `record.toml`
+- launches `dotrepo-lsp` for `.repo` and overlay records at `repos/<host>/<owner>/<repo>/record.toml`
 - exposes validation diagnostics, hover help, and schema-shaped completion in the editor
 - registers thin shell commands for `validate`, `trust`, `doctor`, and `generate --check`
 
@@ -14,7 +14,7 @@ over the existing Rust binaries and follows the scope in
 
 ## First release features
 
-- diagnostics for invalid `.repo` and `record.toml` files
+- diagnostics for invalid `.repo` files and overlay `record.toml` files
 - hover help for core schema fields and trust vocabulary
 - completion for section headers, core keys, and common enum values
 - command palette entries for:
@@ -22,6 +22,11 @@ over the existing Rust binaries and follows the scope in
   - `dotrepo: Trust Current Manifest`
   - `dotrepo: Doctor Current Root`
   - `dotrepo: Generate Check Current Root`
+
+`dotrepo: Doctor Current Root` and `dotrepo: Generate Check Current Root` are
+native-only commands. When the active document is an overlay `record.toml`, the
+extension blocks those commands instead of treating the index directory like a
+repository root.
 
 ## Non-goals
 
@@ -82,7 +87,9 @@ repositories, prefer installed binaries or absolute paths.
 The shell commands use:
 
 - the directory containing the active `.repo`, or
-- the directory containing the active `record.toml`
+- the directory containing the active overlay `record.toml`
+
+Overlay manifests must live at `repos/<host>/<owner>/<repo>/record.toml`.
 
 If no manifest is active, the extension falls back to the first workspace
 folder.

@@ -80,10 +80,16 @@ fn copy_seed_repo(fixture: &str, dest_root: &Path) {
         .join("acme")
         .join("widget");
     fs::create_dir_all(&dest_repo).expect("dest repo dir created");
-    fs::copy(source_repo.join("record.toml"), dest_repo.join("record.toml"))
-        .expect("record copied");
-    fs::copy(source_repo.join("evidence.md"), dest_repo.join("evidence.md"))
-        .expect("evidence copied");
+    fs::copy(
+        source_repo.join("record.toml"),
+        dest_repo.join("record.toml"),
+    )
+    .expect("record copied");
+    fs::copy(
+        source_repo.join("evidence.md"),
+        dest_repo.join("evidence.md"),
+    )
+    .expect("evidence copied");
 }
 
 fn write_scaffold(plan: &dotrepo_core::ClaimScaffoldPlan) {
@@ -160,10 +166,11 @@ fn claim_fixture_pack_matches_validation_expectations() {
     for expectation in expectations() {
         let root = fixture_root().join(&expectation.fixture);
         let findings = validate_index_root(&root).expect("fixture index validates");
-        let has_errors = findings.iter().any(|finding| matches!(finding.severity, dotrepo_core::IndexFindingSeverity::Error));
+        let has_errors = findings
+            .iter()
+            .any(|finding| matches!(finding.severity, dotrepo_core::IndexFindingSeverity::Error));
         assert_eq!(
-            !has_errors,
-            expectation.valid_index,
+            !has_errors, expectation.valid_index,
             "unexpected validation result for {}: {findings:#?}",
             expectation.fixture
         );
