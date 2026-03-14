@@ -1,0 +1,54 @@
+{
+  "apiVersion": "v0",
+  "conflicts": [],
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "8cc5a42d31fc8c6494caaa0bcc1c4fbdf0887992d95834d809be6289a3f9e6fb",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "example",
+    "repo": "nova",
+    "source": "https://github.com/example/nova"
+  },
+  "links": {
+    "indexPath": "repos/github.com/example/nova/",
+    "queryTemplate": "/v0/repos/github.com/example/nova/query?path={dot_path}",
+    "repository": "/v0/repos/github.com/example/nova",
+    "self": "/v0/repos/github.com/example/nova/query?path=repo.description",
+    "trust": "/v0/repos/github.com/example/nova/trust"
+  },
+  "path": "repo.description",
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "artifacts": {
+        "evidencePath": "repos/github.com/example/nova/evidence.md"
+      },
+      "claim": {
+        "claimPath": "repos/github.com/example/nova/claims/2026-03-10-maintainer-claim-01/claim.toml",
+        "handoff": "pending_canonical",
+        "id": "github.com/example/nova/2026-03-10-maintainer-claim-01",
+        "latestEvent": "repos/github.com/example/nova/claims/2026-03-10-maintainer-claim-01/events/0002-accepted.toml",
+        "reviewPath": "repos/github.com/example/nova/claims/2026-03-10-maintainer-claim-01/review.md",
+        "state": "accepted"
+      },
+      "manifestPath": "repos/github.com/example/nova/record.toml",
+      "record": {
+        "mode": "overlay",
+        "source": "https://github.com/example/nova",
+        "status": "reviewed",
+        "trust": {
+          "confidence": "medium",
+          "notes": "Reviewed overlay awaiting maintainer-controlled canonical handoff.",
+          "provenance": [
+            "imported",
+            "verified"
+          ]
+        }
+      }
+    }
+  },
+  "value": "Reviewed metadata with an accepted pending maintainer claim."
+}

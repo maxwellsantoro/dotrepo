@@ -161,7 +161,7 @@ pub struct TrustReport {
     pub conflicts: Vec<ConflictReport>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicFreshness {
     pub generated_at: String,
@@ -298,6 +298,33 @@ pub struct PublicQueryResponse {
     pub selection: PublicSelectionReport,
     pub conflicts: Vec<PublicConflictReport>,
     pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum PublicErrorCode {
+    QueryPathNotFound,
+    RepositoryNotFound,
+    InvalidRepositoryIdentity,
+    InternalError,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicErrorDetail {
+    pub code: PublicErrorCode,
+    pub message: String,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicErrorResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub identity: PublicRepositoryIdentity,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub path: Option<String>,
+    pub error: PublicErrorDetail,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -1055,6 +1082,7 @@ fn index_repository_scope(
     owner: &str,
     repo: &str,
 ) -> Result<PathBuf> {
+    validate_public_identity(host, owner, repo)?;
     let scope_root = index_root.join("repos").join(host).join(owner).join(repo);
     let manifest_path = scope_root.join("record.toml");
     if !manifest_path.is_file() {
@@ -1066,6 +1094,14 @@ fn index_repository_scope(
         );
     }
     Ok(scope_root)
+}
+
+fn validate_public_identity(host: &str, owner: &str, repo: &str) -> Result<()> {
+    for (field, value) in [("host", host), ("owner", owner), ("repo", repo)] {
+        require_path_segment(field, value)
+            .map_err(|err| anyhow!("invalid repository identity: {err}"))?;
+    }
+    Ok(())
 }
 
 fn public_identity(
@@ -2067,6 +2103,78 @@ pub fn public_repository_query(
             .collect(),
         links: public_links(host, owner, repo, PublicLinkKind::Query, Some(path)),
     })
+}
+
+fn classify_public_error(message: &str) -> PublicErrorCode {
+    if message.starts_with("query path not found: ") {
+        PublicErrorCode::QueryPathNotFound
+    } else if message.starts_with("repository not found in index: ") {
+        PublicErrorCode::RepositoryNotFound
+    } else if message.starts_with("invalid repository identity: ") {
+        PublicErrorCode::InvalidRepositoryIdentity
+    } else {
+        PublicErrorCode::InternalError
+    }
+}
+
+pub fn public_error_response(
+    host: &str,
+    owner: &str,
+    repo: &str,
+    path: Option<&str>,
+    freshness: PublicFreshness,
+    error: &anyhow::Error,
+) -> PublicErrorResponse {
+    let message = error.to_string();
+    PublicErrorResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        identity: PublicRepositoryIdentity {
+            host: host.to_string(),
+            owner: owner.to_string(),
+            repo: repo.to_string(),
+            source: None,
+        },
+        path: path.map(ToOwned::to_owned),
+        error: PublicErrorDetail {
+            code: classify_public_error(&message),
+            message,
+        },
+    }
+}
+
+pub fn public_repository_summary_or_error(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+) -> std::result::Result<PublicRepositorySummaryResponse, PublicErrorResponse> {
+    public_repository_summary(index_root, host, owner, repo, freshness.clone())
+        .map_err(|error| public_error_response(host, owner, repo, None, freshness, &error))
+}
+
+pub fn public_repository_trust_or_error(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+) -> std::result::Result<PublicTrustResponse, PublicErrorResponse> {
+    public_repository_trust(index_root, host, owner, repo, freshness.clone())
+        .map_err(|error| public_error_response(host, owner, repo, None, freshness, &error))
+}
+
+pub fn public_repository_query_or_error(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    path: &str,
+    freshness: PublicFreshness,
+) -> std::result::Result<PublicQueryResponse, PublicErrorResponse> {
+    public_repository_query(index_root, host, owner, repo, path, freshness.clone())
+        .map_err(|error| public_error_response(host, owner, repo, Some(path), freshness, &error))
 }
 
 pub fn export_public_index_static(

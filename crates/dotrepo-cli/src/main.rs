@@ -3,15 +3,17 @@ use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
     append_claim_event, export_public_index_static, generate_check_repository, import_repository,
     index_snapshot_digest, inspect_claim_directory, inspect_surface_states, load_manifest_document,
-    load_manifest_from_root, managed_outputs, public_repository_query, public_repository_summary,
-    public_repository_trust, query_repository, scaffold_claim_directory, trust_repository,
-    validate_index_root, validate_manifest, validate_repository, ClaimEventAppendInput,
-    ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport, ClaimScaffoldInput,
-    ConflictRelationship, ImportMode, IndexFindingSeverity, ManagedFileState, PublicFreshness,
+    load_manifest_from_root, managed_outputs, public_repository_query_or_error,
+    public_repository_summary_or_error, public_repository_trust_or_error, query_repository,
+    scaffold_claim_directory, trust_repository, validate_index_root, validate_manifest,
+    validate_repository, ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome,
+    ClaimInspectionReport, ClaimScaffoldInput, ConflictRelationship, ImportMode,
+    IndexFindingSeverity, ManagedFileState, PublicErrorResponse, PublicFreshness,
     SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::{RecordMode, Trust};
+use serde::Serialize;
 use serde_json::Value;
 use std::fs;
 use std::path::PathBuf;
@@ -284,12 +286,15 @@ struct CliExit {
 
 fn main() {
     if let Err(err) = run() {
+        if let Some(err) = err.downcast_ref::<CliExit>() {
+            if !err.message.is_empty() {
+                eprintln!("{}", err.message);
+            }
+            process::exit(err.code);
+        }
+
         eprintln!("{err}");
-        let code = err
-            .downcast_ref::<CliExit>()
-            .map(|err| err.code)
-            .unwrap_or(1);
-        process::exit(code);
+        process::exit(1);
     }
 }
 
@@ -720,9 +725,13 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
             stale_after_hours,
         } => {
             let freshness = current_public_freshness(&index_root, stale_after_hours)?;
-            let response = public_repository_summary(&index_root, &host, &owner, &repo, freshness)?;
-            println!("{}", serde_json::to_string_pretty(&response)?);
-            Ok(())
+            print_public_response(public_repository_summary_or_error(
+                &index_root,
+                &host,
+                &owner,
+                &repo,
+                freshness,
+            ))
         }
         PublicCommand::Trust {
             index_root,
@@ -732,9 +741,13 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
             stale_after_hours,
         } => {
             let freshness = current_public_freshness(&index_root, stale_after_hours)?;
-            let response = public_repository_trust(&index_root, &host, &owner, &repo, freshness)?;
-            println!("{}", serde_json::to_string_pretty(&response)?);
-            Ok(())
+            print_public_response(public_repository_trust_or_error(
+                &index_root,
+                &host,
+                &owner,
+                &repo,
+                freshness,
+            ))
         }
         PublicCommand::Query {
             index_root,
@@ -745,10 +758,14 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
             stale_after_hours,
         } => {
             let freshness = current_public_freshness(&index_root, stale_after_hours)?;
-            let response =
-                public_repository_query(&index_root, &host, &owner, &repo, &path, freshness)?;
-            println!("{}", serde_json::to_string_pretty(&response)?);
-            Ok(())
+            print_public_response(public_repository_query_or_error(
+                &index_root,
+                &host,
+                &owner,
+                &repo,
+                &path,
+                freshness,
+            ))
         }
         PublicCommand::Export {
             index_root,
@@ -772,6 +789,25 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
                 println!("exported {}", path.display());
             }
             Ok(())
+        }
+    }
+}
+
+fn print_public_response<T: Serialize>(
+    response: std::result::Result<T, PublicErrorResponse>,
+) -> Result<()> {
+    match response {
+        Ok(response) => {
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Ok(())
+        }
+        Err(response) => {
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Err(CliExit {
+                code: 1,
+                message: String::new(),
+            }
+            .into())
         }
     }
 }
