@@ -19,6 +19,9 @@ is no longer just an architecture sketch.
   reviewer workflow over append-only claim events
 - A hosted-static deployment path for the exported public JSON tree through
   GitHub Pages workflow automation
+- A release-artifact workflow for packaging the CLI, LSP, and MCP binaries
+- An explicit release-gate script and CI job that package the hosted public
+  tree, install bundles, and VS Code release asset from one reproducible flow
 
 ## What dotrepo does not promise yet
 

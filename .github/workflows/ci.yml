@@ -27,30 +27,6 @@ jobs:
           cargo publish --dry-run -p dotrepo-cli
           cargo publish --dry-run -p dotrepo-lsp
           cargo publish --dry-run -p dotrepo-mcp
-      - name: Build static public export artifact
-        run: |
-          cargo run -p dotrepo-cli -- public export \
-            --index-root index \
-            --out-dir public \
-            --generated-at 2026-03-10T18:30:00Z \
-            --stale-after 2026-03-11T18:30:00Z
-      - name: Package versioned public export bundle
-        run: |
-          python3 scripts/package_public_export.py --input public --output-dir dist
-      - name: Upload static public export artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: public-export-v0
-          path: public/
-          if-no-files-found: error
-          retention-days: 14
-      - name: Upload public export bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: public-export-v0-bundle
-          path: dist/*.tar.gz
-          if-no-files-found: error
-          retention-days: 14
       - name: Smoke test MCP stdio server
         run: |
           python3 - <<'PY'
@@ -144,3 +120,49 @@ jobs:
           proc.terminate()
           proc.wait(timeout=5)
           PY
+
+  release-gate:
+    needs: rust-and-index
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run explicit release-surface gate
+        env:
+          npm_config_cache: ${{ runner.temp }}/npm-cache
+        run: python3 scripts/check_release_gate.py --output-root release-gate
+      - name: Upload static public export artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-export-v0
+          path: release-gate/public/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload public export bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-export-v0-bundle
+          path: release-gate/public-bundle/*.tar.gz
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload release-style install bundles
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-gate-install-bundles
+          path: |
+            release-gate/release-bundle/*.tar.gz
+            release-gate/release-bundle/*.sha256
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload release-style VSIX
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-gate-vscode-vsix
+          path: release-gate/vsix/*.vsix
+          if-no-files-found: error
+          retention-days: 14

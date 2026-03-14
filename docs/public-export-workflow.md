@@ -95,14 +95,17 @@ root.
 
 ## CI artifact
 
-The main CI workflow now builds the public tree from the seed `index/` and
-uploads it as workflow artifacts named `public-export-v0` and
+The main CI workflow now runs `scripts/check_release_gate.py`, which builds the
+public tree from the seed `index/`, packages the release-style install assets,
+and uploads the resulting public artifacts as `public-export-v0` and
 `public-export-v0-bundle`.
 
 Current behavior:
 - the artifact is generated from the real `index/` tree
+- CI exercises the hosted `--base-path /dotrepo` path, not just root-relative links
 - CI uses fixed review timestamps for inspectable, stable output
 - CI also packages a versioned review bundle from the exported tree
+- CI also packages a Linux install bundle and a tagged-style VSIX as release-gate artifacts
 - artifact retention is 14 days
 - export generation failures fail CI directly rather than being downgraded to
   warnings

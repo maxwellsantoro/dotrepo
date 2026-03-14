@@ -62,7 +62,8 @@ A structured `.repo` record does not replace code or good documentation. It prov
 - updated RFCs that reflect the protocol + toolchain + index model
 - example native and overlay records
 - a seeded `index/` tree with real overlay layout and validation rules
-- GitHub Actions workflows for workspace CI and example-repo checks
+- GitHub Actions workflows for workspace CI, release-gate packaging, and Pages
+  deployment
 - public-facing docs with a balanced tone around ambition, safety, and practicality
 
 ## What dotrepo does not claim yet
@@ -75,6 +76,7 @@ index validation, claims, public export, and an MCP server.
 ## First docs to read
 
 - [`PLAN.md`](PLAN.md)
+- [`docs/install.md`](docs/install.md)
 - [`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md)
 - [`docs/current-status.md`](docs/current-status.md)
 - [`docs/vision.md`](docs/vision.md)

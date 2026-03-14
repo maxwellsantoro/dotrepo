@@ -38,7 +38,16 @@ The first release does **not** provide:
 - semantic autofix or code actions
 - bundle/workspace authoring support
 
-## Install for local use
+## Install
+
+For normal use, install `dotrepo` and `dotrepo-lsp` from the release bundles
+described in [`docs/install.md`](../../docs/install.md), then make those
+binaries available on `PATH`.
+
+The extension itself can also be installed from the tagged `.vsix` release
+asset.
+
+## Local development
 
 The extension expects `dotrepo-lsp` and `dotrepo` to be available on `PATH` by
 default.
