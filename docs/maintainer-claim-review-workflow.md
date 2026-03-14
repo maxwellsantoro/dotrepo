@@ -13,6 +13,12 @@ This workflow is intentionally narrow. It supports durable claim artifacts,
 append-only review history, and explicit handoff recording before any public
 submission product exists.
 
+The binary-level CLI contract tests in
+`crates/dotrepo-cli/tests/claim_command_contract.rs` exercise the accepted,
+corrected, and invalid-history paths described here.
+For one-command operator validation, run
+`python3 scripts/check_operator_claim_gate.py --output-root operator-gate`.
+
 ## Current command surface
 
 The current reviewer workflow uses:
@@ -93,6 +99,10 @@ cargo run -p dotrepo-cli -- validate-index --index-root index
 The first command shows current state, claimant, target, derived handoff, and
 event history. The second confirms the claim directory still satisfies layout,
 identity, event ordering, and handoff rules.
+
+The operator gate script writes inspectable reports for the accepted, corrected,
+and invalid-history fixture paths under `operator-gate/` so the release bar is
+not just "tests pass" but "the documented reviewer surface still looks right."
 
 ### 5. Record the terminal review outcome
 

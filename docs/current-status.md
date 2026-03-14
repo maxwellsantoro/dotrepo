@@ -17,6 +17,10 @@ is no longer just an architecture sketch.
 - Contract-level claim, supersede, and conflict surfacing semantics
 - Git-backed maintainer-claim artifacts, read-only claim inspection, and a first
   reviewer workflow over append-only claim events
+- Binary-level CLI contract coverage for accepted handoff, corrected claim
+  history, and invalid claim-history rejection
+- An explicit operator-gate script and CI job for claim inspection, handoff, and
+  invalid-history regression coverage
 - A hosted-static deployment path for the exported public JSON tree through
   GitHub Pages workflow automation
 - A release-artifact workflow for packaging the CLI, LSP, and MCP binaries

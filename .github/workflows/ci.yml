@@ -121,8 +121,27 @@ jobs:
           proc.wait(timeout=5)
           PY
 
-  release-gate:
+  operator-gate:
     needs: rust-and-index
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Run explicit maintainer/operator claim gate
+        run: python3 scripts/check_operator_claim_gate.py --output-root operator-gate
+      - name: Upload operator gate inspection artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: operator-gate-claim-reports
+          path: operator-gate/
+          if-no-files-found: error
+          retention-days: 14
+
+  release-gate:
+    needs:
+      - rust-and-index
+      - operator-gate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

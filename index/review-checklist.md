@@ -29,6 +29,7 @@ Use this checklist when reviewing overlay contributions for the seed index.
 
 ## Maintainer claim checks
 
+- `python3 scripts/check_operator_claim_gate.py --output-root operator-gate` passes when claim workflow or validation semantics changed.
 - Claim directories live under `repos/<host>/<owner>/<repo>/claims/<claim-id>/`.
 - `claim.toml` and `events/*.toml` tell the same story as the latest reviewer decision.
 - Event sequence numbers are contiguous and append-only.

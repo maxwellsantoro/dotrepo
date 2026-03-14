@@ -62,8 +62,8 @@ A structured `.repo` record does not replace code or good documentation. It prov
 - updated RFCs that reflect the protocol + toolchain + index model
 - example native and overlay records
 - a seeded `index/` tree with real overlay layout and validation rules
-- GitHub Actions workflows for workspace CI, release-gate packaging, and Pages
-  deployment
+- GitHub Actions workflows for workspace CI, operator-gate claim checks,
+  release-gate packaging, and Pages deployment
 - public-facing docs with a balanced tone around ambition, safety, and practicality
 
 ## What dotrepo does not claim yet
