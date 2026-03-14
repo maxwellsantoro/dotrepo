@@ -53,6 +53,35 @@ fn public_query_success_prints_json_to_stdout() {
 }
 
 #[test]
+fn public_summary_honors_base_path_in_links() {
+    let index_root = fixture_index_root();
+    let output = run_public(&[
+        "public",
+        "summary",
+        "github.com",
+        "example",
+        "orbit",
+        "--index-root",
+        index_root.to_str().expect("fixture path is utf-8"),
+        "--base-path",
+        "/dotrepo",
+    ]);
+
+    assert!(output.status.success(), "command should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    assert_eq!(
+        json["links"]["self"],
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit".into())
+    );
+    assert_eq!(
+        json["links"]["trust"],
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/trust".into())
+    );
+}
+
+#[test]
 fn public_query_missing_path_prints_json_error_and_exit_code_1() {
     let index_root = fixture_index_root();
     let output = run_public(&[

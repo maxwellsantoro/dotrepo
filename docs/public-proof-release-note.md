@@ -2,9 +2,9 @@
 
 This note is the current release-style summary for dotrepo's public JSON tree.
 
-It is intentionally modest. The project can now produce, package, and publish a
-read-only public export artifact, but that is still different from claiming a
-hosted public product surface.
+It is intentionally modest. The project can now produce, package, publish, and
+deploy the same read-only public export tree, but that is still different from
+claiming a broader public product surface.
 
 ## What exists now
 
@@ -15,6 +15,7 @@ The current proof release includes:
 - per-repository summary and trust documents
 - a CI artifact for the loose tree
 - a CI artifact for a versioned review bundle
+- a GitHub Pages deployment workflow plus root landing page render step
 
 ## Why this matters
 
@@ -41,7 +42,6 @@ If you want the reasoning behind the proof-surface choice, see
 ## What this does not promise yet
 
 This proof release does not yet promise:
-- permanent public hosting
 - search or browse UX beyond the exported bundle
 - live mutation or submission APIs
 - production-grade reliability claims

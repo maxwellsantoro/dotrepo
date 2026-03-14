@@ -3,9 +3,10 @@
 This doc covers the current operator and reviewer loop for the read-only public
 JSON tree.
 
-It is intentionally narrow. dotrepo can now export a static public surface and
-publish it as a CI artifact, but that does not yet imply a hosted public site,
-a live public API, or production-hardened serving.
+It is intentionally narrow. dotrepo can now export a static public surface,
+publish it as a CI artifact, and deploy the same tree through the GitHub Pages
+workflow in `.github/workflows/public-pages.yml`. That still does not imply a
+live public query API or production-hardened serving.
 
 ## What exists now
 
@@ -33,7 +34,6 @@ Today this surface proves:
   rebuilding higher-level serving infrastructure first
 
 It does not yet promise:
-- permanent public hosting
 - a public search surface
 - live mutation or submission APIs
 - production-hardened freshness or runtime guarantees
@@ -89,6 +89,9 @@ cargo run -p dotrepo-cli -- public export --index-root index --out-dir public
 ```
 
 You may also add `--stale-after-hours <hours>` for an advisory staleness window.
+When deploying behind a subpath such as a GitHub Pages project site, add
+`--base-path /<repo-name>` so public links resolve correctly from the hosted
+root.
 
 ## CI artifact
 
@@ -106,6 +109,18 @@ Current behavior:
 
 This gives reviewers a fetchable snapshot of the public JSON tree without
 rebuilding locally.
+
+## Hosted static deployment
+
+The repo now also includes `.github/workflows/public-pages.yml`, which:
+
+- validates the index
+- exports the public tree with a hosted-aware `--base-path`
+- renders a small root landing page with `scripts/render_public_pages_landing.py`
+- uploads the result to GitHub Pages
+
+The export tree remains the source of truth. The hosted surface is just a thin
+deployment layer over the same `public/` output.
 
 ## What should stay stable vs variable
 

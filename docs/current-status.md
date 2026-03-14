@@ -17,12 +17,14 @@ is no longer just an architecture sketch.
 - Contract-level claim, supersede, and conflict surfacing semantics
 - Git-backed maintainer-claim artifacts, read-only claim inspection, and a first
   reviewer workflow over append-only claim events
+- A hosted-static deployment path for the exported public JSON tree through
+  GitHub Pages workflow automation
 
 ## What dotrepo does not promise yet
 
 - Production hardening, broad ecosystem adoption, or long-tail operational polish
 - A full maintainer claim workflow product surface
-- A public index site or query API
+- A broader public site UX or live public query API
 - Bundle mode or first-class workspace/relations support
 - Arbitrary prose round-tripping or automatic conversion of unmanaged files into
   managed-region files

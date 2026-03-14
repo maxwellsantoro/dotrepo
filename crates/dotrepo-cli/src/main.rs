@@ -1,15 +1,15 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    append_claim_event, export_public_index_static, generate_check_repository, import_repository,
-    index_snapshot_digest, inspect_claim_directory, inspect_surface_states, load_manifest_document,
-    load_manifest_from_root, managed_outputs, public_repository_query_or_error,
-    public_repository_summary_or_error, public_repository_trust_or_error, query_repository,
-    scaffold_claim_directory, trust_repository, validate_index_root, validate_manifest,
-    validate_repository, ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome,
-    ClaimInspectionReport, ClaimScaffoldInput, ConflictRelationship, ImportMode,
-    IndexFindingSeverity, ManagedFileState, PublicErrorResponse, PublicFreshness,
-    SelectionReason, TrustReport,
+    append_claim_event, generate_check_repository, import_repository,
+    export_public_index_static_with_base, index_snapshot_digest, inspect_claim_directory,
+    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
+    public_repository_query_or_error_with_base, public_repository_summary_or_error_with_base,
+    public_repository_trust_or_error_with_base, query_repository, scaffold_claim_directory,
+    trust_repository, validate_index_root, validate_manifest, validate_repository,
+    ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport,
+    ClaimScaffoldInput, ConflictRelationship, ImportMode, IndexFindingSeverity,
+    ManagedFileState, PublicErrorResponse, PublicFreshness, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::{RecordMode, Trust};
@@ -169,6 +169,9 @@ enum PublicCommand {
         host: String,
         owner: String,
         repo: String,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
         /// Advisory staleness window in hours for the rendered response.
         #[arg(long)]
         stale_after_hours: Option<i64>,
@@ -180,6 +183,9 @@ enum PublicCommand {
         host: String,
         owner: String,
         repo: String,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
         /// Advisory staleness window in hours for the rendered response.
         #[arg(long)]
         stale_after_hours: Option<i64>,
@@ -192,6 +198,9 @@ enum PublicCommand {
         owner: String,
         repo: String,
         path: String,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
         /// Advisory staleness window in hours for the rendered response.
         #[arg(long)]
         stale_after_hours: Option<i64>,
@@ -202,6 +211,9 @@ enum PublicCommand {
         index_root: PathBuf,
         #[arg(long, default_value = "public")]
         out_dir: PathBuf,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
         /// Advisory staleness window in hours for exported responses.
         #[arg(long)]
         stale_after_hours: Option<i64>,
@@ -722,15 +734,17 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
             host,
             owner,
             repo,
+            base_path,
             stale_after_hours,
         } => {
             let freshness = current_public_freshness(&index_root, stale_after_hours)?;
-            print_public_response(public_repository_summary_or_error(
+            print_public_response(public_repository_summary_or_error_with_base(
                 &index_root,
                 &host,
                 &owner,
                 &repo,
                 freshness,
+                &base_path,
             ))
         }
         PublicCommand::Trust {
@@ -738,15 +752,17 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
             host,
             owner,
             repo,
+            base_path,
             stale_after_hours,
         } => {
             let freshness = current_public_freshness(&index_root, stale_after_hours)?;
-            print_public_response(public_repository_trust_or_error(
+            print_public_response(public_repository_trust_or_error_with_base(
                 &index_root,
                 &host,
                 &owner,
                 &repo,
                 freshness,
+                &base_path,
             ))
         }
         PublicCommand::Query {
@@ -755,21 +771,24 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
             owner,
             repo,
             path,
+            base_path,
             stale_after_hours,
         } => {
             let freshness = current_public_freshness(&index_root, stale_after_hours)?;
-            print_public_response(public_repository_query_or_error(
+            print_public_response(public_repository_query_or_error_with_base(
                 &index_root,
                 &host,
                 &owner,
                 &repo,
                 &path,
                 freshness,
+                &base_path,
             ))
         }
         PublicCommand::Export {
             index_root,
             out_dir,
+            base_path,
             stale_after_hours,
             generated_at,
             stale_after,
@@ -780,7 +799,8 @@ fn cmd_public(command: PublicCommand) -> Result<()> {
                 generated_at.as_deref(),
                 stale_after.as_deref(),
             )?;
-            let outputs = export_public_index_static(&index_root, &out_dir, freshness)?;
+            let outputs =
+                export_public_index_static_with_base(&index_root, &out_dir, freshness, &base_path)?;
             for (path, contents) in outputs {
                 if let Some(parent) = path.parent() {
                     fs::create_dir_all(parent)?;
@@ -1926,6 +1946,7 @@ description = "Reviewed overlay"
         cmd_public(PublicCommand::Export {
             index_root: index_root.clone(),
             out_dir: out_dir.clone(),
+            base_path: "/".into(),
             stale_after_hours: Some(24),
             generated_at: None,
             stale_after: None,
@@ -1939,6 +1960,52 @@ description = "Reviewed overlay"
         assert!(out_dir
             .join("v0/repos/github.com/example/orbit/trust.json")
             .exists());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn public_export_honors_base_path_in_inventory_links() {
+        let root = temp_dir("public-export-base-path");
+        let index_root = root.join("index");
+        let record_dir = index_root.join("repos/github.com/example/orbit");
+        fs::create_dir_all(&record_dir).expect("record dir created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Reviewed overlay"
+"#,
+        )
+        .expect("record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+
+        let out_dir = root.join("public");
+        cmd_public(PublicCommand::Export {
+            index_root: index_root.clone(),
+            out_dir: out_dir.clone(),
+            base_path: "/dotrepo".into(),
+            stale_after_hours: Some(24),
+            generated_at: None,
+            stale_after: None,
+        })
+        .expect("public export succeeds");
+
+        let inventory = fs::read_to_string(out_dir.join("v0/repos/index.json")).expect("inventory");
+        assert!(inventory.contains("\"self\": \"/dotrepo/v0/repos/github.com/example/orbit\""));
+        assert!(inventory.contains("\"trust\": \"/dotrepo/v0/repos/github.com/example/orbit/trust\""));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -2016,6 +2083,7 @@ description = "Reviewed overlay"
         cmd_public(PublicCommand::Export {
             index_root: index_root.clone(),
             out_dir: out_a.clone(),
+            base_path: "/".into(),
             stale_after_hours: None,
             generated_at: Some(generated_at.clone()),
             stale_after: Some(stale_after.clone()),
@@ -2024,6 +2092,7 @@ description = "Reviewed overlay"
         cmd_public(PublicCommand::Export {
             index_root: index_root.clone(),
             out_dir: out_b.clone(),
+            base_path: "/".into(),
             stale_after_hours: None,
             generated_at: Some(generated_at),
             stale_after: Some(stale_after),
@@ -2066,6 +2135,7 @@ description = "Reviewed overlay"
         let err = cmd_public(PublicCommand::Export {
             index_root: index_root.clone(),
             out_dir: root.join("public"),
+            base_path: "/".into(),
             stale_after_hours: None,
             generated_at: None,
             stale_after: Some("2026-03-11T18:30:00Z".into()),

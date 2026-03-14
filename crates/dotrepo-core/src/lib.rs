@@ -1151,19 +1151,38 @@ fn public_repository_fields(manifest: &Manifest) -> PublicRepositoryFields {
     }
 }
 
-fn public_links(
+fn normalize_public_base_path(base_path: &str) -> Result<String> {
+    let trimmed = base_path.trim();
+    if trimmed.is_empty() || trimmed == "/" {
+        return Ok(String::new());
+    }
+    if !trimmed.starts_with('/') {
+        bail!("public base path must start with `/`");
+    }
+
+    let normalized = trimmed.trim_end_matches('/');
+    if normalized.is_empty() {
+        Ok(String::new())
+    } else {
+        Ok(normalized.to_string())
+    }
+}
+
+fn public_links_with_base(
     host: &str,
     owner: &str,
     repo: &str,
     kind: PublicLinkKind,
     query_path: Option<&str>,
-) -> PublicRepositoryLinks {
-    let repository = format!("/v0/repos/{host}/{owner}/{repo}");
+    base_path: &str,
+) -> Result<PublicRepositoryLinks> {
+    let base_path = normalize_public_base_path(base_path)?;
+    let repository = format!("{base_path}/v0/repos/{host}/{owner}/{repo}");
     let trust = format!("{repository}/trust");
     let query_template = format!("{repository}/query?path={{dot_path}}");
     let index_path = format!("repos/{host}/{owner}/{repo}/");
 
-    match kind {
+    Ok(match kind {
         PublicLinkKind::Repository => PublicRepositoryLinks {
             self_link: repository,
             repository: None,
@@ -1188,7 +1207,7 @@ fn public_links(
             query_template: Some(query_template),
             index_path,
         },
-    }
+    })
 }
 
 fn non_empty_value(value: Option<&str>) -> Option<String> {
@@ -1993,6 +2012,17 @@ pub fn public_repository_summary(
     repo: &str,
     freshness: PublicFreshness,
 ) -> Result<PublicRepositorySummaryResponse> {
+    public_repository_summary_with_base(index_root, host, owner, repo, freshness, "/")
+}
+
+pub fn public_repository_summary_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicRepositorySummaryResponse> {
     let scope_root = index_repository_scope(index_root, host, owner, repo)?;
     let candidates = resolve_candidates(&scope_root)?;
     let selected = &candidates[0];
@@ -2021,7 +2051,7 @@ pub fn public_repository_summary(
                 record: public_selected_record(index_root, candidate),
             })
             .collect(),
-        links: public_links(host, owner, repo, PublicLinkKind::Repository, None),
+        links: public_links_with_base(host, owner, repo, PublicLinkKind::Repository, None, base_path)?,
     })
 }
 
@@ -2031,6 +2061,17 @@ pub fn public_repository_trust(
     owner: &str,
     repo: &str,
     freshness: PublicFreshness,
+) -> Result<PublicTrustResponse> {
+    public_repository_trust_with_base(index_root, host, owner, repo, freshness, "/")
+}
+
+pub fn public_repository_trust_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
 ) -> Result<PublicTrustResponse> {
     let scope_root = index_repository_scope(index_root, host, owner, repo)?;
     let candidates = resolve_candidates(&scope_root)?;
@@ -2059,7 +2100,7 @@ pub fn public_repository_trust(
                 record: public_selected_record(index_root, candidate),
             })
             .collect(),
-        links: public_links(host, owner, repo, PublicLinkKind::Trust, None),
+        links: public_links_with_base(host, owner, repo, PublicLinkKind::Trust, None, base_path)?,
     })
 }
 
@@ -2070,6 +2111,18 @@ pub fn public_repository_query(
     repo: &str,
     path: &str,
     freshness: PublicFreshness,
+) -> Result<PublicQueryResponse> {
+    public_repository_query_with_base(index_root, host, owner, repo, path, freshness, "/")
+}
+
+pub fn public_repository_query_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    path: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
 ) -> Result<PublicQueryResponse> {
     let scope_root = index_repository_scope(index_root, host, owner, repo)?;
     let candidates = resolve_candidates(&scope_root)?;
@@ -2101,7 +2154,14 @@ pub fn public_repository_query(
                 record: public_selected_record(index_root, candidate),
             })
             .collect(),
-        links: public_links(host, owner, repo, PublicLinkKind::Query, Some(path)),
+        links: public_links_with_base(
+            host,
+            owner,
+            repo,
+            PublicLinkKind::Query,
+            Some(path),
+            base_path,
+        )?,
     })
 }
 
@@ -2150,7 +2210,18 @@ pub fn public_repository_summary_or_error(
     repo: &str,
     freshness: PublicFreshness,
 ) -> std::result::Result<PublicRepositorySummaryResponse, PublicErrorResponse> {
-    public_repository_summary(index_root, host, owner, repo, freshness.clone())
+    public_repository_summary_or_error_with_base(index_root, host, owner, repo, freshness, "/")
+}
+
+pub fn public_repository_summary_or_error_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> std::result::Result<PublicRepositorySummaryResponse, PublicErrorResponse> {
+    public_repository_summary_with_base(index_root, host, owner, repo, freshness.clone(), base_path)
         .map_err(|error| public_error_response(host, owner, repo, None, freshness, &error))
 }
 
@@ -2161,7 +2232,18 @@ pub fn public_repository_trust_or_error(
     repo: &str,
     freshness: PublicFreshness,
 ) -> std::result::Result<PublicTrustResponse, PublicErrorResponse> {
-    public_repository_trust(index_root, host, owner, repo, freshness.clone())
+    public_repository_trust_or_error_with_base(index_root, host, owner, repo, freshness, "/")
+}
+
+pub fn public_repository_trust_or_error_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> std::result::Result<PublicTrustResponse, PublicErrorResponse> {
+    public_repository_trust_with_base(index_root, host, owner, repo, freshness.clone(), base_path)
         .map_err(|error| public_error_response(host, owner, repo, None, freshness, &error))
 }
 
@@ -2173,7 +2255,19 @@ pub fn public_repository_query_or_error(
     path: &str,
     freshness: PublicFreshness,
 ) -> std::result::Result<PublicQueryResponse, PublicErrorResponse> {
-    public_repository_query(index_root, host, owner, repo, path, freshness.clone())
+    public_repository_query_or_error_with_base(index_root, host, owner, repo, path, freshness, "/")
+}
+
+pub fn public_repository_query_or_error_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    path: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> std::result::Result<PublicQueryResponse, PublicErrorResponse> {
+    public_repository_query_with_base(index_root, host, owner, repo, path, freshness.clone(), base_path)
         .map_err(|error| public_error_response(host, owner, repo, Some(path), freshness, &error))
 }
 
@@ -2181,6 +2275,15 @@ pub fn export_public_index_static(
     index_root: &Path,
     out_root: &Path,
     freshness: PublicFreshness,
+) -> Result<Vec<(PathBuf, String)>> {
+    export_public_index_static_with_base(index_root, out_root, freshness, "/")
+}
+
+pub fn export_public_index_static_with_base(
+    index_root: &Path,
+    out_root: &Path,
+    freshness: PublicFreshness,
+    base_path: &str,
 ) -> Result<Vec<(PathBuf, String)>> {
     let mut outputs = Vec::new();
     outputs.push((
@@ -2195,19 +2298,21 @@ pub fn export_public_index_static(
             .join(&identity.host)
             .join(&identity.owner)
             .join(&identity.repo);
-        let summary = public_repository_summary(
+        let summary = public_repository_summary_with_base(
             index_root,
             &identity.host,
             &identity.owner,
             &identity.repo,
             freshness.clone(),
+            base_path,
         )?;
-        let trust = public_repository_trust(
+        let trust = public_repository_trust_with_base(
             index_root,
             &identity.host,
             &identity.owner,
             &identity.repo,
             freshness.clone(),
+            base_path,
         )?;
         inventory.push(PublicRepositoryInventoryEntry {
             identity: summary.identity.clone(),

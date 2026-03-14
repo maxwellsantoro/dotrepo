@@ -1,0 +1,63 @@
+name: public-pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: public-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Compute hosted base path
+        id: base_path
+        run: |
+          repo_name="${GITHUB_REPOSITORY#*/}"
+          owner_site="${GITHUB_REPOSITORY_OWNER}.github.io"
+          if [ "$repo_name" = "$owner_site" ]; then
+            echo "value=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=/$repo_name" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Validate index before export
+        run: cargo run -p dotrepo-cli -- validate-index
+      - name: Build static public tree for Pages
+        run: |
+          cargo run -p dotrepo-cli -- public export \
+            --index-root index \
+            --out-dir public \
+            --base-path "${{ steps.base_path.outputs.value }}" \
+            --stale-after-hours 24
+      - name: Render landing page for hosted static surface
+        run: python3 scripts/render_public_pages_landing.py --input public
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public/
+
+  deploy:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

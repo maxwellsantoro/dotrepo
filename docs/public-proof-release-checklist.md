@@ -8,12 +8,14 @@ exported JSON tree.
 - `cargo run -p dotrepo-cli -- validate-index`
 - `cargo test -p dotrepo-core --test public_export_fixture_pack -- --nocapture`
 - `cargo run -p dotrepo-cli -- public export --index-root index --out-dir public --generated-at 2026-03-10T18:30:00Z --stale-after 2026-03-11T18:30:00Z`
+- `python3 scripts/render_public_pages_landing.py --input public`
 - `python3 scripts/package_public_export.py --input public --output-dir dist`
 
 ## Artifact inspection
 
 - `public/v0/meta.json` exists and has the expected `apiVersion`
 - `public/v0/repos/index.json` exists and `repositoryCount` matches the bundle
+- `public/index.html` exists for hosted static entry
 - representative repository `index.json` and `trust.json` files open cleanly
 - the packaged bundle extracts to one self-describing root directory
 
@@ -27,11 +29,11 @@ exported JSON tree.
 ## CI and release surface
 
 - CI uploads both `public-export-v0` and `public-export-v0-bundle`
+- the GitHub Pages workflow can deploy the same tree without editing links by hand
 - the release-style note is current
 - the usage examples still match the exported tree
 
 ## Non-goals check
 
-- no hosted-runtime claim was added implicitly
 - no search/browse UX promise was added implicitly
 - no production-hardening claim was added implicitly

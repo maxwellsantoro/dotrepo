@@ -2,27 +2,22 @@
 
 ## Decision
 
-The first proof surface for the public JSON tree is a release-style artifact
-surface, not a hosted demo.
+The public proof surface is still anchored on the exported JSON tree, with a
+thin hosted-static deployment path layered on top.
 
 That proof surface is:
 - the exported `public/v0/` JSON tree
 - the CI artifact `public-export-v0`
+- the GitHub Pages deployment workflow in `.github/workflows/public-pages.yml`
 - the docs that explain how to generate, inspect, and reason about that tree
 
 ## Why this choice
 
-Two options were on the table:
-
-1. a thin hosted demo over the exported JSON tree
-2. a release-style “what exists now” surface centered on the exported artifact
-
-The second option is the better first move because it:
+The exported artifact is still the right center of gravity because it:
 - stays fully downstream of the exported JSON tree
 - gives humans and agents one inspectable artifact immediately
-- avoids prematurely choosing a hosting/runtime stack
-- remains easy to replace later with a thin hosted surface if the artifact
-  proves useful
+- keeps the hosted deployment path downstream of the same files and contracts
+- avoids inventing a second runtime-specific truth model
 
 ## What ships in this first proof surface
 
@@ -30,6 +25,7 @@ The second option is the better first move because it:
 
 - the CI artifact `public-export-v0`
 - the CI artifact `public-export-v0-bundle`
+- the GitHub Pages deployment workflow
 - the operator loop in [`docs/public-export-workflow.md`](./public-export-workflow.md)
 - the release-style note in [`docs/public-proof-release-note.md`](./public-proof-release-note.md)
 - the current public response contracts in RFCs 0017, 0018, and 0019
@@ -48,14 +44,14 @@ This proof surface demonstrates that dotrepo can:
 - render the seed index into a real read-only public artifact
 - keep public responses identity-first and trust-aware
 - expose claim-aware visibility without inventing a second semantic layer
-- publish one reviewable snapshot without waiting for a hosted product surface
+- publish one reviewable snapshot and deploy the same tree without a second
+  runtime
 
 ## What this does not prove yet
 
 It does not yet prove:
-- permanent hosting
 - public search or browse UX
-- runtime caching strategy beyond the current export artifact
+- runtime caching strategy beyond static hosting
 - production-grade operations or public SLA expectations
 
 ## How to use it now
@@ -72,8 +68,6 @@ Start with:
 
 ## Upgrade path
 
-If this proof surface becomes clearly useful, the next step can be a thin hosted
-reader over the same exported JSON tree or the same response contracts.
-
-That future step should remain downstream of the current artifact, not replace
-it with a second independent truth model.
+The next step is not a second proof surface. It is hardening the hosted-static
+deployment path and, later, adding a thin query wrapper over the same response
+contracts.
