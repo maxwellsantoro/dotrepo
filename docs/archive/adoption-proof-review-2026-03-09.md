@@ -2,10 +2,12 @@
 
 Date: March 9, 2026
 
-This is an early closeout review of the proof-of-adoption board, written on
-March 9, 2026. It answers the same questions the end-of-month review is meant
-to answer, but with the evidence available now rather than waiting for a later
-calendar checkpoint.
+This is a historical closeout review of the proof-of-adoption board, written on
+March 9, 2026. It is preserved as a progress snapshot, not as current roadmap
+or status guidance.
+
+For the active project status and v1.0 launch plan, use
+[`docs/current-status.md`](../current-status.md) and [`PLAN.md`](../../PLAN.md).
 
 ## Did import quality improve?
 

@@ -1,6 +1,6 @@
 # dotrepo Seed Index
 
-This directory is a seed version of the future `dotrepo/index` repository.
+This directory is a seed version of a standalone `dotrepo/index` repository.
 
 It exists to make the public-index model concrete early:
 - contributors can add overlay records before maintainers adopt dotrepo natively
@@ -81,4 +81,5 @@ Run:
 cargo run -p dotrepo-cli -- validate-index
 ```
 
-CI runs the same command on every push and pull request.
+CI runs the same command in pull requests and in the primary-branch validation
+workflow.

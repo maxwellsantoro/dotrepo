@@ -7,7 +7,9 @@ Draft
 
 dotrepo should expose a thin MCP server that wraps the same trust-aware core used by the CLI.
 
-The server's job is not to invent new semantics. It should make the existing protocol and toolchain legible to agents by exposing validation, query, trust, generate-check, and import-preview operations as structured tools.
+The server's job is not to invent new semantics. It should make the existing
+protocol and toolchain legible to agents by exposing validation, query, trust,
+claim inspection, generate-check, and import operations as structured tools.
 
 The first reference implementation is a stdio server in `crates/dotrepo-mcp`.
 
@@ -69,6 +71,21 @@ The trust tool should mirror the same conflict-aware selection model as query. I
 the inspection surface that explains why a canonical record won, why a reviewed
 overlay beat an imported overlay, or why equal-authority overlays remain unresolved.
 
+### `dotrepo.claim_inspect`
+
+Inputs:
+- `root`
+- `claimPath`
+
+Returns:
+- the claim target identity and claimant context
+- current claim state
+- derived handoff status
+- ordered append-only event history
+
+This tool should mirror `dotrepo claim --json` rather than inventing a separate
+claim product vocabulary for agents.
+
 ### `dotrepo.generate_check`
 
 Inputs:
@@ -107,7 +124,9 @@ Returns:
 - the paths written
 - the resulting record status and trust summary
 
-This write tool is optional for the first server iteration. A preview-only import tool is enough to support review and agent planning while keeping mutation explicit.
+This write tool mutates local files and should remain explicit for clients that
+want write access. It should use the same import pipeline and report shape as
+`dotrepo.import_preview`, with only the write side effects added.
 
 ## Response shape guidance
 

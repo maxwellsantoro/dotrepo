@@ -42,7 +42,7 @@ A structured `.repo` record does not replace code or good documentation. It prov
 - **Practical, not doctrinaire**: dotrepo should work with existing files and conventions, not demand an all-or-nothing migration.
 - **Machine-readable, human-legible**: the protocol should help agents and tools without making projects feel sterile.
 
-## Day-one decisions in this scaffold
+## Current protocol decisions
 
 - **Canonical in-repo v0.1 form**: a single root `.repo` file in TOML format
 - **Bundle mode**: reserved for a future version
@@ -53,24 +53,28 @@ A structured `.repo` record does not replace code or good documentation. It prov
 - **Extension namespace**: `x.*` is reserved for non-core extensions
 - **Future workspace support**: relations are reserved now so repos do not become permanent islands
 
-## What this scaffold includes
+## What the repo includes today
 
 - a Rust workspace with `dotrepo-schema`, `dotrepo-core`, `dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, and the shared internal `dotrepo-transport`
-- a first VS Code extension shell under [`editors/vscode/`](editors/vscode/)
+- a thin VS Code extension shell under [`editors/vscode/`](editors/vscode/)
 - a thin import path for bootstrapping records from `README.md`, `CODEOWNERS`, and `SECURITY.md`
 - a thin stdio MCP server exposing trust-aware validate/query/trust/generate-check/import tools
 - updated RFCs that reflect the protocol + toolchain + index model
 - example native and overlay records
 - a seeded `index/` tree with real overlay layout and validation rules
-- starter GitHub Actions templates
+- GitHub Actions workflows for workspace CI and example-repo checks
 - public-facing docs with a balanced tone around ambition, safety, and practicality
 
-## What this scaffold does not claim yet
+## What dotrepo does not claim yet
 
-This repo is an early implementation of the dotrepo protocol and toolchain. It is not yet production-hardened, but it is beyond a pure architecture scaffold: the crates implement import, validation, querying, generated-surface checks, index validation, and a first MCP server.
+This repo is an early implementation of the dotrepo protocol and toolchain. It
+is not yet production-hardened, but it is beyond a pure architecture scaffold:
+the crates implement import, validation, querying, generated-surface checks,
+index validation, claims, public export, and an MCP server.
 
 ## First docs to read
 
+- [`PLAN.md`](PLAN.md)
 - [`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md)
 - [`docs/current-status.md`](docs/current-status.md)
 - [`docs/vision.md`](docs/vision.md)

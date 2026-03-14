@@ -1,6 +1,6 @@
 # Current status
 
-As of March 9, 2026, dotrepo is a coherent early implementation of the protocol,
+As of March 14, 2026, dotrepo is a coherent early implementation of the protocol,
 reference toolchain, and seed index. It is still not production-hardened, but it
 is no longer just an architecture sketch.
 
@@ -9,7 +9,7 @@ is no longer just an architecture sketch.
 - A canonical root `.repo` format plus overlay records for index use
 - Shared Rust core semantics for validation, query, trust, import, generate-check,
   and authority/conflict reporting
-- A thin CLI, stdio MCP server, stdio LSP server, and first VS Code extension shell
+- A thin CLI, stdio MCP server, stdio LSP server, and thin VS Code extension shell
 - Managed sync for supported Markdown surfaces through explicit managed regions
 - Richer import heuristics for `README.md`, `CODEOWNERS`, and `SECURITY.md`, backed
   by a checked-in fixture pack and regression gate
@@ -51,6 +51,9 @@ That is why the next strategic track should focus on the identity-first public
 index site and query API described in RFC 0016 and its follow-on response-shape
 work, not on widening the editor surface or expanding bundle/workspace semantics
 first.
+
+For the concrete v1.0 launch scope, exit criteria, and deferrals, see
+[`PLAN.md`](../PLAN.md).
 
 For the current operator/reviewer loop over the exported public JSON tree, see
 [`docs/public-export-workflow.md`](./public-export-workflow.md).

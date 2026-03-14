@@ -107,6 +107,50 @@ The trust contract should not require downstream consumers to infer precedence o
 from `record.status`. The response should say explicitly why one record won and which
 records remain visible as lower-authority or parallel context.
 
+### `dotrepo claim`
+Inspect one maintainer-claim directory from the index.
+
+The command should support:
+- a claim directory path relative to `--root` or as an absolute path
+- human-readable output by default
+- `--json` for the full claim inspection report
+
+The claim inspection contract should expose:
+- current claim state
+- repository target and claimant context
+- derived handoff state
+- ordered append-only event history
+
+### `dotrepo claim-init`
+Scaffold a draft maintainer-claim directory for one repository in the index.
+
+The command should:
+- create `claim.toml` plus the claim directory layout under `claims/<claim-id>/`
+- optionally create `review.md`
+- refuse to overwrite existing event history even when forced
+
+### `dotrepo claim-event`
+Append one new maintainer-claim event and update the current derived state.
+
+The command should:
+- accept the event kinds `submitted`, `review-started`, `accepted`, `rejected`,
+  `withdrawn`, `disputed`, and `corrected`
+- write deterministic sequence-based event files
+- allow canonical handoff paths only when the resulting claim state is accepted
+- preserve append-only history even when the current state is corrected
+
+### `dotrepo public`
+Inspect or export public read-only index responses.
+
+The command surface should include:
+- `public summary` for one repository summary response
+- `public trust` for one repository trust response
+- `public query` for one trust-aware public query response
+- `public export` for the static-first `public/<version>/` JSON tree
+
+These commands should stay downstream of the same selection, conflict, trust,
+and claim-visibility semantics used by local `trust` and `query`.
+
 ## Exit codes
 
 - `0`: success

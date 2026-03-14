@@ -1,4 +1,4 @@
-# Roadmap sketch
+# Roadmap
 
 ## v0.1
 - Canonical root `.repo` file format
@@ -20,16 +20,34 @@ implementation boundary around managed sync and non-round-trippable cases.
 See [`rfcs/0007-lsp-and-vscode-scope.md`](../rfcs/0007-lsp-and-vscode-scope.md)
 for the first editor feature set and thin-extension model.
 
-## v0.3+
-- Maintainer claim workflow and index-side authority handoff
-- Public index site and query API
+## Completed beyond v0.2
+- Maintainer claim workflow and index-side authority handoff primitives
+- Static public export with repository summary and trust responses
+- Proof-style CI artifacts and bundle packaging for the public export
+
+## v1.0 launch track
+- Freeze the public repository summary, trust, and query-wrapper contracts
+- Ship a hosted/static read-only public surface on top of the existing export
+- Harden the maintainer and operator loops into the formal adoption contract
+- Complete claim and handoff behavior enough for real maintainer replacements of
+  overlays
+- Ship installable release artifacts for the CLI, LSP, MCP server, and thin VS
+  Code shell
+- Turn the current CI and packaging checks into an explicit 1.0 release gate
+
+See [`PLAN.md`](../PLAN.md) for the concrete 1.0 launch plan, exit criteria,
+and deferrals.
+
+## Deferred after 1.0
 - Bundle mode
 - First-class workspace and relations support
+- Discovery-first search and ranking UX
+- Public mutation or submission APIs
 
-The current downstream track after the v0.2 execution loop and first
-maintainer-claim workflow tranche is public index serving. That work should
-turn the existing index, trust, conflict, and claim-visibility semantics into a
-read-only, identity-first repository inspection surface before bundle or
+The current downstream track after the completed v0.2 loop and first
+maintainer-claim/public-export tranche is still public read-only serving. That
+work should turn the existing index, trust, conflict, and claim-visibility
+semantics into a stable repository inspection surface before bundle or
 workspace semantics expand the protocol again.
 
 See [`RFC 0008`](../rfcs/0008-maintainer-claim-lifecycle.md) for the first
