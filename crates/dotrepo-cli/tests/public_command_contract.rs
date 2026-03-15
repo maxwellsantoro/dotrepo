@@ -96,17 +96,17 @@ fn public_query_missing_path_prints_json_error_and_exit_code_1() {
     ]);
 
     assert_eq!(output.status.code(), Some(1));
-    assert!(output.stderr.is_empty(), "public error json should not be duplicated on stderr");
+    assert!(
+        output.stderr.is_empty(),
+        "public error json should not be duplicated on stderr"
+    );
 
     let json = parse_stdout_json(&output);
     assert_eq!(
         json["error"]["code"],
         Value::String("query_path_not_found".into())
     );
-    assert_eq!(
-        json["path"],
-        Value::String("repo.missing_field".into())
-    );
+    assert_eq!(json["path"], Value::String("repo.missing_field".into()));
 }
 
 #[test]
@@ -123,14 +123,20 @@ fn public_summary_missing_repo_prints_json_error_and_exit_code_1() {
     ]);
 
     assert_eq!(output.status.code(), Some(1));
-    assert!(output.stderr.is_empty(), "public error json should not be duplicated on stderr");
+    assert!(
+        output.stderr.is_empty(),
+        "public error json should not be duplicated on stderr"
+    );
 
     let json = parse_stdout_json(&output);
     assert_eq!(
         json["error"]["code"],
         Value::String("repository_not_found".into())
     );
-    assert!(json.get("path").is_none(), "summary failures should not include a query path");
+    assert!(
+        json.get("path").is_none(),
+        "summary failures should not include a query path"
+    );
 }
 
 #[test]
@@ -147,12 +153,18 @@ fn public_trust_invalid_identity_prints_json_error_and_exit_code_1() {
     ]);
 
     assert_eq!(output.status.code(), Some(1));
-    assert!(output.stderr.is_empty(), "public error json should not be duplicated on stderr");
+    assert!(
+        output.stderr.is_empty(),
+        "public error json should not be duplicated on stderr"
+    );
 
     let json = parse_stdout_json(&output);
     assert_eq!(
         json["error"]["code"],
         Value::String("invalid_repository_identity".into())
     );
-    assert!(json.get("path").is_none(), "trust failures should not include a query path");
+    assert!(
+        json.get("path").is_none(),
+        "trust failures should not include a query path"
+    );
 }

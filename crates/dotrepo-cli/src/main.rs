@@ -1,15 +1,15 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    append_claim_event, generate_check_repository, import_repository,
-    export_public_index_static_with_base, index_snapshot_digest, inspect_claim_directory,
-    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
+    append_claim_event, export_public_index_static_with_base, generate_check_repository,
+    import_repository, index_snapshot_digest, inspect_claim_directory, inspect_surface_states,
+    load_manifest_document, load_manifest_from_root, managed_outputs,
     public_repository_query_or_error_with_base, public_repository_summary_or_error_with_base,
     public_repository_trust_or_error_with_base, query_repository, scaffold_claim_directory,
     trust_repository, validate_index_root, validate_manifest, validate_repository,
     ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport,
-    ClaimScaffoldInput, ConflictRelationship, ImportMode, IndexFindingSeverity,
-    ManagedFileState, PublicErrorResponse, PublicFreshness, SelectionReason, TrustReport,
+    ClaimScaffoldInput, ConflictRelationship, ImportMode, IndexFindingSeverity, ManagedFileState,
+    PublicErrorResponse, PublicFreshness, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::{RecordMode, Trust};
@@ -2005,7 +2005,9 @@ description = "Reviewed overlay"
 
         let inventory = fs::read_to_string(out_dir.join("v0/repos/index.json")).expect("inventory");
         assert!(inventory.contains("\"self\": \"/dotrepo/v0/repos/github.com/example/orbit\""));
-        assert!(inventory.contains("\"trust\": \"/dotrepo/v0/repos/github.com/example/orbit/trust\""));
+        assert!(
+            inventory.contains("\"trust\": \"/dotrepo/v0/repos/github.com/example/orbit/trust\"")
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

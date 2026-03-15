@@ -2051,7 +2051,14 @@ pub fn public_repository_summary_with_base(
                 record: public_selected_record(index_root, candidate),
             })
             .collect(),
-        links: public_links_with_base(host, owner, repo, PublicLinkKind::Repository, None, base_path)?,
+        links: public_links_with_base(
+            host,
+            owner,
+            repo,
+            PublicLinkKind::Repository,
+            None,
+            base_path,
+        )?,
     })
 }
 
@@ -2267,8 +2274,16 @@ pub fn public_repository_query_or_error_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> std::result::Result<PublicQueryResponse, PublicErrorResponse> {
-    public_repository_query_with_base(index_root, host, owner, repo, path, freshness.clone(), base_path)
-        .map_err(|error| public_error_response(host, owner, repo, Some(path), freshness, &error))
+    public_repository_query_with_base(
+        index_root,
+        host,
+        owner,
+        repo,
+        path,
+        freshness.clone(),
+        base_path,
+    )
+    .map_err(|error| public_error_response(host, owner, repo, Some(path), freshness, &error))
 }
 
 pub fn export_public_index_static(

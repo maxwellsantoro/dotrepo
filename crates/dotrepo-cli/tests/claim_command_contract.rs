@@ -100,10 +100,16 @@ fn copy_repo(source_repo: &Path, dest_root: &Path, owner: &str, repo: &str) {
         .join(owner)
         .join(repo);
     fs::create_dir_all(&dest_repo).expect("dest repo dir created");
-    fs::copy(source_repo.join("record.toml"), dest_repo.join("record.toml"))
-        .expect("record copied");
-    fs::copy(source_repo.join("evidence.md"), dest_repo.join("evidence.md"))
-        .expect("evidence copied");
+    fs::copy(
+        source_repo.join("record.toml"),
+        dest_repo.join("record.toml"),
+    )
+    .expect("record copied");
+    fs::copy(
+        source_repo.join("evidence.md"),
+        dest_repo.join("evidence.md"),
+    )
+    .expect("evidence copied");
 }
 
 #[test]
@@ -123,8 +129,14 @@ fn claim_command_reports_superseded_handoff_from_fixture() {
 
     let json = parse_stdout_json(&output);
     assert_eq!(json["state"], Value::String("accepted".into()));
-    assert_eq!(json["target"]["handoff"], Value::String("superseded".into()));
-    assert_eq!(json["resolution"]["canonical_record_path"], Value::String(".repo".into()));
+    assert_eq!(
+        json["target"]["handoff"],
+        Value::String("superseded".into())
+    );
+    assert_eq!(
+        json["resolution"]["canonical_record_path"],
+        Value::String(".repo".into())
+    );
     assert_eq!(
         json["resolution"]["canonical_mirror_path"],
         Value::String("repos/github.com/acme/widget/record.toml".into())
@@ -154,7 +166,10 @@ fn claim_command_reports_corrected_history_from_fixture() {
         json["target"]["handoff"],
         Value::String("pending_canonical".into())
     );
-    assert!(json.get("resolution").is_none(), "corrected fixture should not expose canonical resolution");
+    assert!(
+        json.get("resolution").is_none(),
+        "corrected fixture should not expose canonical resolution"
+    );
     assert_eq!(events.len(), 3);
     assert_eq!(events[1]["kind"], Value::String("rejected".into()));
     assert_eq!(events[2]["kind"], Value::String("corrected".into()));
@@ -196,8 +211,14 @@ fn claim_commands_execute_documented_operator_workflow() {
     ]);
     assert!(init.status.success(), "claim-init should succeed");
     assert!(init.stderr.is_empty(), "claim-init should not write stderr");
-    assert!(claim_dir.join("claim.toml").is_file(), "claim scaffold should exist");
-    assert!(claim_dir.join("review.md").is_file(), "review scaffold should exist");
+    assert!(
+        claim_dir.join("claim.toml").is_file(),
+        "claim scaffold should exist"
+    );
+    assert!(
+        claim_dir.join("review.md").is_file(),
+        "review scaffold should exist"
+    );
 
     let submitted = run_dotrepo(&[
         "--root",
@@ -212,7 +233,10 @@ fn claim_commands_execute_documented_operator_workflow() {
         "Submitted maintainer claim.",
     ]);
     assert!(submitted.status.success(), "submitted event should succeed");
-    assert!(submitted.stderr.is_empty(), "submitted event should not write stderr");
+    assert!(
+        submitted.stderr.is_empty(),
+        "submitted event should not write stderr"
+    );
 
     let review_started = run_dotrepo(&[
         "--root",
@@ -226,7 +250,10 @@ fn claim_commands_execute_documented_operator_workflow() {
         "--summary",
         "Started maintainer authority review.",
     ]);
-    assert!(review_started.status.success(), "review-started event should succeed");
+    assert!(
+        review_started.status.success(),
+        "review-started event should succeed"
+    );
     assert!(
         review_started.stderr.is_empty(),
         "review-started event should not write stderr"
@@ -249,7 +276,10 @@ fn claim_commands_execute_documented_operator_workflow() {
         "repos/github.com/acme/widget/record.toml",
     ]);
     assert!(accepted.status.success(), "accepted event should succeed");
-    assert!(accepted.stderr.is_empty(), "accepted event should not write stderr");
+    assert!(
+        accepted.stderr.is_empty(),
+        "accepted event should not write stderr"
+    );
 
     assert!(
         claim_dir.join("events/0001-submitted.toml").is_file(),
@@ -264,19 +294,19 @@ fn claim_commands_execute_documented_operator_workflow() {
         "accepted event should be sequenced as 0003"
     );
 
-    let report = run_dotrepo(&[
-        "--root",
-        root_str,
-        "claim",
-        &claim_path,
-        "--json",
-    ]);
+    let report = run_dotrepo(&["--root", root_str, "claim", &claim_path, "--json"]);
     assert!(report.status.success(), "claim inspection should succeed");
-    assert!(report.stderr.is_empty(), "claim inspection should not write stderr");
+    assert!(
+        report.stderr.is_empty(),
+        "claim inspection should not write stderr"
+    );
     let json = parse_stdout_json(&report);
     let events = json["events"].as_array().expect("events array");
     assert_eq!(json["state"], Value::String("accepted".into()));
-    assert_eq!(json["target"]["handoff"], Value::String("superseded".into()));
+    assert_eq!(
+        json["target"]["handoff"],
+        Value::String("superseded".into())
+    );
     assert_eq!(
         json["resolution"]["result_event"],
         Value::String("events/0003-accepted.toml".into())
@@ -287,7 +317,10 @@ fn claim_commands_execute_documented_operator_workflow() {
 
     let validate = run_dotrepo(&["validate-index", "--index-root", root_str]);
     assert!(validate.status.success(), "validate-index should succeed");
-    assert!(validate.stderr.is_empty(), "validate-index success should not write stderr");
+    assert!(
+        validate.stderr.is_empty(),
+        "validate-index success should not write stderr"
+    );
     assert_eq!(
         String::from_utf8(validate.stdout).expect("stdout is utf-8"),
         "index valid\n"
@@ -304,7 +337,10 @@ fn validate_index_rejects_invalid_claim_history() {
     ]);
 
     assert_eq!(output.status.code(), Some(1));
-    assert!(output.stdout.is_empty(), "failing validate-index should not write stdout");
+    assert!(
+        output.stdout.is_empty(),
+        "failing validate-index should not write stdout"
+    );
 
     let stderr = String::from_utf8(output.stderr).expect("stderr is utf-8");
     assert!(
@@ -367,7 +403,10 @@ fn live_seed_overlay_handoff_surfaces_in_public_outputs() {
         "Submitted maintainer claim.",
     ]);
     assert!(submitted.status.success(), "submitted event should succeed");
-    assert!(submitted.stderr.is_empty(), "submitted event should not write stderr");
+    assert!(
+        submitted.stderr.is_empty(),
+        "submitted event should not write stderr"
+    );
 
     let accepted = run_dotrepo(&[
         "--root",
@@ -386,7 +425,10 @@ fn live_seed_overlay_handoff_surfaces_in_public_outputs() {
         "repos/github.com/cli/cli/record.toml",
     ]);
     assert!(accepted.status.success(), "accepted event should succeed");
-    assert!(accepted.stderr.is_empty(), "accepted event should not write stderr");
+    assert!(
+        accepted.stderr.is_empty(),
+        "accepted event should not write stderr"
+    );
 
     let summary = run_dotrepo(&[
         "public",
@@ -398,7 +440,10 @@ fn live_seed_overlay_handoff_surfaces_in_public_outputs() {
         root_str,
     ]);
     assert!(summary.status.success(), "public summary should succeed");
-    assert!(summary.stderr.is_empty(), "public summary should not write stderr");
+    assert!(
+        summary.stderr.is_empty(),
+        "public summary should not write stderr"
+    );
     let summary_json = parse_stdout_json(&summary);
     assert_eq!(
         summary_json["selection"]["record"]["claim"]["handoff"],
@@ -423,7 +468,10 @@ fn live_seed_overlay_handoff_surfaces_in_public_outputs() {
         root_str,
     ]);
     assert!(trust.status.success(), "public trust should succeed");
-    assert!(trust.stderr.is_empty(), "public trust should not write stderr");
+    assert!(
+        trust.stderr.is_empty(),
+        "public trust should not write stderr"
+    );
     let trust_json = parse_stdout_json(&trust);
     assert_eq!(
         trust_json["selection"]["record"]["claim"]["handoff"],
