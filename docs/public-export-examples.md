@@ -1,9 +1,38 @@
 # Public export examples
 
-These examples use the real exported public JSON tree rather than a separate
-demo API.
+These examples show how to consume the dotrepo public JSON tree. The hosted
+GitHub Pages deployment is the primary consumption path; the same tree can also
+be inspected locally or from CI artifacts.
 
-## 1. Generate a local export
+## 1. Fetch hosted snapshot metadata
+
+```bash
+# Replace BASE_URL with the hosted Pages URL (e.g. https://<owner>.github.io/dotrepo)
+curl -s "$BASE_URL/v0/meta.json" | python3 -c "
+import json, sys
+meta = json.load(sys.stdin)
+print('api version:', meta['apiVersion'])
+print('snapshot digest:', meta['snapshotDigest'])
+print('generated at:', meta['freshness']['generatedAt'])
+"
+```
+
+## 2. List repositories from the hosted inventory
+
+```bash
+curl -s "$BASE_URL/v0/repos/index.json" | python3 -c "
+import json, sys
+inventory = json.load(sys.stdin)
+print('repositories:', inventory['repositoryCount'])
+for entry in inventory['repositories']:
+    repo = entry['identity']['repo']
+    print(f'  {repo}: {entry[\"links\"][\"self\"]}')
+"
+```
+
+## 3. Generate a local export
+
+For local review or development:
 
 ```bash
 cargo run -p dotrepo-cli -- public export \
@@ -13,7 +42,7 @@ cargo run -p dotrepo-cli -- public export \
   --stale-after 2026-03-11T18:30:00Z
 ```
 
-## 2. Read snapshot metadata and repository count
+## 4. Read local snapshot metadata and repository count
 
 ```bash
 python3 - <<'PY'
@@ -28,23 +57,7 @@ print("repositories:", inventory["repositoryCount"])
 PY
 ```
 
-## 3. List repository summary and trust paths
-
-```bash
-python3 - <<'PY'
-import json
-from pathlib import Path
-
-inventory = json.loads(Path("public/v0/repos/index.json").read_text())
-for entry in inventory["repositories"]:
-    repo = entry["identity"]["repo"]
-    summary = entry["links"]["self"]
-    trust = entry["links"]["trust"]
-    print(f"{repo}: {summary} | {trust}")
-PY
-```
-
-## 4. Inspect one repository summary
+## 5. Inspect one repository summary locally
 
 ```bash
 python3 - <<'PY'
@@ -60,7 +73,7 @@ print(summary["selection"]["reason"])
 PY
 ```
 
-## 5. Agent-style traversal from inventory to trust
+## 6. Agent-style traversal from inventory to trust
 
 ```bash
 python3 - <<'PY'
@@ -82,5 +95,5 @@ for entry in inventory["repositories"]:
 PY
 ```
 
-These examples should work equally well against a local export or the CI
-artifacts once extracted.
+These examples work against the hosted deployment, a local export, or extracted
+CI artifacts.

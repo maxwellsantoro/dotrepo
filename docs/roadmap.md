@@ -23,7 +23,7 @@ for the first editor feature set and thin-extension model.
 ## Completed beyond v0.2
 - Maintainer claim workflow and index-side authority handoff primitives
 - Static public export with repository summary and trust responses
-- Proof-style CI artifacts and bundle packaging for the public export
+- CI artifacts and bundle packaging for the public export
 
 ## v1.0 launch track
 - Freeze the public repository summary, trust, and query-wrapper contracts
@@ -67,11 +67,11 @@ See [`RFC 0019`](../rfcs/0019-public-trust-and-query-wrappers.md) for the
 public trust/query wrappers and claim-aware public visibility rules.
 See [`docs/public-export-workflow.md`](./public-export-workflow.md) for the
 current local-review and CI-artifact loop over the exported public JSON tree.
-See [`docs/public-proof-surface.md`](./public-proof-surface.md) for the chosen
-release-style proof surface built on the exported JSON tree.
-See [`docs/public-proof-release-note.md`](./public-proof-release-note.md) and
+See [`docs/public-surface.md`](./public-surface.md) for the public surface
+architecture.
+See [`docs/public-release-note.md`](./public-release-note.md) and
 [`docs/public-export-examples.md`](./public-export-examples.md) for the current
-release-style explanation and consumer examples around that proof surface.
+release summary and consumer examples.
 See [`RFC 0014`](../rfcs/0014-bundle-mode-design.md) for the first bundle-mode
 design note.
 See [`RFC 0015`](../rfcs/0015-workspace-and-relations-model.md) for the first

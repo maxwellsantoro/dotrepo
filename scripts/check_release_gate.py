@@ -7,6 +7,7 @@ import shlex
 import shutil
 import subprocess
 import tarfile
+import tempfile
 import tomllib
 from pathlib import Path
 
@@ -145,6 +146,52 @@ def verify_tar_contains_prefix(archive_path: Path, prefix: str) -> None:
         raise SystemExit(f"{archive_path} does not contain expected root prefix {prefix}")
 
 
+def smoke_test_release_bundle(
+    archive_path: Path, version: str, target: str, repo_root: Path
+) -> None:
+    """Extract the release tarball and run the shipped binaries."""
+    with tempfile.TemporaryDirectory(prefix="dotrepo-smoke-") as tmp:
+        extract_dir = Path(tmp)
+        with tarfile.open(archive_path, "r:gz") as archive:
+            archive.extractall(extract_dir)
+
+        bin_dir = extract_dir / f"dotrepo-{version}-{target}" / "bin"
+        if not bin_dir.is_dir():
+            raise SystemExit(f"extracted bundle missing bin/ directory: {bin_dir}")
+
+        for binary in ["dotrepo", "dotrepo-lsp", "dotrepo-mcp"]:
+            binary_path = bin_dir / binary
+            if not binary_path.is_file():
+                raise SystemExit(f"extracted bundle missing binary: {binary_path}")
+
+            print(f"  smoke: {binary} --help", flush=True)
+            result = subprocess.run(
+                [str(binary_path), "--help"],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            if result.returncode != 0:
+                raise SystemExit(
+                    f"{binary} --help failed (exit {result.returncode}): {result.stderr}"
+                )
+
+        example_root = repo_root / "examples" / "native-minimal"
+        if example_root.is_dir():
+            dotrepo_bin = str(bin_dir / "dotrepo")
+            print("  smoke: dotrepo validate (from release binary)", flush=True)
+            result = subprocess.run(
+                [dotrepo_bin, "--root", str(example_root), "validate"],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            if result.returncode != 0:
+                raise SystemExit(
+                    f"dotrepo validate failed (exit {result.returncode}): {result.stderr}"
+                )
+
+
 def main() -> int:
     args = parse_args()
     repo_root = Path(__file__).resolve().parents[1]
@@ -269,6 +316,11 @@ def main() -> int:
 
     if vsix_path is not None:
         ensure_file(vsix_path)
+
+    print("")
+    print("release install smoke test")
+    smoke_test_release_bundle(release_bundle, version, target, repo_root)
+    print("  all release binaries passed smoke test")
 
     print("")
     print("release gate artifacts")

@@ -1,16 +1,11 @@
 # Public export workflow
 
-This doc covers the current operator and reviewer loop for the read-only public
-JSON tree.
-
-It is intentionally narrow. dotrepo can now export a static public surface,
-publish it as a CI artifact, and deploy the same tree through the GitHub Pages
-workflow in `.github/workflows/public-pages.yml`. That still does not imply a
-live public query API or production-hardened serving.
+This doc covers the operator and reviewer loop for the read-only public JSON
+tree and its hosted deployment.
 
 ## What exists now
 
-The current public export surface is a static JSON tree rooted at:
+The public surface is a static JSON tree hosted through GitHub Pages, rooted at:
 
 ```text
 public/
@@ -25,24 +20,16 @@ public/
             trust.json
 ```
 
-Today this surface proves:
-- the seed index can be rendered into a stable, identity-first public artifact
-- the exported tree includes one bundle-level repository inventory for inspection
-- repository summary and trust responses reuse the same local selection,
+This surface provides:
+- identity-first, trust-aware repository inspection via the hosted deployment
+- a bundle-level repository inventory for navigation
+- repository summary and trust responses reusing the same local selection,
   conflict, and claim-visibility semantics
-- operators and reviewers can inspect one concrete exported tree without
-  rebuilding higher-level serving infrastructure first
+- local review and CI artifacts sharing the same exported tree
 
-It does not yet promise:
+Not yet in scope:
 - a public search surface
 - live mutation or submission APIs
-- production-hardened freshness or runtime guarantees
-
-Important boundary:
-- the checked-in `index/` tree is still overlay-only today
-- the operator gate stages one copied seed entry through accepted claim handoff
-  and `public export` so claim-aware public responses are exercised without
-  publishing a fake accepted claim for a live repository
 
 ## Local review loop
 
@@ -70,8 +57,7 @@ changes, or artifact-path changes.
 
 For the additive-only `v0` compatibility contract around required keys, links,
 and error codes, see [`docs/public-api-compatibility.md`](./public-api-compatibility.md).
-RFCs 0016 through 0019 now serve as the accepted `v0` launch docs for that
-surface rather than open-ended draft guidance.
+RFCs 0016 through 0019 serve as the accepted `v0` launch docs for that surface.
 
 ### 2. Deterministic local export from the real seed index
 
@@ -87,9 +73,9 @@ cargo run -p dotrepo-cli -- public export \
 ```
 
 Important details:
-- `snapshotDigest` is still recomputed from the exported `index/` tree
+- `snapshotDigest` is recomputed from the exported `index/` tree
 - deterministic mode changes freshness timestamps, not response semantics
-- ordinary export runs still emit real timestamps
+- ordinary export runs emit real timestamps
 
 ### 3. Ordinary local export
 
@@ -104,12 +90,11 @@ When deploying behind a subpath such as a GitHub Pages project site, add
 `--base-path /<repo-name>` so public links resolve correctly from the hosted
 root.
 
-## CI artifact
+## CI artifacts
 
-The main CI workflow now runs `scripts/check_release_gate.py`, which builds the
+The main CI workflow runs `scripts/check_release_gate.py`, which builds the
 public tree from the seed `index/`, packages the release-style install assets,
-and uploads the resulting public artifacts as `public-export-v0` and
-`public-export-v0-bundle`.
+smoke tests the release binaries, and uploads the resulting artifacts.
 
 Current behavior:
 - the artifact is generated from the real `index/` tree
@@ -117,32 +102,28 @@ Current behavior:
 - CI uses fixed review timestamps for inspectable, stable output
 - CI also packages a versioned review bundle from the exported tree
 - CI also packages a Linux install bundle and a tagged-style VSIX as release-gate artifacts
+- CI smoke tests the release binaries from the extracted tarball
 - artifact retention is 14 days
-- export generation failures fail CI directly rather than being downgraded to
-  warnings
+- export generation failures fail CI directly
 
-This gives reviewers a fetchable snapshot of the public JSON tree without
-rebuilding locally.
-
-Separate from that release-surface artifact, the `operator-gate` CI job uploads:
+Separate from the release-surface artifacts, the `operator-gate` CI job uploads:
 - `operator-gate-claim-reports`
 - `operator-gate-live-seed-handoff-public`
 
-Those artifacts are proof-only operator outputs. They demonstrate the live
-overlay-to-claim-to-public-export path on a staged copy of `index/repos/github.com/cli/cli/`.
-They are not the checked-in public seed index.
+Those artifacts demonstrate the overlay-to-claim handoff path exported through
+the same public JSON contracts.
 
 ## Hosted static deployment
 
-The repo now also includes `.github/workflows/public-pages.yml`, which:
+`.github/workflows/public-pages.yml`:
 
 - validates the index
 - exports the public tree with a hosted-aware `--base-path`
-- renders a small root landing page with `scripts/render_public_pages_landing.py`
-- uploads the result to GitHub Pages
+- renders a root landing page with `scripts/render_public_pages_landing.py`
+- uploads and deploys to GitHub Pages
 
-The export tree remains the source of truth. The hosted surface is just a thin
-deployment layer over the same `public/` output.
+The export tree is the source of truth. The hosted surface deploys the same
+`public/` output.
 
 ## What should stay stable vs variable
 
@@ -173,12 +154,12 @@ inspecting the current seed index output as a whole.
 The compatibility manifest/test is best for catching accidental key renames,
 link-key drift, or error-code drift inside the same `apiVersion`.
 
-For a release-style summary of the current proof surface, see
-[`docs/public-proof-release-note.md`](./public-proof-release-note.md).
+For a release summary, see
+[`docs/public-release-note.md`](./public-release-note.md).
 For concrete usage snippets, see
 [`docs/public-export-examples.md`](./public-export-examples.md).
 For a cut/review checklist, see
-[`docs/public-proof-release-checklist.md`](./public-proof-release-checklist.md).
+[`docs/public-release-checklist.md`](./public-release-checklist.md).
 
 ## Related docs
 

@@ -33,8 +33,8 @@ Fail signs:
 Related docs:
 
 - [`docs/public-export-workflow.md`](./public-export-workflow.md)
-- [`docs/public-proof-surface.md`](./public-proof-surface.md)
-- [`docs/public-proof-release-note.md`](./public-proof-release-note.md)
+- [`docs/public-surface.md`](./public-surface.md)
+- [`docs/public-release-note.md`](./public-release-note.md)
 
 ## 2. Release-style install is clearly the normal path
 
@@ -106,7 +106,7 @@ Related docs:
 
 - [`PLAN.md`](../PLAN.md)
 - [`docs/current-status.md`](./current-status.md)
-- [`docs/public-proof-release-checklist.md`](./public-proof-release-checklist.md)
+- [`docs/public-release-checklist.md`](./public-release-checklist.md)
 
 ## API versioning note
 

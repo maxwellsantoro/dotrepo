@@ -1,8 +1,7 @@
 # Current status
 
-As of March 14, 2026, dotrepo is a coherent early implementation of the protocol,
-reference toolchain, and seed index. It is still not production-hardened, but it
-is no longer just an architecture sketch.
+As of March 14, 2026, dotrepo is a working implementation of the protocol,
+reference toolchain, and seed index, with a hosted read-only public surface.
 
 ## What exists now
 
@@ -15,25 +14,24 @@ is no longer just an architecture sketch.
   by a checked-in fixture pack and regression gate
 - A seed `index/` tree with evidence rules, showcase overlays, and validation checks
 - Contract-level claim, supersede, and conflict surfacing semantics
-- Git-backed maintainer-claim artifacts, read-only claim inspection, and a first
+- Git-backed maintainer-claim artifacts, read-only claim inspection, and a
   reviewer workflow over append-only claim events
 - Binary-level CLI contract coverage for accepted handoff, corrected claim
   history, and invalid claim-history rejection
 - An explicit operator-gate script and CI job for claim inspection, handoff, and
   invalid-history regression coverage, including a staged seed-overlay handoff
   exported through the normal public JSON path
-- A hosted-static deployment path for the exported public JSON tree through
-  GitHub Pages workflow automation
-- A release-artifact workflow for packaging the CLI, LSP, and MCP binaries
+- A hosted-static public surface deployed through GitHub Pages
+- Release-artifact packaging for the CLI, LSP, and MCP binaries, with CI smoke
+  tests that extract and run the shipped binaries from the packaged tarball
 - An explicit release-gate script and CI job that package the hosted public
   tree, install bundles, and VS Code release asset from one reproducible flow
 - A checked-in public API compatibility manifest and test for the current `v0`
   summary, trust, query, inventory, and error-wrapper contracts
 - Accepted public-serving RFCs 0016 through 0019 as the `v0` launch-doc set
 
-## What dotrepo does not promise yet
+## What dotrepo does not yet include
 
-- Production hardening, broad ecosystem adoption, or long-tail operational polish
 - A full maintainer claim workflow product surface
 - A broader public site UX or live public query API
 - Bundle mode or first-class workspace/relations support
@@ -42,14 +40,17 @@ is no longer just an architecture sketch.
 - Editor assistance for placing managed-region markers or semantic autofix flows
 - Full TOML language-server parity beyond the current schema-shaped manifest surface
 
-## What is still deliberately proof-only
+## Remaining gaps before 1.0
 
-- The checked-in seed index remains overlay-only. dotrepo does not yet publish a
-  reviewed accepted maintainer claim for a live repository from `index/`.
+- The checked-in seed index remains overlay-only. dotrepo does not yet have a
+  reviewed accepted maintainer claim for a live repository in `index/`.
 - The operator gate stages one copied seed entry through accepted handoff and
-  `public export` as a proof artifact, then uploads that output separately in CI.
-- That split is intentional: it proves the claim-aware public path without
-  asserting a real maintainer-reviewed handoff in the live public seed tree.
+  `public export` as a CI artifact, which exercises the claim-aware public path
+  without asserting a real maintainer-reviewed handoff in the live seed tree.
+
+Landing one real reviewed maintainer handoff in the checked-in index is the
+primary remaining prerequisite for the 1.0 release decision. See
+[`docs/v1-go-no-go.md`](./v1-go-no-go.md) for the full release bar.
 
 ## What is true about the current editor and sync layers
 
@@ -61,28 +62,17 @@ is no longer just an architecture sketch.
 - The current sync contract is limited to supported Markdown surfaces. `CODEOWNERS`
   can be generated, but it is not part of the managed-region contract.
 
-## What the next strategic constraint is
-
-The next meaningful constraint is no longer import quality, initial editor
-ergonomics, or basic maintainer-claim workflow. It is public, read-only index
-serving: how dotrepo exposes repository identity, preferred-record summary,
-trust context, and competing claims without inventing a second public truth
-model.
-
-That is why the next strategic track should focus on the identity-first public
-index site and query API described in RFC 0016 and its follow-on response-shape
-work, not on widening the editor surface or expanding bundle/workspace semantics
-first.
+## Where to go next
 
 For the concrete v1.0 launch scope, exit criteria, and deferrals, see
 [`PLAN.md`](../PLAN.md).
-For the actual release decision bar, see
+For the release decision bar, see
 [`docs/v1-go-no-go.md`](./v1-go-no-go.md).
 
-For the current operator/reviewer loop over the exported public JSON tree, see
+For the operator/reviewer loop over the exported public JSON tree, see
 [`docs/public-export-workflow.md`](./public-export-workflow.md).
-For the current outward-facing proof vehicle built on that export tree, see
-[`docs/public-proof-surface.md`](./public-proof-surface.md).
-For the current release-style note and usage examples around that proof surface,
-see [`docs/public-proof-release-note.md`](./public-proof-release-note.md) and
+For the public surface architecture, see
+[`docs/public-surface.md`](./public-surface.md).
+For the release note and usage examples, see
+[`docs/public-release-note.md`](./public-release-note.md) and
 [`docs/public-export-examples.md`](./public-export-examples.md).

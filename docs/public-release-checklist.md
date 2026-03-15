@@ -1,7 +1,7 @@
-# Public proof release checklist
+# Public release checklist
 
-Use this checklist when cutting or reviewing a public proof release from the
-exported JSON tree.
+Use this checklist when cutting or reviewing a public release from the exported
+JSON tree.
 
 ## Local generation
 
@@ -22,10 +22,11 @@ still useful when reviewing only one part of the public/export flow.
 - the required `v0` response/link/error keys still match `docs/public-api-compatibility.md`
 - `public/v0/repos/index.json` exists and `repositoryCount` matches the bundle
 - inventory links honor the hosted `--base-path`
-- `public/index.html` and `.nojekyll` exist for hosted static entry
+- `public/index.html` and `.nojekyll` exist for the hosted static entry
 - representative repository `index.json` and `trust.json` files open cleanly
 - the packaged bundle extracts to one self-describing root directory
 - the release binary bundle contains `dotrepo`, `dotrepo-lsp`, and `dotrepo-mcp`
+- the release binary smoke test passes (binaries execute from extracted bundle)
 - the VS Code release asset installs from a tagged `.vsix`
 
 ## Review questions
@@ -42,12 +43,12 @@ still useful when reviewing only one part of the public/export flow.
   - `public-export-v0-bundle`
   - `release-gate-install-bundles`
   - `release-gate-vscode-vsix`
-- the GitHub Pages workflow can deploy the same tree without editing links by hand
+- the release gate smoke tests the extracted release binaries
+- the GitHub Pages workflow deploys the same tree without editing links by hand
 - the `release-artifacts` workflow publishes tagged CLI/LSP/MCP bundles and a VSIX
-- the release-style note is current
+- the release note is current
 - the usage examples still match the exported tree
 
 ## Non-goals check
 
 - no search/browse UX promise was added implicitly
-- no production-hardening claim was added implicitly
