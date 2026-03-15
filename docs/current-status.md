@@ -20,7 +20,8 @@ is no longer just an architecture sketch.
 - Binary-level CLI contract coverage for accepted handoff, corrected claim
   history, and invalid claim-history rejection
 - An explicit operator-gate script and CI job for claim inspection, handoff, and
-  invalid-history regression coverage
+  invalid-history regression coverage, including a staged seed-overlay handoff
+  exported through the normal public JSON path
 - A hosted-static deployment path for the exported public JSON tree through
   GitHub Pages workflow automation
 - A release-artifact workflow for packaging the CLI, LSP, and MCP binaries
@@ -37,6 +38,15 @@ is no longer just an architecture sketch.
   managed-region files
 - Editor assistance for placing managed-region markers or semantic autofix flows
 - Full TOML language-server parity beyond the current schema-shaped manifest surface
+
+## What is still deliberately proof-only
+
+- The checked-in seed index remains overlay-only. dotrepo does not yet publish a
+  reviewed accepted maintainer claim for a live repository from `index/`.
+- The operator gate stages one copied seed entry through accepted handoff and
+  `public export` as a proof artifact, then uploads that output separately in CI.
+- That split is intentional: it proves the claim-aware public path without
+  asserting a real maintainer-reviewed handoff in the live public seed tree.
 
 ## What is true about the current editor and sync layers
 

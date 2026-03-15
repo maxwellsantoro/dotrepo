@@ -56,11 +56,24 @@ def claim_path(claim_id: str) -> str:
     return f"repos/github.com/acme/widget/claims/{claim_id}"
 
 
+def live_seed_repo_root(repo_root: Path, owner: str, repo: str) -> Path:
+    return repo_root / "index" / "repos" / "github.com" / owner / repo
+
+
+def copy_repo(source_repo: Path, dest_root: Path, owner: str, repo: str) -> None:
+    dest_repo = dest_root / "repos" / "github.com" / owner / repo
+    dest_repo.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source_repo / "record.toml", dest_repo / "record.toml")
+    shutil.copy2(source_repo / "evidence.md", dest_repo / "evidence.md")
+
+
 def main() -> int:
     args = parse_args()
     repo_root = Path(__file__).resolve().parents[1]
     output_root = (repo_root / args.output_root).resolve()
     reports_dir = output_root / "reports"
+    live_seed_index_dir = output_root / "live-seed-handoff-index"
+    live_seed_public_dir = output_root / "live-seed-handoff-public"
 
     if output_root.exists():
         shutil.rmtree(output_root)
@@ -161,6 +174,152 @@ def main() -> int:
     )
     (reports_dir / "invalid-history.stderr.txt").write_text(invalid.stderr)
 
+    copy_repo(live_seed_repo_root(repo_root, "cli", "cli"), live_seed_index_dir, "cli", "cli")
+
+    run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "dotrepo-cli",
+            "--",
+            "--root",
+            str(live_seed_index_dir),
+            "claim-init",
+            "--host",
+            "github.com",
+            "--owner",
+            "cli",
+            "--repo",
+            "cli",
+            "--claim-id",
+            "2026-03-19-maintainer-claim-01",
+            "--claimant-name",
+            "GitHub CLI maintainers",
+            "--asserted-role",
+            "maintainer",
+            "--contact",
+            "maintainers@github.com",
+            "--record-source",
+            "https://github.com/cli/cli",
+            "--canonical-repo-url",
+            "https://github.com/cli/cli",
+            "--review-md",
+        ],
+        cwd=repo_root,
+    )
+    run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "dotrepo-cli",
+            "--",
+            "--root",
+            str(live_seed_index_dir),
+            "claim-event",
+            "repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01",
+            "--kind",
+            "submitted",
+            "--actor",
+            "claimant",
+            "--summary",
+            "Submitted maintainer claim.",
+        ],
+        cwd=repo_root,
+    )
+    run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "dotrepo-cli",
+            "--",
+            "--root",
+            str(live_seed_index_dir),
+            "claim-event",
+            "repos/github.com/cli/cli/claims/2026-03-19-maintainer-claim-01",
+            "--kind",
+            "accepted",
+            "--actor",
+            "index-reviewer",
+            "--summary",
+            "Accepted claim after maintainer review.",
+            "--canonical-record-path",
+            ".repo",
+            "--canonical-mirror-path",
+            "repos/github.com/cli/cli/record.toml",
+        ],
+        cwd=repo_root,
+    )
+    run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "dotrepo-cli",
+            "--",
+            "public",
+            "export",
+            "--index-root",
+            str(live_seed_index_dir),
+            "--out-dir",
+            str(live_seed_public_dir),
+            "--generated-at",
+            "2026-03-10T18:30:00Z",
+            "--stale-after",
+            "2026-03-11T18:30:00Z",
+        ],
+        cwd=repo_root,
+    )
+
+    live_summary_path = (
+        live_seed_public_dir / "v0" / "repos" / "github.com" / "cli" / "cli" / "index.json"
+    )
+    live_trust_path = (
+        live_seed_public_dir / "v0" / "repos" / "github.com" / "cli" / "cli" / "trust.json"
+    )
+    live_summary = json.loads(live_summary_path.read_text())
+    live_trust = json.loads(live_trust_path.read_text())
+    ensure(
+        live_summary["selection"]["record"]["claim"]["handoff"] == "superseded",
+        "live seed handoff export should surface superseded claim context in summary",
+    )
+    ensure(
+        live_trust["selection"]["record"]["claim"]["handoff"] == "superseded",
+        "live seed handoff export should surface superseded claim context in trust",
+    )
+
+    readme = "\n".join(
+        [
+            "dotrepo operator gate artifacts",
+            "",
+            "This directory is a proof artifact written by scripts/check_operator_claim_gate.py.",
+            "",
+            "What is checked in:",
+            "- the real seed index under ./index/ remains overlay-only today",
+            "- no accepted maintainer claim is committed for a real public repository yet",
+            "",
+            "What is staged here:",
+            "- reports/accepted-clean.json and reports/corrected.json come from checked-in claim fixtures",
+            "- reports/invalid-history.stderr.txt captures the expected validate-index failure path",
+            "- live-seed-handoff-index/ is a temporary copy of index/repos/github.com/cli/cli with a staged claim",
+            "- live-seed-handoff-public/ is the public export generated from that staged copy",
+            "",
+            "Why this exists:",
+            "- it proves the operator workflow and claim-aware public export path end to end",
+            "- it avoids publishing a fake accepted maintainer claim in the checked-in seed index",
+            "",
+            "The staged handoff is a proof artifact, not the live public seed index.",
+            "",
+        ]
+    )
+    (output_root / "README.txt").write_text(readme)
+
     summary = {
         "checks": [
             "seed index validate-index",
@@ -169,6 +328,7 @@ def main() -> int:
             "accepted-clean claim inspection",
             "corrected claim inspection",
             "invalid-history rejection",
+            "live seed overlay handoff export",
         ],
         "reports": {
             "accepted_clean": str((reports_dir / "accepted-clean.json").relative_to(output_root)),
@@ -176,6 +336,8 @@ def main() -> int:
             "invalid_history_stderr": str(
                 (reports_dir / "invalid-history.stderr.txt").relative_to(output_root)
             ),
+            "live_seed_summary": str(live_summary_path.relative_to(output_root)),
+            "live_seed_trust": str(live_trust_path.relative_to(output_root)),
         },
     }
     (output_root / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
@@ -185,6 +347,9 @@ def main() -> int:
     print(f"  accepted-clean report: {reports_dir / 'accepted-clean.json'}")
     print(f"  corrected report: {reports_dir / 'corrected.json'}")
     print(f"  invalid-history stderr: {reports_dir / 'invalid-history.stderr.txt'}")
+    print(f"  readme: {output_root / 'README.txt'}")
+    print(f"  live seed summary: {live_summary_path}")
+    print(f"  live seed trust: {live_trust_path}")
     return 0
 
 

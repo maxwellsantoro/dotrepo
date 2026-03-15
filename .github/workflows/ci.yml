@@ -137,6 +137,13 @@ jobs:
           path: operator-gate/
           if-no-files-found: error
           retention-days: 14
+      - name: Upload staged live-handoff public export
+        uses: actions/upload-artifact@v4
+        with:
+          name: operator-gate-live-seed-handoff-public
+          path: operator-gate/live-seed-handoff-public/
+          if-no-files-found: error
+          retention-days: 14
 
   release-gate:
     needs:

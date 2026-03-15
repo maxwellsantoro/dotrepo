@@ -29,8 +29,23 @@ fn claims_fixture_root(fixture: &str) -> PathBuf {
         .join(fixture)
 }
 
+fn live_seed_repo_root(owner: &str, repo: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("..")
+        .join("..")
+        .join("index")
+        .join("repos")
+        .join("github.com")
+        .join(owner)
+        .join(repo)
+}
+
 fn claim_relative_path(claim_id: &str) -> String {
     format!("repos/github.com/acme/widget/claims/{claim_id}")
+}
+
+fn public_index_relative_path(owner: &str, repo: &str) -> String {
+    format!("repos/github.com/{owner}/{repo}")
 }
 
 struct TempRoot {
@@ -70,11 +85,20 @@ fn copy_seed_repo(fixture: &str, dest_root: &Path) {
         .join("github.com")
         .join("acme")
         .join("widget");
+    copy_repo(source_repo.as_path(), dest_root, "acme", "widget");
+}
+
+fn copy_live_seed_repo(owner: &str, repo: &str, dest_root: &Path) {
+    let source_repo = live_seed_repo_root(owner, repo);
+    copy_repo(source_repo.as_path(), dest_root, owner, repo);
+}
+
+fn copy_repo(source_repo: &Path, dest_root: &Path, owner: &str, repo: &str) {
     let dest_repo = dest_root
         .join("repos")
         .join("github.com")
-        .join("acme")
-        .join("widget");
+        .join(owner)
+        .join(repo);
     fs::create_dir_all(&dest_repo).expect("dest repo dir created");
     fs::copy(source_repo.join("record.toml"), dest_repo.join("record.toml"))
         .expect("record copied");
@@ -290,5 +314,123 @@ fn validate_index_rejects_invalid_claim_history() {
     assert!(
         stderr.contains("claim.state is Accepted"),
         "expected claim state mismatch error, got: {stderr}"
+    );
+}
+
+#[test]
+fn live_seed_overlay_handoff_surfaces_in_public_outputs() {
+    let root = TempRoot::new("seed-handoff-public");
+    copy_live_seed_repo("cli", "cli", root.path());
+
+    let root_str = root.path().to_str().expect("temp path is utf-8");
+    let claim_id = "2026-03-19-maintainer-claim-01";
+    let claim_path = public_index_relative_path("cli", "cli");
+    let claim_dir = format!("{claim_path}/claims/{claim_id}");
+
+    let init = run_dotrepo(&[
+        "--root",
+        root_str,
+        "claim-init",
+        "--host",
+        "github.com",
+        "--owner",
+        "cli",
+        "--repo",
+        "cli",
+        "--claim-id",
+        claim_id,
+        "--claimant-name",
+        "GitHub CLI maintainers",
+        "--asserted-role",
+        "maintainer",
+        "--contact",
+        "maintainers@github.com",
+        "--record-source",
+        "https://github.com/cli/cli",
+        "--canonical-repo-url",
+        "https://github.com/cli/cli",
+        "--review-md",
+    ]);
+    assert!(init.status.success(), "claim-init should succeed");
+    assert!(init.stderr.is_empty(), "claim-init should not write stderr");
+
+    let submitted = run_dotrepo(&[
+        "--root",
+        root_str,
+        "claim-event",
+        &claim_dir,
+        "--kind",
+        "submitted",
+        "--actor",
+        "claimant",
+        "--summary",
+        "Submitted maintainer claim.",
+    ]);
+    assert!(submitted.status.success(), "submitted event should succeed");
+    assert!(submitted.stderr.is_empty(), "submitted event should not write stderr");
+
+    let accepted = run_dotrepo(&[
+        "--root",
+        root_str,
+        "claim-event",
+        &claim_dir,
+        "--kind",
+        "accepted",
+        "--actor",
+        "index-reviewer",
+        "--summary",
+        "Accepted claim after maintainer review.",
+        "--canonical-record-path",
+        ".repo",
+        "--canonical-mirror-path",
+        "repos/github.com/cli/cli/record.toml",
+    ]);
+    assert!(accepted.status.success(), "accepted event should succeed");
+    assert!(accepted.stderr.is_empty(), "accepted event should not write stderr");
+
+    let summary = run_dotrepo(&[
+        "public",
+        "summary",
+        "github.com",
+        "cli",
+        "cli",
+        "--index-root",
+        root_str,
+    ]);
+    assert!(summary.status.success(), "public summary should succeed");
+    assert!(summary.stderr.is_empty(), "public summary should not write stderr");
+    let summary_json = parse_stdout_json(&summary);
+    assert_eq!(
+        summary_json["selection"]["record"]["claim"]["handoff"],
+        Value::String("superseded".into())
+    );
+    assert_eq!(
+        summary_json["selection"]["record"]["claim"]["state"],
+        Value::String("accepted".into())
+    );
+    assert_eq!(
+        summary_json["selection"]["record"]["claim"]["reviewPath"],
+        Value::String(format!("{claim_dir}/review.md"))
+    );
+
+    let trust = run_dotrepo(&[
+        "public",
+        "trust",
+        "github.com",
+        "cli",
+        "cli",
+        "--index-root",
+        root_str,
+    ]);
+    assert!(trust.status.success(), "public trust should succeed");
+    assert!(trust.stderr.is_empty(), "public trust should not write stderr");
+    let trust_json = parse_stdout_json(&trust);
+    assert_eq!(
+        trust_json["selection"]["record"]["claim"]["handoff"],
+        Value::String("superseded".into())
+    );
+    assert_eq!(
+        trust_json["selection"]["record"]["claim"]["state"],
+        Value::String("accepted".into())
     );
 }

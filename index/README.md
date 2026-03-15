@@ -25,6 +25,8 @@ index/
 ## Day-one rules
 
 - v0.1 seed-index entries use `record.mode = "overlay"`.
+- The checked-in seed index remains overlay-only until dotrepo has a real
+  reviewed maintainer handoff it is willing to publish for a live repository.
 - `record.toml` must pass `dotrepo validate`.
 - `evidence.md` must exist beside every `record.toml`.
 - `record.source` must resolve to the same `<host>/<owner>/<repo>` path used by the index entry.
@@ -61,6 +63,9 @@ PR checklist when deciding whether an overlay is strong enough to merge.
 For maintainer-claim review, use
 [`docs/maintainer-claim-review-workflow.md`](../docs/maintainer-claim-review-workflow.md)
 as the end-to-end operator loop.
+That workflow currently stages one copied seed entry through claim handoff and
+`public export` in CI instead of checking a proof-only accepted claim into the
+live seed index.
 
 ## Reference examples
 

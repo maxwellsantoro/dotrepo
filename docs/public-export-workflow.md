@@ -38,6 +38,12 @@ It does not yet promise:
 - live mutation or submission APIs
 - production-hardened freshness or runtime guarantees
 
+Important boundary:
+- the checked-in `index/` tree is still overlay-only today
+- the operator gate stages one copied seed entry through accepted claim handoff
+  and `public export` so claim-aware public responses are exercised without
+  publishing a fake accepted claim for a live repository
+
 ## Local review loop
 
 ### 1. Fixture and golden-output regression gate
@@ -112,6 +118,14 @@ Current behavior:
 
 This gives reviewers a fetchable snapshot of the public JSON tree without
 rebuilding locally.
+
+Separate from that release-surface artifact, the `operator-gate` CI job uploads:
+- `operator-gate-claim-reports`
+- `operator-gate-live-seed-handoff-public`
+
+Those artifacts are proof-only operator outputs. They demonstrate the live
+overlay-to-claim-to-public-export path on a staged copy of `index/repos/github.com/cli/cli/`.
+They are not the checked-in public seed index.
 
 ## Hosted static deployment
 

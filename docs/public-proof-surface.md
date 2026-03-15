@@ -11,6 +11,10 @@ That proof surface is:
 - the GitHub Pages deployment workflow in `.github/workflows/public-pages.yml`
 - the docs that explain how to generate, inspect, and reason about that tree
 
+Adjacent proof artifact:
+- the `operator-gate-live-seed-handoff-public` CI artifact, which stages one
+  copied seed entry through accepted claim handoff and exports the result
+
 ## Why this choice
 
 The exported artifact is still the right center of gravity because it:
@@ -46,6 +50,12 @@ This proof surface demonstrates that dotrepo can:
 - expose claim-aware visibility without inventing a second semantic layer
 - publish one reviewable snapshot and deploy the same tree without a second
   runtime
+
+The separate operator-gate artifact demonstrates one thing the checked-in seed
+index still does not: a staged overlay-to-claim handoff exported through the
+same public JSON path. That boundary is deliberate so the live proof surface
+does not pretend a real repository already has a published reviewed maintainer
+handoff.
 
 ## What this does not prove yet
 

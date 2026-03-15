@@ -101,8 +101,10 @@ event history. The second confirms the claim directory still satisfies layout,
 identity, event ordering, and handoff rules.
 
 The operator gate script writes inspectable reports for the accepted, corrected,
-and invalid-history fixture paths under `operator-gate/` so the release bar is
-not just "tests pass" but "the documented reviewer surface still looks right."
+and invalid-history fixture paths under `operator-gate/`, and it stages one
+real seed overlay handoff through `public export`, so the release bar is not
+just "tests pass" but "the documented reviewer and public surfaces still look
+right."
 
 ### 5. Record the terminal review outcome
 
