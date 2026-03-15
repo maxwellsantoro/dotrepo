@@ -79,6 +79,7 @@ index validation, claims, public export, and an MCP server.
 - [`docs/install.md`](docs/install.md)
 - [`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md)
 - [`docs/current-status.md`](docs/current-status.md)
+- [`docs/v1-go-no-go.md`](docs/v1-go-no-go.md)
 - [`docs/vision.md`](docs/vision.md)
 - [`docs/public-messaging.md`](docs/public-messaging.md)
 - [`docs/trust-model.md`](docs/trust-model.md)

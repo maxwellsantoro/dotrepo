@@ -76,6 +76,8 @@ first.
 
 For the concrete v1.0 launch scope, exit criteria, and deferrals, see
 [`PLAN.md`](../PLAN.md).
+For the actual release decision bar, see
+[`docs/v1-go-no-go.md`](./v1-go-no-go.md).
 
 For the current operator/reviewer loop over the exported public JSON tree, see
 [`docs/public-export-workflow.md`](./public-export-workflow.md).

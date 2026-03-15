@@ -31,8 +31,8 @@ dotrepo is ready for v1.0 when all of the following are true:
   one exported tree.
 
 Exit criteria:
-- `public/v1/` (or equivalent versioned public path) has a documented stable
-  layout.
+- Public API versioning policy is documented, with public `apiVersion`
+  decoupled from the repo release number.
 - Public summary and trust responses are versioned and backward-compatibility
   tested.
 - The query-wrapper contract is documented and validated against the same core
@@ -140,8 +140,14 @@ Exit criteria:
 
 - Do not invent a second public truth model that diverges from local trust and
   query semantics.
+- Do not couple the public API version directly to the repo release number.
 - Do not widen editor scope before the public surface and operator loop are
   ready.
 - Do not treat bundle/workspace expansion as launch-critical scope.
 - Do not turn internal cleanup into a milestone unless it directly reduces
   launch risk.
+
+## Release Decision
+
+Use [`docs/v1-go-no-go.md`](docs/v1-go-no-go.md) as the release decision sheet
+for the final `1.0.0` go/no-go call.
