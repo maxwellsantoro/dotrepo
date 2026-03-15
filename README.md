@@ -84,6 +84,7 @@ index validation, claims, public export, and an MCP server.
 - [`docs/trust-model.md`](docs/trust-model.md)
 - [`docs/sync-boundaries.md`](docs/sync-boundaries.md)
 - [`docs/public-export-workflow.md`](docs/public-export-workflow.md)
+- [`docs/public-api-compatibility.md`](docs/public-api-compatibility.md)
 - [`docs/public-proof-release-note.md`](docs/public-proof-release-note.md)
 - [`docs/public-proof-surface.md`](docs/public-proof-surface.md)
 - [`docs/public-export-examples.md`](docs/public-export-examples.md)

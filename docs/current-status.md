@@ -27,6 +27,8 @@ is no longer just an architecture sketch.
 - A release-artifact workflow for packaging the CLI, LSP, and MCP binaries
 - An explicit release-gate script and CI job that package the hosted public
   tree, install bundles, and VS Code release asset from one reproducible flow
+- A checked-in public API compatibility manifest and test for the current `v0`
+  summary, trust, query, inventory, and error-wrapper contracts
 
 ## What dotrepo does not promise yet
 

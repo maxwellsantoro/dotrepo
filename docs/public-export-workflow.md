@@ -68,6 +68,9 @@ files byte-for-byte against the checked-in golden tree.
 Use this when reviewing response-shape changes, claim-visibility changes, link
 changes, or artifact-path changes.
 
+For the additive-only `v0` compatibility contract around required keys, links,
+and error codes, see [`docs/public-api-compatibility.md`](./public-api-compatibility.md).
+
 ### 2. Deterministic local export from the real seed index
 
 For review artifacts outside the fixture pack, use fixed timestamps so repeated
@@ -164,6 +167,9 @@ When the public export changes, ask:
 
 The fixture pack is best for contract review. The CI artifact is best for
 inspecting the current seed index output as a whole.
+
+The compatibility manifest/test is best for catching accidental key renames,
+link-key drift, or error-code drift inside the same `apiVersion`.
 
 For a release-style summary of the current proof surface, see
 [`docs/public-proof-release-note.md`](./public-proof-release-note.md).

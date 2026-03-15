@@ -175,6 +175,8 @@ def main() -> int:
             "public_query_fixture_pack",
             "--test",
             "public_error_fixture_pack",
+            "--test",
+            "public_contract_compatibility",
         ],
         cwd=repo_root,
     )

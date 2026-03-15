@@ -1,0 +1,48 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "requiredKeys": ["generatedAt", "snapshotDigest", "staleAfter"]
+  },
+  "identity": {
+    "requiredKeys": ["host", "owner", "repo"],
+    "optionalKeys": ["source"]
+  },
+  "selection": {
+    "requiredKeys": ["reason", "record"]
+  },
+  "recordSummary": {
+    "requiredKeys": ["manifestPath", "record", "artifacts"],
+    "recordKeys": ["mode", "status", "source", "trust"],
+    "trustKeys": ["confidence", "provenance", "notes"],
+    "artifactsKeys": ["evidencePath"],
+    "claimKeys": ["id", "state", "handoff", "claimPath", "latestEvent", "reviewPath"]
+  },
+  "inventory": {
+    "requiredKeys": ["apiVersion", "freshness", "repositoryCount", "repositories"],
+    "entryKeys": ["identity", "name", "description", "links"],
+    "linkKeys": ["self", "trust", "queryTemplate", "indexPath"]
+  },
+  "summary": {
+    "requiredKeys": ["apiVersion", "freshness", "identity", "repository", "selection", "conflicts", "links"],
+    "repositoryKeys": ["name", "description", "homepage", "docsRoot", "gettingStarted", "ownersTeam", "securityContact"],
+    "linkKeys": ["self", "trust", "queryTemplate", "indexPath"]
+  },
+  "trust": {
+    "requiredKeys": ["apiVersion", "freshness", "identity", "selection", "conflicts", "links"],
+    "linkKeys": ["self", "repository", "queryTemplate", "indexPath"]
+  },
+  "query": {
+    "requiredKeys": ["apiVersion", "freshness", "identity", "path", "value", "selection", "conflicts", "links"],
+    "linkKeys": ["self", "repository", "trust", "indexPath"]
+  },
+  "errors": {
+    "requiredKeys": ["apiVersion", "freshness", "identity", "error"],
+    "queryRequiredKeys": ["apiVersion", "freshness", "identity", "path", "error"],
+    "errorKeys": ["code", "message"],
+    "codes": [
+      "invalid_repository_identity",
+      "query_path_not_found",
+      "repository_not_found"
+    ]
+  }
+}

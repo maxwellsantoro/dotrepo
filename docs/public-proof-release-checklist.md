@@ -8,6 +8,7 @@ exported JSON tree.
 - `python3 scripts/check_release_gate.py --output-root release-gate`
 - `cargo run -p dotrepo-cli -- validate-index`
 - `cargo test -p dotrepo-core --test public_export_fixture_pack -- --nocapture`
+- `cargo test -p dotrepo-core --test public_contract_compatibility`
 - `cargo run -p dotrepo-cli -- public export --index-root index --out-dir public --base-path /dotrepo --generated-at 2026-03-10T18:30:00Z --stale-after 2026-03-11T18:30:00Z`
 - `python3 scripts/render_public_pages_landing.py --input public`
 - `python3 scripts/package_public_export.py --input public --output-dir dist`
@@ -18,6 +19,7 @@ still useful when reviewing only one part of the public/export flow.
 ## Artifact inspection
 
 - `public/v0/meta.json` exists and has the expected `apiVersion`
+- the required `v0` response/link/error keys still match `docs/public-api-compatibility.md`
 - `public/v0/repos/index.json` exists and `repositoryCount` matches the bundle
 - inventory links honor the hosted `--base-path`
 - `public/index.html` and `.nojekyll` exist for hosted static entry
