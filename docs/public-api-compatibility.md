@@ -45,9 +45,10 @@ The checked-in manifest freezes:
 
 ## Relationship to RFCs
 
-RFCs 0016 through 0019 still describe the design direction and public-serving
-intent. This doc and the compatibility test are narrower: they define what the
-repo currently treats as the frozen `v0` wire contract.
+RFCs 0016 through 0019 are now the accepted `v0` public launch docs. This doc
+and the compatibility test are narrower: they define the exact checked-in
+wire-level keys, links, and error codes that those RFCs must not drift from
+within `apiVersion = "v0"`.
 
 If the public contract changes intentionally, update:
 

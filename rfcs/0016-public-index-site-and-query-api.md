@@ -1,7 +1,18 @@
 # RFC 0016: Public index site and query API
 
 ## Status
-Draft
+Accepted for `v0` public serving
+
+This RFC is now part of the accepted `v0` public launch contract.
+
+Compatibility rule:
+- breaking changes to public semantics or endpoint meaning require a new public
+  `apiVersion`
+- additive fields and implementation details may still evolve within `v0` as
+  long as they preserve the accepted response semantics
+
+For the exact checked-in `v0` wire-compatibility surface, see
+[`docs/public-api-compatibility.md`](../docs/public-api-compatibility.md).
 
 ## Summary
 

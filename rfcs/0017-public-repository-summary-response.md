@@ -1,7 +1,18 @@
 # RFC 0017: Public repository summary response
 
 ## Status
-Draft
+Accepted for `v0` public contract
+
+This RFC now describes the accepted `v0` repository-summary contract.
+
+Compatibility rule:
+- existing summary semantics are frozen within `apiVersion = "v0"`
+- additive fields are allowed within `v0` only when they do not rename, remove,
+  or reinterpret existing keys
+- breaking field-shape changes require a new public `apiVersion`
+
+For the exact checked-in `v0` key/link contract, see
+[`docs/public-api-compatibility.md`](../docs/public-api-compatibility.md).
 
 ## Summary
 

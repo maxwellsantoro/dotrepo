@@ -70,6 +70,8 @@ changes, or artifact-path changes.
 
 For the additive-only `v0` compatibility contract around required keys, links,
 and error codes, see [`docs/public-api-compatibility.md`](./public-api-compatibility.md).
+RFCs 0016 through 0019 now serve as the accepted `v0` launch docs for that
+surface rather than open-ended draft guidance.
 
 ### 2. Deterministic local export from the real seed index
 

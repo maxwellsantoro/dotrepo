@@ -29,6 +29,7 @@ is no longer just an architecture sketch.
   tree, install bundles, and VS Code release asset from one reproducible flow
 - A checked-in public API compatibility manifest and test for the current `v0`
   summary, trust, query, inventory, and error-wrapper contracts
+- Accepted public-serving RFCs 0016 through 0019 as the `v0` launch-doc set
 
 ## What dotrepo does not promise yet
 

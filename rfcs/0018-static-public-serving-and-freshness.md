@@ -1,7 +1,19 @@
 # RFC 0018: Static public serving and freshness metadata
 
 ## Status
-Draft
+Accepted for `v0` public serving strategy
+
+This RFC now describes the accepted `v0` static-first serving and freshness
+strategy.
+
+Compatibility rule:
+- `freshness` semantics and the static-first delivery model are frozen within
+  `apiVersion = "v0"`
+- operational details may still improve as long as they preserve the accepted
+  response model and snapshot semantics
+
+For the exact checked-in `v0` response and freshness keys, see
+[`docs/public-api-compatibility.md`](../docs/public-api-compatibility.md).
 
 ## Summary
 

@@ -1,7 +1,19 @@
 # RFC 0019: Public trust and query wrappers
 
 ## Status
-Draft
+Accepted for `v0` public contract
+
+This RFC now describes the accepted `v0` trust-wrapper, query-wrapper, and
+machine-readable error contract.
+
+Compatibility rule:
+- existing trust/query/error semantics are frozen within `apiVersion = "v0"`
+- additive fields are allowed within `v0` only when they preserve current key
+  names, link names, and error-code vocabulary
+- breaking wire changes require a new public `apiVersion`
+
+For the exact checked-in `v0` key/link/error compatibility surface, see
+[`docs/public-api-compatibility.md`](../docs/public-api-compatibility.md).
 
 ## Summary
 

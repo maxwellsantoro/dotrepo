@@ -32,7 +32,9 @@ The exported artifact is still the right center of gravity because it:
 - the GitHub Pages deployment workflow
 - the operator loop in [`docs/public-export-workflow.md`](./public-export-workflow.md)
 - the release-style note in [`docs/public-proof-release-note.md`](./public-proof-release-note.md)
-- the current public response contracts in RFCs 0017, 0018, and 0019
+- the accepted `v0` public contracts in RFCs 0016 through 0019
+- the exact checked-in `v0` compatibility note in
+  [`docs/public-api-compatibility.md`](./public-api-compatibility.md)
 
 ### For agents
 
