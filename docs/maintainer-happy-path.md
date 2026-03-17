@@ -3,6 +3,10 @@
 This is the canonical v0.1 maintainer flow for a repository that wants an
 in-repo `.repo` file as its source of truth.
 
+This guide assumes `dotrepo` is installed and on your `PATH`.
+If you are working inside the dotrepo workspace itself, replace `dotrepo` with
+`cargo run -p dotrepo-cli --`.
+
 Use [`examples/native-minimal/`](../examples/native-minimal/) as the reference
 repository while reading this guide. It already contains:
 - a canonical root [`.repo`](../examples/native-minimal/.repo)
@@ -12,8 +16,8 @@ repository while reading this guide. It already contains:
 ## Start the record
 
 Choose one bootstrap path:
-- `cargo run -p dotrepo-cli -- --root <repo> init` if you want to author a canonical `.repo` from scratch.
-- `cargo run -p dotrepo-cli -- --root <repo> import` if you want to bootstrap from existing `README.md`, `CODEOWNERS`, and `SECURITY.md` content first.
+- `dotrepo --root <repo> init` if you want to author a canonical `.repo` from scratch.
+- `dotrepo --root <repo> import` if you want to bootstrap from existing `README.md`, `CODEOWNERS`, and `SECURITY.md` content first.
 
 After that first step, treat the root `.repo` as the source of truth and keep
 generated compatibility surfaces in sync from it.
@@ -23,11 +27,11 @@ generated compatibility surfaces in sync from it.
 Run the same loop the example repo uses:
 
 ```bash
-cargo run -p dotrepo-cli -- --root examples/native-minimal validate
-cargo run -p dotrepo-cli -- --root examples/native-minimal query repo.build --raw
-cargo run -p dotrepo-cli -- --root examples/native-minimal trust
-cargo run -p dotrepo-cli -- --root examples/native-minimal doctor
-cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
+dotrepo --root examples/native-minimal validate
+dotrepo --root examples/native-minimal query repo.build --raw
+dotrepo --root examples/native-minimal trust
+dotrepo --root examples/native-minimal doctor
+dotrepo --root examples/native-minimal generate --check
 ```
 
 What each command answers:
@@ -42,8 +46,8 @@ What each command answers:
 Use `trust` when you need to understand why one record won:
 
 ```bash
-cargo run -p dotrepo-cli -- --root <repo-or-index-scope> trust
-cargo run -p dotrepo-cli -- --root <repo-or-index-scope> trust --json
+dotrepo --root <repo-or-index-scope> trust
+dotrepo --root <repo-or-index-scope> trust --json
 ```
 
 The human-facing output should tell you:
@@ -59,7 +63,7 @@ conflict-aware structure returned by `dotrepo-core`.
 If you need one field together with the same selection context, use:
 
 ```bash
-cargo run -p dotrepo-cli -- --root <repo-or-index-scope> query repo.build --json
+dotrepo --root <repo-or-index-scope> query repo.build --json
 ```
 
 `query --raw` remains available for single-record scalar lookups, but it now
@@ -93,11 +97,11 @@ markers, and unsupported layouts, see
 The example workflow runs the same maintainer path in CI:
 
 ```bash
-cargo run -p dotrepo-cli -- --root examples/native-minimal validate
-cargo run -p dotrepo-cli -- --root examples/native-minimal query repo.build --raw
-cargo run -p dotrepo-cli -- --root examples/native-minimal trust
-cargo run -p dotrepo-cli -- --root examples/native-minimal doctor
-cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
+dotrepo --root examples/native-minimal validate
+dotrepo --root examples/native-minimal query repo.build --raw
+dotrepo --root examples/native-minimal trust
+dotrepo --root examples/native-minimal doctor
+dotrepo --root examples/native-minimal generate --check
 ```
 
 That is the intended v0.1 contract for a native repo:

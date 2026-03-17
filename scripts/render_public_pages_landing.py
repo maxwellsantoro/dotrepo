@@ -139,36 +139,42 @@ def main() -> int:
     .links a {{
       font-weight: 600;
     }}
-    .repo-list {{
-      margin-top: 28px;
-    }}
-    .repo-list li + li {{
-      margin-top: 10px;
-    }}
-    .repo-list span {{
-      color: var(--muted);
-      margin-right: 8px;
-    }}
-  </style>
-</head>
-<body>
-  <main>
-    <section class="card">
-      <h2>Hosted Static Surface</h2>
-      <h1>dotrepo public export</h1>
-      <p>This site serves the exported read-only JSON tree directly. The JSON contracts remain the source of truth.</p>
-      <div class="meta">
-        <p><strong>Generated at:</strong> {html.escape(str(generated_at))}</p>
-        <p><strong>Snapshot digest:</strong> <code>{html.escape(str(snapshot_digest))}</code></p>
-        {stale_html}
-        <p><strong>Repositories:</strong> {html.escape(str(repository_count))}</p>
-      </div>
-      <div class="links">
-        <a href="./v0/meta.json">meta.json</a>
-        <a href="./v0/repos/index.json">repos/index.json</a>
-      </div>
-      <section class="repo-list">
-        <h2>Repository endpoints</h2>
+	    .repo-list {{
+	      margin-top: 28px;
+	    }}
+	    .repo-list li + li {{
+	      margin-top: 10px;
+	    }}
+	    .repo-list span {{
+	      color: var(--muted);
+	      margin-right: 8px;
+	    }}
+	    .lede {{
+	      font-size: 1.08rem;
+	      max-width: 44rem;
+	    }}
+	  </style>
+	</head>
+	<body>
+	  <main>
+	    <section class="card">
+	      <h2>Hosted Static Surface</h2>
+	      <h1>dotrepo public export</h1>
+	      <p class="lede">Trustworthy repository metadata for humans, tools, and agents. This site serves the exported read-only JSON tree directly, and the JSON contracts remain the source of truth.</p>
+	      <div class="meta">
+	        <p><strong>Generated at:</strong> {html.escape(str(generated_at))}</p>
+	        <p><strong>Snapshot digest:</strong> <code>{html.escape(str(snapshot_digest))}</code></p>
+	        {stale_html}
+	        <p><strong>Repositories:</strong> {html.escape(str(repository_count))}</p>
+	      </div>
+	      <div class="links">
+	        <a href="./v0/meta.json">meta.json</a>
+	        <a href="./v0/repos/index.json">repos/index.json</a>
+	        <a href="https://github.com/maxwellsantoro/dotrepo">GitHub repo</a>
+	        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/README.md">README</a>
+	      </div>
+	      <section class="repo-list">
+	        <h2>Repository endpoints</h2>
         <ul>
           {repositories_html}
         </ul>
