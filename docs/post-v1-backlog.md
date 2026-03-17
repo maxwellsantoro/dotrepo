@@ -94,6 +94,7 @@ without inventing a second API dialect or broadening into search.
 
 Primary surfaces:
 `rfcs/0019-public-trust-and-query-wrappers.md`,
+`docs/hosted-query-serving.md`,
 `docs/public-surface.md`,
 `.github/workflows/public-pages.yml`,
 the future serving/deployment layer,
