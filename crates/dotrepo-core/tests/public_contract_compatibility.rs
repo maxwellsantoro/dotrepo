@@ -142,7 +142,10 @@ fn assert_has_keys(value: &Value, required_keys: &[String], context: &str) {
 }
 
 fn assert_exact_keys(value: &Value, expected_keys: &[String], context: &str) {
-    let actual_keys = object(value, context).keys().cloned().collect::<BTreeSet<_>>();
+    let actual_keys = object(value, context)
+        .keys()
+        .cloned()
+        .collect::<BTreeSet<_>>();
     let expected_keys = expected_keys.iter().cloned().collect::<BTreeSet<_>>();
     assert_eq!(actual_keys, expected_keys, "{context} keys drifted");
 }
@@ -233,7 +236,10 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         "selection.reason",
     );
     assert_serialized_string_set(
-        &[ConflictRelationship::Superseded, ConflictRelationship::Parallel],
+        &[
+            ConflictRelationship::Superseded,
+            ConflictRelationship::Parallel,
+        ],
         &manifest.conflict.relationship_values,
         "conflicts[].relationship",
     );
@@ -295,7 +301,11 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         &manifest.summary.link_keys,
         "summary.links",
     );
-    assert_exact_keys(&orbit_summary["links"], &manifest.summary.link_keys, "summary.links");
+    assert_exact_keys(
+        &orbit_summary["links"],
+        &manifest.summary.link_keys,
+        "summary.links",
+    );
 
     let nova_summary = serde_json::to_value(
         public_repository_summary_or_error(
@@ -357,7 +367,11 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         &manifest.trust.link_keys,
         "trust.links",
     );
-    assert_exact_keys(&orbit_trust["links"], &manifest.trust.link_keys, "trust.links");
+    assert_exact_keys(
+        &orbit_trust["links"],
+        &manifest.trust.link_keys,
+        "trust.links",
+    );
     for conflict in orbit_trust["conflicts"]
         .as_array()
         .expect("trust.conflicts array")
@@ -436,7 +450,11 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         &manifest.query.link_keys,
         "query.links",
     );
-    assert_exact_keys(&orbit_query["links"], &manifest.query.link_keys, "query.links");
+    assert_exact_keys(
+        &orbit_query["links"],
+        &manifest.query.link_keys,
+        "query.links",
+    );
     assert_string(&orbit_query["value"], "query.value");
     for conflict in orbit_query["conflicts"]
         .as_array()

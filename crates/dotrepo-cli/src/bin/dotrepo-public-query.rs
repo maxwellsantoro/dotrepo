@@ -101,8 +101,11 @@ fn normalize_base_path(base_path: &str) -> String {
 }
 
 fn handle_connection(mut stream: TcpStream, state: &ServerState) -> Result<()> {
-    let mut reader =
-        BufReader::new(stream.try_clone().context("failed to clone request stream")?);
+    let mut reader = BufReader::new(
+        stream
+            .try_clone()
+            .context("failed to clone request stream")?,
+    );
     let mut request_line = String::new();
     if reader
         .read_line(&mut request_line)
@@ -149,7 +152,9 @@ fn handle_connection(mut stream: TcpStream, state: &ServerState) -> Result<()> {
             );
             match response {
                 Ok(body) => write_json_response(&mut stream, 200, &body),
-                Err(body) => write_json_response(&mut stream, status_for_public_error(&body), &body),
+                Err(body) => {
+                    write_json_response(&mut stream, status_for_public_error(&body), &body)
+                }
             }
         }
         Ok(None) => write_text_response(&mut stream, 404, "not found"),

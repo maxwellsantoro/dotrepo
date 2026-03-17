@@ -33,11 +33,67 @@ pub enum ManagedFileState {
     Unsupported,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DoctorSurface {
+    Readme,
+    Security,
+    Contributing,
+    Codeowners,
+    PullRequestTemplate,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DoctorOwnershipHonesty {
+    Honest,
+    LossyFullGeneration,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DoctorRecommendedMode {
+    Generate,
+    PartiallyManaged,
+    Skip,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DoctorRendererCoverage {
+    Structured,
+    StubOnly,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DoctorFinding {
     pub path: PathBuf,
+    pub surface: DoctorSurface,
     pub state: ManagedFileState,
     pub message: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub declared_mode: Option<CompatMode>,
+    pub supports_managed_regions: bool,
+    pub supports_full_generation: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ownership_honesty: Option<DoctorOwnershipHonesty>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub recommended_mode: Option<DoctorRecommendedMode>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub would_drop_unmanaged_content: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub renderer_coverage: Option<DoctorRendererCoverage>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub advice: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DoctorReport {
+    pub mode: RecordMode,
+    pub status: RecordStatus,
+    pub findings: Vec<DoctorFinding>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -4161,6 +4217,7 @@ pub fn github_outputs(manifest: &Manifest, source_bytes: &[u8]) -> Vec<(PathBuf,
 
 pub fn inspect_surface_states(root: &Path) -> Result<Vec<DoctorFinding>> {
     let mut findings = Vec::new();
+    let loaded_manifest = load_doctor_manifest(root)?;
 
     for surface in [
         ManagedSurface::Readme,
@@ -4171,13 +4228,12 @@ pub fn inspect_surface_states(root: &Path) -> Result<Vec<DoctorFinding>> {
         if status.state == ManagedFileState::Missing {
             continue;
         }
-        findings.push(DoctorFinding {
-            path: relative_or_absolute(root, &status.path),
-            state: status.state,
-            message: status
-                .message
-                .unwrap_or_else(|| default_state_message(status.state)),
-        });
+        findings.push(build_managed_surface_doctor_finding(
+            root,
+            surface,
+            status,
+            loaded_manifest.as_ref(),
+        )?);
     }
 
     for relative in [
@@ -4195,22 +4251,289 @@ pub fn inspect_surface_states(root: &Path) -> Result<Vec<DoctorFinding>> {
         match fs::read_to_string(&path) {
             Ok(contents) => {
                 if !is_dotrepo_generated(&contents) {
-                    findings.push(DoctorFinding {
-                        path: PathBuf::from(relative),
-                        state: ManagedFileState::Unsupported,
-                        message: "conventional surface exists outside the managed-region contract for this file; keep it unmanaged or convert it to a fully generated dotrepo surface".into(),
-                    });
+                    findings.push(build_unsupported_surface_doctor_finding(
+                        relative,
+                        ManagedFileState::Unsupported,
+                        "conventional surface exists outside the managed-region contract for this file; keep it unmanaged or convert it to a fully generated dotrepo surface".into(),
+                        loaded_manifest.as_ref(),
+                    ));
                 }
             }
-            Err(err) => findings.push(DoctorFinding {
-                path: PathBuf::from(relative),
-                state: ManagedFileState::Unsupported,
-                message: format!("could not be read during doctor scan: {}", err),
-            }),
+            Err(err) => findings.push(build_unsupported_surface_doctor_finding(
+                relative,
+                ManagedFileState::Unsupported,
+                format!("could not be read during doctor scan: {}", err),
+                loaded_manifest.as_ref(),
+            )),
         }
     }
 
     Ok(findings)
+}
+
+fn load_doctor_manifest(root: &Path) -> Result<Option<LoadedManifest>> {
+    let path = manifest_path(root);
+    if !path.exists() {
+        return Ok(None);
+    }
+    load_manifest_file(&path).map(Some)
+}
+
+fn build_managed_surface_doctor_finding(
+    root: &Path,
+    surface: ManagedSurface,
+    status: ManagedSurfaceStatus,
+    loaded_manifest: Option<&LoadedManifest>,
+) -> Result<DoctorFinding> {
+    let doctor_surface = doctor_surface_for_managed(surface);
+    let mut finding = base_doctor_finding(
+        relative_or_absolute(root, &status.path),
+        doctor_surface,
+        status.state,
+        status
+            .message
+            .unwrap_or_else(|| default_state_message(status.state)),
+    );
+
+    if let Some(loaded_manifest) = loaded_manifest {
+        apply_doctor_surface_manifest_metadata(
+            root,
+            &mut finding,
+            loaded_manifest,
+            status.current.as_deref(),
+        )?;
+    }
+
+    Ok(finding)
+}
+
+fn build_unsupported_surface_doctor_finding(
+    relative: &str,
+    state: ManagedFileState,
+    message: String,
+    loaded_manifest: Option<&LoadedManifest>,
+) -> DoctorFinding {
+    let mut finding = base_doctor_finding(
+        PathBuf::from(relative),
+        doctor_surface_for_unsupported_path(relative),
+        state,
+        message,
+    );
+
+    if let Some(loaded_manifest) = loaded_manifest {
+        apply_unsupported_surface_manifest_metadata(&mut finding, &loaded_manifest.manifest);
+    }
+
+    finding
+}
+
+fn base_doctor_finding(
+    path: PathBuf,
+    surface: DoctorSurface,
+    state: ManagedFileState,
+    message: String,
+) -> DoctorFinding {
+    DoctorFinding {
+        path,
+        surface,
+        state,
+        message,
+        declared_mode: None,
+        supports_managed_regions: surface_supports_managed_regions(surface),
+        supports_full_generation: surface_supports_full_generation(surface),
+        ownership_honesty: None,
+        recommended_mode: None,
+        would_drop_unmanaged_content: None,
+        renderer_coverage: Some(surface_renderer_coverage(surface)),
+        advice: Vec::new(),
+    }
+}
+
+fn apply_doctor_surface_manifest_metadata(
+    root: &Path,
+    finding: &mut DoctorFinding,
+    loaded_manifest: &LoadedManifest,
+    current: Option<&str>,
+) -> Result<()> {
+    let manifest = &loaded_manifest.manifest;
+    finding.declared_mode = declared_mode_for_surface(manifest, finding.surface);
+
+    match finding.surface {
+        DoctorSurface::Readme => {
+            if finding.state == ManagedFileState::PartiallyManaged {
+                finding.ownership_honesty = Some(DoctorOwnershipHonesty::Honest);
+                finding.recommended_mode = Some(DoctorRecommendedMode::PartiallyManaged);
+                finding.would_drop_unmanaged_content = Some(false);
+            } else if finding.state == ManagedFileState::FullyGenerated {
+                finding.ownership_honesty = Some(DoctorOwnershipHonesty::Honest);
+                finding.recommended_mode = Some(DoctorRecommendedMode::Generate);
+                finding.would_drop_unmanaged_content = Some(false);
+            }
+        }
+        DoctorSurface::Security | DoctorSurface::Contributing => {
+            if finding.declared_mode == Some(CompatMode::Generate) {
+                match finding.state {
+                    ManagedFileState::FullyGenerated => {
+                        finding.ownership_honesty = Some(DoctorOwnershipHonesty::Honest);
+                        finding.recommended_mode = Some(DoctorRecommendedMode::Generate);
+                        finding.would_drop_unmanaged_content = Some(false);
+                    }
+                    ManagedFileState::PartiallyManaged => {
+                        finding.ownership_honesty = Some(DoctorOwnershipHonesty::Honest);
+                        finding.recommended_mode = Some(DoctorRecommendedMode::PartiallyManaged);
+                        finding.would_drop_unmanaged_content = Some(false);
+                    }
+                    ManagedFileState::Unmanaged => {
+                        let expected = expected_generated_surface_contents(
+                            root,
+                            finding.surface,
+                            manifest,
+                            &loaded_manifest.raw,
+                        )?;
+                        if current != Some(expected.as_str()) {
+                            finding.ownership_honesty =
+                                Some(DoctorOwnershipHonesty::LossyFullGeneration);
+                            finding.recommended_mode =
+                                Some(DoctorRecommendedMode::PartiallyManaged);
+                            finding.would_drop_unmanaged_content = Some(true);
+                            finding.message = format!(
+                                "{} is declared as fully generated, but the current renderer can only reproduce a minimal dotrepo-owned block from this manifest. Regenerating would replace repository-specific prose. Prefer `partially_managed` or `skip` unless the generated stub is the full file you want.",
+                                finding.path.display()
+                            );
+                            finding.advice = vec![
+                                format!(
+                                    "Run `dotrepo preview --surface {}` before changing compat mode.",
+                                    doctor_surface_cli_name(finding.surface)
+                                ),
+                                "Use managed regions to preserve repository-specific prose outside the dotrepo-owned block.".into(),
+                            ];
+                        }
+                    }
+                    ManagedFileState::Missing
+                    | ManagedFileState::MalformedManaged
+                    | ManagedFileState::Unsupported => {}
+                }
+            }
+        }
+        DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => {}
+    }
+
+    Ok(())
+}
+
+fn apply_unsupported_surface_manifest_metadata(finding: &mut DoctorFinding, manifest: &Manifest) {
+    finding.declared_mode = declared_mode_for_surface(manifest, finding.surface);
+
+    if finding.declared_mode != Some(CompatMode::Generate) {
+        return;
+    }
+
+    finding.ownership_honesty = Some(DoctorOwnershipHonesty::LossyFullGeneration);
+    finding.recommended_mode = Some(DoctorRecommendedMode::Skip);
+    finding.would_drop_unmanaged_content = Some(true);
+    finding.message = format!(
+        "{} is declared as fully generated, but partial management is not supported for this surface. dotrepo can only fully replace it or leave it unmanaged. Prefer `skip` unless the generated template is the entire file you want.",
+        finding.path.display()
+    );
+    finding.advice = vec![
+        format!(
+            "Run `dotrepo preview --surface {}` before enabling full generation.",
+            doctor_surface_cli_name(finding.surface)
+        ),
+        "Keep this surface unmanaged if the checked-in file contains richer policy or workflow content than the current template can express.".into(),
+    ];
+}
+
+fn doctor_surface_for_managed(surface: ManagedSurface) -> DoctorSurface {
+    match surface {
+        ManagedSurface::Readme => DoctorSurface::Readme,
+        ManagedSurface::Security => DoctorSurface::Security,
+        ManagedSurface::Contributing => DoctorSurface::Contributing,
+    }
+}
+
+fn doctor_surface_for_unsupported_path(relative: &str) -> DoctorSurface {
+    if relative.to_ascii_lowercase().contains("codeowners") {
+        DoctorSurface::Codeowners
+    } else {
+        DoctorSurface::PullRequestTemplate
+    }
+}
+
+fn doctor_surface_cli_name(surface: DoctorSurface) -> &'static str {
+    match surface {
+        DoctorSurface::Readme => "readme",
+        DoctorSurface::Security => "security",
+        DoctorSurface::Contributing => "contributing",
+        DoctorSurface::Codeowners => "codeowners",
+        DoctorSurface::PullRequestTemplate => "pull_request_template",
+    }
+}
+
+fn surface_supports_managed_regions(surface: DoctorSurface) -> bool {
+    matches!(
+        surface,
+        DoctorSurface::Readme | DoctorSurface::Security | DoctorSurface::Contributing
+    )
+}
+
+fn surface_supports_full_generation(_surface: DoctorSurface) -> bool {
+    true
+}
+
+fn surface_renderer_coverage(surface: DoctorSurface) -> DoctorRendererCoverage {
+    match surface {
+        DoctorSurface::Readme | DoctorSurface::Codeowners => DoctorRendererCoverage::Structured,
+        DoctorSurface::Security
+        | DoctorSurface::Contributing
+        | DoctorSurface::PullRequestTemplate => DoctorRendererCoverage::StubOnly,
+    }
+}
+
+fn declared_mode_for_surface(manifest: &Manifest, surface: DoctorSurface) -> Option<CompatMode> {
+    let github = manifest
+        .compat
+        .as_ref()
+        .and_then(|compat| compat.github.as_ref());
+    match surface {
+        DoctorSurface::Readme => None,
+        DoctorSurface::Security => github.and_then(|github| github.security.clone()),
+        DoctorSurface::Contributing => github.and_then(|github| github.contributing.clone()),
+        DoctorSurface::Codeowners => github.and_then(|github| github.codeowners.clone()),
+        DoctorSurface::PullRequestTemplate => {
+            github.and_then(|github| github.pull_request_template.clone())
+        }
+    }
+}
+
+fn expected_generated_surface_contents(
+    root: &Path,
+    surface: DoctorSurface,
+    manifest: &Manifest,
+    source_bytes: &[u8],
+) -> Result<String> {
+    let digest = source_digest(source_bytes);
+    match surface {
+        DoctorSurface::Readme => render_readme(root, manifest, source_bytes),
+        DoctorSurface::Security => Ok(render_managed_markdown(
+            generated_banner(CommentStyle::Html, manifest, &digest),
+            &render_security_body(manifest),
+        )),
+        DoctorSurface::Contributing => Ok(render_contributing(manifest, &digest)),
+        DoctorSurface::Codeowners => {
+            let owners = manifest
+                .owners
+                .as_ref()
+                .map(|owners| owners.maintainers.join(" "))
+                .unwrap_or_else(|| "@maintainers".into());
+            Ok(format!(
+                "{}\n* {}\n",
+                generated_banner(CommentStyle::Hash, manifest, &digest),
+                owners
+            ))
+        }
+        DoctorSurface::PullRequestTemplate => Ok(render_pull_request_template(manifest, &digest)),
+    }
 }
 
 pub fn validate_index_root(index_root: &Path) -> Result<Vec<IndexFinding>> {
@@ -7658,6 +7981,197 @@ broken
         assert_eq!(findings[0].state, ManagedFileState::PartiallyManaged);
         assert_eq!(findings[1].path, PathBuf::from(".github/SECURITY.md"));
         assert_eq!(findings[1].state, ManagedFileState::MalformedManaged);
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn inspect_surface_states_flags_lossy_contributing_generation() {
+        let root = temp_dir("doctor-lossy-contributing");
+        fs::create_dir_all(root.join(".github")).expect(".github created");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "reviewed"
+
+[repo]
+name = "example"
+description = "Example project"
+build = "cargo build --locked"
+test = "cargo nextest run --locked"
+
+[owners]
+maintainers = ["@alice"]
+security_contact = "security@example.com"
+
+[compat.github]
+contributing = "generate"
+"#,
+        )
+        .expect(".repo written");
+        fs::write(
+            root.join("CONTRIBUTING.md"),
+            r#"# Contributing
+
+Read this repository-specific guide before opening a pull request.
+
+## Local workflow
+
+- Use the internal bootstrap script.
+- Coordinate releases in the maintainer chat before tagging.
+"#,
+        )
+        .expect("CONTRIBUTING written");
+
+        let findings = inspect_surface_states(&root).expect("doctor findings");
+        let contributing = findings
+            .iter()
+            .find(|finding| finding.surface == DoctorSurface::Contributing)
+            .expect("contributing finding present");
+
+        assert_eq!(contributing.state, ManagedFileState::Unmanaged);
+        assert_eq!(contributing.declared_mode, Some(CompatMode::Generate));
+        assert_eq!(
+            contributing.ownership_honesty,
+            Some(DoctorOwnershipHonesty::LossyFullGeneration)
+        );
+        assert_eq!(
+            contributing.recommended_mode,
+            Some(DoctorRecommendedMode::PartiallyManaged)
+        );
+        assert_eq!(contributing.would_drop_unmanaged_content, Some(true));
+        assert_eq!(
+            contributing.renderer_coverage,
+            Some(DoctorRendererCoverage::StubOnly)
+        );
+        assert!(contributing.supports_managed_regions);
+        assert!(contributing.message.contains("declared as fully generated"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn inspect_surface_states_treats_partially_managed_security_as_honest() {
+        let root = temp_dir("doctor-partial-security");
+        fs::create_dir_all(root.join(".github")).expect(".github created");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "reviewed"
+
+[repo]
+name = "example"
+description = "Example project"
+
+[owners]
+maintainers = ["@alice"]
+security_contact = "security@example.com"
+
+[compat.github]
+security = "generate"
+"#,
+        )
+        .expect(".repo written");
+        fs::write(
+            root.join(".github/SECURITY.md"),
+            r#"Project-specific introduction.
+
+<!-- dotrepo:begin id=security.body -->
+managed
+<!-- dotrepo:end id=security.body -->
+
+Repository-specific disclosure notes.
+"#,
+        )
+        .expect("SECURITY written");
+
+        let findings = inspect_surface_states(&root).expect("doctor findings");
+        let security = findings
+            .iter()
+            .find(|finding| finding.surface == DoctorSurface::Security)
+            .expect("security finding present");
+
+        assert_eq!(security.state, ManagedFileState::PartiallyManaged);
+        assert_eq!(security.declared_mode, Some(CompatMode::Generate));
+        assert_eq!(
+            security.ownership_honesty,
+            Some(DoctorOwnershipHonesty::Honest)
+        );
+        assert_eq!(
+            security.recommended_mode,
+            Some(DoctorRecommendedMode::PartiallyManaged)
+        );
+        assert_eq!(security.would_drop_unmanaged_content, Some(false));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn inspect_surface_states_flags_lossy_pull_request_template_generation() {
+        let root = temp_dir("doctor-lossy-pr-template");
+        fs::create_dir_all(root.join(".github")).expect(".github created");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "reviewed"
+
+[repo]
+name = "example"
+description = "Example project"
+test = "cargo nextest run --locked"
+
+[compat.github]
+pull_request_template = "generate"
+"#,
+        )
+        .expect(".repo written");
+        fs::write(
+            root.join(".github/pull_request_template.md"),
+            r#"## Type of change
+
+- [ ] Feature
+- [ ] Fix
+
+## Repo-specific checks
+
+- [ ] Mention the rollout plan.
+"#,
+        )
+        .expect("PR template written");
+
+        let findings = inspect_surface_states(&root).expect("doctor findings");
+        let pr_template = findings
+            .iter()
+            .find(|finding| finding.surface == DoctorSurface::PullRequestTemplate)
+            .expect("PR template finding present");
+
+        assert_eq!(pr_template.state, ManagedFileState::Unsupported);
+        assert_eq!(pr_template.declared_mode, Some(CompatMode::Generate));
+        assert_eq!(
+            pr_template.ownership_honesty,
+            Some(DoctorOwnershipHonesty::LossyFullGeneration)
+        );
+        assert_eq!(
+            pr_template.recommended_mode,
+            Some(DoctorRecommendedMode::Skip)
+        );
+        assert_eq!(pr_template.would_drop_unmanaged_content, Some(true));
+        assert!(!pr_template.supports_managed_regions);
+        assert!(pr_template
+            .message
+            .contains("partial management is not supported"));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

@@ -9,8 +9,8 @@ use dotrepo_core::{
     public_repository_trust_or_error_with_base, query_repository, scaffold_claim_directory,
     trust_repository, validate_index_root, validate_manifest, validate_repository,
     ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport,
-    ClaimScaffoldInput, ConflictRelationship, ImportMode, ImportOptions, IndexFindingSeverity,
-    ManagedFileState, PublicErrorResponse, SelectionReason, TrustReport,
+    ClaimScaffoldInput, ConflictRelationship, DoctorReport, ImportMode, ImportOptions,
+    IndexFindingSeverity, ManagedFileState, PublicErrorResponse, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::{RecordMode, Trust};
@@ -78,7 +78,11 @@ enum Command {
         check: bool,
     },
     /// Inspect unmanaged conventional files at the repository root.
-    Doctor,
+    Doctor {
+        /// Emit the full doctor report as JSON.
+        #[arg(long)]
+        json: bool,
+    },
     /// Inspect trust, authority handoff, and competing records for one repository identity.
     Trust {
         /// Emit the full conflict-aware trust report as JSON.
@@ -322,7 +326,7 @@ fn run() -> Result<()> {
         Command::ValidateIndex { index_root } => cmd_validate_index(index_root),
         Command::Query { path, json, raw } => cmd_query(cli.root, &path, json, raw),
         Command::Generate { check } => cmd_generate(cli.root, check),
-        Command::Doctor => cmd_doctor(cli.root),
+        Command::Doctor { json } => cmd_doctor(cli.root, json),
         Command::Trust { json } => cmd_trust(cli.root, json),
         Command::Claim { path, json } => cmd_claim(cli.root, path, json),
         Command::ClaimInit {
@@ -578,11 +582,21 @@ fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
     Ok(())
 }
 
-fn cmd_doctor(root: PathBuf) -> Result<()> {
+fn cmd_doctor(root: PathBuf, json: bool) -> Result<()> {
     let manifest = load_manifest_from_root(&root)?;
     validate_manifest(&root, &manifest)?;
     ensure_native_managed_surface_command(&manifest.record.mode, "doctor")?;
     let findings = inspect_surface_states(&root)?;
+    if json {
+        let report = DoctorReport {
+            mode: manifest.record.mode.clone(),
+            status: manifest.record.status.clone(),
+            findings,
+        };
+        println!("{}", serde_json::to_string_pretty(&report)?);
+        return Ok(());
+    }
+
     println!("dotrepo doctor");
     println!("- mode: {:?}", manifest.record.mode);
     println!("- status: {:?}", manifest.record.status);
@@ -1825,7 +1839,7 @@ description = "Example project"
         )
         .expect("record written");
 
-        let err = cmd_doctor(root.clone()).expect_err("overlay doctor should fail");
+        let err = cmd_doctor(root.clone(), false).expect_err("overlay doctor should fail");
         let exit = err.downcast_ref::<CliExit>().expect("returns a CliExit");
         assert_eq!(exit.code, 2);
         assert!(exit

@@ -251,7 +251,9 @@ description = "Competing description"
     );
     assert_eq!(
         json["links"]["self"],
-        Value::String("/dotrepo/v0/repos/github.com/example/orbit/query?path=repo.description".into())
+        Value::String(
+            "/dotrepo/v0/repos/github.com/example/orbit/query?path=repo.description".into()
+        )
     );
     assert_eq!(
         json["links"]["repository"],
