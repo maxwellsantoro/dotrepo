@@ -25,6 +25,8 @@ This surface provides:
 - a bundle-level repository inventory for navigation
 - repository summary and trust responses reusing the same local selection,
   conflict, and claim-visibility semantics
+- a live accepted `pending_canonical` maintainer claim in the checked-in index
+  for `github.com/maxwellsantoro/ries-rs`
 - local review and CI artifacts sharing the same exported tree
 
 Not yet in scope:
@@ -111,7 +113,9 @@ Separate from the release-surface artifacts, the `operator-gate` CI job uploads:
 - `operator-gate-live-seed-handoff-public`
 
 Those artifacts demonstrate the overlay-to-claim handoff path exported through
-the same public JSON contracts.
+the same public JSON contracts with canonical links. The live checked-in index
+already demonstrates the accepted `pending_canonical` path through
+`github.com/maxwellsantoro/ries-rs`.
 
 ## Hosted static deployment
 

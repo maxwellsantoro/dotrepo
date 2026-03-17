@@ -1,6 +1,6 @@
 # Current status
 
-As of March 14, 2026, dotrepo is a working implementation of the protocol,
+As of March 16, 2026, dotrepo is a working implementation of the protocol,
 reference toolchain, and seed index, with a hosted read-only public surface.
 
 ## What exists now
@@ -16,6 +16,9 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Contract-level claim, supersede, and conflict surfacing semantics
 - Git-backed maintainer-claim artifacts, read-only claim inspection, and a
   reviewer workflow over append-only claim events
+- A first live accepted maintainer claim in the checked-in seed index for the
+  released public repository `github.com/maxwellsantoro/ries-rs`, exported
+  through the normal public JSON path
 - Binary-level CLI contract coverage for accepted handoff, corrected claim
   history, and invalid claim-history rejection
 - An explicit operator-gate script and CI job for claim inspection, handoff, and
@@ -40,17 +43,20 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Editor assistance for placing managed-region markers or semantic autofix flows
 - Full TOML language-server parity beyond the current schema-shaped manifest surface
 
-## Remaining gaps before 1.0
+## Live maintainer-claim status
 
-- The checked-in seed index remains overlay-only. dotrepo does not yet have a
-  reviewed accepted maintainer claim for a live repository in `index/`.
-- The operator gate stages one copied seed entry through accepted handoff and
-  `public export` as a CI artifact, which exercises the claim-aware public path
-  without asserting a real maintainer-reviewed handoff in the live seed tree.
+- The checked-in seed index now includes a live accepted maintainer-owned claim
+  for `github.com/maxwellsantoro/ries-rs`.
+- That claim remains `pending_canonical`, so the selected public record is still
+  the reviewed overlay until `ries-rs` publishes a native `.repo`.
+- The upstream repository now has a public `v1.0.1` release, so the live claim
+  is anchored to a shipped public repo rather than a pre-release draft.
+- The operator gate still stages a copied seed entry through accepted handoff
+  with canonical links so the superseded-handoff path remains exercised in CI.
+- A second independently reviewed example is still desirable soon after launch,
+  but the live-index claim gap is no longer a blocker.
 
-Landing one real reviewed maintainer handoff in the checked-in index is the
-primary remaining prerequisite for the 1.0 release decision. See
-[`docs/v1-go-no-go.md`](./v1-go-no-go.md) for the full release bar.
+See [`docs/v1-go-no-go.md`](./v1-go-no-go.md) for the current release bar.
 
 ## What is true about the current editor and sync layers
 

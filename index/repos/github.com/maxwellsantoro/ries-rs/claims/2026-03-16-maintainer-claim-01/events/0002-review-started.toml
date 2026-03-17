@@ -1,0 +1,14 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 2
+kind = "review_started"
+timestamp = "2026-03-16T04:34:51.495042Z"
+actor = "index-reviewer"
+
+[transition]
+from = "submitted"
+to = "in_review"
+
+[summary]
+text = "Started bootstrap maintainer-claim review for the first live index example."

@@ -1,0 +1,22 @@
+schema = "dotrepo-claim/v0"
+
+[claim]
+id = "github.com/maxwellsantoro/ries-rs/2026-03-16-maintainer-claim-01"
+kind = "maintainer_authority"
+state = "accepted"
+created_at = "2026-03-16T04:34:29.15236Z"
+updated_at = "2026-03-16T04:34:55.228988Z"
+
+[identity]
+host = "github.com"
+owner = "maxwellsantoro"
+repo = "ries-rs"
+
+[claimant]
+display_name = "Maxwell Santoro"
+asserted_role = "maintainer"
+
+[target]
+index_paths = ["repos/github.com/maxwellsantoro/ries-rs/record.toml"]
+record_sources = ["https://github.com/maxwellsantoro/ries-rs"]
+canonical_repo_url = "https://github.com/maxwellsantoro/ries-rs"

@@ -102,9 +102,12 @@ identity, event ordering, and handoff rules.
 
 The operator gate script writes inspectable reports for the accepted, corrected,
 and invalid-history fixture paths under `operator-gate/`, and it stages one
-real seed overlay handoff through `public export`, so the release bar is not
+accepted-handoff example with canonical links through `public export`.
+The live seed index now also includes
+`repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/`
+as a checked-in accepted `pending_canonical` example, so the release bar is not
 just "tests pass" but "the documented reviewer and public surfaces still look
-right."
+right on both live and staged claim paths."
 
 ### 5. Record the terminal review outcome
 

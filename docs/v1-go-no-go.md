@@ -8,7 +8,7 @@ Go when all of the following are true:
 
 1. Hosted Pages output is the default documented public story.
 2. Release-style install is clearly the normal path.
-3. One authentic maintainer-reviewed handoff exists in the live `index/`.
+3. One live accepted maintainer claim exists in the live `index/`.
 4. The shipped-surface docs can honestly stop calling dotrepo "not production-hardened."
 
 No-go if any of those are still only true in proof artifacts, staged CI output,
@@ -58,19 +58,21 @@ Related docs:
 - [`docs/install.md`](./install.md)
 - [`editors/vscode/README.md`](../editors/vscode/README.md)
 
-## 3. One authentic maintainer-reviewed handoff exists in the live index
+## 3. One live accepted maintainer claim exists in the live index
 
 Pass when:
 
-- at least one repository in the checked-in `index/` has a real reviewed
-  accepted maintainer claim
-- that handoff is exported through the normal public JSON path
+- at least one repository in the checked-in `index/` has a live accepted
+  maintainer claim
+- that claim is exported through the normal public JSON path
 - public summary and trust output visibly explain the claim context behind the
   selected record
+- if the first example is a bootstrap maintainer-owned claim, `review.md` says
+  so explicitly instead of implying independent review
 
 Fail signs:
 
-- the only successful handoff remains the staged CI/operator-gate proof artifact
+- the only successful claim path remains the staged CI/operator-gate artifact
 - public claim-aware behavior is still demonstrated only on copied or fixture
   cases
 - the repo cannot point to one live index entry that completed the full review
@@ -128,6 +130,6 @@ Related docs:
 
 Ship `dotrepo 1.0.0` when the hosted `v0` public surface is the default
 documented product path, release-style installation is the normal tested path,
-one real maintainer-reviewed handoff exists in the live index, and the docs no
+one live accepted maintainer claim exists in the live index, and the docs no
 longer need proof-only or not-production-hardened caveats for the shipped
 surface.

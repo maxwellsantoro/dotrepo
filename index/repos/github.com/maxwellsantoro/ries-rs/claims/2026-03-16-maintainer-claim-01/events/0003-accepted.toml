@@ -1,0 +1,18 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 3
+kind = "accepted"
+timestamp = "2026-03-16T04:34:55.228988Z"
+actor = "index-reviewer"
+
+[transition]
+from = "in_review"
+to = "accepted"
+
+[summary]
+text = "Accepted maintainer-owned bootstrap claim pending canonical .repo publication."
+
+[links]
+claim = "../claim.toml"
+review_notes = "../review.md"

@@ -47,10 +47,13 @@ The hosted public surface provides:
 - read-only repository summary and trust responses
 - identity-first, trust-aware public responses
 - claim-aware visibility without a second semantic layer
+- a live accepted maintainer-claim example from the checked-in index, currently
+  `github.com/maxwellsantoro/ries-rs` with `pending_canonical` handoff state
 - one deployable snapshot from the same export used for local review
 
 The operator-gate CI artifact separately demonstrates the overlay-to-claim
-handoff path exported through the same public JSON contracts.
+handoff path with canonical links exported through the same public JSON
+contracts.
 
 ## What is not yet in scope
 

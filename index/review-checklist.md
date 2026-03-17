@@ -34,6 +34,7 @@ Use this checklist when reviewing overlay contributions for the seed index.
 - `claim.toml` and `events/*.toml` tell the same story as the latest reviewer decision.
 - Event sequence numbers are contiguous and append-only.
 - Accepted claims without canonical links remain `pending_canonical`; they do not imply canonical authority early.
+- Bootstrap maintainer-owned accepted claims say so explicitly in `review.md` instead of implying independent review.
 - Accepted or corrected claims with canonical links point at the expected `.repo` or canonical mirror path.
 - Rejected, withdrawn, and disputed outcomes remain visible instead of being flattened away.
 - `cargo run -p dotrepo-cli -- --root index claim <claim-dir>` and `cargo run -p dotrepo-cli -- validate-index --index-root index` both reflect the same current state.

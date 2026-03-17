@@ -1,0 +1,36 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/maxwellsantoro/ries-rs"
+generated_at = "2026-03-16T00:00:00Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+notes = "Reviewed overlay backed by a live maintainer-owned accepted claim and public v1.0.1 release; canonical .repo publication is still pending."
+
+[repo]
+name = "RIES-RS"
+description = "High-performance Rust reimplementation of Robert Munafo's RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it - now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support."
+homepage = "https://github.com/maxwellsantoro/ries-rs"
+license = "MIT"
+status = "active"
+visibility = "public"
+languages = ["rust"]
+build = "cargo build --release --locked"
+test = "cargo test --tests --locked"
+topics = ["equation-solver", "inverse-symbolic-calculator", "mathematics", "numerical-methods", "python-bindings", "rust", "scientific-computing", "symbolic-computation", "wasm"]
+
+[owners]
+maintainers = ["@maxwellsantoro"]
+security_contact = "unknown"
+
+[docs]
+root = "docs/"
+getting_started = "README.md"
+architecture = "docs/ARCHITECTURE.md"
+
+[relations]
+references = []
