@@ -22,7 +22,8 @@ Hosted public surface:
 
 ## See it in 60 seconds
 
-What a native `.repo` looks like:
+This repository now ships its own native [`.repo`](.repo). A minimal slice of
+that record looks like:
 
 ```toml
 schema = "dotrepo/v0.1"
@@ -37,9 +38,10 @@ provenance = ["declared", "verified"]
 notes = "Maintainer-controlled source of truth."
 
 [repo]
-name = "orbit"
-build = "cargo build"
-test = "cargo test"
+name = "dotrepo"
+description = "Open metadata protocol for software repositories"
+build = "cargo build --workspace"
+test = "cargo test --workspace"
 ```
 
 What the CLI gives you once `dotrepo` is on your `PATH`:
@@ -88,6 +90,9 @@ dotrepo --root <repo> generate --check
 
 For the full maintainer flow, see
 [`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md).
+
+If you want to contribute to the protocol, toolchain, or seed index, start with
+[`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## What dotrepo is
 
@@ -217,3 +222,8 @@ If you want the protocol and trust model:
 - [`docs/trust-model.md`](docs/trust-model.md)
 - [`rfcs/0001-protocol-and-ecosystem.md`](rfcs/0001-protocol-and-ecosystem.md)
 - [`rfcs/0004-index-and-trust-model.md`](rfcs/0004-index-and-trust-model.md)
+
+If you want to contribute:
+- [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- [`index/README.md`](index/README.md)
+- [`index/review-checklist.md`](index/review-checklist.md)

@@ -1,0 +1,38 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared", "verified"]
+notes = "Maintainer-controlled source of truth for dotrepo."
+
+[repo]
+name = "dotrepo"
+description = "Open metadata protocol for software repositories with a Rust toolchain, MCP server, and public index."
+homepage = "https://maxwellsantoro.github.io/dotrepo/"
+license = "MIT"
+status = "active"
+visibility = "public"
+languages = ["rust", "typescript"]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = ["repository-metadata", "protocol", "rust-cli", "mcp", "lsp", "ai-agents"]
+
+[owners]
+maintainers = ["@maxwellsantoro"]
+team = "dotrepo"
+
+[docs]
+root = "docs/"
+getting_started = "README.md"
+architecture = "docs/current-status.md"
+api = "docs/public-surface.md"
+
+[compat.github]
+codeowners = "skip"
+security = "skip"
+contributing = "skip"
+pull_request_template = "skip"
