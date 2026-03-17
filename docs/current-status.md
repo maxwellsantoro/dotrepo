@@ -17,8 +17,8 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Git-backed maintainer-claim artifacts, read-only claim inspection, and a
   reviewer workflow over append-only claim events
 - A first live accepted maintainer claim in the checked-in seed index for the
-  released public repository `github.com/maxwellsantoro/ries-rs`, exported
-  through the normal public JSON path
+  released public repository `github.com/maxwellsantoro/ries-rs`, now linked to
+  its published native `.repo` and exported through the normal public JSON path
 - Binary-level CLI contract coverage for accepted handoff, corrected claim
   history, and invalid claim-history rejection
 - An explicit operator-gate script and CI job for claim inspection, handoff, and
@@ -46,11 +46,14 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 ## Live maintainer-claim status
 
 - The checked-in seed index now includes a live accepted maintainer-owned claim
-  for `github.com/maxwellsantoro/ries-rs`.
-- That claim remains `pending_canonical`, so the selected public record is still
-  the reviewed overlay until `ries-rs` publishes a native `.repo`.
-- The upstream repository now has a public `v1.0.1` release, so the live claim
-  is anchored to a shipped public repo rather than a pre-release draft.
+  for `github.com/maxwellsantoro/ries-rs`, linked to the published native
+  `.repo` in the upstream repository.
+- The derived handoff is `superseded`. The checked-in seed index remains
+  overlay-only today, so the public export still shows the reviewed overlay as
+  visible seed-index context while surfacing the canonical handoff.
+- The upstream repository now has a public `v1.0.1` release and native `.repo`,
+  so the live claim is anchored to a shipped canonical public repo rather than
+  a pre-release draft.
 - The operator gate still stages a copied seed entry through accepted handoff
   with canonical links so the superseded-handoff path remains exercised in CI.
 - A second independently reviewed example is still desirable soon after launch,

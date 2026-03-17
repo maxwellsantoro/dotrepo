@@ -1,0 +1,15 @@
+schema = "dotrepo-claim-event/v0"
+
+[event]
+sequence = 4
+kind = "corrected"
+timestamp = "2026-03-17T00:44:31.387348Z"
+actor = "index-reviewer"
+
+[summary]
+text = "Linked accepted claim to published canonical .repo."
+
+[links]
+claim = "../claim.toml"
+review_notes = "../review.md"
+canonical_record_path = ".repo"

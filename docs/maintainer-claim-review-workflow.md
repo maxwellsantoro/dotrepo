@@ -105,9 +105,10 @@ and invalid-history fixture paths under `operator-gate/`, and it stages one
 accepted-handoff example with canonical links through `public export`.
 The live seed index now also includes
 `repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/`
-as a checked-in accepted `pending_canonical` example, so the release bar is not
-just "tests pass" but "the documented reviewer and public surfaces still look
-right on both live and staged claim paths."
+as a checked-in accepted claim that was later corrected to link the published
+upstream `.repo`, so the release bar is not just "tests pass" but "the
+documented reviewer and public surfaces still look right on both live and
+staged claim paths."
 
 ### 5. Record the terminal review outcome
 

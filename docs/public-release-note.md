@@ -10,7 +10,7 @@ The current release includes:
 - a bundle-level repository inventory in `repos/index.json`
 - per-repository summary and trust documents
 - live accepted maintainer-claim context for
-  `github.com/maxwellsantoro/ries-rs`, pending canonical publication
+  `github.com/maxwellsantoro/ries-rs`, linked to a published canonical `.repo`
 - a CI artifact for the loose tree
 - a CI artifact for a versioned review bundle
 - a GitHub Pages deployment workflow with root landing page

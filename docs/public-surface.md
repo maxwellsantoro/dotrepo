@@ -48,7 +48,8 @@ The hosted public surface provides:
 - identity-first, trust-aware public responses
 - claim-aware visibility without a second semantic layer
 - a live accepted maintainer-claim example from the checked-in index, currently
-  `github.com/maxwellsantoro/ries-rs` with `pending_canonical` handoff state
+  `github.com/maxwellsantoro/ries-rs` with `superseded` handoff state linked to
+  its upstream `.repo`
 - one deployable snapshot from the same export used for local review
 
 The operator-gate CI artifact separately demonstrates the overlay-to-claim

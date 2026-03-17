@@ -302,7 +302,7 @@ def main() -> int:
             "",
             "What is checked in:",
             "- the real seed index under ./index/ remains overlay-only today",
-            "- no accepted maintainer claim is committed for a real public repository yet",
+            "- the real seed index now includes one accepted maintainer claim for a real public repository, linked to the upstream canonical .repo",
             "",
             "What is staged here:",
             "- reports/accepted-clean.json and reports/corrected.json come from checked-in claim fixtures",
@@ -312,9 +312,9 @@ def main() -> int:
             "",
             "Why this exists:",
             "- it proves the operator workflow and claim-aware public export path end to end",
-            "- it avoids publishing a fake accepted maintainer claim in the checked-in seed index",
+            "- it still exercises a copied canonical-link handoff path independently of the live checked-in ries-rs example",
             "",
-            "The staged handoff is a proof artifact, not the live public seed index.",
+            "The staged handoff is a proof artifact, separate from the live public seed index entry for ries-rs.",
             "",
         ]
     )
