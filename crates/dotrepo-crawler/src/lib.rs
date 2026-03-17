@@ -127,7 +127,26 @@ pub enum CrawlDiagnosticSeverity {
 #[serde(rename_all = "camelCase")]
 pub struct CrawlDiagnostic {
     pub severity: CrawlDiagnosticSeverity,
+    pub code: String,
     pub message: String,
+}
+
+impl CrawlDiagnostic {
+    pub(crate) fn info(code: &str, message: impl Into<String>) -> Self {
+        Self {
+            severity: CrawlDiagnosticSeverity::Info,
+            code: code.into(),
+            message: message.into(),
+        }
+    }
+
+    pub(crate) fn warning(code: &str, message: impl Into<String>) -> Self {
+        Self {
+            severity: CrawlDiagnosticSeverity::Warning,
+            code: code.into(),
+            message: message.into(),
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
