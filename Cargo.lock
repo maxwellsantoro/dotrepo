@@ -170,7 +170,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-cli"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -184,7 +184,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-core"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "dotrepo-schema",
@@ -196,7 +196,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-lsp"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "dotrepo-core",
@@ -210,7 +210,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-mcp"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "dotrepo-core",
@@ -222,7 +222,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-schema"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "serde",
  "thiserror",
@@ -231,7 +231,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-transport"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "serde",

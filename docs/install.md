@@ -17,14 +17,14 @@ release assets for the current tag, then extract it and put the binaries from
 
 The current bundles are named like:
 
-- `dotrepo-0.1.0-x86_64-unknown-linux-gnu.tar.gz`
-- `dotrepo-0.1.0-aarch64-apple-darwin.tar.gz`
+- `dotrepo-1.0.0-x86_64-unknown-linux-gnu.tar.gz`
+- `dotrepo-1.0.0-aarch64-apple-darwin.tar.gz`
 
 Each bundle also includes a matching `.sha256` file.
 
 The same workflow also publishes a VS Code extension package named like:
 
-- `dotrepo-vscode-v0.1.0.vsix`
+- `dotrepo-vscode-v1.0.0.vsix`
 
 Install that in VS Code with `Extensions: Install from VSIX...` if you want the
 thin editor shell without loading the workspace extension directly.
