@@ -68,10 +68,14 @@ A structured `.repo` record does not replace code or good documentation. It prov
 
 ## What dotrepo does not claim yet
 
-This repo is an early implementation of the dotrepo protocol and toolchain. It
-is not yet production-hardened, but it is beyond a pure architecture scaffold:
-the crates implement import, validation, querying, generated-surface checks,
+This repo ships the current dotrepo protocol and reference toolchain surface.
+The crates implement import, validation, querying, generated-surface checks,
 index validation, claims, public export, and an MCP server.
+
+What remains intentionally out of scope for the current release is broader
+post-`1.0` product surface such as search and ranking UX, mutation APIs, bundle
+mode, first-class workspace and relations support, richer editor automation,
+and arbitrary prose round-tripping.
 
 ## First docs to read
 
