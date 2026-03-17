@@ -29,7 +29,8 @@ jobs:
       - name: Detect host target triple
         id: target
         shell: bash
-        run: echo "value=$(rustc -vV | sed -n 's/^host: //p')" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "value=$(rustc -vV | sed -n 's/^host: //p')" >> "$GITHUB_OUTPUT"
       - name: Package release bundle
         run: |
           python3 scripts/package_release_binaries.py \
@@ -59,7 +60,8 @@ jobs:
         run: npm ci
       - name: Detect VS Code extension version
         id: version
-        run: echo "value=$(node -p \"require('./editors/vscode/package.json').version\")" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "value=$(node -p \"require('./editors/vscode/package.json').version\")" >> "$GITHUB_OUTPUT"
       - name: Package VSIX
         working-directory: editors/vscode
         env:
