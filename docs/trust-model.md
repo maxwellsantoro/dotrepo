@@ -6,6 +6,11 @@ A `.repo` record should not imply that all facts are equally authoritative. Inst
 
 In the schema, that means trust metadata belongs to the record itself: `record.status` expresses the authority ladder, and `[record.trust]` carries provenance, confidence, and notes.
 
+Record freshness also stays on the factual record. `record.generated_at` is the
+per-record crawl or import timestamp when that metadata is known. It is not a
+replacement for `[record.trust]`, and it should not be promoted into a detached
+public trust block.
+
 ## Record status ladder
 
 - **draft**: an unfinished or speculative record

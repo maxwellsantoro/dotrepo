@@ -54,6 +54,12 @@ The hosted public surface provides:
   its upstream `.repo`
 - one deployable snapshot from the same export used for local review
 
+Freshness on the hosted JSON is snapshot-first:
+- `freshness.generatedAt` is the export time for the hosted/public snapshot
+- `freshness.snapshotDigest` identifies that export snapshot
+- per-record crawl freshness remains a record concern via `record.generated_at`,
+  not a separate public truth model
+
 The operator-gate CI artifact separately demonstrates the overlay-to-claim
 handoff path with canonical links exported through the same public JSON
 contracts.

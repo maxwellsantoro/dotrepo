@@ -1,8 +1,8 @@
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
-    display_path, generate_check_repository, import_preview_repository, import_repository,
-    inspect_claim_directory, query_repository, record_summary, trust_repository,
-    validate_repository, ImportMode,
+    current_timestamp_rfc3339, display_path, generate_check_repository, import_preview_repository,
+    import_repository_with_options, inspect_claim_directory, query_repository, record_summary,
+    trust_repository, validate_repository, ImportMode, ImportOptions,
 };
 use dotrepo_transport::{
     read_jsonrpc_message as read_message, write_jsonrpc_message as write_message,
@@ -240,7 +240,14 @@ fn tool_import_write(arguments: Value) -> Result<(String, Value)> {
         .get("force")
         .and_then(Value::as_bool)
         .unwrap_or(false);
-    let plan = import_repository(&root, mode, source.as_deref())?;
+    let plan = import_repository_with_options(
+        &root,
+        mode,
+        source.as_deref(),
+        &ImportOptions {
+            generated_at: Some(current_timestamp_rfc3339()?),
+        },
+    )?;
     let written_paths = write_import_plan(&root, &plan, force)?;
 
     let structured = json!({

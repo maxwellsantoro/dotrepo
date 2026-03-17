@@ -9,6 +9,8 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeSet;
 use std::fs;
 use std::path::{Path, PathBuf};
+use time::format_description::well_known::Rfc3339;
+use time::{Duration, OffsetDateTime};
 
 const SUPPORTED_SCHEMA: &str = "dotrepo/v0.1";
 const SUPPORTED_CLAIM_SCHEMA: &str = "dotrepo-claim/v0";
@@ -629,6 +631,11 @@ pub struct ImportPreviewReport {
     pub record: RecordSummary,
 }
 
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+pub struct ImportOptions {
+    pub generated_at: Option<String>,
+}
+
 #[derive(Debug, Clone)]
 pub struct ImportPlan {
     pub manifest_path: PathBuf,
@@ -702,6 +709,25 @@ struct ClaimDirectoryIdentity {
 pub fn load_manifest_document(root: &Path) -> Result<LoadedManifest> {
     let path = manifest_path(root);
     load_manifest_file(&path)
+}
+
+fn render_rfc3339(label: &str, timestamp: OffsetDateTime) -> Result<String> {
+    timestamp
+        .format(&Rfc3339)
+        .map_err(|err| anyhow!("failed to render {label}: {err}"))
+}
+
+fn parse_rfc3339(label: &str, value: &str) -> Result<OffsetDateTime> {
+    OffsetDateTime::parse(value, &Rfc3339)
+        .map_err(|err| anyhow!("failed to parse {label} as RFC3339: {err}"))
+}
+
+fn normalize_rfc3339(label: &str, value: &str) -> Result<String> {
+    render_rfc3339(label, parse_rfc3339(label, value)?)
+}
+
+pub fn current_timestamp_rfc3339() -> Result<String> {
+    render_rfc3339("current timestamp", OffsetDateTime::now_utc())
 }
 
 pub fn parse_claim_record(input: &str) -> Result<ClaimRecord> {
@@ -1947,6 +1973,50 @@ pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
     Ok(format!("{:x}", hasher.finalize()))
 }
 
+pub fn build_public_freshness(
+    index_root: &Path,
+    stale_after_hours: Option<i64>,
+    generated_at: Option<&str>,
+    stale_after: Option<&str>,
+) -> Result<PublicFreshness> {
+    if stale_after.is_some() && stale_after_hours.is_some() {
+        bail!("--stale-after conflicts with --stale-after-hours");
+    }
+    if stale_after.is_some() && generated_at.is_none() {
+        bail!("--stale-after requires --generated-at");
+    }
+
+    let generated_at = match generated_at {
+        Some(value) => parse_rfc3339("--generated-at", value)?,
+        None => OffsetDateTime::now_utc(),
+    };
+    let stale_after = match (stale_after, stale_after_hours) {
+        (Some(value), None) => Some(render_rfc3339(
+            "--stale-after",
+            parse_rfc3339("--stale-after", value)?,
+        )?),
+        (None, Some(hours)) => Some(render_rfc3339(
+            "stale-after timestamp",
+            generated_at + Duration::hours(hours),
+        )?),
+        (None, None) => None,
+        (Some(_), Some(_)) => unreachable!("validated above"),
+    };
+
+    Ok(PublicFreshness {
+        generated_at: render_rfc3339("public freshness timestamp", generated_at)?,
+        snapshot_digest: index_snapshot_digest(index_root)?,
+        stale_after,
+    })
+}
+
+pub fn current_public_freshness(
+    index_root: &Path,
+    stale_after_hours: Option<i64>,
+) -> Result<PublicFreshness> {
+    build_public_freshness(index_root, stale_after_hours, None, None)
+}
+
 pub fn public_snapshot_metadata(freshness: PublicFreshness) -> PublicSnapshotMetadata {
     PublicSnapshotMetadata {
         api_version: PUBLIC_API_VERSION,
@@ -2460,6 +2530,15 @@ pub fn import_repository(
     mode: ImportMode,
     source: Option<&str>,
 ) -> Result<ImportPlan> {
+    import_repository_with_options(root, mode, source, &ImportOptions::default())
+}
+
+pub fn import_repository_with_options(
+    root: &Path,
+    mode: ImportMode,
+    source: Option<&str>,
+    options: &ImportOptions,
+) -> Result<ImportPlan> {
     let readme = load_first_existing_file(root, &["README.md"])?;
     let codeowners = load_first_existing_file(root, &[".github/CODEOWNERS", "CODEOWNERS"])?;
     let security = load_first_existing_file(root, &[".github/SECURITY.md", "SECURITY.md"])?;
@@ -2557,6 +2636,11 @@ pub fn import_repository(
         ImportMode::Overlay if inferred_fields.is_empty() => RecordStatus::Imported,
         ImportMode::Overlay => RecordStatus::Inferred,
     };
+    let generated_at = options
+        .generated_at
+        .as_deref()
+        .map(|value| normalize_rfc3339("record.generated_at", value))
+        .transpose()?;
 
     let mut manifest = Manifest::new(
         Record {
@@ -2575,7 +2659,7 @@ pub fn import_repository(
                         .to_string(),
                 ),
             },
-            generated_at: None,
+            generated_at,
             trust: Some(Trust {
                 confidence: Some(confidence.into()),
                 provenance,
@@ -2702,6 +2786,12 @@ pub fn validate_manifest_diagnostics(
             "validate_manifest",
             format!("unsupported schema: {}", manifest.schema),
         ));
+    }
+
+    if let Some(generated_at) = manifest.record.generated_at.as_deref() {
+        if let Err(err) = parse_rfc3339("record.generated_at", generated_at) {
+            diagnostics.push(validation_error("validate_manifest", err.to_string()));
+        }
     }
 
     if manifest.repo.name.trim().is_empty() {

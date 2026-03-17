@@ -1,15 +1,16 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    append_claim_event, export_public_index_static_with_base, generate_check_repository,
-    import_repository, index_snapshot_digest, inspect_claim_directory, inspect_surface_states,
+    append_claim_event, build_public_freshness, current_public_freshness,
+    current_timestamp_rfc3339, export_public_index_static_with_base, generate_check_repository,
+    import_repository_with_options, inspect_claim_directory, inspect_surface_states,
     load_manifest_document, load_manifest_from_root, managed_outputs,
     public_repository_query_or_error_with_base, public_repository_summary_or_error_with_base,
     public_repository_trust_or_error_with_base, query_repository, scaffold_claim_directory,
     trust_repository, validate_index_root, validate_manifest, validate_repository,
     ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport,
-    ClaimScaffoldInput, ConflictRelationship, ImportMode, IndexFindingSeverity, ManagedFileState,
-    PublicErrorResponse, PublicFreshness, SelectionReason, TrustReport,
+    ClaimScaffoldInput, ConflictRelationship, ImportMode, ImportOptions, IndexFindingSeverity,
+    ManagedFileState, PublicErrorResponse, SelectionReason, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::{RecordMode, Trust};
@@ -19,8 +20,6 @@ use std::fs;
 use std::path::PathBuf;
 use std::process;
 use thiserror::Error;
-use time::format_description::well_known::Rfc3339;
-use time::{Duration, OffsetDateTime};
 
 #[derive(Parser)]
 #[command(name = "dotrepo")]
@@ -421,7 +420,14 @@ fn cmd_import(
     source: Option<String>,
     force: bool,
 ) -> Result<()> {
-    let plan = import_repository(&root, mode.into(), source.as_deref())?;
+    let plan = import_repository_with_options(
+        &root,
+        mode.into(),
+        source.as_deref(),
+        &ImportOptions {
+            generated_at: Some(current_timestamp()?),
+        },
+    )?;
 
     let mut outputs = vec![(plan.manifest_path.clone(), plan.manifest_text.clone())];
     if let (Some(path), Some(contents)) = (&plan.evidence_path, &plan.evidence_text) {
@@ -833,64 +839,7 @@ fn print_public_response<T: Serialize>(
 }
 
 fn current_timestamp() -> Result<String> {
-    Ok(OffsetDateTime::now_utc()
-        .format(&Rfc3339)
-        .map_err(|err| anyhow::anyhow!("failed to render current timestamp: {err}"))?)
-}
-
-fn render_rfc3339(label: &str, timestamp: OffsetDateTime) -> Result<String> {
-    timestamp
-        .format(&Rfc3339)
-        .map_err(|err| anyhow::anyhow!("failed to render {label}: {err}"))
-}
-
-fn parse_rfc3339(label: &str, value: &str) -> Result<OffsetDateTime> {
-    OffsetDateTime::parse(value, &Rfc3339)
-        .map_err(|err| anyhow::anyhow!("failed to parse {label} as RFC3339: {err}"))
-}
-
-fn build_public_freshness(
-    index_root: &std::path::Path,
-    stale_after_hours: Option<i64>,
-    generated_at: Option<&str>,
-    stale_after: Option<&str>,
-) -> Result<PublicFreshness> {
-    if stale_after.is_some() && stale_after_hours.is_some() {
-        bail!("--stale-after conflicts with --stale-after-hours");
-    }
-    if stale_after.is_some() && generated_at.is_none() {
-        bail!("--stale-after requires --generated-at");
-    }
-
-    let generated_at = match generated_at {
-        Some(value) => parse_rfc3339("--generated-at", value)?,
-        None => OffsetDateTime::now_utc(),
-    };
-    let stale_after = match (stale_after, stale_after_hours) {
-        (Some(value), None) => Some(render_rfc3339(
-            "--stale-after",
-            parse_rfc3339("--stale-after", value)?,
-        )?),
-        (None, Some(hours)) => Some(render_rfc3339(
-            "stale-after timestamp",
-            generated_at + Duration::hours(hours),
-        )?),
-        (None, None) => None,
-        (Some(_), Some(_)) => unreachable!("validated above"),
-    };
-
-    Ok(PublicFreshness {
-        generated_at: render_rfc3339("public freshness timestamp", generated_at)?,
-        snapshot_digest: index_snapshot_digest(index_root)?,
-        stale_after,
-    })
-}
-
-fn current_public_freshness(
-    index_root: &std::path::Path,
-    stale_after_hours: Option<i64>,
-) -> Result<PublicFreshness> {
-    build_public_freshness(index_root, stale_after_hours, None, None)
+    current_timestamp_rfc3339()
 }
 
 fn ensure_replaceable_claim_scaffold(claim_dir: &std::path::Path) -> Result<()> {
@@ -1169,6 +1118,7 @@ fn format_managed_file_state(state: ManagedFileState) -> &'static str {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use dotrepo_core::index_snapshot_digest;
     use std::time::{SystemTime, UNIX_EPOCH};
 
     #[test]

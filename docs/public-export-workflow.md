@@ -79,6 +79,8 @@ Important details:
 - `snapshotDigest` is recomputed from the exported `index/` tree
 - deterministic mode changes freshness timestamps, not response semantics
 - ordinary export runs emit real timestamps
+- public `generatedAt` means export time for the snapshot, not proof that an
+  upstream repository changed at that exact moment
 
 ### 3. Ordinary local export
 
@@ -144,6 +146,10 @@ Stable for the same input tree and fixed review timestamps:
 Intentionally variable in ordinary export runs:
 - `generatedAt`
 - `staleAfter`
+
+`generatedAt` is snapshot freshness. Individual repository crawl freshness lives
+on the factual record as `record.generated_at` and can change independently of
+the hosted export cadence.
 
 ## How to reason about changes
 
