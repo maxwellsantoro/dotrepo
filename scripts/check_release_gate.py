@@ -230,6 +230,8 @@ def main() -> int:
             "--test",
             "public_error_fixture_pack",
             "--test",
+            "public_freshness_semantics",
+            "--test",
             "public_contract_compatibility",
         ],
         cwd=repo_root,

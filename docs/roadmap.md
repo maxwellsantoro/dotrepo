@@ -37,6 +37,8 @@ for the first editor feature set and thin-extension model.
 
 See [`PLAN.md`](../PLAN.md) for the concrete 1.0 launch plan, exit criteria,
 and deferrals.
+For the ticket-level post-v1 follow-on backlog grounded in the shipped surface,
+see [`docs/post-v1-backlog.md`](./post-v1-backlog.md).
 
 ## Deferred after 1.0
 - Bundle mode

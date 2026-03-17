@@ -1,6 +1,7 @@
 use dotrepo_core::{
     export_public_index_static, index_snapshot_digest, public_repository_query_or_error,
-    public_repository_summary_or_error, public_repository_trust_or_error, PublicFreshness,
+    public_repository_summary_or_error, public_repository_trust_or_error, ConflictRelationship,
+    PublicFreshness, SelectionReason,
 };
 use serde::Deserialize;
 use serde::Serialize;
@@ -16,6 +17,7 @@ struct CompatibilityManifest {
     freshness: KeySpec,
     identity: IdentitySpec,
     selection: KeySpec,
+    conflict: ConflictSpec,
     record_summary: RecordSummarySpec,
     inventory: InventorySpec,
     summary: ResponseSpec,
@@ -28,6 +30,8 @@ struct CompatibilityManifest {
 struct KeySpec {
     #[serde(rename = "requiredKeys")]
     required_keys: Vec<String>,
+    #[serde(rename = "reasonValues", default)]
+    reason_values: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -66,6 +70,15 @@ struct ResponseSpec {
     link_keys: Vec<String>,
     #[serde(default)]
     repository_keys: Vec<String>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct ConflictSpec {
+    #[serde(rename = "requiredKeys")]
+    required_keys: Vec<String>,
+    query_required_keys: Vec<String>,
+    relationship_values: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -128,6 +141,12 @@ fn assert_has_keys(value: &Value, required_keys: &[String], context: &str) {
     }
 }
 
+fn assert_exact_keys(value: &Value, expected_keys: &[String], context: &str) {
+    let actual_keys = object(value, context).keys().cloned().collect::<BTreeSet<_>>();
+    let expected_keys = expected_keys.iter().cloned().collect::<BTreeSet<_>>();
+    assert_eq!(actual_keys, expected_keys, "{context} keys drifted");
+}
+
 fn assert_string(value: &Value, context: &str) {
     assert!(value.is_string(), "{context} should be a string");
 }
@@ -180,10 +199,44 @@ fn serialize_outcome<T: Serialize, E: Serialize>(value: std::result::Result<T, E
     }
 }
 
+fn assert_serialized_string_set<T: Serialize + Copy>(
+    values: &[T],
+    expected: &[String],
+    label: &str,
+) {
+    let actual = values
+        .iter()
+        .map(|value| {
+            serialize(*value)
+                .as_str()
+                .unwrap_or_else(|| panic!("{label} should serialize to a string"))
+                .to_string()
+        })
+        .collect::<BTreeSet<_>>();
+    let expected = expected.iter().cloned().collect::<BTreeSet<_>>();
+    assert_eq!(actual, expected, "{label} vocabulary drifted");
+}
+
 #[test]
 fn public_contract_compatibility_manifest_matches_live_outputs() {
     let manifest = compatibility_manifest();
     let freshness = sample_public_freshness();
+
+    assert_serialized_string_set(
+        &[
+            SelectionReason::OnlyMatchingRecord,
+            SelectionReason::CanonicalPreferred,
+            SelectionReason::HigherStatusOverlay,
+            SelectionReason::EqualAuthorityConflict,
+        ],
+        &manifest.selection.reason_values,
+        "selection.reason",
+    );
+    assert_serialized_string_set(
+        &[ConflictRelationship::Superseded, ConflictRelationship::Parallel],
+        &manifest.conflict.relationship_values,
+        "conflicts[].relationship",
+    );
 
     let orbit_summary = serde_json::to_value(
         public_repository_summary_or_error(
@@ -242,6 +295,7 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         &manifest.summary.link_keys,
         "summary.links",
     );
+    assert_exact_keys(&orbit_summary["links"], &manifest.summary.link_keys, "summary.links");
 
     let nova_summary = serde_json::to_value(
         public_repository_summary_or_error(
@@ -303,6 +357,13 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         &manifest.trust.link_keys,
         "trust.links",
     );
+    assert_exact_keys(&orbit_trust["links"], &manifest.trust.link_keys, "trust.links");
+    for conflict in orbit_trust["conflicts"]
+        .as_array()
+        .expect("trust.conflicts array")
+    {
+        assert_has_keys(conflict, &manifest.conflict.required_keys, "trust.conflict");
+    }
 
     let nova_trust = serde_json::to_value(
         public_repository_trust_or_error(
@@ -321,6 +382,16 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         true,
         "nova.trust.selection.record",
     );
+    for conflict in nova_trust["conflicts"]
+        .as_array()
+        .expect("nova.trust.conflicts array")
+    {
+        assert_has_keys(
+            conflict,
+            &manifest.conflict.required_keys,
+            "nova.trust.conflict",
+        );
+    }
 
     let orbit_query = serde_json::to_value(
         public_repository_query_or_error(
@@ -365,7 +436,18 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         &manifest.query.link_keys,
         "query.links",
     );
+    assert_exact_keys(&orbit_query["links"], &manifest.query.link_keys, "query.links");
     assert_string(&orbit_query["value"], "query.value");
+    for conflict in orbit_query["conflicts"]
+        .as_array()
+        .expect("query.conflicts array")
+    {
+        assert_has_keys(
+            conflict,
+            &manifest.conflict.query_required_keys,
+            "query.conflict",
+        );
+    }
 
     let nova_query = serde_json::to_value(
         public_repository_query_or_error(
@@ -385,6 +467,16 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         true,
         "nova.query.selection.record",
     );
+    for conflict in nova_query["conflicts"]
+        .as_array()
+        .expect("nova.query.conflicts array")
+    {
+        assert_has_keys(
+            conflict,
+            &manifest.conflict.query_required_keys,
+            "nova.query.conflict",
+        );
+    }
 
     let missing_path = serialize_outcome(public_repository_query_or_error(
         &fixture_index_root(),
@@ -400,6 +492,11 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         "query.error",
     );
     assert_has_keys(
+        &missing_path["error"],
+        &manifest.errors.error_keys,
+        "query.error.error",
+    );
+    assert_exact_keys(
         &missing_path["error"],
         &manifest.errors.error_keys,
         "query.error.error",
@@ -422,6 +519,11 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         &manifest.errors.error_keys,
         "summary.error.error",
     );
+    assert_exact_keys(
+        &missing_repo["error"],
+        &manifest.errors.error_keys,
+        "summary.error.error",
+    );
     assert!(
         missing_repo.get("path").is_none(),
         "summary/trust errors should not include query path"
@@ -440,6 +542,11 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         "trust.error",
     );
     assert_has_keys(
+        &invalid_identity["error"],
+        &manifest.errors.error_keys,
+        "trust.error.error",
+    );
+    assert_exact_keys(
         &invalid_identity["error"],
         &manifest.errors.error_keys,
         "trust.error.error",
@@ -512,5 +619,123 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
             &manifest.inventory.link_keys,
             "inventory.entry.links",
         );
+        assert_exact_keys(
+            &entry["links"],
+            &manifest.inventory.link_keys,
+            "inventory.entry.links",
+        );
     }
+}
+
+fn temp_dir(label: &str) -> PathBuf {
+    let unique = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .expect("clock works")
+        .as_nanos();
+    let path = std::env::temp_dir().join(format!(
+        "dotrepo-contract-{}-{}-{}",
+        label,
+        std::process::id(),
+        unique
+    ));
+    fs::create_dir_all(&path).expect("temp dir created");
+    path
+}
+
+fn ad_hoc_public_freshness(snapshot_digest: &str) -> PublicFreshness {
+    PublicFreshness {
+        generated_at: "2026-03-10T18:30:00Z".into(),
+        snapshot_digest: snapshot_digest.into(),
+        stale_after: Some("2026-03-11T18:30:00Z".into()),
+    }
+}
+
+#[test]
+fn public_contract_compatibility_covers_equal_authority_query_conflicts() {
+    let manifest = compatibility_manifest();
+    let root = temp_dir("equal-authority-query");
+    let record_dir = root.join("repos/github.com/example/orbit");
+    let alt_dir = record_dir.join("alt");
+    fs::create_dir_all(&alt_dir).expect("alt dir created");
+    fs::write(
+        record_dir.join("record.toml"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Selected description"
+"#,
+    )
+    .expect("selected record written");
+    fs::write(
+        alt_dir.join("record.toml"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Competing description"
+"#,
+    )
+    .expect("competing record written");
+
+    let response = serialize_outcome(public_repository_query_or_error(
+        &root,
+        "github.com",
+        "example",
+        "orbit",
+        "repo.description",
+        ad_hoc_public_freshness("equal-authority-snapshot"),
+    ));
+
+    assert_eq!(
+        response["selection"]["reason"],
+        Value::String("equal_authority_conflict".into())
+    );
+    assert_eq!(
+        response["selection"]["record"]["manifestPath"],
+        Value::String("repos/github.com/example/orbit/alt/record.toml".into())
+    );
+    assert_eq!(
+        response["value"],
+        Value::String("Competing description".into())
+    );
+    assert_eq!(
+        response["conflicts"][0]["relationship"],
+        Value::String("parallel".into())
+    );
+    assert_has_keys(
+        &response["conflicts"][0],
+        &manifest.conflict.query_required_keys,
+        "equal-authority.conflicts[0]",
+    );
+    assert_eq!(
+        response["conflicts"][0]["reason"],
+        Value::String("equal_authority_conflict".into())
+    );
+    assert_eq!(
+        response["conflicts"][0]["value"],
+        Value::String("Selected description".into())
+    );
+
+    fs::remove_dir_all(root).expect("temp dir removed");
 }

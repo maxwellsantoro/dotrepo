@@ -61,6 +61,8 @@ changes, or artifact-path changes.
 For the additive-only `v0` compatibility contract around required keys, links,
 and error codes, see [`docs/public-api-compatibility.md`](./public-api-compatibility.md).
 RFCs 0016 through 0019 serve as the accepted `v0` launch docs for that surface.
+For the canonical freshness definitions used by exports and individual
+records, see [`docs/public-freshness.md`](./public-freshness.md).
 
 ### 2. Deterministic local export from the real seed index
 
@@ -97,9 +99,10 @@ root and point at the exported `index.json` / `trust.json` files.
 
 ## CI artifacts
 
-The main CI workflow runs `scripts/check_release_gate.py`, which builds the
-public tree from the seed `index/`, packages the release-style install assets,
-smoke tests the release binaries, and uploads the resulting artifacts.
+The canonical release review entrypoint is `scripts/check_release_gate.py`. The
+main CI workflow runs that script, which builds the public tree from the seed
+`index/`, packages the release-style install assets, smoke tests the release
+binaries, and uploads the resulting artifacts.
 
 Current behavior:
 - the artifact is generated from the real `index/` tree
@@ -147,9 +150,8 @@ Intentionally variable in ordinary export runs:
 - `generatedAt`
 - `staleAfter`
 
-`generatedAt` is snapshot freshness. Individual repository crawl freshness lives
-on the factual record as `record.generated_at` and can change independently of
-the hosted export cadence.
+`generatedAt`, `snapshotDigest`, `staleAfter`, and `record.generated_at` are
+defined in [`docs/public-freshness.md`](./public-freshness.md).
 
 ## How to reason about changes
 
@@ -165,6 +167,10 @@ inspecting the current seed index output as a whole.
 
 The compatibility manifest/test is best for catching accidental key renames,
 link-key drift, or error-code drift inside the same `apiVersion`.
+
+For release review, start with `scripts/check_release_gate.py`; use the
+individual commands above only when you are isolating one specific part of the
+public/export flow.
 
 For a release summary, see
 [`docs/public-release-note.md`](./public-release-note.md).

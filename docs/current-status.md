@@ -28,7 +28,9 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Release-artifact packaging for the CLI, LSP, and MCP binaries, with CI smoke
   tests that extract and run the shipped binaries from the packaged tarball
 - An explicit release-gate script and CI job that package the hosted public
-  tree, install bundles, and VS Code release asset from one reproducible flow
+  tree, install bundles, and VS Code release asset from one reproducible flow,
+  and serve as the canonical operator review entrypoint for public-surface
+  changes
 - A checked-in public API compatibility manifest and test for the current `v0`
   summary, trust, query, inventory, and error-wrapper contracts
 - Accepted public-serving RFCs 0016 through 0019 as the `v0` launch-doc set

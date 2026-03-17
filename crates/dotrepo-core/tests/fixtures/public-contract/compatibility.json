@@ -8,7 +8,18 @@
     "optionalKeys": ["source"]
   },
   "selection": {
-    "requiredKeys": ["reason", "record"]
+    "requiredKeys": ["reason", "record"],
+    "reasonValues": [
+      "only_matching_record",
+      "canonical_preferred",
+      "higher_status_overlay",
+      "equal_authority_conflict"
+    ]
+  },
+  "conflict": {
+    "requiredKeys": ["relationship", "reason", "record"],
+    "queryRequiredKeys": ["relationship", "reason", "value", "record"],
+    "relationshipValues": ["superseded", "parallel"]
   },
   "recordSummary": {
     "requiredKeys": ["manifestPath", "record", "artifacts"],
@@ -33,7 +44,7 @@
   },
   "query": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "path", "value", "selection", "conflicts", "links"],
-    "linkKeys": ["self", "repository", "trust", "indexPath"]
+    "linkKeys": ["self", "repository", "trust", "queryTemplate", "indexPath"]
   },
   "errors": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "error"],

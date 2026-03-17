@@ -13,8 +13,11 @@ JSON tree.
 - `python3 scripts/render_public_pages_landing.py --input public`
 - `python3 scripts/package_public_export.py --input public --output-dir dist`
 
-The script is the intended release-surface gate. The individual commands are
-still useful when reviewing only one part of the public/export flow.
+The script is the canonical operator release review entrypoint. The individual
+commands are still useful when reviewing only one part of the public/export
+flow or when isolating a failure already identified by the gate.
+For the canonical freshness semantics used by these outputs, see
+[`docs/public-freshness.md`](./public-freshness.md).
 
 ## Artifact inspection
 
@@ -43,6 +46,7 @@ still useful when reviewing only one part of the public/export flow.
   - `public-export-v0-bundle`
   - `release-gate-install-bundles`
   - `release-gate-vscode-vsix`
+- the same script is the local and CI release review gate
 - the release gate smoke tests the extracted release binaries
 - the GitHub Pages workflow deploys the same tree without editing links by hand
 - the `release-artifacts` workflow publishes tagged CLI/LSP/MCP bundles and a VSIX

@@ -43,6 +43,10 @@ The checked-in manifest freezes:
   - `query_path_not_found`
   - `repository_not_found`
 
+For the canonical definitions of `generatedAt`, `snapshotDigest`,
+`staleAfter`, and `record.generated_at`, see
+[`docs/public-freshness.md`](./public-freshness.md).
+
 ## Relationship to RFCs
 
 RFCs 0016 through 0019 are now the accepted `v0` public launch docs. This doc

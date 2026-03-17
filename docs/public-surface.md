@@ -27,11 +27,14 @@ The static hosted surface is the right default because it:
 - hosted repository summary and trust responses at stable URLs
 - the CI artifact `public-export-v0` for offline inspection
 - the CI artifact `public-export-v0-bundle` for versioned review snapshots
-- the operator loop in [`docs/public-export-workflow.md`](./public-export-workflow.md)
+- the operator loop in [`docs/public-export-workflow.md`](./public-export-workflow.md),
+  with `scripts/check_release_gate.py` as the canonical release review entrypoint
 - the release note in [`docs/public-release-note.md`](./public-release-note.md)
 - the accepted `v0` public contracts in RFCs 0016 through 0019
 - the `v0` compatibility note in
   [`docs/public-api-compatibility.md`](./public-api-compatibility.md)
+- the canonical freshness reference in
+  [`docs/public-freshness.md`](./public-freshness.md)
 
 ### For agents
 
@@ -55,8 +58,9 @@ The hosted public surface provides:
 - one deployable snapshot from the same export used for local review
 
 Freshness on the hosted JSON is snapshot-first:
-- `freshness.generatedAt` is the export time for the hosted/public snapshot
-- `freshness.snapshotDigest` identifies that export snapshot
+- `freshness.generatedAt`, `freshness.snapshotDigest`, and `freshness.staleAfter`
+  follow the public freshness reference in
+  [`docs/public-freshness.md`](./public-freshness.md)
 - per-record crawl freshness remains a record concern via `record.generated_at`,
   not a separate public truth model
 
@@ -74,7 +78,13 @@ The public surface does not yet include:
 ## How to use it
 
 The primary consumption path is the hosted GitHub Pages deployment. For local
-review or CI inspection:
+review or CI inspection, start with the canonical release gate:
+
+```bash
+python3 scripts/check_release_gate.py --output-root release-gate
+```
+
+Then, if needed:
 
 1. Review the deterministic fixture pack if the contract changed.
 2. Review the CI artifact if the current seed index output changed.
@@ -89,4 +99,6 @@ Start with:
 ## Next steps
 
 The next evolution is adding a thin query wrapper over the same response
-contracts and hardening freshness and caching for the hosted deployment.
+contracts and hardening freshness and caching for the hosted deployment. For
+the freshness definitions that apply to those responses, see
+[`docs/public-freshness.md`](./public-freshness.md).
