@@ -196,6 +196,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "dotrepo-crawler"
+version = "1.0.0"
+dependencies = [
+ "anyhow",
+ "dotrepo-core",
+ "serde",
+ "toml",
+]
+
+[[package]]
 name = "dotrepo-lsp"
 version = "1.0.0"
 dependencies = [

@@ -1,0 +1,22 @@
+[package]
+name = "dotrepo-crawler"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "Library-backed crawl planning and refresh orchestration for dotrepo."
+readme = "../../README.md"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "dotrepo-crawler"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+dotrepo-core.workspace = true
+serde.workspace = true
+toml.workspace = true
