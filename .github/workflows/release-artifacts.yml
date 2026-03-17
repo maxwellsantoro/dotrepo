@@ -67,7 +67,9 @@ jobs:
         working-directory: editors/vscode
         env:
           npm_config_cache: ${{ runner.temp }}/npm-cache
-        run: npx --yes @vscode/vsce package --out ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
+        run: |
+          mkdir -p ../../dist
+          npx --yes @vscode/vsce package --out ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
       - name: Upload VSIX artifact
         uses: actions/upload-artifact@v4
         with:
