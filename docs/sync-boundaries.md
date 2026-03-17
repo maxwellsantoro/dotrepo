@@ -149,6 +149,19 @@ markers.
 - Treat `malformed_managed` and `unsupported` as repair states, not as soft
   warnings.
 
+When adopting an existing repository, the practical question is: "can dotrepo
+reproduce the file I actually want, or only a minimal template?"
+
+- If the current renderer only gives you a narrow stub but the checked-in file
+  contains richer handwritten policy or contributor guidance, `fully_generated`
+  is not the honest ownership mode.
+- For `README.md`, `SECURITY.md`, and `CONTRIBUTING.md`, prefer
+  `partially_managed` when you want dotrepo to own one canonical block while
+  preserving surrounding prose.
+- For `CODEOWNERS` and pull request templates, there is no partial-management
+  escape hatch today. Choose `generate` only when the current dotrepo template
+  is acceptable as the whole file; otherwise leave the file unmanaged.
+
 If you need a surface that is not covered here, the current answer is to leave
 it unmanaged or fully generated. dotrepo does not yet support a richer
 round-tripping contract than that.

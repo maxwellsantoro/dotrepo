@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "d70eb7930fecc4a42bae671eeeed9d7a1667b55256669a76a046fb66ca67f126",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "repositoryCount": 5,
+  "repositories": [
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "BurntSushi",
+        "repo": "ripgrep",
+        "source": "https://github.com/BurntSushi/ripgrep"
+      },
+      "name": "ripgrep",
+      "description": "Line-oriented search tool that recursively searches the current directory for a regex pattern.",
+      "links": {
+        "self": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/index.json",
+        "trust": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/trust.json",
+        "queryTemplate": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/query?path={dot_path}",
+        "indexPath": "repos/github.com/BurntSushi/ripgrep/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "cli",
+        "repo": "cli",
+        "source": "https://github.com/cli/cli"
+      },
+      "name": "GitHub CLI",
+      "description": "GitHub's official command line tool",
+      "links": {
+        "self": "/dotrepo/v0/repos/github.com/cli/cli/index.json",
+        "trust": "/dotrepo/v0/repos/github.com/cli/cli/trust.json",
+        "queryTemplate": "/dotrepo/v0/repos/github.com/cli/cli/query?path={dot_path}",
+        "indexPath": "repos/github.com/cli/cli/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "maxwellsantoro",
+        "repo": "ries-rs",
+        "source": "https://github.com/maxwellsantoro/ries-rs"
+      },
+      "name": "RIES-RS",
+      "description": "High-performance Rust reimplementation of Robert Munafo's RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it - now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support.",
+      "links": {
+        "self": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/index.json",
+        "trust": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json",
+        "queryTemplate": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/query?path={dot_path}",
+        "indexPath": "repos/github.com/maxwellsantoro/ries-rs/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "sharkdp",
+        "repo": "bat",
+        "source": "https://github.com/sharkdp/bat"
+      },
+      "name": "bat",
+      "description": "A cat(1) clone with syntax highlighting and Git integration.",
+      "links": {
+        "self": "/dotrepo/v0/repos/github.com/sharkdp/bat/index.json",
+        "trust": "/dotrepo/v0/repos/github.com/sharkdp/bat/trust.json",
+        "queryTemplate": "/dotrepo/v0/repos/github.com/sharkdp/bat/query?path={dot_path}",
+        "indexPath": "repos/github.com/sharkdp/bat/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "sharkdp",
+        "repo": "fd",
+        "source": "https://github.com/sharkdp/fd"
+      },
+      "name": "fd",
+      "description": "A simple, fast and user-friendly alternative to 'find'.",
+      "links": {
+        "self": "/dotrepo/v0/repos/github.com/sharkdp/fd/index.json",
+        "trust": "/dotrepo/v0/repos/github.com/sharkdp/fd/trust.json",
+        "queryTemplate": "/dotrepo/v0/repos/github.com/sharkdp/fd/query?path={dot_path}",
+        "indexPath": "repos/github.com/sharkdp/fd/"
+      }
+    }
+  ]
+}

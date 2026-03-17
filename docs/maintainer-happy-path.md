@@ -22,6 +22,18 @@ Choose one bootstrap path:
 After that first step, treat the root `.repo` as the source of truth and keep
 generated compatibility surfaces in sync from it.
 
+Do not assume every conventional community file should immediately be marked
+`generate`.
+
+- `generate` is honest only when dotrepo can reproduce the full file from the
+  current manifest and renderer.
+- For rich handwritten `README.md`, `SECURITY.md`, or `CONTRIBUTING.md` files,
+  prefer managed regions when you want dotrepo to own one canonical block while
+  preserving surrounding prose.
+- For `CODEOWNERS` and pull request templates, partial management is not
+  supported today. Use `generate` only if the current dotrepo template is the
+  file you actually want; otherwise leave the file unmanaged.
+
 ## Canonical local loop
 
 Run the same loop the example repo uses:
@@ -87,6 +99,12 @@ repository. It now distinguishes:
 
 That makes it possible to adopt managed regions incrementally without treating
 every existing Markdown file as drift.
+
+Use `doctor` before switching a surface to `generate` in an existing repo. The
+important maintainer question is not just "is this file valid?" but "can
+dotrepo truthfully reproduce the file we want from `.repo`?" If the answer is
+"only a narrow stub," prefer managed regions for supported Markdown files or
+leave the file unmanaged.
 
 For the concrete boundary between supported sync, unmanaged files, malformed
 markers, and unsupported layouts, see

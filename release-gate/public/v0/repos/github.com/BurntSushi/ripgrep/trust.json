@@ -1,0 +1,43 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "d70eb7930fecc4a42bae671eeeed9d7a1667b55256669a76a046fb66ca67f126",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "BurntSushi",
+    "repo": "ripgrep",
+    "source": "https://github.com/BurntSushi/ripgrep"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/BurntSushi/ripgrep/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/BurntSushi/ripgrep",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Imported from public repository materials; build and test commands are inferred from the Cargo project layout; not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/BurntSushi/ripgrep/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/trust.json",
+    "repository": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/index.json",
+    "queryTemplate": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/query?path={dot_path}",
+    "indexPath": "repos/github.com/BurntSushi/ripgrep/"
+  }
+}

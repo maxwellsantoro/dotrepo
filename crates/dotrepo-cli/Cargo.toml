@@ -7,10 +7,15 @@ authors.workspace = true
 repository.workspace = true
 description = "Reference CLI for the dotrepo repository metadata protocol."
 readme = "../../README.md"
+default-run = "dotrepo"
 
 [[bin]]
 name = "dotrepo"
 path = "src/main.rs"
+
+[[bin]]
+name = "dotrepo-public-query"
+path = "src/bin/dotrepo-public-query.rs"
 
 [dependencies]
 anyhow.workspace = true
@@ -21,3 +26,4 @@ serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
 time.workspace = true
+url = "2"

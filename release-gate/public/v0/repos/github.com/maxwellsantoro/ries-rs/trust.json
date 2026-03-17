@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "d70eb7930fecc4a42bae671eeeed9d7a1667b55256669a76a046fb66ca67f126",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "maxwellsantoro",
+    "repo": "ries-rs",
+    "source": "https://github.com/maxwellsantoro/ries-rs"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/maxwellsantoro/ries-rs/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "reviewed",
+        "source": "https://github.com/maxwellsantoro/ries-rs",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Reviewed overlay preserved as visible seed-index context after upstream canonical .repo publication; the live maintainer-owned accepted claim links this overlay to the canonical source of truth."
+        }
+      },
+      "claim": {
+        "id": "github.com/maxwellsantoro/ries-rs/2026-03-16-maintainer-claim-01",
+        "state": "accepted",
+        "handoff": "superseded",
+        "claimPath": "repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/claim.toml",
+        "latestEvent": "repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/events/0004-corrected.toml",
+        "reviewPath": "repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/review.md"
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/maxwellsantoro/ries-rs/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json",
+    "repository": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/index.json",
+    "queryTemplate": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/query?path={dot_path}",
+    "indexPath": "repos/github.com/maxwellsantoro/ries-rs/"
+  }
+}

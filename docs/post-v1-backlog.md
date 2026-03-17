@@ -37,6 +37,7 @@ Use these as top-level program checks across blocks:
 - Epic 1: public contract hardening
 - Epic 3: freshness and cache semantics
 - Epic 4: maintainer adoption loop
+- Epic 4A: managed-surface adoption tooling
 - Epic 5: operator/reviewer loop
 
 ### Block 2
@@ -175,6 +176,43 @@ Primary surfaces:
 - `E4-04 Improve rough failure messages in validate, query, trust, doctor, and generate --check`
   Depends on: `E4-03`.
   Acceptance: the most common unhappy paths produce corrective guidance that is tutorial-quality enough to use directly in maintainer docs and example CI output.
+
+## Epic 4A: Add managed-surface adoption tooling
+
+Goal: help maintainers adopt `.repo` incrementally without falsely labeling rich
+handwritten policy files as fully generated when dotrepo cannot reproduce them.
+
+Primary surfaces:
+`docs/maintainer-happy-path.md`,
+`docs/sync-boundaries.md`,
+`crates/dotrepo-core/src/lib.rs`,
+`crates/dotrepo-cli/src/main.rs`,
+`examples/native-minimal/`,
+native-repo CI scaffolding.
+
+- `E4A-01 Add a per-surface adoption planner for README, SECURITY, and CONTRIBUTING`
+  Depends on: `E4-03`.
+  Acceptance: maintainers can ask dotrepo what ownership mode is honest for an existing file, and the tool can distinguish "fully generated is safe", "managed regions are the right fit", and "leave this unmanaged".
+
+- `E4A-02 Add managed-marker insertion for supported Markdown surfaces`
+  Depends on: `E4A-01`.
+  Acceptance: dotrepo can convert an existing supported Markdown file into a valid managed-region file without discarding prose outside the managed block.
+
+- `E4A-03 Add per-surface preview and diff before generate`
+  Depends on: `E4A-01`.
+  Acceptance: maintainers can preview the effect of dotrepo ownership on one surface at a time and see whether content would be rewritten, preserved in managed regions, or left unmanaged.
+
+- `E4A-04 Teach doctor to detect lossy full-generation choices`
+  Depends on: `E4-04`.
+  Acceptance: `doctor` warns when a file is opted into `generate` but the current renderer can only reproduce a narrow stub and recommends `partially_managed` or `skip` where that is the more truthful ownership mode.
+
+- `E4A-05 Make import choose safer compat defaults from on-disk files`
+  Depends on: `E4A-01`.
+  Acceptance: `import` defaults toward managed regions or `skip` for rich handwritten Markdown files and reserves `generate` for surfaces that are actually reproducible from current manifest data.
+
+- `E4A-06 Add native-repo CI scaffolding for validate, doctor, and generate --check`
+  Depends on: `E4-03`.
+  Acceptance: maintainers can scaffold a pinned CI loop that enforces `.repo` validity and managed-surface drift checks instead of relying on local convention alone.
 
 ## Epic 5: Tighten the operator and reviewer loop
 
