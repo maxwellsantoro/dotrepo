@@ -2004,10 +2004,10 @@ description = "Reviewed overlay"
         .expect("public export succeeds");
 
         let inventory = fs::read_to_string(out_dir.join("v0/repos/index.json")).expect("inventory");
-        assert!(inventory.contains("\"self\": \"/dotrepo/v0/repos/github.com/example/orbit\""));
-        assert!(
-            inventory.contains("\"trust\": \"/dotrepo/v0/repos/github.com/example/orbit/trust\"")
-        );
+        assert!(inventory
+            .contains("\"self\": \"/dotrepo/v0/repos/github.com/example/orbit/index.json\""));
+        assert!(inventory
+            .contains("\"trust\": \"/dotrepo/v0/repos/github.com/example/orbit/trust.json\""));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

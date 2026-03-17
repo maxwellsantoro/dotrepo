@@ -165,11 +165,12 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
         .expect("inventory entries");
     assert!(entries.iter().any(|entry| {
         entry["identity"]["repo"] == Value::String("orbit".into())
-            && entry["links"]["self"] == Value::String("/v0/repos/github.com/example/orbit".into())
+            && entry["links"]["self"]
+                == Value::String("/v0/repos/github.com/example/orbit/index.json".into())
     }));
     assert!(entries.iter().any(|entry| {
         entry["identity"]["repo"] == Value::String("nova".into())
             && entry["links"]["trust"]
-                == Value::String("/v0/repos/github.com/example/nova/trust".into())
+                == Value::String("/v0/repos/github.com/example/nova/trust.json".into())
     }));
 }

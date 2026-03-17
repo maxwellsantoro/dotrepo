@@ -40,6 +40,8 @@ The static hosted surface is the right default because it:
 - stable per-repository `trust.json` with selection, conflict, and claim context
 - the same claim-aware selection and conflict semantics used by local
   query/trust flows
+- a stable `queryTemplate` contract in public responses, even though the hosted
+  static tree does not precompute arbitrary query-path outputs yet
 
 ## What the public surface provides
 

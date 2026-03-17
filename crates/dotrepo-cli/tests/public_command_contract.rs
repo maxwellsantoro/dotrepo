@@ -73,11 +73,11 @@ fn public_summary_honors_base_path_in_links() {
     let json = parse_stdout_json(&output);
     assert_eq!(
         json["links"]["self"],
-        Value::String("/dotrepo/v0/repos/github.com/example/orbit".into())
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/index.json".into())
     );
     assert_eq!(
         json["links"]["trust"],
-        Value::String("/dotrepo/v0/repos/github.com/example/orbit/trust".into())
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/trust.json".into())
     );
 }
 

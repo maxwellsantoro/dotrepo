@@ -13,7 +13,7 @@ import json, sys
 meta = json.load(sys.stdin)
 print('api version:', meta['apiVersion'])
 print('snapshot digest:', meta['snapshotDigest'])
-print('generated at:', meta['freshness']['generatedAt'])
+print('generated at:', meta['generatedAt'])
 "
 ```
 
@@ -93,6 +93,16 @@ for entry in inventory["repositories"]:
         "recordStatus": trust["selection"]["record"]["record"]["status"],
     })
 PY
+```
+
+## 7. Query one field locally from the same index snapshot
+
+The static export ships summary and trust JSON files. It does not precompute
+arbitrary query-path files, so use the CLI when you want the `v0` query wrapper
+locally:
+
+```bash
+cargo run -p dotrepo-cli -- public query github.com sharkdp fd repo.description
 ```
 
 These examples work against the hosted deployment, a local export, or extracted

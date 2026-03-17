@@ -93,8 +93,8 @@ core library.
     }
   ],
   "links": {
-    "self": "/v0/repos/github.com/acme/widget/trust",
-    "repository": "/v0/repos/github.com/acme/widget",
+    "self": "/v0/repos/github.com/acme/widget/trust.json",
+    "repository": "/v0/repos/github.com/acme/widget/index.json",
     "queryTemplate": "/v0/repos/github.com/acme/widget/query?path={dot_path}"
   }
 }
@@ -150,8 +150,8 @@ The public wrapper should not:
   "conflicts": [],
   "links": {
     "self": "/v0/repos/github.com/acme/widget/query?path=repo.description",
-    "repository": "/v0/repos/github.com/acme/widget",
-    "trust": "/v0/repos/github.com/acme/widget/trust"
+    "repository": "/v0/repos/github.com/acme/widget/index.json",
+    "trust": "/v0/repos/github.com/acme/widget/trust.json"
   }
 }
 ```
@@ -163,6 +163,10 @@ The public query wrapper should:
 - preserve the same `selection` / `conflicts` reasoning
 - preserve competing values when they exist
 - stay compatible with the local no-silent-merge rule
+
+Static exports do not need to precompute a query file for every path. The query
+wrapper remains a separate public contract, while summary/trust links in public
+responses should still resolve to the concrete shipped JSON artifacts.
 
 The public wrapper should not:
 - reinterpret missing fields as empty strings

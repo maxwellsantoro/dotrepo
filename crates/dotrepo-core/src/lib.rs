@@ -1177,9 +1177,10 @@ fn public_links_with_base(
     base_path: &str,
 ) -> Result<PublicRepositoryLinks> {
     let base_path = normalize_public_base_path(base_path)?;
-    let repository = format!("{base_path}/v0/repos/{host}/{owner}/{repo}");
-    let trust = format!("{repository}/trust");
-    let query_template = format!("{repository}/query?path={{dot_path}}");
+    let repository_root = format!("{base_path}/v0/repos/{host}/{owner}/{repo}");
+    let repository = format!("{repository_root}/index.json");
+    let trust = format!("{repository_root}/trust.json");
+    let query_template = format!("{repository_root}/query?path={{dot_path}}");
     let index_path = format!("repos/{host}/{owner}/{repo}/");
 
     Ok(match kind {
@@ -1199,7 +1200,7 @@ fn public_links_with_base(
         },
         PublicLinkKind::Query => PublicRepositoryLinks {
             self_link: format!(
-                "{repository}/query?path={}",
+                "{repository_root}/query?path={}",
                 query_path.unwrap_or("{dot_path}")
             ),
             repository: Some(repository),
@@ -6015,7 +6016,7 @@ getting_started = "https://example.com/orbit/docs/start"
         );
         assert_eq!(
             json["links"]["self"],
-            Value::String("/v0/repos/github.com/example/orbit".into())
+            Value::String("/v0/repos/github.com/example/orbit/index.json".into())
         );
 
         fs::remove_dir_all(root).expect("temp dir removed");
@@ -6094,6 +6095,14 @@ description = "Competing description"
         assert_eq!(
             json["links"]["self"],
             Value::String("/v0/repos/github.com/example/orbit/query?path=repo.description".into())
+        );
+        assert_eq!(
+            json["links"]["repository"],
+            Value::String("/v0/repos/github.com/example/orbit/index.json".into())
+        );
+        assert_eq!(
+            json["links"]["trust"],
+            Value::String("/v0/repos/github.com/example/orbit/trust.json".into())
         );
 
         fs::remove_dir_all(root).expect("temp dir removed");

@@ -133,10 +133,17 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
             raise SystemExit(f"summary link does not honor base path {normalized_base}: {summary_link}")
         if not isinstance(trust_link, str) or not trust_link.startswith(normalized_base):
             raise SystemExit(f"trust link does not honor base path {normalized_base}: {trust_link}")
+        if not summary_link.endswith("/index.json"):
+            raise SystemExit(f"summary link should point at the exported index.json file: {summary_link}")
+        if not trust_link.endswith("/trust.json"):
+            raise SystemExit(f"trust link should point at the exported trust.json file: {trust_link}")
         if not isinstance(query_template, str) or not query_template.startswith(normalized_base):
             raise SystemExit(
                 f"query template does not honor base path {normalized_base}: {query_template}"
             )
+        for link in (summary_link, trust_link):
+            relative = link.removeprefix(normalized_base).lstrip("/")
+            ensure_file(public_dir / relative)
 
 
 def verify_tar_contains_prefix(archive_path: Path, prefix: str) -> None:

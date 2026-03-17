@@ -15,9 +15,9 @@
   "links": {
     "indexPath": "repos/github.com/example/orbit/",
     "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
-    "repository": "/v0/repos/github.com/example/orbit",
+    "repository": "/v0/repos/github.com/example/orbit/index.json",
     "self": "/v0/repos/github.com/example/orbit/query?path=repo.description",
-    "trust": "/v0/repos/github.com/example/orbit/trust"
+    "trust": "/v0/repos/github.com/example/orbit/trust.json"
   },
   "path": "repo.description",
   "selection": {

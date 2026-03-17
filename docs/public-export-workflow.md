@@ -91,7 +91,7 @@ cargo run -p dotrepo-cli -- public export --index-root index --out-dir public
 You may also add `--stale-after-hours <hours>` for an advisory staleness window.
 When deploying behind a subpath such as a GitHub Pages project site, add
 `--base-path /<repo-name>` so public links resolve correctly from the hosted
-root.
+root and point at the exported `index.json` / `trust.json` files.
 
 ## CI artifacts
 

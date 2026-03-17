@@ -17,8 +17,8 @@
       "name": "nova",
       "description": "Reviewed metadata with an accepted pending maintainer claim.",
       "links": {
-        "self": "/v0/repos/github.com/example/nova",
-        "trust": "/v0/repos/github.com/example/nova/trust",
+        "self": "/v0/repos/github.com/example/nova/index.json",
+        "trust": "/v0/repos/github.com/example/nova/trust.json",
         "queryTemplate": "/v0/repos/github.com/example/nova/query?path={dot_path}",
         "indexPath": "repos/github.com/example/nova/"
       }
@@ -33,8 +33,8 @@
       "name": "orbit",
       "description": "Reviewed orbital tooling metadata.",
       "links": {
-        "self": "/v0/repos/github.com/example/orbit",
-        "trust": "/v0/repos/github.com/example/orbit/trust",
+        "self": "/v0/repos/github.com/example/orbit/index.json",
+        "trust": "/v0/repos/github.com/example/orbit/trust.json",
         "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
         "indexPath": "repos/github.com/example/orbit/"
       }

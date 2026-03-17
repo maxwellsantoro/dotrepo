@@ -41,7 +41,7 @@ def render_repository_links(inventory: dict) -> str:
             "<li>"
             f"<strong>{html.escape(str(name))}</strong> "
             f"<span>{html.escape(label)}</span> "
-            f"<a href=\"{html.escape(summary)}\">summary.json</a> "
+            f"<a href=\"{html.escape(summary)}\">index.json</a> "
             f"<a href=\"{html.escape(trust)}\">trust.json</a>"
             "</li>"
         )

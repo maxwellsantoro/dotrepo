@@ -150,8 +150,8 @@ inspection belongs to the public query wrapper.
     }
   ],
   "links": {
-    "self": "/v0/repos/github.com/acme/widget",
-    "trust": "/v0/repos/github.com/acme/widget/trust",
+    "self": "/v0/repos/github.com/acme/widget/index.json",
+    "trust": "/v0/repos/github.com/acme/widget/trust.json",
     "queryTemplate": "/v0/repos/github.com/acme/widget/query?path={dot_path}",
     "indexPath": "/index/repos/github.com/acme/widget/"
   }
@@ -294,6 +294,9 @@ Recommended day-one fields:
 - `trust`
 - `queryTemplate`
 - `indexPath`
+
+For static exports, `self` and `trust` should point to the concrete shipped JSON
+artifacts, typically `index.json` and `trust.json`.
 
 `queryTemplate` is preferred over a partially specified concrete URL because the
 caller still needs to provide a dot-path.

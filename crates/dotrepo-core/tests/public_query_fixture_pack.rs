@@ -131,6 +131,14 @@ fn public_query_fixture_pack_covers_success_and_error_contracts() {
         orbit["links"]["self"],
         Value::String("/v0/repos/github.com/example/orbit/query?path=repo.description".into())
     );
+    assert_eq!(
+        orbit["links"]["repository"],
+        Value::String("/v0/repos/github.com/example/orbit/index.json".into())
+    );
+    assert_eq!(
+        orbit["links"]["trust"],
+        Value::String("/v0/repos/github.com/example/orbit/trust.json".into())
+    );
 
     let nova = serialize_outcome(public_repository_query_or_error(
         &fixture_index_root(),
