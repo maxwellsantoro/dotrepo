@@ -61,7 +61,8 @@ jobs:
       - name: Detect VS Code extension version
         id: version
         run: |
-          echo "value=$(node -p \"require('./editors/vscode/package.json').version\")" >> "$GITHUB_OUTPUT"
+          version=$(node -p "require('./editors/vscode/package.json').version")
+          echo "value=$version" >> "$GITHUB_OUTPUT"
       - name: Package VSIX
         working-directory: editors/vscode
         env:
