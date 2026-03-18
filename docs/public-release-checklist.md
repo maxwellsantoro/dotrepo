@@ -9,7 +9,7 @@ JSON tree.
 - `cargo run -p dotrepo-cli -- validate-index`
 - `cargo test -p dotrepo-core --test public_export_fixture_pack -- --nocapture`
 - `cargo test -p dotrepo-core --test public_contract_compatibility`
-- `cargo run -p dotrepo-cli -- public export --index-root index --out-dir public --base-path /dotrepo --generated-at 2026-03-10T18:30:00Z --stale-after 2026-03-11T18:30:00Z`
+- `cargo run -p dotrepo-cli -- public export --index-root index --out-dir public --base-path / --generated-at 2026-03-10T18:30:00Z --stale-after 2026-03-11T18:30:00Z`
 - `python3 scripts/render_public_pages_landing.py --input public`
 - `python3 scripts/sync_cloudflare_public_snapshot.py --input public --output cloudflare/hosted-query/public-snapshot`
 - `python3 scripts/package_public_export.py --input public --output-dir dist`
@@ -59,9 +59,7 @@ For the canonical freshness semantics used by these outputs, see
   exported public tree
 - the release gate smoke tests the Cloudflare Worker route against that same
   exported public tree
-- the current GitHub Pages workflow deploys the same static tree without
-  editing links by hand
-- the opt-in Cloudflare deploy workflow builds a Worker-backed hosted surface
+- the Cloudflare deploy workflow builds and deploys the canonical public origin
   from the reviewed export snapshot when enabled with repository vars/secrets
 - the `release-artifacts` workflow publishes tagged `dotrepo`,
   `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp` binary bundles plus

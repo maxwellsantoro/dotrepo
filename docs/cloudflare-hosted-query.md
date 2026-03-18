@@ -19,7 +19,7 @@ The Worker should:
 - keep `queryTemplate` same-origin and base-path-correct
 - remain GET-only and snapshot-based
 
-This replaces "GitHub Pages plus a future query runtime" with "one same-origin
+This replaced "GitHub Pages plus a future query runtime" with "one same-origin
 runtime that serves both the static public tree and query responses."
 
 ## What stays unchanged
@@ -150,7 +150,7 @@ Acceptance:
 
 - one deployable Worker project exists in-repo
 - CI can build the deploy artifact from the same reviewed export snapshot
-- deployment stops depending on GitHub Pages as the primary hosted surface
+- deployment no longer depends on GitHub Pages as the primary hosted surface
 
 ### E2-11 Extend the release gate for Worker smoke
 
@@ -184,15 +184,16 @@ As of now:
 - the release gate stages the reviewed export into the Worker, runs Worker
   tests, dry-runs Wrangler packaging, and smoke-tests `queryTemplate`
   resolution through `wrangler dev`
-- an opt-in GitHub Actions Cloudflare deploy workflow now exists in-repo and
-  smoke-tests the live deployed `workers.dev` URL after `wrangler deploy`
+- an opt-in GitHub Actions Cloudflare deploy workflow now exists in-repo,
+  deploys the Worker to `dotrepo.org`, and smoke-tests the live deployed custom
+  domain when it resolves, with `workers.dev` as a staging fallback
 - release bundles and the release gate already cover that runtime locally
-- a live `workers.dev` staging deployment now exists for that runtime, while
-  the primary documented public origin is still static GitHub Pages
+- a live `workers.dev` staging deployment exists for that runtime
+- the primary public origin is now `https://dotrepo.org/`, with
+  `https://www.dotrepo.org/` redirected permanently to the apex host
 
-So the remaining gap is no longer the Worker route or basic deployment
-workflow. It is the final production cutover from Pages to a real Cloudflare
-public origin.
+So the remaining gap is no longer Worker deployment. It is the broader project
+homepage on the same canonical origin.
 
 For the concrete local and GitHub setup for that workflow, see
 [`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).

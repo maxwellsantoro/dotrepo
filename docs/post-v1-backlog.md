@@ -18,9 +18,9 @@ Planning assumptions:
 - the repo now also has an in-repo Cloudflare Worker route, Worker tests, a
   Wrangler dry-run path, and release-gate smoke for emitted `queryTemplate`
   resolution through that Worker
-- the current deployed public origin is still static GitHub Pages, so the
-  remaining hosted-query work is deployment architecture rather than public
-  query semantics
+- the current deployed public origin is now `https://dotrepo.org/`, so the
+  remaining hosted-query work is public-site expansion, caching hardening, and
+  secondary-path cleanup rather than basic deployment architecture
 - sequencing should remain `stabilize -> compound -> expand`
 
 ## Program metrics
@@ -107,7 +107,7 @@ Primary surfaces:
 `docs/hosted-query-serving.md`,
 `docs/cloudflare-hosted-query.md`,
 `docs/public-surface.md`,
-`.github/workflows/public-pages.yml`,
+`.github/workflows/public-cloudflare.yml`,
 the current same-origin local runtime,
 the future serving/deployment layer,
 `crates/dotrepo-core/src/lib.rs` public wrapper entrypoints.
@@ -150,7 +150,7 @@ the future serving/deployment layer,
 
 - `E2-10 Add Wrangler project and deploy workflow`
   Depends on: `E2-09`.
-  Acceptance: the repo can build and deploy one Worker-based hosted public surface from the reviewed export snapshot instead of relying on GitHub Pages as the primary hosted origin.
+  Acceptance: the repo can build and deploy one Worker-based hosted public surface from the reviewed export snapshot as the canonical hosted origin.
 
 - `[done] E2-11 Extend the canonical release gate for Worker smoke`
   Depends on: `E2-09`, `E2-10`.
@@ -260,7 +260,7 @@ Primary surfaces:
 `docs/public-export-workflow.md`,
 `docs/public-release-checklist.md`,
 `.github/workflows/ci.yml`,
-`.github/workflows/public-pages.yml`.
+`.github/workflows/public-cloudflare.yml`.
 
 - `E5-01 Treat check_release_gate.py as the canonical operator release script`
   Depends on: none.
@@ -268,7 +268,7 @@ Primary surfaces:
 
 - `E5-02 Publish one operator runbook that maps directly onto scripts and CI artifacts`
   Depends on: `E5-01`.
-  Acceptance: one doc covers review order, claim correction handling, export packaging, hosted Pages inspection, and artifact upload names exactly as CI emits them.
+  Acceptance: one doc covers review order, claim correction handling, export packaging, hosted public-origin inspection, and artifact upload names exactly as CI emits them.
 
 - `E5-03 Add regression coverage for common operator mistakes`
   Depends on: `E5-01`.

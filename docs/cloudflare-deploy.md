@@ -133,21 +133,13 @@ one is declared in the Wrangler config. If the custom domain does not resolve
 yet from CI, the workflow falls back to the deployed `workers.dev` URL until
 Cloudflare DNS and certificate provisioning complete.
 
-## Final cutover from Pages
+## Production shape
 
-To replace GitHub Pages as the primary public origin, keep the Worker on the
-configured `dotrepo.org` custom domain and update the docs and release story to
-treat that origin as canonical.
+The production public origin is now `https://dotrepo.org/`.
 
-That cutover should happen only after:
-
-1. the Worker deploy is stable on `dotrepo.org`
-2. the deployed smoke checks keep passing in CI
-3. `DOTREPO_PUBLIC_BASE_PATH` is set to `/`
-4. Pages is no longer treated as the canonical public origin in the docs
-
-Until then, treat `workers.dev` as the staging surface and GitHub Pages as the
-primary documented public origin.
+`workers.dev` remains useful as a staging origin and as a fallback smoke target
+while custom-domain DNS or certificate provisioning catches up during deploys,
+but it is not the canonical public host.
 
 ## Recommended first run
 

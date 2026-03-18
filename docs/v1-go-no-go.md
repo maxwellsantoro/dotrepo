@@ -6,7 +6,7 @@ Use this as the release-decision sheet for `dotrepo 1.0.0`.
 
 Go when all of the following are true:
 
-1. Hosted Pages output is the default documented public story.
+1. Hosted public output is the default documented public story.
 2. Release-style install is clearly the normal path.
 3. One live accepted maintainer claim exists in the live `index/`.
 4. The shipped-surface docs can honestly stop calling dotrepo "not production-hardened."
@@ -14,19 +14,20 @@ Go when all of the following are true:
 No-go if any of those are still only true in proof artifacts, staged CI output,
 or contributor-only workflows.
 
-## 1. Hosted Pages output is the default public story
+## 1. Hosted public output is the default public story
 
 Pass when:
 
 - primary docs and release notes describe the hosted/static surface as the
   normal public consumption path
 - public examples point to hosted URLs first
-- the Pages deployment is described as downstream of the same exported tree and
-  accepted public contract users are meant to rely on
+- the Cloudflare deployment is described as downstream of the same exported
+  tree and accepted public contract users are meant to rely on
 
 Fail signs:
 
-- core docs still describe Pages mainly as an adjacent proof artifact
+- core docs still describe the deployed public origin mainly as an adjacent
+  proof artifact
 - release notes emphasize downloadable artifacts more than the hosted surface
 - reviewing the public tree still reads like an internal verification step
 

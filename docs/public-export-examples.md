@@ -1,15 +1,16 @@
 # Public export examples
 
 These examples show how to consume the dotrepo public JSON tree. The hosted
-GitHub Pages deployment is the current deployed consumption path; the same tree
-can also be inspected locally, from CI artifacts, or through the local
-same-origin hosted-query runtime.
+deployment at `https://dotrepo.org/` is the current primary consumption path;
+the same tree can also be inspected locally, from CI artifacts, through the
+local same-origin hosted-query runtime, or through the `workers.dev` staging
+origin when needed.
 
 ## 1. Fetch hosted snapshot metadata
 
 ```bash
-# Replace BASE_URL with the current hosted public URL (for example the GitHub
-# Pages URL today)
+# Replace BASE_URL with the current hosted public URL (for example
+# https://dotrepo.org today)
 curl -s "$BASE_URL/v0/meta.json" | python3 -c "
 import json, sys
 meta = json.load(sys.stdin)
@@ -114,19 +115,19 @@ cargo run -p dotrepo-cli -- public query github.com sharkdp fd repo.description
 cargo run -p dotrepo-cli -- public export \
   --index-root index \
   --out-dir public \
-  --base-path /dotrepo
+  --base-path /
 
 cargo run -p dotrepo-cli --bin dotrepo-public-query -- \
   --index-root index \
   --public-root public \
   --bind 127.0.0.1:3000 \
-  --base-path /dotrepo
+  --base-path /
 ```
 
 Then:
 
 ```bash
-curl -s "http://127.0.0.1:3000/dotrepo/v0/repos/index.json" | python3 -c "
+curl -s "http://127.0.0.1:3000/v0/repos/index.json" | python3 -c "
 import json, sys
 inventory = json.load(sys.stdin)
 print(inventory['repositories'][0]['links']['queryTemplate'])

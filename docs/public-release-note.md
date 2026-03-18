@@ -5,7 +5,8 @@ This note is the current release summary for dotrepo's public JSON tree.
 ## What exists now
 
 The current release includes:
-- a static `public/v0/` JSON tree deployed through GitHub Pages
+- a `public/v0/` JSON tree and same-origin query route deployed on
+  `https://dotrepo.org/`
 - snapshot metadata in `meta.json` with digest and freshness
 - a bundle-level repository inventory in `repos/index.json`
 - per-repository summary and trust documents
@@ -14,9 +15,9 @@ The current release includes:
   `github.com/maxwellsantoro/ries-rs`, linked to a published canonical `.repo`
 - a CI artifact for the loose tree
 - a CI artifact for a versioned review bundle
-- a GitHub Pages deployment workflow with root landing page
+- a Cloudflare deployment workflow for the canonical public origin
 - release-bundle smoke checks that prove emitted `queryTemplate` links resolve
-  against the shipped runtime on one origin
+  against the shipped runtime and deployed Worker on one origin
 
 ## What this provides
 
@@ -28,7 +29,7 @@ The hosted public surface provides:
 
 ## What to inspect first
 
-Start with the hosted deployment URL, then:
+Start with `https://dotrepo.org/`, then:
 - `v0/meta.json` for snapshot metadata
 - `v0/repos/index.json` for the repository inventory
 - one repository `v0/repos/<host>/<owner>/<repo>/index.json` for a summary
@@ -36,7 +37,8 @@ Start with the hosted deployment URL, then:
 
 For same-origin hosted-query review, start with
 `scripts/check_release_gate.py`, which smoke tests the shipped
-`dotrepo-public-query` runtime against the exported tree.
+`dotrepo-public-query` runtime against the exported tree and also verifies the
+Cloudflare Worker path in release review.
 
 For the current operator and review loop, see
 [`docs/public-export-workflow.md`](./public-export-workflow.md).

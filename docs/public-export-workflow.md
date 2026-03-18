@@ -5,8 +5,8 @@ tree and its hosted deployment.
 
 ## What exists now
 
-The current deployed public surface is a static JSON tree hosted through GitHub
-Pages, rooted at:
+The current deployed public surface is a Cloudflare Worker-hosted JSON tree on
+`https://dotrepo.org/`, rooted at:
 
 ```text
 public/
@@ -102,9 +102,10 @@ cargo run -p dotrepo-cli -- public export --index-root index --out-dir public
 ```
 
 You may also add `--stale-after-hours <hours>` for an advisory staleness window.
-When deploying behind a subpath such as the current GitHub Pages project site, add
+When deploying behind a subpath such as a project-site-style static host, add
 `--base-path /<repo-name>` so public links resolve correctly from the hosted
-root and point at the exported `index.json` / `trust.json` files.
+root and point at the exported `index.json` / `trust.json` files. The current
+Cloudflare custom-domain deployment on `dotrepo.org` uses `--base-path /`.
 
 ## CI artifacts
 
@@ -118,7 +119,8 @@ resolution through `wrangler dev`, and uploads the resulting artifacts.
 
 Current behavior:
 - the artifact is generated from the real `index/` tree
-- CI exercises the hosted `--base-path /dotrepo` path, not just root-relative links
+- CI exercises both the canonical root-path Cloudflare deployment and the
+  release-gate `/dotrepo` hosted-path review surface
 - CI uses fixed review timestamps for inspectable, stable output
 - CI also packages a versioned review bundle from the exported tree
 - CI also packages a Linux install bundle and a tagged-style VSIX as release-gate artifacts
@@ -142,17 +144,15 @@ upstream native `.repo`.
 
 ## Current deployed hosting
 
-`.github/workflows/public-pages.yml`:
+`.github/workflows/public-cloudflare.yml`:
 
 - validates the index
-- exports the public tree with a hosted-aware `--base-path`
+- exports the public tree with the Cloudflare base path
 - renders a root landing page with `scripts/render_public_pages_landing.py`
-- uploads and deploys to GitHub Pages
-
-Separately, `.github/workflows/public-cloudflare.yml` can stage that same
-reviewed export into the in-repo Worker project, deploy it through Wrangler
-when the required repository vars and Cloudflare secrets are enabled, and
-smoke-test the live deployed Worker URL against the same reviewed export.
+- stages the snapshot into the in-repo Worker project
+- deploys to `dotrepo.org`
+- smoke-tests the deployed custom domain when it resolves, otherwise falls back
+  to the deployed `workers.dev` staging origin
 
 The export tree is the source of truth. The hosted surface deploys the same
 `public/` output.
@@ -161,9 +161,7 @@ For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.
 The Cloudflare Worker path can now also serve the same exported snapshot
 locally after staging the reviewed tree into the Worker project. The remaining
-production gap is promoting the current `workers.dev` staging deployment into
-the final Cloudflare public origin and replacing the current static-only GitHub
-Pages deployment.
+operational work is broader site development on `dotrepo.org`.
 
 ## What should stay stable vs variable
 

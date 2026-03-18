@@ -6,7 +6,7 @@ It is intentionally narrower than the public RFCs:
 
 - RFCs 0016 through 0019 define the public contract
 - this doc defines the first runtime shape for serving that contract beyond the
-  current GitHub Pages static tree
+  now-live Cloudflare public tree
 
 For the selected deployment target and rewrite boundary after the local
 same-origin runtime, see
@@ -27,8 +27,8 @@ What already exists:
   separate static host
 - release bundles and the release gate already include and smoke test that
   runtime
-- public summary and trust responses are exported as a static tree and deployed
-  through GitHub Pages
+- public summary and trust responses are exported as a static tree and now
+  served on `https://dotrepo.org/` through the Cloudflare Worker public origin
 - public responses already emit a stable `queryTemplate`
 - public export now also emits repo-scoped `query-input/` artifacts that can
   reproduce the current query wrapper from snapshot data
@@ -37,9 +37,7 @@ What already exists:
 
 What does not exist yet:
 
-- a deployed route behind the same public contract family as summary and trust
-- a production deployment that replaces the current static-only GitHub Pages
-  hosting with a same-origin hosted query surface
+- the broader homepage and non-JSON project surface on that same public origin
 
 ## Runtime decision
 
