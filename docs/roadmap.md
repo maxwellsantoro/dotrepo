@@ -71,6 +71,8 @@ See [`docs/public-export-workflow.md`](./public-export-workflow.md) for the
 current local-review and CI-artifact loop over the exported public JSON tree.
 See [`docs/public-surface.md`](./public-surface.md) for the public surface
 architecture.
+See [`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md) for the
+planned Cloudflare deployment target for same-origin hosted query serving.
 See [`docs/public-release-note.md`](./public-release-note.md) and
 [`docs/public-export-examples.md`](./public-export-examples.md) for the current
 release summary and consumer examples.

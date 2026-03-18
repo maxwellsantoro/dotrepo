@@ -29,6 +29,8 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   tests that extract and run the shipped binaries from the packaged tarball
 - A local same-origin hosted-query runtime that can serve both the exported
   `public/` tree and query responses from one process
+- A documented Cloudflare Worker + Static Assets deployment plan for replacing
+  the current Pages-only hosted query path without changing the `v0` contract
 - An explicit release-gate script and CI job that package the hosted public
   tree, install bundles, and VS Code release asset from one reproducible flow,
   and serve as the canonical operator review entrypoint for public-surface
@@ -86,6 +88,8 @@ For the operator/reviewer loop over the exported public JSON tree, see
 [`docs/public-export-workflow.md`](./public-export-workflow.md).
 For the public surface architecture, see
 [`docs/public-surface.md`](./public-surface.md).
+For the planned Cloudflare deployment target for hosted query, see
+[`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md).
 For the release note and usage examples, see
 [`docs/public-release-note.md`](./public-release-note.md) and
 [`docs/public-export-examples.md`](./public-export-examples.md).

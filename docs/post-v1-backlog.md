@@ -96,6 +96,7 @@ without inventing a second API dialect or broadening into search.
 Primary surfaces:
 `rfcs/0019-public-trust-and-query-wrappers.md`,
 `docs/hosted-query-serving.md`,
+`docs/cloudflare-hosted-query.md`,
 `docs/public-surface.md`,
 `.github/workflows/public-pages.yml`,
 the future serving/deployment layer,
@@ -120,6 +121,30 @@ the future serving/deployment layer,
 - `E2-05 Make queryTemplate resolve to a real hosted query surface`
   Depends on: `E2-03`.
   Acceptance: `queryTemplate` links emitted in inventory, summary, and trust responses point at a documented and deployed handler rather than a future placeholder.
+
+- `E2-06 Select Cloudflare Worker + Static Assets as the hosted query runtime`
+  Depends on: `E2-05`.
+  Acceptance: one design note freezes Cloudflare as the first deployed target, keeps the `v0` contract unchanged, requires same-origin query resolution, and treats R2 as a scale fallback rather than a day-one dependency.
+
+- `E2-07 Add export-time query input artifacts for edge serving`
+  Depends on: `E2-06`.
+  Acceptance: export produces one repo-level query-input artifact with enough snapshot data to reproduce current query semantics without runtime TOML parsing or checked-in index traversal.
+
+- `E2-08 Refactor query serving into a pure snapshot function`
+  Depends on: `E2-07`.
+  Acceptance: one function can produce the current hosted query response or public error shape from identity, dot path, loaded query-input data, freshness, and base path, independent of filesystem-bound runtime assumptions.
+
+- `E2-09 Implement the Cloudflare Worker query route`
+  Depends on: `E2-08`.
+  Acceptance: the Worker serves the current `v0` query route semantics, falls through to static assets for non-query requests, and preserves the existing base-path and error vocabulary.
+
+- `E2-10 Add Wrangler project and deploy workflow`
+  Depends on: `E2-09`.
+  Acceptance: the repo can build and deploy one Worker-based hosted public surface from the reviewed export snapshot instead of relying on GitHub Pages as the primary hosted origin.
+
+- `E2-11 Extend the canonical release gate for Worker smoke`
+  Depends on: `E2-09`, `E2-10`.
+  Acceptance: the release gate proves an emitted `queryTemplate` resolves against the Worker-hosted same-origin surface before deployment changes are treated as release-ready.
 
 ## Epic 3: Harden freshness and cache semantics
 

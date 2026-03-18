@@ -93,6 +93,7 @@ Then, if needed:
 Start with:
 - [`docs/public-export-workflow.md`](./public-export-workflow.md)
 - [`docs/hosted-query-serving.md`](./hosted-query-serving.md)
+- [`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md)
 - [`rfcs/0017-public-repository-summary-response.md`](../rfcs/0017-public-repository-summary-response.md)
 - [`rfcs/0018-static-public-serving-and-freshness.md`](../rfcs/0018-static-public-serving-and-freshness.md)
 - [`rfcs/0019-public-trust-and-query-wrappers.md`](../rfcs/0019-public-trust-and-query-wrappers.md)
@@ -106,3 +107,5 @@ deploying it alongside or instead of the current Pages-only setup, and
 hardening freshness and caching for the combined hosted deployment. For the freshness definitions that apply to those responses, see
 [`docs/public-freshness.md`](./public-freshness.md). For the first hosted query
 runtime shape, see [`docs/hosted-query-serving.md`](./hosted-query-serving.md).
+For the selected Cloudflare deployment plan, see
+[`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md).

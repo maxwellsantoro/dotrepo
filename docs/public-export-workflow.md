@@ -102,7 +102,9 @@ root and point at the exported `index.json` / `trust.json` files.
 The canonical release review entrypoint is `scripts/check_release_gate.py`. The
 main CI workflow runs that script, which builds the public tree from the seed
 `index/`, packages the release-style install assets, smoke tests the release
-binaries, and uploads the resulting artifacts.
+binaries, smoke tests same-origin hosted-query resolution from the shipped
+`dotrepo-public-query` binary against the exported tree, and uploads the
+resulting artifacts.
 
 Current behavior:
 - the artifact is generated from the real `index/` tree
@@ -111,6 +113,8 @@ Current behavior:
 - CI also packages a versioned review bundle from the exported tree
 - CI also packages a Linux install bundle and a tagged-style VSIX as release-gate artifacts
 - CI smoke tests the release binaries from the extracted tarball
+- CI smoke tests that an emitted `queryTemplate` can resolve against the
+  shipped hosted-query runtime on the same origin
 - artifact retention is 14 days
 - export generation failures fail CI directly
 

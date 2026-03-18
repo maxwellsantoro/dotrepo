@@ -5,10 +5,14 @@ import json
 import os
 import shlex
 import shutil
+import socket
 import subprocess
 import tarfile
 import tempfile
+import time
 import tomllib
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 DEFAULT_GENERATED_AT = "2026-03-10T18:30:00Z"
@@ -153,8 +157,29 @@ def verify_tar_contains_prefix(archive_path: Path, prefix: str) -> None:
         raise SystemExit(f"{archive_path} does not contain expected root prefix {prefix}")
 
 
+def unused_addr() -> str:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(("127.0.0.1", 0))
+        host, port = sock.getsockname()
+    return f"{host}:{port}"
+
+
+def http_get_text(url: str) -> tuple[int, str]:
+    try:
+        with urllib.request.urlopen(url, timeout=5) as response:
+            return response.status, response.read().decode()
+    except urllib.error.HTTPError as err:
+        return err.code, err.read().decode()
+
+
+def normalize_base_path(base_path: str) -> str:
+    if base_path == "/":
+        return "/"
+    return base_path.rstrip("/")
+
+
 def smoke_test_release_bundle(
-    archive_path: Path, version: str, target: str, repo_root: Path
+    archive_path: Path, version: str, target: str, repo_root: Path, public_dir: Path, base_path: str
 ) -> None:
     """Extract the release tarball and run the shipped binaries."""
     with tempfile.TemporaryDirectory(prefix="dotrepo-smoke-") as tmp:
@@ -197,6 +222,78 @@ def smoke_test_release_bundle(
                 raise SystemExit(
                     f"dotrepo validate failed (exit {result.returncode}): {result.stderr}"
                 )
+
+        server_addr = unused_addr()
+        query_bin = str(bin_dir / "dotrepo-public-query")
+        print("  smoke: dotrepo-public-query serves same-origin public tree", flush=True)
+        server = subprocess.Popen(
+            [
+                query_bin,
+                "--index-root",
+                str(repo_root / "index"),
+                "--public-root",
+                str(public_dir),
+                "--bind",
+                server_addr,
+                "--base-path",
+                base_path,
+                "--generated-at",
+                DEFAULT_GENERATED_AT,
+                "--stale-after",
+                DEFAULT_STALE_AFTER,
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        try:
+            deadline = time.time() + 5
+            healthz_url = f"http://{server_addr}/healthz"
+            while time.time() < deadline:
+                if server.poll() is not None:
+                    stderr = server.stderr.read() if server.stderr else ""
+                    raise SystemExit(
+                        f"dotrepo-public-query exited early during smoke test: {stderr}"
+                    )
+                status, body = http_get_text(healthz_url)
+                if status == 200 and body == "ok":
+                    break
+                time.sleep(0.05)
+            else:
+                raise SystemExit("dotrepo-public-query did not become ready during smoke test")
+
+            base = normalize_base_path(base_path)
+            inventory_url = f"http://{server_addr}{base}/v0/repos/index.json"
+            status, body = http_get_text(inventory_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin inventory smoke failed ({status}) for {inventory_url}: {body}"
+                )
+            inventory = json.loads(body)
+            repositories = inventory.get("repositories")
+            if not isinstance(repositories, list) or not repositories:
+                raise SystemExit("same-origin inventory smoke found no repositories")
+            query_template = repositories[0]["links"]["queryTemplate"]
+            if not isinstance(query_template, str):
+                raise SystemExit("same-origin inventory smoke found no queryTemplate")
+            query_url = f"http://{server_addr}{query_template.replace('{dot_path}', 'repo.description')}"
+            status, body = http_get_text(query_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin queryTemplate smoke failed ({status}) for {query_url}: {body}"
+                )
+            query_response = json.loads(body)
+            if query_response.get("path") != "repo.description":
+                raise SystemExit("same-origin queryTemplate smoke returned unexpected path")
+            links = query_response.get("links", {})
+            self_link = links.get("self")
+            if not isinstance(self_link, str) or not self_link.startswith(base):
+                raise SystemExit(
+                    f"same-origin queryTemplate smoke returned unexpected self link: {self_link}"
+                )
+        finally:
+            server.kill()
+            server.wait(timeout=5)
 
 
 def main() -> int:
@@ -328,7 +425,7 @@ def main() -> int:
 
     print("")
     print("release install smoke test")
-    smoke_test_release_bundle(release_bundle, version, target, repo_root)
+    smoke_test_release_bundle(release_bundle, version, target, repo_root, public_dir, args.base_path)
     print("  all release binaries passed smoke test")
 
     print("")

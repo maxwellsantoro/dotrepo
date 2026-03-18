@@ -8,6 +8,10 @@ It is intentionally narrower than the public RFCs:
 - this doc defines the first runtime shape for serving that contract beyond the
   current GitHub Pages static tree
 
+For the selected deployment target and rewrite boundary after the local
+same-origin runtime, see
+[`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md).
+
 ## Current state
 
 What already exists:
@@ -44,6 +48,10 @@ It should not:
 
 The static export remains primary for summary and trust. The query service is a
 thin runtime wrapper over the same `v0` public contract family.
+
+This document still defines the runtime contract and operational boundaries.
+The Cloudflare note defines the planned deployed implementation of that same
+contract.
 
 ## Recommended runtime shape
 

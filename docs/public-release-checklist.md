@@ -30,6 +30,8 @@ For the canonical freshness semantics used by these outputs, see
 - the packaged bundle extracts to one self-describing root directory
 - the release binary bundle contains `dotrepo`, `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp`
 - the release binary smoke test passes (binaries execute from extracted bundle)
+- the release gate proves a shipped `dotrepo-public-query` binary can serve the
+  exported public tree and resolve a real emitted `queryTemplate` on one origin
 - the VS Code release asset installs from a tagged `.vsix`
 
 ## Review questions
@@ -48,6 +50,8 @@ For the canonical freshness semantics used by these outputs, see
   - `release-gate-vscode-vsix`
 - the same script is the local and CI release review gate
 - the release gate smoke tests the extracted release binaries
+- the release gate smoke tests same-origin hosted query resolution against the
+  exported public tree
 - the GitHub Pages workflow deploys the same tree without editing links by hand
 - the `release-artifacts` workflow publishes tagged CLI/LSP/MCP bundles and a VSIX
 - the release note is current
