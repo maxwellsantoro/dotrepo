@@ -7,6 +7,25 @@ export const PUBLIC_ERROR_CODES = {
   internalError: "internal_error"
 };
 
+function normalizeHost(host) {
+  return (host ?? "").trim().toLowerCase();
+}
+
+function maybeRedirectToCanonicalHost(request, env) {
+  const canonicalHost = normalizeHost(env.CANONICAL_HOST);
+  if (canonicalHost === "") {
+    return null;
+  }
+
+  const url = new URL(request.url);
+  if (normalizeHost(url.hostname) === canonicalHost) {
+    return null;
+  }
+
+  url.hostname = canonicalHost;
+  return Response.redirect(url.toString(), 308);
+}
+
 function normalizeBasePath(basePath) {
   const trimmed = (basePath ?? "/").trim();
   if (trimmed === "" || trimmed === "/") {
@@ -259,6 +278,11 @@ async function serveStaticAsset(request, env, strippedPath) {
 }
 
 export async function handleRequest(request, env) {
+  const redirect = maybeRedirectToCanonicalHost(request, env);
+  if (redirect) {
+    return redirect;
+  }
+
   const basePath = normalizeBasePath(env.BASE_PATH);
   const url = new URL(request.url);
 

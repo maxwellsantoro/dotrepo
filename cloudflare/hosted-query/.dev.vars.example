@@ -5,4 +5,5 @@
 # For local deploy/auth, export CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID
 # in your shell instead.
 
-BASE_PATH=/dotrepo
+BASE_PATH=/
+CANONICAL_HOST=dotrepo.org

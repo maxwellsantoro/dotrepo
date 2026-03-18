@@ -222,6 +222,25 @@ test("does not expose query-input artifacts on the public origin", async () => {
   assert.equal(await response.text(), "not found");
 });
 
+test("redirects non-canonical hosts to the configured apex host", async () => {
+  const env = {
+    ASSETS: makeAssets(new Map()),
+    BASE_PATH: "/",
+    CANONICAL_HOST: "dotrepo.org"
+  };
+
+  const response = await handleRequest(
+    new Request("https://www.dotrepo.org/v0/repos/index.json?x=1"),
+    env
+  );
+
+  assert.equal(response.status, 308);
+  assert.equal(
+    response.headers.get("location"),
+    "https://dotrepo.org/v0/repos/index.json?x=1"
+  );
+});
+
 test("preserves equal-authority conflict values from the snapshot", async () => {
   const snapshot = {
     apiVersion: "v0",

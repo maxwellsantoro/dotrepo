@@ -17,14 +17,15 @@ It separates three concerns:
 
 ## Local Worker runtime vars
 
-For local `wrangler dev`, the only runtime variable currently used is
-`BASE_PATH`.
+For local `wrangler dev`, the runtime variables currently used are `BASE_PATH`
+and `CANONICAL_HOST`.
 
 The Worker already defaults that in `wrangler.jsonc`:
 
 ```jsonc
 "vars": {
-  "BASE_PATH": "/dotrepo"
+  "BASE_PATH": "/",
+  "CANONICAL_HOST": "dotrepo.org"
 }
 ```
 
@@ -32,7 +33,7 @@ If you want to override it locally:
 
 1. Copy `cloudflare/hosted-query/.dev.vars.example` to
    `cloudflare/hosted-query/.dev.vars`
-2. Edit `BASE_PATH`
+2. Edit `BASE_PATH` or `CANONICAL_HOST` if you need local overrides
 
 Example:
 
@@ -72,9 +73,9 @@ The deploy workflow is opt-in. It only runs when the repo variable
 Set these in GitHub repository settings under Variables:
 
 - `CLOUDFLARE_PUBLIC_DEPLOY_ENABLED=true`
-- `DOTREPO_PUBLIC_BASE_PATH=/dotrepo`
+- `DOTREPO_PUBLIC_BASE_PATH=/`
 
-`DOTREPO_PUBLIC_BASE_PATH` is optional; the workflow defaults to `/dotrepo`.
+`DOTREPO_PUBLIC_BASE_PATH` is optional; the workflow now defaults to `/`.
 
 ### Repository secrets
 
@@ -108,30 +109,43 @@ snapshot family.
 
 Right now the Worker config publishes to `workers.dev`.
 
-That means the Cloudflare workflow can publish a live staging origin such as:
+It also now declares `dotrepo.org` as the production custom domain in
+`cloudflare/hosted-query/wrangler.jsonc`.
+
+The Worker also declares `www.dotrepo.org` and redirects it permanently to
+`dotrepo.org`, preserving path and query string. That keeps one canonical host
+for the future homepage and the hosted public API.
+
+That means the Cloudflare workflow can publish to:
 
 ```text
-https://dotrepo-public-hosted-query.<account-subdomain>.workers.dev/dotrepo/
+https://dotrepo.org/
 ```
 
-This is useful for proving the Worker deployment path end to end, but it is not
-the final public-origin cutover.
+and continue to keep a `workers.dev` staging origin such as:
+
+```text
+https://dotrepo-public-hosted-query.<account-subdomain>.workers.dev/
+```
+
+The workflow now prefers the custom domain for the post-deploy smoke check when
+one is declared in the Wrangler config.
 
 ## Final cutover from Pages
 
-To replace GitHub Pages as the primary public origin, configure a real
-Cloudflare zone route or custom domain for this Worker and then update
-`cloudflare/hosted-query/wrangler.jsonc` accordingly.
+To replace GitHub Pages as the primary public origin, keep the Worker on the
+configured `dotrepo.org` custom domain and update the docs and release story to
+treat that origin as canonical.
 
 That cutover should happen only after:
 
-1. the Worker deploy is stable on `workers.dev`
+1. the Worker deploy is stable on `dotrepo.org`
 2. the deployed smoke checks keep passing in CI
-3. the chosen public domain and base path are finalized
+3. `DOTREPO_PUBLIC_BASE_PATH` is set to `/`
 4. Pages is no longer treated as the canonical public origin in the docs
 
-Until then, treat `workers.dev` as the live staging surface and GitHub Pages as
-the primary documented public origin.
+Until then, treat `workers.dev` as the staging surface and GitHub Pages as the
+primary documented public origin.
 
 ## Recommended first run
 

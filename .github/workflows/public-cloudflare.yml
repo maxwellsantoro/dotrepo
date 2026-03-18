@@ -26,9 +26,17 @@ jobs:
         run: |
           value="${{ vars.DOTREPO_PUBLIC_BASE_PATH }}"
           if [ -z "$value" ]; then
-            value="/dotrepo"
+            value="/"
           fi
           echo "value=$value" >> "$GITHUB_OUTPUT"
+      - name: Validate custom-domain base path
+        shell: bash
+        run: |
+          custom_domain_count="$(python3 -c 'import json; from pathlib import Path; config = json.loads(Path("cloudflare/hosted-query/wrangler.jsonc").read_text(encoding="utf-8")); print(sum(1 for route in config.get("routes", []) if route.get("custom_domain") is True))')"
+          if [ "$custom_domain_count" -gt 0 ] && [ "${{ steps.base_path.outputs.value }}" != "/" ]; then
+            echo "Cloudflare custom-domain deploys must use DOTREPO_PUBLIC_BASE_PATH=/" >&2
+            exit 1
+          fi
       - name: Validate index before export
         run: cargo run -p dotrepo-cli -- validate-index
       - name: Build reviewed public tree for Cloudflare
@@ -55,6 +63,12 @@ jobs:
         env:
           npm_config_cache: ${{ runner.temp }}/npm-cache
         run: npm test
+      - name: Resolve smoke origin
+        id: smoke_origin
+        shell: bash
+        run: |
+          value="$(python3 -c 'import json; from pathlib import Path; config = json.loads(Path("cloudflare/hosted-query/wrangler.jsonc").read_text(encoding="utf-8")); routes = [route.get("pattern") for route in config.get("routes", []) if route.get("custom_domain") is True and isinstance(route.get("pattern"), str)]; print(f"https://{routes[0]}" if routes else "")')"
+          echo "value=$value" >> "$GITHUB_OUTPUT"
       - name: Deploy Worker
         id: deploy
         working-directory: cloudflare/hosted-query
@@ -75,8 +89,11 @@ jobs:
           echo "url=$deploy_url" >> "$GITHUB_OUTPUT"
       - name: Smoke deployed Worker
         env:
-          DEPLOY_URL: ${{ steps.deploy.outputs.url }}
+          DEPLOY_URL: ${{ steps.smoke_origin.outputs.value }}
         run: |
+          if [ -z "$DEPLOY_URL" ]; then
+            DEPLOY_URL="${{ steps.deploy.outputs.url }}"
+          fi
           python3 scripts/smoke_cloudflare_public_deploy.py \
             --deploy-url "$DEPLOY_URL" \
             --base-path "${{ steps.base_path.outputs.value }}" \
