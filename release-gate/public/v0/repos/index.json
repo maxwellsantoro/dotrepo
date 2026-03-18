@@ -17,9 +17,9 @@
       "name": "ripgrep",
       "description": "Line-oriented search tool that recursively searches the current directory for a regex pattern.",
       "links": {
-        "self": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/index.json",
-        "trust": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/trust.json",
-        "queryTemplate": "/dotrepo/v0/repos/github.com/BurntSushi/ripgrep/query?path={dot_path}",
+        "self": "/v0/repos/github.com/BurntSushi/ripgrep/index.json",
+        "trust": "/v0/repos/github.com/BurntSushi/ripgrep/trust.json",
+        "queryTemplate": "/v0/repos/github.com/BurntSushi/ripgrep/query?path={dot_path}",
         "indexPath": "repos/github.com/BurntSushi/ripgrep/"
       }
     },
@@ -33,9 +33,9 @@
       "name": "GitHub CLI",
       "description": "GitHub's official command line tool",
       "links": {
-        "self": "/dotrepo/v0/repos/github.com/cli/cli/index.json",
-        "trust": "/dotrepo/v0/repos/github.com/cli/cli/trust.json",
-        "queryTemplate": "/dotrepo/v0/repos/github.com/cli/cli/query?path={dot_path}",
+        "self": "/v0/repos/github.com/cli/cli/index.json",
+        "trust": "/v0/repos/github.com/cli/cli/trust.json",
+        "queryTemplate": "/v0/repos/github.com/cli/cli/query?path={dot_path}",
         "indexPath": "repos/github.com/cli/cli/"
       }
     },
@@ -49,9 +49,9 @@
       "name": "RIES-RS",
       "description": "High-performance Rust reimplementation of Robert Munafo's RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it - now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support.",
       "links": {
-        "self": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/index.json",
-        "trust": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json",
-        "queryTemplate": "/dotrepo/v0/repos/github.com/maxwellsantoro/ries-rs/query?path={dot_path}",
+        "self": "/v0/repos/github.com/maxwellsantoro/ries-rs/index.json",
+        "trust": "/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json",
+        "queryTemplate": "/v0/repos/github.com/maxwellsantoro/ries-rs/query?path={dot_path}",
         "indexPath": "repos/github.com/maxwellsantoro/ries-rs/"
       }
     },
@@ -65,9 +65,9 @@
       "name": "bat",
       "description": "A cat(1) clone with syntax highlighting and Git integration.",
       "links": {
-        "self": "/dotrepo/v0/repos/github.com/sharkdp/bat/index.json",
-        "trust": "/dotrepo/v0/repos/github.com/sharkdp/bat/trust.json",
-        "queryTemplate": "/dotrepo/v0/repos/github.com/sharkdp/bat/query?path={dot_path}",
+        "self": "/v0/repos/github.com/sharkdp/bat/index.json",
+        "trust": "/v0/repos/github.com/sharkdp/bat/trust.json",
+        "queryTemplate": "/v0/repos/github.com/sharkdp/bat/query?path={dot_path}",
         "indexPath": "repos/github.com/sharkdp/bat/"
       }
     },
@@ -81,9 +81,9 @@
       "name": "fd",
       "description": "A simple, fast and user-friendly alternative to 'find'.",
       "links": {
-        "self": "/dotrepo/v0/repos/github.com/sharkdp/fd/index.json",
-        "trust": "/dotrepo/v0/repos/github.com/sharkdp/fd/trust.json",
-        "queryTemplate": "/dotrepo/v0/repos/github.com/sharkdp/fd/query?path={dot_path}",
+        "self": "/v0/repos/github.com/sharkdp/fd/index.json",
+        "trust": "/v0/repos/github.com/sharkdp/fd/trust.json",
+        "queryTemplate": "/v0/repos/github.com/sharkdp/fd/query?path={dot_path}",
         "indexPath": "repos/github.com/sharkdp/fd/"
       }
     }

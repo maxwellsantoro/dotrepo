@@ -188,7 +188,7 @@ test("returns repository_not_found when query-input is absent", async () => {
 
 test("falls through to static assets after stripping the configured base path", async () => {
   const files = new Map([
-    ["/index.html", "<html>dotrepo</html>"],
+    ["/", "<html>dotrepo</html>"],
     ["/v0/repos/index.json", "{\"ok\":true}"]
   ]);
   const env = { ASSETS: makeAssets(files), BASE_PATH: "/dotrepo" };
@@ -206,6 +206,19 @@ test("falls through to static assets after stripping the configured base path", 
   );
   assert.equal(inventoryResponse.status, 200);
   assert.equal(await inventoryResponse.text(), "{\"ok\":true}");
+});
+
+test("serves the root document without redirecting through /index.html", async () => {
+  const files = new Map([["/", "<html>home</html>"]]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/" };
+
+  const response = await handleRequest(
+    new Request("https://dotrepo.org/"),
+    env
+  );
+
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), "<html>home</html>");
 });
 
 test("does not expose query-input artifacts on the public origin", async () => {

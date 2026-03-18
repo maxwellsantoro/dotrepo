@@ -17,7 +17,7 @@ from pathlib import Path
 
 DEFAULT_GENERATED_AT = "2026-03-10T18:30:00Z"
 DEFAULT_STALE_AFTER = "2026-03-11T18:30:00Z"
-DEFAULT_BASE_PATH = "/dotrepo"
+DEFAULT_BASE_PATH = "/"
 
 
 def parse_args() -> argparse.Namespace:
@@ -185,7 +185,7 @@ def http_get_text(url: str) -> tuple[int, str]:
 
 def normalize_base_path(base_path: str) -> str:
     if base_path == "/":
-        return "/"
+        return ""
     return base_path.rstrip("/")
 
 

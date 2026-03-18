@@ -272,7 +272,7 @@ function buildQueryResponse(snapshot, path, basePath) {
 }
 
 async function serveStaticAsset(request, env, strippedPath) {
-  const assetPath = strippedPath === "/" ? "/index.html" : strippedPath;
+  const assetPath = strippedPath === "/" ? "/" : strippedPath;
   const assetRequest = new Request(new URL(assetPath, request.url), request);
   return env.ASSETS.fetch(assetRequest);
 }
