@@ -9,7 +9,19 @@ import sys
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
+
+
+REQUEST_HEADERS = {
+    # workers.dev may reject the default Python urllib signature with Cloudflare 1010.
+    "User-Agent": (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 "
+        "dotrepo-release-gate/1.0"
+    ),
+    "Accept": "application/json, text/plain;q=0.9, */*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -42,13 +54,21 @@ def normalize_base_path(value: str) -> str:
 
 
 def http_get_json(url: str) -> Any:
+    request = Request(url, headers=REQUEST_HEADERS)
     try:
-        with urlopen(url) as response:
+        with urlopen(request, timeout=15) as response:
             status = getattr(response, "status", response.getcode())
             body = response.read().decode("utf-8")
     except HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
-        raise SystemExit(f"smoke failed ({exc.code}) for {url}: {body}") from exc
+        hint = ""
+        if exc.code == 403 and "error code: 1010" in body:
+            hint = (
+                " (Cloudflare blocked the client signature on workers.dev; "
+                "verify with a browser-like User-Agent or promote the smoke check "
+                "to the final custom domain instead)"
+            )
+        raise SystemExit(f"smoke failed ({exc.code}) for {url}: {body}{hint}") from exc
     except URLError as exc:
         raise SystemExit(f"smoke failed for {url}: {exc.reason}") from exc
 
