@@ -127,9 +127,17 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
 
     normalized_base = "/" if expected_base_path == "/" else expected_base_path.rstrip("/")
     for repo in repositories:
+        identity = repo.get("identity")
         links = repo.get("links")
+        if not isinstance(identity, dict):
+            raise SystemExit(f"public export inventory entry is missing identity: {repo}")
         if not isinstance(links, dict):
             raise SystemExit(f"public export inventory entry is missing links: {repo}")
+        host = identity.get("host")
+        owner = identity.get("owner")
+        name = identity.get("repo")
+        if not all(isinstance(value, str) and value for value in (host, owner, name)):
+            raise SystemExit(f"public export inventory entry identity is malformed: {repo}")
         summary_link = links.get("self")
         trust_link = links.get("trust")
         query_template = links.get("queryTemplate")
@@ -148,6 +156,7 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
         for link in (summary_link, trust_link):
             relative = link.removeprefix(normalized_base).lstrip("/")
             ensure_file(public_dir / relative)
+        ensure_file(public_dir / "query-input" / host / owner / f"{name}.json")
 
 
 def verify_tar_contains_prefix(archive_path: Path, prefix: str) -> None:

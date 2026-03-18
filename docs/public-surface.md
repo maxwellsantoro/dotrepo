@@ -10,6 +10,8 @@ The public surface consists of:
 - the current deployed `v0/` JSON tree at the GitHub Pages URL
 - the local and release-reviewed same-origin hosted-query runtime
   `dotrepo-public-query`
+- export-time `query-input/` artifacts that capture repo-scoped hosted-query
+  snapshot inputs without runtime TOML traversal
 - the CI-generated `public-export-v0` and `public-export-v0-bundle` artifacts
 - the current static deployment workflow in `.github/workflows/public-pages.yml`
 - the `v0` public contracts defined in RFCs 0016 through 0019
@@ -65,6 +67,8 @@ The hosted public surface provides:
 - one same-origin runtime shape that can serve the exported tree and query
   responses from the same snapshot family during local review and release smoke
   checks
+- one repo-scoped query-input artifact family that can back a future Worker
+  route from the same reviewed snapshot
 
 Freshness on the hosted JSON is snapshot-first:
 - `freshness.generatedAt`, `freshness.snapshotDigest`, and `freshness.staleAfter`
@@ -112,9 +116,11 @@ Start with:
 
 The thin hosted query runtime now exists locally as `dotrepo-public-query`, and
 it can serve the exported `public/` tree on the same origin during local
-review. The next work is making that same-origin runtime a real hosted surface,
-deploying it in place of the current static-only setup, and
-hardening freshness and caching for the combined hosted deployment. For the freshness definitions that apply to those responses, see
+review. The export now also emits repo-scoped `query-input/` artifacts that a
+future Worker can load without runtime TOML parsing. The next work is wiring
+those artifacts into the Cloudflare Worker route, replacing the current
+static-only deployment, and hardening freshness and caching for the combined
+hosted deployment. For the freshness definitions that apply to those responses, see
 [`docs/public-freshness.md`](./public-freshness.md). For the first hosted query
 runtime shape, see [`docs/hosted-query-serving.md`](./hosted-query-serving.md).
 For the selected Cloudflare deployment plan, see

@@ -173,4 +173,30 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
             && entry["links"]["trust"]
                 == Value::String("/v0/repos/github.com/example/nova/trust.json".into())
     }));
+
+    let orbit_query_input = serde_json::from_str::<Value>(
+        generated
+            .get("query-input/github.com/example/orbit.json")
+            .expect("orbit query-input output"),
+    )
+    .expect("orbit query-input parses");
+    assert_eq!(
+        orbit_query_input["identity"]["repo"],
+        Value::String("orbit".into())
+    );
+    assert_eq!(
+        orbit_query_input["selection"]["manifest"]["repo"]["description"],
+        Value::String("Reviewed orbital tooling metadata.".into())
+    );
+
+    let nova_query_input = serde_json::from_str::<Value>(
+        generated
+            .get("query-input/github.com/example/nova.json")
+            .expect("nova query-input output"),
+    )
+    .expect("nova query-input parses");
+    assert_eq!(
+        nova_query_input["selection"]["record"]["claim"]["handoff"],
+        Value::String("pending_canonical".into())
+    );
 }

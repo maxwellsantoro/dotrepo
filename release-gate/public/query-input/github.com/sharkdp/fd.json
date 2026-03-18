@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "d70eb7930fecc4a42bae671eeeed9d7a1667b55256669a76a046fb66ca67f126",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "sharkdp",
+    "repo": "fd",
+    "source": "https://github.com/sharkdp/fd"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/sharkdp/fd/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/sharkdp/fd",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Imported from the upstream README and security policy; not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/sharkdp/fd/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/sharkdp/fd",
+        "generated_at": "2026-03-09T00:00:00Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Imported from the upstream README and security policy; not maintainer-verified."
+        }
+      },
+      "repo": {
+        "name": "fd",
+        "description": "A simple, fast and user-friendly alternative to 'find'.",
+        "homepage": "https://github.com/sharkdp/fd",
+        "license": "Apache-2.0 OR MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "rust"
+        ],
+        "build": "cargo build",
+        "test": "cargo test",
+        "topics": []
+      },
+      "owners": {
+        "maintainers": [
+          "@sharkdp",
+          "@tmccombs",
+          "@tavianator"
+        ],
+        "team": null,
+        "security_contact": "https://github.com/sharkdp/fd/security/advisories/new"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      }
+    }
+  },
+  "conflicts": []
+}

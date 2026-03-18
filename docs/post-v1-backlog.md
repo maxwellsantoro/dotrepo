@@ -12,6 +12,9 @@ Planning assumptions:
 - the repo now has a local same-origin hosted-query runtime, release packaging
   for `dotrepo-public-query`, and release-gate smoke coverage for emitted
   `queryTemplate` resolution
+- export now emits repo-scoped `query-input/` artifacts and core can answer the
+  current hosted query wrapper from loaded snapshot data rather than runtime
+  TOML parsing alone
 - the current deployed public origin is still static GitHub Pages, so the
   remaining hosted-query work is deployment architecture rather than public
   query semantics
@@ -130,11 +133,11 @@ the future serving/deployment layer,
   Depends on: `E2-05`.
   Acceptance: one design note freezes Cloudflare as the first deployed target, keeps the `v0` contract unchanged, requires same-origin query resolution, and treats R2 as a scale fallback rather than a day-one dependency.
 
-- `E2-07 Add export-time query input artifacts for edge serving`
+- `[done] E2-07 Add export-time query input artifacts for edge serving`
   Depends on: `E2-06`.
   Acceptance: export produces one repo-level query-input artifact with enough snapshot data to reproduce current query semantics without runtime TOML parsing or checked-in index traversal.
 
-- `E2-08 Refactor query serving into a pure snapshot function`
+- `[done] E2-08 Refactor query serving into a pure snapshot function`
   Depends on: `E2-07`.
   Acceptance: one function can produce the current hosted query response or public error shape from identity, dot path, loaded query-input data, freshness, and base path, independent of filesystem-bound runtime assumptions.
 

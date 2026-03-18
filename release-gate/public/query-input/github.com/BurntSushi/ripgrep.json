@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "d70eb7930fecc4a42bae671eeeed9d7a1667b55256669a76a046fb66ca67f126",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "BurntSushi",
+    "repo": "ripgrep",
+    "source": "https://github.com/BurntSushi/ripgrep"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/BurntSushi/ripgrep/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/BurntSushi/ripgrep",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Imported from public repository materials; build and test commands are inferred from the Cargo project layout; not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/BurntSushi/ripgrep/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/BurntSushi/ripgrep",
+        "generated_at": "2026-03-08T00:00:00Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Imported from public repository materials; build and test commands are inferred from the Cargo project layout; not maintainer-verified."
+        }
+      },
+      "repo": {
+        "name": "ripgrep",
+        "description": "Line-oriented search tool that recursively searches the current directory for a regex pattern.",
+        "homepage": "https://github.com/BurntSushi/ripgrep",
+        "license": "MIT OR Unlicense",
+        "status": "active",
+        "visibility": "public",
+        "languages": [
+          "rust"
+        ],
+        "build": "cargo build --release",
+        "test": "cargo test",
+        "topics": [
+          "search",
+          "regex",
+          "cli"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@BurntSushi"
+        ],
+        "team": null,
+        "security_contact": "unknown"
+      },
+      "docs": {
+        "root": "docs/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      }
+    }
+  },
+  "conflicts": []
+}

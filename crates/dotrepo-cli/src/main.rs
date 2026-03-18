@@ -2235,6 +2235,9 @@ description = "Reviewed overlay"
         assert!(out_dir
             .join("v0/repos/github.com/example/orbit/trust.json")
             .exists());
+        assert!(out_dir
+            .join("query-input/github.com/example/orbit.json")
+            .exists());
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

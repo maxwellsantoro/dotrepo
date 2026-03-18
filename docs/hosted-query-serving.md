@@ -30,6 +30,8 @@ What already exists:
 - public summary and trust responses are exported as a static tree and deployed
   through GitHub Pages
 - public responses already emit a stable `queryTemplate`
+- public export now also emits repo-scoped `query-input/` artifacts that can
+  reproduce the current query wrapper from snapshot data
 
 What does not exist yet:
 
@@ -98,9 +100,9 @@ That means:
 - public query responses should match the same snapshot identity as summary,
   trust, inventory, and `meta.json`
 
-The first runtime should prefer reading a read-only copy of the exported index
-input or equivalent snapshot directory on disk, not the checked-in repo in a
-mutable working tree.
+The first runtime should prefer reading the exported repo-scoped `query-input/`
+artifacts or an equivalent read-only snapshot directory on disk, not the
+checked-in repo in a mutable working tree.
 
 ## Request routing and base path
 

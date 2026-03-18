@@ -14,7 +14,7 @@ The checked-in `expected/` tree is the golden-output surface for issue `#63`.
 It is intended to catch:
 
 - response-shape drift in bundle `repos/index.json`, repository `index.json`,
-  `trust.json`, and snapshot `meta.json`
+  `trust.json`, repo-scoped `query-input/*.json`, and snapshot `meta.json`
 - claim-visibility drift for ordinary public repository responses
 - unexpected changes to links, artifact locators, or summary-field mapping
 

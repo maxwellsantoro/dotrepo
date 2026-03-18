@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "8cc5a42d31fc8c6494caaa0bcc1c4fbdf0887992d95834d809be6289a3f9e6fb",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "example",
+    "repo": "orbit",
+    "source": "https://github.com/example/orbit"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/example/orbit/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "reviewed",
+        "source": "https://github.com/example/orbit",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Reviewed overlay from public repository materials."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/example/orbit/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "reviewed",
+        "source": "https://github.com/example/orbit",
+        "generated_at": null,
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Reviewed overlay from public repository materials."
+        }
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Reviewed orbital tooling metadata.",
+        "homepage": "https://github.com/example/orbit",
+        "license": null,
+        "status": null,
+        "visibility": null,
+        "languages": [],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": {
+        "maintainers": [],
+        "team": "@example/orbit-team",
+        "security_contact": "security@example.com"
+      },
+      "docs": {
+        "root": "https://docs.example.com/orbit",
+        "getting_started": "https://docs.example.com/orbit/getting-started",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null
+    }
+  },
+  "conflicts": []
+}

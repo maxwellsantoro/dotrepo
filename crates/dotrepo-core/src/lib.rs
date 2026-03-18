@@ -163,7 +163,7 @@ pub struct RepositoryDiagnostic {
     pub manifest_path: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RecordSummary {
     pub mode: RecordMode,
     pub status: RecordStatus,
@@ -173,7 +173,7 @@ pub struct RecordSummary {
     pub trust: Option<Trust>,
 }
 
-#[derive(Debug, Clone, Copy, Serialize)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum SelectionReason {
     OnlyMatchingRecord,
@@ -182,7 +182,7 @@ pub enum SelectionReason {
     EqualAuthorityConflict,
 }
 
-#[derive(Debug, Clone, Copy, Serialize)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum ConflictRelationship {
     Superseded,
@@ -247,7 +247,7 @@ pub struct TrustReport {
     pub conflicts: Vec<ConflictReport>,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicFreshness {
     pub generated_at: String,
@@ -256,7 +256,7 @@ pub struct PublicFreshness {
     pub stale_after: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicRepositoryIdentity {
     pub host: String,
@@ -283,14 +283,14 @@ pub struct PublicRepositoryFields {
     pub security_contact: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicRecordArtifacts {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub evidence_path: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicSelectedRecord {
     pub manifest_path: String,
@@ -301,14 +301,14 @@ pub struct PublicSelectedRecord {
     pub artifacts: Option<PublicRecordArtifacts>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicSelectionReport {
     pub reason: SelectionReason,
     pub record: PublicSelectedRecord,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicConflictReport {
     pub relationship: ConflictRelationship,
@@ -386,6 +386,33 @@ pub struct PublicQueryResponse {
     pub links: PublicRepositoryLinks,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicQueryInputSelection {
+    pub reason: SelectionReason,
+    pub record: PublicSelectedRecord,
+    pub manifest: Manifest,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicQueryInputConflict {
+    pub relationship: ConflictRelationship,
+    pub reason: SelectionReason,
+    pub record: PublicSelectedRecord,
+    pub manifest: Manifest,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicQueryInputSnapshot {
+    pub api_version: String,
+    pub freshness: PublicFreshness,
+    pub identity: PublicRepositoryIdentity,
+    pub selection: PublicQueryInputSelection,
+    pub conflicts: Vec<PublicQueryInputConflict>,
+}
+
 #[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
 pub enum PublicErrorCode {
@@ -424,7 +451,7 @@ pub struct PublicSnapshotMetadata {
     pub strategy: &'static str,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct RecordClaimContext {
     pub id: String,
@@ -579,7 +606,7 @@ pub struct LoadedClaimDirectory {
     pub events: Vec<LoadedClaimEvent>,
 }
 
-#[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
 pub enum ClaimHandoffOutcome {
     PendingCanonical,
@@ -1428,6 +1455,23 @@ fn public_links_with_base(
             index_path,
         },
     })
+}
+
+fn public_query_input_relative_path(host: &str, owner: &str, repo: &str) -> PathBuf {
+    PathBuf::from("query-input")
+        .join(host)
+        .join(owner)
+        .join(format!("{repo}.json"))
+}
+
+fn ensure_public_query_input_version(snapshot: &PublicQueryInputSnapshot) -> Result<()> {
+    if snapshot.api_version != PUBLIC_API_VERSION {
+        bail!(
+            "unsupported public query input apiVersion: {}",
+            snapshot.api_version
+        );
+    }
+    Ok(())
 }
 
 fn non_empty_value(value: Option<&str>) -> Option<String> {
@@ -2436,6 +2480,121 @@ pub fn public_repository_query_with_base(
     })
 }
 
+pub fn public_query_input_snapshot(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+) -> Result<PublicQueryInputSnapshot> {
+    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
+    let candidates = resolve_candidates(&scope_root)?;
+    let selected = &candidates[0];
+    let reason = resolve_selection_reason(&candidates, selected);
+
+    Ok(PublicQueryInputSnapshot {
+        api_version: PUBLIC_API_VERSION.to_string(),
+        freshness,
+        identity: public_identity(host, owner, repo, selected),
+        selection: PublicQueryInputSelection {
+            reason,
+            record: public_selected_record(index_root, selected),
+            manifest: selected.manifest.clone(),
+        },
+        conflicts: candidates
+            .iter()
+            .skip(1)
+            .map(|candidate| PublicQueryInputConflict {
+                relationship: if candidate.rank == selected.rank {
+                    ConflictRelationship::Parallel
+                } else {
+                    ConflictRelationship::Superseded
+                },
+                reason: resolve_conflict_reason(reason, selected, candidate),
+                record: public_selected_record(index_root, candidate),
+                manifest: candidate.manifest.clone(),
+            })
+            .collect(),
+    })
+}
+
+pub fn public_repository_query_from_input_with_base(
+    snapshot: &PublicQueryInputSnapshot,
+    path: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicQueryResponse> {
+    ensure_public_query_input_version(snapshot)?;
+    let value = query_manifest_value(&snapshot.selection.manifest, path)?;
+    let identity = &snapshot.identity;
+
+    Ok(PublicQueryResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        identity: identity.clone(),
+        path: path.to_string(),
+        value,
+        selection: PublicSelectionReport {
+            reason: snapshot.selection.reason,
+            record: snapshot.selection.record.clone(),
+        },
+        conflicts: snapshot
+            .conflicts
+            .iter()
+            .map(|candidate| PublicConflictReport {
+                relationship: candidate.relationship,
+                reason: candidate.reason,
+                value: resolve_competing_value(&candidate.manifest, path),
+                record: candidate.record.clone(),
+            })
+            .collect(),
+        links: public_links_with_base(
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            PublicLinkKind::Query,
+            Some(path),
+            base_path,
+        )?,
+    })
+}
+
+pub fn public_repository_query_from_input_or_error_with_base(
+    snapshot: &PublicQueryInputSnapshot,
+    path: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> std::result::Result<PublicQueryResponse, PublicErrorResponse> {
+    let identity = &snapshot.identity;
+    public_repository_query_from_input_with_base(snapshot, path, freshness.clone(), base_path)
+        .map_err(|error| {
+            public_error_response(
+                &identity.host,
+                &identity.owner,
+                &identity.repo,
+                Some(path),
+                freshness,
+                &error,
+            )
+        })
+}
+
+pub fn load_public_query_input_snapshot(
+    export_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+) -> Result<PublicQueryInputSnapshot> {
+    validate_public_identity(host, owner, repo)?;
+    let path = export_root.join(public_query_input_relative_path(host, owner, repo));
+    let text = fs::read_to_string(&path)
+        .map_err(|error| anyhow!("failed to read {}: {}", path.display(), error))?;
+    let snapshot = serde_json::from_str::<PublicQueryInputSnapshot>(&text)
+        .map_err(|error| anyhow!("failed to parse {}: {}", path.display(), error))?;
+    ensure_public_query_input_version(&snapshot)?;
+    Ok(snapshot)
+}
+
 fn classify_public_error(message: &str) -> PublicErrorCode {
     if message.starts_with("query path not found: ") {
         PublicErrorCode::QueryPathNotFound
@@ -2606,6 +2765,20 @@ pub fn export_public_index_static_with_base(
         outputs.push((
             repo_base.join("trust.json"),
             serde_json::to_string_pretty(&trust)?,
+        ));
+        outputs.push((
+            out_root.join(public_query_input_relative_path(
+                &identity.host,
+                &identity.owner,
+                &identity.repo,
+            )),
+            serde_json::to_string_pretty(&public_query_input_snapshot(
+                index_root,
+                &identity.host,
+                &identity.owner,
+                &identity.repo,
+                freshness.clone(),
+            )?)?,
         ));
     }
     outputs.push((
@@ -7234,7 +7407,7 @@ text = "Rejected claim."
     }
 
     #[test]
-    fn export_public_index_static_emits_meta_summary_and_trust_files() {
+    fn export_public_index_static_emits_meta_summary_trust_and_query_input_files() {
         let root = temp_dir("public-export");
         let record_dir = root.join("repos/github.com/example/orbit");
         fs::create_dir_all(&record_dir).expect("record dir created");
@@ -7285,6 +7458,9 @@ description = "Reviewed overlay"
         assert!(rendered
             .iter()
             .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/trust.json"));
+        assert!(rendered
+            .iter()
+            .any(|(path, _)| path == "public/query-input/github.com/example/orbit.json"));
         assert!(rendered.iter().any(|(path, contents)| {
             path == "public/v0/repos/index.json"
                 && contents.contains("\"repositoryCount\": 1")
@@ -7294,6 +7470,89 @@ description = "Reviewed overlay"
             path == "public/v0/meta.json"
                 && contents.contains("\"strategy\": \"static_summary_and_trust\"")
         }));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn public_query_input_snapshot_matches_direct_query_semantics() {
+        let root = temp_dir("public-query-input");
+        let record_dir = root.join("repos/github.com/example/orbit");
+        let alt_dir = record_dir.join("alt");
+        fs::create_dir_all(&alt_dir).expect("record dirs created");
+        fs::write(
+            record_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Selected description"
+"#,
+        )
+        .expect("selected record written");
+        fs::write(record_dir.join("evidence.md"), "# Evidence\n").expect("evidence written");
+        fs::write(
+            alt_dir.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/orbit"
+
+[record.trust]
+confidence = "medium"
+provenance = ["verified"]
+
+[repo]
+name = "orbit"
+description = "Competing description"
+"#,
+        )
+        .expect("competing record written");
+
+        let freshness = sample_public_freshness();
+        let snapshot =
+            public_query_input_snapshot(&root, "github.com", "example", "orbit", freshness.clone())
+                .expect("query input snapshot builds");
+        let round_tripped = serde_json::from_str::<PublicQueryInputSnapshot>(
+            &serde_json::to_string(&snapshot).expect("snapshot serializes"),
+        )
+        .expect("snapshot round trips");
+
+        let direct = public_repository_query_with_base(
+            &root,
+            "github.com",
+            "example",
+            "orbit",
+            "repo.description",
+            freshness.clone(),
+            "/dotrepo",
+        )
+        .expect("direct query succeeds");
+        let via_snapshot = public_repository_query_from_input_with_base(
+            &round_tripped,
+            "repo.description",
+            freshness,
+            "/dotrepo",
+        )
+        .expect("snapshot query succeeds");
+
+        assert_eq!(
+            serde_json::to_value(via_snapshot).expect("snapshot response serializes"),
+            serde_json::to_value(direct).expect("direct response serializes")
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

@@ -30,6 +30,9 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   the shipped binaries from the packaged tarball
 - A local same-origin hosted-query runtime that can serve both the exported
   `public/` tree and query responses from one process
+- Export-time per-repository `query-input/` artifacts plus a pure snapshot
+  query function in core, so hosted query no longer depends on runtime TOML
+  parsing as the only implementation path
 - A documented Cloudflare Worker + Static Assets deployment plan for replacing
   the current Pages-only hosted query path without changing the `v0` contract
 - An explicit release-gate script and CI job that package the hosted public
@@ -44,6 +47,8 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 
 - A full maintainer claim workflow product surface
 - A broader public site UX or deployed live public query API
+- A deployed Worker route that reads the exported query-input snapshot artifacts
+  on the public origin
 - Bundle mode or first-class workspace/relations support
 - Arbitrary prose round-tripping or automatic conversion of unmanaged files into
   managed-region files

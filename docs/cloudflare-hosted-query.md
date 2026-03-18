@@ -175,7 +175,12 @@ Do not use this rewrite to add:
 As of now:
 
 - local same-origin runtime exists in `dotrepo-public-query`
+- export now emits repo-scoped `query-input/<host>/<owner>/<repo>.json`
+  artifacts from the reviewed snapshot
+- core now has a pure snapshot query function that can answer the current `v0`
+  query wrapper from those artifacts
 - release bundles and the release gate already cover that runtime locally
 - deployed hosting is still static GitHub Pages
 
-So the remaining gap is deployment architecture, not public query semantics.
+So the remaining gap is the Worker route and deployment workflow, not public
+query semantics or snapshot data shape.
