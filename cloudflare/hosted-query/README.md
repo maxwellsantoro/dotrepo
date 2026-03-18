@@ -27,6 +27,11 @@ npm test
 npx wrangler dev
 ```
 
+If you want to override the local Worker base path, copy
+`cloudflare/hosted-query/.dev.vars.example` to `.dev.vars` and edit `BASE_PATH`.
+For Cloudflare auth and GitHub Actions setup, see
+[`docs/cloudflare-deploy.md`](../../docs/cloudflare-deploy.md).
+
 ## Deployment
 
 The Worker expects the staged `public-snapshot/` tree to come from the same

@@ -1,0 +1,8 @@
+# Local Worker runtime bindings for `wrangler dev`.
+#
+# Copy to `.dev.vars` when you want to override the defaults locally.
+# This file is only for Worker runtime variables, not Cloudflare auth.
+# For local deploy/auth, export CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID
+# in your shell instead.
+
+BASE_PATH=/dotrepo

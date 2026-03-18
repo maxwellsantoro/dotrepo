@@ -191,3 +191,6 @@ As of now:
 So the remaining gap is the Worker route and deployment workflow, not public
 query semantics or snapshot data shape, plus the final production cutover from
 Pages to Cloudflare.
+
+For the concrete local and GitHub setup for that workflow, see
+[`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).

@@ -101,6 +101,8 @@ For the public surface architecture, see
 [`docs/public-surface.md`](./public-surface.md).
 For the planned Cloudflare deployment target for hosted query, see
 [`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md).
+For the local and GitHub setup for the Worker deploy path, see
+[`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).
 For the release note and usage examples, see
 [`docs/public-release-note.md`](./public-release-note.md) and
 [`docs/public-export-examples.md`](./public-export-examples.md).
