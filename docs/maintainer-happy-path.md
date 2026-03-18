@@ -33,6 +33,12 @@ workflow shape used by the native example repo. Pass `--version <x.y.z>` when
 you want to pin a different dotrepo release than the current CLI version, or
 `--force` to overwrite an existing workflow file.
 
+Current scope and constraints:
+- `ci init` is supported only for native records with a valid root `.repo`.
+- the scaffold currently targets GitHub Actions on `ubuntu-latest`
+- it installs the `x86_64-unknown-linux-gnu` release bundle and runs `dotrepo`
+  from `PATH`
+
 Native import now chooses `compat.github.*` conservatively from on-disk files:
 - it enables `generate` only when the checked-in surface already matches the
   current dotrepo renderer closely enough that full ownership is honest
@@ -149,14 +155,15 @@ markers, and unsupported layouts, see
 
 ## CI
 
-The example workflow and `dotrepo ci init` write the same maintainer path in CI:
+The example workflow and `dotrepo ci init` use the same command contract in CI.
+The checked-in example file also includes the release-binary install step:
 
 ```bash
-dotrepo --root examples/native-minimal validate
-dotrepo --root examples/native-minimal query repo.build --raw
-dotrepo --root examples/native-minimal trust
-dotrepo --root examples/native-minimal doctor
-dotrepo --root examples/native-minimal generate --check
+dotrepo --root . validate
+dotrepo --root . query repo.build --raw
+dotrepo --root . trust
+dotrepo --root . doctor
+dotrepo --root . generate --check
 ```
 
 That is the intended v0.1 contract for a native repo:

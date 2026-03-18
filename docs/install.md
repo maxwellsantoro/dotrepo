@@ -12,6 +12,8 @@ These are built and packaged by `.github/workflows/release-artifacts.yml`.
 For native repos that want the canonical maintainer CI loop, `dotrepo ci init`
 scaffolds a GitHub Actions workflow that downloads one pinned release bundle
 and runs `validate`, `query`, `trust`, `doctor`, and `generate --check`.
+The current scaffold target is `ubuntu-latest` with the
+`x86_64-unknown-linux-gnu` release bundle.
 
 ## Preferred install path
 

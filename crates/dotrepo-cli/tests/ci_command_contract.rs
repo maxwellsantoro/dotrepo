@@ -150,3 +150,48 @@ description = "Example project"
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
+
+#[test]
+fn ci_init_matches_checked_in_native_example_workflow() {
+    let root = temp_dir("ci-init-example");
+    fs::write(
+        root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "reviewed"
+
+[repo]
+name = "example"
+description = "Example project"
+build = "cargo build --locked"
+"#,
+    )
+    .expect(".repo written");
+
+    let version = env!("CARGO_PKG_VERSION");
+    let output = run_dotrepo(&[
+        "--root",
+        root.to_str().expect("temp path is utf-8"),
+        "ci",
+        "init",
+        "--version",
+        version,
+    ]);
+
+    assert!(output.status.success(), "ci init should succeed");
+
+    let scaffolded =
+        fs::read_to_string(root.join(".github/workflows/dotrepo-check.yml")).expect("workflow");
+    let checked_in = fs::read_to_string(
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../examples/native-minimal/.github/workflows/dotrepo-check.yml"),
+    )
+    .expect("checked-in example workflow");
+
+    assert_eq!(scaffolded, checked_in);
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
