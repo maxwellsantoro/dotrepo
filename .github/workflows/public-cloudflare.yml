@@ -56,9 +56,41 @@ jobs:
           npm_config_cache: ${{ runner.temp }}/npm-cache
         run: npm test
       - name: Deploy Worker
+        id: deploy
         working-directory: cloudflare/hosted-query
+        shell: bash
         env:
           npm_config_cache: ${{ runner.temp }}/npm-cache
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx wrangler deploy
+        run: |
+          set -euo pipefail
+          log_path="$RUNNER_TEMP/wrangler-deploy.log"
+          npx wrangler deploy 2>&1 | tee "$log_path"
+          deploy_url="$(python3 - "$log_path" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+text = Path(sys.argv[1]).read_text(encoding="utf-8")
+workers_matches = re.findall(r"https://[^\s]+\.workers\.dev[^\s]*", text)
+if workers_matches:
+    print(workers_matches[-1])
+    raise SystemExit(0)
+deploy_match = re.search(r"Deployed .*?triggers.*?\n\s*(https://\S+)", text, re.DOTALL)
+print(deploy_match.group(1) if deploy_match else "")
+PY
+)"
+          if [ -z "$deploy_url" ]; then
+            echo "Failed to detect deployed Worker URL from Wrangler output" >&2
+            exit 1
+          fi
+          echo "url=$deploy_url" >> "$GITHUB_OUTPUT"
+      - name: Smoke deployed Worker
+        env:
+          DEPLOY_URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          python3 scripts/smoke_cloudflare_public_deploy.py \
+            --deploy-url "$DEPLOY_URL" \
+            --base-path "${{ steps.base_path.outputs.value }}" \
+            --public-root release-gate/public

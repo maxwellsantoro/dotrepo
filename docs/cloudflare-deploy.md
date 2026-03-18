@@ -85,6 +85,54 @@ Set these in GitHub repository settings under Secrets:
 
 The workflow reads those values directly when it runs `wrangler deploy`.
 
+## What the workflow does after deploy
+
+The workflow in `.github/workflows/public-cloudflare.yml` now:
+
+- builds the reviewed export snapshot
+- stages that snapshot into `cloudflare/hosted-query/public-snapshot`
+- runs Worker tests
+- deploys the Worker with Wrangler
+- captures the emitted deployed URL
+- smoke-tests the live deployed Worker against the same reviewed export
+
+The live smoke checks:
+
+- `/<base>/v0/meta.json`
+- one emitted `queryTemplate` resolved with `repo.description`
+
+That keeps local review, pre-deploy smoke, and post-deploy smoke aligned on one
+snapshot family.
+
+## Current published shape
+
+Right now the Worker config publishes to `workers.dev`.
+
+That means the Cloudflare workflow can publish a live staging origin such as:
+
+```text
+https://dotrepo-public-hosted-query.<account-subdomain>.workers.dev/dotrepo/
+```
+
+This is useful for proving the Worker deployment path end to end, but it is not
+the final public-origin cutover.
+
+## Final cutover from Pages
+
+To replace GitHub Pages as the primary public origin, configure a real
+Cloudflare zone route or custom domain for this Worker and then update
+`cloudflare/hosted-query/wrangler.jsonc` accordingly.
+
+That cutover should happen only after:
+
+1. the Worker deploy is stable on `workers.dev`
+2. the deployed smoke checks keep passing in CI
+3. the chosen public domain and base path are finalized
+4. Pages is no longer treated as the canonical public origin in the docs
+
+Until then, treat `workers.dev` as the live staging surface and GitHub Pages as
+the primary documented public origin.
+
 ## Recommended first run
 
 1. Run the release gate locally:

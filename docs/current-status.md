@@ -25,6 +25,8 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   invalid-history regression coverage, including a staged seed-overlay handoff
   exported through the normal public JSON path
 - A currently deployed static public surface through GitHub Pages
+- A live Cloudflare Worker staging deployment on `workers.dev` built from the
+  reviewed export snapshot, with post-deploy smoke coverage in CI
 - Release-artifact packaging for `dotrepo`, `dotrepo-public-query`,
   `dotrepo-lsp`, and `dotrepo-mcp`, with CI smoke tests that extract and run
   the shipped binaries from the packaged tarball
@@ -52,8 +54,8 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 
 - A full maintainer claim workflow product surface
 - A broader public site UX or deployed live public query API
-- A deployed Worker route that reads the exported query-input snapshot artifacts
-  on the public origin
+- A Cloudflare custom-domain cutover that replaces GitHub Pages as the primary
+  public origin for the hosted public surface
 - Bundle mode or first-class workspace/relations support
 - Arbitrary prose round-tripping or automatic conversion of unmanaged files into
   managed-region files

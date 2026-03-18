@@ -150,8 +150,9 @@ upstream native `.repo`.
 - uploads and deploys to GitHub Pages
 
 Separately, `.github/workflows/public-cloudflare.yml` can stage that same
-reviewed export into the in-repo Worker project and deploy it through Wrangler
-when the required repository vars and Cloudflare secrets are enabled.
+reviewed export into the in-repo Worker project, deploy it through Wrangler
+when the required repository vars and Cloudflare secrets are enabled, and
+smoke-test the live deployed Worker URL against the same reviewed export.
 
 The export tree is the source of truth. The hosted surface deploys the same
 `public/` output.
@@ -160,8 +161,9 @@ For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.
 The Cloudflare Worker path can now also serve the same exported snapshot
 locally after staging the reviewed tree into the Worker project. The remaining
-production gap is replacing the current static-only deployment with the
-Cloudflare origin in production.
+production gap is promoting the current `workers.dev` staging deployment into
+the final Cloudflare public origin and replacing the current static-only GitHub
+Pages deployment.
 
 ## What should stay stable vs variable
 

@@ -184,13 +184,15 @@ As of now:
 - the release gate stages the reviewed export into the Worker, runs Worker
   tests, dry-runs Wrangler packaging, and smoke-tests `queryTemplate`
   resolution through `wrangler dev`
-- an opt-in GitHub Actions Cloudflare deploy workflow now exists in-repo
+- an opt-in GitHub Actions Cloudflare deploy workflow now exists in-repo and
+  smoke-tests the live deployed `workers.dev` URL after `wrangler deploy`
 - release bundles and the release gate already cover that runtime locally
-- deployed hosting is still static GitHub Pages
+- a live `workers.dev` staging deployment now exists for that runtime, while
+  the primary documented public origin is still static GitHub Pages
 
-So the remaining gap is the Worker route and deployment workflow, not public
-query semantics or snapshot data shape, plus the final production cutover from
-Pages to Cloudflare.
+So the remaining gap is no longer the Worker route or basic deployment
+workflow. It is the final production cutover from Pages to a real Cloudflare
+public origin.
 
 For the concrete local and GitHub setup for that workflow, see
 [`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).
