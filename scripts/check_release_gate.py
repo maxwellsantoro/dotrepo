@@ -179,6 +179,8 @@ def http_get_text(url: str) -> tuple[int, str]:
             return response.status, response.read().decode()
     except urllib.error.HTTPError as err:
         return err.code, err.read().decode()
+    except urllib.error.URLError:
+        return 0, ""
 
 
 def normalize_base_path(base_path: str) -> str:
@@ -305,6 +307,77 @@ def smoke_test_release_bundle(
             server.wait(timeout=5)
 
 
+def smoke_test_cloudflare_worker(worker_dir: Path, base_path: str) -> None:
+    server_addr = unused_addr()
+    host, port = server_addr.split(":")
+    print("  smoke: Cloudflare Worker serves same-origin public tree", flush=True)
+    server = subprocess.Popen(
+        [
+            "npx",
+            "wrangler",
+            "dev",
+            "--config",
+            "wrangler.jsonc",
+            "--ip",
+            host,
+            "--port",
+            port,
+        ],
+        cwd=worker_dir,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    try:
+        deadline = time.time() + 20
+        healthz_url = f"http://{server_addr}/healthz"
+        while time.time() < deadline:
+            if server.poll() is not None:
+                stderr = server.stderr.read() if server.stderr else ""
+                raise SystemExit(
+                    f"Cloudflare Worker exited early during smoke test: {stderr}"
+                )
+            status, body = http_get_text(healthz_url)
+            if status == 200 and body == "ok":
+                break
+            time.sleep(0.1)
+        else:
+            raise SystemExit("Cloudflare Worker did not become ready during smoke test")
+
+        base = normalize_base_path(base_path)
+        inventory_url = f"http://{server_addr}{base}/v0/repos/index.json"
+        status, body = http_get_text(inventory_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker inventory smoke failed ({status}) for {inventory_url}: {body}"
+            )
+        inventory = json.loads(body)
+        repositories = inventory.get("repositories")
+        if not isinstance(repositories, list) or not repositories:
+            raise SystemExit("Cloudflare Worker inventory smoke found no repositories")
+        query_template = repositories[0]["links"]["queryTemplate"]
+        if not isinstance(query_template, str):
+            raise SystemExit("Cloudflare Worker inventory smoke found no queryTemplate")
+        query_url = f"http://{server_addr}{query_template.replace('{dot_path}', 'repo.description')}"
+        status, body = http_get_text(query_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker queryTemplate smoke failed ({status}) for {query_url}: {body}"
+            )
+        query_response = json.loads(body)
+        if query_response.get("path") != "repo.description":
+            raise SystemExit("Cloudflare Worker queryTemplate smoke returned unexpected path")
+        links = query_response.get("links", {})
+        self_link = links.get("self")
+        if not isinstance(self_link, str) or not self_link.startswith(base):
+            raise SystemExit(
+                f"Cloudflare Worker queryTemplate smoke returned unexpected self link: {self_link}"
+            )
+    finally:
+        server.kill()
+        server.wait(timeout=5)
+
+
 def main() -> int:
     args = parse_args()
     repo_root = Path(__file__).resolve().parents[1]
@@ -314,6 +387,8 @@ def main() -> int:
     release_bundle_dir = output_root / "release-bundle"
     vsix_dir = output_root / "vsix"
     npm_cache_dir = output_root / "npm-cache"
+    worker_dir = repo_root / "cloudflare" / "hosted-query"
+    worker_snapshot_dir = worker_dir / "public-snapshot"
 
     if output_root.exists():
         shutil.rmtree(output_root)
@@ -371,6 +446,17 @@ def main() -> int:
     run(
         [
             "python3",
+            "scripts/sync_cloudflare_public_snapshot.py",
+            "--input",
+            str(public_dir),
+            "--output",
+            str(worker_snapshot_dir),
+        ],
+        cwd=repo_root,
+    )
+    run(
+        [
+            "python3",
             "scripts/package_public_export.py",
             "--input",
             str(public_dir),
@@ -379,6 +465,10 @@ def main() -> int:
         ],
         cwd=repo_root,
     )
+    npm_env = {"npm_config_cache": str(npm_cache_dir)}
+    run(["npm", "ci"], cwd=worker_dir, env=npm_env)
+    run(["npm", "test"], cwd=worker_dir, env=npm_env)
+    run(["npm", "run", "deploy:dry-run"], cwd=worker_dir, env=npm_env)
 
     run(
         ["cargo", "build", "--release", "-p", "dotrepo-cli", "--bins", "-p", "dotrepo-lsp", "-p", "dotrepo-mcp"],
@@ -402,7 +492,6 @@ def main() -> int:
 
     vsix_path = None
     if not args.skip_vsix:
-        npm_env = {"npm_config_cache": str(npm_cache_dir)}
         run(["npm", "ci"], cwd=repo_root / "editors" / "vscode", env=npm_env)
         extension_version_value = extension_version(repo_root)
         vsix_path = vsix_dir / f"dotrepo-vscode-v{extension_version_value}.vsix"
@@ -436,6 +525,8 @@ def main() -> int:
     print("release install smoke test")
     smoke_test_release_bundle(release_bundle, version, target, repo_root, public_dir, args.base_path)
     print("  all release binaries passed smoke test")
+    smoke_test_cloudflare_worker(worker_dir, args.base_path)
+    print("  Cloudflare Worker smoke test passed")
 
     print("")
     print("release gate artifacts")

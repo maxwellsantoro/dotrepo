@@ -32,6 +32,8 @@ What already exists:
 - public responses already emit a stable `queryTemplate`
 - public export now also emits repo-scoped `query-input/` artifacts that can
   reproduce the current query wrapper from snapshot data
+- an in-repo Cloudflare Worker route now exists locally and can serve the same
+  query contract from those snapshot artifacts when given a staged export
 
 What does not exist yet:
 
@@ -188,6 +190,8 @@ The current local/runtime slice now does all of the following:
    public query fixtures.
 7. Has release-gate smoke checks that prove an emitted `queryTemplate` resolves
    against the shipped runtime on one origin.
+8. Has a Worker implementation plus release-gate smoke that prove the same
+   emitted `queryTemplate` resolves through the Cloudflare route locally.
 
 That slice is enough to prove:
 

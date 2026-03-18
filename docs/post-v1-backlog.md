@@ -15,6 +15,9 @@ Planning assumptions:
 - export now emits repo-scoped `query-input/` artifacts and core can answer the
   current hosted query wrapper from loaded snapshot data rather than runtime
   TOML parsing alone
+- the repo now also has an in-repo Cloudflare Worker route, Worker tests, a
+  Wrangler dry-run path, and release-gate smoke for emitted `queryTemplate`
+  resolution through that Worker
 - the current deployed public origin is still static GitHub Pages, so the
   remaining hosted-query work is deployment architecture rather than public
   query semantics
@@ -141,7 +144,7 @@ the future serving/deployment layer,
   Depends on: `E2-07`.
   Acceptance: one function can produce the current hosted query response or public error shape from identity, dot path, loaded query-input data, freshness, and base path, independent of filesystem-bound runtime assumptions.
 
-- `E2-09 Implement the Cloudflare Worker query route`
+- `[done] E2-09 Implement the Cloudflare Worker query route`
   Depends on: `E2-08`.
   Acceptance: the Worker serves the current `v0` query route semantics, falls through to static assets for non-query requests, and preserves the existing base-path and error vocabulary.
 
@@ -149,7 +152,7 @@ the future serving/deployment layer,
   Depends on: `E2-09`.
   Acceptance: the repo can build and deploy one Worker-based hosted public surface from the reviewed export snapshot instead of relying on GitHub Pages as the primary hosted origin.
 
-- `E2-11 Extend the canonical release gate for Worker smoke`
+- `[done] E2-11 Extend the canonical release gate for Worker smoke`
   Depends on: `E2-09`, `E2-10`.
   Acceptance: the release gate proves an emitted `queryTemplate` resolves against the Worker-hosted same-origin surface before deployment changes are treated as release-ready.
 

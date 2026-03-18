@@ -12,8 +12,11 @@ The public surface consists of:
   `dotrepo-public-query`
 - export-time `query-input/` artifacts that capture repo-scoped hosted-query
   snapshot inputs without runtime TOML traversal
+- an in-repo Cloudflare Worker project that serves the same `v0` query route
+  from those snapshot inputs during local review and release-gate smoke
 - the CI-generated `public-export-v0` and `public-export-v0-bundle` artifacts
 - the current static deployment workflow in `.github/workflows/public-pages.yml`
+- the opt-in Worker deployment workflow in `.github/workflows/public-cloudflare.yml`
 - the `v0` public contracts defined in RFCs 0016 through 0019
 
 ## Why this architecture
@@ -69,6 +72,8 @@ The hosted public surface provides:
   checks
 - one repo-scoped query-input artifact family that can back a future Worker
   route from the same reviewed snapshot
+- one Worker route implementation that already preserves the current base-path
+  and error-vocabulary semantics in local and release-gate smoke
 
 Freshness on the hosted JSON is snapshot-first:
 - `freshness.generatedAt`, `freshness.snapshotDigest`, and `freshness.staleAfter`
@@ -117,10 +122,10 @@ Start with:
 The thin hosted query runtime now exists locally as `dotrepo-public-query`, and
 it can serve the exported `public/` tree on the same origin during local
 review. The export now also emits repo-scoped `query-input/` artifacts that a
-future Worker can load without runtime TOML parsing. The next work is wiring
-those artifacts into the Cloudflare Worker route, replacing the current
-static-only deployment, and hardening freshness and caching for the combined
-hosted deployment. For the freshness definitions that apply to those responses, see
+future Worker can load without runtime TOML parsing, and the Worker route now
+exists in-repo for local review and release smoke. The next work is deploying
+that Worker on the public origin, replacing the current static-only deployment,
+and hardening freshness and caching for the combined hosted deployment. For the freshness definitions that apply to those responses, see
 [`docs/public-freshness.md`](./public-freshness.md). For the first hosted query
 runtime shape, see [`docs/hosted-query-serving.md`](./hosted-query-serving.md).
 For the selected Cloudflare deployment plan, see

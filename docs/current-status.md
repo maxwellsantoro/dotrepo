@@ -33,12 +33,17 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Export-time per-repository `query-input/` artifacts plus a pure snapshot
   query function in core, so hosted query no longer depends on runtime TOML
   parsing as the only implementation path
+- An in-repo Cloudflare Worker project that serves the same `v0` query route
+  from exported `query-input/` artifacts and falls through to static assets
 - A documented Cloudflare Worker + Static Assets deployment plan for replacing
   the current Pages-only hosted query path without changing the `v0` contract
 - An explicit release-gate script and CI job that package the hosted public
   tree, install bundles, smoke test same-origin hosted-query resolution from
   the shipped runtime, and serve as the canonical operator review entrypoint
   for public-surface changes
+- Release-gate Worker smoke that stages the reviewed export into the Cloudflare
+  project, runs Worker tests, dry-runs Wrangler packaging, and proves an
+  emitted `queryTemplate` resolves through the Worker locally
 - A checked-in public API compatibility manifest and test for the current `v0`
   summary, trust, query, inventory, and error-wrapper contracts
 - Accepted public-serving RFCs 0016 through 0019 as the `v0` launch-doc set

@@ -1,0 +1,15 @@
+{
+  "name": "dotrepo-cloudflare-hosted-query",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Cloudflare Worker for the dotrepo hosted public surface",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "wrangler": "^4.63.0"
+  }
+}

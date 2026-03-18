@@ -179,8 +179,15 @@ As of now:
   artifacts from the reviewed snapshot
 - core now has a pure snapshot query function that can answer the current `v0`
   query wrapper from those artifacts
+- an in-repo Worker route now serves the current `v0` query path from those
+  artifacts and falls through to staged static assets locally
+- the release gate stages the reviewed export into the Worker, runs Worker
+  tests, dry-runs Wrangler packaging, and smoke-tests `queryTemplate`
+  resolution through `wrangler dev`
+- an opt-in GitHub Actions Cloudflare deploy workflow now exists in-repo
 - release bundles and the release gate already cover that runtime locally
 - deployed hosting is still static GitHub Pages
 
 So the remaining gap is the Worker route and deployment workflow, not public
-query semantics or snapshot data shape.
+query semantics or snapshot data shape, plus the final production cutover from
+Pages to Cloudflare.

@@ -10,6 +10,10 @@ Pages, rooted at:
 
 ```text
 public/
+  query-input/
+    <host>/
+      <owner>/
+        <repo>.json
   v0/
     meta.json
     repos/
@@ -32,6 +36,7 @@ This surface provides:
   `github.com/maxwellsantoro/ries-rs`, linked to the published upstream `.repo`
   and surfaced with `superseded` handoff state
 - local review and CI artifacts sharing the same exported tree
+- repo-scoped `query-input/` artifacts for Worker-backed hosted query serving
 
 Not yet in scope:
 - a public search surface
@@ -55,8 +60,9 @@ cargo test -p dotrepo-core --test public_export_fixture_pack -- --nocapture
 
 That test fixes `generatedAt` and `staleAfter`, recomputes `snapshotDigest` from
 the checked-in fixture index, and compares the exported `meta.json`,
-bundle-level `repos/index.json`, and per-repository `index.json` / `trust.json`
-files byte-for-byte against the checked-in golden tree.
+bundle-level `repos/index.json`, per-repository `index.json` / `trust.json`,
+and repo-scoped `query-input/*.json` files byte-for-byte against the checked-in
+golden tree.
 
 Use this when reviewing response-shape changes, claim-visibility changes, link
 changes, or artifact-path changes.
@@ -106,8 +112,9 @@ The canonical release review entrypoint is `scripts/check_release_gate.py`. The
 main CI workflow runs that script, which builds the public tree from the seed
 `index/`, packages the release-style install assets, smoke tests the release
 binaries, smoke tests same-origin hosted-query resolution from the shipped
-`dotrepo-public-query` binary against the exported tree, and uploads the
-resulting artifacts.
+`dotrepo-public-query` binary against the exported tree, stages that same
+reviewed export into the Cloudflare Worker, smoke tests `queryTemplate`
+resolution through `wrangler dev`, and uploads the resulting artifacts.
 
 Current behavior:
 - the artifact is generated from the real `index/` tree
@@ -118,6 +125,8 @@ Current behavior:
 - CI smoke tests the release binaries from the extracted tarball
 - CI smoke tests that an emitted `queryTemplate` can resolve against the
   shipped hosted-query runtime on the same origin
+- CI also smoke tests that the same emitted `queryTemplate` resolves through
+  the Cloudflare Worker route backed by the staged export snapshot
 - artifact retention is 14 days
 - export generation failures fail CI directly
 
@@ -140,13 +149,19 @@ upstream native `.repo`.
 - renders a root landing page with `scripts/render_public_pages_landing.py`
 - uploads and deploys to GitHub Pages
 
+Separately, `.github/workflows/public-cloudflare.yml` can stage that same
+reviewed export into the in-repo Worker project and deploy it through Wrangler
+when the required repository vars and Cloudflare secrets are enabled.
+
 The export tree is the source of truth. The hosted surface deploys the same
 `public/` output.
 
 For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.
-The remaining production gap is replacing the current static-only deployment
-with a same-origin runtime deployment.
+The Cloudflare Worker path can now also serve the same exported snapshot
+locally after staging the reviewed tree into the Worker project. The remaining
+production gap is replacing the current static-only deployment with the
+Cloudflare origin in production.
 
 ## What should stay stable vs variable
 
