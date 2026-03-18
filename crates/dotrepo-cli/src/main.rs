@@ -1,7 +1,7 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    append_claim_event, build_public_freshness, current_public_freshness,
+    adopt_managed_surface, append_claim_event, build_public_freshness, current_public_freshness,
     current_timestamp_rfc3339, export_public_index_static_with_base, generate_check_repository,
     import_repository_with_options, inspect_claim_directory, inspect_surface_states,
     load_manifest_document, load_manifest_from_root, managed_outputs, preview_surfaces,
@@ -84,6 +84,14 @@ enum Command {
         #[arg(long)]
         json: bool,
     },
+    /// Adopt one supported Markdown surface into managed-region sync.
+    Manage {
+        /// Conventional surface to manage.
+        surface: PreviewSurfaceArg,
+        /// Convert the existing file into a managed-region file.
+        #[arg(long)]
+        adopt: bool,
+    },
     /// Preview how dotrepo would render or replace one managed surface.
     Preview {
         /// Conventional surface to preview.
@@ -101,6 +109,11 @@ enum Command {
         /// Emit the full conflict-aware trust report as JSON.
         #[arg(long)]
         json: bool,
+    },
+    /// Scaffold CI for the canonical native-repo maintainer loop.
+    Ci {
+        #[command(subcommand)]
+        command: CiCommand,
     },
     /// Inspect one maintainer-claim directory from the index.
     Claim {
@@ -242,6 +255,19 @@ enum PublicCommand {
     },
 }
 
+#[derive(Subcommand)]
+enum CiCommand {
+    /// Write the starter GitHub Actions workflow for native-repo checks.
+    Init {
+        /// Replace an existing workflow file.
+        #[arg(long)]
+        force: bool,
+        /// Release version to pin in the workflow, such as `1.0.0`.
+        #[arg(long)]
+        version: Option<String>,
+    },
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq, ValueEnum)]
 enum ImportModeArg {
     Native,
@@ -361,8 +387,10 @@ fn run() -> Result<()> {
         Command::Query { path, json, raw } => cmd_query(cli.root, &path, json, raw),
         Command::Generate { check } => cmd_generate(cli.root, check),
         Command::Doctor { json } => cmd_doctor(cli.root, json),
+        Command::Manage { surface, adopt } => cmd_manage(cli.root, surface, adopt),
         Command::Preview { surface, all, json } => cmd_preview(cli.root, surface, all, json),
         Command::Trust { json } => cmd_trust(cli.root, json),
+        Command::Ci { command } => cmd_ci(cli.root, command),
         Command::Claim { path, json } => cmd_claim(cli.root, path, json),
         Command::ClaimInit {
             host,
@@ -651,6 +679,32 @@ fn cmd_doctor(root: PathBuf, json: bool) -> Result<()> {
     Ok(())
 }
 
+fn cmd_manage(root: PathBuf, surface: PreviewSurfaceArg, adopt: bool) -> Result<()> {
+    let manifest = load_manifest_from_root(&root)?;
+    validate_manifest(&root, &manifest)?;
+    ensure_native_managed_surface_command(&manifest.record.mode, "manage")?;
+
+    if !adopt {
+        return Err(CliExit {
+            code: 2,
+            message: "manage currently requires --adopt".into(),
+        }
+        .into());
+    }
+
+    let plan = adopt_managed_surface(&root, surface.into())?;
+    if let Some(parent) = plan.path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+    fs::write(&plan.path, plan.contents)?;
+    println!(
+        "adopted {} as a partially managed {} surface",
+        plan.path.display(),
+        format_doctor_surface(plan.surface)
+    );
+    Ok(())
+}
+
 fn cmd_preview(
     root: PathBuf,
     surface: Option<PreviewSurfaceArg>,
@@ -689,6 +743,12 @@ fn cmd_preview(
     Ok(())
 }
 
+fn cmd_ci(root: PathBuf, command: CiCommand) -> Result<()> {
+    match command {
+        CiCommand::Init { force, version } => cmd_ci_init(root, force, version),
+    }
+}
+
 fn ensure_native_managed_surface_command(mode: &RecordMode, command: &str) -> Result<()> {
     if *mode == RecordMode::Overlay {
         return Err(CliExit {
@@ -702,6 +762,93 @@ fn ensure_native_managed_surface_command(mode: &RecordMode, command: &str) -> Re
     }
 
     Ok(())
+}
+
+fn ensure_native_record_command(mode: &RecordMode, command: &str) -> Result<()> {
+    if *mode == RecordMode::Overlay {
+        return Err(CliExit {
+            code: 2,
+            message: format!(
+                "{} is only supported for native records; found record.mode = \"overlay\"",
+                command
+            ),
+        }
+        .into());
+    }
+
+    Ok(())
+}
+
+fn cmd_ci_init(root: PathBuf, force: bool, version: Option<String>) -> Result<()> {
+    let manifest = load_manifest_from_root(&root)?;
+    validate_manifest(&root, &manifest)?;
+    ensure_native_record_command(&manifest.record.mode, "ci init")?;
+
+    let workflow_path = root.join(".github/workflows/dotrepo-check.yml");
+    if workflow_path.exists() && !force {
+        bail!(
+            "{} already exists; rerun with --force to overwrite it",
+            workflow_path.display()
+        );
+    }
+
+    let version = version.unwrap_or_else(|| env!("CARGO_PKG_VERSION").to_string());
+    let workflow = render_ci_workflow(&version);
+    if let Some(parent) = workflow_path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+    fs::write(&workflow_path, workflow)?;
+    println!(
+        "initialized {} with dotrepo {}",
+        workflow_path.display(),
+        version
+    );
+    Ok(())
+}
+
+fn render_ci_workflow(version: &str) -> String {
+    let repository = env!("CARGO_PKG_REPOSITORY").trim_end_matches('/');
+    let asset = format!("dotrepo-{version}-x86_64-unknown-linux-gnu.tar.gz");
+    let release_base = format!("{repository}/releases/download/v{version}");
+    format!(
+        r#"name: dotrepo-check
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dotrepo
+        env:
+          DOTREPO_VERSION: "{version}"
+          DOTREPO_ASSET: "{asset}"
+          DOTREPO_RELEASE_BASE: "{release_base}"
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSLo "$RUNNER_TEMP/$DOTREPO_ASSET" "$DOTREPO_RELEASE_BASE/$DOTREPO_ASSET"
+          curl -fsSLo "$RUNNER_TEMP/$DOTREPO_ASSET.sha256" "$DOTREPO_RELEASE_BASE/$DOTREPO_ASSET.sha256"
+          (
+            cd "$RUNNER_TEMP"
+            sha256sum -c "$DOTREPO_ASSET.sha256"
+          )
+          tar -xzf "$RUNNER_TEMP/$DOTREPO_ASSET" -C "$RUNNER_TEMP"
+          install "$RUNNER_TEMP/dotrepo-$DOTREPO_VERSION-x86_64-unknown-linux-gnu/bin/dotrepo" "$HOME/.local/bin/dotrepo"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Run dotrepo checks
+        run: |
+          dotrepo --root . validate
+          dotrepo --root . query repo.build --raw
+          dotrepo --root . trust
+          dotrepo --root . doctor
+          dotrepo --root . generate --check
+"#
+    )
 }
 
 fn cmd_trust(root: PathBuf, json: bool) -> Result<()> {

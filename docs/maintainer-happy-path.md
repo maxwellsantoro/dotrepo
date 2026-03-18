@@ -22,6 +22,23 @@ Choose one bootstrap path:
 After that first step, treat the root `.repo` as the source of truth and keep
 generated compatibility surfaces in sync from it.
 
+To scaffold the native-repo CI check loop, run:
+
+```bash
+dotrepo --root <repo> ci init
+```
+
+That writes `.github/workflows/dotrepo-check.yml` with the same release-binary
+workflow shape used by the native example repo. Pass `--version <x.y.z>` when
+you want to pin a different dotrepo release than the current CLI version, or
+`--force` to overwrite an existing workflow file.
+
+Native import now chooses `compat.github.*` conservatively from on-disk files:
+- it enables `generate` only when the checked-in surface already matches the
+  current dotrepo renderer closely enough that full ownership is honest
+- richer handwritten surfaces stay `skip` until you inspect them with `doctor`
+  and `preview`, then adopt them explicitly if needed
+
 Do not assume every conventional community file should immediately be marked
 `generate`.
 
@@ -36,7 +53,7 @@ Do not assume every conventional community file should immediately be marked
 
 ## Canonical local loop
 
-Run the same loop the example repo uses:
+Run the same loop the example repo uses locally:
 
 ```bash
 dotrepo --root examples/native-minimal validate
@@ -106,13 +123,33 @@ dotrepo truthfully reproduce the file we want from `.repo`?" If the answer is
 "only a narrow stub," prefer managed regions for supported Markdown files or
 leave the file unmanaged.
 
+For supported Markdown surfaces, the incremental adoption loop is now explicit:
+
+```bash
+dotrepo --root <repo> doctor --json
+dotrepo --root <repo> preview --surface contributing --json
+dotrepo --root <repo> manage contributing --adopt
+dotrepo --root <repo> generate --check
+```
+
+- `preview --surface ...` shows the current file, the proposed managed result,
+  whether unmanaged prose would be dropped, and which ownership mode is
+  recommended.
+- `manage <surface> --adopt` is the explicit conversion path for
+  `README.md`, `SECURITY.md`, and `CONTRIBUTING.md`. It preserves the current
+  prose and inserts one canonical managed region instead of guessing through
+  malformed or unsupported layouts.
+- For `SECURITY.md` and `CONTRIBUTING.md`, set `compat.github.<surface> =
+  "generate"` before adoption so the managed block participates in the normal
+  generate / generate-check loop.
+
 For the concrete boundary between supported sync, unmanaged files, malformed
 markers, and unsupported layouts, see
 [`sync-boundaries.md`](./sync-boundaries.md).
 
 ## CI
 
-The example workflow runs the same maintainer path in CI:
+The example workflow and `dotrepo ci init` write the same maintainer path in CI:
 
 ```bash
 dotrepo --root examples/native-minimal validate

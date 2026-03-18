@@ -9,6 +9,10 @@ intended install surface is:
 
 These are built and packaged by `.github/workflows/release-artifacts.yml`.
 
+For native repos that want the canonical maintainer CI loop, `dotrepo ci init`
+scaffolds a GitHub Actions workflow that downloads one pinned release bundle
+and runs `validate`, `query`, `trust`, `doctor`, and `generate --check`.
+
 ## Preferred install path
 
 Download the latest matching release bundle for your platform from the GitHub

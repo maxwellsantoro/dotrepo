@@ -115,6 +115,13 @@ pub struct SurfacePreviewReport {
     pub previews: Vec<SurfacePreview>,
 }
 
+#[derive(Debug, Clone)]
+pub struct ManagedSurfaceAdoptionPlan {
+    pub surface: DoctorSurface,
+    pub path: PathBuf,
+    pub contents: String,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ValidationDiagnostic {
     pub severity: ValidationDiagnosticSeverity,
@@ -2728,6 +2735,17 @@ pub fn import_repository_with_options(
     let readme = load_first_existing_file(root, &["README.md"])?;
     let codeowners = load_first_existing_file(root, &[".github/CODEOWNERS", "CODEOWNERS"])?;
     let security = load_first_existing_file(root, &[".github/SECURITY.md", "SECURITY.md"])?;
+    let contributing =
+        load_first_existing_file(root, &["CONTRIBUTING.md", ".github/CONTRIBUTING.md"])?;
+    let pull_request_template = load_first_existing_file(
+        root,
+        &[
+            ".github/pull_request_template.md",
+            ".github/PULL_REQUEST_TEMPLATE.md",
+            "pull_request_template.md",
+            "PULL_REQUEST_TEMPLATE.md",
+        ],
+    )?;
 
     let readme_metadata = readme
         .as_ref()
@@ -2898,12 +2916,13 @@ pub fn import_repository_with_options(
     };
     manifest.compat = match mode {
         ImportMode::Native => Some(Compat {
-            github: Some(GitHubCompat {
-                codeowners: Some(CompatMode::Skip),
-                security: Some(CompatMode::Skip),
-                contributing: Some(CompatMode::Skip),
-                pull_request_template: Some(CompatMode::Skip),
-            }),
+            github: Some(native_import_github_compat(
+                &manifest,
+                codeowners.as_ref(),
+                security.as_ref(),
+                contributing.as_ref(),
+                pull_request_template.as_ref(),
+            )),
         }),
         ImportMode::Overlay => None,
     };
@@ -3885,6 +3904,91 @@ fn build_imported_docs(root: Option<String>, getting_started: Option<String>) ->
     }
 }
 
+fn native_import_github_compat(
+    manifest: &Manifest,
+    codeowners: Option<&ImportedFile>,
+    security: Option<&ImportedFile>,
+    contributing: Option<&ImportedFile>,
+    pull_request_template: Option<&ImportedFile>,
+) -> GitHubCompat {
+    GitHubCompat {
+        codeowners: Some(
+            if codeowners.is_some_and(|file| {
+                imported_surface_matches_generated(
+                    &file.contents,
+                    &render_codeowners_body_for_import(manifest),
+                )
+            }) {
+                CompatMode::Generate
+            } else {
+                CompatMode::Skip
+            },
+        ),
+        security: Some(
+            if security.is_some_and(|file| {
+                imported_surface_matches_generated(&file.contents, &render_security_body(manifest))
+            }) {
+                CompatMode::Generate
+            } else {
+                CompatMode::Skip
+            },
+        ),
+        contributing: Some(
+            if contributing.is_some_and(|file| {
+                imported_surface_matches_generated(
+                    &file.contents,
+                    &render_contributing_body(manifest),
+                )
+            }) {
+                CompatMode::Generate
+            } else {
+                CompatMode::Skip
+            },
+        ),
+        pull_request_template: Some(
+            if pull_request_template.is_some_and(|file| {
+                imported_surface_matches_generated(
+                    &file.contents,
+                    &render_pull_request_template_body(manifest),
+                )
+            }) {
+                CompatMode::Generate
+            } else {
+                CompatMode::Skip
+            },
+        ),
+    }
+}
+
+fn render_codeowners_body_for_import(manifest: &Manifest) -> String {
+    let owners = manifest
+        .owners
+        .as_ref()
+        .map(|owners| owners.maintainers.join(" "))
+        .unwrap_or_else(|| "@maintainers".into());
+    format!("* {}\n", owners)
+}
+
+fn imported_surface_matches_generated(current: &str, expected: &str) -> bool {
+    normalize_import_surface(current) == normalize_import_surface(expected)
+}
+
+fn normalize_import_surface(contents: &str) -> String {
+    let without_banner = strip_generated_banner(contents).unwrap_or(contents);
+    without_banner.replace("\r\n", "\n").trim().to_string()
+}
+
+fn strip_generated_banner(contents: &str) -> Option<&str> {
+    let stripped = contents.strip_prefix('\u{feff}').unwrap_or(contents);
+    let line_end = stripped.find('\n')?;
+    let (first_line, rest) = stripped.split_at(line_end);
+    if is_banner_line(first_line) {
+        Some(rest.trim_start_matches('\n'))
+    } else {
+        None
+    }
+}
+
 fn render_import_evidence(
     imported_sources: &[String],
     inferred_fields: &[String],
@@ -4313,6 +4417,65 @@ pub fn preview_surfaces(root: &Path, surfaces: &[DoctorSurface]) -> Result<Surfa
     })
 }
 
+pub fn adopt_managed_surface(
+    root: &Path,
+    surface: DoctorSurface,
+) -> Result<ManagedSurfaceAdoptionPlan> {
+    let loaded_manifest = load_manifest_document(root)?;
+    validate_manifest(root, &loaded_manifest.manifest)?;
+    ensure_native_managed_surface_record(&loaded_manifest.manifest, "manage")?;
+
+    let managed_surface = managed_surface_for_adoption(surface)?;
+    ensure_surface_adoption_is_enabled(surface, &loaded_manifest.manifest)?;
+    let status = inspect_managed_surface(root, managed_surface)?;
+    let body = match managed_surface {
+        ManagedSurface::Readme => render_readme_body(root, &loaded_manifest.manifest)?,
+        ManagedSurface::Security => render_security_body(&loaded_manifest.manifest),
+        ManagedSurface::Contributing => render_contributing_body(&loaded_manifest.manifest),
+    };
+
+    let contents = match status.state {
+        ManagedFileState::Unmanaged => adopt_unmanaged_surface(
+            managed_surface,
+            status
+                .current
+                .as_deref()
+                .expect("unmanaged file retains current contents"),
+            &body,
+        ),
+        ManagedFileState::Missing => {
+            bail!(
+                "{} is missing; `manage --adopt` only converts existing files into managed-region files",
+                display_path(root, &status.path)
+            )
+        }
+        ManagedFileState::PartiallyManaged => {
+            bail!(
+                "{} already contains valid managed-region markers for this surface",
+                display_path(root, &status.path)
+            )
+        }
+        ManagedFileState::FullyGenerated => {
+            bail!(
+                "{} is already fully generated by dotrepo; `manage --adopt` is only for existing unmanaged Markdown surfaces",
+                display_path(root, &status.path)
+            )
+        }
+        ManagedFileState::MalformedManaged | ManagedFileState::Unsupported => bail!(
+            "{}",
+            status
+                .message
+                .unwrap_or_else(|| default_state_message(status.state))
+        ),
+    };
+
+    Ok(ManagedSurfaceAdoptionPlan {
+        surface,
+        path: status.path,
+        contents,
+    })
+}
+
 fn all_doctor_surfaces() -> &'static [DoctorSurface] {
     &[
         DoctorSurface::Readme,
@@ -4377,6 +4540,27 @@ fn build_unsupported_surface_doctor_finding(
     }
 
     finding
+}
+
+fn ensure_surface_adoption_is_enabled(surface: DoctorSurface, manifest: &Manifest) -> Result<()> {
+    match surface {
+        DoctorSurface::Readme => Ok(()),
+        DoctorSurface::Security | DoctorSurface::Contributing => {
+            if declared_mode_for_surface(manifest, surface) == Some(CompatMode::Generate) {
+                Ok(())
+            } else {
+                bail!(
+                    "{} adoption requires compat.github.{} = \"generate\" first",
+                    doctor_surface_cli_name(surface),
+                    doctor_surface_cli_name(surface)
+                )
+            }
+        }
+        DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => bail!(
+            "{} does not support managed-region adoption",
+            doctor_surface_cli_name(surface)
+        ),
+    }
 }
 
 fn preview_surface(
@@ -4591,6 +4775,18 @@ fn managed_surface_for_doctor(surface: DoctorSurface) -> ManagedSurface {
         DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => {
             panic!("no managed-surface equivalent for {:?}", surface)
         }
+    }
+}
+
+fn managed_surface_for_adoption(surface: DoctorSurface) -> Result<ManagedSurface> {
+    match surface {
+        DoctorSurface::Readme => Ok(ManagedSurface::Readme),
+        DoctorSurface::Security => Ok(ManagedSurface::Security),
+        DoctorSurface::Contributing => Ok(ManagedSurface::Contributing),
+        DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => bail!(
+            "partial management is not supported for `{}`; `manage --adopt` is available only for readme, security, and contributing",
+            doctor_surface_cli_name(surface)
+        ),
     }
 }
 
@@ -5211,6 +5407,12 @@ fn render_pull_request_template(manifest: &Manifest, digest: &str) -> String {
     let mut out = String::new();
     out.push_str(&generated_banner(CommentStyle::Html, manifest, digest));
     out.push('\n');
+    out.push_str(&render_pull_request_template_body(manifest));
+    out
+}
+
+fn render_pull_request_template_body(manifest: &Manifest) -> String {
+    let mut out = String::new();
     out.push_str("## Summary\n\n");
     out.push_str("- Describe the user-visible change.\n\n");
     out.push_str("## Validation\n\n");
@@ -5441,6 +5643,26 @@ fn merge_managed_region(
     out.push_str(&ensure_trailing_newline(body));
     out.push_str(&current[region.content_end..]);
     Ok(out)
+}
+
+fn adopt_unmanaged_surface(surface: ManagedSurface, current: &str, body: &str) -> String {
+    let mut out = String::new();
+    let trimmed_current = current.trim_end_matches('\n');
+    if !trimmed_current.is_empty() {
+        out.push_str(trimmed_current);
+        out.push_str("\n\n");
+    }
+    out.push_str(&managed_region_block(surface, body));
+    out
+}
+
+fn managed_region_block(surface: ManagedSurface, body: &str) -> String {
+    format!(
+        "<!-- dotrepo:begin id={} -->\n{}<!-- dotrepo:end id={} -->\n",
+        managed_region_id(surface),
+        ensure_trailing_newline(body),
+        managed_region_id(surface)
+    )
 }
 
 fn parse_managed_regions(path: &Path, contents: &str) -> Result<Vec<ManagedRegion>> {
@@ -7824,6 +8046,76 @@ description = "Fast local-first sync engine"
     }
 
     #[test]
+    fn adopt_managed_surface_preserves_unmanaged_readme_prose() {
+        let root = temp_dir("adopt-readme");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect(".repo written");
+        fs::write(
+            root.join("README.md"),
+            "# Local README\n\nThis introduction stays.\n",
+        )
+        .expect("README written");
+
+        let plan = adopt_managed_surface(&root, DoctorSurface::Readme).expect("adoption succeeds");
+        assert_eq!(plan.path, root.join("README.md"));
+        assert!(plan.contents.contains("# Local README"));
+        assert!(plan.contents.contains("This introduction stays."));
+        assert!(plan
+            .contents
+            .contains("<!-- dotrepo:begin id=readme.body -->"));
+        assert!(plan.contents.contains("## Overview"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn adopt_managed_surface_refuses_missing_supported_file() {
+        let root = temp_dir("adopt-missing");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+
+[owners]
+security_contact = "security@example.com"
+
+[compat.github]
+security = "generate"
+"#,
+        )
+        .expect(".repo written");
+
+        let err =
+            adopt_managed_surface(&root, DoctorSurface::Security).expect_err("missing should fail");
+        assert!(err
+            .to_string()
+            .contains("manage --adopt` only converts existing files"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
     fn managed_outputs_preserve_unmanaged_security_content_outside_markers() {
         let root = temp_dir("managed-security");
         let manifest = parse_manifest(
@@ -8234,6 +8526,60 @@ broken
     }
 
     #[test]
+    fn inspect_surface_states_treats_partially_managed_readme_as_honest() {
+        let root = temp_dir("doctor-partial-readme");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "reviewed"
+
+[repo]
+name = "example"
+description = "Example project"
+
+[readme]
+title = "Example"
+"#,
+        )
+        .expect(".repo written");
+        fs::write(
+            root.join("README.md"),
+            r#"Project-specific introduction.
+
+<!-- dotrepo:begin id=readme.body -->
+managed
+<!-- dotrepo:end id=readme.body -->
+
+Repository-specific footer.
+"#,
+        )
+        .expect("README written");
+
+        let findings = inspect_surface_states(&root).expect("doctor findings");
+        let readme = findings
+            .iter()
+            .find(|finding| finding.surface == DoctorSurface::Readme)
+            .expect("readme finding present");
+
+        assert_eq!(readme.state, ManagedFileState::PartiallyManaged);
+        assert_eq!(
+            readme.ownership_honesty,
+            Some(DoctorOwnershipHonesty::Honest)
+        );
+        assert_eq!(
+            readme.recommended_mode,
+            Some(DoctorRecommendedMode::PartiallyManaged)
+        );
+        assert_eq!(readme.would_drop_unmanaged_content, Some(false));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
     fn inspect_surface_states_flags_lossy_contributing_generation() {
         let root = temp_dir("doctor-lossy-contributing");
         fs::create_dir_all(root.join(".github")).expect(".github created");
@@ -8562,6 +8908,107 @@ pull_request_template = "generate"
         );
         assert_eq!(plan.imported_sources.len(), 3);
         assert!(plan.evidence_text.is_none());
+        let github = plan
+            .manifest
+            .compat
+            .as_ref()
+            .and_then(|compat| compat.github.as_ref())
+            .expect("github compat present");
+        assert_eq!(github.codeowners, Some(CompatMode::Generate));
+        assert_eq!(github.security, Some(CompatMode::Skip));
+        assert_eq!(github.contributing, Some(CompatMode::Skip));
+        assert_eq!(github.pull_request_template, Some(CompatMode::Skip));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_enables_generate_only_for_reproducible_surfaces() {
+        let root = temp_dir("import-native-reproducible");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nFast local-first sync engine.\n",
+        )
+        .expect("README written");
+        fs::create_dir_all(root.join(".github")).expect(".github created");
+        fs::write(root.join(".github/CODEOWNERS"), "* @orbit-maintainer\n")
+            .expect("CODEOWNERS written");
+        fs::write(
+            root.join(".github/SECURITY.md"),
+            "# Security\n\nPlease report vulnerabilities to security@example.com.\n",
+        )
+        .expect("SECURITY written");
+        fs::write(
+            root.join("CONTRIBUTING.md"),
+            "# Contributing\n\nThanks for contributing to Orbit.\n\n## Before you open a change\n\n- Review the repository documentation and policies.\n\n## Security\n\nReport suspected vulnerabilities to security@example.com instead of opening a public issue.\n",
+        )
+        .expect("CONTRIBUTING written");
+        fs::write(
+            root.join(".github/pull_request_template.md"),
+            "## Summary\n\n- Describe the user-visible change.\n\n## Validation\n\n- [ ] Describe how you validated this change.\n\n## Checklist\n\n- [ ] Documentation updated where needed.\n- [ ] Ownership, policy, and security impacts considered.\n",
+        )
+        .expect("PR template written");
+
+        let plan =
+            import_repository(&root, ImportMode::Native, None).expect("native import succeeds");
+
+        let github = plan
+            .manifest
+            .compat
+            .as_ref()
+            .and_then(|compat| compat.github.as_ref())
+            .expect("github compat present");
+        assert_eq!(github.codeowners, Some(CompatMode::Generate));
+        assert_eq!(github.security, Some(CompatMode::Generate));
+        assert_eq!(github.contributing, Some(CompatMode::Generate));
+        assert_eq!(github.pull_request_template, Some(CompatMode::Generate));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_keeps_richer_surfaces_at_skip() {
+        let root = temp_dir("import-native-rich");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nFast local-first sync engine.\n",
+        )
+        .expect("README written");
+        fs::create_dir_all(root.join(".github")).expect(".github created");
+        fs::write(
+            root.join(".github/CODEOWNERS"),
+            "* @orbit-maintainer\n/docs/ @docs-team\n",
+        )
+        .expect("CODEOWNERS written");
+        fs::write(
+            root.join(".github/SECURITY.md"),
+            "# Security\n\nReport vulnerabilities to security@example.com.\n\nSee docs/security.md for the full disclosure policy.\n",
+        )
+        .expect("SECURITY written");
+        fs::write(
+            root.join("CONTRIBUTING.md"),
+            "# Contributing\n\nUse the repository-specific release checklist before opening a change.\n",
+        )
+        .expect("CONTRIBUTING written");
+        fs::write(
+            root.join(".github/pull_request_template.md"),
+            "## Type of change\n\n- [ ] Feature\n- [ ] Fix\n",
+        )
+        .expect("PR template written");
+
+        let plan =
+            import_repository(&root, ImportMode::Native, None).expect("native import succeeds");
+
+        let github = plan
+            .manifest
+            .compat
+            .as_ref()
+            .and_then(|compat| compat.github.as_ref())
+            .expect("github compat present");
+        assert_eq!(github.codeowners, Some(CompatMode::Skip));
+        assert_eq!(github.security, Some(CompatMode::Skip));
+        assert_eq!(github.contributing, Some(CompatMode::Skip));
+        assert_eq!(github.pull_request_template, Some(CompatMode::Skip));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -8597,6 +9044,7 @@ pull_request_template = "generate"
             .inferred_fields
             .iter()
             .any(|field| field == "repo.name"));
+        assert!(plan.manifest.compat.is_none());
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

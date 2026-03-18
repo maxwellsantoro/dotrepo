@@ -60,7 +60,8 @@ Those edits are treated as drift against `.repo`.
 dotrepo currently does **not** attempt:
 
 - arbitrary prose merging outside the supported managed-region surfaces
-- automatic conversion of an unmanaged file into a managed-region file
+- implicit conversion of an unmanaged file into a managed-region file during
+  normal generate or generate-check flows
 - partial management for `CODEOWNERS`
 - partial management for pull request templates
 - nested or overlapping managed regions
@@ -109,6 +110,20 @@ as `unmanaged`.
 
 This is the intentional guardrail that prevents dotrepo from silently replacing
 hand-written prose.
+
+If you want to convert an existing supported Markdown file into a managed-region
+file, use the explicit adoption path instead of relying on `generate`:
+
+```bash
+dotrepo --root <repo> preview --surface readme --json
+dotrepo --root <repo> manage readme --adopt
+```
+
+For `SECURITY.md` and `CONTRIBUTING.md`, set the corresponding
+`compat.github.<surface> = "generate"` value first. `manage --adopt` is
+deliberately conservative: it only works on the supported Markdown surfaces,
+refuses malformed or unsupported marker layouts, and does not guess through
+multiple candidate files.
 
 ### 4. Malformed managed SECURITY file
 

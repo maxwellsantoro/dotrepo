@@ -105,6 +105,77 @@ Use the repository-specific release checklist before you open a pull request.
 }
 
 #[test]
+fn preview_json_preserves_outer_readme_prose_for_partially_managed_files() {
+    let root = temp_dir("preview-readme");
+    fs::write(
+        root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "reviewed"
+
+[repo]
+name = "example"
+description = "Example project"
+
+[readme]
+title = "Example"
+tagline = "Managed README"
+"#,
+    )
+    .expect(".repo written");
+    fs::write(
+        root.join("README.md"),
+        r#"Project-specific introduction.
+
+<!-- dotrepo:begin id=readme.body -->
+old managed content
+<!-- dotrepo:end id=readme.body -->
+
+Repository-specific footer.
+"#,
+    )
+    .expect("README written");
+
+    let output = run_dotrepo(&[
+        "--root",
+        root.to_str().expect("temp path is utf-8"),
+        "preview",
+        "--surface",
+        "readme",
+        "--json",
+    ]);
+
+    assert!(output.status.success(), "preview --json should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    let preview = &json["previews"]
+        .as_array()
+        .expect("previews should be an array")[0];
+
+    assert_eq!(preview["surface"], Value::String("readme".into()));
+    assert_eq!(preview["ownershipHonesty"], Value::String("honest".into()));
+    assert_eq!(
+        preview["recommendedMode"],
+        Value::String("partially_managed".into())
+    );
+    assert_eq!(preview["wouldDropUnmanagedContent"], Value::Bool(false));
+    assert_eq!(preview["fullReplacement"], Value::Bool(false));
+    assert_eq!(preview["preservesUnmanagedContent"], Value::Bool(true));
+
+    let proposed = preview["proposed"].as_str().expect("proposed is a string");
+    assert!(proposed.contains("Project-specific introduction."));
+    assert!(proposed.contains("# Example"));
+    assert!(proposed.contains("> Managed README"));
+    assert!(proposed.contains("Repository-specific footer."));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
 fn preview_json_preserves_outer_security_prose_for_partially_managed_files() {
     let root = temp_dir("preview-security");
     fs::create_dir_all(root.join(".github")).expect(".github created");
