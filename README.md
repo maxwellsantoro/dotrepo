@@ -18,7 +18,7 @@ trustworthy metadata layer that makes repositories easier to understand and
 work with, while respecting the source materials they come from.
 
 Hosted public surface:
-[maxwellsantoro.github.io/dotrepo](https://maxwellsantoro.github.io/dotrepo/)
+[dotrepo.org](https://dotrepo.org/)
 
 ## See it in 60 seconds
 
@@ -190,7 +190,7 @@ Those are separate version lines on purpose:
 - example native and overlay records
 - a seeded `index/` tree with real overlay layout and validation rules
 - GitHub Actions workflows for workspace CI, operator-gate claim checks,
-  release-gate packaging, and Pages deployment
+  release-gate packaging, and Cloudflare deployment
 - public-facing docs with a balanced tone around ambition, safety, and practicality
 
 ## What dotrepo does not claim yet
