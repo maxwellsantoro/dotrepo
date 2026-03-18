@@ -5,15 +5,18 @@ This note is the current release summary for dotrepo's public JSON tree.
 ## What exists now
 
 The current release includes:
-- a static `public/v0/` JSON tree hosted through GitHub Pages
+- a static `public/v0/` JSON tree deployed through GitHub Pages
 - snapshot metadata in `meta.json` with digest and freshness
 - a bundle-level repository inventory in `repos/index.json`
 - per-repository summary and trust documents
+- a release-reviewed same-origin hosted-query runtime via `dotrepo-public-query`
 - live accepted maintainer-claim context for
   `github.com/maxwellsantoro/ries-rs`, linked to a published canonical `.repo`
 - a CI artifact for the loose tree
 - a CI artifact for a versioned review bundle
 - a GitHub Pages deployment workflow with root landing page
+- release-bundle smoke checks that prove emitted `queryTemplate` links resolve
+  against the shipped runtime on one origin
 
 ## What this provides
 
@@ -30,6 +33,10 @@ Start with the hosted deployment URL, then:
 - `v0/repos/index.json` for the repository inventory
 - one repository `v0/repos/<host>/<owner>/<repo>/index.json` for a summary
 - the matching `trust.json` for trust and selection context
+
+For same-origin hosted-query review, start with
+`scripts/check_release_gate.py`, which smoke tests the shipped
+`dotrepo-public-query` runtime against the exported tree.
 
 For the current operator and review loop, see
 [`docs/public-export-workflow.md`](./public-export-workflow.md).

@@ -9,9 +9,12 @@ Planning assumptions:
   documented through RFCs 0016 through 0019
 - the core public summary, trust, and query wrappers already exist in
   `dotrepo-core` and the CLI
-- the hosted deployment is still GitHub Pages static hosting, so "ship hosted
-  query" now means "add a thin serving/runtime layer over the existing wrapper"
-  rather than inventing a new public contract
+- the repo now has a local same-origin hosted-query runtime, release packaging
+  for `dotrepo-public-query`, and release-gate smoke coverage for emitted
+  `queryTemplate` resolution
+- the current deployed public origin is still static GitHub Pages, so the
+  remaining hosted-query work is deployment architecture rather than public
+  query semantics
 - sequencing should remain `stabilize -> compound -> expand`
 
 ## Program metrics
@@ -99,12 +102,13 @@ Primary surfaces:
 `docs/cloudflare-hosted-query.md`,
 `docs/public-surface.md`,
 `.github/workflows/public-pages.yml`,
+the current same-origin local runtime,
 the future serving/deployment layer,
 `crates/dotrepo-core/src/lib.rs` public wrapper entrypoints.
 
 - `E2-01 Freeze the hosted query serving architecture`
   Depends on: `E1-02`.
-  Acceptance: one design note picks the serving target beyond static GitHub Pages, explains request routing and cache boundaries, and keeps summary/trust static export plus query runtime under the same `v0` contract.
+  Acceptance: one design note explains request routing and cache boundaries and keeps summary/trust static export plus query runtime under the same `v0` contract.
 
 - `E2-02 Define the operational constraints for first hosted query serving`
   Depends on: `E2-01`.
@@ -120,7 +124,7 @@ the future serving/deployment layer,
 
 - `E2-05 Make queryTemplate resolve to a real hosted query surface`
   Depends on: `E2-03`.
-  Acceptance: `queryTemplate` links emitted in inventory, summary, and trust responses point at a documented and deployed handler rather than a future placeholder.
+  Acceptance: `queryTemplate` links emitted in inventory, summary, and trust responses point at a documented and deployed handler rather than a deployment placeholder.
 
 - `E2-06 Select Cloudflare Worker + Static Assets as the hosted query runtime`
   Depends on: `E2-05`.

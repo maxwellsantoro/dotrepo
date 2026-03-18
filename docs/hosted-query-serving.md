@@ -25,19 +25,26 @@ What already exists:
 - that runtime can now also serve an exported `public/` tree on the same origin
   through `--public-root`, so local same-origin review does not require a
   separate static host
+- release bundles and the release gate already include and smoke test that
+  runtime
 - public summary and trust responses are exported as a static tree and deployed
   through GitHub Pages
 - public responses already emit a stable `queryTemplate`
 
 What does not exist yet:
 
-- release packaging and deployment for the hosted query runtime
 - a deployed route behind the same public contract family as summary and trust
+- a production deployment that replaces the current static-only GitHub Pages
+  hosting with a same-origin hosted query surface
 
-## Decision
+## Runtime decision
 
-The first hosted query target should be a small Rust HTTP service that serves
-only the public query route against a read-only exported snapshot.
+The current local/runtime hosted-query slice is a small Rust HTTP service over
+a read-only exported snapshot. It is used for local review, release packaging,
+and same-origin smoke checks.
+
+The planned deployed target is the Cloudflare Worker + Static Assets runtime
+described in [`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md).
 
 It should not:
 
@@ -164,17 +171,21 @@ The first hosted query deployment should make these constraints explicit:
 If rate limiting is added, it should live at the HTTP edge or deployment layer,
 not in a second application-specific query vocabulary.
 
-## Recommended first implementation slice
+## Implemented local/runtime slice
 
-Build the first slice in this order:
+The current local/runtime slice now does all of the following:
 
-1. Keep the small Rust HTTP binary that wraps
+1. Keeps the small Rust HTTP binary that wraps
    `public_repository_query_or_error_with_base` thin and release-packaged.
-2. Load one read-only snapshot root and one `base_path` from configuration.
-3. Serve only the public query route and a small health check.
-4. Reuse the existing public freshness block from the loaded snapshot.
-5. Keep parity tests that compare hosted HTTP responses with the existing local
+2. Loads one read-only snapshot root and one `base_path` from configuration.
+3. Serves the public query route and a small health check.
+4. Can also serve the exported `public/` tree on the same origin for local
+   review through `--public-root`.
+5. Reuses the existing public freshness block from the loaded snapshot.
+6. Has parity tests that compare hosted HTTP responses with the existing local
    public query fixtures.
+7. Has release-gate smoke checks that prove an emitted `queryTemplate` resolves
+   against the shipped runtime on one origin.
 
 That slice is enough to prove:
 
@@ -182,7 +193,8 @@ That slice is enough to prove:
 - `queryTemplate` can resolve to a real runtime
 - freshness stays aligned with the exported snapshot
 
-It is not enough to justify search, browse, or broader public-site expansion.
+It is not enough to count as deployed hosted query. The remaining gap is
+production deployment under the public origin.
 
 ## Explicit non-goals for the first slice
 

@@ -52,8 +52,11 @@ For the canonical freshness semantics used by these outputs, see
 - the release gate smoke tests the extracted release binaries
 - the release gate smoke tests same-origin hosted query resolution against the
   exported public tree
-- the GitHub Pages workflow deploys the same tree without editing links by hand
-- the `release-artifacts` workflow publishes tagged CLI/LSP/MCP bundles and a VSIX
+- the current GitHub Pages workflow deploys the same static tree without
+  editing links by hand
+- the `release-artifacts` workflow publishes tagged `dotrepo`,
+  `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp` binary bundles plus
+  a VSIX
 - the release note is current
 - the usage examples still match the exported tree
 

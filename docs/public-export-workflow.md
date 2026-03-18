@@ -5,7 +5,8 @@ tree and its hosted deployment.
 
 ## What exists now
 
-The public surface is a static JSON tree hosted through GitHub Pages, rooted at:
+The current deployed public surface is a static JSON tree hosted through GitHub
+Pages, rooted at:
 
 ```text
 public/
@@ -25,6 +26,8 @@ This surface provides:
 - a bundle-level repository inventory for navigation
 - repository summary and trust responses reusing the same local selection,
   conflict, and claim-visibility semantics
+- a local and release-reviewed same-origin hosted-query runtime over the same
+  snapshot family
 - a live accepted maintainer claim in the checked-in index for
   `github.com/maxwellsantoro/ries-rs`, linked to the published upstream `.repo`
   and surfaced with `superseded` handoff state
@@ -93,7 +96,7 @@ cargo run -p dotrepo-cli -- public export --index-root index --out-dir public
 ```
 
 You may also add `--stale-after-hours <hours>` for an advisory staleness window.
-When deploying behind a subpath such as a GitHub Pages project site, add
+When deploying behind a subpath such as the current GitHub Pages project site, add
 `--base-path /<repo-name>` so public links resolve correctly from the hosted
 root and point at the exported `index.json` / `trust.json` files.
 
@@ -128,7 +131,7 @@ already demonstrates the corrected accepted-claim path through
 `github.com/maxwellsantoro/ries-rs`, with `superseded` handoff linked to the
 upstream native `.repo`.
 
-## Hosted static deployment
+## Current deployed hosting
 
 `.github/workflows/public-pages.yml`:
 
@@ -142,8 +145,8 @@ The export tree is the source of truth. The hosted surface deploys the same
 
 For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.
-The remaining production gap is replacing or fronting the current Pages-only
-deployment with that same-origin runtime.
+The remaining production gap is replacing the current static-only deployment
+with a same-origin runtime deployment.
 
 ## What should stay stable vs variable
 

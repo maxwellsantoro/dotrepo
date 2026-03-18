@@ -1,6 +1,6 @@
 # Current status
 
-As of March 16, 2026, dotrepo is a working implementation of the protocol,
+As of March 18, 2026, dotrepo is a working implementation of the protocol,
 reference toolchain, and seed index, with a hosted read-only public surface.
 
 ## What exists now
@@ -24,17 +24,18 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - An explicit operator-gate script and CI job for claim inspection, handoff, and
   invalid-history regression coverage, including a staged seed-overlay handoff
   exported through the normal public JSON path
-- A hosted-static public surface deployed through GitHub Pages
-- Release-artifact packaging for the CLI, LSP, and MCP binaries, with CI smoke
-  tests that extract and run the shipped binaries from the packaged tarball
+- A currently deployed static public surface through GitHub Pages
+- Release-artifact packaging for `dotrepo`, `dotrepo-public-query`,
+  `dotrepo-lsp`, and `dotrepo-mcp`, with CI smoke tests that extract and run
+  the shipped binaries from the packaged tarball
 - A local same-origin hosted-query runtime that can serve both the exported
   `public/` tree and query responses from one process
 - A documented Cloudflare Worker + Static Assets deployment plan for replacing
   the current Pages-only hosted query path without changing the `v0` contract
 - An explicit release-gate script and CI job that package the hosted public
-  tree, install bundles, and VS Code release asset from one reproducible flow,
-  and serve as the canonical operator review entrypoint for public-surface
-  changes
+  tree, install bundles, smoke test same-origin hosted-query resolution from
+  the shipped runtime, and serve as the canonical operator review entrypoint
+  for public-surface changes
 - A checked-in public API compatibility manifest and test for the current `v0`
   summary, trust, query, inventory, and error-wrapper contracts
 - Accepted public-serving RFCs 0016 through 0019 as the `v0` launch-doc set

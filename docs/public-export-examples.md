@@ -1,13 +1,15 @@
 # Public export examples
 
 These examples show how to consume the dotrepo public JSON tree. The hosted
-GitHub Pages deployment is the primary consumption path; the same tree can also
-be inspected locally or from CI artifacts.
+GitHub Pages deployment is the current deployed consumption path; the same tree
+can also be inspected locally, from CI artifacts, or through the local
+same-origin hosted-query runtime.
 
 ## 1. Fetch hosted snapshot metadata
 
 ```bash
-# Replace BASE_URL with the hosted Pages URL (e.g. https://<owner>.github.io/dotrepo)
+# Replace BASE_URL with the current hosted public URL (for example the GitHub
+# Pages URL today)
 curl -s "$BASE_URL/v0/meta.json" | python3 -c "
 import json, sys
 meta = json.load(sys.stdin)
@@ -98,12 +100,38 @@ PY
 ## 7. Query one field locally from the same index snapshot
 
 The static export ships summary and trust JSON files. It does not precompute
-arbitrary query-path files, so use the CLI when you want the `v0` query wrapper
-locally:
+arbitrary query-path files. For local query access, either use
+`dotrepo public query` directly or run `dotrepo-public-query` against the
+exported tree when you want same-origin hosted-query review:
 
 ```bash
 cargo run -p dotrepo-cli -- public query github.com sharkdp fd repo.description
 ```
 
-These examples work against the hosted deployment, a local export, or extracted
-CI artifacts.
+## 8. Serve a local same-origin public surface plus query route
+
+```bash
+cargo run -p dotrepo-cli -- public export \
+  --index-root index \
+  --out-dir public \
+  --base-path /dotrepo
+
+cargo run -p dotrepo-cli --bin dotrepo-public-query -- \
+  --index-root index \
+  --public-root public \
+  --bind 127.0.0.1:3000 \
+  --base-path /dotrepo
+```
+
+Then:
+
+```bash
+curl -s "http://127.0.0.1:3000/dotrepo/v0/repos/index.json" | python3 -c "
+import json, sys
+inventory = json.load(sys.stdin)
+print(inventory['repositories'][0]['links']['queryTemplate'])
+"
+```
+
+These examples work against the current deployed public tree, a local export,
+the local same-origin runtime, or extracted CI artifacts.
