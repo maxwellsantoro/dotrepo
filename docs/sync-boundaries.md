@@ -43,6 +43,45 @@ For supported Markdown surfaces, dotrepo currently uses these states:
 managed or fully generated surface is expected but absent on disk. `doctor`
 does not list missing files because there is no on-disk surface to inspect.
 
+## Machine-readable adoption reports
+
+`doctor --json` and `preview --json` are the machine-readable adoption surfaces
+for the current managed-sync contract. They are intended for scripts, MCP
+clients, and editor helpers that need the same ownership model humans see in
+the CLI.
+
+These JSON reports are semi-stable within the current v1 line:
+
+- field names and enum vocabularies should be treated as stable enough for
+  maintainer tooling
+- additive fields may appear over time
+- changing or removing the documented keys should be treated as a compatibility
+  change and covered by contract tests
+
+`doctor --json` returns:
+
+- top-level `mode`, `status`, and `findings`
+- one finding per inspected surface, with shared fields:
+  `path`, `surface`, `state`, `message`, `declaredMode`,
+  `supportsManagedRegions`, `supportsFullGeneration`, `ownershipHonesty`,
+  `recommendedMode`, `wouldDropUnmanagedContent`, `rendererCoverage`, and
+  `advice`
+
+`preview --json` returns:
+
+- top-level `root` and `previews`
+- one preview per requested surface
+- every preview includes the same shared finding fields as `doctor --json`
+- preview-specific fields: `current`, `proposed`, `fullReplacement`, and
+  `preservesUnmanagedContent`
+
+Use these reports when you need to answer questions like:
+
+- is this ownership mode honest?
+- would dotrepo drop handwritten prose?
+- is partial management supported for this surface?
+- what would the managed or generated result look like before writing it?
+
 ## What dotrepo preserves
 
 dotrepo preserves:

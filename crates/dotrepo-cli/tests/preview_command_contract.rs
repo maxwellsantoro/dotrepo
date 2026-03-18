@@ -1,4 +1,5 @@
 use serde_json::Value;
+use std::collections::BTreeSet;
 use std::fs;
 use std::path::PathBuf;
 use std::process::Command;
@@ -27,6 +28,14 @@ fn temp_dir(label: &str) -> PathBuf {
     let root = std::env::temp_dir().join(format!("dotrepo-cli-{label}-{nanos}"));
     fs::create_dir_all(&root).expect("temp dir created");
     root
+}
+
+fn object_keys(value: &Value) -> BTreeSet<String> {
+    value.as_object()
+        .expect("json value should be an object")
+        .keys()
+        .cloned()
+        .collect()
 }
 
 #[test]
@@ -78,13 +87,39 @@ Use the repository-specific release checklist before you open a pull request.
     assert!(output.stderr.is_empty(), "success should not write stderr");
 
     let json = parse_stdout_json(&output);
+    let expected_top_level = BTreeSet::from(["previews".to_string(), "root".to_string()]);
+    assert_eq!(object_keys(&json), expected_top_level);
+
     let previews = json["previews"]
         .as_array()
         .expect("previews should be an array");
     assert_eq!(previews.len(), 1);
     let preview = &previews[0];
 
+    let expected_keys = BTreeSet::from([
+        "advice".to_string(),
+        "current".to_string(),
+        "declaredMode".to_string(),
+        "fullReplacement".to_string(),
+        "message".to_string(),
+        "ownershipHonesty".to_string(),
+        "path".to_string(),
+        "preservesUnmanagedContent".to_string(),
+        "proposed".to_string(),
+        "recommendedMode".to_string(),
+        "rendererCoverage".to_string(),
+        "state".to_string(),
+        "supportsFullGeneration".to_string(),
+        "supportsManagedRegions".to_string(),
+        "surface".to_string(),
+        "wouldDropUnmanagedContent".to_string(),
+    ]);
+    assert_eq!(object_keys(preview), expected_keys);
+
     assert_eq!(preview["surface"], Value::String("contributing".into()));
+    assert_eq!(preview["declaredMode"], Value::String("generate".into()));
+    assert_eq!(preview["supportsManagedRegions"], Value::Bool(true));
+    assert_eq!(preview["supportsFullGeneration"], Value::Bool(true));
     assert_eq!(
         preview["ownershipHonesty"],
         Value::String("lossy_full_generation".into())
@@ -96,10 +131,25 @@ Use the repository-specific release checklist before you open a pull request.
     assert_eq!(preview["wouldDropUnmanagedContent"], Value::Bool(true));
     assert_eq!(preview["fullReplacement"], Value::Bool(true));
     assert_eq!(preview["preservesUnmanagedContent"], Value::Bool(false));
+    assert!(preview["current"].is_string());
     assert!(preview["proposed"]
         .as_str()
         .expect("proposed is a string")
         .contains("## Before you open a change"));
+    assert!(
+        preview["advice"]
+            .as_array()
+            .expect("advice should be an array")
+            .iter()
+            .any(|item| item
+                .as_str()
+                .expect("advice items should be strings")
+                .contains("managed regions")
+                || item
+                    .as_str()
+                    .expect("advice items should be strings")
+                    .contains("dotrepo preview"))
+    );
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

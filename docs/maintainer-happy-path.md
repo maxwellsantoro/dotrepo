@@ -141,6 +141,9 @@ dotrepo --root <repo> generate --check
 - `preview --surface ...` shows the current file, the proposed managed result,
   whether unmanaged prose would be dropped, and which ownership mode is
   recommended.
+- `doctor --json` and `preview --json` are also the semi-stable machine-facing
+  adoption reports for scripts, editors, and MCP clients. The field-level
+  contract is documented in [`sync-boundaries.md`](./sync-boundaries.md).
 - `manage <surface> --adopt` is the explicit conversion path for
   `README.md`, `SECURITY.md`, and `CONTRIBUTING.md`. It preserves the current
   prose and inserts one canonical managed region instead of guessing through
