@@ -96,6 +96,25 @@ pub struct DoctorReport {
     pub findings: Vec<DoctorFinding>,
 }
 
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SurfacePreview {
+    #[serde(flatten)]
+    pub finding: DoctorFinding,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub current: Option<String>,
+    pub proposed: String,
+    pub full_replacement: bool,
+    pub preserves_unmanaged_content: bool,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SurfacePreviewReport {
+    pub root: String,
+    pub previews: Vec<SurfacePreview>,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ValidationDiagnostic {
     pub severity: ValidationDiagnosticSeverity,
@@ -4271,6 +4290,39 @@ pub fn inspect_surface_states(root: &Path) -> Result<Vec<DoctorFinding>> {
     Ok(findings)
 }
 
+pub fn preview_surfaces(root: &Path, surfaces: &[DoctorSurface]) -> Result<SurfacePreviewReport> {
+    let loaded_manifest = load_manifest_document(root)?;
+    validate_manifest(root, &loaded_manifest.manifest)?;
+    ensure_native_managed_surface_record(&loaded_manifest.manifest, "preview")?;
+
+    let targets = if surfaces.is_empty() {
+        all_doctor_surfaces().to_vec()
+    } else {
+        surfaces.to_vec()
+    };
+
+    let previews = targets
+        .iter()
+        .copied()
+        .map(|surface| preview_surface(root, &loaded_manifest, surface))
+        .collect::<Result<Vec<_>>>()?;
+
+    Ok(SurfacePreviewReport {
+        root: root.display().to_string(),
+        previews,
+    })
+}
+
+fn all_doctor_surfaces() -> &'static [DoctorSurface] {
+    &[
+        DoctorSurface::Readme,
+        DoctorSurface::Security,
+        DoctorSurface::Contributing,
+        DoctorSurface::Codeowners,
+        DoctorSurface::PullRequestTemplate,
+    ]
+}
+
 fn load_doctor_manifest(root: &Path) -> Result<Option<LoadedManifest>> {
     let path = manifest_path(root);
     if !path.exists() {
@@ -4321,10 +4373,74 @@ fn build_unsupported_surface_doctor_finding(
     );
 
     if let Some(loaded_manifest) = loaded_manifest {
-        apply_unsupported_surface_manifest_metadata(&mut finding, &loaded_manifest.manifest);
+        apply_all_or_nothing_surface_manifest_metadata(&mut finding, &loaded_manifest.manifest);
     }
 
     finding
+}
+
+fn preview_surface(
+    root: &Path,
+    loaded_manifest: &LoadedManifest,
+    surface: DoctorSurface,
+) -> Result<SurfacePreview> {
+    let manifest = &loaded_manifest.manifest;
+    match surface {
+        DoctorSurface::Readme | DoctorSurface::Security | DoctorSurface::Contributing => {
+            let managed_surface = managed_surface_for_doctor(surface);
+            let status = inspect_managed_surface(root, managed_surface)?;
+            let finding = build_managed_surface_doctor_finding(
+                root,
+                managed_surface,
+                status.clone(),
+                Some(loaded_manifest),
+            )?;
+            let proposed = expected_preview_output_for_managed_surface(
+                root,
+                surface,
+                manifest,
+                &loaded_manifest.raw,
+                &status,
+            )?;
+            Ok(SurfacePreview {
+                finding,
+                current: status.current,
+                proposed,
+                full_replacement: matches!(
+                    status.state,
+                    ManagedFileState::Unmanaged
+                        | ManagedFileState::MalformedManaged
+                        | ManagedFileState::Unsupported
+                ),
+                preserves_unmanaged_content: status.state == ManagedFileState::PartiallyManaged,
+            })
+        }
+        DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => {
+            let status = inspect_all_or_nothing_surface(root, surface)?;
+            let mut finding = base_doctor_finding(
+                relative_or_absolute(root, &status.path),
+                surface,
+                status.state,
+                status
+                    .message
+                    .clone()
+                    .unwrap_or_else(|| default_state_message(status.state)),
+            );
+            apply_all_or_nothing_surface_manifest_metadata(&mut finding, manifest);
+            Ok(SurfacePreview {
+                finding,
+                current: status.current,
+                proposed: expected_generated_surface_contents(
+                    root,
+                    surface,
+                    manifest,
+                    &loaded_manifest.raw,
+                )?,
+                full_replacement: status.state == ManagedFileState::Unsupported,
+                preserves_unmanaged_content: false,
+            })
+        }
+    }
 }
 
 fn base_doctor_finding(
@@ -4421,27 +4537,42 @@ fn apply_doctor_surface_manifest_metadata(
     Ok(())
 }
 
-fn apply_unsupported_surface_manifest_metadata(finding: &mut DoctorFinding, manifest: &Manifest) {
+fn apply_all_or_nothing_surface_manifest_metadata(
+    finding: &mut DoctorFinding,
+    manifest: &Manifest,
+) {
     finding.declared_mode = declared_mode_for_surface(manifest, finding.surface);
 
     if finding.declared_mode != Some(CompatMode::Generate) {
         return;
     }
 
-    finding.ownership_honesty = Some(DoctorOwnershipHonesty::LossyFullGeneration);
-    finding.recommended_mode = Some(DoctorRecommendedMode::Skip);
-    finding.would_drop_unmanaged_content = Some(true);
-    finding.message = format!(
-        "{} is declared as fully generated, but partial management is not supported for this surface. dotrepo can only fully replace it or leave it unmanaged. Prefer `skip` unless the generated template is the entire file you want.",
-        finding.path.display()
-    );
-    finding.advice = vec![
-        format!(
-            "Run `dotrepo preview --surface {}` before enabling full generation.",
-            doctor_surface_cli_name(finding.surface)
-        ),
-        "Keep this surface unmanaged if the checked-in file contains richer policy or workflow content than the current template can express.".into(),
-    ];
+    match finding.state {
+        ManagedFileState::Missing | ManagedFileState::FullyGenerated => {
+            finding.ownership_honesty = Some(DoctorOwnershipHonesty::Honest);
+            finding.recommended_mode = Some(DoctorRecommendedMode::Generate);
+            finding.would_drop_unmanaged_content = Some(false);
+        }
+        ManagedFileState::Unsupported => {
+            finding.ownership_honesty = Some(DoctorOwnershipHonesty::LossyFullGeneration);
+            finding.recommended_mode = Some(DoctorRecommendedMode::Skip);
+            finding.would_drop_unmanaged_content = Some(true);
+            finding.message = format!(
+                "{} is declared as fully generated, but partial management is not supported for this surface. dotrepo can only fully replace it or leave it unmanaged. Prefer `skip` unless the generated template is the entire file you want.",
+                finding.path.display()
+            );
+            finding.advice = vec![
+                format!(
+                    "Run `dotrepo preview --surface {}` before enabling full generation.",
+                    doctor_surface_cli_name(finding.surface)
+                ),
+                "Keep this surface unmanaged if the checked-in file contains richer policy or workflow content than the current template can express.".into(),
+            ];
+        }
+        ManagedFileState::PartiallyManaged
+        | ManagedFileState::Unmanaged
+        | ManagedFileState::MalformedManaged => {}
+    }
 }
 
 fn doctor_surface_for_managed(surface: ManagedSurface) -> DoctorSurface {
@@ -4449,6 +4580,17 @@ fn doctor_surface_for_managed(surface: ManagedSurface) -> DoctorSurface {
         ManagedSurface::Readme => DoctorSurface::Readme,
         ManagedSurface::Security => DoctorSurface::Security,
         ManagedSurface::Contributing => DoctorSurface::Contributing,
+    }
+}
+
+fn managed_surface_for_doctor(surface: DoctorSurface) -> ManagedSurface {
+    match surface {
+        DoctorSurface::Readme => ManagedSurface::Readme,
+        DoctorSurface::Security => ManagedSurface::Security,
+        DoctorSurface::Contributing => ManagedSurface::Contributing,
+        DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => {
+            panic!("no managed-surface equivalent for {:?}", surface)
+        }
     }
 }
 
@@ -4533,6 +4675,112 @@ fn expected_generated_surface_contents(
             ))
         }
         DoctorSurface::PullRequestTemplate => Ok(render_pull_request_template(manifest, &digest)),
+    }
+}
+
+fn expected_preview_output_for_managed_surface(
+    root: &Path,
+    surface: DoctorSurface,
+    manifest: &Manifest,
+    source_bytes: &[u8],
+    status: &ManagedSurfaceStatus,
+) -> Result<String> {
+    let full_expected = expected_generated_surface_contents(root, surface, manifest, source_bytes)?;
+    match status.state {
+        ManagedFileState::PartiallyManaged => {
+            let body = match surface {
+                DoctorSurface::Readme => render_readme_body(root, manifest)?,
+                DoctorSurface::Security => render_security_body(manifest),
+                DoctorSurface::Contributing => render_contributing_body(manifest),
+                DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => {
+                    bail!("surface does not support managed-region preview bodies")
+                }
+            };
+            merge_managed_region(
+                &status.path,
+                managed_surface_for_doctor(surface),
+                status
+                    .current
+                    .as_deref()
+                    .expect("partially managed file retains current contents"),
+                &body,
+            )
+        }
+        _ => Ok(full_expected),
+    }
+}
+
+fn inspect_all_or_nothing_surface(
+    root: &Path,
+    surface: DoctorSurface,
+) -> Result<ManagedSurfaceStatus> {
+    let candidate_paths = all_or_nothing_surface_paths(surface)
+        .iter()
+        .map(|relative| root.join(relative))
+        .filter(|path| path.exists())
+        .collect::<Vec<_>>();
+
+    if candidate_paths.len() > 1 {
+        let paths = candidate_paths
+            .iter()
+            .map(|path| display_path(root, path))
+            .collect::<Vec<_>>()
+            .join(", ");
+        return Ok(ManagedSurfaceStatus {
+            path: candidate_paths[0].clone(),
+            state: ManagedFileState::Unsupported,
+            current: None,
+            message: Some(format!(
+                "multiple candidate files exist for this surface ({paths}); keep one authoritative path before enabling sync"
+            )),
+        });
+    }
+
+    let Some(path) = candidate_paths.first() else {
+        return Ok(ManagedSurfaceStatus {
+            path: root.join(all_or_nothing_surface_paths(surface)[0]),
+            state: ManagedFileState::Missing,
+            current: None,
+            message: Some("managed surface is missing".into()),
+        });
+    };
+
+    let current = fs::read_to_string(path)
+        .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+    if is_dotrepo_generated(&current) {
+        return Ok(ManagedSurfaceStatus {
+            path: path.clone(),
+            state: ManagedFileState::FullyGenerated,
+            current: Some(current),
+            message: Some("fully generated by dotrepo".into()),
+        });
+    }
+
+    Ok(ManagedSurfaceStatus {
+        path: path.clone(),
+        state: ManagedFileState::Unsupported,
+        current: Some(current),
+        message: Some(
+            "conventional surface exists outside the managed-region contract for this file; keep it unmanaged or convert it to a fully generated dotrepo surface".into(),
+        ),
+    })
+}
+
+fn all_or_nothing_surface_paths(surface: DoctorSurface) -> &'static [&'static str] {
+    match surface {
+        DoctorSurface::Codeowners => &[".github/CODEOWNERS", "CODEOWNERS"],
+        DoctorSurface::PullRequestTemplate => &[
+            ".github/pull_request_template.md",
+            ".github/PULL_REQUEST_TEMPLATE.md",
+            "pull_request_template.md",
+            "PULL_REQUEST_TEMPLATE.md",
+        ],
+        DoctorSurface::Readme | DoctorSurface::Security | DoctorSurface::Contributing => {
+            panic!(
+                "surface does not use all-or-nothing path resolution: {:?}",
+                surface
+            )
+        }
     }
 }
 

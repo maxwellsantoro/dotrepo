@@ -4,13 +4,14 @@ use dotrepo_core::{
     append_claim_event, build_public_freshness, current_public_freshness,
     current_timestamp_rfc3339, export_public_index_static_with_base, generate_check_repository,
     import_repository_with_options, inspect_claim_directory, inspect_surface_states,
-    load_manifest_document, load_manifest_from_root, managed_outputs,
+    load_manifest_document, load_manifest_from_root, managed_outputs, preview_surfaces,
     public_repository_query_or_error_with_base, public_repository_summary_or_error_with_base,
     public_repository_trust_or_error_with_base, query_repository, scaffold_claim_directory,
     trust_repository, validate_index_root, validate_manifest, validate_repository,
     ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport,
-    ClaimScaffoldInput, ConflictRelationship, DoctorReport, ImportMode, ImportOptions,
-    IndexFindingSeverity, ManagedFileState, PublicErrorResponse, SelectionReason, TrustReport,
+    ClaimScaffoldInput, ConflictRelationship, DoctorOwnershipHonesty, DoctorRecommendedMode,
+    DoctorReport, DoctorSurface, ImportMode, ImportOptions, IndexFindingSeverity, ManagedFileState,
+    PublicErrorResponse, SelectionReason, SurfacePreviewReport, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::{RecordMode, Trust};
@@ -80,6 +81,18 @@ enum Command {
     /// Inspect unmanaged conventional files at the repository root.
     Doctor {
         /// Emit the full doctor report as JSON.
+        #[arg(long)]
+        json: bool,
+    },
+    /// Preview how dotrepo would render or replace one managed surface.
+    Preview {
+        /// Conventional surface to preview.
+        #[arg(long, value_enum, conflicts_with = "all")]
+        surface: Option<PreviewSurfaceArg>,
+        /// Preview every supported surface.
+        #[arg(long, conflicts_with = "surface")]
+        all: bool,
+        /// Emit the full preview report as JSON.
         #[arg(long)]
         json: bool,
     },
@@ -235,6 +248,15 @@ enum ImportModeArg {
     Overlay,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, ValueEnum)]
+enum PreviewSurfaceArg {
+    Readme,
+    Security,
+    Contributing,
+    Codeowners,
+    PullRequestTemplate,
+}
+
 #[derive(Clone, Debug, Eq, PartialEq, ValueEnum)]
 enum ClaimEventKindArg {
     Submitted,
@@ -261,6 +283,18 @@ impl From<ImportModeArg> for ImportMode {
         match value {
             ImportModeArg::Native => ImportMode::Native,
             ImportModeArg::Overlay => ImportMode::Overlay,
+        }
+    }
+}
+
+impl From<PreviewSurfaceArg> for DoctorSurface {
+    fn from(value: PreviewSurfaceArg) -> Self {
+        match value {
+            PreviewSurfaceArg::Readme => DoctorSurface::Readme,
+            PreviewSurfaceArg::Security => DoctorSurface::Security,
+            PreviewSurfaceArg::Contributing => DoctorSurface::Contributing,
+            PreviewSurfaceArg::Codeowners => DoctorSurface::Codeowners,
+            PreviewSurfaceArg::PullRequestTemplate => DoctorSurface::PullRequestTemplate,
         }
     }
 }
@@ -327,6 +361,7 @@ fn run() -> Result<()> {
         Command::Query { path, json, raw } => cmd_query(cli.root, &path, json, raw),
         Command::Generate { check } => cmd_generate(cli.root, check),
         Command::Doctor { json } => cmd_doctor(cli.root, json),
+        Command::Preview { surface, all, json } => cmd_preview(cli.root, surface, all, json),
         Command::Trust { json } => cmd_trust(cli.root, json),
         Command::Claim { path, json } => cmd_claim(cli.root, path, json),
         Command::ClaimInit {
@@ -613,6 +648,44 @@ fn cmd_doctor(root: PathBuf, json: bool) -> Result<()> {
             );
         }
     }
+    Ok(())
+}
+
+fn cmd_preview(
+    root: PathBuf,
+    surface: Option<PreviewSurfaceArg>,
+    all: bool,
+    json: bool,
+) -> Result<()> {
+    let manifest = load_manifest_from_root(&root)?;
+    validate_manifest(&root, &manifest)?;
+    ensure_native_managed_surface_command(&manifest.record.mode, "preview")?;
+
+    let selected_surfaces = if all {
+        vec![
+            DoctorSurface::Readme,
+            DoctorSurface::Security,
+            DoctorSurface::Contributing,
+            DoctorSurface::Codeowners,
+            DoctorSurface::PullRequestTemplate,
+        ]
+    } else if let Some(surface) = surface {
+        vec![surface.into()]
+    } else {
+        return Err(CliExit {
+            code: 2,
+            message: "preview requires either --surface <name> or --all".into(),
+        }
+        .into());
+    };
+
+    let report = preview_surfaces(&root, &selected_surfaces)?;
+    if json {
+        println!("{}", serde_json::to_string_pretty(&report)?);
+        return Ok(());
+    }
+
+    print_surface_preview_report(&report);
     Ok(())
 }
 
@@ -1126,6 +1199,97 @@ fn format_managed_file_state(state: ManagedFileState) -> &'static str {
         ManagedFileState::Unmanaged => "unmanaged",
         ManagedFileState::MalformedManaged => "malformed_managed",
         ManagedFileState::Unsupported => "unsupported",
+    }
+}
+
+fn format_doctor_surface(surface: DoctorSurface) -> &'static str {
+    match surface {
+        DoctorSurface::Readme => "readme",
+        DoctorSurface::Security => "security",
+        DoctorSurface::Contributing => "contributing",
+        DoctorSurface::Codeowners => "codeowners",
+        DoctorSurface::PullRequestTemplate => "pull_request_template",
+    }
+}
+
+fn format_doctor_recommended_mode(mode: DoctorRecommendedMode) -> &'static str {
+    match mode {
+        DoctorRecommendedMode::Generate => "generate",
+        DoctorRecommendedMode::PartiallyManaged => "partially_managed",
+        DoctorRecommendedMode::Skip => "skip",
+    }
+}
+
+fn format_doctor_ownership_honesty(honesty: DoctorOwnershipHonesty) -> &'static str {
+    match honesty {
+        DoctorOwnershipHonesty::Honest => "honest",
+        DoctorOwnershipHonesty::LossyFullGeneration => "lossy_full_generation",
+    }
+}
+
+fn print_surface_preview_report(report: &SurfacePreviewReport) {
+    println!("dotrepo preview");
+    for preview in &report.previews {
+        println!(
+            "surface: {}",
+            format_doctor_surface(preview.finding.surface)
+        );
+        println!("path: {}", preview.finding.path.display());
+        println!(
+            "state: {}",
+            format_managed_file_state(preview.finding.state)
+        );
+        if let Some(mode) = preview.finding.declared_mode.clone() {
+            println!("declared mode: {}", format_compat_mode(mode));
+        }
+        if let Some(honesty) = preview.finding.ownership_honesty {
+            println!(
+                "ownership honesty: {}",
+                format_doctor_ownership_honesty(honesty)
+            );
+        }
+        if let Some(mode) = preview.finding.recommended_mode {
+            println!("recommended mode: {}", format_doctor_recommended_mode(mode));
+        }
+        if let Some(drop) = preview.finding.would_drop_unmanaged_content {
+            println!("content loss risk: {}", if drop { "yes" } else { "no" });
+        }
+        println!(
+            "preserves unmanaged content: {}",
+            if preview.preserves_unmanaged_content {
+                "yes"
+            } else {
+                "no"
+            }
+        );
+        println!(
+            "replacement mode: {}",
+            if preview.full_replacement {
+                "full_replacement"
+            } else {
+                "in_place_or_create"
+            }
+        );
+        println!("summary: {}", preview.finding.message);
+        if !preview.finding.advice.is_empty() {
+            println!("advice:");
+            for advice in &preview.finding.advice {
+                println!("- {}", advice);
+            }
+        }
+        if let Some(current) = &preview.current {
+            println!("current:");
+            println!("{}", current);
+        }
+        println!("proposed:");
+        println!("{}", preview.proposed);
+    }
+}
+
+fn format_compat_mode(mode: dotrepo_schema::CompatMode) -> &'static str {
+    match mode {
+        dotrepo_schema::CompatMode::Generate => "generate",
+        dotrepo_schema::CompatMode::Skip => "skip",
     }
 }
 
