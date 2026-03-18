@@ -136,6 +136,11 @@ upstream native `.repo`.
 The export tree is the source of truth. The hosted surface deploys the same
 `public/` output.
 
+For local same-origin review, `dotrepo-public-query` can now serve that
+exported `public/` tree together with the hosted query route from one process.
+The remaining production gap is replacing or fronting the current Pages-only
+deployment with that same-origin runtime.
+
 ## What should stay stable vs variable
 
 Stable for the same input tree and fixed review timestamps:

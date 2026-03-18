@@ -40,6 +40,10 @@ fn server_bin() -> &'static str {
     env!("CARGO_BIN_EXE_dotrepo-public-query")
 }
 
+fn dotrepo_bin() -> &'static str {
+    env!("CARGO_BIN_EXE_dotrepo")
+}
+
 fn read_expected(name: &str) -> Value {
     serde_json::from_str(
         &fs::read_to_string(expected_query_root().join(name)).expect("expected fixture readable"),
@@ -60,21 +64,28 @@ struct ServerHandle {
 }
 
 impl ServerHandle {
-    fn spawn(index_root: &Path, base_path: &str) -> Self {
+    fn spawn(index_root: &Path, base_path: &str, public_root: Option<&Path>) -> Self {
         let addr = unused_addr();
-        let child = Command::new(server_bin())
-            .args([
-                "--index-root",
-                index_root.to_str().expect("fixture path is utf-8"),
-                "--bind",
-                &addr,
-                "--base-path",
-                base_path,
-                "--generated-at",
-                "2026-03-10T18:30:00Z",
-                "--stale-after",
-                "2026-03-11T18:30:00Z",
-            ])
+        let mut command = Command::new(server_bin());
+        command.args([
+            "--index-root",
+            index_root.to_str().expect("fixture path is utf-8"),
+            "--bind",
+            &addr,
+            "--base-path",
+            base_path,
+            "--generated-at",
+            "2026-03-10T18:30:00Z",
+            "--stale-after",
+            "2026-03-11T18:30:00Z",
+        ]);
+        if let Some(public_root) = public_root {
+            command.args([
+                "--public-root",
+                public_root.to_str().expect("public root path is utf-8"),
+            ]);
+        }
+        let child = command
             .stdout(Stdio::null())
             .stderr(Stdio::null())
             .spawn()
@@ -146,7 +157,7 @@ fn temp_dir(label: &str) -> PathBuf {
 
 #[test]
 fn hosted_query_server_matches_checked_in_query_fixtures() {
-    let server = ServerHandle::spawn(&fixture_index_root(), "/");
+    let server = ServerHandle::spawn(&fixture_index_root(), "/", None);
 
     let cases = [
         (
@@ -232,7 +243,7 @@ description = "Competing description"
     )
     .expect("competing record written");
 
-    let server = ServerHandle::spawn(&root, "/dotrepo");
+    let server = ServerHandle::spawn(&root, "/dotrepo", None);
     let (status, body) = http_get(
         &server.addr,
         "/dotrepo/v0/repos/github.com/example/orbit/query?path=repo.description",
@@ -269,4 +280,91 @@ description = "Competing description"
     );
 
     fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn hosted_query_server_serves_static_export_and_resolves_emitted_query_template() {
+    let public_root = temp_dir("public-root");
+    let export = Command::new(dotrepo_bin())
+        .args([
+            "--root",
+            repo_root().to_str().expect("workspace root is utf-8"),
+            "public",
+            "export",
+            "--index-root",
+            fixture_index_root()
+                .to_str()
+                .expect("fixture path is utf-8"),
+            "--out-dir",
+            public_root.to_str().expect("public root path is utf-8"),
+            "--base-path",
+            "/dotrepo",
+            "--generated-at",
+            "2026-03-10T18:30:00Z",
+            "--stale-after",
+            "2026-03-11T18:30:00Z",
+        ])
+        .output()
+        .expect("public export runs");
+    assert!(
+        export.status.success(),
+        "public export should succeed: {}",
+        String::from_utf8_lossy(&export.stderr)
+    );
+    assert!(public_root.join("v0/repos/index.json").is_file());
+
+    let server = ServerHandle::spawn(&fixture_index_root(), "/dotrepo", Some(&public_root));
+    let (inventory_status, inventory_body) =
+        http_get(&server.addr, "/dotrepo/v0/repos/index.json").expect("inventory request succeeds");
+    assert_eq!(inventory_status, 200);
+
+    let inventory = serde_json::from_str::<Value>(&inventory_body).expect("inventory json parses");
+    let orbit = inventory["repositories"]
+        .as_array()
+        .expect("repositories array")
+        .iter()
+        .find(|repo| {
+            repo["identity"]["host"] == Value::String("github.com".into())
+                && repo["identity"]["owner"] == Value::String("example".into())
+                && repo["identity"]["repo"] == Value::String("orbit".into())
+        })
+        .expect("orbit repo present");
+    let query_template = orbit["links"]["queryTemplate"]
+        .as_str()
+        .expect("queryTemplate is a string");
+    let query_target = query_template.replace("{dot_path}", "repo.description");
+
+    let (query_status, query_body) =
+        http_get(&server.addr, &query_target).expect("query request succeeds");
+    assert_eq!(query_status, 200);
+
+    let actual = serde_json::from_str::<Value>(&query_body).expect("response json parses");
+    let expected = read_expected("orbit-description.json");
+    assert_eq!(actual["apiVersion"], expected["apiVersion"]);
+    assert_eq!(actual["freshness"], expected["freshness"]);
+    assert_eq!(actual["identity"], expected["identity"]);
+    assert_eq!(actual["path"], expected["path"]);
+    assert_eq!(actual["selection"], expected["selection"]);
+    assert_eq!(actual["conflicts"], expected["conflicts"]);
+    assert_eq!(actual["value"], expected["value"]);
+    assert_eq!(
+        actual["links"]["self"],
+        Value::String(
+            "/dotrepo/v0/repos/github.com/example/orbit/query?path=repo.description".into()
+        )
+    );
+    assert_eq!(
+        actual["links"]["repository"],
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/index.json".into())
+    );
+    assert_eq!(
+        actual["links"]["trust"],
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/trust.json".into())
+    );
+    assert_eq!(
+        actual["links"]["queryTemplate"],
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/query?path={dot_path}".into())
+    );
+
+    fs::remove_dir_all(public_root).expect("temp dir removed");
 }

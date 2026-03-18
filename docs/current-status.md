@@ -27,6 +27,8 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - A hosted-static public surface deployed through GitHub Pages
 - Release-artifact packaging for the CLI, LSP, and MCP binaries, with CI smoke
   tests that extract and run the shipped binaries from the packaged tarball
+- A local same-origin hosted-query runtime that can serve both the exported
+  `public/` tree and query responses from one process
 - An explicit release-gate script and CI job that package the hosted public
   tree, install bundles, and VS Code release asset from one reproducible flow,
   and serve as the canonical operator review entrypoint for public-surface
@@ -38,7 +40,7 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 ## What dotrepo does not yet include
 
 - A full maintainer claim workflow product surface
-- A broader public site UX or live public query API
+- A broader public site UX or deployed live public query API
 - Bundle mode or first-class workspace/relations support
 - Arbitrary prose round-tripping or automatic conversion of unmanaged files into
   managed-region files

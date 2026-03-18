@@ -31,7 +31,8 @@ fn temp_dir(label: &str) -> PathBuf {
 }
 
 fn object_keys(value: &Value) -> BTreeSet<String> {
-    value.as_object()
+    value
+        .as_object()
         .expect("json value should be an object")
         .keys()
         .cloned()
@@ -131,20 +132,18 @@ Use the repository-specific release checklist before you open a pull request.
         contributing["rendererCoverage"],
         Value::String("stub_only".into())
     );
-    assert!(
-        contributing["advice"]
-            .as_array()
-            .expect("advice should be an array")
-            .iter()
-            .any(|item| item
+    assert!(contributing["advice"]
+        .as_array()
+        .expect("advice should be an array")
+        .iter()
+        .any(|item| item
+            .as_str()
+            .expect("advice items should be strings")
+            .contains("managed regions")
+            || item
                 .as_str()
                 .expect("advice items should be strings")
-                .contains("managed regions")
-                || item
-                    .as_str()
-                    .expect("advice items should be strings")
-                    .contains("dotrepo preview"))
-    );
+                .contains("dotrepo preview")));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

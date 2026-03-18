@@ -25,7 +25,7 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Build release binaries
-        run: cargo build --release -p dotrepo-cli -p dotrepo-lsp -p dotrepo-mcp
+        run: cargo build --release -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
       - name: Detect host target triple
         id: target
         shell: bash

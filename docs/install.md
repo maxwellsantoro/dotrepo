@@ -4,6 +4,7 @@ dotrepo now has a release-artifact path for the core toolchain binaries. The
 intended install surface is:
 
 - `dotrepo`
+- `dotrepo-public-query`
 - `dotrepo-lsp`
 - `dotrepo-mcp`
 
@@ -40,14 +41,14 @@ thin editor shell without loading the workspace extension directly.
 If you are developing dotrepo itself or want a local debug build:
 
 ```bash
-cargo build -p dotrepo-cli -p dotrepo-lsp -p dotrepo-mcp
+cargo build -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
 export PATH="/path/to/dotrepo/target/debug:$PATH"
 ```
 
 For release-style local binaries:
 
 ```bash
-cargo build --release -p dotrepo-cli -p dotrepo-lsp -p dotrepo-mcp
+cargo build --release -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
 export PATH="/path/to/dotrepo/target/release:$PATH"
 ```
 

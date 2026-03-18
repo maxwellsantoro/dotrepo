@@ -28,7 +28,7 @@ For the canonical freshness semantics used by these outputs, see
 - `public/index.html` and `.nojekyll` exist for the hosted static entry
 - representative repository `index.json` and `trust.json` files open cleanly
 - the packaged bundle extracts to one self-describing root directory
-- the release binary bundle contains `dotrepo`, `dotrepo-lsp`, and `dotrepo-mcp`
+- the release binary bundle contains `dotrepo`, `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp`
 - the release binary smoke test passes (binaries execute from extracted bundle)
 - the VS Code release asset installs from a tagged `.vsix`
 

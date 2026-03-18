@@ -99,8 +99,10 @@ Start with:
 
 ## Next steps
 
-The next evolution is adding a thin query wrapper over the same response
-contracts and hardening freshness and caching for the hosted deployment. For
-the freshness definitions that apply to those responses, see
+The thin hosted query runtime now exists locally as `dotrepo-public-query`, and
+it can serve the exported `public/` tree on the same origin during local
+review. The next work is making that same-origin runtime a real hosted surface,
+deploying it alongside or instead of the current Pages-only setup, and
+hardening freshness and caching for the combined hosted deployment. For the freshness definitions that apply to those responses, see
 [`docs/public-freshness.md`](./public-freshness.md). For the first hosted query
 runtime shape, see [`docs/hosted-query-serving.md`](./hosted-query-serving.md).

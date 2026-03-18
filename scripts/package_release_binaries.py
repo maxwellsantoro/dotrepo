@@ -9,7 +9,7 @@ import tarfile
 import tomllib
 from pathlib import Path
 
-DEFAULT_BINARIES = ["dotrepo", "dotrepo-lsp", "dotrepo-mcp"]
+DEFAULT_BINARIES = ["dotrepo", "dotrepo-public-query", "dotrepo-lsp", "dotrepo-mcp"]
 
 
 def parse_args() -> argparse.Namespace:
@@ -39,7 +39,7 @@ def parse_args() -> argparse.Namespace:
         "--bin",
         dest="binaries",
         action="append",
-        help="Binary to include; may be repeated. Defaults to dotrepo, dotrepo-lsp, dotrepo-mcp.",
+        help="Binary to include; may be repeated. Defaults to dotrepo, dotrepo-public-query, dotrepo-lsp, dotrepo-mcp.",
     )
     return parser.parse_args()
 

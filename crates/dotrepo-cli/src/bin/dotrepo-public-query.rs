@@ -7,7 +7,7 @@ use dotrepo_core::{
 use serde::Serialize;
 use std::io::{BufRead, BufReader, Write};
 use std::net::{TcpListener, TcpStream};
-use std::path::PathBuf;
+use std::path::{Component, Path, PathBuf};
 use url::form_urlencoded;
 
 #[derive(Parser)]
@@ -23,6 +23,9 @@ struct Cli {
     /// URL base path prefix for hosted public links, such as `/dotrepo`.
     #[arg(long, default_value = "/")]
     base_path: String,
+    /// Optional exported public tree to serve on the same origin as query.
+    #[arg(long)]
+    public_root: Option<PathBuf>,
     /// Advisory staleness window in hours for rendered responses.
     #[arg(long)]
     stale_after_hours: Option<i64>,
@@ -38,6 +41,7 @@ struct Cli {
 struct ServerState {
     index_root: PathBuf,
     base_path: String,
+    public_root: Option<PathBuf>,
     freshness: PublicFreshness,
 }
 
@@ -70,6 +74,7 @@ fn run() -> Result<()> {
     let state = ServerState {
         index_root: cli.index_root,
         base_path: normalize_base_path(&cli.base_path),
+        public_root: cli.public_root,
         freshness,
     };
 
@@ -157,7 +162,16 @@ fn handle_connection(mut stream: TcpStream, state: &ServerState) -> Result<()> {
                 }
             }
         }
-        Ok(None) => write_text_response(&mut stream, 404, "not found"),
+        Ok(None) => {
+            if let Some(public_root) = &state.public_root {
+                if let Some(static_path) =
+                    resolve_static_path(target, &state.base_path, public_root)?
+                {
+                    return write_static_file_response(&mut stream, &static_path);
+                }
+            }
+            write_text_response(&mut stream, 404, "not found")
+        }
     }
 }
 
@@ -211,6 +225,67 @@ fn required_query_param(query: &str, key: &str) -> Result<String> {
 
 fn decode_component(raw: &str) -> Result<String> {
     required_query_param(&format!("x={raw}"), "x")
+}
+
+fn resolve_static_path(
+    target: &str,
+    base_path: &str,
+    public_root: &Path,
+) -> Result<Option<PathBuf>> {
+    let (path, _) = target.split_once('?').unwrap_or((target, ""));
+    let relative = static_relative_path(path, base_path)?;
+    let Some(relative) = relative else {
+        return Ok(None);
+    };
+    if !is_safe_relative_path(&relative) {
+        return Ok(None);
+    }
+    let candidate = if relative.as_os_str().is_empty() {
+        public_root.join("index.html")
+    } else {
+        public_root.join(relative)
+    };
+    Ok(candidate.is_file().then_some(candidate))
+}
+
+fn static_relative_path(path: &str, base_path: &str) -> Result<Option<PathBuf>> {
+    if base_path == "/" {
+        if path == "/" || path.is_empty() {
+            return Ok(Some(PathBuf::new()));
+        }
+        return Ok(path.strip_prefix('/').map(PathBuf::from));
+    }
+
+    if path == base_path {
+        return Ok(Some(PathBuf::new()));
+    }
+
+    let prefix = format!("{}/", base_path.trim_end_matches('/'));
+    Ok(path.strip_prefix(&prefix).map(PathBuf::from))
+}
+
+fn is_safe_relative_path(path: &Path) -> bool {
+    path.components().all(|component| match component {
+        Component::Normal(_) => true,
+        Component::CurDir => true,
+        Component::RootDir | Component::ParentDir | Component::Prefix(_) => false,
+    })
+}
+
+fn content_type_for_path(path: &Path) -> &'static str {
+    match path.extension().and_then(|ext| ext.to_str()) {
+        Some("html") => "text/html; charset=utf-8",
+        Some("json") => "application/json",
+        Some("txt") => "text/plain; charset=utf-8",
+        Some("md") => "text/markdown; charset=utf-8",
+        _ => "application/octet-stream",
+    }
+}
+
+fn write_static_file_response(stream: &mut TcpStream, path: &Path) -> Result<()> {
+    let bytes = std::fs::read(path)
+        .with_context(|| format!("failed to read static file {}", path.display()))?;
+    write_response(stream, 200, content_type_for_path(path), &bytes)
 }
 
 fn write_text_response(stream: &mut TcpStream, status: u16, body: &str) -> Result<()> {

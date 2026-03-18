@@ -17,13 +17,17 @@ What already exists:
 - the core wrapper implementation already exists in `dotrepo-core` via
   `public_repository_query_or_error_with_base`
 - the CLI already exposes the same wrapper locally through `dotrepo public query`
+- a thin HTTP runtime binary already exists locally as `dotrepo-public-query`
+- that runtime can now also serve an exported `public/` tree on the same origin
+  through `--public-root`, so local same-origin review does not require a
+  separate static host
 - public summary and trust responses are exported as a static tree and deployed
   through GitHub Pages
 - public responses already emit a stable `queryTemplate`
 
 What does not exist yet:
 
-- a hosted runtime that serves `/v0/repos/{host}/{owner}/{repo}/query?path=...`
+- release packaging and deployment for the hosted query runtime
 - a deployed route behind the same public contract family as summary and trust
 
 ## Decision
@@ -61,6 +65,10 @@ Recommended route split:
   - `/v0/repos/.../trust.json`
 - the query runtime serves:
   - `/v0/repos/{host}/{owner}/{repo}/query?path=...`
+
+The current local runtime can already collapse those into one origin by serving
+the exported `public/` tree and the query route from the same process. The
+remaining hosted gap is deployment, not route semantics.
 
 ## Source of truth
 
@@ -152,12 +160,12 @@ not in a second application-specific query vocabulary.
 
 Build the first slice in this order:
 
-1. Add a small Rust HTTP binary that wraps
-   `public_repository_query_or_error_with_base`.
+1. Keep the small Rust HTTP binary that wraps
+   `public_repository_query_or_error_with_base` thin and release-packaged.
 2. Load one read-only snapshot root and one `base_path` from configuration.
 3. Serve only the public query route and a small health check.
 4. Reuse the existing public freshness block from the loaded snapshot.
-5. Add parity tests that compare hosted HTTP responses with the existing local
+5. Keep parity tests that compare hosted HTTP responses with the existing local
    public query fixtures.
 
 That slice is enough to prove:

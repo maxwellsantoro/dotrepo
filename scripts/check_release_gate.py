@@ -166,7 +166,7 @@ def smoke_test_release_bundle(
         if not bin_dir.is_dir():
             raise SystemExit(f"extracted bundle missing bin/ directory: {bin_dir}")
 
-        for binary in ["dotrepo", "dotrepo-lsp", "dotrepo-mcp"]:
+        for binary in ["dotrepo", "dotrepo-public-query", "dotrepo-lsp", "dotrepo-mcp"]:
             binary_path = bin_dir / binary
             if not binary_path.is_file():
                 raise SystemExit(f"extracted bundle missing binary: {binary_path}")
@@ -275,7 +275,7 @@ def main() -> int:
     )
 
     run(
-        ["cargo", "build", "--release", "-p", "dotrepo-cli", "-p", "dotrepo-lsp", "-p", "dotrepo-mcp"],
+        ["cargo", "build", "--release", "-p", "dotrepo-cli", "--bins", "-p", "dotrepo-lsp", "-p", "dotrepo-mcp"],
         cwd=repo_root,
     )
     target = host_target(repo_root)
