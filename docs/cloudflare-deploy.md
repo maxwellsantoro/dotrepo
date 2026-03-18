@@ -129,7 +129,9 @@ https://dotrepo-public-hosted-query.<account-subdomain>.workers.dev/
 ```
 
 The workflow now prefers the custom domain for the post-deploy smoke check when
-one is declared in the Wrangler config.
+one is declared in the Wrangler config. If the custom domain does not resolve
+yet from CI, the workflow falls back to the deployed `workers.dev` URL until
+Cloudflare DNS and certificate provisioning complete.
 
 ## Final cutover from Pages
 

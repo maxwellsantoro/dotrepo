@@ -87,13 +87,28 @@ jobs:
             exit 1
           fi
           echo "url=$deploy_url" >> "$GITHUB_OUTPUT"
+      - name: Select smoke origin
+        id: smoke_target
+        shell: bash
+        env:
+          CUSTOM_DEPLOY_URL: ${{ steps.smoke_origin.outputs.value }}
+          WORKERS_DEPLOY_URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          if [ -n "$CUSTOM_DEPLOY_URL" ] && python3 -c 'import socket, sys; from urllib.parse import urlparse; host = urlparse(sys.argv[1]).hostname; socket.getaddrinfo(host, 443)' "$CUSTOM_DEPLOY_URL" >/dev/null 2>&1; then
+            echo "value=$CUSTOM_DEPLOY_URL" >> "$GITHUB_OUTPUT"
+            echo "Using custom-domain smoke origin: $CUSTOM_DEPLOY_URL"
+          else
+            echo "value=$WORKERS_DEPLOY_URL" >> "$GITHUB_OUTPUT"
+            if [ -n "$CUSTOM_DEPLOY_URL" ]; then
+              echo "Custom domain not resolvable yet; falling back to workers.dev smoke origin: $WORKERS_DEPLOY_URL"
+            else
+              echo "Using workers.dev smoke origin: $WORKERS_DEPLOY_URL"
+            fi
+          fi
       - name: Smoke deployed Worker
         env:
-          DEPLOY_URL: ${{ steps.smoke_origin.outputs.value }}
+          DEPLOY_URL: ${{ steps.smoke_target.outputs.value }}
         run: |
-          if [ -z "$DEPLOY_URL" ]; then
-            DEPLOY_URL="${{ steps.deploy.outputs.url }}"
-          fi
           python3 scripts/smoke_cloudflare_public_deploy.py \
             --deploy-url "$DEPLOY_URL" \
             --base-path "${{ steps.base_path.outputs.value }}" \
