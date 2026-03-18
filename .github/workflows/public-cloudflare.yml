@@ -67,7 +67,7 @@ jobs:
           set -euo pipefail
           log_path="$RUNNER_TEMP/wrangler-deploy.log"
           npx wrangler deploy 2>&1 | tee "$log_path"
-          deploy_url="$(python3 -c 'import re, sys; from pathlib import Path; text = Path(sys.argv[1]).read_text(encoding="utf-8"); workers_matches = re.findall(r"https://[^\\s]+\\.workers\\.dev[^\\s]*", text); deploy_match = re.search(r"Deployed .*?triggers.*?\\n\\s*(https://\\S+)", text, re.DOTALL); print(workers_matches[-1] if workers_matches else (deploy_match.group(1) if deploy_match else ""))' "$log_path")"
+          deploy_url="$(python3 -c 'import re, sys; from pathlib import Path; text = Path(sys.argv[1]).read_text(encoding="utf-8"); workers_matches = re.findall(r"https://[^\s]+\.workers\.dev[^\s]*", text); deploy_match = re.search(r"Deployed .*?triggers.*?\n\s*(https://\S+)", text, re.DOTALL); print(workers_matches[-1] if workers_matches else (deploy_match.group(1) if deploy_match else ""))' "$log_path")"
           if [ -z "$deploy_url" ]; then
             echo "Failed to detect deployed Worker URL from Wrangler output" >&2
             exit 1
