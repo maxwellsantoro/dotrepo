@@ -950,6 +950,7 @@ def main() -> int:
       margin-top: 18px;
     }}
     .api-card {{
+      min-width: 0;
       padding: 22px;
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.66);
@@ -996,6 +997,20 @@ def main() -> int:
     }}
     .endpoint span {{
       color: var(--muted);
+    }}
+    .endpoint--query {{
+      align-items: flex-start;
+    }}
+    .endpoint--query code {{
+      min-width: 0;
+      flex: 1 1 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }}
+    .endpoint--query span {{
+      min-width: 0;
+      flex: 1 1 14rem;
     }}
     .repo-grid {{
       display: grid;
@@ -1234,7 +1249,7 @@ def main() -> int:
         <article class="api-card">
           <h3>What a query returns</h3>
           <p>The query route returns the selected value together with selection, trust, and conflict context. This truncated example is derived from the current exported snapshot.</p>
-          <div class="endpoint">
+          <div class="endpoint endpoint--query">
             <code>{html.escape(first_query)}</code>
             <span>Example live query for <code>repo.description</code>.</span>
           </div>
