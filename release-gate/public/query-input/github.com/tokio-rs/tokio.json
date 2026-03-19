@@ -1,0 +1,86 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "9688de69ddba825edc3bf112aba82225a7b1a96853f2815c7872a72c408ec55e",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tokio-rs",
+    "repo": "tokio",
+    "source": "https://github.com/tokio-rs/tokio"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/tokio-rs/tokio/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/tokio-rs/tokio",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Imported from the upstream README, contribution docs, SECURITY.md, and repository metadata; not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/tokio-rs/tokio/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/tokio-rs/tokio",
+        "generated_at": "2026-03-18T00:00:00Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Imported from the upstream README, contribution docs, SECURITY.md, and repository metadata; not maintainer-verified."
+        }
+      },
+      "repo": {
+        "name": "Tokio",
+        "description": "A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language.",
+        "homepage": "https://tokio.rs",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "rust"
+        ],
+        "build": "cargo build --all-features",
+        "test": "cargo test --all-features",
+        "topics": [
+          "rust",
+          "asynchronous",
+          "networking"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@tokio.rs"
+      },
+      "docs": {
+        "root": "https://tokio.rs/tokio",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      }
+    }
+  },
+  "conflicts": []
+}

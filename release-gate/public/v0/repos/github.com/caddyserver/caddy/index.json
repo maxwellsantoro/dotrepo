@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "9688de69ddba825edc3bf112aba82225a7b1a96853f2815c7872a72c408ec55e",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "caddyserver",
+    "repo": "caddy",
+    "source": "https://github.com/caddyserver/caddy"
+  },
+  "repository": {
+    "name": "Caddy",
+    "description": "Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS",
+    "homepage": "https://caddyserver.com",
+    "docsRoot": "https://caddyserver.com/docs/",
+    "securityContact": "https://github.com/caddyserver/caddy/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/caddyserver/caddy/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/caddyserver/caddy",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Imported from upstream repository metadata, the README, and SECURITY.md; repo.build normalizes the README's post-clone working directory into a repo-root-relative command; not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/caddyserver/caddy/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/caddyserver/caddy/index.json",
+    "trust": "/v0/repos/github.com/caddyserver/caddy/trust.json",
+    "queryTemplate": "/v0/repos/github.com/caddyserver/caddy/query?path={dot_path}",
+    "indexPath": "repos/github.com/caddyserver/caddy/"
+  }
+}

@@ -1,0 +1,32 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/vitejs/vite"
+generated_at = "2026-03-18T00:00:00Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Imported from upstream repository metadata, the README, package.json, the repository contents listing, and GitHub's security reporting flow; not maintainer-verified."
+
+[repo]
+name = "Vite"
+description = "Next generation frontend tooling. It's fast!"
+homepage = "https://vite.dev/"
+license = "MIT"
+visibility = "public"
+languages = ["typescript", "javascript"]
+build = "pnpm build"
+test = "pnpm test"
+topics = ["vite", "hmr", "frontend", "build-tool", "dev-server"]
+
+[owners]
+security_contact = "https://github.com/vitejs/vite/security/advisories/new"
+
+[docs]
+root = "docs/"
+
+[relations]
+references = []

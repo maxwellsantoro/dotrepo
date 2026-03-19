@@ -1,0 +1,32 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/caddyserver/caddy"
+generated_at = "2026-03-18T00:00:00Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "inferred"]
+notes = "Imported from upstream repository metadata, the README, and SECURITY.md; repo.build normalizes the README's post-clone working directory into a repo-root-relative command; not maintainer-verified."
+
+[repo]
+name = "Caddy"
+description = "Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS"
+homepage = "https://caddyserver.com"
+license = "Apache-2.0"
+visibility = "public"
+languages = ["go"]
+build = "cd cmd/caddy && go build"
+test = "go test ./..."
+topics = ["go", "web-server", "reverse-proxy", "https", "http3"]
+
+[owners]
+security_contact = "https://github.com/caddyserver/caddy/security/advisories/new"
+
+[docs]
+root = "https://caddyserver.com/docs/"
+
+[relations]
+references = []

@@ -1,0 +1,32 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/tokio-rs/tokio"
+generated_at = "2026-03-18T00:00:00Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Imported from the upstream README, contribution docs, SECURITY.md, and repository metadata; not maintainer-verified."
+
+[repo]
+name = "Tokio"
+description = "A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language."
+homepage = "https://tokio.rs"
+license = "MIT"
+visibility = "public"
+languages = ["rust"]
+build = "cargo build --all-features"
+test = "cargo test --all-features"
+topics = ["rust", "asynchronous", "networking"]
+
+[owners]
+security_contact = "security@tokio.rs"
+
+[docs]
+root = "https://tokio.rs/tokio"
+
+[relations]
+references = []

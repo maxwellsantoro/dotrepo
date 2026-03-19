@@ -2,10 +2,10 @@
   "apiVersion": "v0",
   "freshness": {
     "generatedAt": "2026-03-10T18:30:00Z",
-    "snapshotDigest": "d70eb7930fecc4a42bae671eeeed9d7a1667b55256669a76a046fb66ca67f126",
+    "snapshotDigest": "9688de69ddba825edc3bf112aba82225a7b1a96853f2815c7872a72c408ec55e",
     "staleAfter": "2026-03-11T18:30:00Z"
   },
-  "repositoryCount": 5,
+  "repositoryCount": 9,
   "repositories": [
     {
       "identity": {
@@ -26,6 +26,22 @@
     {
       "identity": {
         "host": "github.com",
+        "owner": "caddyserver",
+        "repo": "caddy",
+        "source": "https://github.com/caddyserver/caddy"
+      },
+      "name": "Caddy",
+      "description": "Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS",
+      "links": {
+        "self": "/v0/repos/github.com/caddyserver/caddy/index.json",
+        "trust": "/v0/repos/github.com/caddyserver/caddy/trust.json",
+        "queryTemplate": "/v0/repos/github.com/caddyserver/caddy/query?path={dot_path}",
+        "indexPath": "repos/github.com/caddyserver/caddy/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
         "owner": "cli",
         "repo": "cli",
         "source": "https://github.com/cli/cli"
@@ -37,6 +53,22 @@
         "trust": "/v0/repos/github.com/cli/cli/trust.json",
         "queryTemplate": "/v0/repos/github.com/cli/cli/query?path={dot_path}",
         "indexPath": "repos/github.com/cli/cli/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "fastapi",
+        "repo": "fastapi",
+        "source": "https://github.com/fastapi/fastapi"
+      },
+      "name": "FastAPI",
+      "description": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+      "links": {
+        "self": "/v0/repos/github.com/fastapi/fastapi/index.json",
+        "trust": "/v0/repos/github.com/fastapi/fastapi/trust.json",
+        "queryTemplate": "/v0/repos/github.com/fastapi/fastapi/query?path={dot_path}",
+        "indexPath": "repos/github.com/fastapi/fastapi/"
       }
     },
     {
@@ -85,6 +117,38 @@
         "trust": "/v0/repos/github.com/sharkdp/fd/trust.json",
         "queryTemplate": "/v0/repos/github.com/sharkdp/fd/query?path={dot_path}",
         "indexPath": "repos/github.com/sharkdp/fd/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "tokio-rs",
+        "repo": "tokio",
+        "source": "https://github.com/tokio-rs/tokio"
+      },
+      "name": "Tokio",
+      "description": "A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language.",
+      "links": {
+        "self": "/v0/repos/github.com/tokio-rs/tokio/index.json",
+        "trust": "/v0/repos/github.com/tokio-rs/tokio/trust.json",
+        "queryTemplate": "/v0/repos/github.com/tokio-rs/tokio/query?path={dot_path}",
+        "indexPath": "repos/github.com/tokio-rs/tokio/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "vitejs",
+        "repo": "vite",
+        "source": "https://github.com/vitejs/vite"
+      },
+      "name": "Vite",
+      "description": "Next generation frontend tooling. It's fast!",
+      "links": {
+        "self": "/v0/repos/github.com/vitejs/vite/index.json",
+        "trust": "/v0/repos/github.com/vitejs/vite/trust.json",
+        "queryTemplate": "/v0/repos/github.com/vitejs/vite/query?path={dot_path}",
+        "indexPath": "repos/github.com/vitejs/vite/"
       }
     }
   ]

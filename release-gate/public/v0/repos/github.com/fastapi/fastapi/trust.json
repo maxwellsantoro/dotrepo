@@ -1,0 +1,42 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "9688de69ddba825edc3bf112aba82225a7b1a96853f2815c7872a72c408ec55e",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "fastapi",
+    "repo": "fastapi",
+    "source": "https://github.com/fastapi/fastapi"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/fastapi/fastapi/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/fastapi/fastapi",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Imported from upstream repository metadata, the README, contributing docs, and SECURITY.md; repo.build reflects the documented local development setup command; not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/fastapi/fastapi/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/fastapi/fastapi/trust.json",
+    "repository": "/v0/repos/github.com/fastapi/fastapi/index.json",
+    "queryTemplate": "/v0/repos/github.com/fastapi/fastapi/query?path={dot_path}",
+    "indexPath": "repos/github.com/fastapi/fastapi/"
+  }
+}

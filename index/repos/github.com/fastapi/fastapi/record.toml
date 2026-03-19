@@ -1,0 +1,32 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/fastapi/fastapi"
+generated_at = "2026-03-18T00:00:00Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Imported from upstream repository metadata, the README, contributing docs, and SECURITY.md; repo.build reflects the documented local development setup command; not maintainer-verified."
+
+[repo]
+name = "FastAPI"
+description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
+homepage = "https://fastapi.tiangolo.com/"
+license = "MIT"
+visibility = "public"
+languages = ["python"]
+build = "uv sync --extra all"
+test = "bash scripts/test-cov-html.sh"
+topics = ["python", "api", "openapi", "framework"]
+
+[owners]
+security_contact = "security@tiangolo.com"
+
+[docs]
+root = "docs/en/"
+
+[relations]
+references = []
