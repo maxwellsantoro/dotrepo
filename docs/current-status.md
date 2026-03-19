@@ -56,11 +56,27 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 
 - A full maintainer claim workflow product surface
 - A broader public site UX on top of the now-live hosted public API origin
+- An MCP remote-lookup tool that resolves repository URLs or identities against
+  `https://dotrepo.org/` without a local checkout
+- A seed index broad enough across languages to make dotrepo a likely first
+  check for arbitrary public repositories
 - Bundle mode or first-class workspace/relations support
 - Arbitrary prose round-tripping or automatic conversion of unmanaged files into
   managed-region files
 - Editor assistance for placing managed-region markers or semantic autofix flows
 - Full TOML language-server parity beyond the current schema-shaped manifest surface
+
+## Highest-leverage next steps
+
+- Grow the reviewed overlay index to a first tranche of 50 repositories across
+  Rust, TypeScript, Python, and Go.
+- Add a `dotrepo.lookup`-style MCP tool that wraps the hosted public surface for
+  URL-first remote lookup.
+- Keep the public and editor surface narrow while those two leverage points are
+  landing.
+
+See [`docs/ai-tool-interviews.md`](./ai-tool-interviews.md) for the synthesized
+interview-backed rationale behind those priorities.
 
 ## Live maintainer-claim status
 

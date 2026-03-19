@@ -34,8 +34,11 @@ Use these as top-level program checks across blocks:
 - the checked-in index should contain at least two real independently reviewed
   maintainer-claim examples soon after launch
 - the post-v1 seed-index growth program should hit one explicit first tranche
-  such as 25 additional high-signal repos, then a larger follow-on tranche such
-  as 100
+  of 50 reviewed high-signal repos across Rust, TypeScript, Python, and Go,
+  then a larger follow-on tranche such as 500 before treating dotrepo as a
+  likely first-check service for common public repositories
+- the post-v1 agent path should include one hosted remote-lookup MCP tool before
+  broader search or mutation ambitions are treated as important
 - crawler readiness should first be measured by one factual-only crawl working
   end to end: discovery, materialization, writeback, and state persistence
 
@@ -52,13 +55,14 @@ Use these as top-level program checks across blocks:
 ### Block 2
 
 - Epic 2: thin hosted query serving
+- first hosted remote-lookup MCP surface on top of the hosted public origin
 - remaining Epic 3 items tied to hosted query
 - remaining Epic 5 items tied to release review
+- Epic 7: deliberate index growth first tranche
 
 ### Block 3
 
 - Epic 6: claims and handoffs
-- Epic 7: deliberate index growth
 - Epic 8: thin extension cleanup only
 
 ### Block 4
@@ -155,6 +159,10 @@ the future serving/deployment layer,
 - `[done] E2-11 Extend the canonical release gate for Worker smoke`
   Depends on: `E2-09`, `E2-10`.
   Acceptance: the release gate proves an emitted `queryTemplate` resolves against the Worker-hosted same-origin surface before deployment changes are treated as release-ready.
+
+- `E2-12 Add a dotrepo.lookup MCP tool on top of the hosted public surface`
+  Depends on: `E2-10`.
+  Acceptance: the MCP server accepts a repository URL or identity tuple, resolves it against the hosted public surface on `dotrepo.org`, and returns the same trust-aware repository and query entrypoints without requiring a local checkout.
 
 ## Epic 3: Harden freshness and cache semantics
 
@@ -321,7 +329,7 @@ the factual import/crawl tooling.
 
 - `E7-01 Set concrete post-v1 seed-index growth targets`
   Depends on: none.
-  Acceptance: docs define one near-term target such as 25 high-signal repos and one follow-on target such as 100, along with the review bar for each tranche.
+  Acceptance: docs define one near-term target of 50 reviewed high-signal repos across Rust, TypeScript, Python, and Go and one follow-on target such as 500, along with the review bar for each tranche.
 
 - `E7-02 Add review discipline for record.generated_at refreshes`
   Depends on: `E3-01`.
@@ -330,6 +338,10 @@ the factual import/crawl tooling.
 - `E7-03 Expand the index toward repos agents actually encounter often`
   Depends on: `E7-01`, `E7-02`.
   Acceptance: new overlays are evidence-backed, explicit about unknowns, and selected using a visible rubric that favors dependency centrality, popular OSS runtime or tooling repos, repositories commonly referenced in docs and tutorials, and repos that are hard for agents to infer reliably from convention alone.
+
+- `E7-04 Keep each early growth tranche visibly cross-language`
+  Depends on: `E7-01`.
+  Acceptance: the first deliberate growth tranche includes meaningful coverage across Rust, TypeScript, Python, and Go rather than clustering around one ecosystem or one maintainer circle.
 
 ## Epic 8: Keep the thin extension thin
 

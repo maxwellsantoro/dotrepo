@@ -214,6 +214,20 @@
       margin: 0 0 10px;
       font-size: 1.35rem;
     }
+    .section__intro,
+    .section__note {
+      margin: 12px 0 0;
+      max-width: 48rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .section__note {
+      margin-top: 18px;
+    }
+    .section__note a {
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
     .three-up {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -247,6 +261,22 @@
       margin: 0 0 14px;
       color: var(--muted);
       line-height: 1.7;
+    }
+    .api-card pre {
+      margin: 14px 0 0;
+      padding: 16px;
+      overflow-x: auto;
+      border-radius: 16px;
+      background: #17191d;
+      color: #f6f1e8;
+      border: 1px solid rgba(54, 46, 28, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      line-height: 1.5;
+    }
+    .api-card__caption {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.96rem;
     }
     .endpoint-list {
       display: grid;
@@ -364,10 +394,11 @@
         <span class="brand__tag">open metadata protocol</span>
       </div>
       <nav class="nav__links">
+        <a href="/writing/">Writing</a>
         <a href="https://github.com/maxwellsantoro/dotrepo">GitHub</a>
         <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/README.md">Docs</a>
-        <a href="./v0/repos/index.json">Inventory</a>
-        <a href="./v0/meta.json">Snapshot</a>
+        <a href="/v0/repos/index.json">Inventory</a>
+        <a href="/v0/meta.json">Snapshot</a>
       </nav>
     </header>
 
@@ -430,6 +461,57 @@
     </section>
 
     <section class="panel section">
+      <h2>Interview-backed priorities</h2>
+      <p class="section__intro">
+        A 12-model interview round on dotrepo's current shape converged on three
+        next steps: grow the index until checking it is cheap, expose remote
+        lookup through MCP, and keep the public surface narrow while that work lands.
+      </p>
+      <div class="three-up">
+        <article class="feature">
+          <h3>Seed the index</h3>
+          <p>Near-term usefulness comes from a broader reviewed overlay set, not another round of protocol ornamentation. The next tranche should span Rust, TypeScript, Python, and Go.</p>
+        </article>
+        <article class="feature">
+          <h3>Add remote lookup</h3>
+          <p>The public HTTP shape already supports repo-first lookup. The missing ergonomic layer is an MCP tool that takes a URL or identity and resolves against the hosted surface without cloning first.</p>
+        </article>
+        <article class="feature">
+          <h3>Keep it small</h3>
+          <p>The trust model, freshness semantics, and live query route are the differentiators. Search, mutation, and heavier editor product work should stay subordinate until the data and lookup path are stronger.</p>
+        </article>
+      </div>
+      <p class="section__note">
+        Read the on-site write-up:
+        <a href="/writing/what-the-ais-think-about-dotrepo/">What the AIs Think About dotrepo</a>.
+        Working repo notes remain in
+        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>.
+      </p>
+    </section>
+
+    <section class="panel section">
+      <h2>Writing</h2>
+      <p class="section__intro">
+        Ongoing field reports, launch notes, and research syntheses from the protocol,
+        public surface, and agent-facing product work.
+      </p>
+      <div class="repo-grid">
+        <article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Writing</p>
+                <h3>What the AIs Think About dotrepo</h3>
+                <p class="repo-card__path">March 18, 2026</p>
+              </div>
+              <p class="repo-card__description">A dotrepo-side synthesis of a 12-model interview round about repository metadata, trust, adoption, and what AI coding tools actually need.</p>
+              <div class="repo-card__links">
+                <a href="/writing/what-the-ais-think-about-dotrepo/">Read article</a>
+                <a href="https://maxwellsantoro.com/writing/i-asked-12-ai-models-what-they-want-from-a-repository-metadata-protocol/">Companion essay</a>
+              </div>
+            </article>
+      </div>
+    </section>
+
+    <section class="panel section">
       <h2>Public API</h2>
       <div class="api-grid">
         <article class="api-card">
@@ -456,25 +538,38 @@
               <code>/v0/repos/&lt;host&gt;/&lt;owner&gt;/&lt;repo&gt;/query?path=...</code>
               <span>Same-origin trust-aware field queries.</span>
             </div>
+            <div class="endpoint">
+              <code>read-only / same-origin / claim-aware</code>
+              <span>No mutation API, one canonical host, and trust context stays visible on every query path.</span>
+            </div>
           </div>
         </article>
         <article class="api-card">
-          <h3>Ground rules</h3>
-          <p>dotrepo is a metadata layer, not a replacement for project materials. Public responses stay read-only, trust-aware, and explicit about provenance.</p>
-          <div class="endpoint-list">
-            <div class="endpoint">
-              <code>read-only</code>
-              <span>No mutation or submission API on the public surface.</span>
-            </div>
-            <div class="endpoint">
-              <code>same-origin</code>
-              <span>Inventory, trust, and query links resolve on one canonical host.</span>
-            </div>
-            <div class="endpoint">
-              <code>claim-aware</code>
-              <span>Canonical, imported, inferred, reviewed, and verified states stay visible.</span>
-            </div>
+          <h3>What a query returns</h3>
+          <p>The query route returns the selected value together with selection, trust, and conflict context. This truncated example is derived from the current exported snapshot.</p>
+          <div class="endpoint">
+            <code>/v0/repos/github.com/BurntSushi/ripgrep/query?path=repo.description</code>
+            <span>Example live query for <code>repo.description</code>.</span>
           </div>
+          <pre><code>{
+  &quot;path&quot;: &quot;repo.description&quot;,
+  &quot;value&quot;: &quot;Line-oriented search tool that recursively searches the current directory for a regex pattern.&quot;,
+  &quot;selection&quot;: {
+    &quot;reason&quot;: &quot;only_matching_record&quot;,
+    &quot;recordStatus&quot;: &quot;imported&quot;,
+    &quot;trust&quot;: {
+      &quot;confidence&quot;: &quot;medium&quot;,
+      &quot;provenance&quot;: [
+        &quot;imported&quot;,
+        &quot;inferred&quot;
+      ],
+      &quot;notes&quot;: &quot;Imported from public repository materials; build and test commands are inferred from the Cargo project layout; not maintainer-verified.&quot;
+    },
+    &quot;evidencePath&quot;: &quot;repos/github.com/BurntSushi/ripgrep/evidence.md&quot;
+  },
+  &quot;conflicts&quot;: []
+}</code></pre>
+          <p class="api-card__caption">Full responses also include freshness, repository identity, and navigation links.</p>
         </article>
       </div>
     </section>

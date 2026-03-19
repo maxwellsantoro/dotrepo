@@ -216,6 +216,7 @@ If you are consuming the hosted public surface or building agent tooling:
 - [`docs/public-release-note.md`](docs/public-release-note.md)
 - [`docs/public-export-examples.md`](docs/public-export-examples.md)
 - [`docs/public-surface.md`](docs/public-surface.md)
+- [`docs/ai-tool-interviews.md`](docs/ai-tool-interviews.md)
 - [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md)
 
 If you want the protocol and trust model:
