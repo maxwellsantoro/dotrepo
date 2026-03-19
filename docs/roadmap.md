@@ -24,8 +24,11 @@ for the first editor feature set and thin-extension model.
 - Maintainer claim workflow and index-side authority handoff primitives
 - Static public export with repository summary and trust responses
 - CI artifacts and bundle packaging for the public export
+- Hosted Cloudflare deployment on `https://dotrepo.org/` with same-origin query
+  serving
+- Public homepage and writing surface on top of the exported public tree
 
-## v1.0 launch track
+## Completed v1.0 launch track
 - Freeze the public repository summary, trust, and query-wrapper contracts
 - Ship a hosted/static read-only public surface on top of the existing export
 - Harden the maintainer and operator loops into the formal adoption contract
@@ -36,7 +39,21 @@ for the first editor feature set and thin-extension model.
 - Turn the current CI and packaging checks into an explicit 1.0 release gate
 
 See [`PLAN.md`](../PLAN.md) for the concrete 1.0 launch plan, exit criteria,
-and deferrals.
+and deferrals that drove that release bar.
+
+## Current post-v1 priorities
+
+1. Grow the reviewed overlay index from a proof surface into a useful service.
+   The current target is a first tranche of 50 reviewed high-signal repos across
+   Rust, TypeScript, Python, and Go. The concrete target list now lives in
+   [`index/tranche-one-targets.md`](../index/tranche-one-targets.md).
+2. Add hosted remote lookup to MCP so agents can resolve a repository URL or
+   identity against `https://dotrepo.org/` without cloning first.
+3. Keep public-surface, editor, and operator work scoped to the minimal
+   hardening needed to support those first two priorities.
+
+See [`docs/ai-tool-interviews.md`](./ai-tool-interviews.md) for the research
+that pushed those priorities to the front.
 For the ticket-level post-v1 follow-on backlog grounded in the shipped surface,
 see [`docs/post-v1-backlog.md`](./post-v1-backlog.md).
 
@@ -46,11 +63,11 @@ see [`docs/post-v1-backlog.md`](./post-v1-backlog.md).
 - Discovery-first search and ranking UX
 - Public mutation or submission APIs
 
-The current downstream track after the completed v0.2 loop and first
-maintainer-claim/public-export tranche is still public read-only serving. That
-work should turn the existing index, trust, conflict, and claim-visibility
-semantics into a stable repository inspection surface before bundle or
-workspace semantics expand the protocol again.
+The current downstream track after the completed public-serving launch is
+deliberate index growth plus remote lookup. That work should make the existing
+trust, conflict, freshness, and claim-visibility semantics useful often enough
+that agents and humans actually check dotrepo first before bundle or workspace
+semantics expand the protocol again.
 
 See [`RFC 0008`](../rfcs/0008-maintainer-claim-lifecycle.md) for the first
 lifecycle draft.
@@ -72,7 +89,7 @@ current local-review and CI-artifact loop over the exported public JSON tree.
 See [`docs/public-surface.md`](./public-surface.md) for the public surface
 architecture.
 See [`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md) for the
-planned Cloudflare deployment target for same-origin hosted query serving.
+Cloudflare deployment path for same-origin hosted query serving.
 See [`docs/public-release-note.md`](./public-release-note.md) and
 [`docs/public-export-examples.md`](./public-export-examples.md) for the current
 release summary and consumer examples.

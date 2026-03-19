@@ -1,8 +1,16 @@
 # v1.0 Launch Plan
 
-dotrepo is past the architecture-sketch phase. The v1.0 bar should be treated
-as a launch program over the existing protocol, reference toolchain, and public
-index, with public read-only serving as the critical path.
+This doc records the `v1.0` launch bar and release rationale.
+
+Most of this launch track is now complete. Treat this as the launch record, not
+the active next-work plan. For the current post-launch priorities, use
+[`docs/current-status.md`](./docs/current-status.md),
+[`docs/roadmap.md`](./docs/roadmap.md), and
+[`docs/post-v1-backlog.md`](./docs/post-v1-backlog.md).
+
+The original `v1.0` bar was a launch program over the existing protocol,
+reference toolchain, and public index, with public read-only serving as the
+critical path.
 
 ## What v1.0 means
 

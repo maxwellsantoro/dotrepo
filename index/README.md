@@ -64,6 +64,9 @@ overlay entries, then replace each placeholder with repository-specific evidence
 
 Reviewers can use [`index/review-checklist.md`](review-checklist.md) as the short
 PR checklist when deciding whether an overlay is strong enough to merge.
+For the active seed-index growth program, use
+[`index/tranche-one-targets.md`](tranche-one-targets.md) as the concrete
+candidate list and first-batch execution guide.
 For maintainer-claim review, use
 [`docs/maintainer-claim-review-workflow.md`](../docs/maintainer-claim-review-workflow.md)
 as the end-to-end operator loop.

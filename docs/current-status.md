@@ -28,7 +28,10 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   built from the reviewed export snapshot and serving the hosted `v0` JSON tree
   and same-origin query route from one origin
 - A live Cloudflare Worker staging deployment on `workers.dev`, with post-deploy
-  smoke coverage in CI and fallback use while custom-domain DNS propagates
+  smoke coverage in CI and continued use as the secondary staging origin
+- A real public homepage and writing surface on `https://dotrepo.org/`,
+  generated from the reviewed export and published through the same Cloudflare
+  deployment path as the hosted JSON surface
 - Release-artifact packaging for `dotrepo`, `dotrepo-public-query`,
   `dotrepo-lsp`, and `dotrepo-mcp`, with CI smoke tests that extract and run
   the shipped binaries from the packaged tarball
@@ -55,7 +58,8 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 ## What dotrepo does not yet include
 
 - A full maintainer claim workflow product surface
-- A broader public site UX on top of the now-live hosted public API origin
+- Richer public browse and search UX on top of the now-live hosted public API
+  origin
 - An MCP remote-lookup tool that resolves repository URLs or identities against
   `https://dotrepo.org/` without a local checkout
 - A seed index broad enough across languages to make dotrepo a likely first
@@ -68,12 +72,15 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 
 ## Highest-leverage next steps
 
-- Grow the reviewed overlay index to a first tranche of 50 repositories across
+- Execute the concrete tranche-one seed-index program in
+  [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) until the
+  checked-in index reaches a first tranche of 50 reviewed repositories across
   Rust, TypeScript, Python, and Go.
 - Add a `dotrepo.lookup`-style MCP tool that wraps the hosted public surface for
-  URL-first remote lookup.
-- Keep the public and editor surface narrow while those two leverage points are
-  landing.
+  URL-first remote lookup immediately after the first index-growth tranche is
+  underway.
+- Keep hardening and public-site work tightly scoped to blockers for those two
+  leverage points rather than letting them reclaim the roadmap.
 
 See [`docs/ai-tool-interviews.md`](./ai-tool-interviews.md) for the synthesized
 interview-backed rationale behind those priorities.
@@ -108,7 +115,7 @@ See [`docs/v1-go-no-go.md`](./v1-go-no-go.md) for the current release bar.
 
 ## Where to go next
 
-For the concrete v1.0 launch scope, exit criteria, and deferrals, see
+For the historical `v1.0` launch scope, exit criteria, and deferrals, see
 [`PLAN.md`](../PLAN.md).
 For the release decision bar, see
 [`docs/v1-go-no-go.md`](./v1-go-no-go.md).

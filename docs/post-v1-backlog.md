@@ -42,27 +42,40 @@ Use these as top-level program checks across blocks:
 - crawler readiness should first be measured by one factual-only crawl working
   end to end: discovery, materialization, writeback, and state persistence
 
+## Current recommendation
+
+Treat deliberate index growth as the active top-priority workstream.
+
+Near-term order:
+
+1. Grow the reviewed overlay index from 5 repositories to a first tranche of 50
+   high-signal repos across Rust, TypeScript, Python, and Go, using
+   [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) as the
+   concrete execution list.
+2. Add hosted remote lookup to MCP so agents can consume `dotrepo.org` without
+   a local checkout.
+3. Keep hardening, public-site, and editor work constrained to blockers for the
+   first two items.
+
 ## Priority blocks
 
 ### Block 1
 
-- Epic 1: public contract hardening
-- Epic 3: freshness and cache semantics
-- Epic 4: maintainer adoption loop
-- Epic 4A: managed-surface adoption tooling
-- Epic 5: operator/reviewer loop
+- Epic 7: deliberate index growth first tranche
+- Epic 2: hosted remote-lookup MCP surface on top of the shipped public origin
+- only blocking hardening work from Epics 1, 3, and 5
 
 ### Block 2
 
-- Epic 2: thin hosted query serving
-- first hosted remote-lookup MCP surface on top of the hosted public origin
-- remaining Epic 3 items tied to hosted query
-- remaining Epic 5 items tied to release review
-- Epic 7: deliberate index growth first tranche
+- remaining Epic 1: public contract hardening
+- remaining Epic 3: freshness and cache semantics
+- remaining Epic 5: operator/reviewer loop
+- Epic 6: claims and handoffs
 
 ### Block 3
 
-- Epic 6: claims and handoffs
+- Epic 4: maintainer adoption loop
+- Epic 4A: managed-surface adoption tooling
 - Epic 8: thin extension cleanup only
 
 ### Block 4
@@ -152,7 +165,7 @@ the future serving/deployment layer,
   Depends on: `E2-08`.
   Acceptance: the Worker serves the current `v0` query route semantics, falls through to static assets for non-query requests, and preserves the existing base-path and error vocabulary.
 
-- `E2-10 Add Wrangler project and deploy workflow`
+- `[done] E2-10 Add Wrangler project and deploy workflow`
   Depends on: `E2-09`.
   Acceptance: the repo can build and deploy one Worker-based hosted public surface from the reviewed export snapshot as the canonical hosted origin.
 
@@ -327,7 +340,7 @@ Primary surfaces:
 `index/repos/`,
 the factual import/crawl tooling.
 
-- `E7-01 Set concrete post-v1 seed-index growth targets`
+- `[done] E7-01 Set concrete post-v1 seed-index growth targets`
   Depends on: none.
   Acceptance: docs define one near-term target of 50 reviewed high-signal repos across Rust, TypeScript, Python, and Go and one follow-on target such as 500, along with the review bar for each tranche.
 
@@ -342,6 +355,10 @@ the factual import/crawl tooling.
 - `E7-04 Keep each early growth tranche visibly cross-language`
   Depends on: `E7-01`.
   Acceptance: the first deliberate growth tranche includes meaningful coverage across Rust, TypeScript, Python, and Go rather than clustering around one ecosystem or one maintainer circle.
+
+- `[done] E7-05 Publish the tranche-one candidate list before broadening tooling work`
+  Depends on: `E7-01`, `E7-04`.
+  Acceptance: the repo contains one explicit reviewed target list for the first 50 overlays, including language mix and rationale, so index growth can be executed as a concrete program rather than an abstract aspiration.
 
 ## Epic 8: Keep the thin extension thin
 
