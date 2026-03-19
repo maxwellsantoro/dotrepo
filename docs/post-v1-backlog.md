@@ -437,6 +437,10 @@ Primary surfaces:
   Depends on: `E10-03`.
   Acceptance: one end-to-end crawl can fetch GitHub metadata and conventional surfaces, build a factual overlay plan, write it back, and persist crawler state in a form operators can inspect.
 
+- `[done] E10-04a Expand factual import to README variants and root package-manifest defaults`
+  Depends on: `E10-04`.
+  Acceptance: crawler-staged imports preserve the actual README variant path they used and can fill factual `repo.build` / `repo.test` from root `Cargo.toml`, `package.json`, `pyproject.toml`, or `go.mod` when the command signal is unambiguous.
+
 - `E10-05 Use scheduler reasons as the crawler control plane`
   Depends on: `E10-04`.
   Acceptance: refresh orchestration visibly distinguishes `MissingFactualCrawl`, `HeadChanged`, `MissingSynthesis`, `PreviousSynthesisFailed`, and `SynthesisModelChanged`, and factual refresh works before synthesis is treated as important.

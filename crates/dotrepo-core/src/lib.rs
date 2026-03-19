@@ -2916,6 +2916,10 @@ pub fn import_repository_with_options(
     let readme = load_first_existing_file(root, IMPORT_README_CANDIDATES)?;
     let codeowners = load_first_existing_file(root, &[".github/CODEOWNERS", "CODEOWNERS"])?;
     let security = load_first_existing_file(root, &[".github/SECURITY.md", "SECURITY.md"])?;
+    let cargo_toml = load_first_existing_file(root, &["Cargo.toml"])?;
+    let package_json = load_first_existing_file(root, &["package.json"])?;
+    let pyproject_toml = load_first_existing_file(root, &["pyproject.toml"])?;
+    let go_mod = load_first_existing_file(root, &["go.mod"])?;
     let contributing =
         load_first_existing_file(root, &["CONTRIBUTING.md", ".github/CONTRIBUTING.md"])?;
     let pull_request_template = load_first_existing_file(
@@ -2956,6 +2960,12 @@ pub fn import_repository_with_options(
     } else {
         None
     };
+    let imported_commands = infer_imported_commands(
+        cargo_toml.as_ref(),
+        package_json.as_ref(),
+        pyproject_toml.as_ref(),
+        go_mod.as_ref(),
+    );
 
     let mut imported_sources = Vec::new();
     let mut inferred_fields = Vec::new();
@@ -3008,6 +3018,12 @@ pub fn import_repository_with_options(
             note_import(&mut imported_sources, file.path);
         }
     }
+    if let Some((_, path)) = imported_commands.build.as_ref() {
+        note_import(&mut imported_sources, path);
+    }
+    if let Some((_, path)) = imported_commands.test.as_ref() {
+        note_import(&mut imported_sources, path);
+    }
 
     let provenance = import_provenance(&imported_sources, &inferred_fields);
     let confidence = if provenance.iter().any(|value| value == "imported") {
@@ -3054,6 +3070,7 @@ pub fn import_repository_with_options(
                     &inferred_fields,
                     codeowners_metadata.note.as_deref(),
                     security_note.as_deref(),
+                    &imported_commands.notes,
                 )),
             }),
         },
@@ -3068,8 +3085,14 @@ pub fn import_repository_with_options(
             status: None,
             visibility: None,
             languages: Vec::new(),
-            build: None,
-            test: None,
+            build: imported_commands
+                .build
+                .as_ref()
+                .map(|(command, _)| command.clone()),
+            test: imported_commands
+                .test
+                .as_ref()
+                .map(|(command, _)| command.clone()),
             topics: Vec::new(),
         },
     );
@@ -3127,6 +3150,7 @@ pub fn import_repository_with_options(
                 codeowners_metadata.note.as_deref(),
                 security_note.as_deref(),
                 imported_docs.is_some(),
+                &imported_commands.evidence_bullets,
             )),
         ),
     };
@@ -3304,6 +3328,21 @@ struct SecurityImportMetadata {
     note: Option<String>,
 }
 
+#[derive(Default)]
+struct ImportedCommandMetadata {
+    build: Option<(String, &'static str)>,
+    test: Option<(String, &'static str)>,
+    notes: Vec<String>,
+    evidence_bullets: Vec<String>,
+}
+
+#[derive(Debug, Clone)]
+struct ImportedCommandCandidate {
+    source_path: &'static str,
+    build: Option<String>,
+    test: Option<String>,
+}
+
 fn load_first_existing_file(
     root: &Path,
     candidates: &[&'static str],
@@ -3321,6 +3360,251 @@ fn load_first_existing_file(
     }
 
     Ok(None)
+}
+
+fn infer_imported_commands(
+    cargo_toml: Option<&ImportedFile>,
+    package_json: Option<&ImportedFile>,
+    pyproject_toml: Option<&ImportedFile>,
+    go_mod: Option<&ImportedFile>,
+) -> ImportedCommandMetadata {
+    let mut candidates = Vec::new();
+    if let Some(candidate) = cargo_toml.and_then(infer_cargo_manifest_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = package_json.and_then(infer_package_json_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = pyproject_toml.and_then(infer_pyproject_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = go_mod.and_then(infer_go_module_commands) {
+        candidates.push(candidate);
+    }
+
+    let mut metadata = ImportedCommandMetadata::default();
+    metadata.build = select_unique_imported_command(
+        &candidates,
+        "repo.build",
+        "build",
+        true,
+        &mut metadata.notes,
+        &mut metadata.evidence_bullets,
+    );
+    metadata.test = select_unique_imported_command(
+        &candidates,
+        "repo.test",
+        "test",
+        false,
+        &mut metadata.notes,
+        &mut metadata.evidence_bullets,
+    );
+    metadata
+}
+
+fn infer_cargo_manifest_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let parsed: toml::Value = toml::from_str(&file.contents).ok()?;
+    let has_workspace = parsed
+        .get("workspace")
+        .and_then(toml::Value::as_table)
+        .is_some();
+    let has_package = parsed
+        .get("package")
+        .and_then(toml::Value::as_table)
+        .is_some();
+    if !has_workspace && !has_package {
+        return None;
+    }
+
+    let (build, test) = if has_workspace {
+        ("cargo build --workspace", "cargo test --workspace")
+    } else {
+        ("cargo build", "cargo test")
+    };
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path,
+        build: Some(build.into()),
+        test: Some(test.into()),
+    })
+}
+
+fn infer_package_json_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let parsed: serde_json::Value = serde_json::from_str(&file.contents).ok()?;
+    let scripts = parsed
+        .get("scripts")
+        .and_then(serde_json::Value::as_object)?;
+    let runner = detect_node_package_runner(
+        parsed
+            .get("packageManager")
+            .and_then(serde_json::Value::as_str),
+    );
+
+    let build = scripts
+        .get("build")
+        .and_then(serde_json::Value::as_str)
+        .filter(|value| !value.trim().is_empty())
+        .map(|_| runner.build_command());
+    let test = scripts
+        .get("test")
+        .and_then(serde_json::Value::as_str)
+        .filter(|value| !value.trim().is_empty())
+        .filter(|value| !is_placeholder_package_json_test_script(value))
+        .map(|_| runner.test_command());
+
+    if build.is_none() && test.is_none() {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path,
+        build,
+        test,
+    })
+}
+
+fn infer_pyproject_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let parsed: toml::Value = toml::from_str(&file.contents).ok()?;
+    let build = parsed
+        .get("build-system")
+        .and_then(toml::Value::as_table)
+        .map(|_| "python -m build".to_string());
+    let test = parsed
+        .get("tool")
+        .and_then(toml::Value::as_table)
+        .and_then(|tool| tool.get("pytest"))
+        .map(|_| "python -m pytest".to_string());
+
+    if build.is_none() && test.is_none() {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path,
+        build,
+        test,
+    })
+}
+
+fn infer_go_module_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let has_module = file
+        .contents
+        .lines()
+        .map(str::trim)
+        .filter(|line| !line.is_empty())
+        .any(|line| line.starts_with("module "));
+    if !has_module {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path,
+        build: Some("go build ./...".into()),
+        test: Some("go test ./...".into()),
+    })
+}
+
+fn select_unique_imported_command(
+    candidates: &[ImportedCommandCandidate],
+    field: &'static str,
+    kind: &'static str,
+    select_build: bool,
+    notes: &mut Vec<String>,
+    evidence_bullets: &mut Vec<String>,
+) -> Option<(String, &'static str)> {
+    let mut present = Vec::new();
+    for candidate in candidates {
+        let command = if select_build {
+            candidate.build.as_deref()
+        } else {
+            candidate.test.as_deref()
+        };
+        if let Some(command) = command.filter(|value| !value.trim().is_empty()) {
+            present.push((command.to_string(), candidate.source_path));
+        }
+    }
+
+    if present.is_empty() {
+        return None;
+    }
+
+    let mut unique_commands = Vec::new();
+    for (command, path) in &present {
+        if !unique_commands
+            .iter()
+            .any(|(existing, _): &(String, &'static str)| existing == command)
+        {
+            unique_commands.push((command.clone(), *path));
+        }
+    }
+
+    if unique_commands.len() == 1 {
+        let (command, path) = unique_commands.remove(0);
+        notes.push(format!("Imported `{}` from `{}`.", field, path));
+        evidence_bullets.push(format!(
+            "Imported {} from {} as `{}`.",
+            field, path, command
+        ));
+        return Some((command, path));
+    }
+
+    let mut source_paths = Vec::new();
+    for (_, path) in &present {
+        push_unique(&mut source_paths, (*path).to_string());
+    }
+    let note = format!(
+        "Left `{}` unset because {} suggested conflicting {} commands.",
+        field,
+        human_join(&source_paths),
+        kind
+    );
+    notes.push(note.clone());
+    evidence_bullets.push(note);
+    None
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum NodePackageRunner {
+    Npm,
+    Pnpm,
+    Yarn,
+    Bun,
+}
+
+impl NodePackageRunner {
+    fn build_command(self) -> String {
+        match self {
+            Self::Npm => "npm run build".into(),
+            Self::Pnpm => "pnpm build".into(),
+            Self::Yarn => "yarn build".into(),
+            Self::Bun => "bun run build".into(),
+        }
+    }
+
+    fn test_command(self) -> String {
+        match self {
+            Self::Npm => "npm test".into(),
+            Self::Pnpm => "pnpm test".into(),
+            Self::Yarn => "yarn test".into(),
+            Self::Bun => "bun run test".into(),
+        }
+    }
+}
+
+fn detect_node_package_runner(package_manager: Option<&str>) -> NodePackageRunner {
+    match package_manager
+        .filter(|value| !value.trim().is_empty())
+        .map(|value| value.to_ascii_lowercase())
+    {
+        Some(value) if value.starts_with("pnpm@") || value == "pnpm" => NodePackageRunner::Pnpm,
+        Some(value) if value.starts_with("yarn@") || value == "yarn" => NodePackageRunner::Yarn,
+        Some(value) if value.starts_with("bun@") || value == "bun" => NodePackageRunner::Bun,
+        _ => NodePackageRunner::Npm,
+    }
+}
+
+fn is_placeholder_package_json_test_script(script: &str) -> bool {
+    script.to_ascii_lowercase().contains("no test specified")
 }
 
 fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
@@ -4022,6 +4306,7 @@ fn import_notes(
     inferred_fields: &[String],
     codeowners_note: Option<&str>,
     security_note: Option<&str>,
+    command_notes: &[String],
 ) -> String {
     let mut notes = if imported_sources.is_empty() {
         "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported."
@@ -4045,6 +4330,11 @@ fn import_notes(
     if let Some(security_note) = security_note {
         notes.push(' ');
         notes.push_str(security_note);
+    }
+
+    for command_note in command_notes {
+        notes.push(' ');
+        notes.push_str(command_note);
     }
 
     if matches!(mode, ImportMode::Overlay) {
@@ -4177,6 +4467,7 @@ fn render_import_evidence(
     codeowners_note: Option<&str>,
     security_note: Option<&str>,
     imported_docs: bool,
+    command_evidence_bullets: &[String],
 ) -> String {
     let mut bullets = Vec::new();
 
@@ -4235,6 +4526,7 @@ fn render_import_evidence(
         ));
     }
 
+    bullets.extend(command_evidence_bullets.iter().cloned());
     bullets.push("This is an overlay record, not a maintainer-controlled canonical record.".into());
 
     let mut out = String::from("# Evidence\n\n");
@@ -8285,6 +8577,222 @@ Policy-aware release orchestration for multi-service deploys.
         assert!(plan.evidence_text.as_deref().is_some_and(
             |text| text.contains("Imported repository name and description from README.mdx.")
         ));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_imports_cargo_workspace_build_and_test_commands() {
+        let root = temp_dir("import-cargo-commands");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Cargo.toml"),
+            "[workspace]\nmembers = [\"crates/orbit\"]\n",
+        )
+        .expect("Cargo.toml written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(
+            plan.manifest.repo.build.as_deref(),
+            Some("cargo build --workspace")
+        );
+        assert_eq!(
+            plan.manifest.repo.test.as_deref(),
+            Some("cargo test --workspace")
+        );
+        assert!(plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "Cargo.toml"));
+        assert!(plan
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(|text| text.contains("Imported `repo.build` from `Cargo.toml`.")));
+        assert!(plan.evidence_text.as_deref().is_some_and(|text| text
+            .contains("Imported repo.build from Cargo.toml as `cargo build --workspace`.")));
+        assert!(plan
+            .evidence_text
+            .as_deref()
+            .is_some_and(|text| text
+                .contains("Imported repo.test from Cargo.toml as `cargo test --workspace`.")));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_imports_package_json_commands_with_runner_detection() {
+        let root = temp_dir("import-package-json-commands");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("package.json"),
+            r#"{
+  "name": "orbit",
+  "packageManager": "pnpm@9.1.0",
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run"
+  }
+}
+"#,
+        )
+        .expect("package.json written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("pnpm build"));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("pnpm test"));
+        assert!(plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "package.json"));
+        assert!(plan.evidence_text.as_deref().is_some_and(
+            |text| text.contains("Imported repo.test from package.json as `pnpm test`.")
+        ));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_imports_pyproject_build_and_test_defaults() {
+        let root = temp_dir("import-pyproject-commands");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("pyproject.toml"),
+            r#"[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+"#,
+        )
+        .expect("pyproject written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("python -m build"));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("python -m pytest"));
+        assert!(plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "pyproject.toml"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_imports_go_module_build_and_test_defaults() {
+        let root = temp_dir("import-go-mod-commands");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("go.mod"),
+            "module github.com/example/orbit\n\ngo 1.24\n",
+        )
+        .expect("go.mod written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("go build ./..."));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("go test ./..."));
+        assert!(plan.imported_sources.iter().any(|path| path == "go.mod"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_leaves_conflicting_manifest_commands_unset() {
+        let root = temp_dir("import-conflicting-commands");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Cargo.toml"),
+            "[workspace]\nmembers = [\"crates/orbit\"]\n",
+        )
+        .expect("Cargo.toml written");
+        fs::write(
+            root.join("package.json"),
+            r#"{
+  "name": "orbit",
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run"
+  }
+}
+"#,
+        )
+        .expect("package.json written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build, None);
+        assert_eq!(plan.manifest.repo.test, None);
+        assert!(!plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "Cargo.toml"));
+        assert!(!plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "package.json"));
+        assert!(plan
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(|text| text.contains("Left `repo.build` unset because")));
+        assert!(plan
+            .evidence_text
+            .as_deref()
+            .is_some_and(|text| text.contains("conflicting build commands")));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

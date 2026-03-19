@@ -39,8 +39,9 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   `public/` tree and query responses from one process
 - A working in-repo `dotrepo-crawler` binary that can discover GitHub
   repositories by star band, plan factual overlay crawls, write imported
-  overlays into an index root, and persist crawler state for later refresh
-  scheduling
+  overlays into an index root, persist crawler state for later refresh
+  scheduling, preserve README variant paths, and derive factual `repo.build`
+  and `repo.test` defaults from unambiguous root package manifests
 - Export-time per-repository `query-input/` artifacts plus a pure snapshot
   query function in core, so hosted query no longer depends on runtime TOML
   parsing as the only implementation path

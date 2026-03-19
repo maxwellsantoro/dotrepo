@@ -84,7 +84,7 @@ pub(crate) fn crawl_repository_from_snapshot(
         diagnostics.push(CrawlDiagnostic::info(
             "pipeline.materialized_sources",
             format!(
-                "materialized {} conventional files into a temporary repository root",
+                "materialized {} repository files into a temporary repository root",
                 materialized.written_files.len()
             ),
         ));
