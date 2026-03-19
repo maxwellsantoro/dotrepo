@@ -4,8 +4,9 @@
 [![Latest Release](https://img.shields.io/github/v/release/maxwellsantoro/dotrepo)](https://github.com/maxwellsantoro/dotrepo/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e.svg)](LICENSE)
 
-**dotrepo** gives software repositories a trustworthy source of truth for
-essential metadata.
+**dotrepo** is an open metadata protocol for software repositories.
+It gives maintainers, users, tools, and coding agents a trust-aware source of
+truth for essential repository metadata.
 
 It packages that into three aligned surfaces:
 - **maintainers** get a cleaner, more reliable way to describe and maintain repository metadata
@@ -17,7 +18,7 @@ documentation into machine sludge. The goal is to create a shared,
 trustworthy metadata layer that makes repositories easier to understand and
 work with, while respecting the source materials they come from.
 
-Hosted public surface:
+Project site and hosted public surface:
 [dotrepo.org](https://dotrepo.org/)
 
 ## See it in 60 seconds
