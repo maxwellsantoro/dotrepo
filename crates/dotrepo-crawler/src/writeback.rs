@@ -3,16 +3,14 @@ use anyhow::{bail, Context, Result};
 use std::fs;
 use std::path::PathBuf;
 
-#[allow(dead_code)]
 #[derive(Debug, Clone)]
-pub(crate) struct WritebackReport {
+pub struct WritebackReport {
     pub record_root: PathBuf,
     pub manifest_path: PathBuf,
     pub evidence_path: Option<PathBuf>,
     pub synthesis_path: Option<PathBuf>,
 }
 
-#[allow(dead_code)]
 pub(crate) fn apply_writeback_plan(plan: &CrawlWritebackPlan) -> Result<WritebackReport> {
     fs::create_dir_all(&plan.record_root)
         .with_context(|| format!("failed to create {}", plan.record_root.display()))?;

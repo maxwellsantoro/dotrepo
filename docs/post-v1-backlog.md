@@ -421,19 +421,19 @@ Primary surfaces:
 `crates/dotrepo-crawler/src/state.rs`,
 `crates/dotrepo-crawler/src/schedule.rs`.
 
-- `E10-01 Hit a factual-only end-to-end crawler milestone`
+- `[done] E10-01 Hit a factual-only end-to-end crawler milestone`
   Depends on: none.
   Acceptance: one milestone definition makes "discovery works, factual materialization works, writeback works, state persists, synthesis ignored" the first crawler success bar before richer scheduling or synthesis behavior is treated as important.
 
-- `E10-02 Implement GitHub discovery in discover.rs`
+- `[done] E10-02 Implement GitHub discovery in discover.rs`
   Depends on: none.
   Acceptance: `seed_repositories` returns real candidate repositories across configured star bands and honors archived and fork filters instead of bailing as scaffold-only.
 
-- `E10-03 Wire the dotrepo-crawler CLI to the library entrypoints`
+- `[done] E10-03 Wire the dotrepo-crawler CLI to the library entrypoints`
   Depends on: `E10-01`, `E10-02`.
   Acceptance: the crawler binary exposes discovery, crawl, scheduling, and state-management commands well enough to exercise the pipeline outside Rust tests.
 
-- `E10-04 Finish factual crawl materialization and writeback as a reviewable flow`
+- `[done] E10-04 Finish factual crawl materialization and writeback as a reviewable flow`
   Depends on: `E10-03`.
   Acceptance: one end-to-end crawl can fetch GitHub metadata and conventional surfaces, build a factual overlay plan, write it back, and persist crawler state in a form operators can inspect.
 

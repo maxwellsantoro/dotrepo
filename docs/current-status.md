@@ -37,6 +37,10 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   the shipped binaries from the packaged tarball
 - A local same-origin hosted-query runtime that can serve both the exported
   `public/` tree and query responses from one process
+- A working in-repo `dotrepo-crawler` binary that can discover GitHub
+  repositories by star band, plan factual overlay crawls, write imported
+  overlays into an index root, and persist crawler state for later refresh
+  scheduling
 - Export-time per-repository `query-input/` artifacts plus a pure snapshot
   query function in core, so hosted query no longer depends on runtime TOML
   parsing as the only implementation path

@@ -1,5 +1,5 @@
 use crate::materialize::ConventionalRepositoryFiles;
-use crate::{GitHubRepositorySnapshot, RepositoryRef};
+use crate::{DiscoveredRepository, GitHubRepositorySnapshot, RepositoryRef, StarBand};
 use anyhow::{anyhow, Context, Result};
 use reqwest::blocking::{Client, Response};
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue, ACCEPT, AUTHORIZATION, USER_AGENT};
@@ -20,6 +20,18 @@ pub(crate) trait GitHubClient {
         repository: &RepositoryRef,
         default_branch: &str,
     ) -> Result<ConventionalRepositoryFiles>;
+}
+
+pub(crate) trait GitHubDiscoveryClient {
+    fn search_repositories(
+        &self,
+        host: &str,
+        star_band: &StarBand,
+        page: usize,
+        per_page: usize,
+        include_archived: bool,
+        include_forks: bool,
+    ) -> Result<Vec<DiscoveredRepository>>;
 }
 
 pub(crate) struct HttpGitHubClient {
@@ -75,6 +87,35 @@ impl HttpGitHubClient {
             segments.extend(["repos", repository.owner.as_str(), repository.repo.as_str()]);
             segments.extend(extra_segments.iter().copied());
         }
+        Ok(url)
+    }
+
+    fn search_url(
+        &self,
+        host: &str,
+        star_band: &StarBand,
+        page: usize,
+        per_page: usize,
+        include_archived: bool,
+        include_forks: bool,
+    ) -> Result<Url> {
+        if host.trim() != "github.com" {
+            return Err(anyhow!(
+                "GitHub discovery currently supports github.com identities only"
+            ));
+        }
+
+        let mut url = self
+            .api_base_url
+            .join("search/repositories")
+            .context("failed to build GitHub search URL")?;
+        let query = build_repository_search_query(star_band, include_archived, include_forks);
+        url.query_pairs_mut()
+            .append_pair("q", &query)
+            .append_pair("sort", "stars")
+            .append_pair("order", "desc")
+            .append_pair("per_page", &per_page.to_string())
+            .append_pair("page", &page.to_string());
         Ok(url)
     }
 
@@ -197,6 +238,43 @@ impl GitHubClient for HttpGitHubClient {
     }
 }
 
+impl GitHubDiscoveryClient for HttpGitHubClient {
+    fn search_repositories(
+        &self,
+        host: &str,
+        star_band: &StarBand,
+        page: usize,
+        per_page: usize,
+        include_archived: bool,
+        include_forks: bool,
+    ) -> Result<Vec<DiscoveredRepository>> {
+        let response = self.get_json::<SearchRepositoriesApiResponse>(self.search_url(
+            host,
+            star_band,
+            page,
+            per_page,
+            include_archived,
+            include_forks,
+        )?)?;
+
+        Ok(response
+            .items
+            .into_iter()
+            .map(|item| DiscoveredRepository {
+                repository: RepositoryRef {
+                    host: host.into(),
+                    owner: item.owner.login,
+                    repo: item.name,
+                },
+                stars: item.stargazers_count,
+                default_branch: item.default_branch,
+                archived: item.archived,
+                fork: item.fork,
+            })
+            .collect())
+    }
+}
+
 fn github_token() -> Option<String> {
     std::env::var("GITHUB_TOKEN")
         .ok()
@@ -250,6 +328,28 @@ fn trim_optional(value: Option<String>) -> Option<String> {
         .filter(|value| !value.is_empty())
 }
 
+fn build_repository_search_query(
+    star_band: &StarBand,
+    include_archived: bool,
+    include_forks: bool,
+) -> String {
+    let mut query = vec![format!("stars:{}", render_star_band(star_band))];
+    if !include_archived {
+        query.push("archived:false".into());
+    }
+    if !include_forks {
+        query.push("fork:false".into());
+    }
+    query.join(" ")
+}
+
+fn render_star_band(star_band: &StarBand) -> String {
+    match star_band.max_stars {
+        Some(max_stars) => format!("{}..{}", star_band.min_stars, max_stars),
+        None => format!(">={}", star_band.min_stars),
+    }
+}
+
 #[derive(Debug, Deserialize)]
 struct RepositoryApiResponse {
     html_url: String,
@@ -284,4 +384,25 @@ struct BranchCommitApiResponse {
 struct TopicsApiResponse {
     #[serde(default)]
     names: Vec<String>,
+}
+
+#[derive(Debug, Deserialize)]
+struct SearchRepositoriesApiResponse {
+    #[serde(default)]
+    items: Vec<SearchRepositoryApiResponse>,
+}
+
+#[derive(Debug, Deserialize)]
+struct SearchRepositoryApiResponse {
+    owner: SearchOwnerApiResponse,
+    name: String,
+    stargazers_count: u64,
+    default_branch: Option<String>,
+    archived: bool,
+    fork: bool,
+}
+
+#[derive(Debug, Deserialize)]
+struct SearchOwnerApiResponse {
+    login: String,
 }

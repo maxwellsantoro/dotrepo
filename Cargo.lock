@@ -247,10 +247,12 @@ name = "dotrepo-crawler"
 version = "1.0.0"
 dependencies = [
  "anyhow",
+ "clap",
  "dotrepo-core",
  "dotrepo-schema",
  "reqwest",
  "serde",
+ "serde_json",
  "toml",
 ]
 

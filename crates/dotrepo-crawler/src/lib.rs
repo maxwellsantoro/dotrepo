@@ -12,6 +12,8 @@ mod state;
 mod synth;
 mod writeback;
 
+pub use writeback::WritebackReport;
+
 pub fn seed_repositories(request: &SeedRepositoriesRequest) -> Result<SeedRepositoriesReport> {
     discover::seed_repositories_impl(request)
 }
@@ -28,6 +30,19 @@ pub fn synthesize_repository(
 
 pub fn schedule_refresh(request: &ScheduleRefreshRequest) -> Result<ScheduleRefreshReport> {
     schedule::schedule_refresh_impl(request)
+}
+
+pub fn apply_crawl_writeback(plan: &CrawlWritebackPlan) -> Result<WritebackReport> {
+    writeback::apply_writeback_plan(plan)
+}
+
+pub fn load_crawler_state(path: &Path) -> Result<CrawlerStateSnapshot> {
+    state::load_state(path)
+}
+
+pub fn write_crawler_state(path: &Path, state: &CrawlerStateSnapshot) -> Result<()> {
+    state::write_state(path, state)?;
+    Ok(())
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
