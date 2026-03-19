@@ -3,13 +3,20 @@ use anyhow::{Context, Result};
 use std::fs;
 use std::path::{Path, PathBuf};
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct RepositoryTextFile {
+    pub relative_path: PathBuf,
+    pub contents: String,
+}
+
 #[derive(Debug, Clone, Default)]
 pub(crate) struct ConventionalRepositoryFiles {
-    pub readme: Option<String>,
+    pub readme: Option<RepositoryTextFile>,
     pub root_codeowners: Option<String>,
     pub github_codeowners: Option<String>,
     pub root_security: Option<String>,
     pub github_security: Option<String>,
+    pub extra_files: Vec<RepositoryTextFile>,
 }
 
 #[derive(Debug, Clone)]
@@ -23,6 +30,7 @@ pub(crate) enum MaterializedSurface {
     Readme,
     Codeowners,
     Security,
+    Supplemental,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -50,18 +58,18 @@ pub(crate) fn materialize_repository(
     let mut written_files = Vec::new();
     let mut diagnostics = Vec::new();
 
-    if let Some(readme) = input.files.readme.as_deref() {
+    if let Some(readme) = input.files.readme.as_ref() {
         write_surface(
             &repository_root,
             MaterializedSurface::Readme,
-            Path::new("README.md"),
-            readme,
+            readme.relative_path.as_path(),
+            &readme.contents,
             &mut written_files,
         )?;
     } else {
         diagnostics.push(CrawlDiagnostic::warning(
             "materialize.missing_readme",
-            "README.md was not available for materialization",
+            "no README surface was available for materialization",
         ));
     }
 
@@ -147,6 +155,16 @@ pub(crate) fn materialize_repository(
         )),
     }
 
+    for file in &input.files.extra_files {
+        write_surface(
+            &repository_root,
+            MaterializedSurface::Supplemental,
+            file.relative_path.as_path(),
+            &file.contents,
+            &mut written_files,
+        )?;
+    }
+
     Ok(MaterializedRepository {
         temp_root,
         repository_root,
@@ -205,16 +223,23 @@ mod tests {
         let materialized = materialize_repository(&MaterializeRepositoryInput {
             repository: repository(),
             files: ConventionalRepositoryFiles {
-                readme: Some("# Orbit\n".into()),
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.mdx"),
+                    contents: "# Orbit\n".into(),
+                }),
                 root_codeowners: Some("* @root\n".into()),
                 github_codeowners: Some("* @github\n".into()),
                 root_security: Some("root security\n".into()),
                 github_security: Some("github security\n".into()),
+                extra_files: vec![RepositoryTextFile {
+                    relative_path: PathBuf::from("package.json"),
+                    contents: "{\"name\":\"orbit\"}\n".into(),
+                }],
             },
         })
         .expect("materialization succeeds");
 
-        assert!(materialized.repository_root.join("README.md").is_file());
+        assert!(materialized.repository_root.join("README.mdx").is_file());
         assert!(materialized
             .repository_root
             .join(".github/CODEOWNERS")
@@ -223,6 +248,7 @@ mod tests {
             .repository_root
             .join(".github/SECURITY.md")
             .is_file());
+        assert!(materialized.repository_root.join("package.json").is_file());
         assert!(!materialized.repository_root.join("CODEOWNERS").exists());
         assert!(!materialized.repository_root.join("SECURITY.md").exists());
         assert!(materialized

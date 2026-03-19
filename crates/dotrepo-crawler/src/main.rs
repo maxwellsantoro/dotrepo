@@ -1,8 +1,8 @@
 use anyhow::{bail, Result};
 use clap::{Args, Parser, Subcommand};
 use dotrepo_crawler::{
-    apply_crawl_writeback, crawl_repository, load_crawler_state, seed_repositories,
-    schedule_refresh, write_crawler_state, CrawlDiagnostic, CrawlRepositoryRequest,
+    apply_crawl_writeback, crawl_repository, load_crawler_state, schedule_refresh,
+    seed_repositories, write_crawler_state, CrawlDiagnostic, CrawlRepositoryRequest,
     CrawlStateRecord, CrawlerStateSnapshot, RefreshCandidate, RepositoryRef,
     ScheduleRefreshRequest, SeedRepositoriesReport, SeedRepositoriesRequest, StarBand,
 };
@@ -229,7 +229,11 @@ fn cmd_discover(args: DiscoverArgs) -> Result<()> {
             .unwrap_or_else(|| "default branch unknown".into());
         println!(
             "- {}/{}/{} ({} stars, {})",
-            entry.repository.host, entry.repository.owner, entry.repository.repo, entry.stars, branch
+            entry.repository.host,
+            entry.repository.owner,
+            entry.repository.repo,
+            entry.stars,
+            branch
         );
     }
 
@@ -278,7 +282,11 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
 
     println!(
         "{} overlay for {}/{}/{}",
-        if command_report.wrote { "wrote" } else { "planned" },
+        if command_report.wrote {
+            "wrote"
+        } else {
+            "planned"
+        },
         command_report.repository.host,
         command_report.repository.owner,
         command_report.repository.repo
@@ -291,7 +299,10 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
         println!("state: {}", path.display());
     }
     for diagnostic in &command_report.diagnostics {
-        println!("- {:?} {}: {}", diagnostic.severity, diagnostic.code, diagnostic.message);
+        println!(
+            "- {:?} {}: {}",
+            diagnostic.severity, diagnostic.code, diagnostic.message
+        );
     }
 
     Ok(())
@@ -309,7 +320,10 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
     let mut state = if args.dry_run {
         CrawlerStateSnapshot::default()
     } else {
-        load_crawler_state(&resolve_state_path(&args.index_root, args.state_path.as_deref()))?
+        load_crawler_state(&resolve_state_path(
+            &args.index_root,
+            args.state_path.as_deref(),
+        ))?
     };
     let mut results = Vec::new();
 
@@ -366,7 +380,12 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                 repository: entry.repository.clone(),
                 status: SeedResultStatus::Failed,
                 manifest_path: Some(manifest_path),
-                evidence_path: Some(entry.repository.record_root(&args.index_root).join("evidence.md")),
+                evidence_path: Some(
+                    entry
+                        .repository
+                        .record_root(&args.index_root)
+                        .join("evidence.md"),
+                ),
                 message: Some(err.to_string()),
                 diagnostics: Vec::new(),
             }),

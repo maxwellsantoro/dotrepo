@@ -49,7 +49,10 @@ pub(crate) fn seed_repositories_with_client<C: GitHubDiscoveryClient>(
                 break;
             }
 
-            for entry in page_results.iter().filter(|entry| matches_request(entry, request)) {
+            for entry in page_results
+                .iter()
+                .filter(|entry| matches_request(entry, request))
+            {
                 let identity = &entry.repository;
                 let key = format!("{}/{}/{}", identity.host, identity.owner, identity.repo);
                 if seen.insert(key) {

@@ -110,7 +110,7 @@ pub(crate) fn crawl_repository_from_snapshot(
 
     if manifest_is_missing_description(&import_plan.manifest) {
         return Err(anyhow!(
-            "repo.description is required for crawler overlays; README.md and GitHub metadata both left it empty"
+            "repo.description is required for crawler overlays; the README surface and GitHub metadata both left it empty"
         ));
     }
 
@@ -279,7 +279,10 @@ fn append_github_evidence(
     if trimmed_non_empty(Some(manifest.repo.description.as_str()))
         == trimmed_non_empty(snapshot.description.as_deref())
     {
-        bullets.push("Filled repo.description from GitHub repository metadata when README.md did not provide one.".to_string());
+        bullets.push(
+            "Filled repo.description from GitHub repository metadata when the README surface did not provide one."
+                .to_string(),
+        );
     }
     bullets.push(
         "Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state)."
@@ -457,6 +460,7 @@ mod tests {
     use super::*;
     use crate::materialize::{
         materialize_repository, ConventionalRepositoryFiles, MaterializeRepositoryInput,
+        RepositoryTextFile,
     };
     use crate::writeback::apply_writeback_plan;
     use dotrepo_core::validate_index_root;
@@ -533,9 +537,11 @@ mod tests {
         let materialized = materialize_repository(&MaterializeRepositoryInput {
             repository: repository(),
             files: ConventionalRepositoryFiles {
-                readme: Some(
-                    "# Orbit\n\nREADME description wins over the GitHub fallback.\n".into(),
-                ),
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# Orbit\n\nREADME description wins over the GitHub fallback.\n"
+                        .into(),
+                }),
                 ..Default::default()
             },
         })
@@ -635,7 +641,10 @@ mod tests {
         let materialized = materialize_repository(&MaterializeRepositoryInput {
             repository: repository(),
             files: ConventionalRepositoryFiles {
-                readme: Some("# Orbit\n".into()),
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# Orbit\n".into(),
+                }),
                 ..Default::default()
             },
         })
@@ -666,7 +675,10 @@ mod tests {
         let materialized = materialize_repository(&MaterializeRepositoryInput {
             repository: repository(),
             files: ConventionalRepositoryFiles {
-                readme: Some("# Orbit\n\nRepository description.\n".into()),
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# Orbit\n\nRepository description.\n".into(),
+                }),
                 ..Default::default()
             },
         })
@@ -723,7 +735,10 @@ mod tests {
         let client = FakeGitHubClient {
             snapshot: snapshot(Some("GitHub description fallback")),
             files: ConventionalRepositoryFiles {
-                readme: Some("# Orbit\n\nRepository description.\n".into()),
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.mdx"),
+                    contents: "# Orbit\n\nRepository description.\n".into(),
+                }),
                 ..Default::default()
             },
         };
@@ -751,6 +766,49 @@ mod tests {
             .evidence_path
             .as_ref()
             .is_some_and(|path| path.is_file()));
+
+        fs::remove_dir_all(index_root).expect("index temp removed");
+    }
+
+    #[test]
+    fn crawl_repository_with_client_preserves_readme_variant_in_evidence() {
+        let index_root = temp_dir("with-client-readme-variant-index");
+        let request = CrawlRepositoryRequest {
+            index_root: index_root.clone(),
+            repository: repository(),
+            generated_at: Some("2026-03-19T12:00:00Z".into()),
+            source_url: None,
+            synthesize: false,
+            synthesis_model: None,
+            synthesis_provider: None,
+        };
+        let client = FakeGitHubClient {
+            snapshot: snapshot(Some("GitHub description fallback")),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.mdx"),
+                    contents: "# Orbit\n\nRepository description.\n".into(),
+                }),
+                ..Default::default()
+            },
+        };
+
+        let report = crawl_repository_with_client(&request, &client).expect("crawl succeeds");
+        let evidence = report
+            .writeback_plan
+            .factual
+            .import_plan
+            .evidence_text
+            .as_deref()
+            .expect("evidence present");
+        assert!(report
+            .writeback_plan
+            .factual
+            .import_plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "README.mdx"));
+        assert!(evidence.contains("Imported repository name and description from README.mdx."));
 
         fs::remove_dir_all(index_root).expect("index temp removed");
     }

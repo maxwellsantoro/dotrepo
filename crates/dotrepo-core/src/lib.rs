@@ -15,6 +15,14 @@ use time::format_description::well_known::Rfc3339;
 use time::{Duration, OffsetDateTime};
 
 const SUPPORTED_SCHEMA: &str = "dotrepo/v0.1";
+const IMPORT_README_CANDIDATES: &[&str] = &[
+    "README.md",
+    "README.MD",
+    "readme.md",
+    "README.mdx",
+    "README.markdown",
+    "README",
+];
 const SUPPORTED_CLAIM_SCHEMA: &str = "dotrepo-claim/v0";
 const SUPPORTED_CLAIM_EVENT_SCHEMA: &str = "dotrepo-claim-event/v0";
 const GENERATOR_NAME: &str = "dotrepo";
@@ -2905,7 +2913,7 @@ pub fn import_repository_with_options(
     source: Option<&str>,
     options: &ImportOptions,
 ) -> Result<ImportPlan> {
-    let readme = load_first_existing_file(root, &["README.md"])?;
+    let readme = load_first_existing_file(root, IMPORT_README_CANDIDATES)?;
     let codeowners = load_first_existing_file(root, &[".github/CODEOWNERS", "CODEOWNERS"])?;
     let security = load_first_existing_file(root, &[".github/SECURITY.md", "SECURITY.md"])?;
     let contributing =
@@ -4179,10 +4187,14 @@ fn render_import_evidence(
         );
     }
 
-    if imported_sources.iter().any(|path| path == "README.md") {
+    if let Some(readme_path) = imported_sources
+        .iter()
+        .find(|path| is_imported_readme_path(path))
+    {
         bullets.push(readme_import_evidence_bullet(
             inferred_fields,
             imported_docs,
+            readme_path,
         ));
     }
     if imported_sources
@@ -4234,7 +4246,17 @@ fn render_import_evidence(
     out
 }
 
-fn readme_import_evidence_bullet(inferred_fields: &[String], imported_docs: bool) -> String {
+fn is_imported_readme_path(path: &str) -> bool {
+    IMPORT_README_CANDIDATES
+        .iter()
+        .any(|candidate| path == *candidate)
+}
+
+fn readme_import_evidence_bullet(
+    inferred_fields: &[String],
+    imported_docs: bool,
+    readme_path: &str,
+) -> String {
     let imported_name = !inferred_fields.iter().any(|field| field == "repo.name");
     let imported_description = !inferred_fields
         .iter()
@@ -4242,24 +4264,36 @@ fn readme_import_evidence_bullet(inferred_fields: &[String], imported_docs: bool
 
     match (imported_name, imported_description, imported_docs) {
         (true, true, true) => {
-            "Imported repository name, description, and docs entry points from README.md."
-                .to_string()
+            format!(
+                "Imported repository name, description, and docs entry points from {}.",
+                readme_path
+            )
         }
-        (true, false, true) => {
-            "Imported repository name and docs entry points from README.md.".to_string()
-        }
-        (false, true, true) => {
-            "Imported repository description and docs entry points from README.md.".to_string()
-        }
-        (false, false, true) => {
-            "Imported repository metadata and docs entry points from README.md.".to_string()
-        }
+        (true, false, true) => format!(
+            "Imported repository name and docs entry points from {}.",
+            readme_path
+        ),
+        (false, true, true) => format!(
+            "Imported repository description and docs entry points from {}.",
+            readme_path
+        ),
+        (false, false, true) => format!(
+            "Imported repository metadata and docs entry points from {}.",
+            readme_path
+        ),
         (true, true, false) => {
-            "Imported repository name and description from README.md.".to_string()
+            format!(
+                "Imported repository name and description from {}.",
+                readme_path
+            )
         }
-        (true, false, false) => "Imported repository name from README.md.".to_string(),
-        (false, true, false) => "Imported repository description from README.md.".to_string(),
-        (false, false, false) => "Imported repository metadata from README.md.".to_string(),
+        (true, false, false) => format!("Imported repository name from {}.", readme_path),
+        (false, true, false) => {
+            format!("Imported repository description from {}.", readme_path)
+        }
+        (false, false, false) => {
+            format!("Imported repository metadata from {}.", readme_path)
+        }
     }
 }
 
@@ -8221,6 +8255,38 @@ Policy-aware release orchestration for multi-service deploys.
             metadata.description.as_deref(),
             Some("Policy-aware release orchestration for multi-service deploys.")
         );
+    }
+
+    #[test]
+    fn import_repository_accepts_readme_variants_and_preserves_their_paths() {
+        let root = temp_dir("import-readme-variant");
+        fs::write(
+            root.join("README.mdx"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README variant written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert!(plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "README.mdx"));
+        assert_eq!(plan.manifest.repo.name, "Orbit");
+        assert_eq!(
+            plan.manifest.repo.description,
+            "Policy-aware release orchestration for multi-service deploys."
+        );
+        assert!(plan.evidence_text.as_deref().is_some_and(
+            |text| text.contains("Imported repository name and description from README.mdx.")
+        ));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
     }
 
     #[test]

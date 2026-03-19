@@ -1,4 +1,4 @@
-use crate::materialize::ConventionalRepositoryFiles;
+use crate::materialize::{ConventionalRepositoryFiles, RepositoryTextFile};
 use crate::{DiscoveredRepository, GitHubRepositorySnapshot, RepositoryRef, StarBand};
 use anyhow::{anyhow, Context, Result};
 use reqwest::blocking::{Client, Response};
@@ -7,8 +7,19 @@ use reqwest::{StatusCode, Url};
 use serde::de::DeserializeOwned;
 use serde::Deserialize;
 use std::collections::BTreeMap;
+use std::path::PathBuf;
 
 const GITHUB_API_VERSION: &str = "2022-11-28";
+const README_CANDIDATES: &[&str] = &[
+    "README.md",
+    "README.MD",
+    "readme.md",
+    "README.mdx",
+    "README.markdown",
+    "README",
+];
+const SUPPLEMENTAL_ROOT_FILES: &[&str] =
+    &["Cargo.toml", "package.json", "pyproject.toml", "go.mod"];
 
 pub(crate) trait GitHubClient {
     fn fetch_repository_snapshot(
@@ -169,6 +180,40 @@ impl HttpGitHubClient {
             .with_context(|| format!("failed to decode text response {}", url.as_str()))?;
         Ok(Some(text))
     }
+
+    fn fetch_first_available_file(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+        candidates: &[&'static str],
+    ) -> Result<Option<RepositoryTextFile>> {
+        for candidate in candidates {
+            if let Some(contents) =
+                self.get_optional_text(self.raw_url(repository, default_branch, candidate)?)?
+            {
+                return Ok(Some(RepositoryTextFile {
+                    relative_path: PathBuf::from(candidate),
+                    contents,
+                }));
+            }
+        }
+
+        Ok(None)
+    }
+
+    fn fetch_optional_repository_file(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+        relative_path: &'static str,
+    ) -> Result<Option<RepositoryTextFile>> {
+        Ok(self
+            .get_optional_text(self.raw_url(repository, default_branch, relative_path)?)?
+            .map(|contents| RepositoryTextFile {
+                relative_path: PathBuf::from(relative_path),
+                contents,
+            }))
+    }
 }
 
 impl GitHubClient for HttpGitHubClient {
@@ -208,12 +253,21 @@ impl GitHubClient for HttpGitHubClient {
         repository: &RepositoryRef,
         default_branch: &str,
     ) -> Result<ConventionalRepositoryFiles> {
+        let mut extra_files = Vec::new();
+        for relative_path in SUPPLEMENTAL_ROOT_FILES {
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, relative_path)?
+            {
+                extra_files.push(file);
+            }
+        }
+
         Ok(ConventionalRepositoryFiles {
-            readme: self.get_optional_text(self.raw_url(
+            readme: self.fetch_first_available_file(
                 repository,
                 default_branch,
-                "README.md",
-            )?)?,
+                README_CANDIDATES,
+            )?,
             root_codeowners: self.get_optional_text(self.raw_url(
                 repository,
                 default_branch,
@@ -234,6 +288,7 @@ impl GitHubClient for HttpGitHubClient {
                 default_branch,
                 ".github/SECURITY.md",
             )?)?,
+            extra_files,
         })
     }
 }
