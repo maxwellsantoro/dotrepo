@@ -41,7 +41,10 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   repositories by star band, plan factual overlay crawls, write imported
   overlays into an index root, persist crawler state for later refresh
   scheduling, preserve README variant paths, and derive factual `repo.build`
-  and `repo.test` defaults from unambiguous root package manifests
+  and `repo.test` defaults from unambiguous root package manifests or,
+  conservatively, from `.github/workflows/` when workflow signals are
+  unambiguous and manifest-backed commands are absent, plus a deterministic
+  `--targets-file` batch-seeding path for executing the tranche-one review queue
 - Export-time per-repository `query-input/` artifacts plus a pure snapshot
   query function in core, so hosted query no longer depends on runtime TOML
   parsing as the only implementation path

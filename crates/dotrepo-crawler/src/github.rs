@@ -20,6 +20,7 @@ const README_CANDIDATES: &[&str] = &[
 ];
 const SUPPLEMENTAL_ROOT_FILES: &[&str] =
     &["Cargo.toml", "package.json", "pyproject.toml", "go.mod"];
+const MAX_WORKFLOW_FILES: usize = 8;
 
 pub(crate) trait GitHubClient {
     fn fetch_repository_snapshot(
@@ -151,6 +152,23 @@ impl HttpGitHubClient {
         Ok(url)
     }
 
+    fn contents_url(
+        &self,
+        repository: &RepositoryRef,
+        relative_path: &str,
+        default_branch: &str,
+    ) -> Result<Url> {
+        let mut url = self.api_url(repository, &["contents"])?;
+        {
+            let mut segments = url
+                .path_segments_mut()
+                .map_err(|_| anyhow!("GitHub contents URL does not support path segments"))?;
+            segments.extend(relative_path.split('/'));
+        }
+        url.query_pairs_mut().append_pair("ref", default_branch);
+        Ok(url)
+    }
+
     fn get_json<T: DeserializeOwned>(&self, url: Url) -> Result<T> {
         let response = self
             .client
@@ -181,6 +199,24 @@ impl HttpGitHubClient {
         Ok(Some(text))
     }
 
+    fn get_optional_json<T: DeserializeOwned>(&self, url: Url) -> Result<Option<T>> {
+        let response = self
+            .client
+            .get(url.clone())
+            .send()
+            .with_context(|| format!("failed to GET {}", url.as_str()))?;
+
+        if response.status() == StatusCode::NOT_FOUND {
+            return Ok(None);
+        }
+
+        let response = error_for_status(response, url.as_str())?;
+        let decoded = response
+            .json()
+            .with_context(|| format!("failed to decode GitHub response {}", url.as_str()))?;
+        Ok(Some(decoded))
+    }
+
     fn fetch_first_available_file(
         &self,
         repository: &RepositoryRef,
@@ -205,7 +241,7 @@ impl HttpGitHubClient {
         &self,
         repository: &RepositoryRef,
         default_branch: &str,
-        relative_path: &'static str,
+        relative_path: &str,
     ) -> Result<Option<RepositoryTextFile>> {
         Ok(self
             .get_optional_text(self.raw_url(repository, default_branch, relative_path)?)?
@@ -213,6 +249,41 @@ impl HttpGitHubClient {
                 relative_path: PathBuf::from(relative_path),
                 contents,
             }))
+    }
+
+    fn fetch_workflow_files(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+    ) -> Result<Vec<RepositoryTextFile>> {
+        let entries = self
+            .get_optional_json::<Vec<ContentsEntry>>(self.contents_url(
+                repository,
+                ".github/workflows",
+                default_branch,
+            )?)?
+            .unwrap_or_default();
+        let mut workflow_paths = entries
+            .into_iter()
+            .filter(|entry| entry.entry_type == "file")
+            .filter(|entry| {
+                let lower = entry.path.to_ascii_lowercase();
+                lower.ends_with(".yml") || lower.ends_with(".yaml")
+            })
+            .map(|entry| entry.path)
+            .collect::<Vec<_>>();
+        workflow_paths.sort();
+        workflow_paths.truncate(MAX_WORKFLOW_FILES);
+
+        let mut files = Vec::new();
+        for path in workflow_paths {
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
     }
 }
 
@@ -261,6 +332,7 @@ impl GitHubClient for HttpGitHubClient {
                 extra_files.push(file);
             }
         }
+        extra_files.extend(self.fetch_workflow_files(repository, default_branch)?);
 
         Ok(ConventionalRepositoryFiles {
             readme: self.fetch_first_available_file(
@@ -460,4 +532,11 @@ struct SearchRepositoryApiResponse {
 #[derive(Debug, Deserialize)]
 struct SearchOwnerApiResponse {
     login: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct ContentsEntry {
+    #[serde(rename = "type")]
+    entry_type: String,
+    path: String,
 }

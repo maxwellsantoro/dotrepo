@@ -10,6 +10,10 @@ struct FixtureExpectation {
     repo_name: String,
     repo_description: String,
     #[serde(default)]
+    repo_build: Option<String>,
+    #[serde(default)]
+    repo_test: Option<String>,
+    #[serde(default)]
     docs_root: Option<String>,
     #[serde(default)]
     docs_getting_started: Option<String>,
@@ -53,6 +57,14 @@ fn status_name(status: &RecordStatus) -> &'static str {
 fn assert_common_plan_fields(plan: &ImportPlan, expectation: &FixtureExpectation) {
     assert_eq!(plan.manifest.repo.name, expectation.repo_name);
     assert_eq!(plan.manifest.repo.description, expectation.repo_description);
+    assert_eq!(
+        plan.manifest.repo.build.as_deref(),
+        expectation.repo_build.as_deref()
+    );
+    assert_eq!(
+        plan.manifest.repo.test.as_deref(),
+        expectation.repo_test.as_deref()
+    );
     assert_eq!(
         plan.manifest
             .docs

@@ -2920,6 +2920,7 @@ pub fn import_repository_with_options(
     let package_json = load_first_existing_file(root, &["package.json"])?;
     let pyproject_toml = load_first_existing_file(root, &["pyproject.toml"])?;
     let go_mod = load_first_existing_file(root, &["go.mod"])?;
+    let workflow_files = load_workflow_import_files(root)?;
     let contributing =
         load_first_existing_file(root, &["CONTRIBUTING.md", ".github/CONTRIBUTING.md"])?;
     let pull_request_template = load_first_existing_file(
@@ -2965,21 +2966,22 @@ pub fn import_repository_with_options(
         package_json.as_ref(),
         pyproject_toml.as_ref(),
         go_mod.as_ref(),
+        &workflow_files,
     );
 
     let mut imported_sources = Vec::new();
-    let mut inferred_fields = Vec::new();
+    let mut inferred_defaults = Vec::new();
 
     let repo_name = match readme_metadata.title {
         Some(ref title) => {
             note_import(
                 &mut imported_sources,
-                readme.as_ref().expect("readme exists").path,
+                &readme.as_ref().expect("readme exists").path,
             );
             title.clone()
         }
         None => {
-            inferred_fields.push("repo.name".into());
+            inferred_defaults.push("repo.name".into());
             root.file_name()
                 .and_then(|name| name.to_str())
                 .filter(|name| !name.is_empty())
@@ -2992,12 +2994,12 @@ pub fn import_repository_with_options(
         Some(ref description) => {
             note_import(
                 &mut imported_sources,
-                readme.as_ref().expect("readme exists").path,
+                &readme.as_ref().expect("readme exists").path,
             );
             description.clone()
         }
         None => {
-            inferred_fields.push("repo.description".into());
+            inferred_defaults.push("repo.description".into());
             "Imported repository metadata; review and refine before relying on it.".into()
         }
     };
@@ -3009,20 +3011,29 @@ pub fn import_repository_with_options(
 
     if !codeowners_metadata.owners.is_empty() || codeowners_metadata.team.is_some() {
         if let Some(file) = &codeowners {
-            note_import(&mut imported_sources, file.path);
+            note_import(&mut imported_sources, &file.path);
         }
     }
 
     if security_contact.is_some() {
         if let Some(file) = &security {
-            note_import(&mut imported_sources, file.path);
+            note_import(&mut imported_sources, &file.path);
         }
     }
-    if let Some((_, path)) = imported_commands.build.as_ref() {
-        note_import(&mut imported_sources, path);
+    if let Some(command) = imported_commands.build.as_ref() {
+        if matches!(command.provenance, ImportedCommandProvenance::Imported) {
+            note_import(&mut imported_sources, &command.source_path);
+        }
     }
-    if let Some((_, path)) = imported_commands.test.as_ref() {
-        note_import(&mut imported_sources, path);
+    if let Some(command) = imported_commands.test.as_ref() {
+        if matches!(command.provenance, ImportedCommandProvenance::Imported) {
+            note_import(&mut imported_sources, &command.source_path);
+        }
+    }
+
+    let mut inferred_fields = inferred_defaults.clone();
+    for field in &imported_commands.inferred_fields {
+        push_unique(&mut inferred_fields, field.clone());
     }
 
     let provenance = import_provenance(&imported_sources, &inferred_fields);
@@ -3067,7 +3078,7 @@ pub fn import_repository_with_options(
                 notes: Some(import_notes(
                     mode,
                     &imported_sources,
-                    &inferred_fields,
+                    &inferred_defaults,
                     codeowners_metadata.note.as_deref(),
                     security_note.as_deref(),
                     &imported_commands.notes,
@@ -3088,11 +3099,11 @@ pub fn import_repository_with_options(
             build: imported_commands
                 .build
                 .as_ref()
-                .map(|(command, _)| command.clone()),
+                .map(|command| command.command.clone()),
             test: imported_commands
                 .test
                 .as_ref()
-                .map(|(command, _)| command.clone()),
+                .map(|command| command.command.clone()),
             topics: Vec::new(),
         },
     );
@@ -3145,7 +3156,7 @@ pub fn import_repository_with_options(
             Some(root.join("evidence.md")),
             Some(render_import_evidence(
                 &imported_sources,
-                &inferred_fields,
+                &inferred_defaults,
                 security_contact.as_deref(),
                 codeowners_metadata.note.as_deref(),
                 security_note.as_deref(),
@@ -3304,7 +3315,7 @@ struct ReadmeDocsMetadata {
 }
 
 struct ImportedFile {
-    path: &'static str,
+    path: String,
     contents: String,
 }
 
@@ -3330,15 +3341,29 @@ struct SecurityImportMetadata {
 
 #[derive(Default)]
 struct ImportedCommandMetadata {
-    build: Option<(String, &'static str)>,
-    test: Option<(String, &'static str)>,
+    build: Option<ImportedCommandSelection>,
+    test: Option<ImportedCommandSelection>,
+    inferred_fields: Vec<String>,
     notes: Vec<String>,
     evidence_bullets: Vec<String>,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum ImportedCommandProvenance {
+    Imported,
+    Inferred,
+}
+
+#[derive(Debug, Clone)]
+struct ImportedCommandSelection {
+    command: String,
+    source_path: String,
+    provenance: ImportedCommandProvenance,
+}
+
 #[derive(Debug, Clone)]
 struct ImportedCommandCandidate {
-    source_path: &'static str,
+    source_path: String,
     build: Option<String>,
     test: Option<String>,
 }
@@ -3353,7 +3378,7 @@ fn load_first_existing_file(
             let contents = fs::read_to_string(&path)
                 .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
             return Ok(Some(ImportedFile {
-                path: candidate,
+                path: candidate.to_string(),
                 contents,
             }));
         }
@@ -3362,42 +3387,85 @@ fn load_first_existing_file(
     Ok(None)
 }
 
+fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile>> {
+    let workflows_root = root.join(".github").join("workflows");
+    if !workflows_root.is_dir() {
+        return Ok(Vec::new());
+    }
+
+    let mut files = fs::read_dir(&workflows_root)
+        .map_err(|err| anyhow!("failed to read {}: {}", workflows_root.display(), err))?
+        .filter_map(|entry| entry.ok())
+        .filter_map(|entry| {
+            let path = entry.path();
+            let file_name = path.file_name()?.to_str()?;
+            let lower = file_name.to_ascii_lowercase();
+            if !path.is_file() || !(lower.ends_with(".yml") || lower.ends_with(".yaml")) {
+                return None;
+            }
+            Some((file_name.to_string(), path))
+        })
+        .collect::<Vec<_>>();
+    files.sort_by(|left, right| left.0.cmp(&right.0));
+
+    let mut imported = Vec::new();
+    for (file_name, path) in files {
+        let contents = fs::read_to_string(&path)
+            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        imported.push(ImportedFile {
+            path: format!(".github/workflows/{}", file_name),
+            contents,
+        });
+    }
+
+    Ok(imported)
+}
+
 fn infer_imported_commands(
     cargo_toml: Option<&ImportedFile>,
     package_json: Option<&ImportedFile>,
     pyproject_toml: Option<&ImportedFile>,
     go_mod: Option<&ImportedFile>,
+    workflow_files: &[ImportedFile],
 ) -> ImportedCommandMetadata {
-    let mut candidates = Vec::new();
+    let mut manifest_candidates = Vec::new();
     if let Some(candidate) = cargo_toml.and_then(infer_cargo_manifest_commands) {
-        candidates.push(candidate);
+        manifest_candidates.push(candidate);
     }
     if let Some(candidate) = package_json.and_then(infer_package_json_commands) {
-        candidates.push(candidate);
+        manifest_candidates.push(candidate);
     }
     if let Some(candidate) = pyproject_toml.and_then(infer_pyproject_commands) {
-        candidates.push(candidate);
+        manifest_candidates.push(candidate);
     }
     if let Some(candidate) = go_mod.and_then(infer_go_module_commands) {
-        candidates.push(candidate);
+        manifest_candidates.push(candidate);
     }
+    let workflow_candidates = workflow_files
+        .iter()
+        .filter_map(infer_workflow_commands)
+        .collect::<Vec<_>>();
 
     let mut metadata = ImportedCommandMetadata::default();
-    metadata.build = select_unique_imported_command(
-        &candidates,
+    metadata.build = resolve_command_field(
+        &manifest_candidates,
+        &workflow_candidates,
         "repo.build",
         "build",
         true,
         &mut metadata.notes,
         &mut metadata.evidence_bullets,
+        &mut metadata.inferred_fields,
     );
-    metadata.test = select_unique_imported_command(
-        &candidates,
+    metadata.test = resolve_command_field(
+        &manifest_candidates,
+        &workflow_candidates,
         "repo.test",
         "test",
         false,
         &mut metadata.notes,
         &mut metadata.evidence_bullets,
+        &mut metadata.inferred_fields,
     );
     metadata
 }
@@ -3423,7 +3491,7 @@ fn infer_cargo_manifest_commands(file: &ImportedFile) -> Option<ImportedCommandC
     };
 
     Some(ImportedCommandCandidate {
-        source_path: file.path,
+        source_path: file.path.clone(),
         build: Some(build.into()),
         test: Some(test.into()),
     })
@@ -3457,7 +3525,7 @@ fn infer_package_json_commands(file: &ImportedFile) -> Option<ImportedCommandCan
     }
 
     Some(ImportedCommandCandidate {
-        source_path: file.path,
+        source_path: file.path.clone(),
         build,
         test,
     })
@@ -3480,7 +3548,7 @@ fn infer_pyproject_commands(file: &ImportedFile) -> Option<ImportedCommandCandid
     }
 
     Some(ImportedCommandCandidate {
-        source_path: file.path,
+        source_path: file.path.clone(),
         build,
         test,
     })
@@ -3498,20 +3566,237 @@ fn infer_go_module_commands(file: &ImportedFile) -> Option<ImportedCommandCandid
     }
 
     Some(ImportedCommandCandidate {
-        source_path: file.path,
+        source_path: file.path.clone(),
         build: Some("go build ./...".into()),
         test: Some("go test ./...".into()),
     })
 }
 
-fn select_unique_imported_command(
-    candidates: &[ImportedCommandCandidate],
+fn infer_workflow_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let run_commands = extract_workflow_run_commands(&file.contents);
+    let build = first_matching_workflow_command(&run_commands, true);
+    let test = first_matching_workflow_command(&run_commands, false);
+    if build.is_none() && test.is_none() {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        build,
+        test,
+    })
+}
+
+fn extract_workflow_run_commands(contents: &str) -> Vec<String> {
+    let mut commands = Vec::new();
+    let mut run_block_indent = None;
+
+    for line in contents.lines() {
+        let indent = line.chars().take_while(|ch| ch.is_whitespace()).count();
+        let trimmed = line.trim();
+
+        if let Some(block_indent) = run_block_indent {
+            if !trimmed.is_empty() && indent > block_indent {
+                commands.push(trimmed.to_string());
+                continue;
+            }
+            run_block_indent = None;
+        }
+
+        let run_line = trimmed
+            .strip_prefix("- run:")
+            .or_else(|| trimmed.strip_prefix("run:"));
+        if let Some(rest) = run_line {
+            let rest = rest.trim();
+            if matches!(rest, "|" | "|-" | ">" | ">-") {
+                run_block_indent = Some(indent);
+            } else if !rest.is_empty() {
+                commands.push(rest.to_string());
+            }
+        }
+    }
+
+    commands
+}
+
+fn first_matching_workflow_command(commands: &[String], select_build: bool) -> Option<String> {
+    commands.iter().find_map(|command| {
+        let trimmed = command.trim();
+        if trimmed.is_empty() {
+            return None;
+        }
+
+        if select_build {
+            for prefix in [
+                "cargo build",
+                "go build",
+                "python -m build",
+                "npm run build",
+                "pnpm build",
+                "yarn build",
+                "bun run build",
+            ] {
+                if trimmed.starts_with(prefix) {
+                    return Some(trimmed.to_string());
+                }
+            }
+        } else {
+            for prefix in [
+                "cargo test",
+                "go test",
+                "python -m pytest",
+                "pytest",
+                "npm test",
+                "npm run test",
+                "pnpm test",
+                "yarn test",
+                "bun run test",
+            ] {
+                if trimmed.starts_with(prefix) {
+                    return Some(trimmed.to_string());
+                }
+            }
+        }
+
+        None
+    })
+}
+
+enum UniqueCommandResolution {
+    None,
+    Unique {
+        command: String,
+        source_path: String,
+    },
+    Conflict {
+        source_paths: Vec<String>,
+    },
+}
+
+fn resolve_command_field(
+    manifest_candidates: &[ImportedCommandCandidate],
+    workflow_candidates: &[ImportedCommandCandidate],
     field: &'static str,
     kind: &'static str,
     select_build: bool,
     notes: &mut Vec<String>,
     evidence_bullets: &mut Vec<String>,
-) -> Option<(String, &'static str)> {
+    inferred_fields: &mut Vec<String>,
+) -> Option<ImportedCommandSelection> {
+    let manifest_resolution = resolve_unique_command_candidate(manifest_candidates, select_build);
+    let workflow_resolution = resolve_unique_command_candidate(workflow_candidates, select_build);
+
+    let manifest_unique = match &manifest_resolution {
+        UniqueCommandResolution::Unique {
+            command,
+            source_path,
+        } => Some((command.clone(), source_path.clone())),
+        _ => None,
+    };
+    let workflow_unique = match &workflow_resolution {
+        UniqueCommandResolution::Unique {
+            command,
+            source_path,
+        } => Some((command.clone(), source_path.clone())),
+        _ => None,
+    };
+
+    let mut conflict_paths = Vec::new();
+    if let UniqueCommandResolution::Conflict { source_paths } = &manifest_resolution {
+        for path in source_paths {
+            push_unique(&mut conflict_paths, path.clone());
+        }
+        if let Some((_, path)) = &workflow_unique {
+            push_unique(&mut conflict_paths, path.clone());
+        }
+    }
+    if let UniqueCommandResolution::Conflict { source_paths } = &workflow_resolution {
+        for path in source_paths {
+            push_unique(&mut conflict_paths, path.clone());
+        }
+        if let Some((_, path)) = &manifest_unique {
+            push_unique(&mut conflict_paths, path.clone());
+        }
+    }
+    if let (Some((manifest_command, manifest_path)), Some((workflow_command, workflow_path))) =
+        (&manifest_unique, &workflow_unique)
+    {
+        if manifest_command != workflow_command {
+            push_unique(&mut conflict_paths, manifest_path.clone());
+            push_unique(&mut conflict_paths, workflow_path.clone());
+        }
+    }
+
+    if !conflict_paths.is_empty() {
+        let note = format!(
+            "Left `{}` unset because {} suggested conflicting {} commands.",
+            field,
+            human_join(&conflict_paths),
+            kind
+        );
+        notes.push(note.clone());
+        evidence_bullets.push(note);
+        return None;
+    }
+
+    if let Some((command, source_path)) = manifest_unique {
+        let selection = ImportedCommandSelection {
+            command,
+            source_path,
+            provenance: ImportedCommandProvenance::Imported,
+        };
+        note_selected_command(field, &selection, notes, evidence_bullets);
+        return Some(selection);
+    }
+
+    if let Some((command, source_path)) = workflow_unique {
+        let selection = ImportedCommandSelection {
+            command,
+            source_path,
+            provenance: ImportedCommandProvenance::Inferred,
+        };
+        inferred_fields.push(field.into());
+        note_selected_command(field, &selection, notes, evidence_bullets);
+        return Some(selection);
+    }
+
+    None
+}
+
+fn note_selected_command(
+    field: &'static str,
+    selection: &ImportedCommandSelection,
+    notes: &mut Vec<String>,
+    evidence_bullets: &mut Vec<String>,
+) {
+    match selection.provenance {
+        ImportedCommandProvenance::Imported => {
+            notes.push(format!(
+                "Imported `{}` from `{}`.",
+                field, selection.source_path
+            ));
+            evidence_bullets.push(format!(
+                "Imported {} from {} as `{}`.",
+                field, selection.source_path, selection.command
+            ));
+        }
+        ImportedCommandProvenance::Inferred => {
+            notes.push(format!(
+                "Inferred `{}` from `{}`.",
+                field, selection.source_path
+            ));
+            evidence_bullets.push(format!(
+                "Inferred {} from {} as `{}`.",
+                field, selection.source_path, selection.command
+            ));
+        }
+    }
+}
+
+fn resolve_unique_command_candidate(
+    candidates: &[ImportedCommandCandidate],
+    select_build: bool,
+) -> UniqueCommandResolution {
     let mut present = Vec::new();
     for candidate in candidates {
         let command = if select_build {
@@ -3520,47 +3805,37 @@ fn select_unique_imported_command(
             candidate.test.as_deref()
         };
         if let Some(command) = command.filter(|value| !value.trim().is_empty()) {
-            present.push((command.to_string(), candidate.source_path));
+            present.push((command.to_string(), candidate.source_path.clone()));
         }
     }
 
     if present.is_empty() {
-        return None;
+        return UniqueCommandResolution::None;
     }
 
     let mut unique_commands = Vec::new();
     for (command, path) in &present {
         if !unique_commands
             .iter()
-            .any(|(existing, _): &(String, &'static str)| existing == command)
+            .any(|(existing, _): &(String, String)| existing == command)
         {
-            unique_commands.push((command.clone(), *path));
+            unique_commands.push((command.clone(), path.clone()));
         }
     }
 
     if unique_commands.len() == 1 {
         let (command, path) = unique_commands.remove(0);
-        notes.push(format!("Imported `{}` from `{}`.", field, path));
-        evidence_bullets.push(format!(
-            "Imported {} from {} as `{}`.",
-            field, path, command
-        ));
-        return Some((command, path));
+        return UniqueCommandResolution::Unique {
+            command,
+            source_path: path,
+        };
     }
 
     let mut source_paths = Vec::new();
     for (_, path) in &present {
-        push_unique(&mut source_paths, (*path).to_string());
+        push_unique(&mut source_paths, path.clone());
     }
-    let note = format!(
-        "Left `{}` unset because {} suggested conflicting {} commands.",
-        field,
-        human_join(&source_paths),
-        kind
-    );
-    notes.push(note.clone());
-    evidence_bullets.push(note);
-    None
+    UniqueCommandResolution::Conflict { source_paths }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -3665,7 +3940,7 @@ fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
 
 fn parse_readme_title_line(line: &str) -> Option<String> {
     if line.starts_with('#') {
-        let title = line.trim_start_matches('#').trim();
+        let title = strip_badge_run(line.trim_start_matches('#').trim());
         return normalize_readme_text(title);
     }
 
@@ -3750,6 +4025,7 @@ fn normalize_description_line(line: &str) -> Option<String> {
         || line.starts_with('#')
         || line.starts_with("![")
         || line.starts_with("[![")
+        || is_markdown_reference_definition(line)
         || line.starts_with("<!--")
         || line == "---"
         || line.starts_with("- ")
@@ -3766,13 +4042,52 @@ fn normalize_description_line(line: &str) -> Option<String> {
 }
 
 fn normalize_readme_text(line: &str) -> Option<String> {
-    let stripped = strip_html_tags(line);
+    let stripped = replace_common_html_entities(&strip_html_tags(line));
     let collapsed = stripped.split_whitespace().collect::<Vec<_>>().join(" ");
-    let cleaned = collapsed.trim().trim_matches('`').trim();
+    let cleaned = strip_wrapping_emphasis(collapsed.trim().trim_matches('`').trim());
     if cleaned.is_empty() {
         None
     } else {
         Some(cleaned.to_string())
+    }
+}
+
+fn strip_badge_run(line: &str) -> &str {
+    line.find("[![")
+        .map(|idx| line[..idx].trim_end())
+        .unwrap_or(line)
+}
+
+fn is_markdown_reference_definition(line: &str) -> bool {
+    let trimmed = line.trim();
+    trimmed.starts_with('[') && trimmed.contains("]:")
+}
+
+fn replace_common_html_entities(line: &str) -> String {
+    line.replace("&emsp;", " ")
+        .replace("&ensp;", " ")
+        .replace("&nbsp;", " ")
+        .replace("&amp;", "&")
+}
+
+fn strip_wrapping_emphasis(mut line: &str) -> &str {
+    loop {
+        let trimmed = line.trim();
+        if trimmed.len() >= 4
+            && ((trimmed.starts_with("**") && trimmed.ends_with("**"))
+                || (trimmed.starts_with("__") && trimmed.ends_with("__")))
+        {
+            line = &trimmed[2..trimmed.len() - 2];
+            continue;
+        }
+        if trimmed.len() >= 2
+            && ((trimmed.starts_with('*') && trimmed.ends_with('*'))
+                || (trimmed.starts_with('_') && trimmed.ends_with('_')))
+        {
+            line = &trimmed[1..trimmed.len() - 1];
+            continue;
+        }
+        return trimmed;
     }
 }
 
@@ -4275,7 +4590,7 @@ fn push_unique(values: &mut Vec<String>, value: String) {
     }
 }
 
-fn note_import(imported_sources: &mut Vec<String>, path: &'static str) {
+fn note_import(imported_sources: &mut Vec<String>, path: &str) {
     push_unique(imported_sources, path.to_string());
 }
 
@@ -8550,6 +8865,26 @@ Policy-aware release orchestration for multi-service deploys.
     }
 
     #[test]
+    fn parse_readme_metadata_skips_reference_definitions_and_trailing_badges() {
+        let metadata = parse_readme_metadata(
+            r#"# Serde &emsp; [![Build Status]][actions] [![Latest Version]][crates.io]
+
+[Build Status]: https://img.shields.io/github/actions/workflow/status/serde-rs/serde/ci.yml?branch=master
+[actions]: https://github.com/serde-rs/serde/actions?query=branch%3Amaster
+[Latest Version]: https://img.shields.io/crates/v/serde.svg
+[crates.io]: https://crates.io/crates/serde
+
+**Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.**
+"#,
+        );
+        assert_eq!(metadata.title.as_deref(), Some("Serde"));
+        assert_eq!(
+            metadata.description.as_deref(),
+            Some("Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.")
+        );
+    }
+
+    #[test]
     fn import_repository_accepts_readme_variants_and_preserves_their_paths() {
         let root = temp_dir("import-readme-variant");
         fs::write(
@@ -8793,6 +9128,247 @@ testpaths = ["tests"]
             .evidence_text
             .as_deref()
             .is_some_and(|text| text.contains("conflicting build commands")));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_falls_back_to_workflow_commands_when_manifests_are_absent() {
+        let root = temp_dir("import-workflow-commands");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join(".github/workflows/ci.yml"),
+            r#"name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo build --workspace
+      - run: cargo test --workspace
+"#,
+        )
+        .expect("workflow written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(
+            plan.manifest.repo.build.as_deref(),
+            Some("cargo build --workspace")
+        );
+        assert_eq!(
+            plan.manifest.repo.test.as_deref(),
+            Some("cargo test --workspace")
+        );
+        assert_eq!(
+            plan.inferred_fields,
+            vec!["repo.build".to_string(), "repo.test".to_string()]
+        );
+        assert_eq!(plan.manifest.record.status, RecordStatus::Inferred);
+        assert!(!plan
+            .imported_sources
+            .iter()
+            .any(|path| path == ".github/workflows/ci.yml"));
+        assert!(plan
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(
+                |text| text.contains("Inferred `repo.build` from `.github/workflows/ci.yml`.")
+            ));
+        assert!(plan
+            .evidence_text
+            .as_deref()
+            .is_some_and(|text| text.contains(
+                "Inferred repo.build from .github/workflows/ci.yml as `cargo build --workspace`."
+            )));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_keeps_manifest_commands_imported_when_workflow_agrees() {
+        let root = temp_dir("import-manifest-workflow-agree");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Cargo.toml"),
+            "[workspace]\nmembers = [\"crates/orbit\"]\n",
+        )
+        .expect("Cargo.toml written");
+        fs::write(
+            root.join(".github/workflows/ci.yml"),
+            r#"name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo build --workspace
+      - run: cargo test --workspace
+"#,
+        )
+        .expect("workflow written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(
+            plan.manifest.repo.build.as_deref(),
+            Some("cargo build --workspace")
+        );
+        assert_eq!(
+            plan.manifest.repo.test.as_deref(),
+            Some("cargo test --workspace")
+        );
+        assert!(plan.inferred_fields.is_empty());
+        assert!(plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "Cargo.toml"));
+        assert!(!plan
+            .imported_sources
+            .iter()
+            .any(|path| path == ".github/workflows/ci.yml"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_leaves_commands_unset_when_manifest_and_workflow_conflict() {
+        let root = temp_dir("import-manifest-workflow-conflict");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Cargo.toml"),
+            "[workspace]\nmembers = [\"crates/orbit\"]\n",
+        )
+        .expect("Cargo.toml written");
+        fs::write(
+            root.join(".github/workflows/ci.yml"),
+            r#"name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo build
+      - run: cargo test
+"#,
+        )
+        .expect("workflow written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build, None);
+        assert_eq!(plan.manifest.repo.test, None);
+        assert!(plan.inferred_fields.is_empty());
+        assert!(!plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "Cargo.toml"));
+        assert!(plan
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(|text| text.contains(
+                "`Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting build commands"
+            )));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_leaves_commands_unset_when_workflows_conflict() {
+        let root = temp_dir("import-workflow-conflict");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join(".github/workflows/ci.yml"),
+            r#"name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo build --workspace
+      - run: cargo test --workspace
+"#,
+        )
+        .expect("ci workflow written");
+        fs::write(
+            root.join(".github/workflows/release.yml"),
+            r#"name: Release
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo build
+      - run: cargo test
+"#,
+        )
+        .expect("release workflow written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build, None);
+        assert_eq!(plan.manifest.repo.test, None);
+        assert!(plan.inferred_fields.is_empty());
+        assert!(!plan
+            .imported_sources
+            .iter()
+            .any(|path| path.starts_with(".github/workflows/")));
+        assert!(plan
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(|text| text.contains(
+                "`.github/workflows/ci.yml` and `.github/workflows/release.yml` suggested conflicting build commands"
+            )));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

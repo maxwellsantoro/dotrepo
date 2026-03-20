@@ -14,6 +14,10 @@ It defines the first deliberate growth tranche for the checked-in overlay index:
 These are planning targets, not pre-approved overlays. Each entry still needs a
 reviewable `record.toml`, `evidence.md`, and index validation before merge.
 
+The matching machine-readable seed queue lives in
+[`index/tranche-one-targets.txt`](tranche-one-targets.txt), so crawler runs can
+seed against the same ordered target list the docs describe.
+
 ## Selection rubric
 
 Every tranche-one candidate was chosen using the same filters:
@@ -139,3 +143,19 @@ This order is deliberate:
   popularity story.
 - Use [`index/review-checklist.md`](review-checklist.md) for every contribution,
   even when the target repo is already on this list.
+
+## Batch seeding
+
+Use the checked-in target file for deterministic dry runs of the review queue:
+
+```bash
+cargo run -p dotrepo-crawler -- seed \
+  --targets-file index/tranche-one-targets.txt \
+  --limit 10 \
+  --dry-run \
+  --json
+```
+
+That path keeps batch seeding aligned with the same explicit cross-language
+ordering used in this doc, instead of rediscovering a different queue from star
+bands on every run.

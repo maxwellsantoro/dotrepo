@@ -231,10 +231,16 @@ mod tests {
                 github_codeowners: Some("* @github\n".into()),
                 root_security: Some("root security\n".into()),
                 github_security: Some("github security\n".into()),
-                extra_files: vec![RepositoryTextFile {
-                    relative_path: PathBuf::from("package.json"),
-                    contents: "{\"name\":\"orbit\"}\n".into(),
-                }],
+                extra_files: vec![
+                    RepositoryTextFile {
+                        relative_path: PathBuf::from("package.json"),
+                        contents: "{\"name\":\"orbit\"}\n".into(),
+                    },
+                    RepositoryTextFile {
+                        relative_path: PathBuf::from(".github/workflows/ci.yml"),
+                        contents: "name: CI\n".into(),
+                    },
+                ],
             },
         })
         .expect("materialization succeeds");
@@ -249,6 +255,10 @@ mod tests {
             .join(".github/SECURITY.md")
             .is_file());
         assert!(materialized.repository_root.join("package.json").is_file());
+        assert!(materialized
+            .repository_root
+            .join(".github/workflows/ci.yml")
+            .is_file());
         assert!(!materialized.repository_root.join("CODEOWNERS").exists());
         assert!(!materialized.repository_root.join("SECURITY.md").exists());
         assert!(materialized

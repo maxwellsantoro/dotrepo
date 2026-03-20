@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "a0d8dddce221cf8445cd14754caa02d4d96e23f8322c66026f70880a9a9dedaa",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "serde-rs",
+    "repo": "serde",
+    "source": "https://github.com/serde-rs/serde"
+  },
+  "repository": {
+    "name": "Serde",
+    "description": "Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.",
+    "homepage": "https://serde.rs/",
+    "docsRoot": "https://serde.rs/",
+    "gettingStarted": "https://serde.rs/derive.html"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/serde-rs/serde/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/serde-rs/serde",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Imported from the upstream README, CONTRIBUTING.md, CI workflow, and Cargo manifests. `repo.build` reflects the primary crate build path exercised in CI, while `repo.test` uses the full nightly-only test suite documented for contributors. No SECURITY.md or CODEOWNERS file was detected. Not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/serde-rs/serde/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/serde-rs/serde/index.json",
+    "trust": "/v0/repos/github.com/serde-rs/serde/trust.json",
+    "queryTemplate": "/v0/repos/github.com/serde-rs/serde/query?path={dot_path}",
+    "indexPath": "repos/github.com/serde-rs/serde/"
+  }
+}

@@ -1,12 +1,13 @@
-use anyhow::{bail, Result};
+use anyhow::{anyhow, bail, Result};
 use clap::{Args, Parser, Subcommand};
 use dotrepo_crawler::{
     apply_crawl_writeback, crawl_repository, load_crawler_state, schedule_refresh,
     seed_repositories, write_crawler_state, CrawlDiagnostic, CrawlRepositoryRequest,
-    CrawlStateRecord, CrawlerStateSnapshot, RefreshCandidate, RepositoryRef,
+    CrawlStateRecord, CrawlerStateSnapshot, DiscoveredRepository, RefreshCandidate, RepositoryRef,
     ScheduleRefreshRequest, SeedRepositoriesReport, SeedRepositoriesRequest, StarBand,
 };
 use serde::Serialize;
+use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
 #[derive(Parser)]
@@ -90,12 +91,18 @@ struct SeedArgs {
     /// Repository host. Only github.com is supported today.
     #[arg(long, default_value = "github.com")]
     host: String,
-    /// Maximum number of discovery candidates to crawl.
-    #[arg(long, default_value_t = 10)]
-    limit: usize,
+    /// Maximum number of repositories to crawl.
+    ///
+    /// Defaults to 10 for discovery-based seeding and to the full target-list length when
+    /// --targets-file is used.
+    #[arg(long)]
+    limit: Option<usize>,
     /// Star-band filter such as 1000..10000 or 10000+.
     #[arg(long = "star-band", value_parser = parse_star_band)]
     star_bands: Vec<StarBand>,
+    /// Optional newline-delimited repository target list. Supports owner/repo or host/owner/repo.
+    #[arg(long)]
+    targets_file: Option<PathBuf>,
     /// Include archived repositories in discovery results.
     #[arg(long)]
     include_archived: bool,
@@ -309,13 +316,36 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
 }
 
 fn cmd_seed(args: SeedArgs) -> Result<()> {
-    let discovery = seed_repositories(&seed_request_from_args(
-        &args.host,
-        args.limit,
-        args.star_bands,
-        args.include_archived,
-        args.include_forks,
-    ))?;
+    let explicit_targets = args
+        .targets_file
+        .as_deref()
+        .map(|path| load_repository_targets(path, &args.host))
+        .transpose()?;
+    if explicit_targets.is_some()
+        && (!args.star_bands.is_empty() || args.include_archived || args.include_forks)
+    {
+        bail!(
+            "--targets-file cannot be combined with --star-band, --include-archived, or --include-forks"
+        );
+    }
+
+    let effective_limit = args.limit.unwrap_or_else(|| {
+        explicit_targets
+            .as_ref()
+            .map(|targets| targets.len())
+            .unwrap_or(10)
+    });
+    let discovery = if let Some(targets) = explicit_targets {
+        discovery_report_from_targets(&args.host, targets, effective_limit)
+    } else {
+        seed_repositories(&seed_request_from_args(
+            &args.host,
+            effective_limit,
+            args.star_bands.clone(),
+            args.include_archived,
+            args.include_forks,
+        ))?
+    };
 
     let mut state = if args.dry_run {
         CrawlerStateSnapshot::default()
@@ -528,6 +558,93 @@ fn seed_request_from_args(
     }
 }
 
+fn load_repository_targets(path: &Path, default_host: &str) -> Result<Vec<RepositoryRef>> {
+    let contents = std::fs::read_to_string(path)?;
+    parse_repository_targets(&contents, default_host)
+}
+
+fn parse_repository_targets(contents: &str, default_host: &str) -> Result<Vec<RepositoryRef>> {
+    let mut targets = Vec::new();
+    let mut seen = HashSet::new();
+
+    for (line_number, raw_line) in contents.lines().enumerate() {
+        let line = raw_line.trim();
+        if line.is_empty() || line.starts_with('#') {
+            continue;
+        }
+
+        let repository = parse_repository_target(line, default_host).map_err(|err| {
+            anyhow!(
+                "invalid repository target on line {}: {} ({})",
+                line_number + 1,
+                line,
+                err
+            )
+        })?;
+        let key = format!(
+            "{}/{}/{}",
+            repository.host, repository.owner, repository.repo
+        );
+        if seen.insert(key) {
+            targets.push(repository);
+        }
+    }
+
+    if targets.is_empty() {
+        bail!("repository target list did not contain any repositories");
+    }
+
+    Ok(targets)
+}
+
+fn parse_repository_target(value: &str, default_host: &str) -> Result<RepositoryRef> {
+    let trimmed = value
+        .trim()
+        .trim_start_matches("https://")
+        .trim_start_matches("http://")
+        .trim_matches('/');
+    let segments = trimmed.split('/').collect::<Vec<_>>();
+    match segments.as_slice() {
+        [owner, repo] => Ok(RepositoryRef {
+            host: default_host.into(),
+            owner: owner.to_string(),
+            repo: repo.to_string(),
+        }),
+        [host, owner, repo] => Ok(RepositoryRef {
+            host: host.to_string(),
+            owner: owner.to_string(),
+            repo: repo.to_string(),
+        }),
+        _ => bail!("expected owner/repo or host/owner/repo"),
+    }
+}
+
+fn discovery_report_from_targets(
+    host: &str,
+    repositories: Vec<RepositoryRef>,
+    limit: usize,
+) -> SeedRepositoriesReport {
+    let total_targets = repositories.len();
+    let discovered = repositories
+        .into_iter()
+        .take(limit)
+        .map(|repository| DiscoveredRepository {
+            repository,
+            stars: 0,
+            default_branch: None,
+            archived: false,
+            fork: false,
+        })
+        .collect::<Vec<_>>();
+
+    SeedRepositoriesReport {
+        host: host.into(),
+        requested_limit: limit,
+        exhausted_bands: total_targets <= limit,
+        discovered,
+    }
+}
+
 fn resolve_state_path(index_root: &Path, state_path: Option<&Path>) -> PathBuf {
     state_path
         .map(Path::to_path_buf)
@@ -696,9 +813,63 @@ mod tests {
 
         match cli.command {
             Command::Seed(seed) => {
-                assert_eq!(seed.limit, 25);
+                assert_eq!(seed.limit, Some(25));
                 assert!(seed.dry_run);
                 assert_eq!(seed.star_bands.len(), 2);
+            }
+            _ => panic!("expected seed command"),
+        }
+    }
+
+    #[test]
+    fn parse_repository_targets_supports_comments_and_dedupes() {
+        let parsed = parse_repository_targets(
+            r#"
+# Rust
+tokio-rs/tokio
+github.com/fastapi/fastapi
+https://github.com/tokio-rs/tokio
+"#,
+            "github.com",
+        )
+        .expect("targets parse");
+
+        assert_eq!(
+            parsed,
+            vec![
+                RepositoryRef {
+                    host: "github.com".into(),
+                    owner: "tokio-rs".into(),
+                    repo: "tokio".into(),
+                },
+                RepositoryRef {
+                    host: "github.com".into(),
+                    owner: "fastapi".into(),
+                    repo: "fastapi".into(),
+                },
+            ]
+        );
+    }
+
+    #[test]
+    fn cli_parses_seed_command_with_targets_file() {
+        let cli = Cli::try_parse_from([
+            "dotrepo-crawler",
+            "seed",
+            "--targets-file",
+            "index/tranche-one-targets.txt",
+            "--dry-run",
+        ])
+        .expect("cli parses");
+
+        match cli.command {
+            Command::Seed(seed) => {
+                assert_eq!(
+                    seed.targets_file.as_deref(),
+                    Some(Path::new("index/tranche-one-targets.txt"))
+                );
+                assert_eq!(seed.limit, None);
+                assert!(seed.dry_run);
             }
             _ => panic!("expected seed command"),
         }

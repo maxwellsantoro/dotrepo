@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/serde-rs/serde"
+generated_at = "2026-03-20T02:22:08.895601Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Imported from the upstream README, CONTRIBUTING.md, CI workflow, and Cargo manifests. `repo.build` reflects the primary crate build path exercised in CI, while `repo.test` uses the full nightly-only test suite documented for contributors. No SECURITY.md or CODEOWNERS file was detected. Not maintainer-verified."
+
+[repo]
+name = "Serde"
+description = "Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically."
+homepage = "https://serde.rs/"
+license = "MIT OR Apache-2.0"
+visibility = "public"
+languages = ["Rust"]
+build = "cd serde && cargo build"
+test = "cd test_suite && cargo +nightly test --features unstable"
+topics = [
+    "rust",
+    "serde",
+    "derive",
+    "no-std",
+]
+
+[relations]
+references = []
+
+[docs]
+root = "https://serde.rs/"
+getting_started = "https://serde.rs/derive.html"
+api = "https://docs.rs/serde/latest/serde/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/serde-rs/serde.git"
+default_branch = "master"
+fork = false
+head_sha = "fa7da4a93567ed347ad0735c28e439fca688ef26"
+html_url = "https://github.com/serde-rs/serde"
+stars = 10520

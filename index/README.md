@@ -66,7 +66,9 @@ Reviewers can use [`index/review-checklist.md`](review-checklist.md) as the shor
 PR checklist when deciding whether an overlay is strong enough to merge.
 For the active seed-index growth program, use
 [`index/tranche-one-targets.md`](tranche-one-targets.md) as the concrete
-candidate list and first-batch execution guide.
+candidate list and first-batch execution guide, and
+[`index/tranche-one-targets.txt`](tranche-one-targets.txt) as the machine-readable
+target file for `dotrepo-crawler seed --targets-file`.
 For maintainer-claim review, use
 [`docs/maintainer-claim-review-workflow.md`](../docs/maintainer-claim-review-workflow.md)
 as the end-to-end operator loop.

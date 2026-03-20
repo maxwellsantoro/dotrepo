@@ -360,6 +360,12 @@ the factual import/crawl tooling.
   Depends on: `E7-01`, `E7-04`.
   Acceptance: the repo contains one explicit reviewed target list for the first 50 overlays, including language mix and rationale, so index growth can be executed as a concrete program rather than an abstract aspiration.
 
+- `[done] E7-06 Add a machine-readable tranche queue and deterministic batch seed path`
+  Depends on: `E7-05`, `E10-03`.
+  Acceptance: the repo contains one checked-in target file for tranche one, and
+  `dotrepo-crawler seed --targets-file ...` can dry-run or apply that queue in
+  order without relying on fresh star-band discovery.
+
 ## Epic 8: Keep the thin extension thin
 
 Goal: preserve the editor shell as a wrapper around core semantics instead of a
@@ -440,6 +446,13 @@ Primary surfaces:
 - `[done] E10-04a Expand factual import to README variants and root package-manifest defaults`
   Depends on: `E10-04`.
   Acceptance: crawler-staged imports preserve the actual README variant path they used and can fill factual `repo.build` / `repo.test` from root `Cargo.toml`, `package.json`, `pyproject.toml`, or `go.mod` when the command signal is unambiguous.
+
+- `[done] E10-04b Add conservative workflow-derived command fallback`
+  Depends on: `E10-04a`.
+  Acceptance: crawler-staged imports can infer `repo.build` / `repo.test` from
+  `.github/workflows/*.yml` only when workflow signals are unambiguous, keep
+  those fields `inferred` rather than `imported`, and leave them unset when
+  workflow or manifest evidence conflicts.
 
 - `E10-05 Use scheduler reasons as the crawler control plane`
   Depends on: `E10-04`.

@@ -2,10 +2,10 @@
   "apiVersion": "v0",
   "freshness": {
     "generatedAt": "2026-03-10T18:30:00Z",
-    "snapshotDigest": "9688de69ddba825edc3bf112aba82225a7b1a96853f2815c7872a72c408ec55e",
+    "snapshotDigest": "a0d8dddce221cf8445cd14754caa02d4d96e23f8322c66026f70880a9a9dedaa",
     "staleAfter": "2026-03-11T18:30:00Z"
   },
-  "repositoryCount": 9,
+  "repositoryCount": 10,
   "repositories": [
     {
       "identity": {
@@ -85,6 +85,22 @@
         "trust": "/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json",
         "queryTemplate": "/v0/repos/github.com/maxwellsantoro/ries-rs/query?path={dot_path}",
         "indexPath": "repos/github.com/maxwellsantoro/ries-rs/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "serde-rs",
+        "repo": "serde",
+        "source": "https://github.com/serde-rs/serde"
+      },
+      "name": "Serde",
+      "description": "Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.",
+      "links": {
+        "self": "/v0/repos/github.com/serde-rs/serde/index.json",
+        "trust": "/v0/repos/github.com/serde-rs/serde/trust.json",
+        "queryTemplate": "/v0/repos/github.com/serde-rs/serde/query?path={dot_path}",
+        "indexPath": "repos/github.com/serde-rs/serde/"
       }
     },
     {
