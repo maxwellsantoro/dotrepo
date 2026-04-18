@@ -6,12 +6,125 @@ on:
     branches: [main]
 
 jobs:
+  change-scope:
+    runs-on: ubuntu-latest
+    outputs:
+      run_rust_ci: ${{ steps.scope.outputs.run_rust_ci }}
+      run_operator_gate: ${{ steps.scope.outputs.run_operator_gate }}
+      run_public_surface_gate: ${{ steps.scope.outputs.run_public_surface_gate }}
+      run_release_gate: ${{ steps.scope.outputs.run_release_gate }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Classify changed files
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+          else
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+          fi
+
+          if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ]; then
+            mapfile -t changed_files < <(git ls-files)
+          else
+            mapfile -t changed_files < <(git diff --name-only "$base" "$head")
+          fi
+
+          has_any=false
+          has_code=false
+          has_public_surface=false
+          has_claim_sensitive=false
+
+          for path in "${changed_files[@]}"; do
+            [ -n "$path" ] || continue
+            has_any=true
+
+            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/) ]]; then
+              has_code=true
+            fi
+
+            if [[ "$path" =~ ^(index/|crates/dotrepo-core/|crates/dotrepo-cli/|scripts/check_release_gate\.py|scripts/render_public_pages_landing\.py|scripts/package_public_export\.py|scripts/sync_cloudflare_public_snapshot\.py|cloudflare/hosted-query/) ]]; then
+              has_public_surface=true
+            fi
+
+            if [[ "$path" =~ ^index/repos/[^/]+/[^/]+/[^/]+/claims/ ]] || [[ "$path" =~ ^(scripts/check_operator_claim_gate\.py|crates/dotrepo-core/|crates/dotrepo-cli/) ]]; then
+              has_claim_sensitive=true
+            fi
+          done
+
+          run_rust_ci=false
+          run_operator_gate=false
+          run_public_surface_gate=false
+          run_release_gate=false
+
+          if [ "$has_any" = false ]; then
+            run_rust_ci=true
+            run_operator_gate=true
+            run_public_surface_gate=true
+            run_release_gate=true
+          else
+            if [ "$has_code" = true ]; then
+              run_rust_ci=true
+              run_release_gate=true
+            fi
+            if [ "$has_public_surface" = true ] && [ "$has_code" = false ]; then
+              run_public_surface_gate=true
+            fi
+            if [ "$has_claim_sensitive" = true ]; then
+              run_operator_gate=true
+            fi
+          fi
+
+          {
+            echo "run_rust_ci=$run_rust_ci"
+            echo "run_operator_gate=$run_operator_gate"
+            echo "run_public_surface_gate=$run_public_surface_gate"
+            echo "run_release_gate=$run_release_gate"
+          } >> "$GITHUB_OUTPUT"
+
+          {
+            echo "Changed files:"
+            if [ "${#changed_files[@]}" -eq 0 ]; then
+              echo "- <none detected>"
+            else
+              for path in "${changed_files[@]}"; do
+                [ -n "$path" ] || continue
+                echo "- $path"
+              done
+            fi
+            echo
+            echo "Planned jobs:"
+            echo "- rust-and-index: $run_rust_ci"
+            echo "- operator-gate: $run_operator_gate"
+            echo "- public-surface-gate: $run_public_surface_gate"
+            echo "- release-gate: $run_release_gate"
+          } >> "$GITHUB_STEP_SUMMARY"
+
   rust-and-index:
+    needs: change-scope
+    if: needs.change-scope.outputs.run_rust_ci == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Check formatting, tests, and seeded flows
         run: |
           cargo fmt --all -- --check
@@ -122,12 +235,23 @@ jobs:
           PY
 
   operator-gate:
-    needs: rust-and-index
+    needs: change-scope
+    if: needs.change-scope.outputs.run_operator_gate == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Run explicit maintainer/operator claim gate
         run: python3 scripts/check_operator_claim_gate.py --output-root operator-gate
       - name: Upload operator gate inspection artifacts
@@ -145,15 +269,69 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-  release-gate:
-    needs:
-      - rust-and-index
-      - operator-gate
+  public-surface-gate:
+    needs: change-scope
+    if: needs.change-scope.outputs.run_public_surface_gate == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: cloudflare/hosted-query/package-lock.json
+      - name: Run lightweight public-surface gate
+        env:
+          npm_config_cache: ${{ runner.temp }}/npm-cache
+        run: python3 scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
+      - name: Upload static public export artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-export-v0-lightweight
+          path: release-gate/public/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Upload public export bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-export-v0-bundle-lightweight
+          path: release-gate/public-bundle/*.tar.gz
+          if-no-files-found: error
+          retention-days: 7
+
+  release-gate:
+    needs:
+      - change-scope
+      - rust-and-index
+    if: needs.change-scope.outputs.run_release_gate == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:

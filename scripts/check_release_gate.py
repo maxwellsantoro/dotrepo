@@ -51,6 +51,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Skip npm install and VSIX packaging",
     )
+    parser.add_argument(
+        "--skip-release-bundle",
+        action="store_true",
+        help="Skip release-binary packaging and install-smoke checks",
+    )
     return parser.parse_args()
 
 
@@ -538,25 +543,40 @@ def main() -> int:
     run(["npm", "test"], cwd=worker_dir, env=npm_env)
     run(["npm", "run", "deploy:dry-run"], cwd=worker_dir, env=npm_env)
 
-    run(
-        ["cargo", "build", "--release", "-p", "dotrepo-cli", "--bins", "-p", "dotrepo-lsp", "-p", "dotrepo-mcp"],
-        cwd=repo_root,
-    )
-    target = host_target(repo_root)
+    release_bundle = None
+    release_checksum = None
+    target = None
     version = workspace_version(repo_root)
-    run(
-        [
-            "python3",
-            "scripts/package_release_binaries.py",
-            "--bin-dir",
-            "target/release",
-            "--output-dir",
-            str(release_bundle_dir),
-            "--target",
-            target,
-        ],
-        cwd=repo_root,
-    )
+    if not args.skip_release_bundle:
+        run(
+            [
+                "cargo",
+                "build",
+                "--release",
+                "-p",
+                "dotrepo-cli",
+                "--bins",
+                "-p",
+                "dotrepo-lsp",
+                "-p",
+                "dotrepo-mcp",
+            ],
+            cwd=repo_root,
+        )
+        target = host_target(repo_root)
+        run(
+            [
+                "python3",
+                "scripts/package_release_binaries.py",
+                "--bin-dir",
+                "target/release",
+                "--output-dir",
+                str(release_bundle_dir),
+                "--target",
+                target,
+            ],
+            cwd=repo_root,
+        )
 
     vsix_path = None
     if not args.skip_vsix:
@@ -581,18 +601,24 @@ def main() -> int:
     public_bundle = expect_single(sorted(public_bundle_dir.glob("*.tar.gz")), "public export bundle")
     verify_tar_contains_prefix(public_bundle, public_bundle.stem.removesuffix(".tar"))
 
-    release_bundle = expect_single(sorted(release_bundle_dir.glob("*.tar.gz")), "release binary bundle")
-    release_checksum = release_bundle_dir / f"dotrepo-{version}-{target}.sha256"
-    ensure_file(release_checksum)
-    verify_tar_contains_prefix(release_bundle, f"dotrepo-{version}-{target}/")
+    if not args.skip_release_bundle:
+        release_bundle = expect_single(
+            sorted(release_bundle_dir.glob("*.tar.gz")), "release binary bundle"
+        )
+        release_checksum = release_bundle_dir / f"dotrepo-{version}-{target}.sha256"
+        ensure_file(release_checksum)
+        verify_tar_contains_prefix(release_bundle, f"dotrepo-{version}-{target}/")
 
     if vsix_path is not None:
         ensure_file(vsix_path)
 
     print("")
-    print("release install smoke test")
-    smoke_test_release_bundle(release_bundle, version, target, repo_root, public_dir, args.base_path)
-    print("  all release binaries passed smoke test")
+    if release_bundle is not None and target is not None:
+        print("release install smoke test")
+        smoke_test_release_bundle(
+            release_bundle, version, target, repo_root, public_dir, args.base_path
+        )
+        print("  all release binaries passed smoke test")
     smoke_test_cloudflare_worker(worker_dir, args.base_path)
     print("  Cloudflare Worker smoke test passed")
 
@@ -600,7 +626,8 @@ def main() -> int:
     print("release gate artifacts")
     print(f"  public tree: {public_dir}")
     print(f"  public bundle: {public_bundle}")
-    print(f"  release bundle: {release_bundle}")
+    if release_bundle is not None:
+        print(f"  release bundle: {release_bundle}")
     if vsix_path is not None:
         print(f"  vsix: {vsix_path}")
     return 0
