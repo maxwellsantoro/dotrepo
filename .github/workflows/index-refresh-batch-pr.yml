@@ -1,0 +1,150 @@
+name: index-refresh-batch-pr
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch_id:
+        description: Batch identifier from refresh-batches.json
+        required: true
+      limit:
+        description: Maximum tracked repositories to inspect while regenerating the selected batch
+        required: false
+        default: "10"
+      batch_size:
+        description: Maximum repositories per refresh batch when regenerating the plan
+        required: false
+        default: "5"
+      state_path:
+        description: Crawler state file to inspect and update
+        required: false
+        default: index/.crawler-state.toml
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: index-refresh-batch-pr-${{ github.event.inputs.batch_id }}
+  cancel-in-progress: false
+
+jobs:
+  apply-refresh-batch:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Resolve workflow inputs
+        id: inputs
+        shell: bash
+        run: |
+          limit="${{ github.event.inputs.limit }}"
+          batch_size="${{ github.event.inputs.batch_size }}"
+          state_path="${{ github.event.inputs.state_path }}"
+          if [ -z "$limit" ]; then
+            limit="10"
+          fi
+          if [ -z "$batch_size" ]; then
+            batch_size="5"
+          fi
+          if [ -z "$state_path" ]; then
+            state_path="index/.crawler-state.toml"
+          fi
+          echo "limit=$limit" >> "$GITHUB_OUTPUT"
+          echo "batch_size=$batch_size" >> "$GITHUB_OUTPUT"
+          echo "state_path=$state_path" >> "$GITHUB_OUTPUT"
+      - name: Regenerate refresh batch plan
+        shell: bash
+        run: |
+          mkdir -p index-refresh-batch
+          cargo run -p dotrepo-crawler -- refresh-plan \
+            --state-path "${{ steps.inputs.outputs.state_path }}" \
+            --limit "${{ steps.inputs.outputs.limit }}" \
+            --json > index-refresh-batch/refresh-plan.json
+          if [ ! -s index-refresh-batch/refresh-plan.json ]; then
+            echo "refresh-plan.json was not produced" >&2
+            exit 1
+          fi
+          python3 scripts/plan_refresh_review_batches.py \
+            --input index-refresh-batch/refresh-plan.json \
+            --batch-size "${{ steps.inputs.outputs.batch_size }}" \
+            --output-json index-refresh-batch/refresh-batches.json \
+            --output-md index-refresh-batch/refresh-batches.md
+      - name: Select batch
+        id: batch
+        shell: bash
+        run: |
+          python3 scripts/select_review_batch.py \
+            --input index-refresh-batch/refresh-batches.json \
+            --batch-id "${{ github.event.inputs.batch_id }}" \
+            --output-targets index-refresh-batch/selected-targets.txt \
+            --output-metadata index-refresh-batch/selected-batch.json
+          title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print("chore(index): {}".format(data["batch"]["suggestedPrTitle"]))' index-refresh-batch/selected-batch.json)"
+          branch="automation/index-refresh/${{ github.event.inputs.batch_id }}-${{ github.run_id }}"
+          echo "title=$title" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+      - name: Render pull request body
+        shell: bash
+        run: |
+          python3 scripts/render_review_batch_pull_request.py \
+            --input index-refresh-batch/selected-batch.json \
+            --kind refresh \
+            --output index-refresh-batch/pr-body.md
+      - name: Apply selected refresh batch
+        shell: bash
+        run: |
+          : > index-refresh-batch/applied-crawls.ndjson
+          while IFS=/ read -r host owner repo; do
+            if [ -z "$host" ]; then
+              continue
+            fi
+            cargo run -p dotrepo-crawler -- crawl \
+              --index-root index \
+              --state-path "${{ steps.inputs.outputs.state_path }}" \
+              --host "$host" \
+              --owner "$owner" \
+              --repo "$repo" \
+              --write \
+              --json >> index-refresh-batch/applied-crawls.ndjson
+          done < index-refresh-batch/selected-targets.txt
+      - name: Validate index after refresh writeback
+        run: cargo run -p dotrepo-cli -- validate-index
+      - name: Upload refresh batch artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: index-refresh-batch-${{ github.event.inputs.batch_id }}
+          path: index-refresh-batch/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Create draft pull request
+        id: refresh_pr
+        continue-on-error: true
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: ${{ steps.batch.outputs.branch }}
+          title: ${{ steps.batch.outputs.title }}
+          commit-message: ${{ steps.batch.outputs.title }}
+          body-path: index-refresh-batch/pr-body.md
+          draft: true
+          delete-branch: true
+          add-paths: |
+            index/**
+      - name: Publish pull request outcome
+        shell: bash
+        run: |
+          {
+            echo "# Index Refresh Batch"
+            echo
+            echo "- batch: \`${{ github.event.inputs.batch_id }}\`"
+            if [ "${{ steps.refresh_pr.outcome }}" = "success" ] && [ -n "${{ steps.refresh_pr.outputs.pull-request-url }}" ]; then
+              echo "- draft PR: ${{ steps.refresh_pr.outputs.pull-request-url }}"
+            else
+              echo "- draft PR creation was blocked or failed after branch push"
+              echo "- branch: \`${{ steps.batch.outputs.branch }}\`"
+              echo "- compare URL: https://github.com/${{ github.repository }}/compare/${{ github.ref_name }}...${{ steps.batch.outputs.branch }}?expand=1"
+              echo "- enable 'Allow GitHub Actions to create and approve pull requests' or provide a stronger token if direct PR creation is required"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -54,8 +54,9 @@ Near-term order:
    and Go, using
    [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) as the
    concrete execution list.
-2. Turn the scheduled seed-review and refresh-review artifacts into bounded
-   execution batches that humans can merge deliberately.
+2. Exercise the new seed-batch and refresh-batch draft-PR workflows, including
+   the guarded top-batch auto-PR mode in the review workflows, then decide what
+   should remain dispatch-only versus become scheduled.
 3. Keep hardening, public-site, and editor work constrained to blockers for the
    first two items.
 

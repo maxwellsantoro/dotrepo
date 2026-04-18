@@ -11,6 +11,10 @@ on:
         description: Maximum repositories per reviewer-facing batch artifact
         required: false
         default: "3"
+      open_pr:
+        description: Open a draft PR for the first eligible batch after review artifacts are generated
+        required: false
+        default: "false"
       targets_file:
         description: Repository target list to seed against
         required: false
@@ -19,7 +23,8 @@ on:
     - cron: "0 13 * * 1"
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 concurrency:
   group: index-seed-review
@@ -28,8 +33,10 @@ concurrency:
 jobs:
   candidate-seed-review:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Resolve workflow inputs
@@ -38,6 +45,7 @@ jobs:
         run: |
           limit="${{ github.event.inputs.limit }}"
           batch_size="${{ github.event.inputs.batch_size }}"
+          open_pr="${{ github.event.inputs.open_pr }}"
           targets_file="${{ github.event.inputs.targets_file }}"
           if [ -z "$limit" ]; then
             limit="5"
@@ -45,12 +53,25 @@ jobs:
           if [ -z "$batch_size" ]; then
             batch_size="3"
           fi
+          if [ -z "$open_pr" ]; then
+            open_pr="false"
+          fi
           if [ -z "$targets_file" ]; then
             targets_file="index/tranche-one-targets.txt"
           fi
           echo "limit=$limit" >> "$GITHUB_OUTPUT"
           echo "batch_size=$batch_size" >> "$GITHUB_OUTPUT"
+          echo "open_pr=$open_pr" >> "$GITHUB_OUTPUT"
           echo "targets_file=$targets_file" >> "$GITHUB_OUTPUT"
+      - name: Resolve auto-PR mode
+        id: pr_mode
+        shell: bash
+        run: |
+          enabled="false"
+          if [ "${{ steps.inputs.outputs.open_pr }}" = "true" ] || [ "${{ vars.DOTREPO_INDEX_SEED_AUTO_PR_ENABLED }}" = "true" ]; then
+            enabled="true"
+          fi
+          echo "enabled=$enabled" >> "$GITHUB_OUTPUT"
       - name: Generate candidate seed review artifacts
         id: generate
         continue-on-error: true
@@ -64,7 +85,7 @@ jobs:
             --dry-run \
             --review-report-md index-seed-review/seed-review.md \
             --json > index-seed-review/seed-report.json || status=$?
-          if [ -f index-seed-review/seed-report.json ]; then
+          if [ "$status" -eq 0 ] && [ -s index-seed-review/seed-report.json ]; then
             python3 scripts/plan_seed_review_batches.py \
               --input index-seed-review/seed-report.json \
               --batch-size "${{ steps.inputs.outputs.batch_size }}" \
@@ -85,7 +106,7 @@ jobs:
       - name: Publish GitHub summary
         if: always()
         run: |
-          if [ -f index-seed-review/seed-report.json ]; then
+          if [ -s index-seed-review/seed-report.json ]; then
             python3 scripts/render_seed_review_summary.py \
               --input index-seed-review/seed-report.json \
               --batches index-seed-review/seed-batches.json >> "$GITHUB_STEP_SUMMARY"
@@ -96,9 +117,108 @@ jobs:
           fi
       - name: Upload candidate seed review artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: index-seed-review
+          path: index-seed-review/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Select first eligible seed batch for auto-PR
+        id: auto_batch
+        if: steps.generate.outcome == 'success' && steps.pr_mode.outputs.enabled == 'true'
+        shell: bash
+        run: |
+          selected="false"
+          if python3 scripts/select_review_batch.py \
+            --input index-seed-review/seed-batches.json \
+            --first-batch \
+            --skip-batches-with-failed \
+            --require-no-failed \
+            --output-targets index-seed-review/selected-targets.txt \
+            --output-metadata index-seed-review/selected-batch.json; then
+            selected="true"
+            batch_id="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(data["batch"]["id"])' index-seed-review/selected-batch.json)"
+            repo_count="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(data["batch"]["repositoryCount"])' index-seed-review/selected-batch.json)"
+            title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print("chore(index): {}".format(data["batch"]["suggestedPrTitle"]))' index-seed-review/selected-batch.json)"
+            branch="automation/index-seed-review/$batch_id-${{ github.run_id }}"
+            echo "batch_id=$batch_id" >> "$GITHUB_OUTPUT"
+            echo "repo_count=$repo_count" >> "$GITHUB_OUTPUT"
+            echo "title=$title" >> "$GITHUB_OUTPUT"
+            echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          fi
+          echo "selected=$selected" >> "$GITHUB_OUTPUT"
+      - name: Append seed auto-PR summary
+        if: steps.pr_mode.outputs.enabled == 'true'
+        shell: bash
+        run: |
+          {
+            echo
+            echo "## Auto PR"
+            echo
+            if [ "${{ steps.auto_batch.outputs.selected }}" = "true" ]; then
+              echo "- selected batch: \`${{ steps.auto_batch.outputs.batch_id }}\`"
+              echo "- branch: \`${{ steps.auto_batch.outputs.branch }}\`"
+              echo "- draft PR title: \`${{ steps.auto_batch.outputs.title }}\`"
+            else
+              echo "- no eligible seed batch was selected for automatic PR creation"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Render seed auto-PR body
+        if: steps.auto_batch.outputs.selected == 'true'
+        shell: bash
+        run: |
+          python3 scripts/render_review_batch_pull_request.py \
+            --input index-seed-review/selected-batch.json \
+            --kind seed \
+            --output index-seed-review/pr-body.md
+      - name: Apply selected seed batch for auto-PR
+        if: steps.auto_batch.outputs.selected == 'true'
+        shell: bash
+        run: |
+          cargo run -p dotrepo-crawler -- seed \
+            --targets-file index-seed-review/selected-targets.txt \
+            --limit "${{ steps.auto_batch.outputs.repo_count }}" \
+            --review-report-md index-seed-review/applied-seed-review.md \
+            --json > index-seed-review/applied-seed-report.json
+      - name: Validate index after seed auto-PR writeback
+        if: steps.auto_batch.outputs.selected == 'true'
+        run: cargo run -p dotrepo-cli -- validate-index
+      - name: Create draft seed auto-PR
+        id: seed_pr
+        if: steps.auto_batch.outputs.selected == 'true'
+        continue-on-error: true
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: ${{ steps.auto_batch.outputs.branch }}
+          title: ${{ steps.auto_batch.outputs.title }}
+          commit-message: ${{ steps.auto_batch.outputs.title }}
+          body-path: index-seed-review/pr-body.md
+          draft: true
+          delete-branch: true
+          add-paths: |
+            index/**
+      - name: Append seed auto-PR result
+        if: steps.auto_batch.outputs.selected == 'true'
+        shell: bash
+        run: |
+          {
+            echo
+            echo "## Auto PR Result"
+            echo
+            if [ "${{ steps.seed_pr.outcome }}" = "success" ] && [ -n "${{ steps.seed_pr.outputs.pull-request-url }}" ]; then
+              echo "- draft PR: ${{ steps.seed_pr.outputs.pull-request-url }}"
+            else
+              echo "- draft PR creation was blocked or failed after branch push"
+              echo "- branch: \`${{ steps.auto_batch.outputs.branch }}\`"
+              echo "- compare URL: https://github.com/${{ github.repository }}/compare/${{ github.ref_name }}...${{ steps.auto_batch.outputs.branch }}?expand=1"
+              echo "- enable 'Allow GitHub Actions to create and approve pull requests' or provide a stronger token if direct PR creation is required"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload seed auto-PR execution artifacts
+        if: always() && steps.auto_batch.outputs.selected == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: index-seed-review-auto-pr
           path: index-seed-review/
           if-no-files-found: error
           retention-days: 14

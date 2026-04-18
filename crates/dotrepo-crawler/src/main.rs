@@ -1,5 +1,6 @@
-use anyhow::{anyhow, bail, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use clap::{Args, Parser, Subcommand};
+use dotrepo_core::{load_manifest_from_root, load_synthesis_from_root};
 use dotrepo_crawler::{
     apply_crawl_writeback, crawl_repository, load_crawler_state, refresh_candidates_from_state,
     schedule_refresh, seed_repositories, write_crawler_state, CrawlDiagnostic,
@@ -8,7 +9,7 @@ use dotrepo_crawler::{
     SeedRepositoriesReport, SeedRepositoriesRequest, StarBand, MAX_SEED_LIMIT,
 };
 use dotrepo_schema::{Manifest, RecordStatus};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashSet};
 use std::path::{Path, PathBuf};
 
@@ -281,10 +282,25 @@ struct SeedReviewReport {
 #[serde(rename_all = "camelCase")]
 struct RefreshPlanCommandReport {
     state_path: PathBuf,
+    state_source: RefreshPlanStateSource,
     tracked_repositories: usize,
     candidate_count: usize,
     candidates: Vec<RefreshCandidate>,
     schedule: ScheduleRefreshReport,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+enum RefreshPlanStateSource {
+    CrawlerState,
+    IndexRecords,
+}
+
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(rename_all = "snake_case")]
+struct GitHubRecordExtension {
+    default_branch: Option<String>,
+    head_sha: Option<String>,
 }
 
 fn main() {
@@ -714,7 +730,7 @@ fn cmd_schedule(args: ScheduleArgs) -> Result<()> {
 }
 
 fn cmd_refresh_plan(args: RefreshPlanArgs) -> Result<()> {
-    let state = load_crawler_state(&args.state_path)?;
+    let (state, state_source) = load_refresh_state_for_plan(&args.state_path)?;
     let tracked_repositories = state.repositories.len();
     let candidates = refresh_candidates_from_state(&state)?;
     let effective_limit = args.limit.unwrap_or(candidates.len());
@@ -728,6 +744,7 @@ fn cmd_refresh_plan(args: RefreshPlanArgs) -> Result<()> {
     })?;
     let report = RefreshPlanCommandReport {
         state_path: args.state_path,
+        state_source,
         tracked_repositories,
         candidate_count: candidates.len(),
         candidates,
@@ -743,6 +760,10 @@ fn cmd_refresh_plan(args: RefreshPlanArgs) -> Result<()> {
         "planned {} refreshes from {} tracked repositories",
         report.schedule.scheduled.len(),
         report.tracked_repositories
+    );
+    println!(
+        "state source: {}",
+        refresh_plan_state_source_label(report.state_source)
     );
     let mut reasons = BTreeMap::new();
     for entry in &report.schedule.scheduled {
@@ -895,6 +916,148 @@ fn resolve_state_path(index_root: &Path, state_path: Option<&Path>) -> PathBuf {
     state_path
         .map(Path::to_path_buf)
         .unwrap_or_else(|| index_root.join(".crawler-state.toml"))
+}
+
+fn load_refresh_state_for_plan(
+    state_path: &Path,
+) -> Result<(CrawlerStateSnapshot, RefreshPlanStateSource)> {
+    let state = load_crawler_state(state_path)?;
+    if !state.repositories.is_empty() {
+        return Ok((state, RefreshPlanStateSource::CrawlerState));
+    }
+
+    let index_root = state_path.parent().unwrap_or_else(|| Path::new("."));
+    let derived = derive_refresh_state_from_index(index_root)?;
+    if !derived.repositories.is_empty() {
+        return Ok((derived, RefreshPlanStateSource::IndexRecords));
+    }
+
+    Ok((state, RefreshPlanStateSource::CrawlerState))
+}
+
+fn derive_refresh_state_from_index(index_root: &Path) -> Result<CrawlerStateSnapshot> {
+    let repos_root = index_root.join("repos");
+    if !repos_root.is_dir() {
+        return Ok(CrawlerStateSnapshot::default());
+    }
+
+    let mut repositories = Vec::new();
+    for host_entry in std::fs::read_dir(&repos_root)
+        .with_context(|| format!("failed to read index repositories {}", repos_root.display()))?
+    {
+        let host_entry = host_entry?;
+        if !host_entry.file_type()?.is_dir() {
+            continue;
+        }
+        let host = host_entry.file_name().to_string_lossy().to_string();
+        if host != "github.com" {
+            continue;
+        }
+
+        for owner_entry in std::fs::read_dir(host_entry.path()).with_context(|| {
+            format!(
+                "failed to read repository owner directory {}",
+                host_entry.path().display()
+            )
+        })? {
+            let owner_entry = owner_entry?;
+            if !owner_entry.file_type()?.is_dir() {
+                continue;
+            }
+            let owner = owner_entry.file_name().to_string_lossy().to_string();
+
+            for repo_entry in std::fs::read_dir(owner_entry.path()).with_context(|| {
+                format!(
+                    "failed to read repository directory {}",
+                    owner_entry.path().display()
+                )
+            })? {
+                let repo_entry = repo_entry?;
+                if !repo_entry.file_type()?.is_dir() {
+                    continue;
+                }
+                let repo = repo_entry.file_name().to_string_lossy().to_string();
+                let repo_root = repo_entry.path();
+                if !repo_root.join("record.toml").is_file() {
+                    continue;
+                }
+
+                let manifest = load_manifest_from_root(&repo_root).with_context(|| {
+                    format!(
+                        "failed to load repository manifest for refresh planning {}",
+                        repo_root.display()
+                    )
+                })?;
+                let github = github_record_extension(&manifest).with_context(|| {
+                    format!(
+                        "failed to parse GitHub metadata for refresh planning {}",
+                        repo_root.display()
+                    )
+                })?;
+                let synthesis = if repo_root.join("synthesis.toml").is_file() {
+                    Some(load_synthesis_from_root(&repo_root).with_context(|| {
+                        format!(
+                            "failed to load synthesis document for refresh planning {}",
+                            repo_root.display()
+                        )
+                    })?)
+                } else {
+                    None
+                };
+
+                repositories.push(CrawlStateRecord {
+                    repository: RepositoryRef {
+                        host: host.clone(),
+                        owner: owner.clone(),
+                        repo,
+                    },
+                    default_branch: github.default_branch,
+                    head_sha: github.head_sha,
+                    last_factual_crawl_at: manifest.record.generated_at.clone(),
+                    last_synthesis_success_at: synthesis
+                        .as_ref()
+                        .map(|document| document.synthesis.generated_at.clone()),
+                    last_synthesis_failure: None,
+                    synthesis_model: synthesis
+                        .as_ref()
+                        .map(|document| document.synthesis.model.clone()),
+                });
+            }
+        }
+    }
+
+    repositories.sort_by(|left, right| {
+        (
+            left.repository.host.as_str(),
+            left.repository.owner.as_str(),
+            left.repository.repo.as_str(),
+        )
+            .cmp(&(
+                right.repository.host.as_str(),
+                right.repository.owner.as_str(),
+                right.repository.repo.as_str(),
+            ))
+    });
+
+    Ok(CrawlerStateSnapshot { repositories })
+}
+
+fn github_record_extension(manifest: &Manifest) -> Result<GitHubRecordExtension> {
+    let Some(value) = manifest.x.get("github") else {
+        return Ok(GitHubRecordExtension::default());
+    };
+
+    value
+        .clone()
+        .try_into()
+        .map_err(|err| anyhow!("invalid [x.github] extension: {err}"))
+}
+
+fn refresh_plan_state_source_label(source: RefreshPlanStateSource) -> &'static str {
+    match source {
+        RefreshPlanStateSource::CrawlerState => "crawler state",
+        RefreshPlanStateSource::IndexRecords => "committed index records",
+    }
 }
 
 fn upsert_state_record(state: &mut CrawlerStateSnapshot, record: CrawlStateRecord) {
@@ -1502,6 +1665,83 @@ https://github.com/tokio-rs/tokio
             }
             _ => panic!("expected refresh-plan command"),
         }
+    }
+
+    #[test]
+    fn refresh_plan_falls_back_to_committed_index_records_when_state_is_empty() {
+        let root = temp_dir("refresh-plan-fallback");
+        let index_root = root.join("index");
+        let repo_root = index_root.join("repos/github.com/example/orbit");
+        std::fs::create_dir_all(&repo_root).expect("repo root created");
+        std::fs::write(
+            repo_root.join("record.toml"),
+            r#"schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/orbit"
+generated_at = "2026-03-20T05:00:23Z"
+
+[repo]
+name = "orbit"
+description = "Example repository"
+
+[x.github]
+default_branch = "main"
+head_sha = "abc123"
+"#,
+        )
+        .expect("record written");
+        std::fs::write(
+            repo_root.join("synthesis.toml"),
+            r#"schema = "dotrepo-synthesis/v0"
+
+[synthesis]
+generated_at = "2026-03-20T05:10:00Z"
+source_commit = "abc123"
+model = "gpt-5.4"
+provider = "openai"
+mode = "generated"
+
+[synthesis.architecture]
+summary = "Example architecture"
+
+[synthesis.for_agents]
+how_to_build = "cargo build"
+how_to_test = "cargo test"
+how_to_contribute = "Open a PR"
+"#,
+        )
+        .expect("synthesis written");
+
+        let state_path = index_root.join(".crawler-state.toml");
+        let (state, source) = load_refresh_state_for_plan(&state_path).expect("state loads");
+
+        assert_eq!(source, RefreshPlanStateSource::IndexRecords);
+        assert_eq!(state.repositories.len(), 1);
+        let record = &state.repositories[0];
+        assert_eq!(
+            record.repository,
+            RepositoryRef {
+                host: "github.com".into(),
+                owner: "example".into(),
+                repo: "orbit".into(),
+            }
+        );
+        assert_eq!(record.default_branch.as_deref(), Some("main"));
+        assert_eq!(record.head_sha.as_deref(), Some("abc123"));
+        assert_eq!(
+            record.last_factual_crawl_at.as_deref(),
+            Some("2026-03-20T05:00:23Z")
+        );
+        assert_eq!(
+            record.last_synthesis_success_at.as_deref(),
+            Some("2026-03-20T05:10:00Z")
+        );
+        assert_eq!(record.synthesis_model.as_deref(), Some("gpt-5.4"));
+
+        std::fs::remove_dir_all(root).expect("temp dir removed");
     }
 
     #[test]

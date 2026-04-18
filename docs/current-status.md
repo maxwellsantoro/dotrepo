@@ -66,6 +66,15 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Scheduled weekly candidate-seeding and head-aware refresh-review workflows
   that emit batch-aware reviewer-facing artifacts for tranche growth and factual
   refresh planning
+- Refresh planning now falls back to committed `index/repos/**` records and
+  synthesis metadata when `index/.crawler-state.toml` is absent on GitHub,
+  so CI can still compute tracked refresh batches
+- Manual selected-batch draft-PR workflows for both seed and refresh batches,
+  so reviewers can take one batch artifact and turn it into a draft change set
+  without rebuilding that glue locally
+- Optional guarded auto-draft-PR paths in the scheduled seed-review and
+  refresh-review workflows, so one top batch can be turned into a draft PR when
+  explicitly enabled by workflow input or repository variable
 - A homepage lookup input and visible progress counters for reviewed repo count,
   tranche progress, language mix, and accepted maintainer-claim examples
 - A checked-in public API compatibility manifest and test for the current `v0`
@@ -79,8 +88,8 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   origin
 - A seed index broad enough across languages to make dotrepo a likely first
   check for arbitrary public repositories
-- Draft-PR batching and bounded refresh execution on top of the scheduled seed
-  and refresh review workflows
+- Fully unattended scheduled draft-PR creation and bounded refresh execution on
+  top of the scheduled seed and refresh review workflows
 - Bundle mode or first-class workspace/relations support
 - Arbitrary prose round-tripping or automatic conversion of unmanaged files into
   managed-region files

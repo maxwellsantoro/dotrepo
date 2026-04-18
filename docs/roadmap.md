@@ -47,9 +47,9 @@ and deferrals that drove that release bar.
    The current target is a first tranche of 50 reviewed high-signal repos across
    Rust, TypeScript, Python, and Go. The concrete target list now lives in
    [`index/tranche-one-targets.md`](../index/tranche-one-targets.md).
-2. Turn the scheduled candidate-seeding and refresh-review loops into small,
-   reviewable execution batches while keeping the hosted lookup path thin and
-   stable.
+2. Exercise and harden the new batch-to-draft-PR workflows for seed and refresh
+   batches, including the newly guarded top-batch auto-PR path in the review
+   workflows.
 3. Keep public-surface, editor, and operator work scoped to the minimal
    hardening needed to support those first two priorities.
 

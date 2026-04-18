@@ -158,7 +158,12 @@ and is intentionally artifact-first but now batch-aware:
 - GitHub step summary via
   [`scripts/render_seed_review_summary.py`](../scripts/render_seed_review_summary.py)
 
-Draft-PR creation remains follow-on work once the report cadence is stable.
+Manual draft-PR creation now exists as a separate workflow in
+[`index-seed-batch-pr.yml`](../.github/workflows/index-seed-batch-pr.yml),
+which regenerates one selected batch, applies it, validates the index, and
+opens a draft PR. The review workflow can now also optionally open one draft PR
+for the first eligible batch when explicitly enabled by dispatch input or a
+repository variable. Broad scheduled PR opening remains follow-on work.
 
 ### Refresh loop
 
@@ -176,6 +181,9 @@ The first implementation of that loop now lives in
 and is head-aware rather than discovery-only:
 
 - it reads [`index/.crawler-state.toml`](../index/.crawler-state.toml)
+- if that crawler-state file is absent or empty on CI, it reconstructs tracked
+  refresh state from committed `index/repos/**` records and any checked-in
+  `synthesis.toml` files
 - it fetches current GitHub default-branch heads for tracked repositories via
   `dotrepo-crawler refresh-plan`
 - it emits `refresh-plan.json` plus a reviewer-facing
@@ -186,8 +194,12 @@ and is head-aware rather than discovery-only:
 - it publishes a GitHub step summary via
   [`scripts/render_refresh_plan_summary.py`](../scripts/render_refresh_plan_summary.py)
 
-Automatic crawl execution remains follow-on work. The current workflow only
-plans and reports refresh work.
+Manual refresh execution now exists as a separate workflow in
+[`index-refresh-batch-pr.yml`](../.github/workflows/index-refresh-batch-pr.yml),
+which regenerates one selected refresh batch, applies factual crawl writeback
+for those repositories, validates the index, and opens a draft PR. The review
+workflow can now also optionally open one top-batch draft PR when explicitly
+enabled. Broad scheduled refresh execution remains follow-on work.
 
 ### State and reporting
 
@@ -276,12 +288,14 @@ Exit bar:
 
 ## Immediate Next Actions
 
-1. Turn weekly `seed-batches` artifacts into actual draft-PR or patch batches
-   that are ready for human review.
-2. Turn `refresh-batches` artifacts into bounded factual refresh execution
-   batches, still keeping merge control human.
-3. Use those two loops to move from the current 15 reviewed repositories toward
-   the 25-repository milestone without losing language mix discipline.
+1. Exercise the new seed-batch and refresh-batch draft-PR workflows on GitHub,
+   including the guarded auto-PR mode, and tighten any rough edges in their
+   branch, commit, or PR defaults.
+2. Decide whether the current guarded top-batch auto-PR mode is sufficient or
+   whether broader scheduled PR opening is actually desirable, still keeping
+   merge control human.
+3. Use those execution paths to move from the current 15 reviewed repositories
+   toward the 25-repository milestone without losing language mix discipline.
 4. Add at least one more independently reviewed accepted maintainer-claim
    example to reduce the current single-example gap.
 5. Keep deploy coherence smoke and homepage lookup stable as contract surfaces
