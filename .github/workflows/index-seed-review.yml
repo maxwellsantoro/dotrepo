@@ -34,7 +34,7 @@ jobs:
   candidate-seed-review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Resolve workflow inputs
@@ -115,7 +115,7 @@ jobs:
           fi
       - name: Upload candidate seed review artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: index-seed-review
           path: index-seed-review/
@@ -137,7 +137,7 @@ jobs:
             selected="true"
             batch_id="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(data["batch"]["id"])' index-seed-review/selected-batch.json)"
             repo_count="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(data["batch"]["repositoryCount"])' index-seed-review/selected-batch.json)"
-            title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(f"chore(index): {data[\"batch\"][\"suggestedPrTitle\"]}")' index-seed-review/selected-batch.json)"
+            title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print("chore(index): {}".format(data["batch"]["suggestedPrTitle"]))' index-seed-review/selected-batch.json)"
             branch="automation/index-seed-review/$batch_id-${{ github.run_id }}"
             echo "batch_id=$batch_id" >> "$GITHUB_OUTPUT"
             echo "repo_count=$repo_count" >> "$GITHUB_OUTPUT"
@@ -195,7 +195,7 @@ jobs:
             index/**
       - name: Upload seed auto-PR execution artifacts
         if: always() && steps.auto_batch.outputs.selected == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: index-seed-review-auto-pr
           path: index-seed-review/

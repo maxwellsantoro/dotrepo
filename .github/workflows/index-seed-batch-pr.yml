@@ -31,7 +31,7 @@ jobs:
   apply-seed-batch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Resolve workflow inputs
@@ -79,7 +79,7 @@ jobs:
             --output-targets index-seed-batch/selected-targets.txt \
             --output-metadata index-seed-batch/selected-batch.json
           repo_count="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(data["batch"]["repositoryCount"])' index-seed-batch/selected-batch.json)"
-          title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(f"chore(index): {data[\"batch\"][\"suggestedPrTitle\"]}")' index-seed-batch/selected-batch.json)"
+          title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print("chore(index): {}".format(data["batch"]["suggestedPrTitle"]))' index-seed-batch/selected-batch.json)"
           branch="automation/index-seed/${{ github.event.inputs.batch_id }}-${{ github.run_id }}"
           echo "repo_count=$repo_count" >> "$GITHUB_OUTPUT"
           echo "title=$title" >> "$GITHUB_OUTPUT"
@@ -103,7 +103,7 @@ jobs:
         run: cargo run -p dotrepo-cli -- validate-index
       - name: Upload seed batch artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: index-seed-batch-${{ github.event.inputs.batch_id }}
           path: index-seed-batch/

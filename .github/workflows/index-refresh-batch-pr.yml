@@ -31,7 +31,7 @@ jobs:
   apply-refresh-batch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Resolve workflow inputs
@@ -75,7 +75,7 @@ jobs:
             --batch-id "${{ github.event.inputs.batch_id }}" \
             --output-targets index-refresh-batch/selected-targets.txt \
             --output-metadata index-refresh-batch/selected-batch.json
-          title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(f"chore(index): {data[\"batch\"][\"suggestedPrTitle\"]}")' index-refresh-batch/selected-batch.json)"
+          title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print("chore(index): {}".format(data["batch"]["suggestedPrTitle"]))' index-refresh-batch/selected-batch.json)"
           branch="automation/index-refresh/${{ github.event.inputs.batch_id }}-${{ github.run_id }}"
           echo "title=$title" >> "$GITHUB_OUTPUT"
           echo "branch=$branch" >> "$GITHUB_OUTPUT"
@@ -107,7 +107,7 @@ jobs:
         run: cargo run -p dotrepo-cli -- validate-index
       - name: Upload refresh batch artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: index-refresh-batch-${{ github.event.inputs.batch_id }}
           path: index-refresh-batch/

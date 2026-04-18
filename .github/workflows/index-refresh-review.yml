@@ -34,7 +34,7 @@ jobs:
   refresh-review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Resolve workflow inputs
@@ -119,7 +119,7 @@ jobs:
           fi
       - name: Upload refresh review artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: index-refresh-review
           path: index-refresh-review/
@@ -138,7 +138,7 @@ jobs:
             --output-metadata index-refresh-review/selected-batch.json; then
             selected="true"
             batch_id="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(data["batch"]["id"])' index-refresh-review/selected-batch.json)"
-            title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(f"chore(index): {data[\"batch\"][\"suggestedPrTitle\"]}")' index-refresh-review/selected-batch.json)"
+            title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print("chore(index): {}".format(data["batch"]["suggestedPrTitle"]))' index-refresh-review/selected-batch.json)"
             branch="automation/index-refresh-review/$batch_id-${{ github.run_id }}"
             echo "batch_id=$batch_id" >> "$GITHUB_OUTPUT"
             echo "title=$title" >> "$GITHUB_OUTPUT"
@@ -204,7 +204,7 @@ jobs:
             index/**
       - name: Upload refresh auto-PR execution artifacts
         if: always() && steps.auto_batch.outputs.selected == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: index-refresh-review-auto-pr
           path: index-refresh-review/
