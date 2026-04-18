@@ -6,6 +6,7 @@ use std::collections::HashSet;
 const DEFAULT_MIN_STARS: u64 = 1;
 const SEARCH_PAGE_SIZE: usize = 100;
 const MAX_SEARCH_PAGES_PER_BAND: usize = 10;
+const MAX_SEED_LIMIT: usize = 1_000;
 
 pub(crate) fn seed_repositories_impl(
     request: &SeedRepositoriesRequest,
@@ -93,6 +94,13 @@ fn validate_seed_request(request: &SeedRepositoriesRequest) -> Result<()> {
     }
     if request.host.trim() != "github.com" {
         bail!("seed_repositories currently supports github.com only");
+    }
+    if request.limit > MAX_SEED_LIMIT {
+        bail!(
+            "seed_repositories limit {} exceeds max {}",
+            request.limit,
+            MAX_SEED_LIMIT
+        );
     }
 
     for band in &request.star_bands {
@@ -282,5 +290,25 @@ mod tests {
 
         assert_eq!(report.discovered.len(), 1);
         assert_eq!(report.discovered[0].repository.repo, "fresh");
+    }
+
+    #[test]
+    fn seed_repositories_rejects_limits_above_maximum() {
+        let client = FakeDiscoveryClient::new(BTreeMap::new());
+        let err = seed_repositories_with_client(
+            &SeedRepositoriesRequest {
+                host: "github.com".into(),
+                limit: MAX_SEED_LIMIT + 1,
+                star_bands: Vec::new(),
+                include_archived: false,
+                include_forks: false,
+            },
+            &client,
+        )
+        .expect_err("oversized limit rejected");
+
+        assert!(err
+            .to_string()
+            .contains("exceeds max"));
     }
 }

@@ -11,6 +11,8 @@ use serde::Deserialize;
 use serde_json::{json, to_value, Value};
 use std::fs;
 use std::io::{self, BufReader};
+use std::fs::OpenOptions;
+use std::io::{ErrorKind, Write};
 use std::path::{Path, PathBuf};
 
 const JSONRPC_VERSION: &str = "2.0";
@@ -271,25 +273,38 @@ fn write_import_plan(
         outputs.push((path.clone(), contents.clone()));
     }
 
-    for (path, _) in &outputs {
-        if path.exists() && !force {
-            bail!(
-                "{} already exists; rerun with force=true to overwrite imported artifacts",
-                path.display()
-            );
-        }
-    }
-
     let mut written_paths = Vec::new();
     for (path, contents) in outputs {
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
-        }
-        fs::write(&path, contents)?;
+        write_import_output(&path, &contents, force)?;
         written_paths.push(display_path(root, &path));
     }
 
     Ok(written_paths)
+}
+
+fn write_import_output(path: &Path, contents: &str, force: bool) -> Result<()> {
+    if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+
+    if force {
+        fs::write(path, contents)?;
+        return Ok(());
+    }
+
+    let mut file = OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(path)
+        .map_err(|err| match err.kind() {
+            ErrorKind::AlreadyExists => anyhow!(
+                "{} already exists; rerun with force=true to overwrite imported artifacts",
+                path.display()
+            ),
+            _ => err.into(),
+        })?;
+    file.write_all(contents.as_bytes())?;
+    Ok(())
 }
 
 fn resolve_root(arguments: &Value) -> PathBuf {
@@ -704,6 +719,20 @@ description = "Missing source and trust"
             .as_str()
             .expect("error string")
             .contains("already exists"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn write_import_output_refuses_to_clobber_existing_file_without_force() {
+        let root = temp_dir("import-write-helper");
+        let path = root.join(".repo");
+        fs::write(&path, "existing\n").expect("existing file written");
+
+        let err = write_import_output(&path, "replacement\n", false)
+            .expect_err("existing file should be preserved");
+        assert!(err.to_string().contains("already exists"));
+        assert_eq!(fs::read_to_string(&path).expect("file readable"), "existing\n");
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

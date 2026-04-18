@@ -2,6 +2,8 @@ use anyhow::{anyhow, bail, Context, Result};
 use serde::Serialize;
 use std::io::{BufRead, Write};
 
+const MAX_JSONRPC_MESSAGE_BYTES: usize = 8 * 1024 * 1024;
+
 pub fn read_jsonrpc_message(reader: &mut impl BufRead) -> Result<Option<Vec<u8>>> {
     let mut content_length = None;
     let mut saw_header = false;
@@ -33,6 +35,13 @@ pub fn read_jsonrpc_message(reader: &mut impl BufRead) -> Result<Option<Vec<u8>>
     }
 
     let length = content_length.ok_or_else(|| anyhow!("missing Content-Length header"))?;
+    if length > MAX_JSONRPC_MESSAGE_BYTES {
+        bail!(
+            "Content-Length {} exceeds max frame size {}",
+            length,
+            MAX_JSONRPC_MESSAGE_BYTES
+        );
+    }
     let mut payload = vec![0; length];
     reader
         .read_exact(&mut payload)
@@ -104,5 +113,15 @@ mod tests {
         assert!(err
             .to_string()
             .contains("unexpected EOF while reading stdio body"));
+    }
+
+    #[test]
+    fn read_jsonrpc_message_rejects_oversized_content_length() {
+        let oversized = MAX_JSONRPC_MESSAGE_BYTES + 1;
+        let mut reader = BufReader::new(Cursor::new(
+            format!("Content-Length: {oversized}\r\n\r\n").into_bytes(),
+        ));
+        let err = read_jsonrpc_message(&mut reader).expect_err("oversized body rejected");
+        assert!(err.to_string().contains("exceeds max frame size"));
     }
 }

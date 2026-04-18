@@ -18,6 +18,8 @@ use dotrepo_schema::{RecordMode, Trust};
 use serde::Serialize;
 use serde_json::Value;
 use std::fs;
+use std::fs::OpenOptions;
+use std::io::{ErrorKind, Write};
 use std::path::PathBuf;
 use std::process;
 use thiserror::Error;
@@ -501,20 +503,8 @@ fn cmd_import(
         outputs.push((path.clone(), contents.clone()));
     }
 
-    for (path, _) in &outputs {
-        if path.exists() && !force {
-            bail!(
-                "{} already exists; rerun with --force to overwrite imported artifacts",
-                path.display()
-            );
-        }
-    }
-
     for (path, contents) in outputs {
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
-        }
-        fs::write(&path, contents)?;
+        write_import_output(&path, &contents, force)?;
         println!("imported {}", path.display());
     }
 
@@ -527,6 +517,31 @@ fn cmd_import(
     println!("- mode: {:?}", plan.manifest.record.mode);
     println!("- status: {:?}", plan.manifest.record.status);
 
+    Ok(())
+}
+
+fn write_import_output(path: &PathBuf, contents: &str, force: bool) -> Result<()> {
+    if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+
+    if force {
+        fs::write(path, contents)?;
+        return Ok(());
+    }
+
+    let mut file = OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(path)
+        .map_err(|err| match err.kind() {
+            ErrorKind::AlreadyExists => anyhow::anyhow!(
+                "{} already exists; rerun with --force to overwrite imported artifacts",
+                path.display()
+            ),
+            _ => err.into(),
+        })?;
+    file.write_all(contents.as_bytes())?;
     Ok(())
 }
 
@@ -2054,6 +2069,20 @@ homepage = "https://github.com/example/project"
         );
         assert_eq!(manifest.repo.name, "Example Project");
         assert!(root.join("evidence.md").exists());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn write_import_output_refuses_to_clobber_existing_file_without_force() {
+        let root = temp_dir("import-output-no-force");
+        let path = root.join(".repo");
+        fs::write(&path, "existing\n").expect("existing file written");
+
+        let err = write_import_output(&path, "replacement\n", false)
+            .expect_err("existing file should be preserved");
+        assert!(err.to_string().contains("already exists"));
+        assert_eq!(fs::read_to_string(&path).expect("file readable"), "existing\n");
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

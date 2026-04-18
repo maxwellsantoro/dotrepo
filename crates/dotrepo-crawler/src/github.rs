@@ -8,6 +8,7 @@ use serde::de::DeserializeOwned;
 use serde::Deserialize;
 use std::collections::BTreeMap;
 use std::path::PathBuf;
+use std::time::Duration;
 
 const GITHUB_API_VERSION: &str = "2022-11-28";
 const README_CANDIDATES: &[&str] = &[
@@ -21,6 +22,8 @@ const README_CANDIDATES: &[&str] = &[
 const SUPPLEMENTAL_ROOT_FILES: &[&str] =
     &["Cargo.toml", "package.json", "pyproject.toml", "go.mod"];
 const MAX_WORKFLOW_FILES: usize = 8;
+const GITHUB_HTTP_TIMEOUT: Duration = Duration::from_secs(30);
+const GITHUB_HTTP_CONNECT_TIMEOUT: Duration = Duration::from_secs(10);
 
 pub(crate) trait GitHubClient {
     fn fetch_repository_snapshot(
@@ -76,10 +79,7 @@ impl HttpGitHubClient {
             );
         }
 
-        let client = Client::builder()
-            .default_headers(headers)
-            .build()
-            .context("failed to build GitHub HTTP client")?;
+        let client = build_http_client(headers)?;
 
         Ok(Self {
             client,
@@ -285,6 +285,15 @@ impl HttpGitHubClient {
         }
         Ok(files)
     }
+}
+
+fn build_http_client(headers: HeaderMap) -> Result<Client> {
+    Client::builder()
+        .default_headers(headers)
+        .connect_timeout(GITHUB_HTTP_CONNECT_TIMEOUT)
+        .timeout(GITHUB_HTTP_TIMEOUT)
+        .build()
+        .context("failed to build GitHub HTTP client")
 }
 
 impl GitHubClient for HttpGitHubClient {
@@ -539,4 +548,63 @@ struct ContentsEntry {
     #[serde(rename = "type")]
     entry_type: String,
     path: String,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::io::{Read, Write};
+    use std::net::TcpListener;
+    use std::thread;
+    use std::time::{Duration, Instant};
+
+    #[test]
+    fn http_client_times_out_hung_requests() {
+        let listener = TcpListener::bind("127.0.0.1:0").expect("listener binds");
+        let address = listener.local_addr().expect("listener address");
+        let handle = thread::spawn(move || {
+            let (mut stream, _) = listener.accept().expect("client connects");
+            let mut request = [0_u8; 1024];
+            let _ = stream.read(&mut request);
+            thread::sleep(Duration::from_millis(250));
+            let _ = stream.write_all(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\n{}");
+        });
+
+        let client = Client::builder()
+            .timeout(Duration::from_millis(50))
+            .build()
+            .expect("client builds");
+        let url = Url::parse(&format!("http://{address}/repos/example/project")).expect("URL parses");
+
+        let start = Instant::now();
+        let err = client
+            .get(url.clone())
+            .send()
+            .with_context(|| format!("failed to GET {}", url.as_str()))
+            .expect_err("hung request should time out");
+        let elapsed = start.elapsed();
+
+        assert!(elapsed < Duration::from_secs(1));
+        assert!(err.to_string().contains("failed to GET"));
+
+        handle.join().expect("server thread completes");
+    }
+
+    #[test]
+    fn build_http_client_applies_timeouts_and_headers() {
+        let mut headers = HeaderMap::new();
+        headers.insert(USER_AGENT, HeaderValue::from_static("dotrepo-test"));
+        let client = build_http_client(headers).expect("client builds");
+
+        let err = client
+            .get("http://127.0.0.1:9/")
+            .send()
+            .expect_err("request should fail quickly");
+        let message = err.to_string().to_ascii_lowercase();
+        assert!(
+            message.contains("connection refused")
+                || message.contains("timed out")
+                || message.contains("error sending request")
+        );
+    }
 }
