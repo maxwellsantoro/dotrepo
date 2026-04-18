@@ -26,12 +26,15 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
-      - name: Install Node.js
-        uses: actions/setup-node@v5
+      - name: Use preinstalled Node.js 20
+        run: bash scripts/use_runner_node20.sh
+      - name: Cache npm tarballs
+        uses: actions/cache@v5
         with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: cloudflare/hosted-query/package-lock.json
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('cloudflare/hosted-query/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - name: Resolve hosted base path
         id: base_path
         shell: bash
@@ -67,13 +70,9 @@ jobs:
             --output cloudflare/hosted-query/public-snapshot
       - name: Install Worker dependencies
         working-directory: cloudflare/hosted-query
-        env:
-          npm_config_cache: ${{ runner.temp }}/npm-cache
         run: npm ci
       - name: Run Worker tests
         working-directory: cloudflare/hosted-query
-        env:
-          npm_config_cache: ${{ runner.temp }}/npm-cache
         run: npm test
       - name: Resolve smoke origin
         id: smoke_origin
@@ -86,7 +85,6 @@ jobs:
         working-directory: cloudflare/hosted-query
         shell: bash
         env:
-          npm_config_cache: ${{ runner.temp }}/npm-cache
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |

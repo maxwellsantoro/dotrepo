@@ -459,7 +459,6 @@ def main() -> int:
     public_bundle_dir = output_root / "public-bundle"
     release_bundle_dir = output_root / "release-bundle"
     vsix_dir = output_root / "vsix"
-    npm_cache_dir = output_root / "npm-cache"
     worker_dir = repo_root / "cloudflare" / "hosted-query"
     worker_snapshot_dir = worker_dir / "public-snapshot"
 
@@ -468,7 +467,6 @@ def main() -> int:
     public_bundle_dir.mkdir(parents=True, exist_ok=True)
     release_bundle_dir.mkdir(parents=True, exist_ok=True)
     vsix_dir.mkdir(parents=True, exist_ok=True)
-    npm_cache_dir.mkdir(parents=True, exist_ok=True)
 
     run(["cargo", "run", "-p", "dotrepo-cli", "--", "validate-index"], cwd=repo_root)
     run(
@@ -538,10 +536,9 @@ def main() -> int:
         ],
         cwd=repo_root,
     )
-    npm_env = {"npm_config_cache": str(npm_cache_dir)}
-    run(["npm", "ci"], cwd=worker_dir, env=npm_env)
-    run(["npm", "test"], cwd=worker_dir, env=npm_env)
-    run(["npm", "run", "deploy:dry-run"], cwd=worker_dir, env=npm_env)
+    run(["npm", "ci"], cwd=worker_dir)
+    run(["npm", "test"], cwd=worker_dir)
+    run(["npm", "run", "deploy:dry-run"], cwd=worker_dir)
 
     release_bundle = None
     release_checksum = None
@@ -580,8 +577,8 @@ def main() -> int:
 
     vsix_path = None
     if not args.skip_vsix:
-        run(["npm", "ci"], cwd=repo_root / "editors" / "vscode", env=npm_env)
-        run(["npm", "run", "build"], cwd=repo_root / "editors" / "vscode", env=npm_env)
+        run(["npm", "ci"], cwd=repo_root / "editors" / "vscode")
+        run(["npm", "run", "build"], cwd=repo_root / "editors" / "vscode")
         extension_version_value = extension_version(repo_root)
         vsix_path = vsix_dir / f"dotrepo-vscode-v{extension_version_value}.vsix"
         run(
@@ -590,11 +587,10 @@ def main() -> int:
                 "run",
                 "package:vsix",
                 "--",
-                "--out",
+                "--output",
                 str(vsix_path),
             ],
             cwd=repo_root / "editors" / "vscode",
-            env=npm_env,
         )
 
     verify_public_meta(public_dir, args.base_path)

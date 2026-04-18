@@ -22,12 +22,19 @@
     "type": "git",
     "url": "https://github.com/maxwellsantoro/dotrepo"
   },
+  "bugs": {
+    "url": "https://github.com/maxwellsantoro/dotrepo/issues"
+  },
+  "homepage": "https://github.com/maxwellsantoro/dotrepo#readme",
   "scripts": {
     "build": "esbuild extension.js --bundle --platform=node --format=cjs --external:vscode --minify --outfile=dist/extension.js",
-    "package": "npm run build && npm run package:vsix",
-    "package:vsix": "vsce package"
+    "package": "npm run build && npm run package:vsix -- --output dotrepo-vscode.vsix",
+    "package:vsix": "python3 ../../scripts/package_vscode_extension.py --extension-root ."
   },
   "main": "./dist/extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
   "activationEvents": [
     "onLanguage:dotrepo",
     "onLanguage:dotrepo-overlay",
@@ -110,7 +117,6 @@
     }
   },
   "devDependencies": {
-    "@vscode/vsce": "^3.9.1",
     "esbuild": "^0.28.0",
     "vscode-languageclient": "^9.0.1"
   }

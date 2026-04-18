@@ -287,15 +287,16 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
-      - name: Install Node.js
-        uses: actions/setup-node@v5
+      - name: Use preinstalled Node.js 20
+        run: bash scripts/use_runner_node20.sh
+      - name: Cache npm tarballs
+        uses: actions/cache@v5
         with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: cloudflare/hosted-query/package-lock.json
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('cloudflare/hosted-query/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - name: Run lightweight public-surface gate
-        env:
-          npm_config_cache: ${{ runner.temp }}/npm-cache
         run: python3 scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
       - name: Upload static public export artifact
         uses: actions/upload-artifact@v7
@@ -332,17 +333,16 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
-      - name: Install Node.js
-        uses: actions/setup-node@v5
+      - name: Use preinstalled Node.js 20
+        run: bash scripts/use_runner_node20.sh
+      - name: Cache npm tarballs
+        uses: actions/cache@v5
         with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: |
-            cloudflare/hosted-query/package-lock.json
-            editors/vscode/package-lock.json
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('cloudflare/hosted-query/package-lock.json', 'editors/vscode/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - name: Run explicit release-surface gate
-        env:
-          npm_config_cache: ${{ runner.temp }}/npm-cache
         run: python3 scripts/check_release_gate.py --output-root release-gate
       - name: Upload static public export artifact
         uses: actions/upload-artifact@v7

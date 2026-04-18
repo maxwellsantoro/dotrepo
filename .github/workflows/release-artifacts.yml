@@ -61,12 +61,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Install Node.js
-        uses: actions/setup-node@v5
+      - name: Use preinstalled Node.js 20
+        run: bash scripts/use_runner_node20.sh
+      - name: Cache npm tarballs
+        uses: actions/cache@v5
         with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: editors/vscode/package-lock.json
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('editors/vscode/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - name: Install VS Code extension dependencies
         working-directory: editors/vscode
         run: npm ci
@@ -80,11 +83,9 @@ jobs:
           echo "value=$version" >> "$GITHUB_OUTPUT"
       - name: Package VSIX
         working-directory: editors/vscode
-        env:
-          npm_config_cache: ${{ runner.temp }}/npm-cache
         run: |
           mkdir -p ../../dist
-          npm run package:vsix -- --out ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
+          npm run package:vsix -- --output ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
       - name: Upload VSIX artifact
         uses: actions/upload-artifact@v7
         with:
