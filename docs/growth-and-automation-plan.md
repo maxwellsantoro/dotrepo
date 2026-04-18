@@ -181,6 +181,9 @@ The first implementation of that loop now lives in
 and is head-aware rather than discovery-only:
 
 - it reads [`index/.crawler-state.toml`](../index/.crawler-state.toml)
+- if that crawler-state file is absent or empty on CI, it reconstructs tracked
+  refresh state from committed `index/repos/**` records and any checked-in
+  `synthesis.toml` files
 - it fetches current GitHub default-branch heads for tracked repositories via
   `dotrepo-crawler refresh-plan`
 - it emits `refresh-plan.json` plus a reviewer-facing

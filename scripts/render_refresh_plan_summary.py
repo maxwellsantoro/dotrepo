@@ -81,6 +81,7 @@ def main() -> int:
         "# Index Refresh Review",
         "",
         f"- state path: `{report.get('statePath', 'unknown')}`",
+        f"- state source: `{report.get('stateSource', 'unknown')}`",
         f"- tracked repositories: {report.get('trackedRepositories', 0)}",
         f"- fetched candidates: {report.get('candidateCount', 0)}",
         f"- scheduled refreshes: {len(scheduled)}",
