@@ -1,0 +1,122 @@
+name: index-seed-batch-pr
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch_id:
+        description: Batch identifier from seed-batches.json
+        required: true
+      limit:
+        description: Maximum tranche targets to inspect while regenerating the selected batch
+        required: false
+        default: "5"
+      batch_size:
+        description: Maximum repositories per seed batch when regenerating the plan
+        required: false
+        default: "3"
+      targets_file:
+        description: Repository target list to seed against
+        required: false
+        default: index/tranche-one-targets.txt
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: index-seed-batch-pr-${{ github.event.inputs.batch_id }}
+  cancel-in-progress: false
+
+jobs:
+  apply-seed-batch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Resolve workflow inputs
+        id: inputs
+        shell: bash
+        run: |
+          limit="${{ github.event.inputs.limit }}"
+          batch_size="${{ github.event.inputs.batch_size }}"
+          targets_file="${{ github.event.inputs.targets_file }}"
+          if [ -z "$limit" ]; then
+            limit="5"
+          fi
+          if [ -z "$batch_size" ]; then
+            batch_size="3"
+          fi
+          if [ -z "$targets_file" ]; then
+            targets_file="index/tranche-one-targets.txt"
+          fi
+          echo "limit=$limit" >> "$GITHUB_OUTPUT"
+          echo "batch_size=$batch_size" >> "$GITHUB_OUTPUT"
+          echo "targets_file=$targets_file" >> "$GITHUB_OUTPUT"
+      - name: Regenerate seed review batch plan
+        shell: bash
+        run: |
+          mkdir -p index-seed-batch
+          cargo run -p dotrepo-crawler -- seed \
+            --targets-file "${{ steps.inputs.outputs.targets_file }}" \
+            --limit "${{ steps.inputs.outputs.limit }}" \
+            --dry-run \
+            --review-report-md index-seed-batch/seed-review.md \
+            --json > index-seed-batch/seed-report.json
+          python3 scripts/plan_seed_review_batches.py \
+            --input index-seed-batch/seed-report.json \
+            --batch-size "${{ steps.inputs.outputs.batch_size }}" \
+            --output-json index-seed-batch/seed-batches.json \
+            --output-md index-seed-batch/seed-batches.md
+      - name: Select batch
+        id: batch
+        shell: bash
+        run: |
+          python3 scripts/select_review_batch.py \
+            --input index-seed-batch/seed-batches.json \
+            --batch-id "${{ github.event.inputs.batch_id }}" \
+            --require-no-failed \
+            --output-targets index-seed-batch/selected-targets.txt \
+            --output-metadata index-seed-batch/selected-batch.json
+          repo_count="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(data["batch"]["repositoryCount"])' index-seed-batch/selected-batch.json)"
+          title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(f"chore(index): {data[\"batch\"][\"suggestedPrTitle\"]}")' index-seed-batch/selected-batch.json)"
+          branch="automation/index-seed/${{ github.event.inputs.batch_id }}-${{ github.run_id }}"
+          echo "repo_count=$repo_count" >> "$GITHUB_OUTPUT"
+          echo "title=$title" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+      - name: Render pull request body
+        shell: bash
+        run: |
+          python3 scripts/render_review_batch_pull_request.py \
+            --input index-seed-batch/selected-batch.json \
+            --kind seed \
+            --output index-seed-batch/pr-body.md
+      - name: Apply selected seed batch
+        shell: bash
+        run: |
+          cargo run -p dotrepo-crawler -- seed \
+            --targets-file index-seed-batch/selected-targets.txt \
+            --limit "${{ steps.batch.outputs.repo_count }}" \
+            --review-report-md index-seed-batch/applied-seed-review.md \
+            --json > index-seed-batch/applied-seed-report.json
+      - name: Validate index after writeback
+        run: cargo run -p dotrepo-cli -- validate-index
+      - name: Upload seed batch artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: index-seed-batch-${{ github.event.inputs.batch_id }}
+          path: index-seed-batch/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Create draft pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: ${{ steps.batch.outputs.branch }}
+          title: ${{ steps.batch.outputs.title }}
+          commit-message: ${{ steps.batch.outputs.title }}
+          body-path: index-seed-batch/pr-body.md
+          draft: true
+          delete-branch: true
+          add-paths: |
+            index/**

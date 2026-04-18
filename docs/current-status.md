@@ -66,6 +66,12 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Scheduled weekly candidate-seeding and head-aware refresh-review workflows
   that emit batch-aware reviewer-facing artifacts for tranche growth and factual
   refresh planning
+- Manual selected-batch draft-PR workflows for both seed and refresh batches,
+  so reviewers can take one batch artifact and turn it into a draft change set
+  without rebuilding that glue locally
+- Optional guarded auto-draft-PR paths in the scheduled seed-review and
+  refresh-review workflows, so one top batch can be turned into a draft PR when
+  explicitly enabled by workflow input or repository variable
 - A homepage lookup input and visible progress counters for reviewed repo count,
   tranche progress, language mix, and accepted maintainer-claim examples
 - A checked-in public API compatibility manifest and test for the current `v0`
