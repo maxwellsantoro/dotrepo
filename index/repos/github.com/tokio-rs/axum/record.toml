@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/tokio-rs/axum"
+generated_at = "2026-04-18T19:24:16.844358161Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Left `repo.test` unset because `Cargo.toml` and `.github/workflows/CI.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "axum"
+description = "axum/README.md"
+homepage = "https://github.com/tokio-rs/axum"
+license = "MIT"
+visibility = "public"
+languages = [
+    "HTML",
+    "JavaScript",
+    "Rust",
+]
+build = "cargo build --workspace"
+topics = [
+    "http",
+    "routing",
+    "rust",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tokio-rs/axum.git"
+default_branch = "main"
+fork = false
+head_sha = "309d1bd9530eec2217134cb262760af1df42ee3b"
+html_url = "https://github.com/tokio-rs/axum"
+stars = 25666
