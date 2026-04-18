@@ -336,6 +336,10 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: "20"
+          cache: "npm"
+          cache-dependency-path: |
+            cloudflare/hosted-query/package-lock.json
+            editors/vscode/package-lock.json
       - name: Run explicit release-surface gate
         env:
           npm_config_cache: ${{ runner.temp }}/npm-cache

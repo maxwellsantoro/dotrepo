@@ -70,6 +70,9 @@ jobs:
       - name: Install VS Code extension dependencies
         working-directory: editors/vscode
         run: npm ci
+      - name: Build bundled VS Code extension
+        working-directory: editors/vscode
+        run: npm run build
       - name: Detect VS Code extension version
         id: version
         run: |
@@ -81,7 +84,7 @@ jobs:
           npm_config_cache: ${{ runner.temp }}/npm-cache
         run: |
           mkdir -p ../../dist
-          npx --yes @vscode/vsce package --out ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
+          npm run package:vsix -- --out ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
       - name: Upload VSIX artifact
         uses: actions/upload-artifact@v7
         with:

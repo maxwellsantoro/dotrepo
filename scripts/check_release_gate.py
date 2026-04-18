@@ -581,14 +581,15 @@ def main() -> int:
     vsix_path = None
     if not args.skip_vsix:
         run(["npm", "ci"], cwd=repo_root / "editors" / "vscode", env=npm_env)
+        run(["npm", "run", "build"], cwd=repo_root / "editors" / "vscode", env=npm_env)
         extension_version_value = extension_version(repo_root)
         vsix_path = vsix_dir / f"dotrepo-vscode-v{extension_version_value}.vsix"
         run(
             [
-                "npx",
-                "--yes",
-                "@vscode/vsce",
-                "package",
+                "npm",
+                "run",
+                "package:vsix",
+                "--",
                 "--out",
                 str(vsix_path),
             ],
