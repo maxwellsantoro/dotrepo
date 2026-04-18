@@ -33,6 +33,8 @@ concurrency:
 jobs:
   candidate-seed-review:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust
@@ -83,7 +85,7 @@ jobs:
             --dry-run \
             --review-report-md index-seed-review/seed-review.md \
             --json > index-seed-review/seed-report.json || status=$?
-          if [ -f index-seed-review/seed-report.json ]; then
+          if [ "$status" -eq 0 ] && [ -s index-seed-review/seed-report.json ]; then
             python3 scripts/plan_seed_review_batches.py \
               --input index-seed-review/seed-report.json \
               --batch-size "${{ steps.inputs.outputs.batch_size }}" \
@@ -104,7 +106,7 @@ jobs:
       - name: Publish GitHub summary
         if: always()
         run: |
-          if [ -f index-seed-review/seed-report.json ]; then
+          if [ -s index-seed-review/seed-report.json ]; then
             python3 scripts/render_seed_review_summary.py \
               --input index-seed-review/seed-report.json \
               --batches index-seed-review/seed-batches.json >> "$GITHUB_STEP_SUMMARY"
@@ -182,8 +184,10 @@ jobs:
         if: steps.auto_batch.outputs.selected == 'true'
         run: cargo run -p dotrepo-cli -- validate-index
       - name: Create draft seed auto-PR
+        id: seed_pr
         if: steps.auto_batch.outputs.selected == 'true'
-        uses: peter-evans/create-pull-request@v7
+        continue-on-error: true
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: ${{ steps.auto_batch.outputs.branch }}
           title: ${{ steps.auto_batch.outputs.title }}
@@ -193,6 +197,23 @@ jobs:
           delete-branch: true
           add-paths: |
             index/**
+      - name: Append seed auto-PR result
+        if: steps.auto_batch.outputs.selected == 'true'
+        shell: bash
+        run: |
+          {
+            echo
+            echo "## Auto PR Result"
+            echo
+            if [ "${{ steps.seed_pr.outcome }}" = "success" ] && [ -n "${{ steps.seed_pr.outputs.pull-request-url }}" ]; then
+              echo "- draft PR: ${{ steps.seed_pr.outputs.pull-request-url }}"
+            else
+              echo "- draft PR creation was blocked or failed after branch push"
+              echo "- branch: \`${{ steps.auto_batch.outputs.branch }}\`"
+              echo "- compare URL: https://github.com/${{ github.repository }}/compare/${{ github.ref_name }}...${{ steps.auto_batch.outputs.branch }}?expand=1"
+              echo "- enable 'Allow GitHub Actions to create and approve pull requests' or provide a stronger token if direct PR creation is required"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload seed auto-PR execution artifacts
         if: always() && steps.auto_batch.outputs.selected == 'true'
         uses: actions/upload-artifact@v7

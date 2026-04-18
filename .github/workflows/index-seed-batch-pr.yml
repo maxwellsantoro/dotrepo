@@ -30,6 +30,8 @@ concurrency:
 jobs:
   apply-seed-batch:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v6
       - name: Install Rust
@@ -63,6 +65,10 @@ jobs:
             --dry-run \
             --review-report-md index-seed-batch/seed-review.md \
             --json > index-seed-batch/seed-report.json
+          if [ ! -s index-seed-batch/seed-report.json ]; then
+            echo "seed-report.json was not produced" >&2
+            exit 1
+          fi
           python3 scripts/plan_seed_review_batches.py \
             --input index-seed-batch/seed-report.json \
             --batch-size "${{ steps.inputs.outputs.batch_size }}" \
@@ -110,7 +116,9 @@ jobs:
           if-no-files-found: error
           retention-days: 14
       - name: Create draft pull request
-        uses: peter-evans/create-pull-request@v7
+        id: seed_pr
+        continue-on-error: true
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: ${{ steps.batch.outputs.branch }}
           title: ${{ steps.batch.outputs.title }}
@@ -120,3 +128,19 @@ jobs:
           delete-branch: true
           add-paths: |
             index/**
+      - name: Publish pull request outcome
+        shell: bash
+        run: |
+          {
+            echo "# Index Seed Batch"
+            echo
+            echo "- batch: \`${{ github.event.inputs.batch_id }}\`"
+            if [ "${{ steps.seed_pr.outcome }}" = "success" ] && [ -n "${{ steps.seed_pr.outputs.pull-request-url }}" ]; then
+              echo "- draft PR: ${{ steps.seed_pr.outputs.pull-request-url }}"
+            else
+              echo "- draft PR creation was blocked or failed after branch push"
+              echo "- branch: \`${{ steps.batch.outputs.branch }}\`"
+              echo "- compare URL: https://github.com/${{ github.repository }}/compare/${{ github.ref_name }}...${{ steps.batch.outputs.branch }}?expand=1"
+              echo "- enable 'Allow GitHub Actions to create and approve pull requests' or provide a stronger token if direct PR creation is required"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
