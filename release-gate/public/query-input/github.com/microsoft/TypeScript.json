@@ -1,0 +1,95 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "f20be0c1e21d2eb6bb12e8249c675d64c838ae3c7a2aeae370a18230bd5ac8da",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "TypeScript",
+    "source": "https://github.com/microsoft/TypeScript"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/microsoft/TypeScript/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/microsoft/TypeScript",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/ci.yml`, `.github/workflows/insiders.yaml`, and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/microsoft/TypeScript/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/microsoft/TypeScript",
+        "generated_at": "2026-03-20T03:05:05.024592Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/ci.yml`, `.github/workflows/insiders.yaml`, and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "TypeScript",
+        "description": "TypeScript is a language for application-scale JavaScript. TypeScript adds optional types to JavaScript that support tools for large-scale JavaScript applications for any browser, for any host, on any OS. TypeScript compiles to readable, standards-based JavaScript. Try it out at the playground, and stay up to date via our blog and Twitter account.",
+        "homepage": "https://www.typescriptlang.org",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "JavaScript",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "npm run build",
+        "test": null,
+        "topics": [
+          "typescript",
+          "javascript",
+          "language",
+          "typechecker"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://msrc.microsoft.com/create-report"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/microsoft/TypeScript.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "4f7b4175fe38424fffebb0a20355633bc077d52c",
+          "html_url": "https://github.com/microsoft/TypeScript",
+          "stars": 108217
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

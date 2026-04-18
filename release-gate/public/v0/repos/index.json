@@ -2,10 +2,10 @@
   "apiVersion": "v0",
   "freshness": {
     "generatedAt": "2026-03-10T18:30:00Z",
-    "snapshotDigest": "a0d8dddce221cf8445cd14754caa02d4d96e23f8322c66026f70880a9a9dedaa",
+    "snapshotDigest": "f20be0c1e21d2eb6bb12e8249c675d64c838ae3c7a2aeae370a18230bd5ac8da",
     "staleAfter": "2026-03-11T18:30:00Z"
   },
-  "repositoryCount": 10,
+  "repositoryCount": 15,
   "repositories": [
     {
       "identity": {
@@ -21,6 +21,22 @@
         "trust": "/v0/repos/github.com/BurntSushi/ripgrep/trust.json",
         "queryTemplate": "/v0/repos/github.com/BurntSushi/ripgrep/query?path={dot_path}",
         "indexPath": "repos/github.com/BurntSushi/ripgrep/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "astral-sh",
+        "repo": "uv",
+        "source": "https://github.com/astral-sh/uv"
+      },
+      "name": "uv",
+      "description": "An extremely fast Python package and project manager, written in Rust.",
+      "links": {
+        "self": "/v0/repos/github.com/astral-sh/uv/index.json",
+        "trust": "/v0/repos/github.com/astral-sh/uv/trust.json",
+        "queryTemplate": "/v0/repos/github.com/astral-sh/uv/query?path={dot_path}",
+        "indexPath": "repos/github.com/astral-sh/uv/"
       }
     },
     {
@@ -74,6 +90,38 @@
     {
       "identity": {
         "host": "github.com",
+        "owner": "hashicorp",
+        "repo": "terraform",
+        "source": "https://github.com/hashicorp/terraform"
+      },
+      "name": "Terraform",
+      "description": "Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently. Terraform can manage existing and popular service providers as well as custom in-house solutions.",
+      "links": {
+        "self": "/v0/repos/github.com/hashicorp/terraform/index.json",
+        "trust": "/v0/repos/github.com/hashicorp/terraform/trust.json",
+        "queryTemplate": "/v0/repos/github.com/hashicorp/terraform/query?path={dot_path}",
+        "indexPath": "repos/github.com/hashicorp/terraform/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "helm",
+        "repo": "helm",
+        "source": "https://github.com/helm/helm"
+      },
+      "name": "Helm",
+      "description": "Helm is a tool for managing Charts. Charts are packages of pre-configured Kubernetes resources.",
+      "links": {
+        "self": "/v0/repos/github.com/helm/helm/index.json",
+        "trust": "/v0/repos/github.com/helm/helm/trust.json",
+        "queryTemplate": "/v0/repos/github.com/helm/helm/query?path={dot_path}",
+        "indexPath": "repos/github.com/helm/helm/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
         "owner": "maxwellsantoro",
         "repo": "ries-rs",
         "source": "https://github.com/maxwellsantoro/ries-rs"
@@ -85,6 +133,38 @@
         "trust": "/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json",
         "queryTemplate": "/v0/repos/github.com/maxwellsantoro/ries-rs/query?path={dot_path}",
         "indexPath": "repos/github.com/maxwellsantoro/ries-rs/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "microsoft",
+        "repo": "TypeScript",
+        "source": "https://github.com/microsoft/TypeScript"
+      },
+      "name": "TypeScript",
+      "description": "TypeScript is a language for application-scale JavaScript. TypeScript adds optional types to JavaScript that support tools for large-scale JavaScript applications for any browser, for any host, on any OS. TypeScript compiles to readable, standards-based JavaScript. Try it out at the playground, and stay up to date via our blog and Twitter account.",
+      "links": {
+        "self": "/v0/repos/github.com/microsoft/TypeScript/index.json",
+        "trust": "/v0/repos/github.com/microsoft/TypeScript/trust.json",
+        "queryTemplate": "/v0/repos/github.com/microsoft/TypeScript/query?path={dot_path}",
+        "indexPath": "repos/github.com/microsoft/TypeScript/"
+      }
+    },
+    {
+      "identity": {
+        "host": "github.com",
+        "owner": "pydantic",
+        "repo": "pydantic",
+        "source": "https://github.com/pydantic/pydantic"
+      },
+      "name": "Pydantic",
+      "description": "Data validation using Python type hints.",
+      "links": {
+        "self": "/v0/repos/github.com/pydantic/pydantic/index.json",
+        "trust": "/v0/repos/github.com/pydantic/pydantic/trust.json",
+        "queryTemplate": "/v0/repos/github.com/pydantic/pydantic/query?path={dot_path}",
+        "indexPath": "repos/github.com/pydantic/pydantic/"
       }
     },
     {

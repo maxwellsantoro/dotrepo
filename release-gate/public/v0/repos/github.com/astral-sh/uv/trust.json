@@ -1,0 +1,43 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "f20be0c1e21d2eb6bb12e8249c675d64c838ae3c7a2aeae370a18230bd5ac8da",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "astral-sh",
+    "repo": "uv",
+    "source": "https://github.com/astral-sh/uv"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/astral-sh/uv/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/astral-sh/uv",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Imported from the upstream README, CONTRIBUTING.md, `SECURITY.md`, the organization security policy, `Cargo.toml`, `pyproject.toml`, and CI workflows. `repo.build` follows the dev-binaries workflow command for producing the `uv` and `uvx` binaries. `repo.test` normalizes the contributor guide's nextest recommendation and the CI matrix into a simpler workspace-level default, rather than encoding the full feature and environment matrix. No CODEOWNERS file was present in the crawled snapshot. Not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/astral-sh/uv/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/astral-sh/uv/trust.json",
+    "repository": "/v0/repos/github.com/astral-sh/uv/index.json",
+    "queryTemplate": "/v0/repos/github.com/astral-sh/uv/query?path={dot_path}",
+    "indexPath": "repos/github.com/astral-sh/uv/"
+  }
+}

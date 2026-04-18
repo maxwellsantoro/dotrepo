@@ -68,7 +68,10 @@ For the active seed-index growth program, use
 [`index/tranche-one-targets.md`](tranche-one-targets.md) as the concrete
 candidate list and first-batch execution guide, and
 [`index/tranche-one-targets.txt`](tranche-one-targets.txt) as the machine-readable
-target file for `dotrepo-crawler seed --targets-file`.
+target file for `dotrepo-crawler seed --targets-file`. That seed command can
+also emit an advisory reviewer triage report via
+`--review-report-md <path>`, which helps rank seeded repos against
+[`index/review-checklist.md`](review-checklist.md) before manual promotion.
 For maintainer-claim review, use
 [`docs/maintainer-claim-review-workflow.md`](../docs/maintainer-claim-review-workflow.md)
 as the end-to-end operator loop.
@@ -102,3 +105,19 @@ cargo run -p dotrepo-cli -- validate-index
 
 CI runs the same command in pull requests and in the primary-branch validation
 workflow.
+
+## Crawler seeding
+
+Use the checked-in tranche list when you want deterministic imported-lane batch
+output plus a reviewer-facing triage report:
+
+```bash
+cargo run -p dotrepo-crawler -- seed \
+  --targets-file index/tranche-one-targets.txt \
+  --dry-run \
+  --review-report-md /tmp/dotrepo-seed-review.md
+```
+
+The markdown report is advisory only. It ranks seeded repos for human triage
+priority; it does not change index validity, record trust semantics, or merge
+bar by itself.

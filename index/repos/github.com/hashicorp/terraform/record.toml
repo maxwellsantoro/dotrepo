@@ -1,0 +1,49 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/hashicorp/terraform"
+generated_at = "2026-03-20T04:35:03.123687Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported"]
+notes = "Imported from the upstream README, CONTRIBUTING.md, BUILDING.md, CODEOWNERS, GitHub security overview, and `.go-version`. `repo.build` and `repo.test` follow the documented Terraform CLI/Core development environment. The repo-wide CODEOWNERS default identifies `@hashicorp/terraform-core`, while narrower subtree owners are intentionally not expanded into top-level maintainers. Acceptance tests are optional and external-service-dependent, so `repo.test` stays on the self-contained unit-test suite. Not maintainer-verified."
+
+[repo]
+name = "Terraform"
+description = "Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently. Terraform can manage existing and popular service providers as well as custom in-house solutions."
+homepage = "https://developer.hashicorp.com/terraform"
+license = "BUSL-1.1"
+visibility = "public"
+languages = ["go", "hcl"]
+build = "go install ."
+test = "go test ./..."
+topics = [
+    "graph",
+    "infrastructure-as-code",
+    "terraform",
+    "cloud",
+    "cloud-management",
+]
+
+[owners]
+team = "@hashicorp/terraform-core"
+security_contact = "security@hashicorp.com"
+
+[docs]
+root = "https://developer.hashicorp.com/terraform/docs"
+getting_started = "https://developer.hashicorp.com/terraform/intro"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/hashicorp/terraform.git"
+default_branch = "main"
+fork = false
+head_sha = "2dbb7d9c058f910f769c68fca135d447410a59dc"
+html_url = "https://github.com/hashicorp/terraform"
+stars = 47983

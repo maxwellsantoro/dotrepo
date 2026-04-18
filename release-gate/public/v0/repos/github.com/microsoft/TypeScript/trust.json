@@ -1,0 +1,42 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "f20be0c1e21d2eb6bb12e8249c675d64c838ae3c7a2aeae370a18230bd5ac8da",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "TypeScript",
+    "source": "https://github.com/microsoft/TypeScript"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/microsoft/TypeScript/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/microsoft/TypeScript",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/ci.yml`, `.github/workflows/insiders.yaml`, and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/microsoft/TypeScript/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/microsoft/TypeScript/trust.json",
+    "repository": "/v0/repos/github.com/microsoft/TypeScript/index.json",
+    "queryTemplate": "/v0/repos/github.com/microsoft/TypeScript/query?path={dot_path}",
+    "indexPath": "repos/github.com/microsoft/TypeScript/"
+  }
+}

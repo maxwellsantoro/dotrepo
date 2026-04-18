@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "f20be0c1e21d2eb6bb12e8249c675d64c838ae3c7a2aeae370a18230bd5ac8da",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hashicorp",
+    "repo": "terraform",
+    "source": "https://github.com/hashicorp/terraform"
+  },
+  "repository": {
+    "name": "Terraform",
+    "description": "Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently. Terraform can manage existing and popular service providers as well as custom in-house solutions.",
+    "homepage": "https://developer.hashicorp.com/terraform",
+    "docsRoot": "https://developer.hashicorp.com/terraform/docs",
+    "gettingStarted": "https://developer.hashicorp.com/terraform/intro",
+    "ownersTeam": "@hashicorp/terraform-core",
+    "securityContact": "security@hashicorp.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/hashicorp/terraform/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/hashicorp/terraform",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Imported from the upstream README, CONTRIBUTING.md, BUILDING.md, CODEOWNERS, GitHub security overview, and `.go-version`. `repo.build` and `repo.test` follow the documented Terraform CLI/Core development environment. The repo-wide CODEOWNERS default identifies `@hashicorp/terraform-core`, while narrower subtree owners are intentionally not expanded into top-level maintainers. Acceptance tests are optional and external-service-dependent, so `repo.test` stays on the self-contained unit-test suite. Not maintainer-verified."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/hashicorp/terraform/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/hashicorp/terraform/index.json",
+    "trust": "/v0/repos/github.com/hashicorp/terraform/trust.json",
+    "queryTemplate": "/v0/repos/github.com/hashicorp/terraform/query?path={dot_path}",
+    "indexPath": "repos/github.com/hashicorp/terraform/"
+  }
+}
