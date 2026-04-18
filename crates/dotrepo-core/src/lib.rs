@@ -4042,7 +4042,8 @@ fn normalize_description_line(line: &str) -> Option<String> {
 }
 
 fn normalize_readme_text(line: &str) -> Option<String> {
-    let stripped = replace_common_html_entities(&strip_html_tags(line));
+    let linked = rewrite_markdown_links(line);
+    let stripped = replace_common_html_entities(&strip_html_tags(&linked));
     let collapsed = stripped.split_whitespace().collect::<Vec<_>>().join(" ");
     let cleaned = strip_wrapping_emphasis(collapsed.trim().trim_matches('`').trim());
     if cleaned.is_empty() {
@@ -4177,36 +4178,98 @@ fn parse_readme_docs_signal(line: &str) -> ReadmeDocsMetadata {
 }
 
 fn extract_markdown_links(line: &str) -> Vec<(String, String)> {
-    let bytes = line.as_bytes();
     let mut links = Vec::new();
     let mut idx = 0;
 
-    while idx < bytes.len() {
-        let Some(open_label_rel) = line[idx..].find('[') else {
-            break;
+    while idx < line.len() {
+        let next_idx = match line[idx..].find(['[', '!']) {
+            Some(rel) => idx + rel,
+            None => break,
         };
-        let open_label = idx + open_label_rel;
-        let Some(close_label_rel) = line[open_label + 1..].find("](") else {
-            idx = open_label + 1;
-            continue;
-        };
-        let close_label = open_label + 1 + close_label_rel;
-        let url_start = close_label + 2;
-        let Some(close_url_rel) = line[url_start..].find(')') else {
-            idx = url_start;
-            continue;
-        };
-        let close_url = url_start + close_url_rel;
+        let is_image = line[next_idx..].starts_with("![");
+        let link_start = if is_image { next_idx + 1 } else { next_idx };
 
-        let label = normalize_readme_text(&line[open_label + 1..close_label]);
-        let url = line[url_start..close_url].trim();
-        if let Some(label) = label.filter(|_| !url.is_empty()) {
-            links.push((label, url.to_string()));
+        if let Some((end, label, url)) = parse_markdown_link_at(line, link_start) {
+            if !is_image {
+                if let Some(label) = normalize_readme_text(&label).filter(|_| !url.is_empty()) {
+                    links.push((label, url));
+                }
+            }
+            idx = end;
+            continue;
         }
-        idx = close_url + 1;
+
+        idx = next_idx + 1;
     }
 
     links
+}
+
+fn rewrite_markdown_links(line: &str) -> String {
+    let mut out = String::new();
+    let mut idx = 0;
+
+    while idx < line.len() {
+        let remainder = &line[idx..];
+
+        if remainder.starts_with("![") {
+            if let Some((end, _, _)) = parse_markdown_link_at(line, idx + 1) {
+                idx = end;
+                continue;
+            }
+        }
+
+        if remainder.starts_with('[') {
+            if let Some((end, label, _)) = parse_markdown_link_at(line, idx) {
+                out.push_str(&label);
+                idx = end;
+                continue;
+            }
+        }
+
+        let ch = remainder
+            .chars()
+            .next()
+            .expect("rewrite_markdown_links only advances within non-empty remainder");
+        out.push(ch);
+        idx += ch.len_utf8();
+    }
+
+    out
+}
+
+fn parse_markdown_link_at(line: &str, start: usize) -> Option<(usize, String, String)> {
+    let bytes = line.as_bytes();
+    if bytes.get(start).copied()? != b'[' {
+        return None;
+    }
+
+    let close_label_rel = line[start + 1..].find(']')?;
+    let close_label = start + 1 + close_label_rel;
+    if bytes.get(close_label + 1).copied()? != b'(' {
+        return None;
+    }
+
+    let url_start = close_label + 2;
+    let mut idx = url_start;
+    let mut depth = 1usize;
+    while idx < bytes.len() {
+        match bytes[idx] {
+            b'(' => depth += 1,
+            b')' => {
+                depth -= 1;
+                if depth == 0 {
+                    let label = line[start + 1..close_label].to_string();
+                    let url = line[url_start..idx].trim().to_string();
+                    return Some((idx + 1, label, url));
+                }
+            }
+            _ => {}
+        }
+        idx += 1;
+    }
+
+    None
 }
 
 fn is_probable_readme_nav_line(line: &str) -> bool {
@@ -4381,14 +4444,16 @@ fn parse_security_import_metadata(contents: &str) -> SecurityImportMetadata {
 }
 
 fn find_mailto_or_email(contents: &str) -> Option<String> {
-    for token in contents.split_whitespace() {
-        if let Some(email) = extract_email_candidate(token) {
+    let rewritten = rewrite_markdown_links(contents);
+
+    for destination in security_link_destinations(contents) {
+        if let Some(email) = extract_email_candidate(&destination) {
             return Some(email);
         }
     }
 
-    for destination in security_link_destinations(contents) {
-        if let Some(email) = extract_email_candidate(&destination) {
+    for token in rewritten.split_whitespace() {
+        if let Some(email) = extract_email_candidate(token) {
             return Some(email);
         }
     }
@@ -4397,11 +4462,11 @@ fn find_mailto_or_email(contents: &str) -> Option<String> {
 }
 
 fn find_first_url(contents: &str) -> Option<String> {
-    for token in contents.split_whitespace() {
-        if let Some(url) = extract_url_candidate(token) {
-            return Some(url);
-        }
+    if let Some(url) = find_best_security_url(contents) {
+        return Some(url);
     }
+
+    let rewritten = rewrite_markdown_links(contents);
 
     for destination in security_link_destinations(contents) {
         if let Some(url) = extract_url_candidate(&destination) {
@@ -4409,7 +4474,144 @@ fn find_first_url(contents: &str) -> Option<String> {
         }
     }
 
+    for token in rewritten.split_whitespace() {
+        if let Some(url) = extract_url_candidate(token) {
+            return Some(url);
+        }
+    }
+
     None
+}
+
+fn find_best_security_url(contents: &str) -> Option<String> {
+    let mut current_heading = String::new();
+    let mut best: Option<(i32, String)> = None;
+
+    for line in contents.lines() {
+        let trimmed = line.trim();
+        if trimmed.is_empty() {
+            continue;
+        }
+
+        if let Some(heading) = markdown_heading_text(trimmed) {
+            current_heading = heading;
+            continue;
+        }
+
+        for url in security_urls_in_line(trimmed) {
+            let score = security_reporting_score(&current_heading, trimmed, &url);
+            if score <= 0 {
+                continue;
+            }
+            match &best {
+                Some((best_score, _)) if *best_score >= score => {}
+                _ => best = Some((score, url)),
+            }
+        }
+    }
+
+    best.map(|(_, url)| url)
+}
+
+fn markdown_heading_text(line: &str) -> Option<String> {
+    let trimmed = line.trim_start();
+    let hashes = trimmed.chars().take_while(|ch| *ch == '#').count();
+    if hashes == 0 {
+        return None;
+    }
+
+    let text = trimmed[hashes..].trim();
+    (!text.is_empty()).then(|| text.to_ascii_lowercase())
+}
+
+fn security_urls_in_line(line: &str) -> Vec<String> {
+    let rewritten = rewrite_markdown_links(line);
+    let mut urls = Vec::new();
+
+    for (label, destination) in extract_markdown_links(line) {
+        if let Some(url) = extract_url_candidate(&label) {
+            push_unique(&mut urls, url);
+        }
+        if let Some(url) = extract_url_candidate(&destination) {
+            push_unique(&mut urls, url);
+        }
+    }
+
+    for destination in markdown_reference_destinations(line) {
+        if let Some(url) = extract_url_candidate(&destination) {
+            push_unique(&mut urls, url);
+        }
+    }
+
+    for destination in html_href_destinations(line) {
+        if let Some(url) = extract_url_candidate(&destination) {
+            push_unique(&mut urls, url);
+        }
+    }
+
+    for token in rewritten.split_whitespace() {
+        if let Some(url) = extract_url_candidate(token) {
+            push_unique(&mut urls, url);
+        }
+    }
+
+    urls
+}
+
+fn security_reporting_score(heading: &str, line: &str, url: &str) -> i32 {
+    let heading_lower = heading.to_ascii_lowercase();
+    let line_lower = line.to_ascii_lowercase();
+    let url_lower = url.to_ascii_lowercase();
+    let mut score = 0;
+
+    if heading_lower.contains("report") || heading_lower.contains("disclosure") {
+        score += 6;
+    }
+    if [
+        "report",
+        "contact",
+        "disclosure",
+        "response center",
+        "vulnerability",
+    ]
+    .iter()
+    .any(|needle| line_lower.contains(needle))
+    {
+        score += 4;
+    }
+    if ["report", "create-report", "contact", "submit"]
+        .iter()
+        .any(|needle| url_lower.contains(needle))
+    {
+        score += 3;
+    }
+
+    if [
+        "definition",
+        "faq",
+        "bounty",
+        "policy",
+        "preferred languages",
+    ]
+    .iter()
+    .any(|needle| heading_lower.contains(needle) || line_lower.contains(needle))
+    {
+        score -= 4;
+    }
+    if ["definition", "faq", "bounty", "policy"]
+        .iter()
+        .any(|needle| url_lower.contains(needle))
+    {
+        score -= 3;
+    }
+    if ["aka.ms/", "bit.ly/", "t.co/", "goo.gl/", "tinyurl.com/"]
+        .iter()
+        .any(|needle| url_lower.contains(needle))
+    {
+        score -= 2;
+    }
+
+    score
 }
 
 fn extract_email_candidate(token: &str) -> Option<String> {
@@ -4461,21 +4663,10 @@ fn security_link_destinations(contents: &str) -> Vec<String> {
 }
 
 fn markdown_link_destinations(contents: &str) -> Vec<String> {
-    let mut destinations = Vec::new();
-    let mut rest = contents;
-
-    while let Some(start) = rest.find("](") {
-        let after = &rest[start + 2..];
-        let Some(end) = after.find(')') else {
-            break;
-        };
-        if let Some(destination) = extract_link_destination(&after[..end]) {
-            destinations.push(destination);
-        }
-        rest = &after[end + 1..];
-    }
-
-    destinations
+    extract_markdown_links(contents)
+        .into_iter()
+        .map(|(_, url)| url)
+        .collect()
 }
 
 fn markdown_reference_destinations(contents: &str) -> Vec<String> {
@@ -8885,6 +9076,21 @@ Policy-aware release orchestration for multi-service deploys.
     }
 
     #[test]
+    fn parse_readme_metadata_preserves_unicode_text_around_markdown_links() {
+        let metadata = parse_readme_metadata(
+            r#"# Café
+
+Café sécurité pour les dépôts [guides](./docs/guides.md) et l’équipe.
+"#,
+        );
+        assert_eq!(metadata.title.as_deref(), Some("Café"));
+        assert_eq!(
+            metadata.description.as_deref(),
+            Some("Café sécurité pour les dépôts guides et l’équipe.")
+        );
+    }
+
+    #[test]
     fn import_repository_accepts_readme_variants_and_preserves_their_paths() {
         let root = temp_dir("import-readme-variant");
         fs::write(
@@ -10525,6 +10731,20 @@ pull_request_template = "generate"
             .as_deref(),
             Some("security@example.com")
         );
+        assert_eq!(
+            parse_security_contact(
+                "Please report it to us at [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report).\n",
+            )
+            .as_deref(),
+            Some("https://msrc.microsoft.com/create-report")
+        );
+        assert_eq!(
+            parse_security_contact(
+                "If you believe you have found a security vulnerability that meets [Microsoft's definition of a security vulnerability](https://aka.ms/security.md/definition), please report it to us as described below.\n\n## Reporting Security Issues\nPlease report it to us at [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report).\n",
+            )
+            .as_deref(),
+            Some("https://msrc.microsoft.com/create-report")
+        );
     }
 
     #[test]
@@ -10540,6 +10760,28 @@ pull_request_template = "generate"
         assert!(metadata.note.as_deref().is_some_and(
             |note| note.contains("policy or reporting URL rather than a direct mailbox")
         ));
+    }
+
+    #[test]
+    fn parse_security_contact_prefers_reporting_url_over_redirect_destination() {
+        assert_eq!(
+            parse_security_contact(
+                "Please report vulnerabilities via [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report).\n",
+            )
+            .as_deref(),
+            Some("https://msrc.microsoft.com/create-report")
+        );
+    }
+
+    #[test]
+    fn parse_security_contact_preserves_unicode_context_around_links() {
+        assert_eq!(
+            parse_security_contact(
+                "Pour un signalement sécurité, utilisez [security@example.com](mailto:security@example.com?subject=Rapport%20sécurité).\n",
+            )
+            .as_deref(),
+            Some("security@example.com")
+        );
     }
 
     #[test]

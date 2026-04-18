@@ -6,6 +6,7 @@ use dotrepo_crawler::{
     CrawlStateRecord, CrawlerStateSnapshot, DiscoveredRepository, RefreshCandidate, RepositoryRef,
     ScheduleRefreshRequest, SeedRepositoriesReport, SeedRepositoriesRequest, StarBand,
 };
+use dotrepo_schema::{Manifest, RecordStatus};
 use serde::Serialize;
 use std::collections::HashSet;
 use std::path::{Path, PathBuf};
@@ -112,6 +113,9 @@ struct SeedArgs {
     /// Plan the batch without writing files or crawler state.
     #[arg(long)]
     dry_run: bool,
+    /// Optional markdown path for a reviewer-oriented triage report.
+    #[arg(long)]
+    review_report_md: Option<PathBuf>,
     /// Optional fixed RFC 3339 generated_at timestamp for deterministic output.
     #[arg(long)]
     generated_at: Option<String>,
@@ -159,7 +163,7 @@ struct CrawlCommandReport {
     diagnostics: Vec<CrawlDiagnostic>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
 enum SeedResultStatus {
     Applied,
@@ -177,6 +181,8 @@ struct SeedCommandResult {
     evidence_path: Option<PathBuf>,
     message: Option<String>,
     diagnostics: Vec<CrawlDiagnostic>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    review: Option<SeedReviewAssessment>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -186,6 +192,64 @@ struct SeedCommandReport {
     dry_run: bool,
     state_path: Option<PathBuf>,
     results: Vec<SeedCommandResult>,
+    review: SeedReviewReport,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    review_report_path: Option<PathBuf>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+enum SeedReviewPriority {
+    High,
+    Medium,
+    Low,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct SeedReviewAssessment {
+    repository: RepositoryRef,
+    status: SeedResultStatus,
+    priority: SeedReviewPriority,
+    reasons: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    manifest_path: Option<PathBuf>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    evidence_path: Option<PathBuf>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    record_status: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    build: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    test: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    security_contact: Option<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    inferred_fields: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    warning_codes: Vec<String>,
+}
+
+#[derive(Debug, Clone, Default, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct SeedReviewSummary {
+    actionable: usize,
+    high: usize,
+    medium: usize,
+    low: usize,
+    failed: usize,
+    missing_security_contact: usize,
+    inferred_execution_fields: usize,
+    missing_execution_fields: usize,
+    missing_owner_signal: usize,
+    warnings: usize,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct SeedReviewReport {
+    summary: SeedReviewSummary,
+    items: Vec<SeedReviewAssessment>,
 }
 
 fn main() {
@@ -370,6 +434,7 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                 evidence_path: None,
                 message: Some("record.toml already exists under the index root".into()),
                 diagnostics: Vec::new(),
+                review: None,
             });
             continue;
         }
@@ -391,6 +456,16 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                         manifest_path: Some(report.writeback_plan.factual.manifest_path.clone()),
                         evidence_path: report.writeback_plan.factual.evidence_path.clone(),
                         message: None,
+                        review: Some(build_seed_review_assessment(
+                            entry.repository.clone(),
+                            SeedResultStatus::Planned,
+                            Some(&report.writeback_plan.factual.import_plan.manifest),
+                            &report.writeback_plan.factual.import_plan.inferred_fields,
+                            &report.diagnostics,
+                            report.writeback_plan.factual.manifest_path.clone(),
+                            report.writeback_plan.factual.evidence_path.clone(),
+                            None,
+                        )),
                         diagnostics: report.diagnostics,
                     });
                 } else {
@@ -402,6 +477,16 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                         manifest_path: Some(report.writeback_plan.factual.manifest_path.clone()),
                         evidence_path: report.writeback_plan.factual.evidence_path.clone(),
                         message: None,
+                        review: Some(build_seed_review_assessment(
+                            entry.repository.clone(),
+                            SeedResultStatus::Applied,
+                            Some(&report.writeback_plan.factual.import_plan.manifest),
+                            &report.writeback_plan.factual.import_plan.inferred_fields,
+                            &report.diagnostics,
+                            report.writeback_plan.factual.manifest_path.clone(),
+                            report.writeback_plan.factual.evidence_path.clone(),
+                            None,
+                        )),
                         diagnostics: report.diagnostics,
                     });
                 }
@@ -409,7 +494,7 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
             Err(err) => results.push(SeedCommandResult {
                 repository: entry.repository.clone(),
                 status: SeedResultStatus::Failed,
-                manifest_path: Some(manifest_path),
+                manifest_path: Some(manifest_path.clone()),
                 evidence_path: Some(
                     entry
                         .repository
@@ -418,6 +503,20 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                 ),
                 message: Some(err.to_string()),
                 diagnostics: Vec::new(),
+                review: Some(build_seed_review_assessment(
+                    entry.repository.clone(),
+                    SeedResultStatus::Failed,
+                    None,
+                    &[],
+                    &[],
+                    manifest_path,
+                    Some(
+                        entry.repository
+                            .record_root(&args.index_root)
+                            .join("evidence.md"),
+                    ),
+                    Some(err.to_string()),
+                )),
             }),
         }
     }
@@ -429,11 +528,22 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
         write_crawler_state(&path, &state)?;
         Some(path)
     };
+    let review = build_seed_review_report(&results);
+    let review_report_path = args.review_report_md.clone();
+    if let Some(path) = review_report_path.as_deref() {
+        let markdown = render_seed_review_report_markdown(&review, args.dry_run);
+        if let Some(parent) = path.parent() {
+            std::fs::create_dir_all(parent)?;
+        }
+        std::fs::write(path, markdown)?;
+    }
     let command_report = SeedCommandReport {
         discovery,
         dry_run: args.dry_run,
         state_path,
         results,
+        review,
+        review_report_path,
     };
 
     if args.json {
@@ -479,8 +589,25 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                 }
             }
         }
+        println!(
+            "review triage: {} high, {} medium, {} low",
+            command_report.review.summary.high,
+            command_report.review.summary.medium,
+            command_report.review.summary.low
+        );
+        println!(
+            "review signals: {} missing security, {} inferred build/test, {} missing build/test, {} missing maintainer/team, {} warning-bearing repos",
+            command_report.review.summary.missing_security_contact,
+            command_report.review.summary.inferred_execution_fields,
+            command_report.review.summary.missing_execution_fields,
+            command_report.review.summary.missing_owner_signal,
+            command_report.review.summary.warnings
+        );
         if let Some(path) = &command_report.state_path {
             println!("state: {}", path.display());
+        }
+        if let Some(path) = &command_report.review_report_path {
+            println!("review report: {}", path.display());
         }
     }
 
@@ -728,10 +855,298 @@ fn print_json<T: Serialize>(value: &T) -> Result<()> {
     Ok(())
 }
 
+fn build_seed_review_report(results: &[SeedCommandResult]) -> SeedReviewReport {
+    let items = results
+        .iter()
+        .filter_map(|result| result.review.clone())
+        .collect::<Vec<_>>();
+    let mut summary = SeedReviewSummary {
+        actionable: items.len(),
+        ..SeedReviewSummary::default()
+    };
+
+    for item in &items {
+        match item.priority {
+            SeedReviewPriority::High => summary.high += 1,
+            SeedReviewPriority::Medium => summary.medium += 1,
+            SeedReviewPriority::Low => summary.low += 1,
+        }
+        let failed = matches!(item.status, SeedResultStatus::Failed);
+        if failed {
+            summary.failed += 1;
+        }
+        if !failed
+            && (item.security_contact.is_none()
+            || item
+                .security_contact
+                .as_deref()
+                .is_some_and(|value| value == "unknown"))
+        {
+            summary.missing_security_contact += 1;
+        }
+        if item
+            .inferred_fields
+            .iter()
+            .any(|field| field == "repo.build" || field == "repo.test")
+        {
+            summary.inferred_execution_fields += 1;
+        }
+        if !failed && (item.build.is_none() || item.test.is_none()) {
+            summary.missing_execution_fields += 1;
+        }
+        if item
+            .reasons
+            .iter()
+            .any(|reason| reason.contains("maintainer or team"))
+        {
+            summary.missing_owner_signal += 1;
+        }
+        if !item.warning_codes.is_empty() {
+            summary.warnings += 1;
+        }
+    }
+
+    SeedReviewReport { summary, items }
+}
+
+fn build_seed_review_assessment(
+    repository: RepositoryRef,
+    status: SeedResultStatus,
+    manifest: Option<&Manifest>,
+    inferred_fields: &[String],
+    diagnostics: &[CrawlDiagnostic],
+    manifest_path: PathBuf,
+    evidence_path: Option<PathBuf>,
+    failure_message: Option<String>,
+) -> SeedReviewAssessment {
+    let mut priority = SeedReviewPriority::Low;
+    let mut reasons = Vec::new();
+    let warning_codes = diagnostics
+        .iter()
+        .filter(|diagnostic| matches!(diagnostic.severity, dotrepo_crawler::CrawlDiagnosticSeverity::Warning))
+        .map(|diagnostic| diagnostic.code.clone())
+        .collect::<Vec<_>>();
+
+    if let Some(message) = failure_message {
+        priority = SeedReviewPriority::High;
+        reasons.push(format!("crawl failed before writeback: {}", message));
+        return SeedReviewAssessment {
+            repository,
+            status,
+            priority,
+            reasons,
+            manifest_path: Some(manifest_path),
+            evidence_path,
+            record_status: None,
+            build: None,
+            test: None,
+            security_contact: None,
+            inferred_fields: Vec::new(),
+            warning_codes,
+        };
+    }
+
+    let manifest = manifest.expect("successful crawl review requires manifest");
+    if !warning_codes.is_empty() {
+        raise_seed_review_priority(&mut priority, SeedReviewPriority::Medium);
+        reasons.push(format!(
+            "crawler emitted warning diagnostics: {}",
+            warning_codes.join(", ")
+        ));
+    }
+
+    let security_contact = manifest
+        .owners
+        .as_ref()
+        .and_then(|owners| owners.security_contact.clone());
+    if security_contact
+        .as_deref()
+        .is_none_or(|value| value.trim().is_empty() || value == "unknown")
+    {
+        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
+        reasons.push("security_contact is missing or still unknown".into());
+    }
+
+    if manifest.repo.build.is_none() || manifest.repo.test.is_none() {
+        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
+        reasons.push("repo.build or repo.test is still unset".into());
+    }
+
+    let inferred_execution = inferred_fields
+        .iter()
+        .filter(|field| field.as_str() == "repo.build" || field.as_str() == "repo.test")
+        .cloned()
+        .collect::<Vec<_>>();
+    if !inferred_execution.is_empty() {
+        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
+        reasons.push(format!(
+            "execution fields are inferred: {}",
+            inferred_execution.join(", ")
+        ));
+    } else if !inferred_fields.is_empty() {
+        raise_seed_review_priority(&mut priority, SeedReviewPriority::Medium);
+        reasons.push(format!(
+            "non-execution fields are inferred: {}",
+            inferred_fields.join(", ")
+        ));
+    }
+
+    let has_owner_signal = manifest
+        .owners
+        .as_ref()
+        .is_some_and(|owners| !owners.maintainers.is_empty() || owners.team.is_some());
+    if !has_owner_signal {
+        raise_seed_review_priority(&mut priority, SeedReviewPriority::Medium);
+        reasons.push("no maintainer or team ownership signal is present yet".into());
+    }
+
+    if matches!(manifest.record.status, RecordStatus::Inferred) {
+        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
+        reasons.push("record.status is inferred, so the whole overlay needs closer review".into());
+    }
+
+    if reasons.is_empty() {
+        reasons.push("ready for light review: execution, security, and ownership signals are present".into());
+    }
+
+    SeedReviewAssessment {
+        repository,
+        status,
+        priority,
+        reasons,
+        manifest_path: Some(manifest_path),
+        evidence_path,
+        record_status: Some(record_status_label(&manifest.record.status).into()),
+        build: manifest.repo.build.clone(),
+        test: manifest.repo.test.clone(),
+        security_contact,
+        inferred_fields: inferred_fields.to_vec(),
+        warning_codes,
+    }
+}
+
+fn raise_seed_review_priority(current: &mut SeedReviewPriority, candidate: SeedReviewPriority) {
+    let current_rank = seed_review_priority_rank(*current);
+    let candidate_rank = seed_review_priority_rank(candidate);
+    if candidate_rank > current_rank {
+        *current = candidate;
+    }
+}
+
+fn seed_review_priority_rank(priority: SeedReviewPriority) -> u8 {
+    match priority {
+        SeedReviewPriority::Low => 0,
+        SeedReviewPriority::Medium => 1,
+        SeedReviewPriority::High => 2,
+    }
+}
+
+fn record_status_label(status: &RecordStatus) -> &'static str {
+    match status {
+        RecordStatus::Draft => "draft",
+        RecordStatus::Imported => "imported",
+        RecordStatus::Inferred => "inferred",
+        RecordStatus::Reviewed => "reviewed",
+        RecordStatus::Verified => "verified",
+        RecordStatus::Canonical => "canonical",
+    }
+}
+
+fn seed_result_status_label(status: SeedResultStatus) -> &'static str {
+    match status {
+        SeedResultStatus::Applied => "applied",
+        SeedResultStatus::Planned => "planned",
+        SeedResultStatus::SkippedExisting => "skipped_existing",
+        SeedResultStatus::Failed => "failed",
+    }
+}
+
+fn seed_review_priority_label(priority: SeedReviewPriority) -> &'static str {
+    match priority {
+        SeedReviewPriority::High => "high",
+        SeedReviewPriority::Medium => "medium",
+        SeedReviewPriority::Low => "low",
+    }
+}
+
+fn render_seed_review_report_markdown(report: &SeedReviewReport, dry_run: bool) -> String {
+    let mut output = String::new();
+    output.push_str("# Seed Review Report\n\n");
+    output.push_str(&format!(
+        "- mode: {}\n- actionable repositories: {}\n- high priority: {}\n- medium priority: {}\n- low priority: {}\n- failed crawls: {}\n- missing security contact: {}\n- inferred build/test: {}\n- missing build/test: {}\n- missing maintainer/team signal: {}\n- repos with crawler warnings: {}\n\n",
+        if dry_run { "dry-run" } else { "writeback" },
+        report.summary.actionable,
+        report.summary.high,
+        report.summary.medium,
+        report.summary.low,
+        report.summary.failed,
+        report.summary.missing_security_contact,
+        report.summary.inferred_execution_fields,
+        report.summary.missing_execution_fields,
+        report.summary.missing_owner_signal,
+        report.summary.warnings,
+    ));
+
+    for priority in [
+        SeedReviewPriority::High,
+        SeedReviewPriority::Medium,
+        SeedReviewPriority::Low,
+    ] {
+        let items = report
+            .items
+            .iter()
+            .filter(|item| item.priority == priority)
+            .collect::<Vec<_>>();
+        if items.is_empty() {
+            continue;
+        }
+        output.push_str(&format!(
+            "## {} priority\n\n",
+            seed_review_priority_label(priority).to_ascii_uppercase()
+        ));
+        for item in items {
+            let identity = format!(
+                "{}/{}/{}",
+                item.repository.host, item.repository.owner, item.repository.repo
+            );
+            let mut detail_parts = Vec::new();
+            if let Some(status) = item.record_status.as_deref() {
+                detail_parts.push(format!("record {}", status));
+            }
+            detail_parts.push(seed_result_status_label(item.status).into());
+            if let Some(build) = item.build.as_deref() {
+                detail_parts.push(format!("build `{}`", build));
+            }
+            if let Some(test) = item.test.as_deref() {
+                detail_parts.push(format!("test `{}`", test));
+            }
+            if let Some(contact) = item.security_contact.as_deref() {
+                detail_parts.push(format!("security `{}`", contact));
+            }
+            if !item.warning_codes.is_empty() {
+                detail_parts.push(format!("warnings {}", item.warning_codes.join(", ")));
+            }
+            if let Some(path) = item.manifest_path.as_ref() {
+                detail_parts.push(format!("manifest `{}`", path.display()));
+            }
+            output.push_str(&format!(
+                "- `{}`: {}. {}\n",
+                identity,
+                item.reasons.join("; "),
+                detail_parts.join("; ")
+            ));
+        }
+        output.push('\n');
+    }
+
+    output
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
     use clap::Parser;
+    use dotrepo_schema::{Record, RecordMode, Repo};
 
     #[test]
     fn parse_star_band_supports_range_and_open_ended_forms() {
@@ -808,6 +1223,8 @@ mod tests {
             "--star-band",
             "10000+",
             "--dry-run",
+            "--review-report-md",
+            "tmp/review.md",
         ])
         .expect("cli parses");
 
@@ -816,6 +1233,10 @@ mod tests {
                 assert_eq!(seed.limit, Some(25));
                 assert!(seed.dry_run);
                 assert_eq!(seed.star_bands.len(), 2);
+                assert_eq!(
+                    seed.review_report_md.as_deref(),
+                    Some(Path::new("tmp/review.md"))
+                );
             }
             _ => panic!("expected seed command"),
         }
@@ -900,5 +1321,183 @@ https://github.com/tokio-rs/tokio
             }
             _ => panic!("expected schedule command"),
         }
+    }
+
+    #[test]
+    fn build_seed_review_assessment_flags_inferred_execution_and_missing_security() {
+        let repository = RepositoryRef {
+            host: "github.com".into(),
+            owner: "example".into(),
+            repo: "orbit".into(),
+        };
+        let manifest = Manifest::new(
+            Record {
+                mode: RecordMode::Overlay,
+                status: RecordStatus::Imported,
+                source: Some("https://github.com/example/orbit".into()),
+                generated_at: Some("2026-03-21T00:00:00Z".into()),
+                trust: None,
+            },
+            Repo {
+                name: "orbit".into(),
+                description: "Example repo".into(),
+                homepage: None,
+                license: None,
+                status: None,
+                visibility: Some("public".into()),
+                languages: vec!["rust".into()],
+                build: Some("cargo build --workspace".into()),
+                test: Some("cargo test --workspace".into()),
+                topics: Vec::new(),
+            },
+        );
+
+        let assessment = build_seed_review_assessment(
+            repository,
+            SeedResultStatus::Planned,
+            Some(&manifest),
+            &["repo.build".into(), "repo.test".into()],
+            &[CrawlDiagnostic {
+                severity: dotrepo_crawler::CrawlDiagnosticSeverity::Warning,
+                code: "materialize.missing_security".into(),
+                message: "SECURITY.md missing".into(),
+            }],
+            PathBuf::from("index/repos/github.com/example/orbit/record.toml"),
+            Some(PathBuf::from(
+                "index/repos/github.com/example/orbit/evidence.md",
+            )),
+            None,
+        );
+
+        assert_eq!(assessment.priority, SeedReviewPriority::High);
+        assert!(
+            assessment
+                .reasons
+                .iter()
+                .any(|reason| reason.contains("security_contact is missing or still unknown"))
+        );
+        assert!(
+            assessment
+                .reasons
+                .iter()
+                .any(|reason| reason.contains("execution fields are inferred"))
+        );
+        assert_eq!(
+            assessment.warning_codes,
+            vec!["materialize.missing_security".to_string()]
+        );
+    }
+
+    #[test]
+    fn build_seed_review_report_summarizes_priority_buckets() {
+        let report = build_seed_review_report(&[
+            SeedCommandResult {
+                repository: RepositoryRef {
+                    host: "github.com".into(),
+                    owner: "example".into(),
+                    repo: "high".into(),
+                },
+                status: SeedResultStatus::Planned,
+                manifest_path: None,
+                evidence_path: None,
+                message: None,
+                diagnostics: Vec::new(),
+                review: Some(SeedReviewAssessment {
+                    repository: RepositoryRef {
+                        host: "github.com".into(),
+                        owner: "example".into(),
+                        repo: "high".into(),
+                    },
+                    status: SeedResultStatus::Planned,
+                    priority: SeedReviewPriority::High,
+                    reasons: vec!["security_contact is missing or still unknown".into()],
+                    manifest_path: None,
+                    evidence_path: None,
+                    record_status: Some("imported".into()),
+                    build: Some("cargo build".into()),
+                    test: Some("cargo test".into()),
+                    security_contact: None,
+                    inferred_fields: vec!["repo.build".into()],
+                    warning_codes: vec!["materialize.missing_security".into()],
+                }),
+            },
+            SeedCommandResult {
+                repository: RepositoryRef {
+                    host: "github.com".into(),
+                    owner: "example".into(),
+                    repo: "low".into(),
+                },
+                status: SeedResultStatus::Planned,
+                manifest_path: None,
+                evidence_path: None,
+                message: None,
+                diagnostics: Vec::new(),
+                review: Some(SeedReviewAssessment {
+                    repository: RepositoryRef {
+                        host: "github.com".into(),
+                        owner: "example".into(),
+                        repo: "low".into(),
+                    },
+                    status: SeedResultStatus::Planned,
+                    priority: SeedReviewPriority::Low,
+                    reasons: vec!["ready for light review".into()],
+                    manifest_path: None,
+                    evidence_path: None,
+                    record_status: Some("imported".into()),
+                    build: Some("cargo build".into()),
+                    test: Some("cargo test".into()),
+                    security_contact: Some("security@example.com".into()),
+                    inferred_fields: Vec::new(),
+                    warning_codes: Vec::new(),
+                }),
+            },
+        ]);
+
+        assert_eq!(report.summary.actionable, 2);
+        assert_eq!(report.summary.high, 1);
+        assert_eq!(report.summary.low, 1);
+        assert_eq!(report.summary.missing_security_contact, 1);
+        assert_eq!(report.summary.inferred_execution_fields, 1);
+        assert_eq!(report.summary.warnings, 1);
+    }
+
+    #[test]
+    fn build_seed_review_report_excludes_failed_crawls_from_missing_metadata_counts() {
+        let report = build_seed_review_report(&[SeedCommandResult {
+            repository: RepositoryRef {
+                host: "github.com".into(),
+                owner: "example".into(),
+                repo: "failed".into(),
+            },
+            status: SeedResultStatus::Failed,
+            manifest_path: None,
+            evidence_path: None,
+            message: Some("network timeout".into()),
+            diagnostics: Vec::new(),
+            review: Some(SeedReviewAssessment {
+                repository: RepositoryRef {
+                    host: "github.com".into(),
+                    owner: "example".into(),
+                    repo: "failed".into(),
+                },
+                status: SeedResultStatus::Failed,
+                priority: SeedReviewPriority::High,
+                reasons: vec!["crawl failed before writeback: network timeout".into()],
+                manifest_path: None,
+                evidence_path: None,
+                record_status: None,
+                build: None,
+                test: None,
+                security_contact: None,
+                inferred_fields: Vec::new(),
+                warning_codes: Vec::new(),
+            }),
+        }]);
+
+        assert_eq!(report.summary.actionable, 1);
+        assert_eq!(report.summary.failed, 1);
+        assert_eq!(report.summary.high, 1);
+        assert_eq!(report.summary.missing_security_contact, 0);
+        assert_eq!(report.summary.missing_execution_fields, 0);
     }
 }
