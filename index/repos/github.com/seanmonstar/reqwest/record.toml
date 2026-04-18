@@ -1,0 +1,38 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/seanmonstar/reqwest"
+generated_at = "2026-04-18T19:15:05.341892044Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Left `repo.test` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "reqwest"
+description = "An ergonomic, batteries-included HTTP Client for Rust."
+homepage = "https://docs.rs/reqwest"
+license = "Apache-2.0"
+visibility = "public"
+languages = ["Rust"]
+build = "cargo build"
+topics = [
+    "rust",
+    "http",
+    "http-client",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/seanmonstar/reqwest.git"
+default_branch = "master"
+fork = false
+head_sha = "5f9c231502d827bdd19864277187b133bb746f2f"
+html_url = "https://github.com/seanmonstar/reqwest"
+stars = 11556
