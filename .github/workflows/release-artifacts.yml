@@ -21,11 +21,11 @@ jobs:
             artifact_name: dotrepo-binaries-macos
     runs-on: ${{ matrix.runner }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cargo/registry
@@ -48,7 +48,7 @@ jobs:
             --output-dir dist \
             --target "${{ steps.target.outputs.value }}"
       - name: Upload binary bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.artifact_name }}-${{ steps.target.outputs.value }}
           path: |
@@ -60,9 +60,9 @@ jobs:
   vscode-extension:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "20"
           cache: "npm"
@@ -83,7 +83,7 @@ jobs:
           mkdir -p ../../dist
           npx --yes @vscode/vsce package --out ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
       - name: Upload VSIX artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dotrepo-vscode-vsix
           path: dist/*.vsix
@@ -98,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download packaged artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: release-assets
       - name: Publish GitHub release assets

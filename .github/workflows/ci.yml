@@ -14,7 +14,7 @@ jobs:
       run_public_surface_gate: ${{ steps.scope.outputs.run_public_surface_gate }}
       run_release_gate: ${{ steps.scope.outputs.run_release_gate }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Classify changed files
@@ -112,11 +112,11 @@ jobs:
     if: needs.change-scope.outputs.run_rust_ci == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cargo/registry
@@ -239,11 +239,11 @@ jobs:
     if: needs.change-scope.outputs.run_operator_gate == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cargo/registry
@@ -255,14 +255,14 @@ jobs:
       - name: Run explicit maintainer/operator claim gate
         run: python3 scripts/check_operator_claim_gate.py --output-root operator-gate
       - name: Upload operator gate inspection artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: operator-gate-claim-reports
           path: operator-gate/
           if-no-files-found: error
           retention-days: 14
       - name: Upload staged live-handoff public export
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: operator-gate-live-seed-handoff-public
           path: operator-gate/live-seed-handoff-public/
@@ -274,11 +274,11 @@ jobs:
     if: needs.change-scope.outputs.run_public_surface_gate == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cargo/registry
@@ -288,7 +288,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "20"
           cache: "npm"
@@ -298,14 +298,14 @@ jobs:
           npm_config_cache: ${{ runner.temp }}/npm-cache
         run: python3 scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
       - name: Upload static public export artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: public-export-v0-lightweight
           path: release-gate/public/
           if-no-files-found: error
           retention-days: 7
       - name: Upload public export bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: public-export-v0-bundle-lightweight
           path: release-gate/public-bundle/*.tar.gz
@@ -319,11 +319,11 @@ jobs:
     if: needs.change-scope.outputs.run_release_gate == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cargo/registry
@@ -333,7 +333,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "20"
       - name: Run explicit release-surface gate
@@ -341,21 +341,21 @@ jobs:
           npm_config_cache: ${{ runner.temp }}/npm-cache
         run: python3 scripts/check_release_gate.py --output-root release-gate
       - name: Upload static public export artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: public-export-v0
           path: release-gate/public/
           if-no-files-found: error
           retention-days: 14
       - name: Upload public export bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: public-export-v0-bundle
           path: release-gate/public-bundle/*.tar.gz
           if-no-files-found: error
           retention-days: 14
       - name: Upload release-style install bundles
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-gate-install-bundles
           path: |
@@ -364,7 +364,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
       - name: Upload release-style VSIX
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-gate-vscode-vsix
           path: release-gate/vsix/*.vsix
