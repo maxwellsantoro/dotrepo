@@ -4,31 +4,51 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/BurntSushi/ripgrep"
-generated_at = "2026-03-08T00:00:00Z"
+generated_at = "2026-04-18T19:24:17.844398037Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "inferred"]
-notes = "Imported from public repository materials; build and test commands are inferred from the Cargo project layout; not maintainer-verified."
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Left `repo.build` unset because `.github/workflows/ci.yml`, `.github/workflows/release.yml`, and `Cargo.toml` suggested conflicting build commands. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "ripgrep"
-description = "Line-oriented search tool that recursively searches the current directory for a regex pattern."
+name = "ripgrep (rg)"
+description = "ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern. By default, ripgrep will respect gitignore rules and automatically skip hidden files/directories and binary files. (To disable all automatic filtering by default, use `rg -uuu`.) ripgrep has first class support on Windows, macOS and Linux, with binary downloads available for [every release](https://github.com/BurntSushi/ripgrep/releases). ripgrep is similar to other popular search tools like The Silver Searcher, ack and grep."
 homepage = "https://github.com/BurntSushi/ripgrep"
-license = "MIT OR Unlicense"
-status = "active"
+license = "Unlicense"
 visibility = "public"
-languages = ["rust"]
-build = "cargo build --release"
-test = "cargo test"
-topics = ["search", "regex", "cli"]
-
-[owners]
-maintainers = ["@BurntSushi"]
-security_contact = "unknown"
+languages = [
+    "Python",
+    "Roff",
+    "Ruby",
+    "Rust",
+    "Shell",
+]
+test = "cargo test --workspace"
+topics = [
+    "ripgrep",
+    "recursively-search",
+    "search",
+    "regex",
+    "gitignore",
+    "grep",
+    "command-line-tool",
+    "command-line",
+    "cli",
+    "rust",
+]
 
 [docs]
-root = "docs/"
+getting_started = "https://docs.fedoraproject.org/en-US/epel/getting-started/"
 
 [relations]
 references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/BurntSushi/ripgrep.git"
+default_branch = "master"
+fork = false
+head_sha = "4519153e5e461527f4bca45b042fff45c4ec6fb9"
+html_url = "https://github.com/BurntSushi/ripgrep"
+stars = 62607
