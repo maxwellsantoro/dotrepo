@@ -10,8 +10,8 @@ use dotrepo_transport::{
 use serde::Deserialize;
 use serde_json::{json, to_value, Value};
 use std::fs;
+use std::fs::{File, OpenOptions};
 use std::io::{self, BufReader};
-use std::fs::OpenOptions;
 use std::io::{ErrorKind, Write};
 use std::path::{Path, PathBuf};
 
@@ -273,38 +273,84 @@ fn write_import_plan(
         outputs.push((path.clone(), contents.clone()));
     }
 
-    let mut written_paths = Vec::new();
-    for (path, contents) in outputs {
-        write_import_output(&path, &contents, force)?;
-        written_paths.push(display_path(root, &path));
-    }
+    let written_paths = outputs
+        .iter()
+        .map(|(path, _)| display_path(root, path))
+        .collect::<Vec<_>>();
+    write_import_outputs(outputs, force)?;
 
     Ok(written_paths)
 }
 
-fn write_import_output(path: &Path, contents: &str, force: bool) -> Result<()> {
-    if let Some(parent) = path.parent() {
-        fs::create_dir_all(parent)?;
-    }
+struct ReservedImportOutput {
+    path: PathBuf,
+    contents: String,
+    file: File,
+}
 
+fn write_import_outputs(outputs: Vec<(PathBuf, String)>, force: bool) -> Result<()> {
     if force {
-        fs::write(path, contents)?;
+        for (path, contents) in outputs {
+            if let Some(parent) = path.parent() {
+                fs::create_dir_all(parent)?;
+            }
+            fs::write(path, contents)?;
+        }
         return Ok(());
     }
 
-    let mut file = OpenOptions::new()
-        .write(true)
-        .create_new(true)
-        .open(path)
-        .map_err(|err| match err.kind() {
-            ErrorKind::AlreadyExists => anyhow!(
-                "{} already exists; rerun with force=true to overwrite imported artifacts",
-                path.display()
-            ),
-            _ => err.into(),
-        })?;
-    file.write_all(contents.as_bytes())?;
+    let mut reserved = Vec::new();
+    for (path, contents) in outputs {
+        if let Some(parent) = path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+
+        let file = match OpenOptions::new().write(true).create_new(true).open(&path) {
+            Ok(file) => file,
+            Err(err) => {
+                cleanup_reserved_import_outputs(reserved);
+                return Err(match err.kind() {
+                    ErrorKind::AlreadyExists => anyhow!(
+                        "{} already exists; rerun with force=true to overwrite imported artifacts",
+                        path.display()
+                    ),
+                    _ => err.into(),
+                });
+            }
+        };
+
+        reserved.push(ReservedImportOutput {
+            path,
+            contents,
+            file,
+        });
+    }
+
+    for idx in 0..reserved.len() {
+        let write_result = {
+            let reserved_output = &mut reserved[idx];
+            reserved_output
+                .file
+                .write_all(reserved_output.contents.as_bytes())
+                .and_then(|_| reserved_output.file.flush())
+        };
+        if let Err(err) = write_result {
+            cleanup_reserved_import_outputs(reserved);
+            return Err(err.into());
+        }
+    }
+
     Ok(())
+}
+
+fn cleanup_reserved_import_outputs(outputs: Vec<ReservedImportOutput>) {
+    let paths = outputs
+        .into_iter()
+        .map(|reserved| reserved.path)
+        .collect::<Vec<_>>();
+    for path in paths {
+        let _ = fs::remove_file(path);
+    }
 }
 
 fn resolve_root(arguments: &Value) -> PathBuf {
@@ -729,10 +775,41 @@ description = "Missing source and trust"
         let path = root.join(".repo");
         fs::write(&path, "existing\n").expect("existing file written");
 
-        let err = write_import_output(&path, "replacement\n", false)
+        let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false)
             .expect_err("existing file should be preserved");
         assert!(err.to_string().contains("already exists"));
         assert_eq!(fs::read_to_string(&path).expect("file readable"), "existing\n");
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_write_refuses_existing_evidence_without_leaving_partial_manifest() {
+        let root = temp_dir("import-write-no-partial");
+        fs::write(
+            root.join("README.md"),
+            "# Example Project\n\nProject summary from the README.\n",
+        )
+        .expect("README written");
+        fs::write(root.join("evidence.md"), "preexisting evidence\n").expect("evidence written");
+
+        let plan = import_repository_with_options(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/project"),
+            &ImportOptions {
+                generated_at: Some(current_timestamp_rfc3339().expect("timestamp")),
+            },
+        )
+        .expect("import plan builds");
+        let err = write_import_plan(&root, &plan, false).expect_err("write should fail");
+
+        assert!(err.to_string().contains("already exists"));
+        assert!(!root.join("record.toml").exists());
+        assert_eq!(
+            fs::read_to_string(root.join("evidence.md")).expect("evidence readable"),
+            "preexisting evidence\n"
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

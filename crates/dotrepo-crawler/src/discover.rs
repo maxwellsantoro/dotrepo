@@ -6,7 +6,7 @@ use std::collections::HashSet;
 const DEFAULT_MIN_STARS: u64 = 1;
 const SEARCH_PAGE_SIZE: usize = 100;
 const MAX_SEARCH_PAGES_PER_BAND: usize = 10;
-const MAX_SEED_LIMIT: usize = 1_000;
+pub(crate) const MAX_SEED_LIMIT: usize = 1_000;
 
 pub(crate) fn seed_repositories_impl(
     request: &SeedRepositoriesRequest,

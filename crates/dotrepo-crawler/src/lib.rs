@@ -13,6 +13,7 @@ mod synth;
 mod writeback;
 
 pub use writeback::WritebackReport;
+pub const MAX_SEED_LIMIT: usize = discover::MAX_SEED_LIMIT;
 
 pub fn seed_repositories(request: &SeedRepositoriesRequest) -> Result<SeedRepositoriesReport> {
     discover::seed_repositories_impl(request)

@@ -5,6 +5,7 @@ use dotrepo_crawler::{
     seed_repositories, write_crawler_state, CrawlDiagnostic, CrawlRepositoryRequest,
     CrawlStateRecord, CrawlerStateSnapshot, DiscoveredRepository, RefreshCandidate, RepositoryRef,
     ScheduleRefreshRequest, SeedRepositoriesReport, SeedRepositoriesRequest, StarBand,
+    MAX_SEED_LIMIT,
 };
 use dotrepo_schema::{Manifest, RecordStatus};
 use serde::Serialize;
@@ -399,6 +400,13 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
             .map(|targets| targets.len())
             .unwrap_or(10)
     });
+    if effective_limit > MAX_SEED_LIMIT {
+        bail!(
+            "seed limit {} exceeds max {}",
+            effective_limit,
+            MAX_SEED_LIMIT
+        );
+    }
     let discovery = if let Some(targets) = explicit_targets {
         discovery_report_from_targets(&args.host, targets, effective_limit)
     } else {
@@ -1147,6 +1155,7 @@ mod tests {
     use super::*;
     use clap::Parser;
     use dotrepo_schema::{Record, RecordMode, Repo};
+    use std::time::{SystemTime, UNIX_EPOCH};
 
     #[test]
     fn parse_star_band_supports_range_and_open_ended_forms() {
@@ -1294,6 +1303,32 @@ https://github.com/tokio-rs/tokio
             }
             _ => panic!("expected seed command"),
         }
+    }
+
+    #[test]
+    fn cmd_seed_rejects_targets_file_limits_above_maximum() {
+        let root = temp_dir("seed-limit");
+        let targets = root.join("targets.txt");
+        std::fs::write(&targets, "github.com/example/a\n").expect("targets written");
+
+        let err = cmd_seed(SeedArgs {
+            index_root: root.join("index"),
+            host: "github.com".into(),
+            limit: Some(MAX_SEED_LIMIT + 1),
+            star_bands: Vec::new(),
+            targets_file: Some(targets),
+            include_archived: false,
+            include_forks: false,
+            dry_run: true,
+            review_report_md: None,
+            generated_at: None,
+            state_path: None,
+            json: true,
+        })
+        .expect_err("oversized limit rejected");
+
+        assert!(err.to_string().contains("exceeds max"));
+        std::fs::remove_dir_all(root).expect("temp dir removed");
     }
 
     #[test]
@@ -1499,5 +1534,20 @@ https://github.com/tokio-rs/tokio
         assert_eq!(report.summary.high, 1);
         assert_eq!(report.summary.missing_security_contact, 0);
         assert_eq!(report.summary.missing_execution_fields, 0);
+    }
+
+    fn temp_dir(label: &str) -> PathBuf {
+        let nanos = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("clock works")
+            .as_nanos();
+        let path = std::env::temp_dir().join(format!(
+            "dotrepo-crawler-{}-{}-{}",
+            label,
+            std::process::id(),
+            nanos
+        ));
+        std::fs::create_dir_all(&path).expect("temp dir created");
+        path
     }
 }

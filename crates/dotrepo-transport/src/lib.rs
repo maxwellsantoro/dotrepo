@@ -3,20 +3,21 @@ use serde::Serialize;
 use std::io::{BufRead, Write};
 
 const MAX_JSONRPC_MESSAGE_BYTES: usize = 8 * 1024 * 1024;
+const MAX_JSONRPC_HEADER_LINE_BYTES: usize = 8 * 1024;
+const MAX_JSONRPC_HEADER_BYTES: usize = 64 * 1024;
 
 pub fn read_jsonrpc_message(reader: &mut impl BufRead) -> Result<Option<Vec<u8>>> {
     let mut content_length = None;
     let mut saw_header = false;
+    let mut header_bytes_read = 0usize;
 
     loop {
-        let mut line = String::new();
-        let bytes_read = reader.read_line(&mut line)?;
-        if bytes_read == 0 {
+        let Some(line) = read_header_line(reader, &mut header_bytes_read)? else {
             if saw_header {
                 bail!("unexpected EOF while reading stdio headers");
             }
             return Ok(None);
-        }
+        };
 
         let trimmed = line.trim_end_matches(['\r', '\n']);
         if trimmed.is_empty() {
@@ -47,6 +48,47 @@ pub fn read_jsonrpc_message(reader: &mut impl BufRead) -> Result<Option<Vec<u8>>
         .read_exact(&mut payload)
         .context("unexpected EOF while reading stdio body")?;
     Ok(Some(payload))
+}
+
+fn read_header_line(reader: &mut impl BufRead, total_bytes: &mut usize) -> Result<Option<String>> {
+    let mut line = Vec::new();
+
+    loop {
+        let available = reader.fill_buf()?;
+        if available.is_empty() {
+            if line.is_empty() {
+                return Ok(None);
+            }
+            bail!("unexpected EOF while reading stdio headers");
+        }
+
+        let bytes_to_take = available
+            .iter()
+            .position(|byte| *byte == b'\n')
+            .map(|pos| pos + 1)
+            .unwrap_or(available.len());
+
+        if line.len() + bytes_to_take > MAX_JSONRPC_HEADER_LINE_BYTES {
+            bail!(
+                "stdio header line exceeds max size {}",
+                MAX_JSONRPC_HEADER_LINE_BYTES
+            );
+        }
+        if *total_bytes + bytes_to_take > MAX_JSONRPC_HEADER_BYTES {
+            bail!("stdio headers exceed max size {}", MAX_JSONRPC_HEADER_BYTES);
+        }
+
+        line.extend_from_slice(&available[..bytes_to_take]);
+        *total_bytes += bytes_to_take;
+        let found_newline = available[..bytes_to_take].contains(&b'\n');
+        reader.consume(bytes_to_take);
+
+        if found_newline {
+            break;
+        }
+    }
+
+    String::from_utf8(line).context("stdio headers must be valid UTF-8").map(Some)
 }
 
 pub fn write_jsonrpc_message(writer: &mut impl Write, message: &impl Serialize) -> Result<()> {
@@ -123,5 +165,15 @@ mod tests {
         ));
         let err = read_jsonrpc_message(&mut reader).expect_err("oversized body rejected");
         assert!(err.to_string().contains("exceeds max frame size"));
+    }
+
+    #[test]
+    fn read_jsonrpc_message_rejects_oversized_header_line() {
+        let oversized = "a".repeat(MAX_JSONRPC_HEADER_LINE_BYTES);
+        let mut reader = BufReader::new(Cursor::new(
+            format!("X-Fill: {oversized}\r\n\r\n").into_bytes(),
+        ));
+        let err = read_jsonrpc_message(&mut reader).expect_err("oversized header rejected");
+        assert!(err.to_string().contains("header line exceeds max size"));
     }
 }
