@@ -4,29 +4,58 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/caddyserver/caddy"
-generated_at = "2026-03-18T00:00:00Z"
+generated_at = "2026-04-18T19:15:17.933829848Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "inferred"]
-notes = "Imported from upstream repository metadata, the README, and SECURITY.md; repo.build normalizes the README's post-clone working directory into a repo-root-relative command; not maintainer-verified."
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/ci.yml`, `.github/workflows/cross-build.yml`, and `go.mod` suggested conflicting build commands. Left `repo.test` unset because `go.mod` and `.github/workflows/ci.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Caddy"
-description = "Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS"
+name = "a project"
+description = "Caddy is an extensible server platform that uses TLS by default."
 homepage = "https://caddyserver.com"
 license = "Apache-2.0"
 visibility = "public"
-languages = ["go"]
-build = "cd cmd/caddy && go build"
-test = "go test ./..."
-topics = ["go", "web-server", "reverse-proxy", "https", "http3"]
+languages = [
+    "Go",
+    "HTML",
+    "Shell",
+]
+topics = [
+    "go",
+    "web-server",
+    "caddyfile",
+    "http",
+    "http-server",
+    "reverse-proxy",
+    "https",
+    "tls",
+    "automatic-https",
+    "privacy",
+    "security",
+    "acme",
+    "caddy",
+    "golang",
+    "http3",
+]
 
 [owners]
+maintainers = []
 security_contact = "https://github.com/caddyserver/caddy/security/advisories/new"
 
 [docs]
 root = "https://caddyserver.com/docs/"
+getting_started = "https://caddyserver.com/docs/getting-started"
 
 [relations]
 references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/caddyserver/caddy.git"
+default_branch = "master"
+fork = false
+head_sha = "4430756d5c3047564c4d5d72793de6685ba3efda"
+html_url = "https://github.com/caddyserver/caddy"
+stars = 71654
