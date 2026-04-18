@@ -37,8 +37,9 @@ Use these as top-level program checks across blocks:
   of 50 reviewed high-signal repos across Rust, TypeScript, Python, and Go,
   then a larger follow-on tranche such as 500 before treating dotrepo as a
   likely first-check service for common public repositories
-- the post-v1 agent path should include one hosted remote-lookup MCP tool before
-  broader search or mutation ambitions are treated as important
+- the post-v1 agent path now includes one hosted remote-lookup MCP tool, so
+  broader search or mutation ambitions should remain subordinate until
+  coverage and automation are much stronger
 - crawler readiness should first be measured by one factual-only crawl working
   end to end: discovery, materialization, writeback, and state persistence
 
@@ -48,14 +49,21 @@ Treat deliberate index growth as the active top-priority workstream.
 
 Near-term order:
 
-1. Grow the reviewed overlay index from 5 repositories to a first tranche of 50
-   high-signal repos across Rust, TypeScript, Python, and Go, using
+1. Grow the reviewed overlay index from the current 15-repository live baseline
+   to a first tranche of 50 high-signal repos across Rust, TypeScript, Python,
+   and Go, using
    [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) as the
    concrete execution list.
-2. Add hosted remote lookup to MCP so agents can consume `dotrepo.org` without
-   a local checkout.
+2. Turn the scheduled seed-review and refresh-review artifacts into bounded
+   execution batches that humans can merge deliberately.
 3. Keep hardening, public-site, and editor work constrained to blockers for the
    first two items.
+
+The live hosted surface now shows 15 reviewed repositories on April 18, 2026,
+so the active near-term job is to move from that 15-repository baseline to the
+first 50-repository tranche while establishing the automation loop around it.
+For the execution order and milestone bar for that work, see
+[`docs/growth-and-automation-plan.md`](./growth-and-automation-plan.md).
 
 ## Priority blocks
 
@@ -173,7 +181,7 @@ the future serving/deployment layer,
   Depends on: `E2-09`, `E2-10`.
   Acceptance: the release gate proves an emitted `queryTemplate` resolves against the Worker-hosted same-origin surface before deployment changes are treated as release-ready.
 
-- `E2-12 Add a dotrepo.lookup MCP tool on top of the hosted public surface`
+- `[done] E2-12 Add a dotrepo.lookup MCP tool on top of the hosted public surface`
   Depends on: `E2-10`.
   Acceptance: the MCP server accepts a repository URL or identity tuple, resolves it against the hosted public surface on `dotrepo.org`, and returns the same trust-aware repository and query entrypoints without requiring a local checkout.
 

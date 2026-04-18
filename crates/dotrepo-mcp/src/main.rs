@@ -7,6 +7,8 @@ use dotrepo_core::{
 use dotrepo_transport::{
     read_jsonrpc_message as read_message, write_jsonrpc_message as write_message,
 };
+use reqwest::blocking::Client;
+use reqwest::Url;
 use serde::Deserialize;
 use serde_json::{json, to_value, Value};
 use std::fs;
@@ -14,10 +16,13 @@ use std::fs::{File, OpenOptions};
 use std::io::{self, BufReader};
 use std::io::{ErrorKind, Write};
 use std::path::{Path, PathBuf};
+use std::time::Duration;
 
 const JSONRPC_VERSION: &str = "2.0";
 const SUPPORTED_PROTOCOL_VERSIONS: &[&str] = &["2025-11-25", "2025-06-18", "2024-11-05"];
 const SERVER_NAME: &str = "dotrepo-mcp";
+const DEFAULT_PUBLIC_BASE_URL: &str = "https://dotrepo.org";
+const REMOTE_LOOKUP_TIMEOUT: Duration = Duration::from_secs(15);
 
 fn main() {
     if let Err(err) = run() {
@@ -161,6 +166,7 @@ fn handle_tool_call(params: Value) -> Result<Value> {
         "dotrepo.validate" => tool_validate(arguments),
         "dotrepo.query" => tool_query(arguments),
         "dotrepo.trust" => tool_trust(arguments),
+        "dotrepo.lookup" => tool_lookup(arguments),
         "dotrepo.claim_inspect" => tool_claim_inspect(arguments),
         "dotrepo.generate_check" => tool_generate_check(arguments),
         "dotrepo.import_preview" => tool_import_preview(arguments),
@@ -199,6 +205,81 @@ fn tool_trust(arguments: Value) -> Result<(String, Value)> {
     let root = resolve_root(&arguments);
     let report = trust_repository(&root)?;
     Ok(("trust metadata loaded".into(), to_value(report)?))
+}
+
+fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
+    let target = resolve_lookup_target(&arguments)?;
+    let base_url = optional_string(&arguments, "baseUrl")
+        .unwrap_or_else(|| DEFAULT_PUBLIC_BASE_URL.to_string());
+    let base_url = normalize_public_base_url(&base_url)?;
+    let client = build_remote_lookup_client()?;
+
+    let summary_url = remote_repository_url(
+        &base_url,
+        &target.host,
+        &target.owner,
+        &target.repo,
+        "index.json",
+    );
+    let trust_url = remote_repository_url(
+        &base_url,
+        &target.host,
+        &target.owner,
+        &target.repo,
+        "trust.json",
+    );
+    let snapshot_url = format!("{}/v0/meta.json", remote_public_root(&base_url));
+    let inventory_url = format!("{}/v0/repos/index.json", remote_public_root(&base_url));
+
+    let summary = fetch_remote_json(&client, &summary_url)?;
+    let trust = fetch_remote_json(&client, &trust_url)?;
+    let snapshot = fetch_remote_json(&client, &snapshot_url)?;
+    let query_template = summary
+        .get("links")
+        .and_then(|links| links.get("queryTemplate"))
+        .and_then(Value::as_str)
+        .map(str::to_string)
+        .ok_or_else(|| anyhow!("remote lookup summary is missing links.queryTemplate"))?;
+
+    let query = if let Some(path) = target.path.as_deref() {
+        let query_url =
+            remote_query_url(&base_url, &target.host, &target.owner, &target.repo, path)?;
+        Some(fetch_remote_json(&client, query_url.as_str())?)
+    } else {
+        None
+    };
+
+    let structured = json!({
+        "baseUrl": remote_public_root(&base_url),
+        "identity": {
+            "host": target.host,
+            "owner": target.owner,
+            "repo": target.repo,
+        },
+        "lookup": {
+            "source": target.source,
+            "repositoryUrl": target.repository_url,
+            "requestedPath": target.path,
+        },
+        "links": {
+            "snapshot": snapshot_url,
+            "inventory": inventory_url,
+            "summary": summary_url,
+            "trust": trust_url,
+            "queryTemplate": query_template,
+        },
+        "snapshot": snapshot,
+        "summary": summary,
+        "trust": trust,
+        "query": query,
+    });
+    Ok((
+        format!(
+            "resolved hosted lookup for {}/{}/{}",
+            target.host, target.owner, target.repo
+        ),
+        structured,
+    ))
 }
 
 fn tool_claim_inspect(arguments: Value) -> Result<(String, Value)> {
@@ -394,6 +475,217 @@ fn import_mode_name(mode: ImportMode) -> &'static str {
     }
 }
 
+#[derive(Debug, Clone, Copy)]
+enum LookupTargetSource {
+    RepositoryUrl,
+    Identity,
+}
+
+impl LookupTargetSource {
+    fn as_str(self) -> &'static str {
+        match self {
+            LookupTargetSource::RepositoryUrl => "repository_url",
+            LookupTargetSource::Identity => "identity",
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+struct LookupTarget {
+    host: String,
+    owner: String,
+    repo: String,
+    repository_url: String,
+    path: Option<String>,
+    source: &'static str,
+}
+
+fn resolve_lookup_target(arguments: &Value) -> Result<LookupTarget> {
+    let path = optional_string(arguments, "path");
+    if let Some(repository_url) = optional_string(arguments, "repositoryUrl") {
+        let (host, owner, repo) = parse_repository_url(&repository_url)?;
+        return Ok(LookupTarget {
+            host,
+            owner,
+            repo,
+            repository_url,
+            path,
+            source: LookupTargetSource::RepositoryUrl.as_str(),
+        });
+    }
+
+    let host = required_string(arguments, "host")?.to_string();
+    let owner = required_string(arguments, "owner")?.to_string();
+    let repo = required_string(arguments, "repo")?.to_string();
+    validate_lookup_identity(&host, &owner, &repo)?;
+    Ok(LookupTarget {
+        repository_url: format!("https://{}/{}/{}", host, owner, repo),
+        host,
+        owner,
+        repo,
+        path,
+        source: LookupTargetSource::Identity.as_str(),
+    })
+}
+
+fn parse_repository_url(value: &str) -> Result<(String, String, String)> {
+    let trimmed = value.trim();
+    let with_scheme = if trimmed.starts_with("http://") || trimmed.starts_with("https://") {
+        trimmed.to_string()
+    } else {
+        format!("https://{}", trimmed.trim_start_matches('/'))
+    };
+    let url = Url::parse(&with_scheme)
+        .map_err(|err| anyhow!("invalid repositoryUrl `{}`: {}", value, err))?;
+    let host = url
+        .host_str()
+        .ok_or_else(|| anyhow!("repositoryUrl is missing a host: {}", value))?
+        .to_string();
+    let segments = url
+        .path_segments()
+        .map(|segments| {
+            segments
+                .filter(|segment| !segment.is_empty())
+                .map(str::to_string)
+                .collect::<Vec<_>>()
+        })
+        .unwrap_or_default();
+
+    let (identity_host, owner, repo): (String, String, String) =
+        if segments.len() >= 5 && segments[0] == "v0" && segments[1] == "repos" {
+            (
+                segments[2].clone(),
+                segments[3].clone(),
+                trim_repo_suffix(&segments[4]),
+            )
+        } else if segments.len() >= 2 {
+            (
+                host.clone(),
+                segments[0].clone(),
+                trim_repo_suffix(&segments[1]),
+            )
+        } else {
+            bail!(
+                "repositoryUrl must include at least owner/repo path segments: {}",
+                value
+            );
+        };
+    validate_lookup_identity(&identity_host, &owner, &repo)?;
+    Ok((identity_host, owner, repo))
+}
+
+fn trim_repo_suffix(value: &str) -> String {
+    value.strip_suffix(".git").unwrap_or(value).to_string()
+}
+
+fn validate_lookup_identity(host: &str, owner: &str, repo: &str) -> Result<()> {
+    for (field, value) in [("host", host), ("owner", owner), ("repo", repo)] {
+        let trimmed = value.trim();
+        if trimmed.is_empty() {
+            bail!("lookup {} must not be empty", field);
+        }
+        if trimmed.contains('/') {
+            bail!("lookup {} must be a single path segment", field);
+        }
+    }
+    Ok(())
+}
+
+fn normalize_public_base_url(value: &str) -> Result<String> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        bail!("baseUrl must not be empty");
+    }
+    let with_scheme = if trimmed.starts_with("http://") || trimmed.starts_with("https://") {
+        trimmed.to_string()
+    } else {
+        format!("https://{}", trimmed.trim_start_matches('/'))
+    };
+    let url =
+        Url::parse(&with_scheme).map_err(|err| anyhow!("invalid baseUrl `{}`: {}", value, err))?;
+    match url.scheme() {
+        "http" | "https" => {}
+        other => bail!("unsupported baseUrl scheme: {}", other),
+    }
+    Ok(url.as_str().trim_end_matches('/').to_string())
+}
+
+fn remote_public_root(base_url: &str) -> String {
+    base_url.trim_end_matches('/').to_string()
+}
+
+fn remote_repository_url(
+    base_url: &str,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    leaf: &str,
+) -> String {
+    format!(
+        "{}/v0/repos/{}/{}/{}/{}",
+        remote_public_root(base_url),
+        host,
+        owner,
+        repo,
+        leaf
+    )
+}
+
+fn remote_query_url(
+    base_url: &str,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    path: &str,
+) -> Result<Url> {
+    let mut url = Url::parse(&format!(
+        "{}/v0/repos/{}/{}/{}/query",
+        remote_public_root(base_url),
+        host,
+        owner,
+        repo
+    ))?;
+    url.query_pairs_mut().append_pair("path", path);
+    Ok(url)
+}
+
+fn build_remote_lookup_client() -> Result<Client> {
+    Client::builder()
+        .user_agent(format!("dotrepo-mcp/{}", env!("CARGO_PKG_VERSION")))
+        .timeout(REMOTE_LOOKUP_TIMEOUT)
+        .build()
+        .map_err(Into::into)
+}
+
+fn fetch_remote_json(client: &Client, url: &str) -> Result<Value> {
+    let response = client
+        .get(url)
+        .send()
+        .map_err(|error| anyhow!("failed to GET {}: {}", url, error))?;
+    let status = response.status();
+    if !status.is_success() {
+        let body = response.text().unwrap_or_default();
+        bail!(
+            "remote lookup request failed {}: HTTP {} {}",
+            url,
+            status.as_u16(),
+            compact_error_body(&body)
+        );
+    }
+    response
+        .json::<Value>()
+        .map_err(|error| anyhow!("failed to decode JSON from {}: {}", url, error))
+}
+
+fn compact_error_body(body: &str) -> String {
+    let compact = body.split_whitespace().collect::<Vec<_>>().join(" ");
+    if compact.is_empty() {
+        "without response body".into()
+    } else {
+        compact
+    }
+}
+
 fn ensure_initialized(state: &ServerState) -> Result<()> {
     if state.protocol_version.is_none() {
         bail!("server must receive initialize before calling tools");
@@ -448,6 +740,23 @@ fn tool_definitions() -> Vec<Value> {
                 "type": "object",
                 "properties": {
                     "root": { "type": "string", "description": "Repository root containing .repo or record.toml." }
+                },
+                "additionalProperties": false
+            }
+        }),
+        json!({
+            "name": "dotrepo.lookup",
+            "title": "Lookup hosted public repository",
+            "description": "Resolve a repository URL or identity against the hosted public surface and return summary, trust, and query entrypoints without cloning.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "repositoryUrl": { "type": "string", "description": "Repository URL such as https://github.com/owner/repo or a hosted dotrepo repository URL." },
+                    "host": { "type": "string", "description": "Repository host when resolving by identity." },
+                    "owner": { "type": "string", "description": "Repository owner when resolving by identity." },
+                    "repo": { "type": "string", "description": "Repository name when resolving by identity." },
+                    "path": { "type": "string", "description": "Optional dot-path to resolve immediately through the hosted query route." },
+                    "baseUrl": { "type": "string", "description": "Hosted public origin; defaults to https://dotrepo.org." }
                 },
                 "additionalProperties": false
             }
@@ -572,6 +881,9 @@ fn error_response(id: Value, code: i64, message: String, data: Option<Value>) ->
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::io::{Read, Write};
+    use std::net::TcpListener;
+    use std::thread;
     use std::time::{SystemTime, UNIX_EPOCH};
 
     #[test]
@@ -587,6 +899,9 @@ mod tests {
         assert!(tools
             .iter()
             .any(|tool| tool["name"] == Value::String("dotrepo.query".into())));
+        assert!(tools
+            .iter()
+            .any(|tool| tool["name"] == Value::String("dotrepo.lookup".into())));
         assert!(tools
             .iter()
             .any(|tool| tool["name"] == Value::String("dotrepo.import_preview".into())));
@@ -778,7 +1093,10 @@ description = "Missing source and trust"
         let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false)
             .expect_err("existing file should be preserved");
         assert!(err.to_string().contains("already exists"));
-        assert_eq!(fs::read_to_string(&path).expect("file readable"), "existing\n");
+        assert_eq!(
+            fs::read_to_string(&path).expect("file readable"),
+            "existing\n"
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -994,6 +1312,181 @@ text = "Accepted claim."
     }
 
     #[test]
+    fn parse_repository_url_supports_upstream_and_hosted_urls() {
+        assert_eq!(
+            parse_repository_url("github.com/tokio-rs/tokio").expect("repo url parses"),
+            ("github.com".into(), "tokio-rs".into(), "tokio".into())
+        );
+        assert_eq!(
+            parse_repository_url(
+                "https://dotrepo.org/v0/repos/github.com/tokio-rs/tokio/index.json"
+            )
+            .expect("hosted repo url parses"),
+            ("github.com".into(), "tokio-rs".into(), "tokio".into())
+        );
+    }
+
+    #[test]
+    fn lookup_tool_fetches_hosted_summary_trust_and_query() {
+        let routes = vec![
+            (
+                "/v0/meta.json",
+                json!({
+                    "apiVersion": "v0",
+                    "generatedAt": "2026-04-18T03:02:00Z",
+                    "snapshotDigest": "abc123",
+                    "staleAfter": "2026-04-19T03:02:00Z",
+                    "strategy": "static_summary_and_trust",
+                }),
+            ),
+            (
+                "/v0/repos/github.com/example/orbit/index.json",
+                json!({
+                    "apiVersion": "v0",
+                    "freshness": {
+                        "generatedAt": "2026-04-18T03:02:00Z",
+                        "snapshotDigest": "abc123",
+                        "staleAfter": "2026-04-19T03:02:00Z",
+                    },
+                    "identity": {
+                        "host": "github.com",
+                        "owner": "example",
+                        "repo": "orbit",
+                        "source": "https://github.com/example/orbit",
+                    },
+                    "repository": {
+                        "name": "orbit",
+                        "description": "Fast local-first sync engine",
+                    },
+                    "selection": {
+                        "reason": "only_matching_record",
+                        "record": {
+                            "manifestPath": "repos/github.com/example/orbit/record.toml",
+                            "record": {
+                                "mode": "overlay",
+                                "status": "reviewed",
+                            },
+                        },
+                    },
+                    "conflicts": [],
+                    "links": {
+                        "self": "/v0/repos/github.com/example/orbit/index.json",
+                        "trust": "/v0/repos/github.com/example/orbit/trust.json",
+                        "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
+                        "indexPath": "repos/github.com/example/orbit/",
+                    },
+                }),
+            ),
+            (
+                "/v0/repos/github.com/example/orbit/trust.json",
+                json!({
+                    "apiVersion": "v0",
+                    "freshness": {
+                        "generatedAt": "2026-04-18T03:02:00Z",
+                        "snapshotDigest": "abc123",
+                        "staleAfter": "2026-04-19T03:02:00Z",
+                    },
+                    "identity": {
+                        "host": "github.com",
+                        "owner": "example",
+                        "repo": "orbit",
+                        "source": "https://github.com/example/orbit",
+                    },
+                    "selection": {
+                        "reason": "only_matching_record",
+                        "record": {
+                            "manifestPath": "repos/github.com/example/orbit/record.toml",
+                            "record": {
+                                "mode": "overlay",
+                                "status": "reviewed",
+                            },
+                        },
+                    },
+                    "conflicts": [],
+                    "links": {
+                        "self": "/v0/repos/github.com/example/orbit/trust.json",
+                        "repository": "/v0/repos/github.com/example/orbit/index.json",
+                        "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
+                        "indexPath": "repos/github.com/example/orbit/",
+                    },
+                }),
+            ),
+            (
+                "/v0/repos/github.com/example/orbit/query?path=repo.description",
+                json!({
+                    "apiVersion": "v0",
+                    "freshness": {
+                        "generatedAt": "2026-04-18T03:02:00Z",
+                        "snapshotDigest": "abc123",
+                        "staleAfter": "2026-04-19T03:02:00Z",
+                    },
+                    "identity": {
+                        "host": "github.com",
+                        "owner": "example",
+                        "repo": "orbit",
+                        "source": "https://github.com/example/orbit",
+                    },
+                    "path": "repo.description",
+                    "value": "Fast local-first sync engine",
+                    "selection": {
+                        "reason": "only_matching_record",
+                        "record": {
+                            "manifestPath": "repos/github.com/example/orbit/record.toml",
+                            "record": {
+                                "mode": "overlay",
+                                "status": "reviewed",
+                            },
+                        },
+                    },
+                    "conflicts": [],
+                    "links": {
+                        "self": "/v0/repos/github.com/example/orbit/query?path=repo.description",
+                        "repository": "/v0/repos/github.com/example/orbit/index.json",
+                        "trust": "/v0/repos/github.com/example/orbit/trust.json",
+                        "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
+                        "indexPath": "repos/github.com/example/orbit/",
+                    },
+                }),
+            ),
+        ];
+        let (_server, base_url) = start_json_server(routes);
+
+        let response = call_tool(
+            "dotrepo.lookup",
+            json!({
+                "repositoryUrl": "https://github.com/example/orbit",
+                "path": "repo.description",
+                "baseUrl": base_url,
+            }),
+        );
+        let structured = &response["result"]["structuredContent"];
+        assert_eq!(
+            structured["identity"],
+            json!({
+                "host": "github.com",
+                "owner": "example",
+                "repo": "orbit",
+            })
+        );
+        assert_eq!(
+            structured["lookup"]["source"],
+            Value::String("repository_url".into())
+        );
+        assert_eq!(
+            structured["query"]["value"],
+            Value::String("Fast local-first sync engine".into())
+        );
+        assert_eq!(
+            structured["links"]["queryTemplate"],
+            Value::String("/v0/repos/github.com/example/orbit/query?path={dot_path}".into())
+        );
+        assert_eq!(
+            structured["summary"]["repository"]["name"],
+            Value::String("orbit".into())
+        );
+    }
+
+    #[test]
     fn message_framing_round_trips() {
         let message = json!({
             "jsonrpc": "2.0",
@@ -1128,5 +1621,71 @@ pull_request_template = "skip"
             }
             fs::write(path, contents).expect("output written");
         }
+    }
+
+    struct TestServer {
+        join: Option<thread::JoinHandle<()>>,
+    }
+
+    impl Drop for TestServer {
+        fn drop(&mut self) {
+            if let Some(join) = self.join.take() {
+                join.join().expect("server thread joins");
+            }
+        }
+    }
+
+    fn start_json_server(routes: Vec<(&'static str, Value)>) -> (TestServer, String) {
+        let listener = TcpListener::bind("127.0.0.1:0").expect("listener binds");
+        let address = listener.local_addr().expect("listener address");
+        let routes = routes
+            .into_iter()
+            .map(|(path, body)| {
+                (
+                    path.to_string(),
+                    serde_json::to_string(&body).expect("route JSON serializes"),
+                )
+            })
+            .collect::<Vec<_>>();
+        let expected_requests = routes.len();
+        let handle = thread::spawn(move || {
+            for _ in 0..expected_requests {
+                let (mut stream, _) = listener.accept().expect("client connects");
+                let mut buffer = [0_u8; 4096];
+                let bytes_read = stream.read(&mut buffer).expect("request readable");
+                let request = String::from_utf8_lossy(&buffer[..bytes_read]);
+                let request_line = request.lines().next().expect("request line");
+                let path = request_line
+                    .split_whitespace()
+                    .nth(1)
+                    .expect("request path")
+                    .to_string();
+                let body = routes
+                    .iter()
+                    .find(|(candidate, _)| *candidate == path)
+                    .map(|(_, body)| body.clone());
+                let (status_line, response_body) = if let Some(body) = body {
+                    ("HTTP/1.1 200 OK", body)
+                } else {
+                    (
+                        "HTTP/1.1 404 Not Found",
+                        serde_json::to_string(&json!({ "error": "not found" }))
+                            .expect("404 serializes"),
+                    )
+                };
+                let response = format!(
+                    "{status_line}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}",
+                    response_body.len(),
+                    response_body
+                );
+                stream
+                    .write_all(response.as_bytes())
+                    .expect("response written");
+            }
+        });
+        (
+            TestServer { join: Some(handle) },
+            format!("http://{}", address),
+        )
     }
 }

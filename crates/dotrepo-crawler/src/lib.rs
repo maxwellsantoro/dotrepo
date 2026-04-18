@@ -46,6 +46,12 @@ pub fn write_crawler_state(path: &Path, state: &CrawlerStateSnapshot) -> Result<
     Ok(())
 }
 
+pub fn refresh_candidates_from_state(
+    state: &CrawlerStateSnapshot,
+) -> Result<Vec<RefreshCandidate>> {
+    github::refresh_candidates_from_state_impl(state)
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RepositoryRef {

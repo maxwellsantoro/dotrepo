@@ -1,15 +1,15 @@
 use anyhow::{anyhow, bail, Result};
 use clap::{Args, Parser, Subcommand};
 use dotrepo_crawler::{
-    apply_crawl_writeback, crawl_repository, load_crawler_state, schedule_refresh,
-    seed_repositories, write_crawler_state, CrawlDiagnostic, CrawlRepositoryRequest,
-    CrawlStateRecord, CrawlerStateSnapshot, DiscoveredRepository, RefreshCandidate, RepositoryRef,
-    ScheduleRefreshRequest, SeedRepositoriesReport, SeedRepositoriesRequest, StarBand,
-    MAX_SEED_LIMIT,
+    apply_crawl_writeback, crawl_repository, load_crawler_state, refresh_candidates_from_state,
+    schedule_refresh, seed_repositories, write_crawler_state, CrawlDiagnostic,
+    CrawlRepositoryRequest, CrawlStateRecord, CrawlerStateSnapshot, DiscoveredRepository,
+    RefreshCandidate, RefreshReason, RepositoryRef, ScheduleRefreshReport, ScheduleRefreshRequest,
+    SeedRepositoriesReport, SeedRepositoriesRequest, StarBand, MAX_SEED_LIMIT,
 };
 use dotrepo_schema::{Manifest, RecordStatus};
 use serde::Serialize;
-use std::collections::HashSet;
+use std::collections::{BTreeMap, HashSet};
 use std::path::{Path, PathBuf};
 
 #[derive(Parser)]
@@ -30,6 +30,8 @@ enum Command {
     Seed(SeedArgs),
     /// Schedule refresh work from discovery output and persisted crawler state.
     Schedule(ScheduleArgs),
+    /// Fetch current GitHub heads for tracked repositories and emit a refresh plan.
+    RefreshPlan(RefreshPlanArgs),
 }
 
 #[derive(Args, Debug, Clone)]
@@ -153,6 +155,28 @@ struct ScheduleArgs {
     json: bool,
 }
 
+#[derive(Args, Debug, Clone)]
+struct RefreshPlanArgs {
+    /// Path to the crawler state TOML file.
+    #[arg(long, default_value = "index/.crawler-state.toml")]
+    state_path: PathBuf,
+    /// Maximum number of refreshes to schedule. Defaults to the tracked repo count.
+    #[arg(long)]
+    limit: Option<usize>,
+    /// Optional fixed RFC 3339 timestamp for deterministic scheduling output.
+    #[arg(long)]
+    now: Option<String>,
+    /// Whether scheduled entries should request synthesis on top of factual refresh.
+    #[arg(long)]
+    synthesize: bool,
+    /// Optional synthesis model marker used when scheduling synthesized refreshes.
+    #[arg(long)]
+    synthesis_model: Option<String>,
+    /// Emit JSON instead of human-readable output.
+    #[arg(long)]
+    json: bool,
+}
+
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct CrawlCommandReport {
@@ -253,6 +277,16 @@ struct SeedReviewReport {
     items: Vec<SeedReviewAssessment>,
 }
 
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct RefreshPlanCommandReport {
+    state_path: PathBuf,
+    tracked_repositories: usize,
+    candidate_count: usize,
+    candidates: Vec<RefreshCandidate>,
+    schedule: ScheduleRefreshReport,
+}
+
 fn main() {
     if let Err(err) = run() {
         eprintln!("{err}");
@@ -267,6 +301,7 @@ fn run() -> Result<()> {
         Command::Crawl(args) => cmd_crawl(args),
         Command::Seed(args) => cmd_seed(args),
         Command::Schedule(args) => cmd_schedule(args),
+        Command::RefreshPlan(args) => cmd_refresh_plan(args),
     }
 }
 
@@ -519,7 +554,8 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                     &[],
                     manifest_path,
                     Some(
-                        entry.repository
+                        entry
+                            .repository
                             .record_root(&args.index_root)
                             .join("evidence.md"),
                     ),
@@ -677,6 +713,71 @@ fn cmd_schedule(args: ScheduleArgs) -> Result<()> {
     Ok(())
 }
 
+fn cmd_refresh_plan(args: RefreshPlanArgs) -> Result<()> {
+    let state = load_crawler_state(&args.state_path)?;
+    let tracked_repositories = state.repositories.len();
+    let candidates = refresh_candidates_from_state(&state)?;
+    let effective_limit = args.limit.unwrap_or(candidates.len());
+    let schedule = schedule_refresh(&ScheduleRefreshRequest {
+        now: args.now,
+        limit: effective_limit,
+        synthesize: args.synthesize,
+        synthesis_model: args.synthesis_model,
+        state,
+        candidates: candidates.clone(),
+    })?;
+    let report = RefreshPlanCommandReport {
+        state_path: args.state_path,
+        tracked_repositories,
+        candidate_count: candidates.len(),
+        candidates,
+        schedule,
+    };
+
+    if args.json {
+        print_json(&report)?;
+        return Ok(());
+    }
+
+    println!(
+        "planned {} refreshes from {} tracked repositories",
+        report.schedule.scheduled.len(),
+        report.tracked_repositories
+    );
+    let mut reasons = BTreeMap::new();
+    for entry in &report.schedule.scheduled {
+        *reasons
+            .entry(refresh_reason_label(entry.reason).to_string())
+            .or_insert(0_usize) += 1;
+    }
+    if !reasons.is_empty() {
+        println!("scheduled reasons:");
+        for (reason, count) in reasons {
+            println!("- {}: {}", reason, count);
+        }
+    }
+    for entry in &report.schedule.scheduled {
+        println!(
+            "- {}/{}/{} ({})",
+            entry.repository.host,
+            entry.repository.owner,
+            entry.repository.repo,
+            refresh_reason_label(entry.reason)
+        );
+    }
+    if !report.schedule.skipped.is_empty() {
+        println!("skipped {} repositories", report.schedule.skipped.len());
+        for entry in &report.schedule.skipped {
+            println!(
+                "- {}/{}/{} ({})",
+                entry.repository.host, entry.repository.owner, entry.repository.repo, entry.reason
+            );
+        }
+    }
+
+    Ok(())
+}
+
 fn seed_request_from_args(
     host: &str,
     limit: usize,
@@ -690,6 +791,16 @@ fn seed_request_from_args(
         star_bands,
         include_archived,
         include_forks,
+    }
+}
+
+fn refresh_reason_label(reason: RefreshReason) -> &'static str {
+    match reason {
+        RefreshReason::MissingFactualCrawl => "missing factual crawl",
+        RefreshReason::HeadChanged => "head changed",
+        RefreshReason::MissingSynthesis => "missing synthesis",
+        RefreshReason::PreviousSynthesisFailed => "previous synthesis failed",
+        RefreshReason::SynthesisModelChanged => "synthesis model changed",
     }
 }
 
@@ -885,10 +996,10 @@ fn build_seed_review_report(results: &[SeedCommandResult]) -> SeedReviewReport {
         }
         if !failed
             && (item.security_contact.is_none()
-            || item
-                .security_contact
-                .as_deref()
-                .is_some_and(|value| value == "unknown"))
+                || item
+                    .security_contact
+                    .as_deref()
+                    .is_some_and(|value| value == "unknown"))
         {
             summary.missing_security_contact += 1;
         }
@@ -931,7 +1042,12 @@ fn build_seed_review_assessment(
     let mut reasons = Vec::new();
     let warning_codes = diagnostics
         .iter()
-        .filter(|diagnostic| matches!(diagnostic.severity, dotrepo_crawler::CrawlDiagnosticSeverity::Warning))
+        .filter(|diagnostic| {
+            matches!(
+                diagnostic.severity,
+                dotrepo_crawler::CrawlDiagnosticSeverity::Warning
+            )
+        })
         .map(|diagnostic| diagnostic.code.clone())
         .collect::<Vec<_>>();
 
@@ -1014,7 +1130,9 @@ fn build_seed_review_assessment(
     }
 
     if reasons.is_empty() {
-        reasons.push("ready for light review: execution, security, and ownership signals are present".into());
+        reasons.push(
+            "ready for light review: execution, security, and ownership signals are present".into(),
+        );
     }
 
     SeedReviewAssessment {
@@ -1359,6 +1477,34 @@ https://github.com/tokio-rs/tokio
     }
 
     #[test]
+    fn cli_parses_refresh_plan_command() {
+        let cli = Cli::try_parse_from([
+            "dotrepo-crawler",
+            "refresh-plan",
+            "--state-path",
+            "index/.crawler-state.toml",
+            "--limit",
+            "8",
+            "--synthesize",
+            "--synthesis-model",
+            "gpt-5.4",
+            "--json",
+        ])
+        .expect("cli parses");
+
+        match cli.command {
+            Command::RefreshPlan(plan) => {
+                assert_eq!(plan.state_path, Path::new("index/.crawler-state.toml"));
+                assert_eq!(plan.limit, Some(8));
+                assert!(plan.synthesize);
+                assert_eq!(plan.synthesis_model.as_deref(), Some("gpt-5.4"));
+                assert!(plan.json);
+            }
+            _ => panic!("expected refresh-plan command"),
+        }
+    }
+
+    #[test]
     fn build_seed_review_assessment_flags_inferred_execution_and_missing_security() {
         let repository = RepositoryRef {
             host: "github.com".into(),
@@ -1405,18 +1551,14 @@ https://github.com/tokio-rs/tokio
         );
 
         assert_eq!(assessment.priority, SeedReviewPriority::High);
-        assert!(
-            assessment
-                .reasons
-                .iter()
-                .any(|reason| reason.contains("security_contact is missing or still unknown"))
-        );
-        assert!(
-            assessment
-                .reasons
-                .iter()
-                .any(|reason| reason.contains("execution fields are inferred"))
-        );
+        assert!(assessment
+            .reasons
+            .iter()
+            .any(|reason| reason.contains("security_contact is missing or still unknown")));
+        assert!(assessment
+            .reasons
+            .iter()
+            .any(|reason| reason.contains("execution fields are inferred")));
         assert_eq!(
             assessment.warning_codes,
             vec!["materialize.missing_security".to_string()]

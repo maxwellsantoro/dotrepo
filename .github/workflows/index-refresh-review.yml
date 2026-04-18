@@ -1,0 +1,113 @@
+name: index-refresh-review
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: Maximum number of tracked repositories to schedule for refresh
+        required: false
+        default: "10"
+      batch_size:
+        description: Maximum repositories per reviewer-facing refresh batch
+        required: false
+        default: "5"
+      state_path:
+        description: Crawler state file to inspect
+        required: false
+        default: index/.crawler-state.toml
+  schedule:
+    - cron: "0 13 * * 4"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: index-refresh-review
+  cancel-in-progress: false
+
+jobs:
+  refresh-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Resolve workflow inputs
+        id: inputs
+        shell: bash
+        run: |
+          limit="${{ github.event.inputs.limit }}"
+          batch_size="${{ github.event.inputs.batch_size }}"
+          state_path="${{ github.event.inputs.state_path }}"
+          if [ -z "$limit" ]; then
+            limit="10"
+          fi
+          if [ -z "$batch_size" ]; then
+            batch_size="5"
+          fi
+          if [ -z "$state_path" ]; then
+            state_path="index/.crawler-state.toml"
+          fi
+          echo "limit=$limit" >> "$GITHUB_OUTPUT"
+          echo "batch_size=$batch_size" >> "$GITHUB_OUTPUT"
+          echo "state_path=$state_path" >> "$GITHUB_OUTPUT"
+      - name: Generate refresh review artifacts
+        id: generate
+        continue-on-error: true
+        shell: bash
+        run: |
+          mkdir -p index-refresh-review
+          status=0
+          cargo run -p dotrepo-crawler -- refresh-plan \
+            --state-path "${{ steps.inputs.outputs.state_path }}" \
+            --limit "${{ steps.inputs.outputs.limit }}" \
+            --json > index-refresh-review/refresh-plan.json || status=$?
+          if [ -f index-refresh-review/refresh-plan.json ]; then
+            python3 scripts/plan_refresh_review_batches.py \
+              --input index-refresh-review/refresh-plan.json \
+              --batch-size "${{ steps.inputs.outputs.batch_size }}" \
+              --output-json index-refresh-review/refresh-batches.json \
+              --output-md index-refresh-review/refresh-batches.md
+            python3 scripts/render_refresh_plan_summary.py \
+              --input index-refresh-review/refresh-plan.json \
+              --batches index-refresh-review/refresh-batches.json > index-refresh-review/refresh-plan.md
+          fi
+          cat <<EOF > index-refresh-review/run-context.txt
+          workflow=index-refresh-review
+          limit=${{ steps.inputs.outputs.limit }}
+          batch_size=${{ steps.inputs.outputs.batch_size }}
+          state_path=${{ steps.inputs.outputs.state_path }}
+          ref=${{ github.ref }}
+          sha=${{ github.sha }}
+          run_id=${{ github.run_id }}
+          event_name=${{ github.event_name }}
+          EOF
+          exit "$status"
+      - name: Publish GitHub summary
+        if: always()
+        shell: bash
+        run: |
+          if [ -f index-refresh-review/refresh-plan.json ]; then
+            python3 scripts/render_refresh_plan_summary.py \
+              --input index-refresh-review/refresh-plan.json \
+              --batches index-refresh-review/refresh-batches.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "# Index Refresh Review"
+              echo
+              echo "- refresh-plan generation failed before producing JSON"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload refresh review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: index-refresh-review
+          path: index-refresh-review/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Fail workflow if refresh plan generation failed
+        if: steps.generate.outcome == 'failure'
+        run: |
+          echo "refresh review completed with failures; inspect uploaded artifacts" >&2
+          exit 1

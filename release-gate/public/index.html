@@ -228,6 +228,71 @@
       color: var(--accent-strong);
       font-weight: 700;
     }
+    .lookup-shell {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .lookup-card {
+      min-width: 0;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }
+    .lookup-card h3 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+    .lookup-form {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .lookup-field {
+      display: grid;
+      gap: 8px;
+    }
+    .lookup-field span {
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .lookup-field input {
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(54, 46, 28, 0.16);
+      background: rgba(255, 251, 244, 0.92);
+      color: var(--ink);
+      font: inherit;
+    }
+    .lookup-field input:focus {
+      outline: 2px solid rgba(17, 100, 102, 0.24);
+      outline-offset: 2px;
+    }
+    .lookup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .lookup-button {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+    .lookup-feedback {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .lookup-feedback[data-state="error"] {
+      color: var(--signal);
+      font-weight: 700;
+    }
     .three-up {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -374,6 +439,7 @@
     @media (max-width: 980px) {
       .hero,
       .api-grid,
+      .lookup-shell,
       .repo-grid,
       .three-up {
         grid-template-columns: 1fr;
@@ -402,13 +468,15 @@
   </style>
 </head>
 <body>
+  <script id="dotrepo-homepage-snapshot" type="application/json">{"apiVersion":"v0","generatedAt":"2026-03-10T18:30:00Z","snapshotDigest":"f20be0c1e21d2eb6bb12e8249c675d64c838ae3c7a2aeae370a18230bd5ac8da","staleAfter":"2026-03-11T18:30:00Z","repositoryCount":15}</script>
   <div class="page">
     <header class="nav" aria-label="Top navigation">
       <div class="brand">
-        <span class="brand__mark">dotrepo</span>
+        <a class="brand__mark" href="/">dotrepo</a>
         <span class="brand__tag">open metadata protocol</span>
       </div>
       <nav class="nav__links">
+        <a href="/" aria-current="page">Home</a>
         <a href="/writing/">Writing</a>
         <a href="https://github.com/maxwellsantoro/dotrepo">GitHub</a>
         <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/README.md">Docs</a>
@@ -428,18 +496,30 @@
           this site are built from the reviewed export snapshot below.
         </p>
         <div class="cta-row">
-          <a class="cta cta--primary" href="./v0/repos/index.json">Explore the public index</a>
+          <a class="cta cta--primary" href="/v0/repos/index.json">Explore the public index</a>
           <a class="cta cta--secondary" href="/v0/repos/github.com/BurntSushi/ripgrep/query?path=repo.description">Try a live query</a>
           <a class="cta cta--secondary" href="https://github.com/maxwellsantoro/dotrepo">Read the code</a>
         </div>
       </div>
 
       <aside class="panel hero__meta">
-        <h2>Snapshot status</h2>
+        <h2>Growth and snapshot</h2>
         <div class="stat-grid">
           <div class="stat">
             <strong>15 repositories</strong>
             <span>Published in the current reviewed export.</span>
+          </div>
+          <div class="stat">
+            <strong>15 / 50 reviewed</strong>
+            <span>30% of the first tranche target.</span>
+          </div>
+          <div class="stat">
+            <strong>Rust 6 · TypeScript/JS 2 · Python 3 · Go 4</strong>
+            <span>Primary language-family mix in checked-in reviewed records.</span>
+          </div>
+          <div class="stat">
+            <strong>1 accepted claim example</strong>
+            <span>Accepted maintainer-owned claim examples in the checked-in index.</span>
           </div>
           <div class="stat">
             <strong>2026-03-10T18:30:00Z</strong>
@@ -455,6 +535,153 @@
           </div>
         </div>
       </aside>
+    </section>
+
+    <section class="panel section">
+      <h2>Repo lookup</h2>
+      <p class="section__intro">
+        Paste a repository URL and jump straight to the hosted summary or trust
+        surface. This keeps the human path aligned with the shipped
+        <code>dotrepo.lookup</code> MCP tool instead of inventing a separate browse product.
+      </p>
+      <div class="lookup-shell">
+        <article class="lookup-card">
+          <h3>Paste a repository URL or identity</h3>
+          <p class="section__intro">Open the live hosted summary or trust surface directly from the current public index. The same public origin also powers the MCP <code>dotrepo.lookup</code> tool.</p>
+          <form class="lookup-form" id="repo-lookup-form">
+            <label class="lookup-field" for="repo-lookup-input">
+              <span>Repository</span>
+              <input id="repo-lookup-input" name="repository" type="text" placeholder="github.com/BurntSushi/ripgrep" autocomplete="off" spellcheck="false" required>
+            </label>
+            <div class="lookup-actions">
+              <button class="cta cta--primary lookup-button" type="submit">Open summary</button>
+              <button class="cta cta--secondary lookup-button" type="button" id="repo-lookup-trust">Open trust</button>
+            </div>
+            <p class="lookup-feedback" id="repo-lookup-feedback">Accepted inputs: <code>owner/repo</code>, <code>host/owner/repo</code>, a GitHub URL, or a hosted dotrepo summary or trust URL.</p>
+          </form>
+        </article>
+        <article class="lookup-card">
+          <h3>Examples</h3>
+          <div class="endpoint-list">
+            <div class="endpoint">
+              <code>BurntSushi/ripgrep</code>
+              <span>Defaults to <code>github.com</code> for shorthand input.</span>
+            </div>
+            <div class="endpoint">
+              <code>github.com/astral-sh/uv</code>
+              <span>Explicit host plus identity segments.</span>
+            </div>
+            <div class="endpoint">
+              <code>https://github.com/pydantic/pydantic</code>
+              <span>Full repository URL.</span>
+            </div>
+            <div class="endpoint">
+              <code>https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/index.json</code>
+              <span>Hosted summary or trust URL pasted back into the lookup box.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <script>
+        (() => {
+          const basePath = &quot;&quot;;
+          const form = document.getElementById("repo-lookup-form");
+          const input = document.getElementById("repo-lookup-input");
+          const feedback = document.getElementById("repo-lookup-feedback");
+          const trustButton = document.getElementById("repo-lookup-trust");
+
+          function trimRepoSuffix(value) {
+            return value.endsWith(".git") ? value.slice(0, -4) : value;
+          }
+
+          function assertSegment(label, value) {
+            if (!value || value.includes("/")) {
+              throw new Error(`Invalid ${label} segment.`);
+            }
+            return value;
+          }
+
+          function parseLookupTarget(rawValue) {
+            const value = rawValue.trim();
+            if (!value) {
+              throw new Error("Enter a repository URL or host/owner/repo.");
+            }
+
+            if (value.includes("/v0/repos/")) {
+              const hostedMatch = value.match(/\/v0\/repos\/([^/]+)\/([^/]+)\/([^/]+)\/(?:index|trust)\.json$/);
+              if (hostedMatch) {
+                return {
+                  host: assertSegment("host", hostedMatch[1]),
+                  owner: assertSegment("owner", hostedMatch[2]),
+                  repo: assertSegment("repo", trimRepoSuffix(hostedMatch[3])),
+                };
+              }
+            }
+
+            let parsedUrl = null;
+            if (/^[a-z][a-z0-9+.-]*:\/\//i.test(value)) {
+              parsedUrl = new URL(value);
+            } else if (value.includes("/") && value.includes(".")) {
+              parsedUrl = new URL(`https://${value.replace(/^\/+/, "")}`);
+            }
+
+            if (parsedUrl) {
+              const pathSegments = parsedUrl.pathname.split("/").filter(Boolean);
+              if (pathSegments.length < 2) {
+                throw new Error("Repository URLs must include owner and repo segments.");
+              }
+              return {
+                host: assertSegment("host", parsedUrl.hostname),
+                owner: assertSegment("owner", pathSegments[0]),
+                repo: assertSegment("repo", trimRepoSuffix(pathSegments[1])),
+              };
+            }
+
+            const segments = value.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+            if (segments.length === 2) {
+              return {
+                host: "github.com",
+                owner: assertSegment("owner", segments[0]),
+                repo: assertSegment("repo", trimRepoSuffix(segments[1])),
+              };
+            }
+            if (segments.length >= 3) {
+              return {
+                host: assertSegment("host", segments[0]),
+                owner: assertSegment("owner", segments[1]),
+                repo: assertSegment("repo", trimRepoSuffix(segments[2])),
+              };
+            }
+            throw new Error("Use owner/repo, host/owner/repo, or a full repository URL.");
+          }
+
+          function buildDestination(kind, target) {
+            const suffix = kind === "trust" ? "trust.json" : "index.json";
+            return `${basePath}/v0/repos/${encodeURIComponent(target.host)}/${encodeURIComponent(target.owner)}/${encodeURIComponent(target.repo)}/${suffix}`;
+          }
+
+          function openLookup(kind) {
+            try {
+              const target = parseLookupTarget(input.value);
+              feedback.dataset.state = "ready";
+              feedback.textContent = `Opening ${kind} for ${target.host}/${target.owner}/${target.repo}`;
+              window.location.assign(buildDestination(kind, target));
+            } catch (error) {
+              feedback.dataset.state = "error";
+              feedback.textContent = error instanceof Error ? error.message : "Lookup failed.";
+            }
+          }
+
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            openLookup("summary");
+          });
+
+          trustButton.addEventListener("click", () => {
+            openLookup("trust");
+          });
+        })();
+      </script>
     </section>
 
     <section class="panel section">
@@ -479,8 +706,9 @@
       <h2>Interview-backed priorities</h2>
       <p class="section__intro">
         A 12-model interview round on dotrepo's current shape converged on three
-        next steps: grow the index until checking it is cheap, expose remote
-        lookup through MCP, and keep the public surface narrow while that work lands.
+        next steps: grow the index until checking it is cheap, automate the
+        review and refresh cadence around it, and keep the public surface narrow
+        while lookup and coverage improve.
       </p>
       <div class="three-up">
         <article class="feature">
@@ -488,12 +716,12 @@
           <p>Near-term usefulness comes from a broader reviewed overlay set, not another round of protocol ornamentation. The next tranche should span Rust, TypeScript, Python, and Go.</p>
         </article>
         <article class="feature">
-          <h3>Add remote lookup</h3>
-          <p>The public HTTP shape already supports repo-first lookup. The missing ergonomic layer is an MCP tool that takes a URL or identity and resolves against the hosted surface without cloning first.</p>
+          <h3>Automate the conveyor</h3>
+          <p>Candidate seeding and head-aware refresh planning now exist as scheduled review workflows. The next gain is turning those reports into small human-reviewed PR batches.</p>
         </article>
         <article class="feature">
           <h3>Keep it small</h3>
-          <p>The trust model, freshness semantics, and live query route are the differentiators. Search, mutation, and heavier editor product work should stay subordinate until the data and lookup path are stronger.</p>
+          <p>The trust model, freshness semantics, hosted lookup, and live query route are the differentiators. Search, mutation, and heavier editor product work should stay subordinate until the data is much broader.</p>
         </article>
       </div>
       <p class="section__note">
@@ -792,6 +1020,7 @@
 
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
+      <span>Homepage lookup resolves the same hosted surface used by MCP <code>dotrepo.lookup</code>.</span>
       <span>Staging remains the deployed <code>workers.dev</code> Worker.</span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>

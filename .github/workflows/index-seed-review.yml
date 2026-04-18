@@ -1,0 +1,109 @@
+name: index-seed-review
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: Maximum number of tranche targets to crawl for this review batch
+        required: false
+        default: "5"
+      batch_size:
+        description: Maximum repositories per reviewer-facing batch artifact
+        required: false
+        default: "3"
+      targets_file:
+        description: Repository target list to seed against
+        required: false
+        default: index/tranche-one-targets.txt
+  schedule:
+    - cron: "0 13 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: index-seed-review
+  cancel-in-progress: false
+
+jobs:
+  candidate-seed-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Resolve workflow inputs
+        id: inputs
+        shell: bash
+        run: |
+          limit="${{ github.event.inputs.limit }}"
+          batch_size="${{ github.event.inputs.batch_size }}"
+          targets_file="${{ github.event.inputs.targets_file }}"
+          if [ -z "$limit" ]; then
+            limit="5"
+          fi
+          if [ -z "$batch_size" ]; then
+            batch_size="3"
+          fi
+          if [ -z "$targets_file" ]; then
+            targets_file="index/tranche-one-targets.txt"
+          fi
+          echo "limit=$limit" >> "$GITHUB_OUTPUT"
+          echo "batch_size=$batch_size" >> "$GITHUB_OUTPUT"
+          echo "targets_file=$targets_file" >> "$GITHUB_OUTPUT"
+      - name: Generate candidate seed review artifacts
+        id: generate
+        continue-on-error: true
+        shell: bash
+        run: |
+          mkdir -p index-seed-review
+          status=0
+          cargo run -p dotrepo-crawler -- seed \
+            --targets-file "${{ steps.inputs.outputs.targets_file }}" \
+            --limit "${{ steps.inputs.outputs.limit }}" \
+            --dry-run \
+            --review-report-md index-seed-review/seed-review.md \
+            --json > index-seed-review/seed-report.json || status=$?
+          if [ -f index-seed-review/seed-report.json ]; then
+            python3 scripts/plan_seed_review_batches.py \
+              --input index-seed-review/seed-report.json \
+              --batch-size "${{ steps.inputs.outputs.batch_size }}" \
+              --output-json index-seed-review/seed-batches.json \
+              --output-md index-seed-review/seed-batches.md
+          fi
+          cat <<EOF > index-seed-review/run-context.txt
+          workflow=index-seed-review
+          limit=${{ steps.inputs.outputs.limit }}
+          batch_size=${{ steps.inputs.outputs.batch_size }}
+          targets_file=${{ steps.inputs.outputs.targets_file }}
+          ref=${{ github.ref }}
+          sha=${{ github.sha }}
+          run_id=${{ github.run_id }}
+          event_name=${{ github.event_name }}
+          EOF
+          exit "$status"
+      - name: Publish GitHub summary
+        if: always()
+        run: |
+          if [ -f index-seed-review/seed-report.json ]; then
+            python3 scripts/render_seed_review_summary.py \
+              --input index-seed-review/seed-report.json \
+              --batches index-seed-review/seed-batches.json >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "# Index Seed Review" >> "$GITHUB_STEP_SUMMARY"
+            echo >> "$GITHUB_STEP_SUMMARY"
+            echo "- seed-report.json was not produced; inspect uploaded artifacts" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload candidate seed review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: index-seed-review
+          path: index-seed-review/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Fail workflow if candidate crawl generation failed
+        if: steps.generate.outcome == 'failure'
+        run: |
+          echo "candidate seed review completed with crawl failures; inspect uploaded artifacts" >&2
+          exit 1

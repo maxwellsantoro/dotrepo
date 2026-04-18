@@ -1,6 +1,6 @@
 # Current status
 
-As of March 18, 2026, dotrepo is a working implementation of the protocol,
+As of April 18, 2026, dotrepo is a working implementation of the protocol,
 reference toolchain, and seed index, with a hosted read-only public surface.
 
 ## What exists now
@@ -59,6 +59,15 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Release-gate Worker smoke that stages the reviewed export into the Cloudflare
   project, runs Worker tests, dry-runs Wrangler packaging, and proves an
   emitted `queryTemplate` resolves through the Worker locally
+- A thin hosted `dotrepo.lookup` MCP tool that resolves a repository URL or
+  identity against `https://dotrepo.org/`, returns hosted summary and trust
+  entrypoints, and can optionally execute one immediate hosted query without a
+  local checkout
+- Scheduled weekly candidate-seeding and head-aware refresh-review workflows
+  that emit batch-aware reviewer-facing artifacts for tranche growth and factual
+  refresh planning
+- A homepage lookup input and visible progress counters for reviewed repo count,
+  tranche progress, language mix, and accepted maintainer-claim examples
 - A checked-in public API compatibility manifest and test for the current `v0`
   summary, trust, query, inventory, and error-wrapper contracts
 - Accepted public-serving RFCs 0016 through 0019 as the `v0` launch-doc set
@@ -68,10 +77,10 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - A full maintainer claim workflow product surface
 - Richer public browse and search UX on top of the now-live hosted public API
   origin
-- An MCP remote-lookup tool that resolves repository URLs or identities against
-  `https://dotrepo.org/` without a local checkout
 - A seed index broad enough across languages to make dotrepo a likely first
   check for arbitrary public repositories
+- Draft-PR batching and bounded refresh execution on top of the scheduled seed
+  and refresh review workflows
 - Bundle mode or first-class workspace/relations support
 - Arbitrary prose round-tripping or automatic conversion of unmanaged files into
   managed-region files
@@ -84,11 +93,14 @@ reference toolchain, and seed index, with a hosted read-only public surface.
   [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) until the
   checked-in index reaches a first tranche of 50 reviewed repositories across
   Rust, TypeScript, Python, and Go.
-- Add a `dotrepo.lookup`-style MCP tool that wraps the hosted public surface for
-  URL-first remote lookup immediately after the first index-growth tranche is
-  underway.
-- Keep hardening and public-site work tightly scoped to blockers for those two
-  leverage points rather than letting them reclaim the roadmap.
+- Turn the scheduled candidate-seeding and refresh-review loops into small,
+  human-reviewable execution batches rather than stopping at artifacts.
+- Keep hardening and public-site work tightly scoped to blockers for index
+  growth, review throughput, and hosted lookup stability rather than letting
+  them reclaim the roadmap.
+
+For the concrete execution order, automation loops, and milestone bar for that
+work, see [`docs/growth-and-automation-plan.md`](./growth-and-automation-plan.md).
 
 See [`docs/ai-tool-interviews.md`](./ai-tool-interviews.md) for the synthesized
 interview-backed rationale behind those priorities.
@@ -132,6 +144,9 @@ For the operator/reviewer loop over the exported public JSON tree, see
 [`docs/public-export-workflow.md`](./public-export-workflow.md).
 For the public surface architecture, see
 [`docs/public-surface.md`](./public-surface.md).
+For the concrete post-v1 execution plan over index growth, automation, and
+remote lookup, see
+[`docs/growth-and-automation-plan.md`](./growth-and-automation-plan.md).
 For the planned Cloudflare deployment target for hosted query, see
 [`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md).
 For the local and GitHub setup for the Worker deploy path, see

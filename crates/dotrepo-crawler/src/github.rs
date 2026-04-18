@@ -1,5 +1,8 @@
 use crate::materialize::{ConventionalRepositoryFiles, RepositoryTextFile};
-use crate::{DiscoveredRepository, GitHubRepositorySnapshot, RepositoryRef, StarBand};
+use crate::{
+    CrawlerStateSnapshot, DiscoveredRepository, GitHubRepositorySnapshot, RefreshCandidate,
+    RepositoryRef, StarBand,
+};
 use anyhow::{anyhow, Context, Result};
 use reqwest::blocking::{Client, Response};
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue, ACCEPT, AUTHORIZATION, USER_AGENT};
@@ -47,6 +50,40 @@ pub(crate) trait GitHubDiscoveryClient {
         include_archived: bool,
         include_forks: bool,
     ) -> Result<Vec<DiscoveredRepository>>;
+}
+
+pub(crate) fn refresh_candidates_from_state_impl(
+    state: &CrawlerStateSnapshot,
+) -> Result<Vec<RefreshCandidate>> {
+    let client = HttpGitHubClient::new()?;
+    refresh_candidates_from_state_with_client(state, &client)
+}
+
+fn refresh_candidates_from_state_with_client<C: GitHubClient>(
+    state: &CrawlerStateSnapshot,
+    client: &C,
+) -> Result<Vec<RefreshCandidate>> {
+    let mut candidates = Vec::with_capacity(state.repositories.len());
+    for record in &state.repositories {
+        if record.repository.host.trim() != "github.com" {
+            return Err(anyhow!(
+                "refresh planning currently supports github.com only, got {} for {}/{}/{}",
+                record.repository.host,
+                record.repository.host,
+                record.repository.owner,
+                record.repository.repo
+            ));
+        }
+
+        let snapshot = client.fetch_repository_snapshot(&record.repository)?;
+        candidates.push(RefreshCandidate {
+            repository: record.repository.clone(),
+            default_branch: Some(snapshot.default_branch),
+            head_sha: snapshot.head_sha,
+        });
+    }
+
+    Ok(candidates)
 }
 
 pub(crate) struct HttpGitHubClient {
@@ -574,7 +611,8 @@ mod tests {
             .timeout(Duration::from_millis(50))
             .build()
             .expect("client builds");
-        let url = Url::parse(&format!("http://{address}/repos/example/project")).expect("URL parses");
+        let url =
+            Url::parse(&format!("http://{address}/repos/example/project")).expect("URL parses");
 
         let start = Instant::now();
         let err = client
@@ -606,5 +644,82 @@ mod tests {
                 || message.contains("timed out")
                 || message.contains("error sending request")
         );
+    }
+
+    struct FakeGitHubClient;
+
+    impl GitHubClient for FakeGitHubClient {
+        fn fetch_repository_snapshot(
+            &self,
+            repository: &RepositoryRef,
+        ) -> Result<GitHubRepositorySnapshot> {
+            Ok(GitHubRepositorySnapshot {
+                html_url: repository.source_url(),
+                clone_url: format!("{}.git", repository.source_url()),
+                default_branch: "main".into(),
+                head_sha: Some(format!("{}-sha", repository.repo)),
+                description: None,
+                homepage: None,
+                license: None,
+                languages: Vec::new(),
+                topics: Vec::new(),
+                visibility: None,
+                stars: None,
+                archived: false,
+                fork: false,
+            })
+        }
+
+        fn fetch_repository_files(
+            &self,
+            _repository: &RepositoryRef,
+            _default_branch: &str,
+        ) -> Result<ConventionalRepositoryFiles> {
+            unreachable!("not used in refresh candidate planning tests")
+        }
+    }
+
+    #[test]
+    fn refresh_candidates_from_state_uses_repository_snapshots() {
+        let state = CrawlerStateSnapshot {
+            repositories: vec![
+                crate::CrawlStateRecord {
+                    repository: RepositoryRef {
+                        host: "github.com".into(),
+                        owner: "tokio-rs".into(),
+                        repo: "tokio".into(),
+                    },
+                    default_branch: Some("master".into()),
+                    head_sha: Some("old".into()),
+                    last_factual_crawl_at: Some("2026-03-20T00:00:00Z".into()),
+                    last_synthesis_success_at: None,
+                    last_synthesis_failure: None,
+                    synthesis_model: None,
+                },
+                crate::CrawlStateRecord {
+                    repository: RepositoryRef {
+                        host: "github.com".into(),
+                        owner: "fastapi".into(),
+                        repo: "fastapi".into(),
+                    },
+                    default_branch: Some("master".into()),
+                    head_sha: Some("stale".into()),
+                    last_factual_crawl_at: Some("2026-03-20T00:00:00Z".into()),
+                    last_synthesis_success_at: None,
+                    last_synthesis_failure: None,
+                    synthesis_model: None,
+                },
+            ],
+        };
+
+        let candidates =
+            refresh_candidates_from_state_with_client(&state, &FakeGitHubClient).expect("plans");
+
+        assert_eq!(candidates.len(), 2);
+        assert_eq!(candidates[0].repository.repo, "tokio");
+        assert_eq!(candidates[0].default_branch.as_deref(), Some("main"));
+        assert_eq!(candidates[0].head_sha.as_deref(), Some("tokio-sha"));
+        assert_eq!(candidates[1].repository.repo, "fastapi");
+        assert_eq!(candidates[1].head_sha.as_deref(), Some("fastapi-sha"));
     }
 }

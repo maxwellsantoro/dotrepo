@@ -47,13 +47,17 @@ and deferrals that drove that release bar.
    The current target is a first tranche of 50 reviewed high-signal repos across
    Rust, TypeScript, Python, and Go. The concrete target list now lives in
    [`index/tranche-one-targets.md`](../index/tranche-one-targets.md).
-2. Add hosted remote lookup to MCP so agents can resolve a repository URL or
-   identity against `https://dotrepo.org/` without cloning first.
+2. Turn the scheduled candidate-seeding and refresh-review loops into small,
+   reviewable execution batches while keeping the hosted lookup path thin and
+   stable.
 3. Keep public-surface, editor, and operator work scoped to the minimal
    hardening needed to support those first two priorities.
 
 See [`docs/ai-tool-interviews.md`](./ai-tool-interviews.md) for the research
 that pushed those priorities to the front.
+For the concrete operating plan over growth cadence, automation, and lookup
+shipping order, see
+[`docs/growth-and-automation-plan.md`](./growth-and-automation-plan.md).
 For the ticket-level post-v1 follow-on backlog grounded in the shipped surface,
 see [`docs/post-v1-backlog.md`](./post-v1-backlog.md).
 
@@ -64,10 +68,11 @@ see [`docs/post-v1-backlog.md`](./post-v1-backlog.md).
 - Public mutation or submission APIs
 
 The current downstream track after the completed public-serving launch is
-deliberate index growth plus remote lookup. That work should make the existing
-trust, conflict, freshness, and claim-visibility semantics useful often enough
-that agents and humans actually check dotrepo first before bundle or workspace
-semantics expand the protocol again.
+deliberate index growth plus automation around the now-shipped hosted lookup
+path. That work should make the existing trust, conflict, freshness, and
+claim-visibility semantics useful often enough that agents and humans actually
+check dotrepo first before bundle or workspace semantics expand the protocol
+again.
 
 See [`RFC 0008`](../rfcs/0008-maintainer-claim-lifecycle.md) for the first
 lifecycle draft.

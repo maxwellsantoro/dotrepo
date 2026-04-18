@@ -116,12 +116,13 @@ Current MCP tools:
 - `dotrepo.validate`
 - `dotrepo.query`
 - `dotrepo.trust`
+- `dotrepo.lookup`
 - `dotrepo.claim_inspect`
 - `dotrepo.generate_check`
 - `dotrepo.import_preview`
 - `dotrepo.import_write`
 
-Example MCP tool call:
+Example local MCP tool call:
 
 ```json
 {
@@ -134,7 +135,23 @@ Example MCP tool call:
 ```
 
 That returns the selected value together with record status, provenance, and
-conflict context. See
+conflict context.
+
+Example hosted lookup call:
+
+```json
+{
+  "name": "dotrepo.lookup",
+  "arguments": {
+    "repositoryUrl": "https://github.com/BurntSushi/ripgrep",
+    "path": "repo.description"
+  }
+}
+```
+
+That resolves the repository against `https://dotrepo.org/`, returns the hosted
+summary, trust, and query entrypoints, and optionally includes the live query
+result for the requested dot-path. See
 [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md) for the
 tool contract.
 

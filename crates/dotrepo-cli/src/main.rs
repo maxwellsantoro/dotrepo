@@ -2132,7 +2132,10 @@ homepage = "https://github.com/example/project"
         let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false)
             .expect_err("existing file should be preserved");
         assert!(err.to_string().contains("already exists"));
-        assert_eq!(fs::read_to_string(&path).expect("file readable"), "existing\n");
+        assert_eq!(
+            fs::read_to_string(&path).expect("file readable"),
+            "existing\n"
+        );
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

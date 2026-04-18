@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 import argparse
+import html
 import json
 import os
+import re
 import shlex
 import shutil
 import socket
@@ -106,12 +108,49 @@ def expect_single(paths: list[Path], description: str) -> Path:
     return paths[0]
 
 
+def expected_homepage_snapshot_state(meta: dict, inventory: dict) -> dict:
+    return {
+        "apiVersion": meta.get("apiVersion"),
+        "generatedAt": meta.get("generatedAt"),
+        "snapshotDigest": meta.get("snapshotDigest"),
+        "staleAfter": meta.get("staleAfter"),
+        "repositoryCount": inventory.get("repositoryCount"),
+    }
+
+
+def extract_homepage_snapshot_state(document: str, source: str) -> dict:
+    match = re.search(
+        r'<script id="dotrepo-homepage-snapshot" type="application/json">(.+?)</script>',
+        document,
+        re.DOTALL,
+    )
+    if match is None:
+        raise SystemExit(f"homepage snapshot state marker missing from {source}")
+    try:
+        payload = json.loads(html.unescape(match.group(1)))
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"homepage snapshot state is invalid JSON in {source}: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise SystemExit(f"homepage snapshot state is malformed in {source}: {payload!r}")
+    return payload
+
+
+def verify_homepage_snapshot_state(document: str, source: str, meta: dict, inventory: dict) -> None:
+    expected = expected_homepage_snapshot_state(meta, inventory)
+    actual = extract_homepage_snapshot_state(document, source)
+    if actual != expected:
+        raise SystemExit(
+            f"homepage snapshot state mismatch in {source}: expected {expected}, got {actual}"
+        )
+
+
 def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     meta_path = public_dir / "v0" / "meta.json"
     inventory_path = public_dir / "v0" / "repos" / "index.json"
+    homepage_path = public_dir / "index.html"
     ensure_file(meta_path)
     ensure_file(inventory_path)
-    ensure_file(public_dir / "index.html")
+    ensure_file(homepage_path)
     ensure_file(public_dir / ".nojekyll")
 
     meta = json.loads(meta_path.read_text())
@@ -124,6 +163,7 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     repositories = inventory.get("repositories")
     if not isinstance(repositories, list) or not repositories:
         raise SystemExit(f"public export inventory is empty: {inventory_path}")
+    verify_homepage_snapshot_state(homepage_path.read_text(), str(homepage_path), meta, inventory)
 
     normalized_base = "/" if expected_base_path == "/" else expected_base_path.rstrip("/")
     for repo in repositories:
@@ -284,6 +324,20 @@ def smoke_test_release_bundle(
             repositories = inventory.get("repositories")
             if not isinstance(repositories, list) or not repositories:
                 raise SystemExit("same-origin inventory smoke found no repositories")
+            meta_url = f"http://{server_addr}{base}/v0/meta.json"
+            status, body = http_get_text(meta_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin meta smoke failed ({status}) for {meta_url}: {body}"
+                )
+            meta = json.loads(body)
+            homepage_url = f"http://{server_addr}{base or '/'}"
+            status, body = http_get_text(homepage_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin homepage smoke failed ({status}) for {homepage_url}: {body}"
+                )
+            verify_homepage_snapshot_state(body, homepage_url, meta, inventory)
             query_template = repositories[0]["links"]["queryTemplate"]
             if not isinstance(query_template, str):
                 raise SystemExit("same-origin inventory smoke found no queryTemplate")
@@ -355,6 +409,20 @@ def smoke_test_cloudflare_worker(worker_dir: Path, base_path: str) -> None:
         repositories = inventory.get("repositories")
         if not isinstance(repositories, list) or not repositories:
             raise SystemExit("Cloudflare Worker inventory smoke found no repositories")
+        meta_url = f"http://{server_addr}{base}/v0/meta.json"
+        status, body = http_get_text(meta_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker meta smoke failed ({status}) for {meta_url}: {body}"
+            )
+        meta = json.loads(body)
+        homepage_url = f"http://{server_addr}{base or '/'}"
+        status, body = http_get_text(homepage_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker homepage smoke failed ({status}) for {homepage_url}: {body}"
+            )
+        verify_homepage_snapshot_state(body, homepage_url, meta, inventory)
         query_template = repositories[0]["links"]["queryTemplate"]
         if not isinstance(query_template, str):
             raise SystemExit("Cloudflare Worker inventory smoke found no queryTemplate")

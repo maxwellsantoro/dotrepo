@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -80,6 +82,57 @@ def http_get_json(url: str) -> Any:
         raise SystemExit(f"smoke returned invalid JSON for {url}: {exc}") from exc
 
 
+def http_get_text(url: str) -> str:
+    request = Request(url, headers=REQUEST_HEADERS)
+    try:
+        with urlopen(request, timeout=15) as response:
+            status = getattr(response, "status", response.getcode())
+            body = response.read().decode("utf-8")
+    except HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        hint = ""
+        if exc.code == 403 and "error code: 1010" in body:
+            hint = (
+                " (Cloudflare blocked the client signature on workers.dev; "
+                "verify with a browser-like User-Agent or promote the smoke check "
+                "to the final custom domain instead)"
+            )
+        raise SystemExit(f"smoke failed ({exc.code}) for {url}: {body}{hint}") from exc
+    except URLError as exc:
+        raise SystemExit(f"smoke failed for {url}: {exc.reason}") from exc
+
+    if status != 200:
+        raise SystemExit(f"smoke failed ({status}) for {url}: {body}")
+    return body
+
+
+def extract_homepage_snapshot_state(document: str, source: str) -> dict[str, Any]:
+    match = re.search(
+        r'<script id="dotrepo-homepage-snapshot" type="application/json">(.+?)</script>',
+        document,
+        re.DOTALL,
+    )
+    if match is None:
+        raise SystemExit(f"smoke could not find homepage snapshot state in {source}")
+    try:
+        payload = json.loads(html.unescape(match.group(1)))
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"smoke found invalid homepage snapshot state in {source}: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise SystemExit(f"smoke found malformed homepage snapshot state in {source}: {payload!r}")
+    return payload
+
+
+def expected_homepage_snapshot_state(meta: dict[str, Any], inventory: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "apiVersion": meta.get("apiVersion"),
+        "generatedAt": meta.get("generatedAt"),
+        "snapshotDigest": meta.get("snapshotDigest"),
+        "staleAfter": meta.get("staleAfter"),
+        "repositoryCount": inventory.get("repositoryCount"),
+    }
+
+
 def main() -> int:
     args = parse_args()
     public_root = Path(args.public_root).resolve()
@@ -99,10 +152,23 @@ def main() -> int:
     deploy_url = args.deploy_url.rstrip("/")
     base_path = normalize_base_path(args.base_path)
 
+    homepage_url = f"{deploy_url}{base_path or '/'}"
+    homepage = http_get_text(homepage_url)
+    homepage_state = extract_homepage_snapshot_state(homepage, homepage_url)
+
     meta_url = f"{deploy_url}{base_path}/v0/meta.json"
     meta = http_get_json(meta_url)
     if meta.get("apiVersion") != "v0":
         raise SystemExit(f"unexpected apiVersion from {meta_url}: {meta.get('apiVersion')}")
+
+    inventory_url = f"{deploy_url}{base_path}/v0/repos/index.json"
+    inventory = http_get_json(inventory_url)
+    expected_homepage_state = expected_homepage_snapshot_state(meta, inventory)
+    if homepage_state != expected_homepage_state:
+        raise SystemExit(
+            "deployed homepage snapshot state does not match live public JSON: "
+            f"expected {expected_homepage_state}, got {homepage_state}"
+        )
 
     query_url = (
         f"{deploy_url}{query_template.replace('{dot_path}', 'repo.description')}"
@@ -117,7 +183,9 @@ def main() -> int:
             f"deployed queryTemplate smoke returned unexpected self link: {self_link}"
         )
 
+    print(f"smoke ok: {homepage_url}")
     print(f"smoke ok: {meta_url}")
+    print(f"smoke ok: {inventory_url}")
     print(f"smoke ok: {query_url}")
     return 0
 

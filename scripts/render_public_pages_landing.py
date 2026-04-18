@@ -3,7 +3,10 @@
 import argparse
 import html
 import json
+import tomllib
+from collections import Counter
 from pathlib import Path
+from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
 
@@ -17,6 +20,11 @@ def parse_args() -> argparse.Namespace:
         dest="input_dir",
         default="public",
         help="Path to the exported public tree (default: public)",
+    )
+    parser.add_argument(
+        "--index-root",
+        default="index",
+        help="Path to the checked-in index root used for progress counters (default: index)",
     )
     return parser.parse_args()
 
@@ -33,6 +41,37 @@ def shorten_digest(value: str) -> str:
     return f"{value[:12]}...{value[-10:]}"
 
 
+def normalize_site_base_path(value: str) -> str:
+    trimmed = value.strip()
+    if trimmed in ("", "/"):
+        return ""
+    return trimmed if trimmed.startswith("/") else f"/{trimmed}"
+
+
+def site_href(base_path: str, path: str) -> str:
+    if path.startswith(("http://", "https://")):
+        return path
+    normalized = path if path.startswith("/") else f"/{path}"
+    if base_path:
+        return f"{base_path}{normalized}"
+    return normalized
+
+
+def detect_site_base_path(inventory: dict) -> str:
+    marker = "/v0/"
+    for entry in inventory.get("repositories", []):
+        links = entry.get("links", {})
+        for key in ("self", "trust", "queryTemplate"):
+            value = links.get(key)
+            if not isinstance(value, str):
+                continue
+            path = urlparse(value).path or value
+            index = path.find(marker)
+            if index >= 0:
+                return normalize_site_base_path(path[:index])
+    return ""
+
+
 def repository_segments(entry: dict) -> tuple[str, str, str]:
     identity = entry.get("identity", {})
     return (
@@ -45,6 +84,61 @@ def repository_segments(entry: dict) -> tuple[str, str, str]:
 def load_repository_surface(input_dir: Path, entry: dict, filename: str) -> dict:
     host, owner, repo = repository_segments(entry)
     return load_json(input_dir / "v0" / "repos" / host / owner / repo / filename)
+
+
+def normalize_language_family(languages: list[object]) -> str:
+    for language in languages:
+        normalized = str(language).strip().lower()
+        if normalized == "rust":
+            return "Rust"
+        if normalized in {"typescript", "javascript"}:
+            return "TypeScript/JS"
+        if normalized == "python":
+            return "Python"
+        if normalized == "go":
+            return "Go"
+    return "Other"
+
+
+def load_index_progress(index_root: Path) -> dict:
+    repo_root = index_root / "repos"
+    if not repo_root.is_dir():
+        raise SystemExit(f"missing required index root: {repo_root}")
+
+    language_counts: Counter[str] = Counter()
+    reviewed_repo_count = 0
+    for record_path in sorted(repo_root.glob("*/*/*/record.toml")):
+        document = tomllib.loads(record_path.read_text())
+        repo = document.get("repo", {})
+        languages = repo.get("languages", [])
+        if not isinstance(languages, list):
+            languages = []
+        language_counts[normalize_language_family(languages)] += 1
+        reviewed_repo_count += 1
+
+    accepted_claim_count = 0
+    for claim_path in sorted(repo_root.glob("*/*/*/claims/*/claim.toml")):
+        document = tomllib.loads(claim_path.read_text())
+        claim = document.get("claim", {})
+        if claim.get("state") == "accepted":
+            accepted_claim_count += 1
+
+    tranche_target = 50
+    tranche_percent = round((reviewed_repo_count / tranche_target) * 100) if reviewed_repo_count else 0
+    family_order = ["Rust", "TypeScript/JS", "Python", "Go", "Other"]
+    language_mix = " · ".join(
+        f"{family} {language_counts[family]}" for family in family_order if language_counts[family]
+    )
+    if not language_mix:
+        language_mix = "No reviewed records yet."
+
+    return {
+        "reviewedRepoCount": reviewed_repo_count,
+        "trancheTarget": tranche_target,
+        "tranchePercent": tranche_percent,
+        "languageMix": language_mix,
+        "acceptedClaimCount": accepted_claim_count,
+    }
 
 
 def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str]:
@@ -78,14 +172,14 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str]:
     return query_url, html.escape(json.dumps(example, indent=2))
 
 
-def render_site_header(active: str | None = None) -> str:
+def render_site_header(base_path: str, active: str | None = None) -> str:
     links = [
-        ("home", "/", "Home"),
-        ("writing", "/writing/", "Writing"),
+        ("home", site_href(base_path, "/"), "Home"),
+        ("writing", site_href(base_path, "/writing/"), "Writing"),
         ("github", "https://github.com/maxwellsantoro/dotrepo", "GitHub"),
         ("docs", "https://github.com/maxwellsantoro/dotrepo/blob/main/README.md", "Docs"),
-        ("inventory", "/v0/repos/index.json", "Inventory"),
-        ("snapshot", "/v0/meta.json", "Snapshot"),
+        ("inventory", site_href(base_path, "/v0/repos/index.json"), "Inventory"),
+        ("snapshot", site_href(base_path, "/v0/meta.json"), "Snapshot"),
     ]
     items = []
     for key, href, label in links:
@@ -94,14 +188,14 @@ def render_site_header(active: str | None = None) -> str:
     return """
     <header class="nav" aria-label="Top navigation">
       <div class="brand">
-        <a class="brand__mark" href="/">dotrepo</a>
+        <a class="brand__mark" href="{home_href}">dotrepo</a>
         <span class="brand__tag">open metadata protocol</span>
       </div>
       <nav class="nav__links">
         {items}
       </nav>
     </header>
-    """.format(items="\n        ".join(items)).strip()
+    """.format(home_href=site_href(base_path, "/"), items="\n        ".join(items)).strip()
 
 
 def write_text(path: Path, text: str) -> None:
@@ -109,10 +203,21 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text)
 
 
-def render_writing_cards() -> str:
+def build_homepage_snapshot_state(meta: dict, inventory: dict) -> str:
+    payload = {
+        "apiVersion": meta.get("apiVersion"),
+        "generatedAt": meta.get("generatedAt"),
+        "snapshotDigest": meta.get("snapshotDigest"),
+        "staleAfter": meta.get("staleAfter"),
+        "repositoryCount": inventory.get("repositoryCount"),
+    }
+    return json.dumps(payload, separators=(",", ":"))
+
+
+def render_writing_cards(base_path: str) -> str:
     cards = []
     for article in ARTICLES:
-        path = f"/writing/{article['slug']}/"
+        path = site_href(base_path, f"/writing/{article['slug']}/")
         companion_url = article.get("companion_url")
         companion_link = (
             f'<a href="{html.escape(str(companion_url))}">Companion essay</a>'
@@ -186,7 +291,151 @@ def render_repository_cards(inventory: dict) -> str:
     return "\n".join(cards)
 
 
-def render_writing_index() -> str:
+def render_lookup_panel(base_path: str) -> str:
+    base_path_json = html.escape(json.dumps(base_path))
+    return f"""
+      <div class="lookup-shell">
+        <article class="lookup-card">
+          <h3>Paste a repository URL or identity</h3>
+          <p class="section__intro">Open the live hosted summary or trust surface directly from the current public index. The same public origin also powers the MCP <code>dotrepo.lookup</code> tool.</p>
+          <form class="lookup-form" id="repo-lookup-form">
+            <label class="lookup-field" for="repo-lookup-input">
+              <span>Repository</span>
+              <input id="repo-lookup-input" name="repository" type="text" placeholder="github.com/BurntSushi/ripgrep" autocomplete="off" spellcheck="false" required>
+            </label>
+            <div class="lookup-actions">
+              <button class="cta cta--primary lookup-button" type="submit">Open summary</button>
+              <button class="cta cta--secondary lookup-button" type="button" id="repo-lookup-trust">Open trust</button>
+            </div>
+            <p class="lookup-feedback" id="repo-lookup-feedback">Accepted inputs: <code>owner/repo</code>, <code>host/owner/repo</code>, a GitHub URL, or a hosted dotrepo summary or trust URL.</p>
+          </form>
+        </article>
+        <article class="lookup-card">
+          <h3>Examples</h3>
+          <div class="endpoint-list">
+            <div class="endpoint">
+              <code>BurntSushi/ripgrep</code>
+              <span>Defaults to <code>github.com</code> for shorthand input.</span>
+            </div>
+            <div class="endpoint">
+              <code>github.com/astral-sh/uv</code>
+              <span>Explicit host plus identity segments.</span>
+            </div>
+            <div class="endpoint">
+              <code>https://github.com/pydantic/pydantic</code>
+              <span>Full repository URL.</span>
+            </div>
+            <div class="endpoint">
+              <code>https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/index.json</code>
+              <span>Hosted summary or trust URL pasted back into the lookup box.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <script>
+        (() => {{
+          const basePath = {base_path_json};
+          const form = document.getElementById("repo-lookup-form");
+          const input = document.getElementById("repo-lookup-input");
+          const feedback = document.getElementById("repo-lookup-feedback");
+          const trustButton = document.getElementById("repo-lookup-trust");
+
+          function trimRepoSuffix(value) {{
+            return value.endsWith(".git") ? value.slice(0, -4) : value;
+          }}
+
+          function assertSegment(label, value) {{
+            if (!value || value.includes("/")) {{
+              throw new Error(`Invalid ${{label}} segment.`);
+            }}
+            return value;
+          }}
+
+          function parseLookupTarget(rawValue) {{
+            const value = rawValue.trim();
+            if (!value) {{
+              throw new Error("Enter a repository URL or host/owner/repo.");
+            }}
+
+            if (value.includes("/v0/repos/")) {{
+              const hostedMatch = value.match(/\\/v0\\/repos\\/([^/]+)\\/([^/]+)\\/([^/]+)\\/(?:index|trust)\\.json$/);
+              if (hostedMatch) {{
+                return {{
+                  host: assertSegment("host", hostedMatch[1]),
+                  owner: assertSegment("owner", hostedMatch[2]),
+                  repo: assertSegment("repo", trimRepoSuffix(hostedMatch[3])),
+                }};
+              }}
+            }}
+
+            let parsedUrl = null;
+            if (/^[a-z][a-z0-9+.-]*:\\/\\//i.test(value)) {{
+              parsedUrl = new URL(value);
+            }} else if (value.includes("/") && value.includes(".")) {{
+              parsedUrl = new URL(`https://${{value.replace(/^\\/+/, "")}}`);
+            }}
+
+            if (parsedUrl) {{
+              const pathSegments = parsedUrl.pathname.split("/").filter(Boolean);
+              if (pathSegments.length < 2) {{
+                throw new Error("Repository URLs must include owner and repo segments.");
+              }}
+              return {{
+                host: assertSegment("host", parsedUrl.hostname),
+                owner: assertSegment("owner", pathSegments[0]),
+                repo: assertSegment("repo", trimRepoSuffix(pathSegments[1])),
+              }};
+            }}
+
+            const segments = value.replace(/^\\/+|\\/+$/g, "").split("/").filter(Boolean);
+            if (segments.length === 2) {{
+              return {{
+                host: "github.com",
+                owner: assertSegment("owner", segments[0]),
+                repo: assertSegment("repo", trimRepoSuffix(segments[1])),
+              }};
+            }}
+            if (segments.length >= 3) {{
+              return {{
+                host: assertSegment("host", segments[0]),
+                owner: assertSegment("owner", segments[1]),
+                repo: assertSegment("repo", trimRepoSuffix(segments[2])),
+              }};
+            }}
+            throw new Error("Use owner/repo, host/owner/repo, or a full repository URL.");
+          }}
+
+          function buildDestination(kind, target) {{
+            const suffix = kind === "trust" ? "trust.json" : "index.json";
+            return `${{basePath}}/v0/repos/${{encodeURIComponent(target.host)}}/${{encodeURIComponent(target.owner)}}/${{encodeURIComponent(target.repo)}}/${{suffix}}`;
+          }}
+
+          function openLookup(kind) {{
+            try {{
+              const target = parseLookupTarget(input.value);
+              feedback.dataset.state = "ready";
+              feedback.textContent = `Opening ${{kind}} for ${{target.host}}/${{target.owner}}/${{target.repo}}`;
+              window.location.assign(buildDestination(kind, target));
+            }} catch (error) {{
+              feedback.dataset.state = "error";
+              feedback.textContent = error instanceof Error ? error.message : "Lookup failed.";
+            }}
+          }}
+
+          form.addEventListener("submit", (event) => {{
+            event.preventDefault();
+            openLookup("summary");
+          }});
+
+          trustButton.addEventListener("click", () => {{
+            openLookup("trust");
+          }});
+        }})();
+      </script>
+    """.strip()
+
+
+def render_writing_index(base_path: str) -> str:
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -378,7 +627,7 @@ def render_writing_index() -> str:
 </head>
 <body>
   <div class="page">
-    {render_site_header("writing")}
+    {render_site_header(base_path, "writing")}
     <section class="panel hero">
       <p class="eyebrow">Writing</p>
       <h1>Field reports from the protocol getting real.</h1>
@@ -387,11 +636,12 @@ def render_writing_index() -> str:
     <section class="panel section">
       <h2>Latest</h2>
       <div class="repo-grid">
-        {render_writing_cards()}
+        {render_writing_cards(base_path)}
       </div>
     </section>
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
+      <span>Local review root: <a href="{site_href(base_path, '/')}">homepage</a></span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>
   </div>
@@ -400,7 +650,7 @@ def render_writing_index() -> str:
 """
 
 
-def render_article_page(article: dict) -> str:
+def render_article_page(article: dict, base_path: str) -> str:
     tags = "".join(
         f'<span class="tag">{html.escape(str(tag))}</span>' for tag in article.get("tags", [])
     )
@@ -654,7 +904,7 @@ def render_article_page(article: dict) -> str:
 </head>
 <body>
   <div class="page">
-    {render_site_header("writing")}
+    {render_site_header(base_path, "writing")}
     <article class="panel article-hero">
       <p class="article-kicker">{kicker}</p>
       <h1>{title}</h1>
@@ -669,9 +919,9 @@ def render_article_page(article: dict) -> str:
       {article["body_html"]}
     </section>
     <footer class="panel article-footer">
-      <span><a href="/writing/">Back to writing</a></span>
+      <span><a href="{site_href(base_path, '/writing/')}">Back to writing</a></span>
       <span><a href="https://github.com/maxwellsantoro/dotrepo">Project source</a></span>
-      <span><a href="/v0/repos/index.json">Live public index</a></span>
+      <span><a href="{site_href(base_path, '/v0/repos/index.json')}">Live public index</a></span>
     </footer>
   </div>
 </body>
@@ -682,8 +932,11 @@ def render_article_page(article: dict) -> str:
 def main() -> int:
     args = parse_args()
     input_dir = Path(args.input_dir)
+    index_root = Path(args.index_root)
     meta = load_json(input_dir / "v0" / "meta.json")
     inventory = load_json(input_dir / "v0" / "repos" / "index.json")
+    base_path = detect_site_base_path(inventory)
+    progress = load_index_progress(index_root)
 
     snapshot_digest = str(meta.get("snapshotDigest", "unknown"))
     generated_at = str(meta.get("generatedAt", "unknown"))
@@ -691,6 +944,15 @@ def main() -> int:
     repository_count = inventory.get("repositoryCount", 0)
     repositories = inventory.get("repositories", [])
     first_query, query_example = build_query_example(input_dir, inventory)
+    homepage_snapshot_state = build_homepage_snapshot_state(meta, inventory)
+    reviewed_repo_count = progress["reviewedRepoCount"]
+    tranche_target = progress["trancheTarget"]
+    tranche_percent = progress["tranchePercent"]
+    language_mix = str(progress["languageMix"])
+    accepted_claim_count = progress["acceptedClaimCount"]
+    accepted_claim_label = (
+        "accepted claim example" if accepted_claim_count == 1 else "accepted claim examples"
+    )
 
     stale_line = (
         f"<span>{html.escape(str(stale_after))}</span>" if stale_after else "<span>not set</span>"
@@ -926,6 +1188,71 @@ def main() -> int:
       color: var(--accent-strong);
       font-weight: 700;
     }}
+    .lookup-shell {{
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 18px;
+    }}
+    .lookup-card {{
+      min-width: 0;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }}
+    .lookup-card h3 {{
+      margin: 0;
+      font-size: 1.35rem;
+    }}
+    .lookup-form {{
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }}
+    .lookup-field {{
+      display: grid;
+      gap: 8px;
+    }}
+    .lookup-field span {{
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }}
+    .lookup-field input {{
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(54, 46, 28, 0.16);
+      background: rgba(255, 251, 244, 0.92);
+      color: var(--ink);
+      font: inherit;
+    }}
+    .lookup-field input:focus {{
+      outline: 2px solid rgba(17, 100, 102, 0.24);
+      outline-offset: 2px;
+    }}
+    .lookup-actions {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }}
+    .lookup-button {{
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }}
+    .lookup-feedback {{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }}
+    .lookup-feedback[data-state="error"] {{
+      color: var(--signal);
+      font-weight: 700;
+    }}
     .three-up {{
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1072,6 +1399,7 @@ def main() -> int:
     @media (max-width: 980px) {{
       .hero,
       .api-grid,
+      .lookup-shell,
       .repo-grid,
       .three-up {{
         grid-template-columns: 1fr;
@@ -1100,20 +1428,9 @@ def main() -> int:
   </style>
 </head>
 <body>
+  <script id="dotrepo-homepage-snapshot" type="application/json">{homepage_snapshot_state}</script>
   <div class="page">
-    <header class="nav" aria-label="Top navigation">
-      <div class="brand">
-        <span class="brand__mark">dotrepo</span>
-        <span class="brand__tag">open metadata protocol</span>
-      </div>
-      <nav class="nav__links">
-        <a href="/writing/">Writing</a>
-        <a href="https://github.com/maxwellsantoro/dotrepo">GitHub</a>
-        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/README.md">Docs</a>
-        <a href="/v0/repos/index.json">Inventory</a>
-        <a href="/v0/meta.json">Snapshot</a>
-      </nav>
-    </header>
+    {render_site_header(base_path, "home")}
 
     <section class="hero">
       <div class="panel hero__copy">
@@ -1126,18 +1443,30 @@ def main() -> int:
           this site are built from the reviewed export snapshot below.
         </p>
         <div class="cta-row">
-          <a class="cta cta--primary" href="./v0/repos/index.json">Explore the public index</a>
+          <a class="cta cta--primary" href="{site_href(base_path, '/v0/repos/index.json')}">Explore the public index</a>
           <a class="cta cta--secondary" href="{html.escape(first_query)}">Try a live query</a>
           <a class="cta cta--secondary" href="https://github.com/maxwellsantoro/dotrepo">Read the code</a>
         </div>
       </div>
 
       <aside class="panel hero__meta">
-        <h2>Snapshot status</h2>
+        <h2>Growth and snapshot</h2>
         <div class="stat-grid">
           <div class="stat">
             <strong>{html.escape(str(repository_count))} repositories</strong>
             <span>Published in the current reviewed export.</span>
+          </div>
+          <div class="stat">
+            <strong>{html.escape(str(reviewed_repo_count))} / {html.escape(str(tranche_target))} reviewed</strong>
+            <span>{html.escape(str(tranche_percent))}% of the first tranche target.</span>
+          </div>
+          <div class="stat">
+            <strong>{html.escape(language_mix)}</strong>
+            <span>Primary language-family mix in checked-in reviewed records.</span>
+          </div>
+          <div class="stat">
+            <strong>{html.escape(str(accepted_claim_count))} {accepted_claim_label}</strong>
+            <span>Accepted maintainer-owned claim examples in the checked-in index.</span>
           </div>
           <div class="stat">
             <strong>{html.escape(generated_at)}</strong>
@@ -1153,6 +1482,16 @@ def main() -> int:
           </div>
         </div>
       </aside>
+    </section>
+
+    <section class="panel section">
+      <h2>Repo lookup</h2>
+      <p class="section__intro">
+        Paste a repository URL and jump straight to the hosted summary or trust
+        surface. This keeps the human path aligned with the shipped
+        <code>dotrepo.lookup</code> MCP tool instead of inventing a separate browse product.
+      </p>
+      {render_lookup_panel(base_path)}
     </section>
 
     <section class="panel section">
@@ -1177,8 +1516,9 @@ def main() -> int:
       <h2>Interview-backed priorities</h2>
       <p class="section__intro">
         A 12-model interview round on dotrepo's current shape converged on three
-        next steps: grow the index until checking it is cheap, expose remote
-        lookup through MCP, and keep the public surface narrow while that work lands.
+        next steps: grow the index until checking it is cheap, automate the
+        review and refresh cadence around it, and keep the public surface narrow
+        while lookup and coverage improve.
       </p>
       <div class="three-up">
         <article class="feature">
@@ -1186,17 +1526,17 @@ def main() -> int:
           <p>Near-term usefulness comes from a broader reviewed overlay set, not another round of protocol ornamentation. The next tranche should span Rust, TypeScript, Python, and Go.</p>
         </article>
         <article class="feature">
-          <h3>Add remote lookup</h3>
-          <p>The public HTTP shape already supports repo-first lookup. The missing ergonomic layer is an MCP tool that takes a URL or identity and resolves against the hosted surface without cloning first.</p>
+          <h3>Automate the conveyor</h3>
+          <p>Candidate seeding and head-aware refresh planning now exist as scheduled review workflows. The next gain is turning those reports into small human-reviewed PR batches.</p>
         </article>
         <article class="feature">
           <h3>Keep it small</h3>
-          <p>The trust model, freshness semantics, and live query route are the differentiators. Search, mutation, and heavier editor product work should stay subordinate until the data and lookup path are stronger.</p>
+          <p>The trust model, freshness semantics, hosted lookup, and live query route are the differentiators. Search, mutation, and heavier editor product work should stay subordinate until the data is much broader.</p>
         </article>
       </div>
       <p class="section__note">
         Read the on-site write-up:
-        <a href="/writing/what-the-ais-think-about-dotrepo/">What the AIs Think About dotrepo</a>.
+        <a href="{site_href(base_path, '/writing/what-the-ais-think-about-dotrepo/')}">What the AIs Think About dotrepo</a>.
         Working repo notes remain in
         <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>.
       </p>
@@ -1209,7 +1549,7 @@ def main() -> int:
         public surface, and agent-facing product work.
       </p>
       <div class="repo-grid">
-        {render_writing_cards()}
+        {render_writing_cards(base_path)}
       </div>
     </section>
 
@@ -1221,23 +1561,23 @@ def main() -> int:
           <p>The public surface is export-first. Summary, trust, inventory, freshness, and query responses all come from the same reviewed snapshot family.</p>
           <div class="endpoint-list">
             <div class="endpoint">
-              <code>/v0/meta.json</code>
+              <code>{html.escape(site_href(base_path, '/v0/meta.json'))}</code>
               <span>Snapshot freshness and digest metadata.</span>
             </div>
             <div class="endpoint">
-              <code>/v0/repos/index.json</code>
+              <code>{html.escape(site_href(base_path, '/v0/repos/index.json'))}</code>
               <span>Repository inventory and navigation links.</span>
             </div>
             <div class="endpoint">
-              <code>/v0/repos/&lt;host&gt;/&lt;owner&gt;/&lt;repo&gt;/index.json</code>
+              <code>{html.escape(site_href(base_path, '/v0/repos/<host>/<owner>/<repo>/index.json'))}</code>
               <span>Per-repository summary surface.</span>
             </div>
             <div class="endpoint">
-              <code>/v0/repos/&lt;host&gt;/&lt;owner&gt;/&lt;repo&gt;/trust.json</code>
+              <code>{html.escape(site_href(base_path, '/v0/repos/<host>/<owner>/<repo>/trust.json'))}</code>
               <span>Selection, provenance, and claim context.</span>
             </div>
             <div class="endpoint">
-              <code>/v0/repos/&lt;host&gt;/&lt;owner&gt;/&lt;repo&gt;/query?path=...</code>
+              <code>{html.escape(site_href(base_path, '/v0/repos/<host>/<owner>/<repo>/query?path=...'))}</code>
               <span>Same-origin trust-aware field queries.</span>
             </div>
             <div class="endpoint">
@@ -1268,6 +1608,7 @@ def main() -> int:
 
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
+      <span>Homepage lookup resolves the same hosted surface used by MCP <code>dotrepo.lookup</code>.</span>
       <span>Staging remains the deployed <code>workers.dev</code> Worker.</span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>
@@ -1277,11 +1618,11 @@ def main() -> int:
 """
 
     write_text(input_dir / "index.html", document)
-    write_text(input_dir / "writing" / "index.html", render_writing_index())
+    write_text(input_dir / "writing" / "index.html", render_writing_index(base_path))
     for article in ARTICLES:
         write_text(
             input_dir / "writing" / article["slug"] / "index.html",
-            render_article_page(article),
+            render_article_page(article, base_path),
         )
     write_text(input_dir / ".nojekyll", "")
     print(input_dir / "index.html")

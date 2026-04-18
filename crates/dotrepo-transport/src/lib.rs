@@ -88,7 +88,9 @@ fn read_header_line(reader: &mut impl BufRead, total_bytes: &mut usize) -> Resul
         }
     }
 
-    String::from_utf8(line).context("stdio headers must be valid UTF-8").map(Some)
+    String::from_utf8(line)
+        .context("stdio headers must be valid UTF-8")
+        .map(Some)
 }
 
 pub fn write_jsonrpc_message(writer: &mut impl Write, message: &impl Serialize) -> Result<()> {

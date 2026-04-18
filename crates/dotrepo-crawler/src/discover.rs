@@ -307,8 +307,6 @@ mod tests {
         )
         .expect_err("oversized limit rejected");
 
-        assert!(err
-            .to_string()
-            .contains("exceeds max"));
+        assert!(err.to_string().contains("exceeds max"));
     }
 }
