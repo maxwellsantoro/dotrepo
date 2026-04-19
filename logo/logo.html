@@ -1,0 +1,711 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{var W=["https://claude.ai","https://preview.claude.ai","https://eap-omelette.claude.ai"];var Y=30000;document.addEventListener("DOMContentLoaded",()=>{const D="transform-react-jsx-source";document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((C,F)=>{const Q=C.getAttribute("data-plugins")||"";if(Q.indexOf(D)<0){C.setAttribute("data-plugins",Q?`${Q},${D}`:D)}if(!C.hasAttribute("data-filename")){C.setAttribute("data-filename",C.getAttribute("src")||`inline-${F}`)}})});var K=window.parent;if(K&&K!==window){const D=(k,f)=>{try{K.postMessage({__omelette_log:true,type:k,data:f},"*")}catch{}};["log","warn","error"].forEach((k)=>{const f=console[k];console[k]=(...w)=>{const z=w.map((h)=>{try{return typeof h==="object"?JSON.stringify(h):String(h)}catch{try{return String(h)}catch{return"[unstringifiable]"}}}).join(" ");D(k,z);f.apply(console,w)}});window.addEventListener("error",(k)=>{const f=k.target;if(f&&f!==window&&f.tagName){const w=f.src||f.href||"";D("resource_error",`${f.tagName} failed to load: ${w}`)}else{D("error",`${k.message||"Unknown error"} at ${k.filename||"?"}:${k.lineno||0}:${k.colno||0}`)}},true);window.addEventListener("unhandledrejection",(k)=>{const f=k.reason;const w=f instanceof Error?`${f.message} ${f.stack}`:String(f);D("error",`Unhandled rejection: ${w}`)});const C=()=>{try{K.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(document.readyState==="complete")C();else window.addEventListener("load",C);if(window.ResizeObserver)new ResizeObserver(C).observe(document.documentElement);const F={};let Q=0;window.claude={complete(k){return new Promise((f,w)=>{if(!W.length){w(new Error("claude.complete: no parent origin"));return}const z=`c${++Q}`;const h=()=>setTimeout(()=>{delete F[z];w(new Error(`claude.complete: no data for ${Y/1000}s`))},Y);const J=h();F[z]={resolve:f,reject:w,text:"",t:J,arm:h};try{for(const V of W){K.postMessage({__om_api:true,id:z,body:k},V)}}catch(V){clearTimeout(J);delete F[z];w(V)}})}};const X=(k)=>{try{return JSON.stringify(k)}catch{return JSON.stringify(String(k))}};window.addEventListener("message",(k)=>{if(W.indexOf(k.origin)<0)return;if(k.source!==K)return;const f=k.data;if(!f)return;if(f.__om_api_r){const h=F[f.id];if(!h)return;if(f.error!=null){clearTimeout(h.t);delete F[f.id];h.reject(new Error(f.error));return}if(f.chunk!=null){clearTimeout(h.t);h.t=h.arm();h.text+=f.chunk;return}if(f.done){clearTimeout(h.t);delete F[f.id];h.resolve(f.text!=null?f.text:h.text);return}return}if(!f.__om_eval)return;const w=f;const z=(h)=>{k.source.postMessage({...h,__om_eval_r:1,id:w.id},k.origin)};try{const h=(0,eval)(w.code);if(h&&typeof h.then==="function"){h.then((J)=>z({ok:1,v:X(J)}),(J)=>z({ok:0,e:String(J)}))}else{z({ok:1,v:X(h)})}}catch(h){z({ok:0,e:String(h)})}})}})();
+</script>
+
+<meta charset="utf-8" />
+<title>dotrepo — logo</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eee9; }
+  * { box-sizing: border-box; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+// DesignCanvas.jsx — Figma-ish design canvas wrapper
+// Warm gray grid bg + Sections + Artboards + PostIt notes.
+// No assets, no deps.
+
+const DC = {
+  bg: '#f0eee9',
+  grid: 'rgba(0,0,0,0.06)',
+  label: 'rgba(60,50,40,0.7)',
+  title: 'rgba(40,30,20,0.85)',
+  subtitle: 'rgba(60,50,40,0.6)',
+  postitBg: '#fef4a8',
+  postitText: '#5a4a2a',
+  font: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
+};
+
+// ─────────────────────────────────────────────────────────────
+// Main canvas — transform-based pan/zoom viewport
+//
+// Input mapping (Figma-style):
+//   • trackpad pinch  → zoom   (ctrlKey wheel; Safari gesture* events)
+//   • trackpad scroll → pan    (two-finger)
+//   • mouse wheel     → zoom   (notched; distinguished from trackpad scroll)
+//   • middle-drag / primary-drag-on-bg → pan
+//
+// Transform state lives in a ref and is written straight to the DOM
+// (translate3d + will-change) so wheel ticks don't go through React —
+// keeps pans at 60fps on dense canvases.
+// ─────────────────────────────────────────────────────────────
+function DesignCanvas({ children, minScale = 0.1, maxScale = 8, style = {} }) {
+  const vpRef = React.useRef(null);
+  const worldRef = React.useRef(null);
+  const tf = React.useRef({ x: 0, y: 0, scale: 1 });
+
+  const apply = React.useCallback(() => {
+    const { x, y, scale } = tf.current;
+    const el = worldRef.current;
+    if (el) el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+  }, []);
+
+  React.useEffect(() => {
+    const vp = vpRef.current;
+    if (!vp) return;
+
+    const zoomAt = (cx, cy, factor) => {
+      const r = vp.getBoundingClientRect();
+      const px = cx - r.left, py = cy - r.top;
+      const t = tf.current;
+      const next = Math.min(maxScale, Math.max(minScale, t.scale * factor));
+      const k = next / t.scale;
+      // keep the world point under the cursor fixed
+      t.x = px - (px - t.x) * k;
+      t.y = py - (py - t.y) * k;
+      t.scale = next;
+      apply();
+    };
+
+    // Mouse-wheel vs trackpad-scroll heuristic. A physical wheel sends
+    // line-mode deltas (Firefox) or large integer pixel deltas with no X
+    // component (Chrome/Safari, typically multiples of 100/120). Trackpad
+    // two-finger scroll sends small/fractional pixel deltas, often with
+    // non-zero deltaX. ctrlKey is set by the browser for trackpad pinch.
+    const isMouseWheel = (e) =>
+      e.deltaMode !== 0 ||
+      (e.deltaX === 0 && Number.isInteger(e.deltaY) && Math.abs(e.deltaY) >= 40);
+
+    const onWheel = (e) => {
+      e.preventDefault();
+      if (isGesturing) return; // Safari: gesture* owns the pinch — discard concurrent wheels
+      if (e.ctrlKey) {
+        // trackpad pinch (or explicit ctrl+wheel)
+        zoomAt(e.clientX, e.clientY, Math.exp(-e.deltaY * 0.01));
+      } else if (isMouseWheel(e)) {
+        // notched mouse wheel — fixed-ratio step per click
+        zoomAt(e.clientX, e.clientY, Math.exp(-Math.sign(e.deltaY) * 0.18));
+      } else {
+        // trackpad two-finger scroll — pan
+        tf.current.x -= e.deltaX;
+        tf.current.y -= e.deltaY;
+        apply();
+      }
+    };
+
+    // Safari sends native gesture* events for trackpad pinch with a smooth
+    // e.scale; preferring these over the ctrl+wheel fallback gives a much
+    // better feel there. No-ops on other browsers. Safari also fires
+    // ctrlKey wheel events during the same pinch — isGesturing makes
+    // onWheel drop those entirely so they neither zoom nor pan.
+    let gsBase = 1;
+    let isGesturing = false;
+    const onGestureStart = (e) => { e.preventDefault(); isGesturing = true; gsBase = tf.current.scale; };
+    const onGestureChange = (e) => {
+      e.preventDefault();
+      zoomAt(e.clientX, e.clientY, (gsBase * e.scale) / tf.current.scale);
+    };
+    const onGestureEnd = (e) => { e.preventDefault(); isGesturing = false; };
+
+    // Drag-pan: middle button anywhere, or primary button starting on the
+    // canvas background (not inside an artboard).
+    let drag = null;
+    const onPointerDown = (e) => {
+      const onBg = e.target === vp || e.target === worldRef.current;
+      if (!(e.button === 1 || (e.button === 0 && onBg))) return;
+      e.preventDefault();
+      vp.setPointerCapture(e.pointerId);
+      drag = { id: e.pointerId, lx: e.clientX, ly: e.clientY };
+      vp.style.cursor = 'grabbing';
+    };
+    const onPointerMove = (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      tf.current.x += e.clientX - drag.lx;
+      tf.current.y += e.clientY - drag.ly;
+      drag.lx = e.clientX; drag.ly = e.clientY;
+      apply();
+    };
+    const onPointerUp = (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      vp.releasePointerCapture(e.pointerId);
+      drag = null;
+      vp.style.cursor = '';
+    };
+
+    vp.addEventListener('wheel', onWheel, { passive: false });
+    vp.addEventListener('gesturestart', onGestureStart, { passive: false });
+    vp.addEventListener('gesturechange', onGestureChange, { passive: false });
+    vp.addEventListener('gestureend', onGestureEnd, { passive: false });
+    vp.addEventListener('pointerdown', onPointerDown);
+    vp.addEventListener('pointermove', onPointerMove);
+    vp.addEventListener('pointerup', onPointerUp);
+    vp.addEventListener('pointercancel', onPointerUp);
+    return () => {
+      vp.removeEventListener('wheel', onWheel);
+      vp.removeEventListener('gesturestart', onGestureStart);
+      vp.removeEventListener('gesturechange', onGestureChange);
+      vp.removeEventListener('gestureend', onGestureEnd);
+      vp.removeEventListener('pointerdown', onPointerDown);
+      vp.removeEventListener('pointermove', onPointerMove);
+      vp.removeEventListener('pointerup', onPointerUp);
+      vp.removeEventListener('pointercancel', onPointerUp);
+    };
+  }, [apply, minScale, maxScale]);
+
+  const gridSvg = `url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M120 0H0v120' fill='none' stroke='${encodeURIComponent(DC.grid)}' stroke-width='1'/%3E%3C/svg%3E")`;
+  return (
+    <div
+      ref={vpRef}
+      className="design-canvas"
+      style={{
+        height: '100vh', width: '100vw',
+        background: DC.bg,
+        overflow: 'hidden',
+        overscrollBehavior: 'none',
+        touchAction: 'none',
+        position: 'relative',
+        fontFamily: DC.font,
+        boxSizing: 'border-box',
+        ...style,
+      }}
+    >
+      <div
+        ref={worldRef}
+        style={{
+          position: 'absolute', top: 0, left: 0,
+          transformOrigin: '0 0',
+          willChange: 'transform',
+          width: 'max-content', minWidth: '100%',
+          minHeight: '100%',
+          padding: '60px 0 80px',
+          backgroundImage: gridSvg,
+          backgroundSize: '120px 120px',
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Section — title + subtitle + h-stack of artboards (no wrap)
+// ─────────────────────────────────────────────────────────────
+function DCSection({ title, subtitle, children, gap = 48 }) {
+  return (
+    <div style={{ marginBottom: 80, position: 'relative' }}>
+      <div style={{ padding: '0 60px 36px' }}>
+        <div style={{
+          fontSize: 22, fontWeight: 600, color: DC.title,
+          letterSpacing: -0.3, marginBottom: 4,
+        }}>{title}</div>
+        {subtitle && (
+          <div style={{
+            fontSize: 14, fontWeight: 400, color: DC.subtitle,
+          }}>{subtitle}</div>
+        )}
+      </div>
+      {/* h-stack — clips offscreen, never wraps */}
+      <div style={{
+        display: 'flex', gap, padding: '0 60px',
+        alignItems: 'flex-start', width: 'max-content',
+      }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Artboard — labeled card
+// ─────────────────────────────────────────────────────────────
+function DCArtboard({ label, children, width, height, style = {} }) {
+  return (
+    <div style={{ position: 'relative', flexShrink: 0 }}>
+      {label && (
+        <div style={{
+          position: 'absolute', bottom: '100%', left: 0,
+          paddingBottom: 8,
+          fontSize: 12, fontWeight: 500, color: DC.label,
+          whiteSpace: 'nowrap',
+        }}>{label}</div>
+      )}
+      <div style={{
+        borderRadius: 2,
+        boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)',
+        overflow: 'hidden',
+        width, height,
+        background: '#fff',
+        ...style,
+      }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Post-it — absolute-positioned sticky note
+// ─────────────────────────────────────────────────────────────
+function DCPostIt({ children, top, left, right, bottom, rotate = -2, width = 180 }) {
+  return (
+    <div style={{
+      position: 'absolute', top, left, right, bottom, width,
+      background: DC.postitBg, padding: '14px 16px',
+      fontFamily: '"Comic Sans MS", "Marker Felt", "Segoe Print", cursive',
+      fontSize: 14, lineHeight: 1.4, color: DC.postitText,
+      boxShadow: '0 2px 8px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08)',
+      transform: `rotate(${rotate}deg)`,
+      zIndex: 5,
+    }}>{children}</div>
+  );
+}
+
+Object.assign(window, { DesignCanvas, DCSection, DCArtboard, DCPostIt });
+</script>
+
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard } = window;
+
+const INK = '#141414';
+const PAPER = '#ffffff';
+const ACCENT = 'oklch(0.62 0.14 28)';
+const SANS = 'Inter, -apple-system, system-ui, sans-serif';
+const MONO = '"JetBrains Mono", ui-monospace, monospace';
+
+// ─────────────────────────────────────────────────────────────
+// The logo — merged-dot.
+// The "." of ".repo" is a slightly-oversized filled circle locked tight to
+// "repo". Mark and wordmark are the same object.
+//
+// Proportions (all relative to wordmark fontSize f):
+//   dot diameter d = 0.40f
+//   dot center baseline offset = 0.18f above baseline (sits as punctuation)
+//   gap between dot and 'r' = 0.06f
+// ─────────────────────────────────────────────────────────────
+function Logo({ size = 48, color = INK, as = 'div' }) {
+  const f = size;
+  const d = f * 0.40;
+  const gap = f * 0.06;
+  const Tag = as;
+  return (
+    <Tag style={{
+      display: 'inline-flex', alignItems: 'baseline',
+      fontFamily: MONO, fontWeight: 500,
+      fontSize: f, lineHeight: 1,
+      color, letterSpacing: '-0.01em',
+      gap,
+    }}>
+      <span style={{
+        width: d, height: d, borderRadius: d / 2, background: color,
+        alignSelf: 'baseline', transform: `translateY(0)`,
+      }} />
+      <span>repo</span>
+    </Tag>
+  );
+}
+
+// Mark-only — the dot as a standalone glyph.
+function LogoMark({ size = 64, color = INK }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="20" fill={color} />
+    </svg>
+  );
+}
+
+// Export-ready SVG string for the full lockup at 200×64.
+// The dot is at ~40% of cap-height, baseline-sat. Text is a rendered tspan
+// so it survives without JetBrains Mono installed — though the fallback to
+// ui-monospace stays close.
+const LOCKUP_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" width="260" height="64">
+  <circle cx="24" cy="36" r="13" fill="#141414"/>
+  <text x="44" y="49" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="44" font-weight="500" letter-spacing="-0.44" fill="#141414">repo</text>
+</svg>`;
+
+const MARK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <circle cx="32" cy="32" r="20" fill="#141414"/>
+</svg>`;
+
+// ─────────────────────────────────────────────────────────────
+// Canvas cards
+// ─────────────────────────────────────────────────────────────
+function Card({ children, w = 260, h = 260, bg = '#fff', pad = 0, style = {} }) {
+  return (
+    <div style={{
+      width: w, height: h, background: bg, padding: pad,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      ...style,
+    }}>{children}</div>
+  );
+}
+
+function Caption({ name, note }) {
+  return (
+    <div style={{ position: 'absolute', top: '100%', left: 0, paddingTop: 10, width: '100%' }}>
+      <div style={{ fontFamily: MONO, fontSize: 11, color: '#141414', fontWeight: 500 }}>{name}</div>
+      {note && <div style={{ fontFamily: SANS, fontSize: 11, color: 'rgba(0,0,0,0.5)', marginTop: 2, lineHeight: 1.4 }}>{note}</div>}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Sections
+// ─────────────────────────────────────────────────────────────
+function HeroSection() {
+  return (
+    <DCSection
+      title="dotrepo — the logo"
+      subtitle="Merged-dot, final. The mark IS the leading period of .repo — oversized, locked tight. One object; no stutter."
+      gap={32}
+    >
+      <DCArtboard width={760} height={380}>
+        <Card w={760} h={380} bg="#fafaf8" pad={64} style={{ justifyContent: 'flex-start' }}>
+          <Logo size={96} />
+        </Card>
+      </DCArtboard>
+
+      <DCArtboard width={380} height={380}>
+        <Card w={380} h={380} bg="#0d0d0d" pad={64} style={{ justifyContent: 'flex-start' }}>
+          <Logo size={72} color="#f0eee9" />
+        </Card>
+      </DCArtboard>
+
+      <DCArtboard width={380} height={380} label="accent · dot only">
+        <Card w={380} h={380} bg="#fafaf8" pad={64} style={{ justifyContent: 'flex-start' }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'baseline', gap: 72 * 0.06,
+            fontFamily: MONO, fontWeight: 500, fontSize: 72, color: INK, letterSpacing: '-0.01em',
+          }}>
+            <span style={{ width: 72*0.40, height: 72*0.40, borderRadius: 72*0.20, background: ACCENT }} />
+            <span>repo</span>
+          </div>
+        </Card>
+      </DCArtboard>
+    </DCSection>
+  );
+}
+
+function ScaleSection() {
+  const sizes = [12, 14, 16, 20, 24, 32, 48, 64];
+  return (
+    <DCSection
+      title="Scale — 12 to 64 px wordmark"
+      subtitle="Readable at 12 px. The dot never drops below 5 px even at the smallest tier because it scales with cap-height."
+      gap={0}
+    >
+      <DCArtboard width={900} height={240}>
+        <Card w={900} h={240} pad={40} style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+          {sizes.map(s => (
+            <div key={s} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
+              <Logo size={s} />
+              <div style={{ fontFamily: MONO, fontSize: 10, color: 'rgba(0,0,0,0.45)' }}>{s}px</div>
+            </div>
+          ))}
+        </Card>
+      </DCArtboard>
+    </DCSection>
+  );
+}
+
+function LockupsSection() {
+  return (
+    <DCSection
+      title="Lockups"
+      subtitle="Horizontal (primary), mark-only (favicon / avatar), and the wordmark expressed as prose — for inline mentions in copy."
+      gap={32}
+    >
+      <DCArtboard width={420} height={260} label="horizontal · primary">
+        <Card w={420} h={260} pad={32}><Logo size={56} /></Card>
+      </DCArtboard>
+
+      <DCArtboard width={260} height={260} label="mark only · favicon / avatar">
+        <Card w={260} h={260}><LogoMark size={140} /></Card>
+      </DCArtboard>
+
+      <DCArtboard width={260} height={260} label="on ink">
+        <Card w={260} h={260} bg="#0d0d0d"><LogoMark size={140} color="#f0eee9" /></Card>
+      </DCArtboard>
+
+      <DCArtboard width={420} height={260} label="inline in prose">
+        <Card w={420} h={260} pad={32} style={{ alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column', gap: 10 }}>
+          <div style={{ fontFamily: SANS, fontSize: 16, color: '#141414', lineHeight: 1.6, maxWidth: 340 }}>
+            Trust-aware metadata for repositories.<br/>
+            Visit <Logo size={16} as="span" />, or try <span style={{ fontFamily: MONO, fontSize: 14, background: 'rgba(0,0,0,0.05)', padding: '2px 6px' }}>dotrepo lookup &lt;url&gt;</span> in your shell.
+          </div>
+        </Card>
+      </DCArtboard>
+    </DCSection>
+  );
+}
+
+function ContextSection() {
+  return (
+    <DCSection
+      title="In context"
+      subtitle="Where the logo actually lives: browser tab, terminal, site nav, GitHub social card."
+      gap={32}
+    >
+      {/* Browser tab */}
+      <DCArtboard width={360} height={120} label="browser tab · 16px favicon">
+        <div style={{
+          width: 360, height: 120, background: '#e8e7e2',
+          display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+        }}>
+          <div style={{
+            background: '#fff', margin: '0 12px', borderRadius: '10px 10px 0 0',
+            padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 10,
+          }}>
+            <LogoMark size={16} />
+            <div style={{ fontFamily: SANS, fontSize: 12, color: '#141414', fontWeight: 500 }}>dotrepo — trust-aware metadata</div>
+          </div>
+        </div>
+      </DCArtboard>
+
+      {/* Terminal */}
+      <DCArtboard width={560} height={340} label="terminal">
+        <Card w={560} h={340} bg="#0d0d0d" pad={0} style={{ flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start' }}>
+          <div style={{ height: 28, background: '#1a1a1a', display: 'flex', alignItems: 'center', padding: '0 12px', gap: 6 }}>
+            <div style={{ width: 10, height: 10, borderRadius: 5, background: '#3a3a3a' }} />
+            <div style={{ width: 10, height: 10, borderRadius: 5, background: '#3a3a3a' }} />
+            <div style={{ width: 10, height: 10, borderRadius: 5, background: '#3a3a3a' }} />
+            <div style={{ marginLeft: 12, fontFamily: MONO, fontSize: 11, color: '#888' }}>~/ — dotrepo</div>
+          </div>
+          <div style={{ padding: '22px 22px', flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <Logo size={22} color="#f0eee9" />
+            <div style={{ fontFamily: MONO, fontSize: 13, color: '#f0eee9', lineHeight: 1.6, marginTop: 4 }}>$ dotrepo lookup github.com/BurntSushi/ripgrep</div>
+            <div style={{ fontFamily: MONO, fontSize: 13, color: '#cfcfcf', lineHeight: 1.6 }}>  selection.reason      only_matching_record</div>
+            <div style={{ fontFamily: MONO, fontSize: 13, color: '#cfcfcf', lineHeight: 1.6 }}>  trust.confidence      medium</div>
+            <div style={{ fontFamily: MONO, fontSize: 13, color: '#cfcfcf', lineHeight: 1.6 }}>  trust.provenance      imported, verified</div>
+          </div>
+        </Card>
+      </DCArtboard>
+
+      {/* Site nav */}
+      <DCArtboard width={760} height={120} label="site nav">
+        <Card w={760} h={120} pad={0} bg="#fafaf8" style={{ justifyContent: 'space-between', padding: '0 32px' }}>
+          <Logo size={22} />
+          <div style={{ display: 'flex', gap: 28, fontFamily: SANS, fontSize: 14, color: '#141414' }}>
+            <span>Home</span><span>Docs</span><span>Writing</span><span style={{ color: 'rgba(0,0,0,0.5)' }}>GitHub</span>
+          </div>
+        </Card>
+      </DCArtboard>
+
+      {/* Social card */}
+      <DCArtboard width={560} height={294} label="social card · 1200×630 @ 47%">
+        <Card w={560} h={294} bg="#fafaf8" pad={40} style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <Logo size={28} />
+          <div style={{ fontFamily: SANS, fontSize: 32, fontWeight: 600, color: '#141414', letterSpacing: -0.5, lineHeight: 1.15, maxWidth: 460 }}>
+            Trust-aware metadata for software repositories.
+          </div>
+          <div style={{ fontFamily: MONO, fontSize: 13, color: 'rgba(0,0,0,0.55)' }}>dotrepo.org · open metadata protocol</div>
+        </Card>
+      </DCArtboard>
+    </DCSection>
+  );
+}
+
+function SpecSection() {
+  return (
+    <DCSection
+      title="Spec"
+      subtitle="Everything proportional to wordmark fontSize f. If you match these ratios the mark reads correctly at any size."
+      gap={32}
+    >
+      <DCArtboard width={640} height={320} label="construction">
+        <Card w={640} h={320} pad={48} style={{ alignItems: 'center', justifyContent: 'space-between' }}>
+          {/* Oversized sample with guides */}
+          <div style={{ position: 'relative' }}>
+            <Logo size={120} />
+            {/* baseline rule */}
+            <div style={{ position: 'absolute', left: -12, right: -12, bottom: 0, height: 1, background: ACCENT, opacity: 0.5 }} />
+            {/* cap-height rule */}
+            <div style={{ position: 'absolute', left: -12, right: -12, bottom: 120 * 0.72, height: 1, background: ACCENT, opacity: 0.3 }} />
+          </div>
+          <div style={{ fontFamily: MONO, fontSize: 12, lineHeight: 1.8, color: '#141414' }}>
+            <div>font · JetBrains Mono 500</div>
+            <div>tracking · −0.01 em</div>
+            <div>dot diameter · 0.40 f</div>
+            <div>dot-to-'r' gap · 0.06 f</div>
+            <div>dot y · baseline</div>
+            <div style={{ marginTop: 10, color: 'rgba(0,0,0,0.5)' }}>f = wordmark font-size</div>
+          </div>
+        </Card>
+      </DCArtboard>
+
+      <DCArtboard width={440} height={320} label="palette">
+        <Card w={440} h={320} pad={40} style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 20 }}>
+          {[
+            { name: 'ink',    hex: '#141414',                   role: 'primary — text + mark' },
+            { name: 'paper',  hex: '#ffffff',                   role: 'primary background' },
+            { name: 'warm',   hex: '#fafaf8',                   role: 'warm background (site)' },
+            { name: 'accent', hex: 'oklch(.62 .14 28)',         role: 'sparingly — verified / trust' },
+          ].map(c => (
+            <div key={c.name} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div style={{ width: 32, height: 32, background: c.hex, border: c.name === 'paper' ? '1px solid rgba(0,0,0,0.1)' : 'none' }} />
+              <div>
+                <div style={{ fontFamily: MONO, fontSize: 12, color: '#141414', fontWeight: 500 }}>{c.name}</div>
+                <div style={{ fontFamily: MONO, fontSize: 11, color: 'rgba(0,0,0,0.5)' }}>{c.hex}</div>
+              </div>
+              <div style={{ fontFamily: SANS, fontSize: 12, color: 'rgba(0,0,0,0.6)', marginLeft: 'auto' }}>{c.role}</div>
+            </div>
+          ))}
+        </Card>
+      </DCArtboard>
+
+      <DCArtboard width={440} height={320} label="clear space">
+        <Card w={440} h={320} pad={40} style={{ justifyContent: 'center' }}>
+          <div style={{ position: 'relative', padding: '28px 28px' }}>
+            <Logo size={56} />
+            {/* clear space dashes */}
+            <div style={{ position: 'absolute', inset: 0, border: `1px dashed ${ACCENT}`, opacity: 0.5 }} />
+          </div>
+        </Card>
+        <Caption name="clear space · 0.5f on every side" note="Half the wordmark height of breathing room. More if possible." />
+      </DCArtboard>
+    </DCSection>
+  );
+}
+
+function DontsSection() {
+  const Bad = ({ children, why }) => (
+    <DCArtboard width={300} height={240} label={`don't · ${why}`}>
+      <Card w={300} h={240} pad={24} style={{ position: 'relative' }}>
+        {children}
+        <svg style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} viewBox="0 0 300 240" preserveAspectRatio="none">
+          <line x1="20" y1="20" x2="280" y2="220" stroke="oklch(0.62 0.14 28)" strokeWidth="2" opacity="0.7" />
+        </svg>
+      </Card>
+    </DCArtboard>
+  );
+  return (
+    <DCSection title="Don'ts" subtitle="Four ways to break the logo." gap={32}>
+      <Bad why="double dot">
+        <div style={{
+          display: 'inline-flex', alignItems: 'baseline', gap: 3,
+          fontFamily: MONO, fontWeight: 500, fontSize: 44, color: INK, letterSpacing: '-0.01em',
+        }}>
+          <span style={{ width: 44*0.40, height: 44*0.40, borderRadius: 44*0.20, background: INK }} />
+          <span>.repo</span>
+        </div>
+      </Bad>
+
+      <Bad why="detach the dot">
+        <div style={{ display: 'inline-flex', alignItems: 'baseline', gap: 18 }}>
+          <span style={{ width: 18, height: 18, borderRadius: 9, background: INK }} />
+          <span style={{ fontFamily: MONO, fontWeight: 500, fontSize: 44, color: INK, letterSpacing: '-0.01em' }}>repo</span>
+        </div>
+      </Bad>
+
+      <Bad why="shrink the dot">
+        <div style={{ display: 'inline-flex', alignItems: 'baseline', gap: 3 }}>
+          <span style={{ width: 6, height: 6, borderRadius: 3, background: INK }} />
+          <span style={{ fontFamily: MONO, fontWeight: 500, fontSize: 44, color: INK, letterSpacing: '-0.01em' }}>repo</span>
+        </div>
+      </Bad>
+
+      <Bad why="change the face">
+        <div style={{ display: 'inline-flex', alignItems: 'baseline', gap: 3 }}>
+          <span style={{ width: 17, height: 17, borderRadius: 8.5, background: INK }} />
+          <span style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontWeight: 400, fontSize: 44, color: INK }}>repo</span>
+        </div>
+      </Bad>
+    </DCSection>
+  );
+}
+
+function DownloadsSection() {
+  const copy = (text) => { navigator.clipboard?.writeText(text); };
+  return (
+    <DCSection
+      title="Export-ready SVG"
+      subtitle="Drop-in marks with no font dependency for the dot, and a monospace-fallback lockup for when JetBrains Mono isn't available. Click to copy."
+      gap={32}
+    >
+      <DCArtboard width={460} height={260} label="mark.svg — 64×64">
+        <Card w={460} h={260} pad={32} style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <LogoMark size={100} />
+          <button
+            onClick={() => copy(MARK_SVG)}
+            style={{
+              fontFamily: MONO, fontSize: 11, padding: '8px 12px',
+              background: '#141414', color: '#f0eee9', border: 'none', cursor: 'pointer',
+            }}
+          >copy svg</button>
+        </Card>
+      </DCArtboard>
+
+      <DCArtboard width={520} height={260} label="lockup.svg — 260×64">
+        <Card w={520} h={260} pad={32} style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <div dangerouslySetInnerHTML={{ __html: LOCKUP_SVG }} />
+          <button
+            onClick={() => copy(LOCKUP_SVG)}
+            style={{
+              fontFamily: MONO, fontSize: 11, padding: '8px 12px',
+              background: '#141414', color: '#f0eee9', border: 'none', cursor: 'pointer',
+            }}
+          >copy svg</button>
+        </Card>
+      </DCArtboard>
+
+      <DCArtboard width={460} height={260} label="previous exploration">
+        <Card w={460} h={260} pad={32} style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <div style={{ fontFamily: SANS, fontSize: 13, color: 'rgba(0,0,0,0.6)', lineHeight: 1.5, maxWidth: 380 }}>
+            The 12-direction exploration + striped-disc alternate live at <span style={{ fontFamily: MONO, color: '#141414' }}>Logo v1 — exploration.html</span>.
+          </div>
+          <a
+            href="Logo v1 — exploration.html"
+            style={{
+              fontFamily: MONO, fontSize: 11, padding: '8px 12px',
+              background: '#fff', color: '#141414', border: '1px solid rgba(0,0,0,0.15)', textDecoration: 'none',
+            }}
+          >open v1 →</a>
+        </Card>
+      </DCArtboard>
+    </DCSection>
+  );
+}
+
+function App() {
+  return (
+    <DesignCanvas>
+      <div style={{ padding: '20px 60px 40px', maxWidth: 900 }}>
+        <div style={{ fontFamily: MONO, fontSize: 11, color: 'rgba(0,0,0,0.5)', letterSpacing: 0.5, marginBottom: 10 }}>
+          dotrepo.org · logo · final
+        </div>
+        <div style={{ fontFamily: SANS, fontSize: 36, fontWeight: 600, color: '#141414', letterSpacing: -0.5, lineHeight: 1.1, marginBottom: 14 }}>
+          The mark is the dot.
+        </div>
+        <div style={{ fontFamily: SANS, fontSize: 15, color: 'rgba(0,0,0,0.6)', lineHeight: 1.55, maxWidth: 680, textWrap: 'pretty' }}>
+          Monospace wordmark. Oversized filled circle in place of the leading period. Nothing else. The whole identity is the filename the protocol is named after.
+        </div>
+      </div>
+
+      <HeroSection />
+      <ScaleSection />
+      <LockupsSection />
+      <ContextSection />
+      <SpecSection />
+      <DontsSection />
+      <DownloadsSection />
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
