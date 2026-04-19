@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Repomix: Export Markdown Digest",
+      "type": "shell",
+      "command": "npx",
+      "args": [
+        "repomix@latest",
+        "--style",
+        "markdown",
+        "--output",
+        "${env:HOME}/Documents/repomix/${workspaceFolderBasename}.md",
+        "--compress"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

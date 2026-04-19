@@ -1,0 +1,25 @@
+# Repomix-focused ignores for AI planning/review context.
+# Keep source code, docs, RFCs, scripts, and examples; drop heavy generated/runtime data.
+
+# Build and package artifacts
+target/
+release-gate/public/
+release-gate/public-bundle/
+release-gate/release-bundle/
+release-gate/vsix/
+
+# Local generated outputs and test artifacts
+output/
+cloudflare/hosted-query/public-snapshot/
+
+# Index payloads are high-volume and mostly data, not implementation logic
+index/repos/**
+
+# Python and editor caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Node dependencies
+node_modules/

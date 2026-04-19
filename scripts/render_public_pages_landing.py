@@ -11,6 +11,101 @@ from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
 
+DOCS_SECTIONS = [
+    {
+        "title": "Start here",
+        "items": [
+            {
+                "label": "Current status",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/current-status.md",
+                "summary": "What is live today, what is still intentionally missing, and the highest-leverage next steps.",
+                "kind": "Repo doc",
+            },
+            {
+                "label": "Install",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/install.md",
+                "summary": "Platform bundles, MCP and LSP binaries, and the VS Code extension package.",
+                "kind": "Repo doc",
+            },
+            {
+                "label": "Maintainer happy path",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md",
+                "summary": "The canonical init, import, validate, trust, and generate-check loop for repository owners.",
+                "kind": "Repo doc",
+            },
+        ],
+    },
+    {
+        "title": "Trust and protocol",
+        "items": [
+            {
+                "label": "Trust model",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/trust-model.md",
+                "summary": "Why provenance, precedence, and conflict visibility matter more than a new file extension.",
+                "kind": "Repo doc",
+            },
+            {
+                "label": "Roadmap",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/roadmap.md",
+                "summary": "What shipped in v1, what is deliberately deferred, and why scope restraint is part of the product.",
+                "kind": "Repo doc",
+            },
+            {
+                "label": "Public surface architecture",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-surface.md",
+                "summary": "How the hosted homepage, inventory, summary, trust, and query surfaces are built from one export family.",
+                "kind": "Repo doc",
+            },
+        ],
+    },
+    {
+        "title": "Live public surface",
+        "items": [
+            {
+                "label": "Snapshot metadata",
+                "href": "/v0/meta.json",
+                "summary": "Freshness, snapshot digest, and expiry metadata for the currently hosted export.",
+                "kind": "On-site",
+            },
+            {
+                "label": "Repository inventory",
+                "href": "/v0/repos/index.json",
+                "summary": "The live reviewed repository set with summary, trust, and query entrypoints.",
+                "kind": "On-site",
+            },
+            {
+                "label": "Public export examples",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-export-examples.md",
+                "summary": "Concrete response examples for inventory, repository summary, trust, and query routes.",
+                "kind": "Repo doc",
+            },
+        ],
+    },
+    {
+        "title": "Index growth and operator loop",
+        "items": [
+            {
+                "label": "Seed index",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/index/README.md",
+                "summary": "Seed-index rules, evidence expectations, and the current reference overlays.",
+                "kind": "Repo doc",
+            },
+            {
+                "label": "Growth and automation plan",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/growth-and-automation-plan.md",
+                "summary": "The path from proof surface to useful service: 15 repositories now, 50 reviewed as the next concrete milestone.",
+                "kind": "Repo doc",
+            },
+            {
+                "label": "Maintainer-claim workflow",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-claim-review-workflow.md",
+                "summary": "The reviewer path for accepted maintainer claims and canonical handoff decisions.",
+                "kind": "Repo doc",
+            },
+        ],
+    },
+]
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -127,6 +222,13 @@ def load_repository_surface(input_dir: Path, entry: dict, filename: str) -> dict
     return load_json(input_dir / "v0" / "repos" / host / owner / repo / filename)
 
 
+def find_repository_entry(inventory: dict, host: str, owner: str, repo: str) -> dict | None:
+    for entry in inventory.get("repositories", []):
+        if repository_segments(entry) == (host, owner, repo):
+            return entry
+    return None
+
+
 def normalize_language_family(languages: list[object]) -> str:
     for language in languages:
         normalized = str(language).strip().lower()
@@ -197,14 +299,14 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str]:
     )
     example = {
         "path": "repo.description",
-      "value": compact_text(str(summary.get("repository", {}).get("description") or ""), limit=220),
+        "value": compact_text(str(summary.get("repository", {}).get("description") or ""), limit=220),
         "selection": {
             "reason": selection.get("reason"),
             "recordStatus": record.get("status"),
             "trust": {
                 "confidence": trust.get("confidence"),
-          "provenance": trust.get("provenance", [])[:3],
-          "notes": compact_text(str(trust.get("notes") or ""), limit=220),
+                "provenance": trust.get("provenance", [])[:3],
+                "notes": compact_text(str(trust.get("notes") or ""), limit=220),
             },
             "evidencePath": selected_record.get("artifacts", {}).get("evidencePath"),
         },
@@ -213,12 +315,100 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str]:
     return query_url, html.escape(json.dumps(example, indent=2))
 
 
+def build_featured_trust_example(input_dir: Path, inventory: dict) -> dict:
+    repositories = inventory.get("repositories", [])
+    if not repositories:
+        return {
+            "name": "No featured repository yet",
+            "label": "no featured repository",
+            "summaryUrl": "#",
+            "trustUrl": "#",
+            "queryUrl": "#",
+            "description": "The first accepted maintainer-claim example has not been exported yet.",
+            "proofJson": html.escape(json.dumps({"selection": {"claim": None}}, indent=2)),
+            "claimState": "none",
+            "handoff": "none",
+            "trustConfidence": "unknown",
+            "provenance": "unknown",
+            "notes": "No accepted maintainer-owned claim is available in the current export.",
+            "reviewPath": None,
+            "evidencePath": None,
+        }
+
+    entry = find_repository_entry(inventory, "github.com", "maxwellsantoro", "ries-rs")
+    if entry is None:
+        entry = repositories[0]
+
+    summary = load_repository_surface(input_dir, entry, "index.json")
+    trust = load_repository_surface(input_dir, entry, "trust.json")
+    repository = summary.get("repository", {})
+    selection = trust.get("selection", {})
+    selected_record = selection.get("record", {})
+    record = selected_record.get("record", {})
+    trust_record = record.get("trust", {})
+    claim = selected_record.get("claim", {})
+    artifacts = selected_record.get("artifacts", {})
+    identity = trust.get("identity", {})
+    links = trust.get("links", {})
+    query_url = links.get("queryTemplate", "#").replace("{dot_path}", "repo.description")
+    proof = {
+        "identity": {
+            "host": identity.get("host"),
+            "owner": identity.get("owner"),
+            "repo": identity.get("repo"),
+        },
+        "selection": {
+            "reason": selection.get("reason"),
+            "recordStatus": record.get("status"),
+            "claim": {
+                "state": claim.get("state"),
+                "handoff": claim.get("handoff"),
+            },
+            "trust": {
+                "confidence": trust_record.get("confidence"),
+                "provenance": trust_record.get("provenance", [])[:3],
+                "notes": compact_text(str(trust_record.get("notes") or ""), limit=220),
+            },
+            "artifacts": {
+                "reviewPath": claim.get("reviewPath"),
+                "evidencePath": artifacts.get("evidencePath"),
+            },
+        },
+        "conflicts": trust.get("conflicts", []),
+    }
+    host = str(identity.get("host", "")).strip()
+    owner = str(identity.get("owner", "")).strip()
+    repo = str(identity.get("repo", "")).strip()
+    label = "/".join(segment for segment in (host, owner, repo) if segment) or "unknown"
+    provenance = trust_record.get("provenance", [])
+    if isinstance(provenance, list):
+        provenance_label = ", ".join(str(item) for item in provenance) if provenance else "unknown"
+    else:
+        provenance_label = str(provenance)
+    return {
+        "name": repository_card_title(entry, identity),
+        "label": label,
+        "summaryUrl": links.get("repository", "#"),
+        "trustUrl": links.get("self", "#"),
+        "queryUrl": query_url,
+        "description": compact_text(str(repository.get("description") or ""), limit=320),
+        "proofJson": html.escape(json.dumps(proof, indent=2)),
+        "claimState": str(claim.get("state") or "unknown"),
+        "handoff": str(claim.get("handoff") or "unknown"),
+        "trustConfidence": str(trust_record.get("confidence") or "unknown"),
+        "provenance": provenance_label,
+        "notes": compact_text(str(trust_record.get("notes") or ""), limit=220),
+        "reviewPath": claim.get("reviewPath"),
+        "evidencePath": artifacts.get("evidencePath"),
+    }
+
+
 def render_site_header(base_path: str, active: str | None = None) -> str:
     links = [
         ("home", site_href(base_path, "/"), "Home"),
+        ("docs", site_href(base_path, "/docs/"), "Docs"),
         ("writing", site_href(base_path, "/writing/"), "Writing"),
         ("github", "https://github.com/maxwellsantoro/dotrepo", "GitHub"),
-        ("docs", "https://github.com/maxwellsantoro/dotrepo/blob/main/README.md", "Docs"),
         ("inventory", site_href(base_path, "/v0/repos/index.json"), "Inventory"),
         ("snapshot", site_href(base_path, "/v0/meta.json"), "Snapshot"),
     ]
@@ -289,6 +479,45 @@ def render_writing_cards(base_path: str) -> str:
             ).strip()
         )
     return "\n".join(cards)
+
+
+def render_docs_cards(base_path: str) -> str:
+    cards = []
+    for section in DOCS_SECTIONS:
+        item_markup = []
+        for item in section["items"]:
+            href = site_href(base_path, str(item["href"]))
+            item_markup.append(
+                """
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>{label}</h3>
+                    <span>{kind}</span>
+                  </div>
+                  <p>{summary}</p>
+                  <a href="{href}">Open</a>
+                </article>
+                """.format(
+                    label=html.escape(str(item["label"])),
+                    kind=html.escape(str(item["kind"])),
+                    summary=html.escape(str(item["summary"])),
+                    href=html.escape(href),
+                ).strip()
+            )
+        cards.append(
+            """
+            <section class="panel section">
+              <h2>{title}</h2>
+              <div class="doc-grid">
+                {items}
+              </div>
+            </section>
+            """.format(
+                title=html.escape(str(section["title"])),
+                items="\n                ".join(item_markup),
+            ).strip()
+        )
+    return "\n    ".join(cards)
 
 
 def render_repository_cards(inventory: dict) -> str:
@@ -691,6 +920,213 @@ def render_writing_index(base_path: str) -> str:
 """
 
 
+def render_docs_index(base_path: str) -> str:
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docs · dotrepo</title>
+  <meta name="description" content="First-party documentation entry for dotrepo: product status, trust model, public surface, maintainer flow, and index growth.">
+  <style>
+    :root {{
+      color-scheme: light;
+      --paper: #f6f1e8;
+      --paper-strong: #efe6d7;
+      --ink: #16181b;
+      --muted: #5c635d;
+      --panel: rgba(255, 251, 244, 0.84);
+      --line: rgba(54, 46, 28, 0.14);
+      --accent: #116466;
+      --accent-strong: #0d494b;
+      --signal: #c4572e;
+      --shadow: 0 18px 60px rgba(23, 27, 31, 0.12);
+      --radius: 22px;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(17, 100, 102, 0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(196, 87, 46, 0.12), transparent 30%),
+        linear-gradient(180deg, #fbf6ec 0%, var(--paper) 54%, var(--paper-strong) 100%);
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    }}
+    a {{ color: inherit; text-decoration: none; }}
+    .page {{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }}
+    .nav {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }}
+    .brand {{
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }}
+    .brand__mark {{
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+    }}
+    .brand__tag {{
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }}
+    .nav__links {{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }}
+    .nav__links a {{
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.48);
+    }}
+    .nav__links a[aria-current="page"] {{
+      background: linear-gradient(135deg, var(--accent) 0%, #0b4b5a 100%);
+      color: white;
+      border-color: transparent;
+    }}
+    .panel {{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }}
+    .hero {{
+      padding: 34px;
+      display: grid;
+      gap: 16px;
+    }}
+    .eyebrow {{
+      margin: 0;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }}
+    h1 {{
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+    }}
+    .hero p {{
+      margin: 0;
+      color: #273038;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      max-width: 46rem;
+    }}
+    .section {{
+      margin-top: 26px;
+      padding: 30px;
+    }}
+    .section h2 {{
+      margin: 0;
+      font-size: 0.84rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }}
+    .doc-grid {{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }}
+    .doc-item {{
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }}
+    .doc-item__head {{
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+    }}
+    .doc-item__head h3 {{
+      margin: 0;
+      font-size: 1.28rem;
+    }}
+    .doc-item__head span {{
+      color: var(--signal);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }}
+    .doc-item p {{
+      margin: 14px 0 0;
+      color: #30363c;
+      line-height: 1.7;
+    }}
+    .doc-item a {{
+      display: inline-flex;
+      margin-top: 18px;
+      font-weight: 700;
+      color: var(--accent-strong);
+    }}
+    .footer {{
+      margin-top: 28px;
+      padding: 10px 2px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }}
+    @media (max-width: 980px) {{
+      .doc-grid {{ grid-template-columns: 1fr; }}
+    }}
+    @media (max-width: 720px) {{
+      .page {{ padding: 18px 14px 56px; }}
+      .hero,
+      .section {{ padding: 22px; }}
+      .nav {{ align-items: flex-start; flex-direction: column; }}
+      .nav__links {{ justify-content: flex-start; }}
+    }}
+  </style>
+</head>
+<body>
+  <div class="page">
+    {render_site_header(base_path, "docs")}
+    <section class="panel hero">
+      <p class="eyebrow">Docs</p>
+      <h1>The first-party entry to the protocol, product, and live proof surface.</h1>
+      <p>This page keeps the documentation front door on <code>dotrepo.org</code>. Detailed working docs still live in the repository for now, but the canonical entrypoint, public API links, and product framing stay first-party.</p>
+    </section>
+    {render_docs_cards(base_path)}
+    <footer class="footer">
+      <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
+      <span>Live inventory: <a href="{site_href(base_path, '/v0/repos/index.json')}">/v0/repos/index.json</a></span>
+      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+    </footer>
+  </div>
+</body>
+</html>
+"""
+
+
 def render_article_page(article: dict, base_path: str) -> str:
     tags = "".join(
         f'<span class="tag">{html.escape(str(tag))}</span>' for tag in article.get("tags", [])
@@ -986,6 +1422,7 @@ def main() -> int:
     repository_count = inventory.get("repositoryCount", 0)
     repositories = inventory.get("repositories", [])
     first_query, query_example = build_query_example(input_dir, inventory)
+    featured_trust = build_featured_trust_example(input_dir, inventory)
     homepage_snapshot_state = build_homepage_snapshot_state(meta, inventory)
     reviewed_repo_count = progress["reviewedRepoCount"]
     tranche_target = progress["trancheTarget"]
@@ -997,9 +1434,9 @@ def main() -> int:
     )
 
     stale_line = (
-      f"<span>{html.escape(format_timestamp_for_humans(str(stale_after)))}</span>"
-      if stale_after
-      else "<span>not set</span>"
+        f"<span>{html.escape(format_timestamp_for_humans(str(stale_after)))}</span>"
+        if stale_after
+        else "<span>not set</span>"
     )
 
     document = f"""<!doctype html>
@@ -1491,14 +1928,15 @@ def main() -> int:
         <p class="eyebrow">Live public surface</p>
         <h1>Trust-aware metadata for software repositories.</h1>
         <p class="hero__lede">
-          dotrepo gives maintainers, users, tools, and coding agents one
-          structured view of a repository without flattening projects into
-          scraped sludge. The public JSON tree and same-origin query route on
-          this site are built from the reviewed export snapshot below.
+          dotrepo is a trust contract for repository metadata. The important
+          part is not that a <code>.repo</code> file exists. The important part
+          is that hosted answers carry selection reason, provenance, and claim
+          context instead of pretending repository metadata is conflict-free.
         </p>
         <div class="cta-row">
-          <a class="cta cta--primary" href="{site_href(base_path, '/v0/repos/index.json')}">Explore the public index</a>
-          <a class="cta cta--secondary" href="{html.escape(first_query)}">Try a live query</a>
+          <a class="cta cta--primary" href="{html.escape(featured_trust['trustUrl'])}">See the live trust handoff</a>
+          <a class="cta cta--secondary" href="{site_href(base_path, '/v0/repos/index.json')}">Explore the public index</a>
+          <a class="cta cta--secondary" href="{site_href(base_path, '/docs/')}">Read the docs</a>
           <a class="cta cta--secondary" href="https://github.com/maxwellsantoro/dotrepo">Read the code</a>
         </div>
       </div>
@@ -1539,6 +1977,49 @@ def main() -> int:
     </section>
 
     <section class="panel section">
+      <h2>Trust proof</h2>
+      <p class="section__intro">
+        The strongest live artifact on this site is not a generic field lookup. It is a claim-aware trust response that shows accepted maintainer state, preserved reviewed overlay context, and canonical handoff without silently flattening history away.
+      </p>
+      <div class="api-grid">
+        <article class="api-card">
+          <h3>{html.escape(featured_trust['name'])}</h3>
+          <p><code>{html.escape(featured_trust['label'])}</code></p>
+          <p>{html.escape(featured_trust['description'])}</p>
+          <div class="endpoint-list">
+            <div class="endpoint">
+              <code>claim state: {html.escape(featured_trust['claimState'])}</code>
+              <span>The current exported claim state for the selected record.</span>
+            </div>
+            <div class="endpoint">
+              <code>handoff: {html.escape(featured_trust['handoff'])}</code>
+              <span>The reviewed overlay remains visible while the accepted maintainer claim points to the canonical source of truth.</span>
+            </div>
+            <div class="endpoint">
+              <code>confidence: {html.escape(featured_trust['trustConfidence'])}</code>
+              <span>Provenance: {html.escape(featured_trust['provenance'])}</span>
+            </div>
+            <div class="endpoint">
+              <code>{html.escape(featured_trust['notes'])}</code>
+              <span>Selection stays explained instead of being reduced to a bare answer.</span>
+            </div>
+          </div>
+          <div class="repo-card__links">
+            <a href="{html.escape(featured_trust['summaryUrl'])}">Summary</a>
+            <a href="{html.escape(featured_trust['trustUrl'])}">Trust</a>
+            <a href="{html.escape(featured_trust['queryUrl'])}">Query</a>
+          </div>
+        </article>
+        <article class="api-card">
+          <h3>What the live trust surface returns</h3>
+          <p>This excerpt comes from the current exported snapshot and keeps the handoff visible. That is the product proof most metadata layers cannot show.</p>
+          <pre><code>{featured_trust['proofJson']}</code></pre>
+          <p class="api-card__caption">Review path: <code>{html.escape(str(featured_trust['reviewPath'] or "unknown"))}</code> · Evidence path: <code>{html.escape(str(featured_trust['evidencePath'] or "unknown"))}</code></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel section">
       <h2>Repo lookup</h2>
       <p class="section__intro">
         Paste a repository URL and jump straight to the hosted summary or trust
@@ -1564,6 +2045,30 @@ def main() -> int:
           <p>Query stable JSON and same-origin endpoints directly instead of guessing intent from prose, conventions, and partially structured repository surfaces.</p>
         </article>
       </div>
+    </section>
+
+    <section class="panel section">
+      <h2>Docs</h2>
+      <p class="section__intro">
+        The public site now keeps the documentation entrypoint on the first-party domain. Detailed working docs still live in the repository, but the navigation no longer treats the site as a thin wrapper around GitHub.
+      </p>
+      <div class="three-up">
+        <article class="feature">
+          <h3>Product and status</h3>
+          <p>Start with the current-status, install, and maintainer-path docs before diving into RFC history or operator detail.</p>
+        </article>
+        <article class="feature">
+          <h3>Protocol and trust</h3>
+          <p>The trust model, public surface architecture, and roadmap docs explain the real differentiator: provenance, precedence, and conflict surfacing.</p>
+        </article>
+        <article class="feature">
+          <h3>Growth and operator loop</h3>
+          <p>The seed index, tranche targets, and maintainer-claim review docs show how the proof surface becomes a useful service instead of an isolated demo.</p>
+        </article>
+      </div>
+      <p class="section__note">
+        Start at <a href="{site_href(base_path, '/docs/')}">the first-party docs landing page</a>.
+      </p>
     </section>
 
     <section class="panel section">
@@ -1672,6 +2177,7 @@ def main() -> int:
 """
 
     write_text(input_dir / "index.html", document)
+    write_text(input_dir / "docs" / "index.html", render_docs_index(base_path))
     write_text(input_dir / "writing" / "index.html", render_writing_index(base_path))
     for article in ARTICLES:
         write_text(

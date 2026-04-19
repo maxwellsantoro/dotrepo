@@ -169,6 +169,23 @@ def verify_homepage_snapshot_state(document: str, source: str, meta: dict, inven
         )
 
 
+def expected_freshness(meta: dict) -> dict:
+    return {
+        "generatedAt": meta.get("generatedAt"),
+        "snapshotDigest": meta.get("snapshotDigest"),
+        "staleAfter": meta.get("staleAfter"),
+    }
+
+
+def verify_freshness(payload: dict, meta: dict, source: str) -> None:
+    freshness = payload.get("freshness")
+    expected = expected_freshness(meta)
+    if freshness != expected:
+        raise SystemExit(
+            f"freshness mismatch in {source}: expected {expected}, got {freshness}"
+        )
+
+
 def verify_inline_javascript_syntax(document: str, source: str) -> None:
     scripts = re.findall(r"<script([^>]*)>(.*?)</script>", document, re.IGNORECASE | re.DOTALL)
     for index, (attrs, body) in enumerate(scripts, start=1):
@@ -196,9 +213,11 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     meta_path = public_dir / "v0" / "meta.json"
     inventory_path = public_dir / "v0" / "repos" / "index.json"
     homepage_path = public_dir / "index.html"
+    docs_path = public_dir / "docs" / "index.html"
     ensure_file(meta_path)
     ensure_file(inventory_path)
     ensure_file(homepage_path)
+    ensure_file(docs_path)
     ensure_file(public_dir / ".nojekyll")
 
     meta = json.loads(meta_path.read_text())
@@ -222,8 +241,14 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     homepage_document = homepage_path.read_text()
     verify_homepage_snapshot_state(homepage_document, str(homepage_path), meta, inventory)
     verify_inline_javascript_syntax(homepage_document, str(homepage_path))
+    docs_document = docs_path.read_text()
+    verify_inline_javascript_syntax(docs_document, str(docs_path))
 
     normalized_base = "/" if expected_base_path == "/" else expected_base_path.rstrip("/")
+    docs_href = f'{normalized_base}/docs/' if normalized_base != "/" else "/docs/"
+    if f'href="{docs_href}"' not in homepage_document:
+        raise SystemExit(f"homepage does not link to first-party docs path {docs_href}")
+
     for repo in repositories:
         identity = repo.get("identity")
         links = repo.get("links")
@@ -254,7 +279,11 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
         for link in (summary_link, trust_link):
             relative = link.removeprefix(normalized_base).lstrip("/")
             ensure_file(public_dir / relative)
-        ensure_file(public_dir / "query-input" / host / owner / f"{name}.json")
+            payload = json.loads((public_dir / relative).read_text())
+            verify_freshness(payload, meta, str(public_dir / relative))
+        query_input_path = public_dir / "query-input" / host / owner / f"{name}.json"
+        ensure_file(query_input_path)
+        verify_freshness(json.loads(query_input_path.read_text()), meta, str(query_input_path))
 
 
 def verify_tar_contains_prefix(archive_path: Path, prefix: str) -> None:
@@ -403,6 +432,27 @@ def smoke_test_release_bundle(
                     f"same-origin homepage smoke failed ({status}) for {homepage_url}: {body}"
                 )
             verify_homepage_snapshot_state(body, homepage_url, meta, inventory)
+            docs_url = f"http://{server_addr}{base}/docs/"
+            status, body = http_get_text(docs_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin docs smoke failed ({status}) for {docs_url}: {body}"
+                )
+            first_repo = repositories[0]
+            summary_url = f"http://{server_addr}{first_repo['links']['self']}"
+            status, body = http_get_text(summary_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin summary smoke failed ({status}) for {summary_url}: {body}"
+                )
+            verify_freshness(json.loads(body), meta, summary_url)
+            trust_url = f"http://{server_addr}{first_repo['links']['trust']}"
+            status, body = http_get_text(trust_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin trust smoke failed ({status}) for {trust_url}: {body}"
+                )
+            verify_freshness(json.loads(body), meta, trust_url)
             query_template = repositories[0]["links"]["queryTemplate"]
             if not isinstance(query_template, str):
                 raise SystemExit("same-origin inventory smoke found no queryTemplate")
@@ -488,6 +538,27 @@ def smoke_test_cloudflare_worker(worker_dir: Path, base_path: str) -> None:
                 f"Cloudflare Worker homepage smoke failed ({status}) for {homepage_url}: {body}"
             )
         verify_homepage_snapshot_state(body, homepage_url, meta, inventory)
+        docs_url = f"http://{server_addr}{base}/docs/"
+        status, body = http_get_text(docs_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker docs smoke failed ({status}) for {docs_url}: {body}"
+            )
+        first_repo = repositories[0]
+        summary_url = f"http://{server_addr}{first_repo['links']['self']}"
+        status, body = http_get_text(summary_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker summary smoke failed ({status}) for {summary_url}: {body}"
+            )
+        verify_freshness(json.loads(body), meta, summary_url)
+        trust_url = f"http://{server_addr}{first_repo['links']['trust']}"
+        status, body = http_get_text(trust_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker trust smoke failed ({status}) for {trust_url}: {body}"
+            )
+        verify_freshness(json.loads(body), meta, trust_url)
         query_template = repositories[0]["links"]["queryTemplate"]
         if not isinstance(query_template, str):
             raise SystemExit("Cloudflare Worker inventory smoke found no queryTemplate")
