@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/rust-lang/rust-analyzer"
+generated_at = "2026-04-19T14:55:22.245514Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `.github/workflows/ci.yaml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `.github/workflows/ci.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "rust-analyzer"
+description = "rust-analyzer is a language server that provides IDE functionality for writing Rust programs. You can use it with any editor that supports"
+homepage = "https://rust-analyzer.github.io/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "HTML",
+    "Python",
+    "RenderScript",
+    "Rust",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "lsp-server",
+    "rust",
+    "hacktoberfest",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/rust-lang/rust-analyzer.git"
+default_branch = "master"
+fork = false
+head_sha = "2541da9d41db9ee96274d6f4958115ed4ca3c4c2"
+html_url = "https://github.com/rust-lang/rust-analyzer"
+stars = 16280

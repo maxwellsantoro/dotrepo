@@ -1,0 +1,55 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/eslint/eslint"
+generated_at = "2026-04-19T14:55:29.008195Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@eslint/eslint-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Left `repo.build` unset because `.github/workflows/docs-ci.yml`, `.github/workflows/types-integration.yml`, and `.github/workflows/update-readme.yml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/ci.yml`, `.github/workflows/types-integration.yml`, and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "ESLint"
+description = "ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions:"
+homepage = "https://eslint.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "EJS",
+    "HTML",
+    "JavaScript",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "eslint",
+    "javascript",
+    "ecmascript",
+    "static-code-analysis",
+    "linter",
+]
+
+[owners]
+maintainers = [
+    "@eslint/website-team",
+    "@eslint/eslint-team",
+]
+team = "@eslint/eslint-team"
+
+[docs]
+getting_started = "https://eslint.org/docs/latest/use/getting-started#prerequisites"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/eslint/eslint.git"
+default_branch = "main"
+fork = false
+head_sha = "7f479376a2fa463d823ab762db6bb37ce8d2ee8f"
+html_url = "https://github.com/eslint/eslint"
+stars = 27195

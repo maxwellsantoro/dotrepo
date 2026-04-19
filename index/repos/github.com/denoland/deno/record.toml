@@ -1,0 +1,59 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/denoland/deno"
+generated_at = "2026-04-19T14:55:27.45572Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `Cargo.toml` and `.github/workflows/ci.generated.yml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `.github/workflows/ci.generated.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Deno"
+description = "defaults and a great developer experience. It's built on V8, Rust, and Tokio."
+homepage = "https://deno.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Astro",
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Mustache",
+    "Nix",
+    "Nunjucks",
+    "Python",
+    "Rust",
+    "Svelte",
+    "TypeScript",
+    "Vento",
+    "WebAssembly",
+]
+topics = [
+    "deno",
+    "typescript",
+    "javascript",
+    "rust",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/denoland/deno/security/advisories/new"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/denoland/deno.git"
+default_branch = "main"
+fork = false
+head_sha = "ccc0d6f59377a4eae2dc6c025a7dc7ce3e410de9"
+html_url = "https://github.com/denoland/deno"
+stars = 106520
