@@ -5,6 +5,7 @@ import html
 import json
 import tomllib
 from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -39,6 +40,46 @@ def shorten_digest(value: str) -> str:
     if len(value) <= 20:
         return value
     return f"{value[:12]}...{value[-10:]}"
+
+
+def format_timestamp_for_humans(value: str) -> str:
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return value
+    return parsed.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+
+def compact_text(value: str, *, limit: int) -> str:
+    cleaned = " ".join(value.strip().split())
+    if len(cleaned) <= limit:
+        return cleaned
+    return f"{cleaned[: limit - 1].rstrip()}..."
+
+
+def is_low_signal_title(title: str) -> bool:
+    normalized = title.strip().lower()
+    return normalized in {"a project", "sponsors", "project", "repository"}
+
+
+def is_low_signal_description(description: str) -> bool:
+    normalized = description.strip().lower()
+    return normalized.endswith("/readme.md") or normalized in {"readme", "readme.md"}
+
+
+def repository_card_title(entry: dict, identity: dict) -> str:
+    candidate = str(entry.get("name") or "").strip()
+    if candidate and not is_low_signal_title(candidate):
+        return candidate
+    return str(identity.get("repo") or "unknown").strip() or "unknown"
+
+
+def repository_card_description(entry: dict) -> str:
+    fallback = "Repository metadata exported from the reviewed dotrepo index."
+    candidate = str(entry.get("description") or "").strip()
+    if not candidate or is_low_signal_description(candidate):
+        return fallback
+    return compact_text(candidate, limit=240)
 
 
 def normalize_site_base_path(value: str) -> str:
@@ -156,14 +197,14 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str]:
     )
     example = {
         "path": "repo.description",
-        "value": summary.get("repository", {}).get("description"),
+      "value": compact_text(str(summary.get("repository", {}).get("description") or ""), limit=220),
         "selection": {
             "reason": selection.get("reason"),
             "recordStatus": record.get("status"),
             "trust": {
                 "confidence": trust.get("confidence"),
-                "provenance": trust.get("provenance", []),
-                "notes": trust.get("notes"),
+          "provenance": trust.get("provenance", [])[:3],
+          "notes": compact_text(str(trust.get("notes") or ""), limit=220),
             },
             "evidencePath": selected_record.get("artifacts", {}).get("evidencePath"),
         },
@@ -254,8 +295,8 @@ def render_repository_cards(inventory: dict) -> str:
     cards = []
     for entry in inventory.get("repositories", []):
         identity = entry.get("identity", {})
-        name = entry.get("name") or identity.get("repo") or "unknown"
-        description = entry.get("description") or "No description exported yet."
+        name = repository_card_title(entry, identity)
+        description = repository_card_description(entry)
         host = identity.get("host", "")
         owner = identity.get("owner", "")
         repo = identity.get("repo", "")
@@ -940,6 +981,7 @@ def main() -> int:
 
     snapshot_digest = str(meta.get("snapshotDigest", "unknown"))
     generated_at = str(meta.get("generatedAt", "unknown"))
+    generated_at_human = format_timestamp_for_humans(generated_at)
     stale_after = meta.get("staleAfter")
     repository_count = inventory.get("repositoryCount", 0)
     repositories = inventory.get("repositories", [])
@@ -955,7 +997,9 @@ def main() -> int:
     )
 
     stale_line = (
-        f"<span>{html.escape(str(stale_after))}</span>" if stale_after else "<span>not set</span>"
+      f"<span>{html.escape(format_timestamp_for_humans(str(stale_after)))}</span>"
+      if stale_after
+      else "<span>not set</span>"
     )
 
     document = f"""<!doctype html>
@@ -1322,6 +1366,16 @@ def main() -> int:
       color: var(--accent-strong);
       font-weight: 600;
     }}
+    .lookup-card .endpoint code {{
+      min-width: 0;
+      flex: 1 1 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }}
+    .lookup-card .endpoint span {{
+      min-width: 0;
+    }}
     .endpoint span {{
       color: var(--muted);
     }}
@@ -1469,7 +1523,7 @@ def main() -> int:
             <span>Accepted maintainer-owned claim examples in the checked-in index.</span>
           </div>
           <div class="stat">
-            <strong>{html.escape(generated_at)}</strong>
+            <strong>{html.escape(generated_at_human)}</strong>
             <span>Snapshot generated at.</span>
           </div>
           <div class="stat">
