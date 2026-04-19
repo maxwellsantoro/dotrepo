@@ -186,6 +186,83 @@ test("returns repository_not_found when query-input is absent", async () => {
   );
 });
 
+test("rejects inherited properties in query paths", async () => {
+  const snapshot = {
+    apiVersion: "v0",
+    freshness: {
+      generatedAt: "2026-03-10T18:30:00Z",
+      snapshotDigest: "fixture"
+    },
+    identity: {
+      host: "github.com",
+      owner: "example",
+      repo: "orbit",
+      source: "https://github.com/example/orbit"
+    },
+    selection: {
+      reason: "only_matching_record",
+      record: {
+        manifestPath: "repos/github.com/example/orbit/record.toml",
+        record: {
+          mode: "overlay",
+          status: "reviewed",
+          source: "https://github.com/example/orbit"
+        }
+      },
+      manifest: {
+        schema: "dotrepo/v0.1",
+        record: {
+          mode: "overlay",
+          status: "reviewed",
+          source: "https://github.com/example/orbit"
+        },
+        repo: {
+          name: "orbit",
+          description: "Selected description"
+        }
+      }
+    },
+    conflicts: []
+  };
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      JSON.stringify({
+        apiVersion: "v0",
+        generatedAt: "2026-03-10T18:30:00Z",
+        snapshotDigest: "fixture"
+      })
+    ],
+    ["/query-input/github.com/example/orbit.json", JSON.stringify(snapshot)]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/" };
+  const response = await handleRequest(
+    new Request(
+      "https://example.test/v0/repos/github.com/example/orbit/query?path=repo.__proto__"
+    ),
+    env
+  );
+
+  assert.equal(response.status, 404);
+  assert.deepEqual(await response.json(), {
+    apiVersion: "v0",
+    freshness: {
+      generatedAt: "2026-03-10T18:30:00Z",
+      snapshotDigest: "fixture"
+    },
+    identity: {
+      host: "github.com",
+      owner: "example",
+      repo: "orbit"
+    },
+    path: "repo.__proto__",
+    error: {
+      code: "query_path_not_found",
+      message: "query path not found: repo.__proto__"
+    }
+  });
+});
+
 test("falls through to static assets after stripping the configured base path", async () => {
   const files = new Map([
     ["/", "<html>dotrepo</html>"],

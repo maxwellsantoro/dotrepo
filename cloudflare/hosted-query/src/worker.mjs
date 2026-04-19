@@ -48,10 +48,11 @@ function stripBasePath(pathname, basePath) {
 }
 
 function ensureSinglePathSegment(field, value) {
-  if (typeof value !== "string" || value.trim() === "") {
+  const trimmed = typeof value === "string" ? value.trim() : "";
+  if (trimmed === "") {
     throw new Error(`${field} must not be empty`);
   }
-  if (value.includes("/")) {
+  if (trimmed === "." || trimmed === ".." || trimmed.includes("/")) {
     throw new Error(`${field} must be a single path segment`);
   }
 }
@@ -99,7 +100,7 @@ function queryValue(value, path) {
       continue;
     }
     if (current && typeof current === "object" && !Array.isArray(current)) {
-      if (!(segment in current)) {
+      if (!Object.hasOwn(current, segment)) {
         throw new Error(`query path not found: ${path}`);
       }
       current = current[segment];
