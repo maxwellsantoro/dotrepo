@@ -4047,6 +4047,7 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "badges",
     "changelog",
     "code of conduct",
+    "communication",
     "configuration",
     "contributing",
     "credits",
@@ -4060,13 +4061,17 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "installation",
     "introduction",
     "license",
+    "links",
     "motivation",
     "overview",
+    "quick links",
     "quick start",
     "quickstart",
     "readme",
+    "resources",
     "roadmap",
     "security",
+    "security and privacy",
     "sponsors",
     "support",
     "table of contents",
@@ -4142,7 +4147,14 @@ fn parse_readme_description(lines: &[&str], start: usize) -> Option<(String, usi
     if parts.is_empty() {
         None
     } else {
-        Some((parts.join(" "), idx))
+        let joined = parts.join(" ");
+        if looks_like_artifact(&joined) {
+            return None;
+        }
+        if joined.len() < 15 || !joined.contains(' ') {
+            return None;
+        }
+        Some((joined, idx))
     }
 }
 
@@ -4159,6 +4171,8 @@ fn normalize_description_line(line: &str) -> Option<String> {
         || starts_with_ordered_list_item(line)
         || is_probable_readme_nav_line(line)
         || is_probable_docs_signal_line(line)
+        || is_pipe_delimited_nav_line(line)
+        || is_nav_link_item(line)
     {
         return None;
     }
@@ -4177,13 +4191,51 @@ fn looks_like_artifact(value: &str) -> bool {
     if trimmed.starts_with("http://") || trimmed.starts_with("https://") {
         return true;
     }
+    if looks_like_html_attribute_spill(trimmed) {
+        return true;
+    }
     if looks_like_file_path(trimmed) {
         return true;
     }
     if has_unbalanced_brackets(trimmed) {
         return true;
     }
+    if is_pipe_delimited_nav_text(trimmed) {
+        return true;
+    }
     false
+}
+
+fn looks_like_html_attribute_spill(value: &str) -> bool {
+    let lowered = value.to_ascii_lowercase();
+    lowered.contains("src=\"") || lowered.contains("alt=\"") || lowered.contains("href=\"")
+}
+
+fn is_pipe_delimited_nav_line(line: &str) -> bool {
+    is_pipe_delimited_nav_text(line.trim())
+}
+
+fn is_pipe_delimited_nav_text(value: &str) -> bool {
+    let pipe_count = value.chars().filter(|ch| *ch == '|').count();
+    if pipe_count < 2 {
+        return false;
+    }
+    let segments = value.split('|').collect::<Vec<_>>();
+    segments.len() >= 3 && segments.iter().all(|s| s.trim().len() <= 40)
+}
+
+fn is_nav_link_item(line: &str) -> bool {
+    let trimmed = line.trim();
+    if trimmed.contains('|') && trimmed.ends_with('|') {
+        return true;
+    }
+    if trimmed.contains('|') && trimmed.ends_with('|') {
+        return true;
+    }
+    let normalized = normalize_readme_text(trimmed);
+    normalized
+        .as_ref()
+        .is_some_and(|text| text.ends_with('|') || text.trim().ends_with('|'))
 }
 
 fn looks_like_file_path(value: &str) -> bool {
