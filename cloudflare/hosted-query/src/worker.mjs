@@ -71,6 +71,18 @@ function validateRepositoryIdentity(host, owner, repo) {
   }
 }
 
+function decodeRepositoryIdentity(route) {
+  try {
+    return {
+      host: decodeURIComponent(route.host),
+      owner: decodeURIComponent(route.owner),
+      repo: decodeURIComponent(route.repo)
+    };
+  } catch {
+    throw new Error("invalid repository identity: malformed percent-encoding");
+  }
+}
+
 function normalizeQueryPath(path) {
   if (path === "" || path === ".") {
     return ".";
@@ -223,9 +235,9 @@ function parseQueryRoute(pathname) {
   }
 
   return {
-    host: decodeURIComponent(segments[3]),
-    owner: decodeURIComponent(segments[4]),
-    repo: decodeURIComponent(segments[5])
+    host: segments[3],
+    owner: segments[4],
+    repo: segments[5]
   };
 }
 
@@ -319,18 +331,21 @@ export async function handleRequest(request, env) {
 
   const meta = await loadMeta(env, request);
   const fallbackFreshness = buildFreshnessFromMeta(meta);
+  const rawIdentity = {
+    host: route.host,
+    owner: route.owner,
+    repo: route.repo
+  };
+  let identity = rawIdentity;
 
   try {
-    validateRepositoryIdentity(route.host, route.owner, route.repo);
+    identity = decodeRepositoryIdentity(route);
+    validateRepositoryIdentity(identity.host, identity.owner, identity.repo);
   } catch (error) {
     return jsonResponse(
       400,
       buildPublicErrorResponse(
-        {
-          host: route.host,
-          owner: route.owner,
-          repo: route.repo
-        },
+        identity,
         requestedPath,
         fallbackFreshness,
         PUBLIC_ERROR_CODES.invalidRepositoryIdentity,
@@ -343,23 +358,19 @@ export async function handleRequest(request, env) {
     const snapshot = await loadQueryInputSnapshot(
       env,
       request,
-      route.host,
-      route.owner,
-      route.repo
+      identity.host,
+      identity.owner,
+      identity.repo
     );
     if (snapshot === null) {
       return jsonResponse(
         404,
         buildPublicErrorResponse(
-          {
-            host: route.host,
-            owner: route.owner,
-            repo: route.repo
-          },
+          identity,
           requestedPath,
           fallbackFreshness,
           PUBLIC_ERROR_CODES.repositoryNotFound,
-          `repository not found in index: repos/${route.host}/${route.owner}/${route.repo}/record.toml`
+          `repository not found in index: repos/${identity.host}/${identity.owner}/${identity.repo}/record.toml`
         )
       );
     }
@@ -377,11 +388,7 @@ export async function handleRequest(request, env) {
     return jsonResponse(
       status,
       buildPublicErrorResponse(
-        {
-          host: route.host,
-          owner: route.owner,
-          repo: route.repo
-        },
+        identity,
         requestedPath,
         fallbackFreshness,
         code,

@@ -292,7 +292,7 @@ def render_repository_cards(inventory: dict) -> str:
 
 
 def render_lookup_panel(base_path: str) -> str:
-    base_path_json = html.escape(json.dumps(base_path))
+    base_path_json = json.dumps(base_path)
     return f"""
       <div class="lookup-shell">
         <article class="lookup-card">

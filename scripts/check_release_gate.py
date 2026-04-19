@@ -15,14 +15,34 @@ import time
 import tomllib
 import urllib.error
 import urllib.request
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-DEFAULT_GENERATED_AT = "2026-03-10T18:30:00Z"
-DEFAULT_STALE_AFTER = "2026-03-11T18:30:00Z"
 DEFAULT_BASE_PATH = "/"
 
 
+def rfc3339_now_utc() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def rfc3339_plus_hours(value: str, hours: int) -> str:
+    timestamp = parse_rfc3339_utc(value, field="generatedAt") + timedelta(hours=hours)
+    return timestamp.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def parse_rfc3339_utc(value: str, *, field: str) -> datetime:
+    try:
+        timestamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise SystemExit(f"{field} must be a valid RFC3339 timestamp, got: {value}") from exc
+    if timestamp.tzinfo is None:
+        raise SystemExit(f"{field} must include a timezone offset, got: {value}")
+    return timestamp.astimezone(timezone.utc)
+
+
 def parse_args() -> argparse.Namespace:
+    default_generated_at = rfc3339_now_utc()
+    default_stale_after = rfc3339_plus_hours(default_generated_at, 24)
     parser = argparse.ArgumentParser(
         description="Run the release-surface gate for dotrepo."
     )
@@ -38,13 +58,13 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--generated-at",
-        default=DEFAULT_GENERATED_AT,
-        help=f"Deterministic generatedAt timestamp for the public export (default: {DEFAULT_GENERATED_AT})",
+        default=default_generated_at,
+        help=f"generatedAt timestamp for the public export (default: {default_generated_at})",
     )
     parser.add_argument(
         "--stale-after",
-        default=DEFAULT_STALE_AFTER,
-        help=f"Deterministic staleAfter timestamp for the public export (default: {DEFAULT_STALE_AFTER})",
+        default=default_stale_after,
+        help=f"staleAfter timestamp for the public export (default: {default_stale_after})",
     )
     parser.add_argument(
         "--skip-vsix",
@@ -149,6 +169,29 @@ def verify_homepage_snapshot_state(document: str, source: str, meta: dict, inven
         )
 
 
+def verify_inline_javascript_syntax(document: str, source: str) -> None:
+    scripts = re.findall(r"<script([^>]*)>(.*?)</script>", document, re.IGNORECASE | re.DOTALL)
+    for index, (attrs, body) in enumerate(scripts, start=1):
+        if re.search(r'type\s*=\s*["\']application/json["\']', attrs, re.IGNORECASE):
+            continue
+        script_body = body.strip()
+        if script_body == "":
+            continue
+        with tempfile.NamedTemporaryFile("w", suffix=".mjs", delete=True) as handle:
+            handle.write(script_body)
+            handle.flush()
+            result = subprocess.run(
+                ["node", "--check", handle.name],
+                capture_output=True,
+                text=True,
+            )
+        if result.returncode != 0:
+            stderr = result.stderr.strip() or result.stdout.strip() or "unknown parser error"
+            raise SystemExit(
+                f"inline script #{index} in {source} has invalid JavaScript syntax: {stderr}"
+            )
+
+
 def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     meta_path = public_dir / "v0" / "meta.json"
     inventory_path = public_dir / "v0" / "repos" / "index.json"
@@ -163,12 +206,22 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
         raise SystemExit(f"public export metadata is missing apiVersion: {meta_path}")
     if not isinstance(meta.get("snapshotDigest"), str) or not meta["snapshotDigest"]:
         raise SystemExit(f"public export metadata is missing snapshotDigest: {meta_path}")
+    stale_after = meta.get("staleAfter")
+    if not isinstance(stale_after, str) or not stale_after:
+        raise SystemExit(f"public export metadata is missing staleAfter: {meta_path}")
+    stale_after_utc = parse_rfc3339_utc(stale_after, field="staleAfter")
+    if stale_after_utc <= datetime.now(timezone.utc):
+        raise SystemExit(
+            f"public export metadata staleAfter is already in the past: {meta_path} ({stale_after})"
+        )
 
     inventory = json.loads(inventory_path.read_text())
     repositories = inventory.get("repositories")
     if not isinstance(repositories, list) or not repositories:
         raise SystemExit(f"public export inventory is empty: {inventory_path}")
-    verify_homepage_snapshot_state(homepage_path.read_text(), str(homepage_path), meta, inventory)
+    homepage_document = homepage_path.read_text()
+    verify_homepage_snapshot_state(homepage_document, str(homepage_path), meta, inventory)
+    verify_inline_javascript_syntax(homepage_document, str(homepage_path))
 
     normalized_base = "/" if expected_base_path == "/" else expected_base_path.rstrip("/")
     for repo in repositories:
@@ -235,7 +288,14 @@ def normalize_base_path(base_path: str) -> str:
 
 
 def smoke_test_release_bundle(
-    archive_path: Path, version: str, target: str, repo_root: Path, public_dir: Path, base_path: str
+    archive_path: Path,
+    version: str,
+    target: str,
+    repo_root: Path,
+    public_dir: Path,
+    base_path: str,
+    generated_at: str,
+    stale_after: str,
 ) -> None:
     """Extract the release tarball and run the shipped binaries."""
     with tempfile.TemporaryDirectory(prefix="dotrepo-smoke-") as tmp:
@@ -294,9 +354,9 @@ def smoke_test_release_bundle(
                 "--base-path",
                 base_path,
                 "--generated-at",
-                DEFAULT_GENERATED_AT,
+                generated_at,
                 "--stale-after",
-                DEFAULT_STALE_AFTER,
+                stale_after,
             ],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.PIPE,
@@ -613,7 +673,14 @@ def main() -> int:
     if release_bundle is not None and target is not None:
         print("release install smoke test")
         smoke_test_release_bundle(
-            release_bundle, version, target, repo_root, public_dir, args.base_path
+            release_bundle,
+            version,
+            target,
+            repo_root,
+            public_dir,
+            args.base_path,
+            args.generated_at,
+            args.stale_after,
         )
         print("  all release binaries passed smoke test")
     smoke_test_cloudflare_worker(worker_dir, args.base_path)

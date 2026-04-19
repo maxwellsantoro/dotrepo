@@ -143,6 +143,66 @@ test("returns the public error contract for invalid identities", async () => {
   );
 });
 
+test("returns invalid_repository_identity for malformed percent-encoding", async () => {
+  const meta = await readJson(
+    "crates",
+    "dotrepo-core",
+    "tests",
+    "fixtures",
+    "public-export",
+    "expected",
+    "public",
+    "v0",
+    "meta.json"
+  );
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath(
+          "crates",
+          "dotrepo-core",
+          "tests",
+          "fixtures",
+          "public-export",
+          "expected",
+          "public",
+          "v0",
+          "meta.json"
+        ),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/" };
+  const response = await handleRequest(
+    new Request(
+      "https://example.test/v0/repos/github.com/%E0%A4%A/orbit/query?path=repo.description"
+    ),
+    env
+  );
+
+  assert.equal(response.status, 400);
+  assert.deepEqual(await response.json(), {
+    apiVersion: "v0",
+    freshness: {
+      generatedAt: meta.generatedAt,
+      snapshotDigest: meta.snapshotDigest,
+      staleAfter: meta.staleAfter
+    },
+    identity: {
+      host: "github.com",
+      owner: "%E0%A4%A",
+      repo: "orbit"
+    },
+    path: "repo.description",
+    error: {
+      code: "invalid_repository_identity",
+      message: "invalid repository identity: malformed percent-encoding"
+    }
+  });
+});
+
 test("returns repository_not_found when query-input is absent", async () => {
   const files = new Map([
     [
