@@ -3573,15 +3573,13 @@ fn infer_package_json_commands(file: &ImportedFile) -> Option<ImportedCommandCan
 
 fn infer_pyproject_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
     let parsed: toml::Value = toml::from_str(&file.contents).ok()?;
-    let build = parsed
+    let has_build_system = parsed
         .get("build-system")
         .and_then(toml::Value::as_table)
-        .map(|_| "python -m build".to_string());
-    let test = parsed
-        .get("tool")
-        .and_then(toml::Value::as_table)
-        .and_then(|tool| tool.get("pytest"))
-        .map(|_| "python -m pytest".to_string());
+        .is_some();
+    let build = has_build_system.then(|| "python -m build".to_string());
+
+    let test = infer_pyproject_test_command(&parsed);
 
     if build.is_none() && test.is_none() {
         return None;
@@ -3592,6 +3590,48 @@ fn infer_pyproject_commands(file: &ImportedFile) -> Option<ImportedCommandCandid
         build,
         test,
     })
+}
+
+fn infer_pyproject_test_command(parsed: &toml::Value) -> Option<String> {
+    let tool = parsed.get("tool").and_then(toml::Value::as_table);
+    if let Some(tool_table) = tool {
+        if tool_table.contains_key("pytest") {
+            return Some("python -m pytest".to_string());
+        }
+        if tool_table.contains_key("tox") || tool_table.contains_key("tox-gh-actions") {
+            return Some("tox".to_string());
+        }
+        if tool_table.contains_key("nox") {
+            return Some("nox".to_string());
+        }
+    }
+
+    let project = parsed.get("project").and_then(toml::Value::as_table);
+    if let Some(project_table) = project {
+        if let Some(scripts) = project_table.get("scripts").and_then(toml::Value::as_table) {
+            if scripts.contains_key("test") {
+                return Some("python -m pytest".to_string());
+            }
+        }
+        if let Some(optional_deps) = project_table
+            .get("optional-dependencies")
+            .and_then(toml::Value::as_table)
+        {
+            if optional_deps.contains_key("test") || optional_deps.contains_key("testing") {
+                return Some("python -m pytest".to_string());
+            }
+        }
+    }
+
+    if parsed
+        .get("build-system")
+        .and_then(toml::Value::as_table)
+        .is_some()
+    {
+        return Some("python -m pytest".to_string());
+    }
+
+    None
 }
 
 fn infer_go_module_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
@@ -3981,11 +4021,57 @@ fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
 fn parse_readme_title_line(line: &str) -> Option<String> {
     if line.starts_with('#') {
         let title = strip_badge_run(line.trim_start_matches('#').trim());
-        return normalize_readme_text(title);
+        if let Some(normalized) = normalize_readme_text(title) {
+            if !is_non_project_heading(&normalized) {
+                return Some(normalized);
+            }
+        }
+        return None;
     }
 
-    parse_html_heading(line)
+    parse_html_heading(line).filter(|h| !is_non_project_heading(h))
 }
+
+fn is_non_project_heading(heading: &str) -> bool {
+    let lowered = heading.to_ascii_lowercase();
+    let trimmed = lowered.trim();
+    NON_PROJECT_HEADINGS
+        .iter()
+        .any(|pattern| trimmed == *pattern)
+}
+
+const NON_PROJECT_HEADINGS: &[&str] = &[
+    "about",
+    "acknowledgments",
+    "api reference",
+    "badges",
+    "changelog",
+    "code of conduct",
+    "configuration",
+    "contributing",
+    "credits",
+    "documentation",
+    "donate",
+    "example",
+    "examples",
+    "faq",
+    "features",
+    "getting started",
+    "installation",
+    "introduction",
+    "license",
+    "motivation",
+    "overview",
+    "quick start",
+    "quickstart",
+    "readme",
+    "roadmap",
+    "security",
+    "sponsors",
+    "support",
+    "table of contents",
+    "usage",
+];
 
 fn parse_setext_heading(lines: &[&str], idx: usize) -> Option<String> {
     let line = lines.get(idx)?.trim();
@@ -4078,7 +4164,55 @@ fn normalize_description_line(line: &str) -> Option<String> {
     }
 
     let description = line.trim_start_matches('>').trim();
-    normalize_readme_text(description).filter(|value| value.chars().any(|ch| ch.is_alphanumeric()))
+    normalize_readme_text(description)
+        .filter(|value| value.chars().any(|ch| ch.is_alphanumeric()))
+        .filter(|value| !looks_like_artifact(value))
+}
+
+fn looks_like_artifact(value: &str) -> bool {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        return true;
+    }
+    if trimmed.starts_with("http://") || trimmed.starts_with("https://") {
+        return true;
+    }
+    if looks_like_file_path(trimmed) {
+        return true;
+    }
+    if has_unbalanced_brackets(trimmed) {
+        return true;
+    }
+    false
+}
+
+fn looks_like_file_path(value: &str) -> bool {
+    let has_extension = value.rsplit_once('.').is_some_and(|(_, ext)| {
+        ext.len() <= 10
+            && ext
+                .chars()
+                .all(|ch| ch.is_ascii_alphanumeric() || ch == '-')
+    });
+    if !has_extension {
+        return false;
+    }
+    let sep_count = value.chars().filter(|ch| *ch == '/').count();
+    sep_count >= 1
+}
+
+fn has_unbalanced_brackets(value: &str) -> bool {
+    let mut depth_paren = 0i32;
+    let mut depth_bracket = 0i32;
+    for ch in value.chars() {
+        match ch {
+            '(' => depth_paren += 1,
+            ')' => depth_paren -= 1,
+            '[' => depth_bracket += 1,
+            ']' => depth_bracket -= 1,
+            _ => {}
+        }
+    }
+    depth_paren != 0 || depth_bracket != 0
 }
 
 fn normalize_readme_text(line: &str) -> Option<String> {
@@ -9225,6 +9359,135 @@ Café sécurité pour les dépôts [guides](./docs/guides.md) et l’équipe.
         assert_eq!(
             metadata.description.as_deref(),
             Some("Café sécurité pour les dépôts guides et l’équipe.")
+        );
+    }
+
+    #[test]
+    fn parse_readme_title_skips_non_project_headings() {
+        let metadata = parse_readme_metadata(
+            r#"[![CI](https://img.shields.io/badge/CI-passing-green)]
+
+# Code of Conduct
+
+## NumPy
+
+The fundamental package for scientific computing with Python.
+"#,
+        );
+        assert_eq!(metadata.title.as_deref(), Some("NumPy"));
+        assert_eq!(
+            metadata.description.as_deref(),
+            Some("The fundamental package for scientific computing with Python.")
+        );
+    }
+
+    #[test]
+    fn parse_readme_title_skips_installation_and_contributing_headings() {
+        let metadata = parse_readme_metadata(
+            r#"# Installation
+
+Run `pip install myproject`.
+
+# Contributing
+
+PRs welcome.
+"#,
+        );
+        assert!(metadata.title.is_none());
+    }
+
+    #[test]
+    fn normalize_description_line_rejects_url_and_file_path_artifacts() {
+        assert!(normalize_description_line("https://numfocus.org)").is_none());
+        assert!(normalize_description_line("packages/next/README.md").is_none());
+        assert!(normalize_description_line("https://example.com/description").is_none());
+        assert!(normalize_description_line("Normal project description").is_some());
+        assert!(normalize_description_line(
+            "The fundamental package for scientific computing with Python."
+        )
+        .is_some());
+    }
+
+    #[test]
+    fn normalize_description_line_rejects_unbalanced_brackets() {
+        assert!(normalize_description_line("some text] with extra bracket").is_none());
+        assert!(normalize_description_line("some text) with extra paren").is_none());
+        assert!(normalize_description_line("balanced (yes) description").is_some());
+    }
+
+    #[test]
+    fn infer_pyproject_commands_produces_default_test_when_build_system_exists() {
+        let candidate = infer_pyproject_commands(&ImportedFile {
+            path: "pyproject.toml".into(),
+            contents: "[build-system]\nrequires = [\"setuptools\"]\n".into(),
+        })
+        .expect("candidate produced");
+        assert_eq!(candidate.build.as_deref(), Some("python -m build"));
+        assert_eq!(candidate.test.as_deref(), Some("python -m pytest"));
+    }
+
+    #[test]
+    fn infer_pyproject_commands_detects_tox() {
+        let candidate = infer_pyproject_commands(&ImportedFile {
+            path: "pyproject.toml".into(),
+            contents: "[build-system]\nrequires = [\"setuptools\"]\n[tool.tox]\n".into(),
+        })
+        .expect("candidate produced");
+        assert_eq!(candidate.test.as_deref(), Some("tox"));
+    }
+
+    #[test]
+    fn infer_pyproject_commands_detects_nox() {
+        let candidate = infer_pyproject_commands(&ImportedFile {
+            path: "pyproject.toml".into(),
+            contents: "[build-system]\nrequires = [\"setuptools\"]\n[tool.nox]\n".into(),
+        })
+        .expect("candidate produced");
+        assert_eq!(candidate.test.as_deref(), Some("nox"));
+    }
+
+    #[test]
+    fn infer_pyproject_commands_detects_optional_test_dependencies() {
+        let candidate = infer_pyproject_commands(&ImportedFile {
+            path: "pyproject.toml".into(),
+            contents: "[build-system]\nrequires = [\"setuptools\"]\n[project.optional-dependencies]\ntest = [\"pytest\"]\n".into(),
+        })
+        .expect("candidate produced");
+        assert_eq!(candidate.test.as_deref(), Some("python -m pytest"));
+    }
+
+    #[test]
+    fn infer_pyproject_commands_prefers_explicit_tool_over_default() {
+        let candidate = infer_pyproject_commands(&ImportedFile {
+            path: "pyproject.toml".into(),
+            contents: "[build-system]\nrequires = [\"setuptools\"]\n[tool.pytest]\n".into(),
+        })
+        .expect("candidate produced");
+        assert_eq!(candidate.test.as_deref(), Some("python -m pytest"));
+    }
+
+    #[test]
+    fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
+        let pyproject = ImportedFile {
+            path: "pyproject.toml".into(),
+            contents: "[build-system]\nrequires = [\"setuptools\"]\n".into(),
+        };
+        let package_json = ImportedFile {
+            path: "package.json".into(),
+            contents: r#"{"scripts": {"test": "npm test"}}"#.into(),
+        };
+
+        let result =
+            infer_imported_commands(None, Some(&package_json), Some(&pyproject), None, &[]);
+        assert!(
+            result.test.is_none(),
+            "pyproject and package.json should conflict, not let npm test win: {:?}",
+            result.test
+        );
+        assert!(
+            result.notes.iter().any(|n| n.contains("conflicting")),
+            "expected conflict note, got: {:?}",
+            result.notes
         );
     }
 
