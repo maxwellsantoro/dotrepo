@@ -408,17 +408,19 @@ fn run() -> Result<()> {
             force,
         } => cmd_claim_init(
             cli.root,
-            host,
-            owner,
-            repo,
-            claim_id,
-            claimant_name,
-            asserted_role,
-            contact,
-            record_sources,
-            canonical_repo_url,
-            review_md,
-            force,
+            ClaimInitArgs {
+                host,
+                owner,
+                repo,
+                claim_id,
+                claimant_name,
+                asserted_role,
+                contact,
+                record_sources,
+                canonical_repo_url,
+                review_md,
+                force,
+            },
         ),
         Command::ClaimEvent {
             path,
@@ -430,13 +432,15 @@ fn run() -> Result<()> {
             canonical_mirror_path,
         } => cmd_claim_event(
             cli.root,
-            path,
-            kind,
-            actor,
-            summary,
-            corrected_state,
-            canonical_record_path,
-            canonical_mirror_path,
+            ClaimEventArgs {
+                path,
+                kind,
+                actor,
+                summary,
+                corrected_state,
+                canonical_record_path,
+                canonical_mirror_path,
+            },
         ),
         Command::Public { command } => cmd_public(command),
     }
@@ -943,8 +947,7 @@ fn cmd_claim(root: PathBuf, path: PathBuf, json: bool) -> Result<()> {
     Ok(())
 }
 
-fn cmd_claim_init(
-    root: PathBuf,
+struct ClaimInitArgs {
     host: String,
     owner: String,
     repo: String,
@@ -956,7 +959,23 @@ fn cmd_claim_init(
     canonical_repo_url: Option<String>,
     review_md: bool,
     force: bool,
-) -> Result<()> {
+}
+
+fn cmd_claim_init(root: PathBuf, args: ClaimInitArgs) -> Result<()> {
+    let ClaimInitArgs {
+        host,
+        owner,
+        repo,
+        claim_id,
+        claimant_name,
+        asserted_role,
+        contact,
+        record_sources,
+        canonical_repo_url,
+        review_md,
+        force,
+    } = args;
+
     let plan = scaffold_claim_directory(
         &root,
         &ClaimScaffoldInput {
@@ -995,8 +1014,7 @@ fn cmd_claim_init(
     Ok(())
 }
 
-fn cmd_claim_event(
-    root: PathBuf,
+struct ClaimEventArgs {
     path: PathBuf,
     kind: ClaimEventKindArg,
     actor: String,
@@ -1004,7 +1022,19 @@ fn cmd_claim_event(
     corrected_state: Option<CorrectedClaimStateArg>,
     canonical_record_path: Option<String>,
     canonical_mirror_path: Option<String>,
-) -> Result<()> {
+}
+
+fn cmd_claim_event(root: PathBuf, args: ClaimEventArgs) -> Result<()> {
+    let ClaimEventArgs {
+        path,
+        kind,
+        actor,
+        summary,
+        corrected_state,
+        canonical_record_path,
+        canonical_mirror_path,
+    } = args;
+
     let claim_dir = if path.is_absolute() {
         path
     } else {
@@ -1584,17 +1614,19 @@ mod tests {
 
         cmd_claim_init(
             root.clone(),
-            "github.com".into(),
-            "acme".into(),
-            "widget".into(),
-            "2026-03-10-maintainer-claim-03".into(),
-            "Acme maintainers".into(),
-            "maintainer".into(),
-            Some("maintainers@acme.dev".into()),
-            vec!["https://github.com/acme/widget".into()],
-            Some("https://github.com/acme/widget".into()),
-            true,
-            false,
+            ClaimInitArgs {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-03".into(),
+                claimant_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: Some("maintainers@acme.dev".into()),
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: Some("https://github.com/acme/widget".into()),
+                review_md: true,
+                force: false,
+            },
         )
         .expect("claim scaffold succeeds");
 
@@ -1631,17 +1663,19 @@ mod tests {
 
         let err = cmd_claim_init(
             root.clone(),
-            "github.com".into(),
-            "acme".into(),
-            "widget".into(),
-            "2026-03-10-maintainer-claim-03".into(),
-            "Acme maintainers".into(),
-            "maintainer".into(),
-            None,
-            Vec::new(),
-            None,
-            false,
-            false,
+            ClaimInitArgs {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-03".into(),
+                claimant_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: Vec::new(),
+                canonical_repo_url: None,
+                review_md: false,
+                force: false,
+            },
         )
         .expect_err("existing claim dir should fail");
         assert!(err.to_string().contains("already exists"));
@@ -1669,17 +1703,19 @@ mod tests {
 
         let err = cmd_claim_init(
             root.clone(),
-            "github.com".into(),
-            "acme".into(),
-            "widget".into(),
-            "2026-03-10-maintainer-claim-03".into(),
-            "Acme maintainers".into(),
-            "maintainer".into(),
-            None,
-            Vec::new(),
-            None,
-            false,
-            true,
+            ClaimInitArgs {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-03".into(),
+                claimant_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: Vec::new(),
+                canonical_repo_url: None,
+                review_md: false,
+                force: true,
+            },
         )
         .expect_err("existing event history should fail");
         assert!(err
@@ -1698,17 +1734,19 @@ mod tests {
             .expect("record written");
         cmd_claim_init(
             root.clone(),
-            "github.com".into(),
-            "acme".into(),
-            "widget".into(),
-            "2026-03-10-maintainer-claim-03".into(),
-            "Acme maintainers".into(),
-            "maintainer".into(),
-            None,
-            vec!["https://github.com/acme/widget".into()],
-            None,
-            true,
-            false,
+            ClaimInitArgs {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-03".into(),
+                claimant_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: None,
+                review_md: true,
+                force: false,
+            },
         )
         .expect("claim scaffold succeeds");
 
@@ -1716,13 +1754,15 @@ mod tests {
             root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
         cmd_claim_event(
             root.clone(),
-            claim_dir.clone(),
-            ClaimEventKindArg::Submitted,
-            "claimant".into(),
-            "Submitted maintainer claim.".into(),
-            None,
-            None,
-            None,
+            ClaimEventArgs {
+                path: claim_dir.clone(),
+                kind: ClaimEventKindArg::Submitted,
+                actor: "claimant".into(),
+                summary: "Submitted maintainer claim.".into(),
+                corrected_state: None,
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
         )
         .expect("claim event succeeds");
 
@@ -1746,17 +1786,19 @@ mod tests {
             .expect("record written");
         cmd_claim_init(
             root.clone(),
-            "github.com".into(),
-            "acme".into(),
-            "widget".into(),
-            "2026-03-10-maintainer-claim-03".into(),
-            "Acme maintainers".into(),
-            "maintainer".into(),
-            None,
-            vec!["https://github.com/acme/widget".into()],
-            None,
-            false,
-            false,
+            ClaimInitArgs {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-03".into(),
+                claimant_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: None,
+                review_md: false,
+                force: false,
+            },
         )
         .expect("claim scaffold succeeds");
 
@@ -1764,13 +1806,15 @@ mod tests {
             root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
         let err = cmd_claim_event(
             root.clone(),
-            claim_dir,
-            ClaimEventKindArg::Accepted,
-            "index-reviewer".into(),
-            "Accepted maintainer claim.".into(),
-            None,
-            None,
-            None,
+            ClaimEventArgs {
+                path: claim_dir,
+                kind: ClaimEventKindArg::Accepted,
+                actor: "index-reviewer".into(),
+                summary: "Accepted maintainer claim.".into(),
+                corrected_state: None,
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
         )
         .expect_err("draft claim should not accept directly");
         assert!(err
@@ -1789,17 +1833,19 @@ mod tests {
             .expect("record written");
         cmd_claim_init(
             root.clone(),
-            "github.com".into(),
-            "acme".into(),
-            "widget".into(),
-            "2026-03-10-maintainer-claim-03".into(),
-            "Acme maintainers".into(),
-            "maintainer".into(),
-            None,
-            vec!["https://github.com/acme/widget".into()],
-            Some("https://github.com/acme/widget".into()),
-            false,
-            false,
+            ClaimInitArgs {
+                host: "github.com".into(),
+                owner: "acme".into(),
+                repo: "widget".into(),
+                claim_id: "2026-03-10-maintainer-claim-03".into(),
+                claimant_name: "Acme maintainers".into(),
+                asserted_role: "maintainer".into(),
+                contact: None,
+                record_sources: vec!["https://github.com/acme/widget".into()],
+                canonical_repo_url: Some("https://github.com/acme/widget".into()),
+                review_md: false,
+                force: false,
+            },
         )
         .expect("claim scaffold succeeds");
 
@@ -1807,24 +1853,28 @@ mod tests {
             root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
         cmd_claim_event(
             root.clone(),
-            claim_dir.clone(),
-            ClaimEventKindArg::Submitted,
-            "claimant".into(),
-            "Submitted maintainer claim.".into(),
-            None,
-            None,
-            None,
+            ClaimEventArgs {
+                path: claim_dir.clone(),
+                kind: ClaimEventKindArg::Submitted,
+                actor: "claimant".into(),
+                summary: "Submitted maintainer claim.".into(),
+                corrected_state: None,
+                canonical_record_path: None,
+                canonical_mirror_path: None,
+            },
         )
         .expect("submitted event succeeds");
         cmd_claim_event(
             root.clone(),
-            claim_dir.clone(),
-            ClaimEventKindArg::Accepted,
-            "index-reviewer".into(),
-            "Accepted maintainer claim after review.".into(),
-            None,
-            Some(".repo".into()),
-            Some("repos/github.com/acme/widget/record.toml".into()),
+            ClaimEventArgs {
+                path: claim_dir.clone(),
+                kind: ClaimEventKindArg::Accepted,
+                actor: "index-reviewer".into(),
+                summary: "Accepted maintainer claim after review.".into(),
+                corrected_state: None,
+                canonical_record_path: Some(".repo".into()),
+                canonical_mirror_path: Some("repos/github.com/acme/widget/record.toml".into()),
+            },
         )
         .expect("accepted handoff succeeds");
 

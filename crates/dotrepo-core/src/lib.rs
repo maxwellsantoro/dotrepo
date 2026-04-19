@@ -441,11 +441,11 @@ pub struct PublicErrorDetail {
 #[serde(rename_all = "camelCase")]
 pub struct PublicErrorResponse {
     pub api_version: &'static str,
-    pub freshness: PublicFreshness,
-    pub identity: PublicRepositoryIdentity,
+    pub freshness: Box<PublicFreshness>,
+    pub identity: Box<PublicRepositoryIdentity>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub path: Option<String>,
-    pub error: PublicErrorDetail,
+    pub error: Box<PublicErrorDetail>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -1170,7 +1170,7 @@ pub fn append_claim_event(
 }
 
 fn load_manifest_file(path: &Path) -> Result<LoadedManifest> {
-    let raw = fs::read(&path).map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
+    let raw = fs::read(path).map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
     let text = std::str::from_utf8(&raw)
         .map_err(|e| anyhow!("failed to decode {} as UTF-8: {}", path.display(), e))?;
     let manifest = parse_manifest(text)?;
@@ -1316,9 +1316,7 @@ fn public_record_artifacts(
         .filter(|path| path.is_file())
         .map(|path| display_path(display_root, &path));
 
-    if evidence_path.is_none() {
-        return None;
-    }
+    evidence_path.as_ref()?;
 
     Some(PublicRecordArtifacts { evidence_path })
 }
@@ -2649,18 +2647,18 @@ pub fn public_error_response(
     let message = error.to_string();
     PublicErrorResponse {
         api_version: PUBLIC_API_VERSION,
-        freshness,
-        identity: PublicRepositoryIdentity {
+        freshness: Box::new(freshness),
+        identity: Box::new(PublicRepositoryIdentity {
             host: host.to_string(),
             owner: owner.to_string(),
             repo: repo.to_string(),
             source: None,
-        },
+        }),
         path: path.map(ToOwned::to_owned),
-        error: PublicErrorDetail {
+        error: Box::new(PublicErrorDetail {
             code: classify_public_error(&message),
             message,
-        },
+        }),
     }
 }
 
@@ -3495,7 +3493,6 @@ fn infer_imported_commands(
         &manifest_candidates,
         &workflow_candidates,
         "repo.build",
-        "build",
         true,
         &mut metadata.notes,
         &mut metadata.evidence_bullets,
@@ -3505,7 +3502,6 @@ fn infer_imported_commands(
         &manifest_candidates,
         &workflow_candidates,
         "repo.test",
-        "test",
         false,
         &mut metadata.notes,
         &mut metadata.evidence_bullets,
@@ -3721,7 +3717,6 @@ fn resolve_command_field(
     manifest_candidates: &[ImportedCommandCandidate],
     workflow_candidates: &[ImportedCommandCandidate],
     field: &'static str,
-    kind: &'static str,
     select_build: bool,
     notes: &mut Vec<String>,
     evidence_bullets: &mut Vec<String>,
@@ -3772,6 +3767,7 @@ fn resolve_command_field(
     }
 
     if !conflict_paths.is_empty() {
+        let kind = if select_build { "build" } else { "test" };
         let note = format!(
             "Left `{}` unset because {} suggested conflicting {} commands.",
             field,
@@ -5089,9 +5085,7 @@ fn render_import_evidence(
 }
 
 fn is_imported_readme_path(path: &str) -> bool {
-    IMPORT_README_CANDIDATES
-        .iter()
-        .any(|candidate| path == *candidate)
+    IMPORT_README_CANDIDATES.contains(&path)
 }
 
 fn readme_import_evidence_bullet(

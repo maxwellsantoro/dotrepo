@@ -91,14 +91,19 @@ fn handle_request(state: &mut ServerState, request: JsonRpcRequest) -> Option<Va
         });
     }
 
-    if request.id.is_none() {
-        handle_notification(state, request.method, request.params);
+    let JsonRpcRequest {
+        id,
+        method,
+        params,
+        ..
+    } = request;
+
+    let Some(id) = id else {
+        handle_notification(state, method, params);
         return None;
-    }
+    };
 
-    let id = request.id.expect("id checked above");
-
-    let result = match dispatch_request(state, &request.method, request.params) {
+    let result = match dispatch_request(state, &method, params) {
         Ok(result) => response(id, result),
         Err(err) => error_response(id, -32603, err.to_string(), None),
     };

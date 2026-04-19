@@ -730,10 +730,10 @@ fn section_header_range(text: &str, key_span: TomlSpan, value_span: TomlSpan) ->
     }
 }
 
-fn narrowest_path_match<'a>(
-    paths: &'a BTreeMap<String, LspRange>,
+fn narrowest_path_match(
+    paths: &BTreeMap<String, LspRange>,
     position: LspPosition,
-) -> Option<&'a str> {
+) -> Option<&str> {
     paths
         .iter()
         .filter(|(_, range)| position_in_range(position, **range))
@@ -892,7 +892,7 @@ fn legacy_completion_context(
     CompletionContext::Key
 }
 
-fn section_prefix_for_line<'a>(index: &'a DocumentIndex, line_number: u32) -> Option<&'a str> {
+fn section_prefix_for_line(index: &DocumentIndex, line_number: u32) -> Option<&str> {
     let current_index = (line_number as usize).min(index.lines.len().saturating_sub(1));
     for candidate in (0..=current_index).rev() {
         let trimmed = index.lines[candidate].trim();

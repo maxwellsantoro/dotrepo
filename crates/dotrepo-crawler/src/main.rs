@@ -515,16 +515,16 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                         manifest_path: Some(report.writeback_plan.factual.manifest_path.clone()),
                         evidence_path: report.writeback_plan.factual.evidence_path.clone(),
                         message: None,
-                        review: Some(build_seed_review_assessment(
-                            entry.repository.clone(),
-                            SeedResultStatus::Planned,
-                            Some(&report.writeback_plan.factual.import_plan.manifest),
-                            &report.writeback_plan.factual.import_plan.inferred_fields,
-                            &report.diagnostics,
-                            report.writeback_plan.factual.manifest_path.clone(),
-                            report.writeback_plan.factual.evidence_path.clone(),
-                            None,
-                        )),
+                        review: Some(build_seed_review_assessment(SeedReviewAssessmentInput {
+                            repository: entry.repository.clone(),
+                            status: SeedResultStatus::Planned,
+                            manifest: Some(&report.writeback_plan.factual.import_plan.manifest),
+                            inferred_fields: &report.writeback_plan.factual.import_plan.inferred_fields,
+                            diagnostics: &report.diagnostics,
+                            manifest_path: report.writeback_plan.factual.manifest_path.clone(),
+                            evidence_path: report.writeback_plan.factual.evidence_path.clone(),
+                            failure_message: None,
+                        })),
                         diagnostics: report.diagnostics,
                     });
                 } else {
@@ -536,16 +536,16 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                         manifest_path: Some(report.writeback_plan.factual.manifest_path.clone()),
                         evidence_path: report.writeback_plan.factual.evidence_path.clone(),
                         message: None,
-                        review: Some(build_seed_review_assessment(
-                            entry.repository.clone(),
-                            SeedResultStatus::Applied,
-                            Some(&report.writeback_plan.factual.import_plan.manifest),
-                            &report.writeback_plan.factual.import_plan.inferred_fields,
-                            &report.diagnostics,
-                            report.writeback_plan.factual.manifest_path.clone(),
-                            report.writeback_plan.factual.evidence_path.clone(),
-                            None,
-                        )),
+                        review: Some(build_seed_review_assessment(SeedReviewAssessmentInput {
+                            repository: entry.repository.clone(),
+                            status: SeedResultStatus::Applied,
+                            manifest: Some(&report.writeback_plan.factual.import_plan.manifest),
+                            inferred_fields: &report.writeback_plan.factual.import_plan.inferred_fields,
+                            diagnostics: &report.diagnostics,
+                            manifest_path: report.writeback_plan.factual.manifest_path.clone(),
+                            evidence_path: report.writeback_plan.factual.evidence_path.clone(),
+                            failure_message: None,
+                        })),
                         diagnostics: report.diagnostics,
                     });
                 }
@@ -562,21 +562,21 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                 ),
                 message: Some(err.to_string()),
                 diagnostics: Vec::new(),
-                review: Some(build_seed_review_assessment(
-                    entry.repository.clone(),
-                    SeedResultStatus::Failed,
-                    None,
-                    &[],
-                    &[],
+                review: Some(build_seed_review_assessment(SeedReviewAssessmentInput {
+                    repository: entry.repository.clone(),
+                    status: SeedResultStatus::Failed,
+                    manifest: None,
+                    inferred_fields: &[],
+                    diagnostics: &[],
                     manifest_path,
-                    Some(
+                    evidence_path: Some(
                         entry
                             .repository
                             .record_root(&args.index_root)
                             .join("evidence.md"),
                     ),
-                    Some(err.to_string()),
-                )),
+                    failure_message: Some(err.to_string()),
+                })),
             }),
         }
     }
@@ -1191,16 +1191,29 @@ fn build_seed_review_report(results: &[SeedCommandResult]) -> SeedReviewReport {
     SeedReviewReport { summary, items }
 }
 
-fn build_seed_review_assessment(
+struct SeedReviewAssessmentInput<'a> {
     repository: RepositoryRef,
     status: SeedResultStatus,
-    manifest: Option<&Manifest>,
-    inferred_fields: &[String],
-    diagnostics: &[CrawlDiagnostic],
+    manifest: Option<&'a Manifest>,
+    inferred_fields: &'a [String],
+    diagnostics: &'a [CrawlDiagnostic],
     manifest_path: PathBuf,
     evidence_path: Option<PathBuf>,
     failure_message: Option<String>,
-) -> SeedReviewAssessment {
+}
+
+fn build_seed_review_assessment(input: SeedReviewAssessmentInput<'_>) -> SeedReviewAssessment {
+    let SeedReviewAssessmentInput {
+        repository,
+        status,
+        manifest,
+        inferred_fields,
+        diagnostics,
+        manifest_path,
+        evidence_path,
+        failure_message,
+    } = input;
+
     let mut priority = SeedReviewPriority::Low;
     let mut reasons = Vec::new();
     let warning_codes = diagnostics
@@ -1233,7 +1246,25 @@ fn build_seed_review_assessment(
         };
     }
 
-    let manifest = manifest.expect("successful crawl review requires manifest");
+    let Some(manifest) = manifest else {
+        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
+        reasons.push("seed review missing manifest for successful crawl result".into());
+        return SeedReviewAssessment {
+            repository,
+            status,
+            priority,
+            reasons,
+            manifest_path: Some(manifest_path),
+            evidence_path,
+            record_status: None,
+            build: None,
+            test: None,
+            security_contact: None,
+            inferred_fields: inferred_fields.to_vec(),
+            warning_codes,
+        };
+    };
+
     if !warning_codes.is_empty() {
         raise_seed_review_priority(&mut priority, SeedReviewPriority::Medium);
         reasons.push(format!(
@@ -1773,22 +1804,22 @@ how_to_contribute = "Open a PR"
             },
         );
 
-        let assessment = build_seed_review_assessment(
+        let assessment = build_seed_review_assessment(SeedReviewAssessmentInput {
             repository,
-            SeedResultStatus::Planned,
-            Some(&manifest),
-            &["repo.build".into(), "repo.test".into()],
-            &[CrawlDiagnostic {
+            status: SeedResultStatus::Planned,
+            manifest: Some(&manifest),
+            inferred_fields: &["repo.build".into(), "repo.test".into()],
+            diagnostics: &[CrawlDiagnostic {
                 severity: dotrepo_crawler::CrawlDiagnosticSeverity::Warning,
                 code: "materialize.missing_security".into(),
                 message: "SECURITY.md missing".into(),
             }],
-            PathBuf::from("index/repos/github.com/example/orbit/record.toml"),
-            Some(PathBuf::from(
+            manifest_path: PathBuf::from("index/repos/github.com/example/orbit/record.toml"),
+            evidence_path: Some(PathBuf::from(
                 "index/repos/github.com/example/orbit/evidence.md",
             )),
-            None,
-        );
+            failure_message: None,
+        });
 
         assert_eq!(assessment.priority, SeedReviewPriority::High);
         assert!(assessment

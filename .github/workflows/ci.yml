@@ -125,9 +125,10 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
-      - name: Check formatting, tests, and seeded flows
+      - name: Check formatting, linting, tests, and seeded flows
         run: |
           cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets -- -D clippy::correctness
           cargo test --workspace
           cargo run -p dotrepo-cli -- --root examples/native-minimal validate
           cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
