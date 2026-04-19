@@ -92,10 +92,7 @@ fn handle_request(state: &mut ServerState, request: JsonRpcRequest) -> Option<Va
     }
 
     let JsonRpcRequest {
-        id,
-        method,
-        params,
-        ..
+        id, method, params, ..
     } = request;
 
     let Some(id) = id else {

@@ -730,10 +730,7 @@ fn section_header_range(text: &str, key_span: TomlSpan, value_span: TomlSpan) ->
     }
 }
 
-fn narrowest_path_match(
-    paths: &BTreeMap<String, LspRange>,
-    position: LspPosition,
-) -> Option<&str> {
+fn narrowest_path_match(paths: &BTreeMap<String, LspRange>, position: LspPosition) -> Option<&str> {
     paths
         .iter()
         .filter(|(_, range)| position_in_range(position, **range))

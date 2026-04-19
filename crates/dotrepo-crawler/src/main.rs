@@ -519,7 +519,11 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                             repository: entry.repository.clone(),
                             status: SeedResultStatus::Planned,
                             manifest: Some(&report.writeback_plan.factual.import_plan.manifest),
-                            inferred_fields: &report.writeback_plan.factual.import_plan.inferred_fields,
+                            inferred_fields: &report
+                                .writeback_plan
+                                .factual
+                                .import_plan
+                                .inferred_fields,
                             diagnostics: &report.diagnostics,
                             manifest_path: report.writeback_plan.factual.manifest_path.clone(),
                             evidence_path: report.writeback_plan.factual.evidence_path.clone(),
@@ -540,7 +544,11 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                             repository: entry.repository.clone(),
                             status: SeedResultStatus::Applied,
                             manifest: Some(&report.writeback_plan.factual.import_plan.manifest),
-                            inferred_fields: &report.writeback_plan.factual.import_plan.inferred_fields,
+                            inferred_fields: &report
+                                .writeback_plan
+                                .factual
+                                .import_plan
+                                .inferred_fields,
                             diagnostics: &report.diagnostics,
                             manifest_path: report.writeback_plan.factual.manifest_path.clone(),
                             evidence_path: report.writeback_plan.factual.evidence_path.clone(),
