@@ -3,7 +3,6 @@
 import argparse
 import html
 import json
-import re
 import tomllib
 from collections import Counter
 from datetime import datetime, timezone
@@ -12,130 +11,27 @@ from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
 
-BRAND_ASSET_ROOT = "/assets/brand"
-BRAND_ASSETS = {
-    "lockup.svg": Path("logo/lockup.svg"),
-    "mark.svg": Path("logo/mark.svg"),
-}
-
-DOC_PAGES = [
-    {
-        "slug": "current-status",
-        "source": "docs/current-status.md",
-        "label": "Current status",
-        "summary": "What is live today, what is still intentionally missing, and the highest-leverage next steps.",
-    },
-    {
-        "slug": "install",
-        "source": "docs/install.md",
-        "label": "Install",
-        "summary": "Platform bundles, MCP and LSP binaries, and the VS Code extension package.",
-    },
-    {
-        "slug": "trust-model",
-        "source": "docs/trust-model.md",
-        "label": "Trust model",
-        "summary": "Why provenance, precedence, and conflict visibility matter more than a new file extension.",
-    },
-    {
-        "slug": "public-surface",
-        "source": "docs/public-surface.md",
-        "label": "Public surface architecture",
-        "summary": "How the hosted homepage, inventory, summary, trust, and query surfaces are built from one export family.",
-    },
-    {
-        "slug": "roadmap",
-        "source": "docs/roadmap.md",
-        "label": "Roadmap",
-        "summary": "What shipped in v1, what is deliberately deferred, and why scope restraint is part of the product.",
-    },
-    {
-        "slug": "maintainer-happy-path",
-        "source": "docs/maintainer-happy-path.md",
-        "label": "Maintainer happy path",
-        "summary": "The canonical init, import, validate, trust, and generate-check loop for repository owners.",
-    },
-    {
-        "slug": "growth-and-automation-plan",
-        "source": "docs/growth-and-automation-plan.md",
-        "label": "Growth and automation plan",
-        "summary": "The path from proof surface to useful service: 15 repositories now, 50 reviewed as the next concrete milestone.",
-    },
-    {
-        "slug": "maintainer-claim-review-workflow",
-        "source": "docs/maintainer-claim-review-workflow.md",
-        "label": "Maintainer-claim workflow",
-        "summary": "The reviewer path for accepted maintainer claims and canonical handoff decisions.",
-    },
-    {
-        "slug": "public-export-workflow",
-        "source": "docs/public-export-workflow.md",
-        "label": "Public export workflow",
-        "summary": "The operator and review loop for the exported public JSON tree and its hosted deployment.",
-    },
-    {
-        "slug": "public-release-note",
-        "source": "docs/public-release-note.md",
-        "label": "Public release note",
-        "summary": "The current release summary for dotrepo's hosted public JSON tree.",
-    },
-    {
-        "slug": "public-export-examples",
-        "source": "docs/public-export-examples.md",
-        "label": "Public export examples",
-        "summary": "Concrete examples for consuming the hosted tree, local export, and same-origin query runtime.",
-    },
-    {
-        "slug": "hosted-query-serving",
-        "source": "docs/hosted-query-serving.md",
-        "label": "Hosted query serving",
-        "summary": "The first runtime shape for serving same-origin query responses beyond local review and into hosted deployment.",
-    },
-    {
-        "slug": "v1-go-no-go",
-        "source": "docs/v1-go-no-go.md",
-        "label": "v1 go / no-go",
-        "summary": "The release-decision bar for when the hosted public surface and install path count as the normal product story.",
-    },
-    {
-        "slug": "vision",
-        "source": "docs/vision.md",
-        "label": "Vision",
-        "summary": "The compact statement of the protocol, toolchain, and index model and why overlays break the adoption chicken-and-egg trap.",
-    },
-    {
-        "slug": "ai-tool-interviews",
-        "source": "docs/ai-tool-interviews.md",
-        "label": "AI tool interviews",
-        "summary": "Working product takeaways from a 12-model interview round on the live public surface and likely adoption path.",
-    },
-]
-
-DOC_PAGE_BY_SOURCE = {
-    str(entry["source"]): f"/docs/{entry['slug']}/" for entry in DOC_PAGES
-}
-
 DOCS_SECTIONS = [
     {
         "title": "Start here",
         "items": [
             {
                 "label": "Current status",
-                "href": "/docs/current-status/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/current-status.md",
                 "summary": "What is live today, what is still intentionally missing, and the highest-leverage next steps.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
             {
                 "label": "Install",
-                "href": "/docs/install/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/install.md",
                 "summary": "Platform bundles, MCP and LSP binaries, and the VS Code extension package.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
             {
                 "label": "Maintainer happy path",
-                "href": "/docs/maintainer-happy-path/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md",
                 "summary": "The canonical init, import, validate, trust, and generate-check loop for repository owners.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
         ],
     },
@@ -144,27 +40,21 @@ DOCS_SECTIONS = [
         "items": [
             {
                 "label": "Trust model",
-                "href": "/docs/trust-model/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/trust-model.md",
                 "summary": "Why provenance, precedence, and conflict visibility matter more than a new file extension.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
             {
                 "label": "Roadmap",
-                "href": "/docs/roadmap/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/roadmap.md",
                 "summary": "What shipped in v1, what is deliberately deferred, and why scope restraint is part of the product.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
             {
                 "label": "Public surface architecture",
-                "href": "/docs/public-surface/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-surface.md",
                 "summary": "How the hosted homepage, inventory, summary, trust, and query surfaces are built from one export family.",
-                "kind": "On-site",
-            },
-            {
-                "label": "Vision",
-                "href": "/docs/vision/",
-                "summary": "The compact statement of the protocol, toolchain, and index model and why overlays break the adoption chicken-and-egg trap.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
         ],
     },
@@ -185,27 +75,9 @@ DOCS_SECTIONS = [
             },
             {
                 "label": "Public export examples",
-                "href": "/docs/public-export-examples/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-export-examples.md",
                 "summary": "Concrete response examples for inventory, repository summary, trust, and query routes.",
-                "kind": "On-site",
-            },
-            {
-                "label": "Public export workflow",
-                "href": "/docs/public-export-workflow/",
-                "summary": "The canonical operator loop for local review, CI artifacts, packaged bundles, and hosted deploy checks.",
-                "kind": "On-site",
-            },
-            {
-                "label": "Public release note",
-                "href": "/docs/public-release-note/",
-                "summary": "The current release summary for the hosted public tree, trust surface, and same-origin query runtime.",
-                "kind": "On-site",
-            },
-            {
-                "label": "Hosted query serving",
-                "href": "/docs/hosted-query-serving/",
-                "summary": "The runtime contract for same-origin query serving over the same exported snapshot family.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
         ],
     },
@@ -220,32 +92,15 @@ DOCS_SECTIONS = [
             },
             {
                 "label": "Growth and automation plan",
-                "href": "/docs/growth-and-automation-plan/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/growth-and-automation-plan.md",
                 "summary": "The path from proof surface to useful service: 15 repositories now, 50 reviewed as the next concrete milestone.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
             {
                 "label": "Maintainer-claim workflow",
-                "href": "/docs/maintainer-claim-review-workflow/",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-claim-review-workflow.md",
                 "summary": "The reviewer path for accepted maintainer claims and canonical handoff decisions.",
-                "kind": "On-site",
-            },
-        ],
-    },
-    {
-        "title": "Strategy and release bar",
-        "items": [
-            {
-                "label": "AI tool interviews",
-                "href": "/docs/ai-tool-interviews/",
-                "summary": "Working product takeaways from a 12-model interview round on the live public surface and likely adoption path.",
-                "kind": "On-site",
-            },
-            {
-                "label": "v1 go / no-go",
-                "href": "/docs/v1-go-no-go/",
-                "summary": "The release-decision bar for when the hosted public surface and install path count as the normal product story.",
-                "kind": "On-site",
+                "kind": "Repo doc",
             },
         ],
     },
@@ -274,10 +129,6 @@ def load_json(path: Path) -> dict:
     if not path.is_file():
         raise SystemExit(f"missing required file: {path}")
     return json.loads(path.read_text())
-
-
-def github_blob_url(repo_relative_path: str) -> str:
-    return f"https://github.com/maxwellsantoro/dotrepo/blob/main/{repo_relative_path}"
 
 
 def shorten_digest(value: str) -> str:
@@ -568,39 +419,19 @@ def render_site_header(base_path: str, active: str | None = None) -> str:
     return """
     <header class="nav" aria-label="Top navigation">
       <div class="brand">
-        <a class="brand__mark" href="{home_href}" aria-label="dotrepo homepage">
-          <img class="brand__lockup" src="{lockup_src}" alt="dotrepo">
-        </a>
+        <a class="brand__mark" href="{home_href}">dotrepo</a>
         <span class="brand__tag">open metadata protocol</span>
       </div>
       <nav class="nav__links">
         {items}
       </nav>
     </header>
-    """.format(
-        home_href=site_href(base_path, "/"),
-        lockup_src=site_asset_href(base_path, "lockup.svg"),
-        items="\n        ".join(items),
-    ).strip()
+    """.format(home_href=site_href(base_path, "/"), items="\n        ".join(items)).strip()
 
 
 def write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text)
-
-
-def copy_text_asset(source: Path, destination: Path) -> None:
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(source.read_text())
-
-
-def site_asset_href(base_path: str, asset_name: str) -> str:
-    return site_href(base_path, f"{BRAND_ASSET_ROOT}/{asset_name}")
-
-
-def write_brand_assets(output_dir: Path) -> None:
-    for asset_name, source in BRAND_ASSETS.items():
-        copy_text_asset(source, output_dir / "assets" / "brand" / asset_name)
 
 
 def build_homepage_snapshot_state(meta: dict, inventory: dict) -> str:
@@ -687,273 +518,6 @@ def render_docs_cards(base_path: str) -> str:
             ).strip()
         )
     return "\n    ".join(cards)
-
-
-def slugify_heading(value: str) -> str:
-    lowered = value.strip().lower()
-    lowered = re.sub(r"[^a-z0-9\s-]", "", lowered)
-    lowered = re.sub(r"[\s-]+", "-", lowered)
-    return lowered.strip("-") or "section"
-
-
-def repo_relative_path(path: Path) -> str:
-    return path.as_posix().lstrip("./")
-
-
-def rewrite_doc_href(destination: str, current_source: Path, base_path: str) -> str:
-    if destination.startswith(("http://", "https://")):
-        return destination
-    if destination.startswith("#"):
-        return destination
-
-    target, _, fragment = destination.partition("#")
-    resolved = (current_source.parent / target).resolve().relative_to(Path.cwd().resolve())
-    repo_path = repo_relative_path(resolved)
-    local_page = DOC_PAGE_BY_SOURCE.get(repo_path)
-    if local_page is not None:
-        href = site_href(base_path, local_page)
-        if fragment:
-            return f"{href}#{fragment}"
-        return href
-
-    href = github_blob_url(repo_path)
-    if fragment:
-        return f"{href}#{fragment}"
-    return href
-
-
-def render_plain_inline(text: str) -> str:
-    escaped = html.escape(text)
-    return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
-
-
-def render_inline_markdown(text: str, current_source: Path, base_path: str) -> str:
-    pieces = re.split(r"(`[^`]+`)", text)
-    rendered: list[str] = []
-    link_pattern = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
-
-    for piece in pieces:
-        if not piece:
-            continue
-        if piece.startswith("`") and piece.endswith("`") and len(piece) >= 2:
-            rendered.append(f"<code>{html.escape(piece[1:-1])}</code>")
-            continue
-
-        cursor = 0
-        for match in link_pattern.finditer(piece):
-            before = piece[cursor : match.start()]
-            if before:
-                rendered.append(render_plain_inline(before))
-            label = render_plain_inline(match.group(1))
-            href = rewrite_doc_href(match.group(2), current_source, base_path)
-            rendered.append(f'<a href="{html.escape(href)}">{label}</a>')
-            cursor = match.end()
-        tail = piece[cursor:]
-        if tail:
-            rendered.append(render_plain_inline(tail))
-    return "".join(rendered)
-
-
-def is_ordered_list_item(line: str) -> bool:
-    return re.match(r"^\d+\.\s+", line) is not None
-
-
-def is_structural_line(line: str) -> bool:
-    stripped = line.lstrip()
-    return (
-        stripped.startswith("#")
-        or stripped.startswith("```")
-        or stripped.startswith("- ")
-        or stripped.startswith("> ")
-        or is_ordered_list_item(stripped)
-    )
-
-
-def is_table_separator(line: str) -> bool:
-    stripped = line.strip()
-    if not stripped.startswith("|"):
-        return False
-    cells = [cell.strip() for cell in stripped.strip("|").split("|")]
-    if not cells:
-        return False
-    return all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells)
-
-
-def split_table_row(line: str) -> list[str]:
-    return [cell.strip() for cell in line.strip().strip("|").split("|")]
-
-
-def consume_list(lines: list[str], start: int, *, ordered: bool, current_source: Path, base_path: str) -> tuple[str, int]:
-    items: list[str] = []
-    index = start
-    pattern = re.compile(r"^\d+\.\s+" if ordered else r"^-\s+")
-    tag = "ol" if ordered else "ul"
-
-    while index < len(lines):
-        stripped = lines[index].strip()
-        if not stripped:
-            break
-        if not pattern.match(stripped):
-            break
-
-        content = [pattern.sub("", stripped, count=1)]
-        index += 1
-        while index < len(lines):
-            follow = lines[index]
-            follow_stripped = follow.strip()
-            if not follow_stripped:
-                break
-            if pattern.match(follow_stripped):
-                break
-            if is_structural_line(follow):
-                break
-            content.append(follow_stripped)
-            index += 1
-        items.append(
-            f"<li>{render_inline_markdown(' '.join(content), current_source, base_path)}</li>"
-        )
-        while index < len(lines) and not lines[index].strip():
-            index += 1
-
-    return f"<{tag}>\n" + "\n".join(items) + f"\n</{tag}>", index
-
-
-def consume_table(
-    lines: list[str], start: int, *, current_source: Path, base_path: str
-) -> tuple[str, int]:
-    header_cells = split_table_row(lines[start])
-    separator_cells = split_table_row(lines[start + 1])
-    if len(header_cells) != len(separator_cells):
-        raise SystemExit(
-            f"table column mismatch in {current_source}: {header_cells!r} vs {separator_cells!r}"
-        )
-
-    index = start + 2
-    body_rows: list[list[str]] = []
-    while index < len(lines):
-        stripped = lines[index].strip()
-        if not stripped or not stripped.startswith("|"):
-            break
-        row_cells = split_table_row(lines[index])
-        if len(row_cells) != len(header_cells):
-            break
-        body_rows.append(row_cells)
-        index += 1
-
-    head_html = "".join(
-        f"<th>{render_inline_markdown(cell, current_source, base_path)}</th>"
-        for cell in header_cells
-    )
-    row_html = []
-    for row in body_rows:
-        cells_html = "".join(
-            f"<td>{render_inline_markdown(cell, current_source, base_path)}</td>"
-            for cell in row
-        )
-        row_html.append(f"<tr>{cells_html}</tr>")
-
-    table_html = (
-        '<div class="table-wrap"><table><thead><tr>'
-        + head_html
-        + "</tr></thead><tbody>"
-        + "".join(row_html)
-        + "</tbody></table></div>"
-    )
-    return table_html, index
-
-
-def render_markdown_document(source_path: Path, base_path: str) -> tuple[str, str]:
-    lines = source_path.read_text().splitlines()
-    blocks: list[str] = []
-    title = source_path.stem.replace("-", " ").title()
-    index = 0
-
-    while index < len(lines):
-        line = lines[index]
-        stripped = line.strip()
-        if not stripped:
-            index += 1
-            continue
-
-        if stripped.startswith("```"):
-            fence = stripped
-            language = fence[3:].strip()
-            index += 1
-            code_lines: list[str] = []
-            while index < len(lines) and lines[index].strip() != "```":
-                code_lines.append(lines[index])
-                index += 1
-            if index < len(lines):
-                index += 1
-            language_attr = (
-                f' class="language-{html.escape(language)}"' if language else ""
-            )
-            blocks.append(
-                f"<pre><code{language_attr}>{html.escape(chr(10).join(code_lines))}</code></pre>"
-            )
-            continue
-
-        if stripped.startswith("#"):
-            level = len(stripped) - len(stripped.lstrip("#"))
-            heading_text = stripped[level:].strip()
-            if level == 1:
-                title = heading_text
-            blocks.append(
-                f'<h{level} id="{slugify_heading(heading_text)}">'
-                f"{render_inline_markdown(heading_text, source_path, base_path)}</h{level}>"
-            )
-            index += 1
-            continue
-
-        if stripped.startswith("> "):
-            quote_lines: list[str] = []
-            while index < len(lines) and lines[index].strip().startswith("> "):
-                quote_lines.append(lines[index].strip()[2:])
-                index += 1
-            quote_html = render_inline_markdown(" ".join(quote_lines), source_path, base_path)
-            blocks.append(f"<blockquote><p>{quote_html}</p></blockquote>")
-            continue
-
-        if (
-            stripped.startswith("|")
-            and index + 1 < len(lines)
-            and is_table_separator(lines[index + 1])
-        ):
-            table_html, index = consume_table(
-                lines, index, current_source=source_path, base_path=base_path
-            )
-            blocks.append(table_html)
-            continue
-
-        if stripped.startswith("- "):
-            list_html, index = consume_list(
-                lines, index, ordered=False, current_source=source_path, base_path=base_path
-            )
-            blocks.append(list_html)
-            continue
-
-        if is_ordered_list_item(stripped):
-            list_html, index = consume_list(
-                lines, index, ordered=True, current_source=source_path, base_path=base_path
-            )
-            blocks.append(list_html)
-            continue
-
-        paragraph_lines = [stripped]
-        index += 1
-        while index < len(lines):
-            follow = lines[index]
-            if not follow.strip():
-                break
-            if is_structural_line(follow):
-                break
-            paragraph_lines.append(follow.strip())
-            index += 1
-        blocks.append(
-            f"<p>{render_inline_markdown(' '.join(paragraph_lines), source_path, base_path)}</p>"
-        )
-
-    return title, "\n".join(blocks)
 
 
 def render_repository_cards(inventory: dict) -> str:
@@ -1149,7 +713,6 @@ def render_writing_index(base_path: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Writing · dotrepo</title>
   <meta name="description" content="Essays, field reports, and research notes from the dotrepo project.">
-  <link rel="icon" type="image/svg+xml" href="{site_asset_href(base_path, 'mark.svg')}">
   <style>
     :root {{
       color-scheme: light;
@@ -1190,18 +753,14 @@ def render_writing_index(base_path: str) -> str:
     }}
     .brand {{
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 12px;
     }}
     .brand__mark {{
-      display: inline-flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }}
-    .brand__lockup {{
-      display: block;
-      width: 160px;
-      height: auto;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
     }}
     .brand__tag {{
       font-size: 0.88rem;
@@ -1369,7 +928,6 @@ def render_docs_index(base_path: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Docs · dotrepo</title>
   <meta name="description" content="First-party documentation entry for dotrepo: product status, trust model, public surface, maintainer flow, and index growth.">
-  <link rel="icon" type="image/svg+xml" href="{site_asset_href(base_path, 'mark.svg')}">
   <style>
     :root {{
       color-scheme: light;
@@ -1410,18 +968,14 @@ def render_docs_index(base_path: str) -> str:
     }}
     .brand {{
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 12px;
     }}
     .brand__mark {{
-      display: inline-flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }}
-    .brand__lockup {{
-      display: block;
-      width: 160px;
-      height: auto;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
     }}
     .brand__tag {{
       font-size: 0.88rem;
@@ -1573,266 +1127,6 @@ def render_docs_index(base_path: str) -> str:
 """
 
 
-def render_doc_page(entry: dict, base_path: str) -> str:
-    source_path = Path(entry["source"])
-    title, body_html = render_markdown_document(source_path, base_path)
-    summary = html.escape(str(entry["summary"]))
-    source_href = html.escape(github_blob_url(repo_relative_path(source_path)))
-    return f"""<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{html.escape(title)} · dotrepo</title>
-  <meta name="description" content="{summary}">
-  <link rel="icon" type="image/svg+xml" href="{site_asset_href(base_path, 'mark.svg')}">
-  <style>
-    :root {{
-      color-scheme: light;
-      --paper: #f6f1e8;
-      --paper-strong: #efe6d7;
-      --ink: #16181b;
-      --muted: #5c635d;
-      --panel: rgba(255, 251, 244, 0.88);
-      --line: rgba(54, 46, 28, 0.14);
-      --accent: #116466;
-      --accent-strong: #0d494b;
-      --signal: #c4572e;
-      --shadow: 0 18px 60px rgba(23, 27, 31, 0.12);
-      --radius: 22px;
-    }}
-    * {{ box-sizing: border-box; }}
-    body {{
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(17, 100, 102, 0.18), transparent 34%),
-        radial-gradient(circle at top right, rgba(196, 87, 46, 0.12), transparent 30%),
-        linear-gradient(180deg, #fbf6ec 0%, var(--paper) 54%, var(--paper-strong) 100%);
-      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
-    }}
-    a {{ color: var(--accent-strong); text-decoration: none; }}
-    a:hover {{ text-decoration: underline; }}
-    code {{
-      font-family: "SFMono-Regular", "JetBrains Mono", "Cascadia Code", monospace;
-      font-size: 0.92em;
-    }}
-    .table-wrap {{
-      overflow-x: auto;
-    }}
-    table {{
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 680px;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(54, 46, 28, 0.08);
-    }}
-    th,
-    td {{
-      padding: 14px 16px;
-      text-align: left;
-      vertical-align: top;
-      border-bottom: 1px solid rgba(54, 46, 28, 0.08);
-    }}
-    thead th {{
-      background: rgba(17, 100, 102, 0.08);
-      font-size: 0.86rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }}
-    tbody tr:last-child td {{
-      border-bottom: 0;
-    }}
-    pre {{
-      margin: 14px 0 0;
-      padding: 16px;
-      overflow-x: auto;
-      border-radius: 16px;
-      background: #17191d;
-      color: #f6f1e8;
-      border: 1px solid rgba(54, 46, 28, 0.08);
-      line-height: 1.5;
-    }}
-    .page {{
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 28px 18px 80px;
-    }}
-    .nav {{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 30px;
-    }}
-    .brand {{
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }}
-    .brand__mark {{
-      color: inherit;
-      display: inline-flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }}
-    .brand__lockup {{
-      display: block;
-      width: 160px;
-      height: auto;
-    }}
-    .brand__tag {{
-      font-size: 0.88rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }}
-    .nav__links {{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 12px;
-    }}
-    .nav__links a {{
-      padding: 10px 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.48);
-      color: inherit;
-    }}
-    .nav__links a[aria-current="page"] {{
-      background: linear-gradient(135deg, var(--accent) 0%, #0b4b5a 100%);
-      color: white;
-      border-color: transparent;
-    }}
-    .panel {{
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }}
-    .hero,
-    .body,
-    .footer {{
-      padding: 32px;
-    }}
-    .eyebrow {{
-      margin: 0 0 12px;
-      color: var(--accent-strong);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }}
-    h1 {{
-      margin: 0;
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      font-size: clamp(2.9rem, 7vw, 5rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      max-width: 12ch;
-    }}
-    .hero p {{
-      margin: 16px 0 0;
-      color: #273038;
-      font-size: 1.12rem;
-      line-height: 1.75;
-    }}
-    .hero-links {{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px 22px;
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }}
-    .body {{
-      margin-top: 24px;
-      line-height: 1.8;
-      font-size: 1.06rem;
-    }}
-    .body h1 {{ display: none; }}
-    .body h2 {{
-      margin: 2.5rem 0 0.9rem;
-      font-size: 1.55rem;
-      line-height: 1.2;
-    }}
-    .body h3 {{
-      margin: 2rem 0 0.8rem;
-      font-size: 1.18rem;
-      line-height: 1.35;
-    }}
-    .body p,
-    .body ul,
-    .body ol,
-    .body blockquote,
-    .body .table-wrap {{
-      margin: 1rem 0;
-    }}
-    .body ul,
-    .body ol {{
-      padding-left: 1.35rem;
-    }}
-    .body li + li {{
-      margin-top: 0.45rem;
-    }}
-    .body blockquote {{
-      padding: 18px 20px;
-      border-left: 4px solid var(--accent);
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 16px;
-      color: #273038;
-    }}
-    .footer {{
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px 24px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }}
-    @media (max-width: 720px) {{
-      .page {{ padding: 18px 14px 56px; }}
-      .hero,
-      .body,
-      .footer {{ padding: 22px; }}
-      .nav {{ align-items: flex-start; flex-direction: column; }}
-      .nav__links {{ justify-content: flex-start; }}
-      table {{ min-width: 560px; }}
-    }}
-  </style>
-</head>
-<body>
-  <div class="page">
-    {render_site_header(base_path, "docs")}
-    <section class="panel hero">
-      <p class="eyebrow">Docs</p>
-      <h1>{html.escape(title)}</h1>
-      <p>{summary}</p>
-      <div class="hero-links">
-        <span>First-party docs page</span>
-        <span><a href="{source_href}">Source markdown on GitHub</a></span>
-        <span><a href="{site_href(base_path, '/docs/')}">Back to docs</a></span>
-      </div>
-    </section>
-    <section class="panel body">
-      {body_html}
-    </section>
-    <footer class="panel footer">
-      <span><a href="{site_href(base_path, '/docs/')}">Back to docs</a></span>
-      <span><a href="{site_href(base_path, '/')}">Homepage</a></span>
-      <span><a href="{source_href}">View source markdown</a></span>
-    </footer>
-  </div>
-</body>
-</html>
-"""
-
-
 def render_article_page(article: dict, base_path: str) -> str:
     tags = "".join(
         f'<span class="tag">{html.escape(str(tag))}</span>' for tag in article.get("tags", [])
@@ -1849,7 +1143,6 @@ def render_article_page(article: dict, base_path: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title} · dotrepo</title>
   <meta name="description" content="{summary}">
-  <link rel="icon" type="image/svg+xml" href="{site_asset_href(base_path, 'mark.svg')}">
   <style>
     :root {{
       color-scheme: light;
@@ -1896,19 +1189,15 @@ def render_article_page(article: dict, base_path: str) -> str:
     }}
     .brand {{
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 12px;
     }}
     .brand__mark {{
       color: inherit;
-      display: inline-flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }}
-    .brand__lockup {{
-      display: block;
-      width: 160px;
-      height: auto;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
     }}
     .brand__tag {{
       font-size: 0.88rem;
@@ -2157,7 +1446,6 @@ def main() -> int:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>dotrepo</title>
   <meta name="description" content="Trust-aware metadata for software repositories. dotrepo serves a live public JSON surface and query API for humans, tools, and agents.">
-  <link rel="icon" type="image/svg+xml" href="{site_asset_href(base_path, 'mark.svg')}">
   <style>
     :root {{
       color-scheme: light;
@@ -2211,18 +1499,14 @@ def main() -> int:
     }}
     .brand {{
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 12px;
     }}
     .brand__mark {{
-      display: inline-flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }}
-    .brand__lockup {{
-      display: block;
-      width: 160px;
-      height: auto;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
     }}
     .brand__tag {{
       font-size: 0.88rem;
@@ -2812,8 +2096,8 @@ def main() -> int:
       <p class="section__note">
         Read the on-site write-up:
         <a href="{site_href(base_path, '/writing/what-the-ais-think-about-dotrepo/')}">What the AIs Think About dotrepo</a>.
-        Working repo notes now also live on-site at
-        <a href="{site_href(base_path, '/docs/ai-tool-interviews/')}">/docs/ai-tool-interviews/</a>.
+        Working repo notes remain in
+        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>.
       </p>
     </section>
 
@@ -2894,12 +2178,6 @@ def main() -> int:
 
     write_text(input_dir / "index.html", document)
     write_text(input_dir / "docs" / "index.html", render_docs_index(base_path))
-    for entry in DOC_PAGES:
-        write_text(
-            input_dir / "docs" / entry["slug"] / "index.html",
-            render_doc_page(entry, base_path),
-        )
-    write_brand_assets(input_dir)
     write_text(input_dir / "writing" / "index.html", render_writing_index(base_path))
     for article in ARTICLES:
         write_text(

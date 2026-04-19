@@ -19,23 +19,6 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 DEFAULT_BASE_PATH = "/"
-RENDERED_DOC_SLUGS = [
-    "current-status",
-    "install",
-    "trust-model",
-    "public-surface",
-    "roadmap",
-    "maintainer-happy-path",
-    "growth-and-automation-plan",
-    "maintainer-claim-review-workflow",
-    "public-export-workflow",
-    "public-release-note",
-    "public-export-examples",
-    "hosted-query-serving",
-    "v1-go-no-go",
-    "vision",
-    "ai-tool-interviews",
-]
 
 
 def rfc3339_now_utc() -> str:
@@ -231,17 +214,11 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     inventory_path = public_dir / "v0" / "repos" / "index.json"
     homepage_path = public_dir / "index.html"
     docs_path = public_dir / "docs" / "index.html"
-    brand_lockup_path = public_dir / "assets" / "brand" / "lockup.svg"
-    brand_mark_path = public_dir / "assets" / "brand" / "mark.svg"
     ensure_file(meta_path)
     ensure_file(inventory_path)
     ensure_file(homepage_path)
     ensure_file(docs_path)
-    ensure_file(brand_lockup_path)
-    ensure_file(brand_mark_path)
     ensure_file(public_dir / ".nojekyll")
-    for slug in RENDERED_DOC_SLUGS:
-        ensure_file(public_dir / "docs" / slug / "index.html")
 
     meta = json.loads(meta_path.read_text())
     if not isinstance(meta.get("apiVersion"), str) or not meta["apiVersion"]:
@@ -269,26 +246,8 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
 
     normalized_base = "/" if expected_base_path == "/" else expected_base_path.rstrip("/")
     docs_href = f'{normalized_base}/docs/' if normalized_base != "/" else "/docs/"
-    lockup_href = (
-        f'{normalized_base}/assets/brand/lockup.svg'
-        if normalized_base != "/"
-        else "/assets/brand/lockup.svg"
-    )
-    mark_href = (
-        f'{normalized_base}/assets/brand/mark.svg'
-        if normalized_base != "/"
-        else "/assets/brand/mark.svg"
-    )
     if f'href="{docs_href}"' not in homepage_document:
         raise SystemExit(f"homepage does not link to first-party docs path {docs_href}")
-    if lockup_href not in homepage_document:
-        raise SystemExit(f"homepage does not reference brand lockup asset {lockup_href}")
-    if mark_href not in homepage_document:
-        raise SystemExit(f"homepage does not reference brand mark asset {mark_href}")
-    if lockup_href not in docs_document:
-        raise SystemExit(f"docs landing does not reference brand lockup asset {lockup_href}")
-    if mark_href not in docs_document:
-        raise SystemExit(f"docs landing does not reference brand mark asset {mark_href}")
 
     for repo in repositories:
         identity = repo.get("identity")
@@ -479,12 +438,6 @@ def smoke_test_release_bundle(
                 raise SystemExit(
                     f"same-origin docs smoke failed ({status}) for {docs_url}: {body}"
                 )
-            doc_page_url = f"http://{server_addr}{base}/docs/current-status/"
-            status, body = http_get_text(doc_page_url)
-            if status != 200:
-                raise SystemExit(
-                    f"same-origin docs page smoke failed ({status}) for {doc_page_url}: {body}"
-                )
             first_repo = repositories[0]
             summary_url = f"http://{server_addr}{first_repo['links']['self']}"
             status, body = http_get_text(summary_url)
@@ -590,12 +543,6 @@ def smoke_test_cloudflare_worker(worker_dir: Path, base_path: str) -> None:
         if status != 200:
             raise SystemExit(
                 f"Cloudflare Worker docs smoke failed ({status}) for {docs_url}: {body}"
-            )
-        doc_page_url = f"http://{server_addr}{base}/docs/current-status/"
-        status, body = http_get_text(doc_page_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker docs page smoke failed ({status}) for {doc_page_url}: {body}"
             )
         first_repo = repositories[0]
         summary_url = f"http://{server_addr}{first_repo['links']['self']}"
