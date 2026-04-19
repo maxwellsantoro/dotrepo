@@ -419,7 +419,7 @@ def render_site_header(base_path: str, active: str | None = None) -> str:
     return """
     <header class="nav" aria-label="Top navigation">
       <div class="brand">
-        <a class="brand__mark" href="{home_href}">dotrepo</a>
+        <a class="brand__mark" href="{home_href}" aria-label="dotrepo — home"><span class="brand__dot" aria-hidden="true"></span><span>repo</span></a>
         <span class="brand__tag">open metadata protocol</span>
       </div>
       <nav class="nav__links">
@@ -711,6 +711,7 @@ def render_writing_index(base_path: str) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>Writing · dotrepo</title>
   <meta name="description" content="Essays, field reports, and research notes from the dotrepo project.">
   <style>
@@ -757,10 +758,22 @@ def render_writing_index(base_path: str) -> str:
       gap: 12px;
     }}
     .brand__mark {{
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.05em;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.06em;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }}
+    .brand__dot {{
+      display: inline-block;
+      width: 0.40em;
+      height: 0.40em;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      translate: 0 -0.05em;
     }}
     .brand__tag {{
       font-size: 0.88rem;
@@ -926,6 +939,7 @@ def render_docs_index(base_path: str) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>Docs · dotrepo</title>
   <meta name="description" content="First-party documentation entry for dotrepo: product status, trust model, public surface, maintainer flow, and index growth.">
   <style>
@@ -972,10 +986,22 @@ def render_docs_index(base_path: str) -> str:
       gap: 12px;
     }}
     .brand__mark {{
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.05em;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.06em;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }}
+    .brand__dot {{
+      display: inline-block;
+      width: 0.40em;
+      height: 0.40em;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      translate: 0 -0.05em;
     }}
     .brand__tag {{
       font-size: 0.88rem;
@@ -1141,6 +1167,7 @@ def render_article_page(article: dict, base_path: str) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>{title} · dotrepo</title>
   <meta name="description" content="{summary}">
   <style>
@@ -1193,11 +1220,22 @@ def render_article_page(article: dict, base_path: str) -> str:
       gap: 12px;
     }}
     .brand__mark {{
-      color: inherit;
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.05em;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.06em;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }}
+    .brand__dot {{
+      display: inline-block;
+      width: 0.40em;
+      height: 0.40em;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      translate: 0 -0.05em;
     }}
     .brand__tag {{
       font-size: 0.88rem;
@@ -1444,6 +1482,7 @@ def main() -> int:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>dotrepo</title>
   <meta name="description" content="Trust-aware metadata for software repositories. dotrepo serves a live public JSON surface and query API for humans, tools, and agents.">
   <style>
@@ -1503,10 +1542,22 @@ def main() -> int:
       gap: 12px;
     }}
     .brand__mark {{
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.05em;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.06em;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }}
+    .brand__dot {{
+      display: inline-block;
+      width: 0.40em;
+      height: 0.40em;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      translate: 0 -0.05em;
     }}
     .brand__tag {{
       font-size: 0.88rem;
