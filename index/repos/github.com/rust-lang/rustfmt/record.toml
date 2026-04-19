@@ -1,0 +1,44 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/rust-lang/rustfmt"
+generated_at = "2026-04-19T14:55:24.148949Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Left `repo.build` unset because `Cargo.toml` and `.github/workflows/check_diff.yml` suggested conflicting build commands. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "rustfmt"
+description = "A tool for formatting Rust code according to style guidelines."
+homepage = "https://rust-lang.github.io/rustfmt/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "RenderScript",
+    "Rust",
+    "Shell",
+]
+test = "cargo test"
+topics = [
+    "rust",
+    "rustfmt",
+    "formatter",
+    "codeformatter",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/rust-lang/rustfmt.git"
+default_branch = "main"
+fork = false
+head_sha = "e28eb9e2505121b2010b5ab8eda7be4f257a04a2"
+html_url = "https://github.com/rust-lang/rustfmt"
+stars = 6798

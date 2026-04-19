@@ -1,0 +1,73 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/grafana/loki"
+generated_at = "2026-04-19T14:55:30.591368Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@grafana/loki-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Left `repo.build` unset because `go.mod` and `.github/workflows/build-loki-binary.yml` suggested conflicting build commands. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Loki"
+description = "Loki is a horizontally-scalable, highly-available, multi-tenant log aggregation system inspired by Prometheus. It is designed to be very cost effective and easy to operate. It does not index the contents of the logs, but rather a set of labels for each log stream."
+homepage = "https://github.com/grafana/loki"
+license = "AGPL-3.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Jsonnet",
+    "Makefile",
+    "Nix",
+    "Open Policy Agent",
+    "Python",
+    "Ragel",
+    "Ruby",
+    "SCSS",
+    "Shell",
+    "Yacc",
+]
+test = "go test ./..."
+topics = [
+    "loki",
+    "grafana",
+    "prometheus",
+    "logging",
+    "cloudnative",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = [
+    "@grafana/loki-team",
+    "@grafana/docs-logs",
+    "@periklis",
+    "@xperimental",
+    "@JoaoBraveCoding",
+    "@grafana/oss-big-tent",
+    "@trevorwhitney",
+]
+team = "@grafana/loki-team"
+
+[docs]
+getting_started = "https://grafana.com/docs/loki/latest/get-started/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/grafana/loki.git"
+default_branch = "main"
+fork = false
+head_sha = "9c3bd87ae766243e1699daf2c6ea829011957227"
+html_url = "https://github.com/grafana/loki"
+stars = 28020

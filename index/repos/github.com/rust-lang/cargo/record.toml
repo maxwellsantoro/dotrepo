@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/rust-lang/cargo"
+generated_at = "2026-04-19T14:55:20.619339Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `Cargo.toml` and `.github/workflows/main.yml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `.github/workflows/main.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Cargo"
+description = "Cargo downloads your Rust project’s dependencies and compiles your project."
+homepage = "https://doc.rust-lang.org/cargo"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "JavaScript",
+    "Python",
+    "RenderScript",
+    "Roff",
+    "Rust",
+    "Shell",
+]
+topics = [
+    "rust",
+    "package-manager",
+    "cargo",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/rust-lang/cargo.git"
+default_branch = "master"
+fork = false
+head_sha = "c3dbe6e40f4235cc1025577326834187e36b4a34"
+html_url = "https://github.com/rust-lang/cargo"
+stars = 14844
