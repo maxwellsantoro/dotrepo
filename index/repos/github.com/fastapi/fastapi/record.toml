@@ -12,7 +12,7 @@ provenance = ["imported"]
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Sponsors"
+name = "FastAPI"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 homepage = "https://fastapi.tiangolo.com/"
 license = "MIT"
@@ -54,7 +54,7 @@ maintainers = []
 security_contact = "security@tiangolo.com"
 
 [docs]
-root = "http://127.0.0.1:8000/docs"
+root = "https://fastapi.tiangolo.com/"
 
 [relations]
 references = []

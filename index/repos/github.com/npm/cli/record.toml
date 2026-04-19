@@ -12,8 +12,8 @@ provenance = ["imported"]
 notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Left `repo.test` unset because `.github/workflows/ci-libnpmaccess.yml`, `.github/workflows/ci-libnpmdiff.yml`, `.github/workflows/ci-libnpmexec.yml`, `.github/workflows/ci-libnpmfund.yml`, `.github/workflows/ci-libnpmorg.yml`, `.github/workflows/ci-libnpmpack.yml`, and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "npm - a JavaScript package manager"
-description = "You should be running a currently supported version of Node.js to run **`npm`**. For a list of which versions of Node.js are currently supported, please see the Node.js releases page."
+name = "npm"
+description = "the package manager for JavaScript"
 homepage = "https://docs.npmjs.com/cli/"
 license = "NOASSERTION"
 visibility = "public"

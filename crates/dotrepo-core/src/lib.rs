@@ -2993,21 +2993,30 @@ pub fn import_repository_with_options(
     let mut imported_sources = Vec::new();
     let mut inferred_defaults = Vec::new();
 
+    let dir_name = root
+        .file_name()
+        .and_then(|name| name.to_str())
+        .filter(|name| !name.is_empty())
+        .unwrap_or("repository")
+        .to_string();
+
     let repo_name = match readme_metadata.title {
         Some(ref title) => {
             note_import(
                 &mut imported_sources,
                 &readme.as_ref().expect("readme exists").path,
             );
-            title.clone()
+            match clean_project_name(title, &dir_name) {
+                Some(cleaned) => cleaned,
+                None => {
+                    inferred_defaults.push("repo.name".into());
+                    dir_name.clone()
+                }
+            }
         }
         None => {
             inferred_defaults.push("repo.name".into());
-            root.file_name()
-                .and_then(|name| name.to_str())
-                .filter(|name| !name.is_empty())
-                .unwrap_or("repository")
-                .to_string()
+            dir_name.clone()
         }
     };
 
@@ -3017,7 +3026,13 @@ pub fn import_repository_with_options(
                 &mut imported_sources,
                 &readme.as_ref().expect("readme exists").path,
             );
-            description.clone()
+            match clean_project_description(description) {
+                Some(cleaned) => cleaned,
+                None => {
+                    inferred_defaults.push("repo.description".into());
+                    "Imported repository metadata; review and refine before relying on it.".into()
+                }
+            }
         }
         None => {
             inferred_defaults.push("repo.description".into());
@@ -3026,8 +3041,16 @@ pub fn import_repository_with_options(
     };
 
     let imported_docs = build_imported_docs(
-        readme_metadata.docs_root.clone(),
-        readme_metadata.docs_getting_started.clone(),
+        readme_metadata
+            .docs_root
+            .as_deref()
+            .filter(|url| is_quality_url(url))
+            .map(str::to_string),
+        readme_metadata
+            .docs_getting_started
+            .as_deref()
+            .filter(|url| is_quality_url(url))
+            .map(str::to_string),
     );
 
     if !codeowners_metadata.owners.is_empty() || codeowners_metadata.team.is_some() {
@@ -4265,6 +4288,236 @@ fn has_unbalanced_brackets(value: &str) -> bool {
         }
     }
     depth_paren != 0 || depth_bracket != 0
+}
+
+// ---------------------------------------------------------------------------
+// Universal post-extraction cleaners
+// ---------------------------------------------------------------------------
+// These operate on the *result* of README/GitHub parsing and apply
+// language-agnostic quality rules that work for any repo at scale.
+
+/// Strip emoji prefix, parenthetical aliases, and trailing punctuation from
+/// an extracted project name. Returns `None` when the cleaned result is
+/// clearly not a project name (generic phrase, too short, etc.).
+fn clean_project_name(raw: &str, _repo_dir_fallback: &str) -> Option<String> {
+    let trimmed = raw.trim();
+
+    // Strip leading emoji / non-ASCII symbols.
+    let name = trim_leading_emoji(trimmed);
+
+    // Strip parenthetical alias: "ripgrep (rg)" → "ripgrep"
+    let name = strip_parenthetical_suffix(&name);
+
+    // Strip trailing colon or dash patterns: "npm - a JavaScript package manager"
+    let name = strip_name_trailer(&name);
+
+    let cleaned = name.trim().to_string();
+    if cleaned.is_empty() {
+        return None;
+    }
+
+    // Reject generic phrases that somehow passed the heading skip-list.
+    if is_generic_phrase(&cleaned) {
+        return None;
+    }
+
+    Some(cleaned)
+}
+
+fn trim_leading_emoji(s: &str) -> String {
+    s.chars()
+        .skip_while(|ch| !ch.is_ascii_alphabetic() && !ch.is_ascii_digit())
+        .collect()
+}
+
+fn strip_parenthetical_suffix(name: &str) -> String {
+    if let Some(open) = name.rfind(" (") {
+        if name.ends_with(')') {
+            return name[..open].to_string();
+        }
+    }
+    name.to_string()
+}
+
+/// Strip " - description" or ": description" trailers that leak into names
+/// when README titles use the pattern "Name — A description of the project".
+fn strip_name_trailer(name: &str) -> String {
+    if let Some(idx) = name.find(" - ") {
+        let candidate = name[..idx].trim();
+        if candidate.len() >= 2 {
+            return candidate.to_string();
+        }
+    }
+    if let Some(idx) = name.find(" — ") {
+        let candidate = name[..idx].trim();
+        if candidate.len() >= 2 {
+            return candidate.to_string();
+        }
+    }
+    if let Some(idx) = name.find(": ") {
+        let candidate = name[..idx].trim();
+        if candidate.len() >= 2 && candidate.chars().next().is_some_and(|c| c.is_uppercase()) {
+            return candidate.to_string();
+        }
+    }
+    name.to_string()
+}
+
+/// Reject names that are clearly not project identifiers.
+fn is_generic_phrase(name: &str) -> bool {
+    let lowered = name.to_ascii_lowercase();
+    let trimmed = lowered.trim();
+
+    // Exact-match against known generic names that slip through heading checks.
+    GENERIC_NAME_REJECTS
+        .iter()
+        .any(|pattern| trimmed == *pattern)
+}
+
+const GENERIC_NAME_REJECTS: &[&str] = &[
+    "a project",
+    "the project",
+    "this project",
+    "project",
+    "a tool",
+    "a library",
+    "a framework",
+    "welcome",
+    "overview",
+    "introduction",
+];
+
+/// Clean a description extracted from a README: fix backtick artifacts,
+/// truncate at the first sentence boundary, and reject fragments.
+fn clean_project_description(raw: &str) -> Option<String> {
+    let trimmed = raw.trim();
+
+    // Strip orphaned backtick artifacts: "gh` is..." → "gh is..."
+    let cleaned = strip_orphan_backticks(trimmed);
+
+    // Truncate at first sentence boundary.
+    let cleaned = truncate_at_first_sentence(&cleaned);
+
+    let cleaned = cleaned.trim().to_string();
+
+    // Reject fragments: starts with lowercase (likely mid-sentence).
+    if cleaned
+        .chars()
+        .next()
+        .is_some_and(|ch| ch.is_ascii_lowercase())
+    {
+        return None;
+    }
+
+    // Reject very short results or language names.
+    if cleaned.len() < 20 || !cleaned.contains(' ') {
+        return None;
+    }
+
+    // Reject meta-descriptions about the repo itself.
+    if is_meta_description(&cleaned) {
+        return None;
+    }
+
+    Some(cleaned)
+}
+
+/// Replace backtick-space patterns like "gh` is" with "gh is".
+fn strip_orphan_backticks(s: &str) -> String {
+    let mut out = String::with_capacity(s.len());
+    let chars: Vec<char> = s.chars().collect();
+    let mut i = 0;
+    while i < chars.len() {
+        if chars[i] == '`' {
+            let next_is_continuation = chars
+                .get(i + 1)
+                .is_some_and(|ch| *ch == ' ' || ch.is_ascii_lowercase());
+            let prev_is_alphanum = i > 0 && chars[i - 1].is_ascii_alphanumeric();
+            if prev_is_alphanum && next_is_continuation {
+                i += 1;
+                continue;
+            }
+        }
+        out.push(chars[i]);
+        i += 1;
+    }
+    out
+}
+
+/// Truncate text at the first sentence boundary (period + space).
+/// Keeps the first sentence only, which is the core description.
+fn truncate_at_first_sentence(s: &str) -> String {
+    // Look for ". " (period followed by space) — standard sentence boundary.
+    if let Some(idx) = s.find(". ") {
+        let first = &s[..idx + 1]; // include the period
+        // Only truncate if the first sentence is reasonably long (>20 chars)
+        if first.len() >= 20 {
+            return first.to_string();
+        }
+    }
+    // Also truncate at ".\n" boundary.
+    if let Some(idx) = s.find(".\n") {
+        let first = &s[..idx + 1];
+        if first.len() >= 20 {
+            return first.to_string();
+        }
+    }
+    s.to_string()
+}
+
+/// Detect descriptions that are about the repository rather than the project.
+fn is_meta_description(s: &str) -> bool {
+    let lowered = s.to_ascii_lowercase();
+    lowered.starts_with("this repository is")
+        || lowered.starts_with("this repo is")
+        || lowered.starts_with("this is the")
+        || lowered.starts_with("this is a repo")
+}
+
+/// Validate that a URL is structurally sound for use in the index.
+/// Rejects localhost, anchor-only, and bare domains without scheme.
+fn is_quality_url(url: &str) -> bool {
+    let trimmed = url.trim();
+
+    // Reject empty.
+    if trimmed.is_empty() {
+        return false;
+    }
+
+    // Reject anchor-only: "#documentation", "#getting-started"
+    if trimmed.starts_with('#') {
+        return false;
+    }
+
+    // Reject localhost / private IPs.
+    if trimmed.starts_with("http://127.0")
+        || trimmed.starts_with("http://localhost")
+        || trimmed.starts_with("https://localhost")
+        || trimmed.starts_with("http://0.0.0")
+        || trimmed.starts_with("http://[::1]")
+    {
+        return false;
+    }
+
+    // Require http:// or https:// scheme for absolute URLs.
+    // Allow relative paths like "docs/" but reject bare domains like "docs.rs/clap".
+    if !trimmed.starts_with("http://")
+        && !trimmed.starts_with("https://")
+        && !trimmed.starts_with('/')
+        && !trimmed.starts_with("./")
+        && !trimmed.contains(char::is_whitespace)
+    {
+        // If it looks like a domain (contains dots and slashes but no scheme), reject.
+        if trimmed.contains('.') && trimmed.contains('/') && !trimmed.starts_with('#') {
+            return false;
+        }
+        // If it looks like a bare domain without any path, reject.
+        if trimmed.contains('.') && !trimmed.contains('/') {
+            return false;
+        }
+    }
+
+    true
 }
 
 fn normalize_readme_text(line: &str) -> Option<String> {

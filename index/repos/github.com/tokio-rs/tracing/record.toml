@@ -15,7 +15,7 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and
 
 [repo]
 name = "tracing"
-description = "tracing` is a framework for instrumenting Rust programs to collect structured, event-based diagnostic information. `tracing` is maintained by the Tokio project, but does _not_ require the `tokio` runtime to be used."
+description = "A framework for instrumenting Rust programs to collect structured, event-based diagnostic information."
 homepage = "https://tracing.rs"
 license = "MIT"
 visibility = "public"

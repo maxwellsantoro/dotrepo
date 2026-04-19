@@ -12,7 +12,7 @@ provenance = ["imported"]
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml`, `.github/workflows/create_test_report.yml`, `.github/workflows/infra.yml`, `.github/workflows/publish_extension.yml`, `.github/workflows/publish_release.yml`, `.github/workflows/publish_release_docker.yml`, `.github/workflows/roll_browser_into_playwright.yml`, and `package.json` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "🎭 Playwright"
+name = "Playwright"
 description = "Playwright is a framework for web automation and testing. It drives Chromium, Firefox, and WebKit with a single API — in your tests, in your scripts, and as a tool for AI agents."
 homepage = "https://playwright.dev"
 license = "Apache-2.0"
