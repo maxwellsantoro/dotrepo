@@ -1,0 +1,90 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/prometheus/prometheus"
+generated_at = "2026-04-19T16:42:56.524664Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `go.mod`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@prometheus/default-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Left `repo.test` unset because `.github/workflows/ci.yml`, `.github/workflows/fuzzing.yml`, and `go.mod` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Prometheus"
+description = "The Prometheus monitoring system and time series database."
+homepage = "https://prometheus.io/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Lex",
+    "Makefile",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Yacc",
+]
+build = "go build ./..."
+topics = [
+    "monitoring",
+    "metrics",
+    "alerting",
+    "graphing",
+    "time-series",
+    "prometheus",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = [
+    "@prometheus/default-maintainers",
+    "@simonpasquier",
+    "@SuperQ",
+    "@dgl",
+    "@metalmatze",
+    "@beorn7",
+    "@krajorama",
+    "@juliusv",
+    "@nexucis",
+    "@roidelapluie",
+    "@cstyan",
+    "@bwplotka",
+    "@tomwilkie",
+    "@alexgreenbank",
+    "@aknuds1",
+    "@jesusvazquez",
+    "@ArthurSens",
+    "@codesome",
+    "@brancz",
+    "@rexagod",
+    "@jkroepke",
+    "@matt-gp",
+    "@sysadmind",
+    "@mrvarmazyar",
+    "@jooola",
+    "@apricote",
+    "@remyleone",
+]
+team = "@prometheus/default-maintainers"
+security_contact = "https://prometheus.io/docs/operating/security/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/prometheus/prometheus.git"
+default_branch = "main"
+fork = false
+head_sha = "f39fff9691515ea2abfc25b8ad2f919b91973fe6"
+html_url = "https://github.com/prometheus/prometheus"
+stars = 63652

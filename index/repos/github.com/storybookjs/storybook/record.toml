@@ -1,0 +1,82 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/storybookjs/storybook"
+generated_at = "2026-04-19T16:42:59.322304Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Storybook"
+description = "Build bulletproof UI components faster"
+homepage = "https://storybook.js.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "AppleScript",
+    "CSS",
+    "EJS",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "MDX",
+    "Pug",
+    "SCSS",
+    "Shell",
+    "Svelte",
+    "TypeScript",
+    "Vue",
+]
+test = "yarn test"
+topics = [
+    "storybook",
+    "styleguide",
+    "testing",
+    "components",
+    "webpack",
+    "ui",
+    "react",
+    "vue",
+    "react-native",
+    "design-systems",
+    "javascript",
+    "angular",
+    "svelte",
+    "web-components",
+    "typescript",
+    "html",
+    "vite",
+    "workshop",
+    "documentation",
+    "stories",
+]
+
+[owners]
+maintainers = [
+    "@kylegach",
+    "@jonniebigodes",
+]
+security_contact = "https://x.com/storybookjs"
+
+[docs]
+root = "https://storybook.js.org/docs?ref=readme"
+getting_started = "#getting-started"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/storybookjs/storybook.git"
+default_branch = "next"
+fork = false
+head_sha = "d226aa98f39da53b67ae8d6f841532b11032f67c"
+html_url = "https://github.com/storybookjs/storybook"
+stars = 89735

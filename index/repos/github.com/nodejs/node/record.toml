@@ -1,0 +1,97 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/nodejs/node"
+generated_at = "2026-04-19T16:42:48.479594Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Node.js"
+description = "Node.js is an open-source, cross-platform JavaScript runtime environment."
+homepage = "https://nodejs.org"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "Emacs Lisp",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Nix",
+    "Perl",
+    "Python",
+    "R",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "nodejs",
+    "javascript",
+    "node",
+    "js",
+    "runtime",
+    "mit",
+    "linux",
+    "macos",
+    "windows",
+]
+
+[owners]
+maintainers = [
+    "@nodejs/tsc",
+    "@nodejs/build",
+    "@nodejs/web-infra",
+    "@nodejs/streams",
+    "@nodejs/net",
+    "@nodejs/crypto",
+    "@nodejs/http",
+    "@nodejs/http2",
+    "@nodejs/quic",
+    "@nodejs/loaders",
+    "@nodejs/vm",
+    "@nodejs/node-api",
+    "@nodejs/gyp",
+    "@nodejs/wasi",
+    "@nodejs/startup",
+    "@nodejs/realm",
+    "@nodejs/v8-update",
+    "@nodejs/actions",
+    "@nodejs/releasers",
+    "@nodejs/test_runner",
+    "@nodejs/single-executable",
+    "@nodejs/security-wg",
+    "@nodejs/security-stewards",
+    "@nodejs/web-standards",
+    "@nodejs/typescript",
+    "@nodejs/performance",
+    "@nodejs/url",
+    "@nodejs/sqlite",
+    "@nodejs/config",
+    "@nodejs/inspector",
+    "@nodejs/path",
+    "@nodejs/userland-migrations",
+    "@nodejs/devcontainer",
+]
+security_contact = "tsc@iojs.org"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/nodejs/node.git"
+default_branch = "main"
+fork = false
+head_sha = "a79e224eb2bdf4c1baee96e8e5ac413c0880d0ef"
+html_url = "https://github.com/nodejs/node"
+stars = 116811

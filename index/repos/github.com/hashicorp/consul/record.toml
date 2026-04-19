@@ -1,0 +1,66 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/hashicorp/consul"
+generated_at = "2026-04-19T16:42:42.481701Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Filled `repo.name` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "consul"
+description = "Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure."
+homepage = "https://www.consul.io"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Gherkin",
+    "Go",
+    "Go Template",
+    "HCL",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "MDX",
+    "Makefile",
+    "SCSS",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "consul",
+    "service-mesh",
+    "service-discovery",
+    "kubernetes",
+    "vault",
+    "ecs",
+    "api-gateway",
+]
+
+[owners]
+maintainers = [
+    "@hashicorp/consul-selfmanage-maintainers",
+    "@hashicorp/team-consul-core",
+    "@hashicorp/team-selfmanaged-releng",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/hashicorp/consul.git"
+default_branch = "main"
+fork = false
+head_sha = "57e08666c9cdff463552cd25ea06f8925aa2d4a0"
+html_url = "https://github.com/hashicorp/consul"
+stars = 29856
