@@ -1,7 +1,14 @@
 # Evidence
 
-- Imported repository identity, description, homepage, license, visibility, languages, and topics from https://github.com/fastapi/fastapi and the GitHub Languages API for that repository.
-- Imported the documented local development setup command `uv sync --extra all` as `repo.build` from the contributing guide at https://raw.githubusercontent.com/fastapi/fastapi/master/docs/en/docs/contributing.md.
-- Imported the test command `bash scripts/test-cov-html.sh` and the documentation root `docs/en/` from the contributing guide at https://raw.githubusercontent.com/fastapi/fastapi/master/docs/en/docs/contributing.md.
-- Imported the security contact from https://raw.githubusercontent.com/fastapi/fastapi/master/SECURITY.md.
+- Imported repository name, description, and docs entry points from README.md.
+- Imported the security reporting channel from SECURITY.md.
+- Imported repo.build from pyproject.toml as `python -m build`.
+- Imported repo.test from pyproject.toml as `python -m pytest`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+- Augmented repo.homepage from GitHub repository metadata.
+- Augmented repo.license from GitHub repository metadata.
+- Augmented repo.visibility from GitHub repository metadata.
+- Augmented repo.languages from GitHub repository metadata.
+- Augmented repo.topics from GitHub repository metadata.
+- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).

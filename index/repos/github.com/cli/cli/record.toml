@@ -4,25 +4,52 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/cli/cli"
-generated_at = "2026-03-09T00:00:00Z"
+generated_at = "2026-04-18T19:24:24.770932937Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = ["imported"]
-notes = "Imported from the upstream README, install documentation, Makefile, and security policy; not maintainer-verified."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@cli/code-reviewers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `go.mod` and `.github/workflows/go.yml` suggested conflicting build commands. Left `repo.test` unset because `go.mod` and `.github/workflows/go.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "GitHub CLI"
-description = "GitHub's official command line tool"
-homepage = "https://github.com/cli/cli"
+description = "gh` is GitHub on the command line. It brings pull requests, issues, and other GitHub concepts to the terminal next to where you are already working with `git` and your code."
+homepage = "https://cli.github.com"
 license = "MIT"
 visibility = "public"
-languages = ["go"]
-build = "make install"
-test = "make test"
+languages = [
+    "Batchfile",
+    "Go",
+    "Makefile",
+    "PowerShell",
+    "Shell",
+]
+topics = [
+    "github-api-v4",
+    "cli",
+    "git",
+    "golang",
+]
 
 [owners]
-security_contact = "https://github.com/cli/cli/security/policy"
+maintainers = [
+    "@cli/code-reviewers",
+    "@cli/codespaces",
+    "@cli/package-security",
+    "@cli/tuf-root-reviewers",
+    "@cli/skill-reviewers",
+]
+team = "@cli/code-reviewers"
+security_contact = "https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck"
 
 [relations]
 references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/cli/cli.git"
+default_branch = "trunk"
+fork = false
+head_sha = "998b6212b38f653f997c79fc42e6f13197008581"
+html_url = "https://github.com/cli/cli"
+stars = 43900

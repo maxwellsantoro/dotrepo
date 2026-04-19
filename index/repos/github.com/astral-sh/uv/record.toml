@@ -4,22 +4,33 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/astral-sh/uv"
-generated_at = "2026-03-20T05:00:23.722928Z"
+generated_at = "2026-04-18T19:24:20.549658075Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "inferred"]
-notes = "Imported from the upstream README, CONTRIBUTING.md, `SECURITY.md`, the organization security policy, `Cargo.toml`, `pyproject.toml`, and CI workflows. `repo.build` follows the dev-binaries workflow command for producing the `uv` and `uvx` binaries. `repo.test` normalizes the contributor guide's nextest recommendation and the CI matrix into a simpler workspace-level default, rather than encoding the full feature and environment matrix. No CODEOWNERS file was present in the crawled snapshot. Not maintainer-verified."
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `Cargo.toml`, `pyproject.toml`, and `.github/workflows/build-dev-binaries.yml` suggested conflicting build commands. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "uv"
 description = "An extremely fast Python package and project manager, written in Rust."
 homepage = "https://docs.astral.sh/uv"
-license = "MIT OR Apache-2.0"
+license = "Apache-2.0"
 visibility = "public"
-languages = ["python", "rust"]
-build = "cargo build --profile no-debug --bin uv --bin uvx"
-test = "cargo nextest run --workspace"
+languages = [
+    "Batchfile",
+    "C",
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Mustache",
+    "Nushell",
+    "PowerShell",
+    "Python",
+    "RenderScript",
+    "Rust",
+    "Shell",
+]
+test = "cargo test --workspace"
 topics = [
     "packaging",
     "python",
@@ -29,10 +40,9 @@ topics = [
 
 [owners]
 maintainers = []
-security_contact = "security@astral.sh"
+security_contact = "https://github.com/astral-sh/.github/blob/main/SECURITY.md"
 
 [docs]
-root = "https://docs.astral.sh/uv/"
 getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
 
 [relations]
@@ -43,6 +53,6 @@ archived = false
 clone_url = "https://github.com/astral-sh/uv.git"
 default_branch = "main"
 fork = false
-head_sha = "00d72dac7b789d1c64ed21626175b80f4a1b8f2b"
+head_sha = "0ec181539947b32bc69463b18c58a477fc7d61c0"
 html_url = "https://github.com/astral-sh/uv"
-stars = 81496
+stars = 83491
