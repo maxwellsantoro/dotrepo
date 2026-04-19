@@ -394,8 +394,7 @@ mod tests {
             .duration_since(UNIX_EPOCH)
             .expect("unix time")
             .as_nanos();
-        let temp_root =
-            std::env::temp_dir().join(format!("dotrepo-public-query-test-{unique}"));
+        let temp_root = std::env::temp_dir().join(format!("dotrepo-public-query-test-{unique}"));
         let docs_dir = temp_root.join("docs");
         fs::create_dir_all(&docs_dir).expect("create docs dir");
         fs::write(docs_dir.join("index.html"), "<h1>Docs</h1>").expect("write index");
