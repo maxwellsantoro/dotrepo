@@ -4449,8 +4449,7 @@ fn strip_orphan_backticks(s: &str) -> String {
 fn truncate_at_first_sentence(s: &str) -> String {
     // Look for ". " (period followed by space) — standard sentence boundary.
     if let Some(idx) = s.find(". ") {
-        let first = &s[..idx + 1]; // include the period
-        // Only truncate if the first sentence is reasonably long (>20 chars)
+        let first = &s[..idx + 1];
         if first.len() >= 20 {
             return first.to_string();
         }
