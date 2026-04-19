@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/launchbadge/sqlx"
+generated_at = "2026-04-19T13:37:58.232477Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/examples.yml`, `.github/workflows/sqlx-cli.yml`, `.github/workflows/sqlx.yml`, and `Cargo.toml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/examples.yml`, `.github/workflows/sqlx-cli.yml`, `.github/workflows/sqlx.yml`, and `Cargo.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "SQLx"
+description = "🧰 The Rust SQL Toolkit"
+homepage = "https://github.com/launchbadge/sqlx"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "PLpgSQL",
+    "Python",
+    "Rust",
+    "Shell",
+    "TSQL",
+]
+topics = [
+    "sql",
+    "rust",
+    "postgres",
+    "mysql",
+    "async",
+    "await",
+    "mariadb",
+    "postgresql",
+    "sqlite",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/launchbadge/sqlx.git"
+default_branch = "main"
+fork = false
+head_sha = "b180eba9012c486e1c46d6aaf156d8f79ab37cdc"
+html_url = "https://github.com/launchbadge/sqlx"
+stars = 16900
