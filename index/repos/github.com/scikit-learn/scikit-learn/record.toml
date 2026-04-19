@@ -1,0 +1,58 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/scikit-learn/scikit-learn"
+generated_at = "2026-04-19T13:37:51.767676Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "scikit-learn"
+description = "scikit-learn: machine learning in Python"
+homepage = "https://scikit-learn.org"
+license = "BSD-3-Clause"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CSS",
+    "Cython",
+    "JavaScript",
+    "Makefile",
+    "Meson",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "machine-learning",
+    "python",
+    "statistics",
+    "data-science",
+    "data-analysis",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://tidelift.com/security"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/scikit-learn/scikit-learn.git"
+default_branch = "main"
+fork = false
+head_sha = "4e88ecfc3722975197b3afc1417e7f1049e33fd0"
+html_url = "https://github.com/scikit-learn/scikit-learn"
+stars = 65871

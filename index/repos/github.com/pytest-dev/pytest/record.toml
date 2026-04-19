@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/pytest-dev/pytest"
+generated_at = "2026-04-19T13:37:43.808665Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "pytest"
+description = "The pytest framework makes it easy to write small tests, yet scales to support complex functional testing"
+homepage = "https://pytest.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Gherkin",
+    "Python",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "unit-testing",
+    "test",
+    "testing",
+    "python",
+    "hacktoberfest",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/pytest-dev/pytest.git"
+default_branch = "main"
+fork = false
+head_sha = "90465694d3501267decade1ac0be988999940957"
+html_url = "https://github.com/pytest-dev/pytest"
+stars = 13779
