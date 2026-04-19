@@ -209,9 +209,9 @@ fn parse_query_route(rest: &str, query: &str) -> Result<Option<Route>> {
 
     let path = required_query_param(query, "path")?;
     Ok(Some(Route::Query {
-        host: decode_component(segments[0])?,
-        owner: decode_component(segments[1])?,
-        repo: decode_component(segments[2])?,
+        host: decode_identity_component(segments[0], "host")?,
+        owner: decode_identity_component(segments[1], "owner")?,
+        repo: decode_identity_component(segments[2], "repo")?,
         path,
     }))
 }
@@ -225,6 +225,17 @@ fn required_query_param(query: &str, key: &str) -> Result<String> {
 
 fn decode_component(raw: &str) -> Result<String> {
     required_query_param(&format!("x={raw}"), "x")
+}
+
+fn decode_identity_component(raw: &str, field: &str) -> Result<String> {
+    let decoded = decode_component(raw)?;
+    if matches!(
+        Path::new(&decoded).components().next(),
+        Some(Component::CurDir | Component::ParentDir)
+    ) {
+        anyhow::bail!("invalid repository identity: {field} must be a single path segment");
+    }
+    Ok(decoded)
 }
 
 fn resolve_static_path(
@@ -331,5 +342,38 @@ fn status_for_public_error(error: &PublicErrorResponse) -> u16 {
         PublicErrorCode::InvalidRepositoryIdentity => 400,
         PublicErrorCode::QueryPathNotFound | PublicErrorCode::RepositoryNotFound => 404,
         PublicErrorCode::InternalError => 500,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn route_request_rejects_dot_segments_in_repository_identity() {
+        let err = route_request("/v0/repos/github.com/../orbit/query?path=repo.name", "/")
+            .expect_err("dot segment rejected");
+        assert_eq!(
+            err.to_string(),
+            "invalid repository identity: owner must be a single path segment"
+        );
+    }
+
+    #[test]
+    fn route_request_decodes_valid_repository_identity() {
+        let route = route_request(
+            "/v0/repos/github.com/example/orbit/query?path=repo.name",
+            "/",
+        )
+        .expect("route parses");
+        assert_eq!(
+            route,
+            Some(Route::Query {
+                host: "github.com".into(),
+                owner: "example".into(),
+                repo: "orbit".into(),
+                path: "repo.name".into(),
+            })
+        );
     }
 }

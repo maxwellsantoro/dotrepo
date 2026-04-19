@@ -10,7 +10,7 @@ use serde_json::Value;
 use sha2::{Digest, Sha256};
 use std::collections::BTreeSet;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::{Component, Path, PathBuf};
 use time::format_description::well_known::Rfc3339;
 use time::{Duration, OffsetDateTime};
 
@@ -1892,10 +1892,33 @@ fn require_non_empty(field: &str, value: &str) -> Result<()> {
 fn require_path_segment(field: &str, value: &str) -> Result<()> {
     require_non_empty(field, value)?;
     let path = Path::new(value);
-    if path.components().count() != 1 {
+    let mut components = path.components();
+    if !matches!(components.next(), Some(Component::Normal(_))) || components.next().is_some() {
         bail!("{field} must be a single path segment");
     }
     Ok(())
+}
+
+fn resolve_repository_local_path(root: &Path, value: &str) -> Result<PathBuf> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        bail!("path must not be empty");
+    }
+
+    let path = Path::new(trimmed);
+    let mut normalized = PathBuf::new();
+    for component in path.components() {
+        match component {
+            Component::Normal(part) => normalized.push(part),
+            Component::CurDir => {}
+            Component::ParentDir => bail!("path must stay within the repository root"),
+            Component::RootDir | Component::Prefix(_) => {
+                bail!("path must be relative to the repository root")
+            }
+        }
+    }
+
+    Ok(root.join(normalized))
 }
 
 fn resolve_conflict_reason(
@@ -3269,12 +3292,21 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
         .into_iter()
         .flatten()
         {
-            let target = root.join(path);
-            if !target.exists() {
-                diagnostics.push(validation_error(
-                    "validate_native_paths",
-                    format!("referenced path does not exist: {}", target.display()),
-                ));
+            match resolve_repository_local_path(root, path) {
+                Ok(target) => {
+                    if !target.exists() {
+                        diagnostics.push(validation_error(
+                            "validate_native_paths",
+                            format!("referenced path does not exist: {}", target.display()),
+                        ));
+                    }
+                }
+                Err(err) => {
+                    diagnostics.push(validation_error(
+                        "validate_native_paths",
+                        format!("referenced path `{}` is invalid: {}", path, err),
+                    ));
+                }
             }
         }
     }
@@ -3282,16 +3314,28 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
     if let Some(readme) = &manifest.readme {
         for (name, section) in &readme.custom_sections {
             if let Some(path) = &section.path {
-                let target = root.join(path);
-                if !target.exists() {
-                    diagnostics.push(validation_error(
-                        "validate_native_paths",
-                        format!(
-                            "custom README section `{}` references a missing path: {}",
-                            name,
-                            target.display()
-                        ),
-                    ));
+                match resolve_repository_local_path(root, path) {
+                    Ok(target) => {
+                        if !target.exists() {
+                            diagnostics.push(validation_error(
+                                "validate_native_paths",
+                                format!(
+                                    "custom README section `{}` references a missing path: {}",
+                                    name,
+                                    target.display()
+                                ),
+                            ));
+                        }
+                    }
+                    Err(err) => {
+                        diagnostics.push(validation_error(
+                            "validate_native_paths",
+                            format!(
+                                "custom README section `{}` uses an invalid path `{}`: {}",
+                                name, path, err
+                            ),
+                        ));
+                    }
                 }
             }
         }
@@ -6308,7 +6352,14 @@ fn render_custom_section(
     }
 
     if let Some(path) = &custom.path {
-        let target = root.join(path);
+        let target = resolve_repository_local_path(root, path).map_err(|err| {
+            anyhow!(
+                "custom README section `{}` uses an invalid path `{}`: {}",
+                section_name,
+                path,
+                err
+            )
+        })?;
         return fs::read_to_string(&target)
             .map(|content| content.trim().to_string())
             .map_err(|err| {
@@ -8126,6 +8177,28 @@ description = "Competing description"
     }
 
     #[test]
+    fn public_repository_query_rejects_dot_segments_in_identity() {
+        let response = public_repository_query_or_error(
+            Path::new("."),
+            "github.com",
+            "..",
+            "orbit",
+            "repo.description",
+            sample_public_freshness(),
+        )
+        .expect_err("invalid identity rejected");
+
+        assert_eq!(
+            response.error.code,
+            PublicErrorCode::InvalidRepositoryIdentity
+        );
+        assert_eq!(
+            response.error.message,
+            "invalid repository identity: owner must be a single path segment"
+        );
+    }
+
+    #[test]
     fn public_repository_summary_omits_rejected_claim_context() {
         let root = temp_dir("public-rejected-claim");
         let record_dir = root.join("repos/github.com/example/orbit");
@@ -9008,6 +9081,77 @@ content = "Run `cargo build`."
         assert!(rendered.contains("Run `cargo build`."));
 
         fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn render_readme_rejects_custom_sections_outside_repository_root() {
+        let sandbox = temp_dir("custom-readme-escape");
+        let root = sandbox.join("repo");
+        fs::create_dir_all(&root).expect("repo dir created");
+        fs::write(sandbox.join("secret.txt"), "do not read").expect("secret written");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+
+[readme]
+sections = ["overview", "quickstart"]
+
+[readme.custom_sections.quickstart]
+path = "../secret.txt"
+"#,
+        )
+        .expect("manifest parses");
+
+        let err = render_readme(&root, &manifest, b"schema = \"dotrepo/v0.1\"")
+            .expect_err("escape path rejected");
+        assert!(err
+            .to_string()
+            .contains("path must stay within the repository root"));
+
+        fs::remove_dir_all(sandbox).expect("temp dir removed");
+    }
+
+    #[test]
+    fn validate_manifest_rejects_custom_sections_outside_repository_root() {
+        let sandbox = temp_dir("custom-readme-validate-escape");
+        let root = sandbox.join("repo");
+        fs::create_dir_all(&root).expect("repo dir created");
+        fs::write(sandbox.join("secret.txt"), "do not read").expect("secret written");
+        let manifest = parse_manifest(
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+
+[readme]
+sections = ["quickstart"]
+
+[readme.custom_sections.quickstart]
+path = "../secret.txt"
+"#,
+        )
+        .expect("manifest parses");
+
+        let diagnostics = validate_manifest_diagnostics(&root, &manifest);
+        assert!(diagnostics.iter().any(|diagnostic| diagnostic
+            .message
+            .contains("custom README section `quickstart` uses an invalid path")));
+
+        fs::remove_dir_all(sandbox).expect("temp dir removed");
     }
 
     #[test]
