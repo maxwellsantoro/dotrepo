@@ -254,9 +254,18 @@ fn resolve_static_path(
     let candidate = if relative.as_os_str().is_empty() {
         public_root.join("index.html")
     } else {
-        public_root.join(relative)
+        public_root.join(&relative)
     };
-    Ok(candidate.is_file().then_some(candidate))
+    if candidate.is_file() {
+        return Ok(Some(candidate));
+    }
+
+    let directory_index = if relative.as_os_str().is_empty() {
+        None
+    } else {
+        Some(public_root.join(relative).join("index.html"))
+    };
+    Ok(directory_index.filter(|path| path.is_file()))
 }
 
 fn static_relative_path(path: &str, base_path: &str) -> Result<Option<PathBuf>> {
@@ -348,6 +357,8 @@ fn status_for_public_error(error: &PublicErrorResponse) -> u16 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs;
+    use std::time::{SystemTime, UNIX_EPOCH};
 
     #[test]
     fn route_request_rejects_dot_segments_in_repository_identity() {
@@ -375,5 +386,25 @@ mod tests {
                 path: "repo.name".into(),
             })
         );
+    }
+
+    #[test]
+    fn resolve_static_path_serves_directory_index() {
+        let unique = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("unix time")
+            .as_nanos();
+        let temp_root =
+            std::env::temp_dir().join(format!("dotrepo-public-query-test-{unique}"));
+        let docs_dir = temp_root.join("docs");
+        fs::create_dir_all(&docs_dir).expect("create docs dir");
+        fs::write(docs_dir.join("index.html"), "<h1>Docs</h1>").expect("write index");
+
+        let resolved = resolve_static_path("/docs/", "/", &temp_root)
+            .expect("path resolves")
+            .expect("directory index exists");
+
+        assert_eq!(resolved, docs_dir.join("index.html"));
+        fs::remove_dir_all(&temp_root).expect("cleanup temp dir");
     }
 }
