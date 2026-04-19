@@ -1,0 +1,72 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/prettier/prettier"
+generated_at = "2026-04-19T16:42:34.483401Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+]
+notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `package.json` and `.github/workflows/_build.yml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/bundler-friendly.yml`, `.github/workflows/dev-package-test.yml`, `.github/workflows/dev-test.yml`, and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Prettier"
+description = "Prettier is an opinionated code formatter."
+homepage = "https://prettier.io"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "Less",
+    "MDX",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+topics = [
+    "formatter",
+    "printer",
+    "prettier",
+    "ast",
+    "javascript",
+    "flow",
+    "typescript",
+    "css",
+    "scss",
+    "less",
+    "jsx",
+    "vue",
+    "graphql",
+    "json",
+    "markdown",
+    "yaml",
+    "html",
+    "angular",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://tidelift.com/security"
+
+[docs]
+root = "https://prettier.io/docs/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/prettier/prettier.git"
+default_branch = "main"
+fork = false
+head_sha = "a9915750d11b9584a665b809004dec5b90d2021c"
+html_url = "https://github.com/prettier/prettier"
+stars = 51807

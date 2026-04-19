@@ -1,0 +1,75 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/microsoft/playwright"
+generated_at = "2026-04-19T16:42:26.909183Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml`, `.github/workflows/create_test_report.yml`, `.github/workflows/infra.yml`, `.github/workflows/publish_extension.yml`, `.github/workflows/publish_release.yml`, `.github/workflows/publish_release_docker.yml`, `.github/workflows/roll_browser_into_playwright.yml`, and `package.json` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "🎭 Playwright"
+description = "Playwright is a framework for web automation and testing. It drives Chromium, Firefox, and WebKit with a single API — in your tests, in your scripts, and as a tool for AI agents."
+homepage = "https://playwright.dev"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Makefile",
+    "Objective-C",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+test = "npm test"
+topics = [
+    "playwright",
+    "testing",
+    "automation",
+    "webkit",
+    "firefox",
+    "e2e-testing",
+    "web",
+    "chrome",
+    "electron",
+    "javascript",
+    "chromium",
+    "end-to-end-testing",
+    "test",
+    "test-automation",
+    "testing-tools",
+]
+
+[owners]
+maintainers = []
+security_contact = "secure@microsoft.com"
+
+[docs]
+root = "https://playwright.dev"
+getting_started = "https://playwright.dev/docs/getting-started-vscode"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/microsoft/playwright.git"
+default_branch = "main"
+fork = false
+head_sha = "b86038bd105baadcae901d82a10ebcbddfde92e2"
+html_url = "https://github.com/microsoft/playwright"
+stars = 86810

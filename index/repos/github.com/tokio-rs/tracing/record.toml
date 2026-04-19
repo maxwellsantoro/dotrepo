@@ -1,0 +1,59 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/tokio-rs/tracing"
+generated_at = "2026-04-19T16:43:01.664922Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tokio-rs/tracing` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Left `repo.test` unset because `Cargo.toml` and `.github/workflows/CI.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "tracing"
+description = "tracing` is a framework for instrumenting Rust programs to collect structured, event-based diagnostic information. `tracing` is maintained by the Tokio project, but does _not_ require the `tokio` runtime to be used."
+homepage = "https://tracing.rs"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Rust",
+    "Shell",
+]
+build = "cargo build --workspace"
+topics = [
+    "rust",
+    "rust-lang",
+    "tracing",
+    "logging",
+    "logging-library",
+    "logging-facade",
+    "logging-and-metrics",
+    "diagnostics",
+]
+
+[owners]
+maintainers = [
+    "@hawkw",
+    "@hds",
+    "@tokio-rs/tracing",
+    "@yaahc",
+    "@davidbarsky",
+]
+team = "@tokio-rs/tracing"
+security_contact = "security@tokio.rs"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tokio-rs/tracing.git"
+default_branch = "main"
+fork = false
+head_sha = "53e14901f484a455d6edd59474ee87fd2f5f6e54"
+html_url = "https://github.com/tokio-rs/tracing"
+stars = 6640

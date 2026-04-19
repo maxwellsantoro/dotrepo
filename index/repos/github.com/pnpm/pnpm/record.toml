@@ -1,0 +1,59 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/pnpm/pnpm"
+generated_at = "2026-04-19T16:42:53.790353Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "pnpm"
+description = "Português Brasileiro"
+homepage = "https://pnpm.io"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "JavaScript",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "npm",
+    "dependency-manager",
+    "package-manager",
+    "node",
+    "nodejs",
+    "install",
+    "modules",
+    "javascript",
+]
+
+[owners]
+maintainers = [
+    "@zkochan",
+    "@fireairforce",
+    "@gluxon",
+    "@weyert",
+    "@d3lm",
+]
+security_contact = "https://github.com/pnpm/pnpm/security/advisories"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/pnpm/pnpm.git"
+default_branch = "main"
+fork = false
+head_sha = "c86c423bdcd6a68b17df55f6d4bb4c3642d2122e"
+html_url = "https://github.com/pnpm/pnpm"
+stars = 34667
