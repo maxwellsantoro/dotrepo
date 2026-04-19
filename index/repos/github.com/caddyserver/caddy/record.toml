@@ -12,7 +12,7 @@ provenance = ["imported"]
 notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/ci.yml`, `.github/workflows/cross-build.yml`, and `go.mod` suggested conflicting build commands. Left `repo.test` unset because `go.mod` and `.github/workflows/ci.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "a project"
+name = "Caddy"
 description = "Caddy is an extensible server platform that uses TLS by default."
 homepage = "https://caddyserver.com"
 license = "Apache-2.0"
