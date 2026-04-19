@@ -8,10 +8,13 @@ import html
 import json
 import re
 import sys
+import time
+import uuid
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 
 REQUEST_HEADERS = {
@@ -45,6 +48,18 @@ def parse_args() -> argparse.Namespace:
         required=True,
         help="Path to the reviewed exported public tree used for deployment",
     )
+    parser.add_argument(
+        "--settle-timeout-seconds",
+        type=float,
+        default=45.0,
+        help="How long to wait for edge caches to converge before failing (default: 45)",
+    )
+    parser.add_argument(
+        "--settle-interval-seconds",
+        type=float,
+        default=3.0,
+        help="How often to retry while waiting for live assets to converge (default: 3)",
+    )
     return parser.parse_args()
 
 
@@ -53,6 +68,15 @@ def normalize_base_path(value: str) -> str:
     if trimmed in ("", "/"):
         return ""
     return trimmed if trimmed.startswith("/") else f"/{trimmed}"
+
+
+def with_query_param(url: str, name: str, value: str) -> str:
+    split = urlsplit(url)
+    pairs = parse_qsl(split.query, keep_blank_values=True)
+    pairs.append((name, value))
+    return urlunsplit(
+        (split.scheme, split.netloc, split.path, urlencode(pairs), split.fragment)
+    )
 
 
 def http_get_json(url: str) -> Any:
@@ -133,6 +157,20 @@ def expected_homepage_snapshot_state(meta: dict[str, Any], inventory: dict[str, 
     }
 
 
+def fetch_live_public_state(
+    deploy_url: str, base_path: str, cache_bust: str
+) -> tuple[str, dict[str, Any], dict[str, Any], dict[str, Any], str, str]:
+    homepage_url = f"{deploy_url}{base_path or '/'}"
+    meta_url = f"{deploy_url}{base_path}/v0/meta.json"
+    inventory_url = f"{deploy_url}{base_path}/v0/repos/index.json"
+
+    homepage = http_get_text(with_query_param(homepage_url, "_smoke", cache_bust))
+    homepage_state = extract_homepage_snapshot_state(homepage, homepage_url)
+    meta = http_get_json(with_query_param(meta_url, "_smoke", cache_bust))
+    inventory = http_get_json(with_query_param(inventory_url, "_smoke", cache_bust))
+    return homepage, homepage_state, meta, inventory, homepage_url, inventory_url
+
+
 def main() -> int:
     args = parse_args()
     public_root = Path(args.public_root).resolve()
@@ -151,29 +189,38 @@ def main() -> int:
 
     deploy_url = args.deploy_url.rstrip("/")
     base_path = normalize_base_path(args.base_path)
-
-    homepage_url = f"{deploy_url}{base_path or '/'}"
-    homepage = http_get_text(homepage_url)
-    homepage_state = extract_homepage_snapshot_state(homepage, homepage_url)
-
+    deadline = time.monotonic() + max(args.settle_timeout_seconds, 0.0)
     meta_url = f"{deploy_url}{base_path}/v0/meta.json"
-    meta = http_get_json(meta_url)
-    if meta.get("apiVersion") != "v0":
-        raise SystemExit(f"unexpected apiVersion from {meta_url}: {meta.get('apiVersion')}")
-
     inventory_url = f"{deploy_url}{base_path}/v0/repos/index.json"
-    inventory = http_get_json(inventory_url)
-    expected_homepage_state = expected_homepage_snapshot_state(meta, inventory)
-    if homepage_state != expected_homepage_state:
-        raise SystemExit(
-            "deployed homepage snapshot state does not match live public JSON: "
-            f"expected {expected_homepage_state}, got {homepage_state}"
-        )
+
+    while True:
+        cache_bust = uuid.uuid4().hex
+        (
+            homepage,
+            homepage_state,
+            meta,
+            inventory,
+            homepage_url,
+            inventory_url,
+        ) = fetch_live_public_state(deploy_url, base_path, cache_bust)
+        if meta.get("apiVersion") != "v0":
+            raise SystemExit(f"unexpected apiVersion from {meta_url}: {meta.get('apiVersion')}")
+
+        expected_homepage_state = expected_homepage_snapshot_state(meta, inventory)
+        if homepage_state == expected_homepage_state:
+            break
+        if time.monotonic() >= deadline:
+            raise SystemExit(
+                "deployed homepage snapshot state does not match live public JSON after waiting "
+                f"{args.settle_timeout_seconds:g}s: expected {expected_homepage_state}, "
+                f"got {homepage_state}"
+            )
+        time.sleep(max(args.settle_interval_seconds, 0.0))
 
     query_url = (
         f"{deploy_url}{query_template.replace('{dot_path}', 'repo.description')}"
     )
-    query_response = http_get_json(query_url)
+    query_response = http_get_json(with_query_param(query_url, "_smoke", uuid.uuid4().hex))
     if query_response.get("path") != "repo.description":
         raise SystemExit("deployed queryTemplate smoke returned unexpected path")
     self_link = query_response.get("links", {}).get("self")
