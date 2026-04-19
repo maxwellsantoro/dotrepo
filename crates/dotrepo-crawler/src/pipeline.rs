@@ -515,6 +515,17 @@ mod tests {
     }
 
     impl GitHubClient for FakeGitHubClient {
+        fn fetch_repository_head(
+            &self,
+            _repository: &RepositoryRef,
+            _default_branch: Option<&str>,
+        ) -> Result<crate::github::RepositoryHeadSnapshot> {
+            Ok(crate::github::RepositoryHeadSnapshot {
+                default_branch: self.snapshot.default_branch.clone(),
+                head_sha: self.snapshot.head_sha.clone(),
+            })
+        }
+
         fn fetch_repository_snapshot(
             &self,
             _repository: &RepositoryRef,

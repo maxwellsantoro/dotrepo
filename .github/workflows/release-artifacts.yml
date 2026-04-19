@@ -21,9 +21,19 @@ jobs:
             artifact_name: dotrepo-binaries-macos
     runs-on: ${{ matrix.runner }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo artifacts
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - name: Build release binaries
         run: cargo build --release -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
       - name: Detect host target triple
@@ -38,7 +48,7 @@ jobs:
             --output-dir dist \
             --target "${{ steps.target.outputs.value }}"
       - name: Upload binary bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.artifact_name }}-${{ steps.target.outputs.value }}
           path: |
@@ -50,14 +60,22 @@ jobs:
   vscode-extension:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - name: Use preinstalled Node.js 20
+        run: bash scripts/use_runner_node20.sh
+      - name: Cache npm tarballs
+        uses: actions/cache@v5
         with:
-          node-version: "20"
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('editors/vscode/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - name: Install VS Code extension dependencies
         working-directory: editors/vscode
         run: npm ci
+      - name: Build bundled VS Code extension
+        working-directory: editors/vscode
+        run: npm run build
       - name: Detect VS Code extension version
         id: version
         run: |
@@ -65,13 +83,11 @@ jobs:
           echo "value=$version" >> "$GITHUB_OUTPUT"
       - name: Package VSIX
         working-directory: editors/vscode
-        env:
-          npm_config_cache: ${{ runner.temp }}/npm-cache
         run: |
           mkdir -p ../../dist
-          npx --yes @vscode/vsce package --out ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
+          npm run package:vsix -- --output ../../dist/dotrepo-vscode-v${{ steps.version.outputs.value }}.vsix
       - name: Upload VSIX artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dotrepo-vscode-vsix
           path: dist/*.vsix
@@ -86,7 +102,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download packaged artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: release-assets
       - name: Publish GitHub release assets

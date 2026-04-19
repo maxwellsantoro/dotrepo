@@ -1,10 +1,6 @@
 package-lock.json
 .gitignore
 .vscode/**
-dist/**
-node_modules/**/.github/**
-node_modules/**/docs/**
-node_modules/**/test/**
-node_modules/**/tests/**
-node_modules/**/example/**
-node_modules/**/examples/**
+*.tgz
+extension.js
+node_modules/**

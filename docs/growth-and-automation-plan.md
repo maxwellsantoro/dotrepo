@@ -79,6 +79,8 @@ to coding agents without requiring a clone:
 - Keep synthesis subordinate to factual crawl output and review.
 - Keep the public surface export-first and contract-stable.
 - Prefer small, reviewable automation batches over fully autonomous merging.
+- Prefer planning paths and workflow layouts whose cost scales with changed
+  repositories, not with the entire tracked index on every run.
 
 ## Workstreams
 
@@ -105,6 +107,9 @@ Acceptance criteria:
   freshness or repository count.
 - The same snapshot digest is mechanically verified across homepage, `meta`,
   inventory, summary, trust, and query responses.
+- Index-only and public-surface-only changes should be able to prove export and
+  hosted-query coherence without always rebuilding release bundles and VSIX
+  artifacts.
 
 ### Workstream B: Deliberate Index Growth
 
@@ -184,8 +189,10 @@ and is head-aware rather than discovery-only:
 - if that crawler-state file is absent or empty on CI, it reconstructs tracked
   refresh state from committed `index/repos/**` records and any checked-in
   `synthesis.toml` files
-- it fetches current GitHub default-branch heads for tracked repositories via
-  `dotrepo-crawler refresh-plan`
+- it reuses persisted default-branch metadata when available so
+  `dotrepo-crawler refresh-plan` can usually fetch just the current branch head
+  for each tracked repository, falling back to a wider repository lookup only
+  when branch metadata is missing or stale
 - it emits `refresh-plan.json` plus a reviewer-facing
   `refresh-plan.md`
 - it emits `refresh-batches.json` plus a reviewer-facing
@@ -199,7 +206,9 @@ Manual refresh execution now exists as a separate workflow in
 which regenerates one selected refresh batch, applies factual crawl writeback
 for those repositories, validates the index, and opens a draft PR. The review
 workflow can now also optionally open one top-batch draft PR when explicitly
-enabled. Broad scheduled refresh execution remains follow-on work.
+enabled. The seed, refresh, CI, deploy, and release workflows now also restore
+cached Cargo artifacts so the fixed runner cost of each batch stays low. Broad
+scheduled refresh execution remains follow-on work.
 
 ### State and reporting
 

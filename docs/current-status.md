@@ -69,12 +69,21 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 - Refresh planning now falls back to committed `index/repos/**` records and
   synthesis metadata when `index/.crawler-state.toml` is absent on GitHub,
   so CI can still compute tracked refresh batches
+- Refresh planning now reuses persisted default-branch metadata to fetch only
+  the current branch head for tracked repositories when possible, instead of
+  paying for full repository snapshot reads during scheduling
 - Manual selected-batch draft-PR workflows for both seed and refresh batches,
   so reviewers can take one batch artifact and turn it into a draft change set
   without rebuilding that glue locally
 - Optional guarded auto-draft-PR paths in the scheduled seed-review and
   refresh-review workflows, so one top batch can be turned into a draft PR when
   explicitly enabled by workflow input or repository variable
+- GitHub Actions now restore cached Cargo artifacts across CI, index-review,
+  batch-PR, deploy, and release workflows, and the high-churn index-review
+  artifacts now expire after 7 days instead of 14
+- CI now routes index- and public-surface-only changes through a lighter
+  public-surface gate, so routine overlay and export updates do not always pay
+  the full release-bundle and VSIX packaging path
 - A homepage lookup input and visible progress counters for reviewed repo count,
   tranche progress, language mix, and accepted maintainer-claim examples
 - A checked-in public API compatibility manifest and test for the current `v0`

@@ -29,6 +29,11 @@ const GITHUB_HTTP_TIMEOUT: Duration = Duration::from_secs(30);
 const GITHUB_HTTP_CONNECT_TIMEOUT: Duration = Duration::from_secs(10);
 
 pub(crate) trait GitHubClient {
+    fn fetch_repository_head(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: Option<&str>,
+    ) -> Result<RepositoryHeadSnapshot>;
     fn fetch_repository_snapshot(
         &self,
         repository: &RepositoryRef,
@@ -38,6 +43,12 @@ pub(crate) trait GitHubClient {
         repository: &RepositoryRef,
         default_branch: &str,
     ) -> Result<ConventionalRepositoryFiles>;
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct RepositoryHeadSnapshot {
+    pub default_branch: String,
+    pub head_sha: Option<String>,
 }
 
 pub(crate) trait GitHubDiscoveryClient {
@@ -75,11 +86,12 @@ fn refresh_candidates_from_state_with_client<C: GitHubClient>(
             ));
         }
 
-        let snapshot = client.fetch_repository_snapshot(&record.repository)?;
+        let head =
+            client.fetch_repository_head(&record.repository, record.default_branch.as_deref())?;
         candidates.push(RefreshCandidate {
             repository: record.repository.clone(),
-            default_branch: Some(snapshot.default_branch),
-            head_sha: snapshot.head_sha,
+            default_branch: Some(head.default_branch),
+            head_sha: head.head_sha,
         });
     }
 
@@ -334,6 +346,33 @@ fn build_http_client(headers: HeaderMap) -> Result<Client> {
 }
 
 impl GitHubClient for HttpGitHubClient {
+    fn fetch_repository_head(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: Option<&str>,
+    ) -> Result<RepositoryHeadSnapshot> {
+        if let Some(default_branch) = trim_optional(default_branch.map(str::to_string)) {
+            if let Some(branch) = self.get_optional_json::<BranchApiResponse>(
+                self.api_url(repository, &["branches", default_branch.as_str()])?,
+            )? {
+                return Ok(RepositoryHeadSnapshot {
+                    default_branch,
+                    head_sha: Some(branch.commit.sha),
+                });
+            }
+        }
+
+        let repo = self.get_json::<RepositoryApiResponse>(self.api_url(repository, &[])?)?;
+        let branch = self.get_json::<BranchApiResponse>(
+            self.api_url(repository, &["branches", repo.default_branch.as_str()])?,
+        )?;
+
+        Ok(RepositoryHeadSnapshot {
+            default_branch: repo.default_branch,
+            head_sha: Some(branch.commit.sha),
+        })
+    }
+
     fn fetch_repository_snapshot(
         &self,
         repository: &RepositoryRef,
@@ -649,25 +688,22 @@ mod tests {
     struct FakeGitHubClient;
 
     impl GitHubClient for FakeGitHubClient {
-        fn fetch_repository_snapshot(
+        fn fetch_repository_head(
             &self,
             repository: &RepositoryRef,
-        ) -> Result<GitHubRepositorySnapshot> {
-            Ok(GitHubRepositorySnapshot {
-                html_url: repository.source_url(),
-                clone_url: format!("{}.git", repository.source_url()),
+            _default_branch: Option<&str>,
+        ) -> Result<RepositoryHeadSnapshot> {
+            Ok(RepositoryHeadSnapshot {
                 default_branch: "main".into(),
                 head_sha: Some(format!("{}-sha", repository.repo)),
-                description: None,
-                homepage: None,
-                license: None,
-                languages: Vec::new(),
-                topics: Vec::new(),
-                visibility: None,
-                stars: None,
-                archived: false,
-                fork: false,
             })
+        }
+
+        fn fetch_repository_snapshot(
+            &self,
+            _repository: &RepositoryRef,
+        ) -> Result<GitHubRepositorySnapshot> {
+            unreachable!("refresh candidate planning should not fetch full repository snapshots")
         }
 
         fn fetch_repository_files(
@@ -680,7 +716,7 @@ mod tests {
     }
 
     #[test]
-    fn refresh_candidates_from_state_uses_repository_snapshots() {
+    fn refresh_candidates_from_state_uses_repository_heads() {
         let state = CrawlerStateSnapshot {
             repositories: vec![
                 crate::CrawlStateRecord {
