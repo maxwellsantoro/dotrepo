@@ -764,6 +764,170 @@ pub struct ImportPlan {
     pub evidence_text: Option<String>,
     pub imported_sources: Vec<String>,
     pub inferred_fields: Vec<String>,
+    pub command_candidates: ImportCommandCandidates,
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct ImportCommandCandidates {
+    pub candidates: Vec<CommandCandidateSummary>,
+    pub selected_build: Option<CommandCandidateSelection>,
+    pub selected_test: Option<CommandCandidateSelection>,
+}
+
+#[derive(Debug, Clone)]
+pub struct CommandCandidateSummary {
+    pub source_path: String,
+    pub source_tier: CommandSourceTier,
+    pub build: Option<String>,
+    pub test: Option<String>,
+}
+
+#[derive(Debug, Clone)]
+pub struct CommandCandidateSelection {
+    pub command: String,
+    pub source_path: String,
+    pub provenance: ImportedCommandProvenance,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum VerificationSeverity {
+    Pass,
+    Warning,
+    Failure,
+}
+
+#[derive(Debug, Clone)]
+pub struct VerificationCheck {
+    pub check_id: String,
+    pub field: String,
+    pub severity: VerificationSeverity,
+    pub message: String,
+}
+
+#[derive(Debug, Clone)]
+pub struct CandidateProvenance {
+    pub field: String,
+    pub source_path: String,
+    pub source_tier: CommandSourceTier,
+    pub value: Option<String>,
+}
+
+#[derive(Debug, Clone)]
+pub struct VerificationReport {
+    pub checks: Vec<VerificationCheck>,
+    pub candidate_provenance: Vec<CandidateProvenance>,
+    pub unresolved_fields: Vec<String>,
+    pub absent_fields: Vec<String>,
+    pub passed: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum FieldConfidence {
+    HighConfidencePresent,
+    MediumConfidencePresent,
+    HighConfidenceAbsent,
+    Unresolved,
+}
+
+#[derive(Debug, Clone)]
+pub struct FieldScore {
+    pub field: String,
+    pub confidence: FieldConfidence,
+    pub source: Option<String>,
+    pub value: Option<String>,
+    pub reason: String,
+}
+
+#[derive(Debug, Clone)]
+pub struct FieldScoreSummary {
+    pub high_confidence_present: Vec<String>,
+    pub medium_confidence_present: Vec<String>,
+    pub high_confidence_absent: Vec<String>,
+    pub unresolved: Vec<String>,
+    pub eligible_for_auto_publish: bool,
+}
+
+#[derive(Debug, Clone)]
+pub struct FieldScoreReport {
+    pub scores: Vec<FieldScore>,
+    pub summary: FieldScoreSummary,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AdjudicationCandidate {
+    pub value: String,
+    pub source_path: String,
+    pub source_tier: CommandSourceTier,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AdjudicationRequest {
+    pub field: String,
+    pub candidates: Vec<AdjudicationCandidate>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum AdjudicationModelConfidence {
+    High,
+    Medium,
+    Low,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AdjudicationModelResponse {
+    pub field: String,
+    pub value: Option<String>,
+    pub confidence: AdjudicationModelConfidence,
+    pub reason: String,
+    pub source: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct AdjudicationResult {
+    pub field: String,
+    pub outcome: AdjudicationOutcome,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum AdjudicationOutcome {
+    Resolved {
+        value: String,
+        confidence: FieldConfidence,
+        reason: String,
+    },
+    Absent {
+        reason: String,
+    },
+    Rejected {
+        model_value: String,
+        reason: String,
+    },
+}
+
+#[derive(Debug, Clone)]
+pub struct PromotionRecordScore {
+    pub path: String,
+    pub source_url: Option<String>,
+    pub status: Option<String>,
+    pub scores: Vec<FieldScore>,
+    pub eligible: bool,
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct PromotionSummary {
+    pub total_records: usize,
+    pub eligible_count: usize,
+    pub field_blocker_counts: std::collections::HashMap<String, usize>,
+}
+
+#[derive(Debug, Clone)]
+pub struct PromotionReport {
+    pub records: Vec<PromotionRecordScore>,
+    pub summary: PromotionSummary,
 }
 
 #[derive(Debug, Clone)]
@@ -2944,6 +3108,16 @@ pub fn import_repository_with_options(
     let workflow_files = load_workflow_import_files(root)?;
     let contributing =
         load_first_existing_file(root, &["CONTRIBUTING.md", ".github/CONTRIBUTING.md"])?;
+    let makefile = load_first_existing_file(root, &["GNUmakefile", "Makefile", "makefile"])?;
+    let justfile = load_first_existing_file(root, &["justfile", "Justfile"])?;
+    let security_issue_template = load_first_existing_file(
+        root,
+        &[
+            ".github/ISSUE_TEMPLATE/security.md",
+            ".github/ISSUE_TEMPLATE/SECURITY.md",
+            ".github/ISSUE_TEMPLATE/security.yml",
+        ],
+    )?;
     let pull_request_template = load_first_existing_file(
         root,
         &[
@@ -2966,19 +3140,56 @@ pub fn import_repository_with_options(
         .as_ref()
         .map(|file| parse_security_import_metadata(&file.contents))
         .unwrap_or_default();
+    let contributing_security = contributing
+        .as_ref()
+        .and_then(|file| parse_contributing_security(&file.contents));
+    let template_security = security_issue_template
+        .as_ref()
+        .and_then(|file| parse_issue_template_security(&file.contents));
+    let has_contributing_security = contributing_security.is_some();
+    let has_template_security = template_security.is_some();
+
     let security_contact = parsed_security
         .contact
         .clone()
-        .or_else(|| security.as_ref().map(|_| "unknown".into()));
+        .or(contributing_security)
+        .or(template_security)
+        .or_else(|| {
+            if security.is_some() {
+                Some("unknown".into())
+            } else {
+                None
+            }
+        });
     let security_note = if security.is_some() {
         if parsed_security.contact.is_some() {
             parsed_security.note.clone()
+        } else if has_contributing_security {
+            Some(
+                "SECURITY.md did not expose a direct mailbox or reporting URL. `security_contact` was extracted from CONTRIBUTING.md instead."
+                    .to_string(),
+            )
+        } else if has_template_security {
+            Some(
+                "SECURITY.md did not expose a direct mailbox or reporting URL. `security_contact` was extracted from an issue template instead."
+                    .to_string(),
+            )
         } else {
             Some(
                 "SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional."
                     .to_string(),
             )
         }
+    } else if has_contributing_security {
+        Some(
+            "`security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found)."
+                .to_string(),
+        )
+    } else if has_template_security {
+        Some(
+            "`security_contact` was extracted from an issue template (no SECURITY.md found)."
+                .to_string(),
+        )
     } else {
         None
     };
@@ -2987,6 +3198,9 @@ pub fn import_repository_with_options(
         package_json.as_ref(),
         pyproject_toml.as_ref(),
         go_mod.as_ref(),
+        makefile.as_ref(),
+        justfile.as_ref(),
+        contributing.as_ref(),
         &workflow_files,
     );
 
@@ -3062,6 +3276,16 @@ pub fn import_repository_with_options(
     if security_contact.is_some() {
         if let Some(file) = &security {
             note_import(&mut imported_sources, &file.path);
+        }
+        if has_contributing_security {
+            if let Some(file) = &contributing {
+                note_import(&mut imported_sources, &file.path);
+            }
+        }
+        if has_template_security {
+            if let Some(file) = &security_issue_template {
+                note_import(&mut imported_sources, &file.path);
+            }
         }
     }
     if let Some(command) = imported_commands.build.as_ref() {
@@ -3221,7 +3445,1124 @@ pub fn import_repository_with_options(
         evidence_text,
         imported_sources,
         inferred_fields,
+        command_candidates: ImportCommandCandidates {
+            candidates: imported_commands
+                .candidates
+                .iter()
+                .map(|c| CommandCandidateSummary {
+                    source_path: c.source_path.clone(),
+                    source_tier: c.source_tier,
+                    build: c.build.clone(),
+                    test: c.test.clone(),
+                })
+                .collect(),
+            selected_build: imported_commands
+                .build
+                .as_ref()
+                .map(|s| CommandCandidateSelection {
+                    command: s.command.clone(),
+                    source_path: s.source_path.clone(),
+                    provenance: s.provenance.clone(),
+                }),
+            selected_test: imported_commands
+                .test
+                .as_ref()
+                .map(|s| CommandCandidateSelection {
+                    command: s.command.clone(),
+                    source_path: s.source_path.clone(),
+                    provenance: s.provenance.clone(),
+                }),
+        },
     })
+}
+
+pub fn verify_import_plan(root: &Path, plan: &ImportPlan, source_url: &str) -> VerificationReport {
+    let mut checks = Vec::new();
+    let mut candidate_provenance = Vec::new();
+    let mut unresolved_fields = Vec::new();
+    let mut absent_fields = Vec::new();
+
+    // Identity consistency: source URL matches record.source
+    if let Some(ref source) = plan.manifest.record.source {
+        if source != source_url {
+            checks.push(VerificationCheck {
+                check_id: "identity/source-mismatch".into(),
+                field: "record.source".into(),
+                severity: VerificationSeverity::Failure,
+                message: format!(
+                    "record.source ({}) does not match crawl source ({})",
+                    source, source_url
+                ),
+            });
+        } else {
+            checks.push(VerificationCheck {
+                check_id: "identity/source-match".into(),
+                field: "record.source".into(),
+                severity: VerificationSeverity::Pass,
+                message: "record.source matches crawl source".into(),
+            });
+        }
+    }
+
+    // Source-file existence: imported_sources paths exist under root
+    for source_path in &plan.imported_sources {
+        let full_path = root.join(source_path);
+        if !full_path.exists() {
+            checks.push(VerificationCheck {
+                check_id: format!("source-exists/{}", source_path),
+                field: "imported_sources".into(),
+                severity: VerificationSeverity::Failure,
+                message: format!("imported source file does not exist: {}", source_path),
+            });
+        }
+    }
+
+    // Candidate provenance for build/test
+    for candidate in &plan.command_candidates.candidates {
+        candidate_provenance.push(CandidateProvenance {
+            field: "repo.build".into(),
+            source_path: candidate.source_path.clone(),
+            source_tier: candidate.source_tier,
+            value: candidate.build.clone(),
+        });
+        candidate_provenance.push(CandidateProvenance {
+            field: "repo.test".into(),
+            source_path: candidate.source_path.clone(),
+            source_tier: candidate.source_tier,
+            value: candidate.test.clone(),
+        });
+    }
+
+    // Field completeness: check build/test resolution
+    if plan.manifest.repo.build.is_none() {
+        let has_candidates = plan
+            .command_candidates
+            .candidates
+            .iter()
+            .any(|c| c.build.is_some());
+        if has_candidates {
+            unresolved_fields.push("repo.build".into());
+        } else {
+            absent_fields.push("repo.build".into());
+        }
+    }
+    if plan.manifest.repo.test.is_none() {
+        let has_candidates = plan
+            .command_candidates
+            .candidates
+            .iter()
+            .any(|c| c.test.is_some());
+        if has_candidates {
+            unresolved_fields.push("repo.test".into());
+        } else {
+            absent_fields.push("repo.test".into());
+        }
+    }
+
+    // URL quality checks
+    if let Some(ref homepage) = plan.manifest.repo.homepage {
+        if !is_quality_url(homepage) {
+            checks.push(VerificationCheck {
+                check_id: "url-quality/homepage".into(),
+                field: "repo.homepage".into(),
+                severity: VerificationSeverity::Warning,
+                message: format!("homepage URL failed quality check: {}", homepage),
+            });
+        }
+    }
+    if let Some(ref docs) = &plan.manifest.docs {
+        if let Some(ref root) = docs.root {
+            if !is_quality_url(root) {
+                checks.push(VerificationCheck {
+                    check_id: "url-quality/docs.root".into(),
+                    field: "docs.root".into(),
+                    severity: VerificationSeverity::Warning,
+                    message: format!("docs.root URL failed quality check: {}", root),
+                });
+            }
+        }
+        if let Some(ref gs) = docs.getting_started {
+            if !is_quality_url(gs) {
+                checks.push(VerificationCheck {
+                    check_id: "url-quality/docs.getting_started".into(),
+                    field: "docs.getting_started".into(),
+                    severity: VerificationSeverity::Warning,
+                    message: format!("docs.getting_started URL failed quality check: {}", gs),
+                });
+            }
+        }
+    }
+
+    let passed = checks
+        .iter()
+        .all(|c| c.severity != VerificationSeverity::Failure);
+
+    VerificationReport {
+        checks,
+        candidate_provenance,
+        unresolved_fields,
+        absent_fields,
+        passed,
+    }
+}
+
+pub fn score_import_fields(
+    plan: &ImportPlan,
+    verification: &VerificationReport,
+) -> FieldScoreReport {
+    let mut scores = Vec::new();
+
+    // repo.name
+    let name_has_readme_source = plan
+        .imported_sources
+        .iter()
+        .any(|s| s.eq_ignore_ascii_case("readme.md"));
+    scores.push(FieldScore {
+        field: "repo.name".into(),
+        confidence: if name_has_readme_source {
+            FieldConfidence::HighConfidencePresent
+        } else {
+            FieldConfidence::MediumConfidencePresent
+        },
+        source: plan.imported_sources.first().cloned(),
+        value: Some(plan.manifest.repo.name.clone()),
+        reason: if name_has_readme_source {
+            "extracted from README heading with post-cleaners".into()
+        } else {
+            "fell back to directory name or GitHub API".into()
+        },
+    });
+
+    // repo.description
+    scores.push(FieldScore {
+        field: "repo.description".into(),
+        confidence: if name_has_readme_source {
+            FieldConfidence::HighConfidencePresent
+        } else {
+            FieldConfidence::MediumConfidencePresent
+        },
+        source: plan.imported_sources.first().cloned(),
+        value: Some(plan.manifest.repo.description.clone()),
+        reason: if name_has_readme_source {
+            "extracted from README paragraph with post-cleaners".into()
+        } else {
+            "fell back to GitHub API or inferred".into()
+        },
+    });
+
+    // repo.homepage
+    if let Some(ref homepage) = plan.manifest.repo.homepage {
+        scores.push(FieldScore {
+            field: "repo.homepage".into(),
+            confidence: if is_quality_url(homepage) {
+                FieldConfidence::HighConfidencePresent
+            } else {
+                FieldConfidence::MediumConfidencePresent
+            },
+            source: None,
+            value: Some(homepage.clone()),
+            reason: "set and passes quality check".into(),
+        });
+    } else {
+        scores.push(FieldScore {
+            field: "repo.homepage".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no homepage detected".into(),
+        });
+    }
+
+    // repo.build
+    let build_unresolved = verification
+        .unresolved_fields
+        .contains(&"repo.build".to_string());
+    let build_absent = verification
+        .absent_fields
+        .contains(&"repo.build".to_string());
+    if let Some(ref build) = plan.manifest.repo.build {
+        let is_manifest = plan
+            .command_candidates
+            .selected_build
+            .as_ref()
+            .map(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            .unwrap_or(false);
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: if is_manifest {
+                FieldConfidence::HighConfidencePresent
+            } else {
+                FieldConfidence::MediumConfidencePresent
+            },
+            source: plan
+                .command_candidates
+                .selected_build
+                .as_ref()
+                .map(|s| s.source_path.clone()),
+            value: Some(build.clone()),
+            reason: if is_manifest {
+                "from manifest source".into()
+            } else {
+                "from workflow fallback".into()
+            },
+        });
+    } else if build_unresolved {
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: FieldConfidence::Unresolved,
+            source: None,
+            value: None,
+            reason: "conflicting candidates, no clear winner".into(),
+        });
+    } else if build_absent {
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no build command sources found".into(),
+        });
+    }
+
+    // repo.test
+    let test_unresolved = verification
+        .unresolved_fields
+        .contains(&"repo.test".to_string());
+    let test_absent = verification
+        .absent_fields
+        .contains(&"repo.test".to_string());
+    if let Some(ref test) = plan.manifest.repo.test {
+        let is_manifest = plan
+            .command_candidates
+            .selected_test
+            .as_ref()
+            .map(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            .unwrap_or(false);
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: if is_manifest {
+                FieldConfidence::HighConfidencePresent
+            } else {
+                FieldConfidence::MediumConfidencePresent
+            },
+            source: plan
+                .command_candidates
+                .selected_test
+                .as_ref()
+                .map(|s| s.source_path.clone()),
+            value: Some(test.clone()),
+            reason: if is_manifest {
+                "from manifest source".into()
+            } else {
+                "from workflow fallback".into()
+            },
+        });
+    } else if test_unresolved {
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: FieldConfidence::Unresolved,
+            source: None,
+            value: None,
+            reason: "conflicting candidates, no clear winner".into(),
+        });
+    } else if test_absent {
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no test command sources found".into(),
+        });
+    }
+
+    // owners.security_contact
+    let owners = plan.manifest.owners.as_ref();
+    let security = owners.and_then(|o| o.security_contact.as_deref());
+    if let Some(contact) = security {
+        if contact == "unknown" {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidenceAbsent,
+                source: None,
+                value: Some(contact.into()),
+                reason: "explicitly unknown".into(),
+            });
+        } else if contact.contains('@') {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidencePresent,
+                source: plan.imported_sources.first().cloned(),
+                value: Some(contact.into()),
+                reason: "direct email or mailing list".into(),
+            });
+        } else if is_actionable_security_url(contact) {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidencePresent,
+                source: plan.imported_sources.first().cloned(),
+                value: Some(contact.into()),
+                reason: "actionable security reporting URL".into(),
+            });
+        } else {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::MediumConfidencePresent,
+                source: plan.imported_sources.first().cloned(),
+                value: Some(contact.into()),
+                reason: "policy URL or non-email contact".into(),
+            });
+        }
+    } else {
+        scores.push(FieldScore {
+            field: "owners.security_contact".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no SECURITY.md or security contact sources found".into(),
+        });
+    }
+
+    // owners.team
+    let team = owners.and_then(|o| o.team.as_deref());
+    if let Some(team_val) = team {
+        scores.push(FieldScore {
+            field: "owners.team".into(),
+            confidence: FieldConfidence::HighConfidencePresent,
+            source: plan
+                .imported_sources
+                .iter()
+                .find(|s| s.eq_ignore_ascii_case("codeowners"))
+                .cloned(),
+            value: Some(team_val.into()),
+            reason: "clear CODEOWNERS team".into(),
+        });
+    } else {
+        scores.push(FieldScore {
+            field: "owners.team".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no single clear team in CODEOWNERS".into(),
+        });
+    }
+
+    // docs.root
+    if let Some(ref docs) = &plan.manifest.docs {
+        if let Some(ref root) = docs.root {
+            scores.push(FieldScore {
+                field: "docs.root".into(),
+                confidence: if is_quality_url(root) {
+                    FieldConfidence::HighConfidencePresent
+                } else {
+                    FieldConfidence::MediumConfidencePresent
+                },
+                source: None,
+                value: Some(root.clone()),
+                reason: "docs URL present".into(),
+            });
+        } else {
+            scores.push(FieldScore {
+                field: "docs.root".into(),
+                confidence: FieldConfidence::HighConfidenceAbsent,
+                source: None,
+                value: None,
+                reason: "no docs site detected".into(),
+            });
+        }
+    } else {
+        scores.push(FieldScore {
+            field: "docs.root".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no docs detected".into(),
+        });
+    }
+
+    // docs.getting_started
+    if let Some(ref docs) = &plan.manifest.docs {
+        if let Some(ref gs) = docs.getting_started {
+            scores.push(FieldScore {
+                field: "docs.getting_started".into(),
+                confidence: if is_quality_url(gs) {
+                    FieldConfidence::HighConfidencePresent
+                } else {
+                    FieldConfidence::MediumConfidencePresent
+                },
+                source: None,
+                value: Some(gs.clone()),
+                reason: "getting started URL present".into(),
+            });
+        } else {
+            scores.push(FieldScore {
+                field: "docs.getting_started".into(),
+                confidence: FieldConfidence::HighConfidenceAbsent,
+                source: None,
+                value: None,
+                reason: "no getting started link detected".into(),
+            });
+        }
+    } else {
+        scores.push(FieldScore {
+            field: "docs.getting_started".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no docs detected".into(),
+        });
+    }
+
+    let high_confidence_present: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::HighConfidencePresent)
+        .map(|s| s.field.clone())
+        .collect();
+    let medium_confidence_present: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::MediumConfidencePresent)
+        .map(|s| s.field.clone())
+        .collect();
+    let high_confidence_absent: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::HighConfidenceAbsent)
+        .map(|s| s.field.clone())
+        .collect();
+    let unresolved: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::Unresolved)
+        .map(|s| s.field.clone())
+        .collect();
+
+    let eligible_for_auto_publish = unresolved.is_empty() && medium_confidence_present.is_empty();
+
+    FieldScoreReport {
+        scores,
+        summary: FieldScoreSummary {
+            high_confidence_present,
+            medium_confidence_present,
+            high_confidence_absent,
+            unresolved,
+            eligible_for_auto_publish,
+        },
+    }
+}
+
+pub fn build_adjudication_requests(
+    report: &FieldScoreReport,
+    plan: &ImportPlan,
+) -> Vec<AdjudicationRequest> {
+    let unresolved_fields: Vec<&str> = report
+        .scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::Unresolved)
+        .map(|s| s.field.as_str())
+        .collect();
+
+    if unresolved_fields.is_empty() {
+        return Vec::new();
+    }
+
+    let mut requests = Vec::new();
+
+    for field in &unresolved_fields {
+        let is_build = *field == "repo.build";
+        let is_test = *field == "repo.test";
+
+        if !is_build && !is_test {
+            continue;
+        }
+
+        let mut candidates = Vec::new();
+        for candidate in &plan.command_candidates.candidates {
+            let value = if is_build {
+                candidate.build.as_ref()
+            } else {
+                candidate.test.as_ref()
+            };
+            if let Some(value) = value {
+                candidates.push(AdjudicationCandidate {
+                    value: value.clone(),
+                    source_path: candidate.source_path.clone(),
+                    source_tier: candidate.source_tier,
+                });
+            }
+        }
+
+        if !candidates.is_empty() {
+            requests.push(AdjudicationRequest {
+                field: field.to_string(),
+                candidates,
+            });
+        }
+    }
+
+    requests
+}
+
+pub fn apply_adjudication_response(
+    response: &AdjudicationModelResponse,
+    request: &AdjudicationRequest,
+) -> AdjudicationResult {
+    let candidate_values: Vec<&str> = request
+        .candidates
+        .iter()
+        .map(|c| c.value.as_str())
+        .collect();
+
+    match &response.value {
+        Some(value) => {
+            if candidate_values.iter().any(|c| *c == value) {
+                AdjudicationResult {
+                    field: response.field.clone(),
+                    outcome: AdjudicationOutcome::Resolved {
+                        value: value.clone(),
+                        confidence: FieldConfidence::MediumConfidencePresent,
+                        reason: response.reason.clone(),
+                    },
+                }
+            } else {
+                AdjudicationResult {
+                    field: response.field.clone(),
+                    outcome: AdjudicationOutcome::Rejected {
+                        model_value: value.clone(),
+                        reason: format!(
+                            "model proposed value not in candidate set: {:?}",
+                            candidate_values
+                        ),
+                    },
+                }
+            }
+        }
+        None => AdjudicationResult {
+            field: response.field.clone(),
+            outcome: AdjudicationOutcome::Absent {
+                reason: response.reason.clone(),
+            },
+        },
+    }
+}
+
+pub fn apply_adjudication_results(report: &mut FieldScoreReport, results: &[AdjudicationResult]) {
+    for result in results {
+        let Some(score) = report.scores.iter_mut().find(|s| s.field == result.field) else {
+            continue;
+        };
+        match &result.outcome {
+            AdjudicationOutcome::Resolved {
+                value,
+                confidence,
+                reason,
+            } => {
+                score.confidence = confidence.clone();
+                score.value = Some(value.clone());
+                score.reason = format!("adjudicated: {}", reason);
+            }
+            AdjudicationOutcome::Absent { reason } => {
+                score.confidence = FieldConfidence::HighConfidenceAbsent;
+                score.value = None;
+                score.reason = format!("adjudicated absent: {}", reason);
+            }
+            AdjudicationOutcome::Rejected { .. } => {
+                // Leave as unresolved — model couldn't help
+            }
+        }
+    }
+
+    // Recompute summary
+    let mut high_confidence_present = Vec::new();
+    let mut medium_confidence_present = Vec::new();
+    let mut high_confidence_absent = Vec::new();
+    let mut unresolved = Vec::new();
+    for score in &report.scores {
+        match score.confidence {
+            FieldConfidence::HighConfidencePresent => {
+                high_confidence_present.push(score.field.clone())
+            }
+            FieldConfidence::MediumConfidencePresent => {
+                medium_confidence_present.push(score.field.clone())
+            }
+            FieldConfidence::HighConfidenceAbsent => {
+                high_confidence_absent.push(score.field.clone())
+            }
+            FieldConfidence::Unresolved => unresolved.push(score.field.clone()),
+        }
+    }
+    report.summary.high_confidence_present = high_confidence_present;
+    report.summary.medium_confidence_present = medium_confidence_present;
+    report.summary.high_confidence_absent = high_confidence_absent;
+    report.summary.unresolved = unresolved;
+    report.summary.eligible_for_auto_publish =
+        report.summary.unresolved.is_empty() && report.summary.medium_confidence_present.is_empty();
+}
+
+#[derive(Debug, Clone)]
+pub struct PromotionOutcome {
+    pub promoted: bool,
+    pub previous_status: String,
+    pub reason: String,
+}
+
+pub fn promote_to_verified(manifest: &mut Manifest, report: &FieldScoreReport) -> PromotionOutcome {
+    let previous_status = match manifest.record.status {
+        RecordStatus::Draft => "draft",
+        RecordStatus::Imported => "imported",
+        RecordStatus::Inferred => "inferred",
+        RecordStatus::Reviewed => "reviewed",
+        RecordStatus::Verified => "verified",
+        RecordStatus::Canonical => "canonical",
+    }
+    .to_string();
+
+    // Never downgrade from reviewed or canonical
+    if matches!(
+        manifest.record.status,
+        RecordStatus::Reviewed | RecordStatus::Canonical
+    ) {
+        return PromotionOutcome {
+            promoted: false,
+            previous_status,
+            reason: "record already at reviewed or canonical; will not downgrade".to_string(),
+        };
+    }
+
+    if !report.summary.eligible_for_auto_publish {
+        return PromotionOutcome {
+            promoted: false,
+            previous_status,
+            reason: format!(
+                "not all fields are honestly resolved: {} unresolved, {} medium-confidence",
+                report.summary.unresolved.len(),
+                report.summary.medium_confidence_present.len(),
+            ),
+        };
+    }
+
+    manifest.record.status = RecordStatus::Verified;
+
+    // Update trust provenance and confidence
+    if let Some(ref mut trust) = manifest.record.trust {
+        trust.confidence = Some("high".into());
+        if !trust.provenance.contains(&"verified".to_string()) {
+            trust.provenance.push("verified".into());
+        }
+        let existing_notes = trust.notes.take().unwrap_or_default();
+        trust.notes = Some(if existing_notes.is_empty() {
+            "Auto-promoted to verified: all fields are honestly resolved.".to_string()
+        } else {
+            format!(
+                "{} Auto-promoted to verified: all fields are honestly resolved.",
+                existing_notes
+            )
+        });
+    }
+
+    PromotionOutcome {
+        promoted: true,
+        previous_status,
+        reason: "all fields are high-confidence present or high-confidence absent".to_string(),
+    }
+}
+
+pub fn score_index_record_for_promotion(manifest: &Manifest) -> Vec<FieldScore> {
+    let mut scores = Vec::new();
+    let notes = manifest
+        .record
+        .trust
+        .as_ref()
+        .and_then(|t| t.notes.as_deref())
+        .unwrap_or("");
+    let provenance = manifest
+        .record
+        .trust
+        .as_ref()
+        .map(|t| t.provenance.clone())
+        .unwrap_or_default();
+
+    // repo.name — always high confidence if present (post-cleaners guarantee)
+    scores.push(FieldScore {
+        field: "repo.name".into(),
+        confidence: if manifest.repo.name.is_empty() {
+            FieldConfidence::Unresolved
+        } else {
+            FieldConfidence::HighConfidencePresent
+        },
+        source: None,
+        value: if manifest.repo.name.is_empty() {
+            None
+        } else {
+            Some(manifest.repo.name.clone())
+        },
+        reason: if manifest.repo.name.is_empty() {
+            "name not set".into()
+        } else {
+            "post-cleaners guarantee quality".into()
+        },
+    });
+
+    // repo.description — high confidence if present
+    scores.push(FieldScore {
+        field: "repo.description".into(),
+        confidence: if manifest.repo.description.is_empty() {
+            FieldConfidence::Unresolved
+        } else {
+            FieldConfidence::HighConfidencePresent
+        },
+        source: None,
+        value: if manifest.repo.description.is_empty() {
+            None
+        } else {
+            Some(manifest.repo.description.clone())
+        },
+        reason: if manifest.repo.description.is_empty() {
+            "description not set".into()
+        } else {
+            "post-cleaners guarantee quality".into()
+        },
+    });
+
+    // repo.homepage
+    if let Some(ref homepage) = manifest.repo.homepage {
+        let is_github_url = homepage.contains("github.com");
+        scores.push(FieldScore {
+            field: "repo.homepage".into(),
+            confidence: if is_quality_url(homepage) {
+                FieldConfidence::HighConfidencePresent
+            } else {
+                FieldConfidence::MediumConfidencePresent
+            },
+            source: None,
+            value: Some(homepage.clone()),
+            reason: if is_github_url {
+                "GitHub repo URL, no dedicated site found".into()
+            } else {
+                "quality URL".into()
+            },
+        });
+    } else {
+        scores.push(FieldScore {
+            field: "repo.homepage".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no homepage".into(),
+        });
+    }
+
+    // repo.build — trust notes reveal source and conflicts
+    let build_conflict = notes.contains("repo.build") && notes.contains("conflicting");
+    let build_imported = notes.contains("Imported `repo.build`");
+    let build_inferred = provenance.iter().any(|p| p == "inferred")
+        && manifest.repo.build.is_some()
+        && !build_imported;
+    if let Some(ref build) = manifest.repo.build {
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: if build_imported {
+                FieldConfidence::HighConfidencePresent
+            } else if build_inferred {
+                FieldConfidence::MediumConfidencePresent
+            } else {
+                FieldConfidence::HighConfidencePresent
+            },
+            source: None,
+            value: Some(build.clone()),
+            reason: if build_imported {
+                "from manifest source".into()
+            } else if build_inferred {
+                "from workflow or inferred fallback".into()
+            } else {
+                "present, source not specified in notes".into()
+            },
+        });
+    } else if build_conflict {
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: FieldConfidence::Unresolved,
+            source: None,
+            value: None,
+            reason: "conflicting candidates noted in trust record".into(),
+        });
+    } else {
+        scores.push(FieldScore {
+            field: "repo.build".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no build command sources".into(),
+        });
+    }
+
+    // repo.test — same logic as build
+    let test_conflict = notes.contains("repo.test") && notes.contains("conflicting");
+    let test_imported = notes.contains("Imported `repo.test`");
+    let test_inferred = provenance.iter().any(|p| p == "inferred")
+        && manifest.repo.test.is_some()
+        && !test_imported;
+    if let Some(ref test) = manifest.repo.test {
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: if test_imported {
+                FieldConfidence::HighConfidencePresent
+            } else if test_inferred {
+                FieldConfidence::MediumConfidencePresent
+            } else {
+                FieldConfidence::HighConfidencePresent
+            },
+            source: None,
+            value: Some(test.clone()),
+            reason: if test_imported {
+                "from manifest source".into()
+            } else if test_inferred {
+                "from workflow or inferred fallback".into()
+            } else {
+                "present, source not specified in notes".into()
+            },
+        });
+    } else if test_conflict {
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: FieldConfidence::Unresolved,
+            source: None,
+            value: None,
+            reason: "conflicting candidates noted in trust record".into(),
+        });
+    } else {
+        scores.push(FieldScore {
+            field: "repo.test".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no test command sources".into(),
+        });
+    }
+
+    // owners.security_contact
+    let owners = manifest.owners.as_ref();
+    let security = owners.and_then(|o| o.security_contact.as_deref());
+    if let Some(contact) = security {
+        if contact == "unknown" {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidenceAbsent,
+                source: None,
+                value: Some(contact.into()),
+                reason: "explicitly unknown".into(),
+            });
+        } else if contact.contains('@') {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidencePresent,
+                source: None,
+                value: Some(contact.into()),
+                reason: "direct email or mailing list".into(),
+            });
+        } else if is_actionable_security_url(contact) {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::HighConfidencePresent,
+                source: None,
+                value: Some(contact.into()),
+                reason: "actionable security reporting URL".into(),
+            });
+        } else {
+            scores.push(FieldScore {
+                field: "owners.security_contact".into(),
+                confidence: FieldConfidence::MediumConfidencePresent,
+                source: None,
+                value: Some(contact.into()),
+                reason: "policy URL or non-email contact".into(),
+            });
+        }
+    } else {
+        scores.push(FieldScore {
+            field: "owners.security_contact".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no security contact sources found".into(),
+        });
+    }
+
+    // owners.team
+    let team = owners.and_then(|o| o.team.as_deref());
+    scores.push(FieldScore {
+        field: "owners.team".into(),
+        confidence: if team.is_some() {
+            FieldConfidence::HighConfidencePresent
+        } else {
+            FieldConfidence::HighConfidenceAbsent
+        },
+        source: None,
+        value: team.map(|t| t.to_string()),
+        reason: if team.is_some() {
+            "clear CODEOWNERS team".into()
+        } else {
+            "no single clear team".into()
+        },
+    });
+
+    // docs.root
+    if let Some(ref docs) = &manifest.docs {
+        if let Some(ref root) = docs.root {
+            scores.push(FieldScore {
+                field: "docs.root".into(),
+                confidence: if is_quality_url(root) {
+                    FieldConfidence::HighConfidencePresent
+                } else {
+                    FieldConfidence::MediumConfidencePresent
+                },
+                source: None,
+                value: Some(root.clone()),
+                reason: "docs URL present".into(),
+            });
+        } else {
+            scores.push(FieldScore {
+                field: "docs.root".into(),
+                confidence: FieldConfidence::HighConfidenceAbsent,
+                source: None,
+                value: None,
+                reason: "no docs site".into(),
+            });
+        }
+    } else {
+        scores.push(FieldScore {
+            field: "docs.root".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no docs detected".into(),
+        });
+    }
+
+    // docs.getting_started
+    if let Some(ref docs) = &manifest.docs {
+        if let Some(ref gs) = docs.getting_started {
+            scores.push(FieldScore {
+                field: "docs.getting_started".into(),
+                confidence: if is_quality_url(gs) {
+                    FieldConfidence::HighConfidencePresent
+                } else {
+                    FieldConfidence::MediumConfidencePresent
+                },
+                source: None,
+                value: Some(gs.clone()),
+                reason: "getting started URL present".into(),
+            });
+        } else {
+            scores.push(FieldScore {
+                field: "docs.getting_started".into(),
+                confidence: FieldConfidence::HighConfidenceAbsent,
+                source: None,
+                value: None,
+                reason: "no getting started link".into(),
+            });
+        }
+    } else {
+        scores.push(FieldScore {
+            field: "docs.getting_started".into(),
+            confidence: FieldConfidence::HighConfidenceAbsent,
+            source: None,
+            value: None,
+            reason: "no docs detected".into(),
+        });
+    }
+
+    scores
+}
+
+pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
+    let repos_dir = index_root.join("repos");
+    if !repos_dir.exists() {
+        bail!("index repos directory not found: {}", repos_dir.display());
+    }
+
+    let mut records: Vec<PromotionRecordScore> = Vec::new();
+    let mut record_paths = Vec::new();
+    collect_record_paths(&repos_dir, &mut record_paths);
+
+    for path in record_paths {
+        let relative = path
+            .strip_prefix(&repos_dir)
+            .unwrap_or(&path)
+            .to_string_lossy()
+            .to_string();
+
+        let contents = match fs::read_to_string(&path) {
+            Ok(c) => c,
+            Err(_) => continue,
+        };
+        let manifest: Manifest = match toml::from_str(&contents) {
+            Ok(m) => m,
+            Err(_) => continue,
+        };
+
+        let scores = score_index_record_for_promotion(&manifest);
+        let eligible = scores.iter().all(|s| {
+            s.confidence == FieldConfidence::HighConfidencePresent
+                || s.confidence == FieldConfidence::HighConfidenceAbsent
+        });
+
+        let status_str = match manifest.record.status {
+            dotrepo_schema::RecordStatus::Draft => "draft".to_string(),
+            dotrepo_schema::RecordStatus::Imported => "imported".to_string(),
+            dotrepo_schema::RecordStatus::Inferred => "inferred".to_string(),
+            dotrepo_schema::RecordStatus::Reviewed => "reviewed".to_string(),
+            dotrepo_schema::RecordStatus::Verified => "verified".to_string(),
+            dotrepo_schema::RecordStatus::Canonical => "canonical".to_string(),
+        };
+
+        records.push(PromotionRecordScore {
+            path: relative,
+            source_url: manifest.record.source.clone(),
+            status: Some(status_str),
+            scores,
+            eligible,
+        });
+    }
+
+    records.sort_by(|a, b| a.path.cmp(&b.path));
+
+    let mut field_blocker_counts = std::collections::HashMap::new();
+    for record in &records {
+        if !record.eligible {
+            for score in &record.scores {
+                if score.confidence == FieldConfidence::Unresolved
+                    || score.confidence == FieldConfidence::MediumConfidencePresent
+                {
+                    *field_blocker_counts.entry(score.field.clone()).or_insert(0) += 1;
+                }
+            }
+        }
+    }
+
+    let eligible_count = records.iter().filter(|r| r.eligible).count();
+    let total_records = records.len();
+
+    Ok(PromotionReport {
+        records,
+        summary: PromotionSummary {
+            total_records,
+            eligible_count,
+            field_blocker_counts,
+        },
+    })
+}
+
+fn collect_record_paths(dir: &Path, out: &mut Vec<PathBuf>) {
+    if let Ok(entries) = fs::read_dir(dir) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.is_dir() {
+                collect_record_paths(&path, out);
+            } else if path
+                .file_name()
+                .map(|n| n == "record.toml")
+                .unwrap_or(false)
+            {
+                out.push(path);
+            }
+        }
+    }
 }
 
 pub fn validate_manifest(root: &Path, manifest: &Manifest) -> Result<()> {
@@ -3408,13 +4749,14 @@ struct SecurityImportMetadata {
 struct ImportedCommandMetadata {
     build: Option<ImportedCommandSelection>,
     test: Option<ImportedCommandSelection>,
+    candidates: Vec<ImportedCommandCandidate>,
     inferred_fields: Vec<String>,
     notes: Vec<String>,
     evidence_bullets: Vec<String>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-enum ImportedCommandProvenance {
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum ImportedCommandProvenance {
     Imported,
     Inferred,
 }
@@ -3426,9 +4768,19 @@ struct ImportedCommandSelection {
     provenance: ImportedCommandProvenance,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum CommandSourceTier {
+    Workflow,
+    TaskScript,
+    ContribDoc,
+    Manifest,
+}
+
 #[derive(Debug, Clone)]
 struct ImportedCommandCandidate {
     source_path: String,
+    source_tier: CommandSourceTier,
     build: Option<String>,
     test: Option<String>,
 }
@@ -3491,30 +4843,42 @@ fn infer_imported_commands(
     package_json: Option<&ImportedFile>,
     pyproject_toml: Option<&ImportedFile>,
     go_mod: Option<&ImportedFile>,
+    makefile: Option<&ImportedFile>,
+    justfile: Option<&ImportedFile>,
+    contributing: Option<&ImportedFile>,
     workflow_files: &[ImportedFile],
 ) -> ImportedCommandMetadata {
-    let mut manifest_candidates = Vec::new();
+    let mut candidates = Vec::new();
+    // Manifest tier
     if let Some(candidate) = cargo_toml.and_then(infer_cargo_manifest_commands) {
-        manifest_candidates.push(candidate);
+        candidates.push(candidate);
     }
     if let Some(candidate) = package_json.and_then(infer_package_json_commands) {
-        manifest_candidates.push(candidate);
+        candidates.push(candidate);
     }
     if let Some(candidate) = pyproject_toml.and_then(infer_pyproject_commands) {
-        manifest_candidates.push(candidate);
+        candidates.push(candidate);
     }
     if let Some(candidate) = go_mod.and_then(infer_go_module_commands) {
-        manifest_candidates.push(candidate);
+        candidates.push(candidate);
     }
-    let workflow_candidates = workflow_files
-        .iter()
-        .filter_map(infer_workflow_commands)
-        .collect::<Vec<_>>();
+    // ContribDoc tier
+    if let Some(candidate) = contributing.and_then(infer_contributing_commands) {
+        candidates.push(candidate);
+    }
+    // TaskScript tier
+    if let Some(candidate) = makefile.and_then(infer_makefile_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = justfile.and_then(infer_justfile_commands) {
+        candidates.push(candidate);
+    }
+    // Workflow tier
+    candidates.extend(workflow_files.iter().filter_map(infer_workflow_commands));
 
     let mut metadata = ImportedCommandMetadata::default();
     metadata.build = resolve_command_field(
-        &manifest_candidates,
-        &workflow_candidates,
+        &candidates,
         "repo.build",
         true,
         &mut metadata.notes,
@@ -3522,14 +4886,14 @@ fn infer_imported_commands(
         &mut metadata.inferred_fields,
     );
     metadata.test = resolve_command_field(
-        &manifest_candidates,
-        &workflow_candidates,
+        &candidates,
         "repo.test",
         false,
         &mut metadata.notes,
         &mut metadata.evidence_bullets,
         &mut metadata.inferred_fields,
     );
+    metadata.candidates = candidates;
     metadata
 }
 
@@ -3555,6 +4919,7 @@ fn infer_cargo_manifest_commands(file: &ImportedFile) -> Option<ImportedCommandC
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
         build: Some(build.into()),
         test: Some(test.into()),
     })
@@ -3589,6 +4954,7 @@ fn infer_package_json_commands(file: &ImportedFile) -> Option<ImportedCommandCan
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
         build,
         test,
     })
@@ -3610,6 +4976,7 @@ fn infer_pyproject_commands(file: &ImportedFile) -> Option<ImportedCommandCandid
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
         build,
         test,
     })
@@ -3670,8 +5037,122 @@ fn infer_go_module_commands(file: &ImportedFile) -> Option<ImportedCommandCandid
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
         build: Some("go build ./...".into()),
         test: Some("go test ./...".into()),
+    })
+}
+
+fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let mut has_build = false;
+    let mut has_test = false;
+    for line in file.contents.lines() {
+        let trimmed = line.trim();
+        if trimmed.starts_with("build:") || trimmed.starts_with("all:") {
+            has_build = true;
+        }
+        if trimmed.starts_with("test:") || trimmed.starts_with("check:") {
+            has_test = true;
+        }
+    }
+    if !has_build && !has_test {
+        return None;
+    }
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::TaskScript,
+        build: if has_build {
+            Some("make build".into())
+        } else {
+            None
+        },
+        test: if has_test {
+            Some("make test".into())
+        } else {
+            None
+        },
+    })
+}
+
+fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let mut has_build = false;
+    let mut has_test = false;
+    for line in file.contents.lines() {
+        let trimmed = line.trim();
+        // Justfile recipes start with a name followed by ':' or ':='
+        // (but not assignment ':=' at top level for recipes)
+        if let Some(name) = trimmed.split(':').next() {
+            let name = name.trim();
+            if name == "build" || name == "all" {
+                has_build = true;
+            }
+            if name == "test" || name == "check" {
+                has_test = true;
+            }
+        }
+    }
+    if !has_build && !has_test {
+        return None;
+    }
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::TaskScript,
+        build: if has_build {
+            Some("just build".into())
+        } else {
+            None
+        },
+        test: if has_test {
+            Some("just test".into())
+        } else {
+            None
+        },
+    })
+}
+
+fn infer_contributing_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    // Look for build/test instructions in code blocks within CONTRIBUTING.md
+    let mut build: Option<String> = None;
+    let mut test: Option<String> = None;
+    let mut in_code_block = false;
+    for line in file.contents.lines() {
+        let trimmed = line.trim();
+        if trimmed.starts_with("```") {
+            in_code_block = !in_code_block;
+            continue;
+        }
+        if !in_code_block {
+            continue;
+        }
+        let lower = trimmed.to_lowercase();
+        if build.is_none()
+            && (lower.starts_with("cargo build")
+                || lower.starts_with("make")
+                || lower.starts_with("npm run build")
+                || lower.starts_with("go build")
+                || lower.starts_with("just build"))
+        {
+            build = Some(trimmed.to_string());
+        }
+        if test.is_none()
+            && (lower.starts_with("cargo test")
+                || lower.starts_with("make test")
+                || lower.starts_with("make check")
+                || lower.starts_with("npm test")
+                || lower.starts_with("go test")
+                || lower.starts_with("just test"))
+        {
+            test = Some(trimmed.to_string());
+        }
+    }
+    if build.is_none() && test.is_none() {
+        return None;
+    }
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::ContribDoc,
+        build,
+        test,
     })
 }
 
@@ -3685,6 +5166,7 @@ fn infer_workflow_commands(file: &ImportedFile) -> Option<ImportedCommandCandida
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Workflow,
         build,
         test,
     })
@@ -3777,90 +5259,73 @@ enum UniqueCommandResolution {
 }
 
 fn resolve_command_field(
-    manifest_candidates: &[ImportedCommandCandidate],
-    workflow_candidates: &[ImportedCommandCandidate],
+    candidates: &[ImportedCommandCandidate],
     field: &'static str,
     select_build: bool,
     notes: &mut Vec<String>,
     evidence_bullets: &mut Vec<String>,
     inferred_fields: &mut Vec<String>,
 ) -> Option<ImportedCommandSelection> {
-    let manifest_resolution = resolve_unique_command_candidate(manifest_candidates, select_build);
-    let workflow_resolution = resolve_unique_command_candidate(workflow_candidates, select_build);
+    // Resolution goes top-down by tier:
+    // Manifest > ContribDoc > TaskScript > Workflow.
+    // Within a tier, conflicts are genuine and block the field.
+    // If a higher tier resolves, lower tiers are ignored.
+    let tiers = [
+        CommandSourceTier::Manifest,
+        CommandSourceTier::ContribDoc,
+        CommandSourceTier::TaskScript,
+        CommandSourceTier::Workflow,
+    ];
 
-    let manifest_unique = match &manifest_resolution {
-        UniqueCommandResolution::Unique {
-            command,
-            source_path,
-        } => Some((command.clone(), source_path.clone())),
-        _ => None,
-    };
-    let workflow_unique = match &workflow_resolution {
-        UniqueCommandResolution::Unique {
-            command,
-            source_path,
-        } => Some((command.clone(), source_path.clone())),
-        _ => None,
-    };
+    for tier in &tiers {
+        let tier_candidates: Vec<&ImportedCommandCandidate> = candidates
+            .iter()
+            .filter(|c| c.source_tier == *tier)
+            .collect();
 
-    let mut conflict_paths = Vec::new();
-    if let UniqueCommandResolution::Conflict { source_paths } = &manifest_resolution {
-        for path in source_paths {
-            push_unique(&mut conflict_paths, path.clone());
+        if tier_candidates.is_empty() {
+            continue;
         }
-        if let Some((_, path)) = &workflow_unique {
-            push_unique(&mut conflict_paths, path.clone());
-        }
-    }
-    if let UniqueCommandResolution::Conflict { source_paths } = &workflow_resolution {
-        for path in source_paths {
-            push_unique(&mut conflict_paths, path.clone());
-        }
-        if let Some((_, path)) = &manifest_unique {
-            push_unique(&mut conflict_paths, path.clone());
-        }
-    }
-    if let (Some((manifest_command, manifest_path)), Some((workflow_command, workflow_path))) =
-        (&manifest_unique, &workflow_unique)
-    {
-        if manifest_command != workflow_command {
-            push_unique(&mut conflict_paths, manifest_path.clone());
-            push_unique(&mut conflict_paths, workflow_path.clone());
-        }
-    }
 
-    if !conflict_paths.is_empty() {
-        let kind = if select_build { "build" } else { "test" };
-        let note = format!(
-            "Left `{}` unset because {} suggested conflicting {} commands.",
-            field,
-            human_join(&conflict_paths),
-            kind
-        );
-        notes.push(note.clone());
-        evidence_bullets.push(note);
-        return None;
-    }
+        let resolution = resolve_unique_command_candidate(&tier_candidates, select_build);
 
-    if let Some((command, source_path)) = manifest_unique {
-        let selection = ImportedCommandSelection {
-            command,
-            source_path,
-            provenance: ImportedCommandProvenance::Imported,
-        };
-        note_selected_command(field, &selection, notes, evidence_bullets);
-        return Some(selection);
-    }
-
-    if let Some((command, source_path)) = workflow_unique {
-        let selection = ImportedCommandSelection {
-            command,
-            source_path,
-            provenance: ImportedCommandProvenance::Inferred,
-        };
-        inferred_fields.push(field.into());
-        note_selected_command(field, &selection, notes, evidence_bullets);
-        return Some(selection);
+        match &resolution {
+            UniqueCommandResolution::Unique {
+                command,
+                source_path,
+            } => {
+                let is_manifest_tier = *tier == CommandSourceTier::Manifest
+                    || *tier == CommandSourceTier::ContribDoc
+                    || *tier == CommandSourceTier::TaskScript;
+                let selection = ImportedCommandSelection {
+                    command: command.clone(),
+                    source_path: source_path.clone(),
+                    provenance: if is_manifest_tier {
+                        ImportedCommandProvenance::Imported
+                    } else {
+                        ImportedCommandProvenance::Inferred
+                    },
+                };
+                if !is_manifest_tier {
+                    inferred_fields.push(field.into());
+                }
+                note_selected_command(field, &selection, notes, evidence_bullets);
+                return Some(selection);
+            }
+            UniqueCommandResolution::Conflict { source_paths } => {
+                let kind = if select_build { "build" } else { "test" };
+                let note = format!(
+                    "Left `{}` unset because {} suggested conflicting {} commands.",
+                    field,
+                    human_join(source_paths),
+                    kind
+                );
+                notes.push(note.clone());
+                evidence_bullets.push(note);
+                return None;
+            }
+            UniqueCommandResolution::None => continue,
+        }
     }
 
     None
@@ -3897,7 +5362,7 @@ fn note_selected_command(
 }
 
 fn resolve_unique_command_candidate(
-    candidates: &[ImportedCommandCandidate],
+    candidates: &[&ImportedCommandCandidate],
     select_build: bool,
 ) -> UniqueCommandResolution {
     let mut present = Vec::new();
@@ -3985,6 +5450,43 @@ fn is_placeholder_package_json_test_script(script: &str) -> bool {
     script.to_ascii_lowercase().contains("no test specified")
 }
 
+fn try_parse_multiline_html_heading(lines: &[&str], idx: usize) -> Option<(String, usize)> {
+    let line = lines.get(idx)?.trim();
+    let lower = line.to_ascii_lowercase();
+    let tag_level = ["<h1", "<h2", "<h3", "<h4", "<h5", "<h6"]
+        .iter()
+        .find(|needle| lower.starts_with(**needle))?;
+    let close_tag = tag_level.replace('<', "</");
+    if line.contains(&close_tag) {
+        return None;
+    }
+    let mut accumulated = String::new();
+    let mut scan = idx + 1;
+    let mut lines_consumed = 1;
+    while scan < lines.len() {
+        let next = lines[scan].trim();
+        lines_consumed += 1;
+        if next.contains(&close_tag) {
+            if !accumulated.is_empty() {
+                if let Some(normalized) = normalize_readme_text(&accumulated) {
+                    if !is_non_project_heading(&normalized) {
+                        return Some((normalized, lines_consumed));
+                    }
+                }
+            }
+            return None;
+        }
+        if !next.is_empty() {
+            if !accumulated.is_empty() {
+                accumulated.push(' ');
+            }
+            accumulated.push_str(next);
+        }
+        scan += 1;
+    }
+    None
+}
+
 fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
     let mut metadata = ReadmeMetadata::default();
     let lines = contents.lines().collect::<Vec<_>>();
@@ -4004,6 +5506,11 @@ fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
         }
 
         if metadata.title.is_none() {
+            if let Some((title, advance)) = try_parse_multiline_html_heading(&lines, idx) {
+                metadata.title = Some(title);
+                idx += advance;
+                continue;
+            }
             if let Some(title) = parse_readme_title_line(trimmed) {
                 metadata.title = Some(title);
                 idx += 1;
@@ -4044,6 +5551,9 @@ fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
 fn parse_readme_title_line(line: &str) -> Option<String> {
     if line.starts_with('#') {
         let title = strip_badge_run(line.trim_start_matches('#').trim());
+        if is_promo_link_heading(title) {
+            return None;
+        }
         if let Some(normalized) = normalize_readme_text(title) {
             if !is_non_project_heading(&normalized) {
                 return Some(normalized);
@@ -4055,12 +5565,34 @@ fn parse_readme_title_line(line: &str) -> Option<String> {
     parse_html_heading(line).filter(|h| !is_non_project_heading(h))
 }
 
+fn is_promo_link_heading(text: &str) -> bool {
+    let trimmed = text.trim();
+    if !trimmed.starts_with('[') {
+        return false;
+    }
+    if let Some(close_bracket) = trimmed.find("](") {
+        let after_link = trimmed[close_bracket + 2..].trim();
+        after_link.ends_with(')')
+            && after_link
+                .rfind(')')
+                .map_or(false, |pos| pos == after_link.len() - 1)
+    } else {
+        false
+    }
+}
+
 fn is_non_project_heading(heading: &str) -> bool {
     let lowered = heading.to_ascii_lowercase();
     let trimmed = lowered.trim();
-    NON_PROJECT_HEADINGS
+    if NON_PROJECT_HEADINGS
         .iter()
         .any(|pattern| trimmed == *pattern)
+    {
+        return true;
+    }
+    NON_PROJECT_HEADING_KEYWORDS
+        .iter()
+        .any(|keyword| trimmed.contains(keyword))
 }
 
 const NON_PROJECT_HEADINGS: &[&str] = &[
@@ -4069,8 +5601,10 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "api reference",
     "badges",
     "changelog",
+    "commands",
     "code of conduct",
     "communication",
+    "concepts",
     "configuration",
     "contributing",
     "credits",
@@ -4080,8 +5614,10 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "examples",
     "faq",
     "features",
+    "flags",
     "getting started",
     "installation",
+    "installing",
     "introduction",
     "license",
     "links",
@@ -4100,6 +5636,8 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "table of contents",
     "usage",
 ];
+
+const NON_PROJECT_HEADING_KEYWORDS: &[&str] = &["sponsors", "sponsor", "backed by", "supported by"];
 
 fn parse_setext_heading(lines: &[&str], idx: usize) -> Option<String> {
     let line = lines.get(idx)?.trim();
@@ -4204,6 +5742,7 @@ fn normalize_description_line(line: &str) -> Option<String> {
     normalize_readme_text(description)
         .filter(|value| value.chars().any(|ch| ch.is_alphanumeric()))
         .filter(|value| !looks_like_artifact(value))
+        .filter(|value| !is_quoted_tagline(value))
 }
 
 fn looks_like_artifact(value: &str) -> bool {
@@ -4419,6 +5958,11 @@ fn clean_project_description(raw: &str) -> Option<String> {
         return None;
     }
 
+    // Reject quoted taglines: "Any color you like."
+    if is_quoted_tagline(&cleaned) {
+        return None;
+    }
+
     Some(cleaned)
 }
 
@@ -4473,6 +6017,21 @@ fn is_meta_description(s: &str) -> bool {
         || lowered.starts_with("this is a repo")
 }
 
+fn is_quoted_tagline(s: &str) -> bool {
+    let trimmed = s.trim();
+    let openers = ['"', '\u{201c}', '\u{201e}'];
+    let closers = ['"', '\u{201d}', '\u{201e}'];
+    if trimmed.len() > 2
+        && openers.iter().any(|&q| trimmed.starts_with(q))
+        && closers.iter().any(|&q| trimmed.ends_with(q))
+    {
+        let inner = &trimmed[trimmed.chars().next().unwrap().len_utf8()
+            ..trimmed.len() - trimmed.chars().last().unwrap().len_utf8()];
+        return !inner.contains(". ");
+    }
+    false
+}
+
 /// Validate that a URL is structurally sound for use in the index.
 /// Rejects localhost, anchor-only, and bare domains without scheme.
 fn is_quality_url(url: &str) -> bool {
@@ -4517,6 +6076,27 @@ fn is_quality_url(url: &str) -> bool {
     }
 
     true
+}
+
+fn is_actionable_security_url(url: &str) -> bool {
+    let trimmed = url.trim();
+
+    // GitHub's built-in vulnerability disclosure form per repo.
+    if trimmed.contains("/security/advisories/new") {
+        return true;
+    }
+
+    // Microsoft Security Response Center report form.
+    if trimmed.contains("msrc.microsoft.com/create-report") {
+        return true;
+    }
+
+    // Vendor security pages with clear first-party reporting instructions.
+    if trimmed.contains("djangoproject.com/security") {
+        return true;
+    }
+
+    false
 }
 
 fn normalize_readme_text(line: &str) -> Option<String> {
@@ -4921,6 +6501,59 @@ fn parse_security_import_metadata(contents: &str) -> SecurityImportMetadata {
     }
 }
 
+fn parse_contributing_security(contents: &str) -> Option<String> {
+    // Extract the security reporting section from CONTRIBUTING.md.
+    // Only look under headings that mention "security", "vulnerability",
+    // or "responsible disclosure".
+    let mut in_security_section = false;
+    let mut section_depth = 0;
+    let mut security_text = String::new();
+
+    for line in contents.lines() {
+        let trimmed = line.trim();
+        let heading_depth = trimmed.chars().take_while(|c| *c == '#').count();
+        let is_heading = heading_depth > 0 && trimmed.starts_with('#');
+
+        if is_heading {
+            let heading_text = trimmed.trim_start_matches('#').trim().to_lowercase();
+
+            if in_security_section {
+                // Same or higher-level heading ends the security section
+                if heading_depth <= section_depth {
+                    in_security_section = false;
+                }
+            }
+
+            if !in_security_section
+                && (heading_text.contains("security")
+                    || heading_text.contains("vulnerability")
+                    || heading_text.contains("responsible disclosure"))
+            {
+                in_security_section = true;
+                section_depth = heading_depth;
+                continue;
+            }
+        }
+
+        if in_security_section {
+            security_text.push_str(line);
+            security_text.push('\n');
+        }
+    }
+
+    if security_text.trim().is_empty() {
+        return None;
+    }
+
+    parse_security_contact(&security_text)
+}
+
+fn parse_issue_template_security(contents: &str) -> Option<String> {
+    // Look for security reporting links or emails in issue templates.
+    // YAML front matter or plain markdown.
+    parse_security_contact(contents)
+}
+
 fn find_mailto_or_email(contents: &str) -> Option<String> {
     let rewritten = rewrite_markdown_links(contents);
 
@@ -4944,17 +6577,24 @@ fn find_first_url(contents: &str) -> Option<String> {
         return Some(url);
     }
 
+    // Fall back to the first URL that looks semantically related to security reporting.
+    // This catches cases where the URL contains "security" in its path but the surrounding
+    // text triggers a negative score (e.g., "policy" in the line penalizes the URL).
     let rewritten = rewrite_markdown_links(contents);
 
     for destination in security_link_destinations(contents) {
         if let Some(url) = extract_url_candidate(&destination) {
-            return Some(url);
+            if looks_like_security_url(&url) {
+                return Some(url);
+            }
         }
     }
 
     for token in rewritten.split_whitespace() {
         if let Some(url) = extract_url_candidate(token) {
-            return Some(url);
+            if looks_like_security_url(&url) {
+                return Some(url);
+            }
         }
     }
 
@@ -4989,6 +6629,38 @@ fn find_best_security_url(contents: &str) -> Option<String> {
     }
 
     best.map(|(_, url)| url)
+}
+
+fn looks_like_security_url(url: &str) -> bool {
+    let lowered = url.to_ascii_lowercase();
+
+    // Reject known non-security URL patterns.
+    let non_security_path_keywords = [
+        "blog", "docs/", "tutorial", "guide/", "wiki/", "example", "demo",
+    ];
+    for keyword in &non_security_path_keywords {
+        if lowered.contains(keyword) {
+            return false;
+        }
+    }
+
+    // Accept URLs that contain security-related keywords in their path.
+    let security_path_keywords = [
+        "security",
+        "vulnerability",
+        "disclosure",
+        "advisories",
+        "report",
+        "contact",
+        "issue",
+    ];
+    for keyword in &security_path_keywords {
+        if lowered.contains(keyword) {
+            return true;
+        }
+    }
+
+    false
 }
 
 fn markdown_heading_text(line: &str) -> Option<String> {
@@ -5233,7 +6905,20 @@ fn trim_contact_token(token: &str) -> &str {
     token.trim_matches(|ch: char| {
         matches!(
             ch,
-            '<' | '>' | '(' | ')' | '[' | ']' | '{' | '}' | ',' | ';' | ':' | '.' | '"' | '\''
+            '<' | '>'
+                | '('
+                | ')'
+                | '['
+                | ']'
+                | '{'
+                | '}'
+                | ','
+                | ';'
+                | ':'
+                | '.'
+                | '"'
+                | '\''
+                | '`'
         )
     })
 }
@@ -6667,7 +8352,8 @@ fn validate_index_entry(
 
     if let Some(homepage) = &manifest.repo.homepage {
         if let Some(identity) = repository_identity(homepage) {
-            if identity != expected {
+            let code_hosts = ["github.com", "gitlab.com", "bitbucket.org"];
+            if code_hosts.contains(&identity.0.as_str()) && identity != expected {
                 findings.push(index_error(
                     relative_record.clone(),
                     format!(
@@ -9720,6 +11406,81 @@ PRs welcome.
     }
 
     #[test]
+    fn clean_project_description_rejects_quoted_tagline() {
+        assert_eq!(clean_project_description("\"Any color you like.\""), None);
+        assert_eq!(
+            clean_project_description("\u{201c}Any color you like.\u{201d}"),
+            None
+        );
+        assert_eq!(
+            clean_project_description("\"Stay hungry, stay foolish.\""),
+            None
+        );
+    }
+
+    #[test]
+    fn clean_project_description_accepts_quoted_sentence_with_internal_structure() {
+        assert!(clean_project_description(
+            "\"Black\" is the uncompromising Python code formatter used by many."
+        )
+        .is_some());
+    }
+
+    #[test]
+    fn is_non_project_heading_rejects_sponsor_compound() {
+        assert!(is_non_project_heading("Vladimir Sponsors"));
+        assert!(is_non_project_heading("Gold Sponsors"));
+        assert!(is_non_project_heading("Bronze sponsor"));
+        assert!(!is_non_project_heading("Configuration Generator"));
+        assert!(!is_non_project_heading("Vite"));
+    }
+
+    #[test]
+    fn parse_readme_title_line_rejects_promo_link_heading() {
+        assert!(parse_readme_title_line(
+            "### [Warp, the AI terminal for devs](https://www.warp.dev/cobra)"
+        )
+        .is_none());
+        assert!(
+            parse_readme_title_line("## [Click here to try](https://example.com/promo)").is_none()
+        );
+        assert!(parse_readme_title_line("# [Sponsored by Acme](https://acme.com)").is_none());
+        assert_eq!(
+            parse_readme_title_line("# MyProject [link](https://example.com)"),
+            Some("MyProject link".to_string())
+        );
+        assert_eq!(
+            parse_readme_title_line("# MyProject"),
+            Some("MyProject".to_string())
+        );
+    }
+
+    #[test]
+    fn try_parse_multiline_html_heading_extracts_name() {
+        let lines: Vec<&str> = vec![
+            "<h1 align=\"center\">",
+            "Vitest",
+            "</h1>",
+            "<p>Next generation testing framework.</p>",
+        ];
+        let result = try_parse_multiline_html_heading(&lines, 0);
+        assert_eq!(result, Some(("Vitest".to_string(), 3)));
+
+        let lines2: Vec<&str> = vec!["<h2>", "The Uncompromising", "Code Formatter", "</h2>"];
+        let result2 = try_parse_multiline_html_heading(&lines2, 0);
+        assert_eq!(
+            result2,
+            Some(("The Uncompromising Code Formatter".to_string(), 4))
+        );
+
+        let lines3: Vec<&str> = vec!["<h1>Sponsors</h1>"];
+        assert!(try_parse_multiline_html_heading(&lines3, 0).is_none());
+
+        let lines4: Vec<&str> = vec!["not a heading"];
+        assert!(try_parse_multiline_html_heading(&lines4, 0).is_none());
+    }
+
+    #[test]
     fn infer_pyproject_commands_produces_default_test_when_build_system_exists() {
         let candidate = infer_pyproject_commands(&ImportedFile {
             path: "pyproject.toml".into(),
@@ -9781,8 +11542,16 @@ PRs welcome.
             contents: r#"{"scripts": {"test": "npm test"}}"#.into(),
         };
 
-        let result =
-            infer_imported_commands(None, Some(&package_json), Some(&pyproject), None, &[]);
+        let result = infer_imported_commands(
+            None,
+            Some(&package_json),
+            Some(&pyproject),
+            None,
+            None,
+            None,
+            None,
+            &[],
+        );
         assert!(
             result.test.is_none(),
             "pyproject and package.json should conflict, not let npm test win: {:?}",
@@ -10167,7 +11936,7 @@ jobs:
     }
 
     #[test]
-    fn import_repository_leaves_commands_unset_when_manifest_and_workflow_conflict() {
+    fn manifest_over_conflicting_workflow() {
         let root = temp_dir("import-manifest-workflow-conflict");
         fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
         fs::write(
@@ -10201,10 +11970,16 @@ jobs:
         )
         .expect("import succeeds");
 
-        assert_eq!(plan.manifest.repo.build, None);
-        assert_eq!(plan.manifest.repo.test, None);
+        assert_eq!(
+            plan.manifest.repo.build.as_deref(),
+            Some("cargo build --workspace")
+        );
+        assert_eq!(
+            plan.manifest.repo.test.as_deref(),
+            Some("cargo test --workspace")
+        );
         assert!(plan.inferred_fields.is_empty());
-        assert!(!plan
+        assert!(plan
             .imported_sources
             .iter()
             .any(|path| path == "Cargo.toml"));
@@ -10214,9 +11989,7 @@ jobs:
             .trust
             .as_ref()
             .and_then(|trust| trust.notes.as_deref())
-            .is_some_and(|text| text.contains(
-                "`Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting build commands"
-            )));
+            .is_some_and(|text| text.contains("Imported `repo.build` from `Cargo.toml`")));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -10280,6 +12053,285 @@ jobs:
             .is_some_and(|text| text.contains(
                 "`.github/workflows/ci.yml` and `.github/workflows/release.yml` suggested conflicting build commands"
             )));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn two_manifests_conflict() {
+        let root = temp_dir("import-manifest-manifest-conflict");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Cargo.toml"),
+            "[workspace]\nmembers = [\"crates/orbit\"]\n",
+        )
+        .expect("Cargo.toml written");
+        fs::write(
+            root.join("package.json"),
+            r#"{"scripts":{"build":"npm run build","test":"npm test"}}"#,
+        )
+        .expect("package.json written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build, None);
+        assert_eq!(plan.manifest.repo.test, None);
+        assert!(plan
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(|text| text.contains("conflicting")));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn workflow_only_fallback() {
+        let root = temp_dir("import-workflow-only");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join(".github/workflows/ci.yml"),
+            r#"name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo build
+      - run: cargo test
+"#,
+        )
+        .expect("workflow written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
+        assert!(plan.inferred_fields.contains(&"repo.build".to_string()));
+        assert!(plan.inferred_fields.contains(&"repo.test".to_string()));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn manifest_workflow_agree() {
+        let root = temp_dir("import-manifest-workflow-agree");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
+        fs::write(
+            root.join("README.md"),
+            "# Orbit\n\nPolicy-aware release orchestration.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Cargo.toml"),
+            "[workspace]\nmembers = [\"crates/orbit\"]\n",
+        )
+        .expect("Cargo.toml written");
+        fs::write(
+            root.join(".github/workflows/ci.yml"),
+            r#"name: CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cargo build --workspace
+      - run: cargo test --workspace
+"#,
+        )
+        .expect("workflow written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/orbit"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(
+            plan.manifest.repo.build.as_deref(),
+            Some("cargo build --workspace")
+        );
+        assert_eq!(
+            plan.manifest.repo.test.as_deref(),
+            Some("cargo test --workspace")
+        );
+        assert!(plan.inferred_fields.is_empty());
+        assert!(plan
+            .imported_sources
+            .iter()
+            .any(|path| path == "Cargo.toml"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn makefile_produces_taskscript_candidates() {
+        let root = temp_dir("import-makefile");
+        fs::write(
+            root.join("README.md"),
+            "# MakeProj\n\nA project with a Makefile.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Makefile"),
+            "build:\n\tgo build ./...\n\ntest:\n\tgo test ./...\n",
+        )
+        .expect("Makefile written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/makeproj"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("make build"));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("make test"));
+        assert!(plan.inferred_fields.is_empty());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn justfile_produces_taskscript_candidates() {
+        let root = temp_dir("import-justfile");
+        fs::write(
+            root.join("README.md"),
+            "# JustProj\n\nA project with a Justfile.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("justfile"),
+            "build:\n    cargo build\n\ntest:\n    cargo test\n",
+        )
+        .expect("justfile written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/justproj"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("just build"));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("just test"));
+        assert!(plan.inferred_fields.is_empty());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn contributing_md_produces_contribdoc_candidates() {
+        let root = temp_dir("import-contributing");
+        fs::write(
+            root.join("README.md"),
+            "# ContribProj\n\nA project with CONTRIBUTING.md.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("CONTRIBUTING.md"),
+            "# Contributing\n\n## Build\n\n```bash\ncargo build\n```\n\n## Test\n\n```bash\ncargo test\n```\n",
+        )
+        .expect("CONTRIBUTING.md written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/contribproj"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
+        assert!(plan.inferred_fields.is_empty());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn manifest_beats_makefile() {
+        let root = temp_dir("import-manifest-beats-makefile");
+        fs::write(
+            root.join("README.md"),
+            "# Tiers\n\nManifest should win over Makefile.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Cargo.toml"),
+            "[package]\nname = \"tiers\"\nversion = \"0.1.0\"\n",
+        )
+        .expect("Cargo.toml written");
+        fs::write(
+            root.join("Makefile"),
+            "build:\n\techo building\n\ntest:\n\techo testing\n",
+        )
+        .expect("Makefile written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/tiers"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn makefile_beats_workflow() {
+        let root = temp_dir("import-makefile-beats-workflow");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir");
+        fs::write(
+            root.join("README.md"),
+            "# Tiered\n\nMakefile beats workflow.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("Makefile"),
+            "build:\n\tgo build ./...\n\ntest:\n\tgo test ./...\n",
+        )
+        .expect("Makefile written");
+        fs::write(
+            root.join(".github/workflows/ci.yml"),
+            "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: go build\n      - run: go test\n",
+        )
+        .expect("workflow written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/tiered"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("make build"));
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("make test"));
+        assert!(plan.inferred_fields.is_empty());
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }
@@ -11486,6 +13538,148 @@ pull_request_template = "generate"
             )
             .as_deref(),
             Some("security@example.com")
+        );
+    }
+
+    #[test]
+    fn parse_contributing_security_extracts_email_from_section() {
+        let contact = parse_contributing_security(
+            "# Contributing\n\n## How to Help\n\nSubmit PRs.\n\n## Security\n\nReport vulnerabilities to security@example.com.\n",
+        );
+        assert_eq!(contact.as_deref(), Some("security@example.com"));
+    }
+
+    #[test]
+    fn parse_contributing_security_extracts_email_from_responsible_disclosure_heading() {
+        let contact = parse_contributing_security(
+            "# Contributing\n\n## Responsible Disclosure\n\nSend reports to disclose@example.com.\n",
+        );
+        assert_eq!(contact.as_deref(), Some("disclose@example.com"));
+    }
+
+    #[test]
+    fn parse_contributing_security_ignores_non_security_sections() {
+        let contact = parse_contributing_security(
+            "# Contributing\n\n## Getting Started\n\nEmail dev@example.com for help.\n\n## Code Review\n\nUse PRs.\n",
+        );
+        assert!(contact.is_none());
+    }
+
+    #[test]
+    fn parse_issue_template_security_extracts_email() {
+        let contact = parse_issue_template_security(
+            "---\ntitle: Security Vulnerability\n---\n\nReport to security@example.com.\n",
+        );
+        assert_eq!(contact.as_deref(), Some("security@example.com"));
+    }
+
+    #[test]
+    fn import_repository_extracts_security_from_contributing_when_no_security_md() {
+        let root = temp_dir("import-security-from-contributing");
+        fs::write(root.join("README.md"), "# TestProj\n\nA project.\n").expect("README written");
+        fs::write(
+            root.join("CONTRIBUTING.md"),
+            "# Contributing\n\n## Security\n\nEmail sec@example.com for vulnerabilities.\n",
+        )
+        .expect("CONTRIBUTING.md written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/testproj"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(
+            plan.manifest
+                .owners
+                .as_ref()
+                .and_then(|o| o.security_contact.as_deref()),
+            Some("sec@example.com")
+        );
+        assert!(plan.imported_sources.iter().any(|s| s == "CONTRIBUTING.md"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_extracts_security_from_issue_template() {
+        let root = temp_dir("import-security-from-template");
+        fs::create_dir_all(root.join(".github/ISSUE_TEMPLATE")).expect("template dir");
+        fs::write(root.join("README.md"), "# TestProj\n\nA project.\n").expect("README written");
+        fs::write(
+            root.join(".github/ISSUE_TEMPLATE/security.md"),
+            "---\ntitle: Security Issue\n---\n\nContact security@example.com.\n",
+        )
+        .expect("security template written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/testproj"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(
+            plan.manifest
+                .owners
+                .as_ref()
+                .and_then(|o| o.security_contact.as_deref()),
+            Some("security@example.com")
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn import_repository_prefers_security_md_over_contributing() {
+        let root = temp_dir("import-security-priority");
+        fs::write(root.join("README.md"), "# TestProj\n\nA project.\n").expect("README written");
+        fs::write(root.join("SECURITY.md"), "Report to direct@example.com.\n")
+            .expect("SECURITY.md written");
+        fs::write(
+            root.join("CONTRIBUTING.md"),
+            "# Contributing\n\n## Security\n\nContact fallback@example.com.\n",
+        )
+        .expect("CONTRIBUTING.md written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/testproj"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(
+            plan.manifest
+                .owners
+                .as_ref()
+                .and_then(|o| o.security_contact.as_deref()),
+            Some("direct@example.com")
+        );
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn parse_security_contact_finds_backtick_email() {
+        assert_eq!(
+            parse_security_contact(
+                "Please email `cobra-security@googlegroups.com` for vulnerabilities.\n",
+            )
+            .as_deref(),
+            Some("cobra-security@googlegroups.com")
+        );
+    }
+
+    #[test]
+    fn parse_security_contact_rejects_non_security_url() {
+        assert_eq!(
+            parse_security_contact(
+                "## Best Practices\n\n2. [Use Go modules](https://go.dev/blog/using-go-modules) for dependency management.\n",
+            )
+            .as_deref(),
+            None
         );
     }
 

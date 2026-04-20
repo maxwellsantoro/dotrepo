@@ -2,18 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/hashicorp/vault"
-generated_at = "2026-04-19T16:42:45.262398Z"
+generated_at = "2026-04-20T13:12:56.506577Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Vault"
-description = "A tool for secrets management, encryption as a service, and privileged access management"
+description = "**Please note**: We take Vault's security and our users' trust very seriously."
 homepage = "https://developer.hashicorp.com/vault"
 license = "NOASSERTION"
 visibility = "public"
@@ -68,4 +71,4 @@ default_branch = "main"
 fork = false
 head_sha = "34874e31a1e8ced959bf17bd9525580b625bc6af"
 html_url = "https://github.com/hashicorp/vault"
-stars = 35451
+stars = 35457

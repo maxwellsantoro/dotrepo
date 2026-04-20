@@ -1,7 +1,7 @@
 # Evidence
 
-- Imported repository description from README.md. Reviewer corrected description to "The React Framework for the Web." because the automated import extracted a file path instead of the project description.
-- Corrected `repo.name` to "Next.js" to match the project's canonical branding. The name and description were inferred from context rather than extracted from a structured source.
+- No README.md, CODEOWNERS, or SECURITY.md content was imported; this record needs manual completion.
+- Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
 - Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands.
 - Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -10,4 +10,5 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).

@@ -2,31 +2,28 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/kubernetes/client-go"
-generated_at = "2026-04-19T16:42:23.939282Z"
+generated_at = "2026-04-20T13:13:12.270428Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "client-go"
-description = "Go client for Kubernetes."
+description = "⚠️ **This is an automatically published staged repository for Kubernetes**."
 homepage = "https://github.com/kubernetes/client-go"
 license = "Apache-2.0"
 visibility = "public"
-languages = [
-    "Go",
-]
+languages = ["Go"]
 build = "go build ./..."
 test = "go test ./..."
-topics = [
-    "k8s-staging",
-]
+topics = ["k8s-staging"]
 
 [relations]
 references = []

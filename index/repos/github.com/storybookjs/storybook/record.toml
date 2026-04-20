@@ -4,17 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/storybookjs/storybook"
-generated_at = "2026-04-19T16:42:59.322304Z"
+generated_at = "2026-04-20T13:11:52.424644Z"
 
 [record.trust]
 confidence = "medium"
-provenance = [
-    "imported",
-]
+provenance = ["imported"]
 notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Storybook"
+name = "Community"
 description = "Build bulletproof UI components faster"
 homepage = "https://storybook.js.org"
 license = "MIT"
@@ -67,7 +65,6 @@ security_contact = "https://x.com/storybookjs"
 
 [docs]
 root = "https://storybook.js.org/docs?ref=readme"
-getting_started = "https://storybook.js.org/docs/getting-started/installation"
 
 [relations]
 references = []
@@ -79,4 +76,4 @@ default_branch = "next"
 fork = false
 head_sha = "d226aa98f39da53b67ae8d6f841532b11032f67c"
 html_url = "https://github.com/storybookjs/storybook"
-stars = 89735
+stars = 89750

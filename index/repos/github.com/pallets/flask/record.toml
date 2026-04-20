@@ -2,20 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/pallets/flask"
-generated_at = "2026-04-19T16:42:29.174193Z"
+generated_at = "2026-04-20T13:12:36.798221Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Flask"
-description = "The Python micro framework for building web applications."
+description = "Flask is a lightweight [WSGI] web application framework."
 homepage = "https://flask.palletsprojects.com"
 license = "BSD-3-Clause"
 visibility = "public"
@@ -47,4 +48,4 @@ default_branch = "main"
 fork = false
 head_sha = "2ac89889f4cc330eabd50f295dcef02828522c69"
 html_url = "https://github.com/pallets/flask"
-stars = 71423
+stars = 71428

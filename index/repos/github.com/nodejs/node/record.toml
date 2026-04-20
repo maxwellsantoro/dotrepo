@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/nodejs/node"
-generated_at = "2026-04-19T16:42:48.479594Z"
+generated_at = "2026-04-20T13:11:19.861296Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Node.js"
@@ -82,7 +85,7 @@ maintainers = [
     "@nodejs/userland-migrations",
     "@nodejs/devcontainer",
 ]
-security_contact = "tsc@iojs.org"
+security_contact = "security@lists.openjsf.org"
 
 [relations]
 references = []
@@ -92,6 +95,6 @@ archived = false
 clone_url = "https://github.com/nodejs/node.git"
 default_branch = "main"
 fork = false
-head_sha = "a79e224eb2bdf4c1baee96e8e5ac413c0880d0ef"
+head_sha = "5e0bcab7545c940b81f5c3c0894f244582f07573"
 html_url = "https://github.com/nodejs/node"
-stars = 116811
+stars = 116827

@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from pyproject.toml as `python -m build`.
 - Imported repo.test from pyproject.toml as `python -m pytest`.

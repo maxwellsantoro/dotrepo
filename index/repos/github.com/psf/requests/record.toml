@@ -1,0 +1,57 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/psf/requests"
+generated_at = "2026-04-20T13:12:08.188083Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Requests"
+description = "**Requests** is a simple, yet elegant, HTTP library."
+homepage = "https://requests.readthedocs.io/en/latest/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Makefile",
+    "Python",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "python",
+    "http",
+    "forhumans",
+    "requests",
+    "python-requests",
+    "client",
+    "humans",
+    "cookies",
+]
+
+[owners]
+maintainers = [
+    "@nateprewitt",
+    "@sigmavirus24",
+]
+security_contact = "python-maint@redhat.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/psf/requests.git"
+default_branch = "main"
+fork = false
+head_sha = "5f3ff9b9e4d3d44960467e7877e06e9efa22f20b"
+html_url = "https://github.com/psf/requests"
+stars = 53905

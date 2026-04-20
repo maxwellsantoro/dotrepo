@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/vitest-dev/vitest"
+generated_at = "2026-04-20T13:11:46.236225Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Vitest"
+description = "Next generation testing framework powered by Vite."
+homepage = "https://vitest.dev"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "Imba",
+    "JavaScript",
+    "Less",
+    "SCSS",
+    "Sass",
+    "TypeScript",
+    "Vue",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = [
+    "vite",
+    "test",
+    "testing-tools",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/vitest-dev/vitest/security"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/vitest-dev/vitest.git"
+default_branch = "main"
+fork = false
+head_sha = "0e0ff41c7e86d6e2bf581f074dc216805d10d371"
+html_url = "https://github.com/vitest-dev/vitest"
+stars = 16383

@@ -2,31 +2,45 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/tokio-rs/tokio"
-generated_at = "2026-03-18T00:00:00Z"
+generated_at = "2026-04-20T13:10:43.475948Z"
 
 [record.trust]
 confidence = "high"
-provenance = ["imported"]
-notes = "Imported from the upstream README, contribution docs, SECURITY.md, and repository metadata; not maintainer-verified."
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Tokio"
-description = "A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language."
+description = "TokioConf 2026 program and tickets are now available!"
 homepage = "https://tokio.rs"
 license = "MIT"
 visibility = "public"
-languages = ["rust"]
-build = "cargo build --all-features"
-test = "cargo test --all-features"
-topics = ["rust", "asynchronous", "networking"]
+languages = ["Rust"]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "rust",
+    "asynchronous",
+    "networking",
+]
 
 [owners]
+maintainers = []
 security_contact = "security@tokio.rs"
-
-[docs]
-root = "https://tokio.rs/tokio"
 
 [relations]
 references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tokio-rs/tokio.git"
+default_branch = "master"
+fork = false
+head_sha = "1afb39135073a56d8983fed0bde85b9f70a1ec3b"
+html_url = "https://github.com/tokio-rs/tokio"
+stars = 31707

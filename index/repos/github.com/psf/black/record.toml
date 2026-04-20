@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/psf/black"
+generated_at = "2026-04-20T13:12:30.214232Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "The Uncompromising Code Formatter"
+description = "_Black_ is the uncompromising Python code formatter."
+homepage = "https://black.readthedocs.io/en/stable/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Python",
+    "Vim Script",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "python",
+    "code",
+    "formatter",
+    "codeformatter",
+    "gofmt",
+    "yapf",
+    "autopep8",
+    "pre-commit-hook",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://tidelift.com/security"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/psf/black.git"
+default_branch = "main"
+fork = false
+head_sha = "8dcc4865c8f9a2769411db5638927696172cdf75"
+html_url = "https://github.com/psf/black"
+stars = 41478

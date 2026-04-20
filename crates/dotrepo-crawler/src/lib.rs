@@ -1,5 +1,5 @@
 use anyhow::Result;
-use dotrepo_core::{ImportPlan, SynthesisWritePlan};
+use dotrepo_core::{FieldScoreReport, ImportPlan, SynthesisWritePlan, VerificationReport};
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
@@ -252,6 +252,8 @@ pub struct CrawlRepositoryReport {
     pub repository: RepositoryRef,
     pub writeback_plan: CrawlWritebackPlan,
     pub state_record: CrawlStateRecord,
+    pub verification: VerificationReport,
+    pub field_scores: FieldScoreReport,
     pub diagnostics: Vec<CrawlDiagnostic>,
 }
 
