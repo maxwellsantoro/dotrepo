@@ -1285,18 +1285,6 @@ fn build_seed_review_assessment(input: SeedReviewAssessmentInput<'_>) -> SeedRev
         .owners
         .as_ref()
         .and_then(|owners| owners.security_contact.clone());
-    if security_contact
-        .as_deref()
-        .is_none_or(|value| value.trim().is_empty() || value == "unknown")
-    {
-        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
-        reasons.push("security_contact is missing or still unknown".into());
-    }
-
-    if manifest.repo.build.is_none() || manifest.repo.test.is_none() {
-        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
-        reasons.push("repo.build or repo.test is still unset".into());
-    }
 
     let inferred_execution = inferred_fields
         .iter()
@@ -1474,7 +1462,7 @@ fn render_seed_review_report_markdown(report: &SeedReviewReport, dry_run: bool) 
 mod tests {
     use super::*;
     use clap::Parser;
-    use dotrepo_schema::{Record, RecordMode, Repo};
+    use dotrepo_schema::{Owners, Record, RecordMode, Repo};
     use std::time::{SystemTime, UNIX_EPOCH};
 
     #[test]
@@ -1833,15 +1821,72 @@ how_to_contribute = "Open a PR"
         assert!(assessment
             .reasons
             .iter()
-            .any(|reason| reason.contains("security_contact is missing or still unknown")));
+            .any(|reason| reason.contains("execution fields are inferred")));
         assert!(assessment
             .reasons
             .iter()
-            .any(|reason| reason.contains("execution fields are inferred")));
+            .any(|reason| reason.contains("crawler emitted warning diagnostics")));
         assert_eq!(
             assessment.warning_codes,
             vec!["materialize.missing_security".to_string()]
         );
+    }
+
+    #[test]
+    fn build_seed_review_assessment_allows_honest_absence_without_high_priority() {
+        let repository = RepositoryRef {
+            host: "github.com".into(),
+            owner: "example".into(),
+            repo: "orbit".into(),
+        };
+        let mut manifest = Manifest::new(
+            Record {
+                mode: RecordMode::Overlay,
+                status: RecordStatus::Imported,
+                source: Some("https://github.com/example/orbit".into()),
+                generated_at: Some("2026-03-21T00:00:00Z".into()),
+                trust: None,
+            },
+            Repo {
+                name: "orbit".into(),
+                description: "Example repo".into(),
+                homepage: None,
+                license: None,
+                status: None,
+                visibility: Some("public".into()),
+                languages: vec!["rust".into()],
+                build: None,
+                test: None,
+                topics: Vec::new(),
+            },
+        );
+        manifest.owners = Some(Owners {
+            maintainers: vec!["example-maintainer".into()],
+            team: None,
+            security_contact: Some("unknown".into()),
+        });
+
+        let assessment = build_seed_review_assessment(SeedReviewAssessmentInput {
+            repository,
+            status: SeedResultStatus::Planned,
+            manifest: Some(&manifest),
+            inferred_fields: &[],
+            diagnostics: &[],
+            manifest_path: PathBuf::from("index/repos/github.com/example/orbit/record.toml"),
+            evidence_path: Some(PathBuf::from(
+                "index/repos/github.com/example/orbit/evidence.md",
+            )),
+            failure_message: None,
+        });
+
+        assert_eq!(assessment.priority, SeedReviewPriority::Low);
+        assert_eq!(
+            assessment.reasons,
+            vec!["ready for light review: execution, security, and ownership signals are present"]
+        );
+        assert_eq!(assessment.security_contact.as_deref(), Some("unknown"));
+        assert_eq!(assessment.build, None);
+        assert_eq!(assessment.test, None);
     }
 
     #[test]
