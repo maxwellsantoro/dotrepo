@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/rust-lang/cargo"
-generated_at = "2026-04-19T14:55:20.619339Z"
+generated_at = "2026-04-20T13:11:05.724683Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `Cargo.toml` and `.github/workflows/main.yml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `.github/workflows/main.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Cargo"
@@ -26,6 +29,8 @@ languages = [
     "Rust",
     "Shell",
 ]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
 topics = [
     "rust",
     "package-manager",
@@ -42,4 +47,4 @@ default_branch = "master"
 fork = false
 head_sha = "c3dbe6e40f4235cc1025577326834187e36b4a34"
 html_url = "https://github.com/rust-lang/cargo"
-stars = 14844
+stars = 14852

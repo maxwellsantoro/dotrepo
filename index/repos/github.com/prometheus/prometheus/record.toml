@@ -4,18 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/prometheus/prometheus"
-generated_at = "2026-04-19T16:42:56.524664Z"
+generated_at = "2026-04-20T13:12:50.509271Z"
 
 [record.trust]
 confidence = "medium"
-provenance = [
-    "imported",
-]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `go.mod`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@prometheus/default-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Left `repo.test` unset because `.github/workflows/ci.yml`, `.github/workflows/fuzzing.yml`, and `go.mod` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `go.mod`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@prometheus/default-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Prometheus"
-description = "The Prometheus monitoring system and time series database."
+description = "Visit prometheus.io for the full documentation, examples and guides."
 homepage = "https://prometheus.io/"
 license = "Apache-2.0"
 visibility = "public"
@@ -34,6 +32,7 @@ languages = [
     "Yacc",
 ]
 build = "go build ./..."
+test = "go test ./..."
 topics = [
     "monitoring",
     "metrics",
@@ -85,6 +84,6 @@ archived = false
 clone_url = "https://github.com/prometheus/prometheus.git"
 default_branch = "main"
 fork = false
-head_sha = "f39fff9691515ea2abfc25b8ad2f919b91973fe6"
+head_sha = "57821524d5e28c63eb7ac085af012b5a8deb6fa1"
 html_url = "https://github.com/prometheus/prometheus"
-stars = 63652
+stars = 63659

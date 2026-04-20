@@ -4,17 +4,17 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/clap-rs/clap"
-generated_at = "2026-04-18T19:24:17.549579062Z"
+generated_at = "2026-04-20T13:10:48.848057Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Left `repo.test` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "clap"
 description = "Command Line Argument Parser for Rust"
-homepage = "https://docs.rs/clap"
+homepage = "docs.rs/clap"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
@@ -27,6 +27,7 @@ languages = [
     "Shell",
 ]
 build = "cargo build --workspace"
+test = "cargo test --workspace"
 topics = [
     "argument-parsing",
     "subcommands",
@@ -48,4 +49,4 @@ default_branch = "master"
 fork = false
 head_sha = "f6a6701e60f372c2104c6aca413c86b996e3e026"
 html_url = "https://github.com/clap-rs/clap"
-stars = 16315
+stars = 16323

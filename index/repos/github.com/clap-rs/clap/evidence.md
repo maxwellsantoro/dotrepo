@@ -2,7 +2,7 @@
 
 - Imported repository name and description from README.md.
 - Imported repo.build from Cargo.toml as `cargo build --workspace`.
-- Left `repo.test` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting test commands.
+- Imported repo.test from Cargo.toml as `cargo test --workspace`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

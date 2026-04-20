@@ -4,16 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/eslint/eslint"
-generated_at = "2026-04-19T14:55:29.008195Z"
+generated_at = "2026-04-20T13:11:32.859087Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@eslint/eslint-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Left `repo.build` unset because `.github/workflows/docs-ci.yml`, `.github/workflows/types-integration.yml`, and `.github/workflows/update-readme.yml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/ci.yml`, `.github/workflows/types-integration.yml`, and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@eslint/eslint-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Left `repo.build` unset because `.github/workflows/docs-ci.yml`, `.github/workflows/types-integration.yml`, and `.github/workflows/update-readme.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "ESLint"
-description = "ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions:"
+description = "ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code."
 homepage = "https://eslint.org"
 license = "MIT"
 visibility = "public"
@@ -24,6 +24,7 @@ languages = [
     "Shell",
     "TypeScript",
 ]
+test = "npm test"
 topics = [
     "eslint",
     "javascript",
@@ -50,6 +51,6 @@ archived = false
 clone_url = "https://github.com/eslint/eslint.git"
 default_branch = "main"
 fork = false
-head_sha = "7f479376a2fa463d823ab762db6bb37ce8d2ee8f"
+head_sha = "2b252be80f362cca7be3326a6dbe958680fdfe9a"
 html_url = "https://github.com/eslint/eslint"
 stars = 27195

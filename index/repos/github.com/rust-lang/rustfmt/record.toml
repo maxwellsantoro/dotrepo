@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/rust-lang/rustfmt"
-generated_at = "2026-04-19T14:55:24.148949Z"
+generated_at = "2026-04-20T13:11:12.086996Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Left `repo.build` unset because `Cargo.toml` and `.github/workflows/check_diff.yml` suggested conflicting build commands. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "rustfmt"
@@ -23,6 +26,7 @@ languages = [
     "Rust",
     "Shell",
 ]
+build = "cargo build"
 test = "cargo test"
 topics = [
     "rust",
@@ -41,4 +45,4 @@ default_branch = "main"
 fork = false
 head_sha = "e28eb9e2505121b2010b5ab8eda7be4f257a04a2"
 html_url = "https://github.com/rust-lang/rustfmt"
-stars = 6798
+stars = 6800

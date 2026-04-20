@@ -4,17 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/facebook/react"
-generated_at = "2026-04-19T16:43:04.397251Z"
+generated_at = "2026-04-20T13:11:42.69571Z"
 
 [record.trust]
 confidence = "medium"
-provenance = [
-    "imported",
-]
+provenance = ["imported"]
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "React"
+name = "React &middot;"
 description = "React is a JavaScript library for building user interfaces."
 homepage = "https://react.dev"
 license = "MIT"

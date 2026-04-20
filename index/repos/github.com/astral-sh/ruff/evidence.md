@@ -2,8 +2,8 @@
 
 - Imported repository name, description, and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
-- Left `repo.build` unset because `Cargo.toml`, `pyproject.toml`, `.github/workflows/ci.yaml`, and `.github/workflows/daily_fuzz.yaml` suggested conflicting build commands.
-- Left `repo.test` unset because `Cargo.toml`, `pyproject.toml`, and `.github/workflows/ci.yaml` suggested conflicting test commands.
+- Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands.
+- Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

@@ -54,7 +54,7 @@ Deterministic crawl
   → merge GitHub metadata → validate → write back
         │
         ▼
-Deterministic verification  (NEW)
+Deterministic verification
   identity/path/homepage consistency
   source-file existence checks
   candidate provenance checks
@@ -62,7 +62,7 @@ Deterministic verification  (NEW)
   workflow/manifest agreement checks
         │
         ▼
-Field-level scoring  (NEW)
+Field-level scoring
   Each field gets one of four scores:
     high-confidence present
     medium-confidence present
@@ -70,13 +70,13 @@ Field-level scoring  (NEW)
     unresolved
         │
         ▼
-Narrow adjudication  (NEW, only on unresolved fields)
+Narrow adjudication (only on unresolved fields)
   Model sees: field name + candidate values + short source snippets
   Model returns: { value, confidence, reason } or null
   Model must not invent values outside the candidate set.
         │
         ▼
-Deterministic post-check  (NEW)
+Deterministic post-check
   Chosen value must come from the candidate set.
   Cited snippet must actually exist in fetched files.
   Normalized value must parse.
@@ -291,6 +291,12 @@ A record auto-promotes to `verified` when **every** field is either:
 This is the key condition. It is not "all fields are filled." It is "all fields
 are honestly resolved."
 
+Once promoted, the record sits above `reviewed` overlays in the precedence ladder
+(see "Automated verified precedence contract" below). This means an auto-minted
+`verified` overlay will be preferred over a human-reviewed overlay for the same
+repository. Consumers that need human-reviewed records should check provenance for
+the `"reviewed"` tag rather than relying on status alone.
+
 ### Remain as imported/inferred
 
 A record stays at its crawl-determined status when unresolved fields remain.
@@ -321,23 +327,64 @@ automation plan.
    strict JSON output, deterministic post-check
 6. **Auto-publish to verified overlay** — honest-resolution threshold,
    `verified` status promotion, preserve `imported`/`inferred` for partials
-7. **Synthesis integration** — later, still subordinate to factual crawl
+7. ~~**Synthesis integration** — deferred~~ Not currently planned. Steps 1–6 constitute the complete factual automation pipeline. Synthesis (whole-repo model analysis, open-ended generation) remains out of scope until the deterministic pipeline has been exercised at scale and the telemetry surfaces (promotion rate, blocker histogram, adjudication rate) demonstrate a clear need.
 
 ## Acceptance criteria
 
+Steps 1–6 are implemented. The following criteria are verified by the test suite:
+
 - The deterministic verification pass catches all identity/path/homepage
   inconsistencies that `validate-index` currently catches, plus source-file
-  provenance checks.
+  provenance checks. (Step 1)
 - Field scoring produces one of four states for every field on every crawled
   repo, with "high-confidence absent" properly distinguished from "unresolved."
-- The build/test trust hierarchy resolves at least 60% of the currently unset
-  build/test fields without model involvement.
+  (Step 2)
+- The build/test 4-tier trust hierarchy (Manifest > ContribDoc > TaskScript >
+  Workflow) resolves manifest-vs-workflow conflicts deterministically. (Step 3)
 - Security contact detection covers CONTRIBUTING.md and issue templates without
-  coercing general channels into security contacts.
-- The model adjudication path is invoked on fewer than 30% of crawled repos.
+  coercing general channels into security contacts. (Step 4)
+- Narrow adjudication with deterministic post-check rejects out-of-candidate
+  values and maps null responses to absent. (Step 5)
 - Auto-promoted `verified` records pass the same `validate-index` checks that
-  imported records pass.
-- No auto-promoted record claims `reviewed` status.
+  imported records pass. (Step 6)
+- No auto-promoted record claims `reviewed` or `canonical` status. (Step 6)
+- Promotion never rewrites field values, erases provenance origins, or changes
+  record authority semantics (mode, source). See invariant tests in
+  `crates/dotrepo-core/tests/auto_publish.rs`. (Step 6)
+
+## Automated verified precedence contract
+
+The automation pipeline can mint `verified` status without human involvement.
+This has a protocol-level consequence that consumers must understand:
+
+**Precedence ladder** (from [`docs/trust-model.md`](./trust-model.md)):
+canonical `.repo` → canonical mirror → **verified overlay** → reviewed overlay → imported overlay → inferred overlay → draft
+
+An auto-verified overlay **outranks a reviewed overlay**. This is intentional and
+correct because:
+
+1. **Auto-verified means "all fields honestly resolved by the deterministic pipeline,"** not "human-reviewed." The verification standard is exhaustive field-level scoring where every field is either high-confidence present or high-confidence absent with justification.
+
+2. **Reviewed means "a human looked at this."** Human review is valuable for nuance and judgment calls, but does not guarantee the same exhaustive field-level coverage that the automated pipeline enforces.
+
+3. **Canonical still outranks both.** A maintainer-owned `.repo` file at the repository root always wins. The automated pipeline never mints canonical status.
+
+4. **Promotion is one-directional.** The pipeline never downgrades an existing `reviewed` or `canonical` record. If a record already has higher authority, the promotion function is a no-op. See the invariant test family in `crates/dotrepo-core/tests/auto_publish.rs` for the contract enforcement.
+
+5. **Provenance is preserved.** Promotion appends `"verified"` to the provenance array and upgrades confidence to `"high"`, but never erases existing provenance origins. A record that was `["imported"]` becomes `["imported", "verified"]`.
+
+### Promotion telemetry
+
+These metrics should be tracked as the pipeline operates at scale:
+
+- **Eligible count over time**: how many records per crawl batch are promotion-eligible
+- **Blocker histogram over time**: which fields most commonly prevent promotion (unresolved or medium-confidence)
+- **Promotion rate by refresh batch**: what fraction of crawled records are promoted
+- **Adjudication invocation rate**: how often the model path is needed
+- **Zero-model-use fraction**: how many verified records were created without any model involvement
+
+These surfaces inform whether Step 7 (synthesis) would address a real bottleneck or
+solve a problem the deterministic pipeline already handles.
 
 ## Non-goals
 

@@ -4,29 +4,57 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/vitejs/vite"
-generated_at = "2026-03-18T00:00:00Z"
+generated_at = "2026-04-20T13:11:29.912313Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = ["imported"]
-notes = "Imported from upstream repository metadata, the README, package.json, the repository contents listing, and GitHub's security reporting flow; not maintainer-verified."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Vite"
-description = "Next generation frontend tooling. It's fast!"
-homepage = "https://vite.dev/"
+name = "Vite ⚡"
+description = "Next Generation Frontend Tooling"
+homepage = "http://vite.dev"
 license = "MIT"
 visibility = "public"
-languages = ["typescript", "javascript"]
+languages = [
+    "Astro",
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "Pug",
+    "SCSS",
+    "Sass",
+    "Shell",
+    "Stylus",
+    "SugarSS",
+    "Svelte",
+    "TypeScript",
+    "Vue",
+]
 build = "pnpm build"
 test = "pnpm test"
-topics = ["vite", "hmr", "frontend", "build-tool", "dev-server"]
+topics = [
+    "vite",
+    "hmr",
+    "frontend",
+    "build-tool",
+    "dev-server",
+]
 
 [owners]
-security_contact = "https://github.com/vitejs/vite/security/advisories/new"
-
-[docs]
-root = "docs/"
+maintainers = []
+security_contact = "https://github.com/vitejs/vite/security"
 
 [relations]
 references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/vitejs/vite.git"
+default_branch = "main"
+fork = false
+head_sha = "3770a53064e8da27d4cb8d595a2b038413e6abdb"
+html_url = "https://github.com/vitejs/vite"
+stars = 80019

@@ -11,3 +11,7 @@
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Auto-promotion
+
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

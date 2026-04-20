@@ -4,12 +4,12 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/astral-sh/ruff"
-generated_at = "2026-04-19T14:55:25.657175Z"
+generated_at = "2026-04-20T13:12:14.687593Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Left `repo.build` unset because `Cargo.toml`, `pyproject.toml`, `.github/workflows/ci.yaml`, and `.github/workflows/daily_fuzz.yaml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml`, `pyproject.toml`, and `.github/workflows/ci.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Ruff"
@@ -57,7 +57,6 @@ maintainers = [
 
 [docs]
 root = "https://docs.astral.sh/ruff/"
-getting_started = "https://docs.astral.sh/ruff/installation/"
 
 [relations]
 references = []
@@ -67,6 +66,6 @@ archived = false
 clone_url = "https://github.com/astral-sh/ruff.git"
 default_branch = "main"
 fork = false
-head_sha = "67296f083980792a2e2868efc86fa105d2e565dd"
+head_sha = "7c597dc6ce8e9712ca31a4a7621fde9ea2575dc4"
 html_url = "https://github.com/astral-sh/ruff"
-stars = 47153
+stars = 47168

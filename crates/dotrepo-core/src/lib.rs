@@ -5450,6 +5450,43 @@ fn is_placeholder_package_json_test_script(script: &str) -> bool {
     script.to_ascii_lowercase().contains("no test specified")
 }
 
+fn try_parse_multiline_html_heading(lines: &[&str], idx: usize) -> Option<(String, usize)> {
+    let line = lines.get(idx)?.trim();
+    let lower = line.to_ascii_lowercase();
+    let tag_level = ["<h1", "<h2", "<h3", "<h4", "<h5", "<h6"]
+        .iter()
+        .find(|needle| lower.starts_with(**needle))?;
+    let close_tag = tag_level.replace('<', "</");
+    if line.contains(&close_tag) {
+        return None;
+    }
+    let mut accumulated = String::new();
+    let mut scan = idx + 1;
+    let mut lines_consumed = 1;
+    while scan < lines.len() {
+        let next = lines[scan].trim();
+        lines_consumed += 1;
+        if next.contains(&close_tag) {
+            if !accumulated.is_empty() {
+                if let Some(normalized) = normalize_readme_text(&accumulated) {
+                    if !is_non_project_heading(&normalized) {
+                        return Some((normalized, lines_consumed));
+                    }
+                }
+            }
+            return None;
+        }
+        if !next.is_empty() {
+            if !accumulated.is_empty() {
+                accumulated.push(' ');
+            }
+            accumulated.push_str(next);
+        }
+        scan += 1;
+    }
+    None
+}
+
 fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
     let mut metadata = ReadmeMetadata::default();
     let lines = contents.lines().collect::<Vec<_>>();
@@ -5469,6 +5506,11 @@ fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
         }
 
         if metadata.title.is_none() {
+            if let Some((title, advance)) = try_parse_multiline_html_heading(&lines, idx) {
+                metadata.title = Some(title);
+                idx += advance;
+                continue;
+            }
             if let Some(title) = parse_readme_title_line(trimmed) {
                 metadata.title = Some(title);
                 idx += 1;
@@ -5509,6 +5551,9 @@ fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
 fn parse_readme_title_line(line: &str) -> Option<String> {
     if line.starts_with('#') {
         let title = strip_badge_run(line.trim_start_matches('#').trim());
+        if is_promo_link_heading(title) {
+            return None;
+        }
         if let Some(normalized) = normalize_readme_text(title) {
             if !is_non_project_heading(&normalized) {
                 return Some(normalized);
@@ -5520,12 +5565,34 @@ fn parse_readme_title_line(line: &str) -> Option<String> {
     parse_html_heading(line).filter(|h| !is_non_project_heading(h))
 }
 
+fn is_promo_link_heading(text: &str) -> bool {
+    let trimmed = text.trim();
+    if !trimmed.starts_with('[') {
+        return false;
+    }
+    if let Some(close_bracket) = trimmed.find("](") {
+        let after_link = trimmed[close_bracket + 2..].trim();
+        after_link.ends_with(')')
+            && after_link
+                .rfind(')')
+                .map_or(false, |pos| pos == after_link.len() - 1)
+    } else {
+        false
+    }
+}
+
 fn is_non_project_heading(heading: &str) -> bool {
     let lowered = heading.to_ascii_lowercase();
     let trimmed = lowered.trim();
-    NON_PROJECT_HEADINGS
+    if NON_PROJECT_HEADINGS
         .iter()
         .any(|pattern| trimmed == *pattern)
+    {
+        return true;
+    }
+    NON_PROJECT_HEADING_KEYWORDS
+        .iter()
+        .any(|keyword| trimmed.contains(keyword))
 }
 
 const NON_PROJECT_HEADINGS: &[&str] = &[
@@ -5534,8 +5601,10 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "api reference",
     "badges",
     "changelog",
+    "commands",
     "code of conduct",
     "communication",
+    "concepts",
     "configuration",
     "contributing",
     "credits",
@@ -5545,8 +5614,10 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "examples",
     "faq",
     "features",
+    "flags",
     "getting started",
     "installation",
+    "installing",
     "introduction",
     "license",
     "links",
@@ -5565,6 +5636,8 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "table of contents",
     "usage",
 ];
+
+const NON_PROJECT_HEADING_KEYWORDS: &[&str] = &["sponsors", "sponsor", "backed by", "supported by"];
 
 fn parse_setext_heading(lines: &[&str], idx: usize) -> Option<String> {
     let line = lines.get(idx)?.trim();
@@ -5669,6 +5742,7 @@ fn normalize_description_line(line: &str) -> Option<String> {
     normalize_readme_text(description)
         .filter(|value| value.chars().any(|ch| ch.is_alphanumeric()))
         .filter(|value| !looks_like_artifact(value))
+        .filter(|value| !is_quoted_tagline(value))
 }
 
 fn looks_like_artifact(value: &str) -> bool {
@@ -5884,6 +5958,11 @@ fn clean_project_description(raw: &str) -> Option<String> {
         return None;
     }
 
+    // Reject quoted taglines: "Any color you like."
+    if is_quoted_tagline(&cleaned) {
+        return None;
+    }
+
     Some(cleaned)
 }
 
@@ -5936,6 +6015,21 @@ fn is_meta_description(s: &str) -> bool {
         || lowered.starts_with("this repo is")
         || lowered.starts_with("this is the")
         || lowered.starts_with("this is a repo")
+}
+
+fn is_quoted_tagline(s: &str) -> bool {
+    let trimmed = s.trim();
+    let openers = ['"', '\u{201c}', '\u{201e}'];
+    let closers = ['"', '\u{201d}', '\u{201e}'];
+    if trimmed.len() > 2
+        && openers.iter().any(|&q| trimmed.starts_with(q))
+        && closers.iter().any(|&q| trimmed.ends_with(q))
+    {
+        let inner = &trimmed[trimmed.chars().next().unwrap().len_utf8()
+            ..trimmed.len() - trimmed.chars().last().unwrap().len_utf8()];
+        return !inner.contains(". ");
+    }
+    false
 }
 
 /// Validate that a URL is structurally sound for use in the index.
@@ -6483,17 +6577,24 @@ fn find_first_url(contents: &str) -> Option<String> {
         return Some(url);
     }
 
+    // Fall back to the first URL that looks semantically related to security reporting.
+    // This catches cases where the URL contains "security" in its path but the surrounding
+    // text triggers a negative score (e.g., "policy" in the line penalizes the URL).
     let rewritten = rewrite_markdown_links(contents);
 
     for destination in security_link_destinations(contents) {
         if let Some(url) = extract_url_candidate(&destination) {
-            return Some(url);
+            if looks_like_security_url(&url) {
+                return Some(url);
+            }
         }
     }
 
     for token in rewritten.split_whitespace() {
         if let Some(url) = extract_url_candidate(token) {
-            return Some(url);
+            if looks_like_security_url(&url) {
+                return Some(url);
+            }
         }
     }
 
@@ -6528,6 +6629,38 @@ fn find_best_security_url(contents: &str) -> Option<String> {
     }
 
     best.map(|(_, url)| url)
+}
+
+fn looks_like_security_url(url: &str) -> bool {
+    let lowered = url.to_ascii_lowercase();
+
+    // Reject known non-security URL patterns.
+    let non_security_path_keywords = [
+        "blog", "docs/", "tutorial", "guide/", "wiki/", "example", "demo",
+    ];
+    for keyword in &non_security_path_keywords {
+        if lowered.contains(keyword) {
+            return false;
+        }
+    }
+
+    // Accept URLs that contain security-related keywords in their path.
+    let security_path_keywords = [
+        "security",
+        "vulnerability",
+        "disclosure",
+        "advisories",
+        "report",
+        "contact",
+        "issue",
+    ];
+    for keyword in &security_path_keywords {
+        if lowered.contains(keyword) {
+            return true;
+        }
+    }
+
+    false
 }
 
 fn markdown_heading_text(line: &str) -> Option<String> {
@@ -6772,7 +6905,20 @@ fn trim_contact_token(token: &str) -> &str {
     token.trim_matches(|ch: char| {
         matches!(
             ch,
-            '<' | '>' | '(' | ')' | '[' | ']' | '{' | '}' | ',' | ';' | ':' | '.' | '"' | '\''
+            '<' | '>'
+                | '('
+                | ')'
+                | '['
+                | ']'
+                | '{'
+                | '}'
+                | ','
+                | ';'
+                | ':'
+                | '.'
+                | '"'
+                | '\''
+                | '`'
         )
     })
 }
@@ -8206,7 +8352,8 @@ fn validate_index_entry(
 
     if let Some(homepage) = &manifest.repo.homepage {
         if let Some(identity) = repository_identity(homepage) {
-            if identity != expected {
+            let code_hosts = ["github.com", "gitlab.com", "bitbucket.org"];
+            if code_hosts.contains(&identity.0.as_str()) && identity != expected {
                 findings.push(index_error(
                     relative_record.clone(),
                     format!(
@@ -11259,6 +11406,81 @@ PRs welcome.
     }
 
     #[test]
+    fn clean_project_description_rejects_quoted_tagline() {
+        assert_eq!(clean_project_description("\"Any color you like.\""), None);
+        assert_eq!(
+            clean_project_description("\u{201c}Any color you like.\u{201d}"),
+            None
+        );
+        assert_eq!(
+            clean_project_description("\"Stay hungry, stay foolish.\""),
+            None
+        );
+    }
+
+    #[test]
+    fn clean_project_description_accepts_quoted_sentence_with_internal_structure() {
+        assert!(clean_project_description(
+            "\"Black\" is the uncompromising Python code formatter used by many."
+        )
+        .is_some());
+    }
+
+    #[test]
+    fn is_non_project_heading_rejects_sponsor_compound() {
+        assert!(is_non_project_heading("Vladimir Sponsors"));
+        assert!(is_non_project_heading("Gold Sponsors"));
+        assert!(is_non_project_heading("Bronze sponsor"));
+        assert!(!is_non_project_heading("Configuration Generator"));
+        assert!(!is_non_project_heading("Vite"));
+    }
+
+    #[test]
+    fn parse_readme_title_line_rejects_promo_link_heading() {
+        assert!(parse_readme_title_line(
+            "### [Warp, the AI terminal for devs](https://www.warp.dev/cobra)"
+        )
+        .is_none());
+        assert!(
+            parse_readme_title_line("## [Click here to try](https://example.com/promo)").is_none()
+        );
+        assert!(parse_readme_title_line("# [Sponsored by Acme](https://acme.com)").is_none());
+        assert_eq!(
+            parse_readme_title_line("# MyProject [link](https://example.com)"),
+            Some("MyProject link".to_string())
+        );
+        assert_eq!(
+            parse_readme_title_line("# MyProject"),
+            Some("MyProject".to_string())
+        );
+    }
+
+    #[test]
+    fn try_parse_multiline_html_heading_extracts_name() {
+        let lines: Vec<&str> = vec![
+            "<h1 align=\"center\">",
+            "Vitest",
+            "</h1>",
+            "<p>Next generation testing framework.</p>",
+        ];
+        let result = try_parse_multiline_html_heading(&lines, 0);
+        assert_eq!(result, Some(("Vitest".to_string(), 3)));
+
+        let lines2: Vec<&str> = vec!["<h2>", "The Uncompromising", "Code Formatter", "</h2>"];
+        let result2 = try_parse_multiline_html_heading(&lines2, 0);
+        assert_eq!(
+            result2,
+            Some(("The Uncompromising Code Formatter".to_string(), 4))
+        );
+
+        let lines3: Vec<&str> = vec!["<h1>Sponsors</h1>"];
+        assert!(try_parse_multiline_html_heading(&lines3, 0).is_none());
+
+        let lines4: Vec<&str> = vec!["not a heading"];
+        assert!(try_parse_multiline_html_heading(&lines4, 0).is_none());
+    }
+
+    #[test]
     fn infer_pyproject_commands_produces_default_test_when_build_system_exists() {
         let candidate = infer_pyproject_commands(&ImportedFile {
             path: "pyproject.toml".into(),
@@ -13437,6 +13659,28 @@ pull_request_template = "generate"
         );
 
         fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn parse_security_contact_finds_backtick_email() {
+        assert_eq!(
+            parse_security_contact(
+                "Please email `cobra-security@googlegroups.com` for vulnerabilities.\n",
+            )
+            .as_deref(),
+            Some("cobra-security@googlegroups.com")
+        );
+    }
+
+    #[test]
+    fn parse_security_contact_rejects_non_security_url() {
+        assert_eq!(
+            parse_security_contact(
+                "## Best Practices\n\n2. [Use Go modules](https://go.dev/blog/using-go-modules) for dependency management.\n",
+            )
+            .as_deref(),
+            None
+        );
     }
 
     #[test]

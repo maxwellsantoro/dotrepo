@@ -2,8 +2,8 @@
 
 - Imported repository name, description, and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Left `repo.build` unset because `Cargo.toml`, `pyproject.toml`, and `.github/workflows/build-dev-binaries.yml` suggested conflicting build commands.
-- Imported repo.test from Cargo.toml as `cargo test --workspace`.
+- Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands.
+- Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

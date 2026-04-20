@@ -291,3 +291,230 @@ fn end_to_end_conflict_repo_does_not_promote() {
 
     fs::remove_dir_all(&root).expect("cleanup");
 }
+
+// ---------------------------------------------------------------------------
+// Invariant tests: promotion must never violate these contracts
+// ---------------------------------------------------------------------------
+
+#[test]
+fn promotion_never_rewrites_field_values() {
+    let root = temp_dir("invariant-no-rewrite");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit\n\nPolicy-aware release orchestration.\n",
+    )
+    .expect("README");
+    fs::write(
+        root.join("Cargo.toml"),
+        "[package]\nname = \"orbit\"\nversion = \"0.1.0\"\n",
+    )
+    .expect("Cargo.toml");
+
+    let source = "https://github.com/example/orbit";
+    let plan =
+        import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+    let verification = verify_import_plan(&root, &plan, source);
+    let report = score_import_fields(&plan, &verification);
+
+    let pre_name = plan.manifest.repo.name.clone();
+    let pre_description = plan.manifest.repo.description.clone();
+    let pre_build = plan.manifest.repo.build.clone();
+    let pre_test = plan.manifest.repo.test.clone();
+    let pre_homepage = plan.manifest.repo.homepage.clone();
+
+    let mut manifest = plan.manifest.clone();
+    let _ = promote_to_verified(&mut manifest, &report);
+
+    assert_eq!(manifest.repo.name, pre_name, "name must not change");
+    assert_eq!(
+        manifest.repo.description, pre_description,
+        "description must not change"
+    );
+    assert_eq!(manifest.repo.build, pre_build, "build must not change");
+    assert_eq!(manifest.repo.test, pre_test, "test must not change");
+    assert_eq!(
+        manifest.repo.homepage, pre_homepage,
+        "homepage must not change"
+    );
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}
+
+#[test]
+fn promotion_preserves_imported_provenance_origins() {
+    let root = temp_dir("invariant-provenance");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit\n\nPolicy-aware release orchestration.\n",
+    )
+    .expect("README");
+    fs::write(
+        root.join("Cargo.toml"),
+        "[package]\nname = \"orbit\"\nversion = \"0.1.0\"\n",
+    )
+    .expect("Cargo.toml");
+
+    let source = "https://github.com/example/orbit";
+    let plan =
+        import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+    let verification = verify_import_plan(&root, &plan, source);
+    let report = score_import_fields(&plan, &verification);
+
+    let mut manifest = plan.manifest.clone();
+    let pre_provenance = manifest.record.trust.as_ref().unwrap().provenance.clone();
+
+    let _ = promote_to_verified(&mut manifest, &report);
+
+    let post_provenance = manifest.record.trust.as_ref().unwrap().provenance.clone();
+
+    for entry in &pre_provenance {
+        assert!(
+            post_provenance.contains(entry),
+            "provenance origin '{}' must not be erased, got: {:?}",
+            entry,
+            post_provenance
+        );
+    }
+
+    assert!(
+        post_provenance.contains(&"verified".to_string()),
+        "'verified' should be added to provenance"
+    );
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}
+
+#[test]
+fn promotion_does_not_upgrade_unresolved_fields() {
+    let root = temp_dir("invariant-no-upgrade");
+    fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir");
+    fs::write(
+        root.join("README.md"),
+        "# Conflict\n\nConflicting workflows.\n",
+    )
+    .expect("README");
+    fs::write(
+        root.join(".github/workflows/ci.yml"),
+        "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+    ).expect("ci.yml");
+    fs::write(
+        root.join(".github/workflows/release.yml"),
+        "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+    ).expect("release.yml");
+
+    let source = "https://github.com/example/conflict";
+    let plan =
+        import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+    let verification = verify_import_plan(&root, &plan, source);
+    let report = score_import_fields(&plan, &verification);
+
+    let mut manifest = plan.manifest.clone();
+    let outcome = promote_to_verified(&mut manifest, &report);
+
+    assert!(!outcome.promoted);
+    assert!(
+        manifest.repo.build.is_none(),
+        "build must stay None when unresolved"
+    );
+    assert!(
+        manifest.repo.test.is_none(),
+        "test must stay None when unresolved"
+    );
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}
+
+#[test]
+fn promotion_only_touches_status_trust_and_evidence_wording() {
+    let root = temp_dir("invariant-scope");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit\n\nPolicy-aware release orchestration.\n",
+    )
+    .expect("README");
+    fs::write(
+        root.join("Cargo.toml"),
+        "[package]\nname = \"orbit\"\nversion = \"0.1.0\"\n",
+    )
+    .expect("Cargo.toml");
+
+    let source = "https://github.com/example/orbit";
+    let plan =
+        import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+    let verification = verify_import_plan(&root, &plan, source);
+    let report = score_import_fields(&plan, &verification);
+
+    let mut manifest = plan.manifest.clone();
+
+    let outcome = promote_to_verified(&mut manifest, &report);
+    assert!(outcome.promoted);
+
+    assert_eq!(manifest.repo.name, plan.manifest.repo.name);
+    assert_eq!(manifest.repo.description, plan.manifest.repo.description);
+    assert_eq!(manifest.repo.homepage, plan.manifest.repo.homepage);
+    assert_eq!(manifest.repo.build, plan.manifest.repo.build);
+    assert_eq!(manifest.repo.test, plan.manifest.repo.test);
+    assert_eq!(manifest.repo.license, plan.manifest.repo.license);
+    assert_eq!(manifest.repo.languages, plan.manifest.repo.languages);
+    assert_eq!(manifest.repo.topics, plan.manifest.repo.topics);
+    assert_eq!(
+        manifest.owners.as_ref().map(|o| &o.security_contact),
+        plan.manifest.owners.as_ref().map(|o| &o.security_contact)
+    );
+    assert_eq!(
+        manifest.owners.as_ref().map(|o| &o.team),
+        plan.manifest.owners.as_ref().map(|o| &o.team)
+    );
+    assert_eq!(
+        manifest.docs.as_ref().and_then(|d| d.root.as_ref()),
+        plan.manifest.docs.as_ref().and_then(|d| d.root.as_ref())
+    );
+    assert_eq!(manifest.record.source, plan.manifest.record.source);
+    assert_eq!(
+        manifest.record.generated_at,
+        plan.manifest.record.generated_at
+    );
+    assert_eq!(manifest.record.mode, plan.manifest.record.mode);
+    assert_eq!(manifest.x, plan.manifest.x);
+
+    assert_eq!(manifest.record.status, RecordStatus::Verified);
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}
+
+#[test]
+fn promotion_does_not_change_record_authority_semantics() {
+    let root = temp_dir("invariant-authority");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit\n\nPolicy-aware release orchestration.\n",
+    )
+    .expect("README");
+    fs::write(
+        root.join("Cargo.toml"),
+        "[package]\nname = \"orbit\"\nversion = \"0.1.0\"\n",
+    )
+    .expect("Cargo.toml");
+
+    let source = "https://github.com/example/orbit";
+    let plan =
+        import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+    let verification = verify_import_plan(&root, &plan, source);
+    let report = score_import_fields(&plan, &verification);
+
+    let mut manifest = plan.manifest.clone();
+    let _ = promote_to_verified(&mut manifest, &report);
+
+    assert_eq!(
+        manifest.record.mode,
+        RecordMode::Overlay,
+        "mode must remain overlay"
+    );
+    assert_eq!(
+        manifest.record.source.as_deref(),
+        Some("https://github.com/example/orbit"),
+        "source must remain unchanged"
+    );
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}

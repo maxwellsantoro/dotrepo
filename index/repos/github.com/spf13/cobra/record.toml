@@ -1,0 +1,66 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/spf13/cobra"
+generated_at = "2026-04-20T13:13:14.292829Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "cobra"
+description = "Cobra is a library for creating powerful modern CLI applications."
+homepage = "https://cobra.dev"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Go",
+    "Makefile",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "cobra",
+    "cobra-library",
+    "cobra-generator",
+    "posix-compliant-flags",
+    "command-cobra",
+    "cli-app",
+    "command-line",
+    "commandline",
+    "command",
+    "cli",
+    "go",
+    "golang",
+    "golang-library",
+    "golang-application",
+    "subcommands",
+    "posix",
+]
+
+[owners]
+maintainers = []
+security_contact = "cobra-security@googlegroups.com"
+
+[docs]
+root = "https://pkg.go.dev/badge/github.com/spf13/cobra.svg"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/spf13/cobra.git"
+default_branch = "main"
+fork = false
+head_sha = "f2878bab8c96afd6e36968af96343b35dbb82a82"
+html_url = "https://github.com/spf13/cobra"
+stars = 43732
