@@ -10,8 +10,8 @@ use crate::{
 };
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
-    current_timestamp_rfc3339, import_repository_with_options, validate_manifest, ImportMode,
-    ImportOptions,
+    current_timestamp_rfc3339, import_repository_with_options, promote_to_verified,
+    score_import_fields, validate_manifest, verify_import_plan, ImportMode, ImportOptions,
 };
 use dotrepo_schema::{render_manifest, Manifest};
 use std::fs;
@@ -98,6 +98,8 @@ pub(crate) fn crawl_repository_from_snapshot(
             generated_at: Some(generated_at.clone()),
         },
     )?;
+
+    let verification = verify_import_plan(&materialized.repository_root, &import_plan, &source_url);
     import_plan.manifest_path = record_root.join("record.toml");
     import_plan.evidence_path = Some(record_root.join("evidence.md"));
 
@@ -118,6 +120,22 @@ pub(crate) fn crawl_repository_from_snapshot(
     import_plan.manifest_text = render_manifest(&import_plan.manifest)?;
     import_plan.evidence_text =
         append_github_evidence(import_plan.evidence_text, &import_plan.manifest, snapshot);
+
+    let field_scores = score_import_fields(&import_plan, &verification);
+    let promotion = promote_to_verified(&mut import_plan.manifest, &field_scores);
+    if promotion.promoted {
+        diagnostics.push(CrawlDiagnostic::info(
+            "pipeline.auto_promoted",
+            format!(
+                "auto-promoted record from {} to verified: {}",
+                promotion.previous_status, promotion.reason,
+            ),
+        ));
+        import_plan.manifest_text = render_manifest(&import_plan.manifest)?;
+        if let Some(ref mut evidence) = import_plan.evidence_text {
+            evidence.push_str("\n## Auto-promotion\n\nAll fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.\n");
+        }
+    }
 
     let (synthesis, synthesis_failure, synthesis_diagnostics) =
         maybe_attempt_synthesis(request, &record_root, &generated_at);
@@ -148,6 +166,8 @@ pub(crate) fn crawl_repository_from_snapshot(
             synthesis_failure,
         },
         state_record,
+        verification,
+        field_scores,
         diagnostics,
     })
 }

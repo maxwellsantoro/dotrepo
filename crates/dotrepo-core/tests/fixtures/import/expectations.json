@@ -331,7 +331,9 @@
     "fixture": "manifest-workflow-conflict",
     "repo_name": "Orbit",
     "repo_description": "Policy-aware release orchestration for multi-service deploys.",
-    "imported_sources": ["README.md"],
+    "repo_build": "cargo build --workspace",
+    "repo_test": "cargo test --workspace",
+    "imported_sources": ["README.md", "Cargo.toml"],
     "inferred_fields": [],
     "maintainers": [],
     "team": null,
@@ -339,8 +341,8 @@
     "native_status": "draft",
     "overlay_status": "imported",
     "trust_provenance": ["imported"],
-    "native_trust_note_contains": ["Bootstrapped from `README.md`.", "Left `repo.build` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting build commands.", "Left `repo.test` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting test commands."],
-    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "Left `repo.build` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting build commands.", "Left `repo.test` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting test commands.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Left `repo.build` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting build commands.", "Left `repo.test` unset because `Cargo.toml` and `.github/workflows/ci.yml` suggested conflicting test commands.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "native_trust_note_contains": ["Bootstrapped from `README.md` and `Cargo.toml`.", "Imported `repo.build` from `Cargo.toml`.", "Imported `repo.test` from `Cargo.toml`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md` and `Cargo.toml`.", "Imported `repo.build` from `Cargo.toml`.", "Imported `repo.test` from `Cargo.toml`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported repo.build from Cargo.toml as `cargo build --workspace`.", "Imported repo.test from Cargo.toml as `cargo test --workspace`.", "This is an overlay record, not a maintainer-controlled canonical record."]
   }
 ]
