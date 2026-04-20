@@ -4489,11 +4489,41 @@ pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
 
         let contents = match fs::read_to_string(&path) {
             Ok(c) => c,
-            Err(_) => continue,
+            Err(e) => {
+                records.push(PromotionRecordScore {
+                    path: relative,
+                    source_url: None,
+                    status: None,
+                    scores: vec![FieldScore {
+                        field: "record.read".into(),
+                        confidence: FieldConfidence::Unresolved,
+                        source: None,
+                        value: None,
+                        reason: format!("unreadable: {e}"),
+                    }],
+                    eligible: false,
+                });
+                continue;
+            }
         };
         let manifest: Manifest = match toml::from_str(&contents) {
             Ok(m) => m,
-            Err(_) => continue,
+            Err(e) => {
+                records.push(PromotionRecordScore {
+                    path: relative,
+                    source_url: None,
+                    status: None,
+                    scores: vec![FieldScore {
+                        field: "record.parse".into(),
+                        confidence: FieldConfidence::Unresolved,
+                        source: None,
+                        value: None,
+                        reason: format!("invalid TOML: {e}"),
+                    }],
+                    eligible: false,
+                });
+                continue;
+            }
         };
 
         let scores = score_index_record_for_promotion(&manifest);
@@ -5079,10 +5109,19 @@ fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCommandCandida
     let mut has_test = false;
     for line in file.contents.lines() {
         let trimmed = line.trim();
-        // Justfile recipes start with a name followed by ':' or ':='
-        // (but not assignment ':=' at top level for recipes)
-        if let Some(name) = trimmed.split(':').next() {
-            let name = name.trim();
+        // Skip ':=' assignments (variables) and '[' (settings/aliases)
+        if trimmed.contains(":=") || trimmed.starts_with('[') {
+            continue;
+        }
+        // Recipes: "name:" or "name arg:" — split on first ':' and check the lhs
+        if let Some(colon_pos) = trimmed.find(':') {
+            let lhs = trimmed[..colon_pos].trim();
+            // lhs must be a valid recipe identifier (no spaces, no '=')
+            if lhs.contains(' ') || lhs.contains('=') || lhs.is_empty() {
+                continue;
+            }
+            // The first word of lhs is the recipe name (may have args after it)
+            let name = lhs.split_whitespace().next().unwrap_or(lhs);
             if name == "build" || name == "all" {
                 has_build = true;
             }
@@ -5127,7 +5166,9 @@ fn infer_contributing_commands(file: &ImportedFile) -> Option<ImportedCommandCan
         let lower = trimmed.to_lowercase();
         if build.is_none()
             && (lower.starts_with("cargo build")
-                || lower.starts_with("make")
+                || lower == "make"
+                || lower.starts_with("make build")
+                || lower.starts_with("make all")
                 || lower.starts_with("npm run build")
                 || lower.starts_with("go build")
                 || lower.starts_with("just build"))
@@ -12243,6 +12284,34 @@ jobs:
     }
 
     #[test]
+    fn justfile_assignments_do_not_produce_taskscript_candidates() {
+        let root = temp_dir("import-justfile-assignments");
+        fs::write(
+            root.join("README.md"),
+            "# JustVars\n\nA project with justfile variables only.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("justfile"),
+            "build := \"cargo build\"\n\
+             test := \"cargo test\"\n",
+        )
+        .expect("justfile written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/justvars"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build, None);
+        assert_eq!(plan.manifest.repo.test, None);
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
     fn contributing_md_produces_contribdoc_candidates() {
         let root = temp_dir("import-contributing");
         fs::write(
@@ -12266,6 +12335,33 @@ jobs:
         assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
         assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
         assert!(plan.inferred_fields.is_empty());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn contributing_md_does_not_treat_make_lint_as_build_command() {
+        let root = temp_dir("import-contributing-lint");
+        fs::write(
+            root.join("README.md"),
+            "# ContribLint\n\nA project with CONTRIBUTING.md.\n",
+        )
+        .expect("README written");
+        fs::write(
+            root.join("CONTRIBUTING.md"),
+            "# Contributing\n\n```bash\nmake lint\nmake test\n```\n",
+        )
+        .expect("CONTRIBUTING.md written");
+
+        let plan = import_repository(
+            &root,
+            ImportMode::Overlay,
+            Some("https://github.com/example/contriblint"),
+        )
+        .expect("import succeeds");
+
+        assert_eq!(plan.manifest.repo.build, None);
+        assert_eq!(plan.manifest.repo.test.as_deref(), Some("make test"));
 
         fs::remove_dir_all(root).expect("temp dir removed");
     }

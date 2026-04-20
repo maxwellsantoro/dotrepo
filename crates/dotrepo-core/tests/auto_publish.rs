@@ -1,5 +1,6 @@
 use dotrepo_core::{
-    import_repository, promote_to_verified, score_import_fields, verify_import_plan,
+    analyze_index_promotion, import_repository, promote_to_verified, score_import_fields,
+    verify_import_plan,
     FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary, ImportMode,
 };
 use dotrepo_schema::{Manifest, Record, RecordMode, RecordStatus, Repo};
@@ -514,6 +515,122 @@ fn promotion_does_not_change_record_authority_semantics() {
         manifest.record.source.as_deref(),
         Some("https://github.com/example/orbit"),
         "source must remain unchanged"
+    );
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}
+
+#[test]
+fn promotion_analysis_includes_malformed_records_as_blocked() {
+    let root = temp_dir("promotion-analysis-malformed");
+    let repos_root = root.join("repos/github.com/example");
+
+    fs::create_dir_all(repos_root.join("good")).expect("good dir");
+    fs::create_dir_all(repos_root.join("bad")).expect("bad dir");
+
+    fs::write(
+        repos_root.join("good/record.toml"),
+        r#"schema = "dotrepo/v0.1"
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/good"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+
+[repo]
+name = "good"
+description = "good"
+homepage = "https://github.com/example/good"
+languages = []
+topics = []
+
+[relations]
+references = []
+"#,
+    )
+    .expect("good record");
+    fs::write(repos_root.join("bad/record.toml"), "not toml\n").expect("bad record");
+
+    let report = analyze_index_promotion(&root).expect("promotion analysis succeeds");
+
+    assert_eq!(report.summary.total_records, 2);
+    assert_eq!(report.summary.eligible_count, 1);
+
+    let malformed = report
+        .records
+        .iter()
+        .find(|record| record.path.ends_with("github.com/example/bad/record.toml"))
+        .expect("malformed record included");
+    assert!(!malformed.eligible);
+    assert!(
+        malformed
+            .scores
+            .iter()
+            .any(|score| score.field == "record.parse"),
+        "expected parse blocker, got: {:?}",
+        malformed.scores
+    );
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}
+
+#[test]
+fn justfile_only_assignments_do_not_import_as_commands() {
+    let root = temp_dir("justfile-assignments");
+    fs::write(
+        root.join("README.md"),
+        "# AssignOnly\n\nUses justfile variables.\n",
+    )
+    .expect("README");
+    fs::write(
+        root.join("justfile"),
+        "build := \"cargo build\"\ntest := \"cargo test\"\n",
+    )
+    .expect("justfile");
+
+    let source = "https://github.com/example/assignonly";
+    let plan =
+        import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+
+    assert!(
+        plan.manifest.repo.build.is_none(),
+        "justfile variable assignments must not be treated as recipes, got build = {:?}",
+        plan.manifest.repo.build
+    );
+    assert!(
+        plan.manifest.repo.test.is_none(),
+        "justfile variable assignments must not be treated as recipes, got test = {:?}",
+        plan.manifest.repo.test
+    );
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}
+
+#[test]
+fn contributing_make_lint_is_not_imported_as_build() {
+    let root = temp_dir("contributing-make-lint");
+    fs::write(
+        root.join("README.md"),
+        "# LintOnly\n\nHas CONTRIBUTING with make lint.\n",
+    )
+    .expect("README");
+    fs::write(
+        root.join("CONTRIBUTING.md"),
+        "# Contributing\n\n## Setup\n\n```bash\nmake lint\nmake fmt\n```\n",
+    )
+    .expect("CONTRIBUTING");
+
+    let source = "https://github.com/example/lintonly";
+    let plan =
+        import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+
+    assert!(
+        plan.manifest.repo.build.is_none(),
+        "'make lint' must not be imported as repo.build, got {:?}",
+        plan.manifest.repo.build
     );
 
     fs::remove_dir_all(&root).expect("cleanup");

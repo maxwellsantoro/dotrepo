@@ -7,10 +7,11 @@ use anyhow::Result;
 pub(crate) fn schedule_refresh_impl(
     request: &ScheduleRefreshRequest,
 ) -> Result<ScheduleRefreshReport> {
+    let mut applicable = Vec::new();
     let mut scheduled = Vec::new();
     let mut skipped = Vec::new();
 
-    for candidate in &request.candidates {
+    for (index, candidate) in request.candidates.iter().enumerate() {
         let reason = refresh_reason(
             candidate,
             &request.state.repositories,
@@ -19,25 +20,32 @@ pub(crate) fn schedule_refresh_impl(
         );
 
         match reason {
-            Some(reason) if scheduled.len() < request.limit => {
-                scheduled.push(ScheduledRefresh {
-                    repository: candidate.repository.clone(),
-                    default_branch: candidate.default_branch.clone(),
-                    head_sha: candidate.head_sha.clone(),
-                    reason,
-                    scheduled_at: request.now.clone(),
-                    synthesize: request.synthesize,
-                    synthesis_model: request.synthesis_model.clone(),
-                });
-            }
-            Some(reason) => skipped.push(SkippedRefresh {
-                repository: candidate.repository.clone(),
-                reason: format!("{} (limit reached)", refresh_reason_label(reason)),
-            }),
+            Some(reason) => applicable.push((index, candidate, reason)),
             None => skipped.push(SkippedRefresh {
                 repository: candidate.repository.clone(),
                 reason: "already fresh".into(),
             }),
+        }
+    }
+
+    applicable.sort_by_key(|(index, _, reason)| (refresh_reason_rank(*reason), *index));
+
+    for (position, (_, candidate, reason)) in applicable.into_iter().enumerate() {
+        if position < request.limit {
+            scheduled.push(ScheduledRefresh {
+                repository: candidate.repository.clone(),
+                default_branch: candidate.default_branch.clone(),
+                head_sha: candidate.head_sha.clone(),
+                reason,
+                scheduled_at: request.now.clone(),
+                synthesize: request.synthesize,
+                synthesis_model: request.synthesis_model.clone(),
+            });
+        } else {
+            skipped.push(SkippedRefresh {
+                repository: candidate.repository.clone(),
+                reason: format!("{} (limit reached)", refresh_reason_label(reason)),
+            });
         }
     }
 
@@ -93,6 +101,16 @@ fn refresh_reason_label(reason: RefreshReason) -> &'static str {
         RefreshReason::MissingSynthesis => "missing synthesis",
         RefreshReason::PreviousSynthesisFailed => "previous synthesis failed",
         RefreshReason::SynthesisModelChanged => "synthesis model changed",
+    }
+}
+
+fn refresh_reason_rank(reason: RefreshReason) -> u8 {
+    match reason {
+        RefreshReason::MissingFactualCrawl => 0,
+        RefreshReason::HeadChanged => 1,
+        RefreshReason::PreviousSynthesisFailed => 2,
+        RefreshReason::MissingSynthesis => 3,
+        RefreshReason::SynthesisModelChanged => 4,
     }
 }
 
@@ -215,5 +233,58 @@ mod tests {
                 RefreshReason::SynthesisModelChanged
             ]
         );
+    }
+
+    #[test]
+    fn schedule_refresh_prioritizes_factual_work_when_limit_is_tight() {
+        let request = ScheduleRefreshRequest {
+            now: None,
+            limit: 1,
+            synthesize: true,
+            synthesis_model: Some("gpt-5.4".into()),
+            state: CrawlerStateSnapshot {
+                repositories: vec![
+                    CrawlStateRecord {
+                        repository: repository("alpha"),
+                        default_branch: Some("main".into()),
+                        head_sha: Some("aaa111".into()),
+                        last_factual_crawl_at: Some("2026-03-16T12:00:00Z".into()),
+                        last_synthesis_success_at: None,
+                        last_synthesis_failure: None,
+                        synthesis_model: None,
+                    },
+                    CrawlStateRecord {
+                        repository: repository("zeta"),
+                        default_branch: Some("main".into()),
+                        head_sha: Some("bbb111".into()),
+                        last_factual_crawl_at: Some("2026-03-16T12:00:00Z".into()),
+                        last_synthesis_success_at: Some("2026-03-16T12:10:00Z".into()),
+                        last_synthesis_failure: None,
+                        synthesis_model: Some("gpt-5.4".into()),
+                    },
+                ],
+            },
+            candidates: vec![
+                RefreshCandidate {
+                    repository: repository("alpha"),
+                    default_branch: Some("main".into()),
+                    head_sha: Some("aaa111".into()),
+                },
+                RefreshCandidate {
+                    repository: repository("zeta"),
+                    default_branch: Some("main".into()),
+                    head_sha: Some("bbb222".into()),
+                },
+            ],
+        };
+
+        let report = schedule_refresh_impl(&request).expect("schedule builds");
+
+        assert_eq!(report.scheduled.len(), 1);
+        assert_eq!(report.scheduled[0].repository.repo, "zeta");
+        assert_eq!(report.scheduled[0].reason, RefreshReason::HeadChanged);
+        assert_eq!(report.skipped.len(), 1);
+        assert_eq!(report.skipped[0].repository.repo, "alpha");
+        assert_eq!(report.skipped[0].reason, "missing synthesis (limit reached)");
     }
 }
