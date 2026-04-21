@@ -377,6 +377,7 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
         synthesize: false,
         synthesis_model: None,
         synthesis_provider: None,
+        prior_synthesis_failure: None,
     })?;
 
     let mut state_path = None;
@@ -506,6 +507,7 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
             synthesize: false,
             synthesis_model: None,
             synthesis_provider: None,
+            prior_synthesis_failure: None,
         }) {
             Ok(report) => {
                 if args.dry_run {
@@ -879,19 +881,21 @@ fn parse_repository_target(value: &str, default_host: &str) -> Result<Repository
         .trim_start_matches("http://")
         .trim_matches('/');
     let segments = trimmed.split('/').collect::<Vec<_>>();
-    match segments.as_slice() {
-        [owner, repo] => Ok(RepositoryRef {
+    let repository = match segments.as_slice() {
+        [owner, repo] => RepositoryRef {
             host: default_host.into(),
             owner: owner.to_string(),
             repo: repo.to_string(),
-        }),
-        [host, owner, repo] => Ok(RepositoryRef {
+        },
+        [host, owner, repo] => RepositoryRef {
             host: host.to_string(),
             owner: owner.to_string(),
             repo: repo.to_string(),
-        }),
+        },
         _ => bail!("expected owner/repo or host/owner/repo"),
-    }
+    };
+    repository.validate_identity()?;
+    Ok(repository)
 }
 
 fn discovery_report_from_targets(
@@ -1587,6 +1591,30 @@ https://github.com/tokio-rs/tokio
                 },
             ]
         );
+    }
+
+    #[test]
+    fn parse_repository_targets_rejects_path_traversal() {
+        let err = parse_repository_targets("example/..", "github.com")
+            .expect_err("dot-dot should be rejected");
+        assert!(
+            err.to_string().contains("must not be empty"),
+            "expected segment validation error, got: {}",
+            err
+        );
+
+        let err = parse_repository_targets("example/repo\\name", "github.com")
+            .expect_err("backslash should be rejected");
+        assert!(
+            err.to_string().contains("path separators"),
+            "expected path separator error, got: {}",
+            err
+        );
+
+        // Multi-segment traversal that parses as 3 segments: host / owner / ".."
+        let err = parse_repository_targets("github.com/example/..", "github.com")
+            .expect_err("dot-dot in repo should be rejected");
+        assert!(err.to_string().contains("must not be empty"));
     }
 
     #[test]

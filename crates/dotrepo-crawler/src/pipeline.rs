@@ -141,13 +141,19 @@ pub(crate) fn crawl_repository_from_snapshot(
         maybe_attempt_synthesis(request, &record_root, &generated_at);
     diagnostics.extend(synthesis_diagnostics);
 
+    let preserved_synthesis_failure = if request.synthesize {
+        synthesis_failure.clone()
+    } else {
+        request.prior_synthesis_failure.clone()
+    };
+
     let state_record = CrawlStateRecord {
         repository: request.repository.clone(),
         default_branch: Some(snapshot.default_branch.clone()),
         head_sha: snapshot.head_sha.clone(),
         last_factual_crawl_at: Some(generated_at.clone()),
         last_synthesis_success_at: synthesis.as_ref().map(|_| generated_at.clone()),
-        last_synthesis_failure: synthesis_failure.clone(),
+        last_synthesis_failure: preserved_synthesis_failure,
         synthesis_model: request.synthesis_model.clone(),
     };
 
@@ -173,12 +179,7 @@ pub(crate) fn crawl_repository_from_snapshot(
 }
 
 fn validate_repository_identity(repository: &RepositoryRef) -> Result<()> {
-    if repository.host.trim().is_empty()
-        || repository.owner.trim().is_empty()
-        || repository.repo.trim().is_empty()
-    {
-        bail!("repository identity must include host, owner, and repo");
-    }
+    repository.validate_identity()?;
     if repository.host.trim() != "github.com" {
         bail!("crawl_repository currently supports github.com identities only");
     }
@@ -585,6 +586,7 @@ mod tests {
             synthesize: false,
             synthesis_model: None,
             synthesis_provider: None,
+            prior_synthesis_failure: None,
         };
 
         let report = crawl_repository_from_snapshot(
@@ -688,6 +690,7 @@ mod tests {
             synthesize: false,
             synthesis_model: None,
             synthesis_provider: None,
+            prior_synthesis_failure: None,
         };
 
         let err = crawl_repository_from_snapshot(&request, &snapshot(None), &materialized)
@@ -722,6 +725,7 @@ mod tests {
             synthesize: true,
             synthesis_model: Some("gpt-5.4".into()),
             synthesis_provider: Some("openai".into()),
+            prior_synthesis_failure: None,
         };
 
         let report = crawl_repository_from_snapshot(
@@ -762,6 +766,7 @@ mod tests {
             synthesize: false,
             synthesis_model: None,
             synthesis_provider: None,
+            prior_synthesis_failure: None,
         };
         let client = FakeGitHubClient {
             snapshot: snapshot(Some("GitHub description fallback")),
@@ -812,6 +817,7 @@ mod tests {
             synthesize: false,
             synthesis_model: None,
             synthesis_provider: None,
+            prior_synthesis_failure: None,
         };
         let client = FakeGitHubClient {
             snapshot: snapshot(Some("GitHub description fallback")),
@@ -841,6 +847,55 @@ mod tests {
             .any(|path| path == "README.mdx"));
         assert!(evidence.contains("Imported repository name and description from README.mdx."));
 
+        fs::remove_dir_all(index_root).expect("index temp removed");
+    }
+
+    #[test]
+    fn crawl_from_snapshot_preserves_prior_synthesis_failure_when_not_synthesizing() {
+        let index_root = temp_dir("preserve-synthesis-failure");
+        let materialized = materialize_repository(&MaterializeRepositoryInput {
+            repository: repository(),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# Orbit\n\nRepository description.\n".into(),
+                }),
+                ..Default::default()
+            },
+        })
+        .expect("materialization succeeds");
+        let prior_failure = SynthesisFailureMetadata {
+            class: SynthesisFailureClass::RateLimited,
+            message: "secondary rate limit".into(),
+            occurred_at: Some("2026-03-16T12:00:00Z".into()),
+            model: Some("gpt-5.3".into()),
+            provider: Some("openai".into()),
+        };
+        let request = CrawlRepositoryRequest {
+            index_root: index_root.clone(),
+            repository: repository(),
+            generated_at: Some("2026-03-17T12:00:00Z".into()),
+            source_url: None,
+            synthesize: false,
+            synthesis_model: None,
+            synthesis_provider: None,
+            prior_synthesis_failure: Some(prior_failure.clone()),
+        };
+
+        let report = crawl_repository_from_snapshot(
+            &request,
+            &snapshot(Some("GitHub description")),
+            &materialized,
+        )
+        .expect("crawl succeeds");
+
+        assert_eq!(
+            report.state_record.last_synthesis_failure,
+            Some(prior_failure),
+            "synthesis failure should be preserved when synthesis is not requested"
+        );
+
+        fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");
     }
 }

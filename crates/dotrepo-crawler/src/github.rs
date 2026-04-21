@@ -27,6 +27,8 @@ const SUPPLEMENTAL_ROOT_FILES: &[&str] =
 const MAX_WORKFLOW_FILES: usize = 8;
 const GITHUB_HTTP_TIMEOUT: Duration = Duration::from_secs(30);
 const GITHUB_HTTP_CONNECT_TIMEOUT: Duration = Duration::from_secs(10);
+const MAX_RATE_LIMIT_RETRIES: u32 = 3;
+const RATE_LIMIT_RETRY_BASE: Duration = Duration::from_secs(2);
 
 pub(crate) trait GitHubClient {
     fn fetch_repository_head(
@@ -219,29 +221,19 @@ impl HttpGitHubClient {
     }
 
     fn get_json<T: DeserializeOwned>(&self, url: Url) -> Result<T> {
-        let response = self
-            .client
-            .get(url.clone())
-            .send()
-            .with_context(|| format!("failed to GET {}", url.as_str()))?;
-        let response = error_for_status(response, url.as_str())?;
+        let response = self.send_with_retry(url.clone())?;
         response
             .json()
             .with_context(|| format!("failed to decode GitHub response {}", url.as_str()))
     }
 
     fn get_optional_text(&self, url: Url) -> Result<Option<String>> {
-        let response = self
-            .client
-            .get(url.clone())
-            .send()
-            .with_context(|| format!("failed to GET {}", url.as_str()))?;
+        let response = self.send_with_retry(url.clone())?;
 
         if response.status() == StatusCode::NOT_FOUND {
             return Ok(None);
         }
 
-        let response = error_for_status(response, url.as_str())?;
         let text = response
             .text()
             .with_context(|| format!("failed to decode text response {}", url.as_str()))?;
@@ -249,17 +241,12 @@ impl HttpGitHubClient {
     }
 
     fn get_optional_json<T: DeserializeOwned>(&self, url: Url) -> Result<Option<T>> {
-        let response = self
-            .client
-            .get(url.clone())
-            .send()
-            .with_context(|| format!("failed to GET {}", url.as_str()))?;
+        let response = self.send_with_retry(url.clone())?;
 
         if response.status() == StatusCode::NOT_FOUND {
             return Ok(None);
         }
 
-        let response = error_for_status(response, url.as_str())?;
         let decoded = response
             .json()
             .with_context(|| format!("failed to decode GitHub response {}", url.as_str()))?;
@@ -333,6 +320,60 @@ impl HttpGitHubClient {
             }
         }
         Ok(files)
+    }
+
+    fn send_with_retry(&self, url: Url) -> Result<Response> {
+        let mut attempt = 0;
+        loop {
+            let response = self
+                .client
+                .get(url.clone())
+                .send()
+                .with_context(|| format!("failed to GET {}", url.as_str()))?;
+
+            let status = response.status();
+            if status.is_success() || status == StatusCode::NOT_FOUND {
+                return Ok(response);
+            }
+
+            let is_rate_limited = status == StatusCode::TOO_MANY_REQUESTS
+                || response
+                    .headers()
+                    .get("x-ratelimit-remaining")
+                    .and_then(|value| value.to_str().ok())
+                    == Some("0");
+
+            if !is_rate_limited || attempt >= MAX_RATE_LIMIT_RETRIES {
+                let body = response.text().unwrap_or_default();
+                if is_rate_limited {
+                    return Err(anyhow!(
+                        "GitHub API rate limited after {} retries {}: HTTP {} {}",
+                        attempt,
+                        url,
+                        status.as_u16(),
+                        compact_error_body(&body)
+                    ));
+                }
+                return Err(anyhow!(
+                    "GitHub request failed {}: HTTP {} {}",
+                    url,
+                    status.as_u16(),
+                    compact_error_body(&body)
+                ));
+            }
+
+            let sleep_duration = rate_limit_sleep_duration(&response, attempt);
+            let _ = response.text(); // drain body
+            eprintln!(
+                "dotrepo-crawler: rate limited on {} (attempt {}/{}), sleeping {:.1}s",
+                url.path(),
+                attempt + 1,
+                MAX_RATE_LIMIT_RETRIES,
+                sleep_duration.as_secs_f64()
+            );
+            std::thread::sleep(sleep_duration);
+            attempt += 1;
+        }
     }
 }
 
@@ -495,34 +536,26 @@ fn github_token() -> Option<String> {
         .filter(|token| !token.is_empty())
 }
 
-fn error_for_status(response: Response, url: &str) -> Result<Response> {
-    let status = response.status();
-    if status.is_success() {
-        return Ok(response);
+fn rate_limit_sleep_duration(response: &Response, attempt: u32) -> Duration {
+    let reset_seconds = response
+        .headers()
+        .get("x-ratelimit-reset")
+        .and_then(|value| value.to_str().ok())
+        .and_then(|value| value.parse::<u64>().ok());
+
+    if let Some(reset_epoch) = reset_seconds {
+        let now_epoch = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_secs();
+        if reset_epoch > now_epoch {
+            let wait = reset_epoch - now_epoch;
+            return Duration::from_secs(wait.min(120));
+        }
     }
 
-    let rate_limited = status == StatusCode::TOO_MANY_REQUESTS
-        || response
-            .headers()
-            .get("x-ratelimit-remaining")
-            .and_then(|value| value.to_str().ok())
-            == Some("0");
-    let body = response.text().unwrap_or_default();
-    if rate_limited || body.to_ascii_lowercase().contains("rate limit") {
-        return Err(anyhow!(
-            "GitHub API rate limited {}: HTTP {} {}",
-            url,
-            status.as_u16(),
-            compact_error_body(&body)
-        ));
-    }
-
-    Err(anyhow!(
-        "GitHub request failed {}: HTTP {} {}",
-        url,
-        status.as_u16(),
-        compact_error_body(&body)
-    ))
+    let jitter = (attempt as u64 * 37) % 1000;
+    RATE_LIMIT_RETRY_BASE * 2u32.pow(attempt) + Duration::from_millis(jitter)
 }
 
 fn compact_error_body(body: &str) -> String {
@@ -557,7 +590,10 @@ fn build_repository_search_query(
 
 fn render_star_band(star_band: &StarBand) -> String {
     match star_band.max_stars {
-        Some(max_stars) => format!("{}..{}", star_band.min_stars, max_stars),
+        Some(max_stars) if max_stars > star_band.min_stars => {
+            format!("{}..{}", star_band.min_stars, max_stars - 1)
+        }
+        Some(_) => format!(">={}", star_band.min_stars),
         None => format!(">={}", star_band.min_stars),
     }
 }

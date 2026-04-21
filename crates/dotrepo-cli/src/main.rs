@@ -8,7 +8,7 @@ use dotrepo_core::{
     preview_surfaces, public_repository_query_or_error_with_base,
     public_repository_summary_or_error_with_base, public_repository_trust_or_error_with_base,
     query_repository, scaffold_claim_directory, trust_repository, validate_index_root,
-    validate_manifest, validate_repository, ClaimEventAppendInput, ClaimEventKind,
+    validate_manifest, validate_repository, write_import_outputs, ClaimEventAppendInput, ClaimEventKind,
     ClaimHandoffOutcome, ClaimInspectionReport, ClaimScaffoldInput, ConflictRelationship,
     DoctorOwnershipHonesty, DoctorRecommendedMode, DoctorReport, DoctorSurface, ImportMode,
     ImportOptions, IndexFindingSeverity, ManagedFileState, PublicErrorResponse, SelectionReason,
@@ -19,8 +19,6 @@ use dotrepo_schema::{RecordMode, Trust};
 use serde::Serialize;
 use serde_json::Value;
 use std::fs;
-use std::fs::{File, OpenOptions};
-use std::io::{ErrorKind, Write};
 use std::path::PathBuf;
 use std::process;
 use thiserror::Error;
@@ -529,7 +527,7 @@ fn cmd_import(
         .iter()
         .map(|(path, _)| path.clone())
         .collect::<Vec<_>>();
-    write_import_outputs(outputs, force)?;
+    write_import_outputs(outputs, force, "--force")?;
     for path in written_paths {
         println!("imported {}", path.display());
     }
@@ -544,77 +542,6 @@ fn cmd_import(
     println!("- status: {:?}", plan.manifest.record.status);
 
     Ok(())
-}
-
-struct ReservedImportOutput {
-    path: PathBuf,
-    contents: String,
-    file: File,
-}
-
-fn write_import_outputs(outputs: Vec<(PathBuf, String)>, force: bool) -> Result<()> {
-    if force {
-        for (path, contents) in outputs {
-            if let Some(parent) = path.parent() {
-                fs::create_dir_all(parent)?;
-            }
-            fs::write(path, contents)?;
-        }
-        return Ok(());
-    }
-
-    let mut reserved = Vec::new();
-    for (path, contents) in outputs {
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
-        }
-
-        let file = match OpenOptions::new().write(true).create_new(true).open(&path) {
-            Ok(file) => file,
-            Err(err) => {
-                cleanup_reserved_import_outputs(reserved);
-                return Err(match err.kind() {
-                    ErrorKind::AlreadyExists => anyhow::anyhow!(
-                        "{} already exists; rerun with --force to overwrite imported artifacts",
-                        path.display()
-                    ),
-                    _ => err.into(),
-                });
-            }
-        };
-
-        reserved.push(ReservedImportOutput {
-            path,
-            contents,
-            file,
-        });
-    }
-
-    for idx in 0..reserved.len() {
-        let write_result = {
-            let reserved_output = &mut reserved[idx];
-            reserved_output
-                .file
-                .write_all(reserved_output.contents.as_bytes())
-                .and_then(|_| reserved_output.file.flush())
-        };
-        if let Err(err) = write_result {
-            cleanup_reserved_import_outputs(reserved);
-            return Err(err.into());
-        }
-    }
-
-    Ok(())
-}
-
-fn cleanup_reserved_import_outputs(outputs: Vec<ReservedImportOutput>) {
-    let paths = outputs
-        .into_iter()
-        .map(|reserved| reserved.path)
-        .collect::<Vec<_>>();
-    for path in paths {
-        let _ = fs::remove_file(path);
-    }
 }
 
 fn cmd_query(root: PathBuf, path: &str, json: bool, raw: bool) -> Result<()> {
@@ -2310,7 +2237,7 @@ homepage = "https://github.com/example/project"
         let path = root.join(".repo");
         fs::write(&path, "existing\n").expect("existing file written");
 
-        let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false)
+        let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false, "--force")
             .expect_err("existing file should be preserved");
         assert!(err.to_string().contains("already exists"));
         assert_eq!(

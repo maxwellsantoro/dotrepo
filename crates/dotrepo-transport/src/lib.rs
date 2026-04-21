@@ -1,5 +1,6 @@
 use anyhow::{anyhow, bail, Context, Result};
 use serde::Serialize;
+use serde_json::{json, Value};
 use std::io::{BufRead, Write};
 
 const MAX_JSONRPC_MESSAGE_BYTES: usize = 8 * 1024 * 1024;
@@ -99,6 +100,31 @@ pub fn write_jsonrpc_message(writer: &mut impl Write, message: &impl Serialize) 
     writer.write_all(&payload)?;
     writer.flush()?;
     Ok(())
+}
+
+pub const JSONRPC_VERSION: &str = "2.0";
+
+pub fn jsonrpc_response(id: Value, result: Value) -> Value {
+    json!({
+        "jsonrpc": JSONRPC_VERSION,
+        "id": id,
+        "result": result
+    })
+}
+
+pub fn jsonrpc_error_response(id: Value, code: i64, message: String, data: Option<Value>) -> Value {
+    let mut error = json!({
+        "code": code,
+        "message": message,
+    });
+    if let Some(data) = data {
+        error["data"] = data;
+    }
+    json!({
+        "jsonrpc": JSONRPC_VERSION,
+        "id": id,
+        "error": error
+    })
 }
 
 #[cfg(test)]
