@@ -1,4 +1,4 @@
-use anyhow::Result;
+use anyhow::{bail, Result};
 use dotrepo_core::{FieldScoreReport, ImportPlan, SynthesisWritePlan, VerificationReport};
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
@@ -61,6 +61,13 @@ pub struct RepositoryRef {
 }
 
 impl RepositoryRef {
+    pub fn validate_identity(&self) -> Result<()> {
+        validate_repo_segment(&self.host, "host")?;
+        validate_repo_segment(&self.owner, "owner")?;
+        validate_repo_segment(&self.repo, "repo")?;
+        Ok(())
+    }
+
     pub fn record_relative_dir(&self) -> PathBuf {
         PathBuf::from("repos")
             .join(&self.host)
@@ -75,6 +82,17 @@ impl RepositoryRef {
     pub fn source_url(&self) -> String {
         format!("https://{}/{}/{}", self.host, self.owner, self.repo)
     }
+}
+
+pub fn validate_repo_segment(value: &str, label: &str) -> Result<()> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() || trimmed == "." || trimmed == ".." {
+        bail!("{} must not be empty, '.', or '..'", label);
+    }
+    if trimmed.contains('/') || trimmed.contains('\\') || trimmed.contains('\0') {
+        bail!("{} must not contain path separators or null bytes", label);
+    }
+    Ok(())
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -245,6 +263,7 @@ pub struct CrawlRepositoryRequest {
     pub synthesize: bool,
     pub synthesis_model: Option<String>,
     pub synthesis_provider: Option<String>,
+    pub prior_synthesis_failure: Option<SynthesisFailureMetadata>,
 }
 
 #[derive(Debug, Clone)]
