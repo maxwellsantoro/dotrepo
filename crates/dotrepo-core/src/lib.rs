@@ -2388,7 +2388,7 @@ pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
     let mut hasher = Sha256::new();
     for path in files {
         let relative = path.strip_prefix(index_root).unwrap_or(&path);
-        hasher.update(relative.to_string_lossy().as_bytes());
+        hasher.update(relative.as_os_str().as_encoded_bytes());
         hasher.update([0]);
         hasher.update(fs::read(&path).map_err(|err| {
             anyhow!(
@@ -3604,6 +3604,74 @@ pub fn verify_import_plan(root: &Path, plan: &ImportPlan, source_url: &str) -> V
         absent_fields,
         passed,
     }
+}
+
+struct ReservedImportOutput {
+    path: PathBuf,
+    contents: String,
+    file: std::fs::File,
+}
+
+pub fn write_import_outputs(
+    outputs: Vec<(PathBuf, String)>,
+    force: bool,
+    force_hint: &str,
+) -> Result<()> {
+    use std::fs::OpenOptions;
+    use std::io::{ErrorKind, Write};
+
+    if force {
+        for (path, contents) in outputs {
+            if let Some(parent) = path.parent() {
+                fs::create_dir_all(parent)?;
+            }
+            fs::write(path, contents)?;
+        }
+        return Ok(());
+    }
+
+    let mut reserved: Vec<ReservedImportOutput> = Vec::new();
+    for (path, contents) in outputs {
+        if let Some(parent) = path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+
+        let file = match OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&path)
+        {
+            Ok(file) => file,
+            Err(err) => {
+                for reserved in reserved {
+                    let _ = fs::remove_file(reserved.path);
+                }
+                return Err(match err.kind() {
+                    ErrorKind::AlreadyExists => anyhow::anyhow!(
+                        "{} already exists; rerun with {} to overwrite imported artifacts",
+                        path.display(),
+                        force_hint
+                    ),
+                    _ => err.into(),
+                });
+            }
+        };
+
+        reserved.push(ReservedImportOutput {
+            path,
+            contents,
+            file,
+        });
+    }
+
+    for reserved in &mut reserved {
+        reserved
+            .file
+            .write_all(reserved.contents.as_bytes())
+            .and_then(|_| reserved.file.flush())?;
+    }
+
+    Ok(())
 }
 
 pub fn score_import_fields(
@@ -5616,7 +5684,7 @@ fn is_promo_link_heading(text: &str) -> bool {
         after_link.ends_with(')')
             && after_link
                 .rfind(')')
-                .map_or(false, |pos| pos == after_link.len() - 1)
+                .is_some_and(|pos| pos == after_link.len() - 1)
     } else {
         false
     }
@@ -5625,9 +5693,7 @@ fn is_promo_link_heading(text: &str) -> bool {
 fn is_non_project_heading(heading: &str) -> bool {
     let lowered = heading.to_ascii_lowercase();
     let trimmed = lowered.trim();
-    if NON_PROJECT_HEADINGS
-        .iter()
-        .any(|pattern| trimmed == *pattern)
+    if NON_PROJECT_HEADINGS.contains(&trimmed)
     {
         return true;
     }
@@ -5829,7 +5895,7 @@ fn is_pipe_delimited_nav_text(value: &str) -> bool {
 
 fn is_nav_link_item(line: &str) -> bool {
     let trimmed = line.trim();
-    if trimmed.contains('|') && trimmed.ends_with('|') {
+    if trimmed.starts_with('|') && trimmed.contains('|') {
         return true;
     }
     if trimmed.contains('|') && trimmed.ends_with('|') {
@@ -5949,9 +6015,7 @@ fn is_generic_phrase(name: &str) -> bool {
     let trimmed = lowered.trim();
 
     // Exact-match against known generic names that slip through heading checks.
-    GENERIC_NAME_REJECTS
-        .iter()
-        .any(|pattern| trimmed == *pattern)
+    GENERIC_NAME_REJECTS.contains(&trimmed)
 }
 
 const GENERIC_NAME_REJECTS: &[&str] = &[
@@ -8999,12 +9063,16 @@ fn generate_check_output(
     path: PathBuf,
     expected: String,
 ) -> Result<GenerateCheckOutput> {
-    let current = fs::read_to_string(&path).unwrap_or_default();
+    let (current, missing) = match fs::read_to_string(&path) {
+        Ok(content) => (content, false),
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => (String::new(), true),
+        Err(e) => return Err(anyhow!("failed to read {}: {}", path.display(), e)),
+    };
     let relative = display_path(root, &path);
     let is_stale = current != expected;
     Ok(GenerateCheckOutput {
         path: relative,
-        state: if current.is_empty() && !path.exists() {
+        state: if missing {
             ManagedFileState::Missing
         } else {
             ManagedFileState::FullyGenerated

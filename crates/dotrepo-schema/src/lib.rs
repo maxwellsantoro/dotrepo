@@ -405,9 +405,9 @@ pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
             source: None,
             generated_at: None,
             trust: Some(Trust {
-                confidence: Some("high".into()),
-                provenance: vec!["declared".into()],
-                notes: Some("Maintainer-authored scaffold.".into()),
+                confidence: Some("low".into()),
+                provenance: vec!["inferred".into()],
+                notes: Some("Machine-generated scaffold — review and update trust before publishing.".into()),
             }),
         },
         Repo {
@@ -520,7 +520,7 @@ provenance = ["imported"]
                 .trust
                 .as_ref()
                 .and_then(|trust| trust.confidence.as_deref()),
-            Some("high")
+            Some("low")
         );
         assert_eq!(
             manifest

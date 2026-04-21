@@ -2,23 +2,19 @@ use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
     current_timestamp_rfc3339, display_path, generate_check_repository, import_preview_repository,
     import_repository_with_options, inspect_claim_directory, query_repository, record_summary,
-    trust_repository, validate_repository, ImportMode, ImportOptions,
+    trust_repository, validate_repository, write_import_outputs, ImportMode, ImportOptions,
 };
 use dotrepo_transport::{
-    read_jsonrpc_message as read_message, write_jsonrpc_message as write_message,
+    jsonrpc_error_response, jsonrpc_response, read_jsonrpc_message as read_message,
+    write_jsonrpc_message as write_message, JSONRPC_VERSION,
 };
 use reqwest::blocking::Client;
 use reqwest::Url;
 use serde::Deserialize;
 use serde_json::{json, to_value, Value};
-use std::fs;
-use std::fs::{File, OpenOptions};
 use std::io::{self, BufReader};
-use std::io::{ErrorKind, Write};
 use std::path::{Path, PathBuf};
 use std::time::Duration;
-
-const JSONRPC_VERSION: &str = "2.0";
 const SUPPORTED_PROTOCOL_VERSIONS: &[&str] = &["2025-11-25", "2025-06-18", "2024-11-05"];
 const SERVER_NAME: &str = "dotrepo-mcp";
 const DEFAULT_PUBLIC_BASE_URL: &str = "https://dotrepo.org";
@@ -44,7 +40,7 @@ fn run() -> Result<()> {
             Err(err) => {
                 write_message(
                     &mut writer,
-                    &error_response(
+                    &jsonrpc_error_response(
                         Value::Null,
                         -32700,
                         format!("failed to parse request: {}", err),
@@ -82,7 +78,7 @@ struct JsonRpcRequest {
 fn handle_request(state: &mut ServerState, request: JsonRpcRequest) -> Option<Value> {
     if request.jsonrpc != JSONRPC_VERSION {
         return request.id.map(|id| {
-            error_response(
+            jsonrpc_error_response(
                 id,
                 -32600,
                 format!("unsupported jsonrpc version: {}", request.jsonrpc),
@@ -101,8 +97,8 @@ fn handle_request(state: &mut ServerState, request: JsonRpcRequest) -> Option<Va
     };
 
     let result = match dispatch_request(state, &method, params) {
-        Ok(result) => response(id, result),
-        Err(err) => error_response(id, -32603, err.to_string(), None),
+        Ok(result) => jsonrpc_response(id, result),
+        Err(err) => jsonrpc_error_response(id, -32603, err.to_string(), None),
     };
 
     Some(result)
@@ -360,80 +356,9 @@ fn write_import_plan(
         .iter()
         .map(|(path, _)| display_path(root, path))
         .collect::<Vec<_>>();
-    write_import_outputs(outputs, force)?;
+    write_import_outputs(outputs, force, "force=true")?;
 
     Ok(written_paths)
-}
-
-struct ReservedImportOutput {
-    path: PathBuf,
-    contents: String,
-    file: File,
-}
-
-fn write_import_outputs(outputs: Vec<(PathBuf, String)>, force: bool) -> Result<()> {
-    if force {
-        for (path, contents) in outputs {
-            if let Some(parent) = path.parent() {
-                fs::create_dir_all(parent)?;
-            }
-            fs::write(path, contents)?;
-        }
-        return Ok(());
-    }
-
-    let mut reserved = Vec::new();
-    for (path, contents) in outputs {
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
-        }
-
-        let file = match OpenOptions::new().write(true).create_new(true).open(&path) {
-            Ok(file) => file,
-            Err(err) => {
-                cleanup_reserved_import_outputs(reserved);
-                return Err(match err.kind() {
-                    ErrorKind::AlreadyExists => anyhow!(
-                        "{} already exists; rerun with force=true to overwrite imported artifacts",
-                        path.display()
-                    ),
-                    _ => err.into(),
-                });
-            }
-        };
-
-        reserved.push(ReservedImportOutput {
-            path,
-            contents,
-            file,
-        });
-    }
-
-    for idx in 0..reserved.len() {
-        let write_result = {
-            let reserved_output = &mut reserved[idx];
-            reserved_output
-                .file
-                .write_all(reserved_output.contents.as_bytes())
-                .and_then(|_| reserved_output.file.flush())
-        };
-        if let Err(err) = write_result {
-            cleanup_reserved_import_outputs(reserved);
-            return Err(err.into());
-        }
-    }
-
-    Ok(())
-}
-
-fn cleanup_reserved_import_outputs(outputs: Vec<ReservedImportOutput>) {
-    let paths = outputs
-        .into_iter()
-        .map(|reserved| reserved.path)
-        .collect::<Vec<_>>();
-    for path in paths {
-        let _ = fs::remove_file(path);
-    }
 }
 
 fn resolve_root(arguments: &Value) -> PathBuf {
@@ -857,32 +782,10 @@ fn tool_failure(summary: String, structured: Value) -> Value {
     })
 }
 
-fn response(id: Value, result: Value) -> Value {
-    json!({
-        "jsonrpc": JSONRPC_VERSION,
-        "id": id,
-        "result": result
-    })
-}
-
-fn error_response(id: Value, code: i64, message: String, data: Option<Value>) -> Value {
-    let mut error = json!({
-        "code": code,
-        "message": message,
-    });
-    if let Some(data) = data {
-        error["data"] = data;
-    }
-    json!({
-        "jsonrpc": JSONRPC_VERSION,
-        "id": id,
-        "error": error
-    })
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs;
     use std::io::{Read, Write};
     use std::net::TcpListener;
     use std::thread;
@@ -1092,7 +995,7 @@ description = "Missing source and trust"
         let path = root.join(".repo");
         fs::write(&path, "existing\n").expect("existing file written");
 
-        let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false)
+        let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false, "force=true")
             .expect_err("existing file should be preserved");
         assert!(err.to_string().contains("already exists"));
         assert_eq!(
