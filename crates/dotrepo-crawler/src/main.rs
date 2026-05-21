@@ -377,6 +377,7 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
         synthesize: false,
         synthesis_model: None,
         synthesis_provider: None,
+        prior_synthesis_failure: None,
     })?;
 
     let mut state_path = None;
@@ -506,6 +507,7 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
             synthesize: false,
             synthesis_model: None,
             synthesis_provider: None,
+            prior_synthesis_failure: None,
         }) {
             Ok(report) => {
                 if args.dry_run {
@@ -879,19 +881,21 @@ fn parse_repository_target(value: &str, default_host: &str) -> Result<Repository
         .trim_start_matches("http://")
         .trim_matches('/');
     let segments = trimmed.split('/').collect::<Vec<_>>();
-    match segments.as_slice() {
-        [owner, repo] => Ok(RepositoryRef {
+    let repository = match segments.as_slice() {
+        [owner, repo] => RepositoryRef {
             host: default_host.into(),
             owner: owner.to_string(),
             repo: repo.to_string(),
-        }),
-        [host, owner, repo] => Ok(RepositoryRef {
+        },
+        [host, owner, repo] => RepositoryRef {
             host: host.to_string(),
             owner: owner.to_string(),
             repo: repo.to_string(),
-        }),
+        },
         _ => bail!("expected owner/repo or host/owner/repo"),
-    }
+    };
+    repository.validate_identity()?;
+    Ok(repository)
 }
 
 fn discovery_report_from_targets(
@@ -1285,18 +1289,6 @@ fn build_seed_review_assessment(input: SeedReviewAssessmentInput<'_>) -> SeedRev
         .owners
         .as_ref()
         .and_then(|owners| owners.security_contact.clone());
-    if security_contact
-        .as_deref()
-        .is_none_or(|value| value.trim().is_empty() || value == "unknown")
-    {
-        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
-        reasons.push("security_contact is missing or still unknown".into());
-    }
-
-    if manifest.repo.build.is_none() || manifest.repo.test.is_none() {
-        raise_seed_review_priority(&mut priority, SeedReviewPriority::High);
-        reasons.push("repo.build or repo.test is still unset".into());
-    }
 
     let inferred_execution = inferred_fields
         .iter()
@@ -1474,7 +1466,7 @@ fn render_seed_review_report_markdown(report: &SeedReviewReport, dry_run: bool) 
 mod tests {
     use super::*;
     use clap::Parser;
-    use dotrepo_schema::{Record, RecordMode, Repo};
+    use dotrepo_schema::{Owners, Record, RecordMode, Repo};
     use std::time::{SystemTime, UNIX_EPOCH};
 
     #[test]
@@ -1599,6 +1591,30 @@ https://github.com/tokio-rs/tokio
                 },
             ]
         );
+    }
+
+    #[test]
+    fn parse_repository_targets_rejects_path_traversal() {
+        let err = parse_repository_targets("example/..", "github.com")
+            .expect_err("dot-dot should be rejected");
+        assert!(
+            err.to_string().contains("must not be empty"),
+            "expected segment validation error, got: {}",
+            err
+        );
+
+        let err = parse_repository_targets("example/repo\\name", "github.com")
+            .expect_err("backslash should be rejected");
+        assert!(
+            err.to_string().contains("path separators"),
+            "expected path separator error, got: {}",
+            err
+        );
+
+        // Multi-segment traversal that parses as 3 segments: host / owner / ".."
+        let err = parse_repository_targets("github.com/example/..", "github.com")
+            .expect_err("dot-dot in repo should be rejected");
+        assert!(err.to_string().contains("must not be empty"));
     }
 
     #[test]
@@ -1833,15 +1849,72 @@ how_to_contribute = "Open a PR"
         assert!(assessment
             .reasons
             .iter()
-            .any(|reason| reason.contains("security_contact is missing or still unknown")));
+            .any(|reason| reason.contains("execution fields are inferred")));
         assert!(assessment
             .reasons
             .iter()
-            .any(|reason| reason.contains("execution fields are inferred")));
+            .any(|reason| reason.contains("crawler emitted warning diagnostics")));
         assert_eq!(
             assessment.warning_codes,
             vec!["materialize.missing_security".to_string()]
         );
+    }
+
+    #[test]
+    fn build_seed_review_assessment_allows_honest_absence_without_high_priority() {
+        let repository = RepositoryRef {
+            host: "github.com".into(),
+            owner: "example".into(),
+            repo: "orbit".into(),
+        };
+        let mut manifest = Manifest::new(
+            Record {
+                mode: RecordMode::Overlay,
+                status: RecordStatus::Imported,
+                source: Some("https://github.com/example/orbit".into()),
+                generated_at: Some("2026-03-21T00:00:00Z".into()),
+                trust: None,
+            },
+            Repo {
+                name: "orbit".into(),
+                description: "Example repo".into(),
+                homepage: None,
+                license: None,
+                status: None,
+                visibility: Some("public".into()),
+                languages: vec!["rust".into()],
+                build: None,
+                test: None,
+                topics: Vec::new(),
+            },
+        );
+        manifest.owners = Some(Owners {
+            maintainers: vec!["example-maintainer".into()],
+            team: None,
+            security_contact: Some("unknown".into()),
+        });
+
+        let assessment = build_seed_review_assessment(SeedReviewAssessmentInput {
+            repository,
+            status: SeedResultStatus::Planned,
+            manifest: Some(&manifest),
+            inferred_fields: &[],
+            diagnostics: &[],
+            manifest_path: PathBuf::from("index/repos/github.com/example/orbit/record.toml"),
+            evidence_path: Some(PathBuf::from(
+                "index/repos/github.com/example/orbit/evidence.md",
+            )),
+            failure_message: None,
+        });
+
+        assert_eq!(assessment.priority, SeedReviewPriority::Low);
+        assert_eq!(
+            assessment.reasons,
+            vec!["ready for light review: execution, security, and ownership signals are present"]
+        );
+        assert_eq!(assessment.security_contact.as_deref(), Some("unknown"));
+        assert_eq!(assessment.build, None);
+        assert_eq!(assessment.test, None);
     }
 
     #[test]

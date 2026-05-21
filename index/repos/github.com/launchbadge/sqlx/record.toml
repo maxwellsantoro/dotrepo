@@ -1,0 +1,55 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/launchbadge/sqlx"
+generated_at = "2026-04-20T13:10:55.061953Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "SQLx"
+description = "🧰 The Rust SQL Toolkit"
+homepage = "https://github.com/launchbadge/sqlx"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "PLpgSQL",
+    "Python",
+    "Rust",
+    "Shell",
+    "TSQL",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "sql",
+    "rust",
+    "postgres",
+    "mysql",
+    "async",
+    "await",
+    "mariadb",
+    "postgresql",
+    "sqlite",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/launchbadge/sqlx.git"
+default_branch = "main"
+fork = false
+head_sha = "b180eba9012c486e1c46d6aaf156d8f79ab37cdc"
+html_url = "https://github.com/launchbadge/sqlx"
+stars = 16905

@@ -12,8 +12,8 @@ provenance = ["imported"]
 notes = "Bootstrapped from `README.md` and `Cargo.toml`. Left `repo.build` unset because `.github/workflows/ci.yml`, `.github/workflows/release.yml`, and `Cargo.toml` suggested conflicting build commands. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "ripgrep (rg)"
-description = "ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern. By default, ripgrep will respect gitignore rules and automatically skip hidden files/directories and binary files. (To disable all automatic filtering by default, use `rg -uuu`.) ripgrep has first class support on Windows, macOS and Linux, with binary downloads available for [every release](https://github.com/BurntSushi/ripgrep/releases). ripgrep is similar to other popular search tools like The Silver Searcher, ack and grep."
+name = "ripgrep"
+description = "ripgrep is a line-oriented search tool that recursively searches the current directory for a regex pattern."
 homepage = "https://github.com/BurntSushi/ripgrep"
 license = "Unlicense"
 visibility = "public"
@@ -39,7 +39,7 @@ topics = [
 ]
 
 [docs]
-getting_started = "https://docs.fedoraproject.org/en-US/epel/getting-started/"
+getting_started = "https://github.com/BurntSushi/ripgrep#installation"
 
 [relations]
 references = []

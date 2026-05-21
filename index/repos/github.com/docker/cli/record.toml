@@ -1,0 +1,56 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/docker/cli"
+generated_at = "2026-04-20T13:12:46.976563Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@docker/runtime-owners` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Docker CLI"
+description = "The Docker CLI"
+homepage = "https://github.com/docker/cli"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "HCL",
+    "Makefile",
+    "Shell",
+]
+test = "go test -coverprofile=/tmp/coverage.txt $(go list ./... | grep -vE '^github.com/docker/cli/e2e/')"
+topics = [
+    "docker",
+    "cli",
+]
+
+[owners]
+maintainers = [
+    "@silvin-lubecki",
+    "@docker/runtime-owners",
+    "@albers",
+    "@thaJeztah",
+]
+team = "@docker/runtime-owners"
+security_contact = "security@docker.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/docker/cli.git"
+default_branch = "master"
+fork = false
+head_sha = "f31b8b2697411725e9df5008ae1da78d53cee58e"
+html_url = "https://github.com/docker/cli"
+stars = 5804

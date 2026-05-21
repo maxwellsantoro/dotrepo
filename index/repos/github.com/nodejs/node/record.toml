@@ -1,0 +1,100 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/nodejs/node"
+generated_at = "2026-04-20T13:11:19.861296Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Node.js"
+description = "Node.js is an open-source, cross-platform JavaScript runtime environment."
+homepage = "https://nodejs.org"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "Emacs Lisp",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Nix",
+    "Perl",
+    "Python",
+    "R",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "nodejs",
+    "javascript",
+    "node",
+    "js",
+    "runtime",
+    "mit",
+    "linux",
+    "macos",
+    "windows",
+]
+
+[owners]
+maintainers = [
+    "@nodejs/tsc",
+    "@nodejs/build",
+    "@nodejs/web-infra",
+    "@nodejs/streams",
+    "@nodejs/net",
+    "@nodejs/crypto",
+    "@nodejs/http",
+    "@nodejs/http2",
+    "@nodejs/quic",
+    "@nodejs/loaders",
+    "@nodejs/vm",
+    "@nodejs/node-api",
+    "@nodejs/gyp",
+    "@nodejs/wasi",
+    "@nodejs/startup",
+    "@nodejs/realm",
+    "@nodejs/v8-update",
+    "@nodejs/actions",
+    "@nodejs/releasers",
+    "@nodejs/test_runner",
+    "@nodejs/single-executable",
+    "@nodejs/security-wg",
+    "@nodejs/security-stewards",
+    "@nodejs/web-standards",
+    "@nodejs/typescript",
+    "@nodejs/performance",
+    "@nodejs/url",
+    "@nodejs/sqlite",
+    "@nodejs/config",
+    "@nodejs/inspector",
+    "@nodejs/path",
+    "@nodejs/userland-migrations",
+    "@nodejs/devcontainer",
+]
+security_contact = "security@lists.openjsf.org"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/nodejs/node.git"
+default_branch = "main"
+fork = false
+head_sha = "5e0bcab7545c940b81f5c3c0894f244582f07573"
+html_url = "https://github.com/nodejs/node"
+stars = 116827

@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/rust-lang/cargo"
+generated_at = "2026-04-20T13:11:05.724683Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Cargo"
+description = "Cargo downloads your Rust project’s dependencies and compiles your project."
+homepage = "https://doc.rust-lang.org/cargo"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "JavaScript",
+    "Python",
+    "RenderScript",
+    "Roff",
+    "Rust",
+    "Shell",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "rust",
+    "package-manager",
+    "cargo",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/rust-lang/cargo.git"
+default_branch = "master"
+fork = false
+head_sha = "c3dbe6e40f4235cc1025577326834187e36b4a34"
+html_url = "https://github.com/rust-lang/cargo"
+stars = 14852

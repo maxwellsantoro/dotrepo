@@ -71,7 +71,7 @@ pub(crate) fn seed_repositories_with_client<C: GitHubDiscoveryClient>(
 
             if page == MAX_SEARCH_PAGES_PER_BAND {
                 exhausted_bands = false;
-                break 'bands;
+                break;
             }
         }
     }
@@ -261,6 +261,48 @@ mod tests {
         assert_eq!(report.discovered[0].repository.repo, "uv");
         assert_eq!(report.discovered[1].repository.repo, "tokio");
         assert_eq!(report.discovered[2].repository.repo, "fastapi");
+    }
+
+    #[test]
+    fn seed_repositories_continues_to_later_bands_after_page_cap() {
+        let mut pages = BTreeMap::new();
+        for page in 1..=MAX_SEARCH_PAGES_PER_BAND {
+            pages.insert(
+                (1000, Some(10000), page),
+                vec![discovered("tokio-rs", "tokio", 30000, "master"); SEARCH_PAGE_SIZE],
+            );
+        }
+        pages.insert(
+            (10000, None, 1),
+            vec![discovered("fastapi", "fastapi", 85000, "master")],
+        );
+
+        let client = FakeDiscoveryClient::new(pages);
+        let report = seed_repositories_with_client(
+            &SeedRepositoriesRequest {
+                host: "github.com".into(),
+                limit: 5,
+                star_bands: vec![
+                    StarBand {
+                        min_stars: 1000,
+                        max_stars: Some(10000),
+                    },
+                    StarBand {
+                        min_stars: 10000,
+                        max_stars: None,
+                    },
+                ],
+                include_archived: false,
+                include_forks: false,
+            },
+            &client,
+        )
+        .expect("discovery succeeds");
+
+        assert_eq!(report.discovered.len(), 2);
+        assert_eq!(report.discovered[0].repository.repo, "tokio");
+        assert_eq!(report.discovered[1].repository.repo, "fastapi");
+        assert!(!report.exhausted_bands);
     }
 
     #[test]

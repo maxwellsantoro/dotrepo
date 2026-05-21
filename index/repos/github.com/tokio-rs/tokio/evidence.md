@@ -1,7 +1,17 @@
 # Evidence
 
-- Imported repository identity, description, homepage, license, visibility, languages, and topics from https://github.com/tokio-rs/tokio and the GitHub Languages API for that repository.
-- Imported the build command `cargo build --all-features` and the test command `cargo test --all-features` from the contribution guide at https://raw.githubusercontent.com/tokio-rs/tokio/master/docs/contributing/pull-requests.md.
-- Imported the security contact from https://raw.githubusercontent.com/tokio-rs/tokio/master/SECURITY.md.
-- Imported the documentation entry point from the upstream README and guide links at https://raw.githubusercontent.com/tokio-rs/tokio/master/README.md.
+- Imported repository name and description from README.md.
+- Imported the security reporting channel from SECURITY.md.
+- Imported repo.build from Cargo.toml as `cargo build --workspace`.
+- Imported repo.test from Cargo.toml as `cargo test --workspace`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+- Augmented repo.homepage from GitHub repository metadata.
+- Augmented repo.license from GitHub repository metadata.
+- Augmented repo.visibility from GitHub repository metadata.
+- Augmented repo.languages from GitHub repository metadata.
+- Augmented repo.topics from GitHub repository metadata.
+- Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Auto-promotion
+
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

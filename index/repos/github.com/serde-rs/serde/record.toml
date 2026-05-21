@@ -2,24 +2,27 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/serde-rs/serde"
-generated_at = "2026-03-20T02:22:08.895601Z"
+generated_at = "2026-04-20T13:10:45.785211Z"
 
 [record.trust]
 confidence = "high"
-provenance = ["imported"]
-notes = "Imported from the upstream README, CONTRIBUTING.md, CI workflow, and Cargo manifests. `repo.build` reflects the primary crate build path exercised in CI, while `repo.test` uses the full nightly-only test suite documented for contributors. No SECURITY.md or CODEOWNERS file was detected. Not maintainer-verified."
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Serde"
 description = "Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically."
 homepage = "https://serde.rs/"
-license = "MIT OR Apache-2.0"
+license = "Apache-2.0"
 visibility = "public"
 languages = ["Rust"]
-build = "cd serde && cargo build"
-test = "cd test_suite && cargo +nightly test --features unstable"
+build = "cargo build --workspace"
+test = "cargo test --workspace"
 topics = [
     "rust",
     "serde",
@@ -30,11 +33,6 @@ topics = [
 [relations]
 references = []
 
-[docs]
-root = "https://serde.rs/"
-getting_started = "https://serde.rs/derive.html"
-api = "https://docs.rs/serde/latest/serde/"
-
 [x.github]
 archived = false
 clone_url = "https://github.com/serde-rs/serde.git"
@@ -42,4 +40,4 @@ default_branch = "master"
 fork = false
 head_sha = "fa7da4a93567ed347ad0735c28e439fca688ef26"
 html_url = "https://github.com/serde-rs/serde"
-stars = 10520
+stars = 10553

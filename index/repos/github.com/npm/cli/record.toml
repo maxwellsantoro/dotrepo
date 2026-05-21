@@ -1,0 +1,58 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/npm/cli"
+generated_at = "2026-04-20T13:11:23.210383Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "npm"
+description = "You should be running a currently supported version of Node.js to run **`npm`**."
+homepage = "https://docs.npmjs.com/cli/"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Handlebars",
+    "JavaScript",
+    "PowerShell",
+    "Shell",
+]
+test = "npm test"
+topics = [
+    "package-manager",
+    "npm",
+    "nodejs",
+    "javascript",
+    "tools",
+    "npm-cli",
+]
+
+[owners]
+maintainers = ["@npm/cli-team"]
+team = "@npm/cli-team"
+security_contact = "opensource-security@github.com"
+
+[docs]
+root = "https://docs.npmjs.com/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/npm/cli.git"
+default_branch = "latest"
+fork = false
+head_sha = "27567ab27bef8af303bde0b2d7da0386da182b81"
+html_url = "https://github.com/npm/cli"
+stars = 9689

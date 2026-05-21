@@ -1,16 +1,17 @@
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 use dotrepo_core::{
-    adopt_managed_surface, append_claim_event, build_public_freshness, current_public_freshness,
-    current_timestamp_rfc3339, export_public_index_static_with_base, generate_check_repository,
-    import_repository_with_options, inspect_claim_directory, inspect_surface_states,
-    load_manifest_document, load_manifest_from_root, managed_outputs, preview_surfaces,
-    public_repository_query_or_error_with_base, public_repository_summary_or_error_with_base,
-    public_repository_trust_or_error_with_base, query_repository, scaffold_claim_directory,
-    trust_repository, validate_index_root, validate_manifest, validate_repository,
-    ClaimEventAppendInput, ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport,
-    ClaimScaffoldInput, ConflictRelationship, DoctorOwnershipHonesty, DoctorRecommendedMode,
-    DoctorReport, DoctorSurface, ImportMode, ImportOptions, IndexFindingSeverity, ManagedFileState,
+    adopt_managed_surface, analyze_index_promotion, append_claim_event, build_public_freshness,
+    current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_base,
+    generate_check_repository, import_repository_with_options, inspect_claim_directory,
+    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
+    preview_surfaces, public_repository_query_or_error_with_base,
+    public_repository_summary_or_error_with_base, public_repository_trust_or_error_with_base,
+    query_repository, scaffold_claim_directory, trust_repository, validate_index_root,
+    validate_manifest, validate_repository, write_import_outputs, ClaimEventAppendInput,
+    ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport, ClaimScaffoldInput,
+    ConflictRelationship, DoctorOwnershipHonesty, DoctorRecommendedMode, DoctorReport,
+    DoctorSurface, ImportMode, ImportOptions, IndexFindingSeverity, ManagedFileState,
     PublicErrorResponse, SelectionReason, SurfacePreviewReport, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
@@ -18,8 +19,6 @@ use dotrepo_schema::{RecordMode, Trust};
 use serde::Serialize;
 use serde_json::Value;
 use std::fs;
-use std::fs::{File, OpenOptions};
-use std::io::{ErrorKind, Write};
 use std::path::PathBuf;
 use std::process;
 use thiserror::Error;
@@ -62,6 +61,18 @@ enum Command {
         /// Index root to validate.
         #[arg(long, default_value = "index")]
         index_root: PathBuf,
+    },
+    /// Analyze index records for promotion eligibility to verified status.
+    PromotionReport {
+        /// Index root to analyze.
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        /// Emit the full report as JSON.
+        #[arg(long)]
+        json: bool,
+        /// Show per-record details including blockers.
+        #[arg(long)]
+        verbose: bool,
     },
     /// Query one field from the selected record, preserving trust-aware selection in `--json`.
     Query {
@@ -386,6 +397,11 @@ fn run() -> Result<()> {
         } => cmd_import(cli.root, mode, source, force),
         Command::Validate => cmd_validate(cli.root),
         Command::ValidateIndex { index_root } => cmd_validate_index(index_root),
+        Command::PromotionReport {
+            index_root,
+            json,
+            verbose,
+        } => cmd_promotion_report(index_root, json, verbose),
         Command::Query { path, json, raw } => cmd_query(cli.root, &path, json, raw),
         Command::Generate { check } => cmd_generate(cli.root, check),
         Command::Doctor { json } => cmd_doctor(cli.root, json),
@@ -511,7 +527,7 @@ fn cmd_import(
         .iter()
         .map(|(path, _)| path.clone())
         .collect::<Vec<_>>();
-    write_import_outputs(outputs, force)?;
+    write_import_outputs(outputs, force, "--force")?;
     for path in written_paths {
         println!("imported {}", path.display());
     }
@@ -526,77 +542,6 @@ fn cmd_import(
     println!("- status: {:?}", plan.manifest.record.status);
 
     Ok(())
-}
-
-struct ReservedImportOutput {
-    path: PathBuf,
-    contents: String,
-    file: File,
-}
-
-fn write_import_outputs(outputs: Vec<(PathBuf, String)>, force: bool) -> Result<()> {
-    if force {
-        for (path, contents) in outputs {
-            if let Some(parent) = path.parent() {
-                fs::create_dir_all(parent)?;
-            }
-            fs::write(path, contents)?;
-        }
-        return Ok(());
-    }
-
-    let mut reserved = Vec::new();
-    for (path, contents) in outputs {
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
-        }
-
-        let file = match OpenOptions::new().write(true).create_new(true).open(&path) {
-            Ok(file) => file,
-            Err(err) => {
-                cleanup_reserved_import_outputs(reserved);
-                return Err(match err.kind() {
-                    ErrorKind::AlreadyExists => anyhow::anyhow!(
-                        "{} already exists; rerun with --force to overwrite imported artifacts",
-                        path.display()
-                    ),
-                    _ => err.into(),
-                });
-            }
-        };
-
-        reserved.push(ReservedImportOutput {
-            path,
-            contents,
-            file,
-        });
-    }
-
-    for idx in 0..reserved.len() {
-        let write_result = {
-            let reserved_output = &mut reserved[idx];
-            reserved_output
-                .file
-                .write_all(reserved_output.contents.as_bytes())
-                .and_then(|_| reserved_output.file.flush())
-        };
-        if let Err(err) = write_result {
-            cleanup_reserved_import_outputs(reserved);
-            return Err(err.into());
-        }
-    }
-
-    Ok(())
-}
-
-fn cleanup_reserved_import_outputs(outputs: Vec<ReservedImportOutput>) {
-    let paths = outputs
-        .into_iter()
-        .map(|reserved| reserved.path)
-        .collect::<Vec<_>>();
-    for path in paths {
-        let _ = fs::remove_file(path);
-    }
 }
 
 fn cmd_query(root: PathBuf, path: &str, json: bool, raw: bool) -> Result<()> {
@@ -661,6 +606,119 @@ fn cmd_validate_index(index_root: PathBuf) -> Result<()> {
         message: sections.join("\n"),
     }
     .into())
+}
+
+fn cmd_promotion_report(index_root: PathBuf, json: bool, verbose: bool) -> Result<()> {
+    let report = analyze_index_promotion(&index_root)?;
+
+    if json {
+        #[derive(Serialize)]
+        #[serde(rename_all = "camelCase")]
+        struct JsonReport {
+            total_records: usize,
+            eligible_count: usize,
+            field_blocker_counts: std::collections::HashMap<String, usize>,
+            records: Vec<JsonRecord>,
+        }
+        #[derive(Serialize)]
+        #[serde(rename_all = "camelCase")]
+        struct JsonRecord {
+            path: String,
+            source_url: Option<String>,
+            status: Option<String>,
+            eligible: bool,
+            blockers: Vec<String>,
+        }
+        let json_report = JsonReport {
+            total_records: report.summary.total_records,
+            eligible_count: report.summary.eligible_count,
+            field_blocker_counts: report.summary.field_blocker_counts,
+            records: report
+                .records
+                .into_iter()
+                .map(|r| {
+                    let blockers: Vec<String> = r
+                        .scores
+                        .iter()
+                        .filter(|s| {
+                            !matches!(
+                                s.confidence,
+                                dotrepo_core::FieldConfidence::HighConfidencePresent
+                                    | dotrepo_core::FieldConfidence::HighConfidenceAbsent
+                            )
+                        })
+                        .map(|s| {
+                            format!(
+                                "{}: {:?} — {}",
+                                s.field,
+                                match s.confidence {
+                                    dotrepo_core::FieldConfidence::MediumConfidencePresent =>
+                                        "medium-present",
+                                    dotrepo_core::FieldConfidence::Unresolved => "unresolved",
+                                    _ => "other",
+                                },
+                                s.reason
+                            )
+                        })
+                        .collect();
+                    JsonRecord {
+                        path: r.path,
+                        source_url: r.source_url,
+                        status: r.status,
+                        eligible: r.eligible,
+                        blockers,
+                    }
+                })
+                .collect(),
+        };
+        println!("{}", serde_json::to_string_pretty(&json_report)?);
+        return Ok(());
+    }
+
+    let s = &report.summary;
+    println!(
+        "promotion analysis: {}/{} records eligible for verified auto-publish",
+        s.eligible_count, s.total_records
+    );
+    println!();
+
+    if !s.field_blocker_counts.is_empty() {
+        let mut blockers: Vec<_> = s.field_blocker_counts.iter().collect();
+        blockers.sort_by(|a, b| b.1.cmp(a.1));
+        println!("field blockers (blocking auto-publish):");
+        for (field, count) in &blockers {
+            println!("  {} × {}", count, field);
+        }
+        println!();
+    }
+
+    if verbose {
+        for record in &report.records {
+            let tag = if record.eligible {
+                "ELIGIBLE"
+            } else {
+                "BLOCKED"
+            };
+            println!(
+                "[{}] {} ({})",
+                tag,
+                record.path,
+                record.source_url.as_deref().unwrap_or("?")
+            );
+            for score in &record.scores {
+                let marker = match score.confidence {
+                    dotrepo_core::FieldConfidence::HighConfidencePresent => "H+",
+                    dotrepo_core::FieldConfidence::MediumConfidencePresent => "M+",
+                    dotrepo_core::FieldConfidence::HighConfidenceAbsent => "H-",
+                    dotrepo_core::FieldConfidence::Unresolved => "??",
+                };
+                println!("  {} {}: {}", marker, score.field, score.reason);
+            }
+            println!();
+        }
+    }
+
+    Ok(())
 }
 
 fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
@@ -2179,8 +2237,12 @@ homepage = "https://github.com/example/project"
         let path = root.join(".repo");
         fs::write(&path, "existing\n").expect("existing file written");
 
-        let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false)
-            .expect_err("existing file should be preserved");
+        let err = write_import_outputs(
+            vec![(path.clone(), "replacement\n".into())],
+            false,
+            "--force",
+        )
+        .expect_err("existing file should be preserved");
         assert!(err.to_string().contains("already exists"));
         assert_eq!(
             fs::read_to_string(&path).expect("file readable"),

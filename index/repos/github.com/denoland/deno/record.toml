@@ -1,0 +1,65 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/denoland/deno"
+generated_at = "2026-04-20T13:11:55.526046Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Deno"
+description = "A modern runtime for JavaScript and TypeScript."
+homepage = "https://deno.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Astro",
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Mustache",
+    "Nix",
+    "Nunjucks",
+    "Python",
+    "Rust",
+    "Svelte",
+    "TypeScript",
+    "Vento",
+    "WebAssembly",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "deno",
+    "typescript",
+    "javascript",
+    "rust",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/denoland/deno/security/advisories/new"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/denoland/deno.git"
+default_branch = "main"
+fork = false
+head_sha = "ccc0d6f59377a4eae2dc6c025a7dc7ce3e410de9"
+html_url = "https://github.com/denoland/deno"
+stars = 106523

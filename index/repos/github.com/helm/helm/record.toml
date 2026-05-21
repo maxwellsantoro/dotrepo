@@ -4,25 +4,26 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/helm/helm"
-generated_at = "2026-03-20T04:50:27.597988Z"
+generated_at = "2026-04-20T13:12:53.437915Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = ["imported"]
-notes = "Imported from the upstream README, developer setup docs, CONTRIBUTING.md, SECURITY.md, OWNERS, and Makefile. `repo.build` and `repo.test` follow the official Helm developer workflow: build with `make` and run the default local checks with `make test`. `main` tracks Helm v4 development and is explicitly unstable; Helm v3 stable lives on `dev-v3`, so branch context matters when interpreting this overlay. Acceptance tests depend on the separate `helm/acceptance-testing` repository and are intentionally excluded from the default `repo.test`. Not maintainer-verified."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Helm"
-description = "Helm is a tool for managing Charts. Charts are packages of pre-configured Kubernetes resources."
+description = "Helm is a tool for managing Charts."
 homepage = "https://helm.sh"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "go",
-    "shell",
+    "Go",
+    "Makefile",
+    "Shell",
 ]
-build = "make"
-test = "make test"
+build = "go build ./..."
+test = "go test ./..."
 topics = [
     "cncf",
     "chart",
@@ -32,22 +33,11 @@ topics = [
 ]
 
 [owners]
-maintainers = [
-    "@banjoh",
-    "@gjenkins8",
-    "@joejulian",
-    "@marckhouzam",
-    "@mattfarina",
-    "@robertsirc",
-    "@sabre1041",
-    "@scottrigby",
-    "@technosophos",
-    "@TerryHowe",
-]
-security_contact = "cncf-helm-security@lists.cncf.io"
+maintainers = []
+security_contact = "https://github.com/helm/community/blob/master/SECURITY.md"
 
 [docs]
-root = "https://helm.sh/docs/"
+root = "https://helm.sh/docs"
 getting_started = "https://helm.sh/docs/intro/quickstart/"
 
 [relations]
@@ -58,6 +48,6 @@ archived = false
 clone_url = "https://github.com/helm/helm.git"
 default_branch = "main"
 fork = false
-head_sha = "42f78ba60edf531d5161e00d9819a7c34d976343"
+head_sha = "29d309e56b278d8c7a17cd7cb8a08f4f224775c7"
 html_url = "https://github.com/helm/helm"
-stars = 29597
+stars = 29707

@@ -4,7 +4,8 @@ use dotrepo_core::{
 };
 use dotrepo_schema::{parse_manifest, ParseError};
 use dotrepo_transport::{
-    read_jsonrpc_message as read_message, write_jsonrpc_message as write_message,
+    jsonrpc_error_response, jsonrpc_response, read_jsonrpc_message as read_message,
+    write_jsonrpc_message as write_message, JSONRPC_VERSION,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -15,7 +16,6 @@ use std::path::{Path, PathBuf};
 use toml_span::{parse as parse_toml_spanned, Span as TomlSpan, Value as TomlValue};
 use url::Url;
 
-const JSONRPC_VERSION: &str = "2.0";
 const SERVER_NAME: &str = "dotrepo-lsp";
 const TEXT_DOCUMENT_SYNC_FULL: i64 = 1;
 const COMPLETION_KIND_FIELD: u8 = 5;
@@ -229,10 +229,11 @@ fn handle_message(state: &mut ServerState, payload: &[u8]) -> Result<Vec<Value>>
         return Ok(message
             .id
             .map(|id| {
-                vec![error_response(
+                vec![jsonrpc_error_response(
                     id,
                     -32600,
                     format!("unsupported jsonrpc version: {}", message.jsonrpc),
+                    None,
                 )]
             })
             .unwrap_or_default());
@@ -253,7 +254,7 @@ fn handle_request(
     let response = match method {
         "initialize" => {
             state.initialized = true;
-            response(
+            jsonrpc_response(
                 id,
                 json!({
                     "capabilities": {
@@ -274,20 +275,20 @@ fn handle_request(
         }
         "shutdown" => {
             state.shutdown_requested = true;
-            response(id, Value::Null)
+            jsonrpc_response(id, Value::Null)
         }
         "textDocument/completion" => {
             let params: TextDocumentPositionParams = serde_json::from_value(_params)?;
-            response(id, serde_json::to_value(completion_items(state, &params)?)?)
+            jsonrpc_response(id, serde_json::to_value(completion_items(state, &params)?)?)
         }
         "textDocument/hover" => {
             let params: TextDocumentPositionParams = serde_json::from_value(_params)?;
-            response(
+            jsonrpc_response(
                 id,
                 serde_json::to_value(hover_response(state, &params)?).unwrap_or(Value::Null),
             )
         }
-        _ => error_response(id, -32601, format!("method not found: {}", method)),
+        _ => jsonrpc_error_response(id, -32601, format!("method not found: {}", method), None),
     };
 
     Ok(vec![response])
@@ -1325,25 +1326,6 @@ fn publish_diagnostics_notification(snapshot: &DiagnosticSnapshot) -> Value {
             uri: snapshot.uri.clone(),
             version: snapshot.version,
             diagnostics: snapshot.diagnostics.clone(),
-        }
-    })
-}
-
-fn response(id: Value, result: Value) -> Value {
-    json!({
-        "jsonrpc": JSONRPC_VERSION,
-        "id": id,
-        "result": result
-    })
-}
-
-fn error_response(id: Value, code: i64, message: String) -> Value {
-    json!({
-        "jsonrpc": JSONRPC_VERSION,
-        "id": id,
-        "error": {
-            "code": code,
-            "message": message,
         }
     })
 }

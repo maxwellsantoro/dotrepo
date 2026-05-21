@@ -1,0 +1,63 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/vercel/next.js"
+generated_at = "2026-04-20T13:11:26.977927Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "next.js"
+description = "The React Framework"
+homepage = "https://nextjs.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "Pug",
+    "Python",
+    "Rust",
+    "SCSS",
+    "Sass",
+    "Shell",
+    "TypeScript",
+    "WebAssembly",
+]
+topics = [
+    "react",
+    "server-rendering",
+    "universal",
+    "node",
+    "components",
+    "browser",
+    "nextjs",
+    "vercel",
+    "static-site-generator",
+    "hybrid",
+    "ssg",
+    "static",
+    "blog",
+    "compiler",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/vercel/next.js.git"
+default_branch = "canary"
+fork = false
+head_sha = "931868b86c4079300d059dab4301e8dab8924249"
+html_url = "https://github.com/vercel/next.js"
+stars = 139022
