@@ -658,7 +658,10 @@ fn score_index_record_for_promotion_treats_command_conflict_as_unresolved() {
 
     let scores = score_index_record_for_promotion(&manifest);
 
-    let build = scores.iter().find(|s| s.field == "repo.build").expect("build score present");
+    let build = scores
+        .iter()
+        .find(|s| s.field == "repo.build")
+        .expect("build score present");
     assert_eq!(
         build.confidence,
         FieldConfidence::Unresolved,
@@ -666,7 +669,10 @@ fn score_index_record_for_promotion_treats_command_conflict_as_unresolved() {
     );
     assert!(build.reason.contains("intra-tier conflict"));
 
-    let test = scores.iter().find(|s| s.field == "repo.test").expect("test score present");
+    let test = scores
+        .iter()
+        .find(|s| s.field == "repo.test")
+        .expect("test score present");
     assert_eq!(
         test.confidence,
         FieldConfidence::Unresolved,
