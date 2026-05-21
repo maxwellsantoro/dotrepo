@@ -18,3 +18,8 @@ editors/vscode/dist/
 editors/vscode/*.tgz
 editors/vscode/*.vsix
 index/.crawler-state.toml
+
+# macOS AppleDouble / resource fork / extended attribute metadata files
+# These have been a constant source of noise in git status/diff across the repo
+._*
+**/\._*
