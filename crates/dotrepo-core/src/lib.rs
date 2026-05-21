@@ -3193,16 +3193,16 @@ pub fn import_repository_with_options(
     } else {
         None
     };
-    let imported_commands = infer_imported_commands(
-        cargo_toml.as_ref(),
-        package_json.as_ref(),
-        pyproject_toml.as_ref(),
-        go_mod.as_ref(),
-        makefile.as_ref(),
-        justfile.as_ref(),
-        contributing.as_ref(),
-        &workflow_files,
-    );
+    let imported_commands = infer_imported_commands(&ImportSources {
+        cargo_toml: cargo_toml.as_ref(),
+        package_json: package_json.as_ref(),
+        pyproject_toml: pyproject_toml.as_ref(),
+        go_mod: go_mod.as_ref(),
+        makefile: makefile.as_ref(),
+        justfile: justfile.as_ref(),
+        contributing: contributing.as_ref(),
+        workflow_files: &workflow_files,
+    });
 
     let mut imported_sources = Vec::new();
     let mut inferred_defaults = Vec::new();
@@ -3636,11 +3636,7 @@ pub fn write_import_outputs(
             fs::create_dir_all(parent)?;
         }
 
-        let file = match OpenOptions::new()
-            .write(true)
-            .create_new(true)
-            .open(&path)
-        {
+        let file = match OpenOptions::new().write(true).create_new(true).open(&path) {
             Ok(file) => file,
             Err(err) => {
                 for reserved in reserved {
@@ -4233,12 +4229,6 @@ pub fn promote_to_verified(manifest: &mut Manifest, report: &FieldScoreReport) -
 
 pub fn score_index_record_for_promotion(manifest: &Manifest) -> Vec<FieldScore> {
     let mut scores = Vec::new();
-    let notes = manifest
-        .record
-        .trust
-        .as_ref()
-        .and_then(|t| t.notes.as_deref())
-        .unwrap_or("");
     let provenance = manifest
         .record
         .trust
@@ -4316,91 +4306,98 @@ pub fn score_index_record_for_promotion(manifest: &Manifest) -> Vec<FieldScore> 
         });
     }
 
-    // repo.build — trust notes reveal source and conflicts
-    let build_conflict = notes.contains("repo.build") && notes.contains("conflicting");
-    let build_imported = notes.contains("Imported `repo.build`");
-    let build_inferred = provenance.iter().any(|p| p == "inferred")
-        && manifest.repo.build.is_some()
-        && !build_imported;
+    // repo.build / repo.test — score primarily from provenance.
+    // We still perform a narrow, exact-phrase check against trust.notes to detect
+    // intra-tier command conflicts (the only remaining case that should surface as
+    // Unresolved for promotion analysis). This is the single documented exception to
+    // "do not parse notes for scoring". When a machine-readable conflict marker is
+    // added to Trust/Record we can remove the notes check entirely.
+    let has_imported_provenance = provenance.iter().any(|p| p == "imported");
+    let has_inferred_provenance = provenance.iter().any(|p| p == "inferred");
+    let trust_notes = manifest
+        .record
+        .trust
+        .as_ref()
+        .and_then(|t| t.notes.as_deref())
+        .unwrap_or("");
+
     if let Some(ref build) = manifest.repo.build {
         scores.push(FieldScore {
             field: "repo.build".into(),
-            confidence: if build_imported {
+            confidence: if has_imported_provenance {
                 FieldConfidence::HighConfidencePresent
-            } else if build_inferred {
+            } else if has_inferred_provenance {
                 FieldConfidence::MediumConfidencePresent
             } else {
                 FieldConfidence::HighConfidencePresent
             },
             source: None,
             value: Some(build.clone()),
-            reason: if build_imported {
+            reason: if has_imported_provenance {
                 "from manifest source".into()
-            } else if build_inferred {
+            } else if has_inferred_provenance {
                 "from workflow or inferred fallback".into()
             } else {
-                "present, source not specified in notes".into()
+                "present, provenance not specified".into()
             },
         });
-    } else if build_conflict {
-        scores.push(FieldScore {
-            field: "repo.build".into(),
-            confidence: FieldConfidence::Unresolved,
-            source: None,
-            value: None,
-            reason: "conflicting candidates noted in trust record".into(),
-        });
     } else {
+        let is_conflict = trust_notes.contains("Left `repo.build` unset because")
+            && trust_notes.contains("conflicting build commands");
         scores.push(FieldScore {
             field: "repo.build".into(),
-            confidence: FieldConfidence::HighConfidenceAbsent,
+            confidence: if is_conflict {
+                FieldConfidence::Unresolved
+            } else {
+                FieldConfidence::HighConfidenceAbsent
+            },
             source: None,
             value: None,
-            reason: "no build command sources".into(),
+            reason: if is_conflict {
+                "intra-tier conflict left field unset during import".into()
+            } else {
+                "no build command sources".into()
+            },
         });
     }
 
-    // repo.test — same logic as build
-    let test_conflict = notes.contains("repo.test") && notes.contains("conflicting");
-    let test_imported = notes.contains("Imported `repo.test`");
-    let test_inferred = provenance.iter().any(|p| p == "inferred")
-        && manifest.repo.test.is_some()
-        && !test_imported;
     if let Some(ref test) = manifest.repo.test {
         scores.push(FieldScore {
             field: "repo.test".into(),
-            confidence: if test_imported {
+            confidence: if has_imported_provenance {
                 FieldConfidence::HighConfidencePresent
-            } else if test_inferred {
+            } else if has_inferred_provenance {
                 FieldConfidence::MediumConfidencePresent
             } else {
                 FieldConfidence::HighConfidencePresent
             },
             source: None,
             value: Some(test.clone()),
-            reason: if test_imported {
+            reason: if has_imported_provenance {
                 "from manifest source".into()
-            } else if test_inferred {
+            } else if has_inferred_provenance {
                 "from workflow or inferred fallback".into()
             } else {
-                "present, source not specified in notes".into()
+                "present, provenance not specified".into()
             },
         });
-    } else if test_conflict {
-        scores.push(FieldScore {
-            field: "repo.test".into(),
-            confidence: FieldConfidence::Unresolved,
-            source: None,
-            value: None,
-            reason: "conflicting candidates noted in trust record".into(),
-        });
     } else {
+        let is_conflict = trust_notes.contains("Left `repo.test` unset because")
+            && trust_notes.contains("conflicting test commands");
         scores.push(FieldScore {
             field: "repo.test".into(),
-            confidence: FieldConfidence::HighConfidenceAbsent,
+            confidence: if is_conflict {
+                FieldConfidence::Unresolved
+            } else {
+                FieldConfidence::HighConfidenceAbsent
+            },
             source: None,
             value: None,
-            reason: "no test command sources".into(),
+            reason: if is_conflict {
+                "intra-tier conflict left field unset during import".into()
+            } else {
+                "no test command sources".into()
+            },
         });
     }
 
@@ -4546,7 +4543,7 @@ pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
 
     let mut records: Vec<PromotionRecordScore> = Vec::new();
     let mut record_paths = Vec::new();
-    collect_record_paths(&repos_dir, &mut record_paths);
+    collect_record_paths(&repos_dir, &mut record_paths)?;
 
     for path in record_paths {
         let relative = path
@@ -4646,21 +4643,33 @@ pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
     })
 }
 
-fn collect_record_paths(dir: &Path, out: &mut Vec<PathBuf>) {
-    if let Ok(entries) = fs::read_dir(dir) {
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.is_dir() {
-                collect_record_paths(&path, out);
-            } else if path
-                .file_name()
-                .map(|n| n == "record.toml")
-                .unwrap_or(false)
-            {
-                out.push(path);
-            }
+fn collect_record_paths(dir: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
+    collect_record_paths_recursive(dir, out, 0)
+}
+
+fn collect_record_paths_recursive(dir: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
+    if depth > 20 {
+        bail!(
+            "directory traversal depth exceeded at {} — possible symlink cycle",
+            dir.display()
+        );
+    }
+    for entry in
+        fs::read_dir(dir).map_err(|err| anyhow!("failed to read {}: {}", dir.display(), err))?
+    {
+        let entry = entry?;
+        let path = entry.path();
+        if path.is_dir() {
+            collect_record_paths_recursive(&path, out, depth + 1)?;
+        } else if path
+            .file_name()
+            .map(|n| n == "record.toml")
+            .unwrap_or(false)
+        {
+            out.push(path);
         }
     }
+    Ok(())
 }
 
 pub fn validate_manifest(root: &Path, manifest: &Manifest) -> Result<()> {
@@ -4875,6 +4884,17 @@ pub enum CommandSourceTier {
     Manifest,
 }
 
+struct ImportSources<'a> {
+    cargo_toml: Option<&'a ImportedFile>,
+    package_json: Option<&'a ImportedFile>,
+    pyproject_toml: Option<&'a ImportedFile>,
+    go_mod: Option<&'a ImportedFile>,
+    makefile: Option<&'a ImportedFile>,
+    justfile: Option<&'a ImportedFile>,
+    contributing: Option<&'a ImportedFile>,
+    workflow_files: &'a [ImportedFile],
+}
+
 #[derive(Debug, Clone)]
 struct ImportedCommandCandidate {
     source_path: String,
@@ -4936,43 +4956,39 @@ fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile>> {
     Ok(imported)
 }
 
-fn infer_imported_commands(
-    cargo_toml: Option<&ImportedFile>,
-    package_json: Option<&ImportedFile>,
-    pyproject_toml: Option<&ImportedFile>,
-    go_mod: Option<&ImportedFile>,
-    makefile: Option<&ImportedFile>,
-    justfile: Option<&ImportedFile>,
-    contributing: Option<&ImportedFile>,
-    workflow_files: &[ImportedFile],
-) -> ImportedCommandMetadata {
+fn infer_imported_commands(sources: &ImportSources) -> ImportedCommandMetadata {
     let mut candidates = Vec::new();
     // Manifest tier
-    if let Some(candidate) = cargo_toml.and_then(infer_cargo_manifest_commands) {
+    if let Some(candidate) = sources.cargo_toml.and_then(infer_cargo_manifest_commands) {
         candidates.push(candidate);
     }
-    if let Some(candidate) = package_json.and_then(infer_package_json_commands) {
+    if let Some(candidate) = sources.package_json.and_then(infer_package_json_commands) {
         candidates.push(candidate);
     }
-    if let Some(candidate) = pyproject_toml.and_then(infer_pyproject_commands) {
+    if let Some(candidate) = sources.pyproject_toml.and_then(infer_pyproject_commands) {
         candidates.push(candidate);
     }
-    if let Some(candidate) = go_mod.and_then(infer_go_module_commands) {
+    if let Some(candidate) = sources.go_mod.and_then(infer_go_module_commands) {
         candidates.push(candidate);
     }
     // ContribDoc tier
-    if let Some(candidate) = contributing.and_then(infer_contributing_commands) {
+    if let Some(candidate) = sources.contributing.and_then(infer_contributing_commands) {
         candidates.push(candidate);
     }
     // TaskScript tier
-    if let Some(candidate) = makefile.and_then(infer_makefile_commands) {
+    if let Some(candidate) = sources.makefile.and_then(infer_makefile_commands) {
         candidates.push(candidate);
     }
-    if let Some(candidate) = justfile.and_then(infer_justfile_commands) {
+    if let Some(candidate) = sources.justfile.and_then(infer_justfile_commands) {
         candidates.push(candidate);
     }
     // Workflow tier
-    candidates.extend(workflow_files.iter().filter_map(infer_workflow_commands));
+    candidates.extend(
+        sources
+            .workflow_files
+            .iter()
+            .filter_map(infer_workflow_commands),
+    );
 
     let mut metadata = ImportedCommandMetadata::default();
     metadata.build = resolve_command_field(
@@ -5693,8 +5709,7 @@ fn is_promo_link_heading(text: &str) -> bool {
 fn is_non_project_heading(heading: &str) -> bool {
     let lowered = heading.to_ascii_lowercase();
     let trimmed = lowered.trim();
-    if NON_PROJECT_HEADINGS.contains(&trimmed)
-    {
+    if NON_PROJECT_HEADINGS.contains(&trimmed) {
         return true;
     }
     NON_PROJECT_HEADING_KEYWORDS
@@ -9151,6 +9166,16 @@ fn is_banner_line(line: &str) -> bool {
 }
 
 fn collect_record_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
+    collect_record_dirs_recursive(root, out, 0)
+}
+
+fn collect_record_dirs_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
+    if depth > 20 {
+        bail!(
+            "directory traversal depth exceeded at {} — possible symlink cycle",
+            root.display()
+        );
+    }
     for entry in
         fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
     {
@@ -9158,7 +9183,7 @@ fn collect_record_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
         let path = entry.path();
         let file_type = entry.file_type()?;
         if file_type.is_dir() {
-            collect_record_dirs(&path, out)?;
+            collect_record_dirs_recursive(&path, out, depth + 1)?;
         } else if file_type.is_file()
             && path.file_name().and_then(|name| name.to_str()) == Some("record.toml")
         {
@@ -9171,6 +9196,16 @@ fn collect_record_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
 }
 
 fn collect_files(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
+    collect_files_recursive(root, out, 0)
+}
+
+fn collect_files_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
+    if depth > 20 {
+        bail!(
+            "directory traversal depth exceeded at {} — possible symlink cycle",
+            root.display()
+        );
+    }
     for entry in
         fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
     {
@@ -9178,7 +9213,7 @@ fn collect_files(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
         let path = entry.path();
         let file_type = entry.file_type()?;
         if file_type.is_dir() {
-            collect_files(&path, out)?;
+            collect_files_recursive(&path, out, depth + 1)?;
         } else if file_type.is_file() {
             out.push(path);
         }
@@ -9187,6 +9222,16 @@ fn collect_files(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
 }
 
 fn collect_claim_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
+    collect_claim_dirs_recursive(root, out, 0)
+}
+
+fn collect_claim_dirs_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
+    if depth > 20 {
+        bail!(
+            "directory traversal depth exceeded at {} — possible symlink cycle",
+            root.display()
+        );
+    }
     for entry in
         fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
     {
@@ -9204,7 +9249,7 @@ fn collect_claim_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
                     }
                 }
             } else {
-                collect_claim_dirs(&path, out)?;
+                collect_claim_dirs_recursive(&path, out, depth + 1)?;
             }
         }
     }
@@ -11651,16 +11696,16 @@ PRs welcome.
             contents: r#"{"scripts": {"test": "npm test"}}"#.into(),
         };
 
-        let result = infer_imported_commands(
-            None,
-            Some(&package_json),
-            Some(&pyproject),
-            None,
-            None,
-            None,
-            None,
-            &[],
-        );
+        let result = infer_imported_commands(&ImportSources {
+            cargo_toml: None,
+            package_json: Some(&package_json),
+            pyproject_toml: Some(&pyproject),
+            go_mod: None,
+            makefile: None,
+            justfile: None,
+            contributing: None,
+            workflow_files: &[],
+        });
         assert!(
             result.test.is_none(),
             "pyproject and package.json should conflict, not let npm test win: {:?}",

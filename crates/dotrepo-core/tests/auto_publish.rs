@@ -1,7 +1,7 @@
 use dotrepo_core::{
     analyze_index_promotion, import_repository, promote_to_verified, score_import_fields,
-    verify_import_plan,
-    FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary, ImportMode,
+    verify_import_plan, FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary,
+    ImportMode,
 };
 use dotrepo_schema::{Manifest, Record, RecordMode, RecordStatus, Repo};
 use std::fs;
@@ -634,4 +634,42 @@ fn contributing_make_lint_is_not_imported_as_build() {
     );
 
     fs::remove_dir_all(&root).expect("cleanup");
+}
+
+// Regression test for the narrow conflict-note detection in score_index_record_for_promotion.
+// A manifest whose import left repo.build unset because of an intra-tier conflict must
+// produce Unresolved (so the record is ineligible for auto-promotion) even though the
+// field value itself is absent.
+#[test]
+fn score_index_record_for_promotion_treats_command_conflict_as_unresolved() {
+    use dotrepo_core::score_index_record_for_promotion;
+
+    let mut manifest = make_imported_manifest();
+    // Simulate what resolve_command_field does on a tier-internal conflict
+    manifest.repo.build = None;
+    manifest.repo.test = None;
+    if let Some(ref mut t) = manifest.record.trust {
+        t.notes = Some(
+            "Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands. \
+             Left `repo.test` unset because `.github/workflows/ci.yml` suggested conflicting test commands."
+                .into(),
+        );
+    }
+
+    let scores = score_index_record_for_promotion(&manifest);
+
+    let build = scores.iter().find(|s| s.field == "repo.build").expect("build score present");
+    assert_eq!(
+        build.confidence,
+        FieldConfidence::Unresolved,
+        "build conflict must surface as Unresolved for promotion analysis"
+    );
+    assert!(build.reason.contains("intra-tier conflict"));
+
+    let test = scores.iter().find(|s| s.field == "repo.test").expect("test score present");
+    assert_eq!(
+        test.confidence,
+        FieldConfidence::Unresolved,
+        "test conflict must surface as Unresolved"
+    );
 }

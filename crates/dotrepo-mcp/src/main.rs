@@ -995,8 +995,12 @@ description = "Missing source and trust"
         let path = root.join(".repo");
         fs::write(&path, "existing\n").expect("existing file written");
 
-        let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false, "force=true")
-            .expect_err("existing file should be preserved");
+        let err = write_import_outputs(
+            vec![(path.clone(), "replacement\n".into())],
+            false,
+            "force=true",
+        )
+        .expect_err("existing file should be preserved");
         assert!(err.to_string().contains("already exists"));
         assert_eq!(
             fs::read_to_string(&path).expect("file readable"),

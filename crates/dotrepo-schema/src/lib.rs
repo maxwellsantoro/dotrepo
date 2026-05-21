@@ -407,7 +407,10 @@ pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
             trust: Some(Trust {
                 confidence: Some("low".into()),
                 provenance: vec!["inferred".into()],
-                notes: Some("Machine-generated scaffold — review and update trust before publishing.".into()),
+                notes: Some(
+                    "Machine-generated scaffold — review and update trust before publishing."
+                        .into(),
+                ),
             }),
         },
         Repo {

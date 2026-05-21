@@ -285,6 +285,9 @@ mod tests {
         assert_eq!(report.scheduled[0].reason, RefreshReason::HeadChanged);
         assert_eq!(report.skipped.len(), 1);
         assert_eq!(report.skipped[0].repository.repo, "alpha");
-        assert_eq!(report.skipped[0].reason, "missing synthesis (limit reached)");
+        assert_eq!(
+            report.skipped[0].reason,
+            "missing synthesis (limit reached)"
+        );
     }
 }

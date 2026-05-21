@@ -8,11 +8,11 @@ use dotrepo_core::{
     preview_surfaces, public_repository_query_or_error_with_base,
     public_repository_summary_or_error_with_base, public_repository_trust_or_error_with_base,
     query_repository, scaffold_claim_directory, trust_repository, validate_index_root,
-    validate_manifest, validate_repository, write_import_outputs, ClaimEventAppendInput, ClaimEventKind,
-    ClaimHandoffOutcome, ClaimInspectionReport, ClaimScaffoldInput, ConflictRelationship,
-    DoctorOwnershipHonesty, DoctorRecommendedMode, DoctorReport, DoctorSurface, ImportMode,
-    ImportOptions, IndexFindingSeverity, ManagedFileState, PublicErrorResponse, SelectionReason,
-    SurfacePreviewReport, TrustReport,
+    validate_manifest, validate_repository, write_import_outputs, ClaimEventAppendInput,
+    ClaimEventKind, ClaimHandoffOutcome, ClaimInspectionReport, ClaimScaffoldInput,
+    ConflictRelationship, DoctorOwnershipHonesty, DoctorRecommendedMode, DoctorReport,
+    DoctorSurface, ImportMode, ImportOptions, IndexFindingSeverity, ManagedFileState,
+    PublicErrorResponse, SelectionReason, SurfacePreviewReport, TrustReport,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::{RecordMode, Trust};
@@ -2237,8 +2237,12 @@ homepage = "https://github.com/example/project"
         let path = root.join(".repo");
         fs::write(&path, "existing\n").expect("existing file written");
 
-        let err = write_import_outputs(vec![(path.clone(), "replacement\n".into())], false, "--force")
-            .expect_err("existing file should be preserved");
+        let err = write_import_outputs(
+            vec![(path.clone(), "replacement\n".into())],
+            false,
+            "--force",
+        )
+        .expect_err("existing file should be preserved");
         assert!(err.to_string().contains("already exists"));
         assert_eq!(
             fs::read_to_string(&path).expect("file readable"),

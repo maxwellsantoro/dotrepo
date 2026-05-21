@@ -16,13 +16,17 @@ pub(crate) fn apply_writeback_plan(plan: &CrawlWritebackPlan) -> Result<Writebac
         .with_context(|| format!("failed to create {}", plan.record_root.display()))?;
 
     let manifest_tmp = plan.factual.manifest_path.with_extension("toml.tmp");
-    write_atomic(&manifest_tmp, &plan.factual.import_plan.manifest_text, &plan.factual.manifest_path)
-        .with_context(|| {
-            format!(
-                "failed to write factual manifest {}",
-                plan.factual.manifest_path.display()
-            )
-        })?;
+    write_atomic(
+        &manifest_tmp,
+        &plan.factual.import_plan.manifest_text,
+        &plan.factual.manifest_path,
+    )
+    .with_context(|| {
+        format!(
+            "failed to write factual manifest {}",
+            plan.factual.manifest_path.display()
+        )
+    })?;
 
     match (
         plan.factual.evidence_path.as_ref(),
@@ -40,13 +44,17 @@ pub(crate) fn apply_writeback_plan(plan: &CrawlWritebackPlan) -> Result<Writebac
 
     if let Some(synthesis) = &plan.synthesis {
         let synth_tmp = synthesis.synthesis_path.with_extension("toml.tmp");
-        write_atomic(&synth_tmp, &synthesis.write_plan.synthesis_text, &synthesis.synthesis_path)
-            .with_context(|| {
-                format!(
-                    "failed to write synthesis document {}",
-                    synthesis.synthesis_path.display()
-                )
-            })?;
+        write_atomic(
+            &synth_tmp,
+            &synthesis.write_plan.synthesis_text,
+            &synthesis.synthesis_path,
+        )
+        .with_context(|| {
+            format!(
+                "failed to write synthesis document {}",
+                synthesis.synthesis_path.display()
+            )
+        })?;
     }
 
     Ok(WritebackReport {
@@ -63,6 +71,11 @@ pub(crate) fn apply_writeback_plan(plan: &CrawlWritebackPlan) -> Result<Writebac
 fn write_atomic(tmp_path: &Path, contents: &str, final_path: &Path) -> Result<()> {
     fs::write(tmp_path, contents)
         .with_context(|| format!("failed to write temp file {}", tmp_path.display()))?;
-    fs::rename(tmp_path, final_path)
-        .with_context(|| format!("failed to rename {} to {}", tmp_path.display(), final_path.display()))
+    fs::rename(tmp_path, final_path).with_context(|| {
+        format!(
+            "failed to rename {} to {}",
+            tmp_path.display(),
+            final_path.display()
+        )
+    })
 }
