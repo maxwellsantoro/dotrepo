@@ -4,13 +4,13 @@ use serde::Serialize;
 use std::fs;
 use std::path::{Path, PathBuf};
 
+use crate::claims::resolve_repository_local_path_for_read;
 use crate::claims::{
-    claim_directory_identity, load_claim_directory, resolve_repository_local_path,
-    validate_claim_event_history, validate_claim_identity_alignment,
-    validate_claim_resolution_consistency,
+    claim_directory_identity, load_claim_directory, validate_claim_event_history,
+    validate_claim_identity_alignment, validate_claim_resolution_consistency,
 };
 use crate::synthesis::{load_synthesis_document, validate_synthesis};
-use crate::util::{display_path, parse_rfc3339, repository_identity};
+use crate::util::{display_path, parse_rfc3339, repository_identity, validate_shell_safe_command};
 use crate::{load_manifest_document, record_summary, RecordSummary};
 
 pub(crate) const SUPPORTED_SCHEMA: &str = "dotrepo/v0.1";
@@ -165,6 +165,17 @@ pub fn validate_manifest_diagnostics(
         ));
     }
 
+    if let Some(build) = manifest.repo.build.as_deref() {
+        if let Err(err) = validate_shell_safe_command("repo.build", build) {
+            diagnostics.push(validation_error("validate_manifest", err.to_string()));
+        }
+    }
+    if let Some(test) = manifest.repo.test.as_deref() {
+        if let Err(err) = validate_shell_safe_command("repo.test", test) {
+            diagnostics.push(validation_error("validate_manifest", err.to_string()));
+        }
+    }
+
     diagnostics.extend(validate_readme_sections(manifest));
 
     if matches!(manifest.record.mode, RecordMode::Native) {
@@ -212,7 +223,7 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
         .into_iter()
         .flatten()
         {
-            match resolve_repository_local_path(root, path) {
+            match resolve_repository_local_path_for_read(root, path) {
                 Ok(target) => {
                     if !target.exists() {
                         diagnostics.push(validation_error(
@@ -234,7 +245,7 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
     if let Some(readme) = &manifest.readme {
         for (name, section) in &readme.custom_sections {
             if let Some(path) = &section.path {
-                match resolve_repository_local_path(root, path) {
+                match resolve_repository_local_path_for_read(root, path) {
                     Ok(target) => {
                         if !target.exists() {
                             diagnostics.push(validation_error(

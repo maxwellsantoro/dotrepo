@@ -5,7 +5,7 @@ use std::fs;
 use std::path::{Component, Path, PathBuf};
 
 use crate::selection::{CandidateManifest, RepositoryIdentity};
-use crate::util::{display_path, repository_identity};
+use crate::util::{display_path, ensure_path_contained_in_root, repository_identity};
 use crate::validation::{index_error, IndexFinding};
 
 pub(crate) const SUPPORTED_CLAIM_SCHEMA: &str = "dotrepo-claim/v0";
@@ -975,6 +975,20 @@ pub(crate) fn resolve_repository_local_path(root: &Path, value: &str) -> Result<
 
     Ok(root.join(normalized))
 }
+
+pub(crate) fn resolve_repository_local_path_for_read(root: &Path, value: &str) -> Result<PathBuf> {
+    let resolved = resolve_repository_local_path(root, value)?;
+    ensure_path_contained_in_root(root, &resolved)
+}
+
+pub fn resolve_claim_directory(root: &Path, claim_path: &str) -> Result<PathBuf> {
+    if Path::new(claim_path).is_absolute() {
+        bail!("claim path must be relative to root");
+    }
+    let resolved = root.join(claim_path);
+    ensure_path_contained_in_root(root, &resolved)
+}
+
 pub(crate) fn claim_directory_identity(
     index_root: &Path,
     claim_dir: &Path,

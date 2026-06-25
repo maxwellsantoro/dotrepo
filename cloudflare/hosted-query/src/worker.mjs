@@ -83,7 +83,7 @@ function decodeRepositoryIdentity(route) {
   }
 }
 
-function normalizeQueryPath(path) {
+export function normalizeQueryPath(path) {
   if (path === "" || path === ".") {
     return ".";
   }
@@ -96,7 +96,7 @@ function normalizeQueryPath(path) {
   return path;
 }
 
-function queryValue(value, path) {
+export function queryValue(value, path) {
   if (path === "" || path === ".") {
     return value;
   }

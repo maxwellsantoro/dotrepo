@@ -2,6 +2,7 @@ use anyhow::{bail, Result};
 use dotrepo_schema::{Manifest, RecordMode, RecordStatus};
 use serde_json::Value;
 use std::path::Path;
+use std::sync::Arc;
 
 use super::util::{display_path, manifest_path, repository_identity};
 use super::{
@@ -10,7 +11,7 @@ use super::{
 };
 use crate::claims::candidate_claim_context;
 use crate::public::public_record_artifacts;
-use crate::query::query_manifest_value;
+use crate::query::{manifest_to_json, query_manifest_value_from_json};
 use crate::validation::collect_record_dirs;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -24,7 +25,8 @@ pub(crate) struct RepositoryIdentity {
 pub(crate) struct CandidateManifest {
     pub(crate) manifest_path: String,
     pub(crate) path: std::path::PathBuf,
-    pub(crate) manifest: Manifest,
+    pub(crate) manifest: Arc<Manifest>,
+    pub(crate) manifest_json: Value,
     pub(crate) identity: Option<RepositoryIdentity>,
     pub(crate) rank: u8,
 }
@@ -70,8 +72,8 @@ pub(crate) fn resolve_conflict_reason(
     }
 }
 
-pub(crate) fn resolve_competing_value(manifest: &Manifest, path: &str) -> Option<Value> {
-    query_manifest_value(manifest, path).ok()
+pub(crate) fn resolve_competing_value(candidate: &CandidateManifest, path: &str) -> Option<Value> {
+    query_manifest_value_from_json(&candidate.manifest_json, path).ok()
 }
 
 pub(crate) fn resolve_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
@@ -139,7 +141,7 @@ fn load_direct_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
 
         let document = load_manifest_file(&path)?;
         validate_manifest(root, &document.manifest)?;
-        candidates.push(candidate_from_document(root, &document));
+        candidates.push(candidate_from_document(root, &document)?);
     }
     Ok(candidates)
 }
@@ -158,19 +160,22 @@ fn load_descendant_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
         }
         let document = load_manifest_file(&path)?;
         validate_manifest(root, &document.manifest)?;
-        candidates.push(candidate_from_document(root, &document));
+        candidates.push(candidate_from_document(root, &document)?);
     }
     Ok(candidates)
 }
 
-fn candidate_from_document(root: &Path, document: &LoadedManifest) -> CandidateManifest {
-    CandidateManifest {
+fn candidate_from_document(root: &Path, document: &LoadedManifest) -> Result<CandidateManifest> {
+    let manifest = Arc::new(document.manifest.clone());
+    let manifest_json = manifest_to_json(&manifest)?;
+    Ok(CandidateManifest {
         manifest_path: display_path(root, &document.path),
         path: document.path.clone(),
-        rank: precedence_rank(&document.manifest),
+        rank: precedence_rank(&manifest),
         identity: manifest_identity(root, document),
-        manifest: document.manifest.clone(),
-    }
+        manifest,
+        manifest_json,
+    })
 }
 
 /// Computes the total precedence order for candidate records.

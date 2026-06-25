@@ -2,13 +2,20 @@ use anyhow::{anyhow, bail, Result};
 use dotrepo_schema::Manifest;
 use serde_json::Value;
 
+pub fn manifest_to_json(manifest: &Manifest) -> Result<Value> {
+    serde_json::to_value(manifest).map_err(Into::into)
+}
+
 /// Returns an owned JSON value because callers serialize, diff, or store the result.
 pub fn query_manifest_value(manifest: &Manifest, key: &str) -> Result<Value> {
-    let document = serde_json::to_value(manifest)?;
+    query_manifest_value_from_json(&manifest_to_json(manifest)?, key)
+}
+
+pub fn query_manifest_value_from_json(document: &Value, key: &str) -> Result<Value> {
     let canonical_key = normalize_query_path(key);
-    let value = query_value(&document, &canonical_key).or_else(|_| {
+    let value = query_value(document, &canonical_key).or_else(|_| {
         if canonical_key != key {
-            query_value(&document, key)
+            query_value(document, key)
         } else {
             bail!("query path not found: {}", key)
         }

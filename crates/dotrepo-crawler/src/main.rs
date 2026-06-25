@@ -3,11 +3,11 @@ use clap::{Args, Parser, Subcommand};
 use dotrepo_core::{load_manifest_from_root, load_synthesis_from_root};
 use dotrepo_crawler::{
     apply_crawl_writeback, crawl_repository, discovery_report_from_targets, load_crawler_state,
-    load_repository_targets, refresh_candidates_from_state,
-    schedule_refresh, seed_repositories, write_crawler_state, CrawlDiagnostic,
-    CrawlRepositoryRequest, CrawlStateRecord, CrawlerStateSnapshot,
-    RefreshCandidate, RefreshReason, RepositoryRef, ScheduleRefreshReport, ScheduleRefreshRequest,
-    SeedRepositoriesReport, SeedRepositoriesRequest, StarBand, MAX_SEED_LIMIT,
+    load_repository_targets, refresh_candidates_from_state, schedule_refresh, seed_repositories,
+    write_crawler_state, CrawlDiagnostic, CrawlRepositoryRequest, CrawlStateRecord,
+    CrawlerStateSnapshot, RefreshCandidate, RefreshReason, RepositoryRef, ScheduleRefreshReport,
+    ScheduleRefreshRequest, SeedRepositoriesReport, SeedRepositoriesRequest, StarBand,
+    MAX_SEED_LIMIT,
 };
 use dotrepo_schema::{Manifest, RecordStatus};
 use serde::{Deserialize, Serialize};

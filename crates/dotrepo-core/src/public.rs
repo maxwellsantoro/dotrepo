@@ -683,7 +683,7 @@ pub fn public_repository_query_with_base(
                     ConflictRelationship::Superseded
                 },
                 reason: resolve_conflict_reason(reason, selected, candidate),
-                value: resolve_competing_value(&candidate.manifest, path),
+                value: resolve_competing_value(candidate, path),
                 record: public_selected_record(index_root, candidate),
             })
             .collect(),
@@ -717,7 +717,7 @@ pub fn public_query_input_snapshot(
         selection: PublicQueryInputSelection {
             reason,
             record: public_selected_record(index_root, selected),
-            manifest: selected.manifest.clone(),
+            manifest: (*selected.manifest).clone(),
         },
         conflicts: candidates
             .iter()
@@ -730,7 +730,7 @@ pub fn public_query_input_snapshot(
                 },
                 reason: resolve_conflict_reason(reason, selected, candidate),
                 record: public_selected_record(index_root, candidate),
-                manifest: candidate.manifest.clone(),
+                manifest: (*candidate.manifest).clone(),
             })
             .collect(),
     })
@@ -762,7 +762,7 @@ pub fn public_repository_query_from_input_with_base(
             .map(|candidate| PublicConflictReport {
                 relationship: candidate.relationship,
                 reason: candidate.reason,
-                value: resolve_competing_value(&candidate.manifest, path),
+                value: query_manifest_value(&candidate.manifest, path).ok(),
                 record: candidate.record.clone(),
             })
             .collect(),
@@ -1028,6 +1028,9 @@ fn collect_files_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32) -> R
         let entry = entry?;
         let path = entry.path();
         let file_type = entry.file_type()?;
+        if file_type.is_symlink() {
+            continue;
+        }
         if file_type.is_dir() {
             collect_files_recursive(&path, out, depth + 1)?;
         } else if file_type.is_file() {

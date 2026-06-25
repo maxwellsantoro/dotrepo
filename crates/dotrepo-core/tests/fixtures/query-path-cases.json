@@ -1,0 +1,77 @@
+[
+  {
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "native",
+        "status": "canonical"
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Example repository"
+      }
+    },
+    "path": "repo.name",
+    "expected": "orbit"
+  },
+  {
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "native",
+        "status": "canonical",
+        "trust": {
+          "confidence": "high",
+          "provenance": ["declared"]
+        }
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Example repository"
+      }
+    },
+    "path": "trust.confidence",
+    "expected": "high"
+  },
+  {
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "native",
+        "status": "canonical"
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Example repository",
+        "languages": ["rust", "toml"]
+      }
+    },
+    "path": "repo.languages.1",
+    "expected": "toml"
+  },
+  {
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "native",
+        "status": "canonical"
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Example repository"
+      }
+    },
+    "path": ".",
+    "expected": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "native",
+        "status": "canonical"
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Example repository"
+      }
+    }
+  }
+]

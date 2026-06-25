@@ -17,7 +17,9 @@ mod synthesis;
 mod util;
 mod validation;
 
-pub use query::{query_manifest, query_manifest_value};
+pub use query::{
+    manifest_to_json, query_manifest, query_manifest_value, query_manifest_value_from_json,
+};
 pub use synthesis::{
     get_synthesis, load_synthesis_document, load_synthesis_from_root, validate_synthesis,
     write_synthesis, LoadedSynthesis, SynthesisReadReport, SynthesisWritePlan,
@@ -46,11 +48,11 @@ pub(crate) use selection::{
 
 pub use claims::{
     append_claim_event, inspect_claim_directory, load_claim_directory, parse_claim_event,
-    parse_claim_record, scaffold_claim_directory, ClaimEvent, ClaimEventAppendInput,
-    ClaimEventAppendPlan, ClaimEventInspection, ClaimEventKind, ClaimEventLinks,
-    ClaimEventMetadata, ClaimHandoffOutcome, ClaimIdentity, ClaimInspectionReport, ClaimKind,
-    ClaimMetadata, ClaimRecord, ClaimResolution, ClaimScaffoldInput, ClaimScaffoldPlan, ClaimState,
-    ClaimSummary, ClaimTarget, ClaimTargetInspection, ClaimTransition, Claimant,
+    parse_claim_record, resolve_claim_directory, scaffold_claim_directory, ClaimEvent,
+    ClaimEventAppendInput, ClaimEventAppendPlan, ClaimEventInspection, ClaimEventKind,
+    ClaimEventLinks, ClaimEventMetadata, ClaimHandoffOutcome, ClaimIdentity, ClaimInspectionReport,
+    ClaimKind, ClaimMetadata, ClaimRecord, ClaimResolution, ClaimScaffoldInput, ClaimScaffoldPlan,
+    ClaimState, ClaimSummary, ClaimTarget, ClaimTargetInspection, ClaimTransition, Claimant,
     LoadedClaimDirectory, LoadedClaimEvent, RecordClaimContext,
 };
 
@@ -355,7 +357,7 @@ pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
                     ConflictRelationship::Superseded
                 },
                 reason: resolve_conflict_reason(reason, selected, candidate),
-                value: resolve_competing_value(&candidate.manifest, path),
+                value: resolve_competing_value(candidate, path),
                 record: selected_record(root, candidate),
             })
             .collect(),

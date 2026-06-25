@@ -1,5 +1,6 @@
 use anyhow::{anyhow, bail, Result};
 use sha2::{Digest, Sha256};
+use std::fs;
 use std::path::{Path, PathBuf};
 use time::format_description::well_known::Rfc3339;
 use time::OffsetDateTime;
@@ -37,6 +38,48 @@ pub fn normalize_rfc3339(label: &str, value: &str) -> Result<String> {
 
 pub fn current_timestamp_rfc3339() -> Result<String> {
     render_rfc3339("current timestamp", OffsetDateTime::now_utc())
+}
+
+/// Verifies that `path` resolves within `root`, including through symlinks.
+pub(crate) fn ensure_path_contained_in_root(root: &Path, path: &Path) -> Result<PathBuf> {
+    verify_path_contained_in_root(root, path)?;
+    Ok(path.to_path_buf())
+}
+
+pub(crate) fn verify_path_contained_in_root(root: &Path, path: &Path) -> Result<()> {
+    let canonical_root = fs::canonicalize(root).map_err(|err| {
+        anyhow!(
+            "failed to canonicalize repository root {}: {}",
+            root.display(),
+            err
+        )
+    })?;
+
+    if path.exists()
+        || path
+            .symlink_metadata()
+            .is_ok_and(|meta| meta.file_type().is_symlink())
+    {
+        let canonical_path = fs::canonicalize(path)
+            .map_err(|err| anyhow!("failed to canonicalize path {}: {}", path.display(), err))?;
+        if !canonical_path.starts_with(&canonical_root) {
+            bail!("path must stay within the repository root");
+        }
+        return Ok(());
+    }
+
+    if let Some(parent) = path.parent() {
+        if parent.exists() {
+            let canonical_parent = fs::canonicalize(parent).map_err(|err| {
+                anyhow!("failed to canonicalize path {}: {}", parent.display(), err)
+            })?;
+            if !canonical_parent.starts_with(&canonical_root) {
+                bail!("path must stay within the repository root");
+            }
+        }
+    }
+
+    Ok(())
 }
 
 pub fn display_path(root: &Path, path: &Path) -> String {

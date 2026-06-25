@@ -283,10 +283,15 @@ fn handle_request(
         }
         "textDocument/hover" => {
             let params: TextDocumentPositionParams = serde_json::from_value(_params)?;
-            jsonrpc_response(
-                id,
-                serde_json::to_value(hover_response(state, &params)?).unwrap_or(Value::Null),
-            )
+            match serde_json::to_value(hover_response(state, &params)?) {
+                Ok(value) => jsonrpc_response(id, value),
+                Err(err) => jsonrpc_error_response(
+                    id,
+                    -32603,
+                    format!("failed to serialize hover response: {err}"),
+                    None,
+                ),
+            }
         }
         _ => jsonrpc_error_response(id, -32601, format!("method not found: {}", method), None),
     };

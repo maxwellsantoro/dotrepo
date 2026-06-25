@@ -2,7 +2,8 @@ use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
     current_timestamp_rfc3339, display_path, generate_check_repository, import_preview_repository,
     import_repository_with_options, inspect_claim_directory, query_repository, record_summary,
-    trust_repository, validate_repository, write_import_outputs, ImportMode, ImportOptions,
+    resolve_claim_directory, trust_repository, validate_repository, write_import_outputs,
+    ImportMode, ImportOptions,
 };
 use dotrepo_transport::{
     jsonrpc_error_response, jsonrpc_response, read_jsonrpc_message as read_message,
@@ -289,11 +290,7 @@ fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
 fn tool_claim_inspect(arguments: Value) -> Result<(String, Value)> {
     let root = resolve_root(&arguments);
     let claim_path = required_string(&arguments, "claimPath")?;
-    let claim_dir = if Path::new(claim_path).is_absolute() {
-        PathBuf::from(claim_path)
-    } else {
-        root.join(claim_path)
-    };
+    let claim_dir = resolve_claim_directory(&root, claim_path)?;
     let report = inspect_claim_directory(&root, &claim_dir)?;
     Ok(("claim history loaded".into(), to_value(report)?))
 }
@@ -838,12 +835,15 @@ fn tool_definitions() -> Vec<Value> {
     ]
 }
 
+fn structured_tool_text(summary: &str, structured: &Value) -> String {
+    match serde_json::to_string_pretty(structured) {
+        Ok(body) => format!("{summary}\n\n{body}"),
+        Err(err) => format!("{summary}\n\n(structured content unavailable: {err})"),
+    }
+}
+
 fn tool_success(summary: String, structured: Value) -> Value {
-    let text = format!(
-        "{}\n\n{}",
-        summary,
-        serde_json::to_string_pretty(&structured).expect("structured content serializes")
-    );
+    let text = structured_tool_text(&summary, &structured);
     json!({
         "content": [
             {
@@ -857,11 +857,7 @@ fn tool_success(summary: String, structured: Value) -> Value {
 }
 
 fn tool_failure(summary: String, structured: Value) -> Value {
-    let text = format!(
-        "{}\n\n{}",
-        summary,
-        serde_json::to_string_pretty(&structured).expect("structured content serializes")
-    );
+    let text = structured_tool_text(&summary, &structured);
     json!({
         "content": [
             {

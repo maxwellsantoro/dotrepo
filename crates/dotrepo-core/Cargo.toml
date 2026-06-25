@@ -17,5 +17,8 @@ time.workspace = true
 toml.workspace = true
 dotrepo-schema.workspace = true
 
+[lints.clippy]
+perf = "warn"
+
 [dev-dependencies]
 serde.workspace = true

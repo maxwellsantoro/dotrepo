@@ -819,11 +819,17 @@ pub fn write_import_outputs(
         });
     }
 
-    for reserved in &mut reserved {
-        reserved
+    for output in &mut reserved {
+        if let Err(err) = output
             .file
-            .write_all(reserved.contents.as_bytes())
-            .and_then(|_| reserved.file.flush())?;
+            .write_all(output.contents.as_bytes())
+            .and_then(|_| output.file.flush())
+        {
+            for item in &reserved {
+                let _ = fs::remove_file(&item.path);
+            }
+            return Err(err.into());
+        }
     }
 
     Ok(())
@@ -1721,6 +1727,60 @@ fn readme_import_evidence_bullet(
         (false, false, false) => {
             format!("Imported repository metadata from {}.", readme_path)
         }
+    }
+}
+
+#[cfg(test)]
+mod write_import_output_tests {
+    use super::write_import_outputs;
+    use std::fs;
+    use std::path::PathBuf;
+
+    fn temp_dir(label: &str) -> PathBuf {
+        let unique = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .expect("clock")
+            .as_nanos();
+        let path = std::env::temp_dir().join(format!("dotrepo-import-write-{label}-{unique}"));
+        fs::create_dir_all(&path).expect("temp dir created");
+        path
+    }
+
+    #[test]
+    fn write_import_outputs_rolls_back_when_second_write_fails() {
+        use std::os::unix::fs::PermissionsExt;
+
+        let root = temp_dir("rollback");
+        let first = root.join("record.toml");
+        let readonly_dir = root.join("readonly_dir");
+        fs::create_dir(&readonly_dir).expect("readonly dir created");
+        let mut permissions = fs::metadata(&readonly_dir)
+            .expect("readonly dir metadata")
+            .permissions();
+        permissions.set_mode(0o555);
+        fs::set_permissions(&readonly_dir, permissions).expect("readonly dir permissions set");
+
+        let err = write_import_outputs(
+            vec![
+                (first.clone(), "manifest\n".into()),
+                (readonly_dir.join("evidence.md"), "evidence\n".into()),
+            ],
+            false,
+            "--force",
+        )
+        .expect_err("second write should fail");
+
+        assert!(
+            !first.exists(),
+            "partial manifest should be rolled back: {err}"
+        );
+
+        let mut permissions = fs::metadata(&readonly_dir)
+            .expect("readonly dir metadata")
+            .permissions();
+        permissions.set_mode(0o755);
+        fs::set_permissions(&readonly_dir, permissions).expect("readonly dir permissions reset");
+        fs::remove_dir_all(root).expect("temp dir removed");
     }
 }
 

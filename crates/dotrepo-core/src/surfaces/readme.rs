@@ -4,7 +4,7 @@ use std::path::Path;
 use anyhow::{anyhow, bail, Result};
 use dotrepo_schema::{Manifest, ReadmeCustomSection};
 
-use crate::claims::resolve_repository_local_path;
+use crate::claims::resolve_repository_local_path_for_read;
 use crate::render::{generated_banner, CommentStyle};
 use crate::util::source_digest;
 
@@ -112,7 +112,7 @@ fn render_custom_section(
     }
 
     if let Some(path) = &custom.path {
-        let target = resolve_repository_local_path(root, path).map_err(|err| {
+        let target = resolve_repository_local_path_for_read(root, path).map_err(|err| {
             anyhow!(
                 "custom README section `{}` uses an invalid path `{}`: {}",
                 section_name,

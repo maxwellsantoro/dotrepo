@@ -46,7 +46,7 @@ jobs:
             [ -n "$path" ] || continue
             has_any=true
 
-            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/) ]]; then
+            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/) ]] || [[ "$path" =~ ^index/ ]]; then
               has_code=true
             fi
 
@@ -128,7 +128,7 @@ jobs:
       - name: Check formatting, linting, tests, and seeded flows
         run: |
           cargo fmt --all -- --check
-          cargo clippy --workspace --all-targets -- -D clippy::correctness
+          cargo clippy --workspace --all-targets -- -D clippy::correctness -W clippy::perf
           cargo test --workspace
           cargo run -p dotrepo-cli -- --root examples/native-minimal validate
           cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check

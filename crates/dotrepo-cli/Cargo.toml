@@ -9,6 +9,10 @@ description = "Reference CLI for the dotrepo repository metadata protocol."
 readme = "../../README.md"
 default-run = "dotrepo"
 
+[lib]
+name = "dotrepo_cli"
+path = "src/lib.rs"
+
 [[bin]]
 name = "dotrepo"
 path = "src/main.rs"

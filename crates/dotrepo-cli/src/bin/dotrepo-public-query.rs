@@ -256,8 +256,8 @@ fn resolve_static_path(
     } else {
         public_root.join(&relative)
     };
-    if candidate.is_file() {
-        return Ok(Some(candidate));
+    if let Some(path) = contained_static_file(public_root, &candidate)? {
+        return Ok(Some(path));
     }
 
     let directory_index = if relative.as_os_str().is_empty() {
@@ -265,7 +265,32 @@ fn resolve_static_path(
     } else {
         Some(public_root.join(relative).join("index.html"))
     };
-    Ok(directory_index.filter(|path| path.is_file()))
+    if let Some(path) = directory_index {
+        return contained_static_file(public_root, &path);
+    }
+    Ok(None)
+}
+
+fn contained_static_file(public_root: &Path, candidate: &Path) -> Result<Option<PathBuf>> {
+    if !candidate.is_file() {
+        return Ok(None);
+    }
+    let canonical_root = public_root.canonicalize().with_context(|| {
+        format!(
+            "failed to canonicalize public root {}",
+            public_root.display()
+        )
+    })?;
+    let canonical_candidate = candidate.canonicalize().with_context(|| {
+        format!(
+            "failed to canonicalize static asset path {}",
+            candidate.display()
+        )
+    })?;
+    if !canonical_candidate.starts_with(&canonical_root) {
+        return Ok(None);
+    }
+    Ok(Some(candidate.to_path_buf()))
 }
 
 fn static_relative_path(path: &str, base_path: &str) -> Result<Option<PathBuf>> {
