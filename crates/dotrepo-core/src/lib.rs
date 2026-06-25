@@ -27,7 +27,7 @@ pub use synthesis::{
 pub(crate) use util::manifest_path;
 pub use util::{
     current_timestamp_rfc3339, display_path, normalize_rfc3339, parse_rfc3339, render_rfc3339,
-    source_digest,
+    source_digest, validate_repository_identity_segments,
 };
 
 pub(crate) use surfaces::{

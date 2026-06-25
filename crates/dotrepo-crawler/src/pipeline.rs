@@ -179,7 +179,11 @@ pub(crate) fn crawl_repository_from_snapshot(
 }
 
 fn validate_repository_identity(repository: &RepositoryRef) -> Result<()> {
-    repository.validate_identity()?;
+    dotrepo_core::validate_repository_identity_segments(
+        &repository.host,
+        &repository.owner,
+        &repository.repo,
+    )?;
     if repository.host.trim() != "github.com" {
         bail!("crawl_repository currently supports github.com identities only");
     }

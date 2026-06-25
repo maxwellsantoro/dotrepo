@@ -1,6 +1,7 @@
 use anyhow::{anyhow, Context, Result};
 use dotrepo_core::{
-    validate_manifest_diagnostics, ValidationDiagnostic, ValidationDiagnosticSeverity,
+    query_manifest_value, validate_manifest_diagnostics, ValidationDiagnostic,
+    ValidationDiagnosticSeverity,
 };
 use dotrepo_schema::{parse_manifest, ParseError};
 use dotrepo_transport::{
@@ -422,14 +423,29 @@ fn hover_response(
     let Some(path) = index.path_at(params.position) else {
         return Ok(None);
     };
-    let Some(entry) = schema_catalog().iter().find(|entry| entry.path == path) else {
-        return Ok(None);
-    };
+    if let Some(entry) = schema_catalog().iter().find(|entry| entry.path == path) {
+        return Ok(Some(Hover {
+            contents: markup_content(entry.documentation),
+            range: index.range_for_path(path),
+        }));
+    }
 
-    Ok(Some(Hover {
-        contents: markup_content(entry.documentation),
-        range: index.range_for_path(path),
-    }))
+    if path.starts_with("repo.") {
+        if let Ok(manifest) = parse_manifest(&document.text) {
+            if let Ok(value) = query_manifest_value(&manifest, path) {
+                let rendered =
+                    serde_json::to_string_pretty(&value).unwrap_or_else(|_| value.to_string());
+                return Ok(Some(Hover {
+                    contents: markup_content(&format!(
+                        "`{path}` resolves to:\n\n```json\n{rendered}\n```"
+                    )),
+                    range: index.range_for_path(path),
+                }));
+            }
+        }
+    }
+
+    Ok(None)
 }
 
 fn diagnostics_for_document(path: &Path, text: &str) -> Vec<LspDiagnostic> {
@@ -468,48 +484,62 @@ fn map_validation_diagnostic(
     root: &Path,
     diagnostic: &ValidationDiagnostic,
 ) -> LspDiagnostic {
-    let range = if diagnostic.message.starts_with("unsupported schema:") {
-        index.field_range("schema")
-    } else if diagnostic.message == "repo.name must not be empty" {
-        index.field_range("repo.name")
-    } else if diagnostic
-        .message
-        .contains("record.source must be set for overlay records")
-    {
-        index
-            .field_range("record.source")
-            .or_else(|| index.section_range("record"))
-    } else if diagnostic
-        .message
-        .contains("record.trust.provenance must list at least one provenance entry")
-    {
-        index
-            .field_range("record.trust.provenance")
-            .or_else(|| index.section_range("record.trust"))
-    } else if diagnostic
-        .message
-        .contains("record.trust must be set for overlay records")
-    {
-        index
-            .section_range("record.trust")
-            .or_else(|| index.section_range("trust"))
-            .or_else(|| index.section_range("record"))
-    } else if let Some(section_name) = missing_custom_section_name(&diagnostic.message) {
-        index
-            .section_range(&format!("readme.custom_sections.{section_name}"))
-            .or_else(|| index.field_range("readme.custom_sections.path"))
-    } else if let Some(target) = missing_path_target(&diagnostic.message) {
-        range_for_missing_path(index, root, &target)
-    } else {
-        None
-    }
-    .unwrap_or_else(|| index.default_range());
+    let range =
+        range_for_diagnostic_code(index, root, diagnostic).unwrap_or_else(|| index.default_range());
 
     LspDiagnostic {
         range,
         severity: severity_code(diagnostic.severity),
         source: diagnostic.source.into(),
         message: diagnostic.message.clone(),
+    }
+}
+
+fn range_for_diagnostic_code(
+    index: &DocumentIndex,
+    root: &Path,
+    diagnostic: &ValidationDiagnostic,
+) -> Option<LspRange> {
+    match diagnostic.code {
+        "unsupported_schema" => index.field_range("schema"),
+        "invalid_generated_at" => index.field_range("record.generated_at"),
+        "repo_name_empty" => index.field_range("repo.name"),
+        "unsafe_shell_command" => {
+            if diagnostic.message.contains("repo.build") {
+                index.field_range("repo.build")
+            } else if diagnostic.message.contains("repo.test") {
+                index.field_range("repo.test")
+            } else {
+                None
+            }
+        }
+        "overlay_source_required" => index
+            .field_range("record.source")
+            .or_else(|| index.section_range("record")),
+        "overlay_trust_provenance_required" => index
+            .field_range("record.trust.provenance")
+            .or_else(|| index.section_range("record.trust")),
+        "overlay_trust_required" => index
+            .section_range("record.trust")
+            .or_else(|| index.section_range("trust"))
+            .or_else(|| index.section_range("record")),
+        "readme_section_content_or_path_required" | "readme_section_content_and_path_conflict" => {
+            missing_custom_section_name(&diagnostic.message).and_then(|section_name| {
+                index
+                    .section_range(&format!("readme.custom_sections.{section_name}"))
+                    .or_else(|| index.field_range("readme.custom_sections.path"))
+            })
+        }
+        "missing_referenced_path" | "invalid_referenced_path" => {
+            missing_path_target(&diagnostic.message)
+                .and_then(|target| range_for_missing_path(index, root, &target))
+        }
+        "readme_section_missing_path" | "readme_section_invalid_path" => {
+            missing_custom_section_name(&diagnostic.message).and_then(|section_name| {
+                index.section_range(&format!("readme.custom_sections.{section_name}"))
+            })
+        }
+        _ => None,
     }
 }
 

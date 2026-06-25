@@ -61,6 +61,8 @@ pub struct ImportPreviewReport {
     pub evidence_text: Option<String>,
     pub imported_sources: Vec<String>,
     pub inferred_fields: Vec<String>,
+    pub field_scores: FieldScoreSummary,
+    pub verification_passed: bool,
     pub record: RecordSummary,
 }
 
@@ -152,7 +154,8 @@ pub struct FieldScore {
     pub reason: String,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FieldScoreSummary {
     pub high_confidence_present: Vec<String>,
     pub medium_confidence_present: Vec<String>,
@@ -228,6 +231,13 @@ pub fn import_preview_repository(
     source: Option<&str>,
 ) -> Result<ImportPreviewReport> {
     let plan = import_repository(root, mode, source)?;
+    let source_url = source
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .or_else(|| plan.manifest.record.source.as_deref())
+        .unwrap_or("");
+    let verification = verify_import_plan(root, &plan, source_url);
+    let field_scores = score_import_fields(&plan, &verification);
     Ok(ImportPreviewReport {
         root: root.display().to_string(),
         mode: import_mode_name(mode),
@@ -241,6 +251,8 @@ pub fn import_preview_repository(
         evidence_text: plan.evidence_text.clone(),
         imported_sources: plan.imported_sources.clone(),
         inferred_fields: plan.inferred_fields.clone(),
+        field_scores: field_scores.summary,
+        verification_passed: verification.passed,
         record: record_summary(&plan.manifest),
     })
 }

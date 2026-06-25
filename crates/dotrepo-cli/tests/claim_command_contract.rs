@@ -482,3 +482,40 @@ fn live_seed_overlay_handoff_surfaces_in_public_outputs() {
         Value::String("accepted".into())
     );
 }
+
+#[test]
+fn claim_command_rejects_absolute_claim_paths() {
+    let root = TempRoot::new("absolute-claim");
+    let root_str = root.path().to_str().expect("utf-8 path");
+    let output = run_dotrepo(&["--root", root_str, "claim", "/tmp/outside-claim"]);
+    assert!(!output.status.success(), "absolute claim paths should fail");
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        stderr.contains("relative to root"),
+        "unexpected stderr: {stderr}"
+    );
+}
+
+#[test]
+fn claim_event_command_rejects_absolute_claim_paths() {
+    let root = TempRoot::new("absolute-claim-event");
+    let root_str = root.path().to_str().expect("utf-8 path");
+    let output = run_dotrepo(&[
+        "--root",
+        root_str,
+        "claim-event",
+        "/tmp/outside-claim",
+        "--kind",
+        "submitted",
+        "--actor",
+        "maintainer",
+        "--summary",
+        "attempted escape",
+    ]);
+    assert!(!output.status.success(), "absolute claim paths should fail");
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        stderr.contains("relative to root"),
+        "unexpected stderr: {stderr}"
+    );
+}

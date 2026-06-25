@@ -1,4 +1,4 @@
-use anyhow::{bail, Result};
+use anyhow::{bail, Context, Result};
 use dotrepo_core::{
     adopt_managed_surface, analyze_index_promotion, append_claim_event, build_public_freshness,
     current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_base,
@@ -6,10 +6,10 @@ use dotrepo_core::{
     inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
     preview_surfaces, public_repository_query_or_error_with_base,
     public_repository_summary_or_error_with_base, public_repository_trust_or_error_with_base,
-    query_repository, scaffold_claim_directory, trust_repository, validate_index_root,
-    validate_manifest, validate_repository, write_import_outputs, ClaimEventAppendInput,
-    ClaimScaffoldInput, DoctorReport, DoctorSurface, ImportOptions, IndexFindingSeverity,
-    PublicErrorResponse,
+    query_repository, resolve_claim_directory, scaffold_claim_directory, trust_repository,
+    validate_index_root, validate_manifest, validate_repository, write_import_outputs,
+    ClaimEventAppendInput, ClaimScaffoldInput, DoctorReport, DoctorSurface, ImportOptions,
+    IndexFindingSeverity, PublicErrorResponse,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::RecordMode;
@@ -293,7 +293,7 @@ pub fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
     if check {
         let manifest = load_manifest_from_root(&root)?;
         validate_manifest(&root, &manifest)?;
-        ensure_native_managed_surface_command(&manifest.record.mode, "generate-check")?;
+        ensure_native_record_command(&manifest.record.mode, "generate-check")?;
         let report = generate_check_repository(&root)?;
         if !report.stale.is_empty() {
             return Err(CliExit {
@@ -326,7 +326,7 @@ pub fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
 
     let document = load_manifest_document(&root)?;
     validate_manifest(&root, &document.manifest)?;
-    ensure_native_managed_surface_command(&document.manifest.record.mode, "generate")?;
+    ensure_native_record_command(&document.manifest.record.mode, "generate")?;
     let outputs = managed_outputs(&root, &document.manifest, &document.raw)?;
 
     for (path, contents) in outputs {
@@ -343,7 +343,7 @@ pub fn cmd_generate(root: PathBuf, check: bool) -> Result<()> {
 pub fn cmd_doctor(root: PathBuf, json: bool) -> Result<()> {
     let manifest = load_manifest_from_root(&root)?;
     validate_manifest(&root, &manifest)?;
-    ensure_native_managed_surface_command(&manifest.record.mode, "doctor")?;
+    ensure_native_record_command(&manifest.record.mode, "doctor")?;
     let findings = inspect_surface_states(&root)?;
     if json {
         let report = DoctorReport {
@@ -377,7 +377,7 @@ pub fn cmd_doctor(root: PathBuf, json: bool) -> Result<()> {
 pub fn cmd_manage(root: PathBuf, surface: PreviewSurfaceArg, adopt: bool) -> Result<()> {
     let manifest = load_manifest_from_root(&root)?;
     validate_manifest(&root, &manifest)?;
-    ensure_native_managed_surface_command(&manifest.record.mode, "manage")?;
+    ensure_native_record_command(&manifest.record.mode, "manage")?;
 
     if !adopt {
         return Err(CliExit {
@@ -408,7 +408,7 @@ pub fn cmd_preview(
 ) -> Result<()> {
     let manifest = load_manifest_from_root(&root)?;
     validate_manifest(&root, &manifest)?;
-    ensure_native_managed_surface_command(&manifest.record.mode, "preview")?;
+    ensure_native_record_command(&manifest.record.mode, "preview")?;
 
     let selected_surfaces = if all {
         vec![
@@ -442,21 +442,6 @@ pub fn cmd_ci(root: PathBuf, command: CiCommand) -> Result<()> {
     match command {
         CiCommand::Init { force, version } => cmd_ci_init(root, force, version),
     }
-}
-
-fn ensure_native_managed_surface_command(mode: &RecordMode, command: &str) -> Result<()> {
-    if *mode == RecordMode::Overlay {
-        return Err(CliExit {
-            code: 2,
-            message: format!(
-                "{} is only supported for native records; found record.mode = \"overlay\"",
-                command
-            ),
-        }
-        .into());
-    }
-
-    Ok(())
 }
 
 fn ensure_native_record_command(mode: &RecordMode, command: &str) -> Result<()> {
@@ -517,7 +502,8 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # Linux x86_64 release bundle only; use cargo install on other platforms.
+      - uses: actions/checkout@v6
       - name: Install dotrepo
         env:
           DOTREPO_VERSION: "{version}"
@@ -558,11 +544,10 @@ pub fn cmd_trust(root: PathBuf, json: bool) -> Result<()> {
 }
 
 pub fn cmd_claim(root: PathBuf, path: PathBuf, json: bool) -> Result<()> {
-    let claim_dir = if path.is_absolute() {
-        path
-    } else {
-        root.join(path)
-    };
+    let claim_dir = resolve_claim_directory(
+        &root,
+        path.to_str().context("claim path must be valid UTF-8")?,
+    )?;
     let report = inspect_claim_directory(&root, &claim_dir)?;
     if json {
         println!("{}", serde_json::to_string_pretty(&report)?);
@@ -661,11 +646,10 @@ pub fn cmd_claim_event(root: PathBuf, args: ClaimEventArgs) -> Result<()> {
         canonical_mirror_path,
     } = args;
 
-    let claim_dir = if path.is_absolute() {
-        path
-    } else {
-        root.join(path)
-    };
+    let claim_dir = resolve_claim_directory(
+        &root,
+        path.to_str().context("claim path must be valid UTF-8")?,
+    )?;
     let plan = append_claim_event(
         &root,
         &claim_dir,

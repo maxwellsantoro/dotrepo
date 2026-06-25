@@ -179,13 +179,7 @@ fn handle_tool_call(params: Value) -> Result<Value> {
         _ => bail!("unknown tool: {}", name),
     };
 
-    match result {
-        Ok((summary, structured)) => Ok(tool_success(summary, structured)),
-        Err(err) => Ok(tool_failure(
-            format!("tool `{}` failed", name),
-            json!({ "error": err.to_string() }),
-        )),
-    }
+    result.map(|(summary, structured)| tool_success(summary, structured))
 }
 
 fn tool_validate(arguments: Value) -> Result<(String, Value)> {
@@ -254,8 +248,14 @@ fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
         None
     };
 
+    let custom_base_url = allow_custom_lookup_base_url()
+        && !ALLOWED_LOOKUP_BASE_URLS
+            .iter()
+            .any(|allowed| base_url.eq_ignore_ascii_case(allowed));
+
     let structured = json!({
         "baseUrl": remote_public_root(&base_url),
+        "customBaseUrl": custom_base_url,
         "identity": {
             "host": target.host,
             "owner": target.owner,
@@ -669,6 +669,7 @@ fn build_remote_lookup_client() -> Result<Client> {
     Client::builder()
         .user_agent(format!("dotrepo-mcp/{}", env!("CARGO_PKG_VERSION")))
         .timeout(REMOTE_LOOKUP_TIMEOUT)
+        .redirect(reqwest::redirect::Policy::none())
         .build()
         .map_err(Into::into)
 }
@@ -853,20 +854,6 @@ fn tool_success(summary: String, structured: Value) -> Value {
         ],
         "structuredContent": structured,
         "isError": false
-    })
-}
-
-fn tool_failure(summary: String, structured: Value) -> Value {
-    let text = structured_tool_text(&summary, &structured);
-    json!({
-        "content": [
-            {
-                "type": "text",
-                "text": text
-            }
-        ],
-        "structuredContent": structured,
-        "isError": true
     })
 }
 
@@ -1068,8 +1055,8 @@ description = "Missing source and trust"
                 "mode": "native"
             }),
         );
-        assert_eq!(response["result"]["isError"], Value::Bool(true));
-        assert!(response["result"]["structuredContent"]["error"]
+        assert!(response.get("error").is_some());
+        assert!(response["error"]["message"]
             .as_str()
             .expect("error string")
             .contains("already exists"));

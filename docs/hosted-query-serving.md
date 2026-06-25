@@ -72,7 +72,15 @@ Use one small HTTP service with:
 - no write routes
 - no authenticated behavior in the first slice
 
-Recommended route split:
+## Local dev server safety
+
+`dotrepo-public-query` is intended for local review and release smoke checks.
+Bind it to loopback by default (`127.0.0.1:3000`). The runtime applies a 30s
+per-connection read timeout and rejects request lines longer than 8 KiB. Do not
+expose the process on a public interface without a production reverse proxy in
+front of it.
+
+## Recommended route split
 
 - static hosting continues to serve:
   - `/index.html`

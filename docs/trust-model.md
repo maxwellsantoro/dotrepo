@@ -55,6 +55,20 @@ Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `mediu
   missing or `unknown` by default unless a consumer explicitly opts into layered
   fallback and preserves provenance.
 
+## Selection tie-breaking
+
+When two or more candidate records share the same precedence rank, dotrepo breaks
+ties in this order:
+
+1. **Accepted maintainer claim** attached to the candidate record
+2. **In-review maintainer claim** attached to the candidate record
+3. **Lexicographic `manifest_path`** for stable, deterministic ordering
+
+Claim context enriches the selected record in `query` and `trust` responses, but
+only advances selection when ranks are otherwise equal. A higher-status overlay
+still wins over a lower-status native record even when the native record has an
+accepted claim in flight.
+
 See [`RFC 0004`](../rfcs/0004-index-and-trust-model.md) and the worked examples in
 [`authority-handoff-examples.md`](./authority-handoff-examples.md) for the normative
 contract and reference scenarios.

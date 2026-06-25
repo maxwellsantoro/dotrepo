@@ -109,7 +109,7 @@ pub enum Command {
     },
     /// Inspect one maintainer-claim directory from the index.
     Claim {
-        /// Claim directory relative to --root or an absolute path.
+        /// Claim directory relative to --root.
         path: PathBuf,
         /// Emit the full claim inspection report as JSON.
         #[arg(long)]
@@ -153,7 +153,7 @@ pub enum Command {
     },
     /// Append a new claim event and update the current claim state.
     ClaimEvent {
-        /// Claim directory relative to --root or an absolute path.
+        /// Claim directory relative to --root.
         path: PathBuf,
         /// Event kind to append.
         #[arg(long, value_enum)]

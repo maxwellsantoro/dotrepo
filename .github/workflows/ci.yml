@@ -46,7 +46,7 @@ jobs:
             [ -n "$path" ] || continue
             has_any=true
 
-            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/) ]] || [[ "$path" =~ ^index/ ]]; then
+            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/|docs/|rfcs/) ]] || [[ "$path" =~ ^index/ ]]; then
               has_code=true
             fi
 
@@ -231,13 +231,56 @@ jobs:
           })
           assert query["result"]["structuredContent"]["value"] == "orbit"
 
+          trust = send({
+              "jsonrpc": "2.0",
+              "id": 5,
+              "method": "tools/call",
+              "params": {
+                  "name": "dotrepo.trust",
+                  "arguments": {"root": "examples/native-minimal"}
+              }
+          })
+          assert trust["result"]["structuredContent"]["selection"]["reason"] == "only_matching_record"
+
+          preview = send({
+              "jsonrpc": "2.0",
+              "id": 6,
+              "method": "tools/call",
+              "params": {
+                  "name": "dotrepo.import_preview",
+                  "arguments": {
+                      "root": "examples/native-minimal",
+                      "mode": "native"
+                  }
+              }
+          })
+          assert preview["result"]["structuredContent"]["record"]["status"] == "imported"
+
+          import_write = send({
+              "jsonrpc": "2.0",
+              "id": 7,
+              "method": "tools/call",
+              "params": {
+                  "name": "dotrepo.import_write",
+                  "arguments": {
+                      "root": "examples/native-minimal",
+                      "mode": "native"
+                  }
+              }
+          })
+          assert "error" in import_write
+          assert "already exists" in import_write["error"]["message"]
+
           proc.terminate()
           proc.wait(timeout=5)
           PY
 
   operator-gate:
-    needs: change-scope
-    if: needs.change-scope.outputs.run_operator_gate == 'true'
+    needs: [change-scope, rust-and-index]
+    if: >-
+      always() &&
+      needs.change-scope.outputs.run_operator_gate == 'true' &&
+      (needs.rust-and-index.result == 'success' || needs.rust-and-index.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -271,8 +314,11 @@ jobs:
           retention-days: 14
 
   public-surface-gate:
-    needs: change-scope
-    if: needs.change-scope.outputs.run_public_surface_gate == 'true'
+    needs: [change-scope, rust-and-index]
+    if: >-
+      always() &&
+      needs.change-scope.outputs.run_public_surface_gate == 'true' &&
+      (needs.rust-and-index.result == 'success' || needs.rust-and-index.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

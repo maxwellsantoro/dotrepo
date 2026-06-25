@@ -7,12 +7,13 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use time::{Duration, OffsetDateTime};
 
-use crate::claims::{require_path_segment, RecordClaimContext};
+use crate::claims::RecordClaimContext;
 use crate::query::query_manifest_value;
 use crate::selection::{
     public_selected_record, resolve_candidates, resolve_competing_value, resolve_conflict_reason,
     resolve_selection_reason, CandidateManifest,
 };
+use crate::util::validate_repository_identity_segments;
 use crate::util::{display_path, parse_rfc3339, render_rfc3339, repository_identity};
 use crate::validation::collect_record_dirs;
 use crate::{ConflictRelationship, RecordSummary, SelectionReason};
@@ -268,11 +269,8 @@ fn index_repository_scope(
 }
 
 fn validate_public_identity(host: &str, owner: &str, repo: &str) -> Result<()> {
-    for (field, value) in [("host", host), ("owner", owner), ("repo", repo)] {
-        require_path_segment(field, value)
-            .map_err(|err| anyhow!("invalid repository identity: {err}"))?;
-    }
-    Ok(())
+    validate_repository_identity_segments(host, owner, repo)
+        .map_err(|err| anyhow!("invalid repository identity: {err}"))
 }
 
 fn public_identity(

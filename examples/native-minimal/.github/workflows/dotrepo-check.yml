@@ -9,7 +9,8 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # Linux x86_64 release bundle only; use cargo install on other platforms.
+      - uses: actions/checkout@v6
       - name: Install dotrepo
         env:
           DOTREPO_VERSION: "1.0.0"

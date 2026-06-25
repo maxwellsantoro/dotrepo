@@ -8,6 +8,7 @@ use serde::Serialize;
 use std::io::{BufRead, BufReader, Write};
 use std::net::{TcpListener, TcpStream};
 use std::path::{Component, Path, PathBuf};
+use std::time::Duration;
 use url::form_urlencoded;
 
 #[derive(Parser)]
@@ -105,7 +106,13 @@ fn normalize_base_path(base_path: &str) -> String {
     }
 }
 
+const MAX_REQUEST_LINE_BYTES: usize = 8 * 1024;
+const READ_TIMEOUT: Duration = Duration::from_secs(30);
+
 fn handle_connection(mut stream: TcpStream, state: &ServerState) -> Result<()> {
+    stream
+        .set_read_timeout(Some(READ_TIMEOUT))
+        .context("failed to set read timeout")?;
     let mut reader = BufReader::new(
         stream
             .try_clone()
@@ -118,6 +125,9 @@ fn handle_connection(mut stream: TcpStream, state: &ServerState) -> Result<()> {
         == 0
     {
         return Ok(());
+    }
+    if request_line.len() > MAX_REQUEST_LINE_BYTES {
+        return write_text_response(&mut stream, 414, "request URI too long");
     }
 
     loop {

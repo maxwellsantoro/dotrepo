@@ -9,7 +9,7 @@ use super::{
     load_manifest_file, record_summary, validate_manifest, LoadedManifest, PublicSelectedRecord,
     SelectedRecord, SelectionReason,
 };
-use crate::claims::candidate_claim_context;
+use crate::claims::{candidate_claim_context, ClaimState};
 use crate::public::public_record_artifacts;
 use crate::query::{manifest_to_json, query_manifest_value_from_json};
 use crate::validation::collect_record_dirs;
@@ -96,7 +96,7 @@ pub(crate) fn resolve_candidates(root: &Path) -> Result<Vec<CandidateManifest>> 
             }
         }
 
-        sort_candidates(&mut candidates);
+        sort_candidates(&mut candidates, root);
         return Ok(candidates);
     }
 
@@ -127,7 +127,7 @@ pub(crate) fn resolve_candidates(root: &Path) -> Result<Vec<CandidateManifest>> 
         bail!("multiple repository identities were found under the query root; point query/trust at one repository scope");
     };
 
-    sort_candidates(&mut candidates);
+    sort_candidates(&mut candidates, root);
     Ok(candidates)
 }
 
@@ -165,7 +165,10 @@ fn load_descendant_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
     Ok(candidates)
 }
 
-fn candidate_from_document(root: &Path, document: &LoadedManifest) -> Result<CandidateManifest> {
+pub(crate) fn candidate_from_document(
+    root: &Path,
+    document: &LoadedManifest,
+) -> Result<CandidateManifest> {
     let manifest = Arc::new(document.manifest.clone());
     let manifest_json = manifest_to_json(&manifest)?;
     Ok(CandidateManifest {
@@ -262,13 +265,26 @@ fn repository_identity_parts(parts: (String, String, String)) -> RepositoryIdent
     }
 }
 
-fn sort_candidates(candidates: &mut [CandidateManifest]) {
+pub(crate) fn sort_candidates(candidates: &mut [CandidateManifest], root: &Path) {
     candidates.sort_by(|left, right| {
         right
             .rank
             .cmp(&left.rank)
+            .then_with(|| {
+                claim_selection_boost(root, right).cmp(&claim_selection_boost(root, left))
+            })
             .then_with(|| left.manifest_path.cmp(&right.manifest_path))
     });
+}
+
+fn claim_selection_boost(root: &Path, candidate: &CandidateManifest) -> u8 {
+    candidate_claim_context(root, candidate)
+        .map(|context| match context.state {
+            ClaimState::Accepted => 2,
+            ClaimState::InReview => 1,
+            _ => 0,
+        })
+        .unwrap_or(0)
 }
 
 pub(crate) fn selected_record(root: &Path, candidate: &CandidateManifest) -> SelectedRecord {

@@ -214,10 +214,12 @@ fn claim_event_appends_submitted_history_and_updates_claim_state() {
     .expect("claim scaffold succeeds");
 
     let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+    let claim_path =
+        PathBuf::from("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
     cmd_claim_event(
         root.clone(),
         ClaimEventArgs {
-            path: claim_dir.clone(),
+            path: claim_path,
             kind: ClaimEventKindArg::Submitted,
             actor: "claimant".into(),
             summary: "Submitted maintainer claim.".into(),
@@ -263,11 +265,12 @@ fn claim_event_refuses_invalid_transition() {
     )
     .expect("claim scaffold succeeds");
 
-    let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
     let err = cmd_claim_event(
         root.clone(),
         ClaimEventArgs {
-            path: claim_dir,
+            path: PathBuf::from(
+                "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03",
+            ),
             kind: ClaimEventKindArg::Accepted,
             actor: "index-reviewer".into(),
             summary: "Accepted maintainer claim.".into(),
@@ -309,10 +312,12 @@ fn claim_event_records_canonical_handoff_links() {
     .expect("claim scaffold succeeds");
 
     let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
+    let claim_path =
+        PathBuf::from("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");
     cmd_claim_event(
         root.clone(),
         ClaimEventArgs {
-            path: claim_dir.clone(),
+            path: claim_path.clone(),
             kind: ClaimEventKindArg::Submitted,
             actor: "claimant".into(),
             summary: "Submitted maintainer claim.".into(),
@@ -325,7 +330,7 @@ fn claim_event_records_canonical_handoff_links() {
     cmd_claim_event(
         root.clone(),
         ClaimEventArgs {
-            path: claim_dir.clone(),
+            path: claim_path,
             kind: ClaimEventKindArg::Accepted,
             actor: "index-reviewer".into(),
             summary: "Accepted maintainer claim after review.".into(),

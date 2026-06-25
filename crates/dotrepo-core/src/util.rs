@@ -1,7 +1,7 @@
 use anyhow::{anyhow, bail, Result};
 use sha2::{Digest, Sha256};
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::{Component, Path, PathBuf};
 use time::format_description::well_known::Rfc3339;
 use time::OffsetDateTime;
 
@@ -123,4 +123,18 @@ pub(crate) fn repository_identity(url: &str) -> Option<(String, String, String)>
     }
 
     Some((host, owner, repo))
+}
+
+pub fn validate_repository_identity_segments(host: &str, owner: &str, repo: &str) -> Result<()> {
+    for (field, value) in [("host", host), ("owner", owner), ("repo", repo)] {
+        if value.trim().is_empty() {
+            bail!("{field} must not be empty");
+        }
+        let path = Path::new(value);
+        let mut components = path.components();
+        if !matches!(components.next(), Some(Component::Normal(_))) || components.next().is_some() {
+            bail!("{field} must be a single path segment");
+        }
+    }
+    Ok(())
 }

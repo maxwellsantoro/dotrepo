@@ -9,15 +9,17 @@ use crate::claims::{
     claim_directory_identity, load_claim_directory, validate_claim_event_history,
     validate_claim_identity_alignment, validate_claim_resolution_consistency,
 };
+use crate::selection::{candidate_from_document, sort_candidates};
 use crate::synthesis::{load_synthesis_document, validate_synthesis};
 use crate::util::{display_path, parse_rfc3339, repository_identity, validate_shell_safe_command};
-use crate::{load_manifest_document, record_summary, RecordSummary};
+use crate::{load_manifest_document, load_manifest_file, record_summary, RecordSummary};
 
 pub(crate) const SUPPORTED_SCHEMA: &str = "dotrepo/v0.1";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ValidationDiagnostic {
     pub severity: ValidationDiagnosticSeverity,
+    pub code: &'static str,
     pub source: &'static str,
     pub message: String,
 }
@@ -60,39 +62,105 @@ pub struct ValidateReport {
     pub record: Option<RecordSummary>,
 }
 pub fn validate_repository(root: &Path) -> ValidateReport {
-    match load_manifest_document(root) {
-        Ok(document) => {
-            let diagnostics = validate_manifest_diagnostics(root, &document.manifest)
-                .into_iter()
-                .map(|item| RepositoryDiagnostic {
-                    severity: "error",
-                    source: item.source.to_string(),
-                    message: item.message,
-                    manifest_path: Some(display_path(root, &document.path)),
-                })
-                .collect::<Vec<_>>();
+    let mut diagnostics = Vec::new();
+    let mut loaded = Vec::new();
 
-            ValidateReport {
-                valid: diagnostics.is_empty(),
-                root: root.display().to_string(),
-                manifest_path: Some(display_path(root, &document.path)),
-                diagnostics,
-                record: Some(record_summary(&document.manifest)),
-            }
-        }
-        Err(err) => ValidateReport {
-            valid: false,
-            root: root.display().to_string(),
-            manifest_path: None,
-            diagnostics: vec![RepositoryDiagnostic {
+    match collect_manifest_targets(root) {
+        Ok(targets) if targets.is_empty() => {
+            diagnostics.push(RepositoryDiagnostic {
                 severity: "error",
                 source: "load_manifest_document".into(),
+                message: format!(
+                    "failed to read {}: no .repo, record.toml, or descendant record.toml candidates found",
+                    crate::util::manifest_path(root).display()
+                ),
+                manifest_path: None,
+            });
+        }
+        Ok(targets) => {
+            for path in targets {
+                let manifest_path = display_path(root, &path);
+                match load_manifest_file(&path) {
+                    Ok(document) => loaded.push(document),
+                    Err(err) => diagnostics.push(RepositoryDiagnostic {
+                        severity: "error",
+                        source: "load_manifest_document".into(),
+                        message: err.to_string(),
+                        manifest_path: Some(manifest_path),
+                    }),
+                }
+            }
+
+            for document in &loaded {
+                let manifest_path = display_path(root, &document.path);
+                for item in validate_manifest_diagnostics(root, &document.manifest) {
+                    diagnostics.push(RepositoryDiagnostic {
+                        severity: "error",
+                        source: item.source.to_string(),
+                        message: item.message,
+                        manifest_path: Some(manifest_path.clone()),
+                    });
+                }
+            }
+        }
+        Err(err) => {
+            diagnostics.push(RepositoryDiagnostic {
+                severity: "error",
+                source: "collect_manifest_targets".into(),
                 message: err.to_string(),
                 manifest_path: None,
-            }],
-            record: None,
-        },
+            });
+        }
     }
+
+    let mut candidates = Vec::new();
+    for document in &loaded {
+        match candidate_from_document(root, document) {
+            Ok(candidate) => candidates.push(candidate),
+            Err(err) => diagnostics.push(RepositoryDiagnostic {
+                severity: "error",
+                source: "candidate_from_document".into(),
+                message: err.to_string(),
+                manifest_path: Some(display_path(root, &document.path)),
+            }),
+        }
+    }
+    sort_candidates(&mut candidates, root);
+
+    let selected = candidates.first();
+    ValidateReport {
+        valid: diagnostics.is_empty(),
+        root: root.display().to_string(),
+        manifest_path: selected.map(|candidate| candidate.manifest_path.clone()),
+        diagnostics,
+        record: selected.map(|candidate| record_summary(&candidate.manifest)),
+    }
+}
+
+fn collect_manifest_targets(root: &Path) -> Result<Vec<PathBuf>> {
+    let mut targets = Vec::new();
+    for name in [".repo", "record.toml"] {
+        let path = root.join(name);
+        if path.exists() {
+            targets.push(path);
+        }
+    }
+
+    let mut record_dirs = Vec::new();
+    collect_record_dirs(root, &mut record_dirs)?;
+    record_dirs.sort();
+    let root_record = root.join("record.toml");
+    for record_dir in record_dirs {
+        let path = record_dir.join("record.toml");
+        if path == root_record || targets.contains(&path) {
+            continue;
+        }
+        if path.exists() {
+            targets.push(path);
+        }
+    }
+
+    Ok(targets)
 }
 pub(crate) fn collect_record_paths(dir: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
     collect_record_paths_recursive(dir, out, 0)
@@ -147,6 +215,7 @@ pub fn validate_manifest_diagnostics(
 
     if manifest.schema.trim() != SUPPORTED_SCHEMA {
         diagnostics.push(validation_error(
+            "unsupported_schema",
             "validate_manifest",
             format!("unsupported schema: {}", manifest.schema),
         ));
@@ -154,12 +223,17 @@ pub fn validate_manifest_diagnostics(
 
     if let Some(generated_at) = manifest.record.generated_at.as_deref() {
         if let Err(err) = parse_rfc3339("record.generated_at", generated_at) {
-            diagnostics.push(validation_error("validate_manifest", err.to_string()));
+            diagnostics.push(validation_error(
+                "invalid_generated_at",
+                "validate_manifest",
+                err.to_string(),
+            ));
         }
     }
 
     if manifest.repo.name.trim().is_empty() {
         diagnostics.push(validation_error(
+            "repo_name_empty",
             "validate_manifest",
             "repo.name must not be empty",
         ));
@@ -167,12 +241,20 @@ pub fn validate_manifest_diagnostics(
 
     if let Some(build) = manifest.repo.build.as_deref() {
         if let Err(err) = validate_shell_safe_command("repo.build", build) {
-            diagnostics.push(validation_error("validate_manifest", err.to_string()));
+            diagnostics.push(validation_error(
+                "unsafe_shell_command",
+                "validate_manifest",
+                err.to_string(),
+            ));
         }
     }
     if let Some(test) = manifest.repo.test.as_deref() {
         if let Err(err) = validate_shell_safe_command("repo.test", test) {
-            diagnostics.push(validation_error("validate_manifest", err.to_string()));
+            diagnostics.push(validation_error(
+                "unsafe_shell_command",
+                "validate_manifest",
+                err.to_string(),
+            ));
         }
     }
 
@@ -186,6 +268,7 @@ pub fn validate_manifest_diagnostics(
         let source = manifest.record.source.as_deref().unwrap_or("").trim();
         if source.is_empty() {
             diagnostics.push(validation_error(
+                "overlay_source_required",
                 "validate_manifest",
                 "record.source must be set for overlay records",
             ));
@@ -195,12 +278,14 @@ pub fn validate_manifest_diagnostics(
             Some(trust) => {
                 if trust.provenance.is_empty() {
                     diagnostics.push(validation_error(
+                        "overlay_trust_provenance_required",
                         "validate_manifest",
                         "record.trust.provenance must list at least one provenance entry for overlay records",
                     ));
                 }
             }
             None => diagnostics.push(validation_error(
+                "overlay_trust_required",
                 "validate_manifest",
                 "record.trust must be set for overlay records",
             )),
@@ -227,6 +312,7 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
                 Ok(target) => {
                     if !target.exists() {
                         diagnostics.push(validation_error(
+                            "missing_referenced_path",
                             "validate_native_paths",
                             format!("referenced path does not exist: {}", target.display()),
                         ));
@@ -234,6 +320,7 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
                 }
                 Err(err) => {
                     diagnostics.push(validation_error(
+                        "invalid_referenced_path",
                         "validate_native_paths",
                         format!("referenced path `{}` is invalid: {}", path, err),
                     ));
@@ -249,6 +336,7 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
                     Ok(target) => {
                         if !target.exists() {
                             diagnostics.push(validation_error(
+                                "readme_section_missing_path",
                                 "validate_native_paths",
                                 format!(
                                     "custom README section `{}` references a missing path: {}",
@@ -260,6 +348,7 @@ fn validate_native_paths(root: &Path, manifest: &Manifest) -> Vec<ValidationDiag
                     }
                     Err(err) => {
                         diagnostics.push(validation_error(
+                            "readme_section_invalid_path",
                             "validate_native_paths",
                             format!(
                                 "custom README section `{}` uses an invalid path `{}`: {}",
@@ -361,6 +450,7 @@ fn validate_readme_sections(manifest: &Manifest) -> Vec<ValidationDiagnostic> {
             match (has_content, has_path) {
                 (false, false) => {
                     diagnostics.push(validation_error(
+                        "readme_section_content_or_path_required",
                         "validate_readme_sections",
                         format!(
                             "custom README section `{}` must declare either `content` or `path`",
@@ -370,6 +460,7 @@ fn validate_readme_sections(manifest: &Manifest) -> Vec<ValidationDiagnostic> {
                 }
                 (true, true) => {
                     diagnostics.push(validation_error(
+                        "readme_section_content_and_path_conflict",
                         "validate_readme_sections",
                         format!(
                             "custom README section `{}` must not declare both `content` and `path`",
@@ -719,9 +810,14 @@ fn expected_provenance_for_status(
     }
 }
 
-fn validation_error(source: &'static str, message: impl Into<String>) -> ValidationDiagnostic {
+fn validation_error(
+    code: &'static str,
+    source: &'static str,
+    message: impl Into<String>,
+) -> ValidationDiagnostic {
     ValidationDiagnostic {
         severity: ValidationDiagnosticSeverity::Error,
+        code,
         source,
         message: message.into(),
     }
