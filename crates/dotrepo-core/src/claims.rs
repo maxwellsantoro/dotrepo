@@ -1,5 +1,5 @@
 use anyhow::{anyhow, bail, Result};
-use dotrepo_schema::Manifest;
+
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Component, Path, PathBuf};

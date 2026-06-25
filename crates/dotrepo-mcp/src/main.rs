@@ -18,6 +18,12 @@ use std::time::Duration;
 const SUPPORTED_PROTOCOL_VERSIONS: &[&str] = &["2025-11-25", "2025-06-18", "2024-11-05"];
 const SERVER_NAME: &str = "dotrepo-mcp";
 const DEFAULT_PUBLIC_BASE_URL: &str = "https://dotrepo.org";
+const ALLOWED_LOOKUP_BASE_URLS: &[&str] = &[
+    "https://dotrepo.org",
+    "http://dotrepo.org",
+    "https://dotrepo-org.workers.dev",
+    "http://dotrepo-org.workers.dev",
+];
 const REMOTE_LOOKUP_TIMEOUT: Duration = Duration::from_secs(15);
 
 fn main() {
@@ -518,6 +524,70 @@ fn validate_lookup_identity(host: &str, owner: &str, repo: &str) -> Result<()> {
     Ok(())
 }
 
+fn env_flag_enabled(name: &str) -> bool {
+    matches!(
+        std::env::var(name).ok().as_deref().map(str::trim),
+        Some("1") | Some("true") | Some("TRUE") | Some("yes") | Some("YES")
+    )
+}
+
+fn allow_custom_lookup_base_url() -> bool {
+    env_flag_enabled("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL")
+}
+
+fn allow_local_lookup_base_url() -> bool {
+    env_flag_enabled("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL")
+}
+
+fn is_blocked_lookup_host(host: &str) -> bool {
+    if allow_local_lookup_base_url() {
+        return host.trim().is_empty();
+    }
+    let host = host.trim().trim_end_matches('.').to_ascii_lowercase();
+    if host.is_empty() {
+        return true;
+    }
+    if host == "localhost" || host.ends_with(".localhost") {
+        return true;
+    }
+    if host == "0.0.0.0" {
+        return true;
+    }
+
+    let without_zone = host.split('%').next().unwrap_or(&host);
+    if without_zone == "::1" {
+        return true;
+    }
+    if let Some(stripped) = without_zone
+        .strip_prefix('[')
+        .and_then(|v| v.strip_suffix(']'))
+    {
+        if stripped == "::1" {
+            return true;
+        }
+    }
+
+    if let Ok(addr) = without_zone.parse::<std::net::IpAddr>() {
+        return match addr {
+            std::net::IpAddr::V4(v4) => {
+                v4.is_private()
+                    || v4.is_loopback()
+                    || v4.is_link_local()
+                    || v4.is_unspecified()
+                    || v4.octets()[0] == 169 && v4.octets()[1] == 254
+            }
+            std::net::IpAddr::V6(v6) => {
+                v6.is_loopback()
+                    || v6.is_unspecified()
+                    || (v6.segments()[0] & 0xfe00) == 0xfc00
+                    || (v6.segments()[0] & 0xffc0) == 0xfe80
+            }
+        };
+    }
+
+    matches!(host.as_str(), "metadata.google.internal" | "metadata.goog")
+}
+
 fn normalize_public_base_url(value: &str) -> Result<String> {
     let trimmed = value.trim();
     if trimmed.is_empty() {
@@ -534,7 +604,29 @@ fn normalize_public_base_url(value: &str) -> Result<String> {
         "http" | "https" => {}
         other => bail!("unsupported baseUrl scheme: {}", other),
     }
-    Ok(url.as_str().trim_end_matches('/').to_string())
+    let host = url
+        .host_str()
+        .ok_or_else(|| anyhow!("baseUrl must include a host: {}", value))?;
+    if is_blocked_lookup_host(host) {
+        bail!("baseUrl host `{}` is not allowed for remote lookup", host);
+    }
+
+    let normalized = url.as_str().trim_end_matches('/').to_string();
+    if allow_custom_lookup_base_url() {
+        return Ok(normalized);
+    }
+
+    if ALLOWED_LOOKUP_BASE_URLS
+        .iter()
+        .any(|allowed| normalized.eq_ignore_ascii_case(allowed))
+    {
+        return Ok(normalized);
+    }
+
+    bail!(
+        "baseUrl `{}` is not in the default allowlist; set DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL=1 to opt in",
+        normalized
+    )
 }
 
 fn remote_public_root(base_url: &str) -> String {
@@ -1220,6 +1312,49 @@ text = "Accepted claim."
         fs::remove_dir_all(root).expect("temp dir removed");
     }
 
+    fn clear_lookup_base_url_env() {
+        // SAFETY: test-only env cleanup between lookup URL policy tests.
+        unsafe {
+            std::env::remove_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL");
+            std::env::remove_var("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL");
+        }
+    }
+
+    #[test]
+    fn normalize_public_base_url_blocks_private_hosts_by_default() {
+        clear_lookup_base_url_env();
+        let err = normalize_public_base_url("http://127.0.0.1:8080")
+            .expect_err("loopback should be blocked");
+        assert!(err.to_string().contains("not allowed"));
+
+        let err = normalize_public_base_url("http://192.168.1.10")
+            .expect_err("private network should be blocked");
+        assert!(err.to_string().contains("not allowed"));
+    }
+
+    #[test]
+    fn normalize_public_base_url_allows_default_public_origins() {
+        clear_lookup_base_url_env();
+        assert_eq!(
+            normalize_public_base_url("https://dotrepo.org").expect("dotrepo.org allowed"),
+            "https://dotrepo.org"
+        );
+        assert_eq!(
+            normalize_public_base_url("dotrepo-org.workers.dev").expect("workers.dev allowed"),
+            "https://dotrepo-org.workers.dev"
+        );
+    }
+
+    #[test]
+    fn normalize_public_base_url_requires_opt_in_for_custom_origins() {
+        clear_lookup_base_url_env();
+        let err = normalize_public_base_url("https://example.com")
+            .expect_err("custom origin should require opt-in");
+        assert!(err
+            .to_string()
+            .contains("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL"));
+    }
+
     #[test]
     fn parse_repository_url_supports_upstream_and_hosted_urls() {
         assert_eq!(
@@ -1237,6 +1372,12 @@ text = "Accepted claim."
 
     #[test]
     fn lookup_tool_fetches_hosted_summary_trust_and_query() {
+        // SAFETY: test-only env flags for the local mock HTTP server.
+        unsafe {
+            std::env::set_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL", "1");
+            std::env::set_var("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL", "1");
+        }
+
         let routes = vec![
             (
                 "/v0/meta.json",
@@ -1393,6 +1534,8 @@ text = "Accepted claim."
             structured["summary"]["repository"]["name"],
             Value::String("orbit".into())
         );
+
+        clear_lookup_base_url_env();
     }
 
     #[test]

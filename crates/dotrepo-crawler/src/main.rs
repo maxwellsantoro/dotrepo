@@ -2,15 +2,16 @@ use anyhow::{anyhow, bail, Context, Result};
 use clap::{Args, Parser, Subcommand};
 use dotrepo_core::{load_manifest_from_root, load_synthesis_from_root};
 use dotrepo_crawler::{
-    apply_crawl_writeback, crawl_repository, load_crawler_state, refresh_candidates_from_state,
+    apply_crawl_writeback, crawl_repository, discovery_report_from_targets, load_crawler_state,
+    load_repository_targets, refresh_candidates_from_state,
     schedule_refresh, seed_repositories, write_crawler_state, CrawlDiagnostic,
-    CrawlRepositoryRequest, CrawlStateRecord, CrawlerStateSnapshot, DiscoveredRepository,
+    CrawlRepositoryRequest, CrawlStateRecord, CrawlerStateSnapshot,
     RefreshCandidate, RefreshReason, RepositoryRef, ScheduleRefreshReport, ScheduleRefreshRequest,
     SeedRepositoriesReport, SeedRepositoriesRequest, StarBand, MAX_SEED_LIMIT,
 };
 use dotrepo_schema::{Manifest, RecordStatus};
 use serde::{Deserialize, Serialize};
-use std::collections::{BTreeMap, HashSet};
+use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
 #[derive(Parser)]
@@ -835,95 +836,6 @@ fn refresh_reason_label(reason: RefreshReason) -> &'static str {
     }
 }
 
-fn load_repository_targets(path: &Path, default_host: &str) -> Result<Vec<RepositoryRef>> {
-    let contents = std::fs::read_to_string(path)?;
-    parse_repository_targets(&contents, default_host)
-}
-
-fn parse_repository_targets(contents: &str, default_host: &str) -> Result<Vec<RepositoryRef>> {
-    let mut targets = Vec::new();
-    let mut seen = HashSet::new();
-
-    for (line_number, raw_line) in contents.lines().enumerate() {
-        let line = raw_line.trim();
-        if line.is_empty() || line.starts_with('#') {
-            continue;
-        }
-
-        let repository = parse_repository_target(line, default_host).map_err(|err| {
-            anyhow!(
-                "invalid repository target on line {}: {} ({})",
-                line_number + 1,
-                line,
-                err
-            )
-        })?;
-        let key = format!(
-            "{}/{}/{}",
-            repository.host, repository.owner, repository.repo
-        );
-        if seen.insert(key) {
-            targets.push(repository);
-        }
-    }
-
-    if targets.is_empty() {
-        bail!("repository target list did not contain any repositories");
-    }
-
-    Ok(targets)
-}
-
-fn parse_repository_target(value: &str, default_host: &str) -> Result<RepositoryRef> {
-    let trimmed = value
-        .trim()
-        .trim_start_matches("https://")
-        .trim_start_matches("http://")
-        .trim_matches('/');
-    let segments = trimmed.split('/').collect::<Vec<_>>();
-    let repository = match segments.as_slice() {
-        [owner, repo] => RepositoryRef {
-            host: default_host.into(),
-            owner: owner.to_string(),
-            repo: repo.to_string(),
-        },
-        [host, owner, repo] => RepositoryRef {
-            host: host.to_string(),
-            owner: owner.to_string(),
-            repo: repo.to_string(),
-        },
-        _ => bail!("expected owner/repo or host/owner/repo"),
-    };
-    repository.validate_identity()?;
-    Ok(repository)
-}
-
-fn discovery_report_from_targets(
-    host: &str,
-    repositories: Vec<RepositoryRef>,
-    limit: usize,
-) -> SeedRepositoriesReport {
-    let total_targets = repositories.len();
-    let discovered = repositories
-        .into_iter()
-        .take(limit)
-        .map(|repository| DiscoveredRepository {
-            repository,
-            stars: 0,
-            default_branch: None,
-            archived: false,
-            fork: false,
-        })
-        .collect::<Vec<_>>();
-
-    SeedRepositoriesReport {
-        host: host.into(),
-        requested_limit: limit,
-        exhausted_bands: total_targets <= limit,
-        discovered,
-    }
-}
-
 fn resolve_state_path(index_root: &Path, state_path: Option<&Path>) -> PathBuf {
     state_path
         .map(Path::to_path_buf)
@@ -1466,6 +1378,7 @@ fn render_seed_review_report_markdown(report: &SeedReviewReport, dry_run: bool) 
 mod tests {
     use super::*;
     use clap::Parser;
+    use dotrepo_crawler::parse_repository_targets;
     use dotrepo_schema::{Owners, Record, RecordMode, Repo};
     use std::time::{SystemTime, UNIX_EPOCH};
 

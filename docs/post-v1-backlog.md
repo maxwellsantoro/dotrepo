@@ -49,9 +49,9 @@ Treat deliberate index growth as the active top-priority workstream.
 
 Near-term order:
 
-1. Grow the reviewed overlay index from the current 15-repository live baseline
-   to a first tranche of 50 high-signal repos across Rust, TypeScript, Python,
-   and Go, using
+1. Grow the reviewed overlay index from the current 55-repository checked-in
+   baseline (28 verified, 19 imported, 7 inferred, 1 reviewed) to a first tranche
+   of 50 high-signal repos across Rust, TypeScript, Python, and Go, using
    [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) as the
    concrete execution list.
 2. Exercise the new seed-batch and refresh-batch draft-PR workflows, including
@@ -60,9 +60,10 @@ Near-term order:
 3. Keep hardening, public-site, and editor work constrained to blockers for the
    first two items.
 
-The live hosted surface now shows 15 reviewed repositories on April 18, 2026,
-so the active near-term job is to move from that 15-repository baseline to the
-first 50-repository tranche while establishing the automation loop around it.
+The checked-in index now contains 55 overlay records as of June 2026, so the
+active near-term job is to raise review quality across that baseline and reach
+the first 50-repository tranche target while establishing the automation loop
+around it.
 For the execution order and milestone bar for that work, see
 [`docs/growth-and-automation-plan.md`](./growth-and-automation-plan.md).
 

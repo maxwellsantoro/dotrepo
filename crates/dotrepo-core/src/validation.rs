@@ -1,17 +1,16 @@
 use anyhow::{anyhow, bail, Result};
-use dotrepo_schema::{Manifest, RecordMode, RecordStatus};
+use dotrepo_schema::{Manifest, RecordMode};
 use serde::Serialize;
 use std::fs;
-use std::path::{Component, Path, PathBuf};
+use std::path::{Path, PathBuf};
 
 use crate::claims::{
     claim_directory_identity, load_claim_directory, resolve_repository_local_path,
     validate_claim_event_history, validate_claim_identity_alignment,
     validate_claim_resolution_consistency,
 };
-use crate::selection::RepositoryIdentity;
 use crate::synthesis::{load_synthesis_document, validate_synthesis};
-use crate::util::{display_path, manifest_path, parse_rfc3339, repository_identity};
+use crate::util::{display_path, parse_rfc3339, repository_identity};
 use crate::{load_manifest_document, record_summary, RecordSummary};
 
 pub(crate) const SUPPORTED_SCHEMA: &str = "dotrepo/v0.1";
@@ -550,32 +549,6 @@ fn collect_record_dirs_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32
             if let Some(parent) = path.parent() {
                 out.push(parent.to_path_buf());
             }
-        }
-    }
-    Ok(())
-}
-
-fn collect_files(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
-    collect_files_recursive(root, out, 0)
-}
-
-fn collect_files_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
-    if depth > 20 {
-        bail!(
-            "directory traversal depth exceeded at {} — possible symlink cycle",
-            root.display()
-        );
-    }
-    for entry in
-        fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
-    {
-        let entry = entry?;
-        let path = entry.path();
-        let file_type = entry.file_type()?;
-        if file_type.is_dir() {
-            collect_files_recursive(&path, out, depth + 1)?;
-        } else if file_type.is_file() {
-            out.push(path);
         }
     }
     Ok(())

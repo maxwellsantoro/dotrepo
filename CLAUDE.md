@@ -50,11 +50,12 @@ dotrepo-transport → JSON-RPC transport helpers shared by MCP and LSP
 dotrepo-cli      → clap-based CLI, delegates to core
 dotrepo-mcp      → stdio MCP 2025-11-25 server, delegates to core
 dotrepo-lsp      → stdio LSP server with diagnostics/hover/completion, delegates to core
+dotrepo-crawler  → discovery, factual crawl planning, and batch seed writeback (operator tool)
 ```
 
 **Key rule**: No validation or trust logic is duplicated across CLI/MCP/LSP. All business logic lives in `dotrepo-core`.
 
-`dotrepo-core` is split across focused modules under `src/` (`claims.rs`, `import.rs`, `surfaces.rs`, `public.rs`, `selection.rs`, `promotion.rs`, `validation.rs`, `query.rs`, `synthesis.rs`, `util.rs`) plus a thin `lib.rs` facade that re-exports the complete public API. When adding new functionality, place it in the most appropriate module (or create a small new focused one if none fits). Keep the public surface in `lib.rs` unchanged so that all existing `use dotrepo_core::...` sites continue to work.
+`dotrepo-core` is split across focused modules under `src/` (`claims.rs`, `import/` with `commands.rs` and `parsing.rs`, `surfaces.rs`, `public.rs`, `selection.rs`, `promotion.rs`, `validation.rs`, `query.rs`, `synthesis.rs`, `util.rs`) plus a thin `lib.rs` facade that re-exports the complete public API. Facade unit tests live in `facade_tests.rs`. When adding new functionality, place it in the most appropriate module (or create a small new focused one if none fits). Keep the public surface in `lib.rs` unchanged so that all existing `use dotrepo_core::...` sites continue to work.
 
 ## Core Concepts
 

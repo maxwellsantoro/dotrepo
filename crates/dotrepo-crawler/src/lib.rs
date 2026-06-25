@@ -1,6 +1,7 @@
-use anyhow::{bail, Result};
+use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{FieldScoreReport, ImportPlan, SynthesisWritePlan, VerificationReport};
 use serde::{Deserialize, Serialize};
+use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
 mod discover;
@@ -82,6 +83,95 @@ impl RepositoryRef {
     pub fn source_url(&self) -> String {
         format!("https://{}/{}/{}", self.host, self.owner, self.repo)
     }
+}
+
+pub fn load_repository_targets(path: &Path, default_host: &str) -> Result<Vec<RepositoryRef>> {
+    let contents = std::fs::read_to_string(path)?;
+    parse_repository_targets(&contents, default_host)
+}
+
+pub fn parse_repository_targets(contents: &str, default_host: &str) -> Result<Vec<RepositoryRef>> {
+    let mut targets = Vec::new();
+    let mut seen = HashSet::new();
+
+    for (line_number, raw_line) in contents.lines().enumerate() {
+        let line = raw_line.trim();
+        if line.is_empty() || line.starts_with('#') {
+            continue;
+        }
+
+        let repository = parse_repository_target(line, default_host).map_err(|err| {
+            anyhow!(
+                "invalid repository target on line {}: {} ({})",
+                line_number + 1,
+                line,
+                err
+            )
+        })?;
+        let key = format!(
+            "{}/{}/{}",
+            repository.host, repository.owner, repository.repo
+        );
+        if seen.insert(key) {
+            targets.push(repository);
+        }
+    }
+
+    if targets.is_empty() {
+        bail!("repository target list did not contain any repositories");
+    }
+
+    Ok(targets)
+}
+
+pub fn discovery_report_from_targets(
+    host: &str,
+    repositories: Vec<RepositoryRef>,
+    limit: usize,
+) -> SeedRepositoriesReport {
+    let total_targets = repositories.len();
+    let discovered = repositories
+        .into_iter()
+        .take(limit)
+        .map(|repository| DiscoveredRepository {
+            repository,
+            stars: 0,
+            default_branch: None,
+            archived: false,
+            fork: false,
+        })
+        .collect::<Vec<_>>();
+
+    SeedRepositoriesReport {
+        host: host.into(),
+        requested_limit: limit,
+        exhausted_bands: total_targets <= limit,
+        discovered,
+    }
+}
+
+fn parse_repository_target(value: &str, default_host: &str) -> Result<RepositoryRef> {
+    let trimmed = value
+        .trim()
+        .trim_start_matches("https://")
+        .trim_start_matches("http://")
+        .trim_matches('/');
+    let segments = trimmed.split('/').collect::<Vec<_>>();
+    let repository = match segments.as_slice() {
+        [owner, repo] => RepositoryRef {
+            host: default_host.into(),
+            owner: owner.to_string(),
+            repo: repo.to_string(),
+        },
+        [host, owner, repo] => RepositoryRef {
+            host: host.to_string(),
+            owner: owner.to_string(),
+            repo: repo.to_string(),
+        },
+        _ => bail!("expected owner/repo or host/owner/repo"),
+    };
+    repository.validate_identity()?;
+    Ok(repository)
 }
 
 pub fn validate_repo_segment(value: &str, label: &str) -> Result<()> {

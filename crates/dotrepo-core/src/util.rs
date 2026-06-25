@@ -1,8 +1,24 @@
-use anyhow::{anyhow, Result};
+use anyhow::{anyhow, bail, Result};
 use sha2::{Digest, Sha256};
 use std::path::{Path, PathBuf};
 use time::format_description::well_known::Rfc3339;
 use time::OffsetDateTime;
+
+pub(crate) fn contains_unsafe_shell_like_value(value: &str) -> bool {
+    value.contains('\n')
+        || value.contains('\r')
+        || value.contains('\0')
+        || value.contains('`')
+        || value.contains("$(")
+        || value.contains("${")
+}
+
+pub(crate) fn validate_shell_safe_command(field: &str, value: &str) -> Result<()> {
+    if contains_unsafe_shell_like_value(value) {
+        bail!("{field} contains an unsafe shell-like value");
+    }
+    Ok(())
+}
 
 pub fn render_rfc3339(label: &str, timestamp: OffsetDateTime) -> Result<String> {
     timestamp

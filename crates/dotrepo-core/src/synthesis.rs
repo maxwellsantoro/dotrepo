@@ -8,7 +8,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use super::load_manifest_from_root;
-use super::util::{display_path, parse_rfc3339};
+use super::util::{display_path, parse_rfc3339, validate_shell_safe_command};
 
 #[derive(Debug, Clone)]
 pub struct LoadedSynthesis {
@@ -36,20 +36,8 @@ fn synthesis_path(root: &Path) -> PathBuf {
     root.join("synthesis.toml")
 }
 
-fn contains_unsafe_shell_like_value(value: &str) -> bool {
-    value.contains('\n')
-        || value.contains('\r')
-        || value.contains('\0')
-        || value.contains("`")
-        || value.contains("$(")
-        || value.contains("${")
-}
-
 fn validate_synthesis_command(field: &str, value: &str) -> Result<()> {
-    if contains_unsafe_shell_like_value(value) {
-        bail!("{field} contains an unsafe shell-like value");
-    }
-    Ok(())
+    validate_shell_safe_command(field, value)
 }
 
 pub fn load_synthesis_document(root: &Path) -> Result<LoadedSynthesis> {
