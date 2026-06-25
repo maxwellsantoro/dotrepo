@@ -4,7 +4,7 @@ use dotrepo_schema::{
     SynthesisMode, SynthesisRecord, SYNTHESIS_SCHEMA,
 };
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 fn temp_dir(label: &str) -> PathBuf {
     let unique = std::time::SystemTime::now()
@@ -161,7 +161,7 @@ fn validate_index_root_accepts_optional_valid_synthesis_toml() {
     );
     assert!(
         findings.iter().all(|finding| {
-            finding.path != PathBuf::from("repos/github.com/example/orbit/synthesis.toml")
+            finding.path != Path::new("repos/github.com/example/orbit/synthesis.toml")
         }),
         "valid synthesis should not produce synthesis-specific findings: {findings:#?}"
     );
@@ -217,7 +217,7 @@ fn validate_index_root_reports_invalid_synthesis_without_requiring_it() {
 
     let findings = validate_index_root(&root).expect("index validates");
     assert!(findings.iter().any(|finding| finding.path
-        == PathBuf::from("repos/github.com/example/orbit/synthesis.toml")
+        == Path::new("repos/github.com/example/orbit/synthesis.toml")
         && finding.message.contains("synthesis.generated_at")));
 
     fs::remove_dir_all(root).expect("temp dir removed");

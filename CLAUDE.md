@@ -54,7 +54,7 @@ dotrepo-lsp      → stdio LSP server with diagnostics/hover/completion, delegat
 
 **Key rule**: No validation or trust logic is duplicated across CLI/MCP/LSP. All business logic lives in `dotrepo-core`.
 
-`dotrepo-core` is a single large `lib.rs` (~3800 lines). All public API entry points, report types, and internal helpers live in that one file. When adding new functionality, add it to the appropriate section of `lib.rs` rather than creating new modules.
+`dotrepo-core` is split across focused modules under `src/` (`claims.rs`, `import.rs`, `surfaces.rs`, `public.rs`, `selection.rs`, `promotion.rs`, `validation.rs`, `query.rs`, `synthesis.rs`, `util.rs`) plus a thin `lib.rs` facade that re-exports the complete public API. When adding new functionality, place it in the most appropriate module (or create a small new focused one if none fits). Keep the public surface in `lib.rs` unchanged so that all existing `use dotrepo_core::...` sites continue to work.
 
 ## Core Concepts
 

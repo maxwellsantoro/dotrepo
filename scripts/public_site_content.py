@@ -2,27 +2,27 @@ ARTICLES = [
     {
         "slug": "what-the-ais-think-about-dotrepo",
         "title": "What the AIs Think About dotrepo",
-        "dek": "12 models. 10 questions each. One protocol built for them.",
+        "dek": "9 models. 12 sessions. 10 questions each. One protocol built for them.",
         "published": "March 18, 2026",
         "summary": (
-            "A dotrepo-side synthesis of a 12-model interview round about repository "
-            "metadata, trust, adoption, and what AI coding tools actually need."
+            "A dotrepo-side synthesis of a 9-model, 12-session interview round about "
+            "repository metadata, trust, adoption, and what AI coding tools actually need."
         ),
         "kicker": "AI interview experiment",
         "tags": ["dotrepo", "ai", "metadata", "protocol", "mcp"],
         "companion_url": (
             "https://maxwellsantoro.com/writing/"
-            "i-asked-12-ai-models-what-they-want-from-a-repository-metadata-protocol/"
+            "i-asked-9-ai-models-what-they-want-from-a-repository-metadata-protocol/"
         ),
         "body_html": """
 <div class="article-callout">
   <p>This is the dotrepo-side synthesis of the interview round. The companion essay on MaxwellSantoro.com covers the broader framing and why this experiment was worth running at all.</p>
-  <p><a href="https://maxwellsantoro.com/writing/i-asked-12-ai-models-what-they-want-from-a-repository-metadata-protocol/">Read the sister article</a></p>
+  <p><a href="https://maxwellsantoro.com/writing/i-asked-9-ai-models-what-they-want-from-a-repository-metadata-protocol/">Read the sister article</a></p>
 </div>
 
 <h2>The Experiment</h2>
 <p>dotrepo is an open metadata protocol for software repositories. It is designed for three audiences: maintainers, human users, and AI agents. Since AI agents are a first-class consumer of the protocol, it made sense to ask them directly what they want from it.</p>
-<p>I sent the same 10-question prompt to 12 different AI models across 8 providers. Fresh conversations, no priming, no pep talk. The goal was not affirmation. The goal was pressure testing: what feels obviously useful, what is missing, what looks risky, and what would actually make an agent check dotrepo first.</p>
+<p>I sent the same 10-question prompt to 9 different AI models across 8 providers, running 12 sessions in total — ChatGPT, Claude, and Grok each twice (a logged-in session and a fresh one) to check for consistency. No priming, no pep talk. The goal was not affirmation. The goal was pressure testing: what feels obviously useful, what is missing, what looks risky, and what would actually make an agent check dotrepo first.</p>
 <p>The answers converged much harder than expected. That convergence is the signal.</p>
 
 <h2>Models Interviewed</h2>
@@ -51,7 +51,7 @@ ARTICLES = [
     </tbody>
   </table>
 </div>
-<p>Where possible, ChatGPT and Grok were grounded against the live repo and public site, and both ChatGPT, Claude, and Grok were tested in more than one session shape to check whether the takeaways were stable.</p>
+<p>That is nine distinct models across eight providers. ChatGPT, Claude, and Grok were each run twice — a logged-in session and a fresh one — for twelve sessions total, to check that the takeaways stayed stable. Where possible, ChatGPT and Grok were grounded against the live repo and public site first.</p>
 
 <h2>Consensus Findings</h2>
 
@@ -63,7 +63,7 @@ ARTICLES = [
 <p>The implication for dotrepo is direct: structured build and test metadata is not ornamental. It is the highest-value field family in the protocol.</p>
 
 <h3>2. The overlay index is the wedge</h3>
-<p>All 12 models independently identified the public overlay index as dotrepo’s smartest near-term design move. It breaks the adoption trap that kills most metadata standards by making the protocol useful before maintainers opt in.</p>
+<p>All nine models independently identified the public overlay index as dotrepo’s smartest near-term design move. It breaks the adoption trap that kills most metadata standards by making the protocol useful before maintainers opt in.</p>
 <p>That view was not abstract. Several models gave concrete coverage thresholds for when dotrepo would flip from “nice to check” to “I check this first.” The shared theme: the protocol is already coherent; the missing ingredient is enough reviewed data that checking dotrepo is usually cheaper than not checking it.</p>
 
 <h3>3. Trust and provenance is the moat</h3>
@@ -100,7 +100,7 @@ ARTICLES = [
       <tr>
         <th>Operation</th>
         <th>Description</th>
-        <th>Models Requesting</th>
+        <th>Sessions Requesting</th>
       </tr>
     </thead>
     <tbody>

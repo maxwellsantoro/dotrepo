@@ -2125,7 +2125,7 @@ def main() -> int:
     <section class="panel section">
       <h2>Interview-backed priorities</h2>
       <p class="section__intro">
-        A 12-model interview round on dotrepo's current shape converged on three
+        A 9-model, 12-session interview round on dotrepo's current shape converged on three
         next steps: grow the index until checking it is cheap, automate the
         review and refresh cadence around it, and keep the public surface narrow
         while lookup and coverage improve.

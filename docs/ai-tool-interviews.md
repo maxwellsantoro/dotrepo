@@ -1,6 +1,6 @@
 # AI Coding Tool Interview Takeaways
 
-This doc captures the current working takeaways from a 12-model interview round
+This doc captures the current working takeaways from a 9-model, 12-session interview round
 on dotrepo's live public surface, protocol story, and likely adoption path.
 It is not a benchmark or compatibility promise. It is product input for what
 should happen next.
