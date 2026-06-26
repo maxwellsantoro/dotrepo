@@ -5,6 +5,8 @@
 - Imported repo.build from pyproject.toml as `python -m build`.
 - Left `repo.test` unset because `package.json` and `pyproject.toml` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Left `repo.test` unset after model escalation: The candidates represent mutually exclusive language ecosystems (Node.js vs Python); no single primary test command can represent the repository as a whole..
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
