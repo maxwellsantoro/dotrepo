@@ -26,15 +26,12 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
-      - name: Use preinstalled Node.js 20
-        run: bash scripts/use_runner_node20.sh
-      - name: Cache npm tarballs
-        uses: actions/cache@v5
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('cloudflare/hosted-query/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+          node-version: 20
+          cache: npm
+          cache-dependency-path: cloudflare/hosted-query/package-lock.json
       - name: Resolve hosted base path
         id: base_path
         shell: bash

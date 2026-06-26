@@ -18,7 +18,7 @@ candidates=("$toolcache_root"/node/20.*/x64/bin)
 shopt -u nullglob
 
 if [ "${#candidates[@]}" -eq 0 ]; then
-  echo "Failed to find preinstalled Node.js 20.x on PATH or under ${toolcache_root}/node" >&2
+  echo "Node.js 20.x not found on PATH or under ${toolcache_root}/node; install via actions/setup-node@v4 in CI" >&2
   exit 1
 fi
 
