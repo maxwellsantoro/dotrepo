@@ -415,7 +415,7 @@ pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
         },
         Repo {
             name: repo_name.into(),
-            description: "TODO: describe this repository".into(),
+            description: "(add a one-line description of this repository)".into(),
             homepage: None,
             license: None,
             status: None,

@@ -164,12 +164,11 @@ fn collect_record_paths_recursive(dir: &Path, out: &mut Vec<PathBuf>, depth: u32
     {
         let entry = entry?;
         let path = entry.path();
-        if path.is_dir() {
+        let file_type = entry.file_type()?;
+        if file_type.is_dir() {
             collect_record_paths_recursive(&path, out, depth + 1)?;
-        } else if path
-            .file_name()
-            .map(|n| n == "record.toml")
-            .unwrap_or(false)
+        } else if file_type.is_file()
+            && path.file_name().and_then(|name| name.to_str()) == Some("record.toml")
         {
             out.push(path);
         }

@@ -102,14 +102,15 @@ MCP and LSP have inline tests in their respective `main.rs` files that verify pa
 
 ## CI Pipeline
 
-`.github/workflows/ci.yml` runs in a single job:
-1. `cargo fmt --all -- --check` — formatting
-2. `cargo test --workspace` — all tests
-3. CLI smoke: validate + generate-check on `examples/native-minimal`, validate-index on `index/`
-4. `cargo publish --dry-run` for all 6 crates in dependency order
-5. Public export build + Python packaging script
-6. MCP stdio smoke test (initialize handshake → tools/list → validate → query)
+`.github/workflows/ci.yml` classifies changed files in a `change-scope` job, then runs scoped downstream jobs:
+
+1. **`rust-and-index`** — `cargo fmt`, `cargo clippy`, `cargo test`, CLI smoke (validate + generate-check on `examples/native-minimal`, validate-index on `index/`), `cargo publish --dry-run` for all 6 crates, MCP stdio smoke test, LSP stdio smoke test
+2. **`operator-gate`** — maintainer-claim inspection and handoff regression (`scripts/check_operator_claim_gate.py`)
+3. **`public-surface-gate`** — lightweight public export gate for index/public-surface-only changes (`check_release_gate.py --skip-release-bundle --skip-vsix`)
+4. **`release-gate`** — full release packaging, VSIX, and hosted-query Worker smoke
+
+Index-only or other public-surface-only changes route to `public-surface-gate` without paying the full release-bundle path. Rust toolchain, docs, or RFC changes route through `rust-and-index` and `release-gate`.
 
 ## Schema Constants
 
-Current schema version: `dotrepo/v0.1`. Claim schema: `dotrepo-claim/v0`. MCP protocol: `2025-11-25`. Public API: `v0`. These are defined as constants at the top of `dotrepo-core/src/lib.rs`.
+Current schema version: `dotrepo/v0.1` (`validation.rs`). Claim schema: `dotrepo-claim/v0` (`claims.rs`). MCP protocol: `2025-11-25` (`dotrepo-mcp`). Public API: `v0` (`public.rs`).

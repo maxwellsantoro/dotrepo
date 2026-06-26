@@ -1,7 +1,7 @@
 # RFC 0006: MCP server contract
 
 ## Status
-Draft
+Accepted
 
 ## Summary
 

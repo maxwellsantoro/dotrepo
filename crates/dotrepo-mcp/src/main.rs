@@ -13,6 +13,7 @@ use reqwest::blocking::Client;
 use reqwest::Url;
 use serde::Deserialize;
 use serde_json::{json, to_value, Value};
+use std::fs;
 use std::io::{self, BufReader};
 use std::path::{Path, PathBuf};
 use std::time::Duration;
@@ -189,7 +190,7 @@ fn handle_tool_call(params: Value) -> Result<Value> {
 }
 
 fn tool_validate(arguments: Value) -> Result<(String, Value)> {
-    let root = resolve_root(&arguments);
+    let root = resolve_root(&arguments)?;
     let report = validate_repository(&root);
     let summary = if report.valid {
         "manifest valid"
@@ -200,14 +201,14 @@ fn tool_validate(arguments: Value) -> Result<(String, Value)> {
 }
 
 fn tool_query(arguments: Value) -> Result<(String, Value)> {
-    let root = resolve_root(&arguments);
+    let root = resolve_root(&arguments)?;
     let path = required_string(&arguments, "path")?;
     let report = query_repository(&root, path)?;
     Ok((format!("queried {}", path), to_value(report)?))
 }
 
 fn tool_trust(arguments: Value) -> Result<(String, Value)> {
-    let root = resolve_root(&arguments);
+    let root = resolve_root(&arguments)?;
     let report = trust_repository(&root)?;
     Ok(("trust metadata loaded".into(), to_value(report)?))
 }
@@ -294,7 +295,7 @@ fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
 }
 
 fn tool_claim_inspect(arguments: Value) -> Result<(String, Value)> {
-    let root = resolve_root(&arguments);
+    let root = resolve_root(&arguments)?;
     let claim_path = required_string(&arguments, "claimPath")?;
     let claim_dir = resolve_claim_directory(&root, claim_path)?;
     let report = inspect_claim_directory(&root, &claim_dir)?;
@@ -302,7 +303,7 @@ fn tool_claim_inspect(arguments: Value) -> Result<(String, Value)> {
 }
 
 fn tool_generate_check(arguments: Value) -> Result<(String, Value)> {
-    let root = resolve_root(&arguments);
+    let root = resolve_root(&arguments)?;
     let report = generate_check_repository(&root)?;
     Ok((
         format!(
@@ -315,7 +316,7 @@ fn tool_generate_check(arguments: Value) -> Result<(String, Value)> {
 }
 
 fn tool_import_preview(arguments: Value) -> Result<(String, Value)> {
-    let root = resolve_root(&arguments);
+    let root = resolve_root(&arguments)?;
     let mode = import_mode(&arguments)?;
     let source = optional_string(&arguments, "source");
     let report = import_preview_repository(&root, mode, source.as_deref())?;
@@ -323,7 +324,7 @@ fn tool_import_preview(arguments: Value) -> Result<(String, Value)> {
 }
 
 fn tool_import_write(arguments: Value) -> Result<(String, Value)> {
-    let root = resolve_root(&arguments);
+    let root = resolve_root(&arguments)?;
     let mode = import_mode(&arguments)?;
     let source = optional_string(&arguments, "source");
     let force = arguments
@@ -370,10 +371,28 @@ fn write_import_plan(
     Ok(written_paths)
 }
 
-fn resolve_root(arguments: &Value) -> PathBuf {
-    optional_string(arguments, "root")
-        .map(PathBuf::from)
-        .unwrap_or_else(|| PathBuf::from("."))
+fn resolve_root(arguments: &Value) -> Result<PathBuf> {
+    let raw = optional_string(arguments, "root").unwrap_or_else(|| ".".into());
+    let raw_path = PathBuf::from(&raw);
+    let is_absolute = raw_path.is_absolute();
+    let resolved = if is_absolute {
+        raw_path
+    } else {
+        std::env::current_dir()?.join(raw_path)
+    };
+
+    let canonical = fs::canonicalize(&resolved)
+        .map_err(|err| anyhow!("failed to resolve repository root `{}`: {}", raw, err))?;
+
+    if !is_absolute {
+        let cwd = std::env::current_dir()?;
+        let canonical_cwd = fs::canonicalize(&cwd)?;
+        if !canonical.starts_with(&canonical_cwd) {
+            bail!("repository root must stay within the MCP server working directory");
+        }
+    }
+
+    Ok(resolved)
 }
 
 fn required_string<'a>(arguments: &'a Value, field: &str) -> Result<&'a str> {
@@ -910,6 +929,51 @@ mod tests {
         assert!(tools
             .iter()
             .any(|tool| tool["name"] == Value::String("dotrepo.claim_inspect".into())));
+    }
+
+    #[test]
+    fn validate_tool_rejects_relative_root_escape() {
+        let workspace = temp_dir("root-escape-workspace");
+        let outside = temp_dir("root-escape-outside");
+        fs::write(
+            outside.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "outside"
+description = "Outside workspace"
+"#,
+        )
+        .expect("outside manifest written");
+
+        let previous = std::env::current_dir().expect("cwd");
+        std::env::set_current_dir(&workspace).expect("chdir into workspace");
+
+        let outside_name = outside
+            .file_name()
+            .and_then(|name| name.to_str())
+            .expect("outside dir name");
+        let response = call_tool(
+            "dotrepo.validate",
+            json!({
+                "root": format!("../{outside_name}")
+            }),
+        );
+
+        std::env::set_current_dir(&previous).expect("restore cwd");
+        fs::remove_dir_all(workspace).expect("workspace removed");
+        fs::remove_dir_all(outside).expect("outside removed");
+
+        assert_eq!(response["result"]["isError"], Value::Bool(true));
+        assert!(response["result"]["structuredContent"]["error"]
+            .as_str()
+            .expect("error text")
+            .contains("working directory"));
     }
 
     #[test]

@@ -38,7 +38,7 @@ jobs:
           fi
 
           has_any=false
-          has_code=false
+          has_rust_toolchain=false
           has_public_surface=false
           has_claim_sensitive=false
 
@@ -46,8 +46,8 @@ jobs:
             [ -n "$path" ] || continue
             has_any=true
 
-            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/|docs/|rfcs/) ]] || [[ "$path" =~ ^index/ ]]; then
-              has_code=true
+            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/|docs/|rfcs/) ]]; then
+              has_rust_toolchain=true
             fi
 
             if [[ "$path" =~ ^(index/|crates/dotrepo-core/|crates/dotrepo-cli/|scripts/check_release_gate\.py|scripts/render_public_pages_landing\.py|scripts/package_public_export\.py|scripts/sync_cloudflare_public_snapshot\.py|cloudflare/hosted-query/) ]]; then
@@ -70,11 +70,10 @@ jobs:
             run_public_surface_gate=true
             run_release_gate=true
           else
-            if [ "$has_code" = true ]; then
+            if [ "$has_rust_toolchain" = true ]; then
               run_rust_ci=true
               run_release_gate=true
-            fi
-            if [ "$has_public_surface" = true ] && [ "$has_code" = false ]; then
+            elif [ "$has_public_surface" = true ]; then
               run_public_surface_gate=true
             fi
             if [ "$has_claim_sensitive" = true ]; then
@@ -272,6 +271,101 @@ jobs:
           assert "already exists" in import_write["result"]["structuredContent"]["error"]
 
           proc.terminate()
+          proc.wait(timeout=5)
+          PY
+      - name: Smoke test LSP stdio server
+        run: |
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          manifest = Path("examples/native-minimal/.repo").resolve()
+          uri = manifest.as_uri()
+          text = manifest.read_text()
+
+          proc = subprocess.Popen(
+              ["cargo", "run", "-p", "dotrepo-lsp"],
+              stdin=subprocess.PIPE,
+              stdout=subprocess.PIPE,
+              stderr=subprocess.PIPE,
+              text=False,
+          )
+
+          def read_message():
+              header = b""
+              while b"\r\n\r\n" not in header:
+                  chunk = proc.stdout.read(1)
+                  if not chunk:
+                      raise RuntimeError("unexpected EOF while reading LSP headers")
+                  header += chunk
+              length = None
+              for line in header.decode().split("\r\n"):
+                  if line.lower().startswith("content-length:"):
+                      length = int(line.split(":", 1)[1].strip())
+                      break
+              if length is None:
+                  raise RuntimeError("missing Content-Length header")
+              body = proc.stdout.read(length)
+              return json.loads(body)
+
+          def send(message, expect_response=True):
+              payload = json.dumps(message).encode()
+              proc.stdin.write(f"Content-Length: {len(payload)}\r\n\r\n".encode())
+              proc.stdin.write(payload)
+              proc.stdin.flush()
+              if not expect_response:
+                  return None
+              return read_message()
+
+          init = send({
+              "jsonrpc": "2.0",
+              "id": 1,
+              "method": "initialize",
+              "params": {
+                  "processId": None,
+                  "capabilities": {},
+                  "clientInfo": {"name": "ci-smoke", "version": "0"}
+              }
+          })
+          assert init["result"]["serverInfo"]["name"] == "dotrepo-lsp"
+
+          send({
+              "jsonrpc": "2.0",
+              "method": "initialized",
+              "params": {}
+          }, expect_response=False)
+
+          send({
+              "jsonrpc": "2.0",
+              "method": "textDocument/didOpen",
+              "params": {
+                  "textDocument": {
+                      "uri": uri,
+                      "languageId": "toml",
+                      "version": 1,
+                      "text": text
+                  }
+              }
+          }, expect_response=False)
+
+          diagnostics = read_message()
+          assert diagnostics["method"] == "textDocument/publishDiagnostics"
+          assert diagnostics["params"]["uri"] == uri
+          assert diagnostics["params"]["diagnostics"] == []
+
+          send({
+              "jsonrpc": "2.0",
+              "id": 2,
+              "method": "shutdown",
+              "params": {}
+          })
+          send({
+              "jsonrpc": "2.0",
+              "method": "exit",
+              "params": {}
+          }, expect_response=False)
+
           proc.wait(timeout=5)
           PY
 

@@ -27,6 +27,7 @@ Run the core workspace checks:
 
 ```bash
 cargo fmt --all -- --check
+cargo clippy --workspace --all-targets -- -D clippy::correctness -W clippy::perf
 cargo test --workspace
 ```
 
