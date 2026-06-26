@@ -1,6 +1,6 @@
 # Current status
 
-As of April 18, 2026, dotrepo is a working implementation of the protocol,
+As of June 2026, dotrepo is a working implementation of the protocol,
 reference toolchain, and seed index, with a hosted read-only public surface.
 
 ## What exists now
@@ -107,10 +107,11 @@ reference toolchain, and seed index, with a hosted read-only public surface.
 
 ## Highest-leverage next steps
 
-- Execute the concrete tranche-one seed-index program in
-  [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) until the
-  checked-in index reaches a first tranche of 50 reviewed repositories across
-  Rust, TypeScript, Python, and Go.
+- Continue the concrete tranche-one seed-index program in
+  [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) by
+  quality-hardening the current 55-overlay checked-in baseline across Rust,
+  TypeScript, Python, and Go, especially the lower-confidence imported and
+  inferred records.
 - Turn the scheduled candidate-seeding and refresh-review loops into small,
   human-reviewable execution batches rather than stopping at artifacts.
 - Keep hardening and public-site work tightly scoped to blockers for index
@@ -165,7 +166,7 @@ For the public surface architecture, see
 For the concrete post-v1 execution plan over index growth, automation, and
 remote lookup, see
 [`docs/growth-and-automation-plan.md`](./growth-and-automation-plan.md).
-For the planned Cloudflare deployment target for hosted query, see
+For the Cloudflare deployment path for hosted query, see
 [`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md).
 For the local and GitHub setup for the Worker deploy path, see
 [`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).

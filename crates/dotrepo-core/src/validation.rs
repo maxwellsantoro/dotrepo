@@ -65,13 +65,13 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
     let mut diagnostics = Vec::new();
     let mut loaded = Vec::new();
 
-    match collect_manifest_targets(root) {
+    match collect_root_manifest_targets(root) {
         Ok(targets) if targets.is_empty() => {
             diagnostics.push(RepositoryDiagnostic {
                 severity: "error",
                 source: "load_manifest_document".into(),
                 message: format!(
-                    "failed to read {}: no .repo, record.toml, or descendant record.toml candidates found",
+                    "failed to read {}: no .repo or record.toml found at the repository root",
                     crate::util::manifest_path(root).display()
                 ),
                 manifest_path: None,
@@ -106,7 +106,7 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
         Err(err) => {
             diagnostics.push(RepositoryDiagnostic {
                 severity: "error",
-                source: "collect_manifest_targets".into(),
+                source: "collect_root_manifest_targets".into(),
                 message: err.to_string(),
                 manifest_path: None,
             });
@@ -137,24 +137,10 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
     }
 }
 
-fn collect_manifest_targets(root: &Path) -> Result<Vec<PathBuf>> {
+fn collect_root_manifest_targets(root: &Path) -> Result<Vec<PathBuf>> {
     let mut targets = Vec::new();
     for name in [".repo", "record.toml"] {
         let path = root.join(name);
-        if path.exists() {
-            targets.push(path);
-        }
-    }
-
-    let mut record_dirs = Vec::new();
-    collect_record_dirs(root, &mut record_dirs)?;
-    record_dirs.sort();
-    let root_record = root.join("record.toml");
-    for record_dir in record_dirs {
-        let path = record_dir.join("record.toml");
-        if path == root_record || targets.contains(&path) {
-            continue;
-        }
         if path.exists() {
             targets.push(path);
         }

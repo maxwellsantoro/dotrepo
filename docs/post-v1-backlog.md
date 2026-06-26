@@ -33,10 +33,10 @@ Use these as top-level program checks across blocks:
   missing-repo, invalid-identity, and equal-authority conflict cases
 - the checked-in index should contain at least two real independently reviewed
   maintainer-claim examples soon after launch
-- the post-v1 seed-index growth program should hit one explicit first tranche
-  of 50 reviewed high-signal repos across Rust, TypeScript, Python, and Go,
-  then a larger follow-on tranche such as 500 before treating dotrepo as a
-  likely first-check service for common public repositories
+- the post-v1 seed-index growth program should treat the first 50-record
+  tranche as a quality bar, not just a raw-count milestone, then move toward a
+  larger follow-on tranche such as 500 before treating dotrepo as a likely
+  first-check service for common public repositories
 - the post-v1 agent path now includes one hosted remote-lookup MCP tool, so
   broader search or mutation ambitions should remain subordinate until
   coverage and automation are much stronger
@@ -49,11 +49,11 @@ Treat deliberate index growth as the active top-priority workstream.
 
 Near-term order:
 
-1. Grow the reviewed overlay index from the current 55-repository checked-in
-   baseline (28 verified, 19 imported, 7 inferred, 1 reviewed) to a first tranche
-   of 50 high-signal repos across Rust, TypeScript, Python, and Go, using
+1. Quality-harden the current 55-repository checked-in overlay baseline
+   (28 verified, 19 imported, 7 inferred, 1 reviewed) into a stronger first
+   tranche across Rust, TypeScript, Python, and Go, using
    [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) as the
-   concrete execution list.
+   concrete execution guide.
 2. Exercise the new seed-batch and refresh-batch draft-PR workflows, including
    the guarded top-batch auto-PR mode in the review workflows, then decide what
    should remain dispatch-only versus become scheduled.
@@ -61,9 +61,8 @@ Near-term order:
    first two items.
 
 The checked-in index now contains 55 overlay records as of June 2026, so the
-active near-term job is to raise review quality across that baseline and reach
-the first 50-repository tranche target while establishing the automation loop
-around it.
+active near-term job is to raise review quality across that baseline, keep the
+first tranche coherent, and establish the automation loop around it.
 For the execution order and milestone bar for that work, see
 [`docs/growth-and-automation-plan.md`](./growth-and-automation-plan.md).
 

@@ -24,9 +24,7 @@ use crate::cli::{
 
 use crate::error::CliExit;
 use crate::format::{
-    format_claim_report, format_compat_mode, format_conflict_relationship,
-    format_doctor_ownership_honesty, format_doctor_recommended_mode, format_doctor_surface,
-    format_managed_file_state, format_provenance, format_query_value, format_selection_reason,
+    format_claim_report, format_doctor_surface, format_managed_file_state, format_query_value,
     format_trust_report, print_surface_preview_report,
 };
 

@@ -268,8 +268,8 @@ jobs:
                   }
               }
           })
-          assert "error" in import_write
-          assert "already exists" in import_write["error"]["message"]
+          assert import_write["result"]["isError"] is True
+          assert "already exists" in import_write["result"]["structuredContent"]["error"]
 
           proc.terminate()
           proc.wait(timeout=5)

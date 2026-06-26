@@ -1,18 +1,21 @@
 # Growth And Automation Plan
 
-As of April 18, 2026, the live public surface at
+As of June 2026, the public surface at
 [`https://dotrepo.org/`](https://dotrepo.org/) is coherent across the homepage,
 [`/v0/meta.json`](https://dotrepo.org/v0/meta.json), and
-[`/v0/repos/index.json`](https://dotrepo.org/v0/repos/index.json):
+[`/v0/repos/index.json`](https://dotrepo.org/v0/repos/index.json). The April
+launch snapshot proved the hosted path; the checked-in index has since grown
+past the original first-tranche raw-count target:
 
-- the current reviewed export publishes 15 repositories
-- the live snapshot was generated at `2026-04-18T03:02:00.573009786Z`
+- the checked-in index contains 55 overlay records
+- the current record-status mix is 28 `verified`, 19 `imported`, 7 `inferred`,
+  and 1 `reviewed`
 - the homepage, summary, trust, and query surfaces are all coming from one
-  reviewed snapshot family
+  reviewed snapshot family when deployed
 
 That is enough product surface to prove the thesis. It is not yet enough
-coverage or automation to make dotrepo a likely first check for arbitrary
-public repositories.
+quality coverage or automation to make dotrepo a likely first check for
+arbitrary public repositories.
 
 This doc turns the existing post-v1 direction into an execution plan for the
 next phase: grow the reviewed index deliberately, automate the review and
@@ -24,9 +27,10 @@ coverage story gets strong.
 What is already working:
 
 - The public surface is live, coherent, and same-origin on `dotrepo.org`.
-- The first suggested 10 overlays from
-  [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) are already
-  present in the checked-in index.
+- The first tranche queue in
+  [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) is now
+  represented in the checked-in index strongly enough that the next job is
+  quality and refresh discipline, not simply adding records.
 - The crawler can discover, materialize, write back, and schedule factual
   refreshes through `dotrepo-crawler`.
 - The Cloudflare deploy path, Worker smoke, and release-gate export path are in
@@ -34,8 +38,9 @@ What is already working:
 
 What remains weak:
 
-- 15 repositories is still below the threshold where users or agents should
-  expect a likely hit for common public repos.
+- The raw 55-record baseline is still below the threshold where users or agents
+  should expect a likely hit for common public repos, and many entries still
+  need stronger review or refresh evidence.
 - Growth is still mostly a manual operator loop instead of a predictable review
   conveyor.
 - Refresh and drift handling exist as primitives, but not yet as an always-on
@@ -49,9 +54,9 @@ What remains weak:
 
 ### Goal 1
 
-Reach the first tranche of 50 reviewed repositories across Rust,
-TypeScript/JavaScript, Python, and Go without lowering the review bar described
-in [`index/review-checklist.md`](../index/review-checklist.md).
+Quality-harden the first tranche across Rust, TypeScript/JavaScript, Python,
+and Go without lowering the review bar described in
+[`index/review-checklist.md`](../index/review-checklist.md).
 
 ### Goal 2
 
@@ -65,8 +70,8 @@ system:
 
 ### Goal 3
 
-Ship one remote-lookup product path that makes the hosted public surface useful
-to coding agents without requiring a clone:
+Keep the delivered remote-lookup product path useful to coding agents without
+requiring a clone:
 
 - `dotrepo.lookup` in MCP
 - a matching public lookup affordance on the homepage
@@ -126,13 +131,17 @@ Execution model:
 
 Operating target:
 
-- move from 15 reviewed repositories to 25 with the first automation loop in
-  place
-- move from 25 to 50 with review cadence and refresh cadence both stable
+- raise lower-confidence imported and inferred records into stronger reviewed or
+  verified evidence states where the source material supports it
+- keep the first tranche visibly cross-language while moving toward the
+  follow-on coverage target
+- make review cadence and refresh cadence stable before broadening into search
+  or submission surfaces
 
 Acceptance criteria:
 
-- the checked-in index reaches 50 reviewed repositories
+- the checked-in index keeps at least 50 evidence-backed overlay records across
+  the target language mix
 - every merged overlay still ships `record.toml` plus `evidence.md`
 - review artifacts remain readable and grounded in source-specific evidence
 
@@ -217,9 +226,20 @@ Automation should produce one simple weekly readout:
 - current reviewed repository count
 - count by language family
 - queued candidate count
-- queued refresh count
 - maintainer-claim example count
 - last successful deployed snapshot timestamp
+
+The canonical local command for the checked-in index portion of that readout is:
+
+```bash
+uv run python scripts/render_index_growth_status.py \
+  --output-md /tmp/dotrepo-growth-status.md \
+  --output-json /tmp/dotrepo-growth-status.json
+```
+
+The scheduled seed and refresh review workflows publish the same growth-status
+Markdown into their GitHub step summaries and upload the JSON alongside the
+batch artifacts.
 
 Acceptance criteria:
 
@@ -273,7 +293,7 @@ Target outcome:
 
 - scheduled candidate seeding is live
 - scheduled refresh planning is live
-- reviewed index reaches at least 25 repositories
+- review and refresh batches are routine against the current 55-record baseline
 
 Exit bar:
 
@@ -287,7 +307,8 @@ Target outcome:
 
 - `dotrepo.lookup` is shipped
 - homepage lookup exists
-- reviewed index reaches the 50-repository tranche target
+- the first-tranche baseline is quality-hardened enough to support the hosted
+  lookup story
 
 Exit bar:
 
@@ -303,8 +324,8 @@ Exit bar:
 2. Decide whether the current guarded top-batch auto-PR mode is sufficient or
    whether broader scheduled PR opening is actually desirable, still keeping
    merge control human.
-3. Use those execution paths to move from the current 15 reviewed repositories
-   toward the 25-repository milestone without losing language mix discipline.
+3. Use those execution paths to raise the current 55-overlay baseline without
+   losing language mix discipline or evidence quality.
 4. Add at least one more independently reviewed accepted maintainer-claim
    example to reduce the current single-example gap.
 5. Keep deploy coherence smoke and homepage lookup stable as contract surfaces

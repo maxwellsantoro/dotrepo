@@ -121,3 +121,16 @@ cargo run -p dotrepo-crawler -- seed \
 The markdown report is advisory only. It ranks seeded repos for human triage
 priority; it does not change index validity, record trust semantics, or merge
 bar by itself.
+
+## Growth status
+
+Use the growth-status renderer when you need a quick read on tranche coverage,
+language mix, claim examples, and which lower-confidence records should be
+hardened next:
+
+```bash
+uv run python scripts/render_index_growth_status.py
+```
+
+The scheduled seed and refresh review workflows include this same readout in
+their GitHub step summaries and uploaded artifacts.

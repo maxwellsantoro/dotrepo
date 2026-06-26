@@ -122,6 +122,11 @@ Current MCP tools:
 - `dotrepo.import_preview`
 - `dotrepo.import_write`
 
+Tool execution errors are returned as MCP tool results with
+`isError: true` and machine-readable `structuredContent`. Protocol-level
+mistakes, such as calling an unknown tool name, still use normal JSON-RPC
+errors.
+
 Example local MCP tool call:
 
 ```json
@@ -136,6 +141,11 @@ Example local MCP tool call:
 
 That returns the selected value together with record status, provenance, and
 conflict context.
+
+`dotrepo validate` intentionally checks only the root `.repo` or root
+`record.toml` for the selected repository. Use `dotrepo validate-index` for
+descendant `index/repos/**/record.toml` overlays; `query` and `trust` still
+load matching descendant candidates when resolving conflict-aware answers.
 
 Example hosted lookup call:
 

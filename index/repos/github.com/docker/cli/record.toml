@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@docker/runtime-owners` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@docker/runtime-owners` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Left `repo.test` unset because `.github/workflows/test.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Docker CLI"
@@ -27,7 +27,6 @@ languages = [
     "Makefile",
     "Shell",
 ]
-test = "go test -coverprofile=/tmp/coverage.txt $(go list ./... | grep -vE '^github.com/docker/cli/e2e/')"
 topics = [
     "docker",
     "cli",

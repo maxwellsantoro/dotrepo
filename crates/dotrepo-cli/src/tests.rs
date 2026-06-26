@@ -3,10 +3,9 @@ use crate::commands::*;
 use crate::error::CliExit;
 use crate::format::*;
 use dotrepo_core::*;
-use dotrepo_schema::{parse_manifest, render_manifest, RecordMode, Trust};
 use serde_json::Value;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 #[test]

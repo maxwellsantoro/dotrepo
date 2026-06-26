@@ -1228,21 +1228,17 @@ pub(crate) fn validate_claim_resolution_consistency(
         .unwrap_or(false);
 
     match claim.claim.state {
-        ClaimState::Rejected | ClaimState::Withdrawn => {
-            if has_canonical_link {
-                findings.push(index_error(
-                    relative_claim.to_path_buf(),
-                    "rejected or withdrawn claims must not record canonical handoff links",
-                ));
-            }
+        ClaimState::Rejected | ClaimState::Withdrawn if has_canonical_link => {
+            findings.push(index_error(
+                relative_claim.to_path_buf(),
+                "rejected or withdrawn claims must not record canonical handoff links",
+            ));
         }
-        ClaimState::Disputed => {
-            if has_canonical_link {
-                findings.push(index_error(
-                    relative_claim.to_path_buf(),
-                    "disputed claims must not record completed canonical handoff links",
-                ));
-            }
+        ClaimState::Disputed if has_canonical_link => {
+            findings.push(index_error(
+                relative_claim.to_path_buf(),
+                "disputed claims must not record completed canonical handoff links",
+            ));
         }
         ClaimState::Accepted => {
             if let Some(resolution) = resolution {

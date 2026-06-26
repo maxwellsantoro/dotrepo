@@ -179,7 +179,13 @@ fn handle_tool_call(params: Value) -> Result<Value> {
         _ => bail!("unknown tool: {}", name),
     };
 
-    result.map(|(summary, structured)| tool_success(summary, structured))
+    match result {
+        Ok((summary, structured)) => Ok(tool_success(summary, structured)),
+        Err(err) => Ok(tool_failure(
+            format!("tool `{}` failed", name),
+            json!({ "error": err.to_string() }),
+        )),
+    }
 }
 
 fn tool_validate(arguments: Value) -> Result<(String, Value)> {
@@ -857,14 +863,30 @@ fn tool_success(summary: String, structured: Value) -> Value {
     })
 }
 
+fn tool_failure(summary: String, structured: Value) -> Value {
+    let text = structured_tool_text(&summary, &structured);
+    json!({
+        "content": [
+            {
+                "type": "text",
+                "text": text
+            }
+        ],
+        "structuredContent": structured,
+        "isError": true
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
     use std::fs;
     use std::io::{Read, Write};
     use std::net::TcpListener;
+    use std::sync::atomic::{AtomicBool, Ordering};
+    use std::sync::{Arc, Mutex, MutexGuard, OnceLock};
     use std::thread;
-    use std::time::{SystemTime, UNIX_EPOCH};
+    use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
     #[test]
     fn initialize_and_list_tools() {
@@ -1055,8 +1077,8 @@ description = "Missing source and trust"
                 "mode": "native"
             }),
         );
-        assert!(response.get("error").is_some());
-        assert!(response["error"]["message"]
+        assert_eq!(response["result"]["isError"], Value::Bool(true));
+        assert!(response["result"]["structuredContent"]["error"]
             .as_str()
             .expect("error string")
             .contains("already exists"));
@@ -1295,6 +1317,27 @@ text = "Accepted claim."
         fs::remove_dir_all(root).expect("temp dir removed");
     }
 
+    struct LookupEnvGuard {
+        _guard: MutexGuard<'static, ()>,
+    }
+
+    impl Drop for LookupEnvGuard {
+        fn drop(&mut self) {
+            clear_lookup_base_url_env();
+        }
+    }
+
+    fn lock_lookup_base_url_env() -> LookupEnvGuard {
+        static ENV_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
+        let guard = ENV_LOCK
+            .get_or_init(|| Mutex::new(()))
+            .lock()
+            // Test-only env cleanup should not cascade if another lookup test panics.
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        clear_lookup_base_url_env();
+        LookupEnvGuard { _guard: guard }
+    }
+
     fn clear_lookup_base_url_env() {
         // SAFETY: test-only env cleanup between lookup URL policy tests.
         unsafe {
@@ -1305,7 +1348,7 @@ text = "Accepted claim."
 
     #[test]
     fn normalize_public_base_url_blocks_private_hosts_by_default() {
-        clear_lookup_base_url_env();
+        let _env_guard = lock_lookup_base_url_env();
         let err = normalize_public_base_url("http://127.0.0.1:8080")
             .expect_err("loopback should be blocked");
         assert!(err.to_string().contains("not allowed"));
@@ -1317,7 +1360,7 @@ text = "Accepted claim."
 
     #[test]
     fn normalize_public_base_url_allows_default_public_origins() {
-        clear_lookup_base_url_env();
+        let _env_guard = lock_lookup_base_url_env();
         assert_eq!(
             normalize_public_base_url("https://dotrepo.org").expect("dotrepo.org allowed"),
             "https://dotrepo.org"
@@ -1330,7 +1373,7 @@ text = "Accepted claim."
 
     #[test]
     fn normalize_public_base_url_requires_opt_in_for_custom_origins() {
-        clear_lookup_base_url_env();
+        let _env_guard = lock_lookup_base_url_env();
         let err = normalize_public_base_url("https://example.com")
             .expect_err("custom origin should require opt-in");
         assert!(err
@@ -1355,6 +1398,7 @@ text = "Accepted claim."
 
     #[test]
     fn lookup_tool_fetches_hosted_summary_trust_and_query() {
+        let _env_guard = lock_lookup_base_url_env();
         // SAFETY: test-only env flags for the local mock HTTP server.
         unsafe {
             std::env::set_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL", "1");
@@ -1517,8 +1561,6 @@ text = "Accepted claim."
             structured["summary"]["repository"]["name"],
             Value::String("orbit".into())
         );
-
-        clear_lookup_base_url_env();
     }
 
     #[test]
@@ -1660,10 +1702,12 @@ pull_request_template = "skip"
 
     struct TestServer {
         join: Option<thread::JoinHandle<()>>,
+        shutdown: Arc<AtomicBool>,
     }
 
     impl Drop for TestServer {
         fn drop(&mut self) {
+            self.shutdown.store(true, Ordering::Relaxed);
             if let Some(join) = self.join.take() {
                 join.join().expect("server thread joins");
             }
@@ -1672,7 +1716,12 @@ pull_request_template = "skip"
 
     fn start_json_server(routes: Vec<(&'static str, Value)>) -> (TestServer, String) {
         let listener = TcpListener::bind("127.0.0.1:0").expect("listener binds");
+        listener
+            .set_nonblocking(true)
+            .expect("listener can be nonblocking");
         let address = listener.local_addr().expect("listener address");
+        let shutdown = Arc::new(AtomicBool::new(false));
+        let thread_shutdown = Arc::clone(&shutdown);
         let routes = routes
             .into_iter()
             .map(|(path, body)| {
@@ -1684,8 +1733,17 @@ pull_request_template = "skip"
             .collect::<Vec<_>>();
         let expected_requests = routes.len();
         let handle = thread::spawn(move || {
-            for _ in 0..expected_requests {
-                let (mut stream, _) = listener.accept().expect("client connects");
+            let mut handled_requests = 0;
+            while handled_requests < expected_requests && !thread_shutdown.load(Ordering::Relaxed) {
+                let (mut stream, _) = match listener.accept() {
+                    Ok(accepted) => accepted,
+                    Err(err) if err.kind() == std::io::ErrorKind::WouldBlock => {
+                        thread::sleep(Duration::from_millis(10));
+                        continue;
+                    }
+                    Err(err) => panic!("client connects: {err}"),
+                };
+                handled_requests += 1;
                 let mut buffer = [0_u8; 4096];
                 let bytes_read = stream.read(&mut buffer).expect("request readable");
                 let request = String::from_utf8_lossy(&buffer[..bytes_read]);
@@ -1719,7 +1777,10 @@ pull_request_template = "skip"
             }
         });
         (
-            TestServer { join: Some(handle) },
+            TestServer {
+                join: Some(handle),
+                shutdown,
+            },
             format!("http://{}", address),
         )
     }

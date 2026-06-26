@@ -33,7 +33,7 @@ pub enum Command {
         #[arg(long)]
         force: bool,
     },
-    /// Validate the manifest at the selected repository root.
+    /// Validate only the root `.repo` or root `record.toml`.
     Validate,
     /// Validate a public index tree rooted at `index/`.
     ValidateIndex {

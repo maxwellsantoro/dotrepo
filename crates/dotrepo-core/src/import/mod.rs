@@ -234,7 +234,7 @@ pub fn import_preview_repository(
     let source_url = source
         .map(str::trim)
         .filter(|value| !value.is_empty())
-        .or_else(|| plan.manifest.record.source.as_deref())
+        .or(plan.manifest.record.source.as_deref())
         .unwrap_or("");
     let verification = verify_import_plan(root, &plan, source_url);
     let field_scores = score_import_fields(&plan, &verification);
@@ -1742,6 +1742,25 @@ fn readme_import_evidence_bullet(
     }
 }
 
+pub(super) fn human_join(values: &[String]) -> String {
+    match values {
+        [] => String::new(),
+        [only] => format!("`{}`", only),
+        [first, second] => format!("`{}` and `{}`", first, second),
+        _ => {
+            let (leading, [last]) = values.split_at(values.len() - 1) else {
+                return String::new();
+            };
+            let leading = leading
+                .iter()
+                .map(|value| format!("`{}`", value))
+                .collect::<Vec<_>>()
+                .join(", ");
+            format!("{}, and `{}`", leading, last)
+        }
+    }
+}
+
 #[cfg(test)]
 mod write_import_output_tests {
     use super::write_import_outputs;
@@ -1793,24 +1812,5 @@ mod write_import_output_tests {
         permissions.set_mode(0o755);
         fs::set_permissions(&readonly_dir, permissions).expect("readonly dir permissions reset");
         fs::remove_dir_all(root).expect("temp dir removed");
-    }
-}
-
-pub(super) fn human_join(values: &[String]) -> String {
-    match values {
-        [] => String::new(),
-        [only] => format!("`{}`", only),
-        [first, second] => format!("`{}` and `{}`", first, second),
-        _ => {
-            let (leading, [last]) = values.split_at(values.len() - 1) else {
-                return String::new();
-            };
-            let leading = leading
-                .iter()
-                .map(|value| format!("`{}`", value))
-                .collect::<Vec<_>>()
-                .join(", ");
-            format!("{}, and `{}`", leading, last)
-        }
     }
 }

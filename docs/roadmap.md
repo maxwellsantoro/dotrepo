@@ -43,10 +43,12 @@ and deferrals that drove that release bar.
 
 ## Current post-v1 priorities
 
-1. Grow the reviewed overlay index from a proof surface into a useful service.
-   The current target is a first tranche of 50 reviewed high-signal repos across
-   Rust, TypeScript, Python, and Go. The concrete target list now lives in
-   [`index/tranche-one-targets.md`](../index/tranche-one-targets.md).
+1. Turn the reviewed overlay index from a proof surface into a useful service.
+   The current checked-in baseline has passed the original 50-record raw-count
+   target; the active work is to quality-harden that baseline, preserve the
+   Rust, TypeScript, Python, and Go mix, and keep using
+   [`index/tranche-one-targets.md`](../index/tranche-one-targets.md) as the
+   concrete tranche guide.
 2. Exercise and harden the new batch-to-draft-PR workflows for seed and refresh
    batches, including the newly guarded top-batch auto-PR path in the review
    workflows.

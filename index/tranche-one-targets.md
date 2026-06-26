@@ -4,8 +4,10 @@ This doc turns Epic 7 from a backlog heading into an execution list.
 
 It defines the first deliberate growth tranche for the checked-in overlay index:
 
-- current checked-in seed index: 5 repositories
-- tranche-one target: 50 reviewed overlay records
+- original checked-in seed baseline: 5 reference repositories
+- current checked-in index: 55 overlay records as of June 2026
+- tranche-one target: at least 50 evidence-backed overlay records with visible
+  cross-language coverage and a path toward stronger reviewed or verified status
 - language floor: visible coverage across Rust, TypeScript/JavaScript, Python,
   and Go
 - standard: every merged record still has to satisfy
@@ -30,9 +32,10 @@ Every tranche-one candidate was chosen using the same filters:
 - the first 10 records are chosen for high payoff without forcing the entire
   program to start on the largest monorepos first
 
-## Already in the checked-in seed index
+## Original reference seed entries
 
-These repos are already present and are not part of the 50-target tranche:
+These repos were already present before the tranche-one growth queue and remain
+the reference examples for contribution quality:
 
 - `github.com/BurntSushi/ripgrep`
 - `github.com/cli/cli`

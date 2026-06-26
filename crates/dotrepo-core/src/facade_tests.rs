@@ -8,7 +8,6 @@ use crate::import::{
     ImportSources, ImportedFile,
 };
 use crate::surfaces::parse_managed_marker;
-use dotrepo_schema::render_manifest;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 #[test]
