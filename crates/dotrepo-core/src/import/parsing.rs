@@ -1063,7 +1063,15 @@ pub(crate) fn parse_security_import_metadata(contents: &str) -> SecurityImportMe
     }
 }
 
+pub(crate) fn parse_readme_security(contents: &str) -> Option<String> {
+    parse_security_section_from_markdown(contents)
+}
+
 pub(crate) fn parse_contributing_security(contents: &str) -> Option<String> {
+    parse_security_section_from_markdown(contents)
+}
+
+fn parse_security_section_from_markdown(contents: &str) -> Option<String> {
     // Extract the security reporting section from CONTRIBUTING.md.
     // Only look under headings that mention "security", "vulnerability",
     // or "responsible disclosure".

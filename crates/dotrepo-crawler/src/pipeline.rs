@@ -1,3 +1,6 @@
+use crate::adjudication::{
+    import_escalation_options_from_env, resolve_adjudication_providers_from_env,
+};
 use crate::github::{GitHubClient, HttpGitHubClient};
 use crate::materialize::{
     materialize_repository, MaterializeRepositoryInput, MaterializedRepository,
@@ -11,7 +14,8 @@ use crate::{
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
     current_timestamp_rfc3339, import_repository_with_options, promote_to_verified,
-    score_import_fields, validate_manifest, verify_import_plan, ImportMode, ImportOptions,
+    run_import_escalation, score_import_fields, validate_manifest, verify_import_plan,
+    AdjudicationProvider, ImportMode, ImportOptions, TieredAdjudicationProviders,
 };
 use dotrepo_schema::{render_manifest, Manifest};
 use std::fs;
@@ -116,12 +120,59 @@ pub(crate) fn crawl_repository_from_snapshot(
         ));
     }
 
+    let mut field_scores = score_import_fields(&import_plan, &verification);
+    let escalation_options = import_escalation_options_from_env();
+    let resolved_providers = resolve_adjudication_providers_from_env()?;
+    let local_primary = resolved_providers
+        .local_primary
+        .as_ref()
+        .map(|provider| provider as &dyn AdjudicationProvider);
+    let local_second_opinion = resolved_providers
+        .local_second_opinion
+        .as_ref()
+        .map(|provider| provider as &dyn AdjudicationProvider);
+    let api_escalation = resolved_providers
+        .api_escalation
+        .as_ref()
+        .map(|provider| provider as &dyn AdjudicationProvider);
+    let escalation = run_import_escalation(
+        &materialized.repository_root,
+        &mut import_plan,
+        &verification,
+        &mut field_scores,
+        &escalation_options,
+        TieredAdjudicationProviders {
+            local_primary,
+            local_second_opinion,
+            api_escalation,
+        },
+    );
+    if escalation.deterministic_requests > 0
+        || escalation.security_owners_deepened > 0
+        || escalation.model_calls > 0
+    {
+        diagnostics.push(CrawlDiagnostic::info(
+            "pipeline.escalation",
+            format!(
+                "escalation deepened {} owner/security fields, resolved {}/{} deterministic requests, made {} model calls using {} tokens; {} unresolved fields remain",
+                escalation.security_owners_deepened,
+                escalation.deterministic_resolved,
+                escalation.deterministic_requests,
+                escalation.model_calls,
+                escalation.tokens_used,
+                escalation.remaining_unresolved
+            ),
+        ));
+    }
+
+    let verification = verify_import_plan(&materialized.repository_root, &import_plan, &source_url);
+    field_scores = score_import_fields(&import_plan, &verification);
+
     validate_manifest(&record_root, &import_plan.manifest)?;
     import_plan.manifest_text = render_manifest(&import_plan.manifest)?;
     import_plan.evidence_text =
         append_github_evidence(import_plan.evidence_text, &import_plan.manifest, snapshot);
 
-    let field_scores = score_import_fields(&import_plan, &verification);
     let promotion = promote_to_verified(&mut import_plan.manifest, &field_scores);
     if promotion.promoted {
         diagnostics.push(CrawlDiagnostic::info(
@@ -174,6 +225,7 @@ pub(crate) fn crawl_repository_from_snapshot(
         state_record,
         verification,
         field_scores,
+        escalation,
         diagnostics,
     })
 }

@@ -1,6 +1,9 @@
 use anyhow::{anyhow, bail, Context, Result};
 use clap::{Args, Parser, Subcommand};
-use dotrepo_core::{load_manifest_from_root, load_synthesis_from_root};
+use dotrepo_core::{
+    autonomous_writeback_eligible, load_manifest_from_root, load_synthesis_from_root,
+    ImportEscalationReport,
+};
 use dotrepo_crawler::{
     apply_crawl_writeback, crawl_repository, discovery_report_from_targets, load_crawler_state,
     load_repository_targets, refresh_candidates_from_state, schedule_refresh, seed_repositories,
@@ -187,6 +190,7 @@ struct CrawlCommandReport {
     manifest_path: PathBuf,
     evidence_path: Option<PathBuf>,
     state_path: Option<PathBuf>,
+    escalation: ImportEscalationReport,
     diagnostics: Vec<CrawlDiagnostic>,
 }
 
@@ -382,21 +386,34 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
     })?;
 
     let mut state_path = None;
+    let mut wrote = false;
     if args.write {
-        apply_crawl_writeback(&report.writeback_plan)?;
-        let resolved_state_path = resolve_state_path(&args.index_root, args.state_path.as_deref());
-        let mut state = load_crawler_state(&resolved_state_path)?;
-        upsert_state_record(&mut state, report.state_record.clone());
-        write_crawler_state(&resolved_state_path, &state)?;
-        state_path = Some(resolved_state_path);
+        if autonomous_writeback_eligible(&report.verification) {
+            apply_crawl_writeback(&report.writeback_plan)?;
+            let resolved_state_path =
+                resolve_state_path(&args.index_root, args.state_path.as_deref());
+            let mut state = load_crawler_state(&resolved_state_path)?;
+            upsert_state_record(&mut state, report.state_record.clone());
+            write_crawler_state(&resolved_state_path, &state)?;
+            state_path = Some(resolved_state_path);
+            wrote = true;
+        } else {
+            bail!(
+                "autonomous writeback gate failed for {}/{}/{}; verification did not pass",
+                repository.host,
+                repository.owner,
+                repository.repo
+            );
+        }
     }
 
     let command_report = CrawlCommandReport {
         repository,
-        wrote: args.write,
+        wrote,
         manifest_path: report.writeback_plan.factual.manifest_path.clone(),
         evidence_path: report.writeback_plan.factual.evidence_path.clone(),
         state_path,
+        escalation: report.escalation,
         diagnostics: report.diagnostics,
     };
 
@@ -534,7 +551,7 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                         })),
                         diagnostics: report.diagnostics,
                     });
-                } else {
+                } else if autonomous_writeback_eligible(&report.verification) {
                     apply_crawl_writeback(&report.writeback_plan)?;
                     upsert_state_record(&mut state, report.state_record);
                     results.push(SeedCommandResult {
@@ -556,6 +573,33 @@ fn cmd_seed(args: SeedArgs) -> Result<()> {
                             manifest_path: report.writeback_plan.factual.manifest_path.clone(),
                             evidence_path: report.writeback_plan.factual.evidence_path.clone(),
                             failure_message: None,
+                        })),
+                        diagnostics: report.diagnostics,
+                    });
+                } else {
+                    let message = format!(
+                        "autonomous writeback gate failed for {}/{}/{}",
+                        entry.repository.host, entry.repository.owner, entry.repository.repo
+                    );
+                    results.push(SeedCommandResult {
+                        repository: entry.repository.clone(),
+                        status: SeedResultStatus::Failed,
+                        manifest_path: Some(report.writeback_plan.factual.manifest_path.clone()),
+                        evidence_path: report.writeback_plan.factual.evidence_path.clone(),
+                        message: Some(message.clone()),
+                        review: Some(build_seed_review_assessment(SeedReviewAssessmentInput {
+                            repository: entry.repository.clone(),
+                            status: SeedResultStatus::Failed,
+                            manifest: Some(&report.writeback_plan.factual.import_plan.manifest),
+                            inferred_fields: &report
+                                .writeback_plan
+                                .factual
+                                .import_plan
+                                .inferred_fields,
+                            diagnostics: &report.diagnostics,
+                            manifest_path: report.writeback_plan.factual.manifest_path.clone(),
+                            evidence_path: report.writeback_plan.factual.evidence_path.clone(),
+                            failure_message: Some(message),
                         })),
                         diagnostics: report.diagnostics,
                     });

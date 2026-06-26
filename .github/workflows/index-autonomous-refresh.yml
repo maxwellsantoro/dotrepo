@@ -1,0 +1,104 @@
+name: index-autonomous-refresh
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      batch_id:
+        description: Batch identifier from refresh-batches.json
+        required: false
+        default: refresh-batch-01
+      batch_size:
+        description: Maximum repositories per batch
+        required: false
+        default: "5"
+      limit:
+        description: Maximum tracked repositories to inspect while planning
+        required: false
+        default: "20"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: index-autonomous-refresh
+  cancel-in-progress: true
+
+jobs:
+  autonomous-refresh:
+    runs-on: ubuntu-latest
+    if: vars.INDEX_AUTOMATION_ENABLED != 'false'
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      INDEX_AUTOMATION_ENABLED: ${{ vars.INDEX_AUTOMATION_ENABLED || 'true' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo artifacts
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: Run autonomous refresh batch
+        run: |
+          python3 scripts/run_autonomous_index_batch.py \
+            --batch-id "${{ github.event.inputs.batch_id || 'refresh-batch-01' }}" \
+            --batch-size "${{ github.event.inputs.batch_size || '5' }}" \
+            --limit "${{ github.event.inputs.limit || '20' }}" \
+            --output-dir index-autonomous-batch \
+            --skip-automation-enabled-check
+      - name: Upload batch telemetry
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: index-autonomous-batch
+          path: index-autonomous-batch/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Commit and push index updates
+        if: success()
+        shell: bash
+        run: |
+          if git diff --quiet -- index; then
+            echo "No index changes to land"
+            exit 0
+          fi
+          git config user.name "dotrepo-automation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index
+          git commit -m "chore(index): autonomous refresh batch ${{ github.event.inputs.batch_id || 'refresh-batch-01' }}"
+          git push
+      - name: Publish step summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "# Autonomous Index Refresh"
+            echo
+            if [ -f index-autonomous-batch/telemetry.json ]; then
+              python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("index-autonomous-batch/telemetry.json").read_text())
+          print(f"- batch: `{data['batchId']}`")
+          print(f"- crawled: {data['crawled']}")
+          print(f"- written: {data['written']}")
+          print(f"- skipped: {data['skipped']}")
+          print(f"- failed: {data['failed']}")
+          print(f"- adjudication calls: {data.get('adjudicationCalls', 0)}")
+          print(f"- tokens used: {data.get('tokensUsed', 0)}")
+          print(f"- adjudication rate: {data.get('adjudicationRate', 0.0):.2%}")
+          PY
+            else
+              echo "- telemetry: unavailable"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

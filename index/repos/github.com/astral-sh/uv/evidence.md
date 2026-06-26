@@ -5,6 +5,9 @@
 - Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands.
 - Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.build` to `cargo build --profile no-debug` from `.github/workflows/build-dev-binaries.yml` after deterministic escalation.
+- Left `repo.test` unset after model escalation: The candidates represent distinct, non-overlapping technology stacks (Rust vs Python) within the same repository context, indicating a polyglot repository with no single primary test command..
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

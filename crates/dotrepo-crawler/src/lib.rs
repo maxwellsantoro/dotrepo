@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
+mod adjudication;
 mod discover;
 mod github;
 mod materialize;
@@ -12,6 +13,11 @@ mod schedule;
 mod state;
 mod synth;
 mod writeback;
+
+pub use adjudication::{
+    import_escalation_options_from_env, resolve_adjudication_providers_from_env,
+    HttpAdjudicationProvider, ResolvedAdjudicationProviders,
+};
 
 pub use writeback::WritebackReport;
 pub const MAX_SEED_LIMIT: usize = discover::MAX_SEED_LIMIT;
@@ -363,6 +369,7 @@ pub struct CrawlRepositoryReport {
     pub state_record: CrawlStateRecord,
     pub verification: VerificationReport,
     pub field_scores: FieldScoreReport,
+    pub escalation: dotrepo_core::ImportEscalationReport,
     pub diagnostics: Vec<CrawlDiagnostic>,
 }
 

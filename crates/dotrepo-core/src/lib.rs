@@ -76,14 +76,18 @@ pub use public::{
 };
 
 pub use import::{
-    apply_adjudication_response, apply_adjudication_results, build_adjudication_requests,
+    adjudicate_requests_deterministic, apply_adjudication_response, apply_adjudication_results,
+    apply_adjudication_to_import_plan, autonomous_writeback_eligible, build_adjudication_requests,
     import_preview_repository, import_repository, import_repository_with_options,
-    score_import_fields, verify_import_plan, write_import_outputs, AdjudicationCandidate,
-    AdjudicationModelConfidence, AdjudicationModelResponse, AdjudicationOutcome,
-    AdjudicationRequest, AdjudicationResult, CandidateProvenance, CommandCandidateSelection,
-    CommandCandidateSummary, CommandSourceTier, FieldConfidence, FieldScore, FieldScoreReport,
-    FieldScoreSummary, ImportCommandCandidates, ImportMode, ImportOptions, ImportPlan,
-    ImportPreviewReport, ImportedCommandProvenance, VerificationCheck, VerificationReport,
+    run_import_escalation, score_import_fields, verify_import_plan, write_import_outputs,
+    AdjudicationCandidate, AdjudicationModelConfidence, AdjudicationModelResponse,
+    AdjudicationOutcome, AdjudicationProvider, AdjudicationProviderResponse, AdjudicationRequest,
+    AdjudicationResult, AdjudicationTier, AdjudicationTierProvider, CandidateProvenance,
+    CommandCandidateSelection, CommandCandidateSummary, CommandSourceTier, FieldConfidence,
+    FieldScore, FieldScoreReport, FieldScoreSummary, ImportCommandCandidates,
+    ImportEscalationOptions, ImportEscalationReport, ImportMode, ImportOptions, ImportPlan,
+    ImportPreviewReport, ImportedCommandProvenance, NoopAdjudicationProvider,
+    StubAdjudicationProvider, TieredAdjudicationProviders, VerificationCheck, VerificationReport,
     VerificationSeverity,
 };
 

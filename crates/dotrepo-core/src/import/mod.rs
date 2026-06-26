@@ -15,8 +15,20 @@ use crate::util::{display_path, normalize_rfc3339};
 use crate::validate_manifest;
 use crate::{record_summary, RecordSummary};
 
+mod adjudication;
 mod commands;
+mod escalation;
 mod parsing;
+
+pub use adjudication::{
+    AdjudicationProvider, AdjudicationProviderResponse, AdjudicationTier, AdjudicationTierProvider,
+    ImportEscalationOptions, NoopAdjudicationProvider, StubAdjudicationProvider,
+    TieredAdjudicationProviders,
+};
+pub use escalation::{
+    adjudicate_requests_deterministic, apply_adjudication_to_import_plan,
+    autonomous_writeback_eligible, run_import_escalation, ImportEscalationReport,
+};
 
 use commands::{load_first_existing_file, load_workflow_import_files, sanitize_import_command};
 
@@ -28,7 +40,7 @@ pub(crate) use parsing::{
     clean_project_description, extract_markdown_links, is_actionable_security_url,
     is_non_project_heading, is_quality_url, normalize_description_line, parse_codeowners_metadata,
     parse_contributing_security, parse_issue_template_security, parse_readme_docs_signal,
-    parse_readme_metadata, parse_readme_title_line, parse_security_contact,
+    parse_readme_metadata, parse_readme_security, parse_readme_title_line, parse_security_contact,
     parse_security_import_metadata, try_parse_multiline_html_heading,
 };
 

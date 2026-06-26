@@ -1,161 +1,189 @@
-# v1.0 Launch Plan
+# Active Plan: Autonomous Index Growth
 
-This doc records the `v1.0` launch bar and release rationale.
+This doc is the **current execution plan** for dotrepo after the `v1.0` launch.
 
-Most of this launch track is now complete. Treat this as the launch record, not
-the active next-work plan. For the current post-launch priorities, use
-[`docs/current-status.md`](./docs/current-status.md),
-[`docs/roadmap.md`](./docs/roadmap.md), and
-[`docs/post-v1-backlog.md`](./docs/post-v1-backlog.md).
+For shipped launch scope and rationale, see [v1.0 launch record](#v10-launch-record) below.
+For day-to-day status, see [`docs/current-status.md`](./docs/current-status.md).
 
-The original `v1.0` bar was a launch program over the existing protocol,
-reference toolchain, and public index, with public read-only serving as the
-critical path.
+## Objective
 
-## What v1.0 means
+Grow and maintain the public overlay index through a **fully autonomous conveyor**
+that:
 
-dotrepo is ready for v1.0 when all of the following are true:
+- spends tokens only when deterministic work cannot honestly resolve a field
+- lands gate-passed index updates without human per-record review
+- keeps the hosted public surface contract-stable while coverage improves
 
-1. Maintainers can install the CLI, LSP, and MCP surfaces without building from
-   source.
-2. A repository can adopt the documented native flow and keep CI green with
-   `validate`, `query`, `trust`, `doctor`, and `generate --check`.
-3. Index operators can review overlays and claims, validate the index, and cut
-   deterministic public exports from repeatable documented steps.
-4. Public consumers can inspect repository identity and trust through a stable,
-   read-only hosted/static surface with freshness metadata and a documented
-   public query-wrapper contract.
-5. The public promises, CI gates, and release process all match each other.
+The operator may pause, revert, or change policy at any time. The loop does not
+wait for human approval.
 
-## Must ship before 1.0
+## Current baseline
 
-### 1. Freeze the public read-only contract
+As of June 2026:
 
-- Freeze the repository summary, trust, and query-wrapper contracts now carried
-  by RFCs 0016-0019.
-- Treat the public response envelopes, link structure, freshness block, and
-  query error behavior as release contract, not evolving guidance.
-- Add compatibility coverage around contract drift, not just fixture parity for
-  one exported tree.
+- 55 checked-in overlay records; tranche-one target list (50 repos) is fully seeded
+- record mix: 28 `verified`, 19 `imported`, 7 `inferred`, 1 `reviewed`
+- 44 records still carry quality-hardening signals (missing build/test/security,
+  lower-confidence provenance)
+- automation primitives exist: crawler factual writeback, field scoring,
+  adjudication post-checks, auto-promotion, refresh planning, public export CI
 
-Exit criteria:
-- Public API versioning policy is documented, with public `apiVersion`
-  decoupled from the repo release number.
-- Public summary and trust responses are versioned and backward-compatibility
-  tested.
-- The query-wrapper contract is documented and validated against the same core
-  semantics as local `query`.
+The next phase is not "seed more repos first." It is **make the autonomous loop
+the default way the index improves**.
 
-### 2. Ship the public read-only product surface
+## Operating model
 
-- Promote the static export from proof artifact to real public surface.
-- Publish hosted/static repository summary and trust responses at stable URLs.
-- Keep the first public product identity-first and read-only; do not broaden it
-  into search, submission, or mutation work before launch.
-- Document freshness and snapshot expectations clearly enough for humans, agents,
-  and caches to reason about staleness.
+```text
+scheduled trigger (or manual dispatch)
+  → plan refresh batch (head-changed / missing factual crawl)
+  → for each repository:
+       materialize → import → verify → score
+       → escalation ladder (deterministic → optional model tiers)
+       → re-verify → re-score → auto-promote when eligible
+       → gate check
+       → writeback when gate passes
+  → validate-index
+  → commit + push main
+  → export + deploy (existing release/deploy path)
+  → publish batch telemetry
+```
 
-Exit criteria:
-- A public consumer can fetch repository summary and trust JSON without cloning
-  the index or running local tooling.
-- Hosted/static output matches the documented contract and release examples.
-- Freshness metadata and snapshot identity are included in every public
-  response.
+Human role: **circuit breaker only** — not reviewer.
 
-### 3. Harden the maintainer and operator loop
+## Escalation ladder
 
-- Formalize the maintainer adoption contract around `init` or `import`, then
-  `validate`, `query`, `trust`, `doctor`, and `generate --check`.
-- Formalize the operator contract around `claim-init`, `claim-event`, `claim`,
-  `validate-index`, and `public export`.
-- Tighten failure handling, diagnostics, and docs so both happy-path and
-  failure-path behavior are predictable.
+Each repository stops as soon as its fields are honestly resolved.
 
-Exit criteria:
-- The example native repo exercises the documented maintainer CI loop.
-- Operator docs cover review, correction, export, and release without manual
-  guesswork.
-- The intended release gate is reproducible in CI and locally.
+| Tier | Cost | Action |
+|------|------|--------|
+| 0 | 0 tokens | Import heuristics, cleaners, `verify_import_plan`, `score_import_fields` |
+| 1 | 0 tokens | Deterministic command-tier walk for unresolved `repo.build` / `repo.test` |
+| 2 | Cheap local model | Narrow adjudication on remaining unresolved fields (candidates + snippets only) |
+| 3 | Cheap local second opinion | Disagreement resolver when tier 2 is low-confidence |
+| 4 | API escalation | Rare tail; capped per batch/week |
+| 5 | Partial publish | Stay `imported` / `inferred`; writeback only if structural gates pass |
 
-### 4. Complete claim and handoff semantics enough for real use
+Design rules (from [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md)):
 
-- Finish the operator/reviewer claim workflow so scaffold, append, inspect,
-  correct, accept or reject, and canonical handoff all feel operational rather
-  than experimental.
-- Surface claim context anywhere it materially explains current selection,
-  including the public summary and trust responses.
-- Exercise the handoff path on more than fixture-only cases so the first real
-  maintainer replacements of overlays are not novel at launch time.
+- never spend tokens on filesystem/API-answerable questions
+- treat high-confidence absent as success, not failure
+- synthesis and whole-repo model analysis stay out of scope
 
-Exit criteria:
-- Claim history remains append-only and index validation covers the expected
-  edge cases.
-- Public consumers can see claim context when it explains why one record won.
-- At least one end-to-end maintainer handoff has been reviewed and exported
-  through the normal workflow.
+## Autonomous gates (replace human review)
 
-### 5. Ship installable distribution and thin integrations
+A repository is written back only when:
 
-- Publish release artifacts for the CLI, LSP, MCP server, and VS Code
-  extension.
-- Replace source-build-first install guidance with release install guidance.
-- Keep editor and agent integrations thin, but make them install cleanly and
-  smoke-test them against release-style binaries.
+1. `validate_manifest` passes
+2. `verify_import_plan` passes (no verification failures)
+3. `validate-index` passes on the resulting tree (batch-level)
 
-Exit criteria:
-- Normal users can install dotrepo without cloning the repo and running
-  `cargo build`.
-- VS Code docs default to installed binaries instead of workspace-local
-  development overrides.
-- MCP and LSP smoke checks cover release-style installation paths.
+Promotion to `verified` requires `eligible_for_auto_publish` after escalation.
+Partial overlays may still write back at `imported` / `inferred` when structural
+gates pass.
 
-### 6. Make the release gate explicit and credible
+Machine checks replace [`index/review-checklist.md`](./index/review-checklist.md)
+for automation:
 
-- Turn the current CI skeleton into the documented 1.0 release bar: formatting,
-  workspace tests, example-repo loop, index validation, public-export fixture
-  coverage, packaging, publish dry-runs, and integration smoke tests.
-- Add versioning, compatibility, and upgrade guidance for the move from `0.x`
-  to `1.0`.
-- Fix release hygiene mismatches before launch, including branch and CI default
-  branch alignment.
+- identity invariants (`record.source`, path, homepage)
+- imported sources exist in materialized tree
+- evidence bullets are template-generated from provenance (not free-form LLM prose)
+- auto-promotion never mints `reviewed` or `canonical`
+- existing regression packs stay green (`import_quality_gate`, public export fixtures)
 
-Exit criteria:
-- One release checklist reproduces the promised behavior end to end.
-- CI, branch configuration, and public docs no longer disagree about the normal
-  release path.
-- Core docs no longer need to frame dotrepo as "not production-hardened" to
-  describe the shipped 1.0 surface.
+## Circuit breakers
 
-## Safe to defer past 1.0
+| Control | Purpose |
+|---------|---------|
+| `INDEX_AUTOMATION_ENABLED` repo variable | Pause scheduled autonomous runs |
+| `INDEX_MAX_BATCH_SIZE` | Cap repositories per run |
+| `INDEX_MAX_ADJUDICATION_CALLS` | Cap model spend per batch |
+| Workflow `concurrency` + cancel | Stop in-flight batch when paused |
+| Batch telemetry artifact | `promoted`, `skipped`, `gate_failures`, `tokens_used` |
+| Git revert on `index/` commits | Operator recovery path |
 
-- Discovery-first search, ranking, and browse UX
-- Public mutation or self-serve submission APIs
-- Bundle mode
-- First-class workspace and relations semantics
-- Richer editor authoring flows, semantic autofix, and managed-marker UX
-- Broader prose round-tripping beyond the current managed-surface boundary
+## Implementation sequence
 
-## Sequencing
+### Phase 1 — Close the crawler loop (complete)
 
-1. Freeze and test the public contracts.
-2. Publish the hosted/static public surface.
-3. Harden the maintainer, operator, and claim-handoff loop.
-4. Ship installable release artifacts and tighten integration docs.
-5. Cut the `1.0.0` release and the first versioned public export from the same
-   release bar.
+- [x] Document autonomous plan (this file)
+- [x] Wire deterministic escalation into `dotrepo-crawler` pipeline
+- [x] Add `autonomous_writeback_eligible` gate before `--write`
+- [x] Add `scripts/run_autonomous_index_batch.py`
+- [x] Add scheduled `.github/workflows/index-autonomous-refresh.yml`
+
+### Phase 2 — Model tiers (complete)
+
+- [x] Pluggable adjudication provider (local sidecar / API) behind tier 2–4 caps
+- [x] Batch telemetry for adjudication rate and token spend
+- [x] Deterministic deepen for security/owners absent scoring (tier 1 expansion)
+
+### Phase 3 — Scale
+
+- [ ] Tranche-two queue once conveyor metrics are stable
+- [ ] Auto-deploy coherence smoke on landed batches
+- [ ] Deprecate artifact-only / draft-PR review workflows
+
+## Success metrics
+
+Optimize these, not raw merge count:
+
+- `verified_per_batch`
+- `autonomous_writeback_rate` (gate-passed / crawled)
+- `adjudication_rate` (target: <25% of repos)
+- `tokens_per_improved_record`
+- `gate_failure_rate` (should be low; spikes mean gate or importer bugs)
+- hosted lookup hit rate on high-traffic repositories
 
 ## Guardrails
 
-- Do not invent a second public truth model that diverges from local trust and
-  query semantics.
-- Do not couple the public API version directly to the repo release number.
-- Do not widen editor scope before the public surface and operator loop are
-  ready.
-- Do not treat bundle/workspace expansion as launch-critical scope.
-- Do not turn internal cleanup into a milestone unless it directly reduces
-  launch risk.
+- Do not weaken evidence or provenance standards to increase throughput.
+- Do not mint `reviewed` from automation; machine path promotes to `verified` or
+  leaves lower statuses explicit.
+- Do not enable synthesis-led onboarding.
+- Do not expand public search, mutation APIs, or editor scope ahead of conveyor
+  stability.
+- Keep public API `v0` contract-stable.
 
-## Release Decision
+## Related docs
 
-Use [`docs/v1-go-no-go.md`](docs/v1-go-no-go.md) as the release decision sheet
-for the final `1.0.0` go/no-go call.
+- [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md) — pipeline design
+- [`docs/growth-and-automation-plan.md`](./docs/growth-and-automation-plan.md) — workstreams (being superseded by this plan for operations)
+- [`index/tranche-one-targets.md`](./index/tranche-one-targets.md) — seeded queue
+- [`docs/public-export-workflow.md`](./docs/public-export-workflow.md) — export/deploy path
+
+---
+
+## v1.0 Launch Record
+
+The `v1.0` launch track is **complete**. This section is historical reference only.
+
+### What v1.0 meant
+
+dotrepo was ready for v1.0 when all of the following were true:
+
+1. Maintainers could install the CLI, LSP, and MCP surfaces without building from source.
+2. A repository could adopt the documented native flow and keep CI green with
+   `validate`, `query`, `trust`, `doctor`, and `generate --check`.
+3. Index operators could validate the index and cut deterministic public exports
+   from repeatable documented steps.
+4. Public consumers could inspect repository identity and trust through a stable,
+   read-only hosted surface with freshness metadata.
+5. Public promises, CI gates, and release process matched each other.
+
+### Shipped launch outcomes
+
+- Public read-only contract frozen (RFCs 0016–0019) with compatibility tests
+- Hosted surface live at [`https://dotrepo.org/`](https://dotrepo.org/)
+- Installable release artifacts for CLI, MCP, LSP, and VS Code shell
+- Explicit release gate in CI; `v1.0.0` tagged
+- One live accepted maintainer-claim example in the seed index
+
+Release decision record: [`docs/v1-go-no-go.md`](./docs/v1-go-no-go.md)
+
+### Deferred past v1.0 (still deferred)
+
+- Discovery-first search, ranking, and browse UX
+- Public mutation or self-serve submission APIs
+- Bundle mode and first-class workspace/relations
+- Richer editor authoring and managed-marker UX
+- Arbitrary prose round-tripping beyond managed-surface boundaries
