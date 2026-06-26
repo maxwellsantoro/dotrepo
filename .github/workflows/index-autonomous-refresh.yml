@@ -31,6 +31,7 @@ jobs:
     if: vars.INDEX_AUTOMATION_ENABLED != 'false'
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       INDEX_AUTOMATION_ENABLED: ${{ vars.INDEX_AUTOMATION_ENABLED || 'true' }}
     steps:
       - uses: actions/checkout@v6
@@ -48,12 +49,79 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
+      - name: Start adjudication sidecars
+        if: env.OPENROUTER_API_KEY != ''
+        shell: bash
+        env:
+          DOTREPO_ADJUDICATION_MODEL_CONFIG: ${{ vars.DOTREPO_ADJUDICATION_MODEL }}
+          DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL_CONFIG: ${{ vars.DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL }}
+          DOTREPO_ADJUDICATION_API_MODEL_CONFIG: ${{ vars.DOTREPO_ADJUDICATION_API_MODEL }}
+        run: |
+          wait_for_sidecar() {
+            local port="$1"
+            SIDECAR_PORT="$port" python3 - <<'PY'
+          import os
+          import time
+          import urllib.request
+
+          port = os.environ["SIDECAR_PORT"]
+          deadline = time.time() + 20
+          while time.time() < deadline:
+              try:
+                  with urllib.request.urlopen(f"http://127.0.0.1:{port}/health", timeout=2) as response:
+                      if response.status == 200:
+                          break
+              except Exception:
+                  time.sleep(0.25)
+          else:
+              raise SystemExit(f"adjudication sidecar did not become healthy on port {port}")
+          PY
+          }
+
+          start_sidecar() {
+            local name="$1"
+            local port="$2"
+            local model="$3"
+            if [ -z "$model" ]; then
+              return 0
+            fi
+            nohup python3 scripts/adjudication_openrouter_sidecar.py \
+              --port "$port" > "index-adjudication-${name}.log" 2>&1 &
+            echo "$!" > "index-adjudication-${name}.pid"
+            wait_for_sidecar "$port"
+          }
+
+          start_sidecar "primary" "8787" "$DOTREPO_ADJUDICATION_MODEL_CONFIG"
+          start_sidecar "second-opinion" "8788" "$DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL_CONFIG"
+          start_sidecar "api-escalation" "8789" "$DOTREPO_ADJUDICATION_API_MODEL_CONFIG"
+
+          {
+            if [ -n "$DOTREPO_ADJUDICATION_MODEL_CONFIG" ]; then
+              echo "DOTREPO_ADJUDICATION_URL=http://127.0.0.1:8787/adjudicate"
+              echo "DOTREPO_ADJUDICATION_PROVIDER=openrouter"
+              echo "DOTREPO_ADJUDICATION_MODEL=$DOTREPO_ADJUDICATION_MODEL_CONFIG"
+            fi
+            if [ -n "$DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL_CONFIG" ]; then
+              echo "DOTREPO_ADJUDICATION_SECOND_OPINION_URL=http://127.0.0.1:8788/adjudicate"
+              echo "DOTREPO_ADJUDICATION_SECOND_OPINION_PROVIDER=openrouter-second-opinion"
+              echo "DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL=$DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL_CONFIG"
+            fi
+            if [ -n "$DOTREPO_ADJUDICATION_API_MODEL_CONFIG" ]; then
+              echo "DOTREPO_ADJUDICATION_API_URL=http://127.0.0.1:8789/adjudicate"
+              echo "DOTREPO_ADJUDICATION_API_PROVIDER=openrouter-api-escalation"
+              echo "DOTREPO_ADJUDICATION_API_MODEL=$DOTREPO_ADJUDICATION_API_MODEL_CONFIG"
+            fi
+            echo "INDEX_MAX_ADJUDICATION_CALLS=${{ vars.INDEX_MAX_ADJUDICATION_CALLS || '2' }}"
+            echo "INDEX_MAX_BATCH_ADJUDICATION_CALLS=${{ vars.INDEX_MAX_BATCH_ADJUDICATION_CALLS || vars.INDEX_MAX_ADJUDICATION_CALLS || '4' }}"
+          } >> "$GITHUB_ENV"
       - name: Run autonomous refresh batch
         run: |
           python3 scripts/run_autonomous_index_batch.py \
             --batch-id "${{ github.event.inputs.batch_id || 'refresh-batch-01' }}" \
             --batch-size "${{ github.event.inputs.batch_size || '5' }}" \
             --limit "${{ github.event.inputs.limit || '20' }}" \
+            --adjudication-call-budget "${INDEX_MAX_BATCH_ADJUDICATION_CALLS:-0}" \
+            --discovery-limit "${{ vars.INDEX_DISCOVERY_LIMIT || github.event.inputs.batch_size || '5' }}" \
             --output-dir index-autonomous-batch \
             --skip-automation-enabled-check
       - name: Upload batch telemetry
@@ -64,6 +132,19 @@ jobs:
           path: index-autonomous-batch/
           if-no-files-found: warn
           retention-days: 14
+      - name: Evaluate autonomous telemetry gate
+        if: always()
+        shell: bash
+        run: |
+          if [ -f index/telemetry/autonomous-summary.json ]; then
+            python3 scripts/check_autonomous_telemetry_gate.py \
+              --summary index/telemetry/autonomous-summary.json \
+              --output-json index-autonomous-batch/autonomous-telemetry-gate.json \
+              --output-md index-autonomous-batch/autonomous-telemetry-gate.md \
+              --warn-only
+          else
+            echo "No retained telemetry summary yet; skipping telemetry gate"
+          fi
       - name: Commit and push index updates
         if: success()
         shell: bash
@@ -94,9 +175,53 @@ jobs:
           print(f"- written: {data['written']}")
           print(f"- skipped: {data['skipped']}")
           print(f"- failed: {data['failed']}")
+          print(f"- quality reprocess queued: {data.get('qualityReprocessQueued', 0)}")
+          print(f"- discovery queued: {data.get('discoveryQueued', 0)}")
           print(f"- adjudication calls: {data.get('adjudicationCalls', 0)}")
+          print(f"- adjudication budget: {data.get('adjudicationCallBudget', 0)}")
+          print(f"- adjudication budget exhausted: {data.get('adjudicationBudgetExhausted', False)}")
           print(f"- tokens used: {data.get('tokensUsed', 0)}")
           print(f"- adjudication rate: {data.get('adjudicationRate', 0.0):.2%}")
+          tiers = data.get("repositoriesByAdjudicationTier", {})
+          if tiers:
+              print("- repositories by adjudication tier:")
+              for tier, count in sorted(tiers.items()):
+                  print(f"  - {tier}: {count}")
+          summary_path = Path("index/telemetry/autonomous-summary.json")
+          if summary_path.is_file():
+              summary = json.loads(summary_path.read_text())
+              totals = summary.get("totals", {})
+              rates = summary.get("rates", {})
+              print()
+              print("## Retained Telemetry")
+              print(f"- retained runs: {summary.get('runCount', 0)}")
+              print(f"- total crawled: {totals.get('crawled', 0)}")
+              print(f"- total written: {totals.get('written', 0)}")
+              print(f"- total failed: {totals.get('failed', 0)}")
+              print(f"- total quality reprocess queued: {totals.get('qualityReprocessQueued', 0)}")
+              print(f"- total discovery queued: {totals.get('discoveryQueued', 0)}")
+              print(f"- aggregate adjudication rate: {rates.get('adjudicationRate', 0.0):.2%}")
+              print(f"- aggregate zero-model rate: {rates.get('zeroModelRate', 0.0):.2%}")
+              summary_tiers = summary.get("repositoriesByAdjudicationTier", {})
+              if summary_tiers:
+                  print("- aggregate repositories by adjudication tier:")
+                  for tier, count in sorted(summary_tiers.items()):
+                      print(f"  - {tier}: {count}")
+              fixture_candidates = summary.get("regressionFixtureCandidates", [])
+              if fixture_candidates:
+                  print("- recurring failure fixture candidates:")
+                  for item in fixture_candidates[:5]:
+                      print(f"  - {item.get('failureClass', 'unknown')}/{item.get('suggestedFixture', 'unknown')}: {item.get('count', 0)}")
+                  print("- fixture backlog: `index/telemetry/regression-fixture-candidates.md`")
+                  print("- fixture stubs: `index/telemetry/regression-fixture-stubs/`")
+              gate_path = Path("index-autonomous-batch/autonomous-telemetry-gate.json")
+              if gate_path.is_file():
+                  gate = json.loads(gate_path.read_text())
+                  print()
+                  print("## Autonomous Telemetry Gate")
+                  print(f"- result: {'pass' if gate.get('passed') else 'not yet'}")
+                  for item in gate.get("checks", []):
+                      print(f"- {item['label']}: {item['actual']} / {item['expected']} ({'pass' if item['passed'] else 'fail'})")
           PY
             else
               echo "- telemetry: unavailable"

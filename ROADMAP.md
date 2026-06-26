@@ -263,23 +263,26 @@ Exit criteria:
 
 Current operational gaps:
 
-- the scheduled workflow does not yet configure production model endpoints or
-  a nonzero adjudication budget
-- retained multi-run telemetry does not yet demonstrate stable cost,
+- scheduled operation now has budgeted primary, second-opinion, and stronger
+  remote adjudication sidecar paths, but repeated runs still need to prove the
+  tier mix stays within the intended cheap-primary/rare-tail shape
+- retained multi-run telemetry and a proof gate now exist, but repeated
+  scheduled runs still need to satisfy that gate to demonstrate stable cost,
   resolution, promotion, and regression rates
-- autonomous refresh is ahead of autonomous discovery and new-record writeback
-- recurring failures are not yet grouped automatically into parser, evidence,
-  ecosystem, provider, or infrastructure defect classes
+- autonomous refresh now reprocesses lower-confidence checked-in records and
+  newly discovered repositories through the same gate-passed writeback conveyor
+- recurring failures are grouped into operational defect classes and emitted as
+  regression fixture backlog artifacts with checked-in materialization stubs,
+  but ecosystem classification and runnable fixture completion are still
+  pending
 
 Current execution order:
 
-1. Retain and aggregate telemetry across repeated scheduled runs.
-2. Wire the lowest-cost adjudication provider into scheduled operation under a
-   small hard budget, then add second-opinion and remote escalation tiers.
-3. Reprocess lower-confidence records through the same conveyor and convert
-   recurring failures into deterministic fixes and regression fixtures.
-4. Connect candidate discovery to gate-passed direct writeback.
-5. Expand progressively toward the profile and coverage gate in Milestone 2.
+1. Exercise retained telemetry across repeated scheduled runs and use it to
+   identify cost, quality, and regression trends.
+2. Convert recurring failure stubs into deterministic fixes and runnable
+   checked-in regression fixtures.
+3. Expand progressively toward the profile and coverage gate in Milestone 2.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly
 publish gate-passed records, improve quality without a human queue, and expose

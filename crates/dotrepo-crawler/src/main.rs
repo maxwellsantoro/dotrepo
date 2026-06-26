@@ -189,6 +189,7 @@ struct CrawlCommandReport {
     wrote: bool,
     manifest_path: PathBuf,
     evidence_path: Option<PathBuf>,
+    record_status: RecordStatus,
     state_path: Option<PathBuf>,
     escalation: ImportEscalationReport,
     diagnostics: Vec<CrawlDiagnostic>,
@@ -412,6 +413,13 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
         wrote,
         manifest_path: report.writeback_plan.factual.manifest_path.clone(),
         evidence_path: report.writeback_plan.factual.evidence_path.clone(),
+        record_status: report
+            .writeback_plan
+            .factual
+            .import_plan
+            .manifest
+            .record
+            .status,
         state_path,
         escalation: report.escalation,
         diagnostics: report.diagnostics,

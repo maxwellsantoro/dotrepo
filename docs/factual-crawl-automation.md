@@ -258,6 +258,33 @@ that every run enforces model-call and cost ceilings, records tier and usage,
 and stops escalation when a budget is exhausted. Most repositories should use
 no model at all.
 
+The scheduled autonomous refresh workflow starts OpenRouter-backed adjudication
+sidecars only when `OPENROUTER_API_KEY` and tier-specific model variables are
+configured. `DOTREPO_ADJUDICATION_MODEL` enables the primary tier,
+`DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL` enables the independent
+second-opinion tier, and `DOTREPO_ADJUDICATION_API_MODEL` enables the stronger
+remote escalation tier. The batch runner enforces a batch-wide hard ceiling
+with `INDEX_MAX_BATCH_ADJUDICATION_CALLS` (or `--adjudication-call-budget`) and
+caps each repository's `INDEX_MAX_ADJUDICATION_CALLS` to the remaining budget.
+Once the budget is exhausted, provider URLs are removed for the rest of the
+batch so deterministic refresh and writeback can continue without additional
+model calls.
+
+Autonomous refresh batches prefer head-aware scheduled refreshes, then fill any
+open batch slots with lower-confidence checked-in records from the quality
+queue. This sends `draft`, `inferred`, `imported`, low/medium-confidence, or
+missing build/test/security records back through the same crawl, verification,
+promotion, writeback, and telemetry conveyor instead of creating a separate
+manual review path. The selected-batch metadata records any
+`qualityReprocessSupplement` entries that were added.
+
+If batch slots remain after refresh and quality reprocessing, discovery can add
+new repositories directly to the same target list. Newly discovered candidates
+are skipped when a `record.toml` already exists, and any accepted candidates are
+recorded in selected-batch metadata as a `discoverySupplement`. They are then
+crawled with `--write`, so only records passing the autonomous writeback gate
+land in the index.
+
 ## Publish semantics
 
 ### Auto-promote to verified overlay
@@ -344,6 +371,32 @@ These metrics should be tracked as the pipeline operates at scale:
 - **Promotion rate by refresh batch**: what fraction of crawled records are promoted
 - **Adjudication invocation rate**: how often the model path is needed
 - **Zero-model-use fraction**: how many verified records were created without any model involvement
+
+Scheduled autonomous batches retain these run metrics in
+`index/telemetry/autonomous-runs.ndjson` and publish an aggregate summary in
+`index/telemetry/autonomous-summary.json`. The retained summary tracks total
+crawls, writes, failures, quality-reprocess queue entries, discovery queue
+entries, adjudication calls, token use, zero-model rate, promotion rate,
+repositories by adjudication tier, grouped failure classes, and repeated
+failure fingerprints with suggested regression fixture slugs. Repeated
+scheduled runs can demonstrate cost, resolution, and regression trends instead
+of only exposing a short-lived artifact for the latest run, and recurring
+failures can be converted into deterministic parser or fixture work. The runner
+also writes the recurring failure backlog to
+`index/telemetry/regression-fixture-candidates.json` and
+`index/telemetry/regression-fixture-candidates.md` for review and fixture
+creation. It also creates one checked-in stub directory per recurring failure
+under `index/telemetry/regression-fixture-stubs/`; each stub contains
+machine-readable metadata and a materialization checklist so the failure can be
+turned into a real source fixture and deterministic fix.
+
+`scripts/check_autonomous_telemetry_gate.py` evaluates the retained summary
+against the Milestone 1 proof thresholds: repeated runs, processed repository
+volume, direct writeback activity, failure rate, model adjudication rate,
+strong remote escalation rate, and zero-model deterministic rate. Scheduled
+runs publish the gate in warn-only mode while evidence is accumulating; a
+strict run without `--warn-only` is the release-quality proof that the
+autonomous factory is operating inside its stated bounds.
 
 These surfaces show whether optional synthesis would address a real bottleneck
 or duplicate work the factual pipeline already handles.
