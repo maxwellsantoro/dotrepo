@@ -90,12 +90,12 @@ The workflow reads those values directly when it runs `wrangler deploy`.
 
 The workflow in `.github/workflows/public-cloudflare.yml` now:
 
-- builds the reviewed export snapshot
+- builds the validated export snapshot
 - stages that snapshot into `cloudflare/hosted-query/public-snapshot`
 - runs Worker tests
 - deploys the Worker with Wrangler
 - captures the emitted deployed URL
-- smoke-tests the live deployed Worker against the same reviewed export
+- smoke-tests the live deployed Worker against the same validated export
 
 The live smoke checks:
 
@@ -105,9 +105,9 @@ The live smoke checks:
 That keeps local review, pre-deploy smoke, and post-deploy smoke aligned on one
 snapshot family.
 
-## Current published shape
+## Published shape
 
-Right now the Worker config publishes to `workers.dev`.
+The Worker config publishes to `workers.dev`.
 
 It also now declares `dotrepo.org` as the production custom domain in
 `cloudflare/hosted-query/wrangler.jsonc`.
@@ -157,5 +157,5 @@ python3 scripts/check_release_gate.py --skip-vsix
 
 - Do not put GitHub Actions secrets in `.dev.vars`.
 - Do not rely on a root `.env` file for GitHub workflow deploy auth.
-- Do not edit `public/` by hand before deploy; stage from a reviewed export
+- Do not edit `public/` by hand before deploy; stage from a validated export
   snapshot instead.

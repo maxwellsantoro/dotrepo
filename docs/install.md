@@ -22,10 +22,10 @@ Download the latest matching release bundle for your platform from the GitHub
 release assets for the current tag, then extract it and put the binaries from
 `bin/` on your `PATH`.
 
-The current bundles are named like:
+Release bundles are named like:
 
-- `dotrepo-1.0.0-x86_64-unknown-linux-gnu.tar.gz`
-- `dotrepo-1.0.0-aarch64-apple-darwin.tar.gz`
+- `dotrepo-<version>-x86_64-unknown-linux-gnu.tar.gz`
+- `dotrepo-<version>-aarch64-apple-darwin.tar.gz`
 
 Each bundle also includes a matching `.sha256` file.
 

@@ -4,19 +4,25 @@
 [![Latest Release](https://img.shields.io/github/v/release/maxwellsantoro/dotrepo)](https://github.com/maxwellsantoro/dotrepo/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e.svg)](LICENSE)
 
-**dotrepo** is an open metadata protocol for software repositories.
-It gives maintainers, users, tools, and coding agents a trust-aware source of
-truth for essential repository metadata.
+**dotrepo** is an open metadata protocol and shared semantic cache for software
+repositories. It makes repository understanding reusable instead of forcing
+every human and agent to fetch, parse, and infer the same basic facts again.
 
 It packages that into three aligned surfaces:
-- **maintainers** get a cleaner, more reliable way to describe and maintain repository metadata
-- **users** get better discovery and a more consistent understanding of projects
-- **agents and tools** get a structured way to query repository information instead of inferring it from scattered conventions and prose
+- **maintainers** get one structured source of truth and tools that keep supported repository surfaces from drifting
+- **users** get consistent, evidence-linked project orientation and an increasingly useful research index
+- **agents and tools** get compact, trust-aware repository facts before resorting to cloning or scraping
 
-The goal is not to replace the character of projects or flatten their
-documentation into machine sludge. The goal is to create a shared,
-trustworthy metadata layer that makes repositories easier to understand and
-work with, while respecting the source materials they come from.
+Repositories that have not adopted dotrepo can still receive autonomously
+generated overlays. The pipeline uses deterministic parsers first, escalates
+only unresolved fields through progressively stronger model tiers, validates
+all output against evidence, and publishes uncertainty instead of inventing
+certainty. Maintainers can later publish a native `.repo` and become the
+canonical authority.
+
+The goal is not to replace project documentation or character. It is to pay the
+cost of basic repository understanding when a project changes, then reuse that
+understanding across future tools, users, and research tasks.
 
 Project site and hosted public surface:
 [dotrepo.org](https://dotrepo.org/)
@@ -92,19 +98,26 @@ dotrepo --root <repo> generate --check
 For the full maintainer flow, see
 [`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md).
 
-If you want to contribute to the protocol, toolchain, or seed index, start with
+If you want to contribute to the protocol, toolchain, or public index, start with
 [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## What dotrepo is
 
-At day one, dotrepo has three inseparable parts:
+dotrepo has three inseparable parts:
 
 1. **A protocol**
    A versioned `.repo` schema for essential repository metadata, provenance, trust, and synchronization hints.
 2. **A reference toolchain**
    A Rust CLI, stdio MCP server, and related integrations for importing, validating, querying, syncing, and generating compatible repository surfaces.
 3. **An index**
-   A public, Git-backed collection of canonical records and overlays that makes public repositories mechanically visible whether or not maintainers have adopted dotrepo yet.
+   A public, Git-backed collection of evidence-backed overlays, trust context,
+   and maintainer handoffs that makes repositories mechanically visible before
+   native adoption.
+
+The current index is generated and refreshed through an autonomous conveyor.
+Routine generated records do not require per-record human review. Humans set
+policy, improve gates and parsers, monitor aggregate health, and handle
+maintainer authority claims.
 
 ## Why it matters for agents
 
@@ -176,7 +189,10 @@ That is annoying for maintainers, confusing for users, and expensive for coding 
 - Where are the real docs?
 - What policies or constraints apply?
 
-A structured `.repo` record does not replace code or good documentation. It provides a stable layer of essential facts that humans can maintain and machines can query directly.
+A structured `.repo` record does not replace code or good documentation. It
+provides a stable layer of essential facts that humans can maintain and machines
+can query directly. The public index extends that stable shape to repositories
+that have not adopted the protocol yet.
 
 ## Core principles
 
@@ -184,6 +200,8 @@ A structured `.repo` record does not replace code or good documentation. It prov
 - **Trust matters**: all records should communicate provenance and trust level clearly.
 - **Respect the source**: overlays must distinguish declared facts, imported facts, and inferred facts.
 - **Useful before adoption**: the index and overlay model make dotrepo valuable even for repos that do not use it natively.
+- **Deterministic first**: parsers and evidence checks do the common work; model intelligence escalates only when needed.
+- **Honest automation**: generated overlays publish confidence, provenance, conflicts, and explicit unknowns without a routine human review queue.
 - **Practical, not doctrinaire**: dotrepo should work with existing files and conventions, not demand an all-or-nothing migration.
 - **Machine-readable, human-legible**: the protocol should help agents and tools without making projects feel sterile.
 
@@ -200,8 +218,11 @@ A structured `.repo` record does not replace code or good documentation. It prov
 
 ## Versioning note
 
-The project release is `1.0.0`, the canonical in-repo schema is currently
-`dotrepo/v0.1`, and the hosted public JSON API is currently `v0`.
+The project release, manifest schema, claim schema, MCP protocol, and hosted API
+have independent version lines. Read tool versions from GitHub releases,
+manifest versions from the manifest itself, and the hosted API version from
+[`meta.json`](https://dotrepo.org/v0/meta.json) instead of copying them into
+additional status documents.
 
 Those are separate version lines on purpose:
 - the release version tracks the shipped reference toolchain
@@ -214,6 +235,9 @@ Those are separate version lines on purpose:
 - a thin VS Code extension shell under [`editors/vscode/`](editors/vscode/)
 - a thin import path for bootstrapping records from `README.md`, `CODEOWNERS`, and `SECURITY.md`
 - a thin stdio MCP server exposing trust-aware validate/query/trust/generate-check/import tools
+- an autonomous crawler with deterministic verification, field scoring,
+  progressive adjudication providers, promotion, refresh planning, and batch
+  telemetry
 - updated RFCs that reflect the protocol + toolchain + index model
 - example native and overlay records
 - a seeded `index/` tree with real overlay layout and validation rules
@@ -227,12 +251,16 @@ This repo ships the current dotrepo protocol and reference toolchain surface.
 The crates implement import, validation, querying, generated-surface checks,
 index validation, claims, public export, and an MCP server.
 
-What remains intentionally out of scope for the current release is broader
-post-`1.0` product surface such as search and ranking UX, mutation APIs, bundle
-mode, first-class workspace and relations support, richer editor automation,
-and arbitrary prose round-tripping.
+The current public site includes exact lookup and a searchable repository
+catalog. What remains intentionally deferred is structured discovery and
+ranking, comparison, public mutation APIs, bundle mode, first-class workspace
+semantics, broad editor automation, and arbitrary prose round-tripping.
 
 ## Read next
+
+For strategy and active execution:
+- [`ROADMAP.md`](ROADMAP.md)
+- [`docs/README.md`](docs/README.md)
 
 If you are adopting dotrepo in a repository:
 - [`docs/install.md`](docs/install.md)
@@ -240,14 +268,12 @@ If you are adopting dotrepo in a repository:
 - [`docs/sync-boundaries.md`](docs/sync-boundaries.md)
 
 If you are consuming the hosted public surface or building agent tooling:
-- [`docs/public-release-note.md`](docs/public-release-note.md)
 - [`docs/public-export-examples.md`](docs/public-export-examples.md)
 - [`docs/public-surface.md`](docs/public-surface.md)
 - [`docs/ai-tool-interviews.md`](docs/ai-tool-interviews.md)
 - [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md)
 
 If you want the protocol and trust model:
-- [`docs/current-status.md`](docs/current-status.md)
 - [`docs/trust-model.md`](docs/trust-model.md)
 - [`rfcs/0001-protocol-and-ecosystem.md`](rfcs/0001-protocol-and-ecosystem.md)
 - [`rfcs/0004-index-and-trust-model.md`](rfcs/0004-index-and-trust-model.md)

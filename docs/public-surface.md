@@ -2,13 +2,15 @@
 
 ## What it is
 
-The dotrepo public surface is a hosted read-only JSON tree plus a thin query
-contract. It provides repository identity, trust context, and claim-aware
-selection to humans and agents without requiring local tooling or index access.
+The dotrepo public surface is a human-readable website backed by a hosted,
+read-only JSON tree and thin query contract. It provides repository identity,
+trust context, and claim-aware selection without requiring local tooling or
+index access.
 
 The public surface consists of:
 - the deployed `v0/` JSON tree and same-origin query route at
   `https://dotrepo.org/`
+- the homepage, documentation, writing, and searchable repository catalog
 - the local and release-reviewed same-origin hosted-query runtime
   `dotrepo-public-query`
 - export-time `query-input/` artifacts that capture repo-scoped hosted-query
@@ -33,13 +35,14 @@ The export-first hosted surface is the right default because it:
 
 ### For humans
 
+- a searchable repository catalog at `https://dotrepo.org/repositories/`
+- product, protocol, and trust documentation on the same origin
 - hosted repository summary and trust responses at stable URLs
 - a deployed same-origin query runtime on the public origin
 - the CI artifact `public-export-v0` for offline inspection
 - the CI artifact `public-export-v0-bundle` for versioned review snapshots
 - the operator loop in [`docs/public-export-workflow.md`](./public-export-workflow.md),
   with `scripts/check_release_gate.py` as the canonical release review entrypoint
-- the release note in [`docs/public-release-note.md`](./public-release-note.md)
 - the accepted `v0` public contracts in RFCs 0016 through 0019
 - the `v0` compatibility note in
   [`docs/public-api-compatibility.md`](./public-api-compatibility.md)
@@ -70,7 +73,7 @@ The hosted public surface provides:
   responses from the same snapshot family during deployment, local review, and
   release smoke checks
 - one repo-scoped query-input artifact family that backs the live Worker route
-  from the same reviewed snapshot
+  from the same validated snapshot
 - one Worker route implementation that preserves the current error-vocabulary
   semantics on the live public origin
 
@@ -88,7 +91,8 @@ contracts.
 ## What is not yet in scope
 
 The public surface does not yet include:
-- search or browse UX
+- structured research discovery, ranking, comparison, or batch-profile APIs
+- live mutation or submission APIs
 - public SLA expectations
 
 ## How to use it
@@ -103,27 +107,20 @@ python3 scripts/check_release_gate.py --output-root release-gate
 Then, if needed:
 
 1. Review the deterministic fixture pack if the contract changed.
-2. Review the CI artifact if the current seed index output changed.
+2. Review the CI artifact if the current index output changed.
 3. Regenerate the tree locally when you need a fresh export from `index/`.
 
 Start with:
 - [`docs/public-export-workflow.md`](./public-export-workflow.md)
-- [`docs/hosted-query-serving.md`](./hosted-query-serving.md)
-- [`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md)
 - [`rfcs/0017-public-repository-summary-response.md`](../rfcs/0017-public-repository-summary-response.md)
 - [`rfcs/0018-static-public-serving-and-freshness.md`](../rfcs/0018-static-public-serving-and-freshness.md)
 - [`rfcs/0019-public-trust-and-query-wrappers.md`](../rfcs/0019-public-trust-and-query-wrappers.md)
 
 ## Next steps
 
-The thin hosted query runtime now exists locally as `dotrepo-public-query`, and
-it can serve the exported `public/` tree on the same origin during local
-review. The export also emits repo-scoped `query-input/` artifacts that now
-back the deployed Worker route on `dotrepo.org`, while `workers.dev` remains a
-staging origin. The next work is hardening freshness and caching for the
-combined hosted deployment and
-building the broader project homepage on that same canonical origin. For the freshness definitions that apply to those responses, see
-[`docs/public-freshness.md`](./public-freshness.md). For the first hosted query
-runtime shape, see [`docs/hosted-query-serving.md`](./hosted-query-serving.md).
-For the selected Cloudflare deployment plan, see
-[`docs/cloudflare-hosted-query.md`](./cloudflare-hosted-query.md).
+The next public-surface work is hardening freshness and caching, adding compact
+research profiles and batch access, and eventually building discovery and
+comparison on top of the trusted index. See [`ROADMAP.md`](../ROADMAP.md) for the
+active sequence. For the freshness definitions that apply to responses, see
+[`docs/public-freshness.md`](./public-freshness.md). For deployment operations,
+see [`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).

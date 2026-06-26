@@ -6,8 +6,8 @@ This is a historical closeout review of the proof-of-adoption board, written on
 March 9, 2026. It is preserved as a progress snapshot, not as current roadmap
 or status guidance.
 
-For the active project status and v1.0 launch plan, use
-[`docs/current-status.md`](../current-status.md) and [`PLAN.md`](../../PLAN.md).
+For current project guidance, use [`README.md`](../../README.md) and
+[`ROADMAP.md`](../../ROADMAP.md).
 
 ## Did import quality improve?
 

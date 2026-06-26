@@ -20,6 +20,10 @@ ARTICLES = [
   <p><a href="https://maxwellsantoro.com/writing/i-asked-9-ai-models-what-they-want-from-a-repository-metadata-protocol/">Read the sister article</a></p>
 </div>
 
+<div class="article-callout">
+  <p><strong>Update:</strong> This article preserves the original interview snapshot. Remote MCP lookup has since shipped, and autonomous evidence gates have replaced routine human review for generated overlays. See the <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md">roadmap</a> for current direction and execution.</p>
+</div>
+
 <h2>The Experiment</h2>
 <p>dotrepo is an open metadata protocol for software repositories. It is designed for three audiences: maintainers, human users, and AI agents. Since AI agents are a first-class consumer of the protocol, it made sense to ask them directly what they want from it.</p>
 <p>I sent the same 10-question prompt to 9 different AI models across 8 providers, running 12 sessions in total — ChatGPT, Claude, and Grok each twice (a logged-in session and a fresh one) to check for consistency. No priming, no pep talk. The goal was not affirmation. The goal was pressure testing: what feels obviously useful, what is missing, what looks risky, and what would actually make an agent check dotrepo first.</p>
@@ -139,7 +143,7 @@ ARTICLES = [
 </ul>
 
 <h2>Where This Feeds Back Into dotrepo</h2>
-<p>The repo-side synthesis and backlog changes live in <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a> and the post-v1 backlog. The public site now carries this write-up because it is not just internal planning context. It is one of the clearest pieces of product evidence behind the current roadmap.</p>
+<p>The current repo-side synthesis lives in <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>, with active direction in the root roadmap. The public site carries this write-up because it remains useful product evidence, even as the implementation moves beyond its March snapshot.</p>
 <p>If you are building an AI coding tool and want to integrate dotrepo, or if you maintain a popular open-source project and want to correct or replace your overlay record, start at <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a>.</p>
 """,
     }

@@ -11,14 +11,17 @@ from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_BLOB_PREFIX = "https://github.com/maxwellsantoro/dotrepo/blob/main/"
+
 DOCS_SECTIONS = [
     {
         "title": "Start here",
         "items": [
             {
-                "label": "Current status",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/current-status.md",
-                "summary": "What is live today, what is still intentionally missing, and the highest-leverage next steps.",
+                "label": "Project overview",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/README.md",
+                "summary": "What dotrepo is, what ships, and the shortest paths for maintainers, contributors, and consumers.",
                 "kind": "Repo doc",
             },
             {
@@ -46,8 +49,8 @@ DOCS_SECTIONS = [
             },
             {
                 "label": "Roadmap",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/roadmap.md",
-                "summary": "What shipped in v1, what is deliberately deferred, and why scope restraint is part of the product.",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md",
+                "summary": "The mission, operating principles, product milestones, and path from protocol to shared research infrastructure.",
                 "kind": "Repo doc",
             },
             {
@@ -70,7 +73,7 @@ DOCS_SECTIONS = [
             {
                 "label": "Repository inventory",
                 "href": "/v0/repos/index.json",
-                "summary": "The live reviewed repository set with summary, trust, and query entrypoints.",
+                "summary": "The live indexed repository set with summary, trust, and query entrypoints.",
                 "kind": "On-site",
             },
             {
@@ -82,18 +85,18 @@ DOCS_SECTIONS = [
         ],
     },
     {
-        "title": "Index growth and operator loop",
+        "title": "Autonomous index",
         "items": [
             {
-                "label": "Seed index",
+                "label": "Public index",
                 "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/index/README.md",
-                "summary": "Seed-index rules, evidence expectations, and the current reference overlays.",
+                "summary": "Index rules, evidence expectations, autonomous publication, and maintainer handoff.",
                 "kind": "Repo doc",
             },
             {
-                "label": "Growth and automation plan",
-                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/growth-and-automation-plan.md",
-                "summary": "How the index moved beyond its first 50-repository tranche and how reviewed growth continues.",
+                "label": "Crawler and escalation design",
+                "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/factual-crawl-automation.md",
+                "summary": "The deterministic-first pipeline, bounded model escalation, publication gates, and trust semantics.",
                 "kind": "Repo doc",
             },
             {
@@ -105,6 +108,20 @@ DOCS_SECTIONS = [
         ],
     },
 ]
+
+
+def validate_first_party_document_links() -> None:
+    missing = []
+    for section in DOCS_SECTIONS:
+        for item in section["items"]:
+            href = item["href"]
+            if href.startswith(REPO_BLOB_PREFIX):
+                path = REPO_ROOT / href.removeprefix(REPO_BLOB_PREFIX)
+                if not path.is_file():
+                    missing.append(path)
+    if missing:
+        paths = ", ".join(str(path) for path in missing)
+        raise ValueError(f"missing first-party documentation links: {paths}")
 
 
 def parse_args() -> argparse.Namespace:
@@ -170,7 +187,7 @@ def repository_card_title(entry: dict, identity: dict) -> str:
 
 
 def repository_card_description(entry: dict) -> str:
-    fallback = "Repository metadata exported from the reviewed dotrepo index."
+    fallback = "Repository metadata exported from the validated dotrepo index."
     candidate = str(entry.get("description") or "").strip()
     if not candidate or is_low_signal_description(candidate):
         return fallback
@@ -249,7 +266,6 @@ def load_index_progress(index_root: Path) -> dict:
         raise SystemExit(f"missing required index root: {repo_root}")
 
     language_counts: Counter[str] = Counter()
-    indexed_repo_count = 0
     reviewed_or_better_count = 0
     imported_or_inferred_count = 0
     for record_path in sorted(repo_root.glob("*/*/*/record.toml")):
@@ -260,7 +276,6 @@ def load_index_progress(index_root: Path) -> dict:
         if not isinstance(languages, list):
             languages = []
         language_counts[normalize_language_family(languages)] += 1
-        indexed_repo_count += 1
         status = record.get("status")
         if status in {"reviewed", "verified", "canonical"}:
             reviewed_or_better_count += 1
@@ -274,8 +289,6 @@ def load_index_progress(index_root: Path) -> dict:
         if claim.get("state") == "accepted":
             accepted_claim_count += 1
 
-    tranche_target = 50
-    tranche_overage = max(0, indexed_repo_count - tranche_target)
     family_order = ["Rust", "TypeScript/JS", "Python", "Go", "Other"]
     language_mix = " · ".join(
         f"{family} {language_counts[family]}" for family in family_order if language_counts[family]
@@ -284,12 +297,8 @@ def load_index_progress(index_root: Path) -> dict:
         language_mix = "No indexed records yet."
 
     return {
-        "indexedRepoCount": indexed_repo_count,
         "reviewedOrBetterCount": reviewed_or_better_count,
         "importedOrInferredCount": imported_or_inferred_count,
-        "trancheTarget": tranche_target,
-        "trancheComplete": indexed_repo_count >= tranche_target,
-        "trancheOverage": tranche_overage,
         "languageMix": language_mix,
         "acceptedClaimCount": accepted_claim_count,
     }
@@ -737,7 +746,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>Repositories · dotrepo</title>
-  <meta name="description" content="Browse and search repositories in the current reviewed dotrepo public export.">
+  <meta name="description" content="Browse and search repositories in the current validated dotrepo public export.">
   <style>
     :root {{
       color-scheme: light;
@@ -929,7 +938,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
     <section class="panel hero">
       <p class="eyebrow">Public inventory</p>
       <h1>Find a repository.</h1>
-      <p>Search the current reviewed export by project, owner, host, or description, then open its summary, trust report, or query response.</p>
+      <p>Search the current validated export by project, owner, host, or description, then open its summary, trust report, or query response.</p>
     </section>
     <section class="panel catalog">
       <div class="catalog-tools">
@@ -1718,6 +1727,7 @@ def render_article_page(article: dict, base_path: str) -> str:
 
 def main() -> int:
     args = parse_args()
+    validate_first_party_document_links()
     input_dir = Path(args.input_dir)
     index_root = Path(args.index_root)
     meta = load_json(input_dir / "v0" / "meta.json")
@@ -1734,22 +1744,13 @@ def main() -> int:
     first_query, query_example = build_query_example(input_dir, inventory)
     featured_trust = build_featured_trust_example(input_dir, inventory)
     homepage_snapshot_state = build_homepage_snapshot_state(meta, inventory)
-    indexed_repo_count = progress["indexedRepoCount"]
     reviewed_or_better_count = progress["reviewedOrBetterCount"]
     imported_or_inferred_count = progress["importedOrInferredCount"]
-    tranche_target = progress["trancheTarget"]
-    tranche_complete = progress["trancheComplete"]
-    tranche_overage = progress["trancheOverage"]
     language_mix = str(progress["languageMix"])
     accepted_claim_count = progress["acceptedClaimCount"]
     accepted_claim_label = (
         "accepted claim example" if accepted_claim_count == 1 else "accepted claim examples"
     )
-    tranche_heading = "First tranche complete" if tranche_complete else "First tranche in progress"
-    tranche_detail = f"{indexed_repo_count} indexed against the initial target of {tranche_target}"
-    if tranche_overage:
-        tranche_detail += f"; {tranche_overage} beyond target"
-
     stale_line = (
         f"<span>{html.escape(format_timestamp_for_humans(str(stale_after)))}</span>"
         if stale_after
@@ -1763,7 +1764,7 @@ def main() -> int:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>dotrepo</title>
-  <meta name="description" content="Trust-aware metadata for software repositories. dotrepo serves a live public JSON surface and query API for humans, tools, and agents.">
+  <meta name="description" content="Reusable, trust-aware repository understanding for humans, tools, and agents.">
   <style>
     :root {{
       color-scheme: light;
@@ -2271,7 +2272,7 @@ def main() -> int:
     <section class="hero">
       <div class="panel hero__copy">
         <p class="eyebrow">Live public surface</p>
-        <h1>Trust-aware metadata for software repositories.</h1>
+        <h1>Repository understanding, made reusable.</h1>
         <p class="hero__lede">
           dotrepo is a trust contract for repository metadata. The important
           part is not that a <code>.repo</code> file exists. The important part
@@ -2291,15 +2292,11 @@ def main() -> int:
         <div class="stat-grid">
           <div class="stat">
             <strong>{html.escape(str(repository_count))} repositories</strong>
-            <span>Published in the current reviewed export.</span>
+            <span>Published in the current validated export.</span>
           </div>
           <div class="stat">
-            <strong>{html.escape(str(reviewed_or_better_count))} reviewed or better</strong>
+            <strong>{html.escape(str(reviewed_or_better_count))} reviewed or verified</strong>
             <span>{html.escape(str(imported_or_inferred_count))} records remain imported or inferred.</span>
-          </div>
-          <div class="stat">
-            <strong>{tranche_heading}</strong>
-            <span>{html.escape(tranche_detail)}.</span>
           </div>
           <div class="stat">
             <strong>{html.escape(language_mix)}</strong>
@@ -2404,15 +2401,15 @@ def main() -> int:
       <div class="three-up">
         <article class="feature">
           <h3>Product and status</h3>
-          <p>Start with the current-status, install, and maintainer-path docs before diving into RFC history or operator detail.</p>
+          <p>Start with the project overview, install guide, and maintainer path before diving into RFC history or operator detail.</p>
         </article>
         <article class="feature">
           <h3>Protocol and trust</h3>
-          <p>The trust model, public surface architecture, and roadmap docs explain the real differentiator: provenance, precedence, and conflict surfacing.</p>
+          <p>The trust model, public surface architecture, and roadmap explain how reusable facts remain honest: provenance, precedence, freshness, and visible conflict.</p>
         </article>
         <article class="feature">
-          <h3>Growth and operator loop</h3>
-          <p>The seed index, tranche targets, and maintainer-claim review docs show how the proof surface becomes a useful service instead of an isolated demo.</p>
+          <h3>Autonomous index</h3>
+          <p>The roadmap, index rules, and maintainer-claim docs show how evidence-backed overlays scale without confusing generated facts with maintainer authority.</p>
         </article>
       </div>
       <p class="section__note">
@@ -2424,22 +2421,21 @@ def main() -> int:
       <h2>Interview-backed priorities</h2>
       <p class="section__intro">
         A 9-model, 12-session interview round on dotrepo's current shape converged on three
-        next steps: grow the index until checking it is cheap, automate the
-        review and refresh cadence around it, and keep the public surface narrow
-        while lookup and coverage improve.
+        priorities: grow coverage until checking dotrepo is the cheap default,
+        preserve trust and freshness, and keep the core contract focused.
       </p>
       <div class="three-up">
         <article class="feature">
-          <h3>Seed the index</h3>
-          <p>Near-term usefulness comes from a broader reviewed overlay set, not another round of protocol ornamentation. The next tranche should span Rust, TypeScript, Python, and Go.</p>
+          <h3>Broaden coverage</h3>
+          <p>Remote lookup has shipped. The next bar is broader ecosystem coverage with measurable field quality.</p>
         </article>
         <article class="feature">
           <h3>Automate the conveyor</h3>
-          <p>Candidate seeding and head-aware refresh planning now exist as scheduled review workflows. The next gain is turning those reports into small human-reviewed PR batches.</p>
+          <p>Deterministic parsers do the common work, unresolved fields escalate through bounded model tiers, and machine gates publish or abstain without a routine human queue.</p>
         </article>
         <article class="feature">
           <h3>Keep it small</h3>
-          <p>The trust model, freshness semantics, hosted lookup, and live query route are the differentiators. Search, mutation, and heavier editor product work should stay subordinate until the data is much broader.</p>
+          <p>The trust model, freshness semantics, hosted lookup, and compact schema remain the differentiators. Discovery should be built on profile quality, not used to disguise its absence.</p>
         </article>
       </div>
       <p class="section__note">
@@ -2466,7 +2462,7 @@ def main() -> int:
       <div class="api-grid">
         <article class="api-card">
           <h3>Stable entry points</h3>
-          <p>The public surface is export-first. Summary, trust, inventory, freshness, and query responses all come from the same reviewed snapshot family.</p>
+          <p>The public surface is export-first. Summary, trust, inventory, freshness, and query responses all come from the same validated snapshot family.</p>
           <div class="endpoint-list">
             <div class="endpoint">
               <code>{html.escape(site_href(base_path, '/v0/meta.json'))}</code>

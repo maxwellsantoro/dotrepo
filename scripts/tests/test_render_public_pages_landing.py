@@ -49,6 +49,9 @@ def inventory_entry(repo: str) -> dict:
 
 
 class PublicPageRendererTests(unittest.TestCase):
+    def test_first_party_document_links_exist(self) -> None:
+        public_pages.validate_first_party_document_links()
+
     def test_index_progress_distinguishes_status_from_presence(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             index_root = Path(temp_dir) / "index"
@@ -59,11 +62,8 @@ class PublicPageRendererTests(unittest.TestCase):
 
             progress = public_pages.load_index_progress(index_root)
 
-        self.assertEqual(progress["indexedRepoCount"], 4)
         self.assertEqual(progress["reviewedOrBetterCount"], 2)
         self.assertEqual(progress["importedOrInferredCount"], 2)
-        self.assertFalse(progress["trancheComplete"])
-        self.assertEqual(progress["trancheOverage"], 0)
 
     def test_homepage_repository_cards_can_be_bounded(self) -> None:
         inventory = {

@@ -27,6 +27,8 @@ For the canonical freshness semantics used by these outputs, see
 - `public/v0/repos/index.json` exists and `repositoryCount` matches the bundle
 - inventory links honor the hosted `--base-path`
 - `public/index.html` and `.nojekyll` exist for the hosted static entry
+- `public/repositories/index.html` exposes the generated catalog
+- `public/docs/` and `public/writing/` contain their expected entry pages
 - representative repository `index.json` and `trust.json` files open cleanly
 - representative `query-input/<host>/<owner>/<repo>.json` files exist for the
   same repositories
@@ -60,13 +62,12 @@ For the canonical freshness semantics used by these outputs, see
 - the release gate smoke tests the Cloudflare Worker route against that same
   exported public tree
 - the Cloudflare deploy workflow builds and deploys the canonical public origin
-  from the reviewed export snapshot when enabled with repository vars/secrets
+  from the validated export snapshot when enabled with repository vars/secrets
 - the `release-artifacts` workflow publishes tagged `dotrepo`,
   `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp` binary bundles plus
   a VSIX
-- the release note is current
 - the usage examples still match the exported tree
 
 ## Non-goals check
 
-- no search/browse UX promise was added implicitly
+- no discovery, ranking, mutation, or SLA contract was added implicitly

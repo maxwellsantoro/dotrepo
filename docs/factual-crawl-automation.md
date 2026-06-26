@@ -1,13 +1,12 @@
 # Factual Crawl Automation
 
-This document describes how the crawler's factual extraction pipeline should
-scale from its current boutique review loop to a high-throughput system that
-publishes honest partial records without requiring human review on every merge.
+This document describes the crawler's factual extraction and adjudication
+architecture. Product sequencing and milestone gates live in
+[`ROADMAP.md`](../ROADMAP.md).
 
-The plan stays aligned with the project's current priorities:
+The design follows these durable constraints:
 
-- deliberate index growth is the active top priority
-- crawler completion is later work
+- deterministic extraction remains the default path
 - synthesis remains optional and subordinate
 - source materials remain primary; overlays must not claim more certainty than
   their provenance supports
@@ -18,29 +17,17 @@ See [`docs/import-baseline-audit.md`](./import-baseline-audit.md) for the
 fixture pack that defines correct importer behavior, including intentionally
 incomplete cases.
 
-## Current state
+## Implemented pipeline
 
 The crawler fetches, materializes, imports, and writes back overlay records
 for public GitHub repositories. The import heuristics in `dotrepo-core` extract
 name, description, build/test commands, owners, security contact, and docs
 links from README, CODEOWNERS, SECURITY.md, manifest files, and workflow YAML.
-Three universal post-cleaners (name, description, URL quality) run after
-extraction to catch cross-repo error patterns.
+Post-cleaners run after extraction to catch cross-repository error patterns.
+Regression behavior belongs in the fixture pack rather than a copied scorecard
+in this document.
 
-Across 50 repos in the current index:
-
-| Field        | Present | Notes                                   |
-|--------------|---------|-----------------------------------------|
-| name         | 50/50   | 100% after cleaners                     |
-| description  | 50/50   | 100% after cleaners                     |
-| homepage     | 50/50   | some are GitHub URLs                    |
-| build        | 27/50   | correct when present, unset on conflict |
-| test         | 27/50   | correct when present, unset on conflict |
-| security     | 29/50   | correct when present                    |
-| owners       | 30/50   | correct when present                    |
-| docs links   | ~30/50  | URL quality enforced by `is_quality_url`|
-
-Missing fields are often legitimately absent. The fixture audit already treats
+Missing fields are often legitimately absent. The fixture audit treats
 `security_contact = "unknown"` and `owners.team = none` as intentionally
 incomplete in some cases. See
 [`docs/import-baseline-audit.md`](./import-baseline-audit.md) under
@@ -110,9 +97,9 @@ Publish
 
 ### Name and description
 
-No LLM involvement needed. The current pipeline (README parser + post-cleaners
-+ GitHub API fallback) produces correct results for 100% of the current 50
-repos. Future improvements to the README parser or post-cleaners should
+No LLM involvement was needed in the 50-repository audit. The pipeline (README
+parser + post-cleaners + GitHub API fallback) produced correct results for that
+baseline. Future improvements to the README parser or post-cleaners should
 continue to be deterministic.
 
 ### Build and test
@@ -257,27 +244,19 @@ Deterministic post-check:
 - If the model proposes something outside the candidate space, reject it.
 - If the model returns null, score the field as high-confidence absent.
 
-### Model stack
+### Provider tiers and budgets
 
-The model path should be rare. Most repos should never touch a model.
+Routing is capability-based rather than tied to model names:
 
-- **Local default adjudicator:** Gemma 4 E4B (on-device, ~9.6GB, 128K context)
-- **Local second opinion:** Qwen3.5-9B (disagreement resolver)
-- **API escalator:** Gemma 4 26B A4B (only for rare hard cases, not part of
-  the ordinary path)
+1. deterministic extraction and candidate generation
+2. lowest-cost local adjudicator that satisfies the structured-output contract
+3. independent second opinion when confidence or agreement policy requires it
+4. stronger remote adjudicator for the bounded difficult tail
 
-The API model should not be part of the ordinary pipeline. Its role is
-escalation for the tiny tail of genuinely hard repos.
-
-### Token budget
-
-Most repos: 0 tokens.
-Some repos: one narrow adjudication pass (~2-5K input, ~150 output).
-Rare repos: one larger pass (~8K input, ~250 output).
-
-At OpenRouter pricing, a 4K/150 adjudication pass on Gemma 4 26B A4B costs
-about $0.0004. For 10,000 repos at 25% adjudication rate, total cost is under
-$1.
+Provider choices and prices are runtime configuration. The durable contract is
+that every run enforces model-call and cost ceilings, records tier and usage,
+and stops escalation when a budget is exhausted. Most repositories should use
+no model at all.
 
 ## Publish semantics
 
@@ -313,44 +292,27 @@ Reserved for human-reviewed records. The automation pipeline does not mint
 Reserved for maintainer-controlled in-repo records. Not in scope for this
 automation plan.
 
-## Implementation order
+## Implemented invariants
 
-1. **Deterministic verification pass** — identity/path checks, source-file
-   existence, candidate provenance, exact-match for contacts and owners
-2. **Field-level scoring with "confidently absent" support** — per-field
-   confidence, four-bucket scoring, honest absence as success
-3. **Build/test source-trust hierarchy + sandbox verification** — resolve the
-   23 missing build and 23 missing test fields with code, not models
-4. **Broader security and owner detection** — CONTRIBUTING.md, issue
-   templates, three-way contact distinction, team ambiguity as honest absence
-5. **Narrow adjudication for unresolved fields** — local Gemma E4B sidecar,
-   strict JSON output, deterministic post-check
-6. **Auto-publish to verified overlay** — honest-resolution threshold,
-   `verified` status promotion, preserve `imported`/`inferred` for partials
-7. ~~**Synthesis integration** — deferred~~ Not currently planned. Steps 1–6 constitute the complete factual automation pipeline. Synthesis (whole-repo model analysis, open-ended generation) remains out of scope until the deterministic pipeline has been exercised at scale and the telemetry surfaces (promotion rate, blocker histogram, adjudication rate) demonstrate a clear need.
-
-## Acceptance criteria
-
-Steps 1–6 are implemented. The following criteria are verified by the test suite:
+The test suite verifies that:
 
 - The deterministic verification pass catches all identity/path/homepage
   inconsistencies that `validate-index` currently catches, plus source-file
-  provenance checks. (Step 1)
+  provenance checks.
 - Field scoring produces one of four states for every field on every crawled
   repo, with "high-confidence absent" properly distinguished from "unresolved."
-  (Step 2)
 - The build/test 4-tier trust hierarchy (Manifest > ContribDoc > TaskScript >
-  Workflow) resolves manifest-vs-workflow conflicts deterministically. (Step 3)
+  Workflow) resolves manifest-vs-workflow conflicts deterministically.
 - Security contact detection covers CONTRIBUTING.md and issue templates without
-  coercing general channels into security contacts. (Step 4)
+  coercing general channels into security contacts.
 - Narrow adjudication with deterministic post-check rejects out-of-candidate
-  values and maps null responses to absent. (Step 5)
+  values and maps null responses to absent.
 - Auto-promoted `verified` records pass the same `validate-index` checks that
-  imported records pass. (Step 6)
-- No auto-promoted record claims `reviewed` or `canonical` status. (Step 6)
+  imported records pass.
+- No auto-promoted record claims `reviewed` or `canonical` status.
 - Promotion never rewrites field values, erases provenance origins, or changes
   record authority semantics (mode, source). See invariant tests in
-  `crates/dotrepo-core/tests/auto_publish.rs`. (Step 6)
+  `crates/dotrepo-core/tests/auto_publish.rs`.
 
 ## Automated verified precedence contract
 
@@ -383,16 +345,16 @@ These metrics should be tracked as the pipeline operates at scale:
 - **Adjudication invocation rate**: how often the model path is needed
 - **Zero-model-use fraction**: how many verified records were created without any model involvement
 
-These surfaces inform whether Step 7 (synthesis) would address a real bottleneck or
-solve a problem the deterministic pipeline already handles.
+These surfaces show whether optional synthesis would address a real bottleneck
+or duplicate work the factual pipeline already handles.
 
 ## Non-goals
 
 - README/name/description LLM adjudication (already solved deterministically)
 - Whole-repo model analysis or open-ended generation
 - Auto-merge to `reviewed` or `canonical` status
-- Public search or ranking UX
-- Schema expansion beyond current post-v1 blockers
+- Structured discovery or ranking semantics
+- Schema expansion driven only by crawler convenience
 - Bundle mode, workspace, or relations support
 
 ## Related docs
@@ -401,8 +363,6 @@ solve a problem the deterministic pipeline already handles.
   provenance categories
 - [`docs/import-baseline-audit.md`](./import-baseline-audit.md) — fixture pack,
   intentionally incomplete cases
-- [`docs/growth-and-automation-plan.md`](./growth-and-automation-plan.md) —
-  operating plan for index growth cadence and automation
-- [`docs/roadmap.md`](./roadmap.md) — current post-v1 priorities
+- [`ROADMAP.md`](../ROADMAP.md) — direction and active execution order
 - [`index/review-checklist.md`](../index/review-checklist.md) — review
   standards for overlay records

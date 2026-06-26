@@ -3,7 +3,8 @@
 This directory holds historical snapshots that are useful for context but should
 not be treated as current project guidance.
 
-Current planning and status live in:
-- [`PLAN.md`](../../PLAN.md)
-- [`docs/current-status.md`](../current-status.md)
-- [`docs/roadmap.md`](../roadmap.md)
+Current project documentation lives in:
+
+- [`README.md`](../../README.md)
+- [`ROADMAP.md`](../../ROADMAP.md)
+- [`docs/README.md`](../README.md)

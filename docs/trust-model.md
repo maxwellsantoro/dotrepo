@@ -17,7 +17,9 @@ public trust block.
 - **imported**: a record created from existing repo files or platform metadata
 - **inferred**: a record containing heuristically or LLM-derived claims
 - **reviewed**: a record reviewed by a human contributor or curator
-- **verified**: a record checked against evidence to a higher standard
+- **verified**: a record whose required fields have been exhaustively resolved
+  against evidence through deterministic checks and, where needed,
+  candidate-constrained model adjudication; human review is not implied
 - **canonical**: a maintainer-controlled in-repo record treated as authoritative for the project
 
 ## Provenance categories
@@ -25,7 +27,9 @@ public trust block.
 - **declared**: stated directly by project maintainers or canonical records
 - **imported**: parsed from source materials such as README, CODEOWNERS, or platform metadata
 - **inferred**: derived from heuristics, code inspection, or LLM interpretation
-- **verified**: confirmed through human review or explicit maintainer validation
+- **verified**: confirmed against evidence through deterministic verification,
+  constrained adjudication with post-checks, human review, or explicit
+  maintainer validation
 
 These are the reference provenance values for v0.1, not a closed enum. Tools should preserve unknown provenance strings even if they only interpret the reference vocabulary directly.
 
@@ -35,6 +39,9 @@ Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `mediu
 
 - Agents and tools should prefer canonical records when available.
 - Imported and inferred overlays are useful, but should be consumed with awareness of their status.
+- Consumers that specifically require human review should check for `reviewed`
+  status or provenance instead of treating `verified` as a synonym for human
+  approval.
 - Conflicts between sources should surface explicitly rather than being quietly flattened.
 - Claim and supersede are authority handoff semantics, not a requirement for a full
   productized maintainer workflow before precedence can be defined.
@@ -72,3 +79,7 @@ accepted claim in flight.
 See [`RFC 0004`](../rfcs/0004-index-and-trust-model.md) and the worked examples in
 [`authority-handoff-examples.md`](./authority-handoff-examples.md) for the normative
 contract and reference scenarios.
+
+For the autonomous promotion rules that can mint `verified` overlays, see
+[`factual-crawl-automation.md`](./factual-crawl-automation.md) and
+[`ROADMAP.md`](../ROADMAP.md).

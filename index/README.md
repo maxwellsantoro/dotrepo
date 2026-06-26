@@ -1,12 +1,19 @@
-# dotrepo Seed Index
+# dotrepo Public Index
 
-This directory is a seed version of a standalone `dotrepo/index` repository.
+This directory is the checked-in source for dotrepo's public repository index.
+It is a reusable, evidence-backed cache of repository understanding for humans,
+agents, and tools.
 
-It exists to make the public-index model concrete early:
-- contributors can add overlay records before maintainers adopt dotrepo natively
-- CI can validate index-specific contribution rules
-- agents and tools can point at a real index layout instead of only RFC text
-- the seed tree can model what high-quality evidence-backed overlays should look like
+Records enter through two paths:
+
+- the autonomous factory publishes generated overlays after deterministic
+  extraction, narrow model adjudication when needed, and machine validation
+- maintainers and contributors can submit native claims or evidence-backed
+  overlays through the normal pull-request path
+
+Routine generated overlays do not require human approval. Humans define the
+policy and audit the system; maintainers can supersede overlays by publishing
+native `.repo` metadata and completing the claim flow.
 
 ## Layout
 
@@ -22,13 +29,13 @@ index/
           evidence.md
 ```
 
-## Day-one rules
+## Index rules
 
-- v0.1 seed-index entries use `record.mode = "overlay"`.
-- Seed-index entries may also carry maintainer-claim directories, but the
+- Generated and contributed index entries use `record.mode = "overlay"`.
+- Index entries may also carry maintainer-claim directories, but the
   checked-in seed records remain overlay records today even when the upstream
   repository publishes a native `.repo`; canonical handoff is expressed through
-  claim links until the seed index starts carrying canonical mirrors.
+  claim links until the index starts carrying canonical mirrors.
 - Accepted claims without canonical links remain `pending_canonical`; they show
   live maintainer intent without implying canonical authority early.
 - `record.toml` must pass `dotrepo validate`.
@@ -40,8 +47,8 @@ index/
 
 ## Evidence rubric
 
-Reference-quality `evidence.md` files should make review easy, not force a reviewer
-to reverse-engineer where claims came from.
+Reference-quality `evidence.md` files should make a record auditable without
+forcing a consumer or operator to reverse-engineer where claims came from.
 
 At minimum, every overlay evidence file should:
 - state what was imported directly and name the upstream source
@@ -62,20 +69,17 @@ Reference-quality evidence should also:
 Use [`index/evidence-template.md`](evidence-template.md) as the starting point for new
 overlay entries, then replace each placeholder with repository-specific evidence.
 
-Reviewers can use [`index/review-checklist.md`](review-checklist.md) as the short
-PR checklist when deciding whether an overlay is strong enough to merge.
-For the active seed-index growth program, use
-[`index/tranche-one-targets.md`](tranche-one-targets.md) as the concrete
-candidate list and first-batch execution guide, and
-[`index/tranche-one-targets.txt`](tranche-one-targets.txt) as the machine-readable
-target file for `dotrepo-crawler seed --targets-file`. That seed command can
-also emit an advisory reviewer triage report via
-`--review-report-md <path>`, which helps rank seeded repos against
-[`index/review-checklist.md`](review-checklist.md) before manual promotion.
+Reviewers can use [`index/review-checklist.md`](review-checklist.md) for manual
+submissions and audits. The autonomous conveyor uses the gates documented in
+[`ROADMAP.md`](../ROADMAP.md) and
+[`docs/factual-crawl-automation.md`](../docs/factual-crawl-automation.md).
+The machine-readable [`index/tranche-one-targets.txt`](tranche-one-targets.txt)
+is retained for reproducible crawler runs. The seed command can also emit an
+advisory audit report via `--review-report-md <path>`.
 For maintainer-claim review, use
 [`docs/maintainer-claim-review-workflow.md`](../docs/maintainer-claim-review-workflow.md)
 as the end-to-end operator loop.
-The live seed index now includes
+The live index includes
 [`github.com/maxwellsantoro/ries-rs`](repos/github.com/maxwellsantoro/ries-rs/)
 as the first checked-in accepted maintainer-claim example, now linked to the
 upstream native `.repo`.
@@ -85,7 +89,7 @@ live canonical examples exist.
 
 ## Reference examples
 
-These current seed-index entries are the reference-quality examples for v0.1:
+These index entries are useful reference examples for v0.1:
 - [`github.com/BurntSushi/ripgrep`](repos/github.com/BurntSushi/ripgrep/) shows a trust-aware overlay with inferred build and test commands plus an intentional `unknown` security contact.
 - [`github.com/cli/cli`](repos/github.com/cli/cli/) shows a heavily imported overlay with build, test, license, and security claims tied to specific upstream sources.
 - [`github.com/maxwellsantoro/ries-rs`](repos/github.com/maxwellsantoro/ries-rs/) shows a reviewed Rust overlay with a live accepted maintainer-owned claim now linked to the upstream native `.repo`, so the public claim context derives `superseded` while the checked-in seed record remains overlay-only.
@@ -109,7 +113,7 @@ workflow.
 ## Crawler seeding
 
 Use the checked-in tranche list when you want deterministic imported-lane batch
-output plus a reviewer-facing triage report:
+output plus an audit report:
 
 ```bash
 cargo run -p dotrepo-crawler -- seed \
@@ -118,9 +122,8 @@ cargo run -p dotrepo-crawler -- seed \
   --review-report-md /tmp/dotrepo-seed-review.md
 ```
 
-The markdown report is advisory only. It ranks seeded repos for human triage
-priority; it does not change index validity, record trust semantics, or merge
-bar by itself.
+The markdown report is advisory only. It does not change index validity, record
+trust semantics, autonomous publication gates, or the manual contribution bar.
 
 ## Growth status
 

@@ -1,6 +1,9 @@
-# Seed Index Review Checklist
+# Public Index Review Checklist
 
-Use this checklist when reviewing overlay contributions for the seed index.
+Use this checklist for manually submitted overlays and human audits of generated
+records. It is not a routine approval tier in the autonomous publication path;
+that path uses the machine gates in [`ROADMAP.md`](../ROADMAP.md) and
+[`docs/factual-crawl-automation.md`](../docs/factual-crawl-automation.md).
 
 ## Structural checks
 

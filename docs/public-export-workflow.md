@@ -10,6 +10,10 @@ The current deployed public surface is a Cloudflare Worker-hosted JSON tree on
 
 ```text
 public/
+  index.html
+  docs/
+  repositories/
+  writing/
   query-input/
     <host>/
       <owner>/
@@ -39,7 +43,7 @@ This surface provides:
 - repo-scoped `query-input/` artifacts for Worker-backed hosted query serving
 
 Not yet in scope:
-- a public search surface
+- structured discovery, ranking, comparison, and batch-profile APIs
 - live mutation or submission APIs
 
 ## Local review loop
@@ -73,7 +77,7 @@ RFCs 0016 through 0019 serve as the accepted `v0` launch docs for that surface.
 For the canonical freshness definitions used by exports and individual
 records, see [`docs/public-freshness.md`](./public-freshness.md).
 
-### 2. Deterministic local export from the real seed index
+### 2. Deterministic local export from the real index
 
 For review artifacts outside the fixture pack, use fixed timestamps so repeated
 runs on the same input stay byte-stable:
@@ -110,11 +114,11 @@ Cloudflare custom-domain deployment on `dotrepo.org` uses `--base-path /`.
 ## CI artifacts
 
 The canonical release review entrypoint is `scripts/check_release_gate.py`. The
-main CI workflow runs that script, which builds the public tree from the seed
+main CI workflow runs that script, which builds the public tree from the
 `index/`, packages the release-style install assets, smoke tests the release
 binaries, smoke tests same-origin hosted-query resolution from the shipped
 `dotrepo-public-query` binary against the exported tree, stages that same
-reviewed export into the Cloudflare Worker, smoke tests `queryTemplate`
+validated export into the Cloudflare Worker, smoke tests `queryTemplate`
 resolution through `wrangler dev`, and uploads the resulting artifacts.
 
 Current behavior:
@@ -161,7 +165,8 @@ For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.
 The Cloudflare Worker path can now also serve the same exported snapshot
 locally after staging the reviewed tree into the Worker project. The remaining
-operational work is broader site development on `dotrepo.org`.
+operational work is snapshot scaling, compact research profiles, batch access,
+and richer discovery on `dotrepo.org`.
 
 ## What should stay stable vs variable
 
@@ -190,7 +195,7 @@ When the public export changes, ask:
 4. Did only review-time freshness metadata change?
 
 The fixture pack is best for contract review. The CI artifact is best for
-inspecting the current seed index output as a whole.
+inspecting the current index output as a whole.
 
 The compatibility manifest/test is best for catching accidental key renames,
 link-key drift, or error-code drift inside the same `apiVersion`.
@@ -199,8 +204,6 @@ For release review, start with `scripts/check_release_gate.py`; use the
 individual commands above only when you are isolating one specific part of the
 public/export flow.
 
-For a release summary, see
-[`docs/public-release-note.md`](./public-release-note.md).
 For concrete usage snippets, see
 [`docs/public-export-examples.md`](./public-export-examples.md).
 For a cut/review checklist, see
@@ -212,4 +215,4 @@ For a cut/review checklist, see
 - [`rfcs/0017-public-repository-summary-response.md`](../rfcs/0017-public-repository-summary-response.md)
 - [`rfcs/0018-static-public-serving-and-freshness.md`](../rfcs/0018-static-public-serving-and-freshness.md)
 - [`rfcs/0019-public-trust-and-query-wrappers.md`](../rfcs/0019-public-trust-and-query-wrappers.md)
-- [`docs/current-status.md`](./current-status.md)
+- [`README.md`](../README.md)

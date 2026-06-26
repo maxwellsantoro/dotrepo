@@ -1,62 +1,57 @@
 # AI Coding Tool Interview Takeaways
 
-This doc captures the current working takeaways from a 9-model, 12-session interview round
-on dotrepo's live public surface, protocol story, and likely adoption path.
-It is not a benchmark or compatibility promise. It is product input for what
-should happen next.
+This document preserves the product lessons from a 9-model, 12-session
+interview round on dotrepo's public surface, protocol, and adoption path. It is
+product input, not a benchmark or compatibility promise.
 
 Public-facing synthesis:
-[`https://dotrepo.org/writing/what-the-ais-think-about-dotrepo/`](https://dotrepo.org/writing/what-the-ais-think-about-dotrepo/)
+[`What the AIs think about dotrepo`](https://dotrepo.org/writing/what-the-ais-think-about-dotrepo/)
 
 ## What landed well
 
-- The live public JSON surface exists and is already trust-aware.
-- Same-origin query responses return values together with selection, provenance,
-  and conflict context instead of pretending fields are context-free facts.
-- Freshness metadata is explicit enough for humans, agents, and caches to reason
-  about staleness.
+- The public JSON surface is real, stable, and trust-aware.
+- Query responses return selection, provenance, freshness, and conflict context
+  instead of presenting repository claims as context-free facts.
+- The protocol gives agents a cheap first check before they spend resources
+  cloning, scraping, and interpreting a repository again.
 
-## Where the interviews converged
+## What the interviews correctly prioritized
 
-### 1. Grow the index until checking dotrepo is cheap
+### Broader index coverage
 
-The biggest near-term gap is not protocol shape. It is data coverage. A tiny
-index proves the architecture but does not yet make dotrepo the obvious first
-check for arbitrary repositories.
+The original interviews identified coverage as the primary product constraint.
+That remains true, but the operating model is now autonomous rather than a
+queue of human-reviewed records. The first tranche is complete; the next
+milestone is useful, honestly scored coverage across a broader technology mix.
 
-Working target:
+### Remote agent lookup
 
-- first tranche: 50 reviewed high-signal overlays across Rust, TypeScript,
-  Python, and Go
-- follow-on tranche: 500 reviewed overlays before treating the service as a
-  likely first-check lookup for common public repos
+The hosted HTTP surface and MCP `dotrepo.lookup` path now provide remote lookup
+without cloning first. This closed the largest ergonomic gap identified by the
+interviews.
 
-### 2. Add remote lookup to MCP
+### A small, trustworthy core
 
-The hosted HTTP surface already supports URL-shaped remote lookup through
-predictable repository paths under `https://dotrepo.org/v0/repos/...`.
-The missing ergonomic layer is an MCP tool, such as `dotrepo.lookup`, that
-takes a repository URL or identity and resolves against the hosted public
-surface without cloning first.
+Trust, freshness, provenance, and conflict semantics remain the foundation.
+New surfaces should reuse those contracts instead of creating a parallel truth
+model.
 
-### 3. Keep the core small while those two land
+## Current implications
 
-The trust model, freshness semantics, and query surface are the current
-differentiators. Search, ranking, mutation, and heavier editor product work
-should remain subordinate until the index is broader and remote lookup exists.
-
-## What that means for the current roadmap
-
-- treat the public contract as maintenance-mode unless a real compatibility gap
-  appears
-- prioritize seed-index growth and MCP remote lookup ahead of broader surface
-  expansion
-- keep the public site honest about what query responses return and what is
-  still missing
+- Make the autonomous index factory observable, bounded, and cheap.
+- Resolve deterministic evidence first and escalate only unresolved fields to
+  progressively stronger models.
+- Harden existing records while expanding coverage.
+- Add compact research profiles and batch access so one indexed result can
+  replace repeated repository scraping across many agent sessions.
+- Treat discovery and ranking as products built on trusted profiles, not as a
+  substitute for profile quality.
 
 ## Current caveat
 
-The checked-in seed index is still small and Rust-heavy. That is acceptable for
-launching the protocol and public surface, but it is not yet enough to justify
-dotrepo as a likely first check for arbitrary repositories encountered by
-coding agents.
+The index is large enough to demonstrate the system, but not yet broad enough
+to be a dependable first check for arbitrary public repositories. Status counts
+also do not measure usefulness by themselves: field completeness, evidence
+quality, freshness, language diversity, and low-cost reproducibility matter.
+
+See [`ROADMAP.md`](../ROADMAP.md) for product direction and active execution.

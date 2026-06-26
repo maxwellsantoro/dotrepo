@@ -103,7 +103,7 @@ identity, event ordering, and handoff rules.
 The operator gate script writes inspectable reports for the accepted, corrected,
 and invalid-history fixture paths under `operator-gate/`, and it stages one
 accepted-handoff example with canonical links through `public export`.
-The live seed index now also includes
+The live index also includes
 `repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/`
 as a checked-in accepted claim that was later corrected to link the published
 upstream `.repo`, so the release bar is not just "tests pass" but "the
