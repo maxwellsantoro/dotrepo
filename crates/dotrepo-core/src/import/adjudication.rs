@@ -66,21 +66,11 @@ impl<'a> TieredAdjudicationProviders<'a> {
 }
 
 /// Caps and feature flags for model escalation during import.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct ImportEscalationOptions {
     pub max_adjudication_calls: usize,
     pub enable_second_opinion: bool,
     pub enable_api_escalation: bool,
-}
-
-impl Default for ImportEscalationOptions {
-    fn default() -> Self {
-        Self {
-            max_adjudication_calls: 0,
-            enable_second_opinion: false,
-            enable_api_escalation: false,
-        }
-    }
 }
 
 /// No-op provider used when model tiers are disabled.

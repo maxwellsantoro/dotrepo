@@ -551,10 +551,10 @@ pub fn run_import_escalation(
     options: &ImportEscalationOptions,
     providers: TieredAdjudicationProviders<'_>,
 ) -> ImportEscalationReport {
-    let mut report = ImportEscalationReport::default();
-
-    report.security_owners_deepened =
-        deepen_security_owners_deterministic(root, plan, field_scores);
+    let mut report = ImportEscalationReport {
+        security_owners_deepened: deepen_security_owners_deterministic(root, plan, field_scores),
+        ..ImportEscalationReport::default()
+    };
     if report.security_owners_deepened > 0 {
         recompute_field_score_summary(field_scores);
         if !report

@@ -53,6 +53,9 @@ fn query_value<'a>(value: &'a Value, key: &str) -> Result<&'a Value> {
                 let index = segment
                     .parse::<usize>()
                     .map_err(|_| anyhow!("query path not found: {}", key))?;
+                if index.to_string() != segment {
+                    bail!("query path not found: {}", key);
+                }
                 items
                     .get(index)
                     .ok_or_else(|| anyhow!("query path not found: {}", key))?

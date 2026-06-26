@@ -22,7 +22,15 @@ test("query path helpers match the shared parity fixture", async () => {
 
   for (const entry of cases) {
     const canonical = normalizeQueryPath(entry.path);
-    const actual = queryValue(entry.manifest, canonical);
-    assert.deepEqual(actual, entry.expected, `path ${entry.path} drifted`);
+    if (entry.expectedError) {
+      assert.throws(
+        () => queryValue(entry.manifest, canonical),
+        { message: entry.expectedError },
+        `path ${entry.path} error drifted`
+      );
+    } else {
+      const actual = queryValue(entry.manifest, canonical);
+      assert.deepEqual(actual, entry.expected, `path ${entry.path} drifted`);
+    }
   }
 });

@@ -7,7 +7,9 @@ use std::fs;
 struct QueryPathCase {
     manifest: Value,
     path: String,
-    expected: Value,
+    expected: Option<Value>,
+    #[serde(rename = "expectedError")]
+    expected_error: Option<String>,
 }
 
 fn fixture_cases() -> Vec<QueryPathCase> {
@@ -20,8 +22,25 @@ fn fixture_cases() -> Vec<QueryPathCase> {
 #[test]
 fn query_path_cases_match_shared_contract() {
     for case in fixture_cases() {
-        let actual = query_manifest_value_from_json(&case.manifest, &case.path)
-            .expect("query path resolves");
-        assert_eq!(actual, case.expected, "path `{}` drifted", case.path);
+        let result = query_manifest_value_from_json(&case.manifest, &case.path);
+        match (case.expected, case.expected_error) {
+            (Some(expected), None) => {
+                assert_eq!(
+                    result.expect("query path resolves"),
+                    expected,
+                    "path `{}` drifted",
+                    case.path
+                );
+            }
+            (None, Some(expected_error)) => {
+                assert_eq!(
+                    result.expect_err("query path fails").to_string(),
+                    expected_error,
+                    "path `{}` error drifted",
+                    case.path
+                );
+            }
+            _ => panic!("path `{}` must define exactly one expectation", case.path),
+        }
     }
 }
