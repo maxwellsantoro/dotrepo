@@ -1,0 +1,56 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/angular/angular"
+generated_at = "2026-06-26T18:33:46.4533Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Angular"
+description = "Angular is a development platform for building mobile and desktop web applications"
+homepage = "https://angular.dev"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Nix",
+    "SCSS",
+    "Shell",
+    "Starlark",
+    "TypeScript",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = [
+    "angular",
+    "typescript",
+    "web",
+    "javascript",
+    "pwa",
+    "web-framework",
+    "web-performance",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://bughunters.google.com/report"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/angular/angular.git"
+default_branch = "main"
+fork = false
+head_sha = "d109cc5e9d58df169163fa6664ed576aade9ad16"
+html_url = "https://github.com/angular/angular"
+stars = 100465

@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/influxdata/influxdb"
+generated_at = "2026-06-26T18:30:59.362682Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "InfluxDB 3 Core"
+description = "Open source time series database for real-time events, analytics, and monitoring--powered by Apache Arrow, DataFusion, and Parquet."
+homepage = "https://influxdata.com"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Answer Set Programming",
+    "Dockerfile",
+    "HTML",
+    "Linear Programming",
+    "Python",
+    "Rust",
+    "Shell",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "influxdb",
+    "monitoring",
+    "database",
+    "time-series",
+    "metrics",
+    "go",
+    "react",
+    "rust",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@influxdata.com"
+
+[docs]
+getting_started = "https://docs.influxdata.com/influxdb3/core/get-started/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/influxdata/influxdb.git"
+default_branch = "main"
+fork = false
+head_sha = "d7834110b3680ba8e53d16333d158b18b8847bc7"
+html_url = "https://github.com/influxdata/influxdb"
+stars = 31599

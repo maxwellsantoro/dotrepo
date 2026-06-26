@@ -1,0 +1,100 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/cockroachdb/cockroach"
+generated_at = "2026-06-26T18:31:35.812947Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "What is CockroachDB?"
+description = "CockroachDB is a cloud-native distributed SQL database designed to build, scale, and manage modern, data-intensive applications."
+homepage = "https://www.cockroachlabs.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Assembly",
+    "Awk",
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Ruby",
+    "SCSS",
+    "Shell",
+    "Starlark",
+    "Tcl",
+    "TypeScript",
+    "Vim Script",
+    "Yacc",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "go",
+    "database",
+    "sql",
+    "distributed-database",
+    "cockroachdb",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = [
+    "@cockroachdb/dev-inf",
+    "@cockroachdb/code-systems-prs",
+    "@cockroachdb/rfc-prs",
+    "@cockroachdb/release-eng-prs",
+    "@cockroachdb/sql-queries-prs",
+    "@cockroachdb/sql-foundations-prs",
+    "@cockroachdb/disaster-recovery",
+    "@cockroachdb/cdc-prs",
+    "@cockroachdb/obs-prs",
+    "@cockroachdb/jobs-prs",
+    "@cockroachdb/specialized-indexing-prs",
+    "@cockroachdb/server-prs",
+    "@cockroachdb/security-engineering",
+    "@cockroachdb/product-security",
+    "@cockroachdb/cli-prs",
+    "@cockroachdb/kv-prs",
+    "@cockroachdb/obs-india-prs",
+    "@cockroachdb/sqlproxy-prs",
+    "@cockroachdb/storage",
+    "@cockroachdb/test-eng",
+    "@cockroachdb/spatial",
+    "@cockroachdb/admission-control",
+    "@cockroachdb/kv-distribution",
+    "@cockroachdb/cloud-identity",
+    "@cockroachdb/upgrade-prs",
+    "@cockroachdb/docs-infra-prs",
+]
+
+[docs]
+getting_started = "https://www.cockroachlabs.com/docs/cockroachcloud/quickstart.html"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/cockroachdb/cockroach.git"
+default_branch = "master"
+fork = false
+head_sha = "8ee72ef292bda505db680c36abe8653e70b5f02b"
+html_url = "https://github.com/cockroachdb/cockroach"
+stars = 32232

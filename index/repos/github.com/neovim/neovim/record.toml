@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/neovim/neovim"
+generated_at = "2026-06-26T18:34:43.456647Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Documentation | Chat"
+description = "Neovim is a project that seeks to aggressively refactor Vim in order to:"
+homepage = "https://neovim.io"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Lua",
+    "Makefile",
+    "Python",
+    "Roff",
+    "Ruby",
+    "Shell",
+    "Tree-sitter Query",
+    "Vim Script",
+    "Zig",
+]
+topics = [
+    "neovim",
+    "c",
+    "vim",
+    "lua",
+    "nvim",
+    "text-editor",
+    "api",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/neovim/neovim/security/advisories/new"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/neovim/neovim.git"
+default_branch = "master"
+fork = false
+head_sha = "85718f987432dd2a59f1db19e0c2113c0090d125"
+html_url = "https://github.com/neovim/neovim"
+stars = 100736

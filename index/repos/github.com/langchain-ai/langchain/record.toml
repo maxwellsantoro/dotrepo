@@ -1,0 +1,75 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/langchain-ai/langchain"
+generated_at = "2026-06-26T18:31:46.811479Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "The agent engineering platform."
+description = "LangChain is a framework for building agents and LLM-powered applications."
+homepage = "https://docs.langchain.com/langchain/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Shell",
+    "XSLT",
+]
+topics = [
+    "ai",
+    "anthropic",
+    "gemini",
+    "langchain",
+    "llm",
+    "openai",
+    "python",
+    "agents",
+    "ai-agents",
+    "chatgpt",
+    "enterprise",
+    "framework",
+    "generative-ai",
+    "multiagent",
+    "open-source",
+    "pydantic",
+    "rag",
+    "deepagents",
+    "langgraph",
+    "typescript",
+]
+
+[owners]
+maintainers = [
+    "@ccurme",
+    "@eyurtsev",
+    "@mdrxy",
+]
+
+[docs]
+root = "https://docs.langchain.com/oss/python/langchain/overview"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/langchain-ai/langchain.git"
+default_branch = "master"
+fork = false
+head_sha = "00ad96ce85027502b62e5aa20a6d6161e969c454"
+html_url = "https://github.com/langchain-ai/langchain"
+stars = 140288

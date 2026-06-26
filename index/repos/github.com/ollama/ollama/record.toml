@@ -1,0 +1,78 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ollama/ollama"
+generated_at = "2026-06-26T18:33:22.279723Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Ollama"
+description = "Start building with open models."
+homepage = "https://ollama.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "AppleScript",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "Inno Setup",
+    "JavaScript",
+    "Objective-C",
+    "PowerShell",
+    "Shell",
+    "TypeScript",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "llama",
+    "llm",
+    "llms",
+    "go",
+    "golang",
+    "ollama",
+    "mistral",
+    "gemma",
+    "llama3",
+    "deepseek",
+    "gemma3",
+    "qwen",
+    "gpt-oss",
+    "glm",
+    "minimax",
+]
+
+[owners]
+maintainers = []
+security_contact = "hello@ollama.com"
+
+[docs]
+root = "https://docs.ollama.com/cli"
+getting_started = "https://docs.ollama.com/quickstart"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ollama/ollama.git"
+default_branch = "main"
+fork = false
+head_sha = "d26a58557d83aa8892bdfa79b3550f5ee969cd1c"
+html_url = "https://github.com/ollama/ollama"
+stars = 174940

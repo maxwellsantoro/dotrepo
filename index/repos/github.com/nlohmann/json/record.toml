@@ -1,0 +1,74 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/nlohmann/json"
+generated_at = "2026-06-26T18:35:32.77839Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Design goals"
+description = "There are myriads of JSON libraries out there, and each may even have its reason to exist."
+homepage = "https://json.nlohmann.me"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C++",
+    "CMake",
+    "Cuda",
+    "HTML",
+    "Jinja",
+    "Makefile",
+    "Meson",
+    "Python",
+    "Starlark",
+    "Swift",
+]
+topics = [
+    "json",
+    "json-pointer",
+    "json-patch",
+    "cbor",
+    "msgpack",
+    "header-only",
+    "stl-containers",
+    "json-serialization",
+    "json-parser",
+    "rfc-6901",
+    "rfc-6902",
+    "rfc-7159",
+    "rfc-7049",
+    "json-diff",
+    "messagepack",
+    "rfc-8259",
+    "ubjson",
+    "json-merge-patch",
+    "bson",
+]
+
+[owners]
+maintainers = ["@nlohmann"]
+security_contact = "https://github.com/nlohmann/json/security/advisories/new"
+
+[docs]
+root = "https://json.nlohmann.me"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/nlohmann/json.git"
+default_branch = "develop"
+fork = false
+head_sha = "25c58ac6bd88ccd55084e341f7ecb6ef88d527af"
+html_url = "https://github.com/nlohmann/json"
+stars = 50021

@@ -1,0 +1,66 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/minio/minio"
+generated_at = "2026-06-26T18:31:19.274657Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "MinIO Quickstart Guide"
+description = "[!NOTE] THIS REPOSITORY IS NO LONGER MAINTAINED."
+homepage = "https://github.com/minio/minio"
+license = "AGPL-3.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "Makefile",
+    "Mustache",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "go",
+    "storage",
+    "cloud",
+    "s3",
+    "objectstorage",
+    "cloudstorage",
+    "amazon-s3",
+    "cloudnative",
+    "k8s",
+    "kubernetes",
+    "multi-cloud",
+    "multi-cloud-kubernetes",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@min.io"
+
+[docs]
+root = "https://github.com/minio/docs"
+getting_started = "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart"
+
+[relations]
+references = []
+
+[x.github]
+archived = true
+clone_url = "https://github.com/minio/minio.git"
+default_branch = "master"
+fork = false
+head_sha = "7aac2a2c5b7c882e68c1ce017d8256be2feea27f"
+html_url = "https://github.com/minio/minio"
+stars = 61206

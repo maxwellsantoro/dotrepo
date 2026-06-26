@@ -1,0 +1,83 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/protocolbuffers/protobuf"
+generated_at = "2026-06-26T18:35:12.854167Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Protocol Buffers"
+description = "Copyright 2008 Google LLC"
+homepage = "http://protobuf.dev"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Awk",
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "Emacs Lisp",
+    "Java",
+    "Kotlin",
+    "Linker Script",
+    "Lua",
+    "M4",
+    "Makefile",
+    "NASL",
+    "Objective-C",
+    "Objective-C++",
+    "PHP",
+    "Pawn",
+    "PowerShell",
+    "Python",
+    "RenderScript",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "Starlark",
+    "Swift",
+    "Vim Script",
+]
+topics = [
+    "protobuf",
+    "protocol-buffers",
+    "protocol-compiler",
+    "protobuf-runtime",
+    "protoc",
+    "serialization",
+    "marshalling",
+    "rpc",
+]
+
+[owners]
+maintainers = [
+    "@protocolbuffers/protobuf-csharp",
+    "@protocolbuffers/protobuf-docs",
+    "@protocolbuffers/protobuf-java",
+    "@protocolbuffers/protobuf-kotlin",
+    "@protocolbuffers/protobuf-objc",
+    "@protocolbuffers/protobuf-php",
+    "@protocolbuffers/protobuf-python",
+    "@protocolbuffers/protobuf-ruby",
+]
+security_contact = "https://bughunters.google.com/report"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/protocolbuffers/protobuf.git"
+default_branch = "main"
+fork = false
+head_sha = "b89250d7eabc94c3c865ea148ba5bfebc40a6fb6"
+html_url = "https://github.com/protocolbuffers/protobuf"
+stars = 71414

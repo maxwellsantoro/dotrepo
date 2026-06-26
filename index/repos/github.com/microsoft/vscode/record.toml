@@ -1,0 +1,111 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/microsoft/vscode"
+generated_at = "2026-06-26T18:33:16.163066Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/chat-lib-package.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Visual Studio Code"
+description = 'This repository ("`Code - OSS`") is where we (Microsoft) develop the Visual Studio Code product together with the community.'
+homepage = "https://code.visualstudio.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CSS",
+    "Clojure",
+    "CoffeeScript",
+    "Cuda",
+    "Dart",
+    "Dockerfile",
+    "F#",
+    "Go",
+    "Groovy",
+    "HLSL",
+    "HTML",
+    "Hack",
+    "Handlebars",
+    "Inno Setup",
+    "Java",
+    "JavaScript",
+    "Julia",
+    "Jupyter Notebook",
+    "Less",
+    "Lua",
+    "Makefile",
+    "Mermaid",
+    "Objective-C",
+    "Objective-C++",
+    "PHP",
+    "Perl",
+    "PowerShell",
+    "Pug",
+    "Python",
+    "R",
+    "Raku",
+    "Roff",
+    "Ruby",
+    "Rust",
+    "SCSS",
+    "Scilab",
+    "ShaderLab",
+    "Shell",
+    "Swift",
+    "TeX",
+    "Tree-sitter Query",
+    "TypeScript",
+    "Visual Basic .NET",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "editor",
+    "electron",
+    "visual-studio-code",
+    "typescript",
+    "microsoft",
+]
+
+[owners]
+maintainers = [
+    "@hediet",
+    "@alexdima",
+    "@lszomoru",
+    "@sandy081",
+    "@TylerLeonhardt",
+    "@rzhao271",
+    "@Yoyokrazy",
+    "@lramos15",
+    "@mjbvz",
+    "@alexr00",
+    "@sbatten",
+]
+security_contact = "https://aka.ms/SECURITY.md"
+
+[docs]
+root = "https://github.com/microsoft/vscode-docs"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/microsoft/vscode.git"
+default_branch = "main"
+fork = false
+head_sha = "3c30cc5b03aeab87db127b2c0593d2fd1528169c"
+html_url = "https://github.com/microsoft/vscode"
+stars = 186831

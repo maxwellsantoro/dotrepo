@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/redis/redis-py"
+generated_at = "2026-06-26T18:32:04.617958Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "redis-py"
+description = "The Python interface to the Redis key-value store."
+homepage = "https://github.com/redis/redis-py"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "python",
+    "redis",
+    "redis-client",
+    "redis-cluster",
+    "redis-py",
+]
+
+[owners]
+maintainers = ["@dmaier-redislabs"]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/redis/redis-py.git"
+default_branch = "master"
+fork = false
+head_sha = "83c2541001fd898190b3617786d5734f8954f179"
+html_url = "https://github.com/redis/redis-py"
+stars = 13573

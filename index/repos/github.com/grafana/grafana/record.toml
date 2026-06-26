@@ -1,0 +1,136 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/grafana/grafana"
+generated_at = "2026-06-26T18:35:05.698326Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Left `repo.build` unset because `package.json` and `go.mod` suggested conflicting build commands. Left `repo.test` unset because `package.json` and `go.mod` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Get started"
+description = "The open-source platform for monitoring and observability"
+homepage = "https://grafana.com"
+license = "AGPL-3.0"
+visibility = "public"
+languages = [
+    "Assembly",
+    "CSS",
+    "CUE",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Jsonnet",
+    "MDX",
+    "Makefile",
+    "Mustache",
+    "PLpgSQL",
+    "PowerShell",
+    "Python",
+    "Rich Text Format",
+    "Ruby",
+    "SCSS",
+    "Shell",
+    "Smarty",
+    "Starlark",
+    "TypeScript",
+]
+test = "go test -v -count=1 -timeout 5m -run TestIntegrationAvailableChannels ./pkg/tests/api/alerting/... || true"
+topics = [
+    "grafana",
+    "monitoring",
+    "analytics",
+    "metrics",
+    "influxdb",
+    "prometheus",
+    "elasticsearch",
+    "alerting",
+    "data-visualization",
+    "go",
+    "dashboard",
+    "business-intelligence",
+    "mysql",
+    "postgres",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = [
+    "@grafana/grafana-backend-services-squad",
+    "@grafana/grafana-community-support",
+    "@RichiH",
+    "@torkelo",
+    "@grafana/docs-grafana",
+    "@grafana/docs-tooling",
+    "@irenerl24",
+    "@JohnnyK-Grafana",
+    "@urbiz-grafana",
+    "@lwandz13",
+    "@jtvdez",
+    "@grafana/grafana-catalog",
+    "@grafana/grafana-frontend-platform",
+    "@imatwawana",
+    "@baldm0mma",
+    "@grafana/grafana-backend-group",
+    "@grafana/grafana-app-platform-squad",
+    "@grafana/grafana-operator-experience-squad",
+    "@grafana/grafana-datasources-core-services",
+    "@kminehart",
+    "@macabu",
+    "@grafana/grafana-frontend-navigation",
+    "@grafana/alerting-backend",
+    "@grafana/grafana-search-and-storage",
+    "@grafana/dashboards-squad",
+    "@grafana/sharing-squad",
+    "@grafana/access-squad",
+    "@grafana/datapro",
+    "@grafana/observability-logs",
+    "@grafana/identity-squad",
+    "@grafana/identity-access-team",
+    "@grafana/data-sources-plugins",
+    "@grafana/data-sources",
+    "@grafana/dataviz-squad",
+    "@grafana/observability-traces-and-profiling",
+    "@grafana/observability-metrics",
+    "@grafana/grafana-as-code",
+    "@grafana/alerting-frontend",
+    "@bergquist",
+    "@mckn",
+    "@grafana/frontend-ops",
+    "@DanCech",
+    "@grafanabot",
+    "@ryantxu",
+    "@grafana/app-o11y-visualizations",
+    "@zoltanbedi",
+    "@grafana/growth-engineering",
+    "@grafana/product-design-engineering",
+    "@grafana/alerting-squad",
+    "@tolzhabayev",
+    "@sympatheticmoose",
+    "@evictorero",
+    "@Proximyst",
+    "@zserge",
+    "@grafana/security-team",
+]
+
+[docs]
+root = "https://grafana.com/docs/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/grafana/grafana.git"
+default_branch = "main"
+fork = false
+head_sha = "47052748938105a4a32179745b2ae6848c2b365a"
+html_url = "https://github.com/grafana/grafana"
+stars = 74828

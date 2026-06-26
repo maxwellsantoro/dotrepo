@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/remix-run/remix"
+generated_at = "2026-06-26T18:34:17.725862Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Welcome to Remix 3!"
+description = "Build Better Websites. Create modern, resilient user experiences with web fundamentals."
+homepage = "https://remix.run"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Lua",
+    "Shell",
+    "TypeScript",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = []
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/remix-run/remix/security/advisories/new"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/remix-run/remix.git"
+default_branch = "main"
+fork = false
+head_sha = "72a3534474afef4f10464dc47ce92f364c55926a"
+html_url = "https://github.com/remix-run/remix"
+stars = 33130

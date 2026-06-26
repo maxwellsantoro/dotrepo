@@ -1,0 +1,88 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/vectordotdev/vector"
+generated_at = "2026-06-26T18:30:43.156059Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@vectordotdev/vector` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "What is Vector?"
+description = "Quickstart &bull; Docs &bull; Guides &bull; Integrations &bull; Chat &bull; Download &bull; Rust Crate Docs"
+homepage = "https://vector.dev"
+license = "MPL-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "CSS",
+    "CUE",
+    "DIGITAL Command Language",
+    "Dockerfile",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Lua",
+    "PowerShell",
+    "PureBasic",
+    "Python",
+    "Rust",
+    "Sass",
+    "Shell",
+    "Starlark",
+    "TypeScript",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "logs",
+    "metrics",
+    "observability",
+    "forwarder",
+    "events",
+    "stream-processing",
+    "hacktoberfest",
+    "rust-lang",
+    "traces",
+    "pipelines",
+    "datadog",
+    "agent",
+    "cloud-native",
+    "etl",
+    "high-performance",
+    "monitoring",
+    "data-transformation",
+    "telemetry",
+]
+
+[owners]
+maintainers = [
+    "@vectordotdev/vector",
+    "@vectordotdev/single-machine-performance",
+    "@vectordotdev/vector-website",
+    "@vectordotdev/documentation",
+]
+team = "@vectordotdev/vector"
+security_contact = "security@datadoghq.com"
+
+[docs]
+root = "https://vector.dev/docs"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/vectordotdev/vector.git"
+default_branch = "master"
+fork = false
+head_sha = "0141894cb40218aff7fcb308dd32847dd875bf74"
+html_url = "https://github.com/vectordotdev/vector"
+stars = 22098

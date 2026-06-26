@@ -1,0 +1,49 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/vuejs/core"
+generated_at = "2026-06-26T18:35:51.16915Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "vuejs/core"
+description = "Please follow the documentation at vuejs.org!"
+homepage = "https://vuejs.org/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = []
+
+[owners]
+maintainers = []
+security_contact = "jeetpal2007@gmail.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/vuejs/core.git"
+default_branch = "main"
+fork = false
+head_sha = "c0606e91798c8dca4f33d101e1dd836d672592c1"
+html_url = "https://github.com/vuejs/core"
+stars = 53881

@@ -1,0 +1,84 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/tensorflow/tensorflow"
+generated_at = "2026-06-26T18:33:11.020636Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Install"
+description = "TensorFlow is an end-to-end open source platform for machine learning."
+homepage = "https://tensorflow.org"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "CSS",
+    "Cython",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "Java",
+    "Jupyter Notebook",
+    "Linker Script",
+    "MLIR",
+    "Makefile",
+    "Objective-C",
+    "Objective-C++",
+    "Perl",
+    "Python",
+    "Ruby",
+    "Shell",
+    "Smarty",
+    "Starlark",
+    "Swift",
+    "Vim Snippet",
+]
+topics = [
+    "tensorflow",
+    "machine-learning",
+    "python",
+    "deep-learning",
+    "deep-neural-networks",
+    "neural-network",
+    "ml",
+    "distributed",
+]
+
+[owners]
+maintainers = [
+    "@qqfish",
+    "@caisq",
+    "@penpornk",
+    "@azaks2",
+    "@chsigg",
+    "@mdanatg",
+    "@rohan100jain",
+    "@markdaoust",
+    "@aminim",
+    "@perfinion",
+]
+security_contact = "https://g.co/vulnz"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tensorflow/tensorflow.git"
+default_branch = "master"
+fork = false
+head_sha = "f983bdfa03c3167d1ca19ac4d8691942fa2bbf69"
+html_url = "https://github.com/tensorflow/tensorflow"
+stars = 195943

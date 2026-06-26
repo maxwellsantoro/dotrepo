@@ -1,0 +1,60 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/streamlit/streamlit"
+generated_at = "2026-06-26T18:32:16.322005Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@streamlit/open-source-release-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Welcome to Streamlit 👋"
+description = "A faster way to build and share data apps."
+homepage = "https://streamlit.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "python",
+    "machine-learning",
+    "data-science",
+    "deep-learning",
+    "data-visualization",
+    "streamlit",
+    "data-analysis",
+    "developer-tools",
+]
+
+[owners]
+maintainers = ["@streamlit/open-source-release-team"]
+team = "@streamlit/open-source-release-team"
+security_contact = "https://hackerone.com/snowflake?type=team"
+
+[docs]
+root = "https://docs.streamlit.io"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/streamlit/streamlit.git"
+default_branch = "develop"
+fork = false
+head_sha = "c9d6805767dcc67012d4112e6a2ca73137c83bbc"
+html_url = "https://github.com/streamlit/streamlit"
+stars = 45079

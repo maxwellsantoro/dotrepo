@@ -1,0 +1,49 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/golangci/golangci-lint"
+generated_at = "2026-06-26T18:31:27.81373Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "golangci-lint"
+description = "Fast linters runner for Go"
+homepage = "https://golangci-lint.run"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "Makefile",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "go",
+    "golang",
+    "linter",
+    "ci",
+    "golangci-lint",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/golangci/golangci-lint.git"
+default_branch = "main"
+fork = false
+head_sha = "a9b484189fa255f772b661b0e8f2e93a02252ae6"
+html_url = "https://github.com/golangci/golangci-lint"
+stars = 19120

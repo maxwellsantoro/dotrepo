@@ -1,0 +1,120 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/apache/airflow"
+generated_at = "2026-06-26T18:31:58.132131Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Apache Airflow"
+description = "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements."
+homepage = "https://airflow.apache.org/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "HCL",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Jinja",
+    "Jupyter Notebook",
+    "Just",
+    "Kotlin",
+    "Mako",
+    "Nunjucks",
+    "Python",
+    "Shell",
+    "TypeScript",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "airflow",
+    "apache",
+    "apache-airflow",
+    "python",
+    "scheduler",
+    "workflow",
+    "automation",
+    "dag",
+    "data-engineering",
+    "data-integration",
+    "data-orchestrator",
+    "data-pipelines",
+    "data-science",
+    "elt",
+    "etl",
+    "machine-learning",
+    "mlops",
+    "orchestration",
+    "workflow-engine",
+    "workflow-orchestration",
+]
+
+[owners]
+maintainers = [
+    "@XD-DENG",
+    "@ashb",
+    "@o-nikolas",
+    "@pierrejeambrun",
+    "@hussein-awala",
+    "@dheerajturaga",
+    "@bolkedebruin",
+    "@jedcunningham",
+    "@ephraimbuddy",
+    "@jscheffl",
+    "@bugraoz93",
+    "@potiuk",
+    "@gopidesupavan",
+    "@amoghrajesh",
+    "@jason810496",
+    "@rawwar",
+    "@shubhamraj-git",
+    "@choo121600",
+    "@kaxil",
+    "@vincbeck",
+    "@bbovenzi",
+    "@ryanahamilton",
+    "@guan404ming",
+    "@vatsrahul1001",
+    "@shahar1",
+    "@romsharon98",
+    "@uranusjr",
+    "@sekikn",
+    "@BasPH",
+    "@mobuchowski",
+    "@Lee-W",
+    "@dstandish",
+    "@eladkal",
+    "@Fokko",
+    "@josh-fell",
+    "@dabla",
+    "@RNHTTR",
+    "@sjyangkevin",
+    "@Dev-iL",
+]
+security_contact = "security@airflow.apache.org"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/apache/airflow.git"
+default_branch = "main"
+fork = false
+head_sha = "ba8cfe47e57e101a7b9ec39d4ae4a0b042042862"
+html_url = "https://github.com/apache/airflow"
+stars = 45941

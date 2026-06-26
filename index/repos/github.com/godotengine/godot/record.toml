@@ -1,0 +1,97 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/godotengine/godot"
+generated_at = "2026-06-26T18:34:40.655133Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Godot Engine"
+description = "**Godot Engine is a feature-packed, cross-platform game engine to create 2D and 3D games from a unified interface.** It provides a comprehensive set of common tools, so that users can focus on making games without having to reinvent the wheel."
+homepage = "https://godotengine.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "GAP",
+    "GDScript",
+    "GLSL",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Objective-C++",
+    "Python",
+    "Shell",
+    "Swift",
+]
+topics = [
+    "game-engine",
+    "godot",
+    "godotengine",
+    "open-source",
+    "multi-platform",
+    "gamedev",
+    "game-development",
+]
+
+[owners]
+maintainers = [
+    "@godotengine/core",
+    "@godotengine/network",
+    "@godotengine/debugger",
+    "@godotengine/gdextension",
+    "@godotengine/input",
+    "@godotengine/documentation",
+    "@godotengine/i18n",
+    "@godotengine/audio",
+    "@godotengine/rendering",
+    "@godotengine/macos",
+    "@godotengine/ios",
+    "@godotengine/linux-bsd",
+    "@godotengine/windows",
+    "@godotengine/buildsystem",
+    "@godotengine/asset-pipeline",
+    "@godotengine/editor",
+    "@godotengine/animation",
+    "@godotengine/gui-nodes",
+    "@godotengine/2d-nodes",
+    "@godotengine/physics",
+    "@godotengine/3d-nodes",
+    "@godotengine/script-editor",
+    "@godotengine/shaders",
+    "@godotengine/dotnet",
+    "@godotengine/tests",
+    "@godotengine/jolt-physics",
+    "@godotengine/gdscript",
+    "@godotengine/xr",
+    "@godotengine/navigation",
+    "@godotengine/android",
+    "@godotengine/web",
+]
+
+[docs]
+root = "https://docs.godotengine.org/en/latest/classes/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/godotengine/godot.git"
+default_branch = "master"
+fork = false
+head_sha = "d7c45b19ccf6ddadc73d1c8423cd2848f59de437"
+html_url = "https://github.com/godotengine/godot"
+stars = 113152

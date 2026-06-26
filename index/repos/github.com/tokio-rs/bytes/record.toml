@@ -1,0 +1,48 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/tokio-rs/bytes"
+generated_at = "2026-06-26T18:30:49.76824Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Bytes"
+description = "A utility library for working with bytes."
+homepage = "https://github.com/tokio-rs/bytes"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Rust",
+    "Shell",
+]
+build = "cargo build"
+test = "cargo test"
+topics = []
+
+[owners]
+maintainers = []
+security_contact = "security@tokio.rs"
+
+[docs]
+root = "https://docs.rs/bytes"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tokio-rs/bytes.git"
+default_branch = "master"
+fork = false
+head_sha = "91402cee605b21bf530ac07ede463599182b5d32"
+html_url = "https://github.com/tokio-rs/bytes"
+stars = 2226

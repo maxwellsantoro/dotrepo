@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/spring-projects/spring-boot"
+generated_at = "2026-06-26T18:35:24.667747Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "spring-boot"
+description = "Spring Boot helps you to create Spring-powered, production-grade applications and services with absolute minimum fuss."
+homepage = "https://spring.io/projects/spring-boot"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "FreeMarker",
+    "Go Template",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Mustache",
+    "Ruby",
+    "Shell",
+    "Smarty",
+    "Vim Snippet",
+]
+topics = [
+    "java",
+    "spring-boot",
+    "spring",
+    "framework",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/spring-projects/spring-boot.git"
+default_branch = "main"
+fork = false
+head_sha = "fd2e1d221921998647c2527ecf4d273751f6ffb3"
+html_url = "https://github.com/spring-projects/spring-boot"
+stars = 81047

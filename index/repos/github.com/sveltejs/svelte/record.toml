@@ -1,0 +1,48 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/sveltejs/svelte"
+generated_at = "2026-06-26T18:33:43.582107Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "What is Svelte?"
+description = "Svelte is a new way to build web applications."
+homepage = "https://svelte.dev"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Svelte",
+    "TypeScript",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = [
+    "template",
+    "ui",
+    "compiler",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/sveltejs/svelte.git"
+default_branch = "main"
+fork = false
+head_sha = "eae50dfd1c2269e37258ef5c09527003bcf61573"
+html_url = "https://github.com/sveltejs/svelte"
+stars = 87443

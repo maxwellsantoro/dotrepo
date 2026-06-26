@@ -1,0 +1,63 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/celery/celery"
+generated_at = "2026-06-26T18:31:55.0794Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "celery"
+description = "Distributed Task Queue (development branch)"
+homepage = "https://docs.celeryq.dev"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Dockerfile",
+    "Go Template",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+test = "python -m pytest"
+topics = [
+    "python",
+    "task-manager",
+    "task-scheduler",
+    "task-runner",
+    "queue-workers",
+    "queued-jobs",
+    "queue-tasks",
+    "amqp",
+    "redis",
+    "sqs",
+    "sqs-queue",
+    "python3",
+    "python-library",
+    "redis-queue",
+]
+
+[owners]
+maintainers = []
+security_contact = "tomer.nosrati@gmail.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/celery/celery.git"
+default_branch = "main"
+fork = false
+head_sha = "41b88388b9dce51e887d3aa6dc20fa8d4538e81a"
+html_url = "https://github.com/celery/celery"
+stars = 28630

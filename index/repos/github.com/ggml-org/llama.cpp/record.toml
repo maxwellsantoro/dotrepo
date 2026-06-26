@@ -1,0 +1,107 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ggml-org/llama.cpp"
+generated_at = "2026-06-26T18:34:46.16882Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "llama.cpp"
+description = "LLM inference in C/C++"
+homepage = "https://llama.app"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Cuda",
+    "Dockerfile",
+    "GLSL",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Jinja",
+    "MDX",
+    "Makefile",
+    "Metal",
+    "Nix",
+    "Objective-C",
+    "PowerShell",
+    "Python",
+    "SCSS",
+    "Shell",
+    "Svelte",
+    "TypeScript",
+    "WGSL",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = ["ggml"]
+
+[owners]
+maintainers = [
+    "@ngxson",
+    "@ggml-org/ci",
+    "@ggerganov",
+    "@ggml-org/llama-common",
+    "@JohannesGaessler",
+    "@CISC",
+    "@srogmann",
+    "@ggml-org/ggml-hexagon",
+    "@danbev",
+    "@pwilkin",
+    "@am17an",
+    "@hanyin-arm",
+    "@naco-siren",
+    "@ggml-org/ggml-cann",
+    "@alex-spacemit",
+    "@ggml-org/ggml-cuda",
+    "@IMbackK",
+    "@ggml-org/ggml-metal",
+    "@ggml-org/ggml-opencl",
+    "@cavusmustafa",
+    "@wine99",
+    "@ggml-org/ggml-rpc",
+    "@ggml-org/ggml-sycl",
+    "@kpouget",
+    "@ggml-org/ggml-vulkan",
+    "@ggml-org/ggml-webgpu",
+    "@ggml-org/ggml-zdnn",
+    "@Andreas-Krebbel",
+    "@AlekseiNikiforovIBM",
+    "@avinashcpandey",
+    "@Jiten1parmar",
+    "@z-vishal",
+    "@Green-Sky",
+    "@ggml-org/llama-mtmd",
+    "@ggml-org/llama-server",
+    "@ggml-org/llama-ui",
+]
+security_contact = "https://github.com/ggml-org/llama.cpp/security/advisories/new"
+
+[docs]
+root = "./docs/multimodal.md"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ggml-org/llama.cpp.git"
+default_branch = "master"
+fork = false
+head_sha = "3fc4e105279105106b08a133a4e3e483116e621f"
+html_url = "https://github.com/ggml-org/llama.cpp"
+stars = 118265

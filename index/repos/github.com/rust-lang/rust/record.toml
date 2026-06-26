@@ -1,0 +1,69 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/rust-lang/rust"
+generated_at = "2026-06-26T18:30:34.805549Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Why Rust?"
+description = "Empowering everyone to build reliable and efficient software."
+homepage = "https://www.rust-lang.org"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Emacs Lisp",
+    "HTML",
+    "JavaScript",
+    "Julia",
+    "LLVM",
+    "Linker Script",
+    "Makefile",
+    "Nix",
+    "Perl",
+    "PowerShell",
+    "Python",
+    "RPC",
+    "RenderScript",
+    "Roff",
+    "Rust",
+    "Shell",
+    "TypeScript",
+    "XSLT",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "rust",
+    "compiler",
+    "language",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/rust-lang/rust.git"
+default_branch = "main"
+fork = false
+head_sha = "eb6346c659ccb0468a1477c716ca5450a1fa9ba1"
+html_url = "https://github.com/rust-lang/rust"
+stars = 114218

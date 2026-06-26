@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Kludex/starlette"
+generated_at = "2026-06-26T18:36:06.772023Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Starlette"
+description = "✨ The little ASGI framework that shines."
+homepage = "https://starlette.dev"
+license = "BSD-3-Clause"
+visibility = "public"
+languages = [
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "python",
+    "async",
+    "websockets",
+    "http",
+    "asgi",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Kludex/starlette.git"
+default_branch = "main"
+fork = false
+head_sha = "de970d7b3facb853eb7ad077decbf3d94f2aab6c"
+html_url = "https://github.com/Kludex/starlette"
+stars = 12436

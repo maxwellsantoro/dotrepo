@@ -1,0 +1,78 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/elastic/elasticsearch"
+generated_at = "2026-06-26T18:35:02.586195Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `.github/CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "elasticsearch"
+description = "Free and Open Source, Distributed, RESTful Search Engine"
+homepage = "https://www.elastic.co/products/elasticsearch"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "AMPL",
+    "ANTLR",
+    "Batchfile",
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "Emacs Lisp",
+    "FreeMarker",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Makefile",
+    "Mustache",
+    "PowerShell",
+    "Python",
+    "Rust",
+    "Shell",
+    "StringTemplate",
+    "TypeScript",
+]
+topics = [
+    "elasticsearch",
+    "java",
+    "search-engine",
+]
+
+[owners]
+maintainers = [
+    "@elastic/stack-monitoring",
+    "@elastic/fleet",
+    "@elastic/logstash",
+    "@elastic/kibana-security",
+    "@elastic/obs-ds-intake-services",
+    "@elastic/es-storage-engine",
+    "@elastic/es-delivery",
+    "@elastic/es-core-infra",
+    "@elastic/es-security",
+    "@elastic/core-docs",
+    "@elastic/admin-docs",
+    "@elastic/developer-docs",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/elastic/elasticsearch.git"
+default_branch = "main"
+fork = false
+head_sha = "5abab688635f0b7d308981f227c5bfb480cbf50e"
+html_url = "https://github.com/elastic/elasticsearch"
+stars = 77174

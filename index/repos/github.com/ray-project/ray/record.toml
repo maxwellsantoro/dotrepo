@@ -1,0 +1,105 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/ray-project/ray"
+generated_at = "2026-06-26T18:32:07.313106Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `.github/CODEOWNERS` and `SECURITY.md`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "ray"
+description = "Ray is an AI compute engine. Ray consists of a core distributed runtime and a set of AI Libraries for accelerating ML workloads."
+homepage = "https://ray.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CSS",
+    "Cython",
+    "Dockerfile",
+    "Go Template",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Jinja",
+    "Linker Script",
+    "Objective-C",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "Starlark",
+    "TypeScript",
+]
+topics = [
+    "ray",
+    "distributed",
+    "parallel",
+    "machine-learning",
+    "reinforcement-learning",
+    "deep-learning",
+    "python",
+    "rllib",
+    "hyperparameter-search",
+    "optimization",
+    "data-science",
+    "hyperparameter-optimization",
+    "serving",
+    "deployment",
+    "pytorch",
+    "tensorflow",
+    "llm-serving",
+    "large-language-models",
+    "llm",
+    "llm-inference",
+]
+
+[owners]
+maintainers = [
+    "@ray-project/ray-docs",
+    "@pcmoritz",
+    "@ray-project/ray-core",
+    "@kfstorm",
+    "@raulchen",
+    "@WangTaoTheTonic",
+    "@SongGuyang",
+    "@andrewsykim",
+    "@edoakes",
+    "@dayshah",
+    "@MengjinYan",
+    "@marosset",
+    "@jackfrancis",
+    "@alimaazamat",
+    "@richardliaw",
+    "@ray-project/ray-ci",
+    "@ray-project/ray-data",
+    "@ray-project/ray-rllib",
+    "@ray-project/ray-tune",
+    "@ray-project/ray-train",
+    "@ray-project/ray-serve",
+    "@ray-project/ray-llm",
+    "@matthewdeng",
+    "@thomasdesr",
+    "@ryanaoleary",
+]
+security_contact = "security@anyscale.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ray-project/ray.git"
+default_branch = "master"
+fork = false
+head_sha = "0819ae3ce0b193866c7c179b10ae1bcae0f0ebf6"
+html_url = "https://github.com/ray-project/ray"
+stars = 43034

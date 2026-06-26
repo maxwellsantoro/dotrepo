@@ -1,0 +1,63 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/uutils/coreutils"
+generated_at = "2026-06-26T18:30:52.547037Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "uutils coreutils"
+description = "Cross-platform Rust rewrite of the GNU coreutils"
+homepage = "https://uutils.github.io/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Dockerfile",
+    "Fluent",
+    "Makefile",
+    "Nix",
+    "Nushell",
+    "Python",
+    "Rust",
+    "Shell",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "rust",
+    "coreutils",
+    "gnu-coreutils",
+    "busybox",
+    "cross-platform",
+    "command-line-tool",
+]
+
+[owners]
+maintainers = []
+security_contact = "Sylvestre@debian.org"
+
+[docs]
+root = "https://uutils.github.io/coreutils/docs/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/uutils/coreutils.git"
+default_branch = "main"
+fork = false
+head_sha = "697df9832f56f59689d501b05c810bebcc7c52d8"
+html_url = "https://github.com/uutils/coreutils"
+stars = 23691

@@ -1,0 +1,60 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/nestjs/nest"
+generated_at = "2026-06-26T18:33:38.049334Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `SECURITY.md` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "nest"
+description = "A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications with TypeScript/JavaScript 🚀"
+homepage = "https://nestjs.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "JavaScript",
+    "Shell",
+    "TypeScript",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "nest",
+    "javascript",
+    "typescript",
+    "nodejs",
+    "framework",
+    "nodejs-framework",
+    "typescript-framework",
+    "javascript-framework",
+    "microservices",
+    "websockets",
+    "node",
+    "nestjs",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = []
+security_contact = "support@nestjs.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/nestjs/nest.git"
+default_branch = "master"
+fork = false
+head_sha = "7c65045cbedd8e70fc95eb81f7acce0ae2ddf494"
+html_url = "https://github.com/nestjs/nest"
+stars = 75993

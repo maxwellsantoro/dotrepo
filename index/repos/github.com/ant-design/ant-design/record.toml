@@ -1,0 +1,57 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ant-design/ant-design"
+generated_at = "2026-06-26T18:35:43.495089Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+
+[repo]
+name = "Ant Design"
+description = "An enterprise-class UI design language and React UI library."
+homepage = "https://ant.design"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "Shell",
+    "TypeScript",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "react",
+    "ui-kit",
+    "typescript",
+    "antd",
+    "ant-design",
+    "design-systems",
+    "ui-library",
+]
+
+[owners]
+maintainers = []
+security_contact = "unknown"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ant-design/ant-design.git"
+default_branch = "master"
+fork = false
+head_sha = "7393d781e87812bfea8b5dcb4d2c33e49aa00a3d"
+html_url = "https://github.com/ant-design/ant-design"
+stars = 98484

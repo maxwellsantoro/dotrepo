@@ -1,0 +1,80 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/go-gitea/gitea"
+generated_at = "2026-06-26T18:31:38.796649Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Gitea"
+description = "繁體中文 | 简体中文"
+homepage = "https://gitea.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Handlebars",
+    "JavaScript",
+    "Jsonnet",
+    "Jupyter Notebook",
+    "Less",
+    "Makefile",
+    "Nix",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "gitea",
+    "golang",
+    "devops",
+    "git",
+    "gitlab",
+    "github",
+    "go",
+    "hacktoberfest",
+    "git-gui",
+    "git-server",
+    "docker-registry-v2",
+    "github-actions",
+    "maven-server",
+    "npm-registry",
+    "vue",
+    "bitbucket",
+    "cicd",
+    "typescript",
+    "self-hosted",
+    "git-lfs",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@gitea.io"
+
+[docs]
+root = "https://gitea.com/gitea/docs"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/go-gitea/gitea.git"
+default_branch = "main"
+fork = false
+head_sha = "1b0992eb2e59de4bbae27ffe122dbaaaa28b0770"
+html_url = "https://github.com/go-gitea/gitea"
+stars = 56526

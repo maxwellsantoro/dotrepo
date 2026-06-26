@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/apache/kafka"
+generated_at = "2026-06-26T18:34:59.459176Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Build a JAR and run it"
+description = "**Apache Kafka** is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications."
+homepage = "https://kafka.apache.org/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Dockerfile",
+    "HTML",
+    "Java",
+    "Python",
+    "Scala",
+    "Shell",
+    "XSLT",
+]
+topics = [
+    "scala",
+    "kafka",
+    "java",
+    "streaming",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@kafka.apache.org"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/apache/kafka.git"
+default_branch = "trunk"
+fork = false
+head_sha = "4a2edef51415883fc6539981d5860b4efc13f6a6"
+html_url = "https://github.com/apache/kafka"
+stars = 32987

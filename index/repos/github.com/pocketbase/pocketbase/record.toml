@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/pocketbase/pocketbase"
+generated_at = "2026-06-26T18:31:32.925582Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "API SDK clients"
+description = "PocketBase is an open source Go backend that includes:"
+homepage = "https://pocketbase.io"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "authentication",
+    "backend",
+    "realtime",
+    "golang",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://pkg.go.dev/github.com/pocketbase/pocketbase@master/core#BaseApp.DeleteTable"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/pocketbase/pocketbase.git"
+default_branch = "master"
+fork = false
+head_sha = "507ecb264b6155ad3677d661115ff277a48a5cdd"
+html_url = "https://github.com/pocketbase/pocketbase"
+stars = 59293

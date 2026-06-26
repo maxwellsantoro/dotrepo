@@ -1,0 +1,147 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/pytorch/pytorch"
+generated_at = "2026-06-26T18:32:38.575079Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@pytorch/pytorch-dev-infra` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "More About PyTorch"
+description = "PyTorch is a Python package that provides two high-level features:"
+homepage = "https://pytorch.org"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Cuda",
+    "Dockerfile",
+    "GDB",
+    "GLSL",
+    "HIP",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Jinja",
+    "Jupyter Notebook",
+    "Linker Script",
+    "Makefile",
+    "Metal",
+    "Objective-C",
+    "Objective-C++",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "Starlark",
+    "Thrift",
+    "Vim Script",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "neural-network",
+    "autograd",
+    "gpu",
+    "numpy",
+    "deep-learning",
+    "tensor",
+    "python",
+    "machine-learning",
+]
+
+[owners]
+maintainers = [
+    "@fmassa",
+    "@ezyang",
+    "@malfet",
+    "@albanD",
+    "@soulitzer",
+    "@jbschlosser",
+    "@mikaylagawarecki",
+    "@janeyx99",
+    "@larryliu0820",
+    "@salilsdesai",
+    "@kimishpatel",
+    "@digantdesai",
+    "@jianyuh",
+    "@jerryzh168",
+    "@hdcharles",
+    "@jiayisuse",
+    "@osalpekar",
+    "@lw",
+    "@d4l3k",
+    "@fduwjj",
+    "@kapilsh",
+    "@kwen2501",
+    "@weifengpy",
+    "@titaiwangms",
+    "@xadupre",
+    "@justinchuby",
+    "@pytorch/pytorch-dev-infra",
+    "@jeffdaily",
+    "@desertfire",
+    "@Chillee",
+    "@eellison",
+    "@shunting314",
+    "@bertmaher",
+    "@jataylo",
+    "@jithunnair-amd",
+    "@pruthvistony",
+    "@EikanWang",
+    "@gujinghui",
+    "@mruberry",
+    "@lezcano",
+    "@nikitaved",
+    "@zou3519",
+    "@chillee",
+    "@kshitij12345",
+    "@aorenste",
+    "@tugsbayasgalan",
+    "@ydwu4",
+    "@bdhirsh",
+    "@egienvalue",
+    "@scotts",
+    "@ryanzhang22",
+    "@divyanshk",
+    "@ramanishsingh",
+    "@aelavender",
+    "@avikchaudhuri",
+    "@zhxchen17",
+    "@angelayi",
+    "@SherlockNoMad",
+    "@laithsakka",
+    "@eqy",
+    "@syed-ahmed",
+    "@Aidyn-A",
+    "@XuehaiPan",
+    "@drisspg",
+    "@slayton58",
+    "@amjames",
+    "@pearu",
+]
+team = "@pytorch/pytorch-dev-infra"
+security_contact = "https://github.com/pytorch/pytorch/issues/new?template=bug-report.yml"
+
+[docs]
+root = "https://pytorch.org/docs/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/pytorch/pytorch.git"
+default_branch = "main"
+fork = false
+head_sha = "e508d4ea85f9be4c553f7941483f616737ffd128"
+html_url = "https://github.com/pytorch/pytorch"
+stars = 101066
