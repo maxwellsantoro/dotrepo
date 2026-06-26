@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/docker/cli"
-generated_at = "2026-04-20T13:12:46.976563Z"
+generated_at = "2026-06-26T17:58:41.364819Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@docker/runtime-owners` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Left `repo.test` unset because `.github/workflows/test.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@docker/runtime-owners` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Left `repo.test` unset because `.github/workflows/test.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Docker CLI"
@@ -50,6 +51,6 @@ archived = false
 clone_url = "https://github.com/docker/cli.git"
 default_branch = "master"
 fork = false
-head_sha = "f31b8b2697411725e9df5008ae1da78d53cee58e"
+head_sha = "8900f1d330cb39e93e16d780a26bff1d7e07ba03"
 html_url = "https://github.com/docker/cli"
-stars = 5804
+stars = 5937

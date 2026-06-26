@@ -659,6 +659,22 @@ pub fn import_repository_with_options(
     })
 }
 
+fn command_field_has_safe_candidates(
+    candidates: &[CommandCandidateSummary],
+    select_build: bool,
+) -> bool {
+    candidates.iter().any(|candidate| {
+        let value = if select_build {
+            candidate.build.as_ref()
+        } else {
+            candidate.test.as_ref()
+        };
+        value
+            .and_then(|command| sanitize_import_command(command))
+            .is_some()
+    })
+}
+
 pub fn verify_import_plan(root: &Path, plan: &ImportPlan, source_url: &str) -> VerificationReport {
     let mut checks = Vec::new();
     let mut candidate_provenance = Vec::new();
@@ -716,26 +732,17 @@ pub fn verify_import_plan(root: &Path, plan: &ImportPlan, source_url: &str) -> V
         });
     }
 
-    // Field completeness: check build/test resolution
+    // Field completeness: check build/test resolution. Unsafe shell-like candidates
+    // are ignored for unresolved scoring so escalation cannot re-apply them.
     if plan.manifest.repo.build.is_none() {
-        let has_candidates = plan
-            .command_candidates
-            .candidates
-            .iter()
-            .any(|c| c.build.is_some());
-        if has_candidates {
+        if command_field_has_safe_candidates(&plan.command_candidates.candidates, true) {
             unresolved_fields.push("repo.build".into());
         } else {
             absent_fields.push("repo.build".into());
         }
     }
     if plan.manifest.repo.test.is_none() {
-        let has_candidates = plan
-            .command_candidates
-            .candidates
-            .iter()
-            .any(|c| c.test.is_some());
-        if has_candidates {
+        if command_field_has_safe_candidates(&plan.command_candidates.candidates, false) {
             unresolved_fields.push("repo.test".into());
         } else {
             absent_fields.push("repo.test".into());
@@ -1232,7 +1239,8 @@ pub fn build_adjudication_requests(
             } else {
                 candidate.test.as_ref()
             };
-            if let Some(value) = value {
+            if let Some(value) = value.filter(|command| sanitize_import_command(command).is_some())
+            {
                 candidates.push(AdjudicationCandidate {
                     value: value.clone(),
                     source_path: candidate.source_path.clone(),

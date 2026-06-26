@@ -1,5 +1,6 @@
 use super::adjudication::{AdjudicationTier, ImportEscalationOptions, TieredAdjudicationProviders};
 use super::commands::load_first_existing_file;
+use super::commands::sanitize_import_command;
 use super::{
     apply_adjudication_response, apply_adjudication_results, build_adjudication_requests,
     is_actionable_security_url, parse_codeowners_metadata, parse_contributing_security,
@@ -75,6 +76,7 @@ fn adjudicate_request_deterministic(
             .candidates
             .iter()
             .filter(|candidate| candidate.source_tier == tier)
+            .filter(|candidate| sanitize_import_command(&candidate.value).is_some())
             .collect();
         if tier_candidates.is_empty() {
             continue;
@@ -149,6 +151,34 @@ pub fn apply_adjudication_to_import_plan(
     for (request, result) in requests.iter().zip(results.iter()) {
         match &result.outcome {
             AdjudicationOutcome::Resolved { value, .. } => {
+                let is_command_field = result.field == "repo.build" || result.field == "repo.test";
+                let safe_value = if is_command_field {
+                    match sanitize_import_command(value) {
+                        Some(command) => command,
+                        None => {
+                            if result.field == "repo.build" {
+                                plan.manifest.repo.build = None;
+                                plan.command_candidates.selected_build = None;
+                            } else if result.field == "repo.test" {
+                                plan.manifest.repo.test = None;
+                                plan.command_candidates.selected_test = None;
+                            }
+                            if let Some(ref mut evidence) = plan.evidence_text {
+                                evidence.push_str("\n- Left `");
+                                evidence.push_str(&result.field);
+                                evidence.push_str("` unset after ");
+                                evidence.push_str(escalation_label);
+                                evidence.push_str(
+                                    " escalation: candidate command was unsafe shell-like.",
+                                );
+                                evidence.push('.');
+                            }
+                            continue;
+                        }
+                    }
+                } else {
+                    value.clone()
+                };
                 let source_path = request
                     .candidates
                     .iter()
@@ -173,19 +203,19 @@ pub fn apply_adjudication_to_import_plan(
                     })
                     .unwrap_or(ImportedCommandProvenance::Inferred);
                 let selection = CommandCandidateSelection {
-                    command: value.clone(),
+                    command: safe_value.clone(),
                     source_path: source_path.clone(),
                     provenance,
                 };
                 let bullet = format!(
                     "Set `{}` to `{}` from `{}` after {} escalation.",
-                    result.field, value, source_path, escalation_label
+                    result.field, safe_value, source_path, escalation_label
                 );
                 if result.field == "repo.build" {
-                    plan.manifest.repo.build = Some(value.clone());
+                    plan.manifest.repo.build = Some(safe_value);
                     plan.command_candidates.selected_build = Some(selection);
                 } else if result.field == "repo.test" {
-                    plan.manifest.repo.test = Some(value.clone());
+                    plan.manifest.repo.test = Some(safe_value);
                     plan.command_candidates.selected_test = Some(selection);
                 }
                 if let Some(ref mut evidence) = plan.evidence_text {
@@ -783,6 +813,45 @@ mod tests {
             plan.manifest.repo.build.as_deref(),
             Some("cargo build --workspace")
         );
+
+        fs::remove_dir_all(root).expect("cleanup");
+    }
+
+    #[test]
+    fn escalation_does_not_apply_unsafe_task_script_test_command() {
+        let root = temp_dir("unsafe-makefile-test");
+        fs::write(root.join("README.md"), "# Docker CLI\n\nThe Docker CLI.\n").expect("readme");
+        fs::write(
+            root.join("Makefile"),
+            ".PHONY: test-unit\n\
+             test-unit:\n\
+             \tgotestsum -- $${TESTDIRS:-$(shell go list ./... | grep -vE '/vendor/')} $(TESTFLAGS)\n",
+        )
+        .expect("makefile");
+
+        let source = "https://github.com/docker/cli";
+        let mut plan =
+            import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+        let verification = crate::import::verify_import_plan(&root, &plan, source);
+        let mut scores = score_import_fields(&plan, &verification);
+
+        let report = run_import_escalation(
+            &root,
+            &mut plan,
+            &verification,
+            &mut scores,
+            &ImportEscalationOptions::default(),
+            TieredAdjudicationProviders {
+                local_primary: None,
+                local_second_opinion: None,
+                api_escalation: None,
+            },
+        );
+
+        assert_eq!(report.model_calls, 0);
+        assert!(plan.manifest.repo.test.is_none());
+        assert!(!scores.summary.unresolved.contains(&"repo.test".to_string()));
+        crate::validate_manifest(&root, &plan.manifest).expect("manifest validates");
 
         fs::remove_dir_all(root).expect("cleanup");
     }
