@@ -93,7 +93,7 @@ DOCS_SECTIONS = [
             {
                 "label": "Growth and automation plan",
                 "href": "https://github.com/maxwellsantoro/dotrepo/blob/main/docs/growth-and-automation-plan.md",
-                "summary": "The path from proof surface to useful service: 15 repositories now, 50 reviewed as the next concrete milestone.",
+                "summary": "How the index moved beyond its first 50-repository tranche and how reviewed growth continues.",
                 "kind": "Repo doc",
             },
             {
@@ -249,15 +249,23 @@ def load_index_progress(index_root: Path) -> dict:
         raise SystemExit(f"missing required index root: {repo_root}")
 
     language_counts: Counter[str] = Counter()
-    reviewed_repo_count = 0
+    indexed_repo_count = 0
+    reviewed_or_better_count = 0
+    imported_or_inferred_count = 0
     for record_path in sorted(repo_root.glob("*/*/*/record.toml")):
         document = tomllib.loads(record_path.read_text())
+        record = document.get("record", {})
         repo = document.get("repo", {})
         languages = repo.get("languages", [])
         if not isinstance(languages, list):
             languages = []
         language_counts[normalize_language_family(languages)] += 1
-        reviewed_repo_count += 1
+        indexed_repo_count += 1
+        status = record.get("status")
+        if status in {"reviewed", "verified", "canonical"}:
+            reviewed_or_better_count += 1
+        if status in {"imported", "inferred"}:
+            imported_or_inferred_count += 1
 
     accepted_claim_count = 0
     for claim_path in sorted(repo_root.glob("*/*/*/claims/*/claim.toml")):
@@ -267,18 +275,21 @@ def load_index_progress(index_root: Path) -> dict:
             accepted_claim_count += 1
 
     tranche_target = 50
-    tranche_percent = round((reviewed_repo_count / tranche_target) * 100) if reviewed_repo_count else 0
+    tranche_overage = max(0, indexed_repo_count - tranche_target)
     family_order = ["Rust", "TypeScript/JS", "Python", "Go", "Other"]
     language_mix = " · ".join(
         f"{family} {language_counts[family]}" for family in family_order if language_counts[family]
     )
     if not language_mix:
-        language_mix = "No reviewed records yet."
+        language_mix = "No indexed records yet."
 
     return {
-        "reviewedRepoCount": reviewed_repo_count,
+        "indexedRepoCount": indexed_repo_count,
+        "reviewedOrBetterCount": reviewed_or_better_count,
+        "importedOrInferredCount": imported_or_inferred_count,
         "trancheTarget": tranche_target,
-        "tranchePercent": tranche_percent,
+        "trancheComplete": indexed_repo_count >= tranche_target,
+        "trancheOverage": tranche_overage,
         "languageMix": language_mix,
         "acceptedClaimCount": accepted_claim_count,
     }
@@ -408,8 +419,8 @@ def render_site_header(base_path: str, active: str | None = None) -> str:
         ("home", site_href(base_path, "/"), "Home"),
         ("docs", site_href(base_path, "/docs/"), "Docs"),
         ("writing", site_href(base_path, "/writing/"), "Writing"),
+        ("repositories", site_href(base_path, "/repositories/"), "Repositories"),
         ("github", "https://github.com/maxwellsantoro/dotrepo", "GitHub"),
-        ("inventory", site_href(base_path, "/v0/repos/index.json"), "Inventory"),
         ("snapshot", site_href(base_path, "/v0/meta.json"), "Snapshot"),
     ]
     items = []
@@ -520,9 +531,14 @@ def render_docs_cards(base_path: str) -> str:
     return "\n    ".join(cards)
 
 
-def render_repository_cards(inventory: dict) -> str:
+def render_repository_cards(
+    inventory: dict, *, limit: int | None = None, searchable: bool = False
+) -> str:
     cards = []
-    for entry in inventory.get("repositories", []):
+    repositories = inventory.get("repositories", [])
+    if limit is not None:
+        repositories = repositories[:limit]
+    for entry in repositories:
         identity = entry.get("identity", {})
         name = repository_card_title(entry, identity)
         description = repository_card_description(entry)
@@ -534,9 +550,15 @@ def render_repository_cards(inventory: dict) -> str:
         summary = links.get("self", "#")
         trust = links.get("trust", "#")
         query = links.get("queryTemplate", "#").replace("{dot_path}", "repo.description")
+        search_index = " ".join((str(name), label, str(description))).lower()
+        search_attribute = (
+            f' data-search-index="{html.escape(search_index, quote=True)}"'
+            if searchable
+            else ""
+        )
         cards.append(
             """
-            <article class="repo-card">
+            <article class="repo-card"{search_attribute}>
               <div class="repo-card__head">
                 <p class="repo-card__eyebrow">Indexed repository</p>
                 <h3>{name}</h3>
@@ -556,6 +578,7 @@ def render_repository_cards(inventory: dict) -> str:
                 summary=html.escape(summary),
                 trust=html.escape(trust),
                 query=html.escape(query),
+                search_attribute=search_attribute,
             ).strip()
         )
     return "\n".join(cards)
@@ -703,6 +726,255 @@ def render_lookup_panel(base_path: str) -> str:
         }})();
       </script>
     """.strip()
+
+
+def render_repositories_index(inventory: dict, base_path: str) -> str:
+    repository_count = len(inventory.get("repositories", []))
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
+  <title>Repositories · dotrepo</title>
+  <meta name="description" content="Browse and search repositories in the current reviewed dotrepo public export.">
+  <style>
+    :root {{
+      color-scheme: light;
+      --paper: #f6f1e8;
+      --paper-strong: #efe6d7;
+      --ink: #16181b;
+      --muted: #5c635d;
+      --panel: rgba(255, 251, 244, 0.84);
+      --line: rgba(54, 46, 28, 0.14);
+      --accent: #116466;
+      --accent-strong: #0d494b;
+      --signal: #c4572e;
+      --shadow: 0 18px 60px rgba(23, 27, 31, 0.12);
+      --radius: 22px;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(17, 100, 102, 0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(196, 87, 46, 0.12), transparent 30%),
+        linear-gradient(180deg, #fbf6ec 0%, var(--paper) 54%, var(--paper-strong) 100%);
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    }}
+    a {{ color: inherit; text-decoration: none; }}
+    code {{ font-family: "SFMono-Regular", "JetBrains Mono", "Cascadia Code", monospace; }}
+    .page {{ max-width: 1180px; margin: 0 auto; padding: 28px 18px 80px; }}
+    .nav {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }}
+    .brand {{ display: flex; align-items: baseline; gap: 12px; }}
+    .brand__mark {{
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.06em;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }}
+    .brand__dot {{
+      display: inline-block;
+      width: 0.40em;
+      height: 0.40em;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      translate: 0 -0.05em;
+    }}
+    .brand__tag {{
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }}
+    .nav__links {{ display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; }}
+    .nav__links a {{
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.48);
+    }}
+    .nav__links a[aria-current="page"] {{
+      background: linear-gradient(135deg, var(--accent) 0%, #0b4b5a 100%);
+      color: white;
+      border-color: transparent;
+    }}
+    .panel {{
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }}
+    .hero {{ padding: 34px; display: grid; gap: 16px; }}
+    .eyebrow {{
+      margin: 0;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }}
+    h1 {{
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }}
+    .hero p {{ margin: 0; color: #273038; font-size: 1.08rem; line-height: 1.75; max-width: 46rem; }}
+    .catalog {{ margin-top: 26px; padding: 30px; }}
+    .catalog-tools {{
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: end;
+    }}
+    .search-field {{ display: grid; gap: 8px; }}
+    .search-field span {{
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }}
+    .search-field input {{
+      width: 100%;
+      min-width: 0;
+      padding: 14px 16px;
+      border: 1px solid rgba(54, 46, 28, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 251, 244, 0.94);
+      color: var(--ink);
+      font: inherit;
+    }}
+    .search-field input:focus {{ outline: 2px solid rgba(17, 100, 102, 0.3); outline-offset: 2px; }}
+    .result-count {{ margin: 0; padding-bottom: 14px; color: var(--muted); white-space: nowrap; }}
+    .repo-grid {{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }}
+    .repo-card {{
+      min-width: 0;
+      padding: 22px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }}
+    .repo-card[hidden] {{ display: none; }}
+    .repo-card__eyebrow {{
+      margin: 0 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--signal);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }}
+    .repo-card__head h3 {{ margin: 0; font-size: 1.34rem; }}
+    .repo-card__path {{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-family: "SFMono-Regular", "JetBrains Mono", "Cascadia Code", monospace;
+      font-size: 0.9rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }}
+    .repo-card__description {{ margin: 14px 0 0; color: #30363c; line-height: 1.7; }}
+    .repo-card__links {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+      font-weight: 700;
+      color: var(--accent-strong);
+    }}
+    .no-results {{ margin: 22px 0 0; color: var(--muted); }}
+    .footer {{
+      margin-top: 28px;
+      padding: 10px 2px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }}
+    @media (max-width: 980px) {{ .repo-grid {{ grid-template-columns: 1fr; }} }}
+    @media (max-width: 720px) {{
+      .page {{ padding: 18px 14px 56px; }}
+      .hero, .catalog {{ padding: 22px; }}
+      .nav {{ align-items: flex-start; flex-direction: column; }}
+      .nav__links {{ justify-content: flex-start; }}
+      .catalog-tools {{ grid-template-columns: 1fr; }}
+      .result-count {{ padding-bottom: 0; }}
+    }}
+  </style>
+</head>
+<body>
+  <div class="page">
+    {render_site_header(base_path, "repositories")}
+    <section class="panel hero">
+      <p class="eyebrow">Public inventory</p>
+      <h1>Find a repository.</h1>
+      <p>Search the current reviewed export by project, owner, host, or description, then open its summary, trust report, or query response.</p>
+    </section>
+    <section class="panel catalog">
+      <div class="catalog-tools">
+        <label class="search-field" for="repository-search">
+          <span>Search repositories</span>
+          <input id="repository-search" type="search" placeholder="Try ripgrep, Python, or github.com/astral-sh/uv" autocomplete="off">
+        </label>
+        <p class="result-count" id="repository-result-count" aria-live="polite">{repository_count} repositories</p>
+      </div>
+      <div class="repo-grid" id="repository-grid">
+        {render_repository_cards(inventory, searchable=True)}
+      </div>
+      <p class="no-results" id="repository-no-results" hidden>No repositories match this search.</p>
+    </section>
+    <footer class="footer">
+      <span>Machine-readable inventory: <a href="{site_href(base_path, '/v0/repos/index.json')}">/v0/repos/index.json</a></span>
+      <span>Snapshot: <a href="{site_href(base_path, '/v0/meta.json')}">/v0/meta.json</a></span>
+      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+    </footer>
+  </div>
+  <script>
+    (() => {{
+      const input = document.getElementById("repository-search");
+      const cards = Array.from(document.querySelectorAll("[data-search-index]"));
+      const count = document.getElementById("repository-result-count");
+      const noResults = document.getElementById("repository-no-results");
+
+      function updateResults() {{
+        const query = input.value.trim().toLowerCase();
+        let visible = 0;
+        for (const card of cards) {{
+          const matches = !query || card.dataset.searchIndex.includes(query);
+          card.hidden = !matches;
+          if (matches) visible += 1;
+        }}
+        count.textContent = `${{visible}} ${{visible === 1 ? "repository" : "repositories"}}`;
+        noResults.hidden = visible !== 0;
+      }}
+
+      input.addEventListener("input", updateResults);
+    }})();
+  </script>
+</body>
+</html>
+"""
 
 
 def render_writing_index(base_path: str) -> str:
@@ -1462,14 +1734,21 @@ def main() -> int:
     first_query, query_example = build_query_example(input_dir, inventory)
     featured_trust = build_featured_trust_example(input_dir, inventory)
     homepage_snapshot_state = build_homepage_snapshot_state(meta, inventory)
-    reviewed_repo_count = progress["reviewedRepoCount"]
+    indexed_repo_count = progress["indexedRepoCount"]
+    reviewed_or_better_count = progress["reviewedOrBetterCount"]
+    imported_or_inferred_count = progress["importedOrInferredCount"]
     tranche_target = progress["trancheTarget"]
-    tranche_percent = progress["tranchePercent"]
+    tranche_complete = progress["trancheComplete"]
+    tranche_overage = progress["trancheOverage"]
     language_mix = str(progress["languageMix"])
     accepted_claim_count = progress["acceptedClaimCount"]
     accepted_claim_label = (
         "accepted claim example" if accepted_claim_count == 1 else "accepted claim examples"
     )
+    tranche_heading = "First tranche complete" if tranche_complete else "First tranche in progress"
+    tranche_detail = f"{indexed_repo_count} indexed against the initial target of {tranche_target}"
+    if tranche_overage:
+        tranche_detail += f"; {tranche_overage} beyond target"
 
     stale_line = (
         f"<span>{html.escape(format_timestamp_for_humans(str(stale_after)))}</span>"
@@ -1589,6 +1868,7 @@ def main() -> int:
       align-items: stretch;
     }}
     .panel {{
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--panel);
@@ -1803,6 +2083,7 @@ def main() -> int:
       line-height: 1.7;
     }}
     .api-grid {{
+      min-width: 0;
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
       gap: 16px;
@@ -1836,11 +2117,16 @@ def main() -> int:
       color: var(--muted);
       font-size: 0.96rem;
     }}
+    .api-card__caption code {{
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }}
     .endpoint-list {{
       display: grid;
       gap: 12px;
     }}
     .endpoint {{
+      min-width: 0;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 14px;
@@ -1851,8 +2137,11 @@ def main() -> int:
       border: 1px solid rgba(54, 46, 28, 0.08);
     }}
     .endpoint code {{
+      min-width: 0;
       color: var(--accent-strong);
       font-weight: 600;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }}
     .lookup-card .endpoint code {{
       min-width: 0;
@@ -1865,7 +2154,9 @@ def main() -> int:
       min-width: 0;
     }}
     .endpoint span {{
+      min-width: 0;
       color: var(--muted);
+      overflow-wrap: anywhere;
     }}
     .endpoint--query {{
       align-items: flex-start;
@@ -1888,6 +2179,7 @@ def main() -> int:
       margin-top: 18px;
     }}
     .repo-card {{
+      min-width: 0;
       padding: 22px;
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.7);
@@ -1915,6 +2207,8 @@ def main() -> int:
       color: var(--muted);
       font-family: "SFMono-Regular", "JetBrains Mono", "Cascadia Code", monospace;
       font-size: 0.9rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }}
     .repo-card__description {{
       margin: 14px 0 0;
@@ -2000,12 +2294,16 @@ def main() -> int:
             <span>Published in the current reviewed export.</span>
           </div>
           <div class="stat">
-            <strong>{html.escape(str(reviewed_repo_count))} / {html.escape(str(tranche_target))} reviewed</strong>
-            <span>{html.escape(str(tranche_percent))}% of the first tranche target.</span>
+            <strong>{html.escape(str(reviewed_or_better_count))} reviewed or better</strong>
+            <span>{html.escape(str(imported_or_inferred_count))} records remain imported or inferred.</span>
+          </div>
+          <div class="stat">
+            <strong>{tranche_heading}</strong>
+            <span>{html.escape(tranche_detail)}.</span>
           </div>
           <div class="stat">
             <strong>{html.escape(language_mix)}</strong>
-            <span>Primary language-family mix in checked-in reviewed records.</span>
+            <span>Primary language-family mix in checked-in index records.</span>
           </div>
           <div class="stat">
             <strong>{html.escape(str(accepted_claim_count))} {accepted_claim_label}</strong>
@@ -2211,9 +2509,11 @@ def main() -> int:
 
     <section class="panel section">
       <h2>Indexed repositories</h2>
+      <p class="section__intro">A small sample from the current export. Use the repository catalog to search the complete index.</p>
       <div class="repo-grid">
-        {render_repository_cards(inventory)}
+        {render_repository_cards(inventory, limit=8)}
       </div>
+      <p class="section__note"><a href="{site_href(base_path, '/repositories/')}">Browse all {html.escape(str(repository_count))} repositories</a></p>
     </section>
 
     <footer class="footer">
@@ -2229,6 +2529,10 @@ def main() -> int:
 
     write_text(input_dir / "index.html", document)
     write_text(input_dir / "docs" / "index.html", render_docs_index(base_path))
+    write_text(
+        input_dir / "repositories" / "index.html",
+        render_repositories_index(inventory, base_path),
+    )
     write_text(input_dir / "writing" / "index.html", render_writing_index(base_path))
     for article in ARTICLES:
         write_text(
