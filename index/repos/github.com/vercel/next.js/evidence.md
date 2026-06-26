@@ -5,6 +5,9 @@
 - Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands.
 - Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Left `repo.build` unset after model escalation: The repository contains both a Rust workspace and a Node.js package, representing two distinct primary build systems. No single primary build command can be selected without bias..
+- Left `repo.test` unset after model escalation: The candidates represent mutually exclusive language ecosystems (Rust vs Node.js); no single primary value can represent the repository as a whole..
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

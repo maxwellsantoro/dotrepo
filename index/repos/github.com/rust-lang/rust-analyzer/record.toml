@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/rust-lang/rust-analyzer"
-generated_at = "2026-04-20T13:11:08.878711Z"
+generated_at = "2026-06-26T17:40:06.079829Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "rust-analyzer"
@@ -37,6 +36,10 @@ topics = [
     "hacktoberfest",
 ]
 
+[owners]
+maintainers = []
+security_contact = "https://rust-analyzer.github.io/book/security.html"
+
 [relations]
 references = []
 
@@ -45,6 +48,6 @@ archived = false
 clone_url = "https://github.com/rust-lang/rust-analyzer.git"
 default_branch = "master"
 fork = false
-head_sha = "cc5bc48b256d8c996a98fa13ae52a0af29b302fa"
+head_sha = "a77548188dbecc332bdc292b01a5077ec770cd98"
 html_url = "https://github.com/rust-lang/rust-analyzer"
-stars = 16283
+stars = 16603

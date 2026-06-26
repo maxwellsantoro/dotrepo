@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rust-lang/rustfmt"
-generated_at = "2026-04-20T13:11:12.086996Z"
+generated_at = "2026-06-26T17:40:09.27473Z"
 
 [record.trust]
 confidence = "high"
@@ -21,7 +21,6 @@ homepage = "https://rust-lang.github.io/rustfmt/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
     "RenderScript",
     "Rust",
     "Shell",
@@ -43,6 +42,6 @@ archived = false
 clone_url = "https://github.com/rust-lang/rustfmt.git"
 default_branch = "main"
 fork = false
-head_sha = "e28eb9e2505121b2010b5ab8eda7be4f257a04a2"
+head_sha = "95dfb4cb589453758c15b8581ee591255b31a4cc"
 html_url = "https://github.com/rust-lang/rustfmt"
-stars = 6800
+stars = 6891

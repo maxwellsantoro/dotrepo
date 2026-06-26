@@ -2,22 +2,19 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/pydantic/pydantic"
-generated_at = "2026-04-20T13:12:01.374629Z"
+generated_at = "2026-06-26T17:44:46.893683Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Pydantic Validation"
 description = "Data validation using Python type hints."
-homepage = "https://docs.pydantic.dev"
+homepage = "https://pydantic.dev/docs/validation"
 license = "MIT"
 visibility = "public"
 languages = [
@@ -44,8 +41,12 @@ topics = [
     "python313",
 ]
 
+[owners]
+maintainers = []
+security_contact = "https://github.com/pydantic/pydantic/security/policy"
+
 [docs]
-root = "https://docs.pydantic.dev/"
+root = "https://pydantic.dev/docs/validation/latest/get-started/"
 
 [relations]
 references = []
@@ -55,6 +56,6 @@ archived = false
 clone_url = "https://github.com/pydantic/pydantic.git"
 default_branch = "main"
 fork = false
-head_sha = "a6bf50b721c2dd1ed609c8bb402076e8ec0c43f3"
+head_sha = "ee857ec769317486e6851c51ce56c9ad54af0ee7"
 html_url = "https://github.com/pydantic/pydantic"
-stars = 27535
+stars = 28120

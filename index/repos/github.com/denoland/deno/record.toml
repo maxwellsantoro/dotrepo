@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/denoland/deno"
-generated_at = "2026-04-20T13:11:55.526046Z"
+generated_at = "2026-06-26T17:42:09.473555Z"
 
 [record.trust]
 confidence = "high"
@@ -34,6 +34,7 @@ languages = [
     "Nunjucks",
     "Python",
     "Rust",
+    "Shell",
     "Svelte",
     "TypeScript",
     "Vento",
@@ -60,6 +61,6 @@ archived = false
 clone_url = "https://github.com/denoland/deno.git"
 default_branch = "main"
 fork = false
-head_sha = "ccc0d6f59377a4eae2dc6c025a7dc7ce3e410de9"
+head_sha = "49c38256b8affe8aca3f9893576e44de239f486c"
 html_url = "https://github.com/denoland/deno"
-stars = 106523
+stars = 107332
