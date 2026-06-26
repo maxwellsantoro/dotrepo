@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/prometheus/prometheus"
-generated_at = "2026-04-20T13:12:50.509271Z"
+generated_at = "2026-06-26T17:38:13.21534Z"
 
 [record.trust]
 confidence = "medium"
@@ -63,6 +63,7 @@ maintainers = [
     "@jesusvazquez",
     "@ArthurSens",
     "@codesome",
+    "@kgeckhart",
     "@brancz",
     "@rexagod",
     "@jkroepke",
@@ -84,6 +85,6 @@ archived = false
 clone_url = "https://github.com/prometheus/prometheus.git"
 default_branch = "main"
 fork = false
-head_sha = "57821524d5e28c63eb7ac085af012b5a8deb6fa1"
+head_sha = "722334c6cd169d76d785a1bba05712bcf1cbb3de"
 html_url = "https://github.com/prometheus/prometheus"
-stars = 63659
+stars = 64796
