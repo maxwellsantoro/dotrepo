@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/numpy/numpy"
-generated_at = "2026-04-20T13:12:20.992781Z"
+generated_at = "2026-06-26T17:37:51.830942Z"
 
 [record.trust]
 confidence = "high"
@@ -30,7 +30,6 @@ languages = [
     "Python",
     "Shell",
     "Smarty",
-    "Starlark",
     "sed",
 ]
 build = "python -m build"
@@ -48,6 +47,6 @@ archived = false
 clone_url = "https://github.com/numpy/numpy.git"
 default_branch = "main"
 fork = false
-head_sha = "d3a73173a9ef321d014e10255b62ace2104af6f2"
+head_sha = "73d14198a7e98ece82fdd1e3554e6c3d7060ae7b"
 html_url = "https://github.com/numpy/numpy"
-stars = 31865
+stars = 32278

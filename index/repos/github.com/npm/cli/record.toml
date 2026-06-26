@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/npm/cli"
-generated_at = "2026-04-20T13:11:23.210383Z"
+generated_at = "2026-06-26T17:37:48.763157Z"
 
 [record.trust]
 confidence = "high"
@@ -38,8 +38,10 @@ topics = [
 ]
 
 [owners]
-maintainers = ["@npm/cli-team"]
-team = "@npm/cli-team"
+maintainers = [
+    "@npm/cli-team",
+    "@npm/cli-triage",
+]
 security_contact = "opensource-security@github.com"
 
 [docs]
@@ -53,6 +55,6 @@ archived = false
 clone_url = "https://github.com/npm/cli.git"
 default_branch = "latest"
 fork = false
-head_sha = "27567ab27bef8af303bde0b2d7da0386da182b81"
+head_sha = "86416a626e4599791c5d8115ed08aa4369774844"
 html_url = "https://github.com/npm/cli"
-stars = 9689
+stars = 9874
