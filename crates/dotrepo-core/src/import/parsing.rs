@@ -1345,11 +1345,14 @@ fn extract_email_candidate(token: &str) -> Option<String> {
 
 fn extract_mailto_address(token: &str) -> Option<String> {
     let cleaned = trim_contact_token(token);
-    if cleaned.len() < 7 || !cleaned[..7].eq_ignore_ascii_case("mailto:") {
+    let prefix = cleaned.get(..7)?;
+    if !prefix.eq_ignore_ascii_case("mailto:") {
         return None;
     }
 
-    let value = cleaned[7..]
+    let value = cleaned
+        .get(7..)
+        .unwrap_or("")
         .split(['?', '#'])
         .next()
         .map(trim_contact_token)
