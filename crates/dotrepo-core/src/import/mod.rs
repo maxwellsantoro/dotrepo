@@ -30,7 +30,10 @@ pub use escalation::{
     autonomous_writeback_eligible, run_import_escalation, ImportEscalationReport,
 };
 
-use commands::{load_first_existing_file, load_workflow_import_files, sanitize_import_command};
+use commands::{
+    load_first_existing_file, load_first_root_file_with_extension, load_workflow_import_files,
+    sanitize_import_command,
+};
 
 #[allow(unused_imports)]
 pub(crate) use commands::{infer_imported_commands, infer_pyproject_commands};
@@ -290,11 +293,18 @@ pub fn import_repository_with_options(
     let package_json = load_first_existing_file(root, &["package.json"])?;
     let pyproject_toml = load_first_existing_file(root, &["pyproject.toml"])?;
     let go_mod = load_first_existing_file(root, &["go.mod"])?;
+    let pom_xml = load_first_existing_file(root, &["pom.xml"])?;
+    let composer_json = load_first_existing_file(root, &["composer.json"])?;
+    let csproj = load_first_root_file_with_extension(root, "csproj")?;
+    let mix_exs = load_first_existing_file(root, &["mix.exs"])?;
+    let rebar_config = load_first_existing_file(root, &["rebar.config"])?;
+    let cmake_presets_json = load_first_existing_file(root, &["CMakePresets.json"])?;
     let workflow_files = load_workflow_import_files(root)?;
     let contributing =
         load_first_existing_file(root, &["CONTRIBUTING.md", ".github/CONTRIBUTING.md"])?;
     let makefile = load_first_existing_file(root, &["GNUmakefile", "Makefile", "makefile"])?;
     let justfile = load_first_existing_file(root, &["justfile", "Justfile"])?;
+    let rakefile = load_first_existing_file(root, &["Rakefile", "rakefile"])?;
     let security_issue_template = load_first_existing_file(
         root,
         &[
@@ -406,8 +416,15 @@ pub fn import_repository_with_options(
         package_json: package_json.as_ref(),
         pyproject_toml: pyproject_toml.as_ref(),
         go_mod: go_mod.as_ref(),
+        pom_xml: pom_xml.as_ref(),
+        composer_json: composer_json.as_ref(),
+        csproj: csproj.as_ref(),
+        mix_exs: mix_exs.as_ref(),
+        rebar_config: rebar_config.as_ref(),
+        cmake_presets_json: cmake_presets_json.as_ref(),
         makefile: makefile.as_ref(),
         justfile: justfile.as_ref(),
+        rakefile: rakefile.as_ref(),
         contributing: contributing.as_ref(),
         workflow_files: &workflow_files,
     });
@@ -1457,8 +1474,15 @@ pub(crate) struct ImportSources<'a> {
     pub(crate) package_json: Option<&'a ImportedFile>,
     pub(crate) pyproject_toml: Option<&'a ImportedFile>,
     pub(crate) go_mod: Option<&'a ImportedFile>,
+    pub(crate) pom_xml: Option<&'a ImportedFile>,
+    pub(crate) composer_json: Option<&'a ImportedFile>,
+    pub(crate) csproj: Option<&'a ImportedFile>,
+    pub(crate) mix_exs: Option<&'a ImportedFile>,
+    pub(crate) rebar_config: Option<&'a ImportedFile>,
+    pub(crate) cmake_presets_json: Option<&'a ImportedFile>,
     pub(crate) makefile: Option<&'a ImportedFile>,
     pub(crate) justfile: Option<&'a ImportedFile>,
+    pub(crate) rakefile: Option<&'a ImportedFile>,
     pub(crate) contributing: Option<&'a ImportedFile>,
     pub(crate) workflow_files: &'a [ImportedFile],
 }

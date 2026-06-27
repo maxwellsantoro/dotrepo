@@ -1,0 +1,16 @@
+{
+  "fixture": "php-composer-canary",
+  "ecosystem": "php",
+  "repo_name": "Composer Canary",
+  "repo_description": "A compact PHP package fixture used to preserve deterministic Composer script inference.",
+  "repo_build": "composer run-script build",
+  "repo_test": "composer run-script test",
+  "imported_sources": [
+    "README.md",
+    "composer.json"
+  ],
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ]
+}

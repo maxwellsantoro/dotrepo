@@ -1,0 +1,11 @@
+{
+  "name": "dotrepo/fixture-composer-canary",
+  "description": "Offline Composer command inference fixture",
+  "scripts": {
+    "build": "@php bin/build.php",
+    "test": [
+      "@php vendor/bin/phpunit",
+      "@php vendor/bin/phpstan"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "fixture": "ruby-rake-canary",
+  "ecosystem": "ruby",
+  "repo_name": "Rake Canary",
+  "repo_description": "A compact Ruby project fixture used to preserve deterministic Rake task inference.",
+  "repo_build": "rake build",
+  "repo_test": "rake test",
+  "imported_sources": [
+    "README.md",
+    "Rakefile"
+  ],
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ]
+}

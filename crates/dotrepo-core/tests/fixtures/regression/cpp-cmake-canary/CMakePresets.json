@@ -1,0 +1,33 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "ci",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build"
+    }
+  ],
+  "buildPresets": [
+    {"name": "ci", "configurePreset": "ci"}
+  ],
+  "testPresets": [
+    {"name": "ci", "configurePreset": "ci"}
+  ],
+  "workflowPresets": [
+    {
+      "name": "build-ci",
+      "steps": [
+        {"type": "configure", "name": "ci"},
+        {"type": "build", "name": "ci"}
+      ]
+    },
+    {
+      "name": "test-ci",
+      "steps": [
+        {"type": "configure", "name": "ci"},
+        {"type": "build", "name": "ci"},
+        {"type": "test", "name": "ci"}
+      ]
+    }
+  ]
+}

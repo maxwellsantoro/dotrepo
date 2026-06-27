@@ -1,0 +1,16 @@
+{
+  "fixture": "erlang-rebar-canary",
+  "ecosystem": "erlang",
+  "repo_name": "Rebar Canary",
+  "repo_description": "A compact Erlang project fixture used to preserve deterministic Rebar command inference.",
+  "repo_build": "rebar3 compile",
+  "repo_test": "rebar3 eunit",
+  "imported_sources": [
+    "README.md",
+    "rebar.config"
+  ],
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ]
+}

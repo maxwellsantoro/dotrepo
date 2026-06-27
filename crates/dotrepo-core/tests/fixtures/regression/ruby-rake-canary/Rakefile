@@ -1,0 +1,5 @@
+task :build do
+end
+
+task test: :build do
+end

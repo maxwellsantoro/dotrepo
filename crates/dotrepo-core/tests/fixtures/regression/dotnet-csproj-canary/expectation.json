@@ -1,0 +1,16 @@
+{
+  "fixture": "dotnet-csproj-canary",
+  "ecosystem": "dotnet",
+  "repo_name": "Dotnet Test Canary",
+  "repo_description": "A compact .NET test project fixture used to preserve deterministic SDK project inference.",
+  "repo_build": "dotnet build",
+  "repo_test": "dotnet test",
+  "imported_sources": [
+    "README.md",
+    "Dotrepo.Canary.Tests.csproj"
+  ],
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ]
+}

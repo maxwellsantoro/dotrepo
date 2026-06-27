@@ -17,6 +17,8 @@
 use dotrepo_core::{import_repository, parse_rfc3339, ImportMode, ImportPlan};
 use dotrepo_schema::RecordStatus;
 use serde::Deserialize;
+use sha2::{Digest, Sha256};
+use std::collections::{BTreeSet, HashMap};
 use std::fs;
 use std::path::PathBuf;
 
@@ -68,6 +70,8 @@ struct RegressionExpectation {
     captured_at: Option<String>,
     #[serde(default)]
     captured_files: Option<Vec<String>>,
+    #[serde(default)]
+    captured_file_sha256: Option<HashMap<String, String>>,
 }
 
 fn regression_root() -> PathBuf {
@@ -172,6 +176,45 @@ fn assert_metadata_matches(expectation: &RegressionExpectation, root: &std::path
             );
         }
     }
+    if let Some(captured_file_sha256) = expectation.captured_file_sha256.as_ref() {
+        let captured_files = expectation
+            .captured_files
+            .as_deref()
+            .expect("captured_file_sha256 requires captured_files");
+        assert_eq!(
+            captured_file_sha256.len(),
+            captured_files.len(),
+            "regression fixture `{}` captured_file_sha256 must cover every captured file exactly once",
+            expectation.fixture
+        );
+        for captured_file in captured_files {
+            let expected = captured_file_sha256.get(captured_file).unwrap_or_else(|| {
+                panic!(
+                    "regression fixture `{}` is missing a digest for captured file `{}`",
+                    expectation.fixture, captured_file
+                )
+            });
+            assert!(
+                expected.len() == 64 && expected.chars().all(|ch| ch.is_ascii_hexdigit()),
+                "regression fixture `{}` captured file `{}` has invalid SHA-256 `{}`",
+                expectation.fixture,
+                captured_file,
+                expected
+            );
+            let bytes = fs::read(root.join(captured_file)).unwrap_or_else(|err| {
+                panic!(
+                    "regression fixture `{}` captured file `{}` is unreadable: {}",
+                    expectation.fixture, captured_file, err
+                )
+            });
+            let actual = format!("{:x}", Sha256::digest(bytes));
+            assert_eq!(
+                actual, *expected,
+                "regression fixture `{}` captured file `{}` digest",
+                expectation.fixture, captured_file
+            );
+        }
+    }
 }
 
 fn assert_plan_matches(plan: &ImportPlan, expectation: &RegressionExpectation) {
@@ -256,11 +299,11 @@ fn assert_plan_matches(plan: &ImportPlan, expectation: &RegressionExpectation) {
 #[test]
 fn regression_fixture_pack_replays_checked_in_fixtures() {
     let fixtures = discover_fixtures();
-    // No fixtures yet is a valid state: the harness no-ops and stays green as the
-    // checked-in set grows.
-    if fixtures.is_empty() {
-        return;
-    }
+    assert!(
+        !fixtures.is_empty(),
+        "regression fixture pack must not be empty"
+    );
+    let mut covered_ecosystems = BTreeSet::new();
 
     for expectation_path in fixtures {
         let expectation = load_expectation(&expectation_path);
@@ -280,6 +323,7 @@ fn regression_fixture_pack_replays_checked_in_fixtures() {
                 expectation.fixture,
                 ecosystem
             );
+            covered_ecosystems.insert(ecosystem.to_string());
         }
         assert_metadata_matches(&expectation, root);
         let overlay_source = format!("https://example.com/regression/{}", expectation.fixture);
@@ -300,4 +344,16 @@ fn regression_fixture_pack_replays_checked_in_fixtures() {
             );
         }
     }
+
+    let missing = KNOWN_ECOSYSTEMS
+        .iter()
+        .copied()
+        .filter(|ecosystem| *ecosystem != "unknown")
+        .filter(|ecosystem| !covered_ecosystems.contains(*ecosystem))
+        .collect::<Vec<_>>();
+    assert!(
+        missing.is_empty(),
+        "regression fixture pack must cover every named ecosystem; missing: {}",
+        missing.join(", ")
+    );
 }

@@ -19,6 +19,7 @@ pipeline in a throwaway temp copy and parsing the generated ``.repo`` with
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import shutil
@@ -51,6 +52,7 @@ MANIFEST_CANDIDATES = [
     "setup.py",
     "requirements.txt",
     "Gemfile",
+    "Rakefile",
     "composer.json",
     "pom.xml",
     "build.gradle",
@@ -58,6 +60,7 @@ MANIFEST_CANDIDATES = [
     "Makefile",
     "Justfile",
     "CMakeLists.txt",
+    "CMakePresets.json",
     "mix.exs",
     "rebar.config",
 ]
@@ -69,10 +72,19 @@ CONVENTIONAL_PAIRS = [
 ]
 
 MAX_WORKFLOW_FILES = 3
+ROOT_EXTENSION_MANIFESTS = [".csproj"]
+STUB_SCHEMA = "dotrepo/regression-fixture-stub/v0.1"
 
 
 def now_rfc3339() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def captured_file_sha256(files: dict[str, str]) -> dict[str, str]:
+    return {
+        path: hashlib.sha256(contents.encode("utf-8")).hexdigest()
+        for path, contents in sorted(files.items())
+    }
 
 
 def _load_ecosystem_classifier():
@@ -103,6 +115,14 @@ def select_conventional_files(paths: set[str]) -> list[str]:
     for candidate in MANIFEST_CANDIDATES:
         if candidate in paths:
             selected.append(candidate)
+    for extension in ROOT_EXTENSION_MANIFESTS:
+        matches = sorted(
+            path
+            for path in paths
+            if "/" not in path and path.lower().endswith(extension)
+        )
+        if matches:
+            selected.append(matches[0])
     workflows = sorted(
         p
         for p in paths
@@ -135,6 +155,7 @@ def expectation_from_manifest(
     fingerprint: str | None = None,
     captured_at: str | None = None,
     captured_files: list[str] | None = None,
+    captured_file_sha256: dict[str, str] | None = None,
 ) -> dict:
     """Build a harness expectation by parsing a generated overlay ``record.toml``."""
     document = tomllib.loads(manifest_text)
@@ -167,6 +188,8 @@ def expectation_from_manifest(
         expectation["captured_at"] = captured_at
     if captured_files:
         expectation["captured_files"] = captured_files
+    if captured_file_sha256:
+        expectation["captured_file_sha256"] = captured_file_sha256
     return {key: value for key, value in expectation.items() if value is not None}
 
 
@@ -180,6 +203,90 @@ def parse_repo_identity(repo: str) -> tuple[str, str, str]:
     if host != "github.com":
         raise SystemExit(f"only github.com is supported today, got host {host!r}")
     return host, owner, name
+
+
+def load_stub_metadata(stub: str) -> dict:
+    path = Path(stub)
+    metadata_path = path / "metadata.json" if path.is_dir() else path
+    if not metadata_path.is_file():
+        raise SystemExit(f"regression fixture stub metadata not found at {metadata_path}")
+    try:
+        metadata = json.loads(metadata_path.read_text())
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"failed to parse regression fixture stub {metadata_path}: {exc}") from exc
+    if not isinstance(metadata, dict):
+        raise SystemExit(f"regression fixture stub {metadata_path} must contain a JSON object")
+    if metadata.get("schema") != STUB_SCHEMA:
+        raise SystemExit(
+            f"unsupported regression fixture stub schema {metadata.get('schema')!r}; expected {STUB_SCHEMA!r}"
+        )
+    if metadata.get("status") != "needs_materialization":
+        raise SystemExit("regression fixture stub status must be `needs_materialization`")
+    if metadata.get("fixtureEligible") is not True:
+        raise SystemExit("regression fixture stub is not eligible for source materialization")
+    fixture = metadata.get("fixture")
+    if not isinstance(fixture, str) or not fixture or any(
+        not (char.isalnum() or char == "-") for char in fixture
+    ):
+        raise SystemExit("regression fixture stub must contain a safe nonempty `fixture` slug")
+    for field in ("ecosystem", "fingerprint"):
+        value = metadata.get(field)
+        if not isinstance(value, str) or not value.strip():
+            raise SystemExit(f"regression fixture stub must contain nonempty `{field}`")
+    repositories = metadata.get("repositories", [])
+    if not isinstance(repositories, list) or not all(
+        isinstance(repository, str) for repository in repositories
+    ):
+        raise SystemExit("regression fixture stub `repositories` must be a list of identities")
+    normalized_repositories = sorted(set(repositories))
+    for repository in normalized_repositories:
+        parse_repo_identity(repository)
+    metadata["repositories"] = normalized_repositories
+    return metadata
+
+
+def resolve_capture_args(args: argparse.Namespace) -> argparse.Namespace:
+    if args.stub:
+        metadata = load_stub_metadata(args.stub)
+        repositories = metadata["repositories"]
+        if args.repo:
+            parse_repo_identity(args.repo)
+            if repositories and args.repo not in repositories:
+                raise SystemExit(
+                    f"--repo {args.repo!r} is not listed by regression fixture stub; "
+                    f"choose one of: {', '.join(repositories)}"
+                )
+        elif len(repositories) == 1:
+            args.repo = repositories[0]
+        elif repositories:
+            raise SystemExit(
+                "regression fixture stub lists multiple repositories; pass --repo with one of: "
+                + ", ".join(repositories)
+            )
+        else:
+            raise SystemExit(
+                "regression fixture stub does not retain a repository; pass --repo host/owner/repo"
+            )
+
+        stub_values = {
+            "slug": metadata["fixture"],
+            "ecosystem": metadata["ecosystem"],
+            "fingerprint": metadata["fingerprint"],
+        }
+        for field, stub_value in stub_values.items():
+            explicit = getattr(args, field)
+            if explicit is not None and explicit != stub_value:
+                raise SystemExit(
+                    f"--{field} {explicit!r} conflicts with stub value {stub_value!r}"
+                )
+            setattr(args, field, stub_value)
+
+    if not args.repo:
+        raise SystemExit("pass --repo host/owner/repo or --stub with retained repository metadata")
+    if not args.slug:
+        raise SystemExit("pass --slug or --stub")
+    parse_repo_identity(args.repo)
+    return args
 
 
 def gh_json(args: list[str]) -> object:
@@ -330,6 +437,7 @@ def capture(args: argparse.Namespace) -> dict:
         fingerprint=args.fingerprint,
         captured_at=now_rfc3339(),
         captured_files=selected,
+        captured_file_sha256=captured_file_sha256(fixture_files),
     )
 
     if args.dry_run:
@@ -359,8 +467,11 @@ def capture(args: argparse.Namespace) -> dict:
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repo", required=True, help="host/owner/repo to capture")
-    parser.add_argument("--slug", required=True, help="fixture directory name")
+    parser.add_argument("--repo", help="host/owner/repo to capture")
+    parser.add_argument("--slug", help="fixture directory name")
+    parser.add_argument(
+        "--stub", help="regression fixture stub directory or metadata.json to materialize"
+    )
     parser.add_argument("--ecosystem", help="override inferred ecosystem")
     parser.add_argument("--fingerprint", help="original failure fingerprint for provenance")
     parser.add_argument("--branch", help="repo branch (default: repo default branch)")
@@ -373,7 +484,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def main(argv: list[str] | None = None) -> int:
-    args = parse_args(argv)
+    args = resolve_capture_args(parse_args(argv))
     result = capture(args)
     print(json.dumps(result, indent=2))
     return 0

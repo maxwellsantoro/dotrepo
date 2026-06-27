@@ -31,6 +31,9 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
             "failureFingerprints": {"Cargo.toml parse error": 1},
             "failureFingerprintClasses": {"Cargo.toml parse error": "parser"},
             "failureFingerprintEcosystems": {"Cargo.toml parse error": "rust"},
+            "failureFingerprintRepositories": {
+                "Cargo.toml parse error": ["github.com/example/orbit"]
+            },
         },
         {
             "generatedAt": "2026-03-18T12:00:00Z",
@@ -49,6 +52,12 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
             "failureFingerprints": {"Cargo.toml parse error": 1},
             "failureFingerprintClasses": {"Cargo.toml parse error": "parser"},
             "failureFingerprintEcosystems": {"Cargo.toml parse error": "rust"},
+            "failureFingerprintRepositories": {
+                "Cargo.toml parse error": [
+                    "github.com/example/another",
+                    "github.com/example/orbit",
+                ]
+            },
         },
     ]
 
@@ -88,6 +97,10 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
             "fingerprint": "Cargo.toml parse error",
             "count": 2,
             "suggestedFixture": "cargo-toml-parse-error",
+            "repositories": [
+                "github.com/example/another",
+                "github.com/example/orbit",
+            ],
         }
     ]
 
@@ -177,6 +190,31 @@ def test_enrich_telemetry_counts_verified_records_as_promoted() -> None:
     assert enriched["repositoriesByAdjudicationTier"] == {"local_primary": 1}
 
 
+def test_enrich_telemetry_retains_failed_repository_by_fingerprint() -> None:
+    telemetry = {
+        "crawls": [
+            {
+                "repository": "github.com/example/orbit",
+                "status": "failed",
+                "error": "Cargo.toml parse error",
+                "adjudicationCalls": 0,
+            }
+        ]
+    }
+    args = Namespace(
+        index_root="index",
+        state_path="index/.crawler-state.toml",
+        batch_size=5,
+        limit=20,
+    )
+
+    enriched = autonomous_batch.enrich_telemetry(telemetry, args)
+
+    assert enriched["failureFingerprintRepositories"] == {
+        "Cargo.toml parse error": ["github.com/example/orbit"]
+    }
+
+
 def test_adjudication_tier_counts_records_unique_tiers_per_crawl() -> None:
     counts = autonomous_batch.adjudication_tier_counts(
         [
@@ -212,6 +250,7 @@ def test_write_regression_fixture_candidate_artifacts(tmp_path: Path) -> None:
                 "fingerprint": "Cargo.toml parse error",
                 "count": 2,
                 "suggestedFixture": "cargo-toml-parse-error",
+                "repositories": ["github.com/example/orbit"],
             }
         ],
     }
@@ -228,11 +267,13 @@ def test_write_regression_fixture_candidate_artifacts(tmp_path: Path) -> None:
     assert candidate["suggestedFixture"] == "cargo-toml-parse-error"
     assert candidate["ecosystem"] == "rust"
     assert candidate["fixtureEligible"] is True
+    assert candidate["repositories"] == ["github.com/example/orbit"]
     rendered = md_path.read_text()
     assert "# Regression Fixture Candidates" in rendered
     assert "## cargo-toml-parse-error" in rendered
     assert "- ecosystem: `rust`" in rendered
     assert "eligible (deterministic parser/evidence/validation)" in rendered
+    assert "github.com/example/orbit" in rendered
 
 
 def test_write_regression_fixture_stub_artifacts(tmp_path: Path) -> None:
@@ -244,6 +285,7 @@ def test_write_regression_fixture_stub_artifacts(tmp_path: Path) -> None:
             "fingerprint": "Cargo.toml parse error",
             "count": 2,
             "suggestedFixture": "cargo-toml-parse-error",
+            "repositories": ["github.com/example/orbit"],
         }
     ]
     stub_root = tmp_path / "stubs"
@@ -257,10 +299,12 @@ def test_write_regression_fixture_stub_artifacts(tmp_path: Path) -> None:
     assert metadata["status"] == "needs_materialization"
     assert metadata["ecosystem"] == "rust"
     assert metadata["fixtureEligible"] is True
+    assert metadata["repositories"] == ["github.com/example/orbit"]
     readme = (stub_root / "cargo-toml-parse-error" / "README.md").read_text()
     assert "Materialization Checklist" in readme
     assert "Cargo.toml parse error" in readme
     assert "materialize_regression_fixture.py" in readme
+    assert "--stub index/telemetry/regression-fixture-stubs/cargo-toml-parse-error" in readme
     assert "regression_fixture_pack" in readme
 
 

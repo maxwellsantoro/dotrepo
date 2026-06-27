@@ -27,6 +27,36 @@ pub(super) fn load_first_existing_file(
     Ok(None)
 }
 
+pub(super) fn load_first_root_file_with_extension(
+    root: &Path,
+    extension: &str,
+) -> Result<Option<ImportedFile>> {
+    let mut matches = fs::read_dir(root)
+        .map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
+        .filter_map(|entry| entry.ok())
+        .filter_map(|entry| {
+            let path = entry.path();
+            let file_name = path.file_name()?.to_str()?.to_string();
+            let matches_extension = path
+                .extension()
+                .and_then(|value| value.to_str())
+                .is_some_and(|value| value.eq_ignore_ascii_case(extension));
+            (path.is_file() && matches_extension).then_some((file_name, path))
+        })
+        .collect::<Vec<_>>();
+    matches.sort_by(|left, right| left.0.cmp(&right.0));
+
+    let Some((file_name, path)) = matches.into_iter().next() else {
+        return Ok(None);
+    };
+    let contents = fs::read_to_string(&path)
+        .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+    Ok(Some(ImportedFile {
+        path: file_name,
+        contents,
+    }))
+}
+
 pub(super) fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile>> {
     let workflows_root = root.join(".github").join("workflows");
     if !workflows_root.is_dir() {
@@ -76,6 +106,27 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.go_mod.and_then(infer_go_module_commands) {
         candidates.push(candidate);
     }
+    if let Some(candidate) = sources.pom_xml.and_then(infer_maven_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = sources.composer_json.and_then(infer_composer_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = sources.csproj.and_then(infer_dotnet_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = sources.mix_exs.and_then(infer_mix_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = sources.rebar_config.and_then(infer_rebar_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = sources
+        .cmake_presets_json
+        .and_then(infer_cmake_workflow_commands)
+    {
+        candidates.push(candidate);
+    }
     // ContribDoc tier
     if let Some(candidate) = sources.contributing.and_then(infer_contributing_commands) {
         candidates.push(candidate);
@@ -85,6 +136,9 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
         candidates.push(candidate);
     }
     if let Some(candidate) = sources.justfile.and_then(infer_justfile_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = sources.rakefile.and_then(infer_rakefile_commands) {
         candidates.push(candidate);
     }
     // Workflow tier
@@ -262,6 +316,196 @@ fn infer_go_module_commands(file: &ImportedFile) -> Option<ImportedCommandCandid
     })
 }
 
+fn infer_maven_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let document = roxmltree::Document::parse(&file.contents).ok()?;
+    if document.root_element().tag_name().name() != "project" {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: Some("mvn package".into()),
+        test: Some("mvn test".into()),
+    })
+}
+
+fn infer_composer_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let parsed: serde_json::Value = serde_json::from_str(&file.contents).ok()?;
+    let scripts = parsed
+        .get("scripts")
+        .and_then(serde_json::Value::as_object)?;
+    let build = scripts
+        .get("build")
+        .filter(|value| has_nonempty_composer_script(value))
+        .map(|_| "composer run-script build".to_string());
+    let test = scripts
+        .get("test")
+        .filter(|value| has_nonempty_composer_script(value))
+        .map(|_| "composer run-script test".to_string());
+
+    if build.is_none() && test.is_none() {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build,
+        test,
+    })
+}
+
+fn has_nonempty_composer_script(value: &serde_json::Value) -> bool {
+    match value {
+        serde_json::Value::String(script) => !script.trim().is_empty(),
+        serde_json::Value::Array(scripts) => scripts.iter().any(|script| {
+            script
+                .as_str()
+                .is_some_and(|script| !script.trim().is_empty())
+        }),
+        _ => false,
+    }
+}
+
+fn infer_dotnet_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let document = roxmltree::Document::parse(&file.contents).ok()?;
+    if document.root_element().tag_name().name() != "Project" {
+        return None;
+    }
+
+    let is_test_project = document.descendants().any(|node| {
+        node.is_element()
+            && node.tag_name().name() == "IsTestProject"
+            && node
+                .text()
+                .is_some_and(|value| value.trim().eq_ignore_ascii_case("true"))
+    });
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: Some("dotnet build".into()),
+        test: is_test_project.then(|| "dotnet test".into()),
+    })
+}
+
+fn infer_mix_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let lines = file
+        .contents
+        .lines()
+        .map(|line| line.split('#').next().unwrap_or("").trim())
+        .filter(|line| !line.is_empty())
+        .collect::<Vec<_>>();
+    let has_module = lines.iter().any(|line| line.starts_with("defmodule "));
+    let uses_mix_project = lines
+        .iter()
+        .any(|line| *line == "use Mix.Project" || line.starts_with("use Mix.Project,"));
+    let has_project_function = lines
+        .iter()
+        .any(|line| line.starts_with("def project do") || line.starts_with("def project,"));
+    if !(has_module && uses_mix_project && has_project_function) {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: Some("mix compile".into()),
+        test: Some("mix test".into()),
+    })
+}
+
+fn infer_rebar_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let has_config_term = file.contents.lines().any(|line| {
+        let line = line.split('%').next().unwrap_or("").trim();
+        line.starts_with('{') && line.ends_with("}.")
+    });
+    if !has_config_term {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: Some("rebar3 compile".into()),
+        test: Some("rebar3 eunit".into()),
+    })
+}
+
+fn infer_cmake_workflow_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let parsed: serde_json::Value = serde_json::from_str(&file.contents).ok()?;
+    if parsed
+        .get("version")
+        .and_then(serde_json::Value::as_u64)
+        .is_none_or(|version| version < 6)
+    {
+        return None;
+    }
+    let workflows = parsed
+        .get("workflowPresets")
+        .and_then(serde_json::Value::as_array)?;
+
+    let build_name = workflows
+        .iter()
+        .find(|workflow| {
+            cmake_workflow_has_steps(workflow, &["configure", "build"])
+                && !cmake_workflow_has_step(workflow, "test")
+        })
+        .or_else(|| {
+            workflows
+                .iter()
+                .find(|workflow| cmake_workflow_has_steps(workflow, &["configure", "build"]))
+        })
+        .and_then(cmake_workflow_name);
+    let test_name = workflows
+        .iter()
+        .find(|workflow| cmake_workflow_has_steps(workflow, &["configure", "build", "test"]))
+        .and_then(cmake_workflow_name);
+
+    if build_name.is_none() && test_name.is_none() {
+        return None;
+    }
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: build_name.map(|name| format!("cmake --workflow --preset {name}")),
+        test: test_name.map(|name| format!("cmake --workflow --preset {name}")),
+    })
+}
+
+fn cmake_workflow_name(workflow: &serde_json::Value) -> Option<&str> {
+    workflow
+        .get("name")
+        .and_then(serde_json::Value::as_str)
+        .filter(|name| {
+            !name.is_empty()
+                && name
+                    .chars()
+                    .all(|ch| ch.is_ascii_alphanumeric() || matches!(ch, '-' | '_' | '.' | '+'))
+        })
+}
+
+fn cmake_workflow_has_steps(workflow: &serde_json::Value, required: &[&str]) -> bool {
+    required
+        .iter()
+        .all(|required| cmake_workflow_has_step(workflow, required))
+}
+
+fn cmake_workflow_has_step(workflow: &serde_json::Value, required: &str) -> bool {
+    workflow
+        .get("steps")
+        .and_then(serde_json::Value::as_array)
+        .is_some_and(|steps| {
+            steps.iter().any(|step| {
+                step.get("type").and_then(serde_json::Value::as_str) == Some(required)
+                    && step
+                        .get("name")
+                        .and_then(serde_json::Value::as_str)
+                        .is_some_and(|name| !name.trim().is_empty())
+            })
+        })
+}
+
 fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
     let mut has_build = false;
     let mut has_test = false;
@@ -335,6 +579,49 @@ fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCommandCandida
         } else {
             None
         },
+    })
+}
+
+fn infer_rakefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let has_build = file
+        .contents
+        .lines()
+        .any(|line| declares_rake_task(line, "build"));
+    let has_test = file
+        .contents
+        .lines()
+        .any(|line| declares_rake_task(line, "test"));
+    if !has_build && !has_test {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::TaskScript,
+        build: has_build.then(|| "rake build".into()),
+        test: has_test.then(|| "rake test".into()),
+    })
+}
+
+fn declares_rake_task(line: &str, name: &str) -> bool {
+    let line = line.split('#').next().unwrap_or("").trim();
+    let Some(rest) = line.strip_prefix("task ").map(str::trim_start) else {
+        return false;
+    };
+    let prefixes = [
+        format!(":{name}"),
+        format!("\"{name}\""),
+        format!("'{name}'"),
+        format!("{name}:"),
+    ];
+    prefixes.iter().any(|prefix| {
+        rest.strip_prefix(prefix).is_some_and(|suffix| {
+            suffix.is_empty()
+                || suffix
+                    .chars()
+                    .next()
+                    .is_some_and(|ch| ch.is_whitespace() || matches!(ch, ',' | '=' | '{'))
+        })
     })
 }
 

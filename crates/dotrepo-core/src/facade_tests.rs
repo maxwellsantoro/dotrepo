@@ -1957,8 +1957,15 @@ fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
         package_json: Some(&package_json),
         pyproject_toml: Some(&pyproject),
         go_mod: None,
+        pom_xml: None,
+        composer_json: None,
+        csproj: None,
+        mix_exs: None,
+        rebar_config: None,
+        cmake_presets_json: None,
         makefile: None,
         justfile: None,
+        rakefile: None,
         contributing: None,
         workflow_files: &[],
     });
@@ -2162,6 +2169,457 @@ fn import_repository_imports_go_module_build_and_test_defaults() {
     assert_eq!(plan.manifest.repo.build.as_deref(), Some("go build ./..."));
     assert_eq!(plan.manifest.repo.test.as_deref(), Some("go test ./..."));
     assert!(plan.imported_sources.iter().any(|path| path == "go.mod"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_imports_maven_build_and_test_defaults() {
+    let root = temp_dir("import-maven-commands");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+    )
+    .expect("README written");
+    fs::write(
+        root.join("pom.xml"),
+        r#"<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>orbit</artifactId>
+  <version>1.0.0</version>
+</project>
+"#,
+    )
+    .expect("pom.xml written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("mvn package"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("mvn test"));
+    assert!(plan.imported_sources.iter().any(|path| path == "pom.xml"));
+    assert!(plan
+        .evidence_text
+        .as_deref()
+        .is_some_and(|text| text.contains("Imported repo.test from pom.xml as `mvn test`.")));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_ignores_non_maven_xml_named_pom() {
+    let root = temp_dir("import-invalid-maven-pom");
+    fs::write(root.join("pom.xml"), "<not-a-project />\n").expect("pom.xml written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build, None);
+    assert_eq!(plan.manifest.repo.test, None);
+    assert!(!plan.imported_sources.iter().any(|path| path == "pom.xml"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_imports_composer_build_and_test_scripts() {
+    let root = temp_dir("import-composer-commands");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit PHP\n\nPolicy-aware release orchestration for PHP services.\n",
+    )
+    .expect("README written");
+    fs::write(
+        root.join("composer.json"),
+        r#"{
+  "name": "example/orbit",
+  "scripts": {
+    "build": "@php bin/build.php",
+    "test": ["@php vendor/bin/phpunit", "@php vendor/bin/phpstan"]
+  }
+}
+"#,
+    )
+    .expect("composer.json written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit-php"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(
+        plan.manifest.repo.build.as_deref(),
+        Some("composer run-script build")
+    );
+    assert_eq!(
+        plan.manifest.repo.test.as_deref(),
+        Some("composer run-script test")
+    );
+    assert!(plan
+        .imported_sources
+        .iter()
+        .any(|path| path == "composer.json"));
+    assert!(plan.evidence_text.as_deref().is_some_and(|text| text
+        .contains("Imported repo.test from composer.json as `composer run-script test`.")));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_ignores_empty_or_invalid_composer_scripts() {
+    let root = temp_dir("import-empty-composer-commands");
+    fs::write(
+        root.join("composer.json"),
+        r#"{"scripts":{"build":"  ","test":["",42]}}"#,
+    )
+    .expect("composer.json written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit-php"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build, None);
+    assert_eq!(plan.manifest.repo.test, None);
+    assert!(!plan
+        .imported_sources
+        .iter()
+        .any(|path| path == "composer.json"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_imports_explicit_dotnet_test_project_commands() {
+    let root = temp_dir("import-dotnet-test-project");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit Tests\n\nIntegration tests for the Orbit service.\n",
+    )
+    .expect("README written");
+    fs::write(
+        root.join("Orbit.Tests.csproj"),
+        r#"<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+</Project>
+"#,
+    )
+    .expect("csproj written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit-tests"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("dotnet build"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("dotnet test"));
+    assert!(plan
+        .imported_sources
+        .iter()
+        .any(|path| path == "Orbit.Tests.csproj"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_only_builds_non_test_dotnet_project() {
+    let root = temp_dir("import-dotnet-library-project");
+    fs::write(
+        root.join("Orbit.csproj"),
+        r#"<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net8.0</TargetFramework></PropertyGroup>
+</Project>
+"#,
+    )
+    .expect("csproj written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("dotnet build"));
+    assert_eq!(plan.manifest.repo.test, None);
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_imports_mix_project_commands() {
+    let root = temp_dir("import-mix-project");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit Elixir\n\nA small concurrent service for release orchestration.\n",
+    )
+    .expect("README written");
+    fs::write(
+        root.join("mix.exs"),
+        r#"defmodule Orbit.MixProject do
+  use Mix.Project
+
+  def project do
+    [app: :orbit, version: "1.0.0", elixir: "~> 1.16"]
+  end
+end
+"#,
+    )
+    .expect("mix.exs written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit-elixir"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("mix compile"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("mix test"));
+    assert!(plan.imported_sources.iter().any(|path| path == "mix.exs"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_ignores_comment_only_mix_project_signals() {
+    let root = temp_dir("import-invalid-mix-project");
+    fs::write(
+        root.join("mix.exs"),
+        "# defmodule Fake.MixProject do\n# use Mix.Project\n# def project do\n",
+    )
+    .expect("mix.exs written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/not-mix"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build, None);
+    assert_eq!(plan.manifest.repo.test, None);
+    assert!(!plan.imported_sources.iter().any(|path| path == "mix.exs"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_imports_rebar_project_commands() {
+    let root = temp_dir("import-rebar-project");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit Erlang\n\nA small fault-tolerant release coordinator.\n",
+    )
+    .expect("README written");
+    fs::write(
+        root.join("rebar.config"),
+        "{erl_opts, [debug_info]}.\n{deps, []}.\n",
+    )
+    .expect("rebar.config written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit-erlang"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("rebar3 compile"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("rebar3 eunit"));
+    assert!(plan
+        .imported_sources
+        .iter()
+        .any(|path| path == "rebar.config"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_ignores_comment_only_rebar_terms() {
+    let root = temp_dir("import-invalid-rebar-project");
+    fs::write(
+        root.join("rebar.config"),
+        "% {erl_opts, [debug_info]}.\nnot an Erlang configuration term\n",
+    )
+    .expect("rebar.config written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/not-rebar"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build, None);
+    assert_eq!(plan.manifest.repo.test, None);
+    assert!(!plan
+        .imported_sources
+        .iter()
+        .any(|path| path == "rebar.config"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_imports_explicit_rake_tasks() {
+    let root = temp_dir("import-rake-tasks");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit Ruby\n\nA compact release orchestration library for Ruby.\n",
+    )
+    .expect("README written");
+    fs::write(
+        root.join("Rakefile"),
+        "task :build do\nend\n\ntask \"test\" => :build do\nend\n",
+    )
+    .expect("Rakefile written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit-ruby"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("rake build"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("rake test"));
+    assert!(plan.imported_sources.iter().any(|path| path == "Rakefile"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_ignores_comments_and_prefixed_rake_tasks() {
+    let root = temp_dir("import-invalid-rake-tasks");
+    fs::write(
+        root.join("Rakefile"),
+        "# task :build do\ntask :test_helper do\nend\n",
+    )
+    .expect("Rakefile written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/not-rake"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build, None);
+    assert_eq!(plan.manifest.repo.test, None);
+    assert!(!plan.imported_sources.iter().any(|path| path == "Rakefile"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_imports_cmake_workflow_presets() {
+    let root = temp_dir("import-cmake-workflows");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit C++\n\nA compact native release orchestration library.\n",
+    )
+    .expect("README written");
+    fs::write(
+        root.join("CMakePresets.json"),
+        r#"{
+  "version": 6,
+  "workflowPresets": [
+    {
+      "name": "build-ci",
+      "steps": [
+        {"type": "configure", "name": "ci"},
+        {"type": "build", "name": "ci"}
+      ]
+    },
+    {
+      "name": "test-ci",
+      "steps": [
+        {"type": "configure", "name": "ci"},
+        {"type": "build", "name": "ci"},
+        {"type": "test", "name": "ci"}
+      ]
+    }
+  ]
+}
+"#,
+    )
+    .expect("CMakePresets.json written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/orbit-cpp"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(
+        plan.manifest.repo.build.as_deref(),
+        Some("cmake --workflow --preset build-ci")
+    );
+    assert_eq!(
+        plan.manifest.repo.test.as_deref(),
+        Some("cmake --workflow --preset test-ci")
+    );
+    assert!(plan
+        .imported_sources
+        .iter()
+        .any(|path| path == "CMakePresets.json"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn import_repository_ignores_unsafe_or_incomplete_cmake_workflows() {
+    let root = temp_dir("import-invalid-cmake-workflows");
+    fs::write(
+        root.join("CMakePresets.json"),
+        r#"{
+  "version": 6,
+  "workflowPresets": [
+    {"name": "unsafe workflow", "steps": [
+      {"type": "configure", "name": "ci"},
+      {"type": "build", "name": "ci"}
+    ]},
+    {"name": "test-only", "steps": [{"type": "test", "name": "ci"}]}
+  ]
+}
+"#,
+    )
+    .expect("CMakePresets.json written");
+
+    let plan = import_repository(
+        &root,
+        ImportMode::Overlay,
+        Some("https://github.com/example/not-cmake"),
+    )
+    .expect("import succeeds");
+
+    assert_eq!(plan.manifest.repo.build, None);
+    assert_eq!(plan.manifest.repo.test, None);
+    assert!(!plan
+        .imported_sources
+        .iter()
+        .any(|path| path == "CMakePresets.json"));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

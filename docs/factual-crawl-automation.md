@@ -388,8 +388,9 @@ also writes the recurring failure backlog to
 `index/telemetry/regression-fixture-candidates.md` for review and fixture
 creation. It also creates one checked-in stub directory per recurring failure
 under `index/telemetry/regression-fixture-stubs/`; each stub contains
-machine-readable metadata and a materialization checklist so the failure can be
-turned into a real source fixture and deterministic fix.
+machine-readable metadata, the bounded set of repositories that exhibited the
+fingerprint, and a materialization checklist so the failure can be turned into
+a real source fixture and deterministic fix.
 
 Each recurring failure is also classified by **ecosystem** (rust, node, python,
 go, jvm, ruby, php, dotnet, elixir, erlang, cpp, or `unknown`) inferred from the
@@ -404,23 +405,56 @@ deterministic defects can be prioritized by ecosystem.
 
 The stub-to-fixture loop is now completable end to end:
 
-1. Telemetry emits a recurring-failure stub with its ecosystem and eligibility.
-2. `scripts/materialize_regression_fixture.py --repo <host/owner/repo> --slug
-   <fixture>` captures the conventional source files the crawler materializes
+1. Telemetry emits a recurring-failure stub with its ecosystem, eligibility,
+   fingerprint, suggested fixture slug, and up to 20 sorted repository
+   identities observed for that fingerprint.
+2. `scripts/materialize_regression_fixture.py --stub
+   index/telemetry/regression-fixture-stubs/<fixture>` validates the stub and
+   fills in its repository, slug, ecosystem, and fingerprint. A single retained
+   repository is selected automatically; when several repositories exhibited
+   the failure, pass `--repo <host/owner/repo>` to choose one of the listed
+   identities. Explicit values that conflict with stub provenance are rejected.
+   The script captures the conventional source files the crawler materializes
    (README, CODEOWNERS, SECURITY, manifests, workflows) into a checked-in
    fixture directory and derives an `expectation.json` by running the overlay
    import pipeline in a throwaway copy and parsing the result with `tomllib`, so
    the fixture pins the conveyor's actual parser behavior.
 3. `crates/dotrepo-core/tests/regression_fixture_pack.rs` discovers each
    checked-in fixture and replays the offline overlay import path against it,
-   asserting the pinned fields. The harness no-ops when empty and asserts only
-   the fields each `expectation.json` declares, so the checked-in canary set can
-   grow one fixture at a time across ecosystems. New captures also record
-   `captured_at` and `captured_files`, and when `origin`, `fingerprint`,
-   `captured_at`, or `captured_files` metadata is present, the harness validates
-   that lineage too, so captured canaries keep their telemetry context and
-   source-file inventory as they move from stub to checked-in regression
-   fixture.
+   asserting the pinned fields. The harness requires at least one fixture for
+   every named classifier ecosystem and asserts only the fields each
+   `expectation.json` declares. New captures also record
+   `captured_at`, `captured_files`, and SHA-256 digests for each captured file.
+   When lineage metadata is present, the harness validates the repository
+   identity, failure fingerprint, timestamp, source-file inventory, and exact
+   file content, so captured canaries keep their telemetry context as they move
+   from stub to checked-in regression fixture.
+
+Older stubs without retained repository metadata remain usable by passing
+`--repo` explicitly. Provider, infrastructure, and writeback stubs are rejected
+by `--stub` materialization because they cannot be reproduced by source files.
+
+The deterministic import canary pack currently covers Rust/Cargo, Node package
+scripts, Python/pyproject, Go modules, JVM/Maven, PHP/Composer, .NET, and
+Elixir/Mix, Erlang/Rebar, Ruby/Rake, and C++/CMake projects.
+Maven POMs are parsed as XML before conventional `mvn package` and `mvn test`
+commands are admitted as manifest-backed candidates. Composer manifests are
+parsed as JSON, and only declared, nonempty `build` and `test` scripts become
+`composer run-script` candidates.
+Root `.csproj` files are parsed as XML and always provide `dotnet build`; they
+provide `dotnet test` only when `<IsTestProject>true</IsTestProject>` is
+declared.
+Mix manifests provide `mix compile` and `mix test` only when the source contains
+a module that uses `Mix.Project` and defines its `project` function; comments
+alone cannot trigger command inference.
+Rebar manifests provide `rebar3 compile` and `rebar3 eunit` only when an
+uncommented Erlang configuration term is present.
+Rake task files contribute `rake build` and `rake test` independently and only
+for explicit task declarations; a `Gemfile` alone never invents commands.
+CMake commands come only from schema-version-6-or-newer workflow presets with
+safe names: build workflows require configure and build steps, while test
+workflows additionally require a test step. Raw `CMakeLists.txt` presence does
+not invent a shell chain or assume a build directory.
 
 `scripts/check_autonomous_telemetry_gate.py` evaluates the retained summary
 against the Milestone 1 proof thresholds: repeated runs, processed repository

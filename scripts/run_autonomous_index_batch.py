@@ -585,6 +585,7 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
     failure_fingerprints: Counter[str] = Counter()
     failure_fingerprint_classes: dict[str, str] = {}
     failure_fingerprint_ecosystems: dict[str, str] = {}
+    failure_fingerprint_repositories: dict[str, set[str]] = {}
     promoted = 0
 
     for crawl in crawls:
@@ -600,6 +601,11 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
             )
             crawl["ecosystem"] = ecosystem
             failure_fingerprint_ecosystems.setdefault(fingerprint, ecosystem)
+            repository = str(crawl.get("repository") or "").strip()
+            if repository:
+                failure_fingerprint_repositories.setdefault(fingerprint, set()).add(
+                    repository
+                )
         if crawl.get("recordStatus") == "verified":
             promoted += 1
 
@@ -618,6 +624,12 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
             "failureFingerprints": dict(sorted(failure_fingerprints.items())),
             "failureFingerprintClasses": dict(sorted(failure_fingerprint_classes.items())),
             "failureFingerprintEcosystems": dict(sorted(failure_fingerprint_ecosystems.items())),
+            "failureFingerprintRepositories": {
+                fingerprint: sorted(repositories)
+                for fingerprint, repositories in sorted(
+                    failure_fingerprint_repositories.items()
+                )
+            },
             "promoted": promoted,
             "zeroModelRuns": sum(
                 1 for item in crawls if int(item.get("adjudicationCalls") or 0) == 0
@@ -669,6 +681,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
     failure_fingerprints: Counter[str] = Counter()
     failure_fingerprint_classes: dict[str, str] = {}
     failure_fingerprint_ecosystems: dict[str, str] = {}
+    failure_fingerprint_repositories: dict[str, set[str]] = {}
     failure_classes_by_ecosystem: Counter[str] = Counter()
     ecosystem_counts: Counter[str] = Counter()
     tier_counts: Counter[str] = Counter()
@@ -717,6 +730,17 @@ def aggregate_runs(runs: list[dict]) -> dict:
             run_telemetry.get("failureFingerprintEcosystems") or {}
         ).items():
             failure_fingerprint_ecosystems.setdefault(str(fingerprint), str(ecosystem))
+        for fingerprint, repositories in (
+            run_telemetry.get("failureFingerprintRepositories") or {}
+        ).items():
+            if isinstance(repositories, list):
+                failure_fingerprint_repositories.setdefault(
+                    str(fingerprint), set()
+                ).update(
+                    str(repository).strip()
+                    for repository in repositories
+                    if str(repository).strip()
+                )
         for tier, count in (run_telemetry.get("repositoriesByAdjudicationTier") or {}).items():
             tier_counts[str(tier)] += int(count or 0)
 
@@ -744,16 +768,18 @@ def aggregate_runs(runs: list[dict]) -> dict:
         ecosystem = failure_fingerprint_ecosystems.get(
             fingerprint, classify_ecosystem(fingerprint)
         )
-        regression_fixture_candidates.append(
-            {
-                "failureClass": failure_class,
-                "ecosystem": ecosystem,
-                "fixtureEligible": fixture_eligible(failure_class),
-                "fingerprint": fingerprint,
-                "count": item["count"],
-                "suggestedFixture": fixture_slug(fingerprint),
-            }
-        )
+        candidate = {
+            "failureClass": failure_class,
+            "ecosystem": ecosystem,
+            "fixtureEligible": fixture_eligible(failure_class),
+            "fingerprint": fingerprint,
+            "count": item["count"],
+            "suggestedFixture": fixture_slug(fingerprint),
+        }
+        repositories = sorted(failure_fingerprint_repositories.get(fingerprint, ()))[:20]
+        if repositories:
+            candidate["repositories"] = repositories
+        regression_fixture_candidates.append(candidate)
     return {
         "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
         "generatedAt": now_rfc3339(),
@@ -822,6 +848,7 @@ def render_regression_fixture_candidates_markdown(candidates: list[dict]) -> str
                 f"- fixture: {eligibility}",
                 f"- observed runs: {item.get('count', 0)}",
                 f"- fingerprint: `{item.get('fingerprint', 'unknown')}`",
+                f"- repositories: {', '.join(f'`{repo}`' for repo in item.get('repositories') or []) or 'not retained'}",
                 "",
             ]
         )
@@ -854,6 +881,7 @@ def render_regression_fixture_stub_readme(candidate: dict) -> str:
     eligible = candidate.get("fixtureEligible")
     fingerprint = candidate.get("fingerprint", "unknown")
     count = candidate.get("count", 0)
+    repositories = candidate.get("repositories") or []
     if eligible is True:
         eligibility = (
             "eligible — this is a deterministic parser/evidence/validation defect "
@@ -876,6 +904,7 @@ def render_regression_fixture_stub_readme(candidate: dict) -> str:
         f"- fixture: {eligibility}",
         f"- observed runs: {count}",
         f"- fingerprint: `{fingerprint}`",
+        f"- repositories: {', '.join(f'`{repo}`' for repo in repositories) if repositories else 'not retained'}",
         "",
         "## Materialization Checklist",
         "",
@@ -883,7 +912,8 @@ def render_regression_fixture_stub_readme(candidate: dict) -> str:
         "tracked here for operator awareness, not converted into source fixtures.",
         "",
         "- Capture the smallest repository source fixture that reproduces this failure:",
-        "  `uv run python scripts/materialize_regression_fixture.py --repo <host/owner/repo> --slug <fixture>`",
+        f"  `uv run python scripts/materialize_regression_fixture.py --stub index/telemetry/regression-fixture-stubs/{fixture}`",
+        "  Add `--repo <host/owner/repo>` when the stub lists multiple repositories.",
         "- Confirm or edit the generated `expectation.json` so it pins the fixed behavior.",
         "- Add the deterministic parser, evidence, or validation fix in `dotrepo-core`.",
         "- Run the runnable regression harness: `cargo test -p dotrepo-core --test regression_fixture_pack`",
@@ -910,6 +940,7 @@ def write_regression_fixture_stub_artifacts(candidates: list[dict], stub_root: P
             ),
             "fingerprint": candidate.get("fingerprint", "unknown"),
             "observedRuns": candidate.get("count", 0),
+            "repositories": candidate.get("repositories", []),
             "status": "needs_materialization",
         }
         (destination / "metadata.json").write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n")

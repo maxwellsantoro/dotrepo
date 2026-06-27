@@ -1,0 +1,16 @@
+{
+  "fixture": "cpp-cmake-canary",
+  "ecosystem": "cpp",
+  "repo_name": "CMake Canary",
+  "repo_description": "A compact C++ project fixture used to preserve deterministic CMake workflow inference.",
+  "repo_build": "cmake --workflow --preset build-ci",
+  "repo_test": "cmake --workflow --preset test-ci",
+  "imported_sources": [
+    "README.md",
+    "CMakePresets.json"
+  ],
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ]
+}

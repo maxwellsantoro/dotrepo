@@ -1,0 +1,16 @@
+{
+  "fixture": "jvm-maven-canary",
+  "ecosystem": "jvm",
+  "repo_name": "Maven Canary",
+  "repo_description": "A compact JVM service fixture used to preserve deterministic Maven command inference.",
+  "repo_build": "mvn package",
+  "repo_test": "mvn test",
+  "imported_sources": [
+    "README.md",
+    "pom.xml"
+  ],
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ]
+}

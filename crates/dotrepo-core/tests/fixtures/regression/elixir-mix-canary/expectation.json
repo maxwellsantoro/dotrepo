@@ -1,0 +1,16 @@
+{
+  "fixture": "elixir-mix-canary",
+  "ecosystem": "elixir",
+  "repo_name": "Mix Canary",
+  "repo_description": "A compact Elixir project fixture used to preserve deterministic Mix command inference.",
+  "repo_build": "mix compile",
+  "repo_test": "mix test",
+  "imported_sources": [
+    "README.md",
+    "mix.exs"
+  ],
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ]
+}
