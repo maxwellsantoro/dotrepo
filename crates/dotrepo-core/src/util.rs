@@ -130,12 +130,19 @@ pub fn source_digest(source_bytes: &[u8]) -> String {
 }
 
 /// Parses `https://host/owner/repo` style URLs into identity triples.
-pub(crate) fn repository_identity(url: &str) -> Option<(String, String, String)> {
+///
+/// Query strings, fragments, and trailing path segments after `repo` are ignored.
+pub fn repository_identity(url: &str) -> Option<(String, String, String)> {
     let trimmed = url.trim();
     let without_scheme = trimmed
         .strip_prefix("https://")
         .or_else(|| trimmed.strip_prefix("http://"))?;
-    let mut parts = without_scheme.split('/');
+    let without_query = without_scheme
+        .split(['?', '#'])
+        .next()
+        .unwrap_or(without_scheme)
+        .trim_end_matches('/');
+    let mut parts = without_query.split('/').filter(|part| !part.is_empty());
     let host = parts.next()?.trim().trim_end_matches(':').to_string();
     if host.is_empty() {
         return None;
@@ -148,6 +155,44 @@ pub(crate) fn repository_identity(url: &str) -> Option<(String, String, String)>
     }
 
     Some((host, owner, repo))
+}
+
+pub fn record_status_name(status: &dotrepo_schema::RecordStatus) -> &'static str {
+    match status {
+        dotrepo_schema::RecordStatus::Draft => "draft",
+        dotrepo_schema::RecordStatus::Imported => "imported",
+        dotrepo_schema::RecordStatus::Inferred => "inferred",
+        dotrepo_schema::RecordStatus::Reviewed => "reviewed",
+        dotrepo_schema::RecordStatus::Verified => "verified",
+        dotrepo_schema::RecordStatus::Canonical => "canonical",
+    }
+}
+
+pub fn index_record_mirror_path(host: &str, owner: &str, repo: &str) -> String {
+    format!("repos/{host}/{owner}/{repo}/record.toml")
+}
+
+pub fn identity_from_index_claim_path(path: &Path) -> Option<(String, String, String)> {
+    let segments = path
+        .iter()
+        .map(|segment| segment.to_string_lossy().to_string())
+        .collect::<Vec<_>>();
+    if segments.len() != 6
+        || segments[0] != "repos"
+        || segments[4] != "claims"
+        || segments[1].trim().is_empty()
+        || segments[2].trim().is_empty()
+        || segments[3].trim().is_empty()
+        || segments[5].trim().is_empty()
+    {
+        return None;
+    }
+
+    Some((
+        segments[1].clone(),
+        segments[2].clone(),
+        segments[3].clone(),
+    ))
 }
 
 pub fn validate_repository_identity_segments(host: &str, owner: &str, repo: &str) -> Result<()> {

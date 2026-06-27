@@ -1,7 +1,8 @@
 use anyhow::{anyhow, bail, Context, Result};
 use dotrepo_core::{
     manifest_to_json, query_manifest_value_from_json, render_dotrepo_ci_workflow,
-    validate_manifest_diagnostics, ValidationDiagnostic, ValidationDiagnosticSeverity,
+    repository_identity, validate_manifest_diagnostics, ValidationDiagnostic,
+    ValidationDiagnosticSeverity,
 };
 use dotrepo_schema::{parse_manifest, Manifest, ParseError, RecordMode};
 use dotrepo_transport::{
@@ -213,7 +214,51 @@ struct CodeAction {
 
 #[derive(Debug, Serialize, Clone, PartialEq, Eq)]
 struct WorkspaceEdit {
+    #[serde(skip_serializing_if = "BTreeMap::is_empty", default)]
     changes: BTreeMap<String, Vec<TextEdit>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    document_changes: Option<Vec<DocumentChange>>,
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+#[serde(untagged)]
+enum DocumentChange {
+    Create(CreateFileChange),
+    Edit(TextDocumentEdit),
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+struct CreateFileChange {
+    #[serde(rename = "createFile")]
+    create_file: CreateFileOptions,
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+struct CreateFileOptions {
+    uri: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    options: Option<CreateFileOpts>,
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+struct CreateFileOpts {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    overwrite: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    ignore_if_exists: Option<bool>,
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+struct TextDocumentEdit {
+    text_document: WorkspaceTextDocumentIdentifier,
+    edits: Vec<TextEdit>,
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+struct WorkspaceTextDocumentIdentifier {
+    uri: String,
+    version: Option<i32>,
 }
 
 #[derive(Debug, Serialize, Clone, PartialEq, Eq)]
@@ -539,7 +584,10 @@ fn homepage_placeholder_code_action(
         title: "Add repo.homepage placeholder".into(),
         kind: "quickfix".into(),
         diagnostics: vec![diagnostic],
-        edit: WorkspaceEdit { changes },
+        edit: WorkspaceEdit {
+            changes,
+            document_changes: None,
+        },
     }
 }
 
@@ -552,19 +600,34 @@ fn ci_workflow_code_action(document: &OpenDocument, diagnostic: LspDiagnostic) -
     let workflow_uri = Url::from_file_path(&workflow_path)
         .map(|url| url.to_string())
         .unwrap_or_else(|_| workflow_path.display().to_string());
-    let mut changes = BTreeMap::new();
-    changes.insert(
-        workflow_uri,
-        vec![TextEdit {
-            range: insertion_range(0),
-            new_text: render_dotrepo_ci_workflow(env!("CARGO_PKG_VERSION")),
-        }],
-    );
     CodeAction {
         title: "Create dotrepo CI workflow".into(),
         kind: "quickfix".into(),
         diagnostics: vec![diagnostic],
-        edit: WorkspaceEdit { changes },
+        edit: WorkspaceEdit {
+            changes: BTreeMap::new(),
+            document_changes: Some(vec![
+                DocumentChange::Create(CreateFileChange {
+                    create_file: CreateFileOptions {
+                        uri: workflow_uri.clone(),
+                        options: Some(CreateFileOpts {
+                            overwrite: Some(false),
+                            ignore_if_exists: Some(false),
+                        }),
+                    },
+                }),
+                DocumentChange::Edit(TextDocumentEdit {
+                    text_document: WorkspaceTextDocumentIdentifier {
+                        uri: workflow_uri,
+                        version: None,
+                    },
+                    edits: vec![TextEdit {
+                        range: insertion_range(0),
+                        new_text: render_dotrepo_ci_workflow(env!("CARGO_PKG_VERSION")),
+                    }],
+                }),
+            ]),
+        },
     }
 }
 
@@ -653,23 +716,33 @@ fn adoption_diagnostics_for_manifest(
     }
 
     let mut diagnostics = Vec::new();
-    let homepage_ready = manifest
+    let homepage = manifest
         .repo
         .homepage
         .as_deref()
         .map(str::trim)
-        .is_some_and(|value| !value.is_empty());
-    if !homepage_ready {
+        .filter(|value| !value.is_empty());
+    let homepage_range = index
+        .section_range("repo")
+        .or_else(|| index.field_range("repo.name"))
+        .or_else(|| index.field_range("repo.homepage"))
+        .unwrap_or_else(|| index.default_range());
+    if homepage.is_none() {
         diagnostics.push(LspDiagnostic {
-            range: index
-                .section_range("repo")
-                .or_else(|| index.field_range("repo.name"))
-                .unwrap_or_else(|| index.default_range()),
+            range: homepage_range.clone(),
             severity: 4,
             source: "adoption_status".into(),
             message:
                 "set repo.homepage to enable claim-from-native and derived claim handoff commands"
                     .into(),
+        });
+    } else if repository_identity(homepage.unwrap()).is_none() {
+        diagnostics.push(LspDiagnostic {
+            range: homepage_range,
+            severity: 4,
+            source: "adoption_status".into(),
+            message: "repo.homepage must resolve to a host/owner/repo URL for claim-from-native"
+                .into(),
         });
     }
 
@@ -1764,6 +1837,37 @@ description = "Fast local-first sync engine"
     }
 
     #[test]
+    fn diagnostics_warn_when_homepage_does_not_resolve_to_identity() {
+        let root = temp_dir("lsp-adoption-homepage-invalid");
+        let path = root.join(".repo");
+        let diagnostics = diagnostics_for_document(
+            &path,
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+homepage = "not-a-repo-url"
+"#,
+            &[],
+        );
+
+        assert!(diagnostics.iter().any(|diagnostic| {
+            diagnostic.source == "adoption_status"
+                && diagnostic
+                    .message
+                    .contains("repo.homepage must resolve to a host/owner/repo URL")
+        }));
+
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
+    }
+
+    #[test]
     fn diagnostics_for_native_manifest_skip_adoption_hints_when_ready() {
         let root = temp_dir("lsp-adoption-ready");
         let path = root.join(".repo");
@@ -1938,16 +2042,21 @@ homepage = "https://github.com/acme/orbit"
         let workflow_uri = Url::from_file_path(root.join(".github/workflows/dotrepo-check.yml"))
             .expect("workflow uri")
             .to_string();
-        let edits = actions[0]
+        let document_changes = actions[0]
             .edit
-            .changes
-            .get(&workflow_uri)
-            .expect("workflow edit");
-        assert_eq!(edits.len(), 1);
-        assert!(edits[0]
+            .document_changes
+            .as_ref()
+            .expect("workflow document changes");
+        assert_eq!(document_changes.len(), 2);
+        let DocumentChange::Edit(text_edit) = &document_changes[1] else {
+            panic!("second document change should be a text edit");
+        };
+        assert_eq!(text_edit.text_document.uri, workflow_uri);
+        assert_eq!(text_edit.edits.len(), 1);
+        assert!(text_edit.edits[0]
             .new_text
             .contains("dotrepo --root . adoption-status"));
-        assert!(edits[0].new_text.contains("DOTREPO_VERSION"));
+        assert!(text_edit.edits[0].new_text.contains("DOTREPO_VERSION"));
 
         fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }

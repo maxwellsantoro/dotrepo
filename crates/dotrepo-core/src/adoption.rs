@@ -1,8 +1,9 @@
+use crate::util::{identity_from_index_claim_path, index_record_mirror_path};
 use crate::{
     display_root, generate_check_repository, inspect_surface_states, load_manifest_from_root,
-    validate_repository,
+    record_status_name, repository_identity, validate_repository,
 };
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use dotrepo_schema::{Manifest, RecordMode};
 use serde::Serialize;
 use std::path::Path;
@@ -50,9 +51,13 @@ pub fn adoption_status_repository(root: &Path) -> AdoptionStatusReport {
     let has_native_record = manifest
         .as_ref()
         .is_some_and(|manifest| manifest.record.mode == RecordMode::Native);
-    let record_status = manifest
-        .as_ref()
-        .map(|manifest| format!("{:?}", manifest.record.status));
+    let record_status = has_native_record
+        .then(|| {
+            manifest
+                .as_ref()
+                .map(|manifest| record_status_name(&manifest.record.status).to_string())
+        })
+        .flatten();
     let repository_identity = native_repository_identity_from_manifest(manifest.as_ref()).ok();
     let can_claim_from_native = has_native_record && repository_identity.is_some();
     let ci_workflow_present = root.join(".github/workflows/dotrepo-check.yml").exists();
@@ -115,8 +120,20 @@ pub fn adoption_status_repository(root: &Path) -> AdoptionStatusReport {
                 "generate --check is not ready for this record".into()
             } else {
                 format!(
-                    "{} generated surface(s) are stale",
-                    managed_surface_stale.len()
+                    "{} generated surface(s) are stale: {}",
+                    managed_surface_stale.len(),
+                    managed_surface_stale.join(", ")
+                )
+            },
+        },
+        AdoptionStatusItem {
+            name: "surface inspection".into(),
+            ready: surface_findings == 0,
+            detail: if surface_findings == 0 {
+                "managed surfaces are present and aligned".into()
+            } else {
+                format!(
+                    "{surface_findings} managed surface issue(s) reported by inspect_surface_states"
                 )
             },
         },
@@ -165,6 +182,38 @@ pub fn adoption_status_repository(root: &Path) -> AdoptionStatusReport {
         checks,
         next_steps,
     }
+}
+
+pub fn native_repository_identity(manifest: &Manifest) -> Result<AdoptionRepositoryIdentity> {
+    native_repository_identity_from_manifest(Some(manifest))
+}
+
+pub fn canonical_mirror_path_for_claim_path(claim_path: &Path) -> Result<String> {
+    let (host, owner, repo) = identity_from_index_claim_path(claim_path).ok_or_else(|| {
+        anyhow!("claim path must be repos/<host>/<owner>/<repo>/claims/<claim-id>")
+    })?;
+    Ok(index_record_mirror_path(&host, &owner, &repo))
+}
+
+pub fn validate_claim_path_matches_native_identity(
+    claim_path: &Path,
+    native_identity: &AdoptionRepositoryIdentity,
+) -> Result<()> {
+    let (host, owner, repo) = identity_from_index_claim_path(claim_path).ok_or_else(|| {
+        anyhow!("claim path must be repos/<host>/<owner>/<repo>/claims/<claim-id>")
+    })?;
+    if host != native_identity.host
+        || owner != native_identity.owner
+        || repo != native_identity.repo
+    {
+        bail!(
+            "claim path identity {host}/{owner}/{repo} does not match native repo.homepage identity {}/{}/{}",
+            native_identity.host,
+            native_identity.owner,
+            native_identity.repo
+        );
+    }
+    Ok(())
 }
 
 pub fn render_dotrepo_ci_workflow(version: &str) -> String {
@@ -228,7 +277,7 @@ fn native_repository_identity_from_manifest(
         .map(str::trim)
         .filter(|value| !value.is_empty())
         .ok_or_else(|| anyhow!("native identity requires repo.homepage"))?;
-    let (host, owner, repo) = repository_identity_from_url(homepage).ok_or_else(|| {
+    let (host, owner, repo) = repository_identity(homepage).ok_or_else(|| {
         anyhow!("native identity requires repo.homepage to be host/owner/repo URL")
     })?;
     Ok(AdoptionRepositoryIdentity {
@@ -239,19 +288,124 @@ fn native_repository_identity_from_manifest(
     })
 }
 
-fn repository_identity_from_url(url: &str) -> Option<(String, String, String)> {
-    let (_scheme, rest) = url.split_once("://")?;
-    let without_query = rest
-        .split(['?', '#'])
-        .next()
-        .unwrap_or(rest)
-        .trim_end_matches('/');
-    let mut parts = without_query.split('/').filter(|part| !part.is_empty());
-    let host = parts.next()?.to_string();
-    let owner = parts.next()?.to_string();
-    let repo = parts.next()?.trim_end_matches(".git").to_string();
-    if parts.next().is_some() || host.is_empty() || owner.is_empty() || repo.is_empty() {
-        return None;
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use dotrepo_schema::RecordStatus;
+    use std::fs;
+    use std::path::PathBuf;
+
+    #[test]
+    fn record_status_uses_lowercase_contract() {
+        let root =
+            std::env::temp_dir().join(format!("dotrepo-adoption-status-{}", std::process::id()));
+        fs::create_dir_all(&root).expect("temp dir created");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[repo]
+name = "widget"
+description = "Widget toolkit."
+homepage = "https://github.com/acme/widget"
+"#,
+        )
+        .expect("manifest written");
+
+        let report = adoption_status_repository(&root);
+        assert_eq!(report.record_status.as_deref(), Some("canonical"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
     }
-    Some((host, owner, repo))
+
+    #[test]
+    fn record_status_omitted_for_overlay_only_roots() {
+        let root =
+            std::env::temp_dir().join(format!("dotrepo-adoption-overlay-{}", std::process::id()));
+        fs::create_dir_all(&root).expect("temp dir created");
+
+        let report = adoption_status_repository(&root);
+        assert!(!report.has_native_record);
+        assert!(report.record_status.is_none());
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn repository_identity_parses_homepage_urls_consistently() {
+        assert_eq!(
+            repository_identity("https://github.com/acme/widget/tree/main"),
+            Some(("github.com".into(), "acme".into(), "widget".into()))
+        );
+        assert_eq!(
+            repository_identity("https://github.com/acme/widget.git?tab=readme"),
+            Some(("github.com".into(), "acme".into(), "widget".into()))
+        );
+        assert!(repository_identity("git+https://github.com/acme/widget").is_none());
+    }
+
+    #[test]
+    fn canonical_mirror_path_derives_from_claim_path() {
+        let claim_path = PathBuf::from("repos/github.com/acme/widget/claims/claim-01");
+        assert_eq!(
+            canonical_mirror_path_for_claim_path(&claim_path).expect("mirror path"),
+            "repos/github.com/acme/widget/record.toml"
+        );
+    }
+
+    #[test]
+    fn validate_claim_path_rejects_identity_mismatch() {
+        let claim_path = PathBuf::from("repos/github.com/other/widget/claims/claim-01");
+        let native_identity = AdoptionRepositoryIdentity {
+            host: "github.com".into(),
+            owner: "acme".into(),
+            repo: "widget".into(),
+            url: "https://github.com/acme/widget".into(),
+        };
+        assert!(
+            validate_claim_path_matches_native_identity(&claim_path, &native_identity).is_err()
+        );
+    }
+
+    #[test]
+    fn adoption_status_surfaces_surface_inspection_check() {
+        let root =
+            std::env::temp_dir().join(format!("dotrepo-adoption-surfaces-{}", std::process::id()));
+        fs::create_dir_all(&root).expect("temp dir created");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "widget"
+description = "Widget toolkit."
+homepage = "https://github.com/acme/widget"
+"#,
+        )
+        .expect("manifest written");
+
+        let report = adoption_status_repository(&root);
+        assert!(report
+            .checks
+            .iter()
+            .any(|check| check.name == "surface inspection"));
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn record_status_name_matches_schema_contract() {
+        assert_eq!(record_status_name(&RecordStatus::Canonical), "canonical");
+        assert_eq!(record_status_name(&RecordStatus::Draft), "draft");
+    }
 }

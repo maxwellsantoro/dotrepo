@@ -233,6 +233,10 @@ pub enum Command {
         #[arg(long, default_value = "index")]
         index_root: PathBuf,
         /// Claim directory relative to --index-root.
+        #[arg(
+            value_name = "CLAIM_PATH",
+            help = "Claim directory relative to --index-root"
+        )]
         path: Option<PathBuf>,
         /// Claim directory name under claims/<claim-id>; derives path from repo.homepage.
         #[arg(long)]

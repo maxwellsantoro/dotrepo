@@ -19,8 +19,9 @@ mod util;
 mod validation;
 
 pub use adoption::{
-    adoption_status_repository, render_dotrepo_ci_workflow, AdoptionRepositoryIdentity,
-    AdoptionStatusItem, AdoptionStatusReport,
+    adoption_status_repository, canonical_mirror_path_for_claim_path, native_repository_identity,
+    render_dotrepo_ci_workflow, validate_claim_path_matches_native_identity,
+    AdoptionRepositoryIdentity, AdoptionStatusItem, AdoptionStatusReport,
 };
 pub use query::{
     manifest_to_json, query_manifest, query_manifest_value, query_manifest_value_from_json,
@@ -34,8 +35,9 @@ pub(crate) use util::manifest_path;
 pub(crate) use util::relative_to_root;
 pub(crate) use util::walk_dir_entries;
 pub use util::{
-    current_timestamp_rfc3339, display_path, normalize_rfc3339, parse_rfc3339, render_rfc3339,
-    source_digest, validate_repository_identity_segments,
+    current_timestamp_rfc3339, display_path, identity_from_index_claim_path,
+    index_record_mirror_path, normalize_rfc3339, parse_rfc3339, record_status_name, render_rfc3339,
+    repository_identity, source_digest, validate_repository_identity_segments,
 };
 
 pub(crate) use surfaces::{

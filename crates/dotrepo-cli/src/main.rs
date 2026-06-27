@@ -5,11 +5,8 @@ use dotrepo_cli::cli::Command;
 use dotrepo_cli::commands::{
     cmd_adopt_overlay, cmd_adoption_status, cmd_ci, cmd_claim, cmd_claim_event, cmd_claim_init,
     cmd_doctor, cmd_generate, cmd_import, cmd_init, cmd_manage, cmd_preview, cmd_promotion_report,
-    cmd_public, cmd_query, cmd_trust, cmd_validate, cmd_validate_index,
-};
-use dotrepo_cli::commands::{
-    ClaimAcceptNativeArgs, ClaimEventArgs, ClaimFromNativeArgs, ClaimInitArgs,
-    ClaimSubmitNativeArgs,
+    cmd_public, cmd_query, cmd_trust, cmd_validate, cmd_validate_index, ClaimAcceptNativeArgs,
+    ClaimEventArgs, ClaimFromNativeArgs, ClaimInitArgs, ClaimSubmitNativeArgs,
 };
 use dotrepo_cli::error::CliExit;
 use std::process;

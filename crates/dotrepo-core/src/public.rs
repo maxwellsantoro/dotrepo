@@ -16,7 +16,9 @@ use crate::selection::{
 };
 use crate::synthesis::validate_synthesis;
 use crate::util::validate_repository_identity_segments;
-use crate::util::{display_path, parse_rfc3339, render_rfc3339, repository_identity};
+use crate::util::{
+    display_path, parse_rfc3339, record_status_name, render_rfc3339, repository_identity,
+};
 use crate::validation::collect_record_dirs;
 use crate::{ConflictRelationship, RecordSummary, SelectionReason};
 
@@ -743,17 +745,6 @@ fn public_research_completeness(
         has_ownership_signal: !ownership.maintainers.is_empty() || ownership.team.is_some(),
         has_license: non_empty_value(manifest.repo.license.as_deref()).is_some(),
         conflict_count,
-    }
-}
-
-fn record_status_name(status: &dotrepo_schema::RecordStatus) -> &'static str {
-    match status {
-        dotrepo_schema::RecordStatus::Draft => "draft",
-        dotrepo_schema::RecordStatus::Imported => "imported",
-        dotrepo_schema::RecordStatus::Inferred => "inferred",
-        dotrepo_schema::RecordStatus::Reviewed => "reviewed",
-        dotrepo_schema::RecordStatus::Verified => "verified",
-        dotrepo_schema::RecordStatus::Canonical => "canonical",
     }
 }
 
