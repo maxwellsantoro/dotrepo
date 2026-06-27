@@ -103,6 +103,12 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.pyproject_toml.and_then(infer_pyproject_commands) {
         candidates.push(candidate);
     }
+    if let Some(candidate) = sources.setup_py.and_then(infer_setup_py_commands) {
+        candidates.push(candidate);
+    }
+    if let Some(candidate) = sources.setup_cfg.and_then(infer_setup_cfg_commands) {
+        candidates.push(candidate);
+    }
     if let Some(candidate) = sources.go_mod.and_then(infer_go_module_commands) {
         candidates.push(candidate);
     }
@@ -295,6 +301,43 @@ fn infer_pyproject_test_command(parsed: &toml::Value) -> Option<String> {
     }
 
     None
+}
+
+fn infer_setup_py_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let lower = file.contents.to_ascii_lowercase();
+    // Conservative: only claim test if there's evidence of testing setup.
+    // Avoid claiming build from setup.py (often just package metadata).
+    let has_test_evidence = lower.contains("pytest")
+        || lower.contains("test_suite")
+        || lower.contains("tests_require")
+        || lower.contains("test")
+        || lower.contains("unittest");
+    if !has_test_evidence {
+        return None;
+    }
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: None,
+        test: Some("python -m pytest".into()),
+    })
+}
+
+fn infer_setup_cfg_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let lower = file.contents.to_ascii_lowercase();
+    let has_test = lower.contains("[tool:pytest]")
+        || lower.contains("[pytest]")
+        || lower.contains("test")
+        || lower.contains("extras_require") && lower.contains("test");
+    if !has_test {
+        return None;
+    }
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: None,
+        test: Some("python -m pytest".into()),
+    })
 }
 
 fn infer_go_module_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
@@ -1123,5 +1166,22 @@ mod tests {
         let g2 = infer_gradle_commands(&kts).expect("kts");
         assert_eq!(g1.build.as_deref(), Some("./gradlew build"));
         assert_eq!(g2.test.as_deref(), Some("./gradlew test"));
+    }
+
+    #[test]
+    fn infer_setup_commands_provide_pytest_for_classic_python() {
+        use super::{infer_setup_py_commands, infer_setup_cfg_commands, ImportedFile};
+        let setup_py = ImportedFile {
+            path: "setup.py".into(),
+            contents: "from setuptools import setup\nsetup(tests_require=['pytest'])".into(),
+        };
+        let setup_cfg = ImportedFile {
+            path: "setup.cfg".into(),
+            contents: "[tool:pytest]\naddopts = -q".into(),
+        };
+        let p = infer_setup_py_commands(&setup_py).expect("setup.py");
+        let c = infer_setup_cfg_commands(&setup_cfg).expect("setup.cfg");
+        assert_eq!(p.test.as_deref(), Some("python -m pytest"));
+        assert_eq!(c.test.as_deref(), Some("python -m pytest"));
     }
 }

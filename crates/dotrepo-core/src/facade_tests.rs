@@ -1956,6 +1956,8 @@ fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
         cargo_toml: None,
         package_json: Some(&package_json),
         pyproject_toml: Some(&pyproject),
+        setup_py: None,
+        setup_cfg: None,
         go_mod: None,
         pom_xml: None,
         build_gradle: None,

@@ -1,7 +1,7 @@
 use anyhow::{anyhow, bail, Result};
 use dotrepo_schema::{
     parse_synthesis_document, render_synthesis_document, validate_synthesis_document, Manifest,
-    SynthesisDocument,
+    SynthesisArchitecture, SynthesisDocument, SynthesisForAgents, SynthesisMode, SynthesisRecord,
 };
 use serde::Serialize;
 use std::fs;
@@ -105,4 +105,54 @@ pub fn write_synthesis(root: &Path, synthesis: &SynthesisDocument) -> Result<Syn
         synthesis: synthesis.clone(),
         synthesis_text,
     })
+}
+
+/// Generate a minimal "Generated" mode synthesis document using facts from the manifest.
+/// This is a starting point for production synthesis (M3); the result should be reviewed
+/// and may be supplemented with architecture/key concepts from README or manual curation.
+/// how_to_build / how_to_test are populated from the record when present (and will pass validation).
+pub fn generate_basic_synthesis(
+    manifest: &Manifest,
+    generated_at: &str,
+    source_commit: &str,
+    model: &str,
+    provider: &str,
+) -> SynthesisDocument {
+    let how_to_build = manifest
+        .repo
+        .build
+        .clone()
+        .unwrap_or_else(|| "See repository documentation or build system for instructions.".to_string());
+    let how_to_test = manifest
+        .repo
+        .test
+        .clone()
+        .unwrap_or_else(|| "See repository documentation or test system for instructions.".to_string());
+
+    // Minimal placeholders; real production use would enrich from README analysis.
+    SynthesisDocument {
+        schema: "dotrepo-synthesis/v0".to_string(),
+        synthesis: SynthesisRecord {
+            generated_at: generated_at.to_string(),
+            source_commit: source_commit.to_string(),
+            model: model.to_string(),
+            provider: provider.to_string(),
+            mode: SynthesisMode::Generated,
+            architecture: SynthesisArchitecture {
+                summary: if manifest.repo.description.trim().is_empty() {
+                    "See README for project purpose.".to_string()
+                } else {
+                    manifest.repo.description.clone()
+                },
+                entry_points: vec![],
+                key_concepts: vec![],
+            },
+            for_agents: SynthesisForAgents {
+                how_to_build,
+                how_to_test,
+                how_to_contribute: "See CONTRIBUTING.md or repository guidelines.".to_string(),
+                gotchas: vec![],
+            },
+        },
+    }
 }

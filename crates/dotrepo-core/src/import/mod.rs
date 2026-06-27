@@ -379,6 +379,8 @@ pub fn import_repository_with_options(
     let cargo_toml = load_first_existing_file(root, &["Cargo.toml"])?;
     let package_json = load_first_existing_file(root, &["package.json"])?;
     let pyproject_toml = load_first_existing_file(root, &["pyproject.toml"])?;
+    let setup_py = load_first_existing_file(root, &["setup.py"])?;
+    let setup_cfg = load_first_existing_file(root, &["setup.cfg"])?;
     let go_mod = load_first_existing_file(root, &["go.mod"])?;
     let pom_xml = load_first_existing_file(root, &["pom.xml"])?;
     let build_gradle = load_first_existing_file(root, &["build.gradle", "build.gradle.kts"])?;
@@ -503,6 +505,8 @@ pub fn import_repository_with_options(
         cargo_toml: cargo_toml.as_ref(),
         package_json: package_json.as_ref(),
         pyproject_toml: pyproject_toml.as_ref(),
+        setup_py: setup_py.as_ref(),
+        setup_cfg: setup_cfg.as_ref(),
         go_mod: go_mod.as_ref(),
         pom_xml: pom_xml.as_ref(),
         build_gradle: build_gradle.as_ref(),
@@ -1576,6 +1580,8 @@ pub(crate) struct ImportSources<'a> {
     pub(crate) cargo_toml: Option<&'a ImportedFile>,
     pub(crate) package_json: Option<&'a ImportedFile>,
     pub(crate) pyproject_toml: Option<&'a ImportedFile>,
+    pub(crate) setup_py: Option<&'a ImportedFile>,
+    pub(crate) setup_cfg: Option<&'a ImportedFile>,
     pub(crate) go_mod: Option<&'a ImportedFile>,
     pub(crate) pom_xml: Option<&'a ImportedFile>,
     pub(crate) build_gradle: Option<&'a ImportedFile>,

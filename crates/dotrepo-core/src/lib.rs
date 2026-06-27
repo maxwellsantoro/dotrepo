@@ -27,8 +27,8 @@ pub use query::{
     manifest_to_json, query_manifest, query_manifest_value, query_manifest_value_from_json,
 };
 pub use synthesis::{
-    get_synthesis, load_synthesis_document, load_synthesis_from_root, validate_synthesis,
-    write_synthesis, LoadedSynthesis, SynthesisReadReport, SynthesisWritePlan,
+    generate_basic_synthesis, get_synthesis, load_synthesis_document, load_synthesis_from_root,
+    validate_synthesis, write_synthesis, LoadedSynthesis, SynthesisReadReport, SynthesisWritePlan,
 };
 pub(crate) use util::display_root;
 pub(crate) use util::manifest_path;

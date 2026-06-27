@@ -170,6 +170,40 @@ fn validate_index_root_accepts_optional_valid_synthesis_toml() {
 }
 
 #[test]
+fn generate_basic_synthesis_uses_factual_build_test_and_passes_validation() {
+    use dotrepo_core::{generate_basic_synthesis, validate_synthesis};
+    use dotrepo_schema::{Manifest, SynthesisMode};
+
+    // Minimal manifest with build/test
+    let manifest: Manifest = toml::from_str(
+        r#"
+schema = "dotrepo/v0.1"
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://example.com/test"
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+[repo]
+name = "test"
+description = "test"
+build = "cargo build"
+test = "cargo test"
+"#,
+    )
+    .expect("manifest");
+
+    let synth = generate_basic_synthesis(&manifest, "2026-01-01T00:00:00Z", "abc123", "test-model", "test-provider");
+
+    assert_eq!(synth.synthesis.mode, SynthesisMode::Generated);
+    assert_eq!(synth.synthesis.for_agents.how_to_build, "cargo build");
+    assert_eq!(synth.synthesis.for_agents.how_to_test, "cargo test");
+
+    validate_synthesis(&manifest, &synth).expect("generated synthesis validates against manifest");
+}
+
+#[test]
 fn validate_index_root_reports_invalid_synthesis_without_requiring_it() {
     let root = temp_dir("index-invalid");
     let record_dir = root.join("repos/github.com/example/orbit");
