@@ -365,7 +365,7 @@ fn write_import_plan(
     let written_paths = outputs
         .iter()
         .map(|(path, _)| display_path(root, path))
-        .collect::<Vec<_>>();
+        .collect::<Result<Vec<_>, _>>()?;
     write_import_outputs(outputs, force, "force=true")?;
 
     Ok(written_paths)

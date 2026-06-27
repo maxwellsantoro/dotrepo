@@ -256,13 +256,13 @@ pub fn import_preview_repository(
     Ok(ImportPreviewReport {
         root: display_root(root),
         mode: import_mode_name(mode),
-        manifest_path: display_path(root, &plan.manifest_path),
+        manifest_path: display_path(root, &plan.manifest_path)?,
         manifest: plan.manifest.clone(),
         manifest_text: plan.manifest_text.clone(),
-        evidence_path: plan
-            .evidence_path
-            .as_ref()
-            .map(|path| display_path(root, path)),
+        evidence_path: match plan.evidence_path.as_ref() {
+            Some(path) => Some(display_path(root, path)?),
+            None => None,
+        },
         evidence_text: plan.evidence_text.clone(),
         imported_sources: plan.imported_sources.clone(),
         inferred_fields: plan.inferred_fields.clone(),

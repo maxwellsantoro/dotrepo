@@ -76,6 +76,17 @@ only advances selection when ranks are otherwise equal. A higher-status overlay
 still wins over a lower-status native record even when the native record has an
 accepted claim in flight.
 
+## Imported command safety checks
+
+When dotrepo imports `repo.build` or `repo.test` commands from README or manifest
+material, validation runs a lightweight shell-safety check that rejects obvious
+metacharacters and expansion forms (newlines, backticks, `$()`, `${`, `;`, `|`,
+`&`, `<`, `>`). This check is heuristic: it does not parse full shell grammar,
+does not sandbox execution, and cannot catch every quoting or escape sequence an
+actual shell might interpret. Treat imported commands as untrusted until a
+maintainer reviews them in a native record, and never run them outside an
+isolated environment without explicit review.
+
 See [`RFC 0004`](../rfcs/0004-index-and-trust-model.md) and the worked examples in
 [`authority-handoff-examples.md`](./authority-handoff-examples.md) for the normative
 contract and reference scenarios.

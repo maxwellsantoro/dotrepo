@@ -61,7 +61,7 @@ pub(crate) fn build_managed_surface_doctor_finding(
 ) -> Result<DoctorFinding> {
     let doctor_surface = doctor_surface_for_managed(surface);
     let mut finding = base_doctor_finding(
-        relative_or_absolute(root, &status.path),
+        relative_or_absolute(root, &status.path)?,
         doctor_surface,
         status.state,
         status
@@ -164,7 +164,7 @@ pub(crate) fn preview_surface(
         DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => {
             let status = inspect_all_or_nothing_surface(root, surface)?;
             let mut finding = base_doctor_finding(
-                relative_or_absolute(root, &status.path),
+                relative_or_absolute(root, &status.path)?,
                 surface,
                 status.state,
                 status
@@ -522,7 +522,7 @@ fn inspect_all_or_nothing_surface(
         let paths = candidate_paths
             .iter()
             .map(|path| display_path(root, path))
-            .collect::<Vec<_>>()
+            .collect::<Result<Vec<_>, _>>()?
             .join(", ");
         return Ok(ManagedSurfaceStatus {
             path: candidate_paths[0].clone(),
@@ -594,6 +594,6 @@ fn managed_region_block(surface: ManagedSurface, body: &str) -> String {
     )
 }
 
-fn relative_or_absolute(root: &Path, path: &Path) -> PathBuf {
+fn relative_or_absolute(root: &Path, path: &Path) -> Result<PathBuf> {
     crate::relative_to_root(root, path)
 }

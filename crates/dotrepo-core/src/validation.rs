@@ -1,5 +1,5 @@
 use anyhow::{bail, Result};
-use dotrepo_schema::{Manifest, RecordMode};
+use dotrepo_schema::{Manifest, RecordMode, RecordStatus};
 use serde::Serialize;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -7,7 +7,7 @@ use std::path::{Path, PathBuf};
 use crate::claims::resolve_repository_local_path_for_read;
 use crate::claims::{
     claim_directory_identity, load_claim_directory, validate_claim_event_history,
-    validate_claim_identity_alignment, validate_claim_resolution_consistency,
+    validate_claim_identity_alignment, validate_claim_resolution_consistency, ClaimState,
 };
 use crate::selection::{candidate_from_document, sort_candidates};
 use crate::synthesis::{load_synthesis_document, validate_synthesis};
@@ -81,7 +81,18 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
         }
         Ok(targets) => {
             for path in targets {
-                let manifest_path = display_path(root, &path);
+                let manifest_path = match display_path(root, &path) {
+                    Ok(path) => path,
+                    Err(err) => {
+                        diagnostics.push(RepositoryDiagnostic {
+                            severity: "error",
+                            source: "display_path".into(),
+                            message: err.to_string(),
+                            manifest_path: None,
+                        });
+                        continue;
+                    }
+                };
                 match load_manifest_file(&path) {
                     Ok(document) => loaded.push(document),
                     Err(err) => diagnostics.push(RepositoryDiagnostic {
@@ -94,7 +105,18 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
             }
 
             for document in &loaded {
-                let manifest_path = display_path(root, &document.path);
+                let manifest_path = match display_path(root, &document.path) {
+                    Ok(path) => path,
+                    Err(err) => {
+                        diagnostics.push(RepositoryDiagnostic {
+                            severity: "error",
+                            source: "display_path".into(),
+                            message: err.to_string(),
+                            manifest_path: None,
+                        });
+                        continue;
+                    }
+                };
                 for item in validate_manifest_diagnostics(root, &document.manifest) {
                     diagnostics.push(RepositoryDiagnostic {
                         severity: "error",
@@ -123,7 +145,7 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
                 severity: "error",
                 source: "candidate_from_document".into(),
                 message: err.to_string(),
-                manifest_path: Some(display_path(root, &document.path)),
+                manifest_path: display_path(root, &document.path).ok(),
             }),
         }
     }
@@ -356,9 +378,14 @@ pub fn validate_index_root(index_root: &Path) -> Result<Vec<IndexFinding>> {
 
     let mut findings = Vec::new();
     for record_dir in record_dirs {
-        let display_path = crate::relative_to_root(index_root, &record_dir).join("record.toml");
-        let synthesis_display_path =
-            crate::relative_to_root(index_root, &record_dir).join("synthesis.toml");
+        let display_path = match crate::relative_to_root(index_root, &record_dir) {
+            Ok(path) => path.join("record.toml"),
+            Err(err) => {
+                findings.push(index_error(record_dir.join("record.toml"), err.to_string()));
+                continue;
+            }
+        };
+        let synthesis_display_path = display_path.with_file_name("synthesis.toml");
 
         let document = match load_manifest_document(&record_dir) {
             Ok(document) => document,
@@ -446,13 +473,43 @@ fn validate_readme_sections(manifest: &Manifest) -> Vec<ValidationDiagnostic> {
     diagnostics
 }
 
+fn overlay_has_accepted_claim(index_root: &Path, record_dir: &Path) -> bool {
+    let claims_root = record_dir.join("claims");
+    if !claims_root.is_dir() {
+        return false;
+    }
+    fs::read_dir(&claims_root)
+        .ok()
+        .into_iter()
+        .flatten()
+        .filter_map(|entry| entry.ok())
+        .any(|entry| {
+            let path = entry.path();
+            let Ok(file_type) = entry.file_type() else {
+                return false;
+            };
+            if file_type.is_symlink() || !file_type.is_dir() {
+                return false;
+            }
+            load_claim_directory(index_root, &path)
+                .ok()
+                .is_some_and(|loaded| loaded.claim.claim.state == ClaimState::Accepted)
+        })
+}
+
 fn validate_index_entry(
     index_root: &Path,
     record_dir: &Path,
     manifest: &Manifest,
 ) -> Vec<IndexFinding> {
     let mut findings = Vec::new();
-    let relative_record = crate::relative_to_root(index_root, record_dir).join("record.toml");
+    let relative_record = match crate::relative_to_root(index_root, record_dir) {
+        Ok(path) => path.join("record.toml"),
+        Err(err) => {
+            findings.push(index_error(record_dir.join("record.toml"), err.to_string()));
+            return findings;
+        }
+    };
 
     let relative = match record_dir.strip_prefix(index_root.join("repos")) {
         Ok(relative) => relative,
@@ -485,6 +542,17 @@ fn validate_index_entry(
         findings.push(index_error(
             relative_record.clone(),
             "v0.1 index entries must use record.mode = \"overlay\"",
+        ));
+    }
+
+    if matches!(
+        manifest.record.status,
+        RecordStatus::Reviewed | RecordStatus::Canonical
+    ) && !overlay_has_accepted_claim(index_root, record_dir)
+    {
+        findings.push(index_error(
+            relative_record.clone(),
+            "overlay records must not use reviewed or canonical status without an accepted maintainer claim",
         ));
     }
 
@@ -555,12 +623,18 @@ fn validate_index_entry(
 fn validate_claim_directory(index_root: &Path, claim_dir: &Path) -> Vec<IndexFinding> {
     let mut findings = Vec::new();
     let claim_path = claim_dir.join("claim.toml");
-    let relative_claim = crate::relative_to_root(index_root, &claim_path);
+    let relative_claim = match crate::relative_to_root(index_root, &claim_path) {
+        Ok(path) => path,
+        Err(err) => {
+            findings.push(index_error(claim_path.clone(), err.to_string()));
+            return findings;
+        }
+    };
 
     let directory_identity = match claim_directory_identity(index_root, claim_dir) {
         Ok(identity) => identity,
         Err(message) => {
-            findings.push(index_error(relative_claim, message.to_string()));
+            findings.push(index_error(relative_claim.clone(), message.to_string()));
             return findings;
         }
     };

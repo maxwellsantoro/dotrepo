@@ -1,7 +1,7 @@
 use anyhow::{anyhow, bail, Context, Result};
 use dotrepo_core::{
-    query_manifest_value, validate_manifest_diagnostics, ValidationDiagnostic,
-    ValidationDiagnosticSeverity,
+    manifest_to_json, query_manifest_value_from_json, validate_manifest_diagnostics,
+    ValidationDiagnostic, ValidationDiagnosticSeverity,
 };
 use dotrepo_schema::{parse_manifest, ParseError};
 use dotrepo_transport::{
@@ -323,7 +323,7 @@ fn handle_notification(state: &mut ServerState, method: &str, params: Value) -> 
                 version: Some(params.text_document.version),
                 text: params.text_document.text,
             };
-            let publish = publish_for_document(&document);
+            let publish = publish_for_document(&document, &state.workspace_roots);
             state
                 .documents
                 .insert(params.text_document.uri.clone(), document);
@@ -339,7 +339,7 @@ fn handle_notification(state: &mut ServerState, method: &str, params: Value) -> 
             };
             document.text = change.text.clone();
             document.version = Some(params.text_document.version);
-            let publish = publish_for_document(document);
+            let publish = publish_for_document(document, &state.workspace_roots);
             Ok(vec![publish_diagnostics_notification(&publish)])
         }
         "textDocument/didSave" => {
@@ -372,7 +372,7 @@ fn handle_notification(state: &mut ServerState, method: &str, params: Value) -> 
                         },
                     }
                 };
-            let publish = publish_for_document(&document);
+            let publish = publish_for_document(&document, &state.workspace_roots);
             state.documents.insert(document.uri.clone(), document);
             Ok(vec![publish_diagnostics_notification(&publish)])
         }
@@ -391,11 +391,14 @@ fn handle_notification(state: &mut ServerState, method: &str, params: Value) -> 
     }
 }
 
-fn publish_for_document(document: &OpenDocument) -> DiagnosticSnapshot {
+fn publish_for_document(
+    document: &OpenDocument,
+    workspace_roots: &[PathBuf],
+) -> DiagnosticSnapshot {
     DiagnosticSnapshot {
         uri: document.uri.clone(),
         version: document.version,
-        diagnostics: diagnostics_for_document(&document.path, &document.text),
+        diagnostics: diagnostics_for_document(&document.path, &document.text, workspace_roots),
     }
 }
 
@@ -438,15 +441,17 @@ fn hover_response(
 
     if path.starts_with("repo.") {
         if let Ok(manifest) = parse_manifest(&document.text) {
-            if let Ok(value) = query_manifest_value(&manifest, path) {
-                let rendered =
-                    serde_json::to_string_pretty(&value).unwrap_or_else(|_| value.to_string());
-                return Ok(Some(Hover {
-                    contents: markup_content(&format!(
-                        "`{path}` resolves to:\n\n```json\n{rendered}\n```"
-                    )),
-                    range: index.range_for_path(path),
-                }));
+            if let Ok(document_json) = manifest_to_json(&manifest) {
+                if let Ok(value) = query_manifest_value_from_json(&document_json, path) {
+                    let rendered =
+                        serde_json::to_string_pretty(&value).unwrap_or_else(|_| value.to_string());
+                    return Ok(Some(Hover {
+                        contents: markup_content(&format!(
+                            "`{path}` resolves to:\n\n```json\n{rendered}\n```"
+                        )),
+                        range: index.range_for_path(path),
+                    }));
+                }
             }
         }
     }
@@ -454,14 +459,57 @@ fn hover_response(
     Ok(None)
 }
 
-fn diagnostics_for_document(path: &Path, text: &str) -> Vec<LspDiagnostic> {
+fn canonical_manifest_path(path: &Path) -> Result<PathBuf> {
+    if path.exists() {
+        return fs::canonicalize(path).map_err(Into::into);
+    }
+    if let Some(parent) = path.parent() {
+        if parent.as_os_str().is_empty() || !parent.exists() {
+            return Ok(path.to_path_buf());
+        }
+        let canonical_parent = fs::canonicalize(parent)?;
+        return Ok(canonical_parent.join(
+            path.file_name()
+                .ok_or_else(|| anyhow!("manifest path has no file name"))?,
+        ));
+    }
+    Ok(path.to_path_buf())
+}
+
+fn validation_root_for_manifest(path: &Path, workspace_roots: &[PathBuf]) -> PathBuf {
+    if workspace_roots.is_empty() {
+        return path
+            .parent()
+            .unwrap_or_else(|| Path::new("."))
+            .to_path_buf();
+    }
+
+    if let Ok(canonical_path) = canonical_manifest_path(path) {
+        for root in workspace_roots {
+            let canonical_root = fs::canonicalize(root).unwrap_or_else(|_| root.clone());
+            if canonical_path.starts_with(&canonical_root) {
+                return root.clone();
+            }
+        }
+    }
+
+    path.parent()
+        .unwrap_or_else(|| Path::new("."))
+        .to_path_buf()
+}
+
+fn diagnostics_for_document(
+    path: &Path,
+    text: &str,
+    workspace_roots: &[PathBuf],
+) -> Vec<LspDiagnostic> {
     let index = DocumentIndex::from_text(text);
-    let root = path.parent().unwrap_or_else(|| Path::new("."));
+    let root = validation_root_for_manifest(path, workspace_roots);
 
     match parse_manifest(text) {
-        Ok(manifest) => validate_manifest_diagnostics(root, &manifest)
+        Ok(manifest) => validate_manifest_diagnostics(&root, &manifest)
             .into_iter()
-            .map(|diagnostic| map_validation_diagnostic(&index, root, &diagnostic))
+            .map(|diagnostic| map_validation_diagnostic(&index, &root, &diagnostic))
             .collect(),
         Err(ParseError::Toml(err)) => vec![LspDiagnostic {
             range: err
@@ -885,22 +933,7 @@ fn ensure_manifest_in_workspace(path: &Path, workspace_roots: &[PathBuf]) -> Res
         return Ok(());
     }
 
-    let canonical_path = if path.exists() {
-        fs::canonicalize(path)?
-    } else if let Some(parent) = path.parent() {
-        if parent.as_os_str().is_empty() || !parent.exists() {
-            path.to_path_buf()
-        } else {
-            let canonical_parent = fs::canonicalize(parent)?;
-            canonical_parent.join(
-                path.file_name()
-                    .ok_or_else(|| anyhow!("manifest path has no file name"))?,
-            )
-        }
-    } else {
-        path.to_path_buf()
-    };
-
+    let canonical_path = canonical_manifest_path(path)?;
     for root in workspace_roots {
         let canonical_root = fs::canonicalize(root).unwrap_or_else(|_| root.clone());
         if canonical_path.starts_with(&canonical_root) {
@@ -1452,6 +1485,7 @@ status = "imported"
 name = "orbit"
 description = "Fast local-first sync engine"
 "#,
+            &[],
         );
 
         let messages = diagnostics
@@ -1481,6 +1515,7 @@ schema = "dotrepo/v0.1"
 mode = "native
 status = "draft"
 "#,
+            &[],
         );
 
         assert_eq!(diagnostics.len(), 1);

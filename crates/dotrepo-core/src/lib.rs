@@ -60,16 +60,17 @@ pub use claims::{
 };
 
 pub use public::{
-    build_public_freshness, current_public_freshness, export_public_index_static,
-    export_public_index_static_with_base, index_snapshot_digest, list_index_repository_identities,
-    load_public_query_input_snapshot, public_cache_validators, public_error_response,
-    public_export_file_manifest, public_profile_compare, public_profile_compare_with_base,
-    public_profile_search, public_profile_search_with_base, public_query_input_snapshot,
-    public_repository_batch_profiles, public_repository_batch_profiles_with_base,
-    public_repository_batch_query, public_repository_batch_query_with_base,
-    public_repository_profile, public_repository_profile_or_error,
-    public_repository_profile_or_error_with_base, public_repository_profile_with_base,
-    public_repository_query, public_repository_query_from_input_or_error_with_base,
+    build_public_freshness, build_public_freshness_with_digest, current_public_freshness,
+    export_public_index_static, export_public_index_static_with_base, index_snapshot_digest,
+    list_index_repository_identities, load_public_query_input_snapshot, public_cache_validators,
+    public_error_response, public_export_file_manifest, public_profile_compare,
+    public_profile_compare_with_base, public_profile_search, public_profile_search_with_base,
+    public_query_input_snapshot, public_repository_batch_profiles,
+    public_repository_batch_profiles_with_base, public_repository_batch_query,
+    public_repository_batch_query_with_base, public_repository_profile,
+    public_repository_profile_or_error, public_repository_profile_or_error_with_base,
+    public_repository_profile_with_base, public_repository_query,
+    public_repository_query_from_input_or_error_with_base,
     public_repository_query_from_input_with_base, public_repository_query_or_error,
     public_repository_query_or_error_with_base, public_repository_query_with_base,
     public_repository_relations, public_repository_relations_with_base, public_repository_summary,
@@ -295,6 +296,8 @@ pub struct TrustReport {
     pub manifest_path: String,
     pub selection: SelectionReport,
     pub conflicts: Vec<ConflictReport>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub claim_load_warnings: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -401,6 +404,14 @@ pub fn trust_repository(root: &Path) -> Result<TrustReport> {
         )
     })?;
     let reason = resolve_selection_reason(&candidates, selected);
+    let mut claim_load_warnings = Vec::new();
+    for candidate in &candidates {
+        claim_load_warnings.extend(crate::claims::claim_directory_load_warnings(
+            root, candidate,
+        ));
+    }
+    claim_load_warnings.sort();
+    claim_load_warnings.dedup();
     Ok(TrustReport {
         root: display_root(root),
         manifest_path: selected.manifest_path.clone(),
@@ -422,6 +433,7 @@ pub fn trust_repository(root: &Path) -> Result<TrustReport> {
                 record: selected_record(root, candidate),
             })
             .collect(),
+        claim_load_warnings,
     })
 }
 
@@ -618,7 +630,7 @@ fn generate_check_output(
         Err(e) if e.kind() == std::io::ErrorKind::NotFound => (String::new(), true),
         Err(e) => return Err(anyhow!("failed to read {}: {}", path.display(), e)),
     };
-    let relative = display_path(root, &path);
+    let relative = display_path(root, &path)?;
     let is_stale = current != expected;
     Ok(GenerateCheckOutput {
         path: relative,
@@ -688,7 +700,7 @@ fn generate_check_managed_surface(
     };
 
     Ok(GenerateCheckOutput {
-        path: display_path(root, &status.path),
+        path: display_path(root, &status.path)?,
         state: status.state,
         stale,
         expected,

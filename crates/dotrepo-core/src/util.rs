@@ -89,8 +89,8 @@ pub(crate) fn verify_path_contained_in_root(root: &Path, path: &Path) -> Result<
     Ok(())
 }
 
-pub fn display_path(root: &Path, path: &Path) -> String {
-    relative_to_root(root, path).display().to_string()
+pub fn display_path(root: &Path, path: &Path) -> Result<String> {
+    Ok(relative_to_root(root, path)?.display().to_string())
 }
 
 pub(crate) fn display_root(root: &Path) -> String {
@@ -100,22 +100,18 @@ pub(crate) fn display_root(root: &Path) -> String {
         .to_string()
 }
 
-/// Returns `path` made relative to `root` when `path` is under `root`; otherwise returns `path` unchanged.
-/// Callers should prefer passing paths that were resolved under the root.
+/// Returns `path` made relative to `root` when `path` is under `root`.
 /// Used to avoid leaking absolute paths into user-facing reports, digests, and public JSON.
-pub(crate) fn relative_to_root(root: &Path, path: &Path) -> PathBuf {
-    match path.strip_prefix(root) {
-        Ok(relative) => relative.to_path_buf(),
-        Err(_) => {
-            debug_assert!(
-                false,
-                "relative_to_root: path {} is not under root {}",
+pub(crate) fn relative_to_root(root: &Path, path: &Path) -> Result<PathBuf> {
+    path.strip_prefix(root)
+        .map(|relative| relative.to_path_buf())
+        .map_err(|_| {
+            anyhow!(
+                "path {} is not under repository root {}",
                 path.display(),
                 root.display()
-            );
-            path.to_path_buf()
-        }
-    }
+            )
+        })
 }
 
 pub(crate) fn manifest_path(root: &Path) -> PathBuf {

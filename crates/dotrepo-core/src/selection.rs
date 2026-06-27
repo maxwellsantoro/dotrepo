@@ -173,7 +173,7 @@ pub(crate) fn candidate_from_document(
     let manifest = std::sync::Arc::clone(&document.manifest);
     let manifest_json = manifest_to_json(&manifest)?;
     Ok(CandidateManifest {
-        manifest_path: display_path(root, &document.path),
+        manifest_path: display_path(root, &document.path)?,
         path: document.path.clone(),
         rank: precedence_rank(&manifest),
         identity: manifest_identity(root, document),
@@ -301,7 +301,8 @@ pub(crate) fn public_selected_record(
     candidate: &CandidateManifest,
 ) -> PublicSelectedRecord {
     PublicSelectedRecord {
-        manifest_path: display_path(display_root, &candidate.path),
+        manifest_path: display_path(display_root, &candidate.path)
+            .unwrap_or_else(|_| candidate.path.display().to_string()),
         record: record_summary(&candidate.manifest),
         claim: candidate_claim_context(display_root, candidate),
         artifacts: public_record_artifacts(display_root, candidate),

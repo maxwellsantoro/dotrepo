@@ -468,6 +468,10 @@ jobs:
           cache-dependency-path: cloudflare/hosted-query/package-lock.json
       - name: Run import quality gate
         run: cargo test -p dotrepo-core --test import_quality_gate
+      - name: Run core Rust smoke tests
+        run: |
+          cargo test -p dotrepo-core
+          cargo run -p dotrepo-cli -- validate-index
       - name: Run lightweight public-surface gate
         run: uv run python scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
       - name: Upload static public export artifact

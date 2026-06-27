@@ -20,7 +20,8 @@ use serde::Deserialize;
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeSet, HashMap};
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
+use std::process::Command;
 
 /// Ecosystems the telemetry classifier can emit. A checked-in regression
 /// fixture's declared ecosystem must match one of these so capture typos fail
@@ -356,4 +357,68 @@ fn regression_fixture_pack_replays_checked_in_fixtures() {
         "regression fixture pack must cover every named ecosystem; missing: {}",
         missing.join(", ")
     );
+}
+
+fn regression_stub_root() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("..")
+        .join("..")
+        .join("index")
+        .join("telemetry")
+        .join("regression-fixture-stubs")
+}
+
+fn discover_regression_stubs(root: &Path) -> Vec<PathBuf> {
+    if !root.is_dir() {
+        return Vec::new();
+    }
+    let mut found = Vec::new();
+    for entry in fs::read_dir(root).expect("regression stub root is readable") {
+        let entry = entry.expect("regression stub entry is readable");
+        let metadata = entry.path().join("metadata.json");
+        if metadata.is_file() {
+            found.push(entry.path());
+        }
+    }
+    found.sort();
+    found
+}
+
+#[test]
+fn regression_fixture_stubs_materialize_cleanly() {
+    let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("..")
+        .join("..");
+    let stubs_root = regression_stub_root();
+    let stubs = discover_regression_stubs(&stubs_root);
+    if stubs.is_empty() {
+        return;
+    }
+
+    for stub in stubs {
+        let output = Command::new("uv")
+            .current_dir(&repo_root)
+            .args([
+                "run",
+                "python",
+                "scripts/materialize_regression_fixture.py",
+                "--stub",
+            ])
+            .arg(&stub)
+            .arg("--dry-run")
+            .output()
+            .unwrap_or_else(|err| {
+                panic!(
+                    "failed to invoke materialize_regression_fixture.py for {}: {err}",
+                    stub.display()
+                )
+            });
+        assert!(
+            output.status.success(),
+            "regression stub {} failed dry-run materialization:\nstdout: {}\nstderr: {}",
+            stub.display(),
+            String::from_utf8_lossy(&output.stdout),
+            String::from_utf8_lossy(&output.stderr)
+        );
+    }
 }

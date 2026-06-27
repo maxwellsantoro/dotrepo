@@ -2,7 +2,7 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "reviewed"
+status = "verified"
 source = "https://github.com/acme/widget"
 
 [record.trust]
@@ -11,7 +11,7 @@ provenance = ["imported", "verified"]
 
 [repo]
 name = "widget"
-description = "Reviewed overlay for claim fixtures"
+description = "Verified overlay with disputed maintainer claim"
 homepage = "https://github.com/acme/widget"
 build = "cargo build --workspace"
 test = "cargo test --workspace"

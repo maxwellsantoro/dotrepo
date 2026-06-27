@@ -301,9 +301,11 @@ pub fn load_claim_directory(root: &Path, claim_dir: &Path) -> Result<LoadedClaim
         parse_claim_record(&claim_text).map_err(|e| anyhow!("{}: {}", claim_path.display(), e))?;
 
     let review_path = claim_dir.join("review.md");
-    let review = review_path
-        .is_file()
-        .then(|| display_path(root, &review_path));
+    let review = if review_path.is_file() {
+        Some(display_path(root, &review_path)?)
+    } else {
+        None
+    };
 
     let events_dir = claim_dir.join("events");
     let mut event_paths = Vec::new();
@@ -333,13 +335,13 @@ pub fn load_claim_directory(root: &Path, claim_dir: &Path) -> Result<LoadedClaim
             .map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
         let event = parse_claim_event(&text).map_err(|e| anyhow!("{}: {}", path.display(), e))?;
         events.push(LoadedClaimEvent {
-            path: display_path(root, &path),
+            path: display_path(root, &path)?,
             event,
         });
     }
 
     Ok(LoadedClaimDirectory {
-        claim_path: display_path(root, &claim_path),
+        claim_path: display_path(root, &claim_path)?,
         claim,
         review_path: review,
         events,
@@ -547,7 +549,7 @@ pub fn append_claim_event(
 
     let mut simulated_events = loaded.events.clone();
     simulated_events.push(LoadedClaimEvent {
-        path: display_path(root, &event_path),
+        path: display_path(root, &event_path)?,
         event: event.clone(),
     });
     let relative_claim = PathBuf::from(&loaded.claim_path);
@@ -777,10 +779,7 @@ fn update_claim_resolution(
     }
 }
 
-pub(crate) fn candidate_claim_context(
-    root: &Path,
-    candidate: &CandidateManifest,
-) -> Option<RecordClaimContext> {
+fn claim_directories_for_candidate(candidate: &CandidateManifest) -> Option<Vec<PathBuf>> {
     let handoff_root = match candidate.path.parent() {
         Some(parent) => parent.join("claims"),
         None => return None,
@@ -801,7 +800,34 @@ pub(crate) fn candidate_claim_context(
         })
         .collect::<Vec<_>>();
     claim_dirs.sort();
+    Some(claim_dirs)
+}
 
+pub(crate) fn claim_directory_load_warnings(
+    root: &Path,
+    candidate: &CandidateManifest,
+) -> Vec<String> {
+    let Some(claim_dirs) = claim_directories_for_candidate(candidate) else {
+        return Vec::new();
+    };
+
+    claim_dirs
+        .into_iter()
+        .filter_map(|claim_dir| match load_claim_directory(root, &claim_dir) {
+            Ok(_) => None,
+            Err(error) => Some(format!(
+                "failed to load claim directory {}: {error}",
+                display_path(root, &claim_dir).unwrap_or_else(|_| claim_dir.display().to_string())
+            )),
+        })
+        .collect()
+}
+
+pub(crate) fn candidate_claim_context(
+    root: &Path,
+    candidate: &CandidateManifest,
+) -> Option<RecordClaimContext> {
+    let claim_dirs = claim_directories_for_candidate(candidate)?;
     let manifest_path = candidate.manifest_path.as_str();
     let mut matching = claim_dirs
         .into_iter()

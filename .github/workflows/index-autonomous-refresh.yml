@@ -146,8 +146,7 @@ jobs:
             uv run python scripts/check_autonomous_telemetry_gate.py \
               --summary index/telemetry/autonomous-summary.json \
               --output-json index-autonomous-batch/autonomous-telemetry-gate.json \
-              --output-md index-autonomous-batch/autonomous-telemetry-gate.md \
-              --warn-only
+              --output-md index-autonomous-batch/autonomous-telemetry-gate.md
           else
             echo "No retained telemetry summary yet; skipping telemetry gate"
           fi

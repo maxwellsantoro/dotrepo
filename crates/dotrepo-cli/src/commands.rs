@@ -1,11 +1,11 @@
 use anyhow::{bail, Context, Result};
 use dotrepo_core::{
     adopt_managed_surface, adopt_overlay_record, analyze_index_promotion, append_claim_event,
-    build_public_freshness, current_public_freshness, current_timestamp_rfc3339,
-    export_public_index_static_with_base, generate_check_repository,
-    import_repository_with_options, inspect_claim_directory, inspect_surface_states,
-    load_manifest_document, load_manifest_from_root, managed_outputs, preview_surfaces,
-    public_profile_compare_with_base, public_profile_search_with_base,
+    build_public_freshness, build_public_freshness_with_digest, current_public_freshness,
+    current_timestamp_rfc3339, export_public_index_static_with_base, generate_check_repository,
+    import_repository_with_options, index_snapshot_digest, inspect_claim_directory,
+    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
+    preview_surfaces, public_profile_compare_with_base, public_profile_search_with_base,
     public_repository_batch_profiles_with_base, public_repository_batch_query_with_base,
     public_repository_profile_or_error_with_base, public_repository_query_or_error_with_base,
     public_repository_relations_with_base, public_repository_summary_or_error_with_base,
@@ -882,11 +882,13 @@ pub fn cmd_public(command: PublicCommand) -> Result<()> {
             generated_at,
             stale_after,
         } => {
-            let freshness = build_public_freshness(
+            let snapshot_digest = index_snapshot_digest(&index_root)?;
+            let freshness = build_public_freshness_with_digest(
                 &index_root,
                 stale_after_hours,
                 generated_at.as_deref(),
                 stale_after.as_deref(),
+                Some(&snapshot_digest),
             )?;
             let outputs =
                 export_public_index_static_with_base(&index_root, &out_dir, freshness, &base_path)?;

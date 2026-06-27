@@ -595,17 +595,14 @@ pub(crate) fn public_record_artifacts(
     display_root: &Path,
     candidate: &CandidateManifest,
 ) -> Option<PublicRecordArtifacts> {
-    let evidence_path = candidate
-        .path
-        .parent()
-        .map(|parent| parent.join("evidence.md"));
-    let evidence_path = evidence_path
-        .filter(|path| path.is_file())
-        .map(|path| display_path(display_root, &path));
-
-    evidence_path.as_ref()?;
-
-    Some(PublicRecordArtifacts { evidence_path })
+    let evidence_path = candidate.path.parent()?.join("evidence.md");
+    if !evidence_path.is_file() {
+        return None;
+    }
+    let relative = display_path(display_root, &evidence_path).ok()?;
+    Some(PublicRecordArtifacts {
+        evidence_path: Some(relative),
+    })
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -635,6 +632,16 @@ fn index_repository_scope(
         );
     }
     Ok(scope_root)
+}
+
+fn resolve_repository_candidates(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+) -> Result<Vec<CandidateManifest>> {
+    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
+    resolve_candidates(&scope_root)
 }
 
 fn validate_public_identity(host: &str, owner: &str, repo: &str) -> Result<()> {
@@ -759,7 +766,8 @@ fn record_mode_name(mode: &dotrepo_schema::RecordMode) -> &'static str {
 
 fn public_research_record(index_root: &Path, selected: &CandidateManifest) -> PublicResearchRecord {
     PublicResearchRecord {
-        manifest_path: display_path(index_root, &selected.path),
+        manifest_path: display_path(index_root, &selected.path)
+            .unwrap_or_else(|_| selected.path.display().to_string()),
         mode: record_mode_name(&selected.manifest.record.mode).to_string(),
         source: selected.manifest.record.source.clone(),
         generated_at: selected.manifest.record.generated_at.clone(),
@@ -796,7 +804,8 @@ fn public_research_synthesis_from_document(
     synthesis: SynthesisDocument,
 ) -> PublicResearchSynthesis {
     PublicResearchSynthesis {
-        synthesis_path: display_path(display_root, synthesis_path),
+        synthesis_path: display_path(display_root, synthesis_path)
+            .unwrap_or_else(|_| synthesis_path.display().to_string()),
         generated_at: synthesis.synthesis.generated_at,
         source_commit: synthesis.synthesis.source_commit,
         model: synthesis.synthesis.model,
@@ -950,7 +959,7 @@ pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
 
     let mut hasher = Sha256::new();
     for path in files {
-        let relative = crate::relative_to_root(index_root, &path);
+        let relative = crate::relative_to_root(index_root, &path)?;
         hasher.update(relative.as_os_str().as_encoded_bytes());
         hasher.update([0]);
         hasher.update(fs::read(&path).map_err(|err| {
@@ -971,6 +980,22 @@ pub fn build_public_freshness(
     stale_after_hours: Option<i64>,
     generated_at: Option<&str>,
     stale_after: Option<&str>,
+) -> Result<PublicFreshness> {
+    build_public_freshness_with_digest(
+        index_root,
+        stale_after_hours,
+        generated_at,
+        stale_after,
+        None,
+    )
+}
+
+pub fn build_public_freshness_with_digest(
+    index_root: &Path,
+    stale_after_hours: Option<i64>,
+    generated_at: Option<&str>,
+    stale_after: Option<&str>,
+    snapshot_digest: Option<&str>,
 ) -> Result<PublicFreshness> {
     if stale_after.is_some() && stale_after_hours.is_some() {
         bail!("--stale-after conflicts with --stale-after-hours");
@@ -998,7 +1023,10 @@ pub fn build_public_freshness(
 
     Ok(PublicFreshness {
         generated_at: render_rfc3339("public freshness timestamp", generated_at)?,
-        snapshot_digest: index_snapshot_digest(index_root)?,
+        snapshot_digest: match snapshot_digest {
+            Some(digest) => digest.to_string(),
+            None => index_snapshot_digest(index_root)?,
+        },
         stale_after,
     })
 }
@@ -1007,7 +1035,7 @@ pub fn current_public_freshness(
     index_root: &Path,
     stale_after_hours: Option<i64>,
 ) -> Result<PublicFreshness> {
-    build_public_freshness(index_root, stale_after_hours, None, None)
+    build_public_freshness_with_digest(index_root, stale_after_hours, None, None, None)
 }
 
 pub fn public_snapshot_metadata(freshness: PublicFreshness) -> PublicSnapshotMetadata {
@@ -1043,7 +1071,7 @@ pub fn public_export_file_manifest(
     let mut files = outputs
         .iter()
         .map(|(path, contents)| {
-            let relative = crate::relative_to_root(out_root, path);
+            let relative = crate::relative_to_root(out_root, path)?;
             let bytes = contents.as_bytes();
             Ok(PublicExportFileEntry {
                 path: relative.display().to_string(),
@@ -1129,10 +1157,29 @@ pub fn public_repository_summary_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> Result<PublicRepositorySummaryResponse> {
-    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
-    let candidates = resolve_candidates(&scope_root)?;
+    let candidates = resolve_repository_candidates(index_root, host, owner, repo)?;
+    public_repository_summary_with_candidates(
+        index_root,
+        host,
+        owner,
+        repo,
+        &candidates,
+        freshness,
+        base_path,
+    )
+}
+
+fn public_repository_summary_with_candidates(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    candidates: &[CandidateManifest],
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicRepositorySummaryResponse> {
     let selected = &candidates[0];
-    let reason = resolve_selection_reason(&candidates, selected);
+    let reason = resolve_selection_reason(candidates, selected);
 
     Ok(PublicRepositorySummaryResponse {
         api_version: PUBLIC_API_VERSION,
@@ -1186,10 +1233,29 @@ pub fn public_repository_trust_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> Result<PublicTrustResponse> {
-    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
-    let candidates = resolve_candidates(&scope_root)?;
+    let candidates = resolve_repository_candidates(index_root, host, owner, repo)?;
+    public_repository_trust_with_candidates(
+        index_root,
+        host,
+        owner,
+        repo,
+        &candidates,
+        freshness,
+        base_path,
+    )
+}
+
+fn public_repository_trust_with_candidates(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    candidates: &[CandidateManifest],
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicTrustResponse> {
     let selected = &candidates[0];
-    let reason = resolve_selection_reason(&candidates, selected);
+    let reason = resolve_selection_reason(candidates, selected);
 
     Ok(PublicTrustResponse {
         api_version: PUBLIC_API_VERSION,
@@ -1235,10 +1301,29 @@ pub fn public_repository_profile_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> Result<PublicResearchProfileResponse> {
-    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
-    let candidates = resolve_candidates(&scope_root)?;
+    let candidates = resolve_repository_candidates(index_root, host, owner, repo)?;
+    public_repository_profile_with_candidates(
+        index_root,
+        host,
+        owner,
+        repo,
+        &candidates,
+        freshness,
+        base_path,
+    )
+}
+
+fn public_repository_profile_with_candidates(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    candidates: &[CandidateManifest],
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicResearchProfileResponse> {
     let selected = &candidates[0];
-    let reason = resolve_selection_reason(&candidates, selected);
+    let reason = resolve_selection_reason(candidates, selected);
     let docs = public_research_docs(&selected.manifest);
     let ownership = public_research_ownership(&selected.manifest);
     let synthesis = public_research_synthesis(index_root, selected)?;
@@ -1628,11 +1713,18 @@ pub fn public_profile_search_with_base(
     let identities = list_index_repository_identities(index_root)?;
     let mut results = Vec::new();
     for identity in &identities {
-        let profile = public_repository_profile_with_base(
+        let candidates = resolve_repository_candidates(
             index_root,
             &identity.host,
             &identity.owner,
             &identity.repo,
+        )?;
+        let profile = public_repository_profile_with_candidates(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            &candidates,
             freshness.clone(),
             base_path,
         )?;
@@ -2018,10 +2110,27 @@ pub fn public_query_input_snapshot(
     repo: &str,
     freshness: PublicFreshness,
 ) -> Result<PublicQueryInputSnapshot> {
-    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
-    let candidates = resolve_candidates(&scope_root)?;
+    let candidates = resolve_repository_candidates(index_root, host, owner, repo)?;
+    public_query_input_snapshot_with_candidates(
+        index_root,
+        host,
+        owner,
+        repo,
+        &candidates,
+        freshness,
+    )
+}
+
+fn public_query_input_snapshot_with_candidates(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    candidates: &[CandidateManifest],
+    freshness: PublicFreshness,
+) -> Result<PublicQueryInputSnapshot> {
     let selected = &candidates[0];
-    let reason = resolve_selection_reason(&candidates, selected);
+    let reason = resolve_selection_reason(candidates, selected);
 
     Ok(PublicQueryInputSnapshot {
         api_version: PUBLIC_API_VERSION.to_string(),
@@ -2289,27 +2398,36 @@ pub fn export_public_index_static_with_base(
             .join(&identity.host)
             .join(&identity.owner)
             .join(&identity.repo);
-        let summary = public_repository_summary_with_base(
+        let candidates = resolve_repository_candidates(
             index_root,
             &identity.host,
             &identity.owner,
             &identity.repo,
+        )?;
+        let summary = public_repository_summary_with_candidates(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            &candidates,
             freshness.clone(),
             base_path,
         )?;
-        let trust = public_repository_trust_with_base(
+        let trust = public_repository_trust_with_candidates(
             index_root,
             &identity.host,
             &identity.owner,
             &identity.repo,
+            &candidates,
             freshness.clone(),
             base_path,
         )?;
-        let profile = public_repository_profile_with_base(
+        let profile = public_repository_profile_with_candidates(
             index_root,
             &identity.host,
             &identity.owner,
             &identity.repo,
+            &candidates,
             freshness.clone(),
             base_path,
         )?;
@@ -2337,11 +2455,12 @@ pub fn export_public_index_static_with_base(
                 &identity.owner,
                 &identity.repo,
             )),
-            serde_json::to_string_pretty(&public_query_input_snapshot(
+            serde_json::to_string_pretty(&public_query_input_snapshot_with_candidates(
                 index_root,
                 &identity.host,
                 &identity.owner,
                 &identity.repo,
+                &candidates,
                 freshness.clone(),
             )?)?,
         ));

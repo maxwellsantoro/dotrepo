@@ -1026,7 +1026,7 @@ fn scaffold_claim_directory_renders_valid_draft_claim() {
     .expect("claim plan");
 
     assert_eq!(
-        display_path(&root, &plan.claim_path),
+        display_path(&root, &plan.claim_path).expect("claim path is under root"),
         "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-02/claim.toml"
     );
     let claim = parse_claim_record(&plan.claim_text).expect("claim parses");
@@ -1120,7 +1120,7 @@ fn append_claim_event_advances_draft_claim_to_submitted() {
     .expect("submit event");
 
     assert_eq!(
-            display_path(&root, &plan.event_path),
+            display_path(&root, &plan.event_path).expect("event path is under root"),
             "repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-04/events/0001-submitted.toml"
         );
     let updated_claim = parse_claim_record(&plan.claim_text).expect("updated claim parses");

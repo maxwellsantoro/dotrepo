@@ -33,7 +33,7 @@ fn record_toml(build: Option<&str>, test: Option<&str>) -> String {
 
 [record]
 mode = "overlay"
-status = "reviewed"
+status = "verified"
 source = "https://github.com/example/orbit"
 generated_at = "2026-03-17T12:00:00Z"
 
@@ -43,7 +43,7 @@ provenance = ["verified"]
 
 [repo]
 name = "orbit"
-description = "Reviewed overlay"
+description = "Verified overlay"
 homepage = "https://github.com/example/orbit"
 {build_line}{test_line}"#
     )
