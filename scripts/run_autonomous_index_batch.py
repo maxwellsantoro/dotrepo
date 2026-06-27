@@ -644,6 +644,25 @@ def load_retained_runs(path: Path) -> list[dict]:
     return runs
 
 
+def run_rates(run_telemetry: dict) -> dict[str, float]:
+    crawled = int(run_telemetry.get("crawled") or 0)
+    zero_model_runs = int(run_telemetry.get("zeroModelRuns") or 0)
+    tiers = run_telemetry.get("repositoriesByAdjudicationTier") or {}
+    if not crawled:
+        return {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.0,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+        }
+    return {
+        "failureRate": int(run_telemetry.get("failed") or 0) / crawled,
+        "adjudicationRate": (crawled - zero_model_runs) / crawled,
+        "secondOpinionRate": int(tiers.get("local_second_opinion") or 0) / crawled,
+        "apiEscalationRate": int(tiers.get("api_escalation") or 0) / crawled,
+    }
+
+
 def aggregate_runs(runs: list[dict]) -> dict:
     totals = Counter()
     failure_classes: Counter[str] = Counter()
@@ -655,12 +674,23 @@ def aggregate_runs(runs: list[dict]) -> dict:
     tier_counts: Counter[str] = Counter()
     first_run = None
     last_run = None
+    budget_exhausted_runs = 0
+    worst_rates = {
+        "failureRate": 0.0,
+        "adjudicationRate": 0.0,
+        "secondOpinionRate": 0.0,
+        "apiEscalationRate": 0.0,
+    }
 
     for run_telemetry in runs:
         generated_at = run_telemetry.get("generatedAt")
         if generated_at:
             first_run = generated_at if first_run is None else min(first_run, generated_at)
             last_run = generated_at if last_run is None else max(last_run, generated_at)
+        if bool(run_telemetry.get("adjudicationBudgetExhausted", False)):
+            budget_exhausted_runs += 1
+        for key, value in run_rates(run_telemetry).items():
+            worst_rates[key] = max(worst_rates[key], value)
         for key in (
             "crawled",
             "written",
@@ -731,6 +761,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
         "firstRunAt": first_run,
         "lastRunAt": last_run,
         "totals": dict(sorted(totals.items())),
+        "budgetExhaustedRuns": budget_exhausted_runs,
         "rates": {
             "writeRate": totals["written"] / crawled if crawled else 0.0,
             "failureRate": totals["failed"] / crawled if crawled else 0.0,
@@ -738,6 +769,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
             "zeroModelRate": totals["zeroModelRuns"] / crawled if crawled else 0.0,
             "promotionRate": totals["promoted"] / crawled if crawled else 0.0,
         },
+        "worstRunRates": {key: round(value, 6) for key, value in sorted(worst_rates.items())},
         "repositoriesByAdjudicationTier": dict(sorted(tier_counts.items())),
         "failureClasses": dict(sorted(failure_classes.items())),
         "failureClassesByEcosystem": dict(sorted(failure_classes_by_ecosystem.items())),

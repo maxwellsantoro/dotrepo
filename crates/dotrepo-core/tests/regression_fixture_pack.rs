@@ -14,7 +14,7 @@
 //! `docs/factual-crawl-automation.md` and `ROADMAP.md` (Milestone 1 execution
 //! order) for the surrounding design.
 
-use dotrepo_core::{import_repository, ImportMode, ImportPlan};
+use dotrepo_core::{import_repository, parse_rfc3339, ImportMode, ImportPlan};
 use dotrepo_schema::RecordStatus;
 use serde::Deserialize;
 use std::fs;
@@ -60,6 +60,14 @@ struct RegressionExpectation {
     overlay_status: Option<String>,
     #[serde(default)]
     trust_provenance: Option<Vec<String>>,
+    #[serde(default)]
+    origin: Option<String>,
+    #[serde(default)]
+    fingerprint: Option<String>,
+    #[serde(default)]
+    captured_at: Option<String>,
+    #[serde(default)]
+    captured_files: Option<Vec<String>>,
 }
 
 fn regression_root() -> PathBuf {
@@ -107,6 +115,63 @@ fn load_expectation(path: &PathBuf) -> RegressionExpectation {
         path.display()
     );
     expectation
+}
+
+fn assert_metadata_matches(expectation: &RegressionExpectation, root: &std::path::Path) {
+    if let Some(origin) = expectation.origin.as_deref() {
+        let parts: Vec<_> = origin.split('/').collect();
+        assert_eq!(
+            parts.len(),
+            3,
+            "regression fixture `{}` origin must be host/owner/repo",
+            expectation.fixture
+        );
+        assert!(
+            parts.iter().all(|part| !part.trim().is_empty()),
+            "regression fixture `{}` origin must not contain empty identity segments",
+            expectation.fixture
+        );
+    }
+    if let Some(fingerprint) = expectation.fingerprint.as_deref() {
+        assert!(
+            !fingerprint.trim().is_empty(),
+            "regression fixture `{}` fingerprint must not be empty",
+            expectation.fixture
+        );
+    }
+    if let Some(captured_at) = expectation.captured_at.as_deref() {
+        parse_rfc3339("captured_at", captured_at).unwrap_or_else(|err| {
+            panic!(
+                "regression fixture `{}` captured_at must be an RFC3339 timestamp: {}",
+                expectation.fixture, err
+            )
+        });
+    }
+    if let Some(captured_files) = expectation.captured_files.as_deref() {
+        assert!(
+            !captured_files.is_empty(),
+            "regression fixture `{}` captured_files must not be empty",
+            expectation.fixture
+        );
+        for captured_file in captured_files {
+            let path = std::path::Path::new(captured_file);
+            assert!(
+                !path.is_absolute()
+                    && !path
+                        .components()
+                        .any(|component| matches!(component, std::path::Component::ParentDir)),
+                "regression fixture `{}` captured_files contains unsafe path `{}`",
+                expectation.fixture,
+                captured_file
+            );
+            assert!(
+                root.join(path).is_file(),
+                "regression fixture `{}` captured file `{}` must exist",
+                expectation.fixture,
+                captured_file
+            );
+        }
+    }
 }
 
 fn assert_plan_matches(plan: &ImportPlan, expectation: &RegressionExpectation) {
@@ -216,6 +281,7 @@ fn regression_fixture_pack_replays_checked_in_fixtures() {
                 ecosystem
             );
         }
+        assert_metadata_matches(&expectation, root);
         let overlay_source = format!("https://example.com/regression/{}", expectation.fixture);
 
         // Replay the overlay import path the autonomous crawler uses. The parser

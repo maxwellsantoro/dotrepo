@@ -78,6 +78,9 @@ security_contact = "unknown"
         ecosystem="rust",
         overlay_status="imported",
         origin="github.com/BurntSushi/ripgrep",
+        fingerprint="Cargo.toml parse error",
+        captured_at="2026-03-18T12:00:00Z",
+        captured_files=["README.md", "Cargo.toml"],
     )
 
     assert expectation["fixture"] == "rust-readme-only"
@@ -95,6 +98,9 @@ security_contact = "unknown"
     # security_contact "unknown" is a real string value, not dropped.
     assert expectation["security_contact"] == "unknown"
     assert expectation["origin"] == "github.com/BurntSushi/ripgrep"
+    assert expectation["fingerprint"] == "Cargo.toml parse error"
+    assert expectation["captured_at"] == "2026-03-18T12:00:00Z"
+    assert expectation["captured_files"] == ["README.md", "Cargo.toml"]
 
 
 def test_parse_repo_identity_rejects_bad_shapes() -> None:

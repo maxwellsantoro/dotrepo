@@ -22,6 +22,7 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
             "skipped": 0,
             "discoveryQueued": 1,
             "adjudicationCalls": 2,
+            "adjudicationBudgetExhausted": True,
             "tokensUsed": 50,
             "promoted": 1,
             "zeroModelRuns": 1,
@@ -39,6 +40,7 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
             "skipped": 0,
             "discoveryQueued": 0,
             "adjudicationCalls": 0,
+            "adjudicationBudgetExhausted": False,
             "tokensUsed": 0,
             "promoted": 0,
             "zeroModelRuns": 2,
@@ -58,9 +60,16 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
     assert summary["totals"]["crawled"] == 4
     assert summary["totals"]["written"] == 3
     assert summary["totals"]["discoveryQueued"] == 1
+    assert summary["budgetExhaustedRuns"] == 1
     assert summary["rates"]["writeRate"] == 0.75
     assert summary["rates"]["failureRate"] == 0.25
     assert summary["rates"]["adjudicationRate"] == 0.25
+    assert summary["worstRunRates"] == {
+        "adjudicationRate": 0.5,
+        "apiEscalationRate": 0.5,
+        "failureRate": 0.5,
+        "secondOpinionRate": 0.0,
+    }
     assert summary["repositoriesByAdjudicationTier"] == {
         "api_escalation": 1,
         "local_primary": 2,
@@ -96,6 +105,7 @@ def test_retain_telemetry_appends_history_and_writes_summary(tmp_path: Path) -> 
             "skipped": 0,
             "discoveryQueued": 0,
             "adjudicationCalls": 0,
+            "adjudicationBudgetExhausted": False,
             "tokensUsed": 0,
             "promoted": 0,
             "zeroModelRuns": 1,
@@ -116,6 +126,7 @@ def test_retain_telemetry_appends_history_and_writes_summary(tmp_path: Path) -> 
             "skipped": 0,
             "discoveryQueued": 1,
             "adjudicationCalls": 1,
+            "adjudicationBudgetExhausted": True,
             "tokensUsed": 20,
             "promoted": 0,
             "zeroModelRuns": 0,
@@ -133,6 +144,9 @@ def test_retain_telemetry_appends_history_and_writes_summary(tmp_path: Path) -> 
     assert summary["runCount"] == 2
     assert summary["totals"]["failed"] == 1
     assert summary["totals"]["discoveryQueued"] == 1
+    assert summary["budgetExhaustedRuns"] == 1
+    assert summary["worstRunRates"]["adjudicationRate"] == 1.0
+    assert summary["worstRunRates"]["failureRate"] == 1.0
     assert summary["failureClasses"] == {"provider": 1}
     assert summary["repositoriesByAdjudicationTier"] == {"local_primary": 1}
 

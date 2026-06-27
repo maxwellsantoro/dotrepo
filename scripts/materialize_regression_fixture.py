@@ -25,6 +25,7 @@ import shutil
 import subprocess
 import tempfile
 import tomllib
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -68,6 +69,10 @@ CONVENTIONAL_PAIRS = [
 ]
 
 MAX_WORKFLOW_FILES = 3
+
+
+def now_rfc3339() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _load_ecosystem_classifier():
@@ -128,6 +133,8 @@ def expectation_from_manifest(
     overlay_status: str | None = None,
     origin: str | None = None,
     fingerprint: str | None = None,
+    captured_at: str | None = None,
+    captured_files: list[str] | None = None,
 ) -> dict:
     """Build a harness expectation by parsing a generated overlay ``record.toml``."""
     document = tomllib.loads(manifest_text)
@@ -156,6 +163,10 @@ def expectation_from_manifest(
         expectation["origin"] = origin
     if fingerprint:
         expectation["fingerprint"] = fingerprint
+    if captured_at:
+        expectation["captured_at"] = captured_at
+    if captured_files:
+        expectation["captured_files"] = captured_files
     return {key: value for key, value in expectation.items() if value is not None}
 
 
@@ -317,6 +328,8 @@ def capture(args: argparse.Namespace) -> dict:
         ecosystem=ecosystem,
         origin=identity,
         fingerprint=args.fingerprint,
+        captured_at=now_rfc3339(),
+        captured_files=selected,
     )
 
     if args.dry_run:

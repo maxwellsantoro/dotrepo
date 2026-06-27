@@ -206,8 +206,17 @@ jobs:
               print(f"- total failed: {totals.get('failed', 0)}")
               print(f"- total quality reprocess queued: {totals.get('qualityReprocessQueued', 0)}")
               print(f"- total discovery queued: {totals.get('discoveryQueued', 0)}")
+              print(f"- total promoted: {totals.get('promoted', 0)}")
+              print(f"- budget-exhausted runs: {summary.get('budgetExhaustedRuns', 0)}")
               print(f"- aggregate adjudication rate: {rates.get('adjudicationRate', 0.0):.2%}")
+              print(f"- aggregate promotion rate: {rates.get('promotionRate', 0.0):.2%}")
               print(f"- aggregate zero-model rate: {rates.get('zeroModelRate', 0.0):.2%}")
+              worst_rates = summary.get("worstRunRates", {})
+              if worst_rates:
+                  print(f"- worst-run failure rate: {worst_rates.get('failureRate', 0.0):.2%}")
+                  print(f"- worst-run adjudication rate: {worst_rates.get('adjudicationRate', 0.0):.2%}")
+                  print(f"- worst-run second-opinion rate: {worst_rates.get('secondOpinionRate', 0.0):.2%}")
+                  print(f"- worst-run API escalation rate: {worst_rates.get('apiEscalationRate', 0.0):.2%}")
               summary_tiers = summary.get("repositoriesByAdjudicationTier", {})
               if summary_tiers:
                   print("- aggregate repositories by adjudication tier:")
@@ -218,6 +227,8 @@ jobs:
                   print("- recurring failure fixture candidates:")
                   for item in fixture_candidates[:5]:
                       print(f"  - {item.get('failureClass', 'unknown')}/{item.get('suggestedFixture', 'unknown')}: {item.get('count', 0)}")
+                  eligible_count = sum(1 for item in fixture_candidates if item.get("fixtureEligible"))
+                  print(f"- fixture-eligible recurring failures: {eligible_count}")
                   print("- fixture backlog: `index/telemetry/regression-fixture-candidates.md`")
                   print("- fixture stubs: `index/telemetry/regression-fixture-stubs/`")
               gate_path = Path("index-autonomous-batch/autonomous-telemetry-gate.json")
@@ -226,6 +237,12 @@ jobs:
                   print()
                   print("## Autonomous Telemetry Gate")
                   print(f"- result: {'pass' if gate.get('passed') else 'not yet'}")
+                  check_summary = gate.get("checkSummary", {})
+                  if check_summary:
+                      print(f"- checks: {check_summary.get('passed', 0)}/{check_summary.get('total', 0)} passed")
+                      failed_labels = check_summary.get("failedLabels", [])
+                      if failed_labels:
+                          print(f"- failed checks: {', '.join(failed_labels)}")
                   for item in gate.get("checks", []):
                       print(f"- {item['label']}: {item['actual']} / {item['expected']} ({'pass' if item['passed'] else 'fail'})")
           PY

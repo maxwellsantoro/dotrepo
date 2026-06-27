@@ -377,7 +377,8 @@ Scheduled autonomous batches retain these run metrics in
 `index/telemetry/autonomous-summary.json`. The retained summary tracks total
 crawls, writes, failures, quality-reprocess queue entries, discovery queue
 entries, adjudication calls, token use, zero-model rate, promotion rate,
-repositories by adjudication tier, grouped failure classes, and repeated
+repositories by adjudication tier, model-budget exhaustion runs, grouped failure
+classes, worst retained-run failure/adjudication/escalation rates, and repeated
 failure fingerprints with suggested regression fixture slugs. Repeated
 scheduled runs can demonstrate cost, resolution, and regression trends instead
 of only exposing a short-lived artifact for the latest run, and recurring
@@ -414,15 +415,33 @@ The stub-to-fixture loop is now completable end to end:
    checked-in fixture and replays the offline overlay import path against it,
    asserting the pinned fields. The harness no-ops when empty and asserts only
    the fields each `expectation.json` declares, so the checked-in canary set can
-   grow one fixture at a time across ecosystems.
+   grow one fixture at a time across ecosystems. New captures also record
+   `captured_at` and `captured_files`, and when `origin`, `fingerprint`,
+   `captured_at`, or `captured_files` metadata is present, the harness validates
+   that lineage too, so captured canaries keep their telemetry context and
+   source-file inventory as they move from stub to checked-in regression
+   fixture.
 
 `scripts/check_autonomous_telemetry_gate.py` evaluates the retained summary
 against the Milestone 1 proof thresholds: repeated runs, processed repository
-volume, direct writeback activity, failure rate, model adjudication rate,
-strong remote escalation rate, and zero-model deterministic rate. Scheduled
-runs publish the gate in warn-only mode while evidence is accumulating; a
-strict run without `--warn-only` is the release-quality proof that the
-autonomous factory is operating inside its stated bounds.
+volume, direct writeback activity, verified promotion activity, failure rate,
+model adjudication rate, second-opinion adjudication rate, strong remote
+escalation rate, exhausted adjudication budgets, fixture-eligible recurring
+failures, and zero-model deterministic rate. The gate also verifies that it is
+reading the current retained-summary schema and required proof fields before
+treating aggregate rates as proof, and checks worst retained-run failure,
+adjudication, second-opinion, and strong remote escalation rates so a bad run
+cannot be hidden by favorable aggregate totals. The JSON and Markdown gate
+reports include the configured threshold set and a pass/fail check summary, so a
+retained artifact can be audited without recovering the original CI command
+line.
+Environmental recurrences such as provider or infrastructure failures remain
+visible in the retained summary, but strict proof requires parser, evidence, and
+validation recurrences to be fixed or converted into checked-in fixtures instead
+of remaining as unresolved fixture candidates. Scheduled runs publish the gate in
+warn-only mode while evidence is accumulating; a strict run without
+`--warn-only` is the release-quality proof that the autonomous factory is
+operating inside its stated bounds.
 
 These surfaces show whether optional synthesis would address a real bottleneck
 or duplicate work the factual pipeline already handles.

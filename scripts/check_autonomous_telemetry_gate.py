@@ -25,9 +25,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-runs", type=int, default=3)
     parser.add_argument("--min-crawled", type=int, default=10)
     parser.add_argument("--min-written", type=int, default=1)
+    parser.add_argument("--min-promoted", type=int, default=1)
     parser.add_argument("--max-failure-rate", type=float, default=0.05)
     parser.add_argument("--max-adjudication-rate", type=float, default=0.25)
+    parser.add_argument("--max-second-opinion-rate", type=float, default=0.10)
     parser.add_argument("--max-api-escalation-rate", type=float, default=0.05)
+    parser.add_argument("--max-fixture-eligible-recurring-failures", type=int, default=0)
     parser.add_argument("--min-zero-model-rate", type=float, default=0.75)
     return parser.parse_args()
 
@@ -57,21 +60,96 @@ def check(label: str, actual: object, expected: str, passed: bool) -> dict:
     }
 
 
+def summarize_checks(checks: list[dict]) -> dict:
+    failed_labels = [item["label"] for item in checks if not item.get("passed")]
+    return {
+        "total": len(checks),
+        "passed": len(checks) - len(failed_labels),
+        "failed": len(failed_labels),
+        "failedLabels": failed_labels,
+    }
+
+
+def thresholds(args: argparse.Namespace) -> dict:
+    return {
+        "minRuns": args.min_runs,
+        "minCrawled": args.min_crawled,
+        "minWritten": args.min_written,
+        "minPromoted": args.min_promoted,
+        "maxFailureRate": args.max_failure_rate,
+        "maxAdjudicationRate": args.max_adjudication_rate,
+        "maxSecondOpinionRate": args.max_second_opinion_rate,
+        "maxApiEscalationRate": args.max_api_escalation_rate,
+        "maxFixtureEligibleRecurringFailures": args.max_fixture_eligible_recurring_failures,
+        "minZeroModelRate": args.min_zero_model_rate,
+    }
+
+
+def fixture_eligible_recurring_failures(summary: dict) -> list[dict]:
+    candidates = summary.get("regressionFixtureCandidates") or []
+    if not isinstance(candidates, list):
+        return []
+    return [
+        candidate
+        for candidate in candidates
+        if isinstance(candidate, dict) and bool(candidate.get("fixtureEligible", False))
+    ]
+
+
+def retained_proof_fields_present(summary: dict) -> bool:
+    worst_rates = summary.get("worstRunRates")
+    if "budgetExhaustedRuns" not in summary or not isinstance(worst_rates, dict):
+        return False
+    required_worst_rate_keys = {
+        "failureRate",
+        "adjudicationRate",
+        "secondOpinionRate",
+        "apiEscalationRate",
+    }
+    return required_worst_rate_keys.issubset(worst_rates)
+
+
 def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     totals = summary.get("totals") or {}
     rates = summary.get("rates") or {}
+    worst_rates = summary.get("worstRunRates") or {}
     tiers = summary.get("repositoriesByAdjudicationTier") or {}
 
+    schema = str(summary.get("schema") or "")
     run_count = int(summary.get("runCount") or 0)
     crawled = int(totals.get("crawled") or 0)
     written = int(totals.get("written") or 0)
+    promoted = int(totals.get("promoted") or 0)
+    budget_exhausted_runs = int(summary.get("budgetExhaustedRuns") or 0)
+    second_opinions = int(tiers.get("local_second_opinion") or 0)
+    second_opinion_rate = second_opinions / crawled if crawled else 0.0
     api_escalations = int(tiers.get("api_escalation") or 0)
     api_escalation_rate = api_escalations / crawled if crawled else 0.0
     failure_rate = number(rates.get("failureRate"))
     adjudication_rate = number(rates.get("adjudicationRate"))
+    promotion_rate = number(rates.get("promotionRate"))
     zero_model_rate = number(rates.get("zeroModelRate"))
+    worst_failure_rate = number(worst_rates.get("failureRate"))
+    worst_adjudication_rate = number(worst_rates.get("adjudicationRate"))
+    worst_second_opinion_rate = number(worst_rates.get("secondOpinionRate"))
+    worst_api_escalation_rate = number(worst_rates.get("apiEscalationRate"))
+    fixture_eligible_failures = fixture_eligible_recurring_failures(summary)
+    fixture_eligible_failure_count = len(fixture_eligible_failures)
+    proof_fields_present = retained_proof_fields_present(summary)
 
     checks = [
+        check(
+            "retained summary schema",
+            schema or "missing",
+            "dotrepo/autonomous-telemetry-summary/v0.1",
+            schema == "dotrepo/autonomous-telemetry-summary/v0.1",
+        ),
+        check(
+            "retained proof fields",
+            "present" if proof_fields_present else "missing",
+            "present",
+            proof_fields_present,
+        ),
         check(
             "retained repeated runs",
             run_count,
@@ -91,10 +169,22 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             written >= args.min_written,
         ),
         check(
+            "verified promotion activity",
+            promoted,
+            f">= {args.min_promoted}",
+            promoted >= args.min_promoted,
+        ),
+        check(
             "failure rate",
             round(failure_rate, 6),
             f"<= {args.max_failure_rate}",
             failure_rate <= args.max_failure_rate,
+        ),
+        check(
+            "worst-run failure rate",
+            round(worst_failure_rate, 6),
+            f"<= {args.max_failure_rate}",
+            worst_failure_rate <= args.max_failure_rate,
         ),
         check(
             "model adjudication rate",
@@ -103,10 +193,46 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             adjudication_rate <= args.max_adjudication_rate,
         ),
         check(
+            "worst-run model adjudication rate",
+            round(worst_adjudication_rate, 6),
+            f"<= {args.max_adjudication_rate}",
+            worst_adjudication_rate <= args.max_adjudication_rate,
+        ),
+        check(
+            "second-opinion adjudication rate",
+            round(second_opinion_rate, 6),
+            f"<= {args.max_second_opinion_rate}",
+            second_opinion_rate <= args.max_second_opinion_rate,
+        ),
+        check(
+            "worst-run second-opinion adjudication rate",
+            round(worst_second_opinion_rate, 6),
+            f"<= {args.max_second_opinion_rate}",
+            worst_second_opinion_rate <= args.max_second_opinion_rate,
+        ),
+        check(
             "strong remote escalation rate",
             round(api_escalation_rate, 6),
             f"<= {args.max_api_escalation_rate}",
             api_escalation_rate <= args.max_api_escalation_rate,
+        ),
+        check(
+            "worst-run strong remote escalation rate",
+            round(worst_api_escalation_rate, 6),
+            f"<= {args.max_api_escalation_rate}",
+            worst_api_escalation_rate <= args.max_api_escalation_rate,
+        ),
+        check(
+            "adjudication budget exhaustion",
+            budget_exhausted_runs,
+            "0 exhausted runs",
+            budget_exhausted_runs == 0,
+        ),
+        check(
+            "fixture-eligible recurring failures",
+            fixture_eligible_failure_count,
+            f"<= {args.max_fixture_eligible_recurring_failures}",
+            fixture_eligible_failure_count <= args.max_fixture_eligible_recurring_failures,
         ),
         check(
             "zero-model deterministic rate",
@@ -117,26 +243,49 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     ]
 
     passed = all(item["passed"] for item in checks)
+    check_summary = summarize_checks(checks)
     return {
         "schema": "dotrepo/autonomous-telemetry-gate/v0.1",
         "summaryGeneratedAt": summary.get("generatedAt"),
         "passed": passed,
+        "thresholds": thresholds(args),
+        "checkSummary": check_summary,
         "checks": checks,
         "inputs": {
+            "schema": schema,
             "runCount": run_count,
+            "budgetExhaustedRuns": budget_exhausted_runs,
+            "secondOpinionRate": second_opinion_rate,
+            "apiEscalationRate": api_escalation_rate,
+            "promotionRate": promotion_rate,
+            "fixtureEligibleRecurringFailures": fixture_eligible_failures,
             "totals": totals,
             "rates": rates,
+            "worstRunRates": worst_rates,
             "repositoriesByAdjudicationTier": tiers,
         },
     }
 
 
 def render_markdown(report: dict) -> str:
+    inputs = report.get("inputs") or {}
+    limits = report.get("thresholds") or {}
+    rates = inputs.get("rates") or {}
+    worst_rates = inputs.get("worstRunRates") or {}
+    fixture_backlog = inputs.get("fixtureEligibleRecurringFailures") or []
     lines = [
         "# Autonomous Telemetry Gate",
         "",
         f"- result: {'pass' if report.get('passed') else 'not yet'}",
         f"- summary generated at: {report.get('summaryGeneratedAt') or 'unknown'}",
+        f"- retained runs: {inputs.get('runCount', 0)}",
+        f"- aggregate promotion rate: {number(rates.get('promotionRate')):.2%}",
+        f"- aggregate adjudication rate: {number(rates.get('adjudicationRate')):.2%}",
+        f"- worst-run failure rate: {number(worst_rates.get('failureRate')):.2%}",
+        f"- worst-run adjudication rate: {number(worst_rates.get('adjudicationRate')):.2%}",
+        f"- worst-run second-opinion rate: {number(worst_rates.get('secondOpinionRate')):.2%}",
+        f"- fixture-eligible recurring failures: {len(fixture_backlog)}",
+        f"- thresholds: min runs {limits.get('minRuns', 0)}, min crawled {limits.get('minCrawled', 0)}, max adjudication {number(limits.get('maxAdjudicationRate')):.2%}, max API escalation {number(limits.get('maxApiEscalationRate')):.2%}",
         "",
         "| Check | Actual | Expected | Result |",
         "| --- | ---: | ---: | --- |",
