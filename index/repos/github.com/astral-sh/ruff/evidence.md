@@ -6,7 +6,6 @@
 - Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Set `repo.test` to `cargo test -p ty_python_semantic --test mdtest || true` from `.github/workflows/ci.yaml` after deterministic escalation.
 - Set `repo.build` to `cargo build --workspace` from `Cargo.toml` after model escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

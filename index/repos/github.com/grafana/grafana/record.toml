@@ -42,7 +42,6 @@ languages = [
     "Starlark",
     "TypeScript",
 ]
-test = "go test -v -count=1 -timeout 5m -run TestIntegrationAvailableChannels ./pkg/tests/api/alerting/... || true"
 topics = [
     "grafana",
     "monitoring",

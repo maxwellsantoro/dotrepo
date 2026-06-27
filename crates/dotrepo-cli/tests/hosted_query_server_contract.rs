@@ -97,14 +97,18 @@ impl ServerHandle {
     }
 
     fn wait_until_ready(&self) {
-        let deadline = Instant::now() + Duration::from_secs(5);
+        // Allow significantly more time for CI environments where process startup
+        // and TCP listener bind can be slow.
+        let deadline = Instant::now() + Duration::from_secs(30);
+        // Give the child a moment to exec and bind before first probe.
+        thread::sleep(Duration::from_millis(100));
         while Instant::now() < deadline {
             if let Some((status, body)) = http_get(&self.addr, "/healthz") {
-                if status == 200 && body == "ok" {
+                if status == 200 && body.trim() == "ok" {
                     return;
                 }
             }
-            thread::sleep(Duration::from_millis(50));
+            thread::sleep(Duration::from_millis(100));
         }
         panic!("server did not become ready");
     }

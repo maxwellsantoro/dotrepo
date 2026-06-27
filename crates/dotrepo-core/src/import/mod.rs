@@ -728,6 +728,20 @@ pub fn import_repository_with_options(
             references: Vec::new(),
         }),
     };
+
+    // Final defense-in-depth sanitization of build/test before validation/render.
+    // Unsafe values are rejected even if an earlier path missed the filter.
+    if let Some(cmd) = manifest.repo.build.take() {
+        if sanitize_import_command(&cmd).is_some() {
+            manifest.repo.build = Some(cmd);
+        }
+    }
+    if let Some(cmd) = manifest.repo.test.take() {
+        if sanitize_import_command(&cmd).is_some() {
+            manifest.repo.test = Some(cmd);
+        }
+    }
+
     validate_manifest(root, &manifest)?;
     let manifest_text = render_manifest(&manifest)?;
 

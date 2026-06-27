@@ -29,7 +29,6 @@ languages = [
     "TypeScript",
 ]
 build = "cargo build --workspace"
-test = "cargo test -p ty_python_semantic --test mdtest || true"
 topics = [
     "linter",
     "pep8",

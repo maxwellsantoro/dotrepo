@@ -727,23 +727,29 @@ fn adoption_diagnostics_for_manifest(
         .or_else(|| index.field_range("repo.name"))
         .or_else(|| index.field_range("repo.homepage"))
         .unwrap_or_else(|| index.default_range());
-    if homepage.is_none() {
-        diagnostics.push(LspDiagnostic {
-            range: homepage_range.clone(),
-            severity: 4,
-            source: "adoption_status".into(),
-            message:
-                "set repo.homepage to enable claim-from-native and derived claim handoff commands"
-                    .into(),
-        });
-    } else if repository_identity(homepage.unwrap()).is_none() {
-        diagnostics.push(LspDiagnostic {
-            range: homepage_range,
-            severity: 4,
-            source: "adoption_status".into(),
-            message: "repo.homepage must resolve to a host/owner/repo URL for claim-from-native"
-                .into(),
-        });
+    match homepage {
+        None => {
+            diagnostics.push(LspDiagnostic {
+                range: homepage_range,
+                severity: 4,
+                source: "adoption_status".into(),
+                message:
+                    "set repo.homepage to enable claim-from-native and derived claim handoff commands"
+                        .into(),
+            });
+        }
+        Some(hp) => {
+            if repository_identity(hp).is_none() {
+                diagnostics.push(LspDiagnostic {
+                    range: homepage_range,
+                    severity: 4,
+                    source: "adoption_status".into(),
+                    message:
+                        "repo.homepage must resolve to a host/owner/repo URL for claim-from-native"
+                            .into(),
+                });
+            }
+        }
     }
 
     if !root.join(".github/workflows/dotrepo-check.yml").exists() {

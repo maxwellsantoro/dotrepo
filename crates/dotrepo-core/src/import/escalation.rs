@@ -624,7 +624,45 @@ pub fn run_import_escalation(
         report.deterministic_resolved += fallback_resolved;
     }
     report.remaining_unresolved = field_scores.summary.unresolved.len();
+
+    // Defense-in-depth: any code path that set build/test must have been sanitized,
+    // but force-unset here if an unsafe value is present, and record in evidence.
+    sanitize_plan_command_fields(plan, "escalation");
+
     report
+}
+
+fn sanitize_plan_command_fields(plan: &mut ImportPlan, context: &str) {
+    let mut changed = false;
+    if let Some(cmd) = &plan.manifest.repo.build {
+        if sanitize_import_command(cmd).is_none() {
+            plan.manifest.repo.build = None;
+            plan.command_candidates.selected_build = None;
+            if let Some(ref mut ev) = plan.evidence_text {
+                ev.push_str(&format!(
+                    "\n- Left `repo.build` unset during {}: contained unsafe shell-like characters.",
+                    context
+                ));
+            }
+            changed = true;
+        }
+    }
+    if let Some(cmd) = &plan.manifest.repo.test {
+        if sanitize_import_command(cmd).is_none() {
+            plan.manifest.repo.test = None;
+            plan.command_candidates.selected_test = None;
+            if let Some(ref mut ev) = plan.evidence_text {
+                ev.push_str(&format!(
+                    "\n- Left `repo.test` unset during {}: contained unsafe shell-like characters.",
+                    context
+                ));
+            }
+            changed = true;
+        }
+    }
+    if changed {
+        // Ensure downstream verification sees the corrected state
+    }
 }
 
 /// Whether an autonomous crawl may write back overlay artifacts.
@@ -852,6 +890,65 @@ mod tests {
         assert!(plan.manifest.repo.test.is_none());
         assert!(!scores.summary.unresolved.contains(&"repo.test".to_string()));
         crate::validate_manifest(&root, &plan.manifest).expect("manifest validates");
+
+        fs::remove_dir_all(root).expect("cleanup");
+    }
+
+    #[test]
+    fn escalation_rejects_unsafe_value_returned_by_adjudication_provider() {
+        // Even if a provider returns an unsafe command in a Resolved outcome
+        // (defense in depth), apply_adjudication_to_import_plan must reject it.
+        let root = temp_dir("unsafe-adjudicated-test");
+        fs::write(root.join("README.md"), "# Example\n\nA project.\n").expect("readme");
+
+        let source = "https://github.com/example/unsafe-adj";
+        let mut plan =
+            import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+        // Seed a request that looks like it had a (hypothetically unsafe-in-list) candidate
+        // so we can directly exercise the Resolved+unsafe branch.
+        plan.command_candidates
+            .candidates
+            .push(crate::import::CommandCandidateSummary {
+                source_path: "Makefile".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: None,
+                test: Some("go test ./... || true".into()),
+            });
+
+        let requests = vec![crate::import::AdjudicationRequest {
+            field: "repo.test".into(),
+            candidates: vec![crate::import::AdjudicationCandidate {
+                value: "go test ./... || true".into(),
+                source_path: "Makefile".into(),
+                source_tier: CommandSourceTier::Workflow,
+            }],
+        }];
+        let results = vec![crate::import::AdjudicationResult {
+            field: "repo.test".into(),
+            outcome: crate::import::AdjudicationOutcome::Resolved {
+                value: "go test ./... || true".into(),
+                confidence: FieldConfidence::MediumConfidencePresent,
+                reason: "erroneous provider response".into(),
+            },
+        }];
+
+        // Before apply, test should be absent.
+        assert!(plan.manifest.repo.test.is_none());
+
+        apply_adjudication_to_import_plan(&mut plan, &requests, &results, "test");
+
+        // Must have been rejected and unset (with evidence note).
+        assert!(plan.manifest.repo.test.is_none());
+        assert!(plan.command_candidates.selected_test.is_none());
+        let evidence = plan.evidence_text.as_deref().unwrap_or("");
+        assert!(
+            evidence.contains("Left `repo.test` unset") && evidence.contains("unsafe"),
+            "expected rejection note in evidence, got: {}",
+            evidence
+        );
+
+        crate::validate_manifest(&root, &plan.manifest)
+            .expect("manifest validates after rejection");
 
         fs::remove_dir_all(root).expect("cleanup");
     }
