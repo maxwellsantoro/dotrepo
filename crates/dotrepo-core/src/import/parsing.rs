@@ -734,18 +734,28 @@ fn replace_common_html_entities(line: &str) -> String {
 fn strip_wrapping_emphasis(mut line: &str) -> &str {
     loop {
         let trimmed = line.trim();
-        if trimmed.len() >= 4
-            && ((trimmed.starts_with("**") && trimmed.ends_with("**"))
-                || (trimmed.starts_with("__") && trimmed.ends_with("__")))
+        if let Some(inner) = trimmed
+            .strip_prefix("**")
+            .and_then(|s| s.strip_suffix("**"))
+            .or_else(|| {
+                trimmed
+                    .strip_prefix("__")
+                    .and_then(|s| s.strip_suffix("__"))
+            })
         {
-            line = &trimmed[2..trimmed.len() - 2];
+            line = inner;
             continue;
         }
-        if trimmed.len() >= 2
-            && ((trimmed.starts_with('*') && trimmed.ends_with('*'))
-                || (trimmed.starts_with('_') && trimmed.ends_with('_')))
+        if let Some(inner) = trimmed
+            .strip_prefix('*')
+            .and_then(|s| s.strip_suffix('*'))
+            .or_else(|| {
+                trimmed
+                    .strip_prefix('_')
+                    .and_then(|s| s.strip_suffix('_'))
+            })
         {
-            line = &trimmed[1..trimmed.len() - 1];
+            line = inner;
             continue;
         }
         return trimmed;
@@ -1510,7 +1520,7 @@ fn extract_link_destination(raw: &str) -> Option<String> {
 }
 
 fn is_team_handle(token: &str) -> bool {
-    token.starts_with('@') && token[1..].contains('/')
+    token.strip_prefix('@').map_or(false, |rest| rest.contains('/'))
 }
 
 fn trim_contact_token(token: &str) -> &str {

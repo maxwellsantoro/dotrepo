@@ -1958,6 +1958,7 @@ fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
         pyproject_toml: Some(&pyproject),
         go_mod: None,
         pom_xml: None,
+        build_gradle: None,
         composer_json: None,
         csproj: None,
         mix_exs: None,
@@ -2201,13 +2202,13 @@ fn import_repository_imports_maven_build_and_test_defaults() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("mvn package"));
-    assert_eq!(plan.manifest.repo.test.as_deref(), Some("mvn test"));
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("./mvnw package"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("./mvnw test"));
     assert!(plan.imported_sources.iter().any(|path| path == "pom.xml"));
     assert!(plan
         .evidence_text
         .as_deref()
-        .is_some_and(|text| text.contains("Imported repo.test from pom.xml as `mvn test`.")));
+        .is_some_and(|text| text.contains("Imported repo.test from pom.xml as `./mvnw test`.")));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

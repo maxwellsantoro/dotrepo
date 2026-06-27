@@ -109,6 +109,9 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.pom_xml.and_then(infer_maven_commands) {
         candidates.push(candidate);
     }
+    if let Some(candidate) = sources.build_gradle.and_then(infer_gradle_commands) {
+        candidates.push(candidate);
+    }
     if let Some(candidate) = sources.composer_json.and_then(infer_composer_commands) {
         candidates.push(candidate);
     }
@@ -209,17 +212,14 @@ fn infer_package_json_commands(file: &ImportedFile) -> Option<ImportedCommandCan
             .and_then(serde_json::Value::as_str),
     );
 
-    let build = scripts
-        .get("build")
-        .and_then(serde_json::Value::as_str)
-        .filter(|value| !value.trim().is_empty())
-        .map(|_| runner.build_command());
-    let test = scripts
-        .get("test")
-        .and_then(serde_json::Value::as_str)
-        .filter(|value| !value.trim().is_empty())
-        .filter(|value| !is_placeholder_package_json_test_script(value))
-        .map(|_| runner.test_command());
+    let build = pick_node_script_command(scripts, &["build", "compile", "dist", "bundle"], || runner.build_command());
+    let test = pick_node_script_command(scripts, &["test"], || runner.test_command())
+        .filter(|_| {
+            scripts
+                .get("test")
+                .and_then(serde_json::Value::as_str)
+                .map_or(true, |v| !is_placeholder_package_json_test_script(v))
+        });
 
     if build.is_none() && test.is_none() {
         return None;
@@ -322,11 +322,32 @@ fn infer_maven_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate>
         return None;
     }
 
+    // Prefer the executable Maven wrapper when present in real repositories
+    // (common for reproducible builds). The inference here is based on the
+    // pom alone; workflow inference will surface the actual CI command used.
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::Manifest,
-        build: Some("mvn package".into()),
-        test: Some("mvn test".into()),
+        build: Some("./mvnw package".into()),
+        test: Some("./mvnw test".into()),
+    })
+}
+
+pub(crate) fn infer_gradle_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    // Simple presence check for Gradle build files (Groovy or Kotlin DSL).
+    // We prefer the Gradle wrapper for the same reproducibility reasons as Maven.
+    // A more sophisticated parser could look inside for tasks, but presence + standard
+    // wrapper commands is sufficient for the majority of projects.
+    let name = file.path.to_ascii_lowercase();
+    if !name.ends_with("build.gradle") && !name.ends_with("build.gradle.kts") {
+        return None;
+    }
+
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: Some("./gradlew build".into()),
+        test: Some("./gradlew test".into()),
     })
 }
 
@@ -510,12 +531,24 @@ fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandida
     let mut has_build = false;
     let mut has_test = false;
     for line in file.contents.lines() {
-        let trimmed = line.trim();
-        if trimmed.starts_with("build:") || trimmed.starts_with("all:") {
-            has_build = true;
+        // Makefile targets are defined at the start of a line (column 0).
+        // Recipe bodies are indented (tab or spaces) and may contain ":" in
+        // shell expansions like ":-" or "$(var:pat=rep)".
+        if line.starts_with(|c: char| c.is_whitespace()) {
+            continue;
         }
-        if trimmed.starts_with("test:") || trimmed.starts_with("check:") {
-            has_test = true;
+        let trimmed = line.trim();
+        // Common explicit targets (allow "target:" or "target :" forms)
+        let target_name = trimmed
+            .split_once(':')
+            .map(|(lhs, _)| lhs.trim().to_ascii_lowercase());
+        if let Some(name) = target_name {
+            if ["build", "all", "compile", "dist", "package", "ci"].iter().any(|t| name == *t || name.starts_with(&format!("{}-", t))) {
+                has_build = true;
+            }
+            if ["test", "check", "verify", "spec"].iter().any(|t| name == *t || name.starts_with(&format!("{}-", t))) {
+                has_test = true;
+            }
         }
     }
     if !has_build && !has_test {
@@ -728,6 +761,7 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
             return None;
         }
 
+        // Direct clean prefixes (preserve previous behavior for simple cases)
         if select_build {
             for prefix in [
                 "cargo build",
@@ -757,6 +791,52 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
                 if trimmed.starts_with(prefix) {
                     return Some(trimmed.to_string());
                 }
+            }
+        }
+
+        // Flexible capture for real CI usage: compound commands, wrappers, flags.
+        // Return the full line when it contains a recognizable build/test invocation.
+        let lower = trimmed.to_ascii_lowercase();
+        if select_build {
+            if lower.contains(" mvnw") || lower.contains("./mvnw") || (lower.contains("mvn ") && lower.contains("package" ) || lower.contains("compile")) {
+                return Some(trimmed.to_string());
+            }
+            if lower.contains("gradlew") || lower.contains("gradle ") && (lower.contains("build") || lower.contains("assemble")) {
+                return Some(trimmed.to_string());
+            }
+            if lower.contains("npm ") && lower.contains("build") {
+                return Some(trimmed.to_string());
+            }
+            if lower.contains("pnpm ") && lower.contains("build") {
+                return Some(trimmed.to_string());
+            }
+            if lower.contains("yarn ") && lower.contains("build") {
+                return Some(trimmed.to_string());
+            }
+            if lower.contains("make ") && (lower.contains(" build") || lower.trim_start().starts_with("make build") || lower.contains(" all")) {
+                return Some(trimmed.to_string());
+            }
+            if lower.starts_with("make ") && lower.contains("build") {
+                return Some(trimmed.to_string());
+            }
+        } else {
+            if lower.contains(" mvnw") || lower.contains("./mvnw") || (lower.contains("mvn ") && lower.contains("test")) {
+                return Some(trimmed.to_string());
+            }
+            if lower.contains("gradlew") || (lower.contains("gradle ") && lower.contains("test")) {
+                return Some(trimmed.to_string());
+            }
+            if (lower.contains("npm ") || lower.contains("pnpm ") || lower.contains("yarn ") || lower.contains("bun ")) && (lower.contains(" test") || lower.contains("test ")) {
+                return Some(trimmed.to_string());
+            }
+            if lower.contains("make ") && (lower.contains(" test") || lower.contains("check")) {
+                return Some(trimmed.to_string());
+            }
+            if lower.starts_with("make ") && (lower.contains("test") || lower.contains("check")) {
+                return Some(trimmed.to_string());
+            }
+            if lower.contains("cargo test") || lower.contains("go test") || lower.contains("pytest") || lower.trim() == "pytest" {
+                return Some(trimmed.to_string());
             }
         }
 
@@ -984,6 +1064,22 @@ fn is_placeholder_package_json_test_script(script: &str) -> bool {
     script.to_ascii_lowercase().contains("no test specified")
 }
 
+/// Return a runner-wrapped command if any of the candidate script names exists and is non-empty.
+fn pick_node_script_command(
+    scripts: &serde_json::Map<String, serde_json::Value>,
+    names: &[&str],
+    make_cmd: impl FnOnce() -> String,
+) -> Option<String> {
+    for name in names {
+        if let Some(v) = scripts.get(*name).and_then(serde_json::Value::as_str) {
+            if !v.trim().is_empty() {
+                return Some(make_cmd());
+            }
+        }
+    }
+    None
+}
+
 #[cfg(test)]
 mod tests {
     use super::sanitize_import_command;
@@ -999,5 +1095,33 @@ mod tests {
         assert!(sanitize_import_command("cargo test && rm -rf /").is_none());
         assert!(sanitize_import_command("cargo test | sh").is_none());
         assert!(sanitize_import_command("cargo test > /tmp/out").is_none());
+    }
+
+    #[test]
+    fn workflow_and_makefile_inference_improvements_do_not_regress_safety() {
+        // The improvements to workflow matching and makefile target detection
+        // must continue to respect sanitize_import_command. Compound shell is
+        // rejected (defense in depth); clean tool invocations are kept.
+        assert!(sanitize_import_command("./mvnw -B package").is_some());
+        assert!(sanitize_import_command("make test").is_some());
+        assert!(sanitize_import_command("pnpm test").is_some());
+        assert!(sanitize_import_command("npm ci && npm run build").is_none());
+    }
+
+    #[test]
+    fn infer_gradle_commands_detects_presence_and_prefers_wrapper() {
+        use super::{infer_gradle_commands, ImportedFile};
+        let groovy = ImportedFile {
+            path: "build.gradle".into(),
+            contents: "plugins { id 'java' }".into(),
+        };
+        let kts = ImportedFile {
+            path: "build.gradle.kts".into(),
+            contents: "plugins { java }".into(),
+        };
+        let g1 = infer_gradle_commands(&groovy).expect("groovy");
+        let g2 = infer_gradle_commands(&kts).expect("kts");
+        assert_eq!(g1.build.as_deref(), Some("./gradlew build"));
+        assert_eq!(g2.test.as_deref(), Some("./gradlew test"));
     }
 }

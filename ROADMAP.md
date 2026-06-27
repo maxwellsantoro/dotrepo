@@ -289,6 +289,10 @@ Current execution order:
 2. Convert recurring failure stubs into deterministic fixes and runnable
    checked-in regression fixtures (capture loop, harness, and named-ecosystem
    baseline canaries now in place; continue with live failure-derived cases).
+   Recent progress: strengthened workflow and Makefile command inference
+   (compound lines, mvnw/gradlew, indent-safe target detection), added
+   Gradle manifest support, and extended regression canaries with workflow
+   examples to cover the new paths.
 3. Expand progressively toward the profile and coverage gate in Milestone 2.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly

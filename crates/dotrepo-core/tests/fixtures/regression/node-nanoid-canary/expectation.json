@@ -3,11 +3,14 @@
   "ecosystem": "node",
   "repo_name": "Nano ID",
   "repo_description": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript.",
+  "repo_build": "pnpm build",
   "repo_test": "npm test",
   "security_contact": "https://tidelift.com/security",
-  "overlay_status": "imported",
+  "overlay_status": "inferred",
+  "inferred_fields": ["repo.build"],
   "trust_provenance": [
-    "imported"
+    "imported",
+    "inferred"
   ],
   "origin": "github.com/ai/nanoid"
 }

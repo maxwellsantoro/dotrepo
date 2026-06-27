@@ -381,6 +381,7 @@ pub fn import_repository_with_options(
     let pyproject_toml = load_first_existing_file(root, &["pyproject.toml"])?;
     let go_mod = load_first_existing_file(root, &["go.mod"])?;
     let pom_xml = load_first_existing_file(root, &["pom.xml"])?;
+    let build_gradle = load_first_existing_file(root, &["build.gradle", "build.gradle.kts"])?;
     let composer_json = load_first_existing_file(root, &["composer.json"])?;
     let csproj = load_first_root_file_with_extension(root, "csproj")?;
     let mix_exs = load_first_existing_file(root, &["mix.exs"])?;
@@ -504,6 +505,7 @@ pub fn import_repository_with_options(
         pyproject_toml: pyproject_toml.as_ref(),
         go_mod: go_mod.as_ref(),
         pom_xml: pom_xml.as_ref(),
+        build_gradle: build_gradle.as_ref(),
         composer_json: composer_json.as_ref(),
         csproj: csproj.as_ref(),
         mix_exs: mix_exs.as_ref(),
@@ -1576,6 +1578,7 @@ pub(crate) struct ImportSources<'a> {
     pub(crate) pyproject_toml: Option<&'a ImportedFile>,
     pub(crate) go_mod: Option<&'a ImportedFile>,
     pub(crate) pom_xml: Option<&'a ImportedFile>,
+    pub(crate) build_gradle: Option<&'a ImportedFile>,
     pub(crate) composer_json: Option<&'a ImportedFile>,
     pub(crate) csproj: Option<&'a ImportedFile>,
     pub(crate) mix_exs: Option<&'a ImportedFile>,

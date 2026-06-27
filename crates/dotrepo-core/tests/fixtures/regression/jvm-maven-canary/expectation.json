@@ -3,8 +3,8 @@
   "ecosystem": "jvm",
   "repo_name": "Maven Canary",
   "repo_description": "A compact JVM service fixture used to preserve deterministic Maven command inference.",
-  "repo_build": "mvn package",
-  "repo_test": "mvn test",
+  "repo_build": "./mvnw package",
+  "repo_test": "./mvnw test",
   "imported_sources": [
     "README.md",
     "pom.xml"

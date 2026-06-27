@@ -861,8 +861,8 @@ mod tests {
         fs::write(root.join("README.md"), "# Docker CLI\n\nThe Docker CLI.\n").expect("readme");
         fs::write(
             root.join("Makefile"),
-            ".PHONY: test-unit\n\
-             test-unit:\n\
+            ".PHONY: unit\n\
+             unit:\n\
              \tgotestsum -- $${TESTDIRS:-$(shell go list ./... | grep -vE '/vendor/')} $(TESTFLAGS)\n",
         )
         .expect("makefile");
