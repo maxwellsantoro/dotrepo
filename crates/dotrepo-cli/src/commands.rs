@@ -1,15 +1,16 @@
 use anyhow::{bail, Context, Result};
 use dotrepo_core::{
-    adopt_managed_surface, adopt_overlay_record, analyze_index_promotion, append_claim_event,
-    build_public_freshness, build_public_freshness_with_digest, current_public_freshness,
-    current_timestamp_rfc3339, export_public_index_static_with_base, generate_check_repository,
-    import_repository_with_options, index_snapshot_digest, inspect_claim_directory,
-    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
-    preview_surfaces, public_profile_compare_with_base, public_profile_search_with_base,
-    public_repository_batch_profiles_with_base, public_repository_batch_query_with_base,
-    public_repository_profile_or_error_with_base, public_repository_query_or_error_with_base,
-    public_repository_relations_with_base, public_repository_summary_or_error_with_base,
-    public_repository_trust_or_error_with_base, query_repository, resolve_claim_directory,
+    adopt_managed_surface, adopt_overlay_record, adoption_status_repository,
+    analyze_index_promotion, append_claim_event, build_public_freshness_with_digest,
+    current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_base,
+    generate_check_repository, import_repository_with_options, index_snapshot_digest,
+    inspect_claim_directory, inspect_surface_states, load_manifest_document,
+    load_manifest_from_root, managed_outputs, preview_surfaces, public_profile_compare_with_base,
+    public_profile_search_with_base, public_repository_batch_profiles_with_base,
+    public_repository_batch_query_with_base, public_repository_profile_or_error_with_base,
+    public_repository_query_or_error_with_base, public_repository_relations_with_base,
+    public_repository_summary_or_error_with_base, public_repository_trust_or_error_with_base,
+    query_repository, render_dotrepo_ci_workflow, resolve_claim_directory,
     scaffold_claim_directory, trust_repository, validate_index_root, validate_manifest,
     validate_repository, write_import_outputs, ClaimEventAppendInput, ClaimScaffoldInput,
     DoctorReport, DoctorSurface, ImportOptions, IndexFindingSeverity, PublicErrorResponse,
@@ -494,7 +495,7 @@ pub fn cmd_ci_init(root: PathBuf, force: bool, version: Option<String>) -> Resul
     }
 
     let version = version.unwrap_or_else(|| env!("CARGO_PKG_VERSION").to_string());
-    let workflow = render_ci_workflow(&version);
+    let workflow = render_dotrepo_ci_workflow(&version);
     if let Some(parent) = workflow_path.parent() {
         fs::create_dir_all(parent)?;
     }
@@ -507,52 +508,6 @@ pub fn cmd_ci_init(root: PathBuf, force: bool, version: Option<String>) -> Resul
     Ok(())
 }
 
-fn render_ci_workflow(version: &str) -> String {
-    let repository = env!("CARGO_PKG_REPOSITORY").trim_end_matches('/');
-    let asset = format!("dotrepo-{version}-x86_64-unknown-linux-gnu.tar.gz");
-    let release_base = format!("{repository}/releases/download/v{version}");
-    format!(
-        r#"name: dotrepo-check
-
-on:
-  pull_request:
-  push:
-    branches: [main, master]
-
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      # Linux x86_64 release bundle only; use cargo install on other platforms.
-      - uses: actions/checkout@v6
-      - name: Install dotrepo
-        env:
-          DOTREPO_VERSION: "{version}"
-          DOTREPO_ASSET: "{asset}"
-          DOTREPO_RELEASE_BASE: "{release_base}"
-        run: |
-          set -euo pipefail
-          mkdir -p "$HOME/.local/bin"
-          curl -fsSLo "$RUNNER_TEMP/$DOTREPO_ASSET" "$DOTREPO_RELEASE_BASE/$DOTREPO_ASSET"
-          curl -fsSLo "$RUNNER_TEMP/$DOTREPO_ASSET.sha256" "$DOTREPO_RELEASE_BASE/$DOTREPO_ASSET.sha256"
-          (
-            cd "$RUNNER_TEMP"
-            sha256sum -c "$DOTREPO_ASSET.sha256"
-          )
-          tar -xzf "$RUNNER_TEMP/$DOTREPO_ASSET" -C "$RUNNER_TEMP"
-          install "$RUNNER_TEMP/dotrepo-$DOTREPO_VERSION-x86_64-unknown-linux-gnu/bin/dotrepo" "$HOME/.local/bin/dotrepo"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Run dotrepo checks
-        run: |
-          dotrepo --root . validate
-          dotrepo --root . query repo.build --raw
-          dotrepo --root . trust
-          dotrepo --root . doctor
-          dotrepo --root . generate --check
-"#
-    )
-}
-
 pub fn cmd_trust(root: PathBuf, json: bool) -> Result<()> {
     let report = trust_repository(&root)?;
     if json {
@@ -561,6 +516,34 @@ pub fn cmd_trust(root: PathBuf, json: bool) -> Result<()> {
     }
 
     println!("{}", format_trust_report(&report));
+    Ok(())
+}
+
+pub fn cmd_adoption_status(root: PathBuf, json: bool) -> Result<()> {
+    let report = adoption_status_repository(&root);
+    if json {
+        println!("{}", serde_json::to_string_pretty(&report)?);
+        return Ok(());
+    }
+
+    println!("adoption status for {}", report.root);
+    if let Some(status) = &report.record_status {
+        println!("- record status: {status}");
+    }
+    if let Some(identity) = &report.repository_identity {
+        println!(
+            "- repository identity: {}/{}/{} ({})",
+            identity.host, identity.owner, identity.repo, identity.url
+        );
+    }
+    for check in &report.checks {
+        let marker = if check.ready { "ok" } else { "needs attention" };
+        println!("- {}: {} - {}", check.name, marker, check.detail);
+    }
+    println!("next steps:");
+    for step in &report.next_steps {
+        println!("- {step}");
+    }
     Ok(())
 }
 
@@ -591,6 +574,40 @@ pub struct ClaimInitArgs {
     pub canonical_repo_url: Option<String>,
     pub review_md: bool,
     pub force: bool,
+}
+
+pub struct ClaimFromNativeArgs {
+    pub index_root: PathBuf,
+    pub claim_id: String,
+    pub claimant_name: String,
+    pub asserted_role: String,
+    pub contact: Option<String>,
+    pub review_md: bool,
+    pub force: bool,
+}
+
+struct NativeRepositoryIdentity {
+    host: String,
+    owner: String,
+    repo: String,
+    url: String,
+}
+
+fn repository_identity_from_url(url: &str) -> Option<(String, String, String)> {
+    let (_scheme, rest) = url.split_once("://")?;
+    let without_query = rest
+        .split(['?', '#'])
+        .next()
+        .unwrap_or(rest)
+        .trim_end_matches('/');
+    let mut parts = without_query.split('/').filter(|part| !part.is_empty());
+    let host = parts.next()?.to_string();
+    let owner = parts.next()?.to_string();
+    let repo = parts.next()?.trim_end_matches(".git").to_string();
+    if parts.next().is_some() || host.is_empty() || owner.is_empty() || repo.is_empty() {
+        return None;
+    }
+    Some((host, owner, repo))
 }
 
 pub fn cmd_claim_init(root: PathBuf, args: ClaimInitArgs) -> Result<()> {
@@ -646,6 +663,37 @@ pub fn cmd_claim_init(root: PathBuf, args: ClaimInitArgs) -> Result<()> {
     Ok(())
 }
 
+pub fn cmd_claim_from_native(root: PathBuf, args: ClaimFromNativeArgs) -> Result<()> {
+    let ClaimFromNativeArgs {
+        index_root,
+        claim_id,
+        claimant_name,
+        asserted_role,
+        contact,
+        review_md,
+        force,
+    } = args;
+    let manifest = load_manifest_from_root(&root)?;
+    let identity = native_repository_identity(&manifest, "claim-from-native")?;
+
+    cmd_claim_init(
+        index_root,
+        ClaimInitArgs {
+            host: identity.host,
+            owner: identity.owner,
+            repo: identity.repo,
+            claim_id,
+            claimant_name,
+            asserted_role,
+            contact,
+            record_sources: vec![identity.url.clone()],
+            canonical_repo_url: Some(identity.url),
+            review_md,
+            force,
+        },
+    )
+}
+
 pub struct ClaimEventArgs {
     pub path: PathBuf,
     pub kind: ClaimEventKindArg,
@@ -654,6 +702,52 @@ pub struct ClaimEventArgs {
     pub corrected_state: Option<CorrectedClaimStateArg>,
     pub canonical_record_path: Option<String>,
     pub canonical_mirror_path: Option<String>,
+}
+
+pub struct ClaimSubmitNativeArgs {
+    pub index_root: PathBuf,
+    pub claim_id: String,
+    pub actor: String,
+    pub summary: String,
+}
+
+pub struct ClaimAcceptNativeArgs {
+    pub index_root: PathBuf,
+    pub path: Option<PathBuf>,
+    pub claim_id: Option<String>,
+    pub actor: String,
+    pub summary: String,
+}
+
+fn native_repository_identity(
+    manifest: &dotrepo_schema::Manifest,
+    command: &str,
+) -> Result<NativeRepositoryIdentity> {
+    ensure_native_record_command(&manifest.record.mode, command)?;
+    let homepage = manifest
+        .repo
+        .homepage
+        .as_deref()
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .ok_or_else(|| anyhow::anyhow!("{command} requires repo.homepage"))?;
+    repository_identity_from_url(homepage)
+        .ok_or_else(|| {
+            anyhow::anyhow!("{command} requires repo.homepage to be host/owner/repo URL")
+        })
+        .map(|(host, owner, repo)| NativeRepositoryIdentity {
+            host,
+            owner,
+            repo,
+            url: homepage.to_string(),
+        })
+}
+
+fn native_claim_path(identity: &NativeRepositoryIdentity, claim_id: &str) -> PathBuf {
+    PathBuf::from(format!(
+        "repos/{}/{}/{}/claims/{}",
+        identity.host, identity.owner, identity.repo, claim_id
+    ))
 }
 
 pub fn cmd_claim_event(root: PathBuf, args: ClaimEventArgs) -> Result<()> {
@@ -691,6 +785,64 @@ pub fn cmd_claim_event(root: PathBuf, args: ClaimEventArgs) -> Result<()> {
     println!("updated {}", plan.claim_path.display());
     println!("appended {}", plan.event_path.display());
     Ok(())
+}
+
+pub fn cmd_claim_submit_native(root: PathBuf, args: ClaimSubmitNativeArgs) -> Result<()> {
+    let ClaimSubmitNativeArgs {
+        index_root,
+        claim_id,
+        actor,
+        summary,
+    } = args;
+    let manifest = load_manifest_from_root(&root)?;
+    let identity = native_repository_identity(&manifest, "claim-submit-native")?;
+    cmd_claim_event(
+        index_root,
+        ClaimEventArgs {
+            path: native_claim_path(&identity, &claim_id),
+            kind: ClaimEventKindArg::Submitted,
+            actor,
+            summary,
+            corrected_state: None,
+            canonical_record_path: None,
+            canonical_mirror_path: None,
+        },
+    )
+}
+
+pub fn cmd_claim_accept_native(root: PathBuf, args: ClaimAcceptNativeArgs) -> Result<()> {
+    let ClaimAcceptNativeArgs {
+        index_root,
+        path,
+        claim_id,
+        actor,
+        summary,
+    } = args;
+    let manifest = load_manifest_from_root(&root)?;
+    let identity = native_repository_identity(&manifest, "claim-accept-native")?;
+    let path = match (path, claim_id) {
+        (Some(path), None) => path,
+        (None, Some(claim_id)) => native_claim_path(&identity, &claim_id),
+        (Some(_), Some(_)) => {
+            bail!("claim-accept-native accepts either a claim path or --claim-id, not both")
+        }
+        (None, None) => bail!("claim-accept-native requires a claim path or --claim-id"),
+    };
+    cmd_claim_event(
+        index_root,
+        ClaimEventArgs {
+            path,
+            kind: ClaimEventKindArg::Accepted,
+            actor,
+            summary,
+            corrected_state: None,
+            canonical_record_path: Some(".repo".into()),
+            canonical_mirror_path: Some(format!(
+                "repos/{}/{}/{}/record.toml",
+                identity.host, identity.owner, identity.repo
+            )),
+        },
+    )
 }
 
 pub fn cmd_public(command: PublicCommand) -> Result<()> {

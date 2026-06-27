@@ -30,6 +30,56 @@ status. It writes a native `draft` record, clears overlay authority fields, and
 adds a trust note reminding maintainers to review the imported facts before
 submitting a claim.
 
+After reviewing the native `.repo`, you can scaffold the public-index claim from
+that record:
+
+```bash
+dotrepo --root <repo> adoption-status
+dotrepo --root <repo> claim-from-native \
+  --index-root <index> \
+  --claim-id <claim-id> \
+  --claimant-name "<maintainer name>" \
+  --review-md
+dotrepo --root <repo> claim-submit-native \
+  --index-root <index> \
+  --claim-id <claim-id>
+```
+
+`adoption-status` is a read-only onboarding summary for maintainers. It reports
+whether the repository has a native record, validates cleanly, has a
+claim-from-native identity from `repo.homepage`, has the starter CI workflow,
+and has generated or managed surfaces in sync. Use `--json` when an editor,
+script, or MCP client needs the same readiness checks. MCP clients can call
+`dotrepo.adoption_status` for the same structured report.
+
+When editing `.repo` through the LSP, native records also get adoption hints for
+missing `repo.homepage` and the starter CI workflow. The `repo.homepage` hint
+includes a quick fix that inserts a placeholder field, and the CI hint can
+create the starter workflow.
+
+`claim-from-native` derives the target identity and canonical repository URL
+from `repo.homepage`, then creates the same draft claim directory that
+`claim-init` would create with explicit `--host`, `--owner`, `--repo`,
+`--record-source`, and `--canonical-repo-url` flags.
+
+`claim-submit-native` derives the claim directory from `repo.homepage` and
+`--claim-id`, then appends the audited `submitted` event without requiring the
+maintainer to spell the full index-relative path.
+
+After the claim is submitted and reviewed, the reviewer can record the accepted
+handoff without retyping canonical paths:
+
+```bash
+dotrepo --root <repo> claim-accept-native \
+  --index-root <index> \
+  --claim-id <claim-id>
+```
+
+`claim-accept-native` appends an accepted event with `canonical_record_path =
+".repo"` and the matching `canonical_mirror_path` under the index. Pass the
+index-relative claim path instead of `--claim-id` when accepting a claim whose
+path should not be derived from the native record.
+
 To scaffold the native-repo CI check loop, run:
 
 ```bash
@@ -73,6 +123,7 @@ Run the same loop the example repo uses locally:
 dotrepo --root examples/native-minimal validate
 dotrepo --root examples/native-minimal query repo.build --raw
 dotrepo --root examples/native-minimal trust
+dotrepo --root examples/native-minimal adoption-status
 dotrepo --root examples/native-minimal doctor
 dotrepo --root examples/native-minimal generate --check
 ```
@@ -81,6 +132,7 @@ What each command answers:
 - `validate` confirms that the current `.repo` is structurally valid.
 - `query` gives scripts and tools a stable way to read specific fields from the manifest.
 - `trust` is the human-facing inspection surface for status, provenance, authority handoff, and competing records.
+- `adoption-status` summarizes whether the maintainer-owned loop is ready for CI, managed surfaces, and claim handoff.
 - `doctor` reports whether supported conventional surfaces are `fully_generated`, `partially_managed`, `unmanaged`, `malformed_managed`, or in an unsupported state.
 - `generate --check` fails on drift inside fully generated or partially managed surfaces, but does not fail solely because an unmanaged file exists.
 
@@ -173,6 +225,7 @@ The checked-in example file also includes the release-binary install step:
 dotrepo --root . validate
 dotrepo --root . query repo.build --raw
 dotrepo --root . trust
+dotrepo --root . adoption-status
 dotrepo --root . doctor
 dotrepo --root . generate --check
 ```

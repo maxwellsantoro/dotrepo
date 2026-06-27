@@ -110,6 +110,12 @@ pub enum Command {
         #[arg(long)]
         json: bool,
     },
+    /// Summarize native adoption readiness for the current repository.
+    AdoptionStatus {
+        /// Emit the full adoption readiness report as JSON.
+        #[arg(long)]
+        json: bool,
+    },
     /// Scaffold CI for the canonical native-repo maintainer loop.
     Ci {
         #[command(subcommand)]
@@ -159,6 +165,30 @@ pub enum Command {
         #[arg(long)]
         force: bool,
     },
+    /// Scaffold a maintainer claim from the current native `.repo`.
+    ClaimFromNative {
+        /// Index root where the overlay claim directory should be created.
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        /// Claim directory name under claims/<claim-id>/.
+        #[arg(long)]
+        claim_id: String,
+        /// Claimant display name recorded in claim.toml.
+        #[arg(long)]
+        claimant_name: String,
+        /// Claimed repository role, such as `maintainer`.
+        #[arg(long, default_value = "maintainer")]
+        asserted_role: String,
+        /// Optional claimant contact detail.
+        #[arg(long)]
+        contact: Option<String>,
+        /// Create a placeholder review.md next to claim.toml.
+        #[arg(long)]
+        review_md: bool,
+        /// Replace an existing empty scaffold, but never overwrite event history.
+        #[arg(long)]
+        force: bool,
+    },
     /// Append a new claim event and update the current claim state.
     ClaimEvent {
         /// Claim directory relative to --root.
@@ -181,6 +211,41 @@ pub enum Command {
         /// Optional canonical mirror record path recorded for accepted handoff.
         #[arg(long)]
         canonical_mirror_path: Option<String>,
+    },
+    /// Append a submitted claim event with the claim path derived from the current native `.repo`.
+    ClaimSubmitNative {
+        /// Index root containing the claim directory.
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        /// Claim directory name under claims/<claim-id>/.
+        #[arg(long)]
+        claim_id: String,
+        /// Actor label recorded in the event.
+        #[arg(long, default_value = "claimant")]
+        actor: String,
+        /// Short event summary recorded in the audit trail.
+        #[arg(long, default_value = "Submitted maintainer claim.")]
+        summary: String,
+    },
+    /// Append an accepted claim event with canonical links from the current native `.repo`.
+    ClaimAcceptNative {
+        /// Index root containing the claim directory.
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        /// Claim directory relative to --index-root.
+        path: Option<PathBuf>,
+        /// Claim directory name under claims/<claim-id>; derives path from repo.homepage.
+        #[arg(long)]
+        claim_id: Option<String>,
+        /// Actor label recorded in the event.
+        #[arg(long, default_value = "index-reviewer")]
+        actor: String,
+        /// Short event summary recorded in the audit trail.
+        #[arg(
+            long,
+            default_value = "Accepted maintainer claim with canonical native record."
+        )]
+        summary: String,
     },
     /// Inspect or export public read-only index responses.
     Public {

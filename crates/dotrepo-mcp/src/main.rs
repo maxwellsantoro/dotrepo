@@ -1,9 +1,9 @@
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
-    current_timestamp_rfc3339, display_path, generate_check_repository, import_preview_repository,
-    import_repository_with_options, inspect_claim_directory, query_repository, record_summary,
-    resolve_claim_directory, trust_repository, validate_repository, write_import_outputs,
-    ImportMode, ImportOptions,
+    adoption_status_repository, current_timestamp_rfc3339, display_path, generate_check_repository,
+    import_preview_repository, import_repository_with_options, inspect_claim_directory,
+    query_repository, record_summary, resolve_claim_directory, trust_repository,
+    validate_repository, write_import_outputs, ImportMode, ImportOptions,
 };
 use dotrepo_transport::{
     jsonrpc_error_response, jsonrpc_response, read_jsonrpc_message as read_message,
@@ -154,7 +154,7 @@ fn handle_initialize(state: &mut ServerState, params: Value) -> Result<Value> {
             "title": "dotrepo MCP Server",
             "version": env!("CARGO_PKG_VERSION")
         },
-        "instructions": "Use dotrepo.query for trust-aware field lookups, dotrepo.trust for record provenance, and dotrepo.import_preview before dotrepo.import_write."
+        "instructions": "Use dotrepo.query for trust-aware field lookups, dotrepo.trust for record provenance, dotrepo.adoption_status for native maintainer readiness, and dotrepo.import_preview before dotrepo.import_write."
     }))
 }
 
@@ -172,6 +172,7 @@ fn handle_tool_call(params: Value) -> Result<Value> {
         "dotrepo.validate" => tool_validate(arguments),
         "dotrepo.query" => tool_query(arguments),
         "dotrepo.trust" => tool_trust(arguments),
+        "dotrepo.adoption_status" => tool_adoption_status(arguments),
         "dotrepo.lookup" => tool_lookup(arguments),
         "dotrepo.claim_inspect" => tool_claim_inspect(arguments),
         "dotrepo.generate_check" => tool_generate_check(arguments),
@@ -211,6 +212,22 @@ fn tool_trust(arguments: Value) -> Result<(String, Value)> {
     let root = resolve_root(&arguments)?;
     let report = trust_repository(&root)?;
     Ok(("trust metadata loaded".into(), to_value(report)?))
+}
+
+fn tool_adoption_status(arguments: Value) -> Result<(String, Value)> {
+    let root = resolve_root(&arguments)?;
+    let report = adoption_status_repository(&root);
+    let summary = if report.next_steps.len() == 1
+        && report
+            .next_steps
+            .first()
+            .is_some_and(|step| step.contains("ready"))
+    {
+        "native adoption loop ready"
+    } else {
+        "native adoption loop needs attention"
+    };
+    Ok((summary.into(), to_value(report)?))
 }
 
 fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
@@ -796,6 +813,18 @@ fn tool_definitions() -> Vec<Value> {
             }
         }),
         json!({
+            "name": "dotrepo.adoption_status",
+            "title": "Inspect native adoption readiness",
+            "description": "Summarize native-record readiness for validation, claim identity, CI onboarding, and managed-surface drift.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "root": { "type": "string", "description": "Repository root containing the native .repo to inspect." }
+                },
+                "additionalProperties": false
+            }
+        }),
+        json!({
             "name": "dotrepo.lookup",
             "title": "Lookup hosted public repository",
             "description": "Resolve a repository URL or identity against the hosted public surface and return summary, trust, and query entrypoints without cloning.",
@@ -931,6 +960,9 @@ mod tests {
             .any(|tool| tool["name"] == Value::String("dotrepo.query".into())));
         assert!(tools
             .iter()
+            .any(|tool| tool["name"] == Value::String("dotrepo.adoption_status".into())));
+        assert!(tools
+            .iter()
             .any(|tool| tool["name"] == Value::String("dotrepo.lookup".into())));
         assert!(tools
             .iter()
@@ -1015,6 +1047,7 @@ description = "Fast local-first sync engine"
         .expect("manifest written");
 
         let absolute = root.canonicalize().expect("canonical root");
+        let _env_guard = env_test_lock().lock().expect("env test lock");
         std::env::remove_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT");
         let (mut state, _) = initialized_state();
         let response = handle_request(
@@ -1312,6 +1345,15 @@ description = "Missing source and trust"
             generate["result"]["structuredContent"],
             to_value(generate_check_repository(&root).expect("generate-check report"))
                 .expect("generate-check report serializes")
+        );
+
+        let adoption = call_tool(
+            "dotrepo.adoption_status",
+            json!({ "root": root.display().to_string() }),
+        );
+        assert_eq!(
+            adoption["result"]["structuredContent"],
+            to_value(adoption_status_repository(&root)).expect("adoption report serializes")
         );
 
         fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
@@ -1711,6 +1753,7 @@ text = "Accepted claim."
     }
 
     fn call_tool(name: &str, arguments: Value) -> Value {
+        let _env_guard = env_test_lock().lock().expect("env test lock");
         std::env::set_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT", "1");
         let (mut state, _) = initialized_state();
         handle_request(
@@ -1768,6 +1811,11 @@ text = "Accepted claim."
     }
 
     fn cwd_test_lock() -> &'static Mutex<()> {
+        static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
+        LOCK.get_or_init(|| Mutex::new(()))
+    }
+
+    fn env_test_lock() -> &'static Mutex<()> {
         static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
         LOCK.get_or_init(|| Mutex::new(()))
     }

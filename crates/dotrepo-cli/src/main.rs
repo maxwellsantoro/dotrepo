@@ -3,11 +3,14 @@ use clap::Parser;
 use dotrepo_cli::cli::Cli;
 use dotrepo_cli::cli::Command;
 use dotrepo_cli::commands::{
-    cmd_adopt_overlay, cmd_ci, cmd_claim, cmd_claim_event, cmd_claim_init, cmd_doctor,
-    cmd_generate, cmd_import, cmd_init, cmd_manage, cmd_preview, cmd_promotion_report, cmd_public,
-    cmd_query, cmd_trust, cmd_validate, cmd_validate_index,
+    cmd_adopt_overlay, cmd_adoption_status, cmd_ci, cmd_claim, cmd_claim_event, cmd_claim_init,
+    cmd_doctor, cmd_generate, cmd_import, cmd_init, cmd_manage, cmd_preview, cmd_promotion_report,
+    cmd_public, cmd_query, cmd_trust, cmd_validate, cmd_validate_index,
 };
-use dotrepo_cli::commands::{ClaimEventArgs, ClaimInitArgs};
+use dotrepo_cli::commands::{
+    ClaimAcceptNativeArgs, ClaimEventArgs, ClaimFromNativeArgs, ClaimInitArgs,
+    ClaimSubmitNativeArgs,
+};
 use dotrepo_cli::error::CliExit;
 use std::process;
 
@@ -50,6 +53,7 @@ fn run() -> Result<()> {
         Command::Manage { surface, adopt } => cmd_manage(cli.root, surface, adopt),
         Command::Preview { surface, all, json } => cmd_preview(cli.root, surface, all, json),
         Command::Trust { json } => cmd_trust(cli.root, json),
+        Command::AdoptionStatus { json } => cmd_adoption_status(cli.root, json),
         Command::Ci { command } => cmd_ci(cli.root, command),
         Command::Claim { path, json } => cmd_claim(cli.root, path, json),
         Command::ClaimInit {
@@ -80,6 +84,26 @@ fn run() -> Result<()> {
                 force,
             },
         ),
+        Command::ClaimFromNative {
+            index_root,
+            claim_id,
+            claimant_name,
+            asserted_role,
+            contact,
+            review_md,
+            force,
+        } => dotrepo_cli::commands::cmd_claim_from_native(
+            cli.root,
+            ClaimFromNativeArgs {
+                index_root,
+                claim_id,
+                claimant_name,
+                asserted_role,
+                contact,
+                review_md,
+                force,
+            },
+        ),
         Command::ClaimEvent {
             path,
             kind,
@@ -98,6 +122,36 @@ fn run() -> Result<()> {
                 corrected_state,
                 canonical_record_path,
                 canonical_mirror_path,
+            },
+        ),
+        Command::ClaimSubmitNative {
+            index_root,
+            claim_id,
+            actor,
+            summary,
+        } => dotrepo_cli::commands::cmd_claim_submit_native(
+            cli.root,
+            ClaimSubmitNativeArgs {
+                index_root,
+                claim_id,
+                actor,
+                summary,
+            },
+        ),
+        Command::ClaimAcceptNative {
+            index_root,
+            path,
+            claim_id,
+            actor,
+            summary,
+        } => dotrepo_cli::commands::cmd_claim_accept_native(
+            cli.root,
+            ClaimAcceptNativeArgs {
+                index_root,
+                path,
+                claim_id,
+                actor,
+                summary,
             },
         ),
         Command::Public { command } => cmd_public(command),

@@ -437,6 +437,22 @@ Current status:
 - `dotrepo adopt-overlay <record.toml>` bootstraps a native draft `.repo` from a
   public overlay record while clearing overlay authority fields and requiring
   maintainer review before canonical claims
+- `dotrepo claim-from-native --index-root <index>` scaffolds the corresponding
+  draft maintainer claim from a reviewed native `.repo`, deriving target
+  identity and canonical URL from `repo.homepage`
+- `dotrepo claim-submit-native --index-root <index> --claim-id <id>` appends
+  the submitted event using the native record identity instead of a hand-typed
+  claim path
+- `dotrepo claim-accept-native --index-root <index> --claim-id <id>` appends
+  the accepted handoff event with claim, canonical `.repo`, and mirror paths
+  derived from the native record
+- `dotrepo adoption-status [--json]` summarizes native-record readiness for
+  validation, claim identity, CI onboarding, and managed-surface drift
+- MCP exposes the same readiness contract as `dotrepo.adoption_status`, sharing
+  the core report used by the CLI
+- LSP diagnostics surface native adoption hints for claim-ready `repo.homepage`
+  and the starter CI workflow while maintainers edit `.repo`, including quick
+  fixes for adding the homepage placeholder and creating the workflow
 
 Exit criteria:
 

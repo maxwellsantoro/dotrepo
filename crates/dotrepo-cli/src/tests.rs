@@ -109,6 +109,397 @@ fn claim_init_scaffolds_valid_claim_directory() {
 }
 
 #[test]
+fn claim_from_native_derives_identity_and_canonical_source() {
+    let repo_root = temp_dir("claim-from-native-repo");
+    fs::write(
+        repo_root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "widget"
+description = "Native widget metadata."
+homepage = "https://github.com/acme/widget"
+"#,
+    )
+    .expect("native .repo written");
+    let index_root = temp_dir("claim-from-native-index");
+    let record_dir = index_root.join("repos/github.com/acme/widget");
+    fs::create_dir_all(&record_dir).expect("index record dir created");
+    fs::write(
+        record_dir.join("record.toml"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+
+[repo]
+name = "widget"
+description = "Overlay widget metadata."
+"#,
+    )
+    .expect("overlay record written");
+
+    cmd_claim_from_native(
+        repo_root.clone(),
+        ClaimFromNativeArgs {
+            index_root: index_root.clone(),
+            claim_id: "2026-03-10-maintainer-claim-04".into(),
+            claimant_name: "Acme maintainers".into(),
+            asserted_role: "maintainer".into(),
+            contact: Some("maintainers@acme.dev".into()),
+            review_md: true,
+            force: false,
+        },
+    )
+    .expect("claim scaffold succeeds");
+
+    let claim_dir = record_dir.join("claims/2026-03-10-maintainer-claim-04");
+    let report = inspect_claim_directory(&index_root, &claim_dir).expect("claim inspection works");
+    assert_eq!(report.state, dotrepo_core::ClaimState::Draft);
+    assert_eq!(
+        report.target.record_sources,
+        vec!["https://github.com/acme/widget".to_string()]
+    );
+    assert_eq!(
+        report.target.canonical_repo_url,
+        Some("https://github.com/acme/widget".to_string())
+    );
+    assert!(claim_dir.join("review.md").exists());
+
+    fs::remove_dir_all(repo_root).expect("repo temp dir removed");
+    fs::remove_dir_all(index_root).expect("index temp dir removed");
+}
+
+#[test]
+fn claim_from_native_requires_homepage_identity() {
+    let repo_root = temp_dir("claim-from-native-no-homepage");
+    fs::write(
+        repo_root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "widget"
+description = "Native widget metadata."
+"#,
+    )
+    .expect("native .repo written");
+    let index_root = temp_dir("claim-from-native-index-empty");
+
+    let err = cmd_claim_from_native(
+        repo_root.clone(),
+        ClaimFromNativeArgs {
+            index_root: index_root.clone(),
+            claim_id: "2026-03-10-maintainer-claim-04".into(),
+            claimant_name: "Acme maintainers".into(),
+            asserted_role: "maintainer".into(),
+            contact: None,
+            review_md: false,
+            force: false,
+        },
+    )
+    .expect_err("missing homepage should fail");
+
+    assert!(err.to_string().contains("requires repo.homepage"));
+
+    fs::remove_dir_all(repo_root).expect("repo temp dir removed");
+    fs::remove_dir_all(index_root).expect("index temp dir removed");
+}
+
+#[test]
+fn claim_accept_native_records_canonical_handoff_links() {
+    let repo_root = temp_dir("claim-accept-native-repo");
+    fs::write(
+        repo_root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "widget"
+description = "Native widget metadata."
+homepage = "https://github.com/acme/widget"
+"#,
+    )
+    .expect("native .repo written");
+    let index_root = temp_dir("claim-accept-native-index");
+    let record_dir = index_root.join("repos/github.com/acme/widget");
+    fs::create_dir_all(&record_dir).expect("index record dir created");
+    fs::write(
+        record_dir.join("record.toml"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+
+[repo]
+name = "widget"
+description = "Overlay widget metadata."
+"#,
+    )
+    .expect("overlay record written");
+    cmd_claim_from_native(
+        repo_root.clone(),
+        ClaimFromNativeArgs {
+            index_root: index_root.clone(),
+            claim_id: "2026-03-10-maintainer-claim-05".into(),
+            claimant_name: "Acme maintainers".into(),
+            asserted_role: "maintainer".into(),
+            contact: None,
+            review_md: false,
+            force: false,
+        },
+    )
+    .expect("claim scaffold succeeds");
+    cmd_claim_submit_native(
+        repo_root.clone(),
+        ClaimSubmitNativeArgs {
+            index_root: index_root.clone(),
+            claim_id: "2026-03-10-maintainer-claim-05".into(),
+            actor: "claimant".into(),
+            summary: "Submitted maintainer claim.".into(),
+        },
+    )
+    .expect("submitted event succeeds");
+
+    cmd_claim_accept_native(
+        repo_root.clone(),
+        ClaimAcceptNativeArgs {
+            index_root: index_root.clone(),
+            path: None,
+            claim_id: Some("2026-03-10-maintainer-claim-05".into()),
+            actor: "index-reviewer".into(),
+            summary: "Accepted maintainer claim with canonical native record.".into(),
+        },
+    )
+    .expect("accepted event succeeds");
+
+    let claim_dir = record_dir.join("claims/2026-03-10-maintainer-claim-05");
+    let report = inspect_claim_directory(&index_root, &claim_dir).expect("claim inspection works");
+    assert_eq!(report.state, dotrepo_core::ClaimState::Accepted);
+    assert_eq!(report.target.handoff, Some(ClaimHandoffOutcome::Superseded));
+    let resolution = report.resolution.expect("resolution recorded");
+    assert_eq!(resolution.canonical_record_path.as_deref(), Some(".repo"));
+    assert_eq!(
+        resolution.canonical_mirror_path.as_deref(),
+        Some("repos/github.com/acme/widget/record.toml")
+    );
+
+    fs::remove_dir_all(repo_root).expect("repo temp dir removed");
+    fs::remove_dir_all(index_root).expect("index temp dir removed");
+}
+
+#[test]
+fn claim_submit_native_requires_homepage_identity() {
+    let repo_root = temp_dir("claim-submit-native-no-homepage");
+    fs::write(
+        repo_root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "widget"
+description = "Native widget metadata."
+"#,
+    )
+    .expect("native .repo written");
+    let index_root = temp_dir("claim-submit-native-unused-index");
+
+    let err = cmd_claim_submit_native(
+        repo_root.clone(),
+        ClaimSubmitNativeArgs {
+            index_root: index_root.clone(),
+            claim_id: "2026-03-10-maintainer-claim-05".into(),
+            actor: "claimant".into(),
+            summary: "Submitted maintainer claim.".into(),
+        },
+    )
+    .expect_err("missing homepage should fail");
+
+    assert!(err.to_string().contains("requires repo.homepage"));
+
+    fs::remove_dir_all(repo_root).expect("repo temp dir removed");
+    fs::remove_dir_all(index_root).expect("index temp dir removed");
+}
+
+#[test]
+fn claim_accept_native_requires_homepage_identity() {
+    let repo_root = temp_dir("claim-accept-native-no-homepage");
+    fs::write(
+        repo_root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "widget"
+description = "Native widget metadata."
+"#,
+    )
+    .expect("native .repo written");
+    let index_root = temp_dir("claim-accept-native-unused-index");
+
+    let err = cmd_claim_accept_native(
+        repo_root.clone(),
+        ClaimAcceptNativeArgs {
+            index_root: index_root.clone(),
+            path: None,
+            claim_id: Some("claim".into()),
+            actor: "index-reviewer".into(),
+            summary: "Accepted maintainer claim.".into(),
+        },
+    )
+    .expect_err("missing homepage should fail");
+
+    assert!(err.to_string().contains("requires repo.homepage"));
+
+    fs::remove_dir_all(repo_root).expect("repo temp dir removed");
+    fs::remove_dir_all(index_root).expect("index temp dir removed");
+}
+
+#[test]
+fn claim_accept_native_requires_path_or_claim_id() {
+    let repo_root = temp_dir("claim-accept-native-no-path");
+    fs::write(
+        repo_root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "widget"
+description = "Native widget metadata."
+homepage = "https://github.com/acme/widget"
+"#,
+    )
+    .expect("native .repo written");
+    let index_root = temp_dir("claim-accept-native-no-path-index");
+
+    let err = cmd_claim_accept_native(
+        repo_root.clone(),
+        ClaimAcceptNativeArgs {
+            index_root: index_root.clone(),
+            path: None,
+            claim_id: None,
+            actor: "index-reviewer".into(),
+            summary: "Accepted maintainer claim.".into(),
+        },
+    )
+    .expect_err("missing path and claim id should fail");
+
+    assert!(err
+        .to_string()
+        .contains("requires a claim path or --claim-id"));
+
+    fs::remove_dir_all(repo_root).expect("repo temp dir removed");
+    fs::remove_dir_all(index_root).expect("index temp dir removed");
+}
+
+#[test]
+fn adoption_status_reports_ready_native_loop() {
+    let root = temp_dir("adoption-status-ready");
+    fs::write(
+        root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared", "verified"]
+notes = "Maintainer-controlled source of truth."
+
+[repo]
+name = "widget"
+description = "Fast widget toolkit."
+homepage = "https://github.com/acme/widget"
+license = "MIT"
+status = "active"
+visibility = "public"
+languages = ["rust"]
+build = "cargo build"
+test = "cargo test"
+topics = ["widgets"]
+
+[owners]
+maintainers = ["@acme/platform"]
+security_contact = "security@example.com"
+
+[compat.github]
+codeowners = "generate"
+"#,
+    )
+    .expect("native .repo written");
+
+    cmd_generate(root.clone(), false).expect("generated surfaces written");
+    cmd_ci_init(root.clone(), false, Some("0.1.0".into())).expect("ci workflow written");
+
+    let report = adoption_status_repository(&root);
+    assert!(report.has_native_record);
+    assert!(report.validation_passed);
+    assert!(report.can_claim_from_native);
+    assert!(report.ci_workflow_present);
+    assert!(report.managed_surface_check_passed);
+    assert_eq!(
+        report
+            .repository_identity
+            .as_ref()
+            .map(|identity| identity.repo.as_str()),
+        Some("widget")
+    );
+    assert!(report.next_steps.iter().any(|step| step.contains("ready")));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn adoption_status_reports_missing_native_onboarding_steps() {
+    let root = temp_dir("adoption-status-missing");
+
+    let report = adoption_status_repository(&root);
+    assert!(!report.has_native_record);
+    assert!(!report.validation_passed);
+    assert!(!report.can_claim_from_native);
+    assert!(!report.ci_workflow_present);
+    assert!(!report.managed_surface_check_passed);
+    assert!(report
+        .next_steps
+        .iter()
+        .any(|step| step.contains("create a native .repo")));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
 fn claim_init_refuses_existing_claim_dir_without_force() {
     let root = temp_dir("claim-init-no-force");
     let claim_dir = root.join("repos/github.com/acme/widget/claims/2026-03-10-maintainer-claim-03");

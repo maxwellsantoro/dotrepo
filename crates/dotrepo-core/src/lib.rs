@@ -5,6 +5,7 @@ use serde_json::Value;
 use std::fs;
 use std::path::{Path, PathBuf};
 
+mod adoption;
 mod claims;
 mod import;
 mod promotion;
@@ -17,6 +18,10 @@ mod synthesis;
 mod util;
 mod validation;
 
+pub use adoption::{
+    adoption_status_repository, render_dotrepo_ci_workflow, AdoptionRepositoryIdentity,
+    AdoptionStatusItem, AdoptionStatusReport,
+};
 pub use query::{
     manifest_to_json, query_manifest, query_manifest_value, query_manifest_value_from_json,
 };

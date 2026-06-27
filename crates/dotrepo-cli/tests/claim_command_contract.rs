@@ -112,6 +112,25 @@ fn copy_repo(source_repo: &Path, dest_root: &Path, owner: &str, repo: &str) {
     .expect("evidence copied");
 }
 
+fn write_native_widget_repo(root: &Path) {
+    fs::write(
+        root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "widget"
+description = "Native widget metadata."
+homepage = "https://github.com/acme/widget"
+"#,
+    )
+    .expect("native .repo written");
+}
+
 #[test]
 fn claim_command_reports_superseded_handoff_from_fixture() {
     let root = claims_fixture_root("accepted-clean");
@@ -142,6 +161,90 @@ fn claim_command_reports_superseded_handoff_from_fixture() {
         Value::String("repos/github.com/acme/widget/record.toml".into())
     );
     assert_eq!(json["events"].as_array().expect("events array").len(), 2);
+}
+
+#[test]
+fn native_claim_commands_execute_derived_claim_path_workflow() {
+    let repo = TempRoot::new("native-repo");
+    let index = TempRoot::new("native-index");
+    write_native_widget_repo(repo.path());
+    copy_seed_repo("accepted-clean", index.path());
+
+    let repo_str = repo.path().to_str().expect("repo path is utf-8");
+    let index_str = index.path().to_str().expect("index path is utf-8");
+    let claim_id = "2026-03-18-maintainer-native-claim-01";
+    let claim_path = claim_relative_path(claim_id);
+
+    let scaffold = run_dotrepo(&[
+        "--root",
+        repo_str,
+        "claim-from-native",
+        "--index-root",
+        index_str,
+        "--claim-id",
+        claim_id,
+        "--claimant-name",
+        "Acme maintainers",
+    ]);
+    assert!(
+        scaffold.status.success(),
+        "claim-from-native should succeed"
+    );
+    assert!(
+        scaffold.stderr.is_empty(),
+        "claim-from-native should not write stderr"
+    );
+
+    let submitted = run_dotrepo(&[
+        "--root",
+        repo_str,
+        "claim-submit-native",
+        "--index-root",
+        index_str,
+        "--claim-id",
+        claim_id,
+    ]);
+    assert!(
+        submitted.status.success(),
+        "claim-submit-native should succeed"
+    );
+    assert!(
+        submitted.stderr.is_empty(),
+        "claim-submit-native should not write stderr"
+    );
+
+    let accepted = run_dotrepo(&[
+        "--root",
+        repo_str,
+        "claim-accept-native",
+        "--index-root",
+        index_str,
+        "--claim-id",
+        claim_id,
+    ]);
+    assert!(
+        accepted.status.success(),
+        "claim-accept-native should succeed"
+    );
+    assert!(
+        accepted.stderr.is_empty(),
+        "claim-accept-native should not write stderr"
+    );
+
+    let report = run_dotrepo(&["--root", index_str, "claim", &claim_path, "--json"]);
+    assert!(report.status.success(), "claim inspection should succeed");
+    let json = parse_stdout_json(&report);
+    assert_eq!(json["state"], Value::String("accepted".into()));
+    assert_eq!(
+        json["resolution"]["canonical_record_path"],
+        Value::String(".repo".into())
+    );
+    assert_eq!(
+        json["resolution"]["canonical_mirror_path"],
+        Value::String("repos/github.com/acme/widget/record.toml".into())
+    );
+    assert_eq!(json["events"][0]["kind"], Value::String("submitted".into()));
+    assert_eq!(json["events"][1]["kind"], Value::String("accepted".into()));
 }
 
 #[test]

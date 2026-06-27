@@ -33,5 +33,6 @@ jobs:
           dotrepo --root . validate
           dotrepo --root . query repo.build --raw
           dotrepo --root . trust
+          dotrepo --root . adoption-status
           dotrepo --root . doctor
           dotrepo --root . generate --check

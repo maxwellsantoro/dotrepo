@@ -1,9 +1,9 @@
 use anyhow::{anyhow, bail, Context, Result};
 use dotrepo_core::{
-    manifest_to_json, query_manifest_value_from_json, validate_manifest_diagnostics,
-    ValidationDiagnostic, ValidationDiagnosticSeverity,
+    manifest_to_json, query_manifest_value_from_json, render_dotrepo_ci_workflow,
+    validate_manifest_diagnostics, ValidationDiagnostic, ValidationDiagnosticSeverity,
 };
-use dotrepo_schema::{parse_manifest, ParseError};
+use dotrepo_schema::{parse_manifest, Manifest, ParseError, RecordMode};
 use dotrepo_transport::{
     jsonrpc_error_response, jsonrpc_response, read_jsonrpc_message as read_message,
     write_jsonrpc_message as write_message, JSONRPC_VERSION,
@@ -145,7 +145,7 @@ struct PublishDiagnosticsParams {
     diagnostics: Vec<LspDiagnostic>,
 }
 
-#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 struct LspDiagnostic {
     range: LspRange,
@@ -154,7 +154,7 @@ struct LspDiagnostic {
     message: String,
 }
 
-#[derive(Debug, Serialize, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Serialize, Deserialize, Clone, Copy, PartialEq, Eq)]
 struct LspRange {
     start: LspPosition,
     end: LspPosition,
@@ -185,6 +185,42 @@ struct Hover {
     contents: MarkupContent,
     #[serde(skip_serializing_if = "Option::is_none")]
     range: Option<LspRange>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct CodeActionParams {
+    text_document: TextDocumentIdentifier,
+    range: LspRange,
+    context: CodeActionContext,
+}
+
+#[derive(Debug, Deserialize)]
+struct CodeActionContext {
+    #[serde(default)]
+    diagnostics: Vec<LspDiagnostic>,
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+struct CodeAction {
+    title: String,
+    kind: String,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    diagnostics: Vec<LspDiagnostic>,
+    edit: WorkspaceEdit,
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+struct WorkspaceEdit {
+    changes: BTreeMap<String, Vec<TextEdit>>,
+}
+
+#[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+struct TextEdit {
+    range: LspRange,
+    new_text: String,
 }
 
 #[derive(Debug, Serialize, Clone, PartialEq, Eq)]
@@ -267,7 +303,8 @@ fn handle_request(
                             "save": { "includeText": true }
                         },
                         "completionProvider": {},
-                        "hoverProvider": true
+                        "hoverProvider": true,
+                        "codeActionProvider": true
                     },
                     "serverInfo": {
                         "name": SERVER_NAME,
@@ -295,6 +332,10 @@ fn handle_request(
                     None,
                 ),
             }
+        }
+        "textDocument/codeAction" => {
+            let params: CodeActionParams = serde_json::from_value(params)?;
+            jsonrpc_response(id, serde_json::to_value(code_actions(state, &params)?)?)
         }
         _ => jsonrpc_error_response(id, -32601, format!("method not found: {}", method), None),
     };
@@ -459,6 +500,74 @@ fn hover_response(
     Ok(None)
 }
 
+fn code_actions(state: &ServerState, params: &CodeActionParams) -> Result<Vec<CodeAction>> {
+    let document = document_for_request(state, &params.text_document.uri)?;
+    let index = DocumentIndex::from_text(&document.text);
+    let mut actions = Vec::new();
+
+    for diagnostic in &params.context.diagnostics {
+        if diagnostic.source == "adoption_status"
+            && diagnostic.message.contains("set repo.homepage")
+            && ranges_overlap(params.range, diagnostic.range)
+        {
+            actions.push(homepage_placeholder_code_action(
+                &document.uri,
+                &index,
+                diagnostic.clone(),
+            ));
+        }
+        if diagnostic.source == "adoption_status"
+            && diagnostic.message.contains("dotrepo ci init")
+            && ranges_overlap(params.range, diagnostic.range)
+        {
+            actions.push(ci_workflow_code_action(document, diagnostic.clone()));
+        }
+    }
+
+    Ok(actions)
+}
+
+fn homepage_placeholder_code_action(
+    uri: &str,
+    index: &DocumentIndex,
+    diagnostic: LspDiagnostic,
+) -> CodeAction {
+    let (range, new_text) = homepage_insert_edit(index);
+    let mut changes = BTreeMap::new();
+    changes.insert(uri.to_string(), vec![TextEdit { range, new_text }]);
+    CodeAction {
+        title: "Add repo.homepage placeholder".into(),
+        kind: "quickfix".into(),
+        diagnostics: vec![diagnostic],
+        edit: WorkspaceEdit { changes },
+    }
+}
+
+fn ci_workflow_code_action(document: &OpenDocument, diagnostic: LspDiagnostic) -> CodeAction {
+    let workflow_path = document
+        .path
+        .parent()
+        .unwrap_or_else(|| Path::new("."))
+        .join(".github/workflows/dotrepo-check.yml");
+    let workflow_uri = Url::from_file_path(&workflow_path)
+        .map(|url| url.to_string())
+        .unwrap_or_else(|_| workflow_path.display().to_string());
+    let mut changes = BTreeMap::new();
+    changes.insert(
+        workflow_uri,
+        vec![TextEdit {
+            range: insertion_range(0),
+            new_text: render_dotrepo_ci_workflow(env!("CARGO_PKG_VERSION")),
+        }],
+    );
+    CodeAction {
+        title: "Create dotrepo CI workflow".into(),
+        kind: "quickfix".into(),
+        diagnostics: vec![diagnostic],
+        edit: WorkspaceEdit { changes },
+    }
+}
+
 fn canonical_manifest_path(path: &Path) -> Result<PathBuf> {
     if path.exists() {
         return fs::canonicalize(path).map_err(Into::into);
@@ -510,6 +619,7 @@ fn diagnostics_for_document(
         Ok(manifest) => validate_manifest_diagnostics(&root, &manifest)
             .into_iter()
             .map(|diagnostic| map_validation_diagnostic(&index, &root, &diagnostic))
+            .chain(adoption_diagnostics_for_manifest(&index, &root, &manifest))
             .collect(),
         Err(ParseError::Toml(err)) => vec![LspDiagnostic {
             range: err
@@ -531,6 +641,50 @@ fn diagnostics_for_document(
             message: ParseError::ConflictingTrustPlacement.to_string(),
         }],
     }
+}
+
+fn adoption_diagnostics_for_manifest(
+    index: &DocumentIndex,
+    root: &Path,
+    manifest: &Manifest,
+) -> Vec<LspDiagnostic> {
+    if manifest.record.mode == RecordMode::Overlay {
+        return Vec::new();
+    }
+
+    let mut diagnostics = Vec::new();
+    let homepage_ready = manifest
+        .repo
+        .homepage
+        .as_deref()
+        .map(str::trim)
+        .is_some_and(|value| !value.is_empty());
+    if !homepage_ready {
+        diagnostics.push(LspDiagnostic {
+            range: index
+                .section_range("repo")
+                .or_else(|| index.field_range("repo.name"))
+                .unwrap_or_else(|| index.default_range()),
+            severity: 4,
+            source: "adoption_status".into(),
+            message:
+                "set repo.homepage to enable claim-from-native and derived claim handoff commands"
+                    .into(),
+        });
+    }
+
+    if !root.join(".github/workflows/dotrepo-check.yml").exists() {
+        diagnostics.push(LspDiagnostic {
+            range: index
+                .section_range("record")
+                .unwrap_or_else(|| index.default_range()),
+            severity: 4,
+            source: "adoption_status".into(),
+            message: "run dotrepo ci init to add the native-repo adoption check workflow".into(),
+        });
+    }
+
+    diagnostics
 }
 
 fn map_validation_diagnostic(
@@ -833,6 +987,50 @@ fn range_weight(range: LspRange) -> (u32, u32) {
         range.end.line.saturating_sub(range.start.line),
         range.end.character.saturating_sub(range.start.character),
     )
+}
+
+fn ranges_overlap(a: LspRange, b: LspRange) -> bool {
+    position_le(a.start, b.end) && position_le(b.start, a.end)
+}
+
+fn position_le(a: LspPosition, b: LspPosition) -> bool {
+    a.line < b.line || (a.line == b.line && a.character <= b.character)
+}
+
+fn homepage_insert_edit(index: &DocumentIndex) -> (LspRange, String) {
+    if let Some(line) = index
+        .fields
+        .iter()
+        .filter(|(path, _)| path.starts_with("repo."))
+        .map(|(_, range)| range.end.line)
+        .max()
+    {
+        return (
+            insertion_range(line.saturating_add(1)),
+            "homepage = \"https://github.com/owner/repo\"\n".into(),
+        );
+    }
+
+    if let Some(section) = index.section_range("repo") {
+        return (
+            insertion_range(section.end.line.saturating_add(1)),
+            "homepage = \"https://github.com/owner/repo\"\n".into(),
+        );
+    }
+
+    let line = index.lines.len() as u32;
+    let prefix = if index.lines.is_empty() { "" } else { "\n" };
+    (
+        insertion_range(line),
+        format!("{prefix}[repo]\nhomepage = \"https://github.com/owner/repo\"\n"),
+    )
+}
+
+fn insertion_range(line: u32) -> LspRange {
+    LspRange {
+        start: LspPosition { line, character: 0 },
+        end: LspPosition { line, character: 0 },
+    }
 }
 
 fn whole_line_range(line: u32, contents: &str) -> LspRange {
@@ -1522,6 +1720,234 @@ status = "draft"
         assert_eq!(diagnostics[0].source, "parse_manifest");
         assert!(diagnostics[0].message.contains("failed to parse manifest"));
         assert!(diagnostics[0].range.start.line > 0);
+
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
+    }
+
+    #[test]
+    fn diagnostics_for_native_manifest_include_adoption_hints() {
+        let root = temp_dir("lsp-adoption-hints");
+        let path = root.join(".repo");
+        let diagnostics = diagnostics_for_document(
+            &path,
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+            &[],
+        );
+
+        let messages = diagnostics
+            .iter()
+            .filter(|diagnostic| diagnostic.source == "adoption_status")
+            .map(|diagnostic| diagnostic.message.as_str())
+            .collect::<Vec<_>>();
+        assert!(messages
+            .iter()
+            .any(|message| message.contains("set repo.homepage")));
+        assert!(messages
+            .iter()
+            .any(|message| message.contains("dotrepo ci init")));
+        assert!(diagnostics
+            .iter()
+            .filter(|diagnostic| diagnostic.source == "adoption_status")
+            .all(|diagnostic| diagnostic.severity == 4));
+
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
+    }
+
+    #[test]
+    fn diagnostics_for_native_manifest_skip_adoption_hints_when_ready() {
+        let root = temp_dir("lsp-adoption-ready");
+        let path = root.join(".repo");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
+        fs::write(
+            root.join(".github/workflows/dotrepo-check.yml"),
+            "name: dotrepo-check\n",
+        )
+        .expect("workflow written");
+        let diagnostics = diagnostics_for_document(
+            &path,
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+homepage = "https://github.com/acme/orbit"
+"#,
+            &[],
+        );
+
+        assert!(!diagnostics
+            .iter()
+            .any(|diagnostic| diagnostic.source == "adoption_status"));
+
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
+    }
+
+    #[test]
+    fn initialize_advertises_code_action_provider() {
+        let mut state = ServerState::default();
+        let response = handle_request(&mut state, Value::Number(1.into()), "initialize", json!({}))
+            .expect("initialize handled");
+
+        assert_eq!(
+            response[0]["result"]["capabilities"]["codeActionProvider"],
+            Value::Bool(true)
+        );
+    }
+
+    #[test]
+    fn code_action_adds_homepage_placeholder_for_adoption_hint() {
+        let root = temp_dir("lsp-code-action-homepage");
+        let path = root.join(".repo");
+        let uri = Url::from_file_path(&path)
+            .expect("file path uri")
+            .to_string();
+        let text = r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#
+        .to_string();
+        let diagnostics = diagnostics_for_document(&path, &text, &[]);
+        let diagnostic = diagnostics
+            .into_iter()
+            .find(|diagnostic| {
+                diagnostic.source == "adoption_status"
+                    && diagnostic.message.contains("set repo.homepage")
+            })
+            .expect("homepage adoption diagnostic");
+        let mut state = ServerState::default();
+        state.documents.insert(
+            uri.clone(),
+            OpenDocument {
+                uri: uri.clone(),
+                path,
+                version: Some(1),
+                text,
+            },
+        );
+
+        let actions = code_actions(
+            &state,
+            &CodeActionParams {
+                text_document: TextDocumentIdentifier { uri: uri.clone() },
+                range: diagnostic.range,
+                context: CodeActionContext {
+                    diagnostics: vec![diagnostic],
+                },
+            },
+        )
+        .expect("code actions computed");
+
+        assert_eq!(actions.len(), 1);
+        assert_eq!(actions[0].title, "Add repo.homepage placeholder");
+        let edits = actions[0]
+            .edit
+            .changes
+            .get(&uri)
+            .expect("edit for document uri");
+        assert_eq!(edits.len(), 1);
+        assert_eq!(
+            edits[0].new_text,
+            "homepage = \"https://github.com/owner/repo\"\n"
+        );
+        assert!(
+            edits[0].range.start.line > 0,
+            "homepage should be inserted inside the repo section"
+        );
+
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
+    }
+
+    #[test]
+    fn code_action_creates_ci_workflow_for_adoption_hint() {
+        let root = temp_dir("lsp-code-action-ci");
+        let path = root.join(".repo");
+        let uri = Url::from_file_path(&path)
+            .expect("file path uri")
+            .to_string();
+        let text = r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+homepage = "https://github.com/acme/orbit"
+"#
+        .to_string();
+        let diagnostic = diagnostics_for_document(&path, &text, &[])
+            .into_iter()
+            .find(|diagnostic| {
+                diagnostic.source == "adoption_status"
+                    && diagnostic.message.contains("dotrepo ci init")
+            })
+            .expect("ci adoption diagnostic");
+        let mut state = ServerState::default();
+        state.documents.insert(
+            uri.clone(),
+            OpenDocument {
+                uri,
+                path,
+                version: Some(1),
+                text,
+            },
+        );
+
+        let actions = code_actions(
+            &state,
+            &CodeActionParams {
+                text_document: TextDocumentIdentifier {
+                    uri: Url::from_file_path(root.join(".repo"))
+                        .expect("file uri")
+                        .to_string(),
+                },
+                range: diagnostic.range,
+                context: CodeActionContext {
+                    diagnostics: vec![diagnostic],
+                },
+            },
+        )
+        .expect("code actions computed");
+
+        assert_eq!(actions.len(), 1);
+        assert_eq!(actions[0].title, "Create dotrepo CI workflow");
+        let workflow_uri = Url::from_file_path(root.join(".github/workflows/dotrepo-check.yml"))
+            .expect("workflow uri")
+            .to_string();
+        let edits = actions[0]
+            .edit
+            .changes
+            .get(&workflow_uri)
+            .expect("workflow edit");
+        assert_eq!(edits.len(), 1);
+        assert!(edits[0]
+            .new_text
+            .contains("dotrepo --root . adoption-status"));
+        assert!(edits[0].new_text.contains("DOTREPO_VERSION"));
 
         fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
