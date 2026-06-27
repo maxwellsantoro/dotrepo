@@ -111,7 +111,7 @@ impl AdjudicationProvider for StubAdjudicationProvider {
     }
 
     fn adjudicate(&self, _request: &AdjudicationRequest) -> Result<AdjudicationProviderResponse> {
-        let mut index = self.next.lock().expect("stub provider lock");
+        let mut index = self.next.lock().unwrap_or_else(|p| p.into_inner());
         let response = self
             .responses
             .get(*index)

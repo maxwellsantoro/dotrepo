@@ -55,21 +55,23 @@ pub(crate) fn verify_path_contained_in_root(root: &Path, path: &Path) -> Result<
         )
     })?;
 
-    if path.exists()
-        || path
-            .symlink_metadata()
-            .is_ok_and(|meta| meta.file_type().is_symlink())
-    {
-        let canonical_path = fs::canonicalize(path)
-            .map_err(|err| anyhow!("failed to canonicalize path {}: {}", path.display(), err))?;
+    // Attempt full canonicalization first. This resolves symlinks and checks the final target.
+    // If the path (or its target) does not exist, canonicalize fails and we fall back to parent check.
+    // This reduces (but cannot eliminate) TOCTOU between check and use for non-existing paths.
+    // Non-existing paths are only allowed when their resolved parent is contained and the
+    // leaf component(s) were already validated to contain only Normal segments by the caller
+    // (see resolve_repository_local_path).
+    if let Ok(canonical_path) = fs::canonicalize(path) {
         if !canonical_path.starts_with(&canonical_root) {
             bail!("path must stay within the repository root");
         }
         return Ok(());
     }
 
+    // Path does not (currently) exist or is dangling. Verify containing parent if it exists.
     if let Some(parent) = path.parent() {
-        if parent.exists() {
+        // Avoid canonicalizing empty or root-like parents unnecessarily.
+        if !parent.as_os_str().is_empty() && parent.exists() {
             let canonical_parent = fs::canonicalize(parent).map_err(|err| {
                 anyhow!("failed to canonicalize path {}: {}", parent.display(), err)
             })?;
@@ -83,10 +85,14 @@ pub(crate) fn verify_path_contained_in_root(root: &Path, path: &Path) -> Result<
 }
 
 pub fn display_path(root: &Path, path: &Path) -> String {
-    path.strip_prefix(root)
-        .unwrap_or(path)
-        .display()
-        .to_string()
+    relative_to_root(root, path).display().to_string()
+}
+
+/// Returns `path` made relative to `root` when `path` is under `root`; otherwise returns `path` unchanged.
+/// Callers should prefer passing paths that were resolved under the root.
+/// Used to avoid leaking absolute paths into user-facing reports, digests, and public JSON.
+pub(crate) fn relative_to_root<'a>(root: &Path, path: &'a Path) -> &'a Path {
+    path.strip_prefix(root).unwrap_or(path)
 }
 
 pub(crate) fn manifest_path(root: &Path) -> PathBuf {
@@ -134,6 +140,47 @@ pub fn validate_repository_identity_segments(host: &str, owner: &str, repo: &str
         let mut components = path.components();
         if !matches!(components.next(), Some(Component::Normal(_))) || components.next().is_some() {
             bail!("{field} must be a single path segment");
+        }
+    }
+    Ok(())
+}
+
+/// Shared depth-limited directory walker that *skips symlinks*.
+/// This eliminates TOCTOU-adjacent symlink handling divergence and symlink-cycle risks
+/// across validation, public export, selection, and claims code paths.
+///
+/// The `on_entry` closure is invoked for every non-symlink entry (file or dir).
+/// Return `true` from the closure to indicate that directories should be recursed into.
+pub(crate) fn walk_dir_entries<F>(dir: &Path, mut on_entry: F) -> Result<()>
+where
+    F: FnMut(&Path, fs::FileType) -> Result<bool>,
+{
+    walk_dir_entries_impl(dir, 0, &mut on_entry)
+}
+
+fn walk_dir_entries_impl(
+    dir: &Path,
+    depth: u32,
+    on_entry: &mut dyn FnMut(&Path, fs::FileType) -> Result<bool>,
+) -> Result<()> {
+    if depth > 20 {
+        bail!(
+            "directory traversal depth exceeded at {} — possible symlink cycle",
+            dir.display()
+        );
+    }
+    for entry in
+        fs::read_dir(dir).map_err(|err| anyhow!("failed to read {}: {}", dir.display(), err))?
+    {
+        let entry = entry?;
+        let path = entry.path();
+        let file_type = entry.file_type()?;
+        if file_type.is_symlink() {
+            continue;
+        }
+        let should_recurse = on_entry(&path, file_type)?;
+        if should_recurse && file_type.is_dir() {
+            walk_dir_entries_impl(&path, depth + 1, on_entry)?;
         }
     }
     Ok(())

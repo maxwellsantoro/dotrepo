@@ -25,6 +25,8 @@ pub use synthesis::{
     write_synthesis, LoadedSynthesis, SynthesisReadReport, SynthesisWritePlan,
 };
 pub(crate) use util::manifest_path;
+pub(crate) use util::relative_to_root;
+pub(crate) use util::walk_dir_entries;
 pub use util::{
     current_timestamp_rfc3339, display_path, normalize_rfc3339, parse_rfc3339, render_rfc3339,
     source_digest, validate_repository_identity_segments,
@@ -318,7 +320,7 @@ pub struct GenerateCheckReport {
 pub struct LoadedManifest {
     pub path: PathBuf,
     pub raw: Vec<u8>,
-    pub manifest: Manifest,
+    pub manifest: std::sync::Arc<Manifest>,
 }
 
 pub fn load_manifest_document(root: &Path) -> Result<LoadedManifest> {
@@ -330,7 +332,7 @@ fn load_manifest_file(path: &Path) -> Result<LoadedManifest> {
     let raw = fs::read(path).map_err(|e| anyhow!("failed to read {}: {}", path.display(), e))?;
     let text = std::str::from_utf8(&raw)
         .map_err(|e| anyhow!("failed to decode {} as UTF-8: {}", path.display(), e))?;
-    let manifest = parse_manifest(text)?;
+    let manifest = std::sync::Arc::new(parse_manifest(text)?);
     Ok(LoadedManifest {
         path: path.to_path_buf(),
         raw,
@@ -339,7 +341,8 @@ fn load_manifest_file(path: &Path) -> Result<LoadedManifest> {
 }
 
 pub fn load_manifest_from_root(root: &Path) -> Result<Manifest> {
-    Ok(load_manifest_document(root)?.manifest)
+    // LoadedManifest now holds Arc<Manifest> internally for sharing; return an owned copy here.
+    Ok((*load_manifest_document(root)?.manifest).clone())
 }
 
 pub fn record_summary(manifest: &Manifest) -> RecordSummary {
@@ -353,7 +356,9 @@ pub fn record_summary(manifest: &Manifest) -> RecordSummary {
 
 pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
     let candidates = resolve_candidates(root)?;
-    let selected = &candidates[0];
+    let selected = candidates
+        .first()
+        .expect("resolve_candidates must return at least one candidate");
     let value = query_manifest_value(&selected.manifest, path)?;
     let reason = resolve_selection_reason(&candidates, selected);
     Ok(QueryReport {
@@ -384,7 +389,9 @@ pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
 
 pub fn trust_repository(root: &Path) -> Result<TrustReport> {
     let candidates = resolve_candidates(root)?;
-    let selected = &candidates[0];
+    let selected = candidates
+        .first()
+        .expect("resolve_candidates must return at least one candidate");
     let reason = resolve_selection_reason(&candidates, selected);
     Ok(TrustReport {
         root: root.display().to_string(),
@@ -665,6 +672,7 @@ fn generate_check_managed_surface(
     let stale = match status.state {
         ManagedFileState::Missing => true,
         ManagedFileState::FullyGenerated | ManagedFileState::PartiallyManaged => {
+            // For Fully/Partially the current content is present (guaranteed by inspect + merge paths above)
             current.as_deref().unwrap_or_default() != expected
         }
         ManagedFileState::Unmanaged => false,

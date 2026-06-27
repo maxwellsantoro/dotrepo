@@ -334,50 +334,73 @@ pub fn import_repository_with_options(
     let has_contributing_security = contributing_security.is_some();
     let has_template_security = template_security.is_some();
 
-    let security_contact = parsed_security
-        .contact
-        .clone()
-        .or(contributing_security)
-        .or(template_security)
-        .or_else(|| {
-            if security.is_some() {
-                Some("unknown".into())
-            } else {
-                None
-            }
-        });
-    let security_note = if security.is_some() {
-        if parsed_security.contact.is_some() {
-            parsed_security.note.clone()
-        } else if has_contributing_security {
-            Some(
+    let (security_contact, security_note) = infer_security_contact_and_note(
+        security.as_ref(),
+        &parsed_security,
+        contributing_security,
+        template_security,
+        has_contributing_security,
+        has_template_security,
+    );
+
+    /// Centralizes the decision tree for security_contact + accompanying note.
+    /// This reduces duplication between the primary import path and any preview/evidence synthesis.
+    fn infer_security_contact_and_note(
+        security: Option<&ImportedFile>,
+        parsed: &SecurityImportMetadata,
+        from_contributing: Option<String>,
+        from_template: Option<String>,
+        has_contrib: bool,
+        has_template: bool,
+    ) -> (Option<String>, Option<String>) {
+        let contact = parsed
+            .contact
+            .clone()
+            .or(from_contributing.clone())
+            .or(from_template.clone())
+            .or_else(|| {
+                if security.is_some() {
+                    Some("unknown".into())
+                } else {
+                    None
+                }
+            });
+
+        let note = if security.is_some() {
+            if parsed.contact.is_some() {
+                parsed.note.clone()
+            } else if has_contrib {
+                Some(
                 "SECURITY.md did not expose a direct mailbox or reporting URL. `security_contact` was extracted from CONTRIBUTING.md instead."
                     .to_string(),
             )
-        } else if has_template_security {
-            Some(
+            } else if has_template {
+                Some(
                 "SECURITY.md did not expose a direct mailbox or reporting URL. `security_contact` was extracted from an issue template instead."
                     .to_string(),
             )
-        } else {
-            Some(
+            } else {
+                Some(
                 "SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional."
                     .to_string(),
             )
-        }
-    } else if has_contributing_security {
-        Some(
-            "`security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found)."
-                .to_string(),
-        )
-    } else if has_template_security {
-        Some(
-            "`security_contact` was extracted from an issue template (no SECURITY.md found)."
-                .to_string(),
-        )
-    } else {
-        None
-    };
+            }
+        } else if has_contrib {
+            Some(
+                "`security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found)."
+                    .to_string(),
+            )
+        } else if has_template {
+            Some(
+                "`security_contact` was extracted from an issue template (no SECURITY.md found)."
+                    .to_string(),
+            )
+        } else {
+            None
+        };
+
+        (contact, note)
+    }
     let imported_commands = infer_imported_commands(&ImportSources {
         cargo_toml: cargo_toml.as_ref(),
         package_json: package_json.as_ref(),
@@ -398,6 +421,9 @@ pub fn import_repository_with_options(
         .filter(|name| !name.is_empty())
         .unwrap_or("repository")
         .to_string();
+    // dir_name fallback is used only when README signals are weak or absent.
+    // import_quality_gate and expectations track when "repo.name" is inferred.
+    // Root at filesystem root or odd paths will produce the generic default.
 
     let repo_name = match readme_metadata.title {
         Some(ref title) => {

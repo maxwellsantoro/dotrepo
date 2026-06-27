@@ -913,7 +913,7 @@ mod tests {
         assert_eq!(init_response["result"]["protocolVersion"], "2025-11-25");
 
         let tools_response = handle_request(&mut state, request(2, "tools/list", json!({})))
-            .expect("tools/list responds");
+            .unwrap_or_else(|e| panic!("tools/list responds: {e}"));
         let tools = tools_response["result"]["tools"]
             .as_array()
             .expect("tool list");
@@ -951,7 +951,7 @@ description = "Outside workspace"
         )
         .expect("outside manifest written");
 
-        let previous = std::env::current_dir().expect("cwd");
+        let previous = std::env::current_dir().unwrap_or_else(|e| panic!("cwd: {e}"));
         std::env::set_current_dir(&workspace).expect("chdir into workspace");
 
         let outside_name = outside
@@ -997,7 +997,7 @@ name = "orbit"
 description = "Fast local-first sync engine"
 "#,
         )
-        .expect("manifest written");
+        .unwrap_or_else(|e| panic!("manifest written: {e}"));
 
         let response = call_tool(
             "dotrepo.query",
@@ -1023,7 +1023,7 @@ description = "Fast local-first sync engine"
             Value::Array(Vec::new())
         );
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1048,7 +1048,7 @@ description = "Fast local-first sync engine"
             .iter()
             .any(|field| field == "repo.name"));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1068,7 +1068,7 @@ name = "broken"
 description = "Missing source and trust"
 "#,
         )
-        .expect("manifest written");
+        .unwrap_or_else(|e| panic!("manifest written: {e}"));
 
         let response = call_tool(
             "dotrepo.validate",
@@ -1095,7 +1095,7 @@ description = "Missing source and trust"
             .iter()
             .any(|diagnostic| diagnostic["source"] == Value::String("validate_manifest".into())));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1115,7 +1115,7 @@ description = "Missing source and trust"
         );
 
         let response = handle_request(&mut state, request(2, "tools/list", json!({})))
-            .expect("tools/list responds");
+            .unwrap_or_else(|e| panic!("tools/list responds: {e}"));
         assert_eq!(
             response["error"]["message"],
             Value::String(
@@ -1147,7 +1147,7 @@ description = "Missing source and trust"
             .expect("error string")
             .contains("already exists"));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1168,7 +1168,7 @@ description = "Missing source and trust"
             "existing\n"
         );
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1199,7 +1199,7 @@ description = "Missing source and trust"
             "preexisting evidence\n"
         );
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1249,7 +1249,7 @@ description = "Missing source and trust"
                 .expect("generate-check report serializes")
         );
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1345,7 +1345,7 @@ text = "Accepted claim."
                 .expect("claim report serializes")
         );
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1378,7 +1378,7 @@ text = "Accepted claim."
             .expect("import preview report serializes")
         );
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     struct LookupEnvGuard {
@@ -1751,7 +1751,7 @@ contributing = "skip"
 pull_request_template = "skip"
 "#,
         )
-        .expect("manifest written");
+        .unwrap_or_else(|e| panic!("manifest written: {e}"));
 
         let document = dotrepo_core::load_manifest_document(root).expect("manifest loads");
         let outputs = dotrepo_core::managed_outputs(root, &document.manifest, &document.raw)

@@ -10,6 +10,10 @@ import re
 import subprocess
 import sys
 from collections import Counter
+
+# Canonical way to invoke Python helpers under the uv-managed environment.
+# This makes the AGENTS.md "uv run" contract explicit and auditable.
+UV_PYTHON: list[str] = ["uv", "run", "python"]
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -324,9 +328,7 @@ def select_refresh_batch_or_empty(
 
     run(
         [
-            "uv",
-            "run",
-            "python",
+            *UV_PYTHON,
             "scripts/select_review_batch.py",
             "--input",
             str(refresh_batches),
@@ -799,9 +801,7 @@ def main() -> int:
 
     run(
         [
-            "uv",
-            "run",
-            "python",
+            *UV_PYTHON,
             "scripts/plan_refresh_review_batches.py",
             "--input",
             str(refresh_plan),

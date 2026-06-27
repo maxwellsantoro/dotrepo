@@ -1,4 +1,4 @@
-use anyhow::{anyhow, bail, Result};
+use anyhow::{bail, Result};
 use dotrepo_schema::{Manifest, RecordMode};
 use serde::Serialize;
 use std::fs;
@@ -149,31 +149,19 @@ fn collect_root_manifest_targets(root: &Path) -> Result<Vec<PathBuf>> {
     Ok(targets)
 }
 pub(crate) fn collect_record_paths(dir: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
-    collect_record_paths_recursive(dir, out, 0)
-}
-
-fn collect_record_paths_recursive(dir: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
-    if depth > 20 {
-        bail!(
-            "directory traversal depth exceeded at {} — possible symlink cycle",
-            dir.display()
-        );
-    }
-    for entry in
-        fs::read_dir(dir).map_err(|err| anyhow!("failed to read {}: {}", dir.display(), err))?
-    {
-        let entry = entry?;
-        let path = entry.path();
-        let file_type = entry.file_type()?;
+    crate::walk_dir_entries(dir, |path, file_type| {
         if file_type.is_dir() {
-            collect_record_paths_recursive(&path, out, depth + 1)?;
+            // continue recursing
+            Ok(true)
         } else if file_type.is_file()
             && path.file_name().and_then(|name| name.to_str()) == Some("record.toml")
         {
-            out.push(path);
+            out.push(path.to_path_buf());
+            Ok(false)
+        } else {
+            Ok(false)
         }
-    }
-    Ok(())
+    })
 }
 
 pub fn validate_manifest(root: &Path, manifest: &Manifest) -> Result<()> {
@@ -366,14 +354,9 @@ pub fn validate_index_root(index_root: &Path) -> Result<Vec<IndexFinding>> {
 
     let mut findings = Vec::new();
     for record_dir in record_dirs {
-        let display_path = record_dir
-            .strip_prefix(index_root)
-            .unwrap_or(&record_dir)
-            .join("record.toml");
-        let synthesis_display_path = record_dir
-            .strip_prefix(index_root)
-            .unwrap_or(&record_dir)
-            .join("synthesis.toml");
+        let display_path = crate::relative_to_root(index_root, &record_dir).join("record.toml");
+        let synthesis_display_path =
+            crate::relative_to_root(index_root, &record_dir).join("synthesis.toml");
 
         let document = match load_manifest_document(&record_dir) {
             Ok(document) => document,
@@ -467,10 +450,7 @@ fn validate_index_entry(
     manifest: &Manifest,
 ) -> Vec<IndexFinding> {
     let mut findings = Vec::new();
-    let relative_record = record_dir
-        .strip_prefix(index_root)
-        .unwrap_or(record_dir)
-        .join("record.toml");
+    let relative_record = crate::relative_to_root(index_root, record_dir).join("record.toml");
 
     let relative = match record_dir.strip_prefix(index_root.join("repos")) {
         Ok(relative) => relative,
@@ -573,10 +553,7 @@ fn validate_index_entry(
 fn validate_claim_directory(index_root: &Path, claim_dir: &Path) -> Vec<IndexFinding> {
     let mut findings = Vec::new();
     let claim_path = claim_dir.join("claim.toml");
-    let relative_claim = claim_path
-        .strip_prefix(index_root)
-        .unwrap_or(&claim_path)
-        .to_path_buf();
+    let relative_claim = crate::relative_to_root(index_root, &claim_path).to_path_buf();
 
     let directory_identity = match claim_directory_identity(index_root, claim_dir) {
         Ok(identity) => identity,
@@ -612,68 +589,46 @@ fn validate_claim_directory(index_root: &Path, claim_dir: &Path) -> Vec<IndexFin
     findings
 }
 pub(crate) fn collect_record_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
-    collect_record_dirs_recursive(root, out, 0)
-}
-
-fn collect_record_dirs_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
-    if depth > 20 {
-        bail!(
-            "directory traversal depth exceeded at {} — possible symlink cycle",
-            root.display()
-        );
-    }
-    for entry in
-        fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
-    {
-        let entry = entry?;
-        let path = entry.path();
-        let file_type = entry.file_type()?;
+    crate::walk_dir_entries(root, |path, file_type| {
         if file_type.is_dir() {
-            collect_record_dirs_recursive(&path, out, depth + 1)?;
+            Ok(true)
         } else if file_type.is_file()
             && path.file_name().and_then(|name| name.to_str()) == Some("record.toml")
         {
             if let Some(parent) = path.parent() {
                 out.push(parent.to_path_buf());
             }
+            Ok(false)
+        } else {
+            Ok(false)
         }
-    }
-    Ok(())
+    })
 }
 
 fn collect_claim_dirs(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
-    collect_claim_dirs_recursive(root, out, 0)
-}
-
-fn collect_claim_dirs_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
-    if depth > 20 {
-        bail!(
-            "directory traversal depth exceeded at {} — possible symlink cycle",
-            root.display()
-        );
-    }
-    for entry in
-        fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
-    {
-        let entry = entry?;
-        let path = entry.path();
-        let file_type = entry.file_type()?;
+    crate::walk_dir_entries(root, |path, file_type| {
         if file_type.is_dir() {
             if path.file_name().and_then(|name| name.to_str()) == Some("claims") {
-                for claim_entry in fs::read_dir(&path)
-                    .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?
-                {
-                    let claim_entry = claim_entry?;
-                    if claim_entry.file_type()?.is_dir() {
-                        out.push(claim_entry.path());
+                // Collect direct child dirs of the claims/ directory without further recursion here
+                // (walk will not recurse because we return false, and we manually read children).
+                // We still skip symlinks because walk already did for the claims dir itself.
+                if let Ok(read) = fs::read_dir(path) {
+                    for claim_entry in read.flatten() {
+                        if let Ok(ft) = claim_entry.file_type() {
+                            if ft.is_dir() && !ft.is_symlink() {
+                                out.push(claim_entry.path());
+                            }
+                        }
                     }
                 }
+                Ok(false) // do not recurse under claims/ via walker
             } else {
-                collect_claim_dirs_recursive(&path, out, depth + 1)?;
+                Ok(true)
             }
+        } else {
+            Ok(false)
         }
-    }
-    Ok(())
+    })
 }
 fn lint_index_entry(path: PathBuf, manifest: &Manifest, evidence: &str) -> Vec<IndexFinding> {
     let mut findings = Vec::new();

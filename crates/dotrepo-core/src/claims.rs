@@ -314,6 +314,12 @@ pub fn load_claim_directory(root: &Path, claim_dir: &Path) -> Result<LoadedClaim
             let entry =
                 entry.map_err(|e| anyhow!("failed to inspect {}: {}", events_dir.display(), e))?;
             let path = entry.path();
+            // Skip symlinks for consistency with other traversals
+            if let Ok(ft) = entry.file_type() {
+                if ft.is_symlink() {
+                    continue;
+                }
+            }
             if path.extension().and_then(|ext| ext.to_str()) == Some("toml") {
                 event_paths.push(path);
             }
@@ -787,11 +793,11 @@ pub(crate) fn candidate_claim_context(
         .ok()?
         .filter_map(|entry| entry.ok())
         .filter_map(|entry| {
-            entry
-                .file_type()
-                .ok()
-                .filter(|ty| ty.is_dir())
-                .map(|_| entry.path())
+            let ft = entry.file_type().ok()?;
+            if ft.is_symlink() || !ft.is_dir() {
+                return None;
+            }
+            Some(entry.path())
         })
         .collect::<Vec<_>>();
     claim_dirs.sort();

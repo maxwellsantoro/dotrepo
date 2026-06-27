@@ -169,7 +169,8 @@ pub(crate) fn candidate_from_document(
     root: &Path,
     document: &LoadedManifest,
 ) -> Result<CandidateManifest> {
-    let manifest = Arc::new(document.manifest.clone());
+    // Share the Arc; the underlying Manifest is parsed only once at load time.
+    let manifest = std::sync::Arc::clone(&document.manifest);
     let manifest_json = manifest_to_json(&manifest)?;
     Ok(CandidateManifest {
         manifest_path: display_path(root, &document.path),

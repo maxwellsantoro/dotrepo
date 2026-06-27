@@ -65,8 +65,12 @@ pub fn cmd_init(root: PathBuf, force: bool) -> Result<()> {
         .file_name()
         .and_then(|name| name.to_str())
         .filter(|name| !name.is_empty())
-        .unwrap_or("repository");
-    let manifest = render_scaffold_manifest(repo_name)?;
+        .unwrap_or("repository")
+        .to_string();
+    // When falling back to directory name or the generic default "repository",
+    // the generated .repo will contain a placeholder. Users should edit repo.name
+    // (or pass a more specific root). We deliberately do not fail init for usability.
+    let manifest = render_scaffold_manifest(&repo_name)?;
     fs::write(&manifest_path, manifest)?;
     println!("initialized {}", manifest_path.display());
     Ok(())

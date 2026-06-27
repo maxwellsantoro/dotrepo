@@ -1400,7 +1400,7 @@ description = "Fast local-first sync engine"
             .iter()
             .any(|message| message.contains("record.trust must be set for overlay records")));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1423,7 +1423,7 @@ status = "draft"
         assert!(diagnostics[0].message.contains("failed to parse manifest"));
         assert!(diagnostics[0].range.start.line > 0);
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1431,7 +1431,7 @@ status = "draft"
         let root = temp_dir("lsp-open");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .expect("file path uri")
+            .unwrap_or_else(|e| panic!("file path uri: {e}"))
             .to_string();
         let message = json!({
             "jsonrpc": JSONRPC_VERSION,
@@ -1458,7 +1458,7 @@ description = "Fast local-first sync engine"
 
         let mut state = ServerState::default();
         let outputs = handle_message(&mut state, &serde_json::to_vec(&message).expect("message"))
-            .expect("message handled");
+            .unwrap_or_else(|e| panic!("message handled: {e}"));
 
         assert_eq!(outputs.len(), 1);
         assert_eq!(outputs[0]["method"], "textDocument/publishDiagnostics");
@@ -1469,7 +1469,7 @@ description = "Fast local-first sync engine"
             .any(|diagnostic| diagnostic["message"]
                 == Value::String("record.source must be set for overlay records".into())));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1477,7 +1477,7 @@ description = "Fast local-first sync engine"
         let root = temp_dir("lsp-completion");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .expect("file path uri")
+            .unwrap_or_else(|e| panic!("file path uri: {e}"))
             .to_string();
         let mut state = ServerState::default();
         open_document(
@@ -1530,7 +1530,7 @@ mode =
         assert!(value_labels.contains(&"\"native\""));
         assert!(value_labels.contains(&"\"overlay\""));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1538,7 +1538,7 @@ mode =
         let root = temp_dir("lsp-hover");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .expect("file path uri")
+            .unwrap_or_else(|e| panic!("file path uri: {e}"))
             .to_string();
         let mut state = ServerState::default();
         open_document(
@@ -1568,7 +1568,7 @@ status = "draft"
         assert!(hover.contents.value.contains("`record.status`"));
         assert!(hover.contents.value.contains("authority and review level"));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1576,7 +1576,7 @@ status = "draft"
         let root = temp_dir("lsp-inline-hover");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .expect("file path uri")
+            .unwrap_or_else(|e| panic!("file path uri: {e}"))
             .to_string();
         let mut state = ServerState::default();
         open_document(
@@ -1604,7 +1604,7 @@ owners = { security_contact = "security@example.com" }
 
         assert!(hover.contents.value.contains("`owners.security_contact`"));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]
@@ -1612,7 +1612,7 @@ owners = { security_contact = "security@example.com" }
         let root = temp_dir("lsp-multiline-hover");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .expect("file path uri")
+            .unwrap_or_else(|e| panic!("file path uri: {e}"))
             .to_string();
         let mut state = ServerState::default();
         open_document(
@@ -1645,7 +1645,7 @@ status = "draft"
         assert!(hover.contents.value.contains("`repo.description`"));
         assert!(!hover.contents.value.contains("### `[record]`"));
 
-        fs::remove_dir_all(root).expect("temp dir removed");
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     fn open_document(state: &mut ServerState, uri: &str, text: &str) {

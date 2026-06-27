@@ -846,7 +846,7 @@ pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
 
     let mut hasher = Sha256::new();
     for path in files {
-        let relative = path.strip_prefix(index_root).unwrap_or(&path);
+        let relative = crate::relative_to_root(index_root, &path);
         hasher.update(relative.as_os_str().as_encoded_bytes());
         hasher.update([0]);
         hasher.update(fs::read(&path).map_err(|err| {
@@ -939,7 +939,7 @@ pub fn public_export_file_manifest(
     let mut files = outputs
         .iter()
         .map(|(path, contents)| {
-            let relative = path.strip_prefix(out_root).unwrap_or(path);
+            let relative = crate::relative_to_root(out_root, path);
             let bytes = contents.as_bytes();
             Ok(PublicExportFileEntry {
                 path: relative.display().to_string(),
@@ -2155,30 +2155,14 @@ pub fn export_public_index_static_with_base(
     Ok(outputs)
 }
 fn collect_files(root: &Path, out: &mut Vec<PathBuf>) -> Result<()> {
-    collect_files_recursive(root, out, 0)
-}
-
-fn collect_files_recursive(root: &Path, out: &mut Vec<PathBuf>, depth: u32) -> Result<()> {
-    if depth > 20 {
-        bail!(
-            "directory traversal depth exceeded at {} — possible symlink cycle",
-            root.display()
-        );
-    }
-    for entry in
-        fs::read_dir(root).map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
-    {
-        let entry = entry?;
-        let path = entry.path();
-        let file_type = entry.file_type()?;
-        if file_type.is_symlink() {
-            continue;
+    crate::walk_dir_entries(root, |path, file_type| {
+        if file_type.is_file() {
+            out.push(path.to_path_buf());
+            Ok(false)
+        } else if file_type.is_dir() {
+            Ok(true)
+        } else {
+            Ok(false)
         }
-        if file_type.is_dir() {
-            collect_files_recursive(&path, out, depth + 1)?;
-        } else if file_type.is_file() {
-            out.push(path);
-        }
-    }
-    Ok(())
+    })
 }

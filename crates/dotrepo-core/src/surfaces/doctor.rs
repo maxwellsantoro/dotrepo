@@ -381,7 +381,10 @@ fn managed_surface_for_doctor(surface: DoctorSurface) -> ManagedSurface {
         DoctorSurface::Security => ManagedSurface::Security,
         DoctorSurface::Contributing => ManagedSurface::Contributing,
         DoctorSurface::Codeowners | DoctorSurface::PullRequestTemplate => {
-            panic!("no managed-surface equivalent for {:?}", surface)
+            // Unreachable: managed_surface_for_doctor is only called for
+            // surfaces that support managed regions (Readme/Security/Contributing).
+            // See doctor_surface_for_managed and surface_supports_managed_regions.
+            unreachable!("no managed-surface equivalent for {:?}", surface)
         }
     }
 }
@@ -571,7 +574,10 @@ fn all_or_nothing_surface_paths(surface: DoctorSurface) -> &'static [&'static st
             "PULL_REQUEST_TEMPLATE.md",
         ],
         DoctorSurface::Readme | DoctorSurface::Security | DoctorSurface::Contributing => {
-            panic!(
+            // Unreachable: callers only invoke all_or_nothing_surface_paths
+            // for Codeowners and PullRequestTemplate (see doctor_surface_for_unsupported_path
+            // and direct match on DoctorSurface).
+            unreachable!(
                 "surface does not use all-or-nothing path resolution: {:?}",
                 surface
             )
@@ -589,7 +595,5 @@ fn managed_region_block(surface: ManagedSurface, body: &str) -> String {
 }
 
 fn relative_or_absolute(root: &Path, path: &Path) -> PathBuf {
-    path.strip_prefix(root)
-        .map(PathBuf::from)
-        .unwrap_or_else(|_| path.to_path_buf())
+    crate::relative_to_root(root, path).to_path_buf()
 }
