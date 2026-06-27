@@ -891,10 +891,16 @@ description = "Reviewed overlay"
         .any(|(path, _)| path == "public/v0/repos/index.json"));
     assert!(rendered
         .iter()
+        .any(|(path, _)| path == "public/v0/files.json"));
+    assert!(rendered
+        .iter()
         .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/index.json"));
     assert!(rendered
         .iter()
         .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/trust.json"));
+    assert!(rendered
+        .iter()
+        .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/profile.json"));
     assert!(rendered
         .iter()
         .any(|(path, _)| path == "public/query-input/github.com/example/orbit.json"));
@@ -905,7 +911,7 @@ description = "Reviewed overlay"
     }));
     assert!(rendered.iter().any(|(path, contents)| {
         path == "public/v0/meta.json"
-            && contents.contains("\"strategy\": \"static_summary_and_trust\"")
+            && contents.contains("\"strategy\": \"static_summary_trust_and_profile\"")
     }));
 
     fs::remove_dir_all(root).expect("temp dir removed");

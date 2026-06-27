@@ -4,12 +4,14 @@ use dotrepo_core::{
     current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_base,
     generate_check_repository, import_repository_with_options, inspect_claim_directory,
     inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
-    preview_surfaces, public_repository_query_or_error_with_base,
-    public_repository_summary_or_error_with_base, public_repository_trust_or_error_with_base,
-    query_repository, resolve_claim_directory, scaffold_claim_directory, trust_repository,
-    validate_index_root, validate_manifest, validate_repository, write_import_outputs,
-    ClaimEventAppendInput, ClaimScaffoldInput, DoctorReport, DoctorSurface, ImportOptions,
-    IndexFindingSeverity, PublicErrorResponse,
+    preview_surfaces, public_repository_batch_profiles_with_base,
+    public_repository_batch_query_with_base, public_repository_profile_or_error_with_base,
+    public_repository_query_or_error_with_base, public_repository_summary_or_error_with_base,
+    public_repository_trust_or_error_with_base, query_repository, resolve_claim_directory,
+    scaffold_claim_directory, trust_repository, validate_index_root, validate_manifest,
+    validate_repository, write_import_outputs, ClaimEventAppendInput, ClaimScaffoldInput,
+    DoctorReport, DoctorSurface, ImportOptions, IndexFindingSeverity, PublicErrorResponse,
+    PublicRepositoryIdentity,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::RecordMode;
@@ -690,6 +692,24 @@ pub fn cmd_public(command: PublicCommand) -> Result<()> {
                 &base_path,
             ))
         }
+        PublicCommand::Profile {
+            index_root,
+            host,
+            owner,
+            repo,
+            base_path,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            print_public_response(public_repository_profile_or_error_with_base(
+                &index_root,
+                &host,
+                &owner,
+                &repo,
+                freshness,
+                &base_path,
+            ))
+        }
         PublicCommand::Trust {
             index_root,
             host,
@@ -707,6 +727,42 @@ pub fn cmd_public(command: PublicCommand) -> Result<()> {
                 freshness,
                 &base_path,
             ))
+        }
+        PublicCommand::BatchProfiles {
+            index_root,
+            repos,
+            base_path,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let identities = parse_public_repository_args(&repos)?;
+            let response = public_repository_batch_profiles_with_base(
+                &index_root,
+                &identities,
+                freshness,
+                &base_path,
+            )?;
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Ok(())
+        }
+        PublicCommand::BatchQuery {
+            index_root,
+            repos,
+            paths,
+            base_path,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let identities = parse_public_repository_args(&repos)?;
+            let response = public_repository_batch_query_with_base(
+                &index_root,
+                &identities,
+                &paths,
+                freshness,
+                &base_path,
+            )?;
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Ok(())
         }
         PublicCommand::Query {
             index_root,
@@ -754,6 +810,35 @@ pub fn cmd_public(command: PublicCommand) -> Result<()> {
             Ok(())
         }
     }
+}
+
+fn parse_public_repository_args(values: &[String]) -> Result<Vec<PublicRepositoryIdentity>> {
+    values
+        .iter()
+        .map(|value| parse_public_repository_arg(value))
+        .collect()
+}
+
+fn parse_public_repository_arg(value: &str) -> Result<PublicRepositoryIdentity> {
+    let trimmed = value.trim();
+    let without_scheme = trimmed
+        .strip_prefix("https://")
+        .or_else(|| trimmed.strip_prefix("http://"))
+        .unwrap_or(trimmed);
+    let without_git = without_scheme.trim_end_matches(".git");
+    let parts = without_git
+        .split('/')
+        .filter(|part| !part.is_empty())
+        .collect::<Vec<_>>();
+    if parts.len() != 3 {
+        bail!("repository must be host/owner/repo or https://host/owner/repo: {value}");
+    }
+    Ok(PublicRepositoryIdentity {
+        host: parts[0].to_string(),
+        owner: parts[1].to_string(),
+        repo: parts[2].to_string(),
+        source: None,
+    })
 }
 
 fn print_public_response<T: Serialize>(

@@ -22,6 +22,7 @@ project tooling rather than additional plan documents.
 - [`public-export-examples.md`](./public-export-examples.md)
 - [`public-freshness.md`](./public-freshness.md)
 - [`public-api-compatibility.md`](./public-api-compatibility.md)
+- [`public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
 - [`../index/README.md`](../index/README.md)
 
 ## Operate the system

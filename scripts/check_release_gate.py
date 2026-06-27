@@ -9,6 +9,7 @@ import shlex
 import shutil
 import socket
 import subprocess
+import sys
 import tarfile
 import tempfile
 import time
@@ -211,11 +212,13 @@ def verify_inline_javascript_syntax(document: str, source: str) -> None:
 
 def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     meta_path = public_dir / "v0" / "meta.json"
+    files_path = public_dir / "v0" / "files.json"
     inventory_path = public_dir / "v0" / "repos" / "index.json"
     homepage_path = public_dir / "index.html"
     docs_path = public_dir / "docs" / "index.html"
     repositories_path = public_dir / "repositories" / "index.html"
     ensure_file(meta_path)
+    ensure_file(files_path)
     ensure_file(inventory_path)
     ensure_file(homepage_path)
     ensure_file(docs_path)
@@ -227,6 +230,16 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
         raise SystemExit(f"public export metadata is missing apiVersion: {meta_path}")
     if not isinstance(meta.get("snapshotDigest"), str) or not meta["snapshotDigest"]:
         raise SystemExit(f"public export metadata is missing snapshotDigest: {meta_path}")
+    validators = meta.get("validators")
+    if not isinstance(validators, dict):
+        raise SystemExit(f"public export metadata is missing validators: {meta_path}")
+    expected_snapshot_validator = f"sha256:{meta['snapshotDigest']}"
+    if validators.get("snapshot") != expected_snapshot_validator:
+        raise SystemExit(
+            f"public export metadata has invalid snapshot validator: {meta_path}"
+        )
+    if not isinstance(validators.get("etag"), str) or not validators["etag"]:
+        raise SystemExit(f"public export metadata is missing etag validator: {meta_path}")
     stale_after = meta.get("staleAfter")
     if not isinstance(stale_after, str) or not stale_after:
         raise SystemExit(f"public export metadata is missing staleAfter: {meta_path}")
@@ -235,6 +248,23 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
         raise SystemExit(
             f"public export metadata staleAfter is already in the past: {meta_path} ({stale_after})"
         )
+
+    file_manifest = json.loads(files_path.read_text())
+    files = file_manifest.get("files")
+    if not isinstance(files, list) or not files:
+        raise SystemExit(f"public export file manifest is empty: {files_path}")
+    manifest_paths = {entry.get("path") for entry in files if isinstance(entry, dict)}
+    if "v0/meta.json" not in manifest_paths or "v0/repos/index.json" not in manifest_paths:
+        raise SystemExit(f"public export file manifest is missing core paths: {files_path}")
+    for entry in files:
+        if not isinstance(entry, dict):
+            raise SystemExit(f"public export file manifest has invalid entry: {files_path}")
+        if not isinstance(entry.get("path"), str) or not entry["path"]:
+            raise SystemExit(f"public export file manifest entry is missing path: {files_path}")
+        if not isinstance(entry.get("bytes"), int) or entry["bytes"] <= 0:
+            raise SystemExit(f"public export file manifest entry is missing bytes: {files_path}")
+        if not isinstance(entry.get("sha256"), str) or len(entry["sha256"]) != 64:
+            raise SystemExit(f"public export file manifest entry is missing sha256: {files_path}")
 
     inventory = json.loads(inventory_path.read_text())
     repositories = inventory.get("repositories")
@@ -667,12 +697,12 @@ def main() -> int:
         cwd=repo_root,
     )
     run(
-        ["python3", "scripts/render_public_pages_landing.py", "--input", str(public_dir)],
+        [sys.executable, "scripts/render_public_pages_landing.py", "--input", str(public_dir)],
         cwd=repo_root,
     )
     run(
         [
-            "python3",
+            sys.executable,
             "scripts/sync_cloudflare_public_snapshot.py",
             "--input",
             str(public_dir),
@@ -683,7 +713,7 @@ def main() -> int:
     )
     run(
         [
-            "python3",
+            sys.executable,
             "scripts/package_public_export.py",
             "--input",
             str(public_dir),
@@ -719,7 +749,7 @@ def main() -> int:
         target = host_target(repo_root)
         run(
             [
-                "python3",
+                sys.executable,
                 "scripts/package_release_binaries.py",
                 "--bin-dir",
                 "target/release",

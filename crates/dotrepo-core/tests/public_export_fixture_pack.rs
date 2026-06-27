@@ -174,6 +174,43 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
                 == Value::String("/v0/repos/github.com/example/nova/trust.json".into())
     }));
 
+    let meta =
+        serde_json::from_str::<Value>(generated.get("v0/meta.json").expect("metadata output"))
+            .expect("metadata parses");
+    assert_eq!(
+        meta["validators"]["snapshot"],
+        Value::String(format!(
+            "sha256:{}",
+            meta["snapshotDigest"].as_str().unwrap()
+        ))
+    );
+    assert_eq!(
+        meta["validators"]["etag"],
+        Value::String(format!(
+            "\"dotrepo-v0-{}\"",
+            meta["snapshotDigest"].as_str().unwrap()
+        ))
+    );
+
+    let files = serde_json::from_str::<Value>(
+        generated
+            .get("v0/files.json")
+            .expect("file manifest output"),
+    )
+    .expect("file manifest parses");
+    assert_eq!(files["fileCount"], Value::from(10));
+    let file_entries = files["files"].as_array().expect("file manifest entries");
+    assert!(file_entries.iter().any(|entry| {
+        entry["path"] == Value::String("v0/meta.json".into())
+            && entry["sha256"]
+                .as_str()
+                .is_some_and(|digest| digest.len() == 64)
+    }));
+    assert!(file_entries.iter().any(|entry| {
+        entry["path"] == Value::String("v0/repos/github.com/example/orbit/profile.json".into())
+            && entry["bytes"].as_u64().is_some_and(|bytes| bytes > 0)
+    }));
+
     let orbit_query_input = serde_json::from_str::<Value>(
         generated
             .get("query-input/github.com/example/orbit.json")
@@ -187,6 +224,21 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
     assert_eq!(
         orbit_query_input["selection"]["manifest"]["repo"]["description"],
         Value::String("Reviewed orbital tooling metadata.".into())
+    );
+    let orbit_profile = serde_json::from_str::<Value>(
+        generated
+            .get("v0/repos/github.com/example/orbit/profile.json")
+            .expect("orbit profile output"),
+    )
+    .expect("orbit profile parses");
+    assert_eq!(
+        orbit_profile["purpose"],
+        Value::String("Reviewed orbital tooling metadata.".into())
+    );
+    assert_eq!(orbit_profile["completeness"]["hasDocs"], Value::Bool(true));
+    assert_eq!(
+        orbit_profile["trust"]["selectedStatus"],
+        Value::String("reviewed".into())
     );
 
     let nova_query_input = serde_json::from_str::<Value>(

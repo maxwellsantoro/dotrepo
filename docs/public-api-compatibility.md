@@ -6,10 +6,13 @@ surface.
 It covers the `v0` contracts for:
 
 - repository summary
+- compact research profile
+- batch profile and batch field lookup
 - trust wrapper
 - query wrapper
 - machine-readable public errors
 - static inventory under `public/v0/repos/index.json`
+- static file manifest under `public/v0/files.json`
 
 ## Current rule
 
@@ -33,11 +36,13 @@ The executable compatibility source of truth lives in:
 
 The checked-in manifest freezes:
 
-- required top-level keys for summary, trust, query, inventory, and error
-  responses
+- required top-level keys for metadata, file manifest, summary, profile, batch
+  profile, batch query, trust, query, inventory, and error responses
 - required nested keys for freshness, selection, record summaries, artifact
   locators, and claim context
-- stable link-key names for summary, trust, query, and inventory entries
+- stable link-key names for summary, profile, trust, query, and inventory entries
+- batch item success/error envelope keys
+- metadata validator keys and file-manifest entry keys
 - the current machine-readable public error codes:
   - `invalid_repository_identity`
   - `query_path_not_found`

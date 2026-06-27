@@ -173,10 +173,28 @@ Example hosted lookup call:
 ```
 
 That resolves the repository against `https://dotrepo.org/`, returns the hosted
-summary, trust, and query entrypoints, and optionally includes the live query
-result for the requested dot-path. See
+summary, profile, trust, and query entrypoints, and optionally includes the live
+query result for the requested dot-path. See
 [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md) for the
 tool contract.
+
+For repeated known-repository access, the reference CLI also exposes batch
+profile and field lookup:
+
+```bash
+cargo run -p dotrepo-cli -- public batch-profiles --repo github.com/sharkdp/fd
+cargo run -p dotrepo-cli -- public batch-query --repo github.com/sharkdp/fd --path repo.description
+```
+
+The public lookup-efficiency harness measures task hit rate, field hit rate,
+and compact payload bytes for representative known-repository workloads:
+
+```bash
+python3 scripts/measure_public_lookup_efficiency.py \
+  --public-root public \
+  --index-root index \
+  --workload scripts/fixtures/public_lookup_workload.json
+```
 
 ## Why now
 

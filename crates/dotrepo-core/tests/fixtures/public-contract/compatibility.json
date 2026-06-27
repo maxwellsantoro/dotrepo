@@ -1,5 +1,13 @@
 {
   "apiVersion": "v0",
+  "metadata": {
+    "requiredKeys": ["apiVersion", "generatedAt", "snapshotDigest", "staleAfter", "strategy", "validators"],
+    "validatorKeys": ["snapshot", "etag"]
+  },
+  "fileManifest": {
+    "requiredKeys": ["apiVersion", "freshness", "fileCount", "files"],
+    "entryKeys": ["path", "bytes", "sha256"]
+  },
   "freshness": {
     "requiredKeys": ["generatedAt", "snapshotDigest", "staleAfter"]
   },
@@ -31,20 +39,46 @@
   "inventory": {
     "requiredKeys": ["apiVersion", "freshness", "repositoryCount", "repositories"],
     "entryKeys": ["identity", "name", "description", "links"],
-    "linkKeys": ["self", "trust", "queryTemplate", "indexPath"]
+    "linkKeys": ["self", "trust", "profile", "queryTemplate", "indexPath"]
   },
   "summary": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "repository", "selection", "conflicts", "links"],
     "repositoryKeys": ["name", "description", "homepage", "docsRoot", "gettingStarted", "ownersTeam", "securityContact"],
-    "linkKeys": ["self", "trust", "queryTemplate", "indexPath"]
+    "linkKeys": ["self", "trust", "profile", "queryTemplate", "indexPath"]
+  },
+  "profile": {
+    "requiredKeys": [
+      "apiVersion",
+      "freshness",
+      "identity",
+      "record",
+      "purpose",
+      "name",
+      "execution",
+      "docs",
+      "ownership",
+      "completeness",
+      "trust",
+      "conflicts",
+      "links"
+    ],
+    "linkKeys": ["self", "repository", "trust", "queryTemplate", "indexPath"]
+  },
+  "batchProfile": {
+    "requiredKeys": ["apiVersion", "freshness", "resultCount", "results"],
+    "itemKeys": ["identity"]
+  },
+  "batchQuery": {
+    "requiredKeys": ["apiVersion", "freshness", "repositoryCount", "pathCount", "resultCount", "results"],
+    "itemKeys": ["identity", "path"]
   },
   "trust": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "selection", "conflicts", "links"],
-    "linkKeys": ["self", "repository", "queryTemplate", "indexPath"]
+    "linkKeys": ["self", "repository", "profile", "queryTemplate", "indexPath"]
   },
   "query": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "path", "value", "selection", "conflicts", "links"],
-    "linkKeys": ["self", "repository", "trust", "queryTemplate", "indexPath"]
+    "linkKeys": ["self", "repository", "trust", "profile", "queryTemplate", "indexPath"]
   },
   "errors": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "error"],

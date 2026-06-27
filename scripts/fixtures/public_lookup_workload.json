@@ -1,0 +1,29 @@
+{
+  "schema": "dotrepo-public-lookup-workload/v0",
+  "description": "Fixture workload for known-repository agent lookups against the public export surface.",
+  "tasks": [
+    {
+      "id": "orbit-docs-and-owner",
+      "repository": "github.com/example/orbit",
+      "fields": [
+        "repo.description",
+        "repo.homepage",
+        "docs.root",
+        "docs.getting_started",
+        "owners.security_contact"
+      ]
+    },
+    {
+      "id": "nova-runtime-basics",
+      "repository": "github.com/example/nova",
+      "fields": [
+        "repo.description",
+        "repo.homepage",
+        "repo.license",
+        "repo.languages",
+        "repo.build",
+        "repo.test"
+      ]
+    }
+  ]
+}

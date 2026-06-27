@@ -60,7 +60,23 @@ print("repositories:", inventory["repositoryCount"])
 PY
 ```
 
-## 5. Inspect one repository summary locally
+## 5. Inspect cache validators and changed files
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+meta = json.loads(Path("public/v0/meta.json").read_text())
+files = json.loads(Path("public/v0/files.json").read_text())
+print("etag:", meta["validators"]["etag"])
+print("files:", files["fileCount"])
+for entry in files["files"][:5]:
+    print(entry["path"], entry["sha256"])
+PY
+```
+
+## 6. Inspect one repository summary locally
 
 ```bash
 python3 - <<'PY'
@@ -76,7 +92,30 @@ print(summary["selection"]["reason"])
 PY
 ```
 
-## 6. Agent-style traversal from inventory to trust
+## 7. Agent-style traversal from inventory to profile
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+root = Path("public/v0")
+inventory = json.loads((root / "repos/index.json").read_text())
+
+for entry in inventory["repositories"]:
+    identity = entry["identity"]
+    profile_path = entry["links"]["profile"].removeprefix("/v0/")
+    profile = json.loads((root / profile_path).read_text())
+    print({
+        "repo": f'{identity["host"]}/{identity["owner"]}/{identity["repo"]}',
+        "purpose": profile["purpose"],
+        "status": profile["trust"]["selectedStatus"],
+        "hasDocs": profile["completeness"]["hasDocs"],
+    })
+PY
+```
+
+## 8. Agent-style traversal from inventory to trust
 
 ```bash
 python3 - <<'PY'
@@ -98,10 +137,10 @@ for entry in inventory["repositories"]:
 PY
 ```
 
-## 7. Query one field locally from the same index snapshot
+## 9. Query one field locally from the same index snapshot
 
-The static export ships summary and trust JSON files. It does not precompute
-arbitrary query-path files. For local query access, either use
+The static export ships summary, profile, and trust JSON files. It does not
+precompute arbitrary query-path files. For local query access, either use
 `dotrepo public query` directly or run `dotrepo-public-query` against the
 exported tree when you want same-origin hosted-query review:
 
@@ -109,7 +148,24 @@ exported tree when you want same-origin hosted-query review:
 cargo run -p dotrepo-cli -- public query github.com sharkdp fd repo.description
 ```
 
-## 8. Serve a local same-origin public surface plus query route
+## 10. Batch profile and field lookup
+
+```bash
+cargo run -p dotrepo-cli -- public batch-profiles \
+  --repo github.com/sharkdp/fd \
+  --repo github.com/BurntSushi/ripgrep
+
+cargo run -p dotrepo-cli -- public batch-query \
+  --repo github.com/sharkdp/fd \
+  --repo github.com/BurntSushi/ripgrep \
+  --path repo.description \
+  --path repo.test
+```
+
+Batch responses keep going when one repository or field is missing. Each result
+contains either the normal response object or a machine-readable `error`.
+
+## 11. Serve a local same-origin public surface plus query route
 
 ```bash
 cargo run -p dotrepo-cli -- public export \
@@ -136,3 +192,19 @@ print(inventory['repositories'][0]['links']['queryTemplate'])
 
 These examples work against the current deployed public tree, a local export,
 the local same-origin runtime, or extracted CI artifacts.
+
+## 12. Measure known-repository lookup efficiency
+
+```bash
+python3 scripts/measure_public_lookup_efficiency.py \
+  --public-root public \
+  --index-root index \
+  --workload scripts/fixtures/public_lookup_workload.json \
+  --output-json /tmp/dotrepo-lookup-efficiency.json \
+  --output-md /tmp/dotrepo-lookup-efficiency.md
+```
+
+The benchmark reports task hit rate, field hit rate, compact public payload
+bytes, and deterministic source/evidence proxy bytes. See
+[`docs/public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
+for interpretation notes.

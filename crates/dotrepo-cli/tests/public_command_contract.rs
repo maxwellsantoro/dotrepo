@@ -82,6 +82,104 @@ fn public_summary_honors_base_path_in_links() {
 }
 
 #[test]
+fn public_profile_success_prints_compact_research_shape() {
+    let index_root = fixture_index_root();
+    let output = run_public(&[
+        "public",
+        "profile",
+        "github.com",
+        "example",
+        "orbit",
+        "--index-root",
+        index_root.to_str().expect("fixture path is utf-8"),
+        "--base-path",
+        "/dotrepo",
+    ]);
+
+    assert!(output.status.success(), "command should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    assert_eq!(json["apiVersion"], Value::String("v0".into()));
+    assert_eq!(
+        json["purpose"],
+        Value::String("Reviewed orbital tooling metadata.".into())
+    );
+    assert_eq!(json["completeness"]["hasDocs"], Value::Bool(true));
+    assert_eq!(
+        json["trust"]["selectedStatus"],
+        Value::String("reviewed".into())
+    );
+    assert_eq!(
+        json["links"]["repository"],
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/index.json".into())
+    );
+}
+
+#[test]
+fn public_batch_profiles_reports_successes_and_item_errors() {
+    let index_root = fixture_index_root();
+    let output = run_public(&[
+        "public",
+        "batch-profiles",
+        "--repo",
+        "github.com/example/orbit",
+        "--repo",
+        "github.com/missing/repo",
+        "--index-root",
+        index_root.to_str().expect("fixture path is utf-8"),
+    ]);
+
+    assert!(output.status.success(), "batch envelope should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    assert_eq!(json["apiVersion"], Value::String("v0".into()));
+    assert_eq!(json["resultCount"], Value::Number(2.into()));
+    assert_eq!(
+        json["results"][0]["profile"]["purpose"],
+        Value::String("Reviewed orbital tooling metadata.".into())
+    );
+    assert_eq!(
+        json["results"][1]["error"]["code"],
+        Value::String("repository_not_found".into())
+    );
+}
+
+#[test]
+fn public_batch_query_reports_multiple_paths_and_item_errors() {
+    let index_root = fixture_index_root();
+    let output = run_public(&[
+        "public",
+        "batch-query",
+        "--repo",
+        "https://github.com/example/orbit",
+        "--path",
+        "repo.description",
+        "--path",
+        "repo.missing_field",
+        "--index-root",
+        index_root.to_str().expect("fixture path is utf-8"),
+    ]);
+
+    assert!(output.status.success(), "batch envelope should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    assert_eq!(json["repositoryCount"], Value::Number(1.into()));
+    assert_eq!(json["pathCount"], Value::Number(2.into()));
+    assert_eq!(json["resultCount"], Value::Number(2.into()));
+    assert_eq!(
+        json["results"][0]["query"]["value"],
+        Value::String("Reviewed orbital tooling metadata.".into())
+    );
+    assert_eq!(
+        json["results"][1]["error"]["code"],
+        Value::String("query_path_not_found".into())
+    );
+}
+
+#[test]
 fn public_query_missing_path_prints_json_error_and_exit_code_1() {
     let index_root = fixture_index_root();
     let output = run_public(&[

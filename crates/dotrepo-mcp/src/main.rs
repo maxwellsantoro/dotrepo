@@ -1477,7 +1477,7 @@ text = "Accepted claim."
                     "generatedAt": "2026-04-18T03:02:00Z",
                     "snapshotDigest": "abc123",
                     "staleAfter": "2026-04-19T03:02:00Z",
-                    "strategy": "static_summary_and_trust",
+                    "strategy": "static_summary_trust_and_profile",
                 }),
             ),
             (

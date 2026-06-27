@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "8cc5a42d31fc8c6494caaa0bcc1c4fbdf0887992d95834d809be6289a3f9e6fb",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "example",
+    "repo": "nova",
+    "source": "https://github.com/example/nova"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/example/nova/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/example/nova",
+    "evidencePath": "repos/github.com/example/nova/evidence.md"
+  },
+  "purpose": "Reviewed metadata with an accepted pending maintainer claim.",
+  "name": "nova",
+  "homepage": "https://github.com/example/nova",
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "reviewed",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/example/nova/profile.json",
+    "repository": "/v0/repos/github.com/example/nova/index.json",
+    "trust": "/v0/repos/github.com/example/nova/trust.json",
+    "queryTemplate": "/v0/repos/github.com/example/nova/query?path={dot_path}",
+    "indexPath": "repos/github.com/example/nova/"
+  }
+}

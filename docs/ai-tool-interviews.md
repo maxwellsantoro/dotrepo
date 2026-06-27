@@ -42,8 +42,8 @@ model.
 - Resolve deterministic evidence first and escalate only unresolved fields to
   progressively stronger models.
 - Harden existing records while expanding coverage.
-- Add compact research profiles and batch access so one indexed result can
-  replace repeated repository scraping across many agent sessions.
+- Use the compact research profile and batch lookup contracts so one indexed
+  result can replace repeated repository scraping across many agent sessions.
 - Treat discovery and ranking as products built on trusted profiles, not as a
   substitute for profile quality.
 

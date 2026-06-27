@@ -19,6 +19,7 @@
       "links": {
         "self": "/v0/repos/github.com/example/nova/index.json",
         "trust": "/v0/repos/github.com/example/nova/trust.json",
+        "profile": "/v0/repos/github.com/example/nova/profile.json",
         "queryTemplate": "/v0/repos/github.com/example/nova/query?path={dot_path}",
         "indexPath": "repos/github.com/example/nova/"
       }
@@ -35,6 +36,7 @@
       "links": {
         "self": "/v0/repos/github.com/example/orbit/index.json",
         "trust": "/v0/repos/github.com/example/orbit/trust.json",
+        "profile": "/v0/repos/github.com/example/orbit/profile.json",
         "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
         "indexPath": "repos/github.com/example/orbit/"
       }

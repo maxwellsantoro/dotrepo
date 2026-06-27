@@ -37,7 +37,8 @@ The export-first hosted surface is the right default because it:
 
 - a searchable repository catalog at `https://dotrepo.org/repositories/`
 - product, protocol, and trust documentation on the same origin
-- hosted repository summary and trust responses at stable URLs
+- hosted repository summary, compact profile, and trust responses at stable
+  URLs
 - a deployed same-origin query runtime on the public origin
 - the CI artifact `public-export-v0` for offline inspection
 - the CI artifact `public-export-v0-bundle` for versioned review snapshots
@@ -52,8 +53,17 @@ The export-first hosted surface is the right default because it:
 ### For agents
 
 - stable `meta.json` with snapshot digest and freshness metadata
+- stable `files.json` with per-file SHA-256 and byte-size metadata for
+  delta-friendly consumers
 - stable repository `index.json` with inventory and navigation links
+- stable per-repository `profile.json` with compact research fields,
+  completeness signals, record freshness, evidence path, and trust context
 - stable per-repository `trust.json` with selection, conflict, and claim context
+- local and CLI batch profile/query responses for repeated known-repository
+  access
+- a deterministic lookup-efficiency benchmark harness for measuring task hit
+  rate, field hit rate, and compact payload bytes against representative
+  workloads
 - the same claim-aware selection and conflict semantics used by local
   query/trust flows
 - a stable `queryTemplate` contract in public responses, with deployed,
@@ -62,8 +72,12 @@ The export-first hosted surface is the right default because it:
 ## What the public surface provides
 
 The hosted public surface provides:
-- read-only repository summary and trust responses
+- read-only repository summary, profile, and trust responses
+- compact per-repository research profiles for known repository identities
+- batch profile and batch field lookup through the reference CLI/core contract
 - identity-first, trust-aware public responses
+- snapshot validators and a file manifest for cheap revalidation and selective
+  refetch
 - claim-aware visibility without a second semantic layer
 - a live accepted maintainer-claim example from the checked-in index, currently
   `github.com/maxwellsantoro/ries-rs` with `superseded` handoff state linked to
@@ -91,7 +105,7 @@ contracts.
 ## What is not yet in scope
 
 The public surface does not yet include:
-- structured research discovery, ranking, comparison, or batch-profile APIs
+- structured research discovery, ranking, or comparison APIs
 - live mutation or submission APIs
 - public SLA expectations
 
@@ -118,9 +132,11 @@ Start with:
 
 ## Next steps
 
-The next public-surface work is hardening freshness and caching, adding compact
-research profiles and batch access, and eventually building discovery and
-comparison on top of the trusted index. See [`ROADMAP.md`](../ROADMAP.md) for the
-active sequence. For the freshness definitions that apply to responses, see
+The next public-surface work is hardening freshness and caching, scaling profile
+coverage, running the lookup-efficiency benchmark on a larger representative
+workload, adding hosted batch access where appropriate, and eventually building
+discovery and comparison on top of the trusted index. See
+[`ROADMAP.md`](../ROADMAP.md) for the active sequence. For the freshness
+definitions that apply to responses, see
 [`docs/public-freshness.md`](./public-freshness.md). For deployment operations,
 see [`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).

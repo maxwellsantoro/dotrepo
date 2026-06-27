@@ -197,6 +197,51 @@ pub enum PublicCommand {
         #[arg(long)]
         stale_after_hours: Option<i64>,
     },
+    /// Render one compact public research profile response as JSON.
+    Profile {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        host: String,
+        owner: String,
+        repo: String,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
+    /// Render compact public research profiles for multiple repositories.
+    BatchProfiles {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        /// Repository identity as host/owner/repo or https://host/owner/repo.
+        #[arg(long = "repo", required = true)]
+        repos: Vec<String>,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
+    /// Render public query responses for multiple repositories and dot paths.
+    BatchQuery {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        /// Repository identity as host/owner/repo or https://host/owner/repo.
+        #[arg(long = "repo", required = true)]
+        repos: Vec<String>,
+        /// Dot path to query. Repeat for multiple fields.
+        #[arg(long = "path", required = true)]
+        paths: Vec<String>,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
     /// Render one public trust response as JSON.
     Trust {
         #[arg(long, default_value = "index")]
@@ -226,7 +271,7 @@ pub enum PublicCommand {
         #[arg(long)]
         stale_after_hours: Option<i64>,
     },
-    /// Export the static-first public JSON tree for repository summary and trust.
+    /// Export the static-first public JSON tree for repository summary, profile, and trust.
     Export {
         #[arg(long, default_value = "index")]
         index_root: PathBuf,

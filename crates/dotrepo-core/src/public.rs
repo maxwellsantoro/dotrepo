@@ -19,7 +19,7 @@ use crate::validation::collect_record_dirs;
 use crate::{ConflictRelationship, RecordSummary, SelectionReason};
 
 pub(crate) const PUBLIC_API_VERSION: &str = "v0";
-pub(crate) const PUBLIC_STATIC_STRATEGY: &str = "static_summary_and_trust";
+pub(crate) const PUBLIC_STATIC_STRATEGY: &str = "static_summary_trust_and_profile";
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
@@ -55,6 +55,75 @@ pub struct PublicRepositoryFields {
     pub owners_team: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub security_contact: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchExecution {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub build: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub test: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchDocs {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub root: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub getting_started: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub architecture: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub api: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchOwnership {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub maintainers: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub team: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub security_contact: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchCompleteness {
+    pub has_build: bool,
+    pub has_test: bool,
+    pub has_docs: bool,
+    pub has_security_contact: bool,
+    pub has_ownership_signal: bool,
+    pub has_license: bool,
+    pub conflict_count: usize,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchRecord {
+    pub manifest_path: String,
+    pub mode: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub source: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub generated_at: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub evidence_path: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchTrust {
+    pub selected_status: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub confidence: Option<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub provenance: Vec<String>,
+    pub selection_reason: SelectionReason,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -101,6 +170,8 @@ pub struct PublicRepositoryLinks {
     pub repository: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trust: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub profile: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub query_template: Option<String>,
     pub index_path: String,
@@ -158,6 +229,77 @@ pub struct PublicQueryResponse {
     pub selection: PublicSelectionReport,
     pub conflicts: Vec<PublicConflictReport>,
     pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchProfileResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub identity: PublicRepositoryIdentity,
+    pub record: PublicResearchRecord,
+    pub purpose: String,
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub homepage: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub license: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub visibility: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub project_status: Option<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub languages: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub topics: Vec<String>,
+    pub execution: PublicResearchExecution,
+    pub docs: PublicResearchDocs,
+    pub ownership: PublicResearchOwnership,
+    pub completeness: PublicResearchCompleteness,
+    pub trust: PublicResearchTrust,
+    pub conflicts: Vec<PublicConflictReport>,
+    pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicBatchProfileItem {
+    pub identity: PublicRepositoryIdentity,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub profile: Option<Box<PublicResearchProfileResponse>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub error: Option<Box<PublicErrorDetail>>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicBatchProfileResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub result_count: usize,
+    pub results: Vec<PublicBatchProfileItem>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicBatchQueryItem {
+    pub identity: PublicRepositoryIdentity,
+    pub path: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub query: Option<Box<PublicQueryResponse>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub error: Option<Box<PublicErrorDetail>>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicBatchQueryResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub repository_count: usize,
+    pub path_count: usize,
+    pub result_count: usize,
+    pub results: Vec<PublicBatchQueryItem>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -223,6 +365,31 @@ pub struct PublicSnapshotMetadata {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub stale_after: Option<String>,
     pub strategy: &'static str,
+    pub validators: PublicCacheValidators,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicCacheValidators {
+    pub snapshot: String,
+    pub etag: String,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicExportFileEntry {
+    pub path: String,
+    pub bytes: usize,
+    pub sha256: String,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicExportFileManifest {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub file_count: usize,
+    pub files: Vec<PublicExportFileEntry>,
 }
 pub(crate) fn public_record_artifacts(
     display_root: &Path,
@@ -244,6 +411,7 @@ pub(crate) fn public_record_artifacts(
 #[derive(Debug, Clone, Copy)]
 enum PublicLinkKind {
     Repository,
+    Profile,
     Trust,
     Query,
 }
@@ -320,6 +488,100 @@ fn public_repository_fields(manifest: &Manifest) -> PublicRepositoryFields {
     }
 }
 
+fn public_research_execution(manifest: &Manifest) -> PublicResearchExecution {
+    PublicResearchExecution {
+        build: non_empty_value(manifest.repo.build.as_deref()),
+        test: non_empty_value(manifest.repo.test.as_deref()),
+    }
+}
+
+fn public_research_docs(manifest: &Manifest) -> PublicResearchDocs {
+    let docs = manifest.docs.as_ref();
+    PublicResearchDocs {
+        root: docs.and_then(|docs| non_empty_value(docs.root.as_deref())),
+        getting_started: docs.and_then(|docs| non_empty_value(docs.getting_started.as_deref())),
+        architecture: docs.and_then(|docs| non_empty_value(docs.architecture.as_deref())),
+        api: docs.and_then(|docs| non_empty_value(docs.api.as_deref())),
+    }
+}
+
+fn public_research_ownership(manifest: &Manifest) -> PublicResearchOwnership {
+    let owners = manifest.owners.as_ref();
+    PublicResearchOwnership {
+        maintainers: owners
+            .map(|owners| owners.maintainers.clone())
+            .unwrap_or_default(),
+        team: owners.and_then(|owners| non_empty_value(owners.team.as_deref())),
+        security_contact: owners
+            .and_then(|owners| non_empty_value(owners.security_contact.as_deref()))
+            .filter(|value| value != "unknown"),
+    }
+}
+
+fn public_research_completeness(
+    manifest: &Manifest,
+    docs: &PublicResearchDocs,
+    ownership: &PublicResearchOwnership,
+    conflict_count: usize,
+) -> PublicResearchCompleteness {
+    PublicResearchCompleteness {
+        has_build: non_empty_value(manifest.repo.build.as_deref()).is_some(),
+        has_test: non_empty_value(manifest.repo.test.as_deref()).is_some(),
+        has_docs: docs.root.is_some()
+            || docs.getting_started.is_some()
+            || docs.architecture.is_some()
+            || docs.api.is_some(),
+        has_security_contact: ownership.security_contact.is_some(),
+        has_ownership_signal: !ownership.maintainers.is_empty() || ownership.team.is_some(),
+        has_license: non_empty_value(manifest.repo.license.as_deref()).is_some(),
+        conflict_count,
+    }
+}
+
+fn record_status_name(status: &dotrepo_schema::RecordStatus) -> &'static str {
+    match status {
+        dotrepo_schema::RecordStatus::Draft => "draft",
+        dotrepo_schema::RecordStatus::Imported => "imported",
+        dotrepo_schema::RecordStatus::Inferred => "inferred",
+        dotrepo_schema::RecordStatus::Reviewed => "reviewed",
+        dotrepo_schema::RecordStatus::Verified => "verified",
+        dotrepo_schema::RecordStatus::Canonical => "canonical",
+    }
+}
+
+fn record_mode_name(mode: &dotrepo_schema::RecordMode) -> &'static str {
+    match mode {
+        dotrepo_schema::RecordMode::Native => "native",
+        dotrepo_schema::RecordMode::Overlay => "overlay",
+    }
+}
+
+fn public_research_record(index_root: &Path, selected: &CandidateManifest) -> PublicResearchRecord {
+    PublicResearchRecord {
+        manifest_path: display_path(index_root, &selected.path),
+        mode: record_mode_name(&selected.manifest.record.mode).to_string(),
+        source: selected.manifest.record.source.clone(),
+        generated_at: selected.manifest.record.generated_at.clone(),
+        evidence_path: public_record_artifacts(index_root, selected)
+            .and_then(|artifacts| artifacts.evidence_path),
+    }
+}
+
+fn public_research_trust(
+    selected: &CandidateManifest,
+    selection_reason: SelectionReason,
+) -> PublicResearchTrust {
+    let trust = selected.manifest.record.trust.as_ref();
+    PublicResearchTrust {
+        selected_status: record_status_name(&selected.manifest.record.status).to_string(),
+        confidence: trust.and_then(|trust| non_empty_value(trust.confidence.as_deref())),
+        provenance: trust
+            .map(|trust| trust.provenance.clone())
+            .unwrap_or_default(),
+        selection_reason,
+    }
+}
+
 fn normalize_public_base_path(base_path: &str) -> Result<String> {
     let trimmed = base_path.trim();
     if trimmed.is_empty() || trimmed == "/" {
@@ -348,6 +610,7 @@ fn public_links_with_base(
     let base_path = normalize_public_base_path(base_path)?;
     let repository_root = format!("{base_path}/v0/repos/{host}/{owner}/{repo}");
     let repository = format!("{repository_root}/index.json");
+    let profile = format!("{repository_root}/profile.json");
     let trust = format!("{repository_root}/trust.json");
     let query_template = format!("{repository_root}/query?path={{dot_path}}");
     let index_path = format!("repos/{host}/{owner}/{repo}/");
@@ -357,6 +620,15 @@ fn public_links_with_base(
             self_link: repository,
             repository: None,
             trust: Some(trust),
+            profile: Some(profile),
+            query_template: Some(query_template),
+            index_path,
+        },
+        PublicLinkKind::Profile => PublicRepositoryLinks {
+            self_link: profile,
+            repository: Some(repository),
+            trust: Some(trust),
+            profile: None,
             query_template: Some(query_template),
             index_path,
         },
@@ -364,6 +636,7 @@ fn public_links_with_base(
             self_link: trust,
             repository: Some(repository),
             trust: None,
+            profile: Some(profile),
             query_template: Some(query_template),
             index_path,
         },
@@ -374,6 +647,7 @@ fn public_links_with_base(
             ),
             repository: Some(repository),
             trust: Some(trust),
+            profile: Some(profile),
             query_template: Some(query_template),
             index_path,
         },
@@ -471,13 +745,55 @@ pub fn current_public_freshness(
 }
 
 pub fn public_snapshot_metadata(freshness: PublicFreshness) -> PublicSnapshotMetadata {
+    let validators = public_cache_validators(&freshness.snapshot_digest);
     PublicSnapshotMetadata {
         api_version: PUBLIC_API_VERSION,
         generated_at: freshness.generated_at,
         snapshot_digest: freshness.snapshot_digest,
         stale_after: freshness.stale_after,
         strategy: PUBLIC_STATIC_STRATEGY,
+        validators,
     }
+}
+
+pub fn public_cache_validators(snapshot_digest: &str) -> PublicCacheValidators {
+    PublicCacheValidators {
+        snapshot: format!("sha256:{snapshot_digest}"),
+        etag: format!("\"dotrepo-v0-{snapshot_digest}\""),
+    }
+}
+
+fn sha256_hex(bytes: &[u8]) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(bytes);
+    format!("{:x}", hasher.finalize())
+}
+
+pub fn public_export_file_manifest(
+    out_root: &Path,
+    freshness: PublicFreshness,
+    outputs: &[(PathBuf, String)],
+) -> Result<PublicExportFileManifest> {
+    let mut files = outputs
+        .iter()
+        .map(|(path, contents)| {
+            let relative = path.strip_prefix(out_root).unwrap_or(path);
+            let bytes = contents.as_bytes();
+            Ok(PublicExportFileEntry {
+                path: relative.display().to_string(),
+                bytes: bytes.len(),
+                sha256: sha256_hex(bytes),
+            })
+        })
+        .collect::<Result<Vec<_>>>()?;
+    files.sort_by(|left, right| left.path.cmp(&right.path));
+
+    Ok(PublicExportFileManifest {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        file_count: files.len(),
+        files,
+    })
 }
 
 pub fn list_index_repository_identities(
@@ -635,6 +951,73 @@ pub fn public_repository_trust_with_base(
     })
 }
 
+pub fn public_repository_profile(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+) -> Result<PublicResearchProfileResponse> {
+    public_repository_profile_with_base(index_root, host, owner, repo, freshness, "/")
+}
+
+pub fn public_repository_profile_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicResearchProfileResponse> {
+    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
+    let candidates = resolve_candidates(&scope_root)?;
+    let selected = &candidates[0];
+    let reason = resolve_selection_reason(&candidates, selected);
+    let docs = public_research_docs(&selected.manifest);
+    let ownership = public_research_ownership(&selected.manifest);
+    let conflicts = candidates
+        .iter()
+        .skip(1)
+        .map(|candidate| PublicConflictReport {
+            relationship: if candidate.rank == selected.rank {
+                ConflictRelationship::Parallel
+            } else {
+                ConflictRelationship::Superseded
+            },
+            reason: resolve_conflict_reason(reason, selected, candidate),
+            value: None,
+            record: public_selected_record(index_root, candidate),
+        })
+        .collect::<Vec<_>>();
+
+    Ok(PublicResearchProfileResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        identity: public_identity(host, owner, repo, selected),
+        record: public_research_record(index_root, selected),
+        purpose: selected.manifest.repo.description.clone(),
+        name: selected.manifest.repo.name.clone(),
+        homepage: non_empty_value(selected.manifest.repo.homepage.as_deref()),
+        license: non_empty_value(selected.manifest.repo.license.as_deref()),
+        visibility: non_empty_value(selected.manifest.repo.visibility.as_deref()),
+        project_status: non_empty_value(selected.manifest.repo.status.as_deref()),
+        languages: selected.manifest.repo.languages.clone(),
+        topics: selected.manifest.repo.topics.clone(),
+        execution: public_research_execution(&selected.manifest),
+        completeness: public_research_completeness(
+            &selected.manifest,
+            &docs,
+            &ownership,
+            conflicts.len(),
+        ),
+        docs,
+        ownership,
+        trust: public_research_trust(selected, reason),
+        conflicts,
+        links: public_links_with_base(host, owner, repo, PublicLinkKind::Profile, None, base_path)?,
+    })
+}
+
 pub fn public_repository_query(
     index_root: &Path,
     host: &str,
@@ -694,6 +1077,119 @@ pub fn public_repository_query_with_base(
             base_path,
         )?,
     })
+}
+
+pub fn public_repository_batch_profiles_with_base(
+    index_root: &Path,
+    identities: &[PublicRepositoryIdentity],
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicBatchProfileResponse> {
+    normalize_public_base_path(base_path)?;
+    let mut results = Vec::new();
+    for identity in identities {
+        let requested_identity = PublicRepositoryIdentity {
+            host: identity.host.clone(),
+            owner: identity.owner.clone(),
+            repo: identity.repo.clone(),
+            source: identity.source.clone(),
+        };
+        match public_repository_profile_or_error_with_base(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            freshness.clone(),
+            base_path,
+        ) {
+            Ok(profile) => results.push(PublicBatchProfileItem {
+                identity: profile.identity.clone(),
+                profile: Some(Box::new(profile)),
+                error: None,
+            }),
+            Err(error) => results.push(PublicBatchProfileItem {
+                identity: requested_identity,
+                profile: None,
+                error: Some(error.error),
+            }),
+        }
+    }
+
+    Ok(PublicBatchProfileResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        result_count: results.len(),
+        results,
+    })
+}
+
+pub fn public_repository_batch_profiles(
+    index_root: &Path,
+    identities: &[PublicRepositoryIdentity],
+    freshness: PublicFreshness,
+) -> Result<PublicBatchProfileResponse> {
+    public_repository_batch_profiles_with_base(index_root, identities, freshness, "/")
+}
+
+pub fn public_repository_batch_query_with_base(
+    index_root: &Path,
+    identities: &[PublicRepositoryIdentity],
+    paths: &[String],
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicBatchQueryResponse> {
+    normalize_public_base_path(base_path)?;
+    let mut results = Vec::new();
+    for identity in identities {
+        for path in paths {
+            let requested_identity = PublicRepositoryIdentity {
+                host: identity.host.clone(),
+                owner: identity.owner.clone(),
+                repo: identity.repo.clone(),
+                source: identity.source.clone(),
+            };
+            match public_repository_query_or_error_with_base(
+                index_root,
+                &identity.host,
+                &identity.owner,
+                &identity.repo,
+                path,
+                freshness.clone(),
+                base_path,
+            ) {
+                Ok(query) => results.push(PublicBatchQueryItem {
+                    identity: query.identity.clone(),
+                    path: path.clone(),
+                    query: Some(Box::new(query)),
+                    error: None,
+                }),
+                Err(error) => results.push(PublicBatchQueryItem {
+                    identity: requested_identity,
+                    path: path.clone(),
+                    query: None,
+                    error: Some(error.error),
+                }),
+            }
+        }
+    }
+
+    Ok(PublicBatchQueryResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        repository_count: identities.len(),
+        path_count: paths.len(),
+        result_count: results.len(),
+        results,
+    })
+}
+
+pub fn public_repository_batch_query(
+    index_root: &Path,
+    identities: &[PublicRepositoryIdentity],
+    paths: &[String],
+    freshness: PublicFreshness,
+) -> Result<PublicBatchQueryResponse> {
+    public_repository_batch_query_with_base(index_root, identities, paths, freshness, "/")
 }
 
 pub fn public_query_input_snapshot(
@@ -893,6 +1389,28 @@ pub fn public_repository_trust_or_error_with_base(
         .map_err(|error| public_error_response(host, owner, repo, None, freshness, &error))
 }
 
+pub fn public_repository_profile_or_error(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+) -> std::result::Result<PublicResearchProfileResponse, PublicErrorResponse> {
+    public_repository_profile_or_error_with_base(index_root, host, owner, repo, freshness, "/")
+}
+
+pub fn public_repository_profile_or_error_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> std::result::Result<PublicResearchProfileResponse, PublicErrorResponse> {
+    public_repository_profile_with_base(index_root, host, owner, repo, freshness.clone(), base_path)
+        .map_err(|error| public_error_response(host, owner, repo, None, freshness, &error))
+}
+
 pub fn public_repository_query_or_error(
     index_root: &Path,
     host: &str,
@@ -968,6 +1486,14 @@ pub fn export_public_index_static_with_base(
             freshness.clone(),
             base_path,
         )?;
+        let profile = public_repository_profile_with_base(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            freshness.clone(),
+            base_path,
+        )?;
         inventory.push(PublicRepositoryInventoryEntry {
             identity: summary.identity.clone(),
             name: summary.repository.name.clone(),
@@ -981,6 +1507,10 @@ pub fn export_public_index_static_with_base(
         outputs.push((
             repo_base.join("trust.json"),
             serde_json::to_string_pretty(&trust)?,
+        ));
+        outputs.push((
+            repo_base.join("profile.json"),
+            serde_json::to_string_pretty(&profile)?,
         ));
         outputs.push((
             out_root.join(public_query_input_relative_path(
@@ -1001,10 +1531,15 @@ pub fn export_public_index_static_with_base(
         out_root.join("v0/repos/index.json"),
         serde_json::to_string_pretty(&PublicRepositoryInventoryResponse {
             api_version: PUBLIC_API_VERSION,
-            freshness,
+            freshness: freshness.clone(),
             repository_count: inventory.len(),
             repositories: inventory,
         })?,
+    ));
+    let file_manifest = public_export_file_manifest(out_root, freshness, &outputs)?;
+    outputs.push((
+        out_root.join("v0/files.json"),
+        serde_json::to_string_pretty(&file_manifest)?,
     ));
 
     Ok(outputs)

@@ -303,6 +303,20 @@ Deliver:
 - measured hit rate for representative agent research workloads
 - published scrape-versus-dotrepo efficiency benchmark
 
+Current status:
+
+- compact per-repository `profile.json` responses are generated in the static
+  public export and available through `dotrepo public profile`
+- local/core batch profile and batch field lookup are available through
+  `dotrepo public batch-profiles` and `dotrepo public batch-query`
+- static exports include `meta.validators` and `v0/files.json` for
+  snapshot-level revalidation and selective refetch
+- `scripts/measure_public_lookup_efficiency.py` now produces deterministic
+  task hit-rate, field hit-rate, and payload-byte reports for known-repository
+  workloads against a public export
+- profile coverage scale, hosted batch access, richer delta protocols, and
+  a larger published production workload benchmark remain open
+
 Exit criteria:
 
 - agents can answer known-repository questions without cloning or scraping in a

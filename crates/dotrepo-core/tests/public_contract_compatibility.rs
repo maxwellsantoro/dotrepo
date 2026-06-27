@@ -1,7 +1,9 @@
 use dotrepo_core::{
-    export_public_index_static, index_snapshot_digest, public_repository_query_or_error,
-    public_repository_summary_or_error, public_repository_trust_or_error, ConflictRelationship,
-    PublicFreshness, SelectionReason,
+    export_public_index_static, index_snapshot_digest, public_repository_batch_profiles,
+    public_repository_batch_query, public_repository_profile_or_error,
+    public_repository_query_or_error, public_repository_summary_or_error,
+    public_repository_trust_or_error, ConflictRelationship, PublicFreshness,
+    PublicRepositoryIdentity, SelectionReason,
 };
 use serde::Deserialize;
 use serde::Serialize;
@@ -14,6 +16,8 @@ use std::path::PathBuf;
 #[serde(rename_all = "camelCase")]
 struct CompatibilityManifest {
     api_version: String,
+    metadata: MetadataSpec,
+    file_manifest: FileManifestSpec,
     freshness: KeySpec,
     identity: IdentitySpec,
     selection: KeySpec,
@@ -21,9 +25,28 @@ struct CompatibilityManifest {
     record_summary: RecordSummarySpec,
     inventory: InventorySpec,
     summary: ResponseSpec,
+    profile: ResponseSpec,
+    batch_profile: BatchResponseSpec,
+    batch_query: BatchResponseSpec,
     trust: ResponseSpec,
     query: ResponseSpec,
     errors: ErrorSpec,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct MetadataSpec {
+    #[serde(rename = "requiredKeys")]
+    required_keys: Vec<String>,
+    validator_keys: Vec<String>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct FileManifestSpec {
+    #[serde(rename = "requiredKeys")]
+    required_keys: Vec<String>,
+    entry_keys: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -70,6 +93,14 @@ struct ResponseSpec {
     link_keys: Vec<String>,
     #[serde(default)]
     repository_keys: Vec<String>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct BatchResponseSpec {
+    #[serde(rename = "requiredKeys")]
+    required_keys: Vec<String>,
+    item_keys: Vec<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -324,6 +355,111 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         true,
         "nova.summary.selection.record",
     );
+
+    let orbit_profile = serde_json::to_value(
+        public_repository_profile_or_error(
+            &fixture_index_root(),
+            "github.com",
+            "example",
+            "orbit",
+            freshness.clone(),
+        )
+        .expect("orbit profile succeeds"),
+    )
+    .expect("orbit profile serializes");
+    assert_eq!(
+        orbit_profile["apiVersion"],
+        Value::String(manifest.api_version.clone())
+    );
+    assert_has_keys(&orbit_profile, &manifest.profile.required_keys, "profile");
+    assert_has_keys(
+        &orbit_profile["freshness"],
+        &manifest.freshness.required_keys,
+        "profile.freshness",
+    );
+    assert_has_keys(
+        &orbit_profile["identity"],
+        &manifest.identity.required_keys,
+        "profile.identity",
+    );
+    assert_has_keys(
+        &orbit_profile["links"],
+        &manifest.profile.link_keys,
+        "profile.links",
+    );
+    assert_exact_keys(
+        &orbit_profile["links"],
+        &manifest.profile.link_keys,
+        "profile.links",
+    );
+
+    let batch_identities = vec![
+        PublicRepositoryIdentity {
+            host: "github.com".into(),
+            owner: "example".into(),
+            repo: "orbit".into(),
+            source: None,
+        },
+        PublicRepositoryIdentity {
+            host: "github.com".into(),
+            owner: "missing".into(),
+            repo: "repo".into(),
+            source: None,
+        },
+    ];
+    let batch_profiles = serde_json::to_value(
+        public_repository_batch_profiles(
+            &fixture_index_root(),
+            &batch_identities,
+            freshness.clone(),
+        )
+        .expect("batch profiles succeeds"),
+    )
+    .expect("batch profiles serializes");
+    assert_has_keys(
+        &batch_profiles,
+        &manifest.batch_profile.required_keys,
+        "batchProfile",
+    );
+    for item in batch_profiles["results"]
+        .as_array()
+        .expect("batchProfile.results array")
+    {
+        assert_has_keys(item, &manifest.batch_profile.item_keys, "batchProfile.item");
+        assert!(
+            item.get("profile").is_some() ^ item.get("error").is_some(),
+            "batchProfile.item should contain exactly one of profile or error"
+        );
+    }
+
+    let batch_query = serde_json::to_value(
+        public_repository_batch_query(
+            &fixture_index_root(),
+            &batch_identities,
+            &[
+                "repo.description".to_string(),
+                "repo.missing_field".to_string(),
+            ],
+            freshness.clone(),
+        )
+        .expect("batch query succeeds"),
+    )
+    .expect("batch query serializes");
+    assert_has_keys(
+        &batch_query,
+        &manifest.batch_query.required_keys,
+        "batchQuery",
+    );
+    for item in batch_query["results"]
+        .as_array()
+        .expect("batchQuery.results array")
+    {
+        assert_has_keys(item, &manifest.batch_query.item_keys, "batchQuery.item");
+        assert!(
+            item.get("query").is_some() ^ item.get("error").is_some(),
+            "batchQuery.item should contain exactly one of query or error"
+        );
+    }
 
     let orbit_trust = serde_json::to_value(
         public_repository_trust_or_error(
@@ -605,8 +741,57 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         sample_public_freshness(),
     )
     .expect("public export succeeds");
+    let meta_contents = generated_export
+        .iter()
+        .find_map(|(path, contents)| {
+            path.strip_prefix(expected_root())
+                .ok()
+                .filter(|relative| relative == &PathBuf::from("v0/meta.json"))
+                .map(|_| contents)
+        })
+        .expect("metadata output exists");
+    let meta = serde_json::from_str::<Value>(meta_contents).expect("metadata parses");
+    assert_has_keys(&meta, &manifest.metadata.required_keys, "metadata");
+    assert_has_keys(
+        &meta["validators"],
+        &manifest.metadata.validator_keys,
+        "metadata.validators",
+    );
+    assert_exact_keys(
+        &meta["validators"],
+        &manifest.metadata.validator_keys,
+        "metadata.validators",
+    );
+
+    let file_manifest_contents = generated_export
+        .iter()
+        .find_map(|(path, contents)| {
+            path.strip_prefix(expected_root())
+                .ok()
+                .filter(|relative| relative == &PathBuf::from("v0/files.json"))
+                .map(|_| contents)
+        })
+        .expect("file manifest output exists");
+    let file_manifest =
+        serde_json::from_str::<Value>(file_manifest_contents).expect("file manifest parses");
+    assert_has_keys(
+        &file_manifest,
+        &manifest.file_manifest.required_keys,
+        "fileManifest",
+    );
+    for entry in file_manifest["files"]
+        .as_array()
+        .expect("fileManifest.files array")
+    {
+        assert_has_keys(
+            entry,
+            &manifest.file_manifest.entry_keys,
+            "fileManifest.entry",
+        );
+    }
+
     let inventory_contents = generated_export
-        .into_iter()
+        .iter()
         .find_map(|(path, contents)| {
             path.strip_prefix(expected_root())
                 .ok()

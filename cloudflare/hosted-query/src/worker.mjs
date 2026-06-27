@@ -136,6 +136,7 @@ function buildQueryLinks(host, owner, repo, path, basePath) {
     self: `${repositoryRoot}/query?path=${path}`,
     repository: `${repositoryRoot}/index.json`,
     trust: `${repositoryRoot}/trust.json`,
+    profile: `${repositoryRoot}/profile.json`,
     queryTemplate: `${repositoryRoot}/query?path={dot_path}`,
     indexPath: `repos/${host}/${owner}/${repo}/`
   };

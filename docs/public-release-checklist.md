@@ -23,13 +23,17 @@ For the canonical freshness semantics used by these outputs, see
 ## Artifact inspection
 
 - `public/v0/meta.json` exists and has the expected `apiVersion`
+- `public/v0/meta.json` includes `validators.snapshot` and `validators.etag`
+- `public/v0/files.json` exists and lists emitted JSON payloads with SHA-256
+  digests
 - the required `v0` response/link/error keys still match `docs/public-api-compatibility.md`
 - `public/v0/repos/index.json` exists and `repositoryCount` matches the bundle
 - inventory links honor the hosted `--base-path`
 - `public/index.html` and `.nojekyll` exist for the hosted static entry
 - `public/repositories/index.html` exposes the generated catalog
 - `public/docs/` and `public/writing/` contain their expected entry pages
-- representative repository `index.json` and `trust.json` files open cleanly
+- representative repository `index.json`, `profile.json`, and `trust.json`
+  files open cleanly
 - representative `query-input/<host>/<owner>/<repo>.json` files exist for the
   same repositories
 - the packaged bundle extracts to one self-describing root directory

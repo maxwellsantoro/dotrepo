@@ -43,6 +43,30 @@ It answers: "When should I stop trusting this snapshot without rechecking?"
 It is an operational hint, not a guarantee that the underlying repository data
 became invalid at that time.
 
+### `validators`
+
+`meta.json` also carries cache validators derived from `snapshotDigest`:
+
+- `validators.snapshot` is the digest in explicit `sha256:<digest>` form
+- `validators.etag` is the recommended strong ETag value for the exported
+  snapshot family
+
+Consumers can compare either validator with a previously seen value before
+refetching profile, trust, query-input, or inventory files.
+
+### `files.json`
+
+`v0/files.json` is a deterministic manifest for the exported public tree. It
+lists each exported payload file, excluding `files.json` itself, with:
+
+- relative `path`
+- byte length
+- SHA-256 of the emitted file contents
+
+Consumers that already have a snapshot can fetch only `meta.json` and
+`files.json`, compare per-file digests, and then refetch only changed JSON
+payloads.
+
 ## Record freshness
 
 ### `record.generated_at`

@@ -20,20 +20,22 @@ public/
         <repo>.json
   v0/
     meta.json
+    files.json
     repos/
       index.json
       <host>/
         <owner>/
           <repo>/
             index.json
+            profile.json
             trust.json
 ```
 
 This surface provides:
 - identity-first, trust-aware repository inspection via the hosted deployment
 - a bundle-level repository inventory for navigation
-- repository summary and trust responses reusing the same local selection,
-  conflict, and claim-visibility semantics
+- repository summary, profile, and trust responses reusing the same local
+  selection, conflict, and claim-visibility semantics
 - a local and release-reviewed same-origin hosted-query runtime over the same
   snapshot family
 - a live accepted maintainer claim in the checked-in index for
@@ -43,7 +45,7 @@ This surface provides:
 - repo-scoped `query-input/` artifacts for Worker-backed hosted query serving
 
 Not yet in scope:
-- structured discovery, ranking, comparison, and batch-profile APIs
+- structured discovery, ranking, comparison, and hosted batch-profile APIs
 - live mutation or submission APIs
 
 ## Local review loop
@@ -64,7 +66,8 @@ cargo test -p dotrepo-core --test public_export_fixture_pack -- --nocapture
 
 That test fixes `generatedAt` and `staleAfter`, recomputes `snapshotDigest` from
 the checked-in fixture index, and compares the exported `meta.json`,
-bundle-level `repos/index.json`, per-repository `index.json` / `trust.json`,
+`files.json`, bundle-level `repos/index.json`, per-repository `index.json` /
+`profile.json` / `trust.json`,
 and repo-scoped `query-input/*.json` files byte-for-byte against the checked-in
 golden tree.
 
@@ -92,6 +95,8 @@ cargo run -p dotrepo-cli -- public export \
 
 Important details:
 - `snapshotDigest` is recomputed from the exported `index/` tree
+- `meta.json` includes snapshot-derived cache validators
+- `files.json` lists emitted JSON payloads with byte sizes and SHA-256 digests
 - deterministic mode changes freshness timestamps, not response semantics
 - ordinary export runs emit real timestamps
 - public `generatedAt` means export time for the snapshot, not proof that an
@@ -108,8 +113,9 @@ cargo run -p dotrepo-cli -- public export --index-root index --out-dir public
 You may also add `--stale-after-hours <hours>` for an advisory staleness window.
 When deploying behind a subpath such as a project-site-style static host, add
 `--base-path /<repo-name>` so public links resolve correctly from the hosted
-root and point at the exported `index.json` / `trust.json` files. The current
-Cloudflare custom-domain deployment on `dotrepo.org` uses `--base-path /`.
+root and point at the exported `index.json` / `profile.json` / `trust.json`
+files. The current Cloudflare custom-domain deployment on `dotrepo.org` uses
+`--base-path /`.
 
 ## CI artifacts
 
@@ -165,8 +171,8 @@ For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.
 The Cloudflare Worker path can now also serve the same exported snapshot
 locally after staging the reviewed tree into the Worker project. The remaining
-operational work is snapshot scaling, compact research profiles, batch access,
-and richer discovery on `dotrepo.org`.
+operational work is snapshot scaling, profile coverage, hosted batch access, and
+richer discovery on `dotrepo.org`.
 
 ## What should stay stable vs variable
 
@@ -177,13 +183,16 @@ Stable for the same input tree and fixed review timestamps:
 - selection/conflict and claim-visibility semantics
 - link structure and artifact locators
 - `snapshotDigest`
+- `validators`
+- file paths, byte sizes, and digests in `v0/files.json`
 
 Intentionally variable in ordinary export runs:
 - `generatedAt`
 - `staleAfter`
 
-`generatedAt`, `snapshotDigest`, `staleAfter`, and `record.generated_at` are
-defined in [`docs/public-freshness.md`](./public-freshness.md).
+`generatedAt`, `snapshotDigest`, `staleAfter`, validators, `files.json`, and
+`record.generated_at` are defined in
+[`docs/public-freshness.md`](./public-freshness.md).
 
 ## How to reason about changes
 
