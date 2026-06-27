@@ -465,10 +465,15 @@ failures, and zero-model deterministic rate. The gate also verifies that it is
 reading the current retained-summary schema and required proof fields before
 treating aggregate rates as proof, and checks worst retained-run failure,
 adjudication, second-opinion, and strong remote escalation rates so a bad run
-cannot be hidden by favorable aggregate totals. The JSON and Markdown gate
-reports include the configured threshold set and a pass/fail check summary, so a
-retained artifact can be audited without recovering the original CI command
-line.
+cannot be hidden by favorable aggregate totals. The retained summary also
+publishes recent and previous three-run windows. The gate checks the recent
+window's rate ceilings and compares failure, adjudication, and
+strong-remote-escalation drift against the previous window when it exists,
+falling back to the aggregate baseline while history is still short. This
+catches a worsening tail before it can be masked by older successful runs. The
+JSON and Markdown gate reports include the configured threshold set and a
+pass/fail check summary, so a retained artifact can be audited without
+recovering the original CI command line.
 Environmental recurrences such as provider or infrastructure failures remain
 visible in the retained summary, but strict proof requires parser, evidence, and
 validation recurrences to be fixed or converted into checked-in fixtures instead

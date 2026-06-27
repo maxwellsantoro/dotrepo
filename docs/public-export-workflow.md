@@ -173,9 +173,10 @@ For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.
 The Cloudflare Worker path can now also serve the same exported snapshot
 locally after staging the reviewed tree into the Worker project, including
-hosted search, compare, and relation traversal. The remaining operational work
-is snapshot scaling, profile coverage, ranking evaluation, and richer discovery
-on `dotrepo.org`.
+hosted search, compare, and relation traversal. Search ranking now has a
+deterministic quality harness for workload-based review. The remaining
+operational work is snapshot scaling, production-scale profile coverage,
+production search-quality workloads, and richer discovery on `dotrepo.org`.
 
 ## What should stay stable vs variable
 

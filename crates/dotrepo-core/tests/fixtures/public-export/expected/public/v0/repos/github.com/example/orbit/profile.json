@@ -2,7 +2,7 @@
   "apiVersion": "v0",
   "freshness": {
     "generatedAt": "2026-03-10T18:30:00Z",
-    "snapshotDigest": "71ef911ea708f62cb39d6a48baa59f1d140aa43f805a72002e261f62e6212eba",
+    "snapshotDigest": "afd5f502456c1c2bc99b8a86051736c6ce7c5530d61ff7c8cc6f9edf41d4e766",
     "staleAfter": "2026-03-11T18:30:00Z"
   },
   "identity": {
@@ -46,6 +46,33 @@
       "verified"
     ],
     "selectionReason": "only_matching_record"
+  },
+  "synthesis": {
+    "synthesisPath": "repos/github.com/example/orbit/synthesis.toml",
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "sourceCommit": "fixture-orbit-synthesis",
+    "model": "fixture",
+    "provider": "deterministic",
+    "mode": "generated",
+    "architecture": {
+      "summary": "Orbit exposes reviewed metadata and documentation entry points for agents.",
+      "entryPoints": [
+        "README.md",
+        "docs/getting-started.md"
+      ],
+      "keyConcepts": [
+        "public profile",
+        "documentation routing"
+      ]
+    },
+    "forAgents": {
+      "howToBuild": "unknown",
+      "howToTest": "unknown",
+      "howToContribute": "Use the reviewed ownership and docs links before proposing changes.",
+      "gotchas": [
+        "Synthesis is advisory and cannot replace factual profile fields."
+      ]
+    }
   },
   "conflicts": [],
   "links": {

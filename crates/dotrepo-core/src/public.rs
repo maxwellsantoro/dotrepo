@@ -1,5 +1,5 @@
 use anyhow::{anyhow, bail, Result};
-use dotrepo_schema::Manifest;
+use dotrepo_schema::{parse_synthesis_document, Manifest, SynthesisDocument, SynthesisMode};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
@@ -14,6 +14,7 @@ use crate::selection::{
     public_selected_record, resolve_candidates, resolve_competing_value, resolve_conflict_reason,
     resolve_selection_reason, CandidateManifest,
 };
+use crate::synthesis::validate_synthesis;
 use crate::util::validate_repository_identity_segments;
 use crate::util::{display_path, parse_rfc3339, render_rfc3339, repository_identity};
 use crate::validation::collect_record_dirs;
@@ -125,6 +126,39 @@ pub struct PublicResearchTrust {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub provenance: Vec<String>,
     pub selection_reason: SelectionReason,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchSynthesisArchitecture {
+    pub summary: String,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub entry_points: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub key_concepts: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchSynthesisForAgents {
+    pub how_to_build: String,
+    pub how_to_test: String,
+    pub how_to_contribute: String,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub gotchas: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicResearchSynthesis {
+    pub synthesis_path: String,
+    pub generated_at: String,
+    pub source_commit: String,
+    pub model: String,
+    pub provider: String,
+    pub mode: String,
+    pub architecture: PublicResearchSynthesisArchitecture,
+    pub for_agents: PublicResearchSynthesisForAgents,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -258,6 +292,8 @@ pub struct PublicResearchProfileResponse {
     pub ownership: PublicResearchOwnership,
     pub completeness: PublicResearchCompleteness,
     pub trust: PublicResearchTrust,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub synthesis: Option<PublicResearchSynthesis>,
     pub conflicts: Vec<PublicConflictReport>,
     pub links: PublicRepositoryLinks,
 }
@@ -331,7 +367,17 @@ pub struct PublicProfileSearchItem {
     pub completeness: PublicResearchCompleteness,
     pub trust: PublicResearchTrust,
     pub matched: Vec<String>,
+    pub ranking: PublicProfileSearchRanking,
     pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileSearchRanking {
+    pub score: usize,
+    pub matched_field_count: usize,
+    pub completeness_signal_count: usize,
+    pub basis: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -435,6 +481,7 @@ pub struct PublicProfileCompareResponse {
 #[serde(rename_all = "camelCase")]
 pub struct PublicRelationItem {
     pub relationship: String,
+    pub direction: String,
     pub target: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub identity: Option<PublicRepositoryIdentity>,
@@ -734,6 +781,63 @@ fn public_research_trust(
             .unwrap_or_default(),
         selection_reason,
     }
+}
+
+fn synthesis_mode_name(mode: &SynthesisMode) -> &'static str {
+    match mode {
+        SynthesisMode::Generated => "generated",
+        SynthesisMode::Contributed => "contributed",
+    }
+}
+
+fn public_research_synthesis_from_document(
+    display_root: &Path,
+    synthesis_path: &Path,
+    synthesis: SynthesisDocument,
+) -> PublicResearchSynthesis {
+    PublicResearchSynthesis {
+        synthesis_path: display_path(display_root, synthesis_path),
+        generated_at: synthesis.synthesis.generated_at,
+        source_commit: synthesis.synthesis.source_commit,
+        model: synthesis.synthesis.model,
+        provider: synthesis.synthesis.provider,
+        mode: synthesis_mode_name(&synthesis.synthesis.mode).to_string(),
+        architecture: PublicResearchSynthesisArchitecture {
+            summary: synthesis.synthesis.architecture.summary,
+            entry_points: synthesis.synthesis.architecture.entry_points,
+            key_concepts: synthesis.synthesis.architecture.key_concepts,
+        },
+        for_agents: PublicResearchSynthesisForAgents {
+            how_to_build: synthesis.synthesis.for_agents.how_to_build,
+            how_to_test: synthesis.synthesis.for_agents.how_to_test,
+            how_to_contribute: synthesis.synthesis.for_agents.how_to_contribute,
+            gotchas: synthesis.synthesis.for_agents.gotchas,
+        },
+    }
+}
+
+fn public_research_synthesis(
+    index_root: &Path,
+    selected: &CandidateManifest,
+) -> Result<Option<PublicResearchSynthesis>> {
+    let Some(record_root) = selected.path.parent() else {
+        return Ok(None);
+    };
+    let synthesis_path = record_root.join("synthesis.toml");
+    if !synthesis_path.is_file() {
+        return Ok(None);
+    }
+    let raw = fs::read_to_string(&synthesis_path)
+        .map_err(|err| anyhow!("failed to read {}: {}", synthesis_path.display(), err))?;
+    let synthesis = parse_synthesis_document(&raw)
+        .map_err(|err| anyhow!("failed to parse {}: {}", synthesis_path.display(), err))?;
+    validate_synthesis(&selected.manifest, &synthesis)
+        .map_err(|err| anyhow!("invalid {}: {}", synthesis_path.display(), err))?;
+    Ok(Some(public_research_synthesis_from_document(
+        index_root,
+        &synthesis_path,
+        synthesis,
+    )))
 }
 
 fn normalize_public_base_path(base_path: &str) -> Result<String> {
@@ -1137,6 +1241,7 @@ pub fn public_repository_profile_with_base(
     let reason = resolve_selection_reason(&candidates, selected);
     let docs = public_research_docs(&selected.manifest);
     let ownership = public_research_ownership(&selected.manifest);
+    let synthesis = public_research_synthesis(index_root, selected)?;
     let conflicts = candidates
         .iter()
         .skip(1)
@@ -1175,6 +1280,7 @@ pub fn public_repository_profile_with_base(
         docs,
         ownership,
         trust: public_research_trust(selected, reason),
+        synthesis,
         conflicts,
         links: public_links_with_base(host, owner, repo, PublicLinkKind::Profile, None, base_path)?,
     })
@@ -1459,10 +1565,45 @@ fn profile_query_matches(profile: &PublicResearchProfileResponse, query: &str) -
     matched
 }
 
+fn completeness_signal_count(completeness: &PublicResearchCompleteness) -> usize {
+    [
+        completeness.has_build,
+        completeness.has_test,
+        completeness.has_docs,
+        completeness.has_security_contact,
+        completeness.has_ownership_signal,
+        completeness.has_license,
+    ]
+    .into_iter()
+    .filter(|signal| *signal)
+    .count()
+}
+
+fn search_ranking_from_profile(
+    profile: &PublicResearchProfileResponse,
+    matched: &[String],
+) -> PublicProfileSearchRanking {
+    let completeness_signal_count = completeness_signal_count(&profile.completeness);
+    let mut basis = Vec::new();
+    if !matched.is_empty() {
+        basis.push("matchedFields".into());
+    }
+    if completeness_signal_count > 0 {
+        basis.push("profileCompleteness".into());
+    }
+    PublicProfileSearchRanking {
+        score: matched.len() * 10 + completeness_signal_count,
+        matched_field_count: matched.len(),
+        completeness_signal_count,
+        basis,
+    }
+}
+
 fn search_item_from_profile(
     profile: PublicResearchProfileResponse,
     matched: Vec<String>,
 ) -> PublicProfileSearchItem {
+    let ranking = search_ranking_from_profile(&profile, &matched);
     PublicProfileSearchItem {
         identity: profile.identity,
         name: profile.name,
@@ -1472,6 +1613,7 @@ fn search_item_from_profile(
         completeness: profile.completeness,
         trust: profile.trust,
         matched,
+        ranking,
         links: profile.links,
     }
 }
@@ -1509,9 +1651,15 @@ pub fn public_profile_search_with_base(
     }
     results.sort_by(|left, right| {
         right
-            .matched
-            .len()
-            .cmp(&left.matched.len())
+            .ranking
+            .score
+            .cmp(&left.ranking.score)
+            .then_with(|| {
+                right
+                    .ranking
+                    .matched_field_count
+                    .cmp(&left.ranking.matched_field_count)
+            })
             .then_with(|| left.identity.host.cmp(&right.identity.host))
             .then_with(|| left.identity.owner.cmp(&right.identity.owner))
             .then_with(|| left.identity.repo.cmp(&right.identity.repo))
@@ -1714,6 +1862,66 @@ fn parse_relation_reference(value: &str) -> Option<PublicRepositoryIdentity> {
     })
 }
 
+fn relation_reference_key(identity: &PublicRepositoryIdentity) -> String {
+    format!("{}/{}/{}", identity.host, identity.owner, identity.repo)
+}
+
+fn selected_relation_references(
+    index_root: &Path,
+    identity: &PublicRepositoryIdentity,
+) -> Result<Vec<String>> {
+    let scope_root =
+        index_repository_scope(index_root, &identity.host, &identity.owner, &identity.repo)?;
+    let candidates = resolve_candidates(&scope_root)?;
+    Ok(candidates[0]
+        .manifest
+        .relations
+        .as_ref()
+        .map(|relations| relations.references.clone())
+        .unwrap_or_default())
+}
+
+fn relation_item_with_profile(
+    index_root: &Path,
+    target: String,
+    relationship: &str,
+    direction: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> PublicRelationItem {
+    let identity = parse_relation_reference(&target);
+    let mut item = PublicRelationItem {
+        relationship: relationship.into(),
+        direction: direction.into(),
+        target: target.clone(),
+        identity: identity.clone(),
+        profile: None,
+        error: None,
+    };
+    if let Some(identity) = identity {
+        match public_repository_profile_or_error_with_base(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            freshness,
+            base_path,
+        ) {
+            Ok(profile) => {
+                item.identity = Some(profile.identity.clone());
+                item.profile = Some(Box::new(search_item_from_profile(
+                    profile,
+                    vec!["relation".into()],
+                )));
+            }
+            Err(error) => {
+                item.error = Some(error.error);
+            }
+        }
+    }
+    item
+}
+
 pub fn public_repository_relations_with_base(
     index_root: &Path,
     host: &str,
@@ -1731,49 +1939,50 @@ pub fn public_repository_relations_with_base(
         freshness.clone(),
         base_path,
     )?;
-    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
-    let candidates = resolve_candidates(&scope_root)?;
-    let selected = &candidates[0];
-    let references = selected
-        .manifest
-        .relations
-        .as_ref()
-        .map(|relations| relations.references.clone())
-        .unwrap_or_default();
+    let selected_identity = PublicRepositoryIdentity {
+        host: host.to_string(),
+        owner: owner.to_string(),
+        repo: repo.to_string(),
+        source: None,
+    };
+    let selected_key = relation_reference_key(&selected_identity);
+    let references = selected_relation_references(index_root, &selected_identity)?;
 
     let mut items = Vec::new();
     for target in references {
-        let identity = parse_relation_reference(&target);
-        let mut item = PublicRelationItem {
-            relationship: "reference".into(),
-            target: target.clone(),
-            identity: identity.clone(),
-            profile: None,
-            error: None,
-        };
-        if let Some(identity) = identity {
-            match public_repository_profile_or_error_with_base(
+        items.push(relation_item_with_profile(
+            index_root,
+            target,
+            "reference",
+            "outgoing",
+            freshness.clone(),
+            base_path,
+        ));
+    }
+
+    for candidate in list_index_repository_identities(index_root)? {
+        let candidate_key = relation_reference_key(&candidate);
+        if candidate_key == selected_key {
+            continue;
+        }
+        let references = selected_relation_references(index_root, &candidate)?;
+        if references.iter().any(|target| target == &selected_key) {
+            items.push(relation_item_with_profile(
                 index_root,
-                &identity.host,
-                &identity.owner,
-                &identity.repo,
+                candidate_key,
+                "referenced_by",
+                "incoming",
                 freshness.clone(),
                 base_path,
-            ) {
-                Ok(profile) => {
-                    item.identity = Some(profile.identity.clone());
-                    item.profile = Some(Box::new(search_item_from_profile(
-                        profile,
-                        vec!["relation".into()],
-                    )));
-                }
-                Err(error) => {
-                    item.error = Some(error.error);
-                }
-            }
+            ));
         }
-        items.push(item);
     }
+    items.sort_by(|left, right| {
+        left.direction
+            .cmp(&right.direction)
+            .then_with(|| left.relationship.cmp(&right.relationship))
+            .then_with(|| left.target.cmp(&right.target))
+    });
 
     Ok(PublicRelationsResponse {
         api_version: PUBLIC_API_VERSION,

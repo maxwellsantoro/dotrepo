@@ -74,7 +74,7 @@
   },
   "search": {
     "requiredKeys": ["apiVersion", "freshness", "query", "filters", "totalRepositoryCount", "matchedCount", "returnedCount", "results"],
-    "itemKeys": ["identity", "name", "purpose", "completeness", "trust", "matched", "links"],
+    "itemKeys": ["identity", "name", "purpose", "completeness", "trust", "matched", "ranking", "links"],
     "filterKeys": ["languages", "topics", "statuses", "confidences", "requireBuild", "requireTest", "requireDocs", "requireSecurityContact", "requireLicense", "limit"]
   },
   "compare": {
@@ -84,7 +84,7 @@
   },
   "relations": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "relationCount", "references", "links"],
-    "itemKeys": ["relationship", "target"]
+    "itemKeys": ["relationship", "direction", "target"]
   },
   "trust": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "selection", "conflicts", "links"],

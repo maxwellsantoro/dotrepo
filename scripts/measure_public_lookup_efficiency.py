@@ -39,6 +39,28 @@ def parse_args() -> argparse.Namespace:
         "--generated-at",
         help="Override report timestamp, primarily for deterministic tests",
     )
+    parser.add_argument(
+        "--min-task-hit-rate",
+        type=float,
+        default=0.0,
+        help="Fail when task hit rate is below this threshold",
+    )
+    parser.add_argument(
+        "--min-field-hit-rate",
+        type=float,
+        default=0.0,
+        help="Fail when field hit rate is below this threshold",
+    )
+    parser.add_argument(
+        "--max-dotrepo-to-scrape-proxy-ratio",
+        type=float,
+        default=None,
+        help=(
+            "Fail when dotrepoToScrapeProxyRatio exceeds this threshold. "
+            "Unset by default because fixture-scale payloads can be larger than "
+            "their normalized record/evidence proxy."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -238,11 +260,44 @@ def safe_ratio(numerator: int, denominator: int) -> Optional[float]:
     return round(numerator / denominator, 4)
 
 
+def build_gates(
+    summary: dict[str, Any],
+    *,
+    min_task_hit_rate: float = 0.0,
+    min_field_hit_rate: float = 0.0,
+    max_dotrepo_to_scrape_proxy_ratio: Optional[float] = None,
+) -> dict[str, Any]:
+    gates: dict[str, Any] = {
+        "minTaskHitRate": {
+            "threshold": min_task_hit_rate,
+            "actual": summary["hitRate"],
+            "passed": (summary["hitRate"] or 0.0) >= min_task_hit_rate,
+        },
+        "minFieldHitRate": {
+            "threshold": min_field_hit_rate,
+            "actual": summary["fieldHitRate"],
+            "passed": (summary["fieldHitRate"] or 0.0) >= min_field_hit_rate,
+        },
+    }
+    if max_dotrepo_to_scrape_proxy_ratio is not None:
+        ratio_value = summary["dotrepoToScrapeProxyRatio"]
+        gates["maxDotrepoToScrapeProxyRatio"] = {
+            "threshold": max_dotrepo_to_scrape_proxy_ratio,
+            "actual": ratio_value,
+            "passed": ratio_value is not None
+            and ratio_value <= max_dotrepo_to_scrape_proxy_ratio,
+        }
+    return gates
+
+
 def summarize(
     public_root: Path,
     index_root: Path,
     workload_path: Path,
     generated_at: Optional[str] = None,
+    min_task_hit_rate: float = 0.0,
+    min_field_hit_rate: float = 0.0,
+    max_dotrepo_to_scrape_proxy_ratio: Optional[float] = None,
 ) -> dict[str, Any]:
     workload = load_workload(workload_path)
     manifest_sizes = file_size_from_manifest(public_root)
@@ -262,6 +317,26 @@ def summarize(
     )
     bytes_saved = max(scrape_proxy_bytes - dotrepo_bytes, 0)
 
+    summary = {
+        "taskCount": task_count,
+        "hitCount": hit_count,
+        "hitRate": safe_ratio(hit_count, task_count),
+        "fieldCount": field_count,
+        "answeredFieldCount": answered_field_count,
+        "fieldHitRate": safe_ratio(answered_field_count, field_count),
+        "dotrepoBytes": dotrepo_bytes,
+        "scrapeProxyBytes": scrape_proxy_bytes,
+        "bytesSaved": bytes_saved,
+        "bytesSavedRatio": safe_ratio(bytes_saved, scrape_proxy_bytes),
+        "dotrepoToScrapeProxyRatio": safe_ratio(dotrepo_bytes, scrape_proxy_bytes),
+    }
+    gates = build_gates(
+        summary,
+        min_task_hit_rate=min_task_hit_rate,
+        min_field_hit_rate=min_field_hit_rate,
+        max_dotrepo_to_scrape_proxy_ratio=max_dotrepo_to_scrape_proxy_ratio,
+    )
+
     return {
         "schema": SCHEMA,
         "generatedAt": generated_timestamp(generated_at),
@@ -270,19 +345,9 @@ def summarize(
             "schema": workload.get("schema"),
             "taskCount": task_count,
         },
-        "summary": {
-            "taskCount": task_count,
-            "hitCount": hit_count,
-            "hitRate": safe_ratio(hit_count, task_count),
-            "fieldCount": field_count,
-            "answeredFieldCount": answered_field_count,
-            "fieldHitRate": safe_ratio(answered_field_count, field_count),
-            "dotrepoBytes": dotrepo_bytes,
-            "scrapeProxyBytes": scrape_proxy_bytes,
-            "bytesSaved": bytes_saved,
-            "bytesSavedRatio": safe_ratio(bytes_saved, scrape_proxy_bytes),
-            "dotrepoToScrapeProxyRatio": safe_ratio(dotrepo_bytes, scrape_proxy_bytes),
-        },
+        "summary": summary,
+        "gates": gates,
+        "passed": all(gate["passed"] for gate in gates.values()),
         "tasks": tasks,
         "notes": [
             "scrapeProxyBytes uses checked-in record.toml and evidence.md as a deterministic local proxy, not live network scrape bytes",
@@ -308,10 +373,22 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| scrape proxy bytes | {summary['scrapeProxyBytes']} |",
         f"| bytes saved | {summary['bytesSaved']} |",
         f"| bytes saved ratio | {summary['bytesSavedRatio']} |",
+        f"| dotrepo to scrape proxy ratio | {summary['dotrepoToScrapeProxyRatio']} |",
+        "",
+        "## Gates",
+        "",
+        "| Gate | Actual | Threshold | Result |",
+        "| --- | ---: | ---: | --- |",
+    ]
+    for name, gate in report.get("gates", {}).items():
+        lines.append(
+            f"| {name} | {gate['actual']} | {gate['threshold']} | {'pass' if gate['passed'] else 'fail'} |"
+        )
+    lines.extend([
         "",
         "| Task | Repository | Hit | Missing fields |",
         "| --- | --- | --- | --- |",
-    ]
+    ])
     for task in report["tasks"]:
         missing = ", ".join(task["missingFields"]) or "-"
         lines.append(
@@ -330,13 +407,16 @@ def render_markdown(report: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def main() -> None:
+def main() -> int:
     args = parse_args()
     report = summarize(
         Path(args.public_root),
         Path(args.index_root),
         Path(args.workload),
         generated_at=args.generated_at,
+        min_task_hit_rate=args.min_task_hit_rate,
+        min_field_hit_rate=args.min_field_hit_rate,
+        max_dotrepo_to_scrape_proxy_ratio=args.max_dotrepo_to_scrape_proxy_ratio,
     )
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.output_json:
@@ -345,7 +425,8 @@ def main() -> None:
         print(rendered, end="")
     if args.output_md:
         Path(args.output_md).write_text(render_markdown(report))
+    return 0 if report["passed"] else 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

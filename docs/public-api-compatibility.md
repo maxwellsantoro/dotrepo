@@ -9,7 +9,7 @@ It covers the `v0` contracts for:
 - compact research profile
 - structured profile search
 - factual profile comparison
-- declared relationship traversal
+- reference and referenced-by relationship traversal
 - batch profile and batch field lookup
 - trust wrapper
 - query wrapper
@@ -26,6 +26,8 @@ Within `apiVersion = "v0"`:
 - existing machine-readable error codes are treated as stable
 - additive fields are allowed only when they do not rename, remove, or change
   the meaning of current fields
+- optional advisory fields such as profile `synthesis` must remain separate
+  from factual fields and must not change their precedence semantics
 
 That means `v0` may still grow, but it should not silently reshuffle existing
 JSON contracts.

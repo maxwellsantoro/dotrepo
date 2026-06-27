@@ -34,6 +34,22 @@ def parse_args() -> argparse.Namespace:
         help="Fail when high-signal profile count is below this threshold",
     )
     parser.add_argument(
+        "--min-high-signal-ratio",
+        type=float,
+        default=0.0,
+        help="Fail when the high-signal profile ratio is below this threshold",
+    )
+    parser.add_argument(
+        "--max-missing-signal",
+        action="append",
+        default=[],
+        metavar="SIGNAL=COUNT",
+        help=(
+            "Fail when a missing-signal count exceeds COUNT. May be repeated; "
+            "signal names match report missingSignalCounts keys."
+        ),
+    )
+    parser.add_argument(
         "--max-items",
         type=int,
         default=10,
@@ -62,6 +78,33 @@ def ratio(numerator: int, denominator: int) -> Optional[float]:
     if denominator == 0:
         return None
     return round(numerator / denominator, 4)
+
+
+def parse_max_missing_signal(values: list[str]) -> dict[str, int]:
+    limits = {}
+    for raw in values:
+        if "=" not in raw:
+            raise SystemExit(
+                f"--max-missing-signal must use SIGNAL=COUNT, got {raw!r}"
+            )
+        signal, count_text = raw.split("=", 1)
+        signal = signal.strip()
+        if not signal:
+            raise SystemExit(
+                f"--max-missing-signal must include a signal name, got {raw!r}"
+            )
+        try:
+            count = int(count_text)
+        except ValueError as exc:
+            raise SystemExit(
+                f"--max-missing-signal count must be an integer, got {raw!r}"
+            ) from exc
+        if count < 0:
+            raise SystemExit(
+                f"--max-missing-signal count must be >= 0, got {raw!r}"
+            )
+        limits[signal] = count
+    return limits
 
 
 def profile_identity(profile: dict[str, Any], path: Path) -> str:
@@ -117,7 +160,14 @@ def summarize_profile(path: Path, public_root: Path) -> dict[str, Any]:
     }
 
 
-def summarize(public_root: Path, min_profiles: int, min_high_signal: int, max_items: int) -> dict[str, Any]:
+def summarize(
+    public_root: Path,
+    min_profiles: int,
+    min_high_signal: int,
+    max_items: int,
+    min_high_signal_ratio: float = 0.0,
+    max_missing_signal: dict[str, int] | None = None,
+) -> dict[str, Any]:
     profiles = [summarize_profile(path, public_root) for path in profile_paths(public_root)]
     profile_count = len(profiles)
     high_signal_profiles = [profile for profile in profiles if profile["isHighSignal"]]
@@ -128,6 +178,16 @@ def summarize(public_root: Path, min_profiles: int, min_high_signal: int, max_it
     for profile in profiles:
         missing_signal_counts.update(profile["missingSignals"])
 
+    high_signal_ratio = ratio(len(high_signal_profiles), profile_count)
+    missing_limits = max_missing_signal or {}
+    missing_signal_gates = {
+        signal: {
+            "threshold": threshold,
+            "actual": int(missing_signal_counts.get(signal) or 0),
+            "passed": int(missing_signal_counts.get(signal) or 0) <= threshold,
+        }
+        for signal, threshold in sorted(missing_limits.items())
+    }
     gates = {
         "minProfiles": {
             "threshold": min_profiles,
@@ -139,8 +199,19 @@ def summarize(public_root: Path, min_profiles: int, min_high_signal: int, max_it
             "actual": len(high_signal_profiles),
             "passed": len(high_signal_profiles) >= min_high_signal,
         },
+        "minHighSignalRatio": {
+            "threshold": min_high_signal_ratio,
+            "actual": high_signal_ratio,
+            "passed": (high_signal_ratio or 0.0) >= min_high_signal_ratio,
+        },
+        "maxMissingSignal": missing_signal_gates,
     }
-    passed = all(gate["passed"] for gate in gates.values())
+    passed = (
+        gates["minProfiles"]["passed"]
+        and gates["minHighSignal"]["passed"]
+        and gates["minHighSignalRatio"]["passed"]
+        and all(gate["passed"] for gate in missing_signal_gates.values())
+    )
 
     return {
         "schema": SCHEMA,
@@ -148,7 +219,7 @@ def summarize(public_root: Path, min_profiles: int, min_high_signal: int, max_it
         "summary": {
             "profileCount": profile_count,
             "highSignalProfileCount": len(high_signal_profiles),
-            "highSignalRatio": ratio(len(high_signal_profiles), profile_count),
+            "highSignalRatio": high_signal_ratio,
             "statusCounts": dict(sorted(status_counts.items())),
             "confidenceCounts": dict(sorted(confidence_counts.items())),
             "missingSignalCounts": dict(sorted(missing_signal_counts.items())),
@@ -175,10 +246,18 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| High-signal ratio | {summary['highSignalRatio']} |",
         f"| Min profiles gate | {gates['minProfiles']['actual']} / {gates['minProfiles']['threshold']} |",
         f"| Min high-signal gate | {gates['minHighSignal']['actual']} / {gates['minHighSignal']['threshold']} |",
-        "",
-        "## Lower-Signal Profiles",
+        f"| Min high-signal ratio gate | {gates['minHighSignalRatio']['actual']} / {gates['minHighSignalRatio']['threshold']} |",
         "",
     ]
+    if gates["maxMissingSignal"]:
+        lines.extend(["## Missing-Signal Gates", ""])
+        for signal, gate in gates["maxMissingSignal"].items():
+            result = "pass" if gate["passed"] else "fail"
+            lines.append(
+                f"- `{signal}`: {gate['actual']} / {gate['threshold']} ({result})"
+            )
+        lines.append("")
+    lines.extend(["## Lower-Signal Profiles", ""])
     if not report["lowerSignalProfiles"]:
         lines.append("- None in this report window.")
     else:
@@ -199,6 +278,8 @@ def main() -> int:
         min_profiles=args.min_profiles,
         min_high_signal=args.min_high_signal,
         max_items=args.max_items,
+        min_high_signal_ratio=args.min_high_signal_ratio,
+        max_missing_signal=parse_max_missing_signal(args.max_missing_signal),
     )
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.output_json:

@@ -1,7 +1,7 @@
 use anyhow::{anyhow, Result};
 use dotrepo_schema::{
-    render_manifest, Compat, CompatMode, Docs, GitHubCompat, Manifest, Owners, Readme, Record,
-    RecordMode, RecordStatus, Relations, Repo, Trust,
+    parse_manifest, render_manifest, Compat, CompatMode, Docs, GitHubCompat, Manifest, Owners,
+    Readme, Record, RecordMode, RecordStatus, Relations, Repo, Trust,
 };
 use serde::{Deserialize, Serialize};
 use std::fs;
@@ -278,6 +278,93 @@ pub fn import_repository(
     source: Option<&str>,
 ) -> Result<ImportPlan> {
     import_repository_with_options(root, mode, source, &ImportOptions::default())
+}
+
+pub fn adopt_overlay_record(root: &Path, overlay_record_path: &Path) -> Result<ImportPlan> {
+    let raw = fs::read_to_string(overlay_record_path)
+        .map_err(|err| anyhow!("failed to read {}: {}", overlay_record_path.display(), err))?;
+    let mut manifest = parse_manifest(&raw)
+        .map_err(|err| anyhow!("failed to parse {}: {}", overlay_record_path.display(), err))?;
+    if manifest.record.mode != RecordMode::Overlay {
+        return Err(anyhow!(
+            "adopt-overlay requires record.mode = \"overlay\" in {}",
+            overlay_record_path.display()
+        ));
+    }
+
+    let overlay_source = manifest.record.source.clone();
+    let omitted_doc_entries = scrub_overlay_docs_for_native(root, &mut manifest);
+    manifest.record.mode = RecordMode::Native;
+    manifest.record.status = RecordStatus::Draft;
+    manifest.record.source = None;
+    manifest.record.generated_at = None;
+    manifest.record.trust = Some(Trust {
+        confidence: Some("low".into()),
+        provenance: vec!["imported".into()],
+        notes: Some({
+            let mut note = match overlay_source {
+                Some(source) => format!(
+                "Bootstrapped from overlay record {} for {}; maintainers should review before claiming canonical authority.",
+                overlay_record_path.display(),
+                source
+            ),
+                None => format!(
+                "Bootstrapped from overlay record {}; maintainers should review before claiming canonical authority.",
+                overlay_record_path.display()
+            ),
+            };
+            if omitted_doc_entries > 0 {
+                note.push_str(
+                    " Overlay documentation URLs were omitted because native docs entries must reference local repository paths.",
+                );
+            }
+            note
+        }),
+    });
+    manifest.readme = None;
+    manifest.compat = None;
+
+    validate_manifest(root, &manifest)?;
+    let manifest_text = render_manifest(&manifest)?;
+    Ok(ImportPlan {
+        manifest_path: root.join(".repo"),
+        manifest,
+        manifest_text,
+        evidence_path: None,
+        evidence_text: None,
+        imported_sources: vec![overlay_record_path.display().to_string()],
+        inferred_fields: Vec::new(),
+        command_candidates: ImportCommandCandidates::default(),
+    })
+}
+
+fn scrub_overlay_docs_for_native(root: &Path, manifest: &mut Manifest) -> usize {
+    let Some(docs) = manifest.docs.as_mut() else {
+        return 0;
+    };
+    let mut omitted = 0;
+    let mut scrub = |value: &mut Option<String>| {
+        let Some(current) = value.as_deref() else {
+            return;
+        };
+        let trimmed = current.trim();
+        if trimmed.contains("://") || !root.join(trimmed).exists() {
+            *value = None;
+            omitted += 1;
+        }
+    };
+    scrub(&mut docs.root);
+    scrub(&mut docs.getting_started);
+    scrub(&mut docs.architecture);
+    scrub(&mut docs.api);
+    if docs.root.is_none()
+        && docs.getting_started.is_none()
+        && docs.architecture.is_none()
+        && docs.api.is_none()
+    {
+        manifest.docs = None;
+    }
+    omitted
 }
 
 pub fn import_repository_with_options(

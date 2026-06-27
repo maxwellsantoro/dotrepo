@@ -111,9 +111,14 @@ for entry in inventory["repositories"]:
         "purpose": profile["purpose"],
         "status": profile["trust"]["selectedStatus"],
         "hasDocs": profile["completeness"]["hasDocs"],
+        "hasSynthesis": "synthesis" in profile,
     })
 PY
 ```
+
+When present, `profile.synthesis` is advisory bounded guidance from a validated
+`synthesis.toml` sidecar. It remains separate from factual fields such as
+`purpose`, `execution`, `docs`, `ownership`, and `trust`.
 
 ## 8. Agent-style traversal from inventory to trust
 
@@ -240,9 +245,10 @@ cargo run -p dotrepo-cli -- public relations github.com sharkdp fd
 curl -s "$BASE_URL/v0/repos/github.com/sharkdp/fd/relations"
 ```
 
-The relations response reports declared `references` from the selected record.
-When a referenced `host/owner/repo` exists in the same index, the response
-includes a compact linked profile item and profile/trust/query links.
+The relations response reports declared outgoing `references` from the selected
+record and inferred incoming `referenced_by` edges from other checked-in
+profiles. When a related `host/owner/repo` exists in the same index, the
+response includes a compact linked profile item and profile/trust/query links.
 
 ## 15. Measure known-repository lookup efficiency
 
@@ -265,7 +271,23 @@ bytes, and deterministic source/evidence proxy bytes. See
 [`docs/public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
 for interpretation notes.
 
-## 16. Compare two public export manifests
+## 16. Measure public search quality
+
+```bash
+uv run python scripts/measure_public_search_quality.py \
+  --public-root public \
+  --workload scripts/fixtures/public_search_workload.json \
+  --output-json /tmp/dotrepo-search-quality.json \
+  --output-md /tmp/dotrepo-search-quality.md
+```
+
+The search-quality benchmark reports discovery success rate, mean reciprocal
+rank, average first expected rank, searched profile bytes, and profile freshness
+for representative search workloads. See
+[`docs/public-search-quality-benchmark.md`](./public-search-quality-benchmark.md)
+for interpretation notes.
+
+## 17. Compare two public export manifests
 
 ```bash
 uv run python scripts/diff_public_export_files.py \
@@ -278,7 +300,7 @@ uv run python scripts/diff_public_export_files.py \
 The delta report gives consumers the exact files to refetch from the new
 snapshot and the byte ratio of that refetch set.
 
-## 17. Measure public profile coverage
+## 18. Measure public profile coverage
 
 ```bash
 uv run python scripts/check_public_profile_coverage.py \

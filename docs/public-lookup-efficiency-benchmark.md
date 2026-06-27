@@ -17,6 +17,8 @@ uv run python scripts/measure_public_lookup_efficiency.py \
   --public-root public \
   --index-root index \
   --workload /tmp/dotrepo-public-lookup-workload.json \
+  --min-task-hit-rate 0.8 \
+  --min-field-hit-rate 0.9 \
   --output-json /tmp/dotrepo-lookup-efficiency.json \
   --output-md /tmp/dotrepo-lookup-efficiency.md
 ```
@@ -36,6 +38,8 @@ The report includes:
 - scrape proxy bytes: checked-in `record.toml` plus `evidence.md` bytes for the
   same repositories
 - per-task missing inputs and missing fields
+- optional pass/fail gates for task hit rate, field hit rate, and
+  dotrepo-to-scrape-proxy byte ratio
 
 `scrapeProxyBytes` is intentionally named as a proxy. It is deterministic and
 reviewable in CI, but it is not a live measurement of GitHub HTML/API traffic,
@@ -51,9 +55,9 @@ Against the checked-in public export fixture and workload, the harness reports:
 | Task hit rate | 0.5 |
 | Fields answered | 7 / 11 |
 | Field hit rate | 0.6364 |
-| dotrepo bytes | 7839 |
-| scrape proxy bytes | 1302 |
-| dotrepo to scrape proxy ratio | 6.0207 |
+| dotrepo bytes | 8762 |
+| scrape proxy bytes | 1356 |
+| dotrepo to scrape proxy ratio | 6.4617 |
 
 The fixture is small enough that the public JSON payload is larger than the
 local record/evidence proxy. That is useful signal, not a failure: fixture

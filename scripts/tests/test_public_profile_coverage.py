@@ -74,6 +74,9 @@ def test_summarize_reports_profile_and_high_signal_counts(tmp_path: Path) -> Non
     assert report["summary"]["highSignalRatio"] == 0.5
     assert report["gates"]["minProfiles"]["passed"] is True
     assert report["gates"]["minHighSignal"]["passed"] is True
+    assert report["gates"]["minHighSignalRatio"]["actual"] == 0.5
+    assert report["gates"]["minHighSignalRatio"]["passed"] is True
+    assert report["gates"]["maxMissingSignal"] == {}
     assert report["lowerSignalProfiles"][0]["identity"] == "github.com/example/beta"
     assert "hasBuild" in report["lowerSignalProfiles"][0]["missingSignals"]
 
@@ -87,6 +90,56 @@ def test_gate_failure_sets_passed_false(tmp_path: Path) -> None:
     assert report["passed"] is False
     assert report["gates"]["minProfiles"]["actual"] == 1
     assert report["gates"]["minHighSignal"]["actual"] == 1
+
+
+def test_high_signal_ratio_gate_failure_sets_passed_false(tmp_path: Path) -> None:
+    public_root = tmp_path / "public"
+    write_profile(public_root, "example", "alpha")
+    write_profile(public_root, "example", "beta", status="imported")
+
+    report = coverage.summarize(
+        public_root,
+        min_profiles=2,
+        min_high_signal=1,
+        max_items=10,
+        min_high_signal_ratio=0.75,
+    )
+
+    assert report["passed"] is False
+    assert report["gates"]["minHighSignalRatio"] == {
+        "threshold": 0.75,
+        "actual": 0.5,
+        "passed": False,
+    }
+
+
+def test_missing_signal_gate_failure_sets_passed_false(tmp_path: Path) -> None:
+    public_root = tmp_path / "public"
+    write_profile(public_root, "example", "alpha")
+    write_profile(public_root, "example", "beta", has_security=False)
+
+    report = coverage.summarize(
+        public_root,
+        min_profiles=2,
+        min_high_signal=1,
+        max_items=10,
+        max_missing_signal={"hasSecurityContact": 0, "hasLicense": 0},
+    )
+
+    assert report["passed"] is False
+    assert report["gates"]["maxMissingSignal"] == {
+        "hasLicense": {"threshold": 0, "actual": 0, "passed": True},
+        "hasSecurityContact": {"threshold": 0, "actual": 1, "passed": False},
+    }
+
+
+def test_parse_max_missing_signal_accepts_repeated_limits() -> None:
+    assert coverage.parse_max_missing_signal(
+        ["hasBuild=2", "hasSecurityContact=0"]
+    ) == {
+        "hasBuild": 2,
+        "hasSecurityContact": 0,
+    }
 
 
 def test_render_markdown_lists_lower_signal_profiles(tmp_path: Path) -> None:
@@ -107,4 +160,24 @@ def test_render_markdown_lists_lower_signal_profiles(tmp_path: Path) -> None:
 
     assert "# dotrepo public profile coverage" in markdown
     assert "| Profiles | 2 |" in markdown
+    assert "| Min high-signal ratio gate | 0.5 / 0.0 |" in markdown
     assert "`github.com/example/beta`" in markdown
+
+
+def test_render_markdown_lists_missing_signal_gates(tmp_path: Path) -> None:
+    public_root = tmp_path / "public"
+    write_profile(public_root, "example", "alpha")
+    write_profile(public_root, "example", "beta", has_security=False)
+
+    markdown = coverage.render_markdown(
+        coverage.summarize(
+            public_root,
+            min_profiles=1,
+            min_high_signal=1,
+            max_items=10,
+            max_missing_signal={"hasSecurityContact": 0},
+        )
+    )
+
+    assert "## Missing-Signal Gates" in markdown
+    assert "- `hasSecurityContact`: 1 / 0 (fail)" in markdown

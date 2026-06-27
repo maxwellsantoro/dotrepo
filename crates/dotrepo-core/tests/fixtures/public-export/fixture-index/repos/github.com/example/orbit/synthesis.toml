@@ -1,0 +1,19 @@
+schema = "dotrepo-synthesis/v0"
+
+[synthesis]
+generated_at = "2026-03-10T18:30:00Z"
+source_commit = "fixture-orbit-synthesis"
+model = "fixture"
+provider = "deterministic"
+mode = "generated"
+
+[synthesis.architecture]
+summary = "Orbit exposes reviewed metadata and documentation entry points for agents."
+entry_points = ["README.md", "docs/getting-started.md"]
+key_concepts = ["public profile", "documentation routing"]
+
+[synthesis.for_agents]
+how_to_build = "unknown"
+how_to_test = "unknown"
+how_to_contribute = "Use the reviewed ownership and docs links before proposing changes."
+gotchas = ["Synthesis is advisory and cannot replace factual profile fields."]

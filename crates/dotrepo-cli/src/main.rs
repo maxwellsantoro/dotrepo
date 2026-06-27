@@ -3,9 +3,9 @@ use clap::Parser;
 use dotrepo_cli::cli::Cli;
 use dotrepo_cli::cli::Command;
 use dotrepo_cli::commands::{
-    cmd_ci, cmd_claim, cmd_claim_event, cmd_claim_init, cmd_doctor, cmd_generate, cmd_import,
-    cmd_init, cmd_manage, cmd_preview, cmd_promotion_report, cmd_public, cmd_query, cmd_trust,
-    cmd_validate, cmd_validate_index,
+    cmd_adopt_overlay, cmd_ci, cmd_claim, cmd_claim_event, cmd_claim_init, cmd_doctor,
+    cmd_generate, cmd_import, cmd_init, cmd_manage, cmd_preview, cmd_promotion_report, cmd_public,
+    cmd_query, cmd_trust, cmd_validate, cmd_validate_index,
 };
 use dotrepo_cli::commands::{ClaimEventArgs, ClaimInitArgs};
 use dotrepo_cli::error::CliExit;
@@ -33,6 +33,10 @@ fn run() -> Result<()> {
             source,
             force,
         } => cmd_import(cli.root, mode, source, force),
+        Command::AdoptOverlay {
+            overlay_record,
+            force,
+        } => cmd_adopt_overlay(cli.root, overlay_record, force),
         Command::Validate => cmd_validate(cli.root),
         Command::ValidateIndex { index_root } => cmd_validate_index(index_root),
         Command::PromotionReport {

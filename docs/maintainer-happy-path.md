@@ -18,9 +18,17 @@ repository while reading this guide. It already contains:
 Choose one bootstrap path:
 - `dotrepo --root <repo> init` if you want to author a canonical `.repo` from scratch.
 - `dotrepo --root <repo> import` if you want to bootstrap from existing `README.md`, `CODEOWNERS`, and `SECURITY.md` content first.
+- `dotrepo --root <repo> adopt-overlay <path-to-record.toml>` if you found an
+  existing public index overlay and want to convert its current facts into a
+  native draft `.repo` starting point.
 
 After that first step, treat the root `.repo` as the source of truth and keep
 generated compatibility surfaces in sync from it.
+
+`adopt-overlay` does not claim canonical authority or preserve overlay review
+status. It writes a native `draft` record, clears overlay authority fields, and
+adds a trust note reminding maintainers to review the imported facts before
+submitting a claim.
 
 To scaffold the native-repo CI check loop, run:
 

@@ -634,6 +634,114 @@ fn import_writes_overlay_manifest_and_evidence() {
 }
 
 #[test]
+fn adopt_overlay_bootstraps_native_manifest() {
+    let root = temp_dir("adopt-overlay-native");
+    let overlay = root.join("overlay-record.toml");
+    fs::write(
+        &overlay,
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+source = "https://github.com/example/project"
+generated_at = "2026-03-10T18:30:00Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported", "verified"]
+notes = "Reviewed overlay."
+
+[repo]
+name = "project"
+description = "Reviewed project metadata."
+homepage = "https://github.com/example/project"
+
+[docs]
+root = "https://docs.example.com/project"
+"#,
+    )
+    .expect("overlay written");
+
+    cmd_adopt_overlay(root.clone(), overlay.clone(), false).expect("adoption succeeds");
+
+    let manifest = load_manifest_from_root(&root).expect("native manifest loads");
+    assert_eq!(manifest.record.mode, dotrepo_schema::RecordMode::Native);
+    assert_eq!(manifest.record.status, dotrepo_schema::RecordStatus::Draft);
+    assert_eq!(manifest.record.source, None);
+    assert_eq!(manifest.record.generated_at, None);
+    assert_eq!(manifest.repo.name, "project");
+    assert!(manifest.docs.is_none());
+    let trust = manifest.record.trust.expect("adoption trust note");
+    assert_eq!(trust.confidence, Some("low".into()));
+    assert_eq!(trust.provenance, vec!["imported".to_string()]);
+    let notes = trust.notes.expect("trust notes");
+    assert!(notes.contains("maintainers should review before claiming canonical authority"));
+    assert!(notes.contains("documentation URLs were omitted"));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn adopt_overlay_refuses_existing_repo_without_force() {
+    let root = temp_dir("adopt-overlay-no-force");
+    let overlay = root.join("overlay-record.toml");
+    fs::write(root.join(".repo"), "existing\n").expect("existing native record written");
+    fs::write(
+        &overlay,
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "reviewed"
+
+[repo]
+name = "project"
+description = "Reviewed project metadata."
+"#,
+    )
+    .expect("overlay written");
+
+    let err = cmd_adopt_overlay(root.clone(), overlay, false).expect_err("adoption should fail");
+    assert!(err.to_string().contains("already exists"));
+    assert_eq!(
+        fs::read_to_string(root.join(".repo")).expect("native record readable"),
+        "existing\n"
+    );
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn adopt_overlay_rejects_non_overlay_record() {
+    let root = temp_dir("adopt-overlay-wrong-mode");
+    let native = root.join("native-record.toml");
+    fs::write(
+        &native,
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "project"
+description = "Native project metadata."
+"#,
+    )
+    .expect("native record written");
+
+    let err = cmd_adopt_overlay(root.clone(), native, false).expect_err("native should fail");
+    assert!(err.to_string().contains("record.mode = \"overlay\""));
+    assert!(!root.join(".repo").exists());
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
 fn write_import_output_refuses_to_clobber_existing_file_without_force() {
     let root = temp_dir("import-output-no-force");
     let path = root.join(".repo");

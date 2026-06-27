@@ -40,6 +40,24 @@ def parse_args() -> argparse.Namespace:
         default=10,
         help="Maximum low-confidence records or missing targets to list (default: 10)",
     )
+    parser.add_argument(
+        "--min-tranche-coverage-ratio",
+        type=float,
+        default=0.0,
+        help="Fail when present tranche target ratio is below this threshold",
+    )
+    parser.add_argument(
+        "--max-lower-confidence-queue",
+        type=int,
+        default=None,
+        help="Fail when lower-confidence quality queue exceeds this threshold",
+    )
+    parser.add_argument(
+        "--max-missing-targets",
+        type=int,
+        default=None,
+        help="Fail when missing tranche target count exceeds this threshold",
+    )
     parser.add_argument("--output-json", help="Optional path for machine-readable JSON")
     parser.add_argument("--output-md", help="Optional path for markdown output")
     return parser.parse_args()
@@ -188,7 +206,53 @@ def lower_confidence_records(records: list[dict[str, Any]]) -> list[dict[str, An
     return sorted(items, key=quality_rank)
 
 
-def summarize(index_root: Path, targets_file: Path, max_items: int) -> dict[str, Any]:
+def ratio(numerator: int, denominator: int) -> float | None:
+    if denominator == 0:
+        return None
+    return round(numerator / denominator, 4)
+
+
+def build_gates(
+    *,
+    target_count: int,
+    present_count: int,
+    missing_count: int,
+    lower_confidence_queue: int,
+    min_tranche_coverage_ratio: float = 0.0,
+    max_lower_confidence_queue: int | None = None,
+    max_missing_targets: int | None = None,
+) -> dict[str, Any]:
+    coverage_ratio = ratio(present_count, target_count)
+    gates: dict[str, Any] = {
+        "minTrancheCoverageRatio": {
+            "threshold": min_tranche_coverage_ratio,
+            "actual": coverage_ratio,
+            "passed": (coverage_ratio or 0.0) >= min_tranche_coverage_ratio,
+        }
+    }
+    if max_lower_confidence_queue is not None:
+        gates["maxLowerConfidenceQueue"] = {
+            "threshold": max_lower_confidence_queue,
+            "actual": lower_confidence_queue,
+            "passed": lower_confidence_queue <= max_lower_confidence_queue,
+        }
+    if max_missing_targets is not None:
+        gates["maxMissingTargets"] = {
+            "threshold": max_missing_targets,
+            "actual": missing_count,
+            "passed": missing_count <= max_missing_targets,
+        }
+    return gates
+
+
+def summarize(
+    index_root: Path,
+    targets_file: Path,
+    max_items: int,
+    min_tranche_coverage_ratio: float = 0.0,
+    max_lower_confidence_queue: int | None = None,
+    max_missing_targets: int | None = None,
+) -> dict[str, Any]:
     records = load_records(index_root)
     by_identity = {record["identity"]: record for record in records}
     targets = load_targets(targets_file)
@@ -219,11 +283,23 @@ def summarize(index_root: Path, targets_file: Path, max_items: int) -> dict[str,
         if not record.get("securityContact") or record.get("securityContact") == "unknown"
     ]
     quality_queue = lower_confidence_records(records)
+    tranche_coverage_ratio = ratio(len(present_targets), len(targets))
+    gates = build_gates(
+        target_count=len(targets),
+        present_count=len(present_targets),
+        missing_count=len(missing_targets),
+        lower_confidence_queue=len(quality_queue),
+        min_tranche_coverage_ratio=min_tranche_coverage_ratio,
+        max_lower_confidence_queue=max_lower_confidence_queue,
+        max_missing_targets=max_missing_targets,
+    )
 
     return {
         "indexRoot": str(index_root),
         "targetsFile": str(targets_file),
         "totalRecords": len(records),
+        "passed": all(gate["passed"] for gate in gates.values()),
+        "gates": gates,
         "recordStatusCounts": dict(Counter(record["status"] for record in records)),
         "recordModeCounts": dict(Counter(record["mode"] for record in records)),
         "trustConfidenceCounts": dict(Counter(record["confidence"] for record in records)),
@@ -250,6 +326,7 @@ def summarize(index_root: Path, targets_file: Path, max_items: int) -> dict[str,
             "targetCount": len(targets),
             "presentCount": len(present_targets),
             "missingCount": len(missing_targets),
+            "coverageRatio": tranche_coverage_ratio,
             "coverageByGroup": dict(sorted(target_group_counts.items())),
             "missingTargets": missing_targets[:max_items],
         },
@@ -287,13 +364,22 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- trust confidence: {format_counts(summary['trustConfidenceCounts'])}",
         f"- language families: {format_counts(summary['languageFamilyCounts'])}",
         f"- maintainer claims: {format_counts(summary['claimStateCounts'])}",
-        f"- tranche coverage: {tranche['presentCount']}/{tranche['targetCount']} present",
+        f"- tranche coverage: {tranche['presentCount']}/{tranche['targetCount']} present ({tranche['coverageRatio']})",
         f"- quality queue: {quality['lowerConfidenceQueue']} records need review hardening signals",
         f"- missing build/test/security: build={quality['missingBuild']}, test={quality['missingTest']}, security={quality['unknownSecurityContact']}",
         "",
-        "## Tranche Coverage",
+        "## Gates",
         "",
     ]
+    for name, gate in summary.get("gates", {}).items():
+        lines.append(
+            f"- {name}: {gate['actual']} / {gate['threshold']} ({'pass' if gate['passed'] else 'fail'})"
+        )
+    lines.extend([
+        "",
+        "## Tranche Coverage",
+        "",
+    ])
     for group, counts in tranche["coverageByGroup"].items():
         lines.append(f"- {group}: {counts['present']}/{counts['target']} present")
     lines.append("")
@@ -345,13 +431,24 @@ def main() -> int:
     args = parse_args()
     if args.max_items < 0:
         raise SystemExit("--max-items must not be negative")
-    summary = summarize(Path(args.index_root), Path(args.targets_file), args.max_items)
+    if args.max_lower_confidence_queue is not None and args.max_lower_confidence_queue < 0:
+        raise SystemExit("--max-lower-confidence-queue must not be negative")
+    if args.max_missing_targets is not None and args.max_missing_targets < 0:
+        raise SystemExit("--max-missing-targets must not be negative")
+    summary = summarize(
+        Path(args.index_root),
+        Path(args.targets_file),
+        args.max_items,
+        min_tranche_coverage_ratio=args.min_tranche_coverage_ratio,
+        max_lower_confidence_queue=args.max_lower_confidence_queue,
+        max_missing_targets=args.max_missing_targets,
+    )
     markdown = render_markdown(summary)
     write_json(args.output_json, summary)
     write_text(args.output_md, markdown + "\n")
     if not args.output_md:
         print(markdown)
-    return 0
+    return 0 if summary["passed"] else 1
 
 
 if __name__ == "__main__":

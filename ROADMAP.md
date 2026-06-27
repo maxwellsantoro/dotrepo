@@ -266,9 +266,10 @@ Current operational gaps:
 - scheduled operation now has budgeted primary, second-opinion, and stronger
   remote adjudication sidecar paths, but repeated runs still need to prove the
   tier mix stays within the intended cheap-primary/rare-tail shape
-- retained multi-run telemetry and a proof gate now exist, but repeated
-  scheduled runs still need to satisfy that gate to demonstrate stable cost,
-  resolution, promotion, and regression rates
+- retained multi-run telemetry and a proof gate now exist, including worst-run
+  and recent-window drift checks; repeated scheduled runs still need to satisfy
+  that gate to demonstrate stable cost, resolution, promotion, and regression
+  rates
 - autonomous refresh now reprocesses lower-confidence checked-in records and
   newly discovered repositories through the same gate-passed writeback conveyor
 - recurring failures are grouped into operational defect classes, classified by
@@ -324,14 +325,15 @@ Current status:
   manifests into an exact added/changed/removed/refetch report for mirrors and
   agent caches
 - `scripts/check_public_profile_coverage.py` now measures exported profile
-  count, high-signal profile count, missing quality signals, and optional
-  Milestone 2 gates against the public tree
+  count, high-signal profile count and ratio, missing quality signals, and
+  optional Milestone 2 count, ratio, and per-signal ceiling gates against the
+  public tree
 - `scripts/build_public_lookup_workload.py` now derives larger benchmark
   workloads from exported profile completeness so production lookup-efficiency
   reports do not depend on a hand-maintained tiny fixture
 - `scripts/measure_public_lookup_efficiency.py` now produces deterministic
-  task hit-rate, field hit-rate, and payload-byte reports for known-repository
-  workloads against a public export
+  task hit-rate, field hit-rate, payload-byte, and optional pass/fail gate
+  reports for known-repository workloads against a public export
 - reaching 500 high-signal profiles and publishing a larger production workload
   benchmark remain open
 
@@ -371,16 +373,24 @@ Current status:
 
 - `dotrepo public search` provides the first structured profile-search response
   over the public index, with text, language, topic, trust, and completeness
-  filters grounded in generated `profile.json` semantics
+  filters grounded in generated `profile.json` semantics plus explicit
+  relevance ranking metadata that remains separate from factual trust
+- `scripts/measure_public_search_quality.py` now reports discovery success,
+  rank quality, searched profile bytes, freshness, and optional pass/fail gates
+  for public-profile search workloads
 - `dotrepo public compare` provides the first factual comparison response for
   selected profiles, preserving trust, completeness, shared language/topic, and
   side-by-side signal values without ranking or synthesis
+- public `profile.json` can now expose validated optional `synthesis.toml`
+  guidance in a separate `synthesis` section, preserving factual fields as the
+  authority and failing export on invalid or fact-conflicting synthesis
 - `dotrepo public relations` provides the first relationship traversal response
-  over declared profile references, resolving referenced profiles when they are
-  present in the same index
+  over declared profile references and inferred reverse-reference edges,
+  resolving related profiles when they are present in the same index
 - the hosted Worker now serves cacheable GET search, compare, and relations
   routes from the staged public snapshot
-- ranking evaluation, richer relationship types, and bounded synthesis remain
+- production-scale ranking calibration, richer relation semantics beyond
+  reference/referenced-by traversal, and production synthesis generation remain
   open
 
 ### Milestone 4: Index at ecosystem scale
@@ -395,6 +405,12 @@ Deliver:
 - model-provider routing based on task class, quality, latency, and cost
 - automated regression sampling across ecosystems
 - public operational status and coverage telemetry
+
+Current status:
+
+- `scripts/render_index_growth_status.py` reports record growth, tranche
+  coverage, quality queues, language-family coverage, and optional operational
+  gates for tranche coverage, missing targets, and lower-confidence backlog.
 
 Exit criteria:
 
@@ -415,6 +431,12 @@ Deliver:
 - low-friction claim and canonical handoff
 - visible native-record benefits for maintainers and downstream tools
 - integrations that make `.repo` useful even before public indexing
+
+Current status:
+
+- `dotrepo adopt-overlay <record.toml>` bootstraps a native draft `.repo` from a
+  public overlay record while clearing overlay authority fields and requiring
+  maintainer review before canonical claims
 
 Exit criteria:
 

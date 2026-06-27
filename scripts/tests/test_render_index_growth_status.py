@@ -83,11 +83,93 @@ def test_summarize_reports_tranche_and_quality_queue(tmp_path: Path) -> None:
     summary = growth_status.summarize(index_root, targets_file, max_items=5)
 
     assert summary["totalRecords"] == 2
+    assert summary["passed"] is True
     assert summary["tranche"]["presentCount"] == 2
+    assert summary["tranche"]["coverageRatio"] == 1.0
+    assert summary["gates"]["minTrancheCoverageRatio"] == {
+        "threshold": 0.0,
+        "actual": 1.0,
+        "passed": True,
+    }
     assert summary["tranche"]["coverageByGroup"]["Rust"] == {"target": 1, "present": 1}
     assert summary["languageFamilyCounts"] == {"Rust": 1, "Go": 1}
     assert summary["qualitySignals"]["lowerConfidenceQueue"] == 1
     assert summary["nextQualityTargets"][0]["identity"] == "github.com/owner/beta"
+
+
+def test_summarize_operational_gates_fail_when_thresholds_are_not_met(tmp_path: Path) -> None:
+    index_root = tmp_path / "index"
+    targets_file = tmp_path / "targets.txt"
+    targets_file.write_text("# Rust\nowner/alpha\n# Go\nowner/beta\n")
+    write_record(
+        index_root,
+        "owner",
+        "alpha",
+        status="imported",
+        confidence="medium",
+        languages=["Rust"],
+        build=None,
+        test=None,
+        security="unknown",
+    )
+
+    summary = growth_status.summarize(
+        index_root,
+        targets_file,
+        max_items=5,
+        min_tranche_coverage_ratio=0.75,
+        max_lower_confidence_queue=0,
+        max_missing_targets=0,
+    )
+
+    assert summary["passed"] is False
+    assert summary["tranche"]["coverageRatio"] == 0.5
+    assert summary["gates"] == {
+        "minTrancheCoverageRatio": {
+            "threshold": 0.75,
+            "actual": 0.5,
+            "passed": False,
+        },
+        "maxLowerConfidenceQueue": {
+            "threshold": 0,
+            "actual": 1,
+            "passed": False,
+        },
+        "maxMissingTargets": {
+            "threshold": 0,
+            "actual": 1,
+            "passed": False,
+        },
+    }
+
+
+def test_render_markdown_includes_operational_gates(tmp_path: Path) -> None:
+    index_root = tmp_path / "index"
+    targets_file = tmp_path / "targets.txt"
+    targets_file.write_text("# Rust\nowner/alpha\n")
+    write_record(
+        index_root,
+        "owner",
+        "alpha",
+        status="verified",
+        confidence="high",
+        languages=["Rust"],
+    )
+
+    markdown = growth_status.render_markdown(
+        growth_status.summarize(
+            index_root,
+            targets_file,
+            max_items=5,
+            min_tranche_coverage_ratio=1.0,
+            max_lower_confidence_queue=0,
+        )
+    )
+
+    assert "- tranche coverage: 1/1 present (1.0)" in markdown
+    assert "## Gates" in markdown
+    assert "- minTrancheCoverageRatio: 1.0 / 1.0 (pass)" in markdown
+    assert "- maxLowerConfidenceQueue: 0 / 0 (pass)" in markdown
 
 
 def test_malformed_toml_exits_with_path(tmp_path: Path) -> None:

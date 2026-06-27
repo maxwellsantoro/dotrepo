@@ -79,6 +79,22 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "failureRate": 0.5,
         "secondOpinionRate": 0.0,
     }
+    assert summary["recentWindowRunCount"] == 2
+    assert summary["recentWindowRates"] == {
+        "adjudicationRate": 0.25,
+        "apiEscalationRate": 0.25,
+        "failureRate": 0.25,
+        "secondOpinionRate": 0.0,
+        "zeroModelRate": 0.75,
+    }
+    assert summary["previousWindowRunCount"] == 0
+    assert summary["previousWindowRates"] == {
+        "adjudicationRate": 0.0,
+        "apiEscalationRate": 0.0,
+        "failureRate": 0.0,
+        "secondOpinionRate": 0.0,
+        "zeroModelRate": 0.0,
+    }
     assert summary["repositoriesByAdjudicationTier"] == {
         "api_escalation": 1,
         "local_primary": 2,
@@ -160,8 +176,54 @@ def test_retain_telemetry_appends_history_and_writes_summary(tmp_path: Path) -> 
     assert summary["budgetExhaustedRuns"] == 1
     assert summary["worstRunRates"]["adjudicationRate"] == 1.0
     assert summary["worstRunRates"]["failureRate"] == 1.0
+    assert summary["recentWindowRunCount"] == 2
+    assert summary["recentWindowRates"]["adjudicationRate"] == 0.5
+    assert summary["recentWindowRates"]["failureRate"] == 0.5
+    assert summary["previousWindowRunCount"] == 0
     assert summary["failureClasses"] == {"provider": 1}
     assert summary["repositoriesByAdjudicationTier"] == {"local_primary": 1}
+
+
+def test_aggregate_runs_calculates_previous_window_rates() -> None:
+    runs = []
+    for day in range(1, 7):
+        recent = day > 3
+        runs.append(
+            {
+                "generatedAt": f"2026-03-{day:02d}T12:00:00Z",
+                "crawled": 4,
+                "written": 4,
+                "failed": 0,
+                "skipped": 0,
+                "adjudicationBudgetExhausted": False,
+                "zeroModelRuns": 2 if recent else 4,
+                "repositoriesByAdjudicationTier": (
+                    {"local_primary": 2, "api_escalation": 1} if recent else {}
+                ),
+                "failureClasses": {},
+                "failureFingerprints": {},
+                "failureFingerprintClasses": {},
+            }
+        )
+
+    summary = autonomous_batch.aggregate_runs(runs)
+
+    assert summary["recentWindowRunCount"] == 3
+    assert summary["previousWindowRunCount"] == 3
+    assert summary["recentWindowRates"] == {
+        "adjudicationRate": 0.5,
+        "apiEscalationRate": 0.25,
+        "failureRate": 0.0,
+        "secondOpinionRate": 0.0,
+        "zeroModelRate": 0.5,
+    }
+    assert summary["previousWindowRates"] == {
+        "adjudicationRate": 0.0,
+        "apiEscalationRate": 0.0,
+        "failureRate": 0.0,
+        "secondOpinionRate": 0.0,
+        "zeroModelRate": 1.0,
+    }
 
 
 def test_enrich_telemetry_counts_verified_records_as_promoted() -> None:

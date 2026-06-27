@@ -675,6 +675,34 @@ def run_rates(run_telemetry: dict) -> dict[str, float]:
     }
 
 
+def aggregate_rates(runs: list[dict]) -> dict[str, float]:
+    totals = Counter()
+    tier_counts: Counter[str] = Counter()
+    for run_telemetry in runs:
+        for key in ("crawled", "failed", "zeroModelRuns"):
+            totals[key] += int(run_telemetry.get(key) or 0)
+        for tier, count in (run_telemetry.get("repositoriesByAdjudicationTier") or {}).items():
+            tier_counts[str(tier)] += int(count or 0)
+
+    crawled = totals["crawled"]
+    repos_with_adjudication = crawled - totals["zeroModelRuns"]
+    if not crawled:
+        return {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.0,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.0,
+        }
+    return {
+        "failureRate": totals["failed"] / crawled,
+        "adjudicationRate": repos_with_adjudication / crawled,
+        "secondOpinionRate": int(tier_counts.get("local_second_opinion") or 0) / crawled,
+        "apiEscalationRate": int(tier_counts.get("api_escalation") or 0) / crawled,
+        "zeroModelRate": totals["zeroModelRuns"] / crawled,
+    }
+
+
 def aggregate_runs(runs: list[dict]) -> dict:
     totals = Counter()
     failure_classes: Counter[str] = Counter()
@@ -756,6 +784,10 @@ def aggregate_runs(runs: list[dict]) -> dict:
 
     crawled = totals["crawled"]
     repos_with_adjudication = crawled - totals["zeroModelRuns"]
+    recent_window_runs = runs[-3:]
+    previous_window_runs = runs[-6:-3]
+    recent_window_rates = aggregate_rates(recent_window_runs)
+    previous_window_rates = aggregate_rates(previous_window_runs)
     recurring_failures = [
         {"fingerprint": fingerprint, "count": count}
         for fingerprint, count in failure_fingerprints.most_common(20)
@@ -794,6 +826,14 @@ def aggregate_runs(runs: list[dict]) -> dict:
             "adjudicationRate": repos_with_adjudication / crawled if crawled else 0.0,
             "zeroModelRate": totals["zeroModelRuns"] / crawled if crawled else 0.0,
             "promotionRate": totals["promoted"] / crawled if crawled else 0.0,
+        },
+        "recentWindowRunCount": len(recent_window_runs),
+        "recentWindowRates": {
+            key: round(value, 6) for key, value in sorted(recent_window_rates.items())
+        },
+        "previousWindowRunCount": len(previous_window_runs),
+        "previousWindowRates": {
+            key: round(value, 6) for key, value in sorted(previous_window_rates.items())
         },
         "worstRunRates": {key: round(value, 6) for key, value in sorted(worst_rates.items())},
         "repositoriesByAdjudicationTier": dict(sorted(tier_counts.items())),

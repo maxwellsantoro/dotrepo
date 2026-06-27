@@ -513,6 +513,21 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
     );
     for item in search["results"].as_array().expect("search.results array") {
         assert_has_keys(item, &manifest.search.item_keys, "search.item");
+        let ranking = item["ranking"].as_object().expect("search ranking object");
+        assert!(ranking.contains_key("score"), "ranking should expose score");
+        assert!(
+            ranking.contains_key("matchedFieldCount"),
+            "ranking should expose matched field count"
+        );
+        assert!(
+            ranking.contains_key("completenessSignalCount"),
+            "ranking should expose completeness signal count"
+        );
+        assert!(ranking.contains_key("basis"), "ranking should expose basis");
+        assert!(
+            !ranking.contains_key("trust"),
+            "ranking should stay separate from trust"
+        );
     }
 
     let compare = serde_json::to_value(
@@ -554,6 +569,10 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
         .expect("relations.references array")
     {
         assert_has_keys(item, &manifest.relations.item_keys, "relations.item");
+        assert!(
+            ["incoming", "outgoing"].contains(&item["direction"].as_str().unwrap_or_default()),
+            "relations.item direction should expose traversal direction"
+        );
     }
 
     let orbit_trust = serde_json::to_value(

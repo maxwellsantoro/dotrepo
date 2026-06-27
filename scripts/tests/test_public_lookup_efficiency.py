@@ -37,6 +37,17 @@ def test_summarize_fixture_workload_reports_hit_rates_and_bytes() -> None:
     assert report["summary"]["fieldHitRate"] == 0.6364
     assert report["summary"]["dotrepoBytes"] > 0
     assert report["summary"]["scrapeProxyBytes"] > 0
+    assert report["passed"] is True
+    assert report["gates"]["minTaskHitRate"] == {
+        "threshold": 0.0,
+        "actual": 0.5,
+        "passed": True,
+    }
+    assert report["gates"]["minFieldHitRate"] == {
+        "threshold": 0.0,
+        "actual": 0.6364,
+        "passed": True,
+    }
     assert report["tasks"][0]["fieldValues"]["docs.root"] == "https://docs.example.com/orbit"
     assert "query-input/github.com/example/orbit.json" in report["tasks"][0]["inputs"]["publicFiles"]
     assert report["tasks"][1]["missingFields"] == [
@@ -79,6 +90,35 @@ def test_missing_field_is_not_counted_as_hit(tmp_path: Path) -> None:
     assert report["tasks"][0]["missingFields"] == ["repo.topics"]
 
 
+def test_threshold_gates_mark_report_failed() -> None:
+    report = lookup_efficiency.summarize(
+        PUBLIC_ROOT,
+        INDEX_ROOT,
+        WORKLOAD,
+        generated_at="2026-03-10T18:30:00Z",
+        min_task_hit_rate=0.75,
+        min_field_hit_rate=0.75,
+        max_dotrepo_to_scrape_proxy_ratio=1.0,
+    )
+
+    assert report["passed"] is False
+    assert report["gates"]["minTaskHitRate"] == {
+        "threshold": 0.75,
+        "actual": 0.5,
+        "passed": False,
+    }
+    assert report["gates"]["minFieldHitRate"] == {
+        "threshold": 0.75,
+        "actual": 0.6364,
+        "passed": False,
+    }
+    assert report["gates"]["maxDotrepoToScrapeProxyRatio"] == {
+        "threshold": 1.0,
+        "actual": 6.4617,
+        "passed": False,
+    }
+
+
 def test_render_markdown_includes_summary_table() -> None:
     report = lookup_efficiency.summarize(
         PUBLIC_ROOT,
@@ -91,4 +131,6 @@ def test_render_markdown_includes_summary_table() -> None:
 
     assert "# dotrepo public lookup efficiency benchmark" in markdown
     assert "| Tasks answered | 1 / 2 |" in markdown
+    assert "## Gates" in markdown
+    assert "| minTaskHitRate | 0.5 | 0.0 | pass |" in markdown
     assert "| `orbit-docs-and-owner` | `github.com/example/orbit` | true | - |" in markdown

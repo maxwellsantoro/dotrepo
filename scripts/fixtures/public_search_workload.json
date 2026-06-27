@@ -1,0 +1,26 @@
+{
+  "schema": "dotrepo-public-search-workload/v0",
+  "description": "Fixture workload for public profile search quality against the public export surface.",
+  "tasks": [
+    {
+      "id": "orbit-docs-discovery",
+      "query": "orbit",
+      "expectedRepositories": ["github.com/example/orbit"],
+      "filters": {
+        "statuses": ["reviewed"],
+        "requireDocs": true,
+        "requireSecurityContact": true
+      },
+      "limit": 5
+    },
+    {
+      "id": "nova-maintainer-claim",
+      "query": "claim",
+      "expectedRepositories": ["github.com/example/nova"],
+      "filters": {
+        "statuses": ["reviewed"]
+      },
+      "limit": 5
+    }
+  ]
+}

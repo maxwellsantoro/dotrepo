@@ -1,10 +1,11 @@
 use anyhow::{bail, Context, Result};
 use dotrepo_core::{
-    adopt_managed_surface, analyze_index_promotion, append_claim_event, build_public_freshness,
-    current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_base,
-    generate_check_repository, import_repository_with_options, inspect_claim_directory,
-    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
-    preview_surfaces, public_profile_compare_with_base, public_profile_search_with_base,
+    adopt_managed_surface, adopt_overlay_record, analyze_index_promotion, append_claim_event,
+    build_public_freshness, current_public_freshness, current_timestamp_rfc3339,
+    export_public_index_static_with_base, generate_check_repository,
+    import_repository_with_options, inspect_claim_directory, inspect_surface_states,
+    load_manifest_document, load_manifest_from_root, managed_outputs, preview_surfaces,
+    public_profile_compare_with_base, public_profile_search_with_base,
     public_repository_batch_profiles_with_base, public_repository_batch_query_with_base,
     public_repository_profile_or_error_with_base, public_repository_query_or_error_with_base,
     public_repository_relations_with_base, public_repository_summary_or_error_with_base,
@@ -114,6 +115,21 @@ pub fn cmd_import(
     println!("- mode: {:?}", plan.manifest.record.mode);
     println!("- status: {:?}", plan.manifest.record.status);
 
+    Ok(())
+}
+
+pub fn cmd_adopt_overlay(root: PathBuf, overlay_record: PathBuf, force: bool) -> Result<()> {
+    let plan = adopt_overlay_record(&root, &overlay_record)?;
+    let manifest_path = plan.manifest_path.clone();
+    write_import_outputs(
+        vec![(plan.manifest_path, plan.manifest_text)],
+        force,
+        "--force",
+    )?;
+    println!("adopted overlay into {}", manifest_path.display());
+    println!("- imported from: {}", overlay_record.display());
+    println!("- mode: {:?}", plan.manifest.record.mode);
+    println!("- status: {:?}", plan.manifest.record.status);
     Ok(())
 }
 

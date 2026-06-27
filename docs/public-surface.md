@@ -63,6 +63,8 @@ The export-first hosted surface is the right default because it:
 - stable repository `index.json` with inventory and navigation links
 - stable per-repository `profile.json` with compact research fields,
   completeness signals, record freshness, evidence path, and trust context
+- optional profile `synthesis` sections loaded from validated `synthesis.toml`
+  sidecars, kept separate from factual profile fields
 - stable per-repository `trust.json` with selection, conflict, and claim context
 - local and CLI batch profile/query responses for repeated known-repository
   access
@@ -70,16 +72,20 @@ The export-first hosted surface is the right default because it:
   `/v0/batch/query?repo=...&path=...`
 - local and hosted structured profile search through `dotrepo public search`
   and `/v0/search`, covering text, language, topic, trust, and completeness
-  filters
+  filters with relevance ranking metadata kept separate from trust
 - local and hosted factual profile comparison through `dotrepo public compare`
   and `/v0/compare`, returning side-by-side trust, completeness, shared
   language/topic, and profile signals
 - local and hosted relationship traversal through `dotrepo public relations`
-  and `/v0/repos/<host>/<owner>/<repo>/relations`, resolving declared profile
-  references when the target exists in the same index
+  and `/v0/repos/<host>/<owner>/<repo>/relations`, resolving declared outgoing
+  profile references and inferred incoming reverse references when the related
+  repository exists in the same index
 - a deterministic lookup-efficiency benchmark harness for measuring task hit
   rate, field hit rate, and compact payload bytes against representative
   workloads
+- a deterministic search-quality benchmark harness for measuring discovery
+  success rate, rank quality, searched profile bytes, and freshness against
+  representative workloads
 - the same claim-aware selection and conflict semantics used by local
   query/trust flows
 - a stable `queryTemplate` contract in public responses, with deployed,
@@ -92,8 +98,11 @@ The hosted public surface provides:
 - compact per-repository research profiles for known repository identities
 - batch profile and batch field lookup through the reference CLI/core contract
   and hosted GET routes
-- structured profile search, factual profile comparison, and declared-reference
-  traversal through the reference CLI/core contract and hosted GET routes
+- structured profile search, factual profile comparison, and reference/
+  referenced-by traversal through the reference CLI/core contract and hosted GET
+  routes
+- optional bounded synthesis in profile responses when a valid synthesis sidecar
+  is present for the selected record
 - identity-first, trust-aware public responses
 - snapshot validators and a file manifest for cheap revalidation and selective
   refetch
@@ -124,8 +133,8 @@ contracts.
 ## What is not yet in scope
 
 The public surface does not yet include:
-- relevance ranking, bounded synthesis, or richer relationship classes beyond
-  declared `references`
+- production synthesis generation or richer semantic relationship classes beyond
+  reference/referenced-by traversal
 - live mutation or submission APIs
 - public SLA expectations
 

@@ -33,6 +33,14 @@ pub enum Command {
         #[arg(long)]
         force: bool,
     },
+    /// Bootstrap a native `.repo` from an existing public overlay record.
+    AdoptOverlay {
+        /// Path to an overlay record.toml from the public index.
+        overlay_record: PathBuf,
+        /// Overwrite an existing root `.repo`.
+        #[arg(long)]
+        force: bool,
+    },
     /// Validate only the root `.repo` or root `record.toml`.
     Validate,
     /// Validate a public index tree rooted at `index/`.

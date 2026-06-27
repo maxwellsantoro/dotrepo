@@ -111,6 +111,24 @@ fn public_profile_success_prints_compact_research_shape() {
         Value::String("reviewed".into())
     );
     assert_eq!(
+        json["synthesis"]["synthesisPath"],
+        Value::String("repos/github.com/example/orbit/synthesis.toml".into())
+    );
+    assert_eq!(
+        json["synthesis"]["architecture"]["summary"],
+        Value::String(
+            "Orbit exposes reviewed metadata and documentation entry points for agents.".into()
+        )
+    );
+    assert_eq!(
+        json["synthesis"]["forAgents"]["howToBuild"],
+        Value::String("unknown".into())
+    );
+    assert!(
+        json.get("repo").is_none(),
+        "synthesis must not overwrite factual profile fields"
+    );
+    assert_eq!(
         json["links"]["repository"],
         Value::String("/dotrepo/v0/repos/github.com/example/orbit/index.json".into())
     );
@@ -213,6 +231,18 @@ fn public_search_filters_profiles() {
         json["results"][0]["matched"][0],
         Value::String("identity".into())
     );
+    assert_eq!(
+        json["results"][0]["ranking"]["matchedFieldCount"],
+        Value::Number(4.into())
+    );
+    assert_eq!(
+        json["results"][0]["ranking"]["basis"][0],
+        Value::String("matchedFields".into())
+    );
+    assert!(
+        json["results"][0]["ranking"]["trust"].is_null(),
+        "ranking metadata must remain separate from trust"
+    );
     assert_eq!(json["filters"]["requireDocs"], Value::Bool(true));
 }
 
@@ -280,12 +310,59 @@ fn public_relations_resolves_referenced_profiles() {
         Value::String("github.com/example/nova".into())
     );
     assert_eq!(
+        json["references"][0]["relationship"],
+        Value::String("reference".into())
+    );
+    assert_eq!(
+        json["references"][0]["direction"],
+        Value::String("outgoing".into())
+    );
+    assert_eq!(
         json["references"][0]["identity"]["repo"],
         Value::String("nova".into())
     );
     assert_eq!(
         json["references"][0]["profile"]["links"]["self"],
         Value::String("/dotrepo/v0/repos/github.com/example/nova/profile.json".into())
+    );
+}
+
+#[test]
+fn public_relations_reports_reverse_references() {
+    let index_root = fixture_index_root();
+    let output = run_public(&[
+        "public",
+        "relations",
+        "github.com",
+        "example",
+        "nova",
+        "--base-path",
+        "/dotrepo",
+        "--index-root",
+        index_root.to_str().expect("fixture path is utf-8"),
+    ]);
+
+    assert!(output.status.success(), "relations response should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    assert_eq!(json["apiVersion"], Value::String("v0".into()));
+    assert_eq!(json["relationCount"], Value::Number(1.into()));
+    assert_eq!(
+        json["references"][0]["relationship"],
+        Value::String("referenced_by".into())
+    );
+    assert_eq!(
+        json["references"][0]["direction"],
+        Value::String("incoming".into())
+    );
+    assert_eq!(
+        json["references"][0]["target"],
+        Value::String("github.com/example/orbit".into())
+    );
+    assert_eq!(
+        json["references"][0]["profile"]["links"]["self"],
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/profile.json".into())
     );
 }
 
