@@ -378,8 +378,9 @@ Scheduled autonomous batches retain these run metrics in
 crawls, writes, failures, quality-reprocess queue entries, discovery queue
 entries, adjudication calls, token use, zero-model rate, promotion rate,
 repositories by adjudication tier, model-budget exhaustion runs, grouped failure
-classes, worst retained-run failure/adjudication/escalation rates, and repeated
-failure fingerprints with suggested regression fixture slugs. Repeated
+classes, worst retained-run failure/adjudication/escalation rates, worst
+retained-run zero-model rate, and repeated failure fingerprints with suggested
+regression fixture slugs. Repeated
 scheduled runs can demonstrate cost, resolution, and regression trends instead
 of only exposing a short-lived artifact for the latest run, and recurring
 failures can be converted into deterministic parser or fixture work. The runner
@@ -464,12 +465,14 @@ escalation rate, exhausted adjudication budgets, fixture-eligible recurring
 failures, and zero-model deterministic rate. The gate also verifies that it is
 reading the current retained-summary schema and required proof fields before
 treating aggregate rates as proof, and checks worst retained-run failure,
-adjudication, second-opinion, and strong remote escalation rates so a bad run
-cannot be hidden by favorable aggregate totals. The retained summary also
+adjudication, second-opinion, strong remote escalation, and zero-model rates so
+a bad run cannot be hidden by favorable aggregate totals. The retained summary also
 publishes recent and previous three-run windows. The gate checks the recent
 window's rate ceilings and compares failure, adjudication, and
 strong-remote-escalation drift against the previous window when it exists,
-falling back to the aggregate baseline while history is still short. This
+falling back to the aggregate baseline while history is still short. It also
+checks for a recent zero-model-rate drop, so a shift away from deterministic
+resolution is visible even while the absolute minimum still passes. This
 catches a worsening tail before it can be masked by older successful runs. The
 JSON and Markdown gate reports include the configured threshold set and a
 pass/fail check summary, so a retained artifact can be audited without

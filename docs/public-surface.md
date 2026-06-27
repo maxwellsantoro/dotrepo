@@ -59,7 +59,7 @@ The export-first hosted surface is the right default because it:
   `scripts/diff_public_export_files.py` for mirrors and agent caches
 - deterministic profile coverage reports through
   `scripts/check_public_profile_coverage.py` for profile-count and
-  high-signal gates
+  high-signal gates, plus per-signal minimum gates for completeness growth
 - stable repository `index.json` with inventory and navigation links
 - stable per-repository `profile.json` with compact research fields,
   completeness signals, record freshness, evidence path, and trust context

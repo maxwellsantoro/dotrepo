@@ -326,8 +326,8 @@ Current status:
   agent caches
 - `scripts/check_public_profile_coverage.py` now measures exported profile
   count, high-signal profile count and ratio, missing quality signals, and
-  optional Milestone 2 count, ratio, and per-signal ceiling gates against the
-  public tree
+  optional Milestone 2 count, ratio, per-signal minimum, and per-signal ceiling
+  gates against the public tree
 - `scripts/build_public_lookup_workload.py` now derives larger benchmark
   workloads from exported profile completeness so production lookup-efficiency
   reports do not depend on a hand-maintained tiny fixture

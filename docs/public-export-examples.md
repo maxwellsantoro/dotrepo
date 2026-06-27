@@ -307,6 +307,9 @@ uv run python scripts/check_public_profile_coverage.py \
   --public-root public \
   --min-profiles 500 \
   --min-high-signal 500 \
+  --min-signal hasBuild=500 \
+  --min-signal hasTest=500 \
+  --min-signal hasDocs=500 \
   --output-json /tmp/dotrepo-profile-coverage.json \
   --output-md /tmp/dotrepo-profile-coverage.md
 ```
@@ -314,4 +317,6 @@ uv run python scripts/check_public_profile_coverage.py \
 The coverage report counts exported `profile.json` files, marks profiles as
 high-signal when they have a purpose, reviewed-or-better status,
 medium-or-better confidence, and no selected-record conflicts, then lists the
-lowest-signal profiles to improve next.
+lowest-signal profiles to improve next. `--min-signal` gates can ratchet
+individual completeness signals such as build, test, docs, ownership, security,
+and license coverage toward the same profile-count target.

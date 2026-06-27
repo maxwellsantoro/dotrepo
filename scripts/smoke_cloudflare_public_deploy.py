@@ -157,29 +157,73 @@ def expected_homepage_snapshot_state(meta: dict[str, Any], inventory: dict[str, 
     }
 
 
+def load_json_file(path: Path, description: str) -> dict[str, Any]:
+    if not path.is_file():
+        raise SystemExit(f"missing reviewed export {description}: {path}")
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"reviewed export {description} is invalid JSON: {path}: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise SystemExit(f"reviewed export {description} is malformed: {path}")
+    return payload
+
+
+def load_reviewed_public_state(public_root: Path) -> dict[str, dict[str, Any]]:
+    return {
+        "meta": load_json_file(public_root / "v0" / "meta.json", "metadata"),
+        "files": load_json_file(public_root / "v0" / "files.json", "file manifest"),
+        "inventory": load_json_file(
+            public_root / "v0" / "repos" / "index.json", "repository inventory"
+        ),
+    }
+
+
+def deploy_coherence_mismatches(
+    reviewed: dict[str, dict[str, Any]], live: dict[str, dict[str, Any]]
+) -> list[str]:
+    mismatches = []
+    for key, label in (
+        ("meta", "v0/meta.json"),
+        ("files", "v0/files.json"),
+        ("inventory", "v0/repos/index.json"),
+    ):
+        if live.get(key) != reviewed.get(key):
+            mismatches.append(label)
+    return mismatches
+
+
 def fetch_live_public_state(
     deploy_url: str, base_path: str, cache_bust: str
-) -> tuple[str, dict[str, Any], dict[str, Any], dict[str, Any], str, str]:
+) -> tuple[
+    str,
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+    str,
+    str,
+    str,
+]:
     homepage_url = f"{deploy_url}{base_path or '/'}"
     meta_url = f"{deploy_url}{base_path}/v0/meta.json"
+    files_url = f"{deploy_url}{base_path}/v0/files.json"
     inventory_url = f"{deploy_url}{base_path}/v0/repos/index.json"
 
     homepage = http_get_text(with_query_param(homepage_url, "_smoke", cache_bust))
     homepage_state = extract_homepage_snapshot_state(homepage, homepage_url)
     meta = http_get_json(with_query_param(meta_url, "_smoke", cache_bust))
+    files = http_get_json(with_query_param(files_url, "_smoke", cache_bust))
     inventory = http_get_json(with_query_param(inventory_url, "_smoke", cache_bust))
-    return homepage, homepage_state, meta, inventory, homepage_url, inventory_url
+    return homepage, homepage_state, meta, files, inventory, homepage_url, files_url, inventory_url
 
 
 def main() -> int:
     args = parse_args()
     public_root = Path(args.public_root).resolve()
-    inventory_path = public_root / "v0" / "repos" / "index.json"
-    if not inventory_path.is_file():
-        raise SystemExit(f"missing reviewed export inventory: {inventory_path}")
+    reviewed = load_reviewed_public_state(public_root)
 
-    inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
-    repositories = inventory.get("repositories")
+    repositories = reviewed["inventory"].get("repositories")
     if not isinstance(repositories, list) or not repositories:
         raise SystemExit("reviewed export inventory contains no repositories")
     links = repositories[0].get("links", {})
@@ -210,21 +254,26 @@ def main() -> int:
             homepage,
             homepage_state,
             meta,
+            files,
             inventory,
             homepage_url,
+            files_url,
             inventory_url,
         ) = fetch_live_public_state(deploy_url, base_path, cache_bust)
         if meta.get("apiVersion") != "v0":
             raise SystemExit(f"unexpected apiVersion from {meta_url}: {meta.get('apiVersion')}")
 
         expected_homepage_state = expected_homepage_snapshot_state(meta, inventory)
-        if homepage_state == expected_homepage_state:
+        live = {"meta": meta, "files": files, "inventory": inventory}
+        mismatches = deploy_coherence_mismatches(reviewed, live)
+        if homepage_state == expected_homepage_state and not mismatches:
             break
         if time.monotonic() >= deadline:
             raise SystemExit(
-                "deployed homepage snapshot state does not match live public JSON after waiting "
-                f"{args.settle_timeout_seconds:g}s: expected {expected_homepage_state}, "
-                f"got {homepage_state}"
+                "deployed public surface did not converge to the reviewed export after waiting "
+                f"{args.settle_timeout_seconds:g}s: homepage expected {expected_homepage_state}, "
+                f"homepage got {homepage_state}, mismatched reviewed files: "
+                f"{', '.join(mismatches) or 'none'}"
             )
         time.sleep(max(args.settle_interval_seconds, 0.0))
 
@@ -290,6 +339,7 @@ def main() -> int:
 
     print(f"smoke ok: {homepage_url}")
     print(f"smoke ok: {meta_url}")
+    print(f"smoke ok: {files_url}")
     print(f"smoke ok: {inventory_url}")
     print(f"smoke ok: {query_url}")
     print(f"smoke ok: {batch_profiles_url}")

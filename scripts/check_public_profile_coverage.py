@@ -50,6 +50,16 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--min-signal",
+        action="append",
+        default=[],
+        metavar="SIGNAL=COUNT",
+        help=(
+            "Fail when fewer than COUNT profiles carry SIGNAL. May be repeated; "
+            "signal names match report signalCounts keys."
+        ),
+    )
+    parser.add_argument(
         "--max-items",
         type=int,
         default=10,
@@ -80,31 +90,39 @@ def ratio(numerator: int, denominator: int) -> Optional[float]:
     return round(numerator / denominator, 4)
 
 
-def parse_max_missing_signal(values: list[str]) -> dict[str, int]:
+def parse_signal_limits(values: list[str], flag: str) -> dict[str, int]:
     limits = {}
     for raw in values:
         if "=" not in raw:
             raise SystemExit(
-                f"--max-missing-signal must use SIGNAL=COUNT, got {raw!r}"
+                f"{flag} must use SIGNAL=COUNT, got {raw!r}"
             )
         signal, count_text = raw.split("=", 1)
         signal = signal.strip()
         if not signal:
             raise SystemExit(
-                f"--max-missing-signal must include a signal name, got {raw!r}"
+                f"{flag} must include a signal name, got {raw!r}"
             )
         try:
             count = int(count_text)
         except ValueError as exc:
             raise SystemExit(
-                f"--max-missing-signal count must be an integer, got {raw!r}"
+                f"{flag} count must be an integer, got {raw!r}"
             ) from exc
         if count < 0:
             raise SystemExit(
-                f"--max-missing-signal count must be >= 0, got {raw!r}"
+                f"{flag} count must be >= 0, got {raw!r}"
             )
         limits[signal] = count
     return limits
+
+
+def parse_max_missing_signal(values: list[str]) -> dict[str, int]:
+    return parse_signal_limits(values, "--max-missing-signal")
+
+
+def parse_min_signal(values: list[str]) -> dict[str, int]:
+    return parse_signal_limits(values, "--min-signal")
 
 
 def profile_identity(profile: dict[str, Any], path: Path) -> str:
@@ -167,6 +185,7 @@ def summarize(
     max_items: int,
     min_high_signal_ratio: float = 0.0,
     max_missing_signal: dict[str, int] | None = None,
+    min_signal: dict[str, int] | None = None,
 ) -> dict[str, Any]:
     profiles = [summarize_profile(path, public_root) for path in profile_paths(public_root)]
     profile_count = len(profiles)
@@ -174,8 +193,12 @@ def summarize(
     lower_signal_profiles = [profile for profile in profiles if not profile["isHighSignal"]]
     status_counts = Counter(profile["selectedStatus"] for profile in profiles)
     confidence_counts = Counter(profile["confidence"] for profile in profiles)
+    signal_counts: Counter[str] = Counter()
     missing_signal_counts: Counter[str] = Counter()
     for profile in profiles:
+        signal_counts.update(
+            key for key, value in profile["signalFlags"].items() if value
+        )
         missing_signal_counts.update(profile["missingSignals"])
 
     high_signal_ratio = ratio(len(high_signal_profiles), profile_count)
@@ -187,6 +210,15 @@ def summarize(
             "passed": int(missing_signal_counts.get(signal) or 0) <= threshold,
         }
         for signal, threshold in sorted(missing_limits.items())
+    }
+    signal_minimums = min_signal or {}
+    min_signal_gates = {
+        signal: {
+            "threshold": threshold,
+            "actual": int(signal_counts.get(signal) or 0),
+            "passed": int(signal_counts.get(signal) or 0) >= threshold,
+        }
+        for signal, threshold in sorted(signal_minimums.items())
     }
     gates = {
         "minProfiles": {
@@ -204,12 +236,14 @@ def summarize(
             "actual": high_signal_ratio,
             "passed": (high_signal_ratio or 0.0) >= min_high_signal_ratio,
         },
+        "minSignal": min_signal_gates,
         "maxMissingSignal": missing_signal_gates,
     }
     passed = (
         gates["minProfiles"]["passed"]
         and gates["minHighSignal"]["passed"]
         and gates["minHighSignalRatio"]["passed"]
+        and all(gate["passed"] for gate in min_signal_gates.values())
         and all(gate["passed"] for gate in missing_signal_gates.values())
     )
 
@@ -222,6 +256,7 @@ def summarize(
             "highSignalRatio": high_signal_ratio,
             "statusCounts": dict(sorted(status_counts.items())),
             "confidenceCounts": dict(sorted(confidence_counts.items())),
+            "signalCounts": dict(sorted(signal_counts.items())),
             "missingSignalCounts": dict(sorted(missing_signal_counts.items())),
         },
         "gates": gates,
@@ -257,6 +292,14 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"- `{signal}`: {gate['actual']} / {gate['threshold']} ({result})"
             )
         lines.append("")
+    if gates["minSignal"]:
+        lines.extend(["## Signal Minimum Gates", ""])
+        for signal, gate in gates["minSignal"].items():
+            result = "pass" if gate["passed"] else "fail"
+            lines.append(
+                f"- `{signal}`: {gate['actual']} / {gate['threshold']} ({result})"
+            )
+        lines.append("")
     lines.extend(["## Lower-Signal Profiles", ""])
     if not report["lowerSignalProfiles"]:
         lines.append("- None in this report window.")
@@ -280,6 +323,7 @@ def main() -> int:
         max_items=args.max_items,
         min_high_signal_ratio=args.min_high_signal_ratio,
         max_missing_signal=parse_max_missing_signal(args.max_missing_signal),
+        min_signal=parse_min_signal(args.min_signal),
     )
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.output_json:

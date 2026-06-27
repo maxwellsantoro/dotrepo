@@ -25,6 +25,7 @@ def args(**overrides: object) -> Namespace:
         "max_recent_failure_rate_delta": 0.02,
         "max_recent_adjudication_rate_delta": 0.10,
         "max_recent_api_escalation_rate_delta": 0.02,
+        "max_recent_zero_model_rate_drop": 0.10,
         "max_fixture_eligible_recurring_failures": 0,
         "min_zero_model_rate": 0.75,
     }
@@ -50,6 +51,7 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
             "adjudicationRate": 0.2,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
         },
         "recentWindowRunCount": 3,
         "recentWindowRates": {
@@ -85,8 +87,8 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
     assert report["passed"]
     assert all(item["passed"] for item in report["checks"])
     assert report["checkSummary"] == {
-        "total": 25,
-        "passed": 25,
+        "total": 27,
+        "passed": 27,
         "failed": 0,
         "failedLabels": [],
     }
@@ -102,6 +104,7 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
         "maxRecentFailureRateDelta": 0.02,
         "maxRecentAdjudicationRateDelta": 0.10,
         "maxRecentApiEscalationRateDelta": 0.02,
+        "maxRecentZeroModelRateDrop": 0.10,
         "maxFixtureEligibleRecurringFailures": 0,
         "minZeroModelRate": 0.75,
     }
@@ -130,6 +133,7 @@ def test_evaluate_reports_not_yet_for_insufficient_or_expensive_runs() -> None:
             "adjudicationRate": 0.5,
             "secondOpinionRate": 0.25,
             "apiEscalationRate": 0.25,
+            "zeroModelRate": 0.5,
         },
         "recentWindowRunCount": 1,
         "recentWindowRates": {
@@ -191,6 +195,7 @@ def test_evaluate_reports_not_yet_for_insufficient_or_expensive_runs() -> None:
     assert "adjudication budget exhaustion" in failed_labels
     assert "fixture-eligible recurring failures" in failed_labels
     assert "zero-model deterministic rate" in failed_labels
+    assert "worst-run zero-model deterministic rate" in failed_labels
     assert "recent-window zero-model deterministic rate" in failed_labels
 
 
@@ -212,6 +217,7 @@ def test_evaluate_allows_environmental_recurring_failures_for_fixture_gate() -> 
             "adjudicationRate": 0.2,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
         },
         "recentWindowRunCount": 3,
         "recentWindowRates": {
@@ -272,6 +278,7 @@ def test_evaluate_rejects_worst_run_regression_when_aggregate_rates_pass() -> No
             "adjudicationRate": 0.5,
             "secondOpinionRate": 0.25,
             "apiEscalationRate": 0.25,
+            "zeroModelRate": 0.8,
         },
         "recentWindowRunCount": 3,
         "recentWindowRates": {
@@ -307,6 +314,55 @@ def test_evaluate_rejects_worst_run_regression_when_aggregate_rates_pass() -> No
     }
 
 
+def test_evaluate_rejects_worst_run_zero_model_regression() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 4,
+        "budgetExhaustedRuns": 0,
+        "totals": {"crawled": 40, "written": 38, "failed": 0, "promoted": 8},
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "promotionRate": 0.2,
+            "zeroModelRate": 0.8,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.25,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.7,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.8,
+        },
+        "previousWindowRunCount": 1,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.8,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 8},
+        "regressionFixtureCandidates": [],
+    }
+
+    report = telemetry_gate.evaluate(summary, args())
+    failed_labels = {
+        item["label"] for item in report["checks"] if not item["passed"]
+    }
+
+    assert not report["passed"]
+    assert failed_labels == {"worst-run zero-model deterministic rate"}
+
+
 def test_evaluate_rejects_recent_window_drift_when_ceiling_rates_pass() -> None:
     summary = {
         "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
@@ -325,6 +381,7 @@ def test_evaluate_rejects_recent_window_drift_when_ceiling_rates_pass() -> None:
             "adjudicationRate": 0.25,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.04,
+            "zeroModelRate": 0.8,
         },
         "recentWindowRunCount": 3,
         "recentWindowRates": {
@@ -332,7 +389,7 @@ def test_evaluate_rejects_recent_window_drift_when_ceiling_rates_pass() -> None:
             "adjudicationRate": 0.25,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.04,
-            "zeroModelRate": 0.75,
+            "zeroModelRate": 0.8,
         },
         "previousWindowRunCount": 0,
         "previousWindowRates": {
@@ -376,6 +433,7 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
             "adjudicationRate": 0.25,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.04,
+            "zeroModelRate": 0.75,
         },
         "recentWindowRunCount": 3,
         "recentWindowRates": {
@@ -383,7 +441,7 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
             "adjudicationRate": 0.25,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.04,
-            "zeroModelRate": 0.75,
+            "zeroModelRate": 0.8,
         },
         "previousWindowRunCount": 3,
         "previousWindowRates": {
@@ -391,7 +449,7 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
             "adjudicationRate": 0.1,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.0,
-            "zeroModelRate": 0.9,
+            "zeroModelRate": 0.85,
         },
         "repositoriesByAdjudicationTier": {"local_primary": 12, "api_escalation": 2},
         "regressionFixtureCandidates": [],
@@ -408,6 +466,56 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
         "recent-window model adjudication drift",
         "recent-window strong remote escalation drift",
     }
+
+
+def test_evaluate_rejects_recent_zero_model_drop_when_absolute_rates_pass() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 6,
+        "budgetExhaustedRuns": 0,
+        "totals": {"crawled": 60, "written": 58, "failed": 0, "promoted": 10},
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.1,
+            "promotionRate": 0.166667,
+            "zeroModelRate": 0.9,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.25,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.75,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.25,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.75,
+        },
+        "previousWindowRunCount": 3,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.95,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 6},
+        "regressionFixtureCandidates": [],
+    }
+
+    report = telemetry_gate.evaluate(summary, args())
+    failed_labels = {
+        item["label"] for item in report["checks"] if not item["passed"]
+    }
+
+    assert not report["passed"]
+    assert failed_labels == {"recent-window zero-model deterministic rate drop"}
+    assert report["inputs"]["recentZeroModelRateDrop"] == 0.19999999999999996
 
 
 def test_evaluate_rejects_missing_summary_schema() -> None:
@@ -427,6 +535,7 @@ def test_evaluate_rejects_missing_summary_schema() -> None:
             "adjudicationRate": 0.2,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
         },
         "recentWindowRunCount": 3,
         "recentWindowRates": {
@@ -526,6 +635,7 @@ def test_render_markdown_includes_check_table() -> None:
                 "adjudicationRate": 0.2,
                 "zeroModelRate": 0.8,
             },
+            "recentZeroModelRateDrop": 0.1,
             "previousWindowRates": {
                 "adjudicationRate": 0.1,
             },
@@ -533,6 +643,7 @@ def test_render_markdown_includes_check_table() -> None:
                 "failureRate": 0.05,
                 "adjudicationRate": 0.25,
                 "secondOpinionRate": 0.1,
+                "zeroModelRate": 0.75,
             },
             "fixtureEligibleRecurringFailures": [{"fingerprint": "Cargo.toml parse error"}],
         },
@@ -556,9 +667,11 @@ def test_render_markdown_includes_check_table() -> None:
     assert "- previous-window adjudication rate: 10.00%" in rendered
     assert "- recent-window adjudication rate: 20.00%" in rendered
     assert "- recent-window zero-model rate: 80.00%" in rendered
+    assert "- recent-window zero-model drop: 10.00%" in rendered
     assert "- drift reference: previous-window" in rendered
     assert "- worst-run adjudication rate: 25.00%" in rendered
     assert "- worst-run second-opinion rate: 10.00%" in rendered
+    assert "- worst-run zero-model rate: 75.00%" in rendered
     assert "- fixture-eligible recurring failures: 1" in rendered
     assert "- thresholds: min runs 3, min crawled 10, max adjudication 25.00%, max API escalation 5.00%" in rendered
     assert "| retained repeated runs | 1 | >= 3 | fail |" in rendered

@@ -165,6 +165,9 @@ upstream native `.repo`.
 - deploys to `dotrepo.org`
 - smoke-tests the deployed custom domain when it resolves, otherwise falls back
   to the deployed `workers.dev` staging origin
+- verifies the deployed `meta.json`, `files.json`, and repository inventory are
+  byte-for-byte JSON-equivalent to the reviewed export snapshot before route
+  smoke checks pass
 
 The export tree is the source of truth. The hosted surface deploys the same
 `public/` output.

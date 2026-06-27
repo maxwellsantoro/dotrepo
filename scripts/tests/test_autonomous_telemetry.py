@@ -78,6 +78,7 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "apiEscalationRate": 0.5,
         "failureRate": 0.5,
         "secondOpinionRate": 0.0,
+        "zeroModelRate": 0.5,
     }
     assert summary["recentWindowRunCount"] == 2
     assert summary["recentWindowRates"] == {

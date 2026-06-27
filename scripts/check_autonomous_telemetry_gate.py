@@ -33,6 +33,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-recent-failure-rate-delta", type=float, default=0.02)
     parser.add_argument("--max-recent-adjudication-rate-delta", type=float, default=0.10)
     parser.add_argument("--max-recent-api-escalation-rate-delta", type=float, default=0.02)
+    parser.add_argument("--max-recent-zero-model-rate-drop", type=float, default=0.10)
     parser.add_argument("--max-fixture-eligible-recurring-failures", type=int, default=0)
     parser.add_argument("--min-zero-model-rate", type=float, default=0.75)
     return parser.parse_args()
@@ -86,6 +87,7 @@ def thresholds(args: argparse.Namespace) -> dict:
         "maxRecentFailureRateDelta": args.max_recent_failure_rate_delta,
         "maxRecentAdjudicationRateDelta": args.max_recent_adjudication_rate_delta,
         "maxRecentApiEscalationRateDelta": args.max_recent_api_escalation_rate_delta,
+        "maxRecentZeroModelRateDrop": args.max_recent_zero_model_rate_drop,
         "maxFixtureEligibleRecurringFailures": args.max_fixture_eligible_recurring_failures,
         "minZeroModelRate": args.min_zero_model_rate,
     }
@@ -121,8 +123,9 @@ def retained_proof_fields_present(summary: dict) -> bool:
         "secondOpinionRate",
         "apiEscalationRate",
     }
+    required_worst_rate_keys = required_rate_keys | {"zeroModelRate"}
     return (
-        required_rate_keys.issubset(worst_rates)
+        required_worst_rate_keys.issubset(worst_rates)
         and required_rate_keys.issubset(recent_window_rates)
         and required_rate_keys.issubset(previous_window_rates)
     )
@@ -156,6 +159,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     worst_adjudication_rate = number(worst_rates.get("adjudicationRate"))
     worst_second_opinion_rate = number(worst_rates.get("secondOpinionRate"))
     worst_api_escalation_rate = number(worst_rates.get("apiEscalationRate"))
+    worst_zero_model_rate = number(worst_rates.get("zeroModelRate"))
     recent_failure_rate = number(recent_window_rates.get("failureRate"))
     recent_adjudication_rate = number(recent_window_rates.get("adjudicationRate"))
     recent_second_opinion_rate = number(
@@ -176,6 +180,9 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     recent_api_escalation_rate_delta = recent_api_escalation_rate - number(
         drift_reference_rates.get("apiEscalationRate")
     )
+    recent_zero_model_rate_drop = number(
+        drift_reference_rates.get("zeroModelRate")
+    ) - recent_zero_model_rate
     fixture_eligible_failures = fixture_eligible_recurring_failures(summary)
     fixture_eligible_failure_count = len(fixture_eligible_failures)
     proof_fields_present = retained_proof_fields_present(summary)
@@ -308,6 +315,12 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             recent_api_escalation_rate_delta <= args.max_recent_api_escalation_rate_delta,
         ),
         check(
+            "recent-window zero-model deterministic rate drop",
+            round(recent_zero_model_rate_drop, 6),
+            f"<= {args.max_recent_zero_model_rate_drop}",
+            recent_zero_model_rate_drop <= args.max_recent_zero_model_rate_drop,
+        ),
+        check(
             "adjudication budget exhaustion",
             budget_exhausted_runs,
             "0 exhausted runs",
@@ -324,6 +337,12 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             round(zero_model_rate, 6),
             f">= {args.min_zero_model_rate}",
             zero_model_rate >= args.min_zero_model_rate,
+        ),
+        check(
+            "worst-run zero-model deterministic rate",
+            round(worst_zero_model_rate, 6),
+            f">= {args.min_zero_model_rate}",
+            not proof_fields_present or worst_zero_model_rate >= args.min_zero_model_rate,
         ),
         check(
             "recent-window zero-model deterministic rate",
@@ -354,6 +373,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "recentFailureRateDelta": recent_failure_rate_delta,
             "recentAdjudicationRateDelta": recent_adjudication_rate_delta,
             "recentApiEscalationRateDelta": recent_api_escalation_rate_delta,
+            "recentZeroModelRateDrop": recent_zero_model_rate_drop,
             "promotionRate": promotion_rate,
             "fixtureEligibleRecurringFailures": fixture_eligible_failures,
             "totals": totals,
@@ -387,10 +407,12 @@ def render_markdown(report: dict) -> str:
         f"- previous-window adjudication rate: {number(previous_window_rates.get('adjudicationRate')):.2%}",
         f"- recent-window adjudication rate: {number(recent_window_rates.get('adjudicationRate')):.2%}",
         f"- recent-window zero-model rate: {number(recent_window_rates.get('zeroModelRate')):.2%}",
+        f"- recent-window zero-model drop: {number(inputs.get('recentZeroModelRateDrop')):.2%}",
         f"- drift reference: {inputs.get('driftReference') or 'unknown'}",
         f"- worst-run failure rate: {number(worst_rates.get('failureRate')):.2%}",
         f"- worst-run adjudication rate: {number(worst_rates.get('adjudicationRate')):.2%}",
         f"- worst-run second-opinion rate: {number(worst_rates.get('secondOpinionRate')):.2%}",
+        f"- worst-run zero-model rate: {number(worst_rates.get('zeroModelRate')):.2%}",
         f"- fixture-eligible recurring failures: {len(fixture_backlog)}",
         f"- thresholds: min runs {limits.get('minRuns', 0)}, min crawled {limits.get('minCrawled', 0)}, max adjudication {number(limits.get('maxAdjudicationRate')):.2%}, max API escalation {number(limits.get('maxApiEscalationRate')):.2%}",
         "",

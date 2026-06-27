@@ -666,12 +666,14 @@ def run_rates(run_telemetry: dict) -> dict[str, float]:
             "adjudicationRate": 0.0,
             "secondOpinionRate": 0.0,
             "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.0,
         }
     return {
         "failureRate": int(run_telemetry.get("failed") or 0) / crawled,
         "adjudicationRate": (crawled - zero_model_runs) / crawled,
         "secondOpinionRate": int(tiers.get("local_second_opinion") or 0) / crawled,
         "apiEscalationRate": int(tiers.get("api_escalation") or 0) / crawled,
+        "zeroModelRate": zero_model_runs / crawled,
     }
 
 
@@ -721,7 +723,9 @@ def aggregate_runs(runs: list[dict]) -> dict:
         "adjudicationRate": 0.0,
         "secondOpinionRate": 0.0,
         "apiEscalationRate": 0.0,
+        "zeroModelRate": 1.0,
     }
+    saw_crawled_run = False
 
     for run_telemetry in runs:
         generated_at = run_telemetry.get("generatedAt")
@@ -731,7 +735,12 @@ def aggregate_runs(runs: list[dict]) -> dict:
         if bool(run_telemetry.get("adjudicationBudgetExhausted", False)):
             budget_exhausted_runs += 1
         for key, value in run_rates(run_telemetry).items():
-            worst_rates[key] = max(worst_rates[key], value)
+            if key == "zeroModelRate":
+                if int(run_telemetry.get("crawled") or 0):
+                    saw_crawled_run = True
+                    worst_rates[key] = min(worst_rates[key], value)
+            else:
+                worst_rates[key] = max(worst_rates[key], value)
         for key in (
             "crawled",
             "written",
@@ -784,6 +793,8 @@ def aggregate_runs(runs: list[dict]) -> dict:
 
     crawled = totals["crawled"]
     repos_with_adjudication = crawled - totals["zeroModelRuns"]
+    if not saw_crawled_run:
+        worst_rates["zeroModelRate"] = 0.0
     recent_window_runs = runs[-3:]
     previous_window_runs = runs[-6:-3]
     recent_window_rates = aggregate_rates(recent_window_runs)

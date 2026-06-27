@@ -99,8 +99,13 @@ The workflow in `.github/workflows/public-cloudflare.yml` now:
 
 The live smoke checks:
 
+- the deployed `v0/meta.json`, `v0/files.json`, and `v0/repos/index.json`
+  exactly match the reviewed export that was staged for deployment
+- the homepage embedded snapshot state matches the deployed public JSON
 - `/<base>/v0/meta.json`
 - one emitted `queryTemplate` resolved with `repo.description`
+- batch profile lookup, batch field lookup, search, compare, and relation
+  traversal routes for the first reviewed repository
 
 That keeps local review, pre-deploy smoke, and post-deploy smoke aligned on one
 snapshot family.
