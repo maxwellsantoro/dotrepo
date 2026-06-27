@@ -107,10 +107,21 @@ pub fn write_synthesis(root: &Path, synthesis: &SynthesisDocument) -> Result<Syn
     })
 }
 
+fn factual_command_or_placeholder(value: &Option<String>, placeholder: &str) -> String {
+    value
+        .as_deref()
+        .filter(|command| !command.trim().is_empty())
+        .map(str::to_string)
+        .unwrap_or_else(|| placeholder.to_string())
+}
+
 /// Generate a minimal "Generated" mode synthesis document using facts from the manifest.
 /// This is a starting point for production synthesis (M3); the result should be reviewed
 /// and may be supplemented with architecture/key concepts from README or manual curation.
-/// how_to_build / how_to_test are populated from the record when present (and will pass validation).
+///
+/// `generated_at` must be a valid RFC3339 timestamp. Callers should run `validate_synthesis`
+/// before persisting. `how_to_build` / `how_to_test` are populated from `manifest.repo` when
+/// present and non-empty (and will pass validation).
 pub fn generate_basic_synthesis(
     manifest: &Manifest,
     generated_at: &str,
@@ -118,16 +129,14 @@ pub fn generate_basic_synthesis(
     model: &str,
     provider: &str,
 ) -> SynthesisDocument {
-    let how_to_build = manifest
-        .repo
-        .build
-        .clone()
-        .unwrap_or_else(|| "See repository documentation or build system for instructions.".to_string());
-    let how_to_test = manifest
-        .repo
-        .test
-        .clone()
-        .unwrap_or_else(|| "See repository documentation or test system for instructions.".to_string());
+    let how_to_build = factual_command_or_placeholder(
+        &manifest.repo.build,
+        "See repository documentation or build system for instructions.",
+    );
+    let how_to_test = factual_command_or_placeholder(
+        &manifest.repo.test,
+        "See repository documentation or test system for instructions.",
+    );
 
     // Minimal placeholders; real production use would enrich from README analysis.
     SynthesisDocument {

@@ -749,11 +749,7 @@ fn strip_wrapping_emphasis(mut line: &str) -> &str {
         if let Some(inner) = trimmed
             .strip_prefix('*')
             .and_then(|s| s.strip_suffix('*'))
-            .or_else(|| {
-                trimmed
-                    .strip_prefix('_')
-                    .and_then(|s| s.strip_suffix('_'))
-            })
+            .or_else(|| trimmed.strip_prefix('_').and_then(|s| s.strip_suffix('_')))
         {
             line = inner;
             continue;
@@ -1200,7 +1196,13 @@ fn find_mailto_or_email(contents: &str) -> Option<String> {
 fn find_bare_email_anywhere(text: &str) -> Option<String> {
     let lower = text.to_ascii_lowercase();
     // Look for common security email patterns
-    for prefix in ["security@", "vuln@", "security-response@", "cve@", "disclosure@"] {
+    for prefix in [
+        "security@",
+        "vuln@",
+        "security-response@",
+        "cve@",
+        "disclosure@",
+    ] {
         if let Some(pos) = lower.find(prefix) {
             // extract until whitespace or common terminators
             let start = pos;
@@ -1565,7 +1567,9 @@ fn extract_link_destination(raw: &str) -> Option<String> {
 }
 
 fn is_team_handle(token: &str) -> bool {
-    token.strip_prefix('@').map_or(false, |rest| rest.contains('/'))
+    token
+        .strip_prefix('@')
+        .map_or(false, |rest| rest.contains('/'))
 }
 
 fn trim_contact_token(token: &str) -> &str {

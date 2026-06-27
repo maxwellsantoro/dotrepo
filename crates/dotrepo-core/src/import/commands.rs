@@ -218,9 +218,11 @@ fn infer_package_json_commands(file: &ImportedFile) -> Option<ImportedCommandCan
             .and_then(serde_json::Value::as_str),
     );
 
-    let build = pick_node_script_command(scripts, &["build", "compile", "dist", "bundle"], || runner.build_command());
-    let test = pick_node_script_command(scripts, &["test"], || runner.test_command())
-        .filter(|_| {
+    let build = pick_node_script_command(scripts, &["build", "compile", "dist", "bundle"], || {
+        runner.build_command()
+    });
+    let test =
+        pick_node_script_command(scripts, &["test"], || runner.test_command()).filter(|_| {
             scripts
                 .get("test")
                 .and_then(serde_json::Value::as_str)
@@ -303,40 +305,81 @@ fn infer_pyproject_test_command(parsed: &toml::Value) -> Option<String> {
     None
 }
 
-fn infer_setup_py_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
-    let lower = file.contents.to_ascii_lowercase();
-    // Conservative: only claim test if there's evidence of testing setup.
+fn infer_setup_py_test_command(contents: &str) -> Option<String> {
+    let lower = contents.to_ascii_lowercase();
+    // Conservative: only claim test when the runner is identifiable.
     // Avoid claiming build from setup.py (often just package metadata).
-    let has_test_evidence = lower.contains("pytest")
-        || lower.contains("test_suite")
-        || lower.contains("tests_require")
-        || lower.contains("test")
-        || lower.contains("unittest");
-    if !has_test_evidence {
-        return None;
+    if lower.contains("pytest") {
+        return Some("python -m pytest".into());
     }
+    if lower.contains("unittest") || lower.contains("test_suite") {
+        return Some("python -m unittest discover".into());
+    }
+    None
+}
+
+fn infer_setup_py_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let test = infer_setup_py_test_command(&file.contents)?;
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::Manifest,
         build: None,
-        test: Some("python -m pytest".into()),
+        test: Some(test),
     })
 }
 
-fn infer_setup_cfg_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
-    let lower = file.contents.to_ascii_lowercase();
-    let has_test = lower.contains("[tool:pytest]")
-        || lower.contains("[pytest]")
-        || lower.contains("test")
-        || lower.contains("extras_require") && lower.contains("test");
-    if !has_test {
-        return None;
+fn infer_setup_cfg_test_command(contents: &str) -> Option<String> {
+    let mut current_section: Option<String> = None;
+    let mut has_pytest_section = false;
+    let mut has_test_extras_pytest = false;
+    let mut has_test_suite = false;
+
+    for line in contents.lines() {
+        let trimmed = line.trim();
+        if trimmed.starts_with('[') && trimmed.ends_with(']') {
+            let section = trimmed[1..trimmed.len() - 1].trim().to_ascii_lowercase();
+            has_pytest_section |= section == "tool:pytest" || section == "pytest";
+            current_section = Some(section);
+            continue;
+        }
+        if trimmed.is_empty() || trimmed.starts_with('#') || trimmed.starts_with(';') {
+            continue;
+        }
+        let Some(section) = current_section.as_ref() else {
+            continue;
+        };
+        let Some((key, value)) = trimmed.split_once('=') else {
+            continue;
+        };
+        let key = key.trim().to_ascii_lowercase();
+        let value = value.trim().to_ascii_lowercase();
+        match section.as_str() {
+            "options" | "metadata" if key == "test_suite" => has_test_suite = true,
+            "options.extras_require" if key == "test" || key == "testing" => {
+                if value.contains("pytest") {
+                    has_test_extras_pytest = true;
+                }
+            }
+            _ => {}
+        }
     }
+
+    if has_pytest_section || has_test_extras_pytest {
+        Some("python -m pytest".into())
+    } else if has_test_suite {
+        Some("python -m unittest discover".into())
+    } else {
+        None
+    }
+}
+
+fn infer_setup_cfg_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let test = infer_setup_cfg_test_command(&file.contents)?;
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::Manifest,
         build: None,
-        test: Some("python -m pytest".into()),
+        test: Some(test),
     })
 }
 
@@ -586,10 +629,16 @@ fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandida
             .split_once(':')
             .map(|(lhs, _)| lhs.trim().to_ascii_lowercase());
         if let Some(name) = target_name {
-            if ["build", "all", "compile", "dist", "package", "ci"].iter().any(|t| name == *t || name.starts_with(&format!("{}-", t))) {
+            if ["build", "all", "compile", "dist", "package", "ci"]
+                .iter()
+                .any(|t| name == *t || name.starts_with(&format!("{}-", t)))
+            {
                 has_build = true;
             }
-            if ["test", "check", "verify", "spec"].iter().any(|t| name == *t || name.starts_with(&format!("{}-", t))) {
+            if ["test", "check", "verify", "spec"]
+                .iter()
+                .any(|t| name == *t || name.starts_with(&format!("{}-", t)))
+            {
                 has_test = true;
             }
         }
@@ -841,10 +890,17 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
         // Return the full line when it contains a recognizable build/test invocation.
         let lower = trimmed.to_ascii_lowercase();
         if select_build {
-            if lower.contains(" mvnw") || lower.contains("./mvnw") || (lower.contains("mvn ") && lower.contains("package" ) || lower.contains("compile")) {
+            if lower.contains(" mvnw")
+                || lower.contains("./mvnw")
+                || (lower.contains("mvn ") && lower.contains("package")
+                    || lower.contains("compile"))
+            {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("gradlew") || lower.contains("gradle ") && (lower.contains("build") || lower.contains("assemble")) {
+            if lower.contains("gradlew")
+                || lower.contains("gradle ")
+                    && (lower.contains("build") || lower.contains("assemble"))
+            {
                 return Some(trimmed.to_string());
             }
             if lower.contains("npm ") && lower.contains("build") {
@@ -856,20 +912,32 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
             if lower.contains("yarn ") && lower.contains("build") {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("make ") && (lower.contains(" build") || lower.trim_start().starts_with("make build") || lower.contains(" all")) {
+            if lower.contains("make ")
+                && (lower.contains(" build")
+                    || lower.trim_start().starts_with("make build")
+                    || lower.contains(" all"))
+            {
                 return Some(trimmed.to_string());
             }
             if lower.starts_with("make ") && lower.contains("build") {
                 return Some(trimmed.to_string());
             }
         } else {
-            if lower.contains(" mvnw") || lower.contains("./mvnw") || (lower.contains("mvn ") && lower.contains("test")) {
+            if lower.contains(" mvnw")
+                || lower.contains("./mvnw")
+                || (lower.contains("mvn ") && lower.contains("test"))
+            {
                 return Some(trimmed.to_string());
             }
             if lower.contains("gradlew") || (lower.contains("gradle ") && lower.contains("test")) {
                 return Some(trimmed.to_string());
             }
-            if (lower.contains("npm ") || lower.contains("pnpm ") || lower.contains("yarn ") || lower.contains("bun ")) && (lower.contains(" test") || lower.contains("test ")) {
+            if (lower.contains("npm ")
+                || lower.contains("pnpm ")
+                || lower.contains("yarn ")
+                || lower.contains("bun "))
+                && (lower.contains(" test") || lower.contains("test "))
+            {
                 return Some(trimmed.to_string());
             }
             if lower.contains("make ") && (lower.contains(" test") || lower.contains("check")) {
@@ -878,7 +946,11 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
             if lower.starts_with("make ") && (lower.contains("test") || lower.contains("check")) {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("cargo test") || lower.contains("go test") || lower.contains("pytest") || lower.trim() == "pytest" {
+            if lower.contains("cargo test")
+                || lower.contains("go test")
+                || lower.contains("pytest")
+                || lower.trim() == "pytest"
+            {
                 return Some(trimmed.to_string());
             }
         }
@@ -1170,7 +1242,7 @@ mod tests {
 
     #[test]
     fn infer_setup_commands_provide_pytest_for_classic_python() {
-        use super::{infer_setup_py_commands, infer_setup_cfg_commands, ImportedFile};
+        use super::{infer_setup_cfg_commands, infer_setup_py_commands, ImportedFile};
         let setup_py = ImportedFile {
             path: "setup.py".into(),
             contents: "from setuptools import setup\nsetup(tests_require=['pytest'])".into(),
@@ -1183,5 +1255,105 @@ mod tests {
         let c = infer_setup_cfg_commands(&setup_cfg).expect("setup.cfg");
         assert_eq!(p.test.as_deref(), Some("python -m pytest"));
         assert_eq!(c.test.as_deref(), Some("python -m pytest"));
+    }
+
+    #[test]
+    fn infer_setup_py_abstains_without_test_signals() {
+        use super::{infer_setup_py_commands, infer_setup_py_test_command, ImportedFile};
+        let minimal = ImportedFile {
+            path: "setup.py".into(),
+            contents: "from setuptools import setup\nsetup(name='demo')".into(),
+        };
+        let contest = ImportedFile {
+            path: "setup.py".into(),
+            contents: "from setuptools import setup\nsetup(name='contest-kit')".into(),
+        };
+        assert!(infer_setup_py_test_command(&minimal.contents).is_none());
+        assert!(infer_setup_py_test_command(&contest.contents).is_none());
+        assert!(infer_setup_py_commands(&minimal).is_none());
+        assert!(infer_setup_py_commands(&contest).is_none());
+    }
+
+    #[test]
+    fn infer_setup_py_prefers_unittest_when_pytest_is_absent() {
+        use super::{infer_setup_py_commands, ImportedFile};
+        let setup_py = ImportedFile {
+            path: "setup.py".into(),
+            contents: "from setuptools import setup\nsetup(test_suite='tests')".into(),
+        };
+        let candidate = infer_setup_py_commands(&setup_py).expect("setup.py");
+        assert_eq!(
+            candidate.test.as_deref(),
+            Some("python -m unittest discover")
+        );
+    }
+
+    #[test]
+    fn infer_setup_cfg_abstains_on_unrelated_test_substrings() {
+        use super::{infer_setup_cfg_commands, infer_setup_cfg_test_command, ImportedFile};
+        let metadata_only = ImportedFile {
+            path: "setup.cfg".into(),
+            contents: "[metadata]\nname = latest-contest-kit\n".into(),
+        };
+        assert!(infer_setup_cfg_test_command(&metadata_only.contents).is_none());
+        assert!(infer_setup_cfg_commands(&metadata_only).is_none());
+    }
+
+    #[test]
+    fn infer_setup_cfg_detects_extras_require_test_pytest() {
+        use super::{infer_setup_cfg_commands, ImportedFile};
+        let setup_cfg = ImportedFile {
+            path: "setup.cfg".into(),
+            contents: "[options.extras_require]\ntest = pytest>=7\n".into(),
+        };
+        let candidate = infer_setup_cfg_commands(&setup_cfg).expect("setup.cfg");
+        assert_eq!(candidate.test.as_deref(), Some("python -m pytest"));
+    }
+
+    #[test]
+    fn pyproject_tox_conflicts_with_setup_py_pytest_instead_of_losing() {
+        use super::{infer_imported_commands, ImportedFile};
+        use crate::import::ImportSources;
+
+        let pyproject = ImportedFile {
+            path: "pyproject.toml".into(),
+            contents: "[build-system]\nrequires = [\"setuptools\"]\n[tool.tox]\n".into(),
+        };
+        let setup_py = ImportedFile {
+            path: "setup.py".into(),
+            contents: "from setuptools import setup\nsetup(tests_require=['pytest'])".into(),
+        };
+
+        let result = infer_imported_commands(&ImportSources {
+            cargo_toml: None,
+            package_json: None,
+            pyproject_toml: Some(&pyproject),
+            setup_py: Some(&setup_py),
+            setup_cfg: None,
+            go_mod: None,
+            pom_xml: None,
+            build_gradle: None,
+            composer_json: None,
+            csproj: None,
+            mix_exs: None,
+            rebar_config: None,
+            cmake_presets_json: None,
+            makefile: None,
+            justfile: None,
+            rakefile: None,
+            contributing: None,
+            workflow_files: &[],
+        });
+
+        assert!(
+            result.test.is_none(),
+            "pyproject tox and setup.py pytest should conflict: {:?}",
+            result.test
+        );
+        assert!(
+            result.notes.iter().any(|note| note.contains("conflicting")),
+            "expected conflict note, got: {:?}",
+            result.notes
+        );
     }
 }
