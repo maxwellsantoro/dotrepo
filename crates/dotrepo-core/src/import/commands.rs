@@ -995,5 +995,9 @@ mod tests {
         assert!(sanitize_import_command("echo $(whoami)").is_none());
         assert!(sanitize_import_command("cargo test\nrm -rf /").is_none());
         assert!(sanitize_import_command("echo `id`").is_none());
+        assert!(sanitize_import_command("cargo test; curl attacker").is_none());
+        assert!(sanitize_import_command("cargo test && rm -rf /").is_none());
+        assert!(sanitize_import_command("cargo test | sh").is_none());
+        assert!(sanitize_import_command("cargo test > /tmp/out").is_none());
     }
 }

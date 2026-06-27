@@ -371,6 +371,10 @@ fn write_import_plan(
     Ok(written_paths)
 }
 
+fn allow_absolute_repository_root() -> bool {
+    env_flag_enabled("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT")
+}
+
 fn resolve_root(arguments: &Value) -> Result<PathBuf> {
     let raw = optional_string(arguments, "root").unwrap_or_else(|| ".".into());
     let raw_path = PathBuf::from(&raw);
@@ -384,15 +388,20 @@ fn resolve_root(arguments: &Value) -> Result<PathBuf> {
     let canonical = fs::canonicalize(&resolved)
         .map_err(|err| anyhow!("failed to resolve repository root `{}`: {}", raw, err))?;
 
-    if !is_absolute {
-        let cwd = std::env::current_dir()?;
-        let canonical_cwd = fs::canonicalize(&cwd)?;
-        if !canonical.starts_with(&canonical_cwd) {
+    let cwd = std::env::current_dir()?;
+    let canonical_cwd = fs::canonicalize(&cwd)?;
+    if !canonical.starts_with(&canonical_cwd) {
+        if is_absolute && !allow_absolute_repository_root() {
+            bail!(
+                "absolute repository root outside the MCP server working directory requires DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT=1"
+            );
+        }
+        if !is_absolute {
             bail!("repository root must stay within the MCP server working directory");
         }
     }
 
-    Ok(resolved)
+    Ok(canonical)
 }
 
 fn required_string<'a>(arguments: &'a Value, field: &str) -> Result<&'a str> {
@@ -933,6 +942,7 @@ mod tests {
 
     #[test]
     fn validate_tool_rejects_relative_root_escape() {
+        let _cwd_guard = cwd_test_lock().lock().expect("cwd test lock");
         let workspace = temp_dir("root-escape-workspace");
         let outside = temp_dir("root-escape-outside");
         fs::write(
@@ -974,6 +984,61 @@ description = "Outside workspace"
             .as_str()
             .expect("error text")
             .contains("working directory"));
+    }
+
+    #[test]
+    fn validate_tool_rejects_absolute_root_without_opt_in() {
+        let unique = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("clock works")
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!(
+            "dotrepo-mcp-absolute-root-{}-{}",
+            std::process::id(),
+            unique
+        ));
+        fs::create_dir_all(&root).expect("temp dir created");
+        fs::write(
+            root.join(".repo"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+        )
+        .expect("manifest written");
+
+        let absolute = root.canonicalize().expect("canonical root");
+        std::env::remove_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT");
+        let (mut state, _) = initialized_state();
+        let response = handle_request(
+            &mut state,
+            request(
+                2,
+                "tools/call",
+                json!({
+                    "name": "dotrepo.validate",
+                    "arguments": {
+                        "root": absolute.display().to_string()
+                    }
+                }),
+            ),
+        )
+        .expect("tool call responds");
+
+        fs::remove_dir_all(root).expect("temp dir removed");
+
+        assert_eq!(response["result"]["isError"], Value::Bool(true));
+        assert!(response["result"]["structuredContent"]["error"]
+            .as_str()
+            .expect("error text")
+            .contains("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT"));
     }
 
     #[test]
@@ -1646,6 +1711,7 @@ text = "Accepted claim."
     }
 
     fn call_tool(name: &str, arguments: Value) -> Value {
+        std::env::set_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT", "1");
         let (mut state, _) = initialized_state();
         handle_request(
             &mut state,
@@ -1699,6 +1765,11 @@ text = "Accepted claim."
             method: method.into(),
             params,
         }
+    }
+
+    fn cwd_test_lock() -> &'static Mutex<()> {
+        static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
+        LOCK.get_or_init(|| Mutex::new(()))
     }
 
     fn temp_dir(label: &str) -> PathBuf {

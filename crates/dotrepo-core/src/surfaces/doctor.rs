@@ -595,5 +595,5 @@ fn managed_region_block(surface: ManagedSurface, body: &str) -> String {
 }
 
 fn relative_or_absolute(root: &Path, path: &Path) -> PathBuf {
-    crate::relative_to_root(root, path).to_path_buf()
+    crate::relative_to_root(root, path)
 }

@@ -138,7 +138,7 @@ MCP and LSP have inline tests in their respective `main.rs` files that verify pa
 
 `.github/workflows/ci.yml` classifies changed files in a `change-scope` job, then runs scoped downstream jobs:
 
-1. **`rust-and-index`** — `cargo fmt`, `cargo clippy`, `cargo test`, CLI smoke (validate + generate-check on `examples/native-minimal`, validate-index on `index/`), `cargo publish --dry-run` for all 6 crates, MCP stdio smoke test, LSP stdio smoke test
+1. **`rust-and-index`** — `cargo fmt`, `cargo clippy`, `cargo test`, CLI smoke (validate + generate-check on `examples/native-minimal`, validate-index on `index/`), `cargo publish --dry-run` for the 6 published crates (`dotrepo-crawler` is internal orchestration and is not published), MCP stdio smoke test, LSP stdio smoke test
 2. **`operator-gate`** — maintainer-claim inspection and handoff regression (`scripts/check_operator_claim_gate.py`)
 3. **`public-surface-gate`** — lightweight public export gate for index/public-surface-only changes (`check_release_gate.py --skip-release-bundle --skip-vsix`)
 4. **`release-gate`** — full release packaging, VSIX, and hosted-query Worker smoke

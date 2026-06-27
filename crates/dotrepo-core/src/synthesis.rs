@@ -8,7 +8,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use super::load_manifest_from_root;
-use super::util::{display_path, parse_rfc3339, validate_shell_safe_command};
+use super::util::{display_path, display_root, parse_rfc3339, validate_shell_safe_command};
 
 #[derive(Debug, Clone)]
 pub struct LoadedSynthesis {
@@ -60,7 +60,7 @@ pub fn load_synthesis_from_root(root: &Path) -> Result<SynthesisDocument> {
 pub fn get_synthesis(root: &Path) -> Result<SynthesisReadReport> {
     let loaded = load_synthesis_document(root)?;
     Ok(SynthesisReadReport {
-        root: root.display().to_string(),
+        root: display_root(root),
         synthesis_path: display_path(root, &loaded.path),
         synthesis: loaded.synthesis,
     })

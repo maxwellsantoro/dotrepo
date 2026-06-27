@@ -11,7 +11,7 @@ use crate::render::{
     render_contributing_body, render_pull_request_template_body, render_security_body,
 };
 use crate::surfaces::is_banner_line;
-use crate::util::{display_path, normalize_rfc3339};
+use crate::util::{display_path, display_root, normalize_rfc3339};
 use crate::validate_manifest;
 use crate::{record_summary, RecordSummary};
 
@@ -254,7 +254,7 @@ pub fn import_preview_repository(
     let verification = verify_import_plan(root, &plan, source_url);
     let field_scores = score_import_fields(&plan, &verification);
     Ok(ImportPreviewReport {
-        root: root.display().to_string(),
+        root: display_root(root),
         mode: import_mode_name(mode),
         manifest_path: display_path(root, &plan.manifest_path),
         manifest: plan.manifest.clone(),

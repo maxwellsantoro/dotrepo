@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use dotrepo_core::{
     query_manifest_value, validate_manifest_diagnostics, ValidationDiagnostic,
     ValidationDiagnosticSeverity,
@@ -55,6 +55,7 @@ struct ServerState {
     initialized: bool,
     shutdown_requested: bool,
     exit_requested: bool,
+    workspace_roots: Vec<PathBuf>,
     documents: BTreeMap<String, OpenDocument>,
 }
 
@@ -250,11 +251,12 @@ fn handle_request(
     state: &mut ServerState,
     id: Value,
     method: &str,
-    _params: Value,
+    params: Value,
 ) -> Result<Vec<Value>> {
     let response = match method {
         "initialize" => {
             state.initialized = true;
+            state.workspace_roots = workspace_roots_from_initialize(&params)?;
             jsonrpc_response(
                 id,
                 json!({
@@ -279,11 +281,11 @@ fn handle_request(
             jsonrpc_response(id, Value::Null)
         }
         "textDocument/completion" => {
-            let params: TextDocumentPositionParams = serde_json::from_value(_params)?;
+            let params: TextDocumentPositionParams = serde_json::from_value(params)?;
             jsonrpc_response(id, serde_json::to_value(completion_items(state, &params)?)?)
         }
         "textDocument/hover" => {
-            let params: TextDocumentPositionParams = serde_json::from_value(_params)?;
+            let params: TextDocumentPositionParams = serde_json::from_value(params)?;
             match serde_json::to_value(hover_response(state, &params)?) {
                 Ok(value) => jsonrpc_response(id, value),
                 Err(err) => jsonrpc_error_response(
@@ -310,7 +312,9 @@ fn handle_notification(state: &mut ServerState, method: &str, params: Value) -> 
         "textDocument/didOpen" => {
             let params: DidOpenTextDocumentParams = serde_json::from_value(params)?;
             let path = manifest_path_from_uri(&params.text_document.uri)?;
-            if !is_supported_manifest_path(&path) {
+            if !is_supported_manifest_path(&path)
+                || ensure_manifest_in_workspace(&path, &state.workspace_roots).is_err()
+            {
                 return Ok(Vec::new());
             }
             let document = OpenDocument {
@@ -352,7 +356,9 @@ fn handle_notification(state: &mut ServerState, method: &str, params: Value) -> 
                     document.clone()
                 } else {
                     let path = manifest_path_from_uri(&params.text_document.uri)?;
-                    if !is_supported_manifest_path(&path) {
+                    if !is_supported_manifest_path(&path)
+                        || ensure_manifest_in_workspace(&path, &state.workspace_roots).is_err()
+                    {
                         return Ok(Vec::new());
                     }
                     OpenDocument {
@@ -844,6 +850,65 @@ fn manifest_path_from_uri(uri: &str) -> Result<PathBuf> {
     let url = Url::parse(uri).with_context(|| format!("invalid uri: {uri}"))?;
     url.to_file_path()
         .map_err(|_| anyhow!("uri is not a file path: {uri}"))
+}
+
+fn workspace_uri_to_path(uri: &str) -> Result<PathBuf> {
+    let url = Url::parse(uri).with_context(|| format!("invalid workspace uri: {uri}"))?;
+    url.to_file_path()
+        .map_err(|_| anyhow!("workspace uri is not a file path: {uri}"))
+}
+
+fn workspace_roots_from_initialize(params: &Value) -> Result<Vec<PathBuf>> {
+    let mut roots = Vec::new();
+
+    if let Some(folders) = params.get("workspaceFolders").and_then(Value::as_array) {
+        for folder in folders {
+            if let Some(uri) = folder.get("uri").and_then(Value::as_str) {
+                roots.push(workspace_uri_to_path(uri)?);
+            }
+        }
+    }
+
+    if roots.is_empty() {
+        if let Some(uri) = params.get("rootUri").and_then(Value::as_str) {
+            roots.push(workspace_uri_to_path(uri)?);
+        } else if let Some(path) = params.get("rootPath").and_then(Value::as_str) {
+            roots.push(PathBuf::from(path));
+        }
+    }
+
+    Ok(roots)
+}
+
+fn ensure_manifest_in_workspace(path: &Path, workspace_roots: &[PathBuf]) -> Result<()> {
+    if workspace_roots.is_empty() {
+        return Ok(());
+    }
+
+    let canonical_path = if path.exists() {
+        fs::canonicalize(path)?
+    } else if let Some(parent) = path.parent() {
+        if parent.as_os_str().is_empty() || !parent.exists() {
+            path.to_path_buf()
+        } else {
+            let canonical_parent = fs::canonicalize(parent)?;
+            canonical_parent.join(
+                path.file_name()
+                    .ok_or_else(|| anyhow!("manifest path has no file name"))?,
+            )
+        }
+    } else {
+        path.to_path_buf()
+    };
+
+    for root in workspace_roots {
+        let canonical_root = fs::canonicalize(root).unwrap_or_else(|_| root.clone());
+        if canonical_path.starts_with(&canonical_root) {
+            return Ok(());
+        }
+    }
+
+    bail!("manifest path is outside workspace folders");
 }
 
 fn is_supported_manifest_path(path: &Path) -> bool {
@@ -1470,6 +1535,74 @@ description = "Fast local-first sync engine"
                 == Value::String("record.source must be set for overlay records".into())));
 
         fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
+    }
+
+    #[test]
+    fn did_open_ignores_manifest_outside_workspace_folders() {
+        let workspace = temp_dir("lsp-workspace");
+        let outside = temp_dir("lsp-outside");
+        let manifest_path = outside.join(".repo");
+        fs::write(
+            &manifest_path,
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "outside"
+description = "Outside workspace"
+"#,
+        )
+        .expect("manifest written");
+        let uri = Url::from_file_path(&manifest_path)
+            .expect("file path uri")
+            .to_string();
+        let workspace_uri = Url::from_file_path(&workspace)
+            .expect("workspace uri")
+            .to_string();
+
+        let mut state = ServerState::default();
+        let init = json!({
+            "jsonrpc": JSONRPC_VERSION,
+            "id": 1,
+            "method": "initialize",
+            "params": {
+                "workspaceFolders": [
+                    { "uri": workspace_uri, "name": "workspace" }
+                ]
+            }
+        });
+        handle_request(
+            &mut state,
+            init["id"].clone(),
+            "initialize",
+            init["params"].clone(),
+        )
+        .expect("initialize handled");
+
+        let open = json!({
+            "jsonrpc": JSONRPC_VERSION,
+            "method": "textDocument/didOpen",
+            "params": {
+                "textDocument": {
+                    "uri": uri.clone(),
+                    "languageId": "toml",
+                    "version": 1,
+                    "text": fs::read_to_string(&manifest_path).expect("manifest read"),
+                }
+            }
+        });
+        let outputs = handle_message(&mut state, &serde_json::to_vec(&open).expect("message"))
+            .expect("open handled");
+
+        assert!(outputs.is_empty());
+        assert!(!state.documents.contains_key(&uri));
+
+        fs::remove_dir_all(workspace).unwrap_or_else(|e| panic!("workspace removed: {e}"));
+        fs::remove_dir_all(outside).unwrap_or_else(|e| panic!("outside removed: {e}"));
     }
 
     #[test]

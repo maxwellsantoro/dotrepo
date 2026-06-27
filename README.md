@@ -332,10 +332,11 @@ This repo ships the current dotrepo protocol and reference toolchain surface.
 The crates implement import, validation, querying, generated-surface checks,
 index validation, claims, public export, and an MCP server.
 
-The current public site includes exact lookup and a searchable repository
-catalog. What remains intentionally deferred is structured discovery and
-ranking, comparison, public mutation APIs, bundle mode, first-class workspace
-semantics, broad editor automation, and arbitrary prose round-tripping.
+The current public site includes exact lookup, a searchable repository
+catalog, factual profile comparison, and relationship lookup. What remains
+intentionally deferred is ranking and synthesis, public mutation APIs, bundle
+mode, first-class workspace semantics, broad editor automation, and arbitrary
+prose round-tripping.
 
 ## Read next
 

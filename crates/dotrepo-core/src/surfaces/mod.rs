@@ -10,7 +10,7 @@ use dotrepo_schema::Manifest;
 
 use crate::load_manifest_document;
 use crate::render::{render_contributing_body, render_security_body};
-use crate::util::{display_path, source_digest};
+use crate::util::{display_path, display_root, source_digest};
 use crate::validation::validate_manifest;
 use crate::{
     DoctorFinding, DoctorSurface, ManagedFileState, ManagedSurfaceAdoptionPlan, Result,
@@ -367,7 +367,7 @@ pub fn preview_surfaces(root: &Path, surfaces: &[DoctorSurface]) -> Result<Surfa
         .collect::<Result<Vec<_>>>()?;
 
     Ok(SurfacePreviewReport {
-        root: root.display().to_string(),
+        root: display_root(root),
         previews,
     })
 }

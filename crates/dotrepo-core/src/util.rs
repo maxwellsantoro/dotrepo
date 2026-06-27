@@ -12,6 +12,11 @@ pub(crate) fn contains_unsafe_shell_like_value(value: &str) -> bool {
         || value.contains('`')
         || value.contains("$(")
         || value.contains("${")
+        || value.contains(';')
+        || value.contains('|')
+        || value.contains('&')
+        || value.contains('<')
+        || value.contains('>')
 }
 
 pub(crate) fn validate_shell_safe_command(field: &str, value: &str) -> Result<()> {
@@ -88,11 +93,29 @@ pub fn display_path(root: &Path, path: &Path) -> String {
     relative_to_root(root, path).display().to_string()
 }
 
+pub(crate) fn display_root(root: &Path) -> String {
+    fs::canonicalize(root)
+        .unwrap_or_else(|_| root.to_path_buf())
+        .display()
+        .to_string()
+}
+
 /// Returns `path` made relative to `root` when `path` is under `root`; otherwise returns `path` unchanged.
 /// Callers should prefer passing paths that were resolved under the root.
 /// Used to avoid leaking absolute paths into user-facing reports, digests, and public JSON.
-pub(crate) fn relative_to_root<'a>(root: &Path, path: &'a Path) -> &'a Path {
-    path.strip_prefix(root).unwrap_or(path)
+pub(crate) fn relative_to_root(root: &Path, path: &Path) -> PathBuf {
+    match path.strip_prefix(root) {
+        Ok(relative) => relative.to_path_buf(),
+        Err(_) => {
+            debug_assert!(
+                false,
+                "relative_to_root: path {} is not under root {}",
+                path.display(),
+                root.display()
+            );
+            path.to_path_buf()
+        }
+    }
 }
 
 pub(crate) fn manifest_path(root: &Path) -> PathBuf {
@@ -156,6 +179,24 @@ where
     F: FnMut(&Path, fs::FileType) -> Result<bool>,
 {
     walk_dir_entries_impl(dir, 0, &mut on_entry)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::contains_unsafe_shell_like_value;
+
+    #[test]
+    fn contains_unsafe_shell_like_value_rejects_chaining_and_substitution() {
+        assert!(!contains_unsafe_shell_like_value("cargo test"));
+        assert!(!contains_unsafe_shell_like_value("npm run build"));
+        assert!(contains_unsafe_shell_like_value("echo $(whoami)"));
+        assert!(contains_unsafe_shell_like_value(
+            "cargo test; curl attacker"
+        ));
+        assert!(contains_unsafe_shell_like_value("cargo test && rm -rf /"));
+        assert!(contains_unsafe_shell_like_value("cargo test | sh"));
+        assert!(contains_unsafe_shell_like_value("cargo test > /tmp/out"));
+    }
 }
 
 fn walk_dir_entries_impl(

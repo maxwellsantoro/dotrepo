@@ -13,6 +13,7 @@ jobs:
       run_operator_gate: ${{ steps.scope.outputs.run_operator_gate }}
       run_public_surface_gate: ${{ steps.scope.outputs.run_public_surface_gate }}
       run_release_gate: ${{ steps.scope.outputs.run_release_gate }}
+      run_minimal_gate: ${{ steps.scope.outputs.run_minimal_gate }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -69,6 +70,7 @@ jobs:
           run_operator_gate=false
           run_public_surface_gate=false
           run_release_gate=false
+          run_minimal_gate=false
 
           if [ "$has_any" = false ]; then
             run_rust_ci=true
@@ -85,6 +87,9 @@ jobs:
             if [ "$has_claim_sensitive" = true ]; then
               run_operator_gate=true
             fi
+            if [ "$has_any" = true ] && [ "$has_rust_toolchain" = false ] && [ "$has_public_surface" = false ] && [ "$has_claim_sensitive" = false ]; then
+              run_minimal_gate=true
+            fi
           fi
 
           {
@@ -92,6 +97,7 @@ jobs:
             echo "run_operator_gate=$run_operator_gate"
             echo "run_public_surface_gate=$run_public_surface_gate"
             echo "run_release_gate=$run_release_gate"
+            echo "run_minimal_gate=$run_minimal_gate"
           } >> "$GITHUB_OUTPUT"
 
           {
@@ -110,6 +116,7 @@ jobs:
             echo "- operator-gate: $run_operator_gate"
             echo "- public-surface-gate: $run_public_surface_gate"
             echo "- release-gate: $run_release_gate"
+            echo "- minimal-gate: $run_minimal_gate"
           } >> "$GITHUB_STEP_SUMMARY"
 
   rust-and-index:
@@ -459,6 +466,8 @@ jobs:
           node-version: 20
           cache: npm
           cache-dependency-path: cloudflare/hosted-query/package-lock.json
+      - name: Run import quality gate
+        run: cargo test -p dotrepo-core --test import_quality_gate
       - name: Run lightweight public-surface gate
         run: uv run python scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
       - name: Upload static public export artifact
@@ -476,11 +485,43 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+  minimal-gate:
+    needs: change-scope
+    if: needs.change-scope.outputs.run_minimal_gate == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo artifacts
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: Run minimal validation gate
+        run: |
+          cargo test --workspace
+          cargo run -p dotrepo-cli -- validate-index
+
   release-gate:
     needs:
       - change-scope
       - rust-and-index
-    if: needs.change-scope.outputs.run_release_gate == 'true'
+    if: >-
+      always() &&
+      needs.change-scope.outputs.run_release_gate == 'true' &&
+      (needs.rust-and-index.result == 'success' || needs.rust-and-index.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

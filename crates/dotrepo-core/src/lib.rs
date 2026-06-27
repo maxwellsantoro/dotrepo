@@ -24,6 +24,7 @@ pub use synthesis::{
     get_synthesis, load_synthesis_document, load_synthesis_from_root, validate_synthesis,
     write_synthesis, LoadedSynthesis, SynthesisReadReport, SynthesisWritePlan,
 };
+pub(crate) use util::display_root;
 pub(crate) use util::manifest_path;
 pub(crate) use util::relative_to_root;
 pub(crate) use util::walk_dir_entries;
@@ -356,13 +357,16 @@ pub fn record_summary(manifest: &Manifest) -> RecordSummary {
 
 pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
     let candidates = resolve_candidates(root)?;
-    let selected = candidates
-        .first()
-        .expect("resolve_candidates must return at least one candidate");
+    let selected = candidates.first().ok_or_else(|| {
+        anyhow!(
+            "no repository record candidates found under {}",
+            root.display()
+        )
+    })?;
     let value = query_manifest_value(&selected.manifest, path)?;
     let reason = resolve_selection_reason(&candidates, selected);
     Ok(QueryReport {
-        root: root.display().to_string(),
+        root: display_root(root),
         manifest_path: selected.manifest_path.clone(),
         path: path.to_string(),
         value,
@@ -389,12 +393,15 @@ pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
 
 pub fn trust_repository(root: &Path) -> Result<TrustReport> {
     let candidates = resolve_candidates(root)?;
-    let selected = candidates
-        .first()
-        .expect("resolve_candidates must return at least one candidate");
+    let selected = candidates.first().ok_or_else(|| {
+        anyhow!(
+            "no repository record candidates found under {}",
+            root.display()
+        )
+    })?;
     let reason = resolve_selection_reason(&candidates, selected);
     Ok(TrustReport {
-        root: root.display().to_string(),
+        root: display_root(root),
         manifest_path: selected.manifest_path.clone(),
         selection: SelectionReport {
             reason,
@@ -484,7 +491,7 @@ pub fn generate_check_repository(root: &Path) -> Result<GenerateCheckReport> {
     }
 
     Ok(GenerateCheckReport {
-        root: root.display().to_string(),
+        root: display_root(root),
         checked: rendered_outputs.len(),
         stale,
         outputs: rendered_outputs,

@@ -11,7 +11,9 @@ use crate::claims::{
 };
 use crate::selection::{candidate_from_document, sort_candidates};
 use crate::synthesis::{load_synthesis_document, validate_synthesis};
-use crate::util::{display_path, parse_rfc3339, repository_identity, validate_shell_safe_command};
+use crate::util::{
+    display_path, display_root, parse_rfc3339, repository_identity, validate_shell_safe_command,
+};
 use crate::{load_manifest_document, load_manifest_file, record_summary, RecordSummary};
 
 pub(crate) const SUPPORTED_SCHEMA: &str = "dotrepo/v0.1";
@@ -130,7 +132,7 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
     let selected = candidates.first();
     ValidateReport {
         valid: diagnostics.is_empty(),
-        root: root.display().to_string(),
+        root: display_root(root),
         manifest_path: selected.map(|candidate| candidate.manifest_path.clone()),
         diagnostics,
         record: selected.map(|candidate| record_summary(&candidate.manifest)),
@@ -553,7 +555,7 @@ fn validate_index_entry(
 fn validate_claim_directory(index_root: &Path, claim_dir: &Path) -> Vec<IndexFinding> {
     let mut findings = Vec::new();
     let claim_path = claim_dir.join("claim.toml");
-    let relative_claim = crate::relative_to_root(index_root, &claim_path).to_path_buf();
+    let relative_claim = crate::relative_to_root(index_root, &claim_path);
 
     let directory_identity = match claim_directory_identity(index_root, claim_dir) {
         Ok(identity) => identity,
