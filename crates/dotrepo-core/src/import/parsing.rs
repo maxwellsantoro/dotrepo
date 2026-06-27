@@ -1188,6 +1188,39 @@ fn find_mailto_or_email(contents: &str) -> Option<String> {
         }
     }
 
+    // Additional pass: scan for bare emails anywhere (e.g. "contact security@foo.com")
+    // This helps when punctuation or surrounding text interferes with simple split.
+    if let Some(email) = find_bare_email_anywhere(contents) {
+        return Some(email);
+    }
+
+    None
+}
+
+fn find_bare_email_anywhere(text: &str) -> Option<String> {
+    let lower = text.to_ascii_lowercase();
+    // Look for common security email patterns
+    for prefix in ["security@", "vuln@", "security-response@", "cve@", "disclosure@"] {
+        if let Some(pos) = lower.find(prefix) {
+            // extract until whitespace or common terminators
+            let start = pos;
+            let mut end = start;
+            for (i, ch) in text[start..].char_indices() {
+                if ch.is_whitespace() || matches!(ch, ')' | ']' | '>' | ',' | ';' | '"' | '\'') {
+                    end = start + i;
+                    break;
+                }
+                end = start + i + ch.len_utf8();
+            }
+            if end > start {
+                let candidate = &text[start..end];
+                let cleaned = trim_contact_token(candidate);
+                if looks_like_email(cleaned) {
+                    return Some(cleaned.to_string());
+                }
+            }
+        }
+    }
     None
 }
 
@@ -1333,6 +1366,9 @@ fn security_reporting_score(heading: &str, line: &str, url: &str) -> i32 {
     let url_lower = url.to_ascii_lowercase();
     let mut score = 0;
 
+    if heading_lower.contains("security") {
+        score += 3;
+    }
     if heading_lower.contains("report") || heading_lower.contains("disclosure") {
         score += 6;
     }
@@ -1355,19 +1391,28 @@ fn security_reporting_score(heading: &str, line: &str, url: &str) -> i32 {
         score += 3;
     }
 
-    if [
-        "definition",
-        "faq",
-        "bounty",
-        "policy",
-        "preferred languages",
-    ]
-    .iter()
-    .any(|needle| heading_lower.contains(needle) || line_lower.contains(needle))
+    // Lighter penalty for "policy" (common in legitimate SECURITY.md titles)
+    // only apply full penalty if no strong positive signals in line/url.
+    let has_policy = heading_lower.contains("policy") || line_lower.contains("policy");
+    let has_strong_positive = heading_lower.contains("report")
+        || heading_lower.contains("disclosure")
+        || line_lower.contains("report")
+        || line_lower.contains("vulnerability")
+        || url_lower.contains("security")
+        || url_lower.contains("report");
+    if has_policy && !has_strong_positive {
+        score -= 3;
+    } else if has_policy {
+        score -= 1;
+    }
+
+    if ["definition", "faq", "bounty", "preferred languages"]
+        .iter()
+        .any(|needle| heading_lower.contains(needle) || line_lower.contains(needle))
     {
         score -= 4;
     }
-    if ["definition", "faq", "bounty", "policy"]
+    if ["definition", "faq", "bounty"]
         .iter()
         .any(|needle| url_lower.contains(needle))
     {

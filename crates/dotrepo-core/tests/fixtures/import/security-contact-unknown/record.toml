@@ -1,0 +1,26 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://example.com/test"
+generated_at = "2026-06-27T20:08:56.097014Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = 'Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
+
+[repo]
+name = "Lantern"
+description = "Release health dashboards for CLI tools."
+homepage = "https://example.com/test"
+languages = []
+topics = []
+
+[owners]
+maintainers = []
+security_contact = "unknown"
+
+[relations]
+references = []

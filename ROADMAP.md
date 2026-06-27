@@ -291,8 +291,9 @@ Current execution order:
    baseline canaries now in place; continue with live failure-derived cases).
    Recent progress: strengthened workflow and Makefile command inference
    (compound lines, mvnw/gradlew, indent-safe target detection), added
-   Gradle manifest support, and extended regression canaries with workflow
-   examples to cover the new paths.
+   Gradle manifest support + new jvm-gradle-canary regression fixture,
+   improved security contact scoring and bare-email extraction, and
+   extended regression canaries with workflow examples to cover the new paths.
 3. Expand progressively toward the profile and coverage gate in Milestone 2.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly
