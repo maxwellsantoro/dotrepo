@@ -67,6 +67,19 @@ Consumers that already have a snapshot can fetch only `meta.json` and
 `files.json`, compare per-file digests, and then refetch only changed JSON
 payloads.
 
+For local review, mirrors, or agent caches, use the deterministic delta helper:
+
+```bash
+uv run python scripts/diff_public_export_files.py \
+  --old-files old-public/v0/files.json \
+  --new-files public/v0/files.json \
+  --output-json /tmp/dotrepo-public-file-delta.json \
+  --output-md /tmp/dotrepo-public-file-delta.md
+```
+
+The report lists added, changed, removed, and unchanged files, plus the exact
+refetch set and refetch byte ratio for the new snapshot.
+
 ## Record freshness
 
 ### `record.generated_at`

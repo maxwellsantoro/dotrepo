@@ -22,3 +22,6 @@ security_contact = "security@example.com"
 [docs]
 root = "https://docs.example.com/orbit"
 getting_started = "https://docs.example.com/orbit/getting-started"
+
+[relations]
+references = ["github.com/example/nova"]

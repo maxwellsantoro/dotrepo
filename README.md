@@ -186,14 +186,77 @@ cargo run -p dotrepo-cli -- public batch-profiles --repo github.com/sharkdp/fd
 cargo run -p dotrepo-cli -- public batch-query --repo github.com/sharkdp/fd --path repo.description
 ```
 
+The hosted public surface exposes the same batch lookup shape as cacheable GET
+routes:
+
+```bash
+curl -s "https://dotrepo.org/v0/batch/profiles?repo=github.com/sharkdp/fd&repo=github.com/BurntSushi/ripgrep"
+curl -s "https://dotrepo.org/v0/batch/query?repo=github.com/sharkdp/fd&path=repo.description&path=repo.test"
+```
+
+For the first structured discovery pass, the CLI and hosted public surface can
+search compact public profiles by text plus trust and completeness filters:
+
+```bash
+cargo run -p dotrepo-cli -- public search \
+  --q search \
+  --language Rust \
+  --status verified \
+  --require-docs
+
+curl -s "https://dotrepo.org/v0/search?q=search&language=Rust&status=verified&require-docs"
+```
+
+It can also compare selected profiles without inventing a rank or winner:
+
+```bash
+cargo run -p dotrepo-cli -- public compare \
+  --repo github.com/sharkdp/fd \
+  --repo github.com/BurntSushi/ripgrep
+
+curl -s "https://dotrepo.org/v0/compare?repo=github.com/sharkdp/fd&repo=github.com/BurntSushi/ripgrep"
+```
+
+Relationship traversal starts with declared profile references:
+
+```bash
+cargo run -p dotrepo-cli -- public relations github.com sharkdp fd
+
+curl -s "https://dotrepo.org/v0/repos/github.com/sharkdp/fd/relations"
+```
+
 The public lookup-efficiency harness measures task hit rate, field hit rate,
 and compact payload bytes for representative known-repository workloads:
 
 ```bash
-python3 scripts/measure_public_lookup_efficiency.py \
+uv run python scripts/build_public_lookup_workload.py \
+  --public-root public \
+  --limit 500 \
+  --output /tmp/dotrepo-public-lookup-workload.json
+
+uv run python scripts/measure_public_lookup_efficiency.py \
   --public-root public \
   --index-root index \
-  --workload scripts/fixtures/public_lookup_workload.json
+  --workload /tmp/dotrepo-public-lookup-workload.json
+```
+
+Consumers that mirror snapshots can diff two `v0/files.json` manifests and
+refetch only changed payloads:
+
+```bash
+uv run python scripts/diff_public_export_files.py \
+  --old-files old-public/v0/files.json \
+  --new-files public/v0/files.json
+```
+
+Operators can measure profile-count and high-signal coverage gates against the
+exported public tree:
+
+```bash
+uv run python scripts/check_public_profile_coverage.py \
+  --public-root public \
+  --min-profiles 500 \
+  --min-high-signal 500
 ```
 
 ## Why now
@@ -300,3 +363,6 @@ If you want to contribute:
 - [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - [`index/README.md`](index/README.md)
 - [`index/review-checklist.md`](index/review-checklist.md)
+
+Repository Python tooling is managed exclusively with `uv`: run `uv venv`,
+`uv sync --dev --locked`, then invoke scripts and tests through `uv run`.

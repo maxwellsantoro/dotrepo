@@ -14,6 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
@@ -44,7 +50,7 @@ jobs:
       - name: Validate custom-domain base path
         shell: bash
         run: |
-          custom_domain_count="$(python3 -c 'import json; from pathlib import Path; config = json.loads(Path("cloudflare/hosted-query/wrangler.jsonc").read_text(encoding="utf-8")); print(sum(1 for route in config.get("routes", []) if route.get("custom_domain") is True))')"
+          custom_domain_count="$(uv run python -c 'import json; from pathlib import Path; config = json.loads(Path("cloudflare/hosted-query/wrangler.jsonc").read_text(encoding="utf-8")); print(sum(1 for route in config.get("routes", []) if route.get("custom_domain") is True))')"
           if [ "$custom_domain_count" -gt 0 ] && [ "${{ steps.base_path.outputs.value }}" != "/" ]; then
             echo "Cloudflare custom-domain deploys must use DOTREPO_PUBLIC_BASE_PATH=/" >&2
             exit 1
@@ -59,10 +65,10 @@ jobs:
             --base-path "${{ steps.base_path.outputs.value }}" \
             --stale-after-hours 24
       - name: Render landing page
-        run: python3 scripts/render_public_pages_landing.py --input release-gate/public
+        run: uv run python scripts/render_public_pages_landing.py --input release-gate/public
       - name: Stage Worker snapshot
         run: |
-          python3 scripts/sync_cloudflare_public_snapshot.py \
+          uv run python scripts/sync_cloudflare_public_snapshot.py \
             --input release-gate/public \
             --output cloudflare/hosted-query/public-snapshot
       - name: Install Worker dependencies
@@ -75,7 +81,7 @@ jobs:
         id: smoke_origin
         shell: bash
         run: |
-          value="$(python3 -c 'import json; from pathlib import Path; config = json.loads(Path("cloudflare/hosted-query/wrangler.jsonc").read_text(encoding="utf-8")); routes = [route.get("pattern") for route in config.get("routes", []) if route.get("custom_domain") is True and isinstance(route.get("pattern"), str)]; print(f"https://{routes[0]}" if routes else "")')"
+          value="$(uv run python -c 'import json; from pathlib import Path; config = json.loads(Path("cloudflare/hosted-query/wrangler.jsonc").read_text(encoding="utf-8")); routes = [route.get("pattern") for route in config.get("routes", []) if route.get("custom_domain") is True and isinstance(route.get("pattern"), str)]; print(f"https://{routes[0]}" if routes else "")')"
           echo "value=$value" >> "$GITHUB_OUTPUT"
       - name: Deploy Worker
         id: deploy
@@ -88,7 +94,7 @@ jobs:
           set -euo pipefail
           log_path="$RUNNER_TEMP/wrangler-deploy.log"
           npx wrangler deploy 2>&1 | tee "$log_path"
-          deploy_url="$(python3 -c 'import re, sys; from pathlib import Path; text = Path(sys.argv[1]).read_text(encoding="utf-8"); workers_matches = re.findall(r"https://[^\s]+\.workers\.dev[^\s]*", text); deploy_match = re.search(r"Deployed .*?triggers.*?\n\s*(https://\S+)", text, re.DOTALL); print(workers_matches[-1] if workers_matches else (deploy_match.group(1) if deploy_match else ""))' "$log_path")"
+          deploy_url="$(uv run python -c 'import re, sys; from pathlib import Path; text = Path(sys.argv[1]).read_text(encoding="utf-8"); workers_matches = re.findall(r"https://[^\s]+\.workers\.dev[^\s]*", text); deploy_match = re.search(r"Deployed .*?triggers.*?\n\s*(https://\S+)", text, re.DOTALL); print(workers_matches[-1] if workers_matches else (deploy_match.group(1) if deploy_match else ""))' "$log_path")"
           if [ -z "$deploy_url" ]; then
             echo "Failed to detect deployed Worker URL from Wrangler output" >&2
             exit 1
@@ -101,7 +107,7 @@ jobs:
           CUSTOM_DEPLOY_URL: ${{ steps.smoke_origin.outputs.value }}
           WORKERS_DEPLOY_URL: ${{ steps.deploy.outputs.url }}
         run: |
-          if [ -n "$CUSTOM_DEPLOY_URL" ] && python3 -c 'import socket, sys; from urllib.parse import urlparse; host = urlparse(sys.argv[1]).hostname; socket.getaddrinfo(host, 443)' "$CUSTOM_DEPLOY_URL" >/dev/null 2>&1; then
+          if [ -n "$CUSTOM_DEPLOY_URL" ] && uv run python -c 'import socket, sys; from urllib.parse import urlparse; host = urlparse(sys.argv[1]).hostname; socket.getaddrinfo(host, 443)' "$CUSTOM_DEPLOY_URL" >/dev/null 2>&1; then
             echo "value=$CUSTOM_DEPLOY_URL" >> "$GITHUB_OUTPUT"
             echo "Using custom-domain smoke origin: $CUSTOM_DEPLOY_URL"
           else
@@ -116,7 +122,7 @@ jobs:
         env:
           DEPLOY_URL: ${{ steps.smoke_target.outputs.value }}
         run: |
-          python3 scripts/smoke_cloudflare_public_deploy.py \
+          uv run python scripts/smoke_cloudflare_public_deploy.py \
             --deploy-url "$DEPLOY_URL" \
             --base-path "${{ steps.base_path.outputs.value }}" \
             --public-root release-gate/public

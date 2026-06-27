@@ -180,6 +180,116 @@ fn public_batch_query_reports_multiple_paths_and_item_errors() {
 }
 
 #[test]
+fn public_search_filters_profiles() {
+    let index_root = fixture_index_root();
+    let output = run_public(&[
+        "public",
+        "search",
+        "--q",
+        "orbit",
+        "--status",
+        "reviewed",
+        "--require-docs",
+        "--require-security-contact",
+        "--limit",
+        "5",
+        "--index-root",
+        index_root.to_str().expect("fixture path is utf-8"),
+    ]);
+
+    assert!(output.status.success(), "search envelope should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    assert_eq!(json["apiVersion"], Value::String("v0".into()));
+    assert_eq!(json["query"], Value::String("orbit".into()));
+    assert_eq!(json["matchedCount"], Value::Number(1.into()));
+    assert_eq!(json["returnedCount"], Value::Number(1.into()));
+    assert_eq!(
+        json["results"][0]["identity"]["repo"],
+        Value::String("orbit".into())
+    );
+    assert_eq!(
+        json["results"][0]["matched"][0],
+        Value::String("identity".into())
+    );
+    assert_eq!(json["filters"]["requireDocs"], Value::Bool(true));
+}
+
+#[test]
+fn public_compare_reports_side_by_side_signals() {
+    let index_root = fixture_index_root();
+    let output = run_public(&[
+        "public",
+        "compare",
+        "--repo",
+        "github.com/example/orbit",
+        "--repo",
+        "github.com/example/nova",
+        "--base-path",
+        "/dotrepo",
+        "--index-root",
+        index_root.to_str().expect("fixture path is utf-8"),
+    ]);
+
+    assert!(output.status.success(), "compare envelope should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    assert_eq!(json["apiVersion"], Value::String("v0".into()));
+    assert_eq!(json["repositoryCount"], Value::Number(2.into()));
+    assert_eq!(
+        json["results"][0]["identity"]["repo"],
+        Value::String("orbit".into())
+    );
+    assert_eq!(
+        json["results"][0]["links"]["self"],
+        Value::String("/dotrepo/v0/repos/github.com/example/orbit/profile.json".into())
+    );
+    assert_eq!(
+        json["signals"]["selectedStatuses"][0]["value"],
+        Value::String("reviewed".into())
+    );
+    assert_eq!(json["signals"]["hasDocs"][0]["value"], Value::Bool(true));
+    assert_eq!(json["signals"]["hasDocs"][1]["value"], Value::Bool(false));
+}
+
+#[test]
+fn public_relations_resolves_referenced_profiles() {
+    let index_root = fixture_index_root();
+    let output = run_public(&[
+        "public",
+        "relations",
+        "github.com",
+        "example",
+        "orbit",
+        "--base-path",
+        "/dotrepo",
+        "--index-root",
+        index_root.to_str().expect("fixture path is utf-8"),
+    ]);
+
+    assert!(output.status.success(), "relations response should succeed");
+    assert!(output.stderr.is_empty(), "success should not write stderr");
+
+    let json = parse_stdout_json(&output);
+    assert_eq!(json["apiVersion"], Value::String("v0".into()));
+    assert_eq!(json["relationCount"], Value::Number(1.into()));
+    assert_eq!(
+        json["references"][0]["target"],
+        Value::String("github.com/example/nova".into())
+    );
+    assert_eq!(
+        json["references"][0]["identity"]["repo"],
+        Value::String("nova".into())
+    );
+    assert_eq!(
+        json["references"][0]["profile"]["links"]["self"],
+        Value::String("/dotrepo/v0/repos/github.com/example/nova/profile.json".into())
+    );
+}
+
+#[test]
 fn public_query_missing_path_prints_json_error_and_exit_code_1() {
     let index_root = fixture_index_root();
     let output = run_public(&[

@@ -146,7 +146,7 @@ but it is not the canonical public host.
 1. Run the release gate locally:
 
 ```bash
-python3 scripts/check_release_gate.py --skip-vsix
+uv run python scripts/check_release_gate.py --skip-vsix
 ```
 
 2. Confirm the Worker dry-run passes locally.

@@ -55,12 +55,28 @@ The export-first hosted surface is the right default because it:
 - stable `meta.json` with snapshot digest and freshness metadata
 - stable `files.json` with per-file SHA-256 and byte-size metadata for
   delta-friendly consumers
+- deterministic `files.json` delta reports through
+  `scripts/diff_public_export_files.py` for mirrors and agent caches
+- deterministic profile coverage reports through
+  `scripts/check_public_profile_coverage.py` for profile-count and
+  high-signal gates
 - stable repository `index.json` with inventory and navigation links
 - stable per-repository `profile.json` with compact research fields,
   completeness signals, record freshness, evidence path, and trust context
 - stable per-repository `trust.json` with selection, conflict, and claim context
 - local and CLI batch profile/query responses for repeated known-repository
   access
+- hosted GET batch routes at `/v0/batch/profiles?repo=...` and
+  `/v0/batch/query?repo=...&path=...`
+- local and hosted structured profile search through `dotrepo public search`
+  and `/v0/search`, covering text, language, topic, trust, and completeness
+  filters
+- local and hosted factual profile comparison through `dotrepo public compare`
+  and `/v0/compare`, returning side-by-side trust, completeness, shared
+  language/topic, and profile signals
+- local and hosted relationship traversal through `dotrepo public relations`
+  and `/v0/repos/<host>/<owner>/<repo>/relations`, resolving declared profile
+  references when the target exists in the same index
 - a deterministic lookup-efficiency benchmark harness for measuring task hit
   rate, field hit rate, and compact payload bytes against representative
   workloads
@@ -75,6 +91,9 @@ The hosted public surface provides:
 - read-only repository summary, profile, and trust responses
 - compact per-repository research profiles for known repository identities
 - batch profile and batch field lookup through the reference CLI/core contract
+  and hosted GET routes
+- structured profile search, factual profile comparison, and declared-reference
+  traversal through the reference CLI/core contract and hosted GET routes
 - identity-first, trust-aware public responses
 - snapshot validators and a file manifest for cheap revalidation and selective
   refetch
@@ -105,7 +124,8 @@ contracts.
 ## What is not yet in scope
 
 The public surface does not yet include:
-- structured research discovery, ranking, or comparison APIs
+- relevance ranking, bounded synthesis, or richer relationship classes beyond
+  declared `references`
 - live mutation or submission APIs
 - public SLA expectations
 
@@ -115,7 +135,7 @@ The primary deployed consumption path is now `https://dotrepo.org/`. For local
 review or CI inspection, start with the canonical release gate:
 
 ```bash
-python3 scripts/check_release_gate.py --output-root release-gate
+uv run python scripts/check_release_gate.py --output-root release-gate
 ```
 
 Then, if needed:
@@ -134,8 +154,8 @@ Start with:
 
 The next public-surface work is hardening freshness and caching, scaling profile
 coverage, running the lookup-efficiency benchmark on a larger representative
-workload, adding hosted batch access where appropriate, and eventually building
-discovery and comparison on top of the trusted index. See
+workload, and eventually building discovery and comparison on top of the trusted
+index. See
 [`ROADMAP.md`](../ROADMAP.md) for the active sequence. For the freshness
 definitions that apply to responses, see
 [`docs/public-freshness.md`](./public-freshness.md). For deployment operations,

@@ -7,14 +7,14 @@ published crates.
 ## Requirements
 
 These scripts are **standard-library only** — they have no third-party
-dependencies, so there is nothing to install beyond Python itself.
+dependencies beyond the locked development tools.
 
-- **Python ≥ 3.11** is required (scripts use `tomllib`, added in 3.11).
-- Run with the system interpreter or `uv`:
+- **Python >= 3.12** is required (the packaging scripts use modern f-string syntax).
+- Create and sync the repository environment, then run through `uv`:
 
   ```bash
-  python3 scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
-  # or, equivalently, through uv:
+  uv venv
+  uv sync --dev
   uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
   ```
 
@@ -29,7 +29,7 @@ under [`../docs/`](../docs/).
 | Release & packaging | `check_release_gate.py`, `package_public_export.py`, `package_release_binaries.py`, `package_vscode_extension.py`, `public_site_content.py` |
 | Autonomous index batch | `run_autonomous_index_batch.py`, `adjudication_openrouter_sidecar.py`, `check_autonomous_telemetry_gate.py`, `test_adjudication_env.py` |
 | Review-batch planning | `plan_refresh_review_batches.py`, `plan_seed_review_batches.py`, `select_review_batch.py`, `render_review_batch_pull_request.py`, `render_seed_review_summary.py`, `render_refresh_plan_summary.py` |
-| Public surface | `render_public_pages_landing.py`, `render_index_growth_status.py`, `measure_public_lookup_efficiency.py`, `smoke_cloudflare_public_deploy.py`, `sync_cloudflare_public_snapshot.py` |
+| Public surface | `render_public_pages_landing.py`, `render_index_growth_status.py`, `check_public_profile_coverage.py`, `build_public_lookup_workload.py`, `measure_public_lookup_efficiency.py`, `diff_public_export_files.py`, `smoke_cloudflare_public_deploy.py`, `sync_cloudflare_public_snapshot.py` |
 | Operator gates | `check_operator_claim_gate.py` |
 | Shell helpers | `recrawl-batch.sh`, `use_runner_node20.sh` |
 

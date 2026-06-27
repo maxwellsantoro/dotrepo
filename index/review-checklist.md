@@ -32,7 +32,7 @@ that path uses the machine gates in [`ROADMAP.md`](../ROADMAP.md) and
 
 ## Maintainer claim checks
 
-- `python3 scripts/check_operator_claim_gate.py --output-root operator-gate` passes when claim workflow, handoff, or claim-aware public-export semantics changed.
+- `uv run python scripts/check_operator_claim_gate.py --output-root operator-gate` passes when claim workflow, handoff, or claim-aware public-export semantics changed.
 - Claim directories live under `repos/<host>/<owner>/<repo>/claims/<claim-id>/`.
 - `claim.toml` and `events/*.toml` tell the same story as the latest reviewer decision.
 - Event sequence numbers are contiguous and append-only.

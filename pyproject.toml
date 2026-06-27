@@ -1,0 +1,13 @@
+[project]
+name = "dotrepo-python-tools"
+version = "0.0.0"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3,<9",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["scripts/tests"]

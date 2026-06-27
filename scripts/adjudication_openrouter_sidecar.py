@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run python
 """Thin HTTP sidecar: dotrepo adjudication JSON -> OpenRouter chat completions."""
 
 from __future__ import annotations

@@ -5,6 +5,10 @@ snapshot:
 
 - static files from `public-snapshot/`
 - live `v0` query responses reconstructed from `query-input/*.json`
+- live `v0` batch profile and batch query responses from the same staged
+  snapshot
+- live hosted profile search, factual profile compare, and declared-reference
+  relation traversal from the same staged snapshot
 
 ## Local workflow
 
@@ -15,9 +19,9 @@ snapshot:
 Typical commands from the repo root:
 
 ```bash
-python3 scripts/check_release_gate.py --skip-vsix
+uv run python scripts/check_release_gate.py --skip-vsix
 
-python3 scripts/sync_cloudflare_public_snapshot.py \
+uv run python scripts/sync_cloudflare_public_snapshot.py \
   --input release-gate/public \
   --output cloudflare/hosted-query/public-snapshot
 

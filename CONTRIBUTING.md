@@ -28,6 +28,15 @@ tested changes rather than speculative surface area.
 
 ## Local checks
 
+Create the locked Python environment before running repository tooling. All
+Python commands in this repository must go through `uv run`.
+
+```bash
+uv venv
+uv sync --dev --locked
+uv run pytest
+```
+
 Run the core workspace checks:
 
 ```bash
@@ -50,14 +59,14 @@ If you touched the public index, claims, or evidence rules, also run:
 
 ```bash
 cargo run -p dotrepo-cli -- validate-index --index-root index
-python3 scripts/check_operator_claim_gate.py --output-root /tmp/dotrepo-operator-gate
+uv run python scripts/check_operator_claim_gate.py --output-root /tmp/dotrepo-operator-gate
 ```
 
 If you touched public export, release packaging, or the hosted public surface,
 also run:
 
 ```bash
-python3 scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
+uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
 ```
 
 ## Public index contributions

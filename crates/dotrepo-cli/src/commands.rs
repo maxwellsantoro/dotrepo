@@ -4,14 +4,15 @@ use dotrepo_core::{
     current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_base,
     generate_check_repository, import_repository_with_options, inspect_claim_directory,
     inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
-    preview_surfaces, public_repository_batch_profiles_with_base,
-    public_repository_batch_query_with_base, public_repository_profile_or_error_with_base,
-    public_repository_query_or_error_with_base, public_repository_summary_or_error_with_base,
+    preview_surfaces, public_profile_compare_with_base, public_profile_search_with_base,
+    public_repository_batch_profiles_with_base, public_repository_batch_query_with_base,
+    public_repository_profile_or_error_with_base, public_repository_query_or_error_with_base,
+    public_repository_relations_with_base, public_repository_summary_or_error_with_base,
     public_repository_trust_or_error_with_base, query_repository, resolve_claim_directory,
     scaffold_claim_directory, trust_repository, validate_index_root, validate_manifest,
     validate_repository, write_import_outputs, ClaimEventAppendInput, ClaimScaffoldInput,
     DoctorReport, DoctorSurface, ImportOptions, IndexFindingSeverity, PublicErrorResponse,
-    PublicRepositoryIdentity,
+    PublicProfileSearchOptions, PublicRepositoryIdentity,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::RecordMode;
@@ -758,6 +759,75 @@ pub fn cmd_public(command: PublicCommand) -> Result<()> {
                 &index_root,
                 &identities,
                 &paths,
+                freshness,
+                &base_path,
+            )?;
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Ok(())
+        }
+        PublicCommand::Compare {
+            index_root,
+            repos,
+            base_path,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let identities = parse_public_repository_args(&repos)?;
+            let response =
+                public_profile_compare_with_base(&index_root, &identities, freshness, &base_path)?;
+            println!("{}", serde_json::to_string_pretty(&response)?);
+            Ok(())
+        }
+        PublicCommand::Relations {
+            index_root,
+            host,
+            owner,
+            repo,
+            base_path,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            print_public_response(Ok(public_repository_relations_with_base(
+                &index_root,
+                &host,
+                &owner,
+                &repo,
+                freshness,
+                &base_path,
+            )?))
+        }
+        PublicCommand::Search {
+            index_root,
+            q,
+            languages,
+            topics,
+            statuses,
+            confidences,
+            require_build,
+            require_test,
+            require_docs,
+            require_security_contact,
+            require_license,
+            limit,
+            base_path,
+            stale_after_hours,
+        } => {
+            let freshness = current_public_freshness(&index_root, stale_after_hours)?;
+            let response = public_profile_search_with_base(
+                &index_root,
+                PublicProfileSearchOptions {
+                    query: q,
+                    languages,
+                    topics,
+                    statuses,
+                    confidences,
+                    require_build,
+                    require_test,
+                    require_docs,
+                    require_security_contact,
+                    require_license,
+                    limit,
+                },
                 freshness,
                 &base_path,
             )?;

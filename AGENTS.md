@@ -28,7 +28,14 @@ When documentation conflicts, prefer current code and contracts, then
 
 ## Commands
 
+All Python tooling in this repository uses `uv`. Create the repository environment
+with `uv venv`, then run Python commands, scripts, and tests with `uv run`. Never
+invoke `python`, `python3`, `pip`, or `pytest` directly, and preserve this convention
+in documentation, automation, subprocesses, and examples.
+
 ```bash
+uv venv                              # Create the repository Python environment
+uv sync --dev                       # Install locked Python development dependencies
 cargo fmt --all -- --check          # Format check (CI enforced)
 cargo test --workspace              # Run all tests
 cargo build -p <crate-name>        # Build specific crate
@@ -50,13 +57,16 @@ cargo run -p dotrepo-mcp
 cargo run -p dotrepo-lsp
 
 # Public export packaging
-python3 scripts/package_public_export.py --input public --output-dir dist
+uv run python scripts/package_public_export.py --input public --output-dir dist
 
 # Autonomous index batch (local, explicit opt-in)
-python3 scripts/run_autonomous_index_batch.py --skip-automation-enabled-check --output-dir /tmp/dotrepo-autonomous-batch
+uv run python scripts/run_autonomous_index_batch.py --skip-automation-enabled-check --output-dir /tmp/dotrepo-autonomous-batch
 
 # Canonical public release gate
-python3 scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
+uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
+
+# Python tests
+uv run pytest
 ```
 
 Run a single test file: `cargo test -p dotrepo-core --test import_fixture_pack`

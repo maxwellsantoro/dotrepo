@@ -1,9 +1,10 @@
 use dotrepo_core::{
-    export_public_index_static, index_snapshot_digest, public_repository_batch_profiles,
-    public_repository_batch_query, public_repository_profile_or_error,
-    public_repository_query_or_error, public_repository_summary_or_error,
+    export_public_index_static, index_snapshot_digest, public_profile_compare,
+    public_profile_search, public_repository_batch_profiles, public_repository_batch_query,
+    public_repository_profile_or_error, public_repository_query_or_error,
+    public_repository_relations, public_repository_summary_or_error,
     public_repository_trust_or_error, ConflictRelationship, PublicFreshness,
-    PublicRepositoryIdentity, SelectionReason,
+    PublicProfileSearchOptions, PublicRepositoryIdentity, SelectionReason,
 };
 use serde::Deserialize;
 use serde::Serialize;
@@ -28,6 +29,9 @@ struct CompatibilityManifest {
     profile: ResponseSpec,
     batch_profile: BatchResponseSpec,
     batch_query: BatchResponseSpec,
+    search: SearchResponseSpec,
+    compare: CompareResponseSpec,
+    relations: RelationsResponseSpec,
     trust: ResponseSpec,
     query: ResponseSpec,
     errors: ErrorSpec,
@@ -98,6 +102,32 @@ struct ResponseSpec {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct BatchResponseSpec {
+    #[serde(rename = "requiredKeys")]
+    required_keys: Vec<String>,
+    item_keys: Vec<String>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct SearchResponseSpec {
+    #[serde(rename = "requiredKeys")]
+    required_keys: Vec<String>,
+    item_keys: Vec<String>,
+    filter_keys: Vec<String>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct CompareResponseSpec {
+    #[serde(rename = "requiredKeys")]
+    required_keys: Vec<String>,
+    item_keys: Vec<String>,
+    signal_keys: Vec<String>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct RelationsResponseSpec {
     #[serde(rename = "requiredKeys")]
     required_keys: Vec<String>,
     item_keys: Vec<String>,
@@ -459,6 +489,71 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
             item.get("query").is_some() ^ item.get("error").is_some(),
             "batchQuery.item should contain exactly one of query or error"
         );
+    }
+
+    let search = serde_json::to_value(
+        public_profile_search(
+            &fixture_index_root(),
+            PublicProfileSearchOptions {
+                query: Some("orbit".into()),
+                statuses: vec!["reviewed".into()],
+                limit: Some(10),
+                ..PublicProfileSearchOptions::default()
+            },
+            freshness.clone(),
+        )
+        .expect("search succeeds"),
+    )
+    .expect("search serializes");
+    assert_has_keys(&search, &manifest.search.required_keys, "search");
+    assert_has_keys(
+        &search["filters"],
+        &manifest.search.filter_keys,
+        "search.filters",
+    );
+    for item in search["results"].as_array().expect("search.results array") {
+        assert_has_keys(item, &manifest.search.item_keys, "search.item");
+    }
+
+    let compare = serde_json::to_value(
+        public_profile_compare(
+            &fixture_index_root(),
+            &batch_identities[..1],
+            freshness.clone(),
+        )
+        .expect("compare succeeds"),
+    )
+    .expect("compare serializes");
+    assert_has_keys(&compare, &manifest.compare.required_keys, "compare");
+    assert_has_keys(
+        &compare["signals"],
+        &manifest.compare.signal_keys,
+        "compare.signals",
+    );
+    for item in compare["results"]
+        .as_array()
+        .expect("compare.results array")
+    {
+        assert_has_keys(item, &manifest.compare.item_keys, "compare.item");
+    }
+
+    let relations = serde_json::to_value(
+        public_repository_relations(
+            &fixture_index_root(),
+            "github.com",
+            "example",
+            "orbit",
+            freshness.clone(),
+        )
+        .expect("relations succeeds"),
+    )
+    .expect("relations serializes");
+    assert_has_keys(&relations, &manifest.relations.required_keys, "relations");
+    for item in relations["references"]
+        .as_array()
+        .expect("relations.references array")
+    {
+        assert_has_keys(item, &manifest.relations.item_keys, "relations.item");
     }
 
     let orbit_trust = serde_json::to_value(

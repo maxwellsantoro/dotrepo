@@ -71,6 +71,47 @@ function validateRepositoryIdentity(host, owner, repo) {
   }
 }
 
+function parseRepositoryParam(value) {
+  const trimmed = (value ?? "").trim();
+  const withoutScheme = trimmed.replace(/^https?:\/\//, "");
+  const withoutGit = withoutScheme.endsWith(".git")
+    ? withoutScheme.slice(0, -4)
+    : withoutScheme;
+  const parts = withoutGit.split("/").filter((part) => part !== "");
+  if (parts.length !== 3) {
+    return {
+      identity: {
+        host: trimmed,
+        owner: "",
+        repo: ""
+      },
+      error: {
+        code: PUBLIC_ERROR_CODES.invalidRepositoryIdentity,
+        message: `invalid repository identity: repository must be host/owner/repo or https://host/owner/repo: ${value}`
+      }
+    };
+  }
+
+  const identity = {
+    host: parts[0],
+    owner: parts[1],
+    repo: parts[2]
+  };
+  try {
+    validateRepositoryIdentity(identity.host, identity.owner, identity.repo);
+  } catch (error) {
+    return {
+      identity,
+      error: {
+        code: PUBLIC_ERROR_CODES.invalidRepositoryIdentity,
+        message: error.message
+      }
+    };
+  }
+
+  return { identity, error: null };
+}
+
 function decodeRepositoryIdentity(route) {
   try {
     return {
@@ -180,6 +221,42 @@ async function loadQueryInputSnapshot(env, request, host, owner, repo) {
   return response.json();
 }
 
+async function loadProfileSnapshot(env, request, host, owner, repo) {
+  const response = await fetchInternalAsset(
+    env,
+    request,
+    `/v0/repos/${host}/${owner}/${repo}/profile.json`
+  );
+  if (response.status === 404) {
+    return null;
+  }
+  if (!response.ok) {
+    throw new Error(
+      `failed to load /v0/repos/${host}/${owner}/${repo}/profile.json: ${response.status}`
+    );
+  }
+  return response.json();
+}
+
+async function loadInventorySnapshot(env, request) {
+  const response = await fetchInternalAsset(env, request, "/v0/repos/index.json");
+  if (!response.ok) {
+    throw new Error(`failed to load /v0/repos/index.json: ${response.status}`);
+  }
+  return response.json();
+}
+
+function repositoryNotFoundMessage(identity) {
+  return `repository not found in index: repos/${identity.host}/${identity.owner}/${identity.repo}/record.toml`;
+}
+
+function buildPublicErrorDetail(code, message) {
+  return {
+    code,
+    message
+  };
+}
+
 function buildPublicErrorResponse(identity, path, freshness, code, message) {
   return {
     apiVersion: PUBLIC_API_VERSION,
@@ -242,6 +319,329 @@ function parseQueryRoute(pathname) {
   };
 }
 
+function parseRelationsRoute(pathname) {
+  const segments = pathname.split("/");
+  if (
+    segments.length !== 7 ||
+    segments[1] !== "v0" ||
+    segments[2] !== "repos" ||
+    segments[6] !== "relations"
+  ) {
+    return null;
+  }
+
+  return {
+    host: segments[3],
+    owner: segments[4],
+    repo: segments[5]
+  };
+}
+
+function parseBatchRoute(pathname) {
+  if (pathname === "/v0/batch/profiles") {
+    return "profiles";
+  }
+  if (pathname === "/v0/batch/query") {
+    return "query";
+  }
+  return null;
+}
+
+function normalizeSearchValue(value) {
+  return `${value ?? ""}`.trim().toLowerCase();
+}
+
+function containsNormalized(values, expected) {
+  const normalized = normalizeSearchValue(expected);
+  return (values ?? []).some((value) => normalizeSearchValue(value) === normalized);
+}
+
+function optionMatchesFilter(actual, filters) {
+  return filters.length === 0 || filters.some((filter) => normalizeSearchValue(actual) === normalizeSearchValue(filter));
+}
+
+function profileMatchesFilters(profile, options) {
+  if (!options.languages.every((language) => containsNormalized(profile.languages ?? [], language))) {
+    return false;
+  }
+  if (!options.topics.every((topic) => containsNormalized(profile.topics ?? [], topic))) {
+    return false;
+  }
+  if (!optionMatchesFilter(profile.trust?.selectedStatus, options.statuses)) {
+    return false;
+  }
+  if (!optionMatchesFilter(profile.trust?.confidence, options.confidences)) {
+    return false;
+  }
+  const completeness = profile.completeness ?? {};
+  if (options.requireBuild && !completeness.hasBuild) return false;
+  if (options.requireTest && !completeness.hasTest) return false;
+  if (options.requireDocs && !completeness.hasDocs) return false;
+  if (options.requireSecurityContact && !completeness.hasSecurityContact) return false;
+  if (options.requireLicense && !completeness.hasLicense) return false;
+  return true;
+}
+
+function profileQueryMatches(profile, query) {
+  const normalized = normalizeSearchValue(query);
+  if (normalized === "") {
+    return ["all"];
+  }
+  const fields = [
+    ["identity", `${profile.identity?.host}/${profile.identity?.owner}/${profile.identity?.repo}`],
+    ["name", profile.name],
+    ["purpose", profile.purpose],
+    ["homepage", profile.homepage],
+    ["license", profile.license]
+  ];
+  const matched = [];
+  for (const [field, value] of fields) {
+    if (normalizeSearchValue(value).includes(normalized)) {
+      matched.push(field);
+    }
+  }
+  if ((profile.languages ?? []).some((language) => normalizeSearchValue(language).includes(normalized))) {
+    matched.push("languages");
+  }
+  if ((profile.topics ?? []).some((topic) => normalizeSearchValue(topic).includes(normalized))) {
+    matched.push("topics");
+  }
+  return matched;
+}
+
+function searchItemFromProfile(profile, matched = ["relation"]) {
+  return {
+    identity: profile.identity,
+    name: profile.name,
+    purpose: profile.purpose,
+    ...((profile.languages ?? []).length === 0 ? {} : { languages: profile.languages }),
+    ...((profile.topics ?? []).length === 0 ? {} : { topics: profile.topics }),
+    completeness: profile.completeness,
+    trust: profile.trust,
+    matched,
+    links: profile.links
+  };
+}
+
+function parseSearchOptions(url) {
+  return {
+    query: url.searchParams.get("q"),
+    languages: url.searchParams.getAll("language").filter((value) => value.trim() !== ""),
+    topics: url.searchParams.getAll("topic").filter((value) => value.trim() !== ""),
+    statuses: url.searchParams.getAll("status").filter((value) => value.trim() !== ""),
+    confidences: url.searchParams.getAll("confidence").filter((value) => value.trim() !== ""),
+    requireBuild: url.searchParams.has("requireBuild") || url.searchParams.has("require-build"),
+    requireTest: url.searchParams.has("requireTest") || url.searchParams.has("require-test"),
+    requireDocs: url.searchParams.has("requireDocs") || url.searchParams.has("require-docs"),
+    requireSecurityContact: url.searchParams.has("requireSecurityContact") || url.searchParams.has("require-security-contact"),
+    requireLicense: url.searchParams.has("requireLicense") || url.searchParams.has("require-license"),
+    limit: url.searchParams.has("limit") ? Number.parseInt(url.searchParams.get("limit"), 10) : null
+  };
+}
+
+async function loadInventoryProfiles(env, request) {
+  const inventory = await loadInventorySnapshot(env, request);
+  const repositories = Array.isArray(inventory.repositories) ? inventory.repositories : [];
+  const profiles = [];
+  for (const entry of repositories) {
+    const identity = entry.identity ?? {};
+    const profile = await loadProfileSnapshot(env, request, identity.host, identity.owner, identity.repo);
+    if (profile !== null) {
+      profiles.push(profile);
+    }
+  }
+  return { inventory, profiles };
+}
+
+async function buildSearchResponse(env, request, url, freshness) {
+  const options = parseSearchOptions(url);
+  const { inventory, profiles } = await loadInventoryProfiles(env, request);
+  let results = [];
+  for (const profile of profiles) {
+    if (!profileMatchesFilters(profile, options)) {
+      continue;
+    }
+    const matched = options.query === null ? ["filters"] : profileQueryMatches(profile, options.query);
+    if (matched.length === 0) {
+      continue;
+    }
+    results.push(searchItemFromProfile(profile, matched));
+  }
+  results.sort((left, right) => {
+    const matched = right.matched.length - left.matched.length;
+    if (matched !== 0) return matched;
+    return `${left.identity.host}/${left.identity.owner}/${left.identity.repo}`.localeCompare(
+      `${right.identity.host}/${right.identity.owner}/${right.identity.repo}`
+    );
+  });
+  const matchedCount = results.length;
+  if (Number.isInteger(options.limit) && options.limit >= 0) {
+    results = results.slice(0, options.limit);
+  }
+  return {
+    apiVersion: PUBLIC_API_VERSION,
+    freshness,
+    query: options.query,
+    filters: {
+      languages: options.languages,
+      topics: options.topics,
+      statuses: options.statuses,
+      confidences: options.confidences,
+      requireBuild: options.requireBuild,
+      requireTest: options.requireTest,
+      requireDocs: options.requireDocs,
+      requireSecurityContact: options.requireSecurityContact,
+      requireLicense: options.requireLicense,
+      ...(options.limit === null ? {} : { limit: options.limit })
+    },
+    totalRepositoryCount: inventory.repositoryCount ?? profiles.length,
+    matchedCount,
+    returnedCount: results.length,
+    results
+  };
+}
+
+function compareItemFromProfile(profile) {
+  return {
+    identity: profile.identity,
+    name: profile.name,
+    purpose: profile.purpose,
+    ...(profile.homepage ? { homepage: profile.homepage } : {}),
+    ...(profile.license ? { license: profile.license } : {}),
+    ...((profile.languages ?? []).length === 0 ? {} : { languages: profile.languages }),
+    ...((profile.topics ?? []).length === 0 ? {} : { topics: profile.topics }),
+    execution: profile.execution ?? {},
+    docs: profile.docs ?? {},
+    ownership: profile.ownership ?? {},
+    completeness: profile.completeness,
+    trust: profile.trust,
+    links: profile.links
+  };
+}
+
+function sharedValues(items, key) {
+  if (items.length === 0) return [];
+  let shared = new Set((items[0][key] ?? []).map(normalizeSearchValue));
+  for (const item of items.slice(1)) {
+    const values = new Set((item[key] ?? []).map(normalizeSearchValue));
+    shared = new Set([...shared].filter((value) => values.has(value)));
+  }
+  return (items[0][key] ?? []).filter((value) => shared.has(normalizeSearchValue(value)));
+}
+
+function textSignals(items, select) {
+  return items.map((item) => {
+    const value = select(item);
+    return {
+      identity: item.identity,
+      ...(value === undefined || value === null ? {} : { value })
+    };
+  });
+}
+
+function boolSignals(items, select) {
+  return items.map((item) => ({
+    identity: item.identity,
+    value: Boolean(select(item))
+  }));
+}
+
+function compareSignals(items) {
+  return {
+    sharedLanguages: sharedValues(items, "languages"),
+    sharedTopics: sharedValues(items, "topics"),
+    licenses: textSignals(items, (item) => item.license),
+    selectedStatuses: textSignals(items, (item) => item.trust?.selectedStatus),
+    confidences: textSignals(items, (item) => item.trust?.confidence),
+    hasBuild: boolSignals(items, (item) => item.completeness?.hasBuild),
+    hasTest: boolSignals(items, (item) => item.completeness?.hasTest),
+    hasDocs: boolSignals(items, (item) => item.completeness?.hasDocs),
+    hasSecurityContact: boolSignals(items, (item) => item.completeness?.hasSecurityContact),
+    hasLicense: boolSignals(items, (item) => item.completeness?.hasLicense)
+  };
+}
+
+async function buildCompareResponse(env, request, repoParams, freshness) {
+  const results = [];
+  for (const repoParam of repoParams) {
+    const parsed = parseRepositoryParam(repoParam);
+    if (parsed.error) {
+      throw new Error(parsed.error.message);
+    }
+    const profile = await loadProfileSnapshot(
+      env,
+      request,
+      parsed.identity.host,
+      parsed.identity.owner,
+      parsed.identity.repo
+    );
+    if (profile === null) {
+      throw new Error(repositoryNotFoundMessage(parsed.identity));
+    }
+    results.push(compareItemFromProfile(profile));
+  }
+  return {
+    apiVersion: PUBLIC_API_VERSION,
+    freshness,
+    repositoryCount: results.length,
+    results,
+    signals: compareSignals(results)
+  };
+}
+
+async function buildRelationsResponse(env, request, identity, freshness, basePath) {
+  const snapshot = await loadQueryInputSnapshot(env, request, identity.host, identity.owner, identity.repo);
+  if (snapshot === null) {
+    throw new Error(repositoryNotFoundMessage(identity));
+  }
+  const references = snapshot.selection?.manifest?.relations?.references ?? [];
+  const items = [];
+  for (const target of references) {
+    const parsed = parseRepositoryParam(target);
+    const item = {
+      relationship: "reference",
+      target
+    };
+    if (parsed.error) {
+      items.push(item);
+      continue;
+    }
+    item.identity = parsed.identity;
+    const profile = await loadProfileSnapshot(
+      env,
+      request,
+      parsed.identity.host,
+      parsed.identity.owner,
+      parsed.identity.repo
+    );
+    if (profile === null) {
+      item.error = buildPublicErrorDetail(
+        PUBLIC_ERROR_CODES.repositoryNotFound,
+        repositoryNotFoundMessage(parsed.identity)
+      );
+    } else {
+      item.identity = profile.identity;
+      item.profile = searchItemFromProfile(profile, ["relation"]);
+    }
+    items.push(item);
+  }
+  return {
+    apiVersion: PUBLIC_API_VERSION,
+    freshness,
+    identity: snapshot.identity,
+    relationCount: items.length,
+    references: items,
+    links: {
+      self: `${buildRepositoryRoot(identity.host, identity.owner, identity.repo, basePath)}/relations`,
+      repository: `${buildRepositoryRoot(identity.host, identity.owner, identity.repo, basePath)}/index.json`,
+      profile: `${buildRepositoryRoot(identity.host, identity.owner, identity.repo, basePath)}/profile.json`,
+      trust: `${buildRepositoryRoot(identity.host, identity.owner, identity.repo, basePath)}/trust.json`,
+      queryTemplate: `${buildRepositoryRoot(identity.host, identity.owner, identity.repo, basePath)}/query?path={dot_path}`,
+      indexPath: `repos/${identity.host}/${identity.owner}/${identity.repo}/`
+    }
+  };
+}
+
 function buildQueryResponse(snapshot, path, basePath) {
   if (snapshot.apiVersion !== PUBLIC_API_VERSION) {
     throw new Error(`unsupported public query input apiVersion: ${snapshot.apiVersion}`);
@@ -285,6 +685,112 @@ function buildQueryResponse(snapshot, path, basePath) {
   };
 }
 
+async function buildBatchProfileItem(env, request, repoParam) {
+  const parsed = parseRepositoryParam(repoParam);
+  if (parsed.error) {
+    return {
+      identity: parsed.identity,
+      error: parsed.error
+    };
+  }
+
+  const profile = await loadProfileSnapshot(
+    env,
+    request,
+    parsed.identity.host,
+    parsed.identity.owner,
+    parsed.identity.repo
+  );
+  if (profile === null) {
+    return {
+      identity: parsed.identity,
+      error: buildPublicErrorDetail(
+        PUBLIC_ERROR_CODES.repositoryNotFound,
+        repositoryNotFoundMessage(parsed.identity)
+      )
+    };
+  }
+
+  return {
+    identity: profile.identity,
+    profile
+  };
+}
+
+async function buildBatchQueryItem(env, request, repoParam, path, basePath) {
+  const parsed = parseRepositoryParam(repoParam);
+  if (parsed.error) {
+    return {
+      identity: parsed.identity,
+      path,
+      error: parsed.error
+    };
+  }
+
+  const snapshot = await loadQueryInputSnapshot(
+    env,
+    request,
+    parsed.identity.host,
+    parsed.identity.owner,
+    parsed.identity.repo
+  );
+  if (snapshot === null) {
+    return {
+      identity: parsed.identity,
+      path,
+      error: buildPublicErrorDetail(
+        PUBLIC_ERROR_CODES.repositoryNotFound,
+        repositoryNotFoundMessage(parsed.identity)
+      )
+    };
+  }
+
+  try {
+    return {
+      identity: snapshot.identity,
+      path,
+      query: buildQueryResponse(snapshot, path, basePath)
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return {
+      identity: parsed.identity,
+      path,
+      error: buildPublicErrorDetail(classifyErrorCode(message), message)
+    };
+  }
+}
+
+async function buildBatchProfileResponse(env, request, repoParams, freshness) {
+  const results = [];
+  for (const repoParam of repoParams) {
+    results.push(await buildBatchProfileItem(env, request, repoParam));
+  }
+  return {
+    apiVersion: PUBLIC_API_VERSION,
+    freshness,
+    resultCount: results.length,
+    results
+  };
+}
+
+async function buildBatchQueryResponse(env, request, repoParams, paths, freshness, basePath) {
+  const results = [];
+  for (const repoParam of repoParams) {
+    for (const path of paths) {
+      results.push(await buildBatchQueryItem(env, request, repoParam, path, basePath));
+    }
+  }
+  return {
+    apiVersion: PUBLIC_API_VERSION,
+    freshness,
+    repositoryCount: repoParams.length,
+    pathCount: paths.length,
+    resultCount: results.length,
+    results
+  };
+}
+
 async function serveStaticAsset(request, env, strippedPath) {
   const assetPath = strippedPath === "/" ? "/" : strippedPath;
   const assetRequest = new Request(new URL(assetPath, request.url), request);
@@ -314,6 +820,81 @@ export async function handleRequest(request, env) {
   }
   if (strippedPath.startsWith("/query-input/")) {
     return textResponse(404, "not found");
+  }
+
+  if (strippedPath === "/v0/search") {
+    const meta = await loadMeta(env, request);
+    const freshness = buildFreshnessFromMeta(meta);
+    return jsonResponse(200, await buildSearchResponse(env, request, url, freshness));
+  }
+
+  if (strippedPath === "/v0/compare") {
+    const repoParams = url.searchParams.getAll("repo").filter((value) => value.trim() !== "");
+    if (repoParams.length === 0) {
+      return textResponse(400, "missing query parameter `repo`");
+    }
+    const meta = await loadMeta(env, request);
+    const freshness = buildFreshnessFromMeta(meta);
+    try {
+      return jsonResponse(200, await buildCompareResponse(env, request, repoParams, freshness));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      return jsonResponse(
+        classifyErrorCode(message) === PUBLIC_ERROR_CODES.invalidRepositoryIdentity ? 400 : 404,
+        {
+          apiVersion: PUBLIC_API_VERSION,
+          freshness,
+          error: buildPublicErrorDetail(classifyErrorCode(message), message)
+        }
+      );
+    }
+  }
+
+  const relationsRoute = parseRelationsRoute(strippedPath);
+  if (relationsRoute !== null) {
+    const meta = await loadMeta(env, request);
+    const freshness = buildFreshnessFromMeta(meta);
+    let identity = relationsRoute;
+    try {
+      identity = decodeRepositoryIdentity(relationsRoute);
+      validateRepositoryIdentity(identity.host, identity.owner, identity.repo);
+      return jsonResponse(200, await buildRelationsResponse(env, request, identity, freshness, basePath));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      const code = classifyErrorCode(message);
+      return jsonResponse(
+        code === PUBLIC_ERROR_CODES.invalidRepositoryIdentity ? 400 : 404,
+        buildPublicErrorResponse(identity, undefined, freshness, code, message)
+      );
+    }
+  }
+
+  const batchRoute = parseBatchRoute(strippedPath);
+  if (batchRoute !== null) {
+    if (request.method !== "GET") {
+      return textResponse(405, "method not allowed");
+    }
+    const repoParams = url.searchParams.getAll("repo").filter((value) => value.trim() !== "");
+    if (repoParams.length === 0) {
+      return textResponse(400, "missing query parameter `repo`");
+    }
+    const meta = await loadMeta(env, request);
+    const freshness = buildFreshnessFromMeta(meta);
+    if (batchRoute === "profiles") {
+      return jsonResponse(
+        200,
+        await buildBatchProfileResponse(env, request, repoParams, freshness)
+      );
+    }
+
+    const paths = url.searchParams.getAll("path").filter((value) => value.trim() !== "");
+    if (paths.length === 0) {
+      return textResponse(400, "missing query parameter `path`");
+    }
+    return jsonResponse(
+      200,
+      await buildBatchQueryResponse(env, request, repoParams, paths, freshness, basePath)
+    );
   }
 
   const route = parseQueryRoute(strippedPath);

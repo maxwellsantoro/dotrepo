@@ -45,7 +45,7 @@ This surface provides:
 - repo-scoped `query-input/` artifacts for Worker-backed hosted query serving
 
 Not yet in scope:
-- structured discovery, ranking, comparison, and hosted batch-profile APIs
+- structured discovery, ranking, and comparison APIs
 - live mutation or submission APIs
 
 ## Local review loop
@@ -139,6 +139,8 @@ Current behavior:
   shipped hosted-query runtime on the same origin
 - CI also smoke tests that the same emitted `queryTemplate` resolves through
   the Cloudflare Worker route backed by the staged export snapshot
+- CI also smoke tests hosted search, compare, and relation traversal through
+  the Cloudflare Worker route backed by the staged export snapshot
 - artifact retention is 14 days
 - export generation failures fail CI directly
 
@@ -170,9 +172,10 @@ The export tree is the source of truth. The hosted surface deploys the same
 For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.
 The Cloudflare Worker path can now also serve the same exported snapshot
-locally after staging the reviewed tree into the Worker project. The remaining
-operational work is snapshot scaling, profile coverage, hosted batch access, and
-richer discovery on `dotrepo.org`.
+locally after staging the reviewed tree into the Worker project, including
+hosted search, compare, and relation traversal. The remaining operational work
+is snapshot scaling, profile coverage, ranking evaluation, and richer discovery
+on `dotrepo.org`.
 
 ## What should stay stable vs variable
 

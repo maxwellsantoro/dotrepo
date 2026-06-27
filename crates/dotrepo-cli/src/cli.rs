@@ -242,6 +242,78 @@ pub enum PublicCommand {
         #[arg(long)]
         stale_after_hours: Option<i64>,
     },
+    /// Compare compact public research profiles for multiple repositories.
+    Compare {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        /// Repository identity as host/owner/repo or https://host/owner/repo.
+        #[arg(long = "repo", required = true)]
+        repos: Vec<String>,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
+    /// Traverse public repository references declared in the selected profile.
+    Relations {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        host: String,
+        owner: String,
+        repo: String,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
+    /// Search compact public research profiles by text and structured filters.
+    Search {
+        #[arg(long, default_value = "index")]
+        index_root: PathBuf,
+        /// Text query matched against identity, name, purpose, homepage, license, languages, and topics.
+        #[arg(long)]
+        q: Option<String>,
+        /// Required language. Repeat for multiple required languages.
+        #[arg(long = "language")]
+        languages: Vec<String>,
+        /// Required topic. Repeat for multiple required topics.
+        #[arg(long = "topic")]
+        topics: Vec<String>,
+        /// Required selected record status. Repeat for accepted statuses.
+        #[arg(long = "status")]
+        statuses: Vec<String>,
+        /// Required trust confidence. Repeat for accepted confidence values.
+        #[arg(long = "confidence")]
+        confidences: Vec<String>,
+        /// Require a build command signal.
+        #[arg(long)]
+        require_build: bool,
+        /// Require a test command signal.
+        #[arg(long)]
+        require_test: bool,
+        /// Require documentation signal.
+        #[arg(long)]
+        require_docs: bool,
+        /// Require security contact signal.
+        #[arg(long)]
+        require_security_contact: bool,
+        /// Require license signal.
+        #[arg(long)]
+        require_license: bool,
+        /// Maximum results to return.
+        #[arg(long)]
+        limit: Option<usize>,
+        /// URL base path prefix for hosted public links, such as `/dotrepo`.
+        #[arg(long, default_value = "/")]
+        base_path: String,
+        /// Advisory staleness window in hours for the rendered response.
+        #[arg(long)]
+        stale_after_hours: Option<i64>,
+    },
     /// Render one public trust response as JSON.
     Trust {
         #[arg(long, default_value = "index")]

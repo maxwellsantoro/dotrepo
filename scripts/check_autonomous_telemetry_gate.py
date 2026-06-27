@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run python
 """Evaluate retained autonomous-run telemetry against Milestone 1 proof gates."""
 
 from __future__ import annotations

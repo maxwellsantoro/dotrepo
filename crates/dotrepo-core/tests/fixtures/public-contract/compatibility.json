@@ -72,6 +72,20 @@
     "requiredKeys": ["apiVersion", "freshness", "repositoryCount", "pathCount", "resultCount", "results"],
     "itemKeys": ["identity", "path"]
   },
+  "search": {
+    "requiredKeys": ["apiVersion", "freshness", "query", "filters", "totalRepositoryCount", "matchedCount", "returnedCount", "results"],
+    "itemKeys": ["identity", "name", "purpose", "completeness", "trust", "matched", "links"],
+    "filterKeys": ["languages", "topics", "statuses", "confidences", "requireBuild", "requireTest", "requireDocs", "requireSecurityContact", "requireLicense", "limit"]
+  },
+  "compare": {
+    "requiredKeys": ["apiVersion", "freshness", "repositoryCount", "results", "signals"],
+    "itemKeys": ["identity", "name", "purpose", "completeness", "trust", "links"],
+    "signalKeys": ["sharedLanguages", "sharedTopics", "licenses", "selectedStatuses", "confidences", "hasBuild", "hasTest", "hasDocs", "hasSecurityContact", "hasLicense"]
+  },
+  "relations": {
+    "requiredKeys": ["apiVersion", "freshness", "identity", "relationCount", "references", "links"],
+    "itemKeys": ["relationship", "target"]
+  },
   "trust": {
     "requiredKeys": ["apiVersion", "freshness", "identity", "selection", "conflicts", "links"],
     "linkKeys": ["self", "repository", "profile", "queryTemplate", "indexPath"]

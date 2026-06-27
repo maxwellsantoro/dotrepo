@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run python
 """Smoke-test .env adjudication: sidecar health, OpenRouter call, crawler escalation."""
 
 from __future__ import annotations

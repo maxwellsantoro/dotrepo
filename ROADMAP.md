@@ -309,13 +309,25 @@ Current status:
   public export and available through `dotrepo public profile`
 - local/core batch profile and batch field lookup are available through
   `dotrepo public batch-profiles` and `dotrepo public batch-query`
+- hosted batch profile and batch field lookup are available as cacheable GET
+  routes on the same public surface and in the local `dotrepo-public-query`
+  runtime
 - static exports include `meta.validators` and `v0/files.json` for
   snapshot-level revalidation and selective refetch
+- `scripts/diff_public_export_files.py` now turns two `v0/files.json`
+  manifests into an exact added/changed/removed/refetch report for mirrors and
+  agent caches
+- `scripts/check_public_profile_coverage.py` now measures exported profile
+  count, high-signal profile count, missing quality signals, and optional
+  Milestone 2 gates against the public tree
+- `scripts/build_public_lookup_workload.py` now derives larger benchmark
+  workloads from exported profile completeness so production lookup-efficiency
+  reports do not depend on a hand-maintained tiny fixture
 - `scripts/measure_public_lookup_efficiency.py` now produces deterministic
   task hit-rate, field hit-rate, and payload-byte reports for known-repository
   workloads against a public export
-- profile coverage scale, hosted batch access, richer delta protocols, and
-  a larger published production workload benchmark remain open
+- reaching 500 high-signal profiles and publishing a larger production workload
+  benchmark remain open
 
 Exit criteria:
 
@@ -348,6 +360,22 @@ Exit criteria:
   comparable profiles without scraping repository pages
 - synthesis remains optional and cannot overwrite factual fields
 - search quality, coverage, freshness, and cost are observable
+
+Current status:
+
+- `dotrepo public search` provides the first structured profile-search response
+  over the public index, with text, language, topic, trust, and completeness
+  filters grounded in generated `profile.json` semantics
+- `dotrepo public compare` provides the first factual comparison response for
+  selected profiles, preserving trust, completeness, shared language/topic, and
+  side-by-side signal values without ranking or synthesis
+- `dotrepo public relations` provides the first relationship traversal response
+  over declared profile references, resolving referenced profiles when they are
+  present in the same index
+- the hosted Worker now serves cacheable GET search, compare, and relations
+  routes from the staged public snapshot
+- ranking evaluation, richer relationship types, and bounded synthesis remain
+  open
 
 ### Milestone 4: Index at ecosystem scale
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run python
 """Run one autonomous index refresh batch: crawl, gate, writeback, validate."""
 
 from __future__ import annotations
@@ -324,7 +324,9 @@ def select_refresh_batch_or_empty(
 
     run(
         [
-            "python3",
+            "uv",
+            "run",
+            "python",
             "scripts/select_review_batch.py",
             "--input",
             str(refresh_batches),
@@ -797,7 +799,9 @@ def main() -> int:
 
     run(
         [
-            "python3",
+            "uv",
+            "run",
+            "python",
             "scripts/plan_refresh_review_batches.py",
             "--input",
             str(refresh_plan),

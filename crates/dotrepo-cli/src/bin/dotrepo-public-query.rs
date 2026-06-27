@@ -1,8 +1,9 @@
 use anyhow::{Context, Result};
 use clap::Parser;
 use dotrepo_core::{
-    build_public_freshness, public_repository_query_or_error_with_base, PublicErrorCode,
-    PublicErrorResponse, PublicFreshness,
+    build_public_freshness, public_repository_batch_profiles_with_base,
+    public_repository_batch_query_with_base, public_repository_query_or_error_with_base,
+    PublicErrorCode, PublicErrorResponse, PublicFreshness, PublicRepositoryIdentity,
 };
 use serde::Serialize;
 use std::io::{BufRead, BufReader, Write};
@@ -49,6 +50,13 @@ struct ServerState {
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum Route {
     Healthz,
+    BatchProfiles {
+        repos: Vec<PublicRepositoryIdentity>,
+    },
+    BatchQuery {
+        repos: Vec<PublicRepositoryIdentity>,
+        paths: Vec<String>,
+    },
     Query {
         host: String,
         owner: String,
@@ -150,6 +158,25 @@ fn handle_connection(mut stream: TcpStream, state: &ServerState) -> Result<()> {
     match route_request(target, &state.base_path) {
         Err(err) => write_text_response(&mut stream, 400, &err.to_string()),
         Ok(Some(Route::Healthz)) => write_text_response(&mut stream, 200, "ok"),
+        Ok(Some(Route::BatchProfiles { repos })) => {
+            let response = public_repository_batch_profiles_with_base(
+                &state.index_root,
+                &repos,
+                state.freshness.clone(),
+                &state.base_path,
+            )?;
+            write_json_response(&mut stream, 200, &response)
+        }
+        Ok(Some(Route::BatchQuery { repos, paths })) => {
+            let response = public_repository_batch_query_with_base(
+                &state.index_root,
+                &repos,
+                &paths,
+                state.freshness.clone(),
+                &state.base_path,
+            )?;
+            write_json_response(&mut stream, 200, &response)
+        }
         Ok(Some(Route::Query {
             host,
             owner,
@@ -191,21 +218,41 @@ fn route_request(target: &str, base_path: &str) -> Result<Option<Route>> {
         return Ok(Some(Route::Healthz));
     }
 
-    let prefix = if base_path == "/" {
-        "/v0/repos/"
+    let stripped_path = if base_path == "/" {
+        path.to_string()
     } else {
-        return route_request_with_base(path, query, base_path);
+        let Some(stripped) = strip_base_path(path, base_path) else {
+            return Ok(None);
+        };
+        stripped
     };
 
-    let Some(rest) = path.strip_prefix(prefix) else {
-        return Ok(None);
-    };
-    parse_query_route(rest, query)
+    parse_public_route(&stripped_path, query)
 }
 
-fn route_request_with_base(path: &str, query: &str, base_path: &str) -> Result<Option<Route>> {
-    let expected_prefix = format!("{}/v0/repos/", base_path.trim_end_matches('/'));
-    let Some(rest) = path.strip_prefix(&expected_prefix) else {
+fn strip_base_path(path: &str, base_path: &str) -> Option<String> {
+    if path == base_path {
+        return Some("/".to_string());
+    }
+    let prefix = format!("{}/", base_path.trim_end_matches('/'));
+    path.strip_prefix(&prefix)
+        .map(|stripped| format!("/{stripped}"))
+}
+
+fn parse_public_route(path: &str, query: &str) -> Result<Option<Route>> {
+    if path == "/v0/batch/profiles" {
+        return Ok(Some(Route::BatchProfiles {
+            repos: required_repository_params(query)?,
+        }));
+    }
+    if path == "/v0/batch/query" {
+        return Ok(Some(Route::BatchQuery {
+            repos: required_repository_params(query)?,
+            paths: required_repeated_query_param(query, "path")?,
+        }));
+    }
+
+    let Some(rest) = path.strip_prefix("/v0/repos/") else {
         return Ok(None);
     };
     parse_query_route(rest, query)
@@ -226,11 +273,55 @@ fn parse_query_route(rest: &str, query: &str) -> Result<Option<Route>> {
     }))
 }
 
+fn required_repeated_query_param(query: &str, key: &str) -> Result<Vec<String>> {
+    let values = form_urlencoded::parse(query.as_bytes())
+        .filter_map(|(candidate, value)| {
+            (candidate == key && !value.trim().is_empty()).then(|| value.into_owned())
+        })
+        .collect::<Vec<_>>();
+    if values.is_empty() {
+        anyhow::bail!("missing query parameter `{key}`");
+    }
+    Ok(values)
+}
+
 fn required_query_param(query: &str, key: &str) -> Result<String> {
     form_urlencoded::parse(query.as_bytes())
         .find_map(|(candidate, value)| (candidate == key).then(|| value.into_owned()))
         .filter(|value| !value.trim().is_empty())
         .ok_or_else(|| anyhow::anyhow!("missing query parameter `{key}`"))
+}
+
+fn required_repository_params(query: &str) -> Result<Vec<PublicRepositoryIdentity>> {
+    required_repeated_query_param(query, "repo")?
+        .iter()
+        .map(|value| parse_repository_param(value))
+        .collect()
+}
+
+fn parse_repository_param(value: &str) -> Result<PublicRepositoryIdentity> {
+    let trimmed = value.trim();
+    let without_scheme = trimmed
+        .strip_prefix("https://")
+        .or_else(|| trimmed.strip_prefix("http://"))
+        .unwrap_or(trimmed);
+    let without_git = without_scheme.trim_end_matches(".git");
+    let parts = without_git
+        .split('/')
+        .filter(|part| !part.is_empty())
+        .collect::<Vec<_>>();
+    if parts.len() != 3 {
+        anyhow::bail!("repository must be host/owner/repo or https://host/owner/repo: {value}");
+    }
+    validate_identity_component(parts[0], "host")?;
+    validate_identity_component(parts[1], "owner")?;
+    validate_identity_component(parts[2], "repo")?;
+    Ok(PublicRepositoryIdentity {
+        host: parts[0].to_string(),
+        owner: parts[1].to_string(),
+        repo: parts[2].to_string(),
+        source: None,
+    })
 }
 
 fn decode_component(raw: &str) -> Result<String> {
@@ -239,13 +330,18 @@ fn decode_component(raw: &str) -> Result<String> {
 
 fn decode_identity_component(raw: &str, field: &str) -> Result<String> {
     let decoded = decode_component(raw)?;
+    validate_identity_component(&decoded, field)?;
+    Ok(decoded)
+}
+
+fn validate_identity_component(decoded: &str, field: &str) -> Result<()> {
     if matches!(
-        Path::new(&decoded).components().next(),
+        Path::new(decoded).components().next(),
         Some(Component::CurDir | Component::ParentDir)
     ) {
         anyhow::bail!("invalid repository identity: {field} must be a single path segment");
     }
-    Ok(decoded)
+    Ok(())
 }
 
 fn resolve_static_path(
@@ -421,6 +517,45 @@ mod tests {
                 path: "repo.name".into(),
             })
         );
+    }
+
+    #[test]
+    fn route_request_decodes_batch_profiles() {
+        let route = route_request(
+            "/v0/batch/profiles?repo=github.com/example/orbit&repo=https%3A%2F%2Fgithub.com%2Fexample%2Fnova",
+            "/",
+        )
+        .expect("route parses");
+
+        let Some(Route::BatchProfiles { repos }) = route else {
+            panic!("expected batch profiles route");
+        };
+        assert_eq!(repos.len(), 2);
+        assert_eq!(repos[0].repo, "orbit");
+        assert_eq!(repos[1].repo, "nova");
+    }
+
+    #[test]
+    fn route_request_decodes_batch_query_with_base_path() {
+        let route = route_request(
+            "/dotrepo/v0/batch/query?repo=github.com/example/orbit&path=repo.description&path=record.trust",
+            "/dotrepo",
+        )
+        .expect("route parses");
+
+        let Some(Route::BatchQuery { repos, paths }) = route else {
+            panic!("expected batch query route");
+        };
+        assert_eq!(repos.len(), 1);
+        assert_eq!(repos[0].owner, "example");
+        assert_eq!(paths, vec!["repo.description", "record.trust"]);
+    }
+
+    #[test]
+    fn route_request_rejects_batch_without_repositories() {
+        let err =
+            route_request("/v0/batch/profiles?path=repo.name", "/").expect_err("repo is required");
+        assert_eq!(err.to_string(), "missing query parameter `repo`");
     }
 
     #[test]

@@ -197,6 +197,54 @@ fn hosted_query_server_matches_checked_in_query_fixtures() {
 }
 
 #[test]
+fn hosted_query_server_serves_batch_profile_and_query_routes() {
+    let server = ServerHandle::spawn(&fixture_index_root(), "/dotrepo", None);
+
+    let (profile_status, profile_body) = http_get(
+        &server.addr,
+        "/dotrepo/v0/batch/profiles?repo=github.com/example/orbit&repo=github.com/missing/repo",
+    )
+    .expect("batch profile request should succeed");
+    assert_eq!(profile_status, 200);
+    let profiles = serde_json::from_str::<Value>(&profile_body).expect("profile json parses");
+    assert_eq!(profiles["apiVersion"], Value::String("v0".into()));
+    assert_eq!(profiles["resultCount"], Value::Number(2.into()));
+    assert_eq!(
+        profiles["results"][0]["profile"]["purpose"],
+        Value::String("Reviewed orbital tooling metadata.".into())
+    );
+    assert_eq!(
+        profiles["results"][1]["error"]["code"],
+        Value::String("repository_not_found".into())
+    );
+
+    let (query_status, query_body) = http_get(
+        &server.addr,
+        "/dotrepo/v0/batch/query?repo=https%3A%2F%2Fgithub.com%2Fexample%2Forbit&path=repo.description&path=repo.missing_field",
+    )
+    .expect("batch query request should succeed");
+    assert_eq!(query_status, 200);
+    let query = serde_json::from_str::<Value>(&query_body).expect("query json parses");
+    assert_eq!(query["repositoryCount"], Value::Number(1.into()));
+    assert_eq!(query["pathCount"], Value::Number(2.into()));
+    assert_eq!(query["resultCount"], Value::Number(2.into()));
+    assert_eq!(
+        query["results"][0]["query"]["value"],
+        Value::String("Reviewed orbital tooling metadata.".into())
+    );
+    assert_eq!(
+        query["results"][0]["query"]["links"]["self"],
+        Value::String(
+            "/dotrepo/v0/repos/github.com/example/orbit/query?path=repo.description".into()
+        )
+    );
+    assert_eq!(
+        query["results"][1]["error"]["code"],
+        Value::String("query_path_not_found".into())
+    );
+}
+
+#[test]
 fn hosted_query_server_honors_base_path_and_preserves_equal_authority_conflicts() {
     let root = temp_dir("equal-authority-server");
     let record_dir = root.join("repos/github.com/example/orbit");

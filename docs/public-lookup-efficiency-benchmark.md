@@ -8,13 +8,24 @@ The deterministic benchmark harness measures that lookup path against a JSON
 workload of known-repository questions:
 
 ```bash
-python3 scripts/measure_public_lookup_efficiency.py \
-  --public-root crates/dotrepo-core/tests/fixtures/public-export/expected/public \
-  --index-root crates/dotrepo-core/tests/fixtures/public-export/fixture-index \
-  --workload scripts/fixtures/public_lookup_workload.json \
+uv run python scripts/build_public_lookup_workload.py \
+  --public-root public \
+  --limit 500 \
+  --output /tmp/dotrepo-public-lookup-workload.json
+
+uv run python scripts/measure_public_lookup_efficiency.py \
+  --public-root public \
+  --index-root index \
+  --workload /tmp/dotrepo-public-lookup-workload.json \
   --output-json /tmp/dotrepo-lookup-efficiency.json \
   --output-md /tmp/dotrepo-lookup-efficiency.md
 ```
+
+`build_public_lookup_workload.py` derives tasks from the exported inventory and
+profile completeness signals. Every task includes common identity-orientation
+fields such as `repo.description` and `repo.homepage`; build, test,
+documentation, security, ownership, license, language, and topic fields are
+included when the profile says those facts are present.
 
 The report includes:
 
@@ -51,4 +62,3 @@ for source files, host responses, documentation pages, and interpretation
 context. The next benchmark step is to run the same report shape against a
 larger production workload and publish the resulting hit rate and byte
 comparison from the hosted snapshot.
-

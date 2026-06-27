@@ -29,7 +29,7 @@
   "scripts": {
     "build": "esbuild extension.js --bundle --platform=node --format=cjs --external:vscode --minify --outfile=dist/extension.js",
     "package": "npm run build && npm run package:vsix -- --output dotrepo-vscode.vsix",
-    "package:vsix": "python3 ../../scripts/package_vscode_extension.py --extension-root ."
+    "package:vsix": "uv run python ../../scripts/package_vscode_extension.py --extension-root ."
   },
   "main": "./dist/extension.js",
   "extensionKind": [

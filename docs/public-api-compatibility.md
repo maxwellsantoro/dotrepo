@@ -7,6 +7,9 @@ It covers the `v0` contracts for:
 
 - repository summary
 - compact research profile
+- structured profile search
+- factual profile comparison
+- declared relationship traversal
 - batch profile and batch field lookup
 - trust wrapper
 - query wrapper
@@ -36,8 +39,9 @@ The executable compatibility source of truth lives in:
 
 The checked-in manifest freezes:
 
-- required top-level keys for metadata, file manifest, summary, profile, batch
-  profile, batch query, trust, query, inventory, and error responses
+- required top-level keys for metadata, file manifest, summary, profile, search,
+  compare, relations, batch profile, batch query, trust, query, inventory, and
+  error responses
 - required nested keys for freshness, selection, record summaries, artifact
   locators, and claim context
 - stable link-key names for summary, profile, trust, query, and inventory entries

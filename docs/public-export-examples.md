@@ -11,7 +11,7 @@ origin when needed.
 ```bash
 # Replace BASE_URL with the current hosted public URL (for example
 # https://dotrepo.org today)
-curl -s "$BASE_URL/v0/meta.json" | python3 -c "
+curl -s "$BASE_URL/v0/meta.json" | uv run python -c "
 import json, sys
 meta = json.load(sys.stdin)
 print('api version:', meta['apiVersion'])
@@ -23,7 +23,7 @@ print('generated at:', meta['generatedAt'])
 ## 2. List repositories from the hosted inventory
 
 ```bash
-curl -s "$BASE_URL/v0/repos/index.json" | python3 -c "
+curl -s "$BASE_URL/v0/repos/index.json" | uv run python -c "
 import json, sys
 inventory = json.load(sys.stdin)
 print('repositories:', inventory['repositoryCount'])
@@ -48,7 +48,7 @@ cargo run -p dotrepo-cli -- public export \
 ## 4. Read local snapshot metadata and repository count
 
 ```bash
-python3 - <<'PY'
+uv run python - <<'PY'
 import json
 from pathlib import Path
 
@@ -63,7 +63,7 @@ PY
 ## 5. Inspect cache validators and changed files
 
 ```bash
-python3 - <<'PY'
+uv run python - <<'PY'
 import json
 from pathlib import Path
 
@@ -79,7 +79,7 @@ PY
 ## 6. Inspect one repository summary locally
 
 ```bash
-python3 - <<'PY'
+uv run python - <<'PY'
 import json
 from pathlib import Path
 
@@ -95,7 +95,7 @@ PY
 ## 7. Agent-style traversal from inventory to profile
 
 ```bash
-python3 - <<'PY'
+uv run python - <<'PY'
 import json
 from pathlib import Path
 
@@ -118,7 +118,7 @@ PY
 ## 8. Agent-style traversal from inventory to trust
 
 ```bash
-python3 - <<'PY'
+uv run python - <<'PY'
 import json
 from pathlib import Path
 
@@ -165,6 +165,14 @@ cargo run -p dotrepo-cli -- public batch-query \
 Batch responses keep going when one repository or field is missing. Each result
 contains either the normal response object or a machine-readable `error`.
 
+Hosted batch lookup uses the same response envelope:
+
+```bash
+curl -s "$BASE_URL/v0/batch/profiles?repo=github.com/sharkdp/fd&repo=github.com/BurntSushi/ripgrep"
+
+curl -s "$BASE_URL/v0/batch/query?repo=github.com/sharkdp/fd&path=repo.description&path=repo.test"
+```
+
 ## 11. Serve a local same-origin public surface plus query route
 
 ```bash
@@ -183,7 +191,7 @@ cargo run -p dotrepo-cli --bin dotrepo-public-query -- \
 Then:
 
 ```bash
-curl -s "http://127.0.0.1:3000/v0/repos/index.json" | python3 -c "
+curl -s "http://127.0.0.1:3000/v0/repos/index.json" | uv run python -c "
 import json, sys
 inventory = json.load(sys.stdin)
 print(inventory['repositories'][0]['links']['queryTemplate'])
@@ -193,13 +201,61 @@ print(inventory['repositories'][0]['links']['queryTemplate'])
 These examples work against the current deployed public tree, a local export,
 the local same-origin runtime, or extracted CI artifacts.
 
-## 12. Measure known-repository lookup efficiency
+## 12. Search compact public profiles
 
 ```bash
-python3 scripts/measure_public_lookup_efficiency.py \
+cargo run -p dotrepo-cli -- public search \
+  --q orbit \
+  --status reviewed \
+  --require-docs \
+  --require-security-contact
+
+curl -s "$BASE_URL/v0/search?q=orbit&status=reviewed&require-docs&require-security-contact"
+```
+
+Search results include compact profile fields, matched field names,
+completeness signals, trust context, and links back to profile, trust, query,
+and repository JSON.
+
+## 13. Compare compact public profiles
+
+```bash
+cargo run -p dotrepo-cli -- public compare \
+  --repo github.com/sharkdp/fd \
+  --repo github.com/BurntSushi/ripgrep
+
+curl -s "$BASE_URL/v0/compare?repo=github.com/sharkdp/fd&repo=github.com/BurntSushi/ripgrep"
+```
+
+Comparison responses are factual matrices: profile summaries, trust and
+completeness signals, shared languages/topics, and side-by-side selected
+statuses, confidences, licenses, and build/test/docs/security/license flags.
+They do not rank projects or generate a recommendation.
+
+## 14. Traverse declared profile references
+
+```bash
+cargo run -p dotrepo-cli -- public relations github.com sharkdp fd
+
+curl -s "$BASE_URL/v0/repos/github.com/sharkdp/fd/relations"
+```
+
+The relations response reports declared `references` from the selected record.
+When a referenced `host/owner/repo` exists in the same index, the response
+includes a compact linked profile item and profile/trust/query links.
+
+## 15. Measure known-repository lookup efficiency
+
+```bash
+uv run python scripts/build_public_lookup_workload.py \
+  --public-root public \
+  --limit 500 \
+  --output /tmp/dotrepo-public-lookup-workload.json
+
+uv run python scripts/measure_public_lookup_efficiency.py \
   --public-root public \
   --index-root index \
-  --workload scripts/fixtures/public_lookup_workload.json \
+  --workload /tmp/dotrepo-public-lookup-workload.json \
   --output-json /tmp/dotrepo-lookup-efficiency.json \
   --output-md /tmp/dotrepo-lookup-efficiency.md
 ```
@@ -208,3 +264,32 @@ The benchmark reports task hit rate, field hit rate, compact public payload
 bytes, and deterministic source/evidence proxy bytes. See
 [`docs/public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
 for interpretation notes.
+
+## 16. Compare two public export manifests
+
+```bash
+uv run python scripts/diff_public_export_files.py \
+  --old-files old-public/v0/files.json \
+  --new-files public/v0/files.json \
+  --output-json /tmp/dotrepo-public-file-delta.json \
+  --output-md /tmp/dotrepo-public-file-delta.md
+```
+
+The delta report gives consumers the exact files to refetch from the new
+snapshot and the byte ratio of that refetch set.
+
+## 17. Measure public profile coverage
+
+```bash
+uv run python scripts/check_public_profile_coverage.py \
+  --public-root public \
+  --min-profiles 500 \
+  --min-high-signal 500 \
+  --output-json /tmp/dotrepo-profile-coverage.json \
+  --output-md /tmp/dotrepo-profile-coverage.md
+```
+
+The coverage report counts exported `profile.json` files, marks profiles as
+high-signal when they have a purpose, reviewed-or-better status,
+medium-or-better confidence, and no selected-record conflicts, then lists the
+lowest-signal profiles to improve next.

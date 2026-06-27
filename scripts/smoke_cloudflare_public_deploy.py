@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run python
 """Smoke-test the live Cloudflare Worker deployment from a reviewed export."""
 
 from __future__ import annotations
@@ -186,6 +186,17 @@ def main() -> int:
     query_template = links.get("queryTemplate")
     if not isinstance(query_template, str):
         raise SystemExit("reviewed export inventory contains no queryTemplate")
+    first_identity = repositories[0].get("identity", {})
+    try:
+        first_repo = "/".join(
+            [
+                first_identity["host"],
+                first_identity["owner"],
+                first_identity["repo"],
+            ]
+        )
+    except KeyError as exc:
+        raise SystemExit(f"reviewed export inventory missing identity key: {exc}") from exc
 
     deploy_url = args.deploy_url.rstrip("/")
     base_path = normalize_base_path(args.base_path)
@@ -230,10 +241,62 @@ def main() -> int:
             f"deployed queryTemplate smoke returned unexpected self link: {self_link}"
         )
 
+    batch_profiles_url = f"{deploy_url}{base_path}/v0/batch/profiles?{urlencode([('repo', first_repo)])}"
+    batch_profiles = http_get_json(
+        with_query_param(batch_profiles_url, "_smoke", uuid.uuid4().hex)
+    )
+    if batch_profiles.get("resultCount") != 1:
+        raise SystemExit("deployed batch profile smoke returned unexpected resultCount")
+    if batch_profiles.get("results", [{}])[0].get("profile", {}).get("identity") != first_identity:
+        raise SystemExit("deployed batch profile smoke returned unexpected identity")
+
+    batch_query_url = f"{deploy_url}{base_path}/v0/batch/query?{urlencode([('repo', first_repo), ('path', 'repo.description')])}"
+    batch_query = http_get_json(
+        with_query_param(batch_query_url, "_smoke", uuid.uuid4().hex)
+    )
+    if batch_query.get("repositoryCount") != 1 or batch_query.get("pathCount") != 1:
+        raise SystemExit("deployed batch query smoke returned unexpected counts")
+    batch_query_result = batch_query.get("results", [{}])[0]
+    if batch_query_result.get("path") != "repo.description" or "query" not in batch_query_result:
+        raise SystemExit("deployed batch query smoke returned unexpected result")
+
+    search_url = f"{deploy_url}{base_path}/v0/search?{urlencode([('q', first_identity['repo'])])}"
+    search_response = http_get_json(
+        with_query_param(search_url, "_smoke", uuid.uuid4().hex)
+    )
+    if search_response.get("returnedCount", 0) < 1:
+        raise SystemExit("deployed search smoke returned no results")
+
+    compare_url = f"{deploy_url}{base_path}/v0/compare?{urlencode([('repo', first_repo)])}"
+    compare_response = http_get_json(
+        with_query_param(compare_url, "_smoke", uuid.uuid4().hex)
+    )
+    if compare_response.get("repositoryCount") != 1:
+        raise SystemExit("deployed compare smoke returned unexpected repositoryCount")
+    if compare_response.get("results", [{}])[0].get("identity") != first_identity:
+        raise SystemExit("deployed compare smoke returned unexpected identity")
+
+    relations_url = (
+        f"{deploy_url}{base_path}/v0/repos/"
+        f"{first_identity['host']}/{first_identity['owner']}/{first_identity['repo']}/relations"
+    )
+    relations_response = http_get_json(
+        with_query_param(relations_url, "_smoke", uuid.uuid4().hex)
+    )
+    if relations_response.get("identity") != first_identity:
+        raise SystemExit("deployed relations smoke returned unexpected identity")
+    if not isinstance(relations_response.get("references"), list):
+        raise SystemExit("deployed relations smoke returned malformed references")
+
     print(f"smoke ok: {homepage_url}")
     print(f"smoke ok: {meta_url}")
     print(f"smoke ok: {inventory_url}")
     print(f"smoke ok: {query_url}")
+    print(f"smoke ok: {batch_profiles_url}")
+    print(f"smoke ok: {batch_query_url}")
+    print(f"smoke ok: {search_url}")
+    print(f"smoke ok: {compare_url}")
+    print(f"smoke ok: {relations_url}")
     return 0
 
 

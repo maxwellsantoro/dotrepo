@@ -34,6 +34,12 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
@@ -77,7 +83,7 @@ jobs:
             echo "refresh-plan.json was not produced" >&2
             exit 1
           fi
-          python3 scripts/plan_refresh_review_batches.py \
+          uv run python scripts/plan_refresh_review_batches.py \
             --input index-refresh-batch/refresh-plan.json \
             --batch-size "${{ steps.inputs.outputs.batch_size }}" \
             --output-json index-refresh-batch/refresh-batches.json \
@@ -86,19 +92,19 @@ jobs:
         id: batch
         shell: bash
         run: |
-          python3 scripts/select_review_batch.py \
+          uv run python scripts/select_review_batch.py \
             --input index-refresh-batch/refresh-batches.json \
             --batch-id "${{ github.event.inputs.batch_id }}" \
             --output-targets index-refresh-batch/selected-targets.txt \
             --output-metadata index-refresh-batch/selected-batch.json
-          title="$(python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print("chore(index): {}".format(data["batch"]["suggestedPrTitle"]))' index-refresh-batch/selected-batch.json)"
+          title="$(uv run python -c 'import json, sys; data = json.load(open(sys.argv[1])); print("chore(index): {}".format(data["batch"]["suggestedPrTitle"]))' index-refresh-batch/selected-batch.json)"
           branch="automation/index-refresh/${{ github.event.inputs.batch_id }}-${{ github.run_id }}"
           echo "title=$title" >> "$GITHUB_OUTPUT"
           echo "branch=$branch" >> "$GITHUB_OUTPUT"
       - name: Render pull request body
         shell: bash
         run: |
-          python3 scripts/render_review_batch_pull_request.py \
+          uv run python scripts/render_review_batch_pull_request.py \
             --input index-refresh-batch/selected-batch.json \
             --kind refresh \
             --output index-refresh-batch/pr-body.md

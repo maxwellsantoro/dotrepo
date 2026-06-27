@@ -100,6 +100,252 @@ test("serves query responses from exported query-input fixtures", async () => {
   );
 });
 
+test("serves hosted batch profile responses with item errors", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath(
+          "crates",
+          "dotrepo-core",
+          "tests",
+          "fixtures",
+          "public-export",
+          "expected",
+          "public",
+          "v0",
+          "meta.json"
+        ),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/github.com/example/orbit/profile.json",
+      await readFile(
+        fixturePath(
+          "crates",
+          "dotrepo-core",
+          "tests",
+          "fixtures",
+          "public-export",
+          "expected",
+          "public",
+          "v0",
+          "repos",
+          "github.com",
+          "example",
+          "orbit",
+          "profile.json"
+        ),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/" };
+  const response = await handleRequest(
+    new Request(
+      "https://example.test/v0/batch/profiles?repo=github.com/example/orbit&repo=github.com/missing/repo"
+    ),
+    env
+  );
+  const json = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(json.apiVersion, "v0");
+  assert.equal(json.resultCount, 2);
+  assert.equal(json.results[0].profile.purpose, "Reviewed orbital tooling metadata.");
+  assert.equal(json.results[1].identity.host, "github.com");
+  assert.equal(json.results[1].error.code, "repository_not_found");
+});
+
+test("serves hosted batch query responses with path-level item errors", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath(
+          "crates",
+          "dotrepo-core",
+          "tests",
+          "fixtures",
+          "public-export",
+          "expected",
+          "public",
+          "v0",
+          "meta.json"
+        ),
+        "utf8"
+      )
+    ],
+    [
+      "/query-input/github.com/example/orbit.json",
+      await readFile(
+        fixturePath(
+          "crates",
+          "dotrepo-core",
+          "tests",
+          "fixtures",
+          "public-export",
+          "expected",
+          "public",
+          "query-input",
+          "github.com",
+          "example",
+          "orbit.json"
+        ),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/dotrepo" };
+  const response = await handleRequest(
+    new Request(
+      "https://example.test/dotrepo/v0/batch/query?repo=https%3A%2F%2Fgithub.com%2Fexample%2Forbit&path=repo.description&path=repo.missing_field"
+    ),
+    env
+  );
+  const json = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(json.repositoryCount, 1);
+  assert.equal(json.pathCount, 2);
+  assert.equal(json.resultCount, 2);
+  assert.equal(json.results[0].query.value, "Reviewed orbital tooling metadata.");
+  assert.equal(
+    json.results[0].query.links.self,
+    "/dotrepo/v0/repos/github.com/example/orbit/query?path=repo.description"
+  );
+  assert.equal(json.results[1].error.code, "query_path_not_found");
+});
+
+test("serves hosted profile search from staged profiles", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "meta.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/index.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "index.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/github.com/example/orbit/profile.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "github.com", "example", "orbit", "profile.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/github.com/example/nova/profile.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "github.com", "example", "nova", "profile.json"),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/dotrepo" };
+  const response = await handleRequest(
+    new Request(
+      "https://example.test/dotrepo/v0/search?q=orbit&status=reviewed&require-docs&require-security-contact"
+    ),
+    env
+  );
+  const json = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(json.query, "orbit");
+  assert.equal(json.matchedCount, 1);
+  assert.equal(json.returnedCount, 1);
+  assert.equal(json.results[0].identity.repo, "orbit");
+  assert.equal(json.filters.requireDocs, true);
+});
+
+test("serves hosted factual compare from staged profiles", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "meta.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/github.com/example/orbit/profile.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "github.com", "example", "orbit", "profile.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/github.com/example/nova/profile.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "github.com", "example", "nova", "profile.json"),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/dotrepo" };
+  const response = await handleRequest(
+    new Request(
+      "https://example.test/dotrepo/v0/compare?repo=github.com/example/orbit&repo=github.com/example/nova"
+    ),
+    env
+  );
+  const json = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(json.repositoryCount, 2);
+  assert.equal(json.results[0].identity.repo, "orbit");
+  assert.equal(json.results[0].links.self, "/v0/repos/github.com/example/orbit/profile.json");
+  assert.equal(json.signals.hasDocs[0].value, true);
+  assert.equal(json.signals.hasDocs[1].value, false);
+});
+
+test("serves hosted relation traversal from query-input snapshots", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "meta.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/query-input/github.com/example/orbit.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "query-input", "github.com", "example", "orbit.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/github.com/example/nova/profile.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "github.com", "example", "nova", "profile.json"),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/dotrepo" };
+  const response = await handleRequest(
+    new Request("https://example.test/dotrepo/v0/repos/github.com/example/orbit/relations"),
+    env
+  );
+  const json = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(json.relationCount, 1);
+  assert.equal(json.references[0].target, "github.com/example/nova");
+  assert.equal(json.references[0].profile.identity.repo, "nova");
+  assert.equal(json.links.self, "/dotrepo/v0/repos/github.com/example/orbit/relations");
+  assert.equal(json.links.profile, "/dotrepo/v0/repos/github.com/example/orbit/profile.json");
+});
+
 test("returns the public error contract for invalid identities", async () => {
   const files = new Map([
     [

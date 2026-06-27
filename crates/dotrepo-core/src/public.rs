@@ -3,6 +3,7 @@ use dotrepo_schema::Manifest;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
+use std::collections::BTreeSet;
 use std::fs;
 use std::path::{Path, PathBuf};
 use time::{Duration, OffsetDateTime};
@@ -302,6 +303,158 @@ pub struct PublicBatchQueryResponse {
     pub results: Vec<PublicBatchQueryItem>,
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct PublicProfileSearchOptions {
+    pub query: Option<String>,
+    pub languages: Vec<String>,
+    pub topics: Vec<String>,
+    pub statuses: Vec<String>,
+    pub confidences: Vec<String>,
+    pub require_build: bool,
+    pub require_test: bool,
+    pub require_docs: bool,
+    pub require_security_contact: bool,
+    pub require_license: bool,
+    pub limit: Option<usize>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileSearchItem {
+    pub identity: PublicRepositoryIdentity,
+    pub name: String,
+    pub purpose: String,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub languages: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub topics: Vec<String>,
+    pub completeness: PublicResearchCompleteness,
+    pub trust: PublicResearchTrust,
+    pub matched: Vec<String>,
+    pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileSearchResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub query: Option<String>,
+    pub filters: PublicProfileSearchAppliedFilters,
+    pub total_repository_count: usize,
+    pub matched_count: usize,
+    pub returned_count: usize,
+    pub results: Vec<PublicProfileSearchItem>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileSearchAppliedFilters {
+    #[serde(default)]
+    pub languages: Vec<String>,
+    #[serde(default)]
+    pub topics: Vec<String>,
+    #[serde(default)]
+    pub statuses: Vec<String>,
+    #[serde(default)]
+    pub confidences: Vec<String>,
+    pub require_build: bool,
+    pub require_test: bool,
+    pub require_docs: bool,
+    pub require_security_contact: bool,
+    pub require_license: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub limit: Option<usize>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileCompareItem {
+    pub identity: PublicRepositoryIdentity,
+    pub name: String,
+    pub purpose: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub homepage: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub license: Option<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub languages: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub topics: Vec<String>,
+    pub execution: PublicResearchExecution,
+    pub docs: PublicResearchDocs,
+    pub ownership: PublicResearchOwnership,
+    pub completeness: PublicResearchCompleteness,
+    pub trust: PublicResearchTrust,
+    pub links: PublicRepositoryLinks,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileCompareTextValue {
+    pub identity: PublicRepositoryIdentity,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileCompareBoolValue {
+    pub identity: PublicRepositoryIdentity,
+    pub value: bool,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileCompareSignals {
+    #[serde(default)]
+    pub shared_languages: Vec<String>,
+    #[serde(default)]
+    pub shared_topics: Vec<String>,
+    pub licenses: Vec<PublicProfileCompareTextValue>,
+    pub selected_statuses: Vec<PublicProfileCompareTextValue>,
+    pub confidences: Vec<PublicProfileCompareTextValue>,
+    pub has_build: Vec<PublicProfileCompareBoolValue>,
+    pub has_test: Vec<PublicProfileCompareBoolValue>,
+    pub has_docs: Vec<PublicProfileCompareBoolValue>,
+    pub has_security_contact: Vec<PublicProfileCompareBoolValue>,
+    pub has_license: Vec<PublicProfileCompareBoolValue>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicProfileCompareResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub repository_count: usize,
+    pub results: Vec<PublicProfileCompareItem>,
+    pub signals: PublicProfileCompareSignals,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRelationItem {
+    pub relationship: String,
+    pub target: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub identity: Option<PublicRepositoryIdentity>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub profile: Option<Box<PublicProfileSearchItem>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub error: Option<Box<PublicErrorDetail>>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRelationsResponse {
+    pub api_version: &'static str,
+    pub freshness: PublicFreshness,
+    pub identity: PublicRepositoryIdentity,
+    pub relation_count: usize,
+    pub references: Vec<PublicRelationItem>,
+    pub links: PublicRepositoryLinks,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicQueryInputSelection {
@@ -414,6 +567,7 @@ enum PublicLinkKind {
     Profile,
     Trust,
     Query,
+    Relations,
 }
 
 fn index_repository_scope(
@@ -645,6 +799,14 @@ fn public_links_with_base(
                 "{repository_root}/query?path={}",
                 query_path.unwrap_or("{dot_path}")
             ),
+            repository: Some(repository),
+            trust: Some(trust),
+            profile: Some(profile),
+            query_template: Some(query_template),
+            index_path,
+        },
+        PublicLinkKind::Relations => PublicRepositoryLinks {
+            self_link: format!("{repository_root}/relations"),
             repository: Some(repository),
             trust: Some(trust),
             profile: Some(profile),
@@ -1190,6 +1352,454 @@ pub fn public_repository_batch_query(
     freshness: PublicFreshness,
 ) -> Result<PublicBatchQueryResponse> {
     public_repository_batch_query_with_base(index_root, identities, paths, freshness, "/")
+}
+
+fn normalize_search_value(value: &str) -> String {
+    value.trim().to_ascii_lowercase()
+}
+
+fn contains_normalized(values: &[String], expected: &str) -> bool {
+    let expected = normalize_search_value(expected);
+    values
+        .iter()
+        .any(|value| normalize_search_value(value) == expected)
+}
+
+fn option_matches_filter(actual: Option<&str>, filters: &[String]) -> bool {
+    filters.is_empty()
+        || actual
+            .map(|value| {
+                filters
+                    .iter()
+                    .any(|filter| normalize_search_value(value) == normalize_search_value(filter))
+            })
+            .unwrap_or(false)
+}
+
+fn profile_matches_filters(
+    profile: &PublicResearchProfileResponse,
+    options: &PublicProfileSearchOptions,
+) -> bool {
+    if !options
+        .languages
+        .iter()
+        .all(|language| contains_normalized(&profile.languages, language))
+    {
+        return false;
+    }
+    if !options
+        .topics
+        .iter()
+        .all(|topic| contains_normalized(&profile.topics, topic))
+    {
+        return false;
+    }
+    if !option_matches_filter(Some(&profile.trust.selected_status), &options.statuses) {
+        return false;
+    }
+    if !option_matches_filter(profile.trust.confidence.as_deref(), &options.confidences) {
+        return false;
+    }
+    if options.require_build && !profile.completeness.has_build {
+        return false;
+    }
+    if options.require_test && !profile.completeness.has_test {
+        return false;
+    }
+    if options.require_docs && !profile.completeness.has_docs {
+        return false;
+    }
+    if options.require_security_contact && !profile.completeness.has_security_contact {
+        return false;
+    }
+    if options.require_license && !profile.completeness.has_license {
+        return false;
+    }
+    true
+}
+
+fn profile_query_matches(profile: &PublicResearchProfileResponse, query: &str) -> Vec<String> {
+    let query = normalize_search_value(query);
+    if query.is_empty() {
+        return vec!["all".into()];
+    }
+    let mut matched = Vec::new();
+    let text_fields = [
+        (
+            "identity",
+            format!(
+                "{}/{}/{}",
+                profile.identity.host, profile.identity.owner, profile.identity.repo
+            ),
+        ),
+        ("name", profile.name.clone()),
+        ("purpose", profile.purpose.clone()),
+        ("homepage", profile.homepage.clone().unwrap_or_default()),
+        ("license", profile.license.clone().unwrap_or_default()),
+    ];
+    for (field, value) in text_fields {
+        if normalize_search_value(&value).contains(&query) {
+            matched.push(field.to_string());
+        }
+    }
+    if profile
+        .languages
+        .iter()
+        .any(|language| normalize_search_value(language).contains(&query))
+    {
+        matched.push("languages".into());
+    }
+    if profile
+        .topics
+        .iter()
+        .any(|topic| normalize_search_value(topic).contains(&query))
+    {
+        matched.push("topics".into());
+    }
+    matched
+}
+
+fn search_item_from_profile(
+    profile: PublicResearchProfileResponse,
+    matched: Vec<String>,
+) -> PublicProfileSearchItem {
+    PublicProfileSearchItem {
+        identity: profile.identity,
+        name: profile.name,
+        purpose: profile.purpose,
+        languages: profile.languages,
+        topics: profile.topics,
+        completeness: profile.completeness,
+        trust: profile.trust,
+        matched,
+        links: profile.links,
+    }
+}
+
+pub fn public_profile_search_with_base(
+    index_root: &Path,
+    options: PublicProfileSearchOptions,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicProfileSearchResponse> {
+    normalize_public_base_path(base_path)?;
+    let identities = list_index_repository_identities(index_root)?;
+    let mut results = Vec::new();
+    for identity in &identities {
+        let profile = public_repository_profile_with_base(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            freshness.clone(),
+            base_path,
+        )?;
+        if !profile_matches_filters(&profile, &options) {
+            continue;
+        }
+        let matched = if let Some(query) = options.query.as_deref() {
+            profile_query_matches(&profile, query)
+        } else {
+            vec!["filters".into()]
+        };
+        if matched.is_empty() {
+            continue;
+        }
+        results.push(search_item_from_profile(profile, matched));
+    }
+    results.sort_by(|left, right| {
+        right
+            .matched
+            .len()
+            .cmp(&left.matched.len())
+            .then_with(|| left.identity.host.cmp(&right.identity.host))
+            .then_with(|| left.identity.owner.cmp(&right.identity.owner))
+            .then_with(|| left.identity.repo.cmp(&right.identity.repo))
+    });
+    let matched_count = results.len();
+    if let Some(limit) = options.limit {
+        results.truncate(limit);
+    }
+
+    Ok(PublicProfileSearchResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        query: options.query.clone(),
+        filters: PublicProfileSearchAppliedFilters {
+            languages: options.languages.clone(),
+            topics: options.topics.clone(),
+            statuses: options.statuses.clone(),
+            confidences: options.confidences.clone(),
+            require_build: options.require_build,
+            require_test: options.require_test,
+            require_docs: options.require_docs,
+            require_security_contact: options.require_security_contact,
+            require_license: options.require_license,
+            limit: options.limit,
+        },
+        total_repository_count: identities.len(),
+        matched_count,
+        returned_count: results.len(),
+        results,
+    })
+}
+
+pub fn public_profile_search(
+    index_root: &Path,
+    options: PublicProfileSearchOptions,
+    freshness: PublicFreshness,
+) -> Result<PublicProfileSearchResponse> {
+    public_profile_search_with_base(index_root, options, freshness, "/")
+}
+
+fn compare_item_from_profile(profile: PublicResearchProfileResponse) -> PublicProfileCompareItem {
+    PublicProfileCompareItem {
+        identity: profile.identity,
+        name: profile.name,
+        purpose: profile.purpose,
+        homepage: profile.homepage,
+        license: profile.license,
+        languages: profile.languages,
+        topics: profile.topics,
+        execution: profile.execution,
+        docs: profile.docs,
+        ownership: profile.ownership,
+        completeness: profile.completeness,
+        trust: profile.trust,
+        links: profile.links,
+    }
+}
+
+fn shared_profile_values<F>(items: &[PublicProfileCompareItem], select: F) -> Vec<String>
+where
+    F: Fn(&PublicProfileCompareItem) -> &[String],
+{
+    let Some((first, rest)) = items.split_first() else {
+        return Vec::new();
+    };
+    let mut shared = select(first)
+        .iter()
+        .map(|value| normalize_search_value(value))
+        .collect::<BTreeSet<_>>();
+    for item in rest {
+        let values = select(item)
+            .iter()
+            .map(|value| normalize_search_value(value))
+            .collect::<BTreeSet<_>>();
+        shared = shared
+            .intersection(&values)
+            .cloned()
+            .collect::<BTreeSet<_>>();
+    }
+    select(first)
+        .iter()
+        .filter(|value| shared.contains(&normalize_search_value(value)))
+        .cloned()
+        .collect()
+}
+
+fn compare_text_values<F>(
+    items: &[PublicProfileCompareItem],
+    select: F,
+) -> Vec<PublicProfileCompareTextValue>
+where
+    F: Fn(&PublicProfileCompareItem) -> Option<String>,
+{
+    items
+        .iter()
+        .map(|item| PublicProfileCompareTextValue {
+            identity: item.identity.clone(),
+            value: select(item),
+        })
+        .collect()
+}
+
+fn compare_bool_values<F>(
+    items: &[PublicProfileCompareItem],
+    select: F,
+) -> Vec<PublicProfileCompareBoolValue>
+where
+    F: Fn(&PublicProfileCompareItem) -> bool,
+{
+    items
+        .iter()
+        .map(|item| PublicProfileCompareBoolValue {
+            identity: item.identity.clone(),
+            value: select(item),
+        })
+        .collect()
+}
+
+fn compare_signals(items: &[PublicProfileCompareItem]) -> PublicProfileCompareSignals {
+    PublicProfileCompareSignals {
+        shared_languages: shared_profile_values(items, |item| &item.languages),
+        shared_topics: shared_profile_values(items, |item| &item.topics),
+        licenses: compare_text_values(items, |item| item.license.clone()),
+        selected_statuses: compare_text_values(items, |item| {
+            Some(item.trust.selected_status.clone())
+        }),
+        confidences: compare_text_values(items, |item| item.trust.confidence.clone()),
+        has_build: compare_bool_values(items, |item| item.completeness.has_build),
+        has_test: compare_bool_values(items, |item| item.completeness.has_test),
+        has_docs: compare_bool_values(items, |item| item.completeness.has_docs),
+        has_security_contact: compare_bool_values(items, |item| {
+            item.completeness.has_security_contact
+        }),
+        has_license: compare_bool_values(items, |item| item.completeness.has_license),
+    }
+}
+
+pub fn public_profile_compare_with_base(
+    index_root: &Path,
+    identities: &[PublicRepositoryIdentity],
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicProfileCompareResponse> {
+    normalize_public_base_path(base_path)?;
+    if identities.is_empty() {
+        bail!("compare requires at least one repository");
+    }
+    let mut results = Vec::new();
+    for identity in identities {
+        let profile = public_repository_profile_with_base(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            freshness.clone(),
+            base_path,
+        )?;
+        results.push(compare_item_from_profile(profile));
+    }
+    let signals = compare_signals(&results);
+    Ok(PublicProfileCompareResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        repository_count: results.len(),
+        results,
+        signals,
+    })
+}
+
+pub fn public_profile_compare(
+    index_root: &Path,
+    identities: &[PublicRepositoryIdentity],
+    freshness: PublicFreshness,
+) -> Result<PublicProfileCompareResponse> {
+    public_profile_compare_with_base(index_root, identities, freshness, "/")
+}
+
+fn parse_relation_reference(value: &str) -> Option<PublicRepositoryIdentity> {
+    let trimmed = value.trim();
+    let without_scheme = trimmed
+        .strip_prefix("https://")
+        .or_else(|| trimmed.strip_prefix("http://"))
+        .unwrap_or(trimmed);
+    let without_git = without_scheme.trim_end_matches(".git");
+    let parts = without_git
+        .split('/')
+        .filter(|part| !part.is_empty())
+        .collect::<Vec<_>>();
+    if parts.len() != 3 {
+        return None;
+    }
+    if validate_repository_identity_segments(parts[0], parts[1], parts[2]).is_err() {
+        return None;
+    }
+    Some(PublicRepositoryIdentity {
+        host: parts[0].to_string(),
+        owner: parts[1].to_string(),
+        repo: parts[2].to_string(),
+        source: None,
+    })
+}
+
+pub fn public_repository_relations_with_base(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> Result<PublicRelationsResponse> {
+    normalize_public_base_path(base_path)?;
+    let profile = public_repository_profile_with_base(
+        index_root,
+        host,
+        owner,
+        repo,
+        freshness.clone(),
+        base_path,
+    )?;
+    let scope_root = index_repository_scope(index_root, host, owner, repo)?;
+    let candidates = resolve_candidates(&scope_root)?;
+    let selected = &candidates[0];
+    let references = selected
+        .manifest
+        .relations
+        .as_ref()
+        .map(|relations| relations.references.clone())
+        .unwrap_or_default();
+
+    let mut items = Vec::new();
+    for target in references {
+        let identity = parse_relation_reference(&target);
+        let mut item = PublicRelationItem {
+            relationship: "reference".into(),
+            target: target.clone(),
+            identity: identity.clone(),
+            profile: None,
+            error: None,
+        };
+        if let Some(identity) = identity {
+            match public_repository_profile_or_error_with_base(
+                index_root,
+                &identity.host,
+                &identity.owner,
+                &identity.repo,
+                freshness.clone(),
+                base_path,
+            ) {
+                Ok(profile) => {
+                    item.identity = Some(profile.identity.clone());
+                    item.profile = Some(Box::new(search_item_from_profile(
+                        profile,
+                        vec!["relation".into()],
+                    )));
+                }
+                Err(error) => {
+                    item.error = Some(error.error);
+                }
+            }
+        }
+        items.push(item);
+    }
+
+    Ok(PublicRelationsResponse {
+        api_version: PUBLIC_API_VERSION,
+        freshness,
+        identity: profile.identity,
+        relation_count: items.len(),
+        references: items,
+        links: public_links_with_base(
+            host,
+            owner,
+            repo,
+            PublicLinkKind::Relations,
+            None,
+            base_path,
+        )?,
+    })
+}
+
+pub fn public_repository_relations(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: PublicFreshness,
+) -> Result<PublicRelationsResponse> {
+    public_repository_relations_with_base(index_root, host, owner, repo, freshness, "/")
 }
 
 pub fn public_query_input_snapshot(

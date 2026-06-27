@@ -17,7 +17,7 @@ The binary-level CLI contract tests in
 `crates/dotrepo-cli/tests/claim_command_contract.rs` exercise the accepted,
 corrected, and invalid-history paths described here.
 For one-command operator validation, run
-`python3 scripts/check_operator_claim_gate.py --output-root operator-gate`.
+`uv run python scripts/check_operator_claim_gate.py --output-root operator-gate`.
 
 ## Current command surface
 

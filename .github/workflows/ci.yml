@@ -17,6 +17,12 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Classify changed files
         id: scope
         shell: bash
@@ -46,7 +52,7 @@ jobs:
             [ -n "$path" ] || continue
             has_any=true
 
-            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/|docs/|rfcs/) ]]; then
+            if [[ "$path" =~ ^(Cargo\.toml|Cargo\.lock|pyproject\.toml|uv\.lock|\.python-version|crates/|examples/|scripts/|cloudflare/|editors/|\.github/workflows/|\.cargo/|docs/|rfcs/) ]]; then
               has_rust_toolchain=true
             fi
 
@@ -112,6 +118,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
@@ -129,6 +141,7 @@ jobs:
           cargo fmt --all -- --check
           cargo clippy --workspace --all-targets -- -D clippy::correctness -W clippy::perf
           cargo test --workspace
+          uv run pytest
           cargo run -p dotrepo-cli -- --root examples/native-minimal validate
           cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
           cargo run -p dotrepo-cli -- validate-index
@@ -142,7 +155,7 @@ jobs:
           cargo publish --dry-run -p dotrepo-mcp
       - name: Smoke test MCP stdio server
         run: |
-          python3 - <<'PY'
+          uv run python - <<'PY'
           import json
           import subprocess
 
@@ -275,7 +288,7 @@ jobs:
           PY
       - name: Smoke test LSP stdio server
         run: |
-          python3 - <<'PY'
+          uv run python - <<'PY'
           import json
           import subprocess
           from pathlib import Path
@@ -378,6 +391,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
@@ -391,7 +410,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
       - name: Run explicit maintainer/operator claim gate
-        run: python3 scripts/check_operator_claim_gate.py --output-root operator-gate
+        run: uv run python scripts/check_operator_claim_gate.py --output-root operator-gate
       - name: Upload operator gate inspection artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -416,6 +435,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
@@ -435,7 +460,7 @@ jobs:
           cache: npm
           cache-dependency-path: cloudflare/hosted-query/package-lock.json
       - name: Run lightweight public-surface gate
-        run: python3 scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
+        run: uv run python scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
       - name: Upload static public export artifact
         uses: actions/upload-artifact@v7
         with:
@@ -459,6 +484,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
@@ -480,7 +511,7 @@ jobs:
             cloudflare/hosted-query/package-lock.json
             editors/vscode/package-lock.json
       - name: Run explicit release-surface gate
-        run: python3 scripts/check_release_gate.py --output-root release-gate
+        run: uv run python scripts/check_release_gate.py --output-root release-gate
       - name: Upload static public export artifact
         uses: actions/upload-artifact@v7
         with:

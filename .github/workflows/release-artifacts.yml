@@ -22,6 +22,12 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
@@ -43,7 +49,7 @@ jobs:
           echo "value=$(rustc -vV | sed -n 's/^host: //p')" >> "$GITHUB_OUTPUT"
       - name: Package release bundle
         run: |
-          python3 scripts/package_release_binaries.py \
+          uv run python scripts/package_release_binaries.py \
             --bin-dir target/release \
             --output-dir dist \
             --target "${{ steps.target.outputs.value }}"
@@ -61,6 +67,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
