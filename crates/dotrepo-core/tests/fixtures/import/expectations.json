@@ -408,5 +408,21 @@
     "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
     "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
     "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "admonition-readme",
+    "repo_name": "Admonlib",
+    "repo_description": "Admonlib is a small library that skips GitHub admonitions when extracting project descriptions.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
   }
 ]

@@ -10,12 +10,12 @@ import re
 import subprocess
 import sys
 from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
 
 # Canonical way to invoke Python helpers under the uv-managed environment.
 # This makes the AGENTS.md "uv run" contract explicit and auditable.
 UV_PYTHON: list[str] = ["uv", "run", "python"]
-from datetime import datetime, timezone
-from pathlib import Path
 
 
 def parse_args() -> argparse.Namespace:
@@ -307,40 +307,50 @@ def select_refresh_batch_or_empty(
 ) -> bool:
     plan = load_json(refresh_batches)
     batches = plan.get("batches") or []
-    if not batches:
-        selected_metadata.write_text(
-            json.dumps(
-                {
-                    "source": plan.get("source", {}),
-                    "summary": plan.get("summary", {}),
-                    "batch": {
-                        "id": batch_id,
-                        "reason": "no_scheduled_refreshes",
-                        "repositoryCount": 0,
-                        "repositories": [],
-                    },
-                },
-                indent=2,
+    # A scheduled run may request a batch the (possibly limited) plan did not
+    # produce — e.g. asking for refresh-batch-03 when only two batches exist.
+    # That is a normal "nothing to do this run" condition, not a crash: degrade
+    # to an empty batch so the conveyor stays stable across repeated runs.
+    reason = "no_scheduled_refreshes"
+    if batches:
+        if any(
+            isinstance(batch, dict) and batch.get("id") == batch_id
+            for batch in batches
+        ):
+            run(
+                [
+                    *UV_PYTHON,
+                    "scripts/select_review_batch.py",
+                    "--input",
+                    str(refresh_batches),
+                    "--batch-id",
+                    batch_id,
+                    "--output-targets",
+                    str(selected_targets),
+                    "--output-metadata",
+                    str(selected_metadata),
+                ]
             )
-        )
-        write_target_identities(selected_targets, [])
-        return False
+            return True
+        reason = "batch_not_found"
 
-    run(
-        [
-            *UV_PYTHON,
-            "scripts/select_review_batch.py",
-            "--input",
-            str(refresh_batches),
-            "--batch-id",
-            batch_id,
-            "--output-targets",
-            str(selected_targets),
-            "--output-metadata",
-            str(selected_metadata),
-        ]
+    selected_metadata.write_text(
+        json.dumps(
+            {
+                "source": plan.get("source", {}),
+                "summary": plan.get("summary", {}),
+                "batch": {
+                    "id": batch_id,
+                    "reason": reason,
+                    "repositoryCount": 0,
+                    "repositories": [],
+                },
+            },
+            indent=2,
+        )
     )
-    return True
+    write_target_identities(selected_targets, [])
+    return False
 
 
 def fill_quality_reprocess_targets(
@@ -503,11 +513,78 @@ def fixture_slug(value: str) -> str:
     return "".join(slug).strip("-") or "unknown-failure"
 
 
+# Ordered so the most specific manifest signal wins. Substrings are matched
+# against lowercased failure text. Manifest filenames are the strongest
+# deterministic ecosystem signal available from an error fingerprint.
+ECOSYSTEM_SIGNALS: list[tuple[str, str]] = [
+    ("cargo.toml", "rust"),
+    ("cargo ", "rust"),
+    ("rustup", "rust"),
+    ("crate", "rust"),
+    ("package.json", "node"),
+    ("pnpm", "node"),
+    ("yarn", "node"),
+    ("npm ", "node"),
+    ("node_modules", "node"),
+    ("pyproject.toml", "python"),
+    ("setup.py", "python"),
+    ("requirements.txt", "python"),
+    ("pytest", "python"),
+    ("pip ", "python"),
+    ("python", "python"),
+    ("go.mod", "go"),
+    ("go test", "go"),
+    ("go build", "go"),
+    ("pom.xml", "jvm"),
+    ("build.gradle", "jvm"),
+    ("mvn ", "jvm"),
+    ("maven", "jvm"),
+    ("gemfile", "ruby"),
+    ("bundler", "ruby"),
+    ("rake", "ruby"),
+    ("composer.json", "php"),
+    ("composer ", "php"),
+    (".csproj", "dotnet"),
+    ("dotnet", "dotnet"),
+    ("mix.exs", "elixir"),
+    ("rebar.config", "erlang"),
+    ("cmake", "cpp"),
+    ("meson.build", "cpp"),
+]
+
+# Failure classes that can be reproduced by a checked-in source fixture run
+# through the deterministic import pipeline. Provider, infrastructure, and
+# writeback failures are environmental and are not fixture-able.
+FIXTURE_ELIGIBLE_FAILURE_CLASSES = frozenset({"parser", "evidence", "validation"})
+
+
+def classify_ecosystem(*texts: object) -> str:
+    """Infer a repository ecosystem from lowercased failure/source text.
+
+    Deterministic and conservative: returns ``unknown`` when no manifest or
+    language signal is present. The first matching signal wins, so more
+    specific manifest filenames should precede looser language hints in
+    ``ECOSYSTEM_SIGNALS``.
+    """
+    haystack = " ".join(str(part or "").lower() for part in texts)
+    if not haystack.strip():
+        return "unknown"
+    for signal, ecosystem in ECOSYSTEM_SIGNALS:
+        if signal in haystack:
+            return ecosystem
+    return "unknown"
+
+
+def fixture_eligible(failure_class: object) -> bool:
+    return str(failure_class or "unknown") in FIXTURE_ELIGIBLE_FAILURE_CLASSES
+
+
 def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
     crawls = telemetry.get("crawls") or []
     failure_classes: Counter[str] = Counter()
     failure_fingerprints: Counter[str] = Counter()
     failure_fingerprint_classes: dict[str, str] = {}
+    failure_fingerprint_ecosystems: dict[str, str] = {}
     promoted = 0
 
     for crawl in crawls:
@@ -518,6 +595,11 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
             fingerprint = failure_fingerprint(crawl.get("error"))
             failure_fingerprints[fingerprint] += 1
             failure_fingerprint_classes.setdefault(fingerprint, failure_class)
+            ecosystem = classify_ecosystem(
+                crawl.get("error"), crawl.get("repository")
+            )
+            crawl["ecosystem"] = ecosystem
+            failure_fingerprint_ecosystems.setdefault(fingerprint, ecosystem)
         if crawl.get("recordStatus") == "verified":
             promoted += 1
 
@@ -535,6 +617,7 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
             "failureClasses": dict(sorted(failure_classes.items())),
             "failureFingerprints": dict(sorted(failure_fingerprints.items())),
             "failureFingerprintClasses": dict(sorted(failure_fingerprint_classes.items())),
+            "failureFingerprintEcosystems": dict(sorted(failure_fingerprint_ecosystems.items())),
             "promoted": promoted,
             "zeroModelRuns": sum(
                 1 for item in crawls if int(item.get("adjudicationCalls") or 0) == 0
@@ -566,6 +649,9 @@ def aggregate_runs(runs: list[dict]) -> dict:
     failure_classes: Counter[str] = Counter()
     failure_fingerprints: Counter[str] = Counter()
     failure_fingerprint_classes: dict[str, str] = {}
+    failure_fingerprint_ecosystems: dict[str, str] = {}
+    failure_classes_by_ecosystem: Counter[str] = Counter()
+    ecosystem_counts: Counter[str] = Counter()
     tier_counts: Counter[str] = Counter()
     first_run = None
     last_run = None
@@ -597,8 +683,22 @@ def aggregate_runs(runs: list[dict]) -> dict:
             run_telemetry.get("failureFingerprintClasses") or {}
         ).items():
             failure_fingerprint_classes.setdefault(str(fingerprint), str(failure_class))
+        for fingerprint, ecosystem in (
+            run_telemetry.get("failureFingerprintEcosystems") or {}
+        ).items():
+            failure_fingerprint_ecosystems.setdefault(str(fingerprint), str(ecosystem))
         for tier, count in (run_telemetry.get("repositoriesByAdjudicationTier") or {}).items():
             tier_counts[str(tier)] += int(count or 0)
+
+    # Cross-tabulate failure class by ecosystem using the per-fingerprint maps so
+    # recurring parser/evidence/validation defects can be prioritized by ecosystem.
+    for fingerprint, count in failure_fingerprints.items():
+        failure_class = failure_fingerprint_classes.get(fingerprint, "unknown")
+        ecosystem = failure_fingerprint_ecosystems.get(
+            fingerprint, classify_ecosystem(fingerprint)
+        )
+        ecosystem_counts[ecosystem] += count
+        failure_classes_by_ecosystem[f"{failure_class}/{ecosystem}"] += count
 
     crawled = totals["crawled"]
     repos_with_adjudication = crawled - totals["zeroModelRuns"]
@@ -607,6 +707,23 @@ def aggregate_runs(runs: list[dict]) -> dict:
         for fingerprint, count in failure_fingerprints.most_common(20)
         if count > 1
     ]
+    regression_fixture_candidates = []
+    for item in recurring_failures:
+        fingerprint = item["fingerprint"]
+        failure_class = failure_fingerprint_classes.get(fingerprint, "unknown")
+        ecosystem = failure_fingerprint_ecosystems.get(
+            fingerprint, classify_ecosystem(fingerprint)
+        )
+        regression_fixture_candidates.append(
+            {
+                "failureClass": failure_class,
+                "ecosystem": ecosystem,
+                "fixtureEligible": fixture_eligible(failure_class),
+                "fingerprint": fingerprint,
+                "count": item["count"],
+                "suggestedFixture": fixture_slug(fingerprint),
+            }
+        )
     return {
         "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
         "generatedAt": now_rfc3339(),
@@ -623,18 +740,10 @@ def aggregate_runs(runs: list[dict]) -> dict:
         },
         "repositoriesByAdjudicationTier": dict(sorted(tier_counts.items())),
         "failureClasses": dict(sorted(failure_classes.items())),
+        "failureClassesByEcosystem": dict(sorted(failure_classes_by_ecosystem.items())),
+        "failureEcosystems": dict(sorted(ecosystem_counts.items())),
         "recurringFailures": recurring_failures,
-        "regressionFixtureCandidates": [
-            {
-                "failureClass": failure_fingerprint_classes.get(
-                    item["fingerprint"], "unknown"
-                ),
-                "fingerprint": item["fingerprint"],
-                "count": item["count"],
-                "suggestedFixture": fixture_slug(item["fingerprint"]),
-            }
-            for item in recurring_failures
-        ],
+        "regressionFixtureCandidates": regression_fixture_candidates,
     }
 
 
@@ -664,11 +773,21 @@ def render_regression_fixture_candidates_markdown(candidates: list[dict]) -> str
         return "\n".join(lines).rstrip() + "\n"
 
     for item in candidates:
+        eligible = item.get("fixtureEligible")
+        eligibility = (
+            "eligible (deterministic parser/evidence/validation)"
+            if eligible
+            else "not eligible (environmental)"
+            if eligible is False
+            else "unknown"
+        )
         lines.extend(
             [
                 f"## {item.get('suggestedFixture', 'unknown-failure')}",
                 "",
                 f"- failure class: `{item.get('failureClass', 'unknown')}`",
+                f"- ecosystem: `{item.get('ecosystem', 'unknown')}`",
+                f"- fixture: {eligibility}",
                 f"- observed runs: {item.get('count', 0)}",
                 f"- fingerprint: `{item.get('fingerprint', 'unknown')}`",
                 "",
@@ -699,23 +818,44 @@ def write_regression_fixture_candidate_artifacts(
 def render_regression_fixture_stub_readme(candidate: dict) -> str:
     fixture = candidate.get("suggestedFixture", "unknown-failure")
     failure_class = candidate.get("failureClass", "unknown")
+    ecosystem = candidate.get("ecosystem", "unknown")
+    eligible = candidate.get("fixtureEligible")
     fingerprint = candidate.get("fingerprint", "unknown")
     count = candidate.get("count", 0)
+    if eligible is True:
+        eligibility = (
+            "eligible — this is a deterministic parser/evidence/validation defect "
+            "that a checked-in source fixture can reproduce offline"
+        )
+    elif eligible is False:
+        eligibility = (
+            "not eligible — this is an environmental provider/infrastructure/writeback "
+            "defect that a source fixture cannot reproduce"
+        )
+    else:
+        eligibility = "unknown"
     lines = [
         f"# {fixture}",
         "",
         "This stub was generated from recurring autonomous index failure telemetry.",
         "",
         f"- failure class: `{failure_class}`",
+        f"- ecosystem: `{ecosystem}`",
+        f"- fixture: {eligibility}",
         f"- observed runs: {count}",
         f"- fingerprint: `{fingerprint}`",
         "",
         "## Materialization Checklist",
         "",
-        "- Add the smallest repository source fixture that reproduces this failure.",
-        "- Add or update the matching quality-gate expectation.",
-        "- Add the deterministic parser, evidence, provider, infrastructure, or validation fix.",
-        "- Run the relevant focused regression test before removing this stub.",
+        "Only fixture-eligible stubs should be materialized. Environmental failures are",
+        "tracked here for operator awareness, not converted into source fixtures.",
+        "",
+        "- Capture the smallest repository source fixture that reproduces this failure:",
+        "  `uv run python scripts/materialize_regression_fixture.py --repo <host/owner/repo> --slug <fixture>`",
+        "- Confirm or edit the generated `expectation.json` so it pins the fixed behavior.",
+        "- Add the deterministic parser, evidence, or validation fix in `dotrepo-core`.",
+        "- Run the runnable regression harness: `cargo test -p dotrepo-core --test regression_fixture_pack`",
+        "- Remove this stub once the checked-in runnable fixture guards the fix.",
         "",
     ]
     return "\n".join(lines)
@@ -727,10 +867,15 @@ def write_regression_fixture_stub_artifacts(candidates: list[dict], stub_root: P
         fixture = fixture_slug(str(candidate.get("suggestedFixture") or candidate.get("fingerprint") or "unknown-failure"))
         destination = stub_root / fixture
         destination.mkdir(parents=True, exist_ok=True)
+        failure_class = candidate.get("failureClass", "unknown")
         metadata = {
             "schema": "dotrepo/regression-fixture-stub/v0.1",
             "fixture": fixture,
-            "failureClass": candidate.get("failureClass", "unknown"),
+            "failureClass": failure_class,
+            "ecosystem": candidate.get("ecosystem", "unknown"),
+            "fixtureEligible": candidate.get(
+                "fixtureEligible", fixture_eligible(failure_class)
+            ),
             "fingerprint": candidate.get("fingerprint", "unknown"),
             "observedRuns": candidate.get("count", 0),
             "status": "needs_materialization",

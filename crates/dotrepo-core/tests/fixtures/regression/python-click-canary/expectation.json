@@ -1,0 +1,13 @@
+{
+  "fixture": "python-click-canary",
+  "ecosystem": "python",
+  "repo_name": "Click",
+  "repo_description": "Click is a Python package for creating beautiful command line interfaces in a composable way with as little code as necessary.",
+  "repo_build": "python -m build",
+  "repo_test": "python -m pytest",
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ],
+  "origin": "github.com/pallets/click"
+}

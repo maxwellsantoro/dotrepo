@@ -219,6 +219,34 @@ fn parse_html_heading(line: &str) -> Option<String> {
     normalize_readme_text(trimmed)
 }
 
+/// A GitHub alert / admonition blockquote, e.g. `> [!NOTE]`, `> [!IMPORTANT]`.
+/// These are presentation chrome, not project descriptions.
+fn is_github_admonition_line(trimmed: &str) -> bool {
+    let Some(rest) = trimmed.strip_prefix('>') else {
+        return false;
+    };
+    let inner = rest.trim();
+    let Some(tag_body) = inner.strip_prefix("[!") else {
+        return false;
+    };
+    match tag_body.find(']') {
+        Some(end) => {
+            let tag = &tag_body[..end];
+            !tag.is_empty() && tag.chars().all(|c| c.is_ascii_alphanumeric())
+        }
+        None => false,
+    }
+}
+
+/// Advance past a contiguous blockquote block (lines whose text begins with `>`).
+fn skip_blockquote_block(lines: &[&str], start: usize) -> usize {
+    let mut idx = start;
+    while idx < lines.len() && lines[idx].trim_start().starts_with('>') {
+        idx += 1;
+    }
+    idx
+}
+
 fn parse_readme_description(lines: &[&str], start: usize) -> Option<(String, usize)> {
     let mut parts = Vec::new();
     let mut idx = start;
@@ -231,6 +259,17 @@ fn parse_readme_description(lines: &[&str], start: usize) -> Option<(String, usi
         if trimmed.is_empty() {
             if parts.is_empty() {
                 idx += 1;
+                continue;
+            }
+            break;
+        }
+        // GitHub admonition blockquotes (> [!NOTE], > [!IMPORTANT], ...) are
+        // presentation chrome. Skip a leading admonition block entirely so it is
+        // never mistaken for the description; an admonition after description
+        // text ends the description like any other non-description content.
+        if is_github_admonition_line(trimmed) {
+            if parts.is_empty() {
+                idx = skip_blockquote_block(lines, idx);
                 continue;
             }
             break;

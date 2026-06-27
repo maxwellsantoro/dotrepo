@@ -390,6 +390,32 @@ under `index/telemetry/regression-fixture-stubs/`; each stub contains
 machine-readable metadata and a materialization checklist so the failure can be
 turned into a real source fixture and deterministic fix.
 
+Each recurring failure is also classified by **ecosystem** (rust, node, python,
+go, jvm, ruby, php, dotnet, elixir, erlang, cpp, or `unknown`) inferred from the
+manifest and language signals in the failure text, and by **fixture
+eligibility**. Only `parser`, `evidence`, and `validation` defects are
+fixture-eligible — they can be reproduced by a checked-in source fixture run
+through the deterministic import pipeline. `provider`, `infrastructure`, and
+`writeback` defects are environmental and are tracked for operator awareness
+without becoming source fixtures. The aggregate summary cross-tabulates failures
+as `failureClassesByEcosystem` and `failureEcosystems` so recurring
+deterministic defects can be prioritized by ecosystem.
+
+The stub-to-fixture loop is now completable end to end:
+
+1. Telemetry emits a recurring-failure stub with its ecosystem and eligibility.
+2. `scripts/materialize_regression_fixture.py --repo <host/owner/repo> --slug
+   <fixture>` captures the conventional source files the crawler materializes
+   (README, CODEOWNERS, SECURITY, manifests, workflows) into a checked-in
+   fixture directory and derives an `expectation.json` by running the overlay
+   import pipeline in a throwaway copy and parsing the result with `tomllib`, so
+   the fixture pins the conveyor's actual parser behavior.
+3. `crates/dotrepo-core/tests/regression_fixture_pack.rs` discovers each
+   checked-in fixture and replays the offline overlay import path against it,
+   asserting the pinned fields. The harness no-ops when empty and asserts only
+   the fields each `expectation.json` declares, so the checked-in canary set can
+   grow one fixture at a time across ecosystems.
+
 `scripts/check_autonomous_telemetry_gate.py` evaluates the retained summary
 against the Milestone 1 proof thresholds: repeated runs, processed repository
 volume, direct writeback activity, failure rate, model adjudication rate,

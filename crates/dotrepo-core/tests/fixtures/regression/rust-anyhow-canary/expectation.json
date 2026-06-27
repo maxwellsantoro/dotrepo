@@ -1,0 +1,13 @@
+{
+  "fixture": "rust-anyhow-canary",
+  "ecosystem": "rust",
+  "repo_name": "Anyhow \u00af\\\\\\_(\u00b0\u30da)\\_/\u00af",
+  "repo_description": "This library provides [`anyhow::Error`][Error], a trait object based error type for easy idiomatic error handling in Rust applications.",
+  "repo_build": "cargo build",
+  "repo_test": "cargo test",
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ],
+  "origin": "github.com/dtolnay/anyhow"
+}

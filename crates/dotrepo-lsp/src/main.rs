@@ -1431,7 +1431,7 @@ status = "draft"
         let root = temp_dir("lsp-open");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .unwrap_or_else(|e| panic!("file path uri: {e}"))
+            .expect("file path uri")
             .to_string();
         let message = json!({
             "jsonrpc": JSONRPC_VERSION,
@@ -1477,7 +1477,7 @@ description = "Fast local-first sync engine"
         let root = temp_dir("lsp-completion");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .unwrap_or_else(|e| panic!("file path uri: {e}"))
+            .expect("file path uri")
             .to_string();
         let mut state = ServerState::default();
         open_document(
@@ -1538,7 +1538,7 @@ mode =
         let root = temp_dir("lsp-hover");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .unwrap_or_else(|e| panic!("file path uri: {e}"))
+            .expect("file path uri")
             .to_string();
         let mut state = ServerState::default();
         open_document(
@@ -1576,7 +1576,7 @@ status = "draft"
         let root = temp_dir("lsp-inline-hover");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .unwrap_or_else(|e| panic!("file path uri: {e}"))
+            .expect("file path uri")
             .to_string();
         let mut state = ServerState::default();
         open_document(
@@ -1612,7 +1612,7 @@ owners = { security_contact = "security@example.com" }
         let root = temp_dir("lsp-multiline-hover");
         let path = root.join(".repo");
         let uri = Url::from_file_path(&path)
-            .unwrap_or_else(|e| panic!("file path uri: {e}"))
+            .expect("file path uri")
             .to_string();
         let mut state = ServerState::default();
         open_document(

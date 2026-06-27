@@ -271,17 +271,20 @@ Current operational gaps:
   resolution, promotion, and regression rates
 - autonomous refresh now reprocesses lower-confidence checked-in records and
   newly discovered repositories through the same gate-passed writeback conveyor
-- recurring failures are grouped into operational defect classes and emitted as
-  regression fixture backlog artifacts with checked-in materialization stubs,
-  but ecosystem classification and runnable fixture completion are still
-  pending
+- recurring failures are grouped into operational defect classes, classified by
+  ecosystem, and tagged with fixture eligibility; eligible stubs can now be
+  captured into checked-in, offline-runnable regression fixtures that replay the
+  overlay import path in `cargo test` (see
+  `docs/factual-crawl-automation.md`). Growing the checked-in canary set across
+  ecosystems remains open work.
 
 Current execution order:
 
 1. Exercise retained telemetry across repeated scheduled runs and use it to
    identify cost, quality, and regression trends.
 2. Convert recurring failure stubs into deterministic fixes and runnable
-   checked-in regression fixtures.
+   checked-in regression fixtures (capture loop and harness now in place; grow
+   the canary set per ecosystem).
 3. Expand progressively toward the profile and coverage gate in Milestone 2.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly

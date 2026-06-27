@@ -27,8 +27,9 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
             "zeroModelRuns": 1,
             "repositoriesByAdjudicationTier": {"local_primary": 1},
             "failureClasses": {"parser": 1},
-            "failureFingerprints": {"failed to parse TOML": 1},
-            "failureFingerprintClasses": {"failed to parse TOML": "parser"},
+            "failureFingerprints": {"Cargo.toml parse error": 1},
+            "failureFingerprintClasses": {"Cargo.toml parse error": "parser"},
+            "failureFingerprintEcosystems": {"Cargo.toml parse error": "rust"},
         },
         {
             "generatedAt": "2026-03-18T12:00:00Z",
@@ -43,8 +44,9 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
             "zeroModelRuns": 2,
             "repositoriesByAdjudicationTier": {"local_primary": 1, "api_escalation": 1},
             "failureClasses": {},
-            "failureFingerprints": {"failed to parse TOML": 1},
-            "failureFingerprintClasses": {"failed to parse TOML": "parser"},
+            "failureFingerprints": {"Cargo.toml parse error": 1},
+            "failureFingerprintClasses": {"Cargo.toml parse error": "parser"},
+            "failureFingerprintEcosystems": {"Cargo.toml parse error": "rust"},
         },
     ]
 
@@ -64,15 +66,19 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "local_primary": 2,
     }
     assert summary["failureClasses"] == {"parser": 1}
+    assert summary["failureClassesByEcosystem"] == {"parser/rust": 2}
+    assert summary["failureEcosystems"] == {"rust": 2}
     assert summary["recurringFailures"] == [
-        {"fingerprint": "failed to parse TOML", "count": 2}
+        {"fingerprint": "Cargo.toml parse error", "count": 2}
     ]
     assert summary["regressionFixtureCandidates"] == [
         {
             "failureClass": "parser",
-            "fingerprint": "failed to parse TOML",
+            "ecosystem": "rust",
+            "fixtureEligible": True,
+            "fingerprint": "Cargo.toml parse error",
             "count": 2,
-            "suggestedFixture": "failed-to-parse-toml",
+            "suggestedFixture": "cargo-toml-parse-error",
         }
     ]
 
@@ -187,9 +193,11 @@ def test_write_regression_fixture_candidate_artifacts(tmp_path: Path) -> None:
         "regressionFixtureCandidates": [
             {
                 "failureClass": "parser",
-                "fingerprint": "failed to parse TOML",
+                "ecosystem": "rust",
+                "fixtureEligible": True,
+                "fingerprint": "Cargo.toml parse error",
                 "count": 2,
-                "suggestedFixture": "failed-to-parse-toml",
+                "suggestedFixture": "cargo-toml-parse-error",
             }
         ],
     }
@@ -202,19 +210,26 @@ def test_write_regression_fixture_candidate_artifacts(tmp_path: Path) -> None:
 
     payload = autonomous_batch.json.loads(json_path.read_text())
     assert payload["candidateCount"] == 1
-    assert payload["candidates"][0]["suggestedFixture"] == "failed-to-parse-toml"
+    candidate = payload["candidates"][0]
+    assert candidate["suggestedFixture"] == "cargo-toml-parse-error"
+    assert candidate["ecosystem"] == "rust"
+    assert candidate["fixtureEligible"] is True
     rendered = md_path.read_text()
     assert "# Regression Fixture Candidates" in rendered
-    assert "## failed-to-parse-toml" in rendered
+    assert "## cargo-toml-parse-error" in rendered
+    assert "- ecosystem: `rust`" in rendered
+    assert "eligible (deterministic parser/evidence/validation)" in rendered
 
 
 def test_write_regression_fixture_stub_artifacts(tmp_path: Path) -> None:
     candidates = [
         {
             "failureClass": "parser",
-            "fingerprint": "failed to parse TOML",
+            "ecosystem": "rust",
+            "fixtureEligible": True,
+            "fingerprint": "Cargo.toml parse error",
             "count": 2,
-            "suggestedFixture": "failed-to-parse-toml",
+            "suggestedFixture": "cargo-toml-parse-error",
         }
     ]
     stub_root = tmp_path / "stubs"
@@ -222,13 +237,17 @@ def test_write_regression_fixture_stub_artifacts(tmp_path: Path) -> None:
     autonomous_batch.write_regression_fixture_stub_artifacts(candidates, stub_root)
 
     metadata = autonomous_batch.json.loads(
-        (stub_root / "failed-to-parse-toml" / "metadata.json").read_text()
+        (stub_root / "cargo-toml-parse-error" / "metadata.json").read_text()
     )
     assert metadata["schema"] == "dotrepo/regression-fixture-stub/v0.1"
     assert metadata["status"] == "needs_materialization"
-    readme = (stub_root / "failed-to-parse-toml" / "README.md").read_text()
+    assert metadata["ecosystem"] == "rust"
+    assert metadata["fixtureEligible"] is True
+    readme = (stub_root / "cargo-toml-parse-error" / "README.md").read_text()
     assert "Materialization Checklist" in readme
-    assert "failed to parse TOML" in readme
+    assert "Cargo.toml parse error" in readme
+    assert "materialize_regression_fixture.py" in readme
+    assert "regression_fixture_pack" in readme
 
 
 def test_crawl_env_caps_per_repo_calls_to_remaining_batch_budget() -> None:
@@ -437,3 +456,64 @@ def test_classify_failure_groups_known_operational_failures() -> None:
     assert autonomous_batch.classify_failure("OpenRouter provider rejected model") == "provider"
     assert autonomous_batch.classify_failure("HTTP timeout fetching GitHub") == "infrastructure"
     assert autonomous_batch.classify_failure("autonomous writeback gate failed") == "validation"
+
+
+def _write_refresh_batches(path: Path, batch_ids: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        autonomous_batch.json.dumps(
+            {
+                "source": {},
+                "summary": {},
+                "batches": [
+                    {
+                        "id": batch_id,
+                        "repositories": [
+                            {"identity": f"github.com/owner/{batch_id}-repo"}
+                        ],
+                    }
+                    for batch_id in batch_ids
+                ],
+            },
+            indent=2,
+        )
+    )
+
+
+def test_select_refresh_batch_or_empty_degrades_when_batch_not_found(tmp_path: Path) -> None:
+    refresh_batches = tmp_path / "refresh-batches.json"
+    selected_targets = tmp_path / "selected-targets.txt"
+    selected_metadata = tmp_path / "selected-batch.json"
+    _write_refresh_batches(refresh_batches, ["refresh-batch-01", "refresh-batch-02"])
+
+    selected = autonomous_batch.select_refresh_batch_or_empty(
+        refresh_batches,
+        "refresh-batch-99",
+        selected_targets,
+        selected_metadata,
+    )
+
+    assert selected is False
+    assert selected_targets.read_text() == ""
+    metadata = autonomous_batch.json.loads(selected_metadata.read_text())
+    assert metadata["batch"]["reason"] == "batch_not_found"
+    assert metadata["batch"]["repositoryCount"] == 0
+
+
+def test_select_refresh_batch_or_empty_degrades_when_no_batches(tmp_path: Path) -> None:
+    refresh_batches = tmp_path / "refresh-batches.json"
+    selected_targets = tmp_path / "selected-targets.txt"
+    selected_metadata = tmp_path / "selected-batch.json"
+    refresh_batches.parent.mkdir(parents=True, exist_ok=True)
+    refresh_batches.write_text(autonomous_batch.json.dumps({"batches": []}))
+
+    selected = autonomous_batch.select_refresh_batch_or_empty(
+        refresh_batches,
+        "refresh-batch-01",
+        selected_targets,
+        selected_metadata,
+    )
+
+    assert selected is False
+    metadata = autonomous_batch.json.loads(selected_metadata.read_text())
+    assert metadata["batch"]["reason"] == "no_scheduled_refreshes"

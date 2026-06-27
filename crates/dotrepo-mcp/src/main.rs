@@ -913,7 +913,7 @@ mod tests {
         assert_eq!(init_response["result"]["protocolVersion"], "2025-11-25");
 
         let tools_response = handle_request(&mut state, request(2, "tools/list", json!({})))
-            .unwrap_or_else(|e| panic!("tools/list responds: {e}"));
+            .expect("tools/list responds");
         let tools = tools_response["result"]["tools"]
             .as_array()
             .expect("tool list");
@@ -1115,7 +1115,7 @@ description = "Missing source and trust"
         );
 
         let response = handle_request(&mut state, request(2, "tools/list", json!({})))
-            .unwrap_or_else(|e| panic!("tools/list responds: {e}"));
+            .expect("tools/list responds");
         assert_eq!(
             response["error"]["message"],
             Value::String(

@@ -1,0 +1,112 @@
+{
+  "name": "nanoid",
+  "version": "5.1.16",
+  "description": "A tiny (118 bytes), secure URL-friendly unique string ID generator",
+  "keywords": [
+    "id",
+    "random",
+    "url",
+    "uuid"
+  ],
+  "license": "MIT",
+  "author": "Andrey Sitnik <andrey@sitnik.es>",
+  "repository": "ai/nanoid",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/ai"
+    }
+  ],
+  "bin": "./bin/nanoid.js",
+  "type": "module",
+  "sideEffects": false,
+  "browser": {
+    "./index.js": "./index.browser.js"
+  },
+  "types": "./index.d.ts",
+  "react-native": {
+    "./index.js": "./index.browser.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "browser": "./index.browser.js",
+      "react-native": "./index.browser.js",
+      "default": "./index.js"
+    },
+    "./non-secure": {
+      "types": "./non-secure/index.d.ts",
+      "default": "./non-secure/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "clean": "rm -rf coverage",
+    "start": "vite --host 0.0.0.0 test/demo/",
+    "test:coverage": "bnt --coverage 100 --coverage-exclude 'test/*'",
+    "test:lint": "oxlint",
+    "test:size": "pnpm clean && size-limit",
+    "test:versions": "node ./test/check-versions.js",
+    "test:prebuild": "node ./test/check-prebuild.js",
+    "test": "pnpm run /^test:/"
+  },
+  "devDependencies": {
+    "@logux/oxc-configs": "^0.4.0",
+    "@lukeed/uuid": "^2.0.1",
+    "@napi-rs/uuid": "^0.2.2",
+    "@size-limit/file": "^12.1.0",
+    "@size-limit/webpack": "^12.1.0",
+    "actions-up": "^1.14.3",
+    "better-node-test": "^0.8.4",
+    "eslint-plugin-prefer-let": "^4.2.2",
+    "nope-id": "^1.3.0",
+    "oxlint": "^1.70.0",
+    "oxlint-tsgolint": "^0.23.0",
+    "rndm": "^1.2.0",
+    "secure-random-string": "^1.1.4",
+    "simple-git-hooks": "^2.13.1",
+    "size-limit": "^12.1.0",
+    "terser": "^5.48.0",
+    "tinybench": "^6.0.2",
+    "typescript": "^6.0.3",
+    "uid": "^2.0.2",
+    "uid-safe": "^2.1.5",
+    "uuid": "^14.0.1",
+    "vite": "^8.0.16"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "./test/check-versions.js"
+  },
+  "size-limit": [
+    {
+      "name": "nanoid",
+      "import": "{ nanoid }",
+      "limit": "118 B"
+    },
+    {
+      "name": "customAlphabet",
+      "import": "{ customAlphabet }",
+      "limit": "207 B"
+    },
+    {
+      "name": "urlAlphabet",
+      "import": "{ urlAlphabet }",
+      "limit": "47 B"
+    },
+    {
+      "name": "non-secure nanoid",
+      "import": "{ nanoid }",
+      "path": "non-secure/index.js",
+      "limit": "93 B"
+    },
+    {
+      "name": "non-secure customAlphabet",
+      "import": "{ customAlphabet }",
+      "path": "non-secure/index.js",
+      "limit": "55 B"
+    }
+  ],
+  "engines": {
+    "node": "^18 || >=20"
+  }
+}
