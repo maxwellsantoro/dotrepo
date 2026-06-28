@@ -4,7 +4,7 @@ set -euo pipefail
 
 if command -v node >/dev/null 2>&1; then
   current_node_version="$(node -p 'process.versions.node' 2>/dev/null || true)"
-  if [[ "$current_node_version" == 20.* ]]; then
+  if [[ "$current_node_version" == 22.* ]]; then
     echo "Using Node.js ${current_node_version} already on PATH"
     node -v
     npm -v
@@ -14,11 +14,11 @@ fi
 
 toolcache_root="${RUNNER_TOOL_CACHE:-/opt/hostedtoolcache}"
 shopt -s nullglob
-candidates=("$toolcache_root"/node/20.*/x64/bin)
+candidates=("$toolcache_root"/node/22.*/x64/bin)
 shopt -u nullglob
 
 if [ "${#candidates[@]}" -eq 0 ]; then
-  echo "Node.js 20.x not found on PATH or under ${toolcache_root}/node; install via actions/setup-node@v4 in CI" >&2
+  echo "Node.js 22.x not found on PATH or under ${toolcache_root}/node; install via actions/setup-node@v4 in CI" >&2
   exit 1
 fi
 
@@ -31,8 +31,8 @@ if [ -n "${GITHUB_PATH:-}" ]; then
 fi
 
 selected_node_version="$(node -p 'process.versions.node')"
-if [[ "$selected_node_version" != 20.* ]]; then
-  echo "Expected Node.js 20.x after selecting runner toolcache, found ${selected_node_version}" >&2
+if [[ "$selected_node_version" != 22.* ]]; then
+  echo "Expected Node.js 22.x after selecting runner toolcache, found ${selected_node_version}" >&2
   exit 1
 fi
 
