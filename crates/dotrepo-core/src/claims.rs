@@ -1017,7 +1017,21 @@ pub fn resolve_claim_directory(root: &Path, claim_path: &str) -> Result<PathBuf>
     if Path::new(claim_path).is_absolute() {
         bail!("claim path must be relative to root");
     }
-    let resolved = root.join(claim_path);
+
+    let path = Path::new(claim_path);
+    let mut normalized = PathBuf::new();
+    for component in path.components() {
+        match component {
+            Component::Normal(part) => normalized.push(part),
+            Component::CurDir => {}
+            Component::ParentDir => bail!("claim path must stay within the repository root"),
+            Component::RootDir | Component::Prefix(_) => {
+                bail!("claim path must be relative to the repository root")
+            }
+        }
+    }
+
+    let resolved = root.join(normalized);
     ensure_path_contained_in_root(root, &resolved)
 }
 

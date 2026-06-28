@@ -399,7 +399,8 @@ fn handle_notification(state: &mut ServerState, method: &str, params: Value) -> 
             let params: DidOpenTextDocumentParams = serde_json::from_value(params)?;
             let path = manifest_path_from_uri(&params.text_document.uri)?;
             if !is_supported_manifest_path(&path)
-                || ensure_manifest_in_workspace(&path, &state.workspace_roots).is_err()
+                || ensure_manifest_in_workspace(&path, &state.workspace_roots, state.initialized)
+                    .is_err()
             {
                 return Ok(Vec::new());
             }
@@ -443,7 +444,12 @@ fn handle_notification(state: &mut ServerState, method: &str, params: Value) -> 
                 } else {
                     let path = manifest_path_from_uri(&params.text_document.uri)?;
                     if !is_supported_manifest_path(&path)
-                        || ensure_manifest_in_workspace(&path, &state.workspace_roots).is_err()
+                        || ensure_manifest_in_workspace(
+                            &path,
+                            &state.workspace_roots,
+                            state.initialized,
+                        )
+                        .is_err()
                     {
                         return Ok(Vec::new());
                     }
@@ -1257,12 +1263,25 @@ fn workspace_roots_from_initialize(params: &Value) -> Result<Vec<PathBuf>> {
     Ok(roots)
 }
 
-fn ensure_manifest_in_workspace(path: &Path, workspace_roots: &[PathBuf]) -> Result<()> {
+fn ensure_manifest_in_workspace(
+    path: &Path,
+    workspace_roots: &[PathBuf],
+    initialized: bool,
+) -> Result<()> {
+    let canonical_path = canonical_manifest_path(path)?;
     if workspace_roots.is_empty() {
-        return Ok(());
+        if !initialized {
+            return Ok(());
+        }
+        let cwd = std::env::current_dir()
+            .map_err(|err| anyhow!("failed to resolve process working directory: {}", err))?;
+        let canonical_cwd = fs::canonicalize(&cwd).unwrap_or(cwd);
+        if canonical_path.starts_with(&canonical_cwd) {
+            return Ok(());
+        }
+        bail!("manifest path is outside the process working directory");
     }
 
-    let canonical_path = canonical_manifest_path(path)?;
     for root in workspace_roots {
         let canonical_root = fs::canonicalize(root).unwrap_or_else(|_| root.clone());
         if canonical_path.starts_with(&canonical_root) {

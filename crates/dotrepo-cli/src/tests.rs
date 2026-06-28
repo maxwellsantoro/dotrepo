@@ -1064,7 +1064,7 @@ root = "https://docs.example.com/project"
     assert_eq!(manifest.record.generated_at, None);
     assert_eq!(manifest.repo.name, "project");
     assert!(manifest.docs.is_none());
-    let trust = manifest.record.trust.expect("adoption trust note");
+    let trust = manifest.record.trust.clone().expect("adoption trust note");
     assert_eq!(trust.confidence, Some("low".into()));
     assert_eq!(trust.provenance, vec!["imported".to_string()]);
     let notes = trust.notes.expect("trust notes");

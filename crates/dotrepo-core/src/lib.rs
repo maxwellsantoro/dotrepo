@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
 mod adoption;
 mod claims;
@@ -356,9 +357,8 @@ fn load_manifest_file(path: &Path) -> Result<LoadedManifest> {
     })
 }
 
-pub fn load_manifest_from_root(root: &Path) -> Result<Manifest> {
-    // LoadedManifest now holds Arc<Manifest> internally for sharing; return an owned copy here.
-    Ok((*load_manifest_document(root)?.manifest).clone())
+pub fn load_manifest_from_root(root: &Path) -> Result<Arc<Manifest>> {
+    Ok(Arc::clone(&load_manifest_document(root)?.manifest))
 }
 
 pub fn record_summary(manifest: &Manifest) -> RecordSummary {
@@ -381,7 +381,7 @@ pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
     let value = query_manifest_value(&selected.manifest, path)?;
     let reason = resolve_selection_reason(&candidates, selected);
     Ok(QueryReport {
-        root: display_root(root),
+        root: display_root(root)?,
         manifest_path: selected.manifest_path.clone(),
         path: path.to_string(),
         value,
@@ -424,7 +424,7 @@ pub fn trust_repository(root: &Path) -> Result<TrustReport> {
     claim_load_warnings.sort();
     claim_load_warnings.dedup();
     Ok(TrustReport {
-        root: display_root(root),
+        root: display_root(root)?,
         manifest_path: selected.manifest_path.clone(),
         selection: SelectionReport {
             reason,
@@ -515,7 +515,7 @@ pub fn generate_check_repository(root: &Path) -> Result<GenerateCheckReport> {
     }
 
     Ok(GenerateCheckReport {
-        root: display_root(root),
+        root: display_root(root)?,
         checked: rendered_outputs.len(),
         stale,
         outputs: rendered_outputs,
@@ -703,8 +703,10 @@ fn generate_check_managed_surface(
     let stale = match status.state {
         ManagedFileState::Missing => true,
         ManagedFileState::FullyGenerated | ManagedFileState::PartiallyManaged => {
-            // For Fully/Partially the current content is present (guaranteed by inspect + merge paths above)
-            current.as_deref().unwrap_or_default() != expected
+            match current.as_deref() {
+                None => true,
+                Some(current) => current != expected,
+            }
         }
         ManagedFileState::Unmanaged => false,
         ManagedFileState::MalformedManaged | ManagedFileState::Unsupported => true,

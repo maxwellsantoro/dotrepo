@@ -471,6 +471,10 @@ jobs:
           cache-dependency-path: cloudflare/hosted-query/package-lock.json
       - name: Run import quality gate
         run: cargo test -p dotrepo-core --test import_quality_gate
+      - name: Run Rust format and lint checks
+        run: |
+          cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets -- -D warnings
       - name: Run core Rust smoke tests
         run: |
           cargo test -p dotrepo-core
@@ -520,6 +524,7 @@ jobs:
       - name: Run minimal validation gate
         run: |
           cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets -- -D warnings
           cargo test --workspace
           uv run pytest
           cargo run -p dotrepo-cli -- validate-index

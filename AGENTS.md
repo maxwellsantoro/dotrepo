@@ -115,8 +115,13 @@ CLI, MCP, and LSP all consume the same core report structs. The main ones:
 - `AdoptionStatusReport` — native maintainer readiness checks from `adoption_status_repository()`
 
 MCP also exposes `dotrepo.lookup` for remote trust-aware queries without a local clone.
-Set `DOTREPO_MCP_LOOKUP_BASE_URL` to an allowlisted hosted snapshot origin; the server
-rejects other origins to limit SSRF risk.
+The tool accepts `repositoryUrl` or `host`/`owner`/`repo`, an optional `path`, and an
+optional `baseUrl` (defaults to `https://dotrepo.org`). Only allowlisted hosted snapshot
+origins are permitted unless `DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL=1` is set. Additional
+operator flags: `DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL` (permit loopback/private hosts),
+`DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT` (permit absolute local roots on other tools). Lookup
+requests reject private-network targets, disable redirects, and validate resolved IPs to
+limit SSRF and DNS rebinding risk.
 - `GenerateCheckReport` — per-file drift detection from `generate_check_repository()`
 - `ImportPlan` — manifest text + evidence text + imported sources + inferred fields from `import_repository()`
 - `ClaimInspectionReport` — claim state + event history + validation from `inspect_claim_directory()`

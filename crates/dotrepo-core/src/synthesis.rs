@@ -60,7 +60,7 @@ pub fn load_synthesis_from_root(root: &Path) -> Result<SynthesisDocument> {
 pub fn get_synthesis(root: &Path) -> Result<SynthesisReadReport> {
     let loaded = load_synthesis_document(root)?;
     Ok(SynthesisReadReport {
-        root: display_root(root),
+        root: display_root(root)?,
         synthesis_path: display_path(root, &loaded.path)?,
         synthesis: loaded.synthesis,
     })

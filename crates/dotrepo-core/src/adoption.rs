@@ -58,7 +58,7 @@ pub fn adoption_status_repository(root: &Path) -> AdoptionStatusReport {
                 .map(|manifest| record_status_name(&manifest.record.status).to_string())
         })
         .flatten();
-    let repository_identity = native_repository_identity_from_manifest(manifest.as_ref()).ok();
+    let repository_identity = native_repository_identity_from_manifest(manifest.as_deref()).ok();
     let can_claim_from_native = has_native_record && repository_identity.is_some();
     let ci_workflow_present = root.join(".github/workflows/dotrepo-check.yml").exists();
     let generate_check = generate_check_repository(root);
@@ -167,8 +167,10 @@ pub fn adoption_status_repository(root: &Path) -> AdoptionStatusReport {
         );
     }
 
+    let root_display = display_root(root).unwrap_or_else(|_| root.display().to_string());
+
     AdoptionStatusReport {
-        root: display_root(root),
+        root: root_display,
         has_native_record,
         validation_passed: validation.valid,
         can_claim_from_native,

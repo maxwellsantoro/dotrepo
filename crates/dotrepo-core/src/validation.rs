@@ -153,9 +153,18 @@ pub fn validate_repository(root: &Path) -> ValidateReport {
     sort_candidates(&mut candidates, root);
 
     let selected = candidates.first();
+    let root_display = display_root(root).unwrap_or_else(|err| {
+        diagnostics.push(RepositoryDiagnostic {
+            severity: "error",
+            source: "display_root".into(),
+            message: err.to_string(),
+            manifest_path: None,
+        });
+        root.display().to_string()
+    });
     ValidateReport {
         valid: diagnostics.is_empty(),
-        root: display_root(root),
+        root: root_display,
         manifest_path: selected.map(|candidate| candidate.manifest_path.clone()),
         diagnostics,
         record: selected.map(|candidate| record_summary(&candidate.manifest)),

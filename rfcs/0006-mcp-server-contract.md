@@ -144,18 +144,22 @@ separate readiness vocabulary for agents.
 ### `dotrepo.lookup`
 
 Inputs:
-- `url` (required repository URL or `host/owner/repo` identity)
-- `path` (optional dotrepo query path; defaults to `repo.name`)
-- `baseUrl` (optional hosted public snapshot origin)
+- `repositoryUrl` (repository URL such as `https://github.com/owner/repo`)
+- `host`, `owner`, and `repo` (alternative identity form when `repositoryUrl` is omitted)
+- `path` (optional dotrepo query path to resolve immediately through the hosted query route)
+- `baseUrl` (optional hosted public snapshot origin; defaults to `https://dotrepo.org`)
 
 Returns:
-- the same trust-aware query envelope as `dotrepo.query`, resolved against a
-  remote hosted snapshot instead of a local repository root
+- hosted snapshot metadata plus `summary`, `trust`, and optional `query` payloads resolved
+  against the public export instead of a local repository root
 
 Security constraints:
 - `baseUrl` must match the server's allowlisted hosted snapshot origins unless
-  `DOTREPO_MCP_LOOKUP_BASE_URL` overrides the default
-- the server rejects private-network and non-HTTP(S) lookup targets
+  `DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL=1` opts into custom origins
+- `DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL=1` may permit loopback/private hosts for local
+  development only
+- the server rejects private-network and non-HTTP(S) lookup targets, disables HTTP redirects,
+  and validates resolved destination IPs to limit SSRF and DNS rebinding
 
 ## Response shape guidance
 

@@ -14,6 +14,15 @@ fn temp_dir(label: &str) -> PathBuf {
 }
 
 #[test]
+fn resolve_claim_directory_rejects_parent_dir_components() {
+    let root = temp_dir("parent-dir-claim");
+    let err = resolve_claim_directory(&root, "repos/github.com/acme/widget/claims/../escape")
+        .expect_err("parent-dir claim paths should be rejected");
+    assert!(err.to_string().contains("stay within the repository root"));
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
 fn resolve_claim_directory_rejects_absolute_paths() {
     let root = temp_dir("absolute-claim");
     let err = resolve_claim_directory(&root, "/tmp/outside-claim")

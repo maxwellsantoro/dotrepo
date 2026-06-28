@@ -254,7 +254,7 @@ pub fn import_preview_repository(
     let verification = verify_import_plan(root, &plan, source_url);
     let field_scores = score_import_fields(&plan, &verification);
     Ok(ImportPreviewReport {
-        root: display_root(root),
+        root: display_root(root)?,
         mode: import_mode_name(mode),
         manifest_path: display_path(root, &plan.manifest_path)?,
         manifest: plan.manifest.clone(),

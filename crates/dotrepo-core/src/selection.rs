@@ -6,13 +6,14 @@ use std::sync::Arc;
 
 use super::util::{display_path, manifest_path, repository_identity};
 use super::{
-    load_manifest_file, record_summary, validate_manifest, LoadedManifest, PublicSelectedRecord,
-    SelectedRecord, SelectionReason,
+    load_manifest_file, record_summary, LoadedManifest, PublicSelectedRecord, SelectedRecord,
+    SelectionReason,
 };
 use crate::claims::{candidate_claim_context, ClaimState};
 use crate::public::public_record_artifacts;
 use crate::query::{manifest_to_json, query_manifest_value_from_json};
 use crate::validation::collect_record_dirs;
+use crate::validation::validate_manifest_diagnostics;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct RepositoryIdentity {
@@ -134,16 +135,24 @@ pub(crate) fn resolve_candidates(root: &Path) -> Result<Vec<CandidateManifest>> 
 fn load_direct_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
     let mut candidates = Vec::new();
     for name in [".repo", "record.toml"] {
-        let path = root.join(name);
-        if !path.exists() {
-            continue;
+        if let Some(candidate) = try_load_root_candidate(root, name) {
+            candidates.push(candidate);
         }
-
-        let document = load_manifest_file(&path)?;
-        validate_manifest(root, &document.manifest)?;
-        candidates.push(candidate_from_document(root, &document)?);
     }
     Ok(candidates)
+}
+
+fn try_load_root_candidate(root: &Path, name: &str) -> Option<CandidateManifest> {
+    let path = root.join(name);
+    if !path.exists() {
+        return None;
+    }
+
+    let document = load_manifest_file(&path).ok()?;
+    if !validate_manifest_diagnostics(root, &document.manifest).is_empty() {
+        return None;
+    }
+    candidate_from_document(root, &document).ok()
 }
 
 fn load_descendant_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
@@ -158,11 +167,19 @@ fn load_descendant_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
         if path == root_record {
             continue;
         }
-        let document = load_manifest_file(&path)?;
-        validate_manifest(root, &document.manifest)?;
-        candidates.push(candidate_from_document(root, &document)?);
+        if let Some(candidate) = try_load_descendant_candidate(root, &path) {
+            candidates.push(candidate);
+        }
     }
     Ok(candidates)
+}
+
+fn try_load_descendant_candidate(root: &Path, path: &Path) -> Option<CandidateManifest> {
+    let document = load_manifest_file(path).ok()?;
+    if !validate_manifest_diagnostics(root, &document.manifest).is_empty() {
+        return None;
+    }
+    candidate_from_document(root, &document).ok()
 }
 
 pub(crate) fn candidate_from_document(
@@ -302,7 +319,7 @@ pub(crate) fn public_selected_record(
 ) -> PublicSelectedRecord {
     PublicSelectedRecord {
         manifest_path: display_path(display_root, &candidate.path)
-            .unwrap_or_else(|_| candidate.path.display().to_string()),
+            .unwrap_or_else(|_| candidate.manifest_path.clone()),
         record: record_summary(&candidate.manifest),
         claim: candidate_claim_context(display_root, candidate),
         artifacts: public_record_artifacts(display_root, candidate),

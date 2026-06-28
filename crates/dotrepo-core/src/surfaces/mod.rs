@@ -367,7 +367,7 @@ pub fn preview_surfaces(root: &Path, surfaces: &[DoctorSurface]) -> Result<Surfa
         .collect::<Result<Vec<_>>>()?;
 
     Ok(SurfacePreviewReport {
-        root: display_root(root),
+        root: display_root(root)?,
         previews,
     })
 }

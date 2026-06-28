@@ -1,4 +1,7 @@
-use dotrepo_core::{validate_index_root, validate_repository, IndexFindingSeverity};
+use dotrepo_core::{
+    query_repository, record_status_name, trust_repository, validate_index_root,
+    validate_repository, IndexFindingSeverity,
+};
 use std::fs;
 use std::path::PathBuf;
 
@@ -59,6 +62,62 @@ description = "Missing overlay trust metadata"
             .iter()
             .any(|diagnostic| diagnostic.manifest_path.as_deref() == Some("record.toml")),
         "overlay diagnostics should be attributed to record.toml"
+    );
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
+fn query_and_trust_select_valid_root_repo_when_record_toml_is_invalid() {
+    let root = temp_dir("query-trust-multi-root");
+    fs::write(
+        root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "canonical"
+
+[record.trust]
+confidence = "high"
+provenance = ["declared"]
+
+[repo]
+name = "native-canonical"
+description = "Native canonical record"
+"#,
+    )
+    .expect("native manifest written");
+    fs::write(
+        root.join("record.toml"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+
+[repo]
+name = "broken-overlay"
+description = "Missing overlay trust metadata"
+"#,
+    )
+    .expect("overlay manifest written");
+
+    let validation = validate_repository(&root);
+    assert!(!validation.valid);
+    assert_eq!(validation.manifest_path.as_deref(), Some(".repo"));
+
+    let query = query_repository(&root, "repo.name").expect("query should succeed");
+    assert_eq!(query.manifest_path, ".repo");
+    assert_eq!(query.value.as_str(), Some("native-canonical"));
+
+    let trust = trust_repository(&root).expect("trust should succeed");
+    assert_eq!(trust.manifest_path, ".repo");
+    assert_eq!(
+        record_status_name(&trust.selection.record.record.status),
+        "canonical"
     );
 
     fs::remove_dir_all(root).expect("temp dir removed");

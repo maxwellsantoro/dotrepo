@@ -138,11 +138,15 @@ pub fn display_path(root: &Path, path: &Path) -> Result<String> {
     Ok(relative_to_root(root, path)?.display().to_string())
 }
 
-pub(crate) fn display_root(root: &Path) -> String {
-    fs::canonicalize(root)
-        .unwrap_or_else(|_| root.to_path_buf())
-        .display()
-        .to_string()
+pub(crate) fn display_root(root: &Path) -> Result<String> {
+    let canonical = fs::canonicalize(root).map_err(|err| {
+        anyhow!(
+            "failed to canonicalize repository root {}: {}",
+            root.display(),
+            err
+        )
+    })?;
+    Ok(canonical.display().to_string())
 }
 
 /// Returns `path` made relative to `root` when `path` is under `root`.
