@@ -241,6 +241,23 @@ async function loadProfileSnapshot(env, request, host, owner, repo) {
   return response.json();
 }
 
+async function loadRelationsSnapshot(env, request, host, owner, repo) {
+  const response = await fetchInternalAsset(
+    env,
+    request,
+    `/v0/repos/${host}/${owner}/${repo}/relations.json`
+  );
+  if (response.status === 404) {
+    return null;
+  }
+  if (!response.ok) {
+    throw new Error(
+      `failed to load /v0/repos/${host}/${owner}/${repo}/relations.json: ${response.status}`
+    );
+  }
+  return response.json();
+}
+
 async function loadInventorySnapshot(env, request) {
   const response = await fetchInternalAsset(env, request, "/v0/repos/index.json");
   if (!response.ok) {
@@ -647,6 +664,17 @@ async function buildCompareResponse(env, request, repoParams, freshness) {
 }
 
 async function buildRelationsResponse(env, request, identity, freshness, basePath) {
+  const exported = await loadRelationsSnapshot(
+    env,
+    request,
+    identity.host,
+    identity.owner,
+    identity.repo
+  );
+  if (exported !== null) {
+    return exported;
+  }
+
   const snapshot = await loadQueryInputSnapshot(env, request, identity.host, identity.owner, identity.repo);
   if (snapshot === null) {
     throw new Error(repositoryNotFoundMessage(identity));

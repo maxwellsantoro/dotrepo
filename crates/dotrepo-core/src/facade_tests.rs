@@ -903,6 +903,9 @@ description = "Reviewed overlay"
         .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/profile.json"));
     assert!(rendered
         .iter()
+        .any(|(path, _)| path == "public/v0/repos/github.com/example/orbit/relations.json"));
+    assert!(rendered
+        .iter()
         .any(|(path, _)| path == "public/query-input/github.com/example/orbit.json"));
     assert!(rendered.iter().any(|(path, contents)| {
         path == "public/v0/repos/index.json"

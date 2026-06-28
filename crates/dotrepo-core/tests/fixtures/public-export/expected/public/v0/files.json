@@ -5,7 +5,7 @@
     "snapshotDigest": "afd5f502456c1c2bc99b8a86051736c6ce7c5530d61ff7c8cc6f9edf41d4e766",
     "staleAfter": "2026-03-11T18:30:00Z"
   },
-  "fileCount": 10,
+  "fileCount": 12,
   "files": [
     {
       "path": "query-input/github.com/example/nova.json",
@@ -33,6 +33,11 @@
       "sha256": "31ffc6d06163ac7f426c0767fb11403fa392aa221e667e64efee5d17d70e169b"
     },
     {
+      "path": "v0/repos/github.com/example/nova/relations.json",
+      "bytes": 2540,
+      "sha256": "b2a7cc6b284502d0910ee2a4985c714d64db1bef3e50f3a793071253146cd7c3"
+    },
+    {
       "path": "v0/repos/github.com/example/nova/trust.json",
       "bytes": 1829,
       "sha256": "8d644d1a03317c9f0af5650068e7e88c490fe63dbfe116bd4bef5a7214476e5b"
@@ -46,6 +51,11 @@
       "path": "v0/repos/github.com/example/orbit/profile.json",
       "bytes": 2560,
       "sha256": "b3ff3e6a820d8ea08045d21de21af7074cffd955967739926bfa38007ec27f9e"
+    },
+    {
+      "path": "v0/repos/github.com/example/orbit/relations.json",
+      "bytes": 2527,
+      "sha256": "6f9e0a1fdf04882f1d05929f00e74783132e80f070d779274dd67953db2b4efc"
     },
     {
       "path": "v0/repos/github.com/example/orbit/trust.json",

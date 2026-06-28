@@ -198,7 +198,7 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
             .expect("file manifest output"),
     )
     .expect("file manifest parses");
-    assert_eq!(files["fileCount"], Value::from(10));
+    assert_eq!(files["fileCount"], Value::from(12));
     let file_entries = files["files"].as_array().expect("file manifest entries");
     assert!(file_entries.iter().any(|entry| {
         entry["path"] == Value::String("v0/meta.json".into())
@@ -208,6 +208,10 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
     }));
     assert!(file_entries.iter().any(|entry| {
         entry["path"] == Value::String("v0/repos/github.com/example/orbit/profile.json".into())
+            && entry["bytes"].as_u64().is_some_and(|bytes| bytes > 0)
+    }));
+    assert!(file_entries.iter().any(|entry| {
+        entry["path"] == Value::String("v0/repos/github.com/example/orbit/relations.json".into())
             && entry["bytes"].as_u64().is_some_and(|bytes| bytes > 0)
     }));
 

@@ -2578,6 +2578,18 @@ pub fn export_public_index_static_with_base(
             repo_base.join("profile.json"),
             serde_json::to_string_pretty(&profile)?,
         ));
+        let relations = public_repository_relations_with_base(
+            index_root,
+            &identity.host,
+            &identity.owner,
+            &identity.repo,
+            freshness.clone(),
+            base_path,
+        )?;
+        outputs.push((
+            repo_base.join("relations.json"),
+            serde_json::to_string_pretty(&relations)?,
+        ));
         outputs.push((
             out_root.join(public_query_input_relative_path(
                 &identity.host,

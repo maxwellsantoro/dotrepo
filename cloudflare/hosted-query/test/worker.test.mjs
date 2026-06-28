@@ -422,6 +422,49 @@ test("serves hosted relation traversal from query-input snapshots", async () => 
   assert.equal(reverse.references[0].profile.identity.repo, "orbit");
 });
 
+test("serves pre-exported relations snapshots without scanning the inventory", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "meta.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/github.com/example/orbit/relations.json",
+      await readFile(
+        fixturePath(
+          "crates",
+          "dotrepo-core",
+          "tests",
+          "fixtures",
+          "public-export",
+          "expected",
+          "public",
+          "v0",
+          "repos",
+          "github.com",
+          "example",
+          "orbit",
+          "relations.json"
+        ),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/dotrepo" };
+  const response = await handleRequest(
+    new Request("https://example.test/dotrepo/v0/repos/github.com/example/orbit/relations"),
+    env
+  );
+  const json = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(json.identity.repo, "orbit");
+  assert.ok(Array.isArray(json.references));
+});
+
 test("returns the public error contract for invalid identities", async () => {
   const files = new Map([
     [
