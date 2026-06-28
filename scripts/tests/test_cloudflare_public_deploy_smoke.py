@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 
@@ -87,3 +88,82 @@ def test_deploy_coherence_mismatches_passes_for_reviewed_export(tmp_path: Path) 
 
     assert smoke.deploy_coherence_mismatches(reviewed, reviewed) == []
 
+
+def manifest_entry(path: str, body: bytes) -> dict:
+    return {
+        "path": path,
+        "bytes": len(body),
+        "sha256": hashlib.sha256(body).hexdigest(),
+    }
+
+
+def test_select_manifest_coherence_entries_prioritizes_public_contract_paths() -> None:
+    files = {
+        "files": [
+            manifest_entry("query-input/github.com/example/orbit.json", b"private"),
+            manifest_entry("v0/repos/github.com/example/orbit/profile.json", b"profile"),
+            manifest_entry("v0/repos/index.json", b"inventory"),
+            manifest_entry("v0/meta.json", b"meta"),
+            manifest_entry("v0/files.json", b"files"),
+            manifest_entry("v0/repos/github.com/example/orbit/trust.json", b"trust"),
+            manifest_entry("v0/repos/github.com/example/other/profile.json", b"other"),
+        ]
+    }
+    identity = {"host": "github.com", "owner": "example", "repo": "orbit"}
+
+    selected = smoke.select_manifest_coherence_entries(files, identity, 5)
+
+    assert [entry["path"] for entry in selected] == [
+        "v0/meta.json",
+        "v0/files.json",
+        "v0/repos/index.json",
+        "v0/repos/github.com/example/orbit/profile.json",
+        "v0/repos/github.com/example/orbit/trust.json",
+    ]
+
+
+def test_select_manifest_coherence_entries_spreads_remaining_public_files() -> None:
+    files = {
+        "files": [
+            manifest_entry("v0/meta.json", b"meta"),
+            manifest_entry("v0/files.json", b"files"),
+            manifest_entry("v0/repos/index.json", b"inventory"),
+            manifest_entry("query-input/github.com/example/orbit.json", b"private"),
+            manifest_entry("v0/repos/github.com/example/one/profile.json", b"one"),
+            manifest_entry("v0/repos/github.com/example/two/profile.json", b"two"),
+            manifest_entry("v0/repos/github.com/example/three/profile.json", b"three"),
+        ]
+    }
+    identity = {"host": "github.com", "owner": "example", "repo": "missing"}
+
+    selected = smoke.select_manifest_coherence_entries(files, identity, 5)
+
+    assert [entry["path"] for entry in selected] == [
+        "v0/meta.json",
+        "v0/files.json",
+        "v0/repos/index.json",
+        "v0/repos/github.com/example/one/profile.json",
+        "v0/repos/github.com/example/two/profile.json",
+    ]
+
+
+def test_live_manifest_entry_mismatches_reports_hash_and_size_drift(
+    monkeypatch,
+) -> None:
+    bodies = {
+        "https://example.test/v0/meta.json?_smoke=cache": b"meta",
+        "https://example.test/v0/files.json?_smoke=cache": b"wrong",
+    }
+
+    def fake_get_bytes(url: str) -> bytes:
+        return bodies[url]
+
+    monkeypatch.setattr(smoke, "http_get_bytes", fake_get_bytes)
+    entries = [
+        manifest_entry("v0/meta.json", b"meta"),
+        manifest_entry("v0/files.json", b"files"),
+    ]
+
+    assert smoke.live_manifest_entry_mismatches(
+        "https://example.test", "", entries, "cache"
+    ) == ["v0/files.json"]

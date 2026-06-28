@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import re
@@ -60,6 +61,16 @@ def parse_args() -> argparse.Namespace:
         default=3.0,
         help="How often to retry while waiting for live assets to converge (default: 3)",
     )
+    parser.add_argument(
+        "--manifest-sample-limit",
+        type=int,
+        default=24,
+        help=(
+            "Maximum public file-manifest entries to fetch and hash from the live "
+            "deployment after core coherence passes. Use 0 to disable the sampled "
+            "manifest content check."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -106,12 +117,12 @@ def http_get_json(url: str) -> Any:
         raise SystemExit(f"smoke returned invalid JSON for {url}: {exc}") from exc
 
 
-def http_get_text(url: str) -> str:
+def http_get_bytes(url: str) -> bytes:
     request = Request(url, headers=REQUEST_HEADERS)
     try:
         with urlopen(request, timeout=15) as response:
             status = getattr(response, "status", response.getcode())
-            body = response.read().decode("utf-8")
+            body = response.read()
     except HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
         hint = ""
@@ -126,8 +137,13 @@ def http_get_text(url: str) -> str:
         raise SystemExit(f"smoke failed for {url}: {exc.reason}") from exc
 
     if status != 200:
-        raise SystemExit(f"smoke failed ({status}) for {url}: {body}")
+        decoded = body.decode("utf-8", errors="replace")
+        raise SystemExit(f"smoke failed ({status}) for {url}: {decoded}")
     return body
+
+
+def http_get_text(url: str) -> str:
+    return http_get_bytes(url).decode("utf-8")
 
 
 def extract_homepage_snapshot_state(document: str, source: str) -> dict[str, Any]:
@@ -193,6 +209,106 @@ def deploy_coherence_mismatches(
     return mismatches
 
 
+def manifest_entries_by_path(files_manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    entries = files_manifest.get("files")
+    if not isinstance(entries, list):
+        raise SystemExit("reviewed export file manifest is missing files[]")
+    by_path = {}
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise SystemExit(f"reviewed export file manifest has malformed entry: {entry!r}")
+        path = entry.get("path")
+        if not isinstance(path, str) or not path:
+            raise SystemExit(f"reviewed export file manifest entry is missing path: {entry!r}")
+        if path.startswith("/") or ".." in path.split("/"):
+            raise SystemExit(f"reviewed export file manifest path is unsafe: {path}")
+        if not isinstance(entry.get("bytes"), int) or entry["bytes"] < 0:
+            raise SystemExit(f"reviewed export file manifest entry is missing bytes: {path}")
+        sha256 = entry.get("sha256")
+        if not isinstance(sha256, str) or not re.fullmatch(r"[0-9a-f]{64}", sha256):
+            raise SystemExit(f"reviewed export file manifest entry is missing sha256: {path}")
+        by_path[path] = entry
+    return by_path
+
+
+def public_manifest_entry(entry: dict[str, Any]) -> bool:
+    path = str(entry.get("path") or "")
+    return not path.startswith("query-input/")
+
+
+def select_manifest_coherence_entries(
+    files_manifest: dict[str, Any],
+    first_identity: dict[str, Any],
+    limit: int,
+) -> list[dict[str, Any]]:
+    if limit <= 0:
+        return []
+    entries_by_path = manifest_entries_by_path(files_manifest)
+    first_repo_prefix = (
+        f"v0/repos/{first_identity.get('host')}/"
+        f"{first_identity.get('owner')}/{first_identity.get('repo')}/"
+    )
+    priority_paths = [
+        "v0/meta.json",
+        "v0/files.json",
+        "v0/repos/index.json",
+        f"{first_repo_prefix}index.json",
+        f"{first_repo_prefix}profile.json",
+        f"{first_repo_prefix}trust.json",
+        f"{first_repo_prefix}relations.json",
+    ]
+    selected_paths = []
+    for path in priority_paths:
+        entry = entries_by_path.get(path)
+        if entry and public_manifest_entry(entry) and path not in selected_paths:
+            selected_paths.append(path)
+        if len(selected_paths) >= limit:
+            return [entries_by_path[path] for path in selected_paths]
+
+    remaining = [
+        entry
+        for path, entry in sorted(entries_by_path.items())
+        if path not in selected_paths and public_manifest_entry(entry)
+    ]
+    open_slots = limit - len(selected_paths)
+    if open_slots <= 0 or not remaining:
+        return [entries_by_path[path] for path in selected_paths]
+    if len(remaining) <= open_slots:
+        selected_paths.extend(entry["path"] for entry in remaining)
+    else:
+        # Deterministic spread across the manifest catches partition or routing
+        # drift without turning every deploy smoke into hundreds of requests.
+        last_index = len(remaining) - 1
+        for index in range(open_slots):
+            selected = remaining[round(index * last_index / max(open_slots - 1, 1))]
+            if selected["path"] not in selected_paths:
+                selected_paths.append(selected["path"])
+    return [entries_by_path[path] for path in selected_paths]
+
+
+def manifest_entry_url(deploy_url: str, base_path: str, entry_path: str) -> str:
+    return f"{deploy_url}{base_path}/{entry_path.lstrip('/')}"
+
+
+def live_manifest_entry_mismatches(
+    deploy_url: str,
+    base_path: str,
+    entries: list[dict[str, Any]],
+    cache_bust: str,
+) -> list[str]:
+    mismatches = []
+    for entry in entries:
+        path = entry["path"]
+        url = with_query_param(
+            manifest_entry_url(deploy_url, base_path, path), "_smoke", cache_bust
+        )
+        body = http_get_bytes(url)
+        digest = hashlib.sha256(body).hexdigest()
+        if len(body) != entry["bytes"] or digest != entry["sha256"]:
+            mismatches.append(path)
+    return mismatches
+
+
 def fetch_live_public_state(
     deploy_url: str, base_path: str, cache_bust: str
 ) -> tuple[
@@ -244,6 +360,9 @@ def main() -> int:
 
     deploy_url = args.deploy_url.rstrip("/")
     base_path = normalize_base_path(args.base_path)
+    manifest_entries = select_manifest_coherence_entries(
+        reviewed["files"], first_identity, args.manifest_sample_limit
+    )
     deadline = time.monotonic() + max(args.settle_timeout_seconds, 0.0)
     meta_url = f"{deploy_url}{base_path}/v0/meta.json"
     inventory_url = f"{deploy_url}{base_path}/v0/repos/index.json"
@@ -266,14 +385,24 @@ def main() -> int:
         expected_homepage_state = expected_homepage_snapshot_state(meta, inventory)
         live = {"meta": meta, "files": files, "inventory": inventory}
         mismatches = deploy_coherence_mismatches(reviewed, live)
+        manifest_mismatches = []
         if homepage_state == expected_homepage_state and not mismatches:
+            manifest_mismatches = live_manifest_entry_mismatches(
+                deploy_url, base_path, manifest_entries, cache_bust
+            )
+        if (
+            homepage_state == expected_homepage_state
+            and not mismatches
+            and not manifest_mismatches
+        ):
             break
         if time.monotonic() >= deadline:
             raise SystemExit(
                 "deployed public surface did not converge to the reviewed export after waiting "
                 f"{args.settle_timeout_seconds:g}s: homepage expected {expected_homepage_state}, "
                 f"homepage got {homepage_state}, mismatched reviewed files: "
-                f"{', '.join(mismatches) or 'none'}"
+                f"{', '.join(mismatches) or 'none'}, mismatched manifest entries: "
+                f"{', '.join(manifest_mismatches) or 'none'}"
             )
         time.sleep(max(args.settle_interval_seconds, 0.0))
 
@@ -347,6 +476,8 @@ def main() -> int:
     print(f"smoke ok: {search_url}")
     print(f"smoke ok: {compare_url}")
     print(f"smoke ok: {relations_url}")
+    if manifest_entries:
+        print(f"smoke ok: {len(manifest_entries)} manifest entries matched reviewed hashes")
     return 0
 
 

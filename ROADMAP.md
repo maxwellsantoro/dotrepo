@@ -274,9 +274,12 @@ Current operational gaps:
   remote adjudication sidecar paths, but repeated runs still need to prove the
   tier mix stays within the intended cheap-primary/rare-tail shape
 - retained multi-run telemetry and a proof gate now exist, including worst-run
-  quality checks plus recent-window quality, adjudication-budget, and token-cost
-  drift checks; repeated scheduled runs still need to satisfy that gate to
-  demonstrate stable cost, resolution, promotion, and regression rates
+  quality checks plus recent-window quality, tier-mix, adjudication-budget, and
+  token-cost drift checks; repeated scheduled runs still need to satisfy that
+  gate to demonstrate stable cost, resolution, promotion, and regression rates
+- automatic deploy coherence checks now compare the live Worker against the
+  reviewed export's core contract files and a deterministic public
+  `v0/files.json` hash sample before post-deploy smoke checks pass
 - scheduled failures now retain telemetry and valid partial writebacks before
   restoring the failed workflow result, so early proof-gate failures and live
   repository defects no longer prevent the multi-run history from accumulating
@@ -359,8 +362,9 @@ Current status:
   agent caches
 - `scripts/check_public_profile_coverage.py` now measures exported profile
   count, high-signal profile count and ratio, missing quality signals, and
-  optional Milestone 2 count, ratio, per-signal minimum, and per-signal ceiling
-  gates against the public tree
+  conflict-bearing profile rate, plus optional Milestone 2 count, ratio,
+  conflict-rate, per-signal minimum, and per-signal ceiling gates against the
+  public tree
 - profile coverage now validates the accepted response shape and path identity,
   excludes malformed files from every coverage claim, and is enforced by the
   canonical release gate through a versioned 157-profile/107-high-signal
@@ -372,9 +376,9 @@ Current status:
   hand-maintained tiny fixture or self-fulfilling completeness filters
 - `scripts/measure_public_lookup_efficiency.py` now produces deterministic
   aggregate and per-intent task/field hit-rate, workload-volume, payload-byte,
-  and pass/fail gate reports for known-repository workloads; the canonical
-  release gate publishes the current 157-repository, 628-task benchmark against
-  a versioned baseline
+  request-reduction, and pass/fail gate reports for known-repository workloads;
+  the canonical release gate publishes the current 157-repository, 628-task
+  benchmark against a versioned baseline
 - the canonical release gate also checks a cited exact-value accuracy sample:
   20 assertions across FastAPI, Tokio, and Gin currently pass, with workload
   volume and repository count guarded against silent shrinkage; this sample
@@ -453,8 +457,13 @@ Current status:
   filters grounded in generated `profile.json` semantics plus explicit
   relevance ranking metadata that remains separate from factual trust
 - `scripts/measure_public_search_quality.py` now reports discovery success,
-  rank quality, searched profile bytes, freshness, and optional pass/fail gates
-  for public-profile search workloads
+  rank quality, inventory-only versus profile-fanout task rates, searched
+  profile bytes, freshness, and optional pass/fail gates for public-profile
+  search workloads
+- `scripts/measure_public_factual_accuracy.py` now reports exact cited
+  assertion accuracy with separate missing and mismatch rates, and the release
+  gate applies versioned ceilings for both so sampled abstention and wrong facts
+  cannot hide behind aggregate accuracy
 - `dotrepo public compare` provides the first factual comparison response for
   selected profiles, preserving trust, completeness, shared language/topic, and
   side-by-side signal values without ranking or synthesis
@@ -489,8 +498,10 @@ Deliver:
 Current status:
 
 - `scripts/render_index_growth_status.py` reports record growth, tranche
-  coverage, quality queues, language-family coverage, and optional operational
-  gates for tranche coverage, missing targets, and lower-confidence backlog.
+  coverage, quality queues, language-family coverage, stale-or-missing
+  `generated_at` rate, maximum record age, overdue refresh latency, and optional
+  operational gates for tranche coverage, missing targets, lower-confidence
+  backlog, stale freshness backlog, and maximum refresh overdue days.
 
 Exit criteria:
 

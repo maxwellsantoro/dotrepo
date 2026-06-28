@@ -150,12 +150,21 @@ trust semantics, autonomous publication gates, or the manual contribution bar.
 
 Use the growth-status renderer when you need a quick read on record-level
 high-signal progress, active-tranche capacity, tranche coverage, language mix,
-claim examples, high-signal lift candidates, and which lower-confidence records
-should be hardened next:
+claim examples, high-signal lift candidates, stale or missing `generated_at`
+metadata, and which lower-confidence records should be hardened next:
 
 ```bash
 uv run python scripts/render_index_growth_status.py \
   --milestone-high-signal-target 500
+```
+
+For strict operational checks, add freshness gates such as:
+
+```bash
+uv run python scripts/render_index_growth_status.py \
+  --stale-after-days 30 \
+  --max-stale-or-missing-record-rate 0.10 \
+  --max-refresh-overdue-days 7
 ```
 
 The scheduled seed and refresh review workflows include this same readout in
@@ -166,7 +175,9 @@ coverage. The high-signal lift queue is also advisory; it highlights records
 with medium/high confidence plus build, test, and security signals that still
 need the normal validation and promotion path before they can increase the
 high-signal count. The record-level potential line shows how far the checked-in
-index could move if those candidates pass that path.
+index could move if those candidates pass that path. Freshness lines report the
+stale-or-missing `generated_at` rate, maximum record age, and overdue refresh
+latency so operators can separate scale growth from refresh health.
 
 Use the core promotion report when you need the authoritative auto-promotion
 view:

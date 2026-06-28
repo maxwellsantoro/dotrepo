@@ -720,6 +720,14 @@ def aggregate_rates(runs: list[dict]) -> dict[str, float]:
     }
 
 
+def aggregate_tiers(runs: list[dict]) -> dict[str, int]:
+    tier_counts: Counter[str] = Counter()
+    for run_telemetry in runs:
+        for tier, count in (run_telemetry.get("repositoriesByAdjudicationTier") or {}).items():
+            tier_counts[str(tier)] += int(count or 0)
+    return dict(sorted(tier_counts.items()))
+
+
 def aggregate_costs(runs: list[dict]) -> dict[str, int | float]:
     totals = Counter()
     for run_telemetry in runs:
@@ -847,6 +855,8 @@ def aggregate_runs(runs: list[dict]) -> dict:
     previous_window_runs = runs[-6:-3]
     recent_window_rates = aggregate_rates(recent_window_runs)
     previous_window_rates = aggregate_rates(previous_window_runs)
+    recent_window_tiers = aggregate_tiers(recent_window_runs)
+    previous_window_tiers = aggregate_tiers(previous_window_runs)
     recent_window_costs = aggregate_costs(recent_window_runs)
     previous_window_costs = aggregate_costs(previous_window_runs)
     recurring_failures = [
@@ -893,6 +903,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
         "recentWindowRates": {
             key: round(value, 6) for key, value in sorted(recent_window_rates.items())
         },
+        "recentWindowRepositoriesByAdjudicationTier": recent_window_tiers,
         "recentWindowCosts": {
             key: round(value, 6) if isinstance(value, float) else value
             for key, value in sorted(recent_window_costs.items())
@@ -901,6 +912,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
         "previousWindowRates": {
             key: round(value, 6) for key, value in sorted(previous_window_rates.items())
         },
+        "previousWindowRepositoriesByAdjudicationTier": previous_window_tiers,
         "previousWindowCosts": {
             key: round(value, 6) if isinstance(value, float) else value
             for key, value in sorted(previous_window_costs.items())

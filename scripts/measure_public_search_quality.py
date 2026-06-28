@@ -123,6 +123,14 @@ def profile_paths(public_root: Path) -> list[Path]:
     return sorted(root.glob("*/*/*/profile.json"))
 
 
+def inventory_path(public_root: Path) -> Path:
+    return public_root / "v0" / "repos" / "index.json"
+
+
+def file_size(path: Path) -> int:
+    return path.stat().st_size if path.is_file() else 0
+
+
 def load_profiles(public_root: Path) -> list[dict[str, Any]]:
     profiles = []
     for path in profile_paths(public_root):
@@ -138,6 +146,29 @@ def load_profiles(public_root: Path) -> list[dict[str, Any]]:
             }
         )
     return profiles
+
+
+def requires_profile_fanout(filters: dict[str, Any]) -> bool:
+    if not filters:
+        return False
+    profile_filter_keys = {
+        "languages",
+        "topics",
+        "statuses",
+        "confidences",
+        "requireBuild",
+        "requireTest",
+        "requireDocs",
+        "requireSecurityContact",
+        "requireLicense",
+    }
+    for key in profile_filter_keys:
+        value = filters.get(key)
+        if isinstance(value, list) and value:
+            return True
+        if isinstance(value, bool) and value:
+            return True
+    return False
 
 
 def contains_normalized(values: list[str], expected: str) -> bool:
@@ -291,6 +322,11 @@ def analyze_task(
         "id": task["id"],
         "query": task["query"],
         "filters": task.get("filters", {}),
+        "costMode": (
+            "profile_fanout"
+            if requires_profile_fanout(task.get("filters", {}))
+            else "inventory_only"
+        ),
         "limit": limit,
         "expectedRepositories": expected,
         "returnedRepositories": [item["repository"] for item in limited],
@@ -368,6 +404,26 @@ def unique_profile_bytes(tasks: list[dict[str, Any]], public_root: Path) -> int:
     return sum(path.stat().st_size for path in paths if path.is_file())
 
 
+def cost_summary(tasks: list[dict[str, Any]], public_root: Path) -> dict[str, Any]:
+    inventory_only_count = sum(1 for task in tasks if task["costMode"] == "inventory_only")
+    profile_fanout_count = sum(1 for task in tasks if task["costMode"] == "profile_fanout")
+    task_count = len(tasks)
+    searched_profile_bytes = unique_profile_bytes(tasks, public_root)
+    inventory_bytes = file_size(inventory_path(public_root))
+    return {
+        "inventoryOnlyTaskCount": inventory_only_count,
+        "profileFanoutTaskCount": profile_fanout_count,
+        "inventoryOnlyTaskRate": safe_ratio(inventory_only_count, task_count),
+        "profileFanoutTaskRate": safe_ratio(profile_fanout_count, task_count),
+        "inventoryBytes": inventory_bytes,
+        "searchedProfileBytes": searched_profile_bytes,
+        "profileBytesPerTask": safe_ratio(searched_profile_bytes, task_count),
+        "profileBytesPerProfileFanoutTask": safe_ratio(
+            searched_profile_bytes, profile_fanout_count
+        ),
+    }
+
+
 def freshness_summary(profiles: list[dict[str, Any]]) -> dict[str, Any]:
     generated_at = sorted(
         {
@@ -418,6 +474,7 @@ def summarize(
         for task in tasks
         if task["firstExpectedRank"] is not None
     ]
+    costs = cost_summary(tasks, public_root)
     summary = {
         "taskCount": task_count,
         "successCount": success_count,
@@ -425,7 +482,8 @@ def summarize(
         "meanReciprocalRank": average([task["reciprocalRank"] for task in tasks]),
         "averageFirstExpectedRank": average(first_ranks),
         "candidateProfileCount": len(profiles),
-        "searchedProfileBytes": unique_profile_bytes(tasks, public_root),
+        "searchedProfileBytes": costs["searchedProfileBytes"],
+        "cost": costs,
         "freshness": freshness_summary(profiles),
     }
     gates = build_gates(
@@ -449,6 +507,7 @@ def summarize(
         "notes": [
             "search quality is measured against exported profile.json payloads without repository scraping",
             "ranking score uses matched public fields and completeness signals, not trust status or confidence",
+            "inventoryOnlyTaskRate estimates tasks that can use inventory-only hosted search without loading full profile snapshots",
         ],
     }
 
@@ -468,6 +527,10 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| Average first expected rank | {summary['averageFirstExpectedRank']} |",
         f"| Candidate profiles | {summary['candidateProfileCount']} |",
         f"| Searched profile bytes | {summary['searchedProfileBytes']} |",
+        f"| Inventory bytes | {summary['cost']['inventoryBytes']} |",
+        f"| Inventory-only task rate | {summary['cost']['inventoryOnlyTaskRate']} |",
+        f"| Profile fan-out task rate | {summary['cost']['profileFanoutTaskRate']} |",
+        f"| Profile bytes per fan-out task | {summary['cost']['profileBytesPerProfileFanoutTask']} |",
         f"| Snapshot count | {summary['freshness']['snapshotCount']} |",
         "",
         "## Gates",

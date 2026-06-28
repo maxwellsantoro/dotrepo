@@ -227,7 +227,8 @@ curl -s "https://dotrepo.org/v0/repos/github.com/sharkdp/fd/relations"
 ```
 
 The public lookup-efficiency harness measures task hit rate, field hit rate,
-and compact payload bytes for representative known-repository workloads:
+compact payload bytes, and deterministic request-count reduction for
+representative known-repository workloads:
 
 ```bash
 uv run python scripts/build_public_lookup_workload.py \
@@ -257,7 +258,8 @@ exported public tree:
 uv run python scripts/check_public_profile_coverage.py \
   --public-root public \
   --min-profiles 500 \
-  --min-high-signal 500
+  --min-high-signal 500 \
+  --max-conflict-rate 0.0
 ```
 
 ## Why now

@@ -35,15 +35,17 @@ For the canonical freshness semantics used by these outputs, see
 - representative repository `index.json`, `profile.json`, and `trust.json`
   files open cleanly
 - `public-profile-coverage.json` and `.md` pass the versioned valid-profile,
-  high-signal, malformed-profile, and completeness-signal baseline
+  high-signal, conflict-rate, malformed-profile, and completeness-signal
+  baseline
 - `index-growth-plan.json`, `.md`, and `index-growth-targets.txt` pass the
   versioned active-tranche baseline, exclude already-indexed repositories, and
   report planned Milestone 2 capacity without counting it as completed coverage
 - `public-lookup-workload.json` covers the release inventory, and
   `public-lookup-efficiency.json` and `.md` pass aggregate and per-intent volume,
   hit-rate, and payload-ratio baselines
-- `public-factual-accuracy.json` and `.md` pass every cited exact-value assertion
-  in the versioned cross-ecosystem accuracy sample
+- `public-factual-accuracy.json` and `.md` pass every cited exact-value
+  assertion, missing-rate ceiling, and mismatch-rate ceiling in the versioned
+  cross-ecosystem accuracy sample
 - representative `query-input/<host>/<owner>/<repo>.json` files exist for the
   same repositories
 - the packaged bundle extracts to one self-describing root directory

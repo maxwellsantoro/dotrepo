@@ -95,10 +95,18 @@ def test_summarize_reports_profile_and_high_signal_counts(tmp_path: Path) -> Non
     assert report["summary"]["malformedProfileCount"] == 0
     assert report["summary"]["highSignalProfileCount"] == 1
     assert report["summary"]["highSignalRatio"] == 0.5
+    assert report["summary"]["conflictProfileCount"] == 0
+    assert report["summary"]["conflictRate"] == 0.0
+    assert report["summary"]["totalConflictCount"] == 0
     assert report["gates"]["minProfiles"]["passed"] is True
     assert report["gates"]["minHighSignal"]["passed"] is True
     assert report["gates"]["minHighSignalRatio"]["actual"] == 0.5
     assert report["gates"]["minHighSignalRatio"]["passed"] is True
+    assert report["gates"]["maxConflictRate"] == {
+        "threshold": 1.0,
+        "actual": 0.0,
+        "passed": True,
+    }
     assert report["summary"]["signalCounts"]["hasBuild"] == 1
     assert report["summary"]["signalCounts"]["hasPurpose"] == 2
     assert report["gates"]["minSignal"] == {}
@@ -138,6 +146,31 @@ def test_high_signal_ratio_gate_failure_sets_passed_false(tmp_path: Path) -> Non
         "actual": 0.5,
         "passed": False,
     }
+
+
+def test_conflict_rate_gate_failure_sets_passed_false(tmp_path: Path) -> None:
+    public_root = tmp_path / "public"
+    write_profile(public_root, "example", "alpha")
+    write_profile(public_root, "example", "beta", conflict_count=2)
+
+    report = coverage.summarize(
+        public_root,
+        min_profiles=2,
+        min_high_signal=1,
+        max_items=10,
+        max_conflict_rate=0.25,
+    )
+
+    assert report["passed"] is False
+    assert report["summary"]["conflictProfileCount"] == 1
+    assert report["summary"]["conflictRate"] == 0.5
+    assert report["summary"]["totalConflictCount"] == 2
+    assert report["gates"]["maxConflictRate"] == {
+        "threshold": 0.25,
+        "actual": 0.5,
+        "passed": False,
+    }
+    assert report["conflictProfiles"][0]["identity"] == "github.com/example/beta"
 
 
 def test_missing_signal_gate_failure_sets_passed_false(tmp_path: Path) -> None:
@@ -217,7 +250,29 @@ def test_render_markdown_lists_lower_signal_profiles(tmp_path: Path) -> None:
     assert "# dotrepo public profile coverage" in markdown
     assert "| Profiles | 2 |" in markdown
     assert "| Min high-signal ratio gate | 0.5 / 0.0 |" in markdown
+    assert "| Max conflict rate gate | 0.0 / 1.0 |" in markdown
     assert "`github.com/example/beta`" in markdown
+
+
+def test_render_markdown_lists_conflict_profiles(tmp_path: Path) -> None:
+    public_root = tmp_path / "public"
+    write_profile(public_root, "example", "alpha")
+    write_profile(public_root, "example", "beta", conflict_count=3)
+
+    markdown = coverage.render_markdown(
+        coverage.summarize(
+            public_root,
+            min_profiles=1,
+            min_high_signal=1,
+            max_items=10,
+            max_conflict_rate=0.0,
+        )
+    )
+
+    assert "| Conflict-bearing profiles | 1 |" in markdown
+    assert "| Conflict rate | 0.5 |" in markdown
+    assert "## Conflict-Bearing Profiles" in markdown
+    assert "`github.com/example/beta`: 3 selected-record conflicts" in markdown
 
 
 def test_render_markdown_lists_missing_signal_gates(tmp_path: Path) -> None:

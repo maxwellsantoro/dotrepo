@@ -32,6 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-api-escalation-rate", type=float, default=0.05)
     parser.add_argument("--max-recent-failure-rate-delta", type=float, default=0.02)
     parser.add_argument("--max-recent-adjudication-rate-delta", type=float, default=0.10)
+    parser.add_argument("--max-recent-second-opinion-rate-delta", type=float, default=0.05)
     parser.add_argument("--max-recent-api-escalation-rate-delta", type=float, default=0.02)
     parser.add_argument("--max-recent-zero-model-rate-drop", type=float, default=0.10)
     parser.add_argument("--max-fixture-eligible-recurring-failures", type=int, default=0)
@@ -94,6 +95,7 @@ def thresholds(args: argparse.Namespace) -> dict:
         "maxApiEscalationRate": args.max_api_escalation_rate,
         "maxRecentFailureRateDelta": args.max_recent_failure_rate_delta,
         "maxRecentAdjudicationRateDelta": args.max_recent_adjudication_rate_delta,
+        "maxRecentSecondOpinionRateDelta": args.max_recent_second_opinion_rate_delta,
         "maxRecentApiEscalationRateDelta": args.max_recent_api_escalation_rate_delta,
         "maxRecentZeroModelRateDrop": args.max_recent_zero_model_rate_drop,
         "maxFixtureEligibleRecurringFailures": args.max_fixture_eligible_recurring_failures,
@@ -202,6 +204,8 @@ def retained_proof_fields_present(summary: dict) -> bool:
     regression_fixture_candidates = summary.get("regressionFixtureCandidates")
     recent_window_costs = summary.get("recentWindowCosts")
     previous_window_costs = summary.get("previousWindowCosts")
+    recent_window_tiers = summary.get("recentWindowRepositoriesByAdjudicationTier")
+    previous_window_tiers = summary.get("previousWindowRepositoriesByAdjudicationTier")
     if (
         not count_value(summary.get("runCount"))
         or not count_value(summary.get("budgetExhaustedRuns"))
@@ -215,6 +219,20 @@ def retained_proof_fields_present(summary: dict) -> bool:
         or not isinstance(previous_window_rates, dict)
         or not isinstance(regression_fixture_candidates, list)
         or not regression_fixture_candidates_well_formed(regression_fixture_candidates)
+        or (
+            recent_window_tiers is not None
+            and (
+                not isinstance(recent_window_tiers, dict)
+                or not tier_counts_well_formed(recent_window_tiers)
+            )
+        )
+        or (
+            previous_window_tiers is not None
+            and (
+                not isinstance(previous_window_tiers, dict)
+                or not tier_counts_well_formed(previous_window_tiers)
+            )
+        )
         or (
             recent_window_costs is not None
             and (
@@ -272,6 +290,8 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     recent_window_costs = summary.get("recentWindowCosts") or {}
     previous_window_costs = summary.get("previousWindowCosts") or {}
     tiers = summary.get("repositoriesByAdjudicationTier") or {}
+    recent_window_tiers = summary.get("recentWindowRepositoriesByAdjudicationTier") or {}
+    previous_window_tiers = summary.get("previousWindowRepositoriesByAdjudicationTier") or {}
 
     schema = str(summary.get("schema") or "")
     run_count = count_or_zero(summary.get("runCount"))
@@ -342,6 +362,9 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     )
     recent_adjudication_rate_delta = recent_adjudication_rate - number(
         drift_reference_rates.get("adjudicationRate")
+    )
+    recent_second_opinion_rate_delta = recent_second_opinion_rate - number(
+        drift_reference_rates.get("secondOpinionRate")
     )
     recent_api_escalation_rate_delta = recent_api_escalation_rate - number(
         drift_reference_rates.get("apiEscalationRate")
@@ -455,6 +478,13 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             round(recent_second_opinion_rate, 6),
             f"<= {args.max_second_opinion_rate}",
             recent_second_opinion_rate <= args.max_second_opinion_rate,
+        ),
+        check(
+            "recent-window second-opinion adjudication drift",
+            round(recent_second_opinion_rate_delta, 6),
+            f"<= {args.max_recent_second_opinion_rate_delta}",
+            recent_second_opinion_rate_delta
+            <= args.max_recent_second_opinion_rate_delta,
         ),
         check(
             "strong remote escalation rate",
@@ -586,6 +616,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "driftReference": drift_reference_label,
             "recentFailureRateDelta": recent_failure_rate_delta,
             "recentAdjudicationRateDelta": recent_adjudication_rate_delta,
+            "recentSecondOpinionRateDelta": recent_second_opinion_rate_delta,
             "recentApiEscalationRateDelta": recent_api_escalation_rate_delta,
             "recentZeroModelRateDrop": recent_zero_model_rate_drop,
             "promotionRate": promotion_rate,
@@ -598,6 +629,8 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "recentWindowCosts": recent_window_costs,
             "previousWindowCosts": previous_window_costs,
             "repositoriesByAdjudicationTier": tiers,
+            "recentWindowRepositoriesByAdjudicationTier": recent_window_tiers,
+            "previousWindowRepositoriesByAdjudicationTier": previous_window_tiers,
         },
     }
 
@@ -609,6 +642,8 @@ def render_markdown(report: dict) -> str:
     worst_rates = inputs.get("worstRunRates") or {}
     recent_window_rates = inputs.get("recentWindowRates") or {}
     previous_window_rates = inputs.get("previousWindowRates") or {}
+    recent_window_tiers = inputs.get("recentWindowRepositoriesByAdjudicationTier") or {}
+    previous_window_tiers = inputs.get("previousWindowRepositoriesByAdjudicationTier") or {}
     fixture_backlog = inputs.get("fixtureEligibleRecurringFailures") or []
     lines = [
         "# Autonomous Telemetry Gate",
@@ -624,6 +659,10 @@ def render_markdown(report: dict) -> str:
         f"- recent-window adjudication rate: {number(recent_window_rates.get('adjudicationRate')):.2%}",
         f"- recent-window zero-model rate: {number(recent_window_rates.get('zeroModelRate')):.2%}",
         f"- recent-window zero-model drop: {number(inputs.get('recentZeroModelRateDrop')):.2%}",
+        f"- recent-window second-opinion rate: {number(recent_window_rates.get('secondOpinionRate')):.2%}",
+        f"- recent-window second-opinion drift: {number(inputs.get('recentSecondOpinionRateDelta')):.2%}",
+        f"- recent-window tier counts: {json.dumps(recent_window_tiers, sort_keys=True)}",
+        f"- previous-window tier counts: {json.dumps(previous_window_tiers, sort_keys=True)}",
         f"- adjudication call budget usage: {number(inputs.get('adjudicationBudgetUseRate')):.2%}",
         f"- tokens per crawled repository: {number(inputs.get('tokensPerCrawled')):.2f}",
         f"- recent-window adjudication budget usage: {number(inputs.get('recentAdjudicationBudgetUseRate')):.2%}",

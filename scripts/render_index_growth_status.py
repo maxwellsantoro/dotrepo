@@ -4,6 +4,7 @@ import argparse
 import json
 import tomllib
 from collections import Counter, defaultdict
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -75,9 +76,50 @@ def parse_args() -> argparse.Namespace:
             "targets is below this capacity threshold"
         ),
     )
+    parser.add_argument(
+        "--stale-after-days",
+        type=int,
+        default=30,
+        help="Treat records generated more than this many days ago as stale (default: 30)",
+    )
+    parser.add_argument(
+        "--now",
+        help="Override current timestamp for deterministic freshness reports",
+    )
+    parser.add_argument(
+        "--max-stale-or-missing-record-rate",
+        type=float,
+        default=None,
+        help="Fail when stale, missing, or invalid generated_at records exceed this ratio",
+    )
+    parser.add_argument(
+        "--max-refresh-overdue-days",
+        type=float,
+        default=None,
+        help="Fail when any stale record is more than this many days past the stale threshold",
+    )
     parser.add_argument("--output-json", help="Optional path for machine-readable JSON")
     parser.add_argument("--output-md", help="Optional path for markdown output")
     return parser.parse_args()
+
+
+def parse_rfc3339(value: str) -> datetime | None:
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def resolve_now(value: str | None) -> datetime:
+    if value:
+        parsed = parse_rfc3339(value)
+        if parsed is None:
+            raise SystemExit(f"--now must be an RFC3339 timestamp, got {value!r}")
+        return parsed
+    return datetime.now(timezone.utc).replace(microsecond=0)
 
 
 def load_toml(path: Path) -> dict[str, Any]:
@@ -267,10 +309,14 @@ def build_gates(
     missing_count: int,
     lower_confidence_queue: int,
     tranche_high_signal_capacity: int,
+    stale_or_missing_record_rate: float | None,
+    max_refresh_overdue_days_actual: float,
     min_tranche_coverage_ratio: float = 0.0,
     max_lower_confidence_queue: int | None = None,
     max_missing_targets: int | None = None,
     min_tranche_high_signal_capacity: int | None = None,
+    max_stale_or_missing_record_rate: float | None = None,
+    max_refresh_overdue_days: float | None = None,
 ) -> dict[str, Any]:
     coverage_ratio = ratio(present_count, target_count)
     gates: dict[str, Any] = {
@@ -298,7 +344,85 @@ def build_gates(
             "actual": tranche_high_signal_capacity,
             "passed": tranche_high_signal_capacity >= min_tranche_high_signal_capacity,
         }
+    if max_stale_or_missing_record_rate is not None:
+        gates["maxStaleOrMissingRecordRate"] = {
+            "threshold": max_stale_or_missing_record_rate,
+            "actual": stale_or_missing_record_rate,
+            "passed": stale_or_missing_record_rate is not None
+            and stale_or_missing_record_rate <= max_stale_or_missing_record_rate,
+        }
+    if max_refresh_overdue_days is not None:
+        gates["maxRefreshOverdueDays"] = {
+            "threshold": max_refresh_overdue_days,
+            "actual": max_refresh_overdue_days_actual,
+            "passed": max_refresh_overdue_days_actual <= max_refresh_overdue_days,
+        }
     return gates
+
+
+def freshness_signals(
+    records: list[dict[str, Any]],
+    *,
+    now: datetime,
+    stale_after_days: int,
+) -> dict[str, Any]:
+    stale = []
+    missing = []
+    invalid = []
+    ages = []
+    overdue_days = []
+    parsed_timestamps = []
+    for record in records:
+        identity = record["identity"]
+        generated_at = record.get("generatedAt")
+        if not isinstance(generated_at, str) or not generated_at.strip():
+            missing.append(identity)
+            continue
+        parsed = parse_rfc3339(generated_at)
+        if parsed is None:
+            invalid.append(identity)
+            continue
+        age_days = max((now - parsed).total_seconds() / 86400, 0.0)
+        ages.append((identity, age_days))
+        parsed_timestamps.append(parsed)
+        if age_days > stale_after_days:
+            stale.append(identity)
+            overdue_days.append(age_days - stale_after_days)
+
+    total = len(records)
+    stale_or_missing_count = len(stale) + len(missing) + len(invalid)
+    total_overdue_days = sum(overdue_days)
+    return {
+        "asOf": now.isoformat().replace("+00:00", "Z"),
+        "staleAfterDays": stale_after_days,
+        "recordCount": total,
+        "generatedAtKnown": len(ages),
+        "missingGeneratedAt": len(missing),
+        "invalidGeneratedAt": len(invalid),
+        "staleRecords": len(stale),
+        "staleOrMissingRecords": stale_or_missing_count,
+        "staleRecordRate": ratio(len(stale), total),
+        "staleOrMissingRecordRate": ratio(stale_or_missing_count, total),
+        "maxRecordAgeDays": round(max((age for _identity, age in ages), default=0.0), 2),
+        "maxRefreshOverdueDays": round(max(overdue_days, default=0.0), 2),
+        "meanRefreshOverdueDays": (
+            round(total_overdue_days / len(overdue_days), 2) if overdue_days else 0.0
+        ),
+        "totalRefreshOverdueDays": round(total_overdue_days, 2),
+        "oldestGeneratedAt": (
+            min(parsed_timestamps).isoformat().replace("+00:00", "Z")
+            if parsed_timestamps
+            else None
+        ),
+        "newestGeneratedAt": (
+            max(parsed_timestamps).isoformat().replace("+00:00", "Z")
+            if parsed_timestamps
+            else None
+        ),
+        "staleRecordIdentities": stale,
+        "missingGeneratedAtIdentities": missing,
+        "invalidGeneratedAtIdentities": invalid,
+    }
 
 
 def summarize(
@@ -310,9 +434,15 @@ def summarize(
     max_missing_targets: int | None = None,
     milestone_high_signal_target: int = 500,
     min_tranche_high_signal_capacity: int | None = None,
+    stale_after_days: int = 30,
+    now: datetime | None = None,
+    max_stale_or_missing_record_rate: float | None = None,
+    max_refresh_overdue_days: float | None = None,
 ) -> dict[str, Any]:
     if milestone_high_signal_target < 0:
         raise SystemExit("--milestone-high-signal-target must not be negative")
+    if stale_after_days < 0:
+        raise SystemExit("--stale-after-days must not be negative")
     records = load_records(index_root)
     by_identity = {record["identity"]: record for record in records}
     targets = load_targets(targets_file)
@@ -350,16 +480,25 @@ def summarize(
     lift_candidates = high_signal_lift_candidates(records)
     record_lift_capacity = high_signal_record_count + len(lift_candidates)
     tranche_high_signal_capacity = high_signal_record_count + len(missing_targets)
+    freshness = freshness_signals(
+        records,
+        now=now or datetime.now(timezone.utc).replace(microsecond=0),
+        stale_after_days=stale_after_days,
+    )
     gates = build_gates(
         target_count=len(targets),
         present_count=len(present_targets),
         missing_count=len(missing_targets),
         lower_confidence_queue=len(quality_queue),
         tranche_high_signal_capacity=tranche_high_signal_capacity,
+        stale_or_missing_record_rate=freshness["staleOrMissingRecordRate"],
+        max_refresh_overdue_days_actual=freshness["maxRefreshOverdueDays"],
         min_tranche_coverage_ratio=min_tranche_coverage_ratio,
         max_lower_confidence_queue=max_lower_confidence_queue,
         max_missing_targets=max_missing_targets,
         min_tranche_high_signal_capacity=min_tranche_high_signal_capacity,
+        max_stale_or_missing_record_rate=max_stale_or_missing_record_rate,
+        max_refresh_overdue_days=max_refresh_overdue_days,
     )
 
     return {
@@ -390,6 +529,7 @@ def summarize(
             "unknownSecurityContact": len(unknown_security),
             "lowerConfidenceQueue": len(quality_queue),
         },
+        "freshnessSignals": freshness,
         "milestoneProgress": {
             "recordLevelHighSignalCount": high_signal_record_count,
             "milestoneHighSignalTarget": milestone_high_signal_target,
@@ -459,6 +599,7 @@ def format_counts(counts: dict[str, int]) -> str:
 def render_markdown(summary: dict[str, Any]) -> str:
     tranche = summary["tranche"]
     quality = summary["qualitySignals"]
+    freshness = summary["freshnessSignals"]
     progress = summary["milestoneProgress"]
     lines = [
         "# Index Growth Status",
@@ -477,6 +618,9 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- remaining high-signal gap after active tranche: {progress['remainingHighSignalGapAfterActiveTranche']}",
         f"- quality queue: {quality['lowerConfidenceQueue']} records need review hardening signals",
         f"- missing build/test/security: build={quality['missingBuild']}, test={quality['missingTest']}, security={quality['unknownSecurityContact']}",
+        f"- stale/missing generated_at: {freshness['staleOrMissingRecords']}/{freshness['recordCount']} ({freshness['staleOrMissingRecordRate']}) as of {freshness['asOf']}",
+        f"- max record age: {freshness['maxRecordAgeDays']} days; stale threshold: {freshness['staleAfterDays']} days",
+        f"- refresh overdue latency: max={freshness['maxRefreshOverdueDays']} days, mean={freshness['meanRefreshOverdueDays']} days",
         "",
         "## Gates",
         "",
@@ -527,6 +671,19 @@ def render_markdown(summary: dict[str, Any]) -> str:
             )
         lines.append("")
 
+    stale = freshness.get("staleRecordIdentities") or []
+    missing = freshness.get("missingGeneratedAtIdentities") or []
+    invalid = freshness.get("invalidGeneratedAtIdentities") or []
+    if stale or missing or invalid:
+        lines.extend(["## Freshness Queue", ""])
+        for identity in stale[:10]:
+            lines.append(f"- `{identity}`: stale generated_at")
+        for identity in missing[:10]:
+            lines.append(f"- `{identity}`: missing generated_at")
+        for identity in invalid[:10]:
+            lines.append(f"- `{identity}`: invalid generated_at")
+        lines.append("")
+
     return "\n".join(lines).rstrip()
 
 
@@ -561,6 +718,15 @@ def main() -> int:
         and args.min_tranche_high_signal_capacity < 0
     ):
         raise SystemExit("--min-tranche-high-signal-capacity must not be negative")
+    if args.stale_after_days < 0:
+        raise SystemExit("--stale-after-days must not be negative")
+    if (
+        args.max_stale_or_missing_record_rate is not None
+        and not 0 <= args.max_stale_or_missing_record_rate <= 1
+    ):
+        raise SystemExit("--max-stale-or-missing-record-rate must be between 0 and 1")
+    if args.max_refresh_overdue_days is not None and args.max_refresh_overdue_days < 0:
+        raise SystemExit("--max-refresh-overdue-days must not be negative")
     summary = summarize(
         Path(args.index_root),
         Path(args.targets_file),
@@ -570,6 +736,10 @@ def main() -> int:
         max_missing_targets=args.max_missing_targets,
         milestone_high_signal_target=args.milestone_high_signal_target,
         min_tranche_high_signal_capacity=args.min_tranche_high_signal_capacity,
+        stale_after_days=args.stale_after_days,
+        now=resolve_now(args.now),
+        max_stale_or_missing_record_rate=args.max_stale_or_missing_record_rate,
+        max_refresh_overdue_days=args.max_refresh_overdue_days,
     )
     markdown = render_markdown(summary)
     write_json(args.output_json, summary)

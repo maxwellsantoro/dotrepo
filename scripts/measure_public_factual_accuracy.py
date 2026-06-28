@@ -20,6 +20,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-assertions", type=int, default=0)
     parser.add_argument("--min-repositories", type=int, default=0)
     parser.add_argument("--min-accuracy-rate", type=float, default=0.0)
+    parser.add_argument("--max-missing-rate", type=float, default=1.0)
+    parser.add_argument("--max-mismatch-rate", type=float, default=1.0)
     parser.add_argument("--generated-at")
     parser.add_argument("--output-json")
     parser.add_argument("--output-md")
@@ -126,6 +128,8 @@ def summarize(
     min_assertions: int = 0,
     min_repositories: int = 0,
     min_accuracy_rate: float = 0.0,
+    max_missing_rate: float = 1.0,
+    max_mismatch_rate: float = 1.0,
 ) -> dict[str, Any]:
     assertions = validate_workload(load_json(workload_path), workload_path)
     manifests: dict[str, Any] = {}
@@ -138,6 +142,8 @@ def summarize(
     missing_count = sum(1 for result in results if result["outcome"] == "missing")
     mismatch_count = sum(1 for result in results if result["outcome"] == "mismatch")
     accuracy_rate = safe_ratio(correct_count, assertion_count)
+    missing_rate = safe_ratio(missing_count, assertion_count)
+    mismatch_rate = safe_ratio(mismatch_count, assertion_count)
     summary = {
         "assertionCount": assertion_count,
         "repositoryCount": repository_count,
@@ -145,6 +151,8 @@ def summarize(
         "missingCount": missing_count,
         "mismatchCount": mismatch_count,
         "accuracyRate": accuracy_rate,
+        "missingRate": missing_rate,
+        "mismatchRate": mismatch_rate,
     }
     gates = {
         "minAssertions": {
@@ -161,6 +169,16 @@ def summarize(
             "threshold": min_accuracy_rate,
             "actual": accuracy_rate,
             "passed": accuracy_rate is not None and accuracy_rate >= min_accuracy_rate,
+        },
+        "maxMissingRate": {
+            "threshold": max_missing_rate,
+            "actual": missing_rate,
+            "passed": missing_rate is not None and missing_rate <= max_missing_rate,
+        },
+        "maxMismatchRate": {
+            "threshold": max_mismatch_rate,
+            "actual": mismatch_rate,
+            "passed": mismatch_rate is not None and mismatch_rate <= max_mismatch_rate,
         },
     }
     return {
@@ -191,7 +209,9 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| Repositories sampled | {summary['repositoryCount']} |",
         f"| Accuracy rate | {summary['accuracyRate']} |",
         f"| Missing values | {summary['missingCount']} |",
+        f"| Missing rate | {summary['missingRate']} |",
         f"| Mismatched values | {summary['mismatchCount']} |",
+        f"| Mismatch rate | {summary['mismatchRate']} |",
         "",
         "| Gate | Actual | Threshold | Result |",
         "| --- | ---: | ---: | --- |",
@@ -227,6 +247,8 @@ def main() -> int:
         min_assertions=args.min_assertions,
         min_repositories=args.min_repositories,
         min_accuracy_rate=args.min_accuracy_rate,
+        max_missing_rate=args.max_missing_rate,
+        max_mismatch_rate=args.max_mismatch_rate,
     )
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.output_json:

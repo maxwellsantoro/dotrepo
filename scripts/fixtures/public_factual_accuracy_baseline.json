@@ -2,5 +2,7 @@
   "schema": "dotrepo-public-factual-accuracy-baseline/v0",
   "minAssertions": 20,
   "minRepositories": 3,
-  "minAccuracyRate": 1.0
+  "minAccuracyRate": 1.0,
+  "maxMissingRate": 0.0,
+  "maxMismatchRate": 0.0
 }

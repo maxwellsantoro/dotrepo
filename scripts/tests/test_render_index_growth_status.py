@@ -1,4 +1,5 @@
 import importlib.util
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
@@ -22,6 +23,7 @@ def write_record(
     build: str | None = "make build",
     test: str | None = "make test",
     security: str | None = "security@example.com",
+    generated_at: str | None = "2026-03-10T00:00:00Z",
 ) -> None:
     record_dir = root / "repos" / "github.com" / owner / repo
     record_dir.mkdir(parents=True)
@@ -32,17 +34,23 @@ def write_record(
         'mode = "overlay"',
         f'status = "{status}"',
         f'source = "https://github.com/{owner}/{repo}"',
-        "",
-        "[record.trust]",
-        f'confidence = "{confidence}"',
-        'provenance = ["imported"]',
-        "",
-        "[repo]",
-        f'name = "{repo}"',
-        f'description = "{repo} description"',
-        f'homepage = "https://github.com/{owner}/{repo}"',
-        "languages = [",
     ]
+    if generated_at is not None:
+        lines.append(f'generated_at = "{generated_at}"')
+    lines.extend(
+        [
+            "",
+            "[record.trust]",
+            f'confidence = "{confidence}"',
+            'provenance = ["imported"]',
+            "",
+            "[repo]",
+            f'name = "{repo}"',
+            f'description = "{repo} description"',
+            f'homepage = "https://github.com/{owner}/{repo}"',
+            "languages = [",
+        ]
+    )
     lines.extend(f'    "{language}",' for language in languages)
     lines.append("]")
     if build is not None:
@@ -192,6 +200,96 @@ def test_summarize_operational_gates_fail_when_thresholds_are_not_met(tmp_path: 
             "passed": False,
         },
     }
+
+
+def test_summarize_reports_freshness_queue_and_stale_gate(tmp_path: Path) -> None:
+    index_root = tmp_path / "index"
+    targets_file = tmp_path / "targets.txt"
+    targets_file.write_text("# Rust\nowner/fresh\nowner/stale\nowner/missing\nowner/invalid\n")
+    write_record(
+        index_root,
+        "owner",
+        "fresh",
+        status="verified",
+        confidence="high",
+        languages=["Rust"],
+        generated_at="2026-03-28T00:00:00Z",
+    )
+    write_record(
+        index_root,
+        "owner",
+        "stale",
+        status="verified",
+        confidence="high",
+        languages=["Rust"],
+        generated_at="2026-02-01T00:00:00Z",
+    )
+    write_record(
+        index_root,
+        "owner",
+        "missing",
+        status="verified",
+        confidence="high",
+        languages=["Rust"],
+        generated_at=None,
+    )
+    write_record(
+        index_root,
+        "owner",
+        "invalid",
+        status="verified",
+        confidence="high",
+        languages=["Rust"],
+        generated_at="not-a-date",
+    )
+
+    summary = growth_status.summarize(
+        index_root,
+        targets_file,
+        max_items=5,
+        stale_after_days=30,
+        now=datetime(2026, 4, 1, tzinfo=timezone.utc),
+        max_stale_or_missing_record_rate=0.5,
+        max_refresh_overdue_days=20,
+    )
+
+    freshness = summary["freshnessSignals"]
+    assert summary["passed"] is False
+    assert freshness["recordCount"] == 4
+    assert freshness["generatedAtKnown"] == 2
+    assert freshness["staleRecords"] == 1
+    assert freshness["missingGeneratedAt"] == 1
+    assert freshness["invalidGeneratedAt"] == 1
+    assert freshness["staleOrMissingRecords"] == 3
+    assert freshness["staleRecordRate"] == 0.25
+    assert freshness["staleOrMissingRecordRate"] == 0.75
+    assert freshness["maxRecordAgeDays"] == 59.0
+    assert freshness["maxRefreshOverdueDays"] == 29.0
+    assert freshness["meanRefreshOverdueDays"] == 29.0
+    assert freshness["totalRefreshOverdueDays"] == 29.0
+    assert freshness["oldestGeneratedAt"] == "2026-02-01T00:00:00Z"
+    assert freshness["newestGeneratedAt"] == "2026-03-28T00:00:00Z"
+    assert freshness["staleRecordIdentities"] == ["github.com/owner/stale"]
+    assert freshness["missingGeneratedAtIdentities"] == ["github.com/owner/missing"]
+    assert freshness["invalidGeneratedAtIdentities"] == ["github.com/owner/invalid"]
+    assert summary["gates"]["maxStaleOrMissingRecordRate"] == {
+        "threshold": 0.5,
+        "actual": 0.75,
+        "passed": False,
+    }
+    assert summary["gates"]["maxRefreshOverdueDays"] == {
+        "threshold": 20,
+        "actual": 29.0,
+        "passed": False,
+    }
+
+    markdown = growth_status.render_markdown(summary)
+
+    assert "- stale/missing generated_at: 3/4 (0.75) as of 2026-04-01T00:00:00Z" in markdown
+    assert "- refresh overdue latency: max=29.0 days, mean=29.0 days" in markdown
+    assert "- `github.com/owner/stale`: stale generated_at" in markdown
+    assert "- `github.com/owner/missing`: missing generated_at" in markdown
+    assert "- `github.com/owner/invalid`: invalid generated_at" in markdown
 
 
 def test_render_markdown_includes_operational_gates(tmp_path: Path) -> None:

@@ -41,6 +41,11 @@ def test_summarize_fixture_workload_reports_hit_rates_and_bytes() -> None:
     assert report["summary"]["abstentionRate"] == 0.3636
     assert report["summary"]["dotrepoBytes"] > 0
     assert report["summary"]["scrapeProxyBytes"] > 0
+    assert report["summary"]["uniqueFieldCount"] == 9
+    assert report["summary"]["dotrepoBatchQueryRequests"] == 1
+    assert report["summary"]["scrapeProxyRequests"] == 4
+    assert report["summary"]["requestsSaved"] == 3
+    assert report["summary"]["requestReductionRate"] == 0.75
     assert report["passed"] is True
     assert report["gates"]["minTaskHitRate"] == {
         "threshold": 0.0,
@@ -187,6 +192,15 @@ def test_parse_intent_hit_rates_validates_bounds() -> None:
     ) == {"overview": 0.9, "documentation": 0.3}
 
 
+def test_batch_query_request_count_respects_public_limits() -> None:
+    assert lookup_efficiency.batch_query_request_count(0, 10) == 0
+    assert lookup_efficiency.batch_query_request_count(10, 0) == 0
+    assert lookup_efficiency.batch_query_request_count(50, 10) == 1
+    assert lookup_efficiency.batch_query_request_count(51, 10) == 2
+    assert lookup_efficiency.batch_query_request_count(157, 11) == 4
+    assert lookup_efficiency.batch_query_request_count(10, 26) == 2
+
+
 def test_render_markdown_includes_summary_table() -> None:
     report = lookup_efficiency.summarize(
         PUBLIC_ROOT,
@@ -199,6 +213,8 @@ def test_render_markdown_includes_summary_table() -> None:
 
     assert "# dotrepo public lookup efficiency benchmark" in markdown
     assert "| Tasks answered | 1 / 2 |" in markdown
+    assert "| dotrepo batch query requests | 1 |" in markdown
+    assert "| request reduction rate | 0.75 |" in markdown
     assert "## Gates" in markdown
     assert "| minTaskHitRate | 0.5 | 0.0 | pass |" in markdown
     assert "| `orbit-docs-and-owner` | `github.com/example/orbit` | true | - |" in markdown

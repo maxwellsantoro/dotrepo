@@ -270,8 +270,8 @@ uv run python scripts/measure_public_lookup_efficiency.py \
 The research workload asks fixed overview, execution, documentation, and
 security questions for every exported repository without inspecting field
 completeness first. The benchmark reports aggregate and per-intent task hit
-rate, field hit rate, compact public payload bytes, and deterministic
-source/evidence proxy bytes. See
+rate, field hit rate, compact public payload bytes, deterministic
+source/evidence proxy bytes, and cacheable batch-query request reduction. See
 [`docs/public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
 for interpretation notes.
 
@@ -314,6 +314,7 @@ uv run python scripts/check_public_profile_coverage.py \
   --public-root public \
   --min-profiles 500 \
   --min-high-signal 500 \
+  --max-conflict-rate 0.0 \
   --min-signal hasBuild=500 \
   --min-signal hasTest=500 \
   --min-signal hasDocs=500 \
@@ -327,9 +328,12 @@ export path. Only valid profiles contribute to count, ratio, and signal gates;
 malformed files are reported with bounded diagnostics and fail by default.
 Valid profiles are marked high-signal when they have a purpose,
 reviewed-or-better status, medium-or-better confidence, and no selected-record
-conflicts. `--min-signal` gates can ratchet individual completeness signals such
-as build, test, docs, ownership, security, and license coverage toward the same
-profile-count target.
+conflicts. The report also exposes conflict-bearing profile count, conflict
+rate, and total selected-record conflicts; `--max-conflict-rate` can hold a
+release at zero unresolved conflict-bearing profiles or allow a bounded tail
+while the index grows. `--min-signal` gates can ratchet individual completeness
+signals such as build, test, docs, ownership, security, and license coverage
+toward the same profile-count target.
 
 The canonical release gate applies the versioned floor in
 `scripts/fixtures/public_profile_coverage_baseline.json` and publishes JSON and

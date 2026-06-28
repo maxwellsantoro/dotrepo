@@ -24,6 +24,7 @@ def args(**overrides: object) -> Namespace:
         "max_api_escalation_rate": 0.05,
         "max_recent_failure_rate_delta": 0.02,
         "max_recent_adjudication_rate_delta": 0.10,
+        "max_recent_second_opinion_rate_delta": 0.05,
         "max_recent_api_escalation_rate_delta": 0.02,
         "max_recent_zero_model_rate_drop": 0.10,
         "max_fixture_eligible_recurring_failures": 0,
@@ -91,8 +92,8 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
     assert report["passed"]
     assert all(item["passed"] for item in report["checks"])
     assert report["checkSummary"] == {
-        "total": 33,
-        "passed": 33,
+        "total": 34,
+        "passed": 34,
         "failed": 0,
         "failedLabels": [],
     }
@@ -107,6 +108,7 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
         "maxApiEscalationRate": 0.05,
         "maxRecentFailureRateDelta": 0.02,
         "maxRecentAdjudicationRateDelta": 0.10,
+        "maxRecentSecondOpinionRateDelta": 0.05,
         "maxRecentApiEscalationRateDelta": 0.02,
         "maxRecentZeroModelRateDrop": 0.10,
         "maxFixtureEligibleRecurringFailures": 0,
@@ -554,6 +556,65 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
     assert failed_labels == {
         "recent-window model adjudication drift",
         "recent-window strong remote escalation drift",
+    }
+
+
+def test_evaluate_rejects_recent_second_opinion_drift_when_ceiling_rate_passes() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 6,
+        "budgetExhaustedRuns": 0,
+        "totals": {"adjudicationCallBudget": 30, "adjudicationCalls": 6, "crawled": 60, "written": 58, "failed": 0, "promoted": 10, "tokensUsed": 3000},
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "promotionRate": 0.166667,
+            "zeroModelRate": 0.8,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.25,
+            "secondOpinionRate": 0.08,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.75,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.25,
+            "secondOpinionRate": 0.08,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.8,
+        },
+        "previousWindowRunCount": 3,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.0,
+            "zeroModelRate": 0.8,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 10, "local_second_opinion": 2},
+        "recentWindowRepositoriesByAdjudicationTier": {
+            "local_primary": 4,
+            "local_second_opinion": 2,
+        },
+        "previousWindowRepositoriesByAdjudicationTier": {"local_primary": 6},
+        "regressionFixtureCandidates": [],
+    }
+
+    report = telemetry_gate.evaluate(summary, args())
+    failed_labels = {
+        item["label"] for item in report["checks"] if not item["passed"]
+    }
+
+    assert not report["passed"]
+    assert failed_labels == {"recent-window second-opinion adjudication drift"}
+    assert report["inputs"]["recentSecondOpinionRateDelta"] == 0.08
+    assert report["inputs"]["recentWindowRepositoriesByAdjudicationTier"] == {
+        "local_primary": 4,
+        "local_second_opinion": 2,
     }
 
 

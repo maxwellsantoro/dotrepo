@@ -168,6 +168,9 @@ upstream native `.repo`.
 - verifies the deployed `meta.json`, `files.json`, and repository inventory are
   byte-for-byte JSON-equivalent to the reviewed export snapshot before route
   smoke checks pass
+- verifies a deterministic public sample from `v0/files.json` against reviewed
+  byte counts and SHA-256 hashes, covering the core contract files plus the
+  first repository's exported JSON
 
 The export tree is the source of truth. The hosted surface deploys the same
 `public/` output.

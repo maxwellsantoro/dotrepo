@@ -46,6 +46,10 @@ The report includes:
   files needed by the workload
 - scrape proxy bytes: checked-in `record.toml` plus `evidence.md` bytes for the
   same repositories
+- dotrepo batch-query request count: cacheable public batch-query GETs needed
+  for the workload under the documented repository/path/result limits
+- scrape proxy request count: unique checked-in `record.toml` and `evidence.md`
+  proxy files for the same repositories
 - per-task missing inputs and missing fields
 - per-intent task and field hit rates
 - optional pass/fail gates for workload volume, repository coverage, aggregate
@@ -54,6 +58,9 @@ The report includes:
 `scrapeProxyBytes` is intentionally named as a proxy. It is deterministic and
 reviewable in CI, but it is not a live measurement of GitHub HTML/API traffic,
 repository archives, README fetches, dependency manifests, or model context.
+Likewise, `scrapeProxyRequests` is a conservative local proxy, while
+`dotrepoBatchQueryRequests` models the public batch-query surface that agents
+can cache and reuse.
 
 ## Current production-export result
 
@@ -76,6 +83,10 @@ profiles and applies the versioned baseline in
 | dotrepo bytes | 917209 |
 | scrape proxy bytes | 398648 |
 | dotrepo to scrape proxy ratio | 2.3008 |
+| unique fields requested | 9 |
+| dotrepo batch query requests | 4 |
+| scrape proxy requests | 314 |
+| request reduction rate | 0.9873 |
 
 The documentation slice is the clearest current bottleneck. The byte ratio is
 also reported without dressing it up: profile plus query-input JSON is larger
@@ -96,6 +107,10 @@ Against the checked-in public export fixture and workload, the harness reports:
 | dotrepo bytes | 8762 |
 | scrape proxy bytes | 1356 |
 | dotrepo to scrape proxy ratio | 6.4617 |
+| unique fields requested | 9 |
+| dotrepo batch query requests | 1 |
+| scrape proxy requests | 4 |
+| request reduction rate | 0.75 |
 
 The fixture remains a deterministic unit-scale contract. Production thresholds
 come from the full generated export above, not from these two repositories.

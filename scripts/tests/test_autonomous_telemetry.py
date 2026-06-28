@@ -88,6 +88,10 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "secondOpinionRate": 0.0,
         "zeroModelRate": 0.75,
     }
+    assert summary["recentWindowRepositoriesByAdjudicationTier"] == {
+        "api_escalation": 1,
+        "local_primary": 2,
+    }
     assert summary["recentWindowCosts"] == {
         "adjudicationBudgetUseRate": 0.0,
         "adjudicationCallBudget": 0,
@@ -104,6 +108,7 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "secondOpinionRate": 0.0,
         "zeroModelRate": 0.0,
     }
+    assert summary["previousWindowRepositoriesByAdjudicationTier"] == {}
     assert summary["previousWindowCosts"] == {
         "adjudicationBudgetUseRate": 0.0,
         "adjudicationCallBudget": 0,
@@ -237,6 +242,10 @@ def test_aggregate_runs_calculates_previous_window_rates() -> None:
         "secondOpinionRate": 0.0,
         "zeroModelRate": 0.5,
     }
+    assert summary["recentWindowRepositoriesByAdjudicationTier"] == {
+        "api_escalation": 3,
+        "local_primary": 6,
+    }
     assert summary["previousWindowRates"] == {
         "adjudicationRate": 0.0,
         "apiEscalationRate": 0.0,
@@ -244,6 +253,7 @@ def test_aggregate_runs_calculates_previous_window_rates() -> None:
         "secondOpinionRate": 0.0,
         "zeroModelRate": 1.0,
     }
+    assert summary["previousWindowRepositoriesByAdjudicationTier"] == {}
     assert summary["recentWindowCosts"] == {
         "adjudicationBudgetUseRate": 1.0,
         "adjudicationCallBudget": 12,

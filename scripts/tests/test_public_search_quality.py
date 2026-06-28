@@ -31,6 +31,13 @@ def test_summarize_fixture_workload_reports_search_quality() -> None:
     assert report["summary"]["averageFirstExpectedRank"] == 1.0
     assert report["summary"]["candidateProfileCount"] == 2
     assert report["summary"]["searchedProfileBytes"] > 0
+    assert report["summary"]["cost"]["inventoryOnlyTaskCount"] == 0
+    assert report["summary"]["cost"]["profileFanoutTaskCount"] == 2
+    assert report["summary"]["cost"]["inventoryOnlyTaskRate"] == 0.0
+    assert report["summary"]["cost"]["profileFanoutTaskRate"] == 1.0
+    assert report["summary"]["cost"]["inventoryBytes"] > 0
+    assert report["summary"]["cost"]["searchedProfileBytes"] == report["summary"]["searchedProfileBytes"]
+    assert report["summary"]["cost"]["profileBytesPerProfileFanoutTask"] > 0
     assert report["summary"]["freshness"]["snapshotCount"] == 1
     assert report["passed"] is True
     assert report["gates"]["minSuccessRate"] == {
@@ -46,6 +53,7 @@ def test_summarize_fixture_workload_reports_search_quality() -> None:
         "basis": ["matchedFields", "profileCompleteness"],
     }
     assert "trust" not in report["tasks"][0]["topResults"][0]["ranking"]
+    assert report["tasks"][0]["costMode"] == "profile_fanout"
 
 
 def test_missing_expected_repository_is_not_success(tmp_path: Path) -> None:
@@ -81,6 +89,39 @@ def test_missing_expected_repository_is_not_success(tmp_path: Path) -> None:
     assert report["summary"]["successRate"] == 0.0
     assert report["summary"]["meanReciprocalRank"] == 0.0
     assert report["tasks"][0]["expectedRanks"] == {"github.com/example/nova": None}
+
+
+def test_text_only_search_task_is_inventory_only_eligible(tmp_path: Path) -> None:
+    workload = tmp_path / "workload.json"
+    workload.write_text(
+        """
+{
+  "schema": "dotrepo-public-search-workload/v0",
+  "tasks": [
+    {
+      "id": "text-only",
+      "query": "orbit",
+      "expectedRepositories": ["github.com/example/orbit"],
+      "limit": 5
+    }
+  ]
+}
+""".strip()
+        + "\n"
+    )
+
+    report = search_quality.summarize(
+        PUBLIC_ROOT,
+        workload,
+        generated_at="2026-03-10T18:30:00Z",
+    )
+
+    assert report["summary"]["cost"]["inventoryOnlyTaskCount"] == 1
+    assert report["summary"]["cost"]["profileFanoutTaskCount"] == 0
+    assert report["summary"]["cost"]["inventoryOnlyTaskRate"] == 1.0
+    assert report["summary"]["cost"]["profileFanoutTaskRate"] == 0.0
+    assert report["summary"]["cost"]["profileBytesPerProfileFanoutTask"] is None
+    assert report["tasks"][0]["costMode"] == "inventory_only"
 
 
 def test_threshold_gates_mark_report_failed(tmp_path: Path) -> None:
@@ -138,6 +179,8 @@ def test_render_markdown_includes_gates_and_task_table() -> None:
 
     assert "# dotrepo public search quality benchmark" in markdown
     assert "| Tasks succeeded | 2 / 2 |" in markdown
+    assert "| Inventory-only task rate | 0.0 |" in markdown
+    assert "| Profile fan-out task rate | 1.0 |" in markdown
     assert "## Gates" in markdown
     assert "| minSuccessRate | 1.0 | 0.0 | pass |" in markdown
     assert "| `orbit-docs-discovery` | `orbit` | true | 1 | `github.com/example/orbit` |" in markdown

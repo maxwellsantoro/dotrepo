@@ -397,8 +397,9 @@ crawls, writes, failures, quality-reprocess queue entries, discovery queue
 entries, adjudication calls, token use, zero-model rate, promotion rate,
 repositories by adjudication tier, model-budget exhaustion runs, grouped failure
 classes, worst retained-run failure/adjudication/escalation rates, worst
-retained-run zero-model rate, and repeated failure fingerprints with suggested
-regression fixture slugs. Repeated
+retained-run zero-model rate, recent and previous three-run adjudication tier
+counts, and repeated failure fingerprints with suggested regression fixture
+slugs. Repeated
 scheduled runs can demonstrate cost, resolution, and regression trends instead
 of only exposing a short-lived artifact for the latest run, and recurring
 failures can be converted into deterministic parser or fixture work. The runner
@@ -486,15 +487,16 @@ treating aggregate rates as proof, and checks worst retained-run failure,
 adjudication, second-opinion, strong remote escalation, and zero-model rates so
 a bad run cannot be hidden by favorable aggregate totals. The retained summary also
 publishes recent and previous three-run windows. The gate checks the recent
-window's rate ceilings and compares failure, adjudication, and
+window's rate ceilings and compares failure, adjudication, second-opinion, and
 strong-remote-escalation drift against the previous window when it exists,
 falling back to the aggregate baseline while history is still short. It also
 checks for a recent zero-model-rate drop, so a shift away from deterministic
 resolution is visible even while the absolute minimum still passes. This
 catches a worsening tail before it can be masked by older successful runs. The
-JSON and Markdown gate reports include the configured threshold set and a
-pass/fail check summary, so a retained artifact can be audited without
-recovering the original CI command line.
+JSON and Markdown gate reports include the configured threshold set, recent and
+previous adjudication tier-count windows, and a pass/fail check summary, so a
+retained artifact can be audited without recovering the original CI command
+line.
 Environmental recurrences such as provider or infrastructure failures remain
 visible in the retained summary, but strict proof requires parser, evidence, and
 validation recurrences to be fixed or converted into checked-in fixtures instead

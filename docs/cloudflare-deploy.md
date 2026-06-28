@@ -101,6 +101,9 @@ The live smoke checks:
 
 - the deployed `v0/meta.json`, `v0/files.json`, and `v0/repos/index.json`
   exactly match the reviewed export that was staged for deployment
+- a deterministic sample of public paths from `v0/files.json`, including the
+  core contract files and the first reviewed repository's exported JSON, matches
+  the reviewed byte counts and SHA-256 hashes
 - the homepage embedded snapshot state matches the deployed public JSON
 - `/<base>/v0/meta.json`
 - one emitted `queryTemplate` resolved with `repo.description`

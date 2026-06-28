@@ -8,6 +8,9 @@ from typing import Any, Optional
 
 
 SCHEMA = "dotrepo-public-lookup-efficiency/v0"
+MAX_BATCH_REPOSITORIES = 50
+MAX_BATCH_PATHS = 25
+MAX_BATCH_RESULTS = 500
 
 
 def parse_args() -> argparse.Namespace:
@@ -293,6 +296,33 @@ def unique_file_bytes(
     return public_bytes, scrape_bytes
 
 
+def unique_scrape_proxy_request_count(
+    tasks: list[dict[str, Any]],
+    public_root: Path,
+    index_root: Path,
+) -> int:
+    scrape_paths = set()
+    for task in tasks:
+        paths = repository_paths(public_root, index_root, task["repository"])
+        scrape_paths.update([paths["record"], paths["evidence"]])
+    return sum(1 for path in scrape_paths if path.is_file())
+
+
+def batch_query_request_count(repository_count: int, path_count: int) -> int:
+    if repository_count <= 0 or path_count <= 0:
+        return 0
+    path_batches = [
+        min(MAX_BATCH_PATHS, path_count - offset)
+        for offset in range(0, path_count, MAX_BATCH_PATHS)
+    ]
+    requests = 0
+    for paths_in_batch in path_batches:
+        max_repos_for_paths = max(1, MAX_BATCH_RESULTS // paths_in_batch)
+        repos_per_request = min(MAX_BATCH_REPOSITORIES, max_repos_for_paths)
+        requests += (repository_count + repos_per_request - 1) // repos_per_request
+    return requests
+
+
 def safe_ratio(numerator: int, denominator: int) -> Optional[float]:
     if denominator == 0:
         return None
@@ -373,6 +403,7 @@ def summarize(
     field_count = sum(len(task["fields"]) for task in tasks)
     answered_field_count = sum(len(task["answeredFields"]) for task in tasks)
     repositories = {task["repository"] for task in tasks}
+    fields = {field for task in tasks for field in task["fields"]}
     intent_summaries = {}
     intents = sorted(
         {task["intent"] for task in tasks if isinstance(task.get("intent"), str)}
@@ -402,6 +433,13 @@ def summarize(
         index_root,
         manifest_sizes,
     )
+    dotrepo_batch_query_requests = batch_query_request_count(
+        len(repositories), len(fields)
+    )
+    scrape_proxy_requests = unique_scrape_proxy_request_count(
+        workload["tasks"], public_root, index_root
+    )
+    requests_saved = max(scrape_proxy_requests - dotrepo_batch_query_requests, 0)
     bytes_saved = max(scrape_proxy_bytes - dotrepo_bytes, 0)
 
     summary = {
@@ -419,6 +457,11 @@ def summarize(
         "bytesSaved": bytes_saved,
         "bytesSavedRatio": safe_ratio(bytes_saved, scrape_proxy_bytes),
         "dotrepoToScrapeProxyRatio": safe_ratio(dotrepo_bytes, scrape_proxy_bytes),
+        "uniqueFieldCount": len(fields),
+        "dotrepoBatchQueryRequests": dotrepo_batch_query_requests,
+        "scrapeProxyRequests": scrape_proxy_requests,
+        "requestsSaved": requests_saved,
+        "requestReductionRate": safe_ratio(requests_saved, scrape_proxy_requests),
         "intentSummaries": intent_summaries,
     }
     gates = build_gates(
@@ -446,6 +489,8 @@ def summarize(
         "notes": [
             "scrapeProxyBytes uses checked-in record.toml and evidence.md as a deterministic local proxy, not live network scrape bytes",
             "dotrepoBytes counts unique public profile.json and query-input payloads needed by the workload",
+            "dotrepoBatchQueryRequests estimates cacheable public batch-query GETs using the documented repository, path, and result limits",
+            "scrapeProxyRequests counts unique checked-in record/evidence proxy files, not the larger live scrape request graph",
         ],
     }
 
@@ -471,6 +516,11 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| bytes saved | {summary['bytesSaved']} |",
         f"| bytes saved ratio | {summary['bytesSavedRatio']} |",
         f"| dotrepo to scrape proxy ratio | {summary['dotrepoToScrapeProxyRatio']} |",
+        f"| unique fields requested | {summary['uniqueFieldCount']} |",
+        f"| dotrepo batch query requests | {summary['dotrepoBatchQueryRequests']} |",
+        f"| scrape proxy requests | {summary['scrapeProxyRequests']} |",
+        f"| requests saved | {summary['requestsSaved']} |",
+        f"| request reduction rate | {summary['requestReductionRate']} |",
         "",
         "## Gates",
         "",

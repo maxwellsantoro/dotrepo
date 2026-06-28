@@ -64,6 +64,12 @@ def parse_args() -> argparse.Namespace:
         help="Fail when the high-signal profile ratio is below this threshold",
     )
     parser.add_argument(
+        "--max-conflict-rate",
+        type=float,
+        default=1.0,
+        help="Fail when the share of valid profiles with selected-record conflicts exceeds this threshold",
+    )
+    parser.add_argument(
         "--max-missing-signal",
         action="append",
         default=[],
@@ -256,6 +262,7 @@ def profile_quality(profile: dict[str, Any]) -> dict[str, Any]:
     completeness = profile.get("completeness") or {}
     trust = profile.get("trust") or {}
     purpose = str(profile.get("purpose") or "").strip()
+    conflict_count = int(completeness.get("conflictCount") or 0)
     signal_flags = {
         "hasPurpose": bool(purpose),
         "hasBuild": bool(completeness.get("hasBuild")),
@@ -264,7 +271,7 @@ def profile_quality(profile: dict[str, Any]) -> dict[str, Any]:
         "hasSecurityContact": bool(completeness.get("hasSecurityContact")),
         "hasOwnershipSignal": bool(completeness.get("hasOwnershipSignal")),
         "hasLicense": bool(completeness.get("hasLicense")),
-        "hasNoConflicts": int(completeness.get("conflictCount") or 0) == 0,
+        "hasNoConflicts": conflict_count == 0,
     }
     selected_status = str(trust.get("selectedStatus") or "unknown")
     confidence = str(trust.get("confidence") or "unknown")
@@ -277,6 +284,7 @@ def profile_quality(profile: dict[str, Any]) -> dict[str, Any]:
     return {
         "selectedStatus": selected_status,
         "confidence": confidence,
+        "conflictCount": conflict_count,
         "signalFlags": signal_flags,
         "signalCount": sum(1 for value in signal_flags.values() if value),
         "isHighSignal": is_high_signal,
@@ -321,6 +329,7 @@ def summarize(
     min_high_signal: int,
     max_items: int,
     min_high_signal_ratio: float = 0.0,
+    max_conflict_rate: float = 1.0,
     max_missing_signal: dict[str, int] | None = None,
     min_signal: dict[str, int] | None = None,
     max_malformed_profiles: int = 0,
@@ -335,6 +344,8 @@ def summarize(
     profile_count = len(profiles)
     high_signal_profiles = [profile for profile in profiles if profile["isHighSignal"]]
     lower_signal_profiles = [profile for profile in profiles if not profile["isHighSignal"]]
+    conflict_profiles = [profile for profile in profiles if profile["conflictCount"] > 0]
+    total_conflict_count = sum(profile["conflictCount"] for profile in profiles)
     status_counts = Counter(profile["selectedStatus"] for profile in profiles)
     confidence_counts = Counter(profile["confidence"] for profile in profiles)
     signal_counts: Counter[str] = Counter()
@@ -346,6 +357,7 @@ def summarize(
         missing_signal_counts.update(profile["missingSignals"])
 
     high_signal_ratio = ratio(len(high_signal_profiles), profile_count)
+    conflict_rate = ratio(len(conflict_profiles), profile_count)
     missing_limits = max_missing_signal or {}
     missing_signal_gates = {
         signal: {
@@ -380,6 +392,11 @@ def summarize(
             "actual": high_signal_ratio,
             "passed": (high_signal_ratio or 0.0) >= min_high_signal_ratio,
         },
+        "maxConflictRate": {
+            "threshold": max_conflict_rate,
+            "actual": conflict_rate,
+            "passed": (conflict_rate or 0.0) <= max_conflict_rate,
+        },
         "minSignal": min_signal_gates,
         "maxMissingSignal": missing_signal_gates,
         "maxMalformedProfiles": {
@@ -392,6 +409,7 @@ def summarize(
         gates["minProfiles"]["passed"]
         and gates["minHighSignal"]["passed"]
         and gates["minHighSignalRatio"]["passed"]
+        and gates["maxConflictRate"]["passed"]
         and all(gate["passed"] for gate in min_signal_gates.values())
         and all(gate["passed"] for gate in missing_signal_gates.values())
         and gates["maxMalformedProfiles"]["passed"]
@@ -406,6 +424,9 @@ def summarize(
             "malformedProfileCount": len(malformed_profiles),
             "highSignalProfileCount": len(high_signal_profiles),
             "highSignalRatio": high_signal_ratio,
+            "conflictProfileCount": len(conflict_profiles),
+            "conflictRate": conflict_rate,
+            "totalConflictCount": total_conflict_count,
             "statusCounts": dict(sorted(status_counts.items())),
             "confidenceCounts": dict(sorted(confidence_counts.items())),
             "signalCounts": dict(sorted(signal_counts.items())),
@@ -416,6 +437,10 @@ def summarize(
         "lowerSignalProfiles": sorted(
             lower_signal_profiles,
             key=lambda profile: (profile["signalCount"], profile["identity"]),
+        )[:max_items],
+        "conflictProfiles": sorted(
+            conflict_profiles,
+            key=lambda profile: (-profile["conflictCount"], profile["identity"]),
         )[:max_items],
         "malformedProfiles": malformed_profiles[:max_items],
     }
@@ -434,9 +459,13 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| Malformed profiles | {summary['malformedProfileCount']} |",
         f"| High-signal profiles | {summary['highSignalProfileCount']} |",
         f"| High-signal ratio | {summary['highSignalRatio']} |",
+        f"| Conflict-bearing profiles | {summary['conflictProfileCount']} |",
+        f"| Conflict rate | {summary['conflictRate']} |",
+        f"| Total selected-record conflicts | {summary['totalConflictCount']} |",
         f"| Min profiles gate | {gates['minProfiles']['actual']} / {gates['minProfiles']['threshold']} |",
         f"| Min high-signal gate | {gates['minHighSignal']['actual']} / {gates['minHighSignal']['threshold']} |",
         f"| Min high-signal ratio gate | {gates['minHighSignalRatio']['actual']} / {gates['minHighSignalRatio']['threshold']} |",
+        f"| Max conflict rate gate | {gates['maxConflictRate']['actual']} / {gates['maxConflictRate']['threshold']} |",
         f"| Max malformed profiles gate | {gates['maxMalformedProfiles']['actual']} / {gates['maxMalformedProfiles']['threshold']} |",
         "",
     ]
@@ -467,6 +496,16 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"confidence `{profile['confidence']}`, missing {missing}"
             )
     lines.append("")
+    lines.extend(["## Conflict-Bearing Profiles", ""])
+    if not report["conflictProfiles"]:
+        lines.append("- None in this report window.")
+    else:
+        for profile in report["conflictProfiles"]:
+            lines.append(
+                f"- `{profile['identity']}`: {profile['conflictCount']} selected-record conflicts, "
+                f"status `{profile['selectedStatus']}`, confidence `{profile['confidence']}`"
+            )
+    lines.append("")
     lines.extend(["## Malformed Profiles", ""])
     if not report["malformedProfiles"]:
         lines.append("- None.")
@@ -486,6 +525,7 @@ def main() -> int:
         min_high_signal=args.min_high_signal,
         max_items=args.max_items,
         min_high_signal_ratio=args.min_high_signal_ratio,
+        max_conflict_rate=args.max_conflict_rate,
         max_missing_signal=parse_max_missing_signal(args.max_missing_signal),
         min_signal=parse_min_signal(args.min_signal),
         max_malformed_profiles=args.max_malformed_profiles,

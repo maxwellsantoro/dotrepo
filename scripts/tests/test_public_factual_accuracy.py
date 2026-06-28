@@ -76,6 +76,18 @@ def test_accuracy_report_distinguishes_correct_and_missing_values(tmp_path: Path
         "missingCount": 1,
         "mismatchCount": 0,
         "accuracyRate": 0.5,
+        "missingRate": 0.5,
+        "mismatchRate": 0.0,
+    }
+    assert report["gates"]["maxMissingRate"] == {
+        "threshold": 1.0,
+        "actual": 0.5,
+        "passed": True,
+    }
+    assert report["gates"]["maxMismatchRate"] == {
+        "threshold": 1.0,
+        "actual": 0.0,
+        "passed": True,
     }
     assert report["assertions"][0]["outcome"] == "correct"
     assert report["assertions"][1]["outcome"] == "missing"
@@ -96,5 +108,39 @@ def test_accuracy_report_detects_mismatched_values_and_renders_sources(tmp_path:
 
     assert report["passed"] is True
     assert report["summary"]["mismatchCount"] == 1
+    assert report["summary"]["mismatchRate"] == 0.5
+    assert "| Missing rate | 0.0 |" in markdown
+    assert "| Mismatch rate | 0.5 |" in markdown
     assert "| `name` | `github.com/example/orbit` | `repo.name` | mismatch |" in markdown
     assert "[README H1](https://github.com/example/orbit)" in markdown
+
+
+def test_mismatch_rate_gate_failure_sets_passed_false(tmp_path: Path) -> None:
+    public_root = tmp_path / "public"
+    workload = tmp_path / "workload.json"
+    write_query_input(
+        public_root,
+        "github.com/example/orbit",
+        {"repo": {"name": "Wrong", "test": "cargo test"}},
+    )
+    write_workload(workload)
+
+    report = accuracy.summarize(
+        public_root,
+        workload,
+        min_accuracy_rate=0.0,
+        max_missing_rate=0.0,
+        max_mismatch_rate=0.25,
+    )
+
+    assert report["passed"] is False
+    assert report["gates"]["maxMissingRate"] == {
+        "threshold": 0.0,
+        "actual": 0.0,
+        "passed": True,
+    }
+    assert report["gates"]["maxMismatchRate"] == {
+        "threshold": 0.25,
+        "actual": 0.5,
+        "passed": False,
+    }

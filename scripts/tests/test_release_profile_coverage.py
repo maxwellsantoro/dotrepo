@@ -28,6 +28,7 @@ def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path
     ]
     assert command[command.index("--min-profiles") + 1] == "157"
     assert command[command.index("--min-high-signal") + 1] == "107"
+    assert command[command.index("--max-conflict-rate") + 1] == "0.0"
     assert command[command.index("--max-malformed-profiles") + 1] == "0"
     assert str(output_root / "public-profile-coverage.json") in command
     assert str(output_root / "public-profile-coverage.md") in command
@@ -43,6 +44,7 @@ def test_profile_coverage_baseline_is_well_formed() -> None:
     assert baseline["schema"] == "dotrepo-public-profile-coverage-baseline/v0"
     assert baseline["minProfiles"] >= baseline["minHighSignal"] > 0
     assert 0 < baseline["minHighSignalRatio"] <= 1
+    assert 0 <= baseline["maxConflictRate"] <= 1
     assert baseline["maxMalformedProfiles"] == 0
     assert all(
         0 < minimum <= baseline["minProfiles"]
@@ -149,6 +151,8 @@ def test_release_gate_applies_cited_factual_accuracy_baseline(tmp_path: Path) ->
     assert command[command.index("--min-assertions") + 1] == "20"
     assert command[command.index("--min-repositories") + 1] == "3"
     assert command[command.index("--min-accuracy-rate") + 1] == "1.0"
+    assert command[command.index("--max-missing-rate") + 1] == "0.0"
+    assert command[command.index("--max-mismatch-rate") + 1] == "0.0"
     assert str(output_root / "public-factual-accuracy.json") in command
     assert str(output_root / "public-factual-accuracy.md") in command
 
@@ -166,6 +170,8 @@ def test_factual_accuracy_baseline_and_workload_are_well_formed() -> None:
         "minAssertions": 20,
         "minRepositories": 3,
         "minAccuracyRate": 1.0,
+        "maxMissingRate": 0.0,
+        "maxMismatchRate": 0.0,
     }
     assert workload["schema"] == "dotrepo-public-factual-accuracy-workload/v0"
     assert len(workload["assertions"]) == 20
