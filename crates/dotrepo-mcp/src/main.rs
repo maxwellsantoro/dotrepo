@@ -13,7 +13,6 @@ use reqwest::blocking::Client;
 use reqwest::Url;
 use serde::Deserialize;
 use serde_json::{json, to_value, Value};
-use std::fs;
 use std::io::{self, BufReader};
 use std::path::{Path, PathBuf};
 use std::time::Duration;

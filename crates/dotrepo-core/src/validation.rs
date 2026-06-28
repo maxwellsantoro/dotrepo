@@ -12,7 +12,8 @@ use crate::claims::{
 use crate::selection::{candidate_from_document, sort_candidates};
 use crate::synthesis::{load_synthesis_document, validate_synthesis};
 use crate::util::{
-    display_path, display_root, parse_rfc3339, repository_identity, validate_shell_safe_command,
+    display_path, display_root, parse_rfc3339, repository_identity, repository_reference_identity,
+    validate_shell_safe_command,
 };
 use crate::{load_manifest_document, load_manifest_file, record_summary, RecordSummary};
 
@@ -256,6 +257,7 @@ pub fn validate_manifest_diagnostics(
     }
 
     diagnostics.extend(validate_readme_sections(manifest));
+    diagnostics.extend(validate_relations(manifest));
 
     if matches!(manifest.record.mode, RecordMode::Native) {
         diagnostics.extend(validate_native_paths(root, manifest));
@@ -289,6 +291,59 @@ pub fn validate_manifest_diagnostics(
         }
     }
 
+    diagnostics
+}
+
+fn validate_relations(manifest: &Manifest) -> Vec<ValidationDiagnostic> {
+    let mut diagnostics = Vec::new();
+    let Some(relations) = manifest.relations.as_ref() else {
+        return diagnostics;
+    };
+    for (index, target) in relations.references.iter().enumerate() {
+        if repository_reference_identity(target).is_none() {
+            diagnostics.push(validation_error(
+                "invalid_relation_reference",
+                "validate_relations",
+                format!(
+                    "relations.references[{index}] must be host/owner/repo or an HTTP(S) repository URL"
+                ),
+            ));
+        }
+    }
+    for (index, link) in relations.links.iter().enumerate() {
+        if repository_reference_identity(&link.target).is_none() {
+            diagnostics.push(validation_error(
+                "invalid_relation_target",
+                "validate_relations",
+                format!(
+                    "relations.links[{index}].target must be host/owner/repo or an HTTP(S) repository URL"
+                ),
+            ));
+        }
+        if link
+            .trust
+            .confidence
+            .as_deref()
+            .unwrap_or("")
+            .trim()
+            .is_empty()
+        {
+            diagnostics.push(validation_error(
+                "relation_trust_confidence_required",
+                "validate_relations",
+                format!("relations.links[{index}].trust.confidence must not be empty"),
+            ));
+        }
+        if link.trust.provenance.is_empty() {
+            diagnostics.push(validation_error(
+                "relation_trust_provenance_required",
+                "validate_relations",
+                format!(
+                    "relations.links[{index}].trust.provenance must list at least one provenance entry"
+                ),
+            ));
+        }
+    }
     diagnostics
 }
 

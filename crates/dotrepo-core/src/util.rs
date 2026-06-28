@@ -202,6 +202,30 @@ pub fn repository_identity(url: &str) -> Option<(String, String, String)> {
     Some((host, owner, repo))
 }
 
+pub(crate) fn repository_reference_identity(value: &str) -> Option<(String, String, String)> {
+    let trimmed = value.trim();
+    let without_scheme = trimmed
+        .strip_prefix("https://")
+        .or_else(|| trimmed.strip_prefix("http://"))
+        .unwrap_or(trimmed);
+    let without_suffix = without_scheme
+        .split(['?', '#'])
+        .next()
+        .unwrap_or(without_scheme)
+        .trim_end_matches('/')
+        .trim_end_matches(".git");
+    let parts = without_suffix
+        .split('/')
+        .filter(|part| !part.is_empty())
+        .collect::<Vec<_>>();
+    if parts.len() != 3
+        || validate_repository_identity_segments(parts[0], parts[1], parts[2]).is_err()
+    {
+        return None;
+    }
+    Some((parts[0].into(), parts[1].into(), parts[2].into()))
+}
+
 pub fn record_status_name(status: &dotrepo_schema::RecordStatus) -> &'static str {
     match status {
         dotrepo_schema::RecordStatus::Draft => "draft",

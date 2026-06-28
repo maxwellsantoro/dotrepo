@@ -291,6 +291,7 @@ pub enum SynthesisFailureClass {
     TransportError,
     RateLimited,
     InvalidSchemaOutput,
+    GroundingViolation,
     FieldBoundsViolation,
     FactualConflict,
     UnsafeShellLikeValue,
@@ -373,15 +374,25 @@ pub struct CrawlRepositoryReport {
     pub diagnostics: Vec<CrawlDiagnostic>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SynthesizeRepositoryRequest {
     pub record_root: PathBuf,
     pub repository: RepositoryRef,
+    pub manifest: dotrepo_schema::Manifest,
+    #[serde(default)]
+    pub sources: Vec<SynthesisSourceDocument>,
     pub generated_at: Option<String>,
     pub source_commit: Option<String>,
     pub model: String,
     pub provider: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SynthesisSourceDocument {
+    pub path: String,
+    pub contents: String,
 }
 
 #[derive(Debug, Clone)]

@@ -218,7 +218,9 @@ cargo run -p dotrepo-cli -- public compare \
 curl -s "https://dotrepo.org/v0/compare?repo=github.com/sharkdp/fd&repo=github.com/BurntSushi/ripgrep"
 ```
 
-Relationship traversal starts with declared profile references:
+Relationship traversal covers trust-bearing alternatives, dependencies,
+predecessors, forks, related projects, and references, including semantic
+reverse edges:
 
 ```bash
 cargo run -p dotrepo-cli -- public relations github.com sharkdp fd
@@ -298,7 +300,8 @@ that have not adopted the protocol yet.
 - **Mode-aware validation**: native records and overlays validate differently
 - **Generated outputs**: supported, but not the sole editing surface
 - **Extension namespace**: `x.*` is reserved for non-core extensions
-- **Future workspace support**: relations are reserved now so repos do not become permanent islands
+- **Repository relations**: explicit directed links carry their own trust;
+  workspace-specific relation kinds remain reserved for future work
 
 ## Versioning note
 
@@ -320,8 +323,8 @@ Those are separate version lines on purpose:
 - a thin import path for bootstrapping records from `README.md`, `CODEOWNERS`, and `SECURITY.md`
 - a thin stdio MCP server exposing trust-aware validate/query/trust/generate-check/import tools
 - an autonomous crawler with deterministic verification, field scoring,
-  progressive adjudication providers, promotion, refresh planning, and batch
-  telemetry
+  progressive adjudication providers, optional bounded synthesis sidecars,
+  promotion, refresh planning, and batch telemetry
 - updated RFCs that reflect the protocol + toolchain + index model
 - example native and overlay records
 - a seeded `index/` tree with real overlay layout and validation rules
@@ -335,11 +338,11 @@ This repo ships the current dotrepo protocol and reference toolchain surface.
 The crates implement import, validation, querying, generated-surface checks,
 index validation, claims, public export, and an MCP server.
 
-The current public site includes exact lookup, a searchable repository
-catalog, factual profile comparison, and relationship lookup. What remains
-intentionally deferred is ranking and synthesis, public mutation APIs, bundle
-mode, first-class workspace semantics, broad editor automation, and arbitrary
-prose round-tripping.
+The current public site includes exact lookup, ranked repository search,
+factual profile comparison, relationship lookup, and optional bounded research
+synthesis. What remains intentionally deferred is production-scale ranking
+calibration, public mutation APIs, bundle mode, first-class workspace semantics,
+broad editor automation, and arbitrary prose round-tripping.
 
 ## Read next
 

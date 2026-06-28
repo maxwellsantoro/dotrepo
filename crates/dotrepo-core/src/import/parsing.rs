@@ -172,7 +172,7 @@ fn credible_logo_alt_title(title: &str) -> Option<String> {
         "badge", "build", "ci", "coverage", "docs", "image", "license", "logo", "package",
         "release", "status", "test", "version",
     ];
-    if is_non_project_heading(&title)
+    if is_non_project_heading(title)
         || badge_words.iter().any(|word| {
             lowered
                 .split(|ch: char| !ch.is_ascii_alphanumeric())

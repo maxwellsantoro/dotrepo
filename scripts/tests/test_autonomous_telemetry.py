@@ -4,12 +4,44 @@ import importlib.util
 from argparse import Namespace
 from pathlib import Path
 
+import pytest
+
 
 SCRIPT = Path(__file__).resolve().parents[1] / "run_autonomous_index_batch.py"
 SPEC = importlib.util.spec_from_file_location("run_autonomous_index_batch", SCRIPT)
 autonomous_batch = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(autonomous_batch)
+
+
+def test_resolve_synthesis_config_requires_complete_opt_in(monkeypatch) -> None:
+    monkeypatch.delenv("DOTREPO_SYNTHESIS_URL", raising=False)
+    monkeypatch.delenv("DOTREPO_SYNTHESIS_MODEL", raising=False)
+    monkeypatch.delenv("DOTREPO_SYNTHESIS_PROVIDER", raising=False)
+    args = Namespace(
+        synthesize=True,
+        synthesis_model=None,
+        synthesis_provider=None,
+    )
+
+    with pytest.raises(SystemExit, match="requires model and provider"):
+        autonomous_batch.resolve_synthesis_config(args)
+
+
+def test_resolve_synthesis_config_uses_environment(monkeypatch) -> None:
+    monkeypatch.setenv("DOTREPO_SYNTHESIS_URL", "http://127.0.0.1:9999/synthesize")
+    monkeypatch.setenv("DOTREPO_SYNTHESIS_MODEL", "research-model")
+    monkeypatch.setenv("DOTREPO_SYNTHESIS_PROVIDER", "local-sidecar")
+    args = Namespace(
+        synthesize=True,
+        synthesis_model=None,
+        synthesis_provider=None,
+    )
+
+    assert autonomous_batch.resolve_synthesis_config(args) == (
+        "research-model",
+        "local-sidecar",
+    )
 
 
 def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> None:

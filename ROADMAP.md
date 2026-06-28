@@ -470,17 +470,23 @@ Current status:
 - public `profile.json` can now expose validated optional `synthesis.toml`
   guidance in a separate `synthesis` section, preserving factual fields as the
   authority and failing export on invalid or fact-conflicting synthesis
+- crawler synthesis now runs through an opt-in bounded HTTP sidecar using the
+  freshly validated in-memory manifest and capped source excerpts; factual
+  build/test commands are injected by the crawler, model output is schema-
+  checked before atomic writeback, failures remain nonblocking, and autonomous
+  telemetry retains synthesis success and failure classes
 - `dotrepo public relations` provides the first relationship traversal response
-  over declared profile references and inferred reverse-reference edges,
-  resolving related profiles when they are present in the same index
+  over legacy references and explicit trust-bearing links for alternatives,
+  dependencies, predecessors, forks, related projects, and references; reverse
+  traversal emits semantic inverses and resolves profiles present in the index
 - the hosted Worker now serves cacheable GET search, compare, and relations
   routes from the staged public snapshot
 - hosted search now uses inventory-only matching for text-only queries, loading
   full `profile.json` snapshots only when completeness or trust filters require
   them; this keeps inventory-scale discovery cheaper on the Worker
-- production-scale ranking calibration, richer relation semantics beyond
-  reference/referenced-by traversal, and production synthesis generation remain
-  open
+- production-scale ranking calibration, automated evidence-backed relation
+  discovery, and sustained production synthesis runs with measured quality/cost
+  remain open
 
 ### Milestone 4: Index at ecosystem scale
 

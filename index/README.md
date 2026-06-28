@@ -8,6 +8,8 @@ Records enter through two paths:
 
 - the autonomous factory publishes generated overlays after deterministic
   extraction, narrow model adjudication when needed, and machine validation
+- optional `synthesis.toml` guidance may be generated through the bounded
+  synthesis sidecar after factual validation; it never controls factual fields
 - maintainers and contributors can submit native claims or evidence-backed
   overlays through the normal pull-request path
 
@@ -27,6 +29,7 @@ index/
         <repo>/
           record.toml
           evidence.md
+          synthesis.toml  # optional, bounded non-factual guidance
 ```
 
 ## Index rules

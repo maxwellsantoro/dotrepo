@@ -188,8 +188,15 @@ pub(crate) fn crawl_repository_from_snapshot(
         }
     }
 
-    let (synthesis, synthesis_failure, synthesis_diagnostics) =
-        maybe_attempt_synthesis(request, &record_root, &generated_at);
+    let synthesis_sources = synthesis_sources_from_materialized(materialized);
+    let (synthesis, synthesis_failure, synthesis_diagnostics) = maybe_attempt_synthesis(
+        request,
+        &record_root,
+        &import_plan.manifest,
+        synthesis_sources,
+        snapshot.head_sha.as_deref(),
+        &generated_at,
+    );
     diagnostics.extend(synthesis_diagnostics);
 
     let preserved_synthesis_failure = if request.synthesize {
@@ -380,6 +387,9 @@ fn append_github_evidence(
 fn maybe_attempt_synthesis(
     request: &CrawlRepositoryRequest,
     record_root: &Path,
+    manifest: &dotrepo_schema::Manifest,
+    sources: Vec<crate::SynthesisSourceDocument>,
+    source_commit: Option<&str>,
     occurred_at: &str,
 ) -> (
     Option<crate::SynthesisPlan>,
@@ -434,8 +444,10 @@ fn maybe_attempt_synthesis(
     let synth_request = SynthesizeRepositoryRequest {
         record_root: record_root.to_path_buf(),
         repository: request.repository.clone(),
+        manifest: manifest.clone(),
+        sources,
         generated_at: Some(occurred_at.into()),
-        source_commit: None,
+        source_commit: source_commit.map(str::to_string),
         model: model.clone(),
         provider: provider.clone(),
     };
@@ -456,6 +468,34 @@ fn maybe_attempt_synthesis(
     }
 }
 
+fn synthesis_sources_from_materialized(
+    materialized: &crate::materialize::MaterializedRepository,
+) -> Vec<crate::SynthesisSourceDocument> {
+    materialized
+        .written_files
+        .iter()
+        .take(12)
+        .filter_map(|file| {
+            let path = materialized.repository_root.join(&file.relative_path);
+            let contents = std::fs::read_to_string(path).ok()?;
+            let contents = contents.chars().take(32_000).collect::<String>();
+            Some(crate::SynthesisSourceDocument {
+                path: file.relative_path.to_string_lossy().replace('\\', "/"),
+                contents,
+            })
+        })
+        .scan(0usize, |total, source| {
+            let remaining = 128_000usize.saturating_sub(*total);
+            if remaining == 0 {
+                return None;
+            }
+            let contents = source.contents.chars().take(remaining).collect::<String>();
+            *total += contents.chars().count();
+            Some(crate::SynthesisSourceDocument { contents, ..source })
+        })
+        .collect()
+}
+
 fn classify_synthesis_failure(
     err: &anyhow::Error,
     occurred_at: &str,
@@ -469,11 +509,20 @@ fn classify_synthesis_failure(
         SynthesisFailureClass::FactualConflict
     } else if message.contains("must not be empty") {
         SynthesisFailureClass::EmptyRequiredField
-    } else if message.contains("schema") {
+    } else if message.contains("schema")
+        || message.contains("invalid JSON")
+        || message.contains("unknown field")
+    {
         SynthesisFailureClass::InvalidSchemaOutput
-    } else if message.contains("bound") || message.contains("too long") {
+    } else if message.contains("not grounded") || message.contains("safe relative path") {
+        SynthesisFailureClass::GroundingViolation
+    } else if message.contains("bound")
+        || message.contains("too long")
+        || message.contains("must not exceed")
+        || message.contains("more than")
+    {
         SynthesisFailureClass::FieldBoundsViolation
-    } else if message.contains("rate limit") {
+    } else if message.contains("rate limit") || message.contains("HTTP 429") {
         SynthesisFailureClass::RateLimited
     } else {
         SynthesisFailureClass::TransportError

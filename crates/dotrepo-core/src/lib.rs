@@ -28,7 +28,8 @@ pub use query::{
 };
 pub use synthesis::{
     generate_basic_synthesis, get_synthesis, load_synthesis_document, load_synthesis_from_root,
-    validate_synthesis, write_synthesis, LoadedSynthesis, SynthesisReadReport, SynthesisWritePlan,
+    plan_synthesis_write, validate_synthesis, write_synthesis, LoadedSynthesis,
+    SynthesisReadReport, SynthesisWritePlan,
 };
 pub(crate) use util::display_root;
 pub(crate) use util::manifest_path;
@@ -93,13 +94,13 @@ pub use public::{
     PublicProfileCompareTextValue, PublicProfileSearchAppliedFilters, PublicProfileSearchItem,
     PublicProfileSearchOptions, PublicProfileSearchResponse, PublicQueryInputConflict,
     PublicQueryInputSelection, PublicQueryInputSnapshot, PublicQueryResponse,
-    PublicRecordArtifacts, PublicRelationItem, PublicRelationsResponse, PublicRepositoryFields,
-    PublicRepositoryIdentity, PublicRepositoryInventoryEntry, PublicRepositoryInventoryResponse,
-    PublicRepositoryLinks, PublicRepositorySummaryResponse, PublicResearchCompleteness,
-    PublicResearchDocs, PublicResearchExecution, PublicResearchOwnership,
-    PublicResearchProfileResponse, PublicResearchSynthesis, PublicResearchSynthesisArchitecture,
-    PublicResearchSynthesisForAgents, PublicResearchTrust, PublicSelectedRecord,
-    PublicSelectionReport, PublicSnapshotMetadata, PublicTrustResponse,
+    PublicRecordArtifacts, PublicRelationItem, PublicRelationTrust, PublicRelationsResponse,
+    PublicRepositoryFields, PublicRepositoryIdentity, PublicRepositoryInventoryEntry,
+    PublicRepositoryInventoryResponse, PublicRepositoryLinks, PublicRepositorySummaryResponse,
+    PublicResearchCompleteness, PublicResearchDocs, PublicResearchExecution,
+    PublicResearchOwnership, PublicResearchProfileResponse, PublicResearchSynthesis,
+    PublicResearchSynthesisArchitecture, PublicResearchSynthesisForAgents, PublicResearchTrust,
+    PublicSelectedRecord, PublicSelectionReport, PublicSnapshotMetadata, PublicTrustResponse,
     PUBLIC_BATCH_MAX_IDENTITIES, PUBLIC_BATCH_MAX_PATHS, PUBLIC_BATCH_MAX_QUERY_RESULTS,
 };
 

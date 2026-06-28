@@ -81,6 +81,15 @@ struct CrawlArgs {
     /// Optional explicit source URL override.
     #[arg(long)]
     source_url: Option<String>,
+    /// Request optional bounded synthesis after the factual crawl.
+    #[arg(long)]
+    synthesize: bool,
+    /// Model identifier sent to the configured synthesis sidecar.
+    #[arg(long, requires = "synthesize")]
+    synthesis_model: Option<String>,
+    /// Provider identifier sent to the configured synthesis sidecar.
+    #[arg(long, requires = "synthesize")]
+    synthesis_provider: Option<String>,
     /// Write the planned overlay into the index root and update crawler state.
     #[arg(long)]
     write: bool,
@@ -190,6 +199,8 @@ struct CrawlCommandReport {
     wrote: bool,
     manifest_path: PathBuf,
     evidence_path: Option<PathBuf>,
+    synthesis_path: Option<PathBuf>,
+    synthesis_failure: Option<dotrepo_crawler::SynthesisFailureMetadata>,
     record_status: RecordStatus,
     state_path: Option<PathBuf>,
     escalation: ImportEscalationReport,
@@ -381,9 +392,9 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
         repository: repository.clone(),
         generated_at: args.generated_at,
         source_url: args.source_url,
-        synthesize: false,
-        synthesis_model: None,
-        synthesis_provider: None,
+        synthesize: args.synthesize,
+        synthesis_model: args.synthesis_model,
+        synthesis_provider: args.synthesis_provider,
         prior_synthesis_failure: None,
     })?;
 
@@ -414,6 +425,12 @@ fn cmd_crawl(args: CrawlArgs) -> Result<()> {
         wrote,
         manifest_path: report.writeback_plan.factual.manifest_path.clone(),
         evidence_path: report.writeback_plan.factual.evidence_path.clone(),
+        synthesis_path: report
+            .writeback_plan
+            .synthesis
+            .as_ref()
+            .map(|plan| plan.synthesis_path.clone()),
+        synthesis_failure: report.writeback_plan.synthesis_failure.clone(),
         record_status: report
             .writeback_plan
             .factual
@@ -1625,6 +1642,33 @@ https://github.com/tokio-rs/tokio
                 assert!(seed.dry_run);
             }
             _ => panic!("expected seed command"),
+        }
+    }
+
+    #[test]
+    fn cli_parses_crawl_with_bounded_synthesis() {
+        let cli = Cli::try_parse_from([
+            "dotrepo-crawler",
+            "crawl",
+            "--owner",
+            "example",
+            "--repo",
+            "orbit",
+            "--synthesize",
+            "--synthesis-model",
+            "research-model",
+            "--synthesis-provider",
+            "local-sidecar",
+        ])
+        .expect("cli parses");
+
+        match cli.command {
+            Command::Crawl(crawl) => {
+                assert!(crawl.synthesize);
+                assert_eq!(crawl.synthesis_model.as_deref(), Some("research-model"));
+                assert_eq!(crawl.synthesis_provider.as_deref(), Some("local-sidecar"));
+            }
+            _ => panic!("expected crawl command"),
         }
     }
 

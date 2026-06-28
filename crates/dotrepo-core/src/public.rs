@@ -1,5 +1,7 @@
 use anyhow::{anyhow, bail, Result};
-use dotrepo_schema::{parse_synthesis_document, Manifest, SynthesisDocument, SynthesisMode};
+use dotrepo_schema::{
+    parse_synthesis_document, Manifest, RelationKind, SynthesisDocument, SynthesisMode,
+};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
@@ -15,10 +17,10 @@ use crate::selection::{
     resolve_selection_reason, CandidateManifest,
 };
 use crate::synthesis::validate_synthesis;
-use crate::util::validate_repository_identity_segments;
 use crate::util::{
     display_path, parse_rfc3339, record_status_name, render_rfc3339, repository_identity,
 };
+use crate::util::{repository_reference_identity, validate_repository_identity_segments};
 use crate::validation::collect_record_dirs;
 use crate::{ConflictRelationship, RecordSummary, SelectionReason};
 
@@ -537,11 +539,25 @@ pub struct PublicRelationItem {
     pub direction: String,
     pub target: String,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub notes: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub trust: Option<PublicRelationTrust>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub identity: Option<PublicRepositoryIdentity>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub profile: Option<Box<PublicProfileSearchItem>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub error: Option<Box<PublicErrorDetail>>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicRelationTrust {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub confidence: Option<String>,
+    pub provenance: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub notes: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -1974,26 +1990,11 @@ pub fn public_profile_compare(
 }
 
 fn parse_relation_reference(value: &str) -> Option<PublicRepositoryIdentity> {
-    let trimmed = value.trim();
-    let without_scheme = trimmed
-        .strip_prefix("https://")
-        .or_else(|| trimmed.strip_prefix("http://"))
-        .unwrap_or(trimmed);
-    let without_git = without_scheme.trim_end_matches(".git");
-    let parts = without_git
-        .split('/')
-        .filter(|part| !part.is_empty())
-        .collect::<Vec<_>>();
-    if parts.len() != 3 {
-        return None;
-    }
-    if validate_repository_identity_segments(parts[0], parts[1], parts[2]).is_err() {
-        return None;
-    }
+    let (host, owner, repo) = repository_reference_identity(value)?;
     Some(PublicRepositoryIdentity {
-        host: parts[0].to_string(),
-        owner: parts[1].to_string(),
-        repo: parts[2].to_string(),
+        host,
+        owner,
+        repo,
         source: None,
     })
 }
@@ -2002,34 +2003,80 @@ fn relation_reference_key(identity: &PublicRepositoryIdentity) -> String {
     format!("{}/{}/{}", identity.host, identity.owner, identity.repo)
 }
 
-fn selected_relation_references(
+#[derive(Debug, Clone)]
+struct SelectedRelation {
+    relationship: &'static str,
+    inverse_relationship: &'static str,
+    target: String,
+    notes: Option<String>,
+    trust: Option<PublicRelationTrust>,
+}
+
+fn relation_names(kind: RelationKind) -> (&'static str, &'static str) {
+    match kind {
+        RelationKind::Reference => ("reference", "referenced_by"),
+        RelationKind::Alternative => ("alternative", "alternative"),
+        RelationKind::Dependency => ("dependency", "depended_on_by"),
+        RelationKind::Predecessor => ("predecessor", "successor"),
+        RelationKind::Fork => ("fork", "forked_by"),
+        RelationKind::Related => ("related", "related"),
+    }
+}
+
+fn selected_relations(
     index_root: &Path,
     identity: &PublicRepositoryIdentity,
-) -> Result<Vec<String>> {
+) -> Result<Vec<SelectedRelation>> {
     let scope_root =
         index_repository_scope(index_root, &identity.host, &identity.owner, &identity.repo)?;
     let candidates = resolve_candidates(&scope_root)?;
-    Ok(candidates[0]
-        .manifest
-        .relations
-        .as_ref()
-        .map(|relations| relations.references.clone())
-        .unwrap_or_default())
+    let Some(relations) = candidates[0].manifest.relations.as_ref() else {
+        return Ok(Vec::new());
+    };
+    let mut selected = relations
+        .references
+        .iter()
+        .cloned()
+        .map(|target| SelectedRelation {
+            relationship: "reference",
+            inverse_relationship: "referenced_by",
+            target,
+            notes: None,
+            trust: None,
+        })
+        .collect::<Vec<_>>();
+    selected.extend(relations.links.iter().map(|link| {
+        let (relationship, inverse_relationship) = relation_names(link.kind);
+        SelectedRelation {
+            relationship,
+            inverse_relationship,
+            target: link.target.clone(),
+            notes: link.notes.clone(),
+            trust: Some(PublicRelationTrust {
+                confidence: link.trust.confidence.clone(),
+                provenance: link.trust.provenance.clone(),
+                notes: link.trust.notes.clone(),
+            }),
+        }
+    }));
+    Ok(selected)
 }
 
 fn relation_item_with_profile(
     index_root: &Path,
     target: String,
-    relationship: &str,
+    relation: &SelectedRelation,
     direction: &str,
     freshness: PublicFreshness,
     base_path: &str,
 ) -> PublicRelationItem {
     let identity = parse_relation_reference(&target);
     let mut item = PublicRelationItem {
-        relationship: relationship.into(),
+        relationship: relation.relationship.into(),
         direction: direction.into(),
         target: target.clone(),
+        notes: relation.notes.clone(),
+        trust: relation.trust.clone(),
         identity: identity.clone(),
         profile: None,
         error: None,
@@ -2082,14 +2129,14 @@ pub fn public_repository_relations_with_base(
         source: None,
     };
     let selected_key = relation_reference_key(&selected_identity);
-    let references = selected_relation_references(index_root, &selected_identity)?;
+    let relations = selected_relations(index_root, &selected_identity)?;
 
     let mut items = Vec::new();
-    for target in references {
+    for relation in relations {
         items.push(relation_item_with_profile(
             index_root,
-            target,
-            "reference",
+            relation.target.clone(),
+            &relation,
             "outgoing",
             freshness.clone(),
             base_path,
@@ -2101,12 +2148,21 @@ pub fn public_repository_relations_with_base(
         if candidate_key == selected_key {
             continue;
         }
-        let references = selected_relation_references(index_root, &candidate)?;
-        if references.iter().any(|target| target == &selected_key) {
+        let relations = selected_relations(index_root, &candidate)?;
+        for relation in relations {
+            let points_to_selected = parse_relation_reference(&relation.target)
+                .map(|target| relation_reference_key(&target) == selected_key)
+                .unwrap_or(false);
+            if !points_to_selected {
+                continue;
+            }
             items.push(relation_item_with_profile(
                 index_root,
-                candidate_key,
-                "referenced_by",
+                candidate_key.clone(),
+                &SelectedRelation {
+                    relationship: relation.inverse_relationship,
+                    ..relation.clone()
+                },
                 "incoming",
                 freshness.clone(),
                 base_path,

@@ -651,17 +651,44 @@ async function buildRelationsResponse(env, request, identity, freshness, basePat
   if (snapshot === null) {
     throw new Error(repositoryNotFoundMessage(identity));
   }
-  const references = snapshot.selection?.manifest?.relations?.references ?? [];
+  const relationNames = {
+    reference: ["reference", "referenced_by"],
+    alternative: ["alternative", "alternative"],
+    dependency: ["dependency", "depended_on_by"],
+    predecessor: ["predecessor", "successor"],
+    fork: ["fork", "forked_by"],
+    related: ["related", "related"]
+  };
+  const manifestRelations = snapshot.selection?.manifest?.relations ?? {};
+  const relations = (manifestRelations.references ?? []).map((target) => ({
+    relationship: "reference",
+    inverseRelationship: "referenced_by",
+    target
+  }));
+  for (const link of manifestRelations.links ?? []) {
+    const names = relationNames[link.kind];
+    if (!names) continue;
+    relations.push({
+      relationship: names[0],
+      inverseRelationship: names[1],
+      target: link.target,
+      ...(link.notes ? { notes: link.notes } : {}),
+      ...(link.trust ? { trust: link.trust } : {})
+    });
+  }
   const items = [];
-  for (const target of references) {
+  async function appendItem(relation, target, direction) {
     const parsed = parseRepositoryParam(target);
     const item = {
-      relationship: "reference",
-      target
+      relationship: relation.relationship,
+      direction,
+      target,
+      ...(relation.notes ? { notes: relation.notes } : {}),
+      ...(relation.trust ? { trust: relation.trust } : {})
     };
     if (parsed.error) {
       items.push(item);
-      continue;
+      return;
     }
     item.identity = parsed.identity;
     const profile = await loadProfileSnapshot(
@@ -682,6 +709,58 @@ async function buildRelationsResponse(env, request, identity, freshness, basePat
     }
     items.push(item);
   }
+  for (const relation of relations) {
+    await appendItem(relation, relation.target, "outgoing");
+  }
+
+  const selectedKey = `${identity.host}/${identity.owner}/${identity.repo}`;
+  const inventory = await loadInventorySnapshot(env, request);
+  for (const entry of inventory.repositories ?? []) {
+    const candidate = entry.identity ?? {};
+    const candidateKey = `${candidate.host}/${candidate.owner}/${candidate.repo}`;
+    if (candidateKey === selectedKey) continue;
+    const candidateSnapshot = await loadQueryInputSnapshot(
+      env,
+      request,
+      candidate.host,
+      candidate.owner,
+      candidate.repo
+    );
+    if (candidateSnapshot === null) continue;
+    const candidateRelations = candidateSnapshot.selection?.manifest?.relations ?? {};
+    const links = (candidateRelations.references ?? []).map((target) => ({
+      relationship: "reference",
+      inverseRelationship: "referenced_by",
+      target
+    }));
+    for (const link of candidateRelations.links ?? []) {
+      const names = relationNames[link.kind];
+      if (!names) continue;
+      links.push({
+        relationship: names[0],
+        inverseRelationship: names[1],
+        target: link.target,
+        ...(link.notes ? { notes: link.notes } : {}),
+        ...(link.trust ? { trust: link.trust } : {})
+      });
+    }
+    for (const link of links) {
+      const parsed = parseRepositoryParam(link.target);
+      if (parsed.error) continue;
+      const targetKey = `${parsed.identity.host}/${parsed.identity.owner}/${parsed.identity.repo}`;
+      if (targetKey !== selectedKey) continue;
+      await appendItem(
+        { ...link, relationship: link.inverseRelationship },
+        candidateKey,
+        "incoming"
+      );
+    }
+  }
+  items.sort((left, right) =>
+    left.direction.localeCompare(right.direction) ||
+    left.relationship.localeCompare(right.relationship) ||
+    left.target.localeCompare(right.target)
+  );
   return {
     apiVersion: PUBLIC_API_VERSION,
     freshness,

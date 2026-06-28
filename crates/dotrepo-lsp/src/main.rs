@@ -1472,8 +1472,8 @@ fn schema_catalog() -> &'static [CatalogEntry] {
         CatalogEntry {
             path: "relations",
             kind: CatalogEntryKind::Section,
-            detail: "Reserved relation metadata",
-            documentation: "### `[relations]`\nReserved relationship surface for future workspace and bundle support.",
+            detail: "Cross-repository relation assertions",
+            documentation: "### `[relations]`\nDirected, identity-scoped relation assertions with independent trust metadata.",
             insert_text: "[relations]",
         },
         CatalogEntry {
@@ -1640,9 +1640,37 @@ fn schema_catalog() -> &'static [CatalogEntry] {
         CatalogEntry {
             path: "relations.references",
             kind: CatalogEntryKind::Field,
-            detail: "Reference list",
-            documentation: "`relations.references` is the reserved relation surface for future cross-repository references.",
+            detail: "Legacy reference list",
+            documentation: "`relations.references` preserves untyped cross-repository references. Prefer trust-bearing `relations.links` for new metadata.",
             insert_text: "references = ",
+        },
+        CatalogEntry {
+            path: "relations.links",
+            kind: CatalogEntryKind::Section,
+            detail: "Typed relation assertion",
+            documentation: "`[[relations.links]]` declares a directed relation with `kind`, `target`, optional `notes`, and required relation-level trust.",
+            insert_text: "[[relations.links]]",
+        },
+        CatalogEntry {
+            path: "relations.links.kind",
+            kind: CatalogEntryKind::Field,
+            detail: "Relation kind",
+            documentation: "Recognized kinds are `reference`, `alternative`, `dependency`, `predecessor`, `fork`, and `related`.",
+            insert_text: "kind = ",
+        },
+        CatalogEntry {
+            path: "relations.links.target",
+            kind: CatalogEntryKind::Field,
+            detail: "Repository identity target",
+            documentation: "Target as `host/owner/repo` or an HTTP(S) repository URL.",
+            insert_text: "target = ",
+        },
+        CatalogEntry {
+            path: "relations.links.trust",
+            kind: CatalogEntryKind::Section,
+            detail: "Relation-specific trust",
+            documentation: "`[relations.links.trust]` records confidence, provenance, and optional notes for this edge independently of record trust.",
+            insert_text: "[relations.links.trust]",
         },
         CatalogEntry {
             path: "record.mode",

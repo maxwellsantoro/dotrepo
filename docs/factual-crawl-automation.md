@@ -101,8 +101,9 @@ uncertainty instead of inventing certainty.
 3. **Do not coerce general signals into specific fields.** A general support
    channel is not a security contact. A broad multi-team CODEOWNERS file is not
    a single `owners.team`.
-4. **Keep synthesis subordinate.** The model path is narrow adjudication on
-   unresolved fields, not whole-repo analysis.
+4. **Keep synthesis subordinate.** Optional whole-repository synthesis is
+   stored separately and cannot alter factual fields; factual adjudication
+   remains candidate-bound.
 5. **Preserve visible incompleteness.** The fixture audit and import baseline
   both treat some absences as intentional. Scoring and auto-publish must not
   quietly normalize those away.
@@ -284,6 +285,47 @@ Once the budget is exhausted, provider URLs are removed for the rest of the
 batch so deterministic refresh and writeback can continue without additional
 model calls.
 
+### Optional research synthesis
+
+The crawler can request bounded, non-factual research synthesis after factual
+import and validation. Configure a JSON sidecar with `DOTREPO_SYNTHESIS_URL`,
+then opt in with `dotrepo-crawler crawl --synthesize --synthesis-model <model>
+--synthesis-provider <provider>`. `DOTREPO_SYNTHESIS_API_KEY` is sent as a
+Bearer token when present.
+
+The sidecar request contains the repository identity, the validated factual
+manifest, at most 12 materialized source documents, the model, and the provider.
+Each document is capped at 32,000 characters and aggregate context at 128,000
+characters. The response contract is:
+
+```json
+{
+  "architecture": {
+    "summary": "A shared core powers the protocol surfaces.",
+    "entryPoints": ["src/lib.rs"],
+    "keyConcepts": ["factual authority"]
+  },
+  "forAgents": {
+    "howToContribute": "Update fixtures with behavior.",
+    "gotchas": ["Keep synthesis separate from facts."]
+  },
+  "tokensUsed": 321
+}
+```
+
+The crawler supplies `generatedAt`, source commit, model/provider provenance,
+and factual build/test commands itself. Unknown response fields are rejected,
+and every proposed entry point must be a safe relative path cited by or equal to
+a supplied source document. It validates those grounding rules, schema bounds,
+and command safety before planning `synthesis.toml`; the provider cannot
+overwrite facts. Provider, grounding, schema, bounds, or transport failures are
+recorded in crawler state and telemetry while factual publication continues.
+
+Autonomous batches use the same path with `--synthesize`; model and provider can
+come from `--synthesis-model` / `--synthesis-provider` or
+`DOTREPO_SYNTHESIS_MODEL` / `DOTREPO_SYNTHESIS_PROVIDER`. Retained telemetry
+reports synthesis requests, successes, failures, and failure classes.
+
 Autonomous refresh batches prefer head-aware scheduled refreshes, then fill any
 open batch slots with lower-confidence checked-in records from the quality
 queue. This sends `draft`, `inferred`, `imported`, low/medium-confidence, or
@@ -395,6 +437,7 @@ Scheduled autonomous batches retain these run metrics in
 `index/telemetry/autonomous-summary.json`. The retained summary tracks total
 crawls, writes, failures, quality-reprocess queue entries, discovery queue
 entries, adjudication calls, token use, zero-model rate, promotion rate,
+optional synthesis requests, successes, failures, and failure classes,
 repositories by adjudication tier, model-budget exhaustion runs, grouped failure
 classes, worst retained-run failure/adjudication/escalation rates, worst
 retained-run zero-model rate, recent and previous three-run adjudication tier

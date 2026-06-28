@@ -237,7 +237,7 @@ completeness signals, shared languages/topics, and side-by-side selected
 statuses, confidences, licenses, and build/test/docs/security/license flags.
 They do not rank projects or generate a recommendation.
 
-## 14. Traverse declared profile references
+## 14. Traverse repository relations
 
 ```bash
 cargo run -p dotrepo-cli -- public relations github.com sharkdp fd
@@ -245,10 +245,14 @@ cargo run -p dotrepo-cli -- public relations github.com sharkdp fd
 curl -s "$BASE_URL/v0/repos/github.com/sharkdp/fd/relations"
 ```
 
-The relations response reports declared outgoing `references` from the selected
-record and inferred incoming `referenced_by` edges from other checked-in
-profiles. When a related `host/owner/repo` exists in the same index, the
-response includes a compact linked profile item and profile/trust/query links.
+The relations response reports legacy outgoing `references` plus typed,
+trust-bearing `alternative`, `dependency`, `predecessor`, `fork`, `related`, and
+`reference` links from the selected record. Reverse traversal uses semantic
+inverse names (`depended_on_by`, `successor`, `forked_by`, and
+`referenced_by`); symmetric alternative/related links retain their name with an
+`incoming` direction. Every typed item preserves its relation-level confidence,
+provenance, and notes. When the target exists in the same index, the response
+also includes a compact linked profile and profile/trust/query links.
 
 ## 15. Measure known-repository lookup efficiency
 

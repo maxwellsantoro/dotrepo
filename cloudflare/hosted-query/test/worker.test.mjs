@@ -339,6 +339,18 @@ test("serves hosted factual compare from staged profiles", async () => {
 });
 
 test("serves hosted relation traversal from query-input snapshots", async () => {
+  const orbitSnapshot = await readJson(
+    "crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public",
+    "query-input", "github.com", "example", "orbit.json"
+  );
+  orbitSnapshot.selection.manifest.relations.links = [
+    {
+      kind: "dependency",
+      target: "github.com/example/nova",
+      notes: "Runtime integration.",
+      trust: { confidence: "high", provenance: ["declared"] }
+    }
+  ];
   const files = new Map([
     [
       "/v0/meta.json",
@@ -349,8 +361,19 @@ test("serves hosted relation traversal from query-input snapshots", async () => 
     ],
     [
       "/query-input/github.com/example/orbit.json",
+      JSON.stringify(orbitSnapshot)
+    ],
+    [
+      "/query-input/github.com/example/nova.json",
       await readFile(
-        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "query-input", "github.com", "example", "orbit.json"),
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "query-input", "github.com", "example", "nova.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/index.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "index.json"),
         "utf8"
       )
     ],
@@ -358,6 +381,13 @@ test("serves hosted relation traversal from query-input snapshots", async () => 
       "/v0/repos/github.com/example/nova/profile.json",
       await readFile(
         fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "github.com", "example", "nova", "profile.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/github.com/example/orbit/profile.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "github.com", "example", "orbit", "profile.json"),
         "utf8"
       )
     ]
@@ -370,11 +400,26 @@ test("serves hosted relation traversal from query-input snapshots", async () => 
   const json = await response.json();
 
   assert.equal(response.status, 200);
-  assert.equal(json.relationCount, 1);
+  assert.equal(json.relationCount, 2);
+  assert.equal(json.references[0].relationship, "dependency");
+  assert.equal(json.references[0].direction, "outgoing");
+  assert.equal(json.references[0].trust.confidence, "high");
   assert.equal(json.references[0].target, "github.com/example/nova");
   assert.equal(json.references[0].profile.identity.repo, "nova");
   assert.equal(json.links.self, "/dotrepo/v0/repos/github.com/example/orbit/relations");
   assert.equal(json.links.profile, "/dotrepo/v0/repos/github.com/example/orbit/profile.json");
+
+  const reverseResponse = await handleRequest(
+    new Request("https://example.test/dotrepo/v0/repos/github.com/example/nova/relations"),
+    env
+  );
+  const reverse = await reverseResponse.json();
+  assert.equal(reverseResponse.status, 200);
+  assert.equal(reverse.relationCount, 2);
+  assert.equal(reverse.references[0].relationship, "depended_on_by");
+  assert.equal(reverse.references[0].direction, "incoming");
+  assert.equal(reverse.references[1].relationship, "referenced_by");
+  assert.equal(reverse.references[0].profile.identity.repo, "orbit");
 });
 
 test("returns the public error contract for invalid identities", async () => {

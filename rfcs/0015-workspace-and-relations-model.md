@@ -118,6 +118,17 @@ overfit, and more likely to drag the schema toward a kitchen sink.
 
 ## Proposed relation model direction
 
+### Implemented research-relation subset
+
+The v0.1 reference implementation now uses the proposed `[[relations.links]]`
+shape for the bounded research kinds `reference`, `alternative`, `dependency`,
+`predecessor`, `fork`, and `related`. Every link requires target identity and
+relation-local confidence/provenance; validation remains local and does not
+require reciprocal or remotely resolvable edges. Public traversal preserves
+that trust and emits semantic inverse edges. The workspace-specific kinds in
+the illustrative examples below remain design direction rather than accepted
+manifest values.
+
 The reserved `[relations]` namespace should eventually carry a list of explicit
 relation assertions.
 

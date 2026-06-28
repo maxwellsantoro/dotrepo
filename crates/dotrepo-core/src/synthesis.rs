@@ -98,7 +98,19 @@ pub fn validate_synthesis(manifest: &Manifest, synthesis: &SynthesisDocument) ->
 
 pub fn write_synthesis(root: &Path, synthesis: &SynthesisDocument) -> Result<SynthesisWritePlan> {
     let manifest = load_manifest_from_root(root)?;
-    validate_synthesis(&manifest, synthesis)?;
+    plan_synthesis_write(root, &manifest, synthesis)
+}
+
+/// Validate and render a synthesis document against an already-loaded factual manifest.
+///
+/// Crawler writeback uses this form because factual and synthesis files are planned
+/// atomically before either file exists on disk.
+pub fn plan_synthesis_write(
+    root: &Path,
+    manifest: &Manifest,
+    synthesis: &SynthesisDocument,
+) -> Result<SynthesisWritePlan> {
+    validate_synthesis(manifest, synthesis)?;
     let synthesis_text = render_synthesis_document(synthesis)?;
     Ok(SynthesisWritePlan {
         synthesis_path: synthesis_path(root),

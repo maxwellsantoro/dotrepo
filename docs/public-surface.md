@@ -78,8 +78,10 @@ The export-first hosted surface is the right default because it:
   language/topic, and profile signals
 - local and hosted relationship traversal through `dotrepo public relations`
   and `/v0/repos/<host>/<owner>/<repo>/relations`, resolving declared outgoing
-  profile references and inferred incoming reverse references when the related
-  repository exists in the same index
+  legacy references plus trust-bearing `reference`, `alternative`, `dependency`,
+  `predecessor`, `fork`, and `related` assertions. Incoming traversal reports
+  semantic inverses such as `depended_on_by`, `successor`, and `forked_by` when
+  the related repository exists in the same index
 - a deterministic lookup-efficiency benchmark harness for measuring task hit
   rate, field hit rate, and compact payload bytes against representative
   workloads

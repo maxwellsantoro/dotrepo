@@ -101,6 +101,29 @@ fn write_synthesis_and_get_synthesis_round_trip_against_record_root() {
 }
 
 #[test]
+fn plan_synthesis_write_uses_in_memory_manifest_before_record_writeback() {
+    use dotrepo_core::plan_synthesis_write;
+
+    let root = temp_dir("plan-before-record-writeback");
+    let manifest = dotrepo_schema::parse_manifest(&record_toml(
+        Some("cargo build --workspace"),
+        Some("cargo test --workspace"),
+    ))
+    .expect("manifest parses");
+    let synthesis = sample_synthesis("cargo build --workspace", "cargo test --workspace");
+
+    let plan = plan_synthesis_write(&root, &manifest, &synthesis)
+        .expect("in-memory synthesis plan builds");
+
+    assert_eq!(plan.synthesis_path, root.join("synthesis.toml"));
+    assert_eq!(plan.synthesis, synthesis);
+    assert!(plan.synthesis_text.contains("dotrepo-synthesis/v0"));
+    assert!(!root.join("record.toml").exists());
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
 fn write_synthesis_rejects_conflicts_with_factual_build_or_test() {
     let root = temp_dir("conflict");
     fs::write(

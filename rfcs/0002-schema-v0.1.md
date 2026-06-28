@@ -99,8 +99,12 @@ For v0.1, `confidence` remains an open string field. The reference vocabulary is
 `provenance` is also open-ended in v0.1. The reference vocabulary is `declared`, `imported`, `inferred`, and `verified`; consumers may reason about those values but should preserve unknown entries.
 
 ### `[relations]`
-Reserved namespace for future cross-repo and workspace semantics.
-The first design direction for that namespace lives in
+Cross-repository relation namespace. Legacy `references = []` remains valid.
+New assertions use `[[relations.links]]` with a recognized `kind`, a repository
+identity `target`, optional `notes`, and required `[relations.links.trust]`
+confidence/provenance. The initial recognized kinds are `reference`,
+`alternative`, `dependency`, `predecessor`, `fork`, and `related`. Workspace
+semantics remain deferred; their design direction lives in
 [`RFC 0015`](./0015-workspace-and-relations-model.md).
 
 ### `[x]`

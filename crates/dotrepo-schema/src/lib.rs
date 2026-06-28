@@ -175,6 +175,28 @@ pub struct Trust {
 pub struct Relations {
     #[serde(default)]
     pub references: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub links: Vec<RelationLink>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RelationLink {
+    pub kind: RelationKind,
+    pub target: String,
+    #[serde(default)]
+    pub notes: Option<String>,
+    pub trust: Trust,
+}
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum RelationKind {
+    Reference,
+    Alternative,
+    Dependency,
+    Predecessor,
+    Fork,
+    Related,
 }
 
 pub const SYNTHESIS_SCHEMA: &str = "dotrepo-synthesis/v0";

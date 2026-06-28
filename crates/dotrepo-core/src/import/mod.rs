@@ -737,6 +737,7 @@ pub fn import_repository_with_options(
         ImportMode::Native => None,
         ImportMode::Overlay => Some(Relations {
             references: Vec::new(),
+            links: Vec::new(),
         }),
     };
 

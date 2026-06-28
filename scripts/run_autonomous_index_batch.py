@@ -28,6 +28,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-id", default="refresh-batch-01")
     parser.add_argument("--output-dir", default="index-autonomous-batch")
     parser.add_argument(
+        "--synthesize",
+        action="store_true",
+        help="Request bounded non-factual synthesis through DOTREPO_SYNTHESIS_URL",
+    )
+    parser.add_argument(
+        "--synthesis-model",
+        default=None,
+        help="Synthesis model identifier; defaults to DOTREPO_SYNTHESIS_MODEL",
+    )
+    parser.add_argument(
+        "--synthesis-provider",
+        default=None,
+        help="Synthesis provider identifier; defaults to DOTREPO_SYNTHESIS_PROVIDER",
+    )
+    parser.add_argument(
         "--disable-quality-reprocess",
         action="store_true",
         help="Do not fill empty batch slots with lower-confidence index records",
@@ -139,6 +154,25 @@ def resolve_discovery_limit(args: argparse.Namespace) -> int:
     if limit < 0:
         raise SystemExit("--discovery-limit must be >= 0")
     return limit
+
+
+def resolve_synthesis_config(args: argparse.Namespace) -> tuple[str | None, str | None]:
+    if not args.synthesize:
+        return None, None
+    model = (args.synthesis_model or os.environ.get("DOTREPO_SYNTHESIS_MODEL", "")).strip()
+    provider = (
+        args.synthesis_provider or os.environ.get("DOTREPO_SYNTHESIS_PROVIDER", "")
+    ).strip()
+    missing = [name for name, value in (("model", model), ("provider", provider)) if not value]
+    if missing:
+        raise SystemExit(
+            "--synthesize requires "
+            + " and ".join(missing)
+            + " via CLI flags or DOTREPO_SYNTHESIS_MODEL/DOTREPO_SYNTHESIS_PROVIDER"
+        )
+    if not os.environ.get("DOTREPO_SYNTHESIS_URL", "").strip():
+        raise SystemExit("--synthesize requires DOTREPO_SYNTHESIS_URL")
+    return model, provider
 
 
 def crawl_env_for_remaining_budget(base_env: dict[str, str], remaining_budget: int) -> dict[str, str]:
@@ -602,6 +636,7 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
     failure_fingerprint_ecosystems: dict[str, str] = {}
     failure_fingerprint_repositories: dict[str, set[str]] = {}
     promoted = 0
+    synthesis_failures: Counter[str] = Counter()
 
     for crawl in crawls:
         if crawl.get("status") == "failed":
@@ -623,6 +658,9 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
                 )
         if crawl.get("recordStatus") == "verified":
             promoted += 1
+        synthesis_failure = crawl.get("synthesisFailure") or {}
+        if synthesis_failure:
+            synthesis_failures[str(synthesis_failure.get("class") or "unknown")] += 1
 
     telemetry.update(
         {
@@ -646,6 +684,10 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
                 )
             },
             "promoted": promoted,
+            "synthesisRequested": len(crawls) if getattr(args, "synthesize", False) else 0,
+            "synthesisSucceeded": sum(1 for item in crawls if item.get("synthesisPath")),
+            "synthesisFailed": sum(1 for item in crawls if item.get("synthesisFailure")),
+            "synthesisFailureClasses": dict(sorted(synthesis_failures.items())),
             "zeroModelRuns": sum(
                 1 for item in crawls if int(item.get("adjudicationCalls") or 0) == 0
             ),
@@ -763,6 +805,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
     failure_classes_by_ecosystem: Counter[str] = Counter()
     ecosystem_counts: Counter[str] = Counter()
     tier_counts: Counter[str] = Counter()
+    synthesis_failure_classes: Counter[str] = Counter()
     first_run = None
     last_run = None
     budget_exhausted_runs = 0
@@ -801,6 +844,9 @@ def aggregate_runs(runs: list[dict]) -> dict:
             "tokensUsed",
             "promoted",
             "zeroModelRuns",
+            "synthesisRequested",
+            "synthesisSucceeded",
+            "synthesisFailed",
         ):
             totals[key] += int(run_telemetry.get(key) or 0)
         for failure_class, count in (run_telemetry.get("failureClasses") or {}).items():
@@ -836,6 +882,10 @@ def aggregate_runs(runs: list[dict]) -> dict:
                 )
         for tier, count in (run_telemetry.get("repositoriesByAdjudicationTier") or {}).items():
             tier_counts[str(tier)] += int(count or 0)
+        for failure_class, count in (
+            run_telemetry.get("synthesisFailureClasses") or {}
+        ).items():
+            synthesis_failure_classes[str(failure_class)] += int(count or 0)
 
     # Cross-tabulate failure class by ecosystem using the per-fingerprint maps so
     # recurring parser/evidence/validation defects can be prioritized by ecosystem.
@@ -920,6 +970,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
         "worstRunRates": {key: round(value, 6) for key, value in sorted(worst_rates.items())},
         "repositoriesByAdjudicationTier": dict(sorted(tier_counts.items())),
         "failureClasses": dict(sorted(failure_classes.items())),
+        "synthesisFailureClasses": dict(sorted(synthesis_failure_classes.items())),
         "failureClassesByEcosystem": dict(sorted(failure_classes_by_ecosystem.items())),
         "failureEcosystems": dict(sorted(ecosystem_counts.items())),
         "recurringFailures": recurring_failures,
@@ -1137,6 +1188,7 @@ def main() -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     adjudication_call_budget = resolve_adjudication_call_budget(args)
     discovery_limit = resolve_discovery_limit(args)
+    synthesis_model, synthesis_provider = resolve_synthesis_config(args)
     remaining_adjudication_calls = adjudication_call_budget
     adjudication_budget_conservatively_exhausted = False
     base_env = os.environ.copy()
@@ -1148,8 +1200,7 @@ def main() -> int:
     selected_metadata = output_dir / "selected-batch.json"
     telemetry_path = output_dir / "telemetry.json"
 
-    proc = run(
-        [
+    refresh_plan_command = [
             "cargo",
             "run",
             "-q",
@@ -1163,7 +1214,9 @@ def main() -> int:
             str(args.limit),
             "--json",
         ]
-    )
+    if args.synthesize:
+        refresh_plan_command.extend(["--synthesize", "--synthesis-model", synthesis_model])
+    proc = run(refresh_plan_command)
     refresh_plan.write_text(proc.stdout)
 
     run(
@@ -1244,8 +1297,7 @@ def main() -> int:
                 base_env, remaining_adjudication_calls
             )
             entry["adjudicationCallBudgetBefore"] = remaining_adjudication_calls
-            proc = run(
-                [
+            crawl_command = [
                     "cargo",
                     "run",
                     "-q",
@@ -1265,7 +1317,19 @@ def main() -> int:
                     repo,
                     "--write",
                     "--json",
-                ],
+                ]
+            if args.synthesize:
+                crawl_command.extend(
+                    [
+                        "--synthesize",
+                        "--synthesis-model",
+                        synthesis_model,
+                        "--synthesis-provider",
+                        synthesis_provider,
+                    ]
+                )
+            proc = run(
+                crawl_command,
                 check=False,
                 env=crawl_env,
             )
@@ -1278,6 +1342,8 @@ def main() -> int:
                 entry["adjudicationCalls"] = int(escalation.get("modelCalls") or 0)
                 entry["tokensUsed"] = int(escalation.get("tokensUsed") or 0)
                 entry["recordStatus"] = payload.get("recordStatus")
+                entry["synthesisPath"] = payload.get("synthesisPath")
+                entry["synthesisFailure"] = payload.get("synthesisFailure")
                 remaining_adjudication_calls = max(
                     0,
                     remaining_adjudication_calls - entry["adjudicationCalls"],
