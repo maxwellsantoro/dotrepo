@@ -409,6 +409,15 @@ function profileQueryMatches(profile, query) {
   return matched;
 }
 
+function searchProfileFromInventoryEntry(entry) {
+  return {
+    identity: entry.identity,
+    name: entry.name,
+    purpose: entry.description,
+    links: entry.links
+  };
+}
+
 function searchItemFromProfile(profile, matched = ["relation"]) {
   return {
     identity: profile.identity,
@@ -439,6 +448,20 @@ function parseSearchOptions(url) {
   };
 }
 
+function searchRequiresProfileSnapshots(options) {
+  return (
+    options.languages.length > 0 ||
+    options.topics.length > 0 ||
+    options.statuses.length > 0 ||
+    options.confidences.length > 0 ||
+    options.requireBuild ||
+    options.requireTest ||
+    options.requireDocs ||
+    options.requireSecurityContact ||
+    options.requireLicense
+  );
+}
+
 async function loadInventoryProfiles(env, request) {
   const inventory = await loadInventorySnapshot(env, request);
   const repositories = Array.isArray(inventory.repositories) ? inventory.repositories : [];
@@ -455,7 +478,11 @@ async function loadInventoryProfiles(env, request) {
 
 async function buildSearchResponse(env, request, url, freshness) {
   const options = parseSearchOptions(url);
-  const { inventory, profiles } = await loadInventoryProfiles(env, request);
+  const inventory = await loadInventorySnapshot(env, request);
+  const repositories = Array.isArray(inventory.repositories) ? inventory.repositories : [];
+  const profiles = searchRequiresProfileSnapshots(options)
+    ? (await loadInventoryProfiles(env, request)).profiles
+    : repositories.map(searchProfileFromInventoryEntry);
   let results = [];
   for (const profile of profiles) {
     if (!profileMatchesFilters(profile, options)) {

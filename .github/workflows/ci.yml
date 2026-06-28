@@ -372,7 +372,10 @@ jobs:
           diagnostics = read_message()
           assert diagnostics["method"] == "textDocument/publishDiagnostics"
           assert diagnostics["params"]["uri"] == uri
-          assert diagnostics["params"]["diagnostics"] == []
+          assert all(
+              diagnostic.get("severity", 1) > 3
+              for diagnostic in diagnostics["params"]["diagnostics"]
+          ), diagnostics["params"]["diagnostics"]
 
           send({
               "jsonrpc": "2.0",

@@ -266,6 +266,37 @@ test("serves hosted profile search from staged profiles", async () => {
   assert.equal(json.filters.requireDocs, true);
 });
 
+test("serves simple hosted profile search from inventory without profile fan-out", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "meta.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/index.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "index.json"),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/dotrepo" };
+  const response = await handleRequest(
+    new Request("https://example.test/dotrepo/v0/search?q=orbit"),
+    env
+  );
+  const json = await response.json();
+
+  assert.equal(response.status, 200);
+  assert.equal(json.matchedCount, 1);
+  assert.equal(json.returnedCount, 1);
+  assert.equal(json.results[0].identity.repo, "orbit");
+  assert.equal(json.results[0].purpose, "Reviewed orbital tooling metadata.");
+});
+
 test("serves hosted factual compare from staged profiles", async () => {
   const files = new Map([
     [
