@@ -223,6 +223,13 @@ maintainer authority, `reviewed`, or `canonical` status.
 
 Milestones are capability and quality gates, not release dates.
 
+**Checked-in index snapshot:** 157 overlay records, 107 high-signal profiles
+(21% of the Milestone 2 target), 106 `verified`, 1 accepted maintainer claim.
+Tranche-two crawl progress is 2/106 targets present; active-tranche capacity
+upper bound is 211 high-signal profiles. Deterministic auto-promotion headroom is
+currently 0 (`promotionCandidateCount`); further high-signal growth depends on
+new crawls, field hardening, or parser fixes rather than status lifts alone.
+
 ### Milestone 0: Working protocol and proof surface
 
 **Status: substantially complete.**
@@ -287,6 +294,14 @@ Current operational gaps:
   repository identities, and `--stub` can drive capture without retyping
   provenance; converting live recurring failures into failure-derived fixtures
   and deterministic fixes remains open work.
+- writeback and auto-publish now use distinct gates: `autonomous_writeback_eligible`
+  (verification passed) may persist honestly partial overlays, while promotion to
+  `verified` still requires `eligible_for_auto_publish`; the distinction is
+  documented in `docs/factual-crawl-automation.md` and `index/README.md`, with
+  crawler and core regression tests guarding the looser writeback path
+- `public-surface-gate` now runs lightweight CLI, MCP, LSP, and crawler contract
+  tests in addition to core import and public-export checks, reducing the chance
+  that index-only changes skip surface regressions
 
 Current execution order:
 
@@ -300,7 +315,10 @@ Current execution order:
    Gradle manifest support + new jvm-gradle-canary regression fixture,
    improved security contact scoring and bare-email extraction, and
    extended regression canaries with workflow examples to cover the new paths.
-3. Expand progressively toward the profile and coverage gate in Milestone 2.
+3. Execute the checked-in tranche-two growth plan: only 2/106 targets are present
+   today, leaving a 289-profile high-signal gap after the active-tranche capacity
+   upper bound; crawl throughput is now the dominant Milestone 2 lever once
+   proof-gate stability is demonstrated.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly
 publish gate-passed records, improve quality without a human queue, and expose
@@ -330,6 +348,10 @@ Current status:
 - hosted batch profile and batch field lookup are available as cacheable GET
   routes on the same public surface and in the local `dotrepo-public-query`
   runtime
+- batch profile and batch query requests now enforce shared cardinality limits in
+  core, the hosted Worker, and the reference HTTP server (50 repositories, 25
+  paths, 500 query results); `dotrepo-public-query` is documented as a local and
+  review-only surface
 - static exports include `meta.validators` and `v0/files.json` for
   snapshot-level revalidation and selective refetch
 - `scripts/diff_public_export_files.py` now turns two `v0/files.json`
@@ -382,7 +404,9 @@ Current status:
   the actual deterministic auto-promotion headroom in the checked-in index; the
   first deterministic status-lift batch promoted 14 eligible overlays to
   `verified`, with evidence notes appended, raising the public coverage floor
-  to 107 high-signal profiles
+  to 107 high-signal profiles; headroom is now exhausted (`promotionCandidateCount`
+  is 0), with the largest remaining blockers concentrated in
+  `owners.security_contact`, `repo.test`, and `repo.build`
 - the first two tranche-two writebacks, `github.com/starship/starship` and
   `github.com/gohugoio/hugo`, are now checked in as verified overlays; the
   profile coverage baseline ratcheted to 157 profiles and 107 high-signal
@@ -442,6 +466,9 @@ Current status:
   resolving related profiles when they are present in the same index
 - the hosted Worker now serves cacheable GET search, compare, and relations
   routes from the staged public snapshot
+- hosted search now uses inventory-only matching for text-only queries, loading
+  full `profile.json` snapshots only when completeness or trust filters require
+  them; this keeps inventory-scale discovery cheaper on the Worker
 - production-scale ranking calibration, richer relation semantics beyond
   reference/referenced-by traversal, and production synthesis generation remain
   open
@@ -502,10 +529,15 @@ Current status:
 - `dotrepo adoption-status [--json]` summarizes native-record readiness for
   validation, claim identity, CI onboarding, and managed-surface drift
 - MCP exposes the same readiness contract as `dotrepo.adoption_status`, sharing
-  the core report used by the CLI
+  the core report used by the CLI; RFC 0006 now documents `dotrepo.adoption_status`
+  and `dotrepo.lookup`, and MCP root resolution accepts not-yet-created repository
+  directories for validate/import flows through `resolve_workspace_repository_root`
 - LSP diagnostics surface native adoption hints for claim-ready `repo.homepage`
   and the starter CI workflow while maintainers edit `.repo`, including quick
-  fixes for adding the homepage placeholder and creating the workflow
+  fixes for adding the homepage placeholder and creating the workflow; adoption
+  CI readiness now comes from `adoption_status_repository`, and
+  `validate_repository` diagnostics for other root manifests (for example
+  coexisting `record.toml`) are surfaced while editing `.repo`
 
 Exit criteria:
 
