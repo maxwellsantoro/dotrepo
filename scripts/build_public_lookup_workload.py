@@ -16,6 +16,18 @@ PROFILE_TO_MANIFEST_FIELDS = [
     ("hasTest", "repo.test"),
     ("hasDocs", "docs.root"),
 ]
+RESEARCH_TASK_FIELDS = {
+    "overview": [
+        "repo.description",
+        "repo.homepage",
+        "repo.license",
+        "repo.languages",
+        "repo.topics",
+    ],
+    "execution": ["repo.build", "repo.test"],
+    "documentation": ["docs.root"],
+    "security": ["owners.security_contact"],
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -38,6 +50,15 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=2,
         help="Minimum fields required for a task to be included",
+    )
+    parser.add_argument(
+        "--mode",
+        choices=("observed", "research"),
+        default="observed",
+        help=(
+            "observed asks fields already signaled by each profile; research emits "
+            "fixed overview, execution, documentation, and security tasks"
+        ),
     )
     parser.add_argument("--output", required=True, help="Output workload JSON path")
     return parser.parse_args()
@@ -82,7 +103,25 @@ def workload_fields(profile: dict[str, Any]) -> list[str]:
     return fields
 
 
-def build_workload(public_root: Path, limit: int = 0, min_fields: int = 2) -> dict[str, Any]:
+def research_tasks(repository: str) -> list[dict[str, Any]]:
+    task_prefix = repository.replace("/", "-")
+    return [
+        {
+            "id": f"{task_prefix}-{intent}",
+            "repository": repository,
+            "intent": intent,
+            "fields": list(fields),
+        }
+        for intent, fields in RESEARCH_TASK_FIELDS.items()
+    ]
+
+
+def build_workload(
+    public_root: Path,
+    limit: int = 0,
+    min_fields: int = 2,
+    mode: str = "observed",
+) -> dict[str, Any]:
     inventory_path = public_root / "v0" / "repos" / "index.json"
     inventory = load_json(inventory_path)
     repositories = inventory.get("repositories")
@@ -90,20 +129,25 @@ def build_workload(public_root: Path, limit: int = 0, min_fields: int = 2) -> di
         raise SystemExit(f"inventory must contain a non-empty repositories array: {inventory_path}")
 
     tasks = []
+    included_repositories = 0
     for entry in sorted(repositories, key=lambda item: repository_from_identity(item.get("identity") or {})):
         repository = repository_from_identity(entry.get("identity") or {})
-        profile = load_json(profile_path(public_root, repository))
-        fields = workload_fields(profile)
-        if len(fields) < min_fields:
-            continue
-        tasks.append(
-            {
-                "id": repository.replace("/", "-"),
-                "repository": repository,
-                "fields": fields,
-            }
-        )
-        if limit > 0 and len(tasks) >= limit:
+        if mode == "research":
+            tasks.extend(research_tasks(repository))
+        else:
+            profile = load_json(profile_path(public_root, repository))
+            fields = workload_fields(profile)
+            if len(fields) < min_fields:
+                continue
+            tasks.append(
+                {
+                    "id": repository.replace("/", "-"),
+                    "repository": repository,
+                    "fields": fields,
+                }
+            )
+        included_repositories += 1
+        if limit > 0 and included_repositories >= limit:
             break
 
     if not tasks:
@@ -117,7 +161,10 @@ def build_workload(public_root: Path, limit: int = 0, min_fields: int = 2) -> di
             "inventory": "v0/repos/index.json",
             "limit": limit,
             "minFields": min_fields,
+            "mode": mode,
             "repositoryCount": len(repositories),
+            "includedRepositoryCount": included_repositories,
+            "taskCount": len(tasks),
         },
         "tasks": tasks,
     }
@@ -129,7 +176,12 @@ def main() -> None:
         raise SystemExit("--limit must be >= 0")
     if args.min_fields < 1:
         raise SystemExit("--min-fields must be >= 1")
-    workload = build_workload(Path(args.public_root), limit=args.limit, min_fields=args.min_fields)
+    workload = build_workload(
+        Path(args.public_root),
+        limit=args.limit,
+        min_fields=args.min_fields,
+        mode=args.mode,
+    )
     Path(args.output).write_text(json.dumps(workload, indent=2, sort_keys=True) + "\n")
 
 

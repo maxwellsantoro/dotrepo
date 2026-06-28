@@ -136,3 +136,34 @@ def test_build_workload_uses_maintainers_when_team_is_absent(tmp_path: Path) -> 
 
     assert "owners.maintainers" in workload["tasks"][0]["fields"]
     assert "owners.team" not in workload["tasks"][0]["fields"]
+
+
+def test_research_workload_uses_fixed_intents_independent_of_completeness(
+    tmp_path: Path,
+) -> None:
+    public_root = tmp_path / "public"
+    write_inventory(public_root, [("example", "alpha"), ("example", "beta")])
+    write_export_profile(public_root, "example", "alpha", has_build=True)
+    write_export_profile(public_root, "example", "beta")
+
+    workload = builder.build_workload(public_root, limit=1, mode="research")
+
+    assert workload["source"]["mode"] == "research"
+    assert workload["source"]["includedRepositoryCount"] == 1
+    assert workload["source"]["taskCount"] == 4
+    assert [task["intent"] for task in workload["tasks"]] == [
+        "overview",
+        "execution",
+        "documentation",
+        "security",
+    ]
+    assert workload["tasks"][0]["fields"] == [
+        "repo.description",
+        "repo.homepage",
+        "repo.license",
+        "repo.languages",
+        "repo.topics",
+    ]
+    assert workload["tasks"][1]["fields"] == ["repo.build", "repo.test"]
+    assert workload["tasks"][2]["fields"] == ["docs.root"]
+    assert workload["tasks"][3]["fields"] == ["owners.security_contact"]

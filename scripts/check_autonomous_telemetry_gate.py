@@ -38,6 +38,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-zero-model-rate", type=float, default=0.75)
     parser.add_argument("--max-adjudication-budget-use-rate", type=float, default=1.0)
     parser.add_argument("--max-tokens-per-crawled", type=float, default=5000.0)
+    parser.add_argument(
+        "--max-recent-adjudication-budget-use-rate-delta", type=float, default=0.25
+    )
+    parser.add_argument(
+        "--max-recent-tokens-per-crawled-delta", type=float, default=1000.0
+    )
     return parser.parse_args()
 
 
@@ -94,6 +100,8 @@ def thresholds(args: argparse.Namespace) -> dict:
         "minZeroModelRate": args.min_zero_model_rate,
         "maxAdjudicationBudgetUseRate": args.max_adjudication_budget_use_rate,
         "maxTokensPerCrawled": args.max_tokens_per_crawled,
+        "maxRecentAdjudicationBudgetUseRateDelta": args.max_recent_adjudication_budget_use_rate_delta,
+        "maxRecentTokensPerCrawledDelta": args.max_recent_tokens_per_crawled_delta,
     }
 
 
@@ -139,6 +147,33 @@ def count_or_zero(value: object) -> int:
     return value if count_value(value) else 0
 
 
+def nonnegative_number(value: object) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and value >= 0
+
+
+def cost_block_well_formed(block: dict) -> bool:
+    count_keys = {
+        "adjudicationCallBudget",
+        "adjudicationCalls",
+        "crawled",
+        "tokensUsed",
+    }
+    rate_keys = {"adjudicationBudgetUseRate", "tokensPerCrawled"}
+    if not count_block_well_formed(block, count_keys) or not all(
+        nonnegative_number(block.get(key)) for key in rate_keys
+    ):
+        return False
+    budget = block["adjudicationCallBudget"]
+    crawled = block["crawled"]
+    expected_budget_rate = block["adjudicationCalls"] / budget if budget else 0.0
+    expected_token_rate = block["tokensUsed"] / crawled if crawled else 0.0
+    return (
+        abs(number(block["adjudicationBudgetUseRate"]) - expected_budget_rate)
+        <= 0.000001
+        and abs(number(block["tokensPerCrawled"]) - expected_token_rate) <= 0.000001
+    )
+
+
 def tier_counts_well_formed(tiers: dict) -> bool:
     return all(isinstance(key, str) and count_value(value) for key, value in tiers.items())
 
@@ -165,6 +200,8 @@ def retained_proof_fields_present(summary: dict) -> bool:
     recent_window_rates = summary.get("recentWindowRates")
     previous_window_rates = summary.get("previousWindowRates")
     regression_fixture_candidates = summary.get("regressionFixtureCandidates")
+    recent_window_costs = summary.get("recentWindowCosts")
+    previous_window_costs = summary.get("previousWindowCosts")
     if (
         not count_value(summary.get("runCount"))
         or not count_value(summary.get("budgetExhaustedRuns"))
@@ -178,6 +215,20 @@ def retained_proof_fields_present(summary: dict) -> bool:
         or not isinstance(previous_window_rates, dict)
         or not isinstance(regression_fixture_candidates, list)
         or not regression_fixture_candidates_well_formed(regression_fixture_candidates)
+        or (
+            recent_window_costs is not None
+            and (
+                not isinstance(recent_window_costs, dict)
+                or not cost_block_well_formed(recent_window_costs)
+            )
+        )
+        or (
+            previous_window_costs is not None
+            and (
+                not isinstance(previous_window_costs, dict)
+                or not cost_block_well_formed(previous_window_costs)
+            )
+        )
     ):
         return False
     required_rate_keys = {
@@ -218,6 +269,8 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     worst_rates = summary.get("worstRunRates") or {}
     recent_window_rates = summary.get("recentWindowRates") or {}
     previous_window_rates = summary.get("previousWindowRates") or {}
+    recent_window_costs = summary.get("recentWindowCosts") or {}
+    previous_window_costs = summary.get("previousWindowCosts") or {}
     tiers = summary.get("repositoriesByAdjudicationTier") or {}
 
     schema = str(summary.get("schema") or "")
@@ -245,6 +298,29 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
         else 0.0
     )
     tokens_per_crawled = tokens_used / crawled if crawled else 0.0
+    aggregate_costs = {
+        "adjudicationBudgetUseRate": adjudication_budget_use_rate,
+        "tokensPerCrawled": tokens_per_crawled,
+    }
+    recent_cost_reference = recent_window_costs or aggregate_costs
+    previous_cost_reference = (
+        previous_window_costs
+        if previous_window_run_count and previous_window_costs
+        else aggregate_costs
+    )
+    recent_adjudication_budget_use_rate = number(
+        recent_cost_reference.get("adjudicationBudgetUseRate")
+    )
+    recent_tokens_per_crawled = number(
+        recent_cost_reference.get("tokensPerCrawled")
+    )
+    recent_adjudication_budget_use_rate_delta = (
+        recent_adjudication_budget_use_rate
+        - number(previous_cost_reference.get("adjudicationBudgetUseRate"))
+    )
+    recent_tokens_per_crawled_delta = recent_tokens_per_crawled - number(
+        previous_cost_reference.get("tokensPerCrawled")
+    )
     worst_failure_rate = number(worst_rates.get("failureRate"))
     worst_adjudication_rate = number(worst_rates.get("adjudicationRate"))
     worst_second_opinion_rate = number(worst_rates.get("secondOpinionRate"))
@@ -429,6 +505,33 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             tokens_per_crawled <= args.max_tokens_per_crawled,
         ),
         check(
+            "recent-window adjudication call budget usage",
+            round(recent_adjudication_budget_use_rate, 6),
+            f"<= {args.max_adjudication_budget_use_rate}",
+            recent_adjudication_budget_use_rate
+            <= args.max_adjudication_budget_use_rate,
+        ),
+        check(
+            "recent-window adjudication budget usage drift",
+            round(recent_adjudication_budget_use_rate_delta, 6),
+            f"<= {args.max_recent_adjudication_budget_use_rate_delta}",
+            recent_adjudication_budget_use_rate_delta
+            <= args.max_recent_adjudication_budget_use_rate_delta,
+        ),
+        check(
+            "recent-window tokens per crawled repository",
+            round(recent_tokens_per_crawled, 6),
+            f"<= {args.max_tokens_per_crawled}",
+            recent_tokens_per_crawled <= args.max_tokens_per_crawled,
+        ),
+        check(
+            "recent-window token intensity drift",
+            round(recent_tokens_per_crawled_delta, 6),
+            f"<= {args.max_recent_tokens_per_crawled_delta}",
+            recent_tokens_per_crawled_delta
+            <= args.max_recent_tokens_per_crawled_delta,
+        ),
+        check(
             "fixture-eligible recurring failures",
             fixture_eligible_failure_count,
             f"<= {args.max_fixture_eligible_recurring_failures}",
@@ -472,6 +575,10 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "adjudicationBudgetUseRate": adjudication_budget_use_rate,
             "tokensUsed": tokens_used,
             "tokensPerCrawled": tokens_per_crawled,
+            "recentAdjudicationBudgetUseRate": recent_adjudication_budget_use_rate,
+            "recentAdjudicationBudgetUseRateDelta": recent_adjudication_budget_use_rate_delta,
+            "recentTokensPerCrawled": recent_tokens_per_crawled,
+            "recentTokensPerCrawledDelta": recent_tokens_per_crawled_delta,
             "recentWindowRunCount": recent_window_run_count,
             "previousWindowRunCount": previous_window_run_count,
             "secondOpinionRate": second_opinion_rate,
@@ -488,6 +595,8 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "worstRunRates": worst_rates,
             "recentWindowRates": recent_window_rates,
             "previousWindowRates": previous_window_rates,
+            "recentWindowCosts": recent_window_costs,
+            "previousWindowCosts": previous_window_costs,
             "repositoriesByAdjudicationTier": tiers,
         },
     }
@@ -517,6 +626,8 @@ def render_markdown(report: dict) -> str:
         f"- recent-window zero-model drop: {number(inputs.get('recentZeroModelRateDrop')):.2%}",
         f"- adjudication call budget usage: {number(inputs.get('adjudicationBudgetUseRate')):.2%}",
         f"- tokens per crawled repository: {number(inputs.get('tokensPerCrawled')):.2f}",
+        f"- recent-window adjudication budget usage: {number(inputs.get('recentAdjudicationBudgetUseRate')):.2%}",
+        f"- recent-window tokens per crawled repository: {number(inputs.get('recentTokensPerCrawled')):.2f}",
         f"- drift reference: {inputs.get('driftReference') or 'unknown'}",
         f"- worst-run failure rate: {number(worst_rates.get('failureRate')):.2%}",
         f"- worst-run adjudication rate: {number(worst_rates.get('adjudicationRate')):.2%}",

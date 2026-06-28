@@ -1866,6 +1866,66 @@ fn parse_readme_title_line_rejects_promo_link_heading() {
 }
 
 #[test]
+fn parse_readme_metadata_uses_logo_alt_before_later_section_headings() {
+    let metadata = parse_readme_metadata(
+        r#"<p align="center">
+  <a href="https://fastapi.tiangolo.com"><img src="logo.png" alt="FastAPI"></a>
+</p>
+<p align="center">
+  <em>FastAPI framework, high performance, easy to learn, fast to code, ready for production</em>
+</p>
+
+## Opinions
+"#,
+    );
+
+    assert_eq!(metadata.title.as_deref(), Some("FastAPI"));
+    assert_eq!(
+        metadata.description.as_deref(),
+        Some("FastAPI framework, high performance, easy to learn, fast to code, ready for production")
+    );
+}
+
+#[test]
+fn parse_readme_metadata_ignores_promotions_before_and_after_title() {
+    let metadata = parse_readme_metadata(
+        r#"*[TokioConf 2026 program and tickets are now available!](https://tokioconf.com)*
+
+---
+
+# Tokio
+
+A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language.
+"#,
+    );
+    assert_eq!(metadata.title.as_deref(), Some("Tokio"));
+    assert_eq!(
+        metadata.description.as_deref(),
+        Some("A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language.")
+    );
+
+    let release = parse_readme_metadata(
+        r#"# Gin Web Framework
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/gin-gonic/gin?status.svg)](https://pkg.go.dev/github.com/gin-gonic/gin?tab=doc)
+
+## Gin 1.12.0 is now available!
+
+We're excited to announce the release of Gin 1.12.0! This release brings new features.
+
+---
+
+Gin is a high-performance HTTP web framework written in Go.
+"#,
+    );
+    assert_eq!(
+        release.description.as_deref(),
+        Some("Gin is a high-performance HTTP web framework written in Go.")
+    );
+    assert_eq!(release.docs_root, None);
+}
+
+#[test]
 fn try_parse_multiline_html_heading_extracts_name() {
     let lines: Vec<&str> = vec![
         "<h1 align=\"center\">",

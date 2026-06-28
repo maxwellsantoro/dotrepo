@@ -10,42 +10,80 @@ workload of known-repository questions:
 ```bash
 uv run python scripts/build_public_lookup_workload.py \
   --public-root public \
-  --limit 500 \
+  --mode research \
+  --limit 0 \
   --output /tmp/dotrepo-public-lookup-workload.json
 
 uv run python scripts/measure_public_lookup_efficiency.py \
   --public-root public \
   --index-root index \
   --workload /tmp/dotrepo-public-lookup-workload.json \
-  --min-task-hit-rate 0.8 \
-  --min-field-hit-rate 0.9 \
+  --min-tasks 620 \
+  --min-repositories 155 \
+  --min-task-hit-rate 0.64 \
+  --min-field-hit-rate 0.82 \
+  --min-intent-hit-rate overview=0.90 \
+  --min-intent-hit-rate execution=0.70 \
+  --min-intent-hit-rate documentation=0.32 \
+  --min-intent-hit-rate security=0.65 \
   --output-json /tmp/dotrepo-lookup-efficiency.json \
   --output-md /tmp/dotrepo-lookup-efficiency.md
 ```
 
-`build_public_lookup_workload.py` derives tasks from the exported inventory and
-profile completeness signals. Every task includes common identity-orientation
-fields such as `repo.description` and `repo.homepage`; build, test,
-documentation, security, ownership, license, language, and topic fields are
-included when the profile says those facts are present.
+`build_public_lookup_workload.py --mode research` emits four fixed tasks for
+every exported repository, independent of profile completeness: overview,
+execution, documentation, and security stewardship. This prevents the
+benchmark from selecting questions only after observing which answers are
+already present. The legacy `observed` mode remains useful for payload and
+retrieval-path checks, but it is not the production hit-rate workload.
 
 The report includes:
 
 - task hit rate: every requested field for a repository was present
 - field hit rate: individual requested fields that resolved to non-empty values
+- abstention rate: requested fields left empty rather than fabricated
 - compact dotrepo payload bytes: unique `profile.json` plus `query-input/`
   files needed by the workload
 - scrape proxy bytes: checked-in `record.toml` plus `evidence.md` bytes for the
   same repositories
 - per-task missing inputs and missing fields
-- optional pass/fail gates for task hit rate, field hit rate, and
-  dotrepo-to-scrape-proxy byte ratio
+- per-intent task and field hit rates
+- optional pass/fail gates for workload volume, repository coverage, aggregate
+  and per-intent hit rates, and dotrepo-to-scrape-proxy byte ratio
 
 `scrapeProxyBytes` is intentionally named as a proxy. It is deterministic and
 reviewable in CI, but it is not a live measurement of GitHub HTML/API traffic,
 repository archives, README fetches, dependency manifests, or model context.
 
-## Current fixture result
+## Current production-export result
+
+The canonical release gate builds the research workload from all 155 current
+profiles and applies the versioned baseline in
+`scripts/fixtures/public_lookup_efficiency_baseline.json`. Its current result is:
+
+| Metric | Value |
+| --- | ---: |
+| Repositories | 155 |
+| Tasks answered | 402 / 620 |
+| Task hit rate | 0.6484 |
+| Fields answered | 1150 / 1395 |
+| Field hit rate | 0.8244 |
+| Abstention rate | 0.1756 |
+| Overview task hit rate | 0.9032 |
+| Execution task hit rate | 0.7097 |
+| Documentation task hit rate | 0.3226 |
+| Security task hit rate | 0.6581 |
+| dotrepo bytes | 905131 |
+| scrape proxy bytes | 393199 |
+| dotrepo to scrape proxy ratio | 2.302 |
+
+The documentation slice is the clearest current bottleneck. The byte ratio is
+also reported without dressing it up: profile plus query-input JSON is larger
+than the already-normalized local record/evidence proxy. That proxy is not live
+GitHub or documentation scraping, so the report does not claim a 2.302x live
+network penalty or savings.
+
+## Fixture result
 
 Against the checked-in public export fixture and workload, the harness reports:
 
@@ -59,10 +97,5 @@ Against the checked-in public export fixture and workload, the harness reports:
 | scrape proxy bytes | 1356 |
 | dotrepo to scrape proxy ratio | 6.4617 |
 
-The fixture is small enough that the public JSON payload is larger than the
-local record/evidence proxy. That is useful signal, not a failure: fixture
-records are already normalized and tiny, while real agent scraping usually pays
-for source files, host responses, documentation pages, and interpretation
-context. The next benchmark step is to run the same report shape against a
-larger production workload and publish the resulting hit rate and byte
-comparison from the hosted snapshot.
+The fixture remains a deterministic unit-scale contract. Production thresholds
+come from the full generated export above, not from these two repositories.

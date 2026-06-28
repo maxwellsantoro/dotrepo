@@ -34,6 +34,13 @@ For the canonical freshness semantics used by these outputs, see
 - `public/docs/` and `public/writing/` contain their expected entry pages
 - representative repository `index.json`, `profile.json`, and `trust.json`
   files open cleanly
+- `public-profile-coverage.json` and `.md` pass the versioned valid-profile,
+  high-signal, malformed-profile, and completeness-signal baseline
+- `public-lookup-workload.json` covers the release inventory, and
+  `public-lookup-efficiency.json` and `.md` pass aggregate and per-intent volume,
+  hit-rate, and payload-ratio baselines
+- `public-factual-accuracy.json` and `.md` pass every cited exact-value assertion
+  in the versioned cross-ecosystem accuracy sample
 - representative `query-input/<host>/<owner>/<repo>.json` files exist for the
   same repositories
 - the packaged bundle extracts to one self-describing root directory

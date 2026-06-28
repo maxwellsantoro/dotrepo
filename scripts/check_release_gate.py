@@ -122,6 +122,122 @@ def extension_version(repo_root: Path) -> str:
     return version
 
 
+def public_profile_coverage_command(
+    repo_root: Path, public_dir: Path, output_root: Path
+) -> list[str]:
+    baseline_path = repo_root / "scripts/fixtures/public_profile_coverage_baseline.json"
+    baseline = json.loads(baseline_path.read_text())
+    if baseline.get("schema") != "dotrepo-public-profile-coverage-baseline/v0":
+        raise SystemExit(f"invalid public profile coverage baseline schema: {baseline_path}")
+    command = [
+        sys.executable,
+        "scripts/check_public_profile_coverage.py",
+        "--public-root",
+        str(public_dir),
+        "--min-profiles",
+        str(baseline["minProfiles"]),
+        "--min-high-signal",
+        str(baseline["minHighSignal"]),
+        "--min-high-signal-ratio",
+        str(baseline["minHighSignalRatio"]),
+        "--max-malformed-profiles",
+        str(baseline["maxMalformedProfiles"]),
+        "--output-json",
+        str(output_root / "public-profile-coverage.json"),
+        "--output-md",
+        str(output_root / "public-profile-coverage.md"),
+    ]
+    for signal, minimum in sorted((baseline.get("minSignal") or {}).items()):
+        command.extend(["--min-signal", f"{signal}={minimum}"])
+    return command
+
+
+def public_lookup_benchmark_commands(
+    repo_root: Path,
+    public_dir: Path,
+    output_root: Path,
+    generated_at: str,
+) -> list[list[str]]:
+    baseline_path = repo_root / "scripts/fixtures/public_lookup_efficiency_baseline.json"
+    baseline = json.loads(baseline_path.read_text())
+    if baseline.get("schema") != "dotrepo-public-lookup-efficiency-baseline/v0":
+        raise SystemExit(f"invalid public lookup efficiency baseline schema: {baseline_path}")
+    workload_path = output_root / "public-lookup-workload.json"
+    build_command = [
+        sys.executable,
+        "scripts/build_public_lookup_workload.py",
+        "--public-root",
+        str(public_dir),
+        "--mode",
+        str(baseline["mode"]),
+        "--limit",
+        str(baseline["limit"]),
+        "--output",
+        str(workload_path),
+    ]
+    measure_command = [
+        sys.executable,
+        "scripts/measure_public_lookup_efficiency.py",
+        "--public-root",
+        str(public_dir),
+        "--index-root",
+        "index",
+        "--workload",
+        str(workload_path),
+        "--generated-at",
+        generated_at,
+        "--min-tasks",
+        str(baseline["minTasks"]),
+        "--min-repositories",
+        str(baseline["minRepositories"]),
+        "--min-task-hit-rate",
+        str(baseline["minTaskHitRate"]),
+        "--min-field-hit-rate",
+        str(baseline["minFieldHitRate"]),
+        "--max-dotrepo-to-scrape-proxy-ratio",
+        str(baseline["maxDotrepoToScrapeProxyRatio"]),
+        "--output-json",
+        str(output_root / "public-lookup-efficiency.json"),
+        "--output-md",
+        str(output_root / "public-lookup-efficiency.md"),
+    ]
+    for intent, minimum in sorted((baseline.get("minIntentHitRate") or {}).items()):
+        measure_command.extend(["--min-intent-hit-rate", f"{intent}={minimum}"])
+    return [build_command, measure_command]
+
+
+def public_factual_accuracy_command(
+    repo_root: Path,
+    public_dir: Path,
+    output_root: Path,
+    generated_at: str,
+) -> list[str]:
+    baseline_path = repo_root / "scripts/fixtures/public_factual_accuracy_baseline.json"
+    baseline = json.loads(baseline_path.read_text())
+    if baseline.get("schema") != "dotrepo-public-factual-accuracy-baseline/v0":
+        raise SystemExit(f"invalid public factual accuracy baseline schema: {baseline_path}")
+    return [
+        sys.executable,
+        "scripts/measure_public_factual_accuracy.py",
+        "--public-root",
+        str(public_dir),
+        "--workload",
+        "scripts/fixtures/public_factual_accuracy_workload.json",
+        "--generated-at",
+        generated_at,
+        "--min-assertions",
+        str(baseline["minAssertions"]),
+        "--min-repositories",
+        str(baseline["minRepositories"]),
+        "--min-accuracy-rate",
+        str(baseline["minAccuracyRate"]),
+        "--output-json",
+        str(output_root / "public-factual-accuracy.json"),
+        "--output-md",
+        str(output_root / "public-factual-accuracy.md"),
+    ]
+
+
 def ensure_file(path: Path) -> None:
     if not path.is_file():
         raise SystemExit(f"expected file was not created: {path}")
@@ -700,6 +816,17 @@ def main() -> int:
         [sys.executable, "scripts/render_public_pages_landing.py", "--input", str(public_dir)],
         cwd=repo_root,
     )
+    run(public_profile_coverage_command(repo_root, public_dir, output_root), cwd=repo_root)
+    for command in public_lookup_benchmark_commands(
+        repo_root, public_dir, output_root, args.generated_at
+    ):
+        run(command, cwd=repo_root)
+    run(
+        public_factual_accuracy_command(
+            repo_root, public_dir, output_root, args.generated_at
+        ),
+        cwd=repo_root,
+    )
     run(
         [
             sys.executable,
@@ -816,6 +943,10 @@ def main() -> int:
     print("release gate artifacts")
     print(f"  public tree: {public_dir}")
     print(f"  public bundle: {public_bundle}")
+    print(f"  profile coverage: {output_root / 'public-profile-coverage.json'}")
+    print(f"  lookup workload: {output_root / 'public-lookup-workload.json'}")
+    print(f"  lookup efficiency: {output_root / 'public-lookup-efficiency.json'}")
+    print(f"  factual accuracy: {output_root / 'public-factual-accuracy.json'}")
     if release_bundle is not None:
         print(f"  release bundle: {release_bundle}")
     if vsix_path is not None:

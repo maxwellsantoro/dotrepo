@@ -276,7 +276,11 @@ queue. This sends `draft`, `inferred`, `imported`, low/medium-confidence, or
 missing build/test/security records back through the same crawl, verification,
 promotion, writeback, and telemetry conveyor instead of creating a separate
 manual review path. The selected-batch metadata records any
-`qualityReprocessSupplement` entries that were added.
+`qualityReprocessSupplement` entries that were added. Refresh planning bounds
+GitHub head inspection to `--limit` repositories and checks the oldest factual
+crawls first. The quality queue likewise orders eligible records by their
+generation timestamp before quality severity, so successful but still-partial
+records move behind older candidates instead of monopolizing every open slot.
 
 If batch slots remain after refresh and quality reprocessing, discovery can add
 new repositories directly to the same target list. Newly discovered candidates
@@ -484,6 +488,14 @@ of remaining as unresolved fixture candidates. Scheduled runs publish the gate i
 warn-only mode while evidence is accumulating; a strict run without
 `--warn-only` is the release-quality proof that the autonomous factory is
 operating inside its stated bounds.
+
+The scheduled workflow retains completed batch telemetry and any valid partial
+writebacks even when one or more repositories fail. It validates the resulting
+index before committing, uploads the gate report with the batch artifact, and
+then restores the failed workflow result after the evidence has landed. This
+allows recurring failures to accumulate into actionable fixture candidates
+without turning repository failures into silent green runs or discarding the
+history needed to identify them.
 
 These surfaces show whether optional synthesis would address a real bottleneck
 or duplicate work the factual pipeline already handles.

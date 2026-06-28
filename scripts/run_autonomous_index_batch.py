@@ -219,7 +219,7 @@ def identity_from_record_path(index_root: Path, record_path: Path) -> str:
     return f"{host}/{owner}/{repo}"
 
 
-def quality_reprocess_rank(candidate: dict) -> tuple[int, int, int, int, str]:
+def quality_reprocess_rank(candidate: dict) -> tuple[str, int, int, int, int, str]:
     status_order = {
         "draft": 0,
         "inferred": 1,
@@ -230,6 +230,7 @@ def quality_reprocess_rank(candidate: dict) -> tuple[int, int, int, int, str]:
     }
     confidence_order = {"low": 0, "medium": 1, "high": 2}
     return (
+        str(candidate.get("generatedAt") or ""),
         status_order.get(str(candidate.get("status")), -1),
         confidence_order.get(str(candidate.get("confidence")), -1),
         -int(candidate.get("missingBuild", False) or candidate.get("missingTest", False)),
@@ -268,6 +269,7 @@ def quality_reprocess_candidates(index_root: Path) -> list[dict]:
         candidates.append(
             {
                 "identity": identity_from_record_path(index_root, record_path),
+                "generatedAt": record.get("generated_at"),
                 "status": status,
                 "confidence": confidence,
                 "missingBuild": missing_build,
@@ -718,6 +720,31 @@ def aggregate_rates(runs: list[dict]) -> dict[str, float]:
     }
 
 
+def aggregate_costs(runs: list[dict]) -> dict[str, int | float]:
+    totals = Counter()
+    for run_telemetry in runs:
+        for key in (
+            "adjudicationCallBudget",
+            "adjudicationCalls",
+            "crawled",
+            "tokensUsed",
+        ):
+            totals[key] += int(run_telemetry.get(key) or 0)
+
+    budget = totals["adjudicationCallBudget"]
+    crawled = totals["crawled"]
+    return {
+        "adjudicationCallBudget": budget,
+        "adjudicationCalls": totals["adjudicationCalls"],
+        "adjudicationBudgetUseRate": (
+            totals["adjudicationCalls"] / budget if budget else 0.0
+        ),
+        "crawled": crawled,
+        "tokensUsed": totals["tokensUsed"],
+        "tokensPerCrawled": totals["tokensUsed"] / crawled if crawled else 0.0,
+    }
+
+
 def aggregate_runs(runs: list[dict]) -> dict:
     totals = Counter()
     failure_classes: Counter[str] = Counter()
@@ -820,6 +847,8 @@ def aggregate_runs(runs: list[dict]) -> dict:
     previous_window_runs = runs[-6:-3]
     recent_window_rates = aggregate_rates(recent_window_runs)
     previous_window_rates = aggregate_rates(previous_window_runs)
+    recent_window_costs = aggregate_costs(recent_window_runs)
+    previous_window_costs = aggregate_costs(previous_window_runs)
     recurring_failures = [
         {"fingerprint": fingerprint, "count": count}
         for fingerprint, count in failure_fingerprints.most_common(20)
@@ -864,9 +893,17 @@ def aggregate_runs(runs: list[dict]) -> dict:
         "recentWindowRates": {
             key: round(value, 6) for key, value in sorted(recent_window_rates.items())
         },
+        "recentWindowCosts": {
+            key: round(value, 6) if isinstance(value, float) else value
+            for key, value in sorted(recent_window_costs.items())
+        },
         "previousWindowRunCount": len(previous_window_runs),
         "previousWindowRates": {
             key: round(value, 6) for key, value in sorted(previous_window_rates.items())
+        },
+        "previousWindowCosts": {
+            key: round(value, 6) if isinstance(value, float) else value
+            for key, value in sorted(previous_window_costs.items())
         },
         "worstRunRates": {key: round(value, 6) for key, value in sorted(worst_rates.items())},
         "repositoriesByAdjudicationTier": dict(sorted(tier_counts.items())),

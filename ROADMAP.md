@@ -267,9 +267,15 @@ Current operational gaps:
   remote adjudication sidecar paths, but repeated runs still need to prove the
   tier mix stays within the intended cheap-primary/rare-tail shape
 - retained multi-run telemetry and a proof gate now exist, including worst-run
-  and recent-window drift checks; repeated scheduled runs still need to satisfy
-  that gate to demonstrate stable cost, resolution, promotion, and regression
-  rates
+  quality checks plus recent-window quality, adjudication-budget, and token-cost
+  drift checks; repeated scheduled runs still need to satisfy that gate to
+  demonstrate stable cost, resolution, promotion, and regression rates
+- scheduled failures now retain telemetry and valid partial writebacks before
+  restoring the failed workflow result, so early proof-gate failures and live
+  repository defects no longer prevent the multi-run history from accumulating
+- head-aware planning now bounds network inspection to the configured limit and
+  rotates oldest crawls first; quality reprocessing also rotates by generation
+  time so repeatedly partial records cannot monopolize scheduled batch slots
 - autonomous refresh now reprocesses lower-confidence checked-in records and
   newly discovered repositories through the same gate-passed writeback conveyor
 - recurring failures are grouped into operational defect classes, classified by
@@ -333,14 +339,26 @@ Current status:
   count, high-signal profile count and ratio, missing quality signals, and
   optional Milestone 2 count, ratio, per-signal minimum, and per-signal ceiling
   gates against the public tree
-- `scripts/build_public_lookup_workload.py` now derives larger benchmark
-  workloads from exported profile completeness so production lookup-efficiency
-  reports do not depend on a hand-maintained tiny fixture
+- profile coverage now validates the accepted response shape and path identity,
+  excludes malformed files from every coverage claim, and is enforced by the
+  canonical release gate through a versioned 155-profile/91-high-signal
+  baseline with ratcheted build, test, docs, ownership, security, and license
+  floors
+- `scripts/build_public_lookup_workload.py` now emits a fixed four-intent
+  research workload for every exported profile without preselecting known-present
+  fields, so production lookup-efficiency reports do not depend on a
+  hand-maintained tiny fixture or self-fulfilling completeness filters
 - `scripts/measure_public_lookup_efficiency.py` now produces deterministic
-  task hit-rate, field hit-rate, payload-byte, and optional pass/fail gate
-  reports for known-repository workloads against a public export
-- reaching 500 high-signal profiles and publishing a larger production workload
-  benchmark remain open
+  aggregate and per-intent task/field hit-rate, workload-volume, payload-byte,
+  and pass/fail gate reports for known-repository workloads; the canonical
+  release gate publishes the current 155-repository, 620-task benchmark against
+  a versioned baseline
+- the canonical release gate also checks a cited exact-value accuracy sample:
+  20 assertions across FastAPI, Tokio, and Gin currently pass, with workload
+  volume and repository count guarded against silent shrinkage; this sample
+  exposed and fixed live logo-title, announcement-description, and badge-link
+  parser failures now preserved as offline regression fixtures
+- reaching 500 high-signal profiles remains open
 
 Exit criteria:
 

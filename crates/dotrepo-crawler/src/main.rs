@@ -165,7 +165,8 @@ struct RefreshPlanArgs {
     /// Path to the crawler state TOML file.
     #[arg(long, default_value = "index/.crawler-state.toml")]
     state_path: PathBuf,
-    /// Maximum number of refreshes to schedule. Defaults to the tracked repo count.
+    /// Maximum tracked repositories to inspect and schedule.
+    /// Oldest factual crawls are inspected first. Defaults to the tracked repo count.
     #[arg(long)]
     limit: Option<usize>,
     /// Optional fixed RFC 3339 timestamp for deterministic scheduling output.
@@ -795,8 +796,9 @@ fn cmd_schedule(args: ScheduleArgs) -> Result<()> {
 fn cmd_refresh_plan(args: RefreshPlanArgs) -> Result<()> {
     let (state, state_source) = load_refresh_state_for_plan(&args.state_path)?;
     let tracked_repositories = state.repositories.len();
-    let candidates = refresh_candidates_from_state(&state)?;
-    let effective_limit = args.limit.unwrap_or(candidates.len());
+    let effective_limit = args.limit.unwrap_or(tracked_repositories);
+    let inspection_state = refresh_inspection_state(&state, effective_limit);
+    let candidates = refresh_candidates_from_state(&inspection_state)?;
     let schedule = schedule_refresh(&ScheduleRefreshRequest {
         now: args.now,
         limit: effective_limit,
@@ -860,6 +862,26 @@ fn cmd_refresh_plan(args: RefreshPlanArgs) -> Result<()> {
     }
 
     Ok(())
+}
+
+fn refresh_inspection_state(state: &CrawlerStateSnapshot, limit: usize) -> CrawlerStateSnapshot {
+    let mut repositories = state.repositories.clone();
+    repositories.sort_by(|left, right| {
+        (
+            left.last_factual_crawl_at.as_deref().unwrap_or(""),
+            left.repository.host.as_str(),
+            left.repository.owner.as_str(),
+            left.repository.repo.as_str(),
+        )
+            .cmp(&(
+                right.last_factual_crawl_at.as_deref().unwrap_or(""),
+                right.repository.host.as_str(),
+                right.repository.owner.as_str(),
+                right.repository.repo.as_str(),
+            ))
+    });
+    repositories.truncate(limit);
+    CrawlerStateSnapshot { repositories }
 }
 
 fn seed_request_from_args(
@@ -1762,6 +1784,64 @@ how_to_contribute = "Open a PR"
         assert_eq!(record.synthesis_model.as_deref(), Some("gpt-5.4"));
 
         std::fs::remove_dir_all(root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn refresh_inspection_limit_rotates_oldest_factual_crawls_first() {
+        let record = |repo: &str, last_factual_crawl_at: Option<&str>| CrawlStateRecord {
+            repository: RepositoryRef {
+                host: "github.com".into(),
+                owner: "example".into(),
+                repo: repo.into(),
+            },
+            default_branch: Some("main".into()),
+            head_sha: Some(format!("{repo}-sha")),
+            last_factual_crawl_at: last_factual_crawl_at.map(str::to_string),
+            last_synthesis_success_at: None,
+            last_synthesis_failure: None,
+            synthesis_model: None,
+        };
+        let state = CrawlerStateSnapshot {
+            repositories: vec![
+                record("newest", Some("2026-03-20T00:00:00Z")),
+                record("missing", None),
+                record("oldest", Some("2026-03-01T00:00:00Z")),
+                record("middle", Some("2026-03-10T00:00:00Z")),
+            ],
+        };
+
+        let inspected = refresh_inspection_state(&state, 3);
+
+        assert_eq!(
+            inspected
+                .repositories
+                .iter()
+                .map(|record| record.repository.repo.as_str())
+                .collect::<Vec<_>>(),
+            vec!["missing", "oldest", "middle"]
+        );
+        assert_eq!(state.repositories[0].repository.repo, "newest");
+    }
+
+    #[test]
+    fn refresh_inspection_limit_allows_empty_plans() {
+        let state = CrawlerStateSnapshot {
+            repositories: vec![CrawlStateRecord {
+                repository: RepositoryRef {
+                    host: "github.com".into(),
+                    owner: "example".into(),
+                    repo: "orbit".into(),
+                },
+                default_branch: Some("main".into()),
+                head_sha: Some("abc123".into()),
+                last_factual_crawl_at: None,
+                last_synthesis_success_at: None,
+                last_synthesis_failure: None,
+                synthesis_model: None,
+            }],
+        };
+
+        assert!(refresh_inspection_state(&state, 0).repositories.is_empty());
     }
 
     #[test]

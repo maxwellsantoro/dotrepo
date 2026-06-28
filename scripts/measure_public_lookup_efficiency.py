@@ -46,6 +46,18 @@ def parse_args() -> argparse.Namespace:
         help="Fail when task hit rate is below this threshold",
     )
     parser.add_argument(
+        "--min-tasks",
+        type=int,
+        default=0,
+        help="Fail when the workload contains fewer tasks than this threshold",
+    )
+    parser.add_argument(
+        "--min-repositories",
+        type=int,
+        default=0,
+        help="Fail when the workload covers fewer unique repositories than this threshold",
+    )
+    parser.add_argument(
         "--min-field-hit-rate",
         type=float,
         default=0.0,
@@ -60,6 +72,13 @@ def parse_args() -> argparse.Namespace:
             "Unset by default because fixture-scale payloads can be larger than "
             "their normalized record/evidence proxy."
         ),
+    )
+    parser.add_argument(
+        "--min-intent-hit-rate",
+        action="append",
+        default=[],
+        metavar="INTENT=RATE",
+        help="Fail when an intent's task hit rate is below RATE; may be repeated",
     )
     return parser.parse_args()
 
@@ -84,6 +103,25 @@ def generated_timestamp(override: Optional[str]) -> str:
     if override:
         return override
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def parse_intent_hit_rates(values: list[str]) -> dict[str, float]:
+    rates = {}
+    for raw in values:
+        if "=" not in raw:
+            raise SystemExit(f"--min-intent-hit-rate must use INTENT=RATE, got {raw!r}")
+        intent, rate_text = raw.split("=", 1)
+        intent = intent.strip()
+        if not intent:
+            raise SystemExit("--min-intent-hit-rate requires a nonempty intent")
+        try:
+            rate = float(rate_text)
+        except ValueError as exc:
+            raise SystemExit(f"invalid intent hit rate: {raw!r}") from exc
+        if not 0 <= rate <= 1:
+            raise SystemExit(f"intent hit rate must be between 0 and 1: {raw!r}")
+        rates[intent] = rate
+    return rates
 
 
 def file_size_from_manifest(public_root: Path) -> dict[str, int]:
@@ -208,6 +246,7 @@ def analyze_task(
     return {
         "id": task["id"],
         "repository": repository,
+        **({"intent": task["intent"]} if isinstance(task.get("intent"), str) else {}),
         "fields": list(task["fields"]),
         "answeredFields": answered_fields,
         "missingFields": missing_fields,
@@ -265,9 +304,22 @@ def build_gates(
     *,
     min_task_hit_rate: float = 0.0,
     min_field_hit_rate: float = 0.0,
+    min_tasks: int = 0,
+    min_repositories: int = 0,
+    min_intent_hit_rates: dict[str, float] | None = None,
     max_dotrepo_to_scrape_proxy_ratio: Optional[float] = None,
 ) -> dict[str, Any]:
     gates: dict[str, Any] = {
+        "minTasks": {
+            "threshold": min_tasks,
+            "actual": summary["taskCount"],
+            "passed": summary["taskCount"] >= min_tasks,
+        },
+        "minRepositories": {
+            "threshold": min_repositories,
+            "actual": summary["repositoryCount"],
+            "passed": summary["repositoryCount"] >= min_repositories,
+        },
         "minTaskHitRate": {
             "threshold": min_task_hit_rate,
             "actual": summary["hitRate"],
@@ -279,6 +331,14 @@ def build_gates(
             "passed": (summary["fieldHitRate"] or 0.0) >= min_field_hit_rate,
         },
     }
+    for intent, threshold in sorted((min_intent_hit_rates or {}).items()):
+        intent_summary = summary["intentSummaries"].get(intent)
+        actual = intent_summary.get("hitRate") if intent_summary else None
+        gates[f"minIntentHitRate.{intent}"] = {
+            "threshold": threshold,
+            "actual": actual,
+            "passed": actual is not None and actual >= threshold,
+        }
     if max_dotrepo_to_scrape_proxy_ratio is not None:
         ratio_value = summary["dotrepoToScrapeProxyRatio"]
         gates["maxDotrepoToScrapeProxyRatio"] = {
@@ -297,6 +357,9 @@ def summarize(
     generated_at: Optional[str] = None,
     min_task_hit_rate: float = 0.0,
     min_field_hit_rate: float = 0.0,
+    min_tasks: int = 0,
+    min_repositories: int = 0,
+    min_intent_hit_rates: dict[str, float] | None = None,
     max_dotrepo_to_scrape_proxy_ratio: Optional[float] = None,
 ) -> dict[str, Any]:
     workload = load_workload(workload_path)
@@ -309,6 +372,30 @@ def summarize(
     hit_count = sum(1 for task in tasks if task["hit"])
     field_count = sum(len(task["fields"]) for task in tasks)
     answered_field_count = sum(len(task["answeredFields"]) for task in tasks)
+    repositories = {task["repository"] for task in tasks}
+    intent_summaries = {}
+    intents = sorted(
+        {task["intent"] for task in tasks if isinstance(task.get("intent"), str)}
+    )
+    for intent in intents:
+        intent_tasks = [task for task in tasks if task.get("intent") == intent]
+        intent_field_count = sum(len(task["fields"]) for task in intent_tasks)
+        intent_answered_fields = sum(
+            len(task["answeredFields"]) for task in intent_tasks
+        )
+        intent_hits = sum(1 for task in intent_tasks if task["hit"])
+        intent_summaries[intent] = {
+            "taskCount": len(intent_tasks),
+            "hitCount": intent_hits,
+            "hitRate": safe_ratio(intent_hits, len(intent_tasks)),
+            "fieldCount": intent_field_count,
+            "answeredFieldCount": intent_answered_fields,
+            "fieldHitRate": safe_ratio(intent_answered_fields, intent_field_count),
+            "abstainedFieldCount": intent_field_count - intent_answered_fields,
+            "abstentionRate": safe_ratio(
+                intent_field_count - intent_answered_fields, intent_field_count
+            ),
+        }
     dotrepo_bytes, scrape_proxy_bytes = unique_file_bytes(
         workload["tasks"],
         public_root,
@@ -319,21 +406,28 @@ def summarize(
 
     summary = {
         "taskCount": task_count,
+        "repositoryCount": len(repositories),
         "hitCount": hit_count,
         "hitRate": safe_ratio(hit_count, task_count),
         "fieldCount": field_count,
         "answeredFieldCount": answered_field_count,
         "fieldHitRate": safe_ratio(answered_field_count, field_count),
+        "abstainedFieldCount": field_count - answered_field_count,
+        "abstentionRate": safe_ratio(field_count - answered_field_count, field_count),
         "dotrepoBytes": dotrepo_bytes,
         "scrapeProxyBytes": scrape_proxy_bytes,
         "bytesSaved": bytes_saved,
         "bytesSavedRatio": safe_ratio(bytes_saved, scrape_proxy_bytes),
         "dotrepoToScrapeProxyRatio": safe_ratio(dotrepo_bytes, scrape_proxy_bytes),
+        "intentSummaries": intent_summaries,
     }
     gates = build_gates(
         summary,
         min_task_hit_rate=min_task_hit_rate,
         min_field_hit_rate=min_field_hit_rate,
+        min_tasks=min_tasks,
+        min_repositories=min_repositories,
+        min_intent_hit_rates=min_intent_hit_rates,
         max_dotrepo_to_scrape_proxy_ratio=max_dotrepo_to_scrape_proxy_ratio,
     )
 
@@ -366,9 +460,12 @@ def render_markdown(report: dict[str, Any]) -> str:
         "| Metric | Value |",
         "| --- | ---: |",
         f"| Tasks answered | {summary['hitCount']} / {summary['taskCount']} |",
+        f"| Repositories covered | {summary['repositoryCount']} |",
         f"| Task hit rate | {summary['hitRate']} |",
         f"| Fields answered | {summary['answeredFieldCount']} / {summary['fieldCount']} |",
         f"| Field hit rate | {summary['fieldHitRate']} |",
+        f"| Fields abstained | {summary['abstainedFieldCount']} / {summary['fieldCount']} |",
+        f"| Abstention rate | {summary['abstentionRate']} |",
         f"| dotrepo bytes | {summary['dotrepoBytes']} |",
         f"| scrape proxy bytes | {summary['scrapeProxyBytes']} |",
         f"| bytes saved | {summary['bytesSaved']} |",
@@ -384,6 +481,23 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.append(
             f"| {name} | {gate['actual']} | {gate['threshold']} | {'pass' if gate['passed'] else 'fail'} |"
         )
+    if summary["intentSummaries"]:
+        lines.extend(
+            [
+                "",
+                "## Intent Results",
+                "",
+                "| Intent | Tasks answered | Task hit rate | Fields answered | Field hit rate | Abstention rate |",
+                "| --- | ---: | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for intent, intent_summary in summary["intentSummaries"].items():
+            lines.append(
+                f"| {intent} | {intent_summary['hitCount']} / {intent_summary['taskCount']} | "
+                f"{intent_summary['hitRate']} | {intent_summary['answeredFieldCount']} / "
+                f"{intent_summary['fieldCount']} | {intent_summary['fieldHitRate']} | "
+                f"{intent_summary['abstentionRate']} |"
+            )
     lines.extend([
         "",
         "| Task | Repository | Hit | Missing fields |",
@@ -416,6 +530,9 @@ def main() -> int:
         generated_at=args.generated_at,
         min_task_hit_rate=args.min_task_hit_rate,
         min_field_hit_rate=args.min_field_hit_rate,
+        min_tasks=args.min_tasks,
+        min_repositories=args.min_repositories,
+        min_intent_hit_rates=parse_intent_hit_rates(args.min_intent_hit_rate),
         max_dotrepo_to_scrape_proxy_ratio=args.max_dotrepo_to_scrape_proxy_ratio,
     )
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"

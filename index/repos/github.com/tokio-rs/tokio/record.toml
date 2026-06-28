@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tokio-rs/tokio"
-generated_at = "2026-06-26T17:45:45.964103Z"
+generated_at = "2026-06-28T02:27:53.063702Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Importe
 
 [repo]
 name = "Tokio"
-description = "TokioConf 2026 program and tickets are now available!"
+description = "A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language."
 homepage = "https://tokio.rs"
 license = "MIT"
 visibility = "public"

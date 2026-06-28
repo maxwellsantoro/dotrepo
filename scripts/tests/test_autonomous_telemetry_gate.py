@@ -30,6 +30,8 @@ def args(**overrides: object) -> Namespace:
         "min_zero_model_rate": 0.75,
         "max_adjudication_budget_use_rate": 1.0,
         "max_tokens_per_crawled": 5000.0,
+        "max_recent_adjudication_budget_use_rate_delta": 0.25,
+        "max_recent_tokens_per_crawled_delta": 1000.0,
     }
     defaults.update(overrides)
     return Namespace(**defaults)
@@ -89,8 +91,8 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
     assert report["passed"]
     assert all(item["passed"] for item in report["checks"])
     assert report["checkSummary"] == {
-        "total": 29,
-        "passed": 29,
+        "total": 33,
+        "passed": 33,
         "failed": 0,
         "failedLabels": [],
     }
@@ -111,6 +113,8 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
         "minZeroModelRate": 0.75,
         "maxAdjudicationBudgetUseRate": 1.0,
         "maxTokensPerCrawled": 5000.0,
+        "maxRecentAdjudicationBudgetUseRateDelta": 0.25,
+        "maxRecentTokensPerCrawledDelta": 1000.0,
     }
     assert report["inputs"]["secondOpinionRate"] == 0.0
     assert report["inputs"]["apiEscalationRate"] == 0.05
@@ -268,7 +272,7 @@ def test_evaluate_allows_environmental_recurring_failures_for_fixture_gate() -> 
     assert report["inputs"]["fixtureEligibleRecurringFailures"] == []
 
 
-def test_evaluate_rejects_excessive_cost_when_quality_rates_pass() -> None:
+def test_evaluate_rejects_recent_cost_spike_hidden_by_aggregate_rates() -> None:
     summary = {
         "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
         "generatedAt": "2026-03-18T12:00:00Z",
@@ -276,12 +280,12 @@ def test_evaluate_rejects_excessive_cost_when_quality_rates_pass() -> None:
         "budgetExhaustedRuns": 0,
         "totals": {
             "adjudicationCallBudget": 10,
-            "adjudicationCalls": 11,
+            "adjudicationCalls": 4,
             "crawled": 20,
             "written": 18,
             "failed": 0,
             "promoted": 8,
-            "tokensUsed": 120000,
+            "tokensUsed": 1000,
         },
         "rates": {
             "failureRate": 0.0,
@@ -312,6 +316,22 @@ def test_evaluate_rejects_excessive_cost_when_quality_rates_pass() -> None:
             "apiEscalationRate": 0.05,
             "zeroModelRate": 0.8,
         },
+        "recentWindowCosts": {
+            "adjudicationCallBudget": 6,
+            "adjudicationCalls": 6,
+            "adjudicationBudgetUseRate": 1.0,
+            "crawled": 12,
+            "tokensUsed": 72000,
+            "tokensPerCrawled": 6000.0,
+        },
+        "previousWindowCosts": {
+            "adjudicationCallBudget": 4,
+            "adjudicationCalls": 2,
+            "adjudicationBudgetUseRate": 0.5,
+            "crawled": 8,
+            "tokensUsed": 200,
+            "tokensPerCrawled": 25.0,
+        },
         "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
         "regressionFixtureCandidates": [],
     }
@@ -323,8 +343,9 @@ def test_evaluate_rejects_excessive_cost_when_quality_rates_pass() -> None:
 
     assert not report["passed"]
     assert failed_labels == {
-        "adjudication call budget usage",
-        "tokens per crawled repository",
+        "recent-window adjudication budget usage drift",
+        "recent-window token intensity drift",
+        "recent-window tokens per crawled repository",
     }
 
 
@@ -897,6 +918,28 @@ def test_evaluate_rejects_missing_or_invalid_count_proof_fields() -> None:
         {
             **summary,
             "repositoriesByAdjudicationTier": {"local_primary": True},
+        },
+        {
+            **summary,
+            "recentWindowCosts": {
+                "adjudicationCallBudget": 10,
+                "adjudicationCalls": 4,
+                "adjudicationBudgetUseRate": 0.3,
+                "crawled": 20,
+                "tokensUsed": 1000,
+                "tokensPerCrawled": 50.0,
+            },
+        },
+        {
+            **summary,
+            "previousWindowCosts": {
+                "adjudicationCallBudget": 10,
+                "adjudicationCalls": 4,
+                "adjudicationBudgetUseRate": 0.4,
+                "crawled": 20,
+                "tokensUsed": 1000,
+                "tokensPerCrawled": True,
+            },
         },
     ]
 

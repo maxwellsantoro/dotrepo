@@ -29,13 +29,25 @@ def write_profile(
     profile_dir.mkdir(parents=True)
     profile = {
         "apiVersion": "v0",
+        "freshness": {
+            "generatedAt": "2026-06-28T00:00:00Z",
+            "snapshotDigest": "a" * 64,
+        },
         "identity": {
             "host": "github.com",
             "owner": owner,
             "repo": repo,
             "source": f"https://github.com/{owner}/{repo}",
         },
+        "record": {
+            "manifestPath": f"repos/github.com/{owner}/{repo}/record.toml",
+            "mode": "overlay",
+        },
         "purpose": f"{repo} purpose",
+        "name": repo,
+        "execution": {},
+        "docs": {},
+        "ownership": {},
         "completeness": {
             "hasBuild": has_build,
             "hasTest": has_test,
@@ -48,6 +60,15 @@ def write_profile(
         "trust": {
             "selectedStatus": status,
             "confidence": confidence,
+            "selectionReason": "only_matching_record",
+        },
+        "conflicts": [],
+        "links": {
+            "self": f"/v0/repos/github.com/{owner}/{repo}/profile.json",
+            "repository": f"/v0/repos/github.com/{owner}/{repo}/index.json",
+            "trust": f"/v0/repos/github.com/{owner}/{repo}/trust.json",
+            "queryTemplate": f"/v0/repos/github.com/{owner}/{repo}/query?path={{dot_path}}",
+            "indexPath": f"repos/github.com/{owner}/{repo}/",
         },
     }
     (profile_dir / "profile.json").write_text(json.dumps(profile, indent=2) + "\n")
@@ -70,6 +91,8 @@ def test_summarize_reports_profile_and_high_signal_counts(tmp_path: Path) -> Non
 
     assert report["schema"] == "dotrepo-public-profile-coverage/v0"
     assert report["summary"]["profileCount"] == 2
+    assert report["summary"]["discoveredProfileCount"] == 2
+    assert report["summary"]["malformedProfileCount"] == 0
     assert report["summary"]["highSignalProfileCount"] == 1
     assert report["summary"]["highSignalRatio"] == 0.5
     assert report["gates"]["minProfiles"]["passed"] is True
@@ -80,6 +103,7 @@ def test_summarize_reports_profile_and_high_signal_counts(tmp_path: Path) -> Non
     assert report["summary"]["signalCounts"]["hasPurpose"] == 2
     assert report["gates"]["minSignal"] == {}
     assert report["gates"]["maxMissingSignal"] == {}
+    assert report["gates"]["maxMalformedProfiles"]["passed"] is True
     assert report["lowerSignalProfiles"][0]["identity"] == "github.com/example/beta"
     assert "hasBuild" in report["lowerSignalProfiles"][0]["missingSignals"]
 
@@ -232,3 +256,60 @@ def test_render_markdown_lists_min_signal_gates(tmp_path: Path) -> None:
 
     assert "## Signal Minimum Gates" in markdown
     assert "- `hasDocs`: 1 / 2 (fail)" in markdown
+
+
+def test_malformed_profiles_do_not_satisfy_coverage_counts(tmp_path: Path) -> None:
+    public_root = tmp_path / "public"
+    write_profile(public_root, "example", "valid")
+    write_profile(public_root, "example", "wrong-path")
+    malformed_path = (
+        public_root
+        / "v0/repos/github.com/example/wrong-path/profile.json"
+    )
+    malformed = json.loads(malformed_path.read_text())
+    malformed["identity"]["repo"] = "different"
+    malformed_path.write_text(json.dumps(malformed))
+
+    report = coverage.summarize(
+        public_root,
+        min_profiles=2,
+        min_high_signal=2,
+        max_items=10,
+    )
+
+    assert report["passed"] is False
+    assert report["summary"]["discoveredProfileCount"] == 2
+    assert report["summary"]["profileCount"] == 1
+    assert report["summary"]["malformedProfileCount"] == 1
+    assert report["gates"]["minProfiles"]["actual"] == 1
+    assert report["gates"]["maxMalformedProfiles"] == {
+        "threshold": 0,
+        "actual": 1,
+        "passed": False,
+    }
+    assert "identity does not match profile path" in report["malformedProfiles"][0][
+        "contractErrors"
+    ][0]
+
+
+def test_invalid_json_profile_is_reported_without_aborting_audit(tmp_path: Path) -> None:
+    public_root = tmp_path / "public"
+    write_profile(public_root, "example", "valid")
+    invalid_path = public_root / "v0/repos/github.com/example/invalid/profile.json"
+    invalid_path.parent.mkdir(parents=True)
+    invalid_path.write_text("{not-json")
+
+    report = coverage.summarize(
+        public_root,
+        min_profiles=1,
+        min_high_signal=1,
+        max_items=10,
+        max_malformed_profiles=1,
+    )
+
+    assert report["passed"] is True
+    assert report["summary"]["profileCount"] == 1
+    assert report["summary"]["malformedProfileCount"] == 1
+    assert report["malformedProfiles"][0]["contractErrors"][0].startswith(
+        "invalid JSON:"
+    )

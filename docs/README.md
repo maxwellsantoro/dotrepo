@@ -23,6 +23,7 @@ project tooling rather than additional plan documents.
 - [`public-freshness.md`](./public-freshness.md)
 - [`public-api-compatibility.md`](./public-api-compatibility.md)
 - [`public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
+- [`public-factual-accuracy-benchmark.md`](./public-factual-accuracy-benchmark.md)
 - [`public-search-quality-benchmark.md`](./public-search-quality-benchmark.md)
 - [`../index/README.md`](../index/README.md)
 

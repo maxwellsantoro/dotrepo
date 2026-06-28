@@ -121,6 +121,8 @@ jobs:
             echo "INDEX_MAX_BATCH_ADJUDICATION_CALLS=${{ vars.INDEX_MAX_BATCH_ADJUDICATION_CALLS || vars.INDEX_MAX_ADJUDICATION_CALLS || '4' }}"
           } >> "$GITHUB_ENV"
       - name: Run autonomous refresh batch
+        id: autonomous_batch
+        continue-on-error: true
         run: |
           uv run python scripts/run_autonomous_index_batch.py \
             --batch-id "${{ github.event.inputs.batch_id || 'refresh-batch-01' }}" \
@@ -130,6 +132,24 @@ jobs:
             --discovery-limit "${{ vars.INDEX_DISCOVERY_LIMIT || github.event.inputs.batch_size || '5' }}" \
             --output-dir index-autonomous-batch \
             --skip-automation-enabled-check
+      - name: Evaluate autonomous telemetry gate
+        id: telemetry_gate
+        if: always()
+        shell: bash
+        run: |
+          if [ -f index/telemetry/autonomous-summary.json ]; then
+            uv run python scripts/check_autonomous_telemetry_gate.py \
+              --summary index/telemetry/autonomous-summary.json \
+              --output-json index-autonomous-batch/autonomous-telemetry-gate.json \
+              --output-md index-autonomous-batch/autonomous-telemetry-gate.md \
+              --warn-only
+          else
+            echo "No retained telemetry summary yet; skipping telemetry gate"
+          fi
+      - name: Validate autonomous index state
+        id: validate_index
+        if: always()
+        run: cargo run -q -p dotrepo-cli -- validate-index
       - name: Upload batch telemetry
         if: always()
         uses: actions/upload-artifact@v7
@@ -138,22 +158,14 @@ jobs:
           path: index-autonomous-batch/
           if-no-files-found: warn
           retention-days: 14
-      - name: Evaluate autonomous telemetry gate
-        if: always()
-        shell: bash
-        run: |
-          if [ -f index/telemetry/autonomous-summary.json ]; then
-            uv run python scripts/check_autonomous_telemetry_gate.py \
-              --summary index/telemetry/autonomous-summary.json \
-              --output-json index-autonomous-batch/autonomous-telemetry-gate.json \
-              --output-md index-autonomous-batch/autonomous-telemetry-gate.md
-          else
-            echo "No retained telemetry summary yet; skipping telemetry gate"
-          fi
       - name: Commit and push index updates
-        if: success()
+        if: always() && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success'
         shell: bash
         run: |
+          if [ ! -f index-autonomous-batch/telemetry.json ]; then
+            echo "No completed batch telemetry; refusing to land partial state"
+            exit 0
+          fi
           if git diff --quiet -- index; then
             echo "No index changes to land"
             exit 0
@@ -249,3 +261,8 @@ jobs:
               echo "- telemetry: unavailable"
             fi
           } >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve autonomous batch failure result
+        if: always() && steps.autonomous_batch.outcome == 'failure'
+        run: |
+          echo "Autonomous batch reported one or more failures after retaining telemetry" >&2
+          exit 1

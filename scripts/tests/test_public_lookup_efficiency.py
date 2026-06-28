@@ -30,11 +30,15 @@ def test_summarize_fixture_workload_reports_hit_rates_and_bytes() -> None:
 
     assert report["schema"] == "dotrepo-public-lookup-efficiency/v0"
     assert report["summary"]["taskCount"] == 2
+    assert report["summary"]["repositoryCount"] == 2
+    assert report["summary"]["intentSummaries"] == {}
     assert report["summary"]["hitCount"] == 1
     assert report["summary"]["hitRate"] == 0.5
     assert report["summary"]["fieldCount"] == 11
     assert report["summary"]["answeredFieldCount"] == 7
     assert report["summary"]["fieldHitRate"] == 0.6364
+    assert report["summary"]["abstainedFieldCount"] == 4
+    assert report["summary"]["abstentionRate"] == 0.3636
     assert report["summary"]["dotrepoBytes"] > 0
     assert report["summary"]["scrapeProxyBytes"] > 0
     assert report["passed"] is True
@@ -98,6 +102,9 @@ def test_threshold_gates_mark_report_failed() -> None:
         generated_at="2026-03-10T18:30:00Z",
         min_task_hit_rate=0.75,
         min_field_hit_rate=0.75,
+        min_tasks=3,
+        min_repositories=3,
+        min_intent_hit_rates={"overview": 0.5},
         max_dotrepo_to_scrape_proxy_ratio=1.0,
     )
 
@@ -117,6 +124,67 @@ def test_threshold_gates_mark_report_failed() -> None:
         "actual": 6.4617,
         "passed": False,
     }
+    assert report["gates"]["minTasks"]["passed"] is False
+    assert report["gates"]["minRepositories"]["passed"] is False
+    assert report["gates"]["minIntentHitRate.overview"] == {
+        "threshold": 0.5,
+        "actual": None,
+        "passed": False,
+    }
+
+
+def test_intent_summaries_and_gates_are_reported(tmp_path: Path) -> None:
+    workload = tmp_path / "workload.json"
+    workload.write_text(
+        """
+{
+  "schema": "dotrepo-public-lookup-workload/v0",
+  "tasks": [
+    {
+      "id": "overview",
+      "intent": "overview",
+      "repository": "github.com/example/orbit",
+      "fields": ["repo.description", "repo.homepage"]
+    },
+    {
+      "id": "docs",
+      "intent": "documentation",
+      "repository": "github.com/example/nova",
+      "fields": ["docs.root"]
+    }
+  ]
+}
+""".strip()
+        + "\n"
+    )
+
+    report = lookup_efficiency.summarize(
+        PUBLIC_ROOT,
+        INDEX_ROOT,
+        workload,
+        generated_at="2026-03-10T18:30:00Z",
+        min_intent_hit_rates={"documentation": 1.0, "overview": 1.0},
+    )
+
+    assert report["summary"]["intentSummaries"]["overview"] == {
+        "taskCount": 1,
+        "hitCount": 1,
+        "hitRate": 1.0,
+        "fieldCount": 2,
+        "answeredFieldCount": 2,
+        "fieldHitRate": 1.0,
+        "abstainedFieldCount": 0,
+        "abstentionRate": 0.0,
+    }
+    assert report["summary"]["intentSummaries"]["documentation"]["hitRate"] == 0.0
+    assert report["gates"]["minIntentHitRate.overview"]["passed"] is True
+    assert report["gates"]["minIntentHitRate.documentation"]["passed"] is False
+
+
+def test_parse_intent_hit_rates_validates_bounds() -> None:
+    assert lookup_efficiency.parse_intent_hit_rates(
+        ["overview=0.9", "documentation=0.3"]
+    ) == {"overview": 0.9, "documentation": 0.3}
 
 
 def test_render_markdown_includes_summary_table() -> None:

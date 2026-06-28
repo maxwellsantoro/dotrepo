@@ -88,6 +88,14 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "secondOpinionRate": 0.0,
         "zeroModelRate": 0.75,
     }
+    assert summary["recentWindowCosts"] == {
+        "adjudicationBudgetUseRate": 0.0,
+        "adjudicationCallBudget": 0,
+        "adjudicationCalls": 2,
+        "crawled": 4,
+        "tokensPerCrawled": 12.5,
+        "tokensUsed": 50,
+    }
     assert summary["previousWindowRunCount"] == 0
     assert summary["previousWindowRates"] == {
         "adjudicationRate": 0.0,
@@ -95,6 +103,14 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
         "failureRate": 0.0,
         "secondOpinionRate": 0.0,
         "zeroModelRate": 0.0,
+    }
+    assert summary["previousWindowCosts"] == {
+        "adjudicationBudgetUseRate": 0.0,
+        "adjudicationCallBudget": 0,
+        "adjudicationCalls": 0,
+        "crawled": 0,
+        "tokensPerCrawled": 0.0,
+        "tokensUsed": 0,
     }
     assert summary["repositoriesByAdjudicationTier"] == {
         "api_escalation": 1,
@@ -197,6 +213,9 @@ def test_aggregate_runs_calculates_previous_window_rates() -> None:
                 "failed": 0,
                 "skipped": 0,
                 "adjudicationBudgetExhausted": False,
+                "adjudicationCallBudget": 4,
+                "adjudicationCalls": 4 if recent else 1,
+                "tokensUsed": 800 if recent else 200,
                 "zeroModelRuns": 2 if recent else 4,
                 "repositoriesByAdjudicationTier": (
                     {"local_primary": 2, "api_escalation": 1} if recent else {}
@@ -224,6 +243,22 @@ def test_aggregate_runs_calculates_previous_window_rates() -> None:
         "failureRate": 0.0,
         "secondOpinionRate": 0.0,
         "zeroModelRate": 1.0,
+    }
+    assert summary["recentWindowCosts"] == {
+        "adjudicationBudgetUseRate": 1.0,
+        "adjudicationCallBudget": 12,
+        "adjudicationCalls": 12,
+        "crawled": 12,
+        "tokensPerCrawled": 200.0,
+        "tokensUsed": 2400,
+    }
+    assert summary["previousWindowCosts"] == {
+        "adjudicationBudgetUseRate": 0.25,
+        "adjudicationCallBudget": 12,
+        "adjudicationCalls": 3,
+        "crawled": 12,
+        "tokensPerCrawled": 50.0,
+        "tokensUsed": 600,
     }
 
 
@@ -679,6 +714,46 @@ def test_quality_reprocess_candidates_prioritize_lower_confidence(tmp_path: Path
         "github.com/owner/inferred",
         "github.com/owner/imported",
     ]
+
+
+def test_quality_reprocess_candidates_rotate_oldest_generation_first(
+    tmp_path: Path,
+) -> None:
+    index_root = tmp_path / "index"
+    write_quality_record(
+        index_root,
+        "owner",
+        "recent-inferred",
+        status="inferred",
+        confidence="medium",
+    )
+    write_quality_record(
+        index_root,
+        "owner",
+        "older-imported",
+        status="imported",
+        confidence="high",
+    )
+    recent = index_root / "repos/github.com/owner/recent-inferred/record.toml"
+    older = index_root / "repos/github.com/owner/older-imported/record.toml"
+    recent.write_text(
+        recent.read_text().replace(
+            '[record]\n', '[record]\ngenerated_at = "2026-06-20T00:00:00Z"\n'
+        )
+    )
+    older.write_text(
+        older.read_text().replace(
+            '[record]\n', '[record]\ngenerated_at = "2026-06-01T00:00:00Z"\n'
+        )
+    )
+
+    candidates = autonomous_batch.quality_reprocess_candidates(index_root)
+
+    assert [candidate["identity"] for candidate in candidates] == [
+        "github.com/owner/older-imported",
+        "github.com/owner/recent-inferred",
+    ]
+    assert candidates[0]["generatedAt"] == "2026-06-01T00:00:00Z"
 
 
 def test_fill_quality_reprocess_targets_supplements_open_batch_slots(tmp_path: Path) -> None:

@@ -48,6 +48,8 @@ struct RegressionExpectation {
     #[serde(default)]
     docs_root: Option<String>,
     #[serde(default)]
+    docs_root_absent: bool,
+    #[serde(default)]
     docs_getting_started: Option<String>,
     #[serde(default)]
     imported_sources: Option<Vec<String>>,
@@ -246,6 +248,14 @@ fn assert_plan_matches(plan: &ImportPlan, expectation: &RegressionExpectation) {
             .as_ref()
             .and_then(|docs| docs.root.as_deref());
         assert_eq!(actual, Some(expected), "docs.root");
+    }
+    if expectation.docs_root_absent {
+        let actual = plan
+            .manifest
+            .docs
+            .as_ref()
+            .and_then(|docs| docs.root.as_deref());
+        assert_eq!(actual, None, "docs.root must remain absent");
     }
     if let Some(expected) = expectation.docs_getting_started.as_deref() {
         let actual = plan

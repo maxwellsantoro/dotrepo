@@ -1,0 +1,146 @@
+{
+  "schema": "dotrepo-public-factual-accuracy-workload/v0",
+  "description": "Curated production facts checked against primary upstream repository sources.",
+  "assertions": [
+    {
+      "id": "fastapi-name",
+      "repository": "github.com/fastapi/fastapi",
+      "path": "repo.name",
+      "expected": "FastAPI",
+      "source": {"url": "https://raw.githubusercontent.com/fastapi/fastapi/master/README.md", "locator": "leading logo alt text", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "fastapi-description",
+      "repository": "github.com/fastapi/fastapi",
+      "path": "repo.description",
+      "expected": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+      "source": {"url": "https://raw.githubusercontent.com/fastapi/fastapi/master/README.md", "locator": "leading emphasized tagline", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "fastapi-homepage",
+      "repository": "github.com/fastapi/fastapi",
+      "path": "repo.homepage",
+      "expected": "https://fastapi.tiangolo.com/",
+      "source": {"url": "https://raw.githubusercontent.com/fastapi/fastapi/master/README.md", "locator": "Documentation link", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "fastapi-license",
+      "repository": "github.com/fastapi/fastapi",
+      "path": "repo.license",
+      "expected": "MIT",
+      "source": {"url": "https://raw.githubusercontent.com/fastapi/fastapi/master/README.md", "locator": "License section", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "fastapi-build",
+      "repository": "github.com/fastapi/fastapi",
+      "path": "repo.build",
+      "expected": "python -m build",
+      "source": {"url": "https://raw.githubusercontent.com/fastapi/fastapi/master/pyproject.toml", "locator": "build-system table", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "fastapi-test",
+      "repository": "github.com/fastapi/fastapi",
+      "path": "repo.test",
+      "expected": "python -m pytest",
+      "source": {"url": "https://raw.githubusercontent.com/fastapi/fastapi/master/pyproject.toml", "locator": "pytest dependency and tool.pytest table", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "tokio-name",
+      "repository": "github.com/tokio-rs/tokio",
+      "path": "repo.name",
+      "expected": "Tokio",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/README.md", "locator": "project H1", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "tokio-description",
+      "repository": "github.com/tokio-rs/tokio",
+      "path": "repo.description",
+      "expected": "A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language.",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/README.md", "locator": "first project paragraph after H1", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "tokio-homepage",
+      "repository": "github.com/tokio-rs/tokio",
+      "path": "repo.homepage",
+      "expected": "https://tokio.rs",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/README.md", "locator": "Website link", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "tokio-license",
+      "repository": "github.com/tokio-rs/tokio",
+      "path": "repo.license",
+      "expected": "MIT",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/README.md", "locator": "License section", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "tokio-build",
+      "repository": "github.com/tokio-rs/tokio",
+      "path": "repo.build",
+      "expected": "cargo build --workspace",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/Cargo.toml", "locator": "Cargo workspace manifest", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "tokio-test",
+      "repository": "github.com/tokio-rs/tokio",
+      "path": "repo.test",
+      "expected": "cargo test --workspace",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/Cargo.toml", "locator": "Cargo workspace manifest", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "tokio-security",
+      "repository": "github.com/tokio-rs/tokio",
+      "path": "owners.security_contact",
+      "expected": "security@tokio.rs",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/SECURITY.md", "locator": "Report a security issue", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "gin-name",
+      "repository": "github.com/gin-gonic/gin",
+      "path": "repo.name",
+      "expected": "Gin Web Framework",
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/README.md", "locator": "project H1", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "gin-description",
+      "repository": "github.com/gin-gonic/gin",
+      "path": "repo.description",
+      "expected": "Gin is a high-performance HTTP web framework written in Go. It provides a Martini-like API but with significantly better performance—up to 40 times faster—thanks to httprouter. Gin is designed for building REST APIs, web applications, and microservices.",
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/README.md", "locator": "project summary after release announcement", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "gin-homepage",
+      "repository": "github.com/gin-gonic/gin",
+      "path": "repo.homepage",
+      "expected": "https://gin-gonic.com/",
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/README.md", "locator": "official documentation links", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "gin-license",
+      "repository": "github.com/gin-gonic/gin",
+      "path": "repo.license",
+      "expected": "MIT",
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/LICENSE", "locator": "license text", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "gin-build",
+      "repository": "github.com/gin-gonic/gin",
+      "path": "repo.build",
+      "expected": "go build ./...",
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/go.mod", "locator": "Go module manifest", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "gin-test",
+      "repository": "github.com/gin-gonic/gin",
+      "path": "repo.test",
+      "expected": "go test ./...",
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/go.mod", "locator": "Go module manifest", "checkedAt": "2026-06-28"}
+    },
+    {
+      "id": "gin-docs",
+      "repository": "github.com/gin-gonic/gin",
+      "path": "docs.root",
+      "expected": "https://gin-gonic.com/en/docs/",
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/README.md", "locator": "Documentation section English link", "checkedAt": "2026-06-28"}
+    }
+  ]
+}

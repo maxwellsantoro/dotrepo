@@ -10,6 +10,30 @@ from typing import Any, Optional
 SCHEMA = "dotrepo-public-profile-coverage/v0"
 HIGH_SIGNAL_STATUSES = {"reviewed", "verified", "canonical"}
 HIGH_SIGNAL_CONFIDENCE = {"medium", "high"}
+PROFILE_REQUIRED_KEYS = {
+    "apiVersion",
+    "freshness",
+    "identity",
+    "record",
+    "purpose",
+    "name",
+    "execution",
+    "docs",
+    "ownership",
+    "completeness",
+    "trust",
+    "conflicts",
+    "links",
+}
+PROFILE_LINK_KEYS = {"self", "repository", "trust", "queryTemplate", "indexPath"}
+COMPLETENESS_BOOL_KEYS = {
+    "hasBuild",
+    "hasTest",
+    "hasDocs",
+    "hasSecurityContact",
+    "hasOwnershipSignal",
+    "hasLicense",
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -65,16 +89,15 @@ def parse_args() -> argparse.Namespace:
         default=10,
         help="Maximum lower-signal profiles to include in the report",
     )
+    parser.add_argument(
+        "--max-malformed-profiles",
+        type=int,
+        default=0,
+        help="Fail when more than this many profile files violate the public contract",
+    )
     parser.add_argument("--output-json", help="Optional path for JSON output")
     parser.add_argument("--output-md", help="Optional path for Markdown output")
     return parser.parse_args()
-
-
-def load_json(path: Path) -> dict[str, Any]:
-    try:
-        return json.loads(path.read_text())
-    except json.JSONDecodeError as exc:
-        raise SystemExit(f"failed to parse JSON in {path}: {exc}") from exc
 
 
 def profile_paths(public_root: Path) -> list[Path]:
@@ -129,8 +152,104 @@ def profile_identity(profile: dict[str, Any], path: Path) -> str:
     identity = profile.get("identity") or {}
     try:
         return "/".join([identity["host"], identity["owner"], identity["repo"]])
-    except KeyError:
+    except (KeyError, TypeError):
         return path.as_posix()
+
+
+def nonempty_string(value: object) -> bool:
+    return isinstance(value, str) and bool(value.strip())
+
+
+def profile_contract_errors(
+    profile: object, path: Path, public_root: Path
+) -> list[str]:
+    if not isinstance(profile, dict):
+        return ["profile must be a JSON object"]
+
+    errors = []
+    missing = sorted(PROFILE_REQUIRED_KEYS - profile.keys())
+    if missing:
+        errors.append(f"missing required top-level keys: {', '.join(missing)}")
+    if profile.get("apiVersion") != "v0":
+        errors.append("apiVersion must be v0")
+    for key in ("purpose", "name"):
+        if not nonempty_string(profile.get(key)):
+            errors.append(f"{key} must be a nonempty string")
+
+    object_fields = (
+        "freshness",
+        "identity",
+        "record",
+        "execution",
+        "docs",
+        "ownership",
+        "completeness",
+        "trust",
+        "links",
+    )
+    for key in object_fields:
+        if not isinstance(profile.get(key), dict):
+            errors.append(f"{key} must be an object")
+    if not isinstance(profile.get("conflicts"), list):
+        errors.append("conflicts must be an array")
+
+    freshness = profile.get("freshness")
+    if isinstance(freshness, dict):
+        for key in ("generatedAt", "snapshotDigest"):
+            if not nonempty_string(freshness.get(key)):
+                errors.append(f"freshness.{key} must be a nonempty string")
+
+    identity = profile.get("identity")
+    if isinstance(identity, dict):
+        for key in ("host", "owner", "repo"):
+            if not nonempty_string(identity.get(key)):
+                errors.append(f"identity.{key} must be a nonempty string")
+        relative = path.relative_to(public_root / "v0" / "repos")
+        expected_parts = relative.parts[:3]
+        actual_parts = tuple(identity.get(key) for key in ("host", "owner", "repo"))
+        if len(relative.parts) != 4 or relative.name != "profile.json":
+            errors.append("profile path must be v0/repos/<host>/<owner>/<repo>/profile.json")
+        elif actual_parts != expected_parts:
+            errors.append(
+                "identity does not match profile path: "
+                f"expected {'/'.join(expected_parts)}"
+            )
+
+    record = profile.get("record")
+    if isinstance(record, dict):
+        for key in ("manifestPath", "mode"):
+            if not nonempty_string(record.get(key)):
+                errors.append(f"record.{key} must be a nonempty string")
+
+    completeness = profile.get("completeness")
+    if isinstance(completeness, dict):
+        for key in sorted(COMPLETENESS_BOOL_KEYS):
+            if not isinstance(completeness.get(key), bool):
+                errors.append(f"completeness.{key} must be a boolean")
+        conflict_count = completeness.get("conflictCount")
+        if (
+            not isinstance(conflict_count, int)
+            or isinstance(conflict_count, bool)
+            or conflict_count < 0
+        ):
+            errors.append("completeness.conflictCount must be a nonnegative integer")
+
+    trust = profile.get("trust")
+    if isinstance(trust, dict):
+        if not nonempty_string(trust.get("selectedStatus")):
+            errors.append("trust.selectedStatus must be a nonempty string")
+        if not nonempty_string(trust.get("selectionReason")):
+            errors.append("trust.selectionReason must be a nonempty string")
+
+    links = profile.get("links")
+    if isinstance(links, dict):
+        missing_links = sorted(PROFILE_LINK_KEYS - links.keys())
+        if missing_links:
+            errors.append(f"missing required link keys: {', '.join(missing_links)}")
+        for key in sorted(PROFILE_LINK_KEYS & links.keys()):
+            if not nonempty_string(links.get(key)):
+                errors.append(f"links.{key} must be a nonempty string")
+    return errors
 
 
 def profile_quality(profile: dict[str, Any]) -> dict[str, Any]:
@@ -168,12 +287,30 @@ def profile_quality(profile: dict[str, Any]) -> dict[str, Any]:
 
 
 def summarize_profile(path: Path, public_root: Path) -> dict[str, Any]:
-    profile = load_json(path)
+    try:
+        profile = json.loads(path.read_text())
+    except json.JSONDecodeError as exc:
+        return {
+            "identity": path.relative_to(public_root).as_posix(),
+            "path": path.relative_to(public_root).as_posix(),
+            "contractErrors": [f"invalid JSON: {exc.msg}"],
+            "valid": False,
+        }
+    errors = profile_contract_errors(profile, path, public_root)
+    if not isinstance(profile, dict):
+        return {
+            "identity": path.relative_to(public_root).as_posix(),
+            "path": path.relative_to(public_root).as_posix(),
+            "contractErrors": errors,
+            "valid": False,
+        }
     quality = profile_quality(profile)
     return {
         "identity": profile_identity(profile, path),
         "path": path.relative_to(public_root).as_posix(),
         "purpose": profile.get("purpose"),
+        "contractErrors": errors,
+        "valid": not errors,
         **quality,
     }
 
@@ -186,8 +323,15 @@ def summarize(
     min_high_signal_ratio: float = 0.0,
     max_missing_signal: dict[str, int] | None = None,
     min_signal: dict[str, int] | None = None,
+    max_malformed_profiles: int = 0,
 ) -> dict[str, Any]:
-    profiles = [summarize_profile(path, public_root) for path in profile_paths(public_root)]
+    discovered_profiles = [
+        summarize_profile(path, public_root) for path in profile_paths(public_root)
+    ]
+    profiles = [profile for profile in discovered_profiles if profile["valid"]]
+    malformed_profiles = [
+        profile for profile in discovered_profiles if not profile["valid"]
+    ]
     profile_count = len(profiles)
     high_signal_profiles = [profile for profile in profiles if profile["isHighSignal"]]
     lower_signal_profiles = [profile for profile in profiles if not profile["isHighSignal"]]
@@ -238,6 +382,11 @@ def summarize(
         },
         "minSignal": min_signal_gates,
         "maxMissingSignal": missing_signal_gates,
+        "maxMalformedProfiles": {
+            "threshold": max_malformed_profiles,
+            "actual": len(malformed_profiles),
+            "passed": len(malformed_profiles) <= max_malformed_profiles,
+        },
     }
     passed = (
         gates["minProfiles"]["passed"]
@@ -245,13 +394,16 @@ def summarize(
         and gates["minHighSignalRatio"]["passed"]
         and all(gate["passed"] for gate in min_signal_gates.values())
         and all(gate["passed"] for gate in missing_signal_gates.values())
+        and gates["maxMalformedProfiles"]["passed"]
     )
 
     return {
         "schema": SCHEMA,
         "publicRoot": public_root.as_posix(),
         "summary": {
+            "discoveredProfileCount": len(discovered_profiles),
             "profileCount": profile_count,
+            "malformedProfileCount": len(malformed_profiles),
             "highSignalProfileCount": len(high_signal_profiles),
             "highSignalRatio": high_signal_ratio,
             "statusCounts": dict(sorted(status_counts.items())),
@@ -265,6 +417,7 @@ def summarize(
             lower_signal_profiles,
             key=lambda profile: (profile["signalCount"], profile["identity"]),
         )[:max_items],
+        "malformedProfiles": malformed_profiles[:max_items],
     }
 
 
@@ -277,11 +430,14 @@ def render_markdown(report: dict[str, Any]) -> str:
         "| Metric | Value |",
         "| --- | ---: |",
         f"| Profiles | {summary['profileCount']} |",
+        f"| Discovered profile files | {summary['discoveredProfileCount']} |",
+        f"| Malformed profiles | {summary['malformedProfileCount']} |",
         f"| High-signal profiles | {summary['highSignalProfileCount']} |",
         f"| High-signal ratio | {summary['highSignalRatio']} |",
         f"| Min profiles gate | {gates['minProfiles']['actual']} / {gates['minProfiles']['threshold']} |",
         f"| Min high-signal gate | {gates['minHighSignal']['actual']} / {gates['minHighSignal']['threshold']} |",
         f"| Min high-signal ratio gate | {gates['minHighSignalRatio']['actual']} / {gates['minHighSignalRatio']['threshold']} |",
+        f"| Max malformed profiles gate | {gates['maxMalformedProfiles']['actual']} / {gates['maxMalformedProfiles']['threshold']} |",
         "",
     ]
     if gates["maxMissingSignal"]:
@@ -311,6 +467,14 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"confidence `{profile['confidence']}`, missing {missing}"
             )
     lines.append("")
+    lines.extend(["## Malformed Profiles", ""])
+    if not report["malformedProfiles"]:
+        lines.append("- None.")
+    else:
+        for profile in report["malformedProfiles"]:
+            errors = "; ".join(profile["contractErrors"])
+            lines.append(f"- `{profile['path']}`: {errors}")
+    lines.append("")
     return "\n".join(lines)
 
 
@@ -324,6 +488,7 @@ def main() -> int:
         min_high_signal_ratio=args.min_high_signal_ratio,
         max_missing_signal=parse_max_missing_signal(args.max_missing_signal),
         min_signal=parse_min_signal(args.min_signal),
+        max_malformed_profiles=args.max_malformed_profiles,
     )
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.output_json:

@@ -62,6 +62,11 @@ pub(crate) fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
         }
 
         if metadata.title.is_none() {
+            if let Some(title) = parse_readme_logo_title(trimmed) {
+                metadata.title = Some(title);
+                idx += 1;
+                continue;
+            }
             if let Some((title, advance)) = try_parse_multiline_html_heading(&lines, idx) {
                 metadata.title = Some(title);
                 idx += advance;
@@ -79,7 +84,7 @@ pub(crate) fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
             }
         }
 
-        if metadata.description.is_none() {
+        if metadata.title.is_some() && metadata.description.is_none() {
             if let Some((description, next_idx)) = parse_readme_description(&lines, idx) {
                 metadata.description = Some(description);
                 idx = next_idx;
@@ -97,11 +102,45 @@ pub(crate) fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
         idx += 1;
     }
 
+    if metadata.title.is_none() && metadata.description.is_none() {
+        metadata.description = parse_readme_description(&lines, 0).map(|(value, _)| value);
+    }
+
     let docs = parse_readme_docs_metadata(&lines);
     metadata.docs_root = docs.root;
     metadata.docs_getting_started = docs.getting_started;
 
     metadata
+}
+
+fn parse_readme_logo_title(line: &str) -> Option<String> {
+    let lower = line.to_ascii_lowercase();
+    let image_start = lower.find("<img")?;
+    let image = &line[image_start..];
+    let image_lower = &lower[image_start..];
+    let alt_start = image_lower.find("alt=")? + 4;
+    let quote = image.as_bytes().get(alt_start).copied()? as char;
+    if quote != '"' && quote != '\'' {
+        return None;
+    }
+    let value_start = alt_start + 1;
+    let value_end = image[value_start..].find(quote)? + value_start;
+    let title = normalize_readme_text(&image[value_start..value_end])?;
+    let lowered = title.to_ascii_lowercase();
+    let badge_words = [
+        "badge", "build", "ci", "coverage", "docs", "image", "license", "logo", "package",
+        "release", "status", "test", "version",
+    ];
+    if is_non_project_heading(&title)
+        || badge_words.iter().any(|word| {
+            lowered
+                .split(|ch: char| !ch.is_ascii_alphanumeric())
+                .any(|part| part == *word)
+        })
+    {
+        return None;
+    }
+    Some(title)
 }
 
 pub(crate) fn parse_readme_title_line(line: &str) -> Option<String> {
@@ -326,6 +365,7 @@ pub(crate) fn normalize_description_line(line: &str) -> Option<String> {
         || is_probable_docs_signal_line(line)
         || is_pipe_delimited_nav_line(line)
         || is_nav_link_item(line)
+        || is_promotional_copy(line)
     {
         return None;
     }
@@ -335,6 +375,21 @@ pub(crate) fn normalize_description_line(line: &str) -> Option<String> {
         .filter(|value| value.chars().any(|ch| ch.is_alphanumeric()))
         .filter(|value| !looks_like_artifact(value))
         .filter(|value| !is_quoted_tagline(value))
+}
+
+fn is_promotional_copy(line: &str) -> bool {
+    let normalized = normalize_readme_text(line).unwrap_or_default();
+    let lower = normalized.to_ascii_lowercase();
+    [
+        "announcing ",
+        "new release",
+        "now available",
+        "program and tickets",
+        "we are excited to announce",
+        "we're excited to announce",
+    ]
+    .iter()
+    .any(|phrase| lower.contains(phrase))
 }
 
 fn looks_like_artifact(value: &str) -> bool {
@@ -819,6 +874,10 @@ pub(crate) fn parse_readme_docs_signal(line: &str) -> ReadmeDocsMetadata {
             || lower_url.contains("getting-started")
             || lower_url.contains("quickstart");
 
+        if is_badge_asset_url(&url) {
+            continue;
+        }
+
         if docs.getting_started.is_none() && is_getting_started {
             docs.getting_started = Some(url.clone());
         }
@@ -841,6 +900,14 @@ pub(crate) fn parse_readme_docs_signal(line: &str) -> ReadmeDocsMetadata {
     }
 
     docs
+}
+
+fn is_badge_asset_url(url: &str) -> bool {
+    let lower = url.to_ascii_lowercase();
+    lower.contains("badge")
+        || lower.contains("shields.io")
+        || lower.ends_with(".svg")
+        || lower.contains("status.svg")
 }
 
 pub(crate) fn extract_markdown_links(line: &str) -> Vec<(String, String)> {

@@ -255,7 +255,8 @@ response includes a compact linked profile item and profile/trust/query links.
 ```bash
 uv run python scripts/build_public_lookup_workload.py \
   --public-root public \
-  --limit 500 \
+  --mode research \
+  --limit 0 \
   --output /tmp/dotrepo-public-lookup-workload.json
 
 uv run python scripts/measure_public_lookup_efficiency.py \
@@ -266,10 +267,16 @@ uv run python scripts/measure_public_lookup_efficiency.py \
   --output-md /tmp/dotrepo-lookup-efficiency.md
 ```
 
-The benchmark reports task hit rate, field hit rate, compact public payload
-bytes, and deterministic source/evidence proxy bytes. See
+The research workload asks fixed overview, execution, documentation, and
+security questions for every exported repository without inspecting field
+completeness first. The benchmark reports aggregate and per-intent task hit
+rate, field hit rate, compact public payload bytes, and deterministic
+source/evidence proxy bytes. See
 [`docs/public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
 for interpretation notes.
+
+The separate cited exact-value sample is documented in
+[`docs/public-factual-accuracy-benchmark.md`](./public-factual-accuracy-benchmark.md).
 
 ## 16. Measure public search quality
 
@@ -314,9 +321,17 @@ uv run python scripts/check_public_profile_coverage.py \
   --output-md /tmp/dotrepo-profile-coverage.md
 ```
 
-The coverage report counts exported `profile.json` files, marks profiles as
-high-signal when they have a purpose, reviewed-or-better status,
-medium-or-better confidence, and no selected-record conflicts, then lists the
-lowest-signal profiles to improve next. `--min-signal` gates can ratchet
-individual completeness signals such as build, test, docs, ownership, security,
-and license coverage toward the same profile-count target.
+The coverage report separates discovered `profile.json` files from profiles
+that satisfy the accepted public contract and whose identity matches their
+export path. Only valid profiles contribute to count, ratio, and signal gates;
+malformed files are reported with bounded diagnostics and fail by default.
+Valid profiles are marked high-signal when they have a purpose,
+reviewed-or-better status, medium-or-better confidence, and no selected-record
+conflicts. `--min-signal` gates can ratchet individual completeness signals such
+as build, test, docs, ownership, security, and license coverage toward the same
+profile-count target.
+
+The canonical release gate applies the versioned floor in
+`scripts/fixtures/public_profile_coverage_baseline.json` and publishes JSON and
+Markdown coverage evidence with its other artifacts. Raising that baseline is
+the incremental path from current coverage to the 500-profile milestone.
