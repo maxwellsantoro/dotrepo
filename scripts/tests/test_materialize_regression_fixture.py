@@ -12,6 +12,15 @@ assert SPEC.loader is not None
 SPEC.loader.exec_module(capture)
 
 
+def assert_exits_with(message: str, func, *args: object) -> None:
+    try:
+        func(*args)
+    except SystemExit as exc:
+        assert message in str(exc)
+    else:
+        raise AssertionError("expected SystemExit")
+
+
 def test_select_conventional_files_picks_readme_codeowners_security_manifests() -> None:
     paths = {
         "README.md",
@@ -142,11 +151,41 @@ def test_parse_repo_identity_rejects_bad_shapes() -> None:
         "BurntSushi",
         "ripgrep",
     )
-    try:
-        capture.parse_repo_identity("BurntSushi/ripgrep")
-    except SystemExit:
-        return
-    raise AssertionError("expected SystemExit for two-part identity")
+    assert_exits_with("host/owner/repo", capture.parse_repo_identity, "BurntSushi/ripgrep")
+
+
+def test_parse_repo_identity_rejects_unsafe_segments() -> None:
+    assert_exits_with(
+        "owner must be a safe path segment",
+        capture.parse_repo_identity,
+        "github.com/../orbit",
+    )
+    assert_exits_with(
+        "repo must be a safe path segment",
+        capture.parse_repo_identity,
+        "github.com/example/.",
+    )
+    assert_exits_with(
+        "repo must be a safe path segment",
+        capture.parse_repo_identity,
+        "github.com/example/orbit\\escape",
+    )
+
+
+def test_resolve_capture_args_rejects_unsafe_explicit_slug() -> None:
+    assert_exits_with(
+        "fixture slug must be nonempty",
+        capture.resolve_capture_args,
+        capture.parse_args(["--repo", "github.com/example/orbit", "--slug", "../escape"]),
+    )
+
+
+def test_safe_relative_path_rejects_uncontained_capture_paths() -> None:
+    assert capture.safe_relative_path(".github/workflows/ci.yml") == Path(
+        ".github/workflows/ci.yml"
+    )
+    for unsafe in ("", "/tmp/escape.yml", "../escape.yml", ".github/../escape.yml"):
+        assert_exits_with("refusing unsafe repository path", capture.safe_relative_path, unsafe)
 
 
 def write_stub(tmp_path: Path, **overrides: object) -> Path:

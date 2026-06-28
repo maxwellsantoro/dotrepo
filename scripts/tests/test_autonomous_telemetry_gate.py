@@ -28,6 +28,8 @@ def args(**overrides: object) -> Namespace:
         "max_recent_zero_model_rate_drop": 0.10,
         "max_fixture_eligible_recurring_failures": 0,
         "min_zero_model_rate": 0.75,
+        "max_adjudication_budget_use_rate": 1.0,
+        "max_tokens_per_crawled": 5000.0,
     }
     defaults.update(overrides)
     return Namespace(**defaults)
@@ -39,7 +41,7 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"crawled": 20, "written": 18, "failed": 0, "promoted": 8},
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -87,8 +89,8 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
     assert report["passed"]
     assert all(item["passed"] for item in report["checks"])
     assert report["checkSummary"] == {
-        "total": 27,
-        "passed": 27,
+        "total": 29,
+        "passed": 29,
         "failed": 0,
         "failedLabels": [],
     }
@@ -107,11 +109,15 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
         "maxRecentZeroModelRateDrop": 0.10,
         "maxFixtureEligibleRecurringFailures": 0,
         "minZeroModelRate": 0.75,
+        "maxAdjudicationBudgetUseRate": 1.0,
+        "maxTokensPerCrawled": 5000.0,
     }
     assert report["inputs"]["secondOpinionRate"] == 0.0
     assert report["inputs"]["apiEscalationRate"] == 0.05
     assert report["inputs"]["driftReference"] == "previous-window"
     assert report["inputs"]["promotionRate"] == 0.4
+    assert report["inputs"]["adjudicationBudgetUseRate"] == 0.4
+    assert report["inputs"]["tokensPerCrawled"] == 50.0
     assert report["inputs"]["fixtureEligibleRecurringFailures"] == []
 
 
@@ -121,7 +127,7 @@ def test_evaluate_reports_not_yet_for_insufficient_or_expensive_runs() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 1,
         "budgetExhaustedRuns": 2,
-        "totals": {"crawled": 4, "written": 0, "failed": 1, "promoted": 0},
+        "totals": {"adjudicationCallBudget": 2, "adjudicationCalls": 3, "crawled": 4, "written": 0, "failed": 1, "promoted": 0, "tokensUsed": 40000},
         "rates": {
             "failureRate": 0.25,
             "adjudicationRate": 0.5,
@@ -193,6 +199,8 @@ def test_evaluate_reports_not_yet_for_insufficient_or_expensive_runs() -> None:
     assert "worst-run strong remote escalation rate" in failed_labels
     assert "recent-window strong remote escalation rate" in failed_labels
     assert "adjudication budget exhaustion" in failed_labels
+    assert "adjudication call budget usage" in failed_labels
+    assert "tokens per crawled repository" in failed_labels
     assert "fixture-eligible recurring failures" in failed_labels
     assert "zero-model deterministic rate" in failed_labels
     assert "worst-run zero-model deterministic rate" in failed_labels
@@ -205,7 +213,7 @@ def test_evaluate_allows_environmental_recurring_failures_for_fixture_gate() -> 
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"crawled": 20, "written": 18, "failed": 0, "promoted": 8},
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -260,13 +268,73 @@ def test_evaluate_allows_environmental_recurring_failures_for_fixture_gate() -> 
     assert report["inputs"]["fixtureEligibleRecurringFailures"] == []
 
 
+def test_evaluate_rejects_excessive_cost_when_quality_rates_pass() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 4,
+        "budgetExhaustedRuns": 0,
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 11,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 120000,
+        },
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "promotionRate": 0.4,
+            "zeroModelRate": 0.8,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "previousWindowRunCount": 1,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
+        "regressionFixtureCandidates": [],
+    }
+
+    report = telemetry_gate.evaluate(summary, args())
+    failed_labels = {
+        item["label"] for item in report["checks"] if not item["passed"]
+    }
+
+    assert not report["passed"]
+    assert failed_labels == {
+        "adjudication call budget usage",
+        "tokens per crawled repository",
+    }
+
+
 def test_evaluate_rejects_worst_run_regression_when_aggregate_rates_pass() -> None:
     summary = {
         "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"crawled": 40, "written": 38, "failed": 1, "promoted": 8},
+        "totals": {"adjudicationCallBudget": 20, "adjudicationCalls": 8, "crawled": 40, "written": 38, "failed": 1, "promoted": 8, "tokensUsed": 2000},
         "rates": {
             "failureRate": 0.025,
             "adjudicationRate": 0.2,
@@ -320,7 +388,7 @@ def test_evaluate_rejects_worst_run_zero_model_regression() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"crawled": 40, "written": 38, "failed": 0, "promoted": 8},
+        "totals": {"adjudicationCallBudget": 20, "adjudicationCalls": 8, "crawled": 40, "written": 38, "failed": 0, "promoted": 8, "tokensUsed": 2000},
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -369,7 +437,7 @@ def test_evaluate_rejects_recent_window_drift_when_ceiling_rates_pass() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 6,
         "budgetExhaustedRuns": 0,
-        "totals": {"crawled": 60, "written": 58, "failed": 0, "promoted": 10},
+        "totals": {"adjudicationCallBudget": 30, "adjudicationCalls": 6, "crawled": 60, "written": 58, "failed": 0, "promoted": 10, "tokensUsed": 3000},
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.1,
@@ -421,7 +489,7 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 6,
         "budgetExhaustedRuns": 0,
-        "totals": {"crawled": 60, "written": 58, "failed": 0, "promoted": 10},
+        "totals": {"adjudicationCallBudget": 30, "adjudicationCalls": 6, "crawled": 60, "written": 58, "failed": 0, "promoted": 10, "tokensUsed": 3000},
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -474,7 +542,7 @@ def test_evaluate_rejects_recent_zero_model_drop_when_absolute_rates_pass() -> N
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 6,
         "budgetExhaustedRuns": 0,
-        "totals": {"crawled": 60, "written": 58, "failed": 0, "promoted": 10},
+        "totals": {"adjudicationCallBudget": 30, "adjudicationCalls": 6, "crawled": 60, "written": 58, "failed": 0, "promoted": 10, "tokensUsed": 3000},
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.1,
@@ -523,7 +591,7 @@ def test_evaluate_rejects_missing_summary_schema() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"crawled": 20, "written": 18, "failed": 0, "promoted": 8},
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -554,6 +622,7 @@ def test_evaluate_rejects_missing_summary_schema() -> None:
             "zeroModelRate": 0.8,
         },
         "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
+        "regressionFixtureCandidates": [],
     }
 
     report = telemetry_gate.evaluate(summary, args())
@@ -570,7 +639,7 @@ def test_evaluate_rejects_missing_retained_proof_fields() -> None:
         "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
-        "totals": {"crawled": 20, "written": 18, "failed": 0, "promoted": 8},
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -612,6 +681,383 @@ def test_evaluate_rejects_missing_retained_proof_fields() -> None:
     assert failed_labels == {"retained proof fields"}
 
 
+def test_evaluate_rejects_missing_window_zero_model_proof_fields() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 4,
+        "budgetExhaustedRuns": 0,
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "promotionRate": 0.4,
+            "zeroModelRate": 0.8,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+        },
+        "previousWindowRunCount": 3,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
+        "regressionFixtureCandidates": [],
+    }
+
+    report = telemetry_gate.evaluate(
+        summary,
+        args(min_zero_model_rate=0.0, max_recent_zero_model_rate_drop=1.0),
+    )
+    failed_labels = {
+        item["label"] for item in report["checks"] if not item["passed"]
+    }
+
+    assert not report["passed"]
+    assert failed_labels == {"retained proof fields"}
+
+
+def test_evaluate_rejects_missing_or_invalid_rate_proof_fields() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 4,
+        "budgetExhaustedRuns": 0,
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "promotionRate": 0.4,
+            "zeroModelRate": 0.8,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "previousWindowRunCount": 3,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
+        "regressionFixtureCandidates": [],
+    }
+
+    cases = []
+    missing_aggregate = {
+        **summary,
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "zeroModelRate": 0.8,
+        },
+    }
+    cases.append(missing_aggregate)
+    invalid_aggregate = {
+        **summary,
+        "rates": {
+            **summary["rates"],
+            "failureRate": -0.1,
+        },
+    }
+    cases.append(invalid_aggregate)
+    invalid_recent = {
+        **summary,
+        "recentWindowRates": {
+            **summary["recentWindowRates"],
+            "zeroModelRate": 1.2,
+        },
+    }
+    cases.append(invalid_recent)
+    invalid_worst = {
+        **summary,
+        "worstRunRates": {
+            **summary["worstRunRates"],
+            "zeroModelRate": True,
+        },
+    }
+    cases.append(invalid_worst)
+
+    for candidate_summary in cases:
+        report = telemetry_gate.evaluate(
+            candidate_summary,
+            args(min_zero_model_rate=0.0, max_recent_zero_model_rate_drop=1.0),
+        )
+        failed_labels = {
+            item["label"] for item in report["checks"] if not item["passed"]
+        }
+
+        assert not report["passed"]
+        assert failed_labels == {"retained proof fields"}
+
+
+def test_evaluate_rejects_missing_or_invalid_count_proof_fields() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 4,
+        "budgetExhaustedRuns": 0,
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "promotionRate": 0.4,
+            "zeroModelRate": 0.8,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "previousWindowRunCount": 3,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
+        "regressionFixtureCandidates": [],
+    }
+
+    cases = [
+        {**summary, "runCount": "4"},
+        {**summary, "budgetExhaustedRuns": True},
+        {**summary, "recentWindowRunCount": -1},
+        {
+            **summary,
+            "totals": {"crawled": 20, "written": 18, "failed": 0},
+        },
+        {
+            **summary,
+            "totals": {"crawled": 20, "written": 18, "failed": 0, "promoted": "8"},
+        },
+        {
+            **summary,
+            "totals": {
+                "adjudicationCallBudget": 10,
+                "crawled": 20,
+                "written": 18,
+                "failed": 0,
+                "promoted": 8,
+                "tokensUsed": 1000,
+            },
+        },
+        {
+            **summary,
+            "totals": {
+                "adjudicationCallBudget": 10,
+                "adjudicationCalls": 4,
+                "crawled": 20,
+                "written": 18,
+                "failed": 0,
+                "promoted": 8,
+                "tokensUsed": True,
+            },
+        },
+        {
+            **summary,
+            "repositoriesByAdjudicationTier": {"local_primary": True},
+        },
+    ]
+
+    for candidate_summary in cases:
+        report = telemetry_gate.evaluate(
+            candidate_summary,
+            args(
+                min_runs=0,
+                min_crawled=0,
+                min_written=0,
+                min_promoted=0,
+                min_zero_model_rate=0.0,
+                max_recent_zero_model_rate_drop=1.0,
+            ),
+        )
+        failed_labels = {
+            item["label"] for item in report["checks"] if not item["passed"]
+        }
+
+        assert not report["passed"]
+        assert failed_labels == {"retained proof fields"}
+
+
+def test_evaluate_rejects_missing_or_malformed_fixture_candidate_proof_field() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 4,
+        "budgetExhaustedRuns": 0,
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "promotionRate": 0.4,
+            "zeroModelRate": 0.8,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "previousWindowRunCount": 3,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
+    }
+
+    for candidate_value in (None, {"missing": "list"}):
+        candidate_summary = summary.copy()
+        if candidate_value is not None:
+            candidate_summary["regressionFixtureCandidates"] = candidate_value
+        report = telemetry_gate.evaluate(candidate_summary, args())
+        failed_labels = {
+            item["label"] for item in report["checks"] if not item["passed"]
+        }
+
+        assert not report["passed"]
+        assert failed_labels == {"retained proof fields"}
+
+
+def test_evaluate_rejects_malformed_fixture_candidate_entries() -> None:
+    summary = {
+        "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+        "generatedAt": "2026-03-18T12:00:00Z",
+        "runCount": 4,
+        "budgetExhaustedRuns": 0,
+        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "rates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "promotionRate": 0.4,
+            "zeroModelRate": 0.8,
+        },
+        "worstRunRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "recentWindowRunCount": 3,
+        "recentWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "previousWindowRunCount": 3,
+        "previousWindowRates": {
+            "failureRate": 0.0,
+            "adjudicationRate": 0.2,
+            "secondOpinionRate": 0.0,
+            "apiEscalationRate": 0.05,
+            "zeroModelRate": 0.8,
+        },
+        "repositoriesByAdjudicationTier": {"local_primary": 4, "api_escalation": 1},
+    }
+    malformed_candidates = [
+        "not an object",
+        {
+            "failureClass": "parser",
+            "ecosystem": "rust",
+            "fixtureEligible": "true",
+            "fingerprint": "Cargo.toml parse error",
+            "count": 2,
+            "suggestedFixture": "cargo-toml-parse-error",
+        },
+        {
+            "failureClass": "parser",
+            "ecosystem": "rust",
+            "fixtureEligible": True,
+            "fingerprint": "",
+            "count": 2,
+            "suggestedFixture": "cargo-toml-parse-error",
+        },
+        {
+            "failureClass": "parser",
+            "ecosystem": "rust",
+            "fixtureEligible": True,
+            "fingerprint": "Cargo.toml parse error",
+            "count": "2",
+            "suggestedFixture": "cargo-toml-parse-error",
+        },
+        {
+            "failureClass": "parser",
+            "ecosystem": "rust",
+            "fixtureEligible": True,
+            "fingerprint": "Cargo.toml parse error",
+            "count": True,
+            "suggestedFixture": "cargo-toml-parse-error",
+        },
+    ]
+
+    for candidate in malformed_candidates:
+        candidate_summary = summary.copy()
+        candidate_summary["regressionFixtureCandidates"] = [candidate]
+        report = telemetry_gate.evaluate(candidate_summary, args())
+        failed_labels = {
+            item["label"] for item in report["checks"] if not item["passed"]
+        }
+
+        assert not report["passed"]
+        assert failed_labels == {"retained proof fields"}
+
+
 def test_render_markdown_includes_check_table() -> None:
     report = {
         "passed": False,
@@ -645,7 +1091,16 @@ def test_render_markdown_includes_check_table() -> None:
                 "secondOpinionRate": 0.1,
                 "zeroModelRate": 0.75,
             },
-            "fixtureEligibleRecurringFailures": [{"fingerprint": "Cargo.toml parse error"}],
+            "fixtureEligibleRecurringFailures": [
+                {
+                    "failureClass": "parser",
+                    "ecosystem": "rust",
+                    "fixtureEligible": True,
+                    "fingerprint": "Cargo.toml parse error",
+                    "count": 2,
+                    "suggestedFixture": "cargo-toml-parse-error",
+                }
+            ],
         },
         "checks": [
             {
@@ -675,3 +1130,8 @@ def test_render_markdown_includes_check_table() -> None:
     assert "- fixture-eligible recurring failures: 1" in rendered
     assert "- thresholds: min runs 3, min crawled 10, max adjudication 25.00%, max API escalation 5.00%" in rendered
     assert "| retained repeated runs | 1 | >= 3 | fail |" in rendered
+    assert "## Fixture-Eligible Recurring Failures" in rendered
+    assert (
+        "| `cargo-toml-parse-error` | `parser` | `rust` | 2 | `Cargo.toml parse error` |"
+        in rendered
+    )

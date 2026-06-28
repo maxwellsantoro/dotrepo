@@ -36,6 +36,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-recent-zero-model-rate-drop", type=float, default=0.10)
     parser.add_argument("--max-fixture-eligible-recurring-failures", type=int, default=0)
     parser.add_argument("--min-zero-model-rate", type=float, default=0.75)
+    parser.add_argument("--max-adjudication-budget-use-rate", type=float, default=1.0)
+    parser.add_argument("--max-tokens-per-crawled", type=float, default=5000.0)
     return parser.parse_args()
 
 
@@ -90,6 +92,8 @@ def thresholds(args: argparse.Namespace) -> dict:
         "maxRecentZeroModelRateDrop": args.max_recent_zero_model_rate_drop,
         "maxFixtureEligibleRecurringFailures": args.max_fixture_eligible_recurring_failures,
         "minZeroModelRate": args.min_zero_model_rate,
+        "maxAdjudicationBudgetUseRate": args.max_adjudication_budget_use_rate,
+        "maxTokensPerCrawled": args.max_tokens_per_crawled,
     }
 
 
@@ -100,21 +104,80 @@ def fixture_eligible_recurring_failures(summary: dict) -> list[dict]:
     return [
         candidate
         for candidate in candidates
-        if isinstance(candidate, dict) and bool(candidate.get("fixtureEligible", False))
+        if isinstance(candidate, dict)
+        and regression_fixture_candidates_well_formed([candidate])
+        and candidate.get("fixtureEligible") is True
     ]
 
 
+def candidate_string(candidate: dict, key: str) -> bool:
+    return isinstance(candidate.get(key), str) and bool(candidate.get(key).strip())
+
+
+def candidate_count(candidate: dict) -> bool:
+    value = candidate.get("count")
+    return isinstance(value, int) and not isinstance(value, bool) and value >= 0
+
+
+def rate_value(value: object) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and 0 <= value <= 1
+
+
+def rate_block_well_formed(block: dict, keys: set[str]) -> bool:
+    return keys.issubset(block) and all(rate_value(block.get(key)) for key in keys)
+
+
+def count_value(value: object) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and value >= 0
+
+
+def count_block_well_formed(block: dict, keys: set[str]) -> bool:
+    return keys.issubset(block) and all(count_value(block.get(key)) for key in keys)
+
+
+def count_or_zero(value: object) -> int:
+    return value if count_value(value) else 0
+
+
+def tier_counts_well_formed(tiers: dict) -> bool:
+    return all(isinstance(key, str) and count_value(value) for key, value in tiers.items())
+
+
+def regression_fixture_candidates_well_formed(candidates: list[object]) -> bool:
+    for candidate in candidates:
+        if not isinstance(candidate, dict):
+            return False
+        if not isinstance(candidate.get("fixtureEligible"), bool):
+            return False
+        if not candidate_count(candidate):
+            return False
+        for key in ("failureClass", "ecosystem", "fingerprint", "suggestedFixture"):
+            if not candidate_string(candidate, key):
+                return False
+    return True
+
+
 def retained_proof_fields_present(summary: dict) -> bool:
+    totals = summary.get("totals")
+    tiers = summary.get("repositoriesByAdjudicationTier")
+    rates = summary.get("rates")
     worst_rates = summary.get("worstRunRates")
     recent_window_rates = summary.get("recentWindowRates")
     previous_window_rates = summary.get("previousWindowRates")
+    regression_fixture_candidates = summary.get("regressionFixtureCandidates")
     if (
-        "budgetExhaustedRuns" not in summary
-        or "recentWindowRunCount" not in summary
-        or "previousWindowRunCount" not in summary
+        not count_value(summary.get("runCount"))
+        or not count_value(summary.get("budgetExhaustedRuns"))
+        or not count_value(summary.get("recentWindowRunCount"))
+        or not count_value(summary.get("previousWindowRunCount"))
+        or not isinstance(totals, dict)
+        or not isinstance(tiers, dict)
+        or not isinstance(rates, dict)
         or not isinstance(worst_rates, dict)
         or not isinstance(recent_window_rates, dict)
         or not isinstance(previous_window_rates, dict)
+        or not isinstance(regression_fixture_candidates, list)
+        or not regression_fixture_candidates_well_formed(regression_fixture_candidates)
     ):
         return False
     required_rate_keys = {
@@ -122,12 +185,30 @@ def retained_proof_fields_present(summary: dict) -> bool:
         "adjudicationRate",
         "secondOpinionRate",
         "apiEscalationRate",
+        "zeroModelRate",
     }
-    required_worst_rate_keys = required_rate_keys | {"zeroModelRate"}
+    required_aggregate_rate_keys = {
+        "failureRate",
+        "adjudicationRate",
+        "zeroModelRate",
+        "promotionRate",
+    }
+    required_total_keys = {
+        "adjudicationCallBudget",
+        "adjudicationCalls",
+        "crawled",
+        "failed",
+        "promoted",
+        "tokensUsed",
+        "written",
+    }
     return (
-        required_worst_rate_keys.issubset(worst_rates)
-        and required_rate_keys.issubset(recent_window_rates)
-        and required_rate_keys.issubset(previous_window_rates)
+        count_block_well_formed(totals, required_total_keys)
+        and tier_counts_well_formed(tiers)
+        and rate_block_well_formed(rates, required_aggregate_rate_keys)
+        and rate_block_well_formed(worst_rates, required_rate_keys)
+        and rate_block_well_formed(recent_window_rates, required_rate_keys)
+        and rate_block_well_formed(previous_window_rates, required_rate_keys)
     )
 
 
@@ -140,21 +221,30 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     tiers = summary.get("repositoriesByAdjudicationTier") or {}
 
     schema = str(summary.get("schema") or "")
-    run_count = int(summary.get("runCount") or 0)
-    crawled = int(totals.get("crawled") or 0)
-    written = int(totals.get("written") or 0)
-    promoted = int(totals.get("promoted") or 0)
-    budget_exhausted_runs = int(summary.get("budgetExhaustedRuns") or 0)
-    recent_window_run_count = int(summary.get("recentWindowRunCount") or 0)
-    previous_window_run_count = int(summary.get("previousWindowRunCount") or 0)
-    second_opinions = int(tiers.get("local_second_opinion") or 0)
+    run_count = count_or_zero(summary.get("runCount"))
+    crawled = count_or_zero(totals.get("crawled"))
+    written = count_or_zero(totals.get("written"))
+    promoted = count_or_zero(totals.get("promoted"))
+    adjudication_call_budget = count_or_zero(totals.get("adjudicationCallBudget"))
+    adjudication_calls = count_or_zero(totals.get("adjudicationCalls"))
+    tokens_used = count_or_zero(totals.get("tokensUsed"))
+    budget_exhausted_runs = count_or_zero(summary.get("budgetExhaustedRuns"))
+    recent_window_run_count = count_or_zero(summary.get("recentWindowRunCount"))
+    previous_window_run_count = count_or_zero(summary.get("previousWindowRunCount"))
+    second_opinions = count_or_zero(tiers.get("local_second_opinion"))
     second_opinion_rate = second_opinions / crawled if crawled else 0.0
-    api_escalations = int(tiers.get("api_escalation") or 0)
+    api_escalations = count_or_zero(tiers.get("api_escalation"))
     api_escalation_rate = api_escalations / crawled if crawled else 0.0
     failure_rate = number(rates.get("failureRate"))
     adjudication_rate = number(rates.get("adjudicationRate"))
     promotion_rate = number(rates.get("promotionRate"))
     zero_model_rate = number(rates.get("zeroModelRate"))
+    adjudication_budget_use_rate = (
+        adjudication_calls / adjudication_call_budget
+        if adjudication_call_budget
+        else 0.0
+    )
+    tokens_per_crawled = tokens_used / crawled if crawled else 0.0
     worst_failure_rate = number(worst_rates.get("failureRate"))
     worst_adjudication_rate = number(worst_rates.get("adjudicationRate"))
     worst_second_opinion_rate = number(worst_rates.get("secondOpinionRate"))
@@ -327,6 +417,18 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             budget_exhausted_runs == 0,
         ),
         check(
+            "adjudication call budget usage",
+            round(adjudication_budget_use_rate, 6),
+            f"<= {args.max_adjudication_budget_use_rate}",
+            adjudication_budget_use_rate <= args.max_adjudication_budget_use_rate,
+        ),
+        check(
+            "tokens per crawled repository",
+            round(tokens_per_crawled, 6),
+            f"<= {args.max_tokens_per_crawled}",
+            tokens_per_crawled <= args.max_tokens_per_crawled,
+        ),
+        check(
             "fixture-eligible recurring failures",
             fixture_eligible_failure_count,
             f"<= {args.max_fixture_eligible_recurring_failures}",
@@ -365,6 +467,11 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "schema": schema,
             "runCount": run_count,
             "budgetExhaustedRuns": budget_exhausted_runs,
+            "adjudicationCallBudget": adjudication_call_budget,
+            "adjudicationCalls": adjudication_calls,
+            "adjudicationBudgetUseRate": adjudication_budget_use_rate,
+            "tokensUsed": tokens_used,
+            "tokensPerCrawled": tokens_per_crawled,
             "recentWindowRunCount": recent_window_run_count,
             "previousWindowRunCount": previous_window_run_count,
             "secondOpinionRate": second_opinion_rate,
@@ -408,6 +515,8 @@ def render_markdown(report: dict) -> str:
         f"- recent-window adjudication rate: {number(recent_window_rates.get('adjudicationRate')):.2%}",
         f"- recent-window zero-model rate: {number(recent_window_rates.get('zeroModelRate')):.2%}",
         f"- recent-window zero-model drop: {number(inputs.get('recentZeroModelRateDrop')):.2%}",
+        f"- adjudication call budget usage: {number(inputs.get('adjudicationBudgetUseRate')):.2%}",
+        f"- tokens per crawled repository: {number(inputs.get('tokensPerCrawled')):.2f}",
         f"- drift reference: {inputs.get('driftReference') or 'unknown'}",
         f"- worst-run failure rate: {number(worst_rates.get('failureRate')):.2%}",
         f"- worst-run adjudication rate: {number(worst_rates.get('adjudicationRate')):.2%}",
@@ -423,6 +532,25 @@ def render_markdown(report: dict) -> str:
         lines.append(
             f"| {item['label']} | {item['actual']} | {item['expected']} | {'pass' if item['passed'] else 'fail'} |"
         )
+    if fixture_backlog:
+        lines.extend(
+            [
+                "",
+                "## Fixture-Eligible Recurring Failures",
+                "",
+                "| Fixture | Class | Ecosystem | Runs | Fingerprint |",
+                "| --- | --- | --- | ---: | --- |",
+            ]
+        )
+        for item in fixture_backlog:
+            lines.append(
+                "| "
+                f"`{item.get('suggestedFixture', 'unknown-failure')}` | "
+                f"`{item.get('failureClass', 'unknown')}` | "
+                f"`{item.get('ecosystem', 'unknown')}` | "
+                f"{int(item.get('count') or 0)} | "
+                f"`{item.get('fingerprint', 'unknown')}` |"
+            )
     return "\n".join(lines) + "\n"
 
 

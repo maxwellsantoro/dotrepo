@@ -7,6 +7,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from collections import Counter
@@ -513,6 +514,18 @@ def fixture_slug(value: str) -> str:
     return "".join(slug).strip("-") or "unknown-failure"
 
 
+def unique_fixture_slug(value: str, seen: set[str]) -> str:
+    base = fixture_slug(value)
+    candidate = base
+    suffix = 2
+    while candidate in seen:
+        suffix_text = f"-{suffix}"
+        candidate = f"{base[:80 - len(suffix_text)].rstrip('-')}{suffix_text}"
+        suffix += 1
+    seen.add(candidate)
+    return candidate
+
+
 # Ordered so the most specific manifest signal wins. Substrings are matched
 # against lowercased failure text. Manifest filenames are the strongest
 # deterministic ecosystem signal available from an error fingerprint.
@@ -758,21 +771,29 @@ def aggregate_runs(runs: list[dict]) -> dict:
         for failure_class, count in (run_telemetry.get("failureClasses") or {}).items():
             failure_classes[str(failure_class)] += int(count or 0)
         for fingerprint, count in (run_telemetry.get("failureFingerprints") or {}).items():
-            failure_fingerprints[str(fingerprint)] += int(count or 0)
+            fingerprint = str(fingerprint).strip()
+            if not fingerprint:
+                continue
+            failure_fingerprints[fingerprint] += int(count or 0)
         for fingerprint, failure_class in (
             run_telemetry.get("failureFingerprintClasses") or {}
         ).items():
-            failure_fingerprint_classes.setdefault(str(fingerprint), str(failure_class))
+            fingerprint = str(fingerprint).strip()
+            if fingerprint:
+                failure_fingerprint_classes.setdefault(fingerprint, str(failure_class))
         for fingerprint, ecosystem in (
             run_telemetry.get("failureFingerprintEcosystems") or {}
         ).items():
-            failure_fingerprint_ecosystems.setdefault(str(fingerprint), str(ecosystem))
+            fingerprint = str(fingerprint).strip()
+            if fingerprint:
+                failure_fingerprint_ecosystems.setdefault(fingerprint, str(ecosystem))
         for fingerprint, repositories in (
             run_telemetry.get("failureFingerprintRepositories") or {}
         ).items():
-            if isinstance(repositories, list):
+            fingerprint = str(fingerprint).strip()
+            if fingerprint and isinstance(repositories, list):
                 failure_fingerprint_repositories.setdefault(
-                    str(fingerprint), set()
+                    fingerprint, set()
                 ).update(
                     str(repository).strip()
                     for repository in repositories
@@ -805,6 +826,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
         if count > 1
     ]
     regression_fixture_candidates = []
+    seen_fixture_slugs: set[str] = set()
     for item in recurring_failures:
         fingerprint = item["fingerprint"]
         failure_class = failure_fingerprint_classes.get(fingerprint, "unknown")
@@ -817,7 +839,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
             "fixtureEligible": fixture_eligible(failure_class),
             "fingerprint": fingerprint,
             "count": item["count"],
-            "suggestedFixture": fixture_slug(fingerprint),
+            "suggestedFixture": unique_fixture_slug(fingerprint, seen_fixture_slugs),
         }
         repositories = sorted(failure_fingerprint_repositories.get(fingerprint, ()))[:20]
         if repositories:
@@ -974,10 +996,47 @@ def render_regression_fixture_stub_readme(candidate: dict) -> str:
     return "\n".join(lines)
 
 
+def prune_stale_regression_fixture_stubs(stub_root: Path, active_fixtures: set[str]) -> None:
+    if not stub_root.is_dir():
+        return
+    for entry in stub_root.iterdir():
+        if not entry.is_dir() or entry.name in active_fixtures:
+            continue
+        metadata_path = entry / "metadata.json"
+        if not metadata_path.is_file():
+            continue
+        try:
+            metadata = json.loads(metadata_path.read_text())
+        except json.JSONDecodeError:
+            continue
+        if (
+            isinstance(metadata, dict)
+            and metadata.get("schema") == "dotrepo/regression-fixture-stub/v0.1"
+        ):
+            shutil.rmtree(entry)
+
+
 def write_regression_fixture_stub_artifacts(candidates: list[dict], stub_root: Path) -> None:
     stub_root.mkdir(parents=True, exist_ok=True)
+    active_fixtures = {
+        fixture_slug(
+            str(
+                candidate.get("suggestedFixture")
+                or candidate.get("fingerprint")
+                or "unknown-failure"
+            )
+        )
+        for candidate in candidates
+    }
+    prune_stale_regression_fixture_stubs(stub_root, active_fixtures)
     for candidate in candidates:
-        fixture = fixture_slug(str(candidate.get("suggestedFixture") or candidate.get("fingerprint") or "unknown-failure"))
+        fixture = fixture_slug(
+            str(
+                candidate.get("suggestedFixture")
+                or candidate.get("fingerprint")
+                or "unknown-failure"
+            )
+        )
         destination = stub_root / fixture
         destination.mkdir(parents=True, exist_ok=True)
         failure_class = candidate.get("failureClass", "unknown")

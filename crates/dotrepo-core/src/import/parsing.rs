@@ -1569,7 +1569,7 @@ fn extract_link_destination(raw: &str) -> Option<String> {
 fn is_team_handle(token: &str) -> bool {
     token
         .strip_prefix('@')
-        .map_or(false, |rest| rest.contains('/'))
+        .is_some_and(|rest| rest.contains('/'))
 }
 
 fn trim_contact_token(token: &str) -> &str {

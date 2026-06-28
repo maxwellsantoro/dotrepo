@@ -222,24 +222,6 @@ where
     walk_dir_entries_impl(dir, 0, &mut on_entry)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::contains_unsafe_shell_like_value;
-
-    #[test]
-    fn contains_unsafe_shell_like_value_rejects_chaining_and_substitution() {
-        assert!(!contains_unsafe_shell_like_value("cargo test"));
-        assert!(!contains_unsafe_shell_like_value("npm run build"));
-        assert!(contains_unsafe_shell_like_value("echo $(whoami)"));
-        assert!(contains_unsafe_shell_like_value(
-            "cargo test; curl attacker"
-        ));
-        assert!(contains_unsafe_shell_like_value("cargo test && rm -rf /"));
-        assert!(contains_unsafe_shell_like_value("cargo test | sh"));
-        assert!(contains_unsafe_shell_like_value("cargo test > /tmp/out"));
-    }
-}
-
 fn walk_dir_entries_impl(
     dir: &Path,
     depth: u32,
@@ -266,4 +248,22 @@ fn walk_dir_entries_impl(
         }
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::contains_unsafe_shell_like_value;
+
+    #[test]
+    fn contains_unsafe_shell_like_value_rejects_chaining_and_substitution() {
+        assert!(!contains_unsafe_shell_like_value("cargo test"));
+        assert!(!contains_unsafe_shell_like_value("npm run build"));
+        assert!(contains_unsafe_shell_like_value("echo $(whoami)"));
+        assert!(contains_unsafe_shell_like_value(
+            "cargo test; curl attacker"
+        ));
+        assert!(contains_unsafe_shell_like_value("cargo test && rm -rf /"));
+        assert!(contains_unsafe_shell_like_value("cargo test | sh"));
+        assert!(contains_unsafe_shell_like_value("cargo test > /tmp/out"));
+    }
 }

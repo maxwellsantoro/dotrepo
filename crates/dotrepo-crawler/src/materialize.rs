@@ -1,7 +1,7 @@
 use crate::{CrawlDiagnostic, RepositoryRef};
-use anyhow::{Context, Result};
+use anyhow::{bail, Context, Result};
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::{Component, Path, PathBuf};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct RepositoryTextFile {
@@ -50,6 +50,14 @@ pub(crate) struct MaterializedRepository {
 pub(crate) fn materialize_repository(
     input: &MaterializeRepositoryInput,
 ) -> Result<MaterializedRepository> {
+    input.repository.validate_identity()?;
+    if let Some(readme) = input.files.readme.as_ref() {
+        validate_materialized_relative_path(&readme.relative_path)?;
+    }
+    for file in &input.files.extra_files {
+        validate_materialized_relative_path(&file.relative_path)?;
+    }
+
     let temp_root = temp_root("materialize");
     let repository_root = temp_root.join(&input.repository.repo);
     fs::create_dir_all(&repository_root)
@@ -180,6 +188,7 @@ fn write_surface(
     contents: &str,
     written_files: &mut Vec<MaterializedFile>,
 ) -> Result<()> {
+    validate_materialized_relative_path(relative_path)?;
     let path = repository_root.join(relative_path);
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent)
@@ -190,6 +199,23 @@ fn write_surface(
         surface,
         relative_path: relative_path.to_path_buf(),
     });
+    Ok(())
+}
+
+fn validate_materialized_relative_path(relative_path: &Path) -> Result<()> {
+    let mut saw_normal = false;
+    for component in relative_path.components() {
+        match component {
+            Component::Normal(_) => saw_normal = true,
+            _ => bail!(
+                "materialized repository path must stay relative and contained: {}",
+                relative_path.display()
+            ),
+        }
+    }
+    if !saw_normal {
+        bail!("materialized repository path must not be empty");
+    }
     Ok(())
 }
 
@@ -288,5 +314,42 @@ mod tests {
         assert!(codes.contains(&"materialize.missing_security"));
 
         fs::remove_dir_all(materialized.temp_root).expect("temp dir removed");
+    }
+
+    #[test]
+    fn materialize_repository_rejects_paths_outside_repository_root() {
+        for relative_path in ["../escape.yml", "/tmp/escape.yml", ".github/../escape.yml"] {
+            let err = materialize_repository(&MaterializeRepositoryInput {
+                repository: repository(),
+                files: ConventionalRepositoryFiles {
+                    extra_files: vec![RepositoryTextFile {
+                        relative_path: PathBuf::from(relative_path),
+                        contents: "name: escape\n".into(),
+                    }],
+                    ..ConventionalRepositoryFiles::default()
+                },
+            })
+            .expect_err("path escape should be rejected");
+
+            assert!(err
+                .to_string()
+                .contains("materialized repository path must stay relative and contained"));
+        }
+    }
+
+    #[test]
+    fn materialize_repository_rejects_unsafe_repository_identity() {
+        let err = materialize_repository(&MaterializeRepositoryInput {
+            repository: RepositoryRef {
+                repo: "../escape".into(),
+                ..repository()
+            },
+            files: ConventionalRepositoryFiles::default(),
+        })
+        .expect_err("unsafe repository identity should be rejected");
+
+        assert!(err
+            .to_string()
+            .contains("repo must not contain path separators or null bytes"));
     }
 }

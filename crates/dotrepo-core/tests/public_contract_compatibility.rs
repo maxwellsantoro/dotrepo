@@ -913,7 +913,7 @@ fn public_contract_compatibility_manifest_matches_live_outputs() {
                 .map(|_| contents)
         })
         .expect("inventory output exists");
-    let inventory = serde_json::from_str::<Value>(&inventory_contents).expect("inventory parses");
+    let inventory = serde_json::from_str::<Value>(inventory_contents).expect("inventory parses");
     assert_eq!(inventory["apiVersion"], Value::String(manifest.api_version));
     assert_has_keys(&inventory, &manifest.inventory.required_keys, "inventory");
     assert_has_keys(

@@ -301,6 +301,167 @@ def test_fixture_slug_normalizes_failure_fingerprints() -> None:
     )
 
 
+def test_unique_fixture_slug_suffixes_collisions() -> None:
+    seen: set[str] = set()
+
+    assert autonomous_batch.unique_fixture_slug("Cargo.toml parse error!", seen) == (
+        "cargo-toml-parse-error"
+    )
+    assert autonomous_batch.unique_fixture_slug("Cargo toml parse error", seen) == (
+        "cargo-toml-parse-error-2"
+    )
+
+
+def test_aggregate_runs_keeps_colliding_fixture_slugs_distinct() -> None:
+    runs = [
+        {
+            "generatedAt": "2026-03-17T12:00:00Z",
+            "crawled": 2,
+            "written": 0,
+            "failed": 2,
+            "skipped": 0,
+            "zeroModelRuns": 2,
+            "repositoriesByAdjudicationTier": {},
+            "failureClasses": {"parser": 2},
+            "failureFingerprints": {
+                "Cargo.toml parse error!": 1,
+                "Cargo toml parse error": 1,
+            },
+            "failureFingerprintClasses": {
+                "Cargo.toml parse error!": "parser",
+                "Cargo toml parse error": "parser",
+            },
+            "failureFingerprintEcosystems": {
+                "Cargo.toml parse error!": "rust",
+                "Cargo toml parse error": "rust",
+            },
+        },
+        {
+            "generatedAt": "2026-03-18T12:00:00Z",
+            "crawled": 2,
+            "written": 0,
+            "failed": 2,
+            "skipped": 0,
+            "zeroModelRuns": 2,
+            "repositoriesByAdjudicationTier": {},
+            "failureClasses": {"parser": 2},
+            "failureFingerprints": {
+                "Cargo.toml parse error!": 1,
+                "Cargo toml parse error": 1,
+            },
+            "failureFingerprintClasses": {
+                "Cargo.toml parse error!": "parser",
+                "Cargo toml parse error": "parser",
+            },
+            "failureFingerprintEcosystems": {
+                "Cargo.toml parse error!": "rust",
+                "Cargo toml parse error": "rust",
+            },
+        },
+    ]
+
+    summary = autonomous_batch.aggregate_runs(runs)
+
+    assert [
+        item["suggestedFixture"]
+        for item in summary["regressionFixtureCandidates"]
+    ] == ["cargo-toml-parse-error", "cargo-toml-parse-error-2"]
+
+
+def test_aggregate_runs_skips_blank_failure_fingerprints() -> None:
+    runs = [
+        {
+            "generatedAt": "2026-03-17T12:00:00Z",
+            "crawled": 1,
+            "written": 0,
+            "failed": 1,
+            "skipped": 0,
+            "zeroModelRuns": 1,
+            "repositoriesByAdjudicationTier": {},
+            "failureClasses": {"unknown": 1},
+            "failureFingerprints": {"": 1, "   ": 1},
+            "failureFingerprintClasses": {"": "parser", "   ": "parser"},
+            "failureFingerprintEcosystems": {"": "rust", "   ": "rust"},
+        },
+        {
+            "generatedAt": "2026-03-18T12:00:00Z",
+            "crawled": 1,
+            "written": 0,
+            "failed": 1,
+            "skipped": 0,
+            "zeroModelRuns": 1,
+            "repositoriesByAdjudicationTier": {},
+            "failureClasses": {"unknown": 1},
+            "failureFingerprints": {"": 1, "   ": 1},
+            "failureFingerprintClasses": {"": "parser", "   ": "parser"},
+            "failureFingerprintEcosystems": {"": "rust", "   ": "rust"},
+        },
+    ]
+
+    summary = autonomous_batch.aggregate_runs(runs)
+
+    assert summary["recurringFailures"] == []
+    assert summary["regressionFixtureCandidates"] == []
+    assert summary["failureClassesByEcosystem"] == {}
+    assert summary["failureEcosystems"] == {}
+
+
+def test_aggregate_runs_normalizes_failure_fingerprint_metadata_keys() -> None:
+    runs = [
+        {
+            "generatedAt": "2026-03-17T12:00:00Z",
+            "crawled": 1,
+            "written": 0,
+            "failed": 1,
+            "skipped": 0,
+            "zeroModelRuns": 1,
+            "repositoriesByAdjudicationTier": {},
+            "failureClasses": {"parser": 1},
+            "failureFingerprints": {" Cargo.toml parse error ": 1},
+            "failureFingerprintClasses": {" Cargo.toml parse error ": "parser"},
+            "failureFingerprintEcosystems": {" Cargo.toml parse error ": "rust"},
+            "failureFingerprintRepositories": {
+                " Cargo.toml parse error ": ["github.com/example/orbit"]
+            },
+        },
+        {
+            "generatedAt": "2026-03-18T12:00:00Z",
+            "crawled": 1,
+            "written": 0,
+            "failed": 1,
+            "skipped": 0,
+            "zeroModelRuns": 1,
+            "repositoriesByAdjudicationTier": {},
+            "failureClasses": {"parser": 1},
+            "failureFingerprints": {"Cargo.toml parse error": 1},
+            "failureFingerprintClasses": {"Cargo.toml parse error": "parser"},
+            "failureFingerprintEcosystems": {"Cargo.toml parse error": "rust"},
+            "failureFingerprintRepositories": {
+                "Cargo.toml parse error": ["github.com/example/another"]
+            },
+        },
+    ]
+
+    summary = autonomous_batch.aggregate_runs(runs)
+
+    assert summary["failureClassesByEcosystem"] == {"parser/rust": 2}
+    assert summary["failureEcosystems"] == {"rust": 2}
+    assert summary["regressionFixtureCandidates"] == [
+        {
+            "failureClass": "parser",
+            "ecosystem": "rust",
+            "fixtureEligible": True,
+            "fingerprint": "Cargo.toml parse error",
+            "count": 2,
+            "suggestedFixture": "cargo-toml-parse-error",
+            "repositories": [
+                "github.com/example/another",
+                "github.com/example/orbit",
+            ],
+        }
+    ]
+
+
 def test_write_regression_fixture_candidate_artifacts(tmp_path: Path) -> None:
     summary = {
         "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
@@ -369,6 +530,49 @@ def test_write_regression_fixture_stub_artifacts(tmp_path: Path) -> None:
     assert "materialize_regression_fixture.py" in readme
     assert "--stub index/telemetry/regression-fixture-stubs/cargo-toml-parse-error" in readme
     assert "regression_fixture_pack" in readme
+
+
+def test_write_regression_fixture_stub_artifacts_prunes_stale_generated_stubs(
+    tmp_path: Path,
+) -> None:
+    stub_root = tmp_path / "stubs"
+    stale = stub_root / "stale-parser-failure"
+    stale.mkdir(parents=True)
+    (stale / "metadata.json").write_text(
+        autonomous_batch.json.dumps(
+            {
+                "schema": "dotrepo/regression-fixture-stub/v0.1",
+                "fixture": "stale-parser-failure",
+                "status": "needs_materialization",
+            }
+        )
+    )
+    manual = stub_root / "manual-notes"
+    manual.mkdir()
+    (manual / "README.md").write_text("operator notes\n")
+    foreign = stub_root / "foreign-metadata"
+    foreign.mkdir()
+    (foreign / "metadata.json").write_text('{"schema":"someone-else/v1"}')
+
+    autonomous_batch.write_regression_fixture_stub_artifacts(
+        [
+            {
+                "failureClass": "parser",
+                "ecosystem": "rust",
+                "fixtureEligible": True,
+                "fingerprint": "Cargo.toml parse error",
+                "count": 2,
+                "suggestedFixture": "cargo-toml-parse-error",
+                "repositories": ["github.com/example/orbit"],
+            }
+        ],
+        stub_root,
+    )
+
+    assert not stale.exists()
+    assert manual.is_dir()
+    assert foreign.is_dir()
+    assert (stub_root / "cargo-toml-parse-error" / "metadata.json").is_file()
 
 
 def test_crawl_env_caps_per_repo_calls_to_remaining_batch_budget() -> None:

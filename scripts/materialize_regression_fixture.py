@@ -200,9 +200,18 @@ def parse_repo_identity(repo: str) -> tuple[str, str, str]:
             f"--repo must be host/owner/repo (e.g. github.com/BurntSushi/ripgrep), got {repo!r}"
         )
     host, owner, name = parts
+    for label, value in (("host", host), ("owner", owner), ("repo", name)):
+        if value in {"", ".", ".."} or "\\" in value or "\0" in value:
+            raise SystemExit(f"repository {label} must be a safe path segment, got {value!r}")
     if host != "github.com":
         raise SystemExit(f"only github.com is supported today, got host {host!r}")
     return host, owner, name
+
+
+def validate_fixture_slug(slug: str) -> str:
+    if not slug or any(not (char.isalnum() or char == "-") for char in slug):
+        raise SystemExit("fixture slug must be nonempty and contain only letters, digits, or '-'")
+    return slug
 
 
 def load_stub_metadata(stub: str) -> dict:
@@ -286,6 +295,7 @@ def resolve_capture_args(args: argparse.Namespace) -> argparse.Namespace:
     if not args.slug:
         raise SystemExit("pass --slug or --stub")
     parse_repo_identity(args.repo)
+    args.slug = validate_fixture_slug(args.slug)
     return args
 
 
@@ -332,9 +342,14 @@ def gh_raw(owner: str, repo: str, path: str, branch: str) -> str:
 
 
 def safe_relative_path(path: str) -> Path:
-    if path.startswith("/") or ".." in Path(path).parts:
+    relative = Path(path)
+    if (
+        not path
+        or relative.is_absolute()
+        or any(part in {"", ".", ".."} for part in relative.parts)
+    ):
         raise SystemExit(f"refusing unsafe repository path: {path!r}")
-    return Path(path)
+    return relative
 
 
 def write_fixture_files(dest: Path, files: dict[str, str]) -> None:

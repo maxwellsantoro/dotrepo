@@ -226,7 +226,7 @@ fn infer_package_json_commands(file: &ImportedFile) -> Option<ImportedCommandCan
             scripts
                 .get("test")
                 .and_then(serde_json::Value::as_str)
-                .map_or(true, |v| !is_placeholder_package_json_test_script(v))
+                .is_none_or(|v| !is_placeholder_package_json_test_script(v))
         });
 
     if build.is_none() && test.is_none() {
@@ -355,10 +355,10 @@ fn infer_setup_cfg_test_command(contents: &str) -> Option<String> {
         let value = value.trim().to_ascii_lowercase();
         match section.as_str() {
             "options" | "metadata" if key == "test_suite" => has_test_suite = true,
-            "options.extras_require" if key == "test" || key == "testing" => {
-                if value.contains("pytest") {
-                    has_test_extras_pytest = true;
-                }
+            "options.extras_require"
+                if (key == "test" || key == "testing") && value.contains("pytest") =>
+            {
+                has_test_extras_pytest = true;
             }
             _ => {}
         }
