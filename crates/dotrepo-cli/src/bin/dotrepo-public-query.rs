@@ -14,7 +14,12 @@ use url::form_urlencoded;
 
 #[derive(Parser)]
 #[command(name = "dotrepo-public-query")]
-#[command(about = "Thin HTTP wrapper for the dotrepo public query contract")]
+#[command(
+    about = "Thin HTTP wrapper for the dotrepo public query contract",
+    long_about = "Local and review-only HTTP surface for the public query contract. \
+Bind to loopback for smoke tests; do not expose batch routes on the public internet without \
+a reverse proxy, rate limits, and the cardinality caps enforced by dotrepo-core."
+)]
 struct Cli {
     /// Index snapshot root used to answer public query requests.
     #[arg(long, default_value = "index")]

@@ -128,6 +128,35 @@ This write tool mutates local files and should remain explicit for clients that
 want write access. It should use the same import pipeline and report shape as
 `dotrepo.import_preview`, with only the write side effects added.
 
+### `dotrepo.adoption_status`
+
+Inputs:
+- `root`
+
+Returns:
+- whether a native `.repo` is present
+- whether validation, managed-surface checks, and CI scaffolding are ready
+- ordered readiness checks and suggested next steps
+
+This should mirror `dotrepo adoption-status --json` rather than inventing a
+separate readiness vocabulary for agents.
+
+### `dotrepo.lookup`
+
+Inputs:
+- `url` (required repository URL or `host/owner/repo` identity)
+- `path` (optional dotrepo query path; defaults to `repo.name`)
+- `baseUrl` (optional hosted public snapshot origin)
+
+Returns:
+- the same trust-aware query envelope as `dotrepo.query`, resolved against a
+  remote hosted snapshot instead of a local repository root
+
+Security constraints:
+- `baseUrl` must match the server's allowlisted hosted snapshot origins unless
+  `DOTREPO_MCP_LOOKUP_BASE_URL` overrides the default
+- the server rejects private-network and non-HTTP(S) lookup targets
+
 ## Response shape guidance
 
 The server should return plain structured objects. It should not require consumers to parse CLI text.

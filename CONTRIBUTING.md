@@ -14,6 +14,14 @@ tested changes rather than speculative surface area.
 - Public index: evidence-backed overlay records, claim context, and automation
   under `index/` and `scripts/`.
 
+## Path containment limits
+
+Repository-local tooling resolves paths relative to a declared root and rejects
+paths that escape that root after canonicalization. The check reduces symlink
+escape risk for existing files, but it cannot eliminate time-of-check/time-of-use
+gaps for paths that do not exist yet. Treat containment as a best-effort guard,
+not a sandbox boundary, when adding write flows.
+
 ## Before you open a PR
 
 - Read the shortest relevant doc first instead of starting from the full RFC

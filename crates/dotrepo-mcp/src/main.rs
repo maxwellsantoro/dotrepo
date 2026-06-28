@@ -2,8 +2,8 @@ use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
     adoption_status_repository, current_timestamp_rfc3339, display_path, generate_check_repository,
     import_preview_repository, import_repository_with_options, inspect_claim_directory,
-    query_repository, record_summary, resolve_claim_directory, trust_repository,
-    validate_repository, write_import_outputs, ImportMode, ImportOptions,
+    query_repository, record_summary, resolve_claim_directory, resolve_workspace_repository_root,
+    trust_repository, validate_repository, write_import_outputs, ImportMode, ImportOptions,
 };
 use dotrepo_transport::{
     jsonrpc_error_response, jsonrpc_response, read_jsonrpc_message as read_message,
@@ -394,31 +394,7 @@ fn allow_absolute_repository_root() -> bool {
 
 fn resolve_root(arguments: &Value) -> Result<PathBuf> {
     let raw = optional_string(arguments, "root").unwrap_or_else(|| ".".into());
-    let raw_path = PathBuf::from(&raw);
-    let is_absolute = raw_path.is_absolute();
-    let resolved = if is_absolute {
-        raw_path
-    } else {
-        std::env::current_dir()?.join(raw_path)
-    };
-
-    let canonical = fs::canonicalize(&resolved)
-        .map_err(|err| anyhow!("failed to resolve repository root `{}`: {}", raw, err))?;
-
-    let cwd = std::env::current_dir()?;
-    let canonical_cwd = fs::canonicalize(&cwd)?;
-    if !canonical.starts_with(&canonical_cwd) {
-        if is_absolute && !allow_absolute_repository_root() {
-            bail!(
-                "absolute repository root outside the MCP server working directory requires DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT=1"
-            );
-        }
-        if !is_absolute {
-            bail!("repository root must stay within the MCP server working directory");
-        }
-    }
-
-    Ok(canonical)
+    resolve_workspace_repository_root(&raw, allow_absolute_repository_root())
 }
 
 fn required_string<'a>(arguments: &'a Value, field: &str) -> Result<&'a str> {
@@ -1220,6 +1196,48 @@ description = "Missing source and trust"
                 "server must receive notifications/initialized before calling tools".into()
             )
         );
+    }
+
+    #[test]
+    fn validate_accepts_missing_repository_subdirectory() {
+        let cwd = std::env::current_dir().expect("cwd available");
+        let parent = cwd.join(format!(
+            "dotrepo-mcp-validate-missing-root-{}-{}",
+            std::process::id(),
+            SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .expect("clock works")
+                .as_nanos()
+        ));
+        let root = parent.join("nested/new-repo");
+        fs::create_dir_all(parent.join("nested")).expect("parent nested dir created");
+        let relative = root
+            .strip_prefix(&cwd)
+            .expect("path stays within cwd")
+            .to_str()
+            .expect("utf-8 path");
+
+        let response = call_tool(
+            "dotrepo.validate",
+            json!({
+                "root": relative
+            }),
+        );
+        assert_ne!(response["result"]["isError"], Value::Bool(true));
+        let structured = &response["result"]["structuredContent"];
+        assert_eq!(structured["valid"], Value::Bool(false));
+        assert!(
+            structured["diagnostics"]
+                .as_array()
+                .expect("diagnostics array")
+                .iter()
+                .any(|diagnostic| diagnostic["message"]
+                    .as_str()
+                    .is_some_and(|message| message.contains("no .repo or record.toml"))),
+            "expected missing-manifest diagnostics, not root resolution failure"
+        );
+
+        fs::remove_dir_all(parent).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
     }
 
     #[test]

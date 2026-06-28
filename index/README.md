@@ -101,6 +101,25 @@ These index entries are useful reference examples for v0.1:
 These entries should be strong enough to serve as model contributions for future
 overlay submissions, not just as structurally valid records.
 
+## Autonomous refresh operator controls
+
+The scheduled `index-autonomous-refresh` workflow can commit generated overlays
+with `contents: write`, `GITHUB_TOKEN`, and optional `OPENROUTER_API_KEY`. Treat
+it as production automation, not a passive report:
+
+- keep `INDEX_AUTOMATION_ENABLED` off until policy, parsers, and release gates
+  are ready for unattended writeback
+- require branch protection and review on the automation PR path; autonomous
+  batches should land through the same public-surface and release-gate artifacts
+  as maintainer changes
+- rotate sidecar credentials and monitor workflow logs for unexpected index churn
+- remember that writeback uses `autonomous_writeback_eligible` (verification
+  passed) rather than the stricter `eligible_for_auto_publish` gate used for
+  promotion to `verified`
+
+See [`docs/factual-crawl-automation.md`](../docs/factual-crawl-automation.md) for
+the writeback vs auto-publish distinction.
+
 ## Local validation
 
 Run:

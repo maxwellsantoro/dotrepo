@@ -51,6 +51,51 @@ pub(crate) fn ensure_path_contained_in_root(root: &Path, path: &Path) -> Result<
     Ok(path.to_path_buf())
 }
 
+/// Resolve a repository root relative to the process working directory.
+///
+/// The path need not exist yet (for example before `import_write` creates it).
+/// When the path is missing, containment is checked against the canonical working
+/// directory via parent resolution instead of requiring `canonicalize` on the leaf.
+pub fn resolve_workspace_repository_root(raw: &str, allow_absolute: bool) -> Result<PathBuf> {
+    let raw_path = PathBuf::from(raw);
+    let is_absolute = raw_path.is_absolute();
+    let resolved = if is_absolute {
+        raw_path
+    } else {
+        std::env::current_dir()?.join(raw_path)
+    };
+
+    let cwd = std::env::current_dir()?;
+    let canonical_cwd = fs::canonicalize(&cwd).map_err(|err| {
+        anyhow!(
+            "failed to canonicalize working directory {}: {}",
+            cwd.display(),
+            err
+        )
+    })?;
+
+    let canonical = if resolved.exists() {
+        fs::canonicalize(&resolved)
+            .map_err(|err| anyhow!("failed to resolve repository root `{}`: {}", raw, err))?
+    } else {
+        verify_path_contained_in_root(&canonical_cwd, &resolved)?;
+        resolved
+    };
+
+    if !canonical.starts_with(&canonical_cwd) {
+        if is_absolute && !allow_absolute {
+            bail!(
+                "absolute repository root outside the server working directory requires DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT=1"
+            );
+        }
+        if !is_absolute {
+            bail!("repository root must stay within the server working directory");
+        }
+    }
+
+    Ok(canonical)
+}
+
 pub(crate) fn verify_path_contained_in_root(root: &Path, path: &Path) -> Result<()> {
     let canonical_root = fs::canonicalize(root).map_err(|err| {
         anyhow!(
@@ -252,7 +297,34 @@ fn walk_dir_entries_impl(
 
 #[cfg(test)]
 mod tests {
-    use super::contains_unsafe_shell_like_value;
+    use super::{contains_unsafe_shell_like_value, resolve_workspace_repository_root};
+    use std::fs;
+
+    #[test]
+    fn resolve_workspace_repository_root_accepts_missing_subdirectory() {
+        let cwd = std::env::current_dir().expect("cwd available");
+        let parent = cwd.join(format!(
+            "dotrepo-resolve-root-parent-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .expect("clock works")
+                .as_nanos()
+        ));
+        let missing = parent.join("nested/new-repo");
+        fs::create_dir_all(parent.join("nested")).expect("parent created");
+        let relative = missing
+            .strip_prefix(&cwd)
+            .expect("path stays within cwd")
+            .to_str()
+            .expect("utf-8 path");
+
+        let resolved = resolve_workspace_repository_root(relative, false)
+            .expect("missing subdirectory resolves");
+        assert_eq!(resolved, missing);
+
+        fs::remove_dir_all(parent).expect("parent removed");
+    }
 
     #[test]
     fn contains_unsafe_shell_like_value_rejects_chaining_and_substitution() {

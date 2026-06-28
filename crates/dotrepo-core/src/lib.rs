@@ -37,7 +37,8 @@ pub(crate) use util::walk_dir_entries;
 pub use util::{
     current_timestamp_rfc3339, display_path, identity_from_index_claim_path,
     index_record_mirror_path, normalize_rfc3339, parse_rfc3339, record_status_name, render_rfc3339,
-    repository_identity, source_digest, validate_repository_identity_segments,
+    repository_identity, resolve_workspace_repository_root, source_digest,
+    validate_repository_identity_segments,
 };
 
 pub(crate) use surfaces::{
@@ -99,6 +100,7 @@ pub use public::{
     PublicResearchProfileResponse, PublicResearchSynthesis, PublicResearchSynthesisArchitecture,
     PublicResearchSynthesisForAgents, PublicResearchTrust, PublicSelectedRecord,
     PublicSelectionReport, PublicSnapshotMetadata, PublicTrustResponse,
+    PUBLIC_BATCH_MAX_IDENTITIES, PUBLIC_BATCH_MAX_PATHS, PUBLIC_BATCH_MAX_QUERY_RESULTS,
 };
 
 pub use import::{

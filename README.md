@@ -129,6 +129,7 @@ Current MCP tools:
 - `dotrepo.validate`
 - `dotrepo.query`
 - `dotrepo.trust`
+- `dotrepo.adoption_status`
 - `dotrepo.lookup`
 - `dotrepo.claim_inspect`
 - `dotrepo.generate_check`

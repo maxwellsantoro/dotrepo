@@ -25,6 +25,57 @@ use crate::{ConflictRelationship, RecordSummary, SelectionReason};
 pub(crate) const PUBLIC_API_VERSION: &str = "v0";
 pub(crate) const PUBLIC_STATIC_STRATEGY: &str = "static_summary_trust_and_profile";
 
+/// Maximum repositories per batch profile or batch query request.
+pub const PUBLIC_BATCH_MAX_IDENTITIES: usize = 50;
+/// Maximum distinct query paths per batch query request.
+pub const PUBLIC_BATCH_MAX_PATHS: usize = 25;
+/// Maximum `identities × paths` results per batch query request.
+pub const PUBLIC_BATCH_MAX_QUERY_RESULTS: usize = 500;
+
+fn validate_batch_identities(identities: &[PublicRepositoryIdentity]) -> Result<()> {
+    if identities.is_empty() {
+        bail!("batch request requires at least one repository identity");
+    }
+    if identities.len() > PUBLIC_BATCH_MAX_IDENTITIES {
+        bail!(
+            "batch request exceeds the maximum of {} repositories (received {})",
+            PUBLIC_BATCH_MAX_IDENTITIES,
+            identities.len()
+        );
+    }
+    Ok(())
+}
+
+fn validate_batch_query_paths(
+    identities: &[PublicRepositoryIdentity],
+    paths: &[String],
+) -> Result<()> {
+    validate_batch_identities(identities)?;
+    if paths.is_empty() {
+        bail!("batch query requires at least one path");
+    }
+    if paths.len() > PUBLIC_BATCH_MAX_PATHS {
+        bail!(
+            "batch query exceeds the maximum of {} paths (received {})",
+            PUBLIC_BATCH_MAX_PATHS,
+            paths.len()
+        );
+    }
+    let result_count = identities
+        .len()
+        .checked_mul(paths.len())
+        .ok_or_else(|| anyhow!("batch query result count overflow"))?;
+    if result_count > PUBLIC_BATCH_MAX_QUERY_RESULTS {
+        bail!(
+            "batch query exceeds the maximum of {} results ({} repositories × {} paths)",
+            PUBLIC_BATCH_MAX_QUERY_RESULTS,
+            identities.len(),
+            paths.len()
+        );
+    }
+    Ok(())
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicFreshness {
@@ -1430,6 +1481,7 @@ pub fn public_repository_batch_profiles_with_base(
     base_path: &str,
 ) -> Result<PublicBatchProfileResponse> {
     normalize_public_base_path(base_path)?;
+    validate_batch_identities(identities)?;
     let mut results = Vec::new();
     for identity in identities {
         let requested_identity = PublicRepositoryIdentity {
@@ -1438,12 +1490,12 @@ pub fn public_repository_batch_profiles_with_base(
             repo: identity.repo.clone(),
             source: identity.source.clone(),
         };
-        match public_repository_profile_or_error_with_base(
+        match public_repository_profile_or_error_with_base_ref(
             index_root,
             &identity.host,
             &identity.owner,
             &identity.repo,
-            freshness.clone(),
+            &freshness,
             base_path,
         ) {
             Ok(profile) => results.push(PublicBatchProfileItem {
@@ -1483,6 +1535,7 @@ pub fn public_repository_batch_query_with_base(
     base_path: &str,
 ) -> Result<PublicBatchQueryResponse> {
     normalize_public_base_path(base_path)?;
+    validate_batch_query_paths(identities, paths)?;
     let mut results = Vec::new();
     for identity in identities {
         for path in paths {
@@ -1492,13 +1545,13 @@ pub fn public_repository_batch_query_with_base(
                 repo: identity.repo.clone(),
                 source: identity.source.clone(),
             };
-            match public_repository_query_or_error_with_base(
+            match public_repository_query_or_error_with_base_ref(
                 index_root,
                 &identity.host,
                 &identity.owner,
                 &identity.repo,
                 path,
-                freshness.clone(),
+                &freshness,
                 base_path,
             ) {
                 Ok(query) => results.push(PublicBatchQueryItem {
@@ -2326,8 +2379,21 @@ pub fn public_repository_profile_or_error_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> std::result::Result<PublicResearchProfileResponse, PublicErrorResponse> {
+    public_repository_profile_or_error_with_base_ref(
+        index_root, host, owner, repo, &freshness, base_path,
+    )
+}
+
+pub fn public_repository_profile_or_error_with_base_ref(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    freshness: &PublicFreshness,
+    base_path: &str,
+) -> std::result::Result<PublicResearchProfileResponse, PublicErrorResponse> {
     public_repository_profile_with_base(index_root, host, owner, repo, freshness.clone(), base_path)
-        .map_err(|error| public_error_response(host, owner, repo, None, freshness, &error))
+        .map_err(|error| public_error_response(host, owner, repo, None, freshness.clone(), &error))
 }
 
 pub fn public_repository_query_or_error(
@@ -2350,6 +2416,20 @@ pub fn public_repository_query_or_error_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> std::result::Result<PublicQueryResponse, PublicErrorResponse> {
+    public_repository_query_or_error_with_base_ref(
+        index_root, host, owner, repo, path, &freshness, base_path,
+    )
+}
+
+pub fn public_repository_query_or_error_with_base_ref(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+    path: &str,
+    freshness: &PublicFreshness,
+    base_path: &str,
+) -> std::result::Result<PublicQueryResponse, PublicErrorResponse> {
     public_repository_query_with_base(
         index_root,
         host,
@@ -2359,7 +2439,9 @@ pub fn public_repository_query_or_error_with_base(
         freshness.clone(),
         base_path,
     )
-    .map_err(|error| public_error_response(host, owner, repo, Some(path), freshness, &error))
+    .map_err(|error| {
+        public_error_response(host, owner, repo, Some(path), freshness.clone(), &error)
+    })
 }
 
 pub fn export_public_index_static(

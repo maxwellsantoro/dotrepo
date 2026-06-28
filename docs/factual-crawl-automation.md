@@ -77,6 +77,20 @@ Publish
   reviewed:           human-reviewed only
 ```
 
+### Writeback vs auto-publish gates
+
+Autonomous index writeback uses a different gate than promotion to `verified`:
+
+- **Writeback** (`autonomous_writeback_eligible`): requires deterministic
+  `verification.passed`. The crawler may persist honestly partial overlays when
+  verification succeeds but field scoring still has unresolved entries.
+- **Auto-publish to `verified`** (`FieldScoreSummary::eligible_for_auto_publish`):
+  requires no unresolved fields and no medium-confidence-only present fields.
+
+A record can therefore be written to the index as `imported` or `inferred` while
+promotion abstains until scoring is exhaustive. That is intentional: publish
+uncertainty instead of inventing certainty.
+
 ### Key design rules
 
 1. **Never spend tokens to answer a question the filesystem, GitHub API, or a

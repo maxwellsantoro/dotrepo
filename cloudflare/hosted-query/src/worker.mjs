@@ -1,4 +1,7 @@
 export const PUBLIC_API_VERSION = "v0";
+export const PUBLIC_BATCH_MAX_IDENTITIES = 50;
+export const PUBLIC_BATCH_MAX_PATHS = 25;
+export const PUBLIC_BATCH_MAX_QUERY_RESULTS = 500;
 
 export const PUBLIC_ERROR_CODES = {
   queryPathNotFound: "query_path_not_found",
@@ -345,6 +348,33 @@ function parseBatchRoute(pathname) {
     return "query";
   }
   return null;
+}
+
+function validateBatchRepos(repoParams) {
+  if (repoParams.length === 0) {
+    throw new Error("batch request requires at least one repository identity");
+  }
+  if (repoParams.length > PUBLIC_BATCH_MAX_IDENTITIES) {
+    throw new Error(
+      `batch request exceeds the maximum of ${PUBLIC_BATCH_MAX_IDENTITIES} repositories`
+    );
+  }
+}
+
+function validateBatchQuery(repoParams, paths) {
+  validateBatchRepos(repoParams);
+  if (paths.length === 0) {
+    throw new Error("batch query requires at least one path");
+  }
+  if (paths.length > PUBLIC_BATCH_MAX_PATHS) {
+    throw new Error(`batch query exceeds the maximum of ${PUBLIC_BATCH_MAX_PATHS} paths`);
+  }
+  const resultCount = repoParams.length * paths.length;
+  if (resultCount > PUBLIC_BATCH_MAX_QUERY_RESULTS) {
+    throw new Error(
+      `batch query exceeds the maximum of ${PUBLIC_BATCH_MAX_QUERY_RESULTS} results`
+    );
+  }
 }
 
 function normalizeSearchValue(value) {
@@ -905,6 +935,14 @@ export async function handleRequest(request, env) {
     if (repoParams.length === 0) {
       return textResponse(400, "missing query parameter `repo`");
     }
+    try {
+      if (batchRoute === "profiles") {
+        validateBatchRepos(repoParams);
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      return textResponse(400, message);
+    }
     const meta = await loadMeta(env, request);
     const freshness = buildFreshnessFromMeta(meta);
     if (batchRoute === "profiles") {
@@ -917,6 +955,12 @@ export async function handleRequest(request, env) {
     const paths = url.searchParams.getAll("path").filter((value) => value.trim() !== "");
     if (paths.length === 0) {
       return textResponse(400, "missing query parameter `path`");
+    }
+    try {
+      validateBatchQuery(repoParams, paths);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      return textResponse(400, message);
     }
     return jsonResponse(
       200,

@@ -112,6 +112,11 @@ CLI, MCP, and LSP all consume the same core report structs. The main ones:
 - `ValidateReport` — diagnostics list + per-record results from `validate_repository()`
 - `QueryReport` — resolved value + selection report + conflicts from `query_repository()`
 - `TrustReport` — selected record + selection reason + conflicts from `trust_repository()`
+- `AdoptionStatusReport` — native maintainer readiness checks from `adoption_status_repository()`
+
+MCP also exposes `dotrepo.lookup` for remote trust-aware queries without a local clone.
+Set `DOTREPO_MCP_LOOKUP_BASE_URL` to an allowlisted hosted snapshot origin; the server
+rejects other origins to limit SSRF risk.
 - `GenerateCheckReport` — per-file drift detection from `generate_check_repository()`
 - `ImportPlan` — manifest text + evidence text + imported sources + inferred fields from `import_repository()`
 - `ClaimInspectionReport` — claim state + event history + validation from `inspect_claim_directory()`

@@ -666,6 +666,11 @@ fn sanitize_plan_command_fields(plan: &mut ImportPlan, context: &str) {
 }
 
 /// Whether an autonomous crawl may write back overlay artifacts.
+///
+/// This gate is intentionally looser than `FieldScoreSummary::eligible_for_auto_publish`:
+/// writeback may persist honestly partial overlays when deterministic verification passes,
+/// even when field scoring still has unresolved entries. Auto-publish to `verified` requires
+/// full field resolution instead.
 pub fn autonomous_writeback_eligible(verification: &VerificationReport) -> bool {
     verification.passed
 }
@@ -730,6 +735,39 @@ mod tests {
         assert!(plan.manifest.repo.build.is_none());
         assert_eq!(report.model_calls, 0);
         assert!(autonomous_writeback_eligible(&verification));
+
+        fs::remove_dir_all(root).expect("cleanup");
+    }
+
+    #[test]
+    fn writeback_gate_can_pass_while_auto_publish_remains_blocked() {
+        let root = temp_dir("writeback-vs-auto-publish");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir");
+        fs::write(
+            root.join("README.md"),
+            "# Conflict\n\nConflicting workflows.\n",
+        )
+        .expect("readme");
+        fs::write(
+            root.join(".github/workflows/ci.yml"),
+            "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+        )
+        .expect("ci");
+        fs::write(
+            root.join(".github/workflows/release.yml"),
+            "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+        )
+        .expect("release");
+
+        let source = "https://github.com/example/writeback-vs-auto-publish";
+        let plan =
+            import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+        let verification = crate::import::verify_import_plan(&root, &plan, source);
+        let scores = score_import_fields(&plan, &verification);
+
+        assert!(autonomous_writeback_eligible(&verification));
+        assert!(!scores.summary.unresolved.is_empty());
+        assert!(!scores.summary.eligible_for_auto_publish);
 
         fs::remove_dir_all(root).expect("cleanup");
     }

@@ -474,6 +474,7 @@ jobs:
       - name: Run core Rust smoke tests
         run: |
           cargo test -p dotrepo-core
+          cargo test -p dotrepo-cli -p dotrepo-mcp -p dotrepo-lsp -p dotrepo-crawler
           cargo run -p dotrepo-cli -- validate-index
       - name: Run lightweight public-surface gate
         run: uv run python scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
@@ -518,7 +519,9 @@ jobs:
             ${{ runner.os }}-cargo-
       - name: Run minimal validation gate
         run: |
+          cargo fmt --all -- --check
           cargo test --workspace
+          uv run pytest
           cargo run -p dotrepo-cli -- validate-index
 
   release-gate:

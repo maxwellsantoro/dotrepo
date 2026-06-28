@@ -1,8 +1,8 @@
 use anyhow::{anyhow, bail, Context, Result};
 use dotrepo_core::{
-    manifest_to_json, query_manifest_value_from_json, render_dotrepo_ci_workflow,
-    repository_identity, validate_manifest_diagnostics, ValidationDiagnostic,
-    ValidationDiagnosticSeverity,
+    adoption_status_repository, display_path, manifest_to_json, native_repository_identity,
+    query_manifest_value_from_json, render_dotrepo_ci_workflow, validate_manifest_diagnostics,
+    validate_repository, RepositoryDiagnostic, ValidationDiagnostic, ValidationDiagnosticSeverity,
 };
 use dotrepo_schema::{parse_manifest, Manifest, ParseError, RecordMode};
 use dotrepo_transport::{
@@ -677,8 +677,9 @@ fn diagnostics_for_document(
 ) -> Vec<LspDiagnostic> {
     let index = DocumentIndex::from_text(text);
     let root = validation_root_for_manifest(path, workspace_roots);
+    let current_manifest_path = display_path(&root, path).ok();
 
-    match parse_manifest(text) {
+    let mut diagnostics = match parse_manifest(text) {
         Ok(manifest) => validate_manifest_diagnostics(&root, &manifest)
             .into_iter()
             .map(|diagnostic| map_validation_diagnostic(&index, &root, &diagnostic))
@@ -703,6 +704,58 @@ fn diagnostics_for_document(
             source: "parse_manifest".into(),
             message: ParseError::ConflictingTrustPlacement.to_string(),
         }],
+    };
+
+    if path.exists() || has_other_root_manifests(&root, path) {
+        diagnostics.extend(repository_level_diagnostics(
+            &index,
+            &root,
+            current_manifest_path.as_deref(),
+        ));
+    }
+
+    diagnostics
+}
+
+fn has_other_root_manifests(root: &Path, current: &Path) -> bool {
+    for name in [".repo", "record.toml"] {
+        let candidate = root.join(name);
+        if candidate != current && candidate.exists() {
+            return true;
+        }
+    }
+    false
+}
+
+fn repository_level_diagnostics(
+    index: &DocumentIndex,
+    root: &Path,
+    current_manifest_path: Option<&str>,
+) -> Vec<LspDiagnostic> {
+    validate_repository(root)
+        .diagnostics
+        .into_iter()
+        .filter(|diagnostic| {
+            diagnostic.manifest_path.as_deref() != current_manifest_path
+                || current_manifest_path.is_none()
+        })
+        .map(|diagnostic| map_repository_diagnostic(index, &diagnostic))
+        .collect()
+}
+
+fn map_repository_diagnostic(
+    index: &DocumentIndex,
+    diagnostic: &RepositoryDiagnostic,
+) -> LspDiagnostic {
+    let message = match diagnostic.manifest_path.as_deref() {
+        Some(manifest_path) => format!("{manifest_path}: {}", diagnostic.message),
+        None => diagnostic.message.clone(),
+    };
+    LspDiagnostic {
+        range: index.default_range(),
+        severity: 1,
+        source: diagnostic.source.clone(),
+        message,
     }
 }
 
@@ -715,51 +768,50 @@ fn adoption_diagnostics_for_manifest(
         return Vec::new();
     }
 
+    let report = adoption_status_repository(root);
     let mut diagnostics = Vec::new();
-    let homepage = manifest
-        .repo
-        .homepage
-        .as_deref()
-        .map(str::trim)
-        .filter(|value| !value.is_empty());
     let homepage_range = index
         .section_range("repo")
-        .or_else(|| index.field_range("repo.name"))
         .or_else(|| index.field_range("repo.homepage"))
         .unwrap_or_else(|| index.default_range());
-    match homepage {
-        None => {
-            diagnostics.push(LspDiagnostic {
-                range: homepage_range,
-                severity: 4,
-                source: "adoption_status".into(),
-                message:
-                    "set repo.homepage to enable claim-from-native and derived claim handoff commands"
-                        .into(),
-            });
-        }
-        Some(hp) => {
-            if repository_identity(hp).is_none() {
-                diagnostics.push(LspDiagnostic {
-                    range: homepage_range,
-                    severity: 4,
-                    source: "adoption_status".into(),
-                    message:
-                        "repo.homepage must resolve to a host/owner/repo URL for claim-from-native"
-                            .into(),
-                });
-            }
-        }
+
+    if native_repository_identity(manifest).is_err() {
+        let homepage_present = manifest
+            .repo
+            .homepage
+            .as_deref()
+            .map(str::trim)
+            .is_some_and(|value| !value.is_empty());
+        let message = if homepage_present {
+            "repo.homepage must resolve to a host/owner/repo URL for claim-from-native".to_string()
+        } else {
+            "set repo.homepage to enable claim-from-native and derived claim handoff commands"
+                .to_string()
+        };
+        diagnostics.push(LspDiagnostic {
+            range: homepage_range,
+            severity: 4,
+            source: "adoption_status".into(),
+            message,
+        });
     }
 
-    if !root.join(".github/workflows/dotrepo-check.yml").exists() {
+    if !report.ci_workflow_present {
+        let ci_check = report
+            .checks
+            .iter()
+            .find(|check| check.name == "ci workflow");
         diagnostics.push(LspDiagnostic {
             range: index
                 .section_range("record")
                 .unwrap_or_else(|| index.default_range()),
             severity: 4,
             source: "adoption_status".into(),
-            message: "run dotrepo ci init to add the native-repo adoption check workflow".into(),
+            message: ci_check
+                .map(|check| check.detail.clone())
+                .unwrap_or_else(|| {
+                    "run dotrepo ci init to add the native-repo adoption check workflow".into()
+                }),
         });
     }
 
@@ -1868,6 +1920,51 @@ homepage = "not-a-repo-url"
                 && diagnostic
                     .message
                     .contains("repo.homepage must resolve to a host/owner/repo URL")
+        }));
+
+        fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
+    }
+
+    #[test]
+    fn diagnostics_surface_other_root_manifest_validation_errors() {
+        let root = temp_dir("lsp-dual-manifest");
+        let path = root.join(".repo");
+        fs::write(
+            root.join("record.toml"),
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+
+[repo]
+name = ""
+description = "overlay with missing name"
+"#,
+        )
+        .expect("record.toml written");
+
+        let diagnostics = diagnostics_for_document(
+            &path,
+            r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+
+[repo]
+name = "orbit"
+description = "Fast local-first sync engine"
+"#,
+            &[],
+        );
+
+        assert!(diagnostics.iter().any(|diagnostic| {
+            diagnostic.source == "validate_manifest"
+                && diagnostic.message.contains("record.toml")
+                && diagnostic.message.contains("repo.name")
         }));
 
         fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
