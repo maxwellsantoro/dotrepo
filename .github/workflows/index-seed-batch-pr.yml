@@ -17,7 +17,7 @@ on:
       targets_file:
         description: Repository target list to seed against
         required: false
-        default: index/tranche-one-targets.txt
+        default: index/tranche-two-targets.txt
 
 permissions:
   contents: write
@@ -66,17 +66,33 @@ jobs:
             batch_size="3"
           fi
           if [ -z "$targets_file" ]; then
-            targets_file="index/tranche-one-targets.txt"
+            targets_file="index/tranche-two-targets.txt"
           fi
+          current_high_signal="$(uv run python -c 'import json; print(json.load(open("scripts/fixtures/public_profile_coverage_baseline.json"))["minHighSignal"])')"
+          milestone_high_signal_target="$(uv run python -c 'import json; print(json.load(open("scripts/fixtures/index_growth_tranche_baseline.json"))["milestoneHighSignalTarget"])')"
+          min_planned_capacity=$((current_high_signal + 1))
           echo "limit=$limit" >> "$GITHUB_OUTPUT"
           echo "batch_size=$batch_size" >> "$GITHUB_OUTPUT"
           echo "targets_file=$targets_file" >> "$GITHUB_OUTPUT"
+          echo "current_high_signal=$current_high_signal" >> "$GITHUB_OUTPUT"
+          echo "milestone_high_signal_target=$milestone_high_signal_target" >> "$GITHUB_OUTPUT"
+          echo "min_planned_capacity=$min_planned_capacity" >> "$GITHUB_OUTPUT"
       - name: Regenerate seed review batch plan
         shell: bash
         run: |
           mkdir -p index-seed-batch
+          uv run python scripts/plan_index_growth_tranche.py \
+            --candidate-file "${{ steps.inputs.outputs.targets_file }}" \
+            --target-count "${{ steps.inputs.outputs.limit }}" \
+            --min-selected 1 \
+            --current-high-signal "${{ steps.inputs.outputs.current_high_signal }}" \
+            --milestone-high-signal-target "${{ steps.inputs.outputs.milestone_high_signal_target }}" \
+            --min-planned-high-signal-capacity "${{ steps.inputs.outputs.min_planned_capacity }}" \
+            --output-targets index-seed-batch/planned-targets.txt \
+            --output-json index-seed-batch/growth-plan.json \
+            --output-md index-seed-batch/growth-plan.md
           cargo run -p dotrepo-crawler -- seed \
-            --targets-file "${{ steps.inputs.outputs.targets_file }}" \
+            --targets-file index-seed-batch/planned-targets.txt \
             --limit "${{ steps.inputs.outputs.limit }}" \
             --dry-run \
             --review-report-md index-seed-batch/seed-review.md \

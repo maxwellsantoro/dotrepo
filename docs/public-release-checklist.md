@@ -36,6 +36,9 @@ For the canonical freshness semantics used by these outputs, see
   files open cleanly
 - `public-profile-coverage.json` and `.md` pass the versioned valid-profile,
   high-signal, malformed-profile, and completeness-signal baseline
+- `index-growth-plan.json`, `.md`, and `index-growth-targets.txt` pass the
+  versioned active-tranche baseline, exclude already-indexed repositories, and
+  report planned Milestone 2 capacity without counting it as completed coverage
 - `public-lookup-workload.json` covers the release inventory, and
   `public-lookup-efficiency.json` and `.md` pass aggregate and per-intent volume,
   hit-rate, and payload-ratio baselines
@@ -65,6 +68,7 @@ For the canonical freshness semantics used by these outputs, see
 - CI runs `scripts/check_release_gate.py` and uploads:
   - `public-export-v0`
   - `public-export-v0-bundle`
+  - `index-growth-plan.json` / `index-growth-targets.txt`
   - `release-gate-install-bundles`
   - `release-gate-vscode-vsix`
 - the same script is the local and CI release review gate

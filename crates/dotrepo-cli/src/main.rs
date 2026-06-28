@@ -41,9 +41,11 @@ fn run() -> Result<()> {
         Command::ValidateIndex { index_root } => cmd_validate_index(index_root),
         Command::PromotionReport {
             index_root,
+            apply,
+            limit,
             json,
             verbose,
-        } => cmd_promotion_report(index_root, json, verbose),
+        } => cmd_promotion_report(index_root, apply, limit, json, verbose),
         Command::Query { path, json, raw } => cmd_query(cli.root, &path, json, raw),
         Command::Generate { check } => cmd_generate(cli.root, check),
         Command::Doctor { json } => cmd_doctor(cli.root, json),

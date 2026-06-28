@@ -1730,6 +1730,45 @@ Policy-aware release orchestration for multi-service deploys.
 }
 
 #[test]
+fn parse_readme_docs_metadata_extracts_reference_and_html_docs_links() {
+    let reference_metadata = parse_readme_metadata(
+        r#"[documentation]: https://gohugo.io/documentation
+[installation]: https://gohugo.io/installation
+
+# Hugo
+
+A fast and flexible static site generator.
+
+[Website][] | [Installation][] | [Documentation][]
+"#,
+    );
+    assert_eq!(
+        reference_metadata.docs_root.as_deref(),
+        Some("https://gohugo.io/documentation")
+    );
+    assert_eq!(
+        reference_metadata.docs_getting_started.as_deref(),
+        Some("https://gohugo.io/installation")
+    );
+
+    let html_metadata = parse_readme_metadata(
+        r#"# Starship
+
+The minimal, blazing-fast, and infinitely customizable prompt for any shell!
+
+<p>
+  <a href="https://starship.rs">Website</a>
+  <a href="https://starship.rs/config/">Configuration</a>
+</p>
+"#,
+    );
+    assert_eq!(
+        html_metadata.docs_root.as_deref(),
+        Some("https://starship.rs/config/")
+    );
+}
+
+#[test]
 fn parse_readme_metadata_skips_reference_definitions_and_trailing_badges() {
     let metadata = parse_readme_metadata(
         r#"# Serde &emsp; [![Build Status]][actions] [![Latest Version]][crates.io]

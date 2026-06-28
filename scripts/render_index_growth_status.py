@@ -17,6 +17,8 @@ STATUS_ORDER = {
     "canonical": 5,
 }
 CONFIDENCE_ORDER = {"low": 0, "medium": 1, "high": 2}
+HIGH_SIGNAL_STATUSES = {"reviewed", "verified", "canonical"}
+HIGH_SIGNAL_CONFIDENCE = {"medium", "high"}
 LANGUAGE_FAMILIES = ("Rust", "TypeScript / JavaScript", "Python", "Go", "Other")
 
 
@@ -31,8 +33,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--targets-file",
-        default="index/tranche-one-targets.txt",
-        help="Machine-readable tranche target list (default: index/tranche-one-targets.txt)",
+        default="index/tranche-two-targets.txt",
+        help="Machine-readable tranche target list (default: index/tranche-two-targets.txt)",
     )
     parser.add_argument(
         "--max-items",
@@ -57,6 +59,21 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=None,
         help="Fail when missing tranche target count exceeds this threshold",
+    )
+    parser.add_argument(
+        "--milestone-high-signal-target",
+        type=int,
+        default=500,
+        help="Milestone high-signal profile target for status reporting (default: 500)",
+    )
+    parser.add_argument(
+        "--min-tranche-high-signal-capacity",
+        type=int,
+        default=None,
+        help=(
+            "Fail when current record-level high-signal count plus missing tranche "
+            "targets is below this capacity threshold"
+        ),
     )
     parser.add_argument("--output-json", help="Optional path for machine-readable JSON")
     parser.add_argument("--output-md", help="Optional path for markdown output")
@@ -206,6 +223,37 @@ def lower_confidence_records(records: list[dict[str, Any]]) -> list[dict[str, An
     return sorted(items, key=quality_rank)
 
 
+def is_record_level_high_signal(record: dict[str, Any]) -> bool:
+    return (
+        str(record.get("status")) in HIGH_SIGNAL_STATUSES
+        and str(record.get("confidence")) in HIGH_SIGNAL_CONFIDENCE
+    )
+
+
+def status_lift_rank(record: dict[str, Any]) -> tuple[int, int, str]:
+    status = str(record.get("status", "unknown"))
+    confidence = str(record.get("confidence", "unknown"))
+    return (
+        CONFIDENCE_ORDER.get(confidence, -1),
+        STATUS_ORDER.get(status, -1),
+        str(record.get("identity", "")),
+    )
+
+
+def high_signal_lift_candidates(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    items = [
+        record
+        for record in records
+        if not is_record_level_high_signal(record)
+        and str(record.get("confidence")) in HIGH_SIGNAL_CONFIDENCE
+        and bool(record.get("buildPresent"))
+        and bool(record.get("testPresent"))
+        and bool(record.get("securityContact"))
+        and record.get("securityContact") != "unknown"
+    ]
+    return sorted(items, key=status_lift_rank, reverse=True)
+
+
 def ratio(numerator: int, denominator: int) -> float | None:
     if denominator == 0:
         return None
@@ -218,9 +266,11 @@ def build_gates(
     present_count: int,
     missing_count: int,
     lower_confidence_queue: int,
+    tranche_high_signal_capacity: int,
     min_tranche_coverage_ratio: float = 0.0,
     max_lower_confidence_queue: int | None = None,
     max_missing_targets: int | None = None,
+    min_tranche_high_signal_capacity: int | None = None,
 ) -> dict[str, Any]:
     coverage_ratio = ratio(present_count, target_count)
     gates: dict[str, Any] = {
@@ -242,6 +292,12 @@ def build_gates(
             "actual": missing_count,
             "passed": missing_count <= max_missing_targets,
         }
+    if min_tranche_high_signal_capacity is not None:
+        gates["minTrancheHighSignalCapacity"] = {
+            "threshold": min_tranche_high_signal_capacity,
+            "actual": tranche_high_signal_capacity,
+            "passed": tranche_high_signal_capacity >= min_tranche_high_signal_capacity,
+        }
     return gates
 
 
@@ -252,7 +308,11 @@ def summarize(
     min_tranche_coverage_ratio: float = 0.0,
     max_lower_confidence_queue: int | None = None,
     max_missing_targets: int | None = None,
+    milestone_high_signal_target: int = 500,
+    min_tranche_high_signal_capacity: int | None = None,
 ) -> dict[str, Any]:
+    if milestone_high_signal_target < 0:
+        raise SystemExit("--milestone-high-signal-target must not be negative")
     records = load_records(index_root)
     by_identity = {record["identity"]: record for record in records}
     targets = load_targets(targets_file)
@@ -284,14 +344,22 @@ def summarize(
     ]
     quality_queue = lower_confidence_records(records)
     tranche_coverage_ratio = ratio(len(present_targets), len(targets))
+    high_signal_record_count = sum(
+        1 for record in records if is_record_level_high_signal(record)
+    )
+    lift_candidates = high_signal_lift_candidates(records)
+    record_lift_capacity = high_signal_record_count + len(lift_candidates)
+    tranche_high_signal_capacity = high_signal_record_count + len(missing_targets)
     gates = build_gates(
         target_count=len(targets),
         present_count=len(present_targets),
         missing_count=len(missing_targets),
         lower_confidence_queue=len(quality_queue),
+        tranche_high_signal_capacity=tranche_high_signal_capacity,
         min_tranche_coverage_ratio=min_tranche_coverage_ratio,
         max_lower_confidence_queue=max_lower_confidence_queue,
         max_missing_targets=max_missing_targets,
+        min_tranche_high_signal_capacity=min_tranche_high_signal_capacity,
     )
 
     return {
@@ -322,6 +390,32 @@ def summarize(
             "unknownSecurityContact": len(unknown_security),
             "lowerConfidenceQueue": len(quality_queue),
         },
+        "milestoneProgress": {
+            "recordLevelHighSignalCount": high_signal_record_count,
+            "milestoneHighSignalTarget": milestone_high_signal_target,
+            "recordLevelHighSignalRatio": ratio(
+                high_signal_record_count, milestone_high_signal_target
+            ),
+            "activeTrancheMissingTargets": len(missing_targets),
+            "statusLiftCandidateCount": len(lift_candidates),
+            "recordLevelPotentialAfterLift": record_lift_capacity,
+            "recordLevelPotentialAfterLiftRatio": ratio(
+                record_lift_capacity, milestone_high_signal_target
+            ),
+            "activeTrancheHighSignalCapacityUpperBound": tranche_high_signal_capacity,
+            "activeTrancheCapacityRatio": ratio(
+                tranche_high_signal_capacity, milestone_high_signal_target
+            ),
+            "remainingHighSignalGap": max(
+                milestone_high_signal_target - high_signal_record_count, 0
+            ),
+            "remainingHighSignalGapAfterStatusLift": max(
+                milestone_high_signal_target - record_lift_capacity, 0
+            ),
+            "remainingHighSignalGapAfterActiveTranche": max(
+                milestone_high_signal_target - tranche_high_signal_capacity, 0
+            ),
+        },
         "tranche": {
             "targetCount": len(targets),
             "presentCount": len(present_targets),
@@ -343,6 +437,16 @@ def summarize(
             }
             for record in quality_queue[:max_items]
         ],
+        "nextHighSignalLiftTargets": [
+            {
+                "identity": record["identity"],
+                "status": record["status"],
+                "confidence": record["confidence"],
+                "primaryLanguage": record["primaryLanguage"],
+                "languageFamily": record["languageFamily"],
+            }
+            for record in lift_candidates[:max_items]
+        ],
     }
 
 
@@ -355,6 +459,7 @@ def format_counts(counts: dict[str, int]) -> str:
 def render_markdown(summary: dict[str, Any]) -> str:
     tranche = summary["tranche"]
     quality = summary["qualitySignals"]
+    progress = summary["milestoneProgress"]
     lines = [
         "# Index Growth Status",
         "",
@@ -364,7 +469,12 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- trust confidence: {format_counts(summary['trustConfidenceCounts'])}",
         f"- language families: {format_counts(summary['languageFamilyCounts'])}",
         f"- maintainer claims: {format_counts(summary['claimStateCounts'])}",
+        f"- record-level high-signal: {progress['recordLevelHighSignalCount']}/{progress['milestoneHighSignalTarget']} ({progress['recordLevelHighSignalRatio']})",
+        f"- high-signal lift candidates: {progress['statusLiftCandidateCount']}",
+        f"- record-level potential after lift: {progress['recordLevelPotentialAfterLift']}/{progress['milestoneHighSignalTarget']} ({progress['recordLevelPotentialAfterLiftRatio']})",
         f"- tranche coverage: {tranche['presentCount']}/{tranche['targetCount']} present ({tranche['coverageRatio']})",
+        f"- active tranche high-signal capacity upper bound: {progress['activeTrancheHighSignalCapacityUpperBound']}/{progress['milestoneHighSignalTarget']} ({progress['activeTrancheCapacityRatio']})",
+        f"- remaining high-signal gap after active tranche: {progress['remainingHighSignalGapAfterActiveTranche']}",
         f"- quality queue: {quality['lowerConfidenceQueue']} records need review hardening signals",
         f"- missing build/test/security: build={quality['missingBuild']}, test={quality['missingTest']}, security={quality['unknownSecurityContact']}",
         "",
@@ -408,6 +518,15 @@ def render_markdown(summary: dict[str, Any]) -> str:
             )
         lines.append("")
 
+    next_lift_targets = summary.get("nextHighSignalLiftTargets") or []
+    if next_lift_targets:
+        lines.extend(["## Next High-Signal Lift Targets", ""])
+        for record in next_lift_targets:
+            lines.append(
+                f"- `{record['identity']}`: {record['languageFamily']}; status `{record['status']}`, confidence `{record['confidence']}`"
+            )
+        lines.append("")
+
     return "\n".join(lines).rstrip()
 
 
@@ -435,6 +554,13 @@ def main() -> int:
         raise SystemExit("--max-lower-confidence-queue must not be negative")
     if args.max_missing_targets is not None and args.max_missing_targets < 0:
         raise SystemExit("--max-missing-targets must not be negative")
+    if args.milestone_high_signal_target < 0:
+        raise SystemExit("--milestone-high-signal-target must not be negative")
+    if (
+        args.min_tranche_high_signal_capacity is not None
+        and args.min_tranche_high_signal_capacity < 0
+    ):
+        raise SystemExit("--min-tranche-high-signal-capacity must not be negative")
     summary = summarize(
         Path(args.index_root),
         Path(args.targets_file),
@@ -442,6 +568,8 @@ def main() -> int:
         min_tranche_coverage_ratio=args.min_tranche_coverage_ratio,
         max_lower_confidence_queue=args.max_lower_confidence_queue,
         max_missing_targets=args.max_missing_targets,
+        milestone_high_signal_target=args.milestone_high_signal_target,
+        min_tranche_high_signal_capacity=args.min_tranche_high_signal_capacity,
     )
     markdown = render_markdown(summary)
     write_json(args.output_json, summary)

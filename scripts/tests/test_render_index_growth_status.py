@@ -94,7 +94,51 @@ def test_summarize_reports_tranche_and_quality_queue(tmp_path: Path) -> None:
     assert summary["tranche"]["coverageByGroup"]["Rust"] == {"target": 1, "present": 1}
     assert summary["languageFamilyCounts"] == {"Rust": 1, "Go": 1}
     assert summary["qualitySignals"]["lowerConfidenceQueue"] == 1
+    assert summary["milestoneProgress"] == {
+        "recordLevelHighSignalCount": 1,
+        "milestoneHighSignalTarget": 500,
+        "recordLevelHighSignalRatio": 0.002,
+        "activeTrancheMissingTargets": 0,
+        "statusLiftCandidateCount": 0,
+        "recordLevelPotentialAfterLift": 1,
+        "recordLevelPotentialAfterLiftRatio": 0.002,
+        "activeTrancheHighSignalCapacityUpperBound": 1,
+        "activeTrancheCapacityRatio": 0.002,
+        "remainingHighSignalGap": 499,
+        "remainingHighSignalGapAfterStatusLift": 499,
+        "remainingHighSignalGapAfterActiveTranche": 499,
+    }
     assert summary["nextQualityTargets"][0]["identity"] == "github.com/owner/beta"
+
+
+def test_summarize_reports_high_signal_lift_candidates(tmp_path: Path) -> None:
+    index_root = tmp_path / "index"
+    targets_file = tmp_path / "targets.txt"
+    targets_file.write_text("# Rust\nowner/alpha\n")
+    write_record(
+        index_root,
+        "owner",
+        "alpha",
+        status="imported",
+        confidence="high",
+        languages=["Rust"],
+    )
+
+    summary = growth_status.summarize(index_root, targets_file, max_items=5)
+
+    assert summary["milestoneProgress"]["recordLevelHighSignalCount"] == 0
+    assert summary["milestoneProgress"]["statusLiftCandidateCount"] == 1
+    assert summary["milestoneProgress"]["recordLevelPotentialAfterLift"] == 1
+    assert summary["milestoneProgress"]["remainingHighSignalGapAfterStatusLift"] == 499
+    assert summary["nextHighSignalLiftTargets"] == [
+        {
+            "identity": "github.com/owner/alpha",
+            "status": "imported",
+            "confidence": "high",
+            "primaryLanguage": "Rust",
+            "languageFamily": "Rust",
+        }
+    ]
 
 
 def test_summarize_operational_gates_fail_when_thresholds_are_not_met(tmp_path: Path) -> None:
@@ -120,6 +164,8 @@ def test_summarize_operational_gates_fail_when_thresholds_are_not_met(tmp_path: 
         min_tranche_coverage_ratio=0.75,
         max_lower_confidence_queue=0,
         max_missing_targets=0,
+        milestone_high_signal_target=3,
+        min_tranche_high_signal_capacity=2,
     )
 
     assert summary["passed"] is False
@@ -137,6 +183,11 @@ def test_summarize_operational_gates_fail_when_thresholds_are_not_met(tmp_path: 
         },
         "maxMissingTargets": {
             "threshold": 0,
+            "actual": 1,
+            "passed": False,
+        },
+        "minTrancheHighSignalCapacity": {
+            "threshold": 2,
             "actual": 1,
             "passed": False,
         },
@@ -167,6 +218,10 @@ def test_render_markdown_includes_operational_gates(tmp_path: Path) -> None:
     )
 
     assert "- tranche coverage: 1/1 present (1.0)" in markdown
+    assert "- record-level high-signal: 1/500 (0.002)" in markdown
+    assert "- high-signal lift candidates: 0" in markdown
+    assert "- record-level potential after lift: 1/500 (0.002)" in markdown
+    assert "- active tranche high-signal capacity upper bound: 1/500 (0.002)" in markdown
     assert "## Gates" in markdown
     assert "- minTrancheCoverageRatio: 1.0 / 1.0 (pass)" in markdown
     assert "- maxLowerConfidenceQueue: 0 / 0 (pass)" in markdown

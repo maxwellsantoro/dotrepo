@@ -349,6 +349,8 @@
     "fixture": "sponsor-heading-readme",
     "repo_name": "Vitest",
     "repo_description": "Next generation testing framework powered by Vite.",
+    "overlay_docs_root": "https://example.com/docs",
+    "overlay_docs_getting_started": "https://example.com/guide",
     "imported_sources": ["README.md"],
     "inferred_fields": [],
     "maintainers": [],
@@ -359,7 +361,7 @@
     "trust_provenance": ["imported"],
     "native_trust_note_contains": ["Bootstrapped from `README.md`"],
     "overlay_trust_note_contains": ["Bootstrapped from `README.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
-    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+    "overlay_evidence_contains": ["Imported repository name, description, and docs entry points from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
   },
   {
     "fixture": "promo-link-heading-readme",

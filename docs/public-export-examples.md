@@ -335,3 +335,32 @@ The canonical release gate applies the versioned floor in
 `scripts/fixtures/public_profile_coverage_baseline.json` and publishes JSON and
 Markdown coverage evidence with its other artifacts. Raising that baseline is
 the incremental path from current coverage to the 500-profile milestone.
+
+## 19. Plan the next growth tranche
+
+```bash
+uv run python scripts/plan_index_growth_tranche.py \
+  --candidate-file index/tranche-two-targets.txt \
+  --target-count 100 \
+  --min-selected 100 \
+  --current-high-signal 107 \
+  --milestone-high-signal-target 500 \
+  --min-planned-high-signal-capacity 207 \
+  --output-targets /tmp/dotrepo-growth-targets.txt \
+  --output-json /tmp/dotrepo-growth-plan.json \
+  --output-md /tmp/dotrepo-growth-plan.md
+```
+
+The planner is a pre-crawl control point for coverage growth. It excludes
+repositories already present in the checked-in index, balances eligible targets
+across candidate groups in candidate-file order, and emits a crawler target
+file plus JSON/Markdown evidence. Its Milestone 2 capacity section reports the
+current high-signal floor plus selected targets as an upper bound, not as
+completed profile coverage. The profile coverage gate remains authoritative
+after those targets are actually crawled and exported. The scheduled
+seed-review workflows use this planner before crawling so already-indexed
+candidates do not consume batch slots. The canonical release gate applies the
+versioned floor in
+`scripts/fixtures/index_growth_tranche_baseline.json` and publishes
+`index-growth-plan.json`, `index-growth-plan.md`, and `index-growth-targets.txt`
+with its other artifacts.

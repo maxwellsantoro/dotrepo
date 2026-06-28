@@ -162,9 +162,9 @@ Start with:
 ## Next steps
 
 The next public-surface work is hardening freshness and caching, scaling profile
-coverage, running the lookup-efficiency benchmark on a larger representative
-workload, and eventually building discovery and comparison on top of the trusted
-index. See
+coverage through planned crawl tranches, running the lookup-efficiency benchmark
+on a larger representative workload, and eventually building discovery and
+comparison on top of the trusted index. See
 [`ROADMAP.md`](../ROADMAP.md) for the active sequence. For the freshness
 definitions that apply to responses, see
 [`docs/public-freshness.md`](./public-freshness.md). For deployment operations,

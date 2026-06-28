@@ -118,7 +118,8 @@ pub use import::{
 };
 
 pub use promotion::{
-    analyze_index_promotion, promote_to_verified, score_index_record_for_promotion,
+    analyze_index_promotion, apply_index_promotions, promote_to_verified,
+    score_index_record_for_promotion, PromotionAppliedRecord, PromotionApplyReport,
     PromotionOutcome, PromotionRecordScore, PromotionReport, PromotionSummary,
 };
 

@@ -1,0 +1,19 @@
+{
+  "fixture": "rust-starship-multiline-logo-canary",
+  "ecosystem": "rust",
+  "origin": "github.com/starship/starship",
+  "fingerprint": "README multiline logo alt ignored and later Installation heading imported as repo.name",
+  "repo_name": "Starship",
+  "repo_description": "The minimal, blazing-fast, and infinitely customizable prompt for any shell!",
+  "repo_build": "cargo build",
+  "repo_test": "cargo test",
+  "imported_sources": [
+    "README.md",
+    "Cargo.toml"
+  ],
+  "inferred_fields": [],
+  "overlay_status": "imported",
+  "trust_provenance": [
+    "imported"
+  ]
+}

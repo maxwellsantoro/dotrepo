@@ -367,6 +367,19 @@ fn scrub_overlay_docs_for_native(root: &Path, manifest: &mut Manifest) -> usize 
     omitted
 }
 
+fn importable_docs_entry(root: &Path, mode: ImportMode, value: Option<&str>) -> Option<String> {
+    let value = value?.trim();
+    if !is_quality_url(value) {
+        return None;
+    }
+    match mode {
+        ImportMode::Overlay => Some(value.to_string()),
+        ImportMode::Native => {
+            (!value.contains("://") && root.join(value).exists()).then(|| value.to_string())
+        }
+    }
+}
+
 pub fn import_repository_with_options(
     root: &Path,
     mode: ImportMode,
@@ -574,16 +587,8 @@ pub fn import_repository_with_options(
     };
 
     let imported_docs = build_imported_docs(
-        readme_metadata
-            .docs_root
-            .as_deref()
-            .filter(|url| is_quality_url(url))
-            .map(str::to_string),
-        readme_metadata
-            .docs_getting_started
-            .as_deref()
-            .filter(|url| is_quality_url(url))
-            .map(str::to_string),
+        importable_docs_entry(root, mode, readme_metadata.docs_root.as_deref()),
+        importable_docs_entry(root, mode, readme_metadata.docs_getting_started.as_deref()),
     );
 
     if !codeowners_metadata.owners.is_empty() || codeowners_metadata.team.is_some() {

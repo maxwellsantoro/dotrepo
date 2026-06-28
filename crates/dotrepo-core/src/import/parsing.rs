@@ -2,6 +2,7 @@ use super::{
     push_unique, CodeownersMetadata, CodeownersRule, ReadmeDocsMetadata, ReadmeMetadata,
     SecurityImportMetadata,
 };
+use std::collections::HashMap;
 
 pub(crate) fn try_parse_multiline_html_heading(
     lines: &[&str],
@@ -67,6 +68,11 @@ pub(crate) fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
                 idx += 1;
                 continue;
             }
+            if let Some((title, advance)) = try_parse_multiline_html_image_title(&lines, idx) {
+                metadata.title = Some(title);
+                idx += advance;
+                continue;
+            }
             if let Some((title, advance)) = try_parse_multiline_html_heading(&lines, idx) {
                 metadata.title = Some(title);
                 idx += advance;
@@ -118,14 +124,49 @@ fn parse_readme_logo_title(line: &str) -> Option<String> {
     let image_start = lower.find("<img")?;
     let image = &line[image_start..];
     let image_lower = &lower[image_start..];
-    let alt_start = image_lower.find("alt=")? + 4;
-    let quote = image.as_bytes().get(alt_start).copied()? as char;
+    let title = parse_html_attr(image, image_lower, "alt")?;
+    credible_logo_alt_title(&title)
+}
+
+fn try_parse_multiline_html_image_title(lines: &[&str], idx: usize) -> Option<(String, usize)> {
+    let line = lines.get(idx)?.trim();
+    let lower = line.to_ascii_lowercase();
+    if !lower.contains("<img") || lower.contains('>') {
+        return None;
+    }
+
+    let mut accumulated = String::from(line);
+    let mut scan = idx + 1;
+    let mut lines_consumed = 1;
+    while scan < lines.len() {
+        let next = lines[scan].trim();
+        lines_consumed += 1;
+        if !next.is_empty() {
+            accumulated.push(' ');
+            accumulated.push_str(next);
+        }
+        if next.contains('>') {
+            let lower_accumulated = accumulated.to_ascii_lowercase();
+            let title = parse_html_attr(&accumulated, &lower_accumulated, "alt")?;
+            return credible_logo_alt_title(&title).map(|value| (value, lines_consumed));
+        }
+        scan += 1;
+    }
+    None
+}
+
+fn parse_html_attr(image: &str, image_lower: &str, attr: &str) -> Option<String> {
+    let attr_start = image_lower.find(&format!("{attr}="))? + attr.len() + 1;
+    let quote = image.as_bytes().get(attr_start).copied()? as char;
     if quote != '"' && quote != '\'' {
         return None;
     }
-    let value_start = alt_start + 1;
+    let value_start = attr_start + 1;
     let value_end = image[value_start..].find(quote)? + value_start;
-    let title = normalize_readme_text(&image[value_start..value_end])?;
+    normalize_readme_text(&image[value_start..value_end])
+}
+
+fn credible_logo_alt_title(title: &str) -> Option<String> {
     let lowered = title.to_ascii_lowercase();
     let badge_words = [
         "badge", "build", "ci", "coverage", "docs", "image", "license", "logo", "package",
@@ -140,7 +181,7 @@ fn parse_readme_logo_title(line: &str) -> Option<String> {
     {
         return None;
     }
-    Some(title)
+    Some(title.to_string())
 }
 
 pub(crate) fn parse_readme_title_line(line: &str) -> Option<String> {
@@ -227,6 +268,7 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "support",
     "table of contents",
     "usage",
+    "website",
 ];
 
 const NON_PROJECT_HEADING_KEYWORDS: &[&str] = &["sponsors", "sponsor", "backed by", "supported by"];
@@ -373,6 +415,7 @@ pub(crate) fn normalize_description_line(line: &str) -> Option<String> {
     let description = line.trim_start_matches('>').trim();
     normalize_readme_text(description)
         .filter(|value| value.chars().any(|ch| ch.is_alphanumeric()))
+        .filter(|value| !is_non_project_heading(value))
         .filter(|value| !looks_like_artifact(value))
         .filter(|value| !is_quoted_tagline(value))
 }
@@ -417,7 +460,18 @@ fn looks_like_artifact(value: &str) -> bool {
 
 fn looks_like_html_attribute_spill(value: &str) -> bool {
     let lowered = value.to_ascii_lowercase();
-    lowered.contains("src=\"") || lowered.contains("alt=\"") || lowered.contains("href=\"")
+    [
+        "src=\"",
+        "alt=\"",
+        "href=\"",
+        "width=\"",
+        "height=\"",
+        "align=\"",
+        "class=\"",
+        "style=\"",
+    ]
+    .iter()
+    .any(|attribute| lowered.contains(attribute))
 }
 
 fn is_pipe_delimited_nav_line(line: &str) -> bool {
@@ -535,6 +589,12 @@ fn strip_name_trailer(name: &str) -> String {
         }
     }
     if let Some(idx) = name.find(" — ") {
+        let candidate = name[..idx].trim();
+        if candidate.len() >= 2 {
+            return candidate.to_string();
+        }
+    }
+    if let Some(idx) = name.find(" – ") {
         let candidate = name[..idx].trim();
         if candidate.len() >= 2 {
             return candidate.to_string();
@@ -831,6 +891,7 @@ fn strip_html_tags(line: &str) -> String {
 
 fn parse_readme_docs_metadata(lines: &[&str]) -> ReadmeDocsMetadata {
     let mut docs = ReadmeDocsMetadata::default();
+    let reference_definitions = markdown_reference_definitions(lines);
     let mut in_code_block = false;
 
     for line in lines {
@@ -843,7 +904,7 @@ fn parse_readme_docs_metadata(lines: &[&str]) -> ReadmeDocsMetadata {
             continue;
         }
 
-        let signal = parse_readme_docs_signal(trimmed);
+        let signal = parse_readme_docs_signal_with_references(trimmed, &reference_definitions);
         if docs.root.is_none() {
             docs.root = signal.root;
         }
@@ -859,19 +920,36 @@ fn parse_readme_docs_metadata(lines: &[&str]) -> ReadmeDocsMetadata {
     docs
 }
 
+#[allow(dead_code)]
 pub(crate) fn parse_readme_docs_signal(line: &str) -> ReadmeDocsMetadata {
+    parse_readme_docs_signal_with_references(line, &HashMap::new())
+}
+
+fn parse_readme_docs_signal_with_references(
+    line: &str,
+    reference_definitions: &HashMap<String, String>,
+) -> ReadmeDocsMetadata {
     let mut docs = ReadmeDocsMetadata::default();
     let lower_line = strip_html_tags(line).to_ascii_lowercase();
 
-    for (label, url) in extract_markdown_links(line) {
+    let mut links = extract_markdown_links(line);
+    links.extend(extract_markdown_reference_links(
+        line,
+        reference_definitions,
+    ));
+    links.extend(extract_html_links(line));
+
+    for (label, url) in links {
         let lower_label = label.to_ascii_lowercase();
         let lower_url = url.to_ascii_lowercase();
 
         let is_getting_started = lower_label.contains("getting started")
             || lower_label.contains("quickstart")
+            || lower_label == "installation"
             || lower_line.starts_with("getting started:")
             || lower_line.starts_with("quickstart:")
             || lower_url.contains("getting-started")
+            || lower_url.contains("/installation")
             || lower_url.contains("quickstart");
 
         if is_badge_asset_url(&url) {
@@ -885,10 +963,13 @@ pub(crate) fn parse_readme_docs_signal(line: &str) -> ReadmeDocsMetadata {
         let is_docs_root = !is_getting_started
             && (lower_label == "docs"
                 || lower_label == "documentation"
+                || lower_label == "configuration"
                 || lower_label.contains("reference")
                 || lower_line.starts_with("docs:")
                 || lower_line.starts_with("documentation:")
                 || lower_line.starts_with("documentation ")
+                || lower_url.contains("/config/")
+                || lower_url.contains("/configuration/")
                 || lower_url == "./docs/"
                 || lower_url == "docs/"
                 || lower_url.ends_with("/docs/")
@@ -908,6 +989,107 @@ fn is_badge_asset_url(url: &str) -> bool {
         || lower.contains("shields.io")
         || lower.ends_with(".svg")
         || lower.contains("status.svg")
+}
+
+fn markdown_reference_definitions(lines: &[&str]) -> HashMap<String, String> {
+    let mut definitions = HashMap::new();
+    for line in lines {
+        let trimmed = line.trim();
+        if !trimmed.starts_with('[') {
+            continue;
+        }
+        let Some(split_idx) = trimmed.find("]:") else {
+            continue;
+        };
+        let label = trimmed[1..split_idx].trim();
+        if label.is_empty() {
+            continue;
+        }
+        if let Some(destination) = extract_link_destination(&trimmed[split_idx + 2..]) {
+            definitions.insert(label.to_ascii_lowercase(), destination);
+        }
+    }
+    definitions
+}
+
+fn extract_markdown_reference_links(
+    line: &str,
+    definitions: &HashMap<String, String>,
+) -> Vec<(String, String)> {
+    let mut links = Vec::new();
+    let mut idx = 0;
+    while idx < line.len() {
+        let Some(rel) = line[idx..].find('[') else {
+            break;
+        };
+        let label_start = idx + rel;
+        if label_start > 0 && line.as_bytes().get(label_start - 1) == Some(&b'!') {
+            idx = label_start + 1;
+            continue;
+        }
+        let Some(label_end_rel) = line[label_start + 1..].find(']') else {
+            break;
+        };
+        let label_end = label_start + 1 + label_end_rel;
+        let raw_label = &line[label_start + 1..label_end];
+        let remainder = &line[label_end + 1..];
+        let Some((reference_key, advance)) = parse_reference_suffix(remainder, raw_label) else {
+            idx = label_end + 1;
+            continue;
+        };
+        if let Some(url) = definitions.get(&reference_key) {
+            if let Some(label) = normalize_readme_text(raw_label) {
+                links.push((label, url.clone()));
+            }
+        }
+        idx = label_end + 1 + advance;
+    }
+    links
+}
+
+fn parse_reference_suffix(remainder: &str, raw_label: &str) -> Option<(String, usize)> {
+    if let Some(rest) = remainder.strip_prefix("[]") {
+        return Some((
+            raw_label.trim().to_ascii_lowercase(),
+            remainder.len() - rest.len(),
+        ));
+    }
+    let rest = remainder.strip_prefix('[')?;
+    let close = rest.find(']')?;
+    let reference = rest[..close].trim();
+    if reference.is_empty() {
+        return None;
+    }
+    Some((reference.to_ascii_lowercase(), close + 2))
+}
+
+fn extract_html_links(line: &str) -> Vec<(String, String)> {
+    let mut links = Vec::new();
+    let lower = line.to_ascii_lowercase();
+    let mut idx = 0;
+    while let Some(rel) = lower[idx..].find("<a") {
+        let anchor_start = idx + rel;
+        let Some(tag_end_rel) = lower[anchor_start..].find('>') else {
+            break;
+        };
+        let tag_end = anchor_start + tag_end_rel;
+        let tag = &line[anchor_start..=tag_end];
+        let tag_lower = tag.to_ascii_lowercase();
+        let Some(url) = parse_html_attr(tag, &tag_lower, "href") else {
+            idx = tag_end + 1;
+            continue;
+        };
+        let Some(close_rel) = lower[tag_end + 1..].find("</a>") else {
+            idx = tag_end + 1;
+            continue;
+        };
+        let label_raw = &line[tag_end + 1..tag_end + 1 + close_rel];
+        if let Some(label) = normalize_readme_text(label_raw) {
+            links.push((label, url));
+        }
+        idx = tag_end + 1 + close_rel + "</a>".len();
+    }
+    links
 }
 
 pub(crate) fn extract_markdown_links(line: &str) -> Vec<(String, String)> {

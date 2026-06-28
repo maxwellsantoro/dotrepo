@@ -54,6 +54,12 @@ pub enum Command {
         /// Index root to analyze.
         #[arg(long, default_value = "index")]
         index_root: PathBuf,
+        /// Apply eligible draft/imported/inferred promotions after reporting.
+        #[arg(long)]
+        apply: bool,
+        /// Maximum number of promotions to apply.
+        #[arg(long, requires = "apply")]
+        limit: Option<usize>,
         /// Emit the full report as JSON.
         #[arg(long)]
         json: bool,

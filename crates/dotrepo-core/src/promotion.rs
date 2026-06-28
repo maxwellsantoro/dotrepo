@@ -1,5 +1,5 @@
 use anyhow::{bail, Result};
-use dotrepo_schema::{Manifest, RecordStatus};
+use dotrepo_schema::{render_manifest, Manifest, RecordStatus};
 use std::fs;
 use std::path::Path;
 
@@ -21,6 +21,7 @@ pub struct PromotionRecordScore {
 pub struct PromotionSummary {
     pub total_records: usize,
     pub eligible_count: usize,
+    pub promotion_candidate_count: usize,
     pub field_blocker_counts: std::collections::HashMap<String, usize>,
 }
 
@@ -28,6 +29,19 @@ pub struct PromotionSummary {
 pub struct PromotionReport {
     pub records: Vec<PromotionRecordScore>,
     pub summary: PromotionSummary,
+}
+
+#[derive(Debug, Clone)]
+pub struct PromotionAppliedRecord {
+    pub path: String,
+    pub previous_status: String,
+    pub reason: String,
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct PromotionApplyReport {
+    pub promoted_records: Vec<PromotionAppliedRecord>,
+    pub skipped_eligible_count: usize,
 }
 #[derive(Debug, Clone)]
 pub struct PromotionOutcome {
@@ -94,6 +108,40 @@ pub fn promote_to_verified(manifest: &mut Manifest, report: &FieldScoreReport) -
         promoted: true,
         previous_status,
         reason: "all fields are high-confidence present or high-confidence absent".to_string(),
+    }
+}
+
+fn field_score_report_from_scores(scores: &[FieldScore]) -> FieldScoreReport {
+    let mut high_confidence_present = Vec::new();
+    let mut medium_confidence_present = Vec::new();
+    let mut high_confidence_absent = Vec::new();
+    let mut unresolved = Vec::new();
+
+    for score in scores {
+        match score.confidence {
+            FieldConfidence::HighConfidencePresent => {
+                high_confidence_present.push(score.field.clone())
+            }
+            FieldConfidence::MediumConfidencePresent => {
+                medium_confidence_present.push(score.field.clone())
+            }
+            FieldConfidence::HighConfidenceAbsent => {
+                high_confidence_absent.push(score.field.clone())
+            }
+            FieldConfidence::Unresolved => unresolved.push(score.field.clone()),
+        }
+    }
+
+    FieldScoreReport {
+        scores: scores.to_vec(),
+        summary: crate::import::FieldScoreSummary {
+            eligible_for_auto_publish: unresolved.is_empty()
+                && medium_confidence_present.is_empty(),
+            high_confidence_present,
+            medium_confidence_present,
+            high_confidence_absent,
+            unresolved,
+        },
     }
 }
 
@@ -501,6 +549,16 @@ pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
     }
 
     let eligible_count = records.iter().filter(|r| r.eligible).count();
+    let promotion_candidate_count = records
+        .iter()
+        .filter(|record| {
+            record.eligible
+                && matches!(
+                    record.status.as_deref(),
+                    Some("draft" | "imported" | "inferred")
+                )
+        })
+        .count();
     let total_records = records.len();
 
     Ok(PromotionReport {
@@ -508,7 +566,90 @@ pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
         summary: PromotionSummary {
             total_records,
             eligible_count,
+            promotion_candidate_count,
             field_blocker_counts,
         },
     })
+}
+
+pub fn apply_index_promotions(
+    index_root: &Path,
+    limit: Option<usize>,
+) -> Result<PromotionApplyReport> {
+    let repos_dir = index_root.join("repos");
+    if !repos_dir.exists() {
+        bail!("index repos directory not found: {}", repos_dir.display());
+    }
+
+    let mut record_paths = Vec::new();
+    collect_record_paths(&repos_dir, &mut record_paths)?;
+    record_paths.sort();
+
+    let mut promoted_records = Vec::new();
+    let mut skipped_eligible_count = 0;
+    let max_promotions = limit.unwrap_or(usize::MAX);
+
+    for path in record_paths {
+        let contents = fs::read_to_string(&path)?;
+        let mut manifest: Manifest = toml::from_str(&contents)?;
+        let scores = score_index_record_for_promotion(&manifest);
+        let score_report = field_score_report_from_scores(&scores);
+        let eligible = score_report.summary.eligible_for_auto_publish;
+        let is_candidate = matches!(
+            manifest.record.status,
+            RecordStatus::Draft | RecordStatus::Imported | RecordStatus::Inferred
+        );
+        if !eligible || !is_candidate {
+            continue;
+        }
+
+        if promoted_records.len() >= max_promotions {
+            skipped_eligible_count += 1;
+            continue;
+        }
+
+        let outcome = promote_to_verified(&mut manifest, &score_report);
+        if !outcome.promoted {
+            continue;
+        }
+        let rendered = render_manifest(&manifest)?;
+        fs::write(&path, rendered)?;
+        append_auto_promotion_evidence(&path)?;
+        let relative = path
+            .strip_prefix(&repos_dir)
+            .unwrap_or(&path)
+            .to_string_lossy()
+            .to_string();
+        promoted_records.push(PromotionAppliedRecord {
+            path: relative,
+            previous_status: outcome.previous_status,
+            reason: outcome.reason,
+        });
+    }
+
+    Ok(PromotionApplyReport {
+        promoted_records,
+        skipped_eligible_count,
+    })
+}
+
+fn append_auto_promotion_evidence(record_path: &Path) -> Result<()> {
+    let evidence_path = record_path
+        .parent()
+        .map(|parent| parent.join("evidence.md"))
+        .unwrap_or_else(|| Path::new("evidence.md").to_path_buf());
+    let section = "\n## Auto-promotion\n\nRecord auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.\n";
+    match fs::read_to_string(&evidence_path) {
+        Ok(existing) if existing.contains("auto-promoted to verified") => Ok(()),
+        Ok(mut existing) => {
+            existing.push_str(section);
+            fs::write(evidence_path, existing)?;
+            Ok(())
+        }
+        Err(err) if err.kind() == std::io::ErrorKind::NotFound => {
+            fs::write(evidence_path, section.trim_start())?;
+            Ok(())
+        }
+        Err(err) => Err(err.into()),
+    }
 }

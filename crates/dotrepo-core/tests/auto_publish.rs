@@ -1,9 +1,9 @@
 use dotrepo_core::{
-    analyze_index_promotion, import_repository, promote_to_verified, score_import_fields,
-    verify_import_plan, FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary,
-    ImportMode,
+    analyze_index_promotion, apply_index_promotions, import_repository, promote_to_verified,
+    score_import_fields, verify_import_plan, FieldConfidence, FieldScore, FieldScoreReport,
+    FieldScoreSummary, ImportMode,
 };
-use dotrepo_schema::{Manifest, Record, RecordMode, RecordStatus, Repo};
+use dotrepo_schema::{parse_manifest, Manifest, Record, RecordMode, RecordStatus, Repo};
 use std::fs;
 
 fn temp_dir(name: &str) -> std::path::PathBuf {
@@ -526,6 +526,7 @@ fn promotion_analysis_includes_malformed_records_as_blocked() {
     let repos_root = root.join("repos/github.com/example");
 
     fs::create_dir_all(repos_root.join("good")).expect("good dir");
+    fs::create_dir_all(repos_root.join("already-verified")).expect("verified dir");
     fs::create_dir_all(repos_root.join("bad")).expect("bad dir");
 
     fs::write(
@@ -552,12 +553,37 @@ references = []
 "#,
     )
     .expect("good record");
+    fs::write(
+        repos_root.join("already-verified/record.toml"),
+        r#"schema = "dotrepo/v0.1"
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/example/already-verified"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported", "verified"]
+
+[repo]
+name = "already-verified"
+description = "already verified"
+homepage = "https://github.com/example/already-verified"
+languages = []
+topics = []
+
+[relations]
+references = []
+"#,
+    )
+    .expect("verified record");
     fs::write(repos_root.join("bad/record.toml"), "not toml\n").expect("bad record");
 
     let report = analyze_index_promotion(&root).expect("promotion analysis succeeds");
 
-    assert_eq!(report.summary.total_records, 2);
-    assert_eq!(report.summary.eligible_count, 1);
+    assert_eq!(report.summary.total_records, 3);
+    assert_eq!(report.summary.eligible_count, 2);
+    assert_eq!(report.summary.promotion_candidate_count, 1);
 
     let malformed = report
         .records
@@ -573,6 +599,104 @@ references = []
         "expected parse blocker, got: {:?}",
         malformed.scores
     );
+
+    fs::remove_dir_all(&root).expect("cleanup");
+}
+
+#[test]
+fn apply_index_promotions_promotes_candidates_with_limit() {
+    let root = temp_dir("apply-index-promotions");
+    let repos_root = root.join("repos/github.com/example");
+
+    for repo in ["one", "two", "already-verified"] {
+        fs::create_dir_all(repos_root.join(repo)).expect("record dir");
+        fs::write(repos_root.join(repo).join("evidence.md"), "# Evidence\n").expect("evidence");
+    }
+
+    for repo in ["one", "two"] {
+        fs::write(
+            repos_root.join(repo).join("record.toml"),
+            format!(
+                r#"schema = "dotrepo/v0.1"
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/{repo}"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+
+[repo]
+name = "{repo}"
+description = "{repo}"
+homepage = "https://github.com/example/{repo}"
+languages = []
+topics = []
+
+[relations]
+references = []
+"#
+            ),
+        )
+        .expect("candidate record");
+    }
+
+    fs::write(
+        repos_root.join("already-verified").join("record.toml"),
+        r#"schema = "dotrepo/v0.1"
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/example/already-verified"
+
+[record.trust]
+confidence = "high"
+provenance = ["verified"]
+
+[repo]
+name = "already-verified"
+description = "already verified"
+homepage = "https://github.com/example/already-verified"
+languages = []
+topics = []
+
+[relations]
+references = []
+"#,
+    )
+    .expect("verified record");
+
+    let report = apply_index_promotions(&root, Some(1)).expect("apply succeeds");
+
+    assert_eq!(report.promoted_records.len(), 1);
+    assert_eq!(report.skipped_eligible_count, 1);
+
+    let promoted_path = root.join("repos").join(&report.promoted_records[0].path);
+    let promoted_text = fs::read_to_string(&promoted_path).expect("promoted record read");
+    let promoted = parse_manifest(&promoted_text).expect("promoted record parses");
+    assert_eq!(promoted.record.status, RecordStatus::Verified);
+    assert_eq!(
+        promoted
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.confidence.as_deref()),
+        Some("high")
+    );
+    assert!(promoted
+        .record
+        .trust
+        .as_ref()
+        .is_some_and(|trust| trust.provenance.contains(&"verified".to_string())));
+    let evidence_text = fs::read_to_string(
+        promoted_path
+            .parent()
+            .expect("promoted record parent")
+            .join("evidence.md"),
+    )
+    .expect("promoted evidence read");
+    assert!(evidence_text.contains("auto-promoted to verified"));
 
     fs::remove_dir_all(&root).expect("cleanup");
 }

@@ -152,6 +152,44 @@ def public_profile_coverage_command(
     return command
 
 
+def index_growth_tranche_command(repo_root: Path, output_root: Path) -> list[str]:
+    baseline_path = repo_root / "scripts/fixtures/index_growth_tranche_baseline.json"
+    baseline = json.loads(baseline_path.read_text())
+    if baseline.get("schema") != "dotrepo-index-growth-tranche-baseline/v0":
+        raise SystemExit(f"invalid index growth tranche baseline schema: {baseline_path}")
+    profile_baseline_path = repo_root / "scripts/fixtures/public_profile_coverage_baseline.json"
+    profile_baseline = json.loads(profile_baseline_path.read_text())
+    if profile_baseline.get("schema") != "dotrepo-public-profile-coverage-baseline/v0":
+        raise SystemExit(
+            f"invalid public profile coverage baseline schema: {profile_baseline_path}"
+        )
+    current_high_signal = int(profile_baseline["minHighSignal"])
+    min_selected = int(baseline["minSelected"])
+    milestone_target = int(baseline["milestoneHighSignalTarget"])
+    return [
+        sys.executable,
+        "scripts/plan_index_growth_tranche.py",
+        "--candidate-file",
+        str(repo_root / baseline["candidateFile"]),
+        "--target-count",
+        str(baseline["targetCount"]),
+        "--min-selected",
+        str(min_selected),
+        "--current-high-signal",
+        str(current_high_signal),
+        "--milestone-high-signal-target",
+        str(milestone_target),
+        "--min-planned-high-signal-capacity",
+        str(current_high_signal + min_selected),
+        "--output-targets",
+        str(output_root / "index-growth-targets.txt"),
+        "--output-json",
+        str(output_root / "index-growth-plan.json"),
+        "--output-md",
+        str(output_root / "index-growth-plan.md"),
+    ]
+
+
 def public_lookup_benchmark_commands(
     repo_root: Path,
     public_dir: Path,
@@ -817,6 +855,7 @@ def main() -> int:
         cwd=repo_root,
     )
     run(public_profile_coverage_command(repo_root, public_dir, output_root), cwd=repo_root)
+    run(index_growth_tranche_command(repo_root, output_root), cwd=repo_root)
     for command in public_lookup_benchmark_commands(
         repo_root, public_dir, output_root, args.generated_at
     ):
@@ -944,6 +983,7 @@ def main() -> int:
     print(f"  public tree: {public_dir}")
     print(f"  public bundle: {public_bundle}")
     print(f"  profile coverage: {output_root / 'public-profile-coverage.json'}")
+    print(f"  index growth plan: {output_root / 'index-growth-plan.json'}")
     print(f"  lookup workload: {output_root / 'public-lookup-workload.json'}")
     print(f"  lookup efficiency: {output_root / 'public-lookup-efficiency.json'}")
     print(f"  factual accuracy: {output_root / 'public-factual-accuracy.json'}")

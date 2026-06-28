@@ -17,6 +17,10 @@ struct FixtureExpectation {
     docs_root: Option<String>,
     #[serde(default)]
     docs_getting_started: Option<String>,
+    #[serde(default)]
+    overlay_docs_root: Option<String>,
+    #[serde(default)]
+    overlay_docs_getting_started: Option<String>,
     imported_sources: Vec<String>,
     inferred_fields: Vec<String>,
     maintainers: Vec<String>,
@@ -54,7 +58,12 @@ fn status_name(status: &RecordStatus) -> &'static str {
     }
 }
 
-fn assert_common_plan_fields(plan: &ImportPlan, expectation: &FixtureExpectation) {
+fn assert_common_plan_fields(
+    plan: &ImportPlan,
+    expectation: &FixtureExpectation,
+    expected_docs_root: Option<&str>,
+    expected_docs_getting_started: Option<&str>,
+) {
     assert_eq!(plan.manifest.repo.name, expectation.repo_name);
     assert_eq!(plan.manifest.repo.description, expectation.repo_description);
     assert_eq!(
@@ -70,14 +79,14 @@ fn assert_common_plan_fields(plan: &ImportPlan, expectation: &FixtureExpectation
             .docs
             .as_ref()
             .and_then(|docs| docs.root.as_deref()),
-        expectation.docs_root.as_deref()
+        expected_docs_root
     );
     assert_eq!(
         plan.manifest
             .docs
             .as_ref()
             .and_then(|docs| docs.getting_started.as_deref()),
-        expectation.docs_getting_started.as_deref()
+        expected_docs_getting_started
     );
     assert_eq!(plan.imported_sources, expectation.imported_sources);
     assert_eq!(plan.inferred_fields, expectation.inferred_fields);
@@ -102,11 +111,12 @@ fn assert_common_plan_fields(plan: &ImportPlan, expectation: &FixtureExpectation
     assert_eq!(trust.provenance, expectation.trust_provenance);
 }
 
-fn assert_note_contains(note: &str, expected_substrings: &[String]) {
+fn assert_note_contains(fixture: &str, note: &str, expected_substrings: &[String]) {
     for expected in expected_substrings {
         assert!(
             note.contains(expected),
-            "expected note to contain `{}` but got:\n{}",
+            "fixture `{}` expected note to contain `{}` but got:\n{}",
+            fixture,
             expected,
             note
         );
@@ -121,7 +131,12 @@ fn import_quality_gate_matches_checked_in_expectations() {
 
         let native =
             import_repository(&root, ImportMode::Native, None).expect("native import succeeds");
-        assert_common_plan_fields(&native, &expectation);
+        assert_common_plan_fields(
+            &native,
+            &expectation,
+            expectation.docs_root.as_deref(),
+            expectation.docs_getting_started.as_deref(),
+        );
         assert_eq!(
             status_name(&native.manifest.record.status),
             expectation.native_status
@@ -133,11 +148,26 @@ fn import_quality_gate_matches_checked_in_expectations() {
             .as_ref()
             .and_then(|trust| trust.notes.as_deref())
             .expect("native trust notes");
-        assert_note_contains(native_note, &expectation.native_trust_note_contains);
+        assert_note_contains(
+            &expectation.fixture,
+            native_note,
+            &expectation.native_trust_note_contains,
+        );
 
         let overlay = import_repository(&root, ImportMode::Overlay, Some(&overlay_source))
             .expect("overlay import succeeds");
-        assert_common_plan_fields(&overlay, &expectation);
+        assert_common_plan_fields(
+            &overlay,
+            &expectation,
+            expectation
+                .overlay_docs_root
+                .as_deref()
+                .or(expectation.docs_root.as_deref()),
+            expectation
+                .overlay_docs_getting_started
+                .as_deref()
+                .or(expectation.docs_getting_started.as_deref()),
+        );
         assert_eq!(
             status_name(&overlay.manifest.record.status),
             expectation.overlay_status
@@ -149,10 +179,18 @@ fn import_quality_gate_matches_checked_in_expectations() {
             .as_ref()
             .and_then(|trust| trust.notes.as_deref())
             .expect("overlay trust notes");
-        assert_note_contains(overlay_note, &expectation.overlay_trust_note_contains);
+        assert_note_contains(
+            &expectation.fixture,
+            overlay_note,
+            &expectation.overlay_trust_note_contains,
+        );
 
         let evidence = overlay.evidence_text.as_deref().expect("overlay evidence");
         assert!(evidence.starts_with("# Evidence\n\n"));
-        assert_note_contains(evidence, &expectation.overlay_evidence_contains);
+        assert_note_contains(
+            &expectation.fixture,
+            evidence,
+            &expectation.overlay_evidence_contains,
+        );
     }
 }

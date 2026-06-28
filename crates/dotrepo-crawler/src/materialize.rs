@@ -2,6 +2,7 @@ use crate::{CrawlDiagnostic, RepositoryRef};
 use anyhow::{bail, Context, Result};
 use std::fs;
 use std::path::{Component, Path, PathBuf};
+use std::sync::atomic::{AtomicU64, Ordering};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct RepositoryTextFile {
@@ -220,15 +221,19 @@ fn validate_materialized_relative_path(relative_path: &Path) -> Result<()> {
 }
 
 fn temp_root(label: &str) -> PathBuf {
+    static TEMP_COUNTER: AtomicU64 = AtomicU64::new(0);
+
     let unique = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .expect("clock works")
         .as_nanos();
+    let counter = TEMP_COUNTER.fetch_add(1, Ordering::Relaxed);
     std::env::temp_dir().join(format!(
-        "dotrepo-crawler-{}-{}-{}",
+        "dotrepo-crawler-{}-{}-{}-{}",
         label,
         std::process::id(),
-        unique
+        unique,
+        counter
     ))
 }
 

@@ -18,7 +18,7 @@ on:
       targets_file:
         description: Repository target list to seed against
         required: false
-        default: index/tranche-one-targets.txt
+        default: index/tranche-two-targets.txt
   schedule:
     - cron: "0 13 * * 1"
 
@@ -73,12 +73,18 @@ jobs:
             open_pr="false"
           fi
           if [ -z "$targets_file" ]; then
-            targets_file="index/tranche-one-targets.txt"
+            targets_file="index/tranche-two-targets.txt"
           fi
+          current_high_signal="$(uv run python -c 'import json; print(json.load(open("scripts/fixtures/public_profile_coverage_baseline.json"))["minHighSignal"])')"
+          milestone_high_signal_target="$(uv run python -c 'import json; print(json.load(open("scripts/fixtures/index_growth_tranche_baseline.json"))["milestoneHighSignalTarget"])')"
+          min_planned_capacity=$((current_high_signal + 1))
           echo "limit=$limit" >> "$GITHUB_OUTPUT"
           echo "batch_size=$batch_size" >> "$GITHUB_OUTPUT"
           echo "open_pr=$open_pr" >> "$GITHUB_OUTPUT"
           echo "targets_file=$targets_file" >> "$GITHUB_OUTPUT"
+          echo "current_high_signal=$current_high_signal" >> "$GITHUB_OUTPUT"
+          echo "milestone_high_signal_target=$milestone_high_signal_target" >> "$GITHUB_OUTPUT"
+          echo "min_planned_capacity=$min_planned_capacity" >> "$GITHUB_OUTPUT"
       - name: Resolve auto-PR mode
         id: pr_mode
         shell: bash
@@ -95,12 +101,24 @@ jobs:
         run: |
           mkdir -p index-seed-review
           status=0
-          cargo run -p dotrepo-crawler -- seed \
-            --targets-file "${{ steps.inputs.outputs.targets_file }}" \
-            --limit "${{ steps.inputs.outputs.limit }}" \
-            --dry-run \
-            --review-report-md index-seed-review/seed-review.md \
-            --json > index-seed-review/seed-report.json || status=$?
+          uv run python scripts/plan_index_growth_tranche.py \
+            --candidate-file "${{ steps.inputs.outputs.targets_file }}" \
+            --target-count "${{ steps.inputs.outputs.limit }}" \
+            --min-selected 1 \
+            --current-high-signal "${{ steps.inputs.outputs.current_high_signal }}" \
+            --milestone-high-signal-target "${{ steps.inputs.outputs.milestone_high_signal_target }}" \
+            --min-planned-high-signal-capacity "${{ steps.inputs.outputs.min_planned_capacity }}" \
+            --output-targets index-seed-review/planned-targets.txt \
+            --output-json index-seed-review/growth-plan.json \
+            --output-md index-seed-review/growth-plan.md || status=$?
+          if [ "$status" -eq 0 ]; then
+            cargo run -p dotrepo-crawler -- seed \
+              --targets-file index-seed-review/planned-targets.txt \
+              --limit "${{ steps.inputs.outputs.limit }}" \
+              --dry-run \
+              --review-report-md index-seed-review/seed-review.md \
+              --json > index-seed-review/seed-report.json || status=$?
+          fi
           if [ "$status" -eq 0 ] && [ -s index-seed-review/seed-report.json ]; then
             uv run python scripts/plan_seed_review_batches.py \
               --input index-seed-review/seed-report.json \
@@ -109,6 +127,8 @@ jobs:
               --output-md index-seed-review/seed-batches.md
           fi
           uv run python scripts/render_index_growth_status.py \
+            --targets-file "${{ steps.inputs.outputs.targets_file }}" \
+            --milestone-high-signal-target "${{ steps.inputs.outputs.milestone_high_signal_target }}" \
             --output-json index-seed-review/growth-status.json \
             --output-md index-seed-review/growth-status.md
           cat <<EOF > index-seed-review/run-context.txt
@@ -137,6 +157,10 @@ jobs:
           if [ -s index-seed-review/growth-status.md ]; then
             echo >> "$GITHUB_STEP_SUMMARY"
             cat index-seed-review/growth-status.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -s index-seed-review/growth-plan.md ]; then
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat index-seed-review/growth-plan.md >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Upload candidate seed review artifacts
         if: always()

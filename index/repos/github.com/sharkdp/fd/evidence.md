@@ -6,3 +6,7 @@
 - Imported the dual-license statement from the repository README and license metadata at https://github.com/sharkdp/fd.
 - Imported the security reporting form from the upstream SECURITY.md at https://github.com/sharkdp/fd/security/policy.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+## Auto-promotion
+
+Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.

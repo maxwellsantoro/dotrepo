@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/boto/boto3"
 generated_at = "2026-06-26T18:32:01.723428Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS`, `.github/SECURITY.md`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `.github/CODEOWNERS`, `.github/SECURITY.md`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "boto3"

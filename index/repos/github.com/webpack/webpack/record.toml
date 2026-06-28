@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/webpack/webpack"
 generated_at = "2026-06-26T18:33:49.152584Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Inferred `repo.build` from `.github/workflows/examples.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `package.json`. Inferred `repo.build` from `.github/workflows/examples.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "webpack"

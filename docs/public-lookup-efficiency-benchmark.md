@@ -18,8 +18,8 @@ uv run python scripts/measure_public_lookup_efficiency.py \
   --public-root public \
   --index-root index \
   --workload /tmp/dotrepo-public-lookup-workload.json \
-  --min-tasks 620 \
-  --min-repositories 155 \
+  --min-tasks 628 \
+  --min-repositories 157 \
   --min-task-hit-rate 0.64 \
   --min-field-hit-rate 0.82 \
   --min-intent-hit-rate overview=0.90 \
@@ -57,25 +57,25 @@ repository archives, README fetches, dependency manifests, or model context.
 
 ## Current production-export result
 
-The canonical release gate builds the research workload from all 155 current
+The canonical release gate builds the research workload from all 157 current
 profiles and applies the versioned baseline in
 `scripts/fixtures/public_lookup_efficiency_baseline.json`. Its current result is:
 
 | Metric | Value |
 | --- | ---: |
-| Repositories | 155 |
-| Tasks answered | 402 / 620 |
-| Task hit rate | 0.6484 |
-| Fields answered | 1150 / 1395 |
-| Field hit rate | 0.8244 |
-| Abstention rate | 0.1756 |
-| Overview task hit rate | 0.9032 |
-| Execution task hit rate | 0.7097 |
-| Documentation task hit rate | 0.3226 |
-| Security task hit rate | 0.6581 |
-| dotrepo bytes | 905131 |
-| scrape proxy bytes | 393199 |
-| dotrepo to scrape proxy ratio | 2.302 |
+| Repositories | 157 |
+| Tasks answered | 410 / 628 |
+| Task hit rate | 0.6529 |
+| Fields answered | 1168 / 1413 |
+| Field hit rate | 0.8266 |
+| Abstention rate | 0.1734 |
+| Overview task hit rate | 0.9045 |
+| Execution task hit rate | 0.7134 |
+| Documentation task hit rate | 0.3312 |
+| Security task hit rate | 0.6624 |
+| dotrepo bytes | 917209 |
+| scrape proxy bytes | 398648 |
+| dotrepo to scrape proxy ratio | 2.3008 |
 
 The documentation slice is the clearest current bottleneck. The byte ratio is
 also reported without dressing it up: profile plus query-input JSON is larger

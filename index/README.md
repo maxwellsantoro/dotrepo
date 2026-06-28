@@ -74,8 +74,10 @@ submissions and audits. The autonomous conveyor uses the gates documented in
 [`ROADMAP.md`](../ROADMAP.md) and
 [`docs/factual-crawl-automation.md`](../docs/factual-crawl-automation.md).
 The machine-readable [`index/tranche-one-targets.txt`](tranche-one-targets.txt)
-is retained for reproducible crawler runs. The seed command can also emit an
-advisory audit report via `--review-report-md <path>`.
+is retained for reproducible first-tranche crawler runs. The active growth
+candidate catalog is [`index/tranche-two-targets.txt`](tranche-two-targets.txt).
+The seed command can also emit an advisory audit report via
+`--review-report-md <path>`.
 For maintainer-claim review, use
 [`docs/maintainer-claim-review-workflow.md`](../docs/maintainer-claim-review-workflow.md)
 as the end-to-end operator loop.
@@ -117,7 +119,7 @@ output plus an audit report:
 
 ```bash
 cargo run -p dotrepo-crawler -- seed \
-  --targets-file index/tranche-one-targets.txt \
+  --targets-file index/tranche-two-targets.txt \
   --dry-run \
   --review-report-md /tmp/dotrepo-seed-review.md
 ```
@@ -127,13 +129,68 @@ trust semantics, autonomous publication gates, or the manual contribution bar.
 
 ## Growth status
 
-Use the growth-status renderer when you need a quick read on tranche coverage,
-language mix, claim examples, and which lower-confidence records should be
-hardened next:
+Use the growth-status renderer when you need a quick read on record-level
+high-signal progress, active-tranche capacity, tranche coverage, language mix,
+claim examples, high-signal lift candidates, and which lower-confidence records
+should be hardened next:
 
 ```bash
-uv run python scripts/render_index_growth_status.py
+uv run python scripts/render_index_growth_status.py \
+  --milestone-high-signal-target 500
 ```
 
 The scheduled seed and refresh review workflows include this same readout in
-their GitHub step summaries and uploaded artifacts.
+their GitHub step summaries and uploaded artifacts. The active-tranche capacity
+line is an upper bound: missing tranche targets still need to be crawled,
+validated, exported, and measured before they count toward public-profile
+coverage. The high-signal lift queue is also advisory; it highlights records
+with medium/high confidence plus build, test, and security signals that still
+need the normal validation and promotion path before they can increase the
+high-signal count. The record-level potential line shows how far the checked-in
+index could move if those candidates pass that path.
+
+Use the core promotion report when you need the authoritative auto-promotion
+view:
+
+```bash
+cargo run -p dotrepo-cli -- promotion-report --index-root index --json
+```
+
+The JSON summary separates `eligibleCount` from `promotionCandidateCount`.
+`eligibleCount` includes already verified records; `promotionCandidateCount`
+counts only eligible draft/imported/inferred records that could actually raise
+the high-signal profile count if promoted through the verified auto-publish path.
+
+## Growth tranche planning
+
+Use the growth-tranche planner when moving from the first checked-in tranche to
+larger candidate sets. It accepts a grouped candidate file, such as
+[`index/tranche-two-targets.txt`](tranche-two-targets.txt), removes repositories
+that already have `index/repos/**/record.toml`, balances the remaining targets
+by group in candidate-file order, and emits both crawler-ready targets and an
+audit report:
+
+```bash
+uv run python scripts/plan_index_growth_tranche.py \
+  --candidate-file index/tranche-two-targets.txt \
+  --target-count 100 \
+  --min-selected 100 \
+  --current-high-signal 107 \
+  --milestone-high-signal-target 500 \
+  --min-planned-high-signal-capacity 207 \
+  --output-targets /tmp/dotrepo-growth-targets.txt \
+  --output-json /tmp/dotrepo-growth-plan.json \
+  --output-md /tmp/dotrepo-growth-plan.md
+```
+
+The emitted targets can be passed to `dotrepo-crawler seed --targets-file`.
+Planning a tranche is only an operational input; its Milestone 2 capacity
+section reports current high-signal coverage plus selected targets as an upper
+bound, not as completed coverage. The Milestone 2 gate is still the exported
+profile coverage report, which counts valid high-signal profiles after records
+are crawled, validated, exported, and measured.
+The scheduled seed-review workflows now run this planner first and crawl the
+planned target file, so already-indexed candidates do not consume growth slots.
+Those workflows read the checked-in profile-coverage and tranche baselines and
+pass the same Milestone 2 capacity fields to the planner that the canonical
+release gate uses.

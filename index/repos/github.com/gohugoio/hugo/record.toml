@@ -1,0 +1,64 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/gohugoio/hugo"
+generated_at = "2026-06-28T03:20:20.270591Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Hugo"
+description = "A fast and flexible static site generator built with love by [bep][], [spf13][], and [friends][] in Go."
+homepage = "https://gohugo.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "C",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "go",
+    "hugo",
+    "static-site-generator",
+    "blog-engine",
+    "cms",
+    "content-management-system",
+    "documentation-tool",
+]
+
+[owners]
+maintainers = []
+security_contact = "bjorn.erik.pedersen@gmail.com"
+
+[docs]
+root = "https://gohugo.io/documentation"
+getting_started = "https://gohugo.io/installation"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/gohugoio/hugo.git"
+default_branch = "master"
+fork = false
+head_sha = "790a8aa47412bf32c297250f949cb1fd811a0fbf"
+html_url = "https://github.com/gohugoio/hugo"
+stars = 88757

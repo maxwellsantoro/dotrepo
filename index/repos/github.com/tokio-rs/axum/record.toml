@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/tokio-rs/axum"
 generated_at = "2026-06-26T17:45:42.905789Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "axum"

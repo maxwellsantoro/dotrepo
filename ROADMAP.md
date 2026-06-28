@@ -341,7 +341,7 @@ Current status:
   gates against the public tree
 - profile coverage now validates the accepted response shape and path identity,
   excludes malformed files from every coverage claim, and is enforced by the
-  canonical release gate through a versioned 155-profile/91-high-signal
+  canonical release gate through a versioned 157-profile/107-high-signal
   baseline with ratcheted build, test, docs, ownership, security, and license
   floors
 - `scripts/build_public_lookup_workload.py` now emits a fixed four-intent
@@ -351,13 +351,43 @@ Current status:
 - `scripts/measure_public_lookup_efficiency.py` now produces deterministic
   aggregate and per-intent task/field hit-rate, workload-volume, payload-byte,
   and pass/fail gate reports for known-repository workloads; the canonical
-  release gate publishes the current 155-repository, 620-task benchmark against
+  release gate publishes the current 157-repository, 628-task benchmark against
   a versioned baseline
 - the canonical release gate also checks a cited exact-value accuracy sample:
   20 assertions across FastAPI, Tokio, and Gin currently pass, with workload
   volume and repository count guarded against silent shrinkage; this sample
   exposed and fixed live logo-title, announcement-description, and badge-link
   parser failures now preserved as offline regression fixtures
+- `scripts/plan_index_growth_tranche.py` now turns grouped candidate catalogs
+  into balanced, crawler-ready growth target files in candidate-file group
+  order while excluding repositories already present in
+  `index/repos/**/record.toml`; the checked-in
+  `index/tranche-two-targets.txt` file provides the next 100-candidate crawl
+  wave toward the 500-profile expansion without counting planned targets as
+  completed profile coverage, and the seed-review workflows now default to
+  that catalog and crawl planner-selected targets
+- the canonical release gate now publishes the active growth plan and
+  crawler-ready target file from a versioned tranche baseline, so release
+  evidence includes both current coverage and the next planned coverage wave;
+  the plan also reports current high-signal coverage plus selected targets as a
+  Milestone 2 capacity upper bound without counting planned targets as completed
+  profile coverage
+- the operational growth-status renderer now reports record-level high-signal
+  progress, active-tranche high-signal capacity upper bounds, and remaining
+  Milestone 2 gap in scheduled seed-review artifacts, so day-to-day review
+  batches expose the same scale path as the release gate; it also separates
+  advisory high-signal lift candidates from the broader quality-hardening queue
+- `dotrepo promotion-report --json` now separates total eligible records from
+  promotion candidates that are eligible and not already high-signal, exposing
+  the actual deterministic auto-promotion headroom in the checked-in index; the
+  first deterministic status-lift batch promoted 14 eligible overlays to
+  `verified`, with evidence notes appended, raising the public coverage floor
+  to 107 high-signal profiles
+- the first two tranche-two writebacks, `github.com/starship/starship` and
+  `github.com/gohugoio/hugo`, are now checked in as verified overlays; the
+  profile coverage baseline ratcheted to 157 profiles and 107 high-signal
+  profiles, and README parsing now covers multiline logo titles, HTML docs
+  links, and reference-style documentation links exposed by those crawls
 - reaching 500 high-signal profiles remains open
 
 Exit criteria:

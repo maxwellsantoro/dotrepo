@@ -1,22 +1,22 @@
 use anyhow::{bail, Context, Result};
 use dotrepo_core::{
     adopt_managed_surface, adopt_overlay_record, adoption_status_repository,
-    analyze_index_promotion, append_claim_event, build_public_freshness_with_digest,
-    canonical_mirror_path_for_claim_path, current_public_freshness, current_timestamp_rfc3339,
-    export_public_index_static_with_base, generate_check_repository,
-    import_repository_with_options, index_snapshot_digest, inspect_claim_directory,
-    inspect_surface_states, load_manifest_document, load_manifest_from_root, managed_outputs,
-    native_repository_identity, preview_surfaces, public_profile_compare_with_base,
-    public_profile_search_with_base, public_repository_batch_profiles_with_base,
-    public_repository_batch_query_with_base, public_repository_profile_or_error_with_base,
-    public_repository_query_or_error_with_base, public_repository_relations_with_base,
-    public_repository_summary_or_error_with_base, public_repository_trust_or_error_with_base,
-    query_repository, render_dotrepo_ci_workflow, resolve_claim_directory,
-    scaffold_claim_directory, trust_repository, validate_claim_path_matches_native_identity,
-    validate_index_root, validate_manifest, validate_repository, write_import_outputs,
-    AdoptionRepositoryIdentity, ClaimEventAppendInput, ClaimScaffoldInput, DoctorReport,
-    DoctorSurface, ImportOptions, IndexFindingSeverity, PublicErrorResponse,
-    PublicProfileSearchOptions, PublicRepositoryIdentity,
+    analyze_index_promotion, append_claim_event, apply_index_promotions,
+    build_public_freshness_with_digest, canonical_mirror_path_for_claim_path,
+    current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_base,
+    generate_check_repository, import_repository_with_options, index_snapshot_digest,
+    inspect_claim_directory, inspect_surface_states, load_manifest_document,
+    load_manifest_from_root, managed_outputs, native_repository_identity, preview_surfaces,
+    public_profile_compare_with_base, public_profile_search_with_base,
+    public_repository_batch_profiles_with_base, public_repository_batch_query_with_base,
+    public_repository_profile_or_error_with_base, public_repository_query_or_error_with_base,
+    public_repository_relations_with_base, public_repository_summary_or_error_with_base,
+    public_repository_trust_or_error_with_base, query_repository, render_dotrepo_ci_workflow,
+    resolve_claim_directory, scaffold_claim_directory, trust_repository,
+    validate_claim_path_matches_native_identity, validate_index_root, validate_manifest,
+    validate_repository, write_import_outputs, AdoptionRepositoryIdentity, ClaimEventAppendInput,
+    ClaimScaffoldInput, DoctorReport, DoctorSurface, ImportOptions, IndexFindingSeverity,
+    PublicErrorResponse, PublicProfileSearchOptions, PublicRepositoryIdentity,
 };
 use dotrepo_schema::scaffold_manifest as render_scaffold_manifest;
 use dotrepo_schema::RecordMode;
@@ -200,8 +200,19 @@ pub fn cmd_validate_index(index_root: PathBuf) -> Result<()> {
     .into())
 }
 
-pub fn cmd_promotion_report(index_root: PathBuf, json: bool, verbose: bool) -> Result<()> {
+pub fn cmd_promotion_report(
+    index_root: PathBuf,
+    apply: bool,
+    limit: Option<usize>,
+    json: bool,
+    verbose: bool,
+) -> Result<()> {
     let report = analyze_index_promotion(&index_root)?;
+    let apply_report = if apply {
+        Some(apply_index_promotions(&index_root, limit)?)
+    } else {
+        None
+    };
 
     if json {
         #[derive(Serialize)]
@@ -209,8 +220,24 @@ pub fn cmd_promotion_report(index_root: PathBuf, json: bool, verbose: bool) -> R
         struct JsonReport {
             total_records: usize,
             eligible_count: usize,
+            promotion_candidate_count: usize,
             field_blocker_counts: std::collections::HashMap<String, usize>,
+            applied: Option<JsonApplyReport>,
             records: Vec<JsonRecord>,
+        }
+        #[derive(Serialize)]
+        #[serde(rename_all = "camelCase")]
+        struct JsonApplyReport {
+            promoted_count: usize,
+            skipped_eligible_count: usize,
+            records: Vec<JsonAppliedRecord>,
+        }
+        #[derive(Serialize)]
+        #[serde(rename_all = "camelCase")]
+        struct JsonAppliedRecord {
+            path: String,
+            previous_status: String,
+            reason: String,
         }
         #[derive(Serialize)]
         #[serde(rename_all = "camelCase")]
@@ -224,7 +251,21 @@ pub fn cmd_promotion_report(index_root: PathBuf, json: bool, verbose: bool) -> R
         let json_report = JsonReport {
             total_records: report.summary.total_records,
             eligible_count: report.summary.eligible_count,
+            promotion_candidate_count: report.summary.promotion_candidate_count,
             field_blocker_counts: report.summary.field_blocker_counts,
+            applied: apply_report.as_ref().map(|applied| JsonApplyReport {
+                promoted_count: applied.promoted_records.len(),
+                skipped_eligible_count: applied.skipped_eligible_count,
+                records: applied
+                    .promoted_records
+                    .iter()
+                    .map(|record| JsonAppliedRecord {
+                        path: record.path.clone(),
+                        previous_status: record.previous_status.clone(),
+                        reason: record.reason.clone(),
+                    })
+                    .collect(),
+            }),
             records: report
                 .records
                 .into_iter()
@@ -269,8 +310,8 @@ pub fn cmd_promotion_report(index_root: PathBuf, json: bool, verbose: bool) -> R
 
     let s = &report.summary;
     println!(
-        "promotion analysis: {}/{} records eligible for verified auto-publish",
-        s.eligible_count, s.total_records
+        "promotion analysis: {}/{} records eligible for verified auto-publish; {} can increase high-signal count",
+        s.eligible_count, s.total_records, s.promotion_candidate_count
     );
     println!();
 
@@ -280,6 +321,21 @@ pub fn cmd_promotion_report(index_root: PathBuf, json: bool, verbose: bool) -> R
         println!("field blockers (blocking auto-publish):");
         for (field, count) in &blockers {
             println!("  {} × {}", count, field);
+        }
+        println!();
+    }
+
+    if let Some(applied) = apply_report {
+        println!(
+            "applied promotions: {} promoted, {} eligible records skipped by limit",
+            applied.promoted_records.len(),
+            applied.skipped_eligible_count
+        );
+        for record in applied.promoted_records {
+            println!(
+                "  promoted {} from {} ({})",
+                record.path, record.previous_status, record.reason
+            );
         }
         println!();
     }
