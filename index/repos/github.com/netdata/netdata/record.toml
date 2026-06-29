@@ -1,0 +1,93 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/netdata/netdata"
+generated_at = "2026-06-29T01:08:20.196193Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/coverity.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Netdata"
+description = "The fastest path to AI-powered full stack observability, even for lean teams."
+homepage = "https://www.netdata.cloud"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Jupyter Notebook",
+    "Makefile",
+    "POV-Ray SDL",
+    "PowerShell",
+    "Python",
+    "Rich Text Format",
+    "Rust",
+    "Shell",
+    "TSQL",
+    "Yacc",
+]
+build = 'libprotoc-dev libssl-dev protobuf-compiler \'
+topics = [
+    "monitoring",
+    "docker",
+    "kubernetes",
+    "cncf",
+    "prometheus",
+    "netdata",
+    "devops",
+    "observability",
+    "alerting",
+    "influxdb",
+    "grafana",
+    "data-visualization",
+    "database",
+    "linux",
+    "machine-learning",
+    "mysql",
+    "postgresql",
+    "mongodb",
+    "mcp",
+    "ai",
+]
+
+[owners]
+maintainers = [
+    "@Ferroin",
+    "@netdata/agent-sre",
+    "@stelfrag",
+    "@thiagoftsm",
+    "@ilyam8",
+    "@vkalintiris",
+    "@Ancairon",
+    "@kanelatechnical",
+    "@novykh",
+    "@netdatabot",
+]
+team = "@netdata/agent-sre"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/netdata/netdata.git"
+default_branch = "master"
+fork = false
+head_sha = "d592e310b38a72223dba272d47929dec00d3d47d"
+html_url = "https://github.com/netdata/netdata"
+stars = 79437

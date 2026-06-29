@@ -18,7 +18,7 @@ def test_baseline_int_reads_fixture_keys() -> None:
     assert roadmap_batch.baseline_int(
         REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json",
         "minHighSignal",
-    ) == 121
+    ) == 126
     assert roadmap_batch.baseline_int(
         REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json",
         "milestoneHighSignalTarget",
@@ -39,11 +39,11 @@ def test_plan_seed_targets_uses_growth_baselines(tmp_path: Path) -> None:
         seed_batch_size=1,
     )
 
-    planned = roadmap_batch.plan_seed_targets(args, output_dir, 121, 500)
+    planned = roadmap_batch.plan_seed_targets(args, output_dir, 126, 500)
 
     assert planned.is_file()
     plan = json.loads((output_dir / "growth-plan.json").read_text())
-    assert plan["gates"]["minPlannedHighSignalCapacity"]["threshold"] == 122
+    assert plan["gates"]["minPlannedHighSignalCapacity"]["threshold"] == 127
     assert plan["milestoneProgress"]["milestoneHighSignalTarget"] == 500
 
 

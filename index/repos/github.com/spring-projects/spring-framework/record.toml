@@ -1,0 +1,63 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/spring-projects/spring-framework"
+generated_at = "2026-06-29T01:08:23.209777Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Spring Framework"
+description = "Spring Framework"
+homepage = "https://spring.io/projects/spring-framework"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "AspectJ",
+    "CSS",
+    "FreeMarker",
+    "Go Template",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "PLpgSQL",
+    "Python",
+    "Ruby",
+    "Smarty",
+    "XSLT",
+]
+topics = [
+    "framework",
+    "spring",
+    "spring-framework",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/spring-projects/security-advisories/security/advisories/new"
+
+[docs]
+root = "https://docs.spring.io/spring-framework/docs/current/javadoc-api/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/spring-projects/spring-framework.git"
+default_branch = "main"
+fork = false
+head_sha = "ce718cf699dde1b35c425f81548a1679566aa63b"
+html_url = "https://github.com/spring-projects/spring-framework"
+stars = 60070

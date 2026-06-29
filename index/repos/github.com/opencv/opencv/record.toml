@@ -1,0 +1,66 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/opencv/opencv"
+generated_at = "2026-06-29T01:08:25.125835Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "OpenCV"
+description = "Please read the contribution guidelines before starting work on a pull request."
+homepage = "https://opencv.org"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Cuda",
+    "Dockerfile",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Objective-C",
+    "Objective-C++",
+    "Perl",
+    "PowerShell",
+    "Prolog",
+    "Python",
+    "Shell",
+    "Swift",
+    "TeX",
+]
+topics = [
+    "opencv",
+    "c-plus-plus",
+    "computer-vision",
+    "deep-learning",
+    "image-processing",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@opencv.org"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/opencv/opencv.git"
+default_branch = "4.x"
+fork = false
+head_sha = "5dbfbcdcac0ca97d5aa2784b18ded9d747f620f8"
+html_url = "https://github.com/opencv/opencv"
+stars = 89433

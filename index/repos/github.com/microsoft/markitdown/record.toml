@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/microsoft/markitdown"
+generated_at = "2026-06-29T01:08:16.926014Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "MarkItDown"
+description = "MarkItDown is a lightweight Python utility for converting various files to Markdown for use with LLMs and related text analysis pipelines."
+homepage = "https://github.com/microsoft/markitdown"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Python",
+]
+topics = [
+    "langchain",
+    "openai",
+    "autogen-extension",
+    "autogen",
+    "markdown",
+    "microsoft-office",
+    "pdf",
+]
+
+[owners]
+maintainers = []
+security_contact = "secure@microsoft.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/microsoft/markitdown.git"
+default_branch = "main"
+fork = false
+head_sha = "e144e0a2be95b34df17433bac904e635f2c5e551"
+html_url = "https://github.com/microsoft/markitdown"
+stars = 160631
