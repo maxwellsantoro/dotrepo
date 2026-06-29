@@ -4,10 +4,8 @@ use dotrepo_schema::{
     Readme, Record, RecordMode, RecordStatus, RelationKind, RelationLink, Relations, Repo, Trust,
 };
 use serde::{Deserialize, Serialize};
-use serde_json;
 use std::fs;
 use std::path::{Path, PathBuf};
-use toml;
 
 use crate::render::{
     render_contributing_body, render_pull_request_template_body, render_security_body,
@@ -796,10 +794,12 @@ pub fn import_repository_with_options(
             Some(render_import_evidence(
                 &imported_sources,
                 &inferred_defaults,
-                security_contact.as_deref(),
-                codeowners_metadata.note.as_deref(),
-                security_note.as_deref(),
-                imported_docs.is_some(),
+                ImportEvidenceNotes {
+                    security_contact: security_contact.as_deref(),
+                    codeowners_note: codeowners_metadata.note.as_deref(),
+                    security_note: security_note.as_deref(),
+                    imported_docs: imported_docs.is_some(),
+                },
                 &imported_commands.evidence_bullets,
                 &relation_evidence_notes,
             )),
@@ -1877,13 +1877,17 @@ fn strip_generated_banner(contents: &str) -> Option<&str> {
     }
 }
 
+struct ImportEvidenceNotes<'a> {
+    security_contact: Option<&'a str>,
+    codeowners_note: Option<&'a str>,
+    security_note: Option<&'a str>,
+    imported_docs: bool,
+}
+
 fn render_import_evidence(
     imported_sources: &[String],
     inferred_fields: &[String],
-    security_contact: Option<&str>,
-    codeowners_note: Option<&str>,
-    security_note: Option<&str>,
-    imported_docs: bool,
+    notes: ImportEvidenceNotes<'_>,
     command_evidence_bullets: &[String],
     relation_evidence_bullets: &[String],
 ) -> String {
@@ -1902,7 +1906,7 @@ fn render_import_evidence(
     {
         bullets.push(readme_import_evidence_bullet(
             inferred_fields,
-            imported_docs,
+            notes.imported_docs,
             readme_path,
         ));
     }
@@ -1911,7 +1915,7 @@ fn render_import_evidence(
         .any(|path| path == ".github/CODEOWNERS" || path == "CODEOWNERS")
     {
         let mut bullet = "Imported maintainer candidates from CODEOWNERS.".to_string();
-        if let Some(codeowners_note) = codeowners_note {
+        if let Some(codeowners_note) = notes.codeowners_note {
             bullet.push(' ');
             bullet.push_str(codeowners_note);
         }
@@ -1921,10 +1925,13 @@ fn render_import_evidence(
         .iter()
         .any(|path| path == ".github/SECURITY.md" || path == "SECURITY.md")
     {
-        if security_contact.is_some_and(|contact| contact != "unknown") {
+        if notes
+            .security_contact
+            .is_some_and(|contact| contact != "unknown")
+        {
             let mut bullet =
                 "Imported the security reporting channel from SECURITY.md.".to_string();
-            if let Some(security_note) = security_note {
+            if let Some(security_note) = notes.security_note {
                 bullet.push(' ');
                 bullet.push_str(security_note);
             }

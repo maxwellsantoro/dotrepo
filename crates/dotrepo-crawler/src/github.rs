@@ -606,13 +606,9 @@ fn render_star_band(star_band: &StarBand) -> String {
 
 fn normalize_parent_from_url(u: &str) -> Option<String> {
     let u = u.trim().trim_end_matches('/');
-    if let Some(rest) = u.strip_prefix("https://github.com/") {
-        Some(format!("github.com/{}", rest.trim_start_matches('/')))
-    } else if let Some(rest) = u.strip_prefix("http://github.com/") {
-        Some(format!("github.com/{}", rest.trim_start_matches('/')))
-    } else {
-        None
-    }
+    u.strip_prefix("https://github.com/")
+        .or_else(|| u.strip_prefix("http://github.com/"))
+        .map(|rest| format!("github.com/{}", rest.trim_start_matches('/')))
 }
 
 #[derive(Debug, Deserialize)]
