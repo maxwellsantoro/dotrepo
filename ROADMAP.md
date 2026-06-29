@@ -225,25 +225,65 @@ Milestones are capability and quality gates, not release dates.
 
 **v0.1 implementation status: complete.** The protocol and native/overlay record
 contracts, Rust CLI/MCP/LSP reference toolchain, autonomous index factory,
-public lookup/search/compare/relations surfaces, growth tooling, and M1–M3
-quality gates are shipped. Remaining roadmap work is operational scale and
-adoption: growing the corpus to the quantitative Milestone 2 target, continuously
-refreshing it, calibrating production quality, and expanding maintainer uptake.
+public lookup/search/compare/relations surfaces, growth tooling, and M1–M3 gate
+implementations are shipped. Milestone 1's strict multi-run operational proof is
+still pending; Milestones 2 and 3 have passed their shipped-surface and coverage
+gates. Remaining roadmap work is production proof, operational scale, continuous
+quality calibration, and maintainer uptake.
 
-**Checked-in index snapshot:** 613 overlay records, 516 high-signal profiles
-(103.2% of the Milestone 2 target), 516 `verified`, and 1 accepted maintainer
-claim. The 500-profile Milestone 2 coverage gate is complete. Five bounded
-discovery waves expanded the corpus across non-overlapping GitHub star bands;
-the next priority is quality hardening across the larger index rather than raw
-record growth.
+**Checked-in index snapshot (2026-06-29):** 613 overlay records, 516 high-signal
+public profiles (103.2% of the Milestone 2 target), 514 `verified` records, and 1
+accepted maintainer claim. The 500-profile Milestone 2 coverage gate is
+complete. Five bounded discovery waves expanded the corpus across
+non-overlapping GitHub star bands; the next priority is quality hardening across
+the larger index rather than raw record growth.
+
+### Active execution order
+
+This is the operative ordering across milestones. Detailed milestone sections
+describe the destination; this section decides what runs now.
+
+**Now — prove and harden the autonomous factory (Milestone 1).**
+
+1. Pass `check_autonomous_telemetry_gate.py` without `--warn-only`. In the
+   2026-06-29 snapshot, retained history has 7 runs and 75 processed
+   repositories, but still fails the worst-run failure-rate and recent
+   failure-drift checks.
+2. Work the snapshot's 501-record quality queue through bounded batches and
+   deterministic fixes. Ratchet its missing-signal ceilings of 285 build, 290
+   test, and 408 security downward without regressing the factual-accuracy gates.
+3. Process the current promotion headroom through the normal validation path.
+   `promotion-report` currently reports 61 promotion candidates, while the
+   narrower growth-status heuristic reports 19 high-signal lift candidates.
+4. Preserve at least 613 valid public profiles, 516 high-signal profiles, zero
+   malformed profiles, and the current factual-accuracy floors during hardening.
+
+**Next — begin the first ecosystem-scale and adoption checkpoints (Milestones 4
+and 5).**
+
+1. Grow to 1,000 incrementally maintained profiles while keeping stale or
+   missing `generated_at` records at or below 10% and maximum refresh overdue
+   latency at or below 7 days, using the existing 30-day stale threshold.
+2. Publish a versioned baseline for refresh work, network/model cost, and cost
+   per maintained profile before claiming that incremental refresh becomes
+   cheaper at scale.
+3. Publish adoption telemetry, then reach an initial checkpoint of 10
+   maintainer-owned native records and 5 accepted overlay-to-native handoffs.
+
+**Later — broaden scale, adoption, and interoperability.** Expand from 1,000 to
+10,000 profiles only after the first scale gates hold, deepen the maintainer
+flywheel, and begin Milestone 6 compatibility work once independent producers or
+consumers are ready to test against the protocol.
 
 ### Reference toolchain maintainability
 
 **Goal:** keep the shipped CLI/MCP/LSP/core codebase navigable as the index and
 surfaces grow past v0.1.
 
-**Status:** in progress. The first structural splits and contributor docs are
-landed; LSP extraction and broader rustdoc coverage remain open.
+**Status:** in progress. The first structural splits, contributor docs, and
+rustdoc examples for the three high-traffic repository APIs are landed. LSP/MCP
+extraction and documented dispositions for the remaining oversized source files
+remain open.
 
 Deliver:
 
@@ -254,11 +294,14 @@ Deliver:
   `query_repository`, `trust_repository`)
 - LSP and remaining MCP handler module extraction without transport behavior
   changes
+- a documented split plan or explicit retain rationale for every
+  reference-toolchain source file above the size threshold
 
 Exit criteria:
 
 - no reference-toolchain source file exceeds ~1,500 lines without a documented
-  split plan in [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md)
+  split plan or retain rationale in
+  [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md)
 - facade tests can be exercised by domain without loading the full 5k-line module
 - new contributors can orient to crawler and server crates without reading entire
   `main.rs` entrypoints
@@ -281,10 +324,10 @@ utility, and adoption.
 
 **Goal:** make autonomous generation and refresh the default operating model.
 
-**Implementation status: complete.** Scheduled planning, bounded adjudication,
-gate-passed writeback, retained telemetry, proof gates, and deploy coherence are
-all implemented. Repeated production runs remain an operating discipline rather
-than missing factory machinery.
+**Implementation status: complete; operational proof status: pending.** Scheduled
+planning, bounded adjudication, gate-passed writeback, retained telemetry, proof
+gates, and deploy coherence are implemented. The retained multi-run proof gate
+must pass in strict mode before the milestone itself is complete.
 
 Deliver:
 
@@ -346,12 +389,13 @@ Implemented operational controls:
   tests in addition to core import and public-export checks, reducing the chance
   that index-only changes skip surface regressions
 
-Current execution order:
+Current Milestone 1 work queue (subordinate to the cross-milestone execution
+order above):
 
 1. Work down the quality hardening queue through bounded autonomous batches and
-   targeted re-crawls. The current renderer reports 499 records in the broader
-   queue, including 285 missing build, 290 missing test, and 408 missing security
-   signals; refresh overdue latency is clear across the checked-in snapshot.
+   targeted re-crawls. The 2026-06-29 renderer snapshot reports 501 records in
+   the broader queue, including 285 missing build, 290 missing test, and 408
+   missing security signals; it has no stale or overdue records.
 2. Convert the discovery-wave failure corpus into deterministic parser fixes and
    checked-in regression fixtures, beginning with noisy README relation targets
    that fail repository-identity validation.
@@ -443,15 +487,15 @@ Current status:
   Milestone 2 gap in scheduled seed-review artifacts, so day-to-day review
   batches expose the same scale path as the release gate; it also separates
   advisory high-signal lift candidates from the broader quality-hardening queue
-- `dotrepo promotion-report --json` now separates total eligible records from
-  promotion candidates that are eligible and not already high-signal, exposing
-  the actual deterministic auto-promotion headroom in the checked-in index.
-  Recent quality and promotion waves promoted 48 eligible overlays to
-  `verified` through expanded actionable-security URL scoring, primary-CI
+- `dotrepo promotion-report --json` separates total eligible records from
+  promotion candidates, exposing deterministic auto-promotion headroom in the
+  checked-in index. Recent quality and promotion waves promoted 48 eligible
+  overlays to `verified` through expanded actionable-security URL scoring, primary-CI
   workflow preference during intra-tier command conflicts, targeted re-crawls,
-  and bounded autonomous batches; the current report identifies 0 additional
-  high-signal lift candidates before the discovery expansion; the current
-  checked-in corpus has 516 high-signal records out of 613 total
+  and bounded autonomous batches. As of 2026-06-29, the report identifies 61
+  promotion candidates; the separate growth-status heuristic identifies 19
+  high-signal lift candidates. The current public export has 516 high-signal
+  profiles out of 613 total
 - `is_actionable_security_url()` now recognizes GitHub security surfaces,
   coordinated-disclosure platforms, and first-party policy URLs while rejecting
   issue trackers and non-reporting channels; workflow command resolution now
@@ -470,7 +514,9 @@ Exit criteria:
   large majority of benchmark cases
 - repeated lookups reuse previously extracted understanding
 - factual accuracy and abstention rates are measured, not anecdotal
-- index refresh cost tracks changed repositories rather than total coverage
+
+Incremental refresh-cost proof is intentionally a Milestone 4 scale gate rather
+than a condition of the completed lookup and coverage milestone.
 
 ### Milestone 3: Research substrate
 
@@ -568,11 +614,16 @@ Current status:
   from profile count alone
 - release-gate baselines ratchet profile volume and high-signal floors so index
   growth does not silently regress lookup completeness or factual accuracy
+- the first quantitative scale checkpoint is 1,000 maintained profiles with a
+  stale-or-missing record rate at or below 10%, maximum refresh overdue latency
+  at or below 7 days, and a published refresh-cost baseline
 
 Exit criteria:
 
 - common repository lookups have a high hit rate across major ecosystems
 - refresh latency and stale-record rates meet published targets
+- measured refresh work tracks changed or stale repositories rather than total
+  index coverage
 - cost per maintained record declines as coverage grows
 - throughput can increase without adding proportional human labor
 
@@ -615,6 +666,8 @@ Current status:
   CI readiness now comes from `adoption_status_repository`, and
   `validate_repository` diagnostics for other root manifests (for example
   coexisting `record.toml`) are surfaced while editing `.repo`
+- the first adoption checkpoint is 10 maintainer-owned native records and 5
+  accepted overlay-to-native handoffs, backed by published adoption telemetry
 
 Exit criteria:
 
