@@ -223,12 +223,12 @@ maintainer authority, `reviewed`, or `canonical` status.
 
 Milestones are capability and quality gates, not release dates.
 
-**Checked-in index snapshot:** 261 overlay records, 168 high-signal profiles
-(33.6% of the Milestone 2 target), 168 `verified`, and 1 accepted maintainer
+**Checked-in index snapshot:** 261 overlay records, 239 high-signal profiles
+(47.8% of the Milestone 2 target), 239 `verified`, and 1 accepted maintainer
 claim. Tranche-two crawl coverage is complete at 106/106 targets across all seven
 language-family groups. The checked-in tranche is exhausted; the remaining
-332-profile high-signal gap now depends on promotion and quality hardening,
-followed by a new candidate tranche or autonomous discovery.
+261-profile high-signal gap now depends on quality hardening, parser fixes for
+residual promotion blockers, and a new candidate tranche or autonomous discovery.
 
 ### Milestone 0: Working protocol and proof surface
 
@@ -310,21 +310,23 @@ Current operational gaps:
 
 Current execution order:
 
-1. Lift eligible medium-confidence imported records into the high-signal set,
-   starting with the advisory queue headed by projects such as bat, Vite,
-   Traefik, and Tauri; verify every promotion through the existing gates.
-2. Convert recurring missing `owners.security_contact`, `repo.build`, and
-   `repo.test` signals into deterministic parser fixes and checked-in regression
-   fixtures. The current renderer reports 209 records in the broader quality
-   queue, including 85 missing build, 82 missing test, and 109 missing security
-   signals.
-3. Plan the next discovery wave. Tranche two is complete and its candidate file
+1. Plan and seed tranche three. Tranche two is complete and its candidate file
    is exhausted, so further corpus growth requires a new evidence-backed
    candidate list or sustained autonomous discovery.
-4. Work down the overdue refresh queue alongside growth work. Growth status
-   currently identifies `sharkdp/fd` as stale, with maximum overdue latency of
-   roughly 82 days; scale claims require existing coverage to stay fresh while
-   the corpus expands.
+2. Work down the quality hardening queue through bounded autonomous batches and
+   targeted re-crawls. The current renderer reports 165 records in the broader
+   queue, including 66 missing build, 66 missing test, and 108 missing security
+   signals; refresh overdue latency is currently clear across the checked-in
+   snapshot.
+3. Resolve residual promotion blockers through deterministic parser and scoring
+   fixes rather than model spend. The current promotion report shows 0 additional
+   high-signal lift candidates and 25 field blockers concentrated in
+   `owners.security_contact` (15), `repo.build` (5), `repo.test` (4), and
+   `repo.homepage` (1). Recent gains came from expanded actionable-security URL
+   recognition and primary-CI workflow preference during intra-tier command
+   conflicts; manifest-tier polyglot conflicts remain open.
+4. Convert recurring failure classes into checked-in regression fixtures and
+   offline-runnable deterministic fixes as live cases appear.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly
 publish gate-passed records, improve quality without a human queue, and expose
@@ -370,7 +372,7 @@ Current status:
   public tree
 - profile coverage now validates the accepted response shape and path identity,
   excludes malformed files from every coverage claim, and is enforced by the
-  canonical release gate through a versioned 261-profile/168-high-signal
+  canonical release gate through a versioned 261-profile/239-high-signal
   baseline with ratcheted build, test, docs, ownership, security, and license
   floors
 - `scripts/build_public_lookup_workload.py` now emits a fixed four-intent
@@ -407,16 +409,22 @@ Current status:
   advisory high-signal lift candidates from the broader quality-hardening queue
 - `dotrepo promotion-report --json` now separates total eligible records from
   promotion candidates that are eligible and not already high-signal, exposing
-  the actual deterministic auto-promotion headroom in the checked-in index; the
-  first deterministic status-lift batch promoted 14 eligible overlays to
-  `verified`, with evidence notes appended. The current report identifies 16
-  deterministic promotion candidates, while the broader growth renderer exposes
-  45 advisory high-signal lift candidates; the largest quality blockers remain
-  concentrated in `owners.security_contact`, `repo.test`, and `repo.build`
+  the actual deterministic auto-promotion headroom in the checked-in index.
+  Recent quality and promotion waves promoted 48 eligible overlays to
+  `verified` through expanded actionable-security URL scoring, primary-CI
+  workflow preference during intra-tier command conflicts, targeted re-crawls,
+  and bounded autonomous batches; the current report identifies 0 additional
+  high-signal lift candidates while 239 of 261 records are already high-signal
+- `is_actionable_security_url()` now recognizes GitHub security surfaces,
+  coordinated-disclosure platforms, and first-party policy URLs while rejecting
+  issue trackers and non-reporting channels; workflow command resolution now
+  prefers `ci.yml` / `main.yml` over platform-specific workflows when multiple
+  workflow sources conflict at the same tier, without weakening manifest-tier
+  conflict honesty
 - tranche-two writeback is complete at 106/106 targets across .NET, C/C++, Go,
-  JVM, Python, Rust, and TypeScript/JavaScript; its final nine seed batches
-  brought the checked-in coverage baseline to 261 profiles and 168 high-signal
-  profiles
+  JVM, Python, Rust, and TypeScript/JavaScript; quality hardening and promotion
+  waves since then brought the checked-in coverage baseline to 261 profiles and
+  239 high-signal profiles
 - reaching 500 high-signal profiles remains open
 
 Exit criteria:
