@@ -1,0 +1,83 @@
+{
+  "budgetExhaustedRuns": 0,
+  "failureClasses": {},
+  "failureClassesByEcosystem": {},
+  "failureEcosystems": {},
+  "firstRunAt": "2026-06-29T00:55:19Z",
+  "generatedAt": "2026-06-29T00:55:19Z",
+  "lastRunAt": "2026-06-29T00:55:19Z",
+  "previousWindowCosts": {
+    "adjudicationBudgetUseRate": 0.0,
+    "adjudicationCallBudget": 0,
+    "adjudicationCalls": 0,
+    "crawled": 0,
+    "tokensPerCrawled": 0.0,
+    "tokensUsed": 0
+  },
+  "previousWindowRates": {
+    "adjudicationRate": 0.0,
+    "apiEscalationRate": 0.0,
+    "failureRate": 0.0,
+    "secondOpinionRate": 0.0,
+    "zeroModelRate": 0.0
+  },
+  "previousWindowRepositoriesByAdjudicationTier": {},
+  "previousWindowRunCount": 0,
+  "rates": {
+    "adjudicationRate": 0.0,
+    "failureRate": 0.0,
+    "promotionRate": 0.2,
+    "writeRate": 1.0,
+    "zeroModelRate": 1.0
+  },
+  "recentWindowCosts": {
+    "adjudicationBudgetUseRate": 0.0,
+    "adjudicationCallBudget": 10,
+    "adjudicationCalls": 0,
+    "crawled": 5,
+    "tokensPerCrawled": 0.0,
+    "tokensUsed": 0
+  },
+  "recentWindowRates": {
+    "adjudicationRate": 0.0,
+    "apiEscalationRate": 0.0,
+    "failureRate": 0.0,
+    "secondOpinionRate": 0.0,
+    "zeroModelRate": 1.0
+  },
+  "recentWindowRepositoriesByAdjudicationTier": {
+    "deterministic": 4
+  },
+  "recentWindowRunCount": 1,
+  "recurringFailures": [],
+  "regressionFixtureCandidates": [],
+  "repositoriesByAdjudicationTier": {
+    "deterministic": 4
+  },
+  "runCount": 1,
+  "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
+  "synthesisFailureClasses": {},
+  "totals": {
+    "adjudicationCallBudget": 10,
+    "adjudicationCalls": 0,
+    "crawled": 5,
+    "discoveryQueued": 0,
+    "failed": 0,
+    "promoted": 1,
+    "qualityReprocessQueued": 5,
+    "skipped": 0,
+    "synthesisFailed": 0,
+    "synthesisRequested": 0,
+    "synthesisSucceeded": 0,
+    "tokensUsed": 0,
+    "written": 5,
+    "zeroModelRuns": 5
+  },
+  "worstRunRates": {
+    "adjudicationRate": 0.0,
+    "apiEscalationRate": 0.0,
+    "failureRate": 0.0,
+    "secondOpinionRate": 0.0,
+    "zeroModelRate": 1.0
+  }
+}

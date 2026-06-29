@@ -1,0 +1,63 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/FuelLabs/sway"
+generated_at = "2026-06-29T00:54:30.023204Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@FuelLabs/leads` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Sway"
+description = "Sway is a language developed for the Fuel blockchain."
+homepage = "https://docs.fuel.network/docs/sway/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "JavaScript",
+    "Just",
+    "LLVM",
+    "Rust",
+    "Shell",
+    "Sway",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "sway",
+    "language",
+    "compiler",
+    "fuel",
+]
+
+[owners]
+maintainers = [
+    "@FuelLabs/leads",
+    "@FuelLabs/tooling",
+    "@FuelLabs/sway-compiler",
+    "@FuelLabs/onchain",
+    "@FuelLabs/Devrel",
+]
+team = "@FuelLabs/leads"
+security_contact = "https://github.com/FuelLabs/sway/security/advisories/new"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/FuelLabs/sway.git"
+default_branch = "master"
+fork = false
+head_sha = "794943d71c06c514571d5e23a75574d5fc5f1f97"
+html_url = "https://github.com/FuelLabs/sway"
+stars = 61585

@@ -6,7 +6,8 @@
 - Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Set `repo.build` to `cargo build --workspace` from `Cargo.toml` after model escalation.
+- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
+- Left `repo.test` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

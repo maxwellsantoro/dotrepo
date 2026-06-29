@@ -1,0 +1,64 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/bitcoin/bitcoin"
+generated_at = "2026-06-29T00:54:40.45235Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.build` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Bitcoin Core integration/staging tree"
+description = "For an immediately usable, binary version of the Bitcoin Core software, see"
+homepage = "https://bitcoincore.org/en/download"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Assembly",
+    "C",
+    "C++",
+    "CMake",
+    "Cap'n Proto",
+    "Dockerfile",
+    "HTML",
+    "M4",
+    "Makefile",
+    "Nix",
+    "Objective-C++",
+    "Python",
+    "Rust",
+    "Sage",
+    "Scheme",
+    "Shell",
+]
+build = "sudo apt-get install clang mold ccache build-essential cmake ninja-build pkgconf python3-zmq libboost-dev libsqlite3-dev systemtap-sdt-dev libzmq3-dev qt6-base-dev qt6-tools-dev qt6-l10n-tools libqrencode-dev capnproto libcapnp-dev -y"
+topics = [
+    "bitcoin",
+    "c-plus-plus",
+    "p2p",
+    "cryptocurrency",
+    "cryptography",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@bitcoincore.org"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/bitcoin/bitcoin.git"
+default_branch = "master"
+fork = false
+head_sha = "2a9e35d293b308e81811fa93ad2e5e8ed20e66e0"
+html_url = "https://github.com/bitcoin/bitcoin"
+stars = 89579

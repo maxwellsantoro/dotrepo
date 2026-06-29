@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/astral-sh/uv"
-generated_at = "2026-06-26T17:29:33.687726Z"
+generated_at = "2026-06-29T00:55:00.625864Z"
 
 [record.trust]
 confidence = "medium"
@@ -29,7 +29,6 @@ languages = [
     "Rust",
     "Shell",
 ]
-build = "cargo build --profile no-debug"
 topics = [
     "packaging",
     "python",
@@ -52,6 +51,6 @@ archived = false
 clone_url = "https://github.com/astral-sh/uv.git"
 default_branch = "main"
 fork = false
-head_sha = "62d8b4e0dec3db475d787c1ff2b34a6c88a5719e"
+head_sha = "cfa5ca8122dbdf9cc3950724500a882823102435"
 html_url = "https://github.com/astral-sh/uv"
-stars = 86802
+stars = 86868
