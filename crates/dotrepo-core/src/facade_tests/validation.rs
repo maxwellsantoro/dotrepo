@@ -362,4 +362,3 @@ security_contact = "unknown"
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
-

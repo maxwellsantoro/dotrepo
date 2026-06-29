@@ -391,7 +391,6 @@ fn compact_error_body(body: &str) -> String {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -1001,4 +1001,3 @@ pull_request_template = "generate"
         .iter()
         .any(|(path, _)| path == Path::new(".github/pull_request_template.md")));
 }
-

@@ -18,9 +18,9 @@ const SERVER_NAME: &str = "dotrepo-mcp";
 mod lookup;
 
 use lookup::{
-    allow_custom_lookup_base_url, build_remote_lookup_client, fetch_remote_json, normalize_public_base_url,
-    remote_public_root, remote_query_url, remote_repository_url, resolve_lookup_target,
-    ALLOWED_LOOKUP_BASE_URLS, DEFAULT_PUBLIC_BASE_URL,
+    allow_custom_lookup_base_url, build_remote_lookup_client, fetch_remote_json,
+    normalize_public_base_url, remote_public_root, remote_query_url, remote_repository_url,
+    resolve_lookup_target, ALLOWED_LOOKUP_BASE_URLS, DEFAULT_PUBLIC_BASE_URL,
 };
 
 fn main() {

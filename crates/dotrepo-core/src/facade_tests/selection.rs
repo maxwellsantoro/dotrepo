@@ -536,4 +536,3 @@ text = "Rejected claim."
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
-

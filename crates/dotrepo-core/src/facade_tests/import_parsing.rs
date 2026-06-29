@@ -398,4 +398,3 @@ fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
         result.notes
     );
 }
-

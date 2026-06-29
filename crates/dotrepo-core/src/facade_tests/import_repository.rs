@@ -1560,4 +1560,3 @@ fn import_repository_prefers_security_md_over_contributing() {
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
-
