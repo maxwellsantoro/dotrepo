@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/helix-editor/helix"
-generated_at = "2026-06-26T18:30:36.163858Z"
+generated_at = "2026-06-29T02:01:43.068764Z"
 
 [record.trust]
 confidence = "high"
@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Getting help"
+name = "Helix"
 description = "The editing model is very heavily based on Kakoune; during development I found myself agreeing with most of Kakoune's design decisions."
 homepage = "https://helix-editor.com"
 license = "MPL-2.0"
@@ -53,4 +53,4 @@ default_branch = "master"
 fork = false
 head_sha = "6b7c7c6e0784d7c34295c24064deb36418c0b4b5"
 html_url = "https://github.com/helix-editor/helix"
-stars = 44993
+stars = 45009

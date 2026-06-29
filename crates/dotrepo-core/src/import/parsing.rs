@@ -973,7 +973,9 @@ fn parse_readme_docs_signal_with_references(
                 || lower_url == "./docs/"
                 || lower_url == "docs/"
                 || lower_url.ends_with("/docs/")
-                || lower_url.ends_with("/docs"));
+                || lower_url.ends_with("/docs")
+                || lower_url.contains("readthedocs.io")
+                || lower_url.contains("readthedocs.org"));
 
         if docs.root.is_none() && is_docs_root {
             docs.root = Some(url);

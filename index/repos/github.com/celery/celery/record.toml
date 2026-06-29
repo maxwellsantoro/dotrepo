@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/celery/celery"
-generated_at = "2026-06-26T18:31:55.0794Z"
+generated_at = "2026-06-29T02:02:41.727927Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/docker.yml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "celery"
@@ -29,6 +29,7 @@ languages = [
     "Python",
     "Shell",
 ]
+build = "make docker-build"
 test = "python -m pytest"
 topics = [
     "python",
@@ -51,6 +52,9 @@ topics = [
 maintainers = []
 security_contact = "tomer.nosrati@gmail.com"
 
+[docs]
+root = "https://docs.celeryq.dev"
+
 [relations]
 references = []
 
@@ -59,6 +63,6 @@ archived = false
 clone_url = "https://github.com/celery/celery.git"
 default_branch = "main"
 fork = false
-head_sha = "41b88388b9dce51e887d3aa6dc20fa8d4538e81a"
+head_sha = "d6131816f172750f7ba6204f903cd2fc243853ad"
 html_url = "https://github.com/celery/celery"
-stars = 28630
+stars = 28629

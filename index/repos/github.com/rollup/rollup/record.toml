@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/rollup/rollup"
-generated_at = "2026-06-26T18:34:23.251687Z"
+generated_at = "2026-06-29T02:01:37.079223Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = ["imported"]
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Rollup"
+name = "node compatibility"
 description = "Rollup is a module bundler for JavaScript which compiles small pieces of code into something larger and more complex, such as a library or application."
 homepage = "https://rollupjs.org"
 license = "NOASSERTION"
@@ -32,6 +32,9 @@ topics = []
 maintainers = []
 security_contact = "https://github.com/rollup/rollup/security"
 
+[docs]
+root = "https://rollupjs.org"
+
 [relations]
 references = []
 
@@ -42,4 +45,4 @@ default_branch = "master"
 fork = false
 head_sha = "ff0a94b908e92745136bbd34ddebf7e1bbae1f59"
 html_url = "https://github.com/rollup/rollup"
-stars = 26291
+stars = 26292

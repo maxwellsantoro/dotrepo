@@ -1,15 +1,15 @@
 {
   "schema": "dotrepo-public-profile-coverage-baseline/v0",
   "minProfiles": 261,
-  "minHighSignal": 168,
+  "minHighSignal": 182,
   "minHighSignalRatio": 0.55,
   "maxConflictRate": 0.0,
   "maxMalformedProfiles": 0,
   "minSignal": {
-    "hasBuild": 176,
-    "hasDocs": 112,
+    "hasBuild": 178,
+    "hasDocs": 132,
     "hasLicense": 258,
-    "hasOwnershipSignal": 90,
+    "hasOwnershipSignal": 89,
     "hasSecurityContact": 152,
     "hasTest": 179
   }

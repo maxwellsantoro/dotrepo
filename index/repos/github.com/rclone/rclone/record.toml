@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rclone/rclone"
-generated_at = "2026-06-26T18:31:21.737055Z"
+generated_at = "2026-06-29T02:02:15.816557Z"
 
 [record.trust]
 confidence = "high"
@@ -83,6 +83,7 @@ maintainers = [
 
 [docs]
 root = "https://rclone.org/docs/"
+getting_started = "https://rclone.org/install/"
 
 [relations]
 references = []
@@ -92,6 +93,6 @@ archived = false
 clone_url = "https://github.com/rclone/rclone.git"
 default_branch = "master"
 fork = false
-head_sha = "445528a3fb19669dc9dd2c2c3ffa04257162aaee"
+head_sha = "6bbc28cf02dc3d968c07c84cae0e75f99f8ead23"
 html_url = "https://github.com/rclone/rclone"
-stars = 58017
+stars = 58054

@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name, description, and docs entry points from README.md.
 - Imported repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from Cargo.toml as `cargo test --workspace`.
 - This is an overlay record, not a maintainer-controlled canonical record.

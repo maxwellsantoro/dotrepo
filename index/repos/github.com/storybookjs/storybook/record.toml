@@ -4,15 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/storybookjs/storybook"
-generated_at = "2026-06-26T17:40:36.058972Z"
+generated_at = "2026-06-29T01:57:20.332194Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml`, `.github/workflows/fork-checks.yml`, and `.github/workflows/generate-sandboxes.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Community"
+name = "Storybook"
 description = "Build bulletproof UI components faster"
 homepage = "https://storybook.js.org"
 license = "MIT"
@@ -76,4 +76,4 @@ default_branch = "next"
 fork = false
 head_sha = "bf34cdbfb326181d5f8093a51989e849f0277d20"
 html_url = "https://github.com/storybookjs/storybook"
-stars = 90447
+stars = 90462

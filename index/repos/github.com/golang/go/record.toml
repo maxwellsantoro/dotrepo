@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/golang/go"
-generated_at = "2026-06-26T18:31:01.441086Z"
+generated_at = "2026-06-29T02:02:02.501749Z"
 
 [record.trust]
 confidence = "medium"
@@ -42,6 +42,9 @@ topics = [
 maintainers = []
 security_contact = "https://go.dev/security/policy"
 
+[docs]
+root = "https://go.dev"
+
 [relations]
 references = []
 
@@ -50,6 +53,6 @@ archived = false
 clone_url = "https://github.com/golang/go.git"
 default_branch = "master"
 fork = false
-head_sha = "137b8065ab5b485bbde0ed430dd89841c0602bb2"
+head_sha = "6565f5517ef29eb854377c7db2f967f2627a4e16"
 html_url = "https://github.com/golang/go"
-stars = 134967
+stars = 135087

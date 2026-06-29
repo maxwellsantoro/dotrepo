@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sharkdp/fd"
-generated_at = "2026-03-09T00:00:00Z"
+generated_at = "2026-06-29T02:01:43.86401Z"
 
 [record.trust]
 confidence = "high"
@@ -12,26 +12,45 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Imported from the upstream README and security policy; not maintainer-verified. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "fd"
-description = "A simple, fast and user-friendly alternative to 'find'."
+description = "[中文] [한국어]"
 homepage = "https://github.com/sharkdp/fd"
-license = "Apache-2.0 OR MIT"
+license = "Apache-2.0"
 visibility = "public"
-languages = ["rust"]
+languages = [
+    "Makefile",
+    "Rust",
+    "Shell",
+]
 build = "cargo build"
 test = "cargo test"
-topics = []
+topics = [
+    "command-line",
+    "tool",
+    "filesystem",
+    "search",
+    "regex",
+    "rust",
+    "cli",
+    "terminal",
+    "hacktoberfest",
+]
 
 [owners]
-maintainers = [
-    "@sharkdp",
-    "@tmccombs",
-    "@tavianator",
-]
+maintainers = []
 security_contact = "https://github.com/sharkdp/fd/security/advisories/new"
 
 [relations]
 references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/sharkdp/fd.git"
+default_branch = "master"
+fork = false
+head_sha = "126be9869993f7b99d08eac287c06c5b418bd2c3"
+html_url = "https://github.com/sharkdp/fd"
+stars = 43510

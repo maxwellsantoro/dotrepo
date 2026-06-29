@@ -6,8 +6,8 @@
 - Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.build` unset after model escalation: The repository contains both a Rust workspace and a Node.js package, representing two distinct primary build systems. No single primary build command can be selected without bias..
-- Left `repo.test` unset after model escalation: The candidates represent mutually exclusive language ecosystems (Rust vs Node.js); no single primary value can represent the repository as a whole..
+- Set `repo.build` to `pnpm run build` from `.github/workflows/build_and_deploy.yml` after deterministic escalation.
+- Left `repo.test` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

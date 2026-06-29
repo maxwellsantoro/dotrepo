@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/coder/code-server"
 generated_at = "2026-06-29T01:18:09.655495Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@coder/code-server` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@coder/code-server` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "code-server"

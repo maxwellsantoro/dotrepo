@@ -1,12 +1,16 @@
 # Evidence
 
-- Imported repository identity and description from https://github.com/sharkdp/fd.
-- Imported the build command `cargo build` and the test command `cargo test` from the README development section at https://github.com/sharkdp/fd.
-- Imported the maintainer handles from the README maintainers section at https://github.com/sharkdp/fd.
-- Imported the dual-license statement from the repository README and license metadata at https://github.com/sharkdp/fd.
-- Imported the security reporting form from the upstream SECURITY.md at https://github.com/sharkdp/fd/security/policy.
+- Imported repository name and description from README.md.
+- Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Imported repo.build from Cargo.toml as `cargo build`.
+- Imported repo.test from Cargo.toml as `cargo test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+- Augmented repo.license from GitHub repository metadata.
+- Augmented repo.visibility from GitHub repository metadata.
+- Augmented repo.languages from GitHub repository metadata.
+- Augmented repo.topics from GitHub repository metadata.
+- Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

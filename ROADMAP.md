@@ -223,12 +223,12 @@ maintainer authority, `reviewed`, or `canonical` status.
 
 Milestones are capability and quality gates, not release dates.
 
-**Checked-in index snapshot:** 157 overlay records, 107 high-signal profiles
-(21% of the Milestone 2 target), 106 `verified`, 1 accepted maintainer claim.
-Tranche-two crawl progress is 2/106 targets present; active-tranche capacity
-upper bound is 211 high-signal profiles. Deterministic auto-promotion headroom is
-currently 0 (`promotionCandidateCount`); further high-signal growth depends on
-new crawls, field hardening, or parser fixes rather than status lifts alone.
+**Checked-in index snapshot:** 261 overlay records, 168 high-signal profiles
+(33.6% of the Milestone 2 target), 168 `verified`, and 1 accepted maintainer
+claim. Tranche-two crawl coverage is complete at 106/106 targets across all seven
+language-family groups. The checked-in tranche is exhausted; the remaining
+332-profile high-signal gap now depends on promotion and quality hardening,
+followed by a new candidate tranche or autonomous discovery.
 
 ### Milestone 0: Working protocol and proof surface
 
@@ -310,24 +310,21 @@ Current operational gaps:
 
 Current execution order:
 
-1. Exercise retained telemetry across repeated scheduled runs and use it to
-   identify cost, quality, and regression trends.
-2. Convert recurring failure stubs into deterministic fixes and runnable
-   checked-in regression fixtures (capture loop, harness, and named-ecosystem
-   baseline canaries now in place; continue with live failure-derived cases).
-   Recent progress: strengthened workflow and Makefile command inference
-   (compound lines, mvnw/gradlew, indent-safe target detection), added
-   Gradle manifest support + new jvm-gradle-canary regression fixture,
-   improved security contact scoring and bare-email extraction, and
-   extended regression canaries with workflow examples to cover the new paths.
-3. Execute the checked-in tranche-two growth plan: only 2/106 targets are present
-   today, leaving a 289-profile high-signal gap after the active-tranche capacity
-   upper bound; crawl throughput is now the dominant Milestone 2 lever once
-   proof-gate stability is demonstrated.
-4. Work down the overdue refresh queue alongside new crawls. Growth status now
-   exposes maximum and mean overdue latency, and scale claims require freshness
-   throughput to improve rather than allowing existing coverage to age while the
-   corpus expands.
+1. Lift eligible medium-confidence imported records into the high-signal set,
+   starting with the advisory queue headed by projects such as bat, Vite,
+   Traefik, and Tauri; verify every promotion through the existing gates.
+2. Convert recurring missing `owners.security_contact`, `repo.build`, and
+   `repo.test` signals into deterministic parser fixes and checked-in regression
+   fixtures. The current renderer reports 209 records in the broader quality
+   queue, including 85 missing build, 82 missing test, and 109 missing security
+   signals.
+3. Plan the next discovery wave. Tranche two is complete and its candidate file
+   is exhausted, so further corpus growth requires a new evidence-backed
+   candidate list or sustained autonomous discovery.
+4. Work down the overdue refresh queue alongside growth work. Growth status
+   currently identifies `sharkdp/fd` as stale, with maximum overdue latency of
+   roughly 82 days; scale claims require existing coverage to stay fresh while
+   the corpus expands.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly
 publish gate-passed records, improve quality without a human queue, and expose
@@ -373,7 +370,7 @@ Current status:
   public tree
 - profile coverage now validates the accepted response shape and path identity,
   excludes malformed files from every coverage claim, and is enforced by the
-  canonical release gate through a versioned 157-profile/107-high-signal
+  canonical release gate through a versioned 261-profile/168-high-signal
   baseline with ratcheted build, test, docs, ownership, security, and license
   floors
 - `scripts/build_public_lookup_workload.py` now emits a fixed four-intent
@@ -383,7 +380,7 @@ Current status:
 - `scripts/measure_public_lookup_efficiency.py` now produces deterministic
   aggregate and per-intent task/field hit-rate, workload-volume, payload-byte,
   request-reduction, and pass/fail gate reports for known-repository workloads;
-  the canonical release gate publishes the current 157-repository, 628-task
+  the canonical release gate publishes the current 261-repository, 1,044-task
   benchmark against a versioned baseline
 - the canonical release gate also checks a cited exact-value accuracy sample:
   20 assertions across FastAPI, Tokio, and Gin currently pass, with workload
@@ -394,16 +391,15 @@ Current status:
   into balanced, crawler-ready growth target files in candidate-file group
   order while excluding repositories already present in
   `index/repos/**/record.toml`; the checked-in
-  `index/tranche-two-targets.txt` file provides the next 100-candidate crawl
-  wave toward the 500-profile expansion without counting planned targets as
-  completed profile coverage, and the seed-review workflows now default to
-  that catalog and crawl planner-selected targets
-- the canonical release gate now publishes the active growth plan and
-  crawler-ready target file from a versioned tranche baseline, so release
-  evidence includes both current coverage and the next planned coverage wave;
-  the plan also reports current high-signal coverage plus selected targets as a
-  Milestone 2 capacity upper bound without counting planned targets as completed
-  profile coverage
+  `index/tranche-two-targets.txt` file supplied the completed 106-target crawl
+  wave toward the 500-profile expansion; all seven language-family groups are
+  now exhausted, and the seed-review workflows retain the catalog as the
+  reproducible record of that tranche
+- the canonical release gate publishes the growth plan and crawler-ready target
+  file from a versioned tranche baseline; with tranche two exhausted, the
+  baseline now requires zero selected targets while preserving completed
+  coverage evidence and preventing planned targets from being counted as
+  completed profiles
 - the operational growth-status renderer now reports record-level high-signal
   progress, active-tranche high-signal capacity upper bounds, and remaining
   Milestone 2 gap in scheduled seed-review artifacts, so day-to-day review
@@ -413,15 +409,14 @@ Current status:
   promotion candidates that are eligible and not already high-signal, exposing
   the actual deterministic auto-promotion headroom in the checked-in index; the
   first deterministic status-lift batch promoted 14 eligible overlays to
-  `verified`, with evidence notes appended, raising the public coverage floor
-  to 107 high-signal profiles; headroom is now exhausted (`promotionCandidateCount`
-  is 0), with the largest remaining blockers concentrated in
-  `owners.security_contact`, `repo.test`, and `repo.build`
-- the first two tranche-two writebacks, `github.com/starship/starship` and
-  `github.com/gohugoio/hugo`, are now checked in as verified overlays; the
-  profile coverage baseline ratcheted to 157 profiles and 107 high-signal
-  profiles, and README parsing now covers multiline logo titles, HTML docs
-  links, and reference-style documentation links exposed by those crawls
+  `verified`, with evidence notes appended. The current report identifies 16
+  deterministic promotion candidates, while the broader growth renderer exposes
+  45 advisory high-signal lift candidates; the largest quality blockers remain
+  concentrated in `owners.security_contact`, `repo.test`, and `repo.build`
+- tranche-two writeback is complete at 106/106 targets across .NET, C/C++, Go,
+  JVM, Python, Rust, and TypeScript/JavaScript; its final nine seed batches
+  brought the checked-in coverage baseline to 261 profiles and 168 high-signal
+  profiles
 - reaching 500 high-signal profiles remains open
 
 Exit criteria:

@@ -1716,6 +1716,49 @@ fn build_imported_docs(root: Option<String>, getting_started: Option<String>) ->
     }
 }
 
+/// When README parsing found no docs site, treat a non-forge homepage as docs root.
+pub fn infer_docs_root_from_external_homepage(manifest: &mut Manifest) -> bool {
+    if manifest
+        .docs
+        .as_ref()
+        .and_then(|docs| docs.root.as_ref())
+        .is_some_and(|root| !root.trim().is_empty())
+    {
+        return false;
+    }
+
+    let Some(homepage) = manifest
+        .repo
+        .homepage
+        .as_deref()
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+    else {
+        return false;
+    };
+    if !parsing::is_quality_url(homepage) {
+        return false;
+    }
+
+    let lower = homepage.to_ascii_lowercase();
+    if lower.contains("github.com")
+        || lower.contains("gitlab.com")
+        || lower.contains("bitbucket.org")
+        || lower.contains("sourceforge.net")
+    {
+        return false;
+    }
+
+    let docs = manifest.docs.get_or_insert(Docs {
+        root: None,
+        getting_started: None,
+        architecture: None,
+        api: None,
+    });
+    docs.root = Some(homepage.to_string());
+    true
+}
+
 fn native_import_github_compat(
     manifest: &Manifest,
     codeowners: Option<&ImportedFile>,

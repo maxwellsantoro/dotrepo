@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/golangci/golangci-lint"
-generated_at = "2026-06-26T18:31:27.81373Z"
+generated_at = "2026-06-29T02:02:19.377843Z"
 
 [record.trust]
 confidence = "high"
@@ -36,6 +36,9 @@ topics = [
     "golangci-lint",
 ]
 
+[docs]
+root = "https://golangci-lint.run"
+
 [relations]
 references = []
 
@@ -44,6 +47,6 @@ archived = false
 clone_url = "https://github.com/golangci/golangci-lint.git"
 default_branch = "main"
 fork = false
-head_sha = "a9b484189fa255f772b661b0e8f2e93a02252ae6"
+head_sha = "87b977018c69c97519b000085daa8ce693e8ed22"
 html_url = "https://github.com/golangci/golangci-lint"
-stars = 19120
+stars = 19132

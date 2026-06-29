@@ -4,7 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from CODEOWNERS; `owners.team` is `@docker/runtime-owners` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Left `repo.test` unset because `.github/workflows/test.yml` suggested an unsafe shell-like command.
+- Left `repo.test` unset because `.github/workflows/e2e.yml` and `.github/workflows/test.yml` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

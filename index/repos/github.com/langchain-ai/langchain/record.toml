@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/langchain-ai/langchain"
-generated_at = "2026-06-26T18:31:46.811479Z"
+generated_at = "2026-06-29T02:02:33.809231Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/_compile_integration_test.yml`. Left `repo.test` unset because `.github/workflows/_compile_integration_test.yml`, `.github/workflows/_lint.yml`, `.github/workflows/_release.yml`, `.github/workflows/_test.yml`, `.github/workflows/_test_pydantic.yml`, and `.github/workflows/_test_vcr.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "The agent engineering platform."
@@ -29,6 +29,7 @@ languages = [
     "Shell",
     "XSLT",
 ]
+build = "uv run pytest -m compile tests/integration_tests"
 topics = [
     "ai",
     "anthropic",
@@ -70,6 +71,6 @@ archived = false
 clone_url = "https://github.com/langchain-ai/langchain.git"
 default_branch = "master"
 fork = false
-head_sha = "00ad96ce85027502b62e5aa20a6d6161e969c454"
+head_sha = "e495651fef791650ca554d7b88b23327878a0be8"
 html_url = "https://github.com/langchain-ai/langchain"
-stars = 140288
+stars = 140415

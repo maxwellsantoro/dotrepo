@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/zed-industries/zed"
-generated_at = "2026-06-26T18:30:37.559964Z"
+generated_at = "2026-06-29T02:01:47.034361Z"
 
 [record.trust]
 confidence = "high"
@@ -51,6 +51,10 @@ topics = [
     "rust-lang",
 ]
 
+[docs]
+root = "https://zed.dev"
+getting_started = "https://zed.dev/docs/installation#macos"
+
 [relations]
 references = []
 
@@ -59,6 +63,6 @@ archived = false
 clone_url = "https://github.com/zed-industries/zed.git"
 default_branch = "main"
 fork = false
-head_sha = "adedf355d5207337d243d292d14092135325f885"
+head_sha = "7582bf74349f6084d4f7370ebb8215d70f7105cf"
 html_url = "https://github.com/zed-industries/zed"
-stars = 86000
+stars = 86143

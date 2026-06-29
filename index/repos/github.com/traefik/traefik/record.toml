@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/traefik/traefik"
-generated_at = "2026-06-26T17:40:54.730732Z"
+generated_at = "2026-06-29T02:01:29.635276Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = ["imported"]
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Supported Backends"
+name = "Traefik"
 description = "Traefik (pronounced _traffic_) is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy."
 homepage = "https://traefik.io"
 license = "MIT"
@@ -51,6 +51,9 @@ topics = [
 maintainers = []
 security_contact = "https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=traefik"
 
+[docs]
+root = "https://traefik.io"
+
 [relations]
 references = []
 
@@ -61,4 +64,4 @@ default_branch = "master"
 fork = false
 head_sha = "12686204533b647649bc5d3ec05d4b4290a39021"
 html_url = "https://github.com/traefik/traefik"
-stars = 63749
+stars = 63767

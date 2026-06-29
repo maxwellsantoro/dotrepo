@@ -2,18 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/junegunn/fzf"
-generated_at = "2026-06-26T18:31:41.160327Z"
+generated_at = "2026-06-29T02:02:26.490885Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `go.mod`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Highlights"
-description = "Show your love for fzf -- T-shirts, mugs, and stickers now available!"
+name = "fzf"
+description = ":cherry_blossom: A command-line fuzzy finder"
 homepage = "https://junegunn.github.io/fzf/"
 license = "MIT"
 visibility = "public"
@@ -47,6 +50,9 @@ topics = [
 maintainers = ["@junegunn"]
 security_contact = "https://github.com/junegunn/fzf"
 
+[docs]
+root = "https://junegunn.github.io/fzf/"
+
 [relations]
 references = []
 
@@ -55,6 +61,6 @@ archived = false
 clone_url = "https://github.com/junegunn/fzf.git"
 default_branch = "master"
 fork = false
-head_sha = "f2e451596c5d23de0069cdc51ea3fec73b7fe835"
+head_sha = "9e2856559d50637df482b8598fd7b35b2d746485"
 html_url = "https://github.com/junegunn/fzf"
-stars = 81233
+stars = 81291

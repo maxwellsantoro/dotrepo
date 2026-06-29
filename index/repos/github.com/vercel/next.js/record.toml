@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/vercel/next.js"
-generated_at = "2026-06-26T17:40:58.900201Z"
+generated_at = "2026-06-29T01:57:27.834378Z"
 
 [record.trust]
 confidence = "low"
@@ -33,6 +33,7 @@ languages = [
     "TypeScript",
     "WebAssembly",
 ]
+build = "pnpm run build"
 topics = [
     "react",
     "server-rendering",
@@ -58,6 +59,6 @@ archived = false
 clone_url = "https://github.com/vercel/next.js.git"
 default_branch = "canary"
 fork = false
-head_sha = "d6952ba67e658c34943023d1de506f24e5cc1bf3"
+head_sha = "a88f25caf0070b582a8ed83b1ae9e7135d7fd3bc"
 html_url = "https://github.com/vercel/next.js"
-stars = 140248
+stars = 140407

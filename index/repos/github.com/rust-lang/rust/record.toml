@@ -4,20 +4,19 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rust-lang/rust"
-generated_at = "2026-06-26T18:30:34.805549Z"
+generated_at = "2026-06-29T02:01:39.29674Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Why Rust?"
-description = "Empowering everyone to build reliable and efficient software."
+description = 'Read ["Installation"] from [The Book].'
 homepage = "https://www.rust-lang.org"
 license = "Apache-2.0"
 visibility = "public"
@@ -56,6 +55,9 @@ topics = [
     "language",
 ]
 
+[docs]
+root = "https://www.rust-lang.org"
+
 [relations]
 references = []
 
@@ -64,6 +66,6 @@ archived = false
 clone_url = "https://github.com/rust-lang/rust.git"
 default_branch = "main"
 fork = false
-head_sha = "eb6346c659ccb0468a1477c716ca5450a1fa9ba1"
+head_sha = "df6ee909ef35c75aa58aa45af6ac071a9b8285c2"
 html_url = "https://github.com/rust-lang/rust"
-stars = 114218
+stars = 114391

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/etcd-io/etcd"
-generated_at = "2026-06-26T18:31:11.444679Z"
+generated_at = "2026-06-29T02:02:09.956161Z"
 
 [record.trust]
 confidence = "medium"
@@ -44,6 +44,9 @@ topics = [
 maintainers = []
 security_contact = "https://github.com/etcd-io/etcd/blob/main/security/README.md"
 
+[docs]
+root = "https://etcd.io"
+
 [relations]
 references = []
 
@@ -52,6 +55,6 @@ archived = false
 clone_url = "https://github.com/etcd-io/etcd.git"
 default_branch = "main"
 fork = false
-head_sha = "5f6496ad4b0a3c92cc99d200095ae8b89fbcbf0b"
+head_sha = "8f8587672abb5704d8134b88a1e43059e9440578"
 html_url = "https://github.com/etcd-io/etcd"
-stars = 51901
+stars = 51910

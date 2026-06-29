@@ -2,6 +2,7 @@
 
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
+- Inferred repo.build from .github/workflows/docker.yml as `make docker-build`.
 - Imported repo.test from pyproject.toml as `python -m pytest`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

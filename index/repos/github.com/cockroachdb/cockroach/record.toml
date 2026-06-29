@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/cockroachdb/cockroach"
-generated_at = "2026-06-26T18:31:35.812947Z"
+generated_at = "2026-06-29T02:02:23.385399Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Main
 
 [repo]
 name = "What is CockroachDB?"
-description = "CockroachDB is a cloud-native distributed SQL database designed to build, scale, and manage modern, data-intensive applications."
+description = "CockroachDB is a distributed SQL database built on a transactional and strongly-consistent key-value store."
 homepage = "https://www.cockroachlabs.com"
 license = "NOASSERTION"
 visibility = "public"
@@ -85,6 +85,7 @@ maintainers = [
 ]
 
 [docs]
+root = "https://www.cockroachlabs.com"
 getting_started = "https://www.cockroachlabs.com/docs/cockroachcloud/quickstart.html"
 
 [relations]
@@ -95,6 +96,6 @@ archived = false
 clone_url = "https://github.com/cockroachdb/cockroach.git"
 default_branch = "master"
 fork = false
-head_sha = "8ee72ef292bda505db680c36abe8653e70b5f02b"
+head_sha = "dd111ac7972c1ac43e1fcf18a820dc73361efe76"
 html_url = "https://github.com/cockroachdb/cockroach"
-stars = 32232
+stars = 32228

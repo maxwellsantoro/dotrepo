@@ -1,7 +1,6 @@
 # Evidence
 
-- Imported repository name from README.md.
-- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
+- Imported repository name and description from README.md.
 - Imported repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from Cargo.toml as `cargo test --workspace`.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -10,7 +9,6 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion
