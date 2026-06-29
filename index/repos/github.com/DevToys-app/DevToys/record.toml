@@ -1,0 +1,70 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/DevToys-app/DevToys"
+generated_at = "2026-06-29T01:17:26.454757Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+
+[repo]
+name = "DevToys"
+description = "A Swiss Army knife for developers."
+homepage = "https://devtoys.app/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C#",
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "PowerShell",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "syntax-highlighting",
+    "developer-tools",
+    "windows",
+    "windows-11",
+    "fluent-design",
+    "fluent",
+    "csharp",
+    "windows-10",
+    "mica",
+    "winui",
+    "cross-platform",
+    "desktop",
+    "desktop-app",
+    "desktop-application",
+    "extensible",
+    "linux",
+    "macos",
+    "blazor",
+    "typescript",
+]
+
+[owners]
+maintainers = []
+security_contact = "unknown"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/DevToys-app/DevToys.git"
+default_branch = "main"
+fork = false
+head_sha = "7e12df8448aa1f6aec4a8736b3e06a1c90530715"
+html_url = "https://github.com/DevToys-app/DevToys"
+stars = 31704

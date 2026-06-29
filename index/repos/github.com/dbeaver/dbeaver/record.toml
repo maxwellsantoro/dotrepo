@@ -1,0 +1,69 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/dbeaver/dbeaver"
+generated_at = "2026-06-29T01:17:39.216121Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "DBeaver"
+description = "Free multi-platform database tool for developers, SQL programmers, database administrators and analysts."
+homepage = "https://dbeaver.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "ANTLR",
+    "Batchfile",
+    "C++",
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Shell",
+    "XSLT",
+]
+topics = [
+    "sql",
+    "database",
+    "dbeaver",
+    "gui",
+    "mysql",
+    "postgresql",
+    "db2",
+    "sqlite",
+    "erd",
+    "java",
+    "oracle",
+    "nosql",
+    "sqlserver",
+    "redshift",
+    "jdbc",
+    "ai",
+    "databricks",
+    "snowflake",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@dbeaver.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/dbeaver/dbeaver.git"
+default_branch = "devel"
+fork = false
+head_sha = "cdde588e3408918d55ba1377da33e9789248a93e"
+html_url = "https://github.com/dbeaver/dbeaver"
+stars = 50754

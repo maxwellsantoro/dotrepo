@@ -1,0 +1,70 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/jeecgboot/JeecgBoot"
+generated_at = "2026-06-29T01:18:30.460899Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "JeecgBoot AI低代码平台"
+description = "🚀 **低代码迈入 v2.0 时代，一句自然语言即可生成整个系统**"
+homepage = "https://jeecg.com"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Dockerfile",
+    "Java",
+    "JavaScript",
+    "Less",
+    "Python",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+topics = [
+    "antd",
+    "activiti",
+    "codegenerator",
+    "springcloud",
+    "springboot",
+    "low-code",
+    "vue3",
+    "flowable",
+    "langchain4j",
+    "spring-ai",
+    "mybatis-plus",
+    "agent",
+    "llm",
+    "ai",
+    "mcp",
+    "rag",
+    "skills",
+    "claude-code",
+    "cli",
+    "codex",
+]
+
+[docs]
+getting_started = "http://www.jeecg.com/doc/quickstart"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/jeecgboot/JeecgBoot.git"
+default_branch = "main"
+fork = false
+head_sha = "c3099aba0d684e9b6bffcd86821bc74aa580ac77"
+html_url = "https://github.com/jeecgboot/JeecgBoot"
+stars = 46905

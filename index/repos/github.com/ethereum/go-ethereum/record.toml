@@ -1,0 +1,77 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ethereum/go-ethereum"
+generated_at = "2026-06-29T01:18:28.83174Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Go Ethereum"
+description = "Golang execution layer implementation of the Ethereum protocol."
+homepage = "https://geth.ethereum.org"
+license = "LGPL-3.0"
+visibility = "public"
+languages = [
+    "Assembly",
+    "C",
+    "CMake",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "M4",
+    "Makefile",
+    "NSIS",
+    "Python",
+    "Sage",
+    "Shell",
+    "Solidity",
+    "Yul",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "go",
+    "blockchain",
+    "ethereum",
+    "p2p",
+    "geth",
+]
+
+[owners]
+maintainers = [
+    "@gballet",
+    "@MariusVanDerWijden",
+    "@lightclient",
+    "@fjl",
+    "@zsfelfoldi",
+    "@rjl493456442",
+    "@jwasinger",
+    "@s1na",
+]
+security_contact = "bounty@ethereum.org"
+
+[docs]
+getting_started = "https://geth.ethereum.org/docs/getting-started/installing-geth"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ethereum/go-ethereum.git"
+default_branch = "master"
+fork = false
+head_sha = "ab134b2101b5017d0512ab9b00bfa461632ec902"
+html_url = "https://github.com/ethereum/go-ethereum"
+stars = 51216

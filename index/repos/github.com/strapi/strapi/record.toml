@@ -1,0 +1,72 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/strapi/strapi"
+generated_at = "2026-06-29T01:18:26.850527Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Open-source headless CMS, self-hosted or Cloud you're in control."
+description = "Docs · Strapi Cloud · Roadmap · Discord · Discussions"
+homepage = "https://strapi.io"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "MDX",
+    "Shell",
+    "TypeScript",
+]
+build = "yarn build"
+topics = [
+    "strapi",
+    "nodejs",
+    "api",
+    "dashboard",
+    "javascript",
+    "graphql",
+    "rest",
+    "cms",
+    "headless-cms",
+    "jamstack",
+    "customizable",
+    "hacktoberfest",
+    "mysql",
+    "content-management",
+    "cms-framework",
+    "content-management-system",
+    "typescript",
+    "no-code",
+    "posgresql",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@strapi.io"
+
+[docs]
+root = "https://docs.strapi.io"
+getting_started = "https://docs.strapi.io/developer-docs/latest/getting-started/quick-start.html"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/strapi/strapi.git"
+default_branch = "develop"
+fork = false
+head_sha = "0939748959367bf2c3bba8a7d09d28a164ffd4ae"
+html_url = "https://github.com/strapi/strapi"
+stars = 72563

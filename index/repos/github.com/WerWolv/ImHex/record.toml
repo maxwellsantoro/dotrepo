@@ -1,0 +1,66 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/WerWolv/ImHex"
+generated_at = "2026-06-29T01:18:22.594923Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Left `repo.build` unset because `.github/workflows/analysis.yml`, `.github/workflows/build.yml`, and `.github/workflows/tests.yml` suggested conflicting build commands. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
+
+[repo]
+name = "Discord Server"
+description = "Would you like to appear here as well? Contact us at imhex@werwolv.net!"
+homepage = "https://imhex.werwolv.net/"
+license = "GPL-2.0"
+visibility = "public"
+languages = [
+    "C#",
+    "C++",
+    "CMake",
+    "GDB",
+    "GLSL",
+    "Objective-C",
+    "Python",
+]
+topics = [
+    "hex-editor",
+    "reverse-engineering",
+    "ips",
+    "dear-imgui",
+    "disassembler",
+    "analyzer",
+    "pattern-language",
+    "dark-mode",
+    "hacktoberfest",
+    "forensics",
+    "multi-platform",
+    "binary-analysis",
+    "c-plus-plus",
+    "static-analysis",
+    "windows",
+    "cybersecurity",
+    "hacking",
+    "cpp",
+    "linux",
+    "macos",
+]
+
+[owners]
+maintainers = []
+security_contact = "unknown"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/WerWolv/ImHex.git"
+default_branch = "master"
+fork = false
+head_sha = "af55d25269f201164c7f7e71c943cba4d26b04e3"
+html_url = "https://github.com/WerWolv/ImHex"
+stars = 54029

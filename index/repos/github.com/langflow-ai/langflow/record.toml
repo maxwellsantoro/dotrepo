@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/langflow-ai/langflow"
+generated_at = "2026-06-29T01:16:27.198801Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Highlight features"
+description = "Langflow Desktop is the easiest way to get started with Langflow."
+homepage = "http://www.langflow.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Mako",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "TypeScript",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "react-flow",
+    "chatgpt",
+    "large-language-models",
+    "generative-ai",
+    "agents",
+    "multiagent",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://hackerone.com/ibm"
+
+[docs]
+getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/langflow-ai/langflow.git"
+default_branch = "main"
+fork = false
+head_sha = "a277209fe4e2e109141af41d3c07d5d91693f07f"
+html_url = "https://github.com/langflow-ai/langflow"
+stars = 150166

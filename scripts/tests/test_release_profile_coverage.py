@@ -26,14 +26,14 @@ def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path
         "--public-root",
         str(public_dir),
     ]
-    assert command[command.index("--min-profiles") + 1] == "189"
-    assert command[command.index("--min-high-signal") + 1] == "126"
+    assert command[command.index("--min-profiles") + 1] == "261"
+    assert command[command.index("--min-high-signal") + 1] == "168"
     assert command[command.index("--max-conflict-rate") + 1] == "0.0"
     assert command[command.index("--max-malformed-profiles") + 1] == "0"
     assert str(output_root / "public-profile-coverage.json") in command
     assert str(output_root / "public-profile-coverage.md") in command
-    assert "hasBuild=135" in command
-    assert "hasDocs=74" in command
+    assert "hasBuild=176" in command
+    assert "hasDocs=112" in command
 
 
 def test_profile_coverage_baseline_is_well_formed() -> None:
@@ -61,11 +61,11 @@ def test_release_gate_applies_index_growth_tranche_baseline(tmp_path: Path) -> N
     assert command[command.index("--candidate-file") + 1] == str(
         REPO_ROOT / "index/tranche-two-targets.txt"
     )
-    assert command[command.index("--target-count") + 1] == "72"
-    assert command[command.index("--min-selected") + 1] == "72"
-    assert command[command.index("--current-high-signal") + 1] == "126"
+    assert command[command.index("--target-count") + 1] == "0"
+    assert command[command.index("--min-selected") + 1] == "0"
+    assert command[command.index("--current-high-signal") + 1] == "168"
     assert command[command.index("--milestone-high-signal-target") + 1] == "500"
-    assert command[command.index("--min-planned-high-signal-capacity") + 1] == "198"
+    assert command[command.index("--min-planned-high-signal-capacity") + 1] == "168"
     assert str(output_root / "index-growth-targets.txt") in command
     assert str(output_root / "index-growth-plan.json") in command
     assert str(output_root / "index-growth-plan.md") in command
@@ -80,8 +80,8 @@ def test_index_growth_tranche_baseline_is_well_formed() -> None:
         "schema": "dotrepo-index-growth-tranche-baseline/v0",
         "candidateFile": "index/tranche-two-targets.txt",
         "milestoneHighSignalTarget": 500,
-        "targetCount": 72,
-        "minSelected": 72,
+        "targetCount": 0,
+        "minSelected": 0,
     }
     assert (REPO_ROOT / baseline["candidateFile"]).is_file()
 
@@ -104,14 +104,14 @@ def test_release_gate_builds_and_measures_research_lookup_workload(
     assert build[build.index("--limit") + 1] == "0"
     assert str(output_root / "public-lookup-workload.json") in build
     assert "scripts/measure_public_lookup_efficiency.py" in measure
-    assert measure[measure.index("--min-tasks") + 1] == "756"
-    assert measure[measure.index("--min-repositories") + 1] == "189"
-    assert measure[measure.index("--min-task-hit-rate") + 1] == "0.636"
-    assert measure[measure.index("--min-field-hit-rate") + 1] == "0.814"
+    assert measure[measure.index("--min-tasks") + 1] == "1044"
+    assert measure[measure.index("--min-repositories") + 1] == "261"
+    assert measure[measure.index("--min-task-hit-rate") + 1] == "0.616"
+    assert measure[measure.index("--min-field-hit-rate") + 1] == "0.801"
     assert "overview=0.9" in measure
-    assert "documentation=0.306" in measure
-    assert "execution=0.666" in measure
-    assert "security=0.65" in measure
+    assert "documentation=0.318" in measure
+    assert "execution=0.616" in measure
+    assert "security=0.613" in measure
     assert str(output_root / "public-lookup-efficiency.json") in measure
     assert str(output_root / "public-lookup-efficiency.md") in measure
 

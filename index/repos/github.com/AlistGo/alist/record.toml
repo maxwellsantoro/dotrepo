@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/AlistGo/alist"
+generated_at = "2026-06-29T01:18:40.475872Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "discussions"
+description = "Please go to our discussion forum for general questions, **issues are for bug reports and feature requests only.**"
+homepage = "https://alistgo.com"
+license = "AGPL-3.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "Makefile",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "golang",
+    "gin",
+    "webdav",
+    "solidjs",
+    "file-server",
+    "onedrive",
+]
+
+[docs]
+root = "http://contrib.nn.ci/api?repo=alist-org/alist&repo=alist-org/alist-web&repo=alist-org/docs"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/AlistGo/alist.git"
+default_branch = "main"
+fork = false
+head_sha = "d0cec67718d9b0f3750715fe850f6c0ba9e9e87f"
+html_url = "https://github.com/AlistGo/alist"
+stars = 49761

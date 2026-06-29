@@ -1,0 +1,66 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/peass-ng/PEASS-ng"
+generated_at = "2026-06-29T01:19:46.880557Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/ci-master-failure-chack-agent-pr.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "PEASS-ng"
+description = "Check to learn tens of linux privesc techniques and master LinPEAS"
+homepage = "https://book.hacktricks.xyz"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C#",
+    "CMake",
+    "HTML",
+    "PowerShell",
+    "Python",
+    "Ruby",
+    "Shell",
+]
+build = 'echo "Do not guess from truncated logs when exact compiler/runtime error lines are available."'
+topics = [
+    "enumeration",
+    "linux",
+    "unix",
+    "bash",
+    "shell",
+    "script",
+    "oneliner",
+    "privesc",
+    "one-liner",
+    "linpe",
+    "color",
+    "windows",
+    "batch",
+    "exe",
+    "peas",
+    "linpeas",
+    "winpeas",
+    "batch-script",
+    "csharp",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/peass-ng/PEASS-ng.git"
+default_branch = "master"
+fork = false
+head_sha = "32c351ab689bcc915fadf5755ca7d5705406e51c"
+html_url = "https://github.com/peass-ng/PEASS-ng"
+stars = 20070

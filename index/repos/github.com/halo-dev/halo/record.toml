@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/halo-dev/halo"
+generated_at = "2026-06-29T01:18:52.711291Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/halo.yaml`, `.github/workflows/openapi-check.yaml`, `.github/workflows/packages-preview-release.yaml`, and `.github/workflows/release-ui-packages.yaml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/halo.yaml`, `.github/workflows/openapi-check.yaml`, `.github/workflows/packages-preview-release.yaml`, and `.github/workflows/release-ui-packages.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Docker pulls"
+description = "官网 文档 社区 Gitee Telegram 频道"
+homepage = "https://www.halo.run"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "MDX",
+    "Makefile",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+topics = [
+    "halo",
+    "cms",
+    "halocms",
+    "content-management-system",
+    "blog",
+    "blog-engine",
+    "website-builder",
+]
+
+[owners]
+maintainers = []
+security_contact = "hi@halo.run"
+
+[docs]
+getting_started = "https://docs.halo.run/getting-started/install/1panel"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/halo-dev/halo.git"
+default_branch = "main"
+fork = false
+head_sha = "8206752d23e3499154e7170cadafaaf62bfb63ab"
+html_url = "https://github.com/halo-dev/halo"
+stars = 39157

@@ -1,0 +1,58 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/Unity-Technologies/ml-agents"
+generated_at = "2026-06-29T01:19:51.854508Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/nightly.yml` and `.github/workflows/pytest.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "ml-agents"
+description = "The Unity Machine Learning Agents Toolkit (ML-Agents) is an open-source project that enables games and simulations to serve as environments for training intelligent agents using deep reinforcement learning and imitation learning."
+homepage = "https://unity.com/products/machine-learning-agents"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C#",
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Python",
+    "ShaderLab",
+    "Shell",
+]
+test = 'pytest --cov=ml-agents --cov=ml-agents-envs \'
+topics = [
+    "reinforcement-learning",
+    "unity3d",
+    "deep-learning",
+    "unity",
+    "deep-reinforcement-learning",
+    "neural-networks",
+    "machine-learning",
+]
+
+[owners]
+maintainers = ["@unity/behavior-authoring"]
+team = "@unity/behavior-authoring"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Unity-Technologies/ml-agents.git"
+default_branch = "develop"
+fork = false
+head_sha = "a0bd0abeebb7b7f659db6e26b0e8635dd10b13df"
+html_url = "https://github.com/Unity-Technologies/ml-agents"
+stars = 19521

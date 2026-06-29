@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/mermaid-js/mermaid"
+generated_at = "2026-06-29T01:17:14.49919Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Mermaid"
+description = "Generate diagrams from markdown-like text."
+homepage = "https://mermaid.ai/open-source/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Langium",
+    "Mermaid",
+    "Shell",
+    "TypeScript",
+    "Vue",
+    "Yacc",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = [
+    "documentation",
+    "flowchart",
+    "javascript",
+    "typescript",
+    "uml-diagrams",
+    "diagrams",
+    "diagrams-as-code",
+    "mindmap",
+]
+
+[docs]
+root = "https://mermaid.js.org/config/usage.html"
+getting_started = "https://mermaid.ai/open-source/intro/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/mermaid-js/mermaid.git"
+default_branch = "develop"
+fork = false
+head_sha = "f65401b631165000a77f1b778eebf4f07bc74041"
+html_url = "https://github.com/mermaid-js/mermaid"
+stars = 88910

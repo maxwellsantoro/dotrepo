@@ -1,0 +1,83 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/hoppscotch/hoppscotch"
+generated_at = "2026-06-29T01:17:45.793663Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. Left `repo.build` unset because `.github/workflows/build-hoppscotch-agent.yml` and `.github/workflows/build-hoppscotch-desktop.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Hoppscotch"
+description = "Open Source API Development Ecosystem"
+homepage = "https://hoppscotch.io"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "Nix",
+    "PLpgSQL",
+    "Rust",
+    "SCSS",
+    "Shell",
+    "Svelte",
+    "TypeScript",
+    "Vue",
+]
+build = "pnpm tauri build --verbose --target x86_64-apple-darwin"
+test = "pnpm test"
+topics = [
+    "api",
+    "api-client",
+    "api-rest",
+    "pwa",
+    "api-testing",
+    "vue",
+    "vuejs",
+    "tools",
+    "testing-tools",
+    "testing",
+    "graphql",
+    "websocket",
+    "developer-tools",
+    "spa",
+    "http-client",
+    "rest-api",
+    "rest",
+    "http",
+]
+
+[owners]
+maintainers = [
+    "@AndrewBastin",
+    "@jamesgeorge007",
+    "@JoelJacobStephen",
+    "@balub",
+    "@liyasthomas",
+]
+security_contact = "support@hoppscotch.io"
+
+[docs]
+root = "https://docs.hoppscotch.io"
+getting_started = "https://docs.hoppscotch.io/documentation/self-host/getting-started"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/hoppscotch/hoppscotch.git"
+default_branch = "main"
+fork = false
+head_sha = "e067ee0b3224c675ba4b9bcd98366d0f1b6be3ee"
+html_url = "https://github.com/hoppscotch/hoppscotch"
+stars = 79664

@@ -1,0 +1,64 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/QuantConnect/Lean"
+generated_at = "2026-06-29T01:19:34.970071Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "lean-header"
+description = "LEAN is an event-driven, professional-caliber algorithmic trading platform built with a passion for elegant engineering and deep quant concept modeling."
+homepage = "https://lean.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C#",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "Jupyter Notebook",
+    "Python",
+    "Shell",
+]
+topics = [
+    "c-sharp",
+    "algorithmic-trading-engine",
+    "quantconnect",
+    "lean-engine",
+    "finance",
+    "algorithm",
+    "options",
+    "trading-algorithms",
+    "trading-platform",
+    "trading-strategies",
+    "trading-bot",
+    "python",
+    "stock-indicators",
+    "forex",
+    "trading",
+]
+
+[docs]
+root = "https://www.lean.io/docs/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/QuantConnect/Lean.git"
+default_branch = "master"
+fork = false
+head_sha = "71cabb4141af8c23f6fbf0b64a2afc3e3cc6e7da"
+html_url = "https://github.com/QuantConnect/Lean"
+stars = 20241

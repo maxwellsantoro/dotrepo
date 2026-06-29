@@ -1,0 +1,80 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/mudler/LocalAI"
+generated_at = "2026-06-29T01:18:58.852385Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "LocalAI stars"
+description = "**LocalAI** is the open-source AI engine."
+homepage = "https://localai.io"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Nix",
+    "Python",
+    "Rust",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "llama",
+    "ai",
+    "llm",
+    "stable-diffusion",
+    "api",
+    "tts",
+    "musicgen",
+    "mamba",
+    "audio-generation",
+    "image-generation",
+    "text-generation",
+    "rerank",
+    "distributed",
+    "libp2p",
+    "decentralized",
+    "object-detection",
+    "mcp",
+    "agents",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@localai.io"
+
+[docs]
+root = "https://localai.io/"
+getting_started = "https://localai.io/basics/getting_started/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/mudler/LocalAI.git"
+default_branch = "master"
+fork = false
+head_sha = "c4d302e1ab91d8b2a89f85505f48ef542a3dbfdc"
+html_url = "https://github.com/mudler/LocalAI"
+stars = 47212

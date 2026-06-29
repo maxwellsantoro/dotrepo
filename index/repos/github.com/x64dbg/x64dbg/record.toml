@@ -1,0 +1,65 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/x64dbg/x64dbg"
+generated_at = "2026-06-29T01:18:54.81277Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build.yml` and `.github/workflows/cross.yml` suggested conflicting build commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "x64dbg"
+description = "An open-source binary debugger for Windows, aimed at malware analysis and reverse engineering of executables you do not have the source code for."
+homepage = "http://x64dbg.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Python",
+    "Shell",
+]
+build = "cmake -B build -G Ninja -DCMAKE_UNITY_BUILD=ON"
+topics = [
+    "debugger",
+    "windows",
+    "x64",
+    "disassembler",
+    "reverse-engineering",
+    "security",
+    "x86",
+    "x86-64",
+    "malware-analysis",
+    "security-tools",
+    "binary-analysis",
+    "ctf",
+    "dynamic-analysis",
+    "exploit-development",
+    "hacking",
+    "oscp",
+    "debugging",
+    "program-analysis",
+    "cybersecurity",
+    "offensive-security",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/x64dbg/x64dbg.git"
+default_branch = "development"
+fork = false
+head_sha = "ec18680690e007603d9100ed61a452ea7c54236f"
+html_url = "https://github.com/x64dbg/x64dbg"
+stars = 48755

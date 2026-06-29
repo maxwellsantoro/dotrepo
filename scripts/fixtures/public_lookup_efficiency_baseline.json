@@ -2,15 +2,15 @@
   "schema": "dotrepo-public-lookup-efficiency-baseline/v0",
   "mode": "research",
   "limit": 0,
-  "minTasks": 756,
-  "minRepositories": 189,
-  "minTaskHitRate": 0.636,
-  "minFieldHitRate": 0.814,
+  "minTasks": 1044,
+  "minRepositories": 261,
+  "minTaskHitRate": 0.616,
+  "minFieldHitRate": 0.801,
   "maxDotrepoToScrapeProxyRatio": 2.4,
   "minIntentHitRate": {
-    "documentation": 0.306,
-    "execution": 0.666,
+    "documentation": 0.318,
+    "execution": 0.616,
     "overview": 0.9,
-    "security": 0.65
+    "security": 0.613
   }
 }

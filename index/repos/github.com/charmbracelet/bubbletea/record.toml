@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/charmbracelet/bubbletea"
+generated_at = "2026-06-29T01:19:30.320258Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Bubble Tea"
+description = "The fun, functional and stateful way to build terminal apps."
+homepage = "https://github.com/charmbracelet/bubbletea"
+license = "MIT"
+visibility = "public"
+languages = ["Go"]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "cli",
+    "framework",
+    "elm-architecture",
+    "tui",
+    "functional",
+    "golang",
+    "go",
+    "hacktoberfest",
+]
+
+[docs]
+root = "https://pkg.go.dev/charm.land/bubbletea/v2?tab=doc"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/charmbracelet/bubbletea.git"
+default_branch = "main"
+fork = false
+head_sha = "a23da80847e6fc928febc62114f761403ac5d2f1"
+html_url = "https://github.com/charmbracelet/bubbletea"
+stars = 43428

@@ -1,0 +1,59 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/qbittorrent/qBittorrent"
+generated_at = "2026-06-29T01:19:56.964762Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `.github/workflows/ci_macos.yaml`, `.github/workflows/ci_python.yaml`, `.github/workflows/ci_ubuntu.yaml`, `.github/workflows/ci_windows.yaml`, and `.github/workflows/coverity-scan.yaml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/ci_macos.yaml`, `.github/workflows/ci_ubuntu.yaml`, `.github/workflows/ci_webui.yaml`, and `.github/workflows/ci_windows.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "qBittorrent"
+description = "qBittorrent BitTorrent client"
+homepage = "https://www.qbittorrent.org"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Just",
+    "Objective-C",
+    "Objective-C++",
+    "Python",
+    "Shell",
+]
+topics = [
+    "c-plus-plus",
+    "bittorrent",
+    "torrent",
+    "crossplatform",
+    "bittorrent-client",
+    "torrent-client",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@qbittorrent.org"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/qbittorrent/qBittorrent.git"
+default_branch = "master"
+fork = false
+head_sha = "4d3783a410806294cfb0c7f2f923615f33ff1809"
+html_url = "https://github.com/qbittorrent/qBittorrent"
+stars = 38497

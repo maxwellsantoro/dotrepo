@@ -1,0 +1,55 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/facebookresearch/faiss"
+generated_at = "2026-06-29T01:19:25.720961Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Faiss"
+description = "See CHANGELOG.md for detailed information about latest features."
+homepage = "https://faiss.ai"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Cuda",
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Metal",
+    "Objective-C",
+    "Objective-C++",
+    "Python",
+    "SWIG",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = []
+
+[docs]
+getting_started = "https://github.com/facebookresearch/faiss/wiki/Getting-started"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/facebookresearch/faiss.git"
+default_branch = "main"
+fork = false
+head_sha = "a6f97750aeaf760c72d0526c3a346513823c4a0c"
+html_url = "https://github.com/facebookresearch/faiss"
+stars = 40415

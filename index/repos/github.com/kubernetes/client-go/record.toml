@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kubernetes/client-go"
-generated_at = "2026-06-26T17:37:14.159991Z"
+generated_at = "2026-06-29T01:16:53.955697Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from 
 
 [repo]
 name = "client-go"
-description = "⚠️ **This is an automatically published staged repository for Kubernetes**."
+description = "Go clients for talking to a kubernetes cluster."
 homepage = "https://github.com/kubernetes/client-go"
 license = "Apache-2.0"
 visibility = "public"
@@ -33,6 +33,6 @@ archived = false
 clone_url = "https://github.com/kubernetes/client-go.git"
 default_branch = "master"
 fork = false
-head_sha = "17fd58d111d275a17dca097681a330c4321d23d4"
+head_sha = "ab0d3bd81d327f7974e036a2d895d9bed07c18c7"
 html_url = "https://github.com/kubernetes/client-go"
-stars = 9844
+stars = 9847

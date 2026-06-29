@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/ReactiveX/RxJava"
+generated_at = "2026-06-29T01:18:20.089444Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/gradle_branch.yml`. Inferred `repo.test` from `.github/workflows/gradle_branch.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "RxJava"
+description = "RxJava is a Java VM implementation of Reactive Extensions: a library for composing asynchronous and event-based programs by using observable sequences."
+homepage = "https://dsc.gg/rxjava"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Java",
+    "Shell",
+]
+build = "chmod +x gradlew"
+test = "chmod +x gradlew"
+topics = [
+    "java",
+    "rxjava",
+    "flow",
+    "reactive-streams",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/ReactiveX/RxJava/security/advisories/new"
+
+[docs]
+getting_started = "https://github.com/ReactiveX/RxJava/wiki/Getting-Started"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ReactiveX/RxJava.git"
+default_branch = "4.x"
+fork = false
+head_sha = "aac2c9349b1c60ac88d01b02814a9971a2e51153"
+html_url = "https://github.com/ReactiveX/RxJava"
+stars = 48235

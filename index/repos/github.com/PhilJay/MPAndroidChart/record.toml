@@ -1,0 +1,42 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/PhilJay/MPAndroidChart"
+generated_at = "2026-06-29T01:19:11.203379Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Gradle Setup"
+description = "See the **documentation** for examples and general use of MPAndroidChart."
+homepage = "https://philippjahoda.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = ["Java"]
+topics = [
+    "java",
+    "chart",
+    "graph",
+    "android",
+    "mpandroidchart",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/PhilJay/MPAndroidChart.git"
+default_branch = "master"
+fork = false
+head_sha = "9c7275a0596a7ac0e50ca566e680f7f9d73607af"
+html_url = "https://github.com/PhilJay/MPAndroidChart"
+stars = 38197

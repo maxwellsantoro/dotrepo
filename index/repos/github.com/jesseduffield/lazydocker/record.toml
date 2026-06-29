@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/jesseduffield/lazydocker"
+generated_at = "2026-06-29T01:18:17.671616Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Warp"
+description = "Warp, the intelligent terminal"
+homepage = "https://github.com/jesseduffield/lazydocker"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = []
+
+[docs]
+getting_started = "https://github.com/jesseduffield/lazydocker#installation"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/jesseduffield/lazydocker.git"
+default_branch = "master"
+fork = false
+head_sha = "7e7aadc2071d58031bf2daafca1fbd4093efc23f"
+html_url = "https://github.com/jesseduffield/lazydocker"
+stars = 51509

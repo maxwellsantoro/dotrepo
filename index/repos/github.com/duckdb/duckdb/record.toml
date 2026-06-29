@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/duckdb/duckdb"
+generated_at = "2026-06-29T01:19:44.498458Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/Extensions.yml`. Inferred `repo.test` from `.github/workflows/Extensions.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "discord"
+description = "DuckDB is a high-performance analytical database system."
+homepage = "http://www.duckdb.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CMake",
+    "Julia",
+    "Makefile",
+    "Python",
+    "Shell",
+    "Swift",
+    "TSQL",
+]
+build = """make unittest_release SKIP_BUILD=1 T="--test-flags='--autoloading available --skip-compiled'""""
+test = """make unittest_release SKIP_BUILD=1 T="--test-flags='--autoloading available --skip-compiled'""""
+topics = [
+    "sql",
+    "database",
+    "olap",
+    "analytics",
+    "embedded-database",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/duckdb/duckdb/security/advisories/new"
+
+[docs]
+root = "https://duckdb.org/docs/current/sql/introduction"
+getting_started = "https://duckdb.org/docs/installation/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/duckdb/duckdb.git"
+default_branch = "main"
+fork = false
+head_sha = "ce431923305bff838c951e324f694d56006a9fba"
+html_url = "https://github.com/duckdb/duckdb"
+stars = 39086

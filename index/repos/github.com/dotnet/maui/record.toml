@@ -1,0 +1,68 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/dotnet/maui"
+generated_at = "2026-06-29T01:19:07.106096Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "NET Multi-platform App UI"
+description = ".NET Multi-platform App UI (.NET MAUI) is a cross-platform framework for creating mobile and desktop apps with C# and XAML."
+homepage = "https://dot.net/maui"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C#",
+    "CMake",
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "Swift",
+    "TypeScript",
+]
+topics = [
+    "dotnet",
+    "maui",
+    "multi-platform",
+    "user-interface",
+    "microsoft",
+    "hacktoberfest",
+    "android",
+    "desktop",
+    "ios",
+    "maccatalyst",
+    "mobile",
+    "winui",
+    "winui3",
+]
+
+[owners]
+maintainers = ["@dotnet/dotnet-maui-reviewers"]
+team = "@dotnet/dotnet-maui-reviewers"
+security_contact = "secure@microsoft.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/dotnet/maui.git"
+default_branch = "main"
+fork = false
+head_sha = "fced7612a970b09e3ba5f00ad6f03be564f64d8b"
+html_url = "https://github.com/dotnet/maui"
+stars = 23278

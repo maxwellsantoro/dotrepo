@@ -1,0 +1,88 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ClickHouse/ClickHouse"
+generated_at = "2026-06-29T01:19:04.11241Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "ClickHouse® is an open-source column-oriented database management system that allows generating analytical data reports in real-time."
+description = "Join us for the ClickHouse **26.5** Release Call on May 21, 2026."
+homepage = "https://clickhouse.com"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "ANTLR",
+    "Assembly",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "CSS",
+    "Cap'n Proto",
+    "Clojure",
+    "DIGITAL Command Language",
+    "Dockerfile",
+    "GAP",
+    "Go",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Jinja",
+    "Makefile",
+    "PHP",
+    "PLpgSQL",
+    "Perl",
+    "Python",
+    "Rust",
+    "Shell",
+    "TypeScript",
+    "Vim Script",
+]
+topics = [
+    "dbms",
+    "olap",
+    "analytics",
+    "sql",
+    "big-data",
+    "mpp",
+    "clickhouse",
+    "hacktoberfest",
+    "cpp",
+    "rust",
+    "ai",
+    "cloud-native",
+    "database",
+    "distributed",
+    "embedded",
+    "lakehouse",
+    "self-hosted",
+]
+
+[owners]
+maintainers = []
+security_contact = "trust@clickhouse.com"
+
+[docs]
+root = "https://clickhouse.com/docs/"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ClickHouse/ClickHouse.git"
+default_branch = "master"
+fork = false
+head_sha = "6a000dd97b088e4a79c5f40fc1ca35c62857e44e"
+html_url = "https://github.com/ClickHouse/ClickHouse"
+stars = 48328

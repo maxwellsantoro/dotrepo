@@ -1,0 +1,74 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/milvus-io/milvus"
+generated_at = "2026-06-29T01:19:20.551151Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "milvus banner"
+description = "🐦 Milvus is a high-performance vector database built for scale."
+homepage = "https://milvus.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "ANTLR",
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Dockerfile",
+    "Go",
+    "Groovy",
+    "HTML",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "anns",
+    "nearest-neighbor-search",
+    "faiss",
+    "vector-search",
+    "image-search",
+    "hnsw",
+    "vector-database",
+    "embedding-database",
+    "embedding-store",
+    "vector-store",
+    "vector-similarity",
+    "embedding-similarity",
+    "distributed",
+    "golang",
+    "llm",
+    "cloud-native",
+    "diskann",
+    "rag",
+]
+
+[docs]
+root = "https://milvus.io/docs"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/milvus-io/milvus.git"
+default_branch = "master"
+fork = false
+head_sha = "4018b29458dc5538eae9a9f0bfe3b561c7b41797"
+html_url = "https://github.com/milvus-io/milvus"
+stars = 44996

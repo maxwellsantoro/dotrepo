@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/NickeManarin/ScreenToGif"
+generated_at = "2026-06-29T01:18:24.158637Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "screen recorder"
+description = "ScreenToGif 🎬 screentogif.com"
+homepage = "http://www.screentogif.com"
+license = "MS-PL"
+visibility = "public"
+languages = [
+    "C#",
+    "CSS",
+]
+topics = [
+    "gif",
+    "recorder",
+    "editor",
+    "video",
+    "webcam",
+    "sketchboard",
+    "wpf",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/NickeManarin/ScreenToGif.git"
+default_branch = "master"
+fork = false
+head_sha = "27a49c3be69486f2db964290f4f2274e790fb687"
+html_url = "https://github.com/NickeManarin/ScreenToGif"
+stars = 27178

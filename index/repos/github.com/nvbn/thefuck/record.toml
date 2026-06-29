@@ -1,0 +1,49 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/nvbn/thefuck"
+generated_at = "2026-06-29T01:17:35.297168Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "The Fuck"
+description = "*The Fuck* is a magnificent app, inspired by a @liamosaur tweet, that corrects errors in previous console commands."
+homepage = "https://github.com/nvbn/thefuck"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Dockerfile",
+    "PowerShell",
+    "Python",
+    "Shell",
+]
+test = "coverage run --source=thefuck,tests -m pytest -v --capture=sys tests"
+topics = [
+    "python",
+    "shell",
+]
+
+[docs]
+getting_started = "https://github.com/nvbn/thefuck/wiki/Installation"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/nvbn/thefuck.git"
+default_branch = "master"
+fork = false
+head_sha = "c7e7e1d884d3bb241ea6448f72a989434c2a35ec"
+html_url = "https://github.com/nvbn/thefuck"
+stars = 97448

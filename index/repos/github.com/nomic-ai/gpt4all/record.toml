@@ -1,0 +1,57 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/nomic-ai/gpt4all"
+generated_at = "2026-06-29T01:16:33.716001Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "GPT4All"
+description = "Now with support for DeepSeek R1 Distillations"
+homepage = "https://nomic.ai/gpt4all"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "JavaScript",
+    "Makefile",
+    "Objective-C++",
+    "PowerShell",
+    "Python",
+    "QML",
+    "Qt Script",
+    "Shell",
+]
+topics = [
+    "llm-inference",
+    "ai-chat",
+]
+
+[docs]
+root = "https://docs.gpt4all.io"
+getting_started = "https://docs.gpt4all.io/gpt4all_desktop/quickstart.html#quickstart"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/nomic-ai/gpt4all.git"
+default_branch = "main"
+fork = false
+head_sha = "b666d16db5aeab8b91aaf7963adcee9c643734d7"
+html_url = "https://github.com/nomic-ai/gpt4all"
+stars = 77379

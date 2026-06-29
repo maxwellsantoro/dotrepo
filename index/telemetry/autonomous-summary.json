@@ -4,8 +4,8 @@
   "failureClassesByEcosystem": {},
   "failureEcosystems": {},
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-06-29T00:55:19Z",
-  "lastRunAt": "2026-06-29T00:55:19Z",
+  "generatedAt": "2026-06-29T01:17:01Z",
+  "lastRunAt": "2026-06-29T01:17:01Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
@@ -26,15 +26,15 @@
   "rates": {
     "adjudicationRate": 0.0,
     "failureRate": 0.0,
-    "promotionRate": 0.2,
+    "promotionRate": 0.5,
     "writeRate": 1.0,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
-    "adjudicationCallBudget": 10,
+    "adjudicationCallBudget": 20,
     "adjudicationCalls": 0,
-    "crawled": 5,
+    "crawled": 10,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -48,30 +48,30 @@
   "recentWindowRepositoriesByAdjudicationTier": {
     "deterministic": 4
   },
-  "recentWindowRunCount": 1,
+  "recentWindowRunCount": 2,
   "recurringFailures": [],
   "regressionFixtureCandidates": [],
   "repositoriesByAdjudicationTier": {
     "deterministic": 4
   },
-  "runCount": 1,
+  "runCount": 2,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
-    "adjudicationCallBudget": 10,
+    "adjudicationCallBudget": 20,
     "adjudicationCalls": 0,
-    "crawled": 5,
+    "crawled": 10,
     "discoveryQueued": 0,
     "failed": 0,
-    "promoted": 1,
-    "qualityReprocessQueued": 5,
+    "promoted": 5,
+    "qualityReprocessQueued": 10,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
     "tokensUsed": 0,
-    "written": 5,
-    "zeroModelRuns": 5
+    "written": 10,
+    "zeroModelRuns": 10
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,

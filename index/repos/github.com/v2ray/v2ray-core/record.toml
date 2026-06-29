@@ -1,0 +1,57 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/v2ray/v2ray-core"
+generated_at = "2026-06-29T01:19:09.567461Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Move To https://github.com/v2fly/v2ray-core"
+description = "Project V is a set of network tools that help you to build your own computer network."
+homepage = "https://www.v2ray.com/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Assembly",
+    "Dockerfile",
+    "Go",
+    "Shell",
+    "Starlark",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "v2ray",
+    "shadowsocks",
+    "golang",
+    "proxy",
+    "socks",
+    "socks5",
+    "http-proxy",
+    "vmess",
+]
+
+[owners]
+maintainers = []
+security_contact = "dev@v2fly.org"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/v2ray/v2ray-core.git"
+default_branch = "master"
+fork = false
+head_sha = "d80440f3d57b45c829dbf513306f7adf9a0f3f76"
+html_url = "https://github.com/v2ray/v2ray-core"
+stars = 46898
