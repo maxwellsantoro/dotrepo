@@ -5230,11 +5230,23 @@ repository = "https://github.com/example/another-related"
         .as_ref()
         .expect("relations present for overlay");
     assert_eq!(rels.references.len(), 0);
-    assert!(rels.links.len() >= 2, "should have fork + manifest declared link");
-    let has_fork = rels.links.iter().any(|l| l.kind == RelationKind::Fork && l.target == "github.com/example/upstream");
-    let has_manifest = rels.links.iter().any(|l| l.kind == RelationKind::Related && l.target.contains("another-related"));
+    assert!(
+        rels.links.len() >= 2,
+        "should have fork + manifest declared link"
+    );
+    let has_fork = rels
+        .links
+        .iter()
+        .any(|l| l.kind == RelationKind::Fork && l.target == "github.com/example/upstream");
+    let has_manifest = rels
+        .links
+        .iter()
+        .any(|l| l.kind == RelationKind::Related && l.target.contains("another-related"));
     assert!(has_fork, "must have discovered fork link");
-    assert!(has_manifest, "must have discovered related link from package manifest (Cargo.toml)");
+    assert!(
+        has_manifest,
+        "must have discovered related link from package manifest (Cargo.toml)"
+    );
 
     // evidence must record the discovery
     let ev = plan.evidence_text.as_deref().expect("evidence for overlay");
@@ -5245,7 +5257,8 @@ repository = "https://github.com/example/another-related"
     );
 
     // still validates
-    validate_manifest(&root, &plan.manifest).expect("discovered relations must not break validation");
+    validate_manifest(&root, &plan.manifest)
+        .expect("discovered relations must not break validation");
 
     // Exercise public relations response + traversal for a discovered link (roundtrip)
     // Use produced manifests from import (not hand-crafted stubs) for both fork and upstream
@@ -5261,26 +5274,44 @@ repository = "https://github.com/example/another-related"
 
     // Produce upstream record via actual import call (minimal files + import)
     let up_root = temp_dir("upstream-materialize");
-    fs::write(up_root.join("README.md"), "# Upstream\n\nOriginal project.\n").expect("up readme");
+    fs::write(
+        up_root.join("README.md"),
+        "# Upstream\n\nOriginal project.\n",
+    )
+    .expect("up readme");
     let up_plan = import_repository_with_options(
         &up_root,
         ImportMode::Overlay,
         Some("https://github.com/example/upstream"),
-        &ImportOptions { generated_at: Some("2026-06-28T00:00:00Z".into()), github: None },
-    ).expect("upstream import produces manifest");
+        &ImportOptions {
+            generated_at: Some("2026-06-28T00:00:00Z".into()),
+            github: None,
+        },
+    )
+    .expect("upstream import produces manifest");
     let up_dir = index_root.join("repos/github.com/example/upstream");
     fs::create_dir_all(&up_dir).expect("upstream rec dir");
-    fs::write(up_dir.join("record.toml"), &up_plan.manifest_text).expect("upstream produced record written");
-    fs::write(up_dir.join("evidence.md"), up_plan.evidence_text.clone().unwrap_or_default()).expect("upstream ev");
+    fs::write(up_dir.join("record.toml"), &up_plan.manifest_text)
+        .expect("upstream produced record written");
+    fs::write(
+        up_dir.join("evidence.md"),
+        up_plan.evidence_text.clone().unwrap_or_default(),
+    )
+    .expect("upstream ev");
 
     let fresh = PublicFreshness {
         generated_at: "2026-06-28T00:00:00Z".into(),
         snapshot_digest: "sha256:discoverytest".into(),
         stale_after: None,
     };
-    let rel_resp =
-        public_repository_relations(&index_root, "github.com", "example", "my-fork", fresh.clone())
-            .expect("public relations succeeds for discovered link");
+    let rel_resp = public_repository_relations(
+        &index_root,
+        "github.com",
+        "example",
+        "my-fork",
+        fresh.clone(),
+    )
+    .expect("public relations succeeds for discovered link");
     assert!(
         rel_resp.relation_count >= 1,
         "public rels should surface the discovered fork"
@@ -5289,38 +5320,84 @@ repository = "https://github.com/example/another-related"
         .references
         .iter()
         .any(|item| item.relationship == "fork" && item.target.contains("upstream"));
-    assert!(has_fork, "fork relation with discovered target must appear in public response");
+    assert!(
+        has_fork,
+        "fork relation with discovered target must appear in public response"
+    );
 
     // inverse on upstream
-    let up_resp = public_repository_relations(&index_root, "github.com", "example", "upstream", fresh)
-        .expect("public rels for upstream");
+    let up_resp =
+        public_repository_relations(&index_root, "github.com", "example", "upstream", fresh)
+            .expect("public rels for upstream");
     let has_forked_by = up_resp
         .references
         .iter()
         .any(|item| item.relationship == "forked_by" && item.target.contains("my-fork"));
-    assert!(has_forked_by, "inverse forked_by must be produced for discovered fork relation");
+    assert!(
+        has_forked_by,
+        "inverse forked_by must be produced for discovered fork relation"
+    );
 
     // Drive real CLI public relations on the generated discovered records (produced manifests), capture to scratch
-    let scratch = std::env::var("GROK_SCRATCH").unwrap_or_else(|_| "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/grok-goal-6676e9c7c17c/implementer".to_string());
+    let scratch = std::env::var("GROK_SCRATCH").unwrap_or_else(|_| {
+        "/var/folders/jr/6v5yh0jx5y51pyj48q7_x8qw0000gn/T/grok-goal-6676e9c7c17c/implementer"
+            .to_string()
+    });
     let cli_out_fork = format!("{}/cli-relations-generated-fork.out", scratch);
     let cli_out_up = format!("{}/cli-relations-generated-upstream.out", scratch);
     let _ = std::fs::create_dir_all(&scratch);
     // run cli for fork (should show fork link)
     let status_fork = std::process::Command::new("cargo")
-        .args(["run", "-q", "-p", "dotrepo-cli", "--", "public", "relations", "--index-root", index_root.to_str().unwrap(), "github.com", "example", "my-fork", "--base-path", "/"])
+        .args([
+            "run",
+            "-q",
+            "-p",
+            "dotrepo-cli",
+            "--",
+            "public",
+            "relations",
+            "--index-root",
+            index_root.to_str().unwrap(),
+            "github.com",
+            "example",
+            "my-fork",
+            "--base-path",
+            "/",
+        ])
         .output()
         .expect("spawn cli relations for fork");
     std::fs::write(&cli_out_fork, &status_fork.stdout).ok();
     let out_fork = String::from_utf8_lossy(&status_fork.stdout);
-    assert!(out_fork.contains("fork") || out_fork.contains("Fork"), "CLI relations on generated discovered record must mention fork");
+    assert!(
+        out_fork.contains("fork") || out_fork.contains("Fork"),
+        "CLI relations on generated discovered record must mention fork"
+    );
     // run cli for upstream (should show inverse forked_by)
     let status_up = std::process::Command::new("cargo")
-        .args(["run", "-q", "-p", "dotrepo-cli", "--", "public", "relations", "--index-root", index_root.to_str().unwrap(), "github.com", "example", "upstream", "--base-path", "/"])
+        .args([
+            "run",
+            "-q",
+            "-p",
+            "dotrepo-cli",
+            "--",
+            "public",
+            "relations",
+            "--index-root",
+            index_root.to_str().unwrap(),
+            "github.com",
+            "example",
+            "upstream",
+            "--base-path",
+            "/",
+        ])
         .output()
         .expect("spawn cli relations for upstream");
     std::fs::write(&cli_out_up, &status_up.stdout).ok();
     let out_up = String::from_utf8_lossy(&status_up.stdout);
-    assert!(out_up.contains("forked_by") || out_up.contains("Forked"), "CLI relations on upstream of generated fork must show inverse forked_by");
+    assert!(
+        out_up.contains("forked_by") || out_up.contains("Forked"),
+        "CLI relations on upstream of generated fork must show inverse forked_by"
+    );
 
     fs::remove_dir_all(index_root).expect("index temp removed");
 
@@ -5330,7 +5407,10 @@ repository = "https://github.com/example/another-related"
 
 #[test]
 fn trust_confidence_boost_produces_expected_values_and_search_ranking_uses_it() {
-    use crate::{search_ranking_from_profile, trust_confidence_boost, public_profile_search, PublicProfileSearchOptions, PublicFreshness};
+    use crate::{
+        public_profile_search, search_ranking_from_profile, trust_confidence_boost,
+        PublicFreshness, PublicProfileSearchOptions,
+    };
 
     assert_eq!(trust_confidence_boost(Some("high")), 3);
     assert_eq!(trust_confidence_boost(Some("HIGH")), 3);

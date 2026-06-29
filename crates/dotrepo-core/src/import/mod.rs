@@ -2072,26 +2072,49 @@ fn trimmed_non_empty_for_target(s: &str) -> Option<&str> {
 }
 
 fn normalize_relation_target(s: &str) -> String {
-    let s = s.trim().trim_end_matches('/').trim_end_matches(".git");
+    let s = s.trim();
     if s.is_empty() {
         return String::new();
     }
-    if let Some(rest) = s.strip_prefix("https://github.com/") {
-        format!("github.com/{}", rest.trim_start_matches('/'))
-    } else if let Some(rest) = s.strip_prefix("http://github.com/") {
-        format!("github.com/{}", rest.trim_start_matches('/'))
-    } else if let Some(rest) = s.strip_prefix("github.com/") {
-        format!("github.com/{}", rest)
-    } else if s.contains('/') && !s.contains(' ') {
-        // bare "owner/repo" -> github.com/owner/repo
-        if s.starts_with("github.com/") {
-            s.to_string()
-        } else {
-            format!("github.com/{}", s)
-        }
+
+    let lowercase = s.to_ascii_lowercase();
+    let rest = if let Some(position) = lowercase.find("github.com/") {
+        &s[position + "github.com/".len()..]
+    } else if s.contains('/') && !s.chars().any(char::is_whitespace) {
+        s
     } else {
-        String::new()
+        return String::new();
+    };
+
+    let mut segments = rest.trim_start_matches('/').split('/');
+    let Some(owner) = segments
+        .next()
+        .filter(|segment| valid_github_path_segment(segment))
+    else {
+        return String::new();
+    };
+    let Some(repo_with_suffix) = segments.next() else {
+        return String::new();
+    };
+    let repo = repo_with_suffix
+        .split(['?', '#'])
+        .next()
+        .unwrap_or_default()
+        .trim_end_matches(".git");
+    if !valid_github_path_segment(repo) {
+        return String::new();
     }
+
+    format!("github.com/{owner}/{repo}")
+}
+
+fn valid_github_path_segment(segment: &str) -> bool {
+    !segment.is_empty()
+        && segment != "."
+        && segment != ".."
+        && segment.chars().all(|character| {
+            character.is_ascii_alphanumeric() || matches!(character, '-' | '_' | '.')
+        })
 }
 
 /// Conservative discovery from package manifests (Cargo.toml / package.json) + README
@@ -2114,18 +2137,23 @@ fn discover_relations_from_manifest_files(root: &Path) -> Option<(Vec<RelationLi
                             if let Some(tgt) = extract_github_target_from_str(v) {
                                 let already = links.iter().any(|l: &RelationLink| l.target == tgt);
                                 if !tgt.is_empty() && !already {
-                                    let kind = if key == "repository" { RelationKind::Related } else { RelationKind::Related };
                                     links.push(RelationLink {
-                                        kind,
+                                        kind: RelationKind::Related,
                                         target: tgt.clone(),
                                         notes: Some(format!("Declared {} in Cargo.toml.", key)),
                                         trust: Trust {
                                             confidence: Some("low".to_string()),
-                                            provenance: vec!["declared".to_string(), "manifest".to_string()],
+                                            provenance: vec![
+                                                "declared".to_string(),
+                                                "manifest".to_string(),
+                                            ],
                                             notes: None,
                                         },
                                     });
-                                    notes.push(format!("Discovered related relation to {} from Cargo.toml {}.", tgt, key));
+                                    notes.push(format!(
+                                        "Discovered related relation to {} from Cargo.toml {}.",
+                                        tgt, key
+                                    ));
                                 }
                             }
                         }
@@ -2136,21 +2164,31 @@ fn discover_relations_from_manifest_files(root: &Path) -> Option<(Vec<RelationLi
             // fallback crude scan
             for line in text.lines() {
                 let lower = line.to_ascii_lowercase();
-                if (lower.contains("repository") || lower.contains("homepage")) && lower.contains("github.com") {
+                if (lower.contains("repository") || lower.contains("homepage"))
+                    && lower.contains("github.com")
+                {
                     if let Some(url) = extract_first_github_url(line) {
                         let tgt = normalize_relation_target(&url);
                         if !tgt.is_empty() && !links.iter().any(|l| l.target == tgt) {
                             links.push(RelationLink {
                                 kind: RelationKind::Related,
                                 target: tgt.clone(),
-                                notes: Some("Declared homepage/repository in Cargo.toml.".to_string()),
+                                notes: Some(
+                                    "Declared homepage/repository in Cargo.toml.".to_string(),
+                                ),
                                 trust: Trust {
                                     confidence: Some("low".to_string()),
-                                    provenance: vec!["declared".to_string(), "manifest".to_string()],
+                                    provenance: vec![
+                                        "declared".to_string(),
+                                        "manifest".to_string(),
+                                    ],
                                     notes: None,
                                 },
                             });
-                            notes.push(format!("Discovered related relation to {} from Cargo.toml.", tgt));
+                            notes.push(format!(
+                                "Discovered related relation to {} from Cargo.toml.",
+                                tgt
+                            ));
                             break;
                         }
                     }
@@ -2165,7 +2203,11 @@ fn discover_relations_from_manifest_files(root: &Path) -> Option<(Vec<RelationLi
             for key in ["repository", "homepage"] {
                 let v = if key == "repository" {
                     val.get(key).and_then(|r| {
-                        if let Some(s) = r.as_str() { Some(s.to_string()) } else { r.get("url").and_then(|u| u.as_str()).map(|s| s.to_string()) }
+                        if let Some(s) = r.as_str() {
+                            Some(s.to_string())
+                        } else {
+                            r.get("url").and_then(|u| u.as_str()).map(|s| s.to_string())
+                        }
                     })
                 } else {
                     val.get(key).and_then(|h| h.as_str()).map(|s| s.to_string())
@@ -2180,11 +2222,17 @@ fn discover_relations_from_manifest_files(root: &Path) -> Option<(Vec<RelationLi
                                     notes: Some(format!("Declared {} in package.json.", key)),
                                     trust: Trust {
                                         confidence: Some("low".to_string()),
-                                        provenance: vec!["declared".to_string(), "manifest".to_string()],
+                                        provenance: vec![
+                                            "declared".to_string(),
+                                            "manifest".to_string(),
+                                        ],
                                         notes: None,
                                     },
                                 });
-                                notes.push(format!("Discovered related relation to {} from package.json {}.", tgt, key));
+                                notes.push(format!(
+                                    "Discovered related relation to {} from package.json {}.",
+                                    tgt, key
+                                ));
                             }
                         }
                     }
@@ -2194,10 +2242,18 @@ fn discover_relations_from_manifest_files(root: &Path) -> Option<(Vec<RelationLi
     }
 
     // README cross-links for homepage-style or "see also" / related github (using markdown extractor if available)
-    if let Ok(readme) = fs::read_to_string(root.join("README.md")).or_else(|_| fs::read_to_string(root.join("README"))) {
+    if let Ok(readme) = fs::read_to_string(root.join("README.md"))
+        .or_else(|_| fs::read_to_string(root.join("README")))
+    {
         let lowered = readme.to_ascii_lowercase();
-        if lowered.contains("github.com") && (lowered.contains("see also") || lowered.contains("related") || lowered.contains("homepage") || lowered.contains("fork")) {
-            for (label, url) in extract_markdown_links(&readme) {  // use existing parser (in scope via pub(crate) reexport)
+        if lowered.contains("github.com")
+            && (lowered.contains("see also")
+                || lowered.contains("related")
+                || lowered.contains("homepage")
+                || lowered.contains("fork"))
+        {
+            for (label, url) in extract_markdown_links(&readme) {
+                // use existing parser (in scope via pub(crate) reexport)
                 if url.contains("github.com") {
                     if let Some(tgt) = extract_github_target_from_str(&url) {
                         if !tgt.is_empty() && !links.iter().any(|l| l.target == tgt) {
@@ -2211,7 +2267,10 @@ fn discover_relations_from_manifest_files(root: &Path) -> Option<(Vec<RelationLi
                                     notes: None,
                                 },
                             });
-                            notes.push(format!("Discovered related relation to {} from README cross-link.", tgt));
+                            notes.push(format!(
+                                "Discovered related relation to {} from README cross-link.",
+                                tgt
+                            ));
                             break;
                         }
                     }
@@ -2240,7 +2299,11 @@ fn extract_first_github_url(text: &str) -> Option<String> {
                     break;
                 }
             }
-            let url = rest[..end].trim_matches(|c: char| matches!(c, '"' | '\'' | ',' | ' ' | ')' | ']' | '}' | '>' | '<')).to_string();
+            let url = rest[..end]
+                .trim_matches(|c: char| {
+                    matches!(c, '"' | '\'' | ',' | ' ' | ')' | ']' | '}' | '>' | '<')
+                })
+                .to_string();
             if url.contains('/') {
                 return Some(url);
             }
@@ -2252,9 +2315,47 @@ fn extract_first_github_url(text: &str) -> Option<String> {
 fn extract_github_target_from_str(s: &str) -> Option<String> {
     if s.contains("github.com") {
         let t = normalize_relation_target(s);
-        if !t.is_empty() { Some(t) } else { None }
+        if !t.is_empty() {
+            Some(t)
+        } else {
+            None
+        }
     } else {
         None
+    }
+}
+
+#[cfg(test)]
+mod relation_target_tests {
+    use super::normalize_relation_target;
+
+    #[test]
+    fn github_relation_targets_are_reduced_to_repository_identity() {
+        for (input, expected) in [
+            (
+                "https://github.com/syncthing/syncthing/tree/main?tab=readme-ov-file#related",
+                "github.com/syncthing/syncthing",
+            ),
+            (
+                "git+https://github.com/example/project.git",
+                "github.com/example/project",
+            ),
+            ("example/project#readme", "github.com/example/project"),
+        ] {
+            assert_eq!(normalize_relation_target(input), expected);
+        }
+    }
+
+    #[test]
+    fn malformed_github_relation_targets_are_rejected() {
+        for input in [
+            "https://github.com/syncthing",
+            "https://github.com//syncthing",
+            "https://github.com/syncthing/%2F",
+            "not a repository",
+        ] {
+            assert_eq!(normalize_relation_target(input), "");
+        }
     }
 }
 

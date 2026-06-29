@@ -86,10 +86,21 @@ fn offline_writeback_from_import_fixture_validates_index() {
     let manifest = parse_manifest(&record_text).expect("record parses");
     assert_eq!(manifest.repo.name, "Harbor");
     // end-to-end: discover + links produced in manifest/evidence via apply_crawl_writeback with fork facts
-    let rels = manifest.relations.as_ref().expect("relations present after writeback with fork facts");
-    assert!(rels.links.iter().any(|l| l.kind == dotrepo_schema::RelationKind::Fork && l.target.contains("upstream")), "discovered fork link must be in produced manifest");
+    let rels = manifest
+        .relations
+        .as_ref()
+        .expect("relations present after writeback with fork facts");
+    assert!(
+        rels.links
+            .iter()
+            .any(|l| l.kind == dotrepo_schema::RelationKind::Fork && l.target.contains("upstream")),
+        "discovered fork link must be in produced manifest"
+    );
     let ev_text = fs::read_to_string(&evidence_path).expect("evidence read");
-    assert!(ev_text.contains("Discovered fork-of relation"), "evidence must record the discovered relation from fork facts");
+    assert!(
+        ev_text.contains("Discovered fork-of relation"),
+        "evidence must record the discovered relation from fork facts"
+    );
 
     assert!(fs::metadata(&evidence_path).is_ok());
     assert!(validate_index_root(&index_root)

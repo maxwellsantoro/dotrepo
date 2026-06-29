@@ -15,8 +15,8 @@ use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
     current_timestamp_rfc3339, import_repository_with_options,
     infer_docs_root_from_external_homepage, promote_to_verified, run_import_escalation,
-    score_import_fields, validate_manifest, verify_import_plan, AdjudicationProvider, ImportMode,
-    GitHubSnapshotFacts, ImportOptions, TieredAdjudicationProviders,
+    score_import_fields, validate_manifest, verify_import_plan, AdjudicationProvider,
+    GitHubSnapshotFacts, ImportMode, ImportOptions, TieredAdjudicationProviders,
 };
 use dotrepo_schema::{render_manifest, Manifest};
 use std::fs;
