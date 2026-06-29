@@ -26,14 +26,14 @@ def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path
         "--public-root",
         str(public_dir),
     ]
-    assert command[command.index("--min-profiles") + 1] == "157"
-    assert command[command.index("--min-high-signal") + 1] == "107"
+    assert command[command.index("--min-profiles") + 1] == "173"
+    assert command[command.index("--min-high-signal") + 1] == "116"
     assert command[command.index("--max-conflict-rate") + 1] == "0.0"
     assert command[command.index("--max-malformed-profiles") + 1] == "0"
     assert str(output_root / "public-profile-coverage.json") in command
     assert str(output_root / "public-profile-coverage.md") in command
-    assert "hasBuild=118" in command
-    assert "hasDocs=63" in command
+    assert "hasBuild=128" in command
+    assert "hasDocs=68" in command
 
 
 def test_profile_coverage_baseline_is_well_formed() -> None:
@@ -63,9 +63,9 @@ def test_release_gate_applies_index_growth_tranche_baseline(tmp_path: Path) -> N
     )
     assert command[command.index("--target-count") + 1] == "100"
     assert command[command.index("--min-selected") + 1] == "100"
-    assert command[command.index("--current-high-signal") + 1] == "107"
+    assert command[command.index("--current-high-signal") + 1] == "116"
     assert command[command.index("--milestone-high-signal-target") + 1] == "500"
-    assert command[command.index("--min-planned-high-signal-capacity") + 1] == "207"
+    assert command[command.index("--min-planned-high-signal-capacity") + 1] == "216"
     assert str(output_root / "index-growth-targets.txt") in command
     assert str(output_root / "index-growth-plan.json") in command
     assert str(output_root / "index-growth-plan.md") in command
@@ -104,8 +104,8 @@ def test_release_gate_builds_and_measures_research_lookup_workload(
     assert build[build.index("--limit") + 1] == "0"
     assert str(output_root / "public-lookup-workload.json") in build
     assert "scripts/measure_public_lookup_efficiency.py" in measure
-    assert measure[measure.index("--min-tasks") + 1] == "628"
-    assert measure[measure.index("--min-repositories") + 1] == "157"
+    assert measure[measure.index("--min-tasks") + 1] == "692"
+    assert measure[measure.index("--min-repositories") + 1] == "173"
     assert measure[measure.index("--min-task-hit-rate") + 1] == "0.65"
     assert measure[measure.index("--min-field-hit-rate") + 1] == "0.826"
     assert "overview=0.9" in measure

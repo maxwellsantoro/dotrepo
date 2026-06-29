@@ -1,0 +1,80 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/oven-sh/bun"
+generated_at = "2026-06-29T00:42:41.960072Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Bun"
+description = "Bun is an all-in-one toolkit for JavaScript and TypeScript apps."
+homepage = "https://bun.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Linker Script",
+    "MDX",
+    "Makefile",
+    "Nix",
+    "Objective-C",
+    "Perl",
+    "PowerShell",
+    "Python",
+    "RenderScript",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "Svelte",
+    "TypeScript",
+]
+test = "bun install --cwd test"
+topics = [
+    "bun",
+    "bundler",
+    "javascript",
+    "javascriptcore",
+    "jsx",
+    "nodejs",
+    "npm",
+    "react",
+    "transpiler",
+    "typescript",
+    "zig",
+    "ziglang",
+]
+
+[owners]
+maintainers = [
+    "@Jarred-Sumner",
+    "@alii",
+]
+security_contact = "security@bun.com"
+
+[docs]
+root = "https://bun.com/docs"
+getting_started = "https://bun.com/docs/installation#cpu-requirements-and-baseline-builds"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/oven-sh/bun.git"
+default_branch = "main"
+fork = false
+head_sha = "20d649ff1792653d721cf3d24aacebe351e74fc1"
+html_url = "https://github.com/oven-sh/bun"
+stars = 93507

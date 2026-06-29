@@ -3,8 +3,8 @@ schema = "dotrepo/v0.1"
 [record]
 mode = "overlay"
 status = "verified"
-source = "https://github.com/launchbadge/sqlx"
-generated_at = "2026-04-20T13:10:55.061953Z"
+source = "https://github.com/transact-rs/sqlx"
+generated_at = "2026-06-29T00:45:27.42207Z"
 
 [record.trust]
 confidence = "high"
@@ -17,7 +17,7 @@ notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` f
 [repo]
 name = "SQLx"
 description = "🧰 The Rust SQL Toolkit"
-homepage = "https://github.com/launchbadge/sqlx"
+homepage = "https://github.com/transact-rs/sqlx"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
@@ -47,9 +47,9 @@ references = []
 
 [x.github]
 archived = false
-clone_url = "https://github.com/launchbadge/sqlx.git"
+clone_url = "https://github.com/transact-rs/sqlx.git"
 default_branch = "main"
 fork = false
-head_sha = "b180eba9012c486e1c46d6aaf156d8f79ab37cdc"
-html_url = "https://github.com/launchbadge/sqlx"
-stars = 16905
+head_sha = "3da582ad1dca5054ec8eda1c87b3b16ca079f47a"
+html_url = "https://github.com/transact-rs/sqlx"
+stars = 17224

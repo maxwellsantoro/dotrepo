@@ -1,0 +1,65 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/microsoft/terminal"
+generated_at = "2026-06-29T00:47:25.218129Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Welcome to the Windows Terminal, Console and Command-Line repo"
+description = "This repository contains the source code for:"
+homepage = "https://github.com/microsoft/terminal"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "HLSL",
+    "HTML",
+    "JavaScript",
+    "Jupyter Notebook",
+    "PowerShell",
+    "Python",
+    "Roff",
+]
+topics = [
+    "console",
+    "terminal",
+    "cmd",
+    "wsl",
+    "windows-console",
+    "command-line",
+    "windows-terminal",
+    "contributions-welcome",
+    "good-first-issue",
+    "windows",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = []
+security_contact = "secure@microsoft.com"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/microsoft/terminal.git"
+default_branch = "main"
+fork = false
+head_sha = "dc4ce1c096c07c23e1271f62b781a29b0746887d"
+html_url = "https://github.com/microsoft/terminal"
+stars = 103737

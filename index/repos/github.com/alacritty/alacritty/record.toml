@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/alacritty/alacritty"
+generated_at = "2026-06-29T00:47:14.26944Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Alacritty"
+description = "Alacritty is a modern terminal emulator that comes with sensible defaults, but allows for extensive configuration."
+homepage = "https://alacritty.org"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "GLSL",
+    "Makefile",
+    "Rust",
+    "Shell",
+]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
+topics = [
+    "terminal-emulators",
+    "opengl",
+    "gpu",
+    "rust",
+    "vte",
+    "terminal",
+    "linux",
+    "macos",
+    "windows",
+    "bsd",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/alacritty/alacritty.git"
+default_branch = "master"
+fork = false
+head_sha = "bdb72b32eeb074e3a0b8559d8ccac458237474a3"
+html_url = "https://github.com/alacritty/alacritty"
+stars = 64707

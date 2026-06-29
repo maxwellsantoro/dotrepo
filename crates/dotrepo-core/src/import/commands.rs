@@ -846,16 +846,32 @@ fn extract_workflow_run_commands(contents: &str) -> Vec<String> {
     commands
 }
 
+fn looks_like_shell_assignment(command: &str) -> bool {
+    let trimmed = command.trim();
+    if trimmed.is_empty() {
+        return false;
+    }
+    let without_export = trimmed
+        .strip_prefix("export ")
+        .unwrap_or(trimmed)
+        .trim();
+    without_export.contains('=') && !without_export.contains(' ')
+}
+
 fn first_matching_workflow_command(commands: &[String], select_build: bool) -> Option<String> {
     commands.iter().find_map(|command| {
         let trimmed = command.trim();
-        if trimmed.is_empty() {
+        if trimmed.is_empty()
+            || trimmed.starts_with('#')
+            || looks_like_shell_assignment(trimmed)
+        {
             return None;
         }
 
         // Direct clean prefixes (preserve previous behavior for simple cases)
         if select_build {
             for prefix in [
+                "bazel build",
                 "cargo build",
                 "go build",
                 "python -m build",
@@ -870,6 +886,7 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
             }
         } else {
             for prefix in [
+                "bazel test",
                 "cargo test",
                 "go test",
                 "python -m pytest",
@@ -912,6 +929,9 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
             if lower.contains("yarn ") && lower.contains("build") {
                 return Some(trimmed.to_string());
             }
+            if lower.contains("bazel ") && lower.contains("build") {
+                return Some(trimmed.to_string());
+            }
             if lower.contains("make ")
                 && (lower.contains(" build")
                     || lower.trim_start().starts_with("make build")
@@ -923,6 +943,9 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
                 return Some(trimmed.to_string());
             }
         } else {
+            if lower.contains("bazel ") && lower.contains("test") {
+                return Some(trimmed.to_string());
+            }
             if lower.contains(" mvnw")
                 || lower.contains("./mvnw")
                 || (lower.contains("mvn ") && lower.contains("test"))
@@ -1210,6 +1233,41 @@ mod tests {
         assert!(sanitize_import_command("cargo test && rm -rf /").is_none());
         assert!(sanitize_import_command("cargo test | sh").is_none());
         assert!(sanitize_import_command("cargo test > /tmp/out").is_none());
+    }
+
+    #[test]
+    fn workflow_inference_skips_shell_assignments_and_prefers_bazel_build() {
+        use super::{
+            extract_workflow_run_commands, first_matching_workflow_command, infer_workflow_commands,
+            ImportedFile,
+        };
+
+        let workflow = ImportedFile {
+            path: ".github/workflows/bazel.yml".into(),
+            contents: r#"
+jobs:
+  build:
+    steps:
+      - run: bazel_wrapper_args+=(--windows-cross-compile)
+      - run: bazel build //...
+"#
+            .into(),
+        };
+
+        let commands = extract_workflow_run_commands(&workflow.contents);
+        assert_eq!(commands.len(), 2);
+        assert!(first_matching_workflow_command(
+            &["# setup only".to_string()],
+            true
+        )
+        .is_none());
+        assert_eq!(
+            first_matching_workflow_command(&commands, true).as_deref(),
+            Some("bazel build //...")
+        );
+
+        let candidate = infer_workflow_commands(&workflow).expect("workflow");
+        assert_eq!(candidate.build.as_deref(), Some("bazel build //..."));
     }
 
     #[test]

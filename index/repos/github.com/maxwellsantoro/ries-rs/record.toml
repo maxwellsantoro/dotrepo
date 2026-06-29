@@ -2,35 +2,54 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "reviewed"
+status = "imported"
 source = "https://github.com/maxwellsantoro/ries-rs"
-generated_at = "2026-03-16T00:00:00Z"
+generated_at = "2026-06-29T00:45:17.629704Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported", "verified"]
-notes = "Reviewed overlay preserved as visible seed-index context after upstream canonical .repo publication; the live maintainer-owned accepted claim links this overlay to the canonical source of truth."
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "RIES-RS"
-description = "High-performance Rust reimplementation of Robert Munafo's RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it - now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support."
-homepage = "https://github.com/maxwellsantoro/ries-rs"
+name = "ries-rs"
+description = "Rust inverse equation solver for turning a target number into compact algebraic equations."
+homepage = "https://maxwellsantoro.com/projects/ries-rs/app/"
 license = "MIT"
-status = "active"
 visibility = "public"
-languages = ["rust"]
-build = "cargo build --release --locked"
-test = "cargo test --tests --locked"
-topics = ["equation-solver", "inverse-symbolic-calculator", "mathematics", "numerical-methods", "python-bindings", "rust", "scientific-computing", "symbolic-computation", "wasm"]
+languages = [
+    "HTML",
+    "JavaScript",
+    "Python",
+    "Rust",
+    "Shell",
+    "TypeScript",
+]
+build = "cargo build --features wasm --locked"
+topics = [
+    "equation-solver",
+    "mathematics",
+    "numerical-methods",
+    "python-bindings",
+    "rust",
+    "scientific-computing",
+    "symbolic-computation",
+    "wasm",
+    "inverse-symbolic-calculator",
+]
 
 [owners]
 maintainers = ["@maxwellsantoro"]
-security_contact = "unknown"
-
-[docs]
-root = "docs/"
-getting_started = "README.md"
-architecture = "docs/ARCHITECTURE.md"
+security_contact = "https://github.com/maxwellsantoro/ries-rs/security/advisories/new"
 
 [relations]
 references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/maxwellsantoro/ries-rs.git"
+default_branch = "main"
+fork = false
+head_sha = "0904c3ed17d2f221ea565a7b9e15929d9fe8b419"
+html_url = "https://github.com/maxwellsantoro/ries-rs"
+stars = 1

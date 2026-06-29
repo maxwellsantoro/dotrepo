@@ -1,13 +1,11 @@
 # Evidence
 
-- Imported repository name and description from README.md.
-- Imported maintainer candidates from CODEOWNERS.
-- Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands.
-- Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands.
+- Imported repository name, description, and docs entry points from README.md.
+- Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
+- Imported repo.build from go.mod as `go build ./...`.
+- Left `repo.test` unset because `pyproject.toml` and `go.mod` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Set `repo.build` to `cargo build --features wasm --locked` from `.github/workflows/ci.yml` after deterministic escalation.
 - Left `repo.test` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

@@ -1,0 +1,73 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/Significant-Gravitas/AutoGPT"
+generated_at = "2026-06-29T00:47:18.973063Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.test` unset because `.github/workflows/classic-autogpt-ci.yml`, `.github/workflows/classic-autogpt-docker-ci.yml`, and `.github/workflows/classic-forge-ci.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "AutoGPT"
+description = "**AutoGPT** is a powerful platform that allows you to create, deploy, and manage continuous AI agents that automate complex workflows."
+homepage = "https://agpt.co"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "Elixir",
+    "JavaScript",
+    "Jinja",
+    "Makefile",
+    "PLpgSQL",
+    "Python",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "ai",
+    "openai",
+    "python",
+    "artificial-intelligence",
+    "autonomous-agents",
+    "llama-api",
+    "agentic-ai",
+    "agents",
+    "llm",
+    "claude",
+    "gpt",
+]
+
+[owners]
+maintainers = [
+    "@Significant-Gravitas/maintainers",
+    "@Significant-Gravitas/devops",
+    "@Significant-Gravitas/forge-maintainers",
+    "@Significant-Gravitas/benchmark-maintainers",
+    "@Significant-Gravitas/frontend-maintainers",
+    "@Significant-Gravitas/admins",
+]
+team = "@Significant-Gravitas/maintainers"
+security_contact = "https://github.com/Significant-Gravitas/AutoGPT/security/advisories/new"
+
+[docs]
+root = "https://docs.agpt.co"
+getting_started = "https://agpt.co/docs/platform/getting-started/getting-started"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Significant-Gravitas/AutoGPT.git"
+default_branch = "master"
+fork = false
+head_sha = "e2711b1748bdc3fe702ab4e44c6a11df98458c53"
+html_url = "https://github.com/Significant-Gravitas/AutoGPT"
+stars = 185202

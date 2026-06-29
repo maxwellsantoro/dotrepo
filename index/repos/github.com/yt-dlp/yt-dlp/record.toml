@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/yt-dlp/yt-dlp"
+generated_at = "2026-06-29T00:42:28.508643Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "RELEASE FILES"
+description = "A feature-rich command-line audio/video downloader"
+homepage = "https://discord.gg/H5MNcFW63r"
+license = "Unlicense"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Dockerfile",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "youtube-dl",
+    "python",
+    "sponsorblock",
+    "yt-dlp",
+    "youtube-downloader",
+    "cli",
+    "downloader",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/yt-dlp/yt-dlp.git"
+default_branch = "master"
+fork = false
+head_sha = "5678b282e2a17a8181e682a9681461b9c82ff008"
+html_url = "https://github.com/yt-dlp/yt-dlp"
+stars = 174006

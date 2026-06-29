@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/2dust/v2rayN"
+generated_at = "2026-06-29T00:42:39.286154Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "v2rayN"
+description = "Download the latest release here:"
+homepage = "https://v2rayn.2dust.link"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "C#",
+    "Shell",
+]
+topics = [
+    "windows",
+    "proxy",
+    "socks5",
+    "shadowsocks",
+    "trojan",
+    "v2ray",
+    "v2fly",
+    "xray",
+    "vmess",
+    "vless",
+    "xtls",
+]
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/2dust/v2rayN.git"
+default_branch = "master"
+fork = false
+head_sha = "bf376a8fac2cc3c5935c100e5c468e058b03253b"
+html_url = "https://github.com/2dust/v2rayN"
+stars = 110119

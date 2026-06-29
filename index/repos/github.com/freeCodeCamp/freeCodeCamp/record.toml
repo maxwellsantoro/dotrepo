@@ -1,0 +1,73 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/freeCodeCamp/freeCodeCamp"
+generated_at = "2026-06-29T00:42:26.069269Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Filled `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "freeCodeCamp.org's open-source codebase and curriculum"
+description = "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free."
+homepage = "https://contribute.freecodecamp.org"
+license = "BSD-3-Clause"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Shell",
+    "TypeScript",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = [
+    "learn-to-code",
+    "nonprofits",
+    "programming",
+    "nodejs",
+    "react",
+    "d3",
+    "careers",
+    "education",
+    "teachers",
+    "javascript",
+    "certification",
+    "curriculum",
+    "math",
+    "community",
+    "freecodecamp",
+]
+
+[owners]
+maintainers = [
+    "@freecodecamp/dev-team",
+    "@freecodecamp/curriculum",
+    "@freecodecamp/none",
+    "@freeCodeCamp/dev-team",
+    "@freeCodeCamp/i18n",
+    "@freeCodeCamp/mobile",
+]
+security_contact = "https://contribute.freecodecamp.org/#/security"
+
+[relations]
+references = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/freeCodeCamp/freeCodeCamp.git"
+default_branch = "main"
+fork = false
+head_sha = "a5e99552a72ce75c2d3426c0ae9e7a3c2018d1fc"
+html_url = "https://github.com/freeCodeCamp/freeCodeCamp"
+stars = 450691
