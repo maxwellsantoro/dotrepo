@@ -2526,98 +2526,124 @@ pub fn export_public_index_static_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> Result<Vec<(PathBuf, String)>> {
+    use rayon::prelude::*;
+
     let mut outputs = Vec::new();
     outputs.push((
         out_root.join("v0/meta.json"),
         serde_json::to_string_pretty(&public_snapshot_metadata(freshness.clone()))?,
     ));
 
-    let mut inventory = Vec::new();
-    for identity in list_index_repository_identities(index_root)? {
-        let repo_base = out_root
-            .join("v0/repos")
-            .join(&identity.host)
-            .join(&identity.owner)
-            .join(&identity.repo);
-        let candidates = resolve_repository_candidates(
-            index_root,
-            &identity.host,
-            &identity.owner,
-            &identity.repo,
-        )?;
-        let summary = public_repository_summary_with_candidates(
-            index_root,
-            &identity.host,
-            &identity.owner,
-            &identity.repo,
-            &candidates,
-            freshness.clone(),
-            base_path,
-        )?;
-        let trust = public_repository_trust_with_candidates(
-            index_root,
-            &identity.host,
-            &identity.owner,
-            &identity.repo,
-            &candidates,
-            freshness.clone(),
-            base_path,
-        )?;
-        let profile = public_repository_profile_with_candidates(
-            index_root,
-            &identity.host,
-            &identity.owner,
-            &identity.repo,
-            &candidates,
-            freshness.clone(),
-            base_path,
-        )?;
-        inventory.push(PublicRepositoryInventoryEntry {
-            identity: summary.identity.clone(),
-            name: summary.repository.name.clone(),
-            description: summary.repository.description.clone(),
-            links: summary.links.clone(),
-        });
-        outputs.push((
-            repo_base.join("index.json"),
-            serde_json::to_string_pretty(&summary)?,
-        ));
-        outputs.push((
-            repo_base.join("trust.json"),
-            serde_json::to_string_pretty(&trust)?,
-        ));
-        outputs.push((
-            repo_base.join("profile.json"),
-            serde_json::to_string_pretty(&profile)?,
-        ));
-        let relations = public_repository_relations_with_base(
-            index_root,
-            &identity.host,
-            &identity.owner,
-            &identity.repo,
-            freshness.clone(),
-            base_path,
-        )?;
-        outputs.push((
-            repo_base.join("relations.json"),
-            serde_json::to_string_pretty(&relations)?,
-        ));
-        outputs.push((
-            out_root.join(public_query_input_relative_path(
-                &identity.host,
-                &identity.owner,
-                &identity.repo,
-            )),
-            serde_json::to_string_pretty(&public_query_input_snapshot_with_candidates(
-                index_root,
-                &identity.host,
-                &identity.owner,
-                &identity.repo,
-                &candidates,
-                freshness.clone(),
-            )?)?,
-        ));
+    let identities = list_index_repository_identities(index_root)?;
+
+    // Each repository's exported files are computed in parallel. The per-repo
+    // work is independent -- each reads only its own record and evidence from
+    // disk and shares no mutable state -- so it parallelizes safely. Results are
+    // collected in identity order and emitted serially so the `outputs` vector,
+    // and therefore the derived `files.json` manifest, stays byte-identical to
+    // the serial exporter.
+    let per_repo: Vec<(PublicRepositoryInventoryEntry, Vec<(PathBuf, String)>)> = identities
+        .par_iter()
+        .map(
+            |identity| -> Result<(PublicRepositoryInventoryEntry, Vec<(PathBuf, String)>)> {
+                let repo_base = out_root
+                    .join("v0/repos")
+                    .join(&identity.host)
+                    .join(&identity.owner)
+                    .join(&identity.repo);
+                let candidates = resolve_repository_candidates(
+                    index_root,
+                    &identity.host,
+                    &identity.owner,
+                    &identity.repo,
+                )?;
+                let summary = public_repository_summary_with_candidates(
+                    index_root,
+                    &identity.host,
+                    &identity.owner,
+                    &identity.repo,
+                    &candidates,
+                    freshness.clone(),
+                    base_path,
+                )?;
+                let trust = public_repository_trust_with_candidates(
+                    index_root,
+                    &identity.host,
+                    &identity.owner,
+                    &identity.repo,
+                    &candidates,
+                    freshness.clone(),
+                    base_path,
+                )?;
+                let profile = public_repository_profile_with_candidates(
+                    index_root,
+                    &identity.host,
+                    &identity.owner,
+                    &identity.repo,
+                    &candidates,
+                    freshness.clone(),
+                    base_path,
+                )?;
+                let relations = public_repository_relations_with_base(
+                    index_root,
+                    &identity.host,
+                    &identity.owner,
+                    &identity.repo,
+                    freshness.clone(),
+                    base_path,
+                )?;
+                let inventory = PublicRepositoryInventoryEntry {
+                    identity: summary.identity.clone(),
+                    name: summary.repository.name.clone(),
+                    description: summary.repository.description.clone(),
+                    links: summary.links.clone(),
+                };
+                let files = vec![
+                    (
+                        repo_base.join("index.json"),
+                        serde_json::to_string_pretty(&summary)?,
+                    ),
+                    (
+                        repo_base.join("trust.json"),
+                        serde_json::to_string_pretty(&trust)?,
+                    ),
+                    (
+                        repo_base.join("profile.json"),
+                        serde_json::to_string_pretty(&profile)?,
+                    ),
+                    (
+                        repo_base.join("relations.json"),
+                        serde_json::to_string_pretty(&relations)?,
+                    ),
+                    (
+                        out_root.join(public_query_input_relative_path(
+                            &identity.host,
+                            &identity.owner,
+                            &identity.repo,
+                        )),
+                        serde_json::to_string_pretty(
+                            &public_query_input_snapshot_with_candidates(
+                                index_root,
+                                &identity.host,
+                                &identity.owner,
+                                &identity.repo,
+                                &candidates,
+                                freshness.clone(),
+                            )?,
+                        )?,
+                    ),
+                ];
+                Ok((inventory, files))
+            },
+        )
+        .collect::<Result<Vec<_>>>()?;
+
+    let mut inventory = Vec::with_capacity(per_repo.len());
+    for (entry, files) in per_repo {
+        outputs.extend(files);
+        inventory.push(entry);
     }
+
     outputs.push((
         out_root.join("v0/repos/index.json"),
         serde_json::to_string_pretty(&PublicRepositoryInventoryResponse {
