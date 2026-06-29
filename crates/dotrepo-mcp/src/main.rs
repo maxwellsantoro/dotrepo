@@ -14,18 +14,14 @@ use reqwest::Url;
 use serde::Deserialize;
 use serde_json::{json, to_value, Value};
 use std::io::{self, BufReader};
-use std::net::{IpAddr, ToSocketAddrs};
+use std::net::{IpAddr, SocketAddr, ToSocketAddrs};
 use std::path::{Path, PathBuf};
 use std::time::Duration;
 const SUPPORTED_PROTOCOL_VERSIONS: &[&str] = &["2025-11-25", "2025-06-18", "2024-11-05"];
 const SERVER_NAME: &str = "dotrepo-mcp";
 const DEFAULT_PUBLIC_BASE_URL: &str = "https://dotrepo.org";
-const ALLOWED_LOOKUP_BASE_URLS: &[&str] = &[
-    "https://dotrepo.org",
-    "http://dotrepo.org",
-    "https://dotrepo-org.workers.dev",
-    "http://dotrepo-org.workers.dev",
-];
+const ALLOWED_LOOKUP_BASE_URLS: &[&str] =
+    &["https://dotrepo.org", "https://dotrepo-org.workers.dev"];
 const REMOTE_LOOKUP_TIMEOUT: Duration = Duration::from_secs(15);
 
 fn main() {
@@ -235,7 +231,7 @@ fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
     let base_url = optional_string(&arguments, "baseUrl")
         .unwrap_or_else(|| DEFAULT_PUBLIC_BASE_URL.to_string());
     let base_url = normalize_public_base_url(&base_url)?;
-    let client = build_remote_lookup_client()?;
+    let client = build_remote_lookup_client(&base_url)?;
 
     let summary_url = remote_repository_url(
         &base_url,
@@ -621,7 +617,7 @@ fn is_blocked_lookup_host(host: &str) -> bool {
     matches!(host.as_str(), "metadata.google.internal" | "metadata.goog")
 }
 
-fn ensure_lookup_endpoint_safe(url: &str) -> Result<()> {
+fn resolve_safe_lookup_addresses(url: &str) -> Result<Vec<SocketAddr>> {
     let parsed = Url::parse(url).map_err(|err| anyhow!("invalid lookup URL `{}`: {}", url, err))?;
     let host = parsed
         .host_str()
@@ -629,27 +625,24 @@ fn ensure_lookup_endpoint_safe(url: &str) -> Result<()> {
     if is_blocked_lookup_host(host) {
         bail!("lookup host `{}` is not allowed for remote lookup", host);
     }
+    let port = parsed.port_or_known_default().unwrap_or(443);
 
     if let Ok(addr) = host.parse::<IpAddr>() {
-        if is_blocked_lookup_ip(&addr) {
-            bail!(
-                "lookup host `{}` resolves to blocked address {}",
-                host,
-                addr
-            );
-        }
-        return Ok(());
+        return validate_lookup_addresses(host, vec![SocketAddr::new(addr, port)]);
     }
 
-    let port = parsed.port_or_known_default().unwrap_or(443);
     let endpoint = format!("{host}:{port}");
-    let mut resolved = endpoint
+    let resolved = endpoint
         .to_socket_addrs()
         .map_err(|err| anyhow!("failed to resolve lookup host `{}`: {}", host, err))?;
-    let first = resolved
-        .next()
-        .ok_or_else(|| anyhow!("lookup host `{}` did not resolve to any address", host))?;
-    for addr in std::iter::once(first).chain(resolved) {
+    validate_lookup_addresses(host, resolved.collect())
+}
+
+fn validate_lookup_addresses(host: &str, addresses: Vec<SocketAddr>) -> Result<Vec<SocketAddr>> {
+    if addresses.is_empty() {
+        bail!("lookup host `{}` did not resolve to any address", host);
+    }
+    for addr in &addresses {
         if is_blocked_lookup_ip(&addr.ip()) {
             bail!(
                 "lookup host `{}` resolves to blocked address {}",
@@ -658,7 +651,11 @@ fn ensure_lookup_endpoint_safe(url: &str) -> Result<()> {
             );
         }
     }
-    Ok(())
+    Ok(addresses)
+}
+
+fn ensure_lookup_endpoint_safe(url: &str) -> Result<()> {
+    resolve_safe_lookup_addresses(url).map(|_| ())
 }
 
 fn normalize_public_base_url(value: &str) -> Result<String> {
@@ -674,7 +671,11 @@ fn normalize_public_base_url(value: &str) -> Result<String> {
     let url =
         Url::parse(&with_scheme).map_err(|err| anyhow!("invalid baseUrl `{}`: {}", value, err))?;
     match url.scheme() {
-        "http" | "https" => {}
+        "https" => {}
+        "http" if allow_local_lookup_base_url() => {}
+        "http" => bail!(
+            "baseUrl must use HTTPS; set DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL=1 only for local development"
+        ),
         other => bail!("unsupported baseUrl scheme: {}", other),
     }
     let host = url
@@ -741,11 +742,19 @@ fn remote_query_url(
     Ok(url)
 }
 
-fn build_remote_lookup_client() -> Result<Client> {
+fn build_remote_lookup_client(base_url: &str) -> Result<Client> {
+    let parsed = Url::parse(base_url)
+        .map_err(|err| anyhow!("invalid lookup base URL `{}`: {}", base_url, err))?;
+    let host = parsed
+        .host_str()
+        .ok_or_else(|| anyhow!("lookup base URL must include a host: {}", base_url))?;
+    let addresses = resolve_safe_lookup_addresses(base_url)?;
+
     Client::builder()
         .user_agent(format!("dotrepo-mcp/{}", env!("CARGO_PKG_VERSION")))
         .timeout(REMOTE_LOOKUP_TIMEOUT)
         .redirect(reqwest::redirect::Policy::none())
+        .resolve_to_addrs(host, &addresses)
         .build()
         .map_err(Into::into)
 }
@@ -1591,13 +1600,21 @@ text = "Accepted claim."
     #[test]
     fn normalize_public_base_url_blocks_private_hosts_by_default() {
         let _env_guard = lock_lookup_base_url_env();
-        let err = normalize_public_base_url("http://127.0.0.1:8080")
+        let err = normalize_public_base_url("https://127.0.0.1:8080")
             .expect_err("loopback should be blocked");
         assert!(err.to_string().contains("not allowed"));
 
-        let err = normalize_public_base_url("http://192.168.1.10")
+        let err = normalize_public_base_url("https://192.168.1.10")
             .expect_err("private network should be blocked");
         assert!(err.to_string().contains("not allowed"));
+    }
+
+    #[test]
+    fn normalize_public_base_url_requires_https_by_default() {
+        let _env_guard = lock_lookup_base_url_env();
+        let err = normalize_public_base_url("http://dotrepo.org")
+            .expect_err("default public origins must use HTTPS");
+        assert!(err.to_string().contains("must use HTTPS"));
     }
 
     #[test]
@@ -1606,6 +1623,18 @@ text = "Accepted claim."
         let err = ensure_lookup_endpoint_safe("https://127.0.0.1/v0/meta.json")
             .expect_err("literal loopback IP should be blocked");
         assert!(err.to_string().contains("not allowed"));
+    }
+
+    #[test]
+    fn validate_lookup_addresses_rejects_any_private_resolution() {
+        let _env_guard = lock_lookup_base_url_env();
+        let addresses = vec![
+            "93.184.216.34:443".parse().expect("public address"),
+            "127.0.0.1:443".parse().expect("loopback address"),
+        ];
+        let err = validate_lookup_addresses("rebind.example", addresses)
+            .expect_err("mixed public and private answers must be blocked");
+        assert!(err.to_string().contains("blocked address 127.0.0.1"));
     }
 
     #[test]
