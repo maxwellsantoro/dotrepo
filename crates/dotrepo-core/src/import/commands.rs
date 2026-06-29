@@ -851,20 +851,14 @@ fn looks_like_shell_assignment(command: &str) -> bool {
     if trimmed.is_empty() {
         return false;
     }
-    let without_export = trimmed
-        .strip_prefix("export ")
-        .unwrap_or(trimmed)
-        .trim();
+    let without_export = trimmed.strip_prefix("export ").unwrap_or(trimmed).trim();
     without_export.contains('=') && !without_export.contains(' ')
 }
 
 fn first_matching_workflow_command(commands: &[String], select_build: bool) -> Option<String> {
     commands.iter().find_map(|command| {
         let trimmed = command.trim();
-        if trimmed.is_empty()
-            || trimmed.starts_with('#')
-            || looks_like_shell_assignment(trimmed)
-        {
+        if trimmed.is_empty() || trimmed.starts_with('#') || looks_like_shell_assignment(trimmed) {
             return None;
         }
 
@@ -1238,8 +1232,8 @@ mod tests {
     #[test]
     fn workflow_inference_skips_shell_assignments_and_prefers_bazel_build() {
         use super::{
-            extract_workflow_run_commands, first_matching_workflow_command, infer_workflow_commands,
-            ImportedFile,
+            extract_workflow_run_commands, first_matching_workflow_command,
+            infer_workflow_commands, ImportedFile,
         };
 
         let workflow = ImportedFile {
@@ -1256,11 +1250,7 @@ jobs:
 
         let commands = extract_workflow_run_commands(&workflow.contents);
         assert_eq!(commands.len(), 2);
-        assert!(first_matching_workflow_command(
-            &["# setup only".to_string()],
-            true
-        )
-        .is_none());
+        assert!(first_matching_workflow_command(&["# setup only".to_string()], true).is_none());
         assert_eq!(
             first_matching_workflow_command(&commands, true).as_deref(),
             Some("bazel build //...")
