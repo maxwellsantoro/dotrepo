@@ -834,28 +834,32 @@ def main() -> int:
         ],
         cwd=repo_root,
     )
-    run(
-        [
-            "cargo",
-            "run",
-            "-p",
-            "dotrepo-cli",
-            "--",
-            "public",
-            "export",
-            "--index-root",
-            "index",
-            "--out-dir",
-            str(public_dir),
-            "--base-path",
-            args.base_path,
-            "--generated-at",
-            args.generated_at,
-            "--stale-after",
-            args.stale_after,
-        ],
-        cwd=repo_root,
-    )
+    # Run the export on the release binary when release artifacts are being
+    # built: that release build is then reused by the install-bundle packaging
+    # step, and the CPU-bound export runs faster than on the debug binary. The
+    # lightweight (--skip-release-bundle) gate keeps the debug binary so it does
+    # not pay for a release build it would otherwise not need.
+    export_command = [
+        "cargo",
+        "run",
+        *(["--release"] if not args.skip_release_bundle else []),
+        "-p",
+        "dotrepo-cli",
+        "--",
+        "public",
+        "export",
+        "--index-root",
+        "index",
+        "--out-dir",
+        str(public_dir),
+        "--base-path",
+        args.base_path,
+        "--generated-at",
+        args.generated_at,
+        "--stale-after",
+        args.stale_after,
+    ]
+    run(export_command, cwd=repo_root)
     run(
         [sys.executable, "scripts/render_public_pages_landing.py", "--input", str(public_dir)],
         cwd=repo_root,

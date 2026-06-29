@@ -5,6 +5,11 @@ on:
   push:
     branches: [main]
 
+env:
+  # Faster, smaller dev/test builds in CI; local `cargo` is unaffected.
+  CARGO_INCREMENTAL: "0"
+  CARGO_PROFILE_DEV_DEBUG: line-tables-only
+
 jobs:
   change-scope:
     runs-on: ubuntu-latest
@@ -18,12 +23,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-      - name: Create and sync Python environment
-        run: |
-          uv venv
-          uv sync --dev --locked
       - name: Classify changed files
         id: scope
         shell: bash
@@ -134,15 +133,15 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+        uses: Swatinem/rust-cache@v2
+      - name: Enable faster linker when mold is available
+        run: |
+          if sudo apt-get install -y mold; then
+            echo "RUSTFLAGS=-C link-arg=-fuse-ld=mold" >> "$GITHUB_ENV"
+            echo "mold linker enabled"
+          else
+            echo "mold unavailable; using default linker"
+          fi
       - name: Check formatting, linting, tests, and seeded flows
         run: |
           cargo fmt --all -- --check
@@ -410,15 +409,15 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+        uses: Swatinem/rust-cache@v2
+      - name: Enable faster linker when mold is available
+        run: |
+          if sudo apt-get install -y mold; then
+            echo "RUSTFLAGS=-C link-arg=-fuse-ld=mold" >> "$GITHUB_ENV"
+            echo "mold linker enabled"
+          else
+            echo "mold unavailable; using default linker"
+          fi
       - name: Run explicit maintainer/operator claim gate
         run: uv run python scripts/check_operator_claim_gate.py --output-root operator-gate
       - name: Upload operator gate inspection artifacts
@@ -454,15 +453,15 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+        uses: Swatinem/rust-cache@v2
+      - name: Enable faster linker when mold is available
+        run: |
+          if sudo apt-get install -y mold; then
+            echo "RUSTFLAGS=-C link-arg=-fuse-ld=mold" >> "$GITHUB_ENV"
+            echo "mold linker enabled"
+          else
+            echo "mold unavailable; using default linker"
+          fi
       - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
@@ -512,15 +511,15 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+        uses: Swatinem/rust-cache@v2
+      - name: Enable faster linker when mold is available
+        run: |
+          if sudo apt-get install -y mold; then
+            echo "RUSTFLAGS=-C link-arg=-fuse-ld=mold" >> "$GITHUB_ENV"
+            echo "mold linker enabled"
+          else
+            echo "mold unavailable; using default linker"
+          fi
       - name: Run minimal validation gate
         run: |
           cargo fmt --all -- --check
@@ -549,15 +548,15 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+        uses: Swatinem/rust-cache@v2
+      - name: Enable faster linker when mold is available
+        run: |
+          if sudo apt-get install -y mold; then
+            echo "RUSTFLAGS=-C link-arg=-fuse-ld=mold" >> "$GITHUB_ENV"
+            echo "mold linker enabled"
+          else
+            echo "mold unavailable; using default linker"
+          fi
       - name: Set up Node.js 22
         uses: actions/setup-node@v4
         with:
