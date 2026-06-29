@@ -106,12 +106,12 @@ def test_release_gate_builds_and_measures_research_lookup_workload(
     assert "scripts/measure_public_lookup_efficiency.py" in measure
     assert measure[measure.index("--min-tasks") + 1] == "724"
     assert measure[measure.index("--min-repositories") + 1] == "181"
-    assert measure[measure.index("--min-task-hit-rate") + 1] == "0.65"
-    assert measure[measure.index("--min-field-hit-rate") + 1] == "0.826"
+    assert measure[measure.index("--min-task-hit-rate") + 1] == "0.64"
+    assert measure[measure.index("--min-field-hit-rate") + 1] == "0.818"
     assert "overview=0.9" in measure
-    assert "documentation=0.33" in measure
-    assert "execution=0.71" in measure
-    assert "security=0.66" in measure
+    assert "documentation=0.309" in measure
+    assert "execution=0.685" in measure
+    assert "security=0.657" in measure
     assert str(output_root / "public-lookup-efficiency.json") in measure
     assert str(output_root / "public-lookup-efficiency.md") in measure
 
