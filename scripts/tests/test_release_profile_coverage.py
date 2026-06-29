@@ -16,6 +16,9 @@ SPEC.loader.exec_module(release_gate)
 def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path) -> None:
     public_dir = tmp_path / "public"
     output_root = tmp_path / "release-gate"
+    baseline = json.loads(
+        (REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json").read_text()
+    )
 
     command = release_gate.public_profile_coverage_command(
         REPO_ROOT, public_dir, output_root
@@ -26,14 +29,16 @@ def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path
         "--public-root",
         str(public_dir),
     ]
-    assert command[command.index("--min-profiles") + 1] == "261"
-    assert command[command.index("--min-high-signal") + 1] == "182"
-    assert command[command.index("--max-conflict-rate") + 1] == "0.0"
-    assert command[command.index("--max-malformed-profiles") + 1] == "0"
+    assert command[command.index("--min-profiles") + 1] == str(baseline["minProfiles"])
+    assert command[command.index("--min-high-signal") + 1] == str(baseline["minHighSignal"])
+    assert command[command.index("--max-conflict-rate") + 1] == str(baseline["maxConflictRate"])
+    assert command[command.index("--max-malformed-profiles") + 1] == str(
+        baseline["maxMalformedProfiles"]
+    )
     assert str(output_root / "public-profile-coverage.json") in command
     assert str(output_root / "public-profile-coverage.md") in command
-    assert "hasBuild=178" in command
-    assert "hasDocs=132" in command
+    for signal, minimum in sorted((baseline.get("minSignal") or {}).items()):
+        assert f"{signal}={minimum}" in command
 
 
 def test_profile_coverage_baseline_is_well_formed() -> None:
@@ -54,18 +59,30 @@ def test_profile_coverage_baseline_is_well_formed() -> None:
 
 def test_release_gate_applies_index_growth_tranche_baseline(tmp_path: Path) -> None:
     output_root = tmp_path / "release-gate"
+    growth_baseline = json.loads(
+        (REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json").read_text()
+    )
+    profile_baseline = json.loads(
+        (REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json").read_text()
+    )
 
     command = release_gate.index_growth_tranche_command(REPO_ROOT, output_root)
 
     assert "scripts/plan_index_growth_tranche.py" in command
     assert command[command.index("--candidate-file") + 1] == str(
-        REPO_ROOT / "index/tranche-two-targets.txt"
+        REPO_ROOT / growth_baseline["candidateFile"]
     )
-    assert command[command.index("--target-count") + 1] == "0"
-    assert command[command.index("--min-selected") + 1] == "0"
-    assert command[command.index("--current-high-signal") + 1] == "182"
-    assert command[command.index("--milestone-high-signal-target") + 1] == "500"
-    assert command[command.index("--min-planned-high-signal-capacity") + 1] == "182"
+    assert command[command.index("--target-count") + 1] == str(growth_baseline["targetCount"])
+    assert command[command.index("--min-selected") + 1] == str(growth_baseline["minSelected"])
+    assert command[command.index("--current-high-signal") + 1] == str(
+        profile_baseline["minHighSignal"]
+    )
+    assert command[command.index("--milestone-high-signal-target") + 1] == str(
+        growth_baseline["milestoneHighSignalTarget"]
+    )
+    assert command[command.index("--min-planned-high-signal-capacity") + 1] == str(
+        profile_baseline["minHighSignal"] + growth_baseline["minSelected"]
+    )
     assert str(output_root / "index-growth-targets.txt") in command
     assert str(output_root / "index-growth-plan.json") in command
     assert str(output_root / "index-growth-plan.md") in command

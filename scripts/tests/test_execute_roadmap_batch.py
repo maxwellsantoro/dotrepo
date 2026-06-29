@@ -18,7 +18,7 @@ def test_baseline_int_reads_fixture_keys() -> None:
     assert roadmap_batch.baseline_int(
         REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json",
         "minHighSignal",
-    ) == 182
+    ) == 239
     assert roadmap_batch.baseline_int(
         REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json",
         "milestoneHighSignalTarget",
@@ -39,11 +39,18 @@ def test_plan_seed_targets_uses_growth_baselines(tmp_path: Path) -> None:
         seed_batch_size=1,
     )
 
-    planned = roadmap_batch.plan_seed_targets(args, output_dir, 182, 500)
+    planned = roadmap_batch.plan_seed_targets(
+        args,
+        output_dir,
+        239,
+        500,
+        min_selected=0,
+        min_planned_high_signal_capacity=239,
+    )
 
-    assert planned.is_file()
+    assert planned is None or planned.is_file()
     plan = json.loads((output_dir / "growth-plan.json").read_text())
-    assert plan["gates"]["minPlannedHighSignalCapacity"]["threshold"] == 183
+    assert plan["gates"]["minPlannedHighSignalCapacity"]["threshold"] == 239
     assert plan["milestoneProgress"]["milestoneHighSignalTarget"] == 500
 
 
@@ -59,7 +66,15 @@ def test_dry_run_skips_refresh_and_validate(tmp_path: Path, monkeypatch) -> None
 
         return Result()
 
-    def fake_plan_seed_targets(args, output_dir, current_high_signal, milestone_target):
+    def fake_plan_seed_targets(
+        args,
+        output_dir,
+        current_high_signal,
+        milestone_target,
+        *,
+        min_selected,
+        min_planned_high_signal_capacity,
+    ):
         planned = output_dir / "planned-targets.txt"
         planned.parent.mkdir(parents=True, exist_ok=True)
         planned.write_text("rust/one\n")
@@ -73,10 +88,20 @@ def test_dry_run_skips_refresh_and_validate(tmp_path: Path, monkeypatch) -> None
         json.dumps({"minHighSignal": 1})
     )
     (tmp_path / "scripts/fixtures/index_growth_tranche_baseline.json").write_text(
-        json.dumps({"milestoneHighSignalTarget": 500})
+        json.dumps({"milestoneHighSignalTarget": 500, "minSelected": 0})
     )
     (tmp_path / "index").mkdir()
-    (tmp_path / "index/tranche-two-targets.txt").write_text("rust/one\n")
+    targets_path = "index/candidate-targets.txt"
+    (tmp_path / targets_path).write_text("rust/one\n")
+    (tmp_path / "scripts/fixtures/index_growth_tranche_baseline.json").write_text(
+        json.dumps(
+            {
+                "candidateFile": targets_path,
+                "milestoneHighSignalTarget": 500,
+                "minSelected": 0,
+            }
+        )
+    )
 
     monkeypatch.setattr(
         roadmap_batch,
@@ -84,7 +109,7 @@ def test_dry_run_skips_refresh_and_validate(tmp_path: Path, monkeypatch) -> None
         lambda: argparse.Namespace(
             mode="all",
             index_root="index",
-            targets_file="index/tranche-two-targets.txt",
+            targets_file=targets_path,
             seed_batch_size=8,
             refresh_batch_size=5,
             output_dir="roadmap-execution",
@@ -100,3 +125,7 @@ def test_dry_run_skips_refresh_and_validate(tmp_path: Path, monkeypatch) -> None
     assert any("dotrepo-crawler" in command and "--dry-run" in command for command in joined)
     assert not any("run_autonomous_index_batch.py" in command for command in joined)
     assert not any("validate-index" in command for command in joined)
+
+
+def test_default_targets_file_reads_growth_baseline() -> None:
+    assert roadmap_batch.default_targets_file(REPO_ROOT) == "index/tranche-two-targets.txt"

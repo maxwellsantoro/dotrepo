@@ -77,8 +77,12 @@ submissions and audits. The autonomous conveyor uses the gates documented in
 [`ROADMAP.md`](../ROADMAP.md) and
 [`docs/factual-crawl-automation.md`](../docs/factual-crawl-automation.md).
 The machine-readable [`index/tranche-one-targets.txt`](tranche-one-targets.txt)
-is retained for reproducible first-tranche crawler runs. The active growth
-candidate catalog is [`index/tranche-two-targets.txt`](tranche-two-targets.txt).
+is retained for reproducible first-tranche crawler runs.
+[`index/tranche-two-targets.txt`](tranche-two-targets.txt) is the completed
+second-tranche catalog (106/106 targets exhausted). Further corpus growth
+requires a new evidence-backed candidate list; until one is checked in, seed
+workflows and the roadmap batch read the current catalog from
+`scripts/fixtures/index_growth_tranche_baseline.json`.
 The seed command can also emit an advisory audit report via
 `--review-report-md <path>`.
 For maintainer-claim review, use
@@ -136,8 +140,8 @@ workflow.
 
 ## Crawler seeding
 
-Use the checked-in tranche list when you want deterministic imported-lane batch
-output plus an audit report:
+Use the checked-in candidate catalog when you want deterministic imported-lane
+batch output plus an audit report:
 
 ```bash
 cargo run -p dotrepo-crawler -- seed \
@@ -196,8 +200,8 @@ the high-signal profile count if promoted through the verified auto-publish path
 
 ## Growth tranche planning
 
-Use the growth-tranche planner when moving from the first checked-in tranche to
-larger candidate sets. It accepts a grouped candidate file, such as
+Use the growth-tranche planner when preparing the next candidate catalog. It
+accepts a grouped candidate file, such as
 [`index/tranche-two-targets.txt`](tranche-two-targets.txt), removes repositories
 that already have `index/repos/**/record.toml`, balances the remaining targets
 by group in candidate-file order, and emits both crawler-ready targets and an

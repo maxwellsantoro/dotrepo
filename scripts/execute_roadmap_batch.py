@@ -11,6 +11,22 @@ import sys
 from pathlib import Path
 
 UV_PYTHON = ["uv", "run", "python"]
+GROWTH_BASELINE = Path("scripts/fixtures/index_growth_tranche_baseline.json")
+
+
+def load_json(path: Path) -> dict:
+    if not path.is_file():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def default_targets_file(repo_root: Path | None = None) -> str:
+    root = repo_root or Path.cwd()
+    baseline = load_json(root / GROWTH_BASELINE)
+    candidate = baseline.get("candidateFile")
+    if isinstance(candidate, str) and candidate:
+        return candidate
+    return "index/tranche-two-targets.txt"
 
 
 def parse_args() -> argparse.Namespace:
@@ -19,13 +35,13 @@ def parse_args() -> argparse.Namespace:
         "--mode",
         choices=("seed", "refresh", "all"),
         default="all",
-        help="Run tranche-two seed growth, overdue refresh, or both (default: all)",
+        help="Run candidate seed growth, overdue refresh, or both (default: all)",
     )
     parser.add_argument("--index-root", default="index")
     parser.add_argument(
         "--targets-file",
-        default="index/tranche-two-targets.txt",
-        help="Grouped candidate list for seed growth",
+        default=None,
+        help="Grouped candidate list for seed growth (default: index growth baseline candidateFile)",
     )
     parser.add_argument(
         "--seed-batch-size",
@@ -54,7 +70,10 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Plan seed targets and render status without writing index changes",
     )
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.targets_file is None:
+        args.targets_file = default_targets_file()
+    return args
 
 
 def run(command: list[str], *, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -67,12 +86,6 @@ def run(command: list[str], *, check: bool = True) -> subprocess.CompletedProces
     if check and proc.returncode != 0:
         raise subprocess.CalledProcessError(proc.returncode, command, proc.stdout, proc.stderr)
     return proc
-
-
-def load_json(path: Path) -> dict:
-    if not path.is_file():
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def baseline_int(path: Path, key: str) -> int:
@@ -102,7 +115,10 @@ def plan_seed_targets(
     output_dir: Path,
     current_high_signal: int,
     milestone_target: int,
-) -> Path:
+    *,
+    min_selected: int,
+    min_planned_high_signal_capacity: int,
+) -> Path | None:
     planned_targets = output_dir / "planned-targets.txt"
     run(
         [
@@ -115,13 +131,13 @@ def plan_seed_targets(
             "--target-count",
             str(args.seed_batch_size),
             "--min-selected",
-            "1",
+            str(min_selected),
             "--current-high-signal",
             str(current_high_signal),
             "--milestone-high-signal-target",
             str(milestone_target),
             "--min-planned-high-signal-capacity",
-            str(current_high_signal + 1),
+            str(min_planned_high_signal_capacity),
             "--output-targets",
             str(planned_targets),
             "--output-json",
@@ -131,7 +147,11 @@ def plan_seed_targets(
         ]
     )
     if not planned_targets.is_file() or not planned_targets.read_text(encoding="utf-8").strip():
-        raise SystemExit("growth tranche planner produced no missing targets")
+        print(
+            "candidate catalog has no missing targets; skipping seed crawl",
+            file=sys.stderr,
+        )
+        return None
     return planned_targets
 
 
@@ -206,21 +226,28 @@ def main() -> int:
         repo_root / "scripts/fixtures/public_profile_coverage_baseline.json",
         "minHighSignal",
     )
-    milestone_target = baseline_int(
-        repo_root / "scripts/fixtures/index_growth_tranche_baseline.json",
-        "milestoneHighSignalTarget",
-    )
+    growth_baseline_path = repo_root / GROWTH_BASELINE
+    growth_baseline = load_json(growth_baseline_path)
+    milestone_target = baseline_int(growth_baseline_path, "milestoneHighSignalTarget")
+    min_selected = int(growth_baseline.get("minSelected", 0))
+    min_planned_capacity = current_high_signal + min_selected
 
     print("== roadmap batch: pre-flight growth status ==")
     render_growth_status(index_root, targets_file, output_dir / "growth-status-before.md")
     print((output_dir / "growth-status-before.md").read_text(encoding="utf-8"))
 
     if args.mode in {"seed", "all"}:
-        print("== roadmap batch: tranche-two seed growth ==")
+        print("== roadmap batch: candidate seed growth ==")
         planned_targets = plan_seed_targets(
-            args, output_dir, current_high_signal, milestone_target
+            args,
+            output_dir,
+            current_high_signal,
+            milestone_target,
+            min_selected=min_selected,
+            min_planned_high_signal_capacity=min_planned_capacity,
         )
-        apply_seed_batch(args, planned_targets, output_dir)
+        if planned_targets is not None:
+            apply_seed_batch(args, planned_targets, output_dir)
 
     if args.mode in {"refresh", "all"} and not args.dry_run:
         print("== roadmap batch: overdue refresh ==")

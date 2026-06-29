@@ -346,6 +346,11 @@ the incremental path from current coverage to the 500-profile milestone.
 
 ## 19. Plan the next growth tranche
 
+Tranche two is complete; use this planner with a new evidence-backed candidate
+catalog when preparing the next growth wave. The checked-in
+`index/tranche-two-targets.txt` remains the reproducible record of the
+completed second tranche.
+
 ```bash
 uv run python scripts/plan_index_growth_tranche.py \
   --candidate-file index/tranche-two-targets.txt \

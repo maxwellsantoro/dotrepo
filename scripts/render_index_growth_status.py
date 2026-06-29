@@ -35,7 +35,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--targets-file",
         default="index/tranche-two-targets.txt",
-        help="Machine-readable tranche target list (default: index/tranche-two-targets.txt)",
+        help=(
+            "Machine-readable candidate target list from the active growth catalog "
+            "(default: index/tranche-two-targets.txt until a new catalog is checked in)"
+        ),
     )
     parser.add_argument(
         "--max-items",

@@ -1,9 +1,15 @@
+import json
 from pathlib import Path
 
 
-WORKFLOWS = Path(__file__).resolve().parents[2] / ".github" / "workflows"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+WORKFLOWS = REPO_ROOT / ".github" / "workflows"
 SEED_REVIEW = WORKFLOWS / "index-seed-review.yml"
 SEED_BATCH_PR = WORKFLOWS / "index-seed-batch-pr.yml"
+GROWTH_BASELINE = json.loads(
+    (REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json").read_text()
+)
+CANDIDATE_FILE = GROWTH_BASELINE["candidateFile"]
 
 
 def test_seed_review_defaults_to_second_growth_tranche_and_plans_before_crawl() -> None:
@@ -15,8 +21,9 @@ def test_seed_review_defaults_to_second_growth_tranche_and_plans_before_crawl() 
     summary = workflow.index("cat index-seed-review/growth-plan.md")
     status = workflow.index("scripts/render_index_growth_status.py")
 
-    assert "default: index/tranche-two-targets.txt" in workflow
-    assert 'targets_file="index/tranche-two-targets.txt"' in workflow
+    assert "targets_file:" in workflow
+    assert "index_growth_tranche_baseline.json" in workflow
+    assert f'default: {CANDIDATE_FILE}' in workflow
     assert "public_profile_coverage_baseline.json" in workflow[:plan]
     assert "index_growth_tranche_baseline.json" in workflow[:plan]
     assert "min_planned_capacity=$((current_high_signal + 1))" in workflow[:plan]
@@ -40,8 +47,9 @@ def test_seed_batch_pr_defaults_to_second_growth_tranche_and_uses_planned_target
     crawl = workflow.index("cargo run -p dotrepo-crawler -- seed")
     batches = workflow.index("scripts/plan_seed_review_batches.py")
 
-    assert "default: index/tranche-two-targets.txt" in workflow
-    assert 'targets_file="index/tranche-two-targets.txt"' in workflow
+    assert "targets_file:" in workflow
+    assert "index_growth_tranche_baseline.json" in workflow
+    assert f'default: {CANDIDATE_FILE}' in workflow
     assert "public_profile_coverage_baseline.json" in workflow[:plan]
     assert "index_growth_tranche_baseline.json" in workflow[:plan]
     assert "min_planned_capacity=$((current_high_signal + 1))" in workflow[:plan]

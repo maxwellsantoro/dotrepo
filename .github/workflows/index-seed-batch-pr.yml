@@ -7,7 +7,7 @@ on:
         description: Batch identifier from seed-batches.json
         required: true
       limit:
-        description: Maximum tranche targets to inspect while regenerating the selected batch
+        description: Maximum candidate targets to inspect while regenerating the selected batch
         required: false
         default: "5"
       batch_size:
@@ -15,7 +15,7 @@ on:
         required: false
         default: "3"
       targets_file:
-        description: Repository target list to seed against
+        description: Grouped candidate catalog for seed growth (default from growth baseline)
         required: false
         default: index/tranche-two-targets.txt
 
@@ -66,7 +66,7 @@ jobs:
             batch_size="3"
           fi
           if [ -z "$targets_file" ]; then
-            targets_file="index/tranche-two-targets.txt"
+            targets_file="$(uv run python -c 'import json; print(json.load(open("scripts/fixtures/index_growth_tranche_baseline.json"))["candidateFile"])')"
           fi
           current_high_signal="$(uv run python -c 'import json; print(json.load(open("scripts/fixtures/public_profile_coverage_baseline.json"))["minHighSignal"])')"
           milestone_high_signal_target="$(uv run python -c 'import json; print(json.load(open("scripts/fixtures/index_growth_tranche_baseline.json"))["milestoneHighSignalTarget"])')"
