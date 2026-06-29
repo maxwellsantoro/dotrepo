@@ -22,11 +22,12 @@ def load_json(path: Path) -> dict:
 
 def default_targets_file(repo_root: Path | None = None) -> str:
     root = repo_root or Path.cwd()
-    baseline = load_json(root / GROWTH_BASELINE)
+    baseline_path = root / GROWTH_BASELINE
+    baseline = load_json(baseline_path)
     candidate = baseline.get("candidateFile")
-    if isinstance(candidate, str) and candidate:
+    if isinstance(candidate, str) and candidate.strip():
         return candidate
-    return "index/tranche-two-targets.txt"
+    raise SystemExit(f"{baseline_path} is missing string candidateFile")
 
 
 def parse_args() -> argparse.Namespace:
@@ -180,6 +181,43 @@ def apply_seed_batch(args: argparse.Namespace, planned_targets: Path, output_dir
     (output_dir / "seed-report.json").write_text(proc.stdout, encoding="utf-8")
 
 
+def plan_refresh_batch(args: argparse.Namespace, output_dir: Path) -> None:
+    refresh_dir = output_dir / "refresh"
+    refresh_dir.mkdir(parents=True, exist_ok=True)
+    refresh_plan = refresh_dir / "refresh-plan.json"
+    proc = run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "dotrepo-crawler",
+            "--",
+            "refresh-plan",
+            "--state-path",
+            str(Path(args.index_root) / ".crawler-state.toml"),
+            "--limit",
+            str(max(args.refresh_batch_size * 4, 20)),
+            "--json",
+        ]
+    )
+    refresh_plan.write_text(proc.stdout, encoding="utf-8")
+    run(
+        [
+            *UV_PYTHON,
+            "scripts/plan_refresh_review_batches.py",
+            "--input",
+            str(refresh_plan),
+            "--batch-size",
+            str(args.refresh_batch_size),
+            "--output-json",
+            str(refresh_dir / "refresh-batches.json"),
+            "--output-md",
+            str(refresh_dir / "refresh-batches.md"),
+        ]
+    )
+
+
 def apply_refresh_batch(args: argparse.Namespace, output_dir: Path) -> None:
     refresh_command = [
         *UV_PYTHON,
@@ -232,6 +270,7 @@ def main() -> int:
     min_selected = int(growth_baseline.get("minSelected", 0))
     min_planned_capacity = current_high_signal + min_selected
 
+    print(f"== roadmap batch: active candidate catalog: {args.targets_file} ==")
     print("== roadmap batch: pre-flight growth status ==")
     render_growth_status(index_root, targets_file, output_dir / "growth-status-before.md")
     print((output_dir / "growth-status-before.md").read_text(encoding="utf-8"))
@@ -246,12 +285,23 @@ def main() -> int:
             min_selected=min_selected,
             min_planned_high_signal_capacity=min_planned_capacity,
         )
-        if planned_targets is not None:
-            apply_seed_batch(args, planned_targets, output_dir)
+        seed_targets = planned_targets
+        if seed_targets is None and args.dry_run:
+            print(
+                "candidate catalog exhausted; running seed dry-run audit against catalog",
+                file=sys.stderr,
+            )
+            seed_targets = targets_file
+        if seed_targets is not None:
+            apply_seed_batch(args, seed_targets, output_dir)
 
-    if args.mode in {"refresh", "all"} and not args.dry_run:
-        print("== roadmap batch: overdue refresh ==")
-        apply_refresh_batch(args, output_dir)
+    if args.mode in {"refresh", "all"}:
+        if args.dry_run:
+            print("== roadmap batch: refresh planning ==")
+            plan_refresh_batch(args, output_dir)
+        else:
+            print("== roadmap batch: overdue refresh ==")
+            apply_refresh_batch(args, output_dir)
 
     if not args.dry_run:
         print("== roadmap batch: validate-index ==")

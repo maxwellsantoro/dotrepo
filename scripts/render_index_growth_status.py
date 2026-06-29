@@ -21,6 +21,19 @@ CONFIDENCE_ORDER = {"low": 0, "medium": 1, "high": 2}
 HIGH_SIGNAL_STATUSES = {"reviewed", "verified", "canonical"}
 HIGH_SIGNAL_CONFIDENCE = {"medium", "high"}
 LANGUAGE_FAMILIES = ("Rust", "TypeScript / JavaScript", "Python", "Go", "Other")
+GROWTH_BASELINE = Path("scripts/fixtures/index_growth_tranche_baseline.json")
+
+
+def default_targets_file(repo_root: Path | None = None) -> str:
+    root = repo_root or Path.cwd()
+    baseline_path = root / GROWTH_BASELINE
+    if not baseline_path.is_file():
+        raise SystemExit(f"missing growth baseline: {baseline_path}")
+    baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+    candidate = baseline.get("candidateFile")
+    if isinstance(candidate, str) and candidate.strip():
+        return candidate
+    raise SystemExit(f"{baseline_path} is missing string candidateFile")
 
 
 def parse_args() -> argparse.Namespace:
@@ -34,10 +47,10 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--targets-file",
-        default="index/tranche-two-targets.txt",
+        default=None,
         help=(
             "Machine-readable candidate target list from the active growth catalog "
-            "(default: index/tranche-two-targets.txt until a new catalog is checked in)"
+            "(default: index_growth_tranche_baseline.json candidateFile)"
         ),
     )
     parser.add_argument(
@@ -103,7 +116,10 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--output-json", help="Optional path for machine-readable JSON")
     parser.add_argument("--output-md", help="Optional path for markdown output")
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.targets_file is None:
+        args.targets_file = default_targets_file()
+    return args
 
 
 def parse_rfc3339(value: str) -> datetime | None:

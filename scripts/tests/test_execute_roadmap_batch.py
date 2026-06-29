@@ -54,7 +54,7 @@ def test_plan_seed_targets_uses_growth_baselines(tmp_path: Path) -> None:
     assert plan["milestoneProgress"]["milestoneHighSignalTarget"] == 500
 
 
-def test_dry_run_skips_refresh_and_validate(tmp_path: Path, monkeypatch) -> None:
+def test_dry_run_runs_planning_without_writeback_or_validate(tmp_path: Path, monkeypatch) -> None:
     calls: list[list[str]] = []
 
     def fake_run(command: list[str], *, check: bool = True):
@@ -123,9 +123,14 @@ def test_dry_run_skips_refresh_and_validate(tmp_path: Path, monkeypatch) -> None
     joined = [" ".join(command) for command in calls]
     assert any("render_index_growth_status.py" in command for command in joined)
     assert any("dotrepo-crawler" in command and "--dry-run" in command for command in joined)
+    assert any("refresh-plan" in command for command in joined)
+    assert any("plan_refresh_review_batches.py" in command for command in joined)
     assert not any("run_autonomous_index_batch.py" in command for command in joined)
     assert not any("validate-index" in command for command in joined)
 
 
 def test_default_targets_file_reads_growth_baseline() -> None:
-    assert roadmap_batch.default_targets_file(REPO_ROOT) == "index/tranche-two-targets.txt"
+    baseline = json.loads(
+        (REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json").read_text()
+    )
+    assert roadmap_batch.default_targets_file(REPO_ROOT) == baseline["candidateFile"]
