@@ -280,6 +280,8 @@ Current operational gaps:
 - automatic deploy coherence checks now compare the live Worker against the
   reviewed export's core contract files and a deterministic public
   `v0/files.json` hash sample before post-deploy smoke checks pass
+- Cloudflare packaging and smoke paths run on Node.js 22 in CI, matching the
+  supported Wrangler runtime used by the deployment gate
 - scheduled failures now retain telemetry and valid partial writebacks before
   restoring the failed workflow result, so early proof-gate failures and live
   repository defects no longer prevent the multi-run history from accumulating
@@ -322,6 +324,10 @@ Current execution order:
    today, leaving a 289-profile high-signal gap after the active-tranche capacity
    upper bound; crawl throughput is now the dominant Milestone 2 lever once
    proof-gate stability is demonstrated.
+4. Work down the overdue refresh queue alongside new crawls. Growth status now
+   exposes maximum and mean overdue latency, and scale claims require freshness
+   throughput to improve rather than allowing existing coverage to age while the
+   corpus expands.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly
 publish gate-passed records, improve quality without a human queue, and expose
@@ -479,8 +485,10 @@ Current status:
   over legacy references and explicit trust-bearing links for alternatives,
   dependencies, predecessors, forks, related projects, and references; reverse
   traversal emits semantic inverses and resolves profiles present in the index
-- the hosted Worker now serves cacheable GET search, compare, and relations
-  routes from the staged public snapshot
+- public export precomputes each repository's traversal response as
+  `relations.json`; the hosted Worker serves cacheable GET search, compare, and
+  relations routes from the staged public snapshot, loading this static artifact
+  instead of performing request-time index-wide traversal and profile fanout
 - hosted search now uses inventory-only matching for text-only queries, loading
   full `profile.json` snapshots only when completeness or trust filters require
   them; this keeps inventory-scale discovery cheaper on the Worker
