@@ -62,7 +62,8 @@ fn crawler_writeback_gate_blocks_when_verification_fails() {
     fs::write(root.join("README.md"), "# Broken\n\nNo identity.\n").expect("readme");
 
     let source = "https://github.com/example/broken";
-    let plan = import_repository(&root, ImportMode::Overlay, Some(source)).expect("import plan still builds");
+    let plan = import_repository(&root, ImportMode::Overlay, Some(source))
+        .expect("import plan still builds");
     let verification = verify_import_plan(&root, &plan, "https://evil.example/wrong-source");
 
     assert!(!autonomous_writeback_eligible(&verification));
