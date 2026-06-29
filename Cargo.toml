@@ -20,6 +20,7 @@ repository = "https://github.com/maxwellsantoro/dotrepo"
 [workspace.dependencies]
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
+rayon = "1"
 dotrepo-core = { version = "1.0.0", path = "crates/dotrepo-core" }
 dotrepo-schema = { version = "1.0.0", path = "crates/dotrepo-schema" }
 dotrepo-transport = { version = "1.0.0", path = "crates/dotrepo-transport" }
