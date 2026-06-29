@@ -1,16 +1,22 @@
 {
   "budgetExhaustedRuns": 0,
-  "failureClasses": {},
-  "failureClassesByEcosystem": {},
-  "failureEcosystems": {},
+  "failureClasses": {
+    "infrastructure": 1
+  },
+  "failureClassesByEcosystem": {
+    "infrastructure/unknown": 1
+  },
+  "failureEcosystems": {
+    "unknown": 1
+  },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-06-29T02:21:25Z",
-  "lastRunAt": "2026-06-29T02:21:25Z",
+  "generatedAt": "2026-06-29T07:56:46Z",
+  "lastRunAt": "2026-06-29T07:56:46Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 30,
     "adjudicationCalls": 0,
-    "crawled": 20,
+    "crawled": 30,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -22,33 +28,33 @@
     "zeroModelRate": 1.0
   },
   "previousWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 7
+    "deterministic": 6
   },
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.0,
-    "promotionRate": 0.5142857142857142,
-    "writeRate": 1.0,
+    "failureRate": 0.013333333333333334,
+    "promotionRate": 0.5066666666666667,
+    "writeRate": 0.9866666666666667,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
-    "adjudicationCallBudget": 30,
+    "adjudicationCallBudget": 20,
     "adjudicationCalls": 0,
-    "crawled": 50,
+    "crawled": 40,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
   "recentWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.0,
+    "failureRate": 0.025,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 5
+    "deterministic": 2
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [],
@@ -56,29 +62,29 @@
   "repositoriesByAdjudicationTier": {
     "deterministic": 12
   },
-  "runCount": 6,
+  "runCount": 7,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 60,
     "adjudicationCalls": 0,
-    "crawled": 70,
+    "crawled": 75,
     "discoveryQueued": 0,
-    "failed": 0,
-    "promoted": 36,
+    "failed": 1,
+    "promoted": 38,
     "qualityReprocessQueued": 55,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
     "tokensUsed": 0,
-    "written": 70,
-    "zeroModelRuns": 70
+    "written": 74,
+    "zeroModelRuns": 75
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.0,
+    "failureRate": 0.2,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   }

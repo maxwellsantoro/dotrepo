@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/pytest-dev/pytest"
-generated_at = "2026-06-26T17:44:50.280441Z"
+generated_at = "2026-06-29T07:56:28.342479045Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "pytest"
@@ -39,14 +38,14 @@ topics = [
 maintainers = []
 security_contact = "https://github.com/pytest-dev/pytest/security/advisories/new"
 
-[relations]
-references = []
+[docs]
+root = "https://pytest.org"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/pytest-dev/pytest.git"
 default_branch = "main"
 fork = false
-head_sha = "e6d8374449d0862093295f131b21a0eb2ca9526b"
+head_sha = "0e0f7813327ca0ef65feb457cf9a5885e9ba7cb9"
 html_url = "https://github.com/pytest-dev/pytest"
-stars = 14281
+stars = 14278

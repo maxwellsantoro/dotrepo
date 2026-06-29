@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/scikit-learn/scikit-learn"
-generated_at = "2026-06-26T17:43:11.199797Z"
+generated_at = "2026-06-29T07:56:34.335032479Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "scikit-learn"
@@ -46,14 +45,14 @@ topics = [
 maintainers = []
 security_contact = "security@scikit-learn.org"
 
-[relations]
-references = []
+[docs]
+root = "https://scikit-learn.org"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/scikit-learn/scikit-learn.git"
 default_branch = "main"
 fork = false
-head_sha = "bf2dfd4f4d1949cf78405af7891ec9b340b83d15"
+head_sha = "6c381f02211368addecca848be9f253e244d422c"
 html_url = "https://github.com/scikit-learn/scikit-learn"
-stars = 66492
+stars = 66619
