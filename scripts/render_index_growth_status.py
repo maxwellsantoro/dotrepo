@@ -63,7 +63,7 @@ def parse_args() -> argparse.Namespace:
         "--min-tranche-coverage-ratio",
         type=float,
         default=0.0,
-        help="Fail when present tranche target ratio is below this threshold",
+        help="Fail when present candidate target ratio is below this threshold",
     )
     parser.add_argument(
         "--max-lower-confidence-queue",
@@ -75,7 +75,7 @@ def parse_args() -> argparse.Namespace:
         "--max-missing-targets",
         type=int,
         default=None,
-        help="Fail when missing tranche target count exceeds this threshold",
+        help="Fail when missing candidate target count exceeds this threshold",
     )
     parser.add_argument(
         "--milestone-high-signal-target",
@@ -88,7 +88,7 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=None,
         help=(
-            "Fail when current record-level high-signal count plus missing tranche "
+            "Fail when current record-level high-signal count plus missing candidate "
             "targets is below this capacity threshold"
         ),
     )
@@ -632,9 +632,9 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- record-level high-signal: {progress['recordLevelHighSignalCount']}/{progress['milestoneHighSignalTarget']} ({progress['recordLevelHighSignalRatio']})",
         f"- high-signal lift candidates: {progress['statusLiftCandidateCount']}",
         f"- record-level potential after lift: {progress['recordLevelPotentialAfterLift']}/{progress['milestoneHighSignalTarget']} ({progress['recordLevelPotentialAfterLiftRatio']})",
-        f"- tranche coverage: {tranche['presentCount']}/{tranche['targetCount']} present ({tranche['coverageRatio']})",
-        f"- active tranche high-signal capacity upper bound: {progress['activeTrancheHighSignalCapacityUpperBound']}/{progress['milestoneHighSignalTarget']} ({progress['activeTrancheCapacityRatio']})",
-        f"- remaining high-signal gap after active tranche: {progress['remainingHighSignalGapAfterActiveTranche']}",
+        f"- candidate coverage: {tranche['presentCount']}/{tranche['targetCount']} present ({tranche['coverageRatio']})",
+        f"- active candidate high-signal capacity upper bound: {progress['activeTrancheHighSignalCapacityUpperBound']}/{progress['milestoneHighSignalTarget']} ({progress['activeTrancheCapacityRatio']})",
+        f"- remaining high-signal gap after active candidates: {progress['remainingHighSignalGapAfterActiveTranche']}",
         f"- quality queue: {quality['lowerConfidenceQueue']} records need review hardening signals",
         f"- missing build/test/security: build={quality['missingBuild']}, test={quality['missingTest']}, security={quality['unknownSecurityContact']}",
         f"- stale/missing generated_at: {freshness['staleOrMissingRecords']}/{freshness['recordCount']} ({freshness['staleOrMissingRecordRate']}) as of {freshness['asOf']}",
@@ -650,7 +650,7 @@ def render_markdown(summary: dict[str, Any]) -> str:
         )
     lines.extend([
         "",
-        "## Tranche Coverage",
+        "## Candidate Coverage (active targets file)",
         "",
     ])
     for group, counts in tranche["coverageByGroup"].items():
@@ -659,7 +659,7 @@ def render_markdown(summary: dict[str, Any]) -> str:
 
     missing_targets = tranche.get("missingTargets") or []
     if missing_targets:
-        lines.extend(["## Missing Tranche Targets", ""])
+        lines.extend(["## Missing Candidate Targets", ""])
         for target in missing_targets:
             lines.append(f"- `{target['identity']}` ({target['group']})")
         lines.append("")

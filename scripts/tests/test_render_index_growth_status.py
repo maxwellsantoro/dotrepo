@@ -315,11 +315,11 @@ def test_render_markdown_includes_operational_gates(tmp_path: Path) -> None:
         )
     )
 
-    assert "- tranche coverage: 1/1 present (1.0)" in markdown
+    assert "- candidate coverage: 1/1 present (1.0)" in markdown
     assert "- record-level high-signal: 1/500 (0.002)" in markdown
     assert "- high-signal lift candidates: 0" in markdown
     assert "- record-level potential after lift: 1/500 (0.002)" in markdown
-    assert "- active tranche high-signal capacity upper bound: 1/500 (0.002)" in markdown
+    assert "- active candidate high-signal capacity upper bound: 1/500 (0.002)" in markdown
     assert "## Gates" in markdown
     assert "- minTrancheCoverageRatio: 1.0 / 1.0 (pass)" in markdown
     assert "- maxLowerConfidenceQueue: 0 / 0 (pass)" in markdown

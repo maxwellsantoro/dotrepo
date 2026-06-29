@@ -354,6 +354,7 @@ fn tool_import_write(arguments: Value) -> Result<(String, Value)> {
         source.as_deref(),
         &ImportOptions {
             generated_at: Some(current_timestamp_rfc3339()?),
+            github: None,
         },
     )?;
     let written_paths = write_import_plan(&root, &plan, force)?;
@@ -1354,6 +1355,7 @@ description = "Missing source and trust"
             Some("https://github.com/example/project"),
             &ImportOptions {
                 generated_at: Some(current_timestamp_rfc3339().expect("timestamp")),
+                github: None,
             },
         )
         .expect("import plan builds");

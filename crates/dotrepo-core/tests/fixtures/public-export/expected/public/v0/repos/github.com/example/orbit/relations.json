@@ -54,11 +54,12 @@
           "relation"
         ],
         "ranking": {
-          "score": 10,
+          "score": 11,
           "matchedFieldCount": 1,
           "completenessSignalCount": 0,
           "basis": [
-            "matchedFields"
+            "matchedFields",
+            "trustConfidence"
           ]
         },
         "links": {

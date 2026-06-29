@@ -290,7 +290,7 @@ def render_markdown(plan: dict[str, Any]) -> str:
     summary = plan["summary"]
     progress = plan["milestoneProgress"]
     lines = [
-        "# Index Growth Tranche Plan",
+        "# Index Growth Plan",
         "",
         f"- candidate file: `{plan['candidateFile']}`",
         f"- existing records: {summary['existingRecordCount']}",

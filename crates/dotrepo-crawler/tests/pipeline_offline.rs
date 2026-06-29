@@ -45,6 +45,10 @@ fn offline_writeback_from_import_fixture_validates_index() {
         Some("https://github.com/example/orbit"),
         &ImportOptions {
             generated_at: Some("2026-03-17T12:00:00Z".into()),
+            github: Some(dotrepo_core::GitHubSnapshotFacts {
+                fork: true,
+                parent: Some("github.com/example/upstream".into()),
+            }),
         },
     )
     .expect("import succeeds");
@@ -66,6 +70,7 @@ fn offline_writeback_from_import_fixture_validates_index() {
             stars: None,
             archived: false,
             fork: false,
+            parent: None,
         },
         factual: FactualWritebackPlan {
             import_plan,
@@ -80,6 +85,12 @@ fn offline_writeback_from_import_fixture_validates_index() {
     let record_text = fs::read_to_string(&report.manifest_path).expect("record read");
     let manifest = parse_manifest(&record_text).expect("record parses");
     assert_eq!(manifest.repo.name, "Harbor");
+    // end-to-end: discover + links produced in manifest/evidence via apply_crawl_writeback with fork facts
+    let rels = manifest.relations.as_ref().expect("relations present after writeback with fork facts");
+    assert!(rels.links.iter().any(|l| l.kind == dotrepo_schema::RelationKind::Fork && l.target.contains("upstream")), "discovered fork link must be in produced manifest");
+    let ev_text = fs::read_to_string(&evidence_path).expect("evidence read");
+    assert!(ev_text.contains("Discovered fork-of relation"), "evidence must record the discovered relation from fork facts");
+
     assert!(fs::metadata(&evidence_path).is_ok());
     assert!(validate_index_root(&index_root)
         .expect("index validates")

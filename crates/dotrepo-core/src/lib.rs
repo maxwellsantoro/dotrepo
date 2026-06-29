@@ -116,7 +116,7 @@ pub use import::{
     AdjudicationTier, AdjudicationTierProvider, CandidateProvenance, CommandCandidateSelection,
     CommandCandidateSummary, CommandSourceTier, FieldConfidence, FieldScore, FieldScoreReport,
     FieldScoreSummary, ImportCommandCandidates, ImportEscalationOptions, ImportEscalationReport,
-    ImportMode, ImportOptions, ImportPlan, ImportPreviewReport, ImportedCommandProvenance,
+    GitHubSnapshotFacts, ImportMode, ImportOptions, ImportPlan, ImportPreviewReport, ImportedCommandProvenance,
     NoopAdjudicationProvider, StubAdjudicationProvider, TieredAdjudicationProviders,
     VerificationCheck, VerificationReport, VerificationSeverity,
 };
@@ -137,6 +137,9 @@ pub(crate) use render::{
     generated_banner, render_contributing, render_contributing_body, render_pull_request_template,
     render_security_body, CommentStyle,
 };
+
+#[cfg(test)]
+pub(crate) use public::{search_ranking_from_profile, trust_confidence_boost};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]

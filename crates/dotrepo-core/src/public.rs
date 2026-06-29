@@ -1724,11 +1724,12 @@ fn completeness_signal_count(completeness: &PublicResearchCompleteness) -> usize
     .count()
 }
 
-fn search_ranking_from_profile(
+pub(crate) fn search_ranking_from_profile(
     profile: &PublicResearchProfileResponse,
     matched: &[String],
 ) -> PublicProfileSearchRanking {
     let completeness_signal_count = completeness_signal_count(&profile.completeness);
+    let trust_boost = trust_confidence_boost(profile.trust.confidence.as_deref());
     let mut basis = Vec::new();
     if !matched.is_empty() {
         basis.push("matchedFields".into());
@@ -1736,11 +1737,22 @@ fn search_ranking_from_profile(
     if completeness_signal_count > 0 {
         basis.push("profileCompleteness".into());
     }
+    if trust_boost > 0 {
+        basis.push("trustConfidence".into());
+    }
     PublicProfileSearchRanking {
-        score: matched.len() * 10 + completeness_signal_count,
+        score: matched.len() * 10 + completeness_signal_count + trust_boost,
         matched_field_count: matched.len(),
         completeness_signal_count,
         basis,
+    }
+}
+
+pub(crate) fn trust_confidence_boost(confidence: Option<&str>) -> usize {
+    match confidence.map(|c| c.to_ascii_lowercase()) {
+        Some(c) if c == "high" => 3,
+        Some(c) if c == "medium" => 1,
+        _ => 0,
     }
 }
 

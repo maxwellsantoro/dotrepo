@@ -54,12 +54,13 @@
           "relation"
         ],
         "ranking": {
-          "score": 13,
+          "score": 14,
           "matchedFieldCount": 1,
           "completenessSignalCount": 3,
           "basis": [
             "matchedFields",
-            "profileCompleteness"
+            "profileCompleteness",
+            "trustConfidence"
           ]
         },
         "links": {

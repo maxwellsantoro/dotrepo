@@ -92,6 +92,7 @@ pub fn cmd_import(
         source.as_deref(),
         &ImportOptions {
             generated_at: Some(current_timestamp()?),
+            github: None,
         },
     )?;
 

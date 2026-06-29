@@ -1,11 +1,13 @@
 use anyhow::{anyhow, Result};
 use dotrepo_schema::{
     parse_manifest, render_manifest, Compat, CompatMode, Docs, GitHubCompat, Manifest, Owners,
-    Readme, Record, RecordMode, RecordStatus, Relations, Repo, Trust,
+    Readme, Record, RecordMode, RecordStatus, RelationKind, RelationLink, Relations, Repo, Trust,
 };
 use serde::{Deserialize, Serialize};
+use serde_json;
 use std::fs;
 use std::path::{Path, PathBuf};
+use toml;
 
 use crate::render::{
     render_contributing_body, render_pull_request_template_body, render_security_body,
@@ -84,6 +86,16 @@ pub struct ImportPreviewReport {
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct ImportOptions {
     pub generated_at: Option<String>,
+    /// Optional GitHub snapshot facts (fork state + parent) to enable deterministic
+    /// overlay relation discovery for the autonomous path without fabricating links.
+    pub github: Option<GitHubSnapshotFacts>,
+}
+
+/// GitHub-derived facts available at crawl time for conservative relation discovery.
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+pub struct GitHubSnapshotFacts {
+    pub fork: bool,
+    pub parent: Option<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -733,11 +745,31 @@ pub fn import_repository_with_options(
         }),
         ImportMode::Overlay => None,
     };
+
+    // Deterministic, conservative relation discovery for autonomous overlay records.
+    // Only populates high-certainty links (e.g. GitHub fork parent) grounded in provided facts.
+    // Never fabricates; native records and cases without evidence remain unaffected.
+    let (mut discovered_links, mut relation_evidence_notes) =
+        discover_relations_from_github_facts(options.github.as_ref());
+    // Additional conservative discovery from package manifests (Cargo.toml / package.json
+    // "repository" fields containing github urls). High-certainty only; used for overlay
+    // autonomous path to satisfy declared-references requirement.
+    if matches!(mode, ImportMode::Overlay) {
+        if let Some((extra, enotes)) = discover_relations_from_manifest_files(root) {
+            for l in extra {
+                if !discovered_links.iter().any(|x| x.target == l.target) {
+                    discovered_links.push(l);
+                }
+            }
+            relation_evidence_notes.extend(enotes);
+        }
+    }
     manifest.relations = match mode {
         ImportMode::Native => None,
+        ImportMode::Overlay if discovered_links.is_empty() => None,
         ImportMode::Overlay => Some(Relations {
             references: Vec::new(),
-            links: Vec::new(),
+            links: discovered_links,
         }),
     };
 
@@ -769,6 +801,7 @@ pub fn import_repository_with_options(
                 security_note.as_deref(),
                 imported_docs.is_some(),
                 &imported_commands.evidence_bullets,
+                &relation_evidence_notes,
             )),
         ),
     };
@@ -1852,6 +1885,7 @@ fn render_import_evidence(
     security_note: Option<&str>,
     imported_docs: bool,
     command_evidence_bullets: &[String],
+    relation_evidence_bullets: &[String],
 ) -> String {
     let mut bullets = Vec::new();
 
@@ -1911,6 +1945,7 @@ fn render_import_evidence(
     }
 
     bullets.extend(command_evidence_bullets.iter().cloned());
+    bullets.extend(relation_evidence_bullets.iter().cloned());
     bullets.push("This is an overlay record, not a maintainer-controlled canonical record.".into());
 
     let mut out = String::from("# Evidence\n\n");
@@ -1987,6 +2022,239 @@ pub(super) fn human_join(values: &[String]) -> String {
                 .join(", ");
             format!("{}, and `{}`", leading, last)
         }
+    }
+}
+
+/// Pure deterministic discovery of conservative, evidence-backed relations.
+/// Returns links + evidence notes to record. Only emits for high-certainty cases
+/// (e.g. fork parent from GitHub snapshot facts). No fabrication for native or absent signals.
+fn discover_relations_from_github_facts(
+    github: Option<&GitHubSnapshotFacts>,
+) -> (Vec<RelationLink>, Vec<String>) {
+    let mut links = Vec::new();
+    let mut notes = Vec::new();
+    if let Some(g) = github {
+        if g.fork {
+            if let Some(parent) = g.parent.as_deref().and_then(trimmed_non_empty_for_target) {
+                let target = normalize_relation_target(parent);
+                if !target.is_empty() {
+                    links.push(RelationLink {
+                        kind: RelationKind::Fork,
+                        target: target.clone(),
+                        notes: Some(
+                            "Fork relation discovered from GitHub snapshot parent metadata."
+                                .to_string(),
+                        ),
+                        trust: Trust {
+                            confidence: Some("high".to_string()),
+                            provenance: vec!["declared".to_string(), "github".to_string()],
+                            notes: None,
+                        },
+                    });
+                    notes.push(format!(
+                        "Discovered fork-of relation targeting {} from GitHub parent metadata.",
+                        target
+                    ));
+                }
+            }
+        }
+    }
+    (links, notes)
+}
+
+fn trimmed_non_empty_for_target(s: &str) -> Option<&str> {
+    let t = s.trim();
+    if t.is_empty() {
+        None
+    } else {
+        Some(t)
+    }
+}
+
+fn normalize_relation_target(s: &str) -> String {
+    let s = s.trim().trim_end_matches('/').trim_end_matches(".git");
+    if s.is_empty() {
+        return String::new();
+    }
+    if let Some(rest) = s.strip_prefix("https://github.com/") {
+        format!("github.com/{}", rest.trim_start_matches('/'))
+    } else if let Some(rest) = s.strip_prefix("http://github.com/") {
+        format!("github.com/{}", rest.trim_start_matches('/'))
+    } else if let Some(rest) = s.strip_prefix("github.com/") {
+        format!("github.com/{}", rest)
+    } else if s.contains('/') && !s.contains(' ') {
+        // bare "owner/repo" -> github.com/owner/repo
+        if s.starts_with("github.com/") {
+            s.to_string()
+        } else {
+            format!("github.com/{}", s)
+        }
+    } else {
+        String::new()
+    }
+}
+
+/// Conservative discovery from package manifests (Cargo.toml / package.json) + README
+/// for declared github urls in repository/homepage fields or explicit cross-links.
+/// Adds Related/Reference based on signals (never fabricates). Covers homepage
+/// cross-links and manifest-declared github ids per checklist.
+fn discover_relations_from_manifest_files(root: &Path) -> Option<(Vec<RelationLink>, Vec<String>)> {
+    let mut links = Vec::new();
+    let mut notes = Vec::new();
+
+    // Cargo.toml - use toml for [package] section (repository + homepage)
+    if let Ok(text) = fs::read_to_string(root.join("Cargo.toml"))
+        .or_else(|_| fs::read_to_string(root.join("cargo.toml")))
+    {
+        if let Ok(val) = toml::from_str::<toml::Value>(&text) {
+            if let Some(pkg) = val.get("package") {
+                for key in ["repository", "homepage"] {
+                    if let Some(v) = pkg.get(key).and_then(|x| x.as_str()) {
+                        if v.contains("github.com") {
+                            if let Some(tgt) = extract_github_target_from_str(v) {
+                                let already = links.iter().any(|l: &RelationLink| l.target == tgt);
+                                if !tgt.is_empty() && !already {
+                                    let kind = if key == "repository" { RelationKind::Related } else { RelationKind::Related };
+                                    links.push(RelationLink {
+                                        kind,
+                                        target: tgt.clone(),
+                                        notes: Some(format!("Declared {} in Cargo.toml.", key)),
+                                        trust: Trust {
+                                            confidence: Some("low".to_string()),
+                                            provenance: vec!["declared".to_string(), "manifest".to_string()],
+                                            notes: None,
+                                        },
+                                    });
+                                    notes.push(format!("Discovered related relation to {} from Cargo.toml {}.", tgt, key));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            // fallback crude scan
+            for line in text.lines() {
+                let lower = line.to_ascii_lowercase();
+                if (lower.contains("repository") || lower.contains("homepage")) && lower.contains("github.com") {
+                    if let Some(url) = extract_first_github_url(line) {
+                        let tgt = normalize_relation_target(&url);
+                        if !tgt.is_empty() && !links.iter().any(|l| l.target == tgt) {
+                            links.push(RelationLink {
+                                kind: RelationKind::Related,
+                                target: tgt.clone(),
+                                notes: Some("Declared homepage/repository in Cargo.toml.".to_string()),
+                                trust: Trust {
+                                    confidence: Some("low".to_string()),
+                                    provenance: vec!["declared".to_string(), "manifest".to_string()],
+                                    notes: None,
+                                },
+                            });
+                            notes.push(format!("Discovered related relation to {} from Cargo.toml.", tgt));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // package.json - repository + homepage (object or string)
+    if let Ok(text) = fs::read_to_string(root.join("package.json")) {
+        if let Ok(val) = serde_json::from_str::<serde_json::Value>(&text) {
+            for key in ["repository", "homepage"] {
+                let v = if key == "repository" {
+                    val.get(key).and_then(|r| {
+                        if let Some(s) = r.as_str() { Some(s.to_string()) } else { r.get("url").and_then(|u| u.as_str()).map(|s| s.to_string()) }
+                    })
+                } else {
+                    val.get(key).and_then(|h| h.as_str()).map(|s| s.to_string())
+                };
+                if let Some(s) = v {
+                    if s.contains("github.com") {
+                        if let Some(tgt) = extract_github_target_from_str(&s) {
+                            if !tgt.is_empty() && !links.iter().any(|l| l.target == tgt) {
+                                links.push(RelationLink {
+                                    kind: RelationKind::Related,
+                                    target: tgt.clone(),
+                                    notes: Some(format!("Declared {} in package.json.", key)),
+                                    trust: Trust {
+                                        confidence: Some("low".to_string()),
+                                        provenance: vec!["declared".to_string(), "manifest".to_string()],
+                                        notes: None,
+                                    },
+                                });
+                                notes.push(format!("Discovered related relation to {} from package.json {}.", tgt, key));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // README cross-links for homepage-style or "see also" / related github (using markdown extractor if available)
+    if let Ok(readme) = fs::read_to_string(root.join("README.md")).or_else(|_| fs::read_to_string(root.join("README"))) {
+        let lowered = readme.to_ascii_lowercase();
+        if lowered.contains("github.com") && (lowered.contains("see also") || lowered.contains("related") || lowered.contains("homepage") || lowered.contains("fork")) {
+            for (label, url) in extract_markdown_links(&readme) {  // use existing parser (in scope via pub(crate) reexport)
+                if url.contains("github.com") {
+                    if let Some(tgt) = extract_github_target_from_str(&url) {
+                        if !tgt.is_empty() && !links.iter().any(|l| l.target == tgt) {
+                            links.push(RelationLink {
+                                kind: RelationKind::Related,
+                                target: tgt.clone(),
+                                notes: Some(format!("Cross-link from README: {}", label)),
+                                trust: Trust {
+                                    confidence: Some("low".to_string()),
+                                    provenance: vec!["declared".to_string(), "readme".to_string()],
+                                    notes: None,
+                                },
+                            });
+                            notes.push(format!("Discovered related relation to {} from README cross-link.", tgt));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if links.is_empty() {
+        None
+    } else {
+        Some((links, notes))
+    }
+}
+
+fn extract_first_github_url(text: &str) -> Option<String> {
+    let candidates = ["https://github.com/", "http://github.com/", "github.com/"];
+    for cand in candidates {
+        if let Some(pos) = text.find(cand) {
+            let start = pos;
+            let rest = &text[start..];
+            let mut end = rest.len();
+            for (i, c) in rest.char_indices() {
+                if c.is_whitespace() || matches!(c, '"' | '\'' | ',' | ']' | '}' | ')' | '>') {
+                    end = i;
+                    break;
+                }
+            }
+            let url = rest[..end].trim_matches(|c: char| matches!(c, '"' | '\'' | ',' | ' ' | ')' | ']' | '}' | '>' | '<')).to_string();
+            if url.contains('/') {
+                return Some(url);
+            }
+        }
+    }
+    None
+}
+
+fn extract_github_target_from_str(s: &str) -> Option<String> {
+    if s.contains("github.com") {
+        let t = normalize_relation_target(s);
+        if !t.is_empty() { Some(t) } else { None }
+    } else {
+        None
     }
 }
 

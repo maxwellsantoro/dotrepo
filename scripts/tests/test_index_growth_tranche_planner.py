@@ -189,7 +189,7 @@ def test_render_markdown_includes_selected_and_indexed_sections(tmp_path: Path) 
 
     markdown = planner.render_markdown(plan)
 
-    assert "# Index Growth Tranche Plan" in markdown
+    assert "# Index Growth Plan" in markdown
     assert "- selected targets: 1/1" in markdown
     assert "## Milestone 2 Capacity" in markdown
     assert "- planned high-signal capacity upper bound: 1/500" in markdown

@@ -442,6 +442,12 @@ impl GitHubClient for HttpGitHubClient {
             stars: Some(repo.stargazers_count),
             archived: repo.archived,
             fork: repo.fork,
+            parent: repo.parent.and_then(|p| {
+                p.full_name
+                    .filter(|f| !f.trim().is_empty())
+                    .map(|f| format!("github.com/{}", f))
+                    .or_else(|| p.html_url.and_then(|u| normalize_parent_from_url(&u)))
+            }),
         })
     }
 
@@ -598,6 +604,17 @@ fn render_star_band(star_band: &StarBand) -> String {
     }
 }
 
+fn normalize_parent_from_url(u: &str) -> Option<String> {
+    let u = u.trim().trim_end_matches('/');
+    if let Some(rest) = u.strip_prefix("https://github.com/") {
+        Some(format!("github.com/{}", rest.trim_start_matches('/')))
+    } else if let Some(rest) = u.strip_prefix("http://github.com/") {
+        Some(format!("github.com/{}", rest.trim_start_matches('/')))
+    } else {
+        None
+    }
+}
+
 #[derive(Debug, Deserialize)]
 struct RepositoryApiResponse {
     html_url: String,
@@ -610,6 +627,13 @@ struct RepositoryApiResponse {
     stargazers_count: u64,
     archived: bool,
     fork: bool,
+    parent: Option<ParentApiResponse>,
+}
+
+#[derive(Debug, Deserialize)]
+struct ParentApiResponse {
+    full_name: Option<String>,
+    html_url: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]

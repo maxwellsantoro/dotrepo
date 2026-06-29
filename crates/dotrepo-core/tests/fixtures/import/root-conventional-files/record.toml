@@ -1,0 +1,30 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/example/test"
+generated_at = "2026-06-29T04:10:46.128793Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Harbor"
+description = "Imported repository metadata; review and refine before relying on it."
+homepage = "https://github.com/example/test"
+languages = []
+topics = []
+
+[owners]
+maintainers = [
+    "@harbor-maintainer",
+    "@docs-team",
+    "docs@example.com",
+]
+security_contact = "https://github.com/acme/harbor/security/policy"

@@ -346,6 +346,7 @@ fn import_options_can_populate_record_generated_at() {
         Some("https://example.com/fixtures/description-only-readme"),
         &ImportOptions {
             generated_at: Some("2026-03-17T12:00:00Z".into()),
+            github: None,
         },
     )
     .expect("overlay import succeeds");

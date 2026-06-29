@@ -249,6 +249,10 @@ pub struct GitHubRepositorySnapshot {
     pub stars: Option<u64>,
     pub archived: bool,
     pub fork: bool,
+    /// Normalized parent target for forks, e.g. "github.com/upstream/repo" when GitHub reports parent.
+    /// Enables deterministic fork relation discovery.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub parent: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 UV_PYTHON = ["uv", "run", "python"]
-GROWTH_BASELINE = Path("scripts/fixtures/index_growth_tranche_baseline.json")
+GROWTH_BASELINE = Path("scripts/fixtures/index_growth_tranche_baseline.json")  # baseline supplies candidateFile (may be exhausted tranche or arbitrary)
 
 
 def load_json(path: Path) -> dict:
