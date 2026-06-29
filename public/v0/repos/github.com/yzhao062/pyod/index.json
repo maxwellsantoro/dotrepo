@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "yzhao062",
+    "repo": "pyod",
+    "source": "https://github.com/yzhao062/pyod"
+  },
+  "repository": {
+    "name": "pyod",
+    "description": "A Python library for anomaly detection across tabular, time series, graph, text, image, and audio data. 60+ detectors, benchmark-backed ADEngine orchestration, and an agentic workflow for AI agents.",
+    "homepage": "http://pyod.readthedocs.io",
+    "docsRoot": "http://pyod.readthedocs.io"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/yzhao062/pyod/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/yzhao062/pyod",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/yzhao062/pyod/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/yzhao062/pyod/index.json",
+    "trust": "/v0/repos/github.com/yzhao062/pyod/trust.json",
+    "profile": "/v0/repos/github.com/yzhao062/pyod/profile.json",
+    "queryTemplate": "/v0/repos/github.com/yzhao062/pyod/query?path={dot_path}",
+    "indexPath": "repos/github.com/yzhao062/pyod/"
+  }
+}

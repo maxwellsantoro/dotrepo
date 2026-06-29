@@ -1,0 +1,65 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ipxe/ipxe"
+generated_at = "2026-06-29T05:27:18.836961Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "iPXE network bootloader"
+description = "iPXE network bootloader"
+homepage = "https://ipxe.org"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Assembly",
+    "C",
+    "C++",
+    "GDB",
+    "Linker Script",
+    "Makefile",
+    "Perl",
+    "Python",
+    "Roff",
+    "Shell",
+]
+topics = [
+    "ipxe",
+    "pxe",
+    "boot",
+    "firmware",
+    "network",
+    "netboot",
+    "secureboot",
+    "uefi",
+    "uefi-boot",
+    "aarch32",
+    "aarch64",
+    "loongarch64",
+    "risc-v",
+    "s390x",
+    "x86",
+    "x86-64",
+]
+
+[docs]
+root = "https://ipxe.org"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ipxe/ipxe.git"
+default_branch = "master"
+fork = false
+head_sha = "e5d0c804eea7c2fbe680b1ecd66435a94a9819e3"
+html_url = "https://github.com/ipxe/ipxe"
+stars = 1998

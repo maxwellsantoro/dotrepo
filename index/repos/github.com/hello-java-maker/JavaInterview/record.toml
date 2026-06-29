@@ -1,0 +1,38 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/hello-java-maker/JavaInterview"
+generated_at = "2026-06-29T05:24:40.684376Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "ctrl + f 查找更香：不能点击的，还在写）"
+description = "= 栈和队列的题目可以这样出题型，你掌握了吗"
+homepage = "http://www.java1000.com"
+visibility = "public"
+languages = []
+topics = [
+    "java",
+    "interview",
+]
+
+[docs]
+root = "http://www.java1000.com"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/hello-java-maker/JavaInterview.git"
+default_branch = "master"
+fork = false
+head_sha = "cb1e426145d2df3682eeec922d2052732403e3ab"
+html_url = "https://github.com/hello-java-maker/JavaInterview"
+stars = 4985

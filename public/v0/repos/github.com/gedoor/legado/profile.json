@@ -1,0 +1,67 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "gedoor",
+    "repo": "legado",
+    "source": "https://github.com/gedoor/legado"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/gedoor/legado/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/gedoor/legado",
+    "generatedAt": "2026-06-29T05:14:40.036738Z",
+    "evidencePath": "repos/github.com/gedoor/legado/evidence.md"
+  },
+  "purpose": "Legado 3.0 Book Reader with powerful controls & full functions❤️阅读3.0, 阅读是一款可以自定义来源阅读网络内容的工具，为广大网络文学爱好者提供一种方便、快捷舒适的试读体验。",
+  "name": "legado",
+  "homepage": "https://github.com/gedoor/legado",
+  "visibility": "public",
+  "languages": [
+    "AMPL",
+    "Batchfile",
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Shell",
+    "TypeScript",
+    "Vue"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/gedoor/legado/profile.json",
+    "repository": "/v0/repos/github.com/gedoor/legado/index.json",
+    "trust": "/v0/repos/github.com/gedoor/legado/trust.json",
+    "queryTemplate": "/v0/repos/github.com/gedoor/legado/query?path={dot_path}",
+    "indexPath": "repos/github.com/gedoor/legado/"
+  }
+}

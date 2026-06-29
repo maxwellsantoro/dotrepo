@@ -1,0 +1,120 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Imbad0202",
+    "repo": "academic-research-skills-codex",
+    "source": "https://github.com/Imbad0202/academic-research-skills-codex"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Imbad0202/academic-research-skills-codex/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Imbad0202/academic-research-skills-codex",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Imbad0202/academic-research-skills-codex/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Imbad0202/academic-research-skills-codex",
+        "generated_at": "2026-06-29T05:26:11.955038Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Academic Research Skills for Codex",
+        "description": "Codex-native packaging of the Academic Research Skills suite.",
+        "homepage": "https://github.com/Imbad0202/academic-research-skills-codex",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "HTML",
+          "Python",
+          "Shell",
+          "TeX",
+          "jq"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "academic-pipeline",
+          "academic-research",
+          "academic-writing",
+          "ai-research",
+          "codex",
+          "literature-review",
+          "openai-codex",
+          "peer-review",
+          "prompt-engineering",
+          "research-assistant"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://github.com/Imbad0202/academic-research-skills-codex/security/advisories"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/Imbad0202/academic-research-skills",
+            "notes": "Cross-link from README: Academic Research Skills for Claude Code",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Imbad0202/academic-research-skills-codex.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "efdbc2a4a74ae3482e63535bbbcb2a125066d5de",
+          "html_url": "https://github.com/Imbad0202/academic-research-skills-codex",
+          "stars": 4971
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

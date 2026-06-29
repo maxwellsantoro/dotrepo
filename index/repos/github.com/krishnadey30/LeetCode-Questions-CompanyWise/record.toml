@@ -1,0 +1,29 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"
+generated_at = "2026-06-29T05:16:33.200332Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "LeetCode-Questions-CompanyWise"
+description = "Contains Company Wise Questions sorted based on Frequency and all time"
+homepage = "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"
+visibility = "public"
+languages = []
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise.git"
+default_branch = "master"
+fork = false
+head_sha = "fb5f78b55eead7f948aada8459c5bfd31ae8abbc"
+html_url = "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"
+stars = 19908

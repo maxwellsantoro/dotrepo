@@ -1,0 +1,72 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rubik",
+    "repo": "radon",
+    "source": "https://github.com/rubik/radon"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/rubik/radon/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/rubik/radon",
+    "generatedAt": "2026-06-29T05:28:53.32147Z",
+    "evidencePath": "repos/github.com/rubik/radon/evidence.md"
+  },
+  "purpose": "Various code metrics for Python code",
+  "name": "radon",
+  "homepage": "http://radon.readthedocs.org/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Makefile",
+    "Python"
+  ],
+  "topics": [
+    "python",
+    "cli",
+    "static-analysis",
+    "code-analysis",
+    "quality-assurance"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "http://radon.readthedocs.org/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/rubik/radon/profile.json",
+    "repository": "/v0/repos/github.com/rubik/radon/index.json",
+    "trust": "/v0/repos/github.com/rubik/radon/trust.json",
+    "queryTemplate": "/v0/repos/github.com/rubik/radon/query?path={dot_path}",
+    "indexPath": "repos/github.com/rubik/radon/"
+  }
+}

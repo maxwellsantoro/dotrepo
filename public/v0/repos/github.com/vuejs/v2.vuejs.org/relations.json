@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "vuejs",
+    "repo": "v2.vuejs.org",
+    "source": "https://github.com/vuejs/v2.vuejs.org"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/vuejs/docs-next",
+      "notes": "Cross-link from README: v3 doc repo",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "vuejs",
+        "repo": "docs-next"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/vuejs/docs-next/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/vuejs/v2.vuejs.org/relations",
+    "repository": "/v0/repos/github.com/vuejs/v2.vuejs.org/index.json",
+    "trust": "/v0/repos/github.com/vuejs/v2.vuejs.org/trust.json",
+    "profile": "/v0/repos/github.com/vuejs/v2.vuejs.org/profile.json",
+    "queryTemplate": "/v0/repos/github.com/vuejs/v2.vuejs.org/query?path={dot_path}",
+    "indexPath": "repos/github.com/vuejs/v2.vuejs.org/"
+  }
+}

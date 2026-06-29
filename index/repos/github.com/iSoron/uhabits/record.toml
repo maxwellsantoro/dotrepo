@@ -1,0 +1,46 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/iSoron/uhabits"
+generated_at = "2026-06-29T05:20:07.996303Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Loop Habit Tracker"
+description = "Loop is a mobile app that helps you create and maintain good habits, allowing you to achieve your long-term goals."
+homepage = "https://github.com/iSoron/uhabits"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Python",
+    "Shell",
+]
+topics = [
+    "android",
+    "habits",
+    "habit-tracker",
+    "streak",
+    "java",
+    "kotlin",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/iSoron/uhabits.git"
+default_branch = "dev"
+fork = false
+head_sha = "4383b3ed03cb5db196e9b0d39405ff1913ffbef3"
+html_url = "https://github.com/iSoron/uhabits"
+stars = 9992

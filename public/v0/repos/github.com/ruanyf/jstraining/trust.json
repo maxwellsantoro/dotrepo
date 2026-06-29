@@ -1,0 +1,45 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ruanyf",
+    "repo": "jstraining",
+    "source": "https://github.com/ruanyf/jstraining"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ruanyf/jstraining/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ruanyf/jstraining",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ruanyf/jstraining/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ruanyf/jstraining/trust.json",
+    "repository": "/v0/repos/github.com/ruanyf/jstraining/index.json",
+    "profile": "/v0/repos/github.com/ruanyf/jstraining/profile.json",
+    "queryTemplate": "/v0/repos/github.com/ruanyf/jstraining/query?path={dot_path}",
+    "indexPath": "repos/github.com/ruanyf/jstraining/"
+  }
+}

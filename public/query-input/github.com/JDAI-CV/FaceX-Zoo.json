@@ -1,0 +1,120 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "JDAI-CV",
+    "repo": "FaceX-Zoo",
+    "source": "https://github.com/JDAI-CV/FaceX-Zoo"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/JDAI-CV/FaceX-Zoo/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/JDAI-CV/FaceX-Zoo",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/JDAI-CV/FaceX-Zoo/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/JDAI-CV/FaceX-Zoo",
+        "generated_at": "2026-06-29T05:28:33.754705Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "FaceX-Zoo",
+        "description": "FaceX-Zoo is a PyTorch toolbox for face recognition.",
+        "homepage": "https://arxiv.org/pdf/2101.04407.pdf",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Cython",
+          "Dockerfile",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "face-recognition",
+          "masked-face-recognition",
+          "face-sdk",
+          "semi-siamese-training",
+          "megaface",
+          "lfw",
+          "circleloss",
+          "adam-softmax",
+          "mv-softmax",
+          "magface"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://arxiv.org/pdf/2101.04407.pdf",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/NVIDIA/apex",
+            "notes": "Cross-link from README: apex",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/JDAI-CV/FaceX-Zoo.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "16b793a7564a4b9308cf94e62bdb2ffacb3a725a",
+          "html_url": "https://github.com/JDAI-CV/FaceX-Zoo",
+          "stars": 1996
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

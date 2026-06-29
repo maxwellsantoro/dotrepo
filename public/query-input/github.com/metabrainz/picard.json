@@ -1,0 +1,103 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "metabrainz",
+    "repo": "picard",
+    "source": "https://github.com/metabrainz/picard"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/metabrainz/picard/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/metabrainz/picard",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/metabrainz/picard/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/metabrainz/picard",
+        "generated_at": "2026-06-29T05:24:56.599591Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "MusicBrainz Picard",
+        "description": "MusicBrainz Picard is a cross-platform (Linux, macOS, Windows) audio tagging application.",
+        "homepage": "https://picard.musicbrainz.org",
+        "license": "GPL-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "PowerShell",
+          "Python",
+          "Shell"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "python",
+          "musicbrainz",
+          "tagger",
+          "audio",
+          "music-tagger",
+          "id3",
+          "acoustid",
+          "musicbrainz-picard",
+          "music",
+          "picard"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://picard-docs.musicbrainz.org/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/metabrainz/picard.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "b1ba75a25be05010eff77ce05916a8a8c9f51663",
+          "html_url": "https://github.com/metabrainz/picard",
+          "stars": 4983
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

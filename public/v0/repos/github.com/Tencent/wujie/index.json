@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Tencent",
+    "repo": "wujie",
+    "source": "https://github.com/Tencent/wujie"
+  },
+  "repository": {
+    "name": "wujie（无界）",
+    "description": "无界微前端是一款基于 Web Components + iframe 微前端框架，具备成本低、速度快、原生隔离、功能强等一系列优点。",
+    "homepage": "https://wujie-micro.github.io/doc/",
+    "docsRoot": "https://wujie-micro.github.io/doc/"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Tencent/wujie/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Tencent/wujie",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Tencent/wujie/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Tencent/wujie/index.json",
+    "trust": "/v0/repos/github.com/Tencent/wujie/trust.json",
+    "profile": "/v0/repos/github.com/Tencent/wujie/profile.json",
+    "queryTemplate": "/v0/repos/github.com/Tencent/wujie/query?path={dot_path}",
+    "indexPath": "repos/github.com/Tencent/wujie/"
+  }
+}

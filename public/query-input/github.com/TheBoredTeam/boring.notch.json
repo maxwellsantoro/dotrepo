@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "TheBoredTeam",
+    "repo": "boring.notch",
+    "source": "https://github.com/TheBoredTeam/boring.notch"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/TheBoredTeam/boring.notch/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/TheBoredTeam/boring.notch",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/TheBoredTeam/boring.notch/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/TheBoredTeam/boring.notch",
+        "generated_at": "2026-06-29T05:23:14.998048Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Boring Notch",
+        "description": "Say hello to **Boring Notch**, the coolest way to make your MacBook’s notch the star of the show! Say goodbye to boring status bars: with Boring Notch, your notch transforms into a dynamic music control center, complete with a vibrant visualizer and all the essential music controls you need.",
+        "homepage": "https://theboring.name/",
+        "license": "GPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Metal",
+          "Perl",
+          "Python",
+          "Shell",
+          "Swift"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://github.com/TheBoredTeam/boring.notch/security/advisories/new"
+      },
+      "docs": {
+        "root": "https://theboring.name/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/TheBoredTeam/boring.notch.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "e1123b35c05550a44d6236c7f8b55a88a83adaba",
+          "html_url": "https://github.com/TheBoredTeam/boring.notch",
+          "stars": 9850
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

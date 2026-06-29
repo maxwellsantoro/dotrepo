@@ -1,0 +1,84 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/testing-library/react-testing-library"
+generated_at = "2026-06-29T05:17:46.315707Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "React Testing Library"
+description = "Simple and complete React DOM testing utilities that encourage good testing practices."
+homepage = "https://testing-library.com/react"
+license = "MIT"
+visibility = "public"
+languages = [
+    "JavaScript",
+    "TypeScript",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "reactjs",
+    "testing",
+    "javascript",
+]
+
+[docs]
+root = "https://testing-library.com/react"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/testing-library/react-testing-library"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/testing-library/react-testing-library#readme"
+notes = "Declared homepage in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/testing-library/testing-library-docs"
+notes = "Cross-link from README: Edit the docs"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/testing-library/react-testing-library.git"
+default_branch = "main"
+fork = false
+head_sha = "be9d81d91314c9f0bafaa363f70b409b4b31989c"
+html_url = "https://github.com/testing-library/react-testing-library"
+stars = 19610

@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "JodaOrg",
+    "repo": "joda-time",
+    "source": "https://github.com/JodaOrg/joda-time"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/JodaOrg/joda-time/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/JodaOrg/joda-time",
+    "generatedAt": "2026-06-29T05:24:44.870275Z",
+    "evidencePath": "repos/github.com/JodaOrg/joda-time/evidence.md"
+  },
+  "purpose": "Joda-Time provides a quality replacement for the Java date and time classes.",
+  "name": "Joda-Time",
+  "homepage": "http://www.joda.org/joda-time/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "Java"
+  ],
+  "topics": [
+    "java",
+    "joda",
+    "joda-time",
+    "date-time"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "http://www.joda.org/joda-time/",
+    "gettingStarted": "https://www.joda.org/joda-time/quickstart.html"
+  },
+  "ownership": {
+    "securityContact": "https://tidelift.com/security"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/JodaOrg/joda-time/profile.json",
+    "repository": "/v0/repos/github.com/JodaOrg/joda-time/index.json",
+    "trust": "/v0/repos/github.com/JodaOrg/joda-time/trust.json",
+    "queryTemplate": "/v0/repos/github.com/JodaOrg/joda-time/query?path={dot_path}",
+    "indexPath": "repos/github.com/JodaOrg/joda-time/"
+  }
+}

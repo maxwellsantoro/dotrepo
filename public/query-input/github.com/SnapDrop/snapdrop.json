@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "SnapDrop",
+    "repo": "snapdrop",
+    "source": "https://github.com/SnapDrop/snapdrop"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/SnapDrop/snapdrop/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/SnapDrop/snapdrop",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/SnapDrop/snapdrop/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/SnapDrop/snapdrop",
+        "generated_at": "2026-06-29T05:17:21.131141Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Snapdrop",
+        "description": "Snapdrop: local file sharing in your browser.",
+        "homepage": "https://snapdrop.net",
+        "license": "GPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "webrtc",
+          "pwa",
+          "snapdrop"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://snapdrop.net",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/SnapDrop/snapdrop.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "b8b78cc22a672fd7c442f5a4866a8d9b0c05362e",
+          "html_url": "https://github.com/SnapDrop/snapdrop",
+          "stars": 19716
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

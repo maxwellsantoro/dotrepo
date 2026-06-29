@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "bluefireteam",
+    "repo": "photo_view",
+    "source": "https://github.com/bluefireteam/photo_view"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/bluefireteam/photo_view/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/bluefireteam/photo_view",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/bluefireteam/photo_view/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/bluefireteam/photo_view",
+        "generated_at": "2026-06-29T05:28:58.938601Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Flutter Photo View",
+        "description": "PhotoView enables images to become able to zoom and pan with user gestures such as pinch, rotate and drag.",
+        "homepage": "https://github.com/bluefireteam/photo_view",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dart",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "flutter",
+          "images",
+          "zoomable",
+          "zoom",
+          "photoview",
+          "photos",
+          "widget",
+          "gallery",
+          "pinch-to-zoom",
+          "rotate",
+          "hacktoberfest"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/bluefireteam/photo_view.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "a13ca2fc387a3fb1276126959e092c44d0029987",
+          "html_url": "https://github.com/bluefireteam/photo_view",
+          "stars": 1995
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

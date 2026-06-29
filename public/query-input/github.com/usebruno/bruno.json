@@ -1,0 +1,124 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "usebruno",
+    "repo": "bruno",
+    "source": "https://github.com/usebruno/bruno"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/usebruno/bruno/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/usebruno/bruno",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/flaky-test-detector.yml`. Inferred `repo.test` from `.github/workflows/flaky-test-detector.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/usebruno/bruno/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/usebruno/bruno",
+        "generated_at": "2026-06-29T05:15:35.469159Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/flaky-test-detector.yml`. Inferred `repo.test` from `.github/workflows/flaky-test-detector.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Bruno",
+        "description": "Bruno is a new and innovative API client, aimed at revolutionizing the status quo represented by Postman and similar tools out there.",
+        "homepage": "https://www.usebruno.com/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Bru",
+          "CSS",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "NSIS",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "npm run build:graphql-docs",
+        "test": "xvfb-run npm run test:e2e",
+        "topics": [
+          "api-client",
+          "git",
+          "graphql-client",
+          "opensource",
+          "automation",
+          "javascript",
+          "testing",
+          "api-testing",
+          "developer-tools",
+          "http-client",
+          "openapi",
+          "openapi3",
+          "rest-api",
+          "testing-tools"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@helloanoop",
+          "@bijin-bruno",
+          "@lohit-bruno",
+          "@naman-bruno",
+          "@sid-bruno",
+          "@vijayh-bruno",
+          "@utkarsh-bruno",
+          "@sanish-bruno"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://docs.usebruno.com",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/usebruno/bruno.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "87f74262bb7e535f3c73b97ec3fe99205252e82d",
+          "html_url": "https://github.com/usebruno/bruno",
+          "stars": 45208
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

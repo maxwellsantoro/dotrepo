@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Alfred1984",
+    "repo": "interesting-python",
+    "source": "https://github.com/Alfred1984/interesting-python"
+  },
+  "repository": {
+    "name": "interesting-python: 有趣的Python爬虫和数据分析小项目",
+    "description": "可以用Python实现的有趣的小项目，内容包括Python爬虫、Python数据分析、机器学习、深度学习等，持续更新中。 本Repository主要用于存放项目代码，对应的项目文章可以关注公众号。",
+    "homepage": "https://github.com/Alfred1984/interesting-python"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Alfred1984/interesting-python/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Alfred1984/interesting-python",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Alfred1984/interesting-python/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Alfred1984/interesting-python/index.json",
+    "trust": "/v0/repos/github.com/Alfred1984/interesting-python/trust.json",
+    "profile": "/v0/repos/github.com/Alfred1984/interesting-python/profile.json",
+    "queryTemplate": "/v0/repos/github.com/Alfred1984/interesting-python/query?path={dot_path}",
+    "indexPath": "repos/github.com/Alfred1984/interesting-python/"
+  }
+}

@@ -1,0 +1,46 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/SnapDrop/snapdrop"
+generated_at = "2026-06-29T05:17:21.131141Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Snapdrop"
+description = "Snapdrop: local file sharing in your browser."
+homepage = "https://snapdrop.net"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Shell",
+]
+topics = [
+    "webrtc",
+    "pwa",
+    "snapdrop",
+]
+
+[docs]
+root = "https://snapdrop.net"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/SnapDrop/snapdrop.git"
+default_branch = "master"
+fork = false
+head_sha = "b8b78cc22a672fd7c442f5a4866a8d9b0c05362e"
+html_url = "https://github.com/SnapDrop/snapdrop"
+stars = 19716

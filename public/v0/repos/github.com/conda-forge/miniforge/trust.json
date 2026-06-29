@@ -1,0 +1,44 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "conda-forge",
+    "repo": "miniforge",
+    "source": "https://github.com/conda-forge/miniforge"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/conda-forge/miniforge/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/conda-forge/miniforge",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/conda-forge/miniforge/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/conda-forge/miniforge/trust.json",
+    "repository": "/v0/repos/github.com/conda-forge/miniforge/index.json",
+    "profile": "/v0/repos/github.com/conda-forge/miniforge/profile.json",
+    "queryTemplate": "/v0/repos/github.com/conda-forge/miniforge/query?path={dot_path}",
+    "indexPath": "repos/github.com/conda-forge/miniforge/"
+  }
+}

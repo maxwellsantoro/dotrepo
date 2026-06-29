@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/iina/iina"
+generated_at = "2026-06-29T05:15:23.562569Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "IINA"
+description = "IINA is the modern video player for macOS."
+homepage = "https://iina.io"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "HTML",
+    "JavaScript",
+    "Objective-C",
+    "Rich Text Format",
+    "Ruby",
+    "Shell",
+    "Swift",
+]
+topics = [
+    "macos",
+    "video-player",
+    "swift",
+    "video",
+    "mpv",
+    "hacktoberfest",
+]
+
+[docs]
+root = "https://iina.io"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/iina/iina.git"
+default_branch = "develop"
+fork = false
+head_sha = "34051f1ff86952541e3377ccd6c6a465e55eed67"
+html_url = "https://github.com/iina/iina"
+stars = 45392

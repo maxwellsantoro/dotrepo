@@ -1,0 +1,137 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "testing-library",
+    "repo": "react-testing-library",
+    "source": "https://github.com/testing-library/react-testing-library"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/testing-library/react-testing-library/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/testing-library/react-testing-library",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/testing-library/react-testing-library/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/testing-library/react-testing-library",
+        "generated_at": "2026-06-29T05:17:46.315707Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "React Testing Library",
+        "description": "Simple and complete React DOM testing utilities that encourage good testing practices.",
+        "homepage": "https://testing-library.com/react",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "JavaScript",
+          "TypeScript"
+        ],
+        "build": "npm run build",
+        "test": "npm test",
+        "topics": [
+          "reactjs",
+          "testing",
+          "javascript"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://testing-library.com/react",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/testing-library/react-testing-library",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          },
+          {
+            "kind": "related",
+            "target": "github.com/testing-library/react-testing-library#readme",
+            "notes": "Declared homepage in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          },
+          {
+            "kind": "related",
+            "target": "github.com/testing-library/testing-library-docs",
+            "notes": "Cross-link from README: Edit the docs",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/testing-library/react-testing-library.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "be9d81d91314c9f0bafaa363f70b409b4b31989c",
+          "html_url": "https://github.com/testing-library/react-testing-library",
+          "stars": 19610
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/resend/react-email"
+generated_at = "2026-06-29T05:18:40.938791Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Why"
+description = "We believe that email is an extremely important medium for people to communicate."
+homepage = "https://react.email"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "TypeScript",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = [
+    "email",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@resend.com"
+
+[docs]
+root = "https://react.email"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/resend/react-email.git"
+default_branch = "canary"
+fork = false
+head_sha = "09a8633296508220246784f83fe6d7981645a731"
+html_url = "https://github.com/resend/react-email"
+stars = 19379

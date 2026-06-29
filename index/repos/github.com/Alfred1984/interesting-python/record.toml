@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Alfred1984/interesting-python"
+generated_at = "2026-06-29T05:24:00.243765Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "interesting-python: 有趣的Python爬虫和数据分析小项目"
+description = "可以用Python实现的有趣的小项目，内容包括Python爬虫、Python数据分析、机器学习、深度学习等，持续更新中。 本Repository主要用于存放项目代码，对应的项目文章可以关注公众号。"
+homepage = "https://github.com/Alfred1984/interesting-python"
+visibility = "public"
+languages = [
+    "Jupyter Notebook",
+    "Python",
+]
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/Chyroc/WechatSogou"
+notes = "Cross-link from README: WechatSogou"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Alfred1984/interesting-python.git"
+default_branch = "master"
+fork = false
+head_sha = "3a2e7136353693b2d08bd8675510055f71f83b94"
+html_url = "https://github.com/Alfred1984/interesting-python"
+stars = 4991

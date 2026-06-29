@@ -1,0 +1,93 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jing332",
+    "repo": "AListFlutter",
+    "source": "https://github.com/jing332/AListFlutter"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/jing332/AListFlutter/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/jing332/AListFlutter",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/jing332/AListFlutter/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/jing332/AListFlutter",
+        "generated_at": "2026-06-29T05:27:40.655882Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "AListFlutter",
+        "description": "AListFlutter是一个基于AList的Android服务端，使用Google Flutter作为UI框架。",
+        "homepage": "https://github.com/jing332/AListFlutter",
+        "license": "AGPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "C++",
+          "CMake",
+          "Dart",
+          "Go",
+          "Java",
+          "Kotlin",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/jing332/AListFlutter.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "8ea9448f91a49491464c8f010d1d06c08c1a206d",
+          "html_url": "https://github.com/jing332/AListFlutter",
+          "stars": 1998
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

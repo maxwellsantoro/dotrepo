@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/gcla/termshark"
+generated_at = "2026-06-29T05:21:42.314052Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Termshark"
+description = "A terminal user-interface for tshark, inspired by Wireshark."
+homepage = "https://github.com/gcla/termshark"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Go",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "tshark",
+    "wireshark",
+    "pcap",
+    "tcell",
+    "tui",
+    "gowid",
+    "golang",
+    "go",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/gcla/termshark.git"
+default_branch = "master"
+fork = false
+head_sha = "e8a1ec6e4f2d517f646d3bba35a2ec4926e0202c"
+html_url = "https://github.com/gcla/termshark"
+stars = 9916

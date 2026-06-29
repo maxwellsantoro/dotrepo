@@ -1,0 +1,43 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/chidiwilliams/buzz"
+generated_at = "2026-06-29T05:16:44.747202Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Buzz"
+description = "Transcribe and translate audio offline on your personal computer."
+homepage = "https://chidiwilliams.github.io/buzz"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Inno Setup",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = ["whisper"]
+
+[docs]
+root = "https://chidiwilliams.github.io/buzz/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/chidiwilliams/buzz.git"
+default_branch = "main"
+fork = false
+head_sha = "6be1cc3b3188ff7f6aad23e42e0e35f71145f938"
+html_url = "https://github.com/chidiwilliams/buzz"
+stars = 19873

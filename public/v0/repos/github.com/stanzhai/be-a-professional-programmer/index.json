@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "stanzhai",
+    "repo": "be-a-professional-programmer",
+    "source": "https://github.com/stanzhai/be-a-professional-programmer"
+  },
+  "repository": {
+    "name": "be-a-professional-programmer",
+    "description": "笔者作为一位tool mad，将工作以来用到的各种优秀资料、神器及框架整理在此，毕竟好记性不如烂键盘，此项目可以作为自己的不时之需。",
+    "homepage": "http://tools.stanzhai.site",
+    "docsRoot": "http://hadoop.readthedocs.org/en/latest/"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/stanzhai/be-a-professional-programmer/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/stanzhai/be-a-professional-programmer",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/stanzhai/be-a-professional-programmer/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/stanzhai/be-a-professional-programmer/index.json",
+    "trust": "/v0/repos/github.com/stanzhai/be-a-professional-programmer/trust.json",
+    "profile": "/v0/repos/github.com/stanzhai/be-a-professional-programmer/profile.json",
+    "queryTemplate": "/v0/repos/github.com/stanzhai/be-a-professional-programmer/query?path={dot_path}",
+    "indexPath": "repos/github.com/stanzhai/be-a-professional-programmer/"
+  }
+}

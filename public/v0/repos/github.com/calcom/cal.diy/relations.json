@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "calcom",
+    "repo": "cal.diy",
+    "source": "https://github.com/calcom/cal.diy"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/nvm-sh/nvm",
+      "notes": "Cross-link from README: here",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "nvm-sh",
+        "repo": "nvm"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/nvm-sh/nvm/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/calcom/cal.diy/relations",
+    "repository": "/v0/repos/github.com/calcom/cal.diy/index.json",
+    "trust": "/v0/repos/github.com/calcom/cal.diy/trust.json",
+    "profile": "/v0/repos/github.com/calcom/cal.diy/profile.json",
+    "queryTemplate": "/v0/repos/github.com/calcom/cal.diy/query?path={dot_path}",
+    "indexPath": "repos/github.com/calcom/cal.diy/"
+  }
+}

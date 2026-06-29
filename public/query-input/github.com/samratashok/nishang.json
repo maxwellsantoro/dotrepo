@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "samratashok",
+    "repo": "nishang",
+    "source": "https://github.com/samratashok/nishang"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/samratashok/nishang/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/samratashok/nishang",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/samratashok/nishang/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/samratashok/nishang",
+        "generated_at": "2026-06-29T05:20:27.361443Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Nishang",
+        "description": "By Nikhil Mittal Founder of Altered Security - Hands-on red team and enterprise security training!",
+        "homepage": "https://github.com/samratashok/nishang",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "ASP.NET",
+          "PowerShell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "powershell",
+          "nishang",
+          "security",
+          "red-team",
+          "penetration-testing",
+          "infosec",
+          "hacking",
+          "redteam",
+          "activedirectory"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://www.alteredsecurity.com/"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/samratashok/nishang.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "d87229d2112456470ad30a50edbf312463f2b09a",
+          "html_url": "https://github.com/samratashok/nishang",
+          "stars": 9973
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

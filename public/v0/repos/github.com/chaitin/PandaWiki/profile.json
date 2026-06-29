@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "chaitin",
+    "repo": "PandaWiki",
+    "source": "https://github.com/chaitin/PandaWiki"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/chaitin/PandaWiki/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/chaitin/PandaWiki",
+    "generatedAt": "2026-06-29T05:23:07.41327Z",
+    "evidencePath": "repos/github.com/chaitin/PandaWiki/evidence.md"
+  },
+  "purpose": "PandaWiki 是一款 AI 大模型驱动的**开源知识库搭建系统**，帮助你快速构建智能化的 **产品文档、技术文档、FAQ、博客系统**，借助大模型的力量为你提供 **AI 创作、AI 问答、AI 搜索** 等能力。",
+  "name": "PandaWiki",
+  "homepage": "https://pandawiki.docs.baizhi.cloud/",
+  "license": "AGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "EJS",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "ai",
+    "document",
+    "kb",
+    "knownledge",
+    "llm",
+    "wiki",
+    "docs",
+    "documentation",
+    "self-hosted"
+  ],
+  "execution": {
+    "build": "pnpm run build"
+  },
+  "docs": {
+    "root": "https://pandawiki.docs.baizhi.cloud/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/chaitin/PandaWiki/profile.json",
+    "repository": "/v0/repos/github.com/chaitin/PandaWiki/index.json",
+    "trust": "/v0/repos/github.com/chaitin/PandaWiki/trust.json",
+    "queryTemplate": "/v0/repos/github.com/chaitin/PandaWiki/query?path={dot_path}",
+    "indexPath": "repos/github.com/chaitin/PandaWiki/"
+  }
+}

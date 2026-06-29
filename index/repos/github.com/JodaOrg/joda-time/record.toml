@@ -1,0 +1,65 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/JodaOrg/joda-time"
+generated_at = "2026-06-29T05:24:44.870275Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.test` unset because `.github/workflows/tzdbupdate.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Joda-Time"
+description = "Joda-Time provides a quality replacement for the Java date and time classes."
+homepage = "http://www.joda.org/joda-time/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "Java",
+]
+topics = [
+    "java",
+    "joda",
+    "joda-time",
+    "date-time",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://tidelift.com/security"
+
+[docs]
+root = "http://www.joda.org/joda-time/"
+getting_started = "https://www.joda.org/joda-time/quickstart.html"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/JakeWharton/ThreeTenABP"
+notes = "Cross-link from README: the ThreeTenABP library"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/JodaOrg/joda-time.git"
+default_branch = "main"
+fork = false
+head_sha = "d6ba4f03c242c12feac308ac25b841a8c9457674"
+html_url = "https://github.com/JodaOrg/joda-time"
+stars = 4984

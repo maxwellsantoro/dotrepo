@@ -1,0 +1,37 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/michaelbromley/angularUtils"
+generated_at = "2026-06-29T05:29:44.889549Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Angular Utilities"
+description = "I am working on a large-scale AngularJS-based project and I'll be extracting any useful re-usable components that I make and putting them here."
+homepage = "https://github.com/michaelbromley/angularUtils"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/michaelbromley/angularUtils.git"
+default_branch = "master"
+fork = false
+head_sha = "e531bfa4f138ca9f2878f1aa5175d396a9926114"
+html_url = "https://github.com/michaelbromley/angularUtils"
+stars = 1994

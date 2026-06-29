@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/7Sageer/sublink-worker"
+generated_at = "2026-06-29T05:26:06.847348Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Sublink Worker"
+description = "A lightweight subscription converter and manager for proxy protocols, deployable on Cloudflare Workers, Vercel, Node.js, or Docker."
+homepage = "https://sublink.works/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "JavaScript",
+    "Shell",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "cloudflare-workers",
+    "mihomo",
+    "singbox",
+    "xray-core",
+    "clash-meta",
+    "v2rayn",
+    "v2rayng",
+    "clash",
+]
+
+[docs]
+root = "https://sublink.works/en/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/7Sageer/sublink-worker.git"
+default_branch = "main"
+fork = false
+head_sha = "a8b99afd9ff6d4117b7b68db7e6b085f234c4b16"
+html_url = "https://github.com/7Sageer/sublink-worker"
+stars = 4972

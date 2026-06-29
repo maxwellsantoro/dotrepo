@@ -1,0 +1,44 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/endrazine/wcc"
+generated_at = "2026-06-29T05:29:22.58239Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "The Witchcraft Compiler Collection"
+description = "Welcome to the Witchcraft Compiler Collection !"
+homepage = "https://github.com/endrazine/wcc"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CSS",
+    "HTML",
+    "Linker Script",
+    "Lua",
+    "Makefile",
+    "Roff",
+    "Rust",
+    "TeX",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/endrazine/wcc.git"
+default_branch = "master"
+fork = false
+head_sha = "675bf9600afa5008d3f6c61c0c7f5ba0e9518ece"
+html_url = "https://github.com/endrazine/wcc"
+stars = 1994

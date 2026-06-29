@@ -1,0 +1,72 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/asg017/sqlite-vss"
+generated_at = "2026-06-29T05:28:26.183759Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/site.yaml`. Inferred `repo.test` from `.github/workflows/test.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "sqlite-vss"
+description = "A SQLite extension for efficient vector search, based on Faiss!"
+homepage = "https://github.com/asg017/sqlite-vss"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Elixir",
+    "Go",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "TypeScript",
+]
+build = "make site-build"
+test = "make test-loadable"
+topics = [
+    "sqlite",
+    "sqlite-extension",
+    "vector-search",
+    "faiss",
+]
+
+[docs]
+getting_started = "https://huggingface.co/blog/getting-started-with-embeddings#1-embedding-a-dataset"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/asg017/sqlite-vec"
+notes = "Cross-link from README: sqlite-vec"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/asg017/sqlite-vss.git"
+default_branch = "main"
+fork = false
+head_sha = "8d3c6ff2fca651104563779a0d927ea4fba40347"
+html_url = "https://github.com/asg017/sqlite-vss"
+stars = 1996

@@ -1,0 +1,114 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "signalwire",
+    "repo": "freeswitch",
+    "source": "https://github.com/signalwire/freeswitch"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/signalwire/freeswitch/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/signalwire/freeswitch",
+    "generatedAt": "2026-06-29T05:26:30.608241Z",
+    "evidencePath": "repos/github.com/signalwire/freeswitch/evidence.md"
+  },
+  "purpose": "FreeSWITCH is a Software Defined Telecom Stack enabling the digital transformation from proprietary telecom switches to a versatile software implementation that runs on any commodity hardware.",
+  "name": "FreeSWITCH",
+  "homepage": "https://freeswitch.com/#getting-started",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "ActionScript",
+    "Assembly",
+    "Awk",
+    "Batchfile",
+    "BitBake",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Emacs Lisp",
+    "Erlang",
+    "F#",
+    "GDB",
+    "Go Template",
+    "HTML",
+    "Inno Setup",
+    "Java",
+    "JavaScript",
+    "Limbo",
+    "Lua",
+    "M4",
+    "Makefile",
+    "Meson",
+    "PHP",
+    "Pascal",
+    "Perl",
+    "Processing",
+    "Python",
+    "QMake",
+    "QuickBASIC",
+    "Raku",
+    "Roff",
+    "Ruby",
+    "SWIG",
+    "Shell",
+    "Smarty",
+    "Tcl",
+    "XSLT"
+  ],
+  "topics": [
+    "freeswitch",
+    "signalwire",
+    "open-source",
+    "source-code",
+    "voip",
+    "webrtc",
+    "telephony",
+    "sip",
+    "iot"
+  ],
+  "execution": {
+    "test": "make check"
+  },
+  "docs": {
+    "root": "https://freeswitch.com/#getting-started"
+  },
+  "ownership": {
+    "securityContact": "security@signalwire.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/signalwire/freeswitch/profile.json",
+    "repository": "/v0/repos/github.com/signalwire/freeswitch/index.json",
+    "trust": "/v0/repos/github.com/signalwire/freeswitch/trust.json",
+    "queryTemplate": "/v0/repos/github.com/signalwire/freeswitch/query?path={dot_path}",
+    "indexPath": "repos/github.com/signalwire/freeswitch/"
+  }
+}

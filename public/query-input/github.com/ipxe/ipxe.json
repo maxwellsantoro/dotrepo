@@ -1,0 +1,117 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ipxe",
+    "repo": "ipxe",
+    "source": "https://github.com/ipxe/ipxe"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ipxe/ipxe/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ipxe/ipxe",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ipxe/ipxe/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ipxe/ipxe",
+        "generated_at": "2026-06-29T05:27:18.836961Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "iPXE network bootloader",
+        "description": "iPXE network bootloader",
+        "homepage": "https://ipxe.org",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Assembly",
+          "C",
+          "C++",
+          "GDB",
+          "Linker Script",
+          "Makefile",
+          "Perl",
+          "Python",
+          "Roff",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "ipxe",
+          "pxe",
+          "boot",
+          "firmware",
+          "network",
+          "netboot",
+          "secureboot",
+          "uefi",
+          "uefi-boot",
+          "aarch32",
+          "aarch64",
+          "loongarch64",
+          "risc-v",
+          "s390x",
+          "x86",
+          "x86-64"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://ipxe.org",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/ipxe/ipxe.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "e5d0c804eea7c2fbe680b1ecd66435a94a9819e3",
+          "html_url": "https://github.com/ipxe/ipxe",
+          "stars": 1998
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

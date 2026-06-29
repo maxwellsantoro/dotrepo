@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ClassicOldSong",
+    "repo": "Apollo",
+    "source": "https://github.com/ClassicOldSong/Apollo"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/ClassicOldSong/moonlight-android",
+      "notes": "Cross-link from README: Artemis(Moonlight Noir)",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "ClassicOldSong",
+        "repo": "moonlight-android"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/ClassicOldSong/moonlight-android/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/ClassicOldSong/Apollo/relations",
+    "repository": "/v0/repos/github.com/ClassicOldSong/Apollo/index.json",
+    "trust": "/v0/repos/github.com/ClassicOldSong/Apollo/trust.json",
+    "profile": "/v0/repos/github.com/ClassicOldSong/Apollo/profile.json",
+    "queryTemplate": "/v0/repos/github.com/ClassicOldSong/Apollo/query?path={dot_path}",
+    "indexPath": "repos/github.com/ClassicOldSong/Apollo/"
+  }
+}

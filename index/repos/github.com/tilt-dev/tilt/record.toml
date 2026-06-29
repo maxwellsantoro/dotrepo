@@ -1,0 +1,57 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/tilt-dev/tilt"
+generated_at = "2026-06-29T05:22:18.11729Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Tilt"
+description = "Kubernetes for Prod, Tilt for Dev"
+homepage = "https://tilt.dev/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "PowerShell",
+    "Python",
+    "SCSS",
+    "Shell",
+    "Starlark",
+    "TypeScript",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "kubernetes",
+    "development-environment",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@docker.com"
+
+[docs]
+root = "https://docs.tilt.dev/api.html"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tilt-dev/tilt.git"
+default_branch = "master"
+fork = false
+head_sha = "06d47a29137a1c3c930823fd907aa645f817b2d3"
+html_url = "https://github.com/tilt-dev/tilt"
+stars = 9893

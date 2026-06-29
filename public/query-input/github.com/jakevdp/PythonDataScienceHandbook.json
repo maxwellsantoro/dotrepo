@@ -1,0 +1,118 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jakevdp",
+    "repo": "PythonDataScienceHandbook",
+    "source": "https://github.com/jakevdp/PythonDataScienceHandbook"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/jakevdp/PythonDataScienceHandbook/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/jakevdp/PythonDataScienceHandbook",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/jakevdp/PythonDataScienceHandbook/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/jakevdp/PythonDataScienceHandbook",
+        "generated_at": "2026-06-29T05:13:27.332681Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Python Data Science Handbook",
+        "description": "This repository contains the entire Python Data Science Handbook, in the form of (free!) Jupyter notebooks.",
+        "homepage": "http://jakevdp.github.io/PythonDataScienceHandbook",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "HTML",
+          "Jupyter Notebook",
+          "Less",
+          "Makefile",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "scikit-learn",
+          "numpy",
+          "python",
+          "jupyter-notebook",
+          "matplotlib",
+          "pandas"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "http://jakevdp.github.io/PythonDataScienceHandbook",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/jakevdp/WhirlwindTourOfPython",
+            "notes": "Cross-link from README: A Whirlwind Tour of Python",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/jakevdp/PythonDataScienceHandbook.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "d66231454ef753818dc9213c9b5942e067266966",
+          "html_url": "https://github.com/jakevdp/PythonDataScienceHandbook",
+          "stars": 48709
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

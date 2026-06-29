@@ -1,0 +1,55 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/0x192/universal-android-debloater"
+generated_at = "2026-06-29T05:18:00.650808Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Universal Android Debloater GUI"
+description = "**DISCLAIMER**: Use at your own risk."
+homepage = "https://github.com/0x192/universal-android-debloater"
+license = "GPL-3.0"
+visibility = "public"
+languages = ["Rust"]
+build = "cargo build"
+test = "cargo test"
+topics = [
+    "android",
+    "privacy",
+    "debloat",
+    "adb",
+]
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/0x192/universal-android-debloater"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/0x192/universal-android-debloater.git"
+default_branch = "main"
+fork = false
+head_sha = "11f27c671cba278d71296cdef4c5a5dba06add5e"
+html_url = "https://github.com/0x192/universal-android-debloater"
+stars = 19556

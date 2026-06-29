@@ -1,0 +1,70 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/upscayl/upscayl"
+generated_at = "2026-06-29T05:14:48.087897Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "v2.15 is out! 🥳 Download Now ⬇️"
+description = "Warp, the intelligent terminal for developers"
+homepage = "https://upscayl.org"
+license = "AGPL-3.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "JavaScript",
+    "Python",
+    "Shell",
+    "TypeScript",
+]
+build = "npm run build"
+topics = [
+    "ai",
+    "esrgan",
+    "image",
+    "upscale",
+    "electron",
+    "gigapixel",
+    "gigapixel-images",
+    "image-upscaling",
+    "topaz",
+    "upscalerimage",
+    "upscayl",
+]
+
+[docs]
+root = "https://upscayl.org"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/TGS963/upscayl"
+notes = "Declared homepage in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/upscayl/upscayl.git"
+default_branch = "main"
+fork = false
+head_sha = "a00d55fee90e0f9435d5eaa86e76700df8199af8"
+html_url = "https://github.com/upscayl/upscayl"
+stars = 46477

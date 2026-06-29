@@ -1,0 +1,56 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/xtool-org/xtool"
+generated_at = "2026-06-29T05:24:02.239254Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "xtool"
+description = "Cross-platform Xcode replacement."
+homepage = "https://xtool.sh"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C",
+    "Dockerfile",
+    "JavaScript",
+    "Makefile",
+    "Ruby",
+    "Shell",
+    "Swift",
+]
+topics = [
+    "ios",
+    "linux",
+    "swift",
+    "swift-package-manager",
+    "windows",
+    "xcode",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/xtool-org/xtool/security/advisories/new"
+
+[docs]
+root = "https://xtool.sh"
+getting_started = "https://xtool.sh/documentation/xtooldocs/installation-linux"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/xtool-org/xtool.git"
+default_branch = "main"
+fork = false
+head_sha = "7f151a9c66c98cd84a4de635cd0de6ddb09e9cf4"
+html_url = "https://github.com/xtool-org/xtool"
+stars = 4991

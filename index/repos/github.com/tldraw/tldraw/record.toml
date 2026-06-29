@@ -1,0 +1,80 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/tldraw/tldraw"
+generated_at = "2026-06-29T05:13:36.349969Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "tldraw"
+description = "Build infinite canvas apps in React with the tldraw SDK."
+homepage = "https://tldraw.dev"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "CSS",
+    "GLSL",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "PLpgSQL",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+build = "yarn build"
+test = "yarn test"
+topics = [
+    "drawing",
+    "sketch",
+    "whiteboard",
+    "canvas",
+    "diagram",
+    "infinite",
+    "react",
+    "collaboration",
+    "design",
+    "multiplayer",
+    "sync",
+    "sdk",
+]
+
+[owners]
+maintainers = []
+security_contact = "hello@tldraw.com"
+
+[docs]
+root = "https://tldraw.dev/quick-start"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/tldraw/tldraw"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tldraw/tldraw.git"
+default_branch = "main"
+fork = false
+head_sha = "8e1d0e9a9fc9f2be3c0e9bce31d030d88bef1705"
+html_url = "https://github.com/tldraw/tldraw"
+stars = 48393

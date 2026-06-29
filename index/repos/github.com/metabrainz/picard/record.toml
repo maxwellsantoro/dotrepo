@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/metabrainz/picard"
+generated_at = "2026-06-29T05:24:56.599591Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "MusicBrainz Picard"
+description = "MusicBrainz Picard is a cross-platform (Linux, macOS, Windows) audio tagging application."
+homepage = "https://picard.musicbrainz.org"
+license = "GPL-2.0"
+visibility = "public"
+languages = [
+    "C",
+    "PowerShell",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "python",
+    "musicbrainz",
+    "tagger",
+    "audio",
+    "music-tagger",
+    "id3",
+    "acoustid",
+    "musicbrainz-picard",
+    "music",
+    "picard",
+]
+
+[docs]
+root = "https://picard-docs.musicbrainz.org/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/metabrainz/picard.git"
+default_branch = "master"
+fork = false
+head_sha = "b1ba75a25be05010eff77ce05916a8a8c9f51663"
+html_url = "https://github.com/metabrainz/picard"
+stars = 4983

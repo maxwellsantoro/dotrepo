@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
+  <title>Docs · dotrepo</title>
+  <meta name="description" content="First-party documentation entry for dotrepo: product status, trust model, public surface, maintainer flow, and index growth.">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f1e8;
+      --paper-strong: #efe6d7;
+      --ink: #16181b;
+      --muted: #5c635d;
+      --panel: rgba(255, 251, 244, 0.84);
+      --line: rgba(54, 46, 28, 0.14);
+      --accent: #116466;
+      --accent-strong: #0d494b;
+      --signal: #c4572e;
+      --shadow: 0 18px 60px rgba(23, 27, 31, 0.12);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(17, 100, 102, 0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(196, 87, 46, 0.12), transparent 30%),
+        linear-gradient(180deg, #fbf6ec 0%, var(--paper) 54%, var(--paper-strong) 100%);
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .brand__mark {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.06em;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .brand__dot {
+      display: inline-block;
+      width: 0.40em;
+      height: 0.40em;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      translate: 0 -0.05em;
+    }
+    .brand__tag {
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav__links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    .nav__links a {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.48);
+    }
+    .nav__links a[aria-current="page"] {
+      background: linear-gradient(135deg, var(--accent) 0%, #0b4b5a 100%);
+      color: white;
+      border-color: transparent;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .hero {
+      padding: 34px;
+      display: grid;
+      gap: 16px;
+    }
+    .eyebrow {
+      margin: 0;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+    }
+    .hero p {
+      margin: 0;
+      color: #273038;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      max-width: 46rem;
+    }
+    .section {
+      margin-top: 26px;
+      padding: 30px;
+    }
+    .section h2 {
+      margin: 0;
+      font-size: 0.84rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .doc-item {
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }
+    .doc-item__head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+    }
+    .doc-item__head h3 {
+      margin: 0;
+      font-size: 1.28rem;
+    }
+    .doc-item__head span {
+      color: var(--signal);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .doc-item p {
+      margin: 14px 0 0;
+      color: #30363c;
+      line-height: 1.7;
+    }
+    .doc-item a {
+      display: inline-flex;
+      margin-top: 18px;
+      font-weight: 700;
+      color: var(--accent-strong);
+    }
+    .footer {
+      margin-top: 28px;
+      padding: 10px 2px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 980px) {
+      .doc-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .page { padding: 18px 14px 56px; }
+      .hero,
+      .section { padding: 22px; }
+      .nav { align-items: flex-start; flex-direction: column; }
+      .nav__links { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="nav" aria-label="Top navigation">
+      <div class="brand">
+        <a class="brand__mark" href="/" aria-label="dotrepo — home"><span class="brand__dot" aria-hidden="true"></span><span>repo</span></a>
+        <span class="brand__tag">open metadata protocol</span>
+      </div>
+      <nav class="nav__links">
+        <a href="/">Home</a>
+        <a href="/docs/" aria-current="page">Docs</a>
+        <a href="/writing/">Writing</a>
+        <a href="/repositories/">Repositories</a>
+        <a href="https://github.com/maxwellsantoro/dotrepo">GitHub</a>
+        <a href="/v0/meta.json">Snapshot</a>
+      </nav>
+    </header>
+    <section class="panel hero">
+      <p class="eyebrow">Docs</p>
+      <h1>The first-party entry to the protocol, product, and live proof surface.</h1>
+      <p>This page keeps the documentation front door on <code>dotrepo.org</code>. Detailed working docs still live in the repository for now, but the canonical entrypoint, public API links, and product framing stay first-party.</p>
+    </section>
+    <section class="panel section">
+              <h2>Start here</h2>
+              <div class="doc-grid">
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Project overview</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>What dotrepo is, what ships, and the shortest paths for maintainers, contributors, and consumers.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/README.md">Open</a>
+                </article>
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Install</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>Platform bundles, MCP and LSP binaries, and the VS Code extension package.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/install.md">Open</a>
+                </article>
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Maintainer happy path</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>The canonical init, import, validate, trust, and generate-check loop for repository owners.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md">Open</a>
+                </article>
+              </div>
+            </section>
+    <section class="panel section">
+              <h2>Trust and protocol</h2>
+              <div class="doc-grid">
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Trust model</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>Why provenance, precedence, and conflict visibility matter more than a new file extension.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/trust-model.md">Open</a>
+                </article>
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Roadmap</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>The mission, operating principles, product milestones, and path from protocol to shared research infrastructure.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md">Open</a>
+                </article>
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Public surface architecture</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>How the hosted homepage, inventory, summary, trust, and query surfaces are built from one export family.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-surface.md">Open</a>
+                </article>
+              </div>
+            </section>
+    <section class="panel section">
+              <h2>Live public surface</h2>
+              <div class="doc-grid">
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Snapshot metadata</h3>
+                    <span>On-site</span>
+                  </div>
+                  <p>Freshness, snapshot digest, and expiry metadata for the currently hosted export.</p>
+                  <a href="/v0/meta.json">Open</a>
+                </article>
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Repository inventory</h3>
+                    <span>On-site</span>
+                  </div>
+                  <p>The live indexed repository set with summary, trust, and query entrypoints.</p>
+                  <a href="/v0/repos/index.json">Open</a>
+                </article>
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Public export examples</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>Concrete response examples for inventory, repository summary, trust, and query routes.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-export-examples.md">Open</a>
+                </article>
+              </div>
+            </section>
+    <section class="panel section">
+              <h2>Autonomous index</h2>
+              <div class="doc-grid">
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Public index</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>Index rules, evidence expectations, autonomous publication, and maintainer handoff.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/README.md">Open</a>
+                </article>
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Crawler and escalation design</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>The deterministic-first pipeline, bounded model escalation, publication gates, and trust semantics.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/factual-crawl-automation.md">Open</a>
+                </article>
+                <article class="doc-item">
+                  <div class="doc-item__head">
+                    <h3>Maintainer-claim workflow</h3>
+                    <span>Repo doc</span>
+                  </div>
+                  <p>The reviewer path for accepted maintainer claims and canonical handoff decisions.</p>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-claim-review-workflow.md">Open</a>
+                </article>
+              </div>
+            </section>
+    <footer class="footer">
+      <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
+      <span>Live inventory: <a href="/v0/repos/index.json">/v0/repos/index.json</a></span>
+      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+    </footer>
+  </div>
+</body>
+</html>

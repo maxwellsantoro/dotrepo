@@ -1,0 +1,44 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "willowtreeapps",
+    "repo": "Hyperion-Android",
+    "source": "https://github.com/willowtreeapps/Hyperion-Android"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/willowtreeapps/Hyperion-Android/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/willowtreeapps/Hyperion-Android",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `CODEOWNERS`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@github/js` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/mc-release.yml`. Inferred `repo.test` from `.github/workflows/mc-release.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/willowtreeapps/Hyperion-Android/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/willowtreeapps/Hyperion-Android/trust.json",
+    "repository": "/v0/repos/github.com/willowtreeapps/Hyperion-Android/index.json",
+    "profile": "/v0/repos/github.com/willowtreeapps/Hyperion-Android/profile.json",
+    "queryTemplate": "/v0/repos/github.com/willowtreeapps/Hyperion-Android/query?path={dot_path}",
+    "indexPath": "repos/github.com/willowtreeapps/Hyperion-Android/"
+  }
+}

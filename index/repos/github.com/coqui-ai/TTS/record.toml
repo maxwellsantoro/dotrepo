@@ -1,0 +1,66 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/coqui-ai/TTS"
+generated_at = "2026-06-29T05:15:12.997704Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Coqui.ai News"
+description = "🐸TTS is a library for advanced Text-to-Speech generation."
+homepage = "http://coqui.ai"
+license = "MPL-2.0"
+visibility = "public"
+languages = [
+    "Cython",
+    "Dockerfile",
+    "HTML",
+    "Jupyter Notebook",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "python",
+    "text-to-speech",
+    "deep-learning",
+    "speech",
+    "pytorch",
+    "tts",
+    "vocoder",
+    "tacotron",
+    "glow-tts",
+    "melgan",
+    "speaker-encoder",
+    "hifigan",
+    "speaker-encodings",
+    "multi-speaker-tts",
+    "tts-model",
+    "speech-synthesis",
+    "voice-cloning",
+    "voice-synthesis",
+    "voice-conversion",
+]
+
+[docs]
+root = "https://tts.readthedocs.io/en/dev/models/xtts.html"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/coqui-ai/TTS.git"
+default_branch = "dev"
+fork = false
+head_sha = "dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e"
+html_url = "https://github.com/coqui-ai/TTS"
+stars = 45641

@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/stefan-jansen/machine-learning-for-trading"
+generated_at = "2026-06-29T05:18:38.331666Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Machine Learning for Trading"
+description = "Build, test, and deploy ML-driven trading strategies — from data sourcing to live execution."
+homepage = "https://ml4trading.io"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "machine-learning",
+    "trading",
+    "investment",
+    "finance",
+    "data-science",
+    "investment-strategies",
+    "artificial-intelligence",
+    "trading-strategies",
+    "deep-learning",
+    "synthetic-data",
+    "ml4t-workflow",
+    "trading-agent",
+    "algorithmic-trading",
+    "backtesting",
+    "large-language-models",
+    "polars",
+    "quantitative-finance",
+    "reinforcement-learning",
+]
+
+[docs]
+root = "https://jupytext.readthedocs.io/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/stefan-jansen/machine-learning-for-trading.git"
+default_branch = "main"
+fork = false
+head_sha = "a5641bfeb721bacbd5c2f015e770dffc119cc5db"
+html_url = "https://github.com/stefan-jansen/machine-learning-for-trading"
+stars = 19380

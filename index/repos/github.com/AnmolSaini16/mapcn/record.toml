@@ -1,0 +1,42 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/AnmolSaini16/mapcn"
+generated_at = "2026-06-29T05:22:48.19161Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "mapcn"
+description = "Free & open-source, ready-to-use, customizable map components for React."
+homepage = "https://mapcn.dev"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+]
+build = "npm run build"
+topics = []
+
+[docs]
+root = "https://mapcn.dev/docs"
+getting_started = "https://mapcn.dev/docs/installation"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/AnmolSaini16/mapcn.git"
+default_branch = "main"
+fork = false
+head_sha = "dcca957d9c347620dc3e7c1f923f3af532914396"
+html_url = "https://github.com/AnmolSaini16/mapcn"
+stars = 9868

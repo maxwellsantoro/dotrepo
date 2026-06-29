@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ipxe",
+    "repo": "ipxe",
+    "source": "https://github.com/ipxe/ipxe"
+  },
+  "repository": {
+    "name": "iPXE network bootloader",
+    "description": "iPXE network bootloader",
+    "homepage": "https://ipxe.org",
+    "docsRoot": "https://ipxe.org"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ipxe/ipxe/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ipxe/ipxe",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ipxe/ipxe/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ipxe/ipxe/index.json",
+    "trust": "/v0/repos/github.com/ipxe/ipxe/trust.json",
+    "profile": "/v0/repos/github.com/ipxe/ipxe/profile.json",
+    "queryTemplate": "/v0/repos/github.com/ipxe/ipxe/query?path={dot_path}",
+    "indexPath": "repos/github.com/ipxe/ipxe/"
+  }
+}

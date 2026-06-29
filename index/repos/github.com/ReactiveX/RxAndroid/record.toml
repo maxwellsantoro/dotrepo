@@ -1,0 +1,38 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/ReactiveX/RxAndroid"
+generated_at = "2026-06-29T05:16:18.986128Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/build.yaml`. Inferred `repo.test` from `.github/workflows/build.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "RxAndroid"
+description = "Android specific bindings for RxJava 3."
+homepage = "https://github.com/ReactiveX/RxAndroid"
+license = "Apache-2.0"
+visibility = "public"
+languages = ["Java"]
+build = "./gradlew build"
+test = "./gradlew build"
+topics = []
+
+[docs]
+getting_started = "https://github.com/ReactiveX/RxJava/wiki/Getting-Started"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ReactiveX/RxAndroid.git"
+default_branch = "3.x"
+fork = false
+head_sha = "1c4a9eaf8ebf272fdbe4181d5ae16cdb2138d6e5"
+html_url = "https://github.com/ReactiveX/RxAndroid"
+stars = 19966

@@ -1,0 +1,127 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Rigellute",
+    "repo": "spotify-tui",
+    "source": "https://github.com/Rigellute/spotify-tui"
+  },
+  "relationCount": 2,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/Jguer/yay",
+      "notes": "Cross-link from README: yay",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "Jguer",
+        "repo": "yay"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/Jguer/yay/record.toml"
+      }
+    },
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/Rigellute/spotify-tui",
+      "notes": "Declared repository in Cargo.toml.",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "manifest"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "Rigellute",
+        "repo": "spotify-tui",
+        "source": "https://github.com/Rigellute/spotify-tui"
+      },
+      "profile": {
+        "identity": {
+          "host": "github.com",
+          "owner": "Rigellute",
+          "repo": "spotify-tui",
+          "source": "https://github.com/Rigellute/spotify-tui"
+        },
+        "name": "Spotify TUI",
+        "purpose": "A Spotify client for the terminal written in Rust.",
+        "languages": [
+          "HTML",
+          "Rust"
+        ],
+        "topics": [
+          "spotify",
+          "spotify-api",
+          "spotify-tui",
+          "rust",
+          "terminal-based",
+          "terminal",
+          "cli"
+        ],
+        "completeness": {
+          "hasBuild": true,
+          "hasTest": true,
+          "hasDocs": false,
+          "hasSecurityContact": false,
+          "hasOwnershipSignal": false,
+          "hasLicense": true,
+          "conflictCount": 0
+        },
+        "trust": {
+          "selectedStatus": "verified",
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "selectionReason": "only_matching_record"
+        },
+        "matched": [
+          "relation"
+        ],
+        "ranking": {
+          "score": 16,
+          "matchedFieldCount": 1,
+          "completenessSignalCount": 3,
+          "basis": [
+            "matchedFields",
+            "profileCompleteness",
+            "trustConfidence"
+          ]
+        },
+        "links": {
+          "self": "/v0/repos/github.com/Rigellute/spotify-tui/profile.json",
+          "repository": "/v0/repos/github.com/Rigellute/spotify-tui/index.json",
+          "trust": "/v0/repos/github.com/Rigellute/spotify-tui/trust.json",
+          "queryTemplate": "/v0/repos/github.com/Rigellute/spotify-tui/query?path={dot_path}",
+          "indexPath": "repos/github.com/Rigellute/spotify-tui/"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/Rigellute/spotify-tui/relations",
+    "repository": "/v0/repos/github.com/Rigellute/spotify-tui/index.json",
+    "trust": "/v0/repos/github.com/Rigellute/spotify-tui/trust.json",
+    "profile": "/v0/repos/github.com/Rigellute/spotify-tui/profile.json",
+    "queryTemplate": "/v0/repos/github.com/Rigellute/spotify-tui/query?path={dot_path}",
+    "indexPath": "repos/github.com/Rigellute/spotify-tui/"
+  }
+}

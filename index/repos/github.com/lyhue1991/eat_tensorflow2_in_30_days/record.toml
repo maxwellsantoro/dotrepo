@@ -1,0 +1,38 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/lyhue1991/eat_tensorflow2_in_30_days"
+generated_at = "2026-06-29T05:21:11.946273Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "How to eat TensorFlow2 in 30 days ?🔥🔥"
+description = "Click here for Chinese Version（中文版）"
+homepage = "https://github.com/lyhue1991/eat_tensorflow2_in_30_days"
+license = "Apache-2.0"
+visibility = "public"
+languages = ["Python"]
+topics = [
+    "tensorflow2",
+    "tensorflow",
+    "tensorflow-examples",
+    "tensorflow-tutorial",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/lyhue1991/eat_tensorflow2_in_30_days.git"
+default_branch = "master"
+fork = false
+head_sha = "9c9096b9e5a33c4bc739b93659099dd45515c276"
+html_url = "https://github.com/lyhue1991/eat_tensorflow2_in_30_days"
+stars = 9933

@@ -1,0 +1,46 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/Tyrrrz/CliWrap"
+generated_at = "2026-06-29T05:24:37.380561Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "CliWrap"
+description = "Library for interacting with command-line interfaces"
+homepage = "https://github.com/Tyrrrz/CliWrap"
+license = "MIT"
+visibility = "public"
+languages = ["C#"]
+topics = [
+    "command-line",
+    "cli",
+    "piping",
+    "stdout",
+    "event-stream",
+    "shell",
+    "process",
+    "pipe-stdout",
+    "stderr",
+    "pipe-stderr",
+    "stdin",
+    "pipe-stdin",
+    "dotnet",
+    "dotnet-core",
+    "dotnet-standard",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Tyrrrz/CliWrap.git"
+default_branch = "prime"
+fork = false
+head_sha = "a54d06301249b8e3c1576189ea914457d7791f0a"
+html_url = "https://github.com/Tyrrrz/CliWrap"
+stars = 4985

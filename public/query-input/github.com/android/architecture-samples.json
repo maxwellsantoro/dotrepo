@@ -1,0 +1,95 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "android",
+    "repo": "architecture-samples",
+    "source": "https://github.com/android/architecture-samples"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/android/architecture-samples/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/android/architecture-samples",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/android/architecture-samples/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/android/architecture-samples",
+        "generated_at": "2026-06-29T05:15:03.234852Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Android Architecture Samples",
+        "description": "These samples showcase different architectural approaches to developing Android apps.",
+        "homepage": "https://github.com/android/architecture-samples",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Kotlin"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "android-architecture",
+          "android",
+          "samples"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@josealcerreca",
+          "@dturner"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/android/architecture-samples.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "ee66e1526b84c026615df032c705842b7d2a521f",
+          "html_url": "https://github.com/android/architecture-samples",
+          "stars": 45731
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

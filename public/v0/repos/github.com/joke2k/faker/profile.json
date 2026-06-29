@@ -1,0 +1,72 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "joke2k",
+    "repo": "faker",
+    "source": "https://github.com/joke2k/faker"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/joke2k/faker/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/joke2k/faker",
+    "generatedAt": "2026-06-29T05:19:03.809703Z",
+    "evidencePath": "repos/github.com/joke2k/faker/evidence.md"
+  },
+  "purpose": "Faker is a Python package that generates fake data for you.",
+  "name": "faker",
+  "homepage": "https://faker.readthedocs.io",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Makefile",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "python",
+    "fake",
+    "testing",
+    "dataset",
+    "fake-data",
+    "test-data",
+    "test-data-generator",
+    "faker",
+    "faker-generator"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://faker.readthedocs.io"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "low",
+    "provenance": [
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/joke2k/faker/profile.json",
+    "repository": "/v0/repos/github.com/joke2k/faker/index.json",
+    "trust": "/v0/repos/github.com/joke2k/faker/trust.json",
+    "queryTemplate": "/v0/repos/github.com/joke2k/faker/query?path={dot_path}",
+    "indexPath": "repos/github.com/joke2k/faker/"
+  }
+}

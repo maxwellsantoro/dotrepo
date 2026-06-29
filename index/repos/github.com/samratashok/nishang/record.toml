@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/samratashok/nishang"
+generated_at = "2026-06-29T05:20:27.361443Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Nishang"
+description = "By Nikhil Mittal Founder of Altered Security - Hands-on red team and enterprise security training!"
+homepage = "https://github.com/samratashok/nishang"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "ASP.NET",
+    "PowerShell",
+]
+topics = [
+    "powershell",
+    "nishang",
+    "security",
+    "red-team",
+    "penetration-testing",
+    "infosec",
+    "hacking",
+    "redteam",
+    "activedirectory",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://www.alteredsecurity.com/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/samratashok/nishang.git"
+default_branch = "master"
+fork = false
+head_sha = "d87229d2112456470ad30a50edbf312463f2b09a"
+html_url = "https://github.com/samratashok/nishang"
+stars = 9973

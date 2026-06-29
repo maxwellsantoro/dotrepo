@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "mit-pdos",
+    "repo": "xv6-riscv",
+    "source": "https://github.com/mit-pdos/xv6-riscv"
+  },
+  "repository": {
+    "name": "xv6-riscv",
+    "description": "Xv6 for RISC-V",
+    "homepage": "https://pdos.csail.mit.edu/6.1810",
+    "docsRoot": "https://pdos.csail.mit.edu/6.1810"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/mit-pdos/xv6-riscv/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/mit-pdos/xv6-riscv",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README`. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/mit-pdos/xv6-riscv/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/mit-pdos/xv6-riscv/index.json",
+    "trust": "/v0/repos/github.com/mit-pdos/xv6-riscv/trust.json",
+    "profile": "/v0/repos/github.com/mit-pdos/xv6-riscv/profile.json",
+    "queryTemplate": "/v0/repos/github.com/mit-pdos/xv6-riscv/query?path={dot_path}",
+    "indexPath": "repos/github.com/mit-pdos/xv6-riscv/"
+  }
+}

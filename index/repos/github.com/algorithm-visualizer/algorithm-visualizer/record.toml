@@ -1,0 +1,49 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/algorithm-visualizer/algorithm-visualizer"
+generated_at = "2026-06-29T05:13:29.290292Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Algorithm Visualizer"
+description = "Welcome to Algorithm Visualizer, an interactive online platform designed to bring algorithms to life through visualization."
+homepage = "https://algorithm-visualizer.org/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C++",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "SCSS",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "algorithm",
+    "data-structure",
+    "visualization",
+    "animation",
+]
+
+[docs]
+root = "https://algorithm-visualizer.org/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/algorithm-visualizer/algorithm-visualizer.git"
+default_branch = "master"
+fork = false
+head_sha = "18de2edf6b629e843ee4bcedfa2208d22b253f0f"
+html_url = "https://github.com/algorithm-visualizer/algorithm-visualizer"
+stars = 48606

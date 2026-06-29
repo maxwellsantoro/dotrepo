@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/roncoo/roncoo-pay"
+generated_at = "2026-06-29T05:26:17.073844Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "roncoo-pay"
+description = "在线演示(商户系统)： http://demo.pay.roncoo.com/mch"
+homepage = "https://www.roncoo.net"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Java",
+    "PHP",
+    "SCSS",
+    "Shell",
+]
+topics = [
+    "roncoo",
+    "roncoo-pay",
+]
+
+[docs]
+root = "https://www.roncoo.net"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/roncoo/roncoo-pay.git"
+default_branch = "master"
+fork = false
+head_sha = "9428382af21cd5568319eae7429b7e1d0332ff40"
+html_url = "https://github.com/roncoo/roncoo-pay"
+stars = 4970

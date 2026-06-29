@@ -1,0 +1,63 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ReactiveX",
+    "repo": "RxAndroid",
+    "source": "https://github.com/ReactiveX/RxAndroid"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ReactiveX/RxAndroid/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ReactiveX/RxAndroid",
+    "generatedAt": "2026-06-29T05:16:18.986128Z",
+    "evidencePath": "repos/github.com/ReactiveX/RxAndroid/evidence.md"
+  },
+  "purpose": "Android specific bindings for RxJava 3.",
+  "name": "RxAndroid",
+  "homepage": "https://github.com/ReactiveX/RxAndroid",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Java"
+  ],
+  "execution": {
+    "build": "./gradlew build",
+    "test": "./gradlew build"
+  },
+  "docs": {
+    "gettingStarted": "https://github.com/ReactiveX/RxJava/wiki/Getting-Started"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ReactiveX/RxAndroid/profile.json",
+    "repository": "/v0/repos/github.com/ReactiveX/RxAndroid/index.json",
+    "trust": "/v0/repos/github.com/ReactiveX/RxAndroid/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ReactiveX/RxAndroid/query?path={dot_path}",
+    "indexPath": "repos/github.com/ReactiveX/RxAndroid/"
+  }
+}

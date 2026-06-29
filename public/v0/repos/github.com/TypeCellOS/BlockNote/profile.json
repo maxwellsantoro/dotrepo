@@ -1,0 +1,82 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "TypeCellOS",
+    "repo": "BlockNote",
+    "source": "https://github.com/TypeCellOS/BlockNote"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/TypeCellOS/BlockNote/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/TypeCellOS/BlockNote",
+    "generatedAt": "2026-06-29T05:22:42.284572Z",
+    "evidencePath": "repos/github.com/TypeCellOS/BlockNote/evidence.md"
+  },
+  "purpose": "Welcome to BlockNote! The open source Block-Based React rich text editor.",
+  "name": "TypeCell",
+  "homepage": "https://www.blocknotejs.org/",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "block-based",
+    "editor",
+    "javascript",
+    "notion",
+    "prosemirror",
+    "react",
+    "rich-text-editor",
+    "tiptap",
+    "typescript",
+    "wysiwyg",
+    "yjs",
+    "notion-editor"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {
+    "root": "https://www.blocknotejs.org/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/TypeCellOS/BlockNote/profile.json",
+    "repository": "/v0/repos/github.com/TypeCellOS/BlockNote/index.json",
+    "trust": "/v0/repos/github.com/TypeCellOS/BlockNote/trust.json",
+    "queryTemplate": "/v0/repos/github.com/TypeCellOS/BlockNote/query?path={dot_path}",
+    "indexPath": "repos/github.com/TypeCellOS/BlockNote/"
+  }
+}

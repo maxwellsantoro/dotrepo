@@ -1,0 +1,101 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rubik",
+    "repo": "radon",
+    "source": "https://github.com/rubik/radon"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/rubik/radon/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/rubik/radon",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/rubik/radon/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/rubik/radon",
+        "generated_at": "2026-06-29T05:28:53.32147Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "radon",
+        "description": "Various code metrics for Python code",
+        "homepage": "http://radon.readthedocs.org/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Makefile",
+          "Python"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "python",
+          "cli",
+          "static-analysis",
+          "code-analysis",
+          "quality-assurance"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "unknown"
+      },
+      "docs": {
+        "root": "http://radon.readthedocs.org/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/rubik/radon.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "54b88e5878b2724bf4d77f97349588b811abdff2",
+          "html_url": "https://github.com/rubik/radon",
+          "stars": 1995
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "xinnan-tech",
+    "repo": "xiaozhi-esp32-server",
+    "source": "https://github.com/xinnan-tech/xiaozhi-esp32-server"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/xinnan-tech/xiaozhi-esp32-server/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/xinnan-tech/xiaozhi-esp32-server",
+    "generatedAt": "2026-06-29T05:21:34.523179Z",
+    "evidencePath": "repos/github.com/xinnan-tech/xiaozhi-esp32-server/evidence.md"
+  },
+  "purpose": "本项目基于人机共生智能理论和技术研发智能终端软硬件体系为开源智能硬件项目 xiaozhi-esp32提供后端服务 根据小智通信协议使用Python、Java、Vue实现 支持MQTT+UDP协议、Websocket协议、MCP接入点、声纹识别、知识库",
+  "name": "xiaozhi-esp32-server",
+  "homepage": "http://xiaozhi.biz",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Lua",
+    "Python",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "dify",
+    "esp32",
+    "xiaozhi-esp32",
+    "mcp-server",
+    "xiaozhi",
+    "xiaozhi-ai",
+    "xiaozhi-server"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "http://xiaozhi.biz"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/xinnan-tech/xiaozhi-esp32-server/profile.json",
+    "repository": "/v0/repos/github.com/xinnan-tech/xiaozhi-esp32-server/index.json",
+    "trust": "/v0/repos/github.com/xinnan-tech/xiaozhi-esp32-server/trust.json",
+    "queryTemplate": "/v0/repos/github.com/xinnan-tech/xiaozhi-esp32-server/query?path={dot_path}",
+    "indexPath": "repos/github.com/xinnan-tech/xiaozhi-esp32-server/"
+  }
+}

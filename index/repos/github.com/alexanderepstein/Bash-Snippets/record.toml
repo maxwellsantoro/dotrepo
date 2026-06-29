@@ -1,0 +1,49 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/alexanderepstein/Bash-Snippets"
+generated_at = "2026-06-29T05:21:06.247752Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Bash-Snippets"
+description = "The fastest way to find {command options|code pieces} you need"
+homepage = "https://github.com/alexanderepstein/Bash-Snippets"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Roff",
+    "Shell",
+]
+topics = [
+    "bash",
+    "currency-converter",
+    "stock-prices",
+    "weather",
+    "encryption",
+    "movies",
+    "url-shortner",
+    "recommendation-engine",
+    "cheatsheet",
+    "backup",
+    "youtube-player",
+    "qrencode",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/alexanderepstein/Bash-Snippets.git"
+default_branch = "master"
+fork = false
+head_sha = "581a6b4ea681005e3f8add37dbed74aaec65479f"
+html_url = "https://github.com/alexanderepstein/Bash-Snippets"
+stars = 9936

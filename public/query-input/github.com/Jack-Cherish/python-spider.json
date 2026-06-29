@@ -1,0 +1,98 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Jack-Cherish",
+    "repo": "python-spider",
+    "source": "https://github.com/Jack-Cherish/python-spider"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Jack-Cherish/python-spider/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Jack-Cherish/python-spider",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Jack-Cherish/python-spider/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Jack-Cherish/python-spider",
+        "generated_at": "2026-06-29T05:17:29.412183Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "2020年最新连载教程请移步：Python Spider 2020",
+        "description": ":rainbow:Python3网络爬虫实战：淘宝、京东、网易云、B站、12306、抖音、笔趣阁、漫画小说下载、音乐电影下载等",
+        "homepage": "https://cuijiahua.com/blog/spider/",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "python-spider",
+          "python3",
+          "python",
+          "webspider"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://cuijiahua.com/blog/spider/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Jack-Cherish/python-spider.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "60b7ed839713ccf00bb30fe2b203a6b45d7459aa",
+          "html_url": "https://github.com/Jack-Cherish/python-spider",
+          "stars": 19663
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

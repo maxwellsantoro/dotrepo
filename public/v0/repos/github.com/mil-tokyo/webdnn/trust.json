@@ -1,0 +1,43 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "mil-tokyo",
+    "repo": "webdnn",
+    "source": "https://github.com/mil-tokyo/webdnn"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/mil-tokyo/webdnn/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/mil-tokyo/webdnn",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`. Left `repo.build` unset because `package.json` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `package.json` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/mil-tokyo/webdnn/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/mil-tokyo/webdnn/trust.json",
+    "repository": "/v0/repos/github.com/mil-tokyo/webdnn/index.json",
+    "profile": "/v0/repos/github.com/mil-tokyo/webdnn/profile.json",
+    "queryTemplate": "/v0/repos/github.com/mil-tokyo/webdnn/query?path={dot_path}",
+    "indexPath": "repos/github.com/mil-tokyo/webdnn/"
+  }
+}

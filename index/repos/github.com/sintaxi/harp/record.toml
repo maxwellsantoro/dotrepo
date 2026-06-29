@@ -1,0 +1,67 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/sintaxi/harp"
+generated_at = "2026-06-29T05:23:46.924134Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Harp"
+description = "Static Web Server/Generator/Bundler"
+homepage = "https://harp.sh"
+visibility = "public"
+languages = [
+    "CSS",
+    "CoffeeScript",
+    "EJS",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "Pug",
+    "SCSS",
+    "Sass",
+    "Stylus",
+]
+test = "npm test"
+topics = []
+
+[owners]
+maintainers = []
+security_contact = "brock@sintaxi.com"
+
+[docs]
+root = "http://harp.rip/docs/"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/sintaxi/harp"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/sintaxi/harp.git"
+default_branch = "master"
+fork = false
+head_sha = "a7b3baea426d272c9836cd6faf18ec040578e7cc"
+html_url = "https://github.com/sintaxi/harp"
+stars = 4996

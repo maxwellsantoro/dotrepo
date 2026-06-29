@@ -1,0 +1,82 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "asgeirtj",
+    "repo": "system_prompts_leaks",
+    "source": "https://github.com/asgeirtj/system_prompts_leaks"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/asgeirtj/system_prompts_leaks/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/asgeirtj/system_prompts_leaks",
+    "generatedAt": "2026-06-29T05:14:35.574778Z",
+    "evidencePath": "repos/github.com/asgeirtj/system_prompts_leaks/evidence.md"
+  },
+  "purpose": "The purpose of this repo is to document the System Prompt instructions for all the AI chatbots out there - Claude, ChatGPT, Gemini etc.",
+  "name": "System Prompts Leaks",
+  "homepage": "https://asgeirtj.github.io/system_prompts_leaks/",
+  "license": "CC0-1.0",
+  "visibility": "public",
+  "languages": [
+    "JavaScript"
+  ],
+  "topics": [
+    "ai",
+    "anthropic",
+    "awesome",
+    "chatbot",
+    "chatgpt",
+    "claude",
+    "claude-code",
+    "codex",
+    "deep-learning",
+    "education",
+    "gemini",
+    "generative-ai",
+    "google",
+    "llm",
+    "machine-learning",
+    "nlp",
+    "open-source",
+    "openai",
+    "prompt-engineering",
+    "ai-agents"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://asgeirtj.github.io/system_prompts_leaks/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/asgeirtj/system_prompts_leaks/profile.json",
+    "repository": "/v0/repos/github.com/asgeirtj/system_prompts_leaks/index.json",
+    "trust": "/v0/repos/github.com/asgeirtj/system_prompts_leaks/trust.json",
+    "queryTemplate": "/v0/repos/github.com/asgeirtj/system_prompts_leaks/query?path={dot_path}",
+    "indexPath": "repos/github.com/asgeirtj/system_prompts_leaks/"
+  }
+}

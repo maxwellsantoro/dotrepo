@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "google-deepmind",
+    "repo": "sonnet",
+    "source": "https://github.com/google-deepmind/sonnet"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/google-deepmind/sonnet/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/google-deepmind/sonnet",
+    "generatedAt": "2026-06-29T05:21:30.154367Z",
+    "evidencePath": "repos/github.com/google-deepmind/sonnet/evidence.md"
+  },
+  "purpose": "Sonnet is a library built on top of TensorFlow 2 designed to provide simple, composable abstractions for machine learning research.",
+  "name": "Sonnet",
+  "homepage": "https://sonnet.dev/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Python",
+    "Shell",
+    "Starlark"
+  ],
+  "topics": [
+    "machine-learning",
+    "artificial-intelligence",
+    "neural-networks",
+    "deep-learning",
+    "tensorflow"
+  ],
+  "execution": {
+    "test": "pip install pytest pytest-xdist"
+  },
+  "docs": {
+    "root": "https://sonnet.readthedocs.io/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/google-deepmind/sonnet/profile.json",
+    "repository": "/v0/repos/github.com/google-deepmind/sonnet/index.json",
+    "trust": "/v0/repos/github.com/google-deepmind/sonnet/trust.json",
+    "queryTemplate": "/v0/repos/github.com/google-deepmind/sonnet/query?path={dot_path}",
+    "indexPath": "repos/github.com/google-deepmind/sonnet/"
+  }
+}

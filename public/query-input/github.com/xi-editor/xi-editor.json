@@ -1,0 +1,110 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "xi-editor",
+    "repo": "xi-editor",
+    "source": "https://github.com/xi-editor/xi-editor"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/xi-editor/xi-editor/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/xi-editor/xi-editor",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/xi-editor/xi-editor/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/xi-editor/xi-editor",
+        "generated_at": "2026-06-29T05:17:02.633656Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Xi editor",
+        "description": "***Maintenance status:*** *The xi-editor project is currently discontinued.",
+        "homepage": "https://xi-editor.io",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C++",
+          "Makefile",
+          "Python",
+          "Rust",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://xi-editor.io",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/lapce/lapce",
+            "notes": "Cross-link from README: the Lapce editor",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/xi-editor/xi-editor.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "a2dea3059312795c77caadc639df49bf8a7008eb",
+          "html_url": "https://github.com/xi-editor/xi-editor",
+          "stars": 19816
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jassics",
+    "repo": "security-study-plan",
+    "source": "https://github.com/jassics/security-study-plan"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/jwasham/coding-interview-university",
+      "notes": "Cross-link from README: coding-interview-security",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "jwasham",
+        "repo": "coding-interview-university"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/jwasham/coding-interview-university/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/jassics/security-study-plan/relations",
+    "repository": "/v0/repos/github.com/jassics/security-study-plan/index.json",
+    "trust": "/v0/repos/github.com/jassics/security-study-plan/trust.json",
+    "profile": "/v0/repos/github.com/jassics/security-study-plan/profile.json",
+    "queryTemplate": "/v0/repos/github.com/jassics/security-study-plan/query?path={dot_path}",
+    "indexPath": "repos/github.com/jassics/security-study-plan/"
+  }
+}

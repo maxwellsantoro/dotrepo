@@ -1,0 +1,83 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Homebrew",
+    "repo": "brew",
+    "source": "https://github.com/Homebrew/brew"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Homebrew/brew/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Homebrew/brew",
+    "generatedAt": "2026-06-29T05:13:26.413575Z",
+    "evidencePath": "repos/github.com/Homebrew/brew/evidence.md"
+  },
+  "purpose": "See Homebrew's homepage at `brew.sh for installation instructions, what homebrew does, packages, `brew bundle and more.",
+  "name": "Homebrew",
+  "homepage": "https://brew.sh",
+  "license": "BSD-2-Clause",
+  "visibility": "public",
+  "languages": [
+    "CMake",
+    "Dockerfile",
+    "HTML",
+    "PostScript",
+    "Rich Text Format",
+    "Roff",
+    "Ruby",
+    "Shell",
+    "Swift"
+  ],
+  "topics": [
+    "homebrew",
+    "ruby",
+    "macos",
+    "package-manager",
+    "brew"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://creativecommons.org/licenses/by/4.0/",
+    "gettingStarted": "https://docs.brew.sh/Installation"
+  },
+  "ownership": {
+    "maintainers": [
+      "@Homebrew/lead-maintainers",
+      "@MikeMcQuaid"
+    ],
+    "team": "@Homebrew/lead-maintainers",
+    "securityContact": "https://github.com/Homebrew/.github/blob/HEAD/SECURITY.md"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Homebrew/brew/profile.json",
+    "repository": "/v0/repos/github.com/Homebrew/brew/index.json",
+    "trust": "/v0/repos/github.com/Homebrew/brew/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Homebrew/brew/query?path={dot_path}",
+    "indexPath": "repos/github.com/Homebrew/brew/"
+  }
+}

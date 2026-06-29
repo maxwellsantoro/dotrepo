@@ -1,0 +1,84 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "KieronQuinn",
+    "repo": "PersistentSearch",
+    "source": "https://github.com/KieronQuinn/PersistentSearch"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/KieronQuinn/PersistentSearch/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/KieronQuinn/PersistentSearch",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/KieronQuinn/PersistentSearch/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/KieronQuinn/PersistentSearch",
+        "generated_at": "2026-06-29T05:27:33.298898Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "This project is deprecated",
+        "description": "A library that implements the persistent search bar seen on apps such as Google Now, Google Maps and Google Play",
+        "homepage": "https://github.com/KieronQuinn/PersistentSearch",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Java"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/KieronQuinn/PersistentSearch.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "a342b0a9545040373b49b7dbeb2003844a10660f",
+          "html_url": "https://github.com/KieronQuinn/PersistentSearch",
+          "stars": 1998
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

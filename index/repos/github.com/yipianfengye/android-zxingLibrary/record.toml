@@ -1,0 +1,32 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/yipianfengye/android-zxingLibrary"
+generated_at = "2026-06-29T05:23:37.36985Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "android-zxingLibrary"
+description = "当然了如果以上的以上，你还是对定制化UI方面不太满意，可以直接下载我的项目，然后引入lib-zxing module作为你的module，直接修改其代码。"
+homepage = "https://github.com/yipianfengye/android-zxingLibrary"
+visibility = "public"
+languages = ["Java"]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/yipianfengye/android-zxingLibrary.git"
+default_branch = "master"
+fork = false
+head_sha = "fe7b868f8d232031ddcd099c8fc79a562a758bd2"
+html_url = "https://github.com/yipianfengye/android-zxingLibrary"
+stars = 4998

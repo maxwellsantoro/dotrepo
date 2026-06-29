@@ -1,0 +1,74 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "birobirobiro",
+    "repo": "awesome-shadcn-ui",
+    "source": "https://github.com/birobirobiro/awesome-shadcn-ui"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/birobirobiro/awesome-shadcn-ui/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/birobirobiro/awesome-shadcn-ui",
+    "generatedAt": "2026-06-29T05:16:26.305894Z",
+    "evidencePath": "repos/github.com/birobirobiro/awesome-shadcn-ui/evidence.md"
+  },
+  "purpose": "A curated list of awesome things related to shadcn/ui",
+  "name": "awesome-shadcn/ui",
+  "homepage": "https://awesomeshadcn.dev/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "topics": [
+    "awesome",
+    "awesome-list",
+    "resources",
+    "shadcn",
+    "shadcn-ui",
+    "list",
+    "open-source",
+    "shad"
+  ],
+  "execution": {
+    "build": "npm run build"
+  },
+  "docs": {
+    "root": "https://shuip.plvo.dev/docs"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/birobirobiro/awesome-shadcn-ui/profile.json",
+    "repository": "/v0/repos/github.com/birobirobiro/awesome-shadcn-ui/index.json",
+    "trust": "/v0/repos/github.com/birobirobiro/awesome-shadcn-ui/trust.json",
+    "queryTemplate": "/v0/repos/github.com/birobirobiro/awesome-shadcn-ui/query?path={dot_path}",
+    "indexPath": "repos/github.com/birobirobiro/awesome-shadcn-ui/"
+  }
+}

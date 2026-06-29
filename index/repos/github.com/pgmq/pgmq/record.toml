@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/pgmq/pgmq"
+generated_at = "2026-06-29T05:24:54.260691Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `.github/CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/client-tests.yml`, `.github/workflows/crate_ci.yml`, and `.github/workflows/extension_upgrade.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "pgmq"
+description = "A lightweight message queue. Like AWS SQS and RSMQ but on Postgres."
+homepage = "https://pgmq.github.io/pgmq/"
+license = "PostgreSQL"
+visibility = "public"
+languages = [
+    "Makefile",
+    "PLpgSQL",
+    "Python",
+    "Ruby",
+    "Rust",
+    "Shell",
+]
+topics = ["message-queue"]
+
+[owners]
+maintainers = [
+    "@ChuckHend",
+    "@theory",
+    "@v0idpwn",
+    "@spencewenski",
+]
+
+[docs]
+root = "https://pgmq.github.io/pgmq/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/pgmq/pgmq.git"
+default_branch = "main"
+fork = false
+head_sha = "f88cf285e07bce3394318dc8b0307d94dff35fe3"
+html_url = "https://github.com/pgmq/pgmq"
+stars = 4983

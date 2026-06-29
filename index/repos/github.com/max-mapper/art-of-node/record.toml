@@ -1,0 +1,36 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/max-mapper/art-of-node"
+generated_at = "2026-06-29T05:22:35.83847Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "An introduction to Node.js"
+description = "This document is intended for readers who know at least a little bit of a couple of things:"
+homepage = "https://github.com/max-mapper/art-of-node"
+license = "NOASSERTION"
+visibility = "public"
+languages = ["JavaScript"]
+topics = []
+
+[docs]
+root = "http://python-guide.readthedocs.org/en/latest/dev/virtualenvs/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/max-mapper/art-of-node.git"
+default_branch = "master"
+fork = false
+head_sha = "71d0aba060532c5b4f075c1cd0fad746515f3808"
+html_url = "https://github.com/max-mapper/art-of-node"
+stars = 9874

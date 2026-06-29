@@ -1,0 +1,56 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/samqin123/MoonTV"
+generated_at = "2026-06-29T05:29:21.036468Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "MoonTV"
+description = "🎬 **MoonTV** 是一个开箱即用的、跨平台的影视聚合播放器。它基于 **Next.js 14** + **Tailwind CSS** + **TypeScript** 构建，支持多资源搜索、在线播放、收藏同步、播放记录、本地/云端存储，让你可以随时随地畅享海量免费影视内容。"
+homepage = "https://github.com/samqin123/MoonTV"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "JavaScript",
+    "Shell",
+    "TypeScript",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/zhw2590582/ArtPlayer"
+notes = "Cross-link from README: ArtPlayer"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/samqin123/MoonTV.git"
+default_branch = "main"
+fork = false
+head_sha = "c0bba763d16fb5cd830a808d58329025337491cf"
+html_url = "https://github.com/samqin123/MoonTV"
+stars = 1994

@@ -1,0 +1,64 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/roboflow/supervision"
+generated_at = "2026-06-29T05:15:30.596781Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "roboflow%2Fsupervision | Trendshift"
+description = "📑 Table of Contents"
+homepage = "https://supervision.roboflow.com"
+license = "MIT"
+visibility = "public"
+languages = ["Python"]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "computer-vision",
+    "image-processing",
+    "python",
+    "yolo",
+    "instance-segmentation",
+    "object-detection",
+    "tracking",
+    "video-processing",
+    "coco",
+    "pascal-voc",
+    "deep-learning",
+    "metrics",
+    "machine-learning",
+    "pytorch",
+    "tensorflow",
+    "classification",
+    "oriented-bounding-box",
+    "low-code",
+    "hacktoberfest",
+]
+
+[owners]
+maintainers = [
+    "@SkalskiP",
+    "@soumik12345",
+]
+
+[docs]
+root = "https://roboflow.github.io/supervision"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/roboflow/supervision.git"
+default_branch = "develop"
+fork = false
+head_sha = "09b21992c5791abf0512299217581087dd45bc66"
+html_url = "https://github.com/roboflow/supervision"
+stars = 45238

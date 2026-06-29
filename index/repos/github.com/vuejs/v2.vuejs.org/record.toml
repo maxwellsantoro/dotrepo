@@ -1,0 +1,59 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/vuejs/v2.vuejs.org"
+generated_at = "2026-06-29T05:25:07.75813Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Writing"
+description = "See the Vue Docs Writing Guide for our rules and recommendations on writing and maintaining documentation."
+homepage = "https://v2.vuejs.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "EJS",
+    "HTML",
+    "JavaScript",
+    "Stylus",
+    "Vue",
+]
+build = "npm run build"
+topics = []
+
+[docs]
+root = "https://github.com/vuejs-id/docs"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/vuejs/docs-next"
+notes = "Cross-link from README: v3 doc repo"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/vuejs/v2.vuejs.org.git"
+default_branch = "master"
+fork = false
+head_sha = "e468cc04e4da67ea758682609fc85e721916e7cf"
+html_url = "https://github.com/vuejs/v2.vuejs.org"
+stars = 4980

@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/microsoft/magentic-ui"
+generated_at = "2026-06-29T05:21:20.702922Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "MagenticLite"
+description = "Big tasks. Small models."
+homepage = "https://www.microsoft.com/en-us/research/blog/magenticlite-magenticbrain-fara1-5-an-agentic-experience-optimized-for-small-models/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Python",
+    "Shell",
+    "TypeScript",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "agents",
+    "ai",
+    "ai-ux",
+    "autogen",
+    "browser-use",
+    "computer-use-agent",
+    "ui",
+    "cua",
+    "fara",
+    "magenticbrain",
+    "magenticlite",
+]
+
+[owners]
+maintainers = []
+security_contact = "secure@microsoft.com"
+
+[docs]
+root = "./docs/configuration.md"
+getting_started = "./docs/installation.md"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/microsoft/magentic-ui.git"
+default_branch = "main"
+fork = false
+head_sha = "f5bbb22e3a9be9a54bbe9056e33b3c32f1c8778e"
+html_url = "https://github.com/microsoft/magentic-ui"
+stars = 9929

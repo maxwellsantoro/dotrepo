@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/kaixindelele/ChatPaper"
+generated_at = "2026-06-29T05:17:42.350614Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "ChatPaper"
+description = "一站式服务 / 简单 / 快速 / 高效"
+homepage = "https://academic.chatpaper.top"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Makefile",
+    "Python",
+    "Shell",
+    "TeX",
+]
+topics = [
+    "arxiv",
+    "paper",
+]
+
+[docs]
+root = "https://academic.chatpaper.top"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/kaixindelele/chinarxiv"
+notes = "Cross-link from README: ChinarXiv - Arxiv论文翻译工具"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/kaixindelele/ChatPaper.git"
+default_branch = "main"
+fork = false
+head_sha = "f19b3a4510c24d49a14549a41de4ad4dd32dc6c1"
+html_url = "https://github.com/kaixindelele/ChatPaper"
+stars = 19631

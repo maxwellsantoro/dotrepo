@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/r-lyeh/single_file_libs"
+generated_at = "2026-06-29T05:20:40.977275Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Discord"
+description = "C/C++ open-source libraries with minimal dependencies"
+homepage = "https://github.com/r-lyeh/single_file_libs"
+visibility = "public"
+languages = []
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/nothings/stb"
+notes = "Cross-link from README: STB"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/r-lyeh/single_file_libs.git"
+default_branch = "master"
+fork = false
+head_sha = "fecac8eaa1ca485bfdc7aae540baa4c73bec0c28"
+html_url = "https://github.com/r-lyeh/single_file_libs"
+stars = 9951

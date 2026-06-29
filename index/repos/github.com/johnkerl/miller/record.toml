@@ -1,0 +1,89 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/johnkerl/miller"
+generated_at = "2026-06-29T05:21:10.338775Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "What is Miller?"
+description = "Miller is like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON, JSON Lines, and positionally-indexed."
+homepage = "https://miller.readthedocs.io"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "ASL",
+    "Batchfile",
+    "C",
+    "C++",
+    "D",
+    "Go",
+    "Makefile",
+    "Nim",
+    "Python",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "Vim Script",
+    "Zig",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "data-processing",
+    "data-cleaning",
+    "csv",
+    "csv-format",
+    "streaming-data",
+    "streaming-algorithms",
+    "tsv",
+    "json",
+    "json-data",
+    "data-reduction",
+    "data-regression",
+    "statistics",
+    "statistical-analysis",
+    "devops",
+    "devops-tools",
+    "tabular-data",
+    "command-line",
+    "command-line-tools",
+    "unix-toolkit",
+    "miller",
+]
+
+[docs]
+root = "https://miller.readthedocs.io/en/latest/10min"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/GuilloteauQ/miller-exercises"
+notes = "Cross-link from README: Miller Exercises"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/johnkerl/miller.git"
+default_branch = "main"
+fork = false
+head_sha = "d56eafff97b7b2eb0cd1295b810092eacadf71b0"
+html_url = "https://github.com/johnkerl/miller"
+stars = 9933

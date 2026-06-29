@@ -1,0 +1,126 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "metabase",
+    "repo": "metabase",
+    "source": "https://github.com/metabase/metabase"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/metabase/metabase",
+      "notes": "Declared repository in package.json.",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "manifest"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "metabase",
+        "repo": "metabase",
+        "source": "https://github.com/metabase/metabase"
+      },
+      "profile": {
+        "identity": {
+          "host": "github.com",
+          "owner": "metabase",
+          "repo": "metabase",
+          "source": "https://github.com/metabase/metabase"
+        },
+        "name": "Metabase",
+        "purpose": "Metabase is the easy, open-source way for everyone in your company to ask questions and learn from data.",
+        "languages": [
+          "CSS",
+          "Clojure",
+          "Dockerfile",
+          "Emacs Lisp",
+          "HTML",
+          "Handlebars",
+          "JavaScript",
+          "MDX",
+          "Mustache",
+          "Python",
+          "Shell",
+          "TypeScript"
+        ],
+        "topics": [
+          "analytics",
+          "businessintelligence",
+          "dashboard",
+          "reporting",
+          "slack",
+          "clojure",
+          "database",
+          "metabase",
+          "postgres",
+          "postgresql",
+          "mysql",
+          "bi",
+          "visualization",
+          "data",
+          "data-analysis",
+          "sql-editor",
+          "data-visualization",
+          "business-intelligence"
+        ],
+        "completeness": {
+          "hasBuild": true,
+          "hasTest": true,
+          "hasDocs": true,
+          "hasSecurityContact": true,
+          "hasOwnershipSignal": true,
+          "hasLicense": true,
+          "conflictCount": 0
+        },
+        "trust": {
+          "selectedStatus": "verified",
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "selectionReason": "only_matching_record"
+        },
+        "matched": [
+          "relation"
+        ],
+        "ranking": {
+          "score": 19,
+          "matchedFieldCount": 1,
+          "completenessSignalCount": 6,
+          "basis": [
+            "matchedFields",
+            "profileCompleteness",
+            "trustConfidence"
+          ]
+        },
+        "links": {
+          "self": "/v0/repos/github.com/metabase/metabase/profile.json",
+          "repository": "/v0/repos/github.com/metabase/metabase/index.json",
+          "trust": "/v0/repos/github.com/metabase/metabase/trust.json",
+          "queryTemplate": "/v0/repos/github.com/metabase/metabase/query?path={dot_path}",
+          "indexPath": "repos/github.com/metabase/metabase/"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/metabase/metabase/relations",
+    "repository": "/v0/repos/github.com/metabase/metabase/index.json",
+    "trust": "/v0/repos/github.com/metabase/metabase/trust.json",
+    "profile": "/v0/repos/github.com/metabase/metabase/profile.json",
+    "queryTemplate": "/v0/repos/github.com/metabase/metabase/query?path={dot_path}",
+    "indexPath": "repos/github.com/metabase/metabase/"
+  }
+}

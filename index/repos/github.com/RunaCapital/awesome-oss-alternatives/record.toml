@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/RunaCapital/awesome-oss-alternatives"
+generated_at = "2026-06-29T05:19:01.698672Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/deploy.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Awesome open-source alternatives to SaaS"
+description = "Awesome list of open-source startup alternatives to established SaaS products."
+homepage = "https://runacap.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "JavaScript",
+    "MDX",
+    "Python",
+]
+build = "npm run build"
+topics = [
+    "awesome",
+    "awesome-list",
+    "python",
+    "startups",
+    "list",
+    "unicorns",
+    "resources",
+    "open-source",
+    "saas",
+    "alternatives",
+]
+
+[docs]
+root = "https://aws.amazon.com/config/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/RunaCapital/awesome-oss-alternatives.git"
+default_branch = "main"
+fork = false
+head_sha = "e5a1bd6153c602404c6f25a97b178228b755aebb"
+html_url = "https://github.com/RunaCapital/awesome-oss-alternatives"
+stars = 19294

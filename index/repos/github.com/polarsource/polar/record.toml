@@ -1,0 +1,79 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/polarsource/polar"
+generated_at = "2026-06-29T05:20:03.178687Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@polarsource/engineering` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Polar"
+description = "Focus on building your passion, while we focus on the infrastructure to get you paid."
+homepage = "https://polar.sh"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Just",
+    "MDX",
+    "Mako",
+    "Nix",
+    "Python",
+    "Ruby",
+    "Shell",
+    "Swift",
+    "TypeScript",
+]
+topics = [
+    "fastapi",
+    "nextjs",
+    "python",
+    "typescript",
+    "react",
+    "polar",
+    "subscriptions",
+    "turborepo",
+    "digital-products",
+    "payments",
+    "saas",
+    "merchant-of-record",
+]
+
+[owners]
+maintainers = [
+    "@polarsource/engineering",
+    "@frankie567",
+    "@Yopi",
+    "@pieterbeulque",
+    "@psincraian",
+    "@sebastianekstrom",
+    "@emilwidlund",
+    "@victoriabolin",
+    "@birkjernstrom",
+]
+team = "@polarsource/engineering"
+security_contact = "https://github.com/polarsource/polar/security/advisories/new"
+
+[docs]
+root = "https://polar.sh/docs"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/polarsource/polar.git"
+default_branch = "main"
+fork = false
+head_sha = "dffeeaaa7e78535b17864183563841b073df6b5a"
+html_url = "https://github.com/polarsource/polar"
+stars = 9995

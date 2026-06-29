@@ -1,0 +1,36 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ko1o/PYPhotoBrowser"
+generated_at = "2026-06-29T05:27:20.473062Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "PYPhotoBrowser"
+description = "香脉 汕医移动办公 爱牛股 惠心名刀"
+homepage = "https://github.com/ko1o/PYPhotoBrowser"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Objective-C",
+    "Ruby",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ko1o/PYPhotoBrowser.git"
+default_branch = "master"
+fork = false
+head_sha = "8628924766849734171a81e8fd6c6b6c5168f231"
+html_url = "https://github.com/ko1o/PYPhotoBrowser"
+stars = 1998

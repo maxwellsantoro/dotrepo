@@ -1,0 +1,72 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hustcc",
+    "repo": "echarts-for-react",
+    "source": "https://github.com/hustcc/echarts-for-react"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/hustcc/echarts-for-react/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/hustcc/echarts-for-react",
+    "generatedAt": "2026-06-29T05:23:50.244308Z",
+    "evidencePath": "repos/github.com/hustcc/echarts-for-react/evidence.md"
+  },
+  "purpose": "The simplest, and the best React wrapper for Apache ECharts.",
+  "name": "echarts-for-react",
+  "homepage": "https://git.hust.cc/echarts-for-react",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "JavaScript",
+    "TypeScript"
+  ],
+  "topics": [
+    "echarts",
+    "react",
+    "react-component",
+    "javascript",
+    "echarts-for-react",
+    "visualization"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://git.hust.cc/echarts-for-react"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/hustcc/echarts-for-react/profile.json",
+    "repository": "/v0/repos/github.com/hustcc/echarts-for-react/index.json",
+    "trust": "/v0/repos/github.com/hustcc/echarts-for-react/trust.json",
+    "queryTemplate": "/v0/repos/github.com/hustcc/echarts-for-react/query?path={dot_path}",
+    "indexPath": "repos/github.com/hustcc/echarts-for-react/"
+  }
+}

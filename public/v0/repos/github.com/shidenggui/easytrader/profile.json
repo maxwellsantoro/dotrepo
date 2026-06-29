@@ -1,0 +1,61 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "shidenggui",
+    "repo": "easytrader",
+    "source": "https://github.com/shidenggui/easytrader"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/shidenggui/easytrader/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/shidenggui/easytrader",
+    "generatedAt": "2026-06-29T05:21:13.614009Z",
+    "evidencePath": "repos/github.com/shidenggui/easytrader/evidence.md"
+  },
+  "purpose": "若二维码因 Github 网络无法打开，请点击公众号二维码直接打开图片。",
+  "name": "easytrader",
+  "homepage": "https://github.com/shidenggui/easytrader",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Makefile",
+    "Python"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://easytrader.readthedocs.io/zh-cn/master/miniqmt/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/shidenggui/easytrader/profile.json",
+    "repository": "/v0/repos/github.com/shidenggui/easytrader/index.json",
+    "trust": "/v0/repos/github.com/shidenggui/easytrader/trust.json",
+    "queryTemplate": "/v0/repos/github.com/shidenggui/easytrader/query?path={dot_path}",
+    "indexPath": "repos/github.com/shidenggui/easytrader/"
+  }
+}

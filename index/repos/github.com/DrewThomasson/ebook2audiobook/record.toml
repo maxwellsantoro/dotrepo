@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/DrewThomasson/ebook2audiobook"
+generated_at = "2026-06-29T05:18:46.935224Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "ebook2audiobook"
+description = "CPU/GPU Converter from E-Book to audiobook with chapters and metadata using advanced TTS engines and much more."
+homepage = "https://github.com/DrewThomasson/ebook2audiobook"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Cython",
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Makefile",
+    "PowerShell",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "audiobooks",
+    "docker",
+    "epub",
+    "linux",
+    "mac",
+    "tts",
+    "windows",
+    "xtts",
+    "voice-cloning",
+    "gradio",
+    "chinese",
+    "english",
+    "multilingual",
+    "colab-notebook",
+    "kaggle",
+    "audiobook",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/DrewThomasson/ebook2audiobook.git"
+default_branch = "main"
+fork = false
+head_sha = "ccef2748329d12440891afcd432bb27b0594dfdc"
+html_url = "https://github.com/DrewThomasson/ebook2audiobook"
+stars = 19346

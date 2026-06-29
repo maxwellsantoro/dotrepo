@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/yzhao062/pyod"
+generated_at = "2026-06-29T05:22:23.902572Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "pyod"
+description = "A Python library for anomaly detection across tabular, time series, graph, text, image, and audio data. 60+ detectors, benchmark-backed ADEngine orchestration, and an agentic workflow for AI agents."
+homepage = "http://pyod.readthedocs.io"
+license = "BSD-2-Clause"
+visibility = "public"
+languages = [
+    "Jupyter Notebook",
+    "Python",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "outlier-detection",
+    "anomaly-detection",
+    "outlier-ensembles",
+    "machine-learning",
+    "data-mining",
+    "unsupervised-learning",
+    "fraud-detection",
+    "deep-learning",
+    "data-science",
+    "novelty-detection",
+    "out-of-distribution-detection",
+    "foundation-models",
+    "image-anomaly-detection",
+    "multimodal",
+    "nlp-anomaly-detection",
+    "agentic-ai",
+    "graph-anomaly-detection",
+    "time-series",
+    "time-series-anomaly-detection",
+]
+
+[docs]
+root = "http://pyod.readthedocs.io"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/yzhao062/pyod.git"
+default_branch = "master"
+fork = false
+head_sha = "d9db50aa09e015e4fdb22d9a7cebe287d671e07b"
+html_url = "https://github.com/yzhao062/pyod"
+stars = 9890

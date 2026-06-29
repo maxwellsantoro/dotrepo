@@ -1,0 +1,46 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/francoismichel/ssh3"
+generated_at = "2026-06-29T05:24:42.720411Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "SSH3"
+description = "SSH3 is a complete revisit of the SSH protocol, mapping its semantics on top of the HTTP mechanisms."
+homepage = "https://arxiv.org/abs/2312.08396"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Go",
+    "Makefile",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = []
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/francoismichel/ssh3/security/advisories/new"
+
+[docs]
+root = "https://arxiv.org/abs/2312.08396"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/francoismichel/ssh3.git"
+default_branch = "main"
+fork = false
+head_sha = "5b4b242db02a5cfbb9ebf9dfc5aad2c32e10f245"
+html_url = "https://github.com/francoismichel/ssh3"
+stars = 4985

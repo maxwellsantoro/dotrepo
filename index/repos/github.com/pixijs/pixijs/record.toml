@@ -1,0 +1,83 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/pixijs/pixijs"
+generated_at = "2026-06-29T05:14:02.40657Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "npm downloads"
+description = "Next-Generation, Fastest HTML5 Creation Engine for the Web"
+homepage = "http://pixijs.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "GLSL",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "Shell",
+    "TypeScript",
+    "WGSL",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "canvas2d",
+    "pixijs",
+    "javascript",
+    "webgl",
+    "glsl",
+    "canvas",
+    "rendering",
+    "pixi",
+    "game",
+    "renderer",
+    "rendering-engine",
+    "rendering-2d-graphics",
+    "data-visualization",
+]
+
+[owners]
+maintainers = [
+    "@GoodBoyDigital",
+    "@bigtimebuddy",
+    "@Zyie",
+]
+
+[docs]
+root = "http://pixijs.com"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/pixijs/pixijs"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/pixijs/pixijs.git"
+default_branch = "dev"
+fork = false
+head_sha = "cbaa784685a27da45311d7f3fa0e9b9bc9a899d4"
+html_url = "https://github.com/pixijs/pixijs"
+stars = 47632

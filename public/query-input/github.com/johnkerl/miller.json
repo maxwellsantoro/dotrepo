@@ -1,0 +1,140 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "johnkerl",
+    "repo": "miller",
+    "source": "https://github.com/johnkerl/miller"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/johnkerl/miller/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/johnkerl/miller",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/johnkerl/miller/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/johnkerl/miller",
+        "generated_at": "2026-06-29T05:21:10.338775Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "What is Miller?",
+        "description": "Miller is like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON, JSON Lines, and positionally-indexed.",
+        "homepage": "https://miller.readthedocs.io",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "ASL",
+          "Batchfile",
+          "C",
+          "C++",
+          "D",
+          "Go",
+          "Makefile",
+          "Nim",
+          "Python",
+          "Ruby",
+          "Rust",
+          "Shell",
+          "Vim Script",
+          "Zig"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "data-processing",
+          "data-cleaning",
+          "csv",
+          "csv-format",
+          "streaming-data",
+          "streaming-algorithms",
+          "tsv",
+          "json",
+          "json-data",
+          "data-reduction",
+          "data-regression",
+          "statistics",
+          "statistical-analysis",
+          "devops",
+          "devops-tools",
+          "tabular-data",
+          "command-line",
+          "command-line-tools",
+          "unix-toolkit",
+          "miller"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://miller.readthedocs.io/en/latest/10min",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/GuilloteauQ/miller-exercises",
+            "notes": "Cross-link from README: Miller Exercises",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/johnkerl/miller.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "d56eafff97b7b2eb0cd1295b810092eacadf71b0",
+          "html_url": "https://github.com/johnkerl/miller",
+          "stars": 9933
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

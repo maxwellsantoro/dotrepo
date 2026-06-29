@@ -1,0 +1,114 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "h2oai",
+    "repo": "h2o-llmstudio",
+    "source": "https://github.com/h2oai/h2o-llmstudio"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/h2oai/h2o-llmstudio/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/h2oai/h2o-llmstudio",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Left `repo.build` unset because `.github/workflows/deploy-to-github-pages.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/h2oai/h2o-llmstudio/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/h2oai/h2o-llmstudio",
+        "generated_at": "2026-06-29T05:25:18.168611Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Left `repo.build` unset because `.github/workflows/deploy-to-github-pages.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Welcome to H2O LLM Studio, a framework and no-code GUI designed for fine-tuning state-of-the-art large language models (LLMs).",
+        "description": "For questions, discussing, or just hanging out, come and join our Discord!",
+        "homepage": "https://h2o.ai",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Gherkin",
+          "Makefile",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": "make test",
+        "topics": [
+          "ai",
+          "chatbot",
+          "chatgpt",
+          "fine-tuning",
+          "finetuning",
+          "generative",
+          "generative-ai",
+          "gpt",
+          "llama",
+          "llama2",
+          "llm",
+          "llm-training",
+          "fedramp"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@pascal-pfeiffer",
+          "@sherenem"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://h2o.ai",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/h2oai/h2o-llmstudio.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "420613aeb11f77b0352c7d159e249da8eeacefa1",
+          "html_url": "https://github.com/h2oai/h2o-llmstudio",
+          "stars": 4978
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

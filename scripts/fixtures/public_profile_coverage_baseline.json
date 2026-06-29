@@ -1,16 +1,16 @@
 {
   "schema": "dotrepo-public-profile-coverage-baseline/v0",
-  "minProfiles": 261,
-  "minHighSignal": 239,
-  "minHighSignalRatio": 0.55,
+  "minProfiles": 613,
+  "minHighSignal": 516,
+  "minHighSignalRatio": 0.84,
   "maxConflictRate": 0.0,
   "maxMalformedProfiles": 0,
   "minSignal": {
-    "hasBuild": 195,
-    "hasDocs": 149,
-    "hasLicense": 258,
-    "hasOwnershipSignal": 89,
-    "hasSecurityContact": 153,
-    "hasTest": 195
+    "hasBuild": 328,
+    "hasDocs": 361,
+    "hasLicense": 559,
+    "hasOwnershipSignal": 118,
+    "hasSecurityContact": 205,
+    "hasTest": 323
   }
 }

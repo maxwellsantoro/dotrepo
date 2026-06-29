@@ -1,0 +1,52 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/wb2osz/direwolf"
+generated_at = "2026-06-29T05:28:57.021835Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/codeql-analysis.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Dire Wolf"
+description = 'In the early days of Amateur Packet Radio, it was necessary to use an expensive "Terminal Node Controller" (TNC) with specialized hardware.'
+homepage = "https://github.com/wb2osz/direwolf"
+license = "GPL-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Makefile",
+    "Perl",
+    "Python",
+    "Shell",
+]
+test = "make test"
+topics = [
+    "tnc",
+    "igate",
+    "ham-radio",
+    "packet-radio",
+    "raspberry-pi",
+    "digipeater",
+    "aprs",
+    "ax25",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/wb2osz/direwolf.git"
+default_branch = "master"
+fork = false
+head_sha = "eda1383f5fa9d8ba3cb27f99db1d2c79494404c9"
+html_url = "https://github.com/wb2osz/direwolf"
+stars = 1995

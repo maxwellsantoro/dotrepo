@@ -1,0 +1,113 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "iamkun",
+    "repo": "dayjs",
+    "source": "https://github.com/iamkun/dayjs"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/iamkun/dayjs/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/iamkun/dayjs",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/iamkun/dayjs/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/iamkun/dayjs",
+        "generated_at": "2026-06-29T05:13:28.334914Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "API",
+        "description": "It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times.",
+        "homepage": "https://day.js.org",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "JavaScript"
+        ],
+        "build": "npm run build",
+        "test": "npm test",
+        "topics": [
+          "time",
+          "date",
+          "date-formatting",
+          "datetime",
+          "moment",
+          "dayjs"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://day.js.org/docs/en/parse/parse",
+        "getting_started": "https://day.js.org/docs/en/installation/installation",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/iamkun/dayjs",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/iamkun/dayjs.git",
+          "default_branch": "dev",
+          "fork": false,
+          "head_sha": "f6a1556deca9daedb00372cf40637b3037d82498",
+          "html_url": "https://github.com/iamkun/dayjs",
+          "stars": 48666
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

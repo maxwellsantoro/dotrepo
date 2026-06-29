@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/SWE-agent/SWE-agent"
+generated_at = "2026-06-29T05:17:33.986388Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "swe-agent.com"
+description = "SWE-agent enables your language model of choice (e.g."
+homepage = "https://swe-agent.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Perl",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "agent",
+    "ai",
+    "developer-tools",
+    "llm",
+    "agent-based-model",
+    "lms",
+    "cybersecurity",
+]
+
+[owners]
+maintainers = []
+security_contact = "kl5675@princeton.edu"
+
+[docs]
+root = "https://swe-agent.com"
+getting_started = "https://swe-agent.com/latest/installation/codespaces/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/SWE-agent/SWE-agent.git"
+default_branch = "main"
+fork = false
+head_sha = "abd7d69724d1413b30fea43d4724bb5b463906b4"
+html_url = "https://github.com/SWE-agent/SWE-agent"
+stars = 19658

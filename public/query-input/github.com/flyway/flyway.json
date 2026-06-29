@@ -1,0 +1,116 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "flyway",
+    "repo": "flyway",
+    "source": "https://github.com/flyway/flyway"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/flyway/flyway/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/flyway/flyway",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/flyway/flyway/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/flyway/flyway",
+        "generated_at": "2026-06-29T05:22:37.779228Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Database Migrations Made Easy.",
+        "description": "Simple, focused and powerful.",
+        "homepage": "https://flywaydb.org",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "Dockerfile",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Makefile",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "flyway",
+          "java",
+          "database-migrations",
+          "java-library",
+          "continuous-delivery",
+          "devops",
+          "sql",
+          "continuous-deployment",
+          "database",
+          "database-deployment",
+          "database-administration",
+          "database-management",
+          "mysql",
+          "postgresql",
+          "sqlserver",
+          "db2",
+          "aurora",
+          "mariadb",
+          "redgate"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://documentation.red-gate.com/flyway/reference",
+        "getting_started": "https://documentation.red-gate.com/flyway/getting-started-with-flyway",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/flyway/flyway.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "e0118b30e3594b8859179f31d83537ffaf0a7a34",
+          "html_url": "https://github.com/flyway/flyway",
+          "stars": 9873
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

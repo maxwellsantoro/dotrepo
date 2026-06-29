@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/cncf/landscape"
+generated_at = "2026-06-29T05:21:25.72313Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Cloud Native Landscape"
+description = "The CNCF Cloud Native Landscape is intended as a map through the previously uncharted terrain of cloud native technologies."
+homepage = "https://l.cncf.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = []
+topics = [
+    "cloud-native",
+    "landscape",
+    "cncf",
+    "svg",
+    "logo",
+    "serverless",
+    "crunchbase",
+    "wasm",
+]
+
+[docs]
+root = "https://github.com/cncf/landscape2/blob/main/docs/config/data.yml"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/cncf/landscape.git"
+default_branch = "master"
+fork = false
+head_sha = "c0f2dd271ac795650a62f3124f7698cbd18d491e"
+html_url = "https://github.com/cncf/landscape"
+stars = 9926

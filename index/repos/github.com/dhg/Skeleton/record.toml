@@ -1,0 +1,36 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/dhg/Skeleton"
+generated_at = "2026-06-29T05:18:30.55237Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "What's in the download?"
+description = "The download includes Skeleton's CSS, Normalize CSS as a reset, a sample favicon, and an index.html as a starting point."
+homepage = "http://www.getskeleton.com"
+license = "MIT"
+visibility = "public"
+languages = ["CSS"]
+topics = []
+
+[docs]
+root = "http://www.getskeleton.com"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/dhg/Skeleton.git"
+default_branch = "master"
+fork = false
+head_sha = "88f03612b05f093e3f235ced77cf89d3a8fcf846"
+html_url = "https://github.com/dhg/Skeleton"
+stars = 19412

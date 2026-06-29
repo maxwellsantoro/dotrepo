@@ -1,0 +1,58 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "GhostPack",
+    "repo": "Certify",
+    "source": "https://github.com/GhostPack/Certify"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/GhostPack/Certify/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/GhostPack/Certify",
+    "generatedAt": "2026-06-29T05:27:31.676204Z",
+    "evidencePath": "repos/github.com/GhostPack/Certify/evidence.md"
+  },
+  "purpose": "Certify is a C# tool to enumerate and abuse misconfigurations in Active Directory Certificate Services (AD CS).",
+  "name": "Certify",
+  "homepage": "https://github.com/GhostPack/Certify",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "C#"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/GhostPack/Certify/profile.json",
+    "repository": "/v0/repos/github.com/GhostPack/Certify/index.json",
+    "trust": "/v0/repos/github.com/GhostPack/Certify/trust.json",
+    "queryTemplate": "/v0/repos/github.com/GhostPack/Certify/query?path={dot_path}",
+    "indexPath": "repos/github.com/GhostPack/Certify/"
+  }
+}

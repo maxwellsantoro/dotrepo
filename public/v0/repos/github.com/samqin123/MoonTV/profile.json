@@ -1,0 +1,65 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "samqin123",
+    "repo": "MoonTV",
+    "source": "https://github.com/samqin123/MoonTV"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/samqin123/MoonTV/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/samqin123/MoonTV",
+    "generatedAt": "2026-06-29T05:29:21.036468Z",
+    "evidencePath": "repos/github.com/samqin123/MoonTV/evidence.md"
+  },
+  "purpose": "🎬 **MoonTV** 是一个开箱即用的、跨平台的影视聚合播放器。它基于 **Next.js 14** + **Tailwind CSS** + **TypeScript** 构建，支持多资源搜索、在线播放、收藏同步、播放记录、本地/云端存储，让你可以随时随地畅享海量免费影视内容。",
+  "name": "MoonTV",
+  "homepage": "https://github.com/samqin123/MoonTV",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "JavaScript",
+    "Shell",
+    "TypeScript"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/samqin123/MoonTV/profile.json",
+    "repository": "/v0/repos/github.com/samqin123/MoonTV/index.json",
+    "trust": "/v0/repos/github.com/samqin123/MoonTV/trust.json",
+    "queryTemplate": "/v0/repos/github.com/samqin123/MoonTV/query?path={dot_path}",
+    "indexPath": "repos/github.com/samqin123/MoonTV/"
+  }
+}

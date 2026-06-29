@@ -1,0 +1,77 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ctfs",
+    "repo": "write-ups-2015",
+    "source": "https://github.com/ctfs/write-ups-2015"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ctfs/write-ups-2015/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ctfs/write-ups-2015",
+    "generatedAt": "2026-06-29T05:27:14.672791Z",
+    "evidencePath": "repos/github.com/ctfs/write-ups-2015/evidence.md"
+  },
+  "purpose": "There are some problems with CTF write-ups in general:",
+  "name": "CTF write-ups 2015",
+  "homepage": "https://github.com/ctfs/write-ups-2015",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "Brainfuck",
+    "C",
+    "C++",
+    "COBOL",
+    "CSS",
+    "Go",
+    "HTML",
+    "Hack",
+    "Java",
+    "JavaScript",
+    "Makefile",
+    "PHP",
+    "Pascal",
+    "Perl",
+    "Python",
+    "Roff",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "SystemVerilog"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ctfs/write-ups-2015/profile.json",
+    "repository": "/v0/repos/github.com/ctfs/write-ups-2015/index.json",
+    "trust": "/v0/repos/github.com/ctfs/write-ups-2015/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ctfs/write-ups-2015/query?path={dot_path}",
+    "indexPath": "repos/github.com/ctfs/write-ups-2015/"
+  }
+}

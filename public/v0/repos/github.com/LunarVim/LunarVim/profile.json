@@ -1,0 +1,85 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "LunarVim",
+    "repo": "LunarVim",
+    "source": "https://github.com/LunarVim/LunarVim"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/LunarVim/LunarVim/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/LunarVim/LunarVim",
+    "generatedAt": "2026-06-29T05:19:12.285828Z",
+    "evidencePath": "repos/github.com/LunarVim/LunarVim/evidence.md"
+  },
+  "purpose": "An IDE layer for Neovim with sane defaults.",
+  "name": "Last commit",
+  "homepage": "https://www.lunarvim.org",
+  "license": "GPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Lua",
+    "Makefile",
+    "PowerShell",
+    "Shell"
+  ],
+  "topics": [
+    "neovim",
+    "vim",
+    "vimrc",
+    "nvim",
+    "ide",
+    "lunarvim",
+    "lua",
+    "linters",
+    "formatters",
+    "snippets",
+    "vscode",
+    "neovim-configuration",
+    "neovim-lua",
+    "neovim-config",
+    "neovim-setup",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "test": "make test"
+  },
+  "docs": {
+    "root": "https://www.lunarvim.org",
+    "gettingStarted": "https://www.lunarvim.org/docs/installation"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/LunarVim/LunarVim/profile.json",
+    "repository": "/v0/repos/github.com/LunarVim/LunarVim/index.json",
+    "trust": "/v0/repos/github.com/LunarVim/LunarVim/trust.json",
+    "queryTemplate": "/v0/repos/github.com/LunarVim/LunarVim/query?path={dot_path}",
+    "indexPath": "repos/github.com/LunarVim/LunarVim/"
+  }
+}

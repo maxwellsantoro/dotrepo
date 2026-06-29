@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "LMCache",
+    "repo": "LMCache",
+    "source": "https://github.com/LMCache/LMCache"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/LMCache/LMCache/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/LMCache/LMCache",
+    "generatedAt": "2026-06-29T05:20:58.165628Z",
+    "evidencePath": "repos/github.com/LMCache/LMCache/evidence.md"
+  },
+  "purpose": "LMCache is a **KV cache management layer** for LLM inference.",
+  "name": "A KV Cache Management Layer for Scalable LLM Inference",
+  "homepage": "https://lmcache.ai/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Cuda",
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "amd",
+    "cuda",
+    "inference",
+    "kv-cache",
+    "llm",
+    "pytorch",
+    "rocm",
+    "vllm",
+    "fast",
+    "speed"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://docs.lmcache.ai/",
+    "gettingStarted": "https://docs.lmcache.ai/getting_started/installation.html"
+  },
+  "ownership": {
+    "maintainers": [
+      "@ApostaC",
+      "@YaoJiayi",
+      "@sammshen",
+      "@maobaolong",
+      "@chunxiaozheng",
+      "@deng451e",
+      "@DongDongJu",
+      "@OasisGit",
+      "@hlin99",
+      "@royyhuang",
+      "@yoo-kumaneko",
+      "@Shaoting-Feng",
+      "@hickeyma",
+      "@KuntaiDu"
+    ],
+    "securityContact": "lmcacheteam@gmail.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/LMCache/LMCache/profile.json",
+    "repository": "/v0/repos/github.com/LMCache/LMCache/index.json",
+    "trust": "/v0/repos/github.com/LMCache/LMCache/trust.json",
+    "queryTemplate": "/v0/repos/github.com/LMCache/LMCache/query?path={dot_path}",
+    "indexPath": "repos/github.com/LMCache/LMCache/"
+  }
+}

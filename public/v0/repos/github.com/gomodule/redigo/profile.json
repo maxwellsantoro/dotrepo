@@ -1,0 +1,66 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "gomodule",
+    "repo": "redigo",
+    "source": "https://github.com/gomodule/redigo"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/gomodule/redigo/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/gomodule/redigo",
+    "generatedAt": "2026-06-29T05:22:59.948132Z",
+    "evidencePath": "repos/github.com/gomodule/redigo/evidence.md"
+  },
+  "purpose": "Install Redigo using the \"go get\" command:",
+  "name": "Redigo",
+  "homepage": "https://github.com/gomodule/redigo",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Go"
+  ],
+  "topics": [
+    "go",
+    "redis"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://pkg.go.dev/github.com/gomodule/redigo/redis"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/gomodule/redigo/profile.json",
+    "repository": "/v0/repos/github.com/gomodule/redigo/index.json",
+    "trust": "/v0/repos/github.com/gomodule/redigo/trust.json",
+    "queryTemplate": "/v0/repos/github.com/gomodule/redigo/query?path={dot_path}",
+    "indexPath": "repos/github.com/gomodule/redigo/"
+  }
+}

@@ -1,0 +1,67 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/exo-explore/exo"
+generated_at = "2026-06-29T05:15:01.004564Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Discord"
+description = "Run frontier AI locally."
+homepage = "https://github.com/exo-explore/exo"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Just",
+    "Nix",
+    "Python",
+    "Rust",
+    "Shell",
+    "Svelte",
+    "Swift",
+    "TypeScript",
+]
+topics = []
+
+[owners]
+maintainers = [
+    "@ToxicPine",
+    "@AlexCheema",
+    "@GeluVrabie",
+]
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/ml-explore/mlx"
+notes = "Cross-link from README: MLX"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/exo-explore/exo.git"
+default_branch = "main"
+fork = false
+head_sha = "b5375f8cee4368d09e1ce96a56b9f81fb0bc81aa"
+html_url = "https://github.com/exo-explore/exo"
+stars = 45734

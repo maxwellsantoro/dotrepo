@@ -1,0 +1,60 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "zhongyang219",
+    "repo": "TrafficMonitor",
+    "source": "https://github.com/zhongyang219/TrafficMonitor"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/zhongyang219/TrafficMonitor/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/zhongyang219/TrafficMonitor",
+    "generatedAt": "2026-06-29T05:15:43.897748Z",
+    "evidencePath": "repos/github.com/zhongyang219/TrafficMonitor/evidence.md"
+  },
+  "purpose": "Traffic Monitor是一款用于Windows平台的网速监控悬浮窗软件，可以显示当前网速、CPU及内存利用率，支持嵌入到任务栏显示，支持更换皮肤、历史流量统计等功能。",
+  "name": "Featured｜HelloGitHub",
+  "homepage": "https://github.com/zhongyang219/TrafficMonitor",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C++"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/zhongyang219/TrafficMonitor/profile.json",
+    "repository": "/v0/repos/github.com/zhongyang219/TrafficMonitor/index.json",
+    "trust": "/v0/repos/github.com/zhongyang219/TrafficMonitor/trust.json",
+    "queryTemplate": "/v0/repos/github.com/zhongyang219/TrafficMonitor/query?path={dot_path}",
+    "indexPath": "repos/github.com/zhongyang219/TrafficMonitor/"
+  }
+}

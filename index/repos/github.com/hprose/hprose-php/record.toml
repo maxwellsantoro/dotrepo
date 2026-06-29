@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/hprose/hprose-php"
+generated_at = "2026-06-29T05:28:18.872626Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Hprose"
+description = "*Hprose* is a High Performance Remote Object Service Engine."
+homepage = "https://github.com/hprose/hprose-php"
+license = "MIT"
+visibility = "public"
+languages = ["PHP"]
+topics = [
+    "rpc",
+    "rpc-library",
+    "rpc-framework",
+    "rpc-server",
+    "rpc-service",
+    "rpc-client",
+    "cross-platform",
+    "cross-language",
+    "cross-domain",
+    "cross-device",
+    "php",
+    "php7",
+    "php-library",
+    "hprose",
+    "composer",
+    "packagist",
+    "serialization",
+    "serializer",
+    "serialization-library",
+    "serialize",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/hprose/hprose-php.git"
+default_branch = "master"
+fork = false
+head_sha = "d4e9a231fc814e4a4cdd42f4871bd1d4a68b4741"
+html_url = "https://github.com/hprose/hprose-php"
+stars = 1996

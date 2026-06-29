@@ -1,0 +1,140 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "alirezarezvani",
+    "repo": "claude-skills",
+    "source": "https://github.com/alirezarezvani/claude-skills"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/alirezarezvani/claude-skills/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/alirezarezvani/claude-skills",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/ci-quality-gate.yml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/alirezarezvani/claude-skills/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/alirezarezvani/claude-skills",
+        "generated_at": "2026-06-29T05:18:53.029394Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/ci-quality-gate.yml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Claude Code Skills & Plugins",
+        "description": "345 production-ready Claude Code skills, plugins, and agent skills for 13 AI coding tools.",
+        "homepage": "https://alirezarezvani.medium.com/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "C",
+          "C#",
+          "Go",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Python",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "python -m compileall \\",
+        "test": "python -m pytest",
+        "topics": [
+          "agentic-ai",
+          "anthropic-claude",
+          "claude-ai",
+          "claude-code",
+          "claude-skills",
+          "claude-code-skills",
+          "ai-coding-agent",
+          "claude-code-plugins",
+          "developer-tools",
+          "openai-codex",
+          "prompt-engineering",
+          "agent-plugins",
+          "agent-skills",
+          "codex-skills",
+          "cursor-skills",
+          "gemini-cli-skills",
+          "coding-agent-plugins",
+          "openclaw",
+          "openclaw-skills",
+          "openclaw-plugins"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://alirezarezvani.com"
+      },
+      "docs": {
+        "root": "https://alirezarezvani.medium.com/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/alirezarezvani/claude-code-skills-agents-factory",
+            "notes": "Cross-link from README: Claude Code Skills & Agents Factory",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/alirezarezvani/claude-skills.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "4a3c05b69e64f4925f7fc65c88890f614f79caf0",
+          "html_url": "https://github.com/alirezarezvani/claude-skills",
+          "stars": 19319
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

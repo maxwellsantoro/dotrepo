@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "metabrainz",
+    "repo": "picard",
+    "source": "https://github.com/metabrainz/picard"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/metabrainz/picard/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/metabrainz/picard",
+    "generatedAt": "2026-06-29T05:24:56.599591Z",
+    "evidencePath": "repos/github.com/metabrainz/picard/evidence.md"
+  },
+  "purpose": "MusicBrainz Picard is a cross-platform (Linux, macOS, Windows) audio tagging application.",
+  "name": "MusicBrainz Picard",
+  "homepage": "https://picard.musicbrainz.org",
+  "license": "GPL-2.0",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "PowerShell",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "python",
+    "musicbrainz",
+    "tagger",
+    "audio",
+    "music-tagger",
+    "id3",
+    "acoustid",
+    "musicbrainz-picard",
+    "music",
+    "picard"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://picard-docs.musicbrainz.org/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/metabrainz/picard/profile.json",
+    "repository": "/v0/repos/github.com/metabrainz/picard/index.json",
+    "trust": "/v0/repos/github.com/metabrainz/picard/trust.json",
+    "queryTemplate": "/v0/repos/github.com/metabrainz/picard/query?path={dot_path}",
+    "indexPath": "repos/github.com/metabrainz/picard/"
+  }
+}

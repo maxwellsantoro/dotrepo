@@ -1,0 +1,44 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "livekit",
+    "repo": "livekit",
+    "source": "https://github.com/livekit/livekit"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/livekit/livekit/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/livekit/livekit",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/livekit/livekit/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/livekit/livekit/trust.json",
+    "repository": "/v0/repos/github.com/livekit/livekit/index.json",
+    "profile": "/v0/repos/github.com/livekit/livekit/profile.json",
+    "queryTemplate": "/v0/repos/github.com/livekit/livekit/query?path={dot_path}",
+    "indexPath": "repos/github.com/livekit/livekit/"
+  }
+}

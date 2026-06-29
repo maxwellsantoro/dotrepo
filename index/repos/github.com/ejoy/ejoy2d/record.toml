@@ -1,0 +1,40 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ejoy/ejoy2d"
+generated_at = "2026-06-29T05:29:46.627771Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "EJOY 2D"
+description = "For Windows and msvc"
+homepage = "https://github.com/ejoy/ejoy2d"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C++",
+    "Lua",
+    "Makefile",
+    "Objective-C",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ejoy/ejoy2d.git"
+default_branch = "master"
+fork = false
+head_sha = "bf4af9140af2bf0692b96dbc78f7b1e89dfb6924"
+html_url = "https://github.com/ejoy/ejoy2d"
+stars = 1994

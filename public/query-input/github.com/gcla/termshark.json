@@ -1,0 +1,94 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "gcla",
+    "repo": "termshark",
+    "source": "https://github.com/gcla/termshark"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/gcla/termshark/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/gcla/termshark",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/gcla/termshark/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/gcla/termshark",
+        "generated_at": "2026-06-29T05:21:42.314052Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Termshark",
+        "description": "A terminal user-interface for tshark, inspired by Wireshark.",
+        "homepage": "https://github.com/gcla/termshark",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Go",
+          "Shell"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "tshark",
+          "wireshark",
+          "pcap",
+          "tcell",
+          "tui",
+          "gowid",
+          "golang",
+          "go"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/gcla/termshark.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "e8a1ec6e4f2d517f646d3bba35a2ec4926e0202c",
+          "html_url": "https://github.com/gcla/termshark",
+          "stars": 9916
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

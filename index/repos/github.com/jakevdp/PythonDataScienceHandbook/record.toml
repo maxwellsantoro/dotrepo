@@ -1,0 +1,65 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/jakevdp/PythonDataScienceHandbook"
+generated_at = "2026-06-29T05:13:27.332681Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Python Data Science Handbook"
+description = "This repository contains the entire Python Data Science Handbook, in the form of (free!) Jupyter notebooks."
+homepage = "http://jakevdp.github.io/PythonDataScienceHandbook"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "Jupyter Notebook",
+    "Less",
+    "Makefile",
+    "Python",
+]
+topics = [
+    "scikit-learn",
+    "numpy",
+    "python",
+    "jupyter-notebook",
+    "matplotlib",
+    "pandas",
+]
+
+[docs]
+root = "http://jakevdp.github.io/PythonDataScienceHandbook"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/jakevdp/WhirlwindTourOfPython"
+notes = "Cross-link from README: A Whirlwind Tour of Python"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/jakevdp/PythonDataScienceHandbook.git"
+default_branch = "master"
+fork = false
+head_sha = "d66231454ef753818dc9213c9b5942e067266966"
+html_url = "https://github.com/jakevdp/PythonDataScienceHandbook"
+stars = 48709

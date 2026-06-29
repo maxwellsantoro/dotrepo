@@ -1,0 +1,73 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tiajinsha",
+    "repo": "JKVideo",
+    "source": "https://github.com/tiajinsha/JKVideo"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/tiajinsha/JKVideo/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/tiajinsha/JKVideo",
+    "generatedAt": "2026-06-29T05:23:40.892853Z",
+    "evidencePath": "repos/github.com/tiajinsha/JKVideo/evidence.md"
+  },
+  "purpose": "高颜值第三方 B 站 React Native 客户端",
+  "name": "JKVideo",
+  "homepage": "https://github.com/tiajinsha/JKVideo",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "JavaScript",
+    "PowerShell",
+    "TypeScript"
+  ],
+  "topics": [
+    "android",
+    "danmaku",
+    "dash",
+    "expo",
+    "react-native",
+    "typescript",
+    "video-player",
+    "zustand"
+  ],
+  "execution": {
+    "build": "chmod +x android/gradlew",
+    "test": "chmod +x android/gradlew"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/tiajinsha/JKVideo/profile.json",
+    "repository": "/v0/repos/github.com/tiajinsha/JKVideo/index.json",
+    "trust": "/v0/repos/github.com/tiajinsha/JKVideo/trust.json",
+    "queryTemplate": "/v0/repos/github.com/tiajinsha/JKVideo/query?path={dot_path}",
+    "indexPath": "repos/github.com/tiajinsha/JKVideo/"
+  }
+}

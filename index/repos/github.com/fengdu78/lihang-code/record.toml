@@ -1,0 +1,33 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/fengdu78/lihang-code"
+generated_at = "2026-06-29T05:17:51.486564Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "lihang-code"
+description = "第1章 统计学习方法概论"
+homepage = "https://github.com/fengdu78/lihang-code"
+visibility = "public"
+languages = ["Jupyter Notebook"]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/fengdu78/lihang-code.git"
+default_branch = "master"
+fork = false
+head_sha = "a0b8ab2366b658b7f376b7d360d4257298986532"
+html_url = "https://github.com/fengdu78/lihang-code"
+stars = 19589

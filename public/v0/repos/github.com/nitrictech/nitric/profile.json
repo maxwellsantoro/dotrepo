@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nitrictech",
+    "repo": "nitric",
+    "source": "https://github.com/nitrictech/nitric"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nitrictech/nitric/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nitrictech/nitric",
+    "generatedAt": "2026-06-29T05:29:41.192675Z",
+    "evidencePath": "repos/github.com/nitrictech/nitric/evidence.md"
+  },
+  "purpose": "Nitric is a multi-language framework, with concise inline infrastructure from code.",
+  "name": "Effortless backends with infrastructure from code",
+  "homepage": "https://nitric.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Go",
+    "HCL",
+    "JavaScript",
+    "Makefile"
+  ],
+  "topics": [
+    "cloud",
+    "aws",
+    "gcp",
+    "azure",
+    "golang",
+    "javascript",
+    "serverless",
+    "go",
+    "python",
+    "nitric",
+    "cloud-native",
+    "devops",
+    "microservices",
+    "dart",
+    "pulumi",
+    "terraform",
+    "infrastructure-as-code",
+    "ai",
+    "backend",
+    "typescript"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://nitric.io/docs"
+  },
+  "ownership": {
+    "maintainers": [
+      "@jyecusch",
+      "@tjholm"
+    ]
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nitrictech/nitric/profile.json",
+    "repository": "/v0/repos/github.com/nitrictech/nitric/index.json",
+    "trust": "/v0/repos/github.com/nitrictech/nitric/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nitrictech/nitric/query?path={dot_path}",
+    "indexPath": "repos/github.com/nitrictech/nitric/"
+  }
+}

@@ -1,0 +1,42 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/gao-sun/eul"
+generated_at = "2026-06-29T05:21:52.699061Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "eul"
+description = "🖥️ macOS status monitoring app written in SwiftUI."
+homepage = "https://github.com/gao-sun/eul"
+license = "MIT"
+visibility = "public"
+languages = ["Swift"]
+topics = [
+    "macos",
+    "monitoring",
+    "statusbar",
+    "swiftui",
+    "app",
+    "monitor",
+    "status-monitoring",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/gao-sun/eul.git"
+default_branch = "master"
+fork = false
+head_sha = "b5c3bd0a5be2679ca7e22da676be5ac73e300f4a"
+html_url = "https://github.com/gao-sun/eul"
+stars = 9910

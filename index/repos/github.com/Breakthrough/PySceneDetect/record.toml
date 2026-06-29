@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Breakthrough/PySceneDetect"
+generated_at = "2026-06-29T05:26:21.317337Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "PySceneDetect"
+description = "**Website**: scenedetect.com"
+homepage = "https://www.scenedetect.com/"
+license = "BSD-3-Clause"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "Python",
+    "Shell",
+]
+build = "python -m build"
+test = "python -m pytest"
+topics = [
+    "python",
+    "video",
+    "opencv",
+    "python-opencv",
+    "analysis",
+    "scene-detection",
+    "image-processing",
+    "video-processing",
+    "scene-recognition",
+]
+
+[docs]
+root = "https://www.scenedetect.com/docs/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Breakthrough/PySceneDetect.git"
+default_branch = "main"
+fork = false
+head_sha = "fac764d921bbcdb716209b55ec6f2ee9b1710134"
+html_url = "https://github.com/Breakthrough/PySceneDetect"
+stars = 4969

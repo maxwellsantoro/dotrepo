@@ -1,0 +1,61 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tobiasahlin",
+    "repo": "SpinKit",
+    "source": "https://github.com/tobiasahlin/SpinKit"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/tobiasahlin/SpinKit/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/tobiasahlin/SpinKit",
+    "generatedAt": "2026-06-29T05:18:44.611693Z",
+    "evidencePath": "repos/github.com/tobiasahlin/SpinKit/evidence.md"
+  },
+  "purpose": "Given that you have included `spinkit.min.css in your project, these snippets will produce the different spinners:",
+  "name": "Spinners",
+  "homepage": "http://tobiasahlin.com/spinkit/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "http://tobiasahlin.com/spinkit/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/tobiasahlin/SpinKit/profile.json",
+    "repository": "/v0/repos/github.com/tobiasahlin/SpinKit/index.json",
+    "trust": "/v0/repos/github.com/tobiasahlin/SpinKit/trust.json",
+    "queryTemplate": "/v0/repos/github.com/tobiasahlin/SpinKit/query?path={dot_path}",
+    "indexPath": "repos/github.com/tobiasahlin/SpinKit/"
+  }
+}

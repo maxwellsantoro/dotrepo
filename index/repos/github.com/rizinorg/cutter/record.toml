@@ -1,0 +1,56 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/rizinorg/cutter"
+generated_at = "2026-06-29T05:19:32.50449Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Cutter"
+description = "Cutter is a free and open-source reverse engineering platform powered by rizin."
+homepage = "https://cutter.re"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Makefile",
+    "Meson",
+    "Python",
+    "Ruby",
+    "Shell",
+]
+build = 'cmake -S . -B build \'
+topics = [
+    "cutter",
+    "gui",
+    "reverse-engineering",
+    "security",
+    "debugger",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@cutter.re"
+
+[docs]
+root = "https://cutter.re"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/rizinorg/cutter.git"
+default_branch = "dev"
+fork = false
+head_sha = "beb64885be085a77ed338534e77703538546f704"
+html_url = "https://github.com/rizinorg/cutter"
+stars = 19230

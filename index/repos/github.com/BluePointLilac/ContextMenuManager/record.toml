@@ -1,0 +1,41 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/BluePointLilac/ContextMenuManager"
+generated_at = "2026-06-29T05:18:26.992153Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "ContextMenuManager"
+description = "🖱️ 一个纯粹的Windows右键菜单管理程序"
+homepage = "https://bluepointlilac.github.io/ContextMenuManager"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "C",
+    "C#",
+    "HTML",
+    "Rich Text Format",
+]
+topics = []
+
+[docs]
+root = "https://bluepointlilac.github.io/ContextMenuManager"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/BluePointLilac/ContextMenuManager.git"
+default_branch = "master"
+fork = false
+head_sha = "55507155dd8e49c7ab4606da97f2af192d590dfe"
+html_url = "https://github.com/BluePointLilac/ContextMenuManager"
+stars = 19434

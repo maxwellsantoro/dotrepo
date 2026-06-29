@@ -1,0 +1,40 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/awolfly9/IPProxyTool"
+generated_at = "2026-06-29T05:27:36.833728Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "IPProxyTool"
+description = "使用 scrapy 爬虫抓取代理网站，获取大量的免费代理 ip。过滤出所有可用的 ip，存入数据库以备使用。 可以访问我的个人站点，查看我的更多有趣项目 西瓜"
+homepage = "https://github.com/awolfly9/IPProxyTool"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Python",
+]
+topics = [
+    "proxy",
+    "python",
+    "ipproxy",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/awolfly9/IPProxyTool.git"
+default_branch = "master"
+fork = false
+head_sha = "4e4e3aadd30a75f74393b54e8077568b6a58a813"
+html_url = "https://github.com/awolfly9/IPProxyTool"
+stars = 1998

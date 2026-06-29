@@ -1,0 +1,46 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ahmetb/kubectx"
+generated_at = "2026-06-29T05:16:52.603673Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "kubectx` + `kubens`: Power tools for kubectl"
+description = "This repository provides both `kubectx and `kubens tools."
+homepage = "https://kubectx.dev"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Go",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "kubernetes",
+    "kubectl",
+    "kubectl-plugins",
+    "kubernetes-clusters",
+]
+
+[docs]
+root = "https://kubectx.dev"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ahmetb/kubectx.git"
+default_branch = "master"
+fork = false
+head_sha = "c8393ea883fb241764d8d6ca2851685e1ad5fe02"
+html_url = "https://github.com/ahmetb/kubectx"
+stars = 19849

@@ -1,0 +1,82 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/calcom/cal.diy"
+generated_at = "2026-06-29T05:14:58.926811Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Cal.diy"
+description = "The community-driven, open-source scheduling platform."
+homepage = "https://cal.diy"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Apex",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "Mermaid",
+    "PHP",
+    "PLpgSQL",
+    "Procfile",
+    "Shell",
+    "TypeScript",
+]
+build = "yarn build"
+test = "yarn test"
+topics = [
+    "open-source",
+    "typescript",
+    "nextjs",
+    "next-auth",
+    "postgresql",
+    "prisma",
+    "t3-stack",
+    "tailwindcss",
+    "trpc",
+    "turborepo",
+    "zod",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@cal.com"
+
+[docs]
+root = "https://cal.diy"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/nvm-sh/nvm"
+notes = "Cross-link from README: here"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/calcom/cal.diy.git"
+default_branch = "main"
+fork = false
+head_sha = "b97cd6203de8889fb275a4bf5fb034b5f221eaf2"
+html_url = "https://github.com/calcom/cal.diy"
+stars = 45938

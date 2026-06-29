@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "lukasz-madon",
+    "repo": "awesome-remote-job",
+    "source": "https://github.com/lukasz-madon/awesome-remote-job"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/remote-es/remotes",
+      "notes": "Cross-link from README: remote-es/remotes",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "remote-es",
+        "repo": "remotes"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/remote-es/remotes/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/lukasz-madon/awesome-remote-job/relations",
+    "repository": "/v0/repos/github.com/lukasz-madon/awesome-remote-job/index.json",
+    "trust": "/v0/repos/github.com/lukasz-madon/awesome-remote-job/trust.json",
+    "profile": "/v0/repos/github.com/lukasz-madon/awesome-remote-job/profile.json",
+    "queryTemplate": "/v0/repos/github.com/lukasz-madon/awesome-remote-job/query?path={dot_path}",
+    "indexPath": "repos/github.com/lukasz-madon/awesome-remote-job/"
+  }
+}

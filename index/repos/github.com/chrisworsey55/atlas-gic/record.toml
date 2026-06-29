@@ -1,0 +1,48 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/chrisworsey55/atlas-gic"
+generated_at = "2026-06-29T05:28:17.160471Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "ATLAS Agents"
+description = "The platform built on top of this repo is launching next week."
+homepage = "https://github.com/chrisworsey55/atlas-gic"
+license = "NOASSERTION"
+visibility = "public"
+languages = ["Python"]
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/karpathy/autoresearch"
+notes = "Cross-link from README: Karpathy's autoresearch"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/chrisworsey55/atlas-gic.git"
+default_branch = "main"
+fork = false
+head_sha = "fcfc40dcf628f6af091c28cb2c33827f42cef8fd"
+html_url = "https://github.com/chrisworsey55/atlas-gic"
+stars = 1996

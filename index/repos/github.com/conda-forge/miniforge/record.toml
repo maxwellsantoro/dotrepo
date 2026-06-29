@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/conda-forge/miniforge"
+generated_at = "2026-06-29T05:20:50.473559Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Miniforge"
+description = "This repository holds the minimal installers for Conda and Mamba specific to conda-forge, with the following features pre-configured:"
+homepage = "https://conda-forge.org/download"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "PowerShell",
+    "Python",
+    "Shell",
+]
+topics = []
+
+[owners]
+maintainers = ["@conda-forge/miniforge"]
+team = "@conda-forge/miniforge"
+security_contact = "https://github.com/conda-forge/security"
+
+[docs]
+root = "https://conda-forge.org/download"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/conda-forge/miniforge.git"
+default_branch = "main"
+fork = false
+head_sha = "414fcebad459d7e8f2d2ee7d84be6bf35563f39e"
+html_url = "https://github.com/conda-forge/miniforge"
+stars = 9944

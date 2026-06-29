@@ -1,0 +1,121 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "screenpipe",
+    "repo": "screenpipe",
+    "source": "https://github.com/screenpipe/screenpipe"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/screenpipe/screenpipe/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/screenpipe/screenpipe",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/screenpipe/screenpipe/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/screenpipe/screenpipe",
+        "generated_at": "2026-06-29T05:18:05.691345Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "screenpipe | YC S26 ]",
+        "description": "AI that knows what you've seen, said, or heard.",
+        "homepage": "https://screenpipe.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "CSS",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "NSIS",
+          "PowerShell",
+          "Python",
+          "Rust",
+          "Shell",
+          "Swift",
+          "TypeScript"
+        ],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "topics": [
+          "ai",
+          "computer-vision",
+          "llm",
+          "machine-learning",
+          "multimodal",
+          "agents",
+          "agi",
+          "audio-recording",
+          "local-ai",
+          "local-first",
+          "privacy",
+          "screen-recording",
+          "speech-to-text",
+          "ycombinator",
+          "hermes",
+          "hermes-agent",
+          "openclaw",
+          "ai-memory",
+          "mcp",
+          "rewind"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://docs.screenpi.pe",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/screenpipe/screenpipe.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "204ba2a283ed6c374862572b579cd9c40bcd5d9b",
+          "html_url": "https://github.com/screenpipe/screenpipe",
+          "stars": 19540
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

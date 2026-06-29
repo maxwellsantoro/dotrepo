@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/IBM/fp-go"
+generated_at = "2026-06-29T05:27:53.684862Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "fp-go: Functional Programming Library for Go"
+description = "**🚧 Work in progress! 🚧** Despite major version 1 (due to semantic-release limitations), we're working to minimize breaking changes."
+homepage = "https://github.com/IBM/fp-go/tree/main/v2"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Go",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "functional-programming",
+    "go",
+    "golang",
+    "library",
+    "monad",
+    "utility",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/IBM/fp-go.git"
+default_branch = "main"
+fork = false
+head_sha = "dfc0c4b0159f9810a6ca2526fa73fb88b19a6df3"
+html_url = "https://github.com/IBM/fp-go"
+stars = 1997

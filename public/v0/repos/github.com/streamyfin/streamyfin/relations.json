@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "streamyfin",
+    "repo": "streamyfin",
+    "source": "https://github.com/streamyfin/streamyfin"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/streamyfin/jellyfin-plugin-streamyfin",
+      "notes": "Cross-link from README: Streamyfin Plugin",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "streamyfin",
+        "repo": "jellyfin-plugin-streamyfin"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/streamyfin/jellyfin-plugin-streamyfin/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/streamyfin/streamyfin/relations",
+    "repository": "/v0/repos/github.com/streamyfin/streamyfin/index.json",
+    "trust": "/v0/repos/github.com/streamyfin/streamyfin/trust.json",
+    "profile": "/v0/repos/github.com/streamyfin/streamyfin/profile.json",
+    "queryTemplate": "/v0/repos/github.com/streamyfin/streamyfin/query?path={dot_path}",
+    "indexPath": "repos/github.com/streamyfin/streamyfin/"
+  }
+}

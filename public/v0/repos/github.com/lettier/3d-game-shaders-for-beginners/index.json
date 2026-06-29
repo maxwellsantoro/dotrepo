@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "lettier",
+    "repo": "3d-game-shaders-for-beginners",
+    "source": "https://github.com/lettier/3d-game-shaders-for-beginners"
+  },
+  "repository": {
+    "name": "3D Game Shaders For Beginners",
+    "description": "🎮 A step-by-step guide to implementing SSAO, depth of field, lighting, normal mapping, and more for your 3D game.",
+    "homepage": "https://lettier.github.io/3d-game-shaders-for-beginners/index.html",
+    "docsRoot": "https://lettier.github.io/3d-game-shaders-for-beginners/index.html"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/lettier/3d-game-shaders-for-beginners/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/lettier/3d-game-shaders-for-beginners",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/lettier/3d-game-shaders-for-beginners/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/lettier/3d-game-shaders-for-beginners/index.json",
+    "trust": "/v0/repos/github.com/lettier/3d-game-shaders-for-beginners/trust.json",
+    "profile": "/v0/repos/github.com/lettier/3d-game-shaders-for-beginners/profile.json",
+    "queryTemplate": "/v0/repos/github.com/lettier/3d-game-shaders-for-beginners/query?path={dot_path}",
+    "indexPath": "repos/github.com/lettier/3d-game-shaders-for-beginners/"
+  }
+}

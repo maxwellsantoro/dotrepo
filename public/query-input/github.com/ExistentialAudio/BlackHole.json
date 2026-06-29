@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ExistentialAudio",
+    "repo": "BlackHole",
+    "source": "https://github.com/ExistentialAudio/BlackHole"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ExistentialAudio/BlackHole/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ExistentialAudio/BlackHole",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ExistentialAudio/BlackHole/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ExistentialAudio/BlackHole",
+        "generated_at": "2026-06-29T05:19:09.89158Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "BlackHole",
+        "description": "BlackHole is a modern macOS virtual audio loopback driver that allows applications to pass audio to other applications with zero additional latency.",
+        "homepage": "https://github.com/ExistentialAudio/BlackHole",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "HTML",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "audio",
+          "driver",
+          "macos",
+          "loopback",
+          "virtual-audio-cable"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/ExistentialAudio/BlackHole.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "41d5faa2ba725f703ee5c1f35bb575ba9dbfa391",
+          "html_url": "https://github.com/ExistentialAudio/BlackHole",
+          "stars": 19265
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

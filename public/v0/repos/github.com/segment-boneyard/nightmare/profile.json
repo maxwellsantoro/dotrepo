@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "segment-boneyard",
+    "repo": "nightmare",
+    "source": "https://github.com/segment-boneyard/nightmare"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/segment-boneyard/nightmare/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/segment-boneyard/nightmare",
+    "generatedAt": "2026-06-29T05:17:11.699728Z",
+    "evidencePath": "repos/github.com/segment-boneyard/nightmare/evidence.md"
+  },
+  "purpose": "A high-level browser automation library.",
+  "name": "nightmare",
+  "homepage": "https://open.segment.com",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "JavaScript",
+    "Makefile",
+    "Shell"
+  ],
+  "topics": [
+    "electron",
+    "headless-chrome",
+    "browser",
+    "phantomjs",
+    "chrome"
+  ],
+  "execution": {
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://open.segment.com"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/segment-boneyard/nightmare/profile.json",
+    "repository": "/v0/repos/github.com/segment-boneyard/nightmare/index.json",
+    "trust": "/v0/repos/github.com/segment-boneyard/nightmare/trust.json",
+    "queryTemplate": "/v0/repos/github.com/segment-boneyard/nightmare/query?path={dot_path}",
+    "indexPath": "repos/github.com/segment-boneyard/nightmare/"
+  }
+}

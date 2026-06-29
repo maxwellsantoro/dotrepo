@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/sqlite/sqlite"
+generated_at = "2026-06-29T05:21:07.783797Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "SQLite Source Repository"
+description = "This repository contains the complete source code for the SQLite database engine going back to 2000-05-29."
+homepage = "https://github.com/sqlite/sqlite"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "C#",
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Makefile",
+    "PLpgSQL",
+    "Roff",
+    "Shell",
+    "Tcl",
+    "Yacc",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/sqlite/sqlite.git"
+default_branch = "master"
+fork = false
+head_sha = "a38e6fdf96b7630e8eecb5544e5d4af3ce8f9593"
+html_url = "https://github.com/sqlite/sqlite"
+stars = 9935

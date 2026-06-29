@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/lukasz-madon/awesome-remote-job"
+generated_at = "2026-06-29T05:14:44.217993Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Awesome Remote Job"
+description = "A curated list of awesome remote working resources."
+homepage = "https://github.com/lukasz-madon/awesome-remote-job"
+visibility = "public"
+languages = []
+topics = [
+    "awesome-list",
+    "awesome",
+    "list",
+]
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/remote-es/remotes"
+notes = "Cross-link from README: remote-es/remotes"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/lukasz-madon/awesome-remote-job.git"
+default_branch = "master"
+fork = false
+head_sha = "e23424e40323650b3694751286fea9fc221d2fa3"
+html_url = "https://github.com/lukasz-madon/awesome-remote-job"
+stars = 46546

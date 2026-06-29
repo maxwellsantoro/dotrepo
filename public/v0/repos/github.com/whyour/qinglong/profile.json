@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "whyour",
+    "repo": "qinglong",
+    "source": "https://github.com/whyour/qinglong"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/whyour/qinglong/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/whyour/qinglong",
+    "generatedAt": "2026-06-29T05:17:25.947553Z",
+    "evidencePath": "repos/github.com/whyour/qinglong/evidence.md"
+  },
+  "purpose": "简体中文 | English",
+  "name": "qinglong",
+  "homepage": "https://qinglong.online",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "JavaScript",
+    "Less",
+    "Python",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "crontab",
+    "python",
+    "javascript",
+    "task-manager",
+    "typescript",
+    "shell",
+    "docker"
+  ],
+  "execution": {
+    "build": "pnpm build:front",
+    "test": "pnpm test"
+  },
+  "docs": {
+    "root": "https://qinglong.online",
+    "gettingStarted": "https://qinglong.online/guide/getting-started/installation-guide"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/whyour/qinglong/security"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/whyour/qinglong/profile.json",
+    "repository": "/v0/repos/github.com/whyour/qinglong/index.json",
+    "trust": "/v0/repos/github.com/whyour/qinglong/trust.json",
+    "queryTemplate": "/v0/repos/github.com/whyour/qinglong/query?path={dot_path}",
+    "indexPath": "repos/github.com/whyour/qinglong/"
+  }
+}

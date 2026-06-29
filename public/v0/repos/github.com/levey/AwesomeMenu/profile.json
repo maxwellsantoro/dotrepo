@@ -1,0 +1,59 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "levey",
+    "repo": "AwesomeMenu",
+    "source": "https://github.com/levey/AwesomeMenu"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/levey/AwesomeMenu/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/levey/AwesomeMenu",
+    "generatedAt": "2026-06-29T05:26:15.357664Z",
+    "evidencePath": "repos/github.com/levey/AwesomeMenu/evidence.md"
+  },
+  "purpose": "AwesomeMenu is a menu with the same look as the story menu of Path.",
+  "name": "DO NOT USE IT TO COPY PATH!",
+  "homepage": "https://github.com/levey/AwesomeMenu",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Objective-C",
+    "Ruby"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/levey/AwesomeMenu/profile.json",
+    "repository": "/v0/repos/github.com/levey/AwesomeMenu/index.json",
+    "trust": "/v0/repos/github.com/levey/AwesomeMenu/trust.json",
+    "queryTemplate": "/v0/repos/github.com/levey/AwesomeMenu/query?path={dot_path}",
+    "indexPath": "repos/github.com/levey/AwesomeMenu/"
+  }
+}

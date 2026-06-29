@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "qinguoyi",
+    "repo": "TinyWebServer",
+    "source": "https://github.com/qinguoyi/TinyWebServer"
+  },
+  "repository": {
+    "name": "TinyWebServer",
+    "description": "* C/C++ * B/S模型 * 线程同步机制包装类 * http连接请求处理类 * 半同步/半反应堆线程池 * 定时器处理非活动连接 * 同步/异步日志系统 * 数据库连接池 * 同步线程注册和登录校验 * 简易服务器压力测试",
+    "homepage": "https://github.com/qinguoyi/TinyWebServer"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/qinguoyi/TinyWebServer/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/qinguoyi/TinyWebServer",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/qinguoyi/TinyWebServer/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/qinguoyi/TinyWebServer/index.json",
+    "trust": "/v0/repos/github.com/qinguoyi/TinyWebServer/trust.json",
+    "profile": "/v0/repos/github.com/qinguoyi/TinyWebServer/profile.json",
+    "queryTemplate": "/v0/repos/github.com/qinguoyi/TinyWebServer/query?path={dot_path}",
+    "indexPath": "repos/github.com/qinguoyi/TinyWebServer/"
+  }
+}

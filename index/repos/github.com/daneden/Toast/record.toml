@@ -1,0 +1,36 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/daneden/Toast"
+generated_at = "2026-06-29T05:29:07.867403Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Toast Framework"
+description = "The Toast framework is a grid."
+homepage = "http://daneden.github.io/Toast"
+license = "MIT"
+visibility = "public"
+languages = ["CSS"]
+topics = []
+
+[docs]
+root = "http://daneden.github.io/Toast"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/daneden/Toast.git"
+default_branch = "master"
+fork = false
+head_sha = "e0977feb6724c20c05d97c798e208b059a005403"
+html_url = "https://github.com/daneden/Toast"
+stars = 1995

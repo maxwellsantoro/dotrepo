@@ -1,0 +1,73 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/wulkano/Kap"
+generated_at = "2026-06-29T05:19:14.082397Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Kap"
+description = "An open-source screen recorder built with web technology"
+homepage = "https://getkap.co"
+license = "MIT"
+visibility = "public"
+languages = [
+    "JavaScript",
+    "TypeScript",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "screen-recorder",
+    "javascript",
+    "electron",
+    "mac",
+    "macos",
+    "capture",
+    "kap",
+    "oss",
+    "open-source",
+    "screen-capture",
+    "productivity",
+    "communication",
+    "record",
+    "nextjs",
+    "aperture",
+    "app",
+]
+
+[docs]
+root = "https://getkap.co"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/wulkano/kap-website"
+notes = "Cross-link from README: Website"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/wulkano/Kap.git"
+default_branch = "main"
+fork = false
+head_sha = "c42692fa63ac71ed192e01684beb78a1b864aa88"
+html_url = "https://github.com/wulkano/Kap"
+stars = 19262

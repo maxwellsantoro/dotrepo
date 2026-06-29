@@ -1,0 +1,60 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/diggerhq/digger"
+generated_at = "2026-06-29T05:24:51.952505Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Community Slack | Schedule a call | Demo Video | Docs"
+description = "Heads-up: We’ve rebranded! Starting from 7th November 2025, the Digger project is now OpenTaco."
+homepage = "https://digger.dev"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HCL",
+    "JavaScript",
+    "Makefile",
+    "PLpgSQL",
+    "Shell",
+    "TypeScript",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "infrastructure-as-code",
+    "terraform",
+    "terraformcloud",
+    "tacos",
+    "github-actions",
+    "terraform-aws",
+    "terraform-gcp",
+    "terraform-github-actions",
+    "hacktoberfest",
+]
+
+[docs]
+root = "https://docs.digger.dev/"
+getting_started = "https://docs.digger.dev/getting-started/github-actions-+-aws"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/diggerhq/digger.git"
+default_branch = "develop"
+fork = false
+head_sha = "6baf84cd9cd7c6522b98504f4a2258474d6c2de3"
+html_url = "https://github.com/diggerhq/digger"
+stars = 4983

@@ -1,0 +1,85 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "mvanhorn",
+    "repo": "last30days-skill",
+    "source": "https://github.com/mvanhorn/last30days-skill"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/mvanhorn/last30days-skill/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/mvanhorn/last30days-skill",
+    "generatedAt": "2026-06-29T05:14:07.346094Z",
+    "evidencePath": "repos/github.com/mvanhorn/last30days-skill/evidence.md"
+  },
+  "purpose": "An AI agent-led search engine scored by upvotes, likes, and real money - not editors.",
+  "name": "last30days",
+  "homepage": "https://github.com/mvanhorn/last30days-skill",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Go",
+    "HTML",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "ai-prompts",
+    "claude",
+    "claude-code",
+    "reddit",
+    "twitter",
+    "hackernews",
+    "polymarket",
+    "research",
+    "youtube",
+    "ai-skill",
+    "bluesky",
+    "clawhub",
+    "deep-research",
+    "instagram",
+    "openclaw",
+    "recency",
+    "social-media",
+    "tiktok",
+    "trends",
+    "web-search"
+  ],
+  "execution": {
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/mvanhorn/last30days-skill/profile.json",
+    "repository": "/v0/repos/github.com/mvanhorn/last30days-skill/index.json",
+    "trust": "/v0/repos/github.com/mvanhorn/last30days-skill/trust.json",
+    "queryTemplate": "/v0/repos/github.com/mvanhorn/last30days-skill/query?path={dot_path}",
+    "indexPath": "repos/github.com/mvanhorn/last30days-skill/"
+  }
+}

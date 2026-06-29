@@ -1,0 +1,70 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/jgm/pandoc"
+generated_at = "2026-06-29T05:15:39.558691Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.test` from `.github/workflows/docx-validation.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Pandoc"
+description = "Pandoc is a Haskell library for converting from one markup format to another, and a command-line tool that uses this library."
+homepage = "https://pandoc.org"
+license = "GPL-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Emacs Lisp",
+    "HTML",
+    "Haskell",
+    "JavaScript",
+    "Jupyter Notebook",
+    "Lua",
+    "Makefile",
+    "Nix",
+    "Perl",
+    "Python",
+    "Rich Text Format",
+    "Roff",
+    "Ruby",
+    "Shell",
+    "Smarty",
+    "TeX",
+    "Typst",
+]
+test = "make validate-docx-golden-tests"
+topics = [
+    "pandoc",
+    "haskell",
+    "markdown",
+    "markup",
+    "converter",
+    "publishing",
+    "document",
+    "presentation",
+    "commonmark",
+]
+
+[owners]
+maintainers = []
+security_contact = "jgm@berkeley.edu"
+
+[docs]
+root = "https://pandoc.org"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/jgm/pandoc.git"
+default_branch = "main"
+fork = false
+head_sha = "c568a0e66599384fdabc08ad656fd5beeac39ae1"
+html_url = "https://github.com/jgm/pandoc"
+stars = 45115

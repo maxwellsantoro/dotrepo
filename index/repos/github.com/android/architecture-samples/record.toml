@@ -1,0 +1,43 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/android/architecture-samples"
+generated_at = "2026-06-29T05:15:03.234852Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Android Architecture Samples"
+description = "These samples showcase different architectural approaches to developing Android apps."
+homepage = "https://github.com/android/architecture-samples"
+license = "Apache-2.0"
+visibility = "public"
+languages = ["Kotlin"]
+topics = [
+    "android-architecture",
+    "android",
+    "samples",
+]
+
+[owners]
+maintainers = [
+    "@josealcerreca",
+    "@dturner",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/android/architecture-samples.git"
+default_branch = "main"
+fork = false
+head_sha = "ee66e1526b84c026615df032c705842b7d2a521f"
+html_url = "https://github.com/android/architecture-samples"
+stars = 45731

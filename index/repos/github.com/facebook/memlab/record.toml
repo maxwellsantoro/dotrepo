@@ -1,0 +1,59 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/facebook/memlab"
+generated_at = "2026-06-29T05:24:32.059437Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "MemLab"
+description = "A framework for finding JavaScript memory leaks and analyzing heap snapshots"
+homepage = "https://facebook.github.io/memlab/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "TypeScript",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "facebook",
+    "javascript",
+    "memory",
+    "detector",
+    "heap",
+    "leak",
+    "nodejs",
+    "snapshot",
+    "v8",
+    "e2e",
+    "hermes",
+    "perf-tools",
+    "performance",
+]
+
+[docs]
+root = "https://facebook.github.io/memlab/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/facebook/memlab.git"
+default_branch = "main"
+fork = false
+head_sha = "5e0a00942550aa8969ad9c9f4474756c4a72123d"
+html_url = "https://github.com/facebook/memlab"
+stars = 4986

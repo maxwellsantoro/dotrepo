@@ -1,0 +1,131 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "emqx",
+    "repo": "MQTTX",
+    "source": "https://github.com/emqx/MQTTX"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/emqx/MQTTX/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/emqx/MQTTX",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/units_test_cli.yaml` and `.github/workflows/units_test_desktop.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/emqx/MQTTX/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/emqx/MQTTX",
+        "generated_at": "2026-06-29T05:26:46.789407Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/units_test_cli.yaml` and `.github/workflows/units_test_desktop.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Preview",
+        "description": "Currently available for download from these app stores",
+        "homepage": "https://mqttx.app",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "SCSS",
+          "TypeScript",
+          "Vue"
+        ],
+        "build": "npm run build",
+        "test": null,
+        "topics": [
+          "mqtt-tool",
+          "mqtt",
+          "mqtt-client",
+          "electron-app",
+          "electron",
+          "iot",
+          "iot-application",
+          "vue",
+          "cross-platform",
+          "macos",
+          "linux",
+          "mqtt-cli",
+          "mqtt-client-gui",
+          "mqtt-websocket",
+          "mqtt5",
+          "mqtt-protocol",
+          "cli",
+          "mqtt-smarthome",
+          "mosquitto",
+          "emqx"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://mqttx.app/docs",
+        "getting_started": "https://www.emqx.com/en/blog/the-easiest-guide-to-getting-started-with-mqtt",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/emqx/MQTTX",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/emqx/MQTTX.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "a8a9087fd6a9b434300bf4882c7978c9196ac674",
+          "html_url": "https://github.com/emqx/MQTTX",
+          "stars": 4966
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

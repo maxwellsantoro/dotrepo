@@ -1,0 +1,37 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Bitwise-01/Instagram-"
+generated_at = "2026-06-29T05:25:38.328852Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Instagram Bruter"
+description = "This program will brute force any Instagram account you send it its way given a list of proxies."
+homepage = "https://github.com/Bitwise-01/Instagram-"
+license = "MIT"
+visibility = "public"
+languages = ["Python"]
+topics = [
+    "instagram",
+    "hack",
+    "bruteforce",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Bitwise-01/Instagram-.git"
+default_branch = "master"
+fork = false
+head_sha = "6e01ada2b9ee00cdd3d72b8dad88aaecb963b898"
+html_url = "https://github.com/Bitwise-01/Instagram-"
+stars = 4974

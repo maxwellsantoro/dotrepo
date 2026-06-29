@@ -1,0 +1,43 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/obsidianmd/obsidian-releases"
+generated_at = "2026-06-29T05:19:08.200583Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "About this repo"
+description = "Community plugins list, theme list, and releases of Obsidian."
+homepage = "https://obsidian.md"
+visibility = "public"
+languages = []
+topics = [
+    "obsidian-md",
+    "obsidian",
+    "bases",
+    "jsoncanvas",
+    "markdown",
+    "md",
+]
+
+[docs]
+root = "https://obsidian.md"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/obsidianmd/obsidian-releases.git"
+default_branch = "master"
+fork = false
+head_sha = "b1e8f6e81a741b0bd6c88dda76567405ed0d4eb8"
+html_url = "https://github.com/obsidianmd/obsidian-releases"
+stars = 19267

@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "johnkerl",
+    "repo": "miller",
+    "source": "https://github.com/johnkerl/miller"
+  },
+  "repository": {
+    "name": "What is Miller?",
+    "description": "Miller is like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON, JSON Lines, and positionally-indexed.",
+    "homepage": "https://miller.readthedocs.io",
+    "docsRoot": "https://miller.readthedocs.io/en/latest/10min"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/johnkerl/miller/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/johnkerl/miller",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/johnkerl/miller/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/johnkerl/miller/index.json",
+    "trust": "/v0/repos/github.com/johnkerl/miller/trust.json",
+    "profile": "/v0/repos/github.com/johnkerl/miller/profile.json",
+    "queryTemplate": "/v0/repos/github.com/johnkerl/miller/query?path={dot_path}",
+    "indexPath": "repos/github.com/johnkerl/miller/"
+  }
+}

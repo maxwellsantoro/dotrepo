@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "google-deepmind",
+    "repo": "sonnet",
+    "source": "https://github.com/google-deepmind/sonnet"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/google-deepmind/sonnet/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/google-deepmind/sonnet",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/google-deepmind/sonnet/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/google-deepmind/sonnet",
+        "generated_at": "2026-06-29T05:21:30.154367Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Sonnet",
+        "description": "Sonnet is a library built on top of TensorFlow 2 designed to provide simple, composable abstractions for machine learning research.",
+        "homepage": "https://sonnet.dev/",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Python",
+          "Shell",
+          "Starlark"
+        ],
+        "build": null,
+        "test": "pip install pytest pytest-xdist",
+        "topics": [
+          "machine-learning",
+          "artificial-intelligence",
+          "neural-networks",
+          "deep-learning",
+          "tensorflow"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://sonnet.readthedocs.io/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/google-deepmind/sonnet.git",
+          "default_branch": "v2",
+          "fork": false,
+          "head_sha": "a3052a27a5b99b56a21e666bd0614e95e5c92df5",
+          "html_url": "https://github.com/google-deepmind/sonnet",
+          "stars": 9923
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

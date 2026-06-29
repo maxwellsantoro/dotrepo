@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nsf",
+    "repo": "gocode",
+    "source": "https://github.com/nsf/gocode"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/nsf/gocode/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/nsf/gocode",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/nsf/gocode/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/nsf/gocode",
+        "generated_at": "2026-06-29T05:23:48.440434Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "An autocompletion daemon for the Go programming language",
+        "description": "Gocode is a helper tool which is intended to be integrated with your source code editor, like vim, neovim and emacs.",
+        "homepage": "https://github.com/nsf/gocode",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Emacs Lisp",
+          "Go",
+          "Python",
+          "Ruby",
+          "Shell",
+          "Tcl",
+          "Vim Script"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/nsf/gocode.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "91e26af1d20f5ffbbba04ae891f484785f94a57b",
+          "html_url": "https://github.com/nsf/gocode",
+          "stars": 4995
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

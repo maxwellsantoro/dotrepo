@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "stoplightio",
+    "repo": "prism",
+    "source": "https://github.com/stoplightio/prism"
+  },
+  "repository": {
+    "name": "Prism Overview",
+    "description": "Prism is a set of packages for API mocking and contract testing with **OpenAPI v2** (formerly known as Swagger) and **OpenAPI v3.x**.",
+    "homepage": "https://stoplight.io/open-source/prism",
+    "docsRoot": "https://docs.stoplight.io/docs/prism/674b27b261c3c-prism-overview",
+    "gettingStarted": "./docs/getting-started/01-installation.md",
+    "ownersTeam": "@stoplightio/prism-engineers"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/stoplightio/prism/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/stoplightio/prism",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/stoplightio/prism/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/stoplightio/prism/index.json",
+    "trust": "/v0/repos/github.com/stoplightio/prism/trust.json",
+    "profile": "/v0/repos/github.com/stoplightio/prism/profile.json",
+    "queryTemplate": "/v0/repos/github.com/stoplightio/prism/query?path={dot_path}",
+    "indexPath": "repos/github.com/stoplightio/prism/"
+  }
+}

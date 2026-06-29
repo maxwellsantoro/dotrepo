@@ -1,0 +1,94 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "turbulenz",
+    "repo": "turbulenz_engine",
+    "source": "https://github.com/turbulenz/turbulenz_engine"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/turbulenz/turbulenz_engine/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/turbulenz/turbulenz_engine",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/turbulenz/turbulenz_engine/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/turbulenz/turbulenz_engine",
+        "generated_at": "2026-06-29T05:24:06.262891Z",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "turbulenz_engine",
+        "description": "Turbulenz is a modular 3D and 2D game framework for making HTML5 powered games for browsers, desktops and mobile devices.",
+        "homepage": "http://turbulenz.com",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "CSS",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "Python",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "http://turbulenz.com",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/turbulenz/turbulenz_engine.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "403ef0dadbe93aac3122928441cc0cb8b075b1cf",
+          "html_url": "https://github.com/turbulenz/turbulenz_engine",
+          "stars": 4991
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

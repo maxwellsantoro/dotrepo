@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "magentic-ui",
+    "source": "https://github.com/microsoft/magentic-ui"
+  },
+  "repository": {
+    "name": "MagenticLite",
+    "description": "Big tasks. Small models.",
+    "homepage": "https://www.microsoft.com/en-us/research/blog/magenticlite-magenticbrain-fara1-5-an-agentic-experience-optimized-for-small-models/",
+    "docsRoot": "./docs/configuration.md",
+    "gettingStarted": "./docs/installation.md",
+    "securityContact": "secure@microsoft.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/microsoft/magentic-ui/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/microsoft/magentic-ui",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/microsoft/magentic-ui/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/microsoft/magentic-ui/index.json",
+    "trust": "/v0/repos/github.com/microsoft/magentic-ui/trust.json",
+    "profile": "/v0/repos/github.com/microsoft/magentic-ui/profile.json",
+    "queryTemplate": "/v0/repos/github.com/microsoft/magentic-ui/query?path={dot_path}",
+    "indexPath": "repos/github.com/microsoft/magentic-ui/"
+  }
+}

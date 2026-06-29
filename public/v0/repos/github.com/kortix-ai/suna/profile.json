@@ -1,0 +1,89 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "kortix-ai",
+    "repo": "suna",
+    "source": "https://github.com/kortix-ai/suna"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/kortix-ai/suna/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/kortix-ai/suna",
+    "generatedAt": "2026-06-29T05:16:40.97504Z",
+    "evidencePath": "repos/github.com/kortix-ai/suna/evidence.md"
+  },
+  "purpose": "The AI command center for your company",
+  "name": "Kortix",
+  "homepage": "https://www.kortix.com",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Kotlin",
+    "MDX",
+    "Makefile",
+    "PLpgSQL",
+    "Python",
+    "Ruby",
+    "Shell",
+    "Swift",
+    "TeX",
+    "TypeScript"
+  ],
+  "topics": [
+    "ai",
+    "ai-agents",
+    "llm"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {
+    "root": "https://kortix.com/docs"
+  },
+  "ownership": {
+    "maintainers": [
+      "@markokraemer"
+    ]
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/kortix-ai/suna/profile.json",
+    "repository": "/v0/repos/github.com/kortix-ai/suna/index.json",
+    "trust": "/v0/repos/github.com/kortix-ai/suna/trust.json",
+    "queryTemplate": "/v0/repos/github.com/kortix-ai/suna/query?path={dot_path}",
+    "indexPath": "repos/github.com/kortix-ai/suna/"
+  }
+}

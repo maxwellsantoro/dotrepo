@@ -1,0 +1,58 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/zhimaAi/chatwiki"
+generated_at = "2026-06-29T05:29:02.745064Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Product Positioning"
+description = "ChatWiki is a workflow automation platform focused on the WeChat ecosystem, dedicated to making every official account a super AI agent."
+homepage = "https://chatwiki.ai"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "PHP",
+    "Python",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "llm",
+    "rag",
+    "agent",
+    "ai",
+    "workflow",
+    "aytomation",
+]
+
+[docs]
+root = "https://chatwiki.ai"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/zhimaAi/chatwiki.git"
+default_branch = "main"
+fork = false
+head_sha = "f63e4aa95d273e1d6356ac38a40d74024d953492"
+html_url = "https://github.com/zhimaAi/chatwiki"
+stars = 1995

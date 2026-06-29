@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Visualize-ML",
+    "repo": "Book4_Power-of-Matrix",
+    "source": "https://github.com/Visualize-ML/Book4_Power-of-Matrix"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Visualize-ML/Book4_Power-of-Matrix/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/Visualize-ML/Book4_Power-of-Matrix",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Visualize-ML/Book4_Power-of-Matrix/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/Visualize-ML/Book4_Power-of-Matrix",
+        "generated_at": "2026-06-29T05:20:39.275554Z",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Book4_Power-of-Matrix",
+        "description": "Book_4_《矩阵力量》 |   鸢尾花书：从加减乘除到机器学习；上架！",
+        "homepage": "https://github.com/Visualize-ML/Book4_Power-of-Matrix",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Jupyter Notebook",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "linear",
+          "linear-algebra",
+          "machine-learning",
+          "mathematics",
+          "matrix",
+          "matrix-factorization"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Visualize-ML/Book4_Power-of-Matrix.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7",
+          "html_url": "https://github.com/Visualize-ML/Book4_Power-of-Matrix",
+          "stars": 9954
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

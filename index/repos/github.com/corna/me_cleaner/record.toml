@@ -1,0 +1,33 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/corna/me_cleaner"
+generated_at = "2026-06-29T05:24:35.33895Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = 'me\_cleaner'
+description = '_me\_cleaner_ is a Python script able to modify an Intel ME firmware image with the final purpose of reducing its ability to interact with the system.'
+homepage = "https://github.com/corna/me_cleaner"
+license = "GPL-3.0"
+visibility = "public"
+languages = ["Python"]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/corna/me_cleaner.git"
+default_branch = "master"
+fork = false
+head_sha = "43612a630c79f3bc6f2653bfe90dfe0b7b137e08"
+html_url = "https://github.com/corna/me_cleaner"
+stars = 4986

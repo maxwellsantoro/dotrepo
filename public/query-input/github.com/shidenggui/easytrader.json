@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "shidenggui",
+    "repo": "easytrader",
+    "source": "https://github.com/shidenggui/easytrader"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/shidenggui/easytrader/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/shidenggui/easytrader",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/shidenggui/easytrader/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/shidenggui/easytrader",
+        "generated_at": "2026-06-29T05:21:13.614009Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "easytrader",
+        "description": "若二维码因 Github 网络无法打开，请点击公众号二维码直接打开图片。",
+        "homepage": "https://github.com/shidenggui/easytrader",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Makefile",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://easytrader.readthedocs.io/zh-cn/master/miniqmt/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/shidenggui/easytrader.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "def5a8edc5ebd7d49bf92a9f39e9e30c9bf47101",
+          "html_url": "https://github.com/shidenggui/easytrader",
+          "stars": 9932
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

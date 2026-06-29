@@ -1,0 +1,64 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/dailydotdev/daily"
+generated_at = "2026-06-29T05:16:36.507863Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Welcome to the daily.dev repository"
+description = "We know how hard it is to be a developer."
+homepage = "https://daily.dev"
+license = "AGPL-3.0"
+visibility = "public"
+languages = []
+topics = [
+    "chrome-extension",
+    "developer-tools",
+    "firefox-addon",
+    "developer-portal",
+    "professional-networking",
+    "webapp",
+    "edge-extension",
+    "social-network",
+    "ai",
+    "community",
+    "pwa",
+    "search-engine",
+]
+
+[docs]
+root = "https://github.com/dailydotdev/docs"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/dailydotdev/daily?tab=readme-ov-file#-running-dailydev-locally"
+notes = "Cross-link from README: Run our app locally"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/dailydotdev/daily.git"
+default_branch = "master"
+fork = false
+head_sha = "192dae2b904fd4a4e8b9d212474f34c70710e28d"
+html_url = "https://github.com/dailydotdev/daily"
+stars = 19898

@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/lettier/3d-game-shaders-for-beginners"
+generated_at = "2026-06-29T05:17:19.319405Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "3D Game Shaders For Beginners"
+description = "🎮 A step-by-step guide to implementing SSAO, depth of field, lighting, normal mapping, and more for your 3D game."
+homepage = "https://lettier.github.io/3d-game-shaders-for-beginners/index.html"
+visibility = "public"
+languages = [
+    "C++",
+    "GLSL",
+    "PLSQL",
+    "Shell",
+]
+topics = [
+    "shaders",
+    "3d",
+    "graphics",
+    "panda3d",
+    "game-development",
+    "glsl",
+    "glsl-shaders",
+    "graphics-programming",
+    "3d-graphics",
+    "hlsl",
+    "unity",
+    "godot",
+    "gamedev",
+    "glsl-shader",
+    "shader",
+    "unity3d",
+    "indiedev",
+    "opengl",
+    "webgl",
+    "vulkan",
+]
+
+[docs]
+root = "https://lettier.github.io/3d-game-shaders-for-beginners/index.html"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/lettier/3d-game-shaders-for-beginners.git"
+default_branch = "master"
+fork = false
+head_sha = "29700852da7b730ed7c539efc6b31e08cb3ab684"
+html_url = "https://github.com/lettier/3d-game-shaders-for-beginners"
+stars = 19719

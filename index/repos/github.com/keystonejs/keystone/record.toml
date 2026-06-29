@@ -1,0 +1,69 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/keystonejs/keystone"
+generated_at = "2026-06-29T05:22:12.738941Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/tests_ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Keystone"
+description = "Keystone helps you build faster and scale further than any other CMS or App Framework."
+homepage = "https://keystonejs.com"
+license = "MIT"
+visibility = "public"
+languages = [
+    "HTML",
+    "JavaScript",
+    "TypeScript",
+]
+build = "pnpm build"
+test = "pnpm test:filters"
+topics = [
+    "cms",
+    "cms-framework",
+    "graphql",
+    "nodejs",
+    "react",
+    "keystonejs",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@keystonejs.com"
+
+[docs]
+root = "https://keystonejs.com/docs"
+getting_started = "https://keystonejs.com/docs/getting-started"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/keystonejs/keystone"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/keystonejs/keystone.git"
+default_branch = "main"
+fork = false
+head_sha = "a92fd44921353582b6284dd4627050eab23be7cb"
+html_url = "https://github.com/keystonejs/keystone"
+stars = 9902

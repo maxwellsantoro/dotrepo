@@ -1,0 +1,93 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "stanzhai",
+    "repo": "be-a-professional-programmer",
+    "source": "https://github.com/stanzhai/be-a-professional-programmer"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/stanzhai/be-a-professional-programmer/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/stanzhai/be-a-professional-programmer",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/stanzhai/be-a-professional-programmer/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/stanzhai/be-a-professional-programmer",
+        "generated_at": "2026-06-29T05:22:19.663277Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "be-a-professional-programmer",
+        "description": "笔者作为一位tool mad，将工作以来用到的各种优秀资料、神器及框架整理在此，毕竟好记性不如烂键盘，此项目可以作为自己的不时之需。",
+        "homepage": "http://tools.stanzhai.site",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [],
+        "build": null,
+        "test": null,
+        "topics": [
+          "awesome",
+          "programmer",
+          "programmer-tool"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "http://hadoop.readthedocs.org/en/latest/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/stanzhai/be-a-professional-programmer.git",
+          "default_branch": "gh-pages",
+          "fork": false,
+          "head_sha": "ad207abd04286568354f2a533979ebdd8906eaa0",
+          "html_url": "https://github.com/stanzhai/be-a-professional-programmer",
+          "stars": 9893
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

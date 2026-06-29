@@ -1,0 +1,67 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "fkxxyz",
+    "repo": "rime-cloverpinyin",
+    "source": "https://github.com/fkxxyz/rime-cloverpinyin"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/fkxxyz/rime-cloverpinyin/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/fkxxyz/rime-cloverpinyin",
+    "generatedAt": "2026-06-29T05:29:11.295479Z",
+    "evidencePath": "repos/github.com/fkxxyz/rime-cloverpinyin/evidence.md"
+  },
+  "purpose": "在linux端，很多拼音输入法有少许 bug 或卡顿，或功能不全，所以接触了 rime ，然而自带的朙月拼音和袖珍简化字拼音均不是很不是很理想，但是探索过程中发现很多很好的开源项目提供词库，而 rime 输入法引擎几乎拥有所有的优点（开源、干净无广告、运行流畅、跨平台、...），甚至云同步也能用坚果云之类的服务手动实现，唯一的缺点就是门槛高定制困难，默认配置的不习惯劝退了很多人。",
+  "name": "four_leaf_clover:四叶草拼音输入方案",
+  "homepage": "https://www.fkxxyz.com/d/cloverpinyin/",
+  "license": "LGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "rime",
+    "pinyin",
+    "schema",
+    "fcitx"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://www.fkxxyz.com/d/cloverpinyin/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/fkxxyz/rime-cloverpinyin/profile.json",
+    "repository": "/v0/repos/github.com/fkxxyz/rime-cloverpinyin/index.json",
+    "trust": "/v0/repos/github.com/fkxxyz/rime-cloverpinyin/trust.json",
+    "queryTemplate": "/v0/repos/github.com/fkxxyz/rime-cloverpinyin/query?path={dot_path}",
+    "indexPath": "repos/github.com/fkxxyz/rime-cloverpinyin/"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "pritunl",
+    "repo": "pritunl",
+    "source": "https://github.com/pritunl/pritunl"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/pritunl/pritunl/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/pritunl/pritunl",
+    "generatedAt": "2026-06-29T05:25:02.118771Z",
+    "evidencePath": "repos/github.com/pritunl/pritunl/evidence.md"
+  },
+  "purpose": "Pritunl is a distributed enterprise vpn server built using the OpenVPN protocol.",
+  "name": "pritunl: enterprise vpn server",
+  "homepage": "https://forum.pritunl.com",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Dart",
+    "Dockerfile",
+    "Go",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Python",
+    "SCSS",
+    "Shell"
+  ],
+  "topics": [
+    "pritunl",
+    "vpn",
+    "vpn-server"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://forum.pritunl.com"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/pritunl/pritunl/profile.json",
+    "repository": "/v0/repos/github.com/pritunl/pritunl/index.json",
+    "trust": "/v0/repos/github.com/pritunl/pritunl/trust.json",
+    "queryTemplate": "/v0/repos/github.com/pritunl/pritunl/query?path={dot_path}",
+    "indexPath": "repos/github.com/pritunl/pritunl/"
+  }
+}

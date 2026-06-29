@@ -1,0 +1,85 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "HugoBlox",
+    "repo": "hugo-theme-academic-cv",
+    "source": "https://github.com/HugoBlox/hugo-theme-academic-cv"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/HugoBlox/hugo-theme-academic-cv/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/HugoBlox/hugo-theme-academic-cv",
+    "generatedAt": "2026-06-29T05:25:40.69955Z",
+    "evidencePath": "repos/github.com/HugoBlox/hugo-theme-academic-cv/evidence.md"
+  },
+  "purpose": "Your unfair advantage in academia.",
+  "name": "The Portfolio That Works While You Sleep",
+  "homepage": "https://hugoblox.com/templates/academic-cv",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "HTML",
+    "Jupyter Notebook",
+    "TeX"
+  ],
+  "topics": [
+    "hugo",
+    "website-generation",
+    "academic",
+    "netlify",
+    "rstudio",
+    "blogdown",
+    "hugo-academic",
+    "hugo-site",
+    "hugo-theme",
+    "academic-website",
+    "personal-website",
+    "portfolio-website",
+    "resume-builder",
+    "resume-template",
+    "rmarkdown",
+    "blog-engine",
+    "portfolio-template",
+    "obsidian",
+    "roamresearch",
+    "digital-garden"
+  ],
+  "execution": {
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://docs.ownable.dev/?utm_source=github&utm_medium=readme&utm_content=community_academic-cv"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/HugoBlox/hugo-theme-academic-cv/profile.json",
+    "repository": "/v0/repos/github.com/HugoBlox/hugo-theme-academic-cv/index.json",
+    "trust": "/v0/repos/github.com/HugoBlox/hugo-theme-academic-cv/trust.json",
+    "queryTemplate": "/v0/repos/github.com/HugoBlox/hugo-theme-academic-cv/query?path={dot_path}",
+    "indexPath": "repos/github.com/HugoBlox/hugo-theme-academic-cv/"
+  }
+}

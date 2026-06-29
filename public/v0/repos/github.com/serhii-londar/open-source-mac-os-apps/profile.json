@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "serhii-londar",
+    "repo": "open-source-mac-os-apps",
+    "source": "https://github.com/serhii-londar/open-source-mac-os-apps"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/serhii-londar/open-source-mac-os-apps/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/serhii-londar/open-source-mac-os-apps",
+    "generatedAt": "2026-06-29T05:13:21.117105Z",
+    "evidencePath": "repos/github.com/serhii-londar/open-source-mac-os-apps/evidence.md"
+  },
+  "purpose": "A curated list of open source applications for macOS",
+  "name": "Stand With Ukraine",
+  "homepage": "https://github.com/serhii-londar/open-source-mac-os-apps",
+  "license": "CC0-1.0",
+  "visibility": "public",
+  "topics": [
+    "macos",
+    "mac",
+    "macosx",
+    "apps",
+    "applications",
+    "awesome-list",
+    "opensource",
+    "open-source",
+    "awesome",
+    "swift",
+    "objective-c",
+    "javascript",
+    "python",
+    "ruby",
+    "c",
+    "c-plus-plus",
+    "macos-application",
+    "hacktoberfest"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://github.com/paretoSecurity/pareto-mac/"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/profile.json",
+    "repository": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/index.json",
+    "trust": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/trust.json",
+    "queryTemplate": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/query?path={dot_path}",
+    "indexPath": "repos/github.com/serhii-londar/open-source-mac-os-apps/"
+  }
+}

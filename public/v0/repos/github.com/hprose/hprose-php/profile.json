@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hprose",
+    "repo": "hprose-php",
+    "source": "https://github.com/hprose/hprose-php"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/hprose/hprose-php/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/hprose/hprose-php",
+    "generatedAt": "2026-06-29T05:28:18.872626Z",
+    "evidencePath": "repos/github.com/hprose/hprose-php/evidence.md"
+  },
+  "purpose": "*Hprose* is a High Performance Remote Object Service Engine.",
+  "name": "Hprose",
+  "homepage": "https://github.com/hprose/hprose-php",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "PHP"
+  ],
+  "topics": [
+    "rpc",
+    "rpc-library",
+    "rpc-framework",
+    "rpc-server",
+    "rpc-service",
+    "rpc-client",
+    "cross-platform",
+    "cross-language",
+    "cross-domain",
+    "cross-device",
+    "php",
+    "php7",
+    "php-library",
+    "hprose",
+    "composer",
+    "packagist",
+    "serialization",
+    "serializer",
+    "serialization-library",
+    "serialize"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/hprose/hprose-php/profile.json",
+    "repository": "/v0/repos/github.com/hprose/hprose-php/index.json",
+    "trust": "/v0/repos/github.com/hprose/hprose-php/trust.json",
+    "queryTemplate": "/v0/repos/github.com/hprose/hprose-php/query?path={dot_path}",
+    "indexPath": "repos/github.com/hprose/hprose-php/"
+  }
+}

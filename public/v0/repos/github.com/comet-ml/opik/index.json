@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "comet-ml",
+    "repo": "opik",
+    "source": "https://github.com/comet-ml/opik"
+  },
+  "repository": {
+    "name": "Opik",
+    "description": "Opik helps you build, test, and optimize generative AI applications that run better, from prototype to production.",
+    "homepage": "https://www.comet.com/docs/opik/",
+    "docsRoot": "https://www.comet.com/docs/opik/?from=llm&utm_source=opik&utm_medium=github&utm_content=docs_button&utm_campaign=opik",
+    "gettingStarted": "https://www.comet.com/docs/opik/quickstart/?from=llm&utm_source=opik&utm_medium=github&utm_content=quickstart_link&utm_campaign=opik",
+    "ownersTeam": "@comet-ml/comet-opik-devs"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/comet-ml/opik/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/comet-ml/opik",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.test` from `.github/workflows/backend_tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/comet-ml/opik/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/comet-ml/opik/index.json",
+    "trust": "/v0/repos/github.com/comet-ml/opik/trust.json",
+    "profile": "/v0/repos/github.com/comet-ml/opik/profile.json",
+    "queryTemplate": "/v0/repos/github.com/comet-ml/opik/query?path={dot_path}",
+    "indexPath": "repos/github.com/comet-ml/opik/"
+  }
+}

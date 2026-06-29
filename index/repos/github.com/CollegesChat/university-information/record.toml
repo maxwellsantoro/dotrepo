@@ -1,0 +1,39 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/CollegesChat/university-information"
+generated_at = "2026-06-29T05:25:19.879409Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "university-information"
+description = "这是一个受 https://t.me/RiNGNiR/3571 和 https://t.me/RiNGNiR/3572 启发的项目，意在收集全国各高校招生时不会写明，却会实实在在影响大学生活质量的要求与细节。"
+homepage = "https://colleges.chat"
+visibility = "public"
+languages = [
+    "HTML",
+    "Python",
+]
+topics = []
+
+[docs]
+root = "https://colleges.chat"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/CollegesChat/university-information.git"
+default_branch = "master"
+fork = false
+head_sha = "aa605f975bc08304c8d9b242de7210c57fca4c8d"
+html_url = "https://github.com/CollegesChat/university-information"
+stars = 4978

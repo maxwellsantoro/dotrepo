@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "asg017",
+    "repo": "sqlite-vss",
+    "source": "https://github.com/asg017/sqlite-vss"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/asg017/sqlite-vss/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/asg017/sqlite-vss",
+    "generatedAt": "2026-06-29T05:28:26.183759Z",
+    "evidencePath": "repos/github.com/asg017/sqlite-vss/evidence.md"
+  },
+  "purpose": "A SQLite extension for efficient vector search, based on Faiss!",
+  "name": "sqlite-vss",
+  "homepage": "https://github.com/asg017/sqlite-vss",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Elixir",
+    "Go",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "sqlite",
+    "sqlite-extension",
+    "vector-search",
+    "faiss"
+  ],
+  "execution": {
+    "build": "make site-build",
+    "test": "make test-loadable"
+  },
+  "docs": {
+    "gettingStarted": "https://huggingface.co/blog/getting-started-with-embeddings#1-embedding-a-dataset"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/asg017/sqlite-vss/profile.json",
+    "repository": "/v0/repos/github.com/asg017/sqlite-vss/index.json",
+    "trust": "/v0/repos/github.com/asg017/sqlite-vss/trust.json",
+    "queryTemplate": "/v0/repos/github.com/asg017/sqlite-vss/query?path={dot_path}",
+    "indexPath": "repos/github.com/asg017/sqlite-vss/"
+  }
+}

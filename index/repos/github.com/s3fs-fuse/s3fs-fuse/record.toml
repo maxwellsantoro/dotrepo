@@ -1,0 +1,48 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/s3fs-fuse/s3fs-fuse"
+generated_at = "2026-06-29T05:22:03.014853Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "s3fs"
+description = "FUSE-based file system backed by Amazon S3"
+homepage = "https://github.com/s3fs-fuse/s3fs-fuse"
+license = "GPL-2.0"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "M4",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+test = "make check -C src"
+topics = [
+    "fuse",
+    "s3",
+    "aws-s3",
+    "filesystem",
+    "cloud-storage",
+    "fuse-filesystem",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/s3fs-fuse/s3fs-fuse.git"
+default_branch = "master"
+fork = false
+head_sha = "ac20a7ebcba68eb3079544d3153238700afe305c"
+html_url = "https://github.com/s3fs-fuse/s3fs-fuse"
+stars = 9906

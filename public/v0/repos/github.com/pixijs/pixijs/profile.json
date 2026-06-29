@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "pixijs",
+    "repo": "pixijs",
+    "source": "https://github.com/pixijs/pixijs"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/pixijs/pixijs/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/pixijs/pixijs",
+    "generatedAt": "2026-06-29T05:14:02.40657Z",
+    "evidencePath": "repos/github.com/pixijs/pixijs/evidence.md"
+  },
+  "purpose": "Next-Generation, Fastest HTML5 Creation Engine for the Web",
+  "name": "npm downloads",
+  "homepage": "http://pixijs.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "GLSL",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "Shell",
+    "TypeScript",
+    "WGSL"
+  ],
+  "topics": [
+    "canvas2d",
+    "pixijs",
+    "javascript",
+    "webgl",
+    "glsl",
+    "canvas",
+    "rendering",
+    "pixi",
+    "game",
+    "renderer",
+    "rendering-engine",
+    "rendering-2d-graphics",
+    "data-visualization"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "http://pixijs.com"
+  },
+  "ownership": {
+    "maintainers": [
+      "@GoodBoyDigital",
+      "@bigtimebuddy",
+      "@Zyie"
+    ]
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/pixijs/pixijs/profile.json",
+    "repository": "/v0/repos/github.com/pixijs/pixijs/index.json",
+    "trust": "/v0/repos/github.com/pixijs/pixijs/trust.json",
+    "queryTemplate": "/v0/repos/github.com/pixijs/pixijs/query?path={dot_path}",
+    "indexPath": "repos/github.com/pixijs/pixijs/"
+  }
+}

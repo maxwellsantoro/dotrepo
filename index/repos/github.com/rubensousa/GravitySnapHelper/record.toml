@@ -1,0 +1,42 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/rubensousa/GravitySnapHelper"
+generated_at = "2026-06-29T05:24:26.183907Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/pullrequest.yml`. Inferred `repo.test` from `.github/workflows/pullrequest.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "GravitySnapHelper"
+description = "A SnapHelper that snaps a RecyclerView to an edge."
+homepage = "https://github.com/rubensousa/GravitySnapHelper"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Java",
+    "Kotlin",
+]
+build = "./gradlew --build-cache check assemble"
+test = "./gradlew --build-cache check assemble"
+topics = [
+    "recyclerview",
+    "snapping",
+    "android",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/rubensousa/GravitySnapHelper.git"
+default_branch = "master"
+fork = false
+head_sha = "01a438a9ca90041641fa50b01edad407cc022d2e"
+html_url = "https://github.com/rubensousa/GravitySnapHelper"
+stars = 4987

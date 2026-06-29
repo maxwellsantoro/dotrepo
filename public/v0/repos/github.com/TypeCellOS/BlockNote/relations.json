@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "TypeCellOS",
+    "repo": "BlockNote",
+    "source": "https://github.com/TypeCellOS/BlockNote"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/sponsors/ueberdosis",
+      "notes": "Cross-link from README: Tiptap",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "sponsors",
+        "repo": "ueberdosis"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/sponsors/ueberdosis/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/TypeCellOS/BlockNote/relations",
+    "repository": "/v0/repos/github.com/TypeCellOS/BlockNote/index.json",
+    "trust": "/v0/repos/github.com/TypeCellOS/BlockNote/trust.json",
+    "profile": "/v0/repos/github.com/TypeCellOS/BlockNote/profile.json",
+    "queryTemplate": "/v0/repos/github.com/TypeCellOS/BlockNote/query?path={dot_path}",
+    "indexPath": "repos/github.com/TypeCellOS/BlockNote/"
+  }
+}

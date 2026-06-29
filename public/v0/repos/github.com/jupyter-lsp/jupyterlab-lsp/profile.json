@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jupyter-lsp",
+    "repo": "jupyterlab-lsp",
+    "source": "https://github.com/jupyter-lsp/jupyterlab-lsp"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/jupyter-lsp/jupyterlab-lsp/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/jupyter-lsp/jupyterlab-lsp",
+    "generatedAt": "2026-06-29T05:28:35.974751Z",
+    "evidencePath": "repos/github.com/jupyter-lsp/jupyterlab-lsp/evidence.md"
+  },
+  "purpose": "Examples show Python code, but most features also work in R, bash, typescript, and [many other languages][language-servers].",
+  "name": "Language Server Protocol integration for Jupyter(Lab)",
+  "homepage": "https://jupyterlab-lsp.readthedocs.io",
+  "license": "BSD-3-Clause",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "JavaScript",
+    "Julia",
+    "Jupyter Notebook",
+    "Less",
+    "Python",
+    "R",
+    "RobotFramework",
+    "SCSS",
+    "Shell",
+    "TeX",
+    "TypeScript"
+  ],
+  "topics": [
+    "jupyterlab",
+    "jupyterlab-extension",
+    "language-server-protocol",
+    "jupyter-lab",
+    "lsp",
+    "linter",
+    "jupyter",
+    "jupyter-notebook",
+    "notebook",
+    "notebook-jupyter",
+    "ipython",
+    "autocompletion",
+    "julia-language",
+    "r"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://jupyterlab-lsp.readthedocs.io/en/latest/Language%20Servers.html"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/jupyter-lsp/jupyterlab-lsp/profile.json",
+    "repository": "/v0/repos/github.com/jupyter-lsp/jupyterlab-lsp/index.json",
+    "trust": "/v0/repos/github.com/jupyter-lsp/jupyterlab-lsp/trust.json",
+    "queryTemplate": "/v0/repos/github.com/jupyter-lsp/jupyterlab-lsp/query?path={dot_path}",
+    "indexPath": "repos/github.com/jupyter-lsp/jupyterlab-lsp/"
+  }
+}

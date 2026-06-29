@@ -1,0 +1,83 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hpjansson",
+    "repo": "chafa",
+    "source": "https://github.com/hpjansson/chafa"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/hpjansson/chafa/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/hpjansson/chafa",
+    "generatedAt": "2026-06-29T05:25:34.466383Z",
+    "evidencePath": "repos/github.com/hpjansson/chafa/evidence.md"
+  },
+  "purpose": "Erica Ferrua Edwardsdóttir maintains excellent Python bindings for Chafa.",
+  "name": "Python bindings",
+  "homepage": "https://hpjansson.org/chafa/",
+  "license": "LGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "M4",
+    "Makefile",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "ansi",
+    "terminal-graphics",
+    "terminal-based",
+    "image-processing",
+    "images",
+    "image-viewer",
+    "terminal",
+    "graphics",
+    "graphics-library",
+    "cli",
+    "sixel",
+    "kitty",
+    "iterm2",
+    "powershell"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://hpjansson.org/chafa/"
+  },
+  "ownership": {
+    "securityContact": "hpj@hpjansson.org"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/hpjansson/chafa/profile.json",
+    "repository": "/v0/repos/github.com/hpjansson/chafa/index.json",
+    "trust": "/v0/repos/github.com/hpjansson/chafa/trust.json",
+    "queryTemplate": "/v0/repos/github.com/hpjansson/chafa/query?path={dot_path}",
+    "indexPath": "repos/github.com/hpjansson/chafa/"
+  }
+}

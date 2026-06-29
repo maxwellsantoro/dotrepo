@@ -1,0 +1,39 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/Visualize-ML/Book4_Power-of-Matrix"
+generated_at = "2026-06-29T05:20:39.275554Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Book4_Power-of-Matrix"
+description = "Book_4_《矩阵力量》 |   鸢尾花书：从加减乘除到机器学习；上架！"
+homepage = "https://github.com/Visualize-ML/Book4_Power-of-Matrix"
+visibility = "public"
+languages = [
+    "Jupyter Notebook",
+    "Python",
+]
+topics = [
+    "linear",
+    "linear-algebra",
+    "machine-learning",
+    "mathematics",
+    "matrix",
+    "matrix-factorization",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Visualize-ML/Book4_Power-of-Matrix.git"
+default_branch = "main"
+fork = false
+head_sha = "a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7"
+html_url = "https://github.com/Visualize-ML/Book4_Power-of-Matrix"
+stars = 9954

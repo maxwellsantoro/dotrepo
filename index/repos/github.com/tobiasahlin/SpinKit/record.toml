@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/tobiasahlin/SpinKit"
+generated_at = "2026-06-29T05:18:44.611693Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Spinners"
+description = "Given that you have included `spinkit.min.css in your project, these snippets will produce the different spinners:"
+homepage = "http://tobiasahlin.com/spinkit/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+]
+topics = []
+
+[docs]
+root = "http://tobiasahlin.com/spinkit/"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/tobiasahlin/SpinKit"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tobiasahlin/SpinKit.git"
+default_branch = "master"
+fork = false
+head_sha = "742a71277c49b69053b5beb9fad80d720840a2ab"
+html_url = "https://github.com/tobiasahlin/SpinKit"
+stars = 19347

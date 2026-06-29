@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "VibeVoice",
+    "source": "https://github.com/microsoft/VibeVoice"
+  },
+  "repository": {
+    "name": "VibeVoice",
+    "description": "2026-03-06: 🚀 VibeVoice ASR is now part of a Transformers release! You can now use our speech recognition model directly through the Hugging Face Transformers library for seamless integration into your projects.",
+    "homepage": "https://microsoft.github.io/VibeVoice/",
+    "docsRoot": "https://microsoft.github.io/VibeVoice/",
+    "securityContact": "https://aka.ms/SECURITY.md"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/microsoft/VibeVoice/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/microsoft/VibeVoice",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/microsoft/VibeVoice/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/microsoft/VibeVoice/index.json",
+    "trust": "/v0/repos/github.com/microsoft/VibeVoice/trust.json",
+    "profile": "/v0/repos/github.com/microsoft/VibeVoice/profile.json",
+    "queryTemplate": "/v0/repos/github.com/microsoft/VibeVoice/query?path={dot_path}",
+    "indexPath": "repos/github.com/microsoft/VibeVoice/"
+  }
+}

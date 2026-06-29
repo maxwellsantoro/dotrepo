@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ImageOptim/ImageOptim"
+generated_at = "2026-06-29T05:22:34.099506Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "ImageOptim"
+description = "ImageOptim is a GUI for lossless image optimization tools: Zopfli, PNGOUT, OxiPNG, AdvPNG, PNGCrush, JPEGOptim, Jpegtran, Guetzli, Gifsicle, SVGO, svgcleaner and MozJPEG."
+homepage = "https://imageoptim.com/mac"
+license = "GPL-2.0"
+visibility = "public"
+languages = [
+    "C",
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Objective-C",
+    "Ruby",
+    "Shell",
+]
+topics = [
+    "gui",
+    "image-optimization",
+    "performace",
+    "accelerator",
+    "minification",
+    "imageoptim",
+    "mac-app",
+]
+
+[docs]
+root = "https://imageoptim.com/mac"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ImageOptim/ImageOptim.git"
+default_branch = "main"
+fork = false
+head_sha = "414c7507665d646181c5f18a6e2b8a867ebcf8e8"
+html_url = "https://github.com/ImageOptim/ImageOptim"
+stars = 9878

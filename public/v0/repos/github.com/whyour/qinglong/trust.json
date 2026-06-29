@@ -1,0 +1,44 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "whyour",
+    "repo": "qinglong",
+    "source": "https://github.com/whyour/qinglong"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/whyour/qinglong/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/whyour/qinglong",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.name` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-docker-image.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/whyour/qinglong/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/whyour/qinglong/trust.json",
+    "repository": "/v0/repos/github.com/whyour/qinglong/index.json",
+    "profile": "/v0/repos/github.com/whyour/qinglong/profile.json",
+    "queryTemplate": "/v0/repos/github.com/whyour/qinglong/query?path={dot_path}",
+    "indexPath": "repos/github.com/whyour/qinglong/"
+  }
+}

@@ -1,0 +1,66 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ultralight-ux/Ultralight"
+generated_at = "2026-06-29T05:25:44.841692Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "video_game: Discord Chat"
+description = "Got a question about Ultralight? Chat with us on Discord!"
+homepage = "https://ultralig.ht"
+visibility = "public"
+languages = ["CMake"]
+topics = [
+    "html-renderer",
+    "desktop-apps",
+    "games",
+    "gpu",
+    "cross-platform",
+    "webkit",
+    "ultralight",
+    "windows",
+    "macos",
+    "linux",
+    "directx-11",
+    "opengl",
+    "metal",
+    "game-development",
+    "gamedev",
+]
+
+[docs]
+root = "https://ultralig.ht"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/ultralight-ux/WebCore"
+notes = "Cross-link from README: ultralight-ux/WebCore"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ultralight-ux/Ultralight.git"
+default_branch = "master"
+fork = false
+head_sha = "208d653e872b29234bbd4a5fef6dec403f3dfdbd"
+html_url = "https://github.com/ultralight-ux/Ultralight"
+stars = 4973

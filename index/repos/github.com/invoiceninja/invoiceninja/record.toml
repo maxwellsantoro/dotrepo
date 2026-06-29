@@ -1,0 +1,65 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/invoiceninja/invoiceninja"
+generated_at = "2026-06-29T05:23:03.704824Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "CLA assistant"
+description = "Invoice Ninja Version 5 is here! We've taken the best parts of version 4 and added the most requested features to create an invoicing application like no other."
+homepage = "https://invoiceninja.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Blade",
+    "HTML",
+    "JavaScript",
+    "PHP",
+    "TypeScript",
+    "XSLT",
+]
+build = "npm run build"
+topics = [
+    "php",
+    "expenses",
+    "javascript",
+    "invoices",
+    "tasks",
+    "laravel",
+    "payments",
+    "time-tracker",
+    "kanban",
+    "invoice",
+    "flutter",
+    "hacktoberfest",
+    "invoiceninja",
+    "einvoicing",
+    "projects",
+    "quotes",
+]
+
+[owners]
+maintainers = []
+security_contact = "contact@invoiceninja.com"
+
+[docs]
+root = "https://invoiceninja.com"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/invoiceninja/invoiceninja.git"
+default_branch = "v5-stable"
+fork = false
+head_sha = "9f8bc547af68cefe5654367614ce8e8223a30755"
+html_url = "https://github.com/invoiceninja/invoiceninja"
+stars = 9858

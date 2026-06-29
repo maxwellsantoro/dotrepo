@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "livekit",
+    "repo": "livekit",
+    "source": "https://github.com/livekit/livekit"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/livekit/livekit/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/livekit/livekit",
+    "generatedAt": "2026-06-29T05:18:23.031208Z",
+    "evidencePath": "repos/github.com/livekit/livekit/evidence.md"
+  },
+  "purpose": "LiveKit is an open source project that provides scalable, multi-user conferencing based on WebRTC.",
+  "name": "The LiveKit icon, the name of the repository and some sample code in the background.",
+  "homepage": "https://docs.livekit.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Go",
+    "Shell"
+  ],
+  "topics": [
+    "golang",
+    "webrtc",
+    "sfu",
+    "media-server",
+    "video",
+    "voice",
+    "voice-ai"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://docs.livekit.io/client-sdk-js/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@livekit/cs-devs"
+    ],
+    "team": "@livekit/cs-devs"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/livekit/livekit/profile.json",
+    "repository": "/v0/repos/github.com/livekit/livekit/index.json",
+    "trust": "/v0/repos/github.com/livekit/livekit/trust.json",
+    "queryTemplate": "/v0/repos/github.com/livekit/livekit/query?path={dot_path}",
+    "indexPath": "repos/github.com/livekit/livekit/"
+  }
+}

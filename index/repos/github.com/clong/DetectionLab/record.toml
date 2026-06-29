@@ -1,0 +1,71 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/clong/DetectionLab"
+generated_at = "2026-06-29T05:24:33.800838Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Detection Lab"
+description = "DetectionLab is tested weekly on Saturdays via a scheduled CircleCI workflow to ensure that builds are passing."
+homepage = "https://github.com/clong/DetectionLab"
+license = "MIT"
+visibility = "public"
+languages = [
+    "AutoHotkey",
+    "Batchfile",
+    "HCL",
+    "HTML",
+    "PowerShell",
+    "Ruby",
+    "Shell",
+]
+topics = [
+    "vagrant",
+    "vagrantfile",
+    "packer",
+    "information-security",
+    "lab-environment",
+    "dfir",
+    "terraform",
+    "ansible",
+    "powershell",
+    "detection",
+    "detectionlab",
+    "osquery",
+    "sysmon",
+    "dfir-automation",
+]
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/palantir/windows-event-forwarding"
+notes = "Cross-link from README: Palantir's Windows Event Forwarding"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/clong/DetectionLab.git"
+default_branch = "master"
+fork = false
+head_sha = "a4fd7271271e89ea597d1513f70b3611405c0135"
+html_url = "https://github.com/clong/DetectionLab"
+stars = 4986

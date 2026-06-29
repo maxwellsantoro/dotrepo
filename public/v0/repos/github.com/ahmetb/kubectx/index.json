@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ahmetb",
+    "repo": "kubectx",
+    "source": "https://github.com/ahmetb/kubectx"
+  },
+  "repository": {
+    "name": "kubectx` + `kubens`: Power tools for kubectl",
+    "description": "This repository provides both `kubectx and `kubens tools.",
+    "homepage": "https://kubectx.dev",
+    "docsRoot": "https://kubectx.dev"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ahmetb/kubectx/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ahmetb/kubectx",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ahmetb/kubectx/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ahmetb/kubectx/index.json",
+    "trust": "/v0/repos/github.com/ahmetb/kubectx/trust.json",
+    "profile": "/v0/repos/github.com/ahmetb/kubectx/profile.json",
+    "queryTemplate": "/v0/repos/github.com/ahmetb/kubectx/query?path={dot_path}",
+    "indexPath": "repos/github.com/ahmetb/kubectx/"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "AnmolSaini16",
+    "repo": "mapcn",
+    "source": "https://github.com/AnmolSaini16/mapcn"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/AnmolSaini16/mapcn/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/AnmolSaini16/mapcn",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/AnmolSaini16/mapcn/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/AnmolSaini16/mapcn",
+        "generated_at": "2026-06-29T05:22:48.19161Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "mapcn",
+        "description": "Free & open-source, ready-to-use, customizable map components for React.",
+        "homepage": "https://mapcn.dev",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "JavaScript",
+          "TypeScript"
+        ],
+        "build": "npm run build",
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://mapcn.dev/docs",
+        "getting_started": "https://mapcn.dev/docs/installation",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/AnmolSaini16/mapcn.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "dcca957d9c347620dc3e7c1f923f3af532914396",
+          "html_url": "https://github.com/AnmolSaini16/mapcn",
+          "stars": 9868
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

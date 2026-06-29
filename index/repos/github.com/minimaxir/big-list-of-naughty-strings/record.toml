@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/minimaxir/big-list-of-naughty-strings"
+generated_at = "2026-06-29T05:13:59.531825Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Big List of Naughty Strings"
+description = "The Big List of Naughty Strings is an evolving list of strings which have a high probability of causing issues when used as user-input data."
+homepage = "https://github.com/minimaxir/big-list-of-naughty-strings"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Go",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/minimaxir/big-list-of-naughty-strings#readme"
+notes = "Declared homepage in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/minimaxir/big-list-of-naughty-strings.git"
+default_branch = "master"
+fork = false
+head_sha = "db33ec7b1d5d9616a88c76394b7d0897bd0b97eb"
+html_url = "https://github.com/minimaxir/big-list-of-naughty-strings"
+stars = 47690

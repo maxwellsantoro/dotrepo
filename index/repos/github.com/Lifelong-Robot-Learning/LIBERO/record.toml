@@ -1,0 +1,43 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Lifelong-Robot-Learning/LIBERO"
+generated_at = "2026-06-29T05:28:51.487952Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Tests Passing"
+description = "Bo Liu, Yifeng Zhu, Chongkai Gao, Yihao Feng, Qiang Liu, Yuke Zhu, Peter Stone"
+homepage = "https://github.com/Lifelong-Robot-Learning/LIBERO"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Jupyter Notebook",
+    "Python",
+]
+topics = [
+    "benchmark",
+    "imitation-learning",
+    "lifelong-learning",
+    "manipulation",
+    "multitask-learning",
+    "robot-learning",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Lifelong-Robot-Learning/LIBERO.git"
+default_branch = "master"
+fork = false
+head_sha = "8f1084e3132a39270c3a13ebe37270a43ece2a01"
+html_url = "https://github.com/Lifelong-Robot-Learning/LIBERO"
+stars = 1995

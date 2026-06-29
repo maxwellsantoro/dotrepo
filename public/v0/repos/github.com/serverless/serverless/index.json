@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "serverless",
+    "repo": "serverless",
+    "source": "https://github.com/serverless/serverless"
+  },
+  "repository": {
+    "name": "Serverless Framework",
+    "description": "**January 2026** – V.4 continues to feature significant updates.",
+    "homepage": "https://serverless.com",
+    "docsRoot": "https://serverless.com/framework/docs/",
+    "securityContact": "https://github.com/serverless/serverless/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/serverless/serverless/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/serverless/serverless",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/ci-binary-installer.yml`, `.github/workflows/ci-framework.yml`, `.github/workflows/release-binary-installer.yml`, and `.github/workflows/release-framework.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/serverless/serverless/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/serverless/serverless/index.json",
+    "trust": "/v0/repos/github.com/serverless/serverless/trust.json",
+    "profile": "/v0/repos/github.com/serverless/serverless/profile.json",
+    "queryTemplate": "/v0/repos/github.com/serverless/serverless/query?path={dot_path}",
+    "indexPath": "repos/github.com/serverless/serverless/"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "paascloud",
+    "repo": "paascloud-master",
+    "source": "https://github.com/paascloud/paascloud-master"
+  },
+  "repository": {
+    "name": "Spring Cloud 实战项目",
+    "description": "①：519587831（满） ②：873283104（满） ③：882458726（满） ④：693445268 ⑤：813682656 ⑥：797334670 ⑦：797876073 ⑧：814712305 ⑨：……",
+    "homepage": "http://www.paascloud.net",
+    "docsRoot": "http://www.paascloud.net"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/paascloud/paascloud-master/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/paascloud/paascloud-master",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/paascloud/paascloud-master/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/paascloud/paascloud-master/index.json",
+    "trust": "/v0/repos/github.com/paascloud/paascloud-master/trust.json",
+    "profile": "/v0/repos/github.com/paascloud/paascloud-master/profile.json",
+    "queryTemplate": "/v0/repos/github.com/paascloud/paascloud-master/query?path={dot_path}",
+    "indexPath": "repos/github.com/paascloud/paascloud-master/"
+  }
+}

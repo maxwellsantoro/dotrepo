@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "CollegesChat",
+    "repo": "university-information",
+    "source": "https://github.com/CollegesChat/university-information"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/CollegesChat/university-information/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/CollegesChat/university-information",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/CollegesChat/university-information/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/CollegesChat/university-information",
+        "generated_at": "2026-06-29T05:25:19.879409Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "university-information",
+        "description": "这是一个受 https://t.me/RiNGNiR/3571 和 https://t.me/RiNGNiR/3572 启发的项目，意在收集全国各高校招生时不会写明，却会实实在在影响大学生活质量的要求与细节。",
+        "homepage": "https://colleges.chat",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "HTML",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://colleges.chat",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/CollegesChat/university-information.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "aa605f975bc08304c8d9b242de7210c57fca4c8d",
+          "html_url": "https://github.com/CollegesChat/university-information",
+          "stars": 4978
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

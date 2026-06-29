@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ddnexus/pagy"
+generated_at = "2026-06-29T05:26:03.012734Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "pagy"
+description = "Agnostic pagination in plain ruby"
+homepage = "https://ddnexus.github.io/pagy/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Ruby",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "ruby",
+    "rails",
+    "sinatra",
+    "padrino",
+    "bootstrap",
+    "bulma",
+    "searchkick",
+    "elasticsearch-rails",
+    "hanami",
+    "jsonapi",
+    "meilisearch",
+    "typesense-rails",
+]
+
+[owners]
+maintainers = []
+security_contact = "dd.nexus@gmail.com"
+
+[docs]
+root = "https://ddnexus.github.io/pagy/toolbox/configuration/initializer"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ddnexus/pagy.git"
+default_branch = "master"
+fork = false
+head_sha = "e3eff8f19307eded6ad929e039c495873c8bb98f"
+html_url = "https://github.com/ddnexus/pagy"
+stars = 4972

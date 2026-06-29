@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "JDAI-CV",
+    "repo": "FaceX-Zoo",
+    "source": "https://github.com/JDAI-CV/FaceX-Zoo"
+  },
+  "repository": {
+    "name": "FaceX-Zoo",
+    "description": "FaceX-Zoo is a PyTorch toolbox for face recognition.",
+    "homepage": "https://arxiv.org/pdf/2101.04407.pdf",
+    "docsRoot": "https://arxiv.org/pdf/2101.04407.pdf"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/JDAI-CV/FaceX-Zoo/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/JDAI-CV/FaceX-Zoo",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/JDAI-CV/FaceX-Zoo/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/JDAI-CV/FaceX-Zoo/index.json",
+    "trust": "/v0/repos/github.com/JDAI-CV/FaceX-Zoo/trust.json",
+    "profile": "/v0/repos/github.com/JDAI-CV/FaceX-Zoo/profile.json",
+    "queryTemplate": "/v0/repos/github.com/JDAI-CV/FaceX-Zoo/query?path={dot_path}",
+    "indexPath": "repos/github.com/JDAI-CV/FaceX-Zoo/"
+  }
+}

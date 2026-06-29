@@ -1,0 +1,48 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/InsertKoinIO/koin"
+generated_at = "2026-06-29T05:20:00.371282Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "What is KOIN? ✨"
+description = "Koin is a pragmatic, lightweight dependency injection framework for Kotlin developers, developed by Kotzilla and open-source contributors."
+homepage = "https://insert-koin.io"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Java",
+    "Kotlin",
+    "Shell",
+]
+topics = [
+    "kotlin",
+    "dependency-injection",
+    "injection",
+    "android",
+    "kotlin-multiplatform",
+    "kotlin-multiplatform-library",
+    "library",
+]
+
+[docs]
+root = "https://insert-koin.io"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/InsertKoinIO/koin.git"
+default_branch = "main"
+fork = false
+head_sha = "dc86ef8dd8fbe8564fb7453c03f5b738da3450bb"
+html_url = "https://github.com/InsertKoinIO/koin"
+stars = 9996

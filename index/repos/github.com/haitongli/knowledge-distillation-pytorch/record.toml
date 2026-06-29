@@ -1,0 +1,41 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/haitongli/knowledge-distillation-pytorch"
+generated_at = "2026-06-29T05:28:11.286164Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "knowledge-distillation-pytorch"
+description = "Note: all the hyperparameters can be found and modified in 'params.json' under 'model_dir'"
+homepage = "https://github.com/haitongli/knowledge-distillation-pytorch"
+license = "MIT"
+visibility = "public"
+languages = ["Python"]
+topics = [
+    "pytorch",
+    "knowledge-distillation",
+    "deep-neural-networks",
+    "cifar10",
+    "model-compression",
+    "dark-knowledge",
+    "computer-vision",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/haitongli/knowledge-distillation-pytorch.git"
+default_branch = "master"
+fork = false
+head_sha = "9937528f0be0efa979c745174fbcbe9621cea8b7"
+html_url = "https://github.com/haitongli/knowledge-distillation-pytorch"
+stars = 1996

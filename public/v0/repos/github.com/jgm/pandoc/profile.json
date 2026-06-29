@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jgm",
+    "repo": "pandoc",
+    "source": "https://github.com/jgm/pandoc"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/jgm/pandoc/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/jgm/pandoc",
+    "generatedAt": "2026-06-29T05:15:39.558691Z",
+    "evidencePath": "repos/github.com/jgm/pandoc/evidence.md"
+  },
+  "purpose": "Pandoc is a Haskell library for converting from one markup format to another, and a command-line tool that uses this library.",
+  "name": "Pandoc",
+  "homepage": "https://pandoc.org",
+  "license": "GPL-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Emacs Lisp",
+    "HTML",
+    "Haskell",
+    "JavaScript",
+    "Jupyter Notebook",
+    "Lua",
+    "Makefile",
+    "Nix",
+    "Perl",
+    "Python",
+    "Rich Text Format",
+    "Roff",
+    "Ruby",
+    "Shell",
+    "Smarty",
+    "TeX",
+    "Typst"
+  ],
+  "topics": [
+    "pandoc",
+    "haskell",
+    "markdown",
+    "markup",
+    "converter",
+    "publishing",
+    "document",
+    "presentation",
+    "commonmark"
+  ],
+  "execution": {
+    "test": "make validate-docx-golden-tests"
+  },
+  "docs": {
+    "root": "https://pandoc.org"
+  },
+  "ownership": {
+    "securityContact": "jgm@berkeley.edu"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/jgm/pandoc/profile.json",
+    "repository": "/v0/repos/github.com/jgm/pandoc/index.json",
+    "trust": "/v0/repos/github.com/jgm/pandoc/trust.json",
+    "queryTemplate": "/v0/repos/github.com/jgm/pandoc/query?path={dot_path}",
+    "indexPath": "repos/github.com/jgm/pandoc/"
+  }
+}

@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/SwiftOldDriver/iOS-Weekly"
+generated_at = "2026-06-29T05:24:24.412614Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "iOS-Weekly"
+description = "你也可以为这个项目出一份力，如果发现有价值的信息、文章、工具等可以到 Issues 里提给我们，我们会尽快处理。记得写上推荐的理由哦。有建议和意见也欢迎到 Issues 提出。"
+homepage = "https://swiftolddriver.github.io/iOS-Weekly/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "JavaScript",
+]
+topics = [
+    "swift",
+    "ios",
+    "mobile",
+    "weekly",
+    "objective-c",
+    "rss",
+]
+
+[docs]
+root = "https://swiftolddriver.github.io/iOS-Weekly/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/SwiftOldDriver/iOS-Weekly.git"
+default_branch = "master"
+fork = false
+head_sha = "67c02d307d6f9c5c3e1bdd5bdea712380bb5975f"
+html_url = "https://github.com/SwiftOldDriver/iOS-Weekly"
+stars = 4988

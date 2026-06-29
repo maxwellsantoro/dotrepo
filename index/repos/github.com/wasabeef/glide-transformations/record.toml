@@ -1,0 +1,43 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/wasabeef/glide-transformations"
+generated_at = "2026-06-29T05:22:25.516787Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Glide Transformations"
+description = "An Android transformation library providing a variety of image transformations for Glide."
+homepage = "https://github.com/wasabeef/glide-transformations"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Java",
+    "Kotlin",
+]
+topics = [
+    "android",
+    "android-library",
+    "image-processing",
+    "glide",
+    "kotlin",
+    "java",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/wasabeef/glide-transformations.git"
+default_branch = "main"
+fork = false
+head_sha = "d950f0c33f27f864e4ab4b26fce66c27079911c1"
+html_url = "https://github.com/wasabeef/glide-transformations"
+stars = 9888

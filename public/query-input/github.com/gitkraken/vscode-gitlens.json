@@ -1,0 +1,131 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "gitkraken",
+    "repo": "vscode-gitlens",
+    "source": "https://github.com/gitkraken/vscode-gitlens"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/gitkraken/vscode-gitlens/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/gitkraken/vscode-gitlens",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/gitkraken/vscode-gitlens/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/gitkraken/vscode-gitlens",
+        "generated_at": "2026-06-29T05:23:10.651455Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "GitLens &mdash; Supercharge Git in VS Code",
+        "description": "Supercharge Git and unlock **untapped knowledge** within your repo to better **understand**, **write**, and **review** code.",
+        "homepage": "http://gitkraken.com/gitlens",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "Dockerfile",
+          "HTML",
+          "Handlebars",
+          "JavaScript",
+          "SCSS",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "pnpm build",
+        "test": "pnpm test",
+        "topics": [
+          "git",
+          "vscode",
+          "vscode-extension",
+          "github"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "http://gitkraken.com/gitlens",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/gitkraken/vscode-gitlens",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          },
+          {
+            "kind": "related",
+            "target": "github.com/gitkraken/vscode-gitlens 'Open GitLens on GitHub'",
+            "notes": "Cross-link from README: open-source",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/gitkraken/vscode-gitlens.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "86dddba765d9ff916df1aaab2a3f91b9c69545ed",
+          "html_url": "https://github.com/gitkraken/vscode-gitlens",
+          "stars": 9850
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

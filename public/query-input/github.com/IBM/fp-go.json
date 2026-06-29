@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "IBM",
+    "repo": "fp-go",
+    "source": "https://github.com/IBM/fp-go"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/IBM/fp-go/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/IBM/fp-go",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/IBM/fp-go/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/IBM/fp-go",
+        "generated_at": "2026-06-29T05:27:53.684862Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "fp-go: Functional Programming Library for Go",
+        "description": "**🚧 Work in progress! 🚧** Despite major version 1 (due to semantic-release limitations), we're working to minimize breaking changes.",
+        "homepage": "https://github.com/IBM/fp-go/tree/main/v2",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "Go"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "functional-programming",
+          "go",
+          "golang",
+          "library",
+          "monad",
+          "utility"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/IBM/fp-go.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "dfc0c4b0159f9810a6ca2526fa73fb88b19a6df3",
+          "html_url": "https://github.com/IBM/fp-go",
+          "stars": 1997
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

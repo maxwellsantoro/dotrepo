@@ -1,0 +1,44 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/mit-pdos/xv6-riscv"
+generated_at = "2026-06-29T05:20:18.753293Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README`. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "xv6-riscv"
+description = "Xv6 for RISC-V"
+homepage = "https://pdos.csail.mit.edu/6.1810"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Assembly",
+    "C",
+    "Emacs Lisp",
+    "Linker Script",
+    "Makefile",
+    "Perl",
+    "Python",
+]
+topics = []
+
+[docs]
+root = "https://pdos.csail.mit.edu/6.1810"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/mit-pdos/xv6-riscv.git"
+default_branch = "riscv"
+fork = false
+head_sha = "96987ad25dd35d397778c613c23566c33408516a"
+html_url = "https://github.com/mit-pdos/xv6-riscv"
+stars = 9990

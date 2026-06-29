@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/coreybutler/nvm-windows"
+generated_at = "2026-06-29T05:14:31.748594Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "We are working full time on Author, including Runtime, the successor to NVM for Windows.Complete this form to provide your thoughts and sign up for progress updates.Updates will also be posted on the Author Software LinkedIn Page."
+description = "This is not the same thing as nvm! (expand for details)"
+homepage = "https://github.com/coreybutler/nvm-windows"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Go",
+    "Inno Setup",
+    "JavaScript",
+    "VBScript",
+]
+topics = [
+    "node",
+    "versioning",
+    "management",
+    "version-manager",
+    "windows",
+    "nodejs",
+    "version",
+    "nvm",
+    "go",
+    "switch",
+    "node-version-manager",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/coreybutler/nvm-windows.git"
+default_branch = "master"
+fork = false
+head_sha = "5b18223ca19ff50d707f35410dbc6bd440a9f74d"
+html_url = "https://github.com/coreybutler/nvm-windows"
+stars = 46924

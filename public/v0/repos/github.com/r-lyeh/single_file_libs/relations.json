@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "r-lyeh",
+    "repo": "single_file_libs",
+    "source": "https://github.com/r-lyeh/single_file_libs"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/nothings/stb",
+      "notes": "Cross-link from README: STB",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "nothings",
+        "repo": "stb"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/nothings/stb/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/r-lyeh/single_file_libs/relations",
+    "repository": "/v0/repos/github.com/r-lyeh/single_file_libs/index.json",
+    "trust": "/v0/repos/github.com/r-lyeh/single_file_libs/trust.json",
+    "profile": "/v0/repos/github.com/r-lyeh/single_file_libs/profile.json",
+    "queryTemplate": "/v0/repos/github.com/r-lyeh/single_file_libs/query?path={dot_path}",
+    "indexPath": "repos/github.com/r-lyeh/single_file_libs/"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "calcom",
+    "repo": "cal.diy",
+    "source": "https://github.com/calcom/cal.diy"
+  },
+  "repository": {
+    "name": "Cal.diy",
+    "description": "The community-driven, open-source scheduling platform.",
+    "homepage": "https://cal.diy",
+    "docsRoot": "https://cal.diy",
+    "securityContact": "security@cal.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/calcom/cal.diy/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/calcom/cal.diy",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/calcom/cal.diy/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/calcom/cal.diy/index.json",
+    "trust": "/v0/repos/github.com/calcom/cal.diy/trust.json",
+    "profile": "/v0/repos/github.com/calcom/cal.diy/profile.json",
+    "queryTemplate": "/v0/repos/github.com/calcom/cal.diy/query?path={dot_path}",
+    "indexPath": "repos/github.com/calcom/cal.diy/"
+  }
+}

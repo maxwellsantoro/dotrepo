@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "xi-editor",
+    "repo": "xi-editor",
+    "source": "https://github.com/xi-editor/xi-editor"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/lapce/lapce",
+      "notes": "Cross-link from README: the Lapce editor",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "lapce",
+        "repo": "lapce"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/lapce/lapce/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/xi-editor/xi-editor/relations",
+    "repository": "/v0/repos/github.com/xi-editor/xi-editor/index.json",
+    "trust": "/v0/repos/github.com/xi-editor/xi-editor/trust.json",
+    "profile": "/v0/repos/github.com/xi-editor/xi-editor/profile.json",
+    "queryTemplate": "/v0/repos/github.com/xi-editor/xi-editor/query?path={dot_path}",
+    "indexPath": "repos/github.com/xi-editor/xi-editor/"
+  }
+}

@@ -1,0 +1,63 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/TrestleAdmin/trestle"
+generated_at = "2026-06-29T05:28:45.926515Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Trestle"
+description = "Demo Site | Demo Source Code"
+homepage = "https://trestle.io"
+license = "LGPL-3.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Ruby",
+    "SCSS",
+    "Shell",
+]
+build = "npm run build"
+topics = [
+    "ruby",
+    "rails",
+    "admin-dashboard",
+]
+
+[docs]
+root = "https://trestle.io"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/TrestleAdmin/trestle"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/TrestleAdmin/trestle.git"
+default_branch = "main"
+fork = false
+head_sha = "bd7443b3a893a681f1ab0d03af65cdd412458189"
+html_url = "https://github.com/TrestleAdmin/trestle"
+stars = 1995

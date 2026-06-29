@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/slidevjs/slidev"
+generated_at = "2026-06-29T05:14:09.391926Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Slidev"
+description = "Presentation slides for developers 🧑‍💻👩‍💻👨‍💻"
+homepage = "https://sli.dev"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "TypeScript",
+    "Vue",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = [
+    "slides",
+    "presentation",
+    "vite",
+    "vueuse",
+    "vue",
+    "markdown",
+]
+
+[docs]
+root = "https://sli.dev"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/slidevjs/slidev.git"
+default_branch = "main"
+fork = false
+head_sha = "a0bd1b3b483d96d2de5a49690d8898220dfb58cf"
+html_url = "https://github.com/slidevjs/slidev"
+stars = 47426

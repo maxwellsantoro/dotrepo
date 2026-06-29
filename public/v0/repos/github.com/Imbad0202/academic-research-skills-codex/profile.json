@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Imbad0202",
+    "repo": "academic-research-skills-codex",
+    "source": "https://github.com/Imbad0202/academic-research-skills-codex"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Imbad0202/academic-research-skills-codex/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Imbad0202/academic-research-skills-codex",
+    "generatedAt": "2026-06-29T05:26:11.955038Z",
+    "evidencePath": "repos/github.com/Imbad0202/academic-research-skills-codex/evidence.md"
+  },
+  "purpose": "Codex-native packaging of the Academic Research Skills suite.",
+  "name": "Academic Research Skills for Codex",
+  "homepage": "https://github.com/Imbad0202/academic-research-skills-codex",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "HTML",
+    "Python",
+    "Shell",
+    "TeX",
+    "jq"
+  ],
+  "topics": [
+    "academic-pipeline",
+    "academic-research",
+    "academic-writing",
+    "ai-research",
+    "codex",
+    "literature-review",
+    "openai-codex",
+    "peer-review",
+    "prompt-engineering",
+    "research-assistant"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://github.com/Imbad0202/academic-research-skills-codex/security/advisories"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Imbad0202/academic-research-skills-codex/profile.json",
+    "repository": "/v0/repos/github.com/Imbad0202/academic-research-skills-codex/index.json",
+    "trust": "/v0/repos/github.com/Imbad0202/academic-research-skills-codex/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Imbad0202/academic-research-skills-codex/query?path={dot_path}",
+    "indexPath": "repos/github.com/Imbad0202/academic-research-skills-codex/"
+  }
+}

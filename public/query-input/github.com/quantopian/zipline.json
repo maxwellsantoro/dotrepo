@@ -1,0 +1,98 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "quantopian",
+    "repo": "zipline",
+    "source": "https://github.com/quantopian/zipline"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/quantopian/zipline/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/quantopian/zipline",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/quantopian/zipline/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/quantopian/zipline",
+        "generated_at": "2026-06-29T05:16:31.258548Z",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "zipline",
+        "description": "Zipline, a Pythonic Algorithmic Trading Library",
+        "homepage": "https://www.zipline.io",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "Dockerfile",
+          "Emacs Lisp",
+          "Jupyter Notebook",
+          "PowerShell",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "quant",
+          "python",
+          "algorithmic-trading",
+          "zipline"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://www.zipline.io",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/quantopian/zipline.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "014f1fc339dc8b7671d29be2d85ce57d3daec343",
+          "html_url": "https://github.com/quantopian/zipline",
+          "stars": 19918
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

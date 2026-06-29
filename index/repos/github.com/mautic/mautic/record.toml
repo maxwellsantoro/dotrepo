@@ -1,0 +1,64 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/mautic/mautic"
+generated_at = "2026-06-29T05:20:23.051026Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Mautic Open Source Marketing Automation"
+description = "Open Source Marketing Automation Software."
+homepage = "https://www.mautic.org"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "PHP",
+    "SCSS",
+    "Shell",
+    "Twig",
+    "TypeScript",
+]
+build = "npm run build"
+topics = [
+    "marketing-automation",
+    "mautic",
+    "php",
+    "hacktoberfest",
+    "digital-experience-platform",
+    "digitalexperienceplatform",
+    "dxp",
+    "email-marketing",
+    "email-marketing-automation",
+    "email-marketing-software",
+    "marketing-tools",
+    "open-source",
+]
+
+[owners]
+maintainers = ["@mabumusa1"]
+security_contact = "https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability"
+
+[docs]
+root = "https://www.mautic.org"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/mautic/mautic.git"
+default_branch = "7.x"
+fork = false
+head_sha = "154d819eca66777eb6053f614dc2176930e4d9c8"
+html_url = "https://github.com/mautic/mautic"
+stars = 9983

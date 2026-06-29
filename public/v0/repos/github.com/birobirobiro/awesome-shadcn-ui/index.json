@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "birobirobiro",
+    "repo": "awesome-shadcn-ui",
+    "source": "https://github.com/birobirobiro/awesome-shadcn-ui"
+  },
+  "repository": {
+    "name": "awesome-shadcn/ui",
+    "description": "A curated list of awesome things related to shadcn/ui",
+    "homepage": "https://awesomeshadcn.dev/",
+    "docsRoot": "https://shuip.plvo.dev/docs"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/birobirobiro/awesome-shadcn-ui/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/birobirobiro/awesome-shadcn-ui",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/birobirobiro/awesome-shadcn-ui/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/birobirobiro/awesome-shadcn-ui/index.json",
+    "trust": "/v0/repos/github.com/birobirobiro/awesome-shadcn-ui/trust.json",
+    "profile": "/v0/repos/github.com/birobirobiro/awesome-shadcn-ui/profile.json",
+    "queryTemplate": "/v0/repos/github.com/birobirobiro/awesome-shadcn-ui/query?path={dot_path}",
+    "indexPath": "repos/github.com/birobirobiro/awesome-shadcn-ui/"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "aws",
+    "repo": "aws-toolkit-vscode",
+    "source": "https://github.com/aws/aws-toolkit-vscode"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/aws/aws-toolkit-vscode/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/aws/aws-toolkit-vscode",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@aws/aws-toolkits-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/aws/aws-toolkit-vscode/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/aws/aws-toolkit-vscode",
+        "generated_at": "2026-06-29T05:28:42.167996Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@aws/aws-toolkits-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "AWS Extensions for Visual Studio Code",
+        "description": "This project is open source.",
+        "homepage": "https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.amazon-q-vscode",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C#",
+          "CSS",
+          "Dockerfile",
+          "Go",
+          "HCL",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Makefile",
+          "PowerShell",
+          "Python",
+          "Ruby",
+          "Shell",
+          "TypeScript",
+          "Vue"
+        ],
+        "build": "npm run build",
+        "test": "npm test",
+        "topics": [
+          "aws",
+          "s3",
+          "cloudformation",
+          "cdk",
+          "amazon",
+          "serverless",
+          "lambda",
+          "vscode",
+          "vscode-extension",
+          "codecatalyst",
+          "codewhisperer",
+          "amazon-q"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@aws/aws-toolkits-team",
+          "@aws/codewhisperer-team",
+          "@aws/earlybird",
+          "@aws/access-analyzer",
+          "@aws/cfn-dev-productivity",
+          "@aws/sagemaker-code-editor"
+        ],
+        "team": "@aws/aws-toolkits-team",
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.amazon-q-vscode",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/aws/aws-toolkit-vscode.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "2e2c1c26b1ec973be4560a2f711e912ccc153a2f",
+          "html_url": "https://github.com/aws/aws-toolkit-vscode",
+          "stars": 1996
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

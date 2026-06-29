@@ -1,0 +1,74 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "mdx-js",
+    "repo": "mdx",
+    "source": "https://github.com/mdx-js/mdx"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/mdx-js/mdx/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/mdx-js/mdx",
+    "generatedAt": "2026-06-29T05:17:36.374137Z",
+    "evidencePath": "repos/github.com/mdx-js/mdx/evidence.md"
+  },
+  "purpose": "[MDX][website] is an authorable format that lets you seamlessly write JSX in your markdown documents.",
+  "name": "Markdown for the component era",
+  "homepage": "https://mdxjs.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "JavaScript",
+    "MDX"
+  ],
+  "topics": [
+    "mdx",
+    "markdown",
+    "react",
+    "vue",
+    "jsx",
+    "remark",
+    "unified"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://mdxjs.com",
+    "gettingStarted": "https://mdxjs.com/getting-started/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/mdx-js/mdx/profile.json",
+    "repository": "/v0/repos/github.com/mdx-js/mdx/index.json",
+    "trust": "/v0/repos/github.com/mdx-js/mdx/trust.json",
+    "queryTemplate": "/v0/repos/github.com/mdx-js/mdx/query?path={dot_path}",
+    "indexPath": "repos/github.com/mdx-js/mdx/"
+  }
+}

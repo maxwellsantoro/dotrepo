@@ -1,0 +1,52 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/spring-cloud/spring-cloud-netflix"
+generated_at = "2026-06-29T05:26:23.934292Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "spring-cloud-netflix"
+description = "Integration with Netflix OSS components"
+homepage = "http://cloud.spring.io/spring-cloud-netflix/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "FreeMarker",
+    "Java",
+    "Shell",
+]
+topics = [
+    "java",
+    "spring",
+    "spring-cloud",
+    "spring-boot",
+    "microservices",
+    "cloud-native",
+    "netflixoss",
+    "netflix-eureka",
+    "netflix-zuul",
+    "netflix-hystrix",
+    "ribbon",
+    "feign",
+    "spring-cloud-core",
+]
+
+[docs]
+root = "http://cloud.spring.io/spring-cloud-netflix/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/spring-cloud/spring-cloud-netflix.git"
+default_branch = "main"
+fork = false
+head_sha = "d08a176b17ac7bf0e4598890cf91d9957d90db35"
+html_url = "https://github.com/spring-cloud/spring-cloud-netflix"
+stars = 4969

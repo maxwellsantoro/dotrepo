@@ -1,0 +1,58 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Alfred1984",
+    "repo": "interesting-python",
+    "source": "https://github.com/Alfred1984/interesting-python"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Alfred1984/interesting-python/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Alfred1984/interesting-python",
+    "generatedAt": "2026-06-29T05:24:00.243765Z",
+    "evidencePath": "repos/github.com/Alfred1984/interesting-python/evidence.md"
+  },
+  "purpose": "可以用Python实现的有趣的小项目，内容包括Python爬虫、Python数据分析、机器学习、深度学习等，持续更新中。 本Repository主要用于存放项目代码，对应的项目文章可以关注公众号。",
+  "name": "interesting-python: 有趣的Python爬虫和数据分析小项目",
+  "homepage": "https://github.com/Alfred1984/interesting-python",
+  "visibility": "public",
+  "languages": [
+    "Jupyter Notebook",
+    "Python"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Alfred1984/interesting-python/profile.json",
+    "repository": "/v0/repos/github.com/Alfred1984/interesting-python/index.json",
+    "trust": "/v0/repos/github.com/Alfred1984/interesting-python/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Alfred1984/interesting-python/query?path={dot_path}",
+    "indexPath": "repos/github.com/Alfred1984/interesting-python/"
+  }
+}

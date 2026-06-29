@@ -1,0 +1,32 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/KieronQuinn/PersistentSearch"
+generated_at = "2026-06-29T05:27:33.298898Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "This project is deprecated"
+description = "A library that implements the persistent search bar seen on apps such as Google Now, Google Maps and Google Play"
+homepage = "https://github.com/KieronQuinn/PersistentSearch"
+visibility = "public"
+languages = ["Java"]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/KieronQuinn/PersistentSearch.git"
+default_branch = "master"
+fork = false
+head_sha = "a342b0a9545040373b49b7dbeb2003844a10660f"
+html_url = "https://github.com/KieronQuinn/PersistentSearch"
+stars = 1998

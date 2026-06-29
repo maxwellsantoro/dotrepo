@@ -1,0 +1,101 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Alibaba-NLP",
+    "repo": "DeepResearch",
+    "source": "https://github.com/Alibaba-NLP/DeepResearch"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Alibaba-NLP/DeepResearch/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Alibaba-NLP/DeepResearch",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Alibaba-NLP/DeepResearch/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Alibaba-NLP/DeepResearch",
+        "generated_at": "2026-06-29T05:17:58.575705Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Alibaba-NLP%2FDeepResearch | Trendshift",
+        "description": "👏 Welcome to try Tongyi DeepResearch via our ** Modelscope online demo** or **🤗 Huggingface online demo** or **bailian service**!",
+        "homepage": "https://tongyi-agent.github.io/blog/introducing-tongyi-deep-research/",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "agent",
+          "llm",
+          "artificial-intelligence",
+          "information-seeking",
+          "alibaba",
+          "web-agent",
+          "deepresearch",
+          "tongyi",
+          "deep-research"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://tongyi-agent.github.io/blog/introducing-tongyi-deep-research/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Alibaba-NLP/DeepResearch.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "f72f75d8c3eb842f2bbbab096a12206ff66e270f",
+          "html_url": "https://github.com/Alibaba-NLP/DeepResearch",
+          "stars": 19568
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,67 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nfqws",
+    "repo": "nfqws-keenetic",
+    "source": "https://github.com/nfqws/nfqws-keenetic"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nfqws/nfqws-keenetic/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nfqws/nfqws-keenetic",
+    "generatedAt": "2026-06-29T05:27:27.845043Z",
+    "evidencePath": "repos/github.com/nfqws/nfqws-keenetic/evidence.md"
+  },
+  "purpose": "Пакеты для установки `nfqws на маршрутизаторы.",
+  "name": "nfqws-keenetic",
+  "homepage": "https://github.com/nfqws/nfqws-keenetic",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Makefile",
+    "Shell"
+  ],
+  "topics": [
+    "anti-dpi",
+    "entware",
+    "keenetic",
+    "openwrt"
+  ],
+  "execution": {
+    "build": "make CONFIG_NO_STRIP=y CONFIG_USE_APK=y package/nfqws-keenetic/compile V=s"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nfqws/nfqws-keenetic/profile.json",
+    "repository": "/v0/repos/github.com/nfqws/nfqws-keenetic/index.json",
+    "trust": "/v0/repos/github.com/nfqws/nfqws-keenetic/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nfqws/nfqws-keenetic/query?path={dot_path}",
+    "indexPath": "repos/github.com/nfqws/nfqws-keenetic/"
+  }
+}

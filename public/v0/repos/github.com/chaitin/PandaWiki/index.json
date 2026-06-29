@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "chaitin",
+    "repo": "PandaWiki",
+    "source": "https://github.com/chaitin/PandaWiki"
+  },
+  "repository": {
+    "name": "PandaWiki",
+    "description": "PandaWiki 是一款 AI 大模型驱动的**开源知识库搭建系统**，帮助你快速构建智能化的 **产品文档、技术文档、FAQ、博客系统**，借助大模型的力量为你提供 **AI 创作、AI 问答、AI 搜索** 等能力。",
+    "homepage": "https://pandawiki.docs.baizhi.cloud/",
+    "docsRoot": "https://pandawiki.docs.baizhi.cloud/"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/chaitin/PandaWiki/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/chaitin/PandaWiki",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. Filled `repo.name` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional. Inferred `repo.build` from `.github/workflows/web.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/chaitin/PandaWiki/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/chaitin/PandaWiki/index.json",
+    "trust": "/v0/repos/github.com/chaitin/PandaWiki/trust.json",
+    "profile": "/v0/repos/github.com/chaitin/PandaWiki/profile.json",
+    "queryTemplate": "/v0/repos/github.com/chaitin/PandaWiki/query?path={dot_path}",
+    "indexPath": "repos/github.com/chaitin/PandaWiki/"
+  }
+}

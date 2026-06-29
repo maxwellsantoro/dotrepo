@@ -1,0 +1,98 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/metabase/metabase"
+generated_at = "2026-06-29T05:13:52.082337Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Metabase"
+description = "Metabase is the easy, open-source way for everyone in your company to ask questions and learn from data."
+homepage = "https://metabase.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "CSS",
+    "Clojure",
+    "Dockerfile",
+    "Emacs Lisp",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "MDX",
+    "Mustache",
+    "Python",
+    "Shell",
+    "TypeScript",
+]
+build = "bun run build"
+test = "bun run test"
+topics = [
+    "analytics",
+    "businessintelligence",
+    "dashboard",
+    "reporting",
+    "slack",
+    "clojure",
+    "database",
+    "metabase",
+    "postgres",
+    "postgresql",
+    "mysql",
+    "bi",
+    "visualization",
+    "data",
+    "data-analysis",
+    "sql-editor",
+    "data-visualization",
+    "business-intelligence",
+]
+
+[owners]
+maintainers = [
+    "@metabase/core-backend-querying-platform",
+    "@metabase/graphy",
+    "@metabase/embedding",
+    "@metabase/tech-writers",
+    "@metabase/devexp",
+    "@metabase/cloud-ops",
+    "@metabase/metabot-frontend",
+]
+security_contact = "security@metabase.com"
+
+[docs]
+root = "https://metabase.com"
+getting_started = "https://www.metabase.com/docs/latest/installation-and-operation/installing-metabase"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/metabase/metabase"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/metabase/metabase.git"
+default_branch = "master"
+fork = false
+head_sha = "1290678ca7cb72770abeee822395bd59eeba8c98"
+html_url = "https://github.com/metabase/metabase"
+stars = 47958

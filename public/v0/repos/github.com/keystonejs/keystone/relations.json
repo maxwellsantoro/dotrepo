@@ -1,0 +1,105 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "keystonejs",
+    "repo": "keystone",
+    "source": "https://github.com/keystonejs/keystone"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/keystonejs/keystone",
+      "notes": "Declared repository in package.json.",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "manifest"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "keystonejs",
+        "repo": "keystone",
+        "source": "https://github.com/keystonejs/keystone"
+      },
+      "profile": {
+        "identity": {
+          "host": "github.com",
+          "owner": "keystonejs",
+          "repo": "keystone",
+          "source": "https://github.com/keystonejs/keystone"
+        },
+        "name": "Keystone",
+        "purpose": "Keystone helps you build faster and scale further than any other CMS or App Framework.",
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "TypeScript"
+        ],
+        "topics": [
+          "cms",
+          "cms-framework",
+          "graphql",
+          "nodejs",
+          "react",
+          "keystonejs"
+        ],
+        "completeness": {
+          "hasBuild": true,
+          "hasTest": true,
+          "hasDocs": true,
+          "hasSecurityContact": true,
+          "hasOwnershipSignal": false,
+          "hasLicense": true,
+          "conflictCount": 0
+        },
+        "trust": {
+          "selectedStatus": "inferred",
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "selectionReason": "only_matching_record"
+        },
+        "matched": [
+          "relation"
+        ],
+        "ranking": {
+          "score": 16,
+          "matchedFieldCount": 1,
+          "completenessSignalCount": 5,
+          "basis": [
+            "matchedFields",
+            "profileCompleteness",
+            "trustConfidence"
+          ]
+        },
+        "links": {
+          "self": "/v0/repos/github.com/keystonejs/keystone/profile.json",
+          "repository": "/v0/repos/github.com/keystonejs/keystone/index.json",
+          "trust": "/v0/repos/github.com/keystonejs/keystone/trust.json",
+          "queryTemplate": "/v0/repos/github.com/keystonejs/keystone/query?path={dot_path}",
+          "indexPath": "repos/github.com/keystonejs/keystone/"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/keystonejs/keystone/relations",
+    "repository": "/v0/repos/github.com/keystonejs/keystone/index.json",
+    "trust": "/v0/repos/github.com/keystonejs/keystone/trust.json",
+    "profile": "/v0/repos/github.com/keystonejs/keystone/profile.json",
+    "queryTemplate": "/v0/repos/github.com/keystonejs/keystone/query?path={dot_path}",
+    "indexPath": "repos/github.com/keystonejs/keystone/"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "samratashok",
+    "repo": "nishang",
+    "source": "https://github.com/samratashok/nishang"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/samratashok/nishang/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/samratashok/nishang",
+    "generatedAt": "2026-06-29T05:20:27.361443Z",
+    "evidencePath": "repos/github.com/samratashok/nishang/evidence.md"
+  },
+  "purpose": "By Nikhil Mittal Founder of Altered Security - Hands-on red team and enterprise security training!",
+  "name": "Nishang",
+  "homepage": "https://github.com/samratashok/nishang",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "ASP.NET",
+    "PowerShell"
+  ],
+  "topics": [
+    "powershell",
+    "nishang",
+    "security",
+    "red-team",
+    "penetration-testing",
+    "infosec",
+    "hacking",
+    "redteam",
+    "activedirectory"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://www.alteredsecurity.com/"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/samratashok/nishang/profile.json",
+    "repository": "/v0/repos/github.com/samratashok/nishang/index.json",
+    "trust": "/v0/repos/github.com/samratashok/nishang/trust.json",
+    "queryTemplate": "/v0/repos/github.com/samratashok/nishang/query?path={dot_path}",
+    "indexPath": "repos/github.com/samratashok/nishang/"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "kokke",
+    "repo": "tiny-AES-c",
+    "source": "https://github.com/kokke/tiny-AES-c"
+  },
+  "repository": {
+    "name": "Tiny AES in C",
+    "description": "This is a small and portable implementation of the AES ECB, CTR and CBC encryption algorithms written in C.",
+    "homepage": "https://github.com/kokke/tiny-AES-c"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/kokke/tiny-AES-c/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/kokke/tiny-AES-c",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/c-cpp.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/kokke/tiny-AES-c/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/kokke/tiny-AES-c/index.json",
+    "trust": "/v0/repos/github.com/kokke/tiny-AES-c/trust.json",
+    "profile": "/v0/repos/github.com/kokke/tiny-AES-c/profile.json",
+    "queryTemplate": "/v0/repos/github.com/kokke/tiny-AES-c/query?path={dot_path}",
+    "indexPath": "repos/github.com/kokke/tiny-AES-c/"
+  }
+}

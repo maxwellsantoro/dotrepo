@@ -1,0 +1,41 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/stanzhai/be-a-professional-programmer"
+generated_at = "2026-06-29T05:22:19.663277Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "be-a-professional-programmer"
+description = "笔者作为一位tool mad，将工作以来用到的各种优秀资料、神器及框架整理在此，毕竟好记性不如烂键盘，此项目可以作为自己的不时之需。"
+homepage = "http://tools.stanzhai.site"
+license = "MIT"
+visibility = "public"
+languages = []
+topics = [
+    "awesome",
+    "programmer",
+    "programmer-tool",
+]
+
+[docs]
+root = "http://hadoop.readthedocs.org/en/latest/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/stanzhai/be-a-professional-programmer.git"
+default_branch = "gh-pages"
+fork = false
+head_sha = "ad207abd04286568354f2a533979ebdd8906eaa0"
+html_url = "https://github.com/stanzhai/be-a-professional-programmer"
+stars = 9893

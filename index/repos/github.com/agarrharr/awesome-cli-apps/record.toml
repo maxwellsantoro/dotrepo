@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/agarrharr/awesome-cli-apps"
+generated_at = "2026-06-29T05:16:46.509659Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "awesome cli apps"
+description = "Proudly maintained by:"
+homepage = "https://github.com/agarrharr/awesome-cli-apps"
+visibility = "public"
+languages = ["Shell"]
+topics = [
+    "awesome-list",
+    "awesome",
+    "list",
+    "cli",
+    "cli-app",
+]
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/sindresorhus/awesome"
+notes = "Cross-link from README: awesome"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/agarrharr/awesome-cli-apps.git"
+default_branch = "master"
+fork = false
+head_sha = "59c034d58c16f7bcc0d2f36dd694b87382e0c72d"
+html_url = "https://github.com/agarrharr/awesome-cli-apps"
+stars = 19867

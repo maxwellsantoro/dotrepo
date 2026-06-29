@@ -1,0 +1,64 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/akaunting/akaunting"
+generated_at = "2026-06-29T05:21:36.53816Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Requirements"
+description = "Akaunting uses Laravel, the best existing PHP framework, as the foundation framework and Module package for Apps."
+homepage = "https://akaunting.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Blade",
+    "PHP",
+    "Vue",
+]
+topics = [
+    "php",
+    "laravel",
+    "accounting",
+    "invoices",
+    "payments",
+    "expenses",
+    "laravel-application",
+    "invoicing",
+    "billing",
+    "budget",
+    "money",
+    "balance",
+    "bookkeeping",
+    "fintech",
+    "finance",
+    "payroll",
+    "crm",
+    "erp",
+    "akaunting",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@akaunting.com"
+
+[docs]
+root = "https://akaunting.com/hc/docs"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/akaunting/akaunting.git"
+default_branch = "master"
+fork = false
+head_sha = "c115404fca0be660d0641bd3e4a5f979ddbbbd00"
+html_url = "https://github.com/akaunting/akaunting"
+stars = 9918

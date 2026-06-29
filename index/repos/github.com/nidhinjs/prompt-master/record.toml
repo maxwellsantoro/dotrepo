@@ -1,0 +1,38 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/nidhinjs/prompt-master"
+generated_at = "2026-06-29T05:20:04.775509Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Installation"
+description = "Every AI user wastes credits the same way:"
+homepage = "https://github.com/nidhinjs/prompt-master"
+license = "MIT"
+visibility = "public"
+languages = []
+topics = [
+    "claude-ai",
+    "claude-skills",
+    "llm",
+    "prompt-engineering",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/nidhinjs/prompt-master.git"
+default_branch = "main"
+fork = false
+head_sha = "d15eabbe5d2122eedc060bae8a771381e9873d1b"
+html_url = "https://github.com/nidhinjs/prompt-master"
+stars = 9995

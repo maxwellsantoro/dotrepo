@@ -1,0 +1,35 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/lib/pq"
+generated_at = "2026-06-29T05:22:08.543684Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Connecting"
+description = "Use the `postgres driver name in the `sql.Open()` call:"
+homepage = "https://pkg.go.dev/github.com/lib/pq"
+license = "MIT"
+visibility = "public"
+languages = ["Go"]
+build = "go build ./..."
+test = "go test ./..."
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/lib/pq.git"
+default_branch = "master"
+fork = false
+head_sha = "76df97d6b105229ea6ee82dda41f3f53e5f95010"
+html_url = "https://github.com/lib/pq"
+stars = 9904

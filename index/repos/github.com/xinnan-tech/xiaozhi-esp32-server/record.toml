@@ -1,0 +1,55 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/xinnan-tech/xiaozhi-esp32-server"
+generated_at = "2026-06-29T05:21:34.523179Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "xiaozhi-esp32-server"
+description = "本项目基于人机共生智能理论和技术研发智能终端软硬件体系为开源智能硬件项目 xiaozhi-esp32提供后端服务 根据小智通信协议使用Python、Java、Vue实现 支持MQTT+UDP协议、Websocket协议、MCP接入点、声纹识别、知识库"
+homepage = "http://xiaozhi.biz"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Lua",
+    "Python",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Vue",
+]
+topics = [
+    "dify",
+    "esp32",
+    "xiaozhi-esp32",
+    "mcp-server",
+    "xiaozhi",
+    "xiaozhi-ai",
+    "xiaozhi-server",
+]
+
+[docs]
+root = "http://xiaozhi.biz"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/xinnan-tech/xiaozhi-esp32-server.git"
+default_branch = "main"
+fork = false
+head_sha = "06b0ff139b39d9e5e47e6eb6633df5d5bba83712"
+html_url = "https://github.com/xinnan-tech/xiaozhi-esp32-server"
+stars = 9922

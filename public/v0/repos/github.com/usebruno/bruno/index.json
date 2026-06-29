@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "usebruno",
+    "repo": "bruno",
+    "source": "https://github.com/usebruno/bruno"
+  },
+  "repository": {
+    "name": "Bruno",
+    "description": "Bruno is a new and innovative API client, aimed at revolutionizing the status quo represented by Postman and similar tools out there.",
+    "homepage": "https://www.usebruno.com/",
+    "docsRoot": "https://docs.usebruno.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/usebruno/bruno/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/usebruno/bruno",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/flaky-test-detector.yml`. Inferred `repo.test` from `.github/workflows/flaky-test-detector.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/usebruno/bruno/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/usebruno/bruno/index.json",
+    "trust": "/v0/repos/github.com/usebruno/bruno/trust.json",
+    "profile": "/v0/repos/github.com/usebruno/bruno/profile.json",
+    "queryTemplate": "/v0/repos/github.com/usebruno/bruno/query?path={dot_path}",
+    "indexPath": "repos/github.com/usebruno/bruno/"
+  }
+}

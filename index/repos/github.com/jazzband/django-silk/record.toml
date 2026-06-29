@@ -1,0 +1,54 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/jazzband/django-silk"
+generated_at = "2026-06-29T05:25:15.437956Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Silk"
+description = "Silk is a live profiling and inspection tool for the Django framework."
+homepage = "https://github.com/jazzband/django-silk"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Python",
+    "SCSS",
+]
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/jazzband/django-silk"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/jazzband/django-silk.git"
+default_branch = "master"
+fork = false
+head_sha = "ec4574d802759fdb3fa70f8248953ab4c01c0ab0"
+html_url = "https://github.com/jazzband/django-silk"
+stars = 4978

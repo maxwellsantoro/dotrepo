@@ -1,0 +1,86 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "QwenLM",
+    "repo": "Qwen3-VL",
+    "source": "https://github.com/QwenLM/Qwen3-VL"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/QwenLM/Qwen3-VL/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/QwenLM/Qwen3-VL",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/QwenLM/Qwen3-VL/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/QwenLM/Qwen3-VL",
+        "generated_at": "2026-06-29T05:18:16.041273Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Qwen3-VL",
+        "description": "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date.",
+        "homepage": "https://github.com/QwenLM/Qwen3-VL",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Jupyter Notebook",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/QwenLM/Qwen3-VL.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "96588727e44c78b25ba03ea03b8e12f7e64fd0da",
+          "html_url": "https://github.com/QwenLM/Qwen3-VL",
+          "stars": 19492
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

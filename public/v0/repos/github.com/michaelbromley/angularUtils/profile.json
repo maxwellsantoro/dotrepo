@@ -1,0 +1,60 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "michaelbromley",
+    "repo": "angularUtils",
+    "source": "https://github.com/michaelbromley/angularUtils"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/michaelbromley/angularUtils/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/michaelbromley/angularUtils",
+    "generatedAt": "2026-06-29T05:29:44.889549Z",
+    "evidencePath": "repos/github.com/michaelbromley/angularUtils/evidence.md"
+  },
+  "purpose": "I am working on a large-scale AngularJS-based project and I'll be extracting any useful re-usable components that I make and putting them here.",
+  "name": "Angular Utilities",
+  "homepage": "https://github.com/michaelbromley/angularUtils",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "JavaScript"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/michaelbromley/angularUtils/profile.json",
+    "repository": "/v0/repos/github.com/michaelbromley/angularUtils/index.json",
+    "trust": "/v0/repos/github.com/michaelbromley/angularUtils/trust.json",
+    "queryTemplate": "/v0/repos/github.com/michaelbromley/angularUtils/query?path={dot_path}",
+    "indexPath": "repos/github.com/michaelbromley/angularUtils/"
+  }
+}

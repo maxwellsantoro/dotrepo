@@ -1,0 +1,127 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Homebrew",
+    "repo": "brew",
+    "source": "https://github.com/Homebrew/brew"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Homebrew/brew/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Homebrew/brew",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Homebrew/brew/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Homebrew/brew",
+        "generated_at": "2026-06-29T05:13:26.413575Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Homebrew",
+        "description": "See Homebrew's homepage at `brew.sh for installation instructions, what homebrew does, packages, `brew bundle and more.",
+        "homepage": "https://brew.sh",
+        "license": "BSD-2-Clause",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CMake",
+          "Dockerfile",
+          "HTML",
+          "PostScript",
+          "Rich Text Format",
+          "Roff",
+          "Ruby",
+          "Shell",
+          "Swift"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "homebrew",
+          "ruby",
+          "macos",
+          "package-manager",
+          "brew"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@Homebrew/lead-maintainers",
+          "@MikeMcQuaid"
+        ],
+        "team": "@Homebrew/lead-maintainers",
+        "security_contact": "https://github.com/Homebrew/.github/blob/HEAD/SECURITY.md"
+      },
+      "docs": {
+        "root": "https://creativecommons.org/licenses/by/4.0/",
+        "getting_started": "https://docs.brew.sh/Installation",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/sponsors/Homebrew",
+            "notes": "Cross-link from README: GitHub Sponsors",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Homebrew/brew.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "a8fac8c184237b67888df5cc4762d1123314651c",
+          "html_url": "https://github.com/Homebrew/brew",
+          "stars": 48796
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,72 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "KeygraphHQ",
+    "repo": "shannon",
+    "source": "https://github.com/KeygraphHQ/shannon"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/KeygraphHQ/shannon/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/KeygraphHQ/shannon",
+    "generatedAt": "2026-06-29T05:15:32.910315Z",
+    "evidencePath": "repos/github.com/KeygraphHQ/shannon/evidence.md"
+  },
+  "purpose": "Shannon is an autonomous, white-box AI pentester for web applications and APIs.",
+  "name": "Shannon",
+  "homepage": "https://keygraph.io/",
+  "license": "AGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "JavaScript",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "penetration-testing",
+    "pentesting",
+    "security-audit",
+    "security-automation",
+    "security-tools"
+  ],
+  "execution": {
+    "build": "pnpm build"
+  },
+  "docs": {
+    "root": "https://keygraph.io/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/KeygraphHQ/shannon/profile.json",
+    "repository": "/v0/repos/github.com/KeygraphHQ/shannon/index.json",
+    "trust": "/v0/repos/github.com/KeygraphHQ/shannon/trust.json",
+    "queryTemplate": "/v0/repos/github.com/KeygraphHQ/shannon/query?path={dot_path}",
+    "indexPath": "repos/github.com/KeygraphHQ/shannon/"
+  }
+}

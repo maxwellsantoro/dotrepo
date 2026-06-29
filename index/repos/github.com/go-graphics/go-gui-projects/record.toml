@@ -1,0 +1,48 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/go-graphics/go-gui-projects"
+generated_at = "2026-06-29T05:29:06.292747Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "A list of Go GUI/graphics/image related projects"
+description = "DarwinKit (old name: MacDriver) lets you work with Apple frameworks and build native Mac applications using Go."
+homepage = "https://github.com/go-graphics/go-gui-projects"
+license = "MIT"
+visibility = "public"
+languages = []
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/progrium/darwinkit"
+notes = "Cross-link from README: DarwinKit"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/go-graphics/go-gui-projects.git"
+default_branch = "master"
+fork = false
+head_sha = "1872cc12d607253a3da1dac54cd8e0db1180fd41"
+html_url = "https://github.com/go-graphics/go-gui-projects"
+stars = 1995

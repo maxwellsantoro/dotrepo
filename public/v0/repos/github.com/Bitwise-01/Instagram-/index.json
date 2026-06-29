@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Bitwise-01",
+    "repo": "Instagram-",
+    "source": "https://github.com/Bitwise-01/Instagram-"
+  },
+  "repository": {
+    "name": "Instagram Bruter",
+    "description": "This program will brute force any Instagram account you send it its way given a list of proxies.",
+    "homepage": "https://github.com/Bitwise-01/Instagram-"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Bitwise-01/Instagram-/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Bitwise-01/Instagram-",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Bitwise-01/Instagram-/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Bitwise-01/Instagram-/index.json",
+    "trust": "/v0/repos/github.com/Bitwise-01/Instagram-/trust.json",
+    "profile": "/v0/repos/github.com/Bitwise-01/Instagram-/profile.json",
+    "queryTemplate": "/v0/repos/github.com/Bitwise-01/Instagram-/query?path={dot_path}",
+    "indexPath": "repos/github.com/Bitwise-01/Instagram-/"
+  }
+}

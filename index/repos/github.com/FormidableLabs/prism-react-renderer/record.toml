@@ -1,0 +1,59 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/FormidableLabs/prism-react-renderer"
+generated_at = "2026-06-29T05:29:16.84074Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Prism React Renderer"
+description = "A lean Prism highlighter component for React"
+homepage = "https://github.com/FormidableLabs/prism-react-renderer"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "TypeScript",
+]
+build = "pnpm build"
+test = "pnpm test"
+topics = [
+    "react",
+    "reactjs",
+    "prismjs",
+    "highlight",
+]
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/FormidableLabs/prism-react-renderer"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/FormidableLabs/prism-react-renderer.git"
+default_branch = "master"
+fork = false
+head_sha = "e1c83a468b05df7f452b3ad7e4ae5ab874574d4e"
+html_url = "https://github.com/FormidableLabs/prism-react-renderer"
+stars = 1994

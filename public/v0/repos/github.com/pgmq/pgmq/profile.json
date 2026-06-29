@@ -1,0 +1,75 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "pgmq",
+    "repo": "pgmq",
+    "source": "https://github.com/pgmq/pgmq"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/pgmq/pgmq/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/pgmq/pgmq",
+    "generatedAt": "2026-06-29T05:24:54.260691Z",
+    "evidencePath": "repos/github.com/pgmq/pgmq/evidence.md"
+  },
+  "purpose": "A lightweight message queue. Like AWS SQS and RSMQ but on Postgres.",
+  "name": "pgmq",
+  "homepage": "https://pgmq.github.io/pgmq/",
+  "license": "PostgreSQL",
+  "visibility": "public",
+  "languages": [
+    "Makefile",
+    "PLpgSQL",
+    "Python",
+    "Ruby",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "message-queue"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://pgmq.github.io/pgmq/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@ChuckHend",
+      "@theory",
+      "@v0idpwn",
+      "@spencewenski"
+    ]
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/pgmq/pgmq/profile.json",
+    "repository": "/v0/repos/github.com/pgmq/pgmq/index.json",
+    "trust": "/v0/repos/github.com/pgmq/pgmq/trust.json",
+    "queryTemplate": "/v0/repos/github.com/pgmq/pgmq/query?path={dot_path}",
+    "indexPath": "repos/github.com/pgmq/pgmq/"
+  }
+}

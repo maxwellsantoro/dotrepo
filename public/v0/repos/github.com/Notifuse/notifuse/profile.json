@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Notifuse",
+    "repo": "notifuse",
+    "source": "https://github.com/Notifuse/notifuse"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Notifuse/notifuse/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Notifuse/notifuse",
+    "generatedAt": "2026-06-29T05:28:48.148806Z",
+    "evidencePath": "repos/github.com/Notifuse/notifuse/evidence.md"
+  },
+  "purpose": "☁️ Notifuse Cloud — from $16/month** · **🎯 Try the Live Demo",
+  "name": "Notifuse",
+  "homepage": "https://www.notifuse.com",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "api",
+    "email",
+    "mailing-list",
+    "newsletter",
+    "self-hosted",
+    "transactional"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://www.notifuse.com"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/Notifuse/notifuse/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Notifuse/notifuse/profile.json",
+    "repository": "/v0/repos/github.com/Notifuse/notifuse/index.json",
+    "trust": "/v0/repos/github.com/Notifuse/notifuse/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Notifuse/notifuse/query?path={dot_path}",
+    "indexPath": "repos/github.com/Notifuse/notifuse/"
+  }
+}

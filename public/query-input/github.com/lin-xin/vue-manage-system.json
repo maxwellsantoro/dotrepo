@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "lin-xin",
+    "repo": "vue-manage-system",
+    "source": "https://github.com/lin-xin/vue-manage-system"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/lin-xin/vue-manage-system/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/lin-xin/vue-manage-system",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/lin-xin/vue-manage-system/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/lin-xin/vue-manage-system",
+        "generated_at": "2026-06-29T05:17:37.977511Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "vue-manage-system",
+        "description": "基于 Vue3 + pinia + Element Plus 的后台管理系统解决方案。线上演示",
+        "homepage": "https://lin-xin.github.io/example/vue-manage-system/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "HTML",
+          "TypeScript",
+          "Vue"
+        ],
+        "build": "npm run build",
+        "test": null,
+        "topics": [
+          "vue",
+          "element-plus",
+          "pinia",
+          "typescript"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://lin-xin.github.io/example/vue-manage-system/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/lin-xin/vue-manage-system.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "6a7019ec1a74cc05297d18647a5f944c242d468a",
+          "html_url": "https://github.com/lin-xin/vue-manage-system",
+          "stars": 19639
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

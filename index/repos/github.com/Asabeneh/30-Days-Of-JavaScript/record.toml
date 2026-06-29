@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/Asabeneh/30-Days-Of-JavaScript"
+generated_at = "2026-06-29T05:14:46.127974Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "30-Days-Of-JavaScript"
+description = "30 days of JavaScript programming challenge is a step-by-step guide to learn JavaScript programming language in 30 days. This challenge may take more than 100 days,  please just follow your own pace. These videos may help too: https://www.youtube.com/channel/UC7PNRuno1rzYPb1xLa4yktw"
+homepage = "https://github.com/Asabeneh/30-Days-Of-JavaScript"
+visibility = "public"
+languages = [
+    "HTML",
+    "JavaScript",
+]
+topics = [
+    "30daysofjavascript",
+    "javascript-for-everyone",
+    "css",
+    "html",
+    "javascript",
+    "react",
+    "angular",
+    "js",
+    "json",
+    "node",
+    "nodejs",
+    "typescript",
+    "vue",
+    "d3",
+    "d3js",
+    "redux",
+    "challenge",
+    "programming",
+    "webdevelopment",
+    "website",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Asabeneh/30-Days-Of-JavaScript.git"
+default_branch = "master"
+fork = false
+head_sha = "e067490424f86ebad32625ca0ba035f95c05a8dd"
+html_url = "https://github.com/Asabeneh/30-Days-Of-JavaScript"
+stars = 46510

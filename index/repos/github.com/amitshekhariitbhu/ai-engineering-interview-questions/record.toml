@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
+generated_at = "2026-06-29T05:27:12.862122Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "AI Engineering Interview Questions and Answers"
+description = "AI Engineering Interview Questions and Answers - Your Cheat Sheet For AI Engineering Interviews"
+homepage = "https://outcomeschool.com/program/ai-and-machine-learning"
+license = "Apache-2.0"
+visibility = "public"
+languages = ["Markdown"]
+topics = [
+    "agents",
+    "ai",
+    "ai-agents",
+    "ai-engineering",
+    "interview",
+    "interview-preparation",
+    "interview-questions",
+    "questions-and-answers",
+    "fine-tuning",
+    "llm",
+    "mcp",
+    "quantization",
+    "rag",
+]
+
+[docs]
+root = "https://outcomeschool.com/blog/direct-preference-optimization-dpo"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions.git"
+default_branch = "main"
+fork = false
+head_sha = "bb2b14455a09cf13cb369a0237c04eda486991f8"
+html_url = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
+stars = 1998

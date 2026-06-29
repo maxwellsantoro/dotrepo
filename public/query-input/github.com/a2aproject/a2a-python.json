@@ -1,0 +1,107 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "a2aproject",
+    "repo": "a2a-python",
+    "source": "https://github.com/a2aproject/a2a-python"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/a2aproject/a2a-python/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/a2aproject/a2a-python",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@a2aproject/google-a2a-eng` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/a2aproject/a2a-python/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/a2aproject/a2a-python",
+        "generated_at": "2026-06-29T05:28:13.935903Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@a2aproject/google-a2a-eng` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "A2A Python SDK",
+        "description": "A Python library for running agentic applications as A2A Servers, following the Agent2Agent (A2A) Protocol.",
+        "homepage": "https://a2a-protocol.org/latest/sdk/python/api/",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Mako",
+          "Python",
+          "Shell"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "agents",
+          "generative-ai",
+          "a2a",
+          "a2a-client",
+          "a2a-mcp",
+          "a2a-protocol",
+          "a2a-server",
+          "agent2agent"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@a2aproject/google-a2a-eng",
+          "@a2a-bot"
+        ],
+        "team": "@a2aproject/google-a2a-eng",
+        "security_contact": "https://g.co/vulnz"
+      },
+      "docs": {
+        "root": "https://a2a-protocol.org/latest/sdk/python/api/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/a2aproject/a2a-python.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "e7eafe3999f4ebb00c6d8ab3767db13cb90d8331",
+          "html_url": "https://github.com/a2aproject/a2a-python",
+          "stars": 1996
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

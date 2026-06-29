@@ -1,0 +1,35 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Trinea/android-common"
+generated_at = "2026-06-29T05:23:39.081537Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Trinea Android Common"
+description = "Apache License 2.0 — see LICENSE."
+homepage = "http://p.codekk.com/"
+visibility = "public"
+languages = ["Java"]
+topics = []
+
+[docs]
+root = "http://p.codekk.com/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Trinea/android-common.git"
+default_branch = "master"
+fork = false
+head_sha = "56be038544ef00e02c86052ce16398dda1987a4d"
+html_url = "https://github.com/Trinea/android-common"
+stars = 4998

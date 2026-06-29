@@ -1,0 +1,108 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Tencent",
+    "repo": "wujie",
+    "source": "https://github.com/Tencent/wujie"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Tencent/wujie/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Tencent/wujie",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Tencent/wujie/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Tencent/wujie",
+        "generated_at": "2026-06-29T05:26:18.965989Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "wujie（无界）",
+        "description": "无界微前端是一款基于 Web Components + iframe 微前端框架，具备成本低、速度快、原生隔离、功能强等一系列优点。",
+        "homepage": "https://wujie-micro.github.io/doc/",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "JavaScript",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": null,
+        "test": "pnpm test",
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://wujie-micro.github.io/doc/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/Tencent/wujie",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Tencent/wujie.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "c45932998c0602f34454df8d3e29f4d33a38446a",
+          "html_url": "https://github.com/Tencent/wujie",
+          "stars": 4969
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

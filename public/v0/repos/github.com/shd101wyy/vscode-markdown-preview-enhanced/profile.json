@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "shd101wyy",
+    "repo": "vscode-markdown-preview-enhanced",
+    "source": "https://github.com/shd101wyy/vscode-markdown-preview-enhanced"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/shd101wyy/vscode-markdown-preview-enhanced/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/shd101wyy/vscode-markdown-preview-enhanced",
+    "generatedAt": "2026-06-29T05:28:49.88505Z",
+    "evidencePath": "repos/github.com/shd101wyy/vscode-markdown-preview-enhanced/evidence.md"
+  },
+  "purpose": "English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Français · Español · Português · Nederlands · Türkçe",
+  "name": "Markdown Preview Enhanced",
+  "homepage": "https://shd101wyy.github.io/markdown-preview-enhanced",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "JavaScript",
+    "Nix",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "vscode-extension",
+    "markdown"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://shd101wyy.github.io/markdown-preview-enhanced"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/shd101wyy/vscode-markdown-preview-enhanced/profile.json",
+    "repository": "/v0/repos/github.com/shd101wyy/vscode-markdown-preview-enhanced/index.json",
+    "trust": "/v0/repos/github.com/shd101wyy/vscode-markdown-preview-enhanced/trust.json",
+    "queryTemplate": "/v0/repos/github.com/shd101wyy/vscode-markdown-preview-enhanced/query?path={dot_path}",
+    "indexPath": "repos/github.com/shd101wyy/vscode-markdown-preview-enhanced/"
+  }
+}

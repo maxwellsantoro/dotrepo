@@ -1,0 +1,107 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "exif-js",
+    "repo": "exif-js",
+    "source": "https://github.com/exif-js/exif-js"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/exif-js/exif-js/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/exif-js/exif-js",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/exif-js/exif-js/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/exif-js/exif-js",
+        "generated_at": "2026-06-29T05:25:21.596672Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Exif.js",
+        "description": "A JavaScript library for reading EXIF meta data from image files.",
+        "homepage": "https://github.com/exif-js/exif-js",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "HTML",
+          "JavaScript"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": null,
+        "getting_started": "https://www.npmjs.com/#getting-started",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/exif-js/exif-js",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/exif-js/exif-js.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "51a8f7d2f3aa71cb03463c84088067c9a4ebe8cb",
+          "html_url": "https://github.com/exif-js/exif-js",
+          "stars": 4978
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

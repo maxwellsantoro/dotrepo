@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "anthropics",
+    "repo": "claude-cookbooks",
+    "source": "https://github.com/anthropics/claude-cookbooks"
+  },
+  "repository": {
+    "name": "Claude Cookbooks",
+    "description": "The Claude Cookbooks provide code and guides designed to help developers build with Claude, offering copy-able code snippets that you can easily integrate into your own projects.",
+    "homepage": "https://github.com/anthropics/claude-cookbooks",
+    "gettingStarted": "https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/getting_started_with_vision.ipynb"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/anthropics/claude-cookbooks/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/anthropics/claude-cookbooks",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/anthropics/claude-cookbooks/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/anthropics/claude-cookbooks/index.json",
+    "trust": "/v0/repos/github.com/anthropics/claude-cookbooks/trust.json",
+    "profile": "/v0/repos/github.com/anthropics/claude-cookbooks/profile.json",
+    "queryTemplate": "/v0/repos/github.com/anthropics/claude-cookbooks/query?path={dot_path}",
+    "indexPath": "repos/github.com/anthropics/claude-cookbooks/"
+  }
+}

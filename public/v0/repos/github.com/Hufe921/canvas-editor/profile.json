@@ -1,0 +1,84 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Hufe921",
+    "repo": "canvas-editor",
+    "source": "https://github.com/Hufe921/canvas-editor"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Hufe921/canvas-editor/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Hufe921/canvas-editor",
+    "generatedAt": "2026-06-29T05:26:27.767354Z",
+    "evidencePath": "repos/github.com/Hufe921/canvas-editor/evidence.md"
+  },
+  "purpose": "Live Demo · Documentation · Report Bug · Request Feature · Discussions",
+  "name": "Canvas Editor",
+  "homepage": "https://hufe.club/canvas-editor-docs",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "topics": [
+    "editor",
+    "canvas",
+    "canvas-editor",
+    "rich-text",
+    "typescript",
+    "vite",
+    "wysiwyg",
+    "control",
+    "emr",
+    "pdf",
+    "pdf-generation",
+    "latex",
+    "browser",
+    "date-picker",
+    "svg",
+    "word",
+    "ai"
+  ],
+  "execution": {
+    "build": "npm run build"
+  },
+  "docs": {
+    "root": "https://hufe.club/canvas-editor-docs"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Hufe921/canvas-editor/profile.json",
+    "repository": "/v0/repos/github.com/Hufe921/canvas-editor/index.json",
+    "trust": "/v0/repos/github.com/Hufe921/canvas-editor/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Hufe921/canvas-editor/query?path={dot_path}",
+    "indexPath": "repos/github.com/Hufe921/canvas-editor/"
+  }
+}

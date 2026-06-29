@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ShusenTang",
+    "repo": "Dive-into-DL-PyTorch",
+    "source": "https://github.com/ShusenTang/Dive-into-DL-PyTorch"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ShusenTang/Dive-into-DL-PyTorch/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/ShusenTang/Dive-into-DL-PyTorch",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ShusenTang/Dive-into-DL-PyTorch/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/ShusenTang/Dive-into-DL-PyTorch",
+        "generated_at": "2026-06-29T05:18:34.314746Z",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Dive-into-DL-PyTorch",
+        "description": "本项目将《动手学深度学习》(Dive into Deep Learning)原书中的MXNet实现改为PyTorch实现。",
+        "homepage": "http://tangshusen.me/Dive-into-DL-PyTorch",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Jupyter Notebook",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "deep-learning",
+          "deep-learning-tutorial",
+          "pytorch",
+          "pytorch-tutorial",
+          "computer-vision",
+          "natural-language-processing",
+          "d2l"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "http://tangshusen.me/Dive-into-DL-PyTorch",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/ShusenTang/Dive-into-DL-PyTorch.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "09c8bacc08599eb86236551454ba43b82cb91498",
+          "html_url": "https://github.com/ShusenTang/Dive-into-DL-PyTorch",
+          "stars": 19411
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

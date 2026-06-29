@@ -1,0 +1,65 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/LeCoupa/awesome-cheatsheets"
+generated_at = "2026-06-29T05:14:52.132144Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "LeCoupa%2Fawesome-cheatsheets | Trendshift"
+description = "**WEBSITE DIRECTORY**: Available here"
+homepage = "https://lecoupa.github.io/awesome-cheatsheets/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "PHP",
+    "Python",
+    "Shell",
+    "TypeScript",
+]
+topics = [
+    "cheatsheets",
+    "javascript",
+    "bash",
+    "nodejs",
+    "cheatsheet",
+    "database",
+    "language",
+    "frontend",
+    "backend",
+    "feathersjs",
+    "redis",
+    "vuejs",
+    "vim",
+    "django",
+    "programming-language",
+    "xcode",
+    "php",
+    "docker",
+    "kubernetes",
+    "sailsjs",
+]
+
+[docs]
+root = "https://lecoupa.github.io/awesome-cheatsheets/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/LeCoupa/awesome-cheatsheets.git"
+default_branch = "master"
+fork = false
+head_sha = "38f406dc19f556d4633e36d3ae144895fcab138f"
+html_url = "https://github.com/LeCoupa/awesome-cheatsheets"
+stars = 46108

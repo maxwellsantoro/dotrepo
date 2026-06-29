@@ -1,0 +1,99 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jnordberg",
+    "repo": "gif.js",
+    "source": "https://github.com/jnordberg/gif.js"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/jnordberg/gif.js",
+      "notes": "Declared repository in package.json.",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "manifest"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "jnordberg",
+        "repo": "gif.js",
+        "source": "https://github.com/jnordberg/gif.js"
+      },
+      "profile": {
+        "identity": {
+          "host": "github.com",
+          "owner": "jnordberg",
+          "repo": "gif.js",
+          "source": "https://github.com/jnordberg/gif.js"
+        },
+        "name": "gif.js",
+        "purpose": "JavaScript GIF encoder that runs in your browser.",
+        "languages": [
+          "CSS",
+          "CoffeeScript",
+          "HTML",
+          "JavaScript",
+          "Shell"
+        ],
+        "completeness": {
+          "hasBuild": false,
+          "hasTest": false,
+          "hasDocs": true,
+          "hasSecurityContact": false,
+          "hasOwnershipSignal": false,
+          "hasLicense": true,
+          "conflictCount": 0
+        },
+        "trust": {
+          "selectedStatus": "verified",
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "selectionReason": "only_matching_record"
+        },
+        "matched": [
+          "relation"
+        ],
+        "ranking": {
+          "score": 15,
+          "matchedFieldCount": 1,
+          "completenessSignalCount": 2,
+          "basis": [
+            "matchedFields",
+            "profileCompleteness",
+            "trustConfidence"
+          ]
+        },
+        "links": {
+          "self": "/v0/repos/github.com/jnordberg/gif.js/profile.json",
+          "repository": "/v0/repos/github.com/jnordberg/gif.js/index.json",
+          "trust": "/v0/repos/github.com/jnordberg/gif.js/trust.json",
+          "queryTemplate": "/v0/repos/github.com/jnordberg/gif.js/query?path={dot_path}",
+          "indexPath": "repos/github.com/jnordberg/gif.js/"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/jnordberg/gif.js/relations",
+    "repository": "/v0/repos/github.com/jnordberg/gif.js/index.json",
+    "trust": "/v0/repos/github.com/jnordberg/gif.js/trust.json",
+    "profile": "/v0/repos/github.com/jnordberg/gif.js/profile.json",
+    "queryTemplate": "/v0/repos/github.com/jnordberg/gif.js/query?path={dot_path}",
+    "indexPath": "repos/github.com/jnordberg/gif.js/"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "mbleigh",
+    "repo": "acts-as-taggable-on",
+    "source": "https://github.com/mbleigh/acts-as-taggable-on"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/mbleigh/acts-as-taggable-on/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/mbleigh/acts-as-taggable-on",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/mbleigh/acts-as-taggable-on/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/mbleigh/acts-as-taggable-on",
+        "generated_at": "2026-06-29T05:23:51.917786Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "ActsAsTaggableOn",
+        "description": "This plugin was originally based on Acts as Taggable on Steroids by Jonathan Viney.",
+        "homepage": "http://mbleigh.lighthouseapp.com/projects/10116-acts-as-taggable-on",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Ruby"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "http://mbleigh.lighthouseapp.com/projects/10116-acts-as-taggable-on",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/thlorenz/doctoc",
+            "notes": "Cross-link from README: DocToc",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/mbleigh/acts-as-taggable-on.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "1df5ac334c7f6321ac6b967fb014f834b3aa1e09",
+          "html_url": "https://github.com/mbleigh/acts-as-taggable-on",
+          "stars": 4994
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

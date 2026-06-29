@@ -1,0 +1,39 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/Theano/Theano"
+generated_at = "2026-06-29T05:19:54.396696Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Theano"
+description = "Theano was a Python library that allows you to define, optimize, and evaluate mathematical expressions involving multi-dimensional arrays efficiently. It is being continued as PyTensor: www.github.com/pymc-devs/pytensor"
+homepage = "https://www.github.com/pymc-devs/pytensor"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "C",
+    "CSS",
+    "Cuda",
+    "Cython",
+    "HTML",
+    "Python",
+    "Shell",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Theano/Theano.git"
+default_branch = "master"
+fork = false
+head_sha = "7505f23edd66fcdbbe04953f53c650b4d7cec4dd"
+html_url = "https://github.com/Theano/Theano"
+stars = 9998

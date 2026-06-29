@@ -1,0 +1,93 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Ramotion",
+    "repo": "expanding-collection-android",
+    "source": "https://github.com/Ramotion/expanding-collection-android"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Ramotion/expanding-collection-android/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Ramotion/expanding-collection-android",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Ramotion/expanding-collection-android/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Ramotion/expanding-collection-android",
+        "generated_at": "2026-06-29T05:27:44.265289Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "EXPANDING COLLECTION",
+        "description": "You can find this and other, more complex, examples in this repository ​",
+        "homepage": "https://www.ramotion.com/agency/app-development/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Java"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "android",
+          "java",
+          "library"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://www.ramotion.com/agency/app-development/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Ramotion/expanding-collection-android.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "07ca505e41db1c8d6972731df8834e236dd232c1",
+          "html_url": "https://github.com/Ramotion/expanding-collection-android",
+          "stars": 1997
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

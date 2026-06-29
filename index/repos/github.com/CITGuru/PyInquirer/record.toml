@@ -1,0 +1,49 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/CITGuru/PyInquirer"
+generated_at = "2026-06-29T05:28:32.092259Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "PyInquirer"
+description = "A Python module for common interactive command line user interfaces"
+homepage = "https://github.com/CITGuru/PyInquirer"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Makefile",
+    "Python",
+]
+topics = [
+    "python",
+    "prompt-toolkit",
+    "cmd",
+    "command-line-tool",
+    "command-line-interface",
+    "inquirer",
+    "cli",
+    "cli-app",
+    "command-line-app",
+    "command-line",
+    "ipython",
+    "unix-command",
+    "python2",
+    "python3",
+    "pyinquirer",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/CITGuru/PyInquirer.git"
+default_branch = "master"
+fork = false
+head_sha = "7637373429bec66788650cda8091b7a6f12929ee"
+html_url = "https://github.com/CITGuru/PyInquirer"
+stars = 1996

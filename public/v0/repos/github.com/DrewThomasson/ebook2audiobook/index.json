@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "DrewThomasson",
+    "repo": "ebook2audiobook",
+    "source": "https://github.com/DrewThomasson/ebook2audiobook"
+  },
+  "repository": {
+    "name": "ebook2audiobook",
+    "description": "CPU/GPU Converter from E-Book to audiobook with chapters and metadata using advanced TTS engines and much more.",
+    "homepage": "https://github.com/DrewThomasson/ebook2audiobook"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/DrewThomasson/ebook2audiobook/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/DrewThomasson/ebook2audiobook",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/DrewThomasson/ebook2audiobook/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/DrewThomasson/ebook2audiobook/index.json",
+    "trust": "/v0/repos/github.com/DrewThomasson/ebook2audiobook/trust.json",
+    "profile": "/v0/repos/github.com/DrewThomasson/ebook2audiobook/profile.json",
+    "queryTemplate": "/v0/repos/github.com/DrewThomasson/ebook2audiobook/query?path={dot_path}",
+    "indexPath": "repos/github.com/DrewThomasson/ebook2audiobook/"
+  }
+}

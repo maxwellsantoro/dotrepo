@@ -1,0 +1,120 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jgm",
+    "repo": "pandoc",
+    "source": "https://github.com/jgm/pandoc"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/jgm/pandoc/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/jgm/pandoc",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.test` from `.github/workflows/docx-validation.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/jgm/pandoc/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/jgm/pandoc",
+        "generated_at": "2026-06-29T05:15:39.558691Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.test` from `.github/workflows/docx-validation.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Pandoc",
+        "description": "Pandoc is a Haskell library for converting from one markup format to another, and a command-line tool that uses this library.",
+        "homepage": "https://pandoc.org",
+        "license": "GPL-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Emacs Lisp",
+          "HTML",
+          "Haskell",
+          "JavaScript",
+          "Jupyter Notebook",
+          "Lua",
+          "Makefile",
+          "Nix",
+          "Perl",
+          "Python",
+          "Rich Text Format",
+          "Roff",
+          "Ruby",
+          "Shell",
+          "Smarty",
+          "TeX",
+          "Typst"
+        ],
+        "build": null,
+        "test": "make validate-docx-golden-tests",
+        "topics": [
+          "pandoc",
+          "haskell",
+          "markdown",
+          "markup",
+          "converter",
+          "publishing",
+          "document",
+          "presentation",
+          "commonmark"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "jgm@berkeley.edu"
+      },
+      "docs": {
+        "root": "https://pandoc.org",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/jgm/pandoc.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "c568a0e66599384fdabc08ad656fd5beeac39ae1",
+          "html_url": "https://github.com/jgm/pandoc",
+          "stars": 45115
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

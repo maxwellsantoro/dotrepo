@@ -1,0 +1,59 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/ading2210/linuxpdf"
+generated_at = "2026-06-29T05:26:48.457441Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "LinuxPDF"
+description = "This is Linux running inside a PDF file via a RISC-V emulator, which is based on TinyEMU."
+homepage = "https://linux.doompdf.dev"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "C",
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+topics = []
+
+[docs]
+root = "https://linux.doompdf.dev"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/ading2210/doompdf"
+notes = "Cross-link from README: DoomPDF"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/ading2210/linuxpdf.git"
+default_branch = "main"
+fork = false
+head_sha = "9d6ff291a3c1f157b22ae6d196c9a3841a3de289"
+html_url = "https://github.com/ading2210/linuxpdf"
+stars = 4966

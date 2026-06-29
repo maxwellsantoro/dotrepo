@@ -1,0 +1,36 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/forkingdog/UITableView-FDTemplateLayoutCell"
+generated_at = "2026-06-29T05:22:54.329827Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "UITableView-FDTemplateLayoutCell"
+description = "Template auto layout cell for **automatically** UITableViewCell height calculating."
+homepage = "https://github.com/forkingdog/UITableView-FDTemplateLayoutCell"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Objective-C",
+    "Ruby",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/forkingdog/UITableView-FDTemplateLayoutCell.git"
+default_branch = "master"
+fork = false
+head_sha = "c624e4db4c6bc3723ba971218aa5454dd59c7415"
+html_url = "https://github.com/forkingdog/UITableView-FDTemplateLayoutCell"
+stars = 9865

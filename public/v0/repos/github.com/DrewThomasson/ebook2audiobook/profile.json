@@ -1,0 +1,86 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "DrewThomasson",
+    "repo": "ebook2audiobook",
+    "source": "https://github.com/DrewThomasson/ebook2audiobook"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/DrewThomasson/ebook2audiobook/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/DrewThomasson/ebook2audiobook",
+    "generatedAt": "2026-06-29T05:18:46.935224Z",
+    "evidencePath": "repos/github.com/DrewThomasson/ebook2audiobook/evidence.md"
+  },
+  "purpose": "CPU/GPU Converter from E-Book to audiobook with chapters and metadata using advanced TTS engines and much more.",
+  "name": "ebook2audiobook",
+  "homepage": "https://github.com/DrewThomasson/ebook2audiobook",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Cython",
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Makefile",
+    "PowerShell",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "audiobooks",
+    "docker",
+    "epub",
+    "linux",
+    "mac",
+    "tts",
+    "windows",
+    "xtts",
+    "voice-cloning",
+    "gradio",
+    "chinese",
+    "english",
+    "multilingual",
+    "colab-notebook",
+    "kaggle",
+    "audiobook"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/DrewThomasson/ebook2audiobook/profile.json",
+    "repository": "/v0/repos/github.com/DrewThomasson/ebook2audiobook/index.json",
+    "trust": "/v0/repos/github.com/DrewThomasson/ebook2audiobook/trust.json",
+    "queryTemplate": "/v0/repos/github.com/DrewThomasson/ebook2audiobook/query?path={dot_path}",
+    "indexPath": "repos/github.com/DrewThomasson/ebook2audiobook/"
+  }
+}

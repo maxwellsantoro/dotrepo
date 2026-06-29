@@ -1,0 +1,44 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/tipsy/profile-summary-for-github"
+generated_at = "2026-06-29T05:16:24.262508Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Profile Summary"
+description = "A tool to visualize your **GitHub** presence."
+homepage = "https://profile-summary-for-github.com/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "HTML",
+    "Kotlin",
+    "Procfile",
+    "Vue",
+]
+topics = [
+    "kotlin",
+    "webapp",
+    "github-api",
+    "javalin",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/tipsy/profile-summary-for-github.git"
+default_branch = "master"
+fork = false
+head_sha = "a9b9e6f524a7c04c98e342ae39eb3304817d044c"
+html_url = "https://github.com/tipsy/profile-summary-for-github"
+stars = 19945

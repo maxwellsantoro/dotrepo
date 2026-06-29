@@ -1,0 +1,87 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "invoiceninja",
+    "repo": "invoiceninja",
+    "source": "https://github.com/invoiceninja/invoiceninja"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/invoiceninja/invoiceninja/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/invoiceninja/invoiceninja",
+    "generatedAt": "2026-06-29T05:23:03.704824Z",
+    "evidencePath": "repos/github.com/invoiceninja/invoiceninja/evidence.md"
+  },
+  "purpose": "Invoice Ninja Version 5 is here! We've taken the best parts of version 4 and added the most requested features to create an invoicing application like no other.",
+  "name": "CLA assistant",
+  "homepage": "https://invoiceninja.com",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Blade",
+    "HTML",
+    "JavaScript",
+    "PHP",
+    "TypeScript",
+    "XSLT"
+  ],
+  "topics": [
+    "php",
+    "expenses",
+    "javascript",
+    "invoices",
+    "tasks",
+    "laravel",
+    "payments",
+    "time-tracker",
+    "kanban",
+    "invoice",
+    "flutter",
+    "hacktoberfest",
+    "invoiceninja",
+    "einvoicing",
+    "projects",
+    "quotes"
+  ],
+  "execution": {
+    "build": "npm run build"
+  },
+  "docs": {
+    "root": "https://invoiceninja.com"
+  },
+  "ownership": {
+    "securityContact": "contact@invoiceninja.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/invoiceninja/invoiceninja/profile.json",
+    "repository": "/v0/repos/github.com/invoiceninja/invoiceninja/index.json",
+    "trust": "/v0/repos/github.com/invoiceninja/invoiceninja/trust.json",
+    "queryTemplate": "/v0/repos/github.com/invoiceninja/invoiceninja/query?path={dot_path}",
+    "indexPath": "repos/github.com/invoiceninja/invoiceninja/"
+  }
+}

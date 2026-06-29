@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/NARKOZ/hacker-scripts"
+generated_at = "2026-06-29T05:13:17.75694Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Hacker Scripts"
+description = "Based on a true story"
+homepage = "https://github.com/NARKOZ/hacker-scripts"
+visibility = "public"
+languages = [
+    "C#",
+    "Clojure",
+    "CoffeeScript",
+    "Go",
+    "Groovy",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "PHP",
+    "Perl",
+    "PowerShell",
+    "Python",
+    "R",
+    "Ruby",
+    "Scala",
+    "Shell",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/NARKOZ/hacker-scripts.git"
+default_branch = "master"
+fork = false
+head_sha = "b14a0a89bdf743c63ca4cc9cbcd866e050d7b3b0"
+html_url = "https://github.com/NARKOZ/hacker-scripts"
+stars = 49748

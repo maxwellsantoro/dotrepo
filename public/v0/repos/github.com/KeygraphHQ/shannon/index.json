@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "KeygraphHQ",
+    "repo": "shannon",
+    "source": "https://github.com/KeygraphHQ/shannon"
+  },
+  "repository": {
+    "name": "Shannon",
+    "description": "Shannon is an autonomous, white-box AI pentester for web applications and APIs.",
+    "homepage": "https://keygraph.io/",
+    "docsRoot": "https://keygraph.io/"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/KeygraphHQ/shannon/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/KeygraphHQ/shannon",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/KeygraphHQ/shannon/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/KeygraphHQ/shannon/index.json",
+    "trust": "/v0/repos/github.com/KeygraphHQ/shannon/trust.json",
+    "profile": "/v0/repos/github.com/KeygraphHQ/shannon/profile.json",
+    "queryTemplate": "/v0/repos/github.com/KeygraphHQ/shannon/query?path={dot_path}",
+    "indexPath": "repos/github.com/KeygraphHQ/shannon/"
+  }
+}

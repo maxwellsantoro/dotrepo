@@ -1,0 +1,57 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/KDE/krita"
+generated_at = "2026-06-29T05:20:48.156319Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Repository Status"
+description = "Krita is a free and open source cross-platform application that offers an end-to-end solution for creating digital art files from scratch built on the KDE and Qt frameworks."
+homepage = "https://invent.kde.org/graphics/krita"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CMake",
+    "GLSL",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "MATLAB",
+    "Meson",
+    "NSIS",
+    "Objective-C",
+    "Objective-C++",
+    "Perl",
+    "Python",
+    "QML",
+    "Rich Text Format",
+    "Scheme",
+    "Shell",
+    "Swift",
+]
+topics = []
+
+[docs]
+root = "https://invent.kde.org/graphics/krita"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/KDE/krita.git"
+default_branch = "master"
+fork = false
+head_sha = "51ac89f4541b0ef23e41bfb050b64adb6e2e558d"
+html_url = "https://github.com/KDE/krita"
+stars = 9945

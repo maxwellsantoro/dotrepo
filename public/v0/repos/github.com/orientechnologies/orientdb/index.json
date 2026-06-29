@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "orientechnologies",
+    "repo": "orientdb",
+    "source": "https://github.com/orientechnologies/orientdb"
+  },
+  "repository": {
+    "name": "OrientDB",
+    "description": "**OrientDB** is an Open Source Multi-Model NoSQL DBMS with the support of Native Graphs, Documents, Full-Text search, Reactivity, Geo-Spatial and Object Oriented concepts.",
+    "homepage": "https://orientdb.dev",
+    "docsRoot": "https://orientdb.dev"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/orientechnologies/orientdb/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/orientechnologies/orientdb",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/tests.yml`. Inferred `repo.test` from `.github/workflows/tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/orientechnologies/orientdb/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/orientechnologies/orientdb/index.json",
+    "trust": "/v0/repos/github.com/orientechnologies/orientdb/trust.json",
+    "profile": "/v0/repos/github.com/orientechnologies/orientdb/profile.json",
+    "queryTemplate": "/v0/repos/github.com/orientechnologies/orientdb/query?path={dot_path}",
+    "indexPath": "repos/github.com/orientechnologies/orientdb/"
+  }
+}

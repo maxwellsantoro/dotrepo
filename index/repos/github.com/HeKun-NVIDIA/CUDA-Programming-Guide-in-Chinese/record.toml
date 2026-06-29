@@ -1,0 +1,29 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese"
+generated_at = "2026-06-29T05:28:22.690689Z"
+
+[record.trust]
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "CUDA-Programming-Guide-in-Chinese"
+description = "This is a Chinese translation of the CUDA programming guide"
+homepage = "https://github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese"
+visibility = "public"
+languages = []
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese.git"
+default_branch = "main"
+fork = false
+head_sha = "93adfbef9eed694b4fed21263fa18b178d368ac0"
+html_url = "https://github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese"
+stars = 1996

@@ -1,0 +1,41 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/soruly/trace.moe"
+generated_at = "2026-06-29T05:23:53.549508Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "trace.moe"
+description = "Anime Scene Search Engine"
+homepage = "https://trace.moe"
+license = "MIT"
+visibility = "public"
+languages = []
+topics = [
+    "anime",
+    "image-search",
+    "milvus",
+    "search-engine",
+]
+
+[docs]
+root = "https://trace.moe"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/soruly/trace.moe.git"
+default_branch = "master"
+fork = false
+head_sha = "5c8c0085b29047ff71dd44edd87ba71c8ceef561"
+html_url = "https://github.com/soruly/trace.moe"
+stars = 4993

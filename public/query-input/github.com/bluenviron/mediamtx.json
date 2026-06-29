@@ -1,0 +1,119 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "bluenviron",
+    "repo": "mediamtx",
+    "source": "https://github.com/bluenviron/mediamtx"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/bluenviron/mediamtx/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/bluenviron/mediamtx",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/bluenviron/mediamtx/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/bluenviron/mediamtx",
+        "generated_at": "2026-06-29T05:18:59.291416Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Website](https://mediamtx.org) ![Test](https://github.com/bluenviron/mediamtx/actions/workflows/test.yml?query=branch%3Amain) ![Lint](https://github.com/bluenviron/mediamtx/actions/workflows/lint.yml?query=branch%3Amain) ![CodeCov](https://app.codecov.io/gh/bluenviron/mediamtx/tree/main) ![Release](https://github.com/bluenviron/mediamtx/releases) ![Docker Hub](https://hub.docker.com/r/bluenviron/mediamtx)",
+        "description": "_MediaMTX_ is a ready-to-use and zero-dependency live media server and media proxy that allows to publish, read, proxy, record and playback real-time video and audio streams.",
+        "homepage": "https://mediamtx.org",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "Dockerfile",
+          "Go",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "Shell"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "rtsp",
+          "rtp",
+          "rtcp",
+          "streaming",
+          "golang",
+          "go",
+          "rtsp-server",
+          "rtsp-proxy",
+          "rtmp",
+          "rtmp-server",
+          "rtmp-proxy",
+          "rtsp-relay",
+          "media-server",
+          "obs-studio",
+          "hls",
+          "webrtc",
+          "webrtc-proxy",
+          "srt",
+          "media-over-quic"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://mediamtx.org/docs/other/security"
+      },
+      "docs": {
+        "root": "https://mediamtx.org/docs/kickoff/introduction",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/bluenviron/mediamtx.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "f4decfd41b7dd4239fa5d21aa9281d7975b14271",
+          "html_url": "https://github.com/bluenviron/mediamtx",
+          "stars": 19301
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

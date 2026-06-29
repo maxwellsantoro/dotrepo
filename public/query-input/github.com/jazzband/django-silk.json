@@ -1,0 +1,105 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jazzband",
+    "repo": "django-silk",
+    "source": "https://github.com/jazzband/django-silk"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/jazzband/django-silk/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/jazzband/django-silk",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/jazzband/django-silk/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/jazzband/django-silk",
+        "generated_at": "2026-06-29T05:25:15.437956Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Silk",
+        "description": "Silk is a live profiling and inspection tool for the Django framework.",
+        "homepage": "https://github.com/jazzband/django-silk",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "HTML",
+          "JavaScript",
+          "Python",
+          "SCSS"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/jazzband/django-silk",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/jazzband/django-silk.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "ec4574d802759fdb3fa70f8248953ab4c01c0ab0",
+          "html_url": "https://github.com/jazzband/django-silk",
+          "stars": 4978
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

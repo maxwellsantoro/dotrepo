@@ -1,0 +1,62 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/open-mmlab/Amphion"
+generated_at = "2026-06-29T05:22:04.744179Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Amphion"
+description = "**The North-Star objective of Amphion is to offer a platform for studying the conversion of any inputs into audio.** Amphion is designed to support individual generation tasks, including but not limited to,"
+homepage = "https://openhlt.github.io/amphion/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Cython",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Jupyter Notebook",
+    "Python",
+    "Shell",
+]
+topics = [
+    "audio-generation",
+    "audio-synthesis",
+    "audioldm",
+    "music-generation",
+    "naturalspeech2",
+    "singing-voice-conversion",
+    "speech-synthesis",
+    "text-to-audio",
+    "text-to-speech",
+    "vall-e",
+    "voice-conversion",
+    "audit",
+    "fastspeech2",
+    "vits",
+    "emilia",
+    "maskgct",
+    "vocoder",
+]
+
+[docs]
+root = "https://openhlt.github.io/amphion/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/open-mmlab/Amphion.git"
+default_branch = "main"
+fork = false
+head_sha = "26f6883110181f1dbfe95c70a7c7dbaf4de5f42a"
+html_url = "https://github.com/open-mmlab/Amphion"
+stars = 9906

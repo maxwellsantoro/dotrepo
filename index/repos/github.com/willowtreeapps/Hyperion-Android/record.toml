@@ -1,0 +1,56 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/willowtreeapps/Hyperion-Android"
+generated_at = "2026-06-29T05:29:19.147573Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `CODEOWNERS`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@github/js` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/mc-release.yml`. Inferred `repo.test` from `.github/workflows/mc-release.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Hyperion"
+description = "Hyperion is a hidden plugin drawer that can easily be integrated into any app."
+homepage = "https://github.com/willowtreeapps/Hyperion-Android"
+license = "MIT"
+visibility = "public"
+languages = ["Java"]
+build = "./gradlew assemble"
+test = "./gradlew assemble"
+topics = [
+    "design",
+    "review",
+    "hyperion",
+    "android",
+    "debug",
+    "drawer",
+    "library",
+    "measure",
+    "inspect",
+]
+
+[owners]
+maintainers = [
+    "@kritarie",
+    "@octocat",
+    "@github/js",
+]
+team = "@github/js"
+
+[docs]
+root = "/hyperion-shared-preferences"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/willowtreeapps/Hyperion-Android.git"
+default_branch = "develop"
+fork = false
+head_sha = "3756f826354c2f9bd9bd3d9ef1f4d7b3744c6628"
+html_url = "https://github.com/willowtreeapps/Hyperion-Android"
+stars = 1994

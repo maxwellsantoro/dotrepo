@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "alirezarezvani",
+    "repo": "claude-skills",
+    "source": "https://github.com/alirezarezvani/claude-skills"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/alirezarezvani/claude-code-skills-agents-factory",
+      "notes": "Cross-link from README: Claude Code Skills & Agents Factory",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "alirezarezvani",
+        "repo": "claude-code-skills-agents-factory"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/alirezarezvani/claude-code-skills-agents-factory/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/alirezarezvani/claude-skills/relations",
+    "repository": "/v0/repos/github.com/alirezarezvani/claude-skills/index.json",
+    "trust": "/v0/repos/github.com/alirezarezvani/claude-skills/trust.json",
+    "profile": "/v0/repos/github.com/alirezarezvani/claude-skills/profile.json",
+    "queryTemplate": "/v0/repos/github.com/alirezarezvani/claude-skills/query?path={dot_path}",
+    "indexPath": "repos/github.com/alirezarezvani/claude-skills/"
+  }
+}

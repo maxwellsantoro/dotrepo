@@ -1,0 +1,61 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tpn",
+    "repo": "pdfs",
+    "source": "https://github.com/tpn/pdfs"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/tpn/pdfs/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/tpn/pdfs",
+    "generatedAt": "2026-06-29T05:23:12.376581Z",
+    "evidencePath": "repos/github.com/tpn/pdfs/evidence.md"
+  },
+  "purpose": "A veritable mish-mash of technically-oriented PDFs I've collected over the years.",
+  "name": "pdfs",
+  "homepage": "https://github.com/tpn/pdfs",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "CSS",
+    "HTML",
+    "JavaScript"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/tpn/pdfs/profile.json",
+    "repository": "/v0/repos/github.com/tpn/pdfs/index.json",
+    "trust": "/v0/repos/github.com/tpn/pdfs/trust.json",
+    "queryTemplate": "/v0/repos/github.com/tpn/pdfs/query?path={dot_path}",
+    "indexPath": "repos/github.com/tpn/pdfs/"
+  }
+}

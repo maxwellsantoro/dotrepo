@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/aickin/react-dom-stream"
+generated_at = "2026-06-29T05:28:04.614931Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "react-dom-stream"
+description = "This is a React renderer for generating markup on a NodeJS server, but unlike the built-in `ReactDOM.renderToString`, this module renders to a stream."
+homepage = "https://github.com/aickin/react-dom-stream"
+visibility = "public"
+languages = ["JavaScript"]
+build = "npm run build"
+test = "npm test"
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/aickin/react-dom-stream"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/aickin/react-dom-stream-example"
+notes = "Cross-link from README: react-dom-stream-example"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/aickin/react-dom-stream.git"
+default_branch = "master"
+fork = false
+head_sha = "03620b4697ea037e532b274729ae92938c9f43a6"
+html_url = "https://github.com/aickin/react-dom-stream"
+stars = 1997

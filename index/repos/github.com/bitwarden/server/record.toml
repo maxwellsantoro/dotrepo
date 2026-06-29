@@ -1,0 +1,85 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/bitwarden/server"
+generated_at = "2026-06-29T05:18:57.21902Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Bitwarden"
+description = 'The Bitwarden Server project contains the APIs, database, and other core infrastructure items needed for the "backend" of all bitwarden client applications.'
+homepage = "https://bitwarden.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "C#",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "PLpgSQL",
+    "PowerShell",
+    "Rust",
+    "SCSS",
+    "Shell",
+    "TSQL",
+]
+build = "npm run build"
+topics = [
+    "aspnetcore",
+    "aspnet",
+    "sql-server",
+    "api",
+    "sql",
+    "csharp",
+    "bitwarden",
+    "dotnet-core",
+    "dotnet",
+    "docker",
+    "signalr",
+]
+
+[owners]
+maintainers = [
+    "@bitwarden/tech-leads",
+    "@bitwarden/team-appsec",
+    "@bitwarden/dept-shot",
+    "@bitwarden/dept-dbops",
+    "@bitwarden/team-platform-dev",
+    "@bitwarden/team-ui-foundation",
+    "@bitwarden/team-auth-dev",
+    "@bitwarden/team-autofill-dev",
+    "@bitwarden/team-key-management-dev",
+    "@bitwarden/team-tools-dev",
+    "@bitwarden/team-data-insights-and-reporting-dev",
+    "@bitwarden/team-vault-dev",
+    "@bitwarden/team-admin-console-dev",
+    "@bitwarden/team-billing-dev",
+    "@bitwarden/dept-architecture",
+    "@bitwarden/team-sdk-sme",
+    "@bitwarden/team-ai-sme",
+]
+security_contact = "https://bitwarden.com/contact"
+
+[docs]
+root = "https://bitwarden.com"
+getting_started = "https://contributing.bitwarden.com/getting-started/server/guide"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/bitwarden/server.git"
+default_branch = "main"
+fork = false
+head_sha = "f5ec38e3c84de53bb320b66c96223e9e6e1dbf38"
+html_url = "https://github.com/bitwarden/server"
+stars = 19309

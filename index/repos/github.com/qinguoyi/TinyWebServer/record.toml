@@ -1,0 +1,46 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/qinguoyi/TinyWebServer"
+generated_at = "2026-06-29T05:17:55.223084Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "TinyWebServer"
+description = "* C/C++ * B/S模型 * 线程同步机制包装类 * http连接请求处理类 * 半同步/半反应堆线程池 * 定时器处理非活动连接 * 同步/异步日志系统 * 数据库连接池 * 同步线程注册和登录校验 * 简易服务器压力测试"
+homepage = "https://github.com/qinguoyi/TinyWebServer"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "HTML",
+    "Makefile",
+    "Roff",
+    "Shell",
+]
+topics = [
+    "webserver",
+    "http-server",
+    "tinywebserver",
+    "cpp",
+    "webbench",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/qinguoyi/TinyWebServer.git"
+default_branch = "master"
+fork = false
+head_sha = "4bcf88762f85135e9bd46a1032e815e458de6f2e"
+html_url = "https://github.com/qinguoyi/TinyWebServer"
+stars = 19585

@@ -1,0 +1,40 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Chuyu-Team/Dism-Multi-language"
+generated_at = "2026-06-29T05:16:59.075051Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Dism-Multi-language"
+description = "Dism++ resource files for supporting translation to various languages."
+homepage = "https://github.com/Chuyu-Team/Dism-Multi-language"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C",
+    "C++",
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "PHP",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Chuyu-Team/Dism-Multi-language.git"
+default_branch = "master"
+fork = false
+head_sha = "0db395ef46de8c5a3d64016580417438c5d32497"
+html_url = "https://github.com/Chuyu-Team/Dism-Multi-language"
+stars = 19833

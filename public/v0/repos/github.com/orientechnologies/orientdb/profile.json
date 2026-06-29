@@ -1,0 +1,89 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "orientechnologies",
+    "repo": "orientdb",
+    "source": "https://github.com/orientechnologies/orientdb"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/orientechnologies/orientdb/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/orientechnologies/orientdb",
+    "generatedAt": "2026-06-29T05:26:36.372096Z",
+    "evidencePath": "repos/github.com/orientechnologies/orientdb/evidence.md"
+  },
+  "purpose": "**OrientDB** is an Open Source Multi-Model NoSQL DBMS with the support of Native Graphs, Documents, Full-Text search, Reactivity, Geo-Spatial and Object Oriented concepts.",
+  "name": "OrientDB",
+  "homepage": "https://orientdb.dev",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "Gnuplot",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "PLpgSQL",
+    "SCSS",
+    "Scala",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "orientdb",
+    "graph-database",
+    "document-database",
+    "dbms",
+    "nosql",
+    "graph-store",
+    "multi-master",
+    "multi-model-dbms",
+    "database",
+    "performance",
+    "fast",
+    "sql"
+  ],
+  "execution": {
+    "build": "mvn -B package --file pom.xml",
+    "test": "mvn -B clean deploy -P all -DskipTests --file pom.xml"
+  },
+  "docs": {
+    "root": "https://orientdb.dev"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/orientechnologies/orientdb/profile.json",
+    "repository": "/v0/repos/github.com/orientechnologies/orientdb/index.json",
+    "trust": "/v0/repos/github.com/orientechnologies/orientdb/trust.json",
+    "queryTemplate": "/v0/repos/github.com/orientechnologies/orientdb/query?path={dot_path}",
+    "indexPath": "repos/github.com/orientechnologies/orientdb/"
+  }
+}

@@ -1,0 +1,70 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/bluenviron/mediamtx"
+generated_at = "2026-06-29T05:18:59.291416Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Website](https://mediamtx.org) ![Test](https://github.com/bluenviron/mediamtx/actions/workflows/test.yml?query=branch%3Amain) ![Lint](https://github.com/bluenviron/mediamtx/actions/workflows/lint.yml?query=branch%3Amain) ![CodeCov](https://app.codecov.io/gh/bluenviron/mediamtx/tree/main) ![Release](https://github.com/bluenviron/mediamtx/releases) ![Docker Hub](https://hub.docker.com/r/bluenviron/mediamtx)"
+description = "_MediaMTX_ is a ready-to-use and zero-dependency live media server and media proxy that allows to publish, read, proxy, record and playback real-time video and audio streams."
+homepage = "https://mediamtx.org"
+license = "MIT"
+visibility = "public"
+languages = [
+    "C",
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "rtsp",
+    "rtp",
+    "rtcp",
+    "streaming",
+    "golang",
+    "go",
+    "rtsp-server",
+    "rtsp-proxy",
+    "rtmp",
+    "rtmp-server",
+    "rtmp-proxy",
+    "rtsp-relay",
+    "media-server",
+    "obs-studio",
+    "hls",
+    "webrtc",
+    "webrtc-proxy",
+    "srt",
+    "media-over-quic",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://mediamtx.org/docs/other/security"
+
+[docs]
+root = "https://mediamtx.org/docs/kickoff/introduction"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/bluenviron/mediamtx.git"
+default_branch = "main"
+fork = false
+head_sha = "f4decfd41b7dd4239fa5d21aa9281d7975b14271"
+html_url = "https://github.com/bluenviron/mediamtx"
+stars = 19301

@@ -1,0 +1,42 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/lewagon/setup"
+generated_at = "2026-06-29T05:17:49.801476Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "In Chinese?"
+description = "Haga clic en este enlace para acceder a la versión en español de la configuración."
+homepage = "https://www.lewagon.com"
+visibility = "public"
+languages = [
+    "Batchfile",
+    "Ruby",
+    "Shell",
+]
+topics = [
+    "setup",
+    "ruby",
+]
+
+[docs]
+root = "https://www.lewagon.com"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/lewagon/setup.git"
+default_branch = "master"
+fork = false
+head_sha = "1f0548561f99a7497e39a5ccb8e3af293bbc672d"
+html_url = "https://github.com/lewagon/setup"
+stars = 19595

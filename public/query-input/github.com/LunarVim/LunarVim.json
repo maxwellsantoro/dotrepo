@@ -1,0 +1,110 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "LunarVim",
+    "repo": "LunarVim",
+    "source": "https://github.com/LunarVim/LunarVim"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/LunarVim/LunarVim/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/LunarVim/LunarVim",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/install.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/LunarVim/LunarVim/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/LunarVim/LunarVim",
+        "generated_at": "2026-06-29T05:19:12.285828Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/install.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Last commit",
+        "description": "An IDE layer for Neovim with sane defaults.",
+        "homepage": "https://www.lunarvim.org",
+        "license": "GPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Lua",
+          "Makefile",
+          "PowerShell",
+          "Shell"
+        ],
+        "build": null,
+        "test": "make test",
+        "topics": [
+          "neovim",
+          "vim",
+          "vimrc",
+          "nvim",
+          "ide",
+          "lunarvim",
+          "lua",
+          "linters",
+          "formatters",
+          "snippets",
+          "vscode",
+          "neovim-configuration",
+          "neovim-lua",
+          "neovim-config",
+          "neovim-setup",
+          "hacktoberfest"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://www.lunarvim.org",
+        "getting_started": "https://www.lunarvim.org/docs/installation",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/LunarVim/LunarVim.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "aa51c20f3404cb482e9c6fd6e5e4a4bf5b1612aa",
+          "html_url": "https://github.com/LunarVim/LunarVim",
+          "stars": 19263
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

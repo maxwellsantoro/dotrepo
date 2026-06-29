@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/guyueyingmu/avbook"
+generated_at = "2026-06-29T05:19:55.994332Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "avbook"
+description = '1.解压到 D:\laragon'
+homepage = "https://github.com/guyueyingmu/avbook"
+visibility = "public"
+languages = [
+    "Blade",
+    "PHP",
+    "SCSS",
+    "Shell",
+    "Vue",
+]
+topics = [
+    "javbus",
+    "avmoo",
+    "javlibrary",
+    "spider",
+    "crawler",
+    "laravel",
+    "scraper",
+    "adult",
+    "magnet-link",
+    "magnet",
+    "database",
+    "adult-video",
+    "guzzlehttp",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/guyueyingmu/avbook.git"
+default_branch = "master"
+fork = false
+head_sha = "d3780741288c68da826fc2bb0df542caa8d91fb5"
+html_url = "https://github.com/guyueyingmu/avbook"
+stars = 9997

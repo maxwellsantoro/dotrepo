@@ -1,0 +1,40 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/luanfujun/deep-photo-styletransfer"
+generated_at = "2026-06-29T05:20:06.349426Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "deep-photo-styletransfer"
+description = 'Code and data for paper "Deep Photo Style Transfer"'
+homepage = "https://github.com/luanfujun/deep-photo-styletransfer"
+visibility = "public"
+languages = [
+    "Cuda",
+    "Lua",
+    "M",
+    "MATLAB",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/luanfujun/deep-photo-styletransfer.git"
+default_branch = "master"
+fork = false
+head_sha = "4801fa2dca2e2b52847c377f451246a39eae154a"
+html_url = "https://github.com/luanfujun/deep-photo-styletransfer"
+stars = 9992

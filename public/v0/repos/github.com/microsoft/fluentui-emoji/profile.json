@@ -1,0 +1,67 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "fluentui-emoji",
+    "source": "https://github.com/microsoft/fluentui-emoji"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/microsoft/fluentui-emoji/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/microsoft/fluentui-emoji",
+    "generatedAt": "2026-06-29T05:19:58.252711Z",
+    "evidencePath": "repos/github.com/microsoft/fluentui-emoji/evidence.md"
+  },
+  "purpose": "Fluent Emoji are a collection of familiar, friendly, and modern emoji from Microsoft.",
+  "name": "Fluent Emoji",
+  "homepage": "https://github.com/microsoft/fluentui-emoji",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Python"
+  ],
+  "topics": [
+    "emoji"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@microsoft/fluent-system-icons"
+    ],
+    "team": "@microsoft/fluent-system-icons",
+    "securityContact": "secure@microsoft.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/microsoft/fluentui-emoji/profile.json",
+    "repository": "/v0/repos/github.com/microsoft/fluentui-emoji/index.json",
+    "trust": "/v0/repos/github.com/microsoft/fluentui-emoji/trust.json",
+    "queryTemplate": "/v0/repos/github.com/microsoft/fluentui-emoji/query?path={dot_path}",
+    "indexPath": "repos/github.com/microsoft/fluentui-emoji/"
+  }
+}

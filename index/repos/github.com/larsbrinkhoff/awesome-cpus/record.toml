@@ -1,0 +1,57 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/larsbrinkhoff/awesome-cpus"
+generated_at = "2026-06-29T05:29:14.763979Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Awesome CPU and MCU documentation"
+description = "This repository contains documentation for various CPUs."
+homepage = "https://github.com/larsbrinkhoff/awesome-cpus"
+license = "CC0-1.0"
+visibility = "public"
+languages = [
+    "HTML",
+    "Shell",
+]
+topics = [
+    "cpu",
+    "avr",
+    "openrisc",
+    "mcu",
+    "vax",
+    "xtensa",
+    "microblaze",
+    "datasheet",
+    "sparc",
+    "powerpc",
+    "z80",
+    "pdp-10",
+    "pdp-11",
+    "pdp-1",
+    "pdp-8",
+    "arm",
+    "m68k",
+    "risc-v",
+    "i860",
+    "i960",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/larsbrinkhoff/awesome-cpus.git"
+default_branch = "master"
+fork = false
+head_sha = "fbd37421105fc591cb26f72fe9d13c35fb340ea9"
+html_url = "https://github.com/larsbrinkhoff/awesome-cpus"
+stars = 1994

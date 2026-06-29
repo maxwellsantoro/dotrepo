@@ -1,0 +1,105 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "whomwah",
+    "repo": "rqrcode",
+    "source": "https://github.com/whomwah/rqrcode"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/whomwah/rqrcode/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/whomwah/rqrcode",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/whomwah/rqrcode/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/whomwah/rqrcode",
+        "generated_at": "2026-06-29T05:27:29.679135Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "RQRCode",
+        "description": "RQRCode is a library for creating and rendering QR codes into various formats.",
+        "homepage": "https://github.com/whomwah/rqrcode",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Ruby"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "qrcode",
+          "qrcode-generator",
+          "ruby"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/whomwah/rqrcode",
+            "notes": "Cross-link from README: RQRCode",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/whomwah/rqrcode.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "4359b4192d1845691246a0d155d864d2569122b6",
+          "html_url": "https://github.com/whomwah/rqrcode",
+          "stars": 1998
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,65 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "isocpp",
+    "repo": "CppCoreGuidelines",
+    "source": "https://github.com/isocpp/CppCoreGuidelines"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/isocpp/CppCoreGuidelines/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/isocpp/CppCoreGuidelines",
+    "generatedAt": "2026-06-29T05:15:37.315131Z",
+    "evidencePath": "repos/github.com/isocpp/CppCoreGuidelines/evidence.md"
+  },
+  "purpose": "The aim of the guidelines is to help people to use modern C++ effectively.",
+  "name": "Background and scope",
+  "homepage": "http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "Makefile",
+    "Python"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"
+  },
+  "ownership": {
+    "securityContact": "cppcg-editors@isocpp.org"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/isocpp/CppCoreGuidelines/profile.json",
+    "repository": "/v0/repos/github.com/isocpp/CppCoreGuidelines/index.json",
+    "trust": "/v0/repos/github.com/isocpp/CppCoreGuidelines/trust.json",
+    "queryTemplate": "/v0/repos/github.com/isocpp/CppCoreGuidelines/query?path={dot_path}",
+    "indexPath": "repos/github.com/isocpp/CppCoreGuidelines/"
+  }
+}

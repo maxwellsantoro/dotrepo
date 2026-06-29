@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "roboflow",
+    "repo": "supervision",
+    "source": "https://github.com/roboflow/supervision"
+  },
+  "repository": {
+    "name": "roboflow%2Fsupervision | Trendshift",
+    "description": "📑 Table of Contents",
+    "homepage": "https://supervision.roboflow.com",
+    "docsRoot": "https://roboflow.github.io/supervision"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/roboflow/supervision/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/roboflow/supervision",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/roboflow/supervision/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/roboflow/supervision/index.json",
+    "trust": "/v0/repos/github.com/roboflow/supervision/trust.json",
+    "profile": "/v0/repos/github.com/roboflow/supervision/profile.json",
+    "queryTemplate": "/v0/repos/github.com/roboflow/supervision/query?path={dot_path}",
+    "indexPath": "repos/github.com/roboflow/supervision/"
+  }
+}

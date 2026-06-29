@@ -1,0 +1,115 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "itsfatduck",
+    "repo": "optimizerDuck",
+    "source": "https://github.com/itsfatduck/optimizerDuck"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/itsfatduck/optimizerDuck/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/itsfatduck/optimizerDuck",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/itsfatduck/optimizerDuck/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/itsfatduck/optimizerDuck",
+        "generated_at": "2026-06-29T05:25:54.675948Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "optimizerDuck Banner",
+        "description": "Free, open-source Windows optimization tool for performance, privacy, and simplicity.",
+        "homepage": "https://optimizerduck.vercel.app/",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "C#",
+          "HTML",
+          "JavaScript",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "optimizer",
+          "performance",
+          "tweaker",
+          "open-source",
+          "optimization",
+          "privacy",
+          "tweaks",
+          "windows",
+          "csharp",
+          "debloat",
+          "dotnet",
+          "gaming",
+          "optimizerduck",
+          "winui"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@itsfatduck"
+        ],
+        "team": null,
+        "security_contact": "https://github.com/itsfatduck/optimizerDuck"
+      },
+      "docs": {
+        "root": "https://optimizerduck.vercel.app/",
+        "getting_started": "https://optimizerduck.vercel.app/docs/guides/getting-started",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/itsfatduck/optimizerDuck.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "b472afe35ce33cfa59f9df47c7a60a4e29df29bf",
+          "html_url": "https://github.com/itsfatduck/optimizerDuck",
+          "stars": 4973
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

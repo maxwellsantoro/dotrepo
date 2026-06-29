@@ -1,0 +1,38 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/microsoft/fluentui-emoji"
+generated_at = "2026-06-29T05:19:58.252711Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@microsoft/fluent-system-icons` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Fluent Emoji"
+description = "Fluent Emoji are a collection of familiar, friendly, and modern emoji from Microsoft."
+homepage = "https://github.com/microsoft/fluentui-emoji"
+license = "MIT"
+visibility = "public"
+languages = ["Python"]
+topics = ["emoji"]
+
+[owners]
+maintainers = ["@microsoft/fluent-system-icons"]
+team = "@microsoft/fluent-system-icons"
+security_contact = "secure@microsoft.com"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/microsoft/fluentui-emoji.git"
+default_branch = "main"
+fork = false
+head_sha = "62ecdc0d7ca5c6df32148c169556bc8d3782fca4"
+html_url = "https://github.com/microsoft/fluentui-emoji"
+stars = 9997

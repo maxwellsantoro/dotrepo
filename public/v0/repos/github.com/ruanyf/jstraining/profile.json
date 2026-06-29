@@ -1,0 +1,55 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ruanyf",
+    "repo": "jstraining",
+    "source": "https://github.com/ruanyf/jstraining"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ruanyf/jstraining/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ruanyf/jstraining",
+    "generatedAt": "2026-06-29T05:16:12.14237Z",
+    "evidencePath": "repos/github.com/ruanyf/jstraining/evidence.md"
+  },
+  "purpose": "全栈工程师培训材料",
+  "name": "jstraining",
+  "homepage": "https://github.com/ruanyf/jstraining",
+  "visibility": "public",
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ruanyf/jstraining/profile.json",
+    "repository": "/v0/repos/github.com/ruanyf/jstraining/index.json",
+    "trust": "/v0/repos/github.com/ruanyf/jstraining/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ruanyf/jstraining/query?path={dot_path}",
+    "indexPath": "repos/github.com/ruanyf/jstraining/"
+  }
+}

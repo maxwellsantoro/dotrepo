@@ -1,0 +1,57 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "HobbitLong",
+    "repo": "PyContrast",
+    "source": "https://github.com/HobbitLong/PyContrast"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/HobbitLong/PyContrast/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/HobbitLong/PyContrast",
+    "generatedAt": "2026-06-29T05:27:56.787435Z",
+    "evidencePath": "repos/github.com/HobbitLong/PyContrast/evidence.md"
+  },
+  "purpose": "This repo lists recent contrastive learning **papers**, and includes **code** for many of them.",
+  "name": "PyContrast",
+  "homepage": "https://github.com/HobbitLong/PyContrast",
+  "visibility": "public",
+  "languages": [
+    "Python"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/HobbitLong/PyContrast/profile.json",
+    "repository": "/v0/repos/github.com/HobbitLong/PyContrast/index.json",
+    "trust": "/v0/repos/github.com/HobbitLong/PyContrast/trust.json",
+    "queryTemplate": "/v0/repos/github.com/HobbitLong/PyContrast/query?path={dot_path}",
+    "indexPath": "repos/github.com/HobbitLong/PyContrast/"
+  }
+}

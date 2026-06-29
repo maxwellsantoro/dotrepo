@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/iamkun/dayjs"
+generated_at = "2026-06-29T05:13:28.334914Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "API"
+description = "It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times."
+homepage = "https://day.js.org"
+license = "MIT"
+visibility = "public"
+languages = ["JavaScript"]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "time",
+    "date",
+    "date-formatting",
+    "datetime",
+    "moment",
+    "dayjs",
+]
+
+[docs]
+root = "https://day.js.org/docs/en/parse/parse"
+getting_started = "https://day.js.org/docs/en/installation/installation"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/iamkun/dayjs"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/iamkun/dayjs.git"
+default_branch = "dev"
+fork = false
+head_sha = "f6a1556deca9daedb00372cf40637b3037d82498"
+html_url = "https://github.com/iamkun/dayjs"
+stars = 48666

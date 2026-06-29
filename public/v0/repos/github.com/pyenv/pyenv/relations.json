@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "pyenv",
+    "repo": "pyenv",
+    "source": "https://github.com/pyenv/pyenv"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/rbenv/rbenv",
+      "notes": "Cross-link from README: rbenv",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "rbenv",
+        "repo": "rbenv"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/rbenv/rbenv/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/pyenv/pyenv/relations",
+    "repository": "/v0/repos/github.com/pyenv/pyenv/index.json",
+    "trust": "/v0/repos/github.com/pyenv/pyenv/trust.json",
+    "profile": "/v0/repos/github.com/pyenv/pyenv/profile.json",
+    "queryTemplate": "/v0/repos/github.com/pyenv/pyenv/query?path={dot_path}",
+    "indexPath": "repos/github.com/pyenv/pyenv/"
+  }
+}

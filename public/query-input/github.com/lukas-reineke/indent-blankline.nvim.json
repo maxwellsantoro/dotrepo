@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "lukas-reineke",
+    "repo": "indent-blankline.nvim",
+    "source": "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/lukas-reineke/indent-blankline.nvim/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/lukas-reineke/indent-blankline.nvim",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`. Left `repo.test` unset because `.github/workflows/pr_check.yml` and `.github/workflows/tests.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/lukas-reineke/indent-blankline.nvim/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/lukas-reineke/indent-blankline.nvim",
+        "generated_at": "2026-06-29T05:26:38.318815Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`. Left `repo.test` unset because `.github/workflows/pr_check.yml` and `.github/workflows/tests.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Indent Blankline",
+        "description": "This plugin adds indentation guides to Neovim.",
+        "homepage": "https://github.com/lukas-reineke/indent-blankline.nvim",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Lua",
+          "Makefile"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "vim",
+          "vim-plugin",
+          "neovim",
+          "neovim-plugin",
+          "indentation",
+          "hacktoberfest"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/lukas-reineke/indent-blankline.nvim.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
+          "html_url": "https://github.com/lukas-reineke/indent-blankline.nvim",
+          "stars": 4968
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

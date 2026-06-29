@@ -1,0 +1,71 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/streamyfin/streamyfin"
+generated_at = "2026-06-29T05:24:14.379137Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-apps.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Buy Me A Coffee"
+description = "Streamyfin is a user-friendly Jellyfin video streaming client built with Expo."
+homepage = "https://streamyfin.app/"
+license = "MPL-2.0"
+visibility = "public"
+languages = [
+    "JavaScript",
+    "Kotlin",
+    "Makefile",
+    "Ruby",
+    "Shell",
+    "Swift",
+    "TypeScript",
+]
+build = "bun run build:android:local"
+test = "npm test"
+topics = [
+    "jellyfin",
+    "android",
+    "ios",
+    "jellyfin-client",
+    "streaming-client",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/Streamyfin/Streamyfin/security/advisories"
+
+[docs]
+root = "https://streamyfin.app/"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/streamyfin/jellyfin-plugin-streamyfin"
+notes = "Cross-link from README: Streamyfin Plugin"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/streamyfin/streamyfin.git"
+default_branch = "develop"
+fork = false
+head_sha = "cc0007926d054374817a7db0629c928cda2e03c6"
+html_url = "https://github.com/streamyfin/streamyfin"
+stars = 4989

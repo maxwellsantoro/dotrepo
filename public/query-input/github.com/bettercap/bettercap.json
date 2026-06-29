@@ -1,0 +1,120 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "bettercap",
+    "repo": "bettercap",
+    "source": "https://github.com/bettercap/bettercap"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/bettercap/bettercap/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/bettercap/bettercap",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/bettercap/bettercap/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/bettercap/bettercap",
+        "generated_at": "2026-06-29T05:18:25.403319Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "BetterCap",
+        "description": "The Swiss Army knife for 802.11, BLE, HID, CAN-bus, IPv4 and IPv6 networks reconnaissance and MITM attacks.",
+        "homepage": "https://www.bettercap.org/",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Go",
+          "HTML",
+          "Makefile",
+          "Objective-C",
+          "Python"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "password-sniffer",
+          "mitm",
+          "rogue-ap",
+          "wifi",
+          "hacking",
+          "security",
+          "spoofing",
+          "proxy",
+          "wifi-security",
+          "deauthentication-attack",
+          "dot11",
+          "network-attacks",
+          "monitoring",
+          "pmkid",
+          "wpa2",
+          "redteam",
+          "ble",
+          "mousejack",
+          "hid",
+          "redteaming"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "unknown"
+      },
+      "docs": {
+        "root": "https://www.bettercap.org/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/bettercap/bettercap.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "7efbdca333ae3ea3cc299997c43b0b13bd1e5873",
+          "html_url": "https://github.com/bettercap/bettercap",
+          "stars": 19469
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

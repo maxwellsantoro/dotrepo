@@ -1,0 +1,47 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/google-deepmind/sonnet"
+generated_at = "2026-06-29T05:21:30.154367Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Sonnet"
+description = "Sonnet is a library built on top of TensorFlow 2 designed to provide simple, composable abstractions for machine learning research."
+homepage = "https://sonnet.dev/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Python",
+    "Shell",
+    "Starlark",
+]
+test = "pip install pytest pytest-xdist"
+topics = [
+    "machine-learning",
+    "artificial-intelligence",
+    "neural-networks",
+    "deep-learning",
+    "tensorflow",
+]
+
+[docs]
+root = "https://sonnet.readthedocs.io/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/google-deepmind/sonnet.git"
+default_branch = "v2"
+fork = false
+head_sha = "a3052a27a5b99b56a21e666bd0614e95e5c92df5"
+html_url = "https://github.com/google-deepmind/sonnet"
+stars = 9923

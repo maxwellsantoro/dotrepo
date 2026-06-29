@@ -1,0 +1,40 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Ramotion/expanding-collection-android"
+generated_at = "2026-06-29T05:27:44.265289Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "EXPANDING COLLECTION"
+description = "You can find this and other, more complex, examples in this repository ​"
+homepage = "https://www.ramotion.com/agency/app-development/"
+license = "MIT"
+visibility = "public"
+languages = ["Java"]
+topics = [
+    "android",
+    "java",
+    "library",
+]
+
+[docs]
+root = "https://www.ramotion.com/agency/app-development/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Ramotion/expanding-collection-android.git"
+default_branch = "master"
+fork = false
+head_sha = "07ca505e41db1c8d6972731df8834e236dd232c1"
+html_url = "https://github.com/Ramotion/expanding-collection-android"
+stars = 1997

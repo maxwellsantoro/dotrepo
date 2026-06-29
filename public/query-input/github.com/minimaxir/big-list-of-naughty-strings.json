@@ -1,0 +1,104 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "minimaxir",
+    "repo": "big-list-of-naughty-strings",
+    "source": "https://github.com/minimaxir/big-list-of-naughty-strings"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/minimaxir/big-list-of-naughty-strings/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/minimaxir/big-list-of-naughty-strings",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/minimaxir/big-list-of-naughty-strings/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/minimaxir/big-list-of-naughty-strings",
+        "generated_at": "2026-06-29T05:13:59.531825Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Big List of Naughty Strings",
+        "description": "The Big List of Naughty Strings is an evolving list of strings which have a high probability of causing issues when used as user-input data.",
+        "homepage": "https://github.com/minimaxir/big-list-of-naughty-strings",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Go",
+          "Makefile",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/minimaxir/big-list-of-naughty-strings#readme",
+            "notes": "Declared homepage in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/minimaxir/big-list-of-naughty-strings.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "db33ec7b1d5d9616a88c76394b7d0897bd0b97eb",
+          "html_url": "https://github.com/minimaxir/big-list-of-naughty-strings",
+          "stars": 47690
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

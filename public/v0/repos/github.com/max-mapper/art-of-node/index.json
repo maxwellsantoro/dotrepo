@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "max-mapper",
+    "repo": "art-of-node",
+    "source": "https://github.com/max-mapper/art-of-node"
+  },
+  "repository": {
+    "name": "An introduction to Node.js",
+    "description": "This document is intended for readers who know at least a little bit of a couple of things:",
+    "homepage": "https://github.com/max-mapper/art-of-node",
+    "docsRoot": "http://python-guide.readthedocs.org/en/latest/dev/virtualenvs/"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/max-mapper/art-of-node/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/max-mapper/art-of-node",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/max-mapper/art-of-node/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/max-mapper/art-of-node/index.json",
+    "trust": "/v0/repos/github.com/max-mapper/art-of-node/trust.json",
+    "profile": "/v0/repos/github.com/max-mapper/art-of-node/profile.json",
+    "queryTemplate": "/v0/repos/github.com/max-mapper/art-of-node/query?path={dot_path}",
+    "indexPath": "repos/github.com/max-mapper/art-of-node/"
+  }
+}

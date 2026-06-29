@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/terraform-aws-modules/terraform-aws-eks"
+generated_at = "2026-06-29T05:25:36.737142Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "AWS EKS Terraform module"
+description = "Terraform module which creates Amazon EKS (Kubernetes) resources"
+homepage = "https://registry.terraform.io/modules/terraform-aws-modules/eks/aws"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "HCL",
+    "PowerShell",
+    "Shell",
+    "Smarty",
+]
+topics = [
+    "terraform",
+    "terraform-module",
+    "aws",
+    "kubernetes",
+    "eks",
+    "elastic-kubernetes-service",
+    "aws-eks",
+    "aws-eks-cluster",
+]
+
+[docs]
+root = "https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/docs"
+getting_started = "https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/terraform-aws-modules/terraform-aws-eks.git"
+default_branch = "master"
+fork = false
+head_sha = "d4669ca8eb109a37f6c19ab8fb9487ab7521a9ba"
+html_url = "https://github.com/terraform-aws-modules/terraform-aws-eks"
+stars = 4975

@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/LunarVim/LunarVim"
+generated_at = "2026-06-29T05:19:12.285828Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/install.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Last commit"
+description = "An IDE layer for Neovim with sane defaults."
+homepage = "https://www.lunarvim.org"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Lua",
+    "Makefile",
+    "PowerShell",
+    "Shell",
+]
+test = "make test"
+topics = [
+    "neovim",
+    "vim",
+    "vimrc",
+    "nvim",
+    "ide",
+    "lunarvim",
+    "lua",
+    "linters",
+    "formatters",
+    "snippets",
+    "vscode",
+    "neovim-configuration",
+    "neovim-lua",
+    "neovim-config",
+    "neovim-setup",
+    "hacktoberfest",
+]
+
+[docs]
+root = "https://www.lunarvim.org"
+getting_started = "https://www.lunarvim.org/docs/installation"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/LunarVim/LunarVim.git"
+default_branch = "master"
+fork = false
+head_sha = "aa51c20f3404cb482e9c6fd6e5e4a4bf5b1612aa"
+html_url = "https://github.com/LunarVim/LunarVim"
+stars = 19263

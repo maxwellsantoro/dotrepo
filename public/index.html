@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
+  <title>dotrepo</title>
+  <meta name="description" content="Reusable, trust-aware repository understanding for humans, tools, and agents.">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f1e8;
+      --paper-strong: #efe6d7;
+      --ink: #16181b;
+      --muted: #5c635d;
+      --panel: rgba(255, 251, 244, 0.84);
+      --panel-strong: #fff8ee;
+      --line: rgba(54, 46, 28, 0.14);
+      --accent: #116466;
+      --accent-strong: #0d494b;
+      --signal: #c4572e;
+      --shadow: 0 18px 60px rgba(23, 27, 31, 0.12);
+      --radius: 22px;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(17, 100, 102, 0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(196, 87, 46, 0.12), transparent 30%),
+        linear-gradient(180deg, #fbf6ec 0%, var(--paper) 54%, var(--paper-strong) 100%);
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    code {
+      font-family: "SFMono-Regular", "JetBrains Mono", "Cascadia Code", monospace;
+      font-size: 0.92em;
+    }
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .brand__mark {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.06em;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .brand__dot {
+      display: inline-block;
+      width: 0.40em;
+      height: 0.40em;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      translate: 0 -0.05em;
+    }
+    .brand__tag {
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav__links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    .nav__links a {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.48);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+    .nav__links a:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.78);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+    .panel {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+    .hero__copy {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__copy::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -50px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(196, 87, 46, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      max-width: 10ch;
+    }
+    .hero__lede {
+      margin: 20px 0 0;
+      max-width: 38rem;
+      color: #273038;
+      font-size: 1.12rem;
+      line-height: 1.7;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 170px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+    .cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(17, 100, 102, 0.12);
+    }
+    .cta--primary {
+      background: linear-gradient(135deg, var(--accent) 0%, #0b4b5a 100%);
+      color: white;
+    }
+    .cta--secondary {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--line);
+    }
+    .hero__meta {
+      padding: 28px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 248, 238, 0.9)),
+        linear-gradient(135deg, rgba(17, 100, 102, 0.1), rgba(196, 87, 46, 0.08));
+    }
+    .hero__meta h2,
+    .section h2 {
+      margin: 0;
+      font-size: 0.84rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .stat-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .stat {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }
+    .stat strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+    .stat span {
+      color: var(--muted);
+      word-break: break-word;
+    }
+    .section {
+      margin-top: 26px;
+      padding: 30px;
+    }
+    .section h3 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+    }
+    .section__intro,
+    .section__note {
+      margin: 12px 0 0;
+      max-width: 48rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .section__note {
+      margin-top: 18px;
+    }
+    .section__note a {
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+    .lookup-shell {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .lookup-card {
+      min-width: 0;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }
+    .lookup-card h3 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+    .lookup-form {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .lookup-field {
+      display: grid;
+      gap: 8px;
+    }
+    .lookup-field span {
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .lookup-field input {
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(54, 46, 28, 0.16);
+      background: rgba(255, 251, 244, 0.92);
+      color: var(--ink);
+      font: inherit;
+    }
+    .lookup-field input:focus {
+      outline: 2px solid rgba(17, 100, 102, 0.24);
+      outline-offset: 2px;
+    }
+    .lookup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .lookup-button {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+    .lookup-feedback {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .lookup-feedback[data-state="error"] {
+      color: var(--signal);
+      font-weight: 700;
+    }
+    .three-up {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .feature {
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .api-grid {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .api-card {
+      min-width: 0;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }
+    .api-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .api-card pre {
+      margin: 14px 0 0;
+      padding: 16px;
+      overflow-x: auto;
+      border-radius: 16px;
+      background: #17191d;
+      color: #f6f1e8;
+      border: 1px solid rgba(54, 46, 28, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      line-height: 1.5;
+    }
+    .api-card__caption {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+    .api-card__caption code {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .endpoint-list {
+      display: grid;
+      gap: 12px;
+    }
+    .endpoint {
+      min-width: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255, 251, 244, 0.88);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+    }
+    .endpoint code {
+      min-width: 0;
+      color: var(--accent-strong);
+      font-weight: 600;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .lookup-card .endpoint code {
+      min-width: 0;
+      flex: 1 1 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .lookup-card .endpoint span {
+      min-width: 0;
+    }
+    .endpoint span {
+      min-width: 0;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+    .endpoint--query {
+      align-items: flex-start;
+    }
+    .endpoint--query code {
+      min-width: 0;
+      flex: 1 1 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .endpoint--query span {
+      min-width: 0;
+      flex: 1 1 14rem;
+    }
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .repo-card {
+      min-width: 0;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(54, 46, 28, 0.08);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .repo-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(23, 27, 31, 0.08);
+    }
+    .repo-card__eyebrow {
+      margin: 0 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--signal);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .repo-card__head h3 {
+      margin: 0;
+      font-size: 1.34rem;
+    }
+    .repo-card__path {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-family: "SFMono-Regular", "JetBrains Mono", "Cascadia Code", monospace;
+      font-size: 0.9rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .repo-card__description {
+      margin: 14px 0 0;
+      color: #30363c;
+      line-height: 1.7;
+    }
+    .repo-card__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+      font-weight: 700;
+      color: var(--accent-strong);
+    }
+    .footer {
+      margin-top: 28px;
+      padding: 10px 2px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 980px) {
+      .hero,
+      .api-grid,
+      .lookup-shell,
+      .repo-grid,
+      .three-up {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 720px) {
+      .page {
+        padding: 18px 14px 56px;
+      }
+      .hero__copy,
+      .hero__meta,
+      .section {
+        padding: 22px;
+      }
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .nav__links {
+        justify-content: flex-start;
+      }
+      .cta {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script id="dotrepo-homepage-snapshot" type="application/json">{"apiVersion":"v0","generatedAt":"2026-06-29T06:00:00Z","snapshotDigest":"2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e","staleAfter":"2026-06-30T06:00:00Z","repositoryCount":613}</script>
+  <div class="page">
+    <header class="nav" aria-label="Top navigation">
+      <div class="brand">
+        <a class="brand__mark" href="/" aria-label="dotrepo — home"><span class="brand__dot" aria-hidden="true"></span><span>repo</span></a>
+        <span class="brand__tag">open metadata protocol</span>
+      </div>
+      <nav class="nav__links">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/docs/">Docs</a>
+        <a href="/writing/">Writing</a>
+        <a href="/repositories/">Repositories</a>
+        <a href="https://github.com/maxwellsantoro/dotrepo">GitHub</a>
+        <a href="/v0/meta.json">Snapshot</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="panel hero__copy">
+        <p class="eyebrow">Live public surface</p>
+        <h1>Repository understanding, made reusable.</h1>
+        <p class="hero__lede">
+          dotrepo is a trust contract for repository metadata. The important
+          part is not that a <code>.repo</code> file exists. The important part
+          is that hosted answers carry selection reason, provenance, and claim
+          context instead of pretending repository metadata is conflict-free.
+        </p>
+        <div class="cta-row">
+          <a class="cta cta--primary" href="/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json">See the live trust handoff</a>
+          <a class="cta cta--secondary" href="/v0/repos/index.json">Explore the public index</a>
+          <a class="cta cta--secondary" href="/docs/">Read the docs</a>
+          <a class="cta cta--secondary" href="https://github.com/maxwellsantoro/dotrepo">Read the code</a>
+        </div>
+      </div>
+
+      <aside class="panel hero__meta">
+        <h2>Growth and snapshot</h2>
+        <div class="stat-grid">
+          <div class="stat">
+            <strong>613 repositories</strong>
+            <span>Published in the current validated export.</span>
+          </div>
+          <div class="stat">
+            <strong>516 reviewed or verified</strong>
+            <span>97 records remain imported or inferred.</span>
+          </div>
+          <div class="stat">
+            <strong>Rust 21 · TypeScript/JS 238 · Python 135 · Go 96 · Other 123</strong>
+            <span>Primary language-family mix in checked-in index records.</span>
+          </div>
+          <div class="stat">
+            <strong>1 accepted claim example</strong>
+            <span>Accepted maintainer-owned claim examples in the checked-in index.</span>
+          </div>
+          <div class="stat">
+            <strong>2026-06-29 06:00 UTC</strong>
+            <span>Snapshot generated at.</span>
+          </div>
+          <div class="stat">
+            <strong><code>2e779bd9bf40...9d1f29e24e</code></strong>
+            <span>Snapshot digest <code>2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e</code>.</span>
+          </div>
+          <div class="stat">
+            <strong>Stale after</strong>
+            <span>2026-06-30 06:00 UTC</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="panel section">
+      <h2>Trust proof</h2>
+      <p class="section__intro">
+        The strongest live artifact on this site is not a generic field lookup. It is a claim-aware trust response that shows accepted maintainer state, preserved reviewed overlay context, and canonical handoff without silently flattening history away.
+      </p>
+      <div class="api-grid">
+        <article class="api-card">
+          <h3>ries-rs</h3>
+          <p><code>github.com/maxwellsantoro/ries-rs</code></p>
+          <p>Rust inverse equation solver for turning a target number into compact algebraic equations.</p>
+          <div class="endpoint-list">
+            <div class="endpoint">
+              <code>claim state: accepted</code>
+              <span>The current exported claim state for the selected record.</span>
+            </div>
+            <div class="endpoint">
+              <code>handoff: superseded</code>
+              <span>The reviewed overlay remains visible while the accepted maintainer claim points to the canonical source of truth.</span>
+            </div>
+            <div class="endpoint">
+              <code>confidence: high</code>
+              <span>Provenance: imported, verified</span>
+            </div>
+            <div class="endpoint">
+              <code>Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Import...</code>
+              <span>Selection stays explained instead of being reduced to a bare answer.</span>
+            </div>
+          </div>
+          <div class="repo-card__links">
+            <a href="/v0/repos/github.com/maxwellsantoro/ries-rs/index.json">Summary</a>
+            <a href="/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json">Trust</a>
+            <a href="/v0/repos/github.com/maxwellsantoro/ries-rs/query?path=repo.description">Query</a>
+          </div>
+        </article>
+        <article class="api-card">
+          <h3>What the live trust surface returns</h3>
+          <p>This excerpt comes from the current exported snapshot and keeps the handoff visible. That is the product proof most metadata layers cannot show.</p>
+          <pre><code>{
+  &quot;identity&quot;: {
+    &quot;host&quot;: &quot;github.com&quot;,
+    &quot;owner&quot;: &quot;maxwellsantoro&quot;,
+    &quot;repo&quot;: &quot;ries-rs&quot;
+  },
+  &quot;selection&quot;: {
+    &quot;reason&quot;: &quot;only_matching_record&quot;,
+    &quot;recordStatus&quot;: &quot;verified&quot;,
+    &quot;claim&quot;: {
+      &quot;state&quot;: &quot;accepted&quot;,
+      &quot;handoff&quot;: &quot;superseded&quot;
+    },
+    &quot;trust&quot;: {
+      &quot;confidence&quot;: &quot;high&quot;,
+      &quot;provenance&quot;: [
+        &quot;imported&quot;,
+        &quot;verified&quot;
+      ],
+      &quot;notes&quot;: &quot;Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Import...&quot;
+    },
+    &quot;artifacts&quot;: {
+      &quot;reviewPath&quot;: &quot;repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/review.md&quot;,
+      &quot;evidencePath&quot;: &quot;repos/github.com/maxwellsantoro/ries-rs/evidence.md&quot;
+    }
+  },
+  &quot;conflicts&quot;: []
+}</code></pre>
+          <p class="api-card__caption">Review path: <code>repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/review.md</code> · Evidence path: <code>repos/github.com/maxwellsantoro/ries-rs/evidence.md</code></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <h2>Repo lookup</h2>
+      <p class="section__intro">
+        Paste a repository URL and jump straight to the hosted summary or trust
+        surface. This keeps the human path aligned with the shipped
+        <code>dotrepo.lookup</code> MCP tool instead of inventing a separate browse product.
+      </p>
+      <div class="lookup-shell">
+        <article class="lookup-card">
+          <h3>Paste a repository URL or identity</h3>
+          <p class="section__intro">Open the live hosted summary or trust surface directly from the current public index. The same public origin also powers the MCP <code>dotrepo.lookup</code> tool.</p>
+          <form class="lookup-form" id="repo-lookup-form">
+            <label class="lookup-field" for="repo-lookup-input">
+              <span>Repository</span>
+              <input id="repo-lookup-input" name="repository" type="text" placeholder="github.com/BurntSushi/ripgrep" autocomplete="off" spellcheck="false" required>
+            </label>
+            <div class="lookup-actions">
+              <button class="cta cta--primary lookup-button" type="submit">Open summary</button>
+              <button class="cta cta--secondary lookup-button" type="button" id="repo-lookup-trust">Open trust</button>
+            </div>
+            <p class="lookup-feedback" id="repo-lookup-feedback">Accepted inputs: <code>owner/repo</code>, <code>host/owner/repo</code>, a GitHub URL, or a hosted dotrepo summary or trust URL.</p>
+          </form>
+        </article>
+        <article class="lookup-card">
+          <h3>Examples</h3>
+          <div class="endpoint-list">
+            <div class="endpoint">
+              <code>BurntSushi/ripgrep</code>
+              <span>Defaults to <code>github.com</code> for shorthand input.</span>
+            </div>
+            <div class="endpoint">
+              <code>github.com/astral-sh/uv</code>
+              <span>Explicit host plus identity segments.</span>
+            </div>
+            <div class="endpoint">
+              <code>https://github.com/pydantic/pydantic</code>
+              <span>Full repository URL.</span>
+            </div>
+            <div class="endpoint">
+              <code>https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/index.json</code>
+              <span>Hosted summary or trust URL pasted back into the lookup box.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <script>
+        (() => {
+          const basePath = "";
+          const form = document.getElementById("repo-lookup-form");
+          const input = document.getElementById("repo-lookup-input");
+          const feedback = document.getElementById("repo-lookup-feedback");
+          const trustButton = document.getElementById("repo-lookup-trust");
+
+          function trimRepoSuffix(value) {
+            return value.endsWith(".git") ? value.slice(0, -4) : value;
+          }
+
+          function assertSegment(label, value) {
+            if (!value || value.includes("/")) {
+              throw new Error(`Invalid ${label} segment.`);
+            }
+            return value;
+          }
+
+          function parseLookupTarget(rawValue) {
+            const value = rawValue.trim();
+            if (!value) {
+              throw new Error("Enter a repository URL or host/owner/repo.");
+            }
+
+            if (value.includes("/v0/repos/")) {
+              const hostedMatch = value.match(/\/v0\/repos\/([^/]+)\/([^/]+)\/([^/]+)\/(?:index|trust)\.json$/);
+              if (hostedMatch) {
+                return {
+                  host: assertSegment("host", hostedMatch[1]),
+                  owner: assertSegment("owner", hostedMatch[2]),
+                  repo: assertSegment("repo", trimRepoSuffix(hostedMatch[3])),
+                };
+              }
+            }
+
+            let parsedUrl = null;
+            if (/^[a-z][a-z0-9+.-]*:\/\//i.test(value)) {
+              parsedUrl = new URL(value);
+            } else if (value.includes("/") && value.includes(".")) {
+              parsedUrl = new URL(`https://${value.replace(/^\/+/, "")}`);
+            }
+
+            if (parsedUrl) {
+              const pathSegments = parsedUrl.pathname.split("/").filter(Boolean);
+              if (pathSegments.length < 2) {
+                throw new Error("Repository URLs must include owner and repo segments.");
+              }
+              return {
+                host: assertSegment("host", parsedUrl.hostname),
+                owner: assertSegment("owner", pathSegments[0]),
+                repo: assertSegment("repo", trimRepoSuffix(pathSegments[1])),
+              };
+            }
+
+            const segments = value.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+            if (segments.length === 2) {
+              return {
+                host: "github.com",
+                owner: assertSegment("owner", segments[0]),
+                repo: assertSegment("repo", trimRepoSuffix(segments[1])),
+              };
+            }
+            if (segments.length >= 3) {
+              return {
+                host: assertSegment("host", segments[0]),
+                owner: assertSegment("owner", segments[1]),
+                repo: assertSegment("repo", trimRepoSuffix(segments[2])),
+              };
+            }
+            throw new Error("Use owner/repo, host/owner/repo, or a full repository URL.");
+          }
+
+          function buildDestination(kind, target) {
+            const suffix = kind === "trust" ? "trust.json" : "index.json";
+            return `${basePath}/v0/repos/${encodeURIComponent(target.host)}/${encodeURIComponent(target.owner)}/${encodeURIComponent(target.repo)}/${suffix}`;
+          }
+
+          function openLookup(kind) {
+            try {
+              const target = parseLookupTarget(input.value);
+              feedback.dataset.state = "ready";
+              feedback.textContent = `Opening ${kind} for ${target.host}/${target.owner}/${target.repo}`;
+              window.location.assign(buildDestination(kind, target));
+            } catch (error) {
+              feedback.dataset.state = "error";
+              feedback.textContent = error instanceof Error ? error.message : "Lookup failed.";
+            }
+          }
+
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            openLookup("summary");
+          });
+
+          trustButton.addEventListener("click", () => {
+            openLookup("trust");
+          });
+        })();
+      </script>
+    </section>
+
+    <section class="panel section">
+      <h2>Why dotrepo</h2>
+      <div class="three-up">
+        <article class="feature">
+          <h3>For maintainers</h3>
+          <p>Keep essential repository facts in one trustworthy layer instead of scattering them across README files, CI, platform settings, and tribal knowledge.</p>
+        </article>
+        <article class="feature">
+          <h3>For users</h3>
+          <p>Inspect what a project is, how it should be trusted, and where claims came from without cloning the index or reading every supporting file first.</p>
+        </article>
+        <article class="feature">
+          <h3>For agents and tools</h3>
+          <p>Query stable JSON and same-origin endpoints directly instead of guessing intent from prose, conventions, and partially structured repository surfaces.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <h2>Docs</h2>
+      <p class="section__intro">
+        The public site now keeps the documentation entrypoint on the first-party domain. Detailed working docs still live in the repository, but the navigation no longer treats the site as a thin wrapper around GitHub.
+      </p>
+      <div class="three-up">
+        <article class="feature">
+          <h3>Product and status</h3>
+          <p>Start with the project overview, install guide, and maintainer path before diving into RFC history or operator detail.</p>
+        </article>
+        <article class="feature">
+          <h3>Protocol and trust</h3>
+          <p>The trust model, public surface architecture, and roadmap explain how reusable facts remain honest: provenance, precedence, freshness, and visible conflict.</p>
+        </article>
+        <article class="feature">
+          <h3>Autonomous index</h3>
+          <p>The roadmap, index rules, and maintainer-claim docs show how evidence-backed overlays scale without confusing generated facts with maintainer authority.</p>
+        </article>
+      </div>
+      <p class="section__note">
+        Start at <a href="/docs/">the first-party docs landing page</a>.
+      </p>
+    </section>
+
+    <section class="panel section">
+      <h2>Interview-backed priorities</h2>
+      <p class="section__intro">
+        A 9-model, 12-session interview round on dotrepo's current shape converged on three
+        priorities: grow coverage until checking dotrepo is the cheap default,
+        preserve trust and freshness, and keep the core contract focused.
+      </p>
+      <div class="three-up">
+        <article class="feature">
+          <h3>Broaden coverage</h3>
+          <p>Remote lookup has shipped. The next bar is broader ecosystem coverage with measurable field quality.</p>
+        </article>
+        <article class="feature">
+          <h3>Automate the conveyor</h3>
+          <p>Deterministic parsers do the common work, unresolved fields escalate through bounded model tiers, and machine gates publish or abstain without a routine human queue.</p>
+        </article>
+        <article class="feature">
+          <h3>Keep it small</h3>
+          <p>The trust model, freshness semantics, hosted lookup, and compact schema remain the differentiators. Discovery should be built on profile quality, not used to disguise its absence.</p>
+        </article>
+      </div>
+      <p class="section__note">
+        Read the on-site write-up:
+        <a href="/writing/what-the-ais-think-about-dotrepo/">What the AIs Think About dotrepo</a>.
+        Working repo notes remain in
+        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>.
+      </p>
+    </section>
+
+    <section class="panel section">
+      <h2>Writing</h2>
+      <p class="section__intro">
+        Ongoing field reports, launch notes, and research syntheses from the protocol,
+        public surface, and agent-facing product work.
+      </p>
+      <div class="repo-grid">
+        <article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Writing</p>
+                <h3>What the AIs Think About dotrepo</h3>
+                <p class="repo-card__path">March 18, 2026</p>
+              </div>
+              <p class="repo-card__description">A dotrepo-side synthesis of a 9-model, 12-session interview round about repository metadata, trust, adoption, and what AI coding tools actually need.</p>
+              <div class="repo-card__links">
+                <a href="/writing/what-the-ais-think-about-dotrepo/">Read article</a>
+                <a href="https://maxwellsantoro.com/writing/i-asked-9-ai-models-what-they-want-from-a-repository-metadata-protocol/">Companion essay</a>
+              </div>
+            </article>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <h2>Public API</h2>
+      <div class="api-grid">
+        <article class="api-card">
+          <h3>Stable entry points</h3>
+          <p>The public surface is export-first. Summary, trust, inventory, freshness, and query responses all come from the same validated snapshot family.</p>
+          <div class="endpoint-list">
+            <div class="endpoint">
+              <code>/v0/meta.json</code>
+              <span>Snapshot freshness and digest metadata.</span>
+            </div>
+            <div class="endpoint">
+              <code>/v0/repos/index.json</code>
+              <span>Repository inventory and navigation links.</span>
+            </div>
+            <div class="endpoint">
+              <code>/v0/repos/&lt;host&gt;/&lt;owner&gt;/&lt;repo&gt;/index.json</code>
+              <span>Per-repository summary surface.</span>
+            </div>
+            <div class="endpoint">
+              <code>/v0/repos/&lt;host&gt;/&lt;owner&gt;/&lt;repo&gt;/trust.json</code>
+              <span>Selection, provenance, and claim context.</span>
+            </div>
+            <div class="endpoint">
+              <code>/v0/repos/&lt;host&gt;/&lt;owner&gt;/&lt;repo&gt;/query?path=...</code>
+              <span>Same-origin trust-aware field queries.</span>
+            </div>
+            <div class="endpoint">
+              <code>read-only / same-origin / claim-aware</code>
+              <span>No mutation API, one canonical host, and trust context stays visible on every query path.</span>
+            </div>
+          </div>
+        </article>
+        <article class="api-card">
+          <h3>What a query returns</h3>
+          <p>The query route returns the selected value together with selection, trust, and conflict context. This truncated example is derived from the current exported snapshot.</p>
+          <div class="endpoint endpoint--query">
+            <code>/v0/repos/github.com/0x192/universal-android-debloater/query?path=repo.description</code>
+            <span>Example live query for <code>repo.description</code>.</span>
+          </div>
+          <pre><code>{
+  &quot;path&quot;: &quot;repo.description&quot;,
+  &quot;value&quot;: &quot;**DISCLAIMER**: Use at your own risk.&quot;,
+  &quot;selection&quot;: {
+    &quot;reason&quot;: &quot;only_matching_record&quot;,
+    &quot;recordStatus&quot;: &quot;verified&quot;,
+    &quot;trust&quot;: {
+      &quot;confidence&quot;: &quot;high&quot;,
+      &quot;provenance&quot;: [
+        &quot;imported&quot;,
+        &quot;verified&quot;
+      ],
+      &quot;notes&quot;: &quot;Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted...&quot;
+    },
+    &quot;evidencePath&quot;: &quot;repos/github.com/0x192/universal-android-debloater/evidence.md&quot;
+  },
+  &quot;conflicts&quot;: []
+}</code></pre>
+          <p class="api-card__caption">Full responses also include freshness, repository identity, and navigation links.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel section">
+      <h2>Indexed repositories</h2>
+      <p class="section__intro">A small sample from the current export. Use the repository catalog to search the complete index.</p>
+      <div class="repo-grid">
+        <article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Indexed repository</p>
+                <h3>Universal Android Debloater GUI</h3>
+                <p class="repo-card__path">github.com/0x192/universal-android-debloater</p>
+              </div>
+              <p class="repo-card__description">**DISCLAIMER**: Use at your own risk.</p>
+              <div class="repo-card__links">
+                <a href="/v0/repos/github.com/0x192/universal-android-debloater/index.json">Summary</a>
+                <a href="/v0/repos/github.com/0x192/universal-android-debloater/trust.json">Trust</a>
+                <a href="/v0/repos/github.com/0x192/universal-android-debloater/query?path=repo.description">Query</a>
+              </div>
+            </article>
+<article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Indexed repository</p>
+                <h3>v2rayN</h3>
+                <p class="repo-card__path">github.com/2dust/v2rayN</p>
+              </div>
+              <p class="repo-card__description">Download the latest release here:</p>
+              <div class="repo-card__links">
+                <a href="/v0/repos/github.com/2dust/v2rayN/index.json">Summary</a>
+                <a href="/v0/repos/github.com/2dust/v2rayN/trust.json">Trust</a>
+                <a href="/v0/repos/github.com/2dust/v2rayN/query?path=repo.description">Query</a>
+              </div>
+            </article>
+<article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Indexed repository</p>
+                <h3>Sublink Worker</h3>
+                <p class="repo-card__path">github.com/7Sageer/sublink-worker</p>
+              </div>
+              <p class="repo-card__description">A lightweight subscription converter and manager for proxy protocols, deployable on Cloudflare Workers, Vercel, Node.js, or Docker.</p>
+              <div class="repo-card__links">
+                <a href="/v0/repos/github.com/7Sageer/sublink-worker/index.json">Summary</a>
+                <a href="/v0/repos/github.com/7Sageer/sublink-worker/trust.json">Trust</a>
+                <a href="/v0/repos/github.com/7Sageer/sublink-worker/query?path=repo.description">Query</a>
+              </div>
+            </article>
+<article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Indexed repository</p>
+                <h3>Stable Diffusion web UI</h3>
+                <p class="repo-card__path">github.com/AUTOMATIC1111/stable-diffusion-webui</p>
+              </div>
+              <p class="repo-card__description">A web interface for Stable Diffusion, implemented using Gradio library.</p>
+              <div class="repo-card__links">
+                <a href="/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/index.json">Summary</a>
+                <a href="/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/trust.json">Trust</a>
+                <a href="/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/query?path=repo.description">Query</a>
+              </div>
+            </article>
+<article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Indexed repository</p>
+                <h3>AI Pair Programming in Your Terminal</h3>
+                <p class="repo-card__path">github.com/Aider-AI/aider</p>
+              </div>
+              <p class="repo-card__description">Aider lets you pair program with LLMs to start a new project or build on your existing codebase.</p>
+              <div class="repo-card__links">
+                <a href="/v0/repos/github.com/Aider-AI/aider/index.json">Summary</a>
+                <a href="/v0/repos/github.com/Aider-AI/aider/trust.json">Trust</a>
+                <a href="/v0/repos/github.com/Aider-AI/aider/query?path=repo.description">Query</a>
+              </div>
+            </article>
+<article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Indexed repository</p>
+                <h3>interesting-python: 有趣的Python爬虫和数据分析小项目</h3>
+                <p class="repo-card__path">github.com/Alfred1984/interesting-python</p>
+              </div>
+              <p class="repo-card__description">可以用Python实现的有趣的小项目，内容包括Python爬虫、Python数据分析、机器学习、深度学习等，持续更新中。 本Repository主要用于存放项目代码，对应的项目文章可以关注公众号。</p>
+              <div class="repo-card__links">
+                <a href="/v0/repos/github.com/Alfred1984/interesting-python/index.json">Summary</a>
+                <a href="/v0/repos/github.com/Alfred1984/interesting-python/trust.json">Trust</a>
+                <a href="/v0/repos/github.com/Alfred1984/interesting-python/query?path=repo.description">Query</a>
+              </div>
+            </article>
+<article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Indexed repository</p>
+                <h3>Alibaba-NLP%2FDeepResearch | Trendshift</h3>
+                <p class="repo-card__path">github.com/Alibaba-NLP/DeepResearch</p>
+              </div>
+              <p class="repo-card__description">👏 Welcome to try Tongyi DeepResearch via our ** Modelscope online demo** or **🤗 Huggingface online demo** or **bailian service**!</p>
+              <div class="repo-card__links">
+                <a href="/v0/repos/github.com/Alibaba-NLP/DeepResearch/index.json">Summary</a>
+                <a href="/v0/repos/github.com/Alibaba-NLP/DeepResearch/trust.json">Trust</a>
+                <a href="/v0/repos/github.com/Alibaba-NLP/DeepResearch/query?path=repo.description">Query</a>
+              </div>
+            </article>
+<article class="repo-card">
+              <div class="repo-card__head">
+                <p class="repo-card__eyebrow">Indexed repository</p>
+                <h3>discussions</h3>
+                <p class="repo-card__path">github.com/AlistGo/alist</p>
+              </div>
+              <p class="repo-card__description">Please go to our discussion forum for general questions, **issues are for bug reports and feature requests only.**</p>
+              <div class="repo-card__links">
+                <a href="/v0/repos/github.com/AlistGo/alist/index.json">Summary</a>
+                <a href="/v0/repos/github.com/AlistGo/alist/trust.json">Trust</a>
+                <a href="/v0/repos/github.com/AlistGo/alist/query?path=repo.description">Query</a>
+              </div>
+            </article>
+      </div>
+      <p class="section__note"><a href="/repositories/">Browse all 613 repositories</a></p>
+    </section>
+
+    <footer class="footer">
+      <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
+      <span>Homepage lookup resolves the same hosted surface used by MCP <code>dotrepo.lookup</code>.</span>
+      <span>Staging remains the deployed <code>workers.dev</code> Worker.</span>
+      <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
+    </footer>
+  </div>
+</body>
+</html>

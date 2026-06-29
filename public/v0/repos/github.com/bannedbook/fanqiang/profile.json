@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "bannedbook",
+    "repo": "fanqiang",
+    "source": "https://github.com/bannedbook/fanqiang"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/bannedbook/fanqiang/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/bannedbook/fanqiang",
+    "generatedAt": "2026-06-29T05:13:38.070431Z",
+    "evidencePath": "repos/github.com/bannedbook/fanqiang/evidence.md"
+  },
+  "purpose": "请首先自行安装Google Chrome 浏览器，然后下载Chrome一键翻墙包，本软件会自动调用Google Chrome 浏览器翻墙。 下载后，解压出来，请不要解压到含有中文或空格的目录路径，请不要不解压就直接从压缩包里运行！不解压会出错！ 下载后，请认真阅读里面的使用帮助说明，然后 0.xx-10.xx翻墙 可依次尝试。 自动回复最新翻墙信息网址：freeman105@gmail.com，邮箱不解答问题,如需反馈交流，请点我或加入翻墙电报群:",
+  "name": "fanqiang",
+  "homepage": "https://github.com/bannedbook/fanqiang",
+  "visibility": "public",
+  "languages": [
+    "AIDL",
+    "Batchfile",
+    "Go",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Perl",
+    "Python",
+    "Ruby",
+    "Shell"
+  ],
+  "topics": [
+    "ssr",
+    "v2ray",
+    "shadowsocks",
+    "fanqiang",
+    "proxy",
+    "goflyway",
+    "daze",
+    "brook",
+    "lightsocks",
+    "trojan",
+    "psiphon"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/bannedbook/fanqiang/profile.json",
+    "repository": "/v0/repos/github.com/bannedbook/fanqiang/index.json",
+    "trust": "/v0/repos/github.com/bannedbook/fanqiang/trust.json",
+    "queryTemplate": "/v0/repos/github.com/bannedbook/fanqiang/query?path={dot_path}",
+    "indexPath": "repos/github.com/bannedbook/fanqiang/"
+  }
+}

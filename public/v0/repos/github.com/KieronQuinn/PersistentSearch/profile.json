@@ -1,0 +1,57 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "KieronQuinn",
+    "repo": "PersistentSearch",
+    "source": "https://github.com/KieronQuinn/PersistentSearch"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/KieronQuinn/PersistentSearch/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/KieronQuinn/PersistentSearch",
+    "generatedAt": "2026-06-29T05:27:33.298898Z",
+    "evidencePath": "repos/github.com/KieronQuinn/PersistentSearch/evidence.md"
+  },
+  "purpose": "A library that implements the persistent search bar seen on apps such as Google Now, Google Maps and Google Play",
+  "name": "This project is deprecated",
+  "homepage": "https://github.com/KieronQuinn/PersistentSearch",
+  "visibility": "public",
+  "languages": [
+    "Java"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/KieronQuinn/PersistentSearch/profile.json",
+    "repository": "/v0/repos/github.com/KieronQuinn/PersistentSearch/index.json",
+    "trust": "/v0/repos/github.com/KieronQuinn/PersistentSearch/trust.json",
+    "queryTemplate": "/v0/repos/github.com/KieronQuinn/PersistentSearch/query?path={dot_path}",
+    "indexPath": "repos/github.com/KieronQuinn/PersistentSearch/"
+  }
+}

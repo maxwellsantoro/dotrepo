@@ -1,0 +1,99 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "daliansky",
+    "repo": "Hackintosh",
+    "source": "https://github.com/daliansky/Hackintosh"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/daliansky/Hackintosh/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/daliansky/Hackintosh",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/daliansky/Hackintosh/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/daliansky/Hackintosh",
+        "generated_at": "2026-06-29T05:20:59.823927Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Hackintosh 黑苹果长期维护机型 EFI 及安装教程整理",
+        "description": "553283949 黑果小兵黑苹果技术群 6 2000 人群",
+        "homepage": "https://github.com/daliansky/Hackintosh",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "hackintosh",
+          "macos",
+          "efi",
+          "clover",
+          "mojave",
+          "bootloader",
+          "apple",
+          "hackintool",
+          "opencore",
+          "bigsur",
+          "catalina",
+          "highsierra",
+          "monterey"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/daliansky/Hackintosh.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "33b074774843611c28a6afa3d57c65178141fd51",
+          "html_url": "https://github.com/daliansky/Hackintosh",
+          "stars": 9941
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

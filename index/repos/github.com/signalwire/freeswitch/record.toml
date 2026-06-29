@@ -1,0 +1,92 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/signalwire/freeswitch"
+generated_at = "2026-06-29T05:26:30.608241Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.test` from `.github/workflows/unit-test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "FreeSWITCH"
+description = "FreeSWITCH is a Software Defined Telecom Stack enabling the digital transformation from proprietary telecom switches to a versatile software implementation that runs on any commodity hardware."
+homepage = "https://freeswitch.com/#getting-started"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "ActionScript",
+    "Assembly",
+    "Awk",
+    "Batchfile",
+    "BitBake",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Emacs Lisp",
+    "Erlang",
+    "F#",
+    "GDB",
+    "Go Template",
+    "HTML",
+    "Inno Setup",
+    "Java",
+    "JavaScript",
+    "Limbo",
+    "Lua",
+    "M4",
+    "Makefile",
+    "Meson",
+    "PHP",
+    "Pascal",
+    "Perl",
+    "Processing",
+    "Python",
+    "QMake",
+    "QuickBASIC",
+    "Raku",
+    "Roff",
+    "Ruby",
+    "SWIG",
+    "Shell",
+    "Smarty",
+    "Tcl",
+    "XSLT",
+]
+test = "make check"
+topics = [
+    "freeswitch",
+    "signalwire",
+    "open-source",
+    "source-code",
+    "voip",
+    "webrtc",
+    "telephony",
+    "sip",
+    "iot",
+]
+
+[owners]
+maintainers = []
+security_contact = "security@signalwire.com"
+
+[docs]
+root = "https://freeswitch.com/#getting-started"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/signalwire/freeswitch.git"
+default_branch = "master"
+fork = false
+head_sha = "b9c41705b755623c9cc365e41bc0a347e5854b85"
+html_url = "https://github.com/signalwire/freeswitch"
+stars = 4968

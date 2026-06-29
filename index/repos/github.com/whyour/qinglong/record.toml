@@ -1,0 +1,73 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "inferred"
+source = "https://github.com/whyour/qinglong"
+generated_at = "2026-06-29T05:17:25.947553Z"
+
+[record.trust]
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.name` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-docker-image.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "qinglong"
+description = "简体中文 | English"
+homepage = "https://qinglong.online"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "JavaScript",
+    "Less",
+    "Python",
+    "Shell",
+    "TypeScript",
+]
+build = "pnpm build:front"
+test = "pnpm test"
+topics = [
+    "crontab",
+    "python",
+    "javascript",
+    "task-manager",
+    "typescript",
+    "shell",
+    "docker",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/whyour/qinglong/security"
+
+[docs]
+root = "https://qinglong.online"
+getting_started = "https://qinglong.online/guide/getting-started/installation-guide"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/whyour/qinglong"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/whyour/qinglong.git"
+default_branch = "develop"
+fork = false
+head_sha = "d3016431ce376def56bd4c8896635ead4781e0ac"
+html_url = "https://github.com/whyour/qinglong"
+stars = 19664

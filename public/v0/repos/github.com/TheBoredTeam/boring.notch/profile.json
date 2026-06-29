@@ -1,0 +1,66 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "TheBoredTeam",
+    "repo": "boring.notch",
+    "source": "https://github.com/TheBoredTeam/boring.notch"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/TheBoredTeam/boring.notch/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/TheBoredTeam/boring.notch",
+    "generatedAt": "2026-06-29T05:23:14.998048Z",
+    "evidencePath": "repos/github.com/TheBoredTeam/boring.notch/evidence.md"
+  },
+  "purpose": "Say hello to **Boring Notch**, the coolest way to make your MacBook’s notch the star of the show! Say goodbye to boring status bars: with Boring Notch, your notch transforms into a dynamic music control center, complete with a vibrant visualizer and all the essential music controls you need.",
+  "name": "Boring Notch",
+  "homepage": "https://theboring.name/",
+  "license": "GPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Metal",
+    "Perl",
+    "Python",
+    "Shell",
+    "Swift"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://theboring.name/"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/TheBoredTeam/boring.notch/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/TheBoredTeam/boring.notch/profile.json",
+    "repository": "/v0/repos/github.com/TheBoredTeam/boring.notch/index.json",
+    "trust": "/v0/repos/github.com/TheBoredTeam/boring.notch/trust.json",
+    "queryTemplate": "/v0/repos/github.com/TheBoredTeam/boring.notch/query?path={dot_path}",
+    "indexPath": "repos/github.com/TheBoredTeam/boring.notch/"
+  }
+}

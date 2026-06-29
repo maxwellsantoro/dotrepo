@@ -1,0 +1,64 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Theano",
+    "repo": "Theano",
+    "source": "https://github.com/Theano/Theano"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Theano/Theano/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Theano/Theano",
+    "generatedAt": "2026-06-29T05:19:54.396696Z",
+    "evidencePath": "repos/github.com/Theano/Theano/evidence.md"
+  },
+  "purpose": "Theano was a Python library that allows you to define, optimize, and evaluate mathematical expressions involving multi-dimensional arrays efficiently. It is being continued as PyTensor: www.github.com/pymc-devs/pytensor",
+  "name": "Theano",
+  "homepage": "https://www.github.com/pymc-devs/pytensor",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "CSS",
+    "Cuda",
+    "Cython",
+    "HTML",
+    "Python",
+    "Shell"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "low",
+    "provenance": [
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Theano/Theano/profile.json",
+    "repository": "/v0/repos/github.com/Theano/Theano/index.json",
+    "trust": "/v0/repos/github.com/Theano/Theano/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Theano/Theano/query?path={dot_path}",
+    "indexPath": "repos/github.com/Theano/Theano/"
+  }
+}

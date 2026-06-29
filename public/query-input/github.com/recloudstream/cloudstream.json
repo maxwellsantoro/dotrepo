@@ -1,0 +1,96 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "recloudstream",
+    "repo": "cloudstream",
+    "source": "https://github.com/recloudstream/cloudstream"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/recloudstream/cloudstream/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/recloudstream/cloudstream",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/build_to_archive.yml`. Inferred `repo.test` from `.github/workflows/build_to_archive.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/recloudstream/cloudstream/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/recloudstream/cloudstream",
+        "generated_at": "2026-06-29T05:20:35.590732Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/build_to_archive.yml`. Inferred `repo.test` from `.github/workflows/build_to_archive.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "CloudStream",
+        "description": "⚠️ Warning: By default, this app doesn't provide any video sources; you have to install extensions to add functionality to the app.",
+        "homepage": "https://github.com/recloudstream/cloudstream",
+        "license": "GPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Kotlin"
+        ],
+        "build": "chmod +x gradlew",
+        "test": "chmod +x gradlew",
+        "topics": [
+          "android",
+          "video-streaming",
+          "media-center",
+          "home-theater",
+          "multimedia",
+          "good-first-issue"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": null,
+        "getting_started": "https://recloudstream.github.io/csdocs/",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/recloudstream/cloudstream.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "f1578919b617904cb3407733567652c5a39daea9",
+          "html_url": "https://github.com/recloudstream/cloudstream",
+          "stars": 9957
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

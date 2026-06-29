@@ -1,0 +1,115 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "akaunting",
+    "repo": "akaunting",
+    "source": "https://github.com/akaunting/akaunting"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/akaunting/akaunting/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/akaunting/akaunting",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/akaunting/akaunting/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/akaunting/akaunting",
+        "generated_at": "2026-06-29T05:21:36.53816Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Requirements",
+        "description": "Akaunting uses Laravel, the best existing PHP framework, as the foundation framework and Module package for Apps.",
+        "homepage": "https://akaunting.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Blade",
+          "PHP",
+          "Vue"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "php",
+          "laravel",
+          "accounting",
+          "invoices",
+          "payments",
+          "expenses",
+          "laravel-application",
+          "invoicing",
+          "billing",
+          "budget",
+          "money",
+          "balance",
+          "bookkeeping",
+          "fintech",
+          "finance",
+          "payroll",
+          "crm",
+          "erp",
+          "akaunting"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@akaunting.com"
+      },
+      "docs": {
+        "root": "https://akaunting.com/hc/docs",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/akaunting/akaunting.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "c115404fca0be660d0641bd3e4a5f979ddbbbd00",
+          "html_url": "https://github.com/akaunting/akaunting",
+          "stars": 9918
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

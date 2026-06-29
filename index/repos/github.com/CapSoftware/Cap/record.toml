@@ -1,0 +1,67 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/CapSoftware/Cap"
+generated_at = "2026-06-29T05:16:55.105246Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Cap"
+description = "Beautiful, shareable screen recordings."
+homepage = "https://cap.so"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "RenderScript",
+    "Rust",
+    "Shell",
+    "TypeScript",
+    "WGSL",
+]
+build = "pnpm --filter @cap/chrome-extension build"
+test = "pnpm --filter @cap/chrome-extension test"
+topics = [
+    "app",
+    "cap",
+    "coss",
+    "mac",
+    "open-source",
+    "oss",
+    "react",
+    "record",
+    "screen-capture",
+    "screen-recorder",
+    "screenshot",
+    "tauri",
+    "tauri-app",
+    "typescript",
+    "vite",
+    "solidjs",
+    "loom",
+    "nextjs",
+    "rust",
+    "nextjs15",
+]
+
+[docs]
+root = "https://cap.so/docs"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/CapSoftware/Cap.git"
+default_branch = "main"
+fork = false
+head_sha = "a9f7d7ffc5fc59f34a3bc0f002b0661af3f9a351"
+html_url = "https://github.com/CapSoftware/Cap"
+stars = 19842

@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "JodaOrg",
+    "repo": "joda-time",
+    "source": "https://github.com/JodaOrg/joda-time"
+  },
+  "repository": {
+    "name": "Joda-Time",
+    "description": "Joda-Time provides a quality replacement for the Java date and time classes.",
+    "homepage": "http://www.joda.org/joda-time/",
+    "docsRoot": "http://www.joda.org/joda-time/",
+    "gettingStarted": "https://www.joda.org/joda-time/quickstart.html",
+    "securityContact": "https://tidelift.com/security"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/JodaOrg/joda-time/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/JodaOrg/joda-time",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.test` unset because `.github/workflows/tzdbupdate.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/JodaOrg/joda-time/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/JodaOrg/joda-time/index.json",
+    "trust": "/v0/repos/github.com/JodaOrg/joda-time/trust.json",
+    "profile": "/v0/repos/github.com/JodaOrg/joda-time/profile.json",
+    "queryTemplate": "/v0/repos/github.com/JodaOrg/joda-time/query?path={dot_path}",
+    "indexPath": "repos/github.com/JodaOrg/joda-time/"
+  }
+}

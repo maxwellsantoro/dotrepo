@@ -1,0 +1,59 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hydraponique",
+    "repo": "roscomvpn-routing",
+    "source": "https://github.com/hydraponique/roscomvpn-routing"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/hydraponique/roscomvpn-routing/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/hydraponique/roscomvpn-routing",
+    "generatedAt": "2026-06-29T05:29:30.99077Z",
+    "evidencePath": "repos/github.com/hydraponique/roscomvpn-routing/evidence.md"
+  },
+  "purpose": "Готовые конфигурации маршрутизации для Happ, INCY и Mihomo (Clash Meta, Clash Mi и др.)",
+  "name": "Downloads",
+  "homepage": "https://t.me/vpnrouting",
+  "visibility": "public",
+  "languages": [
+    "Python"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://t.me/vpnrouting"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/hydraponique/roscomvpn-routing/profile.json",
+    "repository": "/v0/repos/github.com/hydraponique/roscomvpn-routing/index.json",
+    "trust": "/v0/repos/github.com/hydraponique/roscomvpn-routing/trust.json",
+    "queryTemplate": "/v0/repos/github.com/hydraponique/roscomvpn-routing/query?path={dot_path}",
+    "indexPath": "repos/github.com/hydraponique/roscomvpn-routing/"
+  }
+}

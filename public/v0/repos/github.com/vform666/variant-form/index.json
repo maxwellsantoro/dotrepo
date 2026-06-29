@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "vform666",
+    "repo": "variant-form",
+    "source": "https://github.com/vform666/variant-form"
+  },
+  "repository": {
+    "name": "Variant Form",
+    "description": "美乐低代码——立即进入 （私有部署、开箱即用️，已开源✌✌）️",
+    "homepage": "http://www.vform666.com",
+    "docsRoot": "http://www.vform666.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/vform666/variant-form/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/vform666/variant-form",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/vform666/variant-form/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/vform666/variant-form/index.json",
+    "trust": "/v0/repos/github.com/vform666/variant-form/trust.json",
+    "profile": "/v0/repos/github.com/vform666/variant-form/profile.json",
+    "queryTemplate": "/v0/repos/github.com/vform666/variant-form/query?path={dot_path}",
+    "indexPath": "repos/github.com/vform666/variant-form/"
+  }
+}

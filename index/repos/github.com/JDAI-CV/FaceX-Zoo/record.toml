@@ -1,0 +1,67 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/JDAI-CV/FaceX-Zoo"
+generated_at = "2026-06-29T05:28:33.754705Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "FaceX-Zoo"
+description = "FaceX-Zoo is a PyTorch toolbox for face recognition."
+homepage = "https://arxiv.org/pdf/2101.04407.pdf"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Cython",
+    "Dockerfile",
+    "Python",
+    "Shell",
+]
+topics = [
+    "face-recognition",
+    "masked-face-recognition",
+    "face-sdk",
+    "semi-siamese-training",
+    "megaface",
+    "lfw",
+    "circleloss",
+    "adam-softmax",
+    "mv-softmax",
+    "magface",
+]
+
+[docs]
+root = "https://arxiv.org/pdf/2101.04407.pdf"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/NVIDIA/apex"
+notes = "Cross-link from README: apex"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/JDAI-CV/FaceX-Zoo.git"
+default_branch = "main"
+fork = false
+head_sha = "16b793a7564a4b9308cf94e62bdb2ffacb3a725a"
+html_url = "https://github.com/JDAI-CV/FaceX-Zoo"
+stars = 1996

@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "InsertKoinIO",
+    "repo": "koin",
+    "source": "https://github.com/InsertKoinIO/koin"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/InsertKoinIO/koin/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/InsertKoinIO/koin",
+    "generatedAt": "2026-06-29T05:20:00.371282Z",
+    "evidencePath": "repos/github.com/InsertKoinIO/koin/evidence.md"
+  },
+  "purpose": "Koin is a pragmatic, lightweight dependency injection framework for Kotlin developers, developed by Kotzilla and open-source contributors.",
+  "name": "What is KOIN? ✨",
+  "homepage": "https://insert-koin.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Java",
+    "Kotlin",
+    "Shell"
+  ],
+  "topics": [
+    "kotlin",
+    "dependency-injection",
+    "injection",
+    "android",
+    "kotlin-multiplatform",
+    "kotlin-multiplatform-library",
+    "library"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://insert-koin.io"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/InsertKoinIO/koin/profile.json",
+    "repository": "/v0/repos/github.com/InsertKoinIO/koin/index.json",
+    "trust": "/v0/repos/github.com/InsertKoinIO/koin/trust.json",
+    "queryTemplate": "/v0/repos/github.com/InsertKoinIO/koin/query?path={dot_path}",
+    "indexPath": "repos/github.com/InsertKoinIO/koin/"
+  }
+}

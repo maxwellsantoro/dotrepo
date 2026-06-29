@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "square",
+    "repo": "okhttp",
+    "source": "https://github.com/square/okhttp"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/square/okhttp/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/square/okhttp",
+    "generatedAt": "2026-06-29T05:14:29.618056Z",
+    "evidencePath": "repos/github.com/square/okhttp/evidence.md"
+  },
+  "purpose": "See the [project website][okhttp] for documentation and APIs.",
+  "name": "OkHttp",
+  "homepage": "https://square.github.io/okhttp/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Java",
+    "Kotlin",
+    "Shell"
+  ],
+  "topics": [
+    "java",
+    "android",
+    "kotlin",
+    "graalvm"
+  ],
+  "execution": {
+    "build": "./gradlew clean publish --stacktrace",
+    "test": "./gradlew clean publish --stacktrace"
+  },
+  "docs": {
+    "root": "https://square.github.io/okhttp/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/square/okhttp/profile.json",
+    "repository": "/v0/repos/github.com/square/okhttp/index.json",
+    "trust": "/v0/repos/github.com/square/okhttp/trust.json",
+    "queryTemplate": "/v0/repos/github.com/square/okhttp/query?path={dot_path}",
+    "indexPath": "repos/github.com/square/okhttp/"
+  }
+}

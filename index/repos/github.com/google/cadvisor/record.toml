@@ -1,0 +1,43 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/google/cadvisor"
+generated_at = "2026-06-29T05:19:28.247298Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Quick Start"
+description = "To quickly tryout cAdvisor on your machine with Docker, we have a Docker image that includes everything you need to get started."
+homepage = "https://github.com/google/cadvisor"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Shell",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/google/cadvisor.git"
+default_branch = "master"
+fork = false
+head_sha = "9c3903ca474779a5f5f9c7b3af9868c566a85f4e"
+html_url = "https://github.com/google/cadvisor"
+stars = 19239

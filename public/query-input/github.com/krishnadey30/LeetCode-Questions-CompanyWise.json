@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "krishnadey30",
+    "repo": "LeetCode-Questions-CompanyWise",
+    "source": "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/krishnadey30/LeetCode-Questions-CompanyWise/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/krishnadey30/LeetCode-Questions-CompanyWise/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise",
+        "generated_at": "2026-06-29T05:16:33.200332Z",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "LeetCode-Questions-CompanyWise",
+        "description": "Contains Company Wise Questions sorted based on Frequency and all time",
+        "homepage": "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "fb5f78b55eead7f948aada8459c5bfd31ae8abbc",
+          "html_url": "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise",
+          "stars": 19908
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

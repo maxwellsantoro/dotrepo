@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "bluenviron",
+    "repo": "mediamtx",
+    "source": "https://github.com/bluenviron/mediamtx"
+  },
+  "repository": {
+    "name": "Website](https://mediamtx.org) ![Test](https://github.com/bluenviron/mediamtx/actions/workflows/test.yml?query=branch%3Amain) ![Lint](https://github.com/bluenviron/mediamtx/actions/workflows/lint.yml?query=branch%3Amain) ![CodeCov](https://app.codecov.io/gh/bluenviron/mediamtx/tree/main) ![Release](https://github.com/bluenviron/mediamtx/releases) ![Docker Hub](https://hub.docker.com/r/bluenviron/mediamtx)",
+    "description": "_MediaMTX_ is a ready-to-use and zero-dependency live media server and media proxy that allows to publish, read, proxy, record and playback real-time video and audio streams.",
+    "homepage": "https://mediamtx.org",
+    "docsRoot": "https://mediamtx.org/docs/kickoff/introduction",
+    "securityContact": "https://mediamtx.org/docs/other/security"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/bluenviron/mediamtx/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/bluenviron/mediamtx",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/bluenviron/mediamtx/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/bluenviron/mediamtx/index.json",
+    "trust": "/v0/repos/github.com/bluenviron/mediamtx/trust.json",
+    "profile": "/v0/repos/github.com/bluenviron/mediamtx/profile.json",
+    "queryTemplate": "/v0/repos/github.com/bluenviron/mediamtx/query?path={dot_path}",
+    "indexPath": "repos/github.com/bluenviron/mediamtx/"
+  }
+}

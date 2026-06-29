@@ -1,0 +1,117 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "type-challenges",
+    "repo": "type-challenges",
+    "source": "https://github.com/type-challenges/type-challenges"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/type-challenges/type-challenges/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/type-challenges/type-challenges",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/type-challenges/type-challenges/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/type-challenges/type-challenges",
+        "generated_at": "2026-06-29T05:13:43.815711Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Intro",
+        "description": "Collection of TypeScript type challenges with online judge",
+        "homepage": "https://tsch.js.org/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "HTML",
+          "JavaScript",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "pnpm build",
+        "test": null,
+        "topics": [
+          "typescript",
+          "type",
+          "type-system",
+          "challenges"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://tsch.js.org/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/antfu/type-challenges",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/type-challenges/type-challenges.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "0b0b0b18bcb7ac42dc22ce26ffb438231d4754b1",
+          "html_url": "https://github.com/type-challenges/type-challenges",
+          "stars": 48276
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,107 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "docker",
+    "repo": "awesome-compose",
+    "source": "https://github.com/docker/awesome-compose"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/docker/awesome-compose/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/docker/awesome-compose",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/docker/awesome-compose/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/docker/awesome-compose",
+        "generated_at": "2026-06-29T05:15:08.065456Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Awesome Compose",
+        "description": "A curated list of Docker Compose samples.",
+        "homepage": "https://docs.docker.com/compose/",
+        "license": "CC0-1.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C#",
+          "CSS",
+          "Dockerfile",
+          "FreeMarker",
+          "Go",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "PHP",
+          "Python",
+          "Rust",
+          "SCSS",
+          "Shell",
+          "TypeScript",
+          "Vue"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "awesome-list",
+          "awesome",
+          "docker-compose"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://docs.docker.com/compose/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/docker/awesome-compose.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "30f4b7f6a6c3b0c0ecf4d4efb0de203c48d11562",
+          "html_url": "https://github.com/docker/awesome-compose",
+          "stars": 45703
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

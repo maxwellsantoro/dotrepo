@@ -1,0 +1,69 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "paascloud",
+    "repo": "paascloud-master",
+    "source": "https://github.com/paascloud/paascloud-master"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/paascloud/paascloud-master/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/paascloud/paascloud-master",
+    "generatedAt": "2026-06-29T05:22:44.046136Z",
+    "evidencePath": "repos/github.com/paascloud/paascloud-master/evidence.md"
+  },
+  "purpose": "①：519587831（满） ②：873283104（满） ③：882458726（满） ④：693445268 ⑤：813682656 ⑥：797334670 ⑦：797876073 ⑧：814712305 ⑨：……",
+  "name": "Spring Cloud 实战项目",
+  "homepage": "http://www.paascloud.net",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "FreeMarker",
+    "HTML",
+    "Java"
+  ],
+  "topics": [
+    "springcloud",
+    "rocketmq",
+    "oauth2",
+    "vuejs2",
+    "spring-cloud"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "http://www.paascloud.net"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/paascloud/paascloud-master/profile.json",
+    "repository": "/v0/repos/github.com/paascloud/paascloud-master/index.json",
+    "trust": "/v0/repos/github.com/paascloud/paascloud-master/trust.json",
+    "queryTemplate": "/v0/repos/github.com/paascloud/paascloud-master/query?path={dot_path}",
+    "indexPath": "repos/github.com/paascloud/paascloud-master/"
+  }
+}

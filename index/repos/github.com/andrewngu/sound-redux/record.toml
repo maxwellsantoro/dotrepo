@@ -1,0 +1,61 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/andrewngu/sound-redux"
+generated_at = "2026-06-29T05:25:09.331201Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "SoundRedux"
+description = "**NOTE** It seems that SoundCloud has revoked my api client keys without any explanation or warning."
+homepage = "http://soundredux.io"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+]
+build = "npm run build"
+topics = [
+    "redux",
+    "soundcloud",
+    "react",
+    "music",
+]
+
+[docs]
+root = "http://soundredux.io"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/andrewngu/sound-redux"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/andrewngu/sound-redux.git"
+default_branch = "master"
+fork = false
+head_sha = "c5f36935c2ab07fbbeeaf63573434fd815f503ad"
+html_url = "https://github.com/andrewngu/sound-redux"
+stars = 4980

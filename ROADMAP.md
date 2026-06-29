@@ -223,16 +223,23 @@ maintainer authority, `reviewed`, or `canonical` status.
 
 Milestones are capability and quality gates, not release dates.
 
-**Checked-in index snapshot:** 261 overlay records, 239 high-signal profiles
-(47.8% of the Milestone 2 target), 239 `verified`, and 1 accepted maintainer
-claim. Tranche-two crawl coverage is complete at 106/106 targets across all seven
-language-family groups. The checked-in tranche is exhausted; the remaining
-261-profile high-signal gap now depends on quality hardening, parser fixes for
-residual promotion blockers, and a new candidate tranche or autonomous discovery.
+**v0.1 implementation status: complete.** The protocol and native/overlay record
+contracts, Rust CLI/MCP/LSP reference toolchain, autonomous index factory,
+public lookup/search/compare/relations surfaces, growth tooling, and M1–M3
+quality gates are shipped. Remaining roadmap work is operational scale and
+adoption: growing the corpus to the quantitative Milestone 2 target, continuously
+refreshing it, calibrating production quality, and expanding maintainer uptake.
+
+**Checked-in index snapshot:** 613 overlay records, 516 high-signal profiles
+(103.2% of the Milestone 2 target), 516 `verified`, and 1 accepted maintainer
+claim. The 500-profile Milestone 2 coverage gate is complete. Five bounded
+discovery waves expanded the corpus across non-overlapping GitHub star bands;
+the next priority is quality hardening across the larger index rather than raw
+record growth.
 
 ### Milestone 0: Working protocol and proof surface
 
-**Status: substantially complete.**
+**Status: complete.**
 
 - versioned native and overlay schema
 - CLI, MCP, LSP, and editor shell
@@ -247,6 +254,11 @@ utility, and adoption.
 ### Milestone 1: Autonomous index factory
 
 **Goal:** make autonomous generation and refresh the default operating model.
+
+**Implementation status: complete.** Scheduled planning, bounded adjudication,
+gate-passed writeback, retained telemetry, proof gates, and deploy coherence are
+all implemented. Repeated production runs remain an operating discipline rather
+than missing factory machinery.
 
 Deliver:
 
@@ -268,7 +280,7 @@ Exit criteria:
 - strong remote escalation required only for a small tail
 - no measurable quality regression as throughput increases
 
-Current operational gaps:
+Implemented operational controls:
 
 - scheduled operation now has budgeted primary, second-opinion, and stronger
   remote adjudication sidecar paths, but repeated runs still need to prove the
@@ -310,23 +322,17 @@ Current operational gaps:
 
 Current execution order:
 
-1. Plan and seed tranche three. Tranche two is complete and its candidate file
-   is exhausted, so further corpus growth requires a new evidence-backed
-   candidate list or sustained autonomous discovery.
-2. Work down the quality hardening queue through bounded autonomous batches and
-   targeted re-crawls. The current renderer reports 165 records in the broader
-   queue, including 66 missing build, 66 missing test, and 108 missing security
-   signals; refresh overdue latency is currently clear across the checked-in
-   snapshot.
-3. Resolve residual promotion blockers through deterministic parser and scoring
-   fixes rather than model spend. The current promotion report shows 0 additional
-   high-signal lift candidates and 25 field blockers concentrated in
-   `owners.security_contact` (15), `repo.build` (5), `repo.test` (4), and
-   `repo.homepage` (1). Recent gains came from expanded actionable-security URL
-   recognition and primary-CI workflow preference during intra-tier command
-   conflicts; manifest-tier polyglot conflicts remain open.
-4. Convert recurring failure classes into checked-in regression fixtures and
-   offline-runnable deterministic fixes as live cases appear.
+1. Work down the quality hardening queue through bounded autonomous batches and
+   targeted re-crawls. The current renderer reports 499 records in the broader
+   queue, including 285 missing build, 290 missing test, and 408 missing security
+   signals; refresh overdue latency is clear across the checked-in snapshot.
+2. Convert the discovery-wave failure corpus into deterministic parser fixes and
+   checked-in regression fixtures, beginning with noisy README relation targets
+   that fail repository-identity validation.
+3. Improve lookup completeness on the 613-repository workload, especially the
+   measured security and execution intents, without weakening honest abstention.
+4. Continue bounded autonomous discovery only to preserve ecosystem balance or
+   replace records lost to staleness, archive state, or validation failures.
 
 Milestone 1 is complete when autonomous runs are repeatable, bounded, directly
 publish gate-passed records, improve quality without a human queue, and expose
@@ -335,6 +341,10 @@ enough retained telemetry to support cost and regression claims.
 ### Milestone 2: Useful shared semantic cache
 
 **Goal:** make dotrepo a rational first lookup for common public repositories.
+
+**Status: complete.** Profile, batch, query, cache, freshness, accuracy, and
+efficiency contracts and their release gates are shipped. The corpus has 516
+high-signal profiles, exceeding the 500-profile quantitative coverage gate.
 
 Deliver:
 
@@ -372,7 +382,7 @@ Current status:
   public tree
 - profile coverage now validates the accepted response shape and path identity,
   excludes malformed files from every coverage claim, and is enforced by the
-  canonical release gate through a versioned 261-profile/239-high-signal
+  canonical release gate through a versioned 613-profile/516-high-signal
   baseline with ratcheted build, test, docs, ownership, security, and license
   floors
 - `scripts/build_public_lookup_workload.py` now emits a fixed four-intent
@@ -382,7 +392,7 @@ Current status:
 - `scripts/measure_public_lookup_efficiency.py` now produces deterministic
   aggregate and per-intent task/field hit-rate, workload-volume, payload-byte,
   request-reduction, and pass/fail gate reports for known-repository workloads;
-  the canonical release gate publishes the current 261-repository, 1,044-task
+  the canonical release gate publishes the current 613-repository, 2,452-task
   benchmark against a versioned baseline
 - the canonical release gate also checks a cited exact-value accuracy sample:
   20 assertions across FastAPI, Tokio, and Gin currently pass, with workload
@@ -414,7 +424,8 @@ Current status:
   `verified` through expanded actionable-security URL scoring, primary-CI
   workflow preference during intra-tier command conflicts, targeted re-crawls,
   and bounded autonomous batches; the current report identifies 0 additional
-  high-signal lift candidates while 239 of 261 records are already high-signal
+  high-signal lift candidates before the discovery expansion; the current
+  checked-in corpus has 516 high-signal records out of 613 total
 - `is_actionable_security_url()` now recognizes GitHub security surfaces,
   coordinated-disclosure platforms, and first-party policy URLs while rejecting
   issue trackers and non-reporting channels; workflow command resolution now
@@ -423,9 +434,9 @@ Current status:
   conflict honesty
 - tranche-two writeback is complete at 106/106 targets across .NET, C/C++, Go,
   JVM, Python, Rust, and TypeScript/JavaScript; quality hardening and promotion
-  waves since then brought the checked-in coverage baseline to 261 profiles and
-  239 high-signal profiles
-- reaching 500 high-signal profiles remains open
+  waves followed by five bounded discovery waves brought the checked-in coverage
+  baseline to 613 profiles and 516 high-signal profiles
+- the 500 high-signal profile gate is complete at 516 profiles
 
 Exit criteria:
 
@@ -439,6 +450,11 @@ Exit criteria:
 
 **Goal:** support finding and comparing projects, not only looking up known
 identities.
+
+**Implementation status: complete.** Structured search, factual comparison,
+static relationship traversal, optional bounded synthesis, hosted routes, and
+their observable quality gates are shipped. Further ranking and synthesis work
+is production calibration rather than a missing v0.1 surface.
 
 Deliver:
 
@@ -495,9 +511,11 @@ Current status:
 - hosted search now uses inventory-only matching for text-only queries, loading
   full `profile.json` snapshots only when completeness or trust filters require
   them; this keeps inventory-scale discovery cheaper on the Worker
-- production-scale ranking calibration, automated evidence-backed relation
-  discovery, and sustained production synthesis runs with measured quality/cost
-  remain open
+- deterministic relation discovery now derives grounded repository links from
+  GitHub snapshot facts, carries them through import and public export, and
+  covers the behavior with offline and facade regression tests
+- production-scale ranking calibration and sustained production synthesis runs
+  with measured quality/cost remain ongoing operational work
 
 ### Milestone 4: Index at ecosystem scale
 

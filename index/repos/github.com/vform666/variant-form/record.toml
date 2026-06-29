@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/vform666/variant-form"
+generated_at = "2026-06-29T05:28:24.316394Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Variant Form"
+description = "美乐低代码——立即进入 （私有部署、开箱即用️，已开源✌✌）️"
+homepage = "http://www.vform666.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "SCSS",
+    "Vue",
+]
+build = "npm run build"
+topics = [
+    "vuejs2",
+    "vue",
+    "form",
+    "designer",
+    "online-forms",
+    "element-ui",
+    "iview",
+]
+
+[docs]
+root = "http://www.vform666.com"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/vform666/variant-form.git"
+default_branch = "master"
+fork = false
+head_sha = "24e62c360bab3b135ffeed1234ece00c7d667209"
+html_url = "https://github.com/vform666/variant-form"
+stars = 1996

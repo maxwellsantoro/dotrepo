@@ -1,0 +1,52 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/git-bug/git-bug"
+generated_at = "2026-06-29T05:21:23.40176Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "git-bug: a decentralized issue tracker"
+description = "[Issues] - [Documentation][doc] - [Feedback][discuss]"
+homepage = "https://github.com/git-bug/git-bug"
+license = "GPL-3.0"
+visibility = "public"
+languages = [
+    "CSS",
+    "Go",
+    "HTML",
+    "Makefile",
+    "Nix",
+    "Shell",
+    "TypeScript",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "bugtracker",
+    "git",
+    "decentralized-application",
+    "distributed-systems",
+    "gitdb",
+]
+
+[docs]
+root = "/doc"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/git-bug/git-bug.git"
+default_branch = "trunk"
+fork = false
+head_sha = "1a5e57dbf00c699ab5d176a9e5aace9baea64163"
+html_url = "https://github.com/git-bug/git-bug"
+stars = 9927

@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "brillout",
+    "repo": "awesome-react-components",
+    "source": "https://github.com/brillout/awesome-react-components"
+  },
+  "repository": {
+    "name": "Absolutely Awesome React Components & Libraries",
+    "description": "This is a list of AWESOME components.",
+    "homepage": "https://github.com/brillout/awesome-react-components",
+    "docsRoot": "https://handsontable.com/docs/react-data-grid/",
+    "gettingStarted": "https://edtr.io/docs/getting-started"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/brillout/awesome-react-components/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/brillout/awesome-react-components",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/brillout/awesome-react-components/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/brillout/awesome-react-components/index.json",
+    "trust": "/v0/repos/github.com/brillout/awesome-react-components/trust.json",
+    "profile": "/v0/repos/github.com/brillout/awesome-react-components/profile.json",
+    "queryTemplate": "/v0/repos/github.com/brillout/awesome-react-components/query?path={dot_path}",
+    "indexPath": "repos/github.com/brillout/awesome-react-components/"
+  }
+}

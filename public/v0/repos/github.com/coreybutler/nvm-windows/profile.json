@@ -1,0 +1,75 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "coreybutler",
+    "repo": "nvm-windows",
+    "source": "https://github.com/coreybutler/nvm-windows"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/coreybutler/nvm-windows/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/coreybutler/nvm-windows",
+    "generatedAt": "2026-06-29T05:14:31.748594Z",
+    "evidencePath": "repos/github.com/coreybutler/nvm-windows/evidence.md"
+  },
+  "purpose": "This is not the same thing as nvm! (expand for details)",
+  "name": "We are working full time on Author, including Runtime, the successor to NVM for Windows.Complete this form to provide your thoughts and sign up for progress updates.Updates will also be posted on the Author Software LinkedIn Page.",
+  "homepage": "https://github.com/coreybutler/nvm-windows",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Go",
+    "Inno Setup",
+    "JavaScript",
+    "VBScript"
+  ],
+  "topics": [
+    "node",
+    "versioning",
+    "management",
+    "version-manager",
+    "windows",
+    "nodejs",
+    "version",
+    "nvm",
+    "go",
+    "switch",
+    "node-version-manager"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/coreybutler/nvm-windows/profile.json",
+    "repository": "/v0/repos/github.com/coreybutler/nvm-windows/index.json",
+    "trust": "/v0/repos/github.com/coreybutler/nvm-windows/trust.json",
+    "queryTemplate": "/v0/repos/github.com/coreybutler/nvm-windows/query?path={dot_path}",
+    "indexPath": "repos/github.com/coreybutler/nvm-windows/"
+  }
+}

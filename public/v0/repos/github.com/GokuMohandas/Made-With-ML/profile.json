@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "GokuMohandas",
+    "repo": "Made-With-ML",
+    "source": "https://github.com/GokuMohandas/Made-With-ML"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/GokuMohandas/Made-With-ML/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/GokuMohandas/Made-With-ML",
+    "generatedAt": "2026-06-29T05:13:33.532721Z",
+    "evidencePath": "repos/github.com/GokuMohandas/Made-With-ML/evidence.md"
+  },
+  "purpose": "Design · Develop · Deploy · Iterate",
+  "name": "Made With ML",
+  "homepage": "https://madewithml.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Jupyter Notebook",
+    "Makefile",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "machine-learning",
+    "deep-learning",
+    "pytorch",
+    "natural-language-processing",
+    "data-science",
+    "python",
+    "mlops",
+    "data-engineering",
+    "data-quality",
+    "distributed-ml",
+    "llms",
+    "ray",
+    "distributed-training"
+  ],
+  "execution": {
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://madewithml.com"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/GokuMohandas/Made-With-ML/profile.json",
+    "repository": "/v0/repos/github.com/GokuMohandas/Made-With-ML/index.json",
+    "trust": "/v0/repos/github.com/GokuMohandas/Made-With-ML/trust.json",
+    "queryTemplate": "/v0/repos/github.com/GokuMohandas/Made-With-ML/query?path={dot_path}",
+    "indexPath": "repos/github.com/GokuMohandas/Made-With-ML/"
+  }
+}

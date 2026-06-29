@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "KoljaB",
+    "repo": "RealtimeSTT",
+    "source": "https://github.com/KoljaB/RealtimeSTT"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/KoljaB/RealtimeSTT/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/KoljaB/RealtimeSTT",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/KoljaB/RealtimeSTT/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/KoljaB/RealtimeSTT",
+        "generated_at": "2026-06-29T05:21:04.439027Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "RealtimeSTT",
+        "description": "RealtimeSTT is a Python speech-to-text library for applications that need voice activity detection, fast transcription, optional realtime text updates, wake words, and direct access to audio streams.",
+        "homepage": "https://github.com/KoljaB/RealtimeSTT",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "python",
+          "realtime",
+          "speech-to-text"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/KoljaB/RealtimeSTT.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "a89fabb05ffe1933ec30d70e17fe73465eea3358",
+          "html_url": "https://github.com/KoljaB/RealtimeSTT",
+          "stars": 9939
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

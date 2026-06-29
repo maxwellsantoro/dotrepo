@@ -1,0 +1,72 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "cssnano",
+    "repo": "cssnano",
+    "source": "https://github.com/cssnano/cssnano"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/cssnano/cssnano/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/cssnano/cssnano",
+    "generatedAt": "2026-06-29T05:25:51.285689Z",
+    "evidencePath": "repos/github.com/cssnano/cssnano/evidence.md"
+  },
+  "purpose": "A modular minifier, built on top of the PostCSS ecosystem.",
+  "name": "cssnano",
+  "homepage": "https://cssnano.github.io/cssnano/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "JavaScript",
+    "Nunjucks"
+  ],
+  "topics": [
+    "postcss",
+    "cssnano",
+    "optimisation",
+    "css",
+    "minification"
+  ],
+  "execution": {
+    "test": "pnpm test"
+  },
+  "docs": {
+    "root": "https://cssnano.github.io/cssnano/",
+    "gettingStarted": "https://cssnano.github.io/cssnano/docs/getting-started"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/cssnano/cssnano/profile.json",
+    "repository": "/v0/repos/github.com/cssnano/cssnano/index.json",
+    "trust": "/v0/repos/github.com/cssnano/cssnano/trust.json",
+    "queryTemplate": "/v0/repos/github.com/cssnano/cssnano/query?path={dot_path}",
+    "indexPath": "repos/github.com/cssnano/cssnano/"
+  }
+}

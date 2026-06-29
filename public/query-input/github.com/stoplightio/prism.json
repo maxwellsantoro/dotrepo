@@ -1,0 +1,131 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "stoplightio",
+    "repo": "prism",
+    "source": "https://github.com/stoplightio/prism"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/stoplightio/prism/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/stoplightio/prism",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/stoplightio/prism/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/stoplightio/prism",
+        "generated_at": "2026-06-29T05:25:57.387385Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Prism Overview",
+        "description": "Prism is a set of packages for API mocking and contract testing with **OpenAPI v2** (formerly known as Swagger) and **OpenAPI v3.x**.",
+        "homepage": "https://stoplight.io/open-source/prism",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "JavaScript",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "npm run build",
+        "test": "npm test",
+        "topics": [
+          "oas",
+          "prism",
+          "mocking",
+          "api-testing",
+          "http-proxy",
+          "swagger",
+          "openapi",
+          "mock-server",
+          "postman-collection",
+          "openapi3",
+          "cli",
+          "hacktoberfest",
+          "stoplight-oss",
+          "swagger-oss",
+          "stoplight-prism"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@stoplightio/prism-engineers"
+        ],
+        "team": "@stoplightio/prism-engineers",
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://docs.stoplight.io/docs/prism/674b27b261c3c-prism-overview",
+        "getting_started": "./docs/getting-started/01-installation.md",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/stoplightio/prism",
+            "notes": "Declared repository in package.json.",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "manifest"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/stoplightio/prism.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "4f86059d07448ace65f3a2d7a1610a500eed8afe",
+          "html_url": "https://github.com/stoplightio/prism",
+          "stars": 4973
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

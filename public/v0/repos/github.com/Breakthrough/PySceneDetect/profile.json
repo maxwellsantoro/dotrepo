@@ -1,0 +1,77 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Breakthrough",
+    "repo": "PySceneDetect",
+    "source": "https://github.com/Breakthrough/PySceneDetect"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Breakthrough/PySceneDetect/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Breakthrough/PySceneDetect",
+    "generatedAt": "2026-06-29T05:26:21.317337Z",
+    "evidencePath": "repos/github.com/Breakthrough/PySceneDetect/evidence.md"
+  },
+  "purpose": "**Website**: scenedetect.com",
+  "name": "PySceneDetect",
+  "homepage": "https://www.scenedetect.com/",
+  "license": "BSD-3-Clause",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "python",
+    "video",
+    "opencv",
+    "python-opencv",
+    "analysis",
+    "scene-detection",
+    "image-processing",
+    "video-processing",
+    "scene-recognition"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://www.scenedetect.com/docs/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Breakthrough/PySceneDetect/profile.json",
+    "repository": "/v0/repos/github.com/Breakthrough/PySceneDetect/index.json",
+    "trust": "/v0/repos/github.com/Breakthrough/PySceneDetect/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Breakthrough/PySceneDetect/query?path={dot_path}",
+    "indexPath": "repos/github.com/Breakthrough/PySceneDetect/"
+  }
+}

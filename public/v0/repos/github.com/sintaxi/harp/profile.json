@@ -1,0 +1,73 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "sintaxi",
+    "repo": "harp",
+    "source": "https://github.com/sintaxi/harp"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/sintaxi/harp/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/sintaxi/harp",
+    "generatedAt": "2026-06-29T05:23:46.924134Z",
+    "evidencePath": "repos/github.com/sintaxi/harp/evidence.md"
+  },
+  "purpose": "Static Web Server/Generator/Bundler",
+  "name": "Harp",
+  "homepage": "https://harp.sh",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "CoffeeScript",
+    "EJS",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "Pug",
+    "SCSS",
+    "Sass",
+    "Stylus"
+  ],
+  "execution": {
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "http://harp.rip/docs/"
+  },
+  "ownership": {
+    "securityContact": "brock@sintaxi.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/sintaxi/harp/profile.json",
+    "repository": "/v0/repos/github.com/sintaxi/harp/index.json",
+    "trust": "/v0/repos/github.com/sintaxi/harp/trust.json",
+    "queryTemplate": "/v0/repos/github.com/sintaxi/harp/query?path={dot_path}",
+    "indexPath": "repos/github.com/sintaxi/harp/"
+  }
+}

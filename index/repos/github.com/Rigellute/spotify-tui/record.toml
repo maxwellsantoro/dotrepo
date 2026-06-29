@@ -1,0 +1,73 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/Rigellute/spotify-tui"
+generated_at = "2026-06-29T05:19:25.520967Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Spotify TUI"
+description = "A Spotify client for the terminal written in Rust."
+homepage = "https://github.com/Rigellute/spotify-tui"
+license = "MIT"
+visibility = "public"
+languages = [
+    "HTML",
+    "Rust",
+]
+build = "cargo build"
+test = "cargo test"
+topics = [
+    "spotify",
+    "spotify-api",
+    "spotify-tui",
+    "rust",
+    "terminal-based",
+    "terminal",
+    "cli",
+]
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/Rigellute/spotify-tui"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/Jguer/yay"
+notes = "Cross-link from README: yay"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/Rigellute/spotify-tui.git"
+default_branch = "master"
+fork = false
+head_sha = "c4dcf6b9fd8318017acbdd7ec005955e26cf2794"
+html_url = "https://github.com/Rigellute/spotify-tui"
+stars = 19246

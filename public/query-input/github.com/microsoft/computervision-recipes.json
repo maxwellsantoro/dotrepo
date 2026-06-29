@@ -1,0 +1,122 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "computervision-recipes",
+    "source": "https://github.com/microsoft/computervision-recipes"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/microsoft/computervision-recipes/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/microsoft/computervision-recipes",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/microsoft/computervision-recipes/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/microsoft/computervision-recipes",
+        "generated_at": "2026-06-29T05:22:50.532965Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Computer Vision",
+        "description": "In recent years, we've see an extra-ordinary growth in Computer Vision, with applications in face recognition, image understanding, search, drones, mapping, semi-autonomous and autonomous vehicles.",
+        "homepage": "https://github.com/microsoft/computervision-recipes",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "C++",
+          "CSS",
+          "Cuda",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Jupyter Notebook",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "machine-learning",
+          "computer-vision",
+          "deep-learning",
+          "python",
+          "jupyter-notebook",
+          "operationalization",
+          "kubernetes",
+          "azure",
+          "microsoft",
+          "data-science",
+          "tutorial",
+          "artificial-intelligence",
+          "image-classification",
+          "image-processing",
+          "similarity",
+          "object-detection",
+          "convolutional-neural-networks"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@PatrickBue"
+        ],
+        "team": null,
+        "security_contact": "secure@microsoft.com"
+      },
+      "docs": {
+        "root": "https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/ai/training-python-models/?WT.mc_id=computervision-github-azureai",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/microsoft/computervision-recipes.git",
+          "default_branch": "staging",
+          "fork": false,
+          "head_sha": "679f1bf82b22b8c948f3703933557a2ba090739d",
+          "html_url": "https://github.com/microsoft/computervision-recipes",
+          "stars": 9866
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

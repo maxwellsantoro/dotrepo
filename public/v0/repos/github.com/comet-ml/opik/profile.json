@@ -1,0 +1,98 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "comet-ml",
+    "repo": "opik",
+    "source": "https://github.com/comet-ml/opik"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/comet-ml/opik/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/comet-ml/opik",
+    "generatedAt": "2026-06-29T05:16:14.923383Z",
+    "evidencePath": "repos/github.com/comet-ml/opik/evidence.md"
+  },
+  "purpose": "Opik helps you build, test, and optimize generative AI applications that run better, from prototype to production.",
+  "name": "Opik",
+  "homepage": "https://www.comet.com/docs/opik/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Jupyter Notebook",
+    "Makefile",
+    "PowerShell",
+    "Python",
+    "SCSS",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "open-source",
+    "langchain",
+    "openai",
+    "playground",
+    "prompt-engineering",
+    "llama-index",
+    "llm",
+    "llm-evaluation",
+    "llm-observability",
+    "llmops",
+    "hacktoberfest",
+    "hacktoberfest2025",
+    "evaluation"
+  ],
+  "execution": {
+    "test": "mvn clean test"
+  },
+  "docs": {
+    "root": "https://www.comet.com/docs/opik/?from=llm&utm_source=opik&utm_medium=github&utm_content=docs_button&utm_campaign=opik",
+    "gettingStarted": "https://www.comet.com/docs/opik/quickstart/?from=llm&utm_source=opik&utm_medium=github&utm_content=quickstart_link&utm_campaign=opik"
+  },
+  "ownership": {
+    "maintainers": [
+      "@comet-ml/comet-opik-devs",
+      "@comet-ml/product",
+      "@comet-ml/comet-devops",
+      "@comet-ml/comet-qa",
+      "@comet-ml/deployment-team",
+      "@comet-ml/comet-opik-optimizer-devs"
+    ],
+    "team": "@comet-ml/comet-opik-devs"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/comet-ml/opik/profile.json",
+    "repository": "/v0/repos/github.com/comet-ml/opik/index.json",
+    "trust": "/v0/repos/github.com/comet-ml/opik/trust.json",
+    "queryTemplate": "/v0/repos/github.com/comet-ml/opik/query?path={dot_path}",
+    "indexPath": "repos/github.com/comet-ml/opik/"
+  }
+}

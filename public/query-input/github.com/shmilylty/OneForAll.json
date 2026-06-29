@@ -1,0 +1,111 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "shmilylty",
+    "repo": "OneForAll",
+    "source": "https://github.com/shmilylty/OneForAll"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/shmilylty/OneForAll/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/shmilylty/OneForAll",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/shmilylty/OneForAll/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/shmilylty/OneForAll",
+        "generated_at": "2026-06-29T05:22:29.293902Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "OneForAll",
+        "description": "👊**OneForAll是一款功能强大的子域收集工具** 📝English Document",
+        "homepage": "https://github.com/shmilylty/OneForAll",
+        "license": "GPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "subdomain",
+          "subdomain-scanner",
+          "subdomain-enumeration",
+          "subdomain-bruteforcing",
+          "subdomain-collection",
+          "subdomian-find",
+          "subdomain-takeover",
+          "subdomain-crawler",
+          "oneforall",
+          "python",
+          "osint",
+          "bugbounty",
+          "pentest-tool",
+          "information-gathering",
+          "zone-transfers",
+          "altname",
+          "recon",
+          "nsec",
+          "content-security-policy",
+          "crossdomainxml"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://github.com/shmilylty/OneForAll/tree/master/config/setting.py",
+        "getting_started": "https://pythonguidecn.readthedocs.io/zh/latest/starting/installation.html#python-3",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/shmilylty/OneForAll.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "e5255ae7009d12779d98be192b099c3c300dfd8a",
+          "html_url": "https://github.com/shmilylty/OneForAll",
+          "stars": 9884
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

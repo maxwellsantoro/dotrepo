@@ -1,0 +1,87 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "itsfatduck",
+    "repo": "optimizerDuck",
+    "source": "https://github.com/itsfatduck/optimizerDuck"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/itsfatduck/optimizerDuck/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/itsfatduck/optimizerDuck",
+    "generatedAt": "2026-06-29T05:25:54.675948Z",
+    "evidencePath": "repos/github.com/itsfatduck/optimizerDuck/evidence.md"
+  },
+  "purpose": "Free, open-source Windows optimization tool for performance, privacy, and simplicity.",
+  "name": "optimizerDuck Banner",
+  "homepage": "https://optimizerduck.vercel.app/",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C#",
+    "HTML",
+    "JavaScript",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "optimizer",
+    "performance",
+    "tweaker",
+    "open-source",
+    "optimization",
+    "privacy",
+    "tweaks",
+    "windows",
+    "csharp",
+    "debloat",
+    "dotnet",
+    "gaming",
+    "optimizerduck",
+    "winui"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://optimizerduck.vercel.app/",
+    "gettingStarted": "https://optimizerduck.vercel.app/docs/guides/getting-started"
+  },
+  "ownership": {
+    "maintainers": [
+      "@itsfatduck"
+    ],
+    "securityContact": "https://github.com/itsfatduck/optimizerDuck"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/itsfatduck/optimizerDuck/profile.json",
+    "repository": "/v0/repos/github.com/itsfatduck/optimizerDuck/index.json",
+    "trust": "/v0/repos/github.com/itsfatduck/optimizerDuck/trust.json",
+    "queryTemplate": "/v0/repos/github.com/itsfatduck/optimizerDuck/query?path={dot_path}",
+    "indexPath": "repos/github.com/itsfatduck/optimizerDuck/"
+  }
+}

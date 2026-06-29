@@ -1,0 +1,88 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ipxe",
+    "repo": "ipxe",
+    "source": "https://github.com/ipxe/ipxe"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ipxe/ipxe/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ipxe/ipxe",
+    "generatedAt": "2026-06-29T05:27:18.836961Z",
+    "evidencePath": "repos/github.com/ipxe/ipxe/evidence.md"
+  },
+  "purpose": "iPXE network bootloader",
+  "name": "iPXE network bootloader",
+  "homepage": "https://ipxe.org",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "C",
+    "C++",
+    "GDB",
+    "Linker Script",
+    "Makefile",
+    "Perl",
+    "Python",
+    "Roff",
+    "Shell"
+  ],
+  "topics": [
+    "ipxe",
+    "pxe",
+    "boot",
+    "firmware",
+    "network",
+    "netboot",
+    "secureboot",
+    "uefi",
+    "uefi-boot",
+    "aarch32",
+    "aarch64",
+    "loongarch64",
+    "risc-v",
+    "s390x",
+    "x86",
+    "x86-64"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://ipxe.org"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ipxe/ipxe/profile.json",
+    "repository": "/v0/repos/github.com/ipxe/ipxe/index.json",
+    "trust": "/v0/repos/github.com/ipxe/ipxe/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ipxe/ipxe/query?path={dot_path}",
+    "indexPath": "repos/github.com/ipxe/ipxe/"
+  }
+}

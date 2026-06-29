@@ -1,0 +1,60 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/serverless/serverless"
+generated_at = "2026-06-29T05:14:38.495332Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/ci-binary-installer.yml`, `.github/workflows/ci-framework.yml`, `.github/workflows/release-binary-installer.yml`, and `.github/workflows/release-framework.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Serverless Framework"
+description = "**January 2026** – V.4 continues to feature significant updates."
+homepage = "https://serverless.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Go",
+    "HCL",
+    "Java",
+    "JavaScript",
+    "Makefile",
+    "Perl",
+    "Python",
+    "Ruby",
+    "Shell",
+    "TypeScript",
+]
+test = "npm test"
+topics = [
+    "serverless",
+    "serverless-framework",
+    "serverless-architectures",
+    "aws-lambda",
+    "google-cloud-functions",
+    "azure-functions",
+    "aws",
+    "microservice",
+    "aws-dynamodb",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/serverless/serverless/security/advisories/new"
+
+[docs]
+root = "https://serverless.com/framework/docs/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/serverless/serverless.git"
+default_branch = "main"
+fork = false
+head_sha = "fb7ac39c75d5d53dd3da5319cc93e99f122652c9"
+html_url = "https://github.com/serverless/serverless"
+stars = 46915

@@ -1,0 +1,53 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "HeKun-NVIDIA",
+    "repo": "CUDA-Programming-Guide-in-Chinese",
+    "source": "https://github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese",
+    "generatedAt": "2026-06-29T05:28:22.690689Z",
+    "evidencePath": "repos/github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese/evidence.md"
+  },
+  "purpose": "This is a Chinese translation of the CUDA programming guide",
+  "name": "CUDA-Programming-Guide-in-Chinese",
+  "homepage": "https://github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese",
+  "visibility": "public",
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "low",
+    "provenance": [
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese/profile.json",
+    "repository": "/v0/repos/github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese/index.json",
+    "trust": "/v0/repos/github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese/trust.json",
+    "queryTemplate": "/v0/repos/github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese/query?path={dot_path}",
+    "indexPath": "repos/github.com/HeKun-NVIDIA/CUDA-Programming-Guide-in-Chinese/"
+  }
+}

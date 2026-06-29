@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme"
+generated_at = "2026-06-29T05:29:38.206701Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "ZeroDarkMatrix Theme for Chrome"
+description = "A highly customized dark theme for Google Chrome."
+homepage = "https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme"
+visibility = "public"
+languages = [
+    "HTML",
+    "JavaScript",
+]
+test = "npm test"
+topics = []
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme.git"
+default_branch = "master"
+fork = false
+head_sha = "3c495ab7e3c549c4d2d56285e59ceb1441e983d9"
+html_url = "https://github.com/mauricecruz/chrome-devtools-zerodarkmatrix-theme"
+stars = 1994

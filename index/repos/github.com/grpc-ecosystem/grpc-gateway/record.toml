@@ -1,0 +1,51 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/grpc-ecosystem/grpc-gateway"
+generated_at = "2026-06-29T05:16:28.613171Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "gRPC-Gateway"
+description = "gRPC to JSON proxy generator following the gRPC HTTP spec"
+homepage = "https://grpc-ecosystem.github.io/grpc-gateway/"
+license = "BSD-3-Clause"
+visibility = "public"
+languages = [
+    "Go",
+    "Makefile",
+    "Starlark",
+]
+build = "go build ./..."
+test = "go test ./..."
+topics = [
+    "go",
+    "grpc",
+    "grpc-gateway",
+    "rest-api",
+    "restful-api",
+    "swagger",
+    "openapi",
+]
+
+[docs]
+root = "https://grpc.io/docs/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/grpc-ecosystem/grpc-gateway.git"
+default_branch = "main"
+fork = false
+head_sha = "54633140440ca470b4cc293ebb25034a9b4af15f"
+html_url = "https://github.com/grpc-ecosystem/grpc-gateway"
+stars = 19941

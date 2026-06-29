@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "google",
+    "repo": "cadvisor",
+    "source": "https://github.com/google/cadvisor"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/google/cadvisor/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/google/cadvisor",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/google/cadvisor/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/google/cadvisor",
+        "generated_at": "2026-06-29T05:19:28.247298Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Quick Start",
+        "description": "To quickly tryout cAdvisor on your machine with Docker, we have a Docker image that includes everything you need to get started.",
+        "homepage": "https://github.com/google/cadvisor",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Go",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "Python",
+          "Shell"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/google/cadvisor.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "9c3903ca474779a5f5f9c7b3af9868c566a85f4e",
+          "html_url": "https://github.com/google/cadvisor",
+          "stars": 19239
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

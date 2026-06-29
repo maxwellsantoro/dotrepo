@@ -1,0 +1,45 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/bitpay/bitcore"
+generated_at = "2026-06-29T05:24:22.733302Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Bitcore Monorepo"
+description = "Infrastructure to build Bitcoin and blockchain-based applications for the next generation of financial technology."
+homepage = "https://bitcore.io/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Shell",
+    "Solidity",
+    "TypeScript",
+]
+build = "npm run build"
+topics = []
+
+[docs]
+root = "https://bitcore.io/"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/bitpay/bitcore.git"
+default_branch = "master"
+fork = false
+head_sha = "29598edd007e3a44759cf9e34fb979c7d631ea29"
+html_url = "https://github.com/bitpay/bitcore"
+stars = 4988

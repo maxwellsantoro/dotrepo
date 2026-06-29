@@ -1,0 +1,77 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "spring-cloud",
+    "repo": "spring-cloud-netflix",
+    "source": "https://github.com/spring-cloud/spring-cloud-netflix"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/spring-cloud/spring-cloud-netflix/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/spring-cloud/spring-cloud-netflix",
+    "generatedAt": "2026-06-29T05:26:23.934292Z",
+    "evidencePath": "repos/github.com/spring-cloud/spring-cloud-netflix/evidence.md"
+  },
+  "purpose": "Integration with Netflix OSS components",
+  "name": "spring-cloud-netflix",
+  "homepage": "http://cloud.spring.io/spring-cloud-netflix/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "FreeMarker",
+    "Java",
+    "Shell"
+  ],
+  "topics": [
+    "java",
+    "spring",
+    "spring-cloud",
+    "spring-boot",
+    "microservices",
+    "cloud-native",
+    "netflixoss",
+    "netflix-eureka",
+    "netflix-zuul",
+    "netflix-hystrix",
+    "ribbon",
+    "feign",
+    "spring-cloud-core"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "http://cloud.spring.io/spring-cloud-netflix/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "low",
+    "provenance": [
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/spring-cloud/spring-cloud-netflix/profile.json",
+    "repository": "/v0/repos/github.com/spring-cloud/spring-cloud-netflix/index.json",
+    "trust": "/v0/repos/github.com/spring-cloud/spring-cloud-netflix/trust.json",
+    "queryTemplate": "/v0/repos/github.com/spring-cloud/spring-cloud-netflix/query?path={dot_path}",
+    "indexPath": "repos/github.com/spring-cloud/spring-cloud-netflix/"
+  }
+}

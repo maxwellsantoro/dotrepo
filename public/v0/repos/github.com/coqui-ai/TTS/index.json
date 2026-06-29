@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "coqui-ai",
+    "repo": "TTS",
+    "source": "https://github.com/coqui-ai/TTS"
+  },
+  "repository": {
+    "name": "Coqui.ai News",
+    "description": "🐸TTS is a library for advanced Text-to-Speech generation.",
+    "homepage": "http://coqui.ai",
+    "docsRoot": "https://tts.readthedocs.io/en/dev/models/xtts.html"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/coqui-ai/TTS/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/coqui-ai/TTS",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/coqui-ai/TTS/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/coqui-ai/TTS/index.json",
+    "trust": "/v0/repos/github.com/coqui-ai/TTS/trust.json",
+    "profile": "/v0/repos/github.com/coqui-ai/TTS/profile.json",
+    "queryTemplate": "/v0/repos/github.com/coqui-ai/TTS/query?path={dot_path}",
+    "indexPath": "repos/github.com/coqui-ai/TTS/"
+  }
+}

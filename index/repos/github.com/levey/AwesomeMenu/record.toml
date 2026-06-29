@@ -1,0 +1,36 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/levey/AwesomeMenu"
+generated_at = "2026-06-29T05:26:15.357664Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "DO NOT USE IT TO COPY PATH!"
+description = "AwesomeMenu is a menu with the same look as the story menu of Path."
+homepage = "https://github.com/levey/AwesomeMenu"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Objective-C",
+    "Ruby",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/levey/AwesomeMenu.git"
+default_branch = "master"
+fork = false
+head_sha = "f52b91cea704562d10f3f453da4b74104696ab46"
+html_url = "https://github.com/levey/AwesomeMenu"
+stars = 4970

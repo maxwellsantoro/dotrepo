@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "sunnypilot",
+    "repo": "sunnypilot",
+    "source": "https://github.com/sunnypilot/sunnypilot"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/sunnypilot/sunnypilot/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/sunnypilot/sunnypilot",
+    "generatedAt": "2026-06-29T05:28:01.32666Z",
+    "evidencePath": "repos/github.com/sunnypilot/sunnypilot/evidence.md"
+  },
+  "purpose": "sunnypilot is an open source driver assistance system. sunnypilot offers the user a unique driving experience for over 350 supported car makes and models with modified behaviors of driving assist engagements. sunnypilot complies with the safety policy from comma.ai's openpilot as accurately as possible.",
+  "name": "What is sunnypilot?",
+  "homepage": "https://www.sunnypilot.ai",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CSS",
+    "Cap'n Proto",
+    "Cython",
+    "HTML",
+    "JavaScript",
+    "Jupyter Notebook",
+    "Python",
+    "Ruby",
+    "Shell"
+  ],
+  "topics": [
+    "autopilot",
+    "comma",
+    "fsd",
+    "openpilot",
+    "selfdriving",
+    "acura",
+    "audi",
+    "chrysler",
+    "genesis",
+    "honda",
+    "hyundai",
+    "jeep",
+    "kia",
+    "lexus",
+    "mazda",
+    "nissan",
+    "ram",
+    "tesla",
+    "toyota",
+    "volkswagen"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://www.sunnypilot.ai",
+    "gettingStarted": "https://community.sunnypilot.ai/t/getting-started-using-sunnypilot-in-your-supported-car/251"
+  },
+  "ownership": {
+    "maintainers": [
+      "@sunnypilot/dev-internal",
+      "@devtekve",
+      "@sunnyhaibin",
+      "@Discountchubbs"
+    ],
+    "team": "@sunnypilot/dev-internal",
+    "securityContact": "adeeb@comma.ai"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/sunnypilot/sunnypilot/profile.json",
+    "repository": "/v0/repos/github.com/sunnypilot/sunnypilot/index.json",
+    "trust": "/v0/repos/github.com/sunnypilot/sunnypilot/trust.json",
+    "queryTemplate": "/v0/repos/github.com/sunnypilot/sunnypilot/query?path={dot_path}",
+    "indexPath": "repos/github.com/sunnypilot/sunnypilot/"
+  }
+}

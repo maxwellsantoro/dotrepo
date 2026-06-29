@@ -1,0 +1,55 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "audreyfeldroy",
+    "repo": "favicon-cheat-sheet",
+    "source": "https://github.com/audreyfeldroy/favicon-cheat-sheet"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/audreyfeldroy/favicon-cheat-sheet/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/audreyfeldroy/favicon-cheat-sheet",
+    "generatedAt": "2026-06-29T05:21:59.318952Z",
+    "evidencePath": "repos/github.com/audreyfeldroy/favicon-cheat-sheet/evidence.md"
+  },
+  "purpose": "For new projects, this covers 99% of use cases:",
+  "name": "favicon-cheat-sheet",
+  "homepage": "https://github.com/audreyfeldroy/favicon-cheat-sheet",
+  "license": "MIT",
+  "visibility": "public",
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/audreyfeldroy/favicon-cheat-sheet/profile.json",
+    "repository": "/v0/repos/github.com/audreyfeldroy/favicon-cheat-sheet/index.json",
+    "trust": "/v0/repos/github.com/audreyfeldroy/favicon-cheat-sheet/trust.json",
+    "queryTemplate": "/v0/repos/github.com/audreyfeldroy/favicon-cheat-sheet/query?path={dot_path}",
+    "indexPath": "repos/github.com/audreyfeldroy/favicon-cheat-sheet/"
+  }
+}

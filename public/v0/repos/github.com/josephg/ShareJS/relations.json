@@ -1,0 +1,119 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "josephg",
+    "repo": "ShareJS",
+    "source": "https://github.com/josephg/ShareJS"
+  },
+  "relationCount": 2,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/josephg/sharejs",
+      "notes": "Declared repository in package.json.",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "manifest"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "josephg",
+        "repo": "sharejs",
+        "source": "https://github.com/josephg/ShareJS"
+      },
+      "profile": {
+        "identity": {
+          "host": "github.com",
+          "owner": "josephg",
+          "repo": "sharejs",
+          "source": "https://github.com/josephg/ShareJS"
+        },
+        "name": "ShareJS",
+        "purpose": "This is a little server & client library to allow concurrent editing of any kind of content via OT.",
+        "languages": [
+          "CoffeeScript",
+          "JavaScript",
+          "Makefile"
+        ],
+        "completeness": {
+          "hasBuild": true,
+          "hasTest": true,
+          "hasDocs": false,
+          "hasSecurityContact": false,
+          "hasOwnershipSignal": false,
+          "hasLicense": true,
+          "conflictCount": 0
+        },
+        "trust": {
+          "selectedStatus": "verified",
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "selectionReason": "only_matching_record"
+        },
+        "matched": [
+          "relation"
+        ],
+        "ranking": {
+          "score": 16,
+          "matchedFieldCount": 1,
+          "completenessSignalCount": 3,
+          "basis": [
+            "matchedFields",
+            "profileCompleteness",
+            "trustConfidence"
+          ]
+        },
+        "links": {
+          "self": "/v0/repos/github.com/josephg/sharejs/profile.json",
+          "repository": "/v0/repos/github.com/josephg/sharejs/index.json",
+          "trust": "/v0/repos/github.com/josephg/sharejs/trust.json",
+          "queryTemplate": "/v0/repos/github.com/josephg/sharejs/query?path={dot_path}",
+          "indexPath": "repos/github.com/josephg/sharejs/"
+        }
+      }
+    },
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/share/sharedb",
+      "notes": "Cross-link from README: ShareDB",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "share",
+        "repo": "sharedb"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/share/sharedb/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/josephg/ShareJS/relations",
+    "repository": "/v0/repos/github.com/josephg/ShareJS/index.json",
+    "trust": "/v0/repos/github.com/josephg/ShareJS/trust.json",
+    "profile": "/v0/repos/github.com/josephg/ShareJS/profile.json",
+    "queryTemplate": "/v0/repos/github.com/josephg/ShareJS/query?path={dot_path}",
+    "indexPath": "repos/github.com/josephg/ShareJS/"
+  }
+}

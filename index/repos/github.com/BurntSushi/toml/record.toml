@@ -1,0 +1,35 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/BurntSushi/toml"
+generated_at = "2026-06-29T05:25:27.705002Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Using the `Marshaler` and `encoding.TextUnmarshaler` interfaces"
+description = "Here's an example that automatically parses values in a `mail.Address`:"
+homepage = "https://github.com/BurntSushi/toml"
+license = "MIT"
+visibility = "public"
+languages = ["Go"]
+build = "go build ./..."
+test = "go test ./..."
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/BurntSushi/toml.git"
+default_branch = "master"
+fork = false
+head_sha = "c6d720d83547bb8d7afb067ba9df8bad0323e2d1"
+html_url = "https://github.com/BurntSushi/toml"
+stars = 4976

@@ -1,0 +1,99 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "r-lyeh",
+    "repo": "single_file_libs",
+    "source": "https://github.com/r-lyeh/single_file_libs"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/r-lyeh/single_file_libs/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/r-lyeh/single_file_libs",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/r-lyeh/single_file_libs/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/r-lyeh/single_file_libs",
+        "generated_at": "2026-06-29T05:20:40.977275Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Discord",
+        "description": "C/C++ open-source libraries with minimal dependencies",
+        "homepage": "https://github.com/r-lyeh/single_file_libs",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/nothings/stb",
+            "notes": "Cross-link from README: STB",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/r-lyeh/single_file_libs.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "fecac8eaa1ca485bfdc7aae540baa4c73bec0c28",
+          "html_url": "https://github.com/r-lyeh/single_file_libs",
+          "stars": 9951
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,37 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/mocheng/react-and-redux"
+generated_at = "2026-06-29T05:29:24.193363Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "react-and-redux"
+description = "《深入浅出React和Redux》代码"
+homepage = "https://github.com/mocheng/react-and-redux"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+]
+topics = []
+
+[x.github]
+archived = false
+clone_url = "https://github.com/mocheng/react-and-redux.git"
+default_branch = "master"
+fork = false
+head_sha = "9cbeab9e82f0089767583e7a5da496256a437605"
+html_url = "https://github.com/mocheng/react-and-redux"
+stars = 1994

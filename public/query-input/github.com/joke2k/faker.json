@@ -1,0 +1,99 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "joke2k",
+    "repo": "faker",
+    "source": "https://github.com/joke2k/faker"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/joke2k/faker/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/joke2k/faker",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/joke2k/faker/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/joke2k/faker",
+        "generated_at": "2026-06-29T05:19:03.809703Z",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "faker",
+        "description": "Faker is a Python package that generates fake data for you.",
+        "homepage": "https://faker.readthedocs.io",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Makefile",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "python",
+          "fake",
+          "testing",
+          "dataset",
+          "fake-data",
+          "test-data",
+          "test-data-generator",
+          "faker",
+          "faker-generator"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://faker.readthedocs.io",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/joke2k/faker.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "8442484c9fbd2637386a7d91563bfef476e28d5e",
+          "html_url": "https://github.com/joke2k/faker",
+          "stars": 19292
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,89 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hydraponique",
+    "repo": "roscomvpn-routing",
+    "source": "https://github.com/hydraponique/roscomvpn-routing"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/hydraponique/roscomvpn-routing/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/hydraponique/roscomvpn-routing",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/hydraponique/roscomvpn-routing/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/hydraponique/roscomvpn-routing",
+        "generated_at": "2026-06-29T05:29:30.99077Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Downloads",
+        "description": "Готовые конфигурации маршрутизации для Happ, INCY и Mihomo (Clash Meta, Clash Mi и др.)",
+        "homepage": "https://t.me/vpnrouting",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://t.me/vpnrouting",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/hydraponique/roscomvpn-routing.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "68d54e41f152247434215aefac7ec8302d869c9c",
+          "html_url": "https://github.com/hydraponique/roscomvpn-routing",
+          "stars": 1994
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

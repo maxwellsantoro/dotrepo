@@ -1,0 +1,58 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/brillout/awesome-react-components"
+generated_at = "2026-06-29T05:13:56.429741Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Absolutely Awesome React Components & Libraries"
+description = "This is a list of AWESOME components."
+homepage = "https://github.com/brillout/awesome-react-components"
+license = "CC0-1.0"
+visibility = "public"
+languages = []
+topics = [
+    "react",
+    "awesome",
+    "awesome-list",
+    "react-components",
+    "react-component",
+]
+
+[docs]
+root = "https://handsontable.com/docs/react-data-grid/"
+getting_started = "https://edtr.io/docs/getting-started"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/brillout/awesome-react-frameworks"
+notes = "Cross-link from README: Awesome React Frameworks"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/brillout/awesome-react-components.git"
+default_branch = "master"
+fork = false
+head_sha = "66b2758c4808d62cfe7c2a1dc0c48f7d51153cf5"
+html_url = "https://github.com/brillout/awesome-react-components"
+stars = 47874

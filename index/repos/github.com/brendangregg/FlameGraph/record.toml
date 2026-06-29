@@ -1,0 +1,42 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/brendangregg/FlameGraph"
+generated_at = "2026-06-29T05:17:56.8449Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Flame Graphs visualize profiled code"
+description = "Example (click to zoom):"
+homepage = "http://www.brendangregg.com/flamegraphs.html"
+visibility = "public"
+languages = [
+    "Awk",
+    "DTrace",
+    "PHP",
+    "Perl",
+    "Python",
+    "Shell",
+]
+topics = []
+
+[docs]
+root = "http://www.brendangregg.com/flamegraphs.html"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/brendangregg/FlameGraph.git"
+default_branch = "master"
+fork = false
+head_sha = "41fee1f99f9276008b7cd112fca19dc3ea84ac32"
+html_url = "https://github.com/brendangregg/FlameGraph"
+stars = 19572

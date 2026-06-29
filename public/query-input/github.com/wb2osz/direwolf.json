@@ -1,0 +1,100 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "wb2osz",
+    "repo": "direwolf",
+    "source": "https://github.com/wb2osz/direwolf"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/wb2osz/direwolf/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/wb2osz/direwolf",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/codeql-analysis.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/wb2osz/direwolf/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/wb2osz/direwolf",
+        "generated_at": "2026-06-29T05:28:57.021835Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/codeql-analysis.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Dire Wolf",
+        "description": "In the early days of Amateur Packet Radio, it was necessary to use an expensive \"Terminal Node Controller\" (TNC) with specialized hardware.",
+        "homepage": "https://github.com/wb2osz/direwolf",
+        "license": "GPL-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "C",
+          "C++",
+          "CMake",
+          "Makefile",
+          "Perl",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": "make test",
+        "topics": [
+          "tnc",
+          "igate",
+          "ham-radio",
+          "packet-radio",
+          "raspberry-pi",
+          "digipeater",
+          "aprs",
+          "ax25"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/wb2osz/direwolf.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "eda1383f5fa9d8ba3cb27f99db1d2c79494404c9",
+          "html_url": "https://github.com/wb2osz/direwolf",
+          "stars": 1995
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

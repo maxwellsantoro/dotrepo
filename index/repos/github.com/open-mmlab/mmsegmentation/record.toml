@@ -1,0 +1,53 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/open-mmlab/mmsegmentation"
+generated_at = "2026-06-29T05:22:56.096755Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Introducing MMSegmentation v1.0.0 🎉"
+description = "MMSegmentation v1.x brings remarkable improvements over the 0.x release, offering a more flexible and feature-packed experience."
+homepage = "https://mmsegmentation.readthedocs.io/en/main/"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Python",
+    "Shell",
+]
+topics = [
+    "semantic-segmentation",
+    "pytorch",
+    "pspnet",
+    "deeplabv3",
+    "transformer",
+    "swin-transformer",
+    "realtime-segmentation",
+    "vessel-segmentation",
+    "retinal-vessel-segmentation",
+    "image-segmentation",
+    "medical-image-segmentation",
+]
+
+[docs]
+root = "https://mmsegmentation.readthedocs.io/en/latest/migration/interface.html"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/open-mmlab/mmsegmentation.git"
+default_branch = "main"
+fork = false
+head_sha = "b040e147adfa027bbc071b624bedf0ae84dfc922"
+html_url = "https://github.com/open-mmlab/mmsegmentation"
+stars = 9862

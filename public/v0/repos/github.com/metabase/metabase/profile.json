@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "metabase",
+    "repo": "metabase",
+    "source": "https://github.com/metabase/metabase"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/metabase/metabase/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/metabase/metabase",
+    "generatedAt": "2026-06-29T05:13:52.082337Z",
+    "evidencePath": "repos/github.com/metabase/metabase/evidence.md"
+  },
+  "purpose": "Metabase is the easy, open-source way for everyone in your company to ask questions and learn from data.",
+  "name": "Metabase",
+  "homepage": "https://metabase.com",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Clojure",
+    "Dockerfile",
+    "Emacs Lisp",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "MDX",
+    "Mustache",
+    "Python",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "analytics",
+    "businessintelligence",
+    "dashboard",
+    "reporting",
+    "slack",
+    "clojure",
+    "database",
+    "metabase",
+    "postgres",
+    "postgresql",
+    "mysql",
+    "bi",
+    "visualization",
+    "data",
+    "data-analysis",
+    "sql-editor",
+    "data-visualization",
+    "business-intelligence"
+  ],
+  "execution": {
+    "build": "bun run build",
+    "test": "bun run test"
+  },
+  "docs": {
+    "root": "https://metabase.com",
+    "gettingStarted": "https://www.metabase.com/docs/latest/installation-and-operation/installing-metabase"
+  },
+  "ownership": {
+    "maintainers": [
+      "@metabase/core-backend-querying-platform",
+      "@metabase/graphy",
+      "@metabase/embedding",
+      "@metabase/tech-writers",
+      "@metabase/devexp",
+      "@metabase/cloud-ops",
+      "@metabase/metabot-frontend"
+    ],
+    "securityContact": "security@metabase.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/metabase/metabase/profile.json",
+    "repository": "/v0/repos/github.com/metabase/metabase/index.json",
+    "trust": "/v0/repos/github.com/metabase/metabase/trust.json",
+    "queryTemplate": "/v0/repos/github.com/metabase/metabase/query?path={dot_path}",
+    "indexPath": "repos/github.com/metabase/metabase/"
+  }
+}

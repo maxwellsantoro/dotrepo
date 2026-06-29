@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "equalsraf",
+    "repo": "neovim-qt",
+    "source": "https://github.com/equalsraf/neovim-qt"
+  },
+  "repository": {
+    "name": "Neovim Qt",
+    "description": "Neovim Qt is a lightweight cross-platform Neovim GUI written in C++ with Qt.",
+    "homepage": "https://github.com/equalsraf/neovim-qt/wiki"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/equalsraf/neovim-qt/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/equalsraf/neovim-qt",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build-test-win.yml` and `.github/workflows/build-test.yml` suggested conflicting build commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/equalsraf/neovim-qt/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/equalsraf/neovim-qt/index.json",
+    "trust": "/v0/repos/github.com/equalsraf/neovim-qt/trust.json",
+    "profile": "/v0/repos/github.com/equalsraf/neovim-qt/profile.json",
+    "queryTemplate": "/v0/repos/github.com/equalsraf/neovim-qt/query?path={dot_path}",
+    "indexPath": "repos/github.com/equalsraf/neovim-qt/"
+  }
+}

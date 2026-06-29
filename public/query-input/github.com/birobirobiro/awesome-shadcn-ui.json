@@ -1,0 +1,117 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "birobirobiro",
+    "repo": "awesome-shadcn-ui",
+    "source": "https://github.com/birobirobiro/awesome-shadcn-ui"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/birobirobiro/awesome-shadcn-ui/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/birobirobiro/awesome-shadcn-ui",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/birobirobiro/awesome-shadcn-ui/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/birobirobiro/awesome-shadcn-ui",
+        "generated_at": "2026-06-29T05:16:26.305894Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "awesome-shadcn/ui",
+        "description": "A curated list of awesome things related to shadcn/ui",
+        "homepage": "https://awesomeshadcn.dev/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "JavaScript",
+          "TypeScript"
+        ],
+        "build": "npm run build",
+        "test": null,
+        "topics": [
+          "awesome",
+          "awesome-list",
+          "resources",
+          "shadcn",
+          "shadcn-ui",
+          "list",
+          "open-source",
+          "shad"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://shuip.plvo.dev/docs",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": [],
+        "links": [
+          {
+            "kind": "related",
+            "target": "github.com/mehrdadrafiee/animated-header",
+            "notes": "Cross-link from README: Link",
+            "trust": {
+              "confidence": "low",
+              "provenance": [
+                "declared",
+                "readme"
+              ],
+              "notes": null
+            }
+          }
+        ]
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/birobirobiro/awesome-shadcn-ui.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "18d73098bac79c4a13e123ba31d8af1462b23d98",
+          "html_url": "https://github.com/birobirobiro/awesome-shadcn-ui",
+          "stars": 19942
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

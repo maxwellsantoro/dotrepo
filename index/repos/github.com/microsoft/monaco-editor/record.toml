@@ -1,0 +1,82 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/microsoft/monaco-editor"
+generated_at = "2026-06-29T05:14:50.432327Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Monaco Editor"
+description = "Try out the editor and see various examples in our interactive playground."
+homepage = "https://microsoft.github.io/monaco-editor/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "monaco-editor",
+    "vscode",
+    "editor",
+    "browser",
+    "typescript",
+]
+
+[owners]
+maintainers = []
+security_contact = "https://aka.ms/SECURITY.md"
+
+[docs]
+root = "https://microsoft.github.io/monaco-editor/"
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/microsoft/monaco-editor"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/microsoft/vscode"
+notes = "Cross-link from README: VS Code"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.github]
+archived = false
+clone_url = "https://github.com/microsoft/monaco-editor.git"
+default_branch = "main"
+fork = false
+head_sha = "d8c9ff06b7bcbd0c07d1ccb16e3d30f5e5962d08"
+html_url = "https://github.com/microsoft/monaco-editor"
+stars = 46262

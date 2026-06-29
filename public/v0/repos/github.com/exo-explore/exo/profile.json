@@ -1,0 +1,74 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "exo-explore",
+    "repo": "exo",
+    "source": "https://github.com/exo-explore/exo"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/exo-explore/exo/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/exo-explore/exo",
+    "generatedAt": "2026-06-29T05:15:01.004564Z",
+    "evidencePath": "repos/github.com/exo-explore/exo/evidence.md"
+  },
+  "purpose": "Run frontier AI locally.",
+  "name": "Discord",
+  "homepage": "https://github.com/exo-explore/exo",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Just",
+    "Nix",
+    "Python",
+    "Rust",
+    "Shell",
+    "Svelte",
+    "Swift",
+    "TypeScript"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@ToxicPine",
+      "@AlexCheema",
+      "@GeluVrabie"
+    ]
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/exo-explore/exo/profile.json",
+    "repository": "/v0/repos/github.com/exo-explore/exo/index.json",
+    "trust": "/v0/repos/github.com/exo-explore/exo/trust.json",
+    "queryTemplate": "/v0/repos/github.com/exo-explore/exo/query?path={dot_path}",
+    "indexPath": "repos/github.com/exo-explore/exo/"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "intel",
+    "repo": "intel-one-mono",
+    "source": "https://github.com/intel/intel-one-mono"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/intel/intel-one-mono/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/intel/intel-one-mono",
+    "generatedAt": "2026-06-29T05:22:01.094577Z",
+    "evidencePath": "repos/github.com/intel/intel-one-mono/evidence.md"
+  },
+  "purpose": "Introducing Intel One Mono, an expressive monospaced font family that’s built with clarity, legibility, and the needs of developers in mind.",
+  "name": "Intel One Mono Typeface",
+  "homepage": "https://github.com/intel/intel-one-mono",
+  "license": "OFL-1.1",
+  "visibility": "public",
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/intel/intel-one-mono/profile.json",
+    "repository": "/v0/repos/github.com/intel/intel-one-mono/index.json",
+    "trust": "/v0/repos/github.com/intel/intel-one-mono/trust.json",
+    "queryTemplate": "/v0/repos/github.com/intel/intel-one-mono/query?path={dot_path}",
+    "indexPath": "repos/github.com/intel/intel-one-mono/"
+  }
+}

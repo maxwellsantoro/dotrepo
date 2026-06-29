@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "johnkerl",
+    "repo": "miller",
+    "source": "https://github.com/johnkerl/miller"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/GuilloteauQ/miller-exercises",
+      "notes": "Cross-link from README: Miller Exercises",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "GuilloteauQ",
+        "repo": "miller-exercises"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/GuilloteauQ/miller-exercises/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/johnkerl/miller/relations",
+    "repository": "/v0/repos/github.com/johnkerl/miller/index.json",
+    "trust": "/v0/repos/github.com/johnkerl/miller/trust.json",
+    "profile": "/v0/repos/github.com/johnkerl/miller/profile.json",
+    "queryTemplate": "/v0/repos/github.com/johnkerl/miller/query?path={dot_path}",
+    "indexPath": "repos/github.com/johnkerl/miller/"
+  }
+}

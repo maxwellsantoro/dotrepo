@@ -1,0 +1,50 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/pritunl/pritunl"
+generated_at = "2026-06-29T05:25:02.118771Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "pritunl: enterprise vpn server"
+description = "Pritunl is a distributed enterprise vpn server built using the OpenVPN protocol."
+homepage = "https://forum.pritunl.com"
+license = "NOASSERTION"
+visibility = "public"
+languages = [
+    "Dart",
+    "Dockerfile",
+    "Go",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Python",
+    "SCSS",
+    "Shell",
+]
+topics = [
+    "pritunl",
+    "vpn",
+    "vpn-server",
+]
+
+[docs]
+root = "https://forum.pritunl.com"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/pritunl/pritunl.git"
+default_branch = "master"
+fork = false
+head_sha = "da6a7b62f420adf1fafd3f4658ea4f960db28127"
+html_url = "https://github.com/pritunl/pritunl"
+stars = 4982

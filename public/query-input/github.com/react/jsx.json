@@ -1,0 +1,89 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "react",
+    "repo": "jsx",
+    "source": "https://github.com/react/jsx"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/react/jsx/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/react/jsx",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/react/jsx/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/react/jsx",
+        "generated_at": "2026-06-29T05:27:25.902323Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "DRAFT",
+        "description": "**See spec text with grammar here**.",
+        "homepage": "http://react.github.io/jsx/",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "HTML"
+        ],
+        "build": "npm run build",
+        "test": null,
+        "topics": []
+      },
+      "owners": null,
+      "docs": {
+        "root": "http://react.github.io/jsx/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/react/jsx.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "d614ce76e6ea996ea6dfa122f2a7be71ed96e6eb",
+          "html_url": "https://github.com/react/jsx",
+          "stars": 1998
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

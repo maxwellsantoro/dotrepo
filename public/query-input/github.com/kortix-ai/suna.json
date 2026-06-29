@@ -1,0 +1,116 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "kortix-ai",
+    "repo": "suna",
+    "source": "https://github.com/kortix-ai/suna"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/kortix-ai/suna/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/kortix-ai/suna",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/kortix-ai/suna/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/kortix-ai/suna",
+        "generated_at": "2026-06-29T05:16:40.97504Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Kortix",
+        "description": "The AI command center for your company",
+        "homepage": "https://www.kortix.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "CSS",
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "HCL",
+          "HTML",
+          "JavaScript",
+          "Kotlin",
+          "MDX",
+          "Makefile",
+          "PLpgSQL",
+          "Python",
+          "Ruby",
+          "Shell",
+          "Swift",
+          "TeX",
+          "TypeScript"
+        ],
+        "build": "pnpm build",
+        "test": "pnpm test",
+        "topics": [
+          "ai",
+          "ai-agents",
+          "llm"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@markokraemer"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://kortix.com/docs",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": null,
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/kortix-ai/suna.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "753556e9b4c0981c14e369f570144e4f7db941c6",
+          "html_url": "https://github.com/kortix-ai/suna",
+          "stars": 19894
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

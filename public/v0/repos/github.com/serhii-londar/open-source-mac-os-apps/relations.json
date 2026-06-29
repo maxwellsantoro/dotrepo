@@ -1,0 +1,47 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T06:00:00Z",
+    "snapshotDigest": "2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e",
+    "staleAfter": "2026-06-30T06:00:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "serhii-londar",
+    "repo": "open-source-mac-os-apps",
+    "source": "https://github.com/serhii-londar/open-source-mac-os-apps"
+  },
+  "relationCount": 1,
+  "references": [
+    {
+      "relationship": "related",
+      "direction": "outgoing",
+      "target": "github.com/audacity/audacity",
+      "notes": "Cross-link from README: Audacity",
+      "trust": {
+        "confidence": "low",
+        "provenance": [
+          "declared",
+          "readme"
+        ]
+      },
+      "identity": {
+        "host": "github.com",
+        "owner": "audacity",
+        "repo": "audacity"
+      },
+      "error": {
+        "code": "repository_not_found",
+        "message": "repository not found in index: repos/github.com/audacity/audacity/record.toml"
+      }
+    }
+  ],
+  "links": {
+    "self": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/relations",
+    "repository": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/index.json",
+    "trust": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/trust.json",
+    "profile": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/profile.json",
+    "queryTemplate": "/v0/repos/github.com/serhii-londar/open-source-mac-os-apps/query?path={dot_path}",
+    "indexPath": "repos/github.com/serhii-londar/open-source-mac-os-apps/"
+  }
+}

@@ -1,0 +1,48 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/cssnano/cssnano"
+generated_at = "2026-06-29T05:25:51.285689Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "cssnano"
+description = "A modular minifier, built on top of the PostCSS ecosystem."
+homepage = "https://cssnano.github.io/cssnano/"
+license = "MIT"
+visibility = "public"
+languages = [
+    "CSS",
+    "JavaScript",
+    "Nunjucks",
+]
+test = "pnpm test"
+topics = [
+    "postcss",
+    "cssnano",
+    "optimisation",
+    "css",
+    "minification",
+]
+
+[docs]
+root = "https://cssnano.github.io/cssnano/"
+getting_started = "https://cssnano.github.io/cssnano/docs/getting-started"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/cssnano/cssnano.git"
+default_branch = "master"
+fork = false
+head_sha = "b0c6ed241c619c593a9d8ef8f8b64f73daff79d9"
+html_url = "https://github.com/cssnano/cssnano"
+stars = 4973
