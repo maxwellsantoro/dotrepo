@@ -101,6 +101,28 @@ Unchanged repositories should be served from the existing semantic cache.
 Refresh cost should scale with changed repository heads and stale records, not
 with the total size of the index.
 
+### Autonomous usefulness does not depend on adoption
+
+The public overlay index must remain accurate, fresh, and useful for repositories
+whose maintainers never adopt dotrepo or claim their records. Native adoption is
+an authority and maintenance upgrade, not a prerequisite for coverage and not a
+scaling strategy for the index.
+
+### Marginal cost is a product constraint
+
+The long-range target is coverage of all publicly processable repositories. At
+that scale, unnecessary network reads, parsing passes, model calls, tokens, and
+high-cost model selections become system-level defects. The default refresh path
+for an unchanged repository should approach the cost of an identity and head
+check. Every more expensive tier must justify its incremental expected value.
+
+### Scale advances through measured cohorts
+
+The index grows through bounded cohorts that preserve ecosystem diversity and
+pass quality, freshness, reliability, throughput, and unit-cost gates. A larger
+corpus is not progress if each record becomes more expensive, less fresh, or
+less trustworthy.
+
 ### Native records win
 
 Generated overlays bootstrap usefulness. Maintainer-owned native records are
@@ -183,6 +205,7 @@ honestly.
 
 | Tier | Method | Expected use |
 | --- | --- | --- |
+| -1 | Cached identity, head, and evidence digests | Skip unchanged repositories and repeated work |
 | 0 | Structured parsers, host APIs, manifests, known files | Most repository facts |
 | 1 | Deterministic inference and cross-source reconciliation | Conventional build, test, docs, owners, and absence decisions |
 | 2 | Cheap local model with narrow candidates and snippets | Ambiguous extraction that requires semantic judgment |
@@ -195,6 +218,29 @@ There is no human adjudication tier for routine generated records.
 Model responses must be post-checked against allowed candidates, evidence,
 field constraints, and repository identity. A stronger model can improve a
 decision; it cannot bypass validation.
+
+Escalation is field-scoped and stops as soon as the remaining uncertainty is not
+worth the additional cost. Provider routing should choose the least expensive
+model that meets a calibrated quality target for the task class. Evidence,
+candidate sets, negative results, and adjudication outcomes should be cached by
+content digest so retries and related queries do not repay the same cost.
+
+Work avoidance precedes escalation. In order: check repository identity and heads
+before materializing source; prefer event-driven refresh signals with adaptive
+polling keyed to churn, demand, staleness risk, and prior failures; cache
+evidence and parser results by content digest; process changed files as deltas
+rather than full re-imports; and batch, deduplicate, and coalesce host-API
+conditional requests.
+
+Model-decision cache keys must include the evidence digest, field, prompt and
+policy versions, and model identity so reuse never hides a semantic change.
+Archived, unavailable, and repeatedly failing repositories use explicit negative
+caching with bounded backoff rather than consuming hot-loop capacity. Provider
+and tier policies are benchmarked periodically because model price, latency, and
+quality drift; a more expensive model is justified only by measured net
+improvement after post-checks, not by capability claims. Local models are not
+presumed free: accelerator time, energy, queueing, maintenance, and opportunity
+cost belong in the same comparison as hosted-model pricing.
 
 ## Quality model
 
@@ -215,9 +261,76 @@ Required protections include:
 - automatic quarantine or abstention on gate failures
 - promotion only when all required fields are honestly resolved
 - immutable telemetry for model tier, cost, tokens, and outcome
+- randomized and risk-weighted audits that test the system without creating a
+  per-record approval queue
 
 Automation may promote eligible records to `verified`. It does not mint
 maintainer authority, `reviewed`, or `canonical` status.
+
+## Operating strategy
+
+The roadmap advances through parallel workstreams. Maintainer adoption improves
+authority, but autonomous scale, utility, and reliability proceed whether or not
+adoption occurs.
+
+| Workstream | Immediate objective | Success criterion or scale gate |
+| --- | --- | --- |
+| Reliability | Prove repeated autonomous refresh and safe partial failure | Strict telemetry SLOs pass for consecutive scheduled runs |
+| Accuracy | Improve factual precision and honest abstention by intent and ecosystem | No intent or ecosystem cohort regresses beyond its error budget |
+| Efficiency | Avoid unchanged work and route unresolved fields to the cheapest sufficient method | No-op, changed-record, and improved-record unit costs are measured and within budget |
+| Throughput | Increase repositories processed per unit of wall time and compute | Cohort completes within latency, memory, rate-limit, and failure-isolation budgets |
+| Utility | Answer representative lookup, execution, documentation, security, and discovery tasks | Intent-level hit-rate and exact-value gates pass |
+| Authority and adoption | Make native ownership and canonical handoff easy | Conversion and retention improve; this workstream does not block overlay coverage |
+| Maintainability | Keep the reference implementation safe to change | Structural gates and focused tests remain healthy |
+
+### Cohort-based expansion
+
+After the current proof gate passes, growth proceeds in cohorts of roughly
+50–100 repositories before moving to larger batches. Each cohort must report:
+
+- exact-value accuracy, incorrect-assertion rate, and correct-abstention rate
+- intent-level task success for overview, execution, documentation, security,
+  ownership, comparison, and discovery
+- parser and validation failures by ecosystem
+- cache hit rate and unchanged-repository skip rate
+- network bytes, files materialized, CPU and accelerator time, peak memory,
+  storage/cache growth, export/serving work, and wall-clock time
+- model calls, tokens, and cost by tier, provider, task class, and outcome
+- cost for an unchanged repository, a changed repository, and a repository with
+  at least one useful field improvement
+- refresh latency, stale-record rate, quarantine rate, and promotion outcome
+
+A cohort may advance, pause for deterministic fixes, or be excluded with an
+explicit reason. Expansion never weakens validation or converts uncertainty into
+unsupported facts.
+
+### Demand and coverage strategy
+
+Coverage selection combines ecosystem balance with demonstrated utility:
+
+- exact-lookup misses and repeated scrape fallbacks
+- repositories frequently encountered by agents or downstream consumers
+- ecosystem, language, and repository-layout gaps
+- dependency and relationship centrality
+- benchmark and canary coverage needs
+- maintainer interest, without making interest a prerequisite
+
+Star bands and curated catalogs remain useful sampling tools, but they are not
+the sole definition of demand.
+
+### Audit strategy
+
+There is no routine human approval tier. Instead, randomized and risk-weighted
+audits examine samples by ecosystem, confidence, parser family, model tier,
+promotion threshold, and surprising cost or completeness. Audit findings become
+deterministic fixes, fixtures, calibration changes, or policy changes.
+
+### Status discipline
+
+`ROADMAP.md` owns stable direction, gates, and execution order. Date-stamped
+counts are snapshots sourced from the repository's growth, coverage, promotion,
+accuracy, and telemetry reports. Operational dashboards and generated artifacts
+own live values so changing counts do not silently redefine strategy.
 
 ## Product milestones
 
@@ -234,46 +347,71 @@ quality calibration, and maintainer uptake.
 **Checked-in index snapshot (2026-06-29):** 613 overlay records, 516 high-signal
 public profiles (103.2% of the Milestone 2 target), 514 `verified` records, and 1
 accepted maintainer claim. The 500-profile Milestone 2 coverage gate is
-complete. Five bounded discovery waves expanded the corpus across
-non-overlapping GitHub star bands; the next priority is quality hardening across
-the larger index rather than raw record growth.
+complete. *High-signal* here is profile-level coverage (a quality-signal
+aggregate over each exported `profile.json`), distinct from the 514 record-level
+`verified` statuses; a few profiles are high-signal before their record reaches
+`verified`. The next priority is quality hardening across the larger index, not
+raw record growth. Live counts come from the generated growth, coverage,
+promotion, and telemetry artifacts and refresh with each run; this snapshot fixes
+direction, not numbers.
 
 ### Active execution order
 
 This is the operative ordering across milestones. Detailed milestone sections
 describe the destination; this section decides what runs now.
 
-**Now — prove and harden the autonomous factory (Milestone 1).**
+**Now — prove, measure, and harden the autonomous factory (Milestone 1).**
 
-1. Pass `check_autonomous_telemetry_gate.py` without `--warn-only`. In the
-   2026-06-29 snapshot, retained history has 7 runs and 75 processed
-   repositories, but still fails the worst-run failure-rate and recent
-   failure-drift checks.
-2. Work the snapshot's 501-record quality queue through bounded batches and
-   deterministic fixes. Ratchet its missing-signal ceilings of 285 build, 290
-   test, and 408 security downward without regressing the factual-accuracy gates.
-3. Process the current promotion headroom through the normal validation path.
-   `promotion-report` currently reports 61 promotion candidates, while the
-   narrower growth-status heuristic reports 19 high-signal lift candidates.
-4. Preserve at least 613 valid public profiles, 516 high-signal profiles, zero
-   malformed profiles, and the current factual-accuracy floors during hardening.
+1. Pass `check_autonomous_telemetry_gate.py` without `--warn-only` for three
+   consecutive scheduled runs. The gate currently fails on worst-run failure rate
+   and recent failure drift; live run and repository counts come from the
+   telemetry summary.
+2. Exercise the model tail deliberately. Stand up a bounded adjudication canary
+   or challenge cohort that drives representative work through the cheap-model,
+   second-opinion, and strong-model paths, so low observed adjudication rates are
+   evidence the escalation system works rather than evidence it was never used.
+   Do not spend production calls merely to generate telemetry.
+3. Add versioned unit-cost reports for unchanged, changed, and usefully improved
+   records — network, CPU, memory, wall time, model calls, tokens, and provider
+   cost — with cache hits and avoided work as first-class outcomes.
+4. Establish intent- and ecosystem-level quality scorecards with explicit error
+   budgets for incorrect facts, missing facts, and correct abstention.
+5. Work the quality-hardening queue through bounded batches and deterministic
+   fixes, ratcheting the missing-signal ceilings (build, test, security) reported
+   by the growth-status renderer downward without regressing factual-accuracy
+   gates.
+6. Process the current promotion headroom through the normal validation path;
+   consult `promotion-report` and the growth-status renderer for live candidate
+   counts.
+7. Begin randomized and risk-weighted system audits and convert every actionable
+   result into a fixture, deterministic fix, calibration change, or policy update.
+8. Preserve the gated profile floors (valid profiles, high-signal ratio, zero
+   malformed) and the current factual-accuracy floors during hardening; the
+   release-gate baseline owns the pinned thresholds.
 
-**Next — begin the first ecosystem-scale and adoption checkpoints (Milestones 4
-and 5).**
+**Next — begin the first ecosystem-scale cohorts (Milestone 4).**
 
-1. Grow to 1,000 incrementally maintained profiles while keeping stale or
-   missing `generated_at` records at or below 10% and maximum refresh overdue
-   latency at or below 7 days, using the existing 30-day stale threshold.
-2. Publish a versioned baseline for refresh work, network/model cost, and cost
-   per maintained profile before claiming that incremental refresh becomes
-   cheaper at scale.
-3. Publish adoption telemetry, then reach an initial checkpoint of 10
-   maintainer-owned native records and 5 accepted overlay-to-native handoffs.
+1. Expand in gated 50–100 repository cohorts until the index reaches 1,000
+   incrementally maintained profiles.
+2. Keep stale or missing `generated_at` records at or below 10% and maximum
+   refresh overdue latency at or below 7 days, using the existing 30-day stale
+   threshold.
+3. Require each cohort to remain inside accuracy, abstention, throughput,
+   resource, model-tier, and unit-cost budgets before increasing batch size.
+4. Select coverage from demand signals and ecosystem gaps, not raw count alone.
+
+**In parallel — improve maintainer authority and adoption (Milestone 5).**
+Publish adoption-funnel telemetry and reach an initial checkpoint of 10
+maintainer-owned native records and 5 accepted overlay-to-native handoffs. These
+outcomes improve authority and durability, but neither target gates autonomous
+index growth or the usefulness of unclaimed overlay records.
 
 **Later — broaden scale, adoption, and interoperability.** Expand from 1,000 to
-10,000 profiles only after the first scale gates hold, deepen the maintainer
-flywheel, and begin Milestone 6 compatibility work once independent producers or
-consumers are ready to test against the protocol.
+10,000 profiles only after the first scale gates hold, then advance toward all
+publicly processable repositories through successively larger gated cohorts.
+Deepen the maintainer flywheel in parallel. Begin a minimal Milestone 6
+conformance suite and independent-consumer test before full ecosystem-scale
+completion so the protocol does not overfit the reference implementation.
 
 ### Reference toolchain maintainability
 
@@ -324,10 +462,11 @@ utility, and adoption.
 
 **Goal:** make autonomous generation and refresh the default operating model.
 
-**Implementation status: complete; operational proof status: pending.** Scheduled
-planning, bounded adjudication, gate-passed writeback, retained telemetry, proof
-gates, and deploy coherence are implemented. The retained multi-run proof gate
-must pass in strict mode before the milestone itself is complete.
+**Core implementation status: complete; operational proof and scale-cost
+instrumentation status: pending.** Scheduled planning, bounded adjudication,
+gate-passed writeback, retained telemetry, proof gates, and deploy coherence are
+implemented. The retained multi-run proof gate must pass in strict mode and the
+expanded unit-cost reports must land before the milestone itself is complete.
 
 Deliver:
 
@@ -343,64 +482,60 @@ Deliver:
 Exit criteria:
 
 - zero routine human reviews per generated overlay
-- stable autonomous writeback and refresh over repeated runs
-- deterministic resolution for the large majority of repositories
+- strict autonomous telemetry gates pass for at least three consecutive
+  scheduled runs
+- stable autonomous writeback and refresh over repeated runs, including safe
+  retention of valid partial progress when individual repositories fail
+- deterministic resolution for at least 75% of processed repositories
 - model adjudication required for less than 25% of processed repositories
-- strong remote escalation required only for a small tail
+- strong remote escalation required for no more than 5% of processed repositories
+- a bounded adjudication canary or challenge cohort has exercised the
+  cheap-model, second-opinion, and strong-model paths, so the escalation system
+  is proven rather than merely untriggered
 - no measurable quality regression as throughput increases
+- unchanged, changed, and improved-record unit costs are separately observable
 
 Implemented operational controls:
 
-- scheduled operation now has budgeted primary, second-opinion, and stronger
-  remote adjudication sidecar paths, but repeated runs still need to prove the
-  tier mix stays within the intended cheap-primary/rare-tail shape
-- retained multi-run telemetry and a proof gate now exist, including worst-run
-  quality checks plus recent-window quality, tier-mix, adjudication-budget, and
-  token-cost drift checks; repeated scheduled runs still need to satisfy that
-  gate to demonstrate stable cost, resolution, promotion, and regression rates
-- automatic deploy coherence checks now compare the live Worker against the
-  reviewed export's core contract files and a deterministic public
-  `v0/files.json` hash sample before post-deploy smoke checks pass
-- Cloudflare packaging and smoke paths run on Node.js 22 in CI, matching the
-  supported Wrangler runtime used by the deployment gate
-- scheduled failures now retain telemetry and valid partial writebacks before
-  restoring the failed workflow result, so early proof-gate failures and live
-  repository defects no longer prevent the multi-run history from accumulating
-- head-aware planning now bounds network inspection to the configured limit and
-  rotates oldest crawls first; quality reprocessing also rotates by generation
-  time so repeatedly partial records cannot monopolize scheduled batch slots
-- autonomous refresh now reprocesses lower-confidence checked-in records and
-  newly discovered repositories through the same gate-passed writeback conveyor
-- recurring failures are grouped into operational defect classes, classified by
-  ecosystem, and tagged with fixture eligibility; eligible stubs can now be
-  captured into checked-in, offline-runnable regression fixtures that replay the
-  overlay import path in `cargo test` (see
-  `docs/factual-crawl-automation.md`). The checked-in baseline now covers every
-  named ecosystem emitted by the classifier, recurring stubs retain implicated
-  repository identities, and `--stub` can drive capture without retyping
-  provenance; converting live recurring failures into failure-derived fixtures
-  and deterministic fixes remains open work.
-- writeback and auto-publish now use distinct gates: `autonomous_writeback_eligible`
-  (verification passed) may persist honestly partial overlays, while promotion to
-  `verified` still requires `eligible_for_auto_publish`; the distinction is
-  documented in `docs/factual-crawl-automation.md` and `index/README.md`, with
-  crawler and core regression tests guarding the looser writeback path
-- `public-surface-gate` now runs lightweight CLI, MCP, LSP, and crawler contract
-  tests in addition to core import and public-export checks, reducing the chance
-  that index-only changes skip surface regressions
+- scheduled discovery and head-aware refresh with budgeted primary,
+  second-opinion, and stronger-remote adjudication sidecar paths
+- retained multi-run telemetry and a strict proof gate covering worst-run quality
+  and recent-window quality, tier-mix, adjudication-budget, and token-cost drift
+- partial-progress safety: scheduled failures retain telemetry and valid
+  writebacks before restoring the failed result, so early failures and live
+  defects do not block history from accumulating
+- head-aware planning bounds network inspection to a configured limit and rotates
+  oldest and most-partial records first so they cannot monopolize batch slots
+- autonomous refresh reprocesses lower-confidence checked-in records and newly
+  discovered repositories through the same gate-passed writeback conveyor
+- distinct writeback and promotion gates: `autonomous_writeback_eligible` may
+  persist honestly partial overlays, while promotion to `verified` still requires
+  `eligible_for_auto_publish` (see `docs/factual-crawl-automation.md`,
+  `index/README.md`)
+- recurring failures are classified into operational defect classes by ecosystem
+  and tagged for fixture eligibility; eligible stubs are captured as offline
+  `cargo test` regression fixtures that replay the overlay import path, with the
+  checked-in baseline covering every named ecosystem the classifier emits
+- automatic deploy-coherence checks compare the live Worker against the reviewed
+  export's core contract files and a deterministic `v0/files.json` hash sample
+  before post-deploy smoke checks; Cloudflare packaging runs on Node.js 22,
+  matching the deployment gate's Wrangler runtime
+- `public-surface-gate` runs lightweight CLI, MCP, LSP, and crawler contract
+  tests alongside core import and public-export checks
 
 Current Milestone 1 work queue (subordinate to the cross-milestone execution
 order above):
 
-1. Work down the quality hardening queue through bounded autonomous batches and
-   targeted re-crawls. The 2026-06-29 renderer snapshot reports 501 records in
-   the broader queue, including 285 missing build, 290 missing test, and 408
-   missing security signals; it has no stale or overdue records.
+1. Work down the quality-hardening queue through bounded autonomous batches and
+   targeted re-crawls; ratchet its missing build/test/security ceilings (reported
+   by the growth-status renderer) downward. The index currently has no stale or
+   overdue records.
 2. Convert the discovery-wave failure corpus into deterministic parser fixes and
    checked-in regression fixtures, beginning with noisy README relation targets
    that fail repository-identity validation.
-3. Improve lookup completeness on the 613-repository workload, especially the
-   measured security and execution intents, without weakening honest abstention.
+3. Improve lookup completeness, especially the security and execution intents,
+   without weakening honest abstention (workload volume comes from the generated
+   lookup workload).
 4. Continue bounded autonomous discovery only to preserve ecosystem balance or
    replace records lost to staleness, archive state, or validation failures.
 
@@ -413,8 +548,8 @@ enough retained telemetry to support cost and regression claims.
 **Goal:** make dotrepo a rational first lookup for common public repositories.
 
 **Status: complete.** Profile, batch, query, cache, freshness, accuracy, and
-efficiency contracts and their release gates are shipped. The corpus has 516
-high-signal profiles, exceeding the 500-profile quantitative coverage gate.
+efficiency contracts and their release gates are shipped. The corpus exceeds the
+500-profile quantitative coverage gate (see the snapshot above).
 
 Deliver:
 
@@ -427,86 +562,47 @@ Deliver:
 - measured hit rate for representative agent research workloads
 - published scrape-versus-dotrepo efficiency benchmark
 
-Current status:
+Current status (shipped capabilities; release history in [`CHANGELOG.md`](./CHANGELOG.md)):
 
-- compact per-repository `profile.json` responses are generated in the static
-  public export and available through `dotrepo public profile`
-- local/core batch profile and batch field lookup are available through
-  `dotrepo public batch-profiles` and `dotrepo public batch-query`
-- hosted batch profile and batch field lookup are available as cacheable GET
-  routes on the same public surface and in the local `dotrepo-public-query`
-  runtime
-- batch profile and batch query requests now enforce shared cardinality limits in
-  core, the hosted Worker, and the reference HTTP server (50 repositories, 25
-  paths, 500 query results); `dotrepo-public-query` is documented as a local and
-  review-only surface
+- compact per-repository `profile.json` responses in the static public export and
+  via `dotrepo public profile`
+- local/core and hosted batch profile and batch field lookup (`public
+  batch-profiles`, `public batch-query`, and cacheable hosted GET routes), with
+  shared cardinality limits enforced in core, the hosted Worker, and the
+  reference HTTP server (50 repositories, 25 paths, 500 query results)
 - static exports include `meta.validators` and `v0/files.json` for
-  snapshot-level revalidation and selective refetch
-- `scripts/diff_public_export_files.py` now turns two `v0/files.json`
-  manifests into an exact added/changed/removed/refetch report for mirrors and
-  agent caches
-- `scripts/check_public_profile_coverage.py` now measures exported profile
-  count, high-signal profile count and ratio, missing quality signals, and
-  conflict-bearing profile rate, plus optional Milestone 2 count, ratio,
-  conflict-rate, per-signal minimum, and per-signal ceiling gates against the
-  public tree
-- profile coverage now validates the accepted response shape and path identity,
-  excludes malformed files from every coverage claim, and is enforced by the
-  canonical release gate through a versioned 613-profile/516-high-signal
-  baseline with ratcheted build, test, docs, ownership, security, and license
-  floors
-- `scripts/build_public_lookup_workload.py` now emits a fixed four-intent
-  research workload for every exported profile without preselecting known-present
-  fields, so production lookup-efficiency reports do not depend on a
-  hand-maintained tiny fixture or self-fulfilling completeness filters
-- `scripts/measure_public_lookup_efficiency.py` now produces deterministic
-  aggregate and per-intent task/field hit-rate, workload-volume, payload-byte,
-  request-reduction, and pass/fail gate reports for known-repository workloads;
-  the canonical release gate publishes the current 613-repository, 2,452-task
-  benchmark against a versioned baseline
-- the canonical release gate also checks a cited exact-value accuracy sample:
-  20 assertions across FastAPI, Tokio, and Gin currently pass, with workload
-  volume and repository count guarded against silent shrinkage; this sample
-  exposed and fixed live logo-title, announcement-description, and badge-link
-  parser failures now preserved as offline regression fixtures
-- `scripts/plan_index_growth_tranche.py` now turns grouped candidate catalogs
-  into balanced, crawler-ready growth target files in candidate-file group
-  order while excluding repositories already present in
-  `index/repos/**/record.toml`; the checked-in
-  `index/tranche-two-targets.txt` file supplied the completed 106-target crawl
-  wave toward the 500-profile expansion; all seven language-family groups are
-  now exhausted, and the seed-review workflows retain the catalog as the
-  reproducible record of that tranche
-- the canonical release gate publishes the growth plan and crawler-ready target
-  file from a versioned tranche baseline; with tranche two exhausted, the
-  baseline now requires zero selected targets while preserving completed
-  coverage evidence and preventing planned targets from being counted as
-  completed profiles
-- the operational growth-status renderer now reports record-level high-signal
-  progress, active-tranche high-signal capacity upper bounds, and remaining
-  Milestone 2 gap in scheduled seed-review artifacts, so day-to-day review
-  batches expose the same scale path as the release gate; it also separates
-  advisory high-signal lift candidates from the broader quality-hardening queue
-- `dotrepo promotion-report --json` separates total eligible records from
-  promotion candidates, exposing deterministic auto-promotion headroom in the
-  checked-in index. Recent quality and promotion waves promoted 48 eligible
-  overlays to `verified` through expanded actionable-security URL scoring, primary-CI
-  workflow preference during intra-tier command conflicts, targeted re-crawls,
-  and bounded autonomous batches. As of 2026-06-29, the report identifies 61
-  promotion candidates; the separate growth-status heuristic identifies 19
-  high-signal lift candidates. The current public export has 516 high-signal
-  profiles out of 613 total
-- `is_actionable_security_url()` now recognizes GitHub security surfaces,
+  snapshot-level revalidation and selective refetch;
+  `scripts/diff_public_export_files.py` turns two `v0/files.json` manifests into
+  an added/changed/removed/refetch report for mirrors and agent caches
+- `scripts/check_public_profile_coverage.py` measures profile count, high-signal
+  count and ratio, missing quality signals, and conflict rate, with optional
+  Milestone 2 gates; coverage validates response shape and path identity and
+  excludes malformed files, enforced by the release gate through a versioned
+  baseline with ratcheted build/test/docs/ownership/security/license floors
+- `scripts/build_public_lookup_workload.py` emits a fixed four-intent research
+  workload for every exported profile — 613 repositories × {overview, execution,
+  documentation, security} = 2,452 tasks — without preselecting known-present
+  fields, so efficiency reports do not depend on a hand-maintained fixture
+- `scripts/measure_public_lookup_efficiency.py` produces deterministic aggregate
+  and per-intent task/field hit-rate, payload-byte, request-reduction, and
+  pass/fail gate reports; the release gate publishes the benchmark against a
+  versioned baseline
+- a cited exact-value accuracy sample (20 assertions across FastAPI, Tokio, and
+  Gin) with versioned missing- and mismatch-rate ceilings; live parser failures
+  it exposed are preserved as offline regression fixtures
+- `scripts/plan_index_growth_tranche.py` turns grouped candidate catalogs into
+  balanced, crawler-ready target files; the completed tranche-two expansion
+  supplied the path to the 500-profile gate, and the seed-review workflows retain
+  the catalog as the reproducible record
+- `dotrepo promotion-report` separates total eligible records from promotion
+  candidates, exposing deterministic auto-promotion headroom; the growth-status
+  renderer separates advisory high-signal lift candidates from the broader
+  quality-hardening queue
+- `is_actionable_security_url()` recognizes GitHub security surfaces,
   coordinated-disclosure platforms, and first-party policy URLs while rejecting
-  issue trackers and non-reporting channels; workflow command resolution now
-  prefers `ci.yml` / `main.yml` over platform-specific workflows when multiple
-  workflow sources conflict at the same tier, without weakening manifest-tier
-  conflict honesty
-- tranche-two writeback is complete at 106/106 targets across .NET, C/C++, Go,
-  JVM, Python, Rust, and TypeScript/JavaScript; quality hardening and promotion
-  waves followed by five bounded discovery waves brought the checked-in coverage
-  baseline to 613 profiles and 516 high-signal profiles
-- the 500 high-signal profile gate is complete at 516 profiles
+  trackers and non-reporting channels; workflow command resolution prefers
+  `ci.yml`/`main.yml` over platform-specific workflows at the same tier without
+  weakening manifest-tier conflict honesty
 
 Exit criteria:
 
@@ -547,47 +643,37 @@ Exit criteria:
 - synthesis remains optional and cannot overwrite factual fields
 - search quality, coverage, freshness, and cost are observable
 
-Current status:
+Current status (shipped capabilities; production calibration is ongoing):
 
-- `dotrepo public search` provides the first structured profile-search response
-  over the public index, with text, language, topic, trust, and completeness
-  filters grounded in generated `profile.json` semantics plus explicit
-  relevance ranking metadata that remains separate from factual trust
-- `scripts/measure_public_search_quality.py` now reports discovery success,
-  rank quality, inventory-only versus profile-fanout task rates, searched
-  profile bytes, freshness, and optional pass/fail gates for public-profile
-  search workloads
-- `scripts/measure_public_factual_accuracy.py` now reports exact cited
-  assertion accuracy with separate missing and mismatch rates, and the release
-  gate applies versioned ceilings for both so sampled abstention and wrong facts
-  cannot hide behind aggregate accuracy
-- `dotrepo public compare` provides the first factual comparison response for
-  selected profiles, preserving trust, completeness, shared language/topic, and
-  side-by-side signal values without ranking or synthesis
-- public `profile.json` can now expose validated optional `synthesis.toml`
-  guidance in a separate `synthesis` section, preserving factual fields as the
-  authority and failing export on invalid or fact-conflicting synthesis
-- crawler synthesis now runs through an opt-in bounded HTTP sidecar using the
-  freshly validated in-memory manifest and capped source excerpts; factual
-  build/test commands are injected by the crawler, model output is schema-
-  checked before atomic writeback, failures remain nonblocking, and autonomous
-  telemetry retains synthesis success and failure classes
-- `dotrepo public relations` provides the first relationship traversal response
-  over legacy references and explicit trust-bearing links for alternatives,
+- `dotrepo public search`: structured profile search with text, language, topic,
+  trust, and completeness filters grounded in `profile.json` semantics, with
+  relevance ranking kept separate from factual trust
+- `dotrepo public compare`: factual comparison preserving trust, completeness,
+  shared language/topic, and side-by-side signal values without ranking or
+  synthesis
+- `dotrepo public relations`: relationship traversal for alternatives,
   dependencies, predecessors, forks, related projects, and references; reverse
   traversal emits semantic inverses and resolves profiles present in the index
-- public export precomputes each repository's traversal response as
-  `relations.json`; the hosted Worker serves cacheable GET search, compare, and
-  relations routes from the staged public snapshot, loading this static artifact
-  instead of performing request-time index-wide traversal and profile fanout
-- hosted search now uses inventory-only matching for text-only queries, loading
-  full `profile.json` snapshots only when completeness or trust filters require
-  them; this keeps inventory-scale discovery cheaper on the Worker
-- deterministic relation discovery now derives grounded repository links from
-  GitHub snapshot facts, carries them through import and public export, and
-  covers the behavior with offline and facade regression tests
-- production-scale ranking calibration and sustained production synthesis runs
-  with measured quality/cost remain ongoing operational work
+- public export precomputes each repository's traversal as `relations.json`; the
+  hosted Worker serves cacheable GET search, compare, and relations routes from
+  the staged snapshot rather than performing request-time fanout. Text-only
+  hosted search uses inventory-only matching and loads full `profile.json`
+  snapshots only when completeness or trust filters require them
+- `profile.json` can expose validated optional `synthesis.toml` guidance in a
+  separate `synthesis` section, preserving factual fields as authority and
+  failing export on invalid or fact-conflicting synthesis; crawler synthesis runs
+  through an opt-in bounded HTTP sidecar over the validated in-memory manifest
+  and capped excerpts, with factual build/test commands injected, schema-checked
+  atomic writeback, and nonblocking failures
+- deterministic relation discovery derives grounded repository links from GitHub
+  snapshot facts and carries them through import and public export, covered by
+  offline and facade regression tests
+- quality instrumentation: `scripts/measure_public_search_quality.py` (discovery
+  success, rank quality, inventory-only vs fanout task rates, freshness, gates)
+  and `scripts/measure_public_factual_accuracy.py` (exact cited assertion
+  accuracy with separate missing and mismatch rates under versioned ceilings)
+- production-scale ranking calibration and sustained synthesis runs with measured
+  quality and cost remain ongoing operational work
 
 ### Milestone 4: Index at ecosystem scale
 
@@ -596,10 +682,27 @@ Current status:
 Deliver:
 
 - thousands, then tens of thousands, of incrementally maintained profiles
+- bounded cohort expansion with automatic quality, reliability, freshness,
+  throughput, and cost gates
+- head-aware and content-digest-aware work avoidance for unchanged repositories
+- cached parser, evidence, candidate, and adjudication results with explicit
+  invalidation semantics
+- delta processing that limits materialization and parsing to relevant changes
+- adaptive refresh scheduling based on observed churn, demand, freshness risk,
+  and bounded backoff for unavailable repositories
 - partitioned export and serving paths where needed
-- bounded scheduling, retries, and failure isolation
-- model-provider routing based on task class, quality, latency, and cost
+- bounded scheduling, concurrency, retries, backpressure, and failure isolation
+- batched and conditional host-API access with request deduplication and
+  coalescing
+- calibrated model-provider routing based on task class, expected quality,
+  latency, and cost
+- explicit budgets for model calls, tokens, network, CPU, memory, and wall time
+- capacity and cost forecasts that extrapolate measured cohort behavior to
+  1,000, 10,000, and broader repository populations
+- demand-driven discovery informed by lookup misses, scrape fallbacks,
+  relationship centrality, and ecosystem gaps
 - automated regression sampling across ecosystems
+- randomized and risk-weighted system audits
 - public operational status and coverage telemetry
 
 Current status:
@@ -609,27 +712,41 @@ Current status:
   `generated_at` rate, maximum record age, overdue refresh latency, and optional
   operational gates for tranche coverage, missing targets, lower-confidence
   backlog, stale freshness backlog, and maximum refresh overdue days.
-- the checked-in corpus is 613 overlay records; refresh cost and stale-record
-  rate must be tracked as first-class Milestone 4 metrics rather than inferred
+- refresh cost and stale-record rate are tracked as first-class Milestone 4
+  metrics from the generated status and coverage artifacts rather than inferred
   from profile count alone
 - release-gate baselines ratchet profile volume and high-signal floors so index
   growth does not silently regress lookup completeness or factual accuracy
 - the first quantitative scale checkpoint is 1,000 maintained profiles with a
   stale-or-missing record rate at or below 10%, maximum refresh overdue latency
   at or below 7 days, and a published refresh-cost baseline
+- the 1,000-profile checkpoint will be reached through 50–100 repository cohorts;
+  larger batch sizes are unlocked by passing cohort gates rather than by elapsed
+  time or operator preference
 
 Exit criteria:
 
 - common repository lookups have a high hit rate across major ecosystems
+- intent- and ecosystem-level error budgets remain satisfied as coverage grows
 - refresh latency and stale-record rates meet published targets
 - measured refresh work tracks changed or stale repositories rather than total
   index coverage
+- unchanged repositories normally stop after cached identity/head validation,
+  without source materialization or model calls
+- model tiers and providers are selected by calibrated task-level quality and
+  expected value, with strong remote models remaining a rare tail
+- throughput rises while per-record network, CPU, memory, model, and wall-time
+  budgets remain bounded
 - cost per maintained record declines as coverage grows
+- measured cohort costs support a credible total-resource forecast for the next
+  scale step before that step begins
 - throughput can increase without adding proportional human labor
+- these scale gates hold independently of maintainer adoption or claim volume
 
 ### Milestone 5: Maintainer adoption flywheel
 
-**Goal:** convert generated coverage into maintainer-owned durable truth.
+**Goal:** make maintainer-owned truth easy to adopt without making autonomous
+coverage depend on adoption.
 
 Deliver:
 
@@ -639,6 +756,8 @@ Deliver:
 - low-friction claim and canonical handoff
 - visible native-record benefits for maintainers and downstream tools
 - integrations that make `.repo` useful even before public indexing
+- adoption-funnel telemetry from record inspection through durable native
+  maintenance
 
 Current status:
 
@@ -676,6 +795,8 @@ Exit criteria:
 - maintainers correct the public substrate by maintaining their own source of
   truth
 - downstream consumers prefer native records when available
+- unclaimed repositories remain independently useful, fresh, and honestly
+  represented by autonomous overlays
 
 ### Milestone 6: Open repository metadata standard
 
@@ -685,6 +806,7 @@ implementation's feature.
 Deliver:
 
 - stable specification and compatibility suites
+- an early minimal conformance suite exercised outside the reference CLI
 - independent producers and consumers
 - SDKs and integrations for major agent and development platforms
 - governance for schema evolution and trust vocabulary
@@ -695,6 +817,8 @@ Exit criteria:
 - tools can consume `.repo` without depending on the reference implementation
 - multiple systems produce compatible native records and projections
 - the protocol survives implementation and hosting diversity
+- at least one independent consumer validates compatibility before the reference
+  implementation reaches full ecosystem scale
 
 ## Research profile direction
 
@@ -743,25 +867,46 @@ remains canonical and directly accessible.
 ### Index quality
 
 - field-level precision and abstention rate
+- incorrect-assertion, missing-fact, and correct-abstention rates by user intent
+  and ecosystem
 - verified profile count and percentage
 - unresolved and conflicting field rates
 - stale-record rate and refresh latency
 - regression failures by parser, ecosystem, and model tier
+- audit findings by risk class and resulting fixture or policy action
+
+### Reliability
+
+- strict-gate pass streak and worst-run regression
+- batch success, partial-writeback, quarantine, and retry rates
+- stale backlog, maximum overdue latency, and backlog drain time
+- provider, host-API, and infrastructure failure rates
+- recovery time without loss of valid completed work
 
 ### Efficiency
 
 - deterministic resolution rate
+- unchanged-repository skip rate and cache hit rate
 - adjudication rate by tier
 - strong-model escalation rate
+- avoided model calls and avoided source materialization
 - tokens and model cost per improved record
-- network bytes and files materialized per refresh
+- network bytes, files materialized, CPU time, peak memory, and wall time per
+  unchanged, changed, and improved record
+- accelerator time, cache/storage growth, and export/serving cost
+- repositories processed per wall-clock hour and per compute unit
 - compute cost per maintained profile per month
+- marginal cost as cohort and corpus size increase
+- total operating cost and projected cost at the next scale checkpoint
 
 ### Utility
 
 - exact-lookup hit rate
 - research-discovery success rate
+- task success by overview, execution, documentation, security, ownership,
+  comparison, and discovery intent
 - batch requests served
+- lookup misses and scrape fallbacks that become future coverage demand
 - agent tasks completed without repository scraping
 - bytes, tokens, requests, latency, and error reduction versus scrape-from-scratch
 
@@ -769,10 +914,15 @@ remains canonical and directly accessible.
 
 - native `.repo` repositories
 - successful overlay-to-native handoffs
+- conversion from record view to adoption start, native record, CI enablement,
+  claim, canonical handoff, and 90-day retention
 - active MCP, API, CLI, and SDK consumers
 - independent protocol producers and consumers
 
 Raw repository count is a capacity metric, not the primary success metric.
+Adoption is an authority metric, not a prerequisite for overlay utility. Scale is
+successful only when accuracy, honest abstention, freshness, reliability,
+throughput, and marginal cost remain inside their budgets.
 
 ## Explicit non-goals
 
@@ -784,6 +934,8 @@ Raw repository count is a capacity metric, not the primary success metric.
 - adding public mutation before provenance and authority remain enforceable
 - expanding the core schema for every research or ecosystem-specific need
 - optimizing raw repository count at the expense of accuracy or refreshability
+- treating maintainer adoption as a prerequisite for public-index usefulness
+- spending model or compute budget merely to avoid publishing an honest unknown
 
 ## Strategic test
 
@@ -793,12 +945,15 @@ The roadmap is succeeding when this behavior becomes normal:
 agent receives a repository or technology question
   -> checks dotrepo first
   -> receives a small, fresh, trust-aware profile or candidate set
+     whether the source is a native record or an autonomous overlay
   -> retrieves only the additional source material the task truly requires
   -> reuses the same maintained understanding on future requests
 ```
 
 At that point, scraping an entire repository to recover basic project facts is
-the fallback, not the default.
+the fallback, not the default. Index growth can continue toward all publicly
+processable repositories without waiting for maintainer participation, while
+native adoption independently improves authority and long-term maintenance.
 
 ## Related documents
 
