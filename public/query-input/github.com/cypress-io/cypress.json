@@ -1,0 +1,123 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "cypress-io",
+    "repo": "cypress",
+    "source": "https://github.com/cypress-io/cypress"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/cypress-io/cypress/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/cypress-io/cypress",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@cypress-io/app` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/cypress-io/cypress/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/cypress-io/cypress",
+        "generated_at": "2026-06-29T02:20:46.648345Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@cypress-io/app` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "The web has evolved. Finally, testing has too.",
+        "description": "Fast, easy and reliable testing for anything that runs in a browser.",
+        "homepage": "https://cypress.io",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "CoffeeScript",
+          "Dockerfile",
+          "EJS",
+          "HTML",
+          "JavaScript",
+          "SCSS",
+          "Shell",
+          "Svelte",
+          "TypeScript",
+          "Vue"
+        ],
+        "build": "yarn build",
+        "test": "yarn test",
+        "topics": [
+          "cypress",
+          "end-to-end-testing",
+          "angular-testing-library",
+          "component-testing",
+          "cypress-cloud",
+          "cypress-schematic",
+          "react-testing-library",
+          "svelte-testing-library",
+          "testing-framework",
+          "testing-library",
+          "testing-tool",
+          "vue-testing-library",
+          "test-replay"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@brian-mann",
+          "@jennifer-shehane",
+          "@cypress-io/app"
+        ],
+        "team": "@cypress-io/app",
+        "security_contact": "https://cypress.io/security/"
+      },
+      "docs": {
+        "root": "https://on.cypress.io",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/cypress-io/cypress.git",
+          "default_branch": "develop",
+          "fork": false,
+          "head_sha": "ea5637913ca3f74adb1511f34a10bec9175d6cdf",
+          "html_url": "https://github.com/cypress-io/cypress",
+          "stars": 50424
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

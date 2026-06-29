@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/babel/babel"
-generated_at = "2026-06-26T18:34:20.4996Z"
+generated_at = "2026-06-29T02:20:42.94923Z"
 
 [record.trust]
 confidence = "high"
@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Supporting Babel"
+name = "babel"
 description = "The compiler for writing next generation JavaScript."
 homepage = "https://babel.dev"
 license = "MIT"
@@ -44,6 +44,9 @@ topics = [
 maintainers = []
 security_contact = "security@babeljs.io"
 
+[docs]
+root = "https://babel.dev"
+
 [relations]
 references = []
 
@@ -52,6 +55,6 @@ archived = false
 clone_url = "https://github.com/babel/babel.git"
 default_branch = "main"
 fork = false
-head_sha = "bd56238538ea2b3e182aa80fe9b4ce5886600a40"
+head_sha = "c2f2084a5ab862328cd7be9f3b9bff26f81c9fd1"
 html_url = "https://github.com/babel/babel"
-stars = 44007
+stars = 44009

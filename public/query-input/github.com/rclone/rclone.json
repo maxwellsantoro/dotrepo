@@ -1,0 +1,146 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rclone",
+    "repo": "rclone",
+    "source": "https://github.com/rclone/rclone"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/rclone/rclone/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/rclone/rclone",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/rclone/rclone/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/rclone/rclone",
+        "generated_at": "2026-06-29T02:02:15.816557Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Rclone",
+        "description": "Rclone *(\"rsync for cloud storage\")* is a command-line program to sync files and directories to and from different cloud storage providers.",
+        "homepage": "https://rclone.org",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "C",
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "PHP",
+          "Python",
+          "Shell"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "golang",
+          "go",
+          "cloud-storage",
+          "s3",
+          "openstack-swift",
+          "google-drive",
+          "azure-blob",
+          "backblaze-b2",
+          "sftp",
+          "ftp",
+          "rclone",
+          "dropbox",
+          "google-cloud-storage",
+          "onedrive",
+          "sync",
+          "fuse-filesystem",
+          "encryption",
+          "webdav",
+          "azure-blob-storage",
+          "azure-files"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@ncw",
+          "@klauspost",
+          "@nielash",
+          "@ivandeex",
+          "@albertony",
+          "@darthShadow",
+          "@dmcardle",
+          "@buengese",
+          "@remusb",
+          "@Max-Sum",
+          "@childish-sambino",
+          "@sandeepkru",
+          "@Cnly",
+          "@lostb1t",
+          "@wiserain",
+          "@henrybear327",
+          "@creativeprojects",
+          "@Enduriel",
+          "@calebcase"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://rclone.org/docs/",
+        "getting_started": "https://rclone.org/install/",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/rclone/rclone.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "6bbc28cf02dc3d968c07c84cae0e75f99f8ead23",
+          "html_url": "https://github.com/rclone/rclone",
+          "stars": 58054
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "files-community",
+    "repo": "Files",
+    "source": "https://github.com/files-community/Files"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/files-community/Files/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/files-community/Files",
+    "generatedAt": "2026-06-29T01:08:28.037202Z",
+    "evidencePath": "repos/github.com/files-community/Files/evidence.md"
+  },
+  "purpose": "A modern file manager that helps users organize their files and folders.",
+  "name": "Files",
+  "homepage": "https://files.community",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "C#",
+    "C++"
+  ],
+  "topics": [
+    "fluent-design",
+    "xaml",
+    "file-manager",
+    "winui",
+    "files",
+    "windows",
+    "csharp",
+    "windows-10",
+    "windows-11",
+    "fluent",
+    "good-first-issue",
+    "dotnet",
+    "developer-tools",
+    "utilities",
+    "alternatives",
+    "productivity",
+    "power-user",
+    "winappsdk",
+    "customization",
+    "git"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/files-community/Files/profile.json",
+    "repository": "/v0/repos/github.com/files-community/Files/index.json",
+    "trust": "/v0/repos/github.com/files-community/Files/trust.json",
+    "queryTemplate": "/v0/repos/github.com/files-community/Files/query?path={dot_path}",
+    "indexPath": "repos/github.com/files-community/Files/"
+  }
+}

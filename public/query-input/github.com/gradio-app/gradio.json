@@ -1,0 +1,124 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "gradio-app",
+    "repo": "gradio",
+    "source": "https://github.com/gradio-app/gradio"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/gradio-app/gradio/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/gradio-app/gradio",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/gradio-app/gradio/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/gradio-app/gradio",
+        "generated_at": "2026-06-29T02:17:58.369741Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "gradio",
+        "description": "Build and share delightful machine learning apps, all in Python. 🌟 Star to support our work!",
+        "homepage": "http://www.gradio.app",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "CSS",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Jupyter Notebook",
+          "MDX",
+          "Python",
+          "SCSS",
+          "Shell",
+          "Svelte",
+          "TypeScript",
+          "mdsvex"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "machine-learning",
+          "models",
+          "ui",
+          "ui-components",
+          "interface",
+          "python",
+          "data-science",
+          "data-visualization",
+          "deep-learning",
+          "data-analysis",
+          "gradio",
+          "gradio-interface",
+          "python-notebook",
+          "deploy"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "gradio-team@huggingface.co"
+      },
+      "docs": {
+        "root": "https://gradio.app/docs/",
+        "getting_started": "https://gradio.app/getting_started/",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/gradio-app/gradio.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "882df35e9eaa7b2fb8767e23f03c66c46ab66d78",
+          "html_url": "https://github.com/gradio-app/gradio",
+          "stars": 43022
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

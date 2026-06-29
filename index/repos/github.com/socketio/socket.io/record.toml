@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "imported"
 source = "https://github.com/socketio/socket.io"
-generated_at = "2026-06-26T18:34:30.231922Z"
+generated_at = "2026-06-29T02:18:29.657358Z"
 
 [record.trust]
 confidence = "medium"
-provenance = [
-    "imported",
-    "inferred",
-]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-examples.yml`. Left `repo.test` unset because `.github/workflows/ci-engine.io-client.yml`, `.github/workflows/ci-engine.io-parser.yml`, `.github/workflows/ci-engine.io.yml`, `.github/workflows/ci-socket.io-adapter.yml`, `.github/workflows/ci-socket.io-client.yml`, `.github/workflows/ci-socket.io-cluster-adapter.yml`, and `.github/workflows/ci-socket.io-cluster-engine.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/build-examples.yml`, `.github/workflows/ci-engine.io-client.yml`, `.github/workflows/ci-engine.io-parser.yml`, `.github/workflows/ci-engine.io.yml`, `.github/workflows/ci-socket.io-adapter.yml`, `.github/workflows/ci-socket.io-client.yml`, `.github/workflows/ci-socket.io-cluster-adapter.yml`, and `.github/workflows/ci-socket.io-cluster-engine.yml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/ci-engine.io-client.yml`, `.github/workflows/ci-engine.io-parser.yml`, `.github/workflows/ci-engine.io.yml`, `.github/workflows/ci-socket.io-adapter.yml`, `.github/workflows/ci-socket.io-client.yml`, `.github/workflows/ci-socket.io-cluster-adapter.yml`, and `.github/workflows/ci-socket.io-cluster-engine.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "socket.io"
@@ -27,7 +24,6 @@ languages = [
     "Shell",
     "TypeScript",
 ]
-build = "npm run build"
 topics = [
     "javascript",
     "nodejs",
@@ -52,4 +48,4 @@ default_branch = "main"
 fork = false
 head_sha = "d2d753fed4435015c2d83fe62e676b44e07fa3f7"
 html_url = "https://github.com/socketio/socket.io"
-stars = 63201
+stars = 63200

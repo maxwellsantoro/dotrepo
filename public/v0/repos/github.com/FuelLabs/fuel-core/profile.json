@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "FuelLabs",
+    "repo": "fuel-core",
+    "source": "https://github.com/FuelLabs/fuel-core"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/FuelLabs/fuel-core/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/FuelLabs/fuel-core",
+    "generatedAt": "2026-06-29T00:54:45.732979Z",
+    "evidencePath": "repos/github.com/FuelLabs/fuel-core/evidence.md"
+  },
+  "purpose": "Fuel client implementation.",
+  "name": "Fuel Client",
+  "homepage": "https://github.com/FuelLabs/fuel-core",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Lua",
+    "Makefile",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "blockchain",
+    "fuel"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@xgreenx",
+      "@Dentosal",
+      "@MitchTurner",
+      "@rymnc",
+      "@FuelLabs/client",
+      "@FuelLabs/engineering-managers"
+    ],
+    "securityContact": "https://github.com/FuelLabs/fuel-core/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/FuelLabs/fuel-core/profile.json",
+    "repository": "/v0/repos/github.com/FuelLabs/fuel-core/index.json",
+    "trust": "/v0/repos/github.com/FuelLabs/fuel-core/trust.json",
+    "queryTemplate": "/v0/repos/github.com/FuelLabs/fuel-core/query?path={dot_path}",
+    "indexPath": "repos/github.com/FuelLabs/fuel-core/"
+  }
+}

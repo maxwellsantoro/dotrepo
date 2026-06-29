@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nvbn",
+    "repo": "thefuck",
+    "source": "https://github.com/nvbn/thefuck"
+  },
+  "repository": {
+    "name": "The Fuck",
+    "description": "*The Fuck* is a magnificent app, inspired by a @liamosaur tweet, that corrects errors in previous console commands.",
+    "homepage": "https://github.com/nvbn/thefuck",
+    "gettingStarted": "https://github.com/nvbn/thefuck/wiki/Installation"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/nvbn/thefuck/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/nvbn/thefuck",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/nvbn/thefuck/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nvbn/thefuck/index.json",
+    "trust": "/v0/repos/github.com/nvbn/thefuck/trust.json",
+    "profile": "/v0/repos/github.com/nvbn/thefuck/profile.json",
+    "queryTemplate": "/v0/repos/github.com/nvbn/thefuck/query?path={dot_path}",
+    "indexPath": "repos/github.com/nvbn/thefuck/"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tauri-apps",
+    "repo": "tauri",
+    "source": "https://github.com/tauri-apps/tauri"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/tauri-apps/tauri/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/tauri-apps/tauri",
+    "generatedAt": "2026-06-29T02:18:35.924375Z",
+    "evidencePath": "repos/github.com/tauri-apps/tauri/evidence.md"
+  },
+  "purpose": "Tauri is a framework for building tiny, blazingly fast binaries for all major operating systems.",
+  "name": "Tauri",
+  "homepage": "https://tauri.app",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "AppleScript",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Kotlin",
+    "NSIS",
+    "Objective-C",
+    "Objective-C++",
+    "PowerShell",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "Standard ML",
+    "Svelte",
+    "Swift",
+    "TypeScript"
+  ],
+  "topics": [
+    "rust",
+    "webview",
+    "high-performance",
+    "desktop-app",
+    "mobile-app",
+    "native-app",
+    "web-frontend"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://tauri.app"
+  },
+  "ownership": {
+    "maintainers": [
+      "@tauri-apps/wg-tauri",
+      "@tauri-apps/wg-devops"
+    ],
+    "team": "@tauri-apps/wg-tauri",
+    "securityContact": "https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability#privately-reporting-a-security-vulnerability"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/tauri-apps/tauri/profile.json",
+    "repository": "/v0/repos/github.com/tauri-apps/tauri/index.json",
+    "trust": "/v0/repos/github.com/tauri-apps/tauri/trust.json",
+    "queryTemplate": "/v0/repos/github.com/tauri-apps/tauri/query?path={dot_path}",
+    "indexPath": "repos/github.com/tauri-apps/tauri/"
+  }
+}

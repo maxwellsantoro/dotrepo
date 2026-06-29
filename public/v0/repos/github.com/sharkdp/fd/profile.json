@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "sharkdp",
+    "repo": "fd",
+    "source": "https://github.com/sharkdp/fd"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/sharkdp/fd/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/sharkdp/fd",
+    "generatedAt": "2026-06-29T02:01:43.86401Z",
+    "evidencePath": "repos/github.com/sharkdp/fd/evidence.md"
+  },
+  "purpose": "[中文] [한국어]",
+  "name": "fd",
+  "homepage": "https://github.com/sharkdp/fd",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Makefile",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "command-line",
+    "tool",
+    "filesystem",
+    "search",
+    "regex",
+    "rust",
+    "cli",
+    "terminal",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "build": "cargo build",
+    "test": "cargo test"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://github.com/sharkdp/fd/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/sharkdp/fd/profile.json",
+    "repository": "/v0/repos/github.com/sharkdp/fd/index.json",
+    "trust": "/v0/repos/github.com/sharkdp/fd/trust.json",
+    "queryTemplate": "/v0/repos/github.com/sharkdp/fd/query?path={dot_path}",
+    "indexPath": "repos/github.com/sharkdp/fd/"
+  }
+}

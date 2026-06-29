@@ -1,0 +1,87 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tikv",
+    "repo": "tikv",
+    "source": "https://github.com/tikv/tikv"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/tikv/tikv/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/tikv/tikv",
+    "generatedAt": "2026-06-26T18:30:38.763092Z",
+    "evidencePath": "repos/github.com/tikv/tikv/evidence.md"
+  },
+  "purpose": "The design of TiKV ('Ti' stands for titanium) is inspired by some great distributed systems from Google, such as BigTable, Spanner, and Percolator, and some of the latest achievements in academia in recent years, such as the Raft consensus algorithm.",
+  "name": "Governance",
+  "homepage": "https://tikv.org",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "Dockerfile",
+    "Makefile",
+    "Perl",
+    "Python",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "distributed-transactions",
+    "raft",
+    "rust",
+    "key-value",
+    "tikv",
+    "consensus",
+    "rocksdb",
+    "tidb",
+    "cncf",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://tikv.org/docs/latest/concepts/overview/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@tikv/tikv-configuration-reviewer"
+    ],
+    "team": "@tikv/tikv-configuration-reviewer",
+    "securityContact": "tikv-security@lists.cncf.io"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/tikv/tikv/profile.json",
+    "repository": "/v0/repos/github.com/tikv/tikv/index.json",
+    "trust": "/v0/repos/github.com/tikv/tikv/trust.json",
+    "queryTemplate": "/v0/repos/github.com/tikv/tikv/query?path={dot_path}",
+    "indexPath": "repos/github.com/tikv/tikv/"
+  }
+}

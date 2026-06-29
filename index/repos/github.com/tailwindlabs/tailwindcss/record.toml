@@ -2,17 +2,20 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/tailwindlabs/tailwindcss"
-generated_at = "2026-06-26T18:33:24.466706Z"
+generated_at = "2026-06-29T02:18:33.786004Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Community"
+name = "Tailwind CSS"
 description = "A utility-first CSS framework for rapidly building custom user interfaces."
 homepage = "https://tailwindcss.com/"
 license = "MIT"
@@ -25,7 +28,8 @@ languages = [
     "Rust",
     "TypeScript",
 ]
-test = "npm run test:ui"
+build = "cargo build --workspace"
+test = "cargo test --workspace"
 topics = [
     "tailwindcss",
     "css",
@@ -40,6 +44,9 @@ topics = [
 maintainers = ["@tailwindlabs/engineering"]
 team = "@tailwindlabs/engineering"
 
+[docs]
+root = "https://tailwindcss.com/"
+
 [relations]
 references = []
 
@@ -50,4 +57,4 @@ default_branch = "main"
 fork = false
 head_sha = "ba4c23eaff3f77ff10ef79879458bc49aae25690"
 html_url = "https://github.com/tailwindlabs/tailwindcss"
-stars = 95760
+stars = 95776

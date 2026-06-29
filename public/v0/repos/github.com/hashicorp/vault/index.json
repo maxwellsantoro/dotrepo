@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hashicorp",
+    "repo": "vault",
+    "source": "https://github.com/hashicorp/vault"
+  },
+  "repository": {
+    "name": "Vault",
+    "description": "**Please note**: We take Vault's security and our users' trust very seriously.",
+    "homepage": "https://developer.hashicorp.com/vault",
+    "docsRoot": "https://developer.hashicorp.com/vault/docs",
+    "gettingStarted": "https://learn.hashicorp.com/collections/vault/getting-started",
+    "ownersTeam": "@hashicorp/vault"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/hashicorp/vault/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/hashicorp/vault",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/hashicorp/vault/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/hashicorp/vault/index.json",
+    "trust": "/v0/repos/github.com/hashicorp/vault/trust.json",
+    "profile": "/v0/repos/github.com/hashicorp/vault/profile.json",
+    "queryTemplate": "/v0/repos/github.com/hashicorp/vault/query?path={dot_path}",
+    "indexPath": "repos/github.com/hashicorp/vault/"
+  }
+}

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/elastic/elasticsearch"
-generated_at = "2026-06-26T18:35:02.586195Z"
+generated_at = "2026-06-29T02:20:54.413181Z"
 
 [record.trust]
 confidence = "high"
@@ -66,6 +66,9 @@ maintainers = [
     "@elastic/developer-docs",
 ]
 
+[docs]
+root = "https://www.elastic.co/products/elasticsearch"
+
 [relations]
 references = []
 
@@ -74,6 +77,6 @@ archived = false
 clone_url = "https://github.com/elastic/elasticsearch.git"
 default_branch = "main"
 fork = false
-head_sha = "5abab688635f0b7d308981f227c5bfb480cbf50e"
+head_sha = "9c233b2040c1aa2d4493a40dc1949f749f6fb1e8"
 html_url = "https://github.com/elastic/elasticsearch"
-stars = 77174
+stars = 77187

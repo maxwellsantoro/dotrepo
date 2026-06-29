@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/astral-sh/uv"
-generated_at = "2026-06-29T00:55:00.625864Z"
+generated_at = "2026-06-29T02:17:48.155503Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "uv"
@@ -29,6 +32,8 @@ languages = [
     "Rust",
     "Shell",
 ]
+build = "cargo build --workspace"
+test = "cargo test --workspace"
 topics = [
     "packaging",
     "python",
@@ -41,6 +46,7 @@ maintainers = []
 security_contact = "https://github.com/astral-sh/.github/blob/main/SECURITY.md"
 
 [docs]
+root = "https://trio.readthedocs.io/"
 getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
 
 [relations]
@@ -53,4 +59,4 @@ default_branch = "main"
 fork = false
 head_sha = "cfa5ca8122dbdf9cc3950724500a882823102435"
 html_url = "https://github.com/astral-sh/uv"
-stars = 86868
+stars = 86869

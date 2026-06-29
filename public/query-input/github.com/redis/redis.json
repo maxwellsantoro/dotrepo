@@ -1,0 +1,124 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "redis",
+    "repo": "redis",
+    "source": "https://github.com/redis/redis"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/redis/redis/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/redis/redis",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/redis/redis/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/redis/redis",
+        "generated_at": "2026-06-26T18:34:51.853293Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "What is Redis?",
+        "description": "This document serves as both a quick start guide to Redis and a detailed resource for building it from source.",
+        "homepage": "http://redis.io",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "C++",
+          "JavaScript",
+          "Makefile",
+          "Python",
+          "Ruby",
+          "Shell",
+          "Smarty",
+          "Tcl"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "database",
+          "key-value",
+          "nosql",
+          "redis",
+          "caching",
+          "distributed-systems",
+          "open-source",
+          "real-time",
+          "time-series",
+          "cache",
+          "in-memory",
+          "in-memory-database",
+          "key-value-store",
+          "message-broker",
+          "no-sql",
+          "message-queue",
+          "realtime",
+          "vector-search",
+          "vector-databases",
+          "json"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@redis.com"
+      },
+      "docs": {
+        "root": "https://redis.io/docs/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/redis/redis.git",
+          "default_branch": "unstable",
+          "fork": false,
+          "head_sha": "08b465e4f4891bef9f08d7049dd670627b86f7a4",
+          "html_url": "https://github.com/redis/redis",
+          "stars": 75126
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

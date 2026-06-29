@@ -1,0 +1,113 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "minio",
+    "repo": "minio",
+    "source": "https://github.com/minio/minio"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/minio/minio/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/minio/minio",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/minio/minio/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/minio/minio",
+        "generated_at": "2026-06-26T18:31:19.274657Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "MinIO Quickstart Guide",
+        "description": "[!NOTE] THIS REPOSITORY IS NO LONGER MAINTAINED.",
+        "homepage": "https://github.com/minio/minio",
+        "license": "AGPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "Makefile",
+          "Mustache",
+          "Shell"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "go",
+          "storage",
+          "cloud",
+          "s3",
+          "objectstorage",
+          "cloudstorage",
+          "amazon-s3",
+          "cloudnative",
+          "k8s",
+          "kubernetes",
+          "multi-cloud",
+          "multi-cloud-kubernetes"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@min.io"
+      },
+      "docs": {
+        "root": "https://github.com/minio/docs",
+        "getting_started": "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": true,
+          "clone_url": "https://github.com/minio/minio.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+          "html_url": "https://github.com/minio/minio",
+          "stars": 61206
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

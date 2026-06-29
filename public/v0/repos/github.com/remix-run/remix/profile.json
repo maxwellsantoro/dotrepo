@@ -1,0 +1,69 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "remix-run",
+    "repo": "remix",
+    "source": "https://github.com/remix-run/remix"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/remix-run/remix/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/remix-run/remix",
+    "generatedAt": "2026-06-26T18:34:17.725862Z",
+    "evidencePath": "repos/github.com/remix-run/remix/evidence.md"
+  },
+  "purpose": "Build Better Websites. Create modern, resilient user experiences with web fundamentals.",
+  "name": "Welcome to Remix 3!",
+  "homepage": "https://remix.run",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Lua",
+    "Shell",
+    "TypeScript"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://github.com/remix-run/remix/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/remix-run/remix/profile.json",
+    "repository": "/v0/repos/github.com/remix-run/remix/index.json",
+    "trust": "/v0/repos/github.com/remix-run/remix/trust.json",
+    "queryTemplate": "/v0/repos/github.com/remix-run/remix/query?path={dot_path}",
+    "indexPath": "repos/github.com/remix-run/remix/"
+  }
+}

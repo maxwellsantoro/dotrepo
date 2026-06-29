@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nvbn",
+    "repo": "thefuck",
+    "source": "https://github.com/nvbn/thefuck"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nvbn/thefuck/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nvbn/thefuck",
+    "generatedAt": "2026-06-29T01:17:35.297168Z",
+    "evidencePath": "repos/github.com/nvbn/thefuck/evidence.md"
+  },
+  "purpose": "*The Fuck* is a magnificent app, inspired by a @liamosaur tweet, that corrects errors in previous console commands.",
+  "name": "The Fuck",
+  "homepage": "https://github.com/nvbn/thefuck",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Dockerfile",
+    "PowerShell",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "python",
+    "shell"
+  ],
+  "execution": {
+    "test": "coverage run --source=thefuck,tests -m pytest -v --capture=sys tests"
+  },
+  "docs": {
+    "gettingStarted": "https://github.com/nvbn/thefuck/wiki/Installation"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nvbn/thefuck/profile.json",
+    "repository": "/v0/repos/github.com/nvbn/thefuck/index.json",
+    "trust": "/v0/repos/github.com/nvbn/thefuck/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nvbn/thefuck/query?path={dot_path}",
+    "indexPath": "repos/github.com/nvbn/thefuck/"
+  }
+}

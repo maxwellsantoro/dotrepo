@@ -976,6 +976,7 @@ fn first_matching_workflow_command(commands: &[String], select_build: bool) -> O
     })
 }
 
+#[derive(Debug)]
 enum UniqueCommandResolution {
     None,
     Unique {
@@ -1145,11 +1146,93 @@ fn resolve_unique_command_candidate(
         };
     }
 
+    if let Some((command, path)) = resolve_preferred_command_candidate(&present) {
+        return UniqueCommandResolution::Unique {
+            command,
+            source_path: path,
+        };
+    }
+
     let mut source_paths = Vec::new();
     for (_, path) in &present {
         push_unique(&mut source_paths, path.clone());
     }
     UniqueCommandResolution::Conflict { source_paths }
+}
+
+fn resolve_preferred_command_candidate(present: &[(String, String)]) -> Option<(String, String)> {
+    if !present
+        .iter()
+        .all(|(_, path)| path.starts_with(".github/workflows/"))
+    {
+        return None;
+    }
+
+    let best_preference = present
+        .iter()
+        .map(|(_, path)| workflow_source_preference(path.rsplit('/').next().unwrap_or(path)))
+        .min()?;
+
+    let preferred: Vec<_> = present
+        .iter()
+        .filter(|(_, path)| {
+            workflow_source_preference(path.rsplit('/').next().unwrap_or(path)) == best_preference
+        })
+        .collect();
+
+    let mut preferred_unique = Vec::new();
+    for (command, path) in preferred {
+        if !preferred_unique
+            .iter()
+            .any(|(existing, _): &(String, String)| existing == command)
+        {
+            preferred_unique.push((command.clone(), path.clone()));
+        }
+    }
+
+    if preferred_unique.len() == 1 {
+        let (command, path) = preferred_unique.remove(0);
+        Some((command, path))
+    } else {
+        None
+    }
+}
+
+fn workflow_source_preference(file: &str) -> i32 {
+    if matches!(file, "ci.yml" | "ci.yaml") {
+        return 0;
+    }
+    if matches!(file, "main.yml" | "main.yaml") {
+        return 1;
+    }
+    if matches!(file, "test.yml" | "test.yaml") {
+        return 2;
+    }
+    if matches!(file, "build.yml" | "build.yaml") {
+        return 3;
+    }
+    if file.contains("build-and-test") && file.contains("pr") {
+        return 4;
+    }
+    if file.contains("build-and-test") {
+        return 5;
+    }
+    if matches!(file, "pr.yml" | "pr.yaml") {
+        return 6;
+    }
+
+    const DEPRIORITIZED: &[&str] = &[
+        "android", "ios", "windows", "macos", "freebsd", "gcc", "clang", "cross", "release",
+        "bindings", "packages", "preview", "apk", "docker", "helm", "npm", "nuget", "pypi",
+        "crates", "openapi", "ui",
+    ];
+    for (index, keyword) in DEPRIORITIZED.iter().enumerate() {
+        if file.contains(keyword) {
+            return 100 + index as i32;
+        }
+    }
+
+    50
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -1227,6 +1310,53 @@ mod tests {
         assert!(sanitize_import_command("cargo test && rm -rf /").is_none());
         assert!(sanitize_import_command("cargo test | sh").is_none());
         assert!(sanitize_import_command("cargo test > /tmp/out").is_none());
+    }
+
+    #[test]
+    fn resolve_unique_command_candidate_prefers_primary_ci_workflow() {
+        use super::{
+            resolve_unique_command_candidate, CommandSourceTier, ImportedCommandCandidate,
+        };
+
+        let candidates = [
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/build-release-apk.yml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: Some("./gradlew assembleRelease".into()),
+                test: Some("./gradlew testReleaseUnitTest".into()),
+            },
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/ci.yml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: Some("npm run build".into()),
+                test: Some("npm test".into()),
+            },
+        ];
+        let refs: Vec<&ImportedCommandCandidate> = candidates.iter().collect();
+
+        let build = resolve_unique_command_candidate(&refs, true);
+        match build {
+            super::UniqueCommandResolution::Unique {
+                command,
+                source_path,
+            } => {
+                assert_eq!(command, "npm run build");
+                assert_eq!(source_path, ".github/workflows/ci.yml");
+            }
+            other => panic!("expected unique build resolution, got {other:?}"),
+        }
+
+        let test = resolve_unique_command_candidate(&refs, false);
+        match test {
+            super::UniqueCommandResolution::Unique {
+                command,
+                source_path,
+            } => {
+                assert_eq!(command, "npm test");
+                assert_eq!(source_path, ".github/workflows/ci.yml");
+            }
+            other => panic!("expected unique test resolution, got {other:?}"),
+        }
     }
 
     #[test]

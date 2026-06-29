@@ -1,0 +1,75 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "mui",
+    "repo": "material-ui",
+    "source": "https://github.com/mui/material-ui"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/mui/material-ui/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/mui/material-ui",
+    "generatedAt": "2026-06-26T18:35:46.51257Z",
+    "evidencePath": "repos/github.com/mui/material-ui/evidence.md"
+  },
+  "purpose": "Material UI is a comprehensive library of React components that features our independent implementation of Google's Material Design system.",
+  "name": "Material UI",
+  "homepage": "https://mui.com/material-ui/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "topics": [
+    "react-components",
+    "react",
+    "material-design",
+    "material-ui",
+    "design-system"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {
+    "gettingStarted": "https://mui.com/material-ui/getting-started/"
+  },
+  "ownership": {
+    "securityContact": "security@mui.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/mui/material-ui/profile.json",
+    "repository": "/v0/repos/github.com/mui/material-ui/index.json",
+    "trust": "/v0/repos/github.com/mui/material-ui/trust.json",
+    "queryTemplate": "/v0/repos/github.com/mui/material-ui/query?path={dot_path}",
+    "indexPath": "repos/github.com/mui/material-ui/"
+  }
+}

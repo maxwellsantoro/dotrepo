@@ -1,0 +1,142 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "netdata",
+    "repo": "netdata",
+    "source": "https://github.com/netdata/netdata"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/netdata/netdata/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/netdata/netdata",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/coverity.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/netdata/netdata/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/netdata/netdata",
+        "generated_at": "2026-06-29T01:08:20.196193Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/coverity.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Netdata",
+        "description": "The fastest path to AI-powered full stack observability, even for lean teams.",
+        "homepage": "https://www.netdata.cloud",
+        "license": "GPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Assembly",
+          "Batchfile",
+          "C",
+          "C++",
+          "CMake",
+          "Dockerfile",
+          "Go",
+          "HTML",
+          "JavaScript",
+          "Jupyter Notebook",
+          "Makefile",
+          "POV-Ray SDL",
+          "PowerShell",
+          "Python",
+          "Rich Text Format",
+          "Rust",
+          "Shell",
+          "TSQL",
+          "Yacc"
+        ],
+        "build": "libprotoc-dev libssl-dev protobuf-compiler \\",
+        "test": null,
+        "topics": [
+          "monitoring",
+          "docker",
+          "kubernetes",
+          "cncf",
+          "prometheus",
+          "netdata",
+          "devops",
+          "observability",
+          "alerting",
+          "influxdb",
+          "grafana",
+          "data-visualization",
+          "database",
+          "linux",
+          "machine-learning",
+          "mysql",
+          "postgresql",
+          "mongodb",
+          "mcp",
+          "ai"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@Ferroin",
+          "@netdata/agent-sre",
+          "@stelfrag",
+          "@thiagoftsm",
+          "@ilyam8",
+          "@vkalintiris",
+          "@Ancairon",
+          "@kanelatechnical",
+          "@novykh",
+          "@netdatabot"
+        ],
+        "team": "@netdata/agent-sre",
+        "security_contact": null
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/netdata/netdata.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "d592e310b38a72223dba272d47929dec00d3d47d",
+          "html_url": "https://github.com/netdata/netdata",
+          "stars": 79437
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

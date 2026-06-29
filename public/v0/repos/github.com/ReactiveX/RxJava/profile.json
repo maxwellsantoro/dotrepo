@@ -1,0 +1,74 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ReactiveX",
+    "repo": "RxJava",
+    "source": "https://github.com/ReactiveX/RxJava"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ReactiveX/RxJava/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ReactiveX/RxJava",
+    "generatedAt": "2026-06-29T01:18:20.089444Z",
+    "evidencePath": "repos/github.com/ReactiveX/RxJava/evidence.md"
+  },
+  "purpose": "RxJava is a Java VM implementation of Reactive Extensions: a library for composing asynchronous and event-based programs by using observable sequences.",
+  "name": "RxJava",
+  "homepage": "https://dsc.gg/rxjava",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Java",
+    "Shell"
+  ],
+  "topics": [
+    "java",
+    "rxjava",
+    "flow",
+    "reactive-streams"
+  ],
+  "execution": {
+    "build": "chmod +x gradlew",
+    "test": "chmod +x gradlew"
+  },
+  "docs": {
+    "gettingStarted": "https://github.com/ReactiveX/RxJava/wiki/Getting-Started"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/ReactiveX/RxJava/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ReactiveX/RxJava/profile.json",
+    "repository": "/v0/repos/github.com/ReactiveX/RxJava/index.json",
+    "trust": "/v0/repos/github.com/ReactiveX/RxJava/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ReactiveX/RxJava/query?path={dot_path}",
+    "indexPath": "repos/github.com/ReactiveX/RxJava/"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nats-io",
+    "repo": "nats-server",
+    "source": "https://github.com/nats-io/nats-server"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nats-io/nats-server/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nats-io/nats-server",
+    "generatedAt": "2026-06-26T18:31:30.927767Z",
+    "evidencePath": "repos/github.com/nats-io/nats-server/evidence.md"
+  },
+  "purpose": "NATS is a simple, secure and performant communications system for digital systems, services and devices.",
+  "name": "Contact",
+  "homepage": "https://nats.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Go",
+    "PowerShell",
+    "Shell"
+  ],
+  "topics": [
+    "go",
+    "golang",
+    "messaging",
+    "message-bus",
+    "message-queue",
+    "cloud-native",
+    "microservices-architecture",
+    "nats-server",
+    "distributed-systems",
+    "cloud",
+    "cloud-computing",
+    "connected-vehicle",
+    "edge",
+    "edge-ai",
+    "edge-computing"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@nats-io/server",
+      "@nats-io/server-dev"
+    ],
+    "team": "@nats-io/server",
+    "securityContact": "security@nats.io"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nats-io/nats-server/profile.json",
+    "repository": "/v0/repos/github.com/nats-io/nats-server/index.json",
+    "trust": "/v0/repos/github.com/nats-io/nats-server/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nats-io/nats-server/query?path={dot_path}",
+    "indexPath": "repos/github.com/nats-io/nats-server/"
+  }
+}

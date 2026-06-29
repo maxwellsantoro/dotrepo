@@ -2970,7 +2970,7 @@ jobs:
 }
 
 #[test]
-fn import_repository_leaves_commands_unset_when_workflows_conflict() {
+fn import_repository_prefers_primary_ci_workflow_over_release_workflow() {
     let root = temp_dir("import-workflow-conflict");
     fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
     fs::write(
@@ -3012,22 +3012,27 @@ jobs:
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build, None);
-    assert_eq!(plan.manifest.repo.test, None);
-    assert!(plan.inferred_fields.is_empty());
-    assert!(!plan
-        .imported_sources
-        .iter()
-        .any(|path| path.starts_with(".github/workflows/")));
+    assert_eq!(
+        plan.manifest.repo.build.as_deref(),
+        Some("cargo build --workspace")
+    );
+    assert_eq!(
+        plan.manifest.repo.test.as_deref(),
+        Some("cargo test --workspace")
+    );
     assert!(plan
-            .manifest
-            .record
-            .trust
-            .as_ref()
-            .and_then(|trust| trust.notes.as_deref())
-            .is_some_and(|text| text.contains(
-                "`.github/workflows/ci.yml` and `.github/workflows/release.yml` suggested conflicting build commands"
-            )));
+        .inferred_fields
+        .iter()
+        .any(|field| field == "repo.build" || field == "repo.test"));
+    assert!(plan
+        .manifest
+        .record
+        .trust
+        .as_ref()
+        .and_then(|trust| trust.notes.as_deref())
+        .is_some_and(
+            |text| text.contains("Inferred `repo.build` from `.github/workflows/ci.yml`.")
+        ));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

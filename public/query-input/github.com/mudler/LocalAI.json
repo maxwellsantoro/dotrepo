@@ -1,0 +1,127 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "mudler",
+    "repo": "LocalAI",
+    "source": "https://github.com/mudler/LocalAI"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/mudler/LocalAI/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/mudler/LocalAI",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/mudler/LocalAI/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/mudler/LocalAI",
+        "generated_at": "2026-06-29T01:18:58.852385Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "LocalAI stars",
+        "description": "**LocalAI** is the open-source AI engine.",
+        "homepage": "https://localai.io",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "C++",
+          "CMake",
+          "CSS",
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "Nix",
+          "Python",
+          "Rust",
+          "Shell"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "llama",
+          "ai",
+          "llm",
+          "stable-diffusion",
+          "api",
+          "tts",
+          "musicgen",
+          "mamba",
+          "audio-generation",
+          "image-generation",
+          "text-generation",
+          "rerank",
+          "distributed",
+          "libp2p",
+          "decentralized",
+          "object-detection",
+          "mcp",
+          "agents"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@localai.io"
+      },
+      "docs": {
+        "root": "https://localai.io/",
+        "getting_started": "https://localai.io/basics/getting_started/",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/mudler/LocalAI.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "c4d302e1ab91d8b2a89f85505f48ef542a3dbfdc",
+          "html_url": "https://github.com/mudler/LocalAI",
+          "stars": 47212
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

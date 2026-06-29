@@ -1,0 +1,105 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "openai",
+    "repo": "codex",
+    "source": "https://github.com/openai/codex"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/openai/codex/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/openai/codex",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.test` unset because `.github/workflows/bazel.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/openai/codex/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/openai/codex",
+        "generated_at": "2026-06-29T00:46:04.195403Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.test` unset because `.github/workflows/bazel.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Codex CLI splash",
+        "description": "If you want Codex in your code editor (VS Code, Cursor, Windsurf), install in your IDE.",
+        "homepage": "https://github.com/openai/codex",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Jupyter Notebook",
+          "Just",
+          "Nix",
+          "PowerShell",
+          "Python",
+          "Rust",
+          "Shell",
+          "Smarty",
+          "Starlark",
+          "TypeScript"
+        ],
+        "build": null,
+        "test": null,
+        "topics": []
+      },
+      "owners": {
+        "maintainers": [
+          "@openai/codex-core-agent-team"
+        ],
+        "team": "@openai/codex-core-agent-team",
+        "security_contact": "https://bugcrowd.com/engagements/openai"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/openai/codex.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "6b5f5743b3169ef463155241da2bab6888a3cbe4",
+          "html_url": "https://github.com/openai/codex",
+          "stars": 94211
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

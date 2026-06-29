@@ -1,0 +1,126 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "langchain-ai",
+    "repo": "langchain",
+    "source": "https://github.com/langchain-ai/langchain"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/langchain-ai/langchain/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/langchain-ai/langchain",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/_compile_integration_test.yml`. Left `repo.test` unset because `.github/workflows/_compile_integration_test.yml`, `.github/workflows/_lint.yml`, `.github/workflows/_release.yml`, `.github/workflows/_test.yml`, `.github/workflows/_test_pydantic.yml`, and `.github/workflows/_test_vcr.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/langchain-ai/langchain/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/langchain-ai/langchain",
+        "generated_at": "2026-06-29T02:18:09.130553Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/_compile_integration_test.yml`. Left `repo.test` unset because `.github/workflows/_compile_integration_test.yml`, `.github/workflows/_lint.yml`, `.github/workflows/_release.yml`, `.github/workflows/_test.yml`, `.github/workflows/_test_pydantic.yml`, and `.github/workflows/_test_vcr.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "The agent engineering platform.",
+        "description": "LangChain is a framework for building agents and LLM-powered applications.",
+        "homepage": "https://docs.langchain.com/langchain/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "Python",
+          "Shell",
+          "XSLT"
+        ],
+        "build": "uv run pytest -m compile tests/integration_tests",
+        "test": null,
+        "topics": [
+          "ai",
+          "anthropic",
+          "gemini",
+          "langchain",
+          "llm",
+          "openai",
+          "python",
+          "agents",
+          "ai-agents",
+          "chatgpt",
+          "enterprise",
+          "framework",
+          "generative-ai",
+          "multiagent",
+          "open-source",
+          "pydantic",
+          "rag",
+          "deepagents",
+          "langgraph",
+          "typescript"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@ccurme",
+          "@eyurtsev",
+          "@mdrxy"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://docs.langchain.com/oss/python/langchain/overview",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/langchain-ai/langchain.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "e495651fef791650ca554d7b88b23327878a0be8",
+          "html_url": "https://github.com/langchain-ai/langchain",
+          "stars": 140417
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,66 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "seanmonstar",
+    "repo": "reqwest",
+    "source": "https://github.com/seanmonstar/reqwest"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/seanmonstar/reqwest/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/seanmonstar/reqwest",
+    "generatedAt": "2026-06-29T01:58:17.476989Z",
+    "evidencePath": "repos/github.com/seanmonstar/reqwest/evidence.md"
+  },
+  "purpose": "An ergonomic, batteries-included HTTP Client for Rust.",
+  "name": "reqwest",
+  "homepage": "https://docs.rs/reqwest",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Rust"
+  ],
+  "topics": [
+    "rust",
+    "http",
+    "http-client"
+  ],
+  "execution": {
+    "build": "cargo build",
+    "test": "cargo test"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/seanmonstar/reqwest/profile.json",
+    "repository": "/v0/repos/github.com/seanmonstar/reqwest/index.json",
+    "trust": "/v0/repos/github.com/seanmonstar/reqwest/trust.json",
+    "queryTemplate": "/v0/repos/github.com/seanmonstar/reqwest/query?path={dot_path}",
+    "indexPath": "repos/github.com/seanmonstar/reqwest/"
+  }
+}

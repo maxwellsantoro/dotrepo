@@ -1,0 +1,138 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "prometheus",
+    "repo": "prometheus",
+    "source": "https://github.com/prometheus/prometheus"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/prometheus/prometheus/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/prometheus/prometheus",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `go.mod`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@prometheus/default-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/prometheus/prometheus/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/prometheus/prometheus",
+        "generated_at": "2026-06-29T01:57:03.435097Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `go.mod`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@prometheus/default-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Prometheus",
+        "description": "Visit prometheus.io for the full documentation, examples and guides.",
+        "homepage": "https://prometheus.io/",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "HTML",
+          "JavaScript",
+          "Lex",
+          "Makefile",
+          "SCSS",
+          "Shell",
+          "TypeScript",
+          "Yacc"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "monitoring",
+          "metrics",
+          "alerting",
+          "graphing",
+          "time-series",
+          "prometheus",
+          "hacktoberfest"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@prometheus/default-maintainers",
+          "@simonpasquier",
+          "@SuperQ",
+          "@dgl",
+          "@metalmatze",
+          "@beorn7",
+          "@krajorama",
+          "@juliusv",
+          "@nexucis",
+          "@roidelapluie",
+          "@cstyan",
+          "@bwplotka",
+          "@tomwilkie",
+          "@alexgreenbank",
+          "@aknuds1",
+          "@jesusvazquez",
+          "@ArthurSens",
+          "@codesome",
+          "@kgeckhart",
+          "@brancz",
+          "@rexagod",
+          "@jkroepke",
+          "@matt-gp",
+          "@sysadmind",
+          "@mrvarmazyar",
+          "@jooola",
+          "@apricote",
+          "@remyleone"
+        ],
+        "team": "@prometheus/default-maintainers",
+        "security_contact": "https://prometheus.io/docs/operating/security/"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/prometheus/prometheus.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "b07f8cf4ccb35e5f71f2cf2ea8e0e7118d5bed6d",
+          "html_url": "https://github.com/prometheus/prometheus",
+          "stars": 64823
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

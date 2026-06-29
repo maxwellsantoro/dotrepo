@@ -1,0 +1,112 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hashicorp",
+    "repo": "terraform",
+    "source": "https://github.com/hashicorp/terraform"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/hashicorp/terraform/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/hashicorp/terraform",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/terraform-core` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/hashicorp/terraform/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/hashicorp/terraform",
+        "generated_at": "2026-06-29T01:16:51.138944Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/terraform-core` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Terraform",
+        "description": "Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently.",
+        "homepage": "http://developer.hashicorp.com/terraform",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Go",
+          "HCL",
+          "Makefile",
+          "Shell"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "graph",
+          "infrastructure-as-code",
+          "terraform",
+          "cloud",
+          "cloud-management"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@hashicorp/terraform-core",
+          "@hashicorp/terraform-azure",
+          "@hashicorp/tf-eco-hybrid-cloud",
+          "@hashicorp/terraform-aws",
+          "@hashicorp/tf-core-cloud",
+          "@hashicorp/team-tf-actions"
+        ],
+        "team": "@hashicorp/terraform-core",
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://developer.hashicorp.com/terraform/docs",
+        "getting_started": "https://learn.hashicorp.com/terraform#getting-started",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/hashicorp/terraform.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "e02391ad384c9c38f1d7f40b853c0d2297348094",
+          "html_url": "https://github.com/hashicorp/terraform",
+          "stars": 48801
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

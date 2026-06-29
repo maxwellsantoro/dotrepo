@@ -1,0 +1,73 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "facebook",
+    "repo": "zstd",
+    "source": "https://github.com/facebook/zstd"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/facebook/zstd/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/facebook/zstd",
+    "generatedAt": "2026-06-26T18:35:27.460852Z",
+    "evidencePath": "repos/github.com/facebook/zstd/evidence.md"
+  },
+  "purpose": "__Zstandard__, or `zstd as short version, is a fast lossless compression algorithm, targeting real-time compression scenarios at zlib-level and better compression ratios.",
+  "name": "Benchmarks",
+  "homepage": "http://www.zstd.net",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Dockerfile",
+    "HTML",
+    "Lua",
+    "Makefile",
+    "Meson",
+    "Python",
+    "Roff",
+    "Shell",
+    "Starlark",
+    "Swift"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://www.facebook.com/whitehat"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/facebook/zstd/profile.json",
+    "repository": "/v0/repos/github.com/facebook/zstd/index.json",
+    "trust": "/v0/repos/github.com/facebook/zstd/trust.json",
+    "queryTemplate": "/v0/repos/github.com/facebook/zstd/query?path={dot_path}",
+    "indexPath": "repos/github.com/facebook/zstd/"
+  }
+}

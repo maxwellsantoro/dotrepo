@@ -1,0 +1,88 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "coder",
+    "repo": "code-server",
+    "source": "https://github.com/coder/code-server"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/coder/code-server/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/coder/code-server",
+    "generatedAt": "2026-06-29T01:18:09.655495Z",
+    "evidencePath": "repos/github.com/coder/code-server/evidence.md"
+  },
+  "purpose": "VS Code in the browser",
+  "name": "code-server",
+  "homepage": "https://coder.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Mustache",
+    "Nix",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "vscode",
+    "vscode-remote",
+    "ide",
+    "remote-work",
+    "development-environment",
+    "dev-tools",
+    "browser-ide"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@coder/code-server",
+      "@Matthew-Beckett",
+      "@alexgorbatchev",
+      "@GNUxeava",
+      "@zhaozhiming"
+    ],
+    "team": "@coder/code-server"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/coder/code-server/profile.json",
+    "repository": "/v0/repos/github.com/coder/code-server/index.json",
+    "trust": "/v0/repos/github.com/coder/code-server/trust.json",
+    "queryTemplate": "/v0/repos/github.com/coder/code-server/query?path={dot_path}",
+    "indexPath": "repos/github.com/coder/code-server/"
+  }
+}

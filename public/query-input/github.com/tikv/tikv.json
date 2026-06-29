@@ -1,0 +1,114 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tikv",
+    "repo": "tikv",
+    "source": "https://github.com/tikv/tikv"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/tikv/tikv/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/tikv/tikv",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tikv/tikv-configuration-reviewer` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/tikv/tikv/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/tikv/tikv",
+        "generated_at": "2026-06-26T18:30:38.763092Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tikv/tikv-configuration-reviewer` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Governance",
+        "description": "The design of TiKV ('Ti' stands for titanium) is inspired by some great distributed systems from Google, such as BigTable, Spanner, and Percolator, and some of the latest achievements in academia in recent years, such as the Raft consensus algorithm.",
+        "homepage": "https://tikv.org",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "Dockerfile",
+          "Makefile",
+          "Perl",
+          "Python",
+          "Rust",
+          "Shell"
+        ],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "topics": [
+          "distributed-transactions",
+          "raft",
+          "rust",
+          "key-value",
+          "tikv",
+          "consensus",
+          "rocksdb",
+          "tidb",
+          "cncf",
+          "hacktoberfest"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@tikv/tikv-configuration-reviewer"
+        ],
+        "team": "@tikv/tikv-configuration-reviewer",
+        "security_contact": "tikv-security@lists.cncf.io"
+      },
+      "docs": {
+        "root": "https://tikv.org/docs/latest/concepts/overview/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/tikv/tikv.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "56a397a1766e5da57670796b31013d0c720c196b",
+          "html_url": "https://github.com/tikv/tikv",
+          "stars": 16751
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,93 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "NationalSecurityAgency",
+    "repo": "ghidra",
+    "source": "https://github.com/NationalSecurityAgency/ghidra"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/NationalSecurityAgency/ghidra/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/NationalSecurityAgency/ghidra",
+    "generatedAt": "2026-06-29T00:54:38.690777Z",
+    "evidencePath": "repos/github.com/NationalSecurityAgency/ghidra/evidence.md"
+  },
+  "purpose": "Ghidra is a software reverse engineering (SRE) framework created and maintained by the [National Security Agency][nsa] Research Directorate.",
+  "name": "Ghidra Software Reverse Engineering Framework",
+  "homepage": "https://www.nsa.gov/ghidra",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "GAP",
+    "GDB",
+    "HTML",
+    "Hack",
+    "Haskell",
+    "Java",
+    "Lex",
+    "Linker Script",
+    "Lua",
+    "Makefile",
+    "Objective-C",
+    "Pawn",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "TeX",
+    "XSLT",
+    "Xtend",
+    "Yacc"
+  ],
+  "topics": [
+    "software-analysis",
+    "disassembler",
+    "reverse-engineering"
+  ],
+  "execution": {
+    "build": "./gradlew -I gradle/support/fetchDependencies.gradle -DhideDownloadProgress -DnoEclipse",
+    "test": "./gradlew -I gradle/support/fetchDependencies.gradle -DhideDownloadProgress -DnoEclipse"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://github.com/NationalSecurityAgency/ghidra/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/NationalSecurityAgency/ghidra/profile.json",
+    "repository": "/v0/repos/github.com/NationalSecurityAgency/ghidra/index.json",
+    "trust": "/v0/repos/github.com/NationalSecurityAgency/ghidra/trust.json",
+    "queryTemplate": "/v0/repos/github.com/NationalSecurityAgency/ghidra/query?path={dot_path}",
+    "indexPath": "repos/github.com/NationalSecurityAgency/ghidra/"
+  }
+}

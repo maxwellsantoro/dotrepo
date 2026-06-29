@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rayon-rs",
+    "repo": "rayon",
+    "source": "https://github.com/rayon-rs/rayon"
+  },
+  "repository": {
+    "name": "Rayon",
+    "description": "Rayon is a data-parallelism library for Rust.",
+    "homepage": "https://github.com/rayon-rs/rayon"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/rayon-rs/rayon/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/rayon-rs/rayon",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/rayon-rs/rayon/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/rayon-rs/rayon/index.json",
+    "trust": "/v0/repos/github.com/rayon-rs/rayon/trust.json",
+    "profile": "/v0/repos/github.com/rayon-rs/rayon/profile.json",
+    "queryTemplate": "/v0/repos/github.com/rayon-rs/rayon/query?path={dot_path}",
+    "indexPath": "repos/github.com/rayon-rs/rayon/"
+  }
+}

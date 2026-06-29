@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "dotnet",
+    "repo": "roslyn",
+    "source": "https://github.com/dotnet/roslyn"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/dotnet/roslyn/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/dotnet/roslyn",
+    "generatedAt": "2026-06-29T01:19:16.316571Z",
+    "evidencePath": "repos/github.com/dotnet/roslyn/evidence.md"
+  },
+  "purpose": "Roslyn is the open-source implementation of both the C# and Visual Basic compilers with an API surface for building code analysis tools.",
+  "name": "The .NET Compiler Platform",
+  "homepage": "https://docs.microsoft.com/dotnet/csharp/roslyn-sdk/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "1C Enterprise",
+    "Batchfile",
+    "C#",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "F#",
+    "HTML",
+    "IL Assembly",
+    "PowerShell",
+    "Python",
+    "ReScript",
+    "Shell",
+    "Vim Snippet",
+    "Visual Basic .NET"
+  ],
+  "topics": [
+    "roslyn",
+    "visual-basic",
+    "visual-studio",
+    "csharp",
+    "hacktoberfest"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@dotnet/roslyn-infrastructure",
+      "@dotnet/roslyn-compiler",
+      "@dotnet/roslyn-ide",
+      "@dotnet/roslyn-interactive",
+      "@dotnet/razor-tooling",
+      "@dotnet/roslyn-api-owners",
+      "@333fred",
+      "@dibarbet"
+    ],
+    "securityContact": "secure@microsoft.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/dotnet/roslyn/profile.json",
+    "repository": "/v0/repos/github.com/dotnet/roslyn/index.json",
+    "trust": "/v0/repos/github.com/dotnet/roslyn/trust.json",
+    "queryTemplate": "/v0/repos/github.com/dotnet/roslyn/query?path={dot_path}",
+    "indexPath": "repos/github.com/dotnet/roslyn/"
+  }
+}

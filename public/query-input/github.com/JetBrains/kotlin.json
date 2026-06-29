@@ -1,0 +1,124 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "JetBrains",
+    "repo": "kotlin",
+    "source": "https://github.com/JetBrains/kotlin"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/JetBrains/kotlin/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/JetBrains/kotlin",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `SECURITY.md`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/JetBrains/kotlin/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/JetBrains/kotlin",
+        "generated_at": "2026-06-26T18:35:21.341821Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `SECURITY.md`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "kotlin",
+        "description": "The Kotlin Programming Language.",
+        "homepage": "https://kotlinlang.org",
+        "license": null,
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "ANTLR",
+          "Batchfile",
+          "C",
+          "C++",
+          "CMake",
+          "CSS",
+          "Dockerfile",
+          "Groovy",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Kotlin",
+          "Lex",
+          "Makefile",
+          "Objective-C",
+          "Objective-C++",
+          "Puppet",
+          "Python",
+          "Roff",
+          "Ruby",
+          "Scala",
+          "Shell",
+          "Swift"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "kotlin",
+          "programming-language",
+          "compiler",
+          "gradle-plugin",
+          "maven-plugin",
+          "kotlin-library",
+          "intellij-plugin",
+          "wasm",
+          "webassembly"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://kotlinlang.org/docs/security.html"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/JetBrains/kotlin.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "5ae94b86231b9352eae67a0413e7691469792f83",
+          "html_url": "https://github.com/JetBrains/kotlin",
+          "stars": 52992
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

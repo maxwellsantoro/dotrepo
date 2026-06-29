@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "axios",
+    "repo": "axios",
+    "source": "https://github.com/axios/axios"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/axios/axios/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/axios/axios",
+    "generatedAt": "2026-06-29T02:20:39.32978Z",
+    "evidencePath": "repos/github.com/axios/axios/evidence.md"
+  },
+  "purpose": "We're passionate about making open source sustainable.",
+  "name": "Thanks.dev",
+  "homepage": "https://axios-http.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "HTML",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "topics": [
+    "http-client",
+    "javascript",
+    "nodejs",
+    "promise",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://axios-http.com",
+    "gettingStarted": "https://axios.rest/pages/getting-started/first-steps.html"
+  },
+  "ownership": {
+    "maintainers": [
+      "@jasonsaayman"
+    ],
+    "securityContact": "https://github.com/axios/axios/security"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/axios/axios/profile.json",
+    "repository": "/v0/repos/github.com/axios/axios/index.json",
+    "trust": "/v0/repos/github.com/axios/axios/trust.json",
+    "queryTemplate": "/v0/repos/github.com/axios/axios/query?path={dot_path}",
+    "indexPath": "repos/github.com/axios/axios/"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "fatedier",
+    "repo": "frp",
+    "source": "https://github.com/fatedier/frp"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/fatedier/frp/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/fatedier/frp",
+    "generatedAt": "2026-06-29T00:42:30.425175Z",
+    "evidencePath": "repos/github.com/fatedier/frp/evidence.md"
+  },
+  "purpose": "README | 中文文档",
+  "name": "frp",
+  "homepage": "https://github.com/fatedier/frp",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "proxy",
+    "reverse-proxy",
+    "tunnel",
+    "nat",
+    "go",
+    "firewall",
+    "frp",
+    "expose",
+    "http-proxy",
+    "p2p"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/fatedier/frp/profile.json",
+    "repository": "/v0/repos/github.com/fatedier/frp/index.json",
+    "trust": "/v0/repos/github.com/fatedier/frp/trust.json",
+    "queryTemplate": "/v0/repos/github.com/fatedier/frp/query?path={dot_path}",
+    "indexPath": "repos/github.com/fatedier/frp/"
+  }
+}

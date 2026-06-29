@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "termux",
+    "repo": "termux-app",
+    "source": "https://github.com/termux/termux-app"
+  },
+  "repository": {
+    "name": "Termux application",
+    "description": "Termux is an Android terminal application and Linux environment.",
+    "homepage": "https://f-droid.org/en/packages/com.termux",
+    "docsRoot": "https://iterm2.com/documentation.html",
+    "securityContact": "https://termux.dev/security"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/termux/termux-app/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/termux/termux-app",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/run_tests.yml`. Inferred `repo.test` from `.github/workflows/run_tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/termux/termux-app/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/termux/termux-app/index.json",
+    "trust": "/v0/repos/github.com/termux/termux-app/trust.json",
+    "profile": "/v0/repos/github.com/termux/termux-app/profile.json",
+    "queryTemplate": "/v0/repos/github.com/termux/termux-app/query?path={dot_path}",
+    "indexPath": "repos/github.com/termux/termux-app/"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "junegunn",
+    "repo": "fzf",
+    "source": "https://github.com/junegunn/fzf"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/junegunn/fzf/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/junegunn/fzf",
+    "generatedAt": "2026-06-29T02:02:26.490885Z",
+    "evidencePath": "repos/github.com/junegunn/fzf/evidence.md"
+  },
+  "purpose": ":cherry_blossom: A command-line fuzzy finder",
+  "name": "fzf",
+  "homepage": "https://junegunn.github.io/fzf/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "Dockerfile",
+    "Go",
+    "Makefile",
+    "Nushell",
+    "PowerShell",
+    "Ruby",
+    "Shell",
+    "Vim Script"
+  ],
+  "topics": [
+    "fzf",
+    "go",
+    "bash",
+    "zsh",
+    "fish",
+    "vim",
+    "neovim",
+    "cli",
+    "unix",
+    "tmux"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://junegunn.github.io/fzf/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@junegunn"
+    ],
+    "securityContact": "https://github.com/junegunn/fzf"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/junegunn/fzf/profile.json",
+    "repository": "/v0/repos/github.com/junegunn/fzf/index.json",
+    "trust": "/v0/repos/github.com/junegunn/fzf/trust.json",
+    "queryTemplate": "/v0/repos/github.com/junegunn/fzf/query?path={dot_path}",
+    "indexPath": "repos/github.com/junegunn/fzf/"
+  }
+}

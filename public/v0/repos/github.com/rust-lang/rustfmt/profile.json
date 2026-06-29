@@ -1,0 +1,69 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rust-lang",
+    "repo": "rustfmt",
+    "source": "https://github.com/rust-lang/rustfmt"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/rust-lang/rustfmt/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/rust-lang/rustfmt",
+    "generatedAt": "2026-06-29T01:57:13.79824Z",
+    "evidencePath": "repos/github.com/rust-lang/rustfmt/evidence.md"
+  },
+  "purpose": "A tool for formatting Rust code according to style guidelines.",
+  "name": "rustfmt",
+  "homepage": "https://rust-lang.github.io/rustfmt/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "RenderScript",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "rust",
+    "rustfmt",
+    "formatter",
+    "codeformatter"
+  ],
+  "execution": {
+    "build": "cargo build",
+    "test": "cargo test"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/rust-lang/rustfmt/profile.json",
+    "repository": "/v0/repos/github.com/rust-lang/rustfmt/index.json",
+    "trust": "/v0/repos/github.com/rust-lang/rustfmt/trust.json",
+    "queryTemplate": "/v0/repos/github.com/rust-lang/rustfmt/query?path={dot_path}",
+    "indexPath": "repos/github.com/rust-lang/rustfmt/"
+  }
+}

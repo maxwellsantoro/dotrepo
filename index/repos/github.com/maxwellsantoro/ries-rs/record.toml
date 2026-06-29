@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/maxwellsantoro/ries-rs"
-generated_at = "2026-06-29T00:45:17.629704Z"
+generated_at = "2026-06-29T02:18:13.621263Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "ries-rs"
@@ -25,7 +28,8 @@ languages = [
     "Shell",
     "TypeScript",
 ]
-build = "cargo build --features wasm --locked"
+build = "cargo build"
+test = "cargo test"
 topics = [
     "equation-solver",
     "mathematics",
@@ -41,6 +45,9 @@ topics = [
 [owners]
 maintainers = ["@maxwellsantoro"]
 security_contact = "https://github.com/maxwellsantoro/ries-rs/security/advisories/new"
+
+[docs]
+root = "https://maxwellsantoro.com/projects/ries-rs/app/"
 
 [relations]
 references = []

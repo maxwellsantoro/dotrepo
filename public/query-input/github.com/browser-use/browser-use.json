@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "browser-use",
+    "repo": "browser-use",
+    "source": "https://github.com/browser-use/browser-use"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/browser-use/browser-use/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/browser-use/browser-use",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/browser-use/browser-use/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/browser-use/browser-use",
+        "generated_at": "2026-06-29T01:17:17.19506Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "The AI browser agent.",
+        "description": "🌤️ Want to skip the setup? Use our cloud for faster, scalable, stealth-enabled browser automation!",
+        "homepage": "https://browser-use.com",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "HTML",
+          "Python",
+          "Shell"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "llm",
+          "ai-agents",
+          "ai-tools",
+          "browser-automation",
+          "python",
+          "browser-use",
+          "playwright"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://github.com/browser-use/browser-use/security/advisories/new"
+      },
+      "docs": {
+        "root": null,
+        "getting_started": "https://cloud.browser-use.com/new-api-key?utm_source=github&utm_medium=readme-quickstart-api-key",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/browser-use/browser-use.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "2454d3e2551705232333c906ded8fc31ab0fc9f2",
+          "html_url": "https://github.com/browser-use/browser-use",
+          "stars": 101171
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ClickHouse",
+    "repo": "ClickHouse",
+    "source": "https://github.com/ClickHouse/ClickHouse"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ClickHouse/ClickHouse/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ClickHouse/ClickHouse",
+    "generatedAt": "2026-06-29T01:19:04.11241Z",
+    "evidencePath": "repos/github.com/ClickHouse/ClickHouse/evidence.md"
+  },
+  "purpose": "Join us for the ClickHouse **26.5** Release Call on May 21, 2026.",
+  "name": "ClickHouse® is an open-source column-oriented database management system that allows generating analytical data reports in real-time.",
+  "homepage": "https://clickhouse.com",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "ANTLR",
+    "Assembly",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "CSS",
+    "Cap'n Proto",
+    "Clojure",
+    "DIGITAL Command Language",
+    "Dockerfile",
+    "GAP",
+    "Go",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Jinja",
+    "Makefile",
+    "PHP",
+    "PLpgSQL",
+    "Perl",
+    "Python",
+    "Rust",
+    "Shell",
+    "TypeScript",
+    "Vim Script"
+  ],
+  "topics": [
+    "dbms",
+    "olap",
+    "analytics",
+    "sql",
+    "big-data",
+    "mpp",
+    "clickhouse",
+    "hacktoberfest",
+    "cpp",
+    "rust",
+    "ai",
+    "cloud-native",
+    "database",
+    "distributed",
+    "embedded",
+    "lakehouse",
+    "self-hosted"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://clickhouse.com/docs/"
+  },
+  "ownership": {
+    "securityContact": "trust@clickhouse.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ClickHouse/ClickHouse/profile.json",
+    "repository": "/v0/repos/github.com/ClickHouse/ClickHouse/index.json",
+    "trust": "/v0/repos/github.com/ClickHouse/ClickHouse/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ClickHouse/ClickHouse/query?path={dot_path}",
+    "indexPath": "repos/github.com/ClickHouse/ClickHouse/"
+  }
+}

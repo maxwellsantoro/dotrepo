@@ -2,14 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/WerWolv/ImHex"
-generated_at = "2026-06-29T01:18:22.594923Z"
+generated_at = "2026-06-29T02:17:38.521332Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Left `repo.build` unset because `.github/workflows/analysis.yml`, `.github/workflows/build.yml`, and `.github/workflows/tests.yml` suggested conflicting build commands. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
 
 [repo]
 name = "Discord Server"
@@ -26,6 +30,7 @@ languages = [
     "Objective-C",
     "Python",
 ]
+build = '-DCMAKE_C_COMPILER_LAUNCHER=ccache                                                        \'
 topics = [
     "hex-editor",
     "reverse-engineering",
@@ -53,6 +58,9 @@ topics = [
 maintainers = []
 security_contact = "unknown"
 
+[docs]
+root = "https://imhex.werwolv.net/"
+
 [relations]
 references = []
 
@@ -63,4 +71,4 @@ default_branch = "master"
 fork = false
 head_sha = "af55d25269f201164c7f7e71c943cba4d26b04e3"
 html_url = "https://github.com/WerWolv/ImHex"
-stars = 54029
+stars = 54031

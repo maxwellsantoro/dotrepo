@@ -1,0 +1,104 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "oven-sh",
+    "repo": "bun",
+    "source": "https://github.com/oven-sh/bun"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/oven-sh/bun/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/oven-sh/bun",
+    "generatedAt": "2026-06-29T02:18:21.29126Z",
+    "evidencePath": "repos/github.com/oven-sh/bun/evidence.md"
+  },
+  "purpose": "Bun is an all-in-one toolkit for JavaScript and TypeScript apps.",
+  "name": "Bun",
+  "homepage": "https://bun.com",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "HCL",
+    "HTML",
+    "JavaScript",
+    "Linker Script",
+    "MDX",
+    "Makefile",
+    "Nix",
+    "Objective-C",
+    "Perl",
+    "PowerShell",
+    "Python",
+    "RenderScript",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "Svelte",
+    "TypeScript"
+  ],
+  "topics": [
+    "bun",
+    "bundler",
+    "javascript",
+    "javascriptcore",
+    "jsx",
+    "nodejs",
+    "npm",
+    "react",
+    "transpiler",
+    "typescript",
+    "zig",
+    "ziglang"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://bun.com/docs",
+    "gettingStarted": "https://bun.com/docs/installation#cpu-requirements-and-baseline-builds"
+  },
+  "ownership": {
+    "maintainers": [
+      "@Jarred-Sumner",
+      "@alii"
+    ],
+    "securityContact": "security@bun.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/oven-sh/bun/profile.json",
+    "repository": "/v0/repos/github.com/oven-sh/bun/index.json",
+    "trust": "/v0/repos/github.com/oven-sh/bun/trust.json",
+    "queryTemplate": "/v0/repos/github.com/oven-sh/bun/query?path={dot_path}",
+    "indexPath": "repos/github.com/oven-sh/bun/"
+  }
+}

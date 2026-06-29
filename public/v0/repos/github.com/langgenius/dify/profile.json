@@ -1,0 +1,126 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "langgenius",
+    "repo": "dify",
+    "source": "https://github.com/langgenius/dify"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/langgenius/dify/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/langgenius/dify",
+    "generatedAt": "2026-06-29T02:18:11.743136Z",
+    "evidencePath": "repos/github.com/langgenius/dify/evidence.md"
+  },
+  "purpose": "Before installing Dify, make sure your machine meets the following minimum system requirements:",
+  "name": "chat on Discord",
+  "homepage": "https://dify.ai",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "Gherkin",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "Makefile",
+    "Mako",
+    "PHP",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "ai",
+    "gpt",
+    "llm",
+    "openai",
+    "python",
+    "rag",
+    "orchestration",
+    "gpt-4",
+    "agent",
+    "nextjs",
+    "workflow",
+    "genai",
+    "gemini",
+    "automation",
+    "low-code",
+    "mcp",
+    "no-code",
+    "agentic-ai",
+    "agentic-framework",
+    "agentic-workflow"
+  ],
+  "execution": {
+    "build": "pnpm build:bin"
+  },
+  "docs": {
+    "root": "https://docs.dify.ai",
+    "gettingStarted": "https://docs.dify.ai/getting-started/install-self-hosted"
+  },
+  "ownership": {
+    "maintainers": [
+      "@crazywoola",
+      "@laipz8200",
+      "@hyoban",
+      "@lyzno1",
+      "@GareArc",
+      "@QuantumGhost",
+      "@Nov1c444",
+      "@JohnJyong",
+      "@WH-2099",
+      "@CourTeous33",
+      "@Mairuis",
+      "@hj24",
+      "@zyssyz123",
+      "@GarfieldDai",
+      "@snakevash",
+      "@MRZHUH",
+      "@iamjoel",
+      "@zxhlyh",
+      "@JzoNgKVO",
+      "@RiskeyL",
+      "@WTW0313",
+      "@zhsama",
+      "@Yessenia-d",
+      "@douxc",
+      "@CodingOnStar"
+    ],
+    "securityContact": "https://github.com/langgenius/dify/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/langgenius/dify/profile.json",
+    "repository": "/v0/repos/github.com/langgenius/dify/index.json",
+    "trust": "/v0/repos/github.com/langgenius/dify/trust.json",
+    "queryTemplate": "/v0/repos/github.com/langgenius/dify/query?path={dot_path}",
+    "indexPath": "repos/github.com/langgenius/dify/"
+  }
+}

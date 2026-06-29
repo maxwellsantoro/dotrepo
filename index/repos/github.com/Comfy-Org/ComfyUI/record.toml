@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Comfy-Org/ComfyUI"
-generated_at = "2026-06-26T18:34:48.963016Z"
+generated_at = "2026-06-29T02:20:30.695142Z"
 
 [record.trust]
 confidence = "high"
@@ -47,6 +47,7 @@ maintainers = [
 security_contact = "https://github.com/comfyanonymous/ComfyUI/security/advisories/new"
 
 [docs]
+root = "https://www.comfy.org/"
 getting_started = "https://docs.comfy.org/comfy-cli/getting-started"
 
 [relations]
@@ -57,6 +58,6 @@ archived = false
 clone_url = "https://github.com/Comfy-Org/ComfyUI.git"
 default_branch = "master"
 fork = false
-head_sha = "7cb784e0f48784bb6ed588912e186e5ee1e9ee68"
+head_sha = "f19735759e8973bd2ead76f08d9cc45abc1f98e4"
 html_url = "https://github.com/Comfy-Org/ComfyUI"
-stars = 118427
+stars = 118667

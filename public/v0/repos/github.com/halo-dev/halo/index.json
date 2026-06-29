@@ -1,0 +1,53 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "halo-dev",
+    "repo": "halo",
+    "source": "https://github.com/halo-dev/halo"
+  },
+  "repository": {
+    "name": "Docker pulls",
+    "description": "官网 文档 社区 Gitee Telegram 频道",
+    "homepage": "https://www.halo.run",
+    "docsRoot": "https://www.halo.run",
+    "gettingStarted": "https://docs.halo.run/getting-started/install/1panel",
+    "securityContact": "hi@halo.run"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/halo-dev/halo/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/halo-dev/halo",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.build` from `.github/workflows/halo.yaml`. Inferred `repo.test` from `.github/workflows/halo.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/halo-dev/halo/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/halo-dev/halo/index.json",
+    "trust": "/v0/repos/github.com/halo-dev/halo/trust.json",
+    "profile": "/v0/repos/github.com/halo-dev/halo/profile.json",
+    "queryTemplate": "/v0/repos/github.com/halo-dev/halo/query?path={dot_path}",
+    "indexPath": "repos/github.com/halo-dev/halo/"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "spring-projects",
+    "repo": "spring-boot",
+    "source": "https://github.com/spring-projects/spring-boot"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/spring-projects/spring-boot/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/spring-projects/spring-boot",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/spring-projects/spring-boot/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/spring-projects/spring-boot",
+        "generated_at": "2026-06-26T18:35:24.667747Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "spring-boot",
+        "description": "Spring Boot helps you to create Spring-powered, production-grade applications and services with absolute minimum fuss.",
+        "homepage": "https://spring.io/projects/spring-boot",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "CSS",
+          "Dockerfile",
+          "FreeMarker",
+          "Go Template",
+          "Groovy",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Kotlin",
+          "Mustache",
+          "Ruby",
+          "Shell",
+          "Smarty",
+          "Vim Snippet"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "java",
+          "spring-boot",
+          "spring",
+          "framework"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/spring-projects/spring-boot.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "fd2e1d221921998647c2527ecf4d273751f6ffb3",
+          "html_url": "https://github.com/spring-projects/spring-boot",
+          "stars": 81047
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

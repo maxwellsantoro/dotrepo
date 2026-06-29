@@ -1,0 +1,108 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "supabase",
+    "repo": "supabase",
+    "source": "https://github.com/supabase/supabase"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/supabase/supabase/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/supabase/supabase",
+    "generatedAt": "2026-06-26T18:34:04.311466Z",
+    "evidencePath": "repos/github.com/supabase/supabase/evidence.md"
+  },
+  "purpose": "Supabase is the Postgres development platform.",
+  "name": "Supabase",
+  "homepage": "https://supabase.com",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "Elixir",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "Makefile",
+    "Mermaid",
+    "PLpgSQL",
+    "Shell",
+    "Smarty",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "firebase",
+    "supabase",
+    "realtime",
+    "postgrest",
+    "postgres",
+    "postgresql",
+    "websockets",
+    "deno",
+    "embeddings",
+    "vectors",
+    "alternative",
+    "auth",
+    "database",
+    "example",
+    "nextjs",
+    "oauth2",
+    "pgvector",
+    "postgis",
+    "ai"
+  ],
+  "execution": {
+    "build": "pnpm build"
+  },
+  "docs": {
+    "root": "https://supabase.com/docs/guides/database",
+    "gettingStarted": "./DEVELOPERS.md"
+  },
+  "ownership": {
+    "maintainers": [
+      "@supabase/design",
+      "@supabase/billing",
+      "@supabase/growth-eng",
+      "@supabase/Dashboard",
+      "@supabase/marketing",
+      "@supabase/cli",
+      "@supabase/self-hosted",
+      "@supabase/security",
+      "@supabase/infra"
+    ]
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/supabase/supabase/profile.json",
+    "repository": "/v0/repos/github.com/supabase/supabase/index.json",
+    "trust": "/v0/repos/github.com/supabase/supabase/trust.json",
+    "queryTemplate": "/v0/repos/github.com/supabase/supabase/query?path={dot_path}",
+    "indexPath": "repos/github.com/supabase/supabase/"
+  }
+}

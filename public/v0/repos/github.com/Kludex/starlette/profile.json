@@ -1,0 +1,69 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Kludex",
+    "repo": "starlette",
+    "source": "https://github.com/Kludex/starlette"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Kludex/starlette/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Kludex/starlette",
+    "generatedAt": "2026-06-26T18:36:06.772023Z",
+    "evidencePath": "repos/github.com/Kludex/starlette/evidence.md"
+  },
+  "purpose": "✨ The little ASGI framework that shines.",
+  "name": "Starlette",
+  "homepage": "https://starlette.dev",
+  "license": "BSD-3-Clause",
+  "visibility": "public",
+  "languages": [
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "python",
+    "async",
+    "websockets",
+    "http",
+    "asgi"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Kludex/starlette/profile.json",
+    "repository": "/v0/repos/github.com/Kludex/starlette/index.json",
+    "trust": "/v0/repos/github.com/Kludex/starlette/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Kludex/starlette/query?path={dot_path}",
+    "indexPath": "repos/github.com/Kludex/starlette/"
+  }
+}

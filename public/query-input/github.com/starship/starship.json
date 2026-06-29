@@ -1,0 +1,115 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "starship",
+    "repo": "starship",
+    "source": "https://github.com/starship/starship"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/starship/starship/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/starship/starship",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/starship/starship/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/starship/starship",
+        "generated_at": "2026-06-28T03:20:19.071216Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Starship",
+        "description": "The minimal, blazing-fast, and infinitely customizable prompt for any shell!",
+        "homepage": "https://starship.rs",
+        "license": "ISC",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Elvish",
+          "HTML",
+          "Lua",
+          "Nushell",
+          "PowerShell",
+          "Rust",
+          "Shell",
+          "Xonsh"
+        ],
+        "build": "cargo build",
+        "test": "cargo test",
+        "topics": [
+          "zsh-theme",
+          "fish-theme",
+          "zsh-prompt",
+          "fish-prompt",
+          "shell-prompt",
+          "oh-my-zsh",
+          "rust",
+          "starship",
+          "zsh",
+          "powershell",
+          "fish",
+          "bash"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://github.com/starship/starship/security/advisories/new"
+      },
+      "docs": {
+        "root": "https://starship.rs/config/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/starship/starship.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "1484c66880e207827f4b000b8c2831bb3ec4a241",
+          "html_url": "https://github.com/starship/starship",
+          "stars": 58525
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

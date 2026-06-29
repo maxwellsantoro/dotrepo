@@ -1,0 +1,140 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "firecrawl",
+    "repo": "firecrawl",
+    "source": "https://github.com/firecrawl/firecrawl"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/firecrawl/firecrawl/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/firecrawl/firecrawl",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/firecrawl/firecrawl/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/firecrawl/firecrawl",
+        "generated_at": "2026-06-29T01:08:14.613524Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `.github/CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Downloads",
+        "description": "**The API to search, scrape, and interact with the web at scale.",
+        "homepage": "https://firecrawl.dev",
+        "license": "AGPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Astro",
+          "C#",
+          "CSS",
+          "Dockerfile",
+          "Elixir",
+          "Go",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Jupyter Notebook",
+          "Makefile",
+          "PHP",
+          "Procfile",
+          "Python",
+          "Rich Text Format",
+          "Ruby",
+          "Rust",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "ai",
+          "crawler",
+          "markdown",
+          "scraper",
+          "html-to-markdown",
+          "llm",
+          "scraping",
+          "web-crawler",
+          "ai-scraping",
+          "webscraping",
+          "web-scraping",
+          "web-data",
+          "web-data-extraction",
+          "ai-agents",
+          "data-extraction",
+          "ai-crawler",
+          "ai-search",
+          "web-scraper",
+          "web-search"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@mogery",
+          "@nickscamara",
+          "@tomkosm",
+          "@rafaelsideguide",
+          "@abimaelmartell",
+          "@ericciarla"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://docs.firecrawl.dev",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/firecrawl/firecrawl.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "80da82307c36913e4abc5677d25d975da3e50385",
+          "html_url": "https://github.com/firecrawl/firecrawl",
+          "stars": 140753
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

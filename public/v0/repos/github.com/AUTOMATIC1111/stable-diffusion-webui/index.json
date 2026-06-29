@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "AUTOMATIC1111",
+    "repo": "stable-diffusion-webui",
+    "source": "https://github.com/AUTOMATIC1111/stable-diffusion-webui"
+  },
+  "repository": {
+    "name": "Stable Diffusion web UI",
+    "description": "A web interface for Stable Diffusion, implemented using Gradio library.",
+    "homepage": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+    "gettingStarted": "https://github.com/openvinotoolkit/stable-diffusion-webui/wiki/Installation-on-Intel-Silicon"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/AUTOMATIC1111/stable-diffusion-webui/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, and `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/AUTOMATIC1111/stable-diffusion-webui/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/index.json",
+    "trust": "/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/trust.json",
+    "profile": "/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/profile.json",
+    "queryTemplate": "/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/query?path={dot_path}",
+    "indexPath": "repos/github.com/AUTOMATIC1111/stable-diffusion-webui/"
+  }
+}

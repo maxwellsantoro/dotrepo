@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "redis",
+    "repo": "redis",
+    "source": "https://github.com/redis/redis"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/redis/redis/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/redis/redis",
+    "generatedAt": "2026-06-26T18:34:51.853293Z",
+    "evidencePath": "repos/github.com/redis/redis/evidence.md"
+  },
+  "purpose": "This document serves as both a quick start guide to Redis and a detailed resource for building it from source.",
+  "name": "What is Redis?",
+  "homepage": "http://redis.io",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Ruby",
+    "Shell",
+    "Smarty",
+    "Tcl"
+  ],
+  "topics": [
+    "database",
+    "key-value",
+    "nosql",
+    "redis",
+    "caching",
+    "distributed-systems",
+    "open-source",
+    "real-time",
+    "time-series",
+    "cache",
+    "in-memory",
+    "in-memory-database",
+    "key-value-store",
+    "message-broker",
+    "no-sql",
+    "message-queue",
+    "realtime",
+    "vector-search",
+    "vector-databases",
+    "json"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://redis.io/docs/"
+  },
+  "ownership": {
+    "securityContact": "security@redis.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/redis/redis/profile.json",
+    "repository": "/v0/repos/github.com/redis/redis/index.json",
+    "trust": "/v0/repos/github.com/redis/redis/trust.json",
+    "queryTemplate": "/v0/repos/github.com/redis/redis/query?path={dot_path}",
+    "indexPath": "repos/github.com/redis/redis/"
+  }
+}

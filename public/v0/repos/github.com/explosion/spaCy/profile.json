@@ -1,0 +1,96 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "explosion",
+    "repo": "spaCy",
+    "source": "https://github.com/explosion/spaCy"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/explosion/spaCy/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/explosion/spaCy",
+    "generatedAt": "2026-06-26T18:32:32.262788Z",
+    "evidencePath": "repos/github.com/explosion/spaCy/evidence.md"
+  },
+  "purpose": "💫 Industrial-strength Natural Language Processing (NLP) in Python",
+  "name": "spaCy: Industrial-strength NLP",
+  "homepage": "https://spacy.io",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "Cython",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Jinja",
+    "MDX",
+    "Makefile",
+    "Python",
+    "Sass",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "natural-language-processing",
+    "data-science",
+    "machine-learning",
+    "python",
+    "cython",
+    "nlp",
+    "artificial-intelligence",
+    "ai",
+    "spacy",
+    "nlp-library",
+    "neural-network",
+    "neural-networks",
+    "deep-learning",
+    "named-entity-recognition",
+    "entity-linking",
+    "text-classification",
+    "tokenization"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://spacy.io/usage",
+    "gettingStarted": "https://spacy.io/usage#section-quickstart"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/explosion/spaCy/profile.json",
+    "repository": "/v0/repos/github.com/explosion/spaCy/index.json",
+    "trust": "/v0/repos/github.com/explosion/spaCy/trust.json",
+    "queryTemplate": "/v0/repos/github.com/explosion/spaCy/query?path={dot_path}",
+    "indexPath": "repos/github.com/explosion/spaCy/"
+  }
+}

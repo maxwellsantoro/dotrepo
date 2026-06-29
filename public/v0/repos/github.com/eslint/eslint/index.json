@@ -1,0 +1,53 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "eslint",
+    "repo": "eslint",
+    "source": "https://github.com/eslint/eslint"
+  },
+  "repository": {
+    "name": "ESLint",
+    "description": "ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.",
+    "homepage": "https://eslint.org",
+    "gettingStarted": "https://eslint.org/docs/latest/use/getting-started#prerequisites",
+    "ownersTeam": "@eslint/eslint-team",
+    "securityContact": "https://github.com/eslint/.github/blob/master/SECURITY.md"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/eslint/eslint/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/eslint/eslint",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@eslint/eslint-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/docs-ci.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/eslint/eslint/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/eslint/eslint/index.json",
+    "trust": "/v0/repos/github.com/eslint/eslint/trust.json",
+    "profile": "/v0/repos/github.com/eslint/eslint/profile.json",
+    "queryTemplate": "/v0/repos/github.com/eslint/eslint/query?path={dot_path}",
+    "indexPath": "repos/github.com/eslint/eslint/"
+  }
+}

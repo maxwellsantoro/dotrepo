@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "spring-projects",
+    "repo": "spring-framework",
+    "source": "https://github.com/spring-projects/spring-framework"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/spring-projects/spring-framework/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/spring-projects/spring-framework",
+    "generatedAt": "2026-06-29T01:08:23.209777Z",
+    "evidencePath": "repos/github.com/spring-projects/spring-framework/evidence.md"
+  },
+  "purpose": "Spring Framework",
+  "name": "Spring Framework",
+  "homepage": "https://spring.io/projects/spring-framework",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "AspectJ",
+    "CSS",
+    "FreeMarker",
+    "Go Template",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "PLpgSQL",
+    "Python",
+    "Ruby",
+    "Smarty",
+    "XSLT"
+  ],
+  "topics": [
+    "framework",
+    "spring",
+    "spring-framework"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://docs.spring.io/spring-framework/docs/current/javadoc-api/"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/spring-projects/security-advisories/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/spring-projects/spring-framework/profile.json",
+    "repository": "/v0/repos/github.com/spring-projects/spring-framework/index.json",
+    "trust": "/v0/repos/github.com/spring-projects/spring-framework/trust.json",
+    "queryTemplate": "/v0/repos/github.com/spring-projects/spring-framework/query?path={dot_path}",
+    "indexPath": "repos/github.com/spring-projects/spring-framework/"
+  }
+}

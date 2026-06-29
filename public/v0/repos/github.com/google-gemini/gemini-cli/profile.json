@@ -1,0 +1,88 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "google-gemini",
+    "repo": "gemini-cli",
+    "source": "https://github.com/google-gemini/gemini-cli"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/google-gemini/gemini-cli/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/google-gemini/gemini-cli",
+    "generatedAt": "2026-06-29T01:16:24.800647Z",
+    "evidencePath": "repos/github.com/google-gemini/gemini-cli/evidence.md"
+  },
+  "purpose": "Gemini CLI is an open-source AI agent that brings the power of Gemini directly into your terminal.",
+  "name": "Gemini CLI",
+  "homepage": "https://geminicli.com",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "C#",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "gemini",
+    "gemini-api",
+    "ai",
+    "ai-agents",
+    "cli",
+    "mcp-client",
+    "mcp-server"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://geminicli.com/docs/",
+    "gettingStarted": "https://www.geminicli.com/docs/get-started/installation"
+  },
+  "ownership": {
+    "maintainers": [
+      "@google-gemini/gemini-cli-maintainers",
+      "@google-gemini/gemini-cli-askmode-approvers",
+      "@google-gemini/gemini-cli-docs",
+      "@google-gemini/gemini-cli-prompt-approvers"
+    ],
+    "team": "@google-gemini/gemini-cli-maintainers",
+    "securityContact": "https://g.co/vulnz"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/google-gemini/gemini-cli/profile.json",
+    "repository": "/v0/repos/github.com/google-gemini/gemini-cli/index.json",
+    "trust": "/v0/repos/github.com/google-gemini/gemini-cli/trust.json",
+    "queryTemplate": "/v0/repos/github.com/google-gemini/gemini-cli/query?path={dot_path}",
+    "indexPath": "repos/github.com/google-gemini/gemini-cli/"
+  }
+}

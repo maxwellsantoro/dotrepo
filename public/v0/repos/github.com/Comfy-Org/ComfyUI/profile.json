@@ -1,0 +1,82 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Comfy-Org",
+    "repo": "ComfyUI",
+    "source": "https://github.com/Comfy-Org/ComfyUI"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Comfy-Org/ComfyUI/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Comfy-Org/ComfyUI",
+    "generatedAt": "2026-06-29T02:20:30.695142Z",
+    "evidencePath": "repos/github.com/Comfy-Org/ComfyUI/evidence.md"
+  },
+  "purpose": "The most powerful and modular AI engine for content creation.",
+  "name": "ComfyUI",
+  "homepage": "https://www.comfy.org/",
+  "license": "GPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "GLSL",
+    "Mako",
+    "Python"
+  ],
+  "topics": [
+    "stable-diffusion",
+    "pytorch",
+    "ai",
+    "python",
+    "comfy",
+    "comfyui"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://www.comfy.org/",
+    "gettingStarted": "https://docs.comfy.org/comfy-cli/getting-started"
+  },
+  "ownership": {
+    "maintainers": [
+      "@comfyanonymous",
+      "@kosinkadink",
+      "@guill",
+      "@alexisrolland",
+      "@rattus128",
+      "@kijai"
+    ],
+    "securityContact": "https://github.com/comfyanonymous/ComfyUI/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Comfy-Org/ComfyUI/profile.json",
+    "repository": "/v0/repos/github.com/Comfy-Org/ComfyUI/index.json",
+    "trust": "/v0/repos/github.com/Comfy-Org/ComfyUI/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Comfy-Org/ComfyUI/query?path={dot_path}",
+    "indexPath": "repos/github.com/Comfy-Org/ComfyUI/"
+  }
+}

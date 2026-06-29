@@ -1,0 +1,159 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "vscode",
+    "source": "https://github.com/microsoft/vscode"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/microsoft/vscode/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/microsoft/vscode",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/microsoft/vscode/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/microsoft/vscode",
+        "generated_at": "2026-06-29T02:21:17.206197Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Visual Studio Code",
+        "description": "This repository (\"`Code - OSS`\") is where we (Microsoft) develop the Visual Studio Code product together with the community.",
+        "homepage": "https://code.visualstudio.com",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "C",
+          "C#",
+          "C++",
+          "CSS",
+          "Clojure",
+          "CoffeeScript",
+          "Cuda",
+          "Dart",
+          "Dockerfile",
+          "F#",
+          "Go",
+          "Groovy",
+          "HLSL",
+          "HTML",
+          "Hack",
+          "Handlebars",
+          "Inno Setup",
+          "Java",
+          "JavaScript",
+          "Julia",
+          "Jupyter Notebook",
+          "Less",
+          "Lua",
+          "Makefile",
+          "Mermaid",
+          "Objective-C",
+          "Objective-C++",
+          "PHP",
+          "Perl",
+          "PowerShell",
+          "Pug",
+          "Python",
+          "R",
+          "Raku",
+          "Roff",
+          "Ruby",
+          "Rust",
+          "SCSS",
+          "Scilab",
+          "ShaderLab",
+          "Shell",
+          "Swift",
+          "TeX",
+          "Tree-sitter Query",
+          "TypeScript",
+          "Visual Basic .NET"
+        ],
+        "build": "npm run build",
+        "test": "npm test",
+        "topics": [
+          "editor",
+          "electron",
+          "visual-studio-code",
+          "typescript",
+          "microsoft"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@hediet",
+          "@alexdima",
+          "@lszomoru",
+          "@sandy081",
+          "@TylerLeonhardt",
+          "@rzhao271",
+          "@Yoyokrazy",
+          "@lramos15",
+          "@mjbvz",
+          "@alexr00",
+          "@sbatten"
+        ],
+        "team": null,
+        "security_contact": "https://aka.ms/SECURITY.md"
+      },
+      "docs": {
+        "root": "https://github.com/microsoft/vscode-docs",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/microsoft/vscode.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "0d2dfb2eb897808a27356ab6e5d33000acec4590",
+          "html_url": "https://github.com/microsoft/vscode",
+          "stars": 187002
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

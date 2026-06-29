@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "FiloSottile",
+    "repo": "mkcert",
+    "source": "https://github.com/FiloSottile/mkcert"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/FiloSottile/mkcert/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/FiloSottile/mkcert",
+    "generatedAt": "2026-06-29T01:17:37.06568Z",
+    "evidencePath": "repos/github.com/FiloSottile/mkcert/evidence.md"
+  },
+  "purpose": "A simple zero-config tool to make locally trusted development certificates with any names you'd like.",
+  "name": "mkcert",
+  "homepage": "https://mkcert.dev",
+  "license": "BSD-3-Clause",
+  "visibility": "public",
+  "languages": [
+    "Go"
+  ],
+  "topics": [
+    "https",
+    "tls",
+    "certificates",
+    "local-development",
+    "localhost",
+    "root-ca",
+    "macos",
+    "linux",
+    "windows",
+    "ios",
+    "firefox",
+    "chrome"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/FiloSottile/mkcert/profile.json",
+    "repository": "/v0/repos/github.com/FiloSottile/mkcert/index.json",
+    "trust": "/v0/repos/github.com/FiloSottile/mkcert/trust.json",
+    "queryTemplate": "/v0/repos/github.com/FiloSottile/mkcert/query?path={dot_path}",
+    "indexPath": "repos/github.com/FiloSottile/mkcert/"
+  }
+}

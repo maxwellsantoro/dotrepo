@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nestjs",
+    "repo": "nest",
+    "source": "https://github.com/nestjs/nest"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nestjs/nest/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nestjs/nest",
+    "generatedAt": "2026-06-26T18:33:38.049334Z",
+    "evidencePath": "repos/github.com/nestjs/nest/evidence.md"
+  },
+  "purpose": "A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications with TypeScript/JavaScript 🚀",
+  "name": "nest",
+  "homepage": "https://nestjs.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "JavaScript",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "nest",
+    "javascript",
+    "typescript",
+    "nodejs",
+    "framework",
+    "nodejs-framework",
+    "typescript-framework",
+    "javascript-framework",
+    "microservices",
+    "websockets",
+    "node",
+    "nestjs",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "support@nestjs.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nestjs/nest/profile.json",
+    "repository": "/v0/repos/github.com/nestjs/nest/index.json",
+    "trust": "/v0/repos/github.com/nestjs/nest/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nestjs/nest/query?path={dot_path}",
+    "indexPath": "repos/github.com/nestjs/nest/"
+  }
+}

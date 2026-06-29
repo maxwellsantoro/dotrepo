@@ -1,0 +1,45 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "boto",
+    "repo": "boto3",
+    "source": "https://github.com/boto/boto3"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/boto/boto3/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/boto/boto3",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `.github/CODEOWNERS`, `.github/SECURITY.md`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/boto/boto3/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/boto/boto3/trust.json",
+    "repository": "/v0/repos/github.com/boto/boto3/index.json",
+    "profile": "/v0/repos/github.com/boto/boto3/profile.json",
+    "queryTemplate": "/v0/repos/github.com/boto/boto3/query?path={dot_path}",
+    "indexPath": "repos/github.com/boto/boto3/"
+  }
+}

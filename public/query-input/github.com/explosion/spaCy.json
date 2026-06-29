@@ -1,0 +1,123 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "explosion",
+    "repo": "spaCy",
+    "source": "https://github.com/explosion/spaCy"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/explosion/spaCy/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/explosion/spaCy",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/explosion/spaCy/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/explosion/spaCy",
+        "generated_at": "2026-06-26T18:32:32.262788Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "spaCy: Industrial-strength NLP",
+        "description": "💫 Industrial-strength Natural Language Processing (NLP) in Python",
+        "homepage": "https://spacy.io",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "C++",
+          "Cython",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Jinja",
+          "MDX",
+          "Makefile",
+          "Python",
+          "Sass",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "natural-language-processing",
+          "data-science",
+          "machine-learning",
+          "python",
+          "cython",
+          "nlp",
+          "artificial-intelligence",
+          "ai",
+          "spacy",
+          "nlp-library",
+          "neural-network",
+          "neural-networks",
+          "deep-learning",
+          "named-entity-recognition",
+          "entity-linking",
+          "text-classification",
+          "tokenization"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://spacy.io/usage",
+        "getting_started": "https://spacy.io/usage#section-quickstart",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/explosion/spaCy.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "e67199550e365dacee28b109210c3a43e1477638",
+          "html_url": "https://github.com/explosion/spaCy",
+          "stars": 33699
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

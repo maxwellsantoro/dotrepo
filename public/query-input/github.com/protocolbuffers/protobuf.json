@@ -1,0 +1,134 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "protocolbuffers",
+    "repo": "protobuf",
+    "source": "https://github.com/protocolbuffers/protobuf"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/protocolbuffers/protobuf/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/protocolbuffers/protobuf",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/protocolbuffers/protobuf/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/protocolbuffers/protobuf",
+        "generated_at": "2026-06-26T18:35:12.854167Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Protocol Buffers",
+        "description": "Copyright 2008 Google LLC",
+        "homepage": "http://protobuf.dev",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Awk",
+          "Batchfile",
+          "C",
+          "C#",
+          "C++",
+          "CMake",
+          "Emacs Lisp",
+          "Java",
+          "Kotlin",
+          "Linker Script",
+          "Lua",
+          "M4",
+          "Makefile",
+          "NASL",
+          "Objective-C",
+          "Objective-C++",
+          "PHP",
+          "Pawn",
+          "PowerShell",
+          "Python",
+          "RenderScript",
+          "Ruby",
+          "Rust",
+          "Shell",
+          "Starlark",
+          "Swift",
+          "Vim Script"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "protobuf",
+          "protocol-buffers",
+          "protocol-compiler",
+          "protobuf-runtime",
+          "protoc",
+          "serialization",
+          "marshalling",
+          "rpc"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@protocolbuffers/protobuf-csharp",
+          "@protocolbuffers/protobuf-docs",
+          "@protocolbuffers/protobuf-java",
+          "@protocolbuffers/protobuf-kotlin",
+          "@protocolbuffers/protobuf-objc",
+          "@protocolbuffers/protobuf-php",
+          "@protocolbuffers/protobuf-python",
+          "@protocolbuffers/protobuf-ruby"
+        ],
+        "team": null,
+        "security_contact": "https://bughunters.google.com/report"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/protocolbuffers/protobuf.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "b89250d7eabc94c3c865ea148ba5bfebc40a6fb6",
+          "html_url": "https://github.com/protocolbuffers/protobuf",
+          "stars": 71414
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

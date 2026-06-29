@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "BurntSushi",
+    "repo": "ripgrep",
+    "source": "https://github.com/BurntSushi/ripgrep"
+  },
+  "repository": {
+    "name": "ripgrep",
+    "description": "ripgrep recursively searches directories for a regex pattern while respecting your gitignore",
+    "homepage": "https://github.com/BurntSushi/ripgrep",
+    "securityContact": "https://blog.burntsushi.net/about/"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/BurntSushi/ripgrep/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/BurntSushi/ripgrep",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/BurntSushi/ripgrep/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/BurntSushi/ripgrep/index.json",
+    "trust": "/v0/repos/github.com/BurntSushi/ripgrep/trust.json",
+    "profile": "/v0/repos/github.com/BurntSushi/ripgrep/profile.json",
+    "queryTemplate": "/v0/repos/github.com/BurntSushi/ripgrep/query?path={dot_path}",
+    "indexPath": "repos/github.com/BurntSushi/ripgrep/"
+  }
+}

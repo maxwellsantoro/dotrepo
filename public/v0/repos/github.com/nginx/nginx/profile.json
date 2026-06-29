@@ -1,0 +1,86 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nginx",
+    "repo": "nginx",
+    "source": "https://github.com/nginx/nginx"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nginx/nginx/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nginx/nginx",
+    "generatedAt": "2026-06-26T18:34:56.450728Z",
+    "evidencePath": "repos/github.com/nginx/nginx/evidence.md"
+  },
+  "purpose": "NGINX (pronounced \"engine x\" or \"en-jin-eks\") is the world's most popular Web Server, high performance Load Balancer, Reverse Proxy, API Gateway and Content Cache.",
+  "name": "How it works",
+  "homepage": "https://nginx.org/",
+  "license": "BSD-2-Clause",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "IL Assembly",
+    "Makefile",
+    "Perl",
+    "Shell",
+    "Vim Script",
+    "XS"
+  ],
+  "topics": [
+    "content-cache",
+    "load-balancer",
+    "reverse-proxy",
+    "web-server",
+    "http",
+    "https",
+    "quic",
+    "tls",
+    "tcp-proxy-server",
+    "mail-proxy-server",
+    "udp-proxy-server",
+    "http2",
+    "http3",
+    "nginx",
+    "security"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://nginx.org/en/docs/"
+  },
+  "ownership": {
+    "securityContact": "security-alert@nginx.org"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nginx/nginx/profile.json",
+    "repository": "/v0/repos/github.com/nginx/nginx/index.json",
+    "trust": "/v0/repos/github.com/nginx/nginx/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nginx/nginx/query?path={dot_path}",
+    "indexPath": "repos/github.com/nginx/nginx/"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nodejs",
+    "repo": "node",
+    "source": "https://github.com/nodejs/node"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nodejs/node/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nodejs/node",
+    "generatedAt": "2026-06-29T02:18:16.345856Z",
+    "evidencePath": "repos/github.com/nodejs/node/evidence.md"
+  },
+  "purpose": "Node.js is an open-source, cross-platform JavaScript runtime environment.",
+  "name": "Node.js",
+  "homepage": "https://nodejs.org",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "Batchfile",
+    "C",
+    "C++",
+    "Emacs Lisp",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Nix",
+    "Perl",
+    "Python",
+    "R",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "nodejs",
+    "javascript",
+    "node",
+    "js",
+    "runtime",
+    "mit",
+    "linux",
+    "macos",
+    "windows"
+  ],
+  "execution": {
+    "build": "make -C \"$TAR_DIR\" build-ci -j4 V=1"
+  },
+  "docs": {
+    "root": "https://nodejs.org"
+  },
+  "ownership": {
+    "maintainers": [
+      "@nodejs/tsc",
+      "@nodejs/build",
+      "@nodejs/web-infra",
+      "@nodejs/streams",
+      "@nodejs/net",
+      "@nodejs/crypto",
+      "@nodejs/http",
+      "@nodejs/http2",
+      "@nodejs/quic",
+      "@nodejs/loaders",
+      "@nodejs/vm",
+      "@nodejs/node-api",
+      "@nodejs/gyp",
+      "@nodejs/wasi",
+      "@nodejs/startup",
+      "@nodejs/realm",
+      "@nodejs/v8-update",
+      "@nodejs/actions",
+      "@nodejs/releasers",
+      "@nodejs/test_runner",
+      "@nodejs/single-executable",
+      "@nodejs/security-wg",
+      "@nodejs/security-stewards",
+      "@nodejs/web-standards",
+      "@nodejs/typescript",
+      "@nodejs/performance",
+      "@nodejs/url",
+      "@nodejs/sqlite",
+      "@nodejs/config",
+      "@nodejs/inspector",
+      "@nodejs/path",
+      "@nodejs/userland-migrations",
+      "@nodejs/devcontainer",
+      "@nodejs/ffi"
+    ],
+    "securityContact": "security@lists.openjsf.org"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nodejs/node/profile.json",
+    "repository": "/v0/repos/github.com/nodejs/node/index.json",
+    "trust": "/v0/repos/github.com/nodejs/node/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nodejs/node/query?path={dot_path}",
+    "indexPath": "repos/github.com/nodejs/node/"
+  }
+}

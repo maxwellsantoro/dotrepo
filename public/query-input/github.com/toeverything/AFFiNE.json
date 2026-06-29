@@ -1,0 +1,131 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "toeverything",
+    "repo": "AFFiNE",
+    "source": "https://github.com/toeverything/AFFiNE"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/toeverything/AFFiNE/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/toeverything/AFFiNE",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@toeverything/blocksuite-core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/toeverything/AFFiNE/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/toeverything/AFFiNE",
+        "generated_at": "2026-06-29T02:18:40.698187Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@toeverything/blocksuite-core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "AFFiNE.Pro Write, Draw and Plan All at Once",
+        "description": "A privacy-focused, local-first, open-source, and ready-to-use alternative for Notion & Miro.",
+        "homepage": "https://affine.pro",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "CSS",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Kotlin",
+          "Metal",
+          "NSIS",
+          "Objective-C",
+          "PLpgSQL",
+          "Ruby",
+          "Rust",
+          "Shell",
+          "Swift",
+          "TypeScript",
+          "Vue"
+        ],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "topics": [
+          "editor",
+          "crdt",
+          "knowledge-base",
+          "markdown",
+          "miro",
+          "notion",
+          "rust",
+          "rust-lang",
+          "whiteboard",
+          "wiki",
+          "workspace",
+          "notion-alternative",
+          "rust-language",
+          "table",
+          "tableview",
+          "app",
+          "notes",
+          "electron"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@toeverything/blocksuite-core"
+        ],
+        "team": "@toeverything/blocksuite-core",
+        "security_contact": "security@toeverything.info"
+      },
+      "docs": {
+        "root": "https://docs.affine.pro/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/toeverything/AFFiNE.git",
+          "default_branch": "canary",
+          "fork": false,
+          "head_sha": "1b9e21f2debcabc45f843c3c3645b2b6631765a5",
+          "html_url": "https://github.com/toeverything/AFFiNE",
+          "stars": 69883
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

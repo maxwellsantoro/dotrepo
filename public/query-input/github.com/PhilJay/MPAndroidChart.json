@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "PhilJay",
+    "repo": "MPAndroidChart",
+    "source": "https://github.com/PhilJay/MPAndroidChart"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/PhilJay/MPAndroidChart/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/PhilJay/MPAndroidChart",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/PhilJay/MPAndroidChart/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/PhilJay/MPAndroidChart",
+        "generated_at": "2026-06-29T01:19:11.203379Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Gradle Setup",
+        "description": "See the **documentation** for examples and general use of MPAndroidChart.",
+        "homepage": "https://philippjahoda.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Java"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "java",
+          "chart",
+          "graph",
+          "android",
+          "mpandroidchart"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/PhilJay/MPAndroidChart.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "9c7275a0596a7ac0e50ca566e680f7f9d73607af",
+          "html_url": "https://github.com/PhilJay/MPAndroidChart",
+          "stars": 38197
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

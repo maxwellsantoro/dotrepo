@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "WerWolv",
+    "repo": "ImHex",
+    "source": "https://github.com/WerWolv/ImHex"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/WerWolv/ImHex/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/WerWolv/ImHex",
+    "generatedAt": "2026-06-29T02:17:38.521332Z",
+    "evidencePath": "repos/github.com/WerWolv/ImHex/evidence.md"
+  },
+  "purpose": "Would you like to appear here as well? Contact us at imhex@werwolv.net!",
+  "name": "Discord Server",
+  "homepage": "https://imhex.werwolv.net/",
+  "license": "GPL-2.0",
+  "visibility": "public",
+  "languages": [
+    "C#",
+    "C++",
+    "CMake",
+    "GDB",
+    "GLSL",
+    "Objective-C",
+    "Python"
+  ],
+  "topics": [
+    "hex-editor",
+    "reverse-engineering",
+    "ips",
+    "dear-imgui",
+    "disassembler",
+    "analyzer",
+    "pattern-language",
+    "dark-mode",
+    "hacktoberfest",
+    "forensics",
+    "multi-platform",
+    "binary-analysis",
+    "c-plus-plus",
+    "static-analysis",
+    "windows",
+    "cybersecurity",
+    "hacking",
+    "cpp",
+    "linux",
+    "macos"
+  ],
+  "execution": {
+    "build": "-DCMAKE_C_COMPILER_LAUNCHER=ccache                                                        \\"
+  },
+  "docs": {
+    "root": "https://imhex.werwolv.net/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/WerWolv/ImHex/profile.json",
+    "repository": "/v0/repos/github.com/WerWolv/ImHex/index.json",
+    "trust": "/v0/repos/github.com/WerWolv/ImHex/trust.json",
+    "queryTemplate": "/v0/repos/github.com/WerWolv/ImHex/query?path={dot_path}",
+    "indexPath": "repos/github.com/WerWolv/ImHex/"
+  }
+}

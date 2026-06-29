@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "open-webui",
+    "repo": "open-webui",
+    "source": "https://github.com/open-webui/open-webui"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/open-webui/open-webui/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/open-webui/open-webui",
+    "generatedAt": "2026-06-29T02:18:18.594968Z",
+    "evidencePath": "repos/github.com/open-webui/open-webui/evidence.md"
+  },
+  "purpose": "**Open WebUI is an extensible, feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline.** It supports various LLM runners like **Ollama** and **OpenAI-compatible APIs**, with **built-in inference engine** for RAG, making it a **powerful AI deployment solution**.",
+  "name": "Open WebUI 👋",
+  "homepage": "https://openwebui.com",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Mako",
+    "Python",
+    "Shell",
+    "Svelte",
+    "TypeScript"
+  ],
+  "topics": [
+    "ollama",
+    "ollama-webui",
+    "llm",
+    "webui",
+    "self-hosted",
+    "llm-ui",
+    "llm-webui",
+    "llms",
+    "rag",
+    "ai",
+    "open-webui",
+    "ui",
+    "openai",
+    "mcp",
+    "openapi"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://openwebui.com",
+    "gettingStarted": "https://docs.openwebui.com/getting-started/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/open-webui/open-webui/profile.json",
+    "repository": "/v0/repos/github.com/open-webui/open-webui/index.json",
+    "trust": "/v0/repos/github.com/open-webui/open-webui/trust.json",
+    "queryTemplate": "/v0/repos/github.com/open-webui/open-webui/query?path={dot_path}",
+    "indexPath": "repos/github.com/open-webui/open-webui/"
+  }
+}

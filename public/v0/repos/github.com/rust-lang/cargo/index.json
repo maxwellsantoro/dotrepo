@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rust-lang",
+    "repo": "cargo",
+    "source": "https://github.com/rust-lang/cargo"
+  },
+  "repository": {
+    "name": "Cargo",
+    "description": "Cargo downloads your Rust project’s dependencies and compiles your project.",
+    "homepage": "https://doc.rust-lang.org/cargo"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/rust-lang/cargo/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/rust-lang/cargo",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/rust-lang/cargo/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/rust-lang/cargo/index.json",
+    "trust": "/v0/repos/github.com/rust-lang/cargo/trust.json",
+    "profile": "/v0/repos/github.com/rust-lang/cargo/profile.json",
+    "queryTemplate": "/v0/repos/github.com/rust-lang/cargo/query?path={dot_path}",
+    "indexPath": "repos/github.com/rust-lang/cargo/"
+  }
+}

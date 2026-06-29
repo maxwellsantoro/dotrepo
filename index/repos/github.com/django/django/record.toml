@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/django/django"
-generated_at = "2026-06-29T00:55:04.601253Z"
+generated_at = "2026-06-29T02:17:50.949412Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Left `repo.test` unset because `package.json` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "django"
@@ -30,6 +31,7 @@ languages = [
     "Smarty",
 ]
 build = "python -m build"
+test = "python -m pytest"
 topics = [
     "python",
     "django",
@@ -46,6 +48,9 @@ topics = [
 maintainers = []
 security_contact = "https://www.djangoproject.com/security/"
 
+[docs]
+root = "https://www.djangoproject.com/"
+
 [relations]
 references = []
 
@@ -56,4 +61,4 @@ default_branch = "main"
 fork = false
 head_sha = "e78991410b78391bc07a4b5010b273dfec814ff6"
 html_url = "https://github.com/django/django"
-stars = 88130
+stars = 88131

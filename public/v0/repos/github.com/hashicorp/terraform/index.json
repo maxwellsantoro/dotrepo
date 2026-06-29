@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hashicorp",
+    "repo": "terraform",
+    "source": "https://github.com/hashicorp/terraform"
+  },
+  "repository": {
+    "name": "Terraform",
+    "description": "Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently.",
+    "homepage": "http://developer.hashicorp.com/terraform",
+    "docsRoot": "https://developer.hashicorp.com/terraform/docs",
+    "gettingStarted": "https://learn.hashicorp.com/terraform#getting-started",
+    "ownersTeam": "@hashicorp/terraform-core"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/hashicorp/terraform/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/hashicorp/terraform",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/terraform-core` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/hashicorp/terraform/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/hashicorp/terraform/index.json",
+    "trust": "/v0/repos/github.com/hashicorp/terraform/trust.json",
+    "profile": "/v0/repos/github.com/hashicorp/terraform/profile.json",
+    "queryTemplate": "/v0/repos/github.com/hashicorp/terraform/query?path={dot_path}",
+    "indexPath": "repos/github.com/hashicorp/terraform/"
+  }
+}

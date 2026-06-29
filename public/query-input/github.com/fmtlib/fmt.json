@@ -1,0 +1,116 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "fmtlib",
+    "repo": "fmt",
+    "source": "https://github.com/fmtlib/fmt"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/fmtlib/fmt/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/fmtlib/fmt",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/fmtlib/fmt/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/fmtlib/fmt",
+        "generated_at": "2026-06-26T18:35:30.264497Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Benchmarks",
+        "description": "**{fmt}** is an open-source formatting library providing a fast and safe alternative to C stdio and C++ iostreams.",
+        "homepage": "https://fmt.dev",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "C++",
+          "CMake",
+          "Cuda",
+          "Makefile",
+          "Python",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "formatting",
+          "printf",
+          "output",
+          "chrono",
+          "performance",
+          "multiplatform",
+          "cross-platform",
+          "cpp",
+          "ranges",
+          "floating-point",
+          "unicode",
+          "c-plus-plus"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@vitaut"
+        ],
+        "team": null,
+        "security_contact": "https://github.com/fmtlib/fmt/security/advisories/new"
+      },
+      "docs": {
+        "root": "https://fmt.dev",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/fmtlib/fmt.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "719823cc6433a08b8dd830ba0a37b6c9fae4cc03",
+          "html_url": "https://github.com/fmtlib/fmt",
+          "stars": 23627
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

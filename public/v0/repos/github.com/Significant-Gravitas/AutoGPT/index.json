@@ -1,0 +1,54 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Significant-Gravitas",
+    "repo": "AutoGPT",
+    "source": "https://github.com/Significant-Gravitas/AutoGPT"
+  },
+  "repository": {
+    "name": "AutoGPT",
+    "description": "**AutoGPT** is a powerful platform that allows you to create, deploy, and manage continuous AI agents that automate complex workflows.",
+    "homepage": "https://agpt.co",
+    "docsRoot": "https://docs.agpt.co",
+    "gettingStarted": "https://agpt.co/docs/platform/getting-started/getting-started",
+    "ownersTeam": "@Significant-Gravitas/maintainers",
+    "securityContact": "https://github.com/Significant-Gravitas/AutoGPT/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Significant-Gravitas/AutoGPT/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Significant-Gravitas/AutoGPT",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.test` from `.github/workflows/classic-autogpt-ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Significant-Gravitas/AutoGPT/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Significant-Gravitas/AutoGPT/index.json",
+    "trust": "/v0/repos/github.com/Significant-Gravitas/AutoGPT/trust.json",
+    "profile": "/v0/repos/github.com/Significant-Gravitas/AutoGPT/profile.json",
+    "queryTemplate": "/v0/repos/github.com/Significant-Gravitas/AutoGPT/query?path={dot_path}",
+    "indexPath": "repos/github.com/Significant-Gravitas/AutoGPT/"
+  }
+}

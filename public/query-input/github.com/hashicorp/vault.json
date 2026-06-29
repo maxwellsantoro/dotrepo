@@ -1,0 +1,122 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hashicorp",
+    "repo": "vault",
+    "source": "https://github.com/hashicorp/vault"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/hashicorp/vault/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/hashicorp/vault",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/hashicorp/vault/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/hashicorp/vault",
+        "generated_at": "2026-06-29T01:58:01.036367Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Vault",
+        "description": "**Please note**: We take Vault's security and our users' trust very seriously.",
+        "homepage": "https://developer.hashicorp.com/vault",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "HCL",
+          "HTML",
+          "Handlebars",
+          "JavaScript",
+          "Makefile",
+          "SCSS",
+          "Shell",
+          "Smarty",
+          "TypeScript"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "vault",
+          "go",
+          "secrets"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@hashicorp/vault",
+          "@hashicorp/vault-ecosystem",
+          "@hashicorp/web-presence",
+          "@hashicorp/vault-education-approvers",
+          "@hashicorp/vault-ui",
+          "@hashicorp/vault-frontend",
+          "@hashicorp/github-secure-vault-core",
+          "@hashicorp/team-vault-quality",
+          "@hashicorp/vault-crypto",
+          "@hashicorp/vault-customer-engineering"
+        ],
+        "team": "@hashicorp/vault",
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://developer.hashicorp.com/vault/docs",
+        "getting_started": "https://learn.hashicorp.com/collections/vault/getting-started",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/hashicorp/vault.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "042e17bf44393d22158e45b6b25764d415edea58",
+          "html_url": "https://github.com/hashicorp/vault",
+          "stars": 35848
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

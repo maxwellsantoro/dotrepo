@@ -1,0 +1,101 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "storybookjs",
+    "repo": "storybook",
+    "source": "https://github.com/storybookjs/storybook"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/storybookjs/storybook/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/storybookjs/storybook",
+    "generatedAt": "2026-06-29T02:18:31.843723Z",
+    "evidencePath": "repos/github.com/storybookjs/storybook/evidence.md"
+  },
+  "purpose": "Build bulletproof UI components faster",
+  "name": "Storybook",
+  "homepage": "https://storybook.js.org",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "AppleScript",
+    "CSS",
+    "EJS",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "MDX",
+    "Pug",
+    "SCSS",
+    "Shell",
+    "Svelte",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "storybook",
+    "styleguide",
+    "testing",
+    "components",
+    "webpack",
+    "ui",
+    "react",
+    "vue",
+    "react-native",
+    "design-systems",
+    "javascript",
+    "angular",
+    "svelte",
+    "web-components",
+    "typescript",
+    "html",
+    "vite",
+    "workshop",
+    "documentation",
+    "stories"
+  ],
+  "execution": {
+    "test": "yarn test"
+  },
+  "docs": {
+    "root": "https://storybook.js.org/docs?ref=readme"
+  },
+  "ownership": {
+    "maintainers": [
+      "@kylegach",
+      "@jonniebigodes"
+    ],
+    "securityContact": "https://x.com/storybookjs"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/storybookjs/storybook/profile.json",
+    "repository": "/v0/repos/github.com/storybookjs/storybook/index.json",
+    "trust": "/v0/repos/github.com/storybookjs/storybook/trust.json",
+    "queryTemplate": "/v0/repos/github.com/storybookjs/storybook/query?path={dot_path}",
+    "indexPath": "repos/github.com/storybookjs/storybook/"
+  }
+}

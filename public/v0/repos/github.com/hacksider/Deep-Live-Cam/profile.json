@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "hacksider",
+    "repo": "Deep-Live-Cam",
+    "source": "https://github.com/hacksider/Deep-Live-Cam"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/hacksider/Deep-Live-Cam/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/hacksider/Deep-Live-Cam",
+    "generatedAt": "2026-06-29T01:17:47.413093Z",
+    "evidencePath": "repos/github.com/hacksider/Deep-Live-Cam/evidence.md"
+  },
+  "purpose": "Real-time face swap and video deepfake with a single click and only a single image.",
+  "name": "Deep-Live-Cam 2.1.6",
+  "homepage": "https://deeplivecam.net/",
+  "license": "AGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Python"
+  ],
+  "topics": [
+    "ai-face",
+    "deepfake",
+    "video-deepfake",
+    "deepfake-webcam",
+    "fake-webcam",
+    "realtime-deepfake",
+    "realtime-face-changer",
+    "faceswap",
+    "webcam",
+    "ai-deep-fake",
+    "ai-webcam",
+    "ai",
+    "artificial-intelligence",
+    "webcamera",
+    "deep-fake",
+    "real-time-deepfake",
+    "gan",
+    "realtime"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/hacksider/Deep-Live-Cam/profile.json",
+    "repository": "/v0/repos/github.com/hacksider/Deep-Live-Cam/index.json",
+    "trust": "/v0/repos/github.com/hacksider/Deep-Live-Cam/trust.json",
+    "queryTemplate": "/v0/repos/github.com/hacksider/Deep-Live-Cam/query?path={dot_path}",
+    "indexPath": "repos/github.com/hacksider/Deep-Live-Cam/"
+  }
+}

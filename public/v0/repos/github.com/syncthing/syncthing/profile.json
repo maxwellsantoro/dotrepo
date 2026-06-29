@@ -1,0 +1,77 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "syncthing",
+    "repo": "syncthing",
+    "source": "https://github.com/syncthing/syncthing"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/syncthing/syncthing/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/syncthing/syncthing",
+    "generatedAt": "2026-06-26T18:31:24.607826Z",
+    "evidencePath": "repos/github.com/syncthing/syncthing/evidence.md"
+  },
+  "purpose": "Syncthing is a **continuous file synchronization program**.",
+  "name": "Goals",
+  "homepage": "https://syncthing.net/",
+  "license": "MPL-2.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "HTML",
+    "JavaScript",
+    "PowerShell",
+    "Ruby",
+    "Shell"
+  ],
+  "topics": [
+    "synchronization",
+    "go",
+    "peer-to-peer",
+    "p2p"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "security@syncthing.net"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/syncthing/syncthing/profile.json",
+    "repository": "/v0/repos/github.com/syncthing/syncthing/index.json",
+    "trust": "/v0/repos/github.com/syncthing/syncthing/trust.json",
+    "queryTemplate": "/v0/repos/github.com/syncthing/syncthing/query?path={dot_path}",
+    "indexPath": "repos/github.com/syncthing/syncthing/"
+  }
+}

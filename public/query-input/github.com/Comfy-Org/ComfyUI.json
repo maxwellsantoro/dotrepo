@@ -1,0 +1,112 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Comfy-Org",
+    "repo": "ComfyUI",
+    "source": "https://github.com/Comfy-Org/ComfyUI"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Comfy-Org/ComfyUI/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Comfy-Org/ComfyUI",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Comfy-Org/ComfyUI/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Comfy-Org/ComfyUI",
+        "generated_at": "2026-06-29T02:20:30.695142Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "ComfyUI",
+        "description": "The most powerful and modular AI engine for content creation.",
+        "homepage": "https://www.comfy.org/",
+        "license": "GPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "GLSL",
+          "Mako",
+          "Python"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "stable-diffusion",
+          "pytorch",
+          "ai",
+          "python",
+          "comfy",
+          "comfyui"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@comfyanonymous",
+          "@kosinkadink",
+          "@guill",
+          "@alexisrolland",
+          "@rattus128",
+          "@kijai"
+        ],
+        "team": null,
+        "security_contact": "https://github.com/comfyanonymous/ComfyUI/security/advisories/new"
+      },
+      "docs": {
+        "root": "https://www.comfy.org/",
+        "getting_started": "https://docs.comfy.org/comfy-cli/getting-started",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Comfy-Org/ComfyUI.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "f19735759e8973bd2ead76f08d9cc45abc1f98e4",
+          "html_url": "https://github.com/Comfy-Org/ComfyUI",
+          "stars": 118667
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

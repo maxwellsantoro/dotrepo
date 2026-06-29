@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "vitest-dev",
+    "repo": "vitest",
+    "source": "https://github.com/vitest-dev/vitest"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/vitest-dev/vitest/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/vitest-dev/vitest",
+    "generatedAt": "2026-06-29T02:01:21.690353Z",
+    "evidencePath": "repos/github.com/vitest-dev/vitest/evidence.md"
+  },
+  "purpose": "Next generation testing framework powered by Vite.",
+  "name": "Vitest",
+  "homepage": "https://vitest.dev",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "Imba",
+    "JavaScript",
+    "Less",
+    "SCSS",
+    "Sass",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "vite",
+    "test",
+    "testing-tools"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {
+    "root": "https://vitest.dev",
+    "gettingStarted": "https://vitest.dev/guide/"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/vitest-dev/vitest/security"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/vitest-dev/vitest/profile.json",
+    "repository": "/v0/repos/github.com/vitest-dev/vitest/index.json",
+    "trust": "/v0/repos/github.com/vitest-dev/vitest/trust.json",
+    "queryTemplate": "/v0/repos/github.com/vitest-dev/vitest/query?path={dot_path}",
+    "indexPath": "repos/github.com/vitest-dev/vitest/"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "mudler",
+    "repo": "LocalAI",
+    "source": "https://github.com/mudler/LocalAI"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/mudler/LocalAI/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/mudler/LocalAI",
+    "generatedAt": "2026-06-29T01:18:58.852385Z",
+    "evidencePath": "repos/github.com/mudler/LocalAI/evidence.md"
+  },
+  "purpose": "**LocalAI** is the open-source AI engine.",
+  "name": "LocalAI stars",
+  "homepage": "https://localai.io",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Nix",
+    "Python",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "llama",
+    "ai",
+    "llm",
+    "stable-diffusion",
+    "api",
+    "tts",
+    "musicgen",
+    "mamba",
+    "audio-generation",
+    "image-generation",
+    "text-generation",
+    "rerank",
+    "distributed",
+    "libp2p",
+    "decentralized",
+    "object-detection",
+    "mcp",
+    "agents"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://localai.io/",
+    "gettingStarted": "https://localai.io/basics/getting_started/"
+  },
+  "ownership": {
+    "securityContact": "security@localai.io"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/mudler/LocalAI/profile.json",
+    "repository": "/v0/repos/github.com/mudler/LocalAI/index.json",
+    "trust": "/v0/repos/github.com/mudler/LocalAI/trust.json",
+    "queryTemplate": "/v0/repos/github.com/mudler/LocalAI/query?path={dot_path}",
+    "indexPath": "repos/github.com/mudler/LocalAI/"
+  }
+}

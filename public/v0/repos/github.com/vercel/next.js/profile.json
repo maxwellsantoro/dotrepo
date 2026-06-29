@@ -1,0 +1,93 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "vercel",
+    "repo": "next.js",
+    "source": "https://github.com/vercel/next.js"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/vercel/next.js/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/vercel/next.js",
+    "generatedAt": "2026-06-29T02:18:43.293822Z",
+    "evidencePath": "repos/github.com/vercel/next.js/evidence.md"
+  },
+  "purpose": "The React Framework",
+  "name": "next.js",
+  "homepage": "https://nextjs.org",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "Pug",
+    "Python",
+    "Rust",
+    "SCSS",
+    "Sass",
+    "Shell",
+    "TypeScript",
+    "WebAssembly"
+  ],
+  "topics": [
+    "react",
+    "server-rendering",
+    "universal",
+    "node",
+    "components",
+    "browser",
+    "nextjs",
+    "vercel",
+    "static-site-generator",
+    "hybrid",
+    "ssg",
+    "static",
+    "blog",
+    "compiler"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://nextjs.org"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/vercel/next.js/profile.json",
+    "repository": "/v0/repos/github.com/vercel/next.js/index.json",
+    "trust": "/v0/repos/github.com/vercel/next.js/trust.json",
+    "queryTemplate": "/v0/repos/github.com/vercel/next.js/query?path={dot_path}",
+    "indexPath": "repos/github.com/vercel/next.js/"
+  }
+}

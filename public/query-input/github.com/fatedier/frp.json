@@ -1,0 +1,105 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "fatedier",
+    "repo": "frp",
+    "source": "https://github.com/fatedier/frp"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/fatedier/frp/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/fatedier/frp",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/fatedier/frp/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/fatedier/frp",
+        "generated_at": "2026-06-29T00:42:30.425175Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "frp",
+        "description": "README | 中文文档",
+        "homepage": "https://github.com/fatedier/frp",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Go",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "SCSS",
+          "Shell",
+          "TypeScript",
+          "Vue"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "proxy",
+          "reverse-proxy",
+          "tunnel",
+          "nat",
+          "go",
+          "firewall",
+          "frp",
+          "expose",
+          "http-proxy",
+          "p2p"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/fatedier/frp.git",
+          "default_branch": "dev",
+          "fork": false,
+          "head_sha": "ae1c0504ec5c1b87a6e7580db5a403d44b95d4b6",
+          "html_url": "https://github.com/fatedier/frp",
+          "stars": 107631
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

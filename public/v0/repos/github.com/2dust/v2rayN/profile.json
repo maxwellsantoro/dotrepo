@@ -1,0 +1,72 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "2dust",
+    "repo": "v2rayN",
+    "source": "https://github.com/2dust/v2rayN"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/2dust/v2rayN/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/2dust/v2rayN",
+    "generatedAt": "2026-06-29T00:42:39.286154Z",
+    "evidencePath": "repos/github.com/2dust/v2rayN/evidence.md"
+  },
+  "purpose": "Download the latest release here:",
+  "name": "v2rayN",
+  "homepage": "https://v2rayn.2dust.link",
+  "license": "GPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "C#",
+    "Shell"
+  ],
+  "topics": [
+    "windows",
+    "proxy",
+    "socks5",
+    "shadowsocks",
+    "trojan",
+    "v2ray",
+    "v2fly",
+    "xray",
+    "vmess",
+    "vless",
+    "xtls"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/2dust/v2rayN/profile.json",
+    "repository": "/v0/repos/github.com/2dust/v2rayN/index.json",
+    "trust": "/v0/repos/github.com/2dust/v2rayN/trust.json",
+    "queryTemplate": "/v0/repos/github.com/2dust/v2rayN/query?path={dot_path}",
+    "indexPath": "repos/github.com/2dust/v2rayN/"
+  }
+}

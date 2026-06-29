@@ -2,21 +2,20 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/grpc/grpc"
-generated_at = "2026-06-26T18:35:15.550485Z"
+generated_at = "2026-06-29T02:21:09.490032Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "gRPC – An RPC library and framework"
+name = "gRPC"
 description = "C++ based gRPC (C++, Python, Ruby, Objective-C, PHP, C#)"
 homepage = "https://grpc.io"
 license = "Apache-2.0"
@@ -58,7 +57,7 @@ maintainers = [
     "@ctiller",
     "@sergiitk",
 ]
-security_contact = "unknown"
+security_contact = "https://github.com/grpc/proposal/blob/master/P4-grpc-cve-process.md"
 
 [docs]
 root = "https://grpc.io/docs/"
@@ -71,6 +70,6 @@ archived = false
 clone_url = "https://github.com/grpc/grpc.git"
 default_branch = "master"
 fork = false
-head_sha = "fa1c20dfa63c163f4adef84b78a994305d7d9e45"
+head_sha = "1c2fef52e7976d59e3fee7e8ed306f1e10924318"
 html_url = "https://github.com/grpc/grpc"
-stars = 44931
+stars = 44932

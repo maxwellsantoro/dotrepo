@@ -1,0 +1,67 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "serde-rs",
+    "repo": "serde",
+    "source": "https://github.com/serde-rs/serde"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/serde-rs/serde/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/serde-rs/serde",
+    "generatedAt": "2026-06-29T01:58:20.336508Z",
+    "evidencePath": "repos/github.com/serde-rs/serde/evidence.md"
+  },
+  "purpose": "Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.",
+  "name": "Serde",
+  "homepage": "https://serde.rs/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Rust"
+  ],
+  "topics": [
+    "rust",
+    "serde",
+    "derive",
+    "no-std"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/serde-rs/serde/profile.json",
+    "repository": "/v0/repos/github.com/serde-rs/serde/index.json",
+    "trust": "/v0/repos/github.com/serde-rs/serde/trust.json",
+    "queryTemplate": "/v0/repos/github.com/serde-rs/serde/query?path={dot_path}",
+    "indexPath": "repos/github.com/serde-rs/serde/"
+  }
+}

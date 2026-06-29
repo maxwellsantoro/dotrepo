@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "cli",
+    "repo": "cli",
+    "source": "https://github.com/cli/cli"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/cli/cli/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/cli/cli",
+    "generatedAt": "2026-06-29T00:45:23.946081Z",
+    "evidencePath": "repos/github.com/cli/cli/evidence.md"
+  },
+  "purpose": "GitHub’s official command line tool",
+  "name": "GitHub CLI",
+  "homepage": "https://cli.github.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Go",
+    "Makefile",
+    "PowerShell",
+    "Shell"
+  ],
+  "topics": [
+    "github-api-v4",
+    "cli",
+    "git",
+    "golang"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@cli/code-reviewers",
+      "@cli/codespaces",
+      "@cli/package-security",
+      "@cli/tuf-root-reviewers",
+      "@cli/skills"
+    ],
+    "team": "@cli/code-reviewers",
+    "securityContact": "https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/cli/cli/profile.json",
+    "repository": "/v0/repos/github.com/cli/cli/index.json",
+    "trust": "/v0/repos/github.com/cli/cli/trust.json",
+    "queryTemplate": "/v0/repos/github.com/cli/cli/query?path={dot_path}",
+    "indexPath": "repos/github.com/cli/cli/"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "webpack",
+    "repo": "webpack",
+    "source": "https://github.com/webpack/webpack"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/webpack/webpack/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/webpack/webpack",
+    "generatedAt": "2026-06-26T18:33:49.152584Z",
+    "evidencePath": "repos/github.com/webpack/webpack/evidence.md"
+  },
+  "purpose": "Webpack is a module bundler.",
+  "name": "webpack",
+  "homepage": "https://webpack.js.org",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "CoffeeScript",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "Perl",
+    "Pug",
+    "SCSS",
+    "TypeScript",
+    "WebAssembly"
+  ],
+  "topics": [
+    "webpack",
+    "javascript",
+    "module-bundler",
+    "loaders",
+    "plugins",
+    "build-tool",
+    "web",
+    "web-performance",
+    "compiler",
+    "javascript-compiler",
+    "commonjs",
+    "amd",
+    "esm",
+    "es6",
+    "es2015",
+    "javascript-modules"
+  ],
+  "execution": {
+    "build": "yarn build:examples",
+    "test": "yarn test"
+  },
+  "docs": {
+    "root": "https://github.com/webpack/webpack.js.org",
+    "gettingStarted": "https://webpack.js.org/guides/getting-started"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/webpack/webpack/profile.json",
+    "repository": "/v0/repos/github.com/webpack/webpack/index.json",
+    "trust": "/v0/repos/github.com/webpack/webpack/trust.json",
+    "queryTemplate": "/v0/repos/github.com/webpack/webpack/query?path={dot_path}",
+    "indexPath": "repos/github.com/webpack/webpack/"
+  }
+}

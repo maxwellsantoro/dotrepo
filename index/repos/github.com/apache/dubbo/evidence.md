@@ -2,8 +2,8 @@
 
 - Imported repository name and description from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Left `repo.build` unset because `.github/workflows/build-and-test-pr.yml`, `.github/workflows/build-and-test-scheduled-3.1.yml`, `.github/workflows/build-and-test-scheduled-3.2.yml`, `.github/workflows/build-and-test-scheduled-3.3.yml`, and `.github/workflows/release-test.yml` suggested conflicting build commands.
-- Left `repo.test` unset because `.github/workflows/build-and-test-pr.yml`, `.github/workflows/build-and-test-scheduled-3.1.yml`, `.github/workflows/build-and-test-scheduled-3.2.yml`, `.github/workflows/build-and-test-scheduled-3.3.yml`, and `.github/workflows/release-test.yml` suggested conflicting test commands.
+- Left `repo.build` unset because `.github/workflows/build-and-test-pr.yml` suggested an unsafe shell-like command.
+- Left `repo.test` unset because `.github/workflows/build-and-test-pr.yml` suggested an unsafe shell-like command.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

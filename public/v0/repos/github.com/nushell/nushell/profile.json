@@ -1,0 +1,75 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nushell",
+    "repo": "nushell",
+    "source": "https://github.com/nushell/nushell"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nushell/nushell/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nushell/nushell",
+    "generatedAt": "2026-06-29T01:17:12.042861Z",
+    "evidencePath": "repos/github.com/nushell/nushell/evidence.md"
+  },
+  "purpose": "A new type of shell.",
+  "name": "Nushell",
+  "homepage": "https://www.nushell.sh/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Dockerfile",
+    "JavaScript",
+    "Nix",
+    "Nushell",
+    "PowerShell",
+    "Python",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "shell",
+    "rust",
+    "nushell"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://discord.gg/NtAbbGn"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nushell/nushell/profile.json",
+    "repository": "/v0/repos/github.com/nushell/nushell/index.json",
+    "trust": "/v0/repos/github.com/nushell/nushell/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nushell/nushell/query?path={dot_path}",
+    "indexPath": "repos/github.com/nushell/nushell/"
+  }
+}

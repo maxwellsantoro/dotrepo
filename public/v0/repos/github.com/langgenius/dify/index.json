@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "langgenius",
+    "repo": "dify",
+    "source": "https://github.com/langgenius/dify"
+  },
+  "repository": {
+    "name": "chat on Discord",
+    "description": "Before installing Dify, make sure your machine meets the following minimum system requirements:",
+    "homepage": "https://dify.ai",
+    "docsRoot": "https://docs.dify.ai",
+    "gettingStarted": "https://docs.dify.ai/getting-started/install-self-hosted",
+    "securityContact": "https://github.com/langgenius/dify/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/langgenius/dify/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/langgenius/dify",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/cli-edge.yml`. Left `repo.test` unset because `.github/workflows/api-tests.yml` and `.github/workflows/cli-e2e.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/langgenius/dify/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/langgenius/dify/index.json",
+    "trust": "/v0/repos/github.com/langgenius/dify/trust.json",
+    "profile": "/v0/repos/github.com/langgenius/dify/profile.json",
+    "queryTemplate": "/v0/repos/github.com/langgenius/dify/query?path={dot_path}",
+    "indexPath": "repos/github.com/langgenius/dify/"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nginx",
+    "repo": "nginx",
+    "source": "https://github.com/nginx/nginx"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/nginx/nginx/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/nginx/nginx",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/nginx/nginx/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/nginx/nginx",
+        "generated_at": "2026-06-26T18:34:56.450728Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "How it works",
+        "description": "NGINX (pronounced \"engine x\" or \"en-jin-eks\") is the world's most popular Web Server, high performance Load Balancer, Reverse Proxy, API Gateway and Content Cache.",
+        "homepage": "https://nginx.org/",
+        "license": "BSD-2-Clause",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "C++",
+          "IL Assembly",
+          "Makefile",
+          "Perl",
+          "Shell",
+          "Vim Script",
+          "XS"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "content-cache",
+          "load-balancer",
+          "reverse-proxy",
+          "web-server",
+          "http",
+          "https",
+          "quic",
+          "tls",
+          "tcp-proxy-server",
+          "mail-proxy-server",
+          "udp-proxy-server",
+          "http2",
+          "http3",
+          "nginx",
+          "security"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security-alert@nginx.org"
+      },
+      "docs": {
+        "root": "https://nginx.org/en/docs/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/nginx/nginx.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "42f8df65b694fa193cc2519f91cedd08fbe38a2c",
+          "html_url": "https://github.com/nginx/nginx",
+          "stars": 31017
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

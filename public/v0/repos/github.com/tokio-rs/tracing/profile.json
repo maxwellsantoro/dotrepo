@@ -1,0 +1,83 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tokio-rs",
+    "repo": "tracing",
+    "source": "https://github.com/tokio-rs/tracing"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/tokio-rs/tracing/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/tokio-rs/tracing",
+    "generatedAt": "2026-06-26T17:45:06.077058Z",
+    "evidencePath": "repos/github.com/tokio-rs/tracing/evidence.md"
+  },
+  "purpose": "Application level tracing for Rust.",
+  "name": "Branch set-up",
+  "homepage": "https://tracing.rs",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "rust",
+    "rust-lang",
+    "tracing",
+    "logging",
+    "logging-library",
+    "logging-facade",
+    "logging-and-metrics",
+    "diagnostics"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@hawkw",
+      "@hds",
+      "@tokio-rs/tracing",
+      "@yaahc",
+      "@davidbarsky"
+    ],
+    "team": "@tokio-rs/tracing",
+    "securityContact": "security@tokio.rs"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/tokio-rs/tracing/profile.json",
+    "repository": "/v0/repos/github.com/tokio-rs/tracing/index.json",
+    "trust": "/v0/repos/github.com/tokio-rs/tracing/trust.json",
+    "queryTemplate": "/v0/repos/github.com/tokio-rs/tracing/query?path={dot_path}",
+    "indexPath": "repos/github.com/tokio-rs/tracing/"
+  }
+}

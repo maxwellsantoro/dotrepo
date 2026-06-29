@@ -1,0 +1,113 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "huggingface",
+    "repo": "datasets",
+    "source": "https://github.com/huggingface/datasets"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/huggingface/datasets/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/huggingface/datasets",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/huggingface/datasets/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/huggingface/datasets",
+        "generated_at": "2026-06-26T18:32:25.793475Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Key Features",
+        "description": "🤗 Datasets is a lightweight library providing **two** main features:",
+        "homepage": "https://huggingface.co/docs/datasets",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Makefile",
+          "Python"
+        ],
+        "build": null,
+        "test": "python -m pytest",
+        "topics": [
+          "nlp",
+          "datasets",
+          "pytorch",
+          "tensorflow",
+          "pandas",
+          "numpy",
+          "natural-language-processing",
+          "computer-vision",
+          "machine-learning",
+          "deep-learning",
+          "speech",
+          "ai",
+          "artificial-intelligence",
+          "llm",
+          "dataset-hub",
+          "huggingface"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@huggingface.co"
+      },
+      "docs": {
+        "root": null,
+        "getting_started": "https://huggingface.co/docs/datasets/quickstart",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/huggingface/datasets.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "b713dcdffa92ada37c569e6f1419ce94fc170b0c",
+          "html_url": "https://github.com/huggingface/datasets",
+          "stars": 21657
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -2,14 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/Significant-Gravitas/AutoGPT"
-generated_at = "2026-06-29T00:47:18.973063Z"
+generated_at = "2026-06-29T02:17:34.788144Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.test` unset because `.github/workflows/classic-autogpt-ci.yml`, `.github/workflows/classic-autogpt-docker-ci.yml`, and `.github/workflows/classic-forge-ci.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.test` from `.github/workflows/classic-autogpt-ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "AutoGPT"
@@ -30,6 +34,7 @@ languages = [
     "Shell",
     "TypeScript",
 ]
+test = 'poetry run pytest -vv \'
 topics = [
     "ai",
     "openai",
@@ -70,4 +75,4 @@ default_branch = "master"
 fork = false
 head_sha = "e2711b1748bdc3fe702ab4e44c6a11df98458c53"
 html_url = "https://github.com/Significant-Gravitas/AutoGPT"
-stars = 185202
+stars = 185201

@@ -797,23 +797,129 @@ pub(crate) fn is_quality_url(url: &str) -> bool {
 
 pub(crate) fn is_actionable_security_url(url: &str) -> bool {
     let trimmed = url.trim();
+    if trimmed.is_empty() {
+        return false;
+    }
 
-    // GitHub's built-in vulnerability disclosure form per repo.
-    if trimmed.contains("/security/advisories/new") {
+    let lower = trimmed.to_ascii_lowercase();
+
+    // Reject channels that are not security-reporting surfaces.
+    if lower.contains("discord.gg/")
+        || lower.contains("discord.com/invite")
+        || lower.starts_with("https://x.com/")
+        || lower.starts_with("https://twitter.com/")
+        || lower.contains("/issues/new")
+        || lower.ends_with("/issues")
+    {
+        return false;
+    }
+
+    // GitHub vulnerability disclosure and repository security surfaces.
+    if lower.contains("/security/advisories/new")
+        || is_github_security_surface(&lower)
+        || lower.contains("docs.github.com/")
+            && lower.contains("privately-reporting-a-security-vulnerability")
+    {
         return true;
     }
 
-    // Microsoft Security Response Center report form.
-    if trimmed.contains("msrc.microsoft.com/create-report") {
+    // Microsoft Security Response Center report forms.
+    if lower.contains("msrc.microsoft.com/create-report")
+        || lower.contains("msrc.microsoft.com/report/vulnerability")
+        || lower.contains("aka.ms/security")
+    {
+        return true;
+    }
+
+    // Coordinated disclosure platforms.
+    if lower.contains("hackerone.com/")
+        || lower.contains("bugcrowd.com/")
+        || lower.contains("bughunters.google.com/")
+        || lower.contains("tidelift.com/security")
+        || lower.contains("g.co/vulnz")
+        || lower.contains("synack.com/")
+        || lower.contains("intigriti.com/")
+    {
         return true;
     }
 
     // Vendor security pages with clear first-party reporting instructions.
-    if trimmed.contains("djangoproject.com/security") {
+    if lower.contains("djangoproject.com/security")
+        || lower.contains("go.dev/security")
+        || lower.contains("kubernetes.io/")
+            && (lower.contains("/security") || lower.contains("report-a-vulnerability"))
+        || lower.contains("cypress.io/security")
+        || lower.contains("kotlinlang.org/docs/security")
+        || lower.contains("prometheus.io/") && lower.contains("security")
+        || lower.contains("postgresql.org/support/security")
+        || lower.contains("chromium.org/") && lower.contains("security")
+        || lower.contains("notion.site/") && lower.contains("vulnerability")
+        || lower.contains("contribute.freecodecamp.org/") && lower.contains("security")
+    {
         return true;
     }
 
+    // Generic first-party policy URLs with an explicit security path segment.
+    if let Some(host) = security_url_host(&lower) {
+        if !is_generic_issue_or_homepage_path(&lower, host)
+            && security_path_segments(&lower).any(|segment| {
+                matches!(
+                    segment,
+                    "security" | "vulnerability" | "vulnerabilities" | "responsible-disclosure"
+                )
+            })
+        {
+            return true;
+        }
+    }
+
     false
+}
+
+fn is_github_security_surface(lower: &str) -> bool {
+    if !lower.contains("github.com/") {
+        return false;
+    }
+
+    if lower.contains("/security/advisories")
+        || lower.contains("/security/policy")
+        || lower.ends_with("/security")
+    {
+        return true;
+    }
+
+    lower.contains("security.md")
+        || lower.contains("/security/readme")
+        || lower.contains("/security#")
+        || lower.contains("early-disclosure")
+}
+
+fn security_url_host(lower: &str) -> Option<&str> {
+    lower
+        .strip_prefix("https://")
+        .or_else(|| lower.strip_prefix("http://"))
+        .and_then(|rest| rest.split('/').next())
+        .filter(|host| !host.is_empty())
+}
+
+fn security_path_segments(lower: &str) -> impl Iterator<Item = &str> {
+    lower
+        .split(['/', '?', '#'])
+        .filter(|segment| !segment.is_empty() && !segment.contains('.'))
+}
+
+fn is_generic_issue_or_homepage_path(lower: &str, host: &str) -> bool {
+    if host == "github.com" {
+        let path = lower
+            .split_once("github.com/")
+            .map(|(_, rest)| rest)
+            .unwrap_or("");
+        let segments: Vec<_> = path.split('/').filter(|s| !s.is_empty()).collect();
+        // Bare repo homepages like github.com/owner/repo are not reporting surfaces.
+        return segments.len() <= 2 && !lower.contains("security");
+    }
+
+    lower.contains("/about") && !lower.contains("security")
 }
 
 fn normalize_readme_text(line: &str) -> Option<String> {
@@ -1858,4 +1964,43 @@ fn looks_like_email(token: &str) -> bool {
         && domain.contains('.')
         && !token.starts_with("http://")
         && !token.starts_with("https://")
+}
+
+#[cfg(test)]
+mod security_url_tests {
+    use super::is_actionable_security_url;
+
+    #[test]
+    fn recognizes_common_security_reporting_surfaces() {
+        for url in [
+            "https://github.com/axios/axios/security",
+            "https://github.com/ShareX/ShareX/security",
+            "https://github.com/eslint/.github/blob/master/SECURITY.md",
+            "https://github.com/containerd/project/blob/main/SECURITY.md#reporting-a-vulnerability",
+            "https://hackerone.com/ibm",
+            "https://bugcrowd.com/engagements/openai",
+            "https://tidelift.com/security",
+            "https://bughunters.google.com/report",
+            "https://g.co/vulnz",
+            "https://go.dev/security/policy",
+            "https://kubernetes.io/docs/reference/issues-security/security/#report-a-vulnerability",
+            "https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability",
+        ] {
+            assert!(is_actionable_security_url(url), "expected actionable: {url}");
+        }
+    }
+
+    #[test]
+    fn rejects_non_reporting_channels() {
+        for url in [
+            "https://blog.burntsushi.net/about/",
+            "https://github.com/junegunn/fzf",
+            "https://github.com/dani-garcia/vaultwarden/issues",
+            "https://github.com/LadybirdBrowser/ladybird/issues/new?template=bug_report.yml",
+            "https://discord.gg/NtAbbGn",
+            "https://x.com/openai",
+        ] {
+            assert!(!is_actionable_security_url(url), "expected rejected: {url}");
+        }
+    }
 }

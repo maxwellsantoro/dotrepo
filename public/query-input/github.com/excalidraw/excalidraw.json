@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "excalidraw",
+    "repo": "excalidraw",
+    "source": "https://github.com/excalidraw/excalidraw"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/excalidraw/excalidraw/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/excalidraw/excalidraw",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/excalidraw/excalidraw/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/excalidraw/excalidraw",
+        "generated_at": "2026-06-26T18:35:40.489043Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Excalidraw Editor | Blog | Documentation | Excalidraw+",
+        "description": "An open source virtual hand-drawn style whiteboard.",
+        "homepage": "https://excalidraw.com",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "MDX",
+          "SCSS",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "yarn build",
+        "test": "yarn test",
+        "topics": [
+          "productivity",
+          "collaboration",
+          "diagrams",
+          "drawing",
+          "whiteboard",
+          "canvas",
+          "hacktoberfest"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://docs.excalidraw.com/docs/@excalidraw/excalidraw/installation",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/excalidraw/excalidraw.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "c070c8ffa62c4c88d48f33fd18a7a40d55bb808a",
+          "html_url": "https://github.com/excalidraw/excalidraw",
+          "stars": 126265
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

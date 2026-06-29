@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "macrozheng",
+    "repo": "mall",
+    "source": "https://github.com/macrozheng/mall"
+  },
+  "repository": {
+    "name": "mall",
+    "description": "1. **快速体验项目**：在线访问地址 。 2. **全套学习教程**：《mall学习教程》 。 3. **视频教程**：《mall视频教程》 。 4. **微服务版本**：基于Spring Cloud Alibaba的项目：mall-swarm 。 5. **分支说明**：`master`分支基于Spring Boot 3.5+JDK 17，`dev-v2`分支基于Spring Boot 2.7+JDK 8。",
+    "homepage": "https://www.macrozheng.com/admin/"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/macrozheng/mall/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/macrozheng/mall",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/macrozheng/mall/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/macrozheng/mall/index.json",
+    "trust": "/v0/repos/github.com/macrozheng/mall/trust.json",
+    "profile": "/v0/repos/github.com/macrozheng/mall/profile.json",
+    "queryTemplate": "/v0/repos/github.com/macrozheng/mall/query?path={dot_path}",
+    "indexPath": "repos/github.com/macrozheng/mall/"
+  }
+}

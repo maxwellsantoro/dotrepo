@@ -1,0 +1,65 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jesseduffield",
+    "repo": "lazydocker",
+    "source": "https://github.com/jesseduffield/lazydocker"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/jesseduffield/lazydocker/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/jesseduffield/lazydocker",
+    "generatedAt": "2026-06-29T01:18:17.671616Z",
+    "evidencePath": "repos/github.com/jesseduffield/lazydocker/evidence.md"
+  },
+  "purpose": "Warp, the intelligent terminal",
+  "name": "Warp",
+  "homepage": "https://github.com/jesseduffield/lazydocker",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Go",
+    "Shell"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "gettingStarted": "https://github.com/jesseduffield/lazydocker#installation"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/jesseduffield/lazydocker/profile.json",
+    "repository": "/v0/repos/github.com/jesseduffield/lazydocker/index.json",
+    "trust": "/v0/repos/github.com/jesseduffield/lazydocker/trust.json",
+    "queryTemplate": "/v0/repos/github.com/jesseduffield/lazydocker/query?path={dot_path}",
+    "indexPath": "repos/github.com/jesseduffield/lazydocker/"
+  }
+}

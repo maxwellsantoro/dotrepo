@@ -1,0 +1,93 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "JetBrains",
+    "repo": "kotlin",
+    "source": "https://github.com/JetBrains/kotlin"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/JetBrains/kotlin/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/JetBrains/kotlin",
+    "generatedAt": "2026-06-26T18:35:21.341821Z",
+    "evidencePath": "repos/github.com/JetBrains/kotlin/evidence.md"
+  },
+  "purpose": "The Kotlin Programming Language.",
+  "name": "kotlin",
+  "homepage": "https://kotlinlang.org",
+  "visibility": "public",
+  "languages": [
+    "ANTLR",
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Lex",
+    "Makefile",
+    "Objective-C",
+    "Objective-C++",
+    "Puppet",
+    "Python",
+    "Roff",
+    "Ruby",
+    "Scala",
+    "Shell",
+    "Swift"
+  ],
+  "topics": [
+    "kotlin",
+    "programming-language",
+    "compiler",
+    "gradle-plugin",
+    "maven-plugin",
+    "kotlin-library",
+    "intellij-plugin",
+    "wasm",
+    "webassembly"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://kotlinlang.org/docs/security.html"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/JetBrains/kotlin/profile.json",
+    "repository": "/v0/repos/github.com/JetBrains/kotlin/index.json",
+    "trust": "/v0/repos/github.com/JetBrains/kotlin/trust.json",
+    "queryTemplate": "/v0/repos/github.com/JetBrains/kotlin/query?path={dot_path}",
+    "indexPath": "repos/github.com/JetBrains/kotlin/"
+  }
+}

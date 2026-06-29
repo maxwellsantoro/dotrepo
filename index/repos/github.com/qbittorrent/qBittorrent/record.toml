@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/qbittorrent/qBittorrent"
-generated_at = "2026-06-29T01:19:56.964762Z"
+generated_at = "2026-06-29T02:18:25.470987Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `.github/workflows/ci_macos.yaml`, `.github/workflows/ci_python.yaml`, `.github/workflows/ci_ubuntu.yaml`, `.github/workflows/ci_windows.yaml`, and `.github/workflows/coverity-scan.yaml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/ci_macos.yaml`, `.github/workflows/ci_ubuntu.yaml`, `.github/workflows/ci_webui.yaml`, and `.github/workflows/ci_windows.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `.github/workflows/ci_macos.yaml`, `.github/workflows/ci_python.yaml`, `.github/workflows/ci_ubuntu.yaml`, `.github/workflows/ci_windows.yaml`, and `.github/workflows/coverity-scan.yaml` suggested conflicting build commands. Inferred `repo.test` from `.github/workflows/ci_ubuntu.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "qBittorrent"
@@ -33,6 +33,7 @@ languages = [
     "Python",
     "Shell",
 ]
+test = "cmake --build build --target check"
 topics = [
     "c-plus-plus",
     "bittorrent",
@@ -45,6 +46,9 @@ topics = [
 [owners]
 maintainers = []
 security_contact = "security@qbittorrent.org"
+
+[docs]
+root = "https://www.qbittorrent.org"
 
 [relations]
 references = []

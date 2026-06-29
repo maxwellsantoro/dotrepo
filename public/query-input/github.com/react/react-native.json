@@ -1,0 +1,115 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "react",
+    "repo": "react-native",
+    "source": "https://github.com/react/react-native"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/react/react-native/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/react/react-native",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/react/react-native/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/react/react-native",
+        "generated_at": "2026-06-29T00:42:36.876523Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "React Native",
+        "description": "Learn once, write anywhere: Build mobile apps with React.",
+        "homepage": "https://reactnative.dev",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Assembly",
+          "C",
+          "C++",
+          "CMake",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Kotlin",
+          "Objective-C",
+          "Objective-C++",
+          "Python",
+          "Ruby",
+          "Shell",
+          "Smarty",
+          "Swift",
+          "TypeScript"
+        ],
+        "build": "yarn build",
+        "test": "yarn test",
+        "topics": [
+          "android",
+          "app-framework",
+          "ios",
+          "mobile",
+          "mobile-development",
+          "react-native",
+          "cross-platform",
+          "react"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": null,
+        "getting_started": "https://reactnative.dev/docs/getting-started",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/react/react-native.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "54b88d9dea5ddc9740327ae426dc3ab8e66f7e75",
+          "html_url": "https://github.com/react/react-native",
+          "stars": 126116
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,116 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "godotengine",
+    "repo": "godot",
+    "source": "https://github.com/godotengine/godot"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/godotengine/godot/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/godotengine/godot",
+    "generatedAt": "2026-06-26T18:34:40.655133Z",
+    "evidencePath": "repos/github.com/godotengine/godot/evidence.md"
+  },
+  "purpose": "**Godot Engine is a feature-packed, cross-platform game engine to create 2D and 3D games from a unified interface.** It provides a comprehensive set of common tools, so that users can focus on making games without having to reinvent the wheel.",
+  "name": "Godot Engine",
+  "homepage": "https://godotengine.org",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "GAP",
+    "GDScript",
+    "GLSL",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Objective-C++",
+    "Python",
+    "Shell",
+    "Swift"
+  ],
+  "topics": [
+    "game-engine",
+    "godot",
+    "godotengine",
+    "open-source",
+    "multi-platform",
+    "gamedev",
+    "game-development"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://docs.godotengine.org/en/latest/classes/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@godotengine/core",
+      "@godotengine/network",
+      "@godotengine/debugger",
+      "@godotengine/gdextension",
+      "@godotengine/input",
+      "@godotengine/documentation",
+      "@godotengine/i18n",
+      "@godotengine/audio",
+      "@godotengine/rendering",
+      "@godotengine/macos",
+      "@godotengine/ios",
+      "@godotengine/linux-bsd",
+      "@godotengine/windows",
+      "@godotengine/buildsystem",
+      "@godotengine/asset-pipeline",
+      "@godotengine/editor",
+      "@godotengine/animation",
+      "@godotengine/gui-nodes",
+      "@godotengine/2d-nodes",
+      "@godotengine/physics",
+      "@godotengine/3d-nodes",
+      "@godotengine/script-editor",
+      "@godotengine/shaders",
+      "@godotengine/dotnet",
+      "@godotengine/tests",
+      "@godotengine/jolt-physics",
+      "@godotengine/gdscript",
+      "@godotengine/xr",
+      "@godotengine/navigation",
+      "@godotengine/android",
+      "@godotengine/web"
+    ]
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/godotengine/godot/profile.json",
+    "repository": "/v0/repos/github.com/godotengine/godot/index.json",
+    "trust": "/v0/repos/github.com/godotengine/godot/trust.json",
+    "queryTemplate": "/v0/repos/github.com/godotengine/godot/query?path={dot_path}",
+    "indexPath": "repos/github.com/godotengine/godot/"
+  }
+}

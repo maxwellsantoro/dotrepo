@@ -1,0 +1,53 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "caddyserver",
+    "repo": "caddy",
+    "source": "https://github.com/caddyserver/caddy"
+  },
+  "repository": {
+    "name": "caddy",
+    "description": "Caddy is an extensible server platform that uses TLS by default.",
+    "homepage": "https://caddyserver.com",
+    "docsRoot": "https://caddyserver.com/docs/",
+    "gettingStarted": "https://caddyserver.com/docs/getting-started",
+    "securityContact": "https://github.com/caddyserver/caddy/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/caddyserver/caddy/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/caddyserver/caddy",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `go.mod`. Filled `repo.name` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/caddyserver/caddy/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/caddyserver/caddy/index.json",
+    "trust": "/v0/repos/github.com/caddyserver/caddy/trust.json",
+    "profile": "/v0/repos/github.com/caddyserver/caddy/profile.json",
+    "queryTemplate": "/v0/repos/github.com/caddyserver/caddy/query?path={dot_path}",
+    "indexPath": "repos/github.com/caddyserver/caddy/"
+  }
+}

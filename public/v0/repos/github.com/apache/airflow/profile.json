@@ -1,0 +1,141 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "apache",
+    "repo": "airflow",
+    "source": "https://github.com/apache/airflow"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/apache/airflow/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/apache/airflow",
+    "generatedAt": "2026-06-26T18:31:58.132131Z",
+    "evidencePath": "repos/github.com/apache/airflow/evidence.md"
+  },
+  "purpose": "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements.",
+  "name": "Apache Airflow",
+  "homepage": "https://airflow.apache.org/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "HCL",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Jinja",
+    "Jupyter Notebook",
+    "Just",
+    "Kotlin",
+    "Mako",
+    "Nunjucks",
+    "Python",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "airflow",
+    "apache",
+    "apache-airflow",
+    "python",
+    "scheduler",
+    "workflow",
+    "automation",
+    "dag",
+    "data-engineering",
+    "data-integration",
+    "data-orchestrator",
+    "data-pipelines",
+    "data-science",
+    "elt",
+    "etl",
+    "machine-learning",
+    "mlops",
+    "orchestration",
+    "workflow-engine",
+    "workflow-orchestration"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@XD-DENG",
+      "@ashb",
+      "@o-nikolas",
+      "@pierrejeambrun",
+      "@hussein-awala",
+      "@dheerajturaga",
+      "@bolkedebruin",
+      "@jedcunningham",
+      "@ephraimbuddy",
+      "@jscheffl",
+      "@bugraoz93",
+      "@potiuk",
+      "@gopidesupavan",
+      "@amoghrajesh",
+      "@jason810496",
+      "@rawwar",
+      "@shubhamraj-git",
+      "@choo121600",
+      "@kaxil",
+      "@vincbeck",
+      "@bbovenzi",
+      "@ryanahamilton",
+      "@guan404ming",
+      "@vatsrahul1001",
+      "@shahar1",
+      "@romsharon98",
+      "@uranusjr",
+      "@sekikn",
+      "@BasPH",
+      "@mobuchowski",
+      "@Lee-W",
+      "@dstandish",
+      "@eladkal",
+      "@Fokko",
+      "@josh-fell",
+      "@dabla",
+      "@RNHTTR",
+      "@sjyangkevin",
+      "@Dev-iL"
+    ],
+    "securityContact": "security@airflow.apache.org"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/apache/airflow/profile.json",
+    "repository": "/v0/repos/github.com/apache/airflow/index.json",
+    "trust": "/v0/repos/github.com/apache/airflow/trust.json",
+    "queryTemplate": "/v0/repos/github.com/apache/airflow/query?path={dot_path}",
+    "indexPath": "repos/github.com/apache/airflow/"
+  }
+}

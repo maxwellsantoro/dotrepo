@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "dotnet",
+    "repo": "maui",
+    "source": "https://github.com/dotnet/maui"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/dotnet/maui/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/dotnet/maui",
+    "generatedAt": "2026-06-29T01:19:07.106096Z",
+    "evidencePath": "repos/github.com/dotnet/maui/evidence.md"
+  },
+  "purpose": ".NET Multi-platform App UI (.NET MAUI) is a cross-platform framework for creating mobile and desktop apps with C# and XAML.",
+  "name": "NET Multi-platform App UI",
+  "homepage": "https://dot.net/maui",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C#",
+    "CMake",
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "Swift",
+    "TypeScript"
+  ],
+  "topics": [
+    "dotnet",
+    "maui",
+    "multi-platform",
+    "user-interface",
+    "microsoft",
+    "hacktoberfest",
+    "android",
+    "desktop",
+    "ios",
+    "maccatalyst",
+    "mobile",
+    "winui",
+    "winui3"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@dotnet/dotnet-maui-reviewers"
+    ],
+    "team": "@dotnet/dotnet-maui-reviewers",
+    "securityContact": "secure@microsoft.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/dotnet/maui/profile.json",
+    "repository": "/v0/repos/github.com/dotnet/maui/index.json",
+    "trust": "/v0/repos/github.com/dotnet/maui/trust.json",
+    "queryTemplate": "/v0/repos/github.com/dotnet/maui/query?path={dot_path}",
+    "indexPath": "repos/github.com/dotnet/maui/"
+  }
+}

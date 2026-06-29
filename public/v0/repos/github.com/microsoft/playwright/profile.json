@@ -1,0 +1,98 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "playwright",
+    "source": "https://github.com/microsoft/playwright"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/microsoft/playwright/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/microsoft/playwright",
+    "generatedAt": "2026-06-29T02:21:13.444471Z",
+    "evidencePath": "repos/github.com/microsoft/playwright/evidence.md"
+  },
+  "purpose": "Playwright is a framework for web automation and testing.",
+  "name": "Playwright",
+  "homepage": "https://playwright.dev",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Makefile",
+    "Objective-C",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "playwright",
+    "testing",
+    "automation",
+    "webkit",
+    "firefox",
+    "e2e-testing",
+    "web",
+    "chrome",
+    "electron",
+    "javascript",
+    "chromium",
+    "end-to-end-testing",
+    "test",
+    "test-automation",
+    "testing-tools"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://playwright.dev",
+    "gettingStarted": "https://playwright.dev/docs/getting-started-vscode"
+  },
+  "ownership": {
+    "securityContact": "secure@microsoft.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/microsoft/playwright/profile.json",
+    "repository": "/v0/repos/github.com/microsoft/playwright/index.json",
+    "trust": "/v0/repos/github.com/microsoft/playwright/trust.json",
+    "queryTemplate": "/v0/repos/github.com/microsoft/playwright/query?path={dot_path}",
+    "indexPath": "repos/github.com/microsoft/playwright/"
+  }
+}

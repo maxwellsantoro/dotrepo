@@ -1,0 +1,105 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "BurntSushi",
+    "repo": "ripgrep",
+    "source": "https://github.com/BurntSushi/ripgrep"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/BurntSushi/ripgrep/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/BurntSushi/ripgrep",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/BurntSushi/ripgrep/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/BurntSushi/ripgrep",
+        "generated_at": "2026-06-29T00:45:20.326575Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "ripgrep",
+        "description": "ripgrep recursively searches directories for a regex pattern while respecting your gitignore",
+        "homepage": "https://github.com/BurntSushi/ripgrep",
+        "license": "Unlicense",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Python",
+          "Roff",
+          "Ruby",
+          "Rust",
+          "Shell"
+        ],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "topics": [
+          "ripgrep",
+          "recursively-search",
+          "search",
+          "regex",
+          "gitignore",
+          "grep",
+          "command-line-tool",
+          "command-line",
+          "cli",
+          "rust"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://blog.burntsushi.net/about/"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/BurntSushi/ripgrep.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "dfe4a81d2591daca76d25ae4e052c34b26578155",
+          "html_url": "https://github.com/BurntSushi/ripgrep",
+          "stars": 65549
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

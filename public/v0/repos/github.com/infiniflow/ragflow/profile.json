@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "infiniflow",
+    "repo": "ragflow",
+    "source": "https://github.com/infiniflow/ragflow"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/infiniflow/ragflow/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/infiniflow/ragflow",
+    "generatedAt": "2026-06-29T02:18:06.624198Z",
+    "evidencePath": "repos/github.com/infiniflow/ragflow/evidence.md"
+  },
+  "purpose": "📕 Table of Contents",
+  "name": "README in English",
+  "homepage": "https://ragflow.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "Makefile",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "ai",
+    "ai-agents",
+    "context-engine",
+    "llm-apps",
+    "rag",
+    "retrieval-augmented-generation",
+    "agentic-ai",
+    "agentic-retrieval",
+    "agentic-search",
+    "context-management"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://ragflow.io",
+    "gettingStarted": "https://ragflow.io/docs/dev/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/infiniflow/ragflow/profile.json",
+    "repository": "/v0/repos/github.com/infiniflow/ragflow/index.json",
+    "trust": "/v0/repos/github.com/infiniflow/ragflow/trust.json",
+    "queryTemplate": "/v0/repos/github.com/infiniflow/ragflow/query?path={dot_path}",
+    "indexPath": "repos/github.com/infiniflow/ragflow/"
+  }
+}

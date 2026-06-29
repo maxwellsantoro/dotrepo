@@ -1,15 +1,16 @@
 # Evidence
 
 - Imported repository name, description, and docs entry points from README.md.
-- Left `repo.build` unset because `.github/workflows/build-vmtool.yaml` and `.github/workflows/release.yaml` suggested conflicting build commands.
-- Left `repo.test` unset because `.github/workflows/build-vmtool.yaml`, `.github/workflows/publish-maven-central.yml`, and `.github/workflows/release.yaml` suggested conflicting test commands.
+- Inferred repo.build from .github/workflows/release.yaml as `mvn -V -ntp clean package -P full`.
+- Inferred repo.test from .github/workflows/publish-maven-central.yml as `mvn -B -ntp -DskipTests`.
 - This is an overlay record, not a maintainer-controlled canonical record.
-
-- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
-- Left `repo.test` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Auto-promotion
+
+Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.

@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rustls",
+    "repo": "rustls",
+    "source": "https://github.com/rustls/rustls"
+  },
+  "repository": {
+    "name": "Status",
+    "description": "Rustls is a modern TLS library written in Rust.",
+    "homepage": "https://github.com/rustls/rustls",
+    "securityContact": "https://github.com/rustls/rustls/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/rustls/rustls/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/rustls/rustls",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/rustls/rustls/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/rustls/rustls/index.json",
+    "trust": "/v0/repos/github.com/rustls/rustls/trust.json",
+    "profile": "/v0/repos/github.com/rustls/rustls/profile.json",
+    "queryTemplate": "/v0/repos/github.com/rustls/rustls/query?path={dot_path}",
+    "indexPath": "repos/github.com/rustls/rustls/"
+  }
+}

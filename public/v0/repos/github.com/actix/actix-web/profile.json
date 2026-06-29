@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "actix",
+    "repo": "actix-web",
+    "source": "https://github.com/actix/actix-web"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/actix/actix-web/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/actix/actix-web",
+    "generatedAt": "2026-06-29T02:01:50.437118Z",
+    "evidencePath": "repos/github.com/actix/actix-web/evidence.md"
+  },
+  "purpose": "Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust.",
+  "name": "actix-web",
+  "homepage": "https://actix.rs",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "JavaScript",
+    "Just",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "rust",
+    "web",
+    "web-development",
+    "websockets",
+    "actix",
+    "actix-web",
+    "async"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://actix.rs"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/actix/actix-web/profile.json",
+    "repository": "/v0/repos/github.com/actix/actix-web/index.json",
+    "trust": "/v0/repos/github.com/actix/actix-web/trust.json",
+    "queryTemplate": "/v0/repos/github.com/actix/actix-web/query?path={dot_path}",
+    "indexPath": "repos/github.com/actix/actix-web/"
+  }
+}

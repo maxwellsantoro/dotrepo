@@ -1,0 +1,83 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "langflow-ai",
+    "repo": "langflow",
+    "source": "https://github.com/langflow-ai/langflow"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/langflow-ai/langflow/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/langflow-ai/langflow",
+    "generatedAt": "2026-06-29T01:16:27.198801Z",
+    "evidencePath": "repos/github.com/langflow-ai/langflow/evidence.md"
+  },
+  "purpose": "Langflow Desktop is the easiest way to get started with Langflow.",
+  "name": "Highlight features",
+  "homepage": "http://www.langflow.org",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Mako",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "react-flow",
+    "chatgpt",
+    "large-language-models",
+    "generative-ai",
+    "agents",
+    "multiagent"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "gettingStarted": "https://docs.astral.sh/uv/getting-started/installation/"
+  },
+  "ownership": {
+    "securityContact": "https://hackerone.com/ibm"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/langflow-ai/langflow/profile.json",
+    "repository": "/v0/repos/github.com/langflow-ai/langflow/index.json",
+    "trust": "/v0/repos/github.com/langflow-ai/langflow/trust.json",
+    "queryTemplate": "/v0/repos/github.com/langflow-ai/langflow/query?path={dot_path}",
+    "indexPath": "repos/github.com/langflow-ai/langflow/"
+  }
+}

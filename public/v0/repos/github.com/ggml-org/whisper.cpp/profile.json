@@ -1,0 +1,90 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ggml-org",
+    "repo": "whisper.cpp",
+    "source": "https://github.com/ggml-org/whisper.cpp"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ggml-org/whisper.cpp/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ggml-org/whisper.cpp",
+    "generatedAt": "2026-06-29T02:17:55.428112Z",
+    "evidencePath": "repos/github.com/ggml-org/whisper.cpp/evidence.md"
+  },
+  "purpose": "Stable: v1.9.1 / Roadmap",
+  "name": "whisper.cpp",
+  "homepage": "https://github.com/ggml-org/whisper.cpp",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Cuda",
+    "Dockerfile",
+    "GLSL",
+    "Go",
+    "Go Template",
+    "Java",
+    "JavaScript",
+    "Makefile",
+    "Metal",
+    "Objective-C",
+    "Objective-C++",
+    "Python",
+    "Ruby",
+    "Shell",
+    "WGSL"
+  ],
+  "topics": [
+    "openai",
+    "speech-to-text",
+    "transformer",
+    "whisper",
+    "inference",
+    "speech-recognition"
+  ],
+  "execution": {
+    "build": "./gradlew assembleRelease --no-daemon",
+    "test": "./gradlew assembleRelease --no-daemon"
+  },
+  "docs": {
+    "gettingStarted": "https://wiki.libsdl.org/SDL2/Installation"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ggml-org/whisper.cpp/profile.json",
+    "repository": "/v0/repos/github.com/ggml-org/whisper.cpp/index.json",
+    "trust": "/v0/repos/github.com/ggml-org/whisper.cpp/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ggml-org/whisper.cpp/query?path={dot_path}",
+    "indexPath": "repos/github.com/ggml-org/whisper.cpp/"
+  }
+}

@@ -1,7 +1,8 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name, description, and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Inferred repo.build from .github/workflows/build.yml as `make CMAKE_FLAGS="-D CI_BUILD=ON -D CMAKE_INSTALL_PREFIX:PATH=$INSTALL_PREFIX"`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -12,4 +13,4 @@
 
 ## Auto-promotion
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.

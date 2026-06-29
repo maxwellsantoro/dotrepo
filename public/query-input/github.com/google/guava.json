@@ -1,0 +1,99 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "google",
+    "repo": "guava",
+    "source": "https://github.com/google/guava"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/google/guava/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/google/guava",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/google/guava/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/google/guava",
+        "generated_at": "2026-06-29T01:17:22.119579Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Guava",
+        "description": "Google core libraries for Java",
+        "homepage": "https://guava.dev/",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Shell"
+        ],
+        "build": "./mvnw -B -ntp -Dtoolchain.skip install -U -DskipTests=true -f $ROOT_POM",
+        "test": "./mvnw -B -ntp -Dtoolchain.skip install -U -DskipTests=true -f $ROOT_POM",
+        "topics": [
+          "guava",
+          "java"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://guava.dev/releases/snapshot-jre/api/docs/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/google/guava.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "ea57186acd66e9c9a21ab3e22548d720a97a337e",
+          "html_url": "https://github.com/google/guava",
+          "stars": 51497
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,104 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "kubernetes",
+    "repo": "kubernetes",
+    "source": "https://github.com/kubernetes/kubernetes"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/kubernetes/kubernetes/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/kubernetes/kubernetes",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/kubernetes/kubernetes/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/kubernetes/kubernetes",
+        "generated_at": "2026-06-29T01:16:56.704893Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Kubernetes",
+        "description": "Kubernetes, also known as K8s, is an open source system for managing [containerized applications] across multiple hosts.",
+        "homepage": "https://kubernetes.io",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "HTML",
+          "Makefile",
+          "PowerShell",
+          "Python",
+          "Shell",
+          "sed"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "kubernetes",
+          "go",
+          "cncf",
+          "containers"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://kubernetes.io/docs/reference/issues-security/security/#report-a-vulnerability"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/kubernetes/kubernetes.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "f7884e76a6289ef290e926ebcf5e9e1c1bdd2185",
+          "html_url": "https://github.com/kubernetes/kubernetes",
+          "stars": 123469
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

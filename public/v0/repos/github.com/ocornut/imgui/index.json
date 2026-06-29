@@ -1,0 +1,48 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ocornut",
+    "repo": "imgui",
+    "source": "https://github.com/ocornut/imgui"
+  },
+  "repository": {
+    "name": "imgui",
+    "description": "Dear ImGui: Bloat-free Graphical User interface for C++ with minimal dependencies",
+    "homepage": "https://github.com/ocornut/imgui"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ocornut/imgui/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/ocornut/imgui",
+        "trust": {
+          "confidence": "low",
+          "provenance": [
+            "inferred"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ocornut/imgui/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ocornut/imgui/index.json",
+    "trust": "/v0/repos/github.com/ocornut/imgui/trust.json",
+    "profile": "/v0/repos/github.com/ocornut/imgui/profile.json",
+    "queryTemplate": "/v0/repos/github.com/ocornut/imgui/query?path={dot_path}",
+    "indexPath": "repos/github.com/ocornut/imgui/"
+  }
+}

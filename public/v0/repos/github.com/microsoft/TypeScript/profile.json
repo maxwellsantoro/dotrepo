@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "TypeScript",
+    "source": "https://github.com/microsoft/TypeScript"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/microsoft/TypeScript/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/microsoft/TypeScript",
+    "generatedAt": "2026-06-26T17:45:33.03327Z",
+    "evidencePath": "repos/github.com/microsoft/TypeScript/evidence.md"
+  },
+  "purpose": "TypeScript is a language for application-scale JavaScript.",
+  "name": "TypeScript",
+  "homepage": "https://www.typescriptlang.org",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "JavaScript",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "typescript",
+    "javascript",
+    "language",
+    "typechecker"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://msrc.microsoft.com/create-report"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/microsoft/TypeScript/profile.json",
+    "repository": "/v0/repos/github.com/microsoft/TypeScript/index.json",
+    "trust": "/v0/repos/github.com/microsoft/TypeScript/trust.json",
+    "queryTemplate": "/v0/repos/github.com/microsoft/TypeScript/query?path={dot_path}",
+    "indexPath": "repos/github.com/microsoft/TypeScript/"
+  }
+}

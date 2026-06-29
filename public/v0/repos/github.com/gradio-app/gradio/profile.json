@@ -1,0 +1,95 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "gradio-app",
+    "repo": "gradio",
+    "source": "https://github.com/gradio-app/gradio"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/gradio-app/gradio/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/gradio-app/gradio",
+    "generatedAt": "2026-06-29T02:17:58.369741Z",
+    "evidencePath": "repos/github.com/gradio-app/gradio/evidence.md"
+  },
+  "purpose": "Build and share delightful machine learning apps, all in Python. 🌟 Star to support our work!",
+  "name": "gradio",
+  "homepage": "http://www.gradio.app",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Jupyter Notebook",
+    "MDX",
+    "Python",
+    "SCSS",
+    "Shell",
+    "Svelte",
+    "TypeScript",
+    "mdsvex"
+  ],
+  "topics": [
+    "machine-learning",
+    "models",
+    "ui",
+    "ui-components",
+    "interface",
+    "python",
+    "data-science",
+    "data-visualization",
+    "deep-learning",
+    "data-analysis",
+    "gradio",
+    "gradio-interface",
+    "python-notebook",
+    "deploy"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://gradio.app/docs/",
+    "gettingStarted": "https://gradio.app/getting_started/"
+  },
+  "ownership": {
+    "securityContact": "gradio-team@huggingface.co"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/gradio-app/gradio/profile.json",
+    "repository": "/v0/repos/github.com/gradio-app/gradio/index.json",
+    "trust": "/v0/repos/github.com/gradio-app/gradio/trust.json",
+    "queryTemplate": "/v0/repos/github.com/gradio-app/gradio/query?path={dot_path}",
+    "indexPath": "repos/github.com/gradio-app/gradio/"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "immich-app",
+    "repo": "immich",
+    "source": "https://github.com/immich-app/immich"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/immich-app/immich/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/immich-app/immich",
+    "generatedAt": "2026-06-26T18:35:35.499706Z",
+    "evidencePath": "repos/github.com/immich-app/immich/evidence.md"
+  },
+  "purpose": "Català Español Français Italiano 日本語 한국어 Deutsch Nederlands Türkçe 简体中文 正體中文 Українська Русский Português Brasileiro Svenska العربية Tiếng Việt ภาษาไทย",
+  "name": "High performance self-hosted photo and video management solution",
+  "homepage": "https://immich.app",
+  "license": "AGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dart",
+    "Dockerfile",
+    "Go Template",
+    "HCL",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Makefile",
+    "Mustache",
+    "Objective-C",
+    "Python",
+    "Ruby",
+    "Shell",
+    "Svelte",
+    "Swift",
+    "TypeScript"
+  ],
+  "topics": [
+    "backup-tool",
+    "mobile-app",
+    "photo-gallery",
+    "photos",
+    "self-hosted",
+    "videos",
+    "flutter",
+    "nestjs",
+    "nodejs",
+    "google-photos-alternative",
+    "svelte",
+    "sveltekit",
+    "google-photos",
+    "photos-management",
+    "typescript",
+    "javascript"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://docs.immich.app/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@bo0tzz",
+      "@danieldietzler",
+      "@mertalev",
+      "@shenlong-tanwen",
+      "@santoshakil"
+    ]
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/immich-app/immich/profile.json",
+    "repository": "/v0/repos/github.com/immich-app/immich/index.json",
+    "trust": "/v0/repos/github.com/immich-app/immich/trust.json",
+    "queryTemplate": "/v0/repos/github.com/immich-app/immich/query?path={dot_path}",
+    "indexPath": "repos/github.com/immich-app/immich/"
+  }
+}

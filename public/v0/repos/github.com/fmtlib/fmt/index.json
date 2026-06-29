@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "fmtlib",
+    "repo": "fmt",
+    "source": "https://github.com/fmtlib/fmt"
+  },
+  "repository": {
+    "name": "Benchmarks",
+    "description": "**{fmt}** is an open-source formatting library providing a fast and safe alternative to C stdio and C++ iostreams.",
+    "homepage": "https://fmt.dev",
+    "docsRoot": "https://fmt.dev",
+    "securityContact": "https://github.com/fmtlib/fmt/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/fmtlib/fmt/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/fmtlib/fmt",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/fmtlib/fmt/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/fmtlib/fmt/index.json",
+    "trust": "/v0/repos/github.com/fmtlib/fmt/trust.json",
+    "profile": "/v0/repos/github.com/fmtlib/fmt/profile.json",
+    "queryTemplate": "/v0/repos/github.com/fmtlib/fmt/query?path={dot_path}",
+    "indexPath": "repos/github.com/fmtlib/fmt/"
+  }
+}

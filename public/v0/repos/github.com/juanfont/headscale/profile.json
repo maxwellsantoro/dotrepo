@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "juanfont",
+    "repo": "headscale",
+    "source": "https://github.com/juanfont/headscale"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/juanfont/headscale/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/juanfont/headscale",
+    "generatedAt": "2026-06-29T01:19:37.475074Z",
+    "evidencePath": "repos/github.com/juanfont/headscale/evidence.md"
+  },
+  "purpose": "Tailscale is a modern VPN built on top of Wireguard.",
+  "name": "What is Tailscale",
+  "homepage": "https://github.com/juanfont/headscale",
+  "license": "BSD-3-Clause",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Go",
+    "Makefile",
+    "Nix",
+    "Shell"
+  ],
+  "topics": [
+    "tailscale",
+    "tailscale-control-server",
+    "wireguard",
+    "tailscale-server"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://headscale.net/stable/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@juanfont",
+      "@kradalby",
+      "@ohdearaugustin",
+      "@nblock"
+    ]
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/juanfont/headscale/profile.json",
+    "repository": "/v0/repos/github.com/juanfont/headscale/index.json",
+    "trust": "/v0/repos/github.com/juanfont/headscale/trust.json",
+    "queryTemplate": "/v0/repos/github.com/juanfont/headscale/query?path={dot_path}",
+    "indexPath": "repos/github.com/juanfont/headscale/"
+  }
+}

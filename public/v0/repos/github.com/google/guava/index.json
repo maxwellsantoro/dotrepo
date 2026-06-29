@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "google",
+    "repo": "guava",
+    "source": "https://github.com/google/guava"
+  },
+  "repository": {
+    "name": "Guava",
+    "description": "Google core libraries for Java",
+    "homepage": "https://guava.dev/",
+    "docsRoot": "https://guava.dev/releases/snapshot-jre/api/docs/"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/google/guava/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/google/guava",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/google/guava/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/google/guava/index.json",
+    "trust": "/v0/repos/github.com/google/guava/trust.json",
+    "profile": "/v0/repos/github.com/google/guava/profile.json",
+    "queryTemplate": "/v0/repos/github.com/google/guava/query?path={dot_path}",
+    "indexPath": "repos/github.com/google/guava/"
+  }
+}

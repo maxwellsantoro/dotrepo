@@ -1,0 +1,131 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "astral-sh",
+    "repo": "ruff",
+    "source": "https://github.com/astral-sh/ruff"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/astral-sh/ruff/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/astral-sh/ruff",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/astral-sh/ruff/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/astral-sh/ruff",
+        "generated_at": "2026-06-29T02:17:45.253768Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Ruff",
+        "description": "An extremely fast Python linter and code formatter, written in Rust.",
+        "homepage": "https://docs.astral.sh/ruff",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Python",
+          "RenderScript",
+          "Rust",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "topics": [
+          "linter",
+          "pep8",
+          "python",
+          "python3",
+          "rust",
+          "rustpython",
+          "static-analysis",
+          "static-code-analysis",
+          "style-guide",
+          "styleguide",
+          "ruff"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@dhruvmanila",
+          "@MichaReiser",
+          "@BurntSushi",
+          "@AlexWaygood",
+          "@astral-sh/ty_notified",
+          "@astral-sh/ruff_db_notified",
+          "@astral-sh/ty_project_notified",
+          "@astral-sh/ty_ide_notified",
+          "@astral-sh/ty_server_notified",
+          "@astral-sh/ty_cli_notified",
+          "@astral-sh/ty_wasm_notified",
+          "@astral-sh/ty_benchmark_notified",
+          "@astral-sh/ty_python_core_notified",
+          "@astral-sh/ty_python_semantic_notified",
+          "@astral-sh/ty_module_resolver_notified"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://docs.astral.sh/ruff/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/astral-sh/ruff.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "d78b3d5f3206d187095a6138538ca91ea2de1d36",
+          "html_url": "https://github.com/astral-sh/ruff",
+          "stars": 48283
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

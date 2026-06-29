@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nlohmann",
+    "repo": "json",
+    "source": "https://github.com/nlohmann/json"
+  },
+  "repository": {
+    "name": "Design goals",
+    "description": "There are myriads of JSON libraries out there, and each may even have its reason to exist.",
+    "homepage": "https://json.nlohmann.me",
+    "docsRoot": "https://json.nlohmann.me",
+    "securityContact": "https://github.com/nlohmann/json/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/nlohmann/json/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/nlohmann/json",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/nlohmann/json/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nlohmann/json/index.json",
+    "trust": "/v0/repos/github.com/nlohmann/json/trust.json",
+    "profile": "/v0/repos/github.com/nlohmann/json/profile.json",
+    "queryTemplate": "/v0/repos/github.com/nlohmann/json/query?path={dot_path}",
+    "indexPath": "repos/github.com/nlohmann/json/"
+  }
+}

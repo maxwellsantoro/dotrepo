@@ -1,0 +1,71 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "socketio",
+    "repo": "socket.io",
+    "source": "https://github.com/socketio/socket.io"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/socketio/socket.io/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/socketio/socket.io",
+    "generatedAt": "2026-06-29T02:18:29.657358Z",
+    "evidencePath": "repos/github.com/socketio/socket.io/evidence.md"
+  },
+  "purpose": "Please check our documentation here.",
+  "name": "socket.io",
+  "homepage": "https://socket.io",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "javascript",
+    "nodejs",
+    "socket-io",
+    "websocket"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://socket.io/docs/v4/"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/darrachequesne"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/socketio/socket.io/profile.json",
+    "repository": "/v0/repos/github.com/socketio/socket.io/index.json",
+    "trust": "/v0/repos/github.com/socketio/socket.io/trust.json",
+    "queryTemplate": "/v0/repos/github.com/socketio/socket.io/query?path={dot_path}",
+    "indexPath": "repos/github.com/socketio/socket.io/"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "browser-use",
+    "repo": "browser-use",
+    "source": "https://github.com/browser-use/browser-use"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/browser-use/browser-use/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/browser-use/browser-use",
+    "generatedAt": "2026-06-29T01:17:17.19506Z",
+    "evidencePath": "repos/github.com/browser-use/browser-use/evidence.md"
+  },
+  "purpose": "🌤️ Want to skip the setup? Use our cloud for faster, scalable, stealth-enabled browser automation!",
+  "name": "The AI browser agent.",
+  "homepage": "https://browser-use.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "HTML",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "llm",
+    "ai-agents",
+    "ai-tools",
+    "browser-automation",
+    "python",
+    "browser-use",
+    "playwright"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "gettingStarted": "https://cloud.browser-use.com/new-api-key?utm_source=github&utm_medium=readme-quickstart-api-key"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/browser-use/browser-use/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/browser-use/browser-use/profile.json",
+    "repository": "/v0/repos/github.com/browser-use/browser-use/index.json",
+    "trust": "/v0/repos/github.com/browser-use/browser-use/trust.json",
+    "queryTemplate": "/v0/repos/github.com/browser-use/browser-use/query?path={dot_path}",
+    "indexPath": "repos/github.com/browser-use/browser-use/"
+  }
+}

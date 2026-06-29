@@ -1,0 +1,131 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "vscode",
+    "source": "https://github.com/microsoft/vscode"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/microsoft/vscode/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/microsoft/vscode",
+    "generatedAt": "2026-06-29T02:21:17.206197Z",
+    "evidencePath": "repos/github.com/microsoft/vscode/evidence.md"
+  },
+  "purpose": "This repository (\"`Code - OSS`\") is where we (Microsoft) develop the Visual Studio Code product together with the community.",
+  "name": "Visual Studio Code",
+  "homepage": "https://code.visualstudio.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CSS",
+    "Clojure",
+    "CoffeeScript",
+    "Cuda",
+    "Dart",
+    "Dockerfile",
+    "F#",
+    "Go",
+    "Groovy",
+    "HLSL",
+    "HTML",
+    "Hack",
+    "Handlebars",
+    "Inno Setup",
+    "Java",
+    "JavaScript",
+    "Julia",
+    "Jupyter Notebook",
+    "Less",
+    "Lua",
+    "Makefile",
+    "Mermaid",
+    "Objective-C",
+    "Objective-C++",
+    "PHP",
+    "Perl",
+    "PowerShell",
+    "Pug",
+    "Python",
+    "R",
+    "Raku",
+    "Roff",
+    "Ruby",
+    "Rust",
+    "SCSS",
+    "Scilab",
+    "ShaderLab",
+    "Shell",
+    "Swift",
+    "TeX",
+    "Tree-sitter Query",
+    "TypeScript",
+    "Visual Basic .NET"
+  ],
+  "topics": [
+    "editor",
+    "electron",
+    "visual-studio-code",
+    "typescript",
+    "microsoft"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://github.com/microsoft/vscode-docs"
+  },
+  "ownership": {
+    "maintainers": [
+      "@hediet",
+      "@alexdima",
+      "@lszomoru",
+      "@sandy081",
+      "@TylerLeonhardt",
+      "@rzhao271",
+      "@Yoyokrazy",
+      "@lramos15",
+      "@mjbvz",
+      "@alexr00",
+      "@sbatten"
+    ],
+    "securityContact": "https://aka.ms/SECURITY.md"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/microsoft/vscode/profile.json",
+    "repository": "/v0/repos/github.com/microsoft/vscode/index.json",
+    "trust": "/v0/repos/github.com/microsoft/vscode/trust.json",
+    "queryTemplate": "/v0/repos/github.com/microsoft/vscode/query?path={dot_path}",
+    "indexPath": "repos/github.com/microsoft/vscode/"
+  }
+}

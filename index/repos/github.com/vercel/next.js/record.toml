@@ -2,14 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/vercel/next.js"
-generated_at = "2026-06-29T01:57:27.834378Z"
+generated_at = "2026-06-29T02:18:43.293822Z"
 
 [record.trust]
-confidence = "low"
-provenance = ["inferred"]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "next.js"
@@ -33,7 +37,8 @@ languages = [
     "TypeScript",
     "WebAssembly",
 ]
-build = "pnpm run build"
+build = "cargo build --workspace"
+test = "cargo test --workspace"
 topics = [
     "react",
     "server-rendering",
@@ -51,6 +56,9 @@ topics = [
     "compiler",
 ]
 
+[docs]
+root = "https://nextjs.org"
+
 [relations]
 references = []
 
@@ -61,4 +69,4 @@ default_branch = "canary"
 fork = false
 head_sha = "a88f25caf0070b582a8ed83b1ae9e7135d7fd3bc"
 html_url = "https://github.com/vercel/next.js"
-stars = 140407
+stars = 140408

@@ -1,0 +1,118 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "meilisearch",
+    "repo": "meilisearch",
+    "source": "https://github.com/meilisearch/meilisearch"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/meilisearch/meilisearch/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/meilisearch/meilisearch",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/meilisearch/meilisearch/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/meilisearch/meilisearch",
+        "generated_at": "2026-06-26T18:30:40.085846Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Website | Roadmap | Meilisearch Cloud | Blog | Documentation | FAQ | Discord",
+        "description": "⚡ A lightning-fast search engine that fits effortlessly into your apps, websites, and workflow 🔍",
+        "homepage": "https://www.meilisearch.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Rust",
+          "Shell"
+        ],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "topics": [
+          "search-engine",
+          "typo-tolerance",
+          "site-search",
+          "database",
+          "enterprise-search",
+          "search",
+          "app-search",
+          "full-text-search",
+          "geosearch",
+          "instantsearch",
+          "search-as-you-type",
+          "faceting",
+          "fuzzy-search",
+          "vector-database",
+          "vectors",
+          "hybrid-search",
+          "semantic-search",
+          "ai",
+          "api",
+          "vector-search"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@meilisearch.com"
+      },
+      "docs": {
+        "root": "https://www.meilisearch.com/docs?utm_campaign=oss&utm_source=github&utm_medium=meilisearch&utm_content=get-started",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/meilisearch/meilisearch.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "0c621b3163eab53ff4641265e19330cebf27c297",
+          "html_url": "https://github.com/meilisearch/meilisearch",
+          "stars": 58308
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

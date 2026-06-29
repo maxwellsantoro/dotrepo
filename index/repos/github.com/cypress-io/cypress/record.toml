@@ -2,18 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/cypress-io/cypress"
-generated_at = "2026-06-26T18:33:54.906989Z"
+generated_at = "2026-06-29T02:20:46.648345Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@cypress-io/app` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@cypress-io/app` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "What is Cypress?"
-description = "The web has evolved."
+name = "The web has evolved. Finally, testing has too."
+description = "Fast, easy and reliable testing for anything that runs in a browser."
 homepage = "https://cypress.io"
 license = "MIT"
 visibility = "public"
@@ -57,6 +60,9 @@ maintainers = [
 team = "@cypress-io/app"
 security_contact = "https://cypress.io/security/"
 
+[docs]
+root = "https://on.cypress.io"
+
 [relations]
 references = []
 
@@ -65,6 +71,6 @@ archived = false
 clone_url = "https://github.com/cypress-io/cypress.git"
 default_branch = "develop"
 fork = false
-head_sha = "ad44f8a9da3d126ef3564ec6d5317d7f9b71851a"
+head_sha = "ea5637913ca3f74adb1511f34a10bec9175d6cdf"
 html_url = "https://github.com/cypress-io/cypress"
-stars = 50418
+stars = 50424

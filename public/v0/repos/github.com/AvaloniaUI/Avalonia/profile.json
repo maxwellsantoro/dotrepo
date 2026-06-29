@@ -1,0 +1,94 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "AvaloniaUI",
+    "repo": "Avalonia",
+    "source": "https://github.com/AvaloniaUI/Avalonia"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/AvaloniaUI/Avalonia/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/AvaloniaUI/Avalonia",
+    "generatedAt": "2026-06-29T01:17:43.676627Z",
+    "evidencePath": "repos/github.com/AvaloniaUI/Avalonia/evidence.md"
+  },
+  "purpose": "Avalonia is a cross-platform UI framework for dotnet, providing a flexible styling system and supporting a wide range of platforms such as Windows, macOS, Linux, iOS, Android and WebAssembly.",
+  "name": "About",
+  "homepage": "https://avaloniaui.net",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CSS",
+    "F#",
+    "HTML",
+    "JavaScript",
+    "Objective-C",
+    "Objective-C++",
+    "PowerShell",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "c-sharp",
+    "xaml",
+    "gui",
+    "avalonia",
+    "avaloniaui",
+    "cross-platform",
+    "dotnet",
+    "csharp",
+    "desktop",
+    "mobile",
+    "wasm",
+    "app-framework",
+    "android",
+    "browser",
+    "ios",
+    "linux",
+    "macos",
+    "windows",
+    "mvvm",
+    "xamarin"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "securityContact": "security@avaloniaui.net"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/AvaloniaUI/Avalonia/profile.json",
+    "repository": "/v0/repos/github.com/AvaloniaUI/Avalonia/index.json",
+    "trust": "/v0/repos/github.com/AvaloniaUI/Avalonia/trust.json",
+    "queryTemplate": "/v0/repos/github.com/AvaloniaUI/Avalonia/query?path={dot_path}",
+    "indexPath": "repos/github.com/AvaloniaUI/Avalonia/"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nodejs",
+    "repo": "node",
+    "source": "https://github.com/nodejs/node"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/nodejs/node/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/nodejs/node",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `.github/workflows/build-tarball.yml`. Left `repo.test` unset because `.github/workflows/build-shared.yml` and `.github/workflows/build-tarball.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/nodejs/node/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/nodejs/node",
+        "generated_at": "2026-06-29T02:18:16.345856Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `.github/workflows/build-tarball.yml`. Left `repo.test` unset because `.github/workflows/build-shared.yml` and `.github/workflows/build-tarball.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Node.js",
+        "description": "Node.js is an open-source, cross-platform JavaScript runtime environment.",
+        "homepage": "https://nodejs.org",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Assembly",
+          "Batchfile",
+          "C",
+          "C++",
+          "Emacs Lisp",
+          "Go Template",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "Nix",
+          "Perl",
+          "Python",
+          "R",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "make -C \"$TAR_DIR\" build-ci -j4 V=1",
+        "test": null,
+        "topics": [
+          "nodejs",
+          "javascript",
+          "node",
+          "js",
+          "runtime",
+          "mit",
+          "linux",
+          "macos",
+          "windows"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@nodejs/tsc",
+          "@nodejs/build",
+          "@nodejs/web-infra",
+          "@nodejs/streams",
+          "@nodejs/net",
+          "@nodejs/crypto",
+          "@nodejs/http",
+          "@nodejs/http2",
+          "@nodejs/quic",
+          "@nodejs/loaders",
+          "@nodejs/vm",
+          "@nodejs/node-api",
+          "@nodejs/gyp",
+          "@nodejs/wasi",
+          "@nodejs/startup",
+          "@nodejs/realm",
+          "@nodejs/v8-update",
+          "@nodejs/actions",
+          "@nodejs/releasers",
+          "@nodejs/test_runner",
+          "@nodejs/single-executable",
+          "@nodejs/security-wg",
+          "@nodejs/security-stewards",
+          "@nodejs/web-standards",
+          "@nodejs/typescript",
+          "@nodejs/performance",
+          "@nodejs/url",
+          "@nodejs/sqlite",
+          "@nodejs/config",
+          "@nodejs/inspector",
+          "@nodejs/path",
+          "@nodejs/userland-migrations",
+          "@nodejs/devcontainer",
+          "@nodejs/ffi"
+        ],
+        "team": null,
+        "security_contact": "security@lists.openjsf.org"
+      },
+      "docs": {
+        "root": "https://nodejs.org",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/nodejs/node.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "92b72d4f6015428864ed7ccc54a5dd3f20fa8140",
+          "html_url": "https://github.com/nodejs/node",
+          "stars": 118131
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

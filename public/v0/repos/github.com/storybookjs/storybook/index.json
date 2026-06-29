@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "storybookjs",
+    "repo": "storybook",
+    "source": "https://github.com/storybookjs/storybook"
+  },
+  "repository": {
+    "name": "Storybook",
+    "description": "Build bulletproof UI components faster",
+    "homepage": "https://storybook.js.org",
+    "docsRoot": "https://storybook.js.org/docs?ref=readme",
+    "securityContact": "https://x.com/storybookjs"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/storybookjs/storybook/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/storybookjs/storybook",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml`, `.github/workflows/fork-checks.yml`, and `.github/workflows/generate-sandboxes.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/storybookjs/storybook/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/storybookjs/storybook/index.json",
+    "trust": "/v0/repos/github.com/storybookjs/storybook/trust.json",
+    "profile": "/v0/repos/github.com/storybookjs/storybook/profile.json",
+    "queryTemplate": "/v0/repos/github.com/storybookjs/storybook/query?path={dot_path}",
+    "indexPath": "repos/github.com/storybookjs/storybook/"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "typst",
+    "repo": "typst",
+    "source": "https://github.com/typst/typst"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/typst/typst/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/typst/typst",
+    "generatedAt": "2026-06-29T01:08:11.75774Z",
+    "evidencePath": "repos/github.com/typst/typst/evidence.md"
+  },
+  "purpose": "Typst is a new markup-based typesetting system that is designed to be as powerful as LaTeX while being much easier to learn and use.",
+  "name": "Typst",
+  "homepage": "https://typst.app",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "JavaScript",
+    "Rust",
+    "TypeScript",
+    "Typst"
+  ],
+  "topics": [
+    "typesetting",
+    "compiler",
+    "markup",
+    "typst"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/typst/typst/profile.json",
+    "repository": "/v0/repos/github.com/typst/typst/index.json",
+    "trust": "/v0/repos/github.com/typst/typst/trust.json",
+    "queryTemplate": "/v0/repos/github.com/typst/typst/query?path={dot_path}",
+    "indexPath": "repos/github.com/typst/typst/"
+  }
+}

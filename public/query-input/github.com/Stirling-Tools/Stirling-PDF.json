@@ -1,0 +1,132 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Stirling-Tools",
+    "repo": "Stirling-PDF",
+    "source": "https://github.com/Stirling-Tools/Stirling-PDF"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Stirling-Tools/Stirling-PDF/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Stirling-Tools/Stirling-PDF",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/PR-Auto-Deploy-V2.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Stirling-Tools/Stirling-PDF/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Stirling-Tools/Stirling-PDF",
+        "generated_at": "2026-06-29T00:42:33.091777Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/PR-Auto-Deploy-V2.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Stirling PDF",
+        "description": "Stirling PDF is a powerful, open-source PDF editing platform.",
+        "homepage": "https://stirling.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "CSS",
+          "Dockerfile",
+          "Gherkin",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Jinja",
+          "PLpgSQL",
+          "PowerShell",
+          "Python",
+          "Rich Text Format",
+          "Rust",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "docker",
+          "java",
+          "pdf",
+          "pdf-converter",
+          "pdf-manipulation",
+          "pdf-merger",
+          "pdf-tools",
+          "pdf-web-apps",
+          "pdf-ocr",
+          "pdfmerger",
+          "pdf-editor",
+          "hacktoberfest",
+          "self-hosted"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@Frooodle",
+          "@Ludy87",
+          "@jbrunton96",
+          "@ConnorYoh",
+          "@DarioGii",
+          "@balazs-szucs",
+          "@reecebrowne",
+          "@EthanHealy01"
+        ],
+        "team": null,
+        "security_contact": "security@stirlingpdf.com"
+      },
+      "docs": {
+        "root": "https://docs.stirlingpdf.com",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Stirling-Tools/Stirling-PDF.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "013f14546257ebd97b42b09605763a5557058947",
+          "html_url": "https://github.com/Stirling-Tools/Stirling-PDF",
+          "stars": 84951
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

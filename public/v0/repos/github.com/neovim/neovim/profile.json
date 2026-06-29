@@ -1,0 +1,86 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "neovim",
+    "repo": "neovim",
+    "source": "https://github.com/neovim/neovim"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/neovim/neovim/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/neovim/neovim",
+    "generatedAt": "2026-06-29T02:21:24.281652Z",
+    "evidencePath": "repos/github.com/neovim/neovim/evidence.md"
+  },
+  "purpose": "Neovim is a project that seeks to aggressively refactor Vim in order to:",
+  "name": "Documentation | Chat",
+  "homepage": "https://neovim.io",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Lua",
+    "Makefile",
+    "Python",
+    "Roff",
+    "Ruby",
+    "Shell",
+    "Tree-sitter Query",
+    "Vim Script",
+    "Zig"
+  ],
+  "topics": [
+    "neovim",
+    "c",
+    "vim",
+    "lua",
+    "nvim",
+    "text-editor",
+    "api"
+  ],
+  "execution": {
+    "build": "make CMAKE_FLAGS=\"-D CI_BUILD=ON -D CMAKE_INSTALL_PREFIX:PATH=$INSTALL_PREFIX\""
+  },
+  "docs": {
+    "root": "https://neovim.io/doc/"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/neovim/neovim/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/neovim/neovim/profile.json",
+    "repository": "/v0/repos/github.com/neovim/neovim/index.json",
+    "trust": "/v0/repos/github.com/neovim/neovim/trust.json",
+    "queryTemplate": "/v0/repos/github.com/neovim/neovim/query?path={dot_path}",
+    "indexPath": "repos/github.com/neovim/neovim/"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "angular",
+    "repo": "angular",
+    "source": "https://github.com/angular/angular"
+  },
+  "repository": {
+    "name": "Angular",
+    "description": "Angular is a development platform for building mobile and desktop web applications",
+    "homepage": "https://angular.dev",
+    "securityContact": "https://bughunters.google.com/report"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/angular/angular/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/angular/angular",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/angular/angular/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/angular/angular/index.json",
+    "trust": "/v0/repos/github.com/angular/angular/trust.json",
+    "profile": "/v0/repos/github.com/angular/angular/profile.json",
+    "queryTemplate": "/v0/repos/github.com/angular/angular/query?path={dot_path}",
+    "indexPath": "repos/github.com/angular/angular/"
+  }
+}

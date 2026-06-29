@@ -1,0 +1,101 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Stirling-Tools",
+    "repo": "Stirling-PDF",
+    "source": "https://github.com/Stirling-Tools/Stirling-PDF"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/Stirling-Tools/Stirling-PDF/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/Stirling-Tools/Stirling-PDF",
+    "generatedAt": "2026-06-29T00:42:33.091777Z",
+    "evidencePath": "repos/github.com/Stirling-Tools/Stirling-PDF/evidence.md"
+  },
+  "purpose": "Stirling PDF is a powerful, open-source PDF editing platform.",
+  "name": "Stirling PDF",
+  "homepage": "https://stirling.com",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "Gherkin",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Jinja",
+    "PLpgSQL",
+    "PowerShell",
+    "Python",
+    "Rich Text Format",
+    "Rust",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "docker",
+    "java",
+    "pdf",
+    "pdf-converter",
+    "pdf-manipulation",
+    "pdf-merger",
+    "pdf-tools",
+    "pdf-web-apps",
+    "pdf-ocr",
+    "pdfmerger",
+    "pdf-editor",
+    "hacktoberfest",
+    "self-hosted"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://docs.stirlingpdf.com"
+  },
+  "ownership": {
+    "maintainers": [
+      "@Frooodle",
+      "@Ludy87",
+      "@jbrunton96",
+      "@ConnorYoh",
+      "@DarioGii",
+      "@balazs-szucs",
+      "@reecebrowne",
+      "@EthanHealy01"
+    ],
+    "securityContact": "security@stirlingpdf.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Stirling-Tools/Stirling-PDF/profile.json",
+    "repository": "/v0/repos/github.com/Stirling-Tools/Stirling-PDF/index.json",
+    "trust": "/v0/repos/github.com/Stirling-Tools/Stirling-PDF/trust.json",
+    "queryTemplate": "/v0/repos/github.com/Stirling-Tools/Stirling-PDF/query?path={dot_path}",
+    "indexPath": "repos/github.com/Stirling-Tools/Stirling-PDF/"
+  }
+}

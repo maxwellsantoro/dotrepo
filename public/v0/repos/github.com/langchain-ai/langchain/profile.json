@@ -1,0 +1,96 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "langchain-ai",
+    "repo": "langchain",
+    "source": "https://github.com/langchain-ai/langchain"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/langchain-ai/langchain/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/langchain-ai/langchain",
+    "generatedAt": "2026-06-29T02:18:09.130553Z",
+    "evidencePath": "repos/github.com/langchain-ai/langchain/evidence.md"
+  },
+  "purpose": "LangChain is a framework for building agents and LLM-powered applications.",
+  "name": "The agent engineering platform.",
+  "homepage": "https://docs.langchain.com/langchain/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "Shell",
+    "XSLT"
+  ],
+  "topics": [
+    "ai",
+    "anthropic",
+    "gemini",
+    "langchain",
+    "llm",
+    "openai",
+    "python",
+    "agents",
+    "ai-agents",
+    "chatgpt",
+    "enterprise",
+    "framework",
+    "generative-ai",
+    "multiagent",
+    "open-source",
+    "pydantic",
+    "rag",
+    "deepagents",
+    "langgraph",
+    "typescript"
+  ],
+  "execution": {
+    "build": "uv run pytest -m compile tests/integration_tests"
+  },
+  "docs": {
+    "root": "https://docs.langchain.com/oss/python/langchain/overview"
+  },
+  "ownership": {
+    "maintainers": [
+      "@ccurme",
+      "@eyurtsev",
+      "@mdrxy"
+    ]
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "inferred",
+    "confidence": "medium",
+    "provenance": [
+      "imported",
+      "inferred"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/langchain-ai/langchain/profile.json",
+    "repository": "/v0/repos/github.com/langchain-ai/langchain/index.json",
+    "trust": "/v0/repos/github.com/langchain-ai/langchain/trust.json",
+    "queryTemplate": "/v0/repos/github.com/langchain-ai/langchain/query?path={dot_path}",
+    "indexPath": "repos/github.com/langchain-ai/langchain/"
+  }
+}

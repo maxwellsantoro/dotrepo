@@ -1,0 +1,120 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "lobehub",
+    "repo": "lobehub",
+    "source": "https://github.com/lobehub/lobehub"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/lobehub/lobehub/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/lobehub/lobehub",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/lobehub/lobehub/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/lobehub/lobehub",
+        "generated_at": "2026-06-29T01:17:55.894799Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "LobeHub",
+        "description": "LobeHub organizes your agents into 7×24 operation.",
+        "homepage": "https://lobehub.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Dockerfile",
+          "Gherkin",
+          "HTML",
+          "JavaScript",
+          "MDX",
+          "PLpgSQL",
+          "Roff",
+          "Shell",
+          "TeX",
+          "TypeScript"
+        ],
+        "build": "pnpm build",
+        "test": "pnpm test",
+        "topics": [
+          "chatgpt",
+          "openai",
+          "ai",
+          "gpt",
+          "claude",
+          "gemini",
+          "knowledge-base",
+          "deepseek",
+          "agent",
+          "mcp",
+          "agent-harness",
+          "agent-collaboration",
+          "cao",
+          "skills",
+          "chief-agent-operator"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@arvinxx",
+          "@nekomeowww",
+          "@tjx666"
+        ],
+        "team": null,
+        "security_contact": "https://github.com/lobehub/lobehub/security/advisories/new"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/lobehub/lobehub.git",
+          "default_branch": "canary",
+          "fork": false,
+          "head_sha": "9aa51fe7d2061d350388b142db44b13109121982",
+          "html_url": "https://github.com/lobehub/lobehub",
+          "stars": 79192
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

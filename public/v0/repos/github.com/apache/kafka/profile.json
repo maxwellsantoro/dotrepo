@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "apache",
+    "repo": "kafka",
+    "source": "https://github.com/apache/kafka"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/apache/kafka/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/apache/kafka",
+    "generatedAt": "2026-06-29T02:20:35.26029Z",
+    "evidencePath": "repos/github.com/apache/kafka/evidence.md"
+  },
+  "purpose": "Follow instructions in https://kafka.apache.org/quickstart",
+  "name": "Build a JAR and run it",
+  "homepage": "https://kafka.apache.org/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Dockerfile",
+    "HTML",
+    "Java",
+    "Python",
+    "Scala",
+    "Shell",
+    "XSLT"
+  ],
+  "topics": [
+    "scala",
+    "kafka",
+    "java",
+    "streaming"
+  ],
+  "execution": {
+    "build": "./gradlew --build-cache --info $SCAN_ARG check releaseTarGz -x test",
+    "test": "./gradlew --build-cache --info $SCAN_ARG check releaseTarGz -x test"
+  },
+  "docs": {
+    "root": "https://kafka.apache.org/"
+  },
+  "ownership": {
+    "securityContact": "security@kafka.apache.org"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/apache/kafka/profile.json",
+    "repository": "/v0/repos/github.com/apache/kafka/index.json",
+    "trust": "/v0/repos/github.com/apache/kafka/trust.json",
+    "queryTemplate": "/v0/repos/github.com/apache/kafka/query?path={dot_path}",
+    "indexPath": "repos/github.com/apache/kafka/"
+  }
+}

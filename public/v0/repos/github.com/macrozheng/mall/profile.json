@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "macrozheng",
+    "repo": "mall",
+    "source": "https://github.com/macrozheng/mall"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/macrozheng/mall/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/macrozheng/mall",
+    "generatedAt": "2026-06-29T00:47:22.885414Z",
+    "evidencePath": "repos/github.com/macrozheng/mall/evidence.md"
+  },
+  "purpose": "1. **快速体验项目**：在线访问地址 。 2. **全套学习教程**：《mall学习教程》 。 3. **视频教程**：《mall视频教程》 。 4. **微服务版本**：基于Spring Cloud Alibaba的项目：mall-swarm 。 5. **分支说明**：`master`分支基于Spring Boot 3.5+JDK 17，`dev-v2`分支基于Spring Boot 2.7+JDK 8。",
+  "name": "mall",
+  "homepage": "https://www.macrozheng.com/admin/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Java",
+    "Shell"
+  ],
+  "topics": [
+    "spring-boot",
+    "spring-security",
+    "mybatis",
+    "docker",
+    "swagger-ui",
+    "mysql",
+    "redis",
+    "elasticsearch",
+    "mongodb",
+    "elk",
+    "spring",
+    "rabbitmq",
+    "spring-cloud",
+    "java",
+    "springcloud",
+    "springboot"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/macrozheng/mall/profile.json",
+    "repository": "/v0/repos/github.com/macrozheng/mall/index.json",
+    "trust": "/v0/repos/github.com/macrozheng/mall/trust.json",
+    "queryTemplate": "/v0/repos/github.com/macrozheng/mall/query?path={dot_path}",
+    "indexPath": "repos/github.com/macrozheng/mall/"
+  }
+}

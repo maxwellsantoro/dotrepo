@@ -1,0 +1,88 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "dbeaver",
+    "repo": "dbeaver",
+    "source": "https://github.com/dbeaver/dbeaver"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/dbeaver/dbeaver/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/dbeaver/dbeaver",
+    "generatedAt": "2026-06-29T01:17:39.216121Z",
+    "evidencePath": "repos/github.com/dbeaver/dbeaver/evidence.md"
+  },
+  "purpose": "Free multi-platform database tool for developers, SQL programmers, database administrators and analysts.",
+  "name": "DBeaver",
+  "homepage": "https://dbeaver.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "ANTLR",
+    "Batchfile",
+    "C++",
+    "CSS",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Shell",
+    "XSLT"
+  ],
+  "topics": [
+    "sql",
+    "database",
+    "dbeaver",
+    "gui",
+    "mysql",
+    "postgresql",
+    "db2",
+    "sqlite",
+    "erd",
+    "java",
+    "oracle",
+    "nosql",
+    "sqlserver",
+    "redshift",
+    "jdbc",
+    "ai",
+    "databricks",
+    "snowflake"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "securityContact": "security@dbeaver.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/dbeaver/dbeaver/profile.json",
+    "repository": "/v0/repos/github.com/dbeaver/dbeaver/index.json",
+    "trust": "/v0/repos/github.com/dbeaver/dbeaver/trust.json",
+    "queryTemplate": "/v0/repos/github.com/dbeaver/dbeaver/query?path={dot_path}",
+    "indexPath": "repos/github.com/dbeaver/dbeaver/"
+  }
+}

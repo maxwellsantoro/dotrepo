@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ethereum",
+    "repo": "go-ethereum",
+    "source": "https://github.com/ethereum/go-ethereum"
+  },
+  "repository": {
+    "name": "Go Ethereum",
+    "description": "Golang execution layer implementation of the Ethereum protocol.",
+    "homepage": "https://geth.ethereum.org",
+    "gettingStarted": "https://geth.ethereum.org/docs/getting-started/installing-geth",
+    "securityContact": "bounty@ethereum.org"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ethereum/go-ethereum/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ethereum/go-ethereum",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ethereum/go-ethereum/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ethereum/go-ethereum/index.json",
+    "trust": "/v0/repos/github.com/ethereum/go-ethereum/trust.json",
+    "profile": "/v0/repos/github.com/ethereum/go-ethereum/profile.json",
+    "queryTemplate": "/v0/repos/github.com/ethereum/go-ethereum/query?path={dot_path}",
+    "indexPath": "repos/github.com/ethereum/go-ethereum/"
+  }
+}

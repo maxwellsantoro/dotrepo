@@ -1,0 +1,83 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "django",
+    "repo": "django",
+    "source": "https://github.com/django/django"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/django/django/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/django/django",
+    "generatedAt": "2026-06-29T02:17:50.949412Z",
+    "evidencePath": "repos/github.com/django/django/evidence.md"
+  },
+  "purpose": "The Web framework for perfectionists with deadlines.",
+  "name": "django",
+  "homepage": "https://www.djangoproject.com/",
+  "license": "BSD-3-Clause",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "JavaScript",
+    "Jinja",
+    "Procfile",
+    "Python",
+    "Shell",
+    "Smarty"
+  ],
+  "topics": [
+    "python",
+    "django",
+    "web",
+    "framework",
+    "orm",
+    "templates",
+    "models",
+    "views",
+    "apps"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://www.djangoproject.com/"
+  },
+  "ownership": {
+    "securityContact": "https://www.djangoproject.com/security/"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/django/django/profile.json",
+    "repository": "/v0/repos/github.com/django/django/index.json",
+    "trust": "/v0/repos/github.com/django/django/trust.json",
+    "queryTemplate": "/v0/repos/github.com/django/django/query?path={dot_path}",
+    "indexPath": "repos/github.com/django/django/"
+  }
+}

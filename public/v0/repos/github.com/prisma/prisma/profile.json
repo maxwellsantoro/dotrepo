@@ -1,0 +1,98 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "prisma",
+    "repo": "prisma",
+    "source": "https://github.com/prisma/prisma"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/prisma/prisma/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/prisma/prisma",
+    "generatedAt": "2026-06-26T18:33:41.204086Z",
+    "evidencePath": "repos/github.com/prisma/prisma/evidence.md"
+  },
+  "purpose": "Prisma ORM is a **next-generation ORM** that consists of these tools:",
+  "name": "Prisma",
+  "homepage": "https://www.prisma.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Dockerfile",
+    "JavaScript",
+    "PLpgSQL",
+    "Shell",
+    "TSQL",
+    "TypeScript"
+  ],
+  "topics": [
+    "prisma",
+    "orm",
+    "database",
+    "typescript",
+    "javascript",
+    "nodejs",
+    "mariadb",
+    "mysql",
+    "postgresql",
+    "sqlserver",
+    "sql-server",
+    "mssql",
+    "sqlite",
+    "mongodb",
+    "mongo",
+    "prisma-client",
+    "mongodb-orm",
+    "postgres",
+    "cockroachdb",
+    "query-builder"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {
+    "root": "https://www.prisma.io/docs/",
+    "gettingStarted": "https://www.prisma.io/docs/getting-started/prisma-orm/quickstart/prisma-postgres?utm_source=github&utm_medium=prisma-readme"
+  },
+  "ownership": {
+    "maintainers": [
+      "@prisma/orm-ts"
+    ],
+    "team": "@prisma/orm-ts",
+    "securityContact": "security@prisma.io"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/prisma/prisma/profile.json",
+    "repository": "/v0/repos/github.com/prisma/prisma/index.json",
+    "trust": "/v0/repos/github.com/prisma/prisma/trust.json",
+    "queryTemplate": "/v0/repos/github.com/prisma/prisma/query?path={dot_path}",
+    "indexPath": "repos/github.com/prisma/prisma/"
+  }
+}

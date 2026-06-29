@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "celery",
+    "repo": "celery",
+    "source": "https://github.com/celery/celery"
+  },
+  "repository": {
+    "name": "celery",
+    "description": "Distributed Task Queue (development branch)",
+    "homepage": "https://docs.celeryq.dev",
+    "docsRoot": "https://docs.celeryq.dev",
+    "securityContact": "tomer.nosrati@gmail.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/celery/celery/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/celery/celery",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/docker.yml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/celery/celery/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/celery/celery/index.json",
+    "trust": "/v0/repos/github.com/celery/celery/trust.json",
+    "profile": "/v0/repos/github.com/celery/celery/profile.json",
+    "queryTemplate": "/v0/repos/github.com/celery/celery/query?path={dot_path}",
+    "indexPath": "repos/github.com/celery/celery/"
+  }
+}

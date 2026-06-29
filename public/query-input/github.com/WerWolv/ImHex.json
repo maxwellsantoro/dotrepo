@@ -1,0 +1,124 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "WerWolv",
+    "repo": "ImHex",
+    "source": "https://github.com/WerWolv/ImHex"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/WerWolv/ImHex/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/WerWolv/ImHex",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/WerWolv/ImHex/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/WerWolv/ImHex",
+        "generated_at": "2026-06-29T02:17:38.521332Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Discord Server",
+        "description": "Would you like to appear here as well? Contact us at imhex@werwolv.net!",
+        "homepage": "https://imhex.werwolv.net/",
+        "license": "GPL-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C#",
+          "C++",
+          "CMake",
+          "GDB",
+          "GLSL",
+          "Objective-C",
+          "Python"
+        ],
+        "build": "-DCMAKE_C_COMPILER_LAUNCHER=ccache                                                        \\",
+        "test": null,
+        "topics": [
+          "hex-editor",
+          "reverse-engineering",
+          "ips",
+          "dear-imgui",
+          "disassembler",
+          "analyzer",
+          "pattern-language",
+          "dark-mode",
+          "hacktoberfest",
+          "forensics",
+          "multi-platform",
+          "binary-analysis",
+          "c-plus-plus",
+          "static-analysis",
+          "windows",
+          "cybersecurity",
+          "hacking",
+          "cpp",
+          "linux",
+          "macos"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "unknown"
+      },
+      "docs": {
+        "root": "https://imhex.werwolv.net/",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/WerWolv/ImHex.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "af55d25269f201164c7f7e71c943cba4d26b04e3",
+          "html_url": "https://github.com/WerWolv/ImHex",
+          "stars": 54031
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

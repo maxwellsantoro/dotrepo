@@ -1,0 +1,89 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "denoland",
+    "repo": "deno",
+    "source": "https://github.com/denoland/deno"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/denoland/deno/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/denoland/deno",
+    "generatedAt": "2026-06-29T02:20:50.604386Z",
+    "evidencePath": "repos/github.com/denoland/deno/evidence.md"
+  },
+  "purpose": "A modern runtime for JavaScript and TypeScript.",
+  "name": "Deno",
+  "homepage": "https://deno.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Astro",
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Mustache",
+    "Nix",
+    "Nunjucks",
+    "Python",
+    "Rust",
+    "Shell",
+    "Svelte",
+    "TypeScript",
+    "Vento",
+    "WebAssembly"
+  ],
+  "topics": [
+    "deno",
+    "typescript",
+    "javascript",
+    "rust"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://deno.com",
+    "gettingStarted": "https://docs.deno.com/runtime/manual/getting_started/installation"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/denoland/deno/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/denoland/deno/profile.json",
+    "repository": "/v0/repos/github.com/denoland/deno/index.json",
+    "trust": "/v0/repos/github.com/denoland/deno/trust.json",
+    "queryTemplate": "/v0/repos/github.com/denoland/deno/query?path={dot_path}",
+    "indexPath": "repos/github.com/denoland/deno/"
+  }
+}

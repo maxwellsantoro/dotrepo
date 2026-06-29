@@ -1,0 +1,73 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rust-lang",
+    "repo": "rustlings",
+    "source": "https://github.com/rust-lang/rustlings"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/rust-lang/rustlings/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/rust-lang/rustlings",
+    "generatedAt": "2026-06-29T02:01:59.765407Z",
+    "evidencePath": "repos/github.com/rust-lang/rustlings/evidence.md"
+  },
+  "purpose": "Small exercises to get you used to reading and writing Rust code - _Recommended in parallel to reading the official Rust book 📚️_",
+  "name": "Rustlings 🦀",
+  "homepage": "https://rustlings.rust-lang.org",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "Just",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "rust",
+    "rustlings",
+    "beginner-friendly",
+    "exercises"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://rustlings.rust-lang.org"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/rust-lang/rustlings/profile.json",
+    "repository": "/v0/repos/github.com/rust-lang/rustlings/index.json",
+    "trust": "/v0/repos/github.com/rust-lang/rustlings/trust.json",
+    "queryTemplate": "/v0/repos/github.com/rust-lang/rustlings/query?path={dot_path}",
+    "indexPath": "repos/github.com/rust-lang/rustlings/"
+  }
+}

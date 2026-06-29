@@ -1,0 +1,108 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tokio-rs",
+    "repo": "tracing",
+    "source": "https://github.com/tokio-rs/tracing"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/tokio-rs/tracing/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/tokio-rs/tracing",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tokio-rs/tracing` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/tokio-rs/tracing/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/tokio-rs/tracing",
+        "generated_at": "2026-06-26T17:45:06.077058Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tokio-rs/tracing` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Branch set-up",
+        "description": "Application level tracing for Rust.",
+        "homepage": "https://tracing.rs",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Rust",
+          "Shell"
+        ],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "topics": [
+          "rust",
+          "rust-lang",
+          "tracing",
+          "logging",
+          "logging-library",
+          "logging-facade",
+          "logging-and-metrics",
+          "diagnostics"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@hawkw",
+          "@hds",
+          "@tokio-rs/tracing",
+          "@yaahc",
+          "@davidbarsky"
+        ],
+        "team": "@tokio-rs/tracing",
+        "security_contact": "security@tokio.rs"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/tokio-rs/tracing.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "d9d4c542de10f5d3a711b7a45ffe450fd0666437",
+          "html_url": "https://github.com/tokio-rs/tracing",
+          "stars": 6757
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

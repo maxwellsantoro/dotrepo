@@ -1,0 +1,118 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "gogs",
+    "repo": "gogs",
+    "source": "https://github.com/gogs/gogs"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/gogs/gogs/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/gogs/gogs",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/gogs/gogs/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/gogs/gogs",
+        "generated_at": "2026-06-29T01:18:50.39236Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Gogs",
+        "description": "👉 Deploy on DigitalOcean and get $200 in free credits!",
+        "homepage": "https://gogs.io",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "CSS",
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "HTML",
+          "JavaScript",
+          "Less",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "gogs",
+          "go",
+          "git",
+          "docker",
+          "mysql",
+          "postgresql",
+          "raspberry-pi",
+          "self-hosted",
+          "sqlite3",
+          "version-control",
+          "source-code-management"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@unknwon"
+        ],
+        "team": null,
+        "security_contact": "security@gogs.io"
+      },
+      "docs": {
+        "root": "https://gogs.io/api-reference",
+        "getting_started": "https://gogs.io/getting-started/installation",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/gogs/gogs.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "5f51118ab513522462a54cef30599d7ddffcc55f",
+          "html_url": "https://github.com/gogs/gogs",
+          "stars": 47631
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

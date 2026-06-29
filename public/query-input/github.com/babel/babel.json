@@ -1,0 +1,108 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "babel",
+    "repo": "babel",
+    "source": "https://github.com/babel/babel"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/babel/babel/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/babel/babel",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/babel/babel/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/babel/babel",
+        "generated_at": "2026-06-29T02:20:42.94923Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "babel",
+        "description": "The compiler for writing next generation JavaScript.",
+        "homepage": "https://babel.dev",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "yarn build",
+        "test": "yarn test",
+        "topics": [
+          "babel",
+          "javascript",
+          "ast",
+          "compiler",
+          "flavortown",
+          "es6",
+          "es2015"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@babeljs.io"
+      },
+      "docs": {
+        "root": "https://babel.dev",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/babel/babel.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "c2f2084a5ab862328cd7be9f3b9bff26f81c9fd1",
+          "html_url": "https://github.com/babel/babel",
+          "stars": 44009
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

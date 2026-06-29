@@ -1,0 +1,135 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tensorflow",
+    "repo": "tensorflow",
+    "source": "https://github.com/tensorflow/tensorflow"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/tensorflow/tensorflow/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/tensorflow/tensorflow",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/tensorflow/tensorflow/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/tensorflow/tensorflow",
+        "generated_at": "2026-06-26T18:33:11.020636Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Install",
+        "description": "TensorFlow is an end-to-end open source platform for machine learning.",
+        "homepage": "https://tensorflow.org",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "C",
+          "C#",
+          "C++",
+          "CMake",
+          "CSS",
+          "Cython",
+          "Dockerfile",
+          "Go",
+          "Go Template",
+          "HTML",
+          "Java",
+          "Jupyter Notebook",
+          "Linker Script",
+          "MLIR",
+          "Makefile",
+          "Objective-C",
+          "Objective-C++",
+          "Perl",
+          "Python",
+          "Ruby",
+          "Shell",
+          "Smarty",
+          "Starlark",
+          "Swift",
+          "Vim Snippet"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "tensorflow",
+          "machine-learning",
+          "python",
+          "deep-learning",
+          "deep-neural-networks",
+          "neural-network",
+          "ml",
+          "distributed"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@qqfish",
+          "@caisq",
+          "@penpornk",
+          "@azaks2",
+          "@chsigg",
+          "@mdanatg",
+          "@rohan100jain",
+          "@markdaoust",
+          "@aminim",
+          "@perfinion"
+        ],
+        "team": null,
+        "security_contact": "https://g.co/vulnz"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/tensorflow/tensorflow.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "f983bdfa03c3167d1ca19ac4d8691942fa2bbf69",
+          "html_url": "https://github.com/tensorflow/tensorflow",
+          "stars": 195943
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

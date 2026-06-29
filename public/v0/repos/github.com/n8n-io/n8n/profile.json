@@ -1,0 +1,109 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "n8n-io",
+    "repo": "n8n",
+    "source": "https://github.com/n8n-io/n8n"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/n8n-io/n8n/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/n8n-io/n8n",
+    "generatedAt": "2026-06-29T02:21:20.795242Z",
+    "evidencePath": "repos/github.com/n8n-io/n8n/evidence.md"
+  },
+  "purpose": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+  "name": "n8n",
+  "homepage": "https://n8n.io",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "HCL",
+    "HTML",
+    "Handlebars",
+    "JavaScript",
+    "Just",
+    "MDX",
+    "Mermaid",
+    "Open Policy Agent",
+    "Python",
+    "Rich Text Format",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "automation",
+    "ipaas",
+    "n8n",
+    "workflow",
+    "typescript",
+    "self-hosted",
+    "integrations",
+    "workflow-automation",
+    "cli",
+    "development",
+    "low-code",
+    "data-flow",
+    "integration-framework",
+    "apis",
+    "low-code-platform",
+    "no-code",
+    "ai",
+    "mcp",
+    "mcp-client",
+    "mcp-server"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {
+    "root": "https://docs.n8n.io",
+    "gettingStarted": "https://docs.n8n.io/hosting/installation/npm/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@n8n-io/migrations-review",
+      "@n8n-io/qa-dx"
+    ],
+    "securityContact": "https://n8n.notion.site/n8n-vulnerability-disclosure-program"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/n8n-io/n8n/profile.json",
+    "repository": "/v0/repos/github.com/n8n-io/n8n/index.json",
+    "trust": "/v0/repos/github.com/n8n-io/n8n/trust.json",
+    "queryTemplate": "/v0/repos/github.com/n8n-io/n8n/query?path={dot_path}",
+    "indexPath": "repos/github.com/n8n-io/n8n/"
+  }
+}

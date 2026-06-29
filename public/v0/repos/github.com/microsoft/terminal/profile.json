@@ -1,0 +1,84 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "terminal",
+    "source": "https://github.com/microsoft/terminal"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/microsoft/terminal/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/microsoft/terminal",
+    "generatedAt": "2026-06-29T00:47:25.218129Z",
+    "evidencePath": "repos/github.com/microsoft/terminal/evidence.md"
+  },
+  "purpose": "This repository contains the source code for:",
+  "name": "Welcome to the Windows Terminal, Console and Command-Line repo",
+  "homepage": "https://github.com/microsoft/terminal",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "HLSL",
+    "HTML",
+    "JavaScript",
+    "Jupyter Notebook",
+    "PowerShell",
+    "Python",
+    "Roff"
+  ],
+  "topics": [
+    "console",
+    "terminal",
+    "cmd",
+    "wsl",
+    "windows-console",
+    "command-line",
+    "windows-terminal",
+    "contributions-welcome",
+    "good-first-issue",
+    "windows",
+    "hacktoberfest"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "securityContact": "secure@microsoft.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/microsoft/terminal/profile.json",
+    "repository": "/v0/repos/github.com/microsoft/terminal/index.json",
+    "trust": "/v0/repos/github.com/microsoft/terminal/trust.json",
+    "queryTemplate": "/v0/repos/github.com/microsoft/terminal/query?path={dot_path}",
+    "indexPath": "repos/github.com/microsoft/terminal/"
+  }
+}

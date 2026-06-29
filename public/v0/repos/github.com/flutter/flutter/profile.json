@@ -1,0 +1,116 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "flutter",
+    "repo": "flutter",
+    "source": "https://github.com/flutter/flutter"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/flutter/flutter/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/flutter/flutter",
+    "generatedAt": "2026-06-29T02:21:02.121226Z",
+    "evidencePath": "repos/github.com/flutter/flutter/evidence.md"
+  },
+  "purpose": "Flutter is Google's SDK for crafting beautiful, fast user experiences for mobile, web, and desktop from a single codebase.",
+  "name": "Flutter",
+  "homepage": "https://flutter.dev",
+  "license": "BSD-3-Clause",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dart",
+    "GLSL",
+    "Go Template",
+    "HLSL",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Lex",
+    "Objective-C",
+    "Objective-C++",
+    "PowerShell",
+    "Python",
+    "Ruby",
+    "Shell",
+    "Swift"
+  ],
+  "topics": [
+    "mobile",
+    "android",
+    "ios",
+    "material-design",
+    "dart",
+    "skia",
+    "web",
+    "web-framework",
+    "windows",
+    "macos",
+    "fuchsia",
+    "dart-platform",
+    "linux-desktop",
+    "app-framework",
+    "desktop",
+    "cross-platform",
+    "flutter",
+    "flutter-package",
+    "mobile-development"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://flutter.dev"
+  },
+  "ownership": {
+    "maintainers": [
+      "@vashworth",
+      "@jtmcdole",
+      "@loic-sharma",
+      "@flutter/android-reviewers",
+      "@flutter/ios-reviewers",
+      "@flutter/macos-reviewers",
+      "@flutter/linux-reviewers",
+      "@flutter/windows-reviewers",
+      "@reidbaker",
+      "@gmackall",
+      "@mdebbar",
+      "@bkonyi"
+    ]
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/flutter/flutter/profile.json",
+    "repository": "/v0/repos/github.com/flutter/flutter/index.json",
+    "trust": "/v0/repos/github.com/flutter/flutter/trust.json",
+    "queryTemplate": "/v0/repos/github.com/flutter/flutter/query?path={dot_path}",
+    "indexPath": "repos/github.com/flutter/flutter/"
+  }
+}

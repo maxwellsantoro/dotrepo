@@ -1,0 +1,74 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "boto",
+    "repo": "boto3",
+    "source": "https://github.com/boto/boto3"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/boto/boto3/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/boto/boto3",
+    "generatedAt": "2026-06-26T18:32:01.723428Z",
+    "evidencePath": "repos/github.com/boto/boto3/evidence.md"
+  },
+  "purpose": "Boto3, an AWS SDK for Python",
+  "name": "boto3",
+  "homepage": "https://aws.amazon.com/sdk-for-python/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Python"
+  ],
+  "topics": [
+    "python",
+    "aws",
+    "cloud",
+    "cloud-management",
+    "aws-sdk"
+  ],
+  "execution": {
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@boto/sync-team-aws-sdk-python"
+    ],
+    "team": "@boto/sync-team-aws-sdk-python",
+    "securityContact": "aws-security@amazon.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/boto/boto3/profile.json",
+    "repository": "/v0/repos/github.com/boto/boto3/index.json",
+    "trust": "/v0/repos/github.com/boto/boto3/trust.json",
+    "queryTemplate": "/v0/repos/github.com/boto/boto3/query?path={dot_path}",
+    "indexPath": "repos/github.com/boto/boto3/"
+  }
+}

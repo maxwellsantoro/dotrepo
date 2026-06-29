@@ -1,0 +1,88 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "react",
+    "repo": "react-native",
+    "source": "https://github.com/react/react-native"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/react/react-native/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/react/react-native",
+    "generatedAt": "2026-06-29T00:42:36.876523Z",
+    "evidencePath": "repos/github.com/react/react-native/evidence.md"
+  },
+  "purpose": "Learn once, write anywhere: Build mobile apps with React.",
+  "name": "React Native",
+  "homepage": "https://reactnative.dev",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "C",
+    "C++",
+    "CMake",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Kotlin",
+    "Objective-C",
+    "Objective-C++",
+    "Python",
+    "Ruby",
+    "Shell",
+    "Smarty",
+    "Swift",
+    "TypeScript"
+  ],
+  "topics": [
+    "android",
+    "app-framework",
+    "ios",
+    "mobile",
+    "mobile-development",
+    "react-native",
+    "cross-platform",
+    "react"
+  ],
+  "execution": {
+    "build": "yarn build",
+    "test": "yarn test"
+  },
+  "docs": {
+    "gettingStarted": "https://reactnative.dev/docs/getting-started"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/react/react-native/profile.json",
+    "repository": "/v0/repos/github.com/react/react-native/index.json",
+    "trust": "/v0/repos/github.com/react/react-native/trust.json",
+    "queryTemplate": "/v0/repos/github.com/react/react-native/query?path={dot_path}",
+    "indexPath": "repos/github.com/react/react-native/"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "fastapi",
+    "repo": "fastapi",
+    "source": "https://github.com/fastapi/fastapi"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/fastapi/fastapi/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/fastapi/fastapi",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/fastapi/fastapi/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/fastapi/fastapi",
+        "generated_at": "2026-06-28T02:27:50.907562Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "FastAPI",
+        "description": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+        "homepage": "https://fastapi.tiangolo.com/",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "HTML",
+          "JavaScript",
+          "Python",
+          "Shell"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "python",
+          "json",
+          "swagger-ui",
+          "redoc",
+          "starlette",
+          "openapi",
+          "api",
+          "openapi3",
+          "framework",
+          "async",
+          "asyncio",
+          "uvicorn",
+          "python3",
+          "python-types",
+          "pydantic",
+          "json-schema",
+          "fastapi",
+          "swagger",
+          "rest",
+          "web"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/fastapi/fastapi.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "1929ac23195136e8616ed1b7c3fd84c65b26d234",
+          "html_url": "https://github.com/fastapi/fastapi",
+          "stars": 99718
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

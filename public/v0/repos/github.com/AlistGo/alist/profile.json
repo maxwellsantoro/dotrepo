@@ -1,0 +1,74 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "AlistGo",
+    "repo": "alist",
+    "source": "https://github.com/AlistGo/alist"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/AlistGo/alist/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/AlistGo/alist",
+    "generatedAt": "2026-06-29T01:18:40.475872Z",
+    "evidencePath": "repos/github.com/AlistGo/alist/evidence.md"
+  },
+  "purpose": "Please go to our discussion forum for general questions, **issues are for bug reports and feature requests only.**",
+  "name": "discussions",
+  "homepage": "https://alistgo.com",
+  "license": "AGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Go",
+    "Makefile",
+    "Shell"
+  ],
+  "topics": [
+    "golang",
+    "gin",
+    "webdav",
+    "solidjs",
+    "file-server",
+    "onedrive"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "http://contrib.nn.ci/api?repo=alist-org/alist&repo=alist-org/alist-web&repo=alist-org/docs"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/AlistGo/alist/profile.json",
+    "repository": "/v0/repos/github.com/AlistGo/alist/index.json",
+    "trust": "/v0/repos/github.com/AlistGo/alist/trust.json",
+    "queryTemplate": "/v0/repos/github.com/AlistGo/alist/query?path={dot_path}",
+    "indexPath": "repos/github.com/AlistGo/alist/"
+  }
+}

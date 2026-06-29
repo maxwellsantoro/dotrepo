@@ -1,0 +1,119 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "microsoft",
+    "repo": "semantic-kernel",
+    "source": "https://github.com/microsoft/semantic-kernel"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/microsoft/semantic-kernel/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/microsoft/semantic-kernel",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/dotnet-build-and-test.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/microsoft/semantic-kernel/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/microsoft/semantic-kernel",
+        "generated_at": "2026-06-29T01:18:06.594189Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/dotnet-build-and-test.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Semantic Kernel",
+        "description": "Build intelligent AI agents and multi-agent systems with this enterprise-ready orchestration framework",
+        "homepage": "https://aka.ms/semantic-kernel",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "Bicep",
+          "C#",
+          "CSS",
+          "F#",
+          "HTML",
+          "Handlebars",
+          "JavaScript",
+          "Jupyter Notebook",
+          "Makefile",
+          "PowerShell",
+          "Python",
+          "Shell",
+          "Smalltalk",
+          "TypeScript"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "ai",
+          "artificial-intelligence",
+          "llm",
+          "openai",
+          "sdk"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@microsoft/octo-semantickernel-pr-dotnet",
+          "@microsoft/octo-semantickernel-pr-python",
+          "@microsoft/octo-semantickernel-pr-java"
+        ],
+        "team": null,
+        "security_contact": "https://msrc.microsoft.com/create-report"
+      },
+      "docs": {
+        "root": "https://learn.microsoft.com/en-us/dotnet/api/microsoft.semantickernel?view=semantic-kernel-dotnet",
+        "getting_started": "https://docs.trychroma.com/docs/overview/getting-started",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/microsoft/semantic-kernel.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "dfc5227227352e7cf4b11de1d9b8e49ebc7b43ff",
+          "html_url": "https://github.com/microsoft/semantic-kernel",
+          "stars": 28213
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

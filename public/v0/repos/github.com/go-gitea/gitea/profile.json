@@ -1,0 +1,99 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "go-gitea",
+    "repo": "gitea",
+    "source": "https://github.com/go-gitea/gitea"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/go-gitea/gitea/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/go-gitea/gitea",
+    "generatedAt": "2026-06-26T18:31:38.796649Z",
+    "evidencePath": "repos/github.com/go-gitea/gitea/evidence.md"
+  },
+  "purpose": "繁體中文 | 简体中文",
+  "name": "Gitea",
+  "homepage": "https://gitea.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Handlebars",
+    "JavaScript",
+    "Jsonnet",
+    "Jupyter Notebook",
+    "Less",
+    "Makefile",
+    "Nix",
+    "Shell",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "gitea",
+    "golang",
+    "devops",
+    "git",
+    "gitlab",
+    "github",
+    "go",
+    "hacktoberfest",
+    "git-gui",
+    "git-server",
+    "docker-registry-v2",
+    "github-actions",
+    "maven-server",
+    "npm-registry",
+    "vue",
+    "bitbucket",
+    "cicd",
+    "typescript",
+    "self-hosted",
+    "git-lfs"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://gitea.com/gitea/docs"
+  },
+  "ownership": {
+    "securityContact": "security@gitea.io"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/go-gitea/gitea/profile.json",
+    "repository": "/v0/repos/github.com/go-gitea/gitea/index.json",
+    "trust": "/v0/repos/github.com/go-gitea/gitea/trust.json",
+    "queryTemplate": "/v0/repos/github.com/go-gitea/gitea/query?path={dot_path}",
+    "indexPath": "repos/github.com/go-gitea/gitea/"
+  }
+}

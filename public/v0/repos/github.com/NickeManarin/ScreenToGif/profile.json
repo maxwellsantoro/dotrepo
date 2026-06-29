@@ -1,0 +1,68 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "NickeManarin",
+    "repo": "ScreenToGif",
+    "source": "https://github.com/NickeManarin/ScreenToGif"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/NickeManarin/ScreenToGif/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/NickeManarin/ScreenToGif",
+    "generatedAt": "2026-06-29T01:18:24.158637Z",
+    "evidencePath": "repos/github.com/NickeManarin/ScreenToGif/evidence.md"
+  },
+  "purpose": "ScreenToGif 🎬 screentogif.com",
+  "name": "screen recorder",
+  "homepage": "http://www.screentogif.com",
+  "license": "MS-PL",
+  "visibility": "public",
+  "languages": [
+    "C#",
+    "CSS"
+  ],
+  "topics": [
+    "gif",
+    "recorder",
+    "editor",
+    "video",
+    "webcam",
+    "sketchboard",
+    "wpf"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/NickeManarin/ScreenToGif/profile.json",
+    "repository": "/v0/repos/github.com/NickeManarin/ScreenToGif/index.json",
+    "trust": "/v0/repos/github.com/NickeManarin/ScreenToGif/trust.json",
+    "queryTemplate": "/v0/repos/github.com/NickeManarin/ScreenToGif/query?path={dot_path}",
+    "indexPath": "repos/github.com/NickeManarin/ScreenToGif/"
+  }
+}

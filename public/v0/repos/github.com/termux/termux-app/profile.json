@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "termux",
+    "repo": "termux-app",
+    "source": "https://github.com/termux/termux-app"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/termux/termux-app/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/termux/termux-app",
+    "generatedAt": "2026-06-29T01:16:31.876631Z",
+    "evidencePath": "repos/github.com/termux/termux-app/evidence.md"
+  },
+  "purpose": "Termux is an Android terminal application and Linux environment.",
+  "name": "Termux application",
+  "homepage": "https://f-droid.org/en/packages/com.termux",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "C",
+    "C++",
+    "Java",
+    "Makefile",
+    "Shell"
+  ],
+  "topics": [
+    "android",
+    "terminal",
+    "termux",
+    "linux",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "build": "./gradlew test",
+    "test": "./gradlew test"
+  },
+  "docs": {
+    "root": "https://iterm2.com/documentation.html"
+  },
+  "ownership": {
+    "securityContact": "https://termux.dev/security"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/termux/termux-app/profile.json",
+    "repository": "/v0/repos/github.com/termux/termux-app/index.json",
+    "trust": "/v0/repos/github.com/termux/termux-app/trust.json",
+    "queryTemplate": "/v0/repos/github.com/termux/termux-app/query?path={dot_path}",
+    "indexPath": "repos/github.com/termux/termux-app/"
+  }
+}

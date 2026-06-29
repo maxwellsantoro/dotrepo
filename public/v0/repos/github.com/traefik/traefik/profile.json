@@ -1,0 +1,88 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "traefik",
+    "repo": "traefik",
+    "source": "https://github.com/traefik/traefik"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/traefik/traefik/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/traefik/traefik",
+    "generatedAt": "2026-06-29T02:01:29.635276Z",
+    "evidencePath": "repos/github.com/traefik/traefik/evidence.md"
+  },
+  "purpose": "Traefik (pronounced _traffic_) is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.",
+  "name": "Traefik",
+  "homepage": "https://traefik.io",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Nix",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "microservice",
+    "docker",
+    "marathon",
+    "mesos",
+    "consul",
+    "etcd",
+    "kubernetes",
+    "load-balancer",
+    "reverse-proxy",
+    "zookeeper",
+    "letsencrypt",
+    "golang",
+    "go",
+    "traefik"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://traefik.io"
+  },
+  "ownership": {
+    "securityContact": "https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=traefik"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "imported",
+    "confidence": "medium",
+    "provenance": [
+      "imported"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/traefik/traefik/profile.json",
+    "repository": "/v0/repos/github.com/traefik/traefik/index.json",
+    "trust": "/v0/repos/github.com/traefik/traefik/trust.json",
+    "queryTemplate": "/v0/repos/github.com/traefik/traefik/query?path={dot_path}",
+    "indexPath": "repos/github.com/traefik/traefik/"
+  }
+}

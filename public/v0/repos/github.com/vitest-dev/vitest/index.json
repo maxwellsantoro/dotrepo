@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "vitest-dev",
+    "repo": "vitest",
+    "source": "https://github.com/vitest-dev/vitest"
+  },
+  "repository": {
+    "name": "Vitest",
+    "description": "Next generation testing framework powered by Vite.",
+    "homepage": "https://vitest.dev",
+    "docsRoot": "https://vitest.dev",
+    "gettingStarted": "https://vitest.dev/guide/",
+    "securityContact": "https://github.com/vitest-dev/vitest/security"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/vitest-dev/vitest/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/vitest-dev/vitest",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/vitest-dev/vitest/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/vitest-dev/vitest/index.json",
+    "trust": "/v0/repos/github.com/vitest-dev/vitest/trust.json",
+    "profile": "/v0/repos/github.com/vitest-dev/vitest/profile.json",
+    "queryTemplate": "/v0/repos/github.com/vitest-dev/vitest/query?path={dot_path}",
+    "indexPath": "repos/github.com/vitest-dev/vitest/"
+  }
+}

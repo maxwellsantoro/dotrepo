@@ -1,0 +1,93 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Kludex",
+    "repo": "starlette",
+    "source": "https://github.com/Kludex/starlette"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Kludex/starlette/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Kludex/starlette",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Kludex/starlette/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Kludex/starlette",
+        "generated_at": "2026-06-26T18:36:06.772023Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Starlette",
+        "description": "✨ The little ASGI framework that shines.",
+        "homepage": "https://starlette.dev",
+        "license": "BSD-3-Clause",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Python",
+          "Shell"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "python",
+          "async",
+          "websockets",
+          "http",
+          "asgi"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/Kludex/starlette.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "de970d7b3facb853eb7ad077decbf3d94f2aab6c",
+          "html_url": "https://github.com/Kludex/starlette",
+          "stars": 12436
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

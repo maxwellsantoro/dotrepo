@@ -1,0 +1,101 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "elastic",
+    "repo": "elasticsearch",
+    "source": "https://github.com/elastic/elasticsearch"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/elastic/elasticsearch/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/elastic/elasticsearch",
+    "generatedAt": "2026-06-29T02:20:54.413181Z",
+    "evidencePath": "repos/github.com/elastic/elasticsearch/evidence.md"
+  },
+  "purpose": "Free and Open Source, Distributed, RESTful Search Engine",
+  "name": "elasticsearch",
+  "homepage": "https://www.elastic.co/products/elasticsearch",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "AMPL",
+    "ANTLR",
+    "Batchfile",
+    "C",
+    "C++",
+    "CSS",
+    "Dockerfile",
+    "Emacs Lisp",
+    "FreeMarker",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Makefile",
+    "Mustache",
+    "PowerShell",
+    "Python",
+    "Rust",
+    "Shell",
+    "StringTemplate",
+    "TypeScript"
+  ],
+  "topics": [
+    "elasticsearch",
+    "java",
+    "search-engine"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://www.elastic.co/products/elasticsearch"
+  },
+  "ownership": {
+    "maintainers": [
+      "@elastic/stack-monitoring",
+      "@elastic/fleet",
+      "@elastic/logstash",
+      "@elastic/kibana-security",
+      "@elastic/obs-ds-intake-services",
+      "@elastic/es-storage-engine",
+      "@elastic/es-delivery",
+      "@elastic/es-core-infra",
+      "@elastic/es-security",
+      "@elastic/core-docs",
+      "@elastic/admin-docs",
+      "@elastic/developer-docs"
+    ]
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/elastic/elasticsearch/profile.json",
+    "repository": "/v0/repos/github.com/elastic/elasticsearch/index.json",
+    "trust": "/v0/repos/github.com/elastic/elasticsearch/trust.json",
+    "queryTemplate": "/v0/repos/github.com/elastic/elasticsearch/query?path={dot_path}",
+    "indexPath": "repos/github.com/elastic/elasticsearch/"
+  }
+}

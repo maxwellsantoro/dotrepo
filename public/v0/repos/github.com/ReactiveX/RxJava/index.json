@@ -1,0 +1,52 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ReactiveX",
+    "repo": "RxJava",
+    "source": "https://github.com/ReactiveX/RxJava"
+  },
+  "repository": {
+    "name": "RxJava",
+    "description": "RxJava is a Java VM implementation of Reactive Extensions: a library for composing asynchronous and event-based programs by using observable sequences.",
+    "homepage": "https://dsc.gg/rxjava",
+    "gettingStarted": "https://github.com/ReactiveX/RxJava/wiki/Getting-Started",
+    "securityContact": "https://github.com/ReactiveX/RxJava/security/advisories/new"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ReactiveX/RxJava/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ReactiveX/RxJava",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/gradle_branch.yml`. Inferred `repo.test` from `.github/workflows/gradle_branch.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ReactiveX/RxJava/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ReactiveX/RxJava/index.json",
+    "trust": "/v0/repos/github.com/ReactiveX/RxJava/trust.json",
+    "profile": "/v0/repos/github.com/ReactiveX/RxJava/profile.json",
+    "queryTemplate": "/v0/repos/github.com/ReactiveX/RxJava/query?path={dot_path}",
+    "indexPath": "repos/github.com/ReactiveX/RxJava/"
+  }
+}

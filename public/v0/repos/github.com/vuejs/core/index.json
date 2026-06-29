@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "vuejs",
+    "repo": "core",
+    "source": "https://github.com/vuejs/core"
+  },
+  "repository": {
+    "name": "vuejs/core",
+    "description": "Please follow the documentation at vuejs.org!",
+    "homepage": "https://vuejs.org/",
+    "securityContact": "jeetpal2007@gmail.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/vuejs/core/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/vuejs/core",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/vuejs/core/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/vuejs/core/index.json",
+    "trust": "/v0/repos/github.com/vuejs/core/trust.json",
+    "profile": "/v0/repos/github.com/vuejs/core/profile.json",
+    "queryTemplate": "/v0/repos/github.com/vuejs/core/query?path={dot_path}",
+    "indexPath": "repos/github.com/vuejs/core/"
+  }
+}

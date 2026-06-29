@@ -1,0 +1,112 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "langflow-ai",
+    "repo": "langflow",
+    "source": "https://github.com/langflow-ai/langflow"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/langflow-ai/langflow/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/langflow-ai/langflow",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/langflow-ai/langflow/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/langflow-ai/langflow",
+        "generated_at": "2026-06-29T01:16:27.198801Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Highlight features",
+        "description": "Langflow Desktop is the easiest way to get started with Langflow.",
+        "homepage": "http://www.langflow.org",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "CSS",
+          "Dockerfile",
+          "HTML",
+          "JavaScript",
+          "Makefile",
+          "Mako",
+          "PowerShell",
+          "Python",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "python -m build",
+        "test": "python -m pytest",
+        "topics": [
+          "react-flow",
+          "chatgpt",
+          "large-language-models",
+          "generative-ai",
+          "agents",
+          "multiagent"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "https://hackerone.com/ibm"
+      },
+      "docs": {
+        "root": null,
+        "getting_started": "https://docs.astral.sh/uv/getting-started/installation/",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/langflow-ai/langflow.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "a277209fe4e2e109141af41d3c07d5d91693f07f",
+          "html_url": "https://github.com/langflow-ai/langflow",
+          "stars": 150166
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

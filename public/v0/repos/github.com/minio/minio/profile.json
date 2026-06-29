@@ -1,0 +1,85 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "minio",
+    "repo": "minio",
+    "source": "https://github.com/minio/minio"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/minio/minio/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/minio/minio",
+    "generatedAt": "2026-06-26T18:31:19.274657Z",
+    "evidencePath": "repos/github.com/minio/minio/evidence.md"
+  },
+  "purpose": "[!NOTE] THIS REPOSITORY IS NO LONGER MAINTAINED.",
+  "name": "MinIO Quickstart Guide",
+  "homepage": "https://github.com/minio/minio",
+  "license": "AGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "Makefile",
+    "Mustache",
+    "Shell"
+  ],
+  "topics": [
+    "go",
+    "storage",
+    "cloud",
+    "s3",
+    "objectstorage",
+    "cloudstorage",
+    "amazon-s3",
+    "cloudnative",
+    "k8s",
+    "kubernetes",
+    "multi-cloud",
+    "multi-cloud-kubernetes"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://github.com/minio/docs",
+    "gettingStarted": "https://docs.min.io/community/minio-object-store/reference/minio-mc.html#quickstart"
+  },
+  "ownership": {
+    "securityContact": "security@min.io"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/minio/minio/profile.json",
+    "repository": "/v0/repos/github.com/minio/minio/index.json",
+    "trust": "/v0/repos/github.com/minio/minio/trust.json",
+    "queryTemplate": "/v0/repos/github.com/minio/minio/query?path={dot_path}",
+    "indexPath": "repos/github.com/minio/minio/"
+  }
+}

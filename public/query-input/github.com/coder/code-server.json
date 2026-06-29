@@ -1,0 +1,114 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "coder",
+    "repo": "code-server",
+    "source": "https://github.com/coder/code-server"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/coder/code-server/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/coder/code-server",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `.github/CODEOWNERS` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@coder/code-server` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/coder/code-server/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/coder/code-server",
+        "generated_at": "2026-06-29T01:18:09.655495Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `.github/CODEOWNERS` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@coder/code-server` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "code-server",
+        "description": "VS Code in the browser",
+        "homepage": "https://coder.com",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Dockerfile",
+          "HCL",
+          "HTML",
+          "JavaScript",
+          "Mustache",
+          "Nix",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "npm run build",
+        "test": "npm test",
+        "topics": [
+          "vscode",
+          "vscode-remote",
+          "ide",
+          "remote-work",
+          "development-environment",
+          "dev-tools",
+          "browser-ide"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@coder/code-server",
+          "@Matthew-Beckett",
+          "@alexgorbatchev",
+          "@GNUxeava",
+          "@zhaozhiming"
+        ],
+        "team": "@coder/code-server",
+        "security_contact": null
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/coder/code-server.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "dd48f7753b3b57f5f85c5c8ab8a09d4c2bec9dc9",
+          "html_url": "https://github.com/coder/code-server",
+          "stars": 78101
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

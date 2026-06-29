@@ -1,0 +1,103 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "dotnet",
+    "repo": "aspnetcore",
+    "source": "https://github.com/dotnet/aspnetcore"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/dotnet/aspnetcore/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/dotnet/aspnetcore",
+    "generatedAt": "2026-06-26T18:35:18.862352Z",
+    "evidencePath": "repos/github.com/dotnet/aspnetcore/evidence.md"
+  },
+  "purpose": "ASP.NET Core is an open-source and cross-platform framework for building modern cloud-based internet-connected applications, such as web apps, IoT apps, and mobile backends.",
+  "name": "ASP.NET Core",
+  "homepage": "https://asp.net",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "ASP.NET",
+    "Batchfile",
+    "C",
+    "C#",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "F#",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Less",
+    "Lua",
+    "PowerShell",
+    "Python",
+    "SCSS",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "dotnet",
+    "aspnetcore",
+    "hacktoberfest",
+    "help-wanted"
+  ],
+  "execution": {
+    "build": "npm run build",
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://github.com/aspnet/Docs",
+    "gettingStarted": "https://learn.microsoft.com/aspnet/core/getting-started"
+  },
+  "ownership": {
+    "maintainers": [
+      "@dotnet/aspnet-build",
+      "@wtgodbe",
+      "@mkArtakMSFT",
+      "@halter73",
+      "@mgravell",
+      "@dotnet/aspnet-blazor-eng",
+      "@BrennanConroy",
+      "@dotnet/minimal-apis",
+      "@dotnet/aspnet-api-review",
+      "@Rick-Anderson",
+      "@tdykstra"
+    ],
+    "securityContact": "https://msrc.microsoft.com/report/vulnerability/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/dotnet/aspnetcore/profile.json",
+    "repository": "/v0/repos/github.com/dotnet/aspnetcore/index.json",
+    "trust": "/v0/repos/github.com/dotnet/aspnetcore/trust.json",
+    "queryTemplate": "/v0/repos/github.com/dotnet/aspnetcore/query?path={dot_path}",
+    "indexPath": "repos/github.com/dotnet/aspnetcore/"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "angular",
+    "repo": "angular",
+    "source": "https://github.com/angular/angular"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/angular/angular/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/angular/angular",
+    "generatedAt": "2026-06-26T18:33:46.4533Z",
+    "evidencePath": "repos/github.com/angular/angular/evidence.md"
+  },
+  "purpose": "Angular is a development platform for building mobile and desktop web applications",
+  "name": "Angular",
+  "homepage": "https://angular.dev",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Nix",
+    "SCSS",
+    "Shell",
+    "Starlark",
+    "TypeScript"
+  ],
+  "topics": [
+    "angular",
+    "typescript",
+    "web",
+    "javascript",
+    "pwa",
+    "web-framework",
+    "web-performance"
+  ],
+  "execution": {
+    "build": "pnpm build",
+    "test": "pnpm test"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://bughunters.google.com/report"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/angular/angular/profile.json",
+    "repository": "/v0/repos/github.com/angular/angular/index.json",
+    "trust": "/v0/repos/github.com/angular/angular/trust.json",
+    "queryTemplate": "/v0/repos/github.com/angular/angular/query?path={dot_path}",
+    "indexPath": "repos/github.com/angular/angular/"
+  }
+}

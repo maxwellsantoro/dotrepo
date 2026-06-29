@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "bevyengine",
+    "repo": "bevy",
+    "source": "https://github.com/bevyengine/bevy"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/bevyengine/bevy/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/bevyengine/bevy",
+    "generatedAt": "2026-06-29T01:08:30.880013Z",
+    "evidencePath": "repos/github.com/bevyengine/bevy/evidence.md"
+  },
+  "purpose": "Bevy is a refreshingly simple data-driven game engine built in Rust.",
+  "name": "What is Bevy?",
+  "homepage": "https://bevy.org",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "GLSL",
+    "Go Template",
+    "HTML",
+    "Mermaid",
+    "Rust",
+    "WGSL"
+  ],
+  "topics": [
+    "bevy",
+    "gamedev",
+    "game-engine",
+    "open-source",
+    "rust",
+    "game-development"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "gettingStarted": "https://bevy.org/learn/quick-start/getting-started/setup"
+  },
+  "ownership": {
+    "securityContact": "https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/bevyengine/bevy/profile.json",
+    "repository": "/v0/repos/github.com/bevyengine/bevy/index.json",
+    "trust": "/v0/repos/github.com/bevyengine/bevy/trust.json",
+    "queryTemplate": "/v0/repos/github.com/bevyengine/bevy/query?path={dot_path}",
+    "indexPath": "repos/github.com/bevyengine/bevy/"
+  }
+}

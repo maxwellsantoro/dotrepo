@@ -1,0 +1,154 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "langgenius",
+    "repo": "dify",
+    "source": "https://github.com/langgenius/dify"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/langgenius/dify/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/langgenius/dify",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/cli-edge.yml`. Left `repo.test` unset because `.github/workflows/api-tests.yml` and `.github/workflows/cli-e2e.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/langgenius/dify/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "inferred",
+        "source": "https://github.com/langgenius/dify",
+        "generated_at": "2026-06-29T02:18:11.743136Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "inferred"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/cli-edge.yml`. Left `repo.test` unset because `.github/workflows/api-tests.yml` and `.github/workflows/cli-e2e.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "chat on Discord",
+        "description": "Before installing Dify, make sure your machine meets the following minimum system requirements:",
+        "homepage": "https://dify.ai",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "CSS",
+          "Dockerfile",
+          "Gherkin",
+          "HTML",
+          "JavaScript",
+          "MDX",
+          "Makefile",
+          "Mako",
+          "PHP",
+          "PowerShell",
+          "Python",
+          "Shell",
+          "TypeScript"
+        ],
+        "build": "pnpm build:bin",
+        "test": null,
+        "topics": [
+          "ai",
+          "gpt",
+          "llm",
+          "openai",
+          "python",
+          "rag",
+          "orchestration",
+          "gpt-4",
+          "agent",
+          "nextjs",
+          "workflow",
+          "genai",
+          "gemini",
+          "automation",
+          "low-code",
+          "mcp",
+          "no-code",
+          "agentic-ai",
+          "agentic-framework",
+          "agentic-workflow"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@crazywoola",
+          "@laipz8200",
+          "@hyoban",
+          "@lyzno1",
+          "@GareArc",
+          "@QuantumGhost",
+          "@Nov1c444",
+          "@JohnJyong",
+          "@WH-2099",
+          "@CourTeous33",
+          "@Mairuis",
+          "@hj24",
+          "@zyssyz123",
+          "@GarfieldDai",
+          "@snakevash",
+          "@MRZHUH",
+          "@iamjoel",
+          "@zxhlyh",
+          "@JzoNgKVO",
+          "@RiskeyL",
+          "@WTW0313",
+          "@zhsama",
+          "@Yessenia-d",
+          "@douxc",
+          "@CodingOnStar"
+        ],
+        "team": null,
+        "security_contact": "https://github.com/langgenius/dify/security/advisories/new"
+      },
+      "docs": {
+        "root": "https://docs.dify.ai",
+        "getting_started": "https://docs.dify.ai/getting-started/install-self-hosted",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/langgenius/dify.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "93d6506443a021e3b71c19420b5967c94e178e96",
+          "html_url": "https://github.com/langgenius/dify",
+          "stars": 146879
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

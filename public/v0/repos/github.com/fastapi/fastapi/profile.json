@@ -1,0 +1,87 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "fastapi",
+    "repo": "fastapi",
+    "source": "https://github.com/fastapi/fastapi"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/fastapi/fastapi/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/fastapi/fastapi",
+    "generatedAt": "2026-06-28T02:27:50.907562Z",
+    "evidencePath": "repos/github.com/fastapi/fastapi/evidence.md"
+  },
+  "purpose": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+  "name": "FastAPI",
+  "homepage": "https://fastapi.tiangolo.com/",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "HTML",
+    "JavaScript",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "python",
+    "json",
+    "swagger-ui",
+    "redoc",
+    "starlette",
+    "openapi",
+    "api",
+    "openapi3",
+    "framework",
+    "async",
+    "asyncio",
+    "uvicorn",
+    "python3",
+    "python-types",
+    "pydantic",
+    "json-schema",
+    "fastapi",
+    "swagger",
+    "rest",
+    "web"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/fastapi/fastapi/profile.json",
+    "repository": "/v0/repos/github.com/fastapi/fastapi/index.json",
+    "trust": "/v0/repos/github.com/fastapi/fastapi/trust.json",
+    "queryTemplate": "/v0/repos/github.com/fastapi/fastapi/query?path={dot_path}",
+    "indexPath": "repos/github.com/fastapi/fastapi/"
+  }
+}

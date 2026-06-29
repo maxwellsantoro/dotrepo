@@ -1,0 +1,100 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "aria2",
+    "repo": "aria2",
+    "source": "https://github.com/aria2/aria2"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/aria2/aria2/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/aria2/aria2",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/aria2/aria2/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/aria2/aria2",
+        "generated_at": "2026-06-29T01:19:13.374817Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "aria2",
+        "description": "aria2 is a lightweight multi-protocol & multi-source, cross platform download utility operated in command-line. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink.",
+        "homepage": "https://aria2.github.io/",
+        "license": "GPL-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "C++",
+          "Dockerfile",
+          "M4",
+          "Makefile",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "cpp11",
+          "http",
+          "ftp",
+          "sftp",
+          "bittorrent",
+          "rpc",
+          "download",
+          "metalink"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/aria2/aria2.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "9e7273583f83e881e3ec067b523ba88724088d2f",
+          "html_url": "https://github.com/aria2/aria2",
+          "stars": 41321
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

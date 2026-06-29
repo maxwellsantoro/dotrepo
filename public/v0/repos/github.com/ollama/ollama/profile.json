@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ollama",
+    "repo": "ollama",
+    "source": "https://github.com/ollama/ollama"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ollama/ollama/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ollama/ollama",
+    "generatedAt": "2026-06-26T18:33:22.279723Z",
+    "evidencePath": "repos/github.com/ollama/ollama/evidence.md"
+  },
+  "purpose": "Start building with open models.",
+  "name": "Ollama",
+  "homepage": "https://ollama.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "AppleScript",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "Inno Setup",
+    "JavaScript",
+    "Objective-C",
+    "PowerShell",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "llama",
+    "llm",
+    "llms",
+    "go",
+    "golang",
+    "ollama",
+    "mistral",
+    "gemma",
+    "llama3",
+    "deepseek",
+    "gemma3",
+    "qwen",
+    "gpt-oss",
+    "glm",
+    "minimax"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://docs.ollama.com/cli",
+    "gettingStarted": "https://docs.ollama.com/quickstart"
+  },
+  "ownership": {
+    "securityContact": "hello@ollama.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ollama/ollama/profile.json",
+    "repository": "/v0/repos/github.com/ollama/ollama/index.json",
+    "trust": "/v0/repos/github.com/ollama/ollama/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ollama/ollama/query?path={dot_path}",
+    "indexPath": "repos/github.com/ollama/ollama/"
+  }
+}

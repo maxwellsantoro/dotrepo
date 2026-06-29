@@ -1,0 +1,116 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "apache",
+    "repo": "superset",
+    "source": "https://github.com/apache/superset"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/apache/superset/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/apache/superset",
+    "generatedAt": "2026-06-29T01:18:15.841676Z",
+    "evidencePath": "repos/github.com/apache/superset/evidence.md"
+  },
+  "purpose": "Apache Superset is a Data Visualization and Data Exploration Platform",
+  "name": "Superset",
+  "homepage": "https://superset.apache.org/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Jinja",
+    "Jupyter Notebook",
+    "Makefile",
+    "Mako",
+    "Pug",
+    "Python",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "superset",
+    "apache",
+    "apache-superset",
+    "data-visualization",
+    "data-viz",
+    "analytics",
+    "business-intelligence",
+    "data-science",
+    "data-engineering",
+    "asf",
+    "bi",
+    "business-analytics",
+    "data-analytics",
+    "data-analysis",
+    "python",
+    "react",
+    "sql-editor",
+    "flask"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "https://superset.apache.org/docs/configuration/feature-flags",
+    "gettingStarted": "https://superset.apache.org/docs/quickstart/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@mistercrunch",
+      "@michael-s-molina",
+      "@betodealmeida",
+      "@eschutho",
+      "@sadpandajoe",
+      "@geido",
+      "@kgabryje",
+      "@craig-rueda",
+      "@dpgaspar",
+      "@villebro",
+      "@nytai",
+      "@rusackas",
+      "@Antonio-RiveroMartnez",
+      "@hainenber",
+      "@sfirke"
+    ],
+    "securityContact": "security@superset.apache.org"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/apache/superset/profile.json",
+    "repository": "/v0/repos/github.com/apache/superset/index.json",
+    "trust": "/v0/repos/github.com/apache/superset/trust.json",
+    "queryTemplate": "/v0/repos/github.com/apache/superset/query?path={dot_path}",
+    "indexPath": "repos/github.com/apache/superset/"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "LizardByte",
+    "repo": "Sunshine",
+    "source": "https://github.com/LizardByte/Sunshine"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/LizardByte/Sunshine/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/LizardByte/Sunshine",
+    "generatedAt": "2026-06-29T02:17:32.29538Z",
+    "evidencePath": "repos/github.com/LizardByte/Sunshine/evidence.md"
+  },
+  "purpose": "Sunshine is a self-hosted game stream host for Moonlight.",
+  "name": "Sunshine icon",
+  "homepage": "http://app.lizardbyte.dev/Sunshine/",
+  "license": "GPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "AppleScript",
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Cuda",
+    "Dockerfile",
+    "GLSL",
+    "HLSL",
+    "HTML",
+    "JavaScript",
+    "Objective-C",
+    "Objective-C++",
+    "PowerShell",
+    "Ruby",
+    "Shell",
+    "Vue"
+  ],
+  "topics": [
+    "game-streaming-server",
+    "game-stream",
+    "game-streaming",
+    "remote-desktop",
+    "moonlight",
+    "geforce-experience",
+    "cpp",
+    "replicator-release-notifications",
+    "docker",
+    "winget-pkg",
+    "homebrew-pkg",
+    "rtd",
+    "pacman-pkg",
+    "replicator-custom-issues",
+    "flathub-pkg",
+    "maintainer-wanted"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {
+    "root": "http://app.lizardbyte.dev/Sunshine/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/LizardByte/Sunshine/profile.json",
+    "repository": "/v0/repos/github.com/LizardByte/Sunshine/index.json",
+    "trust": "/v0/repos/github.com/LizardByte/Sunshine/trust.json",
+    "queryTemplate": "/v0/repos/github.com/LizardByte/Sunshine/query?path={dot_path}",
+    "indexPath": "repos/github.com/LizardByte/Sunshine/"
+  }
+}

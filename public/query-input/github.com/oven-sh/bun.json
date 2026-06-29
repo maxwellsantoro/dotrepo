@@ -1,0 +1,131 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "oven-sh",
+    "repo": "bun",
+    "source": "https://github.com/oven-sh/bun"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/oven-sh/bun/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/oven-sh/bun",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/oven-sh/bun/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/oven-sh/bun",
+        "generated_at": "2026-06-29T02:18:21.29126Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Bun",
+        "description": "Bun is an all-in-one toolkit for JavaScript and TypeScript apps.",
+        "homepage": "https://bun.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C",
+          "C++",
+          "CSS",
+          "Dockerfile",
+          "HCL",
+          "HTML",
+          "JavaScript",
+          "Linker Script",
+          "MDX",
+          "Makefile",
+          "Nix",
+          "Objective-C",
+          "Perl",
+          "PowerShell",
+          "Python",
+          "RenderScript",
+          "Ruby",
+          "Rust",
+          "Shell",
+          "Svelte",
+          "TypeScript"
+        ],
+        "build": "cargo build --workspace",
+        "test": "cargo test --workspace",
+        "topics": [
+          "bun",
+          "bundler",
+          "javascript",
+          "javascriptcore",
+          "jsx",
+          "nodejs",
+          "npm",
+          "react",
+          "transpiler",
+          "typescript",
+          "zig",
+          "ziglang"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@Jarred-Sumner",
+          "@alii"
+        ],
+        "team": null,
+        "security_contact": "security@bun.com"
+      },
+      "docs": {
+        "root": "https://bun.com/docs",
+        "getting_started": "https://bun.com/docs/installation#cpu-requirements-and-baseline-builds",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/oven-sh/bun.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "f789198279bedb351817b17ee19c4310417334ca",
+          "html_url": "https://github.com/oven-sh/bun",
+          "stars": 93506
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

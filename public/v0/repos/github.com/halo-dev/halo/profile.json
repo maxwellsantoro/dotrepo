@@ -1,0 +1,87 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "halo-dev",
+    "repo": "halo",
+    "source": "https://github.com/halo-dev/halo"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/halo-dev/halo/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/halo-dev/halo",
+    "generatedAt": "2026-06-29T02:18:04.162159Z",
+    "evidencePath": "repos/github.com/halo-dev/halo/evidence.md"
+  },
+  "purpose": "官网 文档 社区 Gitee Telegram 频道",
+  "name": "Docker pulls",
+  "homepage": "https://www.halo.run",
+  "license": "GPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "Groovy",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "MDX",
+    "Makefile",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "halo",
+    "cms",
+    "halocms",
+    "content-management-system",
+    "blog",
+    "blog-engine",
+    "website-builder"
+  ],
+  "execution": {
+    "build": "./gradlew clean check --configuration-cache --configuration-cache-problems=warn",
+    "test": "./gradlew clean check --configuration-cache --configuration-cache-problems=warn"
+  },
+  "docs": {
+    "root": "https://www.halo.run",
+    "gettingStarted": "https://docs.halo.run/getting-started/install/1panel"
+  },
+  "ownership": {
+    "securityContact": "hi@halo.run"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/halo-dev/halo/profile.json",
+    "repository": "/v0/repos/github.com/halo-dev/halo/index.json",
+    "trust": "/v0/repos/github.com/halo-dev/halo/trust.json",
+    "queryTemplate": "/v0/repos/github.com/halo-dev/halo/query?path={dot_path}",
+    "indexPath": "repos/github.com/halo-dev/halo/"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "astral-sh",
+    "repo": "ruff",
+    "source": "https://github.com/astral-sh/ruff"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/astral-sh/ruff/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/astral-sh/ruff",
+    "generatedAt": "2026-06-29T02:17:45.253768Z",
+    "evidencePath": "repos/github.com/astral-sh/ruff/evidence.md"
+  },
+  "purpose": "An extremely fast Python linter and code formatter, written in Rust.",
+  "name": "Ruff",
+  "homepage": "https://docs.astral.sh/ruff",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Python",
+    "RenderScript",
+    "Rust",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "linter",
+    "pep8",
+    "python",
+    "python3",
+    "rust",
+    "rustpython",
+    "static-analysis",
+    "static-code-analysis",
+    "style-guide",
+    "styleguide",
+    "ruff"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://docs.astral.sh/ruff/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@dhruvmanila",
+      "@MichaReiser",
+      "@BurntSushi",
+      "@AlexWaygood",
+      "@astral-sh/ty_notified",
+      "@astral-sh/ruff_db_notified",
+      "@astral-sh/ty_project_notified",
+      "@astral-sh/ty_ide_notified",
+      "@astral-sh/ty_server_notified",
+      "@astral-sh/ty_cli_notified",
+      "@astral-sh/ty_wasm_notified",
+      "@astral-sh/ty_benchmark_notified",
+      "@astral-sh/ty_python_core_notified",
+      "@astral-sh/ty_python_semantic_notified",
+      "@astral-sh/ty_module_resolver_notified"
+    ]
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/astral-sh/ruff/profile.json",
+    "repository": "/v0/repos/github.com/astral-sh/ruff/index.json",
+    "trust": "/v0/repos/github.com/astral-sh/ruff/trust.json",
+    "queryTemplate": "/v0/repos/github.com/astral-sh/ruff/query?path={dot_path}",
+    "indexPath": "repos/github.com/astral-sh/ruff/"
+  }
+}

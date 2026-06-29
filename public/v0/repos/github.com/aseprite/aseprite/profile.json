@@ -1,0 +1,88 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "aseprite",
+    "repo": "aseprite",
+    "source": "https://github.com/aseprite/aseprite"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/aseprite/aseprite/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/aseprite/aseprite",
+    "generatedAt": "2026-06-29T01:19:59.582802Z",
+    "evidencePath": "repos/github.com/aseprite/aseprite/evidence.md"
+  },
+  "purpose": "**Aseprite** is a program to create animated sprites.",
+  "name": "Aseprite",
+  "homepage": "https://www.aseprite.org",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "Lua",
+    "Objective-C++",
+    "PowerShell",
+    "Shell"
+  ],
+  "topics": [
+    "animation",
+    "pixel-art",
+    "graphics",
+    "animated-sprites",
+    "spritesheet",
+    "gif",
+    "aseprite",
+    "c-plus-plus",
+    "sprites",
+    "draw",
+    "pixel-editor",
+    "tile-editor",
+    "tilemap-editor",
+    "sprite-editor",
+    "cpp"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://twitter.com/aseprite/status/806889204601016325"
+  },
+  "ownership": {
+    "maintainers": [
+      "@dacap"
+    ],
+    "securityContact": "security@aseprite.org"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": false,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/aseprite/aseprite/profile.json",
+    "repository": "/v0/repos/github.com/aseprite/aseprite/index.json",
+    "trust": "/v0/repos/github.com/aseprite/aseprite/trust.json",
+    "queryTemplate": "/v0/repos/github.com/aseprite/aseprite/query?path={dot_path}",
+    "indexPath": "repos/github.com/aseprite/aseprite/"
+  }
+}

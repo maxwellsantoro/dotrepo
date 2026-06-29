@@ -1,0 +1,96 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "cypress-io",
+    "repo": "cypress",
+    "source": "https://github.com/cypress-io/cypress"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/cypress-io/cypress/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/cypress-io/cypress",
+    "generatedAt": "2026-06-29T02:20:46.648345Z",
+    "evidencePath": "repos/github.com/cypress-io/cypress/evidence.md"
+  },
+  "purpose": "Fast, easy and reliable testing for anything that runs in a browser.",
+  "name": "The web has evolved. Finally, testing has too.",
+  "homepage": "https://cypress.io",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "CoffeeScript",
+    "Dockerfile",
+    "EJS",
+    "HTML",
+    "JavaScript",
+    "SCSS",
+    "Shell",
+    "Svelte",
+    "TypeScript",
+    "Vue"
+  ],
+  "topics": [
+    "cypress",
+    "end-to-end-testing",
+    "angular-testing-library",
+    "component-testing",
+    "cypress-cloud",
+    "cypress-schematic",
+    "react-testing-library",
+    "svelte-testing-library",
+    "testing-framework",
+    "testing-library",
+    "testing-tool",
+    "vue-testing-library",
+    "test-replay"
+  ],
+  "execution": {
+    "build": "yarn build",
+    "test": "yarn test"
+  },
+  "docs": {
+    "root": "https://on.cypress.io"
+  },
+  "ownership": {
+    "maintainers": [
+      "@brian-mann",
+      "@jennifer-shehane",
+      "@cypress-io/app"
+    ],
+    "team": "@cypress-io/app",
+    "securityContact": "https://cypress.io/security/"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/cypress-io/cypress/profile.json",
+    "repository": "/v0/repos/github.com/cypress-io/cypress/index.json",
+    "trust": "/v0/repos/github.com/cypress-io/cypress/trust.json",
+    "queryTemplate": "/v0/repos/github.com/cypress-io/cypress/query?path={dot_path}",
+    "indexPath": "repos/github.com/cypress-io/cypress/"
+  }
+}

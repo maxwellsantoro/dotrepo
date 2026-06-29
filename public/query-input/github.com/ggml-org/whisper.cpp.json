@@ -1,0 +1,118 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ggml-org",
+    "repo": "whisper.cpp",
+    "source": "https://github.com/ggml-org/whisper.cpp"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/ggml-org/whisper.cpp/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ggml-org/whisper.cpp",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/build-android.yml`. Inferred `repo.test` from `.github/workflows/build-android.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/ggml-org/whisper.cpp/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/ggml-org/whisper.cpp",
+        "generated_at": "2026-06-29T02:17:55.428112Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/build-android.yml`. Inferred `repo.test` from `.github/workflows/build-android.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "whisper.cpp",
+        "description": "Stable: v1.9.1 / Roadmap",
+        "homepage": "https://github.com/ggml-org/whisper.cpp",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Batchfile",
+          "C",
+          "C++",
+          "CMake",
+          "Cuda",
+          "Dockerfile",
+          "GLSL",
+          "Go",
+          "Go Template",
+          "Java",
+          "JavaScript",
+          "Makefile",
+          "Metal",
+          "Objective-C",
+          "Objective-C++",
+          "Python",
+          "Ruby",
+          "Shell",
+          "WGSL"
+        ],
+        "build": "./gradlew assembleRelease --no-daemon",
+        "test": "./gradlew assembleRelease --no-daemon",
+        "topics": [
+          "openai",
+          "speech-to-text",
+          "transformer",
+          "whisper",
+          "inference",
+          "speech-recognition"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": null,
+        "getting_started": "https://wiki.libsdl.org/SDL2/Installation",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/ggml-org/whisper.cpp.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "0ae02cdb2c7317b50991367c165736ce42ed96ac",
+          "html_url": "https://github.com/ggml-org/whisper.cpp",
+          "stars": 51118
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

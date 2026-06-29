@@ -1,0 +1,97 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rustdesk",
+    "repo": "rustdesk",
+    "source": "https://github.com/rustdesk/rustdesk"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/rustdesk/rustdesk/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/rustdesk/rustdesk",
+    "generatedAt": "2026-06-26T18:35:37.920378Z",
+    "evidencePath": "repos/github.com/rustdesk/rustdesk/evidence.md"
+  },
+  "purpose": "Build • Docker • Structure • Snapshot",
+  "name": "Dependencies",
+  "homepage": "https://rustdesk.com",
+  "license": "AGPL-3.0",
+  "visibility": "public",
+  "languages": [
+    "AppleScript",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "Dart",
+    "Dockerfile",
+    "HTML",
+    "Kotlin",
+    "Objective-C",
+    "Objective-C++",
+    "Python",
+    "Ruby",
+    "Rust",
+    "Shell",
+    "Swift"
+  ],
+  "topics": [
+    "remote-control",
+    "remote-desktop",
+    "teamviewer",
+    "anydesk",
+    "vnc",
+    "rdp",
+    "rust",
+    "p2p",
+    "flutter",
+    "flutter-apps",
+    "dart",
+    "rust-lang",
+    "wayland",
+    "linux",
+    "android",
+    "flatpak",
+    "ios",
+    "macos",
+    "windows"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/rustdesk/rustdesk/profile.json",
+    "repository": "/v0/repos/github.com/rustdesk/rustdesk/index.json",
+    "trust": "/v0/repos/github.com/rustdesk/rustdesk/trust.json",
+    "queryTemplate": "/v0/repos/github.com/rustdesk/rustdesk/query?path={dot_path}",
+    "indexPath": "repos/github.com/rustdesk/rustdesk/"
+  }
+}

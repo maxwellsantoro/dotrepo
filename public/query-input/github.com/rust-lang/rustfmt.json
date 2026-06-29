@@ -1,0 +1,93 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rust-lang",
+    "repo": "rustfmt",
+    "source": "https://github.com/rust-lang/rustfmt"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/rust-lang/rustfmt/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/rust-lang/rustfmt",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/rust-lang/rustfmt/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/rust-lang/rustfmt",
+        "generated_at": "2026-06-29T01:57:13.79824Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "rustfmt",
+        "description": "A tool for formatting Rust code according to style guidelines.",
+        "homepage": "https://rust-lang.github.io/rustfmt/",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "RenderScript",
+          "Rust",
+          "Shell"
+        ],
+        "build": "cargo build",
+        "test": "cargo test",
+        "topics": [
+          "rust",
+          "rustfmt",
+          "formatter",
+          "codeformatter"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/rust-lang/rustfmt.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "a4b7687425458309a0b7b3db7c057435aba6c8d4",
+          "html_url": "https://github.com/rust-lang/rustfmt",
+          "stars": 6893
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

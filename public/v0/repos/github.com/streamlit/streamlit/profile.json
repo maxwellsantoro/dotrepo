@@ -1,0 +1,84 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "streamlit",
+    "repo": "streamlit",
+    "source": "https://github.com/streamlit/streamlit"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/streamlit/streamlit/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/streamlit/streamlit",
+    "generatedAt": "2026-06-26T18:32:16.322005Z",
+    "evidencePath": "repos/github.com/streamlit/streamlit/evidence.md"
+  },
+  "purpose": "A faster way to build and share data apps.",
+  "name": "Welcome to Streamlit 👋",
+  "homepage": "https://streamlit.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "Makefile",
+    "Python",
+    "SCSS",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "python",
+    "machine-learning",
+    "data-science",
+    "deep-learning",
+    "data-visualization",
+    "streamlit",
+    "data-analysis",
+    "developer-tools"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://docs.streamlit.io"
+  },
+  "ownership": {
+    "maintainers": [
+      "@streamlit/open-source-release-team"
+    ],
+    "team": "@streamlit/open-source-release-team",
+    "securityContact": "https://hackerone.com/snowflake?type=team"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/streamlit/streamlit/profile.json",
+    "repository": "/v0/repos/github.com/streamlit/streamlit/index.json",
+    "trust": "/v0/repos/github.com/streamlit/streamlit/trust.json",
+    "queryTemplate": "/v0/repos/github.com/streamlit/streamlit/query?path={dot_path}",
+    "indexPath": "repos/github.com/streamlit/streamlit/"
+  }
+}

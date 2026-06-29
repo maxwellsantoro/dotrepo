@@ -1,0 +1,129 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "storybookjs",
+    "repo": "storybook",
+    "source": "https://github.com/storybookjs/storybook"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/storybookjs/storybook/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/storybookjs/storybook",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml`, `.github/workflows/fork-checks.yml`, and `.github/workflows/generate-sandboxes.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/storybookjs/storybook/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/storybookjs/storybook",
+        "generated_at": "2026-06-29T02:18:31.843723Z",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml`, `.github/workflows/fork-checks.yml`, and `.github/workflows/generate-sandboxes.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "repo": {
+        "name": "Storybook",
+        "description": "Build bulletproof UI components faster",
+        "homepage": "https://storybook.js.org",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "AppleScript",
+          "CSS",
+          "EJS",
+          "HTML",
+          "Handlebars",
+          "JavaScript",
+          "MDX",
+          "Pug",
+          "SCSS",
+          "Shell",
+          "Svelte",
+          "TypeScript",
+          "Vue"
+        ],
+        "build": null,
+        "test": "yarn test",
+        "topics": [
+          "storybook",
+          "styleguide",
+          "testing",
+          "components",
+          "webpack",
+          "ui",
+          "react",
+          "vue",
+          "react-native",
+          "design-systems",
+          "javascript",
+          "angular",
+          "svelte",
+          "web-components",
+          "typescript",
+          "html",
+          "vite",
+          "workshop",
+          "documentation",
+          "stories"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@kylegach",
+          "@jonniebigodes"
+        ],
+        "team": null,
+        "security_contact": "https://x.com/storybookjs"
+      },
+      "docs": {
+        "root": "https://storybook.js.org/docs?ref=readme",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/storybookjs/storybook.git",
+          "default_branch": "next",
+          "fork": false,
+          "head_sha": "bf34cdbfb326181d5f8093a51989e849f0277d20",
+          "html_url": "https://github.com/storybookjs/storybook",
+          "stars": 90463
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

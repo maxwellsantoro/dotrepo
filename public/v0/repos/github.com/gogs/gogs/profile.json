@@ -1,0 +1,91 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "gogs",
+    "repo": "gogs",
+    "source": "https://github.com/gogs/gogs"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/gogs/gogs/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/gogs/gogs",
+    "generatedAt": "2026-06-29T01:18:50.39236Z",
+    "evidencePath": "repos/github.com/gogs/gogs/evidence.md"
+  },
+  "purpose": "👉 Deploy on DigitalOcean and get $200 in free credits!",
+  "name": "Gogs",
+  "homepage": "https://gogs.io",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Less",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "gogs",
+    "go",
+    "git",
+    "docker",
+    "mysql",
+    "postgresql",
+    "raspberry-pi",
+    "self-hosted",
+    "sqlite3",
+    "version-control",
+    "source-code-management"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://gogs.io/api-reference",
+    "gettingStarted": "https://gogs.io/getting-started/installation"
+  },
+  "ownership": {
+    "maintainers": [
+      "@unknwon"
+    ],
+    "securityContact": "security@gogs.io"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/gogs/gogs/profile.json",
+    "repository": "/v0/repos/github.com/gogs/gogs/index.json",
+    "trust": "/v0/repos/github.com/gogs/gogs/trust.json",
+    "queryTemplate": "/v0/repos/github.com/gogs/gogs/query?path={dot_path}",
+    "indexPath": "repos/github.com/gogs/gogs/"
+  }
+}

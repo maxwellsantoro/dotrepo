@@ -1,0 +1,99 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "2dust",
+    "repo": "v2rayN",
+    "source": "https://github.com/2dust/v2rayN"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/2dust/v2rayN/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/2dust/v2rayN",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/2dust/v2rayN/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/2dust/v2rayN",
+        "generated_at": "2026-06-29T00:42:39.286154Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "v2rayN",
+        "description": "Download the latest release here:",
+        "homepage": "https://v2rayn.2dust.link",
+        "license": "GPL-3.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "C#",
+          "Shell"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "windows",
+          "proxy",
+          "socks5",
+          "shadowsocks",
+          "trojan",
+          "v2ray",
+          "v2fly",
+          "xray",
+          "vmess",
+          "vless",
+          "xtls"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/2dust/v2rayN.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "bf376a8fac2cc3c5935c100e5c468e058b03253b",
+          "html_url": "https://github.com/2dust/v2rayN",
+          "stars": 110119
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -701,15 +701,15 @@ mod tests {
         )
         .expect("readme");
         fs::write(
-            root.join(".github/workflows/ci.yml"),
-            "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+            root.join(".github/workflows/check.yml"),
+            "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
         )
-        .expect("ci");
+        .expect("check");
         fs::write(
-            root.join(".github/workflows/release.yml"),
-            "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+            root.join(".github/workflows/verify.yml"),
+            "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
         )
-        .expect("release");
+        .expect("verify");
 
         let source = "https://github.com/example/conflict";
         let mut plan =
@@ -749,15 +749,15 @@ mod tests {
         )
         .expect("readme");
         fs::write(
-            root.join(".github/workflows/ci.yml"),
-            "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+            root.join(".github/workflows/check.yml"),
+            "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
         )
-        .expect("ci");
+        .expect("check");
         fs::write(
-            root.join(".github/workflows/release.yml"),
-            "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+            root.join(".github/workflows/verify.yml"),
+            "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
         )
-        .expect("release");
+        .expect("verify");
 
         let source = "https://github.com/example/writeback-vs-auto-publish";
         let plan =
@@ -822,15 +822,15 @@ mod tests {
         )
         .expect("readme");
         fs::write(
-            root.join(".github/workflows/ci.yml"),
-            "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo test --workspace\n",
+            root.join(".github/workflows/check.yml"),
+            "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo test --workspace\n",
         )
-        .expect("ci");
+        .expect("check");
         fs::write(
-            root.join(".github/workflows/release.yml"),
-            "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo test\n",
+            root.join(".github/workflows/verify.yml"),
+            "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo test\n",
         )
-        .expect("release");
+        .expect("verify");
 
         let source = "https://github.com/example/model-escalation";
         let mut plan =
@@ -846,8 +846,8 @@ mod tests {
                         field: "repo.build".into(),
                         value: Some("cargo build --workspace".into()),
                         confidence: AdjudicationModelConfidence::Medium,
-                        reason: "CI workflow is primary".into(),
-                        source: Some(".github/workflows/ci.yml".into()),
+                        reason: "Check workflow is primary".into(),
+                        source: Some(".github/workflows/check.yml".into()),
                     },
                     tokens_used: 120,
                 },
@@ -856,8 +856,8 @@ mod tests {
                         field: "repo.test".into(),
                         value: Some("cargo test --workspace".into()),
                         confidence: AdjudicationModelConfidence::Medium,
-                        reason: "CI workflow is primary".into(),
-                        source: Some(".github/workflows/ci.yml".into()),
+                        reason: "Check workflow is primary".into(),
+                        source: Some(".github/workflows/check.yml".into()),
                     },
                     tokens_used: 95,
                 },

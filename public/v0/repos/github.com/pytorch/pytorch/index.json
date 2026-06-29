@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "pytorch",
+    "repo": "pytorch",
+    "source": "https://github.com/pytorch/pytorch"
+  },
+  "repository": {
+    "name": "More About PyTorch",
+    "description": "PyTorch is a Python package that provides two high-level features:",
+    "homepage": "https://pytorch.org",
+    "docsRoot": "https://pytorch.org/docs/",
+    "ownersTeam": "@pytorch/pytorch-dev-infra",
+    "securityContact": "https://github.com/pytorch/pytorch/issues/new?template=bug-report.yml"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/pytorch/pytorch/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "imported",
+        "source": "https://github.com/pytorch/pytorch",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported"
+          ],
+          "notes": "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@pytorch/pytorch-dev-infra` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/pytorch/pytorch/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/pytorch/pytorch/index.json",
+    "trust": "/v0/repos/github.com/pytorch/pytorch/trust.json",
+    "profile": "/v0/repos/github.com/pytorch/pytorch/profile.json",
+    "queryTemplate": "/v0/repos/github.com/pytorch/pytorch/query?path={dot_path}",
+    "indexPath": "repos/github.com/pytorch/pytorch/"
+  }
+}

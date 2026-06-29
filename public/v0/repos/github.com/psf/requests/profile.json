@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "psf",
+    "repo": "requests",
+    "source": "https://github.com/psf/requests"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/psf/requests/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/psf/requests",
+    "generatedAt": "2026-06-26T17:38:20.119694Z",
+    "evidencePath": "repos/github.com/psf/requests/evidence.md"
+  },
+  "purpose": "**Requests** is a simple, yet elegant, HTTP library.",
+  "name": "Requests",
+  "homepage": "https://requests.readthedocs.io/en/latest/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Makefile",
+    "Python"
+  ],
+  "topics": [
+    "python",
+    "http",
+    "forhumans",
+    "requests",
+    "python-requests",
+    "client",
+    "humans",
+    "cookies"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@nateprewitt",
+      "@sigmavirus24"
+    ],
+    "securityContact": "python-maint@redhat.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/psf/requests/profile.json",
+    "repository": "/v0/repos/github.com/psf/requests/index.json",
+    "trust": "/v0/repos/github.com/psf/requests/trust.json",
+    "queryTemplate": "/v0/repos/github.com/psf/requests/query?path={dot_path}",
+    "indexPath": "repos/github.com/psf/requests/"
+  }
+}

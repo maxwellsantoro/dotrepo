@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "npm",
+    "repo": "cli",
+    "source": "https://github.com/npm/cli"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/npm/cli/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/npm/cli",
+    "generatedAt": "2026-06-29T01:17:00.368506Z",
+    "evidencePath": "repos/github.com/npm/cli/evidence.md"
+  },
+  "purpose": "You should be running a currently supported version of Node.js to run **`npm`**.",
+  "name": "npm",
+  "homepage": "https://docs.npmjs.com/cli/",
+  "license": "NOASSERTION",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "Handlebars",
+    "JavaScript",
+    "PowerShell",
+    "Shell"
+  ],
+  "topics": [
+    "package-manager",
+    "npm",
+    "nodejs",
+    "javascript",
+    "tools",
+    "npm-cli"
+  ],
+  "execution": {
+    "test": "npm test"
+  },
+  "docs": {
+    "root": "https://docs.npmjs.com/"
+  },
+  "ownership": {
+    "maintainers": [
+      "@npm/cli-team",
+      "@npm/cli-triage"
+    ],
+    "securityContact": "opensource-security@github.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/npm/cli/profile.json",
+    "repository": "/v0/repos/github.com/npm/cli/index.json",
+    "trust": "/v0/repos/github.com/npm/cli/trust.json",
+    "queryTemplate": "/v0/repos/github.com/npm/cli/query?path={dot_path}",
+    "indexPath": "repos/github.com/npm/cli/"
+  }
+}

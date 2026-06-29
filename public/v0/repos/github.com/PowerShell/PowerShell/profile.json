@@ -1,0 +1,89 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "PowerShell",
+    "repo": "PowerShell",
+    "source": "https://github.com/PowerShell/PowerShell"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/PowerShell/PowerShell/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/PowerShell/PowerShell",
+    "generatedAt": "2026-06-29T00:47:28.214075Z",
+    "evidencePath": "repos/github.com/PowerShell/PowerShell/evidence.md"
+  },
+  "purpose": "PowerShell for every system!",
+  "name": "logo][] PowerShell",
+  "homepage": "https://microsoft.com/PowerShell",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C#",
+    "Dockerfile",
+    "HTML",
+    "PowerShell",
+    "Roff",
+    "Shell",
+    "XSLT"
+  ],
+  "topics": [
+    "powershell",
+    "windows",
+    "macos",
+    "linux",
+    "command-line",
+    "shell",
+    "netcore",
+    "hacktoberfest"
+  ],
+  "execution": {},
+  "docs": {
+    "gettingStarted": "https://learn.microsoft.com/powershell/scripting/learn/more-powershell-learning"
+  },
+  "ownership": {
+    "maintainers": [
+      "@PowerShell/powershell-maintainers",
+      "@TravisEz13",
+      "@seeminglyscience",
+      "@jshigetomi",
+      "@adityapatwardhan",
+      "@daxian-dbw"
+    ],
+    "team": "@PowerShell/powershell-maintainers",
+    "securityContact": "https://msrc.microsoft.com/create-report"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/PowerShell/PowerShell/profile.json",
+    "repository": "/v0/repos/github.com/PowerShell/PowerShell/index.json",
+    "trust": "/v0/repos/github.com/PowerShell/PowerShell/trust.json",
+    "queryTemplate": "/v0/repos/github.com/PowerShell/PowerShell/query?path={dot_path}",
+    "indexPath": "repos/github.com/PowerShell/PowerShell/"
+  }
+}

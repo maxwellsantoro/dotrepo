@@ -1,0 +1,53 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "PowerShell",
+    "repo": "PowerShell",
+    "source": "https://github.com/PowerShell/PowerShell"
+  },
+  "repository": {
+    "name": "logo][] PowerShell",
+    "description": "PowerShell for every system!",
+    "homepage": "https://microsoft.com/PowerShell",
+    "gettingStarted": "https://learn.microsoft.com/powershell/scripting/learn/more-powershell-learning",
+    "ownersTeam": "@PowerShell/powershell-maintainers",
+    "securityContact": "https://msrc.microsoft.com/create-report"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/PowerShell/PowerShell/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/PowerShell/PowerShell",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@PowerShell/powershell-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/PowerShell/PowerShell/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/PowerShell/PowerShell/index.json",
+    "trust": "/v0/repos/github.com/PowerShell/PowerShell/trust.json",
+    "profile": "/v0/repos/github.com/PowerShell/PowerShell/profile.json",
+    "queryTemplate": "/v0/repos/github.com/PowerShell/PowerShell/query?path={dot_path}",
+    "indexPath": "repos/github.com/PowerShell/PowerShell/"
+  }
+}

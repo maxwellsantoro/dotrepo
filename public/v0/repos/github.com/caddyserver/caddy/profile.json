@@ -1,0 +1,86 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "caddyserver",
+    "repo": "caddy",
+    "source": "https://github.com/caddyserver/caddy"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/caddyserver/caddy/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/caddyserver/caddy",
+    "generatedAt": "2026-06-26T17:42:02.181934Z",
+    "evidencePath": "repos/github.com/caddyserver/caddy/evidence.md"
+  },
+  "purpose": "Caddy is an extensible server platform that uses TLS by default.",
+  "name": "caddy",
+  "homepage": "https://caddyserver.com",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Go",
+    "HTML",
+    "Shell"
+  ],
+  "topics": [
+    "go",
+    "web-server",
+    "caddyfile",
+    "http",
+    "http-server",
+    "reverse-proxy",
+    "https",
+    "tls",
+    "automatic-https",
+    "privacy",
+    "security",
+    "acme",
+    "caddy",
+    "golang",
+    "http3"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {
+    "root": "https://caddyserver.com/docs/",
+    "gettingStarted": "https://caddyserver.com/docs/getting-started"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/caddyserver/caddy/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/caddyserver/caddy/profile.json",
+    "repository": "/v0/repos/github.com/caddyserver/caddy/index.json",
+    "trust": "/v0/repos/github.com/caddyserver/caddy/trust.json",
+    "queryTemplate": "/v0/repos/github.com/caddyserver/caddy/query?path={dot_path}",
+    "indexPath": "repos/github.com/caddyserver/caddy/"
+  }
+}

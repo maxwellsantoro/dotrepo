@@ -1,0 +1,106 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "typeorm",
+    "repo": "typeorm",
+    "source": "https://github.com/typeorm/typeorm"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/typeorm/typeorm/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/typeorm/typeorm",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/typeorm/typeorm/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/typeorm/typeorm",
+        "generated_at": "2026-06-26T18:34:25.902469Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Samples",
+        "description": "TypeORM is an ORM that can run in Node.js, Browser, Cordova, Ionic, React Native, NativeScript, Expo, and Electron platforms and can be used with TypeScript and JavaScript (ES2023).",
+        "homepage": "http://typeorm.io",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "JavaScript",
+          "TypeScript"
+        ],
+        "build": null,
+        "test": "pnpm test",
+        "topics": [
+          "orm",
+          "typescript",
+          "javascript",
+          "database",
+          "typeorm",
+          "mysql",
+          "mariadb",
+          "postgresql",
+          "sqlite",
+          "sqlserver",
+          "active-record",
+          "data-mapper",
+          "cockroachdb",
+          "hacktoberfest"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "support@typeorm.io"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/typeorm/typeorm.git",
+          "default_branch": "master",
+          "fork": false,
+          "head_sha": "cca26a919f3ee5afda5af0f835e10629bcc378d1",
+          "html_url": "https://github.com/typeorm/typeorm",
+          "stars": 36555
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

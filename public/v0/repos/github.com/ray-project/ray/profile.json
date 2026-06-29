@@ -1,0 +1,126 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "ray-project",
+    "repo": "ray",
+    "source": "https://github.com/ray-project/ray"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/ray-project/ray/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/ray-project/ray",
+    "generatedAt": "2026-06-26T18:32:07.313106Z",
+    "evidencePath": "repos/github.com/ray-project/ray/evidence.md"
+  },
+  "purpose": "Ray is an AI compute engine. Ray consists of a core distributed runtime and a set of AI Libraries for accelerating ML workloads.",
+  "name": "ray",
+  "homepage": "https://ray.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CSS",
+    "Cython",
+    "Dockerfile",
+    "Go Template",
+    "HTML",
+    "Java",
+    "JavaScript",
+    "Jinja",
+    "Linker Script",
+    "Objective-C",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "Starlark",
+    "TypeScript"
+  ],
+  "topics": [
+    "ray",
+    "distributed",
+    "parallel",
+    "machine-learning",
+    "reinforcement-learning",
+    "deep-learning",
+    "python",
+    "rllib",
+    "hyperparameter-search",
+    "optimization",
+    "data-science",
+    "hyperparameter-optimization",
+    "serving",
+    "deployment",
+    "pytorch",
+    "tensorflow",
+    "llm-serving",
+    "large-language-models",
+    "llm",
+    "llm-inference"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@ray-project/ray-docs",
+      "@pcmoritz",
+      "@ray-project/ray-core",
+      "@kfstorm",
+      "@raulchen",
+      "@WangTaoTheTonic",
+      "@SongGuyang",
+      "@andrewsykim",
+      "@edoakes",
+      "@dayshah",
+      "@MengjinYan",
+      "@marosset",
+      "@jackfrancis",
+      "@alimaazamat",
+      "@richardliaw",
+      "@ray-project/ray-ci",
+      "@ray-project/ray-data",
+      "@ray-project/ray-rllib",
+      "@ray-project/ray-tune",
+      "@ray-project/ray-train",
+      "@ray-project/ray-serve",
+      "@ray-project/ray-llm",
+      "@matthewdeng",
+      "@thomasdesr",
+      "@ryanaoleary"
+    ],
+    "securityContact": "security@anyscale.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/ray-project/ray/profile.json",
+    "repository": "/v0/repos/github.com/ray-project/ray/index.json",
+    "trust": "/v0/repos/github.com/ray-project/ray/trust.json",
+    "queryTemplate": "/v0/repos/github.com/ray-project/ray/query?path={dot_path}",
+    "indexPath": "repos/github.com/ray-project/ray/"
+  }
+}

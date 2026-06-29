@@ -1,0 +1,82 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "duckdb",
+    "repo": "duckdb",
+    "source": "https://github.com/duckdb/duckdb"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/duckdb/duckdb/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/duckdb/duckdb",
+    "generatedAt": "2026-06-29T01:19:44.498458Z",
+    "evidencePath": "repos/github.com/duckdb/duckdb/evidence.md"
+  },
+  "purpose": "DuckDB is a high-performance analytical database system.",
+  "name": "discord",
+  "homepage": "http://www.duckdb.org",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CMake",
+    "Julia",
+    "Makefile",
+    "Python",
+    "Shell",
+    "Swift",
+    "TSQL"
+  ],
+  "topics": [
+    "sql",
+    "database",
+    "olap",
+    "analytics",
+    "embedded-database"
+  ],
+  "execution": {
+    "build": "make unittest_release SKIP_BUILD=1 T=\"--test-flags='--autoloading available --skip-compiled'\"",
+    "test": "make unittest_release SKIP_BUILD=1 T=\"--test-flags='--autoloading available --skip-compiled'\""
+  },
+  "docs": {
+    "root": "https://duckdb.org/docs/current/sql/introduction",
+    "gettingStarted": "https://duckdb.org/docs/installation/"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/duckdb/duckdb/security/advisories/new"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/duckdb/duckdb/profile.json",
+    "repository": "/v0/repos/github.com/duckdb/duckdb/index.json",
+    "trust": "/v0/repos/github.com/duckdb/duckdb/trust.json",
+    "queryTemplate": "/v0/repos/github.com/duckdb/duckdb/query?path={dot_path}",
+    "indexPath": "repos/github.com/duckdb/duckdb/"
+  }
+}

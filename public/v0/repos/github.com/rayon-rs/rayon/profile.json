@@ -1,0 +1,62 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "rayon-rs",
+    "repo": "rayon",
+    "source": "https://github.com/rayon-rs/rayon"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/rayon-rs/rayon/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/rayon-rs/rayon",
+    "generatedAt": "2026-06-29T02:01:53.626827Z",
+    "evidencePath": "repos/github.com/rayon-rs/rayon/evidence.md"
+  },
+  "purpose": "Rayon is a data-parallelism library for Rust.",
+  "name": "Rayon",
+  "homepage": "https://github.com/rayon-rs/rayon",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Rust",
+    "Shell"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/rayon-rs/rayon/profile.json",
+    "repository": "/v0/repos/github.com/rayon-rs/rayon/index.json",
+    "trust": "/v0/repos/github.com/rayon-rs/rayon/trust.json",
+    "queryTemplate": "/v0/repos/github.com/rayon-rs/rayon/query?path={dot_path}",
+    "indexPath": "repos/github.com/rayon-rs/rayon/"
+  }
+}

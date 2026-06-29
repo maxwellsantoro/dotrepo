@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "influxdata",
+    "repo": "influxdb",
+    "source": "https://github.com/influxdata/influxdb"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/influxdata/influxdb/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/influxdata/influxdb",
+    "generatedAt": "2026-06-26T18:30:59.362682Z",
+    "evidencePath": "repos/github.com/influxdata/influxdb/evidence.md"
+  },
+  "purpose": "Open source time series database for real-time events, analytics, and monitoring--powered by Apache Arrow, DataFusion, and Parquet.",
+  "name": "InfluxDB 3 Core",
+  "homepage": "https://influxdata.com",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Answer Set Programming",
+    "Dockerfile",
+    "HTML",
+    "Linear Programming",
+    "Python",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "influxdb",
+    "monitoring",
+    "database",
+    "time-series",
+    "metrics",
+    "go",
+    "react",
+    "rust"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "gettingStarted": "https://docs.influxdata.com/influxdb3/core/get-started/"
+  },
+  "ownership": {
+    "securityContact": "security@influxdata.com"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/influxdata/influxdb/profile.json",
+    "repository": "/v0/repos/github.com/influxdata/influxdb/index.json",
+    "trust": "/v0/repos/github.com/influxdata/influxdb/trust.json",
+    "queryTemplate": "/v0/repos/github.com/influxdata/influxdb/query?path={dot_path}",
+    "indexPath": "repos/github.com/influxdata/influxdb/"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "x64dbg",
+    "repo": "x64dbg",
+    "source": "https://github.com/x64dbg/x64dbg"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/x64dbg/x64dbg/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/x64dbg/x64dbg",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build.yml` and `.github/workflows/cross.yml` suggested conflicting build commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/x64dbg/x64dbg/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/x64dbg/x64dbg",
+        "generated_at": "2026-06-29T01:18:54.81277Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build.yml` and `.github/workflows/cross.yml` suggested conflicting build commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "x64dbg",
+        "description": "An open-source binary debugger for Windows, aimed at malware analysis and reverse engineering of executables you do not have the source code for.",
+        "homepage": "http://x64dbg.com",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Assembly",
+          "Batchfile",
+          "C",
+          "C++",
+          "CMake",
+          "CSS",
+          "Dockerfile",
+          "Python",
+          "Shell"
+        ],
+        "build": "cmake -B build -G Ninja -DCMAKE_UNITY_BUILD=ON",
+        "test": null,
+        "topics": [
+          "debugger",
+          "windows",
+          "x64",
+          "disassembler",
+          "reverse-engineering",
+          "security",
+          "x86",
+          "x86-64",
+          "malware-analysis",
+          "security-tools",
+          "binary-analysis",
+          "ctf",
+          "dynamic-analysis",
+          "exploit-development",
+          "hacking",
+          "oscp",
+          "debugging",
+          "program-analysis",
+          "cybersecurity",
+          "offensive-security"
+        ]
+      },
+      "owners": null,
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/x64dbg/x64dbg.git",
+          "default_branch": "development",
+          "fork": false,
+          "head_sha": "ec18680690e007603d9100ed61a452ea7c54236f",
+          "html_url": "https://github.com/x64dbg/x64dbg",
+          "stars": 48755
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

@@ -1,0 +1,105 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "axios",
+    "repo": "axios",
+    "source": "https://github.com/axios/axios"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/axios/axios/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/axios/axios",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/axios/axios/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/axios/axios",
+        "generated_at": "2026-06-29T02:20:39.32978Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Thanks.dev",
+        "description": "We're passionate about making open source sustainable.",
+        "homepage": "https://axios-http.com",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "TypeScript"
+        ],
+        "build": "npm run build",
+        "test": "npm test",
+        "topics": [
+          "http-client",
+          "javascript",
+          "nodejs",
+          "promise",
+          "hacktoberfest"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@jasonsaayman"
+        ],
+        "team": null,
+        "security_contact": "https://github.com/axios/axios/security"
+      },
+      "docs": {
+        "root": "https://axios-http.com",
+        "getting_started": "https://axios.rest/pages/getting-started/first-steps.html",
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/axios/axios.git",
+          "default_branch": "v1.x",
+          "fork": false,
+          "head_sha": "d45e737718876f3c7a1ad9384693622eb68a739a",
+          "html_url": "https://github.com/axios/axios",
+          "stars": 109222
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

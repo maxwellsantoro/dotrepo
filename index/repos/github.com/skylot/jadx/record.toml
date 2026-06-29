@@ -2,14 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/skylot/jadx"
-generated_at = "2026-06-29T01:18:01.190318Z"
+generated_at = "2026-06-29T02:18:27.181047Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/build-artifacts.yml`, `.github/workflows/build-test.yml`, and `.github/workflows/release.yml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/build-artifacts.yml`, `.github/workflows/build-test.yml`, and `.github/workflows/release.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/release.yml`. Inferred `repo.test` from `.github/workflows/release.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "JADX"
@@ -24,6 +28,8 @@ languages = [
     "Lex",
     "Smali",
 ]
+build = "./gradlew dist -PbundleJRE=true"
+test = "./gradlew dist -PbundleJRE=true"
 topics = [
     "android",
     "dex",
@@ -45,4 +51,4 @@ default_branch = "master"
 fork = false
 head_sha = "aaec137830f217ab5f69d2b64279433c1775a22a"
 html_url = "https://github.com/skylot/jadx"
-stars = 49222
+stars = 49223

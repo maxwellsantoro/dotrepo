@@ -1,0 +1,100 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "charmbracelet",
+    "repo": "bubbletea",
+    "source": "https://github.com/charmbracelet/bubbletea"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/charmbracelet/bubbletea/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/charmbracelet/bubbletea",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/charmbracelet/bubbletea/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/charmbracelet/bubbletea",
+        "generated_at": "2026-06-29T01:19:30.320258Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Bubble Tea",
+        "description": "The fun, functional and stateful way to build terminal apps.",
+        "homepage": "https://github.com/charmbracelet/bubbletea",
+        "license": "MIT",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Go"
+        ],
+        "build": "go build ./...",
+        "test": "go test ./...",
+        "topics": [
+          "cli",
+          "framework",
+          "elm-architecture",
+          "tui",
+          "functional",
+          "golang",
+          "go",
+          "hacktoberfest"
+        ]
+      },
+      "owners": null,
+      "docs": {
+        "root": "https://pkg.go.dev/charm.land/bubbletea/v2?tab=doc",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/charmbracelet/bubbletea.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "a23da80847e6fc928febc62114f761403ac5d2f1",
+          "html_url": "https://github.com/charmbracelet/bubbletea",
+          "stars": 43428
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

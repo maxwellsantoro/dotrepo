@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "kubernetes",
+    "repo": "kubernetes",
+    "source": "https://github.com/kubernetes/kubernetes"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/kubernetes/kubernetes/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/kubernetes/kubernetes",
+    "generatedAt": "2026-06-29T01:16:56.704893Z",
+    "evidencePath": "repos/github.com/kubernetes/kubernetes/evidence.md"
+  },
+  "purpose": "Kubernetes, also known as K8s, is an open source system for managing [containerized applications] across multiple hosts.",
+  "name": "Kubernetes",
+  "homepage": "https://kubernetes.io",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "Makefile",
+    "PowerShell",
+    "Python",
+    "Shell",
+    "sed"
+  ],
+  "topics": [
+    "kubernetes",
+    "go",
+    "cncf",
+    "containers"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "https://kubernetes.io/docs/reference/issues-security/security/#report-a-vulnerability"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/kubernetes/kubernetes/profile.json",
+    "repository": "/v0/repos/github.com/kubernetes/kubernetes/index.json",
+    "trust": "/v0/repos/github.com/kubernetes/kubernetes/trust.json",
+    "queryTemplate": "/v0/repos/github.com/kubernetes/kubernetes/query?path={dot_path}",
+    "indexPath": "repos/github.com/kubernetes/kubernetes/"
+  }
+}

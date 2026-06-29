@@ -2,14 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/alibaba/arthas"
-generated_at = "2026-06-29T01:19:23.003977Z"
+generated_at = "2026-06-29T02:17:40.694966Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build-vmtool.yaml` and `.github/workflows/release.yaml` suggested conflicting build commands. Left `repo.test` unset because `.github/workflows/build-vmtool.yaml`, `.github/workflows/publish-maven-central.yml`, and `.github/workflows/release.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/release.yaml`. Inferred `repo.test` from `.github/workflows/publish-maven-central.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Arthas"
@@ -36,6 +40,8 @@ languages = [
     "TypeScript",
     "Vue",
 ]
+build = "mvn -V -ntp clean package -P full"
+test = "mvn -B -ntp -DskipTests"
 topics = [
     "java",
     "agent",
@@ -49,6 +55,7 @@ topics = [
 ]
 
 [docs]
+root = "https://arthas.aliyun.com/"
 getting_started = "https://arthas.aliyun.com/doc/en/install-detail.html"
 
 [relations]

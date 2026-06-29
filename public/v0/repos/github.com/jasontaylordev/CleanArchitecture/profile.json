@@ -1,0 +1,80 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jasontaylordev",
+    "repo": "CleanArchitecture",
+    "source": "https://github.com/jasontaylordev/CleanArchitecture"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/jasontaylordev/CleanArchitecture/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/jasontaylordev/CleanArchitecture",
+    "generatedAt": "2026-06-29T01:19:27.7802Z",
+    "evidencePath": "repos/github.com/jasontaylordev/CleanArchitecture/evidence.md"
+  },
+  "purpose": "The goal of this template is to provide a straightforward and efficient approach to enterprise application development, leveraging the power of Clean Architecture and ASP.NET Core.",
+  "name": "Clean Architecture Solution Template",
+  "homepage": "https://cleanarchitecture.jasontaylor.dev",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "C#",
+    "Gherkin",
+    "HTML",
+    "JavaScript",
+    "PowerShell",
+    "SCSS",
+    "TypeScript"
+  ],
+  "topics": [
+    "clean-architecture",
+    "template",
+    "angular",
+    "react",
+    "aspire",
+    "asp-net",
+    "entity-framework",
+    "web-api",
+    "dotnet"
+  ],
+  "execution": {
+    "build": "npm run build"
+  },
+  "docs": {
+    "gettingStarted": "https://cleanarchitecture.jasontaylor.dev/docs/getting-started/"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/jasontaylordev/CleanArchitecture/profile.json",
+    "repository": "/v0/repos/github.com/jasontaylordev/CleanArchitecture/index.json",
+    "trust": "/v0/repos/github.com/jasontaylordev/CleanArchitecture/trust.json",
+    "queryTemplate": "/v0/repos/github.com/jasontaylordev/CleanArchitecture/query?path={dot_path}",
+    "indexPath": "repos/github.com/jasontaylordev/CleanArchitecture/"
+  }
+}

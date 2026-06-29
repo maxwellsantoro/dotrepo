@@ -1,0 +1,113 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "GyulyVGC",
+    "repo": "sniffnet",
+    "source": "https://github.com/GyulyVGC/sniffnet"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/GyulyVGC/sniffnet/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/GyulyVGC/sniffnet",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/GyulyVGC/sniffnet/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/GyulyVGC/sniffnet",
+        "generated_at": "2026-06-29T01:17:28.688852Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "Support Sniffnet's development_ 💖",
+        "description": "Sniffnet is completely free, open-source software which needs lots of effort and time to develop and maintain.",
+        "homepage": "https://sniffnet.app",
+        "license": "Apache-2.0",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "Dockerfile",
+          "Rich Text Format",
+          "Rust",
+          "Shell"
+        ],
+        "build": "cargo build",
+        "test": "cargo test",
+        "topics": [
+          "network-analysis",
+          "networking",
+          "packet-sniffer",
+          "rust-crate",
+          "linux",
+          "macos",
+          "packet-capture",
+          "rust",
+          "windows",
+          "security",
+          "utility",
+          "application",
+          "network",
+          "network-monitoring",
+          "packet-analyser",
+          "pcap",
+          "iced",
+          "gui",
+          "tool"
+        ]
+      },
+      "owners": {
+        "maintainers": [],
+        "team": null,
+        "security_contact": "security@sniffnet.app"
+      },
+      "docs": null,
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/GyulyVGC/sniffnet.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "06a249c1680e4f89c67ac909e24790ff70f9e1d2",
+          "html_url": "https://github.com/GyulyVGC/sniffnet",
+          "stars": 39643
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

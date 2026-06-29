@@ -1,0 +1,81 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "astral-sh",
+    "repo": "uv",
+    "source": "https://github.com/astral-sh/uv"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/astral-sh/uv/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/astral-sh/uv",
+    "generatedAt": "2026-06-29T02:17:48.155503Z",
+    "evidencePath": "repos/github.com/astral-sh/uv/evidence.md"
+  },
+  "purpose": "An extremely fast Python package and project manager, written in Rust.",
+  "name": "uv",
+  "homepage": "https://docs.astral.sh/uv",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Nushell",
+    "PowerShell",
+    "Python",
+    "RenderScript",
+    "Rust",
+    "Shell"
+  ],
+  "topics": [
+    "packaging",
+    "python",
+    "resolver",
+    "uv"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {
+    "root": "https://trio.readthedocs.io/",
+    "gettingStarted": "https://docs.astral.sh/uv/getting-started/installation/"
+  },
+  "ownership": {
+    "securityContact": "https://github.com/astral-sh/.github/blob/main/SECURITY.md"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/astral-sh/uv/profile.json",
+    "repository": "/v0/repos/github.com/astral-sh/uv/index.json",
+    "trust": "/v0/repos/github.com/astral-sh/uv/trust.json",
+    "queryTemplate": "/v0/repos/github.com/astral-sh/uv/query?path={dot_path}",
+    "indexPath": "repos/github.com/astral-sh/uv/"
+  }
+}

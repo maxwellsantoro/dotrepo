@@ -1,0 +1,50 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "jeecgboot",
+    "repo": "JeecgBoot",
+    "source": "https://github.com/jeecgboot/JeecgBoot"
+  },
+  "repository": {
+    "name": "JeecgBoot AI低代码平台",
+    "description": "🚀 **低代码迈入 v2.0 时代，一句自然语言即可生成整个系统**",
+    "homepage": "https://jeecg.com",
+    "gettingStarted": "http://www.jeecg.com/doc/quickstart"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/jeecgboot/JeecgBoot/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/jeecgboot/JeecgBoot",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/jeecgboot/JeecgBoot/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/jeecgboot/JeecgBoot/index.json",
+    "trust": "/v0/repos/github.com/jeecgboot/JeecgBoot/trust.json",
+    "profile": "/v0/repos/github.com/jeecgboot/JeecgBoot/profile.json",
+    "queryTemplate": "/v0/repos/github.com/jeecgboot/JeecgBoot/query?path={dot_path}",
+    "indexPath": "repos/github.com/jeecgboot/JeecgBoot/"
+  }
+}

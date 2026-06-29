@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "docker",
+    "repo": "cli",
+    "source": "https://github.com/docker/cli"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/docker/cli/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/docker/cli",
+    "generatedAt": "2026-06-29T02:17:53.391746Z",
+    "evidencePath": "repos/github.com/docker/cli/evidence.md"
+  },
+  "purpose": "The Docker CLI",
+  "name": "Docker CLI",
+  "homepage": "https://github.com/docker/cli",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "Go",
+    "HCL",
+    "Makefile",
+    "Shell"
+  ],
+  "topics": [
+    "docker",
+    "cli"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@silvin-lubecki",
+      "@docker/runtime-owners",
+      "@albers",
+      "@thaJeztah"
+    ],
+    "team": "@docker/runtime-owners",
+    "securityContact": "security@docker.com"
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/docker/cli/profile.json",
+    "repository": "/v0/repos/github.com/docker/cli/index.json",
+    "trust": "/v0/repos/github.com/docker/cli/trust.json",
+    "queryTemplate": "/v0/repos/github.com/docker/cli/query?path={dot_path}",
+    "indexPath": "repos/github.com/docker/cli/"
+  }
+}

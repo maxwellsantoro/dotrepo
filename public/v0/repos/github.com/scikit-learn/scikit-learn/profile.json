@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "scikit-learn",
+    "repo": "scikit-learn",
+    "source": "https://github.com/scikit-learn/scikit-learn"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/scikit-learn/scikit-learn/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/scikit-learn/scikit-learn",
+    "generatedAt": "2026-06-26T17:43:11.199797Z",
+    "evidencePath": "repos/github.com/scikit-learn/scikit-learn/evidence.md"
+  },
+  "purpose": "scikit-learn: machine learning in Python",
+  "name": "scikit-learn",
+  "homepage": "https://scikit-learn.org",
+  "license": "BSD-3-Clause",
+  "visibility": "public",
+  "languages": [
+    "C",
+    "C++",
+    "CSS",
+    "Cython",
+    "JavaScript",
+    "Makefile",
+    "Meson",
+    "Python",
+    "Shell"
+  ],
+  "topics": [
+    "machine-learning",
+    "python",
+    "statistics",
+    "data-science",
+    "data-analysis"
+  ],
+  "execution": {
+    "build": "python -m build",
+    "test": "python -m pytest"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "security@scikit-learn.org"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "inferred",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/scikit-learn/scikit-learn/profile.json",
+    "repository": "/v0/repos/github.com/scikit-learn/scikit-learn/index.json",
+    "trust": "/v0/repos/github.com/scikit-learn/scikit-learn/trust.json",
+    "queryTemplate": "/v0/repos/github.com/scikit-learn/scikit-learn/query?path={dot_path}",
+    "indexPath": "repos/github.com/scikit-learn/scikit-learn/"
+  }
+}

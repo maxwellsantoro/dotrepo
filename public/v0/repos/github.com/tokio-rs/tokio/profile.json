@@ -1,0 +1,68 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "tokio-rs",
+    "repo": "tokio",
+    "source": "https://github.com/tokio-rs/tokio"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/tokio-rs/tokio/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/tokio-rs/tokio",
+    "generatedAt": "2026-06-28T02:27:53.063702Z",
+    "evidencePath": "repos/github.com/tokio-rs/tokio/evidence.md"
+  },
+  "purpose": "A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language.",
+  "name": "Tokio",
+  "homepage": "https://tokio.rs",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Rust"
+  ],
+  "topics": [
+    "rust",
+    "asynchronous",
+    "networking"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {
+    "securityContact": "security@tokio.rs"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/tokio-rs/tokio/profile.json",
+    "repository": "/v0/repos/github.com/tokio-rs/tokio/index.json",
+    "trust": "/v0/repos/github.com/tokio-rs/tokio/trust.json",
+    "queryTemplate": "/v0/repos/github.com/tokio-rs/tokio/query?path={dot_path}",
+    "indexPath": "repos/github.com/tokio-rs/tokio/"
+  }
+}

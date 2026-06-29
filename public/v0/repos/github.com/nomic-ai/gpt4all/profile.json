@@ -1,0 +1,77 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "nomic-ai",
+    "repo": "gpt4all",
+    "source": "https://github.com/nomic-ai/gpt4all"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/nomic-ai/gpt4all/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/nomic-ai/gpt4all",
+    "generatedAt": "2026-06-29T01:16:33.716001Z",
+    "evidencePath": "repos/github.com/nomic-ai/gpt4all/evidence.md"
+  },
+  "purpose": "Now with support for DeepSeek R1 Distillations",
+  "name": "GPT4All",
+  "homepage": "https://nomic.ai/gpt4all",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "Batchfile",
+    "C",
+    "C++",
+    "CMake",
+    "CSS",
+    "JavaScript",
+    "Makefile",
+    "Objective-C++",
+    "PowerShell",
+    "Python",
+    "QML",
+    "Qt Script",
+    "Shell"
+  ],
+  "topics": [
+    "llm-inference",
+    "ai-chat"
+  ],
+  "execution": {},
+  "docs": {
+    "root": "https://docs.gpt4all.io",
+    "gettingStarted": "https://docs.gpt4all.io/gpt4all_desktop/quickstart.html#quickstart"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/nomic-ai/gpt4all/profile.json",
+    "repository": "/v0/repos/github.com/nomic-ai/gpt4all/index.json",
+    "trust": "/v0/repos/github.com/nomic-ai/gpt4all/trust.json",
+    "queryTemplate": "/v0/repos/github.com/nomic-ai/gpt4all/query?path={dot_path}",
+    "indexPath": "repos/github.com/nomic-ai/gpt4all/"
+  }
+}

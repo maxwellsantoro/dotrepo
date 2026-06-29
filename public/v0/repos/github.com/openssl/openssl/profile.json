@@ -1,0 +1,85 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "openssl",
+    "repo": "openssl",
+    "source": "https://github.com/openssl/openssl"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/openssl/openssl/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/openssl/openssl",
+    "generatedAt": "2026-06-26T18:35:09.883578Z",
+    "evidencePath": "repos/github.com/openssl/openssl/evidence.md"
+  },
+  "purpose": "OpenSSL is a robust, commercial-grade, full-featured Open Source Toolkit for the Transport Layer Security (TLS, formerly SSL), Datagram TLS (DTLS), and QUIC protocols.",
+  "name": "Welcome to the OpenSSL Project",
+  "homepage": "https://openssl-library.org/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Assembly",
+    "C",
+    "C++",
+    "CMake",
+    "DIGITAL Command Language",
+    "Dockerfile",
+    "Go Template",
+    "M4",
+    "Pawn",
+    "Perl",
+    "Python",
+    "Raku",
+    "Ruby",
+    "Shell",
+    "eC",
+    "sed"
+  ],
+  "topics": [
+    "cryptography",
+    "openssl",
+    "encryption",
+    "tls",
+    "ssl",
+    "decryption"
+  ],
+  "execution": {},
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@quarckster"
+    ]
+  },
+  "completeness": {
+    "hasBuild": false,
+    "hasTest": false,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/openssl/openssl/profile.json",
+    "repository": "/v0/repos/github.com/openssl/openssl/index.json",
+    "trust": "/v0/repos/github.com/openssl/openssl/trust.json",
+    "queryTemplate": "/v0/repos/github.com/openssl/openssl/query?path={dot_path}",
+    "indexPath": "repos/github.com/openssl/openssl/"
+  }
+}

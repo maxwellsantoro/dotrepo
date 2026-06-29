@@ -1,0 +1,77 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "transact-rs",
+    "repo": "sqlx",
+    "source": "https://github.com/transact-rs/sqlx"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/transact-rs/sqlx/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/transact-rs/sqlx",
+    "generatedAt": "2026-06-29T00:45:27.42207Z",
+    "evidencePath": "repos/github.com/transact-rs/sqlx/evidence.md"
+  },
+  "purpose": "🧰 The Rust SQL Toolkit",
+  "name": "SQLx",
+  "homepage": "https://github.com/transact-rs/sqlx",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "Dockerfile",
+    "PLpgSQL",
+    "Python",
+    "Rust",
+    "Shell",
+    "TSQL"
+  ],
+  "topics": [
+    "sql",
+    "rust",
+    "postgres",
+    "mysql",
+    "async",
+    "await",
+    "mariadb",
+    "postgresql",
+    "sqlite"
+  ],
+  "execution": {
+    "build": "cargo build --workspace",
+    "test": "cargo test --workspace"
+  },
+  "docs": {},
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/transact-rs/sqlx/profile.json",
+    "repository": "/v0/repos/github.com/transact-rs/sqlx/index.json",
+    "trust": "/v0/repos/github.com/transact-rs/sqlx/trust.json",
+    "queryTemplate": "/v0/repos/github.com/transact-rs/sqlx/query?path={dot_path}",
+    "indexPath": "repos/github.com/transact-rs/sqlx/"
+  }
+}

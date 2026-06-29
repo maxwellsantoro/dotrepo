@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "excalidraw",
+    "repo": "excalidraw",
+    "source": "https://github.com/excalidraw/excalidraw"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/excalidraw/excalidraw/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/excalidraw/excalidraw",
+    "generatedAt": "2026-06-26T18:35:40.489043Z",
+    "evidencePath": "repos/github.com/excalidraw/excalidraw/evidence.md"
+  },
+  "purpose": "An open source virtual hand-drawn style whiteboard.",
+  "name": "Excalidraw Editor | Blog | Documentation | Excalidraw+",
+  "homepage": "https://excalidraw.com",
+  "license": "MIT",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "HTML",
+    "JavaScript",
+    "MDX",
+    "SCSS",
+    "Shell",
+    "TypeScript"
+  ],
+  "topics": [
+    "productivity",
+    "collaboration",
+    "diagrams",
+    "drawing",
+    "whiteboard",
+    "canvas",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "build": "yarn build",
+    "test": "yarn test"
+  },
+  "docs": {
+    "root": "https://docs.excalidraw.com/docs/@excalidraw/excalidraw/installation"
+  },
+  "ownership": {},
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": true,
+    "hasSecurityContact": false,
+    "hasOwnershipSignal": false,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/excalidraw/excalidraw/profile.json",
+    "repository": "/v0/repos/github.com/excalidraw/excalidraw/index.json",
+    "trust": "/v0/repos/github.com/excalidraw/excalidraw/trust.json",
+    "queryTemplate": "/v0/repos/github.com/excalidraw/excalidraw/query?path={dot_path}",
+    "indexPath": "repos/github.com/excalidraw/excalidraw/"
+  }
+}

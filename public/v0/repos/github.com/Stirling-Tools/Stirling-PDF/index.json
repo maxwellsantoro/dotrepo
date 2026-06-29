@@ -1,0 +1,51 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "Stirling-Tools",
+    "repo": "Stirling-PDF",
+    "source": "https://github.com/Stirling-Tools/Stirling-PDF"
+  },
+  "repository": {
+    "name": "Stirling PDF",
+    "description": "Stirling PDF is a powerful, open-source PDF editing platform.",
+    "homepage": "https://stirling.com",
+    "docsRoot": "https://docs.stirlingpdf.com",
+    "securityContact": "security@stirlingpdf.com"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/Stirling-Tools/Stirling-PDF/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/Stirling-Tools/Stirling-PDF",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/PR-Auto-Deploy-V2.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/Stirling-Tools/Stirling-PDF/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/Stirling-Tools/Stirling-PDF/index.json",
+    "trust": "/v0/repos/github.com/Stirling-Tools/Stirling-PDF/trust.json",
+    "profile": "/v0/repos/github.com/Stirling-Tools/Stirling-PDF/profile.json",
+    "queryTemplate": "/v0/repos/github.com/Stirling-Tools/Stirling-PDF/query?path={dot_path}",
+    "indexPath": "repos/github.com/Stirling-Tools/Stirling-PDF/"
+  }
+}

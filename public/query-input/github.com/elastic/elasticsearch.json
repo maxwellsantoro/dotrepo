@@ -1,0 +1,134 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "elastic",
+    "repo": "elasticsearch",
+    "source": "https://github.com/elastic/elasticsearch"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/elastic/elasticsearch/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/elastic/elasticsearch",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `.github/CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/elastic/elasticsearch/evidence.md"
+      }
+    },
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "overlay",
+        "status": "verified",
+        "source": "https://github.com/elastic/elasticsearch",
+        "generated_at": "2026-06-29T02:20:54.413181Z",
+        "trust": {
+          "confidence": "high",
+          "provenance": [
+            "imported",
+            "inferred",
+            "verified"
+          ],
+          "notes": "Bootstrapped from `.github/CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+        }
+      },
+      "repo": {
+        "name": "elasticsearch",
+        "description": "Free and Open Source, Distributed, RESTful Search Engine",
+        "homepage": "https://www.elastic.co/products/elasticsearch",
+        "license": "NOASSERTION",
+        "status": null,
+        "visibility": "public",
+        "languages": [
+          "AMPL",
+          "ANTLR",
+          "Batchfile",
+          "C",
+          "C++",
+          "CSS",
+          "Dockerfile",
+          "Emacs Lisp",
+          "FreeMarker",
+          "Groovy",
+          "HTML",
+          "Java",
+          "JavaScript",
+          "Makefile",
+          "Mustache",
+          "PowerShell",
+          "Python",
+          "Rust",
+          "Shell",
+          "StringTemplate",
+          "TypeScript"
+        ],
+        "build": null,
+        "test": null,
+        "topics": [
+          "elasticsearch",
+          "java",
+          "search-engine"
+        ]
+      },
+      "owners": {
+        "maintainers": [
+          "@elastic/stack-monitoring",
+          "@elastic/fleet",
+          "@elastic/logstash",
+          "@elastic/kibana-security",
+          "@elastic/obs-ds-intake-services",
+          "@elastic/es-storage-engine",
+          "@elastic/es-delivery",
+          "@elastic/es-core-infra",
+          "@elastic/es-security",
+          "@elastic/core-docs",
+          "@elastic/admin-docs",
+          "@elastic/developer-docs"
+        ],
+        "team": null,
+        "security_contact": null
+      },
+      "docs": {
+        "root": "https://www.elastic.co/products/elasticsearch",
+        "getting_started": null,
+        "architecture": null,
+        "api": null
+      },
+      "readme": null,
+      "compat": null,
+      "relations": {
+        "references": []
+      },
+      "x": {
+        "github": {
+          "archived": false,
+          "clone_url": "https://github.com/elastic/elasticsearch.git",
+          "default_branch": "main",
+          "fork": false,
+          "head_sha": "9c233b2040c1aa2d4493a40dc1949f749f6fb1e8",
+          "html_url": "https://github.com/elastic/elasticsearch",
+          "stars": 77187
+        }
+      }
+    }
+  },
+  "conflicts": []
+}

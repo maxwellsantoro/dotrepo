@@ -1,0 +1,114 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-06-29T02:21:50Z",
+    "snapshotDigest": "ed1bc67945214676a7189b186f684dc8e1e54ad1e0544cb52de86c79dac42cfc",
+    "staleAfter": "2026-07-06T02:21:50Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "prometheus",
+    "repo": "prometheus",
+    "source": "https://github.com/prometheus/prometheus"
+  },
+  "record": {
+    "manifestPath": "repos/github.com/prometheus/prometheus/record.toml",
+    "mode": "overlay",
+    "source": "https://github.com/prometheus/prometheus",
+    "generatedAt": "2026-06-29T01:57:03.435097Z",
+    "evidencePath": "repos/github.com/prometheus/prometheus/evidence.md"
+  },
+  "purpose": "Visit prometheus.io for the full documentation, examples and guides.",
+  "name": "Prometheus",
+  "homepage": "https://prometheus.io/",
+  "license": "Apache-2.0",
+  "visibility": "public",
+  "languages": [
+    "CSS",
+    "Dockerfile",
+    "Go",
+    "Go Template",
+    "HTML",
+    "JavaScript",
+    "Lex",
+    "Makefile",
+    "SCSS",
+    "Shell",
+    "TypeScript",
+    "Yacc"
+  ],
+  "topics": [
+    "monitoring",
+    "metrics",
+    "alerting",
+    "graphing",
+    "time-series",
+    "prometheus",
+    "hacktoberfest"
+  ],
+  "execution": {
+    "build": "go build ./...",
+    "test": "go test ./..."
+  },
+  "docs": {},
+  "ownership": {
+    "maintainers": [
+      "@prometheus/default-maintainers",
+      "@simonpasquier",
+      "@SuperQ",
+      "@dgl",
+      "@metalmatze",
+      "@beorn7",
+      "@krajorama",
+      "@juliusv",
+      "@nexucis",
+      "@roidelapluie",
+      "@cstyan",
+      "@bwplotka",
+      "@tomwilkie",
+      "@alexgreenbank",
+      "@aknuds1",
+      "@jesusvazquez",
+      "@ArthurSens",
+      "@codesome",
+      "@kgeckhart",
+      "@brancz",
+      "@rexagod",
+      "@jkroepke",
+      "@matt-gp",
+      "@sysadmind",
+      "@mrvarmazyar",
+      "@jooola",
+      "@apricote",
+      "@remyleone"
+    ],
+    "team": "@prometheus/default-maintainers",
+    "securityContact": "https://prometheus.io/docs/operating/security/"
+  },
+  "completeness": {
+    "hasBuild": true,
+    "hasTest": true,
+    "hasDocs": false,
+    "hasSecurityContact": true,
+    "hasOwnershipSignal": true,
+    "hasLicense": true,
+    "conflictCount": 0
+  },
+  "trust": {
+    "selectedStatus": "verified",
+    "confidence": "high",
+    "provenance": [
+      "imported",
+      "verified"
+    ],
+    "selectionReason": "only_matching_record"
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/prometheus/prometheus/profile.json",
+    "repository": "/v0/repos/github.com/prometheus/prometheus/index.json",
+    "trust": "/v0/repos/github.com/prometheus/prometheus/trust.json",
+    "queryTemplate": "/v0/repos/github.com/prometheus/prometheus/query?path={dot_path}",
+    "indexPath": "repos/github.com/prometheus/prometheus/"
+  }
+}
