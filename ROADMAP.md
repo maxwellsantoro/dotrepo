@@ -237,6 +237,32 @@ discovery waves expanded the corpus across non-overlapping GitHub star bands;
 the next priority is quality hardening across the larger index rather than raw
 record growth.
 
+### Reference toolchain maintainability
+
+**Goal:** keep the shipped CLI/MCP/LSP/core codebase navigable as the index and
+surfaces grow past v0.1.
+
+**Status:** in progress. The first structural splits and contributor docs are
+landed; LSP extraction and broader rustdoc coverage remain open.
+
+Deliver:
+
+- domain-scoped facade integration tests under `dotrepo-core/src/facade_tests/`
+- extracted MCP remote-lookup policy in `dotrepo-mcp/src/lookup.rs`
+- contributor onboarding for the internal crawler crate
+- rustdoc examples on high-traffic public APIs (`validate_repository`,
+  `query_repository`, `trust_repository`)
+- LSP and remaining MCP handler module extraction without transport behavior
+  changes
+
+Exit criteria:
+
+- no reference-toolchain source file exceeds ~1,500 lines without a documented
+  split plan in [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md)
+- facade tests can be exercised by domain without loading the full 5k-line module
+- new contributors can orient to crawler and server crates without reading entire
+  `main.rs` entrypoints
+
 ### Milestone 0: Working protocol and proof surface
 
 **Status: complete.**
@@ -537,6 +563,11 @@ Current status:
   `generated_at` rate, maximum record age, overdue refresh latency, and optional
   operational gates for tranche coverage, missing targets, lower-confidence
   backlog, stale freshness backlog, and maximum refresh overdue days.
+- the checked-in corpus is 613 overlay records; refresh cost and stale-record
+  rate must be tracked as first-class Milestone 4 metrics rather than inferred
+  from profile count alone
+- release-gate baselines ratchet profile volume and high-signal floors so index
+  growth does not silently regress lookup completeness or factual accuracy
 
 Exit criteria:
 
@@ -724,3 +755,5 @@ the fallback, not the default.
 - [`docs/public-surface.md`](./docs/public-surface.md) - hosted public contract
 - [`docs/maintainer-happy-path.md`](./docs/maintainer-happy-path.md) - native adoption workflow
 - [`docs/trust-model.md`](./docs/trust-model.md) - authority, provenance, and confidence semantics
+- [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md) - reference toolchain structure and refactor gates
+- [`crates/dotrepo-crawler/README.md`](./crates/dotrepo-crawler/README.md) - internal autonomous index crate orientation

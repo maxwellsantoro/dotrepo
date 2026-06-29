@@ -27,6 +27,11 @@ project tooling rather than additional plan documents.
 - [`public-search-quality-benchmark.md`](./public-search-quality-benchmark.md)
 - [`../index/README.md`](../index/README.md)
 
+## Develop the reference toolchain
+
+- [`toolchain-maintainability.md`](./toolchain-maintainability.md)
+- [`../crates/dotrepo-crawler/README.md`](../crates/dotrepo-crawler/README.md)
+
 ## Operate the system
 
 - [`factual-crawl-automation.md`](./factual-crawl-automation.md)

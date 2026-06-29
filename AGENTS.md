@@ -87,7 +87,9 @@ dotrepo-crawler  → discovery, factual crawl, verification, scoring, escalation
 
 **Key rule**: No validation or trust logic is duplicated across CLI/MCP/LSP. All business logic lives in `dotrepo-core`.
 
-`dotrepo-core` is split across focused modules under `src/` (`claims.rs`, `import/` with `commands.rs` and `parsing.rs`, `surfaces.rs`, `public.rs`, `selection.rs`, `promotion.rs`, `validation.rs`, `query.rs`, `synthesis.rs`, `util.rs`) plus a thin `lib.rs` facade that re-exports the complete public API. Facade unit tests live in `facade_tests.rs`. When adding new functionality, place it in the most appropriate module (or create a small new focused one if none fits). Keep the public surface in `lib.rs` unchanged so that all existing `use dotrepo_core::...` sites continue to work.
+`dotrepo-core` is split across focused modules under `src/` (`claims.rs`, `import/` with `commands.rs` and `parsing.rs`, `surfaces.rs`, `public.rs`, `selection.rs`, `promotion.rs`, `validation.rs`, `query.rs`, `synthesis.rs`, `util.rs`) plus a thin `lib.rs` facade that re-exports the complete public API. Facade integration tests live in `src/facade_tests/` (domain-scoped modules with shared helpers in `common.rs`). When adding new functionality, place it in the most appropriate module (or create a small new focused one if none fits). Keep the public surface in `lib.rs` unchanged so that all existing `use dotrepo_core::...` sites continue to work.
+
+`dotrepo-mcp` extracts remote lookup policy into `src/lookup.rs`. `dotrepo-lsp` module extraction is tracked in `docs/toolchain-maintainability.md`. The internal crawler crate is documented in `crates/dotrepo-crawler/README.md`.
 
 ## Core Concepts
 

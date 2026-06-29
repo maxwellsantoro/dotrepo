@@ -373,6 +373,18 @@ pub fn record_summary(manifest: &Manifest) -> RecordSummary {
     }
 }
 
+/// Resolve a dot-path against the best matching record under `root`.
+///
+/// # Examples
+///
+/// ```no_run
+/// use dotrepo_core::query_repository;
+/// use std::path::Path;
+///
+/// let report = query_repository(Path::new("examples/native-minimal"), "repo.name")?;
+/// assert_eq!(report.path, "repo.name");
+/// # Ok::<(), anyhow::Error>(())
+/// ```
 pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
     let candidates = resolve_candidates(root)?;
     let selected = candidates.first().ok_or_else(|| {
@@ -409,6 +421,18 @@ pub fn query_repository(root: &Path, path: &str) -> Result<QueryReport> {
     })
 }
 
+/// Return the selected record, selection reason, and competing records for `root`.
+///
+/// # Examples
+///
+/// ```no_run
+/// use dotrepo_core::trust_repository;
+/// use std::path::Path;
+///
+/// let report = trust_repository(Path::new("examples/native-minimal"))?;
+/// assert!(!report.manifest_path.is_empty());
+/// # Ok::<(), anyhow::Error>(())
+/// ```
 pub fn trust_repository(root: &Path) -> Result<TrustReport> {
     let candidates = resolve_candidates(root)?;
     let selected = candidates.first().ok_or_else(|| {
@@ -726,5 +750,5 @@ fn generate_check_managed_surface(
 }
 
 #[cfg(test)]
-#[path = "facade_tests.rs"]
+#[path = "facade_tests/mod.rs"]
 mod tests;

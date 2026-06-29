@@ -64,6 +64,17 @@ pub struct ValidateReport {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub record: Option<RecordSummary>,
 }
+/// Validate the root manifest and return structured diagnostics.
+///
+/// # Examples
+///
+/// ```no_run
+/// use dotrepo_core::validate_repository;
+/// use std::path::Path;
+///
+/// let report = validate_repository(Path::new("examples/native-minimal"));
+/// assert!(report.valid);
+/// ```
 pub fn validate_repository(root: &Path) -> ValidateReport {
     let mut diagnostics = Vec::new();
     let mut loaded = Vec::new();
