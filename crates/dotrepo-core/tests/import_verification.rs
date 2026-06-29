@@ -84,13 +84,15 @@ fn verify_records_unresolved_fields() {
     fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir");
     fs::write(root.join("README.md"), "# Test\n\nA test repo.\n").expect("README");
     fs::write(
-        root.join(".github/workflows/ci.yml"),
-        "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
-    ).expect("ci.yml");
+        root.join(".github/workflows/check.yml"),
+        "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+    )
+    .expect("check.yml");
     fs::write(
-        root.join(".github/workflows/release.yml"),
-        "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
-    ).expect("release.yml");
+        root.join(".github/workflows/verify.yml"),
+        "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+    )
+    .expect("verify.yml");
 
     let source = "https://github.com/example/unresolved-test";
     let plan =

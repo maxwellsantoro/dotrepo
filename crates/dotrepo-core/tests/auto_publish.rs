@@ -270,13 +270,15 @@ fn end_to_end_conflict_repo_does_not_promote() {
     )
     .expect("README");
     fs::write(
-        root.join(".github/workflows/ci.yml"),
-        "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
-    ).expect("ci.yml");
+        root.join(".github/workflows/check.yml"),
+        "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+    )
+    .expect("check.yml");
     fs::write(
-        root.join(".github/workflows/release.yml"),
-        "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
-    ).expect("release.yml");
+        root.join(".github/workflows/verify.yml"),
+        "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+    )
+    .expect("verify.yml");
 
     let source = "https://github.com/example/conflict";
     let plan =
@@ -288,7 +290,7 @@ fn end_to_end_conflict_repo_does_not_promote() {
     let outcome = promote_to_verified(&mut manifest, &report);
 
     assert!(!outcome.promoted);
-    assert_eq!(manifest.record.status, RecordStatus::Imported);
+    assert_eq!(manifest.record.status, plan.manifest.record.status);
 
     fs::remove_dir_all(&root).expect("cleanup");
 }
@@ -395,13 +397,15 @@ fn promotion_does_not_upgrade_unresolved_fields() {
     )
     .expect("README");
     fs::write(
-        root.join(".github/workflows/ci.yml"),
-        "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
-    ).expect("ci.yml");
+        root.join(".github/workflows/check.yml"),
+        "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+    )
+    .expect("check.yml");
     fs::write(
-        root.join(".github/workflows/release.yml"),
-        "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
-    ).expect("release.yml");
+        root.join(".github/workflows/verify.yml"),
+        "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+    )
+    .expect("verify.yml");
 
     let source = "https://github.com/example/conflict";
     let plan =

@@ -136,13 +136,15 @@ fn score_unresolved_prevents_auto_publish() {
     )
     .expect("README");
     fs::write(
-        root.join(".github/workflows/ci.yml"),
-        "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
-    ).expect("ci.yml");
+        root.join(".github/workflows/check.yml"),
+        "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+    )
+    .expect("check.yml");
     fs::write(
-        root.join(".github/workflows/release.yml"),
-        "name: Release\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
-    ).expect("release.yml");
+        root.join(".github/workflows/verify.yml"),
+        "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+    )
+    .expect("verify.yml");
 
     let source = "https://github.com/example/conflict";
     let plan =
