@@ -1740,7 +1740,6 @@ def main() -> int:
     generated_at_human = format_timestamp_for_humans(generated_at)
     stale_after = meta.get("staleAfter")
     repository_count = inventory.get("repositoryCount", 0)
-    repositories = inventory.get("repositories", [])
     first_query, query_example = build_query_example(input_dir, inventory)
     featured_trust = build_featured_trust_example(input_dir, inventory)
     homepage_snapshot_state = build_homepage_snapshot_state(meta, inventory)
