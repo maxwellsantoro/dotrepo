@@ -122,9 +122,10 @@ pub use import::{
 };
 
 pub use promotion::{
-    analyze_index_promotion, apply_index_promotions, promote_to_verified,
-    score_index_record_for_promotion, PromotionAppliedRecord, PromotionApplyReport,
-    PromotionOutcome, PromotionRecordScore, PromotionReport, PromotionSummary,
+    analyze_index_promotion, apply_index_promotions, guard_against_unjustified_downgrade,
+    promote_to_verified, score_index_record_for_promotion, DowngradeGuardOutcome,
+    PromotionAppliedRecord, PromotionApplyReport, PromotionOutcome, PromotionRecordScore,
+    PromotionReport, PromotionSummary,
 };
 
 pub use validation::{

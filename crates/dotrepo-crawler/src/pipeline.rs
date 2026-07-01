@@ -13,7 +13,7 @@ use crate::{
 };
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
-    current_timestamp_rfc3339, import_repository_with_options,
+    current_timestamp_rfc3339, guard_against_unjustified_downgrade, import_repository_with_options,
     infer_docs_root_from_external_homepage, promote_to_verified, run_import_escalation,
     score_import_fields, validate_manifest, verify_import_plan, AdjudicationProvider,
     GitHubSnapshotFacts, ImportMode, ImportOptions, TieredAdjudicationProviders,
@@ -86,6 +86,7 @@ pub(crate) fn crawl_repository_from_snapshot(
         .unwrap_or_else(current_timestamp_rfc3339)?;
     let source_url = resolve_source_url(request, snapshot);
     let record_root = request.repository.record_root(&request.index_root);
+    let previous_manifest = read_previous_manifest(&record_root);
     let mut diagnostics = materialized.diagnostics.clone();
     if !materialized.written_files.is_empty() {
         diagnostics.push(CrawlDiagnostic::info(
@@ -195,6 +196,44 @@ pub(crate) fn crawl_repository_from_snapshot(
         }
     }
 
+    // The import above rebuilds the manifest from scratch, so a previously
+    // verified record can otherwise silently drop to a lower status/
+    // confidence purely from re-scoring noise (e.g. a newly gained field
+    // scoring below high confidence). Guard against that, while still
+    // allowing genuine field regressions to surface honestly.
+    if let Some(guard_outcome) =
+        guard_against_unjustified_downgrade(previous_manifest.as_ref(), &mut import_plan.manifest)
+    {
+        if guard_outcome.preserved {
+            diagnostics.push(CrawlDiagnostic::info(
+                "pipeline.downgrade_guard_preserved",
+                "preserved prior verified status: no previously present field regressed in this refresh"
+                    .to_string(),
+            ));
+            import_plan.manifest_text = render_manifest(&import_plan.manifest)?;
+            if let Some(ref mut evidence) = import_plan.evidence_text {
+                evidence.push_str(
+                    "\n## Downgrade guard\n\nA prior verified status was preserved because no previously present field regressed in this refresh.\n",
+                );
+            }
+        } else {
+            diagnostics.push(CrawlDiagnostic::info(
+                "pipeline.downgrade_guard_allowed",
+                format!(
+                    "allowed downgrade from a prior verified status: {} field(s) regressed: {}",
+                    guard_outcome.regressed_fields.len(),
+                    guard_outcome.regressed_fields.join(", "),
+                ),
+            ));
+            if let Some(ref mut evidence) = import_plan.evidence_text {
+                evidence.push_str(&format!(
+                    "\n## Downgrade guard\n\nStatus dropped from a prior verified record because the following previously present field(s) regressed: {}.\n",
+                    guard_outcome.regressed_fields.join(", "),
+                ));
+            }
+        }
+    }
+
     let synthesis_sources = synthesis_sources_from_materialized(materialized);
     let (synthesis, synthesis_failure, synthesis_diagnostics) = maybe_attempt_synthesis(
         request,
@@ -258,6 +297,15 @@ fn validate_repository_identity(repository: &RepositoryRef) -> Result<()> {
         bail!("crawl_repository currently supports github.com identities only");
     }
     Ok(())
+}
+
+/// Best-effort read of the on-disk `record.toml` at `record_root`, if any, so
+/// a fresh crawl can be checked against it for unjustified downgrades. A
+/// missing or unparseable prior record simply means there is nothing to
+/// protect; this never fails the crawl.
+fn read_previous_manifest(record_root: &Path) -> Option<Manifest> {
+    let contents = fs::read_to_string(record_root.join("record.toml")).ok()?;
+    dotrepo_schema::parse_manifest(&contents).ok()
 }
 
 fn resolve_source_url(
@@ -605,7 +653,7 @@ mod tests {
     };
     use crate::writeback::apply_writeback_plan;
     use dotrepo_core::validate_index_root;
-    use dotrepo_schema::parse_manifest;
+    use dotrepo_schema::{parse_manifest, RecordStatus};
     use std::fs;
     use std::path::PathBuf;
 
@@ -784,6 +832,100 @@ mod tests {
             .expect("index validates")
             .iter()
             .all(|finding| !finding.path.ends_with("record.toml")));
+
+        fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
+        fs::remove_dir_all(index_root).expect("index temp removed");
+    }
+
+    #[test]
+    fn crawl_repository_from_snapshot_preserves_prior_verified_status_without_regression() {
+        let index_root = temp_dir("downgrade-guard-preserve");
+        let record_root = repository().record_root(&index_root);
+        fs::create_dir_all(&record_root).expect("record root created");
+        fs::write(
+            record_root.join("record.toml"),
+            r#"schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/example/orbit"
+generated_at = "2026-01-01T00:00:00Z"
+
+[record.trust]
+confidence = "high"
+provenance = ["imported", "verified"]
+notes = "Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "orbit"
+description = "Prior verified description."
+"#,
+        )
+        .expect("prior record written");
+
+        let materialized = materialize_repository(&MaterializeRepositoryInput {
+            repository: repository(),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# Orbit\n\nFresh README description.\n".into(),
+                }),
+                extra_files: vec![
+                    RepositoryTextFile {
+                        relative_path: PathBuf::from(".github/workflows/check.yml"),
+                        contents: "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n".into(),
+                    },
+                    RepositoryTextFile {
+                        relative_path: PathBuf::from(".github/workflows/verify.yml"),
+                        contents: "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n".into(),
+                    },
+                ],
+                ..Default::default()
+            },
+        })
+        .expect("materialization succeeds");
+        let request = CrawlRepositoryRequest {
+            index_root: index_root.clone(),
+            repository: repository(),
+            generated_at: Some("2026-03-17T12:00:00Z".into()),
+            source_url: None,
+            synthesize: false,
+            synthesis_model: None,
+            synthesis_provider: None,
+            prior_synthesis_failure: None,
+        };
+
+        let report = crawl_repository_from_snapshot(
+            &request,
+            &snapshot(Some("GitHub description should not overwrite README.")),
+            &materialized,
+        )
+        .expect("crawl succeeds");
+
+        // Two conflicting build-command workflows make repo.build Unresolved
+        // in the fresh import, which alone would leave the record below
+        // verified. The previous record never had repo.build present either
+        // (it was absent), so this is not a genuine regression -- the guard
+        // must restore verified/high rather than let this routine refresh
+        // silently downgrade the record over an unrelated ambiguity.
+        let manifest = &report.writeback_plan.factual.import_plan.manifest;
+        assert_eq!(manifest.record.status, RecordStatus::Verified);
+        assert_eq!(
+            manifest
+                .record
+                .trust
+                .as_ref()
+                .and_then(|trust| trust.confidence.as_deref()),
+            Some("high")
+        );
+        assert!(report
+            .writeback_plan
+            .factual
+            .import_plan
+            .evidence_text
+            .as_deref()
+            .is_some_and(|text| text.contains("Downgrade guard")));
 
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");

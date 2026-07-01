@@ -1,10 +1,44 @@
 use dotrepo_core::{
-    analyze_index_promotion, apply_index_promotions, import_repository, promote_to_verified,
-    score_import_fields, verify_import_plan, FieldConfidence, FieldScore, FieldScoreReport,
-    FieldScoreSummary, ImportMode,
+    analyze_index_promotion, apply_index_promotions, guard_against_unjustified_downgrade,
+    import_repository, promote_to_verified, score_import_fields, verify_import_plan,
+    FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary, ImportMode,
 };
-use dotrepo_schema::{parse_manifest, Manifest, Record, RecordMode, RecordStatus, Repo};
+use dotrepo_schema::{parse_manifest, Manifest, Owners, Record, RecordMode, RecordStatus, Repo};
 use std::fs;
+
+fn make_verified_manifest_with_security_contact() -> Manifest {
+    let mut manifest = Manifest::new(
+        Record {
+            mode: RecordMode::Overlay,
+            status: RecordStatus::Verified,
+            source: Some("https://github.com/example/verified".into()),
+            generated_at: None,
+            trust: Some(dotrepo_schema::Trust {
+                confidence: Some("high".into()),
+                provenance: vec!["imported".into(), "verified".into()],
+                notes: Some("Auto-promoted to verified: all fields are honestly resolved.".into()),
+            }),
+        },
+        Repo {
+            name: "verified".into(),
+            description: "A previously verified project.".into(),
+            homepage: None,
+            license: None,
+            status: None,
+            visibility: None,
+            languages: vec![],
+            build: Some("cargo build".into()),
+            test: Some("cargo test".into()),
+            topics: vec![],
+        },
+    );
+    manifest.owners = Some(Owners {
+        maintainers: vec!["@example/team".into()],
+        team: Some("@example/team".into()),
+        security_contact: Some("security@example.com".into()),
+    });
+    manifest
+}
 
 fn temp_dir(name: &str) -> std::path::PathBuf {
     let dir = std::env::temp_dir().join(format!("dotrepo-auto-publish-test-{}", name));
@@ -806,4 +840,114 @@ fn score_index_record_for_promotion_treats_command_conflict_as_unresolved() {
         FieldConfidence::Unresolved,
         "test conflict must surface as Unresolved"
     );
+}
+
+#[test]
+fn downgrade_guard_preserves_verified_status_when_only_new_field_scores_lower() {
+    let previous = make_verified_manifest_with_security_contact();
+
+    // Fresh refresh keeps every field the previous verified record had, and
+    // gains a new `docs.root` value -- exactly the boto3/ray shape observed
+    // in a live batch run, where a routine refresh should not silently
+    // regress an already-verified record just because it learned something
+    // new that happens to score below high confidence.
+    let mut fresh = previous.clone();
+    fresh.record.status = RecordStatus::Inferred;
+    fresh.record.trust = Some(dotrepo_schema::Trust {
+        confidence: Some("medium".into()),
+        provenance: vec!["imported".into(), "inferred".into()],
+        notes: Some("Bootstrapped from CODEOWNERS and SECURITY.md.".into()),
+    });
+    fresh.docs = Some(dotrepo_schema::Docs {
+        root: Some("https://example.com/docs".into()),
+        getting_started: None,
+        architecture: None,
+        api: None,
+    });
+
+    let outcome = guard_against_unjustified_downgrade(Some(&previous), &mut fresh)
+        .expect("guard should evaluate a previously verified record");
+
+    assert!(
+        outcome.preserved,
+        "no field regressed, so verified status must be restored"
+    );
+    assert!(outcome.regressed_fields.is_empty());
+    assert_eq!(fresh.record.status, RecordStatus::Verified);
+    assert_eq!(
+        fresh.record.trust.as_ref().unwrap().confidence.as_deref(),
+        Some("high")
+    );
+    assert!(fresh
+        .record
+        .trust
+        .as_ref()
+        .unwrap()
+        .notes
+        .as_ref()
+        .unwrap()
+        .contains("Preserved prior verified status"));
+    // The newly gained field is not discarded by the guard.
+    assert_eq!(
+        fresh.docs.as_ref().unwrap().root.as_deref(),
+        Some("https://example.com/docs")
+    );
+}
+
+#[test]
+fn downgrade_guard_allows_downgrade_when_a_field_genuinely_regresses() {
+    let previous = make_verified_manifest_with_security_contact();
+
+    // Fresh refresh loses the previously present security contact -- a real
+    // upstream change (e.g. SECURITY.md removed), which must be allowed
+    // through honestly rather than papered over.
+    let mut fresh = previous.clone();
+    fresh.record.status = RecordStatus::Inferred;
+    fresh.record.trust = Some(dotrepo_schema::Trust {
+        confidence: Some("medium".into()),
+        provenance: vec!["imported".into(), "inferred".into()],
+        notes: Some("Bootstrapped from CODEOWNERS.".into()),
+    });
+    fresh.owners = Some(Owners {
+        maintainers: vec!["@example/team".into()],
+        team: Some("@example/team".into()),
+        security_contact: None,
+    });
+
+    let outcome = guard_against_unjustified_downgrade(Some(&previous), &mut fresh)
+        .expect("guard should evaluate a previously verified record");
+
+    assert!(
+        !outcome.preserved,
+        "a genuine field regression must not be silently papered over"
+    );
+    assert_eq!(
+        outcome.regressed_fields,
+        vec!["owners.security_contact".to_string()]
+    );
+    // The fresh (lower) status is left as scored -- not silently restored.
+    assert_eq!(fresh.record.status, RecordStatus::Inferred);
+}
+
+#[test]
+fn downgrade_guard_is_a_noop_when_there_is_no_prior_record() {
+    let mut fresh = make_verified_manifest_with_security_contact();
+    fresh.record.status = RecordStatus::Imported;
+
+    let outcome = guard_against_unjustified_downgrade(None, &mut fresh);
+
+    assert!(outcome.is_none());
+    assert_eq!(fresh.record.status, RecordStatus::Imported);
+}
+
+#[test]
+fn downgrade_guard_is_a_noop_when_fresh_status_is_not_lower() {
+    let previous = make_verified_manifest_with_security_contact();
+    let mut fresh = previous.clone();
+    // Fresh status matches or exceeds previous; nothing to guard.
+
+    let outcome = guard_against_unjustified_downgrade(Some(&previous), &mut fresh);
+
+    assert!(outcome.is_none());
+    assert_eq!(fresh.record.status, RecordStatus::Verified);
 }

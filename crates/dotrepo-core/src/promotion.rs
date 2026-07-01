@@ -50,6 +50,158 @@ pub struct PromotionOutcome {
     pub reason: String,
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DowngradeGuardOutcome {
+    /// True when a prior verified-or-higher status/confidence was restored
+    /// onto `manifest` because no field-level regression was found.
+    pub preserved: bool,
+    /// Fields that were present (or high-confidence-absent) in the previous
+    /// record but are missing/unresolved in the fresh import. Non-empty only
+    /// when `preserved` is false and a genuine regression justified letting
+    /// the fresh, lower status stand.
+    pub regressed_fields: Vec<String>,
+}
+
+fn status_rank(status: &RecordStatus) -> u8 {
+    match status {
+        RecordStatus::Draft => 0,
+        RecordStatus::Imported => 1,
+        RecordStatus::Inferred => 2,
+        RecordStatus::Reviewed => 3,
+        RecordStatus::Verified => 4,
+        RecordStatus::Canonical => 5,
+    }
+}
+
+/// Tracked fields whose presence we can compare between a previous on-disk
+/// manifest and a freshly rebuilt import, mirroring the field set scored by
+/// `dotrepo_core::import::score_import_fields`. A field counts as "present"
+/// here when it carries a real, non-placeholder value; `owners.security_contact
+/// = "unknown"` is treated the same as absent because that value is itself an
+/// intentional, documented absence marker (see `docs/import-baseline-audit.md`).
+fn tracked_field_presence(manifest: &Manifest) -> Vec<(&'static str, bool)> {
+    let non_empty = |value: Option<&str>| value.is_some_and(|v| !v.trim().is_empty());
+    let owners = manifest.owners.as_ref();
+    let docs = manifest.docs.as_ref();
+    let security_contact = owners.and_then(|o| o.security_contact.as_deref());
+    vec![
+        (
+            "repo.homepage",
+            non_empty(manifest.repo.homepage.as_deref()),
+        ),
+        ("repo.build", non_empty(manifest.repo.build.as_deref())),
+        ("repo.test", non_empty(manifest.repo.test.as_deref())),
+        (
+            "owners.security_contact",
+            security_contact.is_some_and(|contact| contact != "unknown")
+                && non_empty(security_contact),
+        ),
+        (
+            "owners.team",
+            non_empty(owners.and_then(|o| o.team.as_deref())),
+        ),
+        ("docs.root", non_empty(docs.and_then(|d| d.root.as_deref()))),
+        (
+            "docs.getting_started",
+            non_empty(docs.and_then(|d| d.getting_started.as_deref())),
+        ),
+    ]
+}
+
+/// Fields present in `previous` but missing in `fresh`: a genuine regression,
+/// as opposed to the fresh import merely scoring an unchanged or additional
+/// field below high confidence.
+fn regressed_fields(previous: &Manifest, fresh: &Manifest) -> Vec<String> {
+    let fresh_presence: std::collections::HashMap<&str, bool> =
+        tracked_field_presence(fresh).into_iter().collect();
+    tracked_field_presence(previous)
+        .into_iter()
+        .filter(|(field, was_present)| {
+            *was_present && !fresh_presence.get(field).copied().unwrap_or(false)
+        })
+        .map(|(field, _)| field.to_string())
+        .collect()
+}
+
+/// Guards a freshly rebuilt overlay import against silently regressing an
+/// already-`verified`-or-higher on-disk record. The crawler rebuilds each
+/// overlay manifest from scratch on every refresh; without this guard, a
+/// record already at `verified`/`high` confidence could drop back to a lower
+/// status/confidence purely because the fresh re-scoring judged some field
+/// (often a newly gained one) below high confidence, even though nothing the
+/// previous record had established was actually lost. That is re-scoring
+/// noise, not a real regression, and should not silently discard trust state.
+///
+/// If `previous` is `Some` and at `verified` or higher, and `fresh`'s status
+/// is currently lower than `previous`'s, this checks whether any field
+/// `previous` had present (or intentionally absent) is now missing/unresolved
+/// in `fresh`:
+/// - If no such regression is found, `fresh`'s status and confidence are
+///   restored to `previous`'s, and a clear note is appended explaining why.
+/// - If a genuine regression is found, `fresh` is left as scored (the lower
+///   status honestly reflects what changed), and the caller can surface
+///   `regressed_fields` in evidence/notes so this isn't silently lost either.
+///
+/// Returns `None` when there is no prior record to protect, the prior record
+/// was below `verified`, or the fresh status is already at or above the
+/// previous status (nothing to guard).
+pub fn guard_against_unjustified_downgrade(
+    previous: Option<&Manifest>,
+    fresh: &mut Manifest,
+) -> Option<DowngradeGuardOutcome> {
+    let previous = previous?;
+    if status_rank(&previous.record.status) < status_rank(&RecordStatus::Verified) {
+        return None;
+    }
+    if status_rank(&fresh.record.status) >= status_rank(&previous.record.status) {
+        return None;
+    }
+
+    let regressed = regressed_fields(previous, fresh);
+    if !regressed.is_empty() {
+        return Some(DowngradeGuardOutcome {
+            preserved: false,
+            regressed_fields: regressed,
+        });
+    }
+
+    fresh.record.status = previous.record.status.clone();
+    let previous_confidence = previous
+        .record
+        .trust
+        .as_ref()
+        .and_then(|trust| trust.confidence.clone())
+        .unwrap_or_else(|| "high".to_string());
+    let previous_provenance = previous
+        .record
+        .trust
+        .as_ref()
+        .map(|trust| trust.provenance.clone())
+        .unwrap_or_default();
+    if let Some(ref mut trust) = fresh.record.trust {
+        trust.confidence = Some(previous_confidence);
+        for entry in previous_provenance {
+            if !trust.provenance.contains(&entry) {
+                trust.provenance.push(entry);
+            }
+        }
+        let existing_notes = trust.notes.take().unwrap_or_default();
+        let guard_note = "Preserved prior verified status: no previously present field regressed in this refresh.";
+        trust.notes = Some(if existing_notes.is_empty() {
+            guard_note.to_string()
+        } else if existing_notes.contains(guard_note) {
+            existing_notes
+        } else {
+            format!("{existing_notes} {guard_note}")
+        });
+    }
+
+    Some(DowngradeGuardOutcome {
+        preserved: true,
+        regressed_fields: Vec::new(),
+    })
+}
+
 pub fn promote_to_verified(manifest: &mut Manifest, report: &FieldScoreReport) -> PromotionOutcome {
     let previous_status = match manifest.record.status {
         RecordStatus::Draft => "draft",
