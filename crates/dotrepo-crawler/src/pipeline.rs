@@ -14,9 +14,10 @@ use crate::{
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
     current_timestamp_rfc3339, guard_against_unjustified_downgrade, import_repository_with_options,
-    infer_docs_root_from_external_homepage, promote_to_verified, run_import_escalation,
-    score_import_fields, validate_manifest, verify_import_plan, AdjudicationProvider,
-    GitHubSnapshotFacts, ImportMode, ImportOptions, TieredAdjudicationProviders,
+    infer_docs_root_from_external_homepage, promote_to_verified, repository_identity,
+    run_import_escalation, score_import_fields, validate_manifest, verify_import_plan,
+    AdjudicationProvider, GitHubSnapshotFacts, ImportMode, ImportOptions,
+    TieredAdjudicationProviders,
 };
 use dotrepo_schema::{render_manifest, Manifest};
 use std::fs;
@@ -344,8 +345,28 @@ fn merge_snapshot_fields(
         current_homepage.is_none() || current_homepage == Some(source_url.trim());
     if should_replace_homepage {
         if let Some(homepage) = trimmed_non_empty(snapshot.homepage.as_deref()) {
-            manifest.repo.homepage = Some(homepage.to_string());
-            merged_fields.push("repo.homepage");
+            // GitHub's repository "Website" field is maintainer-set free text
+            // and occasionally points at a different repository entirely
+            // (e.g. a renamed/duplicated project left pointing at its
+            // original). validate_manifest() rejects a repo.homepage that
+            // resolves to a different code-host identity than the record
+            // itself, so merging such a value here would write an overlay
+            // that immediately fails validate-index. Skip the merge (keep
+            // the existing, self-consistent value) rather than write an
+            // inconsistent record.
+            let conflicts_with_identity = homepage_conflicts_with_identity(repository, homepage);
+            if conflicts_with_identity {
+                diagnostics.push(CrawlDiagnostic::warning(
+                    "pipeline.homepage_identity_conflict",
+                    format!(
+                        "skipped GitHub-reported homepage {homepage:?}: resolves to a different repository identity than github.com/{}/{}",
+                        repository.owner, repository.repo
+                    ),
+                ));
+            } else {
+                manifest.repo.homepage = Some(homepage.to_string());
+                merged_fields.push("repo.homepage");
+            }
         }
     }
 
@@ -644,6 +665,19 @@ fn trimmed_non_empty(value: Option<&str>) -> Option<&str> {
     value.map(str::trim).filter(|value| !value.is_empty())
 }
 
+// Must match dotrepo_core::validation's code-host list used by the
+// repo.homepage identity check in validate_manifest().
+const CODE_HOSTS: &[&str] = &["github.com", "gitlab.com", "bitbucket.org"];
+
+/// True when `homepage` is a code-host URL that resolves to a repository
+/// identity different from `repository` itself.
+fn homepage_conflicts_with_identity(repository: &RepositoryRef, homepage: &str) -> bool {
+    repository_identity(homepage).is_some_and(|(host, owner, repo)| {
+        CODE_HOSTS.contains(&host.as_str())
+            && (host != repository.host || owner != repository.owner || repo != repository.repo)
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -926,6 +960,87 @@ description = "Prior verified description."
             .evidence_text
             .as_deref()
             .is_some_and(|text| text.contains("Downgrade guard")));
+
+        fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
+        fs::remove_dir_all(index_root).expect("index temp removed");
+    }
+
+    #[test]
+    fn homepage_conflicts_with_identity_detects_cross_repository_urls() {
+        let repo = repository();
+        assert!(homepage_conflicts_with_identity(
+            &repo,
+            "https://github.com/someone-else/other-project"
+        ));
+        assert!(!homepage_conflicts_with_identity(
+            &repo,
+            "https://github.com/example/orbit"
+        ));
+        assert!(!homepage_conflicts_with_identity(
+            &repo,
+            "https://github.com/example/orbit#readme"
+        ));
+        // Non-code-host URLs are always fine regardless of content.
+        assert!(!homepage_conflicts_with_identity(
+            &repo,
+            "https://orbit.example.dev"
+        ));
+    }
+
+    #[test]
+    fn crawl_repository_from_snapshot_skips_github_homepage_pointing_at_a_different_repository() {
+        // Reproduces a real case found while re-crawling the index:
+        // GitHub's repository "Website" field is maintainer-set free text
+        // and can point at an unrelated repository (e.g. a renamed or
+        // duplicated project left pointing at its original). Blindly
+        // merging it in previously produced a repo.homepage that failed
+        // validate-index's cross-identity check.
+        let index_root = temp_dir("homepage-identity-conflict-index");
+        let materialized = materialize_repository(&MaterializeRepositoryInput {
+            repository: repository(),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# Orbit\n\nA CLI tool.\n".into(),
+                }),
+                ..Default::default()
+            },
+        })
+        .expect("materialization succeeds");
+        let mut conflicting_snapshot = snapshot(Some("A CLI tool."));
+        conflicting_snapshot.homepage =
+            Some("https://github.com/someone-else/other-project".into());
+        let request = CrawlRepositoryRequest {
+            index_root: index_root.clone(),
+            repository: repository(),
+            generated_at: Some("2026-03-17T12:00:00Z".into()),
+            source_url: None,
+            synthesize: false,
+            synthesis_model: None,
+            synthesis_provider: None,
+            prior_synthesis_failure: None,
+        };
+
+        let report = crawl_repository_from_snapshot(&request, &conflicting_snapshot, &materialized)
+            .expect("crawl succeeds");
+
+        let homepage = report
+            .writeback_plan
+            .factual
+            .import_plan
+            .manifest
+            .repo
+            .homepage
+            .clone();
+        assert_ne!(
+            homepage.as_deref(),
+            Some("https://github.com/someone-else/other-project"),
+            "must not adopt a homepage that resolves to a different repository identity"
+        );
+        assert!(report
+            .diagnostics
+            .iter()
+            .any(|d| d.code == "pipeline.homepage_identity_conflict"));
 
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");
