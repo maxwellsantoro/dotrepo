@@ -32,7 +32,7 @@ directional and should be refreshed when this table is used to schedule work.
 | `dotrepo-core/src/import/mod.rs` | Next: reduce to import orchestration and re-exports by moving remaining evidence assembly and field-resolution helpers into focused import modules. |
 | `dotrepo-core/src/import/parsing.rs` | Next: split ecosystem-specific parsers from shared candidate normalization and reconciliation. |
 | `dotrepo-core/src/import/commands.rs` | Next: separate workflow extraction from command safety and command-ranking policy. |
-| `dotrepo-crawler/src/main.rs` | Next: move CLI command execution and report rendering into modules while retaining argument parsing and process startup in `main.rs`. |
+| `dotrepo-crawler/src/main.rs` | Done: `main.rs` now holds only clap argument/subcommand definitions, `main()`, and top-level dispatch; command execution moved to `src/commands.rs` and report/output rendering moved to `src/report.rs`. |
 | `dotrepo-cli/src/tests.rs` | Retain temporarily: this is test-only code with no production navigation cost; split by CLI command domain when the next test family is added. |
 | `dotrepo-core/src/facade_tests/import_repository.rs` | Split on next import-fixture expansion into parsing, evidence, escalation, and manifest-assembly test modules. |
 
