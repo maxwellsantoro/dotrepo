@@ -460,12 +460,37 @@ describe the destination; this section decides what runs now.
 6. Process the current promotion headroom through the normal validation path;
    consult `promotion-report` and the growth-status renderer for live candidate
    counts.
-7. Begin randomized and risk-weighted system audits and convert every actionable
-   result into a fixture, deterministic fix, calibration change, or policy update.
-   `scripts/audit_index_sample.py` now produces the read-only, risk-weighted
-   sample (see "Audit strategy" above); actually running it repeatedly and
-   converting its findings into fixtures, fixes, calibration changes, or policy
-   updates remains open.
+7. **First real conversions landed.** `scripts/audit_index_sample.py`
+   produces the read-only, risk-weighted sample (see "Audit strategy"
+   above); running it against the live index surfaced two real,
+   deterministic bugs that were fixed and re-verified this pass:
+   - `crates/dotrepo-crawler/src/github.rs` fetched GitHub's `/languages`
+     endpoint (byte counts per language) into a `BTreeMap`, then discarded
+     the byte counts via `.into_keys()` — `BTreeMap` iterates
+     alphabetically, so `repo.languages` was silently stored in
+     alphabetical order instead of byte-count-descending order for every
+     crawled repository. Fixed with `languages_by_byte_count_descending()`.
+   - `inferred_language_family` (duplicated in three scripts) classified by
+     whether a language appeared *anywhere* in `repo.languages` rather than
+     the dominant one, so a repo with a single minor vendored Rust file
+     could be misclassified as "Rust" family over its actual dominant
+     language. Fixed to classify by `repo.languages[0]` in all three
+     copies, with regression tests added to each.
+
+   A full-population re-crawl (602/613 records) applying the corrected
+   ordering shifted language-family counts substantially (Other 105→197,
+   Python 171→111, Go 85→70, Rust 74→51), confirming a large fraction of
+   the index was misclassified before. 10 repositories were excluded after
+   the downgrade guard correctly identified a genuine (not stale-config)
+   build/test regression that a live model call still couldn't resolve —
+   degrading already-correct, high-value records for a cosmetic ordering
+   fix was the wrong trade, so those 10 remain untouched at their prior
+   state and are a documented candidate list for a future, more careful
+   pass (`astral-sh/ruff`, `astral-sh/uv`, `LizardByte/Sunshine`,
+   `django/django`, `infiniflow/ragflow`, `maxwellsantoro/ries-rs`,
+   `open-webui/open-webui`, `oven-sh/bun`, `react/react-native`,
+   `vercel/next.js`). Continuing to run the sampler repeatedly and convert
+   further findings remains open work.
 8. Preserve the gated profile floors (valid profiles, high-signal ratio, zero
    malformed) and the current factual-accuracy floors during hardening; the
    release-gate baseline owns the pinned thresholds.
