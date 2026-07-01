@@ -23,8 +23,37 @@ const README_CANDIDATES: &[&str] = &[
     "README.markdown",
     "README",
 ];
-const SUPPLEMENTAL_ROOT_FILES: &[&str] =
-    &["Cargo.toml", "package.json", "pyproject.toml", "go.mod"];
+// Every entry here must have a matching deterministic parser in
+// dotrepo-core (see crates/dotrepo-core/src/import/mod.rs's
+// `load_first_existing_file` calls) — otherwise the crawler fetches bytes
+// that are never used. Historically this list only covered
+// Cargo.toml/package.json/pyproject.toml/go.mod, so every other ecosystem
+// dotrepo-core already knows how to parse (Maven, Gradle, Composer, Mix,
+// Rebar, CMake presets, Makefile, justfile, Rakefile, setup.py/setup.cfg)
+// was silently starved of the one file it needed. `.csproj` is handled
+// separately in `fetch_root_csproj_file` because its filename is not fixed.
+const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
+    "Cargo.toml",
+    "package.json",
+    "pyproject.toml",
+    "go.mod",
+    "setup.py",
+    "setup.cfg",
+    "pom.xml",
+    "build.gradle",
+    "build.gradle.kts",
+    "composer.json",
+    "mix.exs",
+    "rebar.config",
+    "CMakePresets.json",
+    "GNUmakefile",
+    "Makefile",
+    "makefile",
+    "justfile",
+    "Justfile",
+    "Rakefile",
+    "rakefile",
+];
 const MAX_WORKFLOW_FILES: usize = 8;
 const GITHUB_HTTP_TIMEOUT: Duration = Duration::from_secs(30);
 const GITHUB_HTTP_CONNECT_TIMEOUT: Duration = Duration::from_secs(10);
@@ -335,6 +364,32 @@ impl HttpGitHubClient {
         Ok(files)
     }
 
+    /// `.csproj` project files carry an arbitrary, repository-specific name
+    /// (unlike `Cargo.toml` or `go.mod`), so finding one requires a root
+    /// directory listing rather than a fixed-path fetch. Mirrors
+    /// `fetch_workflow_files`'s listing pattern; only the first (by sorted
+    /// name) root-level `.csproj` is materialized, matching
+    /// `dotrepo-core::import::mod::load_first_root_file_with_extension`'s
+    /// single-file expectation.
+    fn fetch_root_csproj_file(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+    ) -> Result<Option<RepositoryTextFile>> {
+        let mut root_contents_url = self.api_url(repository, &["contents"])?;
+        root_contents_url
+            .query_pairs_mut()
+            .append_pair("ref", default_branch);
+        let entries = self
+            .get_optional_json::<Vec<ContentsEntry>>(root_contents_url)?
+            .unwrap_or_default();
+
+        match first_root_csproj_path(entries) {
+            Some(path) => self.fetch_optional_repository_file(repository, default_branch, &path),
+            None => Ok(None),
+        }
+    }
+
     fn send_with_retry(&self, url: Url) -> Result<Response> {
         let mut attempt = 0;
         loop {
@@ -487,6 +542,7 @@ impl GitHubClient for HttpGitHubClient {
             }
         }
         extra_files.extend(self.fetch_workflow_files(repository, default_branch)?);
+        extra_files.extend(self.fetch_root_csproj_file(repository, default_branch)?);
 
         Ok(ConventionalRepositoryFiles {
             readme: self.fetch_first_available_file(
@@ -708,6 +764,21 @@ struct ContentsEntry {
     path: String,
 }
 
+/// Selects the first (by sorted path) root-level `.csproj` file entry, if
+/// any, matching `dotrepo-core::import::mod::load_first_root_file_with_extension`'s
+/// single-file expectation. `.csproj` filenames are repository-specific, so
+/// finding one requires listing root contents rather than a fixed-path fetch.
+fn first_root_csproj_path(entries: Vec<ContentsEntry>) -> Option<String> {
+    let mut csproj_paths: Vec<String> = entries
+        .into_iter()
+        .filter(|entry| entry.entry_type == "file")
+        .filter(|entry| entry.path.to_ascii_lowercase().ends_with(".csproj"))
+        .map(|entry| entry.path)
+        .collect();
+    csproj_paths.sort();
+    csproj_paths.into_iter().next()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -747,6 +818,96 @@ mod tests {
         assert!(err.to_string().contains("failed to GET"));
 
         handle.join().expect("server thread completes");
+    }
+
+    #[test]
+    fn first_root_csproj_path_picks_first_by_sorted_name() {
+        let entries = vec![
+            ContentsEntry {
+                entry_type: "dir".into(),
+                path: "src".into(),
+            },
+            ContentsEntry {
+                entry_type: "file".into(),
+                path: "Zeta.csproj".into(),
+            },
+            ContentsEntry {
+                entry_type: "file".into(),
+                path: "Alpha.csproj".into(),
+            },
+            ContentsEntry {
+                entry_type: "file".into(),
+                path: "README.md".into(),
+            },
+        ];
+
+        assert_eq!(
+            first_root_csproj_path(entries),
+            Some("Alpha.csproj".to_string())
+        );
+    }
+
+    #[test]
+    fn first_root_csproj_path_ignores_directories_and_non_csproj_files() {
+        let entries = vec![
+            ContentsEntry {
+                entry_type: "dir".into(),
+                path: "Project.csproj".into(),
+            },
+            ContentsEntry {
+                entry_type: "file".into(),
+                path: "notes.txt".into(),
+            },
+        ];
+
+        assert_eq!(first_root_csproj_path(entries), None);
+    }
+
+    #[test]
+    fn first_root_csproj_path_returns_none_for_empty_listing() {
+        assert_eq!(first_root_csproj_path(Vec::new()), None);
+    }
+
+    #[test]
+    fn supplemental_root_files_cover_every_dotrepo_core_deterministic_parser() {
+        // Regression guard: every one of these ecosystems has a deterministic
+        // parser in dotrepo-core (see crates/dotrepo-core/src/import/mod.rs's
+        // `load_first_existing_file` calls), so the crawler must actually
+        // fetch the file that parser needs. Before this list was expanded,
+        // only Cargo.toml/package.json/pyproject.toml/go.mod were fetched,
+        // silently starving Maven, Gradle, Composer, Mix, Rebar, CMake
+        // presets, Makefile, justfile, Rakefile, and setup.py/setup.cfg of
+        // the one file each needed -- live crawls of real repositories
+        // (e.g. facebook/zstd, nodejs/node) never detected build/test
+        // commands that were plainly present in their root Makefile.
+        let expected = [
+            "Cargo.toml",
+            "package.json",
+            "pyproject.toml",
+            "go.mod",
+            "setup.py",
+            "setup.cfg",
+            "pom.xml",
+            "build.gradle",
+            "build.gradle.kts",
+            "composer.json",
+            "mix.exs",
+            "rebar.config",
+            "CMakePresets.json",
+            "GNUmakefile",
+            "Makefile",
+            "makefile",
+            "justfile",
+            "Justfile",
+            "Rakefile",
+            "rakefile",
+        ];
+        for name in expected {
+            assert!(
+                SUPPLEMENTAL_ROOT_FILES.contains(&name),
+                "SUPPLEMENTAL_ROOT_FILES must fetch {name} for its dotrepo-core parser to ever see it"
+            );
+        }
     }
 
     #[test]
