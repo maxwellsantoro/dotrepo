@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/harry0703/MoneyPrinterTurbo"
-generated_at = "2026-06-29T01:17:57.667641Z"
+generated_at = "2026-07-01T14:21:18.098642Z"
 
 [record.trust]
 confidence = "high"
@@ -46,11 +46,23 @@ security_contact = "unknown"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/harry0703/MoneyPrinterTurbo"
+notes = "Cross-link from README: issue"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/harry0703/MoneyPrinterTurbo.git"
 default_branch = "main"
 fork = false
-head_sha = "c65c6fd3c3033b522e62e89b200010f0e026e642"
+head_sha = "48b08719c9690739a79dc70665db8dbd109c2afc"
 html_url = "https://github.com/harry0703/MoneyPrinterTurbo"
-stars = 93910
+stars = 94834

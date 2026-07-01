@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kubernetes/client-go"
-generated_at = "2026-06-29T01:16:53.955697Z"
+generated_at = "2026-07-01T14:20:36.370157Z"
 
 [record.trust]
 confidence = "high"
@@ -25,14 +25,11 @@ build = "go build ./..."
 test = "go test ./..."
 topics = ["k8s-staging"]
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/kubernetes/client-go.git"
 default_branch = "master"
 fork = false
-head_sha = "ab0d3bd81d327f7974e036a2d895d9bed07c18c7"
+head_sha = "48ec1022eedd8f58a35607b574f01abf0c8ad609"
 html_url = "https://github.com/kubernetes/client-go"
-stars = 9847
+stars = 9851

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/nushell/nushell"
-generated_at = "2026-06-29T01:17:12.042861Z"
+generated_at = "2026-07-01T14:20:44.51237Z"
 
 [record.trust]
 confidence = "medium"
@@ -40,14 +40,41 @@ topics = [
 maintainers = []
 security_contact = "https://discord.gg/NtAbbGn"
 
+[docs]
+root = "https://www.nushell.sh/"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/nushell/nushell"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/marketplace/actions"
+notes = "Cross-link from README: setup-nu"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/nushell/nushell.git"
 default_branch = "main"
 fork = false
-head_sha = "644ea6ea785a702a9cfa7b66cf84038c4195394f"
+head_sha = "f036236193933b7d65726bc02a5bcd9d5662eaf6"
 html_url = "https://github.com/nushell/nushell"
-stars = 39830
+stars = 39836

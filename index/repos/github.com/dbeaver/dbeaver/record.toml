@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dbeaver/dbeaver"
-generated_at = "2026-06-29T01:17:39.216121Z"
+generated_at = "2026-07-01T14:21:04.688624Z"
 
 [record.trust]
 confidence = "high"
@@ -56,14 +56,14 @@ topics = [
 maintainers = []
 security_contact = "security@dbeaver.com"
 
-[relations]
-references = []
+[docs]
+root = "https://dbeaver.io"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/dbeaver/dbeaver.git"
 default_branch = "devel"
 fork = false
-head_sha = "cdde588e3408918d55ba1377da33e9789248a93e"
+head_sha = "78909a679d3fcd9f58a4d558f23b399647b8fddd"
 html_url = "https://github.com/dbeaver/dbeaver"
-stars = 50754
+stars = 50797

@@ -4,6 +4,7 @@
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Imported repo.build from pyproject.toml as `python -m build`.
 - Imported repo.test from pyproject.toml as `python -m pytest`.
+- Discovered related relation to github.com/harry0703/MoneyPrinterTurbo from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

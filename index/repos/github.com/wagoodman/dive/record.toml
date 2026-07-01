@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/wagoodman/dive"
-generated_at = "2026-06-29T01:17:59.330527Z"
+generated_at = "2026-07-01T14:21:21.113479Z"
 
 [record.trust]
 confidence = "high"
@@ -39,6 +39,18 @@ topics = [
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/wagoodman/dive"
+notes = "Cross-link from README: ![Validations"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/wagoodman/dive.git"
@@ -46,4 +58,4 @@ default_branch = "main"
 fork = false
 head_sha = "d6c691947f8fda635c952a17ee3b7555379d58f0"
 html_url = "https://github.com/wagoodman/dive"
-stars = 54257
+stars = 54281

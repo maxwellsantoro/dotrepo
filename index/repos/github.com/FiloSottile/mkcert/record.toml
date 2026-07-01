@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/FiloSottile/mkcert"
-generated_at = "2026-06-29T01:17:37.06568Z"
+generated_at = "2026-07-01T14:21:01.364313Z"
 
 [record.trust]
 confidence = "high"
@@ -39,8 +39,8 @@ topics = [
     "chrome",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://mkcert.dev"
 
 [x.github]
 archived = false
@@ -49,4 +49,4 @@ default_branch = "master"
 fork = false
 head_sha = "1c1dc4ed27ed5936046b6398d39cab4d657a2d8e"
 html_url = "https://github.com/FiloSottile/mkcert"
-stars = 59199
+stars = 59211

@@ -4,6 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.test from package.json as `npm test`.
+- Discovered related relation to github.com/npm/cli from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

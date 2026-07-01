@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nvbn/thefuck"
-generated_at = "2026-06-29T01:17:35.297168Z"
+generated_at = "2026-07-01T14:20:58.314634Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "The Fuck"
@@ -40,6 +40,18 @@ getting_started = "https://github.com/nvbn/thefuck/wiki/Installation"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/skycocker/chromebrew"
+notes = "Cross-link from README: chromebrew"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/nvbn/thefuck.git"
@@ -47,4 +59,4 @@ default_branch = "master"
 fork = false
 head_sha = "c7e7e1d884d3bb241ea6448f72a989434c2a35ec"
 html_url = "https://github.com/nvbn/thefuck"
-stars = 97448
+stars = 97459

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AvaloniaUI/Avalonia"
-generated_at = "2026-06-29T01:17:43.676627Z"
+generated_at = "2026-07-01T14:21:12.26018Z"
 
 [record.trust]
 confidence = "high"
@@ -62,14 +62,14 @@ topics = [
 maintainers = []
 security_contact = "security@avaloniaui.net"
 
-[relations]
-references = []
+[docs]
+root = "https://avaloniaui.net"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/AvaloniaUI/Avalonia.git"
 default_branch = "master"
 fork = false
-head_sha = "dab62c09d29f18772b82b3933f54d1216db4ed18"
+head_sha = "f8eb57adf1b5fd8ec13cbbcc35450dba289a0723"
 html_url = "https://github.com/AvaloniaUI/Avalonia"
-stars = 31060
+stars = 31078

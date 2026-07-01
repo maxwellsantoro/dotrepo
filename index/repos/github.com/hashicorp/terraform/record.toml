@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hashicorp/terraform"
-generated_at = "2026-06-29T01:16:51.138944Z"
+generated_at = "2026-07-01T14:20:33.156599Z"
 
 [record.trust]
 confidence = "high"
@@ -52,14 +52,11 @@ team = "@hashicorp/terraform-core"
 root = "https://developer.hashicorp.com/terraform/docs"
 getting_started = "https://learn.hashicorp.com/terraform#getting-started"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/hashicorp/terraform.git"
 default_branch = "main"
 fork = false
-head_sha = "e02391ad384c9c38f1d7f40b853c0d2297348094"
+head_sha = "8d3a8b76ecf1ead119c4fc5951e8f5130df1db90"
 html_url = "https://github.com/hashicorp/terraform"
-stars = 48801
+stars = 48748

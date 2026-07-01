@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google/guava"
-generated_at = "2026-06-29T01:17:22.119579Z"
+generated_at = "2026-07-01T14:20:51.535038Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Guava"
@@ -37,14 +37,11 @@ topics = [
 [docs]
 root = "https://guava.dev/releases/snapshot-jre/api/docs/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/google/guava.git"
 default_branch = "master"
 fork = false
-head_sha = "ea57186acd66e9c9a21ab3e22548d720a97a337e"
+head_sha = "e844ae9b6936988b11dd3795d9e433e3cfd84339"
 html_url = "https://github.com/google/guava"
-stars = 51497
+stars = 51504

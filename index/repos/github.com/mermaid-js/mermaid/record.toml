@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mermaid-js/mermaid"
-generated_at = "2026-06-29T01:17:14.49919Z"
+generated_at = "2026-07-01T14:20:48.324316Z"
 
 [record.trust]
 confidence = "high"
@@ -52,11 +52,35 @@ getting_started = "https://mermaid.ai/open-source/intro/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/mermaid-js/mermaid"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/mermaid-js/mermaid-cli"
+notes = "Cross-link from README: Command Line Interface"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/mermaid-js/mermaid.git"
 default_branch = "develop"
 fork = false
-head_sha = "f65401b631165000a77f1b778eebf4f07bc74041"
+head_sha = "594429b3140a72c3960d75d471f14c23e6dfbd1f"
 html_url = "https://github.com/mermaid-js/mermaid"
-stars = 88910
+stars = 88962

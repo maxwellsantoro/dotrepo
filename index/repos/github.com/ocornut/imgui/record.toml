@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ocornut/imgui"
-generated_at = "2026-06-29T01:17:41.515706Z"
+generated_at = "2026-07-01T14:21:08.356357Z"
 
 [record.trust]
 confidence = "low"
@@ -46,14 +46,11 @@ topics = [
     "immediate-gui",
 ]
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/ocornut/imgui.git"
 default_branch = "master"
 fork = false
-head_sha = "76f5be2749ed17f02f0fcef402894340baece0ac"
+head_sha = "e408733eccd89b7a2c0f0013a202cc48e199465b"
 html_url = "https://github.com/ocornut/imgui"
-stars = 74181
+stars = 74214
