@@ -559,6 +559,24 @@ history needed to identify them.
 These surfaces show whether optional synthesis would address a real bottleneck
 or duplicate work the factual pipeline already handles.
 
+### Audit sampling (read-only)
+
+The roadmap's audit strategy (see `ROADMAP.md`) calls for randomized,
+risk-weighted system audits instead of a routine human approval tier.
+`scripts/audit_index_sample.py` is the first slice of that loop: it loads
+every checked-in `index/repos/<host>/<owner>/<repo>/record.toml`, computes a
+heuristic per-record risk weight from confidence, missing build/test/security
+fields, proximity to the `verified` promotion threshold, and surprising
+field-completeness relative to language-family peers, then draws a seedable,
+reproducible random sample sized for a human or future automated pass to
+inspect against `index/review-checklist.md`. It is read-only and local-only —
+no network calls, no model/adjudication provider, and no writes under
+`index/repos/*` — and it only produces the sample; converting findings into
+fixtures, deterministic fixes, calibration changes, or policy updates is a
+separate, not-yet-built step. See the module docstring in
+`scripts/audit_index_sample.py` for the exact weighting formula and its
+stated limits.
+
 ## Non-goals
 
 - README/name/description LLM adjudication (already solved deterministically)

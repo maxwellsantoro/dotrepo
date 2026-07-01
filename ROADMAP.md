@@ -325,6 +325,16 @@ audits examine samples by ecosystem, confidence, parser family, model tier,
 promotion threshold, and surprising cost or completeness. Audit findings become
 deterministic fixes, fixtures, calibration changes, or policy changes.
 
+`scripts/audit_index_sample.py` now exists as the first, honest slice of this:
+a read-only, local-only sampler that computes a heuristic risk weight per
+record (confidence, missing build/test/security, promotion-threshold
+proximity, surprising completeness vs. language-family peers) and draws a
+seedable, risk-weighted random sample for a human or future automated pass to
+inspect against `index/review-checklist.md`. It does not call any model or
+adjudication provider, does not touch the network, and does not act on
+findings — the fixture/fix/calibration/policy conversion loop is still future
+work once this tool has actually run and produced findings.
+
 ### Status discipline
 
 `ROADMAP.md` owns stable direction, gates, and execution order. Date-stamped
@@ -385,6 +395,10 @@ describe the destination; this section decides what runs now.
    counts.
 7. Begin randomized and risk-weighted system audits and convert every actionable
    result into a fixture, deterministic fix, calibration change, or policy update.
+   `scripts/audit_index_sample.py` now produces the read-only, risk-weighted
+   sample (see "Audit strategy" above); actually running it repeatedly and
+   converting its findings into fixtures, fixes, calibration changes, or policy
+   updates remains open.
 8. Preserve the gated profile floors (valid profiles, high-signal ratio, zero
    malformed) and the current factual-accuracy floors during hardening; the
    release-gate baseline owns the pinned thresholds.
