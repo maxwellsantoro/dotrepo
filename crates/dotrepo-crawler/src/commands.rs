@@ -72,11 +72,13 @@ pub(crate) fn cmd_discover(args: DiscoverArgs) -> Result<()> {
 }
 
 pub(crate) fn cmd_crawl(args: CrawlArgs) -> Result<()> {
+    let command_started = std::time::Instant::now();
     let repository = RepositoryRef {
         host: args.host,
         owner: args.owner,
         repo: args.repo,
     };
+    let crawl_started = std::time::Instant::now();
     let report = crawl_repository(&CrawlRepositoryRequest {
         index_root: args.index_root.clone(),
         repository: repository.clone(),
@@ -87,6 +89,7 @@ pub(crate) fn cmd_crawl(args: CrawlArgs) -> Result<()> {
         synthesis_provider: args.synthesis_provider,
         prior_synthesis_failure: None,
     })?;
+    let wall_time_ms = crawl_started.elapsed().as_millis() as u64;
 
     let mut state_path = None;
     let mut wrote = false;
@@ -131,6 +134,9 @@ pub(crate) fn cmd_crawl(args: CrawlArgs) -> Result<()> {
         state_path,
         escalation: report.escalation,
         diagnostics: report.diagnostics,
+        wall_time_ms,
+        total_wall_time_ms: command_started.elapsed().as_millis() as u64,
+        network: report.network,
     };
 
     if args.json {
@@ -501,6 +507,7 @@ pub(crate) fn cmd_schedule(args: ScheduleArgs) -> Result<()> {
 }
 
 pub(crate) fn cmd_refresh_plan(args: RefreshPlanArgs) -> Result<()> {
+    let command_started = std::time::Instant::now();
     let (state, state_source) = load_refresh_state_for_plan(&args.state_path)?;
     let tracked_repositories = state.repositories.len();
     let effective_limit = args.limit.unwrap_or(tracked_repositories);
@@ -521,6 +528,7 @@ pub(crate) fn cmd_refresh_plan(args: RefreshPlanArgs) -> Result<()> {
         candidate_count: candidates.len(),
         candidates,
         schedule,
+        total_wall_time_ms: command_started.elapsed().as_millis() as u64,
     };
 
     if args.json {

@@ -373,7 +373,13 @@ describe the destination; this section decides what runs now.
    Do not spend production calls merely to generate telemetry.
 3. Add versioned unit-cost reports for unchanged, changed, and usefully improved
    records — network, CPU, memory, wall time, model calls, tokens, and provider
-   cost — with cache hits and avoided work as first-class outcomes.
+   cost — with cache hits and avoided work as first-class outcomes. Wall time,
+   network request/byte counting, and unchanged/changed/improved
+   classification are implemented (`crates/dotrepo-crawler/src/github.rs`,
+   `scripts/run_autonomous_index_batch.py`,
+   `scripts/render_unit_cost_report.py`); process-level CPU time and peak
+   memory remain a documented gap (no `libc`/`getrusage` dependency has been
+   added yet).
 4. Establish intent- and ecosystem-level quality scorecards with explicit error
    budgets for incorrect facts, missing facts, and correct abstention.
 5. Work the quality-hardening queue through bounded batches and deterministic
@@ -522,6 +528,13 @@ Implemented operational controls:
   matching the deployment gate's Wrangler runtime
 - `public-surface-gate` runs lightweight CLI, MCP, LSP, and crawler contract
   tests alongside core import and public-export checks
+- per-crawl wall time (`wallTimeMs`/`totalWallTimeMs`) and GitHub network
+  request/byte counters (`HttpGitHubClient::network_usage`) are captured by
+  `dotrepo-crawler crawl --json`; the autonomous batch orchestrator tags every
+  outcome as `unchanged` (scheduler-skipped, zero cost by construction),
+  `changed` (re-crawled, no status-ladder gain), or `improved` (re-crawled with
+  a status-ladder gain), and `scripts/render_unit_cost_report.py` renders
+  versioned per-category unit-cost summaries from the retained NDJSON history
 
 Current Milestone 1 work queue (subordinate to the cross-milestone execution
 order above):

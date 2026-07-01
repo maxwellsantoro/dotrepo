@@ -48,6 +48,7 @@ pub(crate) fn crawl_repository_with_client<C: GitHubClient>(
 
     match (report, cleanup_error) {
         (Ok(mut report), None) => {
+            report.network = client.network_usage();
             report.diagnostics.push(CrawlDiagnostic::info(
                 "pipeline.temp_cleanup",
                 "removed temporary materialized repository root after crawl planning",
@@ -55,6 +56,7 @@ pub(crate) fn crawl_repository_with_client<C: GitHubClient>(
             Ok(report)
         }
         (Ok(mut report), Some(err)) => {
+            report.network = client.network_usage();
             report.diagnostics.push(CrawlDiagnostic::warning(
                 "pipeline.temp_cleanup_failed",
                 format!(
@@ -239,6 +241,10 @@ pub(crate) fn crawl_repository_from_snapshot(
         field_scores,
         escalation,
         diagnostics,
+        // Filled in by the caller (`crawl_repository_impl`/
+        // `crawl_repository_with_client`) once the client has finished
+        // making requests; this snapshot function only builds the plan.
+        network: crate::NetworkUsage::default(),
     })
 }
 

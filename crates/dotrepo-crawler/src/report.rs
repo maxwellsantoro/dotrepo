@@ -8,7 +8,8 @@
 
 use dotrepo_core::ImportEscalationReport;
 use dotrepo_crawler::{
-    CrawlDiagnostic, RefreshCandidate, RefreshReason, RepositoryRef, ScheduleRefreshReport,
+    CrawlDiagnostic, NetworkUsage, RefreshCandidate, RefreshReason, RepositoryRef,
+    ScheduleRefreshReport,
 };
 use dotrepo_schema::{Manifest, RecordStatus};
 use serde::Serialize;
@@ -27,6 +28,15 @@ pub(crate) struct CrawlCommandReport {
     pub(crate) state_path: Option<PathBuf>,
     pub(crate) escalation: ImportEscalationReport,
     pub(crate) diagnostics: Vec<CrawlDiagnostic>,
+    /// Wall-clock duration of the `crawl_repository` step alone (fetch,
+    /// import, verify, escalate, synthesize) in milliseconds. Excludes
+    /// writeback/state I/O; see `total_wall_time_ms` for that.
+    pub(crate) wall_time_ms: u64,
+    /// Wall-clock duration of the entire `crawl` command invocation,
+    /// including writeback and crawler-state read/write, in milliseconds.
+    pub(crate) total_wall_time_ms: u64,
+    /// GitHub HTTP request/byte usage for this crawl.
+    pub(crate) network: NetworkUsage,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
@@ -127,6 +137,10 @@ pub(crate) struct RefreshPlanCommandReport {
     pub(crate) candidate_count: usize,
     pub(crate) candidates: Vec<RefreshCandidate>,
     pub(crate) schedule: ScheduleRefreshReport,
+    /// Wall-clock duration of the whole `refresh-plan` command invocation
+    /// (state load, per-candidate head fetches, and scheduling) in
+    /// milliseconds.
+    pub(crate) total_wall_time_ms: u64,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]

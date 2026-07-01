@@ -455,6 +455,21 @@ machine-readable metadata, the bounded set of repositories that exhibited the
 fingerprint, and a materialization checklist so the failure can be turned into
 a real source fixture and deterministic fix.
 
+Each `crawls` entry also carries unit-cost fields: `wallTimeMs`/
+`totalWallTimeMs` (in-process timing from `dotrepo-crawler crawl --json`),
+`networkRequests`/`networkBytes` (from `HttpGitHubClient::network_usage`),
+and a `category` of `changed` or `improved` (status-ladder advancement proxy
+for "usefully improved"). Repositories the refresh scheduler skips entirely
+because their head SHA is unchanged are recorded separately under each run's
+`unchangedSkips` list with all costs pinned at zero. Run
+`uv run python scripts/render_unit_cost_report.py --runs
+index/telemetry/autonomous-runs.ndjson` to render a versioned per-category
+(`unchanged`/`changed`/`improved`) unit-cost summary — counts and mean/median
+wall time, network bytes/requests, tokens, and model calls — from the
+retained history. CPU time and peak memory are process-level and not yet
+collected anywhere in the pipeline; the report surfaces that as a documented
+gap rather than fabricating a zero.
+
 Each recurring failure is also classified by **ecosystem** (rust, node, python,
 go, jvm, ruby, php, dotnet, elixir, erlang, cpp, or `unknown`) inferred from the
 manifest and language signals in the failure text, and by **fixture
