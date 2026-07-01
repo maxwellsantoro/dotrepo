@@ -511,13 +511,28 @@ fn run_model_escalation(
             }
 
             let result = apply_adjudication_response(&provider_response.response, &request);
-            let accepted = !matches!(result.outcome, AdjudicationOutcome::Rejected { .. });
+            let is_low_confidence =
+                provider_response.response.confidence == AdjudicationModelConfidence::Low;
+            // A `Rejected` outcome (model proposed a value outside the
+            // candidate set) has always escalated when low-confidence. An
+            // `Absent` outcome (model explicitly declined to answer) did
+            // not: any confidence level was previously treated as a final,
+            // accepted "honest unknown", so a cheap tier's uncertain guess
+            // at genuine ambiguity could never get a second opinion from a
+            // stronger model. A *confident* Absent (e.g. correctly
+            // identifying a polyglot repository with no single valid
+            // answer) still terminates immediately here -- only a
+            // low-confidence Absent now continues up the tier ladder, the
+            // same as a low-confidence Rejected already did.
+            let accepted = !matches!(result.outcome, AdjudicationOutcome::Rejected { .. })
+                && !(is_low_confidence
+                    && matches!(result.outcome, AdjudicationOutcome::Absent { .. }));
             last_result = Some(result);
             if accepted {
                 resolved = true;
                 break;
             }
-            if provider_response.response.confidence != AdjudicationModelConfidence::Low {
+            if !is_low_confidence {
                 break;
             }
         }
@@ -889,6 +904,180 @@ mod tests {
             plan.manifest.repo.build.as_deref(),
             Some("cargo build --workspace")
         );
+
+        fs::remove_dir_all(root).expect("cleanup");
+    }
+
+    #[test]
+    fn low_confidence_abstention_escalates_to_second_opinion() {
+        // Reproduces the shape of the intended fix: a cheap primary tier
+        // that is *uncertain* (not confidently correct) should get a second
+        // opinion before its "no answer" is accepted as final, the same way
+        // a low-confidence wrong-value guess already escalates.
+        let root = temp_dir("low-confidence-escalation");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir");
+        fs::write(
+            root.join("README.md"),
+            "# Conflict\n\nConflicting workflows.\n",
+        )
+        .expect("readme");
+        fs::write(
+            root.join(".github/workflows/check.yml"),
+            "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+        )
+        .expect("check");
+        fs::write(
+            root.join(".github/workflows/verify.yml"),
+            "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+        )
+        .expect("verify");
+
+        let source = "https://github.com/example/low-confidence-escalation";
+        let mut plan =
+            import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+        let verification = crate::import::verify_import_plan(&root, &plan, source);
+        let mut scores = score_import_fields(&plan, &verification);
+
+        let primary = StubAdjudicationProvider::new(
+            AdjudicationTier::LocalPrimary,
+            vec![AdjudicationProviderResponse {
+                response: AdjudicationModelResponse {
+                    field: "repo.build".into(),
+                    value: None,
+                    confidence: AdjudicationModelConfidence::Low,
+                    reason: "Not sure which workflow is primary".into(),
+                    source: None,
+                },
+                tokens_used: 80,
+            }],
+        );
+        let second_opinion = StubAdjudicationProvider::new(
+            AdjudicationTier::LocalSecondOpinion,
+            vec![AdjudicationProviderResponse {
+                response: AdjudicationModelResponse {
+                    field: "repo.build".into(),
+                    value: Some("cargo build --workspace".into()),
+                    confidence: AdjudicationModelConfidence::High,
+                    reason: "Check workflow lists --workspace, matching a monorepo build".into(),
+                    source: Some(".github/workflows/check.yml".into()),
+                },
+                tokens_used: 140,
+            }],
+        );
+
+        let report = run_import_escalation(
+            &root,
+            &mut plan,
+            &verification,
+            &mut scores,
+            &ImportEscalationOptions {
+                max_adjudication_calls: 2,
+                enable_second_opinion: true,
+                enable_api_escalation: false,
+            },
+            TieredAdjudicationProviders {
+                local_primary: Some(&primary),
+                local_second_opinion: Some(&second_opinion),
+                api_escalation: None,
+            },
+        );
+
+        assert_eq!(report.model_calls, 2);
+        assert_eq!(report.tokens_used, 220);
+        assert_eq!(report.model_resolved, 1);
+        assert!(report
+            .adjudication_tiers_used
+            .contains(&AdjudicationTier::LocalSecondOpinion));
+        assert_eq!(
+            plan.manifest.repo.build.as_deref(),
+            Some("cargo build --workspace")
+        );
+
+        fs::remove_dir_all(root).expect("cleanup");
+    }
+
+    #[test]
+    fn confident_abstention_does_not_escalate_to_second_opinion() {
+        // A confident "no single answer is honest" (e.g. a genuinely
+        // polyglot repository) must remain terminal -- escalating this to a
+        // stronger model would waste a call re-litigating a correct
+        // abstention rather than genuine model uncertainty. Reproduces the
+        // real astral-sh/ruff and oven-sh/bun cases observed in production.
+        let root = temp_dir("confident-abstention");
+        fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir");
+        fs::write(
+            root.join("README.md"),
+            "# Conflict\n\nConflicting workflows.\n",
+        )
+        .expect("readme");
+        fs::write(
+            root.join(".github/workflows/check.yml"),
+            "name: Check\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build --workspace\n",
+        )
+        .expect("check");
+        fs::write(
+            root.join(".github/workflows/verify.yml"),
+            "name: Verify\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: cargo build\n",
+        )
+        .expect("verify");
+
+        let source = "https://github.com/example/confident-abstention";
+        let mut plan =
+            import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+        let verification = crate::import::verify_import_plan(&root, &plan, source);
+        let mut scores = score_import_fields(&plan, &verification);
+
+        let primary = StubAdjudicationProvider::new(
+            AdjudicationTier::LocalPrimary,
+            vec![AdjudicationProviderResponse {
+                response: AdjudicationModelResponse {
+                    field: "repo.build".into(),
+                    value: None,
+                    confidence: AdjudicationModelConfidence::High,
+                    reason: "Distinct mutually exclusive build targets; no single honest answer"
+                        .into(),
+                    source: None,
+                },
+                tokens_used: 80,
+            }],
+        );
+        let second_opinion = StubAdjudicationProvider::new(
+            AdjudicationTier::LocalSecondOpinion,
+            vec![AdjudicationProviderResponse {
+                response: AdjudicationModelResponse {
+                    field: "repo.build".into(),
+                    value: Some("cargo build --workspace".into()),
+                    confidence: AdjudicationModelConfidence::High,
+                    reason: "Should never be called".into(),
+                    source: None,
+                },
+                tokens_used: 140,
+            }],
+        );
+
+        let report = run_import_escalation(
+            &root,
+            &mut plan,
+            &verification,
+            &mut scores,
+            &ImportEscalationOptions {
+                max_adjudication_calls: 2,
+                enable_second_opinion: true,
+                enable_api_escalation: false,
+            },
+            TieredAdjudicationProviders {
+                local_primary: Some(&primary),
+                local_second_opinion: Some(&second_opinion),
+                api_escalation: None,
+            },
+        );
+
+        assert_eq!(report.model_calls, 1);
+        assert_eq!(report.tokens_used, 80);
+        assert!(!report
+            .adjudication_tiers_used
+            .contains(&AdjudicationTier::LocalSecondOpinion));
+        assert_eq!(plan.manifest.repo.build, None);
 
         fs::remove_dir_all(root).expect("cleanup");
     }
