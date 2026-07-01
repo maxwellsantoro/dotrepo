@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/lukas-reineke/indent-blankline.nvim"
-generated_at = "2026-06-29T05:26:38.318815Z"
+generated_at = "2026-07-01T14:43:35.106432Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`. Left `repo.test` unset because `.github/workflows/pr_check.yml` and `.github/workflows/tests.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Indent Blankline"
@@ -21,6 +24,7 @@ languages = [
     "Lua",
     "Makefile",
 ]
+test = "make test"
 topics = [
     "vim",
     "vim-plugin",
@@ -37,4 +41,4 @@ default_branch = "master"
 fork = false
 head_sha = "d28a3f70721c79e3c5f6693057ae929f3d9c0a03"
 html_url = "https://github.com/lukas-reineke/indent-blankline.nvim"
-stars = 4968
+stars = 4970

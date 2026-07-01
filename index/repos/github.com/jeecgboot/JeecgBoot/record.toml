@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jeecgboot/JeecgBoot"
-generated_at = "2026-06-29T01:18:30.460899Z"
+generated_at = "2026-07-01T14:41:07.19654Z"
 
 [record.trust]
 confidence = "high"
@@ -55,16 +55,29 @@ topics = [
 ]
 
 [docs]
+root = "https://jeecg.com"
 getting_started = "http://www.jeecg.com/doc/quickstart"
 
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/jeecgboot/skills"
+notes = "Cross-link from README: Skills 开源仓库"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/jeecgboot/JeecgBoot.git"
 default_branch = "main"
 fork = false
-head_sha = "c3099aba0d684e9b6bffcd86821bc74aa580ac77"
+head_sha = "32a8dfe94f014f7a9d472bce83e08bb8cf9c10c3"
 html_url = "https://github.com/jeecgboot/JeecgBoot"
-stars = 46905
+stars = 46924

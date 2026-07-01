@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name and description from README.md.
-- Left `repo.build` unset because `.github/workflows/build.yml` and `.github/workflows/cross.yml` suggested conflicting build commands.
+- Left `repo.build` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.build` to `cmake -B build -G Ninja -DCMAKE_UNITY_BUILD=ON` from `.github/workflows/cross.yml` after deterministic escalation.
@@ -12,6 +12,6 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+A prior verified status was preserved because no previously present field regressed in this refresh.

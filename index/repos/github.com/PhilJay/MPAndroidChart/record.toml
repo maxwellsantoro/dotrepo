@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/PhilJay/MPAndroidChart"
-generated_at = "2026-06-29T01:19:11.203379Z"
+generated_at = "2026-07-01T14:41:39.940515Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Gradle Setup"
@@ -21,6 +21,8 @@ homepage = "https://philippjahoda.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = ["Java"]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "java",
     "chart",
@@ -29,8 +31,8 @@ topics = [
     "mpandroidchart",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://philippjahoda.com"
 
 [x.github]
 archived = false
@@ -39,4 +41,4 @@ default_branch = "master"
 fork = false
 head_sha = "9c7275a0596a7ac0e50ca566e680f7f9d73607af"
 html_url = "https://github.com/PhilJay/MPAndroidChart"
-stars = 38197
+stars = 38199

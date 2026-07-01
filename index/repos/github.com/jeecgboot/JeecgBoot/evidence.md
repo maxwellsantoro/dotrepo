@@ -1,6 +1,7 @@
 # Evidence
 
 - Imported repository name, description, and docs entry points from README.md.
+- Discovered related relation to github.com/jeecgboot/skills from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

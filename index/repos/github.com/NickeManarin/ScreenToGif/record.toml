@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/NickeManarin/ScreenToGif"
-generated_at = "2026-06-29T01:18:24.158637Z"
+generated_at = "2026-07-01T14:40:56.773264Z"
 
 [record.trust]
 confidence = "high"
@@ -34,8 +34,8 @@ topics = [
     "wpf",
 ]
 
-[relations]
-references = []
+[docs]
+root = "http://www.screentogif.com"
 
 [x.github]
 archived = false
@@ -44,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "27a49c3be69486f2db964290f4f2274e790fb687"
 html_url = "https://github.com/NickeManarin/ScreenToGif"
-stars = 27178
+stars = 27194

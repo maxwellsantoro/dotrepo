@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/exo-explore/exo"
-generated_at = "2026-06-29T05:15:01.004564Z"
+generated_at = "2026-07-01T14:43:12.404504Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Discord"
@@ -33,6 +34,8 @@ languages = [
     "Swift",
     "TypeScript",
 ]
+build = "just build"
+test = "just test"
 topics = []
 
 [owners]
@@ -64,4 +67,4 @@ default_branch = "main"
 fork = false
 head_sha = "b5375f8cee4368d09e1ce96a56b9f81fb0bc81aa"
 html_url = "https://github.com/exo-explore/exo"
-stars = 45734
+stars = 45807

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/strapi/strapi"
-generated_at = "2026-06-29T01:18:26.850527Z"
+generated_at = "2026-07-01T14:41:02.908865Z"
 
 [record.trust]
 confidence = "high"
@@ -62,11 +62,23 @@ getting_started = "https://docs.strapi.io/developer-docs/latest/getting-started/
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/strapi/strapi"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/strapi/strapi.git"
 default_branch = "develop"
 fork = false
-head_sha = "0939748959367bf2c3bba8a7d09d28a164ffd4ae"
+head_sha = "bad729f84a0113774e1bc0c016a24e2486bab40b"
 html_url = "https://github.com/strapi/strapi"
-stars = 72563
+stars = 72580

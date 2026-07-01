@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/langchain-ai/langchain"
-generated_at = "2026-06-29T02:18:09.130553Z"
+generated_at = "2026-07-01T14:43:26.186327Z"
 
 [record.trust]
 confidence = "medium"
@@ -63,14 +63,11 @@ maintainers = [
 [docs]
 root = "https://docs.langchain.com/oss/python/langchain/overview"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/langchain-ai/langchain.git"
 default_branch = "master"
 fork = false
-head_sha = "e495651fef791650ca554d7b88b23327878a0be8"
+head_sha = "fa021df5926b7be43f2d162117538807836b619d"
 html_url = "https://github.com/langchain-ai/langchain"
-stars = 140417
+stars = 140651

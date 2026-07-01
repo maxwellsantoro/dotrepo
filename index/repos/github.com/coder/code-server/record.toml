@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/coder/code-server"
-generated_at = "2026-06-29T01:18:09.655495Z"
+generated_at = "2026-07-01T14:40:42.805038Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@coder/code-server` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@coder/code-server` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "code-server"
@@ -54,8 +54,23 @@ maintainers = [
 ]
 team = "@coder/code-server"
 
+[docs]
+root = "https://coder.com"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/coder/code-server"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false
@@ -64,4 +79,4 @@ default_branch = "main"
 fork = false
 head_sha = "dd48f7753b3b57f5f85c5c8ab8a09d4c2bec9dc9"
 html_url = "https://github.com/coder/code-server"
-stars = 78101
+stars = 78152

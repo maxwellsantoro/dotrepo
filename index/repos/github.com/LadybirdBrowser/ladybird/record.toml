@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/LadybirdBrowser/ladybird"
-generated_at = "2026-06-29T01:18:03.684414Z"
+generated_at = "2026-07-01T14:40:28.936669Z"
 
 [record.trust]
 confidence = "medium"
@@ -55,14 +55,11 @@ security_contact = "https://github.com/LadybirdBrowser/ladybird/issues/new?templ
 [docs]
 root = "Documentation/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/LadybirdBrowser/ladybird.git"
 default_branch = "master"
 fork = false
-head_sha = "35ce19dcfb424e7be9b577f939ee02d93d22f85d"
+head_sha = "4b7d15104e3f15fabccfffecc61eab9ae8c63754"
 html_url = "https://github.com/LadybirdBrowser/ladybird"
-stars = 64359
+stars = 64397

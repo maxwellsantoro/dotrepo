@@ -3,6 +3,7 @@
 - Imported repository name and description from README.md.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Inferred repo.build from .github/workflows/build-ilspy.yml as `dotnet pack ICSharpCode.Decompiler --no-restore`.
+- Discovered related relation to github.com/icsharpcode/ILSpy from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -10,6 +11,6 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+A prior verified status was preserved because no previously present field regressed in this refresh.

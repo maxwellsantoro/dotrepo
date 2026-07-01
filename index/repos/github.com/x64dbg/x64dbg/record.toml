@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/x64dbg/x64dbg"
-generated_at = "2026-06-29T01:18:54.81277Z"
+generated_at = "2026-07-01T14:41:23.383779Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build.yml` and `.github/workflows/cross.yml` suggested conflicting build commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "x64dbg"
@@ -55,14 +55,14 @@ topics = [
     "offensive-security",
 ]
 
-[relations]
-references = []
+[docs]
+root = "http://x64dbg.com"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/x64dbg/x64dbg.git"
 default_branch = "development"
 fork = false
-head_sha = "ec18680690e007603d9100ed61a452ea7c54236f"
+head_sha = "78ea8b1c85af61f83639287b1c75b7e8188a4e89"
 html_url = "https://github.com/x64dbg/x64dbg"
-stars = 48755
+stars = 48776

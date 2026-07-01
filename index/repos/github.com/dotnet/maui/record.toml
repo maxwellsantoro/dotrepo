@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dotnet/maui"
-generated_at = "2026-06-29T01:19:07.106096Z"
+generated_at = "2026-07-01T14:41:35.70921Z"
 
 [record.trust]
 confidence = "high"
@@ -55,14 +55,14 @@ maintainers = ["@dotnet/dotnet-maui-reviewers"]
 team = "@dotnet/dotnet-maui-reviewers"
 security_contact = "secure@microsoft.com"
 
-[relations]
-references = []
+[docs]
+root = "https://dot.net/maui"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/dotnet/maui.git"
 default_branch = "main"
 fork = false
-head_sha = "fced7612a970b09e3ba5f00ad6f03be564f64d8b"
+head_sha = "fa1d0d2d00219abb274d1036c28b7d5dcefa6cad"
 html_url = "https://github.com/dotnet/maui"
-stars = 23278
+stars = 23279

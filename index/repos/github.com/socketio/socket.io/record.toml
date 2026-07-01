@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/socketio/socket.io"
-generated_at = "2026-06-29T02:18:29.657358Z"
+generated_at = "2026-07-01T14:44:25.542759Z"
 
 [record.trust]
 confidence = "medium"
@@ -38,9 +38,6 @@ security_contact = "https://github.com/darrachequesne"
 [docs]
 root = "https://socket.io/docs/v4/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/socketio/socket.io.git"
@@ -48,4 +45,4 @@ default_branch = "main"
 fork = false
 head_sha = "d2d753fed4435015c2d83fe62e676b44e07fa3f7"
 html_url = "https://github.com/socketio/socket.io"
-stars = 63200
+stars = 63140

@@ -4,12 +4,12 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/storybookjs/storybook"
-generated_at = "2026-06-29T02:18:31.843723Z"
+generated_at = "2026-07-01T14:44:32.389642Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml`, `.github/workflows/fork-checks.yml`, and `.github/workflows/generate-sandboxes.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml` and `.github/workflows/fork-checks.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Storybook"
@@ -66,14 +66,11 @@ security_contact = "https://x.com/storybookjs"
 [docs]
 root = "https://storybook.js.org/docs?ref=readme"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/storybookjs/storybook.git"
 default_branch = "next"
 fork = false
-head_sha = "bf34cdbfb326181d5f8093a51989e849f0277d20"
+head_sha = "5fe3f7bb8493a8c977d7efdc10bed6301b788791"
 html_url = "https://github.com/storybookjs/storybook"
-stars = 90463
+stars = 90410

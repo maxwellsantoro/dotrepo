@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/semantic-kernel"
-generated_at = "2026-06-29T01:18:06.594189Z"
+generated_at = "2026-07-01T14:40:36.451878Z"
 
 [record.trust]
 confidence = "high"
@@ -57,14 +57,11 @@ security_contact = "https://msrc.microsoft.com/create-report"
 root = "https://learn.microsoft.com/en-us/dotnet/api/microsoft.semantickernel?view=semantic-kernel-dotnet"
 getting_started = "https://docs.trychroma.com/docs/overview/getting-started"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/microsoft/semantic-kernel.git"
 default_branch = "main"
 fork = false
-head_sha = "dfc5227227352e7cf4b11de1d9b8e49ebc7b43ff"
+head_sha = "38a5480af04d339b9c07090653737342c0a420a6"
 html_url = "https://github.com/microsoft/semantic-kernel"
-stars = 28213
+stars = 28233

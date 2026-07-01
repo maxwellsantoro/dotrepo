@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/qbittorrent/qBittorrent"
-generated_at = "2026-06-29T02:18:25.470987Z"
+generated_at = "2026-07-01T14:44:02.668334Z"
 
 [record.trust]
 confidence = "medium"
@@ -50,14 +50,11 @@ security_contact = "security@qbittorrent.org"
 [docs]
 root = "https://www.qbittorrent.org"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/qbittorrent/qBittorrent.git"
 default_branch = "master"
 fork = false
-head_sha = "4d3783a410806294cfb0c7f2f923615f33ff1809"
+head_sha = "5527661610ccdb3167ce1f52c21bb45e7018abae"
 html_url = "https://github.com/qbittorrent/qBittorrent"
-stars = 38497
+stars = 38535
