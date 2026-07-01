@@ -14,7 +14,7 @@ adding behavior, extend core first and delegate from the surface crate.
 |------|--------|
 | `dotrepo-core` business logic | Focused modules under `src/`; public API re-exported from `lib.rs`. `public.rs` is further split into `src/public/{mod,types,profile,search,compare,relations,export,error}.rs` behind unchanged facade exports |
 | `dotrepo-core` facade tests | Split into `src/facade_tests/` by domain (selection, public, claims, import, surfaces, validation, relations) |
-| `dotrepo-mcp` | `lookup.rs` extracted for remote lookup policy and SSRF protections; remaining `main.rs` holds JSON-RPC dispatch and tools |
+| `dotrepo-mcp` | `lookup.rs` (remote lookup policy and SSRF protections), `tools.rs` (MCP tool schema declarations), `handlers.rs` (tool handler bodies calling into `dotrepo-core`/`lookup`), `dispatch.rs` (JSON-RPC request/notification routing and MCP lifecycle); `main.rs` reduced to module wiring plus the stdio `main()`/`run()` loop |
 | `dotrepo-lsp` | Split into `protocol.rs` (JSON-RPC/LSP message and type definitions), `state.rs` (server state, open-document tracking, and the `DocumentIndex` byte/UTF-16 offset mapping), `diagnostics.rs` (parse/validation/adoption-status diagnostics), `completions.rs` (completion and hover support over the schema catalog), `code_actions.rs` (adoption-status quick fixes), and `dispatch.rs` (JSON-RPC request/notification routing); `main.rs` retains only the stdio read/write loop and module wiring |
 | `dotrepo-crawler` | Documented in [`crates/dotrepo-crawler/README.md`](../crates/dotrepo-crawler/README.md) |
 
@@ -26,7 +26,6 @@ directional and should be refreshed when this table is used to schedule work.
 
 | File | Current disposition |
 |------|---------------------|
-| `dotrepo-mcp/src/main.rs` | Active after the LSP pattern lands: extract tool schemas and handlers; retain transport startup in `main.rs`. |
 | `dotrepo-core/src/import/mod.rs` | Done: reduced to import orchestration and re-exports (~1,030 lines). Data types moved to `import/types.rs` (~300 lines); field scoring/adjudication reconciliation moved to `import/fields.rs` (~500 lines); owners/docs/compat construction, evidence.md rendering, and relation discovery moved to `import/evidence.rs` (~650 lines). |
 | `dotrepo-core/src/import/parsing.rs` | Done: split into `import/parsing/` (~2,050 lines total, largest file 754 lines). README title/description/name parsing in `readme.rs`; shared markdown/text normalization and link extraction in `markdown.rs`; URL quality gates in `urls.rs`; CODEOWNERS parsing in `codeowners.rs`; security-contact parsing in `security.rs`; `mod.rs` is a thin re-export hub. |
 | `dotrepo-core/src/import/commands.rs` | Done: split into `import/commands/` (~1,590 lines total, largest file 814 lines). Ecosystem-specific candidate *extraction* (Cargo/npm/pyproject/setup.py/go.mod/Maven/Gradle/Composer/.csproj/Mix/Rebar/CMake/Makefile/justfile/Rakefile/CONTRIBUTING/workflows) lives in `extraction.rs`; command sanitization and build/test ranking policy (incl. Node package-runner detection) lives in `policy.rs`; `mod.rs` holds file loading and the `infer_imported_commands` orchestration entrypoint. |
@@ -39,12 +38,12 @@ exit criterion can pass.
 
 ## Targeted refactors
 
-1. **MCP tools module** — move remaining tool handlers out of `main.rs` now that the LSP split establishes the pattern.
-2. **Facade test domains** — keep one concern per file; run a single domain with `cargo test -p dotrepo-core --lib tests::<domain>`.
+1. **Facade test domains** — keep one concern per file; run a single domain with `cargo test -p dotrepo-core --lib tests::<domain>`.
 
-The LSP split, `public.rs` split, `import/` splits, and crawler command split are all
-complete (see the oversized-file dispositions table above). Only the MCP tools
-module extraction remains open from this list.
+The LSP split, MCP tools module split, `public.rs` split, `import/` splits, and
+crawler command split are all complete (see the oversized-file dispositions
+table above and the "Current layout" table). Facade test domains are the only
+remaining item from this list.
 
 ## Public API documentation
 
