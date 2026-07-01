@@ -385,11 +385,22 @@ describe the destination; this section decides what runs now.
    `crates/dotrepo-crawler/src/pipeline.rs`) — previously a refresh that only
    gained a new, imperfectly-scored field (not a real regression) could drop
    `verified`/`high` back to `inferred`/`medium`.
-2. Exercise the model tail deliberately. Stand up a bounded adjudication canary
-   or challenge cohort that drives representative work through the cheap-model,
-   second-opinion, and strong-model paths, so low observed adjudication rates are
-   evidence the escalation system works rather than evidence it was never used.
-   Do not spend production calls merely to generate telemetry.
+2. **Partially done.** A first bounded canary confirmed the deterministic-to-
+   model escalation path fires correctly end to end: real GitHub repositories
+   almost never contain genuinely conflicting build/test candidates (of
+   ~145 repositories refreshed while proving the strict telemetry gate,
+   zero triggered model escalation), so a throwaway public GitHub repository
+   was deliberately engineered with two same-tier conflicting build-command
+   workflows, crawled with `dotrepo-crawler crawl` against the live GitHub
+   API and the local OpenRouter adjudication sidecar
+   (`scripts/adjudication_openrouter_sidecar.py`), and produced exactly the
+   expected result: `deterministicRequests: 1`, `modelCalls: 1`,
+   `modelResolved: 1`, `tokensUsed: 300`, resolving `repo.build` to the
+   manifest-tier candidate with the conflict honestly recorded in
+   `evidence.md`. This proves the primary-tier escalation path, not merely
+   that it exists unused. The second-opinion and strong-remote-escalation
+   tiers remain unexercised by a live model call; a broader challenge cohort
+   covering those tiers is still open work.
 3. Add versioned unit-cost reports for unchanged, changed, and usefully improved
    records — network, CPU, memory, wall time, model calls, tokens, and provider
    cost — with cache hits and avoided work as first-class outcomes. Wall time,
@@ -497,10 +508,11 @@ writeback, retained telemetry, proof gates, and deploy coherence are
 implemented. The retained multi-run proof gate now passes in strict mode
 (three consecutive scheduled-run checkpoints, see the active execution order
 above) and versioned unit-cost reports are in place for wall time, network,
-tokens, and model calls (CPU/memory remain a documented gap). The bounded
-adjudication canary/challenge cohort (exercising the cheap-model,
-second-opinion, and strong-model paths) has not yet run; the milestone is not
-complete until that evidence exists.
+tokens, and model calls (CPU/memory remain a documented gap). A first bounded
+adjudication canary exercised and proved the primary-tier (cheap-model)
+escalation path with a real live model call (see the active execution order
+above); the second-opinion and strong-remote-escalation tiers remain
+unexercised by a live model call, so the milestone is not yet complete.
 
 Deliver:
 
