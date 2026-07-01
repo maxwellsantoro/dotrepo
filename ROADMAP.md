@@ -412,10 +412,24 @@ describe the destination; this section decides what runs now.
    added yet).
 4. Establish intent- and ecosystem-level quality scorecards with explicit error
    budgets for incorrect facts, missing facts, and correct abstention.
-5. Work the quality-hardening queue through bounded batches and deterministic
-   fixes, ratcheting the missing-signal ceilings (build, test, security) reported
-   by the growth-status renderer downward without regressing factual-accuracy
-   gates.
+5. **In progress; one deterministic fix landed.** Investigating individual
+   missing-signal records (rather than blindly re-crawling) found that
+   routine refresh alone never moves the missing-build/test/security
+   ceilings, because `SUPPLEMENTAL_ROOT_FILES`
+   (`crates/dotrepo-crawler/src/github.rs`) only ever fetched
+   `Cargo.toml`/`package.json`/`pyproject.toml`/`go.mod` from GitHub, even
+   though `dotrepo-core`'s import parser has had working support for Maven,
+   Gradle, Composer, Mix, Rebar, CMake presets, Makefile, justfile,
+   Rakefile, and setup.py/setup.cfg all along — those parsers were simply
+   never fed a file to parse. Fixed by fetching every ecosystem file the
+   parser already supports (plus a new root `.csproj` directory listing
+   for arbitrarily-named .NET project files). Re-crawling the 23 known
+   non-verified records missing build/test after the fix moved
+   verified 575→580, missing build 278→275, missing test 285→279, with
+   zero status/confidence regressions. `owners.security_contact` (408
+   missing) is largely honest absence (most flagged repos genuinely lack a
+   `SECURITY.md`) rather than a parser gap, and remains open for further
+   sampling.
 6. Process the current promotion headroom through the normal validation path;
    consult `promotion-report` and the growth-status renderer for live candidate
    counts.
