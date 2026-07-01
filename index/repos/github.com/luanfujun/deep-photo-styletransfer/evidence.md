@@ -1,6 +1,7 @@
 # Evidence
 
 - Imported repository name and description from README.md.
+- Imported repo.build from Makefile as `make build`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

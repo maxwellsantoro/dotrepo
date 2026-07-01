@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"
-generated_at = "2026-06-29T05:16:33.200332Z"
+generated_at = "2026-07-01T15:15:57.778677Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "LeetCode-Questions-CompanyWise"
@@ -29,4 +29,4 @@ default_branch = "master"
 fork = false
 head_sha = "fb5f78b55eead7f948aada8459c5bfd31ae8abbc"
 html_url = "https://github.com/krishnadey30/LeetCode-Questions-CompanyWise"
-stars = 19908
+stars = 19915

@@ -2,7 +2,8 @@
 
 - Imported repository name, description, and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Left `repo.test` unset because `.github/workflows/tzdbupdate.yml` suggested an unsafe shell-like command.
+- Imported repo.build from pom.xml as `./mvnw package`.
+- Imported repo.test from pom.xml as `./mvnw test`.
 - Discovered related relation to github.com/JakeWharton/ThreeTenABP from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

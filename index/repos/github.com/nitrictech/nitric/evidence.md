@@ -2,6 +2,8 @@
 
 - Imported repository name, description, and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from Makefile as `make test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

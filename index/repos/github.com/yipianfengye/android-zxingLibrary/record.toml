@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/yipianfengye/android-zxingLibrary"
-generated_at = "2026-06-29T05:23:37.36985Z"
+generated_at = "2026-07-01T15:11:31.163889Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "android-zxingLibrary"
@@ -20,6 +20,8 @@ description = "当然了如果以上的以上，你还是对定制化UI方面不
 homepage = "https://github.com/yipianfengye/android-zxingLibrary"
 visibility = "public"
 languages = ["Java"]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = []
 
 [x.github]

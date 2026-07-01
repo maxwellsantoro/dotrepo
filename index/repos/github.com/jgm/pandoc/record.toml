@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jgm/pandoc"
-generated_at = "2026-06-29T05:15:39.558691Z"
+generated_at = "2026-07-01T15:17:29.301066Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.test` from `.github/workflows/docx-validation.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Pandoc"
@@ -41,7 +40,8 @@ languages = [
     "TeX",
     "Typst",
 ]
-test = "make validate-docx-golden-tests"
+build = "make build"
+test = "make test"
 topics = [
     "pandoc",
     "haskell",
@@ -66,6 +66,6 @@ archived = false
 clone_url = "https://github.com/jgm/pandoc.git"
 default_branch = "main"
 fork = false
-head_sha = "c568a0e66599384fdabc08ad656fd5beeac39ae1"
+head_sha = "4f5226df4faa0d66dd2c089465b13886360ab3c2"
 html_url = "https://github.com/jgm/pandoc"
-stars = 45115
+stars = 45158

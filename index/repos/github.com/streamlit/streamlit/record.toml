@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/streamlit/streamlit"
-generated_at = "2026-07-01T04:27:12.659379Z"
+generated_at = "2026-07-01T15:13:44.034046Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@streamlit/open-source-release-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Makefile`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@streamlit/open-source-release-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Welcome to Streamlit 👋"
@@ -31,6 +31,8 @@ languages = [
     "Shell",
     "TypeScript",
 ]
+build = "make build"
+test = "make test"
 topics = [
     "python",
     "machine-learning",
@@ -55,6 +57,6 @@ archived = false
 clone_url = "https://github.com/streamlit/streamlit.git"
 default_branch = "develop"
 fork = false
-head_sha = "9e89eff829e93fdcfd8e1b1da03b059c222de189"
+head_sha = "f1024244b0f021756498aa2be9d98eff79036490"
 html_url = "https://github.com/streamlit/streamlit"
-stars = 45118
+stars = 45124

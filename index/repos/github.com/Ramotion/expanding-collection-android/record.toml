@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Ramotion/expanding-collection-android"
-generated_at = "2026-06-29T05:27:44.265289Z"
+generated_at = "2026-07-01T15:28:40.220452Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "EXPANDING COLLECTION"
@@ -21,6 +21,8 @@ homepage = "https://www.ramotion.com/agency/app-development/"
 license = "MIT"
 visibility = "public"
 languages = ["Java"]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "android",
     "java",

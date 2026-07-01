@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name and description from README.md.
-- Discovered related relation to github.com/minimaxir/big-list-of-naughty-strings#readme from package.json homepage.
+- Discovered related relation to github.com/minimaxir/big-list-of-naughty-strings from package.json homepage.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

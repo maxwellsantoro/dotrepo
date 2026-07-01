@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fpillet/NSLogger"
-generated_at = "2026-06-29T05:24:21.083327Z"
+generated_at = "2026-07-01T15:30:02.555012Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.markdown`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.markdown`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "NSLogger"
@@ -37,4 +37,4 @@ default_branch = "master"
 fork = false
 head_sha = "640681c81ed021136aeacf71a4dee1e90940e5b5"
 html_url = "https://github.com/fpillet/NSLogger"
-stars = 4988
+stars = 4982

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/invoiceninja/invoiceninja"
-generated_at = "2026-06-29T05:23:03.704824Z"
+generated_at = "2026-07-01T15:16:47.860163Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `package.json`, and `composer.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `composer.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "CLA assistant"
@@ -29,6 +29,7 @@ languages = [
     "XSLT",
 ]
 build = "npm run build"
+test = "composer run-script test"
 topics = [
     "php",
     "expenses",
@@ -62,4 +63,4 @@ default_branch = "v5-stable"
 fork = false
 head_sha = "9f8bc547af68cefe5654367614ce8e8223a30755"
 html_url = "https://github.com/invoiceninja/invoiceninja"
-stars = 9858
+stars = 9862

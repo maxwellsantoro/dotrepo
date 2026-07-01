@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/KieronQuinn/PersistentSearch"
-generated_at = "2026-06-29T05:27:33.298898Z"
+generated_at = "2026-07-01T15:19:10.675635Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "This project is deprecated"
@@ -20,6 +20,8 @@ description = "A library that implements the persistent search bar seen on apps 
 homepage = "https://github.com/KieronQuinn/PersistentSearch"
 visibility = "public"
 languages = ["Java"]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = []
 
 [x.github]

@@ -14,6 +14,6 @@
 - Filled repo.description from GitHub repository metadata when the README surface did not provide one.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+A prior verified status was preserved because no previously present field regressed in this refresh.

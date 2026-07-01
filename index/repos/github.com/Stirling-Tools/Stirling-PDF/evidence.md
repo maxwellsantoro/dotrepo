@@ -3,7 +3,8 @@
 - Imported repository name, description, and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md.
-- Left `repo.build` unset because `.github/workflows/PR-Auto-Deploy-V2.yml` suggested an unsafe shell-like command.
+- Imported repo.build from build.gradle as `./gradlew build`.
+- Imported repo.test from build.gradle as `./gradlew test`.
 - Discovered related relation to github.com/Stirling-Tools/Stirling-PDF from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

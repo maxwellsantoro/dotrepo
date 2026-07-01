@@ -3,6 +3,8 @@
 - Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
+- Imported repo.build from build.gradle as `./gradlew build`.
+- Imported repo.test from build.gradle as `./gradlew test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

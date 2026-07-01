@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Visualize-ML/Book4_Power-of-Matrix"
-generated_at = "2026-06-29T05:20:39.275554Z"
+generated_at = "2026-07-01T15:22:25.784279Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Book4_Power-of-Matrix"
@@ -39,4 +39,4 @@ default_branch = "main"
 fork = false
 head_sha = "a8050eab6fd561e7c0fbffa1d9fa4db90cb63ba7"
 html_url = "https://github.com/Visualize-ML/Book4_Power-of-Matrix"
-stars = 9954
+stars = 9957

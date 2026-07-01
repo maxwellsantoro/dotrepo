@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/flyway/flyway"
-generated_at = "2026-06-29T05:22:37.779228Z"
+generated_at = "2026-07-01T15:32:46.826295Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Database Migrations Made Easy."
@@ -30,6 +30,8 @@ languages = [
     "Python",
     "Shell",
 ]
+build = "./mvnw package"
+test = "./mvnw test"
 topics = [
     "flyway",
     "java",
@@ -61,6 +63,6 @@ archived = false
 clone_url = "https://github.com/flyway/flyway.git"
 default_branch = "main"
 fork = false
-head_sha = "e0118b30e3594b8859179f31d83537ffaf0a7a34"
+head_sha = "e31d5b4ae42ce255b2f21a3ed094592176b61a39"
 html_url = "https://github.com/flyway/flyway"
-stars = 9873
+stars = 9882

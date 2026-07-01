@@ -2,8 +2,8 @@
 
 - Imported repository name and description from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Left `repo.build` unset because `.github/workflows/build-and-test-pr.yml` suggested an unsafe shell-like command.
-- Left `repo.test` unset because `.github/workflows/build-and-test-pr.yml` suggested an unsafe shell-like command.
+- Imported repo.build from pom.xml as `./mvnw package`.
+- Imported repo.test from pom.xml as `./mvnw test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

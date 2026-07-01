@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/endrazine/wcc"
-generated_at = "2026-06-29T05:29:22.58239Z"
+generated_at = "2026-07-01T15:21:36.768488Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "The Witchcraft Compiler Collection"
@@ -32,6 +32,7 @@ languages = [
     "Rust",
     "TeX",
 ]
+build = "make build"
 topics = []
 
 [x.github]

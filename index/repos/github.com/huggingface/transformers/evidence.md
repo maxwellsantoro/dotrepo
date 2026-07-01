@@ -2,6 +2,7 @@
 
 - Imported repository name and description from README.md.
 - Imported the security reporting channel from SECURITY.md.
+- Imported repo.build from Makefile as `make build`.
 - Imported repo.test from pyproject.toml as `python -m pytest`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

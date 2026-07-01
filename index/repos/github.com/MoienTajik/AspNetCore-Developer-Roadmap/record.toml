@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/MoienTajik/AspNetCore-Developer-Roadmap"
-generated_at = "2026-06-29T05:17:44.275548Z"
+generated_at = "2026-07-01T15:15:04.153094Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "AspNetCore-Developer-Roadmap"
@@ -39,4 +39,4 @@ default_branch = "master"
 fork = false
 head_sha = "f45e355f8829633b918a92b8d7845bcb0c8576c2"
 html_url = "https://github.com/MoienTajik/AspNetCore-Developer-Roadmap"
-stars = 19619
+stars = 19620

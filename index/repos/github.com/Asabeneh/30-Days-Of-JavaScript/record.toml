@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Asabeneh/30-Days-Of-JavaScript"
-generated_at = "2026-06-29T05:14:46.127974Z"
+generated_at = "2026-07-01T15:24:41.09211Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "30-Days-Of-JavaScript"
@@ -53,4 +53,4 @@ default_branch = "master"
 fork = false
 head_sha = "e067490424f86ebad32625ca0ba035f95c05a8dd"
 html_url = "https://github.com/Asabeneh/30-Days-Of-JavaScript"
-stars = 46510
+stars = 46512

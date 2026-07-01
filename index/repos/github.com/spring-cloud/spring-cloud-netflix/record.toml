@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spring-cloud/spring-cloud-netflix"
-generated_at = "2026-06-29T05:26:23.934292Z"
+generated_at = "2026-07-01T15:31:42.075023Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
+    "imported",
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `pom.xml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "spring-cloud-netflix"
@@ -26,6 +27,8 @@ languages = [
     "Java",
     "Shell",
 ]
+build = "./mvnw package"
+test = "./mvnw test"
 topics = [
     "java",
     "spring",
@@ -50,6 +53,6 @@ archived = false
 clone_url = "https://github.com/spring-cloud/spring-cloud-netflix.git"
 default_branch = "main"
 fork = false
-head_sha = "d08a176b17ac7bf0e4598890cf91d9957d90db35"
+head_sha = "68b32f5b87b43858cfcd8489ab9a76ec89f6e15a"
 html_url = "https://github.com/spring-cloud/spring-cloud-netflix"
 stars = 4969

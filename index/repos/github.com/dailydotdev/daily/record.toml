@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dailydotdev/daily"
-generated_at = "2026-06-29T05:16:36.507863Z"
+generated_at = "2026-07-01T15:31:17.969117Z"
 
 [record.trust]
 confidence = "high"
@@ -44,7 +44,7 @@ references = []
 
 [[relations.links]]
 kind = "related"
-target = "github.com/dailydotdev/daily?tab=readme-ov-file#-running-dailydev-locally"
+target = "github.com/dailydotdev/daily"
 notes = "Cross-link from README: Run our app locally"
 
 [relations.links.trust]
@@ -61,4 +61,4 @@ default_branch = "master"
 fork = false
 head_sha = "192dae2b904fd4a4e8b9d212474f34c70710e28d"
 html_url = "https://github.com/dailydotdev/daily"
-stars = 19898
+stars = 19901

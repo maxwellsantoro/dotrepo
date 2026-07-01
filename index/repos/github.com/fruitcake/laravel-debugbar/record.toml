@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fruitcake/laravel-debugbar"
-generated_at = "2026-06-29T05:19:17.048056Z"
+generated_at = "2026-07-01T15:19:55.461875Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `package.json`, and `composer.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `composer.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Debugbar for Laravel"
@@ -27,6 +27,7 @@ languages = [
     "PHP",
 ]
 build = "npm run build"
+test = "composer run-script test"
 topics = [
     "laravel",
     "debugbar",
@@ -47,6 +48,6 @@ archived = false
 clone_url = "https://github.com/fruitcake/laravel-debugbar.git"
 default_branch = "master"
 fork = false
-head_sha = "2344290bee3818badbfc40d95584635812389077"
+head_sha = "5b25b61940049d1494619c7666b6f9f727586e88"
 html_url = "https://github.com/fruitcake/laravel-debugbar"
-stars = 19258
+stars = 19260

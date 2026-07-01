@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/WerWolv/ImHex"
-generated_at = "2026-06-29T02:17:38.521332Z"
+generated_at = "2026-07-01T15:30:11.92936Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh.'
 
 [repo]
 name = "Discord Server"
@@ -61,14 +61,11 @@ security_contact = "unknown"
 [docs]
 root = "https://imhex.werwolv.net/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/WerWolv/ImHex.git"
 default_branch = "master"
 fork = false
-head_sha = "af55d25269f201164c7f7e71c943cba4d26b04e3"
+head_sha = "ae69c36769aef0b4b013cb96e2ca1492495fee15"
 html_url = "https://github.com/WerWolv/ImHex"
-stars = 54031
+stars = 54039

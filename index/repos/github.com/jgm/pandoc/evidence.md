@@ -2,7 +2,8 @@
 
 - Imported repository name and description from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Inferred repo.test from .github/workflows/docx-validation.yaml as `make validate-docx-golden-tests`.
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from Makefile as `make test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -13,4 +14,4 @@
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

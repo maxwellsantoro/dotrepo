@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tipsy/profile-summary-for-github"
-generated_at = "2026-06-29T05:16:24.262508Z"
+generated_at = "2026-07-01T15:21:56.508551Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Profile Summary"
@@ -27,6 +27,8 @@ languages = [
     "Procfile",
     "Vue",
 ]
+build = "./mvnw package"
+test = "./mvnw test"
 topics = [
     "kotlin",
     "webapp",
@@ -41,4 +43,4 @@ default_branch = "master"
 fork = false
 head_sha = "a9b9e6f524a7c04c98e342ae39eb3304817d044c"
 html_url = "https://github.com/tipsy/profile-summary-for-github"
-stars = 19945
+stars = 19941

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/postgres/postgres"
-generated_at = "2026-07-01T04:29:07.711839Z"
+generated_at = "2026-07-01T15:23:56.87295Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/pg-ci.yml` suggested an unsafe shell-like command. Left `repo.test` unset because `.github/workflows/pg-ci.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Left `repo.test` unset because `.github/workflows/pg-ci.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "PostgreSQL Database Management System"
@@ -40,6 +40,7 @@ languages = [
     "Yacc",
     "sed",
 ]
+build = "make build"
 topics = []
 
 [owners]
@@ -54,6 +55,6 @@ archived = false
 clone_url = "https://github.com/postgres/postgres.git"
 default_branch = "master"
 fork = false
-head_sha = "b542d556670586ebadf380102f6ead920609e592"
+head_sha = "aeb07c55fab5c17a600b77ffcdc3b71425d6a8e7"
 html_url = "https://github.com/postgres/postgres"
-stars = 21320
+stars = 21326

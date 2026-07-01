@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/signalwire/freeswitch"
-generated_at = "2026-06-29T05:26:30.608241Z"
+generated_at = "2026-07-01T15:13:21.68209Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.test` from `.github/workflows/unit-test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.test` from `.github/workflows/unit-test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "FreeSWITCH"
@@ -88,6 +88,6 @@ archived = false
 clone_url = "https://github.com/signalwire/freeswitch.git"
 default_branch = "master"
 fork = false
-head_sha = "b9c41705b755623c9cc365e41bc0a347e5854b85"
+head_sha = "225a5e197eea989b74ce8703c4eae298d69b08cc"
 html_url = "https://github.com/signalwire/freeswitch"
-stars = 4968
+stars = 4978

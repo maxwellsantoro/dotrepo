@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/wasabeef/glide-transformations"
-generated_at = "2026-06-29T05:22:25.516787Z"
+generated_at = "2026-07-01T15:21:07.115951Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Glide Transformations"
@@ -24,6 +24,8 @@ languages = [
     "Java",
     "Kotlin",
 ]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "android",
     "android-library",
@@ -40,4 +42,4 @@ default_branch = "main"
 fork = false
 head_sha = "d950f0c33f27f864e4ab4b26fce66c27079911c1"
 html_url = "https://github.com/wasabeef/glide-transformations"
-stars = 9888
+stars = 9889

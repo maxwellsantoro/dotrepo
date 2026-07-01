@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/LunarVim/LunarVim"
-generated_at = "2026-06-29T05:19:12.285828Z"
+generated_at = "2026-07-01T15:24:12.950929Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/install.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Last commit"
@@ -59,4 +58,4 @@ default_branch = "master"
 fork = false
 head_sha = "aa51c20f3404cb482e9c6fd6e5e4a4bf5b1612aa"
 html_url = "https://github.com/LunarVim/LunarVim"
-stars = 19263
+stars = 19259

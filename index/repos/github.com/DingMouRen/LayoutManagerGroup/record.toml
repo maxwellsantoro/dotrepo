@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/DingMouRen/LayoutManagerGroup"
-generated_at = "2026-06-29T05:25:32.839446Z"
+generated_at = "2026-07-01T15:16:55.432959Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Just like a star."
@@ -21,6 +21,8 @@ description = ":point_right: Customize the LayoutManager of RecyclerView(自定�
 homepage = "https://github.com/DingMouRen/LayoutManagerGroup"
 visibility = "public"
 languages = ["Java"]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = []
 
 [x.github]

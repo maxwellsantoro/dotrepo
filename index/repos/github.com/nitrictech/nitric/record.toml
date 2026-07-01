@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nitrictech/nitric"
-generated_at = "2026-06-29T05:29:41.192675Z"
+generated_at = "2026-07-01T15:26:38.196419Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `Makefile`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Effortless backends with infrastructure from code"
@@ -27,6 +27,8 @@ languages = [
     "JavaScript",
     "Makefile",
 ]
+build = "make build"
+test = "make test"
 topics = [
     "cloud",
     "aws",
@@ -66,4 +68,4 @@ default_branch = "main"
 fork = false
 head_sha = "892243986918fa188e8a52bf73d40a5383581d5c"
 html_url = "https://github.com/nitrictech/nitric"
-stars = 1994
+stars = 1995

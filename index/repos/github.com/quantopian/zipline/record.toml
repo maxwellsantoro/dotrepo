@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/quantopian/zipline"
-generated_at = "2026-06-29T05:16:31.258548Z"
+generated_at = "2026-07-01T15:19:49.689123Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "zipline"
@@ -46,4 +46,4 @@ default_branch = "master"
 fork = false
 head_sha = "014f1fc339dc8b7671d29be2d85ce57d3daec343"
 html_url = "https://github.com/quantopian/zipline"
-stars = 19918
+stars = 19940

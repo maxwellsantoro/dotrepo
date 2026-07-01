@@ -3,6 +3,7 @@
 - Imported repository name, description, and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from package.json as `npm run build`.
+- Imported repo.test from composer.json as `composer run-script test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

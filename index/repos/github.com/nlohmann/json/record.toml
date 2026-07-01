@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nlohmann/json"
-generated_at = "2026-07-01T04:30:05.392304Z"
+generated_at = "2026-07-01T15:25:50.94502Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/macos.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Design goals"
@@ -33,7 +32,8 @@ languages = [
     "Starlark",
     "Swift",
 ]
-build = "cmake -S . -B build -D CMAKE_BUILD_TYPE=Debug -DJSON_BuildTests=On -DJSON_FastTests=ON"
+build = "make build"
+test = "make test"
 topics = [
     "json",
     "json-pointer",
@@ -83,6 +83,6 @@ archived = false
 clone_url = "https://github.com/nlohmann/json.git"
 default_branch = "develop"
 fork = false
-head_sha = "272411c5e6ea45919af7673524e74e60c62116df"
+head_sha = "730b57775d4c8a28e8e3353d741a37126fda1f12"
 html_url = "https://github.com/nlohmann/json"
-stars = 50038
+stars = 50044

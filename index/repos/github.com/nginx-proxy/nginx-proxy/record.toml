@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nginx-proxy/nginx-proxy"
-generated_at = "2026-06-29T05:16:48.785035Z"
+generated_at = "2026-07-01T15:24:52.129067Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/test.yml`. Left `repo.test` unset because `.github/workflows/test.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "ZeroSSL"
@@ -30,7 +30,8 @@ languages = [
     "Python",
     "Shell",
 ]
-build = "make build-webserver"
+build = "make build"
+test = "make test"
 topics = [
     "nginx",
     "docker",
@@ -48,4 +49,4 @@ default_branch = "main"
 fork = false
 head_sha = "a64c037f893b22489607661f2534d0ed15c7a8f5"
 html_url = "https://github.com/nginx-proxy/nginx-proxy"
-stars = 19863
+stars = 19864

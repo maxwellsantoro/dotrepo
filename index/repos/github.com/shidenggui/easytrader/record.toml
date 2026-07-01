@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/shidenggui/easytrader"
-generated_at = "2026-06-29T05:21:13.614009Z"
+generated_at = "2026-07-01T15:10:43.315131Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "easytrader"
@@ -24,6 +24,7 @@ languages = [
     "Makefile",
     "Python",
 ]
+test = "make test"
 topics = []
 
 [docs]
@@ -36,4 +37,4 @@ default_branch = "master"
 fork = false
 head_sha = "def5a8edc5ebd7d49bf92a9f39e9e30c9bf47101"
 html_url = "https://github.com/shidenggui/easytrader"
-stars = 9932
+stars = 9941

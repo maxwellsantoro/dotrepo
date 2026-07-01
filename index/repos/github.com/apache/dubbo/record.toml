@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/apache/dubbo"
-generated_at = "2026-06-29T02:17:42.782187Z"
+generated_at = "2026-07-01T15:31:36.924099Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/build-and-test-pr.yml` suggested an unsafe shell-like command. Left `repo.test` unset because `.github/workflows/build-and-test-pr.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Apache Dubbo Project"
@@ -31,6 +31,8 @@ languages = [
     "Mustache",
     "Shell",
 ]
+build = "./mvnw package"
+test = "./mvnw test"
 topics = [
     "dubbo",
     "distributed-systems",
@@ -52,14 +54,11 @@ security_contact = "security@dubbo.apache.org"
 [docs]
 root = "https://dubbo.apache.org/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/apache/dubbo.git"
 default_branch = "3.3"
 fork = false
-head_sha = "2626e28c16193a099b9cf89e133cd9d55b7d9add"
+head_sha = "ed0e11e1cca847b632b32a3e5f61ff8f072ada84"
 html_url = "https://github.com/apache/dubbo"
-stars = 41523
+stars = 41522

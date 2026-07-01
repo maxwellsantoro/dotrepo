@@ -2,8 +2,8 @@
 
 - Imported repository name and docs entry points from README.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.build from .github/workflows/test.yml as `make build-webserver`.
-- Left `repo.test` unset because `.github/workflows/test.yml` suggested an unsafe shell-like command.
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from Makefile as `make test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -14,4 +14,4 @@
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

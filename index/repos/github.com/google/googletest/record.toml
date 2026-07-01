@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google/googletest"
-generated_at = "2026-06-29T01:19:48.760807Z"
+generated_at = "2026-07-01T15:17:08.149758Z"
 
 [record.trust]
 confidence = "high"
@@ -31,14 +31,29 @@ languages = [
 ]
 topics = []
 
+[docs]
+root = "https://google.github.io/googletest/"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/google/googletest"
+notes = "Cross-link from README: Release 1.17.0"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/google/googletest.git"
 default_branch = "main"
 fork = false
-head_sha = "8b53336594cc52213c6c2c7a0b29194fa896d039"
+head_sha = "973323ed64a05b128418e7eab67016db5ba049df"
 html_url = "https://github.com/google/googletest"
-stars = 38751
+stars = 38757

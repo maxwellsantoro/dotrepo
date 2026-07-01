@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rizinorg/cutter"
-generated_at = "2026-06-29T05:19:32.50449Z"
+generated_at = "2026-07-01T15:12:03.291667Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Cutter"
@@ -54,6 +54,6 @@ archived = false
 clone_url = "https://github.com/rizinorg/cutter.git"
 default_branch = "dev"
 fork = false
-head_sha = "beb64885be085a77ed338534e77703538546f704"
+head_sha = "3978a4e8e4bb1fcf1224702e909042668a94d557"
 html_url = "https://github.com/rizinorg/cutter"
-stars = 19230
+stars = 19244

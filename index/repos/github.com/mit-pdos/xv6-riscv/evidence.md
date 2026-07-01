@@ -2,6 +2,7 @@
 
 - Imported repository metadata from README.
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
+- Imported repo.test from Makefile as `make test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -10,6 +11,6 @@
 - Filled repo.description from GitHub repository metadata when the README surface did not provide one.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+A prior verified status was preserved because no previously present field regressed in this refresh.

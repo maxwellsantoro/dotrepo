@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/iSoron/uhabits"
-generated_at = "2026-06-29T05:20:07.996303Z"
+generated_at = "2026-07-01T15:27:19.798707Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle.kts`. Imported `repo.build` from `build.gradle.kts`. Imported `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Loop Habit Tracker"
@@ -27,6 +27,8 @@ languages = [
     "Python",
     "Shell",
 ]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "android",
     "habits",
@@ -43,4 +45,4 @@ default_branch = "dev"
 fork = false
 head_sha = "4383b3ed03cb5db196e9b0d39405ff1913ffbef3"
 html_url = "https://github.com/iSoron/uhabits"
-stars = 9992
+stars = 9994

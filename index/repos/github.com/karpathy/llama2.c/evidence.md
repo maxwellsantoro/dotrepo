@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name and description from README.md.
-- Inferred repo.test from .github/workflows/build.yml as `pytest`.
+- Imported repo.test from Makefile as `make test`.
 - Discovered related relation to github.com/karpathy/nanoGPT from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
@@ -11,4 +11,4 @@
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

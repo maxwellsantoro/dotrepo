@@ -1,6 +1,7 @@
 # Evidence
 
 - Imported repository name and description from README.md.
+- Imported repo.build from Rakefile as `rake build`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

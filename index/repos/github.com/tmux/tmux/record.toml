@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tmux/tmux"
-generated_at = "2026-06-29T05:14:16.626202Z"
+generated_at = "2026-07-01T15:26:58.008977Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README`. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README`. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "tmux"
@@ -38,6 +38,6 @@ archived = false
 clone_url = "https://github.com/tmux/tmux.git"
 default_branch = "master"
 fork = false
-head_sha = "705fbf92eec703cef6f23c1cdbb2c0d822eed7da"
+head_sha = "87aa44f4bcd0dff4d15f3104bb544f2d6ca4355c"
 html_url = "https://github.com/tmux/tmux"
-stars = 47256
+stars = 47237

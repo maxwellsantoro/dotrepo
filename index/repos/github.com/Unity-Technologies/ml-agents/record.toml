@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Unity-Technologies/ml-agents"
-generated_at = "2026-06-29T01:19:51.854508Z"
+generated_at = "2026-07-01T15:32:06.804472Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/nightly.yml` and `.github/workflows/pytest.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/nightly.yml` and `.github/workflows/pytest.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "ml-agents"
@@ -46,14 +46,14 @@ topics = [
 maintainers = ["@unity/behavior-authoring"]
 team = "@unity/behavior-authoring"
 
-[relations]
-references = []
+[docs]
+root = "https://unity.com/products/machine-learning-agents"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/Unity-Technologies/ml-agents.git"
 default_branch = "develop"
 fork = false
-head_sha = "a0bd0abeebb7b7f659db6e26b0e8635dd10b13df"
+head_sha = "47c965cb6f563f2d97e58c4be0507c26ac313570"
 html_url = "https://github.com/Unity-Technologies/ml-agents"
-stars = 19521
+stars = 19525

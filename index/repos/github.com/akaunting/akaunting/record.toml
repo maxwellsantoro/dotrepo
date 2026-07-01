@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/akaunting/akaunting"
-generated_at = "2026-06-29T05:21:36.53816Z"
+generated_at = "2026-07-01T15:19:33.99567Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `composer.json`. Imported `repo.test` from `composer.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Requirements"
@@ -25,6 +25,7 @@ languages = [
     "PHP",
     "Vue",
 ]
+test = "composer run-script test"
 topics = [
     "php",
     "laravel",
@@ -59,6 +60,6 @@ archived = false
 clone_url = "https://github.com/akaunting/akaunting.git"
 default_branch = "master"
 fork = false
-head_sha = "c115404fca0be660d0641bd3e4a5f979ddbbbd00"
+head_sha = "d40be7219915d277360d18a2d437c0f5d781d85a"
 html_url = "https://github.com/akaunting/akaunting"
-stars = 9918
+stars = 9921

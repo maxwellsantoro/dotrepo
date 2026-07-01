@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/wb2osz/direwolf"
-generated_at = "2026-06-29T05:28:57.021835Z"
+generated_at = "2026-07-01T15:11:22.498819Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/codeql-analysis.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `.github/workflows/codeql-analysis.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Dire Wolf"
@@ -31,6 +31,7 @@ languages = [
     "Python",
     "Shell",
 ]
+build = "make build"
 test = "make test"
 topics = [
     "tnc",
@@ -50,4 +51,4 @@ default_branch = "master"
 fork = false
 head_sha = "eda1383f5fa9d8ba3cb27f99db1d2c79494404c9"
 html_url = "https://github.com/wb2osz/direwolf"
-stars = 1995
+stars = 1998

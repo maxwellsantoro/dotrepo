@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/android/architecture-samples"
-generated_at = "2026-06-29T05:15:03.234852Z"
+generated_at = "2026-07-01T15:26:06.77671Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `build.gradle.kts`. Imported `repo.build` from `build.gradle.kts`. Imported `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Android Architecture Samples"
@@ -21,6 +21,8 @@ homepage = "https://github.com/android/architecture-samples"
 license = "Apache-2.0"
 visibility = "public"
 languages = ["Kotlin"]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "android-architecture",
     "android",
@@ -40,4 +42,4 @@ default_branch = "main"
 fork = false
 head_sha = "ee66e1526b84c026615df032c705842b7d2a521f"
 html_url = "https://github.com/android/architecture-samples"
-stars = 45731
+stars = 45736

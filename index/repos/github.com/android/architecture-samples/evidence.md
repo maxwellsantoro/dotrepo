@@ -2,6 +2,8 @@
 
 - Imported repository name and description from README.md.
 - Imported maintainer candidates from CODEOWNERS.
+- Imported repo.build from build.gradle.kts as `./gradlew build`.
+- Imported repo.test from build.gradle.kts as `./gradlew test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/WebKit/WebKit"
-generated_at = "2026-06-29T05:20:44.841093Z"
+generated_at = "2026-07-01T15:11:52.412265Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `Makefile`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "WebKit"
@@ -68,6 +68,7 @@ languages = [
     "XSLT",
     "Yacc",
 ]
+build = "make build"
 topics = [
     "webkit",
     "browser",
@@ -129,6 +130,6 @@ archived = false
 clone_url = "https://github.com/WebKit/WebKit.git"
 default_branch = "main"
 fork = false
-head_sha = "90c69edf1c0ebeef9a60ead6ad3e6cae9a19577a"
+head_sha = "9d2c43b4dc9d9c47448c510c87e79ecaf40b60a4"
 html_url = "https://github.com/WebKit/WebKit"
-stars = 9947
+stars = 9952

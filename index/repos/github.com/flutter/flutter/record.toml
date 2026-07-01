@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/flutter/flutter"
-generated_at = "2026-06-29T02:21:02.121226Z"
+generated_at = "2026-07-01T15:23:35.362858Z"
 
 [record.trust]
 confidence = "high"
@@ -87,11 +87,23 @@ root = "https://flutter.dev"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/flutter/flutter"
+notes = "Cross-link from README: Contributing to Flutter"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/flutter/flutter.git"
 default_branch = "master"
 fork = false
-head_sha = "7e982cb3ca7fa82d7a47458f72593582a0816ac6"
+head_sha = "6be76865c49874d5745bb3618ec7fd7797622f2f"
 html_url = "https://github.com/flutter/flutter"
-stars = 177622
+stars = 177516

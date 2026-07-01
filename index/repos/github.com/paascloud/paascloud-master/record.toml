@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/paascloud/paascloud-master"
-generated_at = "2026-06-29T05:22:44.046136Z"
+generated_at = "2026-07-01T15:20:27.400915Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Spring Cloud 实战项目"
@@ -25,6 +25,8 @@ languages = [
     "HTML",
     "Java",
 ]
+build = "./mvnw package"
+test = "./mvnw test"
 topics = [
     "springcloud",
     "rocketmq",
@@ -43,4 +45,4 @@ default_branch = "master"
 fork = false
 head_sha = "781281a9503332ed3cef44ea618349d14230a127"
 html_url = "https://github.com/paascloud/paascloud-master"
-stars = 9870
+stars = 9871

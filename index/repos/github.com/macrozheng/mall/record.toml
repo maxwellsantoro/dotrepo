@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/macrozheng/mall"
-generated_at = "2026-07-01T04:31:24.943701Z"
+generated_at = "2026-07-01T15:16:11.206325Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "mall"
@@ -25,6 +25,8 @@ languages = [
     "Java",
     "Shell",
 ]
+build = "./mvnw package"
+test = "./mvnw test"
 topics = [
     "spring-boot",
     "spring-security",
@@ -54,4 +56,4 @@ default_branch = "master"
 fork = false
 head_sha = "0504e86b1f1b6f1b8aa6a734d37a90fb67346be7"
 html_url = "https://github.com/macrozheng/mall"
-stars = 83953
+stars = 83955

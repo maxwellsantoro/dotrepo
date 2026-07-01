@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spring-projects/spring-framework"
-generated_at = "2026-07-01T04:33:38.066142Z"
+generated_at = "2026-07-01T15:12:29.743494Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `build.gradle`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Spring Framework"
@@ -37,6 +37,8 @@ languages = [
     "Smarty",
     "XSLT",
 ]
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "framework",
     "spring",
@@ -55,6 +57,6 @@ archived = false
 clone_url = "https://github.com/spring-projects/spring-framework.git"
 default_branch = "main"
 fork = false
-head_sha = "c5d7908a7876855c9385dcbb3ae24a3f67c42e01"
+head_sha = "df0ec741074d868f127df6ed03fc24b2657dcd9c"
 html_url = "https://github.com/spring-projects/spring-framework"
-stars = 60080
+stars = 60081
