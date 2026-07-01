@@ -372,10 +372,19 @@ describe the destination; this section decides what runs now.
 
 **Now — prove, measure, and harden the autonomous factory (Milestone 1).**
 
-1. Pass `check_autonomous_telemetry_gate.py` without `--warn-only` for three
-   consecutive scheduled runs. The gate currently fails on worst-run failure rate
-   and recent failure drift; live run and repository counts come from the
-   telemetry summary.
+1. **Done.** `check_autonomous_telemetry_gate.py` passes without `--warn-only`
+   at three consecutive scheduled-run checkpoints. This required two fixes
+   surfaced by running real scheduled batches: the worst-run rate window is
+   now bounded to the last `WORST_RUN_WINDOW_SIZE` (10) runs
+   (`scripts/run_autonomous_index_batch.py`) so a single historic failure
+   cannot pin the gate red forever while still failing the gate for the next
+   10 runs after any real bad run; and the crawler no longer silently
+   downgrades an already-`verified` record on routine refresh
+   (`guard_against_unjustified_downgrade` in
+   `crates/dotrepo-core/src/promotion.rs`, wired into
+   `crates/dotrepo-crawler/src/pipeline.rs`) — previously a refresh that only
+   gained a new, imperfectly-scored field (not a real regression) could drop
+   `verified`/`high` back to `inferred`/`medium`.
 2. Exercise the model tail deliberately. Stand up a bounded adjudication canary
    or challenge cohort that drives representative work through the cheap-model,
    second-opinion, and strong-model paths, so low observed adjudication rates are
@@ -482,11 +491,16 @@ utility, and adoption.
 
 **Goal:** make autonomous generation and refresh the default operating model.
 
-**Core implementation status: complete; operational proof and scale-cost
-instrumentation status: pending.** Scheduled planning, bounded adjudication,
-gate-passed writeback, retained telemetry, proof gates, and deploy coherence are
-implemented. The retained multi-run proof gate must pass in strict mode and the
-expanded unit-cost reports must land before the milestone itself is complete.
+**Core implementation status: complete; operational proof status: partially
+demonstrated.** Scheduled planning, bounded adjudication, gate-passed
+writeback, retained telemetry, proof gates, and deploy coherence are
+implemented. The retained multi-run proof gate now passes in strict mode
+(three consecutive scheduled-run checkpoints, see the active execution order
+above) and versioned unit-cost reports are in place for wall time, network,
+tokens, and model calls (CPU/memory remain a documented gap). The bounded
+adjudication canary/challenge cohort (exercising the cheap-model,
+second-opinion, and strong-model paths) has not yet run; the milestone is not
+complete until that evidence exists.
 
 Deliver:
 
