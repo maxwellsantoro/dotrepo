@@ -31,6 +31,9 @@ materialized trees, telemetry, and index writeback.
 | `writeback.rs` | Atomic overlay persistence |
 | `schedule.rs` | Head-aware refresh planning |
 | `state.rs` | Crawl state persistence |
+| `src/main.rs` | CLI entrypoint: clap argument/subcommand definitions, `main()`, and top-level dispatch only |
+| `src/commands.rs` | CLI command execution bodies (`cmd_discover`, `cmd_crawl`, `cmd_seed`, `cmd_schedule`, `cmd_refresh_plan`) and their orchestration helpers |
+| `src/report.rs` | CLI report/output types and rendering (JSON serialization glue, seed review scoring, human-readable and markdown output) |
 
 ## Local development
 
