@@ -57,7 +57,22 @@ fn public_research_execution(manifest: &Manifest) -> PublicResearchExecution {
     PublicResearchExecution {
         build: non_empty_value(manifest.repo.build.as_deref()),
         test: non_empty_value(manifest.repo.test.as_deref()),
+        build_candidates: public_command_candidates(&manifest.repo.build_candidates),
+        test_candidates: public_command_candidates(&manifest.repo.test_candidates),
     }
+}
+
+fn public_command_candidates(
+    candidates: &[dotrepo_schema::BuildTestCandidate],
+) -> Vec<PublicCommandCandidate> {
+    candidates
+        .iter()
+        .map(|candidate| PublicCommandCandidate {
+            command: candidate.command.clone(),
+            ecosystem: candidate.ecosystem.clone(),
+            source: candidate.source.clone(),
+        })
+        .collect()
 }
 
 fn public_research_docs(manifest: &Manifest) -> PublicResearchDocs {

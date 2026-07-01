@@ -275,6 +275,24 @@ pub fn validate_manifest_diagnostics(
             ));
         }
     }
+    for candidate in &manifest.repo.build_candidates {
+        if let Err(err) = validate_shell_safe_command("repo.build_candidates", &candidate.command) {
+            diagnostics.push(validation_error(
+                "unsafe_shell_command",
+                "validate_manifest",
+                err.to_string(),
+            ));
+        }
+    }
+    for candidate in &manifest.repo.test_candidates {
+        if let Err(err) = validate_shell_safe_command("repo.test_candidates", &candidate.command) {
+            diagnostics.push(validation_error(
+                "unsafe_shell_command",
+                "validate_manifest",
+                err.to_string(),
+            ));
+        }
+    }
 
     diagnostics.extend(validate_readme_sections(manifest));
     diagnostics.extend(validate_relations(manifest));

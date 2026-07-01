@@ -47,6 +47,23 @@ pub struct PublicResearchExecution {
     pub build: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub test: Option<String>,
+    /// Candidate build commands preserved when no single command could be
+    /// honestly chosen as primary (e.g. a genuinely polyglot repository).
+    /// See `dotrepo_schema::Repo::build_candidates` and RFC 0020.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub build_candidates: Vec<PublicCommandCandidate>,
+    /// Same as `build_candidates`, for `test`.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub test_candidates: Vec<PublicCommandCandidate>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicCommandCandidate {
+    pub command: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ecosystem: Option<String>,
+    pub source: String,
 }
 
 #[derive(Debug, Clone, Serialize)]

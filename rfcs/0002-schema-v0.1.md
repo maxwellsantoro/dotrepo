@@ -54,9 +54,16 @@ The v0.1 reference tool accepts `dotrepo/v0.1` exactly. Future tooling should tr
 - `languages`
 - `build`
 - `test`
+- `build_candidates` / `test_candidates`
 - `topics`
 
 `build` and `test` are shell command strings intended to be run from the repository root.
+
+`build_candidates` and `test_candidates` are optional arrays of
+`{ command, ecosystem, source }` populated only when no single `build`/`test`
+command could be honestly chosen (e.g. a genuinely polyglot repository with
+more than one legitimate command). See
+[RFC 0020](./0020-multi-ecosystem-command-candidates.md).
 
 ### `[owners]`
 - `maintainers`

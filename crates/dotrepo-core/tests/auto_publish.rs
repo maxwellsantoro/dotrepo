@@ -29,6 +29,8 @@ fn make_verified_manifest_with_security_contact() -> Manifest {
             languages: vec![],
             build: Some("cargo build".into()),
             test: Some("cargo test".into()),
+            build_candidates: vec![],
+            test_candidates: vec![],
             topics: vec![],
         },
     );
@@ -126,6 +128,8 @@ fn make_imported_manifest() -> Manifest {
             languages: vec![],
             build: None,
             test: None,
+            build_candidates: vec![],
+            test_candidates: vec![],
             topics: vec![],
         },
     )
@@ -191,6 +195,8 @@ fn promote_does_not_downgrade_reviewed() {
             languages: vec![],
             build: None,
             test: None,
+            build_candidates: vec![],
+            test_candidates: vec![],
             topics: vec![],
         },
     );
@@ -223,6 +229,8 @@ fn promote_does_not_downgrade_canonical() {
             languages: vec![],
             build: None,
             test: None,
+            build_candidates: vec![],
+            test_candidates: vec![],
             topics: vec![],
         },
     );

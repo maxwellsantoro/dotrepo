@@ -5,12 +5,12 @@ use super::{
     apply_adjudication_response, apply_adjudication_results, build_adjudication_requests,
     is_actionable_security_url, parse_codeowners_metadata, parse_contributing_security,
     parse_issue_template_security, parse_readme_security, parse_security_import_metadata,
-    push_unique, AdjudicationModelConfidence, AdjudicationModelResponse, AdjudicationOutcome,
-    AdjudicationRequest, AdjudicationResult, CommandCandidateSelection, CommandSourceTier,
-    FieldConfidence, FieldScoreReport, ImportPlan, ImportedCommandProvenance, VerificationReport,
-    IMPORT_README_CANDIDATES,
+    push_unique, AdjudicationCandidate, AdjudicationModelConfidence, AdjudicationModelResponse,
+    AdjudicationOutcome, AdjudicationRequest, AdjudicationResult, CommandCandidateSelection,
+    CommandSourceTier, FieldConfidence, FieldScoreReport, ImportPlan, ImportedCommandProvenance,
+    VerificationReport, IMPORT_README_CANDIDATES,
 };
-use dotrepo_schema::Owners;
+use dotrepo_schema::{BuildTestCandidate, Owners};
 use std::collections::HashSet;
 use std::path::Path;
 
@@ -224,12 +224,15 @@ pub fn apply_adjudication_to_import_plan(
                 }
             }
             AdjudicationOutcome::Absent { reason } => {
+                let preserved_candidates = distinct_command_candidates(&request.candidates);
                 if result.field == "repo.build" {
                     plan.manifest.repo.build = None;
                     plan.command_candidates.selected_build = None;
+                    plan.manifest.repo.build_candidates = preserved_candidates.clone();
                 } else if result.field == "repo.test" {
                     plan.manifest.repo.test = None;
                     plan.command_candidates.selected_test = None;
+                    plan.manifest.repo.test_candidates = preserved_candidates.clone();
                 }
                 if let Some(ref mut evidence) = plan.evidence_text {
                     evidence.push_str("\n- Left `");
@@ -239,11 +242,69 @@ pub fn apply_adjudication_to_import_plan(
                     evidence.push_str(" escalation: ");
                     evidence.push_str(reason);
                     evidence.push('.');
+                    if preserved_candidates.len() > 1 {
+                        evidence.push_str(" Preserved ");
+                        evidence.push_str(&preserved_candidates.len().to_string());
+                        evidence.push_str(" candidate command(s) in `");
+                        evidence.push_str(&result.field);
+                        evidence.push_str("_candidates` instead of discarding them.");
+                    }
                 }
             }
             AdjudicationOutcome::Rejected { .. } => {}
         }
     }
+}
+
+/// Deduplicates candidate commands by value, preserving first-seen order,
+/// and tags each with a best-effort ecosystem label. Used to populate
+/// `repo.build_candidates`/`repo.test_candidates` when no single command
+/// could be honestly chosen as primary (see `Repo::build_candidates`'s
+/// doc comment and RFC 0020).
+fn distinct_command_candidates(candidates: &[AdjudicationCandidate]) -> Vec<BuildTestCandidate> {
+    let mut seen = HashSet::new();
+    let mut result = Vec::new();
+    for candidate in candidates {
+        let Some(command) = sanitize_import_command(&candidate.value) else {
+            continue;
+        };
+        if !seen.insert(command.clone()) {
+            continue;
+        }
+        result.push(BuildTestCandidate {
+            command,
+            ecosystem: ecosystem_for_source_path(&candidate.source_path),
+            source: candidate.source_path.clone(),
+        });
+    }
+    result
+}
+
+/// Best-effort ecosystem label for a known manifest/build-file path, used
+/// only to make preserved build/test candidates easier for a human or agent
+/// to tell apart at a glance. Returns `None` for unrecognized paths (e.g.
+/// arbitrary CI workflow files) rather than guessing.
+fn ecosystem_for_source_path(source_path: &str) -> Option<String> {
+    let file_name = Path::new(source_path)
+        .file_name()
+        .and_then(|name| name.to_str())
+        .unwrap_or(source_path);
+    let label = match file_name {
+        "Cargo.toml" => "Rust",
+        "package.json" => "Node.js",
+        "pyproject.toml" | "setup.py" | "setup.cfg" => "Python",
+        "go.mod" => "Go",
+        "pom.xml" => "Java (Maven)",
+        "build.gradle" | "build.gradle.kts" => "Java/Kotlin (Gradle)",
+        "composer.json" => "PHP",
+        "mix.exs" => "Elixir",
+        "rebar.config" => "Erlang",
+        "Rakefile" | "rakefile" => "Ruby",
+        "CMakePresets.json" => "C/C++ (CMake)",
+        _ if file_name.ends_with(".csproj") => ".NET",
+        _ => return None,
+    };
+    Some(label.to_string())
 }
 
 fn deepen_security_owners_deterministic(
@@ -1078,6 +1139,88 @@ mod tests {
             .adjudication_tiers_used
             .contains(&AdjudicationTier::LocalSecondOpinion));
         assert_eq!(plan.manifest.repo.build, None);
+        // Even though no single command could be honestly chosen, the
+        // concrete candidates are preserved rather than silently discarded.
+        let candidates = &plan.manifest.repo.build_candidates;
+        assert_eq!(candidates.len(), 2);
+        assert!(candidates
+            .iter()
+            .any(|c| c.command == "cargo build --workspace"));
+        assert!(candidates.iter().any(|c| c.command == "cargo build"));
+
+        fs::remove_dir_all(root).expect("cleanup");
+    }
+
+    #[test]
+    fn confident_abstention_labels_candidates_by_ecosystem_when_recognized() {
+        // A genuinely polyglot repository (Cargo.toml + package.json at the
+        // same manifest tier) should preserve both candidates with their
+        // inferred ecosystem labels, matching the real oven-sh/bun and
+        // django/django cases found in production.
+        let root = temp_dir("polyglot-ecosystem-labels");
+        fs::write(
+            root.join("README.md"),
+            "# Polyglot\n\nRust and Node.js in one repo.\n",
+        )
+        .expect("readme");
+        fs::write(
+            root.join("Cargo.toml"),
+            "[package]\nname = \"polyglot\"\nversion = \"0.1.0\"\n",
+        )
+        .expect("Cargo.toml");
+        fs::write(
+            root.join("package.json"),
+            "{\"name\": \"polyglot\", \"scripts\": {\"build\": \"tsc\"}}",
+        )
+        .expect("package.json");
+
+        let source = "https://github.com/example/polyglot-ecosystem-labels";
+        let mut plan =
+            import_repository(&root, ImportMode::Overlay, Some(source)).expect("import succeeds");
+        let verification = crate::import::verify_import_plan(&root, &plan, source);
+        let mut scores = score_import_fields(&plan, &verification);
+
+        let primary = StubAdjudicationProvider::new(
+            AdjudicationTier::LocalPrimary,
+            vec![AdjudicationProviderResponse {
+                response: AdjudicationModelResponse {
+                    field: "repo.build".into(),
+                    value: None,
+                    confidence: AdjudicationModelConfidence::High,
+                    reason: "Distinct, mutually exclusive ecosystems (Rust vs Node.js)".into(),
+                    source: None,
+                },
+                tokens_used: 90,
+            }],
+        );
+
+        let report = run_import_escalation(
+            &root,
+            &mut plan,
+            &verification,
+            &mut scores,
+            &ImportEscalationOptions {
+                max_adjudication_calls: 1,
+                enable_second_opinion: false,
+                enable_api_escalation: false,
+            },
+            TieredAdjudicationProviders {
+                local_primary: Some(&primary),
+                local_second_opinion: None,
+                api_escalation: None,
+            },
+        );
+
+        assert_eq!(report.model_calls, 1);
+        assert_eq!(plan.manifest.repo.build, None);
+        let candidates = &plan.manifest.repo.build_candidates;
+        assert_eq!(candidates.len(), 2);
+        assert!(candidates
+            .iter()
+            .any(|c| c.source == "Cargo.toml" && c.ecosystem.as_deref() == Some("Rust")));
+        assert!(candidates
+            .iter()
+            .any(|c| c.source == "package.json" && c.ecosystem.as_deref() == Some("Node.js")));
 
         fs::remove_dir_all(root).expect("cleanup");
     }

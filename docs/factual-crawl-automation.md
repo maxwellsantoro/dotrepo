@@ -134,6 +134,12 @@ hierarchy resolves most of these without any model:
 The hierarchy avoids over-trusting CI when CI tests only sub-packages or
 matrices, but also avoids under-trusting it when CI is the only real evidence.
 
+When candidates genuinely tie across mutually exclusive ecosystems (e.g. a
+repository with both a `Cargo.toml` and a `package.json` build), `build`/`test`
+remain honestly unset, but the concrete candidate commands are preserved in
+`repo.build_candidates`/`repo.test_candidates` rather than discarded. See
+[RFC 0020](../rfcs/0020-multi-ecosystem-command-candidates.md).
+
 When the hierarchy still leaves multiple candidates, the field stays unresolved
 and may be escalated to narrow adjudication.
 

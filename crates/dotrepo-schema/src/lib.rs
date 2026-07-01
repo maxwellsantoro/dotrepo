@@ -89,8 +89,34 @@ pub struct Repo {
     pub build: Option<String>,
     #[serde(default)]
     pub test: Option<String>,
+    /// Candidate build commands preserved when no single command could be
+    /// honestly chosen as primary -- e.g. a genuinely polyglot repository
+    /// with more than one legitimate build system. `build` remains `None`
+    /// in that case rather than picking one arbitrarily; this array is the
+    /// structured record of what was actually found, so downstream
+    /// consumers get real commands to choose from instead of nothing. See
+    /// RFC 0020.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub build_candidates: Vec<BuildTestCandidate>,
+    /// Same as `build_candidates`, for `test`.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub test_candidates: Vec<BuildTestCandidate>,
     #[serde(default)]
     pub topics: Vec<String>,
+}
+
+/// One preserved candidate command for an ambiguous `build`/`test` field.
+/// See `Repo::build_candidates` / `Repo::test_candidates`.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct BuildTestCandidate {
+    pub command: String,
+    /// Best-effort ecosystem label inferred from `source` (e.g. "Rust",
+    /// "Node.js", "Python"). `None` when the source file's ecosystem isn't
+    /// recognized.
+    #[serde(default)]
+    pub ecosystem: Option<String>,
+    /// Repository-relative path the candidate command was found in.
+    pub source: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -445,6 +471,8 @@ pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
             languages: Vec::new(),
             build: None,
             test: None,
+            build_candidates: Vec::new(),
+            test_candidates: Vec::new(),
             topics: Vec::new(),
         },
     );

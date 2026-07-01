@@ -531,6 +531,11 @@ pub fn import_repository_with_options(
                 .test
                 .as_ref()
                 .and_then(|command| sanitize_import_command(&command.command)),
+            // Populated later by escalation (see
+            // apply_adjudication_to_import_plan's Absent branch) if a
+            // genuine multi-ecosystem tie is found for build or test.
+            build_candidates: Vec::new(),
+            test_candidates: Vec::new(),
             topics: Vec::new(),
         },
     );

@@ -521,6 +521,8 @@ mod tests {
                 languages: vec!["rust".into()],
                 build: Some("cargo build --workspace".into()),
                 test: Some("cargo test --workspace".into()),
+                build_candidates: Vec::new(),
+                test_candidates: Vec::new(),
                 topics: Vec::new(),
             },
         );
@@ -582,6 +584,8 @@ mod tests {
                 languages: vec!["rust".into()],
                 build: None,
                 test: None,
+                build_candidates: Vec::new(),
+                test_candidates: Vec::new(),
                 topics: Vec::new(),
             },
         );
