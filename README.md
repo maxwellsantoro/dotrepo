@@ -179,90 +179,19 @@ query result for the requested dot-path. See
 [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md) for the
 tool contract.
 
-For repeated known-repository access, the reference CLI also exposes batch
-profile and field lookup:
-
-```bash
-cargo run -p dotrepo-cli -- public batch-profiles --repo github.com/sharkdp/fd
-cargo run -p dotrepo-cli -- public batch-query --repo github.com/sharkdp/fd --path repo.description
-```
-
-The hosted public surface exposes the same batch lookup shape as cacheable GET
+For repeated known-repository access, the reference CLI and hosted public
+surface also expose batch profile/field lookup, structured profile search,
+factual profile comparison, and relationship traversal as cacheable GET
 routes:
 
 ```bash
-curl -s "https://dotrepo.org/v0/batch/profiles?repo=github.com/sharkdp/fd&repo=github.com/BurntSushi/ripgrep"
-curl -s "https://dotrepo.org/v0/batch/query?repo=github.com/sharkdp/fd&path=repo.description&path=repo.test"
+cargo run -p dotrepo-cli -- public batch-profiles --repo github.com/sharkdp/fd
+curl -s "https://dotrepo.org/v0/batch/profiles?repo=github.com/sharkdp/fd"
 ```
 
-For the first structured discovery pass, the CLI and hosted public surface can
-search compact public profiles by text plus trust and completeness filters:
-
-```bash
-cargo run -p dotrepo-cli -- public search \
-  --q search \
-  --language Rust \
-  --status verified \
-  --require-docs
-
-curl -s "https://dotrepo.org/v0/search?q=search&language=Rust&status=verified&require-docs"
-```
-
-It can also compare selected profiles without inventing a rank or winner:
-
-```bash
-cargo run -p dotrepo-cli -- public compare \
-  --repo github.com/sharkdp/fd \
-  --repo github.com/BurntSushi/ripgrep
-
-curl -s "https://dotrepo.org/v0/compare?repo=github.com/sharkdp/fd&repo=github.com/BurntSushi/ripgrep"
-```
-
-Relationship traversal covers trust-bearing alternatives, dependencies,
-predecessors, forks, related projects, and references, including semantic
-reverse edges:
-
-```bash
-cargo run -p dotrepo-cli -- public relations github.com sharkdp fd
-
-curl -s "https://dotrepo.org/v0/repos/github.com/sharkdp/fd/relations"
-```
-
-The public lookup-efficiency harness measures task hit rate, field hit rate,
-compact payload bytes, and deterministic request-count reduction for
-representative known-repository workloads:
-
-```bash
-uv run python scripts/build_public_lookup_workload.py \
-  --public-root public \
-  --limit 500 \
-  --output /tmp/dotrepo-public-lookup-workload.json
-
-uv run python scripts/measure_public_lookup_efficiency.py \
-  --public-root public \
-  --index-root index \
-  --workload /tmp/dotrepo-public-lookup-workload.json
-```
-
-Consumers that mirror snapshots can diff two `v0/files.json` manifests and
-refetch only changed payloads:
-
-```bash
-uv run python scripts/diff_public_export_files.py \
-  --old-files old-public/v0/files.json \
-  --new-files public/v0/files.json
-```
-
-Operators can measure profile-count and high-signal coverage gates against the
-exported public tree:
-
-```bash
-uv run python scripts/check_public_profile_coverage.py \
-  --public-root public \
-  --min-profiles 500 \
-  --min-high-signal 500 \
-  --max-conflict-rate 0.0
-```
+See [`docs/public-export-examples.md`](docs/public-export-examples.md) for the
+full set of batch, search, compare, relations, lookup-efficiency, and coverage
+examples, and for the operator-facing measurement scripts.
 
 ## Why now
 

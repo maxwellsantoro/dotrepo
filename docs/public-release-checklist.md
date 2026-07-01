@@ -51,11 +51,10 @@ For the canonical freshness semantics used by these outputs, see
 - the packaged bundle extracts to one self-describing root directory
 - the release binary bundle contains `dotrepo`, `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp`
 - the release binary smoke test passes (binaries execute from extracted bundle)
-- the release gate proves a shipped `dotrepo-public-query` binary can serve the
-  exported public tree and resolve a real emitted `queryTemplate` on one origin
-- the release gate proves the Cloudflare Worker routes resolve that same
-  emitted `queryTemplate`, hosted batch profile/query responses, hosted search,
-  hosted compare, and hosted relation traversal from the staged export snapshot
+- the release gate's hosted-query and Cloudflare Worker smoke checks pass (see
+  "What the workflow does after deploy" in
+  [`docs/cloudflare-deploy.md`](./cloudflare-deploy.md) for what those checks
+  cover)
 - the VS Code release asset installs from a tagged `.vsix`
 
 ## Review questions
@@ -67,25 +66,17 @@ For the canonical freshness semantics used by these outputs, see
 
 ## CI and release surface
 
-- CI runs `scripts/check_release_gate.py` and uploads:
-  - `public-export-v0`
-  - `public-export-v0-bundle`
-  - `index-growth-plan.json` / `index-growth-targets.txt`
-  - `release-gate-install-bundles`
-  - `release-gate-vscode-vsix`
-- the same script is the local and CI release review gate
-- the release gate smoke tests the extracted release binaries
-- the release gate smoke tests same-origin hosted query resolution against the
-  exported public tree
-- the release gate smoke tests the Cloudflare Worker query, batch, search,
-  compare, and relations routes
-  against that same exported public tree
-- the Cloudflare deploy workflow builds and deploys the canonical public origin
-  from the validated export snapshot when enabled with repository vars/secrets
-- the `release-artifacts` workflow publishes tagged `dotrepo`,
-  `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp` binary bundles plus
-  a VSIX
+- CI runs `scripts/check_release_gate.py` (the same script as local generation
+  above) and uploads `public-export-v0`, `public-export-v0-bundle`,
+  `index-growth-plan.json`/`index-growth-targets.txt`,
+  `release-gate-install-bundles`, and `release-gate-vscode-vsix`
+- the `release-artifacts` workflow publishes tagged binary bundles and a VSIX
 - the usage examples still match the exported tree
+
+For what each CI job and smoke check actually does, see "CI artifacts" in
+[`docs/public-export-workflow.md`](./public-export-workflow.md) and "What the
+workflow does after deploy" in
+[`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).
 
 ## Non-goals check
 
