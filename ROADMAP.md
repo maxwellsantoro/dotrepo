@@ -412,10 +412,10 @@ describe the destination; this section decides what runs now.
    added yet).
 4. Establish intent- and ecosystem-level quality scorecards with explicit error
    budgets for incorrect facts, missing facts, and correct abstention.
-5. **In progress; one deterministic fix landed.** Investigating individual
-   missing-signal records (rather than blindly re-crawling) found that
-   routine refresh alone never moves the missing-build/test/security
-   ceilings, because `SUPPLEMENTAL_ROOT_FILES`
+5. **Done for build/test; security confirmed as honest absence.**
+   Investigating individual missing-signal records (rather than blindly
+   re-crawling) found that routine refresh alone never moves the
+   missing-build/test/security ceilings, because `SUPPLEMENTAL_ROOT_FILES`
    (`crates/dotrepo-crawler/src/github.rs`) only ever fetched
    `Cargo.toml`/`package.json`/`pyproject.toml`/`go.mod` from GitHub, even
    though `dotrepo-core`'s import parser has had working support for Maven,
@@ -423,18 +423,31 @@ describe the destination; this section decides what runs now.
    Rakefile, and setup.py/setup.cfg all along — those parsers were simply
    never fed a file to parse. Fixed by fetching every ecosystem file the
    parser already supports (plus a new root `.csproj` directory listing
-   for arbitrarily-named .NET project files). Re-crawling the 23 known
-   non-verified records missing build/test after the fix moved
-   verified 575→580, missing build 278→275, missing test 285→279, with
-   zero status/confidence regressions. Investigated `owners.security_contact`
-   (408 missing) separately using GitHub's `community/profile` API, which
-   resolves a repository's security policy across every location GitHub
-   itself recognizes (root, `.github/`, `docs/`, and org-level default
-   community health files) in one call — 0 of 50 randomly sampled missing
-   records had a security policy anywhere GitHub could find one across two
-   independent samples. This confirms honest absence rather than a fetch
-   gap; no code change is warranted, and per the roadmap's non-goals,
-   hiding that absence to look complete would be the wrong fix anyway.
+   for arbitrarily-named .NET project files). Re-crawled the 23 known
+   non-verified records plus all 298 already-`verified` records still
+   missing build/test (sampled 30 first to confirm ~23% real yield before
+   committing to the full run): missing build 278→238, missing test
+   285→241, quality queue 501→477, verified 574→580, with zero
+   status/confidence regressions across all 321 touched records (spot-checked
+   every one against its prior committed value). This full-population
+   re-crawl also surfaced and fixed a real, unrelated bug: GitHub's
+   maintainer-set repository "Website" field can point at a different
+   repository entirely (e.g. a renamed/duplicated project left pointing at
+   its original), which `merge_snapshot_fields` previously trusted
+   unconditionally, producing two records whose `repo.homepage` failed
+   `validate-index`'s cross-identity check; fixed by skipping the merge
+   when the reported homepage resolves to a different repository identity
+   (`homepage_conflicts_with_identity` in
+   `crates/dotrepo-crawler/src/pipeline.rs`). Investigated
+   `owners.security_contact` (408 missing) separately using GitHub's
+   `community/profile` API, which resolves a repository's security policy
+   across every location GitHub itself recognizes (root, `.github/`,
+   `docs/`, and org-level default community health files) in one call — 0
+   of 50 randomly sampled missing records had a security policy anywhere
+   GitHub could find one across two independent samples. This confirms
+   honest absence rather than a fetch gap; no code change is warranted,
+   and per the roadmap's non-goals, hiding that absence to look complete
+   would be the wrong fix anyway.
 6. Process the current promotion headroom through the normal validation path;
    consult `promotion-report` and the growth-status renderer for live candidate
    counts.
