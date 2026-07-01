@@ -27,9 +27,9 @@ directional and should be refreshed when this table is used to schedule work.
 | File | Current disposition |
 |------|---------------------|
 | `dotrepo-mcp/src/main.rs` | Active after the LSP pattern lands: extract tool schemas and handlers; retain transport startup in `main.rs`. |
-| `dotrepo-core/src/import/mod.rs` | Next: reduce to import orchestration and re-exports by moving remaining evidence assembly and field-resolution helpers into focused import modules. |
-| `dotrepo-core/src/import/parsing.rs` | Next: split ecosystem-specific parsers from shared candidate normalization and reconciliation. |
-| `dotrepo-core/src/import/commands.rs` | Next: separate workflow extraction from command safety and command-ranking policy. |
+| `dotrepo-core/src/import/mod.rs` | Done: reduced to import orchestration and re-exports (~1,030 lines). Data types moved to `import/types.rs` (~300 lines); field scoring/adjudication reconciliation moved to `import/fields.rs` (~500 lines); owners/docs/compat construction, evidence.md rendering, and relation discovery moved to `import/evidence.rs` (~650 lines). |
+| `dotrepo-core/src/import/parsing.rs` | Done: split into `import/parsing/` (~2,050 lines total, largest file 754 lines). README title/description/name parsing in `readme.rs`; shared markdown/text normalization and link extraction in `markdown.rs`; URL quality gates in `urls.rs`; CODEOWNERS parsing in `codeowners.rs`; security-contact parsing in `security.rs`; `mod.rs` is a thin re-export hub. |
+| `dotrepo-core/src/import/commands.rs` | Done: split into `import/commands/` (~1,590 lines total, largest file 814 lines). Ecosystem-specific candidate *extraction* (Cargo/npm/pyproject/setup.py/go.mod/Maven/Gradle/Composer/.csproj/Mix/Rebar/CMake/Makefile/justfile/Rakefile/CONTRIBUTING/workflows) lives in `extraction.rs`; command sanitization and build/test ranking policy (incl. Node package-runner detection) lives in `policy.rs`; `mod.rs` holds file loading and the `infer_imported_commands` orchestration entrypoint. |
 | `dotrepo-crawler/src/main.rs` | Done: `main.rs` now holds only clap argument/subcommand definitions, `main()`, and top-level dispatch; command execution moved to `src/commands.rs` and report/output rendering moved to `src/report.rs`. |
 | `dotrepo-cli/src/tests.rs` | Retain temporarily: this is test-only code with no production navigation cost; split by CLI command domain when the next test family is added. |
 | `dotrepo-core/src/facade_tests/import_repository.rs` | Split on next import-fixture expansion into parsing, evidence, escalation, and manifest-assembly test modules. |
@@ -40,10 +40,11 @@ exit criterion can pass.
 ## Targeted refactors
 
 1. **MCP tools module** — move remaining tool handlers out of `main.rs` now that the LSP split establishes the pattern.
-2. **Core import splits** — execute the remaining `import/` module boundaries in the table while preserving `dotrepo-core` facade exports. (The `public.rs` split is complete: see `src/public/{mod,types,profile,search,compare,relations,export,error}.rs`.)
-3. **Facade test domains** — keep one concern per file; run a single domain with `cargo test -p dotrepo-core --lib tests::<domain>`.
+2. **Facade test domains** — keep one concern per file; run a single domain with `cargo test -p dotrepo-core --lib tests::<domain>`.
 
-Crawler command split is complete (see the `dotrepo-crawler/src/main.rs` row above).
+The LSP split, `public.rs` split, `import/` splits, and crawler command split are all
+complete (see the oversized-file dispositions table above). Only the MCP tools
+module extraction remains open from this list.
 
 ## Public API documentation
 
