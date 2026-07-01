@@ -18,14 +18,14 @@ uv run python scripts/measure_public_lookup_efficiency.py \
   --public-root public \
   --index-root index \
   --workload /tmp/dotrepo-public-lookup-workload.json \
-  --min-tasks 628 \
-  --min-repositories 157 \
-  --min-task-hit-rate 0.64 \
-  --min-field-hit-rate 0.82 \
-  --min-intent-hit-rate overview=0.90 \
-  --min-intent-hit-rate execution=0.70 \
-  --min-intent-hit-rate documentation=0.32 \
-  --min-intent-hit-rate security=0.65 \
+  --min-tasks 2452 \
+  --min-repositories 613 \
+  --min-task-hit-rate 0.525 \
+  --min-field-hit-rate 0.734 \
+  --min-intent-hit-rate overview=0.74 \
+  --min-intent-hit-rate execution=0.466 \
+  --min-intent-hit-rate documentation=0.543 \
+  --min-intent-hit-rate security=0.35 \
   --output-json /tmp/dotrepo-lookup-efficiency.json \
   --output-md /tmp/dotrepo-lookup-efficiency.md
 ```
@@ -64,35 +64,42 @@ can cache and reuse.
 
 ## Current production-export result
 
-The canonical release gate builds the research workload from all 157 current
+The canonical release gate builds the research workload from all 613 current
 profiles and applies the versioned baseline in
 `scripts/fixtures/public_lookup_efficiency_baseline.json`. Its current result is:
 
 | Metric | Value |
 | --- | ---: |
-| Repositories | 157 |
-| Tasks answered | 410 / 628 |
-| Task hit rate | 0.6529 |
-| Fields answered | 1168 / 1413 |
-| Field hit rate | 0.8266 |
-| Abstention rate | 0.1734 |
-| Overview task hit rate | 0.9045 |
-| Execution task hit rate | 0.7134 |
-| Documentation task hit rate | 0.3312 |
-| Security task hit rate | 0.6624 |
-| dotrepo bytes | 917209 |
-| scrape proxy bytes | 398648 |
-| dotrepo to scrape proxy ratio | 2.3008 |
+| Repositories | 613 |
+| Tasks answered | 1288 / 2452 |
+| Task hit rate | 0.5253 |
+| Fields answered | 4054 / 5517 |
+| Field hit rate | 0.7348 |
+| Abstention rate | 0.2652 |
+| Overview task hit rate | 0.7406 |
+| Execution task hit rate | 0.4666 |
+| Documentation task hit rate | 0.5432 |
+| Security task hit rate | 0.3507 |
+| dotrepo bytes | 3431044 |
+| scrape proxy bytes | 1417339 |
+| dotrepo to scrape proxy ratio | 2.4208 |
 | unique fields requested | 9 |
-| dotrepo batch query requests | 4 |
-| scrape proxy requests | 314 |
-| request reduction rate | 0.9873 |
+| dotrepo batch query requests | 13 |
+| scrape proxy requests | 1226 |
+| request reduction rate | 0.9894 |
 
-The documentation slice is the clearest current bottleneck. The byte ratio is
-also reported without dressing it up: profile plus query-input JSON is larger
-than the already-normalized local record/evidence proxy. That proxy is not live
-GitHub or documentation scraping, so the report does not claim a 2.302x live
-network penalty or savings.
+Security and execution are the clearest current bottlenecks: both dropped
+substantially as coverage grew from 157 to 613 profiles (execution 0.7134 ->
+0.4666, security 0.6624 -> 0.3507), while documentation and overview shifted
+(documentation 0.3312 -> 0.5432; overview 0.9045 -> 0.7406). This tracks the
+quality-hardening queue reported by `scripts/render_index_growth_status.py`
+(285 missing build, 290 missing test, 408 missing security as of this
+snapshot): growth outpaced quality hardening, and closing that queue is the
+direct lever for these intents. The byte ratio is also reported without
+dressing it up: profile plus query-input JSON is larger than the
+already-normalized local record/evidence proxy. That proxy is not live GitHub
+or documentation scraping, so the report does not claim a 2.42x live network
+penalty or savings.
 
 ## Fixture result
 
