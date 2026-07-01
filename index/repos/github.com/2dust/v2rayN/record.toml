@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/2dust/v2rayN"
-generated_at = "2026-06-29T00:42:39.286154Z"
+generated_at = "2026-07-01T04:30:58.459648Z"
 
 [record.trust]
 confidence = "high"
@@ -38,8 +38,8 @@ topics = [
     "xtls",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://v2rayn.2dust.link"
 
 [x.github]
 archived = false
@@ -48,4 +48,4 @@ default_branch = "master"
 fork = false
 head_sha = "bf376a8fac2cc3c5935c100e5c468e058b03253b"
 html_url = "https://github.com/2dust/v2rayN"
-stars = 110119
+stars = 110260

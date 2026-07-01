@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/yt-dlp/yt-dlp"
-generated_at = "2026-06-29T00:42:28.508643Z"
+generated_at = "2026-07-01T04:30:44.519918Z"
 
 [record.trust]
 confidence = "high"
@@ -40,14 +40,29 @@ topics = [
     "downloader",
 ]
 
+[docs]
+root = "https://discord.gg/H5MNcFW63r"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/ytdl-org/youtube-dl"
+notes = "Cross-link from README: youtube-dl"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/yt-dlp/yt-dlp.git"
 default_branch = "master"
 fork = false
-head_sha = "5678b282e2a17a8181e682a9681461b9c82ff008"
+head_sha = "e584a65f2a0feee0c6c363b3309e9ebd6065f6b4"
 html_url = "https://github.com/yt-dlp/yt-dlp"
-stars = 174006
+stars = 174419

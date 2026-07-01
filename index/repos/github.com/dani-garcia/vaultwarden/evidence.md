@@ -5,6 +5,7 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from Cargo.toml as `cargo test --workspace`.
+- Discovered related relation to github.com/dani-garcia/vaultwarden from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

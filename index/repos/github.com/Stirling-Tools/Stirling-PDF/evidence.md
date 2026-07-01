@@ -4,6 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md.
 - Left `repo.build` unset because `.github/workflows/PR-Auto-Deploy-V2.yml` suggested an unsafe shell-like command.
+- Discovered related relation to github.com/Stirling-Tools/Stirling-PDF from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

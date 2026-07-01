@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/PowerShell/PowerShell"
-generated_at = "2026-06-29T00:47:28.214075Z"
+generated_at = "2026-07-01T04:31:31.85888Z"
 
 [record.trust]
 confidence = "high"
@@ -55,16 +55,29 @@ team = "@PowerShell/powershell-maintainers"
 security_contact = "https://msrc.microsoft.com/create-report"
 
 [docs]
+root = "https://microsoft.com/PowerShell"
 getting_started = "https://learn.microsoft.com/powershell/scripting/learn/more-powershell-learning"
 
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/discussions/quickstart"
+notes = "Cross-link from README: GitHub Discussions"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/PowerShell/PowerShell.git"
 default_branch = "master"
 fork = false
-head_sha = "13d66be5b1ccf008e8c7b7116a4783a2ed19bf90"
+head_sha = "36cd02b333d7cecb89d5d336c9a798287fe4736b"
 html_url = "https://github.com/PowerShell/PowerShell"
-stars = 54236
+stars = 54256

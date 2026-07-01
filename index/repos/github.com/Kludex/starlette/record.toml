@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Kludex/starlette"
-generated_at = "2026-06-26T18:36:06.772023Z"
+generated_at = "2026-07-01T04:30:28.08782Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Starlette"
-description = "✨ The little ASGI framework that shines."
+description = "The little ASGI framework that shines. 🌟"
 homepage = "https://starlette.dev"
 license = "BSD-3-Clause"
 visibility = "public"
@@ -34,8 +35,23 @@ topics = [
     "asgi",
 ]
 
+[docs]
+root = "https://asgi.readthedocs.io/en/latest/"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/Kludex/starlette"
+notes = "Cross-link from README: ![Build Status"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
@@ -44,4 +60,4 @@ default_branch = "main"
 fork = false
 head_sha = "de970d7b3facb853eb7ad077decbf3d94f2aab6c"
 html_url = "https://github.com/Kludex/starlette"
-stars = 12436
+stars = 12442

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/huggingface/datasets"
-generated_at = "2026-06-26T18:32:25.793475Z"
+generated_at = "2026-07-01T04:27:41.543201Z"
 
 [record.trust]
 confidence = "high"
@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Key Features"
+name = "Hugging Face Datasets Library"
 description = "🤗 Datasets is a lightweight library providing **two** main features:"
 homepage = "https://huggingface.co/docs/datasets"
 license = "Apache-2.0"
@@ -49,10 +49,8 @@ maintainers = []
 security_contact = "security@huggingface.co"
 
 [docs]
-getting_started = "https://huggingface.co/docs/datasets/quickstart"
-
-[relations]
-references = []
+root = "https://huggingface.co/docs/datasets"
+getting_started = "https://huggingface.co/docs/datasets/installation"
 
 [x.github]
 archived = false
@@ -61,4 +59,4 @@ default_branch = "main"
 fork = false
 head_sha = "b713dcdffa92ada37c569e6f1419ce94fc170b0c"
 html_url = "https://github.com/huggingface/datasets"
-stars = 21657
+stars = 21668

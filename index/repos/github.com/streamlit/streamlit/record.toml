@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/streamlit/streamlit"
-generated_at = "2026-06-26T18:32:16.322005Z"
+generated_at = "2026-07-01T04:27:12.659379Z"
 
 [record.trust]
 confidence = "high"
@@ -50,14 +50,11 @@ security_contact = "https://hackerone.com/snowflake?type=team"
 [docs]
 root = "https://docs.streamlit.io"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/streamlit/streamlit.git"
 default_branch = "develop"
 fork = false
-head_sha = "c9d6805767dcc67012d4112e6a2ca73137c83bbc"
+head_sha = "9e89eff829e93fdcfd8e1b1da03b059c222de189"
 html_url = "https://github.com/streamlit/streamlit"
-stars = 45079
+stars = 45118

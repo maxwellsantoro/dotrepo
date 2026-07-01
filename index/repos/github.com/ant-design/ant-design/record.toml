@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ant-design/ant-design"
-generated_at = "2026-06-26T18:35:43.495089Z"
+generated_at = "2026-07-01T04:30:19.889285Z"
 
 [record.trust]
 confidence = "high"
@@ -44,14 +44,29 @@ topics = [
 maintainers = []
 security_contact = "unknown"
 
+[docs]
+root = "https://ant.design"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/ant-design/ant-design"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/ant-design/ant-design.git"
 default_branch = "master"
 fork = false
-head_sha = "7393d781e87812bfea8b5dcb4d2c33e49aa00a3d"
+head_sha = "003f2a0f67c4e9b34d7deb5b18ce9bf1e1bca82b"
 html_url = "https://github.com/ant-design/ant-design"
-stars = 98484
+stars = 98530

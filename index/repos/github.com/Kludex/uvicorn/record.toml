@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Kludex/uvicorn"
-generated_at = "2026-06-26T18:36:09.339153Z"
+generated_at = "2026-07-01T04:30:31.063487Z"
 
 [record.trust]
 confidence = "high"
@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Why ASGI?"
+name = "uvicorn"
 description = "An ASGI web server, for Python."
 homepage = "https://uvicorn.dev"
 license = "BSD-3-Clause"
@@ -34,8 +34,8 @@ topics = [
     "http-server",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://asgi.readthedocs.io/en/latest/"
 
 [x.github]
 archived = false
@@ -44,4 +44,4 @@ default_branch = "main"
 fork = false
 head_sha = "e8a31bca03254b8457c4c89596e310282cc33edc"
 html_url = "https://github.com/Kludex/uvicorn"
-stars = 10788
+stars = 10801

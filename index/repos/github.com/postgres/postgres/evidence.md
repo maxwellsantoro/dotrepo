@@ -2,6 +2,8 @@
 
 - Imported repository name and description from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Left `repo.build` unset because `.github/workflows/pg-ci.yml` suggested an unsafe shell-like command.
+- Left `repo.test` unset because `.github/workflows/pg-ci.yml` suggested an unsafe shell-like command.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -11,4 +13,4 @@
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

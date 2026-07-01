@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/supabase/supabase"
-generated_at = "2026-06-26T18:34:04.311466Z"
+generated_at = "2026-07-01T04:28:35.70931Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/ai-tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh.'
 
 [repo]
 name = "Supabase"
@@ -36,6 +37,7 @@ languages = [
     "Vue",
 ]
 build = "pnpm build"
+test = "pnpm run test"
 topics = [
     "firebase",
     "supabase",
@@ -79,11 +81,23 @@ getting_started = "./DEVELOPERS.md"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/supabase/supabase"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/supabase/supabase.git"
 default_branch = "master"
 fork = false
-head_sha = "f78c9db32e2e4fd7a0f8369963192cac48464236"
+head_sha = "963ab3e63b939c5e7e699085bdc9686f00eb7139"
 html_url = "https://github.com/supabase/supabase"
-stars = 104880
+stars = 105001

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/protocolbuffers/protobuf"
-generated_at = "2026-06-26T18:35:12.854167Z"
+generated_at = "2026-07-01T04:29:44.680672Z"
 
 [record.trust]
 confidence = "high"
@@ -73,14 +73,14 @@ maintainers = [
 ]
 security_contact = "https://bughunters.google.com/report"
 
-[relations]
-references = []
+[docs]
+root = "http://protobuf.dev"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/protocolbuffers/protobuf.git"
 default_branch = "main"
 fork = false
-head_sha = "b89250d7eabc94c3c865ea148ba5bfebc40a6fb6"
+head_sha = "ac94136f58798e1d02524400be52261b07898ef5"
 html_url = "https://github.com/protocolbuffers/protobuf"
-stars = 71414
+stars = 71437

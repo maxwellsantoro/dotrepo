@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/transact-rs/sqlx"
-generated_at = "2026-06-29T00:45:27.42207Z"
+generated_at = "2026-07-01T04:31:10.571975Z"
 
 [record.trust]
 confidence = "high"
@@ -45,11 +45,23 @@ topics = [
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/rusqlite/rusqlite"
+notes = "Cross-link from README: the `rusqlite` README"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/transact-rs/sqlx.git"
 default_branch = "main"
 fork = false
-head_sha = "3da582ad1dca5054ec8eda1c87b3b16ca079f47a"
+head_sha = "4893f831684c26a4a6dbeae01e7fb9a7120a4d5c"
 html_url = "https://github.com/transact-rs/sqlx"
-stars = 17224
+stars = 17231

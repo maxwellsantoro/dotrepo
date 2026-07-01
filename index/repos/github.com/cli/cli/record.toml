@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/cli/cli"
-generated_at = "2026-06-29T00:45:23.946081Z"
+generated_at = "2026-07-01T04:31:07.646793Z"
 
 [record.trust]
 confidence = "medium"
@@ -47,14 +47,11 @@ maintainers = [
 team = "@cli/code-reviewers"
 security_contact = "https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/cli/cli.git"
 default_branch = "trunk"
 fork = false
-head_sha = "71fb4f5f4358c44c9328637752f0c15a47d84139"
+head_sha = "b7195a53258ae3109867f2a59aa87427c89442a9"
 html_url = "https://github.com/cli/cli"
-stars = 45040
+stars = 45080

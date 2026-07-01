@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/typeorm/typeorm"
-generated_at = "2026-06-26T18:34:25.902469Z"
+generated_at = "2026-07-01T04:28:39.188192Z"
 
 [record.trust]
 confidence = "high"
@@ -12,10 +12,10 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Samples"
+name = "NPM Downloads"
 description = "TypeORM is an ORM that can run in Node.js, Browser, Cordova, Ionic, React Native, NativeScript, Expo, and Electron platforms and can be used with TypeScript and JavaScript (ES2023)."
 homepage = "http://typeorm.io"
 license = "MIT"
@@ -24,6 +24,7 @@ languages = [
     "JavaScript",
     "TypeScript",
 ]
+build = "pnpm build"
 test = "pnpm test"
 topics = [
     "orm",
@@ -46,8 +47,23 @@ topics = [
 maintainers = []
 security_contact = "support@typeorm.io"
 
+[docs]
+root = "http://typeorm.io"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/typeorm/typeorm"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false
@@ -56,4 +72,4 @@ default_branch = "master"
 fork = false
 head_sha = "cca26a919f3ee5afda5af0f835e10629bcc378d1"
 html_url = "https://github.com/typeorm/typeorm"
-stars = 36555
+stars = 36570

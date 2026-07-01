@@ -3,6 +3,7 @@
 - Imported repository name and description from README.md.
 - Imported repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from Cargo.toml as `cargo test --workspace`.
+- Discovered related relation to github.com/rusqlite/rusqlite from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

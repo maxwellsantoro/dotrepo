@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/solidjs/solid"
-generated_at = "2026-06-26T18:35:48.566736Z"
+generated_at = "2026-07-01T04:30:25.278235Z"
 
 [record.trust]
 confidence = "high"
@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "At a Glance"
+name = "SolidJS"
 description = "Solid is a declarative JavaScript library for creating user interfaces."
 homepage = "https://solidjs.com"
 license = "MIT"
@@ -44,6 +44,18 @@ root = "https://docs.solidjs.com"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/solidjs/solid"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/solidjs/solid.git"
@@ -51,4 +63,4 @@ default_branch = "main"
 fork = false
 head_sha = "128225942095f51f9b49a3f8fdc1bd7e3b9ee97b"
 html_url = "https://github.com/solidjs/solid"
-stars = 35665
+stars = 35675

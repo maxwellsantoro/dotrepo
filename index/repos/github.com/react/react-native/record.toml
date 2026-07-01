@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/react/react-native"
-generated_at = "2026-06-29T00:42:36.876523Z"
+generated_at = "2026-07-01T04:30:55.10564Z"
 
 [record.trust]
 confidence = "high"
@@ -52,16 +52,14 @@ topics = [
 ]
 
 [docs]
+root = "https://reactnative.dev"
 getting_started = "https://reactnative.dev/docs/getting-started"
-
-[relations]
-references = []
 
 [x.github]
 archived = false
 clone_url = "https://github.com/react/react-native.git"
 default_branch = "main"
 fork = false
-head_sha = "54b88d9dea5ddc9740327ae426dc3ab8e66f7e75"
+head_sha = "fd10410d512423933ff12f4264e975226aa4b351"
 html_url = "https://github.com/react/react-native"
-stars = 126116
+stars = 126124

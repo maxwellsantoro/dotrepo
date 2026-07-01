@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/redis/redis-py"
-generated_at = "2026-06-26T18:32:04.617958Z"
+generated_at = "2026-07-01T04:27:02.307587Z"
 
 [record.trust]
 confidence = "high"
@@ -37,8 +37,8 @@ topics = [
 [owners]
 maintainers = ["@dmaier-redislabs"]
 
-[relations]
-references = []
+[docs]
+root = "https://redis.readthedocs.io/en/stable/examples.html"
 
 [x.github]
 archived = false
@@ -47,4 +47,4 @@ default_branch = "master"
 fork = false
 head_sha = "83c2541001fd898190b3617786d5734f8954f179"
 html_url = "https://github.com/redis/redis-py"
-stars = 13573
+stars = 13579

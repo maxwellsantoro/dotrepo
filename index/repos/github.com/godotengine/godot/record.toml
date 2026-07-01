@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/godotengine/godot"
-generated_at = "2026-06-26T18:34:40.655133Z"
+generated_at = "2026-07-01T04:29:01.536037Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `.github/workflows/android_builds.yml`. Inferred `repo.test` from `.github/workflows/android_builds.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Godot Engine"
@@ -36,6 +37,8 @@ languages = [
     "Shell",
     "Swift",
 ]
+build = "./gradlew generateGodotTemplates"
+test = "./gradlew generateGodotTemplates"
 topics = [
     "game-engine",
     "godot",
@@ -87,11 +90,23 @@ root = "https://docs.godotengine.org/en/latest/classes/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/godotengine/godot"
+notes = "Cross-link from README: February 2014"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/godotengine/godot.git"
 default_branch = "master"
 fork = false
-head_sha = "d7c45b19ccf6ddadc73d1c8423cd2848f59de437"
+head_sha = "8dbf8a89910e4c8e5b73249884688653021a0074"
 html_url = "https://github.com/godotengine/godot"
-stars = 113152
+stars = 113400

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fatedier/frp"
-generated_at = "2026-06-29T00:42:30.425175Z"
+generated_at = "2026-07-01T04:30:47.559849Z"
 
 [record.trust]
 confidence = "high"
@@ -49,11 +49,23 @@ topics = [
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/fatedier/frp"
+notes = "Cross-link from README: ![Go Report Card"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/fatedier/frp.git"
 default_branch = "dev"
 fork = false
-head_sha = "ae1c0504ec5c1b87a6e7580db5a403d44b95d4b6"
+head_sha = "7fe152e3aa6861225d0bd99b4d77ad640fbc0bc1"
 html_url = "https://github.com/fatedier/frp"
-stars = 107631
+stars = 107681

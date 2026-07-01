@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name, description, and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported repo.build from pyproject.toml as `python -m build`.
 - Imported repo.test from pyproject.toml as `python -m pytest`.

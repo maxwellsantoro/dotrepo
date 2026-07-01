@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/alacritty/alacritty"
-generated_at = "2026-06-29T00:47:14.26944Z"
+generated_at = "2026-07-01T04:31:16.8769Z"
 
 [record.trust]
 confidence = "high"
@@ -41,8 +41,8 @@ topics = [
     "bsd",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://alacritty.org"
 
 [x.github]
 archived = false
@@ -51,4 +51,4 @@ default_branch = "master"
 fork = false
 head_sha = "bdb72b32eeb074e3a0b8559d8ccac458237474a3"
 html_url = "https://github.com/alacritty/alacritty"
-stars = 64707
+stars = 64723

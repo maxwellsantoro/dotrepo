@@ -4,6 +4,8 @@
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from Cargo.toml as `cargo test --workspace`.
+- Discovered related relation to github.com/BurntSushi/ripgrep from Cargo.toml repository.
+- Discovered related relation to github.com/BurntSushi/linux from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Deepened `owners.security_contact` from `README.md` during deterministic escalation.

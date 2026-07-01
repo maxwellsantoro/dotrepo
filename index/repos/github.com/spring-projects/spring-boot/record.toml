@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spring-projects/spring-boot"
-generated_at = "2026-06-26T18:35:24.667747Z"
+generated_at = "2026-07-01T04:29:51.902395Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/run-system-tests.yml`. Inferred `repo.test` from `.github/workflows/run-system-tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "spring-boot"
@@ -37,6 +37,8 @@ languages = [
     "Smarty",
     "Vim Snippet",
 ]
+build = "./gradlew systemTest"
+test = "./gradlew systemTest"
 topics = [
     "java",
     "spring-boot",
@@ -44,14 +46,14 @@ topics = [
     "framework",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://spring.io/projects/spring-boot"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/spring-projects/spring-boot.git"
 default_branch = "main"
 fork = false
-head_sha = "fd2e1d221921998647c2527ecf4d273751f6ffb3"
+head_sha = "ca7849e507f30eeafcabf22c85b0a45a50e24d2e"
 html_url = "https://github.com/spring-projects/spring-boot"
-stars = 81047
+stars = 80988

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/excalidraw/excalidraw"
-generated_at = "2026-06-26T18:35:40.489043Z"
+generated_at = "2026-07-01T04:30:15.930302Z"
 
 [record.trust]
 confidence = "high"
@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Excalidraw Editor | Blog | Documentation | Excalidraw+"
+name = "Excalidraw"
 description = "An open source virtual hand-drawn style whiteboard."
 homepage = "https://excalidraw.com"
 license = "MIT"
@@ -43,16 +43,14 @@ topics = [
 ]
 
 [docs]
-root = "https://docs.excalidraw.com/docs/@excalidraw/excalidraw/installation"
-
-[relations]
-references = []
+root = "https://docs.excalidraw.com"
+getting_started = "https://docs.excalidraw.com/docs/@excalidraw/excalidraw/installation"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/excalidraw/excalidraw.git"
 default_branch = "master"
 fork = false
-head_sha = "c070c8ffa62c4c88d48f33fd18a7a40d55bb808a"
+head_sha = "cce5001aaafe0286855984cf1b4e154b6ce86754"
 html_url = "https://github.com/excalidraw/excalidraw"
-stars = 126265
+stars = 126509

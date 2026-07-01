@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/redis/redis"
-generated_at = "2026-06-26T18:34:51.853293Z"
+generated_at = "2026-07-01T04:29:05.108087Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "What is Redis?"
-description = "This document serves as both a quick start guide to Redis and a detailed resource for building it from source."
+description = "For developers, who are building real-time data-driven applications, Redis is the preferred, fastest, and most feature-rich cache, data structure server, and document and vector query engine."
 homepage = "http://redis.io"
 license = "NOASSERTION"
 visibility = "public"
@@ -31,6 +32,8 @@ languages = [
     "Smarty",
     "Tcl",
 ]
+build = "make REDIS_CFLAGS='-Werror' BUILD_TLS=yes"
+test = "make SANITIZER=address REDIS_CFLAGS='-Werror -DDEBUG_ASSERTIONS -DREDIS_TEST' BUILD_TLS=module"
 topics = [
     "database",
     "key-value",
@@ -61,14 +64,11 @@ security_contact = "security@redis.com"
 [docs]
 root = "https://redis.io/docs/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/redis/redis.git"
 default_branch = "unstable"
 fork = false
-head_sha = "08b465e4f4891bef9f08d7049dd670627b86f7a4"
+head_sha = "ec26d01fbac74acd243083d95c1068023f0310ab"
 html_url = "https://github.com/redis/redis"
-stars = 75126
+stars = 75200

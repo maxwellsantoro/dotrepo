@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/openssl/openssl"
-generated_at = "2026-06-26T18:35:09.883578Z"
+generated_at = "2026-07-01T04:29:14.907124Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Welcome to the OpenSSL Project"
@@ -38,6 +39,8 @@ languages = [
     "eC",
     "sed",
 ]
+build = "make -s build_generated"
+test = '! make test TESTS="test_external_gost_engine"'
 topics = [
     "cryptography",
     "openssl",
@@ -50,14 +53,29 @@ topics = [
 [owners]
 maintainers = ["@quarckster"]
 
+[docs]
+root = "https://openssl-library.org/"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/openssl/openssl"
+notes = "Cross-link from README: ![Nightly OS Zoo ci badge"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/openssl/openssl.git"
 default_branch = "master"
 fork = false
-head_sha = "5a47730f01e8d7b56de5b78674dd2a1d80fdb310"
+head_sha = "f0ca416976ac5b6761bf45e28fa42f1981edbe2c"
 html_url = "https://github.com/openssl/openssl"
-stars = 30370
+stars = 30383

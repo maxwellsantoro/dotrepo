@@ -4,6 +4,8 @@
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Imported repo.build from package.json as `pnpm build`.
+- Inferred repo.test from .github/workflows/ai-tests.yml as `pnpm run test`.
+- Discovered related relation to github.com/supabase/supabase from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -12,6 +14,6 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+A prior verified status was preserved because no previously present field regressed in this refresh.

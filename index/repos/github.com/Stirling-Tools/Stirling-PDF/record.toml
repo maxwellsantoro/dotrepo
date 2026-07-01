@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Stirling-Tools/Stirling-PDF"
-generated_at = "2026-06-29T00:42:33.091777Z"
+generated_at = "2026-07-01T04:30:51.425723Z"
 
 [record.trust]
 confidence = "high"
@@ -72,11 +72,23 @@ root = "https://docs.stirlingpdf.com"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/Stirling-Tools/Stirling-PDF"
+notes = "Cross-link from README: Github issues"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/Stirling-Tools/Stirling-PDF.git"
 default_branch = "main"
 fork = false
-head_sha = "013f14546257ebd97b42b09605763a5557058947"
+head_sha = "41f1cb2c22b8b117eb07f4cc0cf88c8a782c4a50"
 html_url = "https://github.com/Stirling-Tools/Stirling-PDF"
-stars = 84951
+stars = 85449

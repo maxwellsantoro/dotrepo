@@ -3,6 +3,7 @@
 - Imported repository name and description from README.md.
 - Imported repo.build from go.mod as `go build ./...`.
 - Imported repo.test from go.mod as `go test ./...`.
+- Discovered related relation to github.com/fatedier/frp from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
