@@ -398,9 +398,18 @@ describe the destination; this section decides what runs now.
    `modelResolved: 1`, `tokensUsed: 300`, resolving `repo.build` to the
    manifest-tier candidate with the conflict honestly recorded in
    `evidence.md`. This proves the primary-tier escalation path, not merely
-   that it exists unused. The second-opinion and strong-remote-escalation
-   tiers remain unexercised by a live model call; a broader challenge cohort
-   covering those tiers is still open work.
+   that it exists unused. A second canary attempted to force second-opinion
+   escalation with a genuinely tied three-way build-command conflict; the
+   primary model correctly identified the tie and returned a *confident*
+   abstention (`value: null`, `confidence: high`), which by the escalation
+   ladder's own design does not warrant a second opinion — only a
+   *low*-confidence primary response should. This is itself valid evidence
+   (correct abstention on a tied case, not a gap), but it means the
+   second-opinion and strong-remote-escalation tiers remain unexercised by
+   a live model call; both are documented as a rare tail (the exit criteria
+   below cap strong-remote escalation at 5% of processed repositories), and
+   forcing a genuinely low-confidence primary response for a live proof
+   remains open, lower-priority work.
 3. Add versioned unit-cost reports for unchanged, changed, and usefully improved
    records — network, CPU, memory, wall time, model calls, tokens, and provider
    cost — with cache hits and avoided work as first-class outcomes. Wall time,
