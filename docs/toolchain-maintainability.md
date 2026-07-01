@@ -15,7 +15,7 @@ adding behavior, extend core first and delegate from the surface crate.
 | `dotrepo-core` business logic | Focused modules under `src/`; public API re-exported from `lib.rs` |
 | `dotrepo-core` facade tests | Split into `src/facade_tests/` by domain (selection, public, claims, import, surfaces, validation, relations) |
 | `dotrepo-mcp` | `lookup.rs` extracted for remote lookup policy and SSRF protections; remaining `main.rs` holds JSON-RPC dispatch and tools |
-| `dotrepo-lsp` | Monolithic `main.rs` (~2.5k lines); module extraction planned |
+| `dotrepo-lsp` | Split into `protocol.rs` (JSON-RPC/LSP message and type definitions), `state.rs` (server state, open-document tracking, and the `DocumentIndex` byte/UTF-16 offset mapping), `diagnostics.rs` (parse/validation/adoption-status diagnostics), `completions.rs` (completion and hover support over the schema catalog), `code_actions.rs` (adoption-status quick fixes), and `dispatch.rs` (JSON-RPC request/notification routing); `main.rs` retains only the stdio read/write loop and module wiring |
 | `dotrepo-crawler` | Documented in [`crates/dotrepo-crawler/README.md`](../crates/dotrepo-crawler/README.md) |
 
 ## Oversized-file dispositions
@@ -26,7 +26,6 @@ directional and should be refreshed when this table is used to schedule work.
 
 | File | Current disposition |
 |------|---------------------|
-| `dotrepo-lsp/src/main.rs` | Active: extract diagnostics, completions, document sync, and request dispatch while preserving stdio behavior. |
 | `dotrepo-mcp/src/main.rs` | Active after the LSP pattern lands: extract tool schemas and handlers; retain transport startup in `main.rs`. |
 | `dotrepo-core/src/public.rs` | Next: split export construction, search/compare/relations responses, and static-file emission into focused modules behind unchanged facade exports. |
 | `dotrepo-core/src/import/mod.rs` | Next: reduce to import orchestration and re-exports by moving remaining evidence assembly and field-resolution helpers into focused import modules. |
@@ -41,11 +40,10 @@ exit criterion can pass.
 
 ## Targeted refactors
 
-1. **LSP module split** — extract diagnostics, completions, document sync, and request dispatch into focused modules without changing stdio behavior.
-2. **MCP tools module** — move remaining tool handlers out of `main.rs` once LSP split establishes the pattern.
-3. **Core public/import splits** — execute the module boundaries in the table while preserving `dotrepo-core` facade exports.
-4. **Crawler command split** — keep orchestration behavior stable while reducing the entrypoint to startup and dispatch.
-5. **Facade test domains** — keep one concern per file; run a single domain with `cargo test -p dotrepo-core --lib tests::<domain>`.
+1. **MCP tools module** — move remaining tool handlers out of `main.rs` now that the LSP split establishes the pattern.
+2. **Core public/import splits** — execute the module boundaries in the table while preserving `dotrepo-core` facade exports.
+3. **Crawler command split** — keep orchestration behavior stable while reducing the entrypoint to startup and dispatch.
+4. **Facade test domains** — keep one concern per file; run a single domain with `cargo test -p dotrepo-core --lib tests::<domain>`.
 
 ## Public API documentation
 
