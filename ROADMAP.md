@@ -426,10 +426,15 @@ describe the destination; this section decides what runs now.
    for arbitrarily-named .NET project files). Re-crawling the 23 known
    non-verified records missing build/test after the fix moved
    verified 575→580, missing build 278→275, missing test 285→279, with
-   zero status/confidence regressions. `owners.security_contact` (408
-   missing) is largely honest absence (most flagged repos genuinely lack a
-   `SECURITY.md`) rather than a parser gap, and remains open for further
-   sampling.
+   zero status/confidence regressions. Investigated `owners.security_contact`
+   (408 missing) separately using GitHub's `community/profile` API, which
+   resolves a repository's security policy across every location GitHub
+   itself recognizes (root, `.github/`, `docs/`, and org-level default
+   community health files) in one call — 0 of 50 randomly sampled missing
+   records had a security policy anywhere GitHub could find one across two
+   independent samples. This confirms honest absence rather than a fetch
+   gap; no code change is warranted, and per the roadmap's non-goals,
+   hiding that absence to look complete would be the wrong fix anyway.
 6. Process the current promotion headroom through the normal validation path;
    consult `promotion-report` and the growth-status renderer for live candidate
    counts.
