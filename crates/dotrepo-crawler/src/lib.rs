@@ -376,6 +376,21 @@ pub struct CrawlRepositoryReport {
     pub field_scores: FieldScoreReport,
     pub escalation: dotrepo_core::ImportEscalationReport,
     pub diagnostics: Vec<CrawlDiagnostic>,
+    /// GitHub HTTP request/byte usage observed while producing this report.
+    /// Defaults to zero and is filled in by `crawl_repository_impl` after the
+    /// underlying `HttpGitHubClient` finishes making requests.
+    pub network: NetworkUsage,
+}
+
+/// Unit-cost network accounting for a single crawl: request count and
+/// received response bytes (from `Content-Length` where the server sends
+/// it). Used to distinguish the network cost of an unchanged/skipped
+/// repository (zero) from a fully re-crawled one.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct NetworkUsage {
+    pub requests: u32,
+    pub bytes: u64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

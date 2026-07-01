@@ -10,6 +10,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -212,6 +213,48 @@ def adjudication_enabled(env: dict[str, str]) -> bool:
     )
 
 
+def unchanged_skips_from_refresh_plan(refresh_plan_stdout: str) -> list[dict]:
+    """Build zero-cost "unchanged" unit-cost entries from a refresh-plan run.
+
+    `dotrepo-crawler refresh-plan` reports `schedule.skipped` for
+    repositories whose head SHA has not changed since the last factual
+    crawl (see `dotrepo-crawler/src/schedule.rs`). Those repositories never
+    reach the crawl subprocess this run, so they are not part of `crawls` —
+    but they are exactly the "unchanged" unit-cost outcome: zero network,
+    zero wall time, zero model calls, by construction.
+    """
+    try:
+        plan = json.loads(refresh_plan_stdout)
+    except json.JSONDecodeError:
+        return []
+    skipped = ((plan.get("schedule") or {}).get("skipped")) or []
+    unchanged = []
+    for item in skipped:
+        repository = item.get("repository") or {}
+        identity = "/".join(
+            [
+                str(repository.get("host", "")).strip(),
+                str(repository.get("owner", "")).strip(),
+                str(repository.get("repo", "")).strip(),
+            ]
+        )
+        if identity.count("/") != 2:
+            continue
+        unchanged.append(
+            {
+                "repository": identity,
+                "category": "unchanged",
+                "reason": item.get("reason"),
+                "wallTimeMs": 0,
+                "networkRequests": 0,
+                "networkBytes": 0,
+                "adjudicationCalls": 0,
+                "tokensUsed": 0,
+            }
+        )
+    return unchanged
+
+
 def adjudication_tier_counts(crawls: list[dict]) -> dict[str, int]:
     counts: Counter[str] = Counter()
     for crawl in crawls:
@@ -253,24 +296,67 @@ def identity_from_record_path(index_root: Path, record_path: Path) -> str:
     return f"{host}/{owner}/{repo}"
 
 
+# Shared status ladder used both to rank quality-reprocess candidates and to
+# approximate whether a re-crawl "usefully improved" a record (unit-cost
+# classification proxy: status-ladder advancement, e.g. imported -> verified).
+STATUS_ORDER: dict[str, int] = {
+    "draft": 0,
+    "inferred": 1,
+    "imported": 2,
+    "reviewed": 3,
+    "verified": 4,
+    "canonical": 5,
+}
+
+
+def record_status_rank(status: object) -> int:
+    return STATUS_ORDER.get(str(status), -1)
+
+
 def quality_reprocess_rank(candidate: dict) -> tuple[str, int, int, int, int, str]:
-    status_order = {
-        "draft": 0,
-        "inferred": 1,
-        "imported": 2,
-        "reviewed": 3,
-        "verified": 4,
-        "canonical": 5,
-    }
     confidence_order = {"low": 0, "medium": 1, "high": 2}
     return (
         str(candidate.get("generatedAt") or ""),
-        status_order.get(str(candidate.get("status")), -1),
+        record_status_rank(candidate.get("status")),
         confidence_order.get(str(candidate.get("confidence")), -1),
         -int(candidate.get("missingBuild", False) or candidate.get("missingTest", False)),
         -int(candidate.get("missingSecurity", False)),
         str(candidate.get("identity", "")),
     )
+
+
+def capture_record_status_before_crawl(index_root: Path, identity: str) -> str | None:
+    """Read the on-disk record status for `identity` before it is (re-)crawled.
+
+    Returns None when no record exists yet (a brand-new addition to the
+    index), which the unit-cost classifier treats as "changed" rather than
+    "improved" since there is no prior baseline to improve upon.
+    """
+    host, owner, repo = identity.split("/", 2)
+    record_path = index_root / "repos" / host / owner / repo / "record.toml"
+    if not record_path.is_file():
+        return None
+    document = parse_quality_record(record_path)
+    return str(document.get("record", {}).get("status") or "") or None
+
+
+def classify_unit_cost_category(before_status: str | None, after_status: object) -> str:
+    """Classify a crawled repository's unit-cost category.
+
+    Proxy for "usefully improved": the record's status advanced on the
+    draft -> inferred -> imported -> reviewed -> verified -> canonical
+    ladder relative to what was on disk before this run's crawl. Repositories
+    with no prior record (first factual crawl) or no rank improvement are
+    "changed" — real crawl work happened, but there is no completeness gain
+    to report relative to a baseline. Repositories the scheduler skipped
+    entirely (head unchanged, no materialization) are tagged "unchanged" by
+    the caller and never reach this function.
+    """
+    if before_status is None:
+        return "changed"
+    if record_status_rank(after_status) > record_status_rank(before_status):
+        return "improved"
+    return "changed"
 
 
 def quality_reprocess_candidates(index_root: Path) -> list[dict]:
@@ -1218,6 +1304,7 @@ def main() -> int:
         refresh_plan_command.extend(["--synthesize", "--synthesis-model", synthesis_model])
     proc = run(refresh_plan_command)
     refresh_plan.write_text(proc.stdout)
+    unchanged_skips = unchanged_skips_from_refresh_plan(proc.stdout)
 
     run(
         [
@@ -1280,6 +1367,7 @@ def main() -> int:
             "qualityReprocessQueued": len(quality_reprocess_additions),
             "discoveryQueued": len(discovery_additions),
             "crawls": crawls,
+            "unchangedSkips": unchanged_skips,
         }
         write_telemetry_outputs(telemetry, args, telemetry_path)
         print("No refresh targets in selected batch")
@@ -1290,8 +1378,10 @@ def main() -> int:
         if not line:
             continue
         host, owner, repo = line.split("/", 2)
-        entry = {"repository": f"{host}/{owner}/{repo}", "status": "failed"}
+        identity = f"{host}/{owner}/{repo}"
+        entry = {"repository": identity, "status": "failed"}
         crawls.append(entry)
+        before_status = capture_record_status_before_crawl(Path(args.index_root), identity)
         try:
             crawl_env = crawl_env_for_remaining_budget(
                 base_env, remaining_adjudication_calls
@@ -1328,11 +1418,19 @@ def main() -> int:
                         synthesis_provider,
                     ]
                 )
+            command_started = time.monotonic()
             proc = run(
                 crawl_command,
                 check=False,
                 env=crawl_env,
             )
+            # Always available (success or failure): the wall time of the
+            # whole `cargo run ... crawl` subprocess as observed from this
+            # orchestrator, including process startup overhead that the
+            # narrower in-process `wallTimeMs`/`totalWallTimeMs` (reported
+            # only on success, from dotrepo-crawler itself) excludes.
+            entry["commandWallTimeMs"] = round((time.monotonic() - command_started) * 1000)
+            entry["category"] = "changed"
             if proc.returncode == 0:
                 payload = json.loads(proc.stdout)
                 entry["status"] = "written" if payload.get("wrote") else "skipped"
@@ -1344,6 +1442,14 @@ def main() -> int:
                 entry["recordStatus"] = payload.get("recordStatus")
                 entry["synthesisPath"] = payload.get("synthesisPath")
                 entry["synthesisFailure"] = payload.get("synthesisFailure")
+                entry["wallTimeMs"] = payload.get("wallTimeMs")
+                entry["totalWallTimeMs"] = payload.get("totalWallTimeMs")
+                network = payload.get("network") or {}
+                entry["networkRequests"] = network.get("requests")
+                entry["networkBytes"] = network.get("bytes")
+                entry["category"] = classify_unit_cost_category(
+                    before_status, entry["recordStatus"]
+                )
                 remaining_adjudication_calls = max(
                     0,
                     remaining_adjudication_calls - entry["adjudicationCalls"],
@@ -1398,6 +1504,7 @@ def main() -> int:
         "qualityReprocessQueued": len(quality_reprocess_additions),
         "discoveryQueued": len(discovery_additions),
         "crawls": crawls,
+        "unchangedSkips": unchanged_skips,
     }
     write_telemetry_outputs(telemetry, args, telemetry_path)
     print(json.dumps(telemetry, indent=2, sort_keys=True))

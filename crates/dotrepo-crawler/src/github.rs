@@ -1,7 +1,7 @@
 use crate::materialize::{ConventionalRepositoryFiles, RepositoryTextFile};
 use crate::{
-    CrawlerStateSnapshot, DiscoveredRepository, GitHubRepositorySnapshot, RefreshCandidate,
-    RepositoryRef, StarBand,
+    CrawlerStateSnapshot, DiscoveredRepository, GitHubRepositorySnapshot, NetworkUsage,
+    RefreshCandidate, RepositoryRef, StarBand,
 };
 use anyhow::{anyhow, Context, Result};
 use reqwest::blocking::{Client, Response};
@@ -9,6 +9,7 @@ use reqwest::header::{HeaderMap, HeaderName, HeaderValue, ACCEPT, AUTHORIZATION,
 use reqwest::{StatusCode, Url};
 use serde::de::DeserializeOwned;
 use serde::Deserialize;
+use std::cell::RefCell;
 use std::collections::BTreeMap;
 use std::path::PathBuf;
 use std::time::Duration;
@@ -45,6 +46,13 @@ pub(crate) trait GitHubClient {
         repository: &RepositoryRef,
         default_branch: &str,
     ) -> Result<ConventionalRepositoryFiles>;
+
+    /// Cumulative network requests/bytes observed while servicing this
+    /// client's fetch methods. Default is zero for fakes/stubs used in
+    /// tests; `HttpGitHubClient` overrides this with real counters.
+    fn network_usage(&self) -> NetworkUsage {
+        NetworkUsage::default()
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -104,6 +112,10 @@ pub(crate) struct HttpGitHubClient {
     client: Client,
     api_base_url: Url,
     raw_base_url: Url,
+    /// GitHubClient methods take `&self` (the trait is shared across many
+    /// call sites in pipeline.rs), so request/byte counters use interior
+    /// mutability rather than a `&mut self` receiver.
+    network: RefCell<NetworkUsage>,
 }
 
 impl HttpGitHubClient {
@@ -138,6 +150,7 @@ impl HttpGitHubClient {
                 .context("failed to parse GitHub API base URL")?,
             raw_base_url: Url::parse("https://raw.githubusercontent.com/")
                 .context("failed to parse GitHub raw base URL")?,
+            network: RefCell::new(NetworkUsage::default()),
         })
     }
 
@@ -331,6 +344,15 @@ impl HttpGitHubClient {
                 .send()
                 .with_context(|| format!("failed to GET {}", url.as_str()))?;
 
+            // Count every attempt (including rate-limited retries) as real
+            // network traffic. `content_length()` reads the header only, so
+            // this never consumes the body the caller still needs to read.
+            {
+                let mut usage = self.network.borrow_mut();
+                usage.requests += 1;
+                usage.bytes += response.content_length().unwrap_or(0);
+            }
+
             let status = response.status();
             if status.is_success() || status == StatusCode::NOT_FOUND {
                 return Ok(response);
@@ -494,6 +516,10 @@ impl GitHubClient for HttpGitHubClient {
             )?)?,
             extra_files,
         })
+    }
+
+    fn network_usage(&self) -> NetworkUsage {
+        self.network.borrow().clone()
     }
 }
 
