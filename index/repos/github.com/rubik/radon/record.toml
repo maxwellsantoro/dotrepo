@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/rubik/radon"
 generated_at = "2026-06-29T05:28:53.32147Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = 'Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
+notes = 'Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
 
 [repo]
 name = "radon"

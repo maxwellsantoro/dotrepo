@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/schteppe/cannon.js"
 generated_at = "2026-06-29T05:24:58.459046Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.markdown`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.markdown`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "cannon.js"

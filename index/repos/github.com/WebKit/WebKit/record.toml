@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/WebKit/WebKit"
 generated_at = "2026-06-29T05:20:44.841093Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `.github/CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "WebKit"

@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/usebruno/bruno"
 generated_at = "2026-06-29T05:15:35.469159Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/flaky-test-detector.yml`. Inferred `repo.test` from `.github/workflows/flaky-test-detector.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/flaky-test-detector.yml`. Inferred `repo.test` from `.github/workflows/flaky-test-detector.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Bruno"

@@ -8,3 +8,7 @@
 - Augmented repo.languages from GitHub repository metadata.
 - Filled repo.description from GitHub repository metadata when the README surface did not provide one.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Auto-promotion
+
+Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.

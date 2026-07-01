@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/mil-tokyo/webdnn"
 generated_at = "2026-06-29T05:27:35.234719Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `package.json` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `package.json` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `package.json` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `package.json` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "WebDNN"

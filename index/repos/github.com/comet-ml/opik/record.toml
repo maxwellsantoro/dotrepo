@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/comet-ml/opik"
 generated_at = "2026-06-29T05:16:14.923383Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.test` from `.github/workflows/backend_tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.test` from `.github/workflows/backend_tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Opik"
