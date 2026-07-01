@@ -404,12 +404,26 @@ describe the destination; this section decides what runs now.
    abstention (`value: null`, `confidence: high`), which by the escalation
    ladder's own design does not warrant a second opinion — only a
    *low*-confidence primary response should. This is itself valid evidence
-   (correct abstention on a tied case, not a gap), but it means the
-   second-opinion and strong-remote-escalation tiers remain unexercised by
-   a live model call; both are documented as a rare tail (the exit criteria
-   below cap strong-remote escalation at 5% of processed repositories), and
-   forcing a genuinely low-confidence primary response for a live proof
-   remains open, lower-priority work.
+   (correct abstention on a tied case, not a gap). Investigating it further
+   found a real design gap, since fixed
+   (`crates/dotrepo-core/src/import/escalation.rs`): an `Absent` outcome
+   (model explicitly declines to answer) was treated as final regardless of
+   confidence, unlike a `Rejected` outcome (wrong-value guess), which
+   already escalated when low-confidence. A genuinely uncertain "I don't
+   know" now also continues up the tier ladder; a confident one still
+   terminates immediately, preserving correct abstention. The tier-4 model
+   was also upgraded from a marginally larger same-family model
+   (`google/gemma-4-31b-it`) to `z-ai/glm-5.2`, a qualitatively stronger
+   model, per operator request. Re-testing the known-hard repositories
+   (`astral-sh/ruff`, `oven-sh/bun`, `django/django`, and others) with both
+   changes active confirmed their abstentions are still confident and
+   correct even under a stronger model — these are genuinely polyglot
+   repositories with no single honest answer, not cases the escalation
+   ladder was failing to reach. Both fixes remain necessary infrastructure
+   for the next genuinely low-confidence case; the second-opinion and
+   strong-remote-escalation tiers are proven wired but still await a live
+   call from a *genuinely uncertain* (not merely ambiguous) primary
+   response, which remains open, lower-priority work.
 3. Add versioned unit-cost reports for unchanged, changed, and usefully improved
    records — network, CPU, memory, wall time, model calls, tokens, and provider
    cost — with cache hits and avoided work as first-class outcomes. Wall time,
@@ -480,17 +494,29 @@ describe the destination; this section decides what runs now.
    A full-population re-crawl (602/613 records) applying the corrected
    ordering shifted language-family counts substantially (Other 105→197,
    Python 171→111, Go 85→70, Rust 74→51), confirming a large fraction of
-   the index was misclassified before. 10 repositories were excluded after
-   the downgrade guard correctly identified a genuine (not stale-config)
-   build/test regression that a live model call still couldn't resolve —
-   degrading already-correct, high-value records for a cosmetic ordering
-   fix was the wrong trade, so those 10 remain untouched at their prior
-   state and are a documented candidate list for a future, more careful
-   pass (`astral-sh/ruff`, `astral-sh/uv`, `LizardByte/Sunshine`,
-   `django/django`, `infiniflow/ragflow`, `maxwellsantoro/ries-rs`,
-   `open-webui/open-webui`, `oven-sh/bun`, `react/react-native`,
-   `vercel/next.js`). Continuing to run the sampler repeatedly and convert
-   further findings remains open work.
+   the index was misclassified before. 10 repositories initially regressed
+   because the downgrade guard correctly identified a genuine (not
+   stale-config) build/test conflict that no model tier could honestly
+   resolve to a single command — the repositories are genuinely polyglot
+   (e.g. a Rust and a Python component in the same repo). Investigating why
+   even a second-opinion/strong-remote pass couldn't help these surfaced a
+   third real gap, now also fixed: the escalation ladder treated *any*
+   confidence level of "no answer" as final, so a genuinely low-confidence
+   punt from the cheap tier could never get a second opinion (only a
+   low-confidence *wrong guess* escalated); and the tier-4 model was
+   upgraded from a marginally larger same-family model to `z-ai/glm-5.2`, a
+   qualitatively stronger one. Neither change flips these 10 repositories'
+   outcome specifically — their abstentions are confident and correct, not
+   low-confidence — but a fourth, structural finding did: **~4% of the
+   index (23/613 records) shows this exact genuine multi-ecosystem-tie
+   pattern**, not a rare edge case, so `repo.build_candidates` /
+   `repo.test_candidates` (RFC 0020) were added to preserve the concrete
+   candidate commands with inferred ecosystem labels whenever `build`/`test`
+   is left honestly unset for this reason, instead of discarding them. All
+   10 repositories were re-crawled to backfill this: same status change as
+   before (`verified`→`imported`/`inferred`), but now with real, structured
+   data instead of nothing. Continuing to run the sampler repeatedly and
+   convert further findings remains open work.
 8. Preserve the gated profile floors (valid profiles, high-signal ratio, zero
    malformed) and the current factual-accuracy floors during hardening; the
    release-gate baseline owns the pinned thresholds.
@@ -576,9 +602,13 @@ implemented. The retained multi-run proof gate now passes in strict mode
 above) and versioned unit-cost reports are in place for wall time, network,
 tokens, and model calls (CPU/memory remain a documented gap). A first bounded
 adjudication canary exercised and proved the primary-tier (cheap-model)
-escalation path with a real live model call (see the active execution order
-above); the second-opinion and strong-remote-escalation tiers remain
-unexercised by a live model call, so the milestone is not yet complete.
+escalation path with a real live model call, and the escalation ladder now
+correctly forwards genuinely low-confidence abstentions (not just
+low-confidence wrong guesses) to the second-opinion and strong-remote tiers,
+which are now backed by `qwen/qwen3.5-9b` and `z-ai/glm-5.2` respectively
+(see the active execution order above); those two tiers are proven wired but
+still await a live call from a genuinely uncertain (not merely ambiguous)
+primary response, so the milestone is not yet complete.
 
 Deliver:
 
