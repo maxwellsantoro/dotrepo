@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spring-projects/spring-framework"
-generated_at = "2026-06-29T01:08:23.209777Z"
+generated_at = "2026-07-01T04:33:38.066142Z"
 
 [record.trust]
 confidence = "high"
@@ -50,14 +50,11 @@ security_contact = "https://github.com/spring-projects/security-advisories/secur
 [docs]
 root = "https://docs.spring.io/spring-framework/docs/current/javadoc-api/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/spring-projects/spring-framework.git"
 default_branch = "main"
 fork = false
-head_sha = "ce718cf699dde1b35c425f81548a1679566aa63b"
+head_sha = "c5d7908a7876855c9385dcbb3ae24a3f67c42e01"
 html_url = "https://github.com/spring-projects/spring-framework"
-stars = 60070
+stars = 60080

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/grafana/loki"
-generated_at = "2026-06-29T00:55:11.78616Z"
+generated_at = "2026-07-01T04:33:16.301219Z"
 
 [record.trust]
 confidence = "high"
@@ -61,16 +61,29 @@ maintainers = [
 team = "@grafana/loki-team"
 
 [docs]
+root = "https://grafana.com/oss/loki"
 getting_started = "https://grafana.com/docs/loki/latest/installation/"
 
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/grafana/alloy"
+notes = "Cross-link from README: Alloy"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/grafana/loki.git"
 default_branch = "main"
 fork = false
-head_sha = "667368f43bcda78b454b2e24791b3d2ab8edf1a4"
+head_sha = "976379a2d99962e1f55c35e4332b4b4de17ad35e"
 html_url = "https://github.com/grafana/loki"
-stars = 28461
+stars = 28473

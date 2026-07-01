@@ -2,6 +2,7 @@
 
 - Imported repository name and description from README.md.
 - Imported the security reporting channel from SECURITY.md.
+- Discovered related relation to github.com/deanmalmgren/textract from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

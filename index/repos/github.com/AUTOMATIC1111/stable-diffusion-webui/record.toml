@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AUTOMATIC1111/stable-diffusion-webui"
-generated_at = "2026-06-29T00:54:34.458005Z"
+generated_at = "2026-07-01T04:33:02.702885Z"
 
 [record.trust]
 confidence = "high"
@@ -54,9 +54,6 @@ maintainers = ["@AUTOMATIC1111"]
 [docs]
 getting_started = "https://github.com/openvinotoolkit/stable-diffusion-webui/wiki/Installation-on-Intel-Silicon"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/AUTOMATIC1111/stable-diffusion-webui.git"
@@ -64,4 +61,4 @@ default_branch = "master"
 fork = false
 head_sha = "82a973c04367123ae98bd9abdf80d9eda9b910e2"
 html_url = "https://github.com/AUTOMATIC1111/stable-diffusion-webui"
-stars = 163915
+stars = 163873

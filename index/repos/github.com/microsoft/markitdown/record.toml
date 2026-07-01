@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/markitdown"
-generated_at = "2026-06-29T01:08:16.926014Z"
+generated_at = "2026-07-01T04:33:29.517417Z"
 
 [record.trust]
 confidence = "high"
@@ -41,6 +41,18 @@ security_contact = "secure@microsoft.com"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/deanmalmgren/textract"
+notes = "Cross-link from README: textract"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/microsoft/markitdown.git"
@@ -48,4 +60,4 @@ default_branch = "main"
 fork = false
 head_sha = "e144e0a2be95b34df17433bac904e635f2c5e551"
 html_url = "https://github.com/microsoft/markitdown"
-stars = 160631
+stars = 161828

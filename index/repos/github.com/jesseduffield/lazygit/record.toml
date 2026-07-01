@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jesseduffield/lazygit"
-generated_at = "2026-06-29T00:54:36.593188Z"
+generated_at = "2026-07-01T04:33:05.839622Z"
 
 [record.trust]
 confidence = "high"
@@ -36,14 +36,11 @@ topics = [
     "terminal",
 ]
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/jesseduffield/lazygit.git"
 default_branch = "master"
 fork = false
-head_sha = "b31e572547ccfae212c0d17e100ebce8c5e1513c"
+head_sha = "760e9e587b30b0e7b507457fb533c54d36d76443"
 html_url = "https://github.com/jesseduffield/lazygit"
-stars = 79767
+stars = 79878

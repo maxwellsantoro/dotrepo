@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/typst/typst"
-generated_at = "2026-06-29T01:08:11.75774Z"
+generated_at = "2026-07-01T04:33:22.280582Z"
 
 [record.trust]
 confidence = "high"
@@ -37,14 +37,14 @@ topics = [
     "typst",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://typst.app"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/typst/typst.git"
 default_branch = "main"
 fork = false
-head_sha = "c98e910391a8544b28bd5c99a6f3b1ac1ada9a84"
+head_sha = "7c76edca62ee16ca4c6dd4f5498fe57793f28517"
 html_url = "https://github.com/typst/typst"
-stars = 54592
+stars = 54644

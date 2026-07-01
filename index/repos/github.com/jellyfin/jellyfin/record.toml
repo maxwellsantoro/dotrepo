@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jellyfin/jellyfin"
-generated_at = "2026-06-29T00:54:42.905732Z"
+generated_at = "2026-07-01T04:33:12.293364Z"
 
 [record.trust]
 confidence = "high"
@@ -47,11 +47,23 @@ getting_started = "https://jellyfin.org/docs/general/installation/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/jellyfin/jellyfin-ffmpeg"
+notes = "Cross-link from README: ffmpeg"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/jellyfin/jellyfin.git"
 default_branch = "master"
 fork = false
-head_sha = "feef2403c49003761010656cfadaba55a278acd7"
+head_sha = "a43fd188dc0d2a3cfdd4ae3b71b537780dcb3fc9"
 html_url = "https://github.com/jellyfin/jellyfin"
-stars = 53785
+stars = 53849

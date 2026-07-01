@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/netdata/netdata"
-generated_at = "2026-06-29T01:08:20.196193Z"
+generated_at = "2026-07-01T04:33:33.238704Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/coverity.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/coverity.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Netdata"
@@ -77,18 +77,19 @@ maintainers = [
     "@Ancairon",
     "@kanelatechnical",
     "@novykh",
+    "@ktsaou",
     "@netdatabot",
 ]
 team = "@netdata/agent-sre"
 
-[relations]
-references = []
+[docs]
+root = "https://www.netdata.cloud"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/netdata/netdata.git"
 default_branch = "master"
 fork = false
-head_sha = "d592e310b38a72223dba272d47929dec00d3d47d"
+head_sha = "60d9dfc91d7642e1ba78674c7718c2274a442d7c"
 html_url = "https://github.com/netdata/netdata"
-stars = 79437
+stars = 79442

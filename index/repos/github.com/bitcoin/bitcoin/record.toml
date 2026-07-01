@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/bitcoin/bitcoin"
-generated_at = "2026-06-29T00:54:40.45235Z"
+generated_at = "2026-07-01T04:33:08.684723Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.build` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.build` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Bitcoin Core integration/staging tree"
@@ -52,14 +52,29 @@ topics = [
 maintainers = []
 security_contact = "security@bitcoincore.org"
 
+[docs]
+root = "https://bitcoincore.org/en/download"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/bitcoin/bitcoin"
+notes = "Cross-link from README: Tags"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/bitcoin/bitcoin.git"
 default_branch = "master"
 fork = false
-head_sha = "2a9e35d293b308e81811fa93ad2e5e8ed20e66e0"
+head_sha = "dc282ff31d1cc97507530a541d9cec8a8f6a6ef4"
 html_url = "https://github.com/bitcoin/bitcoin"
-stars = 89579
+stars = 89514
