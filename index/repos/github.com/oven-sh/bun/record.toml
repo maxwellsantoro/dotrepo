@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/oven-sh/bun"
-generated_at = "2026-06-29T02:18:21.29126Z"
+generated_at = "2026-07-01T20:44:50.342587Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Bun"
@@ -21,30 +18,29 @@ homepage = "https://bun.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "C",
-    "C++",
-    "CSS",
-    "Dockerfile",
-    "HCL",
-    "HTML",
-    "JavaScript",
-    "Linker Script",
-    "MDX",
-    "Makefile",
-    "Nix",
-    "Objective-C",
-    "Perl",
-    "PowerShell",
-    "Python",
-    "RenderScript",
-    "Ruby",
     "Rust",
-    "Shell",
-    "Svelte",
+    "C++",
     "TypeScript",
+    "C",
+    "JavaScript",
+    "Shell",
+    "Python",
+    "PowerShell",
+    "Objective-C",
+    "CSS",
+    "HTML",
+    "Perl",
+    "Dockerfile",
+    "Ruby",
+    "HCL",
+    "Linker Script",
+    "Nix",
+    "Svelte",
+    "Makefile",
+    "MDX",
+    "RenderScript",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+test = "bun install --cwd test"
 topics = [
     "bun",
     "bundler",
@@ -56,9 +52,19 @@ topics = [
     "react",
     "transpiler",
     "typescript",
-    "zig",
-    "ziglang",
+    "rust",
+    "rust-lang",
 ]
+
+[[repo.build_candidates]]
+command = "cargo build --workspace"
+ecosystem = "Rust"
+source = "Cargo.toml"
+
+[[repo.build_candidates]]
+command = "npm run build"
+ecosystem = "Node.js"
+source = "package.json"
 
 [owners]
 maintainers = [
@@ -71,14 +77,11 @@ security_contact = "security@bun.com"
 root = "https://bun.com/docs"
 getting_started = "https://bun.com/docs/installation#cpu-requirements-and-baseline-builds"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/oven-sh/bun.git"
 default_branch = "main"
 fork = false
-head_sha = "f789198279bedb351817b17ee19c4310417334ca"
+head_sha = "b124ed33684bbc3f0053ca30947663c0be926499"
 html_url = "https://github.com/oven-sh/bun"
-stars = 93506
+stars = 93476

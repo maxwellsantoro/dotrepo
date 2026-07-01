@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/maxwellsantoro/ries-rs"
-generated_at = "2026-06-29T02:18:13.621263Z"
+generated_at = "2026-07-01T20:44:28.295524Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "ries-rs"
@@ -21,15 +18,14 @@ homepage = "https://maxwellsantoro.com/projects/ries-rs/app/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "HTML",
-    "JavaScript",
-    "Python",
     "Rust",
+    "HTML",
+    "Python",
     "Shell",
     "TypeScript",
+    "JavaScript",
 ]
-build = "cargo build"
-test = "cargo test"
+build = "cargo build --features wasm --locked"
 topics = [
     "equation-solver",
     "mathematics",
@@ -42,6 +38,16 @@ topics = [
     "inverse-symbolic-calculator",
 ]
 
+[[repo.test_candidates]]
+command = "cargo test"
+ecosystem = "Rust"
+source = "Cargo.toml"
+
+[[repo.test_candidates]]
+command = "npm test"
+ecosystem = "Node.js"
+source = "package.json"
+
 [owners]
 maintainers = ["@maxwellsantoro"]
 security_contact = "https://github.com/maxwellsantoro/ries-rs/security/advisories/new"
@@ -51,6 +57,30 @@ root = "https://maxwellsantoro.com/projects/ries-rs/app/"
 
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/maxwellsantoro/ries-rs"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/clsn/ries"
+notes = "Cross-link from README: clsn/ries` fork"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false

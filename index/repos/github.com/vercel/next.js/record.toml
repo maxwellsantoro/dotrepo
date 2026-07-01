@@ -2,18 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/vercel/next.js"
-generated_at = "2026-06-29T02:18:43.293822Z"
+generated_at = "2026-07-01T20:45:19.817219Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "inferred",
-    "verified",
-]
-notes = "Bootstrapped from `Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "next.js"
@@ -22,23 +18,22 @@ homepage = "https://nextjs.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
+    "JavaScript",
+    "TypeScript",
+    "Rust",
+    "MDX",
     "CSS",
+    "Shell",
+    "Python",
+    "SCSS",
     "Dockerfile",
     "HTML",
-    "JavaScript",
-    "MDX",
-    "Pug",
-    "Python",
-    "Rust",
-    "SCSS",
-    "Sass",
-    "Shell",
-    "TypeScript",
+    "Batchfile",
     "WebAssembly",
+    "Sass",
+    "Pug",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "pnpm run build"
 topics = [
     "react",
     "server-rendering",
@@ -56,17 +51,24 @@ topics = [
     "compiler",
 ]
 
+[[repo.test_candidates]]
+command = "cargo test --workspace"
+ecosystem = "Rust"
+source = "Cargo.toml"
+
+[[repo.test_candidates]]
+command = "pnpm test"
+ecosystem = "Node.js"
+source = "package.json"
+
 [docs]
 root = "https://nextjs.org"
-
-[relations]
-references = []
 
 [x.github]
 archived = false
 clone_url = "https://github.com/vercel/next.js.git"
 default_branch = "canary"
 fork = false
-head_sha = "a88f25caf0070b582a8ed83b1ae9e7135d7fd3bc"
+head_sha = "02a73c59bbef2b56380fd5e600e64a3f0d4506f9"
 html_url = "https://github.com/vercel/next.js"
-stars = 140408
+stars = 140205

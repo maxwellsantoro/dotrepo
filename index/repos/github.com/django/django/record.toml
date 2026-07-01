@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/django/django"
-generated_at = "2026-06-29T02:17:50.949412Z"
+generated_at = "2026-07-01T20:44:08.020634Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Left `repo.test` unset because `package.json` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "django"
@@ -22,16 +21,15 @@ homepage = "https://www.djangoproject.com/"
 license = "BSD-3-Clause"
 visibility = "public"
 languages = [
-    "CSS",
-    "JavaScript",
-    "Jinja",
-    "Procfile",
     "Python",
+    "Jinja",
+    "JavaScript",
+    "CSS",
     "Shell",
     "Smarty",
+    "Procfile",
 ]
 build = "python -m build"
-test = "python -m pytest"
 topics = [
     "python",
     "django",
@@ -44,6 +42,16 @@ topics = [
     "apps",
 ]
 
+[[repo.test_candidates]]
+command = "npm test"
+ecosystem = "Node.js"
+source = "package.json"
+
+[[repo.test_candidates]]
+command = "python -m pytest"
+ecosystem = "Python"
+source = "pyproject.toml"
+
 [owners]
 maintainers = []
 security_contact = "https://www.djangoproject.com/security/"
@@ -51,14 +59,11 @@ security_contact = "https://www.djangoproject.com/security/"
 [docs]
 root = "https://www.djangoproject.com/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/django/django.git"
 default_branch = "main"
 fork = false
-head_sha = "e78991410b78391bc07a4b5010b273dfec814ff6"
+head_sha = "54495840a6a8b09ec40c793495e6541a3c0d3d5b"
 html_url = "https://github.com/django/django"
-stars = 88131
+stars = 87922

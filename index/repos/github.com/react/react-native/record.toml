@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/react/react-native"
-generated_at = "2026-07-01T04:30:55.10564Z"
+generated_at = "2026-07-01T20:45:02.806905Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `package.json` and `build.gradle.kts` suggested conflicting build commands. Left `repo.test` unset because `package.json` and `build.gradle.kts` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "React Native"
@@ -21,25 +18,23 @@ homepage = "https://reactnative.dev"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Assembly",
-    "C",
     "C++",
-    "CMake",
-    "HTML",
-    "Java",
-    "JavaScript",
     "Kotlin",
-    "Objective-C",
+    "JavaScript",
     "Objective-C++",
-    "Python",
+    "Objective-C",
     "Ruby",
-    "Shell",
-    "Smarty",
-    "Swift",
+    "Java",
+    "Python",
+    "CMake",
     "TypeScript",
+    "C",
+    "Shell",
+    "Swift",
+    "Assembly",
+    "HTML",
+    "Smarty",
 ]
-build = "yarn build"
-test = "yarn test"
 topics = [
     "android",
     "app-framework",
@@ -51,6 +46,26 @@ topics = [
     "react",
 ]
 
+[[repo.build_candidates]]
+command = "yarn build"
+ecosystem = "Node.js"
+source = "package.json"
+
+[[repo.build_candidates]]
+command = "./gradlew build"
+ecosystem = "Java/Kotlin (Gradle)"
+source = "build.gradle.kts"
+
+[[repo.test_candidates]]
+command = "yarn test"
+ecosystem = "Node.js"
+source = "package.json"
+
+[[repo.test_candidates]]
+command = "./gradlew test"
+ecosystem = "Java/Kotlin (Gradle)"
+source = "build.gradle.kts"
+
 [docs]
 root = "https://reactnative.dev"
 getting_started = "https://reactnative.dev/docs/getting-started"
@@ -60,6 +75,6 @@ archived = false
 clone_url = "https://github.com/react/react-native.git"
 default_branch = "main"
 fork = false
-head_sha = "fd10410d512423933ff12f4264e975226aa4b351"
+head_sha = "923e7ddcaf4d2de45ca7dedafbb84c6b87dbffc4"
 html_url = "https://github.com/react/react-native"
-stars = 126124
+stars = 126133

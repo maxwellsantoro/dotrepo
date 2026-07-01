@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/astral-sh/ruff"
-generated_at = "2026-06-29T02:17:45.253768Z"
+generated_at = "2026-07-01T20:43:21.258259Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Ruff"
@@ -21,18 +18,17 @@ homepage = "https://docs.astral.sh/ruff"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Python",
-    "RenderScript",
     "Rust",
-    "Shell",
+    "Python",
     "TypeScript",
+    "Shell",
+    "CSS",
+    "HTML",
+    "Dockerfile",
+    "JavaScript",
+    "RenderScript",
 ]
 build = "cargo build --workspace"
-test = "cargo test --workspace"
 topics = [
     "linter",
     "pep8",
@@ -46,6 +42,16 @@ topics = [
     "styleguide",
     "ruff",
 ]
+
+[[repo.test_candidates]]
+command = "cargo test --workspace"
+ecosystem = "Rust"
+source = "Cargo.toml"
+
+[[repo.test_candidates]]
+command = "python -m pytest"
+ecosystem = "Python"
+source = "pyproject.toml"
 
 [owners]
 maintainers = [
@@ -72,11 +78,23 @@ root = "https://docs.astral.sh/ruff/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/astral-sh/ruff"
+notes = "Cross-link from README: ![Actions status"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/astral-sh/ruff.git"
 default_branch = "main"
 fork = false
-head_sha = "d78b3d5f3206d187095a6138538ca91ea2de1d36"
+head_sha = "e6856de97d72225196444b7d969b8fe084140503"
 html_url = "https://github.com/astral-sh/ruff"
-stars = 48283
+stars = 48348
