@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ReactiveCocoa/ReactiveCocoa"
-generated_at = "2026-07-01T15:25:08.903725Z"
+generated_at = "2026-07-01T17:20:42.041694Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://github.com/ReactiveCocoa/ReactiveCocoa"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Objective-C",
-    "Ruby",
-    "Shell",
     "Swift",
+    "Shell",
+    "Ruby",
+    "Objective-C",
 ]
 topics = [
     "reactiveswift",

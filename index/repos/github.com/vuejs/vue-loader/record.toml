@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vuejs/vue-loader"
-generated_at = "2026-06-29T05:26:40.1545Z"
+generated_at = "2026-07-01T18:36:05.98928Z"
 
 [record.trust]
 confidence = "high"
@@ -22,10 +22,10 @@ homepage = "https://github.com/vuejs/vue-loader"
 license = "MIT"
 visibility = "public"
 languages = [
-    "HTML",
-    "JavaScript",
     "TypeScript",
+    "JavaScript",
     "Vue",
+    "HTML",
 ]
 build = "pnpm build"
 test = "pnpm test"

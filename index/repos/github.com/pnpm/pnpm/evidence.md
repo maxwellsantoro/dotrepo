@@ -3,9 +3,11 @@
 - Imported repository name, description, and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Imported repo.build from Cargo.toml as `cargo build --workspace`.
+- Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands.
 - Imported repo.test from Cargo.toml as `cargo test --workspace`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.build` to `cargo build --workspace` from `Cargo.toml` after model escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

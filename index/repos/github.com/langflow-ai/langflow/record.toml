@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/langflow-ai/langflow"
-generated_at = "2026-06-29T01:16:27.198801Z"
+generated_at = "2026-07-01T18:12:24.962293Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "http://www.langflow.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Makefile",
-    "Mako",
-    "PowerShell",
     "Python",
-    "Shell",
     "TypeScript",
+    "JavaScript",
+    "CSS",
+    "Makefile",
+    "Shell",
+    "Dockerfile",
+    "PowerShell",
+    "Batchfile",
+    "HTML",
+    "Mako",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -49,16 +49,14 @@ maintainers = []
 security_contact = "https://hackerone.com/ibm"
 
 [docs]
+root = "http://www.langflow.org"
 getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
-
-[relations]
-references = []
 
 [x.github]
 archived = false
 clone_url = "https://github.com/langflow-ai/langflow.git"
 default_branch = "main"
 fork = false
-head_sha = "a277209fe4e2e109141af41d3c07d5d91693f07f"
+head_sha = "2a4f6bf5c9d8a889ecf049ca9e65983b191a68a5"
 html_url = "https://github.com/langflow-ai/langflow"
-stars = 150166
+stars = 150323

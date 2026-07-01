@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fastapi/typer"
-generated_at = "2026-06-29T05:17:31.922975Z"
+generated_at = "2026-07-01T18:01:57.97478Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://typer.tiangolo.com/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Python",
     "Shell",
+    "Dockerfile",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -48,4 +48,4 @@ default_branch = "master"
 fork = false
 head_sha = "b210c0e2376d99344f79f11fab3ad34cf890cc20"
 html_url = "https://github.com/fastapi/typer"
-stars = 19662
+stars = 19669

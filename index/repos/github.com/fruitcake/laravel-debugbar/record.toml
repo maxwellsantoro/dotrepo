@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fruitcake/laravel-debugbar"
-generated_at = "2026-07-01T15:19:55.461875Z"
+generated_at = "2026-07-01T18:03:21.357178Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "http://laraveldebugbar.com/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Blade",
-    "CSS",
-    "JavaScript",
     "PHP",
+    "JavaScript",
+    "CSS",
+    "Blade",
 ]
 build = "npm run build"
 test = "composer run-script test"

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/coder/code-server"
-generated_at = "2026-07-01T14:40:42.805038Z"
+generated_at = "2026-07-01T17:50:56.406703Z"
 
 [record.trust]
 confidence = "high"
@@ -22,15 +22,15 @@ homepage = "https://coder.com"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "HCL",
+    "TypeScript",
+    "Shell",
     "HTML",
+    "CSS",
+    "HCL",
     "JavaScript",
     "Mustache",
+    "Dockerfile",
     "Nix",
-    "Shell",
-    "TypeScript",
 ]
 build = "npm run build"
 test = "npm test"
@@ -79,4 +79,4 @@ default_branch = "main"
 fork = false
 head_sha = "dd48f7753b3b57f5f85c5c8ab8a09d4c2bec9dc9"
 html_url = "https://github.com/coder/code-server"
-stars = 78152
+stars = 78150

@@ -5,7 +5,7 @@
 - Left `repo.test` unset because `.github/workflows/client-tests.yml`, `.github/workflows/crate_ci.yml`, and `.github/workflows/extension_upgrade.yml` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.test` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
+- Set `repo.test` to `uv run pytest test.py -v` from `.github/workflows/client-tests.yml` after model escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

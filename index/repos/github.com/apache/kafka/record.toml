@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/apache/kafka"
-generated_at = "2026-06-29T02:20:35.26029Z"
+generated_at = "2026-07-01T17:24:40.045215Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Inferred `repo.build` from `.github/workflows/build.yml`. Inferred `repo.test` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Build a JAR and run it"
@@ -22,17 +21,17 @@ homepage = "https://kafka.apache.org/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Java",
+    "Scala",
+    "Python",
+    "Shell",
     "Batchfile",
     "Dockerfile",
-    "HTML",
-    "Java",
-    "Python",
-    "Scala",
-    "Shell",
     "XSLT",
+    "HTML",
 ]
-build = "./gradlew --build-cache --info $SCAN_ARG check releaseTarGz -x test"
-test = "./gradlew --build-cache --info $SCAN_ARG check releaseTarGz -x test"
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "scala",
     "kafka",
@@ -50,11 +49,23 @@ root = "https://kafka.apache.org/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/apache/kafka"
+notes = "Cross-link from README: ![CI"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/apache/kafka.git"
 default_branch = "trunk"
 fork = false
-head_sha = "91958dfa2860c52936a096bc61f13504f57cf08a"
+head_sha = "be4d31c869ab56d8473d78b6512773cfb78b798b"
 html_url = "https://github.com/apache/kafka"
-stars = 33011
+stars = 33055

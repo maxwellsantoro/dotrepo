@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hustcc/echarts-for-react"
-generated_at = "2026-06-29T05:23:50.244308Z"
+generated_at = "2026-07-01T18:07:27.786361Z"
 
 [record.trust]
 confidence = "high"
@@ -21,8 +21,8 @@ homepage = "https://git.hust.cc/echarts-for-react"
 license = "MIT"
 visibility = "public"
 languages = [
-    "JavaScript",
     "TypeScript",
+    "JavaScript",
 ]
 build = "npm run build"
 test = "npm test"

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jellyfin/jellyfin"
-generated_at = "2026-07-01T15:14:33.087399Z"
+generated_at = "2026-07-01T18:09:33.337914Z"
 
 [record.trust]
 confidence = "high"
@@ -22,9 +22,9 @@ license = "GPL-2.0"
 visibility = "public"
 languages = [
     "C#",
-    "CSS",
     "HTML",
     "Shell",
+    "CSS",
 ]
 topics = [
     "jellyfin",
@@ -66,4 +66,4 @@ default_branch = "master"
 fork = false
 head_sha = "a43fd188dc0d2a3cfdd4ae3b71b537780dcb3fc9"
 html_url = "https://github.com/jellyfin/jellyfin"
-stars = 53866
+stars = 53870

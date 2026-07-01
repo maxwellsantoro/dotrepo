@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/TypeScript"
-generated_at = "2026-06-26T17:45:33.03327Z"
+generated_at = "2026-07-01T18:15:00.725976Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://www.typescriptlang.org"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "TypeScript",
     "JavaScript",
     "Shell",
-    "TypeScript",
 ]
 build = "npm run build"
 test = "npm test"
@@ -38,8 +38,35 @@ topics = [
 maintainers = []
 security_contact = "https://msrc.microsoft.com/create-report"
 
+[docs]
+root = "https://www.typescriptlang.org"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/microsoft/TypeScript"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/microsoft/TypeScript-go"
+notes = "Cross-link from README: typescript-go"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
@@ -48,4 +75,4 @@ default_branch = "main"
 fork = false
 head_sha = "637d5746b70257028fb95aad32ddec6b26ab0a14"
 html_url = "https://github.com/microsoft/TypeScript"
-stars = 109402
+stars = 109377

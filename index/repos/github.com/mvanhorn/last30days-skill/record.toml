@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mvanhorn/last30days-skill"
-generated_at = "2026-07-01T15:29:49.793589Z"
+generated_at = "2026-07-01T18:17:24.747008Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://github.com/mvanhorn/last30days-skill"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Go",
-    "HTML",
     "Python",
+    "Go",
     "Shell",
+    "HTML",
 ]
 test = "python -m pytest"
 topics = [
@@ -57,4 +57,4 @@ default_branch = "main"
 fork = false
 head_sha = "a9d2674147b8e6d4eba45f71bf9e05af6262fa21"
 html_url = "https://github.com/mvanhorn/last30days-skill"
-stars = 48118
+stars = 48160

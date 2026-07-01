@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mermaid-js/mermaid"
-generated_at = "2026-07-01T14:20:48.324316Z"
+generated_at = "2026-07-01T18:14:41.655619Z"
 
 [record.trust]
 confidence = "high"
@@ -21,16 +21,16 @@ homepage = "https://mermaid.ai/open-source/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Langium",
-    "Mermaid",
-    "Shell",
     "TypeScript",
-    "Vue",
+    "JavaScript",
+    "Mermaid",
+    "HTML",
     "Yacc",
+    "Langium",
+    "Vue",
+    "CSS",
+    "Shell",
+    "Dockerfile",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -81,6 +81,6 @@ archived = false
 clone_url = "https://github.com/mermaid-js/mermaid.git"
 default_branch = "develop"
 fork = false
-head_sha = "594429b3140a72c3960d75d471f14c23e6dfbd1f"
+head_sha = "0d1ee0a84578980ec6332823f46bda316f389105"
 html_url = "https://github.com/mermaid-js/mermaid"
-stars = 88962
+stars = 88963

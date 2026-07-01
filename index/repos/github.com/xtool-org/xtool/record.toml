@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/xtool-org/xtool"
-generated_at = "2026-07-01T15:30:07.039751Z"
+generated_at = "2026-07-01T18:37:44.808161Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://xtool.sh"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
-    "Dockerfile",
-    "JavaScript",
-    "Makefile",
-    "Ruby",
-    "Shell",
     "Swift",
+    "Makefile",
+    "C",
+    "Shell",
+    "JavaScript",
+    "Dockerfile",
+    "Ruby",
 ]
 build = "make build"
 topics = [

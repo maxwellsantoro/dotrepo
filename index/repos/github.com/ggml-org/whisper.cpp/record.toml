@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ggml-org/whisper.cpp"
-generated_at = "2026-06-29T02:17:55.428112Z"
+generated_at = "2026-07-01T18:03:42.893711Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/build-android.yml`. Inferred `repo.test` from `.github/workflows/build-android.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `.github/workflows/build-android.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "whisper.cpp"
@@ -22,27 +22,27 @@ homepage = "https://github.com/ggml-org/whisper.cpp"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "C++",
-    "CMake",
+    "C",
     "Cuda",
-    "Dockerfile",
-    "GLSL",
-    "Go",
-    "Go Template",
-    "Java",
-    "JavaScript",
-    "Makefile",
     "Metal",
-    "Objective-C",
-    "Objective-C++",
-    "Python",
-    "Ruby",
-    "Shell",
+    "GLSL",
     "WGSL",
+    "CMake",
+    "Go Template",
+    "Shell",
+    "Python",
+    "Objective-C",
+    "Ruby",
+    "Go",
+    "Java",
+    "Makefile",
+    "Dockerfile",
+    "Batchfile",
+    "Objective-C++",
+    "JavaScript",
 ]
-build = "./gradlew assembleRelease --no-daemon"
+build = "make build"
 test = "./gradlew assembleRelease --no-daemon"
 topics = [
     "openai",
@@ -59,11 +59,23 @@ getting_started = "https://wiki.libsdl.org/SDL2/Installation"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/ggml-org/whisper.cpp"
+notes = "Cross-link from README: ![Actions Status"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/ggml-org/whisper.cpp.git"
 default_branch = "master"
 fork = false
-head_sha = "0ae02cdb2c7317b50991367c165736ce42ed96ac"
+head_sha = "6fc7c33b4c3a2cec83e4b65abd5e96a890480375"
 html_url = "https://github.com/ggml-org/whisper.cpp"
-stars = 51118
+stars = 51194

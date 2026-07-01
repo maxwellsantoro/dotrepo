@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/docker/cli"
-generated_at = "2026-07-01T15:13:17.378333Z"
+generated_at = "2026-07-01T17:52:38.828313Z"
 
 [record.trust]
 confidence = "high"
@@ -22,11 +22,11 @@ homepage = "https://github.com/docker/cli"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Go",
-    "HCL",
-    "Makefile",
     "Shell",
+    "Dockerfile",
+    "Makefile",
+    "HCL",
 ]
 build = "make build"
 test = "make test"
@@ -52,4 +52,4 @@ default_branch = "master"
 fork = false
 head_sha = "0f83acece4249fbdce232c403912de178f828ec0"
 html_url = "https://github.com/docker/cli"
-stars = 5941
+stars = 5940

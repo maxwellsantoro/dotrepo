@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/exo-explore/exo"
-generated_at = "2026-07-01T14:43:12.404504Z"
+generated_at = "2026-07-01T18:01:10.587928Z"
 
 [record.trust]
 confidence = "high"
@@ -22,17 +22,17 @@ homepage = "https://github.com/exo-explore/exo"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "JavaScript",
-    "Just",
-    "Nix",
     "Python",
-    "Rust",
-    "Shell",
     "Svelte",
     "Swift",
     "TypeScript",
+    "Rust",
+    "Nix",
+    "Shell",
+    "CSS",
+    "Just",
+    "JavaScript",
+    "HTML",
 ]
 build = "just build"
 test = "just test"
@@ -67,4 +67,4 @@ default_branch = "main"
 fork = false
 head_sha = "b5375f8cee4368d09e1ce96a56b9f81fb0bc81aa"
 html_url = "https://github.com/exo-explore/exo"
-stars = 45807
+stars = 45809

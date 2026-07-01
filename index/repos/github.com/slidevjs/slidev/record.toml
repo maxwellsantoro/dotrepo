@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/slidevjs/slidev"
-generated_at = "2026-06-29T05:14:09.391926Z"
+generated_at = "2026-07-01T18:29:18.567213Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://sli.dev"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "JavaScript",
     "TypeScript",
     "Vue",
+    "JavaScript",
+    "CSS",
+    "HTML",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -48,4 +48,4 @@ default_branch = "main"
 fork = false
 head_sha = "a0bd1b3b483d96d2de5a49690d8898220dfb58cf"
 html_url = "https://github.com/slidevjs/slidev"
-stars = 47426
+stars = 47465

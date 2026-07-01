@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Unity-Technologies/ml-agents"
-generated_at = "2026-07-01T15:32:06.804472Z"
+generated_at = "2026-07-01T17:22:37.58873Z"
 
 [record.trust]
 confidence = "high"
@@ -22,14 +22,14 @@ homepage = "https://unity.com/products/machine-learning-agents"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "C#",
-    "Dockerfile",
-    "Jupyter Notebook",
     "Python",
+    "Jupyter Notebook",
     "ShaderLab",
     "Shell",
+    "Batchfile",
+    "Dockerfile",
+    "C",
 ]
 test = 'pytest --cov=ml-agents --cov=ml-agents-envs \'
 topics = [

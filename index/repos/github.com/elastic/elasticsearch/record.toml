@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/elastic/elasticsearch"
-generated_at = "2026-07-01T15:15:13.955459Z"
+generated_at = "2026-07-01T18:00:17.040001Z"
 
 [record.trust]
 confidence = "high"
@@ -22,27 +22,27 @@ homepage = "https://www.elastic.co/products/elasticsearch"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "AMPL",
-    "ANTLR",
-    "Batchfile",
-    "C",
-    "C++",
-    "CSS",
-    "Dockerfile",
-    "Emacs Lisp",
-    "FreeMarker",
-    "Groovy",
-    "HTML",
     "Java",
-    "JavaScript",
-    "Makefile",
-    "Mustache",
-    "PowerShell",
-    "Python",
+    "Groovy",
+    "StringTemplate",
+    "C++",
+    "TypeScript",
     "Rust",
     "Shell",
-    "StringTemplate",
-    "TypeScript",
+    "ANTLR",
+    "Dockerfile",
+    "Batchfile",
+    "Python",
+    "Makefile",
+    "PowerShell",
+    "C",
+    "CSS",
+    "Emacs Lisp",
+    "AMPL",
+    "HTML",
+    "JavaScript",
+    "Mustache",
+    "FreeMarker",
 ]
 build = "./gradlew build"
 test = "./gradlew test"
@@ -76,6 +76,6 @@ archived = false
 clone_url = "https://github.com/elastic/elasticsearch.git"
 default_branch = "main"
 fork = false
-head_sha = "e0ecd67c3d266afec373c4d604c70d20c638d628"
+head_sha = "62b888a3bf0316f8b3cfe0f26e2d9ad93074b68c"
 html_url = "https://github.com/elastic/elasticsearch"
-stars = 77146
+stars = 77147

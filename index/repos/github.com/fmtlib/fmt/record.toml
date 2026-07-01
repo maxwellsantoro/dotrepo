@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fmtlib/fmt"
-generated_at = "2026-07-01T15:28:12.148963Z"
+generated_at = "2026-07-01T18:02:35.984493Z"
 
 [record.trust]
 confidence = "high"
@@ -22,13 +22,13 @@ homepage = "https://fmt.dev"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
     "C++",
+    "Python",
     "CMake",
+    "C",
+    "Shell",
     "Cuda",
     "Makefile",
-    "Python",
-    "Shell",
 ]
 build = "cmake -B build -DFMT_DOC=OFF -DFMT_TEST=OFF"
 topics = [
@@ -58,6 +58,6 @@ archived = false
 clone_url = "https://github.com/fmtlib/fmt.git"
 default_branch = "main"
 fork = false
-head_sha = "81516a20d975483bc55687cd04161f2ef7d38a63"
+head_sha = "77b6ff700be3417e0a3ad9674ca306e40c451b6b"
 html_url = "https://github.com/fmtlib/fmt"
 stars = 23634

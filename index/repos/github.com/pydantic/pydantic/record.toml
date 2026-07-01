@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pydantic/pydantic"
-generated_at = "2026-06-29T01:58:31.992974Z"
+generated_at = "2026-07-01T18:23:20.535496Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://pydantic.dev/docs/validation"
 license = "MIT"
 visibility = "public"
 languages = [
-    "HTML",
-    "JavaScript",
-    "Makefile",
     "Python",
     "Rust",
+    "Makefile",
+    "JavaScript",
+    "HTML",
     "Shell",
 ]
 build = "python -m build"
@@ -51,14 +51,11 @@ security_contact = "https://github.com/pydantic/pydantic/security/policy"
 [docs]
 root = "https://pydantic.dev/docs/validation/latest/get-started/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/pydantic/pydantic.git"
 default_branch = "main"
 fork = false
-head_sha = "ee857ec769317486e6851c51ce56c9ad54af0ee7"
+head_sha = "080c741ecf4e113b9c7487de16ffbba5182f03bf"
 html_url = "https://github.com/pydantic/pydantic"
-stars = 28143
+stars = 28169

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/cli/cli"
-generated_at = "2026-07-01T04:31:07.646793Z"
+generated_at = "2026-07-01T17:27:39.626126Z"
 
 [record.trust]
 confidence = "medium"
@@ -21,11 +21,11 @@ homepage = "https://cli.github.com"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
     "Go",
+    "Shell",
     "Makefile",
     "PowerShell",
-    "Shell",
+    "Batchfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -52,6 +52,6 @@ archived = false
 clone_url = "https://github.com/cli/cli.git"
 default_branch = "trunk"
 fork = false
-head_sha = "b7195a53258ae3109867f2a59aa87427c89442a9"
+head_sha = "ff4e4a255006ca98e3036bd0f8d98374a405835f"
 html_url = "https://github.com/cli/cli"
-stars = 45080
+stars = 45086

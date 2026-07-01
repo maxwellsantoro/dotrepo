@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hpjansson/chafa"
-generated_at = "2026-07-01T15:29:08.70833Z"
+generated_at = "2026-07-01T18:07:10.772243Z"
 
 [record.trust]
 confidence = "high"
@@ -23,10 +23,10 @@ visibility = "public"
 languages = [
     "C",
     "C++",
-    "M4",
-    "Makefile",
-    "Python",
     "Shell",
+    "M4",
+    "Python",
+    "Makefile",
 ]
 topics = [
     "ansi",
@@ -59,4 +59,4 @@ default_branch = "master"
 fork = false
 head_sha = "61a9ae47415fd9c26c22e86854217b6e66c130e2"
 html_url = "https://github.com/hpjansson/chafa"
-stars = 4977
+stars = 4978

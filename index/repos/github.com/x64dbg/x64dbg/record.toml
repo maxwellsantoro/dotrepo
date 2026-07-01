@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/x64dbg/x64dbg"
-generated_at = "2026-07-01T15:27:49.332701Z"
+generated_at = "2026-07-01T18:37:33.111997Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "http://x64dbg.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Assembly",
-    "Batchfile",
-    "C",
     "C++",
+    "C",
+    "Python",
     "CMake",
     "CSS",
-    "Dockerfile",
-    "Python",
+    "Assembly",
     "Shell",
+    "Dockerfile",
+    "Batchfile",
 ]
 build = "cmake -B build -G Ninja -DCMAKE_UNITY_BUILD=ON"
 topics = [

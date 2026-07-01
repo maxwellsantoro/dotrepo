@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/golang/go"
-generated_at = "2026-07-01T15:15:32.385772Z"
+generated_at = "2026-07-01T18:04:23.988004Z"
 
 [record.trust]
 confidence = "high"
@@ -21,18 +21,18 @@ homepage = "https://go.dev"
 license = "BSD-3-Clause"
 visibility = "public"
 languages = [
-    "Assembly",
-    "Awk",
-    "Batchfile",
-    "C",
-    "Dockerfile",
     "Go",
+    "Assembly",
     "HTML",
-    "JavaScript",
-    "Makefile",
+    "C",
+    "Shell",
     "Perl",
     "Python",
-    "Shell",
+    "JavaScript",
+    "Batchfile",
+    "Dockerfile",
+    "Makefile",
+    "Awk",
 ]
 topics = [
     "programming-language",
@@ -53,6 +53,6 @@ archived = false
 clone_url = "https://github.com/golang/go.git"
 default_branch = "master"
 fork = false
-head_sha = "9e5cf808f65b11bc0895fefcf4f8d3adb9cd8235"
+head_sha = "375872b48510d2341237564f7065172502ab21e0"
 html_url = "https://github.com/golang/go"
-stars = 134894
+stars = 134896

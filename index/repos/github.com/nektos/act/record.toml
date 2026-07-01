@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nektos/act"
-generated_at = "2026-07-01T04:45:44.545869Z"
+generated_at = "2026-07-01T18:17:43.263255Z"
 
 [record.trust]
 confidence = "high"
@@ -23,8 +23,8 @@ visibility = "public"
 languages = [
     "Go",
     "JavaScript",
-    "Makefile",
     "Shell",
+    "Makefile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -45,4 +45,4 @@ default_branch = "master"
 fork = false
 head_sha = "4f411281417e88660bea1c1a1749aa71ae0bd60f"
 html_url = "https://github.com/nektos/act"
-stars = 70898
+stars = 70905

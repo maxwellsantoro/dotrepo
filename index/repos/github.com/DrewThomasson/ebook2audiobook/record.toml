@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/DrewThomasson/ebook2audiobook"
-generated_at = "2026-06-29T05:18:46.935224Z"
+generated_at = "2026-07-01T17:16:48.241191Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://github.com/DrewThomasson/ebook2audiobook"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Cython",
-    "Dockerfile",
+    "Python",
     "Jupyter Notebook",
+    "Shell",
+    "Batchfile",
+    "Dockerfile",
+    "Cython",
     "Makefile",
     "PowerShell",
-    "Python",
-    "Shell",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -56,6 +56,6 @@ archived = false
 clone_url = "https://github.com/DrewThomasson/ebook2audiobook.git"
 default_branch = "main"
 fork = false
-head_sha = "ccef2748329d12440891afcd432bb27b0594dfdc"
+head_sha = "26a59aa830760d665910ce1ffa52d95a0e3cecb3"
 html_url = "https://github.com/DrewThomasson/ebook2audiobook"
-stars = 19346
+stars = 19389

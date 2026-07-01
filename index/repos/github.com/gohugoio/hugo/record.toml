@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/gohugoio/hugo"
-generated_at = "2026-06-28T03:20:20.270591Z"
+generated_at = "2026-07-01T18:04:19.761301Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://gohugo.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "C",
-    "CSS",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HTML",
+    "C",
     "JavaScript",
+    "HTML",
     "Makefile",
     "Shell",
+    "Dockerfile",
+    "Go Template",
+    "CSS",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -51,14 +51,11 @@ security_contact = "bjorn.erik.pedersen@gmail.com"
 root = "https://gohugo.io/documentation"
 getting_started = "https://gohugo.io/installation"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/gohugoio/hugo.git"
 default_branch = "master"
 fork = false
-head_sha = "790a8aa47412bf32c297250f949cb1fd811a0fbf"
+head_sha = "a5ec54239312c160b82e303f159c4bdb2e030ab5"
 html_url = "https://github.com/gohugoio/hugo"
-stars = 88757
+stars = 88808

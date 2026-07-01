@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tmux/tmux"
-generated_at = "2026-07-01T15:26:58.008977Z"
+generated_at = "2026-07-01T18:33:01.529724Z"
 
 [record.trust]
 confidence = "high"
@@ -22,14 +22,14 @@ homepage = "https://github.com/tmux/tmux"
 license = "ISC"
 visibility = "public"
 languages = [
-    "Awk",
     "C",
-    "M4",
-    "Makefile",
-    "Perl",
     "Roff",
     "Shell",
     "Yacc",
+    "M4",
+    "Awk",
+    "Makefile",
+    "Perl",
 ]
 topics = []
 
@@ -38,6 +38,6 @@ archived = false
 clone_url = "https://github.com/tmux/tmux.git"
 default_branch = "master"
 fork = false
-head_sha = "87aa44f4bcd0dff4d15f3104bb544f2d6ca4355c"
+head_sha = "3d58e04c93c17af60c6852531aeb6d85a5975d09"
 html_url = "https://github.com/tmux/tmux"
-stars = 47237
+stars = 47243

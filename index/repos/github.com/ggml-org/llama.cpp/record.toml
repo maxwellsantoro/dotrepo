@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ggml-org/llama.cpp"
-generated_at = "2026-06-29T02:21:05.686428Z"
+generated_at = "2026-07-01T18:03:38.180924Z"
 
 [record.trust]
 confidence = "high"
@@ -21,30 +21,30 @@ homepage = "https://llama.app"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "C++",
-    "CMake",
-    "CSS",
+    "C",
+    "Python",
     "Cuda",
-    "Dockerfile",
-    "GLSL",
-    "Go Template",
+    "TypeScript",
     "HTML",
-    "JavaScript",
+    "Svelte",
+    "Metal",
     "Jinja",
+    "GLSL",
+    "Shell",
+    "CMake",
+    "WGSL",
+    "Go Template",
+    "Objective-C",
+    "Dockerfile",
+    "Nix",
+    "CSS",
+    "JavaScript",
+    "PowerShell",
     "MDX",
     "Makefile",
-    "Metal",
-    "Nix",
-    "Objective-C",
-    "PowerShell",
-    "Python",
+    "Batchfile",
     "SCSS",
-    "Shell",
-    "Svelte",
-    "TypeScript",
-    "WGSL",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -94,14 +94,11 @@ security_contact = "https://github.com/ggml-org/llama.cpp/security/advisories/ne
 [docs]
 root = "./docs/multimodal.md"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/ggml-org/llama.cpp.git"
 default_branch = "master"
 fork = false
-head_sha = "b3fed31b99f9bd37725833674252bccb429bb183"
+head_sha = "4fc4ec5541b243957ae5099edb67372f8f3b550e"
 html_url = "https://github.com/ggml-org/llama.cpp"
-stars = 118502
+stars = 118906

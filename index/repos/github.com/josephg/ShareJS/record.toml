@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/josephg/ShareJS"
-generated_at = "2026-06-29T05:24:15.959882Z"
+generated_at = "2026-07-01T18:10:20.553835Z"
 
 [record.trust]
 confidence = "high"
@@ -21,8 +21,8 @@ homepage = "https://github.com/josephg/ShareJS"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CoffeeScript",
     "JavaScript",
+    "CoffeeScript",
     "Makefile",
 ]
 build = "npm run build"
@@ -63,4 +63,4 @@ default_branch = "master"
 fork = false
 head_sha = "414e1d6a4e0d3f06a83bfe001bc81f2cd6891475"
 html_url = "https://github.com/josephg/ShareJS"
-stars = 4988
+stars = 4987

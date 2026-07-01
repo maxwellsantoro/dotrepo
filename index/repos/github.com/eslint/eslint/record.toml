@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/eslint/eslint"
-generated_at = "2026-06-29T00:55:07.995262Z"
+generated_at = "2026-07-01T18:00:47.643099Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@eslint/eslint-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/docs-ci.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@eslint/eslint-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/docs-ci.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "ESLint"
@@ -22,11 +22,11 @@ homepage = "https://eslint.org"
 license = "MIT"
 visibility = "public"
 languages = [
+    "JavaScript",
+    "TypeScript",
     "EJS",
     "HTML",
-    "JavaScript",
     "Shell",
-    "TypeScript",
 ]
 build = "npm run build"
 test = "npm test"
@@ -47,16 +47,29 @@ team = "@eslint/eslint-team"
 security_contact = "https://github.com/eslint/.github/blob/master/SECURITY.md"
 
 [docs]
+root = "https://eslint.org"
 getting_started = "https://eslint.org/docs/latest/use/getting-started#prerequisites"
 
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/eslint/eslint"
+notes = "Cross-link from README: ![Build Status"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/eslint/eslint.git"
 default_branch = "main"
 fork = false
-head_sha = "7c9a02933cf1c231237babb8a7a32150ab72e263"
+head_sha = "b23015955c8d6e6516076190730f538c86927f26"
 html_url = "https://github.com/eslint/eslint"
-stars = 27392
+stars = 27339

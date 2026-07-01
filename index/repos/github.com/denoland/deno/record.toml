@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/denoland/deno"
-generated_at = "2026-06-29T02:20:50.604386Z"
+generated_at = "2026-07-01T17:52:05.996214Z"
 
 [record.trust]
 confidence = "high"
@@ -22,23 +22,23 @@ homepage = "https://deno.com"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Astro",
-    "C",
-    "C++",
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Mustache",
-    "Nix",
-    "Nunjucks",
-    "Python",
     "Rust",
-    "Shell",
-    "Svelte",
     "TypeScript",
-    "Vento",
+    "JavaScript",
+    "C",
+    "HTML",
+    "CSS",
+    "Nix",
+    "Shell",
     "WebAssembly",
+    "C++",
+    "Svelte",
+    "Mustache",
+    "Dockerfile",
+    "Python",
+    "Astro",
+    "Vento",
+    "Nunjucks",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -57,14 +57,11 @@ security_contact = "https://github.com/denoland/deno/security/advisories/new"
 root = "https://deno.com"
 getting_started = "https://docs.deno.com/runtime/manual/getting_started/installation"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/denoland/deno.git"
 default_branch = "main"
 fork = false
-head_sha = "d3c7a73bd16fac52dc5071994d9645a339d9dd3a"
+head_sha = "dddb255f333e5b25b292b44b60b9a09af450750a"
 html_url = "https://github.com/denoland/deno"
-stars = 107372
+stars = 107346

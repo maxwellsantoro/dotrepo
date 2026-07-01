@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/cockroachdb/cockroach"
-generated_at = "2026-06-29T02:02:23.385399Z"
+generated_at = "2026-07-01T17:50:51.018025Z"
 
 [record.trust]
 confidence = "high"
@@ -21,27 +21,27 @@ homepage = "https://www.cockroachlabs.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Assembly",
-    "Awk",
-    "C",
-    "C++",
-    "CSS",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HCL",
-    "HTML",
-    "JavaScript",
-    "Makefile",
-    "Python",
-    "Ruby",
-    "SCSS",
-    "Shell",
-    "Starlark",
-    "Tcl",
     "TypeScript",
-    "Vim Script",
+    "Starlark",
+    "Shell",
     "Yacc",
+    "SCSS",
+    "Tcl",
+    "Python",
+    "C",
+    "HTML",
+    "C++",
+    "JavaScript",
+    "HCL",
+    "Go Template",
+    "Ruby",
+    "Dockerfile",
+    "Vim Script",
+    "Awk",
+    "Makefile",
+    "Assembly",
+    "CSS",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -91,11 +91,23 @@ getting_started = "https://www.cockroachlabs.com/docs/cockroachcloud/quickstart.
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/cockroachdb/cockroach"
+notes = "Cross-link from README: opening an issue"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/cockroachdb/cockroach.git"
 default_branch = "master"
 fork = false
-head_sha = "dd111ac7972c1ac43e1fcf18a820dc73361efe76"
+head_sha = "8ba72f3434ea5547293eb034cebd689000d5f777"
 html_url = "https://github.com/cockroachdb/cockroach"
-stars = 32228
+stars = 32234

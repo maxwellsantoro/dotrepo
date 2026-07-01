@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dotnet/aspnetcore"
-generated_at = "2026-06-26T18:35:18.862352Z"
+generated_at = "2026-07-01T17:52:44.281157Z"
 
 [record.trust]
 confidence = "high"
@@ -21,25 +21,25 @@ homepage = "https://asp.net"
 license = "MIT"
 visibility = "public"
 languages = [
-    "ASP.NET",
-    "Batchfile",
-    "C",
     "C#",
-    "C++",
-    "CMake",
-    "CSS",
-    "Dockerfile",
-    "F#",
     "HTML",
-    "Java",
-    "JavaScript",
-    "Less",
-    "Lua",
-    "PowerShell",
-    "Python",
-    "SCSS",
-    "Shell",
     "TypeScript",
+    "C++",
+    "Java",
+    "PowerShell",
+    "Shell",
+    "JavaScript",
+    "C",
+    "CSS",
+    "Batchfile",
+    "Python",
+    "CMake",
+    "F#",
+    "Lua",
+    "Dockerfile",
+    "ASP.NET",
+    "Less",
+    "SCSS",
 ]
 build = "npm run build"
 test = "npm test"
@@ -73,11 +73,23 @@ getting_started = "https://learn.microsoft.com/aspnet/core/getting-started"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/dotnet/aspnetcore"
+notes = "Cross-link from README: Triage Process"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/dotnet/aspnetcore.git"
 default_branch = "main"
 fork = false
-head_sha = "7f8ae8445c7e4c36276e7d32ce5aabdccb8ac952"
+head_sha = "c9bdc09d4e5650b6caf696e0281607f6deb2908a"
 html_url = "https://github.com/dotnet/aspnetcore"
-stars = 38148
+stars = 38109

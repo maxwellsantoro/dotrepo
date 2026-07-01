@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rust-lang/mdBook"
-generated_at = "2026-06-29T02:01:56.850286Z"
+generated_at = "2026-07-01T18:26:18.634665Z"
 
 [record.trust]
 confidence = "high"
@@ -22,11 +22,11 @@ homepage = "https://rust-lang.github.io/mdBook/"
 license = "MPL-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "Handlebars",
-    "JavaScript",
     "Rust",
+    "JavaScript",
+    "CSS",
+    "Handlebars",
+    "HTML",
     "Shell",
 ]
 build = "cargo build --workspace"
@@ -36,14 +36,11 @@ topics = []
 [docs]
 root = "https://rust-lang.github.io/mdBook/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/rust-lang/mdBook.git"
 default_branch = "master"
 fork = false
-head_sha = "cb49cc5523e609a731f27dea1af4395a504815a5"
+head_sha = "5d4eff4ea4d8bb0397b4b1e5d27f21635f5055a8"
 html_url = "https://github.com/rust-lang/mdBook"
-stars = 21881
+stars = 21896

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/flyway/flyway"
-generated_at = "2026-07-01T15:32:46.826295Z"
+generated_at = "2026-07-01T18:02:30.89662Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://flywaydb.org"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
-    "HTML",
     "Java",
-    "JavaScript",
-    "Makefile",
     "Python",
+    "HTML",
+    "Dockerfile",
     "Shell",
+    "Batchfile",
+    "Makefile",
+    "JavaScript",
 ]
 build = "./mvnw package"
 test = "./mvnw test"
@@ -65,4 +65,4 @@ default_branch = "main"
 fork = false
 head_sha = "e31d5b4ae42ce255b2f21a3ed094592176b61a39"
 html_url = "https://github.com/flyway/flyway"
-stars = 9882
+stars = 9883

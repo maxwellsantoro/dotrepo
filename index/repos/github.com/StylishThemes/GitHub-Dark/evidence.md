@@ -1,8 +1,8 @@
 # Evidence
 
 - Imported repository name and description from README.md.
-- Inferred repo.build from .github/workflows/regenerate.yml as `make build`.
-- Inferred repo.test from .github/workflows/ci.yml as `make test`.
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from Makefile as `make test`.
 - Discovered related relation to github.com/settings/appearance from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -14,4 +14,4 @@
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

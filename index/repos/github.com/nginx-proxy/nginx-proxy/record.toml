@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nginx-proxy/nginx-proxy"
-generated_at = "2026-07-01T15:24:52.129067Z"
+generated_at = "2026-07-01T18:18:11.439103Z"
 
 [record.trust]
 confidence = "high"
@@ -22,13 +22,13 @@ homepage = "https://github.com/nginx-proxy/nginx-proxy"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "Go Template",
-    "HTML",
-    "Makefile",
-    "Procfile",
     "Python",
+    "Go Template",
     "Shell",
+    "Makefile",
+    "HTML",
+    "Dockerfile",
+    "Procfile",
 ]
 build = "make build"
 test = "make test"

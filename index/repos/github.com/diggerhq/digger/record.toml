@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/diggerhq/digger"
-generated_at = "2026-06-29T05:24:51.952505Z"
+generated_at = "2026-07-01T17:52:14.317818Z"
 
 [record.trust]
 confidence = "high"
@@ -21,16 +21,16 @@ homepage = "https://digger.dev"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HCL",
+    "TypeScript",
     "JavaScript",
+    "HCL",
+    "Go Template",
+    "Shell",
+    "CSS",
     "Makefile",
     "PLpgSQL",
-    "Shell",
-    "TypeScript",
+    "Dockerfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -57,4 +57,4 @@ default_branch = "develop"
 fork = false
 head_sha = "6baf84cd9cd7c6522b98504f4a2258474d6c2de3"
 html_url = "https://github.com/diggerhq/digger"
-stars = 4983
+stars = 4985

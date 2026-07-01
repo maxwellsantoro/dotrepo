@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ethereum/go-ethereum"
-generated_at = "2026-06-29T01:18:28.83174Z"
+generated_at = "2026-07-01T18:00:57.370093Z"
 
 [record.trust]
 confidence = "high"
@@ -21,22 +21,22 @@ homepage = "https://geth.ethereum.org"
 license = "LGPL-3.0"
 visibility = "public"
 languages = [
-    "Assembly",
-    "C",
-    "CMake",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HTML",
+    "C",
     "JavaScript",
-    "M4",
-    "Makefile",
-    "NSIS",
-    "Python",
+    "Assembly",
     "Sage",
     "Shell",
+    "Go Template",
+    "CMake",
+    "M4",
+    "NSIS",
+    "Python",
     "Solidity",
+    "Makefile",
     "Yul",
+    "Dockerfile",
+    "HTML",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -62,16 +62,29 @@ maintainers = [
 security_contact = "bounty@ethereum.org"
 
 [docs]
+root = "https://geth.ethereum.org"
 getting_started = "https://geth.ethereum.org/docs/getting-started/installing-geth"
 
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/ethereum/go-ethereum"
+notes = "Cross-link from README: ![API Reference"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/ethereum/go-ethereum.git"
 default_branch = "master"
 fork = false
-head_sha = "ab134b2101b5017d0512ab9b00bfa461632ec902"
+head_sha = "7e625dd54822499d7fece76de9850377d65957c4"
 html_url = "https://github.com/ethereum/go-ethereum"
-stars = 51216
+stars = 51149

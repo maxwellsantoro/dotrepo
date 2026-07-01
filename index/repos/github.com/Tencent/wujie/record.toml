@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Tencent/wujie"
-generated_at = "2026-07-01T15:27:34.729403Z"
+generated_at = "2026-07-01T17:22:04.298715Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://wujie-micro.github.io/doc/"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
+    "TypeScript",
     "JavaScript",
     "Shell",
-    "TypeScript",
 ]
 test = "pnpm test"
 topics = []

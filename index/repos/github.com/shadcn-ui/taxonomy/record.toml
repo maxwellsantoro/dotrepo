@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/shadcn-ui/taxonomy"
-generated_at = "2026-07-01T15:15:46.026652Z"
+generated_at = "2026-07-01T18:28:32.53918Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://github.com/shadcn-ui/taxonomy"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "JavaScript",
-    "MDX",
-    "Shell",
     "TypeScript",
+    "MDX",
+    "JavaScript",
+    "CSS",
+    "Shell",
 ]
 build = "npm run build"
 topics = [

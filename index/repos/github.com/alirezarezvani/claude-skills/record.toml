@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/alirezarezvani/claude-skills"
-generated_at = "2026-06-29T05:18:53.029394Z"
+generated_at = "2026-07-01T17:23:53.328318Z"
 
 [record.trust]
 confidence = "medium"
@@ -16,21 +16,21 @@ notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SEC
 
 [repo]
 name = "Claude Code Skills & Plugins"
-description = "345 production-ready Claude Code skills, plugins, and agent skills for 13 AI coding tools."
+description = "354 production-ready Claude Code skills, plugins, and agent skills for 13 AI coding tools."
 homepage = "https://alirezarezvani.medium.com/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
-    "C#",
-    "Go",
-    "HTML",
-    "Java",
-    "JavaScript",
     "Python",
+    "JavaScript",
     "Shell",
     "TypeScript",
+    "HTML",
+    "Go",
+    "C#",
+    "Batchfile",
+    "Java",
+    "C",
 ]
 build = 'python -m compileall \'
 test = "python -m pytest"
@@ -69,8 +69,8 @@ references = []
 
 [[relations.links]]
 kind = "related"
-target = "github.com/alirezarezvani/claude-code-skills-agents-factory"
-notes = "Cross-link from README: Claude Code Skills & Agents Factory"
+target = "github.com/Forward-Future/loop-library"
+notes = "Cross-link from README: Forward-Future/loop-library"
 
 [relations.links.trust]
 confidence = "low"
@@ -84,6 +84,6 @@ archived = false
 clone_url = "https://github.com/alirezarezvani/claude-skills.git"
 default_branch = "main"
 fork = false
-head_sha = "4a3c05b69e64f4925f7fc65c88890f614f79caf0"
+head_sha = "1bd5b1a0b51c91f6e3335592c2b41ffb9b543002"
 html_url = "https://github.com/alirezarezvani/claude-skills"
-stars = 19319
+stars = 19583

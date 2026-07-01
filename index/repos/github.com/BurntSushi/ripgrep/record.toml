@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/BurntSushi/ripgrep"
-generated_at = "2026-07-01T04:31:03.940964Z"
+generated_at = "2026-07-01T17:15:55.147781Z"
 
 [record.trust]
 confidence = "medium"
@@ -21,11 +21,11 @@ homepage = "https://github.com/BurntSushi/ripgrep"
 license = "Unlicense"
 visibility = "public"
 languages = [
+    "Rust",
     "Python",
+    "Shell",
     "Roff",
     "Ruby",
-    "Rust",
-    "Shell",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -78,6 +78,6 @@ archived = false
 clone_url = "https://github.com/BurntSushi/ripgrep.git"
 default_branch = "master"
 fork = false
-head_sha = "dfe4a81d2591daca76d25ae4e052c34b26578155"
+head_sha = "48b0c795f4feb37343b2832d991c5c6a3900c08a"
 html_url = "https://github.com/BurntSushi/ripgrep"
-stars = 65638
+stars = 65662

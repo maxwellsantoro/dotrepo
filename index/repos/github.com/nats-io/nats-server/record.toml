@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nats-io/nats-server"
-generated_at = "2026-06-26T18:31:30.927767Z"
+generated_at = "2026-07-01T18:17:38.922267Z"
 
 [record.trust]
 confidence = "high"
@@ -16,14 +16,14 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Main
 
 [repo]
 name = "Contact"
-description = "NATS is a simple, secure and performant communications system for digital systems, services and devices."
+description = "If you are interested in contributing to NATS, read about our..."
 homepage = "https://nats.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
     "Go",
-    "PowerShell",
     "Shell",
+    "PowerShell",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -53,14 +53,14 @@ maintainers = [
 team = "@nats-io/server"
 security_contact = "security@nats.io"
 
-[relations]
-references = []
+[docs]
+root = "https://nats.io"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/nats-io/nats-server.git"
 default_branch = "main"
 fork = false
-head_sha = "bd058fac3d0c04398698b113e986b35065212fda"
+head_sha = "822c56d17de931b56da507ab0895a21cb5f62eb0"
 html_url = "https://github.com/nats-io/nats-server"
-stars = 20102
+stars = 20125

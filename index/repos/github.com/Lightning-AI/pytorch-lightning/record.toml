@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Lightning-AI/pytorch-lightning"
-generated_at = "2026-06-26T18:32:29.047148Z"
+generated_at = "2026-07-01T17:19:25.455384Z"
 
 [record.trust]
 confidence = "high"
@@ -15,15 +15,15 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Why PyTorch Lightning?"
+name = "Lightning"
 description = "The deep learning framework to pretrain and finetune AI models."
 homepage = "https://lightning.ai/pytorch-lightning/?utm_source=ptl_readme&utm_medium=referral&utm_campaign=ptl_readme"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Makefile",
     "Python",
     "Shell",
+    "Makefile",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -47,8 +47,8 @@ maintainers = [
 ]
 security_contact = "developer@lightning.ai"
 
-[relations]
-references = []
+[docs]
+root = "https://pytorch-lightning.readthedocs.io/en/stable/"
 
 [x.github]
 archived = false
@@ -57,4 +57,4 @@ default_branch = "master"
 fork = false
 head_sha = "fe6b1cc4e80ae0396e2e404c16e6b6968ad5437e"
 html_url = "https://github.com/Lightning-AI/pytorch-lightning"
-stars = 31205
+stars = 31215

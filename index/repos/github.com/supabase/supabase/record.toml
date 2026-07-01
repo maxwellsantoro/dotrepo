@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/supabase/supabase"
-generated_at = "2026-07-01T04:28:35.70931Z"
+generated_at = "2026-07-01T18:31:37.066832Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/ai-tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh.'
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/ai-tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Supabase"
@@ -22,19 +22,19 @@ homepage = "https://supabase.com"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "TypeScript",
+    "MDX",
+    "JavaScript",
     "CSS",
+    "Shell",
+    "Vue",
+    "PLpgSQL",
+    "Makefile",
     "Dockerfile",
+    "Smarty",
+    "Mermaid",
     "Elixir",
     "HTML",
-    "JavaScript",
-    "MDX",
-    "Makefile",
-    "Mermaid",
-    "PLpgSQL",
-    "Shell",
-    "Smarty",
-    "TypeScript",
-    "Vue",
 ]
 build = "pnpm build"
 test = "pnpm run test"
@@ -71,8 +71,8 @@ maintainers = [
     "@supabase/self-hosted",
     "@supabase/security",
     "@supabase/infra",
+    "@supabase/platform",
 ]
-security_contact = "unknown"
 
 [docs]
 root = "https://supabase.com/docs/guides/database"
@@ -98,6 +98,6 @@ archived = false
 clone_url = "https://github.com/supabase/supabase.git"
 default_branch = "master"
 fork = false
-head_sha = "963ab3e63b939c5e7e699085bdc9686f00eb7139"
+head_sha = "bb4eaef0df8173ec5f32cd5b8bf6b80f346a28d8"
 html_url = "https://github.com/supabase/supabase"
-stars = 105001
+stars = 105029

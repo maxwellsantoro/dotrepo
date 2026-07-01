@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/s3fs-fuse/s3fs-fuse"
-generated_at = "2026-07-01T15:29:36.827897Z"
+generated_at = "2026-07-01T18:26:55.297653Z"
 
 [record.trust]
 confidence = "high"
@@ -22,12 +22,12 @@ homepage = "https://github.com/s3fs-fuse/s3fs-fuse"
 license = "GPL-2.0"
 visibility = "public"
 languages = [
-    "C",
     "C++",
+    "Shell",
     "M4",
+    "C",
     "Makefile",
     "Python",
-    "Shell",
 ]
 test = "make check -C src"
 topics = [
@@ -46,4 +46,4 @@ default_branch = "master"
 fork = false
 head_sha = "ac20a7ebcba68eb3079544d3153238700afe305c"
 html_url = "https://github.com/s3fs-fuse/s3fs-fuse"
-stars = 9906
+stars = 9907

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/whyour/qinglong"
-generated_at = "2026-06-29T05:17:25.947553Z"
+generated_at = "2026-07-01T18:36:31.10787Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.name` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-docker-image.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.name` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-docker-image.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "qinglong"
@@ -22,12 +22,12 @@ homepage = "https://qinglong.online"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "JavaScript",
+    "TypeScript",
+    "Shell",
     "Less",
     "Python",
-    "Shell",
-    "TypeScript",
+    "JavaScript",
+    "Dockerfile",
 ]
 build = "pnpm build:front"
 test = "pnpm test"
@@ -69,6 +69,6 @@ archived = false
 clone_url = "https://github.com/whyour/qinglong.git"
 default_branch = "develop"
 fork = false
-head_sha = "d3016431ce376def56bd4c8896635ead4781e0ac"
+head_sha = "f09ef3744118c417223752dbf0734450a49cb814"
 html_url = "https://github.com/whyour/qinglong"
-stars = 19664
+stars = 19673

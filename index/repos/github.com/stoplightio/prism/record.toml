@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/stoplightio/prism"
-generated_at = "2026-06-29T05:25:57.387385Z"
+generated_at = "2026-07-01T18:30:30.338249Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://stoplight.io/open-source/prism"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "JavaScript",
-    "Shell",
     "TypeScript",
+    "JavaScript",
+    "Dockerfile",
+    "Shell",
 ]
 build = "npm run build"
 test = "npm test"
@@ -76,4 +76,4 @@ default_branch = "master"
 fork = false
 head_sha = "4f86059d07448ace65f3a2d7a1610a500eed8afe"
 html_url = "https://github.com/stoplightio/prism"
-stars = 4973
+stars = 4974

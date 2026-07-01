@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vform666/variant-form"
-generated_at = "2026-07-01T15:28:57.086424Z"
+generated_at = "2026-07-01T18:35:39.646275Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "http://www.vform666.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "JavaScript",
-    "SCSS",
     "Vue",
+    "JavaScript",
+    "HTML",
+    "SCSS",
+    "CSS",
 ]
 build = "npm run build"
 topics = [

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/junegunn/fzf"
-generated_at = "2026-06-29T02:02:26.490885Z"
+generated_at = "2026-07-01T18:11:06.57077Z"
 
 [record.trust]
 confidence = "medium"
@@ -21,15 +21,15 @@ homepage = "https://junegunn.github.io/fzf/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Assembly",
-    "Dockerfile",
     "Go",
-    "Makefile",
-    "Nushell",
-    "PowerShell",
     "Ruby",
     "Shell",
     "Vim Script",
+    "Nushell",
+    "Assembly",
+    "Makefile",
+    "PowerShell",
+    "Dockerfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -56,6 +56,18 @@ root = "https://junegunn.github.io/fzf/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/jdx/mise"
+notes = "Cross-link from README: mise"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/junegunn/fzf.git"
@@ -63,4 +75,4 @@ default_branch = "master"
 fork = false
 head_sha = "9e2856559d50637df482b8598fd7b35b2d746485"
 html_url = "https://github.com/junegunn/fzf"
-stars = 81291
+stars = 81370

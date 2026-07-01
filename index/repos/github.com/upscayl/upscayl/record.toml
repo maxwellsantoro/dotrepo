@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/upscayl/upscayl"
-generated_at = "2026-07-01T15:12:19.980061Z"
+generated_at = "2026-07-01T18:34:52.175029Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://upscayl.org"
 license = "AGPL-3.0"
 visibility = "public"
 languages = [
-    "CSS",
+    "TypeScript",
     "JavaScript",
+    "CSS",
     "Python",
     "Shell",
-    "TypeScript",
 ]
 build = "npm run build"
 topics = [
@@ -67,4 +67,4 @@ default_branch = "main"
 fork = false
 head_sha = "a00d55fee90e0f9435d5eaa86e76700df8199af8"
 html_url = "https://github.com/upscayl/upscayl"
-stars = 46545
+stars = 46548

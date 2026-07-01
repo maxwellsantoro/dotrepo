@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vuejs/v2.vuejs.org"
-generated_at = "2026-07-01T15:16:51.735004Z"
+generated_at = "2026-07-01T18:35:58.037082Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://v2.vuejs.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "EJS",
-    "HTML",
     "JavaScript",
+    "HTML",
+    "EJS",
     "Stylus",
+    "CSS",
     "Vue",
 ]
 build = "npm run build"

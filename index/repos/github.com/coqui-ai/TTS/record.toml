@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/coqui-ai/TTS"
-generated_at = "2026-06-29T05:15:12.997704Z"
+generated_at = "2026-07-01T17:51:15.625602Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "http://coqui.ai"
 license = "MPL-2.0"
 visibility = "public"
 languages = [
+    "Python",
+    "Jupyter Notebook",
+    "HTML",
+    "Shell",
+    "Makefile",
     "Cython",
     "Dockerfile",
-    "HTML",
-    "Jupyter Notebook",
-    "Makefile",
-    "Python",
-    "Shell",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -63,4 +63,4 @@ default_branch = "dev"
 fork = false
 head_sha = "dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e"
 html_url = "https://github.com/coqui-ai/TTS"
-stars = 45641
+stars = 45666

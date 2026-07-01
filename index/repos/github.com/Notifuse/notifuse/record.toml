@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Notifuse/notifuse"
-generated_at = "2026-06-29T05:28:48.148806Z"
+generated_at = "2026-07-01T17:20:01.868276Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://www.notifuse.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
     "Go",
-    "HTML",
-    "JavaScript",
-    "Makefile",
-    "Shell",
     "TypeScript",
+    "CSS",
+    "Shell",
+    "HTML",
+    "Makefile",
+    "Dockerfile",
+    "JavaScript",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -55,4 +55,4 @@ default_branch = "main"
 fork = false
 head_sha = "b5b0ae0bcc7e81310c10945e83b863bf5178cbfb"
 html_url = "https://github.com/Notifuse/notifuse"
-stars = 1995
+stars = 1996

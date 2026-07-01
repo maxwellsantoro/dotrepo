@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Homebrew/brew"
-generated_at = "2026-07-01T15:19:44.156553Z"
+generated_at = "2026-07-01T17:17:49.297574Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://brew.sh"
 license = "BSD-2-Clause"
 visibility = "public"
 languages = [
-    "CMake",
-    "Dockerfile",
-    "HTML",
-    "PostScript",
-    "Rich Text Format",
-    "Roff",
     "Ruby",
     "Shell",
+    "Roff",
+    "HTML",
+    "Rich Text Format",
     "Swift",
+    "Dockerfile",
+    "CMake",
+    "PostScript",
 ]
 topics = [
     "homebrew",
@@ -73,4 +73,4 @@ default_branch = "main"
 fork = false
 head_sha = "7f14ed41545a48dd288e2e0b0e940bf6325aa47a"
 html_url = "https://github.com/Homebrew/brew"
-stars = 48689
+stars = 48691

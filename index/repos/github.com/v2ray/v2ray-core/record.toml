@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/v2ray/v2ray-core"
-generated_at = "2026-06-29T01:19:09.567461Z"
+generated_at = "2026-07-01T18:35:12.151892Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://www.v2ray.com/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Assembly",
-    "Dockerfile",
     "Go",
-    "Shell",
     "Starlark",
+    "Shell",
+    "Dockerfile",
+    "Assembly",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -44,8 +44,8 @@ topics = [
 maintainers = []
 security_contact = "dev@v2fly.org"
 
-[relations]
-references = []
+[docs]
+root = "https://www.v2ray.com/"
 
 [x.github]
 archived = false
@@ -54,4 +54,4 @@ default_branch = "master"
 fork = false
 head_sha = "d80440f3d57b45c829dbf513306f7adf9a0f3f76"
 html_url = "https://github.com/v2ray/v2ray-core"
-stars = 46898
+stars = 46900

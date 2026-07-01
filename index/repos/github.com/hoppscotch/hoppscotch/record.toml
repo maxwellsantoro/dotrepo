@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hoppscotch/hoppscotch"
-generated_at = "2026-06-29T01:17:45.793663Z"
+generated_at = "2026-07-01T18:07:07.080567Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. Left `repo.build` unset because `.github/workflows/build-hoppscotch-agent.yml` and `.github/workflows/build-hoppscotch-desktop.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. Left `repo.build` unset because `.github/workflows/build-hoppscotch-agent.yml` and `.github/workflows/build-hoppscotch-desktop.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Hoppscotch"
@@ -21,20 +21,20 @@ homepage = "https://hoppscotch.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "Go",
-    "HTML",
-    "Handlebars",
-    "JavaScript",
-    "Nix",
-    "PLpgSQL",
-    "Rust",
-    "SCSS",
-    "Shell",
-    "Svelte",
     "TypeScript",
     "Vue",
+    "Rust",
+    "JavaScript",
+    "SCSS",
+    "Handlebars",
+    "Go",
+    "Dockerfile",
+    "Nix",
+    "PLpgSQL",
+    "HTML",
+    "Svelte",
+    "CSS",
+    "Shell",
 ]
 build = "pnpm tauri build --verbose --target x86_64-apple-darwin"
 test = "pnpm test"
@@ -76,11 +76,23 @@ getting_started = "https://docs.hoppscotch.io/documentation/self-host/getting-st
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/hoppscotch/hoppscotch"
+notes = "Cross-link from README: ![Tests"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/hoppscotch/hoppscotch.git"
 default_branch = "main"
 fork = false
-head_sha = "e067ee0b3224c675ba4b9bcd98366d0f1b6be3ee"
+head_sha = "afc2cf181c16e56647b099e5d18cfe55710c6cdd"
 html_url = "https://github.com/hoppscotch/hoppscotch"
-stars = 79664
+stars = 79707

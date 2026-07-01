@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jorgebastida/awslogs"
-generated_at = "2026-07-01T15:11:40.970871Z"
+generated_at = "2026-07-01T18:10:16.966275Z"
 
 [record.trust]
 confidence = "high"
@@ -22,8 +22,8 @@ homepage = "https://github.com/jorgebastida/awslogs"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Python",
+    "Dockerfile",
 ]
 test = "python -m unittest discover"
 topics = []

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/stefan-jansen/machine-learning-for-trading"
-generated_at = "2026-06-29T05:18:38.331666Z"
+generated_at = "2026-07-01T18:30:21.6271Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://ml4trading.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Jupyter Notebook",
     "Python",
+    "Dockerfile",
     "Shell",
 ]
 build = "python -m build"
@@ -57,6 +57,6 @@ archived = false
 clone_url = "https://github.com/stefan-jansen/machine-learning-for-trading.git"
 default_branch = "main"
 fork = false
-head_sha = "a5641bfeb721bacbd5c2f015e770dffc119cc5db"
+head_sha = "8edca3b658cc506f935b11899c708952aeda3b52"
 html_url = "https://github.com/stefan-jansen/machine-learning-for-trading"
-stars = 19380
+stars = 19473

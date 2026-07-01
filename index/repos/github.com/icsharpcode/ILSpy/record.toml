@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/icsharpcode/ILSpy"
-generated_at = "2026-07-01T15:25:46.37044Z"
+generated_at = "2026-07-01T18:07:47.734085Z"
 
 [record.trust]
 confidence = "high"
@@ -23,19 +23,19 @@ license = "MIT"
 visibility = "public"
 languages = [
     "C#",
-    "CSS",
-    "Dockerfile",
-    "F#",
-    "HTML",
     "IL Assembly",
     "JavaScript",
-    "Jupyter Notebook",
-    "Less",
     "PowerShell",
-    "Ruby",
-    "Shell",
     "Visual Basic .NET",
+    "HTML",
+    "Less",
+    "Jupyter Notebook",
+    "CSS",
+    "Shell",
+    "F#",
     "XSLT",
+    "Ruby",
+    "Dockerfile",
 ]
 build = "dotnet pack ICSharpCode.Decompiler --no-restore"
 topics = [
@@ -77,4 +77,4 @@ default_branch = "master"
 fork = false
 head_sha = "17b3539a20571acdc88a9841cee77fac3954c55b"
 html_url = "https://github.com/icsharpcode/ILSpy"
-stars = 25538
+stars = 25540

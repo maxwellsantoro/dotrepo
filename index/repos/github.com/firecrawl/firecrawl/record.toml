@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/firecrawl/firecrawl"
-generated_at = "2026-07-01T15:16:26.533619Z"
+generated_at = "2026-07-01T18:02:17.271326Z"
 
 [record.trust]
 confidence = "high"
@@ -21,25 +21,25 @@ homepage = "https://firecrawl.dev"
 license = "AGPL-3.0"
 visibility = "public"
 languages = [
-    "Astro",
+    "TypeScript",
+    "Python",
+    "Rust",
+    "Java",
+    "PHP",
     "C#",
-    "CSS",
-    "Dockerfile",
     "Elixir",
     "Go",
-    "HTML",
-    "Java",
+    "Ruby",
+    "Astro",
     "JavaScript",
     "Jupyter Notebook",
-    "Makefile",
-    "PHP",
-    "Procfile",
-    "Python",
-    "Rich Text Format",
-    "Ruby",
-    "Rust",
     "Shell",
-    "TypeScript",
+    "Dockerfile",
+    "Rich Text Format",
+    "CSS",
+    "Makefile",
+    "HTML",
+    "Procfile",
 ]
 topics = [
     "ai",
@@ -81,6 +81,6 @@ archived = false
 clone_url = "https://github.com/firecrawl/firecrawl.git"
 default_branch = "main"
 fork = false
-head_sha = "183d75057529fca1632dc3b507260be1d4bc3de8"
+head_sha = "67462ee0f7d53c5030ff0a23bd5133efe623f0a9"
 html_url = "https://github.com/firecrawl/firecrawl"
-stars = 142583
+stars = 142659

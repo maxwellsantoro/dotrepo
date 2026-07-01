@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spf13/cobra"
-generated_at = "2026-06-26T17:40:30.04691Z"
+generated_at = "2026-07-01T18:29:38.643402Z"
 
 [record.trust]
 confidence = "high"
@@ -51,10 +51,22 @@ maintainers = []
 security_contact = "cobra-security@googlegroups.com"
 
 [docs]
-root = "https://pkg.go.dev/badge/github.com/spf13/cobra.svg"
+root = "https://cobra.dev"
 
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/cli/cli"
+notes = "Cross-link from README: GitHub CLI"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
@@ -63,4 +75,4 @@ default_branch = "main"
 fork = false
 head_sha = "ad460ea8f249db69c943a365fb84f3a59042d54e"
 html_url = "https://github.com/spf13/cobra"
-stars = 44165
+stars = 44187

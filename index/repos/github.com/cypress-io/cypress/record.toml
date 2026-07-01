@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/cypress-io/cypress"
-generated_at = "2026-06-29T02:20:46.648345Z"
+generated_at = "2026-07-01T17:51:36.287531Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "https://cypress.io"
 license = "MIT"
 visibility = "public"
 languages = [
+    "TypeScript",
+    "JavaScript",
+    "Vue",
+    "HTML",
+    "SCSS",
     "CSS",
+    "Shell",
+    "Svelte",
     "CoffeeScript",
     "Dockerfile",
     "EJS",
-    "HTML",
-    "JavaScript",
-    "SCSS",
-    "Shell",
-    "Svelte",
-    "TypeScript",
-    "Vue",
 ]
 build = "yarn build"
 test = "yarn test"
@@ -66,11 +66,23 @@ root = "https://on.cypress.io"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/cypress-io/cypress"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/cypress-io/cypress.git"
 default_branch = "develop"
 fork = false
-head_sha = "ea5637913ca3f74adb1511f34a10bec9175d6cdf"
+head_sha = "ec97bf1ade862697a2d673738f4b02c9519fdd66"
 html_url = "https://github.com/cypress-io/cypress"
-stars = 50424
+stars = 50374

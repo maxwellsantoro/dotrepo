@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/duckdb/duckdb"
-generated_at = "2026-06-29T01:19:44.498458Z"
+generated_at = "2026-07-01T17:52:59.972945Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/Extensions.yml`. Inferred `repo.test` from `.github/workflows/Extensions.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "discord"
@@ -22,18 +21,20 @@ homepage = "http://www.duckdb.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
     "C++",
-    "CMake",
-    "Julia",
-    "Makefile",
     "Python",
-    "Shell",
+    "C",
+    "Julia",
     "Swift",
+    "CMake",
+    "HTML",
+    "Shell",
+    "Makefile",
     "TSQL",
+    "CSS",
 ]
-build = """make unittest_release SKIP_BUILD=1 T="--test-flags='--autoloading available --skip-compiled'""""
-test = """make unittest_release SKIP_BUILD=1 T="--test-flags='--autoloading available --skip-compiled'""""
+build = "make build"
+test = "make test"
 topics = [
     "sql",
     "database",
@@ -50,14 +51,11 @@ security_contact = "https://github.com/duckdb/duckdb/security/advisories/new"
 root = "https://duckdb.org/docs/current/sql/introduction"
 getting_started = "https://duckdb.org/docs/installation/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/duckdb/duckdb.git"
 default_branch = "main"
 fork = false
-head_sha = "ce431923305bff838c951e324f694d56006a9fba"
+head_sha = "d9a775e4c03b23ecb3784f879196aa81adf0ac1c"
 html_url = "https://github.com/duckdb/duckdb"
-stars = 39086
+stars = 39131

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sunnypilot/sunnypilot"
-generated_at = "2026-06-29T05:28:01.32666Z"
+generated_at = "2026-07-01T18:31:31.977703Z"
 
 [record.trust]
 confidence = "high"
@@ -22,17 +22,17 @@ homepage = "https://www.sunnypilot.ai"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
+    "Python",
     "C++",
-    "CSS",
     "Cap'n Proto",
-    "Cython",
+    "C",
+    "Shell",
+    "Jupyter Notebook",
     "HTML",
     "JavaScript",
-    "Jupyter Notebook",
-    "Python",
+    "Cython",
+    "CSS",
     "Ruby",
-    "Shell",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -95,4 +95,4 @@ default_branch = "master"
 fork = false
 head_sha = "31dc4d8e520f3b309acd05da79cc6ab448affad2"
 html_url = "https://github.com/sunnypilot/sunnypilot"
-stars = 1997
+stars = 1999

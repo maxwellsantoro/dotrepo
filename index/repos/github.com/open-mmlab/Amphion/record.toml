@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/open-mmlab/Amphion"
-generated_at = "2026-07-01T15:21:25.686372Z"
+generated_at = "2026-07-01T18:19:54.648264Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://openhlt.github.io/amphion/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Cython",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Jupyter Notebook",
     "Python",
+    "Jupyter Notebook",
+    "JavaScript",
     "Shell",
+    "HTML",
+    "Dockerfile",
+    "Cython",
 ]
 topics = [
     "audio-generation",

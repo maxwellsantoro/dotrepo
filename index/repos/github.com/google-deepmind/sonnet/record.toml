@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google-deepmind/sonnet"
-generated_at = "2026-07-01T15:20:11.171812Z"
+generated_at = "2026-07-01T18:04:59.566056Z"
 
 [record.trust]
 confidence = "high"
@@ -23,8 +23,8 @@ license = "Apache-2.0"
 visibility = "public"
 languages = [
     "Python",
-    "Shell",
     "Starlark",
+    "Shell",
 ]
 test = "pip install pytest pytest-xdist"
 topics = [

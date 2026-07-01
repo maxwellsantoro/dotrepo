@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/lin-xin/vue-manage-system"
-generated_at = "2026-07-01T15:19:21.675804Z"
+generated_at = "2026-07-01T18:12:56.022567Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://lin-xin.github.io/example/vue-manage-system/"
 license = "MIT"
 visibility = "public"
 languages = [
+    "Vue",
+    "TypeScript",
     "CSS",
     "HTML",
-    "TypeScript",
-    "Vue",
 ]
 build = "npm run build"
 topics = [

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ocornut/imgui"
-generated_at = "2026-07-01T14:43:48.313889Z"
+generated_at = "2026-07-01T18:19:42.104281Z"
 
 [record.trust]
 confidence = "low"
@@ -18,13 +18,13 @@ homepage = "https://github.com/ocornut/imgui"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
     "C++",
-    "GDB",
-    "GLSL",
-    "Objective-C",
+    "C",
     "Objective-C++",
+    "Objective-C",
     "Python",
+    "GLSL",
+    "GDB",
     "Shell",
 ]
 build = "emcmake cmake -B build -DCMAKE_BUILD_TYPE=Release examples/example_glfw_wgpu"
@@ -51,6 +51,6 @@ archived = false
 clone_url = "https://github.com/ocornut/imgui.git"
 default_branch = "master"
 fork = false
-head_sha = "e408733eccd89b7a2c0f0013a202cc48e199465b"
+head_sha = "279d04f7a3e17c4349715a0e7fde455e65facf4a"
 html_url = "https://github.com/ocornut/imgui"
-stars = 74215
+stars = 74217

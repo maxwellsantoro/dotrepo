@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/happydog-intj/JsBridge"
-generated_at = "2026-07-01T15:27:11.615312Z"
+generated_at = "2026-07-01T18:06:22.450056Z"
 
 [record.trust]
 confidence = "high"
@@ -20,8 +20,8 @@ description = "Inspired and modified from this and WeChat jsBridge file, with so
 homepage = "https://github.com/happydog-intj/JsBridge"
 visibility = "public"
 languages = [
-    "HTML",
     "Java",
+    "HTML",
     "JavaScript",
 ]
 build = "./gradlew build"

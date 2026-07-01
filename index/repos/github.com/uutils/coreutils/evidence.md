@@ -5,6 +5,7 @@
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from Cargo.toml as `cargo test --workspace`.
+- Discovered related relation to github.com/uutils/coreutils from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/karpathy/llama2.c"
-generated_at = "2026-07-01T15:20:03.061567Z"
+generated_at = "2026-07-01T18:11:27.543821Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://github.com/karpathy/llama2.c"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C",
+    "Python",
     "Jupyter Notebook",
     "Makefile",
-    "Python",
+    "Batchfile",
 ]
 test = "make test"
 topics = []

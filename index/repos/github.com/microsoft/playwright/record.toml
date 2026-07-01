@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/playwright"
-generated_at = "2026-06-29T02:21:13.444471Z"
+generated_at = "2026-07-01T18:15:33.218565Z"
 
 [record.trust]
 confidence = "high"
@@ -21,22 +21,22 @@ homepage = "https://playwright.dev"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
-    "C#",
-    "C++",
-    "CMake",
-    "CSS",
+    "TypeScript",
     "HTML",
-    "Java",
+    "CSS",
+    "C++",
     "JavaScript",
-    "Makefile",
     "Objective-C",
+    "Shell",
+    "Java",
+    "C",
     "PowerShell",
     "Python",
-    "Shell",
-    "TypeScript",
     "Vue",
+    "C#",
+    "CMake",
+    "Makefile",
+    "Batchfile",
 ]
 build = "npm run build"
 test = "npm test"
@@ -69,11 +69,23 @@ getting_started = "https://playwright.dev/docs/getting-started-vscode"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/microsoft/playwright"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/microsoft/playwright.git"
 default_branch = "main"
 fork = false
-head_sha = "287ad476bb1383c1ffeaf9d21677dc438809ab56"
+head_sha = "62c23485c896b296d968cd2d455f3776533e8b6a"
 html_url = "https://github.com/microsoft/playwright"
-stars = 91822
+stars = 92038

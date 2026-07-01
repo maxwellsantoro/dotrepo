@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/zigtools/zls"
-generated_at = "2026-07-01T15:25:54.99537Z"
+generated_at = "2026-07-01T18:38:15.655855Z"
 
 [record.trust]
 confidence = "high"
@@ -21,8 +21,8 @@ homepage = "https://zigtools.org/zls/install/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Nix",
     "Zig",
+    "Nix",
 ]
 topics = [
     "zig",
@@ -44,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "8da87d4f3305a550e7b739bad764e34bf1e46a08"
 html_url = "https://github.com/zigtools/zls"
-stars = 4990
+stars = 4991

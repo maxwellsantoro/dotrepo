@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ray-project/ray"
-generated_at = "2026-07-01T15:20:19.882932Z"
+generated_at = "2026-07-01T18:24:00.682936Z"
 
 [record.trust]
 confidence = "high"
@@ -22,23 +22,23 @@ homepage = "https://ray.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "C",
-    "C++",
-    "CSS",
-    "Cython",
-    "Dockerfile",
-    "Go Template",
-    "HTML",
-    "Java",
-    "JavaScript",
-    "Jinja",
-    "Linker Script",
-    "Objective-C",
-    "PowerShell",
     "Python",
-    "Shell",
-    "Starlark",
+    "C++",
+    "Java",
     "TypeScript",
+    "Starlark",
+    "Cython",
+    "Shell",
+    "Dockerfile",
+    "C",
+    "Objective-C",
+    "Jinja",
+    "Go Template",
+    "CSS",
+    "Linker Script",
+    "PowerShell",
+    "HTML",
+    "JavaScript",
 ]
 topics = [
     "ray",
@@ -101,6 +101,6 @@ archived = false
 clone_url = "https://github.com/ray-project/ray.git"
 default_branch = "master"
 fork = false
-head_sha = "a2da2a9c084ccfe710aedd1780c07fa6651942ce"
+head_sha = "f6a9b2b5130a35d3dd9e4463f7d17b2f11c6cd18"
 html_url = "https://github.com/ray-project/ray"
-stars = 43080
+stars = 43082

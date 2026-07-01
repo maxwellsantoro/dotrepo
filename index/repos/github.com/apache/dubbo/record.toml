@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/apache/dubbo"
-generated_at = "2026-07-01T15:31:36.924099Z"
+generated_at = "2026-07-01T17:24:34.552283Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://dubbo.apache.org/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
-    "Groovy",
-    "HTML",
     "Java",
-    "JavaScript",
-    "Lex",
+    "Groovy",
     "Mustache",
     "Shell",
+    "Batchfile",
+    "JavaScript",
+    "HTML",
+    "Lex",
+    "Dockerfile",
 ]
 build = "./mvnw package"
 test = "./mvnw test"

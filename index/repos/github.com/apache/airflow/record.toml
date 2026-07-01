@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/apache/airflow"
-generated_at = "2026-06-26T18:31:58.132131Z"
+generated_at = "2026-07-01T17:24:29.972605Z"
 
 [record.trust]
 confidence = "high"
@@ -16,27 +16,28 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.
 
 [repo]
 name = "Apache Airflow"
-description = "Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements."
+description = "Apache Airflow (or simply Airflow) is a platform to programmatically author, schedule, and monitor workflows."
 homepage = "https://airflow.apache.org/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
+    "Python",
+    "TypeScript",
     "Go",
-    "HCL",
+    "JavaScript",
+    "Shell",
+    "Dockerfile",
+    "CSS",
+    "Kotlin",
+    "Jinja",
+    "Nunjucks",
     "HTML",
     "Java",
-    "JavaScript",
-    "Jinja",
     "Jupyter Notebook",
-    "Just",
-    "Kotlin",
+    "Scala",
     "Mako",
-    "Nunjucks",
-    "Python",
-    "Shell",
-    "TypeScript",
+    "Just",
+    "HCL",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -107,14 +108,14 @@ maintainers = [
 ]
 security_contact = "security@airflow.apache.org"
 
-[relations]
-references = []
+[docs]
+root = "https://airflow.apache.org/"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/apache/airflow.git"
 default_branch = "main"
 fork = false
-head_sha = "ba8cfe47e57e101a7b9ec39d4ae4a0b042042862"
+head_sha = "46186d2891228d786cb05f1c6dc2251987cc1b2d"
 html_url = "https://github.com/apache/airflow"
-stars = 45941
+stars = 45990

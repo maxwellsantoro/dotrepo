@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/LMCache/LMCache"
-generated_at = "2026-06-29T05:20:58.165628Z"
+generated_at = "2026-07-01T17:18:59.011508Z"
 
 [record.trust]
 confidence = "high"
@@ -21,19 +21,19 @@ homepage = "https://lmcache.ai/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "C",
-    "C++",
-    "CMake",
-    "CSS",
-    "Cuda",
-    "Dockerfile",
+    "Python",
     "Go",
-    "HTML",
+    "Shell",
+    "C++",
+    "Rust",
+    "Cuda",
     "JavaScript",
     "Makefile",
-    "Python",
-    "Rust",
-    "Shell",
+    "HTML",
+    "C",
+    "Dockerfile",
+    "CSS",
+    "CMake",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -78,6 +78,6 @@ archived = false
 clone_url = "https://github.com/LMCache/LMCache.git"
 default_branch = "dev"
 fork = false
-head_sha = "cc9b0f51bedf44ef711f7a079aaa4b4082a4f392"
+head_sha = "9f5cee0c4923cd65a5c6708f356097f5be7b10ac"
 html_url = "https://github.com/LMCache/LMCache"
-stars = 9942
+stars = 9993

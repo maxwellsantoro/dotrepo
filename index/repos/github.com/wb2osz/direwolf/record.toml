@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/wb2osz/direwolf"
-generated_at = "2026-07-01T15:11:22.498819Z"
+generated_at = "2026-07-01T18:36:18.758641Z"
 
 [record.trust]
 confidence = "high"
@@ -22,14 +22,14 @@ homepage = "https://github.com/wb2osz/direwolf"
 license = "GPL-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C",
-    "C++",
     "CMake",
-    "Makefile",
     "Perl",
-    "Python",
     "Shell",
+    "C++",
+    "Makefile",
+    "Python",
+    "Batchfile",
 ]
 build = "make build"
 test = "make test"

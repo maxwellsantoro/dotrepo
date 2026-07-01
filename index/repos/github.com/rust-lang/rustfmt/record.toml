@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rust-lang/rustfmt"
-generated_at = "2026-06-29T01:57:13.79824Z"
+generated_at = "2026-07-01T18:26:33.649325Z"
 
 [record.trust]
 confidence = "high"
@@ -21,8 +21,8 @@ homepage = "https://rust-lang.github.io/rustfmt/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "RenderScript",
     "Rust",
+    "RenderScript",
     "Shell",
 ]
 build = "cargo build"
@@ -34,8 +34,23 @@ topics = [
     "codeformatter",
 ]
 
+[docs]
+root = "https://rust-lang.github.io/rustfmt/"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/rust-lang/rustfmt"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false

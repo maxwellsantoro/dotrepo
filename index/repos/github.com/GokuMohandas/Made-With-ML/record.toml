@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/GokuMohandas/Made-With-ML"
-generated_at = "2026-07-01T15:24:48.301649Z"
+generated_at = "2026-07-01T17:17:27.645463Z"
 
 [record.trust]
 confidence = "high"
@@ -22,9 +22,9 @@ license = "MIT"
 visibility = "public"
 languages = [
     "Jupyter Notebook",
-    "Makefile",
     "Python",
     "Shell",
+    "Makefile",
 ]
 test = "python -m pytest"
 topics = [
@@ -53,4 +53,4 @@ default_branch = "main"
 fork = false
 head_sha = "3361aeb8ddfc2affdba9f545c978c38c85cee764"
 html_url = "https://github.com/GokuMohandas/Made-With-ML"
-stars = 48478
+stars = 48480

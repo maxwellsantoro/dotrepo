@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/electron/electron"
-generated_at = "2026-07-01T15:30:17.01626Z"
+generated_at = "2026-07-01T18:00:23.632875Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "https://electronjs.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
     "C++",
-    "CSS",
-    "Go Template",
-    "HTML",
-    "JavaScript",
-    "Objective-C",
-    "Objective-C++",
-    "Python",
-    "Shell",
     "TypeScript",
+    "Objective-C++",
+    "JavaScript",
+    "Python",
+    "Objective-C",
+    "Shell",
+    "HTML",
+    "Go Template",
+    "C",
+    "CSS",
 ]
 test = "yarn test"
 topics = [
@@ -79,6 +79,6 @@ archived = false
 clone_url = "https://github.com/electron/electron.git"
 default_branch = "main"
 fork = false
-head_sha = "57cc00ce06d2a1dc222bb2c358dcd82cfd57ab13"
+head_sha = "85f0b1968e2664cf2c07f1af731da5f9cdc92b8d"
 html_url = "https://github.com/electron/electron"
 stars = 121853

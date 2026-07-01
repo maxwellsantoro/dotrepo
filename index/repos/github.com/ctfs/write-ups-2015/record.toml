@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ctfs/write-ups-2015"
-generated_at = "2026-07-01T15:19:38.47191Z"
+generated_at = "2026-07-01T17:51:31.316965Z"
 
 [record.trust]
 confidence = "high"
@@ -20,27 +20,27 @@ description = "There are some problems with CTF write-ups in general:"
 homepage = "https://github.com/ctfs/write-ups-2015"
 visibility = "public"
 languages = [
+    "CSS",
+    "JavaScript",
+    "HTML",
+    "C",
+    "Python",
     "Assembly",
     "Brainfuck",
-    "C",
-    "C++",
-    "COBOL",
-    "CSS",
-    "Go",
-    "HTML",
     "Hack",
-    "Java",
-    "JavaScript",
-    "Makefile",
     "PHP",
-    "Pascal",
-    "Perl",
-    "Python",
-    "Roff",
-    "Ruby",
-    "Rust",
     "Shell",
+    "Go",
+    "C++",
+    "Rust",
+    "Java",
+    "Ruby",
     "SystemVerilog",
+    "COBOL",
+    "Pascal",
+    "Roff",
+    "Perl",
+    "Makefile",
 ]
 topics = []
 

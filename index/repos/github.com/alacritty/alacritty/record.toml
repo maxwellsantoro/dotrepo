@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/alacritty/alacritty"
-generated_at = "2026-07-01T04:31:16.8769Z"
+generated_at = "2026-07-01T17:23:36.765244Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://alacritty.org"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "GLSL",
-    "Makefile",
     "Rust",
     "Shell",
+    "GLSL",
+    "Makefile",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -51,4 +51,4 @@ default_branch = "master"
 fork = false
 head_sha = "bdb72b32eeb074e3a0b8559d8ccac458237474a3"
 html_url = "https://github.com/alacritty/alacritty"
-stars = 64723
+stars = 64727

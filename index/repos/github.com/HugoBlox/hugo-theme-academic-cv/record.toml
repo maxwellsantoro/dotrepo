@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/HugoBlox/hugo-theme-academic-cv"
-generated_at = "2026-07-01T14:42:57.994703Z"
+generated_at = "2026-07-01T17:17:57.475073Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,9 +18,9 @@ homepage = "https://hugoblox.com/templates/academic-cv"
 license = "MIT"
 visibility = "public"
 languages = [
-    "HTML",
     "Jupyter Notebook",
     "TeX",
+    "HTML",
 ]
 test = "go test ./..."
 topics = [

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/browser-use/browser-use"
-generated_at = "2026-06-29T01:17:17.19506Z"
+generated_at = "2026-07-01T17:26:48.30195Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://browser-use.com"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "HTML",
     "Python",
     "Shell",
+    "Dockerfile",
+    "HTML",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -43,16 +43,14 @@ maintainers = []
 security_contact = "https://github.com/browser-use/browser-use/security/advisories/new"
 
 [docs]
+root = "https://browser-use.com"
 getting_started = "https://cloud.browser-use.com/new-api-key?utm_source=github&utm_medium=readme-quickstart-api-key"
-
-[relations]
-references = []
 
 [x.github]
 archived = false
 clone_url = "https://github.com/browser-use/browser-use.git"
 default_branch = "main"
 fork = false
-head_sha = "2454d3e2551705232333c906ded8fc31ab0fc9f2"
+head_sha = "0162e02820d608902536e82c7dea43472a16e65a"
 html_url = "https://github.com/browser-use/browser-use"
-stars = 101171
+stars = 101983

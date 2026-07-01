@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kubernetes/kubernetes"
-generated_at = "2026-06-29T01:16:56.704893Z"
+generated_at = "2026-07-01T18:12:13.838402Z"
 
 [record.trust]
 confidence = "high"
@@ -21,16 +21,16 @@ homepage = "https://kubernetes.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "C",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HTML",
-    "Makefile",
-    "PowerShell",
-    "Python",
     "Shell",
+    "PowerShell",
+    "Makefile",
+    "Dockerfile",
+    "Python",
+    "Go Template",
+    "C",
     "sed",
+    "HTML",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -45,14 +45,14 @@ topics = [
 maintainers = []
 security_contact = "https://kubernetes.io/docs/reference/issues-security/security/#report-a-vulnerability"
 
-[relations]
-references = []
+[docs]
+root = "https://kubernetes.io"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/kubernetes/kubernetes.git"
 default_branch = "master"
 fork = false
-head_sha = "f7884e76a6289ef290e926ebcf5e9e1c1bdd2185"
+head_sha = "bbdae911b89953eb7a229c1b70c660a525a502b2"
 html_url = "https://github.com/kubernetes/kubernetes"
-stars = 123469
+stars = 123313

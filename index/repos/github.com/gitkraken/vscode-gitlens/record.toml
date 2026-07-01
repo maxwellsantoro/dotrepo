@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/gitkraken/vscode-gitlens"
-generated_at = "2026-06-29T05:23:10.651455Z"
+generated_at = "2026-07-01T18:03:57.198Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "http://gitkraken.com/gitlens"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
-    "HTML",
-    "Handlebars",
+    "TypeScript",
     "JavaScript",
     "SCSS",
+    "HTML",
+    "Handlebars",
     "Shell",
-    "TypeScript",
+    "Dockerfile",
+    "Batchfile",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -59,8 +59,8 @@ provenance = [
 
 [[relations.links]]
 kind = "related"
-target = "github.com/gitkraken/vscode-gitlens 'Open GitLens on GitHub'"
-notes = "Cross-link from README: open-source"
+target = "github.com/gitkraken/gitlens-docs"
+notes = "Cross-link from README: GitLens Docs"
 
 [relations.links.trust]
 confidence = "low"
@@ -74,6 +74,6 @@ archived = false
 clone_url = "https://github.com/gitkraken/vscode-gitlens.git"
 default_branch = "main"
 fork = false
-head_sha = "86dddba765d9ff916df1aaab2a3f91b9c69545ed"
+head_sha = "6bdb44bfc65167decf9ac4cd4d64391fa3f362f8"
 html_url = "https://github.com/gitkraken/vscode-gitlens"
-stars = 9850
+stars = 9854

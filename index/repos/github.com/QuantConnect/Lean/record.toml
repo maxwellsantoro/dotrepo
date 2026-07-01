@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/QuantConnect/Lean"
-generated_at = "2026-07-01T15:21:49.679652Z"
+generated_at = "2026-07-01T17:20:24.065734Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://lean.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C#",
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "Jupyter Notebook",
     "Python",
+    "Jupyter Notebook",
+    "HTML",
+    "CSS",
     "Shell",
+    "Dockerfile",
+    "Batchfile",
 ]
 topics = [
     "c-sharp",
@@ -71,6 +71,6 @@ archived = false
 clone_url = "https://github.com/QuantConnect/Lean.git"
 default_branch = "master"
 fork = false
-head_sha = "38a78c411a62fdfc8d2a69c54b42e9953eb8c279"
+head_sha = "eb12c8fa655f0737f140566ae354f8db7a76bceb"
 html_url = "https://github.com/QuantConnect/Lean"
-stars = 20282
+stars = 20283

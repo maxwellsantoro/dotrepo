@@ -5,7 +5,7 @@
 - Inferred repo.test from .github/workflows/autotools-macos.yml as `make check`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
+- Set `repo.build` to `cmake --build build --target install` from `.github/workflows/cmake-win64.yml` after model escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

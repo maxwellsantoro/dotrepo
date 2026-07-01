@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/quantopian/zipline"
-generated_at = "2026-07-01T15:19:49.689123Z"
+generated_at = "2026-07-01T18:23:51.873943Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://www.zipline.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Python",
+    "Jupyter Notebook",
+    "Shell",
     "Batchfile",
+    "PowerShell",
     "Dockerfile",
     "Emacs Lisp",
-    "Jupyter Notebook",
-    "PowerShell",
-    "Python",
-    "Shell",
 ]
 topics = [
     "quant",

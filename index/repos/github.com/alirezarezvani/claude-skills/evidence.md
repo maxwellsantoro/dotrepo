@@ -4,7 +4,7 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred repo.build from .github/workflows/ci-quality-gate.yml as `python -m compileall \`.
 - Imported repo.test from pyproject.toml as `python -m pytest`.
-- Discovered related relation to github.com/alirezarezvani/claude-code-skills-agents-factory from README cross-link.
+- Discovered related relation to github.com/Forward-Future/loop-library from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

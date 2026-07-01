@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/bannedbook/fanqiang"
-generated_at = "2026-07-01T15:28:03.35778Z"
+generated_at = "2026-07-01T17:25:38.854339Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ description = "请首先自行安装Google Chrome 浏览器，然后下载Chrome
 homepage = "https://github.com/bannedbook/fanqiang"
 visibility = "public"
 languages = [
-    "AIDL",
-    "Batchfile",
-    "Go",
+    "Kotlin",
+    "JavaScript",
     "HTML",
     "Java",
-    "JavaScript",
-    "Kotlin",
-    "Perl",
-    "Python",
-    "Ruby",
     "Shell",
+    "Python",
+    "Go",
+    "Ruby",
+    "AIDL",
+    "Batchfile",
+    "Perl",
 ]
 topics = [
     "ssr",
@@ -54,4 +54,4 @@ default_branch = "master"
 fork = false
 head_sha = "c0fdbd16508e6e6ba8cc716b7235348cfcc9aed7"
 html_url = "https://github.com/bannedbook/fanqiang"
-stars = 48514
+stars = 48532

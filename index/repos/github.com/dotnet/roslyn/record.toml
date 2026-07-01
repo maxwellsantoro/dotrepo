@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dotnet/roslyn"
-generated_at = "2026-07-01T15:22:41.852299Z"
+generated_at = "2026-07-01T17:52:55.087222Z"
 
 [record.trust]
 confidence = "high"
@@ -21,21 +21,21 @@ homepage = "https://docs.microsoft.com/dotnet/csharp/roslyn-sdk/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "1C Enterprise",
-    "Batchfile",
     "C#",
+    "Visual Basic .NET",
+    "HTML",
+    "PowerShell",
+    "1C Enterprise",
+    "IL Assembly",
+    "Shell",
+    "Python",
     "CMake",
     "CSS",
+    "Vim Snippet",
+    "Batchfile",
+    "ReScript",
     "Dockerfile",
     "F#",
-    "HTML",
-    "IL Assembly",
-    "PowerShell",
-    "Python",
-    "ReScript",
-    "Shell",
-    "Vim Snippet",
-    "Visual Basic .NET",
 ]
 topics = [
     "roslyn",

@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spring-projects/spring-boot"
-generated_at = "2026-07-01T04:29:51.902395Z"
+generated_at = "2026-07-01T18:29:49.626352Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
+    "imported",
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/run-system-tests.yml`. Inferred `repo.test` from `.github/workflows/run-system-tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `build.gradle`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "spring-boot"
@@ -21,24 +22,24 @@ homepage = "https://spring.io/projects/spring-boot"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "CSS",
-    "Dockerfile",
-    "FreeMarker",
-    "Go Template",
-    "Groovy",
-    "HTML",
     "Java",
-    "JavaScript",
     "Kotlin",
-    "Mustache",
-    "Ruby",
+    "HTML",
+    "JavaScript",
+    "Groovy",
     "Shell",
+    "Ruby",
+    "FreeMarker",
+    "Batchfile",
+    "Go Template",
     "Smarty",
+    "Mustache",
+    "Dockerfile",
     "Vim Snippet",
+    "CSS",
 ]
-build = "./gradlew systemTest"
-test = "./gradlew systemTest"
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "java",
     "spring-boot",
@@ -54,6 +55,6 @@ archived = false
 clone_url = "https://github.com/spring-projects/spring-boot.git"
 default_branch = "main"
 fork = false
-head_sha = "ca7849e507f30eeafcabf22c85b0a45a50e24d2e"
+head_sha = "fb9794a2d346036a6adfa74cc3f1253010d63ea0"
 html_url = "https://github.com/spring-projects/spring-boot"
-stars = 80988
+stars = 80990

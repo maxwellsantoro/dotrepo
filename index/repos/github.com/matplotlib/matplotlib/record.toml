@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/matplotlib/matplotlib"
-generated_at = "2026-06-26T18:32:10.017288Z"
+generated_at = "2026-07-01T18:14:05.670742Z"
 
 [record.trust]
 confidence = "high"
@@ -16,22 +16,22 @@ notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SEC
 
 [repo]
 name = "Install"
-description = "Matplotlib is a comprehensive library for creating static, animated, and interactive visualizations in Python."
+description = "You've discovered a bug or something else you want to change — excellent!"
 homepage = "https://matplotlib.org/stable/"
 visibility = "public"
 languages = [
-    "C",
-    "C++",
-    "CSS",
-    "HTML",
-    "JavaScript",
-    "Jupyter Notebook",
-    "Lua",
-    "Meson",
-    "Objective-C",
     "Python",
+    "C++",
+    "Jupyter Notebook",
+    "Objective-C",
+    "JavaScript",
+    "Meson",
+    "CSS",
+    "C",
+    "HTML",
     "Shell",
     "TeX",
+    "Lua",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -51,14 +51,29 @@ topics = [
 maintainers = []
 security_contact = "https://tidelift.com/security"
 
+[docs]
+root = "https://matplotlib.org/stable/"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/matplotlib/matplotlib"
+notes = "Cross-link from README: ![GitHub actions status"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/matplotlib/matplotlib.git"
 default_branch = "main"
 fork = false
-head_sha = "03334a9df0f85546fae40165528716fbb8806267"
+head_sha = "c0a08db5a17bfcd080dc9054ce0c2a8c67f83173"
 html_url = "https://github.com/matplotlib/matplotlib"
-stars = 22932
+stars = 22945

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/keystonejs/keystone"
-generated_at = "2026-06-29T05:22:12.738941Z"
+generated_at = "2026-07-01T18:11:36.007034Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/tests_ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/tests_ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Keystone"
@@ -22,9 +22,9 @@ homepage = "https://keystonejs.com"
 license = "MIT"
 visibility = "public"
 languages = [
-    "HTML",
-    "JavaScript",
     "TypeScript",
+    "JavaScript",
+    "HTML",
 ]
 build = "pnpm build"
 test = "pnpm test:filters"
@@ -65,6 +65,6 @@ archived = false
 clone_url = "https://github.com/keystonejs/keystone.git"
 default_branch = "main"
 fork = false
-head_sha = "a92fd44921353582b6284dd4627050eab23be7cb"
+head_sha = "b9467b67dbaf233dec847fd2e7b71d56ad3703d3"
 html_url = "https://github.com/keystonejs/keystone"
-stars = 9902
+stars = 9904

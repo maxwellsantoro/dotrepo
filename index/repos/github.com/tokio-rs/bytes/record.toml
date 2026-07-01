@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tokio-rs/bytes"
-generated_at = "2026-06-26T18:30:49.76824Z"
+generated_at = "2026-07-01T18:33:20.627442Z"
 
 [record.trust]
 confidence = "high"
@@ -38,6 +38,18 @@ root = "https://docs.rs/bytes"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/tokio-rs/bytes"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/tokio-rs/bytes.git"
@@ -45,4 +57,4 @@ default_branch = "master"
 fork = false
 head_sha = "91402cee605b21bf530ac07ede463599182b5d32"
 html_url = "https://github.com/tokio-rs/bytes"
-stars = 2226
+stars = 2224

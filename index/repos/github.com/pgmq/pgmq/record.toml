@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/pgmq/pgmq"
-generated_at = "2026-07-01T14:43:53.02285Z"
+generated_at = "2026-07-01T18:21:11.098301Z"
 
 [record.trust]
 confidence = "medium"
@@ -21,13 +21,14 @@ homepage = "https://pgmq.github.io/pgmq/"
 license = "PostgreSQL"
 visibility = "public"
 languages = [
-    "Makefile",
     "PLpgSQL",
-    "Python",
-    "Ruby",
     "Rust",
+    "Python",
+    "Makefile",
     "Shell",
+    "Ruby",
 ]
+test = "uv run pytest test.py -v"
 topics = ["message-queue"]
 
 [owners]
@@ -48,4 +49,4 @@ default_branch = "main"
 fork = false
 head_sha = "f88cf285e07bce3394318dc8b0307d94dff35fe3"
 html_url = "https://github.com/pgmq/pgmq"
-stars = 4989
+stars = 4990

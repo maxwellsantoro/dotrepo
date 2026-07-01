@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/below/HelloSilicon"
-generated_at = "2026-07-01T15:23:02.555539Z"
+generated_at = "2026-07-01T17:25:52.256393Z"
 
 [record.trust]
 confidence = "high"
@@ -22,11 +22,11 @@ license = "MIT"
 visibility = "public"
 languages = [
     "Assembly",
-    "C",
     "Makefile",
+    "C",
+    "Swift",
     "Python",
     "Shell",
-    "Swift",
 ]
 topics = [
     "arm64",

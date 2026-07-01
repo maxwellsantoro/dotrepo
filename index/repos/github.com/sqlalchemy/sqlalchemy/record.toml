@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sqlalchemy/sqlalchemy"
-generated_at = "2026-06-29T01:57:16.966706Z"
+generated_at = "2026-07-01T18:30:00.134702Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "sqlalchemy"
@@ -22,8 +22,8 @@ homepage = "https://www.sqlalchemy.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Cython",
     "Python",
+    "Cython",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -37,8 +37,8 @@ topics = [
 maintainers = []
 security_contact = "https://tidelift.com/docs/security"
 
-[relations]
-references = []
+[docs]
+root = "https://www.sqlalchemy.org"
 
 [x.github]
 archived = false
@@ -47,4 +47,4 @@ default_branch = "main"
 fork = false
 head_sha = "d59159ca08cdf661f97d19d2966071a1b1d3df80"
 html_url = "https://github.com/sqlalchemy/sqlalchemy"
-stars = 11947
+stars = 11953

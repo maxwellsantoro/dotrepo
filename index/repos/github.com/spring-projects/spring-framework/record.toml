@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spring-projects/spring-framework"
-generated_at = "2026-07-01T15:12:29.743494Z"
+generated_at = "2026-07-01T18:29:55.380189Z"
 
 [record.trust]
 confidence = "high"
@@ -22,20 +22,20 @@ homepage = "https://spring.io/projects/spring-framework"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "AspectJ",
-    "CSS",
-    "FreeMarker",
-    "Go Template",
-    "Groovy",
-    "HTML",
     "Java",
-    "JavaScript",
     "Kotlin",
-    "PLpgSQL",
-    "Python",
-    "Ruby",
-    "Smarty",
+    "AspectJ",
+    "FreeMarker",
+    "Groovy",
     "XSLT",
+    "HTML",
+    "Ruby",
+    "CSS",
+    "Go Template",
+    "PLpgSQL",
+    "JavaScript",
+    "Python",
+    "Smarty",
 ]
 build = "./gradlew build"
 test = "./gradlew test"
@@ -59,4 +59,4 @@ default_branch = "main"
 fork = false
 head_sha = "df0ec741074d868f127df6ed03fc24b2657dcd9c"
 html_url = "https://github.com/spring-projects/spring-framework"
-stars = 60081
+stars = 60082

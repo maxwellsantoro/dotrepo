@@ -7,7 +7,7 @@
 - Imported repo.test from package.json as `yarn test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
+- Left `repo.build` unset after model escalation: Both candidates are workflow-based build commands with equal tier status and no clear primary manifest/CI precedence established between the setup and fork-check workflows..
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

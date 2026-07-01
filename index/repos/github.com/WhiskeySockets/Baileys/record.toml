@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/WhiskeySockets/Baileys"
-generated_at = "2026-06-29T05:21:18.20294Z"
+generated_at = "2026-07-01T17:22:54.605558Z"
 
 [record.trust]
 confidence = "high"
@@ -22,8 +22,8 @@ license = "MIT"
 visibility = "public"
 languages = [
     "JavaScript",
-    "Shell",
     "TypeScript",
+    "Shell",
 ]
 build = "yarn build"
 test = "yarn test"
@@ -47,18 +47,6 @@ root = "https://baileys.wiki/docs/intro/"
 
 [relations]
 references = []
-
-[[relations.links]]
-kind = "related"
-target = "github.com/git@github.com:WhiskeySockets/Baileys"
-notes = "Declared repository in package.json."
-
-[relations.links.trust]
-confidence = "low"
-provenance = [
-    "declared",
-    "manifest",
-]
 
 [[relations.links]]
 kind = "related"
@@ -91,4 +79,4 @@ default_branch = "master"
 fork = false
 head_sha = "731cd6b5d1991a16d0c65072fd3107c43968e4a9"
 html_url = "https://github.com/WhiskeySockets/Baileys"
-stars = 9931
+stars = 9965

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/openobserve/openobserve"
-generated_at = "2026-06-29T05:18:20.585301Z"
+generated_at = "2026-07-01T18:20:27.517956Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "https://openobserve.ai"
 license = "AGPL-3.0"
 visibility = "public"
 languages = [
+    "TypeScript",
+    "Rust",
+    "Vue",
+    "JavaScript",
+    "Python",
+    "SCSS",
     "CSS",
+    "Shell",
     "Dockerfile",
     "HTML",
-    "JavaScript",
     "Makefile",
-    "Python",
-    "Rust",
-    "SCSS",
-    "Shell",
-    "TypeScript",
-    "Vue",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -86,6 +86,6 @@ archived = false
 clone_url = "https://github.com/openobserve/openobserve.git"
 default_branch = "main"
 fork = false
-head_sha = "0a2cbdb38724879d1ab93bcee7face4281b8aa41"
+head_sha = "da5c9a930452314273d0b093b538a5d2b1b1cd84"
 html_url = "https://github.com/openobserve/openobserve"
-stars = 19474
+stars = 19654

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/bitcoin/bitcoin"
-generated_at = "2026-07-01T15:22:54.584984Z"
+generated_at = "2026-07-01T17:26:09.557278Z"
 
 [record.trust]
 confidence = "high"
@@ -22,22 +22,22 @@ homepage = "https://bitcoincore.org/en/download"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Assembly",
-    "C",
     "C++",
-    "CMake",
-    "Cap'n Proto",
-    "Dockerfile",
-    "HTML",
-    "M4",
-    "Makefile",
-    "Nix",
-    "Objective-C++",
     "Python",
-    "Rust",
-    "Sage",
-    "Scheme",
+    "C",
+    "CMake",
     "Shell",
+    "Makefile",
+    "Sage",
+    "M4",
+    "Rust",
+    "Assembly",
+    "HTML",
+    "Scheme",
+    "Cap'n Proto",
+    "Objective-C++",
+    "Dockerfile",
+    "Nix",
 ]
 build = "sudo apt-get install clang mold ccache build-essential cmake ninja-build pkgconf python3-zmq libboost-dev libsqlite3-dev systemtap-sdt-dev libzmq3-dev qt6-base-dev qt6-tools-dev qt6-l10n-tools libqrencode-dev capnproto libcapnp-dev -y"
 topics = [
@@ -75,6 +75,6 @@ archived = false
 clone_url = "https://github.com/bitcoin/bitcoin.git"
 default_branch = "master"
 fork = false
-head_sha = "f26c15bdd28f532f95ead48736146d88b66bbea7"
+head_sha = "a8823c099618559fdf6116fe17c9afd311e88890"
 html_url = "https://github.com/bitcoin/bitcoin"
-stars = 89515
+stars = 89517

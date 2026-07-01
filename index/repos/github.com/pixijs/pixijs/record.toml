@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pixijs/pixijs"
-generated_at = "2026-06-29T05:14:02.40657Z"
+generated_at = "2026-07-01T18:21:25.989877Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "http://pixijs.com"
 license = "MIT"
 visibility = "public"
 languages = [
+    "TypeScript",
+    "JavaScript",
+    "MDX",
+    "WGSL",
     "CSS",
     "GLSL",
     "HTML",
-    "JavaScript",
-    "MDX",
     "Shell",
-    "TypeScript",
-    "WGSL",
 ]
 build = "npm run build"
 test = "npm test"
@@ -80,4 +80,4 @@ default_branch = "dev"
 fork = false
 head_sha = "cbaa784685a27da45311d7f3fa0e9b9bc9a899d4"
 html_url = "https://github.com/pixijs/pixijs"
-stars = 47632
+stars = 47654

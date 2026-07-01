@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pytest-dev/pytest"
-generated_at = "2026-06-29T07:56:28.342479045Z"
+generated_at = "2026-07-01T18:23:30.128986Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "pytest"
@@ -22,8 +22,8 @@ homepage = "https://pytest.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Gherkin",
     "Python",
+    "Gherkin",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -47,6 +47,6 @@ archived = false
 clone_url = "https://github.com/pytest-dev/pytest.git"
 default_branch = "main"
 fork = false
-head_sha = "0e0f7813327ca0ef65feb457cf9a5885e9ba7cb9"
+head_sha = "1aa747de62dd9e9f395513c25298ba604f1724d0"
 html_url = "https://github.com/pytest-dev/pytest"
-stars = 14278
+stars = 14288

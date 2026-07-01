@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/h2oai/h2o-llmstudio"
-generated_at = "2026-07-01T15:32:29.573771Z"
+generated_at = "2026-07-01T18:06:06.069896Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://h2o.ai"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Python",
+    "Makefile",
     "Dockerfile",
     "Gherkin",
-    "Makefile",
-    "Python",
     "Shell",
 ]
 build = "make build"

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Rigellute/spotify-tui"
-generated_at = "2026-06-29T05:19:25.520967Z"
+generated_at = "2026-07-01T17:20:54.204683Z"
 
 [record.trust]
 confidence = "high"
@@ -21,8 +21,8 @@ homepage = "https://github.com/Rigellute/spotify-tui"
 license = "MIT"
 visibility = "public"
 languages = [
-    "HTML",
     "Rust",
+    "HTML",
 ]
 build = "cargo build"
 test = "cargo test"
@@ -70,4 +70,4 @@ default_branch = "master"
 fork = false
 head_sha = "c4dcf6b9fd8318017acbdd7ec005955e26cf2794"
 html_url = "https://github.com/Rigellute/spotify-tui"
-stars = 19246
+stars = 19244

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/storybookjs/storybook"
-generated_at = "2026-07-01T14:44:32.389642Z"
+generated_at = "2026-07-01T18:30:35.266419Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,19 +18,19 @@ homepage = "https://storybook.js.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "AppleScript",
-    "CSS",
-    "EJS",
-    "HTML",
-    "Handlebars",
+    "TypeScript",
     "JavaScript",
     "MDX",
-    "Pug",
-    "SCSS",
-    "Shell",
     "Svelte",
-    "TypeScript",
     "Vue",
+    "CSS",
+    "HTML",
+    "EJS",
+    "Shell",
+    "Pug",
+    "AppleScript",
+    "Handlebars",
+    "SCSS",
 ]
 test = "yarn test"
 topics = [
@@ -71,6 +71,6 @@ archived = false
 clone_url = "https://github.com/storybookjs/storybook.git"
 default_branch = "next"
 fork = false
-head_sha = "5fe3f7bb8493a8c977d7efdc10bed6301b788791"
+head_sha = "cf9b1ce71f382c6d6a47eaaf0d4ce50b30b23668"
 html_url = "https://github.com/storybookjs/storybook"
-stars = 90410
+stars = 90409

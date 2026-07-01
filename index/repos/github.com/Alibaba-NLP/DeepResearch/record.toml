@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Alibaba-NLP/DeepResearch"
-generated_at = "2026-07-01T15:31:09.797348Z"
+generated_at = "2026-07-01T17:15:24.07415Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://tongyi-agent.github.io/blog/introducing-tongyi-deep-research
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Python",
     "Shell",
+    "Dockerfile",
 ]
 topics = [
     "agent",

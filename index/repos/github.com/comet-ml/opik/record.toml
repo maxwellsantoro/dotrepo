@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/comet-ml/opik"
-generated_at = "2026-07-01T15:32:34.59777Z"
+generated_at = "2026-07-01T17:51:01.582928Z"
 
 [record.trust]
 confidence = "high"
@@ -22,17 +22,17 @@ homepage = "https://www.comet.com/docs/opik/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Python",
+    "TypeScript",
+    "Shell",
+    "Jupyter Notebook",
+    "PowerShell",
+    "SCSS",
+    "JavaScript",
+    "Makefile",
     "Dockerfile",
     "Go Template",
     "HTML",
-    "JavaScript",
-    "Jupyter Notebook",
-    "Makefile",
-    "PowerShell",
-    "Python",
-    "SCSS",
-    "Shell",
-    "TypeScript",
 ]
 test = "mvn clean test"
 topics = [
@@ -71,6 +71,6 @@ archived = false
 clone_url = "https://github.com/comet-ml/opik.git"
 default_branch = "main"
 fork = false
-head_sha = "8d2c1d6b6992044b9674370f9baf7dedcd580558"
+head_sha = "161c8f20e0e1ed46c02a2ff3b8a1568a3c5dec16"
 html_url = "https://github.com/comet-ml/opik"
-stars = 20181
+stars = 20185

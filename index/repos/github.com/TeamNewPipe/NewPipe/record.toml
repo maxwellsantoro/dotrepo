@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/TeamNewPipe/NewPipe"
-generated_at = "2026-06-29T02:17:36.689894Z"
+generated_at = "2026-07-01T17:22:00.659171Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle.kts`. Imported `repo.build` from `build.gradle.kts`. Imported `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "NewPipe"
@@ -22,13 +21,13 @@ homepage = "https://newpipe.net"
 license = "GPL-3.0"
 visibility = "public"
 languages = [
-    "HTML",
     "Java",
     "Kotlin",
+    "HTML",
     "Swift",
 ]
-build = "./gradlew assembleContinuous lintContinuous testDebugUnitTest --stacktrace -DskipFormatKtlint"
-test = "./gradlew assembleContinuous lintContinuous testDebugUnitTest --stacktrace -DskipFormatKtlint"
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "youtube-video",
     "video",
@@ -49,11 +48,23 @@ root = "https://teamnewpipe.github.io/documentation/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/TeamNewPipe/NewPipeExtractor"
+notes = "Cross-link from README: NewPipe Extractor"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/TeamNewPipe/NewPipe.git"
 default_branch = "dev"
 fork = false
-head_sha = "46a59640cdf8a2e75fbd9166c6407405fec49a44"
+head_sha = "730705a283dc39de2ecba5b36d8c208e153fb581"
 html_url = "https://github.com/TeamNewPipe/NewPipe"
-stars = 38838
+stars = 38864

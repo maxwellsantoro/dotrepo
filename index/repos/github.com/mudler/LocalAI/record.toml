@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mudler/LocalAI"
-generated_at = "2026-06-29T01:18:58.852385Z"
+generated_at = "2026-07-01T18:17:14.562602Z"
 
 [record.trust]
 confidence = "high"
@@ -21,20 +21,20 @@ homepage = "https://localai.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
-    "C++",
-    "CMake",
-    "CSS",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HTML",
     "JavaScript",
-    "Makefile",
-    "Nix",
     "Python",
-    "Rust",
+    "HTML",
+    "C++",
     "Shell",
+    "CSS",
+    "Makefile",
+    "CMake",
+    "C",
+    "Rust",
+    "Dockerfile",
+    "Nix",
+    "Go Template",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -67,14 +67,11 @@ security_contact = "security@localai.io"
 root = "https://localai.io/"
 getting_started = "https://localai.io/basics/getting_started/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/mudler/LocalAI.git"
 default_branch = "master"
 fork = false
-head_sha = "c4d302e1ab91d8b2a89f85505f48ef542a3dbfdc"
+head_sha = "0d8adfc59ab3b0d14f8ceb1c68880c46793823c3"
 html_url = "https://github.com/mudler/LocalAI"
-stars = 47212
+stars = 47254

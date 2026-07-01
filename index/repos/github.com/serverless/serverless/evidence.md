@@ -6,7 +6,7 @@
 - Imported repo.test from package.json as `npm test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
+- Set `repo.build` to `npm run build` from `.github/workflows/ci-framework.yml` after model escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

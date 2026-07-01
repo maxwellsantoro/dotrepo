@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rust-lang/cargo"
-generated_at = "2026-06-29T01:58:35.164282Z"
+generated_at = "2026-07-01T18:26:14.250608Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://doc.rust-lang.org/cargo"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "JavaScript",
-    "Python",
-    "RenderScript",
-    "Roff",
     "Rust",
+    "Roff",
+    "JavaScript",
     "Shell",
+    "Python",
+    "Dockerfile",
+    "RenderScript",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -37,14 +37,14 @@ topics = [
     "cargo",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://doc.rust-lang.org/cargo"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/rust-lang/cargo.git"
 default_branch = "master"
 fork = false
-head_sha = "a335d47ff8036918d3d548dabd513dc0444096a9"
+head_sha = "23ad0b2d07977b14fd00f318810d38633ca45fd4"
 html_url = "https://github.com/rust-lang/cargo"
-stars = 15164
+stars = 15178

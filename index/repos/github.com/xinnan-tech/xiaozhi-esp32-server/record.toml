@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/xinnan-tech/xiaozhi-esp32-server"
-generated_at = "2026-07-01T15:22:36.567133Z"
+generated_at = "2026-07-01T18:37:40.696907Z"
 
 [record.trust]
 confidence = "high"
@@ -21,16 +21,16 @@ homepage = "http://xiaozhi.biz"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "Java",
     "JavaScript",
-    "Lua",
-    "Python",
-    "SCSS",
-    "Shell",
-    "TypeScript",
     "Vue",
+    "Python",
+    "Java",
+    "TypeScript",
+    "HTML",
+    "CSS",
+    "Shell",
+    "SCSS",
+    "Lua",
 ]
 topics = [
     "dify",
@@ -52,4 +52,4 @@ default_branch = "main"
 fork = false
 head_sha = "f0d61442b866624f93cbcaa061cfe365f2f0e766"
 html_url = "https://github.com/xinnan-tech/xiaozhi-esp32-server"
-stars = 9947
+stars = 9948

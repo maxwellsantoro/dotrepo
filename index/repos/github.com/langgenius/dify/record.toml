@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/langgenius/dify"
-generated_at = "2026-07-01T14:43:31.153463Z"
+generated_at = "2026-07-01T18:12:29.879264Z"
 
 [record.trust]
 confidence = "high"
@@ -21,19 +21,19 @@ homepage = "https://dify.ai"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "Gherkin",
-    "HTML",
+    "TypeScript",
+    "Python",
     "JavaScript",
     "MDX",
-    "Makefile",
-    "Mako",
-    "PHP",
-    "PowerShell",
-    "Python",
+    "CSS",
+    "HTML",
     "Shell",
-    "TypeScript",
+    "Dockerfile",
+    "Makefile",
+    "PowerShell",
+    "Gherkin",
+    "PHP",
+    "Mako",
 ]
 build = "make build"
 test = "make test"
@@ -99,6 +99,6 @@ archived = false
 clone_url = "https://github.com/langgenius/dify.git"
 default_branch = "main"
 fork = false
-head_sha = "f1f6ab0ac6945de0b02ea56bbca4ccee7d4c78cc"
+head_sha = "ca8b68032292f12387bcfaa5495d2bdb3fcc5bbd"
 html_url = "https://github.com/langgenius/dify"
-stars = 147252
+stars = 147269

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/n8n-io/n8n"
-generated_at = "2026-06-29T02:21:20.795242Z"
+generated_at = "2026-07-01T18:17:29.619806Z"
 
 [record.trust]
 confidence = "high"
@@ -22,23 +22,23 @@ homepage = "https://n8n.io"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "CSS",
-    "Dockerfile",
-    "HCL",
-    "HTML",
-    "Handlebars",
-    "JavaScript",
-    "Just",
-    "MDX",
-    "Mermaid",
-    "Open Policy Agent",
-    "Python",
-    "Rich Text Format",
-    "SCSS",
-    "Shell",
     "TypeScript",
     "Vue",
+    "JavaScript",
+    "SCSS",
+    "Python",
+    "Handlebars",
+    "MDX",
+    "Dockerfile",
+    "Shell",
+    "HTML",
+    "HCL",
+    "CSS",
+    "Mermaid",
+    "Just",
+    "Open Policy Agent",
+    "Rich Text Format",
+    "Batchfile",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -76,14 +76,11 @@ security_contact = "https://n8n.notion.site/n8n-vulnerability-disclosure-program
 root = "https://docs.n8n.io"
 getting_started = "https://docs.n8n.io/hosting/installation/npm/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/n8n-io/n8n.git"
 default_branch = "master"
 fork = false
-head_sha = "08fe3cd3c6a21f86d045f1e33f30dae2e2bcbdd7"
+head_sha = "3c8689f008611cd77d6356f6102fbc6ead39be36"
 html_url = "https://github.com/n8n-io/n8n"
-stars = 194399
+stars = 194789

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/monaco-editor"
-generated_at = "2026-06-29T05:14:50.432327Z"
+generated_at = "2026-07-01T18:15:27.649387Z"
 
 [record.trust]
 confidence = "high"
@@ -21,12 +21,12 @@ homepage = "https://microsoft.github.io/monaco-editor/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
     "JavaScript",
+    "TypeScript",
+    "HTML",
+    "CSS",
     "SCSS",
     "Shell",
-    "TypeScript",
 ]
 build = "npm run build"
 test = "npm test"
@@ -79,4 +79,4 @@ default_branch = "main"
 fork = false
 head_sha = "d8c9ff06b7bcbd0c07d1ccb16e3d30f5e5962d08"
 html_url = "https://github.com/microsoft/monaco-editor"
-stars = 46262
+stars = 46277

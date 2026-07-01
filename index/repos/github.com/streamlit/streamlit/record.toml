@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/streamlit/streamlit"
-generated_at = "2026-07-01T15:13:44.034046Z"
+generated_at = "2026-07-01T18:31:22.370703Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://streamlit.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "HTML",
+    "Python",
+    "TypeScript",
     "JavaScript",
     "Makefile",
-    "Python",
-    "SCSS",
     "Shell",
-    "TypeScript",
+    "HTML",
+    "SCSS",
+    "Dockerfile",
+    "CSS",
 ]
 build = "make build"
 test = "make test"
@@ -57,6 +57,6 @@ archived = false
 clone_url = "https://github.com/streamlit/streamlit.git"
 default_branch = "develop"
 fork = false
-head_sha = "f1024244b0f021756498aa2be9d98eff79036490"
+head_sha = "89cab1ad197b9197a6eacee93c4bbfca736c5dd3"
 html_url = "https://github.com/streamlit/streamlit"
-stars = 45124
+stars = 45123

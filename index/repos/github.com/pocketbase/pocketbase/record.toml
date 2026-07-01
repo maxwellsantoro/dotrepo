@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pocketbase/pocketbase"
-generated_at = "2026-06-29T07:56:22.970014616Z"
+generated_at = "2026-07-01T18:21:35.687736Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://pocketbase.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
     "Go",
-    "HTML",
     "JavaScript",
+    "CSS",
+    "HTML",
     "Makefile",
 ]
 build = "go build ./..."
@@ -65,4 +65,4 @@ default_branch = "master"
 fork = false
 head_sha = "667a765070bc4554696acb1c96e8a484697008fd"
 html_url = "https://github.com/pocketbase/pocketbase"
-stars = 59323
+stars = 59369

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/moby/moby"
-generated_at = "2026-06-26T18:31:04.866468Z"
+generated_at = "2026-07-01T18:16:56.638685Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "https://mobyproject.org/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Assembly",
-    "C",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HCL",
-    "Lua",
-    "Makefile",
-    "PowerShell",
-    "Python",
     "Shell",
+    "Dockerfile",
+    "PowerShell",
+    "Lua",
+    "Go Template",
+    "Makefile",
+    "Python",
+    "C",
+    "HCL",
+    "Assembly",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -54,14 +54,14 @@ maintainers = [
 ]
 security_contact = "security@docker.com"
 
-[relations]
-references = []
+[docs]
+root = "https://mobyproject.org/"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/moby/moby.git"
 default_branch = "master"
 fork = false
-head_sha = "258ee34b765719cdbfa4c6315fc554c7fbc67e37"
+head_sha = "71fd44528486484ed2838610dec99a1a7ef080ee"
 html_url = "https://github.com/moby/moby"
-stars = 71766
+stars = 71760

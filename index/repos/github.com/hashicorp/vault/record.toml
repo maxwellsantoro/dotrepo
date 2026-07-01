@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hashicorp/vault"
-generated_at = "2026-06-29T01:58:01.036367Z"
+generated_at = "2026-07-01T18:06:42.032592Z"
 
 [record.trust]
 confidence = "high"
@@ -21,19 +21,19 @@ homepage = "https://developer.hashicorp.com/vault"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HCL",
-    "HTML",
-    "Handlebars",
     "JavaScript",
-    "Makefile",
-    "SCSS",
-    "Shell",
-    "Smarty",
     "TypeScript",
+    "Handlebars",
+    "HCL",
+    "Shell",
+    "SCSS",
+    "Makefile",
+    "Go Template",
+    "Dockerfile",
+    "Smarty",
+    "Batchfile",
+    "HTML",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -53,6 +53,7 @@ maintainers = [
     "@hashicorp/vault-frontend",
     "@hashicorp/github-secure-vault-core",
     "@hashicorp/team-vault-quality",
+    "@hashicorp/team-vault-engineering-productivity-team",
     "@hashicorp/vault-crypto",
     "@hashicorp/vault-customer-engineering",
 ]
@@ -65,11 +66,23 @@ getting_started = "https://learn.hashicorp.com/collections/vault/getting-started
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/hashicorp/vault"
+notes = "Cross-link from README: ![build"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/hashicorp/vault.git"
 default_branch = "main"
 fork = false
-head_sha = "042e17bf44393d22158e45b6b25764d415edea58"
+head_sha = "c9a75041cec5382cf263a5f6589a574a44463565"
 html_url = "https://github.com/hashicorp/vault"
-stars = 35848
+stars = 35858

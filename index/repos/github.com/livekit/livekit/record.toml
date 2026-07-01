@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/livekit/livekit"
-generated_at = "2026-06-29T05:18:23.031208Z"
+generated_at = "2026-07-01T18:13:01.029464Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://docs.livekit.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Go",
     "Shell",
+    "Dockerfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -49,6 +49,6 @@ archived = false
 clone_url = "https://github.com/livekit/livekit.git"
 default_branch = "master"
 fork = false
-head_sha = "2aec61c11b545ea5d9575224ee7e9f1dbe95a243"
+head_sha = "46e5caedbe0d53217d1b4c84398deb687737f6b6"
 html_url = "https://github.com/livekit/livekit"
-stars = 19469
+stars = 19520

@@ -6,7 +6,7 @@
 - Discovered related relation to github.com/emqx/MQTTX from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.test` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
+- Left `repo.test` unset after model escalation: Both candidates are primary CI workflows for different components (cli vs desktop) with no clear hierarchy or single primary test command for the entire repository..
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

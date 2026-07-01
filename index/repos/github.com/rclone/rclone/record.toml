@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rclone/rclone"
-generated_at = "2026-06-29T02:02:15.816557Z"
+generated_at = "2026-07-01T18:24:09.322509Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "https://rclone.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
-    "Dockerfile",
     "Go",
-    "Go Template",
+    "Shell",
+    "Python",
     "HTML",
     "JavaScript",
     "Makefile",
+    "Dockerfile",
+    "C",
+    "Go Template",
     "PHP",
-    "Python",
-    "Shell",
+    "Batchfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -85,14 +85,11 @@ maintainers = [
 root = "https://rclone.org/docs/"
 getting_started = "https://rclone.org/install/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/rclone/rclone.git"
 default_branch = "master"
 fork = false
-head_sha = "6bbc28cf02dc3d968c07c84cae0e75f99f8ead23"
+head_sha = "22aba810748fe0200becb72ab817f93953601e37"
 html_url = "https://github.com/rclone/rclone"
-stars = 58054
+stars = 58105

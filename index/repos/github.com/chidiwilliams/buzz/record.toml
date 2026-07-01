@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/chidiwilliams/buzz"
-generated_at = "2026-06-29T05:16:44.747202Z"
+generated_at = "2026-07-01T17:27:22.77922Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://chidiwilliams.github.io/buzz"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Inno Setup",
-    "Makefile",
     "Python",
+    "Makefile",
     "Shell",
+    "Inno Setup",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -38,6 +38,6 @@ archived = false
 clone_url = "https://github.com/chidiwilliams/buzz.git"
 default_branch = "main"
 fork = false
-head_sha = "6be1cc3b3188ff7f6aad23e42e0e35f71145f938"
+head_sha = "8a2a3de69a8d6f116fdeaea02978decf4de643db"
 html_url = "https://github.com/chidiwilliams/buzz"
-stars = 19873
+stars = 19918

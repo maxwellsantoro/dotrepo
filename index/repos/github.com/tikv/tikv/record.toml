@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tikv/tikv"
-generated_at = "2026-06-29T07:56:42.649435034Z"
+generated_at = "2026-07-01T18:32:39.941091Z"
 
 [record.trust]
 confidence = "high"
@@ -22,13 +22,13 @@ homepage = "https://tikv.org"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Rust",
+    "Python",
+    "Perl",
+    "Makefile",
+    "Shell",
     "C",
     "Dockerfile",
-    "Makefile",
-    "Perl",
-    "Python",
-    "Rust",
-    "Shell",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -73,6 +73,6 @@ archived = false
 clone_url = "https://github.com/tikv/tikv.git"
 default_branch = "master"
 fork = false
-head_sha = "cda433d03d008583d587db6dcf39380f08a604ee"
+head_sha = "f8cd7fabb5ec3c2bbf855aa6935e63daf726d84e"
 html_url = "https://github.com/tikv/tikv"
 stars = 16753

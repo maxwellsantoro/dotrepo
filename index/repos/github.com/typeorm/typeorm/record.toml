@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/typeorm/typeorm"
-generated_at = "2026-07-01T04:28:39.188192Z"
+generated_at = "2026-07-01T18:34:39.540513Z"
 
 [record.trust]
 confidence = "high"
@@ -21,8 +21,8 @@ homepage = "http://typeorm.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "JavaScript",
     "TypeScript",
+    "JavaScript",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -72,4 +72,4 @@ default_branch = "master"
 fork = false
 head_sha = "cca26a919f3ee5afda5af0f835e10629bcc378d1"
 html_url = "https://github.com/typeorm/typeorm"
-stars = 36570
+stars = 36568

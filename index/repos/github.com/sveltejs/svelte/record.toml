@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sveltejs/svelte"
-generated_at = "2026-07-01T04:28:28.452164Z"
+generated_at = "2026-07-01T18:31:41.460108Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://svelte.dev"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
     "JavaScript",
     "Svelte",
     "TypeScript",
+    "CSS",
+    "HTML",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -60,4 +60,4 @@ default_branch = "main"
 fork = false
 head_sha = "eae50dfd1c2269e37258ef5c09527003bcf61573"
 html_url = "https://github.com/sveltejs/svelte"
-stars = 87366
+stars = 87365

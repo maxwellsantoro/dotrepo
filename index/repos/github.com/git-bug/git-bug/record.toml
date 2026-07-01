@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/git-bug/git-bug"
-generated_at = "2026-06-29T05:21:23.40176Z"
+generated_at = "2026-07-01T18:03:51.702265Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://github.com/git-bug/git-bug"
 license = "GPL-3.0"
 visibility = "public"
 languages = [
-    "CSS",
     "Go",
-    "HTML",
-    "Makefile",
-    "Nix",
-    "Shell",
     "TypeScript",
+    "Shell",
+    "CSS",
+    "Nix",
+    "Makefile",
+    "HTML",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -49,4 +49,4 @@ default_branch = "trunk"
 fork = false
 head_sha = "1a5e57dbf00c699ab5d176a9e5aace9baea64163"
 html_url = "https://github.com/git-bug/git-bug"
-stars = 9927
+stars = 9925

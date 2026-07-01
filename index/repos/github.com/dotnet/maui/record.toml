@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dotnet/maui"
-generated_at = "2026-07-01T15:22:46.912956Z"
+generated_at = "2026-07-01T17:52:49.783801Z"
 
 [record.trust]
 confidence = "high"
@@ -21,18 +21,18 @@ homepage = "https://dot.net/maui"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C#",
-    "CMake",
-    "CSS",
+    "PowerShell",
+    "Shell",
     "HTML",
     "Java",
-    "JavaScript",
-    "PowerShell",
+    "CSS",
+    "Batchfile",
+    "CMake",
     "Python",
-    "Shell",
-    "Swift",
+    "JavaScript",
     "TypeScript",
+    "Swift",
 ]
 topics = [
     "dotnet",

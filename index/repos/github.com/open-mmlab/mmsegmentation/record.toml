@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/open-mmlab/mmsegmentation"
-generated_at = "2026-07-01T15:21:29.580328Z"
+generated_at = "2026-07-01T18:19:58.41213Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://mmsegmentation.readthedocs.io/en/main/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "Jupyter Notebook",
     "Python",
     "Shell",
+    "Jupyter Notebook",
+    "Dockerfile",
 ]
 topics = [
     "semantic-segmentation",

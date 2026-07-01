@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/nushell/nushell"
-generated_at = "2026-07-01T14:20:44.51237Z"
+generated_at = "2026-07-01T18:19:25.711012Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,15 +18,15 @@ homepage = "https://www.nushell.sh/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
-    "JavaScript",
-    "Nix",
-    "Nushell",
-    "PowerShell",
-    "Python",
     "Rust",
+    "Nushell",
+    "Nix",
+    "Python",
+    "JavaScript",
+    "Dockerfile",
     "Shell",
+    "PowerShell",
+    "Batchfile",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"

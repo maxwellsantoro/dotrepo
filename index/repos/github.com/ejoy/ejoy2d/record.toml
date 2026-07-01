@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ejoy/ejoy2d"
-generated_at = "2026-07-01T15:23:10.109326Z"
+generated_at = "2026-07-01T17:53:07.207651Z"
 
 [record.trust]
 confidence = "high"
@@ -21,12 +21,12 @@ homepage = "https://github.com/ejoy/ejoy2d"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C",
-    "C++",
     "Lua",
-    "Makefile",
+    "C++",
     "Objective-C",
+    "Makefile",
+    "Batchfile",
 ]
 build = "make build"
 topics = []

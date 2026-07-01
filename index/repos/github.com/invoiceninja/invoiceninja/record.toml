@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/invoiceninja/invoiceninja"
-generated_at = "2026-07-01T15:16:47.860163Z"
+generated_at = "2026-07-01T18:08:45.177754Z"
 
 [record.trust]
 confidence = "high"
@@ -21,12 +21,12 @@ homepage = "https://invoiceninja.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
+    "PHP",
+    "XSLT",
     "Blade",
     "HTML",
     "JavaScript",
-    "PHP",
     "TypeScript",
-    "XSLT",
 ]
 build = "npm run build"
 test = "composer run-script test"

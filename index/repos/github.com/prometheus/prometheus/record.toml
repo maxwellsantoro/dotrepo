@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/prometheus/prometheus"
-generated_at = "2026-06-29T01:57:03.435097Z"
+generated_at = "2026-07-01T18:22:51.267897Z"
 
 [record.trust]
 confidence = "high"
@@ -21,18 +21,18 @@ homepage = "https://prometheus.io/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
     "Go",
-    "Go Template",
-    "HTML",
-    "JavaScript",
-    "Lex",
-    "Makefile",
-    "SCSS",
-    "Shell",
     "TypeScript",
     "Yacc",
+    "Shell",
+    "SCSS",
+    "CSS",
+    "JavaScript",
+    "Makefile",
+    "Lex",
+    "HTML",
+    "Dockerfile",
+    "Go Template",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -53,11 +53,11 @@ maintainers = [
     "@SuperQ",
     "@dgl",
     "@metalmatze",
-    "@beorn7",
     "@krajorama",
     "@juliusv",
     "@nexucis",
     "@roidelapluie",
+    "@vpranckaitis",
     "@cstyan",
     "@bwplotka",
     "@tomwilkie",
@@ -80,14 +80,14 @@ maintainers = [
 team = "@prometheus/default-maintainers"
 security_contact = "https://prometheus.io/docs/operating/security/"
 
-[relations]
-references = []
+[docs]
+root = "https://prometheus.io/"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/prometheus/prometheus.git"
 default_branch = "main"
 fork = false
-head_sha = "b07f8cf4ccb35e5f71f2cf2ea8e0e7118d5bed6d"
+head_sha = "3a5a2c00218cf815d67c3fd2819b32c68071fc42"
 html_url = "https://github.com/prometheus/prometheus"
-stars = 64823
+stars = 64825

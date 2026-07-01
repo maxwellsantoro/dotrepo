@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/axios/axios"
-generated_at = "2026-06-29T02:20:39.32978Z"
+generated_at = "2026-07-01T17:25:30.927865Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://axios-http.com"
 license = "MIT"
 visibility = "public"
 languages = [
-    "HTML",
     "JavaScript",
     "TypeScript",
+    "HTML",
 ]
 build = "npm run build"
 test = "npm test"
@@ -46,11 +46,35 @@ getting_started = "https://axios.rest/pages/getting-started/first-steps.html"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/axios/axios"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/tc39/proposal-cancelable-promises"
+notes = "Cross-link from README: cancellable promises proposal"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/axios/axios.git"
 default_branch = "v1.x"
 fork = false
-head_sha = "d45e737718876f3c7a1ad9384693622eb68a739a"
+head_sha = "7b1825ff0832981f02a7aa6f3995522b0be297ee"
 html_url = "https://github.com/axios/axios"
-stars = 109222
+stars = 109103

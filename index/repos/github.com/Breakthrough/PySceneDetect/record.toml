@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Breakthrough/PySceneDetect"
-generated_at = "2026-06-29T05:26:21.317337Z"
+generated_at = "2026-07-01T17:15:51.41117Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://www.scenedetect.com/"
 license = "BSD-3-Clause"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
     "Python",
+    "HTML",
     "Shell",
+    "CSS",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -50,4 +50,4 @@ default_branch = "main"
 fork = false
 head_sha = "fac764d921bbcdb716209b55ec6f2ee9b1710134"
 html_url = "https://github.com/Breakthrough/PySceneDetect"
-stars = 4969
+stars = 4978

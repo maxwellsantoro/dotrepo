@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fastapi/fastapi"
-generated_at = "2026-07-01T04:30:34.466765Z"
+generated_at = "2026-07-01T18:01:53.264059Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://fastapi.tiangolo.com/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "JavaScript",
     "Python",
+    "JavaScript",
     "Shell",
+    "HTML",
+    "CSS",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -60,6 +60,6 @@ archived = false
 clone_url = "https://github.com/fastapi/fastapi.git"
 default_branch = "master"
 fork = false
-head_sha = "bf8283b4444acfbe6bd6ac1de923760acf5e167a"
+head_sha = "cecd96d9c6c318e0df1c40cedbc2e953381ddfd3"
 html_url = "https://github.com/fastapi/fastapi"
-stars = 99834
+stars = 99862

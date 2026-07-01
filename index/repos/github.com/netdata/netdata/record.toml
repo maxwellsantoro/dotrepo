@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/netdata/netdata"
-generated_at = "2026-07-01T15:13:07.092568Z"
+generated_at = "2026-07-01T18:17:57.882742Z"
 
 [record.trust]
 confidence = "high"
@@ -22,25 +22,25 @@ homepage = "https://www.netdata.cloud"
 license = "GPL-3.0"
 visibility = "public"
 languages = [
-    "Assembly",
-    "Batchfile",
-    "C",
-    "C++",
-    "CMake",
-    "Dockerfile",
     "Go",
-    "HTML",
-    "JavaScript",
-    "Jupyter Notebook",
-    "Makefile",
-    "POV-Ray SDL",
-    "PowerShell",
-    "Python",
-    "Rich Text Format",
+    "C",
     "Rust",
     "Shell",
-    "TSQL",
+    "Python",
+    "Jupyter Notebook",
+    "C++",
+    "CMake",
+    "HTML",
+    "JavaScript",
+    "Batchfile",
+    "PowerShell",
     "Yacc",
+    "Rich Text Format",
+    "POV-Ray SDL",
+    "Dockerfile",
+    "Makefile",
+    "TSQL",
+    "Assembly",
 ]
 build = 'libprotoc-dev libssl-dev protobuf-compiler \'
 topics = [

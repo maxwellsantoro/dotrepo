@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sharkdp/fd"
-generated_at = "2026-06-29T02:01:43.86401Z"
+generated_at = "2026-07-01T18:28:49.290155Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://github.com/sharkdp/fd"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Makefile",
     "Rust",
     "Shell",
+    "Makefile",
 ]
 build = "cargo build"
 test = "cargo test"
@@ -46,11 +46,23 @@ security_contact = "https://github.com/sharkdp/fd/security/advisories/new"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/sharkdp/fd"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/sharkdp/fd.git"
 default_branch = "master"
 fork = false
-head_sha = "126be9869993f7b99d08eac287c06c5b418bd2c3"
+head_sha = "c73e5e58a47d1505a3d22298893e50c13ebc293d"
 html_url = "https://github.com/sharkdp/fd"
-stars = 43510
+stars = 43553

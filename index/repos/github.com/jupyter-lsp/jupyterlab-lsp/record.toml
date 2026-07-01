@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jupyter-lsp/jupyterlab-lsp"
-generated_at = "2026-06-29T05:28:35.974751Z"
+generated_at = "2026-07-01T18:11:11.226681Z"
 
 [record.trust]
 confidence = "high"
@@ -21,19 +21,19 @@ homepage = "https://jupyterlab-lsp.readthedocs.io"
 license = "BSD-3-Clause"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "JavaScript",
-    "Julia",
-    "Jupyter Notebook",
-    "Less",
-    "Python",
-    "R",
-    "RobotFramework",
-    "SCSS",
-    "Shell",
-    "TeX",
     "TypeScript",
+    "Python",
+    "RobotFramework",
+    "CSS",
+    "Jupyter Notebook",
+    "JavaScript",
+    "R",
+    "Shell",
+    "SCSS",
+    "TeX",
+    "Less",
+    "Dockerfile",
+    "Julia",
 ]
 build = "npm run build"
 test = "npm test"
@@ -64,4 +64,4 @@ default_branch = "main"
 fork = false
 head_sha = "e2e569321bc45702718030fabfe7dd38d0457f25"
 html_url = "https://github.com/jupyter-lsp/jupyterlab-lsp"
-stars = 1996
+stars = 1997

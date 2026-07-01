@@ -7,7 +7,7 @@
 - Inferred repo.test from .github/workflows/ci_ubuntu.yaml as `cmake --build build --target check`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk.
+- Left `repo.build` unset after model escalation: Multiple distinct build commands exist across different CI workflows (CMake for C++ and compileall for Python) without a single primary build command that unifies the repository's build logic..
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

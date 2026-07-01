@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hashicorp/consul"
-generated_at = "2026-07-01T04:45:57.495146Z"
+generated_at = "2026-07-01T18:06:31.143988Z"
 
 [record.trust]
 confidence = "high"
@@ -21,18 +21,18 @@ homepage = "https://www.consul.io"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "Gherkin",
     "Go",
-    "Go Template",
-    "HCL",
-    "HTML",
-    "Handlebars",
+    "SCSS",
     "JavaScript",
+    "Handlebars",
+    "Shell",
+    "Gherkin",
+    "HCL",
     "MDX",
     "Makefile",
-    "SCSS",
-    "Shell",
+    "Dockerfile",
+    "Go Template",
+    "HTML",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -61,6 +61,6 @@ archived = false
 clone_url = "https://github.com/hashicorp/consul.git"
 default_branch = "main"
 fork = false
-head_sha = "a156b8ea363f0b4344b89e6e09dd4b3a10a86e14"
+head_sha = "9a38fac228fae7960f12f5b2a45c7548c90e8224"
 html_url = "https://github.com/hashicorp/consul"
 stars = 29979

@@ -4,7 +4,7 @@
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
 - Discovered related relation to github.com/gitkraken/vscode-gitlens from package.json repository.
-- Discovered related relation to github.com/gitkraken/vscode-gitlens 'Open GitLens on GitHub' from README cross-link.
+- Discovered related relation to github.com/gitkraken/gitlens-docs from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

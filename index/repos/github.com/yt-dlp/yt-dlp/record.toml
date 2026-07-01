@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/yt-dlp/yt-dlp"
-generated_at = "2026-07-01T04:30:44.519918Z"
+generated_at = "2026-07-01T18:37:53.83828Z"
 
 [record.trust]
 confidence = "high"
@@ -22,11 +22,11 @@ homepage = "https://discord.gg/H5MNcFW63r"
 license = "Unlicense"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
-    "Makefile",
     "Python",
+    "Makefile",
     "Shell",
+    "Dockerfile",
+    "Batchfile",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -63,6 +63,6 @@ archived = false
 clone_url = "https://github.com/yt-dlp/yt-dlp.git"
 default_branch = "master"
 fork = false
-head_sha = "e584a65f2a0feee0c6c363b3309e9ebd6065f6b4"
+head_sha = "249aa5d6e667308fbf95ae5cfb40eba8177a802c"
 html_url = "https://github.com/yt-dlp/yt-dlp"
-stars = 174419
+stars = 174546

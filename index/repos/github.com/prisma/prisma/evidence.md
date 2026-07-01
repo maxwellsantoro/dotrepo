@@ -4,6 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
+- Discovered related relation to github.com/prisma/studio from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Deepened `owners.security_contact` from `README.md` during deterministic escalation.

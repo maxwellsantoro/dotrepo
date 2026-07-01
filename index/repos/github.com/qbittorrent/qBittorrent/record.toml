@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/qbittorrent/qBittorrent"
-generated_at = "2026-07-01T14:44:02.668334Z"
+generated_at = "2026-07-01T18:23:40.04428Z"
 
 [record.trust]
 confidence = "medium"
@@ -21,16 +21,16 @@ homepage = "https://www.qbittorrent.org"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "C",
     "C++",
-    "CMake",
-    "CSS",
-    "HTML",
     "JavaScript",
-    "Just",
-    "Objective-C",
-    "Objective-C++",
+    "HTML",
     "Python",
+    "CSS",
+    "CMake",
+    "C",
+    "Objective-C++",
+    "Objective-C",
+    "Just",
     "Shell",
 ]
 test = "cmake --build build --target check"
@@ -57,4 +57,4 @@ default_branch = "master"
 fork = false
 head_sha = "5527661610ccdb3167ce1f52c21bb45e7018abae"
 html_url = "https://github.com/qbittorrent/qBittorrent"
-stars = 38535
+stars = 38538

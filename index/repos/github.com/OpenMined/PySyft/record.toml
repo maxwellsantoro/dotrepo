@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/OpenMined/PySyft"
-generated_at = "2026-06-29T05:21:45.195009Z"
+generated_at = "2026-07-01T17:20:06.409345Z"
 
 [record.trust]
 confidence = "high"
@@ -15,20 +15,20 @@ provenance = [
 notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Syft-client"
-description = "Syft client lets data scientists submit computations which are ran by data owners on private data — all through cloud storage their organizations already use (Google Drive, Microsoft 365, etc.)."
+name = "PySyft v2"
+description = "PySyft lets data scientists submit computations which are ran by data owners on private data — all through cloud storage their organizations already use (Google Drive, Microsoft 365, etc.)."
 homepage = "https://www.openmined.org/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Jinja",
+    "Python",
     "Jupyter Notebook",
     "Just",
-    "Python",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Dockerfile",
+    "Jinja",
     "Shell",
 ]
 build = "python -m build"
@@ -53,6 +53,6 @@ archived = false
 clone_url = "https://github.com/OpenMined/PySyft.git"
 default_branch = "dev"
 fork = false
-head_sha = "90169712933f9071def2ced5755461844151be2f"
+head_sha = "a0ed141ff7fa5be47e69e3ff951c85c3d93a1ff8"
 html_url = "https://github.com/OpenMined/PySyft"
 stars = 9915

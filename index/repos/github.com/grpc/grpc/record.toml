@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/grpc/grpc"
-generated_at = "2026-06-29T02:21:09.490032Z"
+generated_at = "2026-07-01T18:05:52.381841Z"
 
 [record.trust]
 confidence = "medium"
@@ -21,31 +21,31 @@ homepage = "https://grpc.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Awk",
-    "Batchfile",
-    "C",
-    "C#",
     "C++",
-    "CMake",
-    "CSS",
-    "Cython",
-    "Dockerfile",
-    "Go",
-    "HTML",
-    "Java",
-    "JavaScript",
-    "Linker Script",
-    "Objective-C",
-    "Objective-C++",
-    "PHP",
-    "Pawn",
-    "PowerShell",
     "Python",
-    "Ruby",
-    "Shell",
     "Starlark",
+    "C",
+    "Shell",
+    "Ruby",
+    "Objective-C",
+    "PHP",
+    "Cython",
+    "Objective-C++",
+    "Dockerfile",
+    "C#",
+    "Batchfile",
+    "Go",
+    "CMake",
     "Swift",
     "XSLT",
+    "PowerShell",
+    "Java",
+    "Pawn",
+    "Awk",
+    "JavaScript",
+    "CSS",
+    "Linker Script",
+    "HTML",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -65,11 +65,23 @@ root = "https://grpc.io/docs/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/grpc/grpc-dotnet"
+notes = "Cross-link from README: C#/.NET"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/grpc/grpc.git"
 default_branch = "master"
 fork = false
-head_sha = "1c2fef52e7976d59e3fee7e8ed306f1e10924318"
+head_sha = "345fd1a743f6767a8a18b2908a621a21ea7752db"
 html_url = "https://github.com/grpc/grpc"
-stars = 44932
+stars = 44946

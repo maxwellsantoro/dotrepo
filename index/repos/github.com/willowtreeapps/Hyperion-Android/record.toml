@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/willowtreeapps/Hyperion-Android"
-generated_at = "2026-06-29T05:29:19.147573Z"
+generated_at = "2026-07-01T18:36:35.700119Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `CODEOWNERS`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@github/js` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/mc-release.yml`. Inferred `repo.test` from `.github/workflows/mc-release.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `build.gradle`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@github/js` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Hyperion"
@@ -22,8 +21,8 @@ homepage = "https://github.com/willowtreeapps/Hyperion-Android"
 license = "MIT"
 visibility = "public"
 languages = ["Java"]
-build = "./gradlew assemble"
-test = "./gradlew assemble"
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "design",
     "review",

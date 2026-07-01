@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/endrazine/wcc"
-generated_at = "2026-07-01T15:21:36.768488Z"
+generated_at = "2026-07-01T18:00:33.79769Z"
 
 [record.trust]
 confidence = "high"
@@ -22,15 +22,15 @@ license = "NOASSERTION"
 visibility = "public"
 languages = [
     "C",
-    "C++",
-    "CSS",
     "HTML",
-    "Linker Script",
-    "Lua",
     "Makefile",
-    "Roff",
-    "Rust",
     "TeX",
+    "Lua",
+    "Linker Script",
+    "Roff",
+    "CSS",
+    "Rust",
+    "C++",
 ]
 build = "make build"
 topics = []

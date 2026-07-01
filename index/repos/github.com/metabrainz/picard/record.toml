@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/metabrainz/picard"
-generated_at = "2026-06-29T05:24:56.599591Z"
+generated_at = "2026-07-01T18:14:51.803675Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://picard.musicbrainz.org"
 license = "GPL-2.0"
 visibility = "public"
 languages = [
-    "C",
-    "PowerShell",
     "Python",
     "Shell",
+    "C",
+    "PowerShell",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -49,6 +49,6 @@ archived = false
 clone_url = "https://github.com/metabrainz/picard.git"
 default_branch = "master"
 fork = false
-head_sha = "b1ba75a25be05010eff77ce05916a8a8c9f51663"
+head_sha = "1b2bbf9a54834e36c382bd52e18af5f612e12df7"
 html_url = "https://github.com/metabrainz/picard"
-stars = 4983
+stars = 4992

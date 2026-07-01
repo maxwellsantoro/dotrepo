@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/influxdata/influxdb"
-generated_at = "2026-06-26T18:30:59.362682Z"
+generated_at = "2026-07-01T18:08:37.519855Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://influxdata.com"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Answer Set Programming",
-    "Dockerfile",
-    "HTML",
-    "Linear Programming",
-    "Python",
     "Rust",
+    "Answer Set Programming",
+    "Python",
+    "Linear Programming",
     "Shell",
+    "HTML",
+    "Dockerfile",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -47,10 +47,8 @@ maintainers = []
 security_contact = "security@influxdata.com"
 
 [docs]
+root = "https://influxdata.com"
 getting_started = "https://docs.influxdata.com/influxdb3/core/get-started/"
-
-[relations]
-references = []
 
 [x.github]
 archived = false
@@ -59,4 +57,4 @@ default_branch = "main"
 fork = false
 head_sha = "d7834110b3680ba8e53d16333d158b18b8847bc7"
 html_url = "https://github.com/influxdata/influxdb"
-stars = 31599
+stars = 31596

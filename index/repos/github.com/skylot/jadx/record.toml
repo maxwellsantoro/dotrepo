@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/skylot/jadx"
-generated_at = "2026-06-29T02:18:27.181047Z"
+generated_at = "2026-07-01T18:29:14.231586Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/release.yml`. Inferred `repo.test` from `.github/workflows/release.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `build.gradle.kts`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `build.gradle.kts`. Imported `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "JADX"
@@ -22,14 +21,14 @@ homepage = "https://github.com/skylot/jadx"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Go Template",
     "Java",
+    "Smali",
     "Kotlin",
     "Lex",
-    "Smali",
+    "Go Template",
 ]
-build = "./gradlew dist -PbundleJRE=true"
-test = "./gradlew dist -PbundleJRE=true"
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "android",
     "dex",
@@ -41,9 +40,6 @@ topics = [
 maintainers = []
 security_contact = "https://github.com/skylot/jadx/security/advisories/new"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/skylot/jadx.git"
@@ -51,4 +47,4 @@ default_branch = "master"
 fork = false
 head_sha = "aaec137830f217ab5f69d2b64279433c1775a22a"
 html_url = "https://github.com/skylot/jadx"
-stars = 49223
+stars = 49294

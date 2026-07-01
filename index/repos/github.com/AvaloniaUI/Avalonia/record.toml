@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AvaloniaUI/Avalonia"
-generated_at = "2026-07-01T15:12:07.949601Z"
+generated_at = "2026-07-01T17:15:40.123513Z"
 
 [record.trust]
 confidence = "high"
@@ -21,19 +21,19 @@ homepage = "https://avaloniaui.net"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "C#",
-    "C++",
-    "CSS",
-    "F#",
-    "HTML",
-    "JavaScript",
-    "Objective-C",
     "Objective-C++",
+    "TypeScript",
+    "Objective-C",
+    "C++",
+    "HTML",
     "PowerShell",
     "Shell",
-    "TypeScript",
+    "C",
+    "F#",
+    "JavaScript",
+    "CSS",
+    "Batchfile",
 ]
 topics = [
     "c-sharp",

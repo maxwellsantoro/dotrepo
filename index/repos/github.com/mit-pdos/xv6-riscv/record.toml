@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mit-pdos/xv6-riscv"
-generated_at = "2026-07-01T15:24:08.338974Z"
+generated_at = "2026-07-01T18:16:51.476964Z"
 
 [record.trust]
 confidence = "high"
@@ -22,13 +22,13 @@ homepage = "https://pdos.csail.mit.edu/6.1810"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Assembly",
     "C",
-    "Emacs Lisp",
-    "Linker Script",
+    "Assembly",
     "Makefile",
-    "Perl",
     "Python",
+    "Linker Script",
+    "Perl",
+    "Emacs Lisp",
 ]
 test = "make test"
 topics = []

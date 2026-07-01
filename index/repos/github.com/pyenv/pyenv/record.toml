@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pyenv/pyenv"
-generated_at = "2026-07-01T15:10:18.313694Z"
+generated_at = "2026-07-01T18:23:24.910512Z"
 
 [record.trust]
 confidence = "high"
@@ -22,12 +22,12 @@ homepage = "https://github.com/pyenv/pyenv"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
-    "Dockerfile",
-    "Makefile",
-    "Python",
-    "Roff",
     "Shell",
+    "Python",
+    "Makefile",
+    "C",
+    "Roff",
+    "Dockerfile",
     "Vim Script",
 ]
 test = "make test"

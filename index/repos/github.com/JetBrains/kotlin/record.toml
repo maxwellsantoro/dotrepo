@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/JetBrains/kotlin"
-generated_at = "2026-07-01T15:22:09.082033Z"
+generated_at = "2026-07-01T17:18:24.590686Z"
 
 [record.trust]
 confidence = "high"
@@ -21,29 +21,29 @@ description = "The Kotlin Programming Language."
 homepage = "https://kotlinlang.org"
 visibility = "public"
 languages = [
-    "ANTLR",
-    "Batchfile",
+    "Kotlin",
+    "Java",
     "C",
     "C++",
-    "CMake",
-    "CSS",
+    "Objective-C++",
+    "Python",
+    "Lex",
+    "Swift",
+    "Shell",
+    "JavaScript",
+    "ANTLR",
+    "Objective-C",
+    "Batchfile",
     "Dockerfile",
+    "Ruby",
+    "CSS",
+    "CMake",
+    "Puppet",
     "Groovy",
     "HTML",
-    "Java",
-    "JavaScript",
-    "Kotlin",
-    "Lex",
-    "Makefile",
-    "Objective-C",
-    "Objective-C++",
-    "Puppet",
-    "Python",
     "Roff",
-    "Ruby",
+    "Makefile",
     "Scala",
-    "Shell",
-    "Swift",
 ]
 build = "./gradlew build"
 test = "./gradlew test"
@@ -71,6 +71,6 @@ archived = false
 clone_url = "https://github.com/JetBrains/kotlin.git"
 default_branch = "master"
 fork = false
-head_sha = "8011a78e746ba3bdf9c57dc7ce2a8321a392a6dc"
+head_sha = "07dcedfda4321f739176fd4ecda9d2b32bfa6752"
 html_url = "https://github.com/JetBrains/kotlin"
 stars = 53042

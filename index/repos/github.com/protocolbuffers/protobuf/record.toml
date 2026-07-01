@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/protocolbuffers/protobuf"
-generated_at = "2026-07-01T15:32:15.824128Z"
+generated_at = "2026-07-01T18:22:56.555237Z"
 
 [record.trust]
 confidence = "high"
@@ -21,33 +21,33 @@ homepage = "http://protobuf.dev"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Awk",
-    "Batchfile",
-    "C",
-    "C#",
     "C++",
-    "CMake",
-    "Emacs Lisp",
+    "C#",
+    "C",
     "Java",
-    "Kotlin",
-    "Linker Script",
-    "Lua",
-    "M4",
-    "Makefile",
-    "NASL",
     "Objective-C",
-    "Objective-C++",
-    "PHP",
-    "Pawn",
-    "PowerShell",
     "Python",
-    "RenderScript",
-    "Ruby",
-    "Rust",
-    "Shell",
     "Starlark",
+    "PHP",
+    "Rust",
+    "Ruby",
+    "CMake",
+    "Kotlin",
+    "Shell",
+    "NASL",
+    "Lua",
     "Swift",
+    "Pawn",
+    "Emacs Lisp",
     "Vim Script",
+    "Batchfile",
+    "Objective-C++",
+    "PowerShell",
+    "Awk",
+    "Makefile",
+    "M4",
+    "Linker Script",
+    "RenderScript",
 ]
 topics = [
     "protobuf",
@@ -81,6 +81,6 @@ archived = false
 clone_url = "https://github.com/protocolbuffers/protobuf.git"
 default_branch = "main"
 fork = false
-head_sha = "337abe794bbcad507fc316e94b61379a0cef1c20"
+head_sha = "ee6026fbbda701cc6a2ef521abe5e136808eee6a"
 html_url = "https://github.com/protocolbuffers/protobuf"
 stars = 71443

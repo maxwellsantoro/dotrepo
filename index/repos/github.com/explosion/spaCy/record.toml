@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/explosion/spaCy"
-generated_at = "2026-07-01T04:27:45.570913Z"
+generated_at = "2026-07-01T18:01:15.929805Z"
 
 [record.trust]
 confidence = "high"
@@ -22,19 +22,19 @@ homepage = "https://spacy.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
-    "C++",
-    "Cython",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Jinja",
-    "MDX",
-    "Makefile",
     "Python",
+    "MDX",
+    "Cython",
+    "JavaScript",
     "Sass",
-    "Shell",
     "TypeScript",
+    "Jinja",
+    "C",
+    "HTML",
+    "Makefile",
+    "Shell",
+    "Dockerfile",
+    "C++",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -69,4 +69,4 @@ default_branch = "master"
 fork = false
 head_sha = "e67199550e365dacee28b109210c3a43e1477638"
 html_url = "https://github.com/explosion/spaCy"
-stars = 33705
+stars = 33706

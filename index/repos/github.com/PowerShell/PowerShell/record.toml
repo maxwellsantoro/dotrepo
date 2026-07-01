@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/PowerShell/PowerShell"
-generated_at = "2026-07-01T15:23:14.886902Z"
+generated_at = "2026-07-01T17:20:15.565042Z"
 
 [record.trust]
 confidence = "high"
@@ -22,14 +22,14 @@ homepage = "https://microsoft.com/PowerShell"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C#",
-    "Dockerfile",
-    "HTML",
     "PowerShell",
     "Roff",
     "Shell",
+    "HTML",
     "XSLT",
+    "Dockerfile",
+    "Batchfile",
 ]
 topics = [
     "powershell",

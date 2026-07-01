@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/lobehub/lobehub"
-generated_at = "2026-06-29T01:17:55.894799Z"
+generated_at = "2026-07-01T18:13:05.822695Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "https://lobehub.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "Gherkin",
+    "TypeScript",
     "HTML",
+    "Shell",
     "JavaScript",
+    "Gherkin",
+    "Dockerfile",
     "MDX",
     "PLpgSQL",
     "Roff",
-    "Shell",
     "TeX",
-    "TypeScript",
+    "CSS",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -51,6 +51,9 @@ topics = [
     "cao",
     "skills",
     "chief-agent-operator",
+    "fable",
+    "loop-engineering",
+    "glm",
 ]
 
 [owners]
@@ -61,14 +64,29 @@ maintainers = [
 ]
 security_contact = "https://github.com/lobehub/lobehub/security/advisories/new"
 
+[docs]
+root = "https://lobehub.com"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/lobehub/lobehub"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/lobehub/lobehub.git"
 default_branch = "canary"
 fork = false
-head_sha = "9aa51fe7d2061d350388b142db44b13109121982"
+head_sha = "1579476abb5d2475ffd08e35ac72d5c8bad0d31c"
 html_url = "https://github.com/lobehub/lobehub"
-stars = 79192
+stars = 79315

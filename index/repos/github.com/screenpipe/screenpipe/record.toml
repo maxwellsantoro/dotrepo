@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/screenpipe/screenpipe"
-generated_at = "2026-06-29T05:18:05.691345Z"
+generated_at = "2026-07-01T18:27:26.299367Z"
 
 [record.trust]
 confidence = "high"
@@ -21,18 +21,18 @@ homepage = "https://screenpipe.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "C",
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "NSIS",
-    "PowerShell",
-    "Python",
     "Rust",
-    "Shell",
-    "Swift",
     "TypeScript",
+    "JavaScript",
+    "Swift",
+    "Python",
+    "Shell",
+    "HTML",
+    "CSS",
+    "PowerShell",
+    "Dockerfile",
+    "NSIS",
+    "C",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -67,6 +67,6 @@ archived = false
 clone_url = "https://github.com/screenpipe/screenpipe.git"
 default_branch = "main"
 fork = false
-head_sha = "204ba2a283ed6c374862572b579cd9c40bcd5d9b"
+head_sha = "1b9b939b1bc78e98ad89d6676546b2802a319a7e"
 html_url = "https://github.com/screenpipe/screenpipe"
-stars = 19540
+stars = 19590

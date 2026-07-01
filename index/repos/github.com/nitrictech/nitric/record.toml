@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nitrictech/nitric"
-generated_at = "2026-07-01T15:26:38.196419Z"
+generated_at = "2026-07-01T18:18:23.65117Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://nitric.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Go",
     "HCL",
-    "JavaScript",
     "Makefile",
+    "Dockerfile",
+    "JavaScript",
 ]
 build = "make build"
 test = "make test"

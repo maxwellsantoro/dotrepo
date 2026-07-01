@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/numpy/numpy"
-generated_at = "2026-06-29T01:56:57.286887Z"
+generated_at = "2026-07-01T18:18:50.297324Z"
 
 [record.trust]
 confidence = "high"
@@ -21,16 +21,16 @@ homepage = "https://numpy.org"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
+    "Python",
     "C",
     "C++",
     "Cython",
-    "Fortran",
-    "Makefile",
     "Meson",
-    "Python",
+    "Fortran",
     "Shell",
-    "Smarty",
     "sed",
+    "Smarty",
+    "Makefile",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -39,14 +39,14 @@ topics = [
     "python",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://numpy.org"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/numpy/numpy.git"
 default_branch = "main"
 fork = false
-head_sha = "411c74035e8bea9b45a9658b50c7dfd13b2bdc47"
+head_sha = "b689e13d6ec31bd5f34969aef69d934614a797e9"
 html_url = "https://github.com/numpy/numpy"
-stars = 32387
+stars = 32294

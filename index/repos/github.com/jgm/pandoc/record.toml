@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jgm/pandoc"
-generated_at = "2026-07-01T15:17:29.301066Z"
+generated_at = "2026-07-01T18:09:51.462712Z"
 
 [record.trust]
 confidence = "high"
@@ -21,24 +21,24 @@ homepage = "https://pandoc.org"
 license = "GPL-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "Emacs Lisp",
-    "HTML",
     "Haskell",
+    "Roff",
+    "Rich Text Format",
+    "HTML",
+    "Lua",
     "JavaScript",
     "Jupyter Notebook",
-    "Lua",
-    "Makefile",
-    "Nix",
-    "Perl",
-    "Python",
-    "Rich Text Format",
-    "Roff",
-    "Ruby",
-    "Shell",
-    "Smarty",
-    "TeX",
     "Typst",
+    "Makefile",
+    "Python",
+    "Shell",
+    "TeX",
+    "Nix",
+    "CSS",
+    "Perl",
+    "Smarty",
+    "Emacs Lisp",
+    "Ruby",
 ]
 build = "make build"
 test = "make test"
@@ -68,4 +68,4 @@ default_branch = "main"
 fork = false
 head_sha = "4f5226df4faa0d66dd2c089465b13886360ab3c2"
 html_url = "https://github.com/jgm/pandoc"
-stars = 45158
+stars = 45160

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/birobirobiro/awesome-shadcn-ui"
-generated_at = "2026-07-01T15:32:51.320405Z"
+generated_at = "2026-07-01T17:26:05.729386Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://awesomeshadcn.dev/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "JavaScript",
     "TypeScript",
+    "JavaScript",
+    "CSS",
 ]
 build = "npm run build"
 topics = [

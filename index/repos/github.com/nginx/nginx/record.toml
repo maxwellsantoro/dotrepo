@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nginx/nginx"
-generated_at = "2026-07-01T15:25:01.038335Z"
+generated_at = "2026-07-01T18:18:06.896906Z"
 
 [record.trust]
 confidence = "high"
@@ -22,13 +22,13 @@ license = "BSD-2-Clause"
 visibility = "public"
 languages = [
     "C",
-    "C++",
-    "IL Assembly",
-    "Makefile",
-    "Perl",
-    "Shell",
     "Vim Script",
     "XS",
+    "Perl",
+    "Makefile",
+    "IL Assembly",
+    "Shell",
+    "C++",
 ]
 topics = [
     "content-cache",

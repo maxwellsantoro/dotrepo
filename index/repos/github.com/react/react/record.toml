@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/react/react"
-generated_at = "2026-06-29T02:01:35.646139Z"
+generated_at = "2026-07-01T18:24:18.204764Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,13 +18,13 @@ homepage = "https://react.dev"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "CoffeeScript",
-    "HTML",
     "JavaScript",
     "Rust",
-    "Shell",
     "TypeScript",
+    "HTML",
+    "CSS",
+    "CoffeeScript",
+    "Shell",
 ]
 build = "yarn build"
 test = "yarn test"
@@ -45,14 +45,11 @@ security_contact = "https://www.facebook.com/whitehat"
 root = "https://react.dev/reference/react"
 getting_started = "https://react.dev/learn"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/react/react.git"
 default_branch = "main"
 fork = false
-head_sha = "68631c0453b08e2c7c96a40910f4c91db1f66d5a"
+head_sha = "ec0fca31f419e821018fc67bc88f2ce62ffb2050"
 html_url = "https://github.com/react/react"
-stars = 246282
+stars = 246139

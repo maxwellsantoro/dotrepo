@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/streamyfin/streamyfin"
-generated_at = "2026-06-29T05:24:14.379137Z"
+generated_at = "2026-07-01T18:31:27.309916Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-apps.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-apps.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Buy Me A Coffee"
@@ -22,13 +22,13 @@ homepage = "https://streamyfin.app/"
 license = "MPL-2.0"
 visibility = "public"
 languages = [
-    "JavaScript",
+    "TypeScript",
+    "Swift",
     "Kotlin",
-    "Makefile",
+    "JavaScript",
     "Ruby",
     "Shell",
-    "Swift",
-    "TypeScript",
+    "Makefile",
 ]
 build = "bun run build:android:local"
 test = "npm test"
@@ -67,6 +67,6 @@ archived = false
 clone_url = "https://github.com/streamyfin/streamyfin.git"
 default_branch = "develop"
 fork = false
-head_sha = "cc0007926d054374817a7db0629c928cda2e03c6"
+head_sha = "28a75a2b8c3fe214787bffb7f5bd4907d9d85499"
 html_url = "https://github.com/streamyfin/streamyfin"
-stars = 4989
+stars = 4999

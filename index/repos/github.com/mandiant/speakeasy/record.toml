@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mandiant/speakeasy"
-generated_at = "2026-06-29T05:28:39.826159Z"
+generated_at = "2026-07-01T18:14:01.002823Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://github.com/mandiant/speakeasy"
 license = "MIT"
 visibility = "public"
 languages = [
+    "Python",
     "C",
     "Dockerfile",
     "Just",
-    "Python",
 ]
 build = "python -m build"
 test = "python -m pytest"

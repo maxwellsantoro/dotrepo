@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kokke/tiny-AES-c"
-generated_at = "2026-07-01T15:14:28.286107Z"
+generated_at = "2026-07-01T18:11:55.023366Z"
 
 [record.trust]
 confidence = "high"
@@ -22,10 +22,10 @@ license = "Unlicense"
 visibility = "public"
 languages = [
     "C",
-    "C++",
-    "CMake",
-    "Makefile",
     "Python",
+    "Makefile",
+    "CMake",
+    "C++",
 ]
 test = "make test"
 topics = []

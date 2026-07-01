@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/LadybirdBrowser/ladybird"
-generated_at = "2026-07-01T14:40:28.936669Z"
+generated_at = "2026-07-01T17:19:09.49637Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,24 +18,24 @@ homepage = "https://ladybird.org"
 license = "BSD-2-Clause"
 visibility = "public"
 languages = [
-    "Assembly",
-    "C",
     "C++",
-    "CMake",
-    "CSS",
-    "Dockerfile",
-    "GDB",
-    "GLSL",
     "HTML",
-    "Java",
     "JavaScript",
+    "Rust",
+    "Python",
+    "CMake",
+    "Objective-C++",
+    "CSS",
+    "Assembly",
+    "Shell",
+    "C",
     "Kotlin",
     "Objective-C",
-    "Objective-C++",
-    "Python",
-    "Rust",
-    "Shell",
+    "Dockerfile",
     "WebAssembly",
+    "Java",
+    "GLSL",
+    "GDB",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -60,6 +60,6 @@ archived = false
 clone_url = "https://github.com/LadybirdBrowser/ladybird.git"
 default_branch = "master"
 fork = false
-head_sha = "4b7d15104e3f15fabccfffecc61eab9ae8c63754"
+head_sha = "25a399a2e61f1befc16ed079fe13cd9313716ffc"
 html_url = "https://github.com/LadybirdBrowser/ladybird"
-stars = 64397
+stars = 64398

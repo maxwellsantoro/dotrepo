@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jestjs/jest"
-generated_at = "2026-06-26T18:33:51.970797Z"
+generated_at = "2026-07-01T18:09:46.345315Z"
 
 [record.trust]
 confidence = "high"
@@ -15,17 +15,17 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Delightful JavaScript Testing"
+name = "Follow on Twitter"
 description = "**👩🏻‍💻 Developer Ready**: A comprehensive JavaScript testing solution."
 homepage = "https://jestjs.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "Handlebars",
-    "JavaScript",
-    "Shell",
     "TypeScript",
+    "JavaScript",
+    "CSS",
+    "Shell",
+    "Handlebars",
 ]
 build = "yarn build"
 test = "yarn test"
@@ -45,8 +45,23 @@ topics = [
 maintainers = []
 security_contact = "security@lists.openjsf.org"
 
+[docs]
+root = "https://jestjs.io"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/vitejs/vite"
+notes = "Cross-link from README: plugin system"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
@@ -55,4 +70,4 @@ default_branch = "main"
 fork = false
 head_sha = "f49721c78e195558b40913977c9230f5b7f559d8"
 html_url = "https://github.com/jestjs/jest"
-stars = 45458
+stars = 45400

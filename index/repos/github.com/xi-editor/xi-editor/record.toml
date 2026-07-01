@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/xi-editor/xi-editor"
-generated_at = "2026-07-01T15:14:02.280256Z"
+generated_at = "2026-07-01T18:37:36.946509Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://xi-editor.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Rust",
+    "Python",
     "C++",
     "Makefile",
-    "Python",
-    "Rust",
     "Shell",
 ]
 topics = []

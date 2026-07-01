@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/JDAI-CV/FaceX-Zoo"
-generated_at = "2026-07-01T15:26:17.83556Z"
+generated_at = "2026-07-01T17:18:16.649282Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://arxiv.org/pdf/2101.04407.pdf"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Cython",
-    "Dockerfile",
     "Python",
     "Shell",
+    "Cython",
+    "Dockerfile",
 ]
 topics = [
     "face-recognition",

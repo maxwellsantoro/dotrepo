@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/shd101wyy/vscode-markdown-preview-enhanced"
-generated_at = "2026-06-29T05:28:49.88505Z"
+generated_at = "2026-07-01T18:28:53.265533Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://shd101wyy.github.io/markdown-preview-enhanced"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
+    "TypeScript",
     "JavaScript",
     "Nix",
+    "CSS",
     "Shell",
-    "TypeScript",
 ]
 build = "npm run build"
 test = "npm test"
@@ -59,4 +59,4 @@ default_branch = "develop"
 fork = false
 head_sha = "8bc848b6cbb42b9f35a0f95f7c3bf29b8302970e"
 html_url = "https://github.com/shd101wyy/vscode-markdown-preview-enhanced"
-stars = 1995
+stars = 1996

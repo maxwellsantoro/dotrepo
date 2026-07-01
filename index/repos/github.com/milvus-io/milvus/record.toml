@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/milvus-io/milvus"
-generated_at = "2026-06-29T01:19:20.551151Z"
+generated_at = "2026-07-01T18:16:38.314389Z"
 
 [record.trust]
 confidence = "high"
@@ -21,19 +21,19 @@ homepage = "https://milvus.io"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "ANTLR",
-    "Assembly",
-    "Batchfile",
-    "C",
-    "C++",
-    "CMake",
-    "Dockerfile",
     "Go",
+    "Python",
+    "C++",
+    "Shell",
     "Groovy",
     "HTML",
+    "C",
+    "CMake",
+    "Dockerfile",
     "Makefile",
-    "Python",
-    "Shell",
+    "ANTLR",
+    "Batchfile",
+    "Assembly",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -64,11 +64,23 @@ root = "https://milvus.io/docs"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/milvus-io/milvus"
+notes = "Cross-link from README: Issues"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/milvus-io/milvus.git"
 default_branch = "master"
 fork = false
-head_sha = "4018b29458dc5538eae9a9f0bfe3b561c7b41797"
+head_sha = "ae1d5663f25908042e7537779da1ba812a9cf633"
 html_url = "https://github.com/milvus-io/milvus"
-stars = 44996
+stars = 45038

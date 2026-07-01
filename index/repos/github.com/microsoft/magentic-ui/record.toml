@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/magentic-ui"
-generated_at = "2026-06-29T05:21:20.702922Z"
+generated_at = "2026-07-01T18:15:18.79198Z"
 
 [record.trust]
 confidence = "high"
@@ -21,12 +21,12 @@ homepage = "https://www.microsoft.com/en-us/research/blog/magenticlite-magenticb
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "JavaScript",
     "Python",
-    "Shell",
     "TypeScript",
+    "JavaScript",
+    "CSS",
+    "Shell",
+    "HTML",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -57,6 +57,6 @@ archived = false
 clone_url = "https://github.com/microsoft/magentic-ui.git"
 default_branch = "main"
 fork = false
-head_sha = "f5bbb22e3a9be9a54bbe9056e33b3c32f1c8778e"
+head_sha = "36fa15838bb288a4a5e6b2850d540e3f0cdd5a0b"
 html_url = "https://github.com/microsoft/magentic-ui"
-stars = 9929
+stars = 9931

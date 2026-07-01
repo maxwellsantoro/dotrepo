@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/RunaCapital/awesome-oss-alternatives"
-generated_at = "2026-07-01T15:30:35.316493Z"
+generated_at = "2026-07-01T17:20:58.352234Z"
 
 [record.trust]
 confidence = "high"
@@ -22,10 +22,10 @@ homepage = "https://runacap.com"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "JavaScript",
-    "MDX",
     "Python",
+    "JavaScript",
+    "CSS",
+    "MDX",
 ]
 build = "npm run build"
 topics = [
@@ -51,4 +51,4 @@ default_branch = "main"
 fork = false
 head_sha = "e5a1bd6153c602404c6f25a97b178228b755aebb"
 html_url = "https://github.com/RunaCapital/awesome-oss-alternatives"
-stars = 19299
+stars = 19300

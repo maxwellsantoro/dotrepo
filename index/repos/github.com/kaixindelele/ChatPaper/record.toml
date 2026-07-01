@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kaixindelele/ChatPaper"
-generated_at = "2026-07-01T15:20:49.120794Z"
+generated_at = "2026-07-01T18:11:20.2096Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://academic.chatpaper.top"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
-    "Jupyter Notebook",
-    "Makefile",
     "Python",
-    "Shell",
+    "Jupyter Notebook",
     "TeX",
+    "Dockerfile",
+    "Shell",
+    "Batchfile",
+    "Makefile",
 ]
 topics = [
     "arxiv",

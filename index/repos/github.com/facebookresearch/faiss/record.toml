@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/facebookresearch/faiss"
-generated_at = "2026-06-29T01:19:25.720961Z"
+generated_at = "2026-07-01T18:01:39.941144Z"
 
 [record.trust]
 confidence = "high"
@@ -21,35 +21,33 @@ homepage = "https://faiss.ai"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "C++",
-    "CMake",
-    "Cuda",
-    "Dockerfile",
-    "Jupyter Notebook",
-    "Metal",
-    "Objective-C",
-    "Objective-C++",
     "Python",
+    "Cuda",
+    "Objective-C++",
+    "CMake",
+    "C",
     "SWIG",
+    "Metal",
     "Shell",
+    "Jupyter Notebook",
+    "Objective-C",
+    "Batchfile",
+    "Dockerfile",
 ]
 build = "python -m build"
 test = "python -m pytest"
 topics = []
 
 [docs]
+root = "https://faiss.ai"
 getting_started = "https://github.com/facebookresearch/faiss/wiki/Getting-started"
-
-[relations]
-references = []
 
 [x.github]
 archived = false
 clone_url = "https://github.com/facebookresearch/faiss.git"
 default_branch = "main"
 fork = false
-head_sha = "a6f97750aeaf760c72d0526c3a346513823c4a0c"
+head_sha = "8d0d1a2b3345646b959bfb4962f4a3061aecc3d7"
 html_url = "https://github.com/facebookresearch/faiss"
-stars = 40415
+stars = 40433

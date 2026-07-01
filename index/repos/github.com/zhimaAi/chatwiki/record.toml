@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/zhimaAi/chatwiki"
-generated_at = "2026-06-29T05:29:02.745064Z"
+generated_at = "2026-07-01T18:38:07.622635Z"
 
 [record.trust]
 confidence = "high"
@@ -21,18 +21,18 @@ homepage = "https://chatwiki.ai"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "CSS",
-    "Dockerfile",
-    "Go",
-    "HTML",
-    "JavaScript",
-    "Less",
-    "PHP",
-    "Python",
-    "Shell",
-    "TypeScript",
     "Vue",
+    "Go",
+    "JavaScript",
+    "TypeScript",
+    "PHP",
+    "CSS",
+    "Less",
+    "HTML",
+    "Python",
+    "Dockerfile",
+    "Shell",
+    "Batchfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -55,4 +55,4 @@ default_branch = "main"
 fork = false
 head_sha = "f63e4aa95d273e1d6356ac38a40d74024d953492"
 html_url = "https://github.com/zhimaAi/chatwiki"
-stars = 1995
+stars = 1996

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pritunl/pritunl"
-generated_at = "2026-07-01T15:13:54.871376Z"
+generated_at = "2026-07-01T18:22:46.41698Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://forum.pritunl.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Dart",
-    "Dockerfile",
-    "Go",
-    "HCL",
+    "Python",
     "HTML",
     "JavaScript",
-    "Python",
+    "Dart",
     "SCSS",
     "Shell",
+    "Go",
+    "HCL",
+    "Dockerfile",
 ]
 topics = [
     "pritunl",
@@ -47,4 +47,4 @@ default_branch = "master"
 fork = false
 head_sha = "da6a7b62f420adf1fafd3f4658ea4f960db28127"
 html_url = "https://github.com/pritunl/pritunl"
-stars = 4983
+stars = 4982

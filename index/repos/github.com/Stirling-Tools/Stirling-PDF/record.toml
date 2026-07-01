@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Stirling-Tools/Stirling-PDF"
-generated_at = "2026-07-01T15:27:54.547406Z"
+generated_at = "2026-07-01T17:21:36.941389Z"
 
 [record.trust]
 confidence = "high"
@@ -21,21 +21,21 @@ homepage = "https://stirling.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "CSS",
-    "Dockerfile",
-    "Gherkin",
-    "HTML",
     "Java",
-    "JavaScript",
-    "Jinja",
-    "PLpgSQL",
-    "PowerShell",
-    "Python",
-    "Rich Text Format",
-    "Rust",
-    "Shell",
     "TypeScript",
+    "Python",
+    "CSS",
+    "Shell",
+    "Gherkin",
+    "Rust",
+    "JavaScript",
+    "HTML",
+    "Dockerfile",
+    "Rich Text Format",
+    "PLpgSQL",
+    "Jinja",
+    "Batchfile",
+    "PowerShell",
 ]
 build = "./gradlew build"
 test = "./gradlew test"
@@ -93,4 +93,4 @@ default_branch = "main"
 fork = false
 head_sha = "6c85200eb90e29c7bc00db99808695e9208dc75e"
 html_url = "https://github.com/Stirling-Tools/Stirling-PDF"
-stars = 85532
+stars = 85543

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/itsfatduck/optimizerDuck"
-generated_at = "2026-07-01T14:43:21.208336Z"
+generated_at = "2026-07-01T18:09:05.394725Z"
 
 [record.trust]
 confidence = "medium"
@@ -21,12 +21,12 @@ homepage = "https://optimizerduck.vercel.app/"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C#",
-    "HTML",
-    "JavaScript",
     "Python",
+    "JavaScript",
+    "HTML",
     "Shell",
+    "Batchfile",
 ]
 topics = [
     "optimizer",
@@ -60,4 +60,4 @@ default_branch = "master"
 fork = false
 head_sha = "b472afe35ce33cfa59f9df47c7a60a4e29df29bf"
 html_url = "https://github.com/itsfatduck/optimizerDuck"
-stars = 5083
+stars = 5085

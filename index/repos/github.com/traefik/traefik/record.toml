@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/traefik/traefik"
-generated_at = "2026-06-29T02:01:29.635276Z"
+generated_at = "2026-07-01T18:33:38.457613Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,15 +18,15 @@ homepage = "https://traefik.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Go",
+    "TypeScript",
+    "JavaScript",
+    "Shell",
+    "Makefile",
     "Go Template",
     "HTML",
-    "JavaScript",
-    "Makefile",
     "Nix",
-    "Shell",
-    "TypeScript",
+    "Dockerfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -54,14 +54,11 @@ security_contact = "https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=traefik"
 [docs]
 root = "https://traefik.io"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/traefik/traefik.git"
 default_branch = "master"
 fork = false
-head_sha = "12686204533b647649bc5d3ec05d4b4290a39021"
+head_sha = "6e4f397357787d8c841bf92588866d8a04e4a683"
 html_url = "https://github.com/traefik/traefik"
-stars = 63767
+stars = 63805

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/transact-rs/sqlx"
-generated_at = "2026-07-01T04:31:10.571975Z"
+generated_at = "2026-07-01T18:34:21.587519Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://github.com/transact-rs/sqlx"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Rust",
+    "Python",
+    "Shell",
     "Dockerfile",
     "PLpgSQL",
-    "Python",
-    "Rust",
-    "Shell",
     "TSQL",
 ]
 build = "cargo build --workspace"

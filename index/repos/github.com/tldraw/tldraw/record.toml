@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tldraw/tldraw"
-generated_at = "2026-06-29T05:13:36.349969Z"
+generated_at = "2026-07-01T18:32:56.930412Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://tldraw.dev"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
-    "GLSL",
-    "HTML",
-    "JavaScript",
-    "MDX",
-    "PLpgSQL",
-    "Shell",
     "TypeScript",
+    "MDX",
+    "CSS",
+    "JavaScript",
+    "HTML",
+    "Shell",
+    "PLpgSQL",
+    "GLSL",
     "Vue",
 ]
 build = "yarn build"
@@ -75,6 +75,6 @@ archived = false
 clone_url = "https://github.com/tldraw/tldraw.git"
 default_branch = "main"
 fork = false
-head_sha = "8e1d0e9a9fc9f2be3c0e9bce31d030d88bef1705"
+head_sha = "9a74cc3f19c14c8a578e8090cd55ae9a42a6115f"
 html_url = "https://github.com/tldraw/tldraw"
-stars = 48393
+stars = 48455

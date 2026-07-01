@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/moment/moment"
-generated_at = "2026-07-01T14:43:38.991506Z"
+generated_at = "2026-07-01T18:17:09.790693Z"
 
 [record.trust]
 confidence = "medium"
@@ -19,8 +19,8 @@ license = "MIT"
 visibility = "public"
 languages = [
     "JavaScript",
-    "Shell",
     "TypeScript",
+    "Shell",
 ]
 test = "npm test"
 topics = []

@@ -1,8 +1,8 @@
 # Evidence
 
 - Imported repository name and description from README.md.
-- Inferred repo.build from .github/workflows/release_build.yml as `./gradlew assembleRelease`.
-- Inferred repo.test from .github/workflows/release_build.yml as `./gradlew assembleRelease`.
+- Imported repo.build from build.gradle.kts as `./gradlew build`.
+- Imported repo.test from build.gradle.kts as `./gradlew test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -13,4 +13,4 @@
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

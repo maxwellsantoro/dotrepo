@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nestjs/nest"
-generated_at = "2026-06-26T18:33:38.049334Z"
+generated_at = "2026-07-01T18:17:52.401978Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `SECURITY.md` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `SECURITY.md` and `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "nest"
@@ -22,9 +22,9 @@ homepage = "https://nestjs.com"
 license = "MIT"
 visibility = "public"
 languages = [
+    "TypeScript",
     "JavaScript",
     "Shell",
-    "TypeScript",
 ]
 build = "npm run build"
 test = "npm test"
@@ -48,14 +48,29 @@ topics = [
 maintainers = []
 security_contact = "support@nestjs.com"
 
+[docs]
+root = "https://nestjs.com"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/nestjs/nest"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/nestjs/nest.git"
 default_branch = "master"
 fork = false
-head_sha = "7c65045cbedd8e70fc95eb81f7acce0ae2ddf494"
+head_sha = "ad62d760e114a081014dc381f60b5e06849c49f2"
 html_url = "https://github.com/nestjs/nest"
-stars = 75993
+stars = 75935

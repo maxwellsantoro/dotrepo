@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/resend/react-email"
-generated_at = "2026-06-29T05:18:40.938791Z"
+generated_at = "2026-07-01T18:25:00.655449Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://react.email"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "JavaScript",
-    "MDX",
     "TypeScript",
+    "MDX",
+    "CSS",
+    "JavaScript",
+    "HTML",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -46,6 +46,6 @@ archived = false
 clone_url = "https://github.com/resend/react-email.git"
 default_branch = "canary"
 fork = false
-head_sha = "09a8633296508220246784f83fe6d7981645a731"
+head_sha = "2868e8290c945674417ce7f473a8a499b25748e7"
 html_url = "https://github.com/resend/react-email"
-stars = 19379
+stars = 19386

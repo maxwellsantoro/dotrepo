@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/purifycss/purifycss"
-generated_at = "2026-06-29T05:23:01.71603Z"
+generated_at = "2026-07-01T18:23:15.608831Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://github.com/purifycss/purifycss"
 license = "MIT"
 visibility = "public"
 languages = [
+    "JavaScript",
     "CSS",
     "HTML",
-    "JavaScript",
 ]
 build = "npm run build"
 test = "npm test"

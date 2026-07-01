@@ -5,6 +5,7 @@
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from pyproject.toml as `python -m build`.
 - Imported repo.test from pyproject.toml as `python -m pytest`.
+- Discovered related relation to github.com/pandas-dev/pandas from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

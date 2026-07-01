@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/koho/frpmgr"
-generated_at = "2026-06-29T05:28:55.215551Z"
+generated_at = "2026-07-01T18:11:51.143168Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://github.com/koho/frpmgr"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "Go",
+    "C",
+    "Batchfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -47,4 +47,4 @@ default_branch = "master"
 fork = false
 head_sha = "2c24d3e88fb250c806a219c0b410fcb9ba6bf5b5"
 html_url = "https://github.com/koho/frpmgr"
-stars = 1995
+stars = 2000

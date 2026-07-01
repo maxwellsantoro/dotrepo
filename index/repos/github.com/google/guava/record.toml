@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google/guava"
-generated_at = "2026-07-01T14:20:51.535038Z"
+generated_at = "2026-07-01T18:04:50.669521Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Guava"
@@ -22,13 +22,13 @@ homepage = "https://guava.dev/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "HTML",
     "Java",
-    "JavaScript",
     "Shell",
+    "JavaScript",
+    "HTML",
 ]
-build = "./mvnw -B -ntp -Dtoolchain.skip install -U -DskipTests=true -f $ROOT_POM"
-test = "./mvnw -B -ntp -Dtoolchain.skip install -U -DskipTests=true -f $ROOT_POM"
+build = "./mvnw package"
+test = "./mvnw test"
 topics = [
     "guava",
     "java",
@@ -42,6 +42,6 @@ archived = false
 clone_url = "https://github.com/google/guava.git"
 default_branch = "master"
 fork = false
-head_sha = "e844ae9b6936988b11dd3795d9e433e3cfd84339"
+head_sha = "a97d860d6a93456a1484b8c860c0d56d1abeed0a"
 html_url = "https://github.com/google/guava"
 stars = 51504

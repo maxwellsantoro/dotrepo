@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/yzhao062/pyod"
-generated_at = "2026-06-29T05:22:23.902572Z"
+generated_at = "2026-07-01T18:37:58.516784Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "pyod"
@@ -22,8 +22,8 @@ homepage = "http://pyod.readthedocs.io"
 license = "BSD-2-Clause"
 visibility = "public"
 languages = [
-    "Jupyter Notebook",
     "Python",
+    "Jupyter Notebook",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -59,4 +59,4 @@ default_branch = "master"
 fork = false
 head_sha = "d9db50aa09e015e4fdb22d9a7cebe287d671e07b"
 html_url = "https://github.com/yzhao062/pyod"
-stars = 9890
+stars = 9893

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/FormidableLabs/prism-react-renderer"
-generated_at = "2026-06-29T05:29:16.84074Z"
+generated_at = "2026-07-01T17:17:09.724317Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://github.com/FormidableLabs/prism-react-renderer"
 license = "MIT"
 visibility = "public"
 languages = [
+    "TypeScript",
     "CSS",
     "HTML",
-    "TypeScript",
 ]
 build = "pnpm build"
 test = "pnpm test"

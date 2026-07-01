@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/facebookresearch/pytorch3d"
-generated_at = "2026-07-01T15:23:39.463364Z"
+generated_at = "2026-07-01T18:01:44.199423Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://pytorch3d.org/"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
-    "C++",
-    "CSS",
-    "Cuda",
-    "JavaScript",
     "Python",
+    "C++",
+    "Cuda",
+    "C",
     "Shell",
+    "JavaScript",
+    "Batchfile",
+    "CSS",
 ]
 topics = []
 

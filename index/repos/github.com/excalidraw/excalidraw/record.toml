@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/excalidraw/excalidraw"
-generated_at = "2026-07-01T04:30:15.930302Z"
+generated_at = "2026-07-01T18:01:02.164229Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://excalidraw.com"
 license = "MIT"
 visibility = "public"
 languages = [
+    "TypeScript",
+    "SCSS",
+    "MDX",
+    "JavaScript",
+    "HTML",
     "CSS",
     "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "MDX",
-    "SCSS",
     "Shell",
-    "TypeScript",
 ]
 build = "yarn build"
 test = "yarn test"
@@ -53,4 +53,4 @@ default_branch = "master"
 fork = false
 head_sha = "cce5001aaafe0286855984cf1b4e154b6ce86754"
 html_url = "https://github.com/excalidraw/excalidraw"
-stars = 126509
+stars = 126554

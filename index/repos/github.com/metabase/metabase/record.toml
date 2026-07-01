@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/metabase/metabase"
-generated_at = "2026-06-29T05:13:52.082337Z"
+generated_at = "2026-07-01T18:14:46.808733Z"
 
 [record.trust]
 confidence = "high"
@@ -21,18 +21,18 @@ homepage = "https://metabase.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
     "Clojure",
+    "TypeScript",
+    "JavaScript",
+    "CSS",
+    "Shell",
+    "Python",
+    "Handlebars",
+    "MDX",
+    "HTML",
     "Dockerfile",
     "Emacs Lisp",
-    "HTML",
-    "Handlebars",
-    "JavaScript",
-    "MDX",
     "Mustache",
-    "Python",
-    "Shell",
-    "TypeScript",
 ]
 build = "bun run build"
 test = "bun run test"
@@ -93,6 +93,6 @@ archived = false
 clone_url = "https://github.com/metabase/metabase.git"
 default_branch = "master"
 fork = false
-head_sha = "1290678ca7cb72770abeee822395bd59eeba8c98"
+head_sha = "6cc57802d45efe5bd817d2f15c2691f73d97cc6a"
 html_url = "https://github.com/metabase/metabase"
-stars = 47958
+stars = 48005

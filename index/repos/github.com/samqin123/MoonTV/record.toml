@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/samqin123/MoonTV"
-generated_at = "2026-06-29T05:29:21.036468Z"
+generated_at = "2026-07-01T18:26:58.997016Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://github.com/samqin123/MoonTV"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "JavaScript",
-    "Shell",
     "TypeScript",
+    "CSS",
+    "JavaScript",
+    "Dockerfile",
+    "Shell",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -53,4 +53,4 @@ default_branch = "main"
 fork = false
 head_sha = "c0bba763d16fb5cd830a808d58329025337491cf"
 html_url = "https://github.com/samqin123/MoonTV"
-stars = 1994
+stars = 1996

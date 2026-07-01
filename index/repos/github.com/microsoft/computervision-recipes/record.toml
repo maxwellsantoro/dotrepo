@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/computervision-recipes"
-generated_at = "2026-07-01T15:18:25.365848Z"
+generated_at = "2026-07-01T18:15:09.423537Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://github.com/microsoft/computervision-recipes"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
-    "C++",
-    "CSS",
-    "Cuda",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
     "Jupyter Notebook",
     "Python",
+    "Cuda",
+    "HTML",
+    "JavaScript",
+    "C++",
+    "C",
+    "Dockerfile",
+    "CSS",
     "Shell",
 ]
 topics = [
@@ -66,4 +66,4 @@ default_branch = "staging"
 fork = false
 head_sha = "679f1bf82b22b8c948f3703933557a2ba090739d"
 html_url = "https://github.com/microsoft/computervision-recipes"
-stars = 9866
+stars = 9865

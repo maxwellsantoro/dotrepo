@@ -5,6 +5,7 @@
 - Imported the security reporting channel from SECURITY.md.
 - Left `repo.build` unset because `.github/workflows/build-hoppscotch-agent.yml` and `.github/workflows/build-hoppscotch-desktop.yml` suggested conflicting build commands.
 - Imported repo.test from package.json as `pnpm test`.
+- Discovered related relation to github.com/hoppscotch/hoppscotch from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.build` to `pnpm tauri build --verbose --target x86_64-apple-darwin` from `.github/workflows/build-hoppscotch-agent.yml` after deterministic escalation.
@@ -15,6 +16,6 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+A prior verified status was preserved because no previously present field regressed in this refresh.

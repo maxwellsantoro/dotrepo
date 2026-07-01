@@ -4,6 +4,7 @@
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from Cargo.toml as `cargo build`.
 - Imported repo.test from Cargo.toml as `cargo test`.
+- Discovered related relation to github.com/GyulyVGC/sniffnet from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

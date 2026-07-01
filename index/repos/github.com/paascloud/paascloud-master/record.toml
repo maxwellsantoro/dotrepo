@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/paascloud/paascloud-master"
-generated_at = "2026-07-01T15:20:27.400915Z"
+generated_at = "2026-07-01T18:20:46.974473Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "http://www.paascloud.net"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Java",
     "FreeMarker",
     "HTML",
-    "Java",
 ]
 build = "./mvnw package"
 test = "./mvnw test"

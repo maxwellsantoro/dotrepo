@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/terminal"
-generated_at = "2026-07-01T15:18:20.721671Z"
+generated_at = "2026-07-01T18:15:43.316291Z"
 
 [record.trust]
 confidence = "high"
@@ -21,18 +21,18 @@ homepage = "https://github.com/microsoft/terminal"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
-    "C#",
     "C++",
-    "CMake",
-    "HLSL",
-    "HTML",
-    "JavaScript",
-    "Jupyter Notebook",
+    "C#",
+    "C",
     "PowerShell",
+    "Batchfile",
+    "HLSL",
     "Python",
     "Roff",
+    "Jupyter Notebook",
+    "CMake",
+    "JavaScript",
+    "HTML",
 ]
 topics = [
     "console",
@@ -74,4 +74,4 @@ default_branch = "main"
 fork = false
 head_sha = "e58bd4bdab46f7b0de02b6b3494be5a81e4940ad"
 html_url = "https://github.com/microsoft/terminal"
-stars = 103786
+stars = 103789

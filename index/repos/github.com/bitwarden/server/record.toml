@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/bitwarden/server"
-generated_at = "2026-07-01T14:43:03.229905Z"
+generated_at = "2026-07-01T17:26:18.822938Z"
 
 [record.trust]
 confidence = "medium"
@@ -22,17 +22,17 @@ license = "NOASSERTION"
 visibility = "public"
 languages = [
     "C#",
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "Handlebars",
-    "JavaScript",
-    "PLpgSQL",
-    "PowerShell",
-    "Rust",
-    "SCSS",
-    "Shell",
     "TSQL",
+    "Handlebars",
+    "Rust",
+    "HTML",
+    "Shell",
+    "JavaScript",
+    "Dockerfile",
+    "PowerShell",
+    "PLpgSQL",
+    "SCSS",
+    "CSS",
 ]
 build = "npm run build"
 topics = [
@@ -80,6 +80,6 @@ archived = false
 clone_url = "https://github.com/bitwarden/server.git"
 default_branch = "main"
 fork = false
-head_sha = "0909945d9a08678c5fe2d41a89cd741f5b7bd47c"
+head_sha = "0a6fbd2d7dfbd230b54dbc9f063f478ec55a29fa"
 html_url = "https://github.com/bitwarden/server"
-stars = 19319
+stars = 19321

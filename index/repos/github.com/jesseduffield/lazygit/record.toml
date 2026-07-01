@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jesseduffield/lazygit"
-generated_at = "2026-07-01T04:33:05.839622Z"
+generated_at = "2026-07-01T18:09:41.830149Z"
 
 [record.trust]
 confidence = "high"
@@ -21,12 +21,12 @@ homepage = "https://github.com/jesseduffield/lazygit"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Go",
+    "Shell",
+    "Nix",
     "Just",
     "Makefile",
-    "Nix",
-    "Shell",
+    "Dockerfile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -41,6 +41,6 @@ archived = false
 clone_url = "https://github.com/jesseduffield/lazygit.git"
 default_branch = "master"
 fork = false
-head_sha = "760e9e587b30b0e7b507457fb533c54d36d76443"
+head_sha = "722239abd1edb756f4d6e65b8b7b0ba05c10011c"
 html_url = "https://github.com/jesseduffield/lazygit"
-stars = 79878
+stars = 79901

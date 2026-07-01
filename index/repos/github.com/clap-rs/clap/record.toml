@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/clap-rs/clap"
-generated_at = "2026-06-29T01:57:57.09Z"
+generated_at = "2026-07-01T17:27:30.557166Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,13 +18,13 @@ homepage = "docs.rs/clap"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Elvish",
-    "Makefile",
-    "Nushell",
-    "PowerShell",
-    "Roff",
     "Rust",
     "Shell",
+    "PowerShell",
+    "Nushell",
+    "Elvish",
+    "Roff",
+    "Makefile",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -39,14 +39,11 @@ topics = [
     "argument-parser",
 ]
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/clap-rs/clap.git"
 default_branch = "master"
 fork = false
-head_sha = "8387c812c4b9726474b8407f81ec97f0acf570ed"
+head_sha = "3a4f2d031b5110aaaac40f1cb1d6c0b8ff619df8"
 html_url = "https://github.com/clap-rs/clap"
-stars = 16525
+stars = 16530

@@ -4,7 +4,6 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
-- Discovered related relation to github.com/git@github.com:WhiskeySockets/Baileys from package.json repository.
 - Discovered related relation to github.com/WhiskeySockets/Baileys from package.json homepage.
 - Discovered related relation to github.com/pokearaujo/multidevice from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

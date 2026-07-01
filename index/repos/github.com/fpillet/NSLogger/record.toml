@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fpillet/NSLogger"
-generated_at = "2026-07-01T15:30:02.555012Z"
+generated_at = "2026-07-01T18:03:06.841452Z"
 
 [record.trust]
 confidence = "high"
@@ -21,12 +21,12 @@ homepage = "https://github.com/fpillet/NSLogger"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "C",
-    "Java",
     "Objective-C",
+    "Java",
+    "C",
+    "Swift",
     "Rich Text Format",
     "Ruby",
-    "Swift",
 ]
 topics = []
 

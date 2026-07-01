@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/opencv/opencv"
-generated_at = "2026-07-01T15:24:21.160793Z"
+generated_at = "2026-07-01T18:20:18.722347Z"
 
 [record.trust]
 confidence = "high"
@@ -21,25 +21,25 @@ homepage = "https://opencv.org"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "C++",
+    "C",
+    "Python",
     "CMake",
-    "Cuda",
-    "Dockerfile",
-    "HTML",
     "Java",
-    "JavaScript",
-    "Kotlin",
-    "Objective-C",
     "Objective-C++",
+    "Cuda",
+    "Swift",
+    "JavaScript",
+    "Objective-C",
+    "HTML",
+    "Shell",
     "Perl",
     "PowerShell",
-    "Prolog",
-    "Python",
-    "Shell",
-    "Swift",
+    "Kotlin",
     "TeX",
+    "Batchfile",
+    "Prolog",
+    "Dockerfile",
 ]
 topics = [
     "opencv",
@@ -78,4 +78,4 @@ default_branch = "4.x"
 fork = false
 head_sha = "579a50573469fa6daf066748a9be25eeca200757"
 html_url = "https://github.com/opencv/opencv"
-stars = 89482
+stars = 89481

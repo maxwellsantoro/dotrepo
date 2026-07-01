@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/zed-industries/zed"
-generated_at = "2026-06-29T02:01:47.034361Z"
+generated_at = "2026-07-01T18:38:03.590683Z"
 
 [record.trust]
 confidence = "high"
@@ -21,26 +21,26 @@ homepage = "https://zed.dev"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "HLSL",
-    "HTML",
-    "Handlebars",
-    "Inno Setup",
-    "JavaScript",
-    "Julia",
-    "Metal",
-    "Nix",
-    "Objective-C",
-    "PowerShell",
-    "Procfile",
-    "Python",
-    "RenderScript",
-    "Rich Text Format",
     "Rust",
-    "Shell",
+    "Python",
+    "Inno Setup",
     "Tree-sitter Query",
-    "TypeScript",
+    "Shell",
+    "Nix",
     "WGSL",
+    "Rich Text Format",
+    "Metal",
+    "HLSL",
+    "JavaScript",
+    "Handlebars",
+    "PowerShell",
+    "TypeScript",
+    "Dockerfile",
+    "Julia",
+    "HTML",
+    "Objective-C",
+    "Procfile",
+    "RenderScript",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -55,14 +55,11 @@ topics = [
 root = "https://zed.dev"
 getting_started = "https://zed.dev/docs/installation#macos"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/zed-industries/zed.git"
 default_branch = "main"
 fork = false
-head_sha = "7582bf74349f6084d4f7370ebb8215d70f7105cf"
+head_sha = "d0802abdecadabc5c3248ebf75a466831f6dfbe4"
 html_url = "https://github.com/zed-industries/zed"
-stars = 86143
+stars = 86294

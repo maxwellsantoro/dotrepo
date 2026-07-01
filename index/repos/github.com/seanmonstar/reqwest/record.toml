@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/seanmonstar/reqwest"
-generated_at = "2026-06-29T01:58:17.476989Z"
+generated_at = "2026-07-01T18:27:29.809461Z"
 
 [record.trust]
 confidence = "high"
@@ -29,8 +29,23 @@ topics = [
     "http-client",
 ]
 
+[docs]
+root = "https://docs.rs/reqwest"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/seanmonstar/reqwest"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false
@@ -39,4 +54,4 @@ default_branch = "master"
 fork = false
 head_sha = "ea3d9ca6877620aa571cd67246c0c37a09fdd2e8"
 html_url = "https://github.com/seanmonstar/reqwest"
-stars = 11696
+stars = 11704

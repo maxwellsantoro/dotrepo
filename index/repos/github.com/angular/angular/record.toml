@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/angular/angular"
-generated_at = "2026-06-26T18:33:46.4533Z"
+generated_at = "2026-07-01T17:24:14.669228Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://angular.dev"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
+    "TypeScript",
     "JavaScript",
-    "Nix",
+    "HTML",
+    "Starlark",
+    "CSS",
     "SCSS",
     "Shell",
-    "Starlark",
-    "TypeScript",
+    "Nix",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -46,14 +46,30 @@ topics = [
 maintainers = []
 security_contact = "https://bughunters.google.com/report"
 
+[docs]
+root = "https://angular.dev"
+getting_started = "https://angular.dev/tutorials/learn-angular"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/angular/angular"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/angular/angular.git"
 default_branch = "main"
 fork = false
-head_sha = "d109cc5e9d58df169163fa6664ed576aade9ad16"
+head_sha = "c4cb66e60264a856c2349ad7ae8d6bf74608b5b7"
 html_url = "https://github.com/angular/angular"
-stars = 100465
+stars = 100380

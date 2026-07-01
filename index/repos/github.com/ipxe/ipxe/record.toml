@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ipxe/ipxe"
-generated_at = "2026-07-01T15:12:38.156461Z"
+generated_at = "2026-07-01T18:08:49.508798Z"
 
 [record.trust]
 confidence = "high"
@@ -22,16 +22,16 @@ homepage = "https://ipxe.org"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Assembly",
     "C",
-    "C++",
-    "GDB",
-    "Linker Script",
-    "Makefile",
+    "Assembly",
     "Perl",
     "Python",
-    "Roff",
+    "Makefile",
     "Shell",
+    "C++",
+    "Linker Script",
+    "Roff",
+    "GDB",
 ]
 topics = [
     "ipxe",

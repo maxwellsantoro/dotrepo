@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nsf/gocode"
-generated_at = "2026-07-01T15:20:06.792515Z"
+generated_at = "2026-07-01T18:18:45.741685Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://github.com/nsf/gocode"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Emacs Lisp",
     "Go",
+    "Emacs Lisp",
     "Python",
-    "Ruby",
+    "Vim Script",
     "Shell",
     "Tcl",
-    "Vim Script",
+    "Ruby",
 ]
 topics = []
 

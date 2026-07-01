@@ -2,8 +2,8 @@
 
 - Imported repository name, description, and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Inferred repo.build from .github/workflows/halo.yaml as `./gradlew clean check --configuration-cache --configuration-cache-problems=warn`.
-- Inferred repo.test from .github/workflows/halo.yaml as `./gradlew clean check --configuration-cache --configuration-cache-problems=warn`.
+- Imported repo.build from build.gradle as `./gradlew build`.
+- Imported repo.test from build.gradle as `./gradlew test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -14,4 +14,4 @@
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

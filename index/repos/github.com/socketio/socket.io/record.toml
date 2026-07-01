@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/socketio/socket.io"
-generated_at = "2026-07-01T14:44:25.542759Z"
+generated_at = "2026-07-01T18:29:23.155271Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,11 +18,11 @@ homepage = "https://socket.io"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
+    "TypeScript",
     "JavaScript",
     "Shell",
-    "TypeScript",
+    "HTML",
+    "CSS",
 ]
 topics = [
     "javascript",
@@ -45,4 +45,4 @@ default_branch = "main"
 fork = false
 head_sha = "d2d753fed4435015c2d83fe62e676b44e07fa3f7"
 html_url = "https://github.com/socketio/socket.io"
-stars = 63140
+stars = 63141

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/roncoo/roncoo-pay"
-generated_at = "2026-07-01T15:31:53.042633Z"
+generated_at = "2026-07-01T18:25:58.191937Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://www.roncoo.net"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
     "Java",
     "PHP",
     "SCSS",
+    "Batchfile",
     "Shell",
 ]
 build = "./mvnw package"

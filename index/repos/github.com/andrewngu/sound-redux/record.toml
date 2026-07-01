@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/andrewngu/sound-redux"
-generated_at = "2026-07-01T15:31:45.842237Z"
+generated_at = "2026-07-01T17:24:05.594237Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "http://soundredux.io"
 license = "GPL-3.0"
 visibility = "public"
 languages = [
+    "JavaScript",
     "CSS",
     "HTML",
-    "JavaScript",
 ]
 build = "npm run build"
 topics = [

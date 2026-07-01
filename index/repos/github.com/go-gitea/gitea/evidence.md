@@ -4,6 +4,7 @@
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from go.mod as `go build ./...`.
 - Imported repo.test from go.mod as `go test ./...`.
+- Discovered related relation to github.com/go-gitea/gitea from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

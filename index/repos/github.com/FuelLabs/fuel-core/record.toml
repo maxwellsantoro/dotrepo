@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/FuelLabs/fuel-core"
-generated_at = "2026-06-29T00:54:45.732979Z"
+generated_at = "2026-07-01T17:17:14.708164Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://github.com/FuelLabs/fuel-core"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "Lua",
-    "Makefile",
     "Rust",
+    "Lua",
+    "Dockerfile",
     "Shell",
+    "Makefile",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -45,9 +45,6 @@ maintainers = [
 ]
 security_contact = "https://github.com/FuelLabs/fuel-core/security/advisories/new"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/FuelLabs/fuel-core.git"
@@ -55,4 +52,4 @@ default_branch = "master"
 fork = false
 head_sha = "540fb5f1afdb94e84190834d757e8452640228cb"
 html_url = "https://github.com/FuelLabs/fuel-core"
-stars = 56987
+stars = 56985

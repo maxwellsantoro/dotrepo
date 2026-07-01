@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/terraform-aws-modules/terraform-aws-eks"
-generated_at = "2026-07-01T15:29:45.192263Z"
+generated_at = "2026-07-01T18:32:20.180227Z"
 
 [record.trust]
 confidence = "high"
@@ -22,8 +22,8 @@ license = "Apache-2.0"
 visibility = "public"
 languages = [
     "HCL",
-    "PowerShell",
     "Shell",
+    "PowerShell",
     "Smarty",
 ]
 topics = [

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mautic/mautic"
-generated_at = "2026-07-01T15:15:41.815815Z"
+generated_at = "2026-07-01T18:14:14.340693Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://www.mautic.org"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
-    "JavaScript",
-    "Less",
     "PHP",
-    "SCSS",
-    "Shell",
     "Twig",
+    "JavaScript",
+    "SCSS",
+    "HTML",
+    "CSS",
     "TypeScript",
+    "Shell",
+    "Less",
 ]
 build = "npm run build"
 test = "composer run-script test"
@@ -62,4 +62,4 @@ default_branch = "7.x"
 fork = false
 head_sha = "f552e388ef53b2783446dc06c3e4d639518afbf4"
 html_url = "https://github.com/mautic/mautic"
-stars = 10007
+stars = 10008

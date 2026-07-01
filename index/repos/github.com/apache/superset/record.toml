@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/apache/superset"
-generated_at = "2026-06-29T01:18:15.841676Z"
+generated_at = "2026-07-01T17:24:45.292944Z"
 
 [record.trust]
 confidence = "high"
@@ -22,19 +22,19 @@ homepage = "https://superset.apache.org/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "Go Template",
+    "TypeScript",
+    "Python",
+    "Jupyter Notebook",
     "HTML",
     "JavaScript",
-    "Jinja",
-    "Jupyter Notebook",
-    "Makefile",
-    "Mako",
-    "Pug",
-    "Python",
     "Shell",
-    "TypeScript",
+    "Dockerfile",
+    "Jinja",
+    "Go Template",
+    "Makefile",
+    "CSS",
+    "Pug",
+    "Mako",
 ]
 build = "python -m build"
 test = "python -m pytest"
@@ -83,14 +83,11 @@ security_contact = "security@superset.apache.org"
 root = "https://superset.apache.org/docs/configuration/feature-flags"
 getting_started = "https://superset.apache.org/docs/quickstart/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/apache/superset.git"
 default_branch = "master"
 fork = false
-head_sha = "90fe1f5b7c49d9980afb4fb54ac92d789b294490"
+head_sha = "b3c709b3d5ef52ee6740b0c8edf17f9c996d9b49"
 html_url = "https://github.com/apache/superset"
-stars = 73573
+stars = 73613

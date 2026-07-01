@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/signalwire/freeswitch"
-generated_at = "2026-07-01T15:13:21.68209Z"
+generated_at = "2026-07-01T18:29:06.08159Z"
 
 [record.trust]
 confidence = "high"
@@ -22,46 +22,46 @@ homepage = "https://freeswitch.com/#getting-started"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "ActionScript",
-    "Assembly",
-    "Awk",
-    "Batchfile",
-    "BitBake",
     "C",
-    "C#",
     "C++",
-    "CMake",
-    "CSS",
-    "Dockerfile",
-    "Emacs Lisp",
-    "Erlang",
-    "F#",
-    "GDB",
-    "Go Template",
+    "C#",
+    "JavaScript",
+    "Assembly",
+    "Makefile",
+    "Shell",
+    "Perl",
+    "ActionScript",
+    "M4",
+    "Python",
     "HTML",
     "Inno Setup",
     "Java",
-    "JavaScript",
+    "Emacs Lisp",
+    "CMake",
     "Limbo",
     "Lua",
-    "M4",
-    "Makefile",
-    "Meson",
-    "PHP",
-    "Pascal",
-    "Perl",
     "Processing",
-    "Python",
-    "QMake",
-    "QuickBASIC",
+    "CSS",
+    "Batchfile",
+    "Dockerfile",
+    "SWIG",
+    "PHP",
+    "BitBake",
     "Raku",
+    "Meson",
+    "Erlang",
+    "Awk",
+    "Smarty",
+    "F#",
+    "Pascal",
+    "Go Template",
     "Roff",
     "Ruby",
-    "SWIG",
-    "Shell",
-    "Smarty",
-    "Tcl",
+    "GDB",
     "XSLT",
+    "QMake",
+    "Tcl",
+    "QuickBASIC",
 ]
 test = "make check"
 topics = [

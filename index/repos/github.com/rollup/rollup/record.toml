@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rollup/rollup"
-generated_at = "2026-06-29T02:01:37.079223Z"
+generated_at = "2026-07-01T18:25:54.487134Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://rollupjs.org"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
     "JavaScript",
-    "Rust",
     "TypeScript",
+    "Rust",
+    "HTML",
+    "CSS",
 ]
 build = "npm run build"
 test = "npm test"
@@ -41,6 +41,18 @@ root = "https://rollupjs.org"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/rollup/rollup"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/rollup/rollup.git"
@@ -48,4 +60,4 @@ default_branch = "master"
 fork = false
 head_sha = "ff0a94b908e92745136bbd34ddebf7e1bbae1f59"
 html_url = "https://github.com/rollup/rollup"
-stars = 26292
+stars = 26290

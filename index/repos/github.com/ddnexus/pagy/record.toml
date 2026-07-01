@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ddnexus/pagy"
-generated_at = "2026-07-01T15:12:45.983457Z"
+generated_at = "2026-07-01T17:52:00.773448Z"
 
 [record.trust]
 confidence = "high"
@@ -22,12 +22,12 @@ homepage = "https://ddnexus.github.io/pagy/"
 license = "MIT"
 visibility = "public"
 languages = [
+    "Ruby",
+    "JavaScript",
+    "TypeScript",
     "CSS",
     "HTML",
-    "JavaScript",
-    "Ruby",
     "Shell",
-    "TypeScript",
 ]
 topics = [
     "ruby",

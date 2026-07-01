@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google/googletest"
-generated_at = "2026-07-01T15:17:08.149758Z"
+generated_at = "2026-07-01T18:04:46.298882Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://google.github.io/googletest/"
 license = "BSD-3-Clause"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "C++",
-    "CMake",
     "Python",
-    "Shell",
+    "C",
     "Starlark",
+    "CMake",
+    "Shell",
+    "Batchfile",
 ]
 topics = []
 

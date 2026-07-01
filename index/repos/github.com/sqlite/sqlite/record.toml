@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sqlite/sqlite"
-generated_at = "2026-07-01T15:21:18.123616Z"
+generated_at = "2026-07-01T18:30:03.973676Z"
 
 [record.trust]
 confidence = "high"
@@ -21,19 +21,19 @@ homepage = "https://github.com/sqlite/sqlite"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C",
-    "C#",
-    "CSS",
-    "HTML",
-    "Java",
+    "Tcl",
     "JavaScript",
+    "Java",
     "Makefile",
+    "Shell",
+    "HTML",
+    "Yacc",
+    "Batchfile",
+    "C#",
     "PLpgSQL",
     "Roff",
-    "Shell",
-    "Tcl",
-    "Yacc",
+    "CSS",
 ]
 topics = []
 
@@ -44,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "ebdbae7d9d783d5552da5c009e6df11e13a9c456"
 html_url = "https://github.com/sqlite/sqlite"
-stars = 9950
+stars = 9954

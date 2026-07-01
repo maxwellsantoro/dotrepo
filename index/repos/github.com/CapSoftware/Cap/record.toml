@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/CapSoftware/Cap"
-generated_at = "2026-06-29T05:16:55.105246Z"
+generated_at = "2026-07-01T17:16:07.667718Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Cap"
@@ -21,16 +21,16 @@ homepage = "https://cap.so"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "HTML",
+    "TypeScript",
+    "Rust",
     "JavaScript",
     "MDX",
-    "RenderScript",
-    "Rust",
-    "Shell",
-    "TypeScript",
+    "CSS",
     "WGSL",
+    "HTML",
+    "Shell",
+    "Dockerfile",
+    "RenderScript",
 ]
 build = "pnpm --filter @cap/chrome-extension build"
 test = "pnpm --filter @cap/chrome-extension test"
@@ -65,6 +65,6 @@ archived = false
 clone_url = "https://github.com/CapSoftware/Cap.git"
 default_branch = "main"
 fork = false
-head_sha = "a9f7d7ffc5fc59f34a3bc0f002b0661af3f9a351"
+head_sha = "3f69803d47157a72aaa0734922fc79302cd36475"
 html_url = "https://github.com/CapSoftware/Cap"
-stars = 19842
+stars = 19905

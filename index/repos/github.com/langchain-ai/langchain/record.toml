@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/langchain-ai/langchain"
-generated_at = "2026-07-01T14:43:26.186327Z"
+generated_at = "2026-07-01T18:12:18.938198Z"
 
 [record.trust]
 confidence = "medium"
@@ -21,15 +21,16 @@ homepage = "https://docs.langchain.com/langchain/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Makefile",
     "Python",
+    "Makefile",
     "Shell",
     "XSLT",
+    "HTML",
+    "Dockerfile",
+    "JavaScript",
 ]
 build = "uv run pytest -m compile tests/integration_tests"
+test = "make test PYTEST_EXTRA=-q"
 topics = [
     "ai",
     "anthropic",
@@ -68,6 +69,6 @@ archived = false
 clone_url = "https://github.com/langchain-ai/langchain.git"
 default_branch = "master"
 fork = false
-head_sha = "fa021df5926b7be43f2d162117538807836b619d"
+head_sha = "524c791e912b288663940d01795ef5f12ff51623"
 html_url = "https://github.com/langchain-ai/langchain"
-stars = 140651
+stars = 140662

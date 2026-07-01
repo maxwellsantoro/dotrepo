@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tipsy/profile-summary-for-github"
-generated_at = "2026-07-01T15:21:56.508551Z"
+generated_at = "2026-07-01T18:32:48.316417Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://profile-summary-for-github.com/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "HTML",
-    "Kotlin",
-    "Procfile",
     "Vue",
+    "Kotlin",
+    "HTML",
+    "Dockerfile",
+    "Procfile",
 ]
 build = "./mvnw package"
 test = "./mvnw test"

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/godotengine/godot"
-generated_at = "2026-07-01T04:29:01.536037Z"
+generated_at = "2026-07-01T18:04:10.158092Z"
 
 [record.trust]
 confidence = "high"
@@ -22,20 +22,20 @@ homepage = "https://godotengine.org"
 license = "MIT"
 visibility = "public"
 languages = [
-    "C",
-    "C#",
     "C++",
-    "CMake",
-    "GAP",
-    "GDScript",
-    "GLSL",
+    "C#",
     "Java",
-    "JavaScript",
-    "Kotlin",
+    "C",
+    "GLSL",
     "Objective-C++",
     "Python",
+    "Kotlin",
+    "GDScript",
+    "JavaScript",
     "Shell",
     "Swift",
+    "CMake",
+    "GAP",
 ]
 build = "./gradlew generateGodotTemplates"
 test = "./gradlew generateGodotTemplates"
@@ -107,6 +107,6 @@ archived = false
 clone_url = "https://github.com/godotengine/godot.git"
 default_branch = "master"
 fork = false
-head_sha = "8dbf8a89910e4c8e5b73249884688653021a0074"
+head_sha = "549d1846bdfc0886b4696a1a76f15206364f69b0"
 html_url = "https://github.com/godotengine/godot"
-stars = 113400
+stars = 113436

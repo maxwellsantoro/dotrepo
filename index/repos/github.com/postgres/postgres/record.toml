@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/postgres/postgres"
-generated_at = "2026-07-01T15:23:56.87295Z"
+generated_at = "2026-07-01T18:22:33.153922Z"
 
 [record.trust]
 confidence = "high"
@@ -22,22 +22,22 @@ license = "NOASSERTION"
 visibility = "public"
 languages = [
     "C",
-    "C++",
-    "DTrace",
-    "Emacs Lisp",
-    "Lex",
-    "M4",
-    "Makefile",
-    "Meson",
-    "PLSQL",
     "PLpgSQL",
     "Perl",
-    "Python",
-    "Roff",
-    "Ruby",
-    "Shell",
-    "XS",
     "Yacc",
+    "Meson",
+    "Makefile",
+    "Python",
+    "Lex",
+    "M4",
+    "Ruby",
+    "C++",
+    "Shell",
+    "PLSQL",
+    "Roff",
+    "XS",
+    "Emacs Lisp",
+    "DTrace",
     "sed",
 ]
 build = "make build"
@@ -55,6 +55,6 @@ archived = false
 clone_url = "https://github.com/postgres/postgres.git"
 default_branch = "master"
 fork = false
-head_sha = "aeb07c55fab5c17a600b77ffcdc3b71425d6a8e7"
+head_sha = "85656c1bef4af031f8e9801d927cdaeaaae95566"
 html_url = "https://github.com/postgres/postgres"
-stars = 21326
+stars = 21328

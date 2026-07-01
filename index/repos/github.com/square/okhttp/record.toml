@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/square/okhttp"
-generated_at = "2026-06-29T05:14:29.618056Z"
+generated_at = "2026-07-01T18:30:08.782567Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/build.yml`. Inferred `repo.test` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle.kts`. Imported `repo.build` from `build.gradle.kts`. Imported `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "OkHttp"
@@ -22,12 +21,12 @@ homepage = "https://square.github.io/okhttp/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Java",
     "Kotlin",
+    "Java",
     "Shell",
 ]
-build = "./gradlew clean publish --stacktrace"
-test = "./gradlew clean publish --stacktrace"
+build = "./gradlew build"
+test = "./gradlew test"
 topics = [
     "java",
     "android",
@@ -43,6 +42,6 @@ archived = false
 clone_url = "https://github.com/square/okhttp.git"
 default_branch = "master"
 fork = false
-head_sha = "0cadfa2997513d20bf88ca530c963a1266f17af9"
+head_sha = "1d2c0fe4844fb7143c37198015539eec2fccbd71"
 html_url = "https://github.com/square/okhttp"
-stars = 46993
+stars = 46995

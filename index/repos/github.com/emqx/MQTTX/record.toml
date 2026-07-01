@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/emqx/MQTTX"
-generated_at = "2026-07-01T14:43:07.885462Z"
+generated_at = "2026-07-01T18:00:28.619986Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,13 +18,13 @@ homepage = "https://mqttx.app"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "SCSS",
     "TypeScript",
     "Vue",
+    "SCSS",
+    "JavaScript",
+    "CSS",
+    "HTML",
+    "Dockerfile",
 ]
 build = "npm run build"
 topics = [

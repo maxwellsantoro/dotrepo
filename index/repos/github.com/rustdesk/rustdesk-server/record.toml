@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rustdesk/rustdesk-server"
-generated_at = "2026-06-29T05:20:14.159691Z"
+generated_at = "2026-07-01T18:26:46.085559Z"
 
 [record.trust]
 confidence = "high"
@@ -21,14 +21,14 @@ homepage = "https://rustdesk.com/server"
 license = "AGPL-3.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "CSS",
+    "Rust",
+    "NSIS",
+    "JavaScript",
+    "Shell",
     "Dockerfile",
     "HTML",
-    "JavaScript",
-    "NSIS",
-    "Rust",
-    "Shell",
+    "CSS",
+    "Batchfile",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -47,6 +47,6 @@ archived = false
 clone_url = "https://github.com/rustdesk/rustdesk-server.git"
 default_branch = "master"
 fork = false
-head_sha = "815c728837b8a091c9feeeabb423d543be3a7f8d"
+head_sha = "80d3a50566d19459e7af3a1ab09b0024c942715a"
 html_url = "https://github.com/rustdesk/rustdesk-server"
-stars = 9990
+stars = 10010

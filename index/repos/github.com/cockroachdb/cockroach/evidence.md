@@ -4,6 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Imported repo.build from go.mod as `go build ./...`.
 - Imported repo.test from go.mod as `go test ./...`.
+- Discovered related relation to github.com/cockroachdb/cockroach from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

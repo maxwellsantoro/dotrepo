@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nvbn/thefuck"
-generated_at = "2026-07-01T15:14:56.376945Z"
+generated_at = "2026-07-01T18:19:33.49847Z"
 
 [record.trust]
 confidence = "high"
@@ -22,11 +22,11 @@ homepage = "https://github.com/nvbn/thefuck"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
+    "Python",
     "Dockerfile",
     "PowerShell",
-    "Python",
     "Shell",
+    "Batchfile",
 ]
 test = "coverage run --source=thefuck,tests -m pytest -v --capture=sys tests"
 topics = [
@@ -59,4 +59,4 @@ default_branch = "master"
 fork = false
 head_sha = "c7e7e1d884d3bb241ea6448f72a989434c2a35ec"
 html_url = "https://github.com/nvbn/thefuck"
-stars = 97459
+stars = 97461

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/peass-ng/PEASS-ng"
-generated_at = "2026-07-01T15:23:29.937474Z"
+generated_at = "2026-07-01T18:21:06.547797Z"
 
 [record.trust]
 confidence = "high"
@@ -22,14 +22,14 @@ homepage = "https://book.hacktricks.xyz"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
     "C#",
-    "CMake",
-    "HTML",
+    "Shell",
     "PowerShell",
     "Python",
+    "Batchfile",
     "Ruby",
-    "Shell",
+    "HTML",
+    "CMake",
 ]
 build = 'echo "Do not guess from truncated logs when exact compiler/runtime error lines are available."'
 topics = [
@@ -79,4 +79,4 @@ default_branch = "master"
 fork = false
 head_sha = "be3a05f5ae875aee20df7b19ebacf3acbaeefc74"
 html_url = "https://github.com/peass-ng/PEASS-ng"
-stars = 20077
+stars = 20079

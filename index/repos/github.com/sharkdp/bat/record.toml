@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/sharkdp/bat"
-generated_at = "2026-06-29T02:01:18.500684Z"
+generated_at = "2026-07-01T18:28:45.269529Z"
 
 [record.trust]
 confidence = "medium"
@@ -18,11 +18,11 @@ homepage = "https://github.com/sharkdp/bat"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Nix",
-    "Python",
     "Rust",
+    "Python",
     "Shell",
+    "Nix",
+    "Batchfile",
 ]
 build = "cargo build"
 test = "cargo test"
@@ -44,11 +44,35 @@ security_contact = "https://david-peter.de/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/sharkdp/bat"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[[relations.links]]
+kind = "related"
+target = "github.com/junegunn/fzf"
+notes = "Cross-link from README: fzf"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/sharkdp/bat.git"
 default_branch = "master"
 fork = false
-head_sha = "835bd2a756b133531a8c49cb2b519654d57ace60"
+head_sha = "971f9679dafac7fb9246c2f8a43118873a446b3a"
 html_url = "https://github.com/sharkdp/bat"
-stars = 59462
+stars = 59508

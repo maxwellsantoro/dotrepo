@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/bitpay/bitcore"
-generated_at = "2026-07-01T15:26:53.617814Z"
+generated_at = "2026-07-01T17:26:13.153558Z"
 
 [record.trust]
 confidence = "high"
@@ -21,13 +21,13 @@ homepage = "https://bitcore.io/"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
-    "Makefile",
-    "Shell",
-    "Solidity",
     "TypeScript",
+    "JavaScript",
+    "HTML",
+    "Solidity",
+    "Shell",
+    "Dockerfile",
+    "Makefile",
 ]
 build = "npm run build"
 topics = []

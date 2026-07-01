@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/KoljaB/RealtimeSTT"
-generated_at = "2026-07-01T15:22:32.927511Z"
+generated_at = "2026-07-01T17:18:54.44546Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://github.com/KoljaB/RealtimeSTT"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
-    "HTML",
-    "JavaScript",
     "Python",
+    "HTML",
+    "Batchfile",
+    "JavaScript",
+    "Dockerfile",
 ]
 topics = [
     "python",

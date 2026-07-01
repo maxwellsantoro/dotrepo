@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rustdesk/rustdesk"
-generated_at = "2026-07-01T04:30:12.498154Z"
+generated_at = "2026-07-01T18:26:42.555256Z"
 
 [record.trust]
 confidence = "high"
@@ -21,22 +21,22 @@ homepage = "https://rustdesk.com"
 license = "AGPL-3.0"
 visibility = "public"
 languages = [
-    "AppleScript",
-    "C",
-    "C++",
-    "CMake",
-    "CSS",
-    "Dart",
-    "Dockerfile",
-    "HTML",
-    "Kotlin",
-    "Objective-C",
-    "Objective-C++",
-    "Python",
-    "Ruby",
     "Rust",
+    "Dart",
+    "C++",
+    "Python",
+    "C",
+    "Kotlin",
+    "CMake",
+    "Objective-C++",
+    "CSS",
     "Shell",
     "Swift",
+    "AppleScript",
+    "HTML",
+    "Ruby",
+    "Dockerfile",
+    "Objective-C",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -72,4 +72,4 @@ default_branch = "master"
 fork = false
 head_sha = "9d1ab3fba386b4e5eeeb331eb9d9db4456789824"
 html_url = "https://github.com/rustdesk/rustdesk"
-stars = 117414
+stars = 117453

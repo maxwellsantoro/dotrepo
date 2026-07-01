@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jeecgboot/JeecgBoot"
-generated_at = "2026-07-01T15:10:46.696733Z"
+generated_at = "2026-07-01T18:09:28.570353Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://jeecg.com"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "Dockerfile",
     "Java",
-    "JavaScript",
-    "Less",
-    "Python",
-    "Shell",
-    "TypeScript",
     "Vue",
+    "Less",
+    "TypeScript",
+    "Python",
+    "Dockerfile",
+    "Batchfile",
+    "Shell",
+    "JavaScript",
 ]
 topics = [
     "antd",

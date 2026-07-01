@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/luanfujun/deep-photo-styletransfer"
-generated_at = "2026-07-01T15:26:41.917335Z"
+generated_at = "2026-07-01T18:13:40.844026Z"
 
 [record.trust]
 confidence = "high"
@@ -20,13 +20,13 @@ description = 'Code and data for paper "Deep Photo Style Transfer"'
 homepage = "https://github.com/luanfujun/deep-photo-styletransfer"
 visibility = "public"
 languages = [
-    "Cuda",
-    "Lua",
-    "M",
     "MATLAB",
-    "Makefile",
+    "Lua",
+    "Cuda",
     "Python",
+    "Makefile",
     "Shell",
+    "M",
 ]
 build = "make build"
 topics = []

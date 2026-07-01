@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pallets/click"
-generated_at = "2026-06-29T02:02:37.910188Z"
+generated_at = "2026-07-01T18:20:51.782076Z"
 
 [record.trust]
 confidence = "high"
@@ -36,14 +36,11 @@ topics = [
 [docs]
 root = "https://click.palletsprojects.com"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/pallets/click.git"
 default_branch = "main"
 fork = false
-head_sha = "679a7a0eccbdded7a6e85680bdaaf08003765e01"
+head_sha = "6ec99f89261b32f8a50848786eca055e1967659f"
 html_url = "https://github.com/pallets/click"
-stars = 17551
+stars = 17553

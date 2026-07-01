@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/GyulyVGC/sniffnet"
-generated_at = "2026-06-29T01:17:28.688852Z"
+generated_at = "2026-07-01T17:17:32.362476Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ homepage = "https://sniffnet.app"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
-    "Rich Text Format",
     "Rust",
+    "Rich Text Format",
     "Shell",
+    "Dockerfile",
 ]
 build = "cargo build"
 test = "cargo test"
@@ -54,14 +54,29 @@ topics = [
 maintainers = []
 security_contact = "security@sniffnet.app"
 
+[docs]
+root = "https://sniffnet.app"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/GyulyVGC/sniffnet"
+notes = "Declared repository in Cargo.toml."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/GyulyVGC/sniffnet.git"
 default_branch = "main"
 fork = false
-head_sha = "06a249c1680e4f89c67ac909e24790ff70f9e1d2"
+head_sha = "7f139ecb36b484f5042e4c07bd2cdb6579fcc3e7"
 html_url = "https://github.com/GyulyVGC/sniffnet"
-stars = 39643
+stars = 39673

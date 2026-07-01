@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jakevdp/PythonDataScienceHandbook"
-generated_at = "2026-07-01T15:29:32.957314Z"
+generated_at = "2026-07-01T18:09:09.299998Z"
 
 [record.trust]
 confidence = "high"
@@ -21,12 +21,12 @@ homepage = "http://jakevdp.github.io/PythonDataScienceHandbook"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "HTML",
     "Jupyter Notebook",
+    "Python",
+    "HTML",
+    "CSS",
     "Less",
     "Makefile",
-    "Python",
 ]
 topics = [
     "scikit-learn",
@@ -62,4 +62,4 @@ default_branch = "master"
 fork = false
 head_sha = "d66231454ef753818dc9213c9b5942e067266966"
 html_url = "https://github.com/jakevdp/PythonDataScienceHandbook"
-stars = 48740
+stars = 48743

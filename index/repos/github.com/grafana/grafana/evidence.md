@@ -2,9 +2,12 @@
 
 - Imported repository name, description, and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
-- Imported repo.build from go.mod as `go build ./...`.
-- Imported repo.test from go.mod as `go test ./...`.
+- Left `repo.build` unset because `package.json` and `go.mod` suggested conflicting build commands.
+- Left `repo.test` unset because `package.json` and `go.mod` suggested conflicting test commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.build` to `make build` from `Makefile` after deterministic escalation.
+- Set `repo.test` to `make test` from `Makefile` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

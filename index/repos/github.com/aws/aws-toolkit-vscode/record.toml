@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/aws/aws-toolkit-vscode"
-generated_at = "2026-06-29T05:28:42.167996Z"
+generated_at = "2026-07-01T17:25:26.492421Z"
 
 [record.trust]
 confidence = "high"
@@ -21,21 +21,21 @@ homepage = "https://marketplace.visualstudio.com/items?itemName=AmazonWebService
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "C#",
-    "CSS",
-    "Dockerfile",
-    "Go",
-    "HCL",
-    "HTML",
-    "Java",
-    "JavaScript",
-    "Makefile",
-    "PowerShell",
-    "Python",
-    "Ruby",
-    "Shell",
     "TypeScript",
     "Vue",
+    "JavaScript",
+    "CSS",
+    "Java",
+    "Shell",
+    "PowerShell",
+    "Python",
+    "HTML",
+    "Go",
+    "Dockerfile",
+    "C#",
+    "HCL",
+    "Ruby",
+    "Makefile",
 ]
 build = "npm run build"
 test = "npm test"
@@ -73,6 +73,6 @@ archived = false
 clone_url = "https://github.com/aws/aws-toolkit-vscode.git"
 default_branch = "master"
 fork = false
-head_sha = "2e2c1c26b1ec973be4560a2f711e912ccc153a2f"
+head_sha = "7f9890927220faec67ca4ed26ea03ad2737ae6b8"
 html_url = "https://github.com/aws/aws-toolkit-vscode"
 stars = 1996

@@ -6,6 +6,7 @@
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from go.mod as `go build ./...`.
 - Imported repo.test from go.mod as `go test ./...`.
+- Discovered related relation to github.com/jdx/mise from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

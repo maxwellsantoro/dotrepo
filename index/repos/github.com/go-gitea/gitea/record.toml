@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/go-gitea/gitea"
-generated_at = "2026-06-26T18:31:38.796649Z"
+generated_at = "2026-07-01T18:04:01.863667Z"
 
 [record.trust]
 confidence = "high"
@@ -21,19 +21,19 @@ homepage = "https://gitea.com"
 license = "MIT"
 visibility = "public"
 languages = [
-    "CSS",
-    "Dockerfile",
     "Go",
     "Handlebars",
-    "JavaScript",
-    "Jsonnet",
-    "Jupyter Notebook",
-    "Less",
-    "Makefile",
-    "Nix",
-    "Shell",
     "TypeScript",
+    "CSS",
+    "JavaScript",
     "Vue",
+    "Shell",
+    "Makefile",
+    "Jsonnet",
+    "Dockerfile",
+    "Jupyter Notebook",
+    "Nix",
+    "Less",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -70,11 +70,23 @@ root = "https://gitea.com/gitea/docs"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/go-gitea/gitea"
+notes = "Cross-link from README: !["
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/go-gitea/gitea.git"
 default_branch = "main"
 fork = false
-head_sha = "1b0992eb2e59de4bbae27ffe122dbaaaa28b0770"
+head_sha = "9cb2719fab81ecf5c9909931838363bf4e18d461"
 html_url = "https://github.com/go-gitea/gitea"
-stars = 56526
+stars = 56622

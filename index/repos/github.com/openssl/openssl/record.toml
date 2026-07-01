@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/openssl/openssl"
-generated_at = "2026-07-01T04:29:14.907124Z"
+generated_at = "2026-07-01T18:20:32.10529Z"
 
 [record.trust]
 confidence = "high"
@@ -22,21 +22,21 @@ homepage = "https://openssl-library.org/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Assembly",
     "C",
-    "C++",
-    "CMake",
-    "DIGITAL Command Language",
-    "Dockerfile",
-    "Go Template",
-    "M4",
-    "Pawn",
     "Perl",
-    "Python",
+    "C++",
+    "Assembly",
     "Raku",
-    "Ruby",
+    "Go Template",
     "Shell",
+    "Python",
+    "M4",
+    "CMake",
     "eC",
+    "DIGITAL Command Language",
+    "Pawn",
+    "Dockerfile",
+    "Ruby",
     "sed",
 ]
 build = "make -s build_generated"
@@ -76,6 +76,6 @@ archived = false
 clone_url = "https://github.com/openssl/openssl.git"
 default_branch = "master"
 fork = false
-head_sha = "f0ca416976ac5b6761bf45e28fa42f1981edbe2c"
+head_sha = "8a072a3dabe4df116460f8910735569df321b97b"
 html_url = "https://github.com/openssl/openssl"
-stars = 30383
+stars = 30386

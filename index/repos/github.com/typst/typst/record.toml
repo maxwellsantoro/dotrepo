@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/typst/typst"
-generated_at = "2026-07-01T04:33:22.280582Z"
+generated_at = "2026-07-01T18:34:43.694413Z"
 
 [record.trust]
 confidence = "high"
@@ -21,12 +21,12 @@ homepage = "https://typst.app"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
+    "Rust",
+    "Typst",
+    "TypeScript",
+    "JavaScript",
     "CSS",
     "Dockerfile",
-    "JavaScript",
-    "Rust",
-    "TypeScript",
-    "Typst",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -47,4 +47,4 @@ default_branch = "main"
 fork = false
 head_sha = "7c76edca62ee16ca4c6dd4f5498fe57793f28517"
 html_url = "https://github.com/typst/typst"
-stars = 54644
+stars = 54654

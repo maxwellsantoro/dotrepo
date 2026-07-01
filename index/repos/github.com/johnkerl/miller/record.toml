@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/johnkerl/miller"
-generated_at = "2026-06-29T05:21:10.338775Z"
+generated_at = "2026-07-01T18:10:08.318877Z"
 
 [record.trust]
 confidence = "high"
@@ -21,20 +21,20 @@ homepage = "https://miller.readthedocs.io"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "ASL",
-    "Batchfile",
-    "C",
-    "C++",
-    "D",
     "Go",
-    "Makefile",
-    "Nim",
+    "Shell",
     "Python",
     "Ruby",
-    "Rust",
-    "Shell",
-    "Vim Script",
     "Zig",
+    "C",
+    "Rust",
+    "C++",
+    "Vim Script",
+    "Nim",
+    "Makefile",
+    "D",
+    "Batchfile",
+    "ASL",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -84,6 +84,6 @@ archived = false
 clone_url = "https://github.com/johnkerl/miller.git"
 default_branch = "main"
 fork = false
-head_sha = "d56eafff97b7b2eb0cd1295b810092eacadf71b0"
+head_sha = "9a020556704ffcab2ed8e3bf3f11d27bc9cc9619"
 html_url = "https://github.com/johnkerl/miller"
-stars = 9933
+stars = 9938

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/segment-boneyard/nightmare"
-generated_at = "2026-07-01T15:28:45.076033Z"
+generated_at = "2026-07-01T18:27:34.512489Z"
 
 [record.trust]
 confidence = "high"
@@ -21,10 +21,10 @@ description = "A high-level browser automation library."
 homepage = "https://open.segment.com"
 visibility = "public"
 languages = [
-    "CSS",
     "JavaScript",
-    "Makefile",
     "Shell",
+    "Makefile",
+    "CSS",
 ]
 test = "npm test"
 topics = [

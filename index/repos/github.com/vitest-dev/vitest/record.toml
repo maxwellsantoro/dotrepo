@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vitest-dev/vitest"
-generated_at = "2026-06-29T02:01:21.690353Z"
+generated_at = "2026-07-01T18:35:49.716034Z"
 
 [record.trust]
 confidence = "high"
@@ -21,15 +21,15 @@ homepage = "https://vitest.dev"
 license = "MIT"
 visibility = "public"
 languages = [
+    "TypeScript",
+    "Vue",
+    "JavaScript",
     "CSS",
     "HTML",
     "Imba",
-    "JavaScript",
     "Less",
     "SCSS",
     "Sass",
-    "TypeScript",
-    "Vue",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -47,14 +47,11 @@ security_contact = "https://github.com/vitest-dev/vitest/security"
 root = "https://vitest.dev"
 getting_started = "https://vitest.dev/guide/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/vitest-dev/vitest.git"
 default_branch = "main"
 fork = false
-head_sha = "31fb6020aefe4fabea0b78e719768485b67613ea"
+head_sha = "334edef920b35cbb222019090b8abde788a68bff"
 html_url = "https://github.com/vitest-dev/vitest"
-stars = 16774
+stars = 16786

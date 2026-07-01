@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/toeverything/AFFiNE"
-generated_at = "2026-06-29T02:18:40.698187Z"
+generated_at = "2026-07-01T18:33:10.338253Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@toeverything/blocksuite-core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@toeverything/blocksuite-core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "AFFiNE.Pro Write, Draw and Plan All at Once"
@@ -21,25 +21,25 @@ homepage = "https://affine.pro"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "C",
-    "CSS",
-    "HTML",
-    "Java",
-    "JavaScript",
-    "Kotlin",
-    "Metal",
-    "NSIS",
-    "Objective-C",
-    "PLpgSQL",
-    "Ruby",
-    "Rust",
-    "Shell",
-    "Swift",
     "TypeScript",
+    "Rust",
+    "Swift",
+    "Kotlin",
+    "JavaScript",
+    "PLpgSQL",
+    "C",
+    "HTML",
+    "CSS",
+    "Shell",
     "Vue",
+    "Metal",
+    "Ruby",
+    "Java",
+    "Objective-C",
+    "NSIS",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "yarn build"
+test = "yarn affine @affine/server test:copilot:coverage --forbid-only"
 topics = [
     "editor",
     "crdt",
@@ -72,11 +72,23 @@ root = "https://docs.affine.pro/"
 [relations]
 references = []
 
+[[relations.links]]
+kind = "related"
+target = "github.com/toeverything/AFFiNE"
+notes = "Cross-link from README: Create a bug report"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
 [x.github]
 archived = false
 clone_url = "https://github.com/toeverything/AFFiNE.git"
 default_branch = "canary"
 fork = false
-head_sha = "1b9e21f2debcabc45f843c3c3645b2b6631765a5"
+head_sha = "e5d44b8ff27e88fb8a47bdee177501840b0c140a"
 html_url = "https://github.com/toeverything/AFFiNE"
-stars = 69883
+stars = 69957

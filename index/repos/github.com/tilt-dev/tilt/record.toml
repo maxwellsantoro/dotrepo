@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tilt-dev/tilt"
-generated_at = "2026-06-29T05:22:18.11729Z"
+generated_at = "2026-07-01T18:32:44.534956Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "https://tilt.dev/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Go",
+    "TypeScript",
+    "Python",
+    "Shell",
+    "SCSS",
+    "Dockerfile",
+    "Makefile",
+    "Starlark",
+    "PowerShell",
     "HTML",
     "JavaScript",
-    "Makefile",
-    "PowerShell",
-    "Python",
-    "SCSS",
-    "Shell",
-    "Starlark",
-    "TypeScript",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -54,4 +54,4 @@ default_branch = "master"
 fork = false
 head_sha = "06d47a29137a1c3c930823fd907aa645f817b2d3"
 html_url = "https://github.com/tilt-dev/tilt"
-stars = 9893
+stars = 9896

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jesseduffield/lazydocker"
-generated_at = "2026-07-01T14:40:52.39332Z"
+generated_at = "2026-07-01T18:09:37.344939Z"
 
 [record.trust]
 confidence = "high"
@@ -21,9 +21,9 @@ homepage = "https://github.com/jesseduffield/lazydocker"
 license = "MIT"
 visibility = "public"
 languages = [
-    "Dockerfile",
     "Go",
     "Shell",
+    "Dockerfile",
 ]
 build = "go build ./..."
 test = "go test ./..."

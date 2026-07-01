@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Significant-Gravitas/AutoGPT"
-generated_at = "2026-07-01T15:19:06.875553Z"
+generated_at = "2026-07-01T17:21:23.399844Z"
 
 [record.trust]
 confidence = "high"
@@ -22,17 +22,17 @@ homepage = "https://agpt.co"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "CSS",
-    "Dockerfile",
-    "Elixir",
-    "JavaScript",
-    "Jinja",
-    "Makefile",
-    "PLpgSQL",
     "Python",
-    "Shell",
     "TypeScript",
+    "JavaScript",
+    "PLpgSQL",
+    "Shell",
+    "Jinja",
+    "CSS",
+    "Batchfile",
+    "Dockerfile",
+    "Makefile",
+    "Elixir",
 ]
 test = 'poetry run pytest -vv \'
 topics = [
@@ -87,4 +87,4 @@ default_branch = "master"
 fork = false
 head_sha = "e2711b1748bdc3fe702ab4e44c6a11df98458c53"
 html_url = "https://github.com/Significant-Gravitas/AutoGPT"
-stars = 185230
+stars = 185229

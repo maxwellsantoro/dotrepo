@@ -2,7 +2,6 @@
 
 - Imported repository name, description, and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
-- Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Imported repo.build from package.json as `pnpm build`.
 - Inferred repo.test from .github/workflows/ai-tests.yml as `pnpm run test`.
 - Discovered related relation to github.com/supabase/supabase from package.json repository.

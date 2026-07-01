@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name, description, and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from Cargo.toml as `cargo test --workspace`.
+- Discovered related relation to github.com/tokio-rs/tokio from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

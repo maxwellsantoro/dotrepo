@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rizinorg/cutter"
-generated_at = "2026-07-01T15:12:03.291667Z"
+generated_at = "2026-07-01T18:25:45.178878Z"
 
 [record.trust]
 confidence = "high"
@@ -21,17 +21,17 @@ homepage = "https://cutter.re"
 license = "GPL-3.0"
 visibility = "public"
 languages = [
-    "Batchfile",
-    "C",
     "C++",
     "CMake",
     "CSS",
-    "Dockerfile",
-    "Makefile",
-    "Meson",
     "Python",
-    "Ruby",
     "Shell",
+    "C",
+    "Makefile",
+    "Dockerfile",
+    "Batchfile",
+    "Meson",
+    "Ruby",
 ]
 build = 'cmake -S . -B build \'
 topics = [
@@ -56,4 +56,4 @@ default_branch = "dev"
 fork = false
 head_sha = "3978a4e8e4bb1fcf1224702e909042668a94d557"
 html_url = "https://github.com/rizinorg/cutter"
-stars = 19244
+stars = 19245

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vercel-labs/portless"
-generated_at = "2026-06-29T05:20:10.366787Z"
+generated_at = "2026-07-01T18:35:35.923729Z"
 
 [record.trust]
 confidence = "high"
@@ -21,16 +21,16 @@ homepage = "https://portless.sh"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Astro",
-    "CSS",
-    "HTML",
+    "TypeScript",
     "JavaScript",
     "MDX",
-    "Python",
     "Shell",
-    "Svelte",
-    "TypeScript",
+    "CSS",
+    "Python",
+    "HTML",
+    "Astro",
     "Vue",
+    "Svelte",
 ]
 build = "pnpm build"
 test = "pnpm test"
@@ -44,6 +44,6 @@ archived = false
 clone_url = "https://github.com/vercel-labs/portless.git"
 default_branch = "main"
 fork = false
-head_sha = "8404575c301b6b845a868d76609f79a0077cbe59"
+head_sha = "5940d3cb889f06e9b12b6ca17333232f084ef8d4"
 html_url = "https://github.com/vercel-labs/portless"
-stars = 9991
+stars = 10023

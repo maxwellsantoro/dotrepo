@@ -1,9 +1,8 @@
 # Evidence
 
-- No README.md, CODEOWNERS, or SECURITY.md content was imported; this record needs manual completion.
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.build from .github/workflows/run-system-tests.yml as `./gradlew systemTest`.
-- Inferred repo.test from .github/workflows/run-system-tests.yml as `./gradlew systemTest`.
+- Imported repo.build from build.gradle as `./gradlew build`.
+- Imported repo.test from build.gradle as `./gradlew test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

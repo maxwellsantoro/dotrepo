@@ -4,7 +4,6 @@
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Discovered related relation to github.com/testing-library/react-testing-library from package.json repository.
-- Discovered related relation to github.com/testing-library/react-testing-library#readme from package.json homepage.
 - Discovered related relation to github.com/testing-library/testing-library-docs from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

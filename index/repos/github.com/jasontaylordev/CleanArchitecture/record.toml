@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jasontaylordev/CleanArchitecture"
-generated_at = "2026-07-01T15:30:30.661145Z"
+generated_at = "2026-07-01T18:09:13.709007Z"
 
 [record.trust]
 confidence = "high"
@@ -23,12 +23,12 @@ license = "MIT"
 visibility = "public"
 languages = [
     "C#",
-    "Gherkin",
-    "HTML",
     "JavaScript",
-    "PowerShell",
-    "SCSS",
     "TypeScript",
+    "SCSS",
+    "HTML",
+    "PowerShell",
+    "Gherkin",
 ]
 build = "npm run build"
 topics = [

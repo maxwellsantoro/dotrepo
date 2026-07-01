@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/juanfont/headscale"
-generated_at = "2026-06-29T01:19:37.475074Z"
+generated_at = "2026-07-01T18:10:25.296789Z"
 
 [record.trust]
 confidence = "high"
@@ -21,11 +21,11 @@ homepage = "https://github.com/juanfont/headscale"
 license = "BSD-3-Clause"
 visibility = "public"
 languages = [
-    "CSS",
     "Go",
-    "Makefile",
     "Nix",
     "Shell",
+    "CSS",
+    "Makefile",
 ]
 build = "go build ./..."
 test = "go test ./..."
@@ -47,14 +47,11 @@ maintainers = [
 [docs]
 root = "https://headscale.net/stable/"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/juanfont/headscale.git"
 default_branch = "main"
 fork = false
-head_sha = "518b497be90d2f3c0bd0e226ff5d238e7da818c0"
+head_sha = "a84945f134b5bebe850e7ac1f911d5f15da0a7ae"
 html_url = "https://github.com/juanfont/headscale"
-stars = 40512
+stars = 40614

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sintaxi/harp"
-generated_at = "2026-07-01T15:32:24.553246Z"
+generated_at = "2026-07-01T18:29:09.953067Z"
 
 [record.trust]
 confidence = "high"
@@ -21,16 +21,16 @@ description = "Static Web Server/Generator/Bundler"
 homepage = "https://harp.sh"
 visibility = "public"
 languages = [
-    "CSS",
-    "CoffeeScript",
-    "EJS",
-    "HTML",
     "JavaScript",
-    "Less",
     "Pug",
     "SCSS",
-    "Sass",
+    "Less",
     "Stylus",
+    "HTML",
+    "EJS",
+    "CSS",
+    "CoffeeScript",
+    "Sass",
 ]
 test = "npm test"
 topics = []

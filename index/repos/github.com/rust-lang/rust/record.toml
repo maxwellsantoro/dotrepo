@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rust-lang/rust"
-generated_at = "2026-06-29T02:01:39.29674Z"
+generated_at = "2026-07-01T18:26:23.41634Z"
 
 [record.trust]
 confidence = "high"
@@ -21,31 +21,31 @@ homepage = "https://www.rust-lang.org"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "Assembly",
-    "Batchfile",
+    "Rust",
+    "HTML",
+    "Shell",
     "C",
+    "JavaScript",
+    "Python",
+    "PowerShell",
+    "TypeScript",
     "C++",
-    "CMake",
     "CSS",
     "Dockerfile",
-    "Emacs Lisp",
-    "HTML",
-    "JavaScript",
-    "Julia",
-    "LLVM",
+    "Assembly",
+    "Roff",
     "Linker Script",
     "Makefile",
-    "Nix",
-    "Perl",
-    "PowerShell",
-    "Python",
-    "RPC",
+    "Julia",
     "RenderScript",
-    "Roff",
-    "Rust",
-    "Shell",
-    "TypeScript",
+    "Nix",
     "XSLT",
+    "Emacs Lisp",
+    "Batchfile",
+    "RPC",
+    "CMake",
+    "LLVM",
+    "Perl",
 ]
 build = "cargo build --workspace"
 test = "cargo test --workspace"
@@ -58,14 +58,11 @@ topics = [
 [docs]
 root = "https://www.rust-lang.org"
 
-[relations]
-references = []
-
 [x.github]
 archived = false
 clone_url = "https://github.com/rust-lang/rust.git"
 default_branch = "main"
 fork = false
-head_sha = "df6ee909ef35c75aa58aa45af6ac071a9b8285c2"
+head_sha = "e2b71ade2db4ea263ab0d561d889f3e3795a500d"
 html_url = "https://github.com/rust-lang/rust"
-stars = 114391
+stars = 114184
