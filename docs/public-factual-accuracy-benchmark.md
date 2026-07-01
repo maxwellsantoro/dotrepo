@@ -34,3 +34,28 @@ facts, and zero mismatched sampled facts. This is sampled accuracy evidence, not
 a universal claim about every field in every profile. The workload should grow
 across repositories, ecosystems, and field classes as coverage expands toward
 500 profiles.
+
+### Ecosystem and abstention breakdown
+
+Each assertion's target repository is classified into one of the language
+families used by `scripts/render_index_growth_status.py`
+(`Rust`, `TypeScript / JavaScript`, `Python`, `Go`, `Other`), reusing the same
+`inferred_language_family` heuristic (duplicated locally per
+`scripts/README.md`'s standalone-script convention, with a sync comment) so
+both scripts agree on ecosystem boundaries. The report's
+`summary.ecosystemSummaries` gives a per-family `assertionCount`,
+`correctCount`, `missingCount`, `mismatchCount`, `accuracyRate`,
+`missingRate`, and `mismatchRate`, and `--min-ecosystem-accuracy-rate
+FAMILY=RATE` / `--max-ecosystem-mismatch-rate FAMILY=RATE` (each repeatable)
+add per-family gates (`minEcosystemAccuracyRate.<family>` /
+`maxEcosystemMismatchRate.<family>`) alongside the existing aggregate gates.
+This keeps a single lagging or regressing ecosystem from hiding behind an
+overall passing rate.
+
+The report also separates the three explicit error-budget categories named by
+the roadmap: **incorrect facts** (`mismatchCount` / `incorrectFactCount`),
+**missing facts** (`missingCount` / `missingFactCount`), and **correct
+abstention** (`correctAbstentionCount` / `correctAbstentionRate`) — assertions
+where `expected` is `null` and the resolved value is honestly absent rather
+than fabricated. These three counts are reported both in the aggregate
+summary and inside each `ecosystemSummaries` entry.

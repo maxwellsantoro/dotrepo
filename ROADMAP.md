@@ -671,7 +671,10 @@ Current status (shipped capabilities; production calibration is ongoing):
 - quality instrumentation: `scripts/measure_public_search_quality.py` (discovery
   success, rank quality, inventory-only vs fanout task rates, freshness, gates)
   and `scripts/measure_public_factual_accuracy.py` (exact cited assertion
-  accuracy with separate missing and mismatch rates under versioned ceilings)
+  accuracy with separate missing and mismatch rates under versioned ceilings,
+  plus a per-ecosystem breakdown reusing the growth-status renderer's language
+  family classifier and an explicit correct-abstention count/rate alongside
+  incorrect- and missing-fact counts)
 - production-scale ranking calibration and sustained synthesis runs with measured
   quality and cost remain ongoing operational work
 

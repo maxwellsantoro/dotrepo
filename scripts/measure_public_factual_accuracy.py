@@ -10,6 +10,32 @@ from typing import Any
 SCHEMA = "dotrepo-public-factual-accuracy/v0"
 WORKLOAD_SCHEMA = "dotrepo-public-factual-accuracy-workload/v0"
 
+# Keep in sync with LANGUAGE_FAMILIES / inferred_language_family in
+# scripts/render_index_growth_status.py. Scripts under scripts/ are standalone
+# (see scripts/README.md), so this classifier is duplicated rather than
+# imported; both copies must classify manifests into the same families.
+LANGUAGE_FAMILIES = ("Rust", "TypeScript / JavaScript", "Python", "Go", "Other")
+
+
+def inferred_language_family(manifest: Any) -> str:
+    if not isinstance(manifest, dict):
+        return "Other"
+    languages = [
+        str(language).lower() for language in manifest.get("repo", {}).get("languages") or []
+    ]
+    if any(language == "rust" for language in languages):
+        return "Rust"
+    if any(language == "go" for language in languages):
+        return "Go"
+    if any(language == "python" or language == "cython" for language in languages):
+        return "Python"
+    if any(
+        language in {"typescript", "javascript", "tsx", "jsx", "vue", "svelte"}
+        for language in languages
+    ):
+        return "TypeScript / JavaScript"
+    return "Other"
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -22,10 +48,43 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-accuracy-rate", type=float, default=0.0)
     parser.add_argument("--max-missing-rate", type=float, default=1.0)
     parser.add_argument("--max-mismatch-rate", type=float, default=1.0)
+    parser.add_argument(
+        "--min-ecosystem-accuracy-rate",
+        action="append",
+        default=[],
+        metavar="FAMILY=RATE",
+        help="Fail when an ecosystem's accuracy rate is below RATE; may be repeated",
+    )
+    parser.add_argument(
+        "--max-ecosystem-mismatch-rate",
+        action="append",
+        default=[],
+        metavar="FAMILY=RATE",
+        help="Fail when an ecosystem's mismatch rate is above RATE; may be repeated",
+    )
     parser.add_argument("--generated-at")
     parser.add_argument("--output-json")
     parser.add_argument("--output-md")
     return parser.parse_args()
+
+
+def parse_family_rates(values: list[str], flag: str) -> dict[str, float]:
+    rates: dict[str, float] = {}
+    for raw in values:
+        if "=" not in raw:
+            raise SystemExit(f"{flag} must use FAMILY=RATE, got {raw!r}")
+        family, rate_text = raw.split("=", 1)
+        family = family.strip()
+        if not family:
+            raise SystemExit(f"{flag} requires a nonempty family")
+        try:
+            rate = float(rate_text)
+        except ValueError as exc:
+            raise SystemExit(f"invalid {flag} rate: {raw!r}") from exc
+        if not 0 <= rate <= 1:
+            raise SystemExit(f"{flag} rate must be between 0 and 1: {raw!r}")
+        rates[family] = rate
+    return rates
 
 
 def load_json(path: Path) -> Any:
@@ -104,6 +163,7 @@ def analyze_assertion(
         outcome = "missing"
     else:
         outcome = "mismatch"
+    correct_abstention = passed and expected is None and actual is None
     return {
         "id": assertion["id"],
         "repository": repository,
@@ -112,12 +172,37 @@ def analyze_assertion(
         "actual": actual,
         "passed": passed,
         "outcome": outcome,
+        "correctAbstention": correct_abstention,
+        "ecosystem": inferred_language_family(manifests[repository]),
         "source": assertion["source"],
     }
 
 
 def safe_ratio(numerator: int, denominator: int) -> float | None:
     return round(numerator / denominator, 4) if denominator else None
+
+
+def summarize_results(results: list[dict[str, Any]]) -> dict[str, Any]:
+    assertion_count = len(results)
+    repository_count = len({result["repository"] for result in results})
+    correct_count = sum(1 for result in results if result["passed"])
+    missing_count = sum(1 for result in results if result["outcome"] == "missing")
+    mismatch_count = sum(1 for result in results if result["outcome"] == "mismatch")
+    correct_abstention_count = sum(1 for result in results if result["correctAbstention"])
+    return {
+        "assertionCount": assertion_count,
+        "repositoryCount": repository_count,
+        "correctCount": correct_count,
+        "missingCount": missing_count,
+        "mismatchCount": mismatch_count,
+        "accuracyRate": safe_ratio(correct_count, assertion_count),
+        "missingRate": safe_ratio(missing_count, assertion_count),
+        "mismatchRate": safe_ratio(mismatch_count, assertion_count),
+        "correctAbstentionCount": correct_abstention_count,
+        "correctAbstentionRate": safe_ratio(correct_abstention_count, assertion_count),
+        "incorrectFactCount": mismatch_count,
+        "missingFactCount": missing_count,
+    }
 
 
 def summarize(
@@ -130,57 +215,68 @@ def summarize(
     min_accuracy_rate: float = 0.0,
     max_missing_rate: float = 1.0,
     max_mismatch_rate: float = 1.0,
+    min_ecosystem_accuracy_rates: dict[str, float] | None = None,
+    max_ecosystem_mismatch_rates: dict[str, float] | None = None,
 ) -> dict[str, Any]:
     assertions = validate_workload(load_json(workload_path), workload_path)
     manifests: dict[str, Any] = {}
     results = [
         analyze_assertion(assertion, public_root, manifests) for assertion in assertions
     ]
-    assertion_count = len(results)
-    repository_count = len({result["repository"] for result in results})
-    correct_count = sum(1 for result in results if result["passed"])
-    missing_count = sum(1 for result in results if result["outcome"] == "missing")
-    mismatch_count = sum(1 for result in results if result["outcome"] == "mismatch")
-    accuracy_rate = safe_ratio(correct_count, assertion_count)
-    missing_rate = safe_ratio(missing_count, assertion_count)
-    mismatch_rate = safe_ratio(mismatch_count, assertion_count)
-    summary = {
-        "assertionCount": assertion_count,
-        "repositoryCount": repository_count,
-        "correctCount": correct_count,
-        "missingCount": missing_count,
-        "mismatchCount": mismatch_count,
-        "accuracyRate": accuracy_rate,
-        "missingRate": missing_rate,
-        "mismatchRate": mismatch_rate,
-    }
+    summary = summarize_results(results)
+
+    ecosystem_summaries: dict[str, Any] = {}
+    for ecosystem in sorted({result["ecosystem"] for result in results}):
+        ecosystem_results = [result for result in results if result["ecosystem"] == ecosystem]
+        ecosystem_summaries[ecosystem] = summarize_results(ecosystem_results)
+    summary["ecosystemSummaries"] = ecosystem_summaries
+
     gates = {
         "minAssertions": {
             "threshold": min_assertions,
-            "actual": assertion_count,
-            "passed": assertion_count >= min_assertions,
+            "actual": summary["assertionCount"],
+            "passed": summary["assertionCount"] >= min_assertions,
         },
         "minRepositories": {
             "threshold": min_repositories,
-            "actual": repository_count,
-            "passed": repository_count >= min_repositories,
+            "actual": summary["repositoryCount"],
+            "passed": summary["repositoryCount"] >= min_repositories,
         },
         "minAccuracyRate": {
             "threshold": min_accuracy_rate,
-            "actual": accuracy_rate,
-            "passed": accuracy_rate is not None and accuracy_rate >= min_accuracy_rate,
+            "actual": summary["accuracyRate"],
+            "passed": summary["accuracyRate"] is not None
+            and summary["accuracyRate"] >= min_accuracy_rate,
         },
         "maxMissingRate": {
             "threshold": max_missing_rate,
-            "actual": missing_rate,
-            "passed": missing_rate is not None and missing_rate <= max_missing_rate,
+            "actual": summary["missingRate"],
+            "passed": summary["missingRate"] is not None
+            and summary["missingRate"] <= max_missing_rate,
         },
         "maxMismatchRate": {
             "threshold": max_mismatch_rate,
-            "actual": mismatch_rate,
-            "passed": mismatch_rate is not None and mismatch_rate <= max_mismatch_rate,
+            "actual": summary["mismatchRate"],
+            "passed": summary["mismatchRate"] is not None
+            and summary["mismatchRate"] <= max_mismatch_rate,
         },
     }
+    for family, threshold in sorted((min_ecosystem_accuracy_rates or {}).items()):
+        ecosystem_summary = ecosystem_summaries.get(family)
+        actual = ecosystem_summary.get("accuracyRate") if ecosystem_summary else None
+        gates[f"minEcosystemAccuracyRate.{family}"] = {
+            "threshold": threshold,
+            "actual": actual,
+            "passed": actual is not None and actual >= threshold,
+        }
+    for family, threshold in sorted((max_ecosystem_mismatch_rates or {}).items()):
+        ecosystem_summary = ecosystem_summaries.get(family)
+        actual = ecosystem_summary.get("mismatchRate") if ecosystem_summary else None
+        gates[f"maxEcosystemMismatchRate.{family}"] = {
+            "threshold": threshold,
+            "actual": actual,
+            "passed": actual is not None and actual <= threshold,
+        }
     return {
         "schema": SCHEMA,
         "generatedAt": generated_at
@@ -212,6 +308,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| Missing rate | {summary['missingRate']} |",
         f"| Mismatched values | {summary['mismatchCount']} |",
         f"| Mismatch rate | {summary['mismatchRate']} |",
+        f"| Correct abstentions | {summary['correctAbstentionCount']} |",
+        f"| Correct abstention rate | {summary['correctAbstentionRate']} |",
         "",
         "| Gate | Actual | Threshold | Result |",
         "| --- | ---: | ---: | --- |",
@@ -221,18 +319,36 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"| {name} | {gate['actual']} | {gate['threshold']} | "
             f"{'pass' if gate['passed'] else 'fail'} |"
         )
+    if summary["ecosystemSummaries"]:
+        lines.extend(
+            [
+                "",
+                "## Ecosystem Results",
+                "",
+                "| Ecosystem | Correct | Accuracy rate | Missing rate | "
+                "Mismatch rate | Correct abstention rate |",
+                "| --- | ---: | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for ecosystem, ecosystem_summary in summary["ecosystemSummaries"].items():
+            lines.append(
+                f"| {ecosystem} | {ecosystem_summary['correctCount']} / "
+                f"{ecosystem_summary['assertionCount']} | {ecosystem_summary['accuracyRate']} | "
+                f"{ecosystem_summary['missingRate']} | {ecosystem_summary['mismatchRate']} | "
+                f"{ecosystem_summary['correctAbstentionRate']} |"
+            )
     lines.extend(
         [
             "",
-            "| Assertion | Repository | Path | Result | Source |",
-            "| --- | --- | --- | --- | --- |",
+            "| Assertion | Repository | Ecosystem | Path | Result | Source |",
+            "| --- | --- | --- | --- | --- | --- |",
         ]
     )
     for result in report["assertions"]:
         source = result["source"]
         lines.append(
-            f"| `{result['id']}` | `{result['repository']}` | `{result['path']}` | "
-            f"{result['outcome']} | [{source['locator']}]({source['url']}) |"
+            f"| `{result['id']}` | `{result['repository']}` | {result['ecosystem']} | "
+            f"`{result['path']}` | {result['outcome']} | [{source['locator']}]({source['url']}) |"
         )
     lines.append("")
     return "\n".join(lines)
@@ -249,6 +365,12 @@ def main() -> int:
         min_accuracy_rate=args.min_accuracy_rate,
         max_missing_rate=args.max_missing_rate,
         max_mismatch_rate=args.max_mismatch_rate,
+        min_ecosystem_accuracy_rates=parse_family_rates(
+            args.min_ecosystem_accuracy_rate, "--min-ecosystem-accuracy-rate"
+        ),
+        max_ecosystem_mismatch_rates=parse_family_rates(
+            args.max_ecosystem_mismatch_rate, "--max-ecosystem-mismatch-rate"
+        ),
     )
     rendered = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.output_json:
