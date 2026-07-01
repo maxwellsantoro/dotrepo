@@ -336,3 +336,19 @@ def test_malformed_toml_exits_with_path(tmp_path: Path) -> None:
 
     assert "failed to parse TOML" in str(exc.value)
     assert str(record_path) in str(exc.value)
+
+
+def test_inferred_language_family_uses_dominant_language_not_any_occurrence() -> None:
+    # Reproduces a real audit finding: docker/awesome-compose and
+    # firecrawl/firecrawl were misclassified as "Rust" family purely because
+    # Rust appeared somewhere in their (previously alphabetically-ordered,
+    # now byte-count-ordered) languages list, even though Rust was not their
+    # dominant language.
+    record = {"repo": {"languages": ["Go", "Dockerfile", "Shell", "Rust"]}}
+    assert growth_status.inferred_language_family(record) == "Go"
+
+    record = {"repo": {"languages": ["Rust", "Go"]}}
+    assert growth_status.inferred_language_family(record) == "Rust"
+
+    record = {"repo": {"languages": []}}
+    assert growth_status.inferred_language_family(record) == "Other"

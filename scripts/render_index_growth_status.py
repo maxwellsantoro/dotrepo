@@ -171,17 +171,25 @@ def primary_language(record: dict[str, Any]) -> str:
 
 
 def inferred_language_family(record: dict[str, Any]) -> str:
+    # Classifies by the *dominant* language only (repo.languages[0]), not by
+    # whether a language appears anywhere in the list. GitHub's languages
+    # endpoint reports byte counts, and dotrepo-crawler orders repo.languages
+    # by byte count descending (see crates/dotrepo-crawler/src/github.rs's
+    # `languages_by_byte_count_descending`) specifically so index [0] is the
+    # dominant language. An any-occurrence check previously misclassified
+    # repos with a minor vendored/dependency language (e.g. a few Rust files
+    # in an otherwise Go or TypeScript project) into the wrong family --
+    # found via scripts/audit_index_sample.py flagging docker/awesome-compose
+    # and firecrawl/firecrawl as "Rust" family.
     languages = [str(language).lower() for language in record.get("repo", {}).get("languages") or []]
-    if any(language == "rust" for language in languages):
+    dominant = languages[0] if languages else ""
+    if dominant == "rust":
         return "Rust"
-    if any(language == "go" for language in languages):
+    if dominant == "go":
         return "Go"
-    if any(language == "python" or language == "cython" for language in languages):
+    if dominant in {"python", "cython"}:
         return "Python"
-    if any(
-        language in {"typescript", "javascript", "tsx", "jsx", "vue", "svelte"}
-        for language in languages
-    ):
+    if dominant in {"typescript", "javascript", "tsx", "jsx", "vue", "svelte"}:
         return "TypeScript / JavaScript"
     return "Other"
 

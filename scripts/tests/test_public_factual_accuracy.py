@@ -340,3 +340,11 @@ def test_ecosystem_gate_for_absent_family_reports_none_and_fails(tmp_path: Path)
         "passed": False,
     }
     assert report["passed"] is False
+
+
+def test_inferred_language_family_uses_dominant_language_not_any_occurrence() -> None:
+    manifest = {"repo": {"languages": ["Go", "Dockerfile", "Shell", "Rust"]}}
+    assert accuracy.inferred_language_family(manifest) == "Go"
+
+    manifest = {"repo": {"languages": ["Rust", "Go"]}}
+    assert accuracy.inferred_language_family(manifest) == "Rust"

@@ -513,7 +513,7 @@ impl GitHubClient for HttpGitHubClient {
             license: repo
                 .license
                 .and_then(|license| trim_optional(license.spdx_id.or(license.name))),
-            languages: languages.into_keys().collect(),
+            languages: languages_by_byte_count_descending(languages),
             topics: topics.names,
             visibility: trim_optional(repo.visibility),
             stars: Some(repo.stargazers_count),
@@ -684,6 +684,20 @@ fn render_star_band(star_band: &StarBand) -> String {
         Some(_) => format!(">={}", star_band.min_stars),
         None => format!(">={}", star_band.min_stars),
     }
+}
+
+/// GitHub's `/languages` endpoint reports byte counts per language, which is
+/// the only signal for which language actually dominates a repository.
+/// `BTreeMap<String, u64>`'s key iteration order is alphabetical, not
+/// byte-count order, so collecting `.into_keys()` directly silently
+/// discards that signal and reports languages alphabetically instead of by
+/// dominance -- every downstream consumer treating `repo.languages[0]` (or
+/// any small prefix) as "the primary language(s)" would be misled. Sorts by
+/// byte count descending, breaking ties alphabetically for determinism.
+fn languages_by_byte_count_descending(languages: BTreeMap<String, u64>) -> Vec<String> {
+    let mut by_bytes: Vec<(String, u64)> = languages.into_iter().collect();
+    by_bytes.sort_by(|a, b| b.1.cmp(&a.1).then_with(|| a.0.cmp(&b.0)));
+    by_bytes.into_iter().map(|(name, _)| name).collect()
 }
 
 fn normalize_parent_from_url(u: &str) -> Option<String> {
@@ -866,6 +880,45 @@ mod tests {
     #[test]
     fn first_root_csproj_path_returns_none_for_empty_listing() {
         assert_eq!(first_root_csproj_path(Vec::new()), None);
+    }
+
+    #[test]
+    fn languages_by_byte_count_descending_orders_by_dominance_not_alphabetically() {
+        // Reproduces a real case found via the audit sampler: docker/awesome-compose
+        // and firecrawl/firecrawl were both misclassified into the "Rust" family
+        // because repo.languages was collected from a BTreeMap (alphabetical key
+        // order) instead of GitHub's actual byte-count signal, so a minor vendored
+        // Rust file could outrank the repository's actual dominant language.
+        let mut languages = BTreeMap::new();
+        languages.insert("Rust".to_string(), 120u64);
+        languages.insert("Go".to_string(), 50_000u64);
+        languages.insert("Dockerfile".to_string(), 2_000u64);
+        languages.insert("Shell".to_string(), 800u64);
+
+        assert_eq!(
+            languages_by_byte_count_descending(languages),
+            vec!["Go", "Dockerfile", "Shell", "Rust"]
+        );
+    }
+
+    #[test]
+    fn languages_by_byte_count_descending_breaks_ties_alphabetically() {
+        let mut languages = BTreeMap::new();
+        languages.insert("Zig".to_string(), 100u64);
+        languages.insert("Ada".to_string(), 100u64);
+
+        assert_eq!(
+            languages_by_byte_count_descending(languages),
+            vec!["Ada", "Zig"]
+        );
+    }
+
+    #[test]
+    fn languages_by_byte_count_descending_handles_empty_map() {
+        assert_eq!(
+            languages_by_byte_count_descending(BTreeMap::new()),
+            Vec::<String>::new()
+        );
     }
 
     #[test]

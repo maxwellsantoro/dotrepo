@@ -191,17 +191,22 @@ def identity_from_record_path(index_root: Path, path: Path) -> str:
 
 
 def inferred_language_family(record: dict[str, Any]) -> str:
+    # Classifies by the *dominant* language only (repo.languages[0]), not by
+    # whether a language appears anywhere in the list -- see the matching
+    # comment in render_index_growth_status.py's copy of this function for
+    # the full rationale (an any-occurrence check misclassified repos with a
+    # minor vendored/dependency language into the wrong family; this exact
+    # bug is what this sampler surfaced for docker/awesome-compose and
+    # firecrawl/firecrawl).
     languages = [str(language).lower() for language in record.get("repo", {}).get("languages") or []]
-    if any(language == "rust" for language in languages):
+    dominant = languages[0] if languages else ""
+    if dominant == "rust":
         return "Rust"
-    if any(language == "go" for language in languages):
+    if dominant == "go":
         return "Go"
-    if any(language == "python" or language == "cython" for language in languages):
+    if dominant in {"python", "cython"}:
         return "Python"
-    if any(
-        language in {"typescript", "javascript", "tsx", "jsx", "vue", "svelte"}
-        for language in languages
-    ):
+    if dominant in {"typescript", "javascript", "tsx", "jsx", "vue", "svelte"}:
         return "TypeScript / JavaScript"
     return "Other"
 

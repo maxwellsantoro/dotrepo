@@ -219,3 +219,11 @@ def test_evidence_path_missing_is_reported_as_none(tmp_path: Path) -> None:
     )
     records = audit_index_sample.load_records(index_root)
     assert records[0]["evidencePath"] is None
+
+
+def test_inferred_language_family_uses_dominant_language_not_any_occurrence() -> None:
+    record = {"repo": {"languages": ["Go", "Dockerfile", "Shell", "Rust"]}}
+    assert audit_index_sample.inferred_language_family(record) == "Go"
+
+    record = {"repo": {"languages": ["Rust", "Go"]}}
+    assert audit_index_sample.inferred_language_family(record) == "Rust"
