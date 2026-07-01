@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/opencv/opencv"
-generated_at = "2026-06-29T01:08:25.125835Z"
+generated_at = "2026-07-01T04:45:33.634809Z"
 
 [record.trust]
 confidence = "high"
@@ -53,14 +53,29 @@ topics = [
 maintainers = []
 security_contact = "security@opencv.org"
 
+[docs]
+root = "https://opencv.org"
+
 [relations]
 references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/opencv/opencv"
+notes = "Cross-link from README: contribution guidelines"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
 
 [x.github]
 archived = false
 clone_url = "https://github.com/opencv/opencv.git"
 default_branch = "4.x"
 fork = false
-head_sha = "5dbfbcdcac0ca97d5aa2784b18ded9d747f620f8"
+head_sha = "5b83b0c440961688b9ebac4a8cef57ab3e1dbcfa"
 html_url = "https://github.com/opencv/opencv"
-stars = 89433
+stars = 89475

@@ -2,6 +2,7 @@
 
 - Imported repository name and description from README.md.
 - Imported the security reporting channel from SECURITY.md.
+- Discovered related relation to github.com/opencv/opencv from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

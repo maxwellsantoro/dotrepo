@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hashicorp/consul"
-generated_at = "2026-06-29T01:16:47.520037Z"
+generated_at = "2026-07-01T04:45:57.495146Z"
 
 [record.trust]
 confidence = "high"
@@ -53,14 +53,14 @@ maintainers = [
     "@hashicorp/team-selfmanaged-releng",
 ]
 
-[relations]
-references = []
+[docs]
+root = "https://www.consul.io"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/hashicorp/consul.git"
 default_branch = "main"
 fork = false
-head_sha = "bf60308319d39af618ea04e5b9194ac76ffa67ea"
+head_sha = "a156b8ea363f0b4344b89e6e09dd4b3a10a86e14"
 html_url = "https://github.com/hashicorp/consul"
-stars = 29970
+stars = 29979
