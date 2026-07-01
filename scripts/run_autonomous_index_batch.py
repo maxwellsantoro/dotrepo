@@ -19,6 +19,18 @@ from pathlib import Path
 # This makes the AGENTS.md "uv run" contract explicit and auditable.
 UV_PYTHON: list[str] = ["uv", "run", "python"]
 
+# "Worst-run" rates deliberately look at a bounded rolling window, not the
+# entire lifetime of retained telemetry. The original unbounded design existed
+# so a bad run could not be hidden by favorable aggregate totals; that
+# property still holds inside this window (a single bad run continues to fail
+# the worst-run gate for every one of the next WORST_RUN_WINDOW_SIZE runs), it
+# just eventually ages out the way the existing 3-run recent/previous windows
+# already do. Without a bound, one historic run can pin the strict proof gate
+# red forever regardless of how many clean runs follow, which defeats the
+# gate's purpose of proving *current* operating behavior. See
+# docs/factual-crawl-automation.md for the full rationale.
+WORST_RUN_WINDOW_SIZE = 10
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -895,6 +907,12 @@ def aggregate_runs(runs: list[dict]) -> dict:
     first_run = None
     last_run = None
     budget_exhausted_runs = 0
+    saw_crawled_run = False
+
+    # Worst-run rates are scoped to a bounded rolling window (see
+    # WORST_RUN_WINDOW_SIZE above), not the full lifetime `runs` list, so a
+    # single historic bad run cannot pin the strict proof gate red forever.
+    worst_run_window = runs[-WORST_RUN_WINDOW_SIZE:]
     worst_rates = {
         "failureRate": 0.0,
         "adjudicationRate": 0.0,
@@ -902,7 +920,14 @@ def aggregate_runs(runs: list[dict]) -> dict:
         "apiEscalationRate": 0.0,
         "zeroModelRate": 1.0,
     }
-    saw_crawled_run = False
+    for run_telemetry in worst_run_window:
+        for key, value in run_rates(run_telemetry).items():
+            if key == "zeroModelRate":
+                if int(run_telemetry.get("crawled") or 0):
+                    saw_crawled_run = True
+                    worst_rates[key] = min(worst_rates[key], value)
+            else:
+                worst_rates[key] = max(worst_rates[key], value)
 
     for run_telemetry in runs:
         generated_at = run_telemetry.get("generatedAt")
@@ -911,13 +936,6 @@ def aggregate_runs(runs: list[dict]) -> dict:
             last_run = generated_at if last_run is None else max(last_run, generated_at)
         if bool(run_telemetry.get("adjudicationBudgetExhausted", False)):
             budget_exhausted_runs += 1
-        for key, value in run_rates(run_telemetry).items():
-            if key == "zeroModelRate":
-                if int(run_telemetry.get("crawled") or 0):
-                    saw_crawled_run = True
-                    worst_rates[key] = min(worst_rates[key], value)
-            else:
-                worst_rates[key] = max(worst_rates[key], value)
         for key in (
             "crawled",
             "written",
@@ -1053,6 +1071,8 @@ def aggregate_runs(runs: list[dict]) -> dict:
             key: round(value, 6) if isinstance(value, float) else value
             for key, value in sorted(previous_window_costs.items())
         },
+        "worstRunWindowSize": WORST_RUN_WINDOW_SIZE,
+        "worstRunWindowRunCount": len(worst_run_window),
         "worstRunRates": {key: round(value, 6) for key, value in sorted(worst_rates.items())},
         "repositoriesByAdjudicationTier": dict(sorted(tier_counts.items())),
         "failureClasses": dict(sorted(failure_classes.items())),

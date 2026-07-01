@@ -175,6 +175,76 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
     ]
 
 
+def _clean_run(generated_at: str) -> dict:
+    return {
+        "generatedAt": generated_at,
+        "crawled": 4,
+        "written": 4,
+        "failed": 0,
+        "skipped": 0,
+        "discoveryQueued": 0,
+        "adjudicationCalls": 0,
+        "adjudicationBudgetExhausted": False,
+        "tokensUsed": 0,
+        "promoted": 0,
+        "zeroModelRuns": 4,
+        "repositoriesByAdjudicationTier": {"deterministic": 4},
+        "failureClasses": {},
+        "failureFingerprints": {},
+        "failureFingerprintClasses": {},
+        "failureFingerprintEcosystems": {},
+        "failureFingerprintRepositories": {},
+    }
+
+
+def test_worst_run_rates_age_out_of_a_bounded_window() -> None:
+    bad_run = {
+        "generatedAt": "2026-01-01T00:00:00Z",
+        "crawled": 5,
+        "written": 4,
+        "failed": 1,
+        "skipped": 0,
+        "discoveryQueued": 0,
+        "adjudicationCalls": 0,
+        "adjudicationBudgetExhausted": False,
+        "tokensUsed": 0,
+        "promoted": 0,
+        "zeroModelRuns": 5,
+        "repositoriesByAdjudicationTier": {"deterministic": 5},
+        "failureClasses": {"infrastructure": 1},
+        "failureFingerprints": {},
+        "failureFingerprintClasses": {},
+        "failureFingerprintEcosystems": {},
+        "failureFingerprintRepositories": {},
+    }
+    clean_runs = [_clean_run(f"2026-01-{day:02d}T00:00:00Z") for day in range(2, 20)]
+
+    window_size = autonomous_batch.WORST_RUN_WINDOW_SIZE
+
+    # While the bad run is still inside the window, worst-run failure rate
+    # reflects it, so the strict proof gate correctly stays red.
+    runs_inside_window = [bad_run] + clean_runs[: window_size - 1]
+    summary_inside = autonomous_batch.aggregate_runs(runs_inside_window)
+    assert summary_inside["worstRunRates"]["failureRate"] == 0.2
+    assert summary_inside["worstRunWindowSize"] == window_size
+    assert summary_inside["worstRunWindowRunCount"] == window_size
+
+    # Lifetime totals still include the bad run's single failure regardless
+    # of windowing -- only the worst-run *rate* is bounded.
+    assert summary_inside["totals"]["failed"] == 1
+
+    # Once enough clean runs have accumulated that the bad run has aged out
+    # of the window entirely, worst-run failure rate reflects only the
+    # window's clean runs.
+    runs_after_window = [bad_run] + clean_runs
+    summary_after = autonomous_batch.aggregate_runs(runs_after_window)
+    assert summary_after["worstRunRates"]["failureRate"] == 0.0
+    assert summary_after["worstRunWindowRunCount"] == window_size
+    # The bad run's failure remains visible in lifetime totals even after it
+    # ages out of the worst-run window -- telemetry history is immutable.
+    assert summary_after["totals"]["failed"] == 1
+
+
 def test_retain_telemetry_appends_history_and_writes_summary(tmp_path: Path) -> None:
     history = tmp_path / "index" / "telemetry" / "autonomous-runs.ndjson"
     summary_path = tmp_path / "index" / "telemetry" / "autonomous-summary.json"

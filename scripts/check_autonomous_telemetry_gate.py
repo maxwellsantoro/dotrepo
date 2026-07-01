@@ -285,6 +285,8 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     totals = summary.get("totals") or {}
     rates = summary.get("rates") or {}
     worst_rates = summary.get("worstRunRates") or {}
+    worst_run_window_size = summary.get("worstRunWindowSize")
+    worst_run_window_run_count = summary.get("worstRunWindowRunCount")
     recent_window_rates = summary.get("recentWindowRates") or {}
     previous_window_rates = summary.get("previousWindowRates") or {}
     recent_window_costs = summary.get("recentWindowCosts") or {}
@@ -624,6 +626,8 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "totals": totals,
             "rates": rates,
             "worstRunRates": worst_rates,
+            "worstRunWindowSize": worst_run_window_size,
+            "worstRunWindowRunCount": worst_run_window_run_count,
             "recentWindowRates": recent_window_rates,
             "previousWindowRates": previous_window_rates,
             "recentWindowCosts": recent_window_costs,
@@ -668,6 +672,7 @@ def render_markdown(report: dict) -> str:
         f"- recent-window adjudication budget usage: {number(inputs.get('recentAdjudicationBudgetUseRate')):.2%}",
         f"- recent-window tokens per crawled repository: {number(inputs.get('recentTokensPerCrawled')):.2f}",
         f"- drift reference: {inputs.get('driftReference') or 'unknown'}",
+        f"- worst-run window: last {inputs.get('worstRunWindowRunCount', 0)} of {inputs.get('worstRunWindowSize', 0)} configured runs",
         f"- worst-run failure rate: {number(worst_rates.get('failureRate')):.2%}",
         f"- worst-run adjudication rate: {number(worst_rates.get('adjudicationRate')):.2%}",
         f"- worst-run second-opinion rate: {number(worst_rates.get('secondOpinionRate')):.2%}",
