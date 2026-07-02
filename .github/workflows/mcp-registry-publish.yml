@@ -1,0 +1,67 @@
+name: mcp-registry-publish
+
+# Publishes server.json to the official MCP registry for an existing tagged
+# release whose dotrepo-mcp-<version>.mcpb asset is already attached. Runs
+# automatically at the end of release-artifacts; this manual dispatch exists
+# so a registry-side rejection can be fixed on main and republished without
+# re-tagging the release.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish (e.g. v1.0.1)"
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Download release MCPB asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "${{ inputs.tag }}" \
+            --repo "${{ github.repository }}" \
+            --pattern 'dotrepo-mcp-*.mcpb' \
+            --dir mcpb-assets
+      - name: Update server.json from the release asset
+        shell: bash
+        run: |
+          version="${TAG#v}"
+          bundle="mcpb-assets/dotrepo-mcp-${version}.mcpb"
+          test -f "$bundle" || { echo "missing $bundle" >&2; exit 1; }
+          digest="$(sha256sum "$bundle" | cut -d' ' -f1)"
+          python3 - "$version" "$digest" <<'PY'
+          import json, sys
+          version, digest = sys.argv[1], sys.argv[2]
+          with open("server.json") as fh:
+              server = json.load(fh)
+          server["version"] = version
+          package = server["packages"][0]
+          package["identifier"] = (
+              "https://github.com/maxwellsantoro/dotrepo/releases/download/"
+              f"v{version}/dotrepo-mcp-{version}.mcpb"
+          )
+          package["version"] = version
+          package["fileSha256"] = digest
+          with open("server.json", "w") as fh:
+              json.dump(server, fh, indent=2)
+              fh.write("\n")
+          print(json.dumps(server, indent=2))
+          PY
+        env:
+          TAG: ${{ inputs.tag }}
+      - name: Install mcp-publisher
+        run: |
+          curl -fsSL \
+            "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" \
+            | tar xz mcp-publisher
+      - name: Publish to the MCP registry
+        run: |
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish
