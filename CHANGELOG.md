@@ -46,6 +46,27 @@ growth, coverage, promotion, and telemetry artifacts.
   and a deterministic `v0/files.json` hash sample; Cloudflare packaging on
   Node.js 22
 
+## 1.0.1 - 2026-07-02
+
+- **Fixed MCP stdio framing.** `dotrepo-mcp` only spoke LSP-style
+  `Content-Length` framing, so spec-compliant MCP clients (Claude Code, Claude
+  Desktop, the SDKs) could not talk to it. The transport now auto-detects
+  newline-delimited JSON (the MCP stdio transport) versus `Content-Length`
+  framing per message and responds in kind; the CI smoke test drives the
+  spec-compliant framing. The LSP server is unchanged.
+- The public export emits a pagedigest v1 RC manifest at
+  `/.well-known/pagedigest.json`: monotonic per-URL revisions keyed to content
+  (freshness churn excluded) with auditable full-byte digests over the
+  `/v0/repos/` tree; `public export --pagedigest-previous` carries revision
+  state across fresh export directories
+- The public site publishes the lookup-efficiency benchmark at `/efficiency/`
+  with the compact report at `/benchmarks/lookup-efficiency.json`, re-measured
+  on every deploy
+- Tagged releases attach a deterministic `dotrepo-mcp-<version>.mcpb` bundle
+  and publish `io.github.maxwellsantoro/dotrepo` to the official MCP registry
+  via GitHub OIDC (`scripts/package_mcpb_bundle.py`,
+  `docs/mcp-registry-publishing.md`)
+
 ## 1.0.0 - 2026-03-16
 
 First stable release of the dotrepo protocol, reference toolchain, and public index.
