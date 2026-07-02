@@ -110,10 +110,44 @@ jobs:
       - vscode-extension
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
       - name: Download packaged artifacts
         uses: actions/download-artifact@v8
         with:
           path: release-assets
+      - name: Detect release version
+        id: version
+        shell: bash
+        run: |
+          echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+      - name: Package MCPB bundle for the MCP registry
+        shell: bash
+        run: |
+          args=()
+          while IFS= read -r tarball; do
+            args+=(--tarball "$tarball")
+          done < <(find release-assets -name '*.tar.gz' | sort)
+          uv run python scripts/package_mcpb_bundle.py \
+            "${args[@]}" \
+            --version "${{ steps.version.outputs.value }}" \
+            --output-dir release-assets/mcpb \
+            --update-server-json server.json
+      - name: Upload MCPB artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dotrepo-mcpb
+          path: |
+            release-assets/mcpb/*.mcpb
+            release-assets/mcpb/*.sha256
+            server.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Publish GitHub release assets
         uses: softprops/action-gh-release@v2
         with:
@@ -122,3 +156,29 @@ jobs:
             release-assets/**/*.tar.gz
             release-assets/**/*.sha256
             release-assets/**/*.vsix
+            release-assets/mcpb/*.mcpb
+
+  mcp-registry:
+    if: github.ref_type == 'tag'
+    needs:
+      - release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Download MCPB artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: dotrepo-mcpb
+          path: mcpb-assets
+      - name: Install mcp-publisher
+        run: |
+          curl -fsSL \
+            "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" \
+            | tar xz mcp-publisher
+      - name: Publish to the MCP registry
+        run: |
+          cp mcpb-assets/server.json server.json
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish

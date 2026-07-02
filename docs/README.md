@@ -37,6 +37,7 @@ project tooling rather than additional plan documents.
 - [`factual-crawl-automation.md`](./factual-crawl-automation.md)
 - [`public-export-workflow.md`](./public-export-workflow.md)
 - [`public-release-checklist.md`](./public-release-checklist.md)
+- [`mcp-registry-publishing.md`](./mcp-registry-publishing.md)
 - [`cloudflare-deploy.md`](./cloudflare-deploy.md)
 - [`maintainer-claim-review-workflow.md`](./maintainer-claim-review-workflow.md)
 

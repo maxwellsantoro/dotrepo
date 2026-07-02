@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.maxwellsantoro/dotrepo",
+  "title": "dotrepo",
+  "description": "Trust-aware repository metadata: validate and query .repo records, and look up build, test, license, docs, ownership, and security facts for public repositories from the dotrepo.org index without scraping.",
+  "version": "1.0.0",
+  "websiteUrl": "https://dotrepo.org",
+  "repository": {
+    "url": "https://github.com/maxwellsantoro/dotrepo",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/maxwellsantoro/dotrepo/releases/download/vFILLED_AT_RELEASE/dotrepo-mcp-FILLED_AT_RELEASE.mcpb",
+      "version": "1.0.0",
+      "fileSha256": "FILLED_AT_RELEASE",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
