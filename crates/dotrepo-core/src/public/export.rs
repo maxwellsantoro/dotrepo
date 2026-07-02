@@ -160,6 +160,21 @@ pub fn export_public_index_static_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> Result<Vec<(PathBuf, String)>> {
+    export_public_index_static_with_options(index_root, out_root, freshness, base_path, None)
+}
+
+/// Full-option export. `pagedigest_previous` points at the previously
+/// published pagedigest manifest that carries revision state forward; when
+/// `None`, the exporter looks for one at the manifest's location inside
+/// `out_root`, and a first export without any previous manifest seeds
+/// revisions at 1.
+pub fn export_public_index_static_with_options(
+    index_root: &Path,
+    out_root: &Path,
+    freshness: PublicFreshness,
+    base_path: &str,
+    pagedigest_previous: Option<&Path>,
+) -> Result<Vec<(PathBuf, String)>> {
     use rayon::prelude::*;
 
     let mut outputs = Vec::new();
@@ -287,10 +302,27 @@ pub fn export_public_index_static_with_base(
             repositories: inventory,
         })?,
     ));
+    let generated_at = freshness.generated_at.clone();
     let file_manifest = public_export_file_manifest(out_root, freshness, &outputs)?;
     outputs.push((
         out_root.join("v0/files.json"),
         serde_json::to_string_pretty(&file_manifest)?,
+    ));
+
+    let pagedigest_previous_path = pagedigest_previous
+        .map(Path::to_path_buf)
+        .unwrap_or_else(|| out_root.join(PAGEDIGEST_RELATIVE_PATH));
+    let pagedigest_previous_manifest = load_pagedigest_manifest(&pagedigest_previous_path)?;
+    let pagedigest_manifest = build_pagedigest_manifest(
+        pagedigest_previous_manifest.as_ref(),
+        &generated_at,
+        base_path,
+        out_root,
+        &outputs,
+    )?;
+    outputs.push((
+        out_root.join(PAGEDIGEST_RELATIVE_PATH),
+        serde_json::to_string_pretty(&pagedigest_manifest)?,
     ));
 
     Ok(outputs)

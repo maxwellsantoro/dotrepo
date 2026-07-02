@@ -8,6 +8,7 @@ use crate::validation::collect_record_dirs;
 mod compare;
 mod error;
 mod export;
+mod pagedigest;
 mod profile;
 mod relations;
 mod search;
@@ -26,8 +27,13 @@ pub use error::{
 };
 pub use export::{
     build_public_freshness, build_public_freshness_with_digest, current_public_freshness,
-    export_public_index_static, export_public_index_static_with_base, index_snapshot_digest,
-    public_cache_validators, public_export_file_manifest, public_snapshot_metadata,
+    export_public_index_static, export_public_index_static_with_base,
+    export_public_index_static_with_options, index_snapshot_digest, public_cache_validators,
+    public_export_file_manifest, public_snapshot_metadata,
+};
+pub use pagedigest::{
+    build_pagedigest_manifest, load_pagedigest_manifest, PagedigestCoverage, PagedigestEntry,
+    PagedigestManifest, PAGEDIGEST_RELATIVE_PATH,
 };
 pub use profile::{
     load_public_query_input_snapshot, public_query_input_snapshot,

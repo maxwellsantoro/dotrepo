@@ -1348,6 +1348,7 @@ description = "Reviewed overlay"
         stale_after_hours: Some(24),
         generated_at: None,
         stale_after: None,
+        pagedigest_previous: None,
     })
     .expect("public export succeeds");
 
@@ -1401,6 +1402,7 @@ description = "Reviewed overlay"
         stale_after_hours: Some(24),
         generated_at: None,
         stale_after: None,
+        pagedigest_previous: None,
     })
     .expect("public export succeeds");
 
@@ -1492,6 +1494,7 @@ description = "Reviewed overlay"
         stale_after_hours: None,
         generated_at: Some(generated_at.clone()),
         stale_after: Some(stale_after.clone()),
+        pagedigest_previous: None,
     })
     .expect("first deterministic export succeeds");
     cmd_public(PublicCommand::Export {
@@ -1501,6 +1504,7 @@ description = "Reviewed overlay"
         stale_after_hours: None,
         generated_at: Some(generated_at),
         stale_after: Some(stale_after),
+        pagedigest_previous: None,
     })
     .expect("second deterministic export succeeds");
 
@@ -1544,6 +1548,7 @@ description = "Reviewed overlay"
         stale_after_hours: None,
         generated_at: None,
         stale_after: Some("2026-03-11T18:30:00Z".into()),
+        pagedigest_previous: None,
     })
     .expect_err("fixed stale-after without generated-at should fail");
     assert!(

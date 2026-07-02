@@ -63,7 +63,8 @@ jobs:
             --index-root index \
             --out-dir release-gate/public \
             --base-path "${{ steps.base_path.outputs.value }}" \
-            --stale-after-hours 24
+            --stale-after-hours 24 \
+            --pagedigest-previous public/.well-known/pagedigest.json
       - name: Render landing page
         run: uv run python scripts/render_public_pages_landing.py --input release-gate/public
       - name: Stage Worker snapshot

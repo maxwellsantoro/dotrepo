@@ -3,7 +3,7 @@ use dotrepo_core::{
     adopt_managed_surface, adopt_overlay_record, adoption_status_repository,
     analyze_index_promotion, append_claim_event, apply_index_promotions,
     build_public_freshness_with_digest, canonical_mirror_path_for_claim_path,
-    current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_base,
+    current_public_freshness, current_timestamp_rfc3339, export_public_index_static_with_options,
     generate_check_repository, import_repository_with_options, index_snapshot_digest,
     inspect_claim_directory, inspect_surface_states, load_manifest_document,
     load_manifest_from_root, managed_outputs, native_repository_identity, preview_surfaces,
@@ -1045,6 +1045,7 @@ pub fn cmd_public(command: PublicCommand) -> Result<()> {
             stale_after_hours,
             generated_at,
             stale_after,
+            pagedigest_previous,
         } => {
             let snapshot_digest = index_snapshot_digest(&index_root)?;
             let freshness = build_public_freshness_with_digest(
@@ -1054,8 +1055,13 @@ pub fn cmd_public(command: PublicCommand) -> Result<()> {
                 stale_after.as_deref(),
                 Some(&snapshot_digest),
             )?;
-            let outputs =
-                export_public_index_static_with_base(&index_root, &out_dir, freshness, &base_path)?;
+            let outputs = export_public_index_static_with_options(
+                &index_root,
+                &out_dir,
+                freshness,
+                &base_path,
+                pagedigest_previous.as_deref(),
+            )?;
             for (path, contents) in outputs {
                 if let Some(parent) = path.parent() {
                     fs::create_dir_all(parent)?;

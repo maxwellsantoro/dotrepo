@@ -444,6 +444,11 @@ pub enum PublicCommand {
         /// Fixed RFC 3339 staleness timestamp for deterministic export review.
         #[arg(long)]
         stale_after: Option<String>,
+        /// Previously published pagedigest manifest that carries revision
+        /// state forward when exporting to a fresh directory. Defaults to
+        /// `.well-known/pagedigest.json` inside --out-dir when present.
+        #[arg(long)]
+        pagedigest_previous: Option<PathBuf>,
     },
 }
 

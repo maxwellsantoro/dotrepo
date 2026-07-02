@@ -68,6 +68,17 @@ Snapshot-level mechanics for agents and mirrors:
   (per-file SHA-256 and byte size) support cheap revalidation and selective
   refetch; `scripts/diff_public_export_files.py` turns two `files.json`
   manifests into a delta report
+- `/.well-known/pagedigest.json` publishes the same change-detection signal
+  through the standard pagedigest protocol (v1 RC): monotonic per-URL
+  revisions and auditable SHA-256 digests covering the `/v0/repos/` tree, so
+  generic pagedigest consumers can skip unchanged records with one manifest
+  request. Revisions track material content change (the volatile `freshness`
+  block is excluded), so a re-export with an unchanged index does not churn
+  revisions; each entry's `content_digest` extension field carries that state
+  forward between exports. The checked-in
+  `public/.well-known/pagedigest.json` is the durable revision baseline; the
+  deploy workflow passes it to `public export --pagedigest-previous` so
+  revisions stay monotonic across fresh export directories
 - `scripts/check_public_profile_coverage.py` reports profile-count and
   high-signal coverage gates
 - deterministic lookup-efficiency and search-quality benchmark harnesses
