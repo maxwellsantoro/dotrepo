@@ -27,6 +27,8 @@ mod lookup;
 mod tools;
 
 #[cfg(test)]
+mod test_support;
+#[cfg(test)]
 mod tests;
 
 use dispatch::{handle_request, ServerState};

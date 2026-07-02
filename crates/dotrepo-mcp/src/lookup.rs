@@ -394,7 +394,8 @@ fn compact_error_body(body: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::sync::{Mutex, MutexGuard, OnceLock};
+    use crate::test_support::mcp_env_test_lock;
+    use std::sync::MutexGuard;
 
     struct LookupEnvGuard {
         _guard: MutexGuard<'static, ()>,
@@ -407,9 +408,7 @@ mod tests {
     }
 
     fn lock_lookup_base_url_env() -> LookupEnvGuard {
-        static ENV_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
-        let guard = ENV_LOCK
-            .get_or_init(|| Mutex::new(()))
+        let guard = mcp_env_test_lock()
             .lock()
             // Test-only env cleanup should not cascade if another lookup test panics.
             .unwrap_or_else(|poisoned| poisoned.into_inner());

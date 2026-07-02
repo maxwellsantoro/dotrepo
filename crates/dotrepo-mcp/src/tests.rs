@@ -3,6 +3,7 @@
 //! (`crate::handlers`), and message framing.
 
 use crate::dispatch::{handle_request, JsonRpcRequest, ServerState};
+use crate::test_support::mcp_env_test_lock;
 use crate::handlers::write_import_plan;
 use dotrepo_core::{
     adoption_status_repository, current_timestamp_rfc3339, generate_check_repository,
@@ -608,6 +609,7 @@ fn import_preview_tool_matches_core_report() {
 
 #[test]
 fn lookup_tool_fetches_hosted_summary_trust_and_query() {
+    let _env_guard = env_test_lock().lock().expect("env test lock");
     // SAFETY: test-only env flags for the local mock HTTP server.
     unsafe {
         std::env::set_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL", "1");
@@ -737,7 +739,7 @@ fn lookup_tool_fetches_hosted_summary_trust_and_query() {
     ];
     let (_server, base_url) = start_json_server(routes);
 
-    let response = call_tool(
+    let response = call_tool_unlocked(
         "dotrepo.lookup",
         json!({
             "repositoryUrl": "https://github.com/example/orbit",
@@ -792,7 +794,14 @@ fn message_framing_round_trips() {
 
 fn call_tool(name: &str, arguments: Value) -> Value {
     let _env_guard = env_test_lock().lock().expect("env test lock");
-    std::env::set_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT", "1");
+    call_tool_unlocked(name, arguments)
+}
+
+fn call_tool_unlocked(name: &str, arguments: Value) -> Value {
+    // SAFETY: test-only env flag for local repository roots.
+    unsafe {
+        std::env::set_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT", "1");
+    }
     let (mut state, _) = initialized_state();
     handle_request(
         &mut state,
@@ -854,8 +863,7 @@ fn cwd_test_lock() -> &'static Mutex<()> {
 }
 
 fn env_test_lock() -> &'static Mutex<()> {
-    static LOCK: OnceLock<Mutex<()>> = OnceLock::new();
-    LOCK.get_or_init(|| Mutex::new(()))
+    mcp_env_test_lock()
 }
 
 fn temp_dir(label: &str) -> PathBuf {
@@ -964,9 +972,27 @@ fn start_json_server(routes: Vec<(&'static str, Value)>) -> (TestServer, String)
                 }
                 Err(err) => panic!("client connects: {err}"),
             };
+            stream
+                .set_nonblocking(false)
+                .expect("accepted stream can block for reads");
             handled_requests += 1;
             let mut buffer = [0_u8; 4096];
-            let bytes_read = stream.read(&mut buffer).expect("request readable");
+            let mut bytes_read = 0;
+            let read_deadline = Duration::from_secs(5);
+            let read_started = std::time::Instant::now();
+            while bytes_read == 0 {
+                match stream.read(&mut buffer) {
+                    Ok(0) => panic!("client disconnected before sending request"),
+                    Ok(n) => bytes_read = n,
+                    Err(err) if err.kind() == std::io::ErrorKind::WouldBlock => {
+                        if read_started.elapsed() >= read_deadline {
+                            panic!("timed out waiting for request bytes");
+                        }
+                        thread::sleep(Duration::from_millis(10));
+                    }
+                    Err(err) => panic!("request readable: {err}"),
+                }
+            }
             let request = String::from_utf8_lossy(&buffer[..bytes_read]);
             let request_line = request.lines().next().expect("request line");
             let path = request_line

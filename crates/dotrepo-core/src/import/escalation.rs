@@ -585,8 +585,8 @@ fn run_model_escalation(
             // answer) still terminates immediately here -- only a
             // low-confidence Absent now continues up the tier ladder, the
             // same as a low-confidence Rejected already did.
-            let accepted = !matches!(result.outcome, AdjudicationOutcome::Rejected { .. })
-                && !(is_low_confidence
+            let accepted = !(matches!(result.outcome, AdjudicationOutcome::Rejected { .. })
+                || is_low_confidence
                     && matches!(result.outcome, AdjudicationOutcome::Absent { .. }));
             last_result = Some(result);
             if accepted {
