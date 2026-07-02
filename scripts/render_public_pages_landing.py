@@ -210,6 +210,13 @@ def site_href(base_path: str, path: str) -> str:
     return normalized
 
 
+def query_input_href(base_path: str, entry: dict) -> str:
+    host, owner, repo = repository_segments(entry)
+    if not all((host, owner, repo)):
+        return "#"
+    return site_href(base_path, f"/query-input/{host}/{owner}/{repo}.json")
+
+
 def detect_site_base_path(inventory: dict) -> str:
     marker = "/v0/"
     for entry in inventory.get("repositories", []):
@@ -304,10 +311,10 @@ def load_index_progress(index_root: Path) -> dict:
     }
 
 
-def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str]:
+def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str, str]:
     repositories = inventory.get("repositories", [])
     if not repositories:
-        return "#", html.escape(json.dumps({"path": "repo.description"}, indent=2))
+        return "#", "#", html.escape(json.dumps({"path": "repo.description"}, indent=2))
 
     summary = load_repository_surface(input_dir, repositories[0], "index.json")
     selection = summary.get("selection", {})
@@ -317,6 +324,7 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str]:
     query_url = summary.get("links", {}).get("queryTemplate", "#").replace(
         "{dot_path}", "repo.description"
     )
+    query_input_url = query_input_href(detect_site_base_path(inventory), repositories[0])
     example = {
         "path": "repo.description",
         "value": compact_text(str(summary.get("repository", {}).get("description") or ""), limit=220),
@@ -332,7 +340,7 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str]:
         },
         "conflicts": summary.get("conflicts", []),
     }
-    return query_url, html.escape(json.dumps(example, indent=2))
+    return query_url, query_input_url, html.escape(json.dumps(example, indent=2))
 
 
 def build_featured_trust_example(input_dir: Path, inventory: dict) -> dict:
@@ -370,7 +378,7 @@ def build_featured_trust_example(input_dir: Path, inventory: dict) -> dict:
     artifacts = selected_record.get("artifacts", {})
     identity = trust.get("identity", {})
     links = trust.get("links", {})
-    query_url = links.get("queryTemplate", "#").replace("{dot_path}", "repo.description")
+    query_url = query_input_href(detect_site_base_path(inventory), entry)
     proof = {
         "identity": {
             "host": identity.get("host"),
@@ -476,7 +484,9 @@ def render_writing_cards(base_path: str) -> str:
             if companion_url
             else ""
         )
-        links = [f'<a href="{html.escape(path)}">Read article</a>']
+        links = [
+            f'<a href="{html.escape(path)}" aria-label="Read {html.escape(str(article["title"]), quote=True)}">Read article</a>'
+        ]
         if companion_link:
             links.append(companion_link)
         cards.append(
@@ -516,13 +526,14 @@ def render_docs_cards(base_path: str) -> str:
                     <span>{kind}</span>
                   </div>
                   <p>{summary}</p>
-                  <a href="{href}">Open</a>
+                  <a href="{href}" aria-label="Open {aria_label}">Open</a>
                 </article>
                 """.format(
                     label=html.escape(str(item["label"])),
                     kind=html.escape(str(item["kind"])),
                     summary=html.escape(str(item["summary"])),
                     href=html.escape(href),
+                    aria_label=html.escape(str(item["label"]), quote=True),
                 ).strip()
             )
         cards.append(
@@ -542,7 +553,7 @@ def render_docs_cards(base_path: str) -> str:
 
 
 def render_repository_cards(
-    inventory: dict, *, limit: int | None = None, searchable: bool = False
+    inventory: dict, *, base_path: str = "", limit: int | None = None
 ) -> str:
     cards = []
     repositories = inventory.get("repositories", [])
@@ -559,16 +570,11 @@ def render_repository_cards(
         links = entry.get("links", {})
         summary = links.get("self", "#")
         trust = links.get("trust", "#")
-        query = links.get("queryTemplate", "#").replace("{dot_path}", "repo.description")
-        search_index = " ".join((str(name), label, str(description))).lower()
-        search_attribute = (
-            f' data-search-index="{html.escape(search_index, quote=True)}"'
-            if searchable
-            else ""
-        )
+        query = query_input_href(base_path, entry)
+        aria_label = html.escape(label or str(name), quote=True)
         cards.append(
             """
-            <article class="repo-card"{search_attribute}>
+            <article class="repo-card">
               <div class="repo-card__head">
                 <p class="repo-card__eyebrow">Indexed repository</p>
                 <h3>{name}</h3>
@@ -576,9 +582,9 @@ def render_repository_cards(
               </div>
               <p class="repo-card__description">{description}</p>
               <div class="repo-card__links">
-                <a href="{summary}">Summary</a>
-                <a href="{trust}">Trust</a>
-                <a href="{query}">Query</a>
+                <a href="{summary}" aria-label="Open {aria_label} summary">Summary</a>
+                <a href="{trust}" aria-label="Open {aria_label} trust report">Trust</a>
+                <a href="{query}" aria-label="Open {aria_label} query input data">Query input</a>
               </div>
             </article>
             """.format(
@@ -588,7 +594,7 @@ def render_repository_cards(
                 summary=html.escape(summary),
                 trust=html.escape(trust),
                 query=html.escape(query),
-                search_attribute=search_attribute,
+                aria_label=aria_label,
             ).strip()
         )
     return "\n".join(cards)
@@ -740,6 +746,7 @@ def render_lookup_panel(base_path: str) -> str:
 
 def render_repositories_index(inventory: dict, base_path: str) -> str:
     repository_count = len(inventory.get("repositories", []))
+    inventory_href = site_href(base_path, "/v0/repos/index.json")
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -923,11 +930,28 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
       font-size: 0.95rem;
     }}
     @media (max-width: 980px) {{ .repo-grid {{ grid-template-columns: 1fr; }} }}
+    .catalog-note {{
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }}
     @media (max-width: 720px) {{
       .page {{ padding: 18px 14px 56px; }}
       .hero, .catalog {{ padding: 22px; }}
       .nav {{ align-items: flex-start; flex-direction: column; }}
-      .nav__links {{ justify-content: flex-start; }}
+      .nav__links {{
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }}
+      .nav__links a {{
+        flex: 0 0 auto;
+        padding: 8px 12px;
+      }}
       .catalog-tools {{ grid-template-columns: 1fr; }}
       .result-count {{ padding-bottom: 0; }}
     }}
@@ -939,47 +963,184 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
     <section class="panel hero">
       <p class="eyebrow">Public inventory</p>
       <h1>Find a repository.</h1>
-      <p>Search the current validated export by project, owner, host, or description, then open its summary, trust report, or query response.</p>
+      <p>Search the current validated export by project, owner, host, or description, then open its summary, trust report, or static query-input data.</p>
     </section>
-    <section class="panel catalog">
+    <section class="panel catalog" data-inventory-url="{inventory_href}">
       <div class="catalog-tools">
         <label class="search-field" for="repository-search">
           <span>Search repositories</span>
           <input id="repository-search" type="search" placeholder="Try ripgrep, Python, or github.com/astral-sh/uv" autocomplete="off">
         </label>
-        <p class="result-count" id="repository-result-count" aria-live="polite">{repository_count} repositories</p>
+        <p class="result-count" id="repository-result-count" aria-live="polite">Loading repository inventory...</p>
       </div>
-      <div class="repo-grid" id="repository-grid">
-        {render_repository_cards(inventory, searchable=True)}
-      </div>
+      <div class="repo-grid" id="repository-grid" aria-live="polite"></div>
       <p class="no-results" id="repository-no-results" hidden>No repositories match this search.</p>
+      <p class="catalog-note">Showing a capped result set for speed. Search by name, owner, host, or description to narrow the current validated export.</p>
+      <noscript>
+        <p class="catalog-note">JavaScript is required for the searchable catalog. The complete machine-readable inventory is available at <a href="{inventory_href}">/v0/repos/index.json</a>.</p>
+      </noscript>
     </section>
     <footer class="footer">
-      <span>Machine-readable inventory: <a href="{site_href(base_path, '/v0/repos/index.json')}">/v0/repos/index.json</a></span>
+      <span>Machine-readable inventory: <a href="{inventory_href}">/v0/repos/index.json</a></span>
       <span>Snapshot: <a href="{site_href(base_path, '/v0/meta.json')}">/v0/meta.json</a></span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>
   </div>
   <script>
     (() => {{
+      const RESULT_LIMIT = 60;
+      const catalog = document.querySelector("[data-inventory-url]");
       const input = document.getElementById("repository-search");
-      const cards = Array.from(document.querySelectorAll("[data-search-index]"));
+      const grid = document.getElementById("repository-grid");
       const count = document.getElementById("repository-result-count");
       const noResults = document.getElementById("repository-no-results");
+      const inventoryUrl = catalog.dataset.inventoryUrl;
+      let repositories = [];
+
+      function compactText(value, limit) {{
+        const cleaned = String(value || "").trim().replace(/\\s+/g, " ");
+        return cleaned.length > limit ? `${{cleaned.slice(0, limit - 1).trimEnd()}}...` : cleaned;
+      }}
+
+      function isLowSignalTitle(title) {{
+        return ["a project", "sponsors", "project", "repository"].includes(String(title || "").trim().toLowerCase());
+      }}
+
+      function isLowSignalDescription(description) {{
+        const normalized = String(description || "").trim().toLowerCase();
+        return !normalized || normalized.endsWith("/readme.md") || ["readme", "readme.md"].includes(normalized);
+      }}
+
+      function normalizeEntry(entry) {{
+        const identity = entry.identity || {{}};
+        const host = String(identity.host || "");
+        const owner = String(identity.owner || "");
+        const repo = String(identity.repo || "");
+        const fallbackName = repo || "unknown";
+        const rawName = String(entry.name || "").trim();
+        const name = rawName && !isLowSignalTitle(rawName) ? rawName : fallbackName;
+        const rawDescription = String(entry.description || "").trim();
+        const description = isLowSignalDescription(rawDescription)
+          ? "Repository metadata exported from the validated dotrepo index."
+          : compactText(rawDescription, 240);
+        const label = [host, owner, repo].filter(Boolean).join("/");
+        return {{
+          identity: {{ host, owner, repo }},
+          name,
+          description,
+          label,
+          links: entry.links || {{}},
+          searchIndex: [name, label, description].join(" ").toLowerCase(),
+        }};
+      }}
+
+      function pathSegment(value) {{
+        return encodeURIComponent(value);
+      }}
+
+      function queryInputHref(item) {{
+        const identity = item.identity;
+        if (!identity.host || !identity.owner || !identity.repo) {{
+          return "#";
+        }}
+        return `{base_path}/query-input/${{pathSegment(identity.host)}}/${{pathSegment(identity.owner)}}/${{pathSegment(identity.repo)}}.json`;
+      }}
+
+      function makeLink(href, text, label) {{
+        const link = document.createElement("a");
+        link.href = href || "#";
+        link.textContent = text;
+        link.setAttribute("aria-label", label);
+        return link;
+      }}
+
+      function renderCard(item) {{
+        const article = document.createElement("article");
+        article.className = "repo-card";
+
+        const head = document.createElement("div");
+        head.className = "repo-card__head";
+
+        const eyebrow = document.createElement("p");
+        eyebrow.className = "repo-card__eyebrow";
+        eyebrow.textContent = "Indexed repository";
+
+        const title = document.createElement("h3");
+        title.textContent = item.name;
+
+        const path = document.createElement("p");
+        path.className = "repo-card__path";
+        path.textContent = item.label;
+
+        head.append(eyebrow, title, path);
+
+        const description = document.createElement("p");
+        description.className = "repo-card__description";
+        description.textContent = item.description;
+
+        const links = document.createElement("div");
+        links.className = "repo-card__links";
+        links.append(
+          makeLink(item.links.self, "Summary", `Open ${{item.label}} summary`),
+          makeLink(item.links.trust, "Trust", `Open ${{item.label}} trust report`),
+          makeLink(queryInputHref(item), "Query input", `Open ${{item.label}} query input data`)
+        );
+
+        article.append(head, description, links);
+        return article;
+      }}
 
       function updateResults() {{
         const query = input.value.trim().toLowerCase();
-        let visible = 0;
-        for (const card of cards) {{
-          const matches = !query || card.dataset.searchIndex.includes(query);
-          card.hidden = !matches;
-          if (matches) visible += 1;
+        const matches = query
+          ? repositories.filter((entry) => entry.searchIndex.includes(query))
+          : repositories;
+        const visible = matches.slice(0, RESULT_LIMIT);
+        grid.replaceChildren(...visible.map(renderCard));
+        const total = matches.length;
+        const shown = visible.length;
+        if (query) {{
+          count.textContent = shown === total
+            ? `${{total}} ${{total === 1 ? "repository" : "repositories"}}`
+            : `Showing ${{shown}} of ${{total}} ${{total === 1 ? "repository" : "repositories"}}`;
+        }} else {{
+          count.textContent = shown === total
+            ? `${{total}} repositories`
+            : `Showing ${{shown}} of ${{total}} repositories`;
         }}
-        count.textContent = `${{visible}} ${{visible === 1 ? "repository" : "repositories"}}`;
-        noResults.hidden = visible !== 0;
+        noResults.hidden = total !== 0;
+
+        const url = new URL(window.location.href);
+        if (query) {{
+          url.searchParams.set("q", query);
+        }} else {{
+          url.searchParams.delete("q");
+        }}
+        window.history.replaceState(null, "", url);
       }}
 
       input.addEventListener("input", updateResults);
+
+      fetch(inventoryUrl)
+        .then((response) => {{
+          if (!response.ok) {{
+            throw new Error(`Inventory request failed with ${{response.status}}.`);
+          }}
+          return response.json();
+        }})
+        .then((inventory) => {{
+          repositories = Array.isArray(inventory.repositories)
+            ? inventory.repositories.map(normalizeEntry)
+            : [];
+          const initialQuery = new URL(window.location.href).searchParams.get("q") || "";
+          input.value = initialQuery;
+          updateResults();
+        }})
+        .catch((error) => {{
+          count.textContent = "Inventory unavailable";
+          noResults.hidden = false;
+          noResults.textContent = error instanceof Error ? error.message : "Repository inventory could not be loaded.";
+        }});
     }})();
   </script>
 </body>
@@ -1186,7 +1347,18 @@ def render_writing_index(base_path: str) -> str:
       .hero,
       .section {{ padding: 22px; }}
       .nav {{ align-items: flex-start; flex-direction: column; }}
-      .nav__links {{ justify-content: flex-start; }}
+      .nav__links {{
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }}
+      .nav__links a {{
+        flex: 0 0 auto;
+        padding: 8px 12px;
+      }}
     }}
   </style>
 </head>
@@ -1411,7 +1583,18 @@ def render_docs_index(base_path: str) -> str:
       .hero,
       .section {{ padding: 22px; }}
       .nav {{ align-items: flex-start; flex-direction: column; }}
-      .nav__links {{ justify-content: flex-start; }}
+      .nav__links {{
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }}
+      .nav__links a {{
+        flex: 0 0 auto;
+        padding: 8px 12px;
+      }}
     }}
   </style>
 </head>
@@ -1694,7 +1877,18 @@ def render_article_page(article: dict, base_path: str) -> str:
       .article-body,
       .article-footer {{ padding: 22px; }}
       .nav {{ align-items: flex-start; flex-direction: column; }}
-      .nav__links {{ justify-content: flex-start; }}
+      .nav__links {{
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }}
+      .nav__links a {{
+        flex: 0 0 auto;
+        padding: 8px 12px;
+      }}
       table {{ min-width: 560px; }}
     }}
   </style>
@@ -1741,7 +1935,7 @@ def main() -> int:
     generated_at_human = format_timestamp_for_humans(generated_at)
     stale_after = meta.get("staleAfter")
     repository_count = inventory.get("repositoryCount", 0)
-    first_query, query_example = build_query_example(input_dir, inventory)
+    first_query, first_query_input, query_example = build_query_example(input_dir, inventory)
     featured_trust = build_featured_trust_example(input_dir, inventory)
     homepage_snapshot_state = build_homepage_snapshot_state(meta, inventory)
     reviewed_or_better_count = progress["reviewedOrBetterCount"]
@@ -2256,7 +2450,16 @@ def main() -> int:
         flex-direction: column;
       }}
       .nav__links {{
+        width: 100%;
+        flex-wrap: nowrap;
         justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }}
+      .nav__links a {{
+        flex: 0 0 auto;
+        padding: 8px 12px;
       }}
       .cta {{
         width: 100%;
@@ -2351,9 +2554,9 @@ def main() -> int:
             </div>
           </div>
           <div class="repo-card__links">
-            <a href="{html.escape(featured_trust['summaryUrl'])}">Summary</a>
-            <a href="{html.escape(featured_trust['trustUrl'])}">Trust</a>
-            <a href="{html.escape(featured_trust['queryUrl'])}">Query</a>
+            <a href="{html.escape(featured_trust['summaryUrl'])}" aria-label="Open {html.escape(featured_trust['label'], quote=True)} summary">Summary</a>
+            <a href="{html.escape(featured_trust['trustUrl'])}" aria-label="Open {html.escape(featured_trust['label'], quote=True)} trust report">Trust</a>
+            <a href="{html.escape(featured_trust['queryUrl'])}" aria-label="Open {html.escape(featured_trust['label'], quote=True)} query input data">Query input</a>
           </div>
         </article>
         <article class="api-card">
@@ -2495,7 +2698,7 @@ def main() -> int:
           <p>The query route returns the selected value together with selection, trust, and conflict context. This truncated example is derived from the current exported snapshot.</p>
           <div class="endpoint endpoint--query">
             <code>{html.escape(first_query)}</code>
-            <span>Example live query for <code>repo.description</code>.</span>
+            <span>Hosted query route for <code>repo.description</code>; static preview data: <a href="{html.escape(first_query_input)}"><code>query-input JSON</code></a>.</span>
           </div>
           <pre><code>{query_example}</code></pre>
           <p class="api-card__caption">Full responses also include freshness, repository identity, and navigation links.</p>
@@ -2507,7 +2710,7 @@ def main() -> int:
       <h2>Indexed repositories</h2>
       <p class="section__intro">A small sample from the current export. Use the repository catalog to search the complete index.</p>
       <div class="repo-grid">
-        {render_repository_cards(inventory, limit=8)}
+        {render_repository_cards(inventory, base_path=base_path, limit=8)}
       </div>
       <p class="section__note"><a href="{site_href(base_path, '/repositories/')}">Browse all {html.escape(str(repository_count))} repositories</a></p>
     </section>

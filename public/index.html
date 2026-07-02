@@ -497,7 +497,16 @@
         flex-direction: column;
       }
       .nav__links {
+        width: 100%;
+        flex-wrap: nowrap;
         justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }
+      .nav__links a {
+        flex: 0 0 auto;
+        padding: 8px 12px;
       }
       .cta {
         width: 100%;
@@ -606,9 +615,9 @@
             </div>
           </div>
           <div class="repo-card__links">
-            <a href="/v0/repos/github.com/maxwellsantoro/ries-rs/index.json">Summary</a>
-            <a href="/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json">Trust</a>
-            <a href="/v0/repos/github.com/maxwellsantoro/ries-rs/query?path=repo.description">Query</a>
+            <a href="/v0/repos/github.com/maxwellsantoro/ries-rs/index.json" aria-label="Open github.com/maxwellsantoro/ries-rs summary">Summary</a>
+            <a href="/v0/repos/github.com/maxwellsantoro/ries-rs/trust.json" aria-label="Open github.com/maxwellsantoro/ries-rs trust report">Trust</a>
+            <a href="/query-input/github.com/maxwellsantoro/ries-rs.json" aria-label="Open github.com/maxwellsantoro/ries-rs query input data">Query input</a>
           </div>
         </article>
         <article class="api-card">
@@ -880,7 +889,7 @@
               </div>
               <p class="repo-card__description">A dotrepo-side synthesis of a 9-model, 12-session interview round about repository metadata, trust, adoption, and what AI coding tools actually need.</p>
               <div class="repo-card__links">
-                <a href="/writing/what-the-ais-think-about-dotrepo/">Read article</a>
+                <a href="/writing/what-the-ais-think-about-dotrepo/" aria-label="Read What the AIs Think About dotrepo">Read article</a>
                 <a href="https://maxwellsantoro.com/writing/i-asked-9-ai-models-what-they-want-from-a-repository-metadata-protocol/">Companion essay</a>
               </div>
             </article>
@@ -925,7 +934,7 @@
           <p>The query route returns the selected value together with selection, trust, and conflict context. This truncated example is derived from the current exported snapshot.</p>
           <div class="endpoint endpoint--query">
             <code>/v0/repos/github.com/0x192/universal-android-debloater/query?path=repo.description</code>
-            <span>Example live query for <code>repo.description</code>.</span>
+            <span>Hosted query route for <code>repo.description</code>; static preview data: <a href="/query-input/github.com/0x192/universal-android-debloater.json"><code>query-input JSON</code></a>.</span>
           </div>
           <pre><code>{
   &quot;path&quot;: &quot;repo.description&quot;,
@@ -962,9 +971,9 @@
               </div>
               <p class="repo-card__description">**DISCLAIMER**: Use at your own risk.</p>
               <div class="repo-card__links">
-                <a href="/v0/repos/github.com/0x192/universal-android-debloater/index.json">Summary</a>
-                <a href="/v0/repos/github.com/0x192/universal-android-debloater/trust.json">Trust</a>
-                <a href="/v0/repos/github.com/0x192/universal-android-debloater/query?path=repo.description">Query</a>
+                <a href="/v0/repos/github.com/0x192/universal-android-debloater/index.json" aria-label="Open github.com/0x192/universal-android-debloater summary">Summary</a>
+                <a href="/v0/repos/github.com/0x192/universal-android-debloater/trust.json" aria-label="Open github.com/0x192/universal-android-debloater trust report">Trust</a>
+                <a href="/query-input/github.com/0x192/universal-android-debloater.json" aria-label="Open github.com/0x192/universal-android-debloater query input data">Query input</a>
               </div>
             </article>
 <article class="repo-card">
@@ -975,9 +984,9 @@
               </div>
               <p class="repo-card__description">Download the latest release here:</p>
               <div class="repo-card__links">
-                <a href="/v0/repos/github.com/2dust/v2rayN/index.json">Summary</a>
-                <a href="/v0/repos/github.com/2dust/v2rayN/trust.json">Trust</a>
-                <a href="/v0/repos/github.com/2dust/v2rayN/query?path=repo.description">Query</a>
+                <a href="/v0/repos/github.com/2dust/v2rayN/index.json" aria-label="Open github.com/2dust/v2rayN summary">Summary</a>
+                <a href="/v0/repos/github.com/2dust/v2rayN/trust.json" aria-label="Open github.com/2dust/v2rayN trust report">Trust</a>
+                <a href="/query-input/github.com/2dust/v2rayN.json" aria-label="Open github.com/2dust/v2rayN query input data">Query input</a>
               </div>
             </article>
 <article class="repo-card">
@@ -988,9 +997,9 @@
               </div>
               <p class="repo-card__description">A lightweight subscription converter and manager for proxy protocols, deployable on Cloudflare Workers, Vercel, Node.js, or Docker.</p>
               <div class="repo-card__links">
-                <a href="/v0/repos/github.com/7Sageer/sublink-worker/index.json">Summary</a>
-                <a href="/v0/repos/github.com/7Sageer/sublink-worker/trust.json">Trust</a>
-                <a href="/v0/repos/github.com/7Sageer/sublink-worker/query?path=repo.description">Query</a>
+                <a href="/v0/repos/github.com/7Sageer/sublink-worker/index.json" aria-label="Open github.com/7Sageer/sublink-worker summary">Summary</a>
+                <a href="/v0/repos/github.com/7Sageer/sublink-worker/trust.json" aria-label="Open github.com/7Sageer/sublink-worker trust report">Trust</a>
+                <a href="/query-input/github.com/7Sageer/sublink-worker.json" aria-label="Open github.com/7Sageer/sublink-worker query input data">Query input</a>
               </div>
             </article>
 <article class="repo-card">
@@ -1001,9 +1010,9 @@
               </div>
               <p class="repo-card__description">A web interface for Stable Diffusion, implemented using Gradio library.</p>
               <div class="repo-card__links">
-                <a href="/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/index.json">Summary</a>
-                <a href="/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/trust.json">Trust</a>
-                <a href="/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/query?path=repo.description">Query</a>
+                <a href="/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/index.json" aria-label="Open github.com/AUTOMATIC1111/stable-diffusion-webui summary">Summary</a>
+                <a href="/v0/repos/github.com/AUTOMATIC1111/stable-diffusion-webui/trust.json" aria-label="Open github.com/AUTOMATIC1111/stable-diffusion-webui trust report">Trust</a>
+                <a href="/query-input/github.com/AUTOMATIC1111/stable-diffusion-webui.json" aria-label="Open github.com/AUTOMATIC1111/stable-diffusion-webui query input data">Query input</a>
               </div>
             </article>
 <article class="repo-card">
@@ -1014,9 +1023,9 @@
               </div>
               <p class="repo-card__description">Aider lets you pair program with LLMs to start a new project or build on your existing codebase.</p>
               <div class="repo-card__links">
-                <a href="/v0/repos/github.com/Aider-AI/aider/index.json">Summary</a>
-                <a href="/v0/repos/github.com/Aider-AI/aider/trust.json">Trust</a>
-                <a href="/v0/repos/github.com/Aider-AI/aider/query?path=repo.description">Query</a>
+                <a href="/v0/repos/github.com/Aider-AI/aider/index.json" aria-label="Open github.com/Aider-AI/aider summary">Summary</a>
+                <a href="/v0/repos/github.com/Aider-AI/aider/trust.json" aria-label="Open github.com/Aider-AI/aider trust report">Trust</a>
+                <a href="/query-input/github.com/Aider-AI/aider.json" aria-label="Open github.com/Aider-AI/aider query input data">Query input</a>
               </div>
             </article>
 <article class="repo-card">
@@ -1027,9 +1036,9 @@
               </div>
               <p class="repo-card__description">可以用Python实现的有趣的小项目，内容包括Python爬虫、Python数据分析、机器学习、深度学习等，持续更新中。 本Repository主要用于存放项目代码，对应的项目文章可以关注公众号。</p>
               <div class="repo-card__links">
-                <a href="/v0/repos/github.com/Alfred1984/interesting-python/index.json">Summary</a>
-                <a href="/v0/repos/github.com/Alfred1984/interesting-python/trust.json">Trust</a>
-                <a href="/v0/repos/github.com/Alfred1984/interesting-python/query?path=repo.description">Query</a>
+                <a href="/v0/repos/github.com/Alfred1984/interesting-python/index.json" aria-label="Open github.com/Alfred1984/interesting-python summary">Summary</a>
+                <a href="/v0/repos/github.com/Alfred1984/interesting-python/trust.json" aria-label="Open github.com/Alfred1984/interesting-python trust report">Trust</a>
+                <a href="/query-input/github.com/Alfred1984/interesting-python.json" aria-label="Open github.com/Alfred1984/interesting-python query input data">Query input</a>
               </div>
             </article>
 <article class="repo-card">
@@ -1040,9 +1049,9 @@
               </div>
               <p class="repo-card__description">👏 Welcome to try Tongyi DeepResearch via our ** Modelscope online demo** or **🤗 Huggingface online demo** or **bailian service**!</p>
               <div class="repo-card__links">
-                <a href="/v0/repos/github.com/Alibaba-NLP/DeepResearch/index.json">Summary</a>
-                <a href="/v0/repos/github.com/Alibaba-NLP/DeepResearch/trust.json">Trust</a>
-                <a href="/v0/repos/github.com/Alibaba-NLP/DeepResearch/query?path=repo.description">Query</a>
+                <a href="/v0/repos/github.com/Alibaba-NLP/DeepResearch/index.json" aria-label="Open github.com/Alibaba-NLP/DeepResearch summary">Summary</a>
+                <a href="/v0/repos/github.com/Alibaba-NLP/DeepResearch/trust.json" aria-label="Open github.com/Alibaba-NLP/DeepResearch trust report">Trust</a>
+                <a href="/query-input/github.com/Alibaba-NLP/DeepResearch.json" aria-label="Open github.com/Alibaba-NLP/DeepResearch query input data">Query input</a>
               </div>
             </article>
 <article class="repo-card">
@@ -1053,9 +1062,9 @@
               </div>
               <p class="repo-card__description">Please go to our discussion forum for general questions, **issues are for bug reports and feature requests only.**</p>
               <div class="repo-card__links">
-                <a href="/v0/repos/github.com/AlistGo/alist/index.json">Summary</a>
-                <a href="/v0/repos/github.com/AlistGo/alist/trust.json">Trust</a>
-                <a href="/v0/repos/github.com/AlistGo/alist/query?path=repo.description">Query</a>
+                <a href="/v0/repos/github.com/AlistGo/alist/index.json" aria-label="Open github.com/AlistGo/alist summary">Summary</a>
+                <a href="/v0/repos/github.com/AlistGo/alist/trust.json" aria-label="Open github.com/AlistGo/alist trust report">Trust</a>
+                <a href="/query-input/github.com/AlistGo/alist.json" aria-label="Open github.com/AlistGo/alist query input data">Query input</a>
               </div>
             </article>
       </div>

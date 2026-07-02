@@ -75,6 +75,8 @@ class PublicPageRendererTests(unittest.TestCase):
         self.assertEqual(rendered.count('class="repo-card"'), 8)
         self.assertIn("repo-7", rendered)
         self.assertNotIn("repo-8", rendered)
+        self.assertIn("Query input", rendered)
+        self.assertIn('aria-label="Open github.com/example/repo-0 summary"', rendered)
 
     def test_repository_catalog_is_searchable(self) -> None:
         inventory = {
@@ -86,8 +88,11 @@ class PublicPageRendererTests(unittest.TestCase):
 
         self.assertIn('id="repository-search"', rendered)
         self.assertIn('id="repository-result-count"', rendered)
-        self.assertEqual(rendered.count('data-search-index="'), 2)
-        self.assertIn("card.hidden = !matches", rendered)
+        self.assertIn('data-inventory-url="/v0/repos/index.json"', rendered)
+        self.assertIn("fetch(inventoryUrl)", rendered)
+        self.assertIn("const RESULT_LIMIT = 60", rendered)
+        self.assertIn("queryInputHref(item)", rendered)
+        self.assertNotIn('data-search-index="', rendered)
 
 
 if __name__ == "__main__":

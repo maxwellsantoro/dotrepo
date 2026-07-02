@@ -196,7 +196,18 @@
       .hero,
       .section { padding: 22px; }
       .nav { align-items: flex-start; flex-direction: column; }
-      .nav__links { justify-content: flex-start; }
+      .nav__links {
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }
+      .nav__links a {
+        flex: 0 0 auto;
+        padding: 8px 12px;
+      }
     }
   </style>
 </head>
@@ -233,7 +244,7 @@
               </div>
               <p class="repo-card__description">A dotrepo-side synthesis of a 9-model, 12-session interview round about repository metadata, trust, adoption, and what AI coding tools actually need.</p>
               <div class="repo-card__links">
-                <a href="/writing/what-the-ais-think-about-dotrepo/">Read article</a>
+                <a href="/writing/what-the-ais-think-about-dotrepo/" aria-label="Read What the AIs Think About dotrepo">Read article</a>
                 <a href="https://maxwellsantoro.com/writing/i-asked-9-ai-models-what-they-want-from-a-repository-metadata-protocol/">Companion essay</a>
               </div>
             </article>

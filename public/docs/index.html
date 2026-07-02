@@ -193,7 +193,18 @@
       .hero,
       .section { padding: 22px; }
       .nav { align-items: flex-start; flex-direction: column; }
-      .nav__links { justify-content: flex-start; }
+      .nav__links {
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }
+      .nav__links a {
+        flex: 0 0 auto;
+        padding: 8px 12px;
+      }
     }
   </style>
 </head>
@@ -228,7 +239,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>What dotrepo is, what ships, and the shortest paths for maintainers, contributors, and consumers.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/README.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/README.md" aria-label="Open Project overview">Open</a>
                 </article>
                 <article class="doc-item">
                   <div class="doc-item__head">
@@ -236,7 +247,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>Platform bundles, MCP and LSP binaries, and the VS Code extension package.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/install.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/install.md" aria-label="Open Install">Open</a>
                 </article>
                 <article class="doc-item">
                   <div class="doc-item__head">
@@ -244,7 +255,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>The canonical init, import, validate, trust, and generate-check loop for repository owners.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md" aria-label="Open Maintainer happy path">Open</a>
                 </article>
               </div>
             </section>
@@ -257,7 +268,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>Why provenance, precedence, and conflict visibility matter more than a new file extension.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/trust-model.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/trust-model.md" aria-label="Open Trust model">Open</a>
                 </article>
                 <article class="doc-item">
                   <div class="doc-item__head">
@@ -265,7 +276,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>The mission, operating principles, product milestones, and path from protocol to shared research infrastructure.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/ROADMAP.md" aria-label="Open Roadmap">Open</a>
                 </article>
                 <article class="doc-item">
                   <div class="doc-item__head">
@@ -273,7 +284,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>How the hosted homepage, inventory, summary, trust, and query surfaces are built from one export family.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-surface.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-surface.md" aria-label="Open Public surface architecture">Open</a>
                 </article>
               </div>
             </section>
@@ -286,7 +297,7 @@
                     <span>On-site</span>
                   </div>
                   <p>Freshness, snapshot digest, and expiry metadata for the currently hosted export.</p>
-                  <a href="/v0/meta.json">Open</a>
+                  <a href="/v0/meta.json" aria-label="Open Snapshot metadata">Open</a>
                 </article>
                 <article class="doc-item">
                   <div class="doc-item__head">
@@ -294,7 +305,7 @@
                     <span>On-site</span>
                   </div>
                   <p>The live indexed repository set with summary, trust, and query entrypoints.</p>
-                  <a href="/v0/repos/index.json">Open</a>
+                  <a href="/v0/repos/index.json" aria-label="Open Repository inventory">Open</a>
                 </article>
                 <article class="doc-item">
                   <div class="doc-item__head">
@@ -302,7 +313,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>Concrete response examples for inventory, repository summary, trust, and query routes.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-export-examples.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/public-export-examples.md" aria-label="Open Public export examples">Open</a>
                 </article>
               </div>
             </section>
@@ -315,7 +326,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>Index rules, evidence expectations, autonomous publication, and maintainer handoff.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/README.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/README.md" aria-label="Open Public index">Open</a>
                 </article>
                 <article class="doc-item">
                   <div class="doc-item__head">
@@ -323,7 +334,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>The deterministic-first pipeline, bounded model escalation, publication gates, and trust semantics.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/factual-crawl-automation.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/factual-crawl-automation.md" aria-label="Open Crawler and escalation design">Open</a>
                 </article>
                 <article class="doc-item">
                   <div class="doc-item__head">
@@ -331,7 +342,7 @@
                     <span>Repo doc</span>
                   </div>
                   <p>The reviewer path for accepted maintainer claims and canonical handoff decisions.</p>
-                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-claim-review-workflow.md">Open</a>
+                  <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-claim-review-workflow.md" aria-label="Open Maintainer-claim workflow">Open</a>
                 </article>
               </div>
             </section>

@@ -163,6 +163,20 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
       padding: 14px 16px; overflow-x: auto; line-height: 1.5;
     }}
     .footer {{ display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; font-size: 0.88rem; color: var(--muted); }}
+    @media (max-width: 720px) {{
+      .page {{ padding: 18px 14px 56px; }}
+      .nav {{ align-items: flex-start; flex-direction: column; }}
+      .nav__links {{
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 4px;
+      }}
+      .nav__links a {{ flex: 0 0 auto; padding: 8px 12px; }}
+      .panel {{ padding: 22px; }}
+    }}
   </style>
 </head>
 <body>
