@@ -67,6 +67,22 @@ jobs:
             --pagedigest-previous public/.well-known/pagedigest.json
       - name: Render landing page
         run: uv run python scripts/render_public_pages_landing.py --input release-gate/public
+      - name: Measure lookup efficiency and render benchmark page
+        run: |
+          uv run python scripts/build_public_lookup_workload.py \
+            --public-root release-gate/public \
+            --mode research \
+            --limit 0 \
+            --output "$RUNNER_TEMP/lookup-workload.json"
+          uv run python scripts/measure_public_lookup_efficiency.py \
+            --public-root release-gate/public \
+            --index-root index \
+            --workload "$RUNNER_TEMP/lookup-workload.json" \
+            --output-json "$RUNNER_TEMP/lookup-efficiency.json" \
+            --output-md "$RUNNER_TEMP/lookup-efficiency.md"
+          uv run python scripts/render_public_efficiency_page.py \
+            --input release-gate/public \
+            --benchmark "$RUNNER_TEMP/lookup-efficiency.json"
       - name: Stage Worker snapshot
         run: |
           uv run python scripts/sync_cloudflare_public_snapshot.py \

@@ -1,0 +1,102 @@
+{
+  "gates": {
+    "minFieldHitRate": {
+      "actual": 0.7348,
+      "passed": true,
+      "threshold": 0.0
+    },
+    "minRepositories": {
+      "actual": 613,
+      "passed": true,
+      "threshold": 0
+    },
+    "minTaskHitRate": {
+      "actual": 0.5253,
+      "passed": true,
+      "threshold": 0.0
+    },
+    "minTasks": {
+      "actual": 2452,
+      "passed": true,
+      "threshold": 0
+    }
+  },
+  "generatedAt": "2026-07-02T03:43:25Z",
+  "notes": [
+    "scrapeProxyBytes uses checked-in record.toml and evidence.md as a deterministic local proxy, not live network scrape bytes",
+    "dotrepoBytes counts unique public profile.json and query-input payloads needed by the workload",
+    "dotrepoBatchQueryRequests estimates cacheable public batch-query GETs using the documented repository, path, and result limits",
+    "scrapeProxyRequests counts unique checked-in record/evidence proxy files, not the larger live scrape request graph",
+    "per-task results are omitted from the published report; regenerate them locally with scripts/measure_public_lookup_efficiency.py"
+  ],
+  "passed": true,
+  "schema": "dotrepo-public-lookup-efficiency/v0",
+  "summary": {
+    "abstainedFieldCount": 1463,
+    "abstentionRate": 0.2652,
+    "answeredFieldCount": 4054,
+    "bytesSaved": 0,
+    "bytesSavedRatio": 0.0,
+    "dotrepoBatchQueryRequests": 13,
+    "dotrepoBytes": 3431044,
+    "dotrepoToScrapeProxyRatio": 2.3135,
+    "fieldCount": 5517,
+    "fieldHitRate": 0.7348,
+    "hitCount": 1288,
+    "hitRate": 0.5253,
+    "intentSummaries": {
+      "documentation": {
+        "abstainedFieldCount": 280,
+        "abstentionRate": 0.4568,
+        "answeredFieldCount": 333,
+        "fieldCount": 613,
+        "fieldHitRate": 0.5432,
+        "hitCount": 333,
+        "hitRate": 0.5432,
+        "taskCount": 613
+      },
+      "execution": {
+        "abstainedFieldCount": 575,
+        "abstentionRate": 0.469,
+        "answeredFieldCount": 651,
+        "fieldCount": 1226,
+        "fieldHitRate": 0.531,
+        "hitCount": 286,
+        "hitRate": 0.4666,
+        "taskCount": 613
+      },
+      "overview": {
+        "abstainedFieldCount": 210,
+        "abstentionRate": 0.0685,
+        "answeredFieldCount": 2855,
+        "fieldCount": 3065,
+        "fieldHitRate": 0.9315,
+        "hitCount": 454,
+        "hitRate": 0.7406,
+        "taskCount": 613
+      },
+      "security": {
+        "abstainedFieldCount": 398,
+        "abstentionRate": 0.6493,
+        "answeredFieldCount": 215,
+        "fieldCount": 613,
+        "fieldHitRate": 0.3507,
+        "hitCount": 215,
+        "hitRate": 0.3507,
+        "taskCount": 613
+      }
+    },
+    "repositoryCount": 613,
+    "requestReductionRate": 0.9894,
+    "requestsSaved": 1213,
+    "scrapeProxyBytes": 1483048,
+    "scrapeProxyRequests": 1226,
+    "taskCount": 2452,
+    "uniqueFieldCount": 9
+  },
+  "tasks": [],
+  "workload": {
+    "schema": "dotrepo-public-lookup-workload/v0",
+    "taskCount": 2452
+  }
+}

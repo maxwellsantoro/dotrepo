@@ -429,6 +429,7 @@ def render_site_header(base_path: str, active: str | None = None) -> str:
         ("docs", site_href(base_path, "/docs/"), "Docs"),
         ("writing", site_href(base_path, "/writing/"), "Writing"),
         ("repositories", site_href(base_path, "/repositories/"), "Repositories"),
+        ("efficiency", site_href(base_path, "/efficiency/"), "Efficiency"),
         ("github", "https://github.com/maxwellsantoro/dotrepo", "GitHub"),
         ("snapshot", site_href(base_path, "/v0/meta.json"), "Snapshot"),
     ]
