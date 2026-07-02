@@ -281,6 +281,7 @@ adoption occurs.
 | Throughput | Increase repositories processed per unit of wall time and compute | Cohort completes within latency, memory, rate-limit, and failure-isolation budgets |
 | Utility | Answer representative lookup, execution, documentation, security, and discovery tasks | Intent-level hit-rate and exact-value gates pass |
 | Authority and adoption | Make native ownership and canonical handoff easy | Conversion and retention improve; this workstream does not block overlay coverage |
+| Distribution | Put the lookup surface in the default toolchains agents already use | Hosted and MCP traffic from non-operator consumers exists and grows; at least one external integration ships |
 | Maintainability | Keep the reference implementation safe to change | Structural gates and focused tests remain healthy |
 
 ### Cohort-based expansion
@@ -316,7 +317,64 @@ Coverage selection combines ecosystem balance with demonstrated utility:
 - maintainer interest, without making interest a prerequisite
 
 Star bands and curated catalogs remain useful sampling tools, but they are not
-the sole definition of demand.
+the sole definition of demand. Until live lookup-miss telemetry exists,
+package-registry download rankings (npm, PyPI, crates.io, the Go module proxy)
+are the best available proxy for the repositories agents actually resolve most
+often, and should be the primary cohort selector for Milestone 4 growth.
+
+### Distribution strategy
+
+Index quality creates the value; distribution captures it. Agents check dotrepo
+first only when dotrepo is present in toolchains they already use, so
+distribution is a workstream with its own gates, not a hoped-for side effect of
+coverage:
+
+- list the MCP server in the registries and directories where agent builders
+  discover tools, and keep those listings current
+- publish the scrape-versus-dotrepo efficiency benchmark as a public,
+  regeneratable page — measured tokens, bytes, and requests saved per task is
+  the pitch, and the audience for it is exactly the consumer the index needs
+- land at least one integration in an external agent framework, crawler, or
+  developer tool that resolves repository questions through the public surface
+- measure captured demand directly: hosted-API and MCP requests originating
+  from non-operator consumers are the honest version of "agents check dotrepo
+  first", and they generate the lookup-miss telemetry that demand-driven
+  discovery is designed around
+
+### Shared direction with pagedigest
+
+dotrepo and [pagedigest](https://pagedigest.org) (a sibling protocol,
+pre-release: a one-request `/.well-known/pagedigest.json` manifest of
+monotonic per-URL revisions and optional digests for site-level change
+detection) are two layers of one goal: a cooperation layer that lets automated consumers stop re-deriving what a
+publisher — or a trustworthy overlay — can declare once. pagedigest answers
+*"what changed?"* for any published URL set with a one-request manifest of
+monotonic revisions and optional digests; dotrepo answers *"what is this and
+how do I use it?"* for software repositories with a trust-aware semantic
+record. pagedigest is the general-web form of dotrepo's tier −1 (skip unchanged
+work via cached identity and digests); dotrepo is the deep-semantics form of
+what pagedigest makes cheap to detect.
+
+The projects stay independent, but point the same direction through three
+concrete commitments:
+
+1. **dotrepo publishes pagedigest.** The static public export already emits
+   `v0/files.json` with per-file digests and a snapshot digest — the same
+   pattern as a pagedigest manifest in a bespoke shape. The export should also
+   emit `/.well-known/pagedigest.json` so mirrors and agent caches can use the
+   standard change-detection protocol instead of a dotrepo-specific manifest.
+   This makes dotrepo pagedigest's first production publisher and gives each
+   project the other as a live proof.
+2. **dotrepo consumes pagedigest.** Where non-GitHub evidence sources publish a
+   manifest, the crawler's work-avoidance ladder should honor it before
+   materializing anything, exactly as it honors cached heads today.
+3. **One narrative, one audience.** Both projects pitch measured waste
+   reduction to the same people — agent-framework authors and crawler
+   operators — so positioning, benchmark publication, and directory listings
+   are coordinated rather than duplicated.
+
+Neither project gates the other's milestones; the shared direction is about
+compounding distribution and proof, not coupling release trains.
 
 ### Audit strategy
 
@@ -531,6 +589,16 @@ describe the destination; this section decides what runs now.
 3. Require each cohort to remain inside accuracy, abstention, throughput,
    resource, model-tier, and unit-cost budgets before increasing batch size.
 4. Select coverage from demand signals and ecosystem gaps, not raw count alone.
+
+**In parallel — capture demand through distribution.** Execute the
+distribution strategy above: emit `/.well-known/pagedigest.json` from the
+public export, list the MCP server where agent builders discover tools,
+publish the scrape-versus-dotrepo efficiency benchmark as a public page, and
+pursue one external consumer integration. The checkpoint is sustained hosted
+or MCP traffic from non-operator consumers; that traffic also bootstraps the
+lookup-miss telemetry Milestone 4's demand-driven discovery depends on.
+Distribution outranks maintainer-adoption polish until captured demand exists:
+adoption follows consumers, not the reverse.
 
 **In parallel — improve maintainer authority and adoption (Milestone 5).**
 Publish adoption-funnel telemetry and reach an initial checkpoint of 10
@@ -1117,3 +1185,5 @@ native adoption independently improves authority and long-term maintenance.
 - [`docs/trust-model.md`](./docs/trust-model.md) - authority, provenance, and confidence semantics
 - [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md) - reference toolchain structure and refactor gates
 - [`crates/dotrepo-crawler/README.md`](./crates/dotrepo-crawler/README.md) - internal autonomous index crate orientation
+- [pagedigest](https://pagedigest.org) - sibling protocol for site-level change
+  detection (pre-release); see "Shared direction with pagedigest" above
