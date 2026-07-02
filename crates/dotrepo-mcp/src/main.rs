@@ -16,8 +16,8 @@
 
 use anyhow::Result;
 use dotrepo_transport::{
-    jsonrpc_error_response, read_jsonrpc_message as read_message,
-    write_jsonrpc_message as write_message,
+    jsonrpc_error_response, read_jsonrpc_message_auto as read_message_auto,
+    write_jsonrpc_message_framed as write_message_framed,
 };
 use std::io::{self, BufReader};
 
@@ -45,11 +45,11 @@ fn run() -> Result<()> {
     let mut writer = stdout.lock();
     let mut state = ServerState::default();
 
-    while let Some(message) = read_message(&mut reader)? {
+    while let Some((message, framing)) = read_message_auto(&mut reader)? {
         let request = match serde_json::from_slice::<dispatch::JsonRpcRequest>(&message) {
             Ok(request) => request,
             Err(err) => {
-                write_message(
+                write_message_framed(
                     &mut writer,
                     &jsonrpc_error_response(
                         serde_json::Value::Null,
@@ -57,13 +57,14 @@ fn run() -> Result<()> {
                         format!("failed to parse request: {}", err),
                         None,
                     ),
+                    framing,
                 )?;
                 continue;
             }
         };
 
         if let Some(response) = handle_request(&mut state, request) {
-            write_message(&mut writer, &response)?;
+            write_message_framed(&mut writer, &response, framing)?;
         }
     }
 

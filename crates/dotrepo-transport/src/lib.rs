@@ -102,6 +102,101 @@ pub fn write_jsonrpc_message(writer: &mut impl Write, message: &impl Serialize) 
     Ok(())
 }
 
+/// Wire framing of one JSON-RPC message on a stdio transport.
+///
+/// The MCP specification's stdio transport is newline-delimited JSON; LSP
+/// uses `Content-Length` headers. `read_jsonrpc_message_auto` detects which
+/// one the peer speaks so the MCP server accepts spec-compliant clients while
+/// remaining compatible with pre-existing header-framed tooling.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum JsonRpcFraming {
+    ContentLength,
+    NewlineDelimited,
+}
+
+/// Read one JSON-RPC message, detecting the framing from the first byte:
+/// `{` or `[` starts a newline-delimited JSON message; anything else is
+/// parsed as `Content-Length` headers. Blank lines between newline-delimited
+/// messages are skipped. Returns `None` on clean EOF.
+pub fn read_jsonrpc_message_auto(
+    reader: &mut impl BufRead,
+) -> Result<Option<(Vec<u8>, JsonRpcFraming)>> {
+    loop {
+        let available = reader.fill_buf()?;
+        if available.is_empty() {
+            return Ok(None);
+        }
+        match available[0] {
+            b'\r' | b'\n' | b' ' | b'\t' => {
+                reader.consume(1);
+            }
+            b'{' | b'[' => {
+                return Ok(read_newline_delimited_message(reader)?
+                    .map(|payload| (payload, JsonRpcFraming::NewlineDelimited)));
+            }
+            _ => {
+                return Ok(read_jsonrpc_message(reader)?
+                    .map(|payload| (payload, JsonRpcFraming::ContentLength)));
+            }
+        }
+    }
+}
+
+fn read_newline_delimited_message(reader: &mut impl BufRead) -> Result<Option<Vec<u8>>> {
+    let mut line = Vec::new();
+    loop {
+        let available = reader.fill_buf()?;
+        if available.is_empty() {
+            if line.is_empty() {
+                return Ok(None);
+            }
+            // EOF terminates a final unterminated line.
+            break;
+        }
+        let bytes_to_take = available
+            .iter()
+            .position(|byte| *byte == b'\n')
+            .map(|pos| pos + 1)
+            .unwrap_or(available.len());
+        if line.len() + bytes_to_take > MAX_JSONRPC_MESSAGE_BYTES {
+            bail!(
+                "newline-delimited message exceeds max frame size {}",
+                MAX_JSONRPC_MESSAGE_BYTES
+            );
+        }
+        let found_newline = available[..bytes_to_take].contains(&b'\n');
+        line.extend_from_slice(&available[..bytes_to_take]);
+        reader.consume(bytes_to_take);
+        if found_newline {
+            break;
+        }
+    }
+    while matches!(line.last(), Some(b'\n' | b'\r')) {
+        line.pop();
+    }
+    Ok(Some(line))
+}
+
+/// Write one JSON-RPC message using the given framing. Newline-delimited
+/// output is compact JSON (serde_json never emits raw newlines inside a
+/// compact document) followed by a single `\n`, per the MCP stdio transport.
+pub fn write_jsonrpc_message_framed(
+    writer: &mut impl Write,
+    message: &impl Serialize,
+    framing: JsonRpcFraming,
+) -> Result<()> {
+    match framing {
+        JsonRpcFraming::ContentLength => write_jsonrpc_message(writer, message),
+        JsonRpcFraming::NewlineDelimited => {
+            let payload = serde_json::to_vec(message)?;
+            writer.write_all(&payload)?;
+            writer.write_all(b"\n")?;
+            writer.flush()?;
+            Ok(())
+        }
+    }
+}
+
 pub const JSONRPC_VERSION: &str = "2.0";
 
 pub fn jsonrpc_response(id: Value, result: Value) -> Value {
@@ -149,6 +244,79 @@ mod tests {
             .expect("payload present");
         let decoded: Value = serde_json::from_slice(&payload).expect("payload decodes");
         assert_eq!(decoded, message);
+    }
+
+    #[test]
+    fn newline_framing_round_trips() {
+        let message = json!({
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "ping"
+        });
+        let mut bytes = Vec::new();
+        write_jsonrpc_message_framed(&mut bytes, &message, JsonRpcFraming::NewlineDelimited)
+            .expect("message written");
+        assert!(bytes.ends_with(b"\n"));
+        assert_eq!(bytes.iter().filter(|byte| **byte == b'\n').count(), 1);
+
+        let mut reader = BufReader::new(Cursor::new(bytes));
+        let (payload, framing) = read_jsonrpc_message_auto(&mut reader)
+            .expect("message read")
+            .expect("payload present");
+        assert_eq!(framing, JsonRpcFraming::NewlineDelimited);
+        let decoded: Value = serde_json::from_slice(&payload).expect("payload decodes");
+        assert_eq!(decoded, message);
+    }
+
+    #[test]
+    fn auto_read_detects_content_length_framing() {
+        let message = json!({"jsonrpc": "2.0", "id": 7, "method": "ping"});
+        let mut bytes = Vec::new();
+        write_jsonrpc_message(&mut bytes, &message).expect("message written");
+
+        let mut reader = BufReader::new(Cursor::new(bytes));
+        let (payload, framing) = read_jsonrpc_message_auto(&mut reader)
+            .expect("message read")
+            .expect("payload present");
+        assert_eq!(framing, JsonRpcFraming::ContentLength);
+        let decoded: Value = serde_json::from_slice(&payload).expect("payload decodes");
+        assert_eq!(decoded, message);
+    }
+
+    #[test]
+    fn auto_read_handles_consecutive_newline_messages_and_blank_lines() {
+        let bytes = b"{\"id\":1}\n\n{\"id\":2}\n".to_vec();
+        let mut reader = BufReader::new(Cursor::new(bytes));
+        let (first, _) = read_jsonrpc_message_auto(&mut reader)
+            .expect("first read")
+            .expect("first present");
+        assert_eq!(first, b"{\"id\":1}");
+        let (second, _) = read_jsonrpc_message_auto(&mut reader)
+            .expect("second read")
+            .expect("second present");
+        assert_eq!(second, b"{\"id\":2}");
+        assert!(read_jsonrpc_message_auto(&mut reader)
+            .expect("clean EOF")
+            .is_none());
+    }
+
+    #[test]
+    fn auto_read_accepts_final_unterminated_newline_message() {
+        let mut reader = BufReader::new(Cursor::new(b"{\"id\":3}".to_vec()));
+        let (payload, framing) = read_jsonrpc_message_auto(&mut reader)
+            .expect("message read")
+            .expect("payload present");
+        assert_eq!(framing, JsonRpcFraming::NewlineDelimited);
+        assert_eq!(payload, b"{\"id\":3}");
+    }
+
+    #[test]
+    fn auto_read_rejects_oversized_newline_message() {
+        let mut bytes = vec![b'{'];
+        bytes.extend(vec![b' '; MAX_JSONRPC_MESSAGE_BYTES + 1]);
+        let mut reader = BufReader::new(Cursor::new(bytes));
+        let err = read_jsonrpc_message_auto(&mut reader).expect_err("oversized line rejected");
+        assert!(err.to_string().contains("exceeds max frame size"));
     }
 
     #[test]
