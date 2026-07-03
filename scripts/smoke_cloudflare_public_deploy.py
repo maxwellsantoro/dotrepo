@@ -90,54 +90,81 @@ def with_query_param(url: str, name: str, value: str) -> str:
     )
 
 
-def http_get_json(url: str) -> Any:
+# Transient HTTP statuses worth retrying. The deploy smoke runs against the
+# production custom origin moments after a new Worker version is promoted, so a
+# brand-new content-addressed snapshot path can briefly 404 (or hit a 5xx) at
+# the edge before propagation settles. Retry these so the gate does not flap on
+# every snapshot-changing deploy; a genuinely missing file still fails, just
+# after the retries are exhausted. Status 0 represents a connection failure.
+TRANSIENT_STATUSES = {404, 408, 425, 429, 500, 502, 503, 504}
+RETRY_BACKOFF_SECONDS = (5, 10, 15)
+
+
+def _request_once(url: str) -> tuple[int, bytes]:
     request = Request(url, headers=REQUEST_HEADERS)
     try:
         with urlopen(request, timeout=15) as response:
             status = getattr(response, "status", response.getcode())
-            body = response.read().decode("utf-8")
+            return status, response.read()
     except HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        hint = ""
-        if exc.code == 403 and "error code: 1010" in body:
-            hint = (
-                " (Cloudflare blocked the client signature on workers.dev; "
-                "verify with a browser-like User-Agent or promote the smoke check "
-                "to the final custom domain instead)"
-            )
-        raise SystemExit(f"smoke failed ({exc.code}) for {url}: {body}{hint}") from exc
-    except URLError as exc:
-        raise SystemExit(f"smoke failed for {url}: {exc.reason}") from exc
+        return exc.code, exc.read()
 
+
+def _request_with_retry(url: str) -> tuple[int, bytes]:
+    """Fetch `url`, retrying transient post-deploy edge states.
+
+    Returns the final (status, body). Raises SystemExit only if a connection
+    error persists across all retries; HTTP statuses (including persistent 404)
+    are returned for the caller to format.
+    """
+    reason: str | None = None
+    status = 0
+    body = b""
+    for attempt in range(len(RETRY_BACKOFF_SECONDS) + 1):
+        try:
+            status, body = _request_once(url)
+            reason = None
+        except URLError as exc:
+            reason = str(exc.reason)
+            status, body = 0, b""
+        if status != 0 and status not in TRANSIENT_STATUSES:
+            return status, body
+        if attempt < len(RETRY_BACKOFF_SECONDS):
+            time.sleep(RETRY_BACKOFF_SECONDS[attempt])
+    if status == 0 and reason is not None:
+        raise SystemExit(f"smoke failed for {url}: {reason}")
+    return status, body
+
+
+def http_get_json(url: str) -> Any:
+    status, body = _request_with_retry(url)
+    decoded = body.decode("utf-8", errors="replace")
+    if status == 403 and "error code: 1010" in decoded:
+        raise SystemExit(
+            f"smoke failed (403) for {url}: {decoded}"
+            " (Cloudflare blocked the client signature on workers.dev; "
+            "verify with a browser-like User-Agent or promote the smoke check "
+            "to the final custom domain instead)"
+        )
     if status != 200:
-        raise SystemExit(f"smoke failed ({status}) for {url}: {body}")
+        raise SystemExit(f"smoke failed ({status}) for {url}: {decoded}")
     try:
-        return json.loads(body)
+        return json.loads(decoded)
     except json.JSONDecodeError as exc:
         raise SystemExit(f"smoke returned invalid JSON for {url}: {exc}") from exc
 
 
 def http_get_bytes(url: str) -> bytes:
-    request = Request(url, headers=REQUEST_HEADERS)
-    try:
-        with urlopen(request, timeout=15) as response:
-            status = getattr(response, "status", response.getcode())
-            body = response.read()
-    except HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        hint = ""
-        if exc.code == 403 and "error code: 1010" in body:
-            hint = (
-                " (Cloudflare blocked the client signature on workers.dev; "
-                "verify with a browser-like User-Agent or promote the smoke check "
-                "to the final custom domain instead)"
-            )
-        raise SystemExit(f"smoke failed ({exc.code}) for {url}: {body}{hint}") from exc
-    except URLError as exc:
-        raise SystemExit(f"smoke failed for {url}: {exc.reason}") from exc
-
+    status, body = _request_with_retry(url)
+    decoded = body.decode("utf-8", errors="replace")
+    if status == 403 and "error code: 1010" in decoded:
+        raise SystemExit(
+            f"smoke failed (403) for {url}: {decoded}"
+            " (Cloudflare blocked the client signature on workers.dev; "
+            "verify with a browser-like User-Agent or promote the smoke check "
+            "to the final custom domain instead)"
+        )
     if status != 200:
-        decoded = body.decode("utf-8", errors="replace")
         raise SystemExit(f"smoke failed ({status}) for {url}: {decoded}")
     return body
 
