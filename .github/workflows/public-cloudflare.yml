@@ -94,6 +94,16 @@ jobs:
       - name: Run Worker tests
         working-directory: cloudflare/hosted-query
         run: npm test
+      - name: Archive immutable snapshots to R2
+        if: vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET != ''
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET: ${{ vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET }}
+        run: |
+          uv run python scripts/archive_public_snapshot_r2.py \
+            --public-root release-gate/public \
+            --bucket "$DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET"
       - name: Resolve smoke origin
         id: smoke_origin
         shell: bash

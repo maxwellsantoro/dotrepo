@@ -21,10 +21,17 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
       - name: Check both public edges
+        env:
+          DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED: ${{ vars.DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED }}
         run: |
+          archive_args=()
+          if [ "$DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED" = "true" ]; then
+            archive_args+=(--sample-archived-snapshot)
+          fi
           uv run python scripts/public_edge_canary.py \
             --pagedigest-repo-root sibling-pagedigest \
-            --output public-edge-canary.json
+            --output public-edge-canary.json \
+            "${archive_args[@]}"
       - name: Upload canary report
         if: always()
         uses: actions/upload-artifact@v4

@@ -26,6 +26,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--pagedigest-origin", default="https://pagedigest.org")
     parser.add_argument("--pagedigest-repo-root")
     parser.add_argument("--output")
+    parser.add_argument(
+        "--sample-archived-snapshot",
+        action="store_true",
+        help="Fetch one older immutable snapshot path to verify archive fallback.",
+    )
     return parser.parse_args()
 
 
@@ -63,7 +68,37 @@ def freshness(value: dict[str, Any], context: str) -> dict[str, Any]:
     return result
 
 
-def check_dotrepo(origin: str) -> dict[str, Any]:
+def archived_snapshot_sample(origin: str, log_entries: list[Any], latest_digest: str) -> dict[str, Any] | None:
+    candidates = [
+        entry
+        for entry in log_entries
+        if isinstance(entry, dict) and entry.get("snapshotDigest") != latest_digest
+    ]
+    if not candidates:
+        return None
+    selected = candidates[0]
+    snapshot_id = selected.get("snapshotId")
+    require(isinstance(snapshot_id, str) and snapshot_id, "archived snapshot candidate has no snapshotId")
+    files_path = f"/v0/snapshots/{snapshot_id}/files.json"
+    files = fetch_json(origin, files_path)
+    public_paths = [
+        entry.get("path")
+        for entry in files.get("files", [])
+        if isinstance(entry, dict)
+        and isinstance(entry.get("path"), str)
+        and "/query-input/" not in entry["path"]
+    ]
+    require(public_paths, f"archived snapshot {snapshot_id} file manifest has no public paths")
+    sample_path = "/" + public_paths[0].lstrip("/")
+    fetch(origin, sample_path)
+    return {
+        "snapshotId": snapshot_id,
+        "filesPath": files_path,
+        "samplePath": sample_path,
+    }
+
+
+def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]:
     meta = fetch_json(origin, "/v0/meta.json")
     paths = meta.get("paths")
     require(isinstance(paths, dict), "dotrepo meta is missing content-addressed paths")
@@ -112,6 +147,11 @@ def check_dotrepo(origin: str) -> dict[str, Any]:
         record_path = f"{root}/repos/{identity.get('host')}/{identity.get('owner')}/{identity.get('repo')}/index.json"
         record = fetch_json(origin, record_path)
         require(freshness(record, record_path) == expected_freshness, f"{record_path} disagrees with pointer")
+    archive_sample = (
+        archived_snapshot_sample(origin, log_entries, digest)
+        if sample_archived_snapshot
+        else None
+    )
 
     homepage = fetch(origin, "/").decode("utf-8")
     match = re.search(
@@ -137,6 +177,7 @@ def check_dotrepo(origin: str) -> dict[str, Any]:
         "repositoryCount": inventory.get("repositoryCount"),
         "fileCount": files.get("fileCount"),
         "snapshotCount": log.get("snapshotCount"),
+        "archiveSample": archive_sample,
         "siteRev": manifest.get("site_rev"),
     }
 
@@ -162,7 +203,7 @@ def main() -> int:
     try:
         report = {
             "checkedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-            "dotrepo": check_dotrepo(args.dotrepo_origin),
+            "dotrepo": check_dotrepo(args.dotrepo_origin, args.sample_archived_snapshot),
             "pagedigest": check_pagedigest(
                 args.pagedigest_origin,
                 Path(args.pagedigest_repo_root) if args.pagedigest_repo_root else None,

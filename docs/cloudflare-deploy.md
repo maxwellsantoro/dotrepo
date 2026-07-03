@@ -132,9 +132,37 @@ Worker attempts to read the same key from that binding before returning 404.
 This keeps the hot path fast while avoiding the static-asset file-count ceiling
 for historical snapshots.
 
-Bucket creation and binding configuration are operator-owned setup steps. Once
-the binding exists, archive writes should upload immutable snapshot objects
-under their public path keys, for example:
+Bucket creation and binding configuration are operator-owned setup steps:
+
+```bash
+npx wrangler r2 bucket create dotrepo-public-snapshot-archive
+```
+
+Then add the Worker binding in `cloudflare/hosted-query/wrangler.jsonc`:
+
+```jsonc
+"r2_buckets": [
+  {
+    "binding": "SNAPSHOT_ARCHIVE",
+    "bucket_name": "dotrepo-public-snapshot-archive"
+  }
+]
+```
+
+Set GitHub variable `DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET` to the bucket name to
+enable the deploy workflow's archive upload step. The step runs:
+
+```bash
+uv run python scripts/archive_public_snapshot_r2.py \
+  --public-root release-gate/public \
+  --bucket "$DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET"
+```
+
+Use `--dry-run` locally to inspect the exact `wrangler r2 object put` commands
+before uploading.
+
+Archive writes upload immutable snapshot objects under their public path keys,
+for example:
 
 ```text
 v0/snapshots/<snapshotId>/repos/index.json
@@ -144,8 +172,9 @@ v0/snapshots/log.json
 
 The scheduled canary checks the pointer, canonical files, snapshot log, and
 stats every run. After the archive binding is live and at least two snapshots
-exist, add a weekly canary sample from an older snapshot so archive rot cannot
-hide behind a healthy current edge snapshot.
+exist, set GitHub variable `DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED=true` to make
+the scheduled canary sample an older immutable snapshot URL. That prevents
+archive rot from hiding behind a healthy current edge snapshot.
 
 ## Published shape
 
