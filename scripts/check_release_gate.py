@@ -414,8 +414,21 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     if not isinstance(files, list) or not files:
         raise SystemExit(f"public export file manifest is empty: {files_path}")
     manifest_paths = {entry.get("path") for entry in files if isinstance(entry, dict)}
-    if "v0/meta.json" not in manifest_paths or "v0/repos/index.json" not in manifest_paths:
-        raise SystemExit(f"public export file manifest is missing core paths: {files_path}")
+    # The file manifest is scoped to the content-addressed snapshot tree, so its
+    # structural anchor is the snapshot inventory path declared by meta.json
+    # (meta.paths.inventory), not the top-level v0/meta.json or v0/repos/index.json
+    # pointer files (which live beside the manifest, not inside it).
+    declared_inventory = None
+    paths_meta = meta.get("paths")
+    if isinstance(paths_meta, dict):
+        candidate = paths_meta.get("inventory")
+        if isinstance(candidate, str) and candidate:
+            declared_inventory = candidate.lstrip("/")
+    if not declared_inventory or declared_inventory not in manifest_paths:
+        raise SystemExit(
+            f"public export file manifest is missing the snapshot inventory path "
+            f"({declared_inventory!r}) declared by meta.json: {files_path}"
+        )
     for entry in files:
         if not isinstance(entry, dict):
             raise SystemExit(f"public export file manifest has invalid entry: {files_path}")
