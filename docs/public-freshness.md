@@ -89,8 +89,11 @@ audit history.
 
 `/v0/stats.json` is a mutable instrumentation document derived from the
 append-only snapshot log. It exposes the latest snapshot, the retained history,
-and count deltas between adjacent snapshots. Phase 2 dashboard and essay work
-should build from this document rather than scraping individual payload paths.
+and count deltas between adjacent snapshots. It also carries the current
+PageDigest economics block: records covered, records that must be fetched,
+records skipped, covered bytes, avoided bytes, and a coarse token-avoidance
+estimate. Phase 2 dashboard and essay work should build from this document
+rather than scraping individual payload paths.
 
 ### `files.json`
 

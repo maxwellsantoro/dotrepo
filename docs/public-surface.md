@@ -73,7 +73,9 @@ Snapshot-level mechanics for agents and mirrors:
   the current and previous immutable snapshots; older immutable snapshot URLs
   fall through to the configured R2 archive binding; `/v0/snapshots/log.json`
   is append-only and never pruned. `/v0/stats.json` derives latest/history/count
-  deltas from that log for Phase 2 instrumentation.
+  deltas from that log and publishes PageDigest economics for Phase 2
+  instrumentation: covered records, skipped fetches, avoided bytes, and a
+  coarse token-avoidance estimate.
 - `/.well-known/pagedigest.json` publishes the same change-detection signal
   through the standard pagedigest protocol (v1 RC): monotonic per-URL
   revisions and auditable SHA-256 digests covering the `/v0/repos/` tree, so

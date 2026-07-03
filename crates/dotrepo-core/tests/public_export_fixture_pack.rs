@@ -1,4 +1,7 @@
-use dotrepo_core::{export_public_index_static, index_snapshot_digest, PublicFreshness};
+use dotrepo_core::{
+    export_public_index_static, export_public_index_static_with_options, index_snapshot_digest,
+    PublicFreshness,
+};
 use serde_json::Value;
 use std::collections::BTreeMap;
 use std::fs;
@@ -256,6 +259,38 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
     assert_eq!(log["entries"][0]["repositoryCount"], Value::from(2));
     assert_eq!(log["entries"][0]["fileCount"], Value::from(11));
 
+    let stats =
+        serde_json::from_str::<Value>(generated.get("v0/stats.json").expect("stats output"))
+            .expect("stats parses");
+    assert_eq!(stats["apiVersion"], Value::String("v0".into()));
+    assert_eq!(
+        stats["latest"]["snapshotId"],
+        Value::String(snapshot_id.into())
+    );
+    assert_eq!(stats["snapshotCount"], Value::from(1));
+    assert_eq!(stats["pagedigest"]["version"], Value::from(1));
+    assert_eq!(stats["pagedigest"]["siteRev"], Value::from(1));
+    assert_eq!(stats["pagedigest"]["recordsCovered"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["newRecords"], Value::from(0));
+    assert_eq!(stats["pagedigest"]["changedRecords"], Value::from(0));
+    assert_eq!(stats["pagedigest"]["unchangedRecords"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["removedRecords"], Value::from(0));
+    assert_eq!(stats["pagedigest"]["recordsNeedingFetch"], Value::from(0));
+    assert_eq!(stats["pagedigest"]["fetchesAvoided"], Value::from(9));
+    assert!(stats["pagedigest"]["manifestBytes"]
+        .as_u64()
+        .is_some_and(|bytes| bytes > 0));
+    assert!(stats["pagedigest"]["bytesCovered"]
+        .as_u64()
+        .is_some_and(|bytes| bytes > 0));
+    assert_eq!(
+        stats["pagedigest"]["bytesAvoided"],
+        stats["pagedigest"]["bytesCovered"]
+    );
+    assert!(stats["pagedigest"]["estimatedTokensAvoided"]
+        .as_u64()
+        .is_some_and(|tokens| tokens > 0));
+
     let orbit_query_input = serde_json::from_str::<Value>(
         generated
             .get("query-input/github.com/example/orbit.json")
@@ -296,4 +331,47 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
         nova_query_input["selection"]["record"]["claim"]["handoff"],
         Value::String("pending_canonical".into())
     );
+}
+
+#[test]
+fn public_export_pagedigest_stats_report_cold_start_fetch_cost() {
+    let expected_root = expected_root();
+    let missing_previous = expected_root.join(".well-known/missing-pagedigest.json");
+    let generated = export_public_index_static_with_options(
+        &fixture_index_root(),
+        &expected_root,
+        sample_public_freshness(),
+        "/",
+        Some(&missing_previous),
+    )
+    .expect("public export succeeds")
+    .into_iter()
+    .map(|(path, contents)| {
+        (
+            path.strip_prefix(&expected_root)
+                .expect("generated path stays under expected root")
+                .display()
+                .to_string(),
+            contents,
+        )
+    })
+    .collect::<BTreeMap<_, _>>();
+
+    let stats =
+        serde_json::from_str::<Value>(generated.get("v0/stats.json").expect("stats output"))
+            .expect("stats parses");
+    assert_eq!(stats["pagedigest"]["recordsCovered"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["newRecords"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["changedRecords"], Value::from(0));
+    assert_eq!(stats["pagedigest"]["unchangedRecords"], Value::from(0));
+    assert_eq!(stats["pagedigest"]["recordsNeedingFetch"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["fetchesAvoided"], Value::from(0));
+    assert_eq!(stats["pagedigest"]["bytesAvoided"], Value::from(0));
+    assert_eq!(
+        stats["pagedigest"]["estimatedTokensAvoided"],
+        Value::from(0)
+    );
+    assert!(stats["pagedigest"]["bytesCovered"]
+        .as_u64()
+        .is_some_and(|bytes| bytes > 0));
 }

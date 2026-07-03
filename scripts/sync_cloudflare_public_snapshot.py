@@ -66,10 +66,10 @@ def merge_snapshot_logs(input_dir: Path, previous_dir: Path | None, output_dir: 
     path = output_dir / "v0/snapshots/log.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(output_log, indent=2, sort_keys=False) + "\n", encoding="utf-8")
-    write_stats(output_dir, output_log)
+    write_stats(output_dir, output_log, load_json(input_dir / "v0/stats.json").get("pagedigest"))
 
 
-def write_stats(output_dir: Path, log: dict) -> None:
+def write_stats(output_dir: Path, log: dict, pagedigest: dict | None = None) -> None:
     entries = log.get("entries", [])
     deltas = []
     for previous, current in zip(entries, entries[1:]):
@@ -89,6 +89,8 @@ def write_stats(output_dir: Path, log: dict) -> None:
         "history": entries,
         "deltas": deltas,
     }
+    if pagedigest:
+        stats["pagedigest"] = pagedigest
     path = output_dir / "v0/stats.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(stats, indent=2, sort_keys=False) + "\n", encoding="utf-8")

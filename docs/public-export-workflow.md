@@ -110,6 +110,9 @@ Important details:
 - `v0/snapshots/log.json` records each published snapshot digest,
   `generatedAt`, repository count, and payload count
 - `v0/stats.json` derives latest/history/delta instrumentation from that log
+  and includes PageDigest economics for the current manifest: records covered,
+  records needing fetch, records skipped, bytes covered, bytes avoided, and a
+  coarse token-avoidance estimate
 - mutable `v0/repos/` and `v0/files.json` copies remain compatibility surfaces;
   the Worker resolves them through the pointer with revalidation required
 - deterministic mode changes freshness timestamps, not response semantics

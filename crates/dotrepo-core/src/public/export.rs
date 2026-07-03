@@ -228,7 +228,10 @@ fn public_snapshot_log(
     })
 }
 
-fn public_snapshot_stats(log: &PublicSnapshotLog) -> serde_json::Value {
+fn public_snapshot_stats(
+    log: &PublicSnapshotLog,
+    pagedigest: Option<serde_json::Value>,
+) -> serde_json::Value {
     let latest = log.entries.last().cloned();
     let deltas = log
         .entries
@@ -244,13 +247,81 @@ fn public_snapshot_stats(log: &PublicSnapshotLog) -> serde_json::Value {
             })
         })
         .collect::<Vec<_>>();
-    serde_json::json!({
+    let mut stats = serde_json::json!({
         "apiVersion": PUBLIC_API_VERSION,
         "latest": latest,
         "snapshotCount": log.snapshot_count,
         "history": log.entries,
         "deltas": deltas,
-    })
+    });
+    if let Some(pagedigest) = pagedigest {
+        stats["pagedigest"] = pagedigest;
+    }
+    stats
+}
+
+fn pagedigest_economics_stats(
+    previous: Option<&PagedigestManifest>,
+    current: &PagedigestManifest,
+    base_path: &str,
+    out_root: &Path,
+    outputs: &[(PathBuf, String)],
+    manifest_bytes: usize,
+) -> Result<serde_json::Value> {
+    const COVERED_PREFIX: &str = "v0/repos/";
+    let base = normalize_public_base_path(base_path)?;
+    let mut bytes_by_key = std::collections::BTreeMap::new();
+    for (path, contents) in outputs {
+        let relative = crate::relative_to_root(out_root, path)?;
+        let relative = relative.display().to_string();
+        if relative.starts_with(COVERED_PREFIX) {
+            bytes_by_key.insert(format!("{base}/{relative}"), contents.len());
+        }
+    }
+
+    let mut new_records = 0usize;
+    let mut changed_records = 0usize;
+    let mut unchanged_records = 0usize;
+    let mut bytes_covered = 0usize;
+    let mut bytes_avoided = 0usize;
+    for (key, entry) in &current.entries {
+        let bytes = bytes_by_key.get(key).copied().unwrap_or(0);
+        bytes_covered += bytes;
+        match previous.and_then(|manifest| manifest.entries.get(key)) {
+            None => new_records += 1,
+            Some(prior) if prior.content_digest == entry.content_digest => {
+                unchanged_records += 1;
+                bytes_avoided += bytes;
+            }
+            Some(_) => changed_records += 1,
+        }
+    }
+    let removed_records = previous
+        .map(|manifest| {
+            manifest
+                .entries
+                .keys()
+                .filter(|key| !current.entries.contains_key(*key))
+                .count()
+        })
+        .unwrap_or(0);
+    let records_needing_fetch = new_records + changed_records;
+    Ok(serde_json::json!({
+        "version": current.version,
+        "siteRev": current.site_rev,
+        "generated": current.generated,
+        "manifestBytes": manifest_bytes,
+        "recordsCovered": current.entries.len(),
+        "newRecords": new_records,
+        "changedRecords": changed_records,
+        "unchangedRecords": unchanged_records,
+        "removedRecords": removed_records,
+        "recordsNeedingFetch": records_needing_fetch,
+        "fetchesAvoided": unchanged_records,
+        "bytesCovered": bytes_covered,
+        "bytesAvoided": bytes_avoided,
+        "estimatedTokensAvoided": bytes_avoided / 4,
+    }))
 }
 
 pub fn export_public_index_static(
@@ -450,10 +521,6 @@ pub fn export_public_index_static_with_options(
         snapshot_log_path(out_root),
         serde_json::to_string_pretty(&snapshot_log)?,
     ));
-    outputs.push((
-        out_root.join("v0/stats.json"),
-        serde_json::to_string_pretty(&public_snapshot_stats(&snapshot_log))?,
-    ));
 
     let pagedigest_previous_path = pagedigest_previous
         .map(Path::to_path_buf)
@@ -466,9 +533,25 @@ pub fn export_public_index_static_with_options(
         out_root,
         &outputs,
     )?;
+    let rendered_pagedigest_manifest = serde_json::to_string_pretty(&pagedigest_manifest)?;
+    let pagedigest_stats = pagedigest_economics_stats(
+        pagedigest_previous_manifest.as_ref(),
+        &pagedigest_manifest,
+        base_path,
+        out_root,
+        &outputs,
+        rendered_pagedigest_manifest.len(),
+    )?;
+    outputs.push((
+        out_root.join("v0/stats.json"),
+        serde_json::to_string_pretty(&public_snapshot_stats(
+            &snapshot_log,
+            Some(pagedigest_stats),
+        ))?,
+    ));
     outputs.push((
         out_root.join(PAGEDIGEST_RELATIVE_PATH),
-        serde_json::to_string_pretty(&pagedigest_manifest)?,
+        rendered_pagedigest_manifest,
     ));
 
     Ok(outputs)
