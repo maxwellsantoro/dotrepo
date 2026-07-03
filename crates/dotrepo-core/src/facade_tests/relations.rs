@@ -29,6 +29,7 @@ repository = "https://github.com/example/another-related"
             github: Some(GitHubSnapshotFacts {
                 fork: true,
                 parent: Some("github.com/example/upstream".into()),
+                ..GitHubSnapshotFacts::default()
             }),
         },
     )

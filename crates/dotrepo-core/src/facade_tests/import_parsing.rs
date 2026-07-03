@@ -357,7 +357,7 @@ fn infer_pyproject_commands_prefers_explicit_tool_over_default() {
 }
 
 #[test]
-fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
+fn declared_package_script_beats_pyproject_ecosystem_default() {
     let pyproject = ImportedFile {
         path: "pyproject.toml".into(),
         contents: "[build-system]\nrequires = [\"setuptools\"]\n".into(),
@@ -375,7 +375,9 @@ fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
         setup_cfg: None,
         go_mod: None,
         pom_xml: None,
+        maven_wrapper: false,
         build_gradle: None,
+        gradle_wrapper: false,
         composer_json: None,
         csproj: None,
         mix_exs: None,
@@ -387,15 +389,12 @@ fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
         contributing: None,
         workflow_files: &[],
     });
-    assert!(
-        result.test.is_none(),
-        "pyproject and package.json should conflict, not let npm test win: {:?}",
-        result.test
-    );
-    assert!(
-        result.notes.iter().any(|n| n.contains("conflicting")),
-        "expected conflict note, got: {:?}",
-        result.notes
+    assert_eq!(
+        result
+            .test
+            .as_ref()
+            .map(|selection| selection.command.as_str()),
+        Some("npm test")
     );
 }
 

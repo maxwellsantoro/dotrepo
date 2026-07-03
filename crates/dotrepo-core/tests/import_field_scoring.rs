@@ -1,5 +1,7 @@
 use dotrepo_core::{
-    import_repository, score_import_fields, verify_import_plan, FieldConfidence, ImportMode,
+    build_adjudication_requests, import_repository, import_repository_with_options,
+    score_import_fields, verify_import_plan, FieldConfidence, GitHubSnapshotFacts, ImportMode,
+    ImportOptions,
 };
 use std::fs;
 use std::path::PathBuf;
@@ -9,6 +11,103 @@ fn fixture_root() -> PathBuf {
         .join("tests")
         .join("fixtures")
         .join("import")
+}
+
+#[test]
+fn known_bad_catalog_examples_are_suspect_and_escalated() {
+    let cases = [
+        (
+            "alist",
+            "# discussions\n\nDownload the latest release here.\n",
+            "alist",
+            "A file list program that supports multiple storage providers.",
+        ),
+        (
+            "v2rayn",
+            "# v2rayN\n\nDownload the latest release here.\n",
+            "v2rayN",
+            "A GUI client for Windows that supports Xray and V2Ray.",
+        ),
+        (
+            "uad",
+            "# Universal Android Debloater\n\nDISCLAIMER: Use at your own risk.\n",
+            "universal-android-debloater",
+            "Cross-platform GUI written in Rust using ADB to debloat Android devices.",
+        ),
+    ];
+
+    for (case, readme, repo_name, github_description) in cases {
+        let root = temp_dir(case);
+        fs::write(root.join("README.md"), readme).expect("README");
+        let source = format!("https://github.com/example/{repo_name}");
+        let plan = import_repository_with_options(
+            &root,
+            ImportMode::Overlay,
+            Some(&source),
+            &ImportOptions {
+                github: Some(GitHubSnapshotFacts {
+                    repo_name: Some(repo_name.into()),
+                    description: Some(github_description.into()),
+                    topics: vec!["android".into(), "proxy".into(), "storage".into()],
+                    ..GitHubSnapshotFacts::default()
+                }),
+                ..ImportOptions::default()
+            },
+        )
+        .expect("import succeeds");
+        let verification = verify_import_plan(&root, &plan, &source);
+        let report = score_import_fields(&plan, &verification);
+
+        assert!(!report.summary.suspect.is_empty(), "case {case}");
+        assert!(!report.summary.eligible_for_auto_publish, "case {case}");
+        let requests = build_adjudication_requests(&report, &plan);
+        assert!(
+            requests.iter().any(|request| {
+                request.field == "repo.name" || request.field == "repo.description"
+            }),
+            "case {case} should be escalation-visible"
+        );
+        fs::remove_dir_all(&root).expect("cleanup");
+    }
+}
+
+#[test]
+fn matching_github_metadata_remains_high_confidence() {
+    let root = temp_dir("matching-github-metadata");
+    fs::write(
+        root.join("README.md"),
+        "# Orbit\n\nPolicy-aware release orchestration for multi-service deploys.\n",
+    )
+    .expect("README");
+    let source = "https://github.com/example/orbit";
+    let plan = import_repository_with_options(
+        &root,
+        ImportMode::Overlay,
+        Some(source),
+        &ImportOptions {
+            github: Some(GitHubSnapshotFacts {
+                repo_name: Some("orbit".into()),
+                description: Some("Release orchestration for multi-service deploys.".into()),
+                topics: vec!["release".into(), "orchestration".into()],
+                ..GitHubSnapshotFacts::default()
+            }),
+            ..ImportOptions::default()
+        },
+    )
+    .expect("import succeeds");
+    let verification = verify_import_plan(&root, &plan, source);
+    let report = score_import_fields(&plan, &verification);
+
+    assert!(report.summary.suspect.is_empty());
+    assert_eq!(
+        report
+            .scores
+            .iter()
+            .find(|score| score.field == "repo.description")
+            .map(|score| &score.confidence),
+        Some(&FieldConfidence::HighConfidencePresent)
+    );
+    fs::remove_dir_all(&root).expect("cleanup");
 }
 
 fn temp_dir(name: &str) -> PathBuf {
@@ -96,9 +195,9 @@ fn score_security_unknown_high_confidence() {
 }
 
 #[test]
-fn score_auto_publish_eligibility() {
-    // A repo with all fields either high-confidence present or high-confidence absent
-    // should be eligible for auto-publish.
+fn ecosystem_defaults_prevent_auto_publish() {
+    // Cargo.toml establishes the ecosystem, not that the conventional build and
+    // test commands actually work. Those defaults must require validation.
     let root = temp_dir("score-auto-publish");
     fs::write(
         root.join("README.md"),
@@ -118,10 +217,18 @@ fn score_auto_publish_eligibility() {
     let report = score_import_fields(&plan, &verification);
 
     assert!(
-        report.summary.eligible_for_auto_publish,
-        "expected auto-publish eligibility, but got unresolved: {:?}, medium: {:?}",
+        !report.summary.eligible_for_auto_publish,
+        "ecosystem defaults must not auto-publish; unresolved: {:?}, medium: {:?}",
         report.summary.unresolved, report.summary.medium_confidence_present
     );
+    assert!(report
+        .summary
+        .medium_confidence_present
+        .contains(&"repo.build".to_string()));
+    assert!(report
+        .summary
+        .medium_confidence_present
+        .contains(&"repo.test".to_string()));
 
     fs::remove_dir_all(&root).expect("cleanup");
 }

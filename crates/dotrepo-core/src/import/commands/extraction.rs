@@ -33,7 +33,7 @@ pub(crate) fn infer_cargo_manifest_commands(
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
+        source_tier: CommandSourceTier::EcosystemDefault,
         build: Some(build.into()),
         test: Some(test.into()),
     })
@@ -89,7 +89,7 @@ pub(crate) fn infer_pyproject_commands(file: &ImportedFile) -> Option<ImportedCo
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
+        source_tier: CommandSourceTier::EcosystemDefault,
         build,
         test,
     })
@@ -154,7 +154,7 @@ pub(crate) fn infer_setup_py_commands(file: &ImportedFile) -> Option<ImportedCom
     let test = infer_setup_py_test_command(&file.contents)?;
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
+        source_tier: CommandSourceTier::EcosystemDefault,
         build: None,
         test: Some(test),
     })
@@ -209,7 +209,7 @@ pub(crate) fn infer_setup_cfg_commands(file: &ImportedFile) -> Option<ImportedCo
     let test = infer_setup_cfg_test_command(&file.contents)?;
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
+        source_tier: CommandSourceTier::EcosystemDefault,
         build: None,
         test: Some(test),
     })
@@ -228,13 +228,16 @@ pub(crate) fn infer_go_module_commands(file: &ImportedFile) -> Option<ImportedCo
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
+        source_tier: CommandSourceTier::EcosystemDefault,
         build: Some("go build ./...".into()),
         test: Some("go test ./...".into()),
     })
 }
 
-pub(crate) fn infer_maven_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+pub(crate) fn infer_maven_commands(
+    file: &ImportedFile,
+    has_wrapper: bool,
+) -> Option<ImportedCommandCandidate> {
     let document = roxmltree::Document::parse(&file.contents).ok()?;
     if document.root_element().tag_name().name() != "project" {
         return None;
@@ -245,13 +248,30 @@ pub(crate) fn infer_maven_commands(file: &ImportedFile) -> Option<ImportedComman
     // pom alone; workflow inference will surface the actual CI command used.
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
-        build: Some("./mvnw package".into()),
-        test: Some("./mvnw test".into()),
+        source_tier: CommandSourceTier::EcosystemDefault,
+        build: Some(
+            if has_wrapper {
+                "./mvnw package"
+            } else {
+                "mvn package"
+            }
+            .into(),
+        ),
+        test: Some(
+            if has_wrapper {
+                "./mvnw test"
+            } else {
+                "mvn test"
+            }
+            .into(),
+        ),
     })
 }
 
-pub(crate) fn infer_gradle_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+pub(crate) fn infer_gradle_commands(
+    file: &ImportedFile,
+    has_wrapper: bool,
+) -> Option<ImportedCommandCandidate> {
     // Simple presence check for Gradle build files (Groovy or Kotlin DSL).
     // We prefer the Gradle wrapper for the same reproducibility reasons as Maven.
     // A more sophisticated parser could look inside for tasks, but presence + standard
@@ -263,9 +283,23 @@ pub(crate) fn infer_gradle_commands(file: &ImportedFile) -> Option<ImportedComma
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
-        build: Some("./gradlew build".into()),
-        test: Some("./gradlew test".into()),
+        source_tier: CommandSourceTier::EcosystemDefault,
+        build: Some(
+            if has_wrapper {
+                "./gradlew build"
+            } else {
+                "gradle build"
+            }
+            .into(),
+        ),
+        test: Some(
+            if has_wrapper {
+                "./gradlew test"
+            } else {
+                "gradle test"
+            }
+            .into(),
+        ),
     })
 }
 
@@ -322,7 +356,7 @@ pub(crate) fn infer_dotnet_commands(file: &ImportedFile) -> Option<ImportedComma
     });
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
+        source_tier: CommandSourceTier::EcosystemDefault,
         build: Some("dotnet build".into()),
         test: is_test_project.then(|| "dotnet test".into()),
     })
@@ -348,7 +382,7 @@ pub(crate) fn infer_mix_commands(file: &ImportedFile) -> Option<ImportedCommandC
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
+        source_tier: CommandSourceTier::EcosystemDefault,
         build: Some("mix compile".into()),
         test: Some("mix test".into()),
     })
@@ -365,7 +399,7 @@ pub(crate) fn infer_rebar_commands(file: &ImportedFile) -> Option<ImportedComman
 
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
-        source_tier: CommandSourceTier::Manifest,
+        source_tier: CommandSourceTier::EcosystemDefault,
         build: Some("rebar3 compile".into()),
         test: Some("rebar3 eunit".into()),
     })
@@ -777,13 +811,17 @@ pub(crate) fn first_matching_workflow_command(
             if lower.contains("bazel ") && lower.contains("test") {
                 return Some(trimmed.to_string());
             }
-            if lower.contains(" mvnw")
-                || lower.contains("./mvnw")
-                || (lower.contains("mvn ") && lower.contains("test"))
+            if !lower.contains("skiptests")
+                && (((lower.contains(" mvnw") || lower.contains("./mvnw"))
+                    && lower.contains("test"))
+                    || (lower.contains("mvn ") && lower.contains("test")))
             {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("gradlew") || (lower.contains("gradle ") && lower.contains("test")) {
+            if !lower.contains("-x test")
+                && ((lower.contains("gradlew") && lower.contains("test"))
+                    || (lower.contains("gradle ") && lower.contains("test")))
+            {
                 return Some(trimmed.to_string());
             }
             if (lower.contains("npm ")

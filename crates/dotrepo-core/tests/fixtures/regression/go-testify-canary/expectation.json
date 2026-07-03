@@ -4,10 +4,11 @@
   "repo_name": "Testify",
   "repo_description": "Go code (golang) set of packages that provide many tools for testifying that your code will behave as you intend.",
   "repo_build": "go build ./...",
-  "repo_test": "go test ./...",
-  "overlay_status": "imported",
+  "repo_test": "go test -v -race ./...",
+  "overlay_status": "inferred",
   "trust_provenance": [
-    "imported"
+    "imported",
+    "inferred"
   ],
   "origin": "github.com/stretchr/testify"
 }

@@ -129,10 +129,16 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.go_mod.and_then(infer_go_module_commands) {
         candidates.push(candidate);
     }
-    if let Some(candidate) = sources.pom_xml.and_then(infer_maven_commands) {
+    if let Some(candidate) = sources
+        .pom_xml
+        .and_then(|file| infer_maven_commands(file, sources.maven_wrapper))
+    {
         candidates.push(candidate);
     }
-    if let Some(candidate) = sources.build_gradle.and_then(infer_gradle_commands) {
+    if let Some(candidate) = sources
+        .build_gradle
+        .and_then(|file| infer_gradle_commands(file, sources.gradle_wrapper))
+    {
         candidates.push(candidate);
     }
     if let Some(candidate) = sources.composer_json.and_then(infer_composer_commands) {
@@ -302,7 +308,7 @@ jobs:
     }
 
     #[test]
-    fn infer_gradle_commands_detects_presence_and_prefers_wrapper() {
+    fn infer_gradle_commands_uses_wrapper_only_when_present() {
         use super::super::types::ImportedFile;
         use super::extraction::infer_gradle_commands;
         let groovy = ImportedFile {
@@ -313,10 +319,10 @@ jobs:
             path: "build.gradle.kts".into(),
             contents: "plugins { java }".into(),
         };
-        let g1 = infer_gradle_commands(&groovy).expect("groovy");
-        let g2 = infer_gradle_commands(&kts).expect("kts");
+        let g1 = infer_gradle_commands(&groovy, true).expect("groovy");
+        let g2 = infer_gradle_commands(&kts, false).expect("kts");
         assert_eq!(g1.build.as_deref(), Some("./gradlew build"));
-        assert_eq!(g2.test.as_deref(), Some("./gradlew test"));
+        assert_eq!(g2.test.as_deref(), Some("gradle test"));
     }
 
     #[test]
@@ -417,7 +423,9 @@ jobs:
             setup_cfg: None,
             go_mod: None,
             pom_xml: None,
+            maven_wrapper: false,
             build_gradle: None,
+            gradle_wrapper: false,
             composer_json: None,
             csproj: None,
             mix_exs: None,

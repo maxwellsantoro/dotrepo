@@ -288,6 +288,7 @@ pub fn cmd_promotion_report(
                                 match s.confidence {
                                     dotrepo_core::FieldConfidence::MediumConfidencePresent =>
                                         "medium-present",
+                                    dotrepo_core::FieldConfidence::Suspect => "suspect",
                                     dotrepo_core::FieldConfidence::Unresolved => "unresolved",
                                     _ => "other",
                                 },
@@ -358,6 +359,7 @@ pub fn cmd_promotion_report(
                 let marker = match score.confidence {
                     dotrepo_core::FieldConfidence::HighConfidencePresent => "H+",
                     dotrepo_core::FieldConfidence::MediumConfidencePresent => "M+",
+                    dotrepo_core::FieldConfidence::Suspect => "!!",
                     dotrepo_core::FieldConfidence::HighConfidenceAbsent => "H-",
                     dotrepo_core::FieldConfidence::Unresolved => "??",
                 };

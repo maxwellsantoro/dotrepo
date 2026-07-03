@@ -11,9 +11,10 @@
     "README.md",
     "Cargo.toml"
   ],
-  "inferred_fields": [],
-  "overlay_status": "imported",
+  "inferred_fields": ["repo.build", "repo.test"],
+  "overlay_status": "inferred",
   "trust_provenance": [
-    "imported"
+    "imported",
+    "inferred"
   ]
 }

@@ -37,14 +37,18 @@ pub(crate) fn resolve_command_field(
     inferred_fields: &mut Vec<String>,
 ) -> Option<ImportedCommandSelection> {
     // Resolution goes top-down by tier:
-    // Manifest > ContribDoc > TaskScript > Workflow.
+    // Declared manifest scripts > contribution docs > task scripts > observed
+    // workflows > ecosystem defaults. A build-tool file proves the ecosystem,
+    // but it does not prove that its conventional command works in this repo.
     // Within a tier, conflicts are genuine and block the field.
     // If a higher tier resolves, lower tiers are ignored.
     let tiers = [
+        CommandSourceTier::GitHubApi,
         CommandSourceTier::Manifest,
         CommandSourceTier::ContribDoc,
         CommandSourceTier::TaskScript,
         CommandSourceTier::Workflow,
+        CommandSourceTier::EcosystemDefault,
     ];
 
     for tier in &tiers {
@@ -73,19 +77,20 @@ pub(crate) fn resolve_command_field(
                     evidence_bullets.push(note);
                     return None;
                 };
-                let is_manifest_tier = *tier == CommandSourceTier::Manifest
+                let is_declared_tier = *tier == CommandSourceTier::Manifest
                     || *tier == CommandSourceTier::ContribDoc
                     || *tier == CommandSourceTier::TaskScript;
                 let selection = ImportedCommandSelection {
                     command,
                     source_path: source_path.clone(),
-                    provenance: if is_manifest_tier {
+                    source_tier: *tier,
+                    provenance: if is_declared_tier {
                         ImportedCommandProvenance::Imported
                     } else {
                         ImportedCommandProvenance::Inferred
                     },
                 };
-                if !is_manifest_tier {
+                if !is_declared_tier {
                     inferred_fields.push(field.into());
                 }
                 note_selected_command(field, &selection, notes, evidence_bullets);

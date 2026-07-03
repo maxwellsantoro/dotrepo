@@ -48,6 +48,7 @@ fn offline_writeback_from_import_fixture_validates_index() {
             github: Some(dotrepo_core::GitHubSnapshotFacts {
                 fork: true,
                 parent: Some("github.com/example/upstream".into()),
+                ..dotrepo_core::GitHubSnapshotFacts::default()
             }),
         },
     )

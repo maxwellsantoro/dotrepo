@@ -43,6 +43,9 @@ pub struct ImportOptions {
 pub struct GitHubSnapshotFacts {
     pub fork: bool,
     pub parent: Option<String>,
+    pub repo_name: Option<String>,
+    pub description: Option<String>,
+    pub topics: Vec<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -55,6 +58,7 @@ pub struct ImportPlan {
     pub imported_sources: Vec<String>,
     pub inferred_fields: Vec<String>,
     pub command_candidates: ImportCommandCandidates,
+    pub github: Option<GitHubSnapshotFacts>,
 }
 
 #[derive(Debug, Clone, Default)]
@@ -76,6 +80,7 @@ pub struct CommandCandidateSummary {
 pub struct CommandCandidateSelection {
     pub command: String,
     pub source_path: String,
+    pub source_tier: CommandSourceTier,
     pub provenance: ImportedCommandProvenance,
 }
 
@@ -115,6 +120,7 @@ pub struct VerificationReport {
 pub enum FieldConfidence {
     HighConfidencePresent,
     MediumConfidencePresent,
+    Suspect,
     HighConfidenceAbsent,
     Unresolved,
 }
@@ -133,6 +139,7 @@ pub struct FieldScore {
 pub struct FieldScoreSummary {
     pub high_confidence_present: Vec<String>,
     pub medium_confidence_present: Vec<String>,
+    pub suspect: Vec<String>,
     pub high_confidence_absent: Vec<String>,
     pub unresolved: Vec<String>,
     pub eligible_for_auto_publish: bool,
@@ -258,16 +265,19 @@ pub enum ImportedCommandProvenance {
 pub(crate) struct ImportedCommandSelection {
     pub(crate) command: String,
     pub(crate) source_path: String,
+    pub(crate) source_tier: CommandSourceTier,
     pub(crate) provenance: ImportedCommandProvenance,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum CommandSourceTier {
+    GitHubApi,
     Workflow,
     TaskScript,
     ContribDoc,
     Manifest,
+    EcosystemDefault,
 }
 
 pub(crate) struct ImportSources<'a> {
@@ -278,7 +288,9 @@ pub(crate) struct ImportSources<'a> {
     pub(crate) setup_cfg: Option<&'a ImportedFile>,
     pub(crate) go_mod: Option<&'a ImportedFile>,
     pub(crate) pom_xml: Option<&'a ImportedFile>,
+    pub(crate) maven_wrapper: bool,
     pub(crate) build_gradle: Option<&'a ImportedFile>,
+    pub(crate) gradle_wrapper: bool,
     pub(crate) composer_json: Option<&'a ImportedFile>,
     pub(crate) csproj: Option<&'a ImportedFile>,
     pub(crate) mix_exs: Option<&'a ImportedFile>,

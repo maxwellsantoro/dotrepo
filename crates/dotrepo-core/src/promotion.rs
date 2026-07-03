@@ -267,6 +267,7 @@ fn field_score_report_from_scores(scores: &[FieldScore]) -> FieldScoreReport {
     let mut high_confidence_present = Vec::new();
     let mut medium_confidence_present = Vec::new();
     let mut high_confidence_absent = Vec::new();
+    let mut suspect = Vec::new();
     let mut unresolved = Vec::new();
 
     for score in scores {
@@ -277,6 +278,7 @@ fn field_score_report_from_scores(scores: &[FieldScore]) -> FieldScoreReport {
             FieldConfidence::MediumConfidencePresent => {
                 medium_confidence_present.push(score.field.clone())
             }
+            FieldConfidence::Suspect => suspect.push(score.field.clone()),
             FieldConfidence::HighConfidenceAbsent => {
                 high_confidence_absent.push(score.field.clone())
             }
@@ -288,9 +290,11 @@ fn field_score_report_from_scores(scores: &[FieldScore]) -> FieldScoreReport {
         scores: scores.to_vec(),
         summary: crate::import::FieldScoreSummary {
             eligible_for_auto_publish: unresolved.is_empty()
-                && medium_confidence_present.is_empty(),
+                && medium_confidence_present.is_empty()
+                && suspect.is_empty(),
             high_confidence_present,
             medium_confidence_present,
+            suspect,
             high_confidence_absent,
             unresolved,
         },

@@ -77,14 +77,14 @@ fn import_repository_imports_cargo_workspace_build_and_test_commands() {
         .trust
         .as_ref()
         .and_then(|trust| trust.notes.as_deref())
-        .is_some_and(|text| text.contains("Imported `repo.build` from `Cargo.toml`.")));
+        .is_some_and(|text| text.contains("Inferred `repo.build` from `Cargo.toml`.")));
     assert!(plan
         .evidence_text
         .as_deref()
         .is_some_and(|text| text
-            .contains("Imported repo.build from Cargo.toml as `cargo build --workspace`.")));
+            .contains("Inferred repo.build from Cargo.toml as `cargo build --workspace`.")));
     assert!(plan.evidence_text.as_deref().is_some_and(
-        |text| text.contains("Imported repo.test from Cargo.toml as `cargo test --workspace`.")
+        |text| text.contains("Inferred repo.test from Cargo.toml as `cargo test --workspace`.")
     ));
 
     fs::remove_dir_all(root).expect("temp dir removed");
@@ -226,13 +226,13 @@ fn import_repository_imports_maven_build_and_test_defaults() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("./mvnw package"));
-    assert_eq!(plan.manifest.repo.test.as_deref(), Some("./mvnw test"));
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("mvn package"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("mvn test"));
     assert!(plan.imported_sources.iter().any(|path| path == "pom.xml"));
     assert!(plan
         .evidence_text
         .as_deref()
-        .is_some_and(|text| text.contains("Imported repo.test from pom.xml as `./mvnw test`.")));
+        .is_some_and(|text| text.contains("Inferred repo.test from pom.xml as `mvn test`.")));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
@@ -650,7 +650,7 @@ fn import_repository_ignores_unsafe_or_incomplete_cmake_workflows() {
 }
 
 #[test]
-fn import_repository_leaves_conflicting_manifest_commands_unset() {
+fn declared_package_commands_beat_cargo_ecosystem_defaults() {
     let root = temp_dir("import-conflicting-commands");
     fs::write(
         root.join("README.md"),
@@ -682,27 +682,12 @@ fn import_repository_leaves_conflicting_manifest_commands_unset() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build, None);
-    assert_eq!(plan.manifest.repo.test, None);
-    assert!(!plan
-        .imported_sources
-        .iter()
-        .any(|path| path == "Cargo.toml"));
-    assert!(!plan
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("npm run build"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("npm test"));
+    assert!(plan
         .imported_sources
         .iter()
         .any(|path| path == "package.json"));
-    assert!(plan
-        .manifest
-        .record
-        .trust
-        .as_ref()
-        .and_then(|trust| trust.notes.as_deref())
-        .is_some_and(|text| text.contains("Left `repo.build` unset because")));
-    assert!(plan
-        .evidence_text
-        .as_deref()
-        .is_some_and(|text| text.contains("conflicting build commands")));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
@@ -751,7 +736,7 @@ jobs:
         vec!["repo.build".to_string(), "repo.test".to_string()]
     );
     assert_eq!(plan.manifest.record.status, RecordStatus::Inferred);
-    assert!(!plan
+    assert!(plan
         .imported_sources
         .iter()
         .any(|path| path == ".github/workflows/ci.yml"));
@@ -817,12 +802,13 @@ jobs:
         plan.manifest.repo.test.as_deref(),
         Some("cargo test --workspace")
     );
-    assert!(plan.inferred_fields.is_empty());
-    assert!(plan
+    assert!(plan.inferred_fields.contains(&"repo.build".to_string()));
+    assert!(plan.inferred_fields.contains(&"repo.test".to_string()));
+    assert!(!plan
         .imported_sources
         .iter()
         .any(|path| path == "Cargo.toml"));
-    assert!(!plan
+    assert!(plan
         .imported_sources
         .iter()
         .any(|path| path == ".github/workflows/ci.yml"));
@@ -831,7 +817,7 @@ jobs:
 }
 
 #[test]
-fn manifest_over_conflicting_workflow() {
+fn observed_workflow_beats_ecosystem_default() {
     let root = temp_dir("import-manifest-workflow-conflict");
     fs::create_dir_all(root.join(".github/workflows")).expect("workflow dir created");
     fs::write(
@@ -865,26 +851,24 @@ jobs:
     )
     .expect("import succeeds");
 
-    assert_eq!(
-        plan.manifest.repo.build.as_deref(),
-        Some("cargo build --workspace")
-    );
-    assert_eq!(
-        plan.manifest.repo.test.as_deref(),
-        Some("cargo test --workspace")
-    );
-    assert!(plan.inferred_fields.is_empty());
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
+    assert!(plan.inferred_fields.contains(&"repo.build".to_string()));
+    assert!(plan.inferred_fields.contains(&"repo.test".to_string()));
     assert!(plan
         .imported_sources
         .iter()
-        .any(|path| path == "Cargo.toml"));
-    assert!(plan
-        .manifest
-        .record
-        .trust
-        .as_ref()
-        .and_then(|trust| trust.notes.as_deref())
-        .is_some_and(|text| text.contains("Imported `repo.build` from `Cargo.toml`")));
+        .any(|path| path == ".github/workflows/ci.yml"));
+    assert!(
+        plan.manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .is_some_and(
+                |text| text.contains("Inferred `repo.build` from `.github/workflows/ci.yml`")
+            )
+    );
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
@@ -958,7 +942,7 @@ jobs:
 }
 
 #[test]
-fn two_manifests_conflict() {
+fn declared_package_commands_beat_other_ecosystem_defaults() {
     let root = temp_dir("import-manifest-manifest-conflict");
     fs::write(
         root.join("README.md"),
@@ -983,15 +967,8 @@ fn two_manifests_conflict() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build, None);
-    assert_eq!(plan.manifest.repo.test, None);
-    assert!(plan
-        .manifest
-        .record
-        .trust
-        .as_ref()
-        .and_then(|trust| trust.notes.as_deref())
-        .is_some_and(|text| text.contains("conflicting")));
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("npm run build"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("npm test"));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
@@ -1077,11 +1054,16 @@ jobs:
         plan.manifest.repo.test.as_deref(),
         Some("cargo test --workspace")
     );
-    assert!(plan.inferred_fields.is_empty());
-    assert!(plan
+    assert!(plan.inferred_fields.contains(&"repo.build".to_string()));
+    assert!(plan.inferred_fields.contains(&"repo.test".to_string()));
+    assert!(!plan
         .imported_sources
         .iter()
         .any(|path| path == "Cargo.toml"));
+    assert!(plan
+        .imported_sources
+        .iter()
+        .any(|path| path == ".github/workflows/ci.yml"));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
@@ -1226,11 +1208,11 @@ fn contributing_md_does_not_treat_make_lint_as_build_command() {
 }
 
 #[test]
-fn manifest_beats_makefile() {
+fn declared_makefile_beats_ecosystem_default() {
     let root = temp_dir("import-manifest-beats-makefile");
     fs::write(
         root.join("README.md"),
-        "# Tiers\n\nManifest should win over Makefile.\n",
+        "# Tiers\n\nDeclared commands should win over ecosystem defaults.\n",
     )
     .expect("README written");
     fs::write(
@@ -1251,8 +1233,8 @@ fn manifest_beats_makefile() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
-    assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("make build"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("make test"));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

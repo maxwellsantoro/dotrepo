@@ -70,6 +70,7 @@ fn make_eligible_report() -> FieldScoreReport {
         summary: FieldScoreSummary {
             high_confidence_present: vec!["repo.name".into()],
             medium_confidence_present: vec![],
+            suspect: vec![],
             high_confidence_absent: vec!["repo.build".into()],
             unresolved: vec![],
             eligible_for_auto_publish: true,
@@ -98,6 +99,7 @@ fn make_unresolved_report() -> FieldScoreReport {
         summary: FieldScoreSummary {
             high_confidence_present: vec!["repo.name".into()],
             medium_confidence_present: vec![],
+            suspect: vec![],
             high_confidence_absent: vec![],
             unresolved: vec!["repo.build".into()],
             eligible_for_auto_publish: false,
@@ -276,10 +278,10 @@ fn end_to_end_eligible_repo_promotes() {
     )
     .expect("README");
     fs::write(
-        root.join("Cargo.toml"),
-        "[package]\nname = \"autopub\"\nversion = \"0.1.0\"\n",
+        root.join("package.json"),
+        r#"{"scripts":{"build":"vite build","test":"vitest run"}}"#,
     )
-    .expect("Cargo.toml");
+    .expect("package.json");
 
     let source = "https://github.com/example/autopub";
     let plan =
@@ -350,10 +352,10 @@ fn promotion_never_rewrites_field_values() {
     )
     .expect("README");
     fs::write(
-        root.join("Cargo.toml"),
-        "[package]\nname = \"orbit\"\nversion = \"0.1.0\"\n",
+        root.join("package.json"),
+        r#"{"scripts":{"build":"vite build","test":"vitest run"}}"#,
     )
-    .expect("Cargo.toml");
+    .expect("package.json");
 
     let source = "https://github.com/example/orbit";
     let plan =
@@ -394,10 +396,10 @@ fn promotion_preserves_imported_provenance_origins() {
     )
     .expect("README");
     fs::write(
-        root.join("Cargo.toml"),
-        "[package]\nname = \"orbit\"\nversion = \"0.1.0\"\n",
+        root.join("package.json"),
+        r#"{"scripts":{"build":"vite build","test":"vitest run"}}"#,
     )
-    .expect("Cargo.toml");
+    .expect("package.json");
 
     let source = "https://github.com/example/orbit";
     let plan =
@@ -480,10 +482,10 @@ fn promotion_only_touches_status_trust_and_evidence_wording() {
     )
     .expect("README");
     fs::write(
-        root.join("Cargo.toml"),
-        "[package]\nname = \"orbit\"\nversion = \"0.1.0\"\n",
+        root.join("package.json"),
+        r#"{"scripts":{"build":"vite build","test":"vitest run"}}"#,
     )
-    .expect("Cargo.toml");
+    .expect("package.json");
 
     let source = "https://github.com/example/orbit";
     let plan =

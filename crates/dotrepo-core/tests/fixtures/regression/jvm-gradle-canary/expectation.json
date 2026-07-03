@@ -3,14 +3,15 @@
   "ecosystem": "jvm",
   "repo_name": "Gradle Canary",
   "repo_description": "A compact JVM Gradle fixture used to preserve deterministic Gradle command inference and wrapper preference.",
-  "repo_build": "./gradlew build",
+  "repo_build": "./gradlew build -x test",
   "repo_test": "./gradlew test",
   "imported_sources": [
     "README.md",
-    "build.gradle"
+    ".github/workflows/ci.yml"
   ],
-  "overlay_status": "imported",
+  "overlay_status": "inferred",
   "trust_provenance": [
-    "imported"
+    "imported",
+    "inferred"
   ]
 }

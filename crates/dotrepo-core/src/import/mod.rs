@@ -170,6 +170,7 @@ pub fn adopt_overlay_record(root: &Path, overlay_record_path: &Path) -> Result<I
         imported_sources: vec![overlay_record_path.display().to_string()],
         inferred_fields: Vec::new(),
         command_candidates: ImportCommandCandidates::default(),
+        github: None,
     })
 }
 
@@ -231,7 +232,9 @@ pub fn import_repository_with_options(
     let setup_cfg = load_first_existing_file(root, &["setup.cfg"])?;
     let go_mod = load_first_existing_file(root, &["go.mod"])?;
     let pom_xml = load_first_existing_file(root, &["pom.xml"])?;
+    let maven_wrapper = root.join("mvnw").is_file();
     let build_gradle = load_first_existing_file(root, &["build.gradle", "build.gradle.kts"])?;
+    let gradle_wrapper = root.join("gradlew").is_file();
     let composer_json = load_first_existing_file(root, &["composer.json"])?;
     let csproj = load_first_root_file_with_extension(root, "csproj")?;
     let mix_exs = load_first_existing_file(root, &["mix.exs"])?;
@@ -357,7 +360,9 @@ pub fn import_repository_with_options(
         setup_cfg: setup_cfg.as_ref(),
         go_mod: go_mod.as_ref(),
         pom_xml: pom_xml.as_ref(),
+        maven_wrapper,
         build_gradle: build_gradle.as_ref(),
+        gradle_wrapper,
         composer_json: composer_json.as_ref(),
         csproj: csproj.as_ref(),
         mix_exs: mix_exs.as_ref(),
@@ -448,14 +453,10 @@ pub fn import_repository_with_options(
         }
     }
     if let Some(command) = imported_commands.build.as_ref() {
-        if matches!(command.provenance, ImportedCommandProvenance::Imported) {
-            note_import(&mut imported_sources, &command.source_path);
-        }
+        note_import(&mut imported_sources, &command.source_path);
     }
     if let Some(command) = imported_commands.test.as_ref() {
-        if matches!(command.provenance, ImportedCommandProvenance::Imported) {
-            note_import(&mut imported_sources, &command.source_path);
-        }
+        note_import(&mut imported_sources, &command.source_path);
     }
 
     let mut inferred_fields = inferred_defaults.clone();
@@ -664,6 +665,7 @@ pub fn import_repository_with_options(
                 .map(|s| CommandCandidateSelection {
                     command: s.command.clone(),
                     source_path: s.source_path.clone(),
+                    source_tier: s.source_tier,
                     provenance: s.provenance.clone(),
                 }),
             selected_test: imported_commands
@@ -672,9 +674,11 @@ pub fn import_repository_with_options(
                 .map(|s| CommandCandidateSelection {
                     command: s.command.clone(),
                     source_path: s.source_path.clone(),
+                    source_tier: s.source_tier,
                     provenance: s.provenance.clone(),
                 }),
         },
+        github: options.github.clone(),
     })
 }
 

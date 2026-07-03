@@ -108,6 +108,9 @@ pub(crate) fn crawl_repository_from_snapshot(
             github: Some(GitHubSnapshotFacts {
                 fork: snapshot.fork,
                 parent: snapshot.parent.clone(),
+                repo_name: Some(request.repository.repo.clone()),
+                description: snapshot.description.clone(),
+                topics: snapshot.topics.clone(),
             }),
         },
     )?;
@@ -866,6 +869,54 @@ mod tests {
             .expect("index validates")
             .iter()
             .all(|finding| !finding.path.ends_with("record.toml")));
+
+        fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
+        fs::remove_dir_all(index_root).expect("index temp removed");
+    }
+
+    #[test]
+    fn crawl_replaces_suspect_readme_identity_with_github_facts() {
+        let index_root = temp_dir("suspect-readme-identity");
+        let materialized = materialize_repository(&MaterializeRepositoryInput {
+            repository: repository(),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# discussions\n\nDownload the latest release here.\n".into(),
+                }),
+                ..Default::default()
+            },
+        })
+        .expect("materialization succeeds");
+        let request = CrawlRepositoryRequest {
+            index_root: index_root.clone(),
+            repository: repository(),
+            generated_at: Some("2026-03-17T12:00:00Z".into()),
+            source_url: None,
+            synthesize: false,
+            synthesis_model: None,
+            synthesis_provider: None,
+            prior_synthesis_failure: None,
+        };
+        let github = snapshot(Some(
+            "Automation platform for coordinated multi-service deploys.",
+        ));
+
+        let report = crawl_repository_from_snapshot(&request, &github, &materialized)
+            .expect("crawl succeeds");
+        let manifest = &report.writeback_plan.factual.import_plan.manifest;
+        assert_eq!(manifest.repo.name, "orbit");
+        assert_eq!(
+            manifest.repo.description,
+            "Automation platform for coordinated multi-service deploys."
+        );
+        assert!(report
+            .writeback_plan
+            .factual
+            .import_plan
+            .evidence_text
+            .as_deref()
+            .is_some_and(|text| text.contains("after deterministic escalation")));
 
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");

@@ -5,9 +5,10 @@
   "repo_description": "This library provides [`anyhow::Error`][Error], a trait object based error type for easy idiomatic error handling in Rust applications.",
   "repo_build": "cargo build",
   "repo_test": "cargo test",
-  "overlay_status": "imported",
+  "overlay_status": "inferred",
   "trust_provenance": [
-    "imported"
+    "imported",
+    "inferred"
   ],
   "origin": "github.com/dtolnay/anyhow"
 }

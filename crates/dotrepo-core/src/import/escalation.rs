@@ -14,11 +14,13 @@ use dotrepo_schema::{BuildTestCandidate, Owners};
 use std::collections::HashSet;
 use std::path::Path;
 
-const ESCALATION_TIERS: [CommandSourceTier; 4] = [
+const ESCALATION_TIERS: [CommandSourceTier; 6] = [
+    CommandSourceTier::GitHubApi,
     CommandSourceTier::Manifest,
     CommandSourceTier::ContribDoc,
     CommandSourceTier::TaskScript,
     CommandSourceTier::Workflow,
+    CommandSourceTier::EcosystemDefault,
 ];
 
 const DEEPEN_SECURITY_PATHS: &[&str] = &[
@@ -89,10 +91,13 @@ fn adjudicate_request_deterministic(
         if unique_values.len() == 1 {
             let winner = tier_candidates[0];
             let confidence = match tier {
-                CommandSourceTier::Manifest
+                CommandSourceTier::GitHubApi
+                | CommandSourceTier::Manifest
                 | CommandSourceTier::ContribDoc
                 | CommandSourceTier::TaskScript => FieldConfidence::HighConfidencePresent,
-                CommandSourceTier::Workflow => FieldConfidence::MediumConfidencePresent,
+                CommandSourceTier::Workflow | CommandSourceTier::EcosystemDefault => {
+                    FieldConfidence::MediumConfidencePresent
+                }
             };
             return apply_adjudication_response(
                 &AdjudicationModelResponse {
@@ -138,7 +143,7 @@ fn adjudication_model_confidence(confidence: FieldConfidence) -> AdjudicationMod
             AdjudicationModelConfidence::High
         }
         FieldConfidence::MediumConfidencePresent => AdjudicationModelConfidence::Medium,
-        FieldConfidence::Unresolved => AdjudicationModelConfidence::Low,
+        FieldConfidence::Suspect | FieldConfidence::Unresolved => AdjudicationModelConfidence::Low,
     }
 }
 
@@ -185,26 +190,27 @@ pub fn apply_adjudication_to_import_plan(
                     .find(|candidate| candidate.value == *value)
                     .map(|candidate| candidate.source_path.clone())
                     .unwrap_or_else(|| "adjudicated".into());
-                let provenance = request
+                let source_tier = request
                     .candidates
                     .iter()
                     .find(|candidate| candidate.value == *value)
-                    .map(|candidate| {
-                        if matches!(
-                            candidate.source_tier,
-                            CommandSourceTier::Manifest
-                                | CommandSourceTier::ContribDoc
-                                | CommandSourceTier::TaskScript
-                        ) {
-                            ImportedCommandProvenance::Imported
-                        } else {
-                            ImportedCommandProvenance::Inferred
-                        }
-                    })
-                    .unwrap_or(ImportedCommandProvenance::Inferred);
+                    .map(|candidate| candidate.source_tier)
+                    .unwrap_or(CommandSourceTier::Workflow);
+                let provenance = if matches!(
+                    source_tier,
+                    CommandSourceTier::GitHubApi
+                        | CommandSourceTier::Manifest
+                        | CommandSourceTier::ContribDoc
+                        | CommandSourceTier::TaskScript
+                ) {
+                    ImportedCommandProvenance::Imported
+                } else {
+                    ImportedCommandProvenance::Inferred
+                };
                 let selection = CommandCandidateSelection {
                     command: safe_value.clone(),
                     source_path: source_path.clone(),
+                    source_tier,
                     provenance,
                 };
                 let bullet = format!(
@@ -217,6 +223,10 @@ pub fn apply_adjudication_to_import_plan(
                 } else if result.field == "repo.test" {
                     plan.manifest.repo.test = Some(safe_value);
                     plan.command_candidates.selected_test = Some(selection);
+                } else if result.field == "repo.name" {
+                    plan.manifest.repo.name = safe_value;
+                } else if result.field == "repo.description" {
+                    plan.manifest.repo.description = safe_value;
                 }
                 if let Some(ref mut evidence) = plan.evidence_text {
                     evidence.push_str("\n- ");
@@ -494,6 +504,7 @@ fn recompute_field_score_summary(field_scores: &mut FieldScoreReport) {
     let mut high_confidence_present = Vec::new();
     let mut medium_confidence_present = Vec::new();
     let mut high_confidence_absent = Vec::new();
+    let mut suspect = Vec::new();
     let mut unresolved = Vec::new();
     for score in &field_scores.scores {
         match score.confidence {
@@ -503,6 +514,7 @@ fn recompute_field_score_summary(field_scores: &mut FieldScoreReport) {
             FieldConfidence::MediumConfidencePresent => {
                 medium_confidence_present.push(score.field.clone())
             }
+            FieldConfidence::Suspect => suspect.push(score.field.clone()),
             FieldConfidence::HighConfidenceAbsent => {
                 high_confidence_absent.push(score.field.clone())
             }
@@ -512,9 +524,11 @@ fn recompute_field_score_summary(field_scores: &mut FieldScoreReport) {
     field_scores.summary.high_confidence_present = high_confidence_present;
     field_scores.summary.medium_confidence_present = medium_confidence_present;
     field_scores.summary.high_confidence_absent = high_confidence_absent;
+    field_scores.summary.suspect = suspect;
     field_scores.summary.unresolved = unresolved;
     field_scores.summary.eligible_for_auto_publish = field_scores.summary.unresolved.is_empty()
         && field_scores.summary.medium_confidence_present.is_empty();
+    field_scores.summary.eligible_for_auto_publish &= field_scores.summary.suspect.is_empty();
 }
 
 fn run_model_escalation(
@@ -1152,11 +1166,9 @@ mod tests {
     }
 
     #[test]
-    fn confident_abstention_labels_candidates_by_ecosystem_when_recognized() {
-        // A genuinely polyglot repository (Cargo.toml + package.json at the
-        // same manifest tier) should preserve both candidates with their
-        // inferred ecosystem labels, matching the real oven-sh/bun and
-        // django/django cases found in production.
+    fn declared_script_avoids_polyglot_default_escalation() {
+        // A declared package script is stronger evidence than the conventional
+        // command merely implied by Cargo.toml, so this needs no model call.
         let root = temp_dir("polyglot-ecosystem-labels");
         fs::write(
             root.join("README.md"),
@@ -1211,16 +1223,9 @@ mod tests {
             },
         );
 
-        assert_eq!(report.model_calls, 1);
-        assert_eq!(plan.manifest.repo.build, None);
-        let candidates = &plan.manifest.repo.build_candidates;
-        assert_eq!(candidates.len(), 2);
-        assert!(candidates
-            .iter()
-            .any(|c| c.source == "Cargo.toml" && c.ecosystem.as_deref() == Some("Rust")));
-        assert!(candidates
-            .iter()
-            .any(|c| c.source == "package.json" && c.ecosystem.as_deref() == Some("Node.js")));
+        assert_eq!(report.model_calls, 0);
+        assert_eq!(plan.manifest.repo.build.as_deref(), Some("npm run build"));
+        assert!(plan.manifest.repo.build_candidates.is_empty());
 
         fs::remove_dir_all(root).expect("cleanup");
     }

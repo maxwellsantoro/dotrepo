@@ -21,16 +21,25 @@ pub fn score_import_fields(
         .imported_sources
         .iter()
         .any(|s| s.eq_ignore_ascii_case("readme.md"));
+    let name_conflict = plan
+        .github
+        .as_ref()
+        .and_then(|github| github.repo_name.as_deref())
+        .is_some_and(|slug| !repository_names_match(&plan.manifest.repo.name, slug));
     scores.push(FieldScore {
         field: "repo.name".into(),
-        confidence: if name_has_readme_source {
+        confidence: if name_conflict {
+            FieldConfidence::Suspect
+        } else if name_has_readme_source {
             FieldConfidence::HighConfidencePresent
         } else {
             FieldConfidence::MediumConfidencePresent
         },
         source: plan.imported_sources.first().cloned(),
         value: Some(plan.manifest.repo.name.clone()),
-        reason: if name_has_readme_source {
+        reason: if name_conflict {
+            "README-derived name conflicts with GitHub repository name".into()
+        } else if name_has_readme_source {
             "extracted from README heading with post-cleaners".into()
         } else {
             "fell back to directory name or GitHub API".into()
@@ -38,16 +47,28 @@ pub fn score_import_fields(
     });
 
     // repo.description
+    let description_conflict = plan.github.as_ref().is_some_and(|github| {
+        description_conflicts_with_github(
+            &plan.manifest.repo.description,
+            github.description.as_deref(),
+            &github.topics,
+        )
+    });
     scores.push(FieldScore {
         field: "repo.description".into(),
-        confidence: if name_has_readme_source {
+        confidence: if description_conflict {
+            FieldConfidence::Suspect
+        } else if name_has_readme_source {
             FieldConfidence::HighConfidencePresent
         } else {
             FieldConfidence::MediumConfidencePresent
         },
         source: plan.imported_sources.first().cloned(),
         value: Some(plan.manifest.repo.description.clone()),
-        reason: if name_has_readme_source {
+        reason: if description_conflict {
+            "README-derived description has no meaningful overlap with GitHub description or topics"
+                .into()
+        } else if name_has_readme_source {
             "extracted from README paragraph with post-cleaners".into()
         } else {
             "fell back to GitHub API or inferred".into()
@@ -85,15 +106,27 @@ pub fn score_import_fields(
         .absent_fields
         .contains(&"repo.build".to_string());
     if let Some(ref build) = plan.manifest.repo.build {
-        let is_manifest = plan
+        let is_ecosystem_default = plan
             .command_candidates
             .selected_build
             .as_ref()
-            .map(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            .map(|s| {
+                matches!(
+                    s.source_tier,
+                    super::types::CommandSourceTier::EcosystemDefault
+                )
+            })
             .unwrap_or(false);
         scores.push(FieldScore {
             field: "repo.build".into(),
-            confidence: if is_manifest {
+            confidence: if is_ecosystem_default {
+                FieldConfidence::MediumConfidencePresent
+            } else if plan
+                .command_candidates
+                .selected_build
+                .as_ref()
+                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            {
                 FieldConfidence::HighConfidencePresent
             } else {
                 FieldConfidence::MediumConfidencePresent
@@ -104,8 +137,15 @@ pub fn score_import_fields(
                 .as_ref()
                 .map(|s| s.source_path.clone()),
             value: Some(build.clone()),
-            reason: if is_manifest {
-                "from manifest source".into()
+            reason: if is_ecosystem_default {
+                "inferred ecosystem default from build-tool metadata".into()
+            } else if plan
+                .command_candidates
+                .selected_build
+                .as_ref()
+                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            {
+                "from declared repository source".into()
             } else {
                 "from workflow fallback".into()
             },
@@ -136,15 +176,27 @@ pub fn score_import_fields(
         .absent_fields
         .contains(&"repo.test".to_string());
     if let Some(ref test) = plan.manifest.repo.test {
-        let is_manifest = plan
+        let is_ecosystem_default = plan
             .command_candidates
             .selected_test
             .as_ref()
-            .map(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            .map(|s| {
+                matches!(
+                    s.source_tier,
+                    super::types::CommandSourceTier::EcosystemDefault
+                )
+            })
             .unwrap_or(false);
         scores.push(FieldScore {
             field: "repo.test".into(),
-            confidence: if is_manifest {
+            confidence: if is_ecosystem_default {
+                FieldConfidence::MediumConfidencePresent
+            } else if plan
+                .command_candidates
+                .selected_test
+                .as_ref()
+                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            {
                 FieldConfidence::HighConfidencePresent
             } else {
                 FieldConfidence::MediumConfidencePresent
@@ -155,8 +207,15 @@ pub fn score_import_fields(
                 .as_ref()
                 .map(|s| s.source_path.clone()),
             value: Some(test.clone()),
-            reason: if is_manifest {
-                "from manifest source".into()
+            reason: if is_ecosystem_default {
+                "inferred ecosystem default from build-tool metadata".into()
+            } else if plan
+                .command_candidates
+                .selected_test
+                .as_ref()
+                .is_some_and(|s| matches!(s.provenance, ImportedCommandProvenance::Imported))
+            {
+                "from declared repository source".into()
             } else {
                 "from workflow fallback".into()
             },
@@ -331,19 +390,26 @@ pub fn score_import_fields(
         .filter(|s| s.confidence == FieldConfidence::HighConfidenceAbsent)
         .map(|s| s.field.clone())
         .collect();
+    let suspect: Vec<_> = scores
+        .iter()
+        .filter(|s| s.confidence == FieldConfidence::Suspect)
+        .map(|s| s.field.clone())
+        .collect();
     let unresolved: Vec<_> = scores
         .iter()
         .filter(|s| s.confidence == FieldConfidence::Unresolved)
         .map(|s| s.field.clone())
         .collect();
 
-    let eligible_for_auto_publish = unresolved.is_empty() && medium_confidence_present.is_empty();
+    let eligible_for_auto_publish =
+        unresolved.is_empty() && medium_confidence_present.is_empty() && suspect.is_empty();
 
     FieldScoreReport {
         scores,
         summary: FieldScoreSummary {
             high_confidence_present,
             medium_confidence_present,
+            suspect,
             high_confidence_absent,
             unresolved,
             eligible_for_auto_publish,
@@ -358,7 +424,12 @@ pub fn build_adjudication_requests(
     let unresolved_fields: Vec<&str> = report
         .scores
         .iter()
-        .filter(|s| s.confidence == FieldConfidence::Unresolved)
+        .filter(|s| {
+            matches!(
+                s.confidence,
+                FieldConfidence::Unresolved | FieldConfidence::Suspect
+            )
+        })
         .map(|s| s.field.as_str())
         .collect();
 
@@ -371,6 +442,43 @@ pub fn build_adjudication_requests(
     for field in &unresolved_fields {
         let is_build = *field == "repo.build";
         let is_test = *field == "repo.test";
+
+        if *field == "repo.name" || *field == "repo.description" {
+            let score_value = report
+                .scores
+                .iter()
+                .find(|score| score.field == *field)
+                .and_then(|score| score.value.clone());
+            let github_value = plan.github.as_ref().and_then(|github| {
+                if *field == "repo.name" {
+                    github.repo_name.clone()
+                } else {
+                    github.description.clone()
+                }
+            });
+            let mut candidates = Vec::new();
+            if let Some(value) = github_value.filter(|value| !value.trim().is_empty()) {
+                candidates.push(AdjudicationCandidate {
+                    value,
+                    source_path: "GitHub API".into(),
+                    source_tier: super::types::CommandSourceTier::GitHubApi,
+                });
+            }
+            if let Some(value) = score_value.filter(|value| !value.trim().is_empty()) {
+                candidates.push(AdjudicationCandidate {
+                    value,
+                    source_path: "README.md".into(),
+                    source_tier: super::types::CommandSourceTier::Manifest,
+                });
+            }
+            if !candidates.is_empty() {
+                requests.push(AdjudicationRequest {
+                    field: field.to_string(),
+                    candidates,
+                });
+            }
+            continue;
+        }
 
         if !is_build && !is_test {
             continue;
@@ -477,6 +585,7 @@ pub fn apply_adjudication_results(report: &mut FieldScoreReport, results: &[Adju
     let mut high_confidence_present = Vec::new();
     let mut medium_confidence_present = Vec::new();
     let mut high_confidence_absent = Vec::new();
+    let mut suspect = Vec::new();
     let mut unresolved = Vec::new();
     for score in &report.scores {
         match score.confidence {
@@ -486,6 +595,7 @@ pub fn apply_adjudication_results(report: &mut FieldScoreReport, results: &[Adju
             FieldConfidence::MediumConfidencePresent => {
                 medium_confidence_present.push(score.field.clone())
             }
+            FieldConfidence::Suspect => suspect.push(score.field.clone()),
             FieldConfidence::HighConfidenceAbsent => {
                 high_confidence_absent.push(score.field.clone())
             }
@@ -495,7 +605,70 @@ pub fn apply_adjudication_results(report: &mut FieldScoreReport, results: &[Adju
     report.summary.high_confidence_present = high_confidence_present;
     report.summary.medium_confidence_present = medium_confidence_present;
     report.summary.high_confidence_absent = high_confidence_absent;
+    report.summary.suspect = suspect;
     report.summary.unresolved = unresolved;
-    report.summary.eligible_for_auto_publish =
-        report.summary.unresolved.is_empty() && report.summary.medium_confidence_present.is_empty();
+    report.summary.eligible_for_auto_publish = report.summary.unresolved.is_empty()
+        && report.summary.medium_confidence_present.is_empty()
+        && report.summary.suspect.is_empty();
+}
+
+fn repository_names_match(candidate: &str, github_name: &str) -> bool {
+    let compact = |value: &str| {
+        value
+            .chars()
+            .filter(|ch| ch.is_alphanumeric())
+            .flat_map(char::to_lowercase)
+            .collect::<String>()
+    };
+    let candidate = compact(candidate);
+    let github_name = compact(github_name);
+    !candidate.is_empty()
+        && !github_name.is_empty()
+        && (candidate == github_name
+            || candidate.contains(&github_name)
+            || github_name.contains(&candidate))
+}
+
+fn description_conflicts_with_github(
+    candidate: &str,
+    github_description: Option<&str>,
+    topics: &[String],
+) -> bool {
+    let candidate_tokens = meaningful_tokens(candidate);
+    let mut reference_tokens = github_description
+        .map(meaningful_tokens)
+        .unwrap_or_default();
+    for topic in topics {
+        reference_tokens.extend(meaningful_tokens(topic));
+    }
+    !candidate_tokens.is_empty()
+        && !reference_tokens.is_empty()
+        && candidate_tokens.is_disjoint(&reference_tokens)
+}
+
+fn meaningful_tokens(value: &str) -> std::collections::HashSet<String> {
+    const STOP: &[&str] = &[
+        "the",
+        "and",
+        "for",
+        "with",
+        "from",
+        "this",
+        "that",
+        "your",
+        "you",
+        "are",
+        "use",
+        "using",
+        "repository",
+        "project",
+        "tool",
+        "latest",
+        "here",
+    ];
+    value
+        .split(|ch: char| !ch.is_alphanumeric())
+        .map(str::to_ascii_lowercase)
+        .filter(|token| token.len() >= 3 && !STOP.contains(&token.as_str()))
+        .collect()
 }
