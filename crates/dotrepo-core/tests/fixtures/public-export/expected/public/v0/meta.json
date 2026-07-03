@@ -9,10 +9,17 @@
     "etag": "\"dotrepo-v0-afd5f502456c1c2bc99b8a86051736c6ce7c5530d61ff7c8cc6f9edf41d4e766\""
   },
   "snapshotId": "afd5f502456c",
+  "retention": {
+    "edgeGuarantee": "current_and_previous_snapshot",
+    "archiveGuarantee": "all_published_snapshots_retrievable_from_archive",
+    "logGuarantee": "append_only_never_pruned"
+  },
   "paths": {
     "root": "/v0/snapshots/afd5f502456c",
     "inventory": "/v0/snapshots/afd5f502456c/repos/index.json",
     "files": "/v0/snapshots/afd5f502456c/files.json",
-    "queryInputRoot": "/v0/snapshots/afd5f502456c/query-input/"
+    "stats": "/v0/stats.json",
+    "queryInputRoot": "/v0/snapshots/afd5f502456c/query-input/",
+    "snapshotLog": "/v0/snapshots/log.json"
   }
 }

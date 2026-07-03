@@ -101,6 +101,8 @@ The live smoke checks:
 
 - the deployed `v0/meta.json`, `v0/files.json`, and `v0/repos/index.json`
   exactly match the reviewed export that was staged for deployment
+- the deployed `v0/snapshots/log.json` and `v0/stats.json` exactly match the
+  reviewed export and agree with the current pointer's file/repository counts
 - `v0/meta.json` points at the digest-keyed tree under `v0/snapshots/`; direct
   snapshot responses are immutable while compatibility paths revalidate
 - a deterministic sample of public paths from `v0/files.json`, including the
@@ -114,6 +116,36 @@ The live smoke checks:
 
 That keeps local review, pre-deploy smoke, and post-deploy smoke aligned on one
 snapshot family.
+
+## Snapshot retention and archive
+
+The published retention contract is:
+
+- current and previous immutable snapshots are kept in the Worker static asset
+  bundle
+- every published immutable snapshot is retrievable from the archive layer
+- `/v0/snapshots/log.json` is append-only and never pruned
+
+The Worker supports an optional `SNAPSHOT_ARCHIVE` R2 binding. When a direct
+`/v0/snapshots/<snapshotId>/...` asset is not present in the static bundle, the
+Worker attempts to read the same key from that binding before returning 404.
+This keeps the hot path fast while avoiding the static-asset file-count ceiling
+for historical snapshots.
+
+Bucket creation and binding configuration are operator-owned setup steps. Once
+the binding exists, archive writes should upload immutable snapshot objects
+under their public path keys, for example:
+
+```text
+v0/snapshots/<snapshotId>/repos/index.json
+v0/snapshots/<snapshotId>/files.json
+v0/snapshots/log.json
+```
+
+The scheduled canary checks the pointer, canonical files, snapshot log, and
+stats every run. After the archive binding is live and at least two snapshots
+exist, add a weekly canary sample from an older snapshot so archive rot cannot
+hide behind a healthy current edge snapshot.
 
 ## Published shape
 
@@ -169,3 +201,5 @@ uv run python scripts/check_release_gate.py --skip-vsix
 - Do not rely on a root `.env` file for GitHub workflow deploy auth.
 - Do not edit `public/` by hand before deploy; stage from a validated export
   snapshot instead.
+- Do not treat the static asset bundle as the historical archive. It is the
+  current+previous hot serving layer; R2 is the retention layer.

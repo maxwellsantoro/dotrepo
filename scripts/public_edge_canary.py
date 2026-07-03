@@ -83,12 +83,22 @@ def check_dotrepo(origin: str) -> dict[str, Any]:
 
     inventory = fetch_json(origin, inventory_path)
     files = fetch_json(origin, files_path)
+    log = fetch_json(origin, "/v0/snapshots/log.json")
+    stats = fetch_json(origin, "/v0/stats.json")
     expected_freshness = {
         key: meta.get(key) for key in ("generatedAt", "snapshotDigest", "staleAfter") if meta.get(key) is not None
     }
     require(freshness(inventory, "inventory") == expected_freshness, "inventory freshness disagrees with pointer")
     require(freshness(files, "files manifest") == expected_freshness, "files freshness disagrees with pointer")
     require(inventory.get("repositoryCount") == len(inventory.get("repositories", [])), "repository count is inconsistent")
+    log_entries = log.get("entries")
+    require(isinstance(log_entries, list) and log_entries, "snapshot log is empty")
+    latest_log = log_entries[-1]
+    require(latest_log.get("snapshotDigest") == digest, "snapshot log latest digest disagrees with pointer")
+    require(latest_log.get("repositoryCount") == inventory.get("repositoryCount"), "snapshot log repository count disagrees")
+    require(latest_log.get("fileCount") == files.get("fileCount"), "snapshot log file count disagrees")
+    require(stats.get("latest", {}).get("snapshotDigest") == digest, "stats latest digest disagrees with pointer")
+    require(stats.get("snapshotCount") == log.get("snapshotCount"), "stats snapshot count disagrees with log")
     for entry in files.get("files", []):
         require(
             isinstance(entry, dict) and str(entry.get("path", "")).startswith(root.lstrip("/") + "/"),
@@ -126,6 +136,7 @@ def check_dotrepo(origin: str) -> dict[str, Any]:
         "staleAfter": meta.get("staleAfter"),
         "repositoryCount": inventory.get("repositoryCount"),
         "fileCount": files.get("fileCount"),
+        "snapshotCount": log.get("snapshotCount"),
         "siteRev": manifest.get("site_rev"),
     }
 

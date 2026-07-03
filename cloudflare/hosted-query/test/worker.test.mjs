@@ -50,6 +50,21 @@ function makeAssets(files) {
   };
 }
 
+function makeR2Archive(files) {
+  return {
+    async get(key) {
+      const body = files.get(key);
+      if (body === undefined) {
+        return null;
+      }
+      return {
+        body,
+        httpEtag: `"${key.length.toString(16)}"`
+      };
+    }
+  };
+}
+
 test("serves query responses from exported query-input fixtures", async () => {
   const files = new Map([
     [
@@ -764,6 +779,45 @@ test("marks pointer and immutable snapshot responses with distinct cache policie
 
   assert.equal(pointer.headers.get("cache-control"), "public, max-age=60, must-revalidate");
   assert.equal(snapshot.headers.get("cache-control"), "public, max-age=31536000, immutable");
+});
+
+test("falls through to R2 archive for older immutable snapshots", async () => {
+  const files = new Map([
+    ["/v0/meta.json", "{\"snapshotDigest\":\"current\"}"]
+  ]);
+  const archive = new Map([
+    ["v0/snapshots/old123/repos/index.json", "{\"snapshot\":\"old123\"}"]
+  ]);
+  const env = {
+    ASSETS: makeAssets(files),
+    BASE_PATH: "/",
+    SNAPSHOT_ARCHIVE: makeR2Archive(archive)
+  };
+
+  const response = await handleRequest(
+    new Request("https://example.test/v0/snapshots/old123/repos/index.json"),
+    env
+  );
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { snapshot: "old123" });
+  assert.equal(response.headers.get("cache-control"), "public, max-age=31536000, immutable");
+  assert.equal(response.headers.get("x-dotrepo-snapshot-source"), "archive");
+});
+
+test("keeps returning 404 for missing archived snapshots", async () => {
+  const env = {
+    ASSETS: makeAssets(new Map()),
+    BASE_PATH: "/",
+    SNAPSHOT_ARCHIVE: makeR2Archive(new Map())
+  };
+
+  const response = await handleRequest(
+    new Request("https://example.test/v0/snapshots/missing/repos/index.json"),
+    env
+  );
+
+  assert.equal(response.status, 404);
 });
 
 test("serves the root document without redirecting through /index.html", async () => {

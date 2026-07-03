@@ -199,6 +199,33 @@ async function fetchInternalAsset(env, request, pathname) {
   return env.ASSETS.fetch(assetUrl);
 }
 
+async function fetchArchivedSnapshot(env, pathname) {
+  if (!pathname.startsWith("/v0/snapshots/") || env.SNAPSHOT_ARCHIVE === undefined) {
+    return null;
+  }
+  const key = pathname.replace(/^\/+/, "");
+  const object = await env.SNAPSHOT_ARCHIVE.get(key);
+  if (object === null) {
+    return null;
+  }
+  const headers = new Headers();
+  headers.set("content-type", pathname.endsWith(".json") ? "application/json; charset=utf-8" : "application/octet-stream");
+  headers.set("cache-control", "public, max-age=31536000, immutable");
+  headers.set("x-dotrepo-snapshot-source", "archive");
+  if (object.httpEtag) {
+    headers.set("etag", object.httpEtag);
+  }
+  return new Response(object.body, { status: 200, headers });
+}
+
+async function fetchSnapshotAssetOrArchive(env, request, pathname) {
+  const response = await fetchInternalAsset(env, request, pathname);
+  if (response.status !== 404) {
+    return response;
+  }
+  return (await fetchArchivedSnapshot(env, pathname)) ?? response;
+}
+
 async function loadMeta(env, request) {
   const response = await fetchInternalAsset(env, request, "/v0/meta.json");
   if (!response.ok) {
@@ -1009,6 +1036,8 @@ async function serveStaticAsset(request, env, strippedPath) {
   let cacheControl = null;
   if (strippedPath === "/v0/meta.json") {
     cacheControl = "public, max-age=60, must-revalidate";
+  } else if (strippedPath === "/v0/stats.json" || strippedPath === "/v0/snapshots/log.json") {
+    cacheControl = "no-cache";
   } else if (strippedPath === "/v0/files.json" || strippedPath.startsWith("/v0/repos/")) {
     try {
       const meta = await loadMeta(env, request);
@@ -1029,7 +1058,9 @@ async function serveStaticAsset(request, env, strippedPath) {
     cacheControl = "public, max-age=31536000, immutable";
   }
   const assetRequest = new Request(new URL(assetPath, request.url), request);
-  const response = await env.ASSETS.fetch(assetRequest);
+  const response = assetPath.startsWith("/v0/snapshots/")
+    ? await fetchSnapshotAssetOrArchive(env, assetRequest, assetPath)
+    : await env.ASSETS.fetch(assetRequest);
   return cacheControl === null ? response : withCacheControl(response, cacheControl);
 }
 

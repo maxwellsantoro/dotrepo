@@ -114,10 +114,17 @@ fn public_snapshot_metadata_with_base(
         strategy: PUBLIC_CONTENT_ADDRESSED_STRATEGY,
         validators,
         snapshot_id,
+        retention: PublicSnapshotRetention {
+            edge_guarantee: "current_and_previous_snapshot".into(),
+            archive_guarantee: "all_published_snapshots_retrievable_from_archive".into(),
+            log_guarantee: "append_only_never_pruned".into(),
+        },
         paths: PublicSnapshotPaths {
             inventory: format!("{root}/repos/index.json"),
             files: format!("{root}/files.json"),
+            stats: format!("{base_path}/v0/stats.json"),
             query_input_root: format!("{root}/query-input/"),
+            snapshot_log: format!("{base_path}/v0/snapshots/log.json"),
             root,
         },
     }
@@ -164,6 +171,85 @@ pub fn public_export_file_manifest(
         freshness,
         file_count: files.len(),
         files,
+    })
+}
+
+fn snapshot_log_path(out_root: &Path) -> PathBuf {
+    out_root.join("v0/snapshots/log.json")
+}
+
+fn load_snapshot_log(out_root: &Path) -> Result<Vec<PublicSnapshotLogEntry>> {
+    let path = snapshot_log_path(out_root);
+    if !path.exists() {
+        return Ok(Vec::new());
+    }
+    let text = fs::read_to_string(&path).map_err(|err| {
+        anyhow!(
+            "failed to read previous snapshot log {}: {}",
+            path.display(),
+            err
+        )
+    })?;
+    let log: PublicSnapshotLog = serde_json::from_str(&text)
+        .map_err(|err| anyhow!("invalid snapshot log {}: {}", path.display(), err))?;
+    Ok(log.entries)
+}
+
+fn public_snapshot_log(
+    out_root: &Path,
+    freshness: &PublicFreshness,
+    repository_count: usize,
+    file_count: usize,
+) -> Result<PublicSnapshotLog> {
+    let mut entries = load_snapshot_log(out_root)?;
+    let current = PublicSnapshotLogEntry {
+        snapshot_id: snapshot_id(&freshness.snapshot_digest),
+        snapshot_digest: freshness.snapshot_digest.clone(),
+        generated_at: freshness.generated_at.clone(),
+        repository_count,
+        file_count,
+    };
+    match entries
+        .iter()
+        .position(|entry| entry.snapshot_digest == current.snapshot_digest)
+    {
+        Some(index) => entries[index] = current,
+        None => entries.push(current),
+    }
+    entries.sort_by(|left, right| {
+        left.generated_at
+            .cmp(&right.generated_at)
+            .then_with(|| left.snapshot_digest.cmp(&right.snapshot_digest))
+    });
+    Ok(PublicSnapshotLog {
+        api_version: PUBLIC_API_VERSION.into(),
+        snapshot_count: entries.len(),
+        entries,
+    })
+}
+
+fn public_snapshot_stats(log: &PublicSnapshotLog) -> serde_json::Value {
+    let latest = log.entries.last().cloned();
+    let deltas = log
+        .entries
+        .windows(2)
+        .map(|pair| {
+            let previous = &pair[0];
+            let current = &pair[1];
+            serde_json::json!({
+                "fromSnapshotId": previous.snapshot_id,
+                "toSnapshotId": current.snapshot_id,
+                "repositoryCountDelta": current.repository_count as isize - previous.repository_count as isize,
+                "fileCountDelta": current.file_count as isize - previous.file_count as isize,
+            })
+        })
+        .collect::<Vec<_>>();
+    serde_json::json!({
+        "apiVersion": PUBLIC_API_VERSION,
+        "latest": latest,
+        "snapshotCount": log.snapshot_count,
+        "history": log.entries,
+        "deltas": deltas,
     })
 }
 
@@ -317,12 +403,13 @@ pub fn export_public_index_static_with_options(
         inventory.push(entry);
     }
 
+    let repository_count = inventory.len();
     outputs.push((
         out_root.join("v0/repos/index.json"),
         serde_json::to_string_pretty(&PublicRepositoryInventoryResponse {
             api_version: PUBLIC_API_VERSION,
             freshness: freshness.clone(),
-            repository_count: inventory.len(),
+            repository_count,
             repositories: inventory,
         })?,
     ));
@@ -344,6 +431,7 @@ pub fn export_public_index_static_with_options(
             Some((snapshot_root.join(canonical_relative), contents.clone()))
         })
         .collect::<Vec<_>>();
+    let canonical_file_count = canonical_outputs.len();
     let file_manifest = public_export_file_manifest(out_root, freshness, &canonical_outputs)?;
     outputs.extend(canonical_outputs);
     let rendered_file_manifest = serde_json::to_string_pretty(&file_manifest)?;
@@ -352,6 +440,20 @@ pub fn export_public_index_static_with_options(
         rendered_file_manifest.clone(),
     ));
     outputs.push((snapshot_root.join("files.json"), rendered_file_manifest));
+    let snapshot_log = public_snapshot_log(
+        out_root,
+        &file_manifest.freshness,
+        repository_count,
+        canonical_file_count,
+    )?;
+    outputs.push((
+        snapshot_log_path(out_root),
+        serde_json::to_string_pretty(&snapshot_log)?,
+    ));
+    outputs.push((
+        out_root.join("v0/stats.json"),
+        serde_json::to_string_pretty(&public_snapshot_stats(&snapshot_log))?,
+    ));
 
     let pagedigest_previous_path = pagedigest_previous
         .map(Path::to_path_buf)

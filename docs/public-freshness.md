@@ -56,16 +56,41 @@ refetching profile, trust, query-input, or inventory files.
 
 ### Content-addressed paths
 
-`/v0/meta.json` is the only mutable snapshot pointer. Its `snapshotId` is the
-first 12 hexadecimal characters of `snapshotDigest`, and its `paths` object
-names the immutable snapshot root, inventory, file manifest, and internal
-query-input root under `/v0/snapshots/<snapshotId>/`.
+`/v0/meta.json` is the primary mutable snapshot pointer. Its `snapshotId` is
+the first 12 hexadecimal characters of `snapshotDigest`, and its `paths` object
+names the immutable snapshot root, inventory, file manifest, stats document,
+snapshot log, and internal query-input root.
 
 Canonical snapshot responses are served with a one-year `immutable` cache
 policy. Compatibility paths such as `/v0/repos/index.json` remain available,
 but the Worker resolves them through the current pointer and marks them
 `no-cache`. Every JSON record still carries the full digest and generation
 time in `freshness`, so a consumer can reject an accidentally mixed response.
+
+### Retention contract
+
+Snapshot retention is part of the public trust surface:
+
+- current and previous snapshots are guaranteed on the static edge path for
+  fast reads, instant rollback, and deploy-race tolerance
+- every published snapshot is expected to remain retrievable from the archive
+  path, backed by the Worker `SNAPSHOT_ARCHIVE` R2 binding when configured
+- `/v0/snapshots/log.json` is append-only and never pruned; it lists every
+  published digest with `generatedAt`, `repositoryCount`, and `fileCount`
+
+The static asset bundle is intentionally not the historical archive. Workers
+static asset deployments replace the deployed asset manifest, so retaining every
+historical digest in the bundle would eventually fail on file-count limits even
+though the raw storage cost is small. Consumers should use the current pointer
+for hot reads, immutable snapshot URLs for exact references, and the log for
+audit history.
+
+### `stats.json`
+
+`/v0/stats.json` is a mutable instrumentation document derived from the
+append-only snapshot log. It exposes the latest snapshot, the retained history,
+and count deltas between adjacent snapshots. Phase 2 dashboard and essay work
+should build from this document rather than scraping individual payload paths.
 
 ### `files.json`
 
@@ -83,7 +108,9 @@ the exact immutable payload set and hashes.
 
 The deployed export currently promises a seven-day `staleAfter` window. That
 matches the cadence the project can sustain without pretending a push-driven
-deployment is a daily refresh service.
+deployment is a daily refresh service. The scheduled public-edge canary must
+stay green for seven consecutive days before Phase 0 is declared
+operationally complete.
 
 For local review, mirrors, or agent caches, use the deterministic delta helper:
 

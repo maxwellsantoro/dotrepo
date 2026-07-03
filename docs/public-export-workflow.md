@@ -29,7 +29,9 @@ public/
             index.json
             profile.json
             trust.json
+    stats.json
     snapshots/
+      log.json
       <snapshotId>/
         files.json
         repos/
@@ -101,8 +103,13 @@ cargo run -p dotrepo-cli -- public export \
 Important details:
 - `snapshotDigest` is recomputed from the exported `index/` tree
 - `meta.json` is the sole mutable pointer and names the immutable snapshot paths
+- `meta.json` publishes the retention contract: current+previous at the static
+  edge, all published snapshots through archive, and append-only snapshot log
 - the canonical `files.json` lists only immutable snapshot payloads with byte
   sizes and SHA-256 digests
+- `v0/snapshots/log.json` records each published snapshot digest,
+  `generatedAt`, repository count, and payload count
+- `v0/stats.json` derives latest/history/delta instrumentation from that log
 - mutable `v0/repos/` and `v0/files.json` copies remain compatibility surfaces;
   the Worker resolves them through the pointer with revalidation required
 - deterministic mode changes freshness timestamps, not response semantics
@@ -170,6 +177,8 @@ upstream native `.repo`.
 - exports the public tree with the Cloudflare base path
 - renders a root landing page with `scripts/render_public_pages_landing.py`
 - stages the snapshot into the in-repo Worker project
+- preserves the previous staged immutable snapshot when one exists locally, so
+  the static asset bundle carries current+previous for rollback tolerance
 - deploys to `dotrepo.org`
 - uses a seven-day freshness promise until end-to-end daily automation has
   demonstrated a reliable cadence
@@ -178,16 +187,21 @@ upstream native `.repo`.
 - verifies the deployed `meta.json`, `files.json`, and repository inventory are
   byte-for-byte JSON-equivalent to the reviewed export snapshot before route
   smoke checks pass
+- verifies `v0/snapshots/log.json` and `v0/stats.json` agree with the deployed
+  pointer and current file/repository counts
 - verifies a deterministic public sample from `v0/files.json` against reviewed
   byte counts and SHA-256 hashes, covering the core contract files plus the
   first repository's exported JSON
 - a separate scheduled `public-edge-canary.yml` checks the homepage, pointer,
   canonical inventory, canonical file manifest, two records, both pagedigest
-  manifests, and pagedigest.org's shipped-artifact claims; repeated failures
-  update one GitHub issue instead of opening an issue storm
+  manifests, snapshot log, stats document, and pagedigest.org's shipped-artifact
+  claims; repeated failures update one GitHub issue instead of opening an issue
+  storm
 
-The export tree is the source of truth. The hosted surface deploys the same
-`public/` output.
+The export tree is the source of truth for the current snapshot. Historical
+payload retention belongs to the archive layer; the static asset bundle should
+only be expected to carry the current and immediately previous immutable
+snapshot.
 
 For local same-origin review, `dotrepo-public-query` can now serve that
 exported `public/` tree together with the hosted query route from one process.

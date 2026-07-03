@@ -13,6 +13,7 @@ SPEC.loader.exec_module(smoke)
 
 def write_reviewed_export(root: Path, *, snapshot_digest: str = "abc123") -> None:
     (root / "v0" / "repos").mkdir(parents=True)
+    (root / "v0" / "snapshots").mkdir(parents=True)
     meta = {
         "apiVersion": "v0",
         "generatedAt": "2026-03-10T18:30:00Z",
@@ -47,11 +48,35 @@ def write_reviewed_export(root: Path, *, snapshot_digest: str = "abc123") -> Non
             }
         ],
     }
+    snapshot_log = {
+        "apiVersion": "v0",
+        "snapshotCount": 1,
+        "entries": [
+            {
+                "snapshotId": snapshot_digest[:12],
+                "snapshotDigest": snapshot_digest,
+                "generatedAt": "2026-03-10T18:30:00Z",
+                "repositoryCount": 1,
+                "fileCount": 1,
+            }
+        ],
+    }
+    stats = {
+        "apiVersion": "v0",
+        "latest": snapshot_log["entries"][0],
+        "snapshotCount": 1,
+        "history": snapshot_log["entries"],
+        "deltas": [],
+    }
     (root / "v0" / "meta.json").write_text(json.dumps(meta, indent=2) + "\n")
     (root / "v0" / "files.json").write_text(json.dumps(files, indent=2) + "\n")
     (root / "v0" / "repos" / "index.json").write_text(
         json.dumps(inventory, indent=2) + "\n"
     )
+    (root / "v0" / "snapshots" / "log.json").write_text(
+        json.dumps(snapshot_log, indent=2) + "\n"
+    )
+    (root / "v0" / "stats.json").write_text(json.dumps(stats, indent=2) + "\n")
 
 
 def test_load_reviewed_public_state_reads_deploy_coherence_inputs(tmp_path: Path) -> None:
@@ -63,6 +88,8 @@ def test_load_reviewed_public_state_reads_deploy_coherence_inputs(tmp_path: Path
     assert reviewed["meta"]["snapshotDigest"] == "abc123"
     assert reviewed["files"]["freshness"]["snapshotDigest"] == "abc123"
     assert reviewed["inventory"]["repositoryCount"] == 1
+    assert reviewed["log"]["entries"][0]["snapshotDigest"] == "abc123"
+    assert reviewed["stats"]["latest"]["snapshotDigest"] == "abc123"
 
 
 def test_deploy_coherence_mismatches_reports_exact_live_drift(tmp_path: Path) -> None:
@@ -73,11 +100,14 @@ def test_deploy_coherence_mismatches_reports_exact_live_drift(tmp_path: Path) ->
         "meta": {**reviewed["meta"], "snapshotDigest": "old"},
         "files": reviewed["files"],
         "inventory": {**reviewed["inventory"], "repositoryCount": 0},
+        "log": reviewed["log"],
+        "stats": {**reviewed["stats"], "snapshotCount": 0},
     }
 
     assert smoke.deploy_coherence_mismatches(reviewed, live) == [
         "v0/meta.json",
         "v0/repos/index.json",
+        "v0/stats.json",
     ]
 
 

@@ -191,6 +191,18 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
             meta["snapshotDigest"].as_str().unwrap()
         ))
     );
+    assert_eq!(
+        meta["retention"]["edgeGuarantee"],
+        Value::String("current_and_previous_snapshot".into())
+    );
+    assert_eq!(
+        meta["retention"]["archiveGuarantee"],
+        Value::String("all_published_snapshots_retrievable_from_archive".into())
+    );
+    assert_eq!(
+        meta["paths"]["snapshotLog"],
+        Value::String("/v0/snapshots/log.json".into())
+    );
 
     let files = serde_json::from_str::<Value>(
         generated
@@ -224,6 +236,25 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
             ))
             && entry["bytes"].as_u64().is_some_and(|bytes| bytes > 0)
     }));
+
+    let log = serde_json::from_str::<Value>(
+        generated
+            .get("v0/snapshots/log.json")
+            .expect("snapshot log output"),
+    )
+    .expect("snapshot log parses");
+    assert_eq!(log["apiVersion"], Value::String("v0".into()));
+    assert_eq!(log["snapshotCount"], Value::from(1));
+    assert_eq!(
+        log["entries"][0]["snapshotId"],
+        Value::String(snapshot_id.into())
+    );
+    assert_eq!(
+        log["entries"][0]["snapshotDigest"],
+        meta["snapshotDigest"].clone()
+    );
+    assert_eq!(log["entries"][0]["repositoryCount"], Value::from(2));
+    assert_eq!(log["entries"][0]["fileCount"], Value::from(11));
 
     let orbit_query_input = serde_json::from_str::<Value>(
         generated

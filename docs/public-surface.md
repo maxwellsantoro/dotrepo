@@ -69,6 +69,11 @@ Snapshot-level mechanics for agents and mirrors:
   (per-file SHA-256 and byte size) support cheap revalidation and selective
   refetch; `scripts/diff_public_export_files.py` turns two `files.json`
   manifests into a delta report
+- `meta.json` also publishes the retention contract. The hot edge path carries
+  the current and previous immutable snapshots; older immutable snapshot URLs
+  fall through to the configured R2 archive binding; `/v0/snapshots/log.json`
+  is append-only and never pruned. `/v0/stats.json` derives latest/history/count
+  deltas from that log for Phase 2 instrumentation.
 - `/.well-known/pagedigest.json` publishes the same change-detection signal
   through the standard pagedigest protocol (v1 RC): monotonic per-URL
   revisions and auditable SHA-256 digests covering the `/v0/repos/` tree, so
@@ -118,6 +123,8 @@ The public surface does not yet include:
   reference/referenced-by traversal
 - live mutation or submission APIs
 - public SLA expectations
+- a fully provisioned public R2 archive in every environment; the Worker and
+  contract are archive-aware, but bucket provisioning remains an operator step
 
 ## How to use it
 

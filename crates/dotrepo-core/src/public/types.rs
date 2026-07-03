@@ -568,7 +568,7 @@ pub struct PublicErrorResponse {
     pub error: Box<PublicErrorDetail>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicSnapshotMetadata {
     pub api_version: &'static str,
@@ -579,19 +579,48 @@ pub struct PublicSnapshotMetadata {
     pub strategy: &'static str,
     pub validators: PublicCacheValidators,
     pub snapshot_id: String,
+    pub retention: PublicSnapshotRetention,
     pub paths: PublicSnapshotPaths,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicSnapshotPaths {
     pub root: String,
     pub inventory: String,
     pub files: String,
+    pub stats: String,
     pub query_input_root: String,
+    pub snapshot_log: String,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicSnapshotRetention {
+    pub edge_guarantee: String,
+    pub archive_guarantee: String,
+    pub log_guarantee: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicSnapshotLog {
+    pub api_version: String,
+    pub snapshot_count: usize,
+    pub entries: Vec<PublicSnapshotLogEntry>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicSnapshotLogEntry {
+    pub snapshot_id: String,
+    pub snapshot_digest: String,
+    pub generated_at: String,
+    pub repository_count: usize,
+    pub file_count: usize,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicCacheValidators {
     pub snapshot: String,

@@ -745,7 +745,6 @@ def render_lookup_panel(base_path: str) -> str:
 
 
 def render_repositories_index(inventory: dict, base_path: str) -> str:
-    repository_count = len(inventory.get("repositories", []))
     inventory_href = site_href(base_path, "/v0/repos/index.json")
     return f"""<!doctype html>
 <html lang="en">

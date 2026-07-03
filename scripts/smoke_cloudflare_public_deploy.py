@@ -192,6 +192,8 @@ def load_reviewed_public_state(public_root: Path) -> dict[str, dict[str, Any]]:
         "inventory": load_json_file(
             public_root / "v0" / "repos" / "index.json", "repository inventory"
         ),
+        "log": load_json_file(public_root / "v0" / "snapshots" / "log.json", "snapshot log"),
+        "stats": load_json_file(public_root / "v0" / "stats.json", "stats"),
     }
 
 
@@ -203,6 +205,8 @@ def deploy_coherence_mismatches(
         ("meta", "v0/meta.json"),
         ("files", "v0/files.json"),
         ("inventory", "v0/repos/index.json"),
+        ("log", "v0/snapshots/log.json"),
+        ("stats", "v0/stats.json"),
     ):
         if live.get(key) != reviewed.get(key):
             mismatches.append(label)
@@ -319,27 +323,22 @@ def live_manifest_entry_mismatches(
 
 def fetch_live_public_state(
     deploy_url: str, base_path: str, cache_bust: str
-) -> tuple[
-    str,
-    dict[str, Any],
-    dict[str, Any],
-    dict[str, Any],
-    dict[str, Any],
-    str,
-    str,
-    str,
-]:
+) -> tuple[Any, ...]:
     homepage_url = f"{deploy_url}{base_path or '/'}"
     meta_url = f"{deploy_url}{base_path}/v0/meta.json"
     files_url = f"{deploy_url}{base_path}/v0/files.json"
     inventory_url = f"{deploy_url}{base_path}/v0/repos/index.json"
+    log_url = f"{deploy_url}{base_path}/v0/snapshots/log.json"
+    stats_url = f"{deploy_url}{base_path}/v0/stats.json"
 
     homepage = http_get_text(with_query_param(homepage_url, "_smoke", cache_bust))
     homepage_state = extract_homepage_snapshot_state(homepage, homepage_url)
     meta = http_get_json(with_query_param(meta_url, "_smoke", cache_bust))
     files = http_get_json(with_query_param(files_url, "_smoke", cache_bust))
     inventory = http_get_json(with_query_param(inventory_url, "_smoke", cache_bust))
-    return homepage, homepage_state, meta, files, inventory, homepage_url, files_url, inventory_url
+    log = http_get_json(with_query_param(log_url, "_smoke", cache_bust))
+    stats = http_get_json(with_query_param(stats_url, "_smoke", cache_bust))
+    return homepage, homepage_state, meta, files, inventory, log, stats, homepage_url, files_url, inventory_url, log_url, stats_url
 
 
 def main() -> int:
@@ -383,15 +382,19 @@ def main() -> int:
             meta,
             files,
             inventory,
+            log,
+            stats,
             homepage_url,
             files_url,
             inventory_url,
+            log_url,
+            stats_url,
         ) = fetch_live_public_state(deploy_url, base_path, cache_bust)
         if meta.get("apiVersion") != "v0":
             raise SystemExit(f"unexpected apiVersion from {meta_url}: {meta.get('apiVersion')}")
 
         expected_homepage_state = expected_homepage_snapshot_state(meta, inventory)
-        live = {"meta": meta, "files": files, "inventory": inventory}
+        live = {"meta": meta, "files": files, "inventory": inventory, "log": log, "stats": stats}
         mismatches = deploy_coherence_mismatches(reviewed, live)
         manifest_mismatches = []
         if homepage_state == expected_homepage_state and not mismatches:
@@ -478,6 +481,8 @@ def main() -> int:
     print(f"smoke ok: {meta_url}")
     print(f"smoke ok: {files_url}")
     print(f"smoke ok: {inventory_url}")
+    print(f"smoke ok: {log_url}")
+    print(f"smoke ok: {stats_url}")
     print(f"smoke ok: {query_url}")
     print(f"smoke ok: {batch_profiles_url}")
     print(f"smoke ok: {batch_query_url}")
