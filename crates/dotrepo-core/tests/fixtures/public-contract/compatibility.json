@@ -1,7 +1,7 @@
 {
   "apiVersion": "v0",
   "metadata": {
-    "requiredKeys": ["apiVersion", "generatedAt", "snapshotDigest", "staleAfter", "strategy", "validators"],
+    "requiredKeys": ["apiVersion", "generatedAt", "snapshotDigest", "staleAfter", "strategy", "validators", "snapshotId", "paths"],
     "validatorKeys": ["snapshot", "etag"]
   },
   "fileManifest": {

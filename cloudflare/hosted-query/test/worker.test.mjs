@@ -22,7 +22,19 @@ function makeAssets(files) {
     async fetch(input) {
       const url =
         input instanceof Request ? new URL(input.url) : new URL(input.toString());
-      const body = files.get(url.pathname);
+      let body = files.get(url.pathname);
+      if (body === undefined) {
+        const snapshotMatch = url.pathname.match(/^\/v0\/snapshots\/[^/]+(\/.*)$/);
+        if (snapshotMatch !== null) {
+          const suffix = snapshotMatch[1];
+          const legacyPath = suffix.startsWith("/repos/")
+            ? `/v0${suffix}`
+            : suffix === "/files.json"
+              ? "/v0/files.json"
+              : suffix;
+          body = files.get(legacyPath);
+        }
+      }
       if (body === undefined) {
         return new Response("not found", { status: 404 });
       }
@@ -708,6 +720,50 @@ test("falls through to static assets after stripping the configured base path", 
   );
   assert.equal(inventoryResponse.status, 200);
   assert.equal(await inventoryResponse.text(), "{\"ok\":true}");
+});
+
+test("resolves mutable inventory through the immutable snapshot pointer", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      JSON.stringify({
+        snapshotDigest: "abc123",
+        paths: { root: "/v0/snapshots/abc123" }
+      })
+    ],
+    ["/v0/repos/index.json", "{\"snapshot\":\"stale\"}"],
+    ["/v0/snapshots/abc123/repos/index.json", "{\"snapshot\":\"abc123\"}"]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/" };
+
+  const response = await handleRequest(
+    new Request("https://example.test/v0/repos/index.json"),
+    env
+  );
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { snapshot: "abc123" });
+  assert.equal(response.headers.get("cache-control"), "no-cache");
+});
+
+test("marks pointer and immutable snapshot responses with distinct cache policies", async () => {
+  const files = new Map([
+    ["/v0/meta.json", "{\"snapshotDigest\":\"abc123\"}"],
+    ["/v0/snapshots/abc123/repos/index.json", "{\"ok\":true}"]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/" };
+
+  const pointer = await handleRequest(
+    new Request("https://example.test/v0/meta.json"),
+    env
+  );
+  const snapshot = await handleRequest(
+    new Request("https://example.test/v0/snapshots/abc123/repos/index.json"),
+    env
+  );
+
+  assert.equal(pointer.headers.get("cache-control"), "public, max-age=60, must-revalidate");
+  assert.equal(snapshot.headers.get("cache-control"), "public, max-age=31536000, immutable");
 });
 
 test("serves the root document without redirecting through /index.html", async () => {

@@ -1,0 +1,44 @@
+{
+  "apiVersion": "v0",
+  "freshness": {
+    "generatedAt": "2026-03-10T18:30:00Z",
+    "snapshotDigest": "afd5f502456c1c2bc99b8a86051736c6ce7c5530d61ff7c8cc6f9edf41d4e766",
+    "staleAfter": "2026-03-11T18:30:00Z"
+  },
+  "identity": {
+    "host": "github.com",
+    "owner": "example",
+    "repo": "orbit",
+    "source": "https://github.com/example/orbit"
+  },
+  "selection": {
+    "reason": "only_matching_record",
+    "record": {
+      "manifestPath": "repos/github.com/example/orbit/record.toml",
+      "record": {
+        "mode": "overlay",
+        "status": "reviewed",
+        "source": "https://github.com/example/orbit",
+        "trust": {
+          "confidence": "medium",
+          "provenance": [
+            "imported",
+            "verified"
+          ],
+          "notes": "Reviewed overlay from public repository materials."
+        }
+      },
+      "artifacts": {
+        "evidencePath": "repos/github.com/example/orbit/evidence.md"
+      }
+    }
+  },
+  "conflicts": [],
+  "links": {
+    "self": "/v0/repos/github.com/example/orbit/trust.json",
+    "repository": "/v0/repos/github.com/example/orbit/index.json",
+    "profile": "/v0/repos/github.com/example/orbit/profile.json",
+    "queryTemplate": "/v0/repos/github.com/example/orbit/query?path={dot_path}",
+    "indexPath": "repos/github.com/example/orbit/"
+  }
+}

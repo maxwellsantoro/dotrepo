@@ -54,18 +54,36 @@ became invalid at that time.
 Consumers can compare either validator with a previously seen value before
 refetching profile, trust, query-input, or inventory files.
 
+### Content-addressed paths
+
+`/v0/meta.json` is the only mutable snapshot pointer. Its `snapshotId` is the
+first 12 hexadecimal characters of `snapshotDigest`, and its `paths` object
+names the immutable snapshot root, inventory, file manifest, and internal
+query-input root under `/v0/snapshots/<snapshotId>/`.
+
+Canonical snapshot responses are served with a one-year `immutable` cache
+policy. Compatibility paths such as `/v0/repos/index.json` remain available,
+but the Worker resolves them through the current pointer and marks them
+`no-cache`. Every JSON record still carries the full digest and generation
+time in `freshness`, so a consumer can reject an accidentally mixed response.
+
 ### `files.json`
 
-`v0/files.json` is a deterministic manifest for the exported public tree. It
+`paths.files` (with `/v0/files.json` retained as a convenience path) is a
+deterministic manifest for the immutable exported snapshot. It
 lists each exported payload file, excluding `files.json` itself, with:
 
 - relative `path`
 - byte length
 - SHA-256 of the emitted file contents
 
-Consumers that already have a snapshot can fetch only `meta.json` and
-`files.json`, compare per-file digests, and then refetch only changed JSON
-payloads.
+Consumers fetch `meta.json`, follow `paths.files`, and need no further work if
+the snapshot digest is unchanged. When it changes, the file manifest provides
+the exact immutable payload set and hashes.
+
+The deployed export currently promises a seven-day `staleAfter` window. That
+matches the cadence the project can sustain without pretending a push-driven
+deployment is a daily refresh service.
 
 For local review, mirrors, or agent caches, use the deterministic delta helper:
 

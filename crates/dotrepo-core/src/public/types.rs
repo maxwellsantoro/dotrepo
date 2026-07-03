@@ -578,6 +578,17 @@ pub struct PublicSnapshotMetadata {
     pub stale_after: Option<String>,
     pub strategy: &'static str,
     pub validators: PublicCacheValidators,
+    pub snapshot_id: String,
+    pub paths: PublicSnapshotPaths,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicSnapshotPaths {
+    pub root: String,
+    pub inventory: String,
+    pub files: String,
+    pub query_input_root: String,
 }
 
 #[derive(Debug, Clone, Serialize)]

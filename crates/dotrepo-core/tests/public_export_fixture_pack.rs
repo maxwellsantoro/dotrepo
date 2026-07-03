@@ -198,20 +198,30 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
             .expect("file manifest output"),
     )
     .expect("file manifest parses");
-    assert_eq!(files["fileCount"], Value::from(12));
+    assert_eq!(files["fileCount"], Value::from(11));
     let file_entries = files["files"].as_array().expect("file manifest entries");
+    let snapshot_id = meta["snapshotId"].as_str().expect("snapshot id");
     assert!(file_entries.iter().any(|entry| {
-        entry["path"] == Value::String("v0/meta.json".into())
+        entry["path"]
+            == Value::String(format!(
+                "v0/snapshots/{snapshot_id}/repos/github.com/example/orbit/profile.json"
+            ))
             && entry["sha256"]
                 .as_str()
                 .is_some_and(|digest| digest.len() == 64)
     }));
     assert!(file_entries.iter().any(|entry| {
-        entry["path"] == Value::String("v0/repos/github.com/example/orbit/profile.json".into())
+        entry["path"]
+            == Value::String(format!(
+                "v0/snapshots/{snapshot_id}/repos/github.com/example/orbit/profile.json"
+            ))
             && entry["bytes"].as_u64().is_some_and(|bytes| bytes > 0)
     }));
     assert!(file_entries.iter().any(|entry| {
-        entry["path"] == Value::String("v0/repos/github.com/example/orbit/relations.json".into())
+        entry["path"]
+            == Value::String(format!(
+                "v0/snapshots/{snapshot_id}/repos/github.com/example/orbit/relations.json"
+            ))
             && entry["bytes"].as_u64().is_some_and(|bytes| bytes > 0)
     }));
 

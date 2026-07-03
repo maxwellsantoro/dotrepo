@@ -29,6 +29,11 @@ public/
             index.json
             profile.json
             trust.json
+    snapshots/
+      <snapshotId>/
+        files.json
+        repos/
+        query-input/
 ```
 
 This surface provides:
@@ -95,8 +100,11 @@ cargo run -p dotrepo-cli -- public export \
 
 Important details:
 - `snapshotDigest` is recomputed from the exported `index/` tree
-- `meta.json` includes snapshot-derived cache validators
-- `files.json` lists emitted JSON payloads with byte sizes and SHA-256 digests
+- `meta.json` is the sole mutable pointer and names the immutable snapshot paths
+- the canonical `files.json` lists only immutable snapshot payloads with byte
+  sizes and SHA-256 digests
+- mutable `v0/repos/` and `v0/files.json` copies remain compatibility surfaces;
+  the Worker resolves them through the pointer with revalidation required
 - deterministic mode changes freshness timestamps, not response semantics
 - ordinary export runs emit real timestamps
 - public `generatedAt` means export time for the snapshot, not proof that an
@@ -163,6 +171,8 @@ upstream native `.repo`.
 - renders a root landing page with `scripts/render_public_pages_landing.py`
 - stages the snapshot into the in-repo Worker project
 - deploys to `dotrepo.org`
+- uses a seven-day freshness promise until end-to-end daily automation has
+  demonstrated a reliable cadence
 - smoke-tests the deployed custom domain when it resolves, otherwise falls back
   to the deployed `workers.dev` staging origin
 - verifies the deployed `meta.json`, `files.json`, and repository inventory are
@@ -171,6 +181,10 @@ upstream native `.repo`.
 - verifies a deterministic public sample from `v0/files.json` against reviewed
   byte counts and SHA-256 hashes, covering the core contract files plus the
   first repository's exported JSON
+- a separate scheduled `public-edge-canary.yml` checks the homepage, pointer,
+  canonical inventory, canonical file manifest, two records, both pagedigest
+  manifests, and pagedigest.org's shipped-artifact claims; repeated failures
+  update one GitHub issue instead of opening an issue storm
 
 The export tree is the source of truth. The hosted surface deploys the same
 `public/` output.

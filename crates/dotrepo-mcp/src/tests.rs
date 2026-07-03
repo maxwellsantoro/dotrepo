@@ -3,8 +3,8 @@
 //! (`crate::handlers`), and message framing.
 
 use crate::dispatch::{handle_request, JsonRpcRequest, ServerState};
-use crate::test_support::mcp_env_test_lock;
 use crate::handlers::write_import_plan;
+use crate::test_support::mcp_env_test_lock;
 use dotrepo_core::{
     adoption_status_repository, current_timestamp_rfc3339, generate_check_repository,
     import_preview_repository, import_repository_with_options, inspect_claim_directory,
@@ -624,11 +624,18 @@ fn lookup_tool_fetches_hosted_summary_trust_and_query() {
                 "generatedAt": "2026-04-18T03:02:00Z",
                 "snapshotDigest": "abc123",
                 "staleAfter": "2026-04-19T03:02:00Z",
-                "strategy": "static_summary_trust_and_profile",
+                "strategy": "content_addressed_summary_trust_and_profile",
+                "snapshotId": "abc123",
+                "paths": {
+                    "root": "/v0/snapshots/abc123",
+                    "inventory": "/v0/snapshots/abc123/repos/index.json",
+                    "files": "/v0/snapshots/abc123/files.json",
+                    "queryInputRoot": "/v0/snapshots/abc123/query-input/",
+                },
             }),
         ),
         (
-            "/v0/repos/github.com/example/orbit/index.json",
+            "/v0/snapshots/abc123/repos/github.com/example/orbit/index.json",
             json!({
                 "apiVersion": "v0",
                 "freshness": {
@@ -666,7 +673,7 @@ fn lookup_tool_fetches_hosted_summary_trust_and_query() {
             }),
         ),
         (
-            "/v0/repos/github.com/example/orbit/trust.json",
+            "/v0/snapshots/abc123/repos/github.com/example/orbit/trust.json",
             json!({
                 "apiVersion": "v0",
                 "freshness": {
@@ -771,6 +778,10 @@ fn lookup_tool_fetches_hosted_summary_trust_and_query() {
     assert_eq!(
         structured["summary"]["repository"]["name"],
         Value::String("orbit".into())
+    );
+    assert_eq!(
+        structured["links"]["inventory"],
+        Value::String(format!("{base_url}/v0/snapshots/abc123/repos/index.json"))
     );
 }
 

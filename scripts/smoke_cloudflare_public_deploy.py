@@ -233,7 +233,7 @@ def manifest_entries_by_path(files_manifest: dict[str, Any]) -> dict[str, dict[s
 
 def public_manifest_entry(entry: dict[str, Any]) -> bool:
     path = str(entry.get("path") or "")
-    return not path.startswith("query-input/")
+    return not path.startswith("query-input/") and "/query-input/" not in path
 
 
 def select_manifest_coherence_entries(
@@ -244,14 +244,22 @@ def select_manifest_coherence_entries(
     if limit <= 0:
         return []
     entries_by_path = manifest_entries_by_path(files_manifest)
+    inventory_paths = [
+        path for path in entries_by_path if path.endswith("/repos/index.json")
+    ]
+    snapshot_root = (
+        inventory_paths[0][: -len("/repos/index.json")]
+        if len(inventory_paths) == 1
+        else "v0"
+    )
     first_repo_prefix = (
-        f"v0/repos/{first_identity.get('host')}/"
+        f"{snapshot_root}/repos/{first_identity.get('host')}/"
         f"{first_identity.get('owner')}/{first_identity.get('repo')}/"
     )
     priority_paths = [
         "v0/meta.json",
         "v0/files.json",
-        "v0/repos/index.json",
+        f"{snapshot_root}/repos/index.json",
         f"{first_repo_prefix}index.json",
         f"{first_repo_prefix}profile.json",
         f"{first_repo_prefix}trust.json",

@@ -18,6 +18,7 @@ use dotrepo_core::{
     query_repository, record_summary, resolve_claim_directory, resolve_workspace_repository_root,
     trust_repository, validate_repository, write_import_outputs, ImportMode, ImportOptions,
 };
+use reqwest::Url;
 use serde_json::{json, to_value, Value};
 use std::path::{Path, PathBuf};
 
@@ -68,26 +69,62 @@ pub(crate) fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
     let base_url = normalize_public_base_url(&base_url)?;
     let client = build_remote_lookup_client(&base_url)?;
 
-    let summary_url = remote_repository_url(
-        &base_url,
-        &target.host,
-        &target.owner,
-        &target.repo,
-        "index.json",
-    );
-    let trust_url = remote_repository_url(
-        &base_url,
-        &target.host,
-        &target.owner,
-        &target.repo,
-        "trust.json",
-    );
     let snapshot_url = format!("{}/v0/meta.json", remote_public_root(&base_url));
-    let inventory_url = format!("{}/v0/repos/index.json", remote_public_root(&base_url));
+    let snapshot = fetch_remote_json(&client, &snapshot_url)?;
+    let snapshot_root = snapshot
+        .pointer("/paths/root")
+        .and_then(Value::as_str)
+        .filter(|path| path.starts_with('/') && !path.contains(".."));
+    let pointer_url = |path: &str| -> Option<String> {
+        Url::parse(&base_url)
+            .ok()?
+            .join(path)
+            .ok()
+            .map(|url| url.to_string())
+    };
+    let summary_url = match snapshot_root {
+        Some(root) => pointer_url(&format!(
+            "{}/repos/{}/{}/{}/index.json",
+            root.trim_end_matches('/'),
+            target.host,
+            target.owner,
+            target.repo
+        ))
+        .ok_or_else(|| anyhow!("remote snapshot root is not a valid URL path"))?,
+        None => remote_repository_url(
+            &base_url,
+            &target.host,
+            &target.owner,
+            &target.repo,
+            "index.json",
+        ),
+    };
+    let trust_url = match snapshot_root {
+        Some(root) => pointer_url(&format!(
+            "{}/repos/{}/{}/{}/trust.json",
+            root.trim_end_matches('/'),
+            target.host,
+            target.owner,
+            target.repo
+        ))
+        .ok_or_else(|| anyhow!("remote snapshot root is not a valid URL path"))?,
+        None => remote_repository_url(
+            &base_url,
+            &target.host,
+            &target.owner,
+            &target.repo,
+            "trust.json",
+        ),
+    };
+    let inventory_url = snapshot
+        .pointer("/paths/inventory")
+        .and_then(Value::as_str)
+        .filter(|path| path.starts_with('/') && !path.contains(".."))
+        .and_then(pointer_url)
+        .unwrap_or_else(|| format!("{}/v0/repos/index.json", remote_public_root(&base_url)));
 
     let summary = fetch_remote_json(&client, &summary_url)?;
     let trust = fetch_remote_json(&client, &trust_url)?;
-    let snapshot = fetch_remote_json(&client, &snapshot_url)?;
     let query_template = summary
         .get("links")
         .and_then(|links| links.get("queryTemplate"))

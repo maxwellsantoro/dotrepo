@@ -360,6 +360,12 @@ description = "Reviewed overlay"
     assert!(rendered
         .iter()
         .any(|(path, _)| path == "public/query-input/github.com/example/orbit.json"));
+    assert!(rendered.iter().any(|(path, _)| {
+        path == "public/v0/snapshots/snapshot-123/repos/github.com/example/orbit/index.json"
+    }));
+    assert!(rendered.iter().any(|(path, _)| {
+        path == "public/v0/snapshots/snapshot-123/query-input/github.com/example/orbit.json"
+    }));
     assert!(rendered.iter().any(|(path, contents)| {
         path == "public/v0/repos/index.json"
             && contents.contains("\"repositoryCount\": 1")
@@ -367,7 +373,9 @@ description = "Reviewed overlay"
     }));
     assert!(rendered.iter().any(|(path, contents)| {
         path == "public/v0/meta.json"
-            && contents.contains("\"strategy\": \"static_summary_trust_and_profile\"")
+            && contents.contains("\"strategy\": \"content_addressed_summary_trust_and_profile\"")
+            && contents.contains("\"snapshotId\": \"snapshot-123\"")
+            && contents.contains("/v0/snapshots/snapshot-123/repos/index.json")
     }));
 
     fs::remove_dir_all(root).expect("temp dir removed");

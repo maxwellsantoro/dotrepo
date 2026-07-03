@@ -64,7 +64,8 @@ maintainer-claim example (`github.com/maxwellsantoro/ries-rs`) demonstrates
 claim-aware visibility end to end.
 
 Snapshot-level mechanics for agents and mirrors:
-- `meta.json` (snapshot digest, freshness, cache validators) and `files.json`
+- `meta.json` is the one mutable pointer to a content-addressed tree under
+  `/v0/snapshots/<snapshotId>/`; its canonical `files.json`
   (per-file SHA-256 and byte size) support cheap revalidation and selective
   refetch; `scripts/diff_public_export_files.py` turns two `files.json`
   manifests into a delta report

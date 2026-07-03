@@ -58,7 +58,8 @@ pub(crate) use search::{normalize_search_value, search_item_from_profile};
 pub(crate) use search::{search_ranking_from_profile, trust_confidence_boost};
 
 pub(crate) const PUBLIC_API_VERSION: &str = "v0";
-pub(crate) const PUBLIC_STATIC_STRATEGY: &str = "static_summary_trust_and_profile";
+pub(crate) const PUBLIC_CONTENT_ADDRESSED_STRATEGY: &str =
+    "content_addressed_summary_trust_and_profile";
 
 /// Maximum repositories per batch profile or batch query request.
 pub const PUBLIC_BATCH_MAX_IDENTITIES: usize = 50;

@@ -101,6 +101,8 @@ The live smoke checks:
 
 - the deployed `v0/meta.json`, `v0/files.json`, and `v0/repos/index.json`
   exactly match the reviewed export that was staged for deployment
+- `v0/meta.json` points at the digest-keyed tree under `v0/snapshots/`; direct
+  snapshot responses are immutable while compatibility paths revalidate
 - a deterministic sample of public paths from `v0/files.json`, including the
   core contract files and the first reviewed repository's exported JSON, matches
   the reviewed byte counts and SHA-256 hashes

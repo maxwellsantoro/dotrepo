@@ -1,0 +1,46 @@
+name: public-edge-canary
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17,47 * * * *"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          repository: maxwellsantoro/pagedigest
+          path: sibling-pagedigest
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Check both public edges
+        run: |
+          uv run python scripts/public_edge_canary.py \
+            --pagedigest-repo-root sibling-pagedigest \
+            --output public-edge-canary.json
+      - name: Upload canary report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-edge-canary
+          path: public-edge-canary.json
+          if-no-files-found: ignore
+      - name: Open or update failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Public edge consistency canary is failing"
+          existing="$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "The scheduled public-edge canary failed again: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          else
+            gh issue create --title "$title" --body "The dotrepo × pagedigest public-edge canary failed: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          fi

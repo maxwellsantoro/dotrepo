@@ -207,11 +207,32 @@ async function loadMeta(env, request) {
   return response.json();
 }
 
+function snapshotAssetPath(meta, suffix, legacyPath) {
+  const root = meta?.paths?.root;
+  if (typeof root !== "string" || root === "") {
+    return legacyPath;
+  }
+  const basePath = normalizeBasePath(meta?.paths?.root?.split("/v0/snapshots/")[0] ?? "/");
+  const internalRoot = stripBasePath(root, basePath);
+  return `${internalRoot}${suffix}`;
+}
+
+async function currentSnapshotAssetPath(env, request, suffix, legacyPath) {
+  const meta = await loadMeta(env, request);
+  return snapshotAssetPath(meta, suffix, legacyPath);
+}
+
 async function loadQueryInputSnapshot(env, request, host, owner, repo) {
+  const pathname = await currentSnapshotAssetPath(
+    env,
+    request,
+    `/query-input/${host}/${owner}/${repo}.json`,
+    `/query-input/${host}/${owner}/${repo}.json`
+  );
   const response = await fetchInternalAsset(
     env,
     request,
-    `/query-input/${host}/${owner}/${repo}.json`
+    pathname
   );
   if (response.status === 404) {
     return null;
@@ -225,10 +246,16 @@ async function loadQueryInputSnapshot(env, request, host, owner, repo) {
 }
 
 async function loadProfileSnapshot(env, request, host, owner, repo) {
+  const pathname = await currentSnapshotAssetPath(
+    env,
+    request,
+    `/repos/${host}/${owner}/${repo}/profile.json`,
+    `/v0/repos/${host}/${owner}/${repo}/profile.json`
+  );
   const response = await fetchInternalAsset(
     env,
     request,
-    `/v0/repos/${host}/${owner}/${repo}/profile.json`
+    pathname
   );
   if (response.status === 404) {
     return null;
@@ -242,10 +269,16 @@ async function loadProfileSnapshot(env, request, host, owner, repo) {
 }
 
 async function loadRelationsSnapshot(env, request, host, owner, repo) {
+  const pathname = await currentSnapshotAssetPath(
+    env,
+    request,
+    `/repos/${host}/${owner}/${repo}/relations.json`,
+    `/v0/repos/${host}/${owner}/${repo}/relations.json`
+  );
   const response = await fetchInternalAsset(
     env,
     request,
-    `/v0/repos/${host}/${owner}/${repo}/relations.json`
+    pathname
   );
   if (response.status === 404) {
     return null;
@@ -259,7 +292,13 @@ async function loadRelationsSnapshot(env, request, host, owner, repo) {
 }
 
 async function loadInventorySnapshot(env, request) {
-  const response = await fetchInternalAsset(env, request, "/v0/repos/index.json");
+  const pathname = await currentSnapshotAssetPath(
+    env,
+    request,
+    "/repos/index.json",
+    "/v0/repos/index.json"
+  );
+  const response = await fetchInternalAsset(env, request, pathname);
   if (!response.ok) {
     throw new Error(`failed to load /v0/repos/index.json: ${response.status}`);
   }
@@ -955,10 +994,43 @@ async function buildBatchQueryResponse(env, request, repoParams, paths, freshnes
   };
 }
 
+function withCacheControl(response, cacheControl) {
+  const headers = new Headers(response.headers);
+  headers.set("cache-control", cacheControl);
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
 async function serveStaticAsset(request, env, strippedPath) {
-  const assetPath = strippedPath === "/" ? "/" : strippedPath;
+  let assetPath = strippedPath === "/" ? "/" : strippedPath;
+  let cacheControl = null;
+  if (strippedPath === "/v0/meta.json") {
+    cacheControl = "public, max-age=60, must-revalidate";
+  } else if (strippedPath === "/v0/files.json" || strippedPath.startsWith("/v0/repos/")) {
+    try {
+      const meta = await loadMeta(env, request);
+      assetPath = snapshotAssetPath(
+        meta,
+        strippedPath === "/v0/files.json"
+          ? "/files.json"
+          : strippedPath.slice("/v0".length),
+        strippedPath
+      );
+    } catch {
+      // Legacy and local fixture exports may not yet have a pointer. Serving
+      // their thin mutable copy preserves compatibility during migration.
+      assetPath = strippedPath;
+    }
+    cacheControl = "no-cache";
+  } else if (strippedPath.startsWith("/v0/snapshots/")) {
+    cacheControl = "public, max-age=31536000, immutable";
+  }
   const assetRequest = new Request(new URL(assetPath, request.url), request);
-  return env.ASSETS.fetch(assetRequest);
+  const response = await env.ASSETS.fetch(assetRequest);
+  return cacheControl === null ? response : withCacheControl(response, cacheControl);
 }
 
 export async function handleRequest(request, env) {
@@ -982,7 +1054,7 @@ export async function handleRequest(request, env) {
   if (strippedPath === null) {
     return textResponse(404, "not found");
   }
-  if (strippedPath.startsWith("/query-input/")) {
+  if (strippedPath.startsWith("/query-input/") || strippedPath.includes("/query-input/")) {
     return textResponse(404, "not found");
   }
 

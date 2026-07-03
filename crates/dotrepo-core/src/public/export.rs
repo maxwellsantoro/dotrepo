@@ -95,15 +95,36 @@ pub fn current_public_freshness(
 }
 
 pub fn public_snapshot_metadata(freshness: PublicFreshness) -> PublicSnapshotMetadata {
+    public_snapshot_metadata_with_base(freshness, "/")
+}
+
+fn public_snapshot_metadata_with_base(
+    freshness: PublicFreshness,
+    base_path: &str,
+) -> PublicSnapshotMetadata {
     let validators = public_cache_validators(&freshness.snapshot_digest);
+    let snapshot_id = snapshot_id(&freshness.snapshot_digest);
+    let base_path = base_path.trim().trim_end_matches('/');
+    let root = format!("{base_path}/v0/snapshots/{snapshot_id}");
     PublicSnapshotMetadata {
         api_version: PUBLIC_API_VERSION,
         generated_at: freshness.generated_at,
         snapshot_digest: freshness.snapshot_digest,
         stale_after: freshness.stale_after,
-        strategy: PUBLIC_STATIC_STRATEGY,
+        strategy: PUBLIC_CONTENT_ADDRESSED_STRATEGY,
         validators,
+        snapshot_id,
+        paths: PublicSnapshotPaths {
+            inventory: format!("{root}/repos/index.json"),
+            files: format!("{root}/files.json"),
+            query_input_root: format!("{root}/query-input/"),
+            root,
+        },
     }
+}
+
+fn snapshot_id(snapshot_digest: &str) -> String {
+    snapshot_digest.chars().take(12).collect()
 }
 
 pub fn public_cache_validators(snapshot_digest: &str) -> PublicCacheValidators {
@@ -180,7 +201,10 @@ pub fn export_public_index_static_with_options(
     let mut outputs = Vec::new();
     outputs.push((
         out_root.join("v0/meta.json"),
-        serde_json::to_string_pretty(&public_snapshot_metadata(freshness.clone()))?,
+        serde_json::to_string_pretty(&public_snapshot_metadata_with_base(
+            freshness.clone(),
+            base_path,
+        ))?,
     ));
 
     let identities = list_index_repository_identities(index_root)?;
@@ -303,11 +327,31 @@ pub fn export_public_index_static_with_options(
         })?,
     ));
     let generated_at = freshness.generated_at.clone();
-    let file_manifest = public_export_file_manifest(out_root, freshness, &outputs)?;
+    let snapshot_root = out_root
+        .join("v0/snapshots")
+        .join(snapshot_id(&freshness.snapshot_digest));
+    let canonical_outputs = outputs
+        .iter()
+        .filter_map(|(path, contents)| {
+            let relative = path.strip_prefix(out_root).ok()?;
+            let canonical_relative = if let Ok(rest) = relative.strip_prefix("v0/repos") {
+                PathBuf::from("repos").join(rest)
+            } else if let Ok(rest) = relative.strip_prefix("query-input") {
+                PathBuf::from("query-input").join(rest)
+            } else {
+                return None;
+            };
+            Some((snapshot_root.join(canonical_relative), contents.clone()))
+        })
+        .collect::<Vec<_>>();
+    let file_manifest = public_export_file_manifest(out_root, freshness, &canonical_outputs)?;
+    outputs.extend(canonical_outputs);
+    let rendered_file_manifest = serde_json::to_string_pretty(&file_manifest)?;
     outputs.push((
         out_root.join("v0/files.json"),
-        serde_json::to_string_pretty(&file_manifest)?,
+        rendered_file_manifest.clone(),
     ));
+    outputs.push((snapshot_root.join("files.json"), rendered_file_manifest));
 
     let pagedigest_previous_path = pagedigest_previous
         .map(Path::to_path_buf)

@@ -3,9 +3,16 @@
   "generatedAt": "2026-03-10T18:30:00Z",
   "snapshotDigest": "afd5f502456c1c2bc99b8a86051736c6ce7c5530d61ff7c8cc6f9edf41d4e766",
   "staleAfter": "2026-03-11T18:30:00Z",
-  "strategy": "static_summary_trust_and_profile",
+  "strategy": "content_addressed_summary_trust_and_profile",
   "validators": {
     "snapshot": "sha256:afd5f502456c1c2bc99b8a86051736c6ce7c5530d61ff7c8cc6f9edf41d4e766",
     "etag": "\"dotrepo-v0-afd5f502456c1c2bc99b8a86051736c6ce7c5530d61ff7c8cc6f9edf41d4e766\""
+  },
+  "snapshotId": "afd5f502456c",
+  "paths": {
+    "root": "/v0/snapshots/afd5f502456c",
+    "inventory": "/v0/snapshots/afd5f502456c/repos/index.json",
+    "files": "/v0/snapshots/afd5f502456c/files.json",
+    "queryInputRoot": "/v0/snapshots/afd5f502456c/query-input/"
   }
 }
