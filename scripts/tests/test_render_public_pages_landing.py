@@ -94,6 +94,39 @@ class PublicPageRendererTests(unittest.TestCase):
         self.assertIn("queryInputHref(item)", rendered)
         self.assertNotIn('data-search-index="', rendered)
 
+    def test_pagedigest_dashboard_renders_export_economics(self) -> None:
+        rendered = public_pages.render_pagedigest_stats_dashboard(
+            {
+                "pagedigest": {
+                    "recordsCovered": 3066,
+                    "recordsNeedingFetch": 31,
+                    "fetchesAvoided": 3035,
+                    "bytesCovered": 42_500_000,
+                    "bytesAvoided": 41_200_000,
+                    "estimatedTokensAvoided": 9_800_000,
+                    "siteRev": 3,
+                    "manifestBytes": 850_000,
+                    "generated": "2026-07-03T01:15:11Z",
+                }
+            },
+            "",
+        )
+
+        self.assertIn("PageDigest dogfood", rendered)
+        self.assertIn("3,066 tracked records", rendered)
+        self.assertIn("31 needing fetch", rendered)
+        self.assertIn("3,035 fetches avoided", rendered)
+        self.assertIn("39.3 MB avoided", rendered)
+        self.assertIn("~9.8M tokens avoided", rendered)
+        self.assertIn("site_rev 3", rendered)
+        self.assertIn("/v0/stats.json", rendered)
+
+    def test_pagedigest_dashboard_handles_missing_stats(self) -> None:
+        rendered = public_pages.render_pagedigest_stats_dashboard({}, "")
+
+        self.assertIn("first stats-bearing", rendered)
+        self.assertIn("/v0/stats.json", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()

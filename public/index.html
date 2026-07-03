@@ -205,6 +205,10 @@
       gap: 12px;
       margin-top: 4px;
     }
+    .stat-grid--wide {
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      margin-top: 18px;
+    }
     .stat {
       padding: 16px 18px;
       border-radius: 18px;
@@ -584,6 +588,20 @@
           </div>
         </div>
       </aside>
+    </section>
+
+    <section class="panel section">
+      <h2>PageDigest dogfood</h2>
+      <p class="section__intro">
+        The public stats endpoint is ready for PageDigest economics, but this
+        checked-in public tree was rendered before the first stats-bearing
+        export. Once <code>/v0/stats.json</code> is present, this section will
+        publish records covered, skipped fetches, avoided bytes, and estimated
+        tokens avoided directly from the export.
+      </p>
+      <p class="section__note">
+        Contract endpoint: <code>/v0/stats.json</code>.
+      </p>
     </section>
 
     <section class="panel section">

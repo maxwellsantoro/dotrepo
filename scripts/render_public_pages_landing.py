@@ -148,6 +148,12 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text())
 
 
+def load_optional_json(path: Path) -> dict:
+    if not path.is_file():
+        return {}
+    return json.loads(path.read_text())
+
+
 def shorten_digest(value: str) -> str:
     if len(value) <= 20:
         return value
@@ -167,6 +173,42 @@ def compact_text(value: str, *, limit: int) -> str:
     if len(cleaned) <= limit:
         return cleaned
     return f"{cleaned[: limit - 1].rstrip()}..."
+
+
+def format_count(value: object) -> str:
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        return "unknown"
+    return f"{number:,}"
+
+
+def format_bytes(value: object) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return "unknown"
+    units = ["B", "KB", "MB", "GB"]
+    unit = units[0]
+    for unit in units:
+        if abs(number) < 1024 or unit == units[-1]:
+            break
+        number /= 1024
+    if unit == "B":
+        return f"{int(number):,} {unit}"
+    return f"{number:.1f} {unit}"
+
+
+def format_estimated_tokens(value: object) -> str:
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        return "unknown"
+    if abs(number) >= 1_000_000:
+        return f"~{number / 1_000_000:.1f}M"
+    if abs(number) >= 1_000:
+        return f"~{number / 1_000:.1f}K"
+    return f"~{number:,}"
 
 
 def is_low_signal_title(title: str) -> bool:
@@ -472,6 +514,75 @@ def build_homepage_snapshot_state(meta: dict, inventory: dict) -> str:
         "repositoryCount": inventory.get("repositoryCount"),
     }
     return json.dumps(payload, separators=(",", ":"))
+
+
+def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
+    pagedigest = stats.get("pagedigest")
+    if not isinstance(pagedigest, dict):
+        return """
+    <section class="panel section">
+      <h2>PageDigest dogfood</h2>
+      <p class="section__intro">
+        The public stats endpoint is ready for PageDigest economics, but this
+        checked-in public tree was rendered before the first stats-bearing
+        export. Once <code>/v0/stats.json</code> is present, this section will
+        publish records covered, skipped fetches, avoided bytes, and estimated
+        tokens avoided directly from the export.
+      </p>
+      <p class="section__note">
+        Contract endpoint: <code>/v0/stats.json</code>.
+      </p>
+    </section>
+        """.strip()
+
+    return """
+    <section class="panel section">
+      <h2>PageDigest dogfood</h2>
+      <p class="section__intro">
+        dotrepo publishes thousands of small JSON records. PageDigest lets a
+        consumer check the whole covered set first, then fetch only records
+        whose content actually changed. These numbers come from the current
+        export's <a href="{stats_href}"><code>/v0/stats.json</code></a>.
+      </p>
+      <div class="stat-grid stat-grid--wide">
+        <div class="stat">
+          <strong>{records_covered} tracked records</strong>
+          <span>Records covered by <code>/.well-known/pagedigest.json</code>.</span>
+        </div>
+        <div class="stat">
+          <strong>{records_needing_fetch} needing fetch</strong>
+          <span>New or changed records in this export cycle.</span>
+        </div>
+        <div class="stat">
+          <strong>{fetches_avoided} fetches avoided</strong>
+          <span>Covered records that a PageDigest-aware consumer can skip.</span>
+        </div>
+        <div class="stat">
+          <strong>{bytes_avoided} avoided</strong>
+          <span>Payload bytes skipped this cycle out of {bytes_covered} covered.</span>
+        </div>
+        <div class="stat">
+          <strong>{tokens_avoided} tokens avoided</strong>
+          <span>Coarse bytes ÷ 4 estimate for agent-context savings.</span>
+        </div>
+        <div class="stat">
+          <strong>site_rev {site_rev}</strong>
+          <span>Manifest size {manifest_bytes}; generated {generated}.</span>
+        </div>
+      </div>
+    </section>
+    """.format(
+        stats_href=site_href(base_path, "/v0/stats.json"),
+        records_covered=html.escape(format_count(pagedigest.get("recordsCovered"))),
+        records_needing_fetch=html.escape(format_count(pagedigest.get("recordsNeedingFetch"))),
+        fetches_avoided=html.escape(format_count(pagedigest.get("fetchesAvoided"))),
+        bytes_avoided=html.escape(format_bytes(pagedigest.get("bytesAvoided"))),
+        bytes_covered=html.escape(format_bytes(pagedigest.get("bytesCovered"))),
+        tokens_avoided=html.escape(format_estimated_tokens(pagedigest.get("estimatedTokensAvoided"))),
+        site_rev=html.escape(format_count(pagedigest.get("siteRev"))),
+        manifest_bytes=html.escape(format_bytes(pagedigest.get("manifestBytes"))),
+        generated=html.escape(format_timestamp_for_humans(str(pagedigest.get("generated", "unknown")))),
+    ).strip()
 
 
 def render_writing_cards(base_path: str) -> str:
@@ -1926,6 +2037,7 @@ def main() -> int:
     index_root = Path(args.index_root)
     meta = load_json(input_dir / "v0" / "meta.json")
     inventory = load_json(input_dir / "v0" / "repos" / "index.json")
+    stats = load_optional_json(input_dir / "v0" / "stats.json")
     base_path = detect_site_base_path(inventory)
     progress = load_index_progress(index_root)
 
@@ -2156,6 +2268,10 @@ def main() -> int:
       display: grid;
       gap: 12px;
       margin-top: 4px;
+    }}
+    .stat-grid--wide {{
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      margin-top: 18px;
     }}
     .stat {{
       padding: 16px 18px;
@@ -2523,6 +2639,8 @@ def main() -> int:
         </div>
       </aside>
     </section>
+
+    {render_pagedigest_stats_dashboard(stats, base_path)}
 
     <section class="panel section">
       <h2>Trust proof</h2>
