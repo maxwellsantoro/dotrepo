@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "A KV Cache Management Layer for Scalable LLM Inference"
+name = "LMCache"
 description = "LMCache is a **KV cache management layer** for LLM inference."
 homepage = "https://lmcache.ai/"
 license = "Apache-2.0"

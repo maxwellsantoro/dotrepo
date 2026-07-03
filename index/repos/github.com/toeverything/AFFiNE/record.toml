@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@toeverything/blocksuite-core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "AFFiNE.Pro Write, Draw and Plan All at Once"
+name = "AFFiNE"
 description = "A privacy-focused, local-first, open-source, and ready-to-use alternative for Notion & Miro."
 homepage = "https://affine.pro"
 license = "NOASSERTION"

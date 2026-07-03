@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "What is CockroachDB?"
+name = "cockroach"
 description = "CockroachDB is a distributed SQL database built on a transactional and strongly-consistent key-value store."
 homepage = "https://www.cockroachlabs.com"
 license = "NOASSERTION"

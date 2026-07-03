@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Makefile`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@streamlit/open-source-release-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Welcome to Streamlit 👋"
+name = "streamlit"
 description = "A faster way to build and share data apps."
 homepage = "https://streamlit.io"
 license = "Apache-2.0"

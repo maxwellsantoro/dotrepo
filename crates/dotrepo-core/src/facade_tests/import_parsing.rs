@@ -398,3 +398,85 @@ fn pyproject_test_conflicts_with_package_json_test_instead_of_losing() {
         result.notes
     );
 }
+
+#[test]
+fn clean_project_name_accepts_real_project_names() {
+    // Single-token and short multi-word names survive (calibrated against the
+    // pinned fixture expectations, whose longest valid name is four words).
+    for accepted in [
+        "Orbit",
+        "Serde",
+        "Vitest",
+        "Crate Atlas",
+        "Signal Harbor",
+        "The Uncompromising Code Formatter",
+        // Genuine names that begin with "v" + digit must be preserved.
+        "v2rayN",
+        "V8",
+    ] {
+        assert_eq!(
+            clean_project_name(accepted, "fallback"),
+            Some(accepted.to_string()),
+            "{accepted:?} should be kept as a project name"
+        );
+    }
+}
+
+#[test]
+fn clean_project_name_rejects_question_and_announcement_headings() {
+    // These README H1 patterns must fall back to the dir name, not become the
+    // published repo.name (regression: redis/redis, rust-lang/rust, bevy, etc.).
+    for rejected in [
+        "What is Redis?",
+        "What is Bevy?",
+        "Why Rust?",
+        "How Does It Work?",
+        "What's in the download?",
+        "In Chinese?",
+        "Introducing MMSegmentation v1.0.0",
+        "Welcome to Streamlit",
+        "We are working on the next release",
+        "v2.15 is out!",
+        "Vue 2 has reached End of Life",
+    ] {
+        assert!(
+            clean_project_name(rejected, "fallback").is_none(),
+            "{rejected:?} should be rejected as a project name"
+        );
+    }
+}
+
+#[test]
+fn clean_project_name_rejects_nav_bars_badge_spill_and_sentences() {
+    for rejected in [
+        "Website | Roadmap | Blog | Docs",
+        "Website](https://example.org) ![CI](https://example.org/badge.svg)",
+        "ClickHouse is an open-source column-oriented database management system",
+        "Using the Marshaler and encoding.TextUnmarshaler interfaces",
+        "Build a JAR and run it",
+        "The web has evolved. Finally, testing has too.",
+    ] {
+        assert!(
+            clean_project_name(rejected, "fallback").is_none(),
+            "{rejected:?} should be rejected as a project name"
+        );
+    }
+}
+
+#[test]
+fn clean_project_name_recovers_slug_from_colon_tagline() {
+    // "pandas: tagline" / "fp-go: tagline" → keep the single-token name.
+    assert_eq!(
+        clean_project_name("pandas: A Powerful Python Data Analysis Toolkit", "fb"),
+        Some("pandas".into())
+    );
+    assert_eq!(
+        clean_project_name("fp-go: Functional Programming Library for Go", "fb"),
+        Some("fp-go".into())
+    );
+    // A real multi-word name with a colon is preserved (no single-token prefix).
+    assert_eq!(
+        clean_project_name("Crate Atlas: release automation", "fb"),
+        Some("Crate Atlas: release automation".into())
+    );
+}

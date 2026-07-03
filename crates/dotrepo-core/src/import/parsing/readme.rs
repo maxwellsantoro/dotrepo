@@ -565,7 +565,87 @@ pub(crate) fn clean_project_name(raw: &str, _repo_dir_fallback: &str) -> Option<
         return None;
     }
 
+    // Reject questions, release announcements, nav/link bars, badge spill, and
+    // sentence/tagline-style headings. A README H1 like "## What is Redis?" or
+    // "v2.15 is out!" is far worse than the honest dir-name fallback.
+    if looks_like_sentence_or_non_name(&cleaned) {
+        return None;
+    }
+
     Some(cleaned)
+}
+
+/// Return true when an extracted candidate is clearly not a project identifier.
+///
+/// README titles frequently reuse sentence, announcement, or chrome patterns
+/// (`## What is Redis?`, `# v2.15 is out!`, `# Website | Roadmap | Blog`,
+/// `# pandas: A Powerful Python Data Analysis Toolkit`). Accepting any of them
+/// yields a `repo.name` worse than the dir-name fallback, so reject and let the
+/// caller fall back. The longest valid extracted name observed in the fixture
+/// suite is four words, so a six-plus-word or 60-plus-char result is treated as
+/// a leaked description or section heading.
+fn looks_like_sentence_or_non_name(name: &str) -> bool {
+    let trimmed = name.trim();
+    let lowered = trimmed.to_ascii_lowercase();
+
+    // No real project name ends with a question or exclamation mark.
+    if trimmed.ends_with('?') || trimmed.ends_with('!') {
+        return true;
+    }
+    // Markdown link / image alt-text spill: `Website](https://...) ![CI](...)`.
+    if trimmed.contains("](") || trimmed.contains("![") {
+        return true;
+    }
+    // Pipe-delimited nav/link bars: `Website | Roadmap | Blog | Docs`.
+    if trimmed.contains(" | ") {
+        return true;
+    }
+    // Question-style leads, with or without terminal punctuation.
+    const QUESTION_LEADS: &[&str] = &[
+        "what ", "why ", "how ", "when ", "where ", "who ", "whose ", "is ", "are ", "do ",
+        "does ", "did ", "can ", "could ", "should ", "would ", "will ",
+    ];
+    if QUESTION_LEADS.iter().any(|lead| lowered.starts_with(lead)) {
+        return true;
+    }
+    // Release/announcement leads.
+    const ANNOUNCEMENT_LEADS: &[&str] = &[
+        "introducing ",
+        "announcing ",
+        "welcome to ",
+        "welcome back ",
+        "we are ",
+        "we're ",
+        "new release ",
+        "now available ",
+    ];
+    if ANNOUNCEMENT_LEADS
+        .iter()
+        .any(|lead| lowered.starts_with(lead))
+    {
+        return true;
+    }
+    if let Some(rest) = lowered.strip_prefix('v') {
+        // Version-release announcements: "v2.15 is out", "v2 is out". The
+        // version run is followed by whitespace. Genuine names like "V8" or
+        // "v2rayN" have no such space and must survive.
+        let ver_end = rest
+            .find(|c: char| !c.is_ascii_digit() && c != '.')
+            .unwrap_or(rest.len());
+        let version = &rest[..ver_end];
+        let has_digit = version.chars().any(|c| c.is_ascii_digit());
+        if has_digit && rest[ver_end..].starts_with(' ') {
+            return true;
+        }
+    }
+    if let Some(rest) = lowered.strip_prefix("version ") {
+        if rest.chars().next().is_some_and(|c| c.is_ascii_digit()) {
+            return true;
+        }
+    }
+    // Sentence/tagline length: real project names are short.
+    let word_count = trimmed.split_whitespace().count();
+    word_count >= 6 || trimmed.chars().count() >= 60
 }
 
 fn trim_leading_emoji(s: &str) -> String {
@@ -606,7 +686,10 @@ fn strip_name_trailer(name: &str) -> String {
     }
     if let Some(idx) = name.find(": ") {
         let candidate = name[..idx].trim();
-        if candidate.len() >= 2 && candidate.chars().next().is_some_and(|c| c.is_uppercase()) {
+        // "pandas: tagline" / "fp-go: tagline" → keep the single-token project
+        // name and drop the tagline. Require a single token so we never split a
+        // real multi-word name on a mid-sentence colon.
+        if candidate.len() >= 2 && !candidate.contains(' ') {
             return candidate.to_string();
         }
     }

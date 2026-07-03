@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Using the `Marshaler` and `encoding.TextUnmarshaler` interfaces"
+name = "toml"
 description = "Here's an example that automatically parses values in a `mail.Address`:"
 homepage = "https://github.com/BurntSushi/toml"
 license = "MIT"

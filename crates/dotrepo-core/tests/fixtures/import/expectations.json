@@ -426,5 +426,21 @@
     "native_trust_note_contains": ["Bootstrapped from `README.md`."],
     "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
     "overlay_evidence_contains": ["Imported repository name and description from README.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "question-heading-readme",
+    "repo_name": "question-heading-readme",
+    "repo_description": "Questiontool is a lightweight CLI for asking structured questions in terminal scripts.",
+    "imported_sources": ["README.md"],
+    "inferred_fields": ["repo.name"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from `README.md`.", "Filled `repo.name` with inferred defaults."],
+    "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "Filled `repo.name` with inferred defaults.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository description from README.md.", "Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
   }
 ]

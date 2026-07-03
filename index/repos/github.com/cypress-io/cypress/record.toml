@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@cypress-io/app` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "The web has evolved. Finally, testing has too."
+name = "cypress"
 description = "Fast, easy and reliable testing for anything that runs in a browser."
 homepage = "https://cypress.io"
 license = "MIT"

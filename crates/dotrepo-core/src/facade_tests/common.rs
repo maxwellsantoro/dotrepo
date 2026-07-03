@@ -1,6 +1,6 @@
 pub(crate) use super::super::*;
 pub(crate) use crate::import::{
-    clean_project_description, extract_markdown_links, infer_imported_commands,
+    clean_project_description, clean_project_name, extract_markdown_links, infer_imported_commands,
     infer_pyproject_commands, is_non_project_heading, normalize_description_line,
     parse_codeowners_metadata, parse_contributing_security, parse_issue_template_security,
     parse_readme_docs_signal, parse_readme_metadata, parse_readme_title_line,

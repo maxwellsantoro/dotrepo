@@ -2,6 +2,9 @@
 index-autonomous-batch/
 output/
 target/
+
+# Local agent scratch space (e.g. Claude Code worktrees) must never be tracked.
+.claude/worktrees/
 # macOS Finder metadata
 .DS_Store
 **/.DS_Store

@@ -51,11 +51,12 @@ pub(crate) use commands::{infer_imported_commands, infer_pyproject_commands};
 
 #[allow(unused_imports)]
 pub(crate) use parsing::{
-    clean_project_description, extract_markdown_links, is_actionable_security_url,
-    is_non_project_heading, is_quality_url, normalize_description_line, parse_codeowners_metadata,
-    parse_contributing_security, parse_issue_template_security, parse_readme_docs_signal,
-    parse_readme_metadata, parse_readme_security, parse_readme_title_line, parse_security_contact,
-    parse_security_import_metadata, try_parse_multiline_html_heading,
+    clean_project_description, clean_project_name, extract_markdown_links,
+    is_actionable_security_url, is_non_project_heading, is_quality_url, normalize_description_line,
+    parse_codeowners_metadata, parse_contributing_security, parse_issue_template_security,
+    parse_readme_docs_signal, parse_readme_metadata, parse_readme_security,
+    parse_readme_title_line, parse_security_contact, parse_security_import_metadata,
+    try_parse_multiline_html_heading,
 };
 
 use evidence::{
@@ -63,7 +64,6 @@ use evidence::{
     discover_relations_from_manifest_files, native_import_github_compat, render_import_evidence,
     ImportEvidenceNotes,
 };
-use parsing::clean_project_name;
 pub(crate) use types::{ImportSources, ImportedFile, SecurityImportMetadata};
 
 pub(crate) const IMPORT_README_CANDIDATES: &[&str] = &[

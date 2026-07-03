@@ -16,7 +16,7 @@ provenance = [
 notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Welcome to the OpenSSL Project"
+name = "openssl"
 description = "OpenSSL is a robust, commercial-grade, full-featured Open Source Toolkit for the Transport Layer Security (TLS, formerly SSL), Datagram TLS (DTLS), and QUIC protocols."
 homepage = "https://openssl-library.org/"
 license = "Apache-2.0"

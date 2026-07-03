@@ -150,6 +150,10 @@ jobs:
           uv run pytest
           cargo run -p dotrepo-cli -- --root examples/native-minimal validate
           cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
+          # The repository ships its own native .repo; keep it valid so the
+          # project dogfoods its own protocol (catches dangling doc references,
+          # stale managed-surface paths, and schema drift in the root manifest).
+          cargo run -p dotrepo-cli -- --root . validate
           cargo run -p dotrepo-cli -- validate-index
       - name: Verify publishable crates package and dry-run cleanly
         run: |

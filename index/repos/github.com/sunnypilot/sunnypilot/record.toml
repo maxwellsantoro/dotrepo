@@ -16,7 +16,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@sunnypilot/dev-internal` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "What is sunnypilot?"
+name = "sunnypilot"
 description = "sunnypilot is an open source driver assistance system. sunnypilot offers the user a unique driving experience for over 350 supported car makes and models with modified behaviors of driving assist engagements. sunnypilot complies with the safety policy from comma.ai's openpilot as accurately as possible."
 homepage = "https://www.sunnypilot.ai"
 license = "MIT"
