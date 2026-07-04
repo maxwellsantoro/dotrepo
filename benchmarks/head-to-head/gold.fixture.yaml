@@ -1,0 +1,11 @@
+repos:
+  github.com/acme/widget:
+    description: widget toolkit
+    license: Apache-2.0
+    language: Rust
+    homepage: https://widget.example
+    archived: active
+    build: cargo build
+    test: cargo test
+    security_contact: security@widget.example
+    min_toolchain: '1.74'

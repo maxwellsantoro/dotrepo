@@ -193,6 +193,12 @@ See [`docs/public-export-examples.md`](docs/public-export-examples.md) for the
 full set of batch, search, compare, relations, lookup-efficiency, and coverage
 examples, and for the operator-facing measurement scripts.
 
+The repository also includes a falsifiable
+[head-to-head benchmark harness](benchmarks/head-to-head/) that compares
+dotrepo lookups against a GitHub API + README baseline on accuracy, abstention,
+confidently-wrong answers, latency, and bytes over the wire. It is intentionally
+allowed to make dotrepo lose; that is the measurement point.
+
 ## Why now
 
 Repository metadata is fragmented. Some facts live in README files. Some live in `CODEOWNERS`, `SECURITY.md`, CI config, or platform settings. Some are nowhere except tribal knowledge.

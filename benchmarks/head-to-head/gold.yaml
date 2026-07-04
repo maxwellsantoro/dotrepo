@@ -1,0 +1,44 @@
+# Gold dataset for the dotrepo head-to-head.
+#
+# Each field is either a scalar gold value, or {gold: <value|null>, note: ...}.
+# A null gold is EXCLUDED from scoring (outcome NO_GOLD) -- use it as a "curate
+# me" marker. Matching is lenient per field type (see bench/model.py):
+#   description -> substring   license -> SPDX   build/test -> token containment
+#   homepage    -> URL-normalized   archived -> boolean
+#
+# Curate buried fields (build/test/security_contact/min_toolchain) from the
+# repo's OWN docs, not from memory. The whole experiment is whether dotrepo
+# matches that ground truth more accurately, and more honestly, than a good
+# GitHub+README agent.
+
+repos:
+  github.com/sharkdp/fd:            # github-native fields verified live via REST
+    description: "alternative to 'find'"
+    license: "Apache-2.0"
+    language: "Rust"
+    homepage: {gold: null, note: "no homepage set on GitHub; dotrepo may still assert one"}
+    archived: "active"
+    build: {gold: null, note: "curate from README (cargo install fd-find / cargo build --release)"}
+    test: {gold: null, note: "curate from CONTRIBUTING/README"}
+    security_contact: {gold: null, note: "curate from SECURITY.md if present"}
+    min_toolchain: {gold: null, note: "curate MSRV from README/Cargo.toml"}
+
+  github.com/BurntSushi/ripgrep:
+    description: "recursively search"
+    license: {gold: null, note: "dual Unlicense OR MIT -- confirm SPDX id GitHub reports"}
+    language: "Rust"
+    archived: "active"
+    build: {gold: null, note: "curate"}
+    test: {gold: null, note: "curate"}
+    security_contact: {gold: null, note: "curate"}
+    min_toolchain: {gold: null, note: "curate MSRV"}
+
+  github.com/astral-sh/uv:
+    description: "package"
+    language: "Rust"
+    archived: "active"
+    license: {gold: null, note: "confirm: Apache-2.0 OR MIT"}
+    build: {gold: null, note: "curate"}
+    test: {gold: null, note: "curate"}
+    security_contact: {gold: null, note: "curate"}
+    min_toolchain: {gold: null, note: "curate"}
