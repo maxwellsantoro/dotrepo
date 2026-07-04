@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -126,6 +127,64 @@ class PublicPageRendererTests(unittest.TestCase):
 
         self.assertIn("first stats-bearing", rendered)
         self.assertIn("/v0/stats.json", rendered)
+
+    def test_health_json_summarizes_public_surface_coherence(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            public_root = Path(temp_dir)
+            (public_root / "v0/repos").mkdir(parents=True)
+            (public_root / "v0/snapshots/abc123/repos").mkdir(parents=True)
+            (public_root / ".well-known").mkdir()
+            meta = {
+                "apiVersion": "v0",
+                "generatedAt": "2026-07-03T12:00:00Z",
+                "snapshotId": "abc123",
+                "snapshotDigest": "abc123def456",
+                "paths": {"inventory": "/dotrepo/v0/snapshots/abc123/repos/index.json"},
+            }
+            inventory = {
+                "repositoryCount": 1,
+                "repositories": [inventory_entry("alpha")],
+            }
+            stats = {
+                "latest": {
+                    "snapshotId": "abc123",
+                    "snapshotDigest": "abc123def456",
+                    "repositoryCount": 1,
+                },
+                "pagedigest": {"siteRev": 2, "recordsCovered": 1},
+            }
+            files = {
+                "freshness": {"snapshotDigest": "abc123def456"},
+                "files": [
+                    {
+                        "path": "v0/snapshots/abc123/repos/index.json",
+                        "bytes": 42,
+                        "sha256": "a" * 64,
+                    }
+                ],
+            }
+            pagedigest = {
+                "version": 1,
+                "site_rev": 2,
+                "entries": {"/v0/repos/github.com/example/alpha/index.json": {"rev": 1}},
+            }
+            (public_root / "index.html").write_text("<!doctype html>")
+            (public_root / "v0/meta.json").write_text(json.dumps(meta))
+            (public_root / "v0/repos/index.json").write_text(json.dumps(inventory))
+            (public_root / "v0/stats.json").write_text(json.dumps(stats))
+            (public_root / "v0/files.json").write_text(json.dumps(files))
+            (public_root / ".well-known/pagedigest.json").write_text(json.dumps(pagedigest))
+
+            health = public_pages.build_public_health(public_root, meta, inventory, stats)
+
+        self.assertIs(health["ok"], True)
+        self.assertEqual(health["canonicalOrigin"], "https://dotrepo.org")
+        self.assertEqual(health["snapshotId"], "abc123")
+        self.assertEqual(health["reposIndexCount"], 1)
+        self.assertEqual(health["statsRepositoryCount"], 1)
+        self.assertEqual(health["pagedigestSiteRev"], 2)
+        self.assertEqual(health["checkedAt"], "2026-07-03T12:00:00Z")
+        self.assertEqual(len(health["homepageDigest"]), 64)
 
 
 if __name__ == "__main__":

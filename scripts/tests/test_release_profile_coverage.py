@@ -41,6 +41,34 @@ def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path
         assert f"{signal}={minimum}" in command
 
 
+def test_release_gate_verifies_public_health_payload() -> None:
+    meta = {
+        "apiVersion": "v0",
+        "generatedAt": "2026-07-03T12:00:00Z",
+        "snapshotId": "abc123",
+        "snapshotDigest": "abc123def456",
+    }
+    inventory = {"repositories": [{"identity": {"repo": "alpha"}}]}
+    stats = {
+        "latest": {"repositoryCount": 1},
+        "pagedigest": {"siteRev": 2, "recordsCovered": 4},
+    }
+    health = {
+        "ok": True,
+        "canonicalOrigin": "https://dotrepo.org",
+        "apiVersion": "v0",
+        "snapshotId": "abc123",
+        "snapshotDigest": "abc123def456",
+        "reposIndexCount": 1,
+        "statsRepositoryCount": 1,
+        "pagedigestSiteRev": 2,
+        "pagedigestRecordsCovered": 4,
+        "checkedAt": "2026-07-03T12:00:00Z",
+    }
+
+    release_gate.verify_health_payload(health, meta, inventory, stats, "health fixture")
+
+
 def test_profile_coverage_baseline_is_well_formed() -> None:
     baseline = json.loads(
         (REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json").read_text()

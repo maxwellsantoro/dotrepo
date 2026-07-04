@@ -216,6 +216,57 @@ def validate_pagedigest_stats(
     }
 
 
+def validate_health(
+    health: dict[str, Any], meta: dict[str, Any], inventory: dict[str, Any], stats: dict[str, Any]
+) -> dict[str, Any]:
+    repositories = inventory.get("repositories")
+    require(isinstance(repositories, list), "health validation needs inventory repositories")
+    latest = stats.get("latest")
+    require(isinstance(latest, dict), "health validation needs stats latest")
+    pagedigest_stats = stats.get("pagedigest")
+    require(isinstance(pagedigest_stats, dict), "health validation needs stats pagedigest")
+    expected = {
+        "ok": True,
+        "canonicalOrigin": "https://dotrepo.org",
+        "apiVersion": meta.get("apiVersion"),
+        "snapshotId": meta.get("snapshotId"),
+        "snapshotDigest": meta.get("snapshotDigest"),
+        "reposIndexCount": len(repositories),
+        "statsRepositoryCount": latest.get("repositoryCount"),
+        "pagedigestSiteRev": pagedigest_stats.get("siteRev"),
+        "pagedigestRecordsCovered": pagedigest_stats.get("recordsCovered"),
+        "checkedAt": meta.get("generatedAt"),
+    }
+    for key, expected_value in expected.items():
+        require(
+            health.get(key) == expected_value,
+            f"health {key} disagrees with public surface",
+        )
+    require(
+        health.get("reposIndexCount") == health.get("statsRepositoryCount"),
+        "health repository counts disagree",
+    )
+    for key in (
+        "homepageDigest",
+        "metaDigest",
+        "statsDigest",
+        "reposIndexDigest",
+        "filesDigest",
+        "pagedigestDigest",
+    ):
+        digest = health.get(key)
+        require(
+            isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest) is not None,
+            f"health {key} is not a sha256 hex digest",
+        )
+    return {
+        "ok": health.get("ok"),
+        "snapshotId": health.get("snapshotId"),
+        "reposIndexCount": health.get("reposIndexCount"),
+        "pagedigestSiteRev": health.get("pagedigestSiteRev"),
+    }
+
+
 def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]:
     meta = fetch_json(origin, "/v0/meta.json")
     paths = meta.get("paths")
@@ -243,6 +294,7 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
     files = fetch_json(origin, files_path)
     log = fetch_json(origin, "/v0/snapshots/log.json")
     stats = fetch_json(origin, "/v0/stats.json")
+    health = fetch_json(origin, "/v0/health.json")
     expected_freshness = {
         key: meta.get(key)
         for key in ("generatedAt", "snapshotDigest", "staleAfter")
@@ -335,6 +387,7 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
         "dotrepo site_rev is invalid",
     )
     pagedigest_stats = validate_pagedigest_stats(stats, manifest)
+    health_summary = validate_health(health, meta, inventory, stats)
     return {
         "snapshotDigest": digest,
         "generatedAt": meta.get("generatedAt"),
@@ -345,6 +398,7 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
         "archiveSample": archive_sample,
         "siteRev": manifest.get("site_rev"),
         "pagedigestStats": pagedigest_stats,
+        "health": health_summary,
     }
 
 

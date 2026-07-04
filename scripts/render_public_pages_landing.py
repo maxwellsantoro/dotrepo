@@ -1,6 +1,7 @@
 #!/usr/bin/env -S uv run python
 
 import argparse
+import hashlib
 import html
 import json
 import tomllib
@@ -152,6 +153,121 @@ def load_optional_json(path: Path) -> dict:
     if not path.is_file():
         return {}
     return json.loads(path.read_text())
+
+
+def file_sha256(path: Path) -> str:
+    if not path.is_file():
+        raise SystemExit(f"missing required file for health digest: {path}")
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def validate_public_health_inputs(
+    input_dir: Path, meta: dict, inventory: dict, stats: dict, pagedigest_manifest: dict
+) -> dict:
+    repositories = inventory.get("repositories")
+    if not isinstance(repositories, list):
+        raise SystemExit("cannot build health.json: inventory repositories is not a list")
+    repos_index_count = len(repositories)
+    declared_repository_count = inventory.get("repositoryCount")
+    if declared_repository_count != repos_index_count:
+        raise SystemExit(
+            "cannot build health.json: inventory repositoryCount "
+            f"{declared_repository_count!r} disagrees with {repos_index_count} entries"
+        )
+
+    latest = stats.get("latest")
+    if not isinstance(latest, dict):
+        raise SystemExit("cannot build health.json: stats.latest is missing")
+    stats_repository_count = latest.get("repositoryCount")
+    if stats_repository_count != repos_index_count:
+        raise SystemExit(
+            "cannot build health.json: stats latest repositoryCount "
+            f"{stats_repository_count!r} disagrees with inventory count {repos_index_count}"
+        )
+
+    snapshot_id = meta.get("snapshotId")
+    snapshot_digest = meta.get("snapshotDigest")
+    if latest.get("snapshotId") != snapshot_id:
+        raise SystemExit(
+            "cannot build health.json: stats latest snapshotId disagrees with meta snapshotId"
+        )
+    if latest.get("snapshotDigest") != snapshot_digest:
+        raise SystemExit(
+            "cannot build health.json: stats latest snapshotDigest disagrees with meta snapshotDigest"
+        )
+
+    paths = meta.get("paths")
+    if not isinstance(paths, dict):
+        raise SystemExit("cannot build health.json: meta.paths is missing")
+    expected_inventory_tail = f"/v0/snapshots/{snapshot_id}/repos/index.json"
+    declared_inventory = paths.get("inventory")
+    if not isinstance(declared_inventory, str) or not declared_inventory.endswith(
+        expected_inventory_tail
+    ):
+        raise SystemExit(
+            "cannot build health.json: meta.paths.inventory does not point at "
+            f"the current snapshot inventory ({expected_inventory_tail})"
+        )
+
+    file_manifest = load_json(input_dir / "v0" / "files.json")
+    file_freshness = file_manifest.get("freshness")
+    if not isinstance(file_freshness, dict):
+        raise SystemExit("cannot build health.json: files.json freshness is missing")
+    if file_freshness.get("snapshotDigest") != snapshot_digest:
+        raise SystemExit(
+            "cannot build health.json: files.json freshness snapshotDigest disagrees with meta"
+        )
+    file_paths = {
+        entry.get("path")
+        for entry in file_manifest.get("files", [])
+        if isinstance(entry, dict) and isinstance(entry.get("path"), str)
+    }
+    if expected_inventory_tail.lstrip("/") not in file_paths:
+        raise SystemExit(
+            "cannot build health.json: files.json is missing the snapshot inventory path"
+        )
+
+    pagedigest_stats = stats.get("pagedigest")
+    if not isinstance(pagedigest_stats, dict):
+        raise SystemExit("cannot build health.json: stats.pagedigest is missing")
+    if pagedigest_stats.get("siteRev") != pagedigest_manifest.get("site_rev"):
+        raise SystemExit(
+            "cannot build health.json: stats.pagedigest.siteRev disagrees with PageDigest manifest"
+        )
+    entries = pagedigest_manifest.get("entries")
+    if not isinstance(entries, dict):
+        raise SystemExit("cannot build health.json: PageDigest entries is missing")
+    if pagedigest_stats.get("recordsCovered") != len(entries):
+        raise SystemExit(
+            "cannot build health.json: stats.pagedigest.recordsCovered disagrees with PageDigest entries"
+        )
+
+    return {
+        "reposIndexCount": repos_index_count,
+        "statsRepositoryCount": stats_repository_count,
+        "pagedigestSiteRev": pagedigest_manifest.get("site_rev"),
+        "pagedigestRecordsCovered": len(entries),
+    }
+
+
+def build_public_health(input_dir: Path, meta: dict, inventory: dict, stats: dict) -> dict:
+    pagedigest_manifest = load_json(input_dir / ".well-known" / "pagedigest.json")
+    counts = validate_public_health_inputs(input_dir, meta, inventory, stats, pagedigest_manifest)
+    return {
+        "ok": True,
+        "canonicalOrigin": "https://dotrepo.org",
+        "apiVersion": meta.get("apiVersion"),
+        "snapshotId": meta.get("snapshotId"),
+        "snapshotDigest": meta.get("snapshotDigest"),
+        "homepageDigest": file_sha256(input_dir / "index.html"),
+        "metaDigest": file_sha256(input_dir / "v0" / "meta.json"),
+        "statsDigest": file_sha256(input_dir / "v0" / "stats.json"),
+        "reposIndexDigest": file_sha256(input_dir / "v0" / "repos" / "index.json"),
+        "filesDigest": file_sha256(input_dir / "v0" / "files.json"),
+        "pagedigestDigest": file_sha256(input_dir / ".well-known" / "pagedigest.json"),
+        **counts,
+        "checkedAt": meta.get("generatedAt"),
+    }
 
 
 def shorten_digest(value: str) -> str:
@@ -2789,6 +2905,10 @@ def main() -> int:
               <span>Snapshot freshness and digest metadata.</span>
             </div>
             <div class="endpoint">
+              <code>{html.escape(site_href(base_path, '/v0/health.json'))}</code>
+              <span>Machine-checkable origin, snapshot, count, and digest coherence.</span>
+            </div>
+            <div class="endpoint">
               <code>{html.escape(site_href(base_path, '/v0/repos/index.json'))}</code>
               <span>Repository inventory and navigation links.</span>
             </div>
@@ -2855,6 +2975,10 @@ def main() -> int:
             input_dir / "writing" / article["slug"] / "index.html",
             render_article_page(article, base_path),
         )
+    write_text(
+        input_dir / "v0" / "health.json",
+        json.dumps(build_public_health(input_dir, meta, inventory, stats), indent=2) + "\n",
+    )
     write_text(input_dir / ".nojekyll", "")
     print(input_dir / "index.html")
     return 0

@@ -519,7 +519,7 @@
   </style>
 </head>
 <body>
-  <script id="dotrepo-homepage-snapshot" type="application/json">{"apiVersion":"v0","generatedAt":"2026-06-29T06:00:00Z","snapshotDigest":"2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e","staleAfter":"2026-06-30T06:00:00Z","repositoryCount":613}</script>
+  <script id="dotrepo-homepage-snapshot" type="application/json">{"apiVersion":"v0","generatedAt":"2026-07-03T12:00:00Z","snapshotDigest":"36f920af151bc66dfa0a93144857c004f08db1962d55991a70bfd0a1c44216b1","staleAfter":"2026-07-04T12:00:00Z","repositoryCount":613}</script>
   <div class="page">
     <header class="nav" aria-label="Top navigation">
       <div class="brand">
@@ -575,16 +575,16 @@
             <span>Accepted maintainer-owned claim examples in the checked-in index.</span>
           </div>
           <div class="stat">
-            <strong>2026-06-29 06:00 UTC</strong>
+            <strong>2026-07-03 12:00 UTC</strong>
             <span>Snapshot generated at.</span>
           </div>
           <div class="stat">
-            <strong><code>2e779bd9bf40...9d1f29e24e</code></strong>
-            <span>Snapshot digest <code>2e779bd9bf404f50a1fbf44c58e6d1e86e42240d7360f2fac20a659d1f29e24e</code>.</span>
+            <strong><code>36f920af151b...a1c44216b1</code></strong>
+            <span>Snapshot digest <code>36f920af151bc66dfa0a93144857c004f08db1962d55991a70bfd0a1c44216b1</code>.</span>
           </div>
           <div class="stat">
             <strong>Stale after</strong>
-            <span>2026-06-30 06:00 UTC</span>
+            <span>2026-07-04 12:00 UTC</span>
           </div>
         </div>
       </aside>
@@ -593,15 +593,37 @@
     <section class="panel section">
       <h2>PageDigest dogfood</h2>
       <p class="section__intro">
-        The public stats endpoint is ready for PageDigest economics, but this
-        checked-in public tree was rendered before the first stats-bearing
-        export. Once <code>/v0/stats.json</code> is present, this section will
-        publish records covered, skipped fetches, avoided bytes, and estimated
-        tokens avoided directly from the export.
+        dotrepo publishes thousands of small JSON records. PageDigest lets a
+        consumer check the whole covered set first, then fetch only records
+        whose content actually changed. These numbers come from the current
+        export's <a href="/v0/stats.json"><code>/v0/stats.json</code></a>.
       </p>
-      <p class="section__note">
-        Contract endpoint: <code>/v0/stats.json</code>.
-      </p>
+      <div class="stat-grid stat-grid--wide">
+        <div class="stat">
+          <strong>2,453 tracked records</strong>
+          <span>Records covered by <code>/.well-known/pagedigest.json</code>.</span>
+        </div>
+        <div class="stat">
+          <strong>135 needing fetch</strong>
+          <span>New or changed records in this export cycle.</span>
+        </div>
+        <div class="stat">
+          <strong>2,318 fetches avoided</strong>
+          <span>Covered records that a PageDigest-aware consumer can skip.</span>
+        </div>
+        <div class="stat">
+          <strong>3.9 MB avoided</strong>
+          <span>Payload bytes skipped this cycle out of 4.6 MB covered.</span>
+        </div>
+        <div class="stat">
+          <strong>~1.0M tokens avoided</strong>
+          <span>Coarse bytes ÷ 4 estimate for agent-context savings.</span>
+        </div>
+        <div class="stat">
+          <strong>site_rev 2</strong>
+          <span>Manifest size 658.6 KB; generated 2026-07-03 12:00 UTC.</span>
+        </div>
+      </div>
     </section>
 
     <section class="panel section">
@@ -624,11 +646,11 @@
               <span>The reviewed overlay remains visible while the accepted maintainer claim points to the canonical source of truth.</span>
             </div>
             <div class="endpoint">
-              <code>confidence: high</code>
-              <span>Provenance: imported, verified</span>
+              <code>confidence: medium</code>
+              <span>Provenance: imported</span>
             </div>
             <div class="endpoint">
-              <code>Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Import...</code>
+              <code>Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` un...</code>
               <span>Selection stays explained instead of being reduced to a bare answer.</span>
             </div>
           </div>
@@ -649,18 +671,17 @@
   },
   &quot;selection&quot;: {
     &quot;reason&quot;: &quot;only_matching_record&quot;,
-    &quot;recordStatus&quot;: &quot;verified&quot;,
+    &quot;recordStatus&quot;: &quot;imported&quot;,
     &quot;claim&quot;: {
       &quot;state&quot;: &quot;accepted&quot;,
       &quot;handoff&quot;: &quot;superseded&quot;
     },
     &quot;trust&quot;: {
-      &quot;confidence&quot;: &quot;high&quot;,
+      &quot;confidence&quot;: &quot;medium&quot;,
       &quot;provenance&quot;: [
-        &quot;imported&quot;,
-        &quot;verified&quot;
+        &quot;imported&quot;
       ],
-      &quot;notes&quot;: &quot;Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Import...&quot;
+      &quot;notes&quot;: &quot;Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` un...&quot;
     },
     &quot;artifacts&quot;: {
       &quot;reviewPath&quot;: &quot;repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/review.md&quot;,
@@ -926,6 +947,10 @@
               <span>Snapshot freshness and digest metadata.</span>
             </div>
             <div class="endpoint">
+              <code>/v0/health.json</code>
+              <span>Machine-checkable origin, snapshot, count, and digest coherence.</span>
+            </div>
+            <div class="endpoint">
               <code>/v0/repos/index.json</code>
               <span>Repository inventory and navigation links.</span>
             </div>
@@ -1036,7 +1061,7 @@
 <article class="repo-card">
               <div class="repo-card__head">
                 <p class="repo-card__eyebrow">Indexed repository</p>
-                <h3>AI Pair Programming in Your Terminal</h3>
+                <h3>aider</h3>
                 <p class="repo-card__path">github.com/Aider-AI/aider</p>
               </div>
               <p class="repo-card__description">Aider lets you pair program with LLMs to start a new project or build on your existing codebase.</p>
@@ -1049,7 +1074,7 @@
 <article class="repo-card">
               <div class="repo-card__head">
                 <p class="repo-card__eyebrow">Indexed repository</p>
-                <h3>interesting-python: 有趣的Python爬虫和数据分析小项目</h3>
+                <h3>interesting-python</h3>
                 <p class="repo-card__path">github.com/Alfred1984/interesting-python</p>
               </div>
               <p class="repo-card__description">可以用Python实现的有趣的小项目，内容包括Python爬虫、Python数据分析、机器学习、深度学习等，持续更新中。 本Repository主要用于存放项目代码，对应的项目文章可以关注公众号。</p>
@@ -1062,7 +1087,7 @@
 <article class="repo-card">
               <div class="repo-card__head">
                 <p class="repo-card__eyebrow">Indexed repository</p>
-                <h3>Alibaba-NLP%2FDeepResearch | Trendshift</h3>
+                <h3>DeepResearch</h3>
                 <p class="repo-card__path">github.com/Alibaba-NLP/DeepResearch</p>
               </div>
               <p class="repo-card__description">👏 Welcome to try Tongyi DeepResearch via our ** Modelscope online demo** or **🤗 Huggingface online demo** or **bailian service**!</p>

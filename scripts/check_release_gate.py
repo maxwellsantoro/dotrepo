@@ -1,6 +1,7 @@
 #!/usr/bin/env -S uv run python
 
 import argparse
+import hashlib
 import html
 import json
 import os
@@ -97,6 +98,10 @@ def capture(cmd: list[str], *, cwd: Path) -> str:
         text=True,
     )
     return completed.stdout.strip()
+
+
+def file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def host_target(repo_root: Path) -> str:
@@ -347,6 +352,44 @@ def verify_freshness(payload: dict, meta: dict, source: str) -> None:
         )
 
 
+def verify_health_payload(
+    health: dict, meta: dict, inventory: dict, stats: dict, source: str
+) -> None:
+    repositories = inventory.get("repositories")
+    if not isinstance(repositories, list):
+        raise SystemExit(f"health check cannot verify malformed inventory: {source}")
+    latest = stats.get("latest")
+    if not isinstance(latest, dict):
+        raise SystemExit(f"health check cannot verify malformed stats.latest: {source}")
+    pagedigest_stats = stats.get("pagedigest")
+    if not isinstance(pagedigest_stats, dict):
+        raise SystemExit(f"health check cannot verify missing stats.pagedigest: {source}")
+
+    expected = {
+        "ok": True,
+        "canonicalOrigin": "https://dotrepo.org",
+        "apiVersion": meta.get("apiVersion"),
+        "snapshotId": meta.get("snapshotId"),
+        "snapshotDigest": meta.get("snapshotDigest"),
+        "reposIndexCount": len(repositories),
+        "statsRepositoryCount": latest.get("repositoryCount"),
+        "pagedigestSiteRev": pagedigest_stats.get("siteRev"),
+        "pagedigestRecordsCovered": pagedigest_stats.get("recordsCovered"),
+        "checkedAt": meta.get("generatedAt"),
+    }
+    for key, value in expected.items():
+        if health.get(key) != value:
+            raise SystemExit(
+                f"health check mismatch in {source}: {key} expected {value!r}, "
+                f"got {health.get(key)!r}"
+            )
+    if health.get("reposIndexCount") != health.get("statsRepositoryCount"):
+        raise SystemExit(
+            f"health check repository counts disagree in {source}: "
+            f"{health.get('reposIndexCount')!r} vs {health.get('statsRepositoryCount')!r}"
+        )
+
+
 def verify_inline_javascript_syntax(document: str, source: str) -> None:
     scripts = re.findall(r"<script([^>]*)>(.*?)</script>", document, re.IGNORECASE | re.DOTALL)
     for index, (attrs, body) in enumerate(scripts, start=1):
@@ -372,12 +415,16 @@ def verify_inline_javascript_syntax(document: str, source: str) -> None:
 
 def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     meta_path = public_dir / "v0" / "meta.json"
+    health_path = public_dir / "v0" / "health.json"
+    stats_path = public_dir / "v0" / "stats.json"
     files_path = public_dir / "v0" / "files.json"
     inventory_path = public_dir / "v0" / "repos" / "index.json"
     homepage_path = public_dir / "index.html"
     docs_path = public_dir / "docs" / "index.html"
     repositories_path = public_dir / "repositories" / "index.html"
     ensure_file(meta_path)
+    ensure_file(health_path)
+    ensure_file(stats_path)
     ensure_file(files_path)
     ensure_file(inventory_path)
     ensure_file(homepage_path)
@@ -443,6 +490,22 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     repositories = inventory.get("repositories")
     if not isinstance(repositories, list) or not repositories:
         raise SystemExit(f"public export inventory is empty: {inventory_path}")
+    stats = json.loads(stats_path.read_text())
+    health = json.loads(health_path.read_text())
+    verify_health_payload(health, meta, inventory, stats, str(health_path))
+    expected_health_digests = {
+        "homepageDigest": homepage_path,
+        "metaDigest": meta_path,
+        "statsDigest": stats_path,
+        "reposIndexDigest": inventory_path,
+        "filesDigest": files_path,
+        "pagedigestDigest": public_dir / ".well-known" / "pagedigest.json",
+    }
+    for key, path in expected_health_digests.items():
+        if health.get(key) != file_sha256(path):
+            raise SystemExit(
+                f"health check digest mismatch in {health_path}: {key} does not match {path}"
+            )
     homepage_document = homepage_path.read_text()
     verify_homepage_snapshot_state(homepage_document, str(homepage_path), meta, inventory)
     verify_inline_javascript_syntax(homepage_document, str(homepage_path))
@@ -639,6 +702,20 @@ def smoke_test_release_bundle(
                     f"same-origin meta smoke failed ({status}) for {meta_url}: {body}"
                 )
             meta = json.loads(body)
+            stats_url = f"http://{server_addr}{base}/v0/stats.json"
+            status, body = http_get_text(stats_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin stats smoke failed ({status}) for {stats_url}: {body}"
+                )
+            stats = json.loads(body)
+            health_url = f"http://{server_addr}{base}/v0/health.json"
+            status, body = http_get_text(health_url)
+            if status != 200:
+                raise SystemExit(
+                    f"same-origin health smoke failed ({status}) for {health_url}: {body}"
+                )
+            verify_health_payload(json.loads(body), meta, inventory, stats, health_url)
             homepage_url = f"http://{server_addr}{base or '/'}"
             status, body = http_get_text(homepage_url)
             if status != 200:
@@ -752,6 +829,20 @@ def smoke_test_cloudflare_worker(worker_dir: Path, base_path: str) -> None:
                 f"Cloudflare Worker meta smoke failed ({status}) for {meta_url}: {body}"
             )
         meta = json.loads(body)
+        stats_url = f"http://{server_addr}{base}/v0/stats.json"
+        status, body = http_get_text(stats_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker stats smoke failed ({status}) for {stats_url}: {body}"
+            )
+        stats = json.loads(body)
+        health_url = f"http://{server_addr}{base}/v0/health.json"
+        status, body = http_get_text(health_url)
+        if status != 200:
+            raise SystemExit(
+                f"Cloudflare Worker health smoke failed ({status}) for {health_url}: {body}"
+            )
+        verify_health_payload(json.loads(body), meta, inventory, stats, health_url)
         homepage_url = f"http://{server_addr}{base or '/'}"
         status, body = http_get_text(homepage_url)
         if status != 200:
