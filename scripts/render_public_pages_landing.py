@@ -2756,6 +2756,29 @@ def main() -> int:
       </aside>
     </section>
 
+    <section class="panel section">
+      <h2>Two layers of cooperative automation</h2>
+      <p class="section__intro">
+        PageDigest prevents redundant fetching. dotrepo prevents redundant repository interpretation.
+        Together, they are publisher-declared state for automated clients: fetch less,
+        infer less, and preserve provenance.
+      </p>
+      <div class="three-up">
+        <article class="feature">
+          <h3><a href="https://pagedigest.org">PageDigest</a></h3>
+          <p>One manifest tells automated clients what changed before they spend requests on unchanged pages.</p>
+        </article>
+        <article class="feature">
+          <h3>dotrepo</h3>
+          <p>One trust-aware record tells automated clients what a repository is, how to use it, and why the answer won.</p>
+        </article>
+        <article class="feature">
+          <h3>Together</h3>
+          <p>Fetch less. Re-interpret less. Preserve provenance across repeated machine work.</p>
+        </article>
+      </div>
+    </section>
+
     {render_pagedigest_stats_dashboard(stats, base_path)}
 
     <section class="panel section">
