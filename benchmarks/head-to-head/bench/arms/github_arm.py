@@ -49,7 +49,11 @@ class GitHubArm(Arm):
         self._cost["__meta__"] = (nb, ms)
         # 2) docs for buried fields, fetched lazily-but-once per file
         for label, path in (("readme", "README.md"), ("security", "SECURITY.md"),
-                            ("contributing", "CONTRIBUTING.md")):
+                            ("contributing", "CONTRIBUTING.md"),
+                            ("cargo", "Cargo.toml"),
+                            ("rust_toolchain_toml", "rust-toolchain.toml"),
+                            ("rust_toolchain", "rust-toolchain"),
+                            ("pyproject", "pyproject.toml")):
             branch = self._meta.get("default_branch", "main")
             st, text, nb, ms = self.http.get(f"{RAW}/{owner}/{name}/{branch}/{path}")
             if st == 200:
@@ -99,6 +103,12 @@ class GitHubArm(Arm):
             return self._docs.get("security"), "SECURITY.md"
         if field.id == "test":
             return (self._docs.get("contributing") or self._docs.get("readme")), "docs"
+        if field.id == "min_toolchain":
+            parts = []
+            for label in ("readme", "cargo", "rust_toolchain_toml", "rust_toolchain", "pyproject"):
+                if self._docs.get(label):
+                    parts.append(f"\n--- {label} ---\n{self._docs[label]}")
+            return "\n".join(parts), "toolchain-docs"
         return self._docs.get("readme"), "README.md"
 
     def _heuristic_extract(self, field: Field, blob: str):
@@ -125,6 +135,15 @@ class GitHubArm(Arm):
                     return cmd, "low"
             return None, None
         if field.id == "min_toolchain":
+            m = re.search(r"rust-version\s*=\s*[\"'](\d+\.\d+(?:\.\d+)?)[\"']", blob, re.I)
+            if m:
+                return m.group(1), "high"
+            m = re.search(r"channel\s*=\s*[\"'](\d+\.\d+(?:\.\d+)?)[\"']", blob, re.I)
+            if m:
+                return m.group(1), "medium"
+            m = re.search(r"requires-python\s*=\s*[\"']>=\s*(\d+\.\d+)[\"']", blob, re.I)
+            if m:
+                return m.group(1), "medium"
             m = re.search(r"(rust|msrv)[^\n]{0,30}?(\d+\.\d+(?:\.\d+)?)", low)
             if m:
                 return m.group(2), "low"
@@ -162,8 +181,25 @@ class GitHubArm(Arm):
 
     def _charge_docs(self, field: Field):
         keys = {"security_contact": "__security__", "test": "__contributing__"}
+        if field.id == "min_toolchain":
+            return self._charge_many([
+                "__readme__",
+                "__cargo__",
+                "__rust_toolchain_toml__",
+                "__rust_toolchain__",
+                "__pyproject__",
+            ])
         primary = keys.get(field.id, "__readme__")
         return self._charge(primary)
+
+    def _charge_many(self, keys):
+        total_bytes = 0
+        total_ms = 0.0
+        for key in keys:
+            nb, ms = self._charge(key)
+            total_bytes += nb
+            total_ms += ms
+        return total_bytes, total_ms
 
 
 def _split(repo: str):

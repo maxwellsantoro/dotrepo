@@ -43,9 +43,8 @@ paying rent.
 
 ```bash
 # live run (needs a token: unauthenticated GitHub is 60 req/hr and will starve)
-export GITHUB_TOKEN=ghp_...
-uv run --with requests --with pyyaml python -m bench.run --gold gold.yaml --arms github,dotrepo \
-  --base-url https://dotrepo.org --out results
+GITHUB_TOKEN=$(gh auth token) uv run --with requests --with pyyaml python -m bench.run \
+  --gold gold.yaml --arms github,dotrepo --base-url https://dotrepo.org --out results
 
 # stronger baseline: let an LLM read the READMEs instead of regex
 uv run --with requests --with pyyaml python -m bench.run --gold gold.yaml --extractor llm --out results
@@ -64,6 +63,21 @@ uv run --with requests --with pyyaml python -m bench.run --gold gold.yaml --cach
 Commit the fixture dir and a regression becomes a frozen record you can diff and
 re-audit — the same discipline as freezing a failing pipeline record.
 
+### First live run
+
+`results/live-2026-07-04/` is the first curated live run: five indexed repos
+(`fd`, `ripgrep`, `uv`, `bat`, `ruff`), GitHub-native facts from the GitHub API,
+and buried facts curated from upstream README/CONTRIBUTING/SECURITY/toolchain
+files. The run freezes both arms' HTTP responses under
+`results/live-2026-07-04/fixtures/` so the report is auditable.
+
+Headline result: dotrepo used materially fewer tokens and slightly beat the
+naive GitHub+docs baseline on buried-field accuracy, but it did **not** win the
+full benchmark because coverage was lower and one GitHub-native field was
+confidently wrong: `sharkdp/fd` `repo.description` returned language-link text
+(`[中文] [한국어]`) at high confidence. That is precisely the failure mode this
+harness is meant to make visible.
+
 ### Offline self-test
 
 ```bash
@@ -77,10 +91,11 @@ doesn't, the scorer is broken.
 
 ## Curating gold
 
-`gold.yaml` ships with GitHub-native fields for a few repos and buried fields
-left `null` (excluded until curated). Fill buried fields from each repo's **own
-docs**, not memory — the experiment is only as honest as the gold. Add repos
-that are in the dotrepo index so both arms have something to answer.
+`gold.yaml` ships with a small curated starter set. Fill or revise buried fields
+from each repo's **own docs**, not memory — the experiment is only as honest as
+the gold. Add repos that are in the dotrepo index so both arms have something to
+answer. Leave a field `null` when the upstream docs do not expose a canonical
+answer; null fields are excluded from scoring.
 
 ## One assumption to verify
 

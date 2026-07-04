@@ -35,7 +35,7 @@ FIELDS = [
           FieldClass.BURIED, "command", "repo.test",
           "scrape README/CONTRIBUTING for test instructions"),
     Field("security_contact", "Where to report a security vulnerability.",
-          FieldClass.BURIED, "categorical", "repo.security.contact",
+          FieldClass.BURIED, "categorical", "owners.security_contact",
           "scrape SECURITY.md"),
     Field("min_toolchain", "Minimum required toolchain / runtime version (MSRV, Node, Python).",
           FieldClass.BURIED, "categorical", "repo.toolchain.min",

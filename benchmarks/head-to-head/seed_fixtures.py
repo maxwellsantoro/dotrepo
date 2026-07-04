@@ -8,6 +8,9 @@ from urllib.parse import quote
 
 CACHE = "results/fixtures"
 os.makedirs(CACHE, exist_ok=True)
+for name in os.listdir(CACHE):
+    if name.endswith(".json"):
+        os.unlink(os.path.join(CACHE, name))
 
 def put(url, status, text):
     h = hashlib.sha256(url.encode()).hexdigest()[:24]
@@ -55,7 +58,7 @@ put(f"https://raw.githubusercontent.com/{O}/{R}/main/CONTRIBUTING.md", 404, "")
 # CONFIDENTLY WRONG on license (says MIT @ high). This is the scenario that
 # separates "accurate index" from "confidently wrong index".
 paths = ["repo.description", "repo.license", "repo.language", "repo.homepage",
-         "repo.archived", "repo.build", "repo.test", "repo.security.contact",
+         "repo.archived", "repo.build", "repo.test", "owners.security_contact",
          "repo.toolchain.min"]
 def result(path, value, conf, prov="native-record"):
     return {"path": path, "value": value, "confidence": conf, "provenance": prov}
@@ -67,7 +70,7 @@ env = {"repo": REPO, "results": [
     result("repo.archived", "active", "high"),
     result("repo.build", "cargo build --release", "high"),
     result("repo.test", "cargo test --all", "high"),
-    result("repo.security.contact", "security@widget.example", "high"),
+    result("owners.security_contact", "security@widget.example", "high"),
     result("repo.toolchain.min", "1.74", "medium"),
 ]}
 q = "&".join([f"repo={quote(REPO)}"] + [f"path={quote(p)}" for p in paths])

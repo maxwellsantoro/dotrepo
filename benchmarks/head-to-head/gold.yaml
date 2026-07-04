@@ -18,27 +18,51 @@ repos:
     language: "Rust"
     homepage: {gold: null, note: "no homepage set on GitHub; dotrepo may still assert one"}
     archived: "active"
-    build: {gold: null, note: "curate from README (cargo install fd-find / cargo build --release)"}
-    test: {gold: null, note: "curate from CONTRIBUTING/README"}
-    security_contact: {gold: null, note: "curate from SECURITY.md if present"}
-    min_toolchain: {gold: null, note: "curate MSRV from README/Cargo.toml"}
+    build: {gold: "cargo build", note: "README Development section: Build -> cargo build"}
+    test: {gold: "cargo test", note: "README Development section: Run unit tests and integration tests -> cargo test"}
+    security_contact: {gold: "https://github.com/sharkdp/fd/security/advisories/new", note: "SECURITY.md vulnerability reporting form"}
+    min_toolchain: {gold: "1.90.0", note: "Cargo.toml rust-version; README install prose still mentions an older release floor"}
 
   github.com/BurntSushi/ripgrep:
     description: "recursively search"
-    license: {gold: null, note: "dual Unlicense OR MIT -- confirm SPDX id GitHub reports"}
+    license: "Unlicense"
     language: "Rust"
+    homepage: {gold: null, note: "no homepage set on GitHub"}
     archived: "active"
-    build: {gold: null, note: "curate"}
-    test: {gold: null, note: "curate"}
-    security_contact: {gold: null, note: "curate"}
-    min_toolchain: {gold: null, note: "curate MSRV"}
+    build: {gold: "cargo build --release", note: "README Building section"}
+    test: {gold: "cargo test --all", note: "README Running tests section"}
+    security_contact: {gold: "https://blog.burntsushi.net/about/", note: "README Vulnerability reporting section"}
+    min_toolchain: {gold: "1.85.0", note: "README and Cargo.toml rust-version"}
 
   github.com/astral-sh/uv:
     description: "package"
+    license: "Apache-2.0"
     language: "Rust"
+    homepage: "https://docs.astral.sh/uv"
     archived: "active"
-    license: {gold: null, note: "confirm: Apache-2.0 OR MIT"}
-    build: {gold: null, note: "curate"}
-    test: {gold: null, note: "curate"}
-    security_contact: {gold: null, note: "curate"}
-    min_toolchain: {gold: null, note: "curate"}
+    build: {gold: null, note: "CONTRIBUTING documents build prerequisites but not one canonical build command"}
+    test: {gold: "cargo nextest run", note: "CONTRIBUTING recommends nextest for running tests"}
+    security_contact: {gold: "https://github.com/astral-sh/.github/blob/main/SECURITY.md", note: "SECURITY.md points to the organization security policy"}
+    min_toolchain: {gold: "1.94.0", note: "Cargo.toml rust-version; rust-toolchain.toml pins a newer toolchain channel"}
+
+  github.com/sharkdp/bat:
+    description: "cat(1) clone with wings"
+    license: "Apache-2.0"
+    language: "Rust"
+    homepage: {gold: null, note: "no homepage set on GitHub"}
+    archived: "active"
+    build: {gold: "cargo build --bins", note: "README Development section: Build (debug version)"}
+    test: {gold: "cargo test", note: "README Development section: Run unit tests and integration tests"}
+    security_contact: {gold: "https://david-peter.de/", note: "SECURITY.md says to contact David Peter via email at his site"}
+    min_toolchain: {gold: "1.88", note: "Cargo.toml rust-version; README install prose still mentions an older release floor"}
+
+  github.com/astral-sh/ruff:
+    description: "Python linter and code formatter"
+    license: "MIT"
+    language: "Rust"
+    homepage: "https://docs.astral.sh/ruff"
+    archived: "active"
+    build: {gold: "cargo build --workspace", note: "Cargo workspace build; CONTRIBUTING focuses on running ruff locally rather than a separate build step"}
+    test: {gold: "cargo test", note: "CONTRIBUTING development checks include RUFF_UPDATE_SCHEMA=1 cargo test"}
+    security_contact: {gold: null, note: "no repository SECURITY.md fetched for this benchmark curation"}
+    min_toolchain: {gold: "1.94", note: "Cargo.toml rust-version; rust-toolchain.toml pins a newer channel"}

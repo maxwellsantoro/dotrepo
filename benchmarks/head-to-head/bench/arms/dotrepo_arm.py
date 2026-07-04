@@ -19,9 +19,21 @@ from .base import Arm, Http
 # Candidate locations for the resolved value inside one query result, best-first.
 VALUE_KEYS = ["value", "resolved", "result", "answer", ["query", "value"], ["field", "value"]]
 # Candidate locations for confidence.
-CONF_KEYS = ["confidence", ["trust", "confidence"], ["value", "confidence"], "selectedConfidence"]
+CONF_KEYS = [
+    "confidence",
+    ["trust", "confidence"],
+    ["value", "confidence"],
+    "selectedConfidence",
+    ["query", "selection", "record", "record", "trust", "confidence"],
+]
 # Candidate locations for provenance/source (audit trail).
-PROV_KEYS = ["provenance", "source", ["trust", "provenance"], "origin"]
+PROV_KEYS = [
+    "provenance",
+    "source",
+    ["trust", "provenance"],
+    "origin",
+    ["query", "selection", "record", "record", "trust", "provenance"],
+]
 
 
 class DotrepoArm(Arm):
