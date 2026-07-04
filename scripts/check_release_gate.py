@@ -159,6 +159,35 @@ def public_profile_coverage_command(
     return command
 
 
+def public_quality_dashboard_command(
+    repo_root: Path, public_dir: Path, output_root: Path
+) -> list[str]:
+    baseline_path = repo_root / "scripts/fixtures/public_quality_baseline.json"
+    baseline = json.loads(baseline_path.read_text())
+    if baseline.get("schema") != "dotrepo-public-quality-baseline/v0":
+        raise SystemExit(f"invalid public quality baseline schema: {baseline_path}")
+    return [
+        sys.executable,
+        "scripts/check_public_quality_dashboard.py",
+        "--public-root",
+        str(public_dir),
+        "--min-profiles",
+        str(baseline["minProfiles"]),
+        "--max-generic-field-hits",
+        str(baseline["maxGenericFieldHits"]),
+        "--max-duplicated-description-values",
+        str(baseline["maxDuplicatedDescriptionValues"]),
+        "--max-duplicate-description-records",
+        str(baseline["maxDuplicateDescriptionRecords"]),
+        "--max-bad-looking-records",
+        str(baseline["maxBadLookingRecords"]),
+        "--output-json",
+        str(output_root / "public-quality-dashboard.json"),
+        "--output-md",
+        str(output_root / "public-quality-dashboard.md"),
+    ]
+
+
 def index_growth_tranche_command(repo_root: Path, output_root: Path) -> list[str]:
     baseline_path = repo_root / "scripts/fixtures/index_growth_tranche_baseline.json"
     baseline = json.loads(baseline_path.read_text())
@@ -969,6 +998,7 @@ def main() -> int:
         cwd=repo_root,
     )
     run(public_profile_coverage_command(repo_root, public_dir, output_root), cwd=repo_root)
+    run(public_quality_dashboard_command(repo_root, public_dir, output_root), cwd=repo_root)
     run(index_growth_tranche_command(repo_root, output_root), cwd=repo_root)
     for command in public_lookup_benchmark_commands(
         repo_root, public_dir, output_root, args.generated_at
@@ -1097,6 +1127,7 @@ def main() -> int:
     print(f"  public tree: {public_dir}")
     print(f"  public bundle: {public_bundle}")
     print(f"  profile coverage: {output_root / 'public-profile-coverage.json'}")
+    print(f"  public quality: {output_root / 'public-quality-dashboard.json'}")
     print(f"  index growth plan: {output_root / 'index-growth-plan.json'}")
     print(f"  lookup workload: {output_root / 'public-lookup-workload.json'}")
     print(f"  lookup efficiency: {output_root / 'public-lookup-efficiency.json'}")

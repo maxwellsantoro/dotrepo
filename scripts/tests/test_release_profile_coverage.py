@@ -85,6 +85,50 @@ def test_profile_coverage_baseline_is_well_formed() -> None:
     )
 
 
+def test_release_gate_applies_public_quality_baseline(tmp_path: Path) -> None:
+    public_dir = tmp_path / "public"
+    output_root = tmp_path / "release-gate"
+    baseline = json.loads(
+        (REPO_ROOT / "scripts/fixtures/public_quality_baseline.json").read_text()
+    )
+
+    command = release_gate.public_quality_dashboard_command(
+        REPO_ROOT, public_dir, output_root
+    )
+
+    assert "scripts/check_public_quality_dashboard.py" in command
+    assert command[command.index("--min-profiles") + 1] == str(baseline["minProfiles"])
+    assert command[command.index("--max-generic-field-hits") + 1] == str(
+        baseline["maxGenericFieldHits"]
+    )
+    assert command[command.index("--max-duplicated-description-values") + 1] == str(
+        baseline["maxDuplicatedDescriptionValues"]
+    )
+    assert command[command.index("--max-duplicate-description-records") + 1] == str(
+        baseline["maxDuplicateDescriptionRecords"]
+    )
+    assert command[command.index("--max-bad-looking-records") + 1] == str(
+        baseline["maxBadLookingRecords"]
+    )
+    assert str(output_root / "public-quality-dashboard.json") in command
+    assert str(output_root / "public-quality-dashboard.md") in command
+
+
+def test_public_quality_baseline_is_well_formed() -> None:
+    baseline = json.loads(
+        (REPO_ROOT / "scripts/fixtures/public_quality_baseline.json").read_text()
+    )
+
+    assert baseline == {
+        "schema": "dotrepo-public-quality-baseline/v0",
+        "minProfiles": 613,
+        "maxGenericFieldHits": 8,
+        "maxDuplicatedDescriptionValues": 1,
+        "maxDuplicateDescriptionRecords": 2,
+        "maxBadLookingRecords": 9,
+    }
+
+
 def test_release_gate_applies_index_growth_tranche_baseline(tmp_path: Path) -> None:
     output_root = tmp_path / "release-gate"
     growth_baseline = json.loads(
