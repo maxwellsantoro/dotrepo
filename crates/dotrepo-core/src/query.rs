@@ -34,6 +34,12 @@ fn normalize_query_path(key: &str) -> String {
         "" | "." => ".".into(),
         "trust" => "record.trust".into(),
         _ if key.starts_with("trust.") => format!("record.{}", key),
+        // Agent-facing conveniences for structured GitHub-native facts. The
+        // manifest stores all languages in priority order and GitHub-only
+        // archive state under the namespaced extension, but callers naturally
+        // ask for these as singular repo facts.
+        "repo.language" => "repo.languages.0".into(),
+        "repo.archived" => "x.github.archived".into(),
         _ => key.into(),
     }
 }

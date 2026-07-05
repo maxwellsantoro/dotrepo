@@ -112,6 +112,17 @@ the LLM prompt is deliberately narrow, and dotrepo's lower coverage remains
 visible. But it is now testing against a real model-reading-docs baseline, not
 regex in disguise.
 
+`results/aliascheck-2026-07-05/` is the fix-confirmation run after adding public
+query aliases for the obvious GitHub-native paths agents ask for:
+`repo.language` maps to the dominant `repo.languages.0`, and `repo.archived`
+maps to `x.github.archived`. The run uses the same curated gold against a local
+patched `dotrepo-public-query` server. That moves dotrepo from 47.5% to 72.5%
+overall accuracy and from 57.5% to 82.5% coverage while preserving 0
+confidently-wrong answers. The buried-field thesis result is unchanged in
+shape: dotrepo remains ahead on buried accuracy and confidently-wrong count, but
+minimum-toolchain coverage is still absent and needs a real schema/crawler
+feature rather than another alias.
+
 ### Offline self-test
 
 ```bash

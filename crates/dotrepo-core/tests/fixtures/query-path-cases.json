@@ -62,6 +62,42 @@
         "languages": ["rust", "toml"]
       }
     },
+    "path": "repo.language",
+    "expected": "rust"
+  },
+  {
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "native",
+        "status": "canonical"
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Example repository"
+      },
+      "x": {
+        "github": {
+          "archived": false
+        }
+      }
+    },
+    "path": "repo.archived",
+    "expected": false
+  },
+  {
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "native",
+        "status": "canonical"
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Example repository",
+        "languages": ["rust", "toml"]
+      }
+    },
     "path": "repo.languages.01",
     "expectedError": "query path not found: repo.languages.01"
   },

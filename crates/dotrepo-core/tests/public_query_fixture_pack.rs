@@ -43,6 +43,21 @@ fn serialize<T: Serialize>(value: T) -> Value {
     serde_json::to_value(value).expect("value serializes")
 }
 
+fn temp_dir(label: &str) -> PathBuf {
+    let unique = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .expect("clock works")
+        .as_nanos();
+    let path = std::env::temp_dir().join(format!(
+        "dotrepo-public-query-{}-{}-{}",
+        label,
+        std::process::id(),
+        unique
+    ));
+    fs::create_dir_all(&path).expect("temp dir created");
+    path
+}
+
 fn serialize_outcome<T: Serialize, E: Serialize>(value: std::result::Result<T, E>) -> Value {
     match value {
         Ok(value) => serialize(value),
@@ -195,4 +210,64 @@ fn public_query_fixture_pack_covers_success_and_error_contracts() {
         invalid_identity["error"]["code"],
         Value::String("invalid_repository_identity".into())
     );
+}
+
+#[test]
+fn public_query_aliases_common_github_native_fields() {
+    let root = temp_dir("aliases");
+    let record_dir = root.join("repos/github.com/example/alias");
+    fs::create_dir_all(&record_dir).expect("record dir created");
+    fs::write(
+        record_dir.join("record.toml"),
+        r#"
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/example/alias"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+
+[repo]
+name = "alias"
+description = "Alias coverage fixture."
+languages = ["Rust", "Shell"]
+
+[x.github]
+archived = false
+"#,
+    )
+    .expect("record written");
+    let freshness = PublicFreshness {
+        generated_at: "2026-03-10T18:30:00Z".into(),
+        snapshot_digest: "alias-fixture".into(),
+        stale_after: None,
+    };
+
+    let language = serialize_outcome(public_repository_query_or_error(
+        &root,
+        "github.com",
+        "example",
+        "alias",
+        "repo.language",
+        freshness.clone(),
+    ));
+    assert_eq!(language["path"], Value::String("repo.language".into()));
+    assert_eq!(language["value"], Value::String("Rust".into()));
+
+    let archived = serialize_outcome(public_repository_query_or_error(
+        &root,
+        "github.com",
+        "example",
+        "alias",
+        "repo.archived",
+        freshness,
+    ));
+    assert_eq!(archived["path"], Value::String("repo.archived".into()));
+    assert_eq!(archived["value"], Value::Bool(false));
+
+    fs::remove_dir_all(root).expect("temp dir removed");
 }
