@@ -450,10 +450,7 @@ fn append_github_evidence(
     if trimmed_non_empty(Some(manifest.repo.description.as_str()))
         == trimmed_non_empty(snapshot.description.as_deref())
     {
-        bullets.push(
-            "Filled repo.description from GitHub repository metadata when the README surface did not provide one."
-                .to_string(),
-        );
+        bullets.push("Constrained repo.description with GitHub repository metadata.".to_string());
     }
     bullets.push(
         "Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state)."
@@ -869,6 +866,63 @@ mod tests {
             .expect("index validates")
             .iter()
             .all(|finding| !finding.path.ends_with("record.toml")));
+
+        fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
+        fs::remove_dir_all(index_root).expect("index temp removed");
+    }
+
+    #[test]
+    fn crawl_constrains_readme_description_with_github_metadata() {
+        let index_root = temp_dir("github-description-constraint");
+        let materialized = materialize_repository(&MaterializeRepositoryInput {
+            repository: repository(),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents: "# fd\n\n[中文] [한국어]\n\nA better description appears later.\n"
+                        .into(),
+                }),
+                ..Default::default()
+            },
+        })
+        .expect("materialization succeeds");
+        let request = CrawlRepositoryRequest {
+            index_root: index_root.clone(),
+            repository: repository(),
+            generated_at: Some("2026-03-17T12:00:00Z".into()),
+            source_url: None,
+            synthesize: false,
+            synthesis_model: None,
+            synthesis_provider: None,
+            prior_synthesis_failure: None,
+        };
+        let github = snapshot(Some(
+            "A simple, fast and user-friendly alternative to find.",
+        ));
+
+        let report = crawl_repository_from_snapshot(&request, &github, &materialized)
+            .expect("crawl succeeds");
+        let import_plan = &report.writeback_plan.factual.import_plan;
+        assert_eq!(
+            import_plan.manifest.repo.description,
+            "A simple, fast and user-friendly alternative to find."
+        );
+        assert!(import_plan
+            .evidence_text
+            .as_deref()
+            .is_some_and(|text| text.contains(
+                "Set `repo.description` to `A simple, fast and user-friendly alternative to find.` from `GitHub API` after deterministic escalation."
+            )));
+        let trust_notes = import_plan
+            .manifest
+            .record
+            .trust
+            .as_ref()
+            .and_then(|trust| trust.notes.as_deref())
+            .unwrap_or("");
+        assert!(trust_notes.contains(
+            "Resolved `repo.description` from `GitHub API` after deterministic escalation."
+        ));
 
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");

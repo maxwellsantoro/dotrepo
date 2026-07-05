@@ -78,6 +78,12 @@ confidently wrong: `sharkdp/fd` `repo.description` returned language-link text
 (`[中文] [한국어]`) at high confidence. That is precisely the failure mode this
 harness is meant to make visible.
 
+`results/fixcheck-2026-07-05/` reruns the same gold against a local export after
+the crawler fix that treats GitHub-native description as a deterministic
+constraint on suspect README extraction. The fd description row is corrected and
+dotrepo's confidently-wrong count drops from 1 to 0. This is a fix-confirmation
+run, not a new adoption or thesis-validating benchmark.
+
 ### Offline self-test
 
 ```bash

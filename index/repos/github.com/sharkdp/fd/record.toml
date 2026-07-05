@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sharkdp/fd"
-generated_at = "2026-07-01T18:28:49.290155Z"
+generated_at = "2026-07-05T02:01:55.828494Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.description` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "fd"
-description = "[中文] [한국어]"
+description = "A simple, fast and user-friendly alternative to 'find'"
 homepage = "https://github.com/sharkdp/fd"
 license = "Apache-2.0"
 visibility = "public"
@@ -24,6 +25,7 @@ languages = [
     "Rust",
     "Shell",
     "Makefile",
+    "Awk",
 ]
 build = "cargo build"
 test = "cargo test"
@@ -63,6 +65,6 @@ archived = false
 clone_url = "https://github.com/sharkdp/fd.git"
 default_branch = "master"
 fork = false
-head_sha = "c73e5e58a47d1505a3d22298893e50c13ebc293d"
+head_sha = "fb1486f210885ae663338ebfab4e70210abc4809"
 html_url = "https://github.com/sharkdp/fd"
-stars = 43553
+stars = 43606

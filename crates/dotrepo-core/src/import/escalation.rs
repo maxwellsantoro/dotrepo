@@ -73,12 +73,19 @@ fn adjudicate_request_deterministic(
     request: &AdjudicationRequest,
     defer_conflicts_to_model: bool,
 ) -> AdjudicationResult {
+    let is_command_field = request.field == "repo.build" || request.field == "repo.test";
     for tier in ESCALATION_TIERS {
         let tier_candidates: Vec<_> = request
             .candidates
             .iter()
             .filter(|candidate| candidate.source_tier == tier)
-            .filter(|candidate| sanitize_import_command(&candidate.value).is_some())
+            .filter(|candidate| {
+                if is_command_field {
+                    sanitize_import_command(&candidate.value).is_some()
+                } else {
+                    !candidate.value.trim().is_empty()
+                }
+            })
             .collect();
         if tier_candidates.is_empty() {
             continue;
@@ -232,6 +239,7 @@ pub fn apply_adjudication_to_import_plan(
                     evidence.push_str("\n- ");
                     evidence.push_str(&bullet);
                 }
+                note_trust_resolution(plan, &result.field, &source_path, escalation_label);
             }
             AdjudicationOutcome::Absent { reason } => {
                 let preserved_candidates = distinct_command_candidates(&request.candidates);
@@ -264,6 +272,47 @@ pub fn apply_adjudication_to_import_plan(
             AdjudicationOutcome::Rejected { .. } => {}
         }
     }
+}
+
+fn note_trust_resolution(
+    plan: &mut ImportPlan,
+    field: &str,
+    source_path: &str,
+    escalation_label: &str,
+) {
+    let Some(trust) = plan.manifest.record.trust.as_mut() else {
+        return;
+    };
+    let mut notes = trust.notes.take().unwrap_or_default();
+    remove_stale_unset_note(&mut notes, field);
+    let resolution_note =
+        format!("Resolved `{field}` from `{source_path}` after {escalation_label} escalation.");
+    if notes.is_empty() {
+        notes = resolution_note;
+    } else if !notes.contains(&resolution_note) {
+        notes.push(' ');
+        notes.push_str(&resolution_note);
+    }
+    trust.notes = Some(notes);
+}
+
+fn remove_stale_unset_note(notes: &mut String, field: &str) {
+    let marker = format!("Left `{field}` unset because");
+    let Some(start) = notes.find(&marker) else {
+        return;
+    };
+    let after_marker = start + marker.len();
+    let end = notes[after_marker..]
+        .find(". ")
+        .map(|idx| after_marker + idx + 2)
+        .or_else(|| {
+            notes[after_marker..]
+                .rfind('.')
+                .map(|idx| after_marker + idx + 1)
+        })
+        .unwrap_or(notes.len());
+    notes.replace_range(start..end, "");
+    *notes = notes.split_whitespace().collect::<Vec<_>>().join(" ");
 }
 
 /// Deduplicates candidate commands by value, preserving first-seen order,
