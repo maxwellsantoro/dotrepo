@@ -357,6 +357,7 @@ pub fn import_repository_with_options(
         (contact, note)
     }
     let import_sources = ImportSources {
+        readme: readme.as_ref(),
         cargo_toml: cargo_toml.as_ref(),
         rust_toolchain_toml: rust_toolchain_toml.as_ref(),
         rust_toolchain: rust_toolchain.as_ref(),

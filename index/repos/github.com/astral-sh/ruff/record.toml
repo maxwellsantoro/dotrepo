@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/astral-sh/ruff"
-generated_at = "2026-07-05T05:17:47.410134Z"
+generated_at = "2026-07-05T14:36:07.826217Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/workflows/ci.yaml`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `.github/workflows/ci.yaml`. Left `repo.test` unset because `.github/workflows/ci.yaml` suggested an unsafe shell-like command. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Cargo.toml`, and `CONTRIBUTING.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `Cargo.toml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Ruff"
@@ -31,7 +31,8 @@ languages = [
     "JavaScript",
     "RenderScript",
 ]
-build = "cargo build --bin ruff"
+build = "cargo build --workspace"
+test = "cargo test"
 topics = [
     "linter",
     "pep8",
@@ -45,16 +46,6 @@ topics = [
     "styleguide",
     "ruff",
 ]
-
-[[repo.test_candidates]]
-command = "cargo test --workspace"
-ecosystem = "Rust"
-source = "Cargo.toml"
-
-[[repo.test_candidates]]
-command = "python -m pytest"
-ecosystem = "Python"
-source = "pyproject.toml"
 
 [repo.toolchain]
 min = "1.94"
@@ -104,4 +95,4 @@ default_branch = "main"
 fork = false
 head_sha = "e6f1513d78c99bc8af1fcc3bc2a9a81e25cb3c2d"
 html_url = "https://github.com/astral-sh/ruff"
-stars = 48428
+stars = 48438

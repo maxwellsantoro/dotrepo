@@ -183,7 +183,7 @@ pub(crate) fn resolve_unique_command_candidate(
         };
     }
 
-    if let Some((command, path)) = resolve_preferred_command_candidate(&present) {
+    if let Some((command, path)) = resolve_preferred_command_candidate(&present, select_build) {
         return UniqueCommandResolution::Unique {
             command,
             source_path: path,
@@ -197,14 +197,27 @@ pub(crate) fn resolve_unique_command_candidate(
     UniqueCommandResolution::Conflict { source_paths }
 }
 
-fn resolve_preferred_command_candidate(present: &[(String, String)]) -> Option<(String, String)> {
-    if !present
+fn resolve_preferred_command_candidate(
+    present: &[(String, String)],
+    select_build: bool,
+) -> Option<(String, String)> {
+    if present
         .iter()
         .all(|(_, path)| path.starts_with(".github/workflows/"))
     {
-        return None;
+        return resolve_preferred_workflow_command_candidate(present);
     }
 
+    if select_build {
+        return resolve_preferred_ecosystem_default_build_candidate(present);
+    }
+
+    None
+}
+
+fn resolve_preferred_workflow_command_candidate(
+    present: &[(String, String)],
+) -> Option<(String, String)> {
     let best_preference = present
         .iter()
         .map(|(_, path)| workflow_source_preference(path.rsplit('/').next().unwrap_or(path)))
@@ -233,6 +246,19 @@ fn resolve_preferred_command_candidate(present: &[(String, String)]) -> Option<(
     } else {
         None
     }
+}
+
+fn resolve_preferred_ecosystem_default_build_candidate(
+    present: &[(String, String)],
+) -> Option<(String, String)> {
+    let cargo = present
+        .iter()
+        .find(|(command, path)| path == "Cargo.toml" && command.starts_with("cargo build"))?;
+    let only_cargo_and_generic_python_build = present.iter().all(|(command, path)| {
+        (path == "Cargo.toml" && command.starts_with("cargo build"))
+            || (path == "pyproject.toml" && command == "python -m build")
+    });
+    only_cargo_and_generic_python_build.then(|| (cargo.0.clone(), cargo.1.clone()))
 }
 
 fn workflow_source_preference(file: &str) -> i32 {

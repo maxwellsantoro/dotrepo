@@ -619,40 +619,41 @@ fn declares_rake_task(line: &str, name: &str) -> bool {
 }
 
 pub(crate) fn infer_contributing_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
-    // Look for build/test instructions in code blocks within CONTRIBUTING.md
+    infer_markdown_doc_commands(file)
+}
+
+pub(crate) fn infer_readme_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    infer_markdown_doc_commands(file)
+}
+
+fn infer_markdown_doc_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    // Look for build/test instructions in fenced code blocks. This intentionally
+    // avoids prose-only guesses and user-facing examples that are not standard
+    // development commands.
     let mut build: Option<String> = None;
     let mut test: Option<String> = None;
     let mut in_code_block = false;
+    let mut current_heading = String::new();
     for line in file.contents.lines() {
         let trimmed = line.trim();
-        if trimmed.starts_with("```") {
+        if trimmed.starts_with("```") || trimmed.starts_with("~~~") {
             in_code_block = !in_code_block;
             continue;
         }
         if !in_code_block {
+            if let Some(heading) = markdown_heading_text(trimmed) {
+                current_heading = heading;
+            }
             continue;
         }
-        let lower = trimmed.to_lowercase();
-        if build.is_none()
-            && (lower.starts_with("cargo build")
-                || lower == "make"
-                || lower.starts_with("make build")
-                || lower.starts_with("make all")
-                || lower.starts_with("npm run build")
-                || lower.starts_with("go build")
-                || lower.starts_with("just build"))
-        {
-            build = Some(trimmed.to_string());
+        let Some(command) = normalize_documented_command_line(trimmed) else {
+            continue;
+        };
+        if build.is_none() && doc_heading_allows_command(&current_heading, true) {
+            build = documented_build_command(&command);
         }
-        if test.is_none()
-            && (lower.starts_with("cargo test")
-                || lower.starts_with("make test")
-                || lower.starts_with("make check")
-                || lower.starts_with("npm test")
-                || lower.starts_with("go test")
-                || lower.starts_with("just test"))
-        {
-            test = Some(trimmed.to_string());
+        if test.is_none() && doc_heading_allows_command(&current_heading, false) {
+            test = documented_test_command(&command);
         }
     }
     if build.is_none() && test.is_none() {
@@ -666,7 +667,139 @@ pub(crate) fn infer_contributing_commands(file: &ImportedFile) -> Option<Importe
     })
 }
 
+fn markdown_heading_text(line: &str) -> Option<String> {
+    let heading = line.strip_prefix('#')?.trim_start_matches('#').trim();
+    (!heading.is_empty()).then(|| heading.to_ascii_lowercase())
+}
+
+fn doc_heading_allows_command(heading: &str, select_build: bool) -> bool {
+    let development = heading.contains("develop") || heading.contains("contribut");
+    if select_build {
+        development || heading.contains("build") || heading.contains("compile")
+    } else {
+        development
+            || heading.contains("test")
+            || heading.contains("check")
+            || heading.contains("validation")
+    }
+}
+
+fn normalize_documented_command_line(line: &str) -> Option<String> {
+    let mut trimmed = line.trim();
+    if trimmed.is_empty() || trimmed.starts_with('#') {
+        return None;
+    }
+    for prompt in ["$", ">", "%", "❯"] {
+        if let Some(rest) = trimmed.strip_prefix(prompt) {
+            trimmed = rest.trim_start();
+            break;
+        }
+    }
+    if trimmed.starts_with("cd ") || trimmed == "cd" {
+        return None;
+    }
+
+    let mut parts = trimmed.split_whitespace().collect::<Vec<_>>();
+    if parts.first().is_some_and(|part| *part == "env") {
+        parts.remove(0);
+    }
+    while parts
+        .first()
+        .is_some_and(|part| is_env_assignment_token(part))
+    {
+        parts.remove(0);
+    }
+    if parts.is_empty() {
+        return None;
+    }
+    let command = parts.join(" ");
+    Some(strip_trailing_shell_comment(&command).to_string())
+}
+
+fn strip_trailing_shell_comment(command: &str) -> &str {
+    command
+        .split_once(" #")
+        .map(|(before, _)| before.trim_end())
+        .unwrap_or(command)
+}
+
+fn is_env_assignment_token(token: &str) -> bool {
+    let Some((name, value)) = token.split_once('=') else {
+        return false;
+    };
+    !name.is_empty()
+        && !value.is_empty()
+        && name
+            .chars()
+            .all(|ch| ch.is_ascii_alphanumeric() || ch == '_')
+        && name
+            .chars()
+            .next()
+            .is_some_and(|ch| ch.is_ascii_alphabetic() || ch == '_')
+}
+
+fn documented_build_command(command: &str) -> Option<String> {
+    for prefix in [
+        "bazel build",
+        "cargo build",
+        "go build",
+        "python -m build",
+        "npm run build",
+        "pnpm build",
+        "yarn build",
+        "bun run build",
+        "make build",
+        "make all",
+        "just build",
+    ] {
+        if starts_with_command_prefix(command, prefix) {
+            return Some(command.to_string());
+        }
+    }
+    (command == "make").then(|| "make".to_string())
+}
+
+fn documented_test_command(command: &str) -> Option<String> {
+    if starts_with_command_prefix(command, "cargo nextest run") {
+        // Documentation often shows a selector-specific nextest invocation
+        // immediately after recommending nextest. Publish the runner command,
+        // not the example's one-test selector.
+        return Some("cargo nextest run".to_string());
+    }
+    for prefix in [
+        "bazel test",
+        "cargo test",
+        "go test",
+        "python -m pytest",
+        "pytest",
+        "npm test",
+        "npm run test",
+        "pnpm test",
+        "yarn test",
+        "bun run test",
+        "make test",
+        "make check",
+        "just test",
+    ] {
+        if starts_with_command_prefix(command, prefix) {
+            return Some(command.to_string());
+        }
+    }
+    None
+}
+
+fn starts_with_command_prefix(command: &str, prefix: &str) -> bool {
+    let command = command.trim();
+    command == prefix
+        || command
+            .strip_prefix(prefix)
+            .is_some_and(|rest| rest.chars().next().is_some_and(char::is_whitespace))
+}
+
 pub(crate) fn infer_workflow_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    if workflow_file_is_specialized_noncanonical(&file.path) {
+        return None;
+    }
     let run_commands = extract_workflow_run_commands(&file.contents);
     let build = first_matching_workflow_command(&run_commands, true);
     let test = first_matching_workflow_command(&run_commands, false);
@@ -680,6 +813,13 @@ pub(crate) fn infer_workflow_commands(file: &ImportedFile) -> Option<ImportedCom
         build,
         test,
     })
+}
+
+fn workflow_file_is_specialized_noncanonical(path: &str) -> bool {
+    let file = path.rsplit('/').next().unwrap_or(path).to_ascii_lowercase();
+    ["bench", "benchmark", "fuzz"]
+        .iter()
+        .any(|term| file.contains(term))
 }
 
 pub(crate) fn extract_workflow_run_commands(contents: &str) -> Vec<String> {
@@ -746,6 +886,9 @@ pub(crate) fn first_matching_workflow_command(
                 "bun run build",
             ] {
                 if trimmed.starts_with(prefix) {
+                    if prefix == "cargo build" && is_target_specific_cargo_build(trimmed) {
+                        return None;
+                    }
                     return Some(trimmed.to_string());
                 }
             }
@@ -848,5 +991,18 @@ pub(crate) fn first_matching_workflow_command(
         }
 
         None
+    })
+}
+
+fn is_target_specific_cargo_build(command: &str) -> bool {
+    let mut tokens = command.split_whitespace();
+    if tokens.next() != Some("cargo") || tokens.next() != Some("build") {
+        return false;
+    }
+    tokens.any(|token| {
+        matches!(token, "--bin" | "-p" | "--package" | "--example")
+            || token.starts_with("--bin=")
+            || token.starts_with("--package=")
+            || token.starts_with("--example=")
     })
 }

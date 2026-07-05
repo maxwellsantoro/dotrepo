@@ -290,6 +290,7 @@ pub enum CommandSourceTier {
 }
 
 pub(crate) struct ImportSources<'a> {
+    pub(crate) readme: Option<&'a ImportedFile>,
     pub(crate) cargo_toml: Option<&'a ImportedFile>,
     pub(crate) rust_toolchain_toml: Option<&'a ImportedFile>,
     pub(crate) rust_toolchain: Option<&'a ImportedFile>,

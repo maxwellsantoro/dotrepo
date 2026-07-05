@@ -20,8 +20,9 @@ use extraction::{
     infer_cargo_manifest_commands, infer_cmake_workflow_commands, infer_composer_commands,
     infer_contributing_commands, infer_dotnet_commands, infer_go_module_commands,
     infer_gradle_commands, infer_justfile_commands, infer_makefile_commands, infer_maven_commands,
-    infer_mix_commands, infer_package_json_commands, infer_rakefile_commands, infer_rebar_commands,
-    infer_setup_cfg_commands, infer_setup_py_commands, infer_workflow_commands,
+    infer_mix_commands, infer_package_json_commands, infer_rakefile_commands,
+    infer_readme_commands, infer_rebar_commands, infer_setup_cfg_commands, infer_setup_py_commands,
+    infer_workflow_commands,
 };
 use policy::resolve_command_field;
 
@@ -163,6 +164,9 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.contributing.and_then(infer_contributing_commands) {
         candidates.push(candidate);
     }
+    if let Some(candidate) = sources.readme.and_then(infer_readme_commands) {
+        candidates.push(candidate);
+    }
     // TaskScript tier
     if let Some(candidate) = sources.makefile.and_then(infer_makefile_commands) {
         candidates.push(candidate);
@@ -297,6 +301,114 @@ jobs:
     }
 
     #[test]
+    fn readme_doc_commands_extract_development_build_and_test() {
+        use super::super::types::{CommandSourceTier, ImportedFile};
+        use super::extraction::infer_readme_commands;
+
+        let readme = ImportedFile {
+            path: "README.md".into(),
+            contents: r#"
+# bat
+
+## Development
+
+```bash
+# Recursive clone to retrieve all submodules
+git clone --recursive https://github.com/sharkdp/bat
+
+# Build (debug version)
+cd bat
+cargo build --bins
+
+# Run unit tests and integration tests
+cargo test
+```
+"#
+            .into(),
+        };
+
+        let candidate = infer_readme_commands(&readme).expect("README commands");
+        assert_eq!(candidate.source_tier, CommandSourceTier::ContribDoc);
+        assert_eq!(candidate.build.as_deref(), Some("cargo build --bins"));
+        assert_eq!(candidate.test.as_deref(), Some("cargo test"));
+    }
+
+    #[test]
+    fn docs_nextest_examples_publish_runner_not_specific_selector() {
+        use super::super::types::ImportedFile;
+        use super::extraction::infer_contributing_commands;
+
+        let contributing = ImportedFile {
+            path: "CONTRIBUTING.md".into(),
+            contents: r#"
+# Contributing
+
+For running tests, we recommend nextest.
+
+```shell
+cargo nextest run -E 'test(test_name)'
+```
+"#
+            .into(),
+        };
+
+        let candidate = infer_contributing_commands(&contributing).expect("CONTRIBUTING commands");
+        assert_eq!(candidate.test.as_deref(), Some("cargo nextest run"));
+    }
+
+    #[test]
+    fn docs_strip_leading_env_assignments_from_test_commands() {
+        use super::super::types::ImportedFile;
+        use super::extraction::infer_contributing_commands;
+
+        let contributing = ImportedFile {
+            path: "CONTRIBUTING.md".into(),
+            contents: r#"
+# Contributing
+
+```shell
+RUFF_UPDATE_SCHEMA=1 cargo test
+```
+"#
+            .into(),
+        };
+
+        let candidate = infer_contributing_commands(&contributing).expect("CONTRIBUTING commands");
+        assert_eq!(candidate.test.as_deref(), Some("cargo test"));
+    }
+
+    #[test]
+    fn workflow_inference_ignores_target_specific_cargo_builds() {
+        use super::super::types::ImportedFile;
+        use super::extraction::first_matching_workflow_command;
+        use super::extraction::infer_workflow_commands;
+
+        let target_specific = vec!["cargo build --bin ruff".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&target_specific, true),
+            None
+        );
+
+        let equals_target_specific = vec!["cargo build --profile=profiling --bin=ty".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&equals_target_specific, true),
+            None
+        );
+
+        let release_build = vec!["cargo build --release".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&release_build, true).as_deref(),
+            Some("cargo build --release")
+        );
+
+        let fuzz_workflow = ImportedFile {
+            path: ".github/workflows/daily_fuzz.yaml".into(),
+            contents: "jobs:\n  fuzz:\n    steps:\n      - run: cargo build --locked\n".into(),
+        };
+        assert!(infer_workflow_commands(&fuzz_workflow).is_none());
+    }
+
+    #[test]
     fn workflow_and_makefile_inference_improvements_do_not_regress_safety() {
         // The improvements to workflow matching and makefile target detection
         // must continue to respect sanitize_import_command. Compound shell is
@@ -416,6 +528,7 @@ jobs:
         };
 
         let result = infer_imported_commands(&ImportSources {
+            readme: None,
             cargo_toml: None,
             rust_toolchain_toml: None,
             rust_toolchain: None,

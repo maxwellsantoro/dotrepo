@@ -134,6 +134,19 @@ preserving 0 confidently-wrong answers. All five `min_toolchain` rows are now
 correct; the remaining misses are command-precision misses or honest test
 abstentions.
 
+`results/commands-2026-07-05/` is the fix-confirmation run after improving
+command precision on the actual defects surfaced by `toolchain-2026-07-05/`.
+The crawler now materializes CONTRIBUTING files, README/CONTRIBUTING command
+extraction is section-aware, documented env-prefixed test commands are
+normalized to safe command strings, selector-specific `cargo nextest run ...`
+examples publish the canonical runner command, and specialized benchmark/fuzz
+workflows no longer masquerade as canonical build/test instructions. On the
+same five-repo gold set, dotrepo moves from 82.5% to 97.5% overall accuracy,
+from 66.7% to 100.0% buried-field accuracy, and from 95.0% to 100.0% coverage,
+while preserving 0 confidently-wrong answers. The only remaining miss is a
+GitHub-native `bat` description wording mismatch; all buried build/test,
+security-contact, and toolchain rows are correct.
+
 ### Offline self-test
 
 ```bash

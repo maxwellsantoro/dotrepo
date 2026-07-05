@@ -30,10 +30,13 @@ const README_CANDIDATES: &[&str] = &[
 // Cargo.toml/package.json/pyproject.toml/go.mod, so every other ecosystem
 // dotrepo-core already knows how to parse (Maven, Gradle, Composer, Mix,
 // Rebar, CMake presets, Makefile, justfile, Rakefile, setup.py/setup.cfg)
-// was silently starved of the one file it needed. `.csproj` is handled
-// separately in `fetch_root_csproj_file` because its filename is not fixed.
+// was silently starved of the one file it needed. CONTRIBUTING files feed
+// doc-declared command extraction. `.csproj` is handled separately in
+// `fetch_root_csproj_file` because its filename is not fixed.
 const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
     "Cargo.toml",
+    "CONTRIBUTING.md",
+    ".github/CONTRIBUTING.md",
     "package.json",
     "pyproject.toml",
     "go.mod",
@@ -935,6 +938,8 @@ mod tests {
         // commands that were plainly present in their root Makefile.
         let expected = [
             "Cargo.toml",
+            "CONTRIBUTING.md",
+            ".github/CONTRIBUTING.md",
             "package.json",
             "pyproject.toml",
             "go.mod",

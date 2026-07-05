@@ -216,6 +216,7 @@ rust-version = "1.90.0"
 "#,
         );
         let sources = ImportSources {
+            readme: None,
             cargo_toml: Some(&cargo),
             rust_toolchain_toml: None,
             rust_toolchain: None,
@@ -264,6 +265,7 @@ channel = "1.94.0"
 "#,
         );
         let sources = ImportSources {
+            readme: None,
             cargo_toml: Some(&cargo),
             rust_toolchain_toml: Some(&rust_toolchain),
             rust_toolchain: None,

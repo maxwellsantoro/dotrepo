@@ -2,8 +2,8 @@
 
 - Imported repository name from README.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.build from .github/workflows/ci.yml as `cargo build --verbose`.
-- Inferred repo.test from Cargo.toml as `cargo test --workspace`.
+- Imported repo.build from README.md as `cargo build --release`.
+- Imported repo.test from README.md as `cargo test --all`.
 - Imported repo.toolchain.min from Cargo.toml as `1.85` (Rust).
 - Discovered related relation to github.com/BurntSushi/ripgrep from Cargo.toml repository.
 - Discovered related relation to github.com/BurntSushi/linux from README cross-link.

@@ -368,6 +368,7 @@ fn declared_package_script_beats_pyproject_ecosystem_default() {
     };
 
     let result = infer_imported_commands(&ImportSources {
+        readme: None,
         cargo_toml: None,
         rust_toolchain_toml: None,
         rust_toolchain: None,
@@ -397,6 +398,56 @@ fn declared_package_script_beats_pyproject_ecosystem_default() {
             .as_ref()
             .map(|selection| selection.command.as_str()),
         Some("npm test")
+    );
+}
+
+#[test]
+fn cargo_build_beats_generic_pyproject_build_default() {
+    let cargo = ImportedFile {
+        path: "Cargo.toml".into(),
+        contents: "[workspace]\nmembers = [\"crates/cli\"]\n".into(),
+    };
+    let pyproject = ImportedFile {
+        path: "pyproject.toml".into(),
+        contents: "[build-system]\nrequires = [\"hatchling\"]\n".into(),
+    };
+
+    let result = infer_imported_commands(&ImportSources {
+        readme: None,
+        cargo_toml: Some(&cargo),
+        rust_toolchain_toml: None,
+        rust_toolchain: None,
+        package_json: None,
+        pyproject_toml: Some(&pyproject),
+        setup_py: None,
+        setup_cfg: None,
+        go_mod: None,
+        pom_xml: None,
+        maven_wrapper: false,
+        build_gradle: None,
+        gradle_wrapper: false,
+        composer_json: None,
+        csproj: None,
+        mix_exs: None,
+        rebar_config: None,
+        cmake_presets_json: None,
+        makefile: None,
+        justfile: None,
+        rakefile: None,
+        contributing: None,
+        workflow_files: &[],
+    });
+
+    assert_eq!(
+        result
+            .build
+            .as_ref()
+            .map(|selection| selection.command.as_str()),
+        Some("cargo build --workspace")
+    );
+    assert!(
+        result.test.is_none(),
+        "test should remain unresolved when Cargo and Python defaults conflict"
     );
 }
 

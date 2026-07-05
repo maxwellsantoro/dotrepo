@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sharkdp/fd"
-generated_at = "2026-07-05T05:17:29.309739Z"
+generated_at = "2026-07-05T14:35:50.259737Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.description` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `README.md`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.description` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "fd"
@@ -69,6 +68,6 @@ archived = false
 clone_url = "https://github.com/sharkdp/fd.git"
 default_branch = "master"
 fork = false
-head_sha = "fb1486f210885ae663338ebfab4e70210abc4809"
+head_sha = "aa41f342b5e7a8998d607c967ea672d5971763d3"
 html_url = "https://github.com/sharkdp/fd"
-stars = 43608
+stars = 43617
