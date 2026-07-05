@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spf13/cobra"
-generated_at = "2026-07-01T18:29:38.643402Z"
+generated_at = "2026-07-05T22:55:53.521317Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "cobra"
-description = "Cobra is a library for creating powerful modern CLI applications."
+description = "A Commander for modern Go CLI interactions"
 homepage = "https://cobra.dev"
 license = "Apache-2.0"
 visibility = "public"
@@ -25,8 +25,8 @@ languages = [
     "Go",
     "Makefile",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make build"
+test = "make test"
 topics = [
     "cobra",
     "cobra-library",
@@ -45,6 +45,10 @@ topics = [
     "subcommands",
     "posix",
 ]
+
+[repo.toolchain]
+min = "1.15"
+ecosystem = "Go"
 
 [owners]
 maintainers = []
@@ -75,4 +79,4 @@ default_branch = "main"
 fork = false
 head_sha = "ad460ea8f249db69c943a365fb84f3a59042d54e"
 html_url = "https://github.com/spf13/cobra"
-stars = 44187
+stars = 44206

@@ -66,3 +66,58 @@ repos:
     test: {gold: "cargo test", note: "CONTRIBUTING development checks include RUFF_UPDATE_SCHEMA=1 cargo test"}
     security_contact: {gold: null, note: "no repository SECURITY.md fetched for this benchmark curation"}
     min_toolchain: {gold: "1.94", note: "Cargo.toml rust-version; rust-toolchain.toml pins a newer channel"}
+
+  github.com/starship/starship:
+    description: "minimal, blazing-fast"
+    license: "ISC"
+    language: "Rust"
+    homepage: "https://starship.rs"
+    archived: "active"
+    build: {gold: "cargo build", note: "Cargo.toml root package; no canonical README build command; ignore maintenance workflow npm build"}
+    test: {gold: "cargo test", note: "CONTRIBUTING says unit tests can be run with cargo test"}
+    security_contact: {gold: "https://github.com/starship/starship/security/advisories/new", note: "SECURITY.md GitHub Advisory reporting link"}
+    min_toolchain: {gold: "1.90", note: "Cargo.toml rust-version"}
+
+  github.com/hyperium/hyper:
+    description: "HTTP library for Rust"
+    license: "MIT"
+    language: "Rust"
+    homepage: "https://hyper.rs"
+    archived: "active"
+    build: {gold: "cargo build", note: "Cargo.toml root crate/workspace default; no separate canonical build command in README/CONTRIBUTING"}
+    test: {gold: "cargo test", note: "Cargo.toml Rust crate default; crawler deterministic fallback should not use unsafe workflow shell"}
+    security_contact: {gold: "https://github.com/hyperium/hyper/security/advisories/new", note: "SECURITY.md draft advisory link"}
+    min_toolchain: {gold: "1.63", note: "Cargo.toml rust-version"}
+
+  github.com/spf13/cobra:
+    description: "Commander for modern Go CLI"
+    license: "Apache-2.0"
+    language: "Go"
+    homepage: "https://cobra.dev"
+    archived: "active"
+    build: {gold: "make build", note: "Makefile build target imported; Go module also supports go build"}
+    test: {gold: "make test", note: "CONTRIBUTING says run tests with go test ./... or make test; Makefile provides canonical target"}
+    security_contact: {gold: "cobra-security@googlegroups.com", note: "SECURITY.md reporting email"}
+    min_toolchain: {gold: "1.15", note: "go.mod go directive"}
+
+  github.com/vitejs/vite:
+    description: "Next generation frontend tooling"
+    license: "MIT"
+    language: "TypeScript"
+    homepage: "http://vite.dev"
+    archived: "active"
+    build: {gold: "pnpm run build", note: "CONTRIBUTING says run pnpm run build; package.json build script is pnpm -r --filter='./packages/*' run build"}
+    test: {gold: "pnpm test", note: "CONTRIBUTING/package.json: pnpm test runs unit, serve, and build tests"}
+    security_contact: {gold: "https://github.com/vitejs/vite/security", note: ".github/SECURITY.md private vulnerability report URL"}
+    min_toolchain: {gold: "20.19.0", note: "package.json engines.node floor ^20.19.0 || >=22.12.0"}
+
+  github.com/tokio-rs/tokio:
+    description: "runtime for writing reliable asynchronous applications"
+    license: "MIT"
+    language: "Rust"
+    homepage: "https://tokio.rs"
+    archived: "active"
+    build: {gold: "cargo build", note: "Cargo workspace default; workflow Fortanix target build is not canonical"}
+    test: {gold: "cargo test", note: "Cargo workspace default; workflow doc-only/full-features test is not canonical suite command"}
+    security_contact: {gold: "security@tokio.rs", note: "SECURITY.md reporting mailbox"}
+    min_toolchain: {gold: "1.71", note: "README current MSRV"}

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vitejs/vite"
-generated_at = "2026-07-01T18:35:44.541985Z"
+generated_at = "2026-07-05T22:55:58.1179Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "node compatibility"
-description = "Next Generation Frontend Tooling"
+name = "vite"
+description = "Next generation frontend tooling. It's fast!"
 homepage = "http://vite.dev"
 license = "MIT"
 visibility = "public"
@@ -46,6 +46,10 @@ topics = [
     "dev-server",
 ]
 
+[repo.toolchain]
+min = "20.19.0"
+ecosystem = "Node.js"
+
 [owners]
 maintainers = []
 security_contact = "https://github.com/vitejs/vite/security"
@@ -73,6 +77,6 @@ archived = false
 clone_url = "https://github.com/vitejs/vite.git"
 default_branch = "main"
 fork = false
-head_sha = "2c530542da1c50b95b7f0cb17adf82f64ecf97f3"
+head_sha = "a1d73a3879196cfd76b05a364e30b1e6b4bdf757"
 html_url = "https://github.com/vitejs/vite"
-stars = 81650
+stars = 81786

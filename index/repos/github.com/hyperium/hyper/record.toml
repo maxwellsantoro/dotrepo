@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hyperium/hyper"
-generated_at = "2026-07-01T18:07:35.745491Z"
+generated_at = "2026-07-05T22:55:49.374411Z"
 
 [record.trust]
 confidence = "high"
@@ -13,10 +13,10 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = 'Low-level"'
+name = "hyper"
 description = "An HTTP library for Rust"
 homepage = "https://hyper.rs"
 license = "MIT"
@@ -34,6 +34,10 @@ topics = [
     "hyper",
     "http",
 ]
+
+[repo.toolchain]
+min = "1.63"
+ecosystem = "Rust"
 
 [owners]
 maintainers = []
@@ -64,4 +68,4 @@ default_branch = "master"
 fork = false
 head_sha = "e0d14d19a0a87962efe92acdaa029253be54a612"
 html_url = "https://github.com/hyperium/hyper"
-stars = 16190
+stars = 16202

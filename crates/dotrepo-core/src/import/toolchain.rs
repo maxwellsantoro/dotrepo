@@ -1,14 +1,16 @@
 //! Conservative extraction of a single primary minimum toolchain version from
-//! root package metadata.
+//! root package metadata and explicit README MSRV statements.
 //!
 //! This intentionally stays narrower than a runtime matrix. If a root manifest
-//! declares an unambiguous minimum version, publish it under `repo.toolchain`;
-//! otherwise leave the field absent so consumers fall back to existing docs.
+//! declares an unambiguous minimum version, or the README has an explicit
+//! "current MSRV" statement, publish it under `repo.toolchain`; otherwise leave
+//! the field absent so consumers fall back to existing docs.
 use super::types::{ImportSources, ImportedFile, ImportedToolchainMetadata};
 
 pub(crate) fn infer_toolchain_metadata(sources: &ImportSources<'_>) -> ImportedToolchainMetadata {
     let candidates = [
         sources.cargo_toml.and_then(infer_cargo_rust_version),
+        sources.readme.and_then(infer_readme_rust_msrv),
         sources
             .rust_toolchain_toml
             .and_then(infer_rust_toolchain_toml_channel),
@@ -137,6 +139,37 @@ fn infer_go_mod_version(file: &ImportedFile) -> Option<ToolchainCandidate> {
     candidate(file, "Go", version)
 }
 
+fn infer_readme_rust_msrv(file: &ImportedFile) -> Option<ToolchainCandidate> {
+    for line in file.contents.lines() {
+        let lower = line.to_ascii_lowercase();
+        let has_msrv = lower.contains("msrv");
+        let has_minimum_supported_rust = lower.contains("minimum supported rust version");
+        if !has_msrv && !has_minimum_supported_rust {
+            continue;
+        }
+
+        let is_current_statement = lower.contains("current msrv")
+            || lower.contains("current minimum supported rust version")
+            || (has_minimum_supported_rust && lower.contains("current"));
+        let is_direct_minimum_statement =
+            has_minimum_supported_rust && (lower.contains(" is ") || lower.contains(':'));
+        if !is_current_statement && !is_direct_minimum_statement {
+            continue;
+        }
+
+        let start = lower
+            .find("current msrv")
+            .or_else(|| lower.find("minimum supported rust version"))
+            .or_else(|| lower.find("msrv"))
+            .unwrap_or(0);
+        if let Some(version) = first_version_like(&line[start..]) {
+            return candidate(file, "Rust", Some(version));
+        }
+    }
+
+    None
+}
+
 fn extract_min_version_from_specifier(value: &str) -> Option<String> {
     let normalized = value.trim();
     for operator in [">=", "==", "="] {
@@ -153,6 +186,13 @@ fn first_version_token(value: &str) -> Option<String> {
             ch.is_whitespace() || matches!(ch, ',' | ';' | '|' | '<' | '>' | '=' | '^' | '~')
         })
         .find_map(normalize_version)
+}
+
+fn first_version_like(value: &str) -> Option<String> {
+    value
+        .char_indices()
+        .filter(|(_, ch)| ch.is_ascii_digit())
+        .find_map(|(index, _)| normalize_version(&value[index..]))
 }
 
 fn normalize_version(value: &str) -> Option<String> {
@@ -291,6 +331,57 @@ channel = "1.94.0"
         };
         let metadata = infer_toolchain_metadata(&sources);
         assert_eq!(metadata.min.as_deref(), Some("1.88"));
+    }
+
+    #[test]
+    fn extracts_current_readme_msrv_when_manifest_has_no_minimum() {
+        let cargo = file(
+            "Cargo.toml",
+            r#"
+[workspace]
+members = ["tokio"]
+"#,
+        );
+        let readme = file(
+            "README.md",
+            r#"
+## Supported Rust Versions
+
+Tokio will keep a rolling MSRV (minimum supported rust version) policy.
+The current MSRV is 1.71.
+
+ * `1.47.x` - LTS release until September 2026. (MSRV 1.70)
+"#,
+        );
+        let sources = ImportSources {
+            readme: Some(&readme),
+            cargo_toml: Some(&cargo),
+            rust_toolchain_toml: None,
+            rust_toolchain: None,
+            package_json: None,
+            pyproject_toml: None,
+            setup_py: None,
+            setup_cfg: None,
+            go_mod: None,
+            pom_xml: None,
+            maven_wrapper: false,
+            build_gradle: None,
+            gradle_wrapper: false,
+            composer_json: None,
+            csproj: None,
+            mix_exs: None,
+            rebar_config: None,
+            cmake_presets_json: None,
+            makefile: None,
+            justfile: None,
+            rakefile: None,
+            contributing: None,
+            workflow_files: &[],
+        };
+        let metadata = infer_toolchain_metadata(&sources);
+        assert_eq!(metadata.min.as_deref(), Some("1.71"));
+        assert_eq!(metadata.ecosystem.as_deref(), Some("Rust"));
+        assert_eq!(metadata.source_path.as_deref(), Some("README.md"));
     }
 
     #[test]

@@ -85,6 +85,43 @@ def _spdx(s: str) -> str:
     return _SPDX.get(n, s.strip())
 
 
+_IGNORED_COMMAND_TOKENS = {"the", "a", "run", "then", "&&", "|"}
+_SPECIALIZING_COMMAND_TOKENS = {
+    "--all-features",
+    "--bench",
+    "--benches",
+    "--bin",
+    "--bins",
+    "--doc",
+    "--example",
+    "--examples",
+    "--features",
+    "--no-default-features",
+    "--package",
+    "--target",
+    "--test",
+    "--tests",
+    "-f",
+    "-p",
+}
+_SPECIALIZING_COMMAND_PREFIXES = tuple(
+    f"{token}=" for token in _SPECIALIZING_COMMAND_TOKENS if token.startswith("--")
+)
+
+
+def _command_tokens(s: str) -> set[str]:
+    return set(_norm(s).replace("`", "").split())
+
+
+def _specializing_command_tokens(tokens: set[str]) -> set[str]:
+    return {
+        token
+        for token in tokens
+        if token in _SPECIALIZING_COMMAND_TOKENS
+        or token.startswith(_SPECIALIZING_COMMAND_PREFIXES)
+    }
+
+
 def values_match(match: str, got: str, gold: str) -> bool:
     """True if `got` should count as the gold answer under this field's rule."""
     if got is None or gold is None:
@@ -102,10 +139,17 @@ def values_match(match: str, got: str, gold: str) -> bool:
         strip = lambda u: _norm(u).rstrip("/").replace("https://", "").replace("http://", "").replace("www.", "")
         return strip(got) == strip(gold)
     if match == "command":
-        # order-independent token containment: gold tokens must appear in got
-        gt = set(_norm(got).replace("`", "").split())
-        gd = set(_norm(gold).replace("`", "").split())
-        core = {t for t in gd if t not in {"the", "a", "run", "then", "&&", "|"}}
+        # Order-independent token containment, but do not allow a narrow
+        # workflow selector (target/features/doc/bin/package/etc.) to pass as a
+        # canonical command unless the gold command itself contains that same
+        # selector. Without this guard, `cargo test --doc --features full`
+        # incorrectly scores as `cargo test`.
+        gt = _command_tokens(got)
+        gd = _command_tokens(gold)
+        extra_specializers = _specializing_command_tokens(gt) - _specializing_command_tokens(gd)
+        if extra_specializers:
+            return False
+        core = {t for t in gd if t not in _IGNORED_COMMAND_TOKENS}
         return core.issubset(gt) and len(core) > 0
     # categorical (default): normalized substring either direction
     a, b = _norm(got), _norm(gold)

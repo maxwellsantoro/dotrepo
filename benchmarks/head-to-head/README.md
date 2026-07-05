@@ -164,6 +164,35 @@ scores 65.0% overall with 2 confidently-wrong buried answers, while dotrepo
 scores 100.0% overall, 100.0% buried, 0 confidently-wrong, and less than half
 the approximate wire-token count.
 
+`results/expanded-10-before-command-filter-2026-07-05/` expands the curated
+gold set from five to ten indexed repositories (`starship`, `hyper`, `cobra`,
+`vite`, and `tokio` added) and intentionally captures the next unflattering
+signal: dotrepo had four confidently-wrong buried command rows. The witnesses
+were release/maintenance workflow commands and target/feature/doc-specific
+Cargo invocations (`starship` `npm run build`, `hyper` feature-only build, and
+`tokio` Fortanix/doc-only commands) masquerading as canonical clean-checkout
+build/test instructions.
+
+`results/expanded-10-command-filter-2026-07-05/` confirms the command-filter
+fix in isolation: those four confidently-wrong buried rows drop to zero, with
+one remaining honest abstention for `tokio`'s README-only MSRV.
+
+`results/expanded-10-msrv-2026-07-05/` is the fix-confirmation run after
+filtering noncanonical workflow filenames, rejecting selector-specific Cargo
+workflow commands unless the selector is itself part of the gold command, and
+importing explicit README "current MSRV" statements when no manifest
+`rust-version` exists. On the ten-repo set, dotrepo scores 100.0% overall,
+100.0% buried, 100.0% coverage, and 0 confidently-wrong answers.
+
+`results/llm-expanded-10-msrv-2026-07-05/` reruns the stronger OpenRouter-backed
+GitHub+LLM-docs baseline against that expanded ten-repo surface. GitHub+LLM
+scores 70.6% overall and 34.2% on buried fields, with three confidently-wrong
+buried answers (`bat` security contact, `ruff` test command, and `ruff`
+toolchain). dotrepo scores 100.0% overall and buried, 0 confidently-wrong, and
+uses roughly half the approximate wire-token count. This is still a curated
+sample, not adoption, but it is the first larger head-to-head where dotrepo
+clears the accuracy, honesty, and token bars simultaneously.
+
 ### Offline self-test
 
 ```bash

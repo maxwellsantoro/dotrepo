@@ -817,9 +817,20 @@ pub(crate) fn infer_workflow_commands(file: &ImportedFile) -> Option<ImportedCom
 
 fn workflow_file_is_specialized_noncanonical(path: &str) -> bool {
     let file = path.rsplit('/').next().unwrap_or(path).to_ascii_lowercase();
-    ["bench", "benchmark", "fuzz"]
-        .iter()
-        .any(|term| file.contains(term))
+    [
+        "bench",
+        "benchmark",
+        "clippy",
+        "doc",
+        "docs",
+        "format",
+        "fmt",
+        "fuzz",
+        "lint",
+        "release",
+    ]
+    .iter()
+    .any(|term| file.contains(term))
 }
 
 pub(crate) fn extract_workflow_run_commands(contents: &str) -> Vec<String> {
@@ -886,7 +897,9 @@ pub(crate) fn first_matching_workflow_command(
                 "bun run build",
             ] {
                 if trimmed.starts_with(prefix) {
-                    if prefix == "cargo build" && is_target_specific_cargo_build(trimmed) {
+                    if prefix == "cargo build"
+                        && is_specialized_cargo_workflow_command(trimmed, "build")
+                    {
                         return None;
                     }
                     return Some(trimmed.to_string());
@@ -906,6 +919,11 @@ pub(crate) fn first_matching_workflow_command(
                 "bun run test",
             ] {
                 if trimmed.starts_with(prefix) {
+                    if prefix == "cargo test"
+                        && is_specialized_cargo_workflow_command(trimmed, "test")
+                    {
+                        return None;
+                    }
                     return Some(trimmed.to_string());
                 }
             }
@@ -982,6 +1000,7 @@ pub(crate) fn first_matching_workflow_command(
                 return Some(trimmed.to_string());
             }
             if lower.contains("cargo test")
+                && !is_specialized_cargo_workflow_command(trimmed, "test")
                 || lower.contains("go test")
                 || lower.contains("pytest")
                 || lower.trim() == "pytest"
@@ -994,15 +1013,32 @@ pub(crate) fn first_matching_workflow_command(
     })
 }
 
-fn is_target_specific_cargo_build(command: &str) -> bool {
+fn is_specialized_cargo_workflow_command(command: &str, subcommand: &str) -> bool {
     let mut tokens = command.split_whitespace();
-    if tokens.next() != Some("cargo") || tokens.next() != Some("build") {
+    if tokens.next() != Some("cargo") || tokens.next() != Some(subcommand) {
         return false;
     }
     tokens.any(|token| {
-        matches!(token, "--bin" | "-p" | "--package" | "--example")
+        matches!(
+            token,
+            "--all-features"
+                | "--bench"
+                | "--bin"
+                | "--doc"
+                | "--example"
+                | "--features"
+                | "--no-default-features"
+                | "--package"
+                | "--target"
+                | "--test"
+                | "-F"
+                | "-p"
+        ) || token.starts_with("--bench=")
             || token.starts_with("--bin=")
-            || token.starts_with("--package=")
             || token.starts_with("--example=")
+            || token.starts_with("--features=")
+            || token.starts_with("--package=")
+            || token.starts_with("--target=")
+            || token.starts_with("--test=")
     })
 }

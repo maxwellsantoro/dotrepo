@@ -378,7 +378,7 @@ RUFF_UPDATE_SCHEMA=1 cargo test
     }
 
     #[test]
-    fn workflow_inference_ignores_target_specific_cargo_builds() {
+    fn workflow_inference_ignores_specialized_cargo_commands() {
         use super::super::types::ImportedFile;
         use super::extraction::first_matching_workflow_command;
         use super::extraction::infer_workflow_commands;
@@ -401,11 +401,33 @@ RUFF_UPDATE_SCHEMA=1 cargo test
             Some("cargo build --release")
         );
 
+        let target_features_build =
+            vec!["cargo build --target x86_64-fortanix-unknown-sgx --features rt,sync".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&target_features_build, true),
+            None
+        );
+
+        let doc_only_test = vec!["cargo test --doc --features full".to_string()];
+        assert_eq!(first_matching_workflow_command(&doc_only_test, false), None);
+
         let fuzz_workflow = ImportedFile {
             path: ".github/workflows/daily_fuzz.yaml".into(),
             contents: "jobs:\n  fuzz:\n    steps:\n      - run: cargo build --locked\n".into(),
         };
         assert!(infer_workflow_commands(&fuzz_workflow).is_none());
+
+        let format_workflow = ImportedFile {
+            path: ".github/workflows/format-workflow.yml".into(),
+            contents: "jobs:\n  format:\n    steps:\n      - run: npm run build\n".into(),
+        };
+        assert!(infer_workflow_commands(&format_workflow).is_none());
+
+        let release_workflow = ImportedFile {
+            path: ".github/workflows/release.yml".into(),
+            contents: "jobs:\n  release:\n    steps:\n      - run: npm run build\n".into(),
+        };
+        assert!(infer_workflow_commands(&release_workflow).is_none());
     }
 
     #[test]
