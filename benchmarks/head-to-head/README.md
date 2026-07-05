@@ -147,6 +147,23 @@ while preserving 0 confidently-wrong answers. The only remaining miss is a
 GitHub-native `bat` description wording mismatch; all buried build/test,
 security-contact, and toolchain rows are correct.
 
+`results/description-constraint-2026-07-05/` is the fix-confirmation run after
+making the GitHub crawler treat structured GitHub repository descriptions as
+the source of truth for overlay `repo.description`, instead of preserving a
+README-derived sentence whenever it had token overlap. This closes the remaining
+`bat` description miss without special casing that repository: the on-disk
+record now publishes GitHub's `A cat(1) clone with wings.` summary, while the
+evidence keeps the README-sourced build/test/security/toolchain provenance
+separate. On the same five-repo gold set, dotrepo reaches 100.0% overall
+accuracy, 100.0% precision, 100.0% coverage, and 0 confidently-wrong answers.
+
+`results/llm-description-constraint-2026-07-05/` reruns the stronger
+OpenRouter-backed `--extractor llm` GitHub baseline against the same patched
+local query surface. This is the cleanest current head-to-head: GitHub+LLM docs
+scores 65.0% overall with 2 confidently-wrong buried answers, while dotrepo
+scores 100.0% overall, 100.0% buried, 0 confidently-wrong, and less than half
+the approximate wire-token count.
+
 ### Offline self-test
 
 ```bash

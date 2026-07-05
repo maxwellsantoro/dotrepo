@@ -336,8 +336,8 @@ fn merge_snapshot_fields(
         merged_fields.push("repo.name");
     }
 
-    if manifest_is_missing_description(manifest) {
-        if let Some(description) = trimmed_non_empty(snapshot.description.as_deref()) {
+    if let Some(description) = trimmed_non_empty(snapshot.description.as_deref()) {
+        if trimmed_non_empty(Some(manifest.repo.description.as_str())) != Some(description) {
             manifest.repo.description = description.to_string();
             merged_fields.push("repo.description");
         }
@@ -427,6 +427,8 @@ fn append_github_evidence(
 ) -> Option<String> {
     let mut evidence = evidence_text?;
     let mut bullets = Vec::new();
+    let description_constrained = trimmed_non_empty(Some(manifest.repo.description.as_str()))
+        == trimmed_non_empty(snapshot.description.as_deref());
 
     let homepage = trimmed_non_empty(manifest.repo.homepage.as_deref());
     if homepage.is_some() && homepage == trimmed_non_empty(snapshot.homepage.as_deref()) {
@@ -447,9 +449,8 @@ fn append_github_evidence(
     {
         bullets.push("Augmented repo.topics from GitHub repository metadata.".to_string());
     }
-    if trimmed_non_empty(Some(manifest.repo.description.as_str()))
-        == trimmed_non_empty(snapshot.description.as_deref())
-    {
+    if description_constrained {
+        evidence = remove_readme_description_claim(evidence);
         bullets.push("Constrained repo.description with GitHub repository metadata.".to_string());
     }
     bullets.push(
@@ -466,6 +467,32 @@ fn append_github_evidence(
         evidence.push('\n');
     }
     Some(evidence)
+}
+
+fn remove_readme_description_claim(mut evidence: String) -> String {
+    for readme_path in ["README.md", "README.mdx"] {
+        evidence = evidence.replace(
+            &format!(
+                "- Imported repository name, description, and docs entry points from {readme_path}.\n"
+            ),
+            &format!("- Imported repository name and docs entry points from {readme_path}.\n"),
+        );
+        evidence = evidence.replace(
+            &format!(
+                "- Imported repository description and docs entry points from {readme_path}.\n"
+            ),
+            &format!("- Imported repository docs entry points from {readme_path}.\n"),
+        );
+        evidence = evidence.replace(
+            &format!("- Imported repository name and description from {readme_path}.\n"),
+            &format!("- Imported repository name from {readme_path}.\n"),
+        );
+        evidence = evidence.replace(
+            &format!("- Imported repository description from {readme_path}.\n"),
+            "",
+        );
+    }
+    evidence
 }
 
 fn maybe_attempt_synthesis(
@@ -774,8 +801,9 @@ mod tests {
             files: ConventionalRepositoryFiles {
                 readme: Some(RepositoryTextFile {
                     relative_path: PathBuf::from("README.md"),
-                    contents: "# Orbit\n\nREADME description wins over the GitHub fallback.\n"
-                        .into(),
+                    contents:
+                        "# Orbit\n\nREADME description is longer than the repository summary.\n"
+                            .into(),
                 }),
                 ..Default::default()
             },
@@ -794,7 +822,7 @@ mod tests {
 
         let report = crawl_repository_from_snapshot(
             &request,
-            &snapshot(Some("GitHub description should not overwrite README.")),
+            &snapshot(Some("GitHub description wins for crawler overlays.")),
             &materialized,
         )
         .expect("crawl succeeds");
@@ -807,7 +835,7 @@ mod tests {
                 .manifest
                 .repo
                 .description,
-            "README description wins over the GitHub fallback."
+            "GitHub description wins for crawler overlays."
         );
         assert_eq!(
             report
@@ -872,7 +900,7 @@ mod tests {
     }
 
     #[test]
-    fn crawl_constrains_readme_description_with_github_metadata() {
+    fn crawl_prefers_github_description_over_suspect_readme_description() {
         let index_root = temp_dir("github-description-constraint");
         let materialized = materialize_repository(&MaterializeRepositoryInput {
             repository: repository(),
@@ -910,9 +938,8 @@ mod tests {
         assert!(import_plan
             .evidence_text
             .as_deref()
-            .is_some_and(|text| text.contains(
-                "Set `repo.description` to `A simple, fast and user-friendly alternative to find.` from `GitHub API` after deterministic escalation."
-            )));
+            .is_some_and(|text| text
+                .contains("Constrained repo.description with GitHub repository metadata.")));
         let trust_notes = import_plan
             .manifest
             .record
@@ -920,9 +947,57 @@ mod tests {
             .as_ref()
             .and_then(|trust| trust.notes.as_deref())
             .unwrap_or("");
-        assert!(trust_notes.contains(
-            "Resolved `repo.description` from `GitHub API` after deterministic escalation."
-        ));
+        assert!(trust_notes.contains("Bootstrapped from `README.md`"));
+
+        fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
+        fs::remove_dir_all(index_root).expect("index temp removed");
+    }
+
+    #[test]
+    fn crawl_prefers_github_description_over_overlapping_readme_description() {
+        let index_root = temp_dir("github-description-overlap");
+        let materialized = materialize_repository(&MaterializeRepositoryInput {
+            repository: repository(),
+            files: ConventionalRepositoryFiles {
+                readme: Some(RepositoryTextFile {
+                    relative_path: PathBuf::from("README.md"),
+                    contents:
+                        "# bat\n\nA cat(1) clone with syntax highlighting and Git integration.\n"
+                            .into(),
+                }),
+                ..Default::default()
+            },
+        })
+        .expect("materialization succeeds");
+        let request = CrawlRepositoryRequest {
+            index_root: index_root.clone(),
+            repository: repository(),
+            generated_at: Some("2026-03-17T12:00:00Z".into()),
+            source_url: None,
+            synthesize: false,
+            synthesis_model: None,
+            synthesis_provider: None,
+            prior_synthesis_failure: None,
+        };
+        let github = snapshot(Some("A cat(1) clone with wings."));
+
+        let report = crawl_repository_from_snapshot(&request, &github, &materialized)
+            .expect("crawl succeeds");
+        let import_plan = &report.writeback_plan.factual.import_plan;
+        assert_eq!(
+            import_plan.manifest.repo.description,
+            "A cat(1) clone with wings."
+        );
+        assert!(report.field_scores.scores.iter().any(|score| {
+            score.field == "repo.description"
+                && score.source.as_deref() == Some("GitHub API")
+                && score.reason == "constrained by GitHub repository metadata"
+        }));
+        assert!(import_plan
+            .evidence_text
+            .as_deref()
+            .is_some_and(|text| text
+                .contains("Constrained repo.description with GitHub repository metadata.")));
 
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");
@@ -970,7 +1045,9 @@ mod tests {
             .import_plan
             .evidence_text
             .as_deref()
-            .is_some_and(|text| text.contains("after deterministic escalation")));
+            .is_some_and(|text| {
+                text.contains("Constrained repo.description with GitHub repository metadata.")
+            }));
 
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");
@@ -1328,7 +1405,8 @@ description = "Prior verified description."
             .imported_sources
             .iter()
             .any(|path| path == "README.mdx"));
-        assert!(evidence.contains("Imported repository name and description from README.mdx."));
+        assert!(evidence.contains("Imported repository name from README.mdx."));
+        assert!(evidence.contains("Constrained repo.description with GitHub repository metadata."));
 
         fs::remove_dir_all(index_root).expect("index temp removed");
     }

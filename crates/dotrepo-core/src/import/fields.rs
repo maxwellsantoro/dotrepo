@@ -54,20 +54,34 @@ pub fn score_import_fields(
             &github.topics,
         )
     });
+    let description_matches_github = plan.github.as_ref().is_some_and(|github| {
+        github
+            .description
+            .as_deref()
+            .is_some_and(|description| plan.manifest.repo.description.trim() == description.trim())
+    });
     scores.push(FieldScore {
         field: "repo.description".into(),
         confidence: if description_conflict {
             FieldConfidence::Suspect
+        } else if description_matches_github {
+            FieldConfidence::HighConfidencePresent
         } else if name_has_readme_source {
             FieldConfidence::HighConfidencePresent
         } else {
             FieldConfidence::MediumConfidencePresent
         },
-        source: plan.imported_sources.first().cloned(),
+        source: if description_matches_github {
+            Some("GitHub API".into())
+        } else {
+            plan.imported_sources.first().cloned()
+        },
         value: Some(plan.manifest.repo.description.clone()),
         reason: if description_conflict {
             "README-derived description has no meaningful overlap with GitHub description or topics"
                 .into()
+        } else if description_matches_github {
+            "constrained by GitHub repository metadata".into()
         } else if name_has_readme_source {
             "extracted from README paragraph with post-cleaners".into()
         } else {
