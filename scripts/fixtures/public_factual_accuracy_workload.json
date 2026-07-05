@@ -55,8 +55,8 @@
       "id": "tokio-description",
       "repository": "github.com/tokio-rs/tokio",
       "path": "repo.description",
-      "expected": "A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language.",
-      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/README.md", "locator": "first project paragraph after H1", "checkedAt": "2026-06-28"}
+      "expected": "A runtime for writing reliable asynchronous applications with Rust. Provides I/O, networking, scheduling, timers, ...",
+      "source": {"url": "https://api.github.com/repos/tokio-rs/tokio", "locator": "GitHub repository description", "checkedAt": "2026-07-05"}
     },
     {
       "id": "tokio-homepage",
@@ -83,8 +83,8 @@
       "id": "tokio-test",
       "repository": "github.com/tokio-rs/tokio",
       "path": "repo.test",
-      "expected": "cargo test --workspace",
-      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/Cargo.toml", "locator": "Cargo workspace manifest", "checkedAt": "2026-06-28"}
+      "expected": "cargo test",
+      "source": {"url": "https://raw.githubusercontent.com/tokio-rs/tokio/master/.github/workflows/ci.yml", "locator": "broad cargo test workflow step", "checkedAt": "2026-07-05"}
     },
     {
       "id": "tokio-security",
