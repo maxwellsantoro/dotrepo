@@ -417,6 +417,8 @@ jobs:
 
         let result = infer_imported_commands(&ImportSources {
             cargo_toml: None,
+            rust_toolchain_toml: None,
+            rust_toolchain: None,
             package_json: None,
             pyproject_toml: Some(&pyproject),
             setup_py: Some(&setup_py),

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sharkdp/fd"
-generated_at = "2026-07-05T02:01:55.828494Z"
+generated_at = "2026-07-05T05:17:29.309739Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.description` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.description` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "fd"
@@ -41,6 +41,10 @@ topics = [
     "hacktoberfest",
 ]
 
+[repo.toolchain]
+min = "1.90.0"
+ecosystem = "Rust"
+
 [owners]
 maintainers = []
 security_contact = "https://github.com/sharkdp/fd/security/advisories/new"
@@ -67,4 +71,4 @@ default_branch = "master"
 fork = false
 head_sha = "fb1486f210885ae663338ebfab4e70210abc4809"
 html_url = "https://github.com/sharkdp/fd"
-stars = 43606
+stars = 43608

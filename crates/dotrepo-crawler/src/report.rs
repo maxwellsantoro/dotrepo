@@ -523,6 +523,7 @@ mod tests {
                 test: Some("cargo test --workspace".into()),
                 build_candidates: Vec::new(),
                 test_candidates: Vec::new(),
+                toolchain: None,
                 topics: Vec::new(),
             },
         );
@@ -586,6 +587,7 @@ mod tests {
                 test: None,
                 build_candidates: Vec::new(),
                 test_candidates: Vec::new(),
+                toolchain: None,
                 topics: Vec::new(),
             },
         );

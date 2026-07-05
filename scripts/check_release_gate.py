@@ -807,127 +807,207 @@ def smoke_test_cloudflare_worker(worker_dir: Path, base_path: str) -> None:
     server_addr = unused_addr()
     host, port = server_addr.split(":")
     print("  smoke: Cloudflare Worker serves same-origin public tree", flush=True)
-    server = subprocess.Popen(
-        [
-            "npx",
-            "wrangler",
-            "dev",
-            "--config",
-            "wrangler.jsonc",
-            "--ip",
-            host,
-            "--port",
-            port,
-        ],
-        cwd=worker_dir,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    try:
-        deadline = time.time() + 20
-        healthz_url = f"http://{server_addr}/healthz"
-        while time.time() < deadline:
-            if server.poll() is not None:
-                stderr = server.stderr.read() if server.stderr else ""
-                raise SystemExit(
-                    f"Cloudflare Worker exited early during smoke test: {stderr}"
-                )
-            status, body = http_get_text(healthz_url)
-            if status == 200 and body == "ok":
-                break
-            time.sleep(0.1)
-        else:
-            raise SystemExit("Cloudflare Worker did not become ready during smoke test")
+    # The full generated public snapshot is validated earlier by public export
+    # checks and by `wrangler deploy --dry-run`. `wrangler dev`, however, also
+    # tries to watch the assets directory locally; with the full 14k-file public
+    # tree this can exceed platform watcher limits and hang before listening.
+    # Copy only the files this smoke test exercises so the Worker route logic is
+    # still tested through Wrangler without making local readiness depend on a
+    # giant watched asset tree.
+    with tempfile.TemporaryDirectory(prefix="dotrepo-worker-smoke-assets-") as assets_tmp:
+        smoke_assets = Path(assets_tmp)
+        prepare_worker_smoke_assets(worker_dir / "public-snapshot", smoke_assets)
+        server = subprocess.Popen(
+            [
+                "npx",
+                "wrangler",
+                "dev",
+                "--config",
+                "wrangler.jsonc",
+                "--assets",
+                str(smoke_assets),
+                "--ip",
+                host,
+                "--port",
+                port,
+                "--show-interactive-dev-session",
+                "false",
+            ],
+            cwd=worker_dir,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        try:
+            run_cloudflare_worker_smoke(server, server_addr, base_path)
+        finally:
+            server.kill()
+            server.wait(timeout=5)
 
-        base = normalize_base_path(base_path)
-        inventory_url = f"http://{server_addr}{base}/v0/repos/index.json"
-        status, body = http_get_text(inventory_url)
-        if status != 200:
+
+def prepare_worker_smoke_assets(source_root: Path, output_root: Path) -> None:
+    if not source_root.is_dir():
+        raise SystemExit(f"Worker public snapshot is missing: {source_root}")
+
+    def copy_rel(relative: str) -> None:
+        source = source_root / relative
+        if not source.is_file():
+            raise SystemExit(f"Worker smoke asset is missing: {source}")
+        target = output_root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+
+    def copy_path(path: str) -> None:
+        copy_rel(path.lstrip("/"))
+
+    for relative in [
+        "index.html",
+        "docs/index.html",
+        "repositories/index.html",
+        "v0/meta.json",
+        "v0/stats.json",
+        "v0/health.json",
+        "v0/repos/index.json",
+    ]:
+        copy_rel(relative)
+
+    meta = json.loads((source_root / "v0/meta.json").read_text())
+    paths = meta.get("paths", {})
+    snapshot_root = paths.get("root")
+    if not isinstance(snapshot_root, str) or not snapshot_root.startswith("/v0/snapshots/"):
+        raise SystemExit("Worker smoke source meta is missing a snapshot root path")
+    for key in ["inventory", "files", "snapshotLog"]:
+        path = paths.get(key)
+        if isinstance(path, str):
+            copy_path(path)
+
+    inventory = json.loads((source_root / "v0/repos/index.json").read_text())
+    repositories = inventory.get("repositories")
+    if not isinstance(repositories, list) or not repositories:
+        raise SystemExit("Worker smoke source inventory found no repositories")
+    first_repo = repositories[0]
+    identity = first_repo.get("identity", {})
+    host = identity.get("host")
+    owner = identity.get("owner")
+    repo = identity.get("repo")
+    if not all(isinstance(value, str) and value for value in [host, owner, repo]):
+        raise SystemExit("Worker smoke source inventory has an invalid first repository identity")
+
+    for key in ["self", "trust"]:
+        link = first_repo.get("links", {}).get(key)
+        if not isinstance(link, str):
+            raise SystemExit(f"Worker smoke source inventory is missing link `{key}`")
+        copy_path(link)
+        if link.startswith("/v0/repos/"):
+            copy_path(f"{snapshot_root}{link.removeprefix('/v0')}")
+    query_input = f"query-input/{host}/{owner}/{repo}.json"
+    copy_rel(query_input)
+    copy_path(f"{snapshot_root}/{query_input}")
+
+
+def run_cloudflare_worker_smoke(
+    server: subprocess.Popen[str], server_addr: str, base_path: str
+) -> None:
+    deadline = time.time() + 20
+    healthz_url = f"http://{server_addr}/healthz"
+    while time.time() < deadline:
+        if server.poll() is not None:
+            stderr = server.stderr.read() if server.stderr else ""
             raise SystemExit(
-                f"Cloudflare Worker inventory smoke failed ({status}) for {inventory_url}: {body}"
+                f"Cloudflare Worker exited early during smoke test: {stderr}"
             )
-        inventory = json.loads(body)
-        repositories = inventory.get("repositories")
-        if not isinstance(repositories, list) or not repositories:
-            raise SystemExit("Cloudflare Worker inventory smoke found no repositories")
-        meta_url = f"http://{server_addr}{base}/v0/meta.json"
-        status, body = http_get_text(meta_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker meta smoke failed ({status}) for {meta_url}: {body}"
-            )
-        meta = json.loads(body)
-        stats_url = f"http://{server_addr}{base}/v0/stats.json"
-        status, body = http_get_text(stats_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker stats smoke failed ({status}) for {stats_url}: {body}"
-            )
-        stats = json.loads(body)
-        health_url = f"http://{server_addr}{base}/v0/health.json"
-        status, body = http_get_text(health_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker health smoke failed ({status}) for {health_url}: {body}"
-            )
-        verify_health_payload(json.loads(body), meta, inventory, stats, health_url)
-        homepage_url = f"http://{server_addr}{base or '/'}"
-        status, body = http_get_text(homepage_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker homepage smoke failed ({status}) for {homepage_url}: {body}"
-            )
-        verify_homepage_snapshot_state(body, homepage_url, meta, inventory)
-        docs_url = f"http://{server_addr}{base}/docs/"
-        status, body = http_get_text(docs_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker docs smoke failed ({status}) for {docs_url}: {body}"
-            )
-        repositories_url = f"http://{server_addr}{base}/repositories/"
-        status, body = http_get_text(repositories_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker repository catalog smoke failed ({status}) for "
-                f"{repositories_url}: {body}"
-            )
-        first_repo = repositories[0]
-        summary_url = f"http://{server_addr}{first_repo['links']['self']}"
-        status, body = http_get_text(summary_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker summary smoke failed ({status}) for {summary_url}: {body}"
-            )
-        verify_freshness(json.loads(body), meta, summary_url)
-        trust_url = f"http://{server_addr}{first_repo['links']['trust']}"
-        status, body = http_get_text(trust_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker trust smoke failed ({status}) for {trust_url}: {body}"
-            )
-        verify_freshness(json.loads(body), meta, trust_url)
-        query_template = repositories[0]["links"]["queryTemplate"]
-        if not isinstance(query_template, str):
-            raise SystemExit("Cloudflare Worker inventory smoke found no queryTemplate")
-        query_url = f"http://{server_addr}{query_template.replace('{dot_path}', 'repo.description')}"
-        status, body = http_get_text(query_url)
-        if status != 200:
-            raise SystemExit(
-                f"Cloudflare Worker queryTemplate smoke failed ({status}) for {query_url}: {body}"
-            )
-        query_response = json.loads(body)
-        if query_response.get("path") != "repo.description":
-            raise SystemExit("Cloudflare Worker queryTemplate smoke returned unexpected path")
-        links = query_response.get("links", {})
-        self_link = links.get("self")
-        if not isinstance(self_link, str) or not self_link.startswith(base):
-            raise SystemExit(
-                f"Cloudflare Worker queryTemplate smoke returned unexpected self link: {self_link}"
-            )
-    finally:
-        server.kill()
-        server.wait(timeout=5)
+        status, body = http_get_text(healthz_url)
+        if status == 200 and body == "ok":
+            break
+        time.sleep(0.1)
+    else:
+        raise SystemExit("Cloudflare Worker did not become ready during smoke test")
+
+    base = normalize_base_path(base_path)
+    inventory_url = f"http://{server_addr}{base}/v0/repos/index.json"
+    status, body = http_get_text(inventory_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker inventory smoke failed ({status}) for {inventory_url}: {body}"
+        )
+    inventory = json.loads(body)
+    repositories = inventory.get("repositories")
+    if not isinstance(repositories, list) or not repositories:
+        raise SystemExit("Cloudflare Worker inventory smoke found no repositories")
+    meta_url = f"http://{server_addr}{base}/v0/meta.json"
+    status, body = http_get_text(meta_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker meta smoke failed ({status}) for {meta_url}: {body}"
+        )
+    meta = json.loads(body)
+    stats_url = f"http://{server_addr}{base}/v0/stats.json"
+    status, body = http_get_text(stats_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker stats smoke failed ({status}) for {stats_url}: {body}"
+        )
+    stats = json.loads(body)
+    health_url = f"http://{server_addr}{base}/v0/health.json"
+    status, body = http_get_text(health_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker health smoke failed ({status}) for {health_url}: {body}"
+        )
+    verify_health_payload(json.loads(body), meta, inventory, stats, health_url)
+    homepage_url = f"http://{server_addr}{base or '/'}"
+    status, body = http_get_text(homepage_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker homepage smoke failed ({status}) for {homepage_url}: {body}"
+        )
+    verify_homepage_snapshot_state(body, homepage_url, meta, inventory)
+    docs_url = f"http://{server_addr}{base}/docs/"
+    status, body = http_get_text(docs_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker docs smoke failed ({status}) for {docs_url}: {body}"
+        )
+    repositories_url = f"http://{server_addr}{base}/repositories/"
+    status, body = http_get_text(repositories_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker repository catalog smoke failed ({status}) for "
+            f"{repositories_url}: {body}"
+        )
+    first_repo = repositories[0]
+    summary_url = f"http://{server_addr}{first_repo['links']['self']}"
+    status, body = http_get_text(summary_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker summary smoke failed ({status}) for {summary_url}: {body}"
+        )
+    verify_freshness(json.loads(body), meta, summary_url)
+    trust_url = f"http://{server_addr}{first_repo['links']['trust']}"
+    status, body = http_get_text(trust_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker trust smoke failed ({status}) for {trust_url}: {body}"
+        )
+    verify_freshness(json.loads(body), meta, trust_url)
+    query_template = repositories[0]["links"]["queryTemplate"]
+    if not isinstance(query_template, str):
+        raise SystemExit("Cloudflare Worker inventory smoke found no queryTemplate")
+    query_url = f"http://{server_addr}{query_template.replace('{dot_path}', 'repo.description')}"
+    status, body = http_get_text(query_url)
+    if status != 200:
+        raise SystemExit(
+            f"Cloudflare Worker queryTemplate smoke failed ({status}) for {query_url}: {body}"
+        )
+    query_response = json.loads(body)
+    if query_response.get("path") != "repo.description":
+        raise SystemExit("Cloudflare Worker queryTemplate smoke returned unexpected path")
+    links = query_response.get("links", {})
+    self_link = links.get("self")
+    if not isinstance(self_link, str) or not self_link.startswith(base):
+        raise SystemExit(
+            f"Cloudflare Worker queryTemplate smoke returned unexpected self link: {self_link}"
+        )
 
 
 def main() -> int:

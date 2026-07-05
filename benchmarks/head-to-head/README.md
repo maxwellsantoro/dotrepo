@@ -123,6 +123,17 @@ shape: dotrepo remains ahead on buried accuracy and confidently-wrong count, but
 minimum-toolchain coverage is still absent and needs a real schema/crawler
 feature rather than another alias.
 
+`results/toolchain-2026-07-05/` is the fix-confirmation run after adding that
+real schema/crawler feature: optional `[repo.toolchain] min = "..."` extracted
+from conservative root metadata such as Cargo `rust-version`, Python
+`requires-python`, Node `engines.node`, and Go `go` directives. The run uses a
+local patched `dotrepo-public-query` server against refreshed index records for
+the same five repos. It moves dotrepo from 72.5% to 82.5% overall accuracy, from
+82.5% to 95.0% coverage, and from 44.4% to 66.7% buried-field accuracy while
+preserving 0 confidently-wrong answers. All five `min_toolchain` rows are now
+correct; the remaining misses are command-precision misses or honest test
+abstentions.
+
 ### Offline self-test
 
 ```bash

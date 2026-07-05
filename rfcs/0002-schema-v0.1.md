@@ -55,6 +55,7 @@ The v0.1 reference tool accepts `dotrepo/v0.1` exactly. Future tooling should tr
 - `build`
 - `test`
 - `build_candidates` / `test_candidates`
+- `[repo.toolchain]`
 - `topics`
 
 `build` and `test` are shell command strings intended to be run from the repository root.
@@ -64,6 +65,12 @@ The v0.1 reference tool accepts `dotrepo/v0.1` exactly. Future tooling should tr
 command could be honestly chosen (e.g. a genuinely polyglot repository with
 more than one legitimate command). See
 [RFC 0020](./0020-multi-ecosystem-command-candidates.md).
+
+`[repo.toolchain]` is optional and intentionally narrow. `min` records the
+single primary minimum toolchain version only when root package metadata states
+one unambiguously; `ecosystem` labels the value (for example `Rust`, `Python`,
+`Node.js`, or `Go`). Importers must leave the field absent rather than guessing
+for polyglot or unconventional repositories.
 
 ### `[owners]`
 - `maintainers`

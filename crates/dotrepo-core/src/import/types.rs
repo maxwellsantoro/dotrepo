@@ -255,6 +255,15 @@ pub(crate) struct ImportedCommandMetadata {
     pub(crate) evidence_bullets: Vec<String>,
 }
 
+#[derive(Default)]
+pub(crate) struct ImportedToolchainMetadata {
+    pub(crate) min: Option<String>,
+    pub(crate) ecosystem: Option<String>,
+    pub(crate) source_path: Option<String>,
+    pub(crate) notes: Vec<String>,
+    pub(crate) evidence_bullets: Vec<String>,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ImportedCommandProvenance {
     Imported,
@@ -282,6 +291,8 @@ pub enum CommandSourceTier {
 
 pub(crate) struct ImportSources<'a> {
     pub(crate) cargo_toml: Option<&'a ImportedFile>,
+    pub(crate) rust_toolchain_toml: Option<&'a ImportedFile>,
+    pub(crate) rust_toolchain: Option<&'a ImportedFile>,
     pub(crate) package_json: Option<&'a ImportedFile>,
     pub(crate) pyproject_toml: Option<&'a ImportedFile>,
     pub(crate) setup_py: Option<&'a ImportedFile>,

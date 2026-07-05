@@ -95,6 +95,25 @@
       "repo": {
         "name": "orbit",
         "description": "Example repository",
+        "toolchain": {
+          "min": "1.90.0",
+          "ecosystem": "Rust"
+        }
+      }
+    },
+    "path": "repo.toolchain.min",
+    "expected": "1.90.0"
+  },
+  {
+    "manifest": {
+      "schema": "dotrepo/v0.1",
+      "record": {
+        "mode": "native",
+        "status": "canonical"
+      },
+      "repo": {
+        "name": "orbit",
+        "description": "Example repository",
         "languages": ["rust", "toml"]
       }
     },

@@ -31,6 +31,7 @@ fn make_verified_manifest_with_security_contact() -> Manifest {
             test: Some("cargo test".into()),
             build_candidates: vec![],
             test_candidates: vec![],
+            toolchain: None,
             topics: vec![],
         },
     );
@@ -132,6 +133,7 @@ fn make_imported_manifest() -> Manifest {
             test: None,
             build_candidates: vec![],
             test_candidates: vec![],
+            toolchain: None,
             topics: vec![],
         },
     )
@@ -199,6 +201,7 @@ fn promote_does_not_downgrade_reviewed() {
             test: None,
             build_candidates: vec![],
             test_candidates: vec![],
+            toolchain: None,
             topics: vec![],
         },
     );
@@ -233,6 +236,7 @@ fn promote_does_not_downgrade_canonical() {
             test: None,
             build_candidates: vec![],
             test_candidates: vec![],
+            toolchain: None,
             topics: vec![],
         },
     );

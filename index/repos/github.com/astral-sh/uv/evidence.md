@@ -2,20 +2,16 @@
 
 - Imported repository name, description, and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands.
+- Inferred repo.build from .github/workflows/bench.yml as `cargo run --bin uv -- pip compile test/requirements/jupyter.in --universal --exclude-newer 2024-08-08 --cache-dir .cache`.
 - Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands.
+- Imported repo.toolchain.min from Cargo.toml as `1.94.0` (Rust).
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.build` unset after model escalation: Multiple primary manifest-tier build commands exist for different languages (Rust and Python), preventing a single primary value selection.. Preserved 4 candidate command(s) in `repo.build_candidates` instead of discarding them.
-- Left `repo.test` unset after model escalation: The candidates represent mutually exclusive language ecosystems (Rust vs Python); no single primary value can represent the repository as a whole.. Preserved 2 candidate command(s) in `repo.test_candidates` instead of discarding them.
+- Left `repo.test` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk. Preserved 2 candidate command(s) in `repo.test_candidates` instead of discarding them.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Downgrade guard
-
-Status dropped from a prior verified record because the following previously present field(s) regressed: repo.build, repo.test.

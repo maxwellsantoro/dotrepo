@@ -5,6 +5,8 @@
   "repo_description": "Click is a Python package for creating beautiful command line interfaces in a composable way with as little code as necessary.",
   "repo_build": "python -m build",
   "repo_test": "python -m pytest",
+  "repo_toolchain_min": "3.10",
+  "repo_toolchain_ecosystem": "Python",
   "overlay_status": "inferred",
   "trust_provenance": [
     "imported",

@@ -236,6 +236,10 @@ name = "alias"
 description = "Alias coverage fixture."
 languages = ["Rust", "Shell"]
 
+[repo.toolchain]
+min = "1.90.0"
+ecosystem = "Rust"
+
 [x.github]
 archived = false
 "#,
@@ -264,10 +268,24 @@ archived = false
         "example",
         "alias",
         "repo.archived",
-        freshness,
+        freshness.clone(),
     ));
     assert_eq!(archived["path"], Value::String("repo.archived".into()));
     assert_eq!(archived["value"], Value::Bool(false));
+
+    let toolchain_min = serialize_outcome(public_repository_query_or_error(
+        &root,
+        "github.com",
+        "example",
+        "alias",
+        "repo.toolchain.min",
+        freshness,
+    ));
+    assert_eq!(
+        toolchain_min["path"],
+        Value::String("repo.toolchain.min".into())
+    );
+    assert_eq!(toolchain_min["value"], Value::String("1.90.0".into()));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

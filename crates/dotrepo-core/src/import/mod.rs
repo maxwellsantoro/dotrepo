@@ -1,7 +1,7 @@
 use anyhow::{anyhow, Result};
 use dotrepo_schema::{
     parse_manifest, render_manifest, Compat, Manifest, Readme, Record, RecordMode, RecordStatus,
-    Relations, Repo, Trust,
+    Relations, Repo, Toolchain, Trust,
 };
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -16,6 +16,7 @@ mod escalation;
 mod evidence;
 mod fields;
 mod parsing;
+mod toolchain;
 mod types;
 
 pub use adjudication::{
@@ -64,6 +65,7 @@ use evidence::{
     discover_relations_from_manifest_files, native_import_github_compat, render_import_evidence,
     ImportEvidenceNotes,
 };
+use toolchain::infer_toolchain_metadata;
 pub(crate) use types::{ImportSources, ImportedFile, SecurityImportMetadata};
 
 pub(crate) const IMPORT_README_CANDIDATES: &[&str] = &[
@@ -226,6 +228,8 @@ pub fn import_repository_with_options(
     let codeowners = load_first_existing_file(root, &[".github/CODEOWNERS", "CODEOWNERS"])?;
     let security = load_first_existing_file(root, &[".github/SECURITY.md", "SECURITY.md"])?;
     let cargo_toml = load_first_existing_file(root, &["Cargo.toml"])?;
+    let rust_toolchain_toml = load_first_existing_file(root, &["rust-toolchain.toml"])?;
+    let rust_toolchain = load_first_existing_file(root, &["rust-toolchain"])?;
     let package_json = load_first_existing_file(root, &["package.json"])?;
     let pyproject_toml = load_first_existing_file(root, &["pyproject.toml"])?;
     let setup_py = load_first_existing_file(root, &["setup.py"])?;
@@ -352,8 +356,10 @@ pub fn import_repository_with_options(
 
         (contact, note)
     }
-    let imported_commands = infer_imported_commands(&ImportSources {
+    let import_sources = ImportSources {
         cargo_toml: cargo_toml.as_ref(),
+        rust_toolchain_toml: rust_toolchain_toml.as_ref(),
+        rust_toolchain: rust_toolchain.as_ref(),
         package_json: package_json.as_ref(),
         pyproject_toml: pyproject_toml.as_ref(),
         setup_py: setup_py.as_ref(),
@@ -373,7 +379,9 @@ pub fn import_repository_with_options(
         rakefile: rakefile.as_ref(),
         contributing: contributing.as_ref(),
         workflow_files: &workflow_files,
-    });
+    };
+    let imported_commands = infer_imported_commands(&import_sources);
+    let imported_toolchain = infer_toolchain_metadata(&import_sources);
 
     let mut imported_sources = Vec::new();
     let mut inferred_defaults = Vec::new();
@@ -458,6 +466,9 @@ pub fn import_repository_with_options(
     if let Some(command) = imported_commands.test.as_ref() {
         note_import(&mut imported_sources, &command.source_path);
     }
+    if let Some(source_path) = imported_toolchain.source_path.as_deref() {
+        note_import(&mut imported_sources, source_path);
+    }
 
     let mut inferred_fields = inferred_defaults.clone();
     for field in &imported_commands.inferred_fields {
@@ -509,7 +520,7 @@ pub fn import_repository_with_options(
                     &inferred_defaults,
                     codeowners_metadata.note.as_deref(),
                     security_note.as_deref(),
-                    &imported_commands.notes,
+                    &combined_import_notes(&imported_commands.notes, &imported_toolchain.notes),
                 )),
             }),
         },
@@ -537,6 +548,10 @@ pub fn import_repository_with_options(
             // genuine multi-ecosystem tie is found for build or test.
             build_candidates: Vec::new(),
             test_candidates: Vec::new(),
+            toolchain: imported_toolchain.min.as_ref().map(|min| Toolchain {
+                min: Some(min.clone()),
+                ecosystem: imported_toolchain.ecosystem.clone(),
+            }),
             topics: Vec::new(),
         },
     );
@@ -618,6 +633,10 @@ pub fn import_repository_with_options(
     validate_manifest(root, &manifest)?;
     let manifest_text = render_manifest(&manifest)?;
 
+    let evidence_bullets = combined_import_notes(
+        &imported_commands.evidence_bullets,
+        &imported_toolchain.evidence_bullets,
+    );
     let (evidence_path, evidence_text) = match mode {
         ImportMode::Native => (None, None),
         ImportMode::Overlay => (
@@ -631,7 +650,7 @@ pub fn import_repository_with_options(
                     security_note: security_note.as_deref(),
                     imported_docs: imported_docs.is_some(),
                 },
-                &imported_commands.evidence_bullets,
+                &evidence_bullets,
                 &relation_evidence_notes,
             )),
         ),
@@ -897,6 +916,10 @@ pub(super) fn push_unique(values: &mut Vec<String>, value: String) {
 
 fn note_import(imported_sources: &mut Vec<String>, path: &str) {
     push_unique(imported_sources, path.to_string());
+}
+
+fn combined_import_notes(left: &[String], right: &[String]) -> Vec<String> {
+    left.iter().chain(right.iter()).cloned().collect()
 }
 
 fn import_mode_name(mode: ImportMode) -> &'static str {

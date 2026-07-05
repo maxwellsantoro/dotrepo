@@ -46,6 +46,10 @@ struct RegressionExpectation {
     #[serde(default)]
     repo_test: Option<String>,
     #[serde(default)]
+    repo_toolchain_min: Option<String>,
+    #[serde(default)]
+    repo_toolchain_ecosystem: Option<String>,
+    #[serde(default)]
     docs_root: Option<String>,
     #[serde(default)]
     docs_root_absent: bool,
@@ -240,6 +244,24 @@ fn assert_plan_matches(plan: &ImportPlan, expectation: &RegressionExpectation) {
             Some(expected),
             "repo.test"
         );
+    }
+    if let Some(expected) = expectation.repo_toolchain_min.as_deref() {
+        let actual = plan
+            .manifest
+            .repo
+            .toolchain
+            .as_ref()
+            .and_then(|toolchain| toolchain.min.as_deref());
+        assert_eq!(actual, Some(expected), "repo.toolchain.min");
+    }
+    if let Some(expected) = expectation.repo_toolchain_ecosystem.as_deref() {
+        let actual = plan
+            .manifest
+            .repo
+            .toolchain
+            .as_ref()
+            .and_then(|toolchain| toolchain.ecosystem.as_deref());
+        assert_eq!(actual, Some(expected), "repo.toolchain.ecosystem");
     }
     if let Some(expected) = expectation.docs_root.as_deref() {
         let actual = plan

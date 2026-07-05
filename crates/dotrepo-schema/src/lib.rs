@@ -101,6 +101,12 @@ pub struct Repo {
     /// Same as `build_candidates`, for `test`.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub test_candidates: Vec<BuildTestCandidate>,
+    /// Conservative, single primary minimum toolchain version when it can be
+    /// extracted from root package metadata without guessing. This is optional
+    /// because polyglot and unconventional repositories may not have one honest
+    /// value.
+    #[serde(default, skip_serializing_if = "toolchain_absent")]
+    pub toolchain: Option<Toolchain>,
     #[serde(default)]
     pub topics: Vec<String>,
 }
@@ -117,6 +123,30 @@ pub struct BuildTestCandidate {
     pub ecosystem: Option<String>,
     /// Repository-relative path the candidate command was found in.
     pub source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
+pub struct Toolchain {
+    /// Minimum version required by the primary ecosystem, normalized to the
+    /// bare version where the source syntax allows it (for example `1.90.0`
+    /// from Cargo's `rust-version = "1.90.0"` or `3.10` from Python's
+    /// `requires-python = ">=3.10"`).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub min: Option<String>,
+    /// Ecosystem label for `min` (for example `Rust`, `Python`, `Node.js`, or
+    /// `Go`). Kept advisory so consumers can use `repo.toolchain.min` without
+    /// needing a second field, while richer clients can disambiguate.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ecosystem: Option<String>,
+}
+
+fn toolchain_absent(value: &Option<Toolchain>) -> bool {
+    value
+        .as_ref()
+        .and_then(|toolchain| toolchain.min.as_deref())
+        .map(str::trim)
+        .filter(|min| !min.is_empty())
+        .is_none()
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -473,6 +503,7 @@ pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
             test: None,
             build_candidates: Vec::new(),
             test_candidates: Vec::new(),
+            toolchain: None,
             topics: Vec::new(),
         },
     );

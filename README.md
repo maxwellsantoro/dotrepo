@@ -49,6 +49,10 @@ name = "dotrepo"
 description = "Open metadata protocol for software repositories"
 build = "cargo build --workspace"
 test = "cargo test --workspace"
+
+[repo.toolchain]
+min = "1.90.0"
+ecosystem = "Rust"
 ```
 
 What the CLI gives you once `dotrepo` is on your `PATH`:

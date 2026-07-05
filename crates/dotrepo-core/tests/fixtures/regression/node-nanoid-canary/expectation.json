@@ -5,6 +5,8 @@
   "repo_description": "A tiny, secure, URL-friendly, unique string ID generator for JavaScript.",
   "repo_build": "pnpm build",
   "repo_test": "npm test",
+  "repo_toolchain_min": "18",
+  "repo_toolchain_ecosystem": "Node.js",
   "security_contact": "https://tidelift.com/security",
   "overlay_status": "inferred",
   "inferred_fields": ["repo.build"],
