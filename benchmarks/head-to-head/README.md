@@ -46,9 +46,17 @@ paying rent.
 GITHUB_TOKEN=$(gh auth token) uv run --with requests --with pyyaml python -m bench.run \
   --gold gold.yaml --arms github,dotrepo --base-url https://dotrepo.org --out results
 
-# stronger baseline: let an LLM read the READMEs instead of regex
-uv run --with requests --with pyyaml python -m bench.run --gold gold.yaml --extractor llm --out results
+# stronger baseline: let an LLM read the READMEs instead of regex.
+# This intentionally fails closed unless ANTHROPIC_API_KEY is set; it never
+# silently falls back to the heuristic extractor.
+GITHUB_TOKEN=$(gh auth token) ANTHROPIC_API_KEY=... \
+  uv run --with requests --with pyyaml python -m bench.run \
+  --gold gold.yaml --arms github,dotrepo --extractor llm \
+  --base-url https://dotrepo.org --out results/llm-2026-07-05
 ```
+
+Set `ANTHROPIC_MODEL` to override the default model. Keep the key out of
+committed fixtures and shell history.
 
 Output: `results/report.md` (the table) and `results/results.json` (every
 per-field row with value, confidence, source, bytes, latency — auditable).

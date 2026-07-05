@@ -154,24 +154,46 @@ class GitHubArm(Arm):
     def _llm_extract(self, field: Field, blob: str):
         """Opt-in Anthropic extraction. Returns (value|None, confidence)."""
         import requests as rq
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise RuntimeError(
+                "LLM extractor requires ANTHROPIC_API_KEY; refusing to fall back to heuristics"
+            )
+        model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929")
         prompt = (
             f"From the document below, extract: {field.prompt}\n"
             f"Reply as JSON: {{\"value\": <string or null>, \"confidence\": "
             f"\"high\"|\"medium\"|\"low\"}}. null if the document does not state it. "
             f"No prose.\n\n---\n{blob[:12000]}"
         )
-        try:
-            r = rq.post("https://api.anthropic.com/v1/messages",
-                        headers={"content-type": "application/json"},
-                        json={"model": "claude-sonnet-4-6", "max_tokens": 400,
-                              "messages": [{"role": "user", "content": prompt}]},
-                        timeout=40)
-            data = r.json()
-            txt = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text")
-            obj = json.loads(txt[txt.find("{"): txt.rfind("}") + 1])
-            return obj.get("value"), (obj.get("confidence") or "medium")
-        except Exception:
-            return self._heuristic_extract(field, blob)
+        r = rq.post(
+            "https://api.anthropic.com/v1/messages",
+            headers={
+                "content-type": "application/json",
+                "x-api-key": api_key,
+                "anthropic-version": "2023-06-01",
+            },
+            json={
+                "model": model,
+                "max_tokens": 400,
+                "messages": [{"role": "user", "content": prompt}],
+            },
+            timeout=40,
+        )
+        r.raise_for_status()
+        data = r.json()
+        txt = "".join(
+            b.get("text", "") for b in data.get("content", []) if b.get("type") == "text"
+        )
+        start = txt.find("{")
+        end = txt.rfind("}")
+        if start == -1 or end == -1 or end < start:
+            raise RuntimeError(f"LLM extractor returned non-JSON text for {field.id}: {txt!r}")
+        obj = json.loads(txt[start : end + 1])
+        conf = obj.get("confidence") or "medium"
+        if conf not in ("high", "medium", "low"):
+            conf = "medium"
+        return obj.get("value"), conf
 
     # -- byte/latency accounting: charge each underlying fetch exactly once --
     def _charge(self, key: str):
