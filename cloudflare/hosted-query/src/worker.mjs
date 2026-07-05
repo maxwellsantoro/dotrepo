@@ -137,6 +137,12 @@ export function normalizeQueryPath(path) {
   if (path.startsWith("trust.")) {
     return `record.${path}`;
   }
+  if (path === "repo.language") {
+    return "repo.languages.0";
+  }
+  if (path === "repo.archived") {
+    return "x.github.archived";
+  }
   return path;
 }
 
