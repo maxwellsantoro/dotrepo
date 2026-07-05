@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 from collections import defaultdict
+from pathlib import Path
 from typing import Dict, List
 
 import yaml
@@ -14,6 +15,21 @@ from .model import Answer, GoldItem, Outcome, FieldClass, score_answer
 from .arms.base import Http
 from .arms.github_arm import GitHubArm
 from .arms.dotrepo_arm import DotrepoArm
+
+
+def load_repo_dotenv() -> None:
+    """Load dotrepo/.env for local benchmark runs without overriding the shell."""
+    if os.environ.get("DOTREPO_BENCH_LOAD_DOTENV", "1").lower() in {"0", "false", "no"}:
+        return
+    env_path = Path(__file__).resolve().parents[3] / ".env"
+    if not env_path.is_file():
+        return
+    for line in env_path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip())
 
 
 def load_gold(path: str) -> List[GoldItem]:
@@ -138,6 +154,8 @@ def markdown(results: List[Dict]) -> str:
 
 
 def main():
+    load_repo_dotenv()
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--gold", default="gold.yaml")
     ap.add_argument("--arms", default="github,dotrepo")

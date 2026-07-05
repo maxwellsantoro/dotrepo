@@ -152,20 +152,82 @@ class GitHubArm(Arm):
         return None, None
 
     def _llm_extract(self, field: Field, blob: str):
-        """Opt-in Anthropic extraction. Returns (value|None, confidence)."""
-        import requests as rq
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not api_key:
-            raise RuntimeError(
-                "LLM extractor requires ANTHROPIC_API_KEY; refusing to fall back to heuristics"
-            )
-        model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929")
-        prompt = (
+        """Opt-in model extraction. Returns (value|None, confidence)."""
+        if os.environ.get("OPENROUTER_API_KEY"):
+            return self._openrouter_extract(field, blob)
+        if os.environ.get("ANTHROPIC_API_KEY"):
+            return self._anthropic_extract(field, blob)
+        raise RuntimeError(
+            "LLM extractor requires OPENROUTER_API_KEY or ANTHROPIC_API_KEY; "
+            "refusing to fall back to heuristics"
+        )
+
+    def _llm_prompt(self, field: Field, blob: str) -> str:
+        return (
             f"From the document below, extract: {field.prompt}\n"
             f"Reply as JSON: {{\"value\": <string or null>, \"confidence\": "
             f"\"high\"|\"medium\"|\"low\"}}. null if the document does not state it. "
             f"No prose.\n\n---\n{blob[:12000]}"
         )
+
+    def _openrouter_extract(self, field: Field, blob: str):
+        import requests as rq
+
+        api_key = os.environ["OPENROUTER_API_KEY"]
+        model = (
+            os.environ.get("OPENROUTER_MODEL")
+            or os.environ.get("DOTREPO_ADJUDICATION_MODEL")
+            or os.environ.get("DOTREPO_ADJUDICATION_API_MODEL")
+        )
+        if not model:
+            raise RuntimeError(
+                "LLM extractor using OpenRouter requires OPENROUTER_MODEL, "
+                "DOTREPO_ADJUDICATION_MODEL, or DOTREPO_ADJUDICATION_API_MODEL"
+            )
+        r = rq.post(
+            "https://openrouter.ai/api/v1/chat/completions",
+            headers={
+                "authorization": f"Bearer {api_key}",
+                "content-type": "application/json",
+                "http-referer": "https://github.com/maxwellsantoro/dotrepo",
+                "x-title": "dotrepo-head-to-head-benchmark",
+            },
+            json={
+                "model": model,
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "Return strict JSON only. Never wrap in markdown fences.",
+                    },
+                    {"role": "user", "content": self._llm_prompt(field, blob)},
+                ],
+                "temperature": 0,
+                "max_tokens": 400,
+                "response_format": {"type": "json_object"},
+                "reasoning": {"enabled": False},
+            },
+            timeout=60,
+        )
+        r.raise_for_status()
+        data = r.json()
+        choice = data["choices"][0]
+        txt = choice["message"].get("content")
+        if isinstance(txt, list):
+            txt = "".join(
+                part.get("text", "") for part in txt if isinstance(part, dict)
+            )
+        if not txt:
+            raise RuntimeError(
+                "OpenRouter returned an empty LLM extraction response "
+                f"for {field.id}; finish_reason={choice.get('finish_reason')!r}"
+            )
+        return _parse_llm_json(field, txt)
+
+    def _anthropic_extract(self, field: Field, blob: str):
+        import requests as rq
+
+        api_key = os.environ["ANTHROPIC_API_KEY"]
+        model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929")
         r = rq.post(
             "https://api.anthropic.com/v1/messages",
             headers={
@@ -176,7 +238,7 @@ class GitHubArm(Arm):
             json={
                 "model": model,
                 "max_tokens": 400,
-                "messages": [{"role": "user", "content": prompt}],
+                "messages": [{"role": "user", "content": self._llm_prompt(field, blob)}],
             },
             timeout=40,
         )
@@ -185,15 +247,7 @@ class GitHubArm(Arm):
         txt = "".join(
             b.get("text", "") for b in data.get("content", []) if b.get("type") == "text"
         )
-        start = txt.find("{")
-        end = txt.rfind("}")
-        if start == -1 or end == -1 or end < start:
-            raise RuntimeError(f"LLM extractor returned non-JSON text for {field.id}: {txt!r}")
-        obj = json.loads(txt[start : end + 1])
-        conf = obj.get("confidence") or "medium"
-        if conf not in ("high", "medium", "low"):
-            conf = "medium"
-        return obj.get("value"), conf
+        return _parse_llm_json(field, txt)
 
     # -- byte/latency accounting: charge each underlying fetch exactly once --
     def _charge(self, key: str):
@@ -230,6 +284,18 @@ def _split(repo: str):
     if parts[0].endswith(".com") or parts[0].endswith(".org"):
         return parts[1], parts[2]
     return parts[0], parts[1]
+
+
+def _parse_llm_json(field: Field, txt: str):
+    start = txt.find("{")
+    end = txt.rfind("}")
+    if start == -1 or end == -1 or end < start:
+        raise RuntimeError(f"LLM extractor returned non-JSON text for {field.id}: {txt!r}")
+    obj = json.loads(txt[start : end + 1])
+    conf = obj.get("confidence") or "medium"
+    if conf not in ("high", "medium", "low"):
+        conf = "medium"
+    return obj.get("value"), conf
 
 
 def _first_cmd(block: str, field_id: str) -> Optional[str]:

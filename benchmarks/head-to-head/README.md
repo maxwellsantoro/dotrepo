@@ -47,16 +47,20 @@ GITHUB_TOKEN=$(gh auth token) uv run --with requests --with pyyaml python -m ben
   --gold gold.yaml --arms github,dotrepo --base-url https://dotrepo.org --out results
 
 # stronger baseline: let an LLM read the READMEs instead of regex.
-# This intentionally fails closed unless ANTHROPIC_API_KEY is set; it never
+# Local runs automatically load dotrepo/.env; OPENROUTER_API_KEY is preferred.
+# This intentionally fails closed if no provider key is configured; it never
 # silently falls back to the heuristic extractor.
-GITHUB_TOKEN=$(gh auth token) ANTHROPIC_API_KEY=... \
-  uv run --with requests --with pyyaml python -m bench.run \
+uv run --with requests --with pyyaml python -m bench.run \
   --gold gold.yaml --arms github,dotrepo --extractor llm \
   --base-url https://dotrepo.org --out results/llm-2026-07-05
 ```
 
-Set `ANTHROPIC_MODEL` to override the default model. Keep the key out of
-committed fixtures and shell history.
+Set `OPENROUTER_MODEL` to override the OpenRouter model for this benchmark; if
+unset, it reuses `DOTREPO_ADJUDICATION_API_MODEL` and then
+`DOTREPO_ADJUDICATION_MODEL`. Set `DOTREPO_BENCH_LOAD_DOTENV=0` to disable
+automatic `.env` loading. Anthropic direct remains available via
+`ANTHROPIC_API_KEY`/`ANTHROPIC_MODEL` when no OpenRouter key is present. Keep
+keys out of committed fixtures and shell history.
 
 Output: `results/report.md` (the table) and `results/results.json` (every
 per-field row with value, confidence, source, bytes, latency — auditable).
@@ -91,6 +95,22 @@ the crawler fix that treats GitHub-native description as a deterministic
 constraint on suspect README extraction. The fd description row is corrected and
 dotrepo's confidently-wrong count drops from 1 to 0. This is a fix-confirmation
 run, not a new adoption or thesis-validating benchmark.
+
+### First LLM-docs baseline
+
+`results/llm-2026-07-05/` runs the same curated gold with the GitHub arm's
+`--extractor llm` path. Local runs automatically load `dotrepo/.env`, so this
+uses the existing OpenRouter setup by default instead of a separate Anthropic
+credential. The result is sharper than the naive-regex baseline: dotrepo still
+loses overall to GitHub-native structured fields, but on buried fields dotrepo
+scores 44.4% vs 22.2% and has 0 confidently-wrong buried answers vs 2 for the
+LLM-docs baseline. The two LLM confidently-wrong buried answers are `bat`
+`security_contact` and `ruff` `test`.
+
+Read this as a first signal, not a settled win: the buried set is still tiny,
+the LLM prompt is deliberately narrow, and dotrepo's lower coverage remains
+visible. But it is now testing against a real model-reading-docs baseline, not
+regex in disguise.
 
 ### Offline self-test
 
