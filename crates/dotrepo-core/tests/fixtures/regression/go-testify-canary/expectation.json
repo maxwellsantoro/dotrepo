@@ -4,7 +4,7 @@
   "repo_name": "Testify",
   "repo_description": "Go code (golang) set of packages that provide many tools for testifying that your code will behave as you intend.",
   "repo_build": "go build ./...",
-  "repo_test": "go test -v -race ./...",
+  "repo_test": "go test ./...",
   "repo_toolchain_min": "1.17",
   "repo_toolchain_ecosystem": "Go",
   "overlay_status": "inferred",

@@ -832,6 +832,17 @@ fn is_env_assignment_token(token: &str) -> bool {
             .is_some_and(|ch| ch.is_ascii_alphabetic() || ch == '_')
 }
 
+fn is_package_narrowed_go_test_example(command: &str) -> bool {
+    let Some(rest) = command.strip_prefix("go test") else {
+        return false;
+    };
+    if !rest.is_empty() && !rest.starts_with(char::is_whitespace) {
+        return false;
+    }
+    rest.split_whitespace()
+        .any(|token| (token.starts_with("./") || token.starts_with("../")) && token != "./...")
+}
+
 /// Documented cargo commands may pin a toolchain (`cargo +nightly test ...`).
 /// Prefix matching must see the plain subcommand; the published command keeps
 /// the maintainer's exact toolchain override.
@@ -872,6 +883,12 @@ fn documented_test_command(command: &str) -> Option<String> {
         // immediately after recommending nextest. Publish the runner command,
         // not the example's one-test selector.
         return Some("cargo nextest run".to_string());
+    }
+    if is_package_narrowed_go_test_example(matchable) {
+        // A documented `go test` narrowed to one package (e.g.
+        // `go test ./internal/datanode -cover`) is a walkthrough example,
+        // not the repository's test command; let the module default resolve.
+        return None;
     }
     for prefix in [
         "bazel test",
@@ -940,6 +957,17 @@ fn workflow_file_is_specialized_noncanonical(path: &str) -> bool {
     .any(|term| file.contains(term))
 }
 
+fn strip_matching_yaml_quotes(value: &str) -> &str {
+    let bytes = value.as_bytes();
+    if bytes.len() >= 2 {
+        let first = bytes[0];
+        if (first == b'\'' || first == b'"') && bytes[bytes.len() - 1] == first {
+            return &value[1..value.len() - 1];
+        }
+    }
+    value
+}
+
 pub(crate) fn extract_workflow_run_commands(contents: &str) -> Vec<String> {
     let mut commands = Vec::new();
     let mut run_block_indent = None;
@@ -964,7 +992,9 @@ pub(crate) fn extract_workflow_run_commands(contents: &str) -> Vec<String> {
             if matches!(rest, "|" | "|-" | ">" | ">-") {
                 run_block_indent = Some(indent);
             } else if !rest.is_empty() {
-                commands.push(rest.to_string());
+                // Inline run values may be YAML-quoted; the quotes are not
+                // part of the shell command.
+                commands.push(strip_matching_yaml_quotes(rest).to_string());
             }
         }
     }
@@ -988,6 +1018,15 @@ pub(crate) fn first_matching_workflow_command(
     commands.iter().find_map(|command| {
         let trimmed = command.trim();
         if trimmed.is_empty() || trimmed.starts_with('#') || looks_like_shell_assignment(trimmed) {
+            return None;
+        }
+        // Lines that merely print or prepare files can mention a runner
+        // (`echo go test ...`, `chmod +x gradlew`) without executing it.
+        let first_token = trimmed.split_whitespace().next().unwrap_or("");
+        if matches!(
+            first_token,
+            "echo" | "printf" | "chmod" | "mkdir" | "touch" | "cat" | "cp" | "mv" | "rm"
+        ) {
             return None;
         }
 
@@ -1042,14 +1081,15 @@ pub(crate) fn first_matching_workflow_command(
         if select_build {
             if lower.contains(" mvnw")
                 || lower.contains("./mvnw")
-                || (lower.contains("mvn ") && lower.contains("package")
-                    || lower.contains("compile"))
+                || (lower.contains("mvn ")
+                    && (lower.contains("package") || lower.contains("compile")))
             {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("gradlew")
-                || lower.contains("gradle ")
-                    && (lower.contains("build") || lower.contains("assemble"))
+            // Both runner spellings require a build-ish task: a bare mention of
+            // the wrapper (e.g. `chmod +x gradlew`) is not a build command.
+            if (lower.contains("gradlew") || lower.contains("gradle "))
+                && (lower.contains("build") || lower.contains("assemble"))
             {
                 return Some(trimmed.to_string());
             }

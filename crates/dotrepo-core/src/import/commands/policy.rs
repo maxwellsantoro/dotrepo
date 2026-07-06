@@ -42,6 +42,19 @@ pub(crate) fn resolve_command_field(
     // but it does not prove that its conventional command works in this repo.
     // Within a tier, conflicts are genuine and block the field.
     // If a higher tier resolves, lower tiers are ignored.
+    if !select_build {
+        if let Some(source_paths) = conflicting_cross_ecosystem_test_sources(candidates) {
+            let note = format!(
+                "Left `{}` unset because {} suggested conflicting test commands.",
+                field,
+                human_join(&source_paths)
+            );
+            notes.push(note.clone());
+            evidence_bullets.push(note);
+            return None;
+        }
+    }
+
     let tiers = [
         CommandSourceTier::GitHubApi,
         CommandSourceTier::Manifest,
@@ -68,7 +81,17 @@ pub(crate) fn resolve_command_field(
                 command,
                 source_path,
             } => {
-                let Some(command) = sanitize_import_command(command) else {
+                let (command, source_path, tier) = if *tier == CommandSourceTier::Workflow {
+                    preferred_ecosystem_default_for_workflow_command(
+                        candidates,
+                        command,
+                        select_build,
+                    )
+                    .unwrap_or_else(|| (command.clone(), source_path.clone(), *tier))
+                } else {
+                    (command.clone(), source_path.clone(), *tier)
+                };
+                let Some(command) = sanitize_import_command(&command) else {
                     let note = format!(
                         "Left `{}` unset because `{}` suggested an unsafe shell-like command.",
                         field, source_path
@@ -77,13 +100,13 @@ pub(crate) fn resolve_command_field(
                     evidence_bullets.push(note);
                     return None;
                 };
-                let is_declared_tier = *tier == CommandSourceTier::Manifest
-                    || *tier == CommandSourceTier::ContribDoc
-                    || *tier == CommandSourceTier::TaskScript;
+                let is_declared_tier = tier == CommandSourceTier::Manifest
+                    || tier == CommandSourceTier::ContribDoc
+                    || tier == CommandSourceTier::TaskScript;
                 let selection = ImportedCommandSelection {
                     command,
-                    source_path: source_path.clone(),
-                    source_tier: *tier,
+                    source_path,
+                    source_tier: tier,
                     provenance: if is_declared_tier {
                         ImportedCommandProvenance::Imported
                     } else {
@@ -143,6 +166,232 @@ fn note_selected_command(
             ));
         }
     }
+}
+
+fn preferred_ecosystem_default_for_workflow_command(
+    candidates: &[ImportedCommandCandidate],
+    workflow_command: &str,
+    select_build: bool,
+) -> Option<(String, String, CommandSourceTier)> {
+    preferred_cargo_workspace_default_for_workflow_command(
+        candidates,
+        workflow_command,
+        select_build,
+    )
+    .or_else(|| {
+        preferred_go_module_default_for_workflow_command(candidates, workflow_command, select_build)
+    })
+    .or_else(|| {
+        preferred_wrapper_default_for_workflow_command(candidates, workflow_command, select_build)
+    })
+}
+
+/// Gradle and Maven CI workflows almost always run pipeline-flavored tasks
+/// (`systemTest`, `clean publish`, profile-specific goals, `$VAR` POM paths).
+/// When the manifest tier already supplies the conventional wrapper-aware
+/// default, that default is the canonical developer command.
+fn preferred_wrapper_default_for_workflow_command(
+    candidates: &[ImportedCommandCandidate],
+    workflow_command: &str,
+    select_build: bool,
+) -> Option<(String, String, CommandSourceTier)> {
+    let normalized = workflow_command.trim().trim_matches('\'').trim_matches('"');
+    let manifest_paths: &[&str] = if normalized.starts_with("./gradlew")
+        || normalized.starts_with("gradlew")
+        || normalized.starts_with("gradle ")
+    {
+        &["build.gradle", "build.gradle.kts"]
+    } else if normalized.starts_with("./mvnw") || normalized.starts_with("mvn ") {
+        &["pom.xml"]
+    } else {
+        return None;
+    };
+    let (mut replacement, source_path, tier) = candidates.iter().find_map(|candidate| {
+        (candidate.source_tier == CommandSourceTier::EcosystemDefault
+            && manifest_paths.contains(&candidate.source_path.as_str()))
+        .then(|| {
+            if select_build {
+                candidate.build.clone()
+            } else {
+                candidate.test.clone()
+            }
+            .map(|value| (value, candidate.source_path.clone(), candidate.source_tier))
+        })
+        .flatten()
+    })?;
+    // A workflow command that invokes the wrapper is itself proof the wrapper
+    // exists, even when it was not materialized for the manifest default.
+    if normalized.starts_with("./gradlew") {
+        if let Some(rest) = replacement.strip_prefix("gradle ") {
+            replacement = format!("./gradlew {rest}");
+        }
+    } else if normalized.starts_with("./mvnw") {
+        if let Some(rest) = replacement.strip_prefix("mvn ") {
+            replacement = format!("./mvnw {rest}");
+        }
+    }
+    if normalized == replacement {
+        return None;
+    }
+    Some((replacement, source_path, tier))
+}
+
+fn preferred_cargo_workspace_default_for_workflow_command(
+    candidates: &[ImportedCommandCandidate],
+    workflow_command: &str,
+    select_build: bool,
+) -> Option<(String, String, CommandSourceTier)> {
+    if !is_less_canonical_cargo_workflow_command(workflow_command, select_build) {
+        return None;
+    }
+    let expected = if select_build {
+        "cargo build --workspace"
+    } else {
+        "cargo test --workspace"
+    };
+    ecosystem_default_candidate(candidates, "Cargo.toml", expected, select_build)
+}
+
+fn preferred_go_module_default_for_workflow_command(
+    candidates: &[ImportedCommandCandidate],
+    workflow_command: &str,
+    select_build: bool,
+) -> Option<(String, String, CommandSourceTier)> {
+    if !is_less_canonical_go_workflow_command(workflow_command, select_build) {
+        return None;
+    }
+    let expected = if select_build {
+        "go build ./..."
+    } else {
+        "go test ./..."
+    };
+    ecosystem_default_candidate(candidates, "go.mod", expected, select_build)
+}
+
+fn ecosystem_default_candidate(
+    candidates: &[ImportedCommandCandidate],
+    manifest_path: &str,
+    expected: &str,
+    select_build: bool,
+) -> Option<(String, String, CommandSourceTier)> {
+    candidates.iter().find_map(|candidate| {
+        (candidate.source_tier == CommandSourceTier::EcosystemDefault
+            && candidate.source_path == manifest_path
+            && if select_build {
+                candidate.build.as_deref() == Some(expected)
+            } else {
+                candidate.test.as_deref() == Some(expected)
+            })
+        .then(|| {
+            (
+                expected.to_string(),
+                candidate.source_path.clone(),
+                candidate.source_tier,
+            )
+        })
+    })
+}
+
+fn is_less_canonical_go_workflow_command(command: &str, select_build: bool) -> bool {
+    let normalized = command.trim().trim_matches('\'').trim_matches('"');
+    let (runner, canonical) = if select_build {
+        ("go build", "go build ./...")
+    } else {
+        ("go test", "go test ./...")
+    };
+    if normalized == canonical || normalized == runner {
+        return false;
+    }
+    // Any flagged invocation (-race, -coverprofile, -tags, ...) is a
+    // CI-specialized variant of the module default, not the canonical
+    // developer command.
+    normalized.strip_prefix(runner).is_some_and(|rest| {
+        rest.starts_with(char::is_whitespace)
+            && rest.split_whitespace().any(|token| token.starts_with('-'))
+    })
+}
+
+fn is_less_canonical_cargo_workflow_command(command: &str, select_build: bool) -> bool {
+    let normalized = command.trim().trim_matches('\'').trim_matches('"');
+    if select_build {
+        return normalized == "cargo build";
+    }
+    if normalized == "cargo test" {
+        return false;
+    }
+    normalized.starts_with("cargo test")
+        && (contains_specializing_command_token(normalized) || normalized.contains("::"))
+}
+
+fn contains_specializing_command_token(command: &str) -> bool {
+    command.split_whitespace().any(|token| {
+        matches!(
+            token,
+            "--all-features"
+                | "--bench"
+                | "--benches"
+                | "--bin"
+                | "--bins"
+                | "--doc"
+                | "--example"
+                | "--examples"
+                | "--features"
+                | "--no-default-features"
+                | "--package"
+                | "--target"
+                | "--test"
+                | "--tests"
+                | "-f"
+                | "-p"
+        ) || token.starts_with("--features=")
+            || token.starts_with("--package=")
+            || token.starts_with("--target=")
+            || token.starts_with("--test=")
+    })
+}
+
+fn conflicting_cross_ecosystem_test_sources(
+    candidates: &[ImportedCommandCandidate],
+) -> Option<Vec<String>> {
+    let node = candidates.iter().find(|candidate| {
+        candidate.source_tier == CommandSourceTier::Manifest
+            && candidate.source_path == "package.json"
+            && candidate
+                .test
+                .as_deref()
+                .is_some_and(is_node_package_test_command)
+    })?;
+    let python = candidates.iter().find(|candidate| {
+        candidate.source_tier == CommandSourceTier::EcosystemDefault
+            && matches!(
+                candidate.source_path.as_str(),
+                "pyproject.toml" | "setup.py" | "setup.cfg"
+            )
+            && candidate
+                .test
+                .as_deref()
+                .is_some_and(is_python_test_command)
+            && candidate.test != node.test
+    })?;
+
+    let mut source_paths = Vec::new();
+    push_unique(&mut source_paths, node.source_path.clone());
+    push_unique(&mut source_paths, python.source_path.clone());
+    Some(source_paths)
+}
+
+fn is_node_package_test_command(command: &str) -> bool {
+    matches!(
+        command.trim(),
+        "npm test" | "pnpm test" | "yarn test" | "bun test"
+    )
+}
+
+fn is_python_test_command(command: &str) -> bool {
+    matches!(
+        command.trim(),
+        "python -m pytest" | "python -m unittest discover" | "tox" | "nox"
+    )
 }
 
 pub(crate) fn resolve_unique_command_candidate(

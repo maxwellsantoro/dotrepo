@@ -851,7 +851,13 @@ jobs:
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
+    // A generic `cargo build` observed in CI defers to the workspace default
+    // from Cargo.toml; the workflow's plain `cargo test` is not a specialized
+    // variant, so it still wins as the observed command.
+    assert_eq!(
+        plan.manifest.repo.build.as_deref(),
+        Some("cargo build --workspace")
+    );
     assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
     assert!(plan.inferred_fields.contains(&"repo.build".to_string()));
     assert!(plan.inferred_fields.contains(&"repo.test".to_string()));
@@ -859,16 +865,13 @@ jobs:
         .imported_sources
         .iter()
         .any(|path| path == ".github/workflows/ci.yml"));
-    assert!(
-        plan.manifest
-            .record
-            .trust
-            .as_ref()
-            .and_then(|trust| trust.notes.as_deref())
-            .is_some_and(
-                |text| text.contains("Inferred `repo.build` from `.github/workflows/ci.yml`")
-            )
-    );
+    assert!(plan
+        .manifest
+        .record
+        .trust
+        .as_ref()
+        .and_then(|trust| trust.notes.as_deref())
+        .is_some_and(|text| text.contains("Inferred `repo.test` from `.github/workflows/ci.yml`")));
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }

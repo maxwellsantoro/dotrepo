@@ -74,6 +74,37 @@ fn adjudicate_request_deterministic(
     defer_conflicts_to_model: bool,
 ) -> AdjudicationResult {
     let is_command_field = request.field == "repo.build" || request.field == "repo.test";
+    if request.field == "repo.test" {
+        if let Some(source_paths) =
+            conflicting_cross_ecosystem_test_sources_for_adjudication(&request.candidates)
+        {
+            if defer_conflicts_to_model {
+                return AdjudicationResult {
+                    field: request.field.clone(),
+                    outcome: AdjudicationOutcome::Rejected {
+                        model_value: String::new(),
+                        reason: format!(
+                            "conflicting test candidates from {} deferred to model adjudication",
+                            source_paths.join(", ")
+                        ),
+                    },
+                };
+            }
+            return apply_adjudication_response(
+                &AdjudicationModelResponse {
+                    field: request.field.clone(),
+                    value: None,
+                    confidence: AdjudicationModelConfidence::High,
+                    reason: format!(
+                        "conflicting test candidates from {}",
+                        source_paths.join(", ")
+                    ),
+                    source: None,
+                },
+                request,
+            );
+        }
+    }
     for tier in ESCALATION_TIERS {
         let tier_candidates: Vec<_> = request
             .candidates
@@ -152,6 +183,44 @@ fn adjudication_model_confidence(confidence: FieldConfidence) -> AdjudicationMod
         FieldConfidence::MediumConfidencePresent => AdjudicationModelConfidence::Medium,
         FieldConfidence::Suspect | FieldConfidence::Unresolved => AdjudicationModelConfidence::Low,
     }
+}
+
+fn conflicting_cross_ecosystem_test_sources_for_adjudication(
+    candidates: &[AdjudicationCandidate],
+) -> Option<Vec<String>> {
+    let node = candidates.iter().find(|candidate| {
+        candidate.source_tier == CommandSourceTier::Manifest
+            && candidate.source_path == "package.json"
+            && is_node_package_test_command(&candidate.value)
+    })?;
+    let python = candidates.iter().find(|candidate| {
+        candidate.source_tier == CommandSourceTier::EcosystemDefault
+            && matches!(
+                candidate.source_path.as_str(),
+                "pyproject.toml" | "setup.py" | "setup.cfg"
+            )
+            && is_python_test_command(&candidate.value)
+            && candidate.value != node.value
+    })?;
+
+    let mut source_paths = Vec::new();
+    push_unique(&mut source_paths, node.source_path.clone());
+    push_unique(&mut source_paths, python.source_path.clone());
+    Some(source_paths)
+}
+
+fn is_node_package_test_command(command: &str) -> bool {
+    matches!(
+        command.trim(),
+        "npm test" | "pnpm test" | "yarn test" | "bun test"
+    )
+}
+
+fn is_python_test_command(command: &str) -> bool {
+    matches!(
+        command.trim(),
+        "python -m pytest" | "python -m unittest discover" | "tox" | "nox"
+    )
 }
 
 pub fn apply_adjudication_to_import_plan(
@@ -828,6 +897,31 @@ mod tests {
         let _ = fs::remove_dir_all(&dir);
         fs::create_dir_all(&dir).expect("temp dir created");
         dir
+    }
+
+    #[test]
+    fn deterministic_escalation_keeps_node_python_test_conflict_absent() {
+        let results = adjudicate_requests_deterministic(&[AdjudicationRequest {
+            field: "repo.test".into(),
+            candidates: vec![
+                AdjudicationCandidate {
+                    value: "npm test".into(),
+                    source_path: "package.json".into(),
+                    source_tier: CommandSourceTier::Manifest,
+                },
+                AdjudicationCandidate {
+                    value: "tox".into(),
+                    source_path: "pyproject.toml".into(),
+                    source_tier: CommandSourceTier::EcosystemDefault,
+                },
+            ],
+        }]);
+
+        assert_eq!(results.len(), 1);
+        assert!(matches!(
+            results[0].outcome,
+            AdjudicationOutcome::Absent { .. }
+        ));
     }
 
     #[test]

@@ -3,11 +3,11 @@
   "ecosystem": "jvm",
   "repo_name": "Maven Canary",
   "repo_description": "A compact JVM service fixture used to preserve deterministic Maven command inference.",
-  "repo_build": "./mvnw -B --no-transfer-progress clean package -DskipTests",
-  "repo_test": "./mvnw -B test",
+  "repo_build": "./mvnw package",
+  "repo_test": "./mvnw test",
   "imported_sources": [
     "README.md",
-    ".github/workflows/ci.yml"
+    "pom.xml"
   ],
   "overlay_status": "inferred",
   "trust_provenance": [

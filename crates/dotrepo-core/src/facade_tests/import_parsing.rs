@@ -357,7 +357,10 @@ fn infer_pyproject_commands_prefers_explicit_tool_over_default() {
 }
 
 #[test]
-fn declared_package_script_beats_pyproject_ecosystem_default() {
+fn conflicting_node_and_python_test_signals_abstain() {
+    // A repository with both a declared package.json test script and a Python
+    // packaging default is genuinely polyglot: neither `npm test` nor
+    // `python -m pytest` is the single honest answer, so `repo.test` abstains.
     let pyproject = ImportedFile {
         path: "pyproject.toml".into(),
         contents: "[build-system]\nrequires = [\"setuptools\"]\n".into(),
@@ -392,13 +395,11 @@ fn declared_package_script_beats_pyproject_ecosystem_default() {
         contributing: None,
         workflow_files: &[],
     });
-    assert_eq!(
-        result
-            .test
-            .as_ref()
-            .map(|selection| selection.command.as_str()),
-        Some("npm test")
-    );
+    assert!(result.test.is_none());
+    assert!(result
+        .notes
+        .iter()
+        .any(|note| note.contains("conflicting test commands")));
 }
 
 #[test]

@@ -56,6 +56,11 @@ const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
     "Justfile",
     "Rakefile",
     "rakefile",
+    // Wrapper marker files: import command inference only checks their
+    // presence, but without materializing them the Maven/Gradle manifest
+    // tiers emit bare `mvn`/`gradle` for repositories that ship a wrapper.
+    "gradlew",
+    "mvnw",
 ];
 const MAX_WORKFLOW_FILES: usize = 8;
 const GITHUB_HTTP_TIMEOUT: Duration = Duration::from_secs(30);
