@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AlistGo/alist"
-generated_at = "2026-07-01T17:15:26.137777Z"
+generated_at = "2026-07-06T07:43:25.712582518Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "discussions"
-description = "Please go to our discussion forum for general questions, **issues are for bug reports and feature requests only.**"
+name = "alist"
+description = "🗂️A file list/WebDAV program that supports multiple storages, powered by Gin and Solidjs. / 一个支持多存储的文件列表/WebDAV程序，使用 Gin 和 Solidjs。"
 homepage = "https://alistgo.com"
 license = "AGPL-3.0"
 visibility = "public"
@@ -37,6 +38,10 @@ topics = [
     "onedrive",
 ]
 
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
+
 [docs]
 root = "http://contrib.nn.ci/api?repo=alist-org/alist&repo=alist-org/alist-web&repo=alist-org/docs"
 
@@ -45,6 +50,6 @@ archived = false
 clone_url = "https://github.com/AlistGo/alist.git"
 default_branch = "main"
 fork = false
-head_sha = "d0cec67718d9b0f3750715fe850f6c0ba9e9e87f"
+head_sha = "3a38a1f5db47b6d80c5883a0a58424a41e1502d2"
 html_url = "https://github.com/AlistGo/alist"
-stars = 49774
+stars = 49799

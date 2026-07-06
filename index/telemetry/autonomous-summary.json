@@ -10,13 +10,13 @@
     "unknown": 1
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-07-01T14:41:45Z",
-  "lastRunAt": "2026-07-01T14:41:45Z",
+  "generatedAt": "2026-07-06T07:43:40Z",
+  "lastRunAt": "2026-07-06T07:43:40Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
-    "adjudicationCallBudget": 0,
+    "adjudicationCallBudget": 8,
     "adjudicationCalls": 0,
-    "crawled": 15,
+    "crawled": 18,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -31,16 +31,16 @@
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.005780346820809248,
-    "promotionRate": 0.7398843930635838,
-    "writeRate": 0.9942196531791907,
+    "failureRate": 0.0056179775280898875,
+    "promotionRate": 0.7471910112359551,
+    "writeRate": 0.9943820224719101,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
-    "adjudicationCallBudget": 8,
+    "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 38,
+    "crawled": 35,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -52,32 +52,32 @@
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 1
+    "deterministic": 3
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [],
   "regressionFixtureCandidates": [],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 15
+    "deterministic": 17
   },
-  "runCount": 22,
+  "runCount": 23,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 173,
+    "crawled": 178,
     "discoveryQueued": 0,
     "failed": 1,
-    "promoted": 128,
+    "promoted": 133,
     "qualityReprocessQueued": 153,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
     "tokensUsed": 0,
-    "written": 172,
-    "zeroModelRuns": 173
+    "written": 177,
+    "zeroModelRuns": 178
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,

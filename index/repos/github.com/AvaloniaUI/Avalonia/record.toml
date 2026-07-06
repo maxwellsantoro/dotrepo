@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AvaloniaUI/Avalonia"
-generated_at = "2026-07-01T17:15:40.123513Z"
+generated_at = "2026-07-06T07:43:31.825845212Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `readme.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "About"
-description = "Avalonia is a cross-platform UI framework for dotnet, providing a flexible styling system and supporting a wide range of platforms such as Windows, macOS, Linux, iOS, Android and WebAssembly."
+name = "Avalonia"
+description = "Develop Desktop, Embedded, Mobile and WebAssembly apps with C# and XAML. The future of .NET UI"
 homepage = "https://avaloniaui.net"
 license = "MIT"
 visibility = "public"
@@ -70,6 +70,6 @@ archived = false
 clone_url = "https://github.com/AvaloniaUI/Avalonia.git"
 default_branch = "master"
 fork = false
-head_sha = "f8eb57adf1b5fd8ec13cbbcc35450dba289a0723"
+head_sha = "bc5d32dca7e3d7756281e834d39c16262a04509a"
 html_url = "https://github.com/AvaloniaUI/Avalonia"
-stars = 31078
+stars = 31117
