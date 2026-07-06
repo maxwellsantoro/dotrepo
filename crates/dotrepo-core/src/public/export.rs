@@ -16,6 +16,9 @@ pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
     let mut hasher = Sha256::new();
     for path in files {
         let relative = crate::relative_to_root(index_root, &path)?;
+        if relative == Path::new(".crawler-state.toml") {
+            continue;
+        }
         hasher.update(relative.as_os_str().as_encoded_bytes());
         hasher.update([0]);
         hasher.update(fs::read(&path).map_err(|err| {

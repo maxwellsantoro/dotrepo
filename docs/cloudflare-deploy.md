@@ -228,7 +228,7 @@ uv run python scripts/check_release_gate.py --skip-vsix
 
 - Do not put GitHub Actions secrets in `.dev.vars`.
 - Do not rely on a root `.env` file for GitHub workflow deploy auth.
-- Do not edit `public/` by hand before deploy; stage from a validated export
-  snapshot instead.
+- Do not edit or commit generated `public/` or `release-gate/` trees; stage
+  from a validated export snapshot instead.
 - Do not treat the static asset bundle as the historical archive. It is the
   current+previous hot serving layer; R2 is the retention layer.

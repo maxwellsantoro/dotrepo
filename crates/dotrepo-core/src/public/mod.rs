@@ -1,5 +1,8 @@
 use anyhow::{anyhow, bail, Result};
-use std::path::{Path, PathBuf};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
 
 use crate::selection::{resolve_candidates, CandidateManifest};
 use crate::util::{repository_identity, validate_repository_identity_segments};
@@ -130,15 +133,74 @@ fn index_repository_scope(
     validate_public_identity(host, owner, repo)?;
     let scope_root = index_root.join("repos").join(host).join(owner).join(repo);
     let manifest_path = scope_root.join("record.toml");
-    if !manifest_path.is_file() {
+    if manifest_path.is_file() {
+        return Ok(scope_root);
+    }
+
+    if host.eq_ignore_ascii_case("github.com") {
+        if let Some(scope_root) = case_insensitive_repository_scope(index_root, host, owner, repo)?
+        {
+            return Ok(scope_root);
+        }
+    }
+
+    bail!(
+        "repository not found in index: repos/{}/{}/{}/record.toml",
+        host,
+        owner,
+        repo
+    )
+}
+
+fn case_insensitive_child_directory(parent: &Path, requested: &str) -> Result<Option<PathBuf>> {
+    if !parent.is_dir() {
+        return Ok(None);
+    }
+    let mut matches = Vec::new();
+    for entry in fs::read_dir(parent)? {
+        let entry = entry?;
+        if !entry.file_type()?.is_dir() {
+            continue;
+        }
+        let name = entry.file_name();
+        if name
+            .to_str()
+            .is_some_and(|name| name.eq_ignore_ascii_case(requested))
+        {
+            matches.push(entry.path());
+        }
+    }
+    matches.sort();
+    if matches.len() > 1 {
         bail!(
-            "repository not found in index: repos/{}/{}/{}/record.toml",
-            host,
-            owner,
-            repo
+            "ambiguous case-insensitive index segment `{}` under {}",
+            requested,
+            parent.display()
         );
     }
-    Ok(scope_root)
+    Ok(matches.pop())
+}
+
+fn case_insensitive_repository_scope(
+    index_root: &Path,
+    host: &str,
+    owner: &str,
+    repo: &str,
+) -> Result<Option<PathBuf>> {
+    let repos_root = index_root.join("repos");
+    let Some(host_root) = case_insensitive_child_directory(&repos_root, host)? else {
+        return Ok(None);
+    };
+    let Some(owner_root) = case_insensitive_child_directory(&host_root, owner)? else {
+        return Ok(None);
+    };
+    let Some(scope_root) = case_insensitive_child_directory(&owner_root, repo)? else {
+        return Ok(None);
+    };
+    Ok(scope_root
+        .join("record.toml")
+        .is_file()
+        .then_some(scope_root))
 }
 
 fn resolve_repository_candidates(

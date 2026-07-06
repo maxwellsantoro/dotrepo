@@ -192,3 +192,48 @@ provenance = []
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
+
+#[test]
+fn github_relation_identity_resolution_is_case_insensitive_across_filesystems() {
+    let index = temp_dir("case-insensitive");
+    write_record(
+        &index,
+        "github.com/example/Source",
+        &record(
+            "github.com/example/Source",
+            r#"[[relations.links]]
+kind = "related"
+target = "github.com/example/target"
+[relations.links.trust]
+confidence = "high"
+provenance = ["declared"]
+"#,
+        ),
+    );
+    write_record(
+        &index,
+        "github.com/example/Target",
+        &record("github.com/example/Target", ""),
+    );
+    let freshness = PublicFreshness {
+        generated_at: "2026-06-28T12:00:00Z".into(),
+        snapshot_digest: "fixture".into(),
+        stale_after: None,
+    };
+
+    let outgoing =
+        public_repository_relations(&index, "github.com", "example", "Source", freshness.clone())
+            .expect("case-insensitive outgoing traversal succeeds");
+    let related = outgoing.references.first().expect("outgoing relation");
+    assert!(related.error.is_none());
+    assert!(related.profile.is_some());
+
+    let incoming =
+        public_repository_relations(&index, "github.com", "example", "Target", freshness)
+            .expect("case-insensitive incoming traversal succeeds");
+    assert_eq!(incoming.references.len(), 1);
+    assert_eq!(incoming.references[0].direction, "incoming");
+    assert_eq!(incoming.references[0].relationship, "related");
+
+    fs::remove_dir_all(index).expect("temp dir removed");
+}

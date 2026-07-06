@@ -3,6 +3,14 @@ index-autonomous-batch/
 output/
 target/
 
+# Generated review, packaging, and deployment outputs.
+/public/
+/release-gate/
+/operator-gate/
+/dist/
+/cloudflare/hosted-query/public-snapshot/
+/public-edge-canary.json
+
 # Local agent scratch space (e.g. Claude Code worktrees) must never be tracked.
 .claude/worktrees/
 # macOS Finder metadata

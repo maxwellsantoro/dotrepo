@@ -1,7 +1,7 @@
 use dotrepo_core::{
     build_public_freshness, export_public_index_static, import_repository_with_options,
-    public_repository_query, public_repository_summary, public_repository_trust, query_repository,
-    trust_repository, ImportMode, ImportOptions,
+    index_snapshot_digest, public_repository_query, public_repository_summary,
+    public_repository_trust, query_repository, trust_repository, ImportMode, ImportOptions,
 };
 use serde_json::{to_value, Value};
 use std::collections::{BTreeMap, BTreeSet};
@@ -81,6 +81,24 @@ fn export_outputs_map(
             )
         })
         .collect()
+}
+
+#[test]
+fn snapshot_digest_ignores_local_crawler_state() {
+    let index_root = temp_dir("snapshot-crawler-state");
+    fs::write(index_root.join("tracked-source.toml"), "value = 1\n")
+        .expect("tracked source written");
+    let before = index_snapshot_digest(&index_root).expect("initial snapshot digest");
+
+    fs::write(
+        index_root.join(".crawler-state.toml"),
+        "last_refresh = \"local-only\"\n",
+    )
+    .expect("crawler state written");
+    let after = index_snapshot_digest(&index_root).expect("snapshot digest with crawler state");
+
+    assert_eq!(before, after);
+    fs::remove_dir_all(index_root).expect("temp dir removed");
 }
 
 #[test]
