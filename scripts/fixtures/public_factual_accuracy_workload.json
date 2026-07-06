@@ -132,8 +132,8 @@
       "id": "gin-test",
       "repository": "github.com/gin-gonic/gin",
       "path": "repo.test",
-      "expected": "go test ./...",
-      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/go.mod", "locator": "Go module manifest", "checkedAt": "2026-06-28"}
+      "expected": "make test",
+      "source": {"url": "https://raw.githubusercontent.com/gin-gonic/gin/master/Makefile", "locator": "test target (multi-step recipe; maintainer task-script entrypoint)", "checkedAt": "2026-07-06"}
     },
     {
       "id": "gin-docs",
