@@ -369,9 +369,11 @@ cargo nextest run -E 'test(test_name)'
         };
         let candidate = infer_makefile_commands(&makefile).expect("Makefile commands");
         assert_eq!(candidate.build, None);
-        assert_eq!(candidate.test.as_deref(), Some("make test"));
+        assert_eq!(candidate.test.as_deref(), Some("python -m pytest tests"));
 
-        // A Makefile whose only build-ish target is `all` publishes `make all`.
+        // A Makefile whose only build-ish target is `all` publishes `make all`
+        // when the recipe is project-specific rather than a canonical
+        // developer command that can stand alone.
         let all_only = ImportedFile {
             path: "Makefile".into(),
             contents: "all:\n\tgcc -o app main.c\n\ncheck:\n\t./run-tests.sh\n".into(),
@@ -379,6 +381,15 @@ cargo nextest run -E 'test(test_name)'
         let candidate = infer_makefile_commands(&all_only).expect("Makefile commands");
         assert_eq!(candidate.build.as_deref(), Some("make all"));
         assert_eq!(candidate.test.as_deref(), Some("make check"));
+
+        // Multi-step recipes remain wrapper commands because the target is the
+        // audited entrypoint for the sequence.
+        let multi_step = ImportedFile {
+            path: "Makefile".into(),
+            contents: "test:\n\tpython -m pip install -e .\n\tpython -m pytest tests\n".into(),
+        };
+        let candidate = infer_makefile_commands(&multi_step).expect("Makefile commands");
+        assert_eq!(candidate.test.as_deref(), Some("make test"));
     }
 
     #[test]
