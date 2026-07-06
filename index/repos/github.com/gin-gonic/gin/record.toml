@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/gin-gonic/gin"
-generated_at = "2026-07-01T18:03:46.987503Z"
+generated_at = "2026-07-06T18:43:25.532695Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `go.mod`, and `Makefile`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `go.mod`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Gin Web Framework"
@@ -26,7 +26,7 @@ languages = [
     "Makefile",
 ]
 build = "go build ./..."
-test = "go test ./..."
+test = "make test"
 topics = [
     "server",
     "middleware",
@@ -36,6 +36,10 @@ topics = [
     "performance",
     "gin",
 ]
+
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
 
 [docs]
 root = "https://gin-gonic.com/en/docs/"
@@ -62,4 +66,4 @@ default_branch = "master"
 fork = false
 head_sha = "34dac209ffb6ef85cc78c5d217bbb7ad001d68fd"
 html_url = "https://github.com/gin-gonic/gin"
-stars = 88796
+stars = 88851

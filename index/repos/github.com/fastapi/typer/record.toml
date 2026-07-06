@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fastapi/typer"
-generated_at = "2026-07-01T18:01:57.97478Z"
+generated_at = "2026-07-06T18:41:57.302188Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Typer"
-description = "Typer, build great CLIs."
+description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
 homepage = "https://typer.tiangolo.com/"
 license = "MIT"
 visibility = "public"
@@ -38,6 +39,10 @@ topics = [
     "typer",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [docs]
 root = "https://rich.readthedocs.io/en/stable/index.html"
 
@@ -46,6 +51,6 @@ archived = false
 clone_url = "https://github.com/fastapi/typer.git"
 default_branch = "master"
 fork = false
-head_sha = "b210c0e2376d99344f79f11fab3ad34cf890cc20"
+head_sha = "7fb978fbf44c776ca7d9441b47c5e64b00740b40"
 html_url = "https://github.com/fastapi/typer"
-stars = 19669
+stars = 19696

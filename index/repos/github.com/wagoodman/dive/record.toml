@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/wagoodman/dive"
-generated_at = "2026-07-01T18:36:10.53942Z"
+generated_at = "2026-07-06T19:06:17.400082Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/validations.yaml`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/validations.yaml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "dive"
-description = "To analyze a Docker image simply run dive with an image tag/id/digest:"
+description = "A tool for exploring each layer in a docker image"
 homepage = "https://github.com/wagoodman/dive"
 license = "MIT"
 visibility = "public"
@@ -26,7 +27,7 @@ languages = [
     "Dockerfile",
 ]
 build = "go build ./..."
-test = "go test ./..."
+test = "make ci-test-docker-image"
 topics = [
     "docker",
     "docker-image",
@@ -35,6 +36,10 @@ topics = [
     "cli",
     "tui",
 ]
+
+[repo.toolchain]
+min = "1.24"
+ecosystem = "Go"
 
 [relations]
 references = []
@@ -58,4 +63,4 @@ default_branch = "main"
 fork = false
 head_sha = "d6c691947f8fda635c952a17ee3b7555379d58f0"
 html_url = "https://github.com/wagoodman/dive"
-stars = 54283
+stars = 54297

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nginx-proxy/nginx-proxy"
-generated_at = "2026-07-01T18:18:11.439103Z"
+generated_at = "2026-07-06T18:54:11.204027Z"
 
 [record.trust]
 confidence = "high"
@@ -13,10 +13,10 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/test.yml`, and `Makefile`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/test.yml`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "ZeroSSL"
+name = "nginx-proxy"
 description = "Automated Nginx Reverse Proxy for Docker"
 homepage = "https://github.com/nginx-proxy/nginx-proxy"
 license = "MIT"
@@ -30,7 +30,7 @@ languages = [
     "Dockerfile",
     "Procfile",
 ]
-build = "make build"
+build = "make build-webserver"
 test = "make test"
 topics = [
     "nginx",
@@ -49,4 +49,4 @@ default_branch = "main"
 fork = false
 head_sha = "a64c037f893b22489607661f2534d0ed15c7a8f5"
 html_url = "https://github.com/nginx-proxy/nginx-proxy"
-stars = 19864
+stars = 19869

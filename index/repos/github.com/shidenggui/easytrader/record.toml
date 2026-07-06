@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/shidenggui/easytrader"
-generated_at = "2026-07-01T18:28:56.939642Z"
+generated_at = "2026-07-06T19:01:37.96804Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from
 
 [repo]
 name = "easytrader"
-description = "若二维码因 Github 网络无法打开，请点击公众号二维码直接打开图片。"
+description = "提供同花顺客户端/miniqmt/雪球的股票量化交易，支持跟踪 joinquant /ricequant 模拟交易 和 实盘雪球组合"
 homepage = "https://github.com/shidenggui/easytrader"
 license = "MIT"
 visibility = "public"
@@ -24,7 +24,7 @@ languages = [
     "Python",
     "Makefile",
 ]
-test = "make test"
+test = "pytest -vx --cov=easytrader tests"
 topics = []
 
 [docs]
@@ -37,4 +37,4 @@ default_branch = "master"
 fork = false
 head_sha = "def5a8edc5ebd7d49bf92a9f39e9e30c9bf47101"
 html_url = "https://github.com/shidenggui/easytrader"
-stars = 9941
+stars = 9959

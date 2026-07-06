@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/actix/actix-web"
-generated_at = "2026-07-01T17:23:03.869219Z"
+generated_at = "2026-07-06T18:33:23.281376Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `Cargo.toml` and `justfile`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Imported `repo.test` from `justfile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "actix-web"
@@ -28,7 +28,7 @@ languages = [
     "JavaScript",
 ]
 build = "cargo build --workspace"
-test = "cargo test --workspace"
+test = "just test"
 topics = [
     "rust",
     "web",
@@ -39,6 +39,10 @@ topics = [
     "async",
 ]
 
+[repo.toolchain]
+min = "1.88"
+ecosystem = "Rust"
+
 [docs]
 root = "https://actix.rs"
 
@@ -47,6 +51,6 @@ archived = false
 clone_url = "https://github.com/actix/actix-web.git"
 default_branch = "main"
 fork = false
-head_sha = "1fc14e3072a500c71d290d85847d6c6f3959b4a7"
+head_sha = "c6249cc00c757083ae1b29a3c4e1748185f43071"
 html_url = "https://github.com/actix/actix-web"
-stars = 24701
+stars = 24710

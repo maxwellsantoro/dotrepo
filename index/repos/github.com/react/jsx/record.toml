@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/react/jsx"
-generated_at = "2026-07-01T18:24:13.370272Z"
+generated_at = "2026-07-06T18:58:20.003447Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "DRAFT"
-description = "**See spec text with grammar here**."
+name = "jsx"
+description = "The JSX specification is a XML-like syntax extension to ECMAScript."
 homepage = "http://react.github.io/jsx/"
 visibility = "public"
 languages = ["HTML"]

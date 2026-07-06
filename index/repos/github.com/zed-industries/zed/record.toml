@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/zed-industries/zed"
-generated_at = "2026-07-01T18:38:03.590683Z"
+generated_at = "2026-07-06T19:07:36.744586Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Zed"
-description = "Welcome to Zed, a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter."
+description = "Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter."
 homepage = "https://zed.dev"
 license = "NOASSERTION"
 visibility = "public"
@@ -60,6 +61,6 @@ archived = false
 clone_url = "https://github.com/zed-industries/zed.git"
 default_branch = "main"
 fork = false
-head_sha = "d0802abdecadabc5c3248ebf75a466831f6dfbe4"
+head_sha = "eeff97950f7ccfd5b2f73b48f7267bd0df5e4bfb"
 html_url = "https://github.com/zed-industries/zed"
-stars = 86294
+stars = 86568

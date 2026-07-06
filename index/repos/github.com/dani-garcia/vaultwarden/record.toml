@@ -2,18 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/dani-garcia/vaultwarden"
-generated_at = "2026-07-01T17:51:52.347669Z"
+generated_at = "2026-07-06T18:39:10.344058Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
-name = "Docker/Podman CLI"
-description = "Pull the container image and mount a volume from the host for persistent storage."
+name = "vaultwarden"
+description = "Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs"
 homepage = "https://github.com/dani-garcia/vaultwarden"
 license = "AGPL-3.0"
 visibility = "public"
@@ -38,6 +41,10 @@ topics = [
     "rocket",
     "bitwarden-rs",
 ]
+
+[repo.toolchain]
+min = "1.94.0"
+ecosystem = "Rust"
 
 [owners]
 maintainers = [
@@ -71,4 +78,4 @@ default_branch = "main"
 fork = false
 head_sha = "d6a3d539ed13352085ca7dfa63c49017d86c419b"
 html_url = "https://github.com/dani-garcia/vaultwarden"
-stars = 63169
+stars = 63347

@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rust-lang/rustfmt"
-generated_at = "2026-07-01T18:26:33.649325Z"
+generated_at = "2026-07-06T18:59:50.727942Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/check_diff.yml`, and `Cargo.toml`. Inferred `repo.build` from `.github/workflows/check_diff.yml`. Inferred `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "rustfmt"
-description = "A tool for formatting Rust code according to style guidelines."
+description = "Format Rust code"
 homepage = "https://rust-lang.github.io/rustfmt/"
 license = "Apache-2.0"
 visibility = "public"
@@ -25,7 +26,7 @@ languages = [
     "RenderScript",
     "Shell",
 ]
-build = "cargo build"
+build = "cargo build --release"
 test = "cargo test"
 topics = [
     "rust",
@@ -59,4 +60,4 @@ default_branch = "main"
 fork = false
 head_sha = "a4b7687425458309a0b7b3db7c057435aba6c8d4"
 html_url = "https://github.com/rust-lang/rustfmt"
-stars = 6893
+stars = 6899

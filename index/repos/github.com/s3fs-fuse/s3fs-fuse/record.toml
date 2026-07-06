@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/s3fs-fuse/s3fs-fuse"
-generated_at = "2026-07-01T18:26:55.297653Z"
+generated_at = "2026-07-06T19:00:13.221505Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `.github/workflows/ci.yml`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "s3fs"
@@ -44,6 +44,6 @@ archived = false
 clone_url = "https://github.com/s3fs-fuse/s3fs-fuse.git"
 default_branch = "master"
 fork = false
-head_sha = "ac20a7ebcba68eb3079544d3153238700afe305c"
+head_sha = "6e7d1632ce9cffd4186c11c9298b84fb81f897a3"
 html_url = "https://github.com/s3fs-fuse/s3fs-fuse"
-stars = 9907
+stars = 9914

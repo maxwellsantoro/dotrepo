@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/max-mapper/art-of-node"
-generated_at = "2026-07-01T18:14:18.05367Z"
+generated_at = "2026-07-06T18:52:02.740654Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "An introduction to Node.js"
-description = "This document is intended for readers who know at least a little bit of a couple of things:"
+name = "art-of-node"
+description = ":snowflake: a short introduction to node.js"
 homepage = "https://github.com/max-mapper/art-of-node"
 license = "NOASSERTION"
 visibility = "public"
@@ -33,4 +33,4 @@ default_branch = "master"
 fork = false
 head_sha = "71d0aba060532c5b4f075c1cd0fad746515f3808"
 html_url = "https://github.com/max-mapper/art-of-node"
-stars = 9871
+stars = 9874

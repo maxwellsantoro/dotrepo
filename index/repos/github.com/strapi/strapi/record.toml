@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/strapi/strapi"
-generated_at = "2026-07-01T18:30:42.087862Z"
+generated_at = "2026-07-06T19:03:17.451745Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "strapi"
-description = "Docs · Strapi Cloud · Roadmap · Discord · Discussions"
+description = "🚀 Strapi is the leading open-source headless CMS. It’s 100% JavaScript/TypeScript, fully customizable, and developer-first."
 homepage = "https://strapi.io"
 license = "NOASSERTION"
 visibility = "public"
@@ -51,6 +52,10 @@ topics = [
     "posgresql",
 ]
 
+[repo.toolchain]
+min = "20.0.0"
+ecosystem = "Node.js"
+
 [owners]
 maintainers = []
 security_contact = "security@strapi.io"
@@ -79,6 +84,6 @@ archived = false
 clone_url = "https://github.com/strapi/strapi.git"
 default_branch = "develop"
 fork = false
-head_sha = "bad729f84a0113774e1bc0c016a24e2486bab40b"
+head_sha = "ae96fc43ffd1a5e62ab75e029e0d15e131ded174"
 html_url = "https://github.com/strapi/strapi"
-stars = 72578
+stars = 72613

@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/SolaceLabs/solace-agent-mesh"
-generated_at = "2026-07-01T17:21:31.778866Z"
+generated_at = "2026-07-06T18:31:45.50054Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/gh_pages.yaml`, and `pyproject.toml`. Inferred `repo.build` from `.github/workflows/gh_pages.yaml`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Solace Agent Mesh"
-description = "Key Features • Quickstart • Next Steps • Docs"
+description = "An event-driven framework designed to build and orchestrate multi-agent AI systems. It enables seamless integration of AI agents with real-world data sources and systems, facilitating complex, multi-step workflows."
 homepage = "https://solacelabs.github.io/solace-agent-mesh/"
 license = "Apache-2.0"
 visibility = "public"
@@ -31,8 +32,8 @@ languages = [
     "Mako",
     "Shell",
 ]
-build = "python -m build"
-test = "python -m pytest"
+build = "npm run build"
+test = "pytest"
 topics = [
     "agentframework",
     "agents",
@@ -56,6 +57,10 @@ topics = [
     "mcp",
 ]
 
+[repo.toolchain]
+min = "3.10.16"
+ecosystem = "Python"
+
 [docs]
 root = "https://solacelabs.github.io/solace-agent-mesh/"
 
@@ -66,4 +71,4 @@ default_branch = "main"
 fork = false
 head_sha = "6b44e306a4c8571a6f6a8481c29fc35074d0a2db"
 html_url = "https://github.com/SolaceLabs/solace-agent-mesh"
-stars = 4966
+stars = 4967

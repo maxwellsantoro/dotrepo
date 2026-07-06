@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/x64dbg/x64dbg"
-generated_at = "2026-07-01T18:37:33.111997Z"
+generated_at = "2026-07-06T19:06:56.249638Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `.github/workflows/cross.yml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "x64dbg"
-description = "An open-source binary debugger for Windows, aimed at malware analysis and reverse engineering of executables you do not have the source code for."
+description = "An open-source user mode debugger for Windows. Optimized for reverse engineering and malware analysis."
 homepage = "http://x64dbg.com"
 license = "NOASSERTION"
 visibility = "public"
@@ -63,6 +63,6 @@ archived = false
 clone_url = "https://github.com/x64dbg/x64dbg.git"
 default_branch = "development"
 fork = false
-head_sha = "78ea8b1c85af61f83639287b1c75b7e8188a4e89"
+head_sha = "931f3be64d91b89023924c83512d2b83449c6008"
 html_url = "https://github.com/x64dbg/x64dbg"
-stars = 48776
+stars = 48815

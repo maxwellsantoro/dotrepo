@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/purifycss/purifycss"
-generated_at = "2026-07-01T18:23:15.608831Z"
+generated_at = "2026-07-06T18:57:23.076098Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "PurifyCSS"
-description = "PurifyCSS does not modify the original CSS files."
+description = "Remove unused CSS. Also works with single-page apps."
 homepage = "https://github.com/purifycss/purifycss"
 license = "MIT"
 visibility = "public"

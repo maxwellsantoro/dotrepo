@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ahmetb/kubectx"
-generated_at = "2026-07-01T17:23:19.393923Z"
+generated_at = "2026-07-06T18:33:42.210449Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/ci.yml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "kubectx"
-description = "This repository provides both `kubectx and `kubens tools."
+description = "Faster way to switch between clusters and namespaces in kubectl"
 homepage = "https://kubectx.dev"
 license = "Apache-2.0"
 visibility = "public"
@@ -33,6 +34,10 @@ topics = [
     "kubernetes-clusters",
 ]
 
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
+
 [docs]
 root = "https://kubectx.dev"
 
@@ -43,4 +48,4 @@ default_branch = "master"
 fork = false
 head_sha = "c8393ea883fb241764d8d6ca2851685e1ad5fe02"
 html_url = "https://github.com/ahmetb/kubectx"
-stars = 19857
+stars = 19871

@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rclone/rclone"
-generated_at = "2026-07-01T18:24:09.322509Z"
+generated_at = "2026-07-06T18:58:14.428178Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/workflows/build.yml`, `CONTRIBUTING.md`, and `go.mod`. Inferred `repo.build` from `.github/workflows/build.yml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Rclone"
-description = 'Rclone *("rsync for cloud storage")* is a command-line program to sync files and directories to and from different cloud storage providers.'
+description = '"rsync for cloud storage" - Google Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Wasabi, Google Cloud Storage, Azure Blob, Azure Files, Yandex Files'
 homepage = "https://rclone.org"
 license = "MIT"
 visibility = "public"
@@ -33,8 +34,8 @@ languages = [
     "PHP",
     "Batchfile",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make compile_all"
+test = "go test -v ./..."
 topics = [
     "golang",
     "go",
@@ -57,6 +58,10 @@ topics = [
     "azure-blob-storage",
     "azure-files",
 ]
+
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
 
 [owners]
 maintainers = [
@@ -90,6 +95,6 @@ archived = false
 clone_url = "https://github.com/rclone/rclone.git"
 default_branch = "master"
 fork = false
-head_sha = "22aba810748fe0200becb72ab817f93953601e37"
+head_sha = "2e2a50cc441dfab989ec4f3a73448f40ceb873f3"
 html_url = "https://github.com/rclone/rclone"
-stars = 58105
+stars = 58198

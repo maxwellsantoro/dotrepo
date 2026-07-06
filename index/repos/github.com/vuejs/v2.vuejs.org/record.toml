@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vuejs/v2.vuejs.org"
-generated_at = "2026-07-01T18:35:58.037082Z"
+generated_at = "2026-07-06T19:06:01.106276Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Writing"
-description = "See the Vue Docs Writing Guide for our rules and recommendations on writing and maintaining documentation."
+name = "v2.vuejs.org"
+description = "📄 Documentation for Vue 2"
 homepage = "https://v2.vuejs.org"
 license = "MIT"
 visibility = "public"
@@ -30,6 +30,10 @@ languages = [
 ]
 build = "npm run build"
 topics = []
+
+[repo.toolchain]
+min = "14.0.0"
+ecosystem = "Node.js"
 
 [docs]
 root = "https://github.com/vuejs-id/docs"
@@ -56,4 +60,4 @@ default_branch = "master"
 fork = false
 head_sha = "e468cc04e4da67ea758682609fc85e721916e7cf"
 html_url = "https://github.com/vuejs/v2.vuejs.org"
-stars = 4980
+stars = 4979

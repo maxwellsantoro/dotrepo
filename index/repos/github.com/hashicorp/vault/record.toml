@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hashicorp/vault"
-generated_at = "2026-07-01T18:06:42.032592Z"
+generated_at = "2026-07-06T18:46:02.843139Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Makefile`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Makefile`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Vault"
-description = "**Please note**: We take Vault's security and our users' trust very seriously."
+description = "A tool for secrets management, encryption as a service, and privileged access management"
 homepage = "https://developer.hashicorp.com/vault"
 license = "NOASSERTION"
 visibility = "public"
@@ -35,13 +35,17 @@ languages = [
     "Batchfile",
     "HTML",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make build"
+test = "go test -run 'TestRaft_Configuration_Docker' ./vault/external_tests/raft/raft_binary"
 topics = [
     "vault",
     "go",
     "secrets",
 ]
+
+[repo.toolchain]
+min = "1.26.3"
+ecosystem = "Go"
 
 [owners]
 maintainers = [
@@ -83,6 +87,6 @@ archived = false
 clone_url = "https://github.com/hashicorp/vault.git"
 default_branch = "main"
 fork = false
-head_sha = "c9a75041cec5382cf263a5f6589a574a44463565"
+head_sha = "99e93b14ea8891d9dcde92f2212bab20d490bcf9"
 html_url = "https://github.com/hashicorp/vault"
-stars = 35858
+stars = 35884

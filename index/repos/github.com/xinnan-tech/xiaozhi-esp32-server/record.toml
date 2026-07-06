@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/xinnan-tech/xiaozhi-esp32-server"
-generated_at = "2026-07-01T18:37:40.696907Z"
+generated_at = "2026-07-06T19:07:06.334071Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "xiaozhi-esp32-server"
-description = "本项目基于人机共生智能理论和技术研发智能终端软硬件体系为开源智能硬件项目 xiaozhi-esp32提供后端服务 根据小智通信协议使用Python、Java、Vue实现 支持MQTT+UDP协议、Websocket协议、MCP接入点、声纹识别、知识库"
+description = "本项目为xiaozhi-esp32提供后端服务，帮助您快速搭建ESP32设备控制服务器。Backend service for xiaozhi-esp32, helps you quickly build an ESP32 device control server."
 homepage = "http://xiaozhi.biz"
 license = "MIT"
 visibility = "public"
@@ -50,6 +50,6 @@ archived = false
 clone_url = "https://github.com/xinnan-tech/xiaozhi-esp32-server.git"
 default_branch = "main"
 fork = false
-head_sha = "f0d61442b866624f93cbcaa061cfe365f2f0e766"
+head_sha = "209fd3fbc86ed41471b888bc117b32b8c32a558d"
 html_url = "https://github.com/xinnan-tech/xiaozhi-esp32-server"
-stars = 9948
+stars = 9994

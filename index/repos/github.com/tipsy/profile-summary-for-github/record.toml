@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tipsy/profile-summary-for-github"
-generated_at = "2026-07-01T18:32:48.316417Z"
+generated_at = "2026-07-06T20:24:45.021478Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Inferred `repo.build` from `pom.xml`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Profile Summary"
-description = "A tool to visualize your **GitHub** presence."
+description = "Tool for visualizing GitHub profiles"
 homepage = "https://profile-summary-for-github.com/"
 license = "Apache-2.0"
 visibility = "public"
@@ -43,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "a9b9e6f524a7c04c98e342ae39eb3304817d044c"
 html_url = "https://github.com/tipsy/profile-summary-for-github"
-stars = 19941
+stars = 19944

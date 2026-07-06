@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ultralight-ux/Ultralight"
-generated_at = "2026-07-01T18:34:47.319993Z"
+generated_at = "2026-07-06T19:05:26.639593Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "video_game"
-description = "Got a question about Ultralight? Chat with us on Discord!"
+name = "Ultralight"
+description = "Lightweight, high-performance HTML renderer for game and app developers."
 homepage = "https://ultralig.ht"
 visibility = "public"
 languages = ["CMake"]

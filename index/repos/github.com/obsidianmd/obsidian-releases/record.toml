@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/obsidianmd/obsidian-releases"
-generated_at = "2026-07-01T18:19:37.625069Z"
+generated_at = "2026-07-06T18:55:11.290036Z"
 
 [record.trust]
 confidence = "high"
@@ -13,10 +13,10 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "About this repo"
+name = "obsidian-releases"
 description = "Community plugins list, theme list, and releases of Obsidian."
 homepage = "https://obsidian.md"
 visibility = "public"
@@ -38,6 +38,6 @@ archived = false
 clone_url = "https://github.com/obsidianmd/obsidian-releases.git"
 default_branch = "master"
 fork = false
-head_sha = "e43e3c728cf58fe4d30e05dff0f213887e5f02e8"
+head_sha = "19a662829c86f2ed6fe852df70b84107b8262506"
 html_url = "https://github.com/obsidianmd/obsidian-releases"
-stars = 19370
+stars = 19537

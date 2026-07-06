@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tiajinsha/JKVideo"
-generated_at = "2026-07-01T18:32:35.63247Z"
+generated_at = "2026-07-06T19:04:17.009706Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/release.yml`. Inferred `repo.test` from `.github/workflows/release.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "JKVideo"
@@ -26,8 +25,6 @@ languages = [
     "JavaScript",
     "PowerShell",
 ]
-build = "chmod +x android/gradlew"
-test = "chmod +x android/gradlew"
 topics = [
     "android",
     "danmaku",
@@ -46,4 +43,4 @@ default_branch = "master"
 fork = false
 head_sha = "3592d036b1930af19d78e4a08bf3e60399c54467"
 html_url = "https://github.com/tiajinsha/JKVideo"
-stars = 5000
+stars = 4999

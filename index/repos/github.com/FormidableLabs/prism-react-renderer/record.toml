@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/FormidableLabs/prism-react-renderer"
-generated_at = "2026-07-01T17:17:09.724317Z"
+generated_at = "2026-07-06T18:27:28.203617Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "Prism React Renderer"
-description = "A lean Prism highlighter component for React"
+description = "🖌️ Renders highlighted Prism output to React (+ theming & vendored Prism)"
 homepage = "https://github.com/FormidableLabs/prism-react-renderer"
 license = "MIT"
 visibility = "public"

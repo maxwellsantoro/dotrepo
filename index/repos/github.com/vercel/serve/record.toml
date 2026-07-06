@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vercel/serve"
-generated_at = "2026-07-01T18:35:31.53539Z"
+generated_at = "2026-07-06T19:05:44.957124Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "API"
-description = "The core of `serve is `serve-handler`, which can be used as middleware in existing HTTP servers:"
+name = "serve"
+description = "Static file serving and directory listing"
 homepage = "https://npmjs.com/package/serve"
 license = "MIT"
 visibility = "public"
@@ -35,6 +35,10 @@ topics = [
     "node",
 ]
 
+[repo.toolchain]
+min = "14"
+ecosystem = "Node.js"
+
 [docs]
 root = "https://npmjs.com/package/serve"
 
@@ -45,4 +49,4 @@ default_branch = "main"
 fork = false
 head_sha = "37b3a743fa90d0e11d7f5b5efe88c27017b7ee13"
 html_url = "https://github.com/vercel/serve"
-stars = 9871
+stars = 9874

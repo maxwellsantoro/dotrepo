@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/discourse/discourse"
-generated_at = "2026-07-01T17:52:19.376282Z"
+generated_at = "2026-07-06T18:39:34.550007Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "github-readme"
-description = "You can self-host Discourse on your own infrastructure."
+name = "discourse"
+description = "A platform for community discussion. Free, open, simple."
 homepage = "https://www.discourse.org"
 license = "GPL-2.0"
 visibility = "public"
@@ -41,6 +41,10 @@ topics = [
     "forum",
     "postgresql",
 ]
+
+[repo.toolchain]
+min = "20"
+ecosystem = "Node.js"
 
 [owners]
 maintainers = [
@@ -72,6 +76,6 @@ archived = false
 clone_url = "https://github.com/discourse/discourse.git"
 default_branch = "main"
 fork = false
-head_sha = "3406778ac30b6c933fb5260880abf261245dcef0"
+head_sha = "2ef5ce2cf12ea4ac3410f17c8295afcf33a49c2f"
 html_url = "https://github.com/discourse/discourse"
-stars = 47372
+stars = 47409

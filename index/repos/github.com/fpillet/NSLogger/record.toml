@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fpillet/NSLogger"
-generated_at = "2026-07-01T18:03:06.841452Z"
+generated_at = "2026-07-06T18:42:57.05347Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.markdown`. This is an overlay bootstrap, not 
 
 [repo]
 name = "NSLogger"
-description = "**NSLogger** is a high performance logging utility which displays traces emitted by client applications running on *macOS*, *iOS* and *Android*."
+description = "A modern, flexible logging tool"
 homepage = "https://github.com/fpillet/NSLogger"
 license = "NOASSERTION"
 visibility = "public"

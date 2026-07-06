@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository description and docs entry points from README.md.
+- Imported repository docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -9,7 +9,7 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

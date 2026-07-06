@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rubik/radon"
-generated_at = "2026-07-01T18:26:09.752466Z"
+generated_at = "2026-07-06T18:59:22.027711Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh.'
+notes = 'Bootstrapped from `SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh.'
 
 [repo]
 name = "radon"
@@ -50,4 +50,4 @@ default_branch = "master"
 fork = false
 head_sha = "54b88e5878b2724bf4d77f97349588b811abdff2"
 html_url = "https://github.com/rubik/radon"
-stars = 1995
+stars = 1997

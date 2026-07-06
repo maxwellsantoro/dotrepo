@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/comet-ml/opik"
-generated_at = "2026-07-01T17:51:01.582928Z"
+generated_at = "2026-07-06T18:38:15.523288Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.test` from `.github/workflows/backend_tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `.github/workflows/backend_tests.yml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Opik"
-description = "Opik helps you build, test, and optimize generative AI applications that run better, from prototype to production."
+description = "Debug, evaluate, and monitor your LLM applications, RAG systems, and agentic workflows with comprehensive tracing, automated evaluations, and production-ready dashboards."
 homepage = "https://www.comet.com/docs/opik/"
 license = "Apache-2.0"
 visibility = "public"
@@ -71,6 +71,6 @@ archived = false
 clone_url = "https://github.com/comet-ml/opik.git"
 default_branch = "main"
 fork = false
-head_sha = "161c8f20e0e1ed46c02a2ff3b8a1568a3c5dec16"
+head_sha = "bfbcb6feb3fd262332ad70a0986ff3f7ef0296f9"
 html_url = "https://github.com/comet-ml/opik"
-stars = 20185
+stars = 20359

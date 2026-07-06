@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pimox/pimox7"
-generated_at = "2026-07-01T18:21:16.275907Z"
+generated_at = "2026-07-06T18:56:47.270501Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Pimox"
-description = "Pimox is a port of Proxmox to the Raspberry Pi allowing you to build a Proxmox cluster of Rapberry Pi's or even a hybrid cluster of Pis and x86 hardware."
+description = "Proxmox V7 for Raspberry Pi"
 homepage = "https://github.com/pimox/pimox7"
 visibility = "public"
 languages = ["Shell"]
@@ -32,4 +32,4 @@ default_branch = "master"
 fork = false
 head_sha = "e8a48f292f0f07258a8f5be2430064049c1c647c"
 html_url = "https://github.com/pimox/pimox7"
-stars = 1994
+stars = 1993

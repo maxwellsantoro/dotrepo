@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/exo-explore/exo"
-generated_at = "2026-07-01T18:01:10.587928Z"
+generated_at = "2026-07-06T18:40:55.512163Z"
 
 [record.trust]
 confidence = "high"
@@ -13,10 +13,10 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `pyproject.toml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `justfile`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `justfile`. Imported `repo.test` from `justfile`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Discord"
+name = "exo"
 description = "Run frontier AI locally."
 homepage = "https://github.com/exo-explore/exo"
 license = "Apache-2.0"
@@ -34,9 +34,13 @@ languages = [
     "JavaScript",
     "HTML",
 ]
-build = "just build"
+build = "just all"
 test = "just test"
 topics = []
+
+[repo.toolchain]
+min = "3.13"
+ecosystem = "Python"
 
 [owners]
 maintainers = [
@@ -67,4 +71,4 @@ default_branch = "main"
 fork = false
 head_sha = "b5375f8cee4368d09e1ce96a56b9f81fb0bc81aa"
 html_url = "https://github.com/exo-explore/exo"
-stars = 45809
+stars = 45983

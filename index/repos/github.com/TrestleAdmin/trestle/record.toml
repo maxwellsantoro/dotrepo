@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/TrestleAdmin/trestle"
-generated_at = "2026-07-01T17:22:20.344385Z"
+generated_at = "2026-07-06T18:32:39.308057Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "Trestle"
-description = "Demo Site | Demo Source Code"
+description = "A modern, responsive admin framework for Ruby on Rails"
 homepage = "https://trestle.io"
 license = "LGPL-3.0"
 visibility = "public"
@@ -60,4 +60,4 @@ default_branch = "main"
 fork = false
 head_sha = "bd7443b3a893a681f1ab0d03af65cdd412458189"
 html_url = "https://github.com/TrestleAdmin/trestle"
-stars = 1996
+stars = 1995

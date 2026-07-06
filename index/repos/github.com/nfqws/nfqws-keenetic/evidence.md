@@ -1,8 +1,9 @@
 # Evidence
 
 - Imported repository name and description from README.md.
-- Inferred repo.build from .github/workflows/release.yml as `make CONFIG_NO_STRIP=y CONFIG_USE_APK=y package/nfqws-keenetic/compile V=s`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.description` to `Пакеты для установки `nfqws на маршрутизаторы.` from `README.md` after deterministic escalation.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
@@ -11,4 +12,4 @@
 
 ## Downgrade guard
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Status dropped from a prior verified record because the following previously present field(s) regressed: repo.build.

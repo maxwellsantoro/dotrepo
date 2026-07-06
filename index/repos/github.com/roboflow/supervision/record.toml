@@ -4,25 +4,26 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/roboflow/supervision"
-generated_at = "2026-07-01T18:25:50.169434Z"
+generated_at = "2026-07-06T18:59:02.380616Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `pyproject.toml`, and `.github/workflows/ci-tests.yml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `.github/workflows/ci-tests.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "supervision"
-description = "📑 Table of Contents"
+description = "We write your reusable computer vision tools. 💜"
 homepage = "https://supervision.roboflow.com"
 license = "MIT"
 visibility = "public"
 languages = ["Python"]
 build = "python -m build"
-test = "python -m pytest"
+test = "pytest src/ tests/ --cov=supervision --cov-report=xml"
 topics = [
     "computer-vision",
     "image-processing",
@@ -45,6 +46,10 @@ topics = [
     "hacktoberfest",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [owners]
 maintainers = [
     "@SkalskiP",
@@ -59,6 +64,6 @@ archived = false
 clone_url = "https://github.com/roboflow/supervision.git"
 default_branch = "develop"
 fork = false
-head_sha = "04858a2727b448bb006626aa860a002c6e1a04a0"
+head_sha = "e13090f84b3a6c6db17cdf80ea6db5a8d0af013f"
 html_url = "https://github.com/roboflow/supervision"
-stars = 46141
+stars = 46961

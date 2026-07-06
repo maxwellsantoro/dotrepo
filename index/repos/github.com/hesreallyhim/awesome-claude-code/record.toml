@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hesreallyhim/awesome-claude-code"
-generated_at = "2026-07-01T18:06:59.167662Z"
+generated_at = "2026-07-06T18:46:18.08135Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Awesome Claude Code"
-description = "A delightfully curated collection of the finest of resources for the most excellent of agents, Claude Code, by Anthropic PBC."
+name = "awesome-claude-code"
+description = "A hand-picked collection of the finest of resources for the most awesome of agents, Claude Code, the undisputed champion of coding companions, from the unstoppable team at Anthropic PBC. A delectable showcase of top tier skills, ambidextrous agents, scintillating status lines, top notch developer tooling, and also we have plugins"
 homepage = "https://github.com/hesreallyhim/awesome-claude-code"
 license = "NOASSERTION"
 visibility = "public"
@@ -24,8 +25,7 @@ languages = [
     "Python",
     "Makefile",
 ]
-build = "python -m build"
-test = "python -m pytest"
+test = "make test"
 topics = [
     "anthropic",
     "anthropic-claude",
@@ -48,11 +48,18 @@ topics = [
     "awesome-claude-code",
 ]
 
+[owners]
+maintainers = []
+security_contact = "https://github.com/hesreallyhim/awesome-claude-code/security/advisories/new"
+
+[docs]
+root = "https://code.claude.com/docs/"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/hesreallyhim/awesome-claude-code.git"
 default_branch = "main"
 fork = false
-head_sha = "29755104e1f15404f99db9e5f381e23960efc4a0"
+head_sha = "193dcfeb86273fac60622375ea55b100f16ab1ca"
 html_url = "https://github.com/hesreallyhim/awesome-claude-code"
-stars = 47710
+stars = 48701

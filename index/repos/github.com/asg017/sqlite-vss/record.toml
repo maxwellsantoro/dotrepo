@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/asg017/sqlite-vss"
-generated_at = "2026-07-01T17:24:58.055946Z"
+generated_at = "2026-07-06T18:35:09.441933Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/site.yaml`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/workflows/site.yaml`, and `Makefile`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/site.yaml`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "sqlite-vss"
@@ -70,4 +70,4 @@ default_branch = "main"
 fork = false
 head_sha = "8d3c6ff2fca651104563779a0d927ea4fba40347"
 html_url = "https://github.com/asg017/sqlite-vss"
-stars = 1997
+stars = 1998

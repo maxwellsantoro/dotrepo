@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jupyter-lsp/jupyterlab-lsp"
-generated_at = "2026-07-01T18:11:11.226681Z"
+generated_at = "2026-07-06T18:49:26.14012Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "jupyterlab-lsp"
-description = "Examples show Python code, but most features also work in R, bash, typescript, and [many other languages][language-servers]."
+description = "Coding assistance for JupyterLab (code navigation + hover suggestions + linters + autocompletion + rename) using Language Server Protocol"
 homepage = "https://jupyterlab-lsp.readthedocs.io"
 license = "BSD-3-Clause"
 visibility = "public"
@@ -64,4 +65,4 @@ default_branch = "main"
 fork = false
 head_sha = "e2e569321bc45702718030fabfe7dd38d0457f25"
 html_url = "https://github.com/jupyter-lsp/jupyterlab-lsp"
-stars = 1997
+stars = 1996

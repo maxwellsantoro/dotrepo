@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/livekit/livekit"
-generated_at = "2026-07-01T18:13:01.029464Z"
+generated_at = "2026-07-06T18:51:19.672813Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `go.mod` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "livekit"
-description = "LiveKit is an open source project that provides scalable, multi-user conferencing based on WebRTC."
+description = "End-to-end realtime stack for connecting humans and AI"
 homepage = "https://docs.livekit.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -37,6 +38,10 @@ topics = [
     "voice-ai",
 ]
 
+[repo.toolchain]
+min = "1.26"
+ecosystem = "Go"
+
 [owners]
 maintainers = ["@livekit/cs-devs"]
 team = "@livekit/cs-devs"
@@ -49,6 +54,6 @@ archived = false
 clone_url = "https://github.com/livekit/livekit.git"
 default_branch = "master"
 fork = false
-head_sha = "46e5caedbe0d53217d1b4c84398deb687737f6b6"
+head_sha = "bf777e65132e393aa286bccf0463d6fd8c6d31be"
 html_url = "https://github.com/livekit/livekit"
-stars = 19520
+stars = 19601

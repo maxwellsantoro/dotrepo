@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mvanhorn/last30days-skill"
-generated_at = "2026-07-01T18:17:24.747008Z"
+generated_at = "2026-07-06T18:53:37.492834Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/validate.yml`, and `pyproject.toml`. Inferred `repo.test` from `.github/workflows/validate.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "last30days"
-description = "An AI agent-led search engine scored by upvotes, likes, and real money - not editors."
+description = "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary"
 homepage = "https://github.com/mvanhorn/last30days-skill"
 license = "MIT"
 visibility = "public"
@@ -26,7 +27,7 @@ languages = [
     "Shell",
     "HTML",
 ]
-test = "python -m pytest"
+test = "uv run pytest --cov --cov-report=term-missing"
 topics = [
     "ai-prompts",
     "claude",
@@ -50,11 +51,15 @@ topics = [
     "web-search",
 ]
 
+[repo.toolchain]
+min = "3.12"
+ecosystem = "Python"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/mvanhorn/last30days-skill.git"
 default_branch = "main"
 fork = false
-head_sha = "a9d2674147b8e6d4eba45f71bf9e05af6262fa21"
+head_sha = "4bbfee40553d0eb4a25583834335449607c6bea3"
 html_url = "https://github.com/mvanhorn/last30days-skill"
-stars = 48160
+stars = 49639

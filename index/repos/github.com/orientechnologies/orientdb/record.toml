@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/orientechnologies/orientdb"
-generated_at = "2026-07-01T18:20:36.389632Z"
+generated_at = "2026-07-06T20:24:08.052492Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Inferred `repo.build` from `pom.xml`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "OrientDB"
-description = "**OrientDB** is an Open Source Multi-Model NoSQL DBMS with the support of Native Graphs, Documents, Full-Text search, Reactivity, Geo-Spatial and Object Oriented concepts."
+description = "OrientDB is the most versatile DBMS supporting Graph, Document, Reactive, Full-Text and Geospatial models in one Multi-Model product. OrientDB can run distributed (Multi-Master), supports SQL, ACID Transactions, Full-Text indexing and Reactive Queries."
 homepage = "https://orientdb.dev"
 license = "Apache-2.0"
 visibility = "public"
@@ -60,6 +61,6 @@ archived = false
 clone_url = "https://github.com/orientechnologies/orientdb.git"
 default_branch = "develop"
 fork = false
-head_sha = "1577c832eac997e35dfd4545ab75d350e40a046b"
+head_sha = "9d49f85efd876c2e01651fd329114ab4cf84207d"
 html_url = "https://github.com/orientechnologies/orientdb"
-stars = 4969
+stars = 4970

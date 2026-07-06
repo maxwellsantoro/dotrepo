@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jnordberg/gif.js"
-generated_at = "2026-07-01T18:09:59.14308Z"
+generated_at = "2026-07-06T18:48:41.608011Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "gif.js"
-description = "JavaScript GIF encoder that runs in your browser."
+description = "JavaScript GIF encoding library"
 homepage = "http://jnordberg.github.io/gif.js/"
 license = "MIT"
 visibility = "public"
@@ -54,4 +54,4 @@ default_branch = "master"
 fork = false
 head_sha = "92d27a02841339e202c75150dcf6fe5f4fa42ec5"
 html_url = "https://github.com/jnordberg/gif.js"
-stars = 4969
+stars = 4968

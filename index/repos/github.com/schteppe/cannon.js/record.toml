@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/schteppe/cannon.js"
-generated_at = "2026-07-01T18:27:10.873377Z"
+generated_at = "2026-07-06T19:00:35.129092Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.markdown`. This is an overlay bootstrap, not 
 
 [repo]
 name = "cannon.js"
-description = "Inspired by three.js and ammo.js, and driven by the fact that the web lacks a physics engine, here comes cannon.js."
+description = "A lightweight 3D physics engine written in JavaScript."
 homepage = "http://schteppe.github.com/cannon.js"
 license = "MIT"
 visibility = "public"
@@ -55,4 +55,4 @@ default_branch = "master"
 fork = false
 head_sha = "569730f94a1d9da47967a24fad0323ef7d5b4119"
 html_url = "https://github.com/schteppe/cannon.js"
-stars = 4980
+stars = 4981

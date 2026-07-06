@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/r-lyeh/single_file_libs"
-generated_at = "2026-07-01T18:23:55.690388Z"
+generated_at = "2026-07-06T18:57:58.052698Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Discord"
-description = "C/C++ open-source libraries with minimal dependencies"
+name = "single_file_libs"
+description = "List of single-file C/C++ libraries, with emphasis on clause-less licenses."
 homepage = "https://github.com/r-lyeh/single_file_libs"
 visibility = "public"
 languages = []
@@ -44,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "fecac8eaa1ca485bfdc7aae540baa4c73bec0c28"
 html_url = "https://github.com/r-lyeh/single_file_libs"
-stars = 9953
+stars = 9959

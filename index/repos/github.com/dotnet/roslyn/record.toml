@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dotnet/roslyn"
-generated_at = "2026-07-01T17:52:55.087222Z"
+generated_at = "2026-07-06T18:39:53.59151Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `CONTRIBUTING.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "The .NET Compiler Platform"
-description = "Roslyn is the open-source implementation of both the C# and Visual Basic compilers with an API surface for building code analysis tools."
+name = "roslyn"
+description = "The Roslyn .NET compiler provides C# and Visual Basic languages with rich code analysis APIs."
 homepage = "https://docs.microsoft.com/dotnet/csharp/roslyn-sdk/"
 license = "MIT"
 visibility = "public"
@@ -50,8 +50,8 @@ maintainers = [
     "@dotnet/roslyn-infrastructure",
     "@dotnet/roslyn-compiler",
     "@dotnet/roslyn-ide",
-    "@dotnet/roslyn-interactive",
     "@dotnet/razor-tooling",
+    "@dotnet/roslyn-interactive",
     "@dotnet/roslyn-api-owners",
     "@333fred",
     "@dibarbet",
@@ -66,6 +66,6 @@ archived = false
 clone_url = "https://github.com/dotnet/roslyn.git"
 default_branch = "main"
 fork = false
-head_sha = "83e1242a37c78e52af27a6ea3183c1de24772bac"
+head_sha = "2c9084dffdfb1776b86effb0dd0a513aefbb4be5"
 html_url = "https://github.com/dotnet/roslyn"
-stars = 20515
+stars = 20527

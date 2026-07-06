@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rust-lang/rust"
-generated_at = "2026-07-01T18:26:23.41634Z"
+generated_at = "2026-07-06T18:59:38.886942Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `.github/workflows/ci.yml`. Filled `repo.name` with inferred defaults. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `Cargo.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "rust"
-description = 'Read ["Installation"] from [The Book].'
+description = "Empowering everyone to build reliable and efficient software."
 homepage = "https://www.rust-lang.org"
 license = "Apache-2.0"
 visibility = "public"
@@ -48,7 +49,7 @@ languages = [
     "Perl",
 ]
 build = "cargo build --workspace"
-test = "cargo test --workspace"
+test = "CARGO_INCREMENTAL=0 cargo test"
 topics = [
     "rust",
     "compiler",
@@ -63,6 +64,6 @@ archived = false
 clone_url = "https://github.com/rust-lang/rust.git"
 default_branch = "main"
 fork = false
-head_sha = "e2b71ade2db4ea263ab0d561d889f3e3795a500d"
+head_sha = "36714a9983d6ba11203d8bb87a1b372247fbcf06"
 html_url = "https://github.com/rust-lang/rust"
-stars = 114184
+stars = 114408

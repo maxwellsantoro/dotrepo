@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/postgres/postgres"
-generated_at = "2026-07-01T18:22:33.153922Z"
+generated_at = "2026-07-06T18:57:06.553589Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Left `repo.test` unset because `.github/workflows/pg-ci.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "PostgreSQL Database Management System"
-description = "This directory contains the source code distribution of the PostgreSQL database management system."
+description = "Mirror of the official PostgreSQL GIT repository. Note that this is just a *mirror* - we don't work with pull requests on github. To contribute, please see https://wiki.postgresql.org/wiki/Submitting_a_Patch"
 homepage = "https://www.postgresql.org/"
 license = "NOASSERTION"
 visibility = "public"
@@ -40,7 +40,8 @@ languages = [
     "DTrace",
     "sed",
 ]
-build = "make build"
+build = "make all"
+test = "make check"
 topics = []
 
 [owners]
@@ -55,6 +56,6 @@ archived = false
 clone_url = "https://github.com/postgres/postgres.git"
 default_branch = "master"
 fork = false
-head_sha = "85656c1bef4af031f8e9801d927cdaeaaae95566"
+head_sha = "42b7ff3aaefa5f63b4890679a283f83f1a4acb00"
 html_url = "https://github.com/postgres/postgres"
-stars = 21328
+stars = 21373

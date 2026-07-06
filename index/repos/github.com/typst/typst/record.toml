@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/typst/typst"
-generated_at = "2026-07-01T18:34:43.694413Z"
+generated_at = "2026-07-06T19:05:21.26154Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, and `Cargo.toml`. Imported `repo.build` from `README.md`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Typst"
-description = "Typst is a new markup-based typesetting system that is designed to be as powerful as LaTeX while being much easier to learn and use."
+description = "A markup-based typesetting system that is powerful and easy to learn."
 homepage = "https://typst.app"
 license = "Apache-2.0"
 visibility = "public"
@@ -28,14 +29,18 @@ languages = [
     "CSS",
     "Dockerfile",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "cargo build --release"
+test = "cargo test --workspace --no-run"
 topics = [
     "typesetting",
     "compiler",
     "markup",
     "typst",
 ]
+
+[repo.toolchain]
+min = "1.92"
+ecosystem = "Rust"
 
 [docs]
 root = "https://typst.app"
@@ -45,6 +50,6 @@ archived = false
 clone_url = "https://github.com/typst/typst.git"
 default_branch = "main"
 fork = false
-head_sha = "7c76edca62ee16ca4c6dd4f5498fe57793f28517"
+head_sha = "b0693a74b6ec279b9186444c9f0cbd831f6196dc"
 html_url = "https://github.com/typst/typst"
-stars = 54654
+stars = 54768

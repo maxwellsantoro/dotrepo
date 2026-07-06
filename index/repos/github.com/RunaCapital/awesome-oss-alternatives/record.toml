@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/RunaCapital/awesome-oss-alternatives"
-generated_at = "2026-07-01T17:20:58.352234Z"
+generated_at = "2026-07-06T18:31:17.72153Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.build` from `.github/workflows/deploy.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `.github/workflows/deploy.yml`. Inferred `repo.build` from `.github/workflows/deploy.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Awesome open-source alternatives to SaaS"
-description = "Awesome list of open-source startup alternatives to established SaaS products."
+name = "awesome-oss-alternatives"
+description = "Awesome list of open-source startup alternatives to well-known SaaS products 🚀"
 homepage = "https://runacap.com"
 license = "MIT"
 visibility = "public"
@@ -51,4 +51,4 @@ default_branch = "main"
 fork = false
 head_sha = "e5a1bd6153c602404c6f25a97b178228b755aebb"
 html_url = "https://github.com/RunaCapital/awesome-oss-alternatives"
-stars = 19300
+stars = 19326

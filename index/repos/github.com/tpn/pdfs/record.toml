@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tpn/pdfs"
-generated_at = "2026-07-01T18:33:33.560496Z"
+generated_at = "2026-07-06T19:04:48.316228Z"
 
 [record.trust]
 confidence = "high"
@@ -17,7 +17,7 @@ notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred default
 
 [repo]
 name = "pdfs"
-description = "A veritable mish-mash of technically-oriented PDFs I've collected over the years."
+description = "Technically-oriented PDF Collection (Papers, Specs, Decks, Manuals, etc)"
 homepage = "https://github.com/tpn/pdfs"
 visibility = "public"
 languages = [
@@ -35,4 +35,4 @@ default_branch = "master"
 fork = false
 head_sha = "6aa7706e862a9486ea4a0ac2c4a7bf6e778558fa"
 html_url = "https://github.com/tpn/pdfs"
-stars = 9861
+stars = 9882

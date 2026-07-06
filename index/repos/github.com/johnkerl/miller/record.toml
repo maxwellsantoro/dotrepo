@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/johnkerl/miller"
-generated_at = "2026-07-01T18:10:08.318877Z"
+generated_at = "2026-07-06T18:48:52.32048Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, `Makefile`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "miller"
-description = "Miller is like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON, JSON Lines, and positionally-indexed."
+description = "Miller is like awk, sed, cut, join, and sort for name-indexed data such as CSV, TSV, and tabular JSON"
 homepage = "https://miller.readthedocs.io"
 license = "NOASSERTION"
 visibility = "public"
@@ -36,8 +37,8 @@ languages = [
     "Batchfile",
     "ASL",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make"
+test = "make check"
 topics = [
     "data-processing",
     "data-cleaning",
@@ -60,6 +61,10 @@ topics = [
     "unix-toolkit",
     "miller",
 ]
+
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
 
 [docs]
 root = "https://miller.readthedocs.io/en/latest/10min"
@@ -84,6 +89,6 @@ archived = false
 clone_url = "https://github.com/johnkerl/miller.git"
 default_branch = "main"
 fork = false
-head_sha = "9a020556704ffcab2ed8e3bf3f11d27bc9cc9619"
+head_sha = "ac08b072dc3676d1560893434f6dbeb1464976f2"
 html_url = "https://github.com/johnkerl/miller"
-stars = 9938
+stars = 9936

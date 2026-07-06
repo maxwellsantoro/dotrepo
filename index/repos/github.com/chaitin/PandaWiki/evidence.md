@@ -1,6 +1,5 @@
 # Evidence
 
-- Imported repository description from README.md.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from .github/workflows/web.yml as `pnpm run build`.
@@ -10,6 +9,7 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Downgrade guard

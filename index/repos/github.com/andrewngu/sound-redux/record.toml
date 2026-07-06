@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/andrewngu/sound-redux"
-generated_at = "2026-07-01T17:24:05.594237Z"
+generated_at = "2026-07-06T18:34:33.441101Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "SoundRedux"
-description = "**NOTE** It seems that SoundCloud has revoked my api client keys without any explanation or warning."
+description = "A Soundcloud client built with React / Redux"
 homepage = "http://soundredux.io"
 license = "GPL-3.0"
 visibility = "public"
@@ -58,4 +58,4 @@ default_branch = "master"
 fork = false
 head_sha = "c5f36935c2ab07fbbeeaf63573434fd815f503ad"
 html_url = "https://github.com/andrewngu/sound-redux"
-stars = 4979
+stars = 4980

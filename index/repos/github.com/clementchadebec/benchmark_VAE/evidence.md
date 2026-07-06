@@ -1,14 +1,17 @@
 # Evidence
 
-- Imported repository name, description, and docs entry points from README.md.
-- Inferred repo.test from .github/workflows/coverage.yml as `pip install pytest`.
+- Imported repository name and docs entry points from README.md.
+- Imported repo.test from CONTRIBUTING.md as `pytest tests/`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.name` to `benchmark_VAE` from `GitHub API` after deterministic escalation.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Auto-promotion
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

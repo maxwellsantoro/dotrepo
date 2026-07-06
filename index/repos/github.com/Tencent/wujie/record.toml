@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Tencent/wujie"
-generated_at = "2026-07-01T17:22:04.298715Z"
+generated_at = "2026-07-06T18:32:15.886356Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` 
 
 [repo]
 name = "wujie（无界）"
-description = "无界微前端是一款基于 Web Components + iframe 微前端框架，具备成本低、速度快、原生隔离、功能强等一系列优点。"
+description = "极致的微前端框架"
 homepage = "https://wujie-micro.github.io/doc/"
 license = "NOASSERTION"
 visibility = "public"
@@ -53,4 +53,4 @@ default_branch = "master"
 fork = false
 head_sha = "c45932998c0602f34454df8d3e29f4d33a38446a"
 html_url = "https://github.com/Tencent/wujie"
-stars = 4971
+stars = 4979

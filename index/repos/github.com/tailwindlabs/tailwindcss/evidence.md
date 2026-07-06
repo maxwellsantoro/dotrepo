@@ -1,20 +1,18 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS.
-- Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands.
-- Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands.
+- Imported repo.build from package.json as `pnpm build`.
+- Imported repo.test from package.json as `pnpm test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
-
-- Set `repo.build` to `pnpm run build` from `.github/workflows/ci.yml` after deterministic escalation.
-- Set `repo.test` to `pnpm run test` from `.github/workflows/ci.yml` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Auto-promotion
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

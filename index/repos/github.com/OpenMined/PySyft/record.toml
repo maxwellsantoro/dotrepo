@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/OpenMined/PySyft"
-generated_at = "2026-07-01T17:20:06.409345Z"
+generated_at = "2026-07-06T18:30:11.781109Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `justfile`, `CONTRIBUTING.md`, and `pyproject.toml`. Imported `repo.build` from `justfile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "PySyft v2"
-description = "PySyft lets data scientists submit computations which are ran by data owners on private data — all through cloud storage their organizations already use (Google Drive, Microsoft 365, etc.)."
+description = "Perform data science on data that remains in someone else's server"
 homepage = "https://www.openmined.org/"
 license = "Apache-2.0"
 visibility = "public"
@@ -26,13 +26,14 @@ languages = [
     "Just",
     "HTML",
     "CSS",
+    "HCL",
     "JavaScript",
     "Dockerfile",
     "Jinja",
     "Shell",
 ]
-build = "python -m build"
-test = "python -m pytest"
+build = "just build"
+test = "pytest tests/unit/ -v"
 topics = [
     "deep-learning",
     "secure-computation",
@@ -45,6 +46,10 @@ topics = [
     "hacktoberfest",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [docs]
 root = "https://www.openmined.org/"
 
@@ -53,6 +58,6 @@ archived = false
 clone_url = "https://github.com/OpenMined/PySyft.git"
 default_branch = "dev"
 fork = false
-head_sha = "a0ed141ff7fa5be47e69e3ff951c85c3d93a1ff8"
+head_sha = "e1c2b2f3c1bfdf3e2488a03d26fc8dc070dc6e8e"
 html_url = "https://github.com/OpenMined/PySyft"
-stars = 9915
+stars = 9918

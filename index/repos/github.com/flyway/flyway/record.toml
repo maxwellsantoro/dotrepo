@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/flyway/flyway"
-generated_at = "2026-07-01T18:02:30.89662Z"
+generated_at = "2026-07-06T20:23:30.447393Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Inferred `repo.build` from `pom.xml`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Database Migrations Made Easy."
-description = "Simple, focused and powerful."
+name = "flyway"
+description = "Flyway by Redgate • Database Migrations Made Easy."
 homepage = "https://flywaydb.org"
 license = "Apache-2.0"
 visibility = "public"
@@ -65,4 +66,4 @@ default_branch = "main"
 fork = false
 head_sha = "e31d5b4ae42ce255b2f21a3ed094592176b61a39"
 html_url = "https://github.com/flyway/flyway"
-stars = 9883
+stars = 9889

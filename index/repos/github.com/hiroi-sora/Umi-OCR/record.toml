@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hiroi-sora/Umi-OCR"
-generated_at = "2026-07-01T18:07:02.616886Z"
+generated_at = "2026-07-06T18:46:23.382853Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Umi-OCR"
-description = "免费，开源，可批量的离线OCR软件 适用于 Windows7 x64 、Linux x64"
+description = "OCR software, free and offline. 开源、免费的离线OCR软件。支持截屏/批量导入图片，PDF文档识别，排除水印/页眉页脚，扫描/生成二维码。内置多国语言库。"
 homepage = "https://github.com/hiroi-sora/Umi-OCR"
 license = "MIT"
 visibility = "public"
@@ -56,4 +56,4 @@ default_branch = "main"
 fork = false
 head_sha = "83173efc4f4453b41223ea96d63d44534bf0505c"
 html_url = "https://github.com/hiroi-sora/Umi-OCR"
-stars = 45725
+stars = 45847

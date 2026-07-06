@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/juspay/hyperswitch"
-generated_at = "2026-07-01T18:11:16.356109Z"
+generated_at = "2026-07-06T18:49:32.634245Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@juspay/hyperswitch-maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Makefile`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@juspay/hyperswitch-maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Resolved `repo.build` from `Cargo.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Composable Open-Source Payments Infrastructure"
-description = "📁 Table of Contents"
+name = "hyperswitch"
+description = "Open source, composable payments platform | PCI compliant | SaaS and Self-host options | Enables connectivity to multiple payment, payout, fraud, vault and tokenization providers | Uplifts authorization with intelligent routing and revenue recovery | Reduce payment processing costs with cost observability | Reduces payment ops with reconciliation"
 homepage = "https://hyperswitch.io/"
 license = "Apache-2.0"
 visibility = "public"
@@ -38,7 +38,7 @@ languages = [
     "RenderScript",
 ]
 build = "cargo build --workspace"
-test = "cargo test --workspace"
+test = "cargo test --all-features"
 topics = [
     "payments",
     "rust",
@@ -61,6 +61,10 @@ topics = [
     "adyen",
     "stripe",
 ]
+
+[repo.toolchain]
+min = "1.85.0"
+ecosystem = "Rust"
 
 [owners]
 maintainers = [
@@ -90,6 +94,6 @@ archived = false
 clone_url = "https://github.com/juspay/hyperswitch.git"
 default_branch = "main"
 fork = false
-head_sha = "c64e80a117dd61c716d6f50ba56369234514eee3"
+head_sha = "2223f40068ea208b58e817ef687293d366ed7bf5"
 html_url = "https://github.com/juspay/hyperswitch"
-stars = 43163
+stars = 43202

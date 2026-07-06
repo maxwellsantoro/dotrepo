@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/koho/frpmgr"
-generated_at = "2026-07-01T18:11:51.143168Z"
+generated_at = "2026-07-06T18:50:11.855718Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `go.mod`, and `.github/workflows/tests.yml`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `.github/workflows/tests.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "FRP Manager"
-description = "English | 简体中文"
+name = "frpmgr"
+description = "A user-friendly desktop GUI client for FRP on Windows."
 homepage = "https://github.com/koho/frpmgr"
 license = "Apache-2.0"
 visibility = "public"
@@ -26,7 +27,7 @@ languages = [
     "Batchfile",
 ]
 build = "go build ./..."
-test = "go test ./..."
+test = "go test -v ./..."
 topics = [
     "frpc",
     "frp",
@@ -36,6 +37,10 @@ topics = [
     "gui",
     "windows",
 ]
+
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
 
 [docs]
 root = "https://github.com/koho/frpmgr/wiki/Configuration"
@@ -47,4 +52,4 @@ default_branch = "master"
 fork = false
 head_sha = "2c24d3e88fb250c806a219c0b410fcb9ba6bf5b5"
 html_url = "https://github.com/koho/frpmgr"
-stars = 2000
+stars = 2003

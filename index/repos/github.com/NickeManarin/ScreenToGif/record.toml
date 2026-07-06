@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/NickeManarin/ScreenToGif"
-generated_at = "2026-07-01T17:19:57.657366Z"
+generated_at = "2026-07-06T18:30:05.715182Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "screen recorder"
-description = "ScreenToGif 🎬 screentogif.com"
+name = "ScreenToGif"
+description = "🎬 ScreenToGif allows you to record a selected area of your screen, edit and save it as a gif or video."
 homepage = "http://www.screentogif.com"
 license = "MS-PL"
 visibility = "public"
@@ -44,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "27a49c3be69486f2db964290f4f2274e790fb687"
 html_url = "https://github.com/NickeManarin/ScreenToGif"
-stars = 27195
+stars = 27227

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google/google-ctf"
-generated_at = "2026-07-01T18:04:42.144908Z"
+generated_at = "2026-07-06T18:44:19.988763Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Google CTF"
-description = "This repository lists most of the challenges used in the Google CTF since 2017, as well as most of the infrastructure that can be used to run them."
+description = "Google CTF"
 homepage = "https://g.co/ctf"
 license = "Apache-2.0"
 visibility = "public"
@@ -85,4 +85,4 @@ default_branch = "main"
 fork = false
 head_sha = "067421eb7e918c29e39f187fac5a0f0d72a6ab83"
 html_url = "https://github.com/google/google-ctf"
-stars = 4980
+stars = 4979

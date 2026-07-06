@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/samratashok/nishang"
-generated_at = "2026-07-01T18:27:02.756479Z"
+generated_at = "2026-07-06T19:00:24.005991Z"
 
 [record.trust]
 confidence = "medium"
@@ -13,7 +13,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Nishang"
-description = "By Nikhil Mittal Founder of Altered Security - Hands-on red team and enterprise security training!"
+description = "Nishang - Offensive PowerShell for red team, penetration testing and offensive security."
 homepage = "https://github.com/samratashok/nishang"
 license = "NOASSERTION"
 visibility = "public"
@@ -44,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "d87229d2112456470ad30a50edbf312463f2b09a"
 html_url = "https://github.com/samratashok/nishang"
-stars = 9973
+stars = 9982

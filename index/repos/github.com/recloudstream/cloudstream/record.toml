@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/recloudstream/cloudstream"
-generated_at = "2026-07-01T18:24:41.960814Z"
+generated_at = "2026-07-06T20:33:39.855704Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `build.gradle.kts`. Imported `repo.build` from `build.gradle.kts`. Imported `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle.kts`. Inferred `repo.build` from `build.gradle.kts`. Inferred `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "CloudStream"
-description = "⚠️ Warning: By default, this app doesn't provide any video sources; you have to install extensions to add functionality to the app."
+description = "Android app for streaming and downloading media."
 homepage = "https://github.com/recloudstream/cloudstream"
 license = "GPL-3.0"
 visibility = "public"
@@ -40,6 +41,6 @@ archived = false
 clone_url = "https://github.com/recloudstream/cloudstream.git"
 default_branch = "master"
 fork = false
-head_sha = "b425d39ef5fcc21b9c6bc09d2282405a8c7f4d0f"
+head_sha = "bfb85ca5c96e33b1e068fa76ccc89bfac3ab6297"
 html_url = "https://github.com/recloudstream/cloudstream"
-stars = 9973
+stars = 10016

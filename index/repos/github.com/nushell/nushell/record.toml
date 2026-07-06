@@ -4,16 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/nushell/nushell"
-generated_at = "2026-07-01T18:19:25.711012Z"
+generated_at = "2026-07-06T18:54:56.125558Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `Cargo.toml` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation."
 
 [repo]
 name = "Nushell"
-description = "A new type of shell."
+description = "A new type of shell"
 homepage = "https://www.nushell.sh/"
 license = "MIT"
 visibility = "public"
@@ -35,6 +35,10 @@ topics = [
     "rust",
     "nushell",
 ]
+
+[repo.toolchain]
+min = "1.95.0"
+ecosystem = "Rust"
 
 [owners]
 maintainers = []
@@ -75,6 +79,6 @@ archived = false
 clone_url = "https://github.com/nushell/nushell.git"
 default_branch = "main"
 fork = false
-head_sha = "f036236193933b7d65726bc02a5bcd9d5662eaf6"
+head_sha = "57a036c4b011c027609b90afefb52f5930d84496"
 html_url = "https://github.com/nushell/nushell"
-stars = 39836
+stars = 39887

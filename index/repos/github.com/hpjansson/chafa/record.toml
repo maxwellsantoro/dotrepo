@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hpjansson/chafa"
-generated_at = "2026-07-01T18:07:10.772243Z"
+generated_at = "2026-07-06T18:46:28.448033Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.test` unset because `.github/workflows/c-cpp.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.test` unset because `.github/workflows/c-cpp.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Python bindings"
-description = "Erica Ferrua Edwardsdóttir maintains excellent Python bindings for Chafa."
+name = "chafa"
+description = "📺🗿 Terminal graphics for the 21st century."
 homepage = "https://hpjansson.org/chafa/"
 license = "LGPL-3.0"
 visibility = "public"
@@ -59,4 +59,4 @@ default_branch = "master"
 fork = false
 head_sha = "61a9ae47415fd9c26c22e86854217b6e66c130e2"
 html_url = "https://github.com/hpjansson/chafa"
-stars = 4978
+stars = 4994

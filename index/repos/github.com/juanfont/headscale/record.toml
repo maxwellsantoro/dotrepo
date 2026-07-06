@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/juanfont/headscale"
-generated_at = "2026-07-01T18:10:25.296789Z"
+generated_at = "2026-07-06T18:49:13.551746Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `README.md`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "headscale"
-description = "Tailscale is a modern VPN built on top of Wireguard."
+description = "An open source, self-hosted implementation of the Tailscale control server"
 homepage = "https://github.com/juanfont/headscale"
 license = "BSD-3-Clause"
 visibility = "public"
@@ -27,14 +28,18 @@ languages = [
     "CSS",
     "Makefile",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make build"
+test = "make test"
 topics = [
     "tailscale",
     "tailscale-control-server",
     "wireguard",
     "tailscale-server",
 ]
+
+[repo.toolchain]
+min = "1.26.4"
+ecosystem = "Go"
 
 [owners]
 maintainers = [
@@ -52,6 +57,6 @@ archived = false
 clone_url = "https://github.com/juanfont/headscale.git"
 default_branch = "main"
 fork = false
-head_sha = "a84945f134b5bebe850e7ac1f911d5f15da0a7ae"
+head_sha = "048308511c72fa77da103e932f9b857a6e5247b9"
 html_url = "https://github.com/juanfont/headscale"
-stars = 40614
+stars = 41091

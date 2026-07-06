@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fkxxyz/rime-cloverpinyin"
-generated_at = "2026-07-01T18:02:21.118482Z"
+generated_at = "2026-07-06T18:42:26.013759Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "four_leaf_clover:四叶草拼音输入方案"
-description = "在linux端，很多拼音输入法有少许 bug 或卡顿，或功能不全，所以接触了 rime ，然而自带的朙月拼音和袖珍简化字拼音均不是很不是很理想，但是探索过程中发现很多很好的开源项目提供词库，而 rime 输入法引擎几乎拥有所有的优点（开源、干净无广告、运行流畅、跨平台、...），甚至云同步也能用坚果云之类的服务手动实现，唯一的缺点就是门槛高定制困难，默认配置的不习惯劝退了很多人。"
+name = "rime-cloverpinyin"
+description = "🍀️四叶草拼音输入方案，做最好用的基于rime开源的简体拼音输入方案！"
 homepage = "https://www.fkxxyz.com/d/cloverpinyin/"
 license = "LGPL-3.0"
 visibility = "public"
@@ -56,4 +56,4 @@ default_branch = "master"
 fork = false
 head_sha = "efdfb69688e832d875aad13679fa34ab235cbf54"
 html_url = "https://github.com/fkxxyz/rime-cloverpinyin"
-stars = 1995
+stars = 1998

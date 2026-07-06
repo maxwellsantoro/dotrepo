@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kokke/tiny-AES-c"
-generated_at = "2026-07-01T18:11:55.023366Z"
+generated_at = "2026-07-06T18:50:16.894736Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Tiny AES in C"
-description = "This is a small and portable implementation of the AES ECB, CTR and CBC encryption algorithms written in C."
+name = "tiny-AES-c"
+description = "Small portable AES128/192/256 in C"
 homepage = "https://github.com/kokke/tiny-AES-c"
 license = "Unlicense"
 visibility = "public"
@@ -37,4 +37,4 @@ default_branch = "master"
 fork = false
 head_sha = "23856752fbd139da0b8ca6e471a13d5bcc99a08d"
 html_url = "https://github.com/kokke/tiny-AES-c"
-stars = 4978
+stars = 4980

@@ -4,25 +4,24 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/clementchadebec/benchmark_VAE"
-generated_at = "2026-07-01T17:27:34.462333Z"
+generated_at = "2026-07-06T18:37:33.891407Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/coverage.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Python"
-description = "This library implements some of the most common (Variational) Autoencoder models under a unified implementation."
+name = "benchmark_VAE"
+description = "Unifying Variational Autoencoder (VAE) implementations in Pytorch (NeurIPS 2022)"
 homepage = "https://github.com/clementchadebec/benchmark_VAE"
 license = "Apache-2.0"
 visibility = "public"
 languages = ["Python"]
-test = "pip install pytest"
+test = "pytest tests/"
 topics = [
     "vae",
     "benchmarking",
@@ -51,4 +50,4 @@ default_branch = "main"
 fork = false
 head_sha = "6419e21558f2a6abc2da99944bddda846ded30f4"
 html_url = "https://github.com/clementchadebec/benchmark_VAE"
-stars = 1995
+stars = 1994

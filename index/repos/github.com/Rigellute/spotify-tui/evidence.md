@@ -1,8 +1,8 @@
 # Evidence
 
-- Imported repository name and description from README.md.
-- Imported repo.build from Cargo.toml as `cargo build`.
-- Imported repo.test from Cargo.toml as `cargo test`.
+- Imported repository name from README.md.
+- Inferred repo.build from Cargo.toml as `cargo build`.
+- Inferred repo.test from Cargo.toml as `cargo test`.
 - Discovered related relation to github.com/Rigellute/spotify-tui from Cargo.toml repository.
 - Discovered related relation to github.com/Jguer/yay from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -10,8 +10,9 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+A prior verified status was preserved because no previously present field regressed in this refresh.

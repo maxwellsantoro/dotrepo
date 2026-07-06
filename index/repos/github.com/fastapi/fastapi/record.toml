@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fastapi/fastapi"
-generated_at = "2026-07-01T18:01:53.264059Z"
+generated_at = "2026-07-06T18:41:50.957346Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "FastAPI"
@@ -52,6 +53,10 @@ topics = [
     "web",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [docs]
 root = "https://fastapi.tiangolo.com/"
 
@@ -60,6 +65,6 @@ archived = false
 clone_url = "https://github.com/fastapi/fastapi.git"
 default_branch = "master"
 fork = false
-head_sha = "cecd96d9c6c318e0df1c40cedbc2e953381ddfd3"
+head_sha = "dd17e4f723a23854cfe4b9b6258e31efd86ea523"
 html_url = "https://github.com/fastapi/fastapi"
-stars = 99862
+stars = 100074

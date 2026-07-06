@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mermaid-js/mermaid"
-generated_at = "2026-07-01T18:14:41.655619Z"
+generated_at = "2026-07-06T18:52:19.073517Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "Mermaid"
-description = "Generate diagrams from markdown-like text."
+description = "Generation of diagrams like flowcharts or sequence diagrams from text in a similar manner as markdown"
 homepage = "https://mermaid.ai/open-source/"
 license = "MIT"
 visibility = "public"
@@ -83,4 +83,4 @@ default_branch = "develop"
 fork = false
 head_sha = "0d1ee0a84578980ec6332823f46bda316f389105"
 html_url = "https://github.com/mermaid-js/mermaid"
-stars = 88963
+stars = 89061

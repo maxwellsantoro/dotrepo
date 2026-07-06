@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/webpack/webpack"
-generated_at = "2026-07-01T18:36:23.457967Z"
+generated_at = "2026-07-06T19:06:34.691357Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Inferred `repo.build` from `.github/workflows/examples.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/workflows/examples.yml`, and `package.json`. Inferred `repo.build` from `.github/workflows/examples.yml`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "webpack"
-description = "Webpack is a module bundler."
+description = 'A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows for loading parts of the application on demand. Through "loaders", modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff.'
 homepage = "https://webpack.js.org"
 license = "MIT"
 visibility = "public"
@@ -54,6 +54,10 @@ topics = [
     "javascript-modules",
 ]
 
+[repo.toolchain]
+min = "10.13.0"
+ecosystem = "Node.js"
+
 [docs]
 root = "https://github.com/webpack/webpack.js.org"
 getting_started = "https://webpack.js.org/guides/getting-started"
@@ -78,6 +82,6 @@ archived = false
 clone_url = "https://github.com/webpack/webpack.git"
 default_branch = "main"
 fork = false
-head_sha = "5461ae40d0ee61d0e3a6f28c5ddd80e776d82260"
+head_sha = "cb5dd8b8fef655fe6824ef0db83e4ab6fa2e9d7f"
 html_url = "https://github.com/webpack/webpack"
-stars = 65773
+stars = 65835

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/terraform-aws-modules/terraform-aws-eks"
-generated_at = "2026-07-01T18:32:20.180227Z"
+generated_at = "2026-07-06T19:03:59.960513Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "AWS EKS Terraform module"
-description = "Terraform module which creates Amazon EKS (Kubernetes) resources"
+name = "terraform-aws-eks"
+description = "Terraform module to create Amazon Elastic Kubernetes (EKS) resources 🇺🇦"
 homepage = "https://registry.terraform.io/modules/terraform-aws-modules/eks/aws"
 license = "Apache-2.0"
 visibility = "public"
@@ -48,4 +48,4 @@ default_branch = "master"
 fork = false
 head_sha = "d4669ca8eb109a37f6c19ab8fb9487ab7521a9ba"
 html_url = "https://github.com/terraform-aws-modules/terraform-aws-eks"
-stars = 4976
+stars = 4983

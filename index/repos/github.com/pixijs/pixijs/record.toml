@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pixijs/pixijs"
-generated_at = "2026-07-01T18:21:25.989877Z"
+generated_at = "2026-07-06T18:56:53.500254Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "npm downloads"
-description = "Next-Generation, Fastest HTML5 Creation Engine for the Web"
+name = "pixijs"
+description = "The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer."
 homepage = "http://pixijs.com"
 license = "MIT"
 visibility = "public"
@@ -80,4 +80,4 @@ default_branch = "dev"
 fork = false
 head_sha = "cbaa784685a27da45311d7f3fa0e9b9bc9a899d4"
 html_url = "https://github.com/pixijs/pixijs"
-stars = 47654
+stars = 47691

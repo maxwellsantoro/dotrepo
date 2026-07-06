@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/metabrainz/picard"
-generated_at = "2026-07-01T18:14:51.803675Z"
+generated_at = "2026-07-06T18:52:25.13891Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/package-pypi.yml`, `CONTRIBUTING.md`, and `pyproject.toml`. Inferred `repo.build` from `.github/workflows/package-pypi.yml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "MusicBrainz Picard"
-description = "MusicBrainz Picard is a cross-platform (Linux, macOS, Windows) audio tagging application."
+description = "Picard is a cross-platform music tagger powered by the MusicBrainz database"
 homepage = "https://picard.musicbrainz.org"
 license = "GPL-2.0"
 visibility = "public"
@@ -26,8 +27,8 @@ languages = [
     "C",
     "PowerShell",
 ]
-build = "python -m build"
-test = "python -m pytest"
+build = "python -m build --sdist"
+test = "pytest -n auto"
 topics = [
     "python",
     "musicbrainz",
@@ -41,6 +42,10 @@ topics = [
     "picard",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [docs]
 root = "https://picard-docs.musicbrainz.org/"
 
@@ -49,6 +54,6 @@ archived = false
 clone_url = "https://github.com/metabrainz/picard.git"
 default_branch = "master"
 fork = false
-head_sha = "1b2bbf9a54834e36c382bd52e18af5f612e12df7"
+head_sha = "b2aeb8c0aea284fcd7af526215da5fcd3ba88128"
 html_url = "https://github.com/metabrainz/picard"
-stars = 4992
+stars = 4998

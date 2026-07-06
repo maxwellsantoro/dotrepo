@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/supabase/supabase"
-generated_at = "2026-07-01T18:31:37.066832Z"
+generated_at = "2026-07-06T19:03:24.084059Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/ai-tests.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `package.json`, and `.github/workflows/ai-tests.yml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/ai-tests.yml`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Supabase"
-description = "Supabase is the Postgres development platform."
+description = "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications."
 homepage = "https://supabase.com"
 license = "Apache-2.0"
 visibility = "public"
@@ -60,6 +60,10 @@ topics = [
     "ai",
 ]
 
+[repo.toolchain]
+min = "22"
+ecosystem = "Node.js"
+
 [owners]
 maintainers = [
     "@supabase/design",
@@ -98,6 +102,6 @@ archived = false
 clone_url = "https://github.com/supabase/supabase.git"
 default_branch = "master"
 fork = false
-head_sha = "bb4eaef0df8173ec5f32cd5b8bf6b80f346a28d8"
+head_sha = "c790bd44a338f82119e5176647f89aa6915be653"
 html_url = "https://github.com/supabase/supabase"
-stars = 105029
+stars = 105820

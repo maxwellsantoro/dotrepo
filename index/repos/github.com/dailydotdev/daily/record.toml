@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/dailydotdev/daily"
-generated_at = "2026-07-01T17:51:39.848071Z"
+generated_at = "2026-07-06T18:38:52.483574Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "daily"
-description = "We know how hard it is to be a developer."
+description = "daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻"
 homepage = "https://daily.dev"
 license = "AGPL-3.0"
 visibility = "public"
@@ -61,4 +62,4 @@ default_branch = "master"
 fork = false
 head_sha = "192dae2b904fd4a4e8b9d212474f34c70710e28d"
 html_url = "https://github.com/dailydotdev/daily"
-stars = 19901
+stars = 19908

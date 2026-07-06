@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google/leveldb"
-generated_at = "2026-07-01T18:04:54.964233Z"
+generated_at = "2026-07-06T18:44:36.412127Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Limitations"
-description = "This project supports CMake out of the box."
+name = "leveldb"
+description = "LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values."
 homepage = "https://github.com/google/leveldb"
 license = "BSD-3-Clause"
 visibility = "public"
@@ -34,4 +34,4 @@ default_branch = "main"
 fork = false
 head_sha = "7ee830d02b623e8ffe0b95d59a74db1e58da04c5"
 html_url = "https://github.com/google/leveldb"
-stars = 39195
+stars = 39213

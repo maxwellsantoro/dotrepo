@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/electron/electron"
-generated_at = "2026-07-01T18:00:23.632875Z"
+generated_at = "2026-07-06T18:40:17.038465Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Platform support"
-description = "Each Electron release provides binaries for macOS, Windows, and Linux."
+name = "electron"
+description = ":electron: Build cross-platform desktop apps with JavaScript, HTML, and CSS"
 homepage = "https://electronjs.org"
 license = "MIT"
 visibility = "public"
@@ -79,6 +79,6 @@ archived = false
 clone_url = "https://github.com/electron/electron.git"
 default_branch = "main"
 fork = false
-head_sha = "85f0b1968e2664cf2c07f1af731da5f9cdc92b8d"
+head_sha = "a35584bfcd3c9ab173c6a38a6295b2902f7b0ce1"
 html_url = "https://github.com/electron/electron"
-stars = 121853
+stars = 121914

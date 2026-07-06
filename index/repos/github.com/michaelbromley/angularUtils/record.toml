@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/michaelbromley/angularUtils"
-generated_at = "2026-07-01T18:14:55.752548Z"
+generated_at = "2026-07-06T18:52:30.06155Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Angular Utilities"
-description = "I am working on a large-scale AngularJS-based project and I'll be extracting any useful re-usable components that I make and putting them here."
+name = "angularUtils"
+description = "A place where I will collect useful re-usable Angular components that I make"
 homepage = "https://github.com/michaelbromley/angularUtils"
 license = "MIT"
 visibility = "public"

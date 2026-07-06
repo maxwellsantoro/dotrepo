@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Leonidas-from-XIV/node-xml2js"
-generated_at = "2026-07-01T17:19:16.723825Z"
+generated_at = "2026-07-06T18:29:29.323929Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "node-xml2js"
-description = "Ever had the urge to parse XML? And wanted to access the data in some sane, easy way? Don't want to compile a C parser, for whatever reason? Then xml2js is what you're looking for!"
+description = "XML to JavaScript object converter."
 homepage = "https://github.com/Leonidas-from-XIV/node-xml2js"
 license = "MIT"
 visibility = "public"
@@ -35,6 +35,10 @@ topics = [
     "node-js",
     "node",
 ]
+
+[repo.toolchain]
+min = "4.0.0"
+ecosystem = "Node.js"
 
 [relations]
 references = []
@@ -58,4 +62,4 @@ default_branch = "master"
 fork = false
 head_sha = "7173c245aab4c2b417cd4c24f0b54e697a369864"
 html_url = "https://github.com/Leonidas-from-XIV/node-xml2js"
-stars = 4967
+stars = 4965

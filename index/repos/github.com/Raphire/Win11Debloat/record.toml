@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Raphire/Win11Debloat"
-generated_at = "2026-07-01T17:20:34.617961Z"
+generated_at = "2026-07-06T18:30:50.667476Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Win11Debloat"
-description = "Win11Debloat is a lightweight, easy to use PowerShell script that allows you to quickly declutter and customize your Windows experience, no installation required! You can use it to remove pre-installed apps, disable telemetry, remove intrusive interface elements and much more."
+description = "A simple, lightweight PowerShell script that allows you to remove pre-installed apps, disable telemetry, as well as perform various other changes to declutter and customize your Windows experience. Win11Debloat works for both Windows 10 and Windows 11."
 homepage = "https://github.com/Raphire/Win11Debloat"
 license = "MIT"
 visibility = "public"
@@ -52,6 +52,6 @@ archived = false
 clone_url = "https://github.com/Raphire/Win11Debloat.git"
 default_branch = "master"
 fork = false
-head_sha = "9a700afaedf0a9f960c9970be0bd02c819d02613"
+head_sha = "949515da3edb4cf6037b572e5eed9522780e59a6"
 html_url = "https://github.com/Raphire/Win11Debloat"
-stars = 49909
+stars = 50115

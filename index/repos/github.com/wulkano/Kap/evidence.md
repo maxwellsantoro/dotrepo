@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name from README.md.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Discovered related relation to github.com/wulkano/kap-website from README cross-link.
@@ -10,7 +10,7 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

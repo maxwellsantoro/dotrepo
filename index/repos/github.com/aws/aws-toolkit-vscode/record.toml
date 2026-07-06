@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/aws/aws-toolkit-vscode"
-generated_at = "2026-07-01T17:25:26.492421Z"
+generated_at = "2026-07-06T18:35:35.194059Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@aws/aws-toolkits-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `CONTRIBUTING.md`, and `package.json`. Filled `repo.name` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@aws/aws-toolkits-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "aws-toolkit-vscode"
-description = "This project is open source."
+description = "Amazon Q, CodeCatalyst, Local Lambda debug, SAM/CFN syntax, ECS Terminal, AWS resources"
 homepage = "https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.amazon-q-vscode"
 license = "Apache-2.0"
 visibility = "public"
@@ -60,10 +61,11 @@ maintainers = [
     "@aws/codewhisperer-team",
     "@aws/earlybird",
     "@aws/access-analyzer",
-    "@aws/cfn-dev-productivity",
+    "@aws-cloudformation/cfn-dev-productivity",
     "@aws/sagemaker-code-editor",
 ]
 team = "@aws/aws-toolkits-team"
+security_contact = "http://aws.amazon.com/security/vulnerability-reporting/"
 
 [docs]
 root = "https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.amazon-q-vscode"
@@ -73,6 +75,6 @@ archived = false
 clone_url = "https://github.com/aws/aws-toolkit-vscode.git"
 default_branch = "master"
 fork = false
-head_sha = "7f9890927220faec67ca4ed26ea03ad2737ae6b8"
+head_sha = "6cf61e7ebaf4047948c240ed48e98890e758e304"
 html_url = "https://github.com/aws/aws-toolkit-vscode"
 stars = 1996

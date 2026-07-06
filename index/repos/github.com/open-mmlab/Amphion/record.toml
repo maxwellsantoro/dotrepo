@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/open-mmlab/Amphion"
-generated_at = "2026-07-01T18:19:54.648264Z"
+generated_at = "2026-07-06T18:55:32.543537Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Amphion"
-description = "**The North-Star objective of Amphion is to offer a platform for studying the conversion of any inputs into audio.** Amphion is designed to support individual generation tasks, including but not limited to,"
+description = "Amphion (/æmˈfaɪən/) is a toolkit for Audio, Music, and Speech Generation. Its purpose is to support reproducible research and help junior researchers and engineers get started in the field of audio, music, and speech generation research and development."
 homepage = "https://openhlt.github.io/amphion/"
 license = "MIT"
 visibility = "public"
@@ -59,4 +59,4 @@ default_branch = "main"
 fork = false
 head_sha = "26f6883110181f1dbfe95c70a7c7dbaf4de5f42a"
 html_url = "https://github.com/open-mmlab/Amphion"
-stars = 9909
+stars = 9920

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/alexanderepstein/Bash-Snippets"
-generated_at = "2026-07-01T17:23:40.164048Z"
+generated_at = "2026-07-06T18:34:01.050905Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Bash-Snippets"
-description = "The fastest way to find {command options|code pieces} you need"
+description = "A collection of small bash scripts for heavy terminal users"
 homepage = "https://github.com/alexanderepstein/Bash-Snippets"
 license = "MIT"
 visibility = "public"
@@ -46,4 +46,4 @@ default_branch = "master"
 fork = false
 head_sha = "581a6b4ea681005e3f8add37dbed74aaec65479f"
 html_url = "https://github.com/alexanderepstein/Bash-Snippets"
-stars = 9936
+stars = 9938

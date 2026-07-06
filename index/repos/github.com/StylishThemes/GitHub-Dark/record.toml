@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/StylishThemes/GitHub-Dark"
-generated_at = "2026-07-01T17:21:42.280732Z"
+generated_at = "2026-07-06T18:31:50.427401Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Stars"
-description = "⚙️ GitHub Custom Fonts ⚙️ GitHub Blog Dark ⚙️ GitHub Code Wrap ⚙️ GitHub Commit Limit ⚙️ GitHub Community Dark - Now part of Discourse Dark ⚙️ GitHub Compact Feed ⚙️ GitHub Dark Calendar Color Customizer ⚙️ GitHub Dark Diff Color Customizer ⚙️ GitHub Dark Element Borders ⚙️ GitHub Dark IMG Background Color ⚙️ GitHub Feed Icons ⚙️ GitHub FixedHeader ⚙️ GitHub Selected Tab Color ⚙️ GitHub Sticky Sidebar ⚙️ GitHub Tab Size ⚙️ GitHub Custom Border Radii ⚙️ GitHub Dark Custom Blame usercss ⚙️ GitHub Upstream BugFixes usercss ⚙️ Overlay Scrollbars"
+name = "GitHub-Dark"
+description = ":octocat: Dark GitHub style"
 homepage = "https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/master/github-dark.user.css"
 license = "BSD-2-Clause"
 visibility = "public"
@@ -64,6 +64,6 @@ archived = false
 clone_url = "https://github.com/StylishThemes/GitHub-Dark.git"
 default_branch = "master"
 fork = false
-head_sha = "3722e24c15ef297c0259468d3ffaf90b3d178b27"
+head_sha = "67af792e072009f1b6e1a380eb483770e04d8d56"
 html_url = "https://github.com/StylishThemes/GitHub-Dark"
-stars = 9918
+stars = 9916

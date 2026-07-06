@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kaixindelele/ChatPaper"
-generated_at = "2026-07-01T18:11:20.2096Z"
+generated_at = "2026-07-06T18:49:37.293568Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "ChatPaper"
-description = "一站式服务 / 简单 / 快速 / 高效"
+description = "Use ChatGPT to summarize the arXiv papers. 全流程加速科研，利用chatgpt进行论文全文总结+专业翻译+润色+审稿+审稿回复"
 homepage = "https://academic.chatpaper.top"
 license = "NOASSERTION"
 visibility = "public"
@@ -59,4 +59,4 @@ default_branch = "main"
 fork = false
 head_sha = "f19b3a4510c24d49a14549a41de4ad4dd32dc6c1"
 html_url = "https://github.com/kaixindelele/ChatPaper"
-stars = 19641
+stars = 19652

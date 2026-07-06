@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name, description, and docs entry points from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from CODEOWNERS; `owners.team` is `@jellyfin/core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.
 - Discovered related relation to github.com/jellyfin/jellyfin-ffmpeg from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -9,6 +9,7 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

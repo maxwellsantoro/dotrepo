@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ShareX/ShareX"
-generated_at = "2026-07-01T17:21:05.96471Z"
+generated_at = "2026-07-06T18:31:22.702022Z"
 
 [record.trust]
 confidence = "high"
@@ -16,15 +16,16 @@ notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md pr
 
 [repo]
 name = "ShareX Banner"
-description = "For further information please check our website"
+description = "ShareX is a free and open-source application that enables users to capture or record any area of their screen with a single keystroke. It also supports uploading images, text, and various file types to a wide range of destinations."
 homepage = "https://getsharex.com"
 license = "GPL-3.0"
 visibility = "public"
 languages = [
     "C#",
-    "HTML",
     "Inno Setup",
+    "PowerShell",
     "CSS",
+    "HTML",
 ]
 topics = [
     "screen-capture",
@@ -61,6 +62,6 @@ archived = false
 clone_url = "https://github.com/ShareX/ShareX.git"
 default_branch = "develop"
 fork = false
-head_sha = "e6ec32aea3d7f41413ccfd5cec0c7585bb6ad9b9"
+head_sha = "77de3ec66b2c958b6b3db1de1648904a257f0f18"
 html_url = "https://github.com/ShareX/ShareX"
-stars = 38360
+stars = 38444

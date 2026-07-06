@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/npm/cli"
-generated_at = "2026-07-01T18:18:42.115599Z"
+generated_at = "2026-07-06T18:54:39.456516Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "npm"
-description = "You should be running a currently supported version of Node.js to run **`npm`**."
+name = "cli"
+description = "the package manager for JavaScript"
 homepage = "https://docs.npmjs.com/cli/"
 license = "NOASSERTION"
 visibility = "public"
@@ -36,6 +36,10 @@ topics = [
     "tools",
     "npm-cli",
 ]
+
+[repo.toolchain]
+min = "22.22.2"
+ecosystem = "Node.js"
 
 [owners]
 maintainers = [
@@ -69,4 +73,4 @@ default_branch = "latest"
 fork = false
 head_sha = "42b12c250ff3e2ecd756fd82666454ebafc9386c"
 html_url = "https://github.com/npm/cli"
-stars = 9900
+stars = 9911

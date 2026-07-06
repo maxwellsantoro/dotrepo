@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/yzhao062/pyod"
-generated_at = "2026-07-01T18:37:58.516784Z"
+generated_at = "2026-07-06T19:07:29.604134Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `.github/workflows/testing.yml`, `.github/workflows/testing-cron.yml`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/testing.yml`. Inferred `repo.test` from `.github/workflows/testing-cron.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "pyod"
@@ -26,7 +26,7 @@ languages = [
     "Jupyter Notebook",
 ]
 build = "python -m build"
-test = "python -m pytest"
+test = "pip install pytest"
 topics = [
     "outlier-detection",
     "anomaly-detection",
@@ -49,6 +49,10 @@ topics = [
     "time-series-anomaly-detection",
 ]
 
+[repo.toolchain]
+min = "3.9"
+ecosystem = "Python"
+
 [docs]
 root = "http://pyod.readthedocs.io"
 
@@ -59,4 +63,4 @@ default_branch = "master"
 fork = false
 head_sha = "d9db50aa09e015e4fdb22d9a7cebe287d671e07b"
 html_url = "https://github.com/yzhao062/pyod"
-stars = 9893
+stars = 9905

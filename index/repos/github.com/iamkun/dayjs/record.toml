@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/iamkun/dayjs"
-generated_at = "2026-07-01T18:07:43.303988Z"
+generated_at = "2026-07-06T18:46:58.899322Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "API"
-description = "It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times."
+name = "dayjs"
+description = "⏰ Day.js 2kB immutable date-time library alternative to Moment.js with the same modern API"
 homepage = "https://day.js.org"
 license = "MIT"
 visibility = "public"
@@ -58,4 +58,4 @@ default_branch = "dev"
 fork = false
 head_sha = "98364bcebc047529345cc8c2bbcc44a6a8c18e79"
 html_url = "https://github.com/iamkun/dayjs"
-stars = 48664
+stars = 48669

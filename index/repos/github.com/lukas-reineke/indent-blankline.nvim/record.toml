@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/lukas-reineke/indent-blankline.nvim"
-generated_at = "2026-07-01T18:13:45.015521Z"
+generated_at = "2026-07-06T18:51:34.228131Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from
 
 [repo]
 name = "Indent Blankline"
-description = "This plugin adds indentation guides to Neovim."
+description = "Indent guides  for Neovim"
 homepage = "https://github.com/lukas-reineke/indent-blankline.nvim"
 license = "MIT"
 visibility = "public"
@@ -41,4 +41,4 @@ default_branch = "master"
 fork = false
 head_sha = "d28a3f70721c79e3c5f6693057ae929f3d9c0a03"
 html_url = "https://github.com/lukas-reineke/indent-blankline.nvim"
-stars = 4970
+stars = 4976

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pritunl/pritunl"
-generated_at = "2026-07-01T18:22:46.41698Z"
+generated_at = "2026-07-06T18:57:11.326255Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "pritunl"
-description = "Pritunl is a distributed enterprise vpn server built using the OpenVPN protocol."
+description = "Enterprise VPN server"
 homepage = "https://forum.pritunl.com"
 license = "NOASSERTION"
 visibility = "public"
@@ -47,4 +47,4 @@ default_branch = "master"
 fork = false
 head_sha = "da6a7b62f420adf1fafd3f4658ea4f960db28127"
 html_url = "https://github.com/pritunl/pritunl"
-stars = 4982
+stars = 4985

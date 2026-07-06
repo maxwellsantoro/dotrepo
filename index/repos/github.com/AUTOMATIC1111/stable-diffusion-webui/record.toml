@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AUTOMATIC1111/stable-diffusion-webui"
-generated_at = "2026-07-01T17:15:17.816002Z"
+generated_at = "2026-07-06T18:25:27.872835Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `.github/workflows/run_tests.yaml`. Inferred `repo.test` from `.github/workflows/run_tests.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Stable Diffusion web UI"
-description = "A web interface for Stable Diffusion, implemented using Gradio library."
+description = "Stable Diffusion web UI"
 homepage = "https://github.com/AUTOMATIC1111/stable-diffusion-webui"
 license = "AGPL-3.0"
 visibility = "public"
@@ -28,7 +29,7 @@ languages = [
     "Shell",
     "Batchfile",
 ]
-test = "python -m pytest"
+test = "python -m pytest -vv --junitxml=test/results.xml --cov . --cov-report=xml --verify-base-url test"
 topics = [
     "deep-learning",
     "diffusion",
@@ -61,4 +62,4 @@ default_branch = "master"
 fork = false
 head_sha = "82a973c04367123ae98bd9abdf80d9eda9b910e2"
 html_url = "https://github.com/AUTOMATIC1111/stable-diffusion-webui"
-stars = 163884
+stars = 164010

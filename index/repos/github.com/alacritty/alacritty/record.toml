@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/alacritty/alacritty"
-generated_at = "2026-07-01T17:23:36.765244Z"
+generated_at = "2026-07-06T18:33:56.296664Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `Makefile`, `CONTRIBUTING.md`, and `Cargo.toml`. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Alacritty"
-description = "Alacritty is a modern terminal emulator that comes with sensible defaults, but allows for extensive configuration."
+description = "A cross-platform, OpenGL terminal emulator."
 homepage = "https://alacritty.org"
 license = "Apache-2.0"
 visibility = "public"
@@ -26,8 +26,8 @@ languages = [
     "GLSL",
     "Makefile",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "make all"
+test = "cargo test"
 topics = [
     "terminal-emulators",
     "opengl",
@@ -41,6 +41,10 @@ topics = [
     "bsd",
 ]
 
+[repo.toolchain]
+min = "1.85.0"
+ecosystem = "Rust"
+
 [docs]
 root = "https://alacritty.org"
 
@@ -51,4 +55,4 @@ default_branch = "master"
 fork = false
 head_sha = "bdb72b32eeb074e3a0b8559d8ccac458237474a3"
 html_url = "https://github.com/alacritty/alacritty"
-stars = 64727
+stars = 64775

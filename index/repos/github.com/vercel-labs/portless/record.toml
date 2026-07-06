@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vercel-labs/portless"
-generated_at = "2026-07-01T18:35:35.923729Z"
+generated_at = "2026-07-06T19:05:50.533986Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "portless"
-description = "Replace port numbers with stable, named .localhost URLs for local development."
+description = "Replace port numbers with stable, named local URLs. For humans and agents."
 homepage = "https://portless.sh"
 license = "Apache-2.0"
 visibility = "public"
@@ -36,6 +36,10 @@ build = "pnpm build"
 test = "pnpm test"
 topics = []
 
+[repo.toolchain]
+min = "24"
+ecosystem = "Node.js"
+
 [docs]
 root = "https://portless.sh"
 
@@ -46,4 +50,4 @@ default_branch = "main"
 fork = false
 head_sha = "5940d3cb889f06e9b12b6ca17333232f084ef8d4"
 html_url = "https://github.com/vercel-labs/portless"
-stars = 10023
+stars = 10051

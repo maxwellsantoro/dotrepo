@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/stoplightio/prism"
-generated_at = "2026-07-01T18:30:30.338249Z"
+generated_at = "2026-07-06T19:03:04.125056Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`
 
 [repo]
 name = "Prism Overview"
-description = "Prism is a set of packages for API mocking and contract testing with **OpenAPI v2** (formerly known as Swagger) and **OpenAPI v3.x**."
+description = "Turn any OpenAPI2/3 and Postman Collection file into an API server with mocking, transformations and validations."
 homepage = "https://stoplight.io/open-source/prism"
 license = "Apache-2.0"
 visibility = "public"
@@ -74,6 +74,6 @@ archived = false
 clone_url = "https://github.com/stoplightio/prism.git"
 default_branch = "master"
 fork = false
-head_sha = "4f86059d07448ace65f3a2d7a1610a500eed8afe"
+head_sha = "b1d5e928a5704495a5b1819fac8a929b6fb75e53"
 html_url = "https://github.com/stoplightio/prism"
-stars = 4974
+stars = 4981

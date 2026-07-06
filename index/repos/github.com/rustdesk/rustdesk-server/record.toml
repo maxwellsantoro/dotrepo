@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rustdesk/rustdesk-server"
-generated_at = "2026-07-01T18:26:46.085559Z"
+generated_at = "2026-07-06T19:00:07.485832Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `README.md`. Inferred `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "RustDesk Server Program"
-description = "How to migrate OSS to Pro"
+description = "RustDesk Server Program"
 homepage = "https://rustdesk.com/server"
 license = "AGPL-3.0"
 visibility = "public"
@@ -30,7 +31,7 @@ languages = [
     "CSS",
     "Batchfile",
 ]
-build = "cargo build --workspace"
+build = "cargo build --release"
 test = "cargo test --workspace"
 topics = [
     "remote-desktop",
@@ -49,4 +50,4 @@ default_branch = "master"
 fork = false
 head_sha = "80d3a50566d19459e7af3a1ab09b0024c942715a"
 html_url = "https://github.com/rustdesk/rustdesk-server"
-stars = 10010
+stars = 10027

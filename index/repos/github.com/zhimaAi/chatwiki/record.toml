@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/zhimaAi/chatwiki"
-generated_at = "2026-07-01T18:38:07.622635Z"
+generated_at = "2026-07-06T19:07:42.252631Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Product Positioning"
-description = "ChatWiki is a workflow automation platform focused on the WeChat ecosystem, dedicated to making every official account a super AI agent."
+name = "chatwiki"
+description = "ChatWiki 微信公众号的AI知识库工作流Agent平台，RAG大模型AI客服机器人，致力于成为垂直领域的coze、n8n。"
 homepage = "https://chatwiki.ai"
 license = "NOASSERTION"
 visibility = "public"
@@ -45,6 +46,10 @@ topics = [
     "aytomation",
 ]
 
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
+
 [docs]
 root = "https://chatwiki.ai"
 
@@ -53,6 +58,6 @@ archived = false
 clone_url = "https://github.com/zhimaAi/chatwiki.git"
 default_branch = "main"
 fork = false
-head_sha = "f63e4aa95d273e1d6356ac38a40d74024d953492"
+head_sha = "f8c150bf7683b98b1a87ef141b37f95384c35390"
 html_url = "https://github.com/zhimaAi/chatwiki"
-stars = 1996
+stars = 2004

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/explosion/spaCy"
-generated_at = "2026-07-01T18:01:15.929805Z"
+generated_at = "2026-07-06T18:41:02.306162Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "spaCy"
@@ -36,8 +36,8 @@ languages = [
     "Dockerfile",
     "C++",
 ]
-build = "python -m build"
-test = "python -m pytest"
+build = "make package"
+test = "python -m pytest --pyargs spacy"
 topics = [
     "natural-language-processing",
     "data-science",
@@ -69,4 +69,4 @@ default_branch = "master"
 fork = false
 head_sha = "e67199550e365dacee28b109210c3a43e1477638"
 html_url = "https://github.com/explosion/spaCy"
-stars = 33706
+stars = 33718

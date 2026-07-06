@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/zhongyang219/TrafficMonitor"
-generated_at = "2026-07-01T18:38:11.284522Z"
+generated_at = "2026-07-06T19:07:47.663103Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Featured｜HelloGitHub"
-description = "Traffic Monitor是一款用于Windows平台的网速监控悬浮窗软件，可以显示当前网速、CPU及内存利用率，支持嵌入到任务栏显示，支持更换皮肤、历史流量统计等功能。"
+name = "TrafficMonitor"
+description = "这是一个用于显示当前网速、CPU及内存利用率的桌面悬浮窗软件，并支持任务栏显示，支持更换皮肤。"
 homepage = "https://github.com/zhongyang219/TrafficMonitor"
 license = "NOASSERTION"
 visibility = "public"
@@ -34,4 +34,4 @@ default_branch = "master"
 fork = false
 head_sha = "7901ce07727ee2b220dc5666f934fe69be03f3af"
 html_url = "https://github.com/zhongyang219/TrafficMonitor"
-stars = 45048
+stars = 45106

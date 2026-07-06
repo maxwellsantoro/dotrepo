@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/lin-xin/vue-manage-system"
-generated_at = "2026-07-01T18:12:56.022567Z"
+generated_at = "2026-07-06T18:51:13.230909Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "vue-manage-system"
-description = "基于 Vue3 + pinia + Element Plus 的后台管理系统解决方案。线上演示"
+description = "Vue3、Element Plus、typescript后台管理系统"
 homepage = "https://lin-xin.github.io/example/vue-manage-system/"
 license = "MIT"
 visibility = "public"
@@ -44,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "6a7019ec1a74cc05297d18647a5f944c242d468a"
 html_url = "https://github.com/lin-xin/vue-manage-system"
-stars = 19637
+stars = 19634

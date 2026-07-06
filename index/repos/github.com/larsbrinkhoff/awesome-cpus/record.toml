@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/larsbrinkhoff/awesome-cpus"
-generated_at = "2026-07-01T18:12:33.458885Z"
+generated_at = "2026-07-06T18:50:43.583491Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Awesome CPU and MCU documentation"
-description = "This repository contains documentation for various CPUs."
+name = "awesome-cpus"
+description = "All CPU and MCU documentation in one place"
 homepage = "https://github.com/larsbrinkhoff/awesome-cpus"
 license = "CC0-1.0"
 visibility = "public"
@@ -54,4 +54,4 @@ default_branch = "master"
 fork = false
 head_sha = "fbd37421105fc591cb26f72fe9d13c35fb340ea9"
 html_url = "https://github.com/larsbrinkhoff/awesome-cpus"
-stars = 1994
+stars = 1995

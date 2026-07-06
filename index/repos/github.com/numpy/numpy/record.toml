@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/numpy/numpy"
-generated_at = "2026-07-01T18:18:50.297324Z"
+generated_at = "2026-07-06T18:54:50.420714Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `pyproject.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Code of Conduct"
-description = "NumPy is a community-driven open source project developed by a diverse group of contributors."
+name = "numpy"
+description = "The fundamental package for scientific computing with Python."
 homepage = "https://numpy.org"
 license = "NOASSERTION"
 visibility = "public"
@@ -39,6 +40,10 @@ topics = [
     "python",
 ]
 
+[repo.toolchain]
+min = "3.12"
+ecosystem = "Python"
+
 [docs]
 root = "https://numpy.org"
 
@@ -47,6 +52,6 @@ archived = false
 clone_url = "https://github.com/numpy/numpy.git"
 default_branch = "main"
 fork = false
-head_sha = "b689e13d6ec31bd5f34969aef69d934614a797e9"
+head_sha = "a2097089432f4e374dc12c405672c8cc7ac88fb9"
 html_url = "https://github.com/numpy/numpy"
-stars = 32294
+stars = 32323

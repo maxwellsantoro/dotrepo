@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/rizinorg/cutter"
-generated_at = "2026-07-01T18:25:45.178878Z"
+generated_at = "2026-07-06T18:58:55.679014Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Cutter"
-description = "Cutter is a free and open-source reverse engineering platform powered by rizin."
+description = "Free and Open Source Reverse Engineering Platform powered by rizin"
 homepage = "https://cutter.re"
 license = "GPL-3.0"
 visibility = "public"
@@ -33,7 +33,6 @@ languages = [
     "Meson",
     "Ruby",
 ]
-build = 'cmake -S . -B build \'
 topics = [
     "cutter",
     "gui",
@@ -54,6 +53,6 @@ archived = false
 clone_url = "https://github.com/rizinorg/cutter.git"
 default_branch = "dev"
 fork = false
-head_sha = "3978a4e8e4bb1fcf1224702e909042668a94d557"
+head_sha = "e01d86b5fa12542b7eed9e35ce7d597b6b0a31ee"
 html_url = "https://github.com/rizinorg/cutter"
-stars = 19245
+stars = 19323

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ReactiveCocoa/ReactiveCocoa"
-generated_at = "2026-07-01T17:20:42.041694Z"
+generated_at = "2026-07-06T18:31:01.884673Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "ReactiveCocoa"
-description = "Reactive extensions to Cocoa frameworks, built on top of ReactiveSwift."
+description = "Cocoa framework and Obj-C dynamism bindings for ReactiveSwift."
 homepage = "https://github.com/ReactiveCocoa/ReactiveCocoa"
 license = "MIT"
 visibility = "public"
@@ -39,4 +39,4 @@ default_branch = "master"
 fork = false
 head_sha = "f2d9bd56ae9f345821d9cd53fe3479db77e29094"
 html_url = "https://github.com/ReactiveCocoa/ReactiveCocoa"
-stars = 19832
+stars = 19826

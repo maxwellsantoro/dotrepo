@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/josephg/ShareJS"
-generated_at = "2026-07-01T18:10:20.553835Z"
+generated_at = "2026-07-06T18:49:07.609733Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "ShareJS"
-description = "This is a little server & client library to allow concurrent editing of any kind of content via OT."
+description = "Collaborative editing in any app"
 homepage = "https://github.com/josephg/ShareJS"
 license = "NOASSERTION"
 visibility = "public"

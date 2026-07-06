@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/milvus-io/milvus"
-generated_at = "2026-07-01T18:16:38.314389Z"
+generated_at = "2026-07-06T20:24:03.829505Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `README.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `go.mod` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "milvus banner"
-description = "🐦 Milvus is a high-performance vector database built for scale."
+description = "Milvus is a high-performance, cloud-native vector database built for scalable vector ANN search"
 homepage = "https://milvus.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -35,7 +35,7 @@ languages = [
     "Batchfile",
     "Assembly",
 ]
-build = "go build ./..."
+build = "make"
 test = "go test ./..."
 topics = [
     "anns",
@@ -57,6 +57,10 @@ topics = [
     "diskann",
     "rag",
 ]
+
+[repo.toolchain]
+min = "1.26.4"
+ecosystem = "Go"
 
 [docs]
 root = "https://milvus.io/docs"
@@ -81,6 +85,6 @@ archived = false
 clone_url = "https://github.com/milvus-io/milvus.git"
 default_branch = "master"
 fork = false
-head_sha = "ae1d5663f25908042e7537779da1ba812a9cf633"
+head_sha = "58ca68ce9662d07df174ad8ad62f33afc29dc7c3"
 html_url = "https://github.com/milvus-io/milvus"
-stars = 45038
+stars = 45098

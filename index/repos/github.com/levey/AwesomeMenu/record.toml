@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/levey/AwesomeMenu"
-generated_at = "2026-07-01T18:12:44.414292Z"
+generated_at = "2026-07-06T18:50:58.385263Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "AwesomeMenu"
-description = "AwesomeMenu is a menu with the same look as the story menu of Path."
+description = "Path 2.0 menu using CoreAnimation :)"
 homepage = "https://github.com/levey/AwesomeMenu"
 license = "NOASSERTION"
 visibility = "public"
@@ -33,4 +34,4 @@ default_branch = "master"
 fork = false
 head_sha = "f52b91cea704562d10f3f453da4b74104696ab46"
 html_url = "https://github.com/levey/AwesomeMenu"
-stars = 4969
+stars = 4967

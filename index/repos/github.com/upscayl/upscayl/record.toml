@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/upscayl/upscayl"
-generated_at = "2026-07-01T18:34:52.175029Z"
+generated_at = "2026-07-06T19:05:31.915223Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "upscayl"
-description = "Warp, the intelligent terminal for developers"
+description = "🆙 Upscayl - #1 Free and Open Source AI Image Upscaler for Linux, MacOS and Windows."
 homepage = "https://upscayl.org"
 license = "AGPL-3.0"
 visibility = "public"
@@ -67,4 +68,4 @@ default_branch = "main"
 fork = false
 head_sha = "a00d55fee90e0f9435d5eaa86e76700df8199af8"
 html_url = "https://github.com/upscayl/upscayl"
-stars = 46548
+stars = 46720

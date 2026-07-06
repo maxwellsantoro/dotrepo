@@ -4,24 +4,25 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Trinea/android-common"
-generated_at = "2026-07-01T17:22:23.643069Z"
+generated_at = "2026-07-06T20:23:06.460812Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Inferred `repo.build` from `build.gradle`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Trinea Android Common"
-description = "Apache License 2.0 — see LICENSE."
+description = "Android common lib, include ImageCache, HttpCache, DropDownListView, DownloadManager, Utils and so on"
 homepage = "http://p.codekk.com/"
 visibility = "public"
 languages = ["Java"]
-build = "./gradlew build"
-test = "./gradlew test"
+build = "gradle build"
+test = "gradle test"
 topics = []
 
 [docs]
@@ -34,4 +35,4 @@ default_branch = "master"
 fork = false
 head_sha = "56be038544ef00e02c86052ce16398dda1987a4d"
 html_url = "https://github.com/Trinea/android-common"
-stars = 4998
+stars = 4999

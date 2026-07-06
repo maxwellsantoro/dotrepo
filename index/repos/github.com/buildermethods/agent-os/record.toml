@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/buildermethods/agent-os"
-generated_at = "2026-07-01T17:26:51.942821Z"
+generated_at = "2026-07-06T18:36:52.65052Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Agent OS"
-description = "Agent OS helps you shape better specs, keeps agents aligned in a lightweight system that fits how you already build."
+description = "Agent OS is a system for injecting your codebase standards and writing better specs for spec-driven development."
 homepage = "https://buildermethods.com/agent-os"
 license = "MIT"
 visibility = "public"
@@ -33,4 +33,4 @@ default_branch = "main"
 fork = false
 head_sha = "cae8e664fb59a01869718c3151e0f45b7a06a2fb"
 html_url = "https://github.com/buildermethods/agent-os"
-stars = 4991
+stars = 5016

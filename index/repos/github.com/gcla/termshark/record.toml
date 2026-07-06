@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/gcla/termshark"
-generated_at = "2026-07-01T18:03:29.608503Z"
+generated_at = "2026-07-06T18:43:07.866143Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/go.yml`, and `go.mod`. Inferred `repo.build` from `.github/workflows/go.yml`. Inferred `repo.test` from `.github/workflows/go.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Termshark"
-description = "A terminal user-interface for tshark, inspired by Wireshark."
+description = "A terminal UI for tshark, inspired by Wireshark"
 homepage = "https://github.com/gcla/termshark"
 license = "MIT"
 visibility = "public"
@@ -24,8 +25,8 @@ languages = [
     "Go",
     "Shell",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "go build -v ./..."
+test = "go test -v ./..."
 topics = [
     "tshark",
     "wireshark",
@@ -37,6 +38,10 @@ topics = [
     "go",
 ]
 
+[repo.toolchain]
+min = "1.13"
+ecosystem = "Go"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/gcla/termshark.git"
@@ -44,4 +49,4 @@ default_branch = "master"
 fork = false
 head_sha = "e8a1ec6e4f2d517f646d3bba35a2ec4926e0202c"
 html_url = "https://github.com/gcla/termshark"
-stars = 9920
+stars = 9926

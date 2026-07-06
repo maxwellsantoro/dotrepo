@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `npm run build`.
 - Discovered related relation to github.com/TGS963/upscayl from package.json homepage.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -9,6 +9,7 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

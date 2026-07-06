@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/alibaba/arthas"
-generated_at = "2026-07-01T17:23:48.613889Z"
+generated_at = "2026-07-06T20:23:11.091224Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Inferred `repo.build` from `pom.xml`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Arthas"
-description = "Arthas is a Java Diagnostic tool open sourced by Alibaba."
+description = "Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器Arthas"
 homepage = "https://arthas.aliyun.com/"
 license = "Apache-2.0"
 visibility = "public"
@@ -79,4 +80,4 @@ default_branch = "master"
 fork = false
 head_sha = "7b74eb6a1bc479d6adba2f0a2a5658ba57561aee"
 html_url = "https://github.com/alibaba/arthas"
-stars = 37408
+stars = 37416

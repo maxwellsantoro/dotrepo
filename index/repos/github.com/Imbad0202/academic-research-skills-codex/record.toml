@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Imbad0202/academic-research-skills-codex"
-generated_at = "2026-07-01T17:18:08.539996Z"
+generated_at = "2026-07-06T18:28:24.686057Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Academic Research Skills for Codex"
-description = "Codex-native packaging of the Academic Research Skills suite."
+name = "academic-research-skills-codex"
+description = "Codex-native Academic Research Skills suite for human-in-the-loop academic research workflows"
 homepage = "https://github.com/Imbad0202/academic-research-skills-codex"
 license = "NOASSERTION"
 visibility = "public"
@@ -64,6 +64,6 @@ archived = false
 clone_url = "https://github.com/Imbad0202/academic-research-skills-codex.git"
 default_branch = "main"
 fork = false
-head_sha = "efdbc2a4a74ae3482e63535bbbcb2a125066d5de"
+head_sha = "8626ccb54ef73b620e67ac80107a56a6b65b180c"
 html_url = "https://github.com/Imbad0202/academic-research-skills-codex"
-stars = 5215
+stars = 5592

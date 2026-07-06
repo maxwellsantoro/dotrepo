@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spring-projects/spring-boot"
-generated_at = "2026-07-01T18:29:49.626352Z"
+generated_at = "2026-07-06T20:24:35.913037Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `build.gradle`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `build.gradle`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `build.gradle`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "spring-boot"
@@ -55,6 +55,6 @@ archived = false
 clone_url = "https://github.com/spring-projects/spring-boot.git"
 default_branch = "main"
 fork = false
-head_sha = "fb9794a2d346036a6adfa74cc3f1253010d63ea0"
+head_sha = "4c346884f379af3032d45041d8f620cc147b1a79"
 html_url = "https://github.com/spring-projects/spring-boot"
-stars = 80990
+stars = 81067

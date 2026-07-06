@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ctfs/write-ups-2015"
-generated_at = "2026-07-01T17:51:31.316965Z"
+generated_at = "2026-07-06T18:38:47.809877Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "CTF write-ups 2015"
-description = "There are some problems with CTF write-ups in general:"
+description = "Wiki-like CTF write-ups repository, maintained by the community. 2015"
 homepage = "https://github.com/ctfs/write-ups-2015"
 visibility = "public"
 languages = [
@@ -51,4 +51,4 @@ default_branch = "master"
 fork = false
 head_sha = "172d7cf5cfc238804e127e299868365bec1c19ee"
 html_url = "https://github.com/ctfs/write-ups-2015"
-stars = 1998
+stars = 1997

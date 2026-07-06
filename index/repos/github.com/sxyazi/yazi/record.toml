@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sxyazi/yazi"
-generated_at = "2026-07-01T18:31:46.17801Z"
+generated_at = "2026-07-06T19:03:36.290877Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, and `Cargo.toml`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Yazi"
-description = "💡 A new article explaining its internal workings: Why is Yazi Fast?"
+description = "💥 Blazing fast terminal file manager written in Rust, based on async I/O."
 homepage = "https://yazi-rs.github.io"
 license = "MIT"
 visibility = "public"
@@ -28,8 +28,8 @@ languages = [
     "Shell",
     "RenderScript",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "cargo build"
+test = "cargo test --workspace --verbose"
 topics = [
     "asyncio",
     "concurrency",
@@ -52,6 +52,10 @@ topics = [
     "cross-platform",
 ]
 
+[repo.toolchain]
+min = "1.95.0"
+ecosystem = "Rust"
+
 [docs]
 root = "https://yazi-rs.github.io"
 
@@ -60,6 +64,6 @@ archived = false
 clone_url = "https://github.com/sxyazi/yazi.git"
 default_branch = "main"
 fork = false
-head_sha = "21550a7eb5086ba34f8eabf8aaab85f601d34a74"
+head_sha = "aa850f9a3bece5fa353b45adea9eee59fc7e6996"
 html_url = "https://github.com/sxyazi/yazi"
-stars = 39936
+stars = 40092

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/cncf/landscape"
-generated_at = "2026-07-01T17:27:51.612614Z"
+generated_at = "2026-07-06T18:37:56.235797Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Cloud Native Landscape"
-description = "The CNCF Cloud Native Landscape is intended as a map through the previously uncharted terrain of cloud native technologies."
+description = "🌄 The Cloud Native Interactive Landscape filters and sorts hundreds of projects and products, and shows details including GitHub stars, funding, first and last commits, contributor counts and headquarters location."
 homepage = "https://l.cncf.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -40,6 +40,6 @@ archived = false
 clone_url = "https://github.com/cncf/landscape.git"
 default_branch = "master"
 fork = false
-head_sha = "5cef32577c8afd3cbb9dd10b53a211988237a4b4"
+head_sha = "d7548b510cc219b6cce37764d4cf13bbaaeb0778"
 html_url = "https://github.com/cncf/landscape"
-stars = 9929
+stars = 9932

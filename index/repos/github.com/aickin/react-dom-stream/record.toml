@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/aickin/react-dom-stream"
-generated_at = "2026-07-01T17:23:23.006793Z"
+generated_at = "2026-07-06T18:33:46.68378Z"
 
 [record.trust]
 confidence = "high"
@@ -12,17 +12,21 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "react-dom-stream"
-description = "This is a React renderer for generating markup on a NodeJS server, but unlike the built-in `ReactDOM.renderToString`, this module renders to a stream."
+description = "A streaming server-side rendering library for React."
 homepage = "https://github.com/aickin/react-dom-stream"
 visibility = "public"
 languages = ["JavaScript"]
 build = "npm run build"
 test = "npm test"
 topics = []
+
+[repo.toolchain]
+min = "4.0.0"
+ecosystem = "Node.js"
 
 [relations]
 references = []

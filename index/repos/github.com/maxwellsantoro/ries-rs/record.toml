@@ -2,18 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/maxwellsantoro/ries-rs"
-generated_at = "2026-07-01T20:44:28.295524Z"
+generated_at = "2026-07-06T19:08:19.998986Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "ries-rs"
-description = "Rust inverse equation solver for turning a target number into compact algebraic equations."
+description = "High-performance Rust reimplementation of Robert Munafo’s RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it — now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support."
 homepage = "https://maxwellsantoro.com/projects/ries-rs/app/"
 license = "MIT"
 visibility = "public"
@@ -25,7 +28,8 @@ languages = [
     "TypeScript",
     "JavaScript",
 ]
-build = "cargo build --features wasm --locked"
+build = "npm run build"
+test = "npm test"
 topics = [
     "equation-solver",
     "mathematics",
@@ -37,16 +41,6 @@ topics = [
     "wasm",
     "inverse-symbolic-calculator",
 ]
-
-[[repo.test_candidates]]
-command = "cargo test"
-ecosystem = "Rust"
-source = "Cargo.toml"
-
-[[repo.test_candidates]]
-command = "npm test"
-ecosystem = "Node.js"
-source = "package.json"
 
 [owners]
 maintainers = ["@maxwellsantoro"]

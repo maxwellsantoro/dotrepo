@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/cssnano/cssnano"
-generated_at = "2026-07-01T17:51:27.629799Z"
+generated_at = "2026-07-06T18:38:43.123625Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "cssnano"
@@ -34,6 +34,10 @@ topics = [
     "minification",
 ]
 
+[repo.toolchain]
+min = "22.11"
+ecosystem = "Node.js"
+
 [docs]
 root = "https://cssnano.github.io/cssnano/"
 getting_started = "https://cssnano.github.io/cssnano/docs/getting-started"
@@ -45,4 +49,4 @@ default_branch = "master"
 fork = false
 head_sha = "b0c6ed241c619c593a9d8ef8f8b64f73daff79d9"
 html_url = "https://github.com/cssnano/cssnano"
-stars = 4972
+stars = 4971

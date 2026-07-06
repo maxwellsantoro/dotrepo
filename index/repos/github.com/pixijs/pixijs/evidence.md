@@ -1,16 +1,19 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
 - Discovered related relation to github.com/pixijs/pixijs from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.name` to `pixijs` from `GitHub API` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

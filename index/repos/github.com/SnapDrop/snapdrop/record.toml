@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/SnapDrop/snapdrop"
-generated_at = "2026-07-01T17:21:26.868176Z"
+generated_at = "2026-07-06T18:31:39.599877Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Snapdrop"
-description = "Snapdrop: local file sharing in your browser."
+description = "A Progressive Web App for local file sharing"
 homepage = "https://snapdrop.net"
 license = "GPL-3.0"
 visibility = "public"
@@ -43,4 +43,4 @@ default_branch = "master"
 fork = false
 head_sha = "b8b78cc22a672fd7c442f5a4866a8d9b0c05362e"
 html_url = "https://github.com/SnapDrop/snapdrop"
-stars = 19714
+stars = 19712

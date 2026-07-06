@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/syedhali/EZAudio"
-generated_at = "2026-07-01T18:31:49.744806Z"
+generated_at = "2026-07-06T19:03:41.595958Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Deprecated"
-description = "EZAudio has recently been deprecated in favor of AudioKit."
+name = "EZAudio"
+description = "An iOS and macOS audio visualization framework built upon Core Audio useful for anyone doing real-time, low-latency audio processing and visualizations."
 homepage = "https://github.com/syedhali/EZAudio"
 license = "NOASSERTION"
 visibility = "public"
@@ -49,4 +49,4 @@ default_branch = "master"
 fork = false
 head_sha = "d8e4b9313aabb78337ce616291f22d49f06e1eed"
 html_url = "https://github.com/syedhali/EZAudio"
-stars = 4987
+stars = 4986

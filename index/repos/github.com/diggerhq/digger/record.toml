@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/diggerhq/digger"
-generated_at = "2026-07-01T17:52:14.317818Z"
+generated_at = "2026-07-06T18:39:28.459674Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/backend_test.yml`, and `go.mod`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `.github/workflows/backend_test.yml`. Inferred `repo.test` from `.github/workflows/backend_test.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "digger"
-description = "Heads-up: We’ve rebranded! Starting from 7th November 2025, the Digger project is now OpenTaco."
+description = "Digger is an open source IaC orchestration tool. Digger allows you to run IaC in your existing CI pipeline ⚡️"
 homepage = "https://digger.dev"
 license = "MIT"
 visibility = "public"
@@ -32,7 +33,7 @@ languages = [
     "PLpgSQL",
     "Dockerfile",
 ]
-build = "go build ./..."
+build = "go build"
 test = "go test ./..."
 topics = [
     "infrastructure-as-code",
@@ -46,6 +47,10 @@ topics = [
     "hacktoberfest",
 ]
 
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
+
 [docs]
 root = "https://docs.digger.dev/"
 getting_started = "https://docs.digger.dev/getting-started/github-actions-+-aws"
@@ -57,4 +62,4 @@ default_branch = "develop"
 fork = false
 head_sha = "6baf84cd9cd7c6522b98504f4a2258474d6c2de3"
 html_url = "https://github.com/diggerhq/digger"
-stars = 4985
+stars = 4987

@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name, description, and docs entry points from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Discovered related relation to github.com/sponsors/Homebrew from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -11,6 +11,7 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

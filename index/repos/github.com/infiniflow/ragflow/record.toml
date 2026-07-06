@@ -2,18 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/infiniflow/ragflow"
-generated_at = "2026-07-01T20:44:17.820964Z"
+generated_at = "2026-07-06T19:08:14.073898Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported"]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `go.mod`. Left `repo.test` unset because `pyproject.toml` and `go.mod` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, `go.mod`, and `pyproject.toml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because `.github/workflows/sep-tests.yml` suggested an unsafe shell-like command. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation.'
 
 [repo]
-name = "README in English"
-description = "📕 Table of Contents"
+name = "ragflow"
+description = "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs"
 homepage = "https://ragflow.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -58,6 +61,10 @@ command = "go test ./..."
 ecosystem = "Go"
 source = "go.mod"
 
+[repo.toolchain]
+min = "3.13"
+ecosystem = "Python"
+
 [owners]
 maintainers = []
 security_contact = "unknown"
@@ -71,6 +78,6 @@ archived = false
 clone_url = "https://github.com/infiniflow/ragflow.git"
 default_branch = "main"
 fork = false
-head_sha = "42a0faad18af1b390be428de1e53a20f3ac80df9"
+head_sha = "d8cefcf052e5f16340da9a60b098f20b8b41ef91"
 html_url = "https://github.com/infiniflow/ragflow"
-stars = 84061
+stars = 84417

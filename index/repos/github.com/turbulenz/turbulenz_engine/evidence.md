@@ -7,7 +7,7 @@
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Downgrade guard

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/JohnSundell/Publish"
-generated_at = "2026-07-01T17:18:31.770544Z"
+generated_at = "2026-07-06T18:28:44.434335Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Publish"
-description = "Welcome to **Publish**, a static site generator built specifically for Swift developers."
+description = "A static site generator for Swift developers"
 homepage = "https://github.com/JohnSundell/Publish"
 license = "MIT"
 visibility = "public"
@@ -39,4 +39,4 @@ default_branch = "master"
 fork = false
 head_sha = "58e943047882a5a6d8135ae2711be8ba7fba57c4"
 html_url = "https://github.com/JohnSundell/Publish"
-stars = 4966
+stars = 4968

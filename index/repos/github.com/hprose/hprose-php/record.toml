@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hprose/hprose-php"
-generated_at = "2026-07-01T18:07:14.567492Z"
+generated_at = "2026-07-06T18:46:33.526051Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Hprose"
-description = "*Hprose* is a High Performance Remote Object Service Engine."
+description = "Hprose is a cross-language RPC. This project is Hprose 3.0 for PHP"
 homepage = "https://github.com/hprose/hprose-php"
 license = "MIT"
 visibility = "public"

@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/chidiwilliams/buzz"
-generated_at = "2026-07-01T17:27:22.77922Z"
+generated_at = "2026-07-06T18:37:16.147969Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/gh-pages.yml`, `Makefile`, and `pyproject.toml`. Inferred `repo.build` from `.github/workflows/gh-pages.yml`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Buzz"
-description = "Transcribe and translate audio offline on your personal computer."
+description = "Buzz transcribes and translates audio offline on your personal computer. Powered by OpenAI's Whisper."
 homepage = "https://chidiwilliams.github.io/buzz"
 license = "MIT"
 visibility = "public"
@@ -26,9 +27,13 @@ languages = [
     "Shell",
     "Inno Setup",
 ]
-build = "python -m build"
-test = "python -m pytest"
+build = "npm run build"
+test = "make test"
 topics = ["whisper"]
+
+[repo.toolchain]
+min = "3.12"
+ecosystem = "Python"
 
 [docs]
 root = "https://chidiwilliams.github.io/buzz/"
@@ -38,6 +43,6 @@ archived = false
 clone_url = "https://github.com/chidiwilliams/buzz.git"
 default_branch = "main"
 fork = false
-head_sha = "8a2a3de69a8d6f116fdeaea02978decf4de643db"
+head_sha = "191795bab21ee8414fc5479fb8c72d16f457c496"
 html_url = "https://github.com/chidiwilliams/buzz"
-stars = 19918
+stars = 19993

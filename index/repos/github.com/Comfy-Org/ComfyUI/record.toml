@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Comfy-Org/ComfyUI"
-generated_at = "2026-07-01T17:16:32.55764Z"
+generated_at = "2026-07-06T18:26:48.24751Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "ComfyUI"
-description = "The most powerful and modular AI engine for content creation."
+description = "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface."
 homepage = "https://www.comfy.org/"
 license = "GPL-3.0"
 visibility = "public"
@@ -34,6 +34,10 @@ topics = [
     "comfy",
     "comfyui",
 ]
+
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
 
 [owners]
 maintainers = [
@@ -70,6 +74,6 @@ archived = false
 clone_url = "https://github.com/Comfy-Org/ComfyUI.git"
 default_branch = "master"
 fork = false
-head_sha = "dd17debce517f8818ae9910b437cb1ebaa673176"
+head_sha = "b08debceca73bd3732b731c571bd0b4710281310"
 html_url = "https://github.com/Comfy-Org/ComfyUI"
-stars = 119047
+stars = 119640

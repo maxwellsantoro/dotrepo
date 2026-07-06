@@ -4,12 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/vercel/next.js"
-generated_at = "2026-07-01T20:45:19.817219Z"
+generated_at = "2026-07-06T19:08:47.802103Z"
 
 [record.trust]
-confidence = "low"
-provenance = ["inferred"]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "medium"
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `package.json`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "next.js"
@@ -33,7 +36,8 @@ languages = [
     "Sass",
     "Pug",
 ]
-build = "pnpm run build"
+build = "pnpm build"
+test = "pnpm test"
 topics = [
     "react",
     "server-rendering",
@@ -51,15 +55,9 @@ topics = [
     "compiler",
 ]
 
-[[repo.test_candidates]]
-command = "cargo test --workspace"
-ecosystem = "Rust"
-source = "Cargo.toml"
-
-[[repo.test_candidates]]
-command = "pnpm test"
+[repo.toolchain]
+min = "20.9.0"
 ecosystem = "Node.js"
-source = "package.json"
 
 [docs]
 root = "https://nextjs.org"
@@ -69,6 +67,6 @@ archived = false
 clone_url = "https://github.com/vercel/next.js.git"
 default_branch = "canary"
 fork = false
-head_sha = "02a73c59bbef2b56380fd5e600e64a3f0d4506f9"
+head_sha = "f656c597c63e274baf54519fa99ec1c98d39761a"
 html_url = "https://github.com/vercel/next.js"
-stars = 140205
+stars = 140364

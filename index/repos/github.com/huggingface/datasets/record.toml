@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/huggingface/datasets"
-generated_at = "2026-07-01T18:07:18.996613Z"
+generated_at = "2026-07-06T18:46:39.550999Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Hugging Face Datasets Library"
-description = "🤗 Datasets is a lightweight library providing **two** main features:"
+description = "🤗 The largest hub of ready-to-use datasets for AI models with fast, easy-to-use and efficient data manipulation tools"
 homepage = "https://huggingface.co/docs/datasets"
 license = "Apache-2.0"
 visibility = "public"
@@ -24,7 +24,7 @@ languages = [
     "Python",
     "Makefile",
 ]
-test = "python -m pytest"
+test = "python -m pytest -n auto --dist=loadfile -s -v ./tests/"
 topics = [
     "nlp",
     "datasets",
@@ -57,6 +57,6 @@ archived = false
 clone_url = "https://github.com/huggingface/datasets.git"
 default_branch = "main"
 fork = false
-head_sha = "b713dcdffa92ada37c569e6f1419ce94fc170b0c"
+head_sha = "41adfd0f9ee9ba3a6b4f719d5b551c5b19ae45e2"
 html_url = "https://github.com/huggingface/datasets"
-stars = 21669
+stars = 21692

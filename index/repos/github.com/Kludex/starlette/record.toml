@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Kludex/starlette"
-generated_at = "2026-07-01T17:18:47.129552Z"
+generated_at = "2026-07-06T18:29:03.785068Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Starlette"
@@ -34,6 +34,10 @@ topics = [
     "http",
     "asgi",
 ]
+
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
 
 [docs]
 root = "https://asgi.readthedocs.io/en/latest/"
@@ -58,6 +62,6 @@ archived = false
 clone_url = "https://github.com/Kludex/starlette.git"
 default_branch = "main"
 fork = false
-head_sha = "de970d7b3facb853eb7ad077decbf3d94f2aab6c"
+head_sha = "5174d4c8358a6f06aa8056bafd14c2272dab8dd1"
 html_url = "https://github.com/Kludex/starlette"
-stars = 12442
+stars = 12457

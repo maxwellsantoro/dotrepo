@@ -1,17 +1,18 @@
 # Evidence
 
-- Imported repository name and description from README.md.
-- Imported repo.build from pyproject.toml as `python -m build`.
-- Imported repo.test from pyproject.toml as `python -m pytest`.
+- Imported repository name from README.md.
+- Inferred repo.build from pyproject.toml as `python -m build`.
+- Inferred repo.test from pyproject.toml as `python -m pytest`.
+- Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+A prior verified status was preserved because no previously present field regressed in this refresh.

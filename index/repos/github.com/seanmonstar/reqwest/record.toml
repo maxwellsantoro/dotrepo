@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/seanmonstar/reqwest"
-generated_at = "2026-07-01T18:27:29.809461Z"
+generated_at = "2026-07-06T19:00:54.67724Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "reqwest"
-description = "An ergonomic, batteries-included HTTP Client for Rust."
+description = "An easy and powerful Rust HTTP Client"
 homepage = "https://docs.rs/reqwest"
 license = "Apache-2.0"
 visibility = "public"
@@ -28,6 +29,10 @@ topics = [
     "http",
     "http-client",
 ]
+
+[repo.toolchain]
+min = "1.85.0"
+ecosystem = "Rust"
 
 [docs]
 root = "https://docs.rs/reqwest"
@@ -52,6 +57,6 @@ archived = false
 clone_url = "https://github.com/seanmonstar/reqwest.git"
 default_branch = "master"
 fork = false
-head_sha = "ea3d9ca6877620aa571cd67246c0c37a09fdd2e8"
+head_sha = "065a5ae5209d27d4f4e3c4409725672c49a8aa39"
 html_url = "https://github.com/seanmonstar/reqwest"
-stars = 11704
+stars = 11714

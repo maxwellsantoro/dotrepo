@@ -1,16 +1,19 @@
 # Evidence
 
-- Imported repository name and description from README.md.
-- Imported repo.build from build.gradle.kts as `./gradlew build`.
-- Imported repo.test from build.gradle.kts as `./gradlew test`.
+- Imported repository name from README.md.
+- Inferred repo.build from build.gradle.kts as `./gradlew build`.
+- Inferred repo.test from build.gradle.kts as `./gradlew test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.name` to `HyperCeiler` from `GitHub API` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+A prior verified status was preserved because no previously present field regressed in this refresh.

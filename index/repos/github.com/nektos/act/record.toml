@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nektos/act"
-generated_at = "2026-07-01T18:17:43.263255Z"
+generated_at = "2026-07-06T18:53:48.428238Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `Makefile`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "act"
-description = "Let's see it in action with a sample repo!"
+description = "Run your GitHub Actions locally 🚀"
 homepage = "https://nektosact.com"
 license = "MIT"
 visibility = "public"
@@ -26,14 +27,18 @@ languages = [
     "Shell",
     "Makefile",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make build"
+test = "make test"
 topics = [
     "github-actions",
     "golang",
     "ci",
     "devops",
 ]
+
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
 
 [docs]
 root = "https://nektosact.com"
@@ -45,4 +50,4 @@ default_branch = "master"
 fork = false
 head_sha = "4f411281417e88660bea1c1a1749aa71ae0bd60f"
 html_url = "https://github.com/nektos/act"
-stars = 70905
+stars = 70964

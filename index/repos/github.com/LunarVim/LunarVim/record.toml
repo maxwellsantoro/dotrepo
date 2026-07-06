@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/LunarVim/LunarVim"
-generated_at = "2026-07-01T17:19:34.312501Z"
+generated_at = "2026-07-06T18:29:39.939949Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Last commit"
-description = "An IDE layer for Neovim with sane defaults."
+name = "LunarVim"
+description = "🌙 LunarVim is an IDE layer for Neovim. Completely free and community driven."
 homepage = "https://www.lunarvim.org"
 license = "GPL-3.0"
 visibility = "public"
@@ -58,4 +58,4 @@ default_branch = "master"
 fork = false
 head_sha = "aa51c20f3404cb482e9c6fd6e5e4a4bf5b1612aa"
 html_url = "https://github.com/LunarVim/LunarVim"
-stars = 19259
+stars = 19264

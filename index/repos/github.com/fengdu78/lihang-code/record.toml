@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/fengdu78/lihang-code"
-generated_at = "2026-07-01T18:02:06.332145Z"
+generated_at = "2026-07-06T18:42:08.04778Z"
 
 [record.trust]
 confidence = "high"
@@ -17,7 +17,7 @@ notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred default
 
 [repo]
 name = "lihang-code"
-description = "第1章 统计学习方法概论"
+description = "《统计学习方法》的代码实现"
 homepage = "https://github.com/fengdu78/lihang-code"
 visibility = "public"
 languages = ["Jupyter Notebook"]
@@ -30,4 +30,4 @@ default_branch = "master"
 fork = false
 head_sha = "a0b8ab2366b658b7f376b7d360d4257298986532"
 html_url = "https://github.com/fengdu78/lihang-code"
-stars = 19592
+stars = 19593

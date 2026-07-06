@@ -1,16 +1,14 @@
 # Evidence
 
-- Imported repository name and description from README.md.
-- Inferred repo.build from .github/workflows/release.yml as `chmod +x android/gradlew`.
-- Inferred repo.test from .github/workflows/release.yml as `chmod +x android/gradlew`.
+- Imported repository name from README.md.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Auto-promotion
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

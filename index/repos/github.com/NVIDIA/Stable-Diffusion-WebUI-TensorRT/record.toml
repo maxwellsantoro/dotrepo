@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/NVIDIA/Stable-Diffusion-WebUI-TensorRT"
-generated_at = "2026-07-01T17:19:49.968491Z"
+generated_at = "2026-07-06T18:30:00.746435Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "TensorRT Extension for Stable Diffusion"
-description = "This extension enables the best performance on NVIDIA RTX GPUs for Stable Diffusion with TensorRT."
+name = "Stable-Diffusion-WebUI-TensorRT"
+description = "TensorRT Extension for Stable Diffusion Web UI"
 homepage = "https://github.com/NVIDIA/Stable-Diffusion-WebUI-TensorRT"
 license = "MIT"
 visibility = "public"
@@ -30,4 +30,4 @@ default_branch = "main"
 fork = false
 head_sha = "b75f5604a7e4534899c720ef8db5e15042b2b9f9"
 html_url = "https://github.com/NVIDIA/Stable-Diffusion-WebUI-TensorRT"
-stars = 1991
+stars = 1992

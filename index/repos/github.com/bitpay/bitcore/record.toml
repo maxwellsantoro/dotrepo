@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/bitpay/bitcore"
-generated_at = "2026-07-01T17:26:13.153558Z"
+generated_at = "2026-07-06T18:36:12.814947Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "Bitcore Monorepo"
-description = "Infrastructure to build Bitcoin and blockchain-based applications for the next generation of financial technology."
+description = "A full stack for bitcoin and blockchain-based applications"
 homepage = "https://bitcore.io/"
 license = "MIT"
 visibility = "public"
@@ -42,4 +42,4 @@ default_branch = "master"
 fork = false
 head_sha = "75b3e4a5c5f3bbd630e8a2546624f3cf1aed4c58"
 html_url = "https://github.com/bitpay/bitcore"
-stars = 4987
+stars = 4988

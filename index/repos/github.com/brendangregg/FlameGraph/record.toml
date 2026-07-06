@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/brendangregg/FlameGraph"
-generated_at = "2026-07-01T17:26:35.898098Z"
+generated_at = "2026-07-06T18:36:37.747257Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Flame Graphs visualize profiled code"
-description = "Example (click to zoom):"
+description = "Stack trace visualizer"
 homepage = "http://www.brendangregg.com/flamegraphs.html"
 visibility = "public"
 languages = [
@@ -39,4 +39,4 @@ default_branch = "master"
 fork = false
 head_sha = "41fee1f99f9276008b7cd112fca19dc3ea84ac32"
 html_url = "https://github.com/brendangregg/FlameGraph"
-stars = 19574
+stars = 19583

@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jesseduffield/lazydocker"
-generated_at = "2026-07-01T18:09:37.344939Z"
+generated_at = "2026-07-06T18:48:23.295917Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Warp"
-description = "Warp, the intelligent terminal"
+name = "lazydocker"
+description = "The lazier way to manage everything docker"
 homepage = "https://github.com/jesseduffield/lazydocker"
 license = "MIT"
 visibility = "public"
@@ -29,6 +30,10 @@ build = "go build ./..."
 test = "go test ./..."
 topics = []
 
+[repo.toolchain]
+min = "1.22"
+ecosystem = "Go"
+
 [docs]
 getting_started = "https://github.com/jesseduffield/lazydocker#installation"
 
@@ -39,4 +44,4 @@ default_branch = "master"
 fork = false
 head_sha = "7e7aadc2071d58031bf2daafca1fbd4093efc23f"
 html_url = "https://github.com/jesseduffield/lazydocker"
-stars = 51547
+stars = 51769

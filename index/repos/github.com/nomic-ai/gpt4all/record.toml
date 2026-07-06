@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nomic-ai/gpt4all"
-generated_at = "2026-07-01T18:18:37.596583Z"
+generated_at = "2026-07-06T18:54:32.83853Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "GPT4All"
-description = "Now with support for DeepSeek R1 Distillations"
+description = "GPT4All: Run Local LLMs on Any Device. Open-source and available for commercial use."
 homepage = "https://nomic.ai/gpt4all"
 license = "MIT"
 visibility = "public"
@@ -51,4 +51,4 @@ default_branch = "main"
 fork = false
 head_sha = "b666d16db5aeab8b91aaf7963adcee9c643734d7"
 html_url = "https://github.com/nomic-ai/gpt4all"
-stars = 77379
+stars = 77388

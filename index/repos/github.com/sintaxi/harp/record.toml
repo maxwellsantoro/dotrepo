@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/sintaxi/harp"
-generated_at = "2026-07-01T18:29:09.953067Z"
+generated_at = "2026-07-06T19:01:54.713382Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Harp"
@@ -34,6 +34,10 @@ languages = [
 ]
 test = "npm test"
 topics = []
+
+[repo.toolchain]
+min = "6"
+ecosystem = "Node.js"
 
 [owners]
 maintainers = []
@@ -64,4 +68,4 @@ default_branch = "master"
 fork = false
 head_sha = "a7b3baea426d272c9836cd6faf18ec040578e7cc"
 html_url = "https://github.com/sintaxi/harp"
-stars = 4996
+stars = 4995

@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/gomodule/redigo"
-generated_at = "2026-07-01T18:04:33.375053Z"
+generated_at = "2026-07-06T20:23:43.645172Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.markdown` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.markdown` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Redigo"
-description = 'Install Redigo using the "go get" command:'
+description = "Go client for Redis"
 homepage = "https://github.com/gomodule/redigo"
 license = "Apache-2.0"
 visibility = "public"
@@ -28,6 +29,10 @@ topics = [
     "redis",
 ]
 
+[repo.toolchain]
+min = "1.17"
+ecosystem = "Go"
+
 [docs]
 root = "https://pkg.go.dev/github.com/gomodule/redigo/redis"
 
@@ -38,4 +43,4 @@ default_branch = "master"
 fork = false
 head_sha = "57c8b99ccb90c3401bec6e09289081e8b78b3bde"
 html_url = "https://github.com/gomodule/redigo"
-stars = 9861
+stars = 9860

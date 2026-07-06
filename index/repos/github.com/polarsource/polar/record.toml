@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/polarsource/polar"
-generated_at = "2026-07-01T18:21:40.80907Z"
+generated_at = "2026-07-06T18:57:00.104773Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. Maintai
 
 [repo]
 name = "Polar"
-description = "Turn usage into revenue."
+description = "Polar — A billing platform for the intelligence era"
 homepage = "https://polar.sh"
 license = "Apache-2.0"
 visibility = "public"
@@ -30,8 +30,8 @@ languages = [
     "Swift",
     "CSS",
     "Dockerfile",
-    "HTML",
     "Just",
+    "HTML",
     "Mako",
     "Nix",
     "Ruby",
@@ -56,10 +56,10 @@ topics = [
 [owners]
 maintainers = [
     "@polarsource/engineering",
-    "@frankie567",
     "@Yopi",
     "@pieterbeulque",
     "@psincraian",
+    "@frankie567",
     "@sebastianekstrom",
     "@emilwidlund",
     "@victoriabolin",
@@ -76,6 +76,6 @@ archived = false
 clone_url = "https://github.com/polarsource/polar.git"
 default_branch = "main"
 fork = false
-head_sha = "a89912f0911674a5e1504469d5ed123029699295"
+head_sha = "659789e8faa38ba04da1859fd793f11403974e14"
 html_url = "https://github.com/polarsource/polar"
-stars = 10003
+stars = 10042

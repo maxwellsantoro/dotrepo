@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hashicorp/terraform"
-generated_at = "2026-07-01T18:06:36.717705Z"
+generated_at = "2026-07-06T18:45:56.060844Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/terraform-core` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `go.mod`, and `.github/CONTRIBUTING.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/terraform-core` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.build` from `go.mod`. Imported `repo.test` from `.github/CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Terraform"
-description = "Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently."
+description = "Terraform enables you to safely and predictably create, change, and improve infrastructure. It is a source-available tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned."
 homepage = "http://developer.hashicorp.com/terraform"
 license = "NOASSERTION"
 visibility = "public"
@@ -36,6 +37,10 @@ topics = [
     "cloud",
     "cloud-management",
 ]
+
+[repo.toolchain]
+min = "1.26.4"
+ecosystem = "Go"
 
 [owners]
 maintainers = [
@@ -57,6 +62,6 @@ archived = false
 clone_url = "https://github.com/hashicorp/terraform.git"
 default_branch = "main"
 fork = false
-head_sha = "8d3a8b76ecf1ead119c4fc5951e8f5130df1db90"
+head_sha = "144d42f23d8b4fedd787724ae7ff50fbfba5ea04"
 html_url = "https://github.com/hashicorp/terraform"
-stars = 48747
+stars = 48835

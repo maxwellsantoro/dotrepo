@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kortix-ai/suna"
-generated_at = "2026-07-01T18:11:59.915151Z"
+generated_at = "2026-07-06T18:50:22.921569Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Kortix"
-description = "The AI command center for your company"
+name = "suna"
+description = "The Company AI Command Center"
 homepage = "https://www.kortix.com"
 license = "NOASSERTION"
 visibility = "public"
@@ -24,9 +24,9 @@ languages = [
     "TypeScript",
     "Python",
     "Shell",
-    "PLpgSQL",
-    "HCL",
     "MDX",
+    "HCL",
+    "PLpgSQL",
     "JavaScript",
     "CSS",
     "HTML",
@@ -59,6 +59,6 @@ archived = false
 clone_url = "https://github.com/kortix-ai/suna.git"
 default_branch = "main"
 fork = false
-head_sha = "a7c7a047efdea7563a9fb6fb2924e324c03a63bc"
+head_sha = "eb23048abd572087ccf8b90a39349ebca0176201"
 html_url = "https://github.com/kortix-ai/suna"
-stars = 19904
+stars = 19920

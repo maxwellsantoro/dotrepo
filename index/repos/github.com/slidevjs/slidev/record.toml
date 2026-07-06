@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/slidevjs/slidev"
-generated_at = "2026-07-01T18:29:18.567213Z"
+generated_at = "2026-07-06T19:02:01.254857Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Slidev"
-description = "Presentation slides for developers 🧑‍💻👩‍💻👨‍💻"
+description = "Presentation Slides for Developers"
 homepage = "https://sli.dev"
 license = "MIT"
 visibility = "public"
@@ -38,6 +38,10 @@ topics = [
     "markdown",
 ]
 
+[repo.toolchain]
+min = "20.12.0"
+ecosystem = "Node.js"
+
 [docs]
 root = "https://sli.dev"
 
@@ -46,6 +50,6 @@ archived = false
 clone_url = "https://github.com/slidevjs/slidev.git"
 default_branch = "main"
 fork = false
-head_sha = "a0bd1b3b483d96d2de5a49690d8898220dfb58cf"
+head_sha = "c63cb1207d3bc8e0757cfc841c860a3ca317ffc1"
 html_url = "https://github.com/slidevjs/slidev"
-stars = 47465
+stars = 47550

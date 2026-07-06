@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/type-challenges/type-challenges"
-generated_at = "2026-07-01T18:34:34.545565Z"
+generated_at = "2026-07-06T19:05:16.077435Z"
 
 [record.trust]
 confidence = "high"
@@ -13,10 +13,10 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Intro"
+name = "type-challenges"
 description = "Collection of TypeScript type challenges with online judge"
 homepage = "https://tsch.js.org/"
 license = "MIT"
@@ -61,4 +61,4 @@ default_branch = "main"
 fork = false
 head_sha = "0b0b0b18bcb7ac42dc22ce26ffb438231d4754b1"
 html_url = "https://github.com/type-challenges/type-challenges"
-stars = 48279
+stars = 48295

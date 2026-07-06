@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/KoljaB/RealtimeSTT"
-generated_at = "2026-07-01T17:18:54.44546Z"
+generated_at = "2026-07-06T18:29:13.362774Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "RealtimeSTT"
-description = "RealtimeSTT is a Python speech-to-text library for applications that need voice activity detection, fast transcription, optional realtime text updates, wake words, and direct access to audio streams."
+description = "A robust, efficient, low-latency speech-to-text library with advanced voice activity detection, wake word activation and instant transcription."
 homepage = "https://github.com/KoljaB/RealtimeSTT"
 license = "MIT"
 visibility = "public"
@@ -40,4 +40,4 @@ default_branch = "master"
 fork = false
 head_sha = "a89fabb05ffe1933ec30d70e17fe73465eea3358"
 html_url = "https://github.com/KoljaB/RealtimeSTT"
-stars = 9943
+stars = 9961

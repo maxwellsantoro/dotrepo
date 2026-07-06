@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/cli/cli"
-generated_at = "2026-07-01T17:27:39.626126Z"
+generated_at = "2026-07-06T18:37:40.371777Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `go.mod`. Filled `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@cli/code-reviewers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `.github/workflows/go.yml`, `Makefile`, and `go.mod`. Filled `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@cli/code-reviewers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/go.yml`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "GitHub CLI"
@@ -27,7 +27,7 @@ languages = [
     "PowerShell",
     "Batchfile",
 ]
-build = "go build ./..."
+build = "go build -v ./cmd/gh"
 test = "go test ./..."
 topics = [
     "github-api-v4",
@@ -35,6 +35,10 @@ topics = [
     "git",
     "golang",
 ]
+
+[repo.toolchain]
+min = "1.26.0"
+ecosystem = "Go"
 
 [owners]
 maintainers = [
@@ -52,6 +56,6 @@ archived = false
 clone_url = "https://github.com/cli/cli.git"
 default_branch = "trunk"
 fork = false
-head_sha = "ff4e4a255006ca98e3036bd0f8d98374a405835f"
+head_sha = "27762fcfe431924c1a6c0baab994ef755ddc73dc"
 html_url = "https://github.com/cli/cli"
-stars = 45086
+stars = 45149

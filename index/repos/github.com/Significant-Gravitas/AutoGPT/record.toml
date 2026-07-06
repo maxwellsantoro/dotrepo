@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Significant-Gravitas/AutoGPT"
-generated_at = "2026-07-01T17:21:23.399844Z"
+generated_at = "2026-07-06T18:31:34.709202Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.test` from `.github/workflows/classic-autogpt-ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `.github/workflows/classic-autogpt-ci.yml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.test` from `.github/workflows/classic-autogpt-ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "AutoGPT"
-description = "**AutoGPT** is a powerful platform that allows you to create, deploy, and manage continuous AI agents that automate complex workflows."
+description = "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters."
 homepage = "https://agpt.co"
 license = "NOASSERTION"
 visibility = "public"
@@ -87,4 +87,4 @@ default_branch = "master"
 fork = false
 head_sha = "e2711b1748bdc3fe702ab4e44c6a11df98458c53"
 html_url = "https://github.com/Significant-Gravitas/AutoGPT"
-stars = 185229
+stars = 185403

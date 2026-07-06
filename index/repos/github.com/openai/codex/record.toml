@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/openai/codex"
-generated_at = "2026-07-01T18:20:10.38321Z"
+generated_at = "2026-07-06T18:55:43.900611Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.test` unset because `.github/workflows/bazel.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `justfile`, and `package.json`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `justfile`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Codex CLI splash"
-description = "If you want Codex in your code editor (VS Code, Cursor, Windsurf), install in your IDE."
+description = "Lightweight coding agent that runs in your terminal"
 homepage = "https://github.com/openai/codex"
 license = "Apache-2.0"
 visibility = "public"
@@ -36,7 +36,12 @@ languages = [
     "Dockerfile",
     "C",
 ]
+test = "just test"
 topics = []
+
+[repo.toolchain]
+min = "22"
+ecosystem = "Node.js"
 
 [owners]
 maintainers = ["@openai/codex-core-agent-team"]
@@ -48,6 +53,6 @@ archived = false
 clone_url = "https://github.com/openai/codex.git"
 default_branch = "main"
 fork = false
-head_sha = "d059658ad1920bdb36e98798f44009a5f4c51735"
+head_sha = "a86d525e4d28b299d2522cbef844675203e86084"
 html_url = "https://github.com/openai/codex"
-stars = 94869
+stars = 95854

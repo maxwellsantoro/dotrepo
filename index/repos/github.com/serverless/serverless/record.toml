@@ -4,16 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/serverless/serverless"
-generated_at = "2026-07-01T18:28:26.588468Z"
+generated_at = "2026-07-06T19:01:18.486634Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/ci-binary-installer.yml`, `.github/workflows/ci-framework.yml`, `.github/workflows/release-binary-installer.yml`, and `.github/workflows/release-framework.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/ci-binary-installer.yml` and `.github/workflows/ci-framework.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Serverless Framework"
-description = "**January 2026** – V.4 continues to feature significant updates."
+description = "⚡ Serverless Framework – Effortlessly build apps that auto-scale, incur zero costs when idle, and require minimal maintenance using AWS Lambda and other managed cloud services."
 homepage = "https://serverless.com"
 license = "NOASSERTION"
 visibility = "public"
@@ -30,7 +30,6 @@ languages = [
     "HCL",
     "Makefile",
 ]
-build = "npm run build"
 test = "npm test"
 topics = [
     "serverless",
@@ -43,6 +42,14 @@ topics = [
     "microservice",
     "aws-dynamodb",
 ]
+
+[[repo.build_candidates]]
+command = "make build-prod"
+source = ".github/workflows/ci-binary-installer.yml"
+
+[[repo.build_candidates]]
+command = "npm run build"
+source = ".github/workflows/ci-framework.yml"
 
 [owners]
 maintainers = []
@@ -58,4 +65,4 @@ default_branch = "main"
 fork = false
 head_sha = "b5ff282fe22cc22c0dc1a4f8b2dfc43085256b81"
 html_url = "https://github.com/serverless/serverless"
-stars = 46908
+stars = 46913

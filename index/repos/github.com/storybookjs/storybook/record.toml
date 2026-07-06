@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/storybookjs/storybook"
-generated_at = "2026-07-01T18:30:35.266419Z"
+generated_at = "2026-07-06T19:03:10.420529Z"
 
 [record.trust]
 confidence = "medium"
@@ -13,7 +13,7 @@ notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `packag
 
 [repo]
 name = "Storybook"
-description = "Build bulletproof UI components faster"
+description = "Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation"
 homepage = "https://storybook.js.org"
 license = "MIT"
 visibility = "public"
@@ -56,6 +56,14 @@ topics = [
     "stories",
 ]
 
+[[repo.build_candidates]]
+command = "yarn nx run-many --targets compile --no-cloud"
+source = ".github/workflows/copilot-setup-steps.yml"
+
+[[repo.build_candidates]]
+command = "yarn task --task compile --start-from=compile"
+source = ".github/workflows/fork-checks.yml"
+
 [owners]
 maintainers = [
     "@kylegach",
@@ -71,6 +79,6 @@ archived = false
 clone_url = "https://github.com/storybookjs/storybook.git"
 default_branch = "next"
 fork = false
-head_sha = "cf9b1ce71f382c6d6a47eaaf0d4ce50b30b23668"
+head_sha = "fac05a57415eec36b0a72b383befd7ef5071572c"
 html_url = "https://github.com/storybookjs/storybook"
-stars = 90409
+stars = 90495

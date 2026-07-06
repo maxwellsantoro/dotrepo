@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/equalsraf/neovim-qt"
-generated_at = "2026-07-01T18:00:42.812682Z"
+generated_at = "2026-07-06T18:40:39.660963Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github
 
 [repo]
 name = "Neovim Qt"
-description = "Neovim Qt is a lightweight cross-platform Neovim GUI written in C++ with Qt."
+description = "Neovim client library and GUI, in Qt5."
 homepage = "https://github.com/equalsraf/neovim-qt/wiki"
 license = "ISC"
 visibility = "public"

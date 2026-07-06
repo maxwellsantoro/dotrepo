@@ -4,16 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/senchalabs/connect"
-generated_at = "2026-07-01T18:27:38.512191Z"
+generated_at = "2026-07-06T19:01:06.007482Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Install Connect"
-description = 'The main component is a Connect "app".'
+description = 'Connect is an extensible HTTP server framework for node using "plugins" known as middleware.'
 homepage = "https://github.com/senchalabs/connect"
 license = "MIT"
 visibility = "public"
@@ -23,6 +23,10 @@ topics = [
     "javascript",
     "nodejs",
 ]
+
+[repo.toolchain]
+min = "0.10.0"
+ecosystem = "Node.js"
 
 [owners]
 maintainers = []

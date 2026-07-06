@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/coqui-ai/TTS"
-generated_at = "2026-07-01T17:51:15.625602Z"
+generated_at = "2026-07-06T18:38:27.524807Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `Makefile`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Coqui.ai News"
-description = "🐸TTS is a library for advanced Text-to-Speech generation."
+name = "TTS"
+description = "🐸💬 - a deep learning toolkit for Text-to-Speech, battle-tested in research and production"
 homepage = "http://coqui.ai"
 license = "MPL-2.0"
 visibility = "public"
@@ -30,7 +31,7 @@ languages = [
     "Dockerfile",
 ]
 build = "python -m build"
-test = "python -m pytest"
+test = "make test"
 topics = [
     "python",
     "text-to-speech",
@@ -63,4 +64,4 @@ default_branch = "dev"
 fork = false
 head_sha = "dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e"
 html_url = "https://github.com/coqui-ai/TTS"
-stars = 45666
+stars = 45699

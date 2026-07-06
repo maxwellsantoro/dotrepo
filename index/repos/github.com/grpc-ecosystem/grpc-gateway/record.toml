@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/grpc-ecosystem/grpc-gateway"
-generated_at = "2026-07-01T18:05:56.948889Z"
+generated_at = "2026-07-06T18:45:09.207782Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, `Makefile`, and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "gRPC-Gateway"
@@ -27,7 +27,7 @@ languages = [
     "Makefile",
 ]
 build = "go build ./..."
-test = "go test ./..."
+test = "make test"
 topics = [
     "go",
     "grpc",
@@ -38,6 +38,10 @@ topics = [
     "openapi",
 ]
 
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
+
 [docs]
 root = "https://grpc.io/docs/"
 
@@ -46,6 +50,6 @@ archived = false
 clone_url = "https://github.com/grpc-ecosystem/grpc-gateway.git"
 default_branch = "main"
 fork = false
-head_sha = "c09d450dfc9663193f72536c22b0cac328db168c"
+head_sha = "e1c5f8deb96d0b3a1143959f40a09c71c543f07e"
 html_url = "https://github.com/grpc-ecosystem/grpc-gateway"
-stars = 19938
+stars = 19946

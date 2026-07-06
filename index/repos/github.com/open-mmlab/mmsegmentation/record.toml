@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/open-mmlab/mmsegmentation"
-generated_at = "2026-07-01T18:19:58.41213Z"
+generated_at = "2026-07-06T18:55:37.604976Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "mmsegmentation"
-description = "MMSegmentation v1.x brings remarkable improvements over the 0.x release, offering a more flexible and feature-packed experience."
+description = "OpenMMLab Semantic Segmentation Toolbox and Benchmark."
 homepage = "https://mmsegmentation.readthedocs.io/en/main/"
 license = "Apache-2.0"
 visibility = "public"
@@ -50,4 +51,4 @@ default_branch = "main"
 fork = false
 head_sha = "b040e147adfa027bbc071b624bedf0ae84dfc922"
 html_url = "https://github.com/open-mmlab/mmsegmentation"
-stars = 9866
+stars = 9872

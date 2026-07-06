@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/minimaxir/big-list-of-naughty-strings"
-generated_at = "2026-07-01T18:16:41.875977Z"
+generated_at = "2026-07-06T18:53:15.955807Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "Big List of Naughty Strings"
-description = "The Big List of Naughty Strings is an evolving list of strings which have a high probability of causing issues when used as user-input data."
+description = "The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data."
 homepage = "https://github.com/minimaxir/big-list-of-naughty-strings"
 license = "MIT"
 visibility = "public"
@@ -50,4 +50,4 @@ default_branch = "master"
 fork = false
 head_sha = "db33ec7b1d5d9616a88c76394b7d0897bd0b97eb"
 html_url = "https://github.com/minimaxir/big-list-of-naughty-strings"
-stars = 47693
+stars = 47694

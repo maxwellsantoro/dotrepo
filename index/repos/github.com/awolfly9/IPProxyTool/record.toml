@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/awolfly9/IPProxyTool"
-generated_at = "2026-07-01T17:25:21.866197Z"
+generated_at = "2026-07-06T18:35:29.441512Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "IPProxyTool"
-description = "使用 scrapy 爬虫抓取代理网站，获取大量的免费代理 ip。过滤出所有可用的 ip，存入数据库以备使用。 可以访问我的个人站点，查看我的更多有趣项目 西瓜"
+description = "python ip proxy tool  scrapy crawl. 抓取大量免费代理 ip，提取有效 ip 使用"
 homepage = "https://github.com/awolfly9/IPProxyTool"
 license = "MIT"
 visibility = "public"

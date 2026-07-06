@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/asgeirtj/system_prompts_leaks"
-generated_at = "2026-07-01T17:25:01.368753Z"
+generated_at = "2026-07-06T18:35:14.757306Z"
 
 [record.trust]
 confidence = "high"
@@ -16,11 +16,14 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "System Prompts Leaks"
-description = "The purpose of this repo is to document the System Prompt instructions for all the AI chatbots out there - Claude, ChatGPT, Gemini etc."
+description = "Extracted system prompts from Anthropic - Claude Fable 5, Opus 4.8, Claude Code, Claude Design. OpenAI - ChatGPT 5.5 Thinking, GPT 5.5 Instant, Codex. Google - Gemini 3.5 Flash, 3.1 Pro, Antigravity. xAI - Grok, Cursor, Copilot, VS Code, Perplexity, and more. Updated regularly."
 homepage = "https://asgeirtj.github.io/system_prompts_leaks/"
 license = "CC0-1.0"
 visibility = "public"
-languages = ["JavaScript"]
+languages = [
+    "JavaScript",
+    "Python",
+]
 topics = [
     "ai",
     "anthropic",
@@ -52,6 +55,6 @@ archived = false
 clone_url = "https://github.com/asgeirtj/system_prompts_leaks.git"
 default_branch = "main"
 fork = false
-head_sha = "feff4a1a5372f491af7c9579760c87c62784251b"
+head_sha = "267c1547d717d8fba52685c84df28a7f8cb94a90"
 html_url = "https://github.com/asgeirtj/system_prompts_leaks"
-stars = 47596
+stars = 51192

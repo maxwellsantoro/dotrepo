@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tokio-rs/axum"
-generated_at = "2026-07-01T18:33:16.590758Z"
+generated_at = "2026-07-06T19:04:43.380804Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `Cargo.toml` and `.github/workflows/CI.yml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `.github/workflows/CI.yml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "axum"
@@ -27,12 +27,16 @@ languages = [
     "JavaScript",
 ]
 build = "cargo build --workspace"
-test = "cargo test --workspace"
+test = "cargo test"
 topics = [
     "http",
     "routing",
     "rust",
 ]
+
+[repo.toolchain]
+min = "1.80"
+ecosystem = "Rust"
 
 [x.github]
 archived = false
@@ -41,4 +45,4 @@ default_branch = "main"
 fork = false
 head_sha = "b90b8e02d0f761ce36a13610acd2afa60984a5e2"
 html_url = "https://github.com/tokio-rs/axum"
-stars = 26403
+stars = 26450

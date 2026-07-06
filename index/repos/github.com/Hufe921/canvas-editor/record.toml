@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Hufe921/canvas-editor"
-generated_at = "2026-07-01T17:17:53.148879Z"
+generated_at = "2026-07-06T18:28:04.531275Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Canvas Editor"
-description = "Live Demo · Documentation · Report Bug · Request Feature · Discussions"
+description = "A Canvas/SVG-based rich text editor"
 homepage = "https://hufe.club/canvas-editor-docs"
 license = "MIT"
 visibility = "public"
@@ -46,6 +46,10 @@ topics = [
     "word",
     "ai",
 ]
+
+[repo.toolchain]
+min = "24.13.1"
+ecosystem = "Node.js"
 
 [docs]
 root = "https://hufe.club/canvas-editor-docs"
@@ -82,6 +86,6 @@ archived = false
 clone_url = "https://github.com/Hufe921/canvas-editor.git"
 default_branch = "main"
 fork = false
-head_sha = "3a223a9f08b09d8bbd5638fc6b30ec379fc52b2b"
+head_sha = "ef55657459c685d16f91875b26f8fd3debe9719c"
 html_url = "https://github.com/Hufe921/canvas-editor"
-stars = 4974
+stars = 4983

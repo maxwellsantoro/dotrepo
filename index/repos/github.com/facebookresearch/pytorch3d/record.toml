@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/facebookresearch/pytorch3d"
-generated_at = "2026-07-01T18:01:44.199423Z"
+generated_at = "2026-07-06T18:41:39.17068Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Tutorials"
-description = "Get started with PyTorch3D by trying one of the tutorial notebooks."
+name = "pytorch3d"
+description = "PyTorch3D is FAIR's library of reusable components for deep learning with 3D data"
 homepage = "https://pytorch3d.org/"
 license = "NOASSERTION"
 visibility = "public"
@@ -42,4 +42,4 @@ default_branch = "main"
 fork = false
 head_sha = "c8fcd83ff96fa0a5893c0b994f9285d7aa772540"
 html_url = "https://github.com/facebookresearch/pytorch3d"
-stars = 9910
+stars = 9915

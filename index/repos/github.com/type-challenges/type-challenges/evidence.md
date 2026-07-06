@@ -5,12 +5,14 @@
 - Imported repo.build from package.json as `pnpm build`.
 - Discovered related relation to github.com/antfu/type-challenges from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.name` to `type-challenges` from `GitHub API` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

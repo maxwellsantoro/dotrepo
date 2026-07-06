@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/lib/pq"
-generated_at = "2026-07-01T18:12:52.524198Z"
+generated_at = "2026-07-06T20:40:23.029115Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Connecting"
-description = "Use the `postgres driver name in the `sql.Open()` call:"
+name = "pq"
+description = "Go PostgreSQL driver for database/sql"
 homepage = "https://pkg.go.dev/github.com/lib/pq"
 license = "MIT"
 visibility = "public"
@@ -25,6 +26,10 @@ build = "go build ./..."
 test = "go test ./..."
 topics = []
 
+[repo.toolchain]
+min = "1.23"
+ecosystem = "Go"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/lib/pq.git"
@@ -32,4 +37,4 @@ default_branch = "master"
 fork = false
 head_sha = "76df97d6b105229ea6ee82dda41f3f53e5f95010"
 html_url = "https://github.com/lib/pq"
-stars = 9902
+stars = 9904

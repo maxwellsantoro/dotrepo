@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hydraponique/roscomvpn-routing"
-generated_at = "2026-07-01T18:07:31.717716Z"
+generated_at = "2026-07-06T18:46:49.028228Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Downloads"
-description = "Готовые конфигурации маршрутизации для Happ, INCY и Mihomo (Clash Meta, Clash Mi и др.)"
+name = "roscomvpn-routing"
+description = "Custom routing rules for Happ, INCY, Mihomo with Deeplink"
 homepage = "https://t.me/vpnrouting"
 visibility = "public"
 languages = ["Python"]
@@ -30,6 +30,6 @@ archived = false
 clone_url = "https://github.com/hydraponique/roscomvpn-routing.git"
 default_branch = "main"
 fork = false
-head_sha = "b1f3f63f78798919ae99b912d9c0506df5aa1898"
+head_sha = "9fe3c674950113b1d30a5979d3a2ea2b00f14746"
 html_url = "https://github.com/hydraponique/roscomvpn-routing"
-stars = 2023
+stars = 2069

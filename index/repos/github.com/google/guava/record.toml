@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/google/guava"
-generated_at = "2026-07-01T18:04:50.669521Z"
+generated_at = "2026-07-06T20:23:48.281205Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pom.xml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `pom.xml`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Guava"
@@ -42,6 +42,6 @@ archived = false
 clone_url = "https://github.com/google/guava.git"
 default_branch = "master"
 fork = false
-head_sha = "a97d860d6a93456a1484b8c860c0d56d1abeed0a"
+head_sha = "337bb45445e037488794ac3fd2bb737e36cae858"
 html_url = "https://github.com/google/guava"
-stars = 51504
+stars = 51514

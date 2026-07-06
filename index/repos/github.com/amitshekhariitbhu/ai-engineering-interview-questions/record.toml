@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
-generated_at = "2026-07-01T17:24:01.786609Z"
+generated_at = "2026-07-06T18:34:28.033355Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "ai-engineering-interview-questions"
-description = "AI Engineering Interview Questions and Answers - Your Cheat Sheet For AI Engineering Interviews"
+description = "Your Cheat Sheet for AI Engineering Interview – Questions and Answers."
 homepage = "https://outcomeschool.com/program/ai-and-machine-learning"
 license = "Apache-2.0"
 visibility = "public"
@@ -45,6 +46,6 @@ archived = false
 clone_url = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions.git"
 default_branch = "main"
 fork = false
-head_sha = "8e5b85d58c16c446da786779008d0ee7c2d3f19d"
+head_sha = "4a7368cba7428ac6f21fbb0b0204623cc687ffbf"
 html_url = "https://github.com/amitshekhariitbhu/ai-engineering-interview-questions"
-stars = 2034
+stars = 2078

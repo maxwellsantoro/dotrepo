@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nginx/nginx"
-generated_at = "2026-07-01T18:18:06.896906Z"
+generated_at = "2026-07-06T18:54:05.588744Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay boo
 
 [repo]
 name = "NGINX Banner"
-description = """NGINX (pronounced "engine x" or "en-jin-eks") is the world's most popular Web Server, high performance Load Balancer, Reverse Proxy, API Gateway and Content Cache."""
+description = "The official NGINX Open Source repository."
 homepage = "https://nginx.org/"
 license = "BSD-2-Clause"
 visibility = "public"
@@ -75,6 +75,6 @@ archived = false
 clone_url = "https://github.com/nginx/nginx.git"
 default_branch = "master"
 fork = false
-head_sha = "8f3465ac7f02b0ae86304e1be4ed319abb9d2edb"
+head_sha = "29c23ad846787e8baa1390b2edca479eb63ea8d7"
 html_url = "https://github.com/nginx/nginx"
-stars = 31015
+stars = 31110

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/testing-library/react-testing-library"
-generated_at = "2026-07-01T18:32:31.896146Z"
+generated_at = "2026-07-06T19:04:11.787862Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "React Testing Library"
-description = "Simple and complete React DOM testing utilities that encourage good testing practices."
+description = "🐐 Simple and complete React DOM testing utilities that encourage good testing practices."
 homepage = "https://testing-library.com/react"
 license = "MIT"
 visibility = "public"
@@ -31,6 +31,10 @@ topics = [
     "testing",
     "javascript",
 ]
+
+[repo.toolchain]
+min = "18"
+ecosystem = "Node.js"
 
 [docs]
 root = "https://testing-library.com/react"
@@ -69,4 +73,4 @@ default_branch = "main"
 fork = false
 head_sha = "be9d81d91314c9f0bafaa363f70b409b4b31989c"
 html_url = "https://github.com/testing-library/react-testing-library"
-stars = 19614
+stars = 19617

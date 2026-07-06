@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/karan/Projects"
-generated_at = "2026-07-01T18:11:23.858182Z"
+generated_at = "2026-07-06T18:49:41.945926Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Mega Project List"
-description = "A list of practical projects that anyone can solve in any programming language (See solutions)."
+name = "Projects"
+description = ":page_with_curl: A list of practical projects that anyone can solve in any programming language."
 homepage = "https://twitter.com/karangoel"
 license = "MIT"
 visibility = "public"
@@ -48,4 +48,4 @@ default_branch = "master"
 fork = false
 head_sha = "10ed1c05166c66aa1b1085b92d95b67ad5268182"
 html_url = "https://github.com/karan/Projects"
-stars = 47772
+stars = 47782

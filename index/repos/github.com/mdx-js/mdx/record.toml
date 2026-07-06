@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mdx-js/mdx"
-generated_at = "2026-07-01T18:14:32.124586Z"
+generated_at = "2026-07-06T18:52:13.312269Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Markdown for the component era"
-description = "[MDX][website] is an authorable format that lets you seamlessly write JSX in your markdown documents."
+name = "mdx"
+description = "Markdown for the component era"
 homepage = "https://mdxjs.com"
 license = "MIT"
 visibility = "public"
@@ -45,6 +45,6 @@ archived = false
 clone_url = "https://github.com/mdx-js/mdx.git"
 default_branch = "main"
 fork = false
-head_sha = "8846e1768be8b7d71539ee756f31ed795e66c9d7"
+head_sha = "685627a819567c0788eadb85f5f57065bcc81c2c"
 html_url = "https://github.com/mdx-js/mdx"
-stars = 19654
+stars = 19667

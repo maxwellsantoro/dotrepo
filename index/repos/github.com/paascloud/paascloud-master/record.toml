@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/paascloud/paascloud-master"
-generated_at = "2026-07-01T18:20:46.974473Z"
+generated_at = "2026-07-06T20:24:11.902888Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pom.xml`. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pom.xml`. Inferred `repo.build` from `pom.xml`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Spring Cloud 实战项目"
-description = "①：519587831（满） ②：873283104（满） ③：882458726（满） ④：693445268 ⑤：813682656 ⑥：797334670 ⑦：797876073 ⑧：814712305 ⑨：……"
+name = "paascloud-master"
+description = "spring cloud + vue + oAuth2.0全家桶实战，前后端分离模拟商城，完整的购物流程、后端运营平台，可以实现快速搭建企业级微服务项目。支持微信登录等三方登录。"
 homepage = "http://www.paascloud.net"
 license = "Apache-2.0"
 visibility = "public"
@@ -25,8 +26,8 @@ languages = [
     "FreeMarker",
     "HTML",
 ]
-build = "./mvnw package"
-test = "./mvnw test"
+build = "mvn package"
+test = "mvn test"
 topics = [
     "springcloud",
     "rocketmq",
@@ -45,4 +46,4 @@ default_branch = "master"
 fork = false
 head_sha = "781281a9503332ed3cef44ea618349d14230a127"
 html_url = "https://github.com/paascloud/paascloud-master"
-stars = 9871
+stars = 9867

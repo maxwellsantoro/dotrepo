@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/pgmq/pgmq"
-generated_at = "2026-07-01T18:21:11.098301Z"
+generated_at = "2026-07-06T18:56:42.714855Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS`. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/client-tests.yml`, `.github/workflows/crate_ci.yml`, and `.github/workflows/extension_upgrade.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/client-tests.yml`, `.github/workflows/crate_ci.yml`, and `.github/workflows/extension_upgrade.yml` suggested conflicting test commands. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "pgmq"
@@ -28,8 +28,23 @@ languages = [
     "Shell",
     "Ruby",
 ]
-test = "uv run pytest test.py -v"
 topics = ["message-queue"]
+
+[[repo.test_candidates]]
+command = "uv run pytest test.py -v"
+source = ".github/workflows/client-tests.yml"
+
+[[repo.test_candidates]]
+command = "make check.fmt"
+source = ".github/workflows/crate_ci.yml"
+
+[[repo.test_candidates]]
+command = "UPGRADE_PHASE=pre uv run pytest upgrade_test.py -v"
+source = ".github/workflows/extension_upgrade.yml"
+
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
 
 [owners]
 maintainers = [
@@ -47,6 +62,6 @@ archived = false
 clone_url = "https://github.com/pgmq/pgmq.git"
 default_branch = "main"
 fork = false
-head_sha = "f88cf285e07bce3394318dc8b0307d94dff35fe3"
+head_sha = "80d273a399631f37a6a2b136a615dd673cd4e90a"
 html_url = "https://github.com/pgmq/pgmq"
-stars = 4990
+stars = 5003

@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/DrewThomasson/ebook2audiobook"
-generated_at = "2026-07-01T17:16:48.241191Z"
+generated_at = "2026-07-06T18:27:08.263979Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "ebook2audiobook"
-description = "CPU/GPU Converter from E-Book to audiobook with chapters and metadata using advanced TTS engines and much more."
+description = "Generate audiobooks from e-books, voice cloning & 1158+ languages!"
 homepage = "https://github.com/DrewThomasson/ebook2audiobook"
 license = "Apache-2.0"
 visibility = "public"
@@ -51,6 +52,10 @@ topics = [
     "audiobook",
 ]
 
+[repo.toolchain]
+min = "3.9"
+ecosystem = "Python"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/DrewThomasson/ebook2audiobook.git"
@@ -58,4 +63,4 @@ default_branch = "main"
 fork = false
 head_sha = "26a59aa830760d665910ce1ffa52d95a0e3cecb3"
 html_url = "https://github.com/DrewThomasson/ebook2audiobook"
-stars = 19389
+stars = 19482

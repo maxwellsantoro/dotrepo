@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/FiloSottile/mkcert"
-generated_at = "2026-07-01T17:17:05.48323Z"
+generated_at = "2026-07-06T20:22:34.462379Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "mkcert"
@@ -39,6 +39,10 @@ topics = [
     "chrome",
 ]
 
+[repo.toolchain]
+min = "1.18"
+ecosystem = "Go"
+
 [docs]
 root = "https://mkcert.dev"
 
@@ -49,4 +53,4 @@ default_branch = "master"
 fork = false
 head_sha = "1c1dc4ed27ed5936046b6398d39cab4d657a2d8e"
 html_url = "https://github.com/FiloSottile/mkcert"
-stars = 59210
+stars = 59237

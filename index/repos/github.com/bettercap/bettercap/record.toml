@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/bettercap/bettercap"
-generated_at = "2026-07-01T17:25:56.863888Z"
+generated_at = "2026-07-06T18:35:55.48034Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
 
 [repo]
 name = "BetterCap"
@@ -28,8 +28,8 @@ languages = [
     "Makefile",
     "HTML",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make build"
+test = "make test"
 topics = [
     "password-sniffer",
     "mitm",
@@ -53,6 +53,10 @@ topics = [
     "redteaming",
 ]
 
+[repo.toolchain]
+min = "1.25.0"
+ecosystem = "Go"
+
 [owners]
 maintainers = []
 security_contact = "unknown"
@@ -67,4 +71,4 @@ default_branch = "master"
 fork = false
 head_sha = "7efbdca333ae3ea3cc299997c43b0b13bd1e5873"
 html_url = "https://github.com/bettercap/bettercap"
-stars = 19472
+stars = 19495

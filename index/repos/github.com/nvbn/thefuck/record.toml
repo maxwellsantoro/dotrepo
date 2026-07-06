@@ -4,20 +4,19 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nvbn/thefuck"
-generated_at = "2026-07-01T18:19:33.49847Z"
+generated_at = "2026-07-06T18:55:06.30869Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Inferred `repo.test` from `.github/workflows/test.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "The Fuck"
-description = "*The Fuck* is a magnificent app, inspired by a @liamosaur tweet, that corrects errors in previous console commands."
+description = "Magnificent app which corrects your previous console command."
 homepage = "https://github.com/nvbn/thefuck"
 license = "MIT"
 visibility = "public"
@@ -28,7 +27,7 @@ languages = [
     "Shell",
     "Batchfile",
 ]
-test = "coverage run --source=thefuck,tests -m pytest -v --capture=sys tests"
+test = "pytest"
 topics = [
     "python",
     "shell",
@@ -59,4 +58,4 @@ default_branch = "master"
 fork = false
 head_sha = "c7e7e1d884d3bb241ea6448f72a989434c2a35ec"
 html_url = "https://github.com/nvbn/thefuck"
-stars = 97461
+stars = 97480

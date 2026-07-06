@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/helix-editor/helix"
-generated_at = "2026-07-01T18:06:46.345969Z"
+generated_at = "2026-07-06T18:46:08.200943Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `Cargo.toml`, and `.github/workflows/build.yml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `.github/workflows/build.yml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Helix"
-description = "The editing model is very heavily based on Kakoune; during development I found myself agreeing with most of Kakoune's design decisions."
+description = "A post-modern modal text editor."
 homepage = "https://helix-editor.com"
 license = "MPL-2.0"
 visibility = "public"
@@ -40,6 +41,10 @@ topics = [
     "kakoune",
 ]
 
+[repo.toolchain]
+min = "1.90"
+ecosystem = "Rust"
+
 [docs]
 root = "https://docs.helix-editor.com/"
 
@@ -48,6 +53,6 @@ archived = false
 clone_url = "https://github.com/helix-editor/helix.git"
 default_branch = "master"
 fork = false
-head_sha = "278b24389457e33791d394dd9a8a93740e2cc099"
+head_sha = "39b3f22b1bf53f64bd4256b133f4563c4d0e43b0"
 html_url = "https://github.com/helix-editor/helix"
-stars = 45039
+stars = 45226

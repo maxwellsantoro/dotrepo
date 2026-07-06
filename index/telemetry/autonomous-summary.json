@@ -10,13 +10,13 @@
     "unknown": 1
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-07-06T07:43:40Z",
-  "lastRunAt": "2026-07-06T07:43:40Z",
+  "generatedAt": "2026-07-06T19:09:48Z",
+  "lastRunAt": "2026-07-06T19:09:48Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 8,
     "adjudicationCalls": 0,
-    "crawled": 18,
+    "crawled": 28,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -31,16 +31,16 @@
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.0056179775280898875,
-    "promotionRate": 0.7471910112359551,
-    "writeRate": 0.9943820224719101,
+    "failureRate": 0.001519756838905775,
+    "promotionRate": 0.8693009118541033,
+    "writeRate": 0.9984802431610942,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 35,
+    "crawled": 500,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -52,32 +52,32 @@
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 3
+    "deterministic": 125
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [],
   "regressionFixtureCandidates": [],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 17
+    "deterministic": 139
   },
-  "runCount": 23,
+  "runCount": 24,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 178,
+    "crawled": 658,
     "discoveryQueued": 0,
     "failed": 1,
-    "promoted": 133,
-    "qualityReprocessQueued": 153,
+    "promoted": 572,
+    "qualityReprocessQueued": 633,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
     "tokensUsed": 0,
-    "written": 177,
-    "zeroModelRuns": 178
+    "written": 657,
+    "zeroModelRuns": 658
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,

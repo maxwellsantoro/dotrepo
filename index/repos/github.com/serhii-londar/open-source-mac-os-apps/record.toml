@@ -4,16 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/serhii-londar/open-source-mac-os-apps"
-generated_at = "2026-07-01T18:27:47.165911Z"
+generated_at = "2026-07-06T19:01:12.300598Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
-name = "Stand With Ukraine"
-description = "A curated list of open source applications for macOS"
+name = "open-source-mac-os-apps"
+description = "🚀 Awesome list of open source applications for macOS. https://t.me/s/opensourcemacosapps"
 homepage = "https://github.com/serhii-londar/open-source-mac-os-apps"
 license = "CC0-1.0"
 visibility = "public"
@@ -65,4 +65,4 @@ default_branch = "master"
 fork = false
 head_sha = "7efc7fe4098982ef69accbe8d6e48601c6062357"
 html_url = "https://github.com/serhii-londar/open-source-mac-os-apps"
-stars = 49401
+stars = 49468

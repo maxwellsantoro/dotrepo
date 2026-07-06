@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/karpathy/llama2.c"
-generated_at = "2026-07-01T18:11:27.543821Z"
+generated_at = "2026-07-06T18:49:46.556801Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Imported `repo.test` from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "llama2.c"
-description = "Have you ever wanted to inference a baby Llama 2 model in pure C? No? Well, now you can!"
+description = "Inference Llama 2 in one file of pure C"
 homepage = "https://github.com/karpathy/llama2.c"
 license = "MIT"
 visibility = "public"
@@ -27,7 +27,7 @@ languages = [
     "Makefile",
     "Batchfile",
 ]
-test = "make test"
+test = "pytest"
 topics = []
 
 [relations]
@@ -52,4 +52,4 @@ default_branch = "master"
 fork = false
 head_sha = "350e04fe35433e6d2941dce5a1f53308f87058eb"
 html_url = "https://github.com/karpathy/llama2.c"
-stars = 19687
+stars = 19704

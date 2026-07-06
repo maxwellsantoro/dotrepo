@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and description from readme.md.
+- Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

@@ -1,13 +1,14 @@
 # Evidence
 
-- Imported repository name and description from README.md.
-- Imported repo.test from pyproject.toml as `python -m pytest`.
+- Imported repository name from README.md.
+- Imported repo.test from README.md as `pytest --dataset-loc=$DATASET_LOC tests/data --verbose --disable-warnings`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

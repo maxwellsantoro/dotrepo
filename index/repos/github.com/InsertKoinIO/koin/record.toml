@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/InsertKoinIO/koin"
-generated_at = "2026-07-01T17:18:13.200526Z"
+generated_at = "2026-07-06T18:28:30.211334Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. Left `repo.build` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "koin"
-description = "Koin is a pragmatic, lightweight dependency injection framework for Kotlin developers, developed by Kotzilla and open-source contributors."
+description = "Koin - a pragmatic lightweight dependency injection framework for Kotlin & Kotlin Multiplatform"
 homepage = "https://insert-koin.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -45,4 +46,4 @@ default_branch = "main"
 fork = false
 head_sha = "dc86ef8dd8fbe8564fb7453c03f5b738da3450bb"
 html_url = "https://github.com/InsertKoinIO/koin"
-stars = 9996
+stars = 9998

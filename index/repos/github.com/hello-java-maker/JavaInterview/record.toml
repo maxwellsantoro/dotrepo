@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/hello-java-maker/JavaInterview"
-generated_at = "2026-07-01T18:06:49.909094Z"
+generated_at = "2026-07-06T18:46:12.772716Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "ctrl + f 查找更香：不能点击的，还在写）"
-description = "= 栈和队列的题目可以这样出题型，你掌握了吗"
+name = "JavaInterview"
+description = "【Java面试+Java后端技术学习指南】：一份通向理想互联网公司的面试指南，包括 Java，技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计、分布式、数据库（MySQL、Redis）、Java 项目实战等"
 homepage = "http://www.java1000.com"
 visibility = "public"
 languages = []
@@ -35,4 +35,4 @@ default_branch = "master"
 fork = false
 head_sha = "cb1e426145d2df3682eeec922d2052732403e3ab"
 html_url = "https://github.com/hello-java-maker/JavaInterview"
-stars = 4985
+stars = 4987

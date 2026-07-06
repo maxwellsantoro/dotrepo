@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/opencv/opencv"
-generated_at = "2026-07-01T18:20:18.722347Z"
+generated_at = "2026-07-06T18:55:54.323636Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay boo
 
 [repo]
 name = "OpenCV"
-description = "Please read the contribution guidelines before starting work on a pull request."
+description = "Open Source Computer Vision Library"
 homepage = "https://opencv.org"
 license = "Apache-2.0"
 visibility = "public"
@@ -76,6 +76,6 @@ archived = false
 clone_url = "https://github.com/opencv/opencv.git"
 default_branch = "4.x"
 fork = false
-head_sha = "579a50573469fa6daf066748a9be25eeca200757"
+head_sha = "f6be96989ee057f9bc030a519d1a5bc12cb32d27"
 html_url = "https://github.com/opencv/opencv"
-stars = 89481
+stars = 89613

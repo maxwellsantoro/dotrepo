@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/yipianfengye/android-zxingLibrary"
-generated_at = "2026-07-01T18:37:48.567851Z"
+generated_at = "2026-07-06T20:24:56.816336Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Inferred `repo.build` from `build.gradle`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "android-zxingLibrary"
-description = "当然了如果以上的以上，你还是对定制化UI方面不太满意，可以直接下载我的项目，然后引入lib-zxing module作为你的module，直接修改其代码。"
+description = "几行代码快速集成二维码扫描功能"
 homepage = "https://github.com/yipianfengye/android-zxingLibrary"
 visibility = "public"
 languages = ["Java"]

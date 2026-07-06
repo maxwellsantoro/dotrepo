@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ray-project/ray"
-generated_at = "2026-07-01T18:24:00.682936Z"
+generated_at = "2026-07-06T18:58:04.158349Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `SECURITY.md`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "ray"
@@ -63,10 +63,15 @@ topics = [
     "llm-inference",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [owners]
 maintainers = [
     "@ray-project/ray-docs",
-    "@pcmoritz",
+    "@ray-project/ray-ci",
+    "@ray-project/ray-docs-reviewers",
     "@ray-project/ray-core",
     "@kfstorm",
     "@raulchen",
@@ -80,7 +85,6 @@ maintainers = [
     "@jackfrancis",
     "@alimaazamat",
     "@richardliaw",
-    "@ray-project/ray-ci",
     "@ray-project/ray-data",
     "@ray-project/ray-rllib",
     "@ray-project/ray-tune",
@@ -88,6 +92,7 @@ maintainers = [
     "@ray-project/ray-serve",
     "@ray-project/ray-llm",
     "@matthewdeng",
+    "@pcmoritz",
     "@thomasdesr",
     "@ryanaoleary",
 ]
@@ -101,6 +106,6 @@ archived = false
 clone_url = "https://github.com/ray-project/ray.git"
 default_branch = "master"
 fork = false
-head_sha = "f6a9b2b5130a35d3dd9e4463f7d17b2f11c6cd18"
+head_sha = "e35fdb3859cd0c3885838944fa9a60bf68795948"
 html_url = "https://github.com/ray-project/ray"
-stars = 43082
+stars = 43136

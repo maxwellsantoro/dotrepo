@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/SylphAI-Inc/LLM-engineer-handbook"
-generated_at = "2026-07-01T17:21:52.374393Z"
+generated_at = "2026-07-06T18:32:00.203611Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a main
 
 [repo]
 name = "LLM-engineer-handbook"
-description = "🔥 Large Language Models(LLM) have taken the ~~NLP community~~ ~~AI community~~ **the Whole World** by storm."
+description = "A curated list of Large Language Model resources, covering model training, serving, fine-tuning, and building LLM applications."
 homepage = "https://github.com/SylphAI-Inc/LLM-engineer-handbook"
 license = "MIT"
 visibility = "public"
@@ -33,4 +33,4 @@ default_branch = "main"
 fork = false
 head_sha = "2b1e84dea80d276a9ff9c1c0c9df5dc13f64cea6"
 html_url = "https://github.com/SylphAI-Inc/LLM-engineer-handbook"
-stars = 4972
+stars = 4978

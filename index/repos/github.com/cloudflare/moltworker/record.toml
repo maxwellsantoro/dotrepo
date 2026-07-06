@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/cloudflare/moltworker"
-generated_at = "2026-07-01T17:27:47.457273Z"
+generated_at = "2026-07-06T18:37:51.036253Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "OpenClaw on Cloudflare Workers"
-description = "Run OpenClaw (formerly Moltbot, formerly Clawdbot) personal AI assistant in a Cloudflare Sandbox."
+name = "moltworker"
+description = "Run OpenClaw, (formerly Moltbot, formerly Clawdbot) on Cloudflare Workers"
 homepage = "https://blog.cloudflare.com/moltworker-self-hosted-ai-agent/"
 license = "Apache-2.0"
 visibility = "public"

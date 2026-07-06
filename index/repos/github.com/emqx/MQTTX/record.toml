@@ -4,16 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/emqx/MQTTX"
-generated_at = "2026-07-01T18:00:28.619986Z"
+generated_at = "2026-07-06T18:40:22.698312Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/units_test_cli.yaml` and `.github/workflows/units_test_desktop.yaml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/units_test_cli.yaml` and `.github/workflows/units_test_desktop.yaml` suggested conflicting test commands. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
-name = "Preview"
-description = "Currently available for download from these app stores"
+name = "MQTTX"
+description = "A Powerful and All-in-One MQTT 5.0 client toolbox for Desktop, CLI and WebSocket."
 homepage = "https://mqttx.app"
 license = "Apache-2.0"
 visibility = "public"
@@ -50,6 +50,18 @@ topics = [
     "emqx",
 ]
 
+[[repo.test_candidates]]
+command = "yarn test:coverage"
+source = ".github/workflows/units_test_cli.yaml"
+
+[[repo.test_candidates]]
+command = "yarn test:unit"
+source = ".github/workflows/units_test_desktop.yaml"
+
+[repo.toolchain]
+min = "18"
+ecosystem = "Node.js"
+
 [docs]
 root = "https://mqttx.app/docs"
 getting_started = "https://www.emqx.com/en/blog/the-easiest-guide-to-getting-started-with-mqtt"
@@ -76,4 +88,4 @@ default_branch = "main"
 fork = false
 head_sha = "a8a9087fd6a9b434300bf4882c7978c9196ac674"
 html_url = "https://github.com/emqx/MQTTX"
-stars = 4973
+stars = 4982

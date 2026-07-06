@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jellyfin/jellyfin"
-generated_at = "2026-07-01T18:09:33.337914Z"
+generated_at = "2026-07-06T18:48:17.726943Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer info
 
 [repo]
 name = "Jellyfin"
-description = "Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media."
+description = "The Free Software Media System - Server Backend & API"
 homepage = "https://jellyfin.org"
 license = "GPL-2.0"
 visibility = "public"
@@ -64,6 +64,6 @@ archived = false
 clone_url = "https://github.com/jellyfin/jellyfin.git"
 default_branch = "master"
 fork = false
-head_sha = "a43fd188dc0d2a3cfdd4ae3b71b537780dcb3fc9"
+head_sha = "e31f168e9bc132b4f830e39b0781cac550c08b85"
 html_url = "https://github.com/jellyfin/jellyfin"
-stars = 53870
+stars = 54023

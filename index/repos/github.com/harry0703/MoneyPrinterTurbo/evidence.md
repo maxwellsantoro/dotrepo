@@ -1,17 +1,19 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name from README.md.
 - Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
-- Imported repo.build from pyproject.toml as `python -m build`.
-- Imported repo.test from pyproject.toml as `python -m pytest`.
+- Inferred repo.build from .github/workflows/ci.yml as `uv run python -m compileall app cli.py main.py webui test`.
+- Inferred repo.test from pyproject.toml as `python -m pytest`.
+- Imported repo.toolchain.min from pyproject.toml as `3.11` (Python).
 - Discovered related relation to github.com/harry0703/MoneyPrinterTurbo from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+A prior verified status was preserved because no previously present field regressed in this refresh.

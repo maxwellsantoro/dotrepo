@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/wb2osz/direwolf"
-generated_at = "2026-07-01T18:36:18.758641Z"
+generated_at = "2026-07-06T19:06:28.016433Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `.github/workflows/codeql-analysis.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `Makefile`, and `.github/workflows/codeql-analysis.yml`. Imported `repo.build` from `Makefile`. Inferred `repo.test` from `.github/workflows/codeql-analysis.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Dire Wolf"
-description = 'In the early days of Amateur Packet Radio, it was necessary to use an expensive "Terminal Node Controller" (TNC) with specialized hardware.'
+description = 'Dire Wolf is a software "soundcard" AX.25 packet modem/TNC and APRS encoder/decoder. It can be used stand-alone to observe APRS traffic, as a tracker, digipeater, APRStt gateway, or Internet Gateway (IGate).   For more information, look at the bottom 1/4 of this page and in https://github.com/wb2osz/direwolf/blob/dev/doc/README.md'
 homepage = "https://github.com/wb2osz/direwolf"
 license = "GPL-2.0"
 visibility = "public"
@@ -31,7 +31,7 @@ languages = [
     "Python",
     "Batchfile",
 ]
-build = "make build"
+build = "make all"
 test = "make test"
 topics = [
     "tnc",
@@ -51,4 +51,4 @@ default_branch = "master"
 fork = false
 head_sha = "eda1383f5fa9d8ba3cb27f99db1d2c79494404c9"
 html_url = "https://github.com/wb2osz/direwolf"
-stars = 1998
+stars = 2002

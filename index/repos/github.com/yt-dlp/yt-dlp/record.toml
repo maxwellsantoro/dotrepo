@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/yt-dlp/yt-dlp"
-generated_at = "2026-07-01T18:37:53.83828Z"
+generated_at = "2026-07-06T19:07:23.115969Z"
 
 [record.trust]
 confidence = "high"
@@ -13,10 +13,10 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `Makefile`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "RELEASE FILES"
+name = "yt-dlp"
 description = "A feature-rich command-line audio/video downloader"
 homepage = "https://discord.gg/H5MNcFW63r"
 license = "Unlicense"
@@ -28,8 +28,8 @@ languages = [
     "Dockerfile",
     "Batchfile",
 ]
-build = "python -m build"
-test = "python -m pytest"
+build = "make all"
+test = "make test"
 topics = [
     "youtube-dl",
     "python",
@@ -39,6 +39,10 @@ topics = [
     "cli",
     "downloader",
 ]
+
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
 
 [docs]
 root = "https://discord.gg/H5MNcFW63r"
@@ -63,6 +67,6 @@ archived = false
 clone_url = "https://github.com/yt-dlp/yt-dlp.git"
 default_branch = "master"
 fork = false
-head_sha = "249aa5d6e667308fbf95ae5cfb40eba8177a802c"
+head_sha = "fdec00e0bf530dc6c3cc7b1dd780e95d9ae460e9"
 html_url = "https://github.com/yt-dlp/yt-dlp"
-stars = 174546
+stars = 175661

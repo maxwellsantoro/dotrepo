@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/computervision-recipes"
-generated_at = "2026-07-01T18:15:09.423537Z"
+generated_at = "2026-07-06T18:52:35.708566Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`.
 
 [repo]
 name = "Computer Vision"
-description = "In recent years, we've see an extra-ordinary growth in Computer Vision, with applications in face recognition, image understanding, search, drones, mapping, semi-autonomous and autonomous vehicles."
+description = "Best Practices, code samples, and documentation for Computer Vision."
 homepage = "https://github.com/microsoft/computervision-recipes"
 license = "MIT"
 visibility = "public"

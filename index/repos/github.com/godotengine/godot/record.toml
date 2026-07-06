@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/godotengine/godot"
-generated_at = "2026-07-01T18:04:10.158092Z"
+generated_at = "2026-07-06T20:23:39.326872Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `.github/workflows/android_builds.yml`. Inferred `repo.test` from `.github/workflows/android_builds.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/android_builds.yml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `.github/workflows/android_builds.yml`. Inferred `repo.test` from `.github/workflows/android_builds.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Godot Engine"
-description = "**Godot Engine is a feature-packed, cross-platform game engine to create 2D and 3D games from a unified interface.** It provides a comprehensive set of common tools, so that users can focus on making games without having to reinvent the wheel."
+description = "Godot Engine – Multi-platform 2D and 3D game engine"
 homepage = "https://godotengine.org"
 license = "MIT"
 visibility = "public"
@@ -38,7 +38,7 @@ languages = [
     "GAP",
 ]
 build = "./gradlew generateGodotTemplates"
-test = "./gradlew generateGodotTemplates"
+test = "./gradlew :editor:assembleAndroidAndroidTest :editor:assembleAndroidDebug -Pperform_signing=true"
 topics = [
     "game-engine",
     "godot",
@@ -107,6 +107,6 @@ archived = false
 clone_url = "https://github.com/godotengine/godot.git"
 default_branch = "master"
 fork = false
-head_sha = "549d1846bdfc0886b4696a1a76f15206364f69b0"
+head_sha = "f5af32893ba3774235b5d3c570d8433d079a4b82"
 html_url = "https://github.com/godotengine/godot"
-stars = 113436
+stars = 113700

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/KeygraphHQ/shannon"
-generated_at = "2026-07-01T17:18:39.94734Z"
+generated_at = "2026-07-06T18:28:54.448642Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build`
 
 [repo]
 name = "Shannon"
-description = "Shannon is an autonomous, white-box AI pentester for web applications and APIs."
+description = "Shannon is an autonomous, white-box AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production."
 homepage = "https://keygraph.io/"
 license = "AGPL-3.0"
 visibility = "public"
@@ -43,6 +43,6 @@ archived = false
 clone_url = "https://github.com/KeygraphHQ/shannon.git"
 default_branch = "main"
 fork = false
-head_sha = "5a2f78c5d9ef617c6e191725e0cccd8d177f361d"
+head_sha = "00e56455dfb0f2626b63e7e9231980cfb48e2fe2"
 html_url = "https://github.com/KeygraphHQ/shannon"
-stars = 45315
+stars = 45465

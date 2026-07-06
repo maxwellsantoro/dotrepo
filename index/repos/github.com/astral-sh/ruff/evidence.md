@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name, description, and docs entry points from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
 - Imported repo.test from CONTRIBUTING.md as `cargo test`.

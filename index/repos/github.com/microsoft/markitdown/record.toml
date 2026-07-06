@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/markitdown"
-generated_at = "2026-07-01T18:15:23.150595Z"
+generated_at = "2026-07-06T18:52:47.200102Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay boo
 
 [repo]
 name = "MarkItDown"
-description = "MarkItDown is a lightweight Python utility for converting various files to Markdown for use with LLMs and related text analysis pipelines."
+description = "Python tool for converting files and office documents to Markdown."
 homepage = "https://github.com/microsoft/markitdown"
 license = "MIT"
 visibility = "public"
@@ -60,4 +60,4 @@ default_branch = "main"
 fork = false
 head_sha = "e144e0a2be95b34df17433bac904e635f2c5e551"
 html_url = "https://github.com/microsoft/markitdown"
-stars = 162078
+stars = 163400

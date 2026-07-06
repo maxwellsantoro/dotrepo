@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/openssl/openssl"
-generated_at = "2026-07-01T18:20:32.10529Z"
+generated_at = "2026-07-06T18:56:04.593742Z"
 
 [record.trust]
 confidence = "high"
@@ -13,11 +13,11 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/ci.yml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "openssl"
-description = "OpenSSL is a robust, commercial-grade, full-featured Open Source Toolkit for the Transport Layer Security (TLS, formerly SSL), Datagram TLS (DTLS), and QUIC protocols."
+description = "General purpose TLS and crypto library"
 homepage = "https://openssl-library.org/"
 license = "Apache-2.0"
 visibility = "public"
@@ -76,6 +76,6 @@ archived = false
 clone_url = "https://github.com/openssl/openssl.git"
 default_branch = "master"
 fork = false
-head_sha = "8a072a3dabe4df116460f8910735569df321b97b"
+head_sha = "a89400969d49d42eb8699c6afaf2f613f917fc5b"
 html_url = "https://github.com/openssl/openssl"
-stars = 30386
+stars = 30422

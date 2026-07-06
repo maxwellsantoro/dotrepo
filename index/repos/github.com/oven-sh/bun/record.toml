@@ -2,18 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/oven-sh/bun"
-generated_at = "2026-07-01T20:44:50.342587Z"
+generated_at = "2026-07-06T19:08:33.556681Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Bun"
-description = "Bun is an all-in-one toolkit for JavaScript and TypeScript apps."
+description = "Incredibly fast JavaScript runtime, bundler, test runner, and package manager – all in one"
 homepage = "https://bun.com"
 license = "NOASSERTION"
 visibility = "public"
@@ -40,7 +43,8 @@ languages = [
     "MDX",
     "RenderScript",
 ]
-test = "bun install --cwd test"
+build = "npm run build"
+test = "npm test"
 topics = [
     "bun",
     "bundler",
@@ -55,16 +59,6 @@ topics = [
     "rust",
     "rust-lang",
 ]
-
-[[repo.build_candidates]]
-command = "cargo build --workspace"
-ecosystem = "Rust"
-source = "Cargo.toml"
-
-[[repo.build_candidates]]
-command = "npm run build"
-ecosystem = "Node.js"
-source = "package.json"
 
 [owners]
 maintainers = [
@@ -82,6 +76,6 @@ archived = false
 clone_url = "https://github.com/oven-sh/bun.git"
 default_branch = "main"
 fork = false
-head_sha = "b124ed33684bbc3f0053ca30947663c0be926499"
+head_sha = "48ff9eb2fdab9269c63889d4093f26f442a40c72"
 html_url = "https://github.com/oven-sh/bun"
-stars = 93476
+stars = 93602

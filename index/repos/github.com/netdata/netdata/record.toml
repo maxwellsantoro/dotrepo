@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/netdata/netdata"
-generated_at = "2026-07-01T18:17:57.882742Z"
+generated_at = "2026-07-06T18:53:54.699607Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/coverity.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/coverity.yml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `.github/workflows/coverity.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Netdata"
@@ -31,6 +31,7 @@ languages = [
     "C++",
     "CMake",
     "HTML",
+    "Objective-C",
     "JavaScript",
     "Batchfile",
     "PowerShell",
@@ -90,6 +91,6 @@ archived = false
 clone_url = "https://github.com/netdata/netdata.git"
 default_branch = "master"
 fork = false
-head_sha = "ca9a5426a6b1cdf6e1b2c82d3d5710e9e0a66fed"
+head_sha = "9d578cf0d591b03d6312fe274794315718118ada"
 html_url = "https://github.com/netdata/netdata"
-stars = 79447
+stars = 79515

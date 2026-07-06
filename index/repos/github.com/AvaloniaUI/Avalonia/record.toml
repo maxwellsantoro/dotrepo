@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AvaloniaUI/Avalonia"
-generated_at = "2026-07-06T07:43:31.825845212Z"
+generated_at = "2026-07-06T19:09:28.250107Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `readme.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Avalonia"
@@ -70,6 +70,6 @@ archived = false
 clone_url = "https://github.com/AvaloniaUI/Avalonia.git"
 default_branch = "master"
 fork = false
-head_sha = "bc5d32dca7e3d7756281e834d39c16262a04509a"
+head_sha = "04e8b20e4767ce7a607ec61efe7699af514242ac"
 html_url = "https://github.com/AvaloniaUI/Avalonia"
-stars = 31117
+stars = 31122

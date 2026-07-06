@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/DingMouRen/LayoutManagerGroup"
-generated_at = "2026-07-01T17:16:39.787782Z"
+generated_at = "2026-07-06T20:22:30.128324Z"
 
 [record.trust]
 confidence = "high"
@@ -13,10 +13,10 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `build.gradle`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `build.gradle`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `build.gradle`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
-name = "Just like a star."
+name = "LayoutManagerGroup"
 description = ":point_right: Customize the LayoutManager of RecyclerView(自定义LayoutManager)"
 homepage = "https://github.com/DingMouRen/LayoutManagerGroup"
 visibility = "public"
@@ -32,4 +32,4 @@ default_branch = "master"
 fork = false
 head_sha = "26a38fd30d1f04730051198aa512f3ede8c99b45"
 html_url = "https://github.com/DingMouRen/LayoutManagerGroup"
-stars = 4976
+stars = 4975
