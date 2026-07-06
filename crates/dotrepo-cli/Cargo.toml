@@ -7,6 +7,9 @@ authors.workspace = true
 repository.workspace = true
 description = "Reference CLI for the dotrepo repository metadata protocol."
 readme = "../../README.md"
+homepage.workspace = true
+keywords = ["cli", "metadata", "repository", "trust", "protocol"]
+categories = ["command-line-utilities", "development-tools"]
 default-run = "dotrepo"
 
 [lib]

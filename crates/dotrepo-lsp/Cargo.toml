@@ -7,6 +7,9 @@ authors.workspace = true
 repository.workspace = true
 description = "Thin language server for dotrepo manifests."
 readme = "../../README.md"
+homepage.workspace = true
+keywords = ["lsp", "language-server", "toml", "metadata"]
+categories = ["development-tools"]
 
 [[bin]]
 name = "dotrepo-lsp"

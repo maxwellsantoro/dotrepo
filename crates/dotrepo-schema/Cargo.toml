@@ -7,6 +7,9 @@ authors.workspace = true
 repository.workspace = true
 description = "Schema types and manifest parsing for the dotrepo protocol."
 readme = "../../README.md"
+homepage.workspace = true
+keywords = ["metadata", "repository", "protocol", "toml", "schema"]
+categories = ["parser-implementations", "development-tools"]
 
 [dependencies]
 serde.workspace = true

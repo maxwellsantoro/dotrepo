@@ -7,6 +7,9 @@ authors.workspace = true
 repository.workspace = true
 description = "Shared JSON-RPC transport helpers for dotrepo services."
 readme = "../../README.md"
+homepage.workspace = true
+keywords = ["json-rpc", "stdio", "transport", "metadata"]
+categories = ["network-programming", "development-tools"]
 
 [dependencies]
 anyhow.workspace = true

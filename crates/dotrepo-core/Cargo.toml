@@ -7,6 +7,9 @@ authors.workspace = true
 repository.workspace = true
 description = "Core parsing, validation, trust, and export logic for dotrepo."
 readme = "../../README.md"
+homepage.workspace = true
+keywords = ["metadata", "repository", "trust", "provenance", "validation"]
+categories = ["development-tools"]
 
 [dependencies]
 anyhow.workspace = true

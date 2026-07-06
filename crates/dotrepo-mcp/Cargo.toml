@@ -7,6 +7,9 @@ authors.workspace = true
 repository.workspace = true
 description = "Stdio MCP server for trust-aware dotrepo operations."
 readme = "../../README.md"
+homepage.workspace = true
+keywords = ["mcp", "ai", "agents", "metadata", "repository"]
+categories = ["development-tools"]
 
 [[bin]]
 name = "dotrepo-mcp"
