@@ -23,6 +23,7 @@ pub use adoption::{
     adoption_status_repository, canonical_mirror_path_for_claim_path, native_repository_identity,
     render_dotrepo_ci_workflow, validate_claim_path_matches_native_identity,
     AdoptionRepositoryIdentity, AdoptionStatusItem, AdoptionStatusReport,
+    DEFAULT_CI_RELEASE_VERSION,
 };
 pub use query::{
     manifest_to_json, query_manifest, query_manifest_value, query_manifest_value_from_json,

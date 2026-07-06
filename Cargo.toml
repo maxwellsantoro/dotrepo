@@ -15,7 +15,7 @@ exclude = ["crates/dotrepo"]
 resolver = "2"
 
 [workspace.package]
-version = "1.0.1"
+version = "2.0.0-alpha.0"
 edition = "2021"
 rust-version = "1.90.0"
 license = "MIT"
@@ -27,9 +27,9 @@ homepage = "https://dotrepo.org/"
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
 rayon = "1"
-dotrepo-core = { version = "1.0.1", path = "crates/dotrepo-core" }
-dotrepo-schema = { version = "1.0.1", path = "crates/dotrepo-schema" }
-dotrepo-transport = { version = "1.0.1", path = "crates/dotrepo-transport" }
+dotrepo-core = { version = "2.0.0-alpha.0", path = "crates/dotrepo-core" }
+dotrepo-schema = { version = "2.0.0-alpha.0", path = "crates/dotrepo-schema" }
+dotrepo-transport = { version = "2.0.0-alpha.0", path = "crates/dotrepo-transport" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }

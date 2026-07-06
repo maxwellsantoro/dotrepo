@@ -15,6 +15,9 @@ scaffolds a GitHub Actions workflow that downloads one pinned release bundle
 and runs `validate`, `query`, `trust`, `doctor`, and `generate --check`.
 The current scaffold target is `ubuntu-latest` with the
 `x86_64-unknown-linux-gnu` release bundle.
+The default pin is the latest published stable release, not the version of a
+development build used to generate the file. Pass `--version <release>` to pin
+a different published release explicitly.
 
 ## Preferred install path
 
