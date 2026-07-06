@@ -51,6 +51,11 @@ This surface provides:
 - local review and CI artifacts sharing the same exported tree
 - repo-scoped `query-input/` artifacts for Worker-backed hosted query serving
 
+The root `public/` and `release-gate/` directories are generated outputs and
+are intentionally gitignored. They can be regenerated from the checked-in
+`index/`, scripts, and fixture contracts; CI uploads bounded review artifacts,
+and deployed immutable snapshots are archived separately.
+
 Not yet in scope:
 - structured discovery, ranking, and comparison APIs
 - live mutation or submission APIs
@@ -101,7 +106,8 @@ cargo run -p dotrepo-cli -- public export \
 ```
 
 Important details:
-- `snapshotDigest` is recomputed from the exported `index/` tree
+- `snapshotDigest` is recomputed from the checked-in `index/` inputs; ignored
+  local crawler state does not perturb it
 - `meta.json` is the sole mutable pointer and names the immutable snapshot paths
 - `meta.json` publishes the retention contract: current+previous at the static
   edge, all published snapshots through archive, and append-only snapshot log
@@ -177,6 +183,8 @@ upstream native `.repo`.
 `.github/workflows/public-cloudflare.yml`:
 
 - validates the index
+- fetches and validates the deployed PageDigest manifest as the prior revision
+  baseline; it fails closed if that baseline cannot be trusted
 - exports the public tree with the Cloudflare base path
 - renders a root landing page with `scripts/render_public_pages_landing.py`
 - stages the snapshot into the in-repo Worker project

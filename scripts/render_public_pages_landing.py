@@ -642,7 +642,7 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
       <h2>PageDigest dogfood</h2>
       <p class="section__intro">
         The public stats endpoint is ready for PageDigest economics, but this
-        checked-in public tree was rendered before the first stats-bearing
+        current public tree was rendered before the first stats-bearing
         export. Once <code>/v0/stats.json</code> is present, this section will
         publish records covered, skipped fetches, avoided bytes, and estimated
         tokens avoided directly from the export.

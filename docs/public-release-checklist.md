@@ -17,6 +17,8 @@ JSON tree.
 The script is the canonical operator release review entrypoint. The individual
 commands are still useful when reviewing only one part of the public/export
 flow or when isolating a failure already identified by the gate.
+The root `public/`, `release-gate/`, and `dist/` outputs are gitignored and
+must be regenerated for each review; do not commit them.
 For the canonical freshness semantics used by these outputs, see
 [`docs/public-freshness.md`](./public-freshness.md).
 

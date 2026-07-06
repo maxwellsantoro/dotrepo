@@ -83,10 +83,11 @@ Snapshot-level mechanics for agents and mirrors:
   request. Revisions track material content change (the volatile `freshness`
   block is excluded), so a re-export with an unchanged index does not churn
   revisions; each entry's `content_digest` extension field carries that state
-  forward between exports. The checked-in
-  `public/.well-known/pagedigest.json` is the durable revision baseline; the
-  deploy workflow passes it to `public export --pagedigest-previous` so
-  revisions stay monotonic across fresh export directories
+  forward between exports. Before building a replacement export, the deploy
+  workflow fetches and validates the currently deployed
+  `/.well-known/pagedigest.json`, then passes that manifest to
+  `public export --pagedigest-previous`. A missing or malformed baseline fails
+  the deploy rather than resetting revision history
 - `scripts/check_public_profile_coverage.py` reports profile-count and
   high-signal coverage gates
 - deterministic lookup-efficiency and search-quality benchmark harnesses
@@ -136,6 +137,11 @@ review or CI inspection, start with the canonical release gate:
 ```bash
 uv run python scripts/check_release_gate.py --output-root release-gate
 ```
+
+The root `public/` and `release-gate/` trees are generated and gitignored.
+Durable review copies live in CI artifacts, immutable R2 archives, and the
+deployed public origin; the checked-in `index/` and fixture packs remain the
+source inputs and regression contracts.
 
 Then, if needed:
 

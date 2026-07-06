@@ -18,7 +18,7 @@ fn parse_relation_reference(value: &str) -> Option<PublicRepositoryIdentity> {
 }
 
 fn relation_reference_key(identity: &PublicRepositoryIdentity) -> String {
-    format!("{}/{}/{}", identity.host, identity.owner, identity.repo)
+    format!("{}/{}/{}", identity.host, identity.owner, identity.repo).to_ascii_lowercase()
 }
 
 #[derive(Debug, Clone)]

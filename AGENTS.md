@@ -69,6 +69,11 @@ uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-g
 uv run pytest
 ```
 
+Root `public/`, `release-gate/`, `operator-gate/`, and `dist/` directories are
+generated review/deployment outputs and are intentionally gitignored. The
+checked-in `index/` tree and fixture packs remain the source inputs and golden
+contracts.
+
 Run a single test file: `cargo test -p dotrepo-core --test import_fixture_pack`
 
 Run a single test function: `cargo test -p dotrepo-core --test import_quality_gate -- test_name`
