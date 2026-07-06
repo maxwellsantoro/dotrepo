@@ -10,7 +10,23 @@ permissions:
   contents: write
 
 jobs:
+  version-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Verify release version integrity
+        shell: bash
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            uv run python scripts/check_release_version.py --tag "${GITHUB_REF_NAME}"
+          else
+            uv run python scripts/check_release_version.py
+          fi
+
   binaries:
+    needs: version-integrity
     strategy:
       fail-fast: false
       matrix:
@@ -64,6 +80,7 @@ jobs:
           retention-days: 14
 
   vscode-extension:
+    needs: version-integrity
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

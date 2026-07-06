@@ -1,6 +1,11 @@
 # Changelog
 
-## Unreleased
+## Unreleased (`2.0.0-alpha.0` development line)
+
+The post-1.0 tree includes public Rust API changes, including the new
+`FieldConfidence::Suspect` variant. Development therefore continues on a 2.0
+prerelease line so the source at `main` cannot be confused with the immutable
+`v1.0.1` release and crates.io packages.
 
 Post-1.0 growth, hardening, and operational-proof work toward the roadmap
 milestones. Direction and gates live in [`ROADMAP.md`](./ROADMAP.md); the counts

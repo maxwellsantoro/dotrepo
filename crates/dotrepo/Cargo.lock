@@ -192,7 +192,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo"
-version = "1.0.1"
+version = "2.0.0-alpha.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -201,7 +201,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-cli"
-version = "1.0.1"
+version = "2.0.0-alpha.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -216,7 +216,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-core"
-version = "1.0.1"
+version = "2.0.0-alpha.0"
 dependencies = [
  "anyhow",
  "dotrepo-schema",
@@ -231,7 +231,7 @@ dependencies = [
 
 [[package]]
 name = "dotrepo-schema"
-version = "1.0.1"
+version = "2.0.0-alpha.0"
 dependencies = [
  "serde",
  "thiserror",
@@ -862,4 +862,4 @@ checksum = "b8848ee67ecc8aedbaf3e4122217aff892639231befc6a1b58d29fff4c2cabaa"
 
 [[patch.unused]]
 name = "dotrepo-transport"
-version = "1.0.1"
+version = "2.0.0-alpha.0"

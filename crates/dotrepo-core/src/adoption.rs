@@ -8,6 +8,13 @@ use dotrepo_schema::{Manifest, RecordMode};
 use serde::Serialize;
 use std::path::Path;
 
+/// Latest published release used by generated maintainer CI unless overridden.
+///
+/// Development builds may have a newer prerelease package version that has not
+/// been published yet. Generated workflows must keep pointing at an artifact
+/// that actually exists.
+pub const DEFAULT_CI_RELEASE_VERSION: &str = "1.0.1";
+
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdoptionStatusItem {

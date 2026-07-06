@@ -3,6 +3,14 @@
 Use this checklist when cutting or reviewing a public release from the exported
 JSON tree.
 
+After a stable release is tagged and published, advance the workspace and
+standalone alias package to the next SemVer-honest prerelease line in the next
+commit. Never leave post-tag development on the published version: a version
+must identify one source tree across GitHub, release artifacts, and crates.io.
+When cutting a stable release, also advance `DEFAULT_CI_RELEASE_VERSION` in
+`crates/dotrepo-core/src/adoption.rs` and regenerate the checked-in native CI
+example so new adopters pin an artifact that actually exists.
+
 ## Local generation
 
 - `uv run python scripts/check_release_gate.py --output-root release-gate`
