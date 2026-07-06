@@ -134,7 +134,9 @@ What each command answers:
 - `trust` is the human-facing inspection surface for status, provenance, authority handoff, and competing records.
 - `adoption-status` summarizes whether the maintainer-owned loop is ready for CI, managed surfaces, and claim handoff.
 - `doctor` reports whether supported conventional surfaces are `fully_generated`, `partially_managed`, `unmanaged`, `malformed_managed`, or in an unsupported state.
-- `generate --check` fails on drift inside fully generated or partially managed surfaces, but does not fail solely because an unmanaged file exists.
+- `generate --check` fails on semantic drift inside fully generated or partially
+  managed surfaces, but does not fail solely because an unmanaged file exists
+  or because only the generator version in an otherwise identical banner changed.
 
 ## Inspect authority handoff and conflicts
 

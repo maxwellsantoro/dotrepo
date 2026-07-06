@@ -9,7 +9,7 @@ use anyhow::bail;
 use dotrepo_schema::Manifest;
 
 use crate::load_manifest_document;
-use crate::render::{render_contributing_body, render_security_body};
+use crate::render::{generated_output_matches, render_contributing_body, render_security_body};
 use crate::util::{display_path, display_root, source_digest};
 use crate::validation::validate_manifest;
 use crate::{
@@ -112,7 +112,13 @@ pub(crate) fn render_managed_output(
 
     let output_path = status.path;
     let contents = match status.state {
-        ManagedFileState::Missing | ManagedFileState::FullyGenerated => full_contents,
+        ManagedFileState::Missing => full_contents,
+        ManagedFileState::FullyGenerated => match status.current.as_deref() {
+            Some(current) if generated_output_matches(current, &full_contents) => {
+                current.to_string()
+            }
+            _ => full_contents,
+        },
         ManagedFileState::PartiallyManaged => {
             let current = status.current.as_deref().ok_or_else(|| {
                 anyhow::anyhow!(

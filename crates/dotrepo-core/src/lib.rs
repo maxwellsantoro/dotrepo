@@ -575,13 +575,15 @@ pub fn managed_outputs(
                     .as_ref()
                     .map(|o| o.maintainers.join(" "))
                     .unwrap_or_else(|| "@maintainers".into());
+                let path = root.join(".github/CODEOWNERS");
+                let expected = format!(
+                    "{}\n* {}\n",
+                    generated_banner(CommentStyle::Hash, manifest, &digest),
+                    owners
+                );
                 outputs.push(ManagedOutput {
-                    path: root.join(".github/CODEOWNERS"),
-                    contents: format!(
-                        "{}\n* {}\n",
-                        generated_banner(CommentStyle::Hash, manifest, &digest),
-                        owners
-                    ),
+                    contents: preserve_matching_generated_output(&path, expected)?,
+                    path,
                 });
             }
             if matches!(github.security, Some(CompatMode::Generate)) {
@@ -602,9 +604,11 @@ pub fn managed_outputs(
                 }
             }
             if matches!(github.pull_request_template, Some(CompatMode::Generate)) {
+                let path = root.join(".github/pull_request_template.md");
+                let expected = render_pull_request_template(manifest, &digest);
                 outputs.push(ManagedOutput {
-                    path: root.join(".github/pull_request_template.md"),
-                    contents: render_pull_request_template(manifest, &digest),
+                    contents: preserve_matching_generated_output(&path, expected)?,
+                    path,
                 });
             }
         }
@@ -614,6 +618,15 @@ pub fn managed_outputs(
         .into_iter()
         .map(|output| (output.path, output.contents))
         .collect())
+}
+
+fn preserve_matching_generated_output(path: &Path, expected: String) -> Result<String> {
+    match fs::read_to_string(path) {
+        Ok(current) if crate::render::generated_output_matches(&current, &expected) => Ok(current),
+        Ok(_) => Ok(expected),
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(expected),
+        Err(error) => Err(anyhow!("failed to read {}: {}", path.display(), error)),
+    }
 }
 
 pub fn github_outputs(manifest: &Manifest, source_bytes: &[u8]) -> Vec<(PathBuf, String)> {
@@ -673,7 +686,8 @@ fn generate_check_output(
         Err(e) => return Err(anyhow!("failed to read {}: {}", path.display(), e)),
     };
     let relative = display_path(root, &path)?;
-    let is_stale = current != expected;
+    let is_stale = !crate::render::generated_output_matches(&current, &expected);
+    let expected = if is_stale { expected } else { current.clone() };
     Ok(GenerateCheckOutput {
         path: relative,
         state: if missing {
@@ -736,11 +750,16 @@ fn generate_check_managed_surface(
         ManagedFileState::FullyGenerated | ManagedFileState::PartiallyManaged => {
             match current.as_deref() {
                 None => true,
-                Some(current) => current != expected,
+                Some(current) => !crate::render::generated_output_matches(current, &expected),
             }
         }
         ManagedFileState::Unmanaged => false,
         ManagedFileState::MalformedManaged | ManagedFileState::Unsupported => true,
+    };
+    let expected = if stale {
+        expected
+    } else {
+        current.clone().unwrap_or(expected)
     };
 
     Ok(GenerateCheckOutput {
