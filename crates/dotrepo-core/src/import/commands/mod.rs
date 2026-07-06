@@ -357,6 +357,63 @@ cargo nextest run -E 'test(test_name)'
     }
 
     #[test]
+    fn makefile_commands_name_only_targets_that_exist() {
+        use super::super::types::ImportedFile;
+        use super::extraction::infer_makefile_commands;
+
+        // Shaped like psf/requests: `ci` and `test-readme` targets exist, but
+        // there is no `build` target, so no build command may be published.
+        let makefile = ImportedFile {
+            path: "Makefile".into(),
+            contents: ".PHONY: docs\ninit:\n\tpython -m pip install -r requirements-dev.txt\ntest:\n\tpython -m pytest tests\n\nci:\n\tpython -m pytest tests --junitxml=report.xml\n\ntest-readme:\n\techo check\n".into(),
+        };
+        let candidate = infer_makefile_commands(&makefile).expect("Makefile commands");
+        assert_eq!(candidate.build, None);
+        assert_eq!(candidate.test.as_deref(), Some("make test"));
+
+        // A Makefile whose only build-ish target is `all` publishes `make all`.
+        let all_only = ImportedFile {
+            path: "Makefile".into(),
+            contents: "all:\n\tgcc -o app main.c\n\ncheck:\n\t./run-tests.sh\n".into(),
+        };
+        let candidate = infer_makefile_commands(&all_only).expect("Makefile commands");
+        assert_eq!(candidate.build.as_deref(), Some("make all"));
+        assert_eq!(candidate.test.as_deref(), Some("make check"));
+    }
+
+    #[test]
+    fn docs_accept_cargo_toolchain_override_and_keep_it_in_the_command() {
+        use super::super::types::ImportedFile;
+        use super::extraction::infer_contributing_commands;
+
+        // Shaped like serde-rs/serde: the full-suite command pins a toolchain
+        // and lives under a directory-specific subheading of the test section.
+        let contributing = ImportedFile {
+            path: "CONTRIBUTING.md".into(),
+            contents: r#"
+# Contributing
+
+## Running the test suite
+
+##### In the [`test_suite`] directory
+
+```sh
+# Run the full test suite, including tests of unstable functionality
+cargo +nightly test --features unstable
+```
+"#
+            .into(),
+        };
+
+        let candidate = infer_contributing_commands(&contributing).expect("CONTRIBUTING commands");
+        assert_eq!(
+            candidate.test.as_deref(),
+            Some("cargo +nightly test --features unstable")
+        );
+        assert_eq!(candidate.build, None);
+    }
+
+    #[test]
     fn docs_strip_leading_env_assignments_from_test_commands() {
         use super::super::types::ImportedFile;
         use super::extraction::infer_contributing_commands;

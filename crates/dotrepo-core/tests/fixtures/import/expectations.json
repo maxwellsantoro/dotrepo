@@ -442,5 +442,39 @@
     "native_trust_note_contains": ["Bootstrapped from `README.md`.", "Filled `repo.name` with inferred defaults."],
     "overlay_trust_note_contains": ["Bootstrapped from `README.md`.", "Filled `repo.name` with inferred defaults.", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
     "overlay_evidence_contains": ["Imported repository description from README.md.", "Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "downstream-packager-security",
+    "repo_name": "PackagerNote",
+    "repo_description": "Fixture for reporting URLs that must beat downstream packager emails.",
+    "imported_sources": ["README.md", "SECURITY.md"],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": "https://github.com/example/packagernote/security/advisories/new",
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": ["imported"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "`SECURITY.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported the security reporting channel from SECURITY.md.", "This is an overlay record, not a maintainer-controlled canonical record."]
+  },
+  {
+    "fixture": "nightly-toolchain-contributing",
+    "repo_name": "NightlySuite",
+    "repo_description": "Fixture for documented test commands that pin a cargo toolchain.",
+    "repo_build": "cargo build",
+    "repo_test": "cargo +nightly test --features unstable",
+    "imported_sources": ["README.md", "Cargo.toml", "CONTRIBUTING.md"],
+    "inferred_fields": ["repo.build"],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": ["imported", "inferred"],
+    "native_trust_note_contains": ["Bootstrapped from", "`README.md`"],
+    "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
+    "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported repo.test from CONTRIBUTING.md as `cargo +nightly test --features unstable`."]
   }
 ]

@@ -482,8 +482,7 @@ fn cmake_workflow_has_step(workflow: &serde_json::Value, required: &str) -> bool
 }
 
 pub(crate) fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
-    let mut has_build = false;
-    let mut has_test = false;
+    let mut targets: Vec<String> = Vec::new();
     for line in file.contents.lines() {
         // Makefile targets are defined at the start of a line (column 0).
         // Recipe bodies are indented (tab or spaces) and may contain ":" in
@@ -491,48 +490,39 @@ pub(crate) fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCom
         if line.starts_with(|c: char| c.is_whitespace()) {
             continue;
         }
-        let trimmed = line.trim();
-        // Common explicit targets (allow "target:" or "target :" forms)
-        let target_name = trimmed
-            .split_once(':')
-            .map(|(lhs, _)| lhs.trim().to_ascii_lowercase());
-        if let Some(name) = target_name {
-            if ["build", "all", "compile", "dist", "package", "ci"]
-                .iter()
-                .any(|t| name == *t || name.starts_with(&format!("{}-", t)))
-            {
-                has_build = true;
-            }
-            if ["test", "check", "verify", "spec"]
-                .iter()
-                .any(|t| name == *t || name.starts_with(&format!("{}-", t)))
-            {
-                has_test = true;
-            }
+        let Some((lhs, _)) = line.trim().split_once(':') else {
+            continue;
+        };
+        // A rule line may declare several targets: "a b: deps".
+        for name in lhs.split_whitespace() {
+            targets.push(name.to_ascii_lowercase());
         }
     }
-    if !has_build && !has_test {
+    // The published command must name a target the Makefile actually
+    // declares. A `ci:` pipeline target or a prefixed variant like
+    // `test-readme:` is not a canonical build/test entrypoint and must not
+    // be rewritten to a `build`/`test` target that does not exist.
+    let pick = |names: &[&str]| {
+        names
+            .iter()
+            .find(|name| targets.iter().any(|target| target == *name))
+            .map(|name| format!("make {name}"))
+    };
+    let build = pick(&["build", "all", "compile", "dist", "package"]);
+    let test = pick(&["test", "check", "verify", "spec"]);
+    if build.is_none() && test.is_none() {
         return None;
     }
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::TaskScript,
-        build: if has_build {
-            Some("make build".into())
-        } else {
-            None
-        },
-        test: if has_test {
-            Some("make test".into())
-        } else {
-            None
-        },
+        build,
+        test,
     })
 }
 
 pub(crate) fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
-    let mut has_build = false;
-    let mut has_test = false;
+    let mut recipes: Vec<String> = Vec::new();
     for line in file.contents.lines() {
         let trimmed = line.trim();
         // Skip ':=' assignments (variables) and '[' (settings/aliases)
@@ -549,29 +539,31 @@ pub(crate) fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCom
             // The first word of lhs is the recipe name (may have args after it)
             let name = lhs.split_whitespace().next().unwrap_or(lhs);
             if name == "build" || name == "all" {
-                has_build = true;
+                recipes.push(name.to_string());
             }
             if name == "test" || name == "check" {
-                has_test = true;
+                recipes.push(name.to_string());
             }
         }
     }
-    if !has_build && !has_test {
+    // Publish the recipe name that actually exists rather than assuming a
+    // `build`/`test` recipe.
+    let pick = |names: &[&str]| {
+        names
+            .iter()
+            .find(|name| recipes.iter().any(|recipe| recipe == *name))
+            .map(|name| format!("just {name}"))
+    };
+    let build = pick(&["build", "all"]);
+    let test = pick(&["test", "check"]);
+    if build.is_none() && test.is_none() {
         return None;
     }
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::TaskScript,
-        build: if has_build {
-            Some("just build".into())
-        } else {
-            None
-        },
-        test: if has_test {
-            Some("just test".into())
-        } else {
-            None
-        },
+        build,
+        test,
     })
 }
 
@@ -738,7 +730,18 @@ fn is_env_assignment_token(token: &str) -> bool {
             .is_some_and(|ch| ch.is_ascii_alphabetic() || ch == '_')
 }
 
+/// Documented cargo commands may pin a toolchain (`cargo +nightly test ...`).
+/// Prefix matching must see the plain subcommand; the published command keeps
+/// the maintainer's exact toolchain override.
+fn without_cargo_toolchain_override(command: &str) -> Option<String> {
+    let rest = command.strip_prefix("cargo +")?;
+    let tail = rest.split_once(char::is_whitespace)?.1;
+    Some(format!("cargo {}", tail.trim_start()))
+}
+
 fn documented_build_command(command: &str) -> Option<String> {
+    let stripped = without_cargo_toolchain_override(command);
+    let matchable = stripped.as_deref().unwrap_or(command);
     for prefix in [
         "bazel build",
         "cargo build",
@@ -752,7 +755,7 @@ fn documented_build_command(command: &str) -> Option<String> {
         "make all",
         "just build",
     ] {
-        if starts_with_command_prefix(command, prefix) {
+        if starts_with_command_prefix(matchable, prefix) {
             return Some(command.to_string());
         }
     }
@@ -760,7 +763,9 @@ fn documented_build_command(command: &str) -> Option<String> {
 }
 
 fn documented_test_command(command: &str) -> Option<String> {
-    if starts_with_command_prefix(command, "cargo nextest run") {
+    let stripped = without_cargo_toolchain_override(command);
+    let matchable = stripped.as_deref().unwrap_or(command);
+    if starts_with_command_prefix(matchable, "cargo nextest run") {
         // Documentation often shows a selector-specific nextest invocation
         // immediately after recommending nextest. Publish the runner command,
         // not the example's one-test selector.
@@ -781,7 +786,7 @@ fn documented_test_command(command: &str) -> Option<String> {
         "make check",
         "just test",
     ] {
-        if starts_with_command_prefix(command, prefix) {
+        if starts_with_command_prefix(matchable, prefix) {
             return Some(command.to_string());
         }
     }

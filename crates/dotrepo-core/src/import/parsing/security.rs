@@ -5,7 +5,55 @@ use super::super::types::SecurityImportMetadata;
 use super::markdown::{extract_markdown_links, rewrite_markdown_links};
 
 pub(crate) fn parse_security_contact(contents: &str) -> Option<String> {
-    find_mailto_or_email(contents).or_else(|| find_first_url(contents))
+    match find_mailto_or_email(contents) {
+        Some(email) => {
+            if email_in_reporting_context(contents, &email) {
+                return Some(email);
+            }
+            // The only email in the document is incidental: SECURITY.md files
+            // routinely list downstream packagers, credits, or moderation
+            // contacts far from the actual reporting instruction. A scored
+            // security-reporting URL is the actionable channel in that case.
+            find_best_security_url(contents).or(Some(email))
+        }
+        None => find_first_url(contents),
+    }
+}
+
+fn email_in_reporting_context(contents: &str, email: &str) -> bool {
+    let email_lower = email.to_ascii_lowercase();
+    let mut current_heading = String::new();
+    for line in contents.lines() {
+        let trimmed = line.trim();
+        if trimmed.is_empty() {
+            continue;
+        }
+        if let Some(heading) = markdown_heading_text(trimmed) {
+            current_heading = heading;
+            continue;
+        }
+        let line_lower = trimmed.to_ascii_lowercase();
+        if !line_lower.contains(&email_lower) {
+            continue;
+        }
+        if line_lower.contains("mailto:") {
+            return true;
+        }
+        let heading_lower = current_heading.to_ascii_lowercase();
+        if ["report", "disclos", "security", "contact"]
+            .iter()
+            .any(|needle| heading_lower.contains(needle))
+        {
+            return true;
+        }
+        if ["report", "email", "contact", "disclos", "send", "write to"]
+            .iter()
+            .any(|needle| line_lower.contains(needle))
+        {
+            return true;
+        }
+    }
+    false
 }
 
 pub(crate) fn parse_security_import_metadata(contents: &str) -> SecurityImportMetadata {
@@ -524,6 +572,61 @@ pub(crate) fn looks_like_email(token: &str) -> bool {
         && domain.contains('.')
         && !token.starts_with("http://")
         && !token.starts_with("https://")
+}
+
+#[cfg(test)]
+mod security_contact_tests {
+    use super::parse_security_contact;
+
+    #[test]
+    fn reporting_url_beats_incidental_downstream_packager_email() {
+        // Shaped like psf/requests: the reporting instruction is an advisory
+        // URL in the opening section, and the only email in the document is a
+        // downstream packager notified ahead of releases.
+        let contents = r#"# Vulnerability Disclosure
+
+If you think you have found a potential security vulnerability, please
+open a [draft Security Advisory](https://github.com/example/project/security/advisories/new)
+via GitHub.
+
+## Process
+
+### Timeline
+
+Currently the list of people we actively contact ahead of a public release is:
+
+-   Python Maintenance Team, Red Hat (python-maint@redhat.com)
+-   Daniele Tricoli, Debian (@eriol)
+"#;
+        assert_eq!(
+            parse_security_contact(contents).as_deref(),
+            Some("https://github.com/example/project/security/advisories/new"),
+        );
+    }
+
+    #[test]
+    fn reporting_context_email_still_beats_policy_url() {
+        let contents = r#"# Security Policy
+
+## Reporting a Vulnerability
+
+Please email security@example.com with details.
+See https://example.com/security/policy for scope.
+"#;
+        assert_eq!(
+            parse_security_contact(contents).as_deref(),
+            Some("security@example.com"),
+        );
+    }
+
+    #[test]
+    fn lone_email_without_context_is_kept_when_no_url_exists() {
+        let contents = "# Notes\n\nMaintained by team@example.com.\n";
+        assert_eq!(
+            parse_security_contact(contents).as_deref(),
+            Some("team@example.com"),
+        );
+    }
 }
 
 #[cfg(test)]
