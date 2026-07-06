@@ -1089,8 +1089,8 @@ fn makefile_produces_taskscript_candidates() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("make build"));
-    assert_eq!(plan.manifest.repo.test.as_deref(), Some("make test"));
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("go build ./..."));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("go test ./..."));
     assert!(plan.inferred_fields.is_empty());
 
     fs::remove_dir_all(root).expect("temp dir removed");
@@ -1117,8 +1117,8 @@ fn justfile_produces_taskscript_candidates() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("just build"));
-    assert_eq!(plan.manifest.repo.test.as_deref(), Some("just test"));
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("cargo build"));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("cargo test"));
     assert!(plan.inferred_fields.is_empty());
 
     fs::remove_dir_all(root).expect("temp dir removed");
@@ -1266,8 +1266,8 @@ fn makefile_beats_workflow() {
     )
     .expect("import succeeds");
 
-    assert_eq!(plan.manifest.repo.build.as_deref(), Some("make build"));
-    assert_eq!(plan.manifest.repo.test.as_deref(), Some("make test"));
+    assert_eq!(plan.manifest.repo.build.as_deref(), Some("go build ./..."));
+    assert_eq!(plan.manifest.repo.test.as_deref(), Some("go test ./..."));
     assert!(plan.inferred_fields.is_empty());
 
     fs::remove_dir_all(root).expect("temp dir removed");
