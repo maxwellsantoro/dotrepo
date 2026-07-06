@@ -115,7 +115,9 @@ If `README.md` begins with the dotrepo generated banner, dotrepo treats it as
 `fully_generated`.
 
 - `doctor` reports `README.md [fully_generated]`
-- `generate --check` fails if any part of the file drifts
+- `generate --check` fails if the schema, source digest, or rendered body drifts
+- a generator-version-only banner difference is not drift; the previous banner
+  is preserved until the rendered output materially changes
 - `generate` rewrites the whole file from `.repo`
 
 ### 2. Partially managed README with local prose around it
