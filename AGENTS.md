@@ -83,6 +83,7 @@ dotrepo-cli      → clap-based CLI, delegates to core
 dotrepo-mcp      → stdio MCP 2025-11-25 server, delegates to core
 dotrepo-lsp      → stdio LSP server with diagnostics/hover/completion, delegates to core
 dotrepo-crawler  → discovery, factual crawl, verification, scoring, escalation, promotion, refresh planning, and autonomous writeback
+dotrepo          → standalone installable alias for dotrepo-cli (crates/dotrepo, excluded from the workspace because both emit a `dotrepo` binary)
 ```
 
 **Key rule**: No validation or trust logic is duplicated across CLI/MCP/LSP. All business logic lives in `dotrepo-core`.
@@ -150,7 +151,7 @@ MCP and LSP have inline tests in their respective `main.rs` files that verify pa
 
 `.github/workflows/ci.yml` classifies changed files in a `change-scope` job, then runs scoped downstream jobs:
 
-1. **`rust-and-index`** — `cargo fmt`, strict `cargo clippy`, `cargo deny`, `ruff check`, `ruff format --check`, root `.repo`/Cargo toolchain parity, `cargo test`, CLI smoke (validate + generate-check on `examples/native-minimal`, validate-index on `index/`), `cargo publish --dry-run` for the 6 published crates (`dotrepo-crawler` is internal orchestration and is not published), MCP stdio smoke test, LSP stdio smoke test
+1. **`rust-and-index`** — `cargo fmt`, strict `cargo clippy`, `cargo deny`, `ruff check`, `ruff format --check`, root `.repo`/Cargo toolchain parity, `cargo test`, CLI smoke (validate + generate-check on `examples/native-minimal`, validate-index on `index/`), `cargo publish --dry-run` for the 6 published workspace crates plus a local check of the standalone `dotrepo` alias package (`dotrepo-crawler` is internal orchestration and is not published), MCP stdio smoke test, LSP stdio smoke test. Tagged releases publish all 7 crates to crates.io through the `publish-crates` job in `release-artifacts.yml`
 2. **`operator-gate`** — maintainer-claim inspection and handoff regression (`scripts/check_operator_claim_gate.py`)
 3. **`public-surface-gate`** — lightweight public export gate for index/public-surface-only changes (`check_release_gate.py --skip-release-bundle --skip-vsix`)
 4. **`release-gate`** — full release packaging, VSIX, and hosted-query Worker smoke

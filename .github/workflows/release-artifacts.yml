@@ -158,6 +158,41 @@ jobs:
             release-assets/**/*.vsix
             release-assets/mcpb/*.mcpb
 
+  publish-crates:
+    if: github.ref_type == 'tag'
+    needs:
+      - release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Publish crates to crates.io
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          publish_one() {
+            local crate="$1"
+            shift
+            if curl -fsS -A "dotrepo-release-workflow (github.com/maxwellsantoro/dotrepo)" \
+              "https://crates.io/api/v1/crates/${crate}/${version}" > /dev/null 2>&1; then
+              echo "${crate} ${version} already on crates.io; skipping"
+              return 0
+            fi
+            cargo publish "$@"
+          }
+          for crate in dotrepo-schema dotrepo-transport dotrepo-core dotrepo-cli dotrepo-mcp dotrepo-lsp; do
+            publish_one "$crate" -p "$crate"
+          done
+          # The standalone alias package is excluded from the workspace and
+          # must be published last: its verification build resolves the
+          # dotrepo-cli version published above from the registry.
+          publish_one dotrepo --manifest-path crates/dotrepo/Cargo.toml
+
   mcp-registry:
     if: github.ref_type == 'tag'
     needs:

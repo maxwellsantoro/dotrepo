@@ -51,6 +51,9 @@ For the canonical freshness semantics used by these outputs, see
 - the packaged bundle extracts to one self-describing root directory
 - the release binary bundle contains `dotrepo`, `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp`
 - the release binary smoke test passes (binaries execute from extracted bundle)
+- the `publish-crates` release job published all seven crates for the tag,
+  including the standalone `dotrepo` alias package (its version and
+  `dotrepo-cli` dependency must both match the tag)
 - the release gate's hosted-query and Cloudflare Worker smoke checks pass (see
   "What the workflow does after deploy" in
   [`docs/cloudflare-deploy.md`](./cloudflare-deploy.md) for what those checks

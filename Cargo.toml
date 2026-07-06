@@ -8,6 +8,10 @@ members = [
   "crates/dotrepo-lsp",
   "crates/dotrepo-transport",
 ]
+# crates/dotrepo is the installable alias for dotrepo-cli. It is excluded
+# because both packages emit a binary named `dotrepo`, which collides inside
+# one workspace target directory.
+exclude = ["crates/dotrepo"]
 resolver = "2"
 
 [workspace.package]

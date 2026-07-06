@@ -28,10 +28,14 @@ The toolchain crates are published to crates.io, so a Rust toolchain is the
 only prerequisite:
 
 ```bash
-cargo install dotrepo-cli    # installs `dotrepo` and `dotrepo-public-query`
+cargo install dotrepo        # installs `dotrepo`
 cargo install dotrepo-mcp    # installs `dotrepo-mcp`
 cargo install dotrepo-lsp    # installs `dotrepo-lsp`
 ```
+
+`dotrepo` is a thin alias for `dotrepo-cli`; install `dotrepo-cli` instead if
+you also want the `dotrepo-public-query` binary. Install one or the other, not
+both — they provide the same `dotrepo` binary.
 
 Published crate versions track tagged releases: the crates.io source for a
 version matches the GitHub release tag of the same version, not the tip of

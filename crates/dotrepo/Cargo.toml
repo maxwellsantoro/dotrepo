@@ -1,0 +1,31 @@
+# Standalone alias package, excluded from the workspace because its binary
+# name collides with the `dotrepo` binary from dotrepo-cli. It must compile
+# against the published dotrepo-cli, so keep its dependency version pinned to
+# a released version. Workspace inheritance is unavailable here; keep these
+# fields in sync with [workspace.package] in the root Cargo.toml.
+#
+# At release time, bump both [package] version and the dotrepo-cli dependency
+# version to the tag version; the publish-crates release job publishes this
+# package last so the matching dotrepo-cli is already on the registry.
+[package]
+name = "dotrepo"
+version = "1.0.1"
+edition = "2021"
+rust-version = "1.90.0"
+license = "MIT"
+authors = ["dotrepo contributors"]
+repository = "https://github.com/maxwellsantoro/dotrepo"
+homepage = "https://dotrepo.org/"
+description = "Trust-aware repository metadata CLI. Installable alias for dotrepo-cli."
+readme = "../../README.md"
+keywords = ["cli", "metadata", "repository", "trust", "protocol"]
+categories = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "dotrepo"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+dotrepo-cli = { version = "1.0.1", path = "../dotrepo-cli" }
