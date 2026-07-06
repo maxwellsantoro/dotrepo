@@ -9,11 +9,13 @@ extracted from README/SECURITY.md/CONTRIBUTING with either a regex heuristic
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
 from typing import Optional
 
+from ..cache import ReplayCacheMiss
 from ..model import Answer, Field, FieldClass
 from .base import Arm, Http
 
@@ -21,6 +23,26 @@ API = "https://api.github.com"
 RAW = "https://raw.githubusercontent.com"
 
 _FENCE = re.compile(r"```(?:bash|sh|console|shell|text)?\n(.*?)```", re.S | re.I)
+
+DOC_PATHS = {
+    "readme": ("README.md", "README.rst", "README", "Readme.md"),
+    "security": ("SECURITY.md", ".github/SECURITY.md"),
+    "contributing": (
+        "CONTRIBUTING.md",
+        ".github/CONTRIBUTING.md",
+        "CONTRIBUTING.rst",
+        "docs/contributing.md",
+        "docs/contributing.rst",
+    ),
+    "cargo": ("Cargo.toml",),
+    "rust_toolchain_toml": ("rust-toolchain.toml",),
+    "rust_toolchain": ("rust-toolchain",),
+    "pyproject": ("pyproject.toml",),
+    "package": ("package.json",),
+    "go_mod": ("go.mod",),
+    "makefile": ("Makefile",),
+    "justfile": ("justfile", "Justfile"),
+}
 
 
 class GitHubArm(Arm):
@@ -40,6 +62,28 @@ class GitHubArm(Arm):
             h["Authorization"] = f"Bearer {self.token}"
         return h
 
+    def configuration(self) -> dict:
+        config = {"extractor": self.extractor}
+        if self.extractor != "llm":
+            return config
+        if os.environ.get("OPENROUTER_API_KEY"):
+            config.update(
+                {
+                    "provider": "openrouter",
+                    "model": os.environ.get("OPENROUTER_MODEL")
+                    or os.environ.get("DOTREPO_ADJUDICATION_MODEL")
+                    or os.environ.get("DOTREPO_ADJUDICATION_API_MODEL"),
+                }
+            )
+        elif os.environ.get("ANTHROPIC_API_KEY"):
+            config.update(
+                {
+                    "provider": "anthropic",
+                    "model": os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929"),
+                }
+            )
+        return config
+
     def prefetch(self, repo: str):
         self._meta, self._docs, self._cost = {}, {}, {}
         owner, name = _split(repo)
@@ -48,21 +92,21 @@ class GitHubArm(Arm):
         if st == 200:
             self._meta = json.loads(text)
         self._cost["__meta__"] = (nb, ms)
-        # 2) docs for buried fields, fetched lazily-but-once per file
-        for label, path in (
-            ("readme", "README.md"),
-            ("security", "SECURITY.md"),
-            ("contributing", "CONTRIBUTING.md"),
-            ("cargo", "Cargo.toml"),
-            ("rust_toolchain_toml", "rust-toolchain.toml"),
-            ("rust_toolchain", "rust-toolchain"),
-            ("pyproject", "pyproject.toml"),
-        ):
-            branch = self._meta.get("default_branch", "main")
-            st, text, nb, ms = self.http.get(f"{RAW}/{owner}/{name}/{branch}/{path}")
-            if st == 200:
-                self._docs[label] = text
-            self._cost[f"__{label}__"] = (nb if st == 200 else 0, ms)
+        # 2) conventional maintainer docs and manifests for buried fields.
+        # Try common filename/location variants rather than silently treating
+        # README.rst or .github/SECURITY.md as absent.
+        branch = self._meta.get("default_branch", "main")
+        for label, paths in DOC_PATHS.items():
+            total_bytes = 0
+            total_ms = 0.0
+            for path in paths:
+                st, text, nb, ms = self.http.get(f"{RAW}/{owner}/{name}/{branch}/{path}")
+                total_bytes += nb
+                total_ms += ms
+                if st == 200:
+                    self._docs[label] = text
+                    break
+            self._cost[f"__{label}__"] = (total_bytes, total_ms)
 
     def answer(self, repo: str, field: Field) -> Answer:
         if field.field_class == FieldClass.GITHUB_NATIVE:
@@ -118,14 +162,37 @@ class GitHubArm(Arm):
         if field.id == "security_contact":
             return self._docs.get("security"), "SECURITY.md"
         if field.id == "test":
-            return (self._docs.get("contributing") or self._docs.get("readme")), "docs"
+            return self._join_docs(
+                "contributing", "makefile", "justfile", "package", "pyproject", "readme"
+            ), "test-docs"
         if field.id == "min_toolchain":
-            parts = []
-            for label in ("readme", "cargo", "rust_toolchain_toml", "rust_toolchain", "pyproject"):
-                if self._docs.get(label):
-                    parts.append(f"\n--- {label} ---\n{self._docs[label]}")
-            return "\n".join(parts), "toolchain-docs"
-        return self._docs.get("readme"), "README.md"
+            return self._join_docs(
+                "cargo",
+                "rust_toolchain_toml",
+                "rust_toolchain",
+                "pyproject",
+                "package",
+                "go_mod",
+                "readme",
+            ), "toolchain-docs"
+        return (
+            self._join_docs(
+                "contributing",
+                "makefile",
+                "justfile",
+                "package",
+                "pyproject",
+                "cargo",
+                "go_mod",
+                "readme",
+            ),
+            "build-docs",
+        )
+
+    def _join_docs(self, *labels: str) -> str:
+        return "\n".join(
+            f"\n--- {label} ---\n{self._docs[label]}" for label in labels if self._docs.get(label)
+        )
 
     def _heuristic_extract(self, field: Field, blob: str):
         low = blob.lower()
@@ -162,9 +229,19 @@ class GitHubArm(Arm):
             m = re.search(r"channel\s*=\s*[\"'](\d+\.\d+(?:\.\d+)?)[\"']", blob, re.I)
             if m:
                 return m.group(1), "medium"
-            m = re.search(r"requires-python\s*=\s*[\"']>=\s*(\d+\.\d+)[\"']", blob, re.I)
+            m = re.search(
+                r"(?:requires-python|python)\s*=\s*[\"']>=\s*(\d+\.\d+(?:\.\d+)?)[\"']",
+                blob,
+                re.I,
+            )
             if m:
                 return m.group(1), "medium"
+            m = re.search(r"[\"\']node[\"\']\s*:\s*[\"\']>=\s*(\d+(?:\.\d+)*)", blob, re.I)
+            if m:
+                return m.group(1), "medium"
+            m = re.search(r"^go\s+(\d+\.\d+(?:\.\d+)?)\s*$", blob, re.I | re.M)
+            if m:
+                return m.group(1), "high"
             m = re.search(r"(rust|msrv)[^\n]{0,30}?(\d+\.\d+(?:\.\d+)?)", low)
             if m:
                 return m.group(2), "low"
@@ -205,6 +282,10 @@ class GitHubArm(Arm):
                 "LLM extractor using OpenRouter requires OPENROUTER_MODEL, "
                 "DOTREPO_ADJUDICATION_MODEL, or DOTREPO_ADJUDICATION_API_MODEL"
             )
+        prompt = self._llm_prompt(field, blob)
+        cached = self._cached_llm_result("openrouter", model, prompt)
+        if cached is not None:
+            return cached
         r = rq.post(
             "https://openrouter.ai/api/v1/chat/completions",
             headers={
@@ -220,7 +301,7 @@ class GitHubArm(Arm):
                         "role": "system",
                         "content": "Return strict JSON only. Never wrap in markdown fences.",
                     },
-                    {"role": "user", "content": self._llm_prompt(field, blob)},
+                    {"role": "user", "content": prompt},
                 ],
                 "temperature": 0,
                 "max_tokens": 400,
@@ -240,13 +321,19 @@ class GitHubArm(Arm):
                 "OpenRouter returned an empty LLM extraction response "
                 f"for {field.id}; finish_reason={choice.get('finish_reason')!r}"
             )
-        return _parse_llm_json(field, txt)
+        result = _parse_llm_json(field, txt)
+        self._freeze_llm_result("openrouter", model, prompt, result)
+        return result
 
     def _anthropic_extract(self, field: Field, blob: str):
         import requests as rq
 
         api_key = os.environ["ANTHROPIC_API_KEY"]
         model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929")
+        prompt = self._llm_prompt(field, blob)
+        cached = self._cached_llm_result("anthropic", model, prompt)
+        if cached is not None:
+            return cached
         r = rq.post(
             "https://api.anthropic.com/v1/messages",
             headers={
@@ -257,14 +344,46 @@ class GitHubArm(Arm):
             json={
                 "model": model,
                 "max_tokens": 400,
-                "messages": [{"role": "user", "content": self._llm_prompt(field, blob)}],
+                "messages": [{"role": "user", "content": prompt}],
             },
             timeout=40,
         )
         r.raise_for_status()
         data = r.json()
         txt = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text")
-        return _parse_llm_json(field, txt)
+        result = _parse_llm_json(field, txt)
+        self._freeze_llm_result("anthropic", model, prompt, result)
+        return result
+
+    def _cached_llm_result(self, provider: str, model: str, prompt: str):
+        if self.http.cache is None:
+            return None
+        key = self._llm_cache_key(provider, model, prompt)
+        hit = self.http.cache.get(key)
+        if hit is not None:
+            payload = json.loads(hit["text"])
+            return payload.get("value"), payload.get("confidence")
+        if self.http.cache.mode == "replay":
+            raise ReplayCacheMiss(f"replay cache miss: {key}")
+        return None
+
+    def _freeze_llm_result(
+        self, provider: str, model: str, prompt: str, result: tuple[object, str]
+    ) -> None:
+        if self.http.cache is None:
+            return
+        key = self._llm_cache_key(provider, model, prompt)
+        value, confidence = result
+        self.http.cache.put(
+            key,
+            200,
+            json.dumps({"value": value, "confidence": confidence}, sort_keys=True),
+        )
+
+    @staticmethod
+    def _llm_cache_key(provider: str, model: str, prompt: str) -> str:
+        digest = hashlib.sha256(prompt.encode()).hexdigest()
+        return f"benchmark-llm://{provider}/{model}/{digest}"
 
     # -- byte/latency accounting: charge each underlying fetch exactly once --
     def _charge(self, key: str):
@@ -273,19 +392,44 @@ class GitHubArm(Arm):
         return nb, ms
 
     def _charge_docs(self, field: Field):
-        keys = {"security_contact": "__security__", "test": "__contributing__"}
+        keys = {"security_contact": ["__security__"]}
+        if field.id == "test":
+            return self._charge_many(
+                [
+                    "__contributing__",
+                    "__makefile__",
+                    "__justfile__",
+                    "__package__",
+                    "__pyproject__",
+                    "__readme__",
+                ]
+            )
         if field.id == "min_toolchain":
             return self._charge_many(
                 [
-                    "__readme__",
                     "__cargo__",
                     "__rust_toolchain_toml__",
                     "__rust_toolchain__",
                     "__pyproject__",
+                    "__package__",
+                    "__go_mod__",
+                    "__readme__",
                 ]
             )
-        primary = keys.get(field.id, "__readme__")
-        return self._charge(primary)
+        if field.id == "build":
+            return self._charge_many(
+                [
+                    "__contributing__",
+                    "__makefile__",
+                    "__justfile__",
+                    "__package__",
+                    "__pyproject__",
+                    "__cargo__",
+                    "__go_mod__",
+                    "__readme__",
+                ]
+            )
+        return self._charge_many(keys.get(field.id, ["__readme__"]))
 
     def _charge_many(self, keys):
         total_bytes = 0

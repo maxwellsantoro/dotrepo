@@ -11,14 +11,19 @@ from urllib.parse import quote
 
 import yaml
 
+from bench.arms.github_arm import DOC_PATHS
+
 CACHE = "results/fixtures"
 os.makedirs(CACHE, exist_ok=True)
 for name in os.listdir(CACHE):
     if name.endswith(".json"):
         os.unlink(os.path.join(CACHE, name))
 
+seeded_urls = set()
+
 
 def put(url, status, text):
+    seeded_urls.add(url)
     h = hashlib.sha256(url.encode()).hexdigest()[:24]
     json.dump(
         {"url": url, "status": status, "text": text}, open(os.path.join(CACHE, f"{h}.json"), "w")
@@ -73,6 +78,15 @@ put(
 
 # CONTRIBUTING absent
 put(f"https://raw.githubusercontent.com/{OWNER}/{REPOSITORY}/main/CONTRIBUTING.md", 404, "")
+
+# Freeze every conventional-source probe. Replay mode fails closed on a cache
+# miss, so the offline self-test cannot silently touch the network when the
+# baseline's source discovery expands.
+for candidate_paths in DOC_PATHS.values():
+    for candidate_path in candidate_paths:
+        url = f"https://raw.githubusercontent.com/{OWNER}/{REPOSITORY}/main/{candidate_path}"
+        if url not in seeded_urls:
+            put(url, 404, "")
 
 # --- dotrepo batch/query envelope ---
 # Correct on description/language/build/test/security; ABSTAINS on homepage;

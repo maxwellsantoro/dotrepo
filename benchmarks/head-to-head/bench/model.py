@@ -13,7 +13,7 @@ from __future__ import annotations
 import enum
 import re
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Any, Optional
 
 
 class Outcome(str, enum.Enum):
@@ -46,8 +46,10 @@ class Field:
 class GoldItem:
     repo: str  # "github.com/sharkdp/fd"
     field_id: str
-    gold: Optional[str]  # curated truth; None => NO_GOLD (excluded)
+    gold: Optional[str | list[str]]  # accepted truths; None => NO_GOLD (excluded)
     note: str = ""
+    cohort: str = "unspecified"
+    evidence: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -63,6 +65,7 @@ class Answer:
 # ---- normalization + matching -------------------------------------------------
 
 _WS = re.compile(r"\s+")
+_MD_LINK = re.compile(r"\[([^\]]+)\]\([^)]+\)")
 
 # Minimal SPDX alias table. Extend as gold set grows.
 _SPDX = {
@@ -89,6 +92,12 @@ _SPDX = {
 
 def _norm(s: str) -> str:
     return _WS.sub(" ", s.strip().lower())
+
+
+def _norm_categorical(s: str) -> str:
+    s = _MD_LINK.sub(r"\1", s)
+    s = s.translate(str.maketrans({"’": "'", "‘": "'", "“": '"', "”": '"'}))
+    return _norm(s.replace("*", "").replace("`", "").replace("[", "").replace("]", ""))
 
 
 def _spdx(s: str) -> str:
@@ -171,17 +180,29 @@ def values_match(match: str, got: str, gold: str) -> bool:
             return False
         core = {t for t in gd if t not in _IGNORED_COMMAND_TOKENS}
         return core.issubset(gt) and len(core) > 0
+    if match == "version":
+        got_version = _version_tuple(got)
+        gold_version = _version_tuple(gold)
+        return got_version is not None and got_version == gold_version
     # categorical (default): normalized substring either direction
-    a, b = _norm(got), _norm(gold)
+    a, b = _norm_categorical(got), _norm_categorical(gold)
     return a == b or a in b or b in a
 
 
-def score_answer(field: Field, ans: Answer, gold: Optional[str]) -> Outcome:
-    if gold is None:
+def _version_tuple(value: str) -> tuple[int, int, int] | None:
+    match = re.search(r"(?<!\d)(\d+)(?:\.(\d+))?(?:\.(\d+))?(?!\d)", value)
+    if match is None:
+        return None
+    return tuple(int(part or 0) for part in match.groups())
+
+
+def score_answer(field: Field, ans: Answer, gold: Optional[str | list[str]]) -> Outcome:
+    if gold is None or gold == []:
         return Outcome.NO_GOLD
     if ans.value is None or _norm(ans.value) in {"", "unknown", "n/a", "none", "null"}:
         return Outcome.ABSTAINED
-    if values_match(field.match, ans.value, gold):
+    accepted = gold if isinstance(gold, list) else [gold]
+    if any(values_match(field.match, ans.value, candidate) for candidate in accepted):
         return Outcome.CORRECT
     # wrong value: severity gated on confidence
     if (ans.confidence or "").lower() == "high":

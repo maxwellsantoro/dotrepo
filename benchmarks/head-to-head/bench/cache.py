@@ -6,6 +6,10 @@ import os
 from typing import Optional
 
 
+class ReplayCacheMiss(RuntimeError):
+    """A replay requested an input that was not present in the frozen artifact."""
+
+
 class ResponseCache:
     """Content-addressed cache of raw HTTP responses.
 
