@@ -39,12 +39,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-zero-model-rate", type=float, default=0.75)
     parser.add_argument("--max-adjudication-budget-use-rate", type=float, default=1.0)
     parser.add_argument("--max-tokens-per-crawled", type=float, default=5000.0)
-    parser.add_argument(
-        "--max-recent-adjudication-budget-use-rate-delta", type=float, default=0.25
-    )
-    parser.add_argument(
-        "--max-recent-tokens-per-crawled-delta", type=float, default=1000.0
-    )
+    parser.add_argument("--max-recent-adjudication-budget-use-rate-delta", type=float, default=0.25)
+    parser.add_argument("--max-recent-tokens-per-crawled-delta", type=float, default=1000.0)
     return parser.parse_args()
 
 
@@ -170,8 +166,7 @@ def cost_block_well_formed(block: dict) -> bool:
     expected_budget_rate = block["adjudicationCalls"] / budget if budget else 0.0
     expected_token_rate = block["tokensUsed"] / crawled if crawled else 0.0
     return (
-        abs(number(block["adjudicationBudgetUseRate"]) - expected_budget_rate)
-        <= 0.000001
+        abs(number(block["adjudicationBudgetUseRate"]) - expected_budget_rate) <= 0.000001
         and abs(number(block["tokensPerCrawled"]) - expected_token_rate) <= 0.000001
     )
 
@@ -315,9 +310,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     promotion_rate = number(rates.get("promotionRate"))
     zero_model_rate = number(rates.get("zeroModelRate"))
     adjudication_budget_use_rate = (
-        adjudication_calls / adjudication_call_budget
-        if adjudication_call_budget
-        else 0.0
+        adjudication_calls / adjudication_call_budget if adjudication_call_budget else 0.0
     )
     tokens_per_crawled = tokens_used / crawled if crawled else 0.0
     aggregate_costs = {
@@ -333,12 +326,9 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     recent_adjudication_budget_use_rate = number(
         recent_cost_reference.get("adjudicationBudgetUseRate")
     )
-    recent_tokens_per_crawled = number(
-        recent_cost_reference.get("tokensPerCrawled")
-    )
-    recent_adjudication_budget_use_rate_delta = (
-        recent_adjudication_budget_use_rate
-        - number(previous_cost_reference.get("adjudicationBudgetUseRate"))
+    recent_tokens_per_crawled = number(recent_cost_reference.get("tokensPerCrawled"))
+    recent_adjudication_budget_use_rate_delta = recent_adjudication_budget_use_rate - number(
+        previous_cost_reference.get("adjudicationBudgetUseRate")
     )
     recent_tokens_per_crawled_delta = recent_tokens_per_crawled - number(
         previous_cost_reference.get("tokensPerCrawled")
@@ -350,12 +340,8 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     worst_zero_model_rate = number(worst_rates.get("zeroModelRate"))
     recent_failure_rate = number(recent_window_rates.get("failureRate"))
     recent_adjudication_rate = number(recent_window_rates.get("adjudicationRate"))
-    recent_second_opinion_rate = number(
-        recent_window_rates.get("secondOpinionRate")
-    )
-    recent_api_escalation_rate = number(
-        recent_window_rates.get("apiEscalationRate")
-    )
+    recent_second_opinion_rate = number(recent_window_rates.get("secondOpinionRate"))
+    recent_api_escalation_rate = number(recent_window_rates.get("apiEscalationRate"))
     recent_zero_model_rate = number(recent_window_rates.get("zeroModelRate"))
     drift_reference_rates = previous_window_rates if previous_window_run_count else rates
     drift_reference_label = "previous-window" if previous_window_run_count else "aggregate"
@@ -371,9 +357,9 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
     recent_api_escalation_rate_delta = recent_api_escalation_rate - number(
         drift_reference_rates.get("apiEscalationRate")
     )
-    recent_zero_model_rate_drop = number(
-        drift_reference_rates.get("zeroModelRate")
-    ) - recent_zero_model_rate
+    recent_zero_model_rate_drop = (
+        number(drift_reference_rates.get("zeroModelRate")) - recent_zero_model_rate
+    )
     fixture_eligible_failures = fixture_eligible_recurring_failures(summary)
     fixture_eligible_failure_count = len(fixture_eligible_failures)
     proof_fields_present = retained_proof_fields_present(summary)
@@ -485,8 +471,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "recent-window second-opinion adjudication drift",
             round(recent_second_opinion_rate_delta, 6),
             f"<= {args.max_recent_second_opinion_rate_delta}",
-            recent_second_opinion_rate_delta
-            <= args.max_recent_second_opinion_rate_delta,
+            recent_second_opinion_rate_delta <= args.max_recent_second_opinion_rate_delta,
         ),
         check(
             "strong remote escalation rate",
@@ -540,8 +525,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "recent-window adjudication call budget usage",
             round(recent_adjudication_budget_use_rate, 6),
             f"<= {args.max_adjudication_budget_use_rate}",
-            recent_adjudication_budget_use_rate
-            <= args.max_adjudication_budget_use_rate,
+            recent_adjudication_budget_use_rate <= args.max_adjudication_budget_use_rate,
         ),
         check(
             "recent-window adjudication budget usage drift",
@@ -560,8 +544,7 @@ def evaluate(summary: dict, args: argparse.Namespace) -> dict:
             "recent-window token intensity drift",
             round(recent_tokens_per_crawled_delta, 6),
             f"<= {args.max_recent_tokens_per_crawled_delta}",
-            recent_tokens_per_crawled_delta
-            <= args.max_recent_tokens_per_crawled_delta,
+            recent_tokens_per_crawled_delta <= args.max_recent_tokens_per_crawled_delta,
         ),
         check(
             "fixture-eligible recurring failures",

@@ -130,7 +130,9 @@ def build_workload(
 
     tasks = []
     included_repositories = 0
-    for entry in sorted(repositories, key=lambda item: repository_from_identity(item.get("identity") or {})):
+    for entry in sorted(
+        repositories, key=lambda item: repository_from_identity(item.get("identity") or {})
+    ):
         repository = repository_from_identity(entry.get("identity") or {})
         if mode == "research":
             tasks.extend(research_tasks(repository))

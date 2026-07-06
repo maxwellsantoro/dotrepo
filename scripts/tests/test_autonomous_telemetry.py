@@ -156,9 +156,7 @@ def test_aggregate_runs_calculates_retained_rates_and_recurring_failures() -> No
     assert summary["failureClasses"] == {"parser": 1}
     assert summary["failureClassesByEcosystem"] == {"parser/rust": 2}
     assert summary["failureEcosystems"] == {"rust": 2}
-    assert summary["recurringFailures"] == [
-        {"fingerprint": "Cargo.toml parse error", "count": 2}
-    ]
+    assert summary["recurringFailures"] == [{"fingerprint": "Cargo.toml parse error", "count": 2}]
     assert summary["regressionFixtureCandidates"] == [
         {
             "failureClass": "parser",
@@ -429,11 +427,7 @@ def test_adjudication_tier_counts_records_unique_tiers_per_crawl() -> None:
     counts = autonomous_batch.adjudication_tier_counts(
         [
             {"escalation": {"adjudicationTiersUsed": ["local_primary"]}},
-            {
-                "escalation": {
-                    "adjudicationTiersUsed": ["local_primary", "api_escalation"]
-                }
-            },
+            {"escalation": {"adjudicationTiersUsed": ["local_primary", "api_escalation"]}},
             {"escalation": {"adjudicationTiersUsed": []}},
         ]
     )
@@ -509,10 +503,10 @@ def test_aggregate_runs_keeps_colliding_fixture_slugs_distinct() -> None:
 
     summary = autonomous_batch.aggregate_runs(runs)
 
-    assert [
-        item["suggestedFixture"]
-        for item in summary["regressionFixtureCandidates"]
-    ] == ["cargo-toml-parse-error", "cargo-toml-parse-error-2"]
+    assert [item["suggestedFixture"] for item in summary["regressionFixtureCandidates"]] == [
+        "cargo-toml-parse-error",
+        "cargo-toml-parse-error-2",
+    ]
 
 
 def test_aggregate_runs_skips_blank_failure_fingerprints() -> None:
@@ -628,9 +622,7 @@ def test_write_regression_fixture_candidate_artifacts(tmp_path: Path) -> None:
     json_path = tmp_path / "regression-fixture-candidates.json"
     md_path = tmp_path / "regression-fixture-candidates.md"
 
-    autonomous_batch.write_regression_fixture_candidate_artifacts(
-        summary, json_path, md_path
-    )
+    autonomous_batch.write_regression_fixture_candidate_artifacts(summary, json_path, md_path)
 
     payload = autonomous_batch.json.loads(json_path.read_text())
     assert payload["candidateCount"] == 1
@@ -850,13 +842,11 @@ def test_quality_reprocess_candidates_rotate_oldest_generation_first(
     older = index_root / "repos/github.com/owner/older-imported/record.toml"
     recent.write_text(
         recent.read_text().replace(
-            '[record]\n', '[record]\ngenerated_at = "2026-06-20T00:00:00Z"\n'
+            "[record]\n", '[record]\ngenerated_at = "2026-06-20T00:00:00Z"\n'
         )
     )
     older.write_text(
-        older.read_text().replace(
-            '[record]\n', '[record]\ngenerated_at = "2026-06-01T00:00:00Z"\n'
-        )
+        older.read_text().replace("[record]\n", '[record]\ngenerated_at = "2026-06-01T00:00:00Z"\n')
     )
 
     candidates = autonomous_batch.quality_reprocess_candidates(index_root)
@@ -980,9 +970,7 @@ def _write_refresh_batches(path: Path, batch_ids: list[str]) -> None:
                 "batches": [
                     {
                         "id": batch_id,
-                        "repositories": [
-                            {"identity": f"github.com/owner/{batch_id}-repo"}
-                        ],
+                        "repositories": [{"identity": f"github.com/owner/{batch_id}-repo"}],
                     }
                     for batch_id in batch_ids
                 ],

@@ -70,12 +70,8 @@ def write_reviewed_export(root: Path, *, snapshot_digest: str = "abc123") -> Non
     }
     (root / "v0" / "meta.json").write_text(json.dumps(meta, indent=2) + "\n")
     (root / "v0" / "files.json").write_text(json.dumps(files, indent=2) + "\n")
-    (root / "v0" / "repos" / "index.json").write_text(
-        json.dumps(inventory, indent=2) + "\n"
-    )
-    (root / "v0" / "snapshots" / "log.json").write_text(
-        json.dumps(snapshot_log, indent=2) + "\n"
-    )
+    (root / "v0" / "repos" / "index.json").write_text(json.dumps(inventory, indent=2) + "\n")
+    (root / "v0" / "snapshots" / "log.json").write_text(json.dumps(snapshot_log, indent=2) + "\n")
     (root / "v0" / "stats.json").write_text(json.dumps(stats, indent=2) + "\n")
 
 
@@ -194,6 +190,6 @@ def test_live_manifest_entry_mismatches_reports_hash_and_size_drift(
         manifest_entry("v0/files.json", b"files"),
     ]
 
-    assert smoke.live_manifest_entry_mismatches(
-        "https://example.test", "", entries, "cache"
-    ) == ["v0/files.json"]
+    assert smoke.live_manifest_entry_mismatches("https://example.test", "", entries, "cache") == [
+        "v0/files.json"
+    ]

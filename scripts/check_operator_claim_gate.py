@@ -41,15 +41,7 @@ def ensure(condition: bool, message: str) -> None:
 
 
 def fixture_root(repo_root: Path, name: str) -> Path:
-    return (
-        repo_root
-        / "crates"
-        / "dotrepo-core"
-        / "tests"
-        / "fixtures"
-        / "claims"
-        / name
-    )
+    return repo_root / "crates" / "dotrepo-core" / "tests" / "fixtures" / "claims" / name
 
 
 def claim_path(claim_id: str) -> str:
@@ -100,7 +92,9 @@ def main() -> int:
         cwd=repo_root,
     )
     accepted_json = json.loads(accepted.stdout)
-    ensure(accepted_json["state"] == "accepted", "accepted-clean fixture should report accepted state")
+    ensure(
+        accepted_json["state"] == "accepted", "accepted-clean fixture should report accepted state"
+    )
     ensure(
         accepted_json["target"]["handoff"] == "superseded",
         "accepted-clean fixture should report superseded handoff",

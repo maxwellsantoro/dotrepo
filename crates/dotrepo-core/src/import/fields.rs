@@ -64,9 +64,7 @@ pub fn score_import_fields(
         field: "repo.description".into(),
         confidence: if description_conflict {
             FieldConfidence::Suspect
-        } else if description_matches_github {
-            FieldConfidence::HighConfidencePresent
-        } else if name_has_readme_source {
+        } else if description_matches_github || name_has_readme_source {
             FieldConfidence::HighConfidencePresent
         } else {
             FieldConfidence::MediumConfidencePresent

@@ -123,25 +123,17 @@ def parse_signal_limits(values: list[str], flag: str) -> dict[str, int]:
     limits = {}
     for raw in values:
         if "=" not in raw:
-            raise SystemExit(
-                f"{flag} must use SIGNAL=COUNT, got {raw!r}"
-            )
+            raise SystemExit(f"{flag} must use SIGNAL=COUNT, got {raw!r}")
         signal, count_text = raw.split("=", 1)
         signal = signal.strip()
         if not signal:
-            raise SystemExit(
-                f"{flag} must include a signal name, got {raw!r}"
-            )
+            raise SystemExit(f"{flag} must include a signal name, got {raw!r}")
         try:
             count = int(count_text)
         except ValueError as exc:
-            raise SystemExit(
-                f"{flag} count must be an integer, got {raw!r}"
-            ) from exc
+            raise SystemExit(f"{flag} count must be an integer, got {raw!r}") from exc
         if count < 0:
-            raise SystemExit(
-                f"{flag} count must be >= 0, got {raw!r}"
-            )
+            raise SystemExit(f"{flag} count must be >= 0, got {raw!r}")
         limits[signal] = count
     return limits
 
@@ -166,9 +158,7 @@ def nonempty_string(value: object) -> bool:
     return isinstance(value, str) and bool(value.strip())
 
 
-def profile_contract_errors(
-    profile: object, path: Path, public_root: Path
-) -> list[str]:
+def profile_contract_errors(profile: object, path: Path, public_root: Path) -> list[str]:
     if not isinstance(profile, dict):
         return ["profile must be a JSON object"]
 
@@ -217,8 +207,7 @@ def profile_contract_errors(
             errors.append("profile path must be v0/repos/<host>/<owner>/<repo>/profile.json")
         elif actual_parts != expected_parts:
             errors.append(
-                "identity does not match profile path: "
-                f"expected {'/'.join(expected_parts)}"
+                f"identity does not match profile path: expected {'/'.join(expected_parts)}"
             )
 
     record = profile.get("record")
@@ -288,9 +277,7 @@ def profile_quality(profile: dict[str, Any]) -> dict[str, Any]:
         "signalFlags": signal_flags,
         "signalCount": sum(1 for value in signal_flags.values() if value),
         "isHighSignal": is_high_signal,
-        "missingSignals": [
-            key for key, value in signal_flags.items() if not value
-        ],
+        "missingSignals": [key for key, value in signal_flags.items() if not value],
     }
 
 
@@ -338,9 +325,7 @@ def summarize(
         summarize_profile(path, public_root) for path in profile_paths(public_root)
     ]
     profiles = [profile for profile in discovered_profiles if profile["valid"]]
-    malformed_profiles = [
-        profile for profile in discovered_profiles if not profile["valid"]
-    ]
+    malformed_profiles = [profile for profile in discovered_profiles if not profile["valid"]]
     profile_count = len(profiles)
     high_signal_profiles = [profile for profile in profiles if profile["isHighSignal"]]
     lower_signal_profiles = [profile for profile in profiles if not profile["isHighSignal"]]
@@ -351,9 +336,7 @@ def summarize(
     signal_counts: Counter[str] = Counter()
     missing_signal_counts: Counter[str] = Counter()
     for profile in profiles:
-        signal_counts.update(
-            key for key, value in profile["signalFlags"].items() if value
-        )
+        signal_counts.update(key for key, value in profile["signalFlags"].items() if value)
         missing_signal_counts.update(profile["missingSignals"])
 
     high_signal_ratio = ratio(len(high_signal_profiles), profile_count)
@@ -473,17 +456,13 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.extend(["## Missing-Signal Gates", ""])
         for signal, gate in gates["maxMissingSignal"].items():
             result = "pass" if gate["passed"] else "fail"
-            lines.append(
-                f"- `{signal}`: {gate['actual']} / {gate['threshold']} ({result})"
-            )
+            lines.append(f"- `{signal}`: {gate['actual']} / {gate['threshold']} ({result})")
         lines.append("")
     if gates["minSignal"]:
         lines.extend(["## Signal Minimum Gates", ""])
         for signal, gate in gates["minSignal"].items():
             result = "pass" if gate["passed"] else "fail"
-            lines.append(
-                f"- `{signal}`: {gate['actual']} / {gate['threshold']} ({result})"
-            )
+            lines.append(f"- `{signal}`: {gate['actual']} / {gate['threshold']} ({result})")
         lines.append("")
     lines.extend(["## Lower-Signal Profiles", ""])
     if not report["lowerSignalProfiles"]:

@@ -21,6 +21,10 @@ build = "cargo build --workspace"
 test = "cargo test --workspace"
 topics = ["repository-metadata", "protocol", "rust-cli", "mcp", "lsp", "ai-agents"]
 
+[repo.toolchain]
+min = "1.90.0"
+ecosystem = "Rust"
+
 [owners]
 maintainers = ["@maxwellsantoro"]
 team = "dotrepo"

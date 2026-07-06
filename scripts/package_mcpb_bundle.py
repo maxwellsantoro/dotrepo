@@ -59,9 +59,7 @@ def target_from_tarball_name(name: str, version: str) -> str:
     prefix = f"dotrepo-{version}-"
     stem = name.removesuffix(".tar.gz")
     if not stem.startswith(prefix):
-        raise SystemExit(
-            f"tarball name {name!r} does not match dotrepo-{version}-<target>.tar.gz"
-        )
+        raise SystemExit(f"tarball name {name!r} does not match dotrepo-{version}-<target>.tar.gz")
     return stem.removeprefix(prefix)
 
 
@@ -147,9 +145,7 @@ def main() -> int:
         tarball = Path(raw)
         target = target_from_tarball_name(tarball.name, args.version)
         if target not in TARGET_PLATFORMS:
-            raise SystemExit(
-                f"unknown release target {target!r}; add it to TARGET_PLATFORMS"
-            )
+            raise SystemExit(f"unknown release target {target!r}; add it to TARGET_PLATFORMS")
         _, subdir = TARGET_PLATFORMS[target]
         binary_name = "dotrepo-mcp.exe" if target.endswith("windows-msvc") else "dotrepo-mcp"
         bundle_path = f"{subdir}/{binary_name}"
@@ -173,9 +169,7 @@ def main() -> int:
         server["version"] = args.version
         packages = server.get("packages")
         if not isinstance(packages, list) or len(packages) != 1:
-            raise SystemExit(
-                f"{server_json_path} must contain exactly one package entry to update"
-            )
+            raise SystemExit(f"{server_json_path} must contain exactly one package entry to update")
         packages[0]["identifier"] = (
             "https://github.com/maxwellsantoro/dotrepo/releases/download/"
             f"v{args.version}/{bundle_path.name}"

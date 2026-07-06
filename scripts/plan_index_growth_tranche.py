@@ -213,15 +213,11 @@ def build_plan(
     indexed_candidates = [
         candidate for candidate in candidates if candidate["identity"] in existing
     ]
-    eligible = [
-        candidate for candidate in candidates if candidate["identity"] not in existing
-    ]
+    eligible = [candidate for candidate in candidates if candidate["identity"] not in existing]
     selected = select_balanced(eligible, target_count)
     selected_identities = {candidate["identity"] for candidate in selected}
     deferred = [
-        candidate
-        for candidate in eligible
-        if candidate["identity"] not in selected_identities
+        candidate for candidate in eligible if candidate["identity"] not in selected_identities
     ]
     selected_counts = Counter(candidate["group"] for candidate in selected)
     eligible_counts = Counter(candidate["group"] for candidate in eligible)
@@ -239,7 +235,7 @@ def build_plan(
             "threshold": min_planned_high_signal_capacity,
             "actual": planned_capacity,
             "passed": planned_capacity >= min_planned_high_signal_capacity,
-        }
+        },
     }
     return {
         "schema": SCHEMA,
@@ -264,12 +260,8 @@ def build_plan(
             "plannedHighSignalCapacityUpperBound": planned_capacity,
             "remainingHighSignalGap": remaining_gap,
             "remainingHighSignalGapAfterSelected": remaining_gap_after_selected,
-            "completedHighSignalRatio": ratio(
-                current_high_signal, milestone_high_signal_target
-            ),
-            "plannedCapacityRatio": ratio(
-                planned_capacity, milestone_high_signal_target
-            ),
+            "completedHighSignalRatio": ratio(current_high_signal, milestone_high_signal_target),
+            "plannedCapacityRatio": ratio(planned_capacity, milestone_high_signal_target),
         },
         "groups": {
             group: {

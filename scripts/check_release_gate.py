@@ -45,9 +45,7 @@ def parse_rfc3339_utc(value: str, *, field: str) -> datetime:
 def parse_args() -> argparse.Namespace:
     default_generated_at = rfc3339_now_utc()
     default_stale_after = rfc3339_plus_hours(default_generated_at, 24)
-    parser = argparse.ArgumentParser(
-        description="Run the release-surface gate for dotrepo."
-    )
+    parser = argparse.ArgumentParser(description="Run the release-surface gate for dotrepo.")
     parser.add_argument(
         "--output-root",
         default="release-gate",
@@ -376,9 +374,7 @@ def verify_freshness(payload: dict, meta: dict, source: str) -> None:
     freshness = payload.get("freshness")
     expected = expected_freshness(meta)
     if freshness != expected:
-        raise SystemExit(
-            f"freshness mismatch in {source}: expected {expected}, got {freshness}"
-        )
+        raise SystemExit(f"freshness mismatch in {source}: expected {expected}, got {freshness}")
 
 
 def verify_health_payload(
@@ -471,9 +467,7 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
         raise SystemExit(f"public export metadata is missing validators: {meta_path}")
     expected_snapshot_validator = f"sha256:{meta['snapshotDigest']}"
     if validators.get("snapshot") != expected_snapshot_validator:
-        raise SystemExit(
-            f"public export metadata has invalid snapshot validator: {meta_path}"
-        )
+        raise SystemExit(f"public export metadata has invalid snapshot validator: {meta_path}")
     if not isinstance(validators.get("etag"), str) or not validators["etag"]:
         raise SystemExit(f"public export metadata is missing etag validator: {meta_path}")
     stale_after = meta.get("staleAfter")
@@ -544,16 +538,14 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
     verify_inline_javascript_syntax(repositories_document, str(repositories_path))
 
     normalized_base = "/" if expected_base_path == "/" else expected_base_path.rstrip("/")
-    docs_href = f'{normalized_base}/docs/' if normalized_base != "/" else "/docs/"
+    docs_href = f"{normalized_base}/docs/" if normalized_base != "/" else "/docs/"
     if f'href="{docs_href}"' not in homepage_document:
         raise SystemExit(f"homepage does not link to first-party docs path {docs_href}")
     repositories_href = (
         f"{normalized_base}/repositories/" if normalized_base != "/" else "/repositories/"
     )
     if f'href="{repositories_href}"' not in homepage_document:
-        raise SystemExit(
-            f"homepage does not link to repository catalog path {repositories_href}"
-        )
+        raise SystemExit(f"homepage does not link to repository catalog path {repositories_href}")
 
     for repo in repositories:
         identity = repo.get("identity")
@@ -571,13 +563,19 @@ def verify_public_meta(public_dir: Path, expected_base_path: str) -> None:
         trust_link = links.get("trust")
         query_template = links.get("queryTemplate")
         if not isinstance(summary_link, str) or not summary_link.startswith(normalized_base):
-            raise SystemExit(f"summary link does not honor base path {normalized_base}: {summary_link}")
+            raise SystemExit(
+                f"summary link does not honor base path {normalized_base}: {summary_link}"
+            )
         if not isinstance(trust_link, str) or not trust_link.startswith(normalized_base):
             raise SystemExit(f"trust link does not honor base path {normalized_base}: {trust_link}")
         if not summary_link.endswith("/index.json"):
-            raise SystemExit(f"summary link should point at the exported index.json file: {summary_link}")
+            raise SystemExit(
+                f"summary link should point at the exported index.json file: {summary_link}"
+            )
         if not trust_link.endswith("/trust.json"):
-            raise SystemExit(f"trust link should point at the exported trust.json file: {trust_link}")
+            raise SystemExit(
+                f"trust link should point at the exported trust.json file: {trust_link}"
+            )
         if not isinstance(query_template, str) or not query_template.startswith(normalized_base):
             raise SystemExit(
                 f"query template does not honor base path {normalized_base}: {query_template}"
@@ -727,9 +725,7 @@ def smoke_test_release_bundle(
             meta_url = f"http://{server_addr}{base}/v0/meta.json"
             status, body = http_get_text(meta_url)
             if status != 200:
-                raise SystemExit(
-                    f"same-origin meta smoke failed ({status}) for {meta_url}: {body}"
-                )
+                raise SystemExit(f"same-origin meta smoke failed ({status}) for {meta_url}: {body}")
             meta = json.loads(body)
             stats_url = f"http://{server_addr}{base}/v0/stats.json"
             status, body = http_get_text(stats_url)
@@ -755,9 +751,7 @@ def smoke_test_release_bundle(
             docs_url = f"http://{server_addr}{base}/docs/"
             status, body = http_get_text(docs_url)
             if status != 200:
-                raise SystemExit(
-                    f"same-origin docs smoke failed ({status}) for {docs_url}: {body}"
-                )
+                raise SystemExit(f"same-origin docs smoke failed ({status}) for {docs_url}: {body}")
             repositories_url = f"http://{server_addr}{base}/repositories/"
             status, body = http_get_text(repositories_url)
             if status != 200:
@@ -783,7 +777,9 @@ def smoke_test_release_bundle(
             query_template = repositories[0]["links"]["queryTemplate"]
             if not isinstance(query_template, str):
                 raise SystemExit("same-origin inventory smoke found no queryTemplate")
-            query_url = f"http://{server_addr}{query_template.replace('{dot_path}', 'repo.description')}"
+            query_url = (
+                f"http://{server_addr}{query_template.replace('{dot_path}', 'repo.description')}"
+            )
             status, body = http_get_text(query_url)
             if status != 200:
                 raise SystemExit(
@@ -913,9 +909,7 @@ def run_cloudflare_worker_smoke(
     while time.time() < deadline:
         if server.poll() is not None:
             stderr = server.stderr.read() if server.stderr else ""
-            raise SystemExit(
-                f"Cloudflare Worker exited early during smoke test: {stderr}"
-            )
+            raise SystemExit(f"Cloudflare Worker exited early during smoke test: {stderr}")
         status, body = http_get_text(healthz_url)
         if status == 200 and body == "ok":
             break
@@ -937,16 +931,12 @@ def run_cloudflare_worker_smoke(
     meta_url = f"http://{server_addr}{base}/v0/meta.json"
     status, body = http_get_text(meta_url)
     if status != 200:
-        raise SystemExit(
-            f"Cloudflare Worker meta smoke failed ({status}) for {meta_url}: {body}"
-        )
+        raise SystemExit(f"Cloudflare Worker meta smoke failed ({status}) for {meta_url}: {body}")
     meta = json.loads(body)
     stats_url = f"http://{server_addr}{base}/v0/stats.json"
     status, body = http_get_text(stats_url)
     if status != 200:
-        raise SystemExit(
-            f"Cloudflare Worker stats smoke failed ({status}) for {stats_url}: {body}"
-        )
+        raise SystemExit(f"Cloudflare Worker stats smoke failed ({status}) for {stats_url}: {body}")
     stats = json.loads(body)
     health_url = f"http://{server_addr}{base}/v0/health.json"
     status, body = http_get_text(health_url)
@@ -965,9 +955,7 @@ def run_cloudflare_worker_smoke(
     docs_url = f"http://{server_addr}{base}/docs/"
     status, body = http_get_text(docs_url)
     if status != 200:
-        raise SystemExit(
-            f"Cloudflare Worker docs smoke failed ({status}) for {docs_url}: {body}"
-        )
+        raise SystemExit(f"Cloudflare Worker docs smoke failed ({status}) for {docs_url}: {body}")
     repositories_url = f"http://{server_addr}{base}/repositories/"
     status, body = http_get_text(repositories_url)
     if status != 200:
@@ -986,9 +974,7 @@ def run_cloudflare_worker_smoke(
     trust_url = f"http://{server_addr}{first_repo['links']['trust']}"
     status, body = http_get_text(trust_url)
     if status != 200:
-        raise SystemExit(
-            f"Cloudflare Worker trust smoke failed ({status}) for {trust_url}: {body}"
-        )
+        raise SystemExit(f"Cloudflare Worker trust smoke failed ({status}) for {trust_url}: {body}")
     verify_freshness(json.loads(body), meta, trust_url)
     query_template = repositories[0]["links"]["queryTemplate"]
     if not isinstance(query_template, str):
@@ -1085,9 +1071,7 @@ def main() -> int:
     ):
         run(command, cwd=repo_root)
     run(
-        public_factual_accuracy_command(
-            repo_root, public_dir, output_root, args.generated_at
-        ),
+        public_factual_accuracy_command(repo_root, public_dir, output_root, args.generated_at),
         cwd=repo_root,
     )
     run(
@@ -1171,7 +1155,9 @@ def main() -> int:
 
     verify_public_meta(public_dir, args.base_path)
 
-    public_bundle = expect_single(sorted(public_bundle_dir.glob("*.tar.gz")), "public export bundle")
+    public_bundle = expect_single(
+        sorted(public_bundle_dir.glob("*.tar.gz")), "public export bundle"
+    )
     verify_tar_contains_prefix(public_bundle, public_bundle.stem.removesuffix(".tar"))
 
     if not args.skip_release_bundle:

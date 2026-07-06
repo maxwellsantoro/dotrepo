@@ -479,13 +479,15 @@ def build_query_example(input_dir: Path, inventory: dict) -> tuple[str, str, str
     selected_record = selection.get("record", {})
     record = selected_record.get("record", {})
     trust = record.get("trust", {})
-    query_url = summary.get("links", {}).get("queryTemplate", "#").replace(
-        "{dot_path}", "repo.description"
+    query_url = (
+        summary.get("links", {}).get("queryTemplate", "#").replace("{dot_path}", "repo.description")
     )
     query_input_url = query_input_href(detect_site_base_path(inventory), repositories[0])
     example = {
         "path": "repo.description",
-        "value": compact_text(str(summary.get("repository", {}).get("description") or ""), limit=220),
+        "value": compact_text(
+            str(summary.get("repository", {}).get("description") or ""), limit=220
+        ),
         "selection": {
             "reason": selection.get("reason"),
             "recordStatus": record.get("status"),
@@ -694,10 +696,14 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
         fetches_avoided=html.escape(format_count(pagedigest.get("fetchesAvoided"))),
         bytes_avoided=html.escape(format_bytes(pagedigest.get("bytesAvoided"))),
         bytes_covered=html.escape(format_bytes(pagedigest.get("bytesCovered"))),
-        tokens_avoided=html.escape(format_estimated_tokens(pagedigest.get("estimatedTokensAvoided"))),
+        tokens_avoided=html.escape(
+            format_estimated_tokens(pagedigest.get("estimatedTokensAvoided"))
+        ),
         site_rev=html.escape(format_count(pagedigest.get("siteRev"))),
         manifest_bytes=html.escape(format_bytes(pagedigest.get("manifestBytes"))),
-        generated=html.escape(format_timestamp_for_humans(str(pagedigest.get("generated", "unknown")))),
+        generated=html.escape(
+            format_timestamp_for_humans(str(pagedigest.get("generated", "unknown")))
+        ),
     ).strip()
 
 
@@ -1208,7 +1214,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
     </section>
     <footer class="footer">
       <span>Machine-readable inventory: <a href="{inventory_href}">/v0/repos/index.json</a></span>
-      <span>Snapshot: <a href="{site_href(base_path, '/v0/meta.json')}">/v0/meta.json</a></span>
+      <span>Snapshot: <a href="{site_href(base_path, "/v0/meta.json")}">/v0/meta.json</a></span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>
   </div>
@@ -1604,7 +1610,7 @@ def render_writing_index(base_path: str) -> str:
     </section>
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
-      <span>Local review root: <a href="{site_href(base_path, '/')}">homepage</a></span>
+      <span>Local review root: <a href="{site_href(base_path, "/")}">homepage</a></span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>
   </div>
@@ -1835,7 +1841,7 @@ def render_docs_index(base_path: str) -> str:
     {render_docs_cards(base_path)}
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
-      <span>Live inventory: <a href="{site_href(base_path, '/v0/repos/index.json')}">/v0/repos/index.json</a></span>
+      <span>Live inventory: <a href="{site_href(base_path, "/v0/repos/index.json")}">/v0/repos/index.json</a></span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>
   </div>
@@ -2136,9 +2142,9 @@ def render_article_page(article: dict, base_path: str) -> str:
       {article["body_html"]}
     </section>
     <footer class="panel article-footer">
-      <span><a href="{site_href(base_path, '/writing/')}">Back to writing</a></span>
+      <span><a href="{site_href(base_path, "/writing/")}">Back to writing</a></span>
       <span><a href="https://github.com/maxwellsantoro/dotrepo">Project source</a></span>
-      <span><a href="{site_href(base_path, '/v0/repos/index.json')}">Live public index</a></span>
+      <span><a href="{site_href(base_path, "/v0/repos/index.json")}">Live public index</a></span>
     </footer>
   </div>
 </body>
@@ -2714,9 +2720,9 @@ def main() -> int:
           context instead of pretending repository metadata is conflict-free.
         </p>
         <div class="cta-row">
-          <a class="cta cta--primary" href="{html.escape(featured_trust['trustUrl'])}">See the live trust handoff</a>
-          <a class="cta cta--secondary" href="{site_href(base_path, '/v0/repos/index.json')}">Explore the public index</a>
-          <a class="cta cta--secondary" href="{site_href(base_path, '/docs/')}">Read the docs</a>
+          <a class="cta cta--primary" href="{html.escape(featured_trust["trustUrl"])}">See the live trust handoff</a>
+          <a class="cta cta--secondary" href="{site_href(base_path, "/v0/repos/index.json")}">Explore the public index</a>
+          <a class="cta cta--secondary" href="{site_href(base_path, "/docs/")}">Read the docs</a>
           <a class="cta cta--secondary" href="https://github.com/maxwellsantoro/dotrepo">Read the code</a>
         </div>
       </div>
@@ -2788,38 +2794,38 @@ def main() -> int:
       </p>
       <div class="api-grid">
         <article class="api-card">
-          <h3>{html.escape(featured_trust['name'])}</h3>
-          <p><code>{html.escape(featured_trust['label'])}</code></p>
-          <p>{html.escape(featured_trust['description'])}</p>
+          <h3>{html.escape(featured_trust["name"])}</h3>
+          <p><code>{html.escape(featured_trust["label"])}</code></p>
+          <p>{html.escape(featured_trust["description"])}</p>
           <div class="endpoint-list">
             <div class="endpoint">
-              <code>claim state: {html.escape(featured_trust['claimState'])}</code>
+              <code>claim state: {html.escape(featured_trust["claimState"])}</code>
               <span>The current exported claim state for the selected record.</span>
             </div>
             <div class="endpoint">
-              <code>handoff: {html.escape(featured_trust['handoff'])}</code>
+              <code>handoff: {html.escape(featured_trust["handoff"])}</code>
               <span>The reviewed overlay remains visible while the accepted maintainer claim points to the canonical source of truth.</span>
             </div>
             <div class="endpoint">
-              <code>confidence: {html.escape(featured_trust['trustConfidence'])}</code>
-              <span>Provenance: {html.escape(featured_trust['provenance'])}</span>
+              <code>confidence: {html.escape(featured_trust["trustConfidence"])}</code>
+              <span>Provenance: {html.escape(featured_trust["provenance"])}</span>
             </div>
             <div class="endpoint">
-              <code>{html.escape(featured_trust['notes'])}</code>
+              <code>{html.escape(featured_trust["notes"])}</code>
               <span>Selection stays explained instead of being reduced to a bare answer.</span>
             </div>
           </div>
           <div class="repo-card__links">
-            <a href="{html.escape(featured_trust['summaryUrl'])}" aria-label="Open {html.escape(featured_trust['label'], quote=True)} summary">Summary</a>
-            <a href="{html.escape(featured_trust['trustUrl'])}" aria-label="Open {html.escape(featured_trust['label'], quote=True)} trust report">Trust</a>
-            <a href="{html.escape(featured_trust['queryUrl'])}" aria-label="Open {html.escape(featured_trust['label'], quote=True)} query input data">Query input</a>
+            <a href="{html.escape(featured_trust["summaryUrl"])}" aria-label="Open {html.escape(featured_trust["label"], quote=True)} summary">Summary</a>
+            <a href="{html.escape(featured_trust["trustUrl"])}" aria-label="Open {html.escape(featured_trust["label"], quote=True)} trust report">Trust</a>
+            <a href="{html.escape(featured_trust["queryUrl"])}" aria-label="Open {html.escape(featured_trust["label"], quote=True)} query input data">Query input</a>
           </div>
         </article>
         <article class="api-card">
           <h3>What the live trust surface returns</h3>
           <p>This excerpt comes from the current exported snapshot and keeps the handoff visible. That is the product proof most metadata layers cannot show.</p>
-          <pre><code>{featured_trust['proofJson']}</code></pre>
-          <p class="api-card__caption">Review path: <code>{html.escape(str(featured_trust['reviewPath'] or "unknown"))}</code> · Evidence path: <code>{html.escape(str(featured_trust['evidencePath'] or "unknown"))}</code></p>
+          <pre><code>{featured_trust["proofJson"]}</code></pre>
+          <p class="api-card__caption">Review path: <code>{html.escape(str(featured_trust["reviewPath"] or "unknown"))}</code> · Evidence path: <code>{html.escape(str(featured_trust["evidencePath"] or "unknown"))}</code></p>
         </article>
       </div>
     </section>
@@ -2872,7 +2878,7 @@ def main() -> int:
         </article>
       </div>
       <p class="section__note">
-        Start at <a href="{site_href(base_path, '/docs/')}">the first-party docs landing page</a>.
+        Start at <a href="{site_href(base_path, "/docs/")}">the first-party docs landing page</a>.
       </p>
     </section>
 
@@ -2899,7 +2905,7 @@ def main() -> int:
       </div>
       <p class="section__note">
         Read the on-site write-up:
-        <a href="{site_href(base_path, '/writing/what-the-ais-think-about-dotrepo/')}">What the AIs Think About dotrepo</a>.
+        <a href="{site_href(base_path, "/writing/what-the-ais-think-about-dotrepo/")}">What the AIs Think About dotrepo</a>.
         Working repo notes remain in
         <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>.
       </p>
@@ -2924,27 +2930,27 @@ def main() -> int:
           <p>The public surface is export-first. Summary, trust, inventory, freshness, and query responses all come from the same validated snapshot family.</p>
           <div class="endpoint-list">
             <div class="endpoint">
-              <code>{html.escape(site_href(base_path, '/v0/meta.json'))}</code>
+              <code>{html.escape(site_href(base_path, "/v0/meta.json"))}</code>
               <span>Snapshot freshness and digest metadata.</span>
             </div>
             <div class="endpoint">
-              <code>{html.escape(site_href(base_path, '/v0/health.json'))}</code>
+              <code>{html.escape(site_href(base_path, "/v0/health.json"))}</code>
               <span>Machine-checkable origin, snapshot, count, and digest coherence.</span>
             </div>
             <div class="endpoint">
-              <code>{html.escape(site_href(base_path, '/v0/repos/index.json'))}</code>
+              <code>{html.escape(site_href(base_path, "/v0/repos/index.json"))}</code>
               <span>Repository inventory and navigation links.</span>
             </div>
             <div class="endpoint">
-              <code>{html.escape(site_href(base_path, '/v0/repos/<host>/<owner>/<repo>/index.json'))}</code>
+              <code>{html.escape(site_href(base_path, "/v0/repos/<host>/<owner>/<repo>/index.json"))}</code>
               <span>Per-repository summary surface.</span>
             </div>
             <div class="endpoint">
-              <code>{html.escape(site_href(base_path, '/v0/repos/<host>/<owner>/<repo>/trust.json'))}</code>
+              <code>{html.escape(site_href(base_path, "/v0/repos/<host>/<owner>/<repo>/trust.json"))}</code>
               <span>Selection, provenance, and claim context.</span>
             </div>
             <div class="endpoint">
-              <code>{html.escape(site_href(base_path, '/v0/repos/<host>/<owner>/<repo>/query?path=...'))}</code>
+              <code>{html.escape(site_href(base_path, "/v0/repos/<host>/<owner>/<repo>/query?path=..."))}</code>
               <span>Same-origin trust-aware field queries.</span>
             </div>
             <div class="endpoint">
@@ -2972,7 +2978,7 @@ def main() -> int:
       <div class="repo-grid">
         {render_repository_cards(inventory, base_path=base_path, limit=8)}
       </div>
-      <p class="section__note"><a href="{site_href(base_path, '/repositories/')}">Browse all {html.escape(str(repository_count))} repositories</a></p>
+      <p class="section__note"><a href="{site_href(base_path, "/repositories/")}">Browse all {html.escape(str(repository_count))} repositories</a></p>
     </section>
 
     <footer class="footer">

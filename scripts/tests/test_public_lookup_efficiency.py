@@ -9,14 +9,8 @@ assert SPEC.loader is not None
 SPEC.loader.exec_module(lookup_efficiency)
 
 ROOT = Path(__file__).resolve().parents[2]
-PUBLIC_ROOT = (
-    ROOT
-    / "crates/dotrepo-core/tests/fixtures/public-export/expected/public"
-)
-INDEX_ROOT = (
-    ROOT
-    / "crates/dotrepo-core/tests/fixtures/public-export/fixture-index"
-)
+PUBLIC_ROOT = ROOT / "crates/dotrepo-core/tests/fixtures/public-export/expected/public"
+INDEX_ROOT = ROOT / "crates/dotrepo-core/tests/fixtures/public-export/fixture-index"
 WORKLOAD = ROOT / "scripts/fixtures/public_lookup_workload.json"
 
 
@@ -58,7 +52,9 @@ def test_summarize_fixture_workload_reports_hit_rates_and_bytes() -> None:
         "passed": True,
     }
     assert report["tasks"][0]["fieldValues"]["docs.root"] == "https://docs.example.com/orbit"
-    assert "query-input/github.com/example/orbit.json" in report["tasks"][0]["inputs"]["publicFiles"]
+    assert (
+        "query-input/github.com/example/orbit.json" in report["tasks"][0]["inputs"]["publicFiles"]
+    )
     assert report["tasks"][1]["missingFields"] == [
         "repo.license",
         "repo.languages",
@@ -187,9 +183,10 @@ def test_intent_summaries_and_gates_are_reported(tmp_path: Path) -> None:
 
 
 def test_parse_intent_hit_rates_validates_bounds() -> None:
-    assert lookup_efficiency.parse_intent_hit_rates(
-        ["overview=0.9", "documentation=0.3"]
-    ) == {"overview": 0.9, "documentation": 0.3}
+    assert lookup_efficiency.parse_intent_hit_rates(["overview=0.9", "documentation=0.3"]) == {
+        "overview": 0.9,
+        "documentation": 0.3,
+    }
 
 
 def test_batch_query_request_count_respects_public_limits() -> None:

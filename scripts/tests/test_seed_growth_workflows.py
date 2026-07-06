@@ -23,7 +23,7 @@ def test_seed_review_defaults_to_second_growth_tranche_and_plans_before_crawl() 
 
     assert "targets_file:" in workflow
     assert "index_growth_tranche_baseline.json" in workflow
-    assert f'default: {CANDIDATE_FILE}' in workflow
+    assert f"default: {CANDIDATE_FILE}" in workflow
     assert "public_profile_coverage_baseline.json" in workflow[:plan]
     assert "index_growth_tranche_baseline.json" in workflow[:plan]
     assert "min_planned_capacity=$((current_high_signal + 1))" in workflow[:plan]
@@ -35,9 +35,7 @@ def test_seed_review_defaults_to_second_growth_tranche_and_plans_before_crawl() 
     assert "--output-targets index-seed-review/planned-targets.txt" in workflow[plan:crawl]
     assert "--targets-file index-seed-review/planned-targets.txt" in workflow[crawl:batches]
     assert "--milestone-high-signal-target" in workflow[status:summary]
-    assert "--targets-file \"${{ steps.inputs.outputs.targets_file }}\"" in workflow[
-        batches:summary
-    ]
+    assert '--targets-file "${{ steps.inputs.outputs.targets_file }}"' in workflow[batches:summary]
 
 
 def test_seed_batch_pr_defaults_to_second_growth_tranche_and_uses_planned_targets() -> None:
@@ -49,7 +47,7 @@ def test_seed_batch_pr_defaults_to_second_growth_tranche_and_uses_planned_target
 
     assert "targets_file:" in workflow
     assert "index_growth_tranche_baseline.json" in workflow
-    assert f'default: {CANDIDATE_FILE}' in workflow
+    assert f"default: {CANDIDATE_FILE}" in workflow
     assert "public_profile_coverage_baseline.json" in workflow[:plan]
     assert "index_growth_tranche_baseline.json" in workflow[:plan]
     assert "min_planned_capacity=$((current_high_signal + 1))" in workflow[:plan]

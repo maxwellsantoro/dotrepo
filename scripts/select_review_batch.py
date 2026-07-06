@@ -9,7 +9,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Select one review batch and emit targets plus metadata."
     )
-    parser.add_argument("--input", required=True, help="Path to seed-batches.json or refresh-batches.json")
+    parser.add_argument(
+        "--input", required=True, help="Path to seed-batches.json or refresh-batches.json"
+    )
     selection = parser.add_mutually_exclusive_group(required=True)
     selection.add_argument("--batch-id", help="Batch identifier such as seed-batch-01")
     selection.add_argument(
@@ -17,8 +19,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Select the first batch in the plan, optionally skipping failed ones",
     )
-    parser.add_argument("--output-targets", required=True, help="Path for newline-delimited repository identities")
-    parser.add_argument("--output-metadata", required=True, help="Path for selected batch metadata JSON")
+    parser.add_argument(
+        "--output-targets", required=True, help="Path for newline-delimited repository identities"
+    )
+    parser.add_argument(
+        "--output-metadata", required=True, help="Path for selected batch metadata JSON"
+    )
     parser.add_argument(
         "--require-no-failed",
         action="store_true",
@@ -77,9 +83,15 @@ def main() -> int:
 
     repositories = selected.get("repositories", [])
     if not isinstance(repositories, list) or not repositories:
-        raise SystemExit(f"selected batch `{selected.get('id', '<unknown>')}` contains no repositories")
+        raise SystemExit(
+            f"selected batch `{selected.get('id', '<unknown>')}` contains no repositories"
+        )
     if args.require_no_failed:
-        failed = [repo.get("identity", "<unknown>") for repo in repositories if repo.get("status") == "failed"]
+        failed = [
+            repo.get("identity", "<unknown>")
+            for repo in repositories
+            if repo.get("status") == "failed"
+        ]
         if failed:
             rendered = ", ".join(failed)
             raise SystemExit(
@@ -89,7 +101,9 @@ def main() -> int:
     targets_path = Path(args.output_targets)
     targets_path.parent.mkdir(parents=True, exist_ok=True)
     targets_path.write_text(
-        "".join(f"{repo.get('identity', '').strip()}\n" for repo in repositories if repo.get("identity"))
+        "".join(
+            f"{repo.get('identity', '').strip()}\n" for repo in repositories if repo.get("identity")
+        )
     )
 
     metadata = {

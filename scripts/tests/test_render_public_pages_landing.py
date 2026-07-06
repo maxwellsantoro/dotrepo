@@ -67,9 +67,7 @@ class PublicPageRendererTests(unittest.TestCase):
         self.assertEqual(progress["importedOrInferredCount"], 2)
 
     def test_homepage_repository_cards_can_be_bounded(self) -> None:
-        inventory = {
-            "repositories": [inventory_entry(f"repo-{index}") for index in range(12)]
-        }
+        inventory = {"repositories": [inventory_entry(f"repo-{index}") for index in range(12)]}
 
         rendered = public_pages.render_repository_cards(inventory, limit=8)
 

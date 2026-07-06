@@ -15,14 +15,20 @@ SPEC.loader.exec_module(roadmap_batch)
 
 
 def test_baseline_int_reads_fixture_keys() -> None:
-    assert roadmap_batch.baseline_int(
-        REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json",
-        "minHighSignal",
-    ) == 514
-    assert roadmap_batch.baseline_int(
-        REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json",
-        "milestoneHighSignalTarget",
-    ) == 500
+    assert (
+        roadmap_batch.baseline_int(
+            REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json",
+            "minHighSignal",
+        )
+        == 514
+    )
+    assert (
+        roadmap_batch.baseline_int(
+            REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json",
+            "milestoneHighSignalTarget",
+        )
+        == 500
+    )
 
 
 def test_plan_seed_targets_uses_growth_baselines(tmp_path: Path) -> None:
@@ -59,6 +65,7 @@ def test_dry_run_runs_planning_without_writeback_or_validate(tmp_path: Path, mon
 
     def fake_run(command: list[str], *, check: bool = True):
         calls.append(command)
+
         class Result:
             stdout = "# Index Growth Status\n"
             stderr = ""

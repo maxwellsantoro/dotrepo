@@ -41,7 +41,14 @@ FIXTURE_ROOT_DEFAULT = (
 )
 
 # Same conventional README variants the crawler/importer accept.
-README_CANDIDATES = ["README.md", "README.MD", "readme.md", "README.mdx", "README.markdown", "README"]
+README_CANDIDATES = [
+    "README.md",
+    "README.MD",
+    "readme.md",
+    "README.mdx",
+    "README.markdown",
+    "README",
+]
 
 # Root-level manifest / build files used both for capture and ecosystem inference.
 MANIFEST_CANDIDATES = [
@@ -117,9 +124,7 @@ def select_conventional_files(paths: set[str]) -> list[str]:
             selected.append(candidate)
     for extension in ROOT_EXTENSION_MANIFESTS:
         matches = sorted(
-            path
-            for path in paths
-            if "/" not in path and path.lower().endswith(extension)
+            path for path in paths if "/" not in path and path.lower().endswith(extension)
         )
         if matches:
             selected.append(matches[0])
@@ -234,8 +239,10 @@ def load_stub_metadata(stub: str) -> dict:
     if metadata.get("fixtureEligible") is not True:
         raise SystemExit("regression fixture stub is not eligible for source materialization")
     fixture = metadata.get("fixture")
-    if not isinstance(fixture, str) or not fixture or any(
-        not (char.isalnum() or char == "-") for char in fixture
+    if (
+        not isinstance(fixture, str)
+        or not fixture
+        or any(not (char.isalnum() or char == "-") for char in fixture)
     ):
         raise SystemExit("regression fixture stub must contain a safe nonempty `fixture` slug")
     for field in ("ecosystem", "fingerprint"):
@@ -285,9 +292,7 @@ def resolve_capture_args(args: argparse.Namespace) -> argparse.Namespace:
         for field, stub_value in stub_values.items():
             explicit = getattr(args, field)
             if explicit is not None and explicit != stub_value:
-                raise SystemExit(
-                    f"--{field} {explicit!r} conflicts with stub value {stub_value!r}"
-                )
+                raise SystemExit(f"--{field} {explicit!r} conflicts with stub value {stub_value!r}")
             setattr(args, field, stub_value)
 
     if not args.repo:
@@ -300,17 +305,13 @@ def resolve_capture_args(args: argparse.Namespace) -> argparse.Namespace:
 
 
 def gh_json(args: list[str]) -> object:
-    proc = subprocess.run(
-        ["gh", *args], check=True, text=True, capture_output=True
-    )
+    proc = subprocess.run(["gh", *args], check=True, text=True, capture_output=True)
     return json.loads(proc.stdout)
 
 
 def gh_tree_paths(owner: str, repo: str, branch: str) -> set[str]:
     """Fetch the recursive file tree and return the set of repository paths."""
-    payload = gh_json(
-        ["api", f"repos/{owner}/{repo}/git/trees/{branch}?recursive=1"]
-    )
+    payload = gh_json(["api", f"repos/{owner}/{repo}/git/trees/{branch}?recursive=1"])
     if not isinstance(payload, dict):
         raise SystemExit(f"unexpected tree response: {payload!r}")
     if payload.get("truncated"):

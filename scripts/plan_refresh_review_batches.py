@@ -183,7 +183,9 @@ def main() -> int:
 
     report = load_report(Path(args.input))
     plan = build_plan(report, args.batch_size)
-    markdown = render_markdown(plan, max_preview_batches=None if args.output_md else args.max_preview_batches)
+    markdown = render_markdown(
+        plan, max_preview_batches=None if args.output_md else args.max_preview_batches
+    )
 
     write_json(args.output_json, plan)
     write_text(args.output_md, markdown)

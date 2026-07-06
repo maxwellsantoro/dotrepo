@@ -44,7 +44,15 @@ def test_evaluate_passes_when_retained_telemetry_meets_thresholds() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -133,7 +141,15 @@ def test_evaluate_reports_not_yet_for_insufficient_or_expensive_runs() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 1,
         "budgetExhaustedRuns": 2,
-        "totals": {"adjudicationCallBudget": 2, "adjudicationCalls": 3, "crawled": 4, "written": 0, "failed": 1, "promoted": 0, "tokensUsed": 40000},
+        "totals": {
+            "adjudicationCallBudget": 2,
+            "adjudicationCalls": 3,
+            "crawled": 4,
+            "written": 0,
+            "failed": 1,
+            "promoted": 0,
+            "tokensUsed": 40000,
+        },
         "rates": {
             "failureRate": 0.25,
             "adjudicationRate": 0.5,
@@ -180,9 +196,7 @@ def test_evaluate_reports_not_yet_for_insufficient_or_expensive_runs() -> None:
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert report["checkSummary"]["failedLabels"] == [
@@ -219,7 +233,15 @@ def test_evaluate_allows_environmental_recurring_failures_for_fixture_gate() -> 
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -264,9 +286,7 @@ def test_evaluate_allows_environmental_recurring_failures_for_fixture_gate() -> 
 
     report = telemetry_gate.evaluate(summary, args())
     fixture_check = next(
-        item
-        for item in report["checks"]
-        if item["label"] == "fixture-eligible recurring failures"
+        item for item in report["checks"] if item["label"] == "fixture-eligible recurring failures"
     )
 
     assert report["passed"]
@@ -339,9 +359,7 @@ def test_evaluate_rejects_recent_cost_spike_hidden_by_aggregate_rates() -> None:
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {
@@ -357,7 +375,15 @@ def test_evaluate_rejects_worst_run_regression_when_aggregate_rates_pass() -> No
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 20, "adjudicationCalls": 8, "crawled": 40, "written": 38, "failed": 1, "promoted": 8, "tokensUsed": 2000},
+        "totals": {
+            "adjudicationCallBudget": 20,
+            "adjudicationCalls": 8,
+            "crawled": 40,
+            "written": 38,
+            "failed": 1,
+            "promoted": 8,
+            "tokensUsed": 2000,
+        },
         "rates": {
             "failureRate": 0.025,
             "adjudicationRate": 0.2,
@@ -392,9 +418,7 @@ def test_evaluate_rejects_worst_run_regression_when_aggregate_rates_pass() -> No
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {
@@ -411,7 +435,15 @@ def test_evaluate_rejects_worst_run_zero_model_regression() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 20, "adjudicationCalls": 8, "crawled": 40, "written": 38, "failed": 0, "promoted": 8, "tokensUsed": 2000},
+        "totals": {
+            "adjudicationCallBudget": 20,
+            "adjudicationCalls": 8,
+            "crawled": 40,
+            "written": 38,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 2000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -446,9 +478,7 @@ def test_evaluate_rejects_worst_run_zero_model_regression() -> None:
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {"worst-run zero-model deterministic rate"}
@@ -460,7 +490,15 @@ def test_evaluate_rejects_recent_window_drift_when_ceiling_rates_pass() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 6,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 30, "adjudicationCalls": 6, "crawled": 60, "written": 58, "failed": 0, "promoted": 10, "tokensUsed": 3000},
+        "totals": {
+            "adjudicationCallBudget": 30,
+            "adjudicationCalls": 6,
+            "crawled": 60,
+            "written": 58,
+            "failed": 0,
+            "promoted": 10,
+            "tokensUsed": 3000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.1,
@@ -495,9 +533,7 @@ def test_evaluate_rejects_recent_window_drift_when_ceiling_rates_pass() -> None:
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {
@@ -512,7 +548,15 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 6,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 30, "adjudicationCalls": 6, "crawled": 60, "written": 58, "failed": 0, "promoted": 10, "tokensUsed": 3000},
+        "totals": {
+            "adjudicationCallBudget": 30,
+            "adjudicationCalls": 6,
+            "crawled": 60,
+            "written": 58,
+            "failed": 0,
+            "promoted": 10,
+            "tokensUsed": 3000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -547,9 +591,7 @@ def test_evaluate_rejects_previous_window_drift_when_aggregate_rates_pass() -> N
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert report["inputs"]["driftReference"] == "previous-window"
     assert not report["passed"]
@@ -565,7 +607,15 @@ def test_evaluate_rejects_recent_second_opinion_drift_when_ceiling_rate_passes()
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 6,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 30, "adjudicationCalls": 6, "crawled": 60, "written": 58, "failed": 0, "promoted": 10, "tokensUsed": 3000},
+        "totals": {
+            "adjudicationCallBudget": 30,
+            "adjudicationCalls": 6,
+            "crawled": 60,
+            "written": 58,
+            "failed": 0,
+            "promoted": 10,
+            "tokensUsed": 3000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -605,9 +655,7 @@ def test_evaluate_rejects_recent_second_opinion_drift_when_ceiling_rate_passes()
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {"recent-window second-opinion adjudication drift"}
@@ -624,7 +672,15 @@ def test_evaluate_rejects_recent_zero_model_drop_when_absolute_rates_pass() -> N
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 6,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 30, "adjudicationCalls": 6, "crawled": 60, "written": 58, "failed": 0, "promoted": 10, "tokensUsed": 3000},
+        "totals": {
+            "adjudicationCallBudget": 30,
+            "adjudicationCalls": 6,
+            "crawled": 60,
+            "written": 58,
+            "failed": 0,
+            "promoted": 10,
+            "tokensUsed": 3000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.1,
@@ -659,9 +715,7 @@ def test_evaluate_rejects_recent_zero_model_drop_when_absolute_rates_pass() -> N
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {"recent-window zero-model deterministic rate drop"}
@@ -673,7 +727,15 @@ def test_evaluate_rejects_missing_summary_schema() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -708,9 +770,7 @@ def test_evaluate_rejects_missing_summary_schema() -> None:
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {"retained summary schema"}
@@ -721,7 +781,15 @@ def test_evaluate_rejects_missing_retained_proof_fields() -> None:
         "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -755,9 +823,7 @@ def test_evaluate_rejects_missing_retained_proof_fields() -> None:
     }
 
     report = telemetry_gate.evaluate(summary, args())
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {"retained proof fields"}
@@ -769,7 +835,15 @@ def test_evaluate_rejects_missing_window_zero_model_proof_fields() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -805,9 +879,7 @@ def test_evaluate_rejects_missing_window_zero_model_proof_fields() -> None:
         summary,
         args(min_zero_model_rate=0.0, max_recent_zero_model_rate_drop=1.0),
     )
-    failed_labels = {
-        item["label"] for item in report["checks"] if not item["passed"]
-    }
+    failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
     assert not report["passed"]
     assert failed_labels == {"retained proof fields"}
@@ -819,7 +891,15 @@ def test_evaluate_rejects_missing_or_invalid_rate_proof_fields() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -893,9 +973,7 @@ def test_evaluate_rejects_missing_or_invalid_rate_proof_fields() -> None:
             candidate_summary,
             args(min_zero_model_rate=0.0, max_recent_zero_model_rate_drop=1.0),
         )
-        failed_labels = {
-            item["label"] for item in report["checks"] if not item["passed"]
-        }
+        failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
         assert not report["passed"]
         assert failed_labels == {"retained proof fields"}
@@ -907,7 +985,15 @@ def test_evaluate_rejects_missing_or_invalid_count_proof_fields() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -1016,9 +1102,7 @@ def test_evaluate_rejects_missing_or_invalid_count_proof_fields() -> None:
                 max_recent_zero_model_rate_drop=1.0,
             ),
         )
-        failed_labels = {
-            item["label"] for item in report["checks"] if not item["passed"]
-        }
+        failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
         assert not report["passed"]
         assert failed_labels == {"retained proof fields"}
@@ -1030,7 +1114,15 @@ def test_evaluate_rejects_missing_or_malformed_fixture_candidate_proof_field() -
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -1068,9 +1160,7 @@ def test_evaluate_rejects_missing_or_malformed_fixture_candidate_proof_field() -
         if candidate_value is not None:
             candidate_summary["regressionFixtureCandidates"] = candidate_value
         report = telemetry_gate.evaluate(candidate_summary, args())
-        failed_labels = {
-            item["label"] for item in report["checks"] if not item["passed"]
-        }
+        failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
         assert not report["passed"]
         assert failed_labels == {"retained proof fields"}
@@ -1082,7 +1172,15 @@ def test_evaluate_rejects_malformed_fixture_candidate_entries() -> None:
         "generatedAt": "2026-03-18T12:00:00Z",
         "runCount": 4,
         "budgetExhaustedRuns": 0,
-        "totals": {"adjudicationCallBudget": 10, "adjudicationCalls": 4, "crawled": 20, "written": 18, "failed": 0, "promoted": 8, "tokensUsed": 1000},
+        "totals": {
+            "adjudicationCallBudget": 10,
+            "adjudicationCalls": 4,
+            "crawled": 20,
+            "written": 18,
+            "failed": 0,
+            "promoted": 8,
+            "tokensUsed": 1000,
+        },
         "rates": {
             "failureRate": 0.0,
             "adjudicationRate": 0.2,
@@ -1154,9 +1252,7 @@ def test_evaluate_rejects_malformed_fixture_candidate_entries() -> None:
         candidate_summary = summary.copy()
         candidate_summary["regressionFixtureCandidates"] = [candidate]
         report = telemetry_gate.evaluate(candidate_summary, args())
-        failed_labels = {
-            item["label"] for item in report["checks"] if not item["passed"]
-        }
+        failed_labels = {item["label"] for item in report["checks"] if not item["passed"]}
 
         assert not report["passed"]
         assert failed_labels == {"retained proof fields"}
@@ -1232,7 +1328,10 @@ def test_render_markdown_includes_check_table() -> None:
     assert "- worst-run second-opinion rate: 10.00%" in rendered
     assert "- worst-run zero-model rate: 75.00%" in rendered
     assert "- fixture-eligible recurring failures: 1" in rendered
-    assert "- thresholds: min runs 3, min crawled 10, max adjudication 25.00%, max API escalation 5.00%" in rendered
+    assert (
+        "- thresholds: min runs 3, min crawled 10, max adjudication 25.00%, max API escalation 5.00%"
+        in rendered
+    )
     assert "| retained repeated runs | 1 | >= 3 | fail |" in rendered
     assert "## Fixture-Eligible Recurring Failures" in rendered
     assert (

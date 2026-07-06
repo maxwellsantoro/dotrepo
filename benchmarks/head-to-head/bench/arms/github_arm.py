@@ -6,6 +6,7 @@ fields come straight from the REST API (high confidence). Buried fields are
 extracted from README/SECURITY.md/CONTRIBUTING with either a regex heuristic
 (default, zero API cost, low/medium confidence) or an LLM extractor (opt-in).
 """
+
 from __future__ import annotations
 
 import json
@@ -48,12 +49,15 @@ class GitHubArm(Arm):
             self._meta = json.loads(text)
         self._cost["__meta__"] = (nb, ms)
         # 2) docs for buried fields, fetched lazily-but-once per file
-        for label, path in (("readme", "README.md"), ("security", "SECURITY.md"),
-                            ("contributing", "CONTRIBUTING.md"),
-                            ("cargo", "Cargo.toml"),
-                            ("rust_toolchain_toml", "rust-toolchain.toml"),
-                            ("rust_toolchain", "rust-toolchain"),
-                            ("pyproject", "pyproject.toml")):
+        for label, path in (
+            ("readme", "README.md"),
+            ("security", "SECURITY.md"),
+            ("contributing", "CONTRIBUTING.md"),
+            ("cargo", "Cargo.toml"),
+            ("rust_toolchain_toml", "rust-toolchain.toml"),
+            ("rust_toolchain", "rust-toolchain"),
+            ("pyproject", "pyproject.toml"),
+        ):
             branch = self._meta.get("default_branch", "main")
             st, text, nb, ms = self.http.get(f"{RAW}/{owner}/{name}/{branch}/{path}")
             if st == 200:
@@ -82,21 +86,33 @@ class GitHubArm(Arm):
         elif field.id == "archived":
             val = "archived" if m.get("archived") else "active"
         conf = "high" if val is not None else None
-        return Answer(value=val, confidence=conf, source="github:rest", bytes_over_wire=nb, latency_ms=ms)
+        return Answer(
+            value=val, confidence=conf, source="github:rest", bytes_over_wire=nb, latency_ms=ms
+        )
 
     # -- buried fields: read the docs an agent would read --
     def _buried(self, field: Field) -> Answer:
         blob, src = self._doc_for(field)
         nb, ms = self._charge_docs(field)
         if not blob:
-            return Answer(value=None, confidence=None, source="github:no-doc",
-                          bytes_over_wire=nb, latency_ms=ms)
+            return Answer(
+                value=None,
+                confidence=None,
+                source="github:no-doc",
+                bytes_over_wire=nb,
+                latency_ms=ms,
+            )
         if self.extractor == "llm":
             val, conf = self._llm_extract(field, blob)
         else:
             val, conf = self._heuristic_extract(field, blob)
-        return Answer(value=val, confidence=conf, source=f"github:{src}:{self.extractor}",
-                      bytes_over_wire=nb, latency_ms=ms)
+        return Answer(
+            value=val,
+            confidence=conf,
+            source=f"github:{src}:{self.extractor}",
+            bytes_over_wire=nb,
+            latency_ms=ms,
+        )
 
     def _doc_for(self, field: Field):
         if field.id == "security_contact":
@@ -122,7 +138,9 @@ class GitHubArm(Arm):
         if field.id in ("build", "test"):
             key = "test" if field.id == "test" else "build|install|compile"
             # find a fenced block near a heading mentioning the key
-            for m in re.finditer(rf"#{{1,4}}[^\n]*\b({key})\b[^\n]*\n(.*?)(?=\n#|\Z)", blob, re.S | re.I):
+            for m in re.finditer(
+                rf"#{{1,4}}[^\n]*\b({key})\b[^\n]*\n(.*?)(?=\n#|\Z)", blob, re.S | re.I
+            ):
                 fb = _FENCE.search(m.group(2))
                 if fb:
                     cmd = _first_cmd(fb.group(1), field.id)
@@ -131,7 +149,10 @@ class GitHubArm(Arm):
             # fall back: any fenced command containing the keyword
             for fb in _FENCE.finditer(blob):
                 cmd = _first_cmd(fb.group(1), field.id)
-                if cmd and (field.id in cmd or (field.id == "build" and re.search(r"build|install|make|cargo b|npm i", cmd))):
+                if cmd and (
+                    field.id in cmd
+                    or (field.id == "build" and re.search(r"build|install|make|cargo b|npm i", cmd))
+                ):
                     return cmd, "low"
             return None, None
         if field.id == "min_toolchain":
@@ -165,8 +186,8 @@ class GitHubArm(Arm):
     def _llm_prompt(self, field: Field, blob: str) -> str:
         return (
             f"From the document below, extract: {field.prompt}\n"
-            f"Reply as JSON: {{\"value\": <string or null>, \"confidence\": "
-            f"\"high\"|\"medium\"|\"low\"}}. null if the document does not state it. "
+            f'Reply as JSON: {{"value": <string or null>, "confidence": '
+            f'"high"|"medium"|"low"}}. null if the document does not state it. '
             f"No prose.\n\n---\n{blob[:12000]}"
         )
 
@@ -213,9 +234,7 @@ class GitHubArm(Arm):
         choice = data["choices"][0]
         txt = choice["message"].get("content")
         if isinstance(txt, list):
-            txt = "".join(
-                part.get("text", "") for part in txt if isinstance(part, dict)
-            )
+            txt = "".join(part.get("text", "") for part in txt if isinstance(part, dict))
         if not txt:
             raise RuntimeError(
                 "OpenRouter returned an empty LLM extraction response "
@@ -244,9 +263,7 @@ class GitHubArm(Arm):
         )
         r.raise_for_status()
         data = r.json()
-        txt = "".join(
-            b.get("text", "") for b in data.get("content", []) if b.get("type") == "text"
-        )
+        txt = "".join(b.get("text", "") for b in data.get("content", []) if b.get("type") == "text")
         return _parse_llm_json(field, txt)
 
     # -- byte/latency accounting: charge each underlying fetch exactly once --
@@ -258,13 +275,15 @@ class GitHubArm(Arm):
     def _charge_docs(self, field: Field):
         keys = {"security_contact": "__security__", "test": "__contributing__"}
         if field.id == "min_toolchain":
-            return self._charge_many([
-                "__readme__",
-                "__cargo__",
-                "__rust_toolchain_toml__",
-                "__rust_toolchain__",
-                "__pyproject__",
-            ])
+            return self._charge_many(
+                [
+                    "__readme__",
+                    "__cargo__",
+                    "__rust_toolchain_toml__",
+                    "__rust_toolchain__",
+                    "__pyproject__",
+                ]
+            )
         primary = keys.get(field.id, "__readme__")
         return self._charge(primary)
 
@@ -305,7 +324,9 @@ def _first_cmd(block: str, field_id: str) -> Optional[str]:
             continue
         if field_id == "test" and re.search(r"\btest\b", line):
             return line
-        if field_id == "build" and re.search(r"build|install|make|cargo b|npm i|go build|pip install", line):
+        if field_id == "build" and re.search(
+            r"build|install|make|cargo b|npm i|go build|pip install", line
+        ):
             return line
     # otherwise first executable-looking line
     for line in block.splitlines():

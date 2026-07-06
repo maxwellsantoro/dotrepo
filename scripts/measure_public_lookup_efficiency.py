@@ -96,9 +96,7 @@ def load_json(path: Path) -> dict[str, Any]:
 def parse_repository(value: str) -> tuple[str, str, str]:
     parts = [part for part in value.strip("/").split("/") if part]
     if len(parts) != 3:
-        raise SystemExit(
-            f"repository must be host/owner/repo, got {value!r}"
-        )
+        raise SystemExit(f"repository must be host/owner/repo, got {value!r}")
     return parts[0], parts[1], parts[2]
 
 
@@ -225,11 +223,7 @@ def analyze_task(
     public_files = [paths["profile"], paths["queryInput"]]
     scrape_proxy_files = [paths["record"], paths["evidence"]]
 
-    missing_inputs = [
-        name
-        for name in ("profile", "queryInput")
-        if not paths[name].is_file()
-    ]
+    missing_inputs = [name for name in ("profile", "queryInput") if not paths[name].is_file()]
     manifest = None
     if paths["queryInput"].is_file():
         query_input = load_json(paths["queryInput"])
@@ -262,15 +256,9 @@ def analyze_task(
         "scrapeProxyBytes": size_existing(scrape_proxy_files),
         "inputs": {
             "publicFiles": [
-                relative_public_path(public_root, path)
-                for path in public_files
-                if path.is_file()
+                relative_public_path(public_root, path) for path in public_files if path.is_file()
             ],
-            "scrapeProxyFiles": [
-                path.as_posix()
-                for path in scrape_proxy_files
-                if path.is_file()
-            ],
+            "scrapeProxyFiles": [path.as_posix() for path in scrape_proxy_files if path.is_file()],
         },
     }
 
@@ -288,9 +276,7 @@ def unique_file_bytes(
         public_paths.update([paths["profile"], paths["queryInput"]])
         scrape_paths.update([paths["record"], paths["evidence"]])
     public_bytes = sum(
-        measured_size(path, manifest_sizes, public_root)
-        for path in public_paths
-        if path.is_file()
+        measured_size(path, manifest_sizes, public_root) for path in public_paths if path.is_file()
     )
     scrape_bytes = size_existing(sorted(scrape_paths))
     return public_bytes, scrape_bytes
@@ -374,8 +360,7 @@ def build_gates(
         gates["maxDotrepoToScrapeProxyRatio"] = {
             "threshold": max_dotrepo_to_scrape_proxy_ratio,
             "actual": ratio_value,
-            "passed": ratio_value is not None
-            and ratio_value <= max_dotrepo_to_scrape_proxy_ratio,
+            "passed": ratio_value is not None and ratio_value <= max_dotrepo_to_scrape_proxy_ratio,
         }
     return gates
 
@@ -395,8 +380,7 @@ def summarize(
     workload = load_workload(workload_path)
     manifest_sizes = file_size_from_manifest(public_root)
     tasks = [
-        analyze_task(task, public_root, index_root, manifest_sizes)
-        for task in workload["tasks"]
+        analyze_task(task, public_root, index_root, manifest_sizes) for task in workload["tasks"]
     ]
     task_count = len(tasks)
     hit_count = sum(1 for task in tasks if task["hit"])
@@ -405,15 +389,11 @@ def summarize(
     repositories = {task["repository"] for task in tasks}
     fields = {field for task in tasks for field in task["fields"]}
     intent_summaries = {}
-    intents = sorted(
-        {task["intent"] for task in tasks if isinstance(task.get("intent"), str)}
-    )
+    intents = sorted({task["intent"] for task in tasks if isinstance(task.get("intent"), str)})
     for intent in intents:
         intent_tasks = [task for task in tasks if task.get("intent") == intent]
         intent_field_count = sum(len(task["fields"]) for task in intent_tasks)
-        intent_answered_fields = sum(
-            len(task["answeredFields"]) for task in intent_tasks
-        )
+        intent_answered_fields = sum(len(task["answeredFields"]) for task in intent_tasks)
         intent_hits = sum(1 for task in intent_tasks if task["hit"])
         intent_summaries[intent] = {
             "taskCount": len(intent_tasks),
@@ -433,9 +413,7 @@ def summarize(
         index_root,
         manifest_sizes,
     )
-    dotrepo_batch_query_requests = batch_query_request_count(
-        len(repositories), len(fields)
-    )
+    dotrepo_batch_query_requests = batch_query_request_count(len(repositories), len(fields))
     scrape_proxy_requests = unique_scrape_proxy_request_count(
         workload["tasks"], public_root, index_root
     )
@@ -548,11 +526,13 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"{intent_summary['fieldCount']} | {intent_summary['fieldHitRate']} | "
                 f"{intent_summary['abstentionRate']} |"
             )
-    lines.extend([
-        "",
-        "| Task | Repository | Hit | Missing fields |",
-        "| --- | --- | --- | --- |",
-    ])
+    lines.extend(
+        [
+            "",
+            "| Task | Repository | Hit | Missing fields |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
     for task in report["tasks"]:
         missing = ", ".join(task["missingFields"]) or "-"
         lines.append(

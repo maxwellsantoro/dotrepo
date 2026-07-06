@@ -106,9 +106,13 @@ def median_or_none(values: list[float]) -> float | None:
 
 
 def summarize_category(category: str, entries: list[dict]) -> dict[str, Any]:
-    wall_times = [value for value in (wall_time_ms(entry) for entry in entries) if value is not None]
+    wall_times = [
+        value for value in (wall_time_ms(entry) for entry in entries) if value is not None
+    ]
     network_bytes = [
-        value for value in (number_or_none(entry.get("networkBytes")) for entry in entries) if value is not None
+        value
+        for value in (number_or_none(entry.get("networkBytes")) for entry in entries)
+        if value is not None
     ]
     network_requests = [
         value
@@ -116,7 +120,9 @@ def summarize_category(category: str, entries: list[dict]) -> dict[str, Any]:
         if value is not None
     ]
     tokens = [
-        value for value in (number_or_none(entry.get("tokensUsed")) for entry in entries) if value is not None
+        value
+        for value in (number_or_none(entry.get("tokensUsed")) for entry in entries)
+        if value is not None
     ]
     model_calls = [
         value
@@ -135,7 +141,10 @@ def summarize_category(category: str, entries: list[dict]) -> dict[str, Any]:
             "sampled": len(wall_times),
         },
         "networkBytes": {"mean": mean_or_none(network_bytes), "sampled": len(network_bytes)},
-        "networkRequests": {"mean": mean_or_none(network_requests), "sampled": len(network_requests)},
+        "networkRequests": {
+            "mean": mean_or_none(network_requests),
+            "sampled": len(network_requests),
+        },
         "tokensUsed": {"mean": mean_or_none(tokens), "sampled": len(tokens)},
         "modelCalls": {"mean": mean_or_none(model_calls), "sampled": len(model_calls)},
         "cpuTimeMs": {"mean": None, "sampled": 0, "note": "not collected"},
@@ -153,7 +162,9 @@ def build_report(runs: list[dict]) -> dict[str, Any]:
         "schema": SCHEMA,
         "runCount": len(runs),
         "totalEntries": total_entries,
-        "categories": {category: categories[category] for category in CATEGORIES if category in categories},
+        "categories": {
+            category: categories[category] for category in CATEGORIES if category in categories
+        },
     }
 
 

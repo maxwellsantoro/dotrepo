@@ -89,9 +89,7 @@ def main() -> int:
     ]
 
     if reason_counts:
-        rendered = ", ".join(
-            f"{reason}={count}" for reason, count in sorted(reason_counts.items())
-        )
+        rendered = ", ".join(f"{reason}={count}" for reason, count in sorted(reason_counts.items()))
         lines.append(f"- scheduled reasons: {rendered}")
     lines.append("")
 

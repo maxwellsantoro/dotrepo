@@ -22,8 +22,7 @@ COMPLETENESS_SIGNALS = (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Measure public profile search quality against a representative "
-            "discovery workload."
+            "Measure public profile search quality against a representative discovery workload."
         )
     )
     parser.add_argument(
@@ -298,26 +297,13 @@ def analyze_task(
     ranked = rank_profiles(profiles, task["query"], task.get("filters", {}))
     limited = ranked[:limit]
     expected = list(task["expectedRepositories"])
-    rank_by_repository = {
-        item["repository"]: index + 1
-        for index, item in enumerate(limited)
-    }
-    expected_ranks = {
-        repository: rank_by_repository.get(repository)
-        for repository in expected
-    }
-    found_ranks = [
-        rank
-        for rank in expected_ranks.values()
-        if isinstance(rank, int)
-    ]
+    rank_by_repository = {item["repository"]: index + 1 for index, item in enumerate(limited)}
+    expected_ranks = {repository: rank_by_repository.get(repository) for repository in expected}
+    found_ranks = [rank for rank in expected_ranks.values() if isinstance(rank, int)]
     first_expected_rank = min(found_ranks) if found_ranks else None
     reciprocal_rank = round(1 / first_expected_rank, 4) if first_expected_rank else 0.0
     success = all(isinstance(rank, int) for rank in expected_ranks.values())
-    public_paths = [
-        result["profilePath"]
-        for result in ranked
-    ]
+    public_paths = [result["profilePath"] for result in ranked]
     return {
         "id": task["id"],
         "query": task["query"],
@@ -344,10 +330,7 @@ def analyze_task(
             for item in limited
         ],
         "inputs": {
-            "profileFiles": [
-                relative_public_path(public_root, path)
-                for path in public_paths
-            ],
+            "profileFiles": [relative_public_path(public_root, path) for path in public_paths],
         },
     }
 
@@ -380,8 +363,7 @@ def build_gates(
         "minMeanReciprocalRank": {
             "threshold": min_mean_reciprocal_rank,
             "actual": summary["meanReciprocalRank"],
-            "passed": (summary["meanReciprocalRank"] or 0.0)
-            >= min_mean_reciprocal_rank,
+            "passed": (summary["meanReciprocalRank"] or 0.0) >= min_mean_reciprocal_rank,
         },
     }
     if max_average_first_rank is not None:
@@ -463,16 +445,11 @@ def summarize(
 ) -> dict[str, Any]:
     workload = load_workload(workload_path)
     profiles = load_profiles(public_root)
-    tasks = [
-        analyze_task(task, profiles, public_root)
-        for task in workload["tasks"]
-    ]
+    tasks = [analyze_task(task, profiles, public_root) for task in workload["tasks"]]
     task_count = len(tasks)
     success_count = sum(1 for task in tasks if task["success"])
     first_ranks = [
-        float(task["firstExpectedRank"])
-        for task in tasks
-        if task["firstExpectedRank"] is not None
+        float(task["firstExpectedRank"]) for task in tasks if task["firstExpectedRank"] is not None
     ]
     costs = cost_summary(tasks, public_root)
     summary = {
@@ -542,11 +519,13 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.append(
             f"| {name} | {gate['actual']} | {gate['threshold']} | {'pass' if gate['passed'] else 'fail'} |"
         )
-    lines.extend([
-        "",
-        "| Task | Query | Success | First expected rank | Returned repositories |",
-        "| --- | --- | --- | ---: | --- |",
-    ])
+    lines.extend(
+        [
+            "",
+            "| Task | Query | Success | First expected rank | Returned repositories |",
+            "| --- | --- | --- | ---: | --- |",
+        ]
+    )
     for task in report["tasks"]:
         returned = ", ".join(f"`{repo}`" for repo in task["returnedRepositories"]) or "-"
         lines.append(

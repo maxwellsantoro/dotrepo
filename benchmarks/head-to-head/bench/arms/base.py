@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import time
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 import requests
 
 from ..model import Answer, Field
+
+if TYPE_CHECKING:
+    from ..cache import ResponseCache
 
 
 class Arm:
@@ -31,7 +34,7 @@ class Http:
     optional on-disk cache so a benchmark run is replayable as a frozen fixture
     (freeze once, re-score deterministically forever)."""
 
-    def __init__(self, cache: Optional["ResponseCache"] = None, timeout: float = 20.0):
+    def __init__(self, cache: Optional[ResponseCache] = None, timeout: float = 20.0):
         self.s = requests.Session()
         self.s.headers["User-Agent"] = "dotrepo-bench/0.1 (+falsifiable head-to-head)"
         self.cache = cache

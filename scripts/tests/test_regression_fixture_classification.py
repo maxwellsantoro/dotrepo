@@ -68,10 +68,7 @@ def test_aggregate_runs_marks_environmental_failures_not_fixture_eligible() -> N
     ]
 
     summary = autonomous_batch.aggregate_runs(runs)
-    by_fixture = {
-        item["fingerprint"]: item
-        for item in summary["regressionFixtureCandidates"]
-    }
+    by_fixture = {item["fingerprint"]: item for item in summary["regressionFixtureCandidates"]}
 
     assert by_fixture["package.json parse error"]["fixtureEligible"] is True
     assert by_fixture["package.json parse error"]["ecosystem"] == "node"

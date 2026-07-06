@@ -131,9 +131,7 @@ def test_accuracy_report_detects_mismatched_values_and_renders_sources(tmp_path:
     assert report["summary"]["mismatchRate"] == 0.5
     assert "| Missing rate | 0.0 |" in markdown
     assert "| Mismatch rate | 0.5 |" in markdown
-    assert (
-        "| `name` | `github.com/example/orbit` | Other | `repo.name` | mismatch |" in markdown
-    )
+    assert "| `name` | `github.com/example/orbit` | Other | `repo.name` | mismatch |" in markdown
     assert "[README H1](https://github.com/example/orbit)" in markdown
     assert "## Ecosystem Results" in markdown
     assert "| Other | 1 / 2 | 0.5 |" in markdown

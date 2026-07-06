@@ -33,7 +33,14 @@ def test_upload_command_uses_public_key_and_r2_metadata(tmp_path: Path) -> None:
 
     command = archive.upload_command("dotrepo-archive", public_root, path)
 
-    assert command[:6] == ["npx", "wrangler", "r2", "object", "put", "dotrepo-archive/v0/snapshots/abc123/repos/index.json"]
+    assert command[:6] == [
+        "npx",
+        "wrangler",
+        "r2",
+        "object",
+        "put",
+        "dotrepo-archive/v0/snapshots/abc123/repos/index.json",
+    ]
     assert "--remote" in command
     assert command[command.index("--file") + 1] == str(path)
     assert command[command.index("--content-type") + 1] == "application/json; charset=utf-8"

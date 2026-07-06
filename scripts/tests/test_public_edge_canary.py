@@ -46,7 +46,7 @@ def stats() -> dict:
             "bytesCovered": 1200,
             "bytesAvoided": 400,
             "estimatedTokensAvoided": 100,
-        }
+        },
     }
 
 

@@ -216,9 +216,7 @@ def test_min_signal_gate_failure_sets_passed_false(tmp_path: Path) -> None:
 
 
 def test_parse_max_missing_signal_accepts_repeated_limits() -> None:
-    assert coverage.parse_max_missing_signal(
-        ["hasBuild=2", "hasSecurityContact=0"]
-    ) == {
+    assert coverage.parse_max_missing_signal(["hasBuild=2", "hasSecurityContact=0"]) == {
         "hasBuild": 2,
         "hasSecurityContact": 0,
     }
@@ -317,10 +315,7 @@ def test_malformed_profiles_do_not_satisfy_coverage_counts(tmp_path: Path) -> No
     public_root = tmp_path / "public"
     write_profile(public_root, "example", "valid")
     write_profile(public_root, "example", "wrong-path")
-    malformed_path = (
-        public_root
-        / "v0/repos/github.com/example/wrong-path/profile.json"
-    )
+    malformed_path = public_root / "v0/repos/github.com/example/wrong-path/profile.json"
     malformed = json.loads(malformed_path.read_text())
     malformed["identity"]["repo"] = "different"
     malformed_path.write_text(json.dumps(malformed))
@@ -342,9 +337,10 @@ def test_malformed_profiles_do_not_satisfy_coverage_counts(tmp_path: Path) -> No
         "actual": 1,
         "passed": False,
     }
-    assert "identity does not match profile path" in report["malformedProfiles"][0][
-        "contractErrors"
-    ][0]
+    assert (
+        "identity does not match profile path"
+        in report["malformedProfiles"][0]["contractErrors"][0]
+    )
 
 
 def test_invalid_json_profile_is_reported_without_aborting_audit(tmp_path: Path) -> None:
@@ -365,6 +361,4 @@ def test_invalid_json_profile_is_reported_without_aborting_audit(tmp_path: Path)
     assert report["passed"] is True
     assert report["summary"]["profileCount"] == 1
     assert report["summary"]["malformedProfileCount"] == 1
-    assert report["malformedProfiles"][0]["contractErrors"][0].startswith(
-        "invalid JSON:"
-    )
+    assert report["malformedProfiles"][0]["contractErrors"][0].startswith("invalid JSON:")

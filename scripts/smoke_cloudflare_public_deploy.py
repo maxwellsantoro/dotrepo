@@ -85,9 +85,7 @@ def with_query_param(url: str, name: str, value: str) -> str:
     split = urlsplit(url)
     pairs = parse_qsl(split.query, keep_blank_values=True)
     pairs.append((name, value))
-    return urlunsplit(
-        (split.scheme, split.netloc, split.path, urlencode(pairs), split.fragment)
-    )
+    return urlunsplit((split.scheme, split.netloc, split.path, urlencode(pairs), split.fragment))
 
 
 # Transient HTTP statuses worth retrying. The deploy smoke runs against the
@@ -190,7 +188,9 @@ def extract_homepage_snapshot_state(document: str, source: str) -> dict[str, Any
     return payload
 
 
-def expected_homepage_snapshot_state(meta: dict[str, Any], inventory: dict[str, Any]) -> dict[str, Any]:
+def expected_homepage_snapshot_state(
+    meta: dict[str, Any], inventory: dict[str, Any]
+) -> dict[str, Any]:
     return {
         "apiVersion": meta.get("apiVersion"),
         "generatedAt": meta.get("generatedAt"),
@@ -275,13 +275,9 @@ def select_manifest_coherence_entries(
     if limit <= 0:
         return []
     entries_by_path = manifest_entries_by_path(files_manifest)
-    inventory_paths = [
-        path for path in entries_by_path if path.endswith("/repos/index.json")
-    ]
+    inventory_paths = [path for path in entries_by_path if path.endswith("/repos/index.json")]
     snapshot_root = (
-        inventory_paths[0][: -len("/repos/index.json")]
-        if len(inventory_paths) == 1
-        else "v0"
+        inventory_paths[0][: -len("/repos/index.json")] if len(inventory_paths) == 1 else "v0"
     )
     first_repo_prefix = (
         f"{snapshot_root}/repos/{first_identity.get('host')}/"
@@ -348,9 +344,7 @@ def live_manifest_entry_mismatches(
     return mismatches
 
 
-def fetch_live_public_state(
-    deploy_url: str, base_path: str, cache_bust: str
-) -> tuple[Any, ...]:
+def fetch_live_public_state(deploy_url: str, base_path: str, cache_bust: str) -> tuple[Any, ...]:
     homepage_url = f"{deploy_url}{base_path or '/'}"
     meta_url = f"{deploy_url}{base_path}/v0/meta.json"
     files_url = f"{deploy_url}{base_path}/v0/files.json"
@@ -365,7 +359,20 @@ def fetch_live_public_state(
     inventory = http_get_json(with_query_param(inventory_url, "_smoke", cache_bust))
     log = http_get_json(with_query_param(log_url, "_smoke", cache_bust))
     stats = http_get_json(with_query_param(stats_url, "_smoke", cache_bust))
-    return homepage, homepage_state, meta, files, inventory, log, stats, homepage_url, files_url, inventory_url, log_url, stats_url
+    return (
+        homepage,
+        homepage_state,
+        meta,
+        files,
+        inventory,
+        log,
+        stats,
+        homepage_url,
+        files_url,
+        inventory_url,
+        log_url,
+        stats_url,
+    )
 
 
 def main() -> int:
@@ -428,11 +435,7 @@ def main() -> int:
             manifest_mismatches = live_manifest_entry_mismatches(
                 deploy_url, base_path, manifest_entries, cache_bust
             )
-        if (
-            homepage_state == expected_homepage_state
-            and not mismatches
-            and not manifest_mismatches
-        ):
+        if homepage_state == expected_homepage_state and not mismatches and not manifest_mismatches:
             break
         if time.monotonic() >= deadline:
             raise SystemExit(
@@ -444,32 +447,26 @@ def main() -> int:
             )
         time.sleep(max(args.settle_interval_seconds, 0.0))
 
-    query_url = (
-        f"{deploy_url}{query_template.replace('{dot_path}', 'repo.description')}"
-    )
+    query_url = f"{deploy_url}{query_template.replace('{dot_path}', 'repo.description')}"
     query_response = http_get_json(with_query_param(query_url, "_smoke", uuid.uuid4().hex))
     if query_response.get("path") != "repo.description":
         raise SystemExit("deployed queryTemplate smoke returned unexpected path")
     self_link = query_response.get("links", {}).get("self")
     expected_prefix = base_path or "/"
     if not isinstance(self_link, str) or not self_link.startswith(expected_prefix):
-        raise SystemExit(
-            f"deployed queryTemplate smoke returned unexpected self link: {self_link}"
-        )
+        raise SystemExit(f"deployed queryTemplate smoke returned unexpected self link: {self_link}")
 
-    batch_profiles_url = f"{deploy_url}{base_path}/v0/batch/profiles?{urlencode([('repo', first_repo)])}"
-    batch_profiles = http_get_json(
-        with_query_param(batch_profiles_url, "_smoke", uuid.uuid4().hex)
+    batch_profiles_url = (
+        f"{deploy_url}{base_path}/v0/batch/profiles?{urlencode([('repo', first_repo)])}"
     )
+    batch_profiles = http_get_json(with_query_param(batch_profiles_url, "_smoke", uuid.uuid4().hex))
     if batch_profiles.get("resultCount") != 1:
         raise SystemExit("deployed batch profile smoke returned unexpected resultCount")
     if batch_profiles.get("results", [{}])[0].get("profile", {}).get("identity") != first_identity:
         raise SystemExit("deployed batch profile smoke returned unexpected identity")
 
     batch_query_url = f"{deploy_url}{base_path}/v0/batch/query?{urlencode([('repo', first_repo), ('path', 'repo.description')])}"
-    batch_query = http_get_json(
-        with_query_param(batch_query_url, "_smoke", uuid.uuid4().hex)
-    )
+    batch_query = http_get_json(with_query_param(batch_query_url, "_smoke", uuid.uuid4().hex))
     if batch_query.get("repositoryCount") != 1 or batch_query.get("pathCount") != 1:
         raise SystemExit("deployed batch query smoke returned unexpected counts")
     batch_query_result = batch_query.get("results", [{}])[0]
@@ -477,16 +474,12 @@ def main() -> int:
         raise SystemExit("deployed batch query smoke returned unexpected result")
 
     search_url = f"{deploy_url}{base_path}/v0/search?{urlencode([('q', first_identity['repo'])])}"
-    search_response = http_get_json(
-        with_query_param(search_url, "_smoke", uuid.uuid4().hex)
-    )
+    search_response = http_get_json(with_query_param(search_url, "_smoke", uuid.uuid4().hex))
     if search_response.get("returnedCount", 0) < 1:
         raise SystemExit("deployed search smoke returned no results")
 
     compare_url = f"{deploy_url}{base_path}/v0/compare?{urlencode([('repo', first_repo)])}"
-    compare_response = http_get_json(
-        with_query_param(compare_url, "_smoke", uuid.uuid4().hex)
-    )
+    compare_response = http_get_json(with_query_param(compare_url, "_smoke", uuid.uuid4().hex))
     if compare_response.get("repositoryCount") != 1:
         raise SystemExit("deployed compare smoke returned unexpected repositoryCount")
     if compare_response.get("results", [{}])[0].get("identity") != first_identity:
@@ -496,9 +489,7 @@ def main() -> int:
         f"{deploy_url}{base_path}/v0/repos/"
         f"{first_identity['host']}/{first_identity['owner']}/{first_identity['repo']}/relations"
     )
-    relations_response = http_get_json(
-        with_query_param(relations_url, "_smoke", uuid.uuid4().hex)
-    )
+    relations_response = http_get_json(with_query_param(relations_url, "_smoke", uuid.uuid4().hex))
     if relations_response.get("identity") != first_identity:
         raise SystemExit("deployed relations smoke returned unexpected identity")
     if not isinstance(relations_response.get("references"), list):

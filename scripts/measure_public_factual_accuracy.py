@@ -141,9 +141,7 @@ def validate_workload(workload: Any, path: Path) -> list[dict[str, Any]]:
             raise SystemExit(f"accuracy assertion {assertion_id} is missing source")
         for key in ("url", "locator", "checkedAt"):
             if not isinstance(source.get(key), str) or not source[key].strip():
-                raise SystemExit(
-                    f"accuracy assertion {assertion_id} source.{key} must be nonempty"
-                )
+                raise SystemExit(f"accuracy assertion {assertion_id} source.{key} must be nonempty")
         if not source["url"].startswith(("https://", "http://")):
             raise SystemExit(f"accuracy assertion {assertion_id} source.url must be HTTP(S)")
     return assertions
@@ -223,9 +221,7 @@ def summarize(
 ) -> dict[str, Any]:
     assertions = validate_workload(load_json(workload_path), workload_path)
     manifests: dict[str, Any] = {}
-    results = [
-        analyze_assertion(assertion, public_root, manifests) for assertion in assertions
-    ]
+    results = [analyze_assertion(assertion, public_root, manifests) for assertion in assertions]
     summary = summarize_results(results)
 
     ecosystem_summaries: dict[str, Any] = {}

@@ -181,7 +181,9 @@ def inferred_language_family(record: dict[str, Any]) -> str:
     # in an otherwise Go or TypeScript project) into the wrong family --
     # found via scripts/audit_index_sample.py flagging docker/awesome-compose
     # and firecrawl/firecrawl as "Rust" family.
-    languages = [str(language).lower() for language in record.get("repo", {}).get("languages") or []]
+    languages = [
+        str(language).lower() for language in record.get("repo", {}).get("languages") or []
+    ]
     dominant = languages[0] if languages else ""
     if dominant == "rust":
         return "Rust"
@@ -263,9 +265,7 @@ def load_targets(path: Path) -> list[dict[str, str]]:
 def quality_rank(record: dict[str, Any]) -> tuple[int, int, int, int, str]:
     status = str(record.get("status", "unknown"))
     confidence = str(record.get("confidence", "unknown"))
-    missing_execution = int(
-        not record.get("buildPresent") or not record.get("testPresent")
-    )
+    missing_execution = int(not record.get("buildPresent") or not record.get("testPresent"))
     missing_security = int(
         not record.get("securityContact") or record.get("securityContact") == "unknown"
     )
@@ -437,14 +437,10 @@ def freshness_signals(
         ),
         "totalRefreshOverdueDays": round(total_overdue_days, 2),
         "oldestGeneratedAt": (
-            min(parsed_timestamps).isoformat().replace("+00:00", "Z")
-            if parsed_timestamps
-            else None
+            min(parsed_timestamps).isoformat().replace("+00:00", "Z") if parsed_timestamps else None
         ),
         "newestGeneratedAt": (
-            max(parsed_timestamps).isoformat().replace("+00:00", "Z")
-            if parsed_timestamps
-            else None
+            max(parsed_timestamps).isoformat().replace("+00:00", "Z") if parsed_timestamps else None
         ),
         "staleRecordIdentities": stale,
         "missingGeneratedAtIdentities": missing,
@@ -475,14 +471,14 @@ def summarize(
     targets = load_targets(targets_file)
     target_groups = {target["identity"]: target["group"] for target in targets}
     for record in records:
-        record["languageFamily"] = target_groups.get(
-            record["identity"], record["languageFamily"]
-        )
+        record["languageFamily"] = target_groups.get(record["identity"], record["languageFamily"])
     target_identities = [target["identity"] for target in targets]
     present_targets = [identity for identity in target_identities if identity in by_identity]
     missing_targets = [target for target in targets if target["identity"] not in by_identity]
 
-    target_group_counts: dict[str, dict[str, int]] = defaultdict(lambda: {"target": 0, "present": 0})
+    target_group_counts: dict[str, dict[str, int]] = defaultdict(
+        lambda: {"target": 0, "present": 0}
+    )
     for target in targets:
         target_group_counts[target["group"]]["target"] += 1
         if target["identity"] in by_identity:
@@ -501,9 +497,7 @@ def summarize(
     ]
     quality_queue = lower_confidence_records(records)
     tranche_coverage_ratio = ratio(len(present_targets), len(targets))
-    high_signal_record_count = sum(
-        1 for record in records if is_record_level_high_signal(record)
-    )
+    high_signal_record_count = sum(1 for record in records if is_record_level_high_signal(record))
     lift_candidates = high_signal_lift_candidates(records)
     record_lift_capacity = high_signal_record_count + len(lift_candidates)
     tranche_high_signal_capacity = high_signal_record_count + len(missing_targets)
@@ -656,11 +650,13 @@ def render_markdown(summary: dict[str, Any]) -> str:
         lines.append(
             f"- {name}: {gate['actual']} / {gate['threshold']} ({'pass' if gate['passed'] else 'fail'})"
         )
-    lines.extend([
-        "",
-        "## Candidate Coverage (active targets file)",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Candidate Coverage (active targets file)",
+            "",
+        ]
+    )
     for group, counts in tranche["coverageByGroup"].items():
         lines.append(f"- {group}: {counts['present']}/{counts['target']} present")
     lines.append("")

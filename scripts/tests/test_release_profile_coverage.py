@@ -20,9 +20,7 @@ def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path
         (REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json").read_text()
     )
 
-    command = release_gate.public_profile_coverage_command(
-        REPO_ROOT, public_dir, output_root
-    )
+    command = release_gate.public_profile_coverage_command(REPO_ROOT, public_dir, output_root)
 
     assert command[1:4] == [
         "scripts/check_public_profile_coverage.py",
@@ -79,22 +77,15 @@ def test_profile_coverage_baseline_is_well_formed() -> None:
     assert 0 < baseline["minHighSignalRatio"] <= 1
     assert 0 <= baseline["maxConflictRate"] <= 1
     assert baseline["maxMalformedProfiles"] == 0
-    assert all(
-        0 < minimum <= baseline["minProfiles"]
-        for minimum in baseline["minSignal"].values()
-    )
+    assert all(0 < minimum <= baseline["minProfiles"] for minimum in baseline["minSignal"].values())
 
 
 def test_release_gate_applies_public_quality_baseline(tmp_path: Path) -> None:
     public_dir = tmp_path / "public"
     output_root = tmp_path / "release-gate"
-    baseline = json.loads(
-        (REPO_ROOT / "scripts/fixtures/public_quality_baseline.json").read_text()
-    )
+    baseline = json.loads((REPO_ROOT / "scripts/fixtures/public_quality_baseline.json").read_text())
 
-    command = release_gate.public_quality_dashboard_command(
-        REPO_ROOT, public_dir, output_root
-    )
+    command = release_gate.public_quality_dashboard_command(REPO_ROOT, public_dir, output_root)
 
     assert "scripts/check_public_quality_dashboard.py" in command
     assert command[command.index("--min-profiles") + 1] == str(baseline["minProfiles"])
@@ -115,9 +106,7 @@ def test_release_gate_applies_public_quality_baseline(tmp_path: Path) -> None:
 
 
 def test_public_quality_baseline_is_well_formed() -> None:
-    baseline = json.loads(
-        (REPO_ROOT / "scripts/fixtures/public_quality_baseline.json").read_text()
-    )
+    baseline = json.loads((REPO_ROOT / "scripts/fixtures/public_quality_baseline.json").read_text())
 
     assert baseline == {
         "schema": "dotrepo-public-quality-baseline/v0",

@@ -9,10 +9,7 @@ assert SPEC.loader is not None
 SPEC.loader.exec_module(search_quality)
 
 ROOT = Path(__file__).resolve().parents[2]
-PUBLIC_ROOT = (
-    ROOT
-    / "crates/dotrepo-core/tests/fixtures/public-export/expected/public"
-)
+PUBLIC_ROOT = ROOT / "crates/dotrepo-core/tests/fixtures/public-export/expected/public"
 WORKLOAD = ROOT / "scripts/fixtures/public_search_workload.json"
 
 
@@ -36,7 +33,10 @@ def test_summarize_fixture_workload_reports_search_quality() -> None:
     assert report["summary"]["cost"]["inventoryOnlyTaskRate"] == 0.0
     assert report["summary"]["cost"]["profileFanoutTaskRate"] == 1.0
     assert report["summary"]["cost"]["inventoryBytes"] > 0
-    assert report["summary"]["cost"]["searchedProfileBytes"] == report["summary"]["searchedProfileBytes"]
+    assert (
+        report["summary"]["cost"]["searchedProfileBytes"]
+        == report["summary"]["searchedProfileBytes"]
+    )
     assert report["summary"]["cost"]["profileBytesPerProfileFanoutTask"] > 0
     assert report["summary"]["freshness"]["snapshotCount"] == 1
     assert report["passed"] is True
@@ -183,4 +183,6 @@ def test_render_markdown_includes_gates_and_task_table() -> None:
     assert "| Profile fan-out task rate | 1.0 |" in markdown
     assert "## Gates" in markdown
     assert "| minSuccessRate | 1.0 | 0.0 | pass |" in markdown
-    assert "| `orbit-docs-discovery` | `orbit` | true | 1 | `github.com/example/orbit` |" in markdown
+    assert (
+        "| `orbit-docs-discovery` | `orbit` | true | 1 | `github.com/example/orbit` |" in markdown
+    )

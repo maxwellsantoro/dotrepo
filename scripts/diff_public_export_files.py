@@ -38,7 +38,9 @@ def load_json(path: Path) -> dict[str, Any]:
 def load_manifest(path: Path) -> dict[str, Any]:
     manifest = load_json(path)
     if manifest.get("apiVersion") != "v0":
-        raise SystemExit(f"unsupported file manifest apiVersion in {path}: {manifest.get('apiVersion')}")
+        raise SystemExit(
+            f"unsupported file manifest apiVersion in {path}: {manifest.get('apiVersion')}"
+        )
     files = manifest.get("files")
     if not isinstance(files, list):
         raise SystemExit(f"file manifest must contain a files array: {path}")
@@ -112,9 +114,7 @@ def compare_manifests(old_manifest_path: Path, new_manifest_path: Path) -> dict[
         if path not in new_files:
             removed.append(old_files[path])
 
-    refetch = sorted(item["path"] for item in added) + sorted(
-        item["path"] for item in changed
-    )
+    refetch = sorted(item["path"] for item in added) + sorted(item["path"] for item in changed)
     old_bytes = sum(item["bytes"] for item in old_files.values())
     new_bytes = sum(item["bytes"] for item in new_files.values())
     refetch_bytes = sum(new_files[path]["bytes"] for path in refetch)

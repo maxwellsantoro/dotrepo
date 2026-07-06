@@ -7,10 +7,10 @@ resolver tries a priority list rather than hardcoding one shape. If your deploye
 envelope differs, adjust VALUE_KEYS / CONF_KEYS below in one place -- verified
 against a single live curl, this arm needs no other change.
 """
+
 from __future__ import annotations
 
 import json
-from typing import Optional, Tuple
 from urllib.parse import quote
 
 from ..model import Answer, Field
@@ -42,11 +42,12 @@ class DotrepoArm(Arm):
     def __init__(self, http: Http, base_url: str = "https://dotrepo.org"):
         self.http = http
         self.base = base_url.rstrip("/")
-        self._results: dict = {}   # path -> result dict (or error)
+        self._results: dict = {}  # path -> result dict (or error)
         self._cost = (0, 0.0)
 
     def prefetch(self, repo: str):
         from ..fields import FIELDS
+
         self._results, self._cost = {}, (0, 0.0)
         paths = [f.dotrepo_path for f in FIELDS if f.dotrepo_path]
         q = "&".join([f"repo={quote(repo)}"] + [f"path={quote(p)}" for p in paths])
@@ -73,10 +74,14 @@ class DotrepoArm(Arm):
             val = json.dumps(val)
         conf = _dig_first(res, CONF_KEYS)
         prov = _dig_first(res, PROV_KEYS)
-        return Answer(value=(str(val) if val is not None else None),
-                      confidence=(str(conf).lower() if conf else None),
-                      source=f"dotrepo:{prov or 'query'}",
-                      bytes_over_wire=nb, latency_ms=ms, raw=res)
+        return Answer(
+            value=(str(val) if val is not None else None),
+            confidence=(str(conf).lower() if conf else None),
+            source=f"dotrepo:{prov or 'query'}",
+            bytes_over_wire=nb,
+            latency_ms=ms,
+            raw=res,
+        )
 
 
 def _index_by_path(payload) -> dict:
@@ -105,7 +110,7 @@ def _index_by_path(payload) -> dict:
 
 def _dig(obj, keypath):
     cur = obj
-    for k in (keypath if isinstance(keypath, list) else [keypath]):
+    for k in keypath if isinstance(keypath, list) else [keypath]:
         if not isinstance(cur, dict) or k not in cur:
             return None
         cur = cur[k]

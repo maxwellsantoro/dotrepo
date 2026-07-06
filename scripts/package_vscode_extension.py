@@ -106,8 +106,7 @@ def extension_kind_value(package: dict) -> str:
 
 def derives_code(package: dict) -> bool:
     return any(
-        isinstance(package.get(field), str) and package.get(field)
-        for field in ("main", "browser")
+        isinstance(package.get(field), str) and package.get(field) for field in ("main", "browser")
     )
 
 
@@ -181,7 +180,9 @@ def archive_entries(extension_root: Path, package: dict) -> list[tuple[Path, str
                 if isinstance(configuration, str) and configuration:
                     config_path = extension_root / configuration.removeprefix("./")
                     ensure_file(config_path)
-                    entries.append((config_path, f"extension/{config_path.relative_to(extension_root)}"))
+                    entries.append(
+                        (config_path, f"extension/{config_path.relative_to(extension_root)}")
+                    )
 
     entries.append((main_path, f"extension/{main_path.relative_to(extension_root)}"))
     ordered = dedupe_entries(entries)
@@ -207,11 +208,7 @@ def dedupe_entries(entries: list[tuple[Path, str]]) -> list[tuple[Path, str]]:
 
 def content_types_xml(archive_names: list[str]) -> str:
     extensions = sorted(
-        {
-            Path(name).suffix
-            for name in archive_names
-            if Path(name).suffix in CONTENT_TYPES
-        }
+        {Path(name).suffix for name in archive_names if Path(name).suffix in CONTENT_TYPES}
         | {".vsixmanifest"}
     )
     defaults = "".join(
@@ -226,7 +223,9 @@ def content_types_xml(archive_names: list[str]) -> str:
     )
 
 
-def rewrite_readme_links(readme: str, *, readme_path: Path, repo_root: Path, repo_public_url: str | None) -> str:
+def rewrite_readme_links(
+    readme: str, *, readme_path: Path, repo_root: Path, repo_public_url: str | None
+) -> str:
     if not repo_public_url:
         return readme
 
@@ -263,7 +262,11 @@ def manifest_xml(
     description = expect_string(package, "description")
     engine = expect_string(package.get("engines", {}), "vscode")
     categories = package.get("categories")
-    categories_value = ",".join(value for value in categories if isinstance(value, str)) if isinstance(categories, list) else ""
+    categories_value = (
+        ",".join(value for value in categories if isinstance(value, str))
+        if isinstance(categories, list)
+        else ""
+    )
     tags_value = manifest_tags(package)
     extension_kind = extension_kind_value(package)
     support = support_url(package, repo_public_url)
@@ -278,7 +281,9 @@ def manifest_xml(
         '\t\t\t\t<Property Id="Microsoft.VisualStudio.Code.EnabledApiProposals" Value="" />',
     ]
     if derives_code(package):
-        properties.append('\t\t\t\t<Property Id="Microsoft.VisualStudio.Code.ExecutesCode" Value="true" />')
+        properties.append(
+            '\t\t\t\t<Property Id="Microsoft.VisualStudio.Code.ExecutesCode" Value="true" />'
+        )
     if repo_git_url:
         properties.extend(
             [
@@ -314,31 +319,31 @@ def manifest_xml(
             '\t\t\t<Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />'
         )
 
-    license_xml = '\n\t\t\t<License>extension/LICENSE.txt</License>' if has_license else ""
+    license_xml = "\n\t\t\t<License>extension/LICENSE.txt</License>" if has_license else ""
     return (
         '<?xml version="1.0" encoding="utf-8"?>\n'
         '\t<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" '
         'xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">\n'
-        '\t\t<Metadata>\n'
+        "\t\t<Metadata>\n"
         f'\t\t\t<Identity Language="en-US" Id="{escape(name)}" Version="{escape(version)}" Publisher="{escape(publisher)}" />\n'
-        f'\t\t\t<DisplayName>{escape(display_name)}</DisplayName>\n'
+        f"\t\t\t<DisplayName>{escape(display_name)}</DisplayName>\n"
         f'\t\t\t<Description xml:space="preserve">{escape(description)}</Description>\n'
-        f'\t\t\t<Tags>{escape(tags_value)}</Tags>\n'
-        f'\t\t\t<Categories>{escape(categories_value)}</Categories>\n'
-        '\t\t\t<GalleryFlags>Public</GalleryFlags>\n'
-        '\t\t\t<Properties>\n'
-        f'{"\n".join(properties)}\n'
-        '\t\t\t</Properties>'
-        f'{license_xml}\n'
-        '\t\t</Metadata>\n'
-        '\t\t<Installation>\n'
+        f"\t\t\t<Tags>{escape(tags_value)}</Tags>\n"
+        f"\t\t\t<Categories>{escape(categories_value)}</Categories>\n"
+        "\t\t\t<GalleryFlags>Public</GalleryFlags>\n"
+        "\t\t\t<Properties>\n"
+        f"{'\n'.join(properties)}\n"
+        "\t\t\t</Properties>"
+        f"{license_xml}\n"
+        "\t\t</Metadata>\n"
+        "\t\t<Installation>\n"
         '\t\t\t<InstallationTarget Id="Microsoft.VisualStudio.Code"/>\n'
-        '\t\t</Installation>\n'
-        '\t\t<Dependencies/>\n'
-        '\t\t<Assets>\n'
-        f'{"\n".join(assets)}\n'
-        '\t\t</Assets>\n'
-        '\t</PackageManifest>\n'
+        "\t\t</Installation>\n"
+        "\t\t<Dependencies/>\n"
+        "\t\t<Assets>\n"
+        f"{'\n'.join(assets)}\n"
+        "\t\t</Assets>\n"
+        "\t</PackageManifest>\n"
     )
 
 
@@ -360,13 +365,16 @@ def write_vsix(extension_root: Path, output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     archive_names = [archive_name for _, archive_name in entries]
     with ZipFile(output_path, "w", compression=ZIP_DEFLATED) as archive:
-        archive.writestr("extension.vsixmanifest", manifest_xml(
-            package,
-            repo_public_url=repo_public_url,
-            repo_git_url=repo_git_url,
-            has_readme=has_readme,
-            has_license=has_license,
-        ))
+        archive.writestr(
+            "extension.vsixmanifest",
+            manifest_xml(
+                package,
+                repo_public_url=repo_public_url,
+                repo_git_url=repo_git_url,
+                has_readme=has_readme,
+                has_license=has_license,
+            ),
+        )
         archive.writestr("[Content_Types].xml", content_types_xml(archive_names))
         for source, archive_name in entries:
             if archive_name == "extension/readme.md":

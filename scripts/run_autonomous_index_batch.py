@@ -173,9 +173,7 @@ def resolve_synthesis_config(args: argparse.Namespace) -> tuple[str | None, str 
     if not args.synthesize:
         return None, None
     model = (args.synthesis_model or os.environ.get("DOTREPO_SYNTHESIS_MODEL", "")).strip()
-    provider = (
-        args.synthesis_provider or os.environ.get("DOTREPO_SYNTHESIS_PROVIDER", "")
-    ).strip()
+    provider = (args.synthesis_provider or os.environ.get("DOTREPO_SYNTHESIS_PROVIDER", "")).strip()
     missing = [name for name, value in (("model", model), ("provider", provider)) if not value]
     if missing:
         raise SystemExit(
@@ -188,7 +186,9 @@ def resolve_synthesis_config(args: argparse.Namespace) -> tuple[str | None, str 
     return model, provider
 
 
-def crawl_env_for_remaining_budget(base_env: dict[str, str], remaining_budget: int) -> dict[str, str]:
+def crawl_env_for_remaining_budget(
+    base_env: dict[str, str], remaining_budget: int
+) -> dict[str, str]:
     env = base_env.copy()
     if remaining_budget <= 0:
         env["INDEX_MAX_ADJUDICATION_CALLS"] = "0"
@@ -448,10 +448,7 @@ def select_refresh_batch_or_empty(
     # to an empty batch so the conveyor stays stable across repeated runs.
     reason = "no_scheduled_refreshes"
     if batches:
-        if any(
-            isinstance(batch, dict) and batch.get("id") == batch_id
-            for batch in batches
-        ):
+        if any(isinstance(batch, dict) and batch.get("id") == batch_id for batch in batches):
             run(
                 [
                     *UV_PYTHON,
@@ -654,7 +651,7 @@ def unique_fixture_slug(value: str, seen: set[str]) -> str:
     suffix = 2
     while candidate in seen:
         suffix_text = f"-{suffix}"
-        candidate = f"{base[:80 - len(suffix_text)].rstrip('-')}{suffix_text}"
+        candidate = f"{base[: 80 - len(suffix_text)].rstrip('-')}{suffix_text}"
         suffix += 1
     seen.add(candidate)
     return candidate
@@ -744,16 +741,12 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
             fingerprint = failure_fingerprint(crawl.get("error"))
             failure_fingerprints[fingerprint] += 1
             failure_fingerprint_classes.setdefault(fingerprint, failure_class)
-            ecosystem = classify_ecosystem(
-                crawl.get("error"), crawl.get("repository")
-            )
+            ecosystem = classify_ecosystem(crawl.get("error"), crawl.get("repository"))
             crawl["ecosystem"] = ecosystem
             failure_fingerprint_ecosystems.setdefault(fingerprint, ecosystem)
             repository = str(crawl.get("repository") or "").strip()
             if repository:
-                failure_fingerprint_repositories.setdefault(fingerprint, set()).add(
-                    repository
-                )
+                failure_fingerprint_repositories.setdefault(fingerprint, set()).add(repository)
         if crawl.get("recordStatus") == "verified":
             promoted += 1
         synthesis_failure = crawl.get("synthesisFailure") or {}
@@ -777,9 +770,7 @@ def enrich_telemetry(telemetry: dict, args: argparse.Namespace) -> dict:
             "failureFingerprintEcosystems": dict(sorted(failure_fingerprint_ecosystems.items())),
             "failureFingerprintRepositories": {
                 fingerprint: sorted(repositories)
-                for fingerprint, repositories in sorted(
-                    failure_fingerprint_repositories.items()
-                )
+                for fingerprint, repositories in sorted(failure_fingerprint_repositories.items())
             },
             "promoted": promoted,
             "synthesisRequested": len(crawls) if getattr(args, "synthesize", False) else 0,
@@ -884,9 +875,7 @@ def aggregate_costs(runs: list[dict]) -> dict[str, int | float]:
     return {
         "adjudicationCallBudget": budget,
         "adjudicationCalls": totals["adjudicationCalls"],
-        "adjudicationBudgetUseRate": (
-            totals["adjudicationCalls"] / budget if budget else 0.0
-        ),
+        "adjudicationBudgetUseRate": (totals["adjudicationCalls"] / budget if budget else 0.0),
         "crawled": crawled,
         "tokensUsed": totals["tokensUsed"],
         "tokensPerCrawled": totals["tokensUsed"] / crawled if crawled else 0.0,
@@ -977,27 +966,21 @@ def aggregate_runs(runs: list[dict]) -> dict:
         ).items():
             fingerprint = str(fingerprint).strip()
             if fingerprint and isinstance(repositories, list):
-                failure_fingerprint_repositories.setdefault(
-                    fingerprint, set()
-                ).update(
+                failure_fingerprint_repositories.setdefault(fingerprint, set()).update(
                     str(repository).strip()
                     for repository in repositories
                     if str(repository).strip()
                 )
         for tier, count in (run_telemetry.get("repositoriesByAdjudicationTier") or {}).items():
             tier_counts[str(tier)] += int(count or 0)
-        for failure_class, count in (
-            run_telemetry.get("synthesisFailureClasses") or {}
-        ).items():
+        for failure_class, count in (run_telemetry.get("synthesisFailureClasses") or {}).items():
             synthesis_failure_classes[str(failure_class)] += int(count or 0)
 
     # Cross-tabulate failure class by ecosystem using the per-fingerprint maps so
     # recurring parser/evidence/validation defects can be prioritized by ecosystem.
     for fingerprint, count in failure_fingerprints.items():
         failure_class = failure_fingerprint_classes.get(fingerprint, "unknown")
-        ecosystem = failure_fingerprint_ecosystems.get(
-            fingerprint, classify_ecosystem(fingerprint)
-        )
+        ecosystem = failure_fingerprint_ecosystems.get(fingerprint, classify_ecosystem(fingerprint))
         ecosystem_counts[ecosystem] += count
         failure_classes_by_ecosystem[f"{failure_class}/{ecosystem}"] += count
 
@@ -1023,9 +1006,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
     for item in recurring_failures:
         fingerprint = item["fingerprint"]
         failure_class = failure_fingerprint_classes.get(fingerprint, "unknown")
-        ecosystem = failure_fingerprint_ecosystems.get(
-            fingerprint, classify_ecosystem(fingerprint)
-        )
+        ecosystem = failure_fingerprint_ecosystems.get(fingerprint, classify_ecosystem(fingerprint))
         candidate = {
             "failureClass": failure_class,
             "ecosystem": ecosystem,
@@ -1084,9 +1065,7 @@ def aggregate_runs(runs: list[dict]) -> dict:
     }
 
 
-def retain_telemetry(
-    telemetry: dict, history_path: Path, summary_path: Path
-) -> dict:
+def retain_telemetry(telemetry: dict, history_path: Path, summary_path: Path) -> dict:
     history_path.parent.mkdir(parents=True, exist_ok=True)
     with history_path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(telemetry, sort_keys=True, separators=(",", ":")) + "\n")
@@ -1251,19 +1230,21 @@ def write_regression_fixture_stub_artifacts(candidates: list[dict], stub_root: P
             "fixture": fixture,
             "failureClass": failure_class,
             "ecosystem": candidate.get("ecosystem", "unknown"),
-            "fixtureEligible": candidate.get(
-                "fixtureEligible", fixture_eligible(failure_class)
-            ),
+            "fixtureEligible": candidate.get("fixtureEligible", fixture_eligible(failure_class)),
             "fingerprint": candidate.get("fingerprint", "unknown"),
             "observedRuns": candidate.get("count", 0),
             "repositories": candidate.get("repositories", []),
             "status": "needs_materialization",
         }
-        (destination / "metadata.json").write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n")
+        (destination / "metadata.json").write_text(
+            json.dumps(metadata, indent=2, sort_keys=True) + "\n"
+        )
         (destination / "README.md").write_text(render_regression_fixture_stub_readme(candidate))
 
 
-def write_telemetry_outputs(telemetry: dict, args: argparse.Namespace, telemetry_path: Path) -> None:
+def write_telemetry_outputs(
+    telemetry: dict, args: argparse.Namespace, telemetry_path: Path
+) -> None:
     telemetry = enrich_telemetry(telemetry, args)
     telemetry_path.write_text(json.dumps(telemetry, indent=2, sort_keys=True) + "\n")
     summary = retain_telemetry(
@@ -1307,19 +1288,19 @@ def main() -> int:
     telemetry_path = output_dir / "telemetry.json"
 
     refresh_plan_command = [
-            "cargo",
-            "run",
-            "-q",
-            "-p",
-            "dotrepo-crawler",
-            "--",
-            "refresh-plan",
-            "--state-path",
-            args.state_path,
-            "--limit",
-            str(args.limit),
-            "--json",
-        ]
+        "cargo",
+        "run",
+        "-q",
+        "-p",
+        "dotrepo-crawler",
+        "--",
+        "refresh-plan",
+        "--state-path",
+        args.state_path,
+        "--limit",
+        str(args.limit),
+        "--json",
+    ]
     if args.synthesize:
         refresh_plan_command.extend(["--synthesize", "--synthesis-model", synthesis_model])
     proc = run(refresh_plan_command)
@@ -1356,7 +1337,10 @@ def main() -> int:
             batch_size=args.batch_size,
         )
     discovery_additions = []
-    if not args.disable_discovery and len(read_target_identities(selected_targets)) < args.batch_size:
+    if (
+        not args.disable_discovery
+        and len(read_target_identities(selected_targets)) < args.batch_size
+    ):
         discovery_report = run_discovery_fill(
             discovery_json=discovery_json,
             discovery_limit=discovery_limit,
@@ -1403,31 +1387,29 @@ def main() -> int:
         crawls.append(entry)
         before_status = capture_record_status_before_crawl(Path(args.index_root), identity)
         try:
-            crawl_env = crawl_env_for_remaining_budget(
-                base_env, remaining_adjudication_calls
-            )
+            crawl_env = crawl_env_for_remaining_budget(base_env, remaining_adjudication_calls)
             entry["adjudicationCallBudgetBefore"] = remaining_adjudication_calls
             crawl_command = [
-                    "cargo",
-                    "run",
-                    "-q",
-                    "-p",
-                    "dotrepo-crawler",
-                    "--",
-                    "crawl",
-                    "--index-root",
-                    args.index_root,
-                    "--state-path",
-                    args.state_path,
-                    "--host",
-                    host,
-                    "--owner",
-                    owner,
-                    "--repo",
-                    repo,
-                    "--write",
-                    "--json",
-                ]
+                "cargo",
+                "run",
+                "-q",
+                "-p",
+                "dotrepo-crawler",
+                "--",
+                "crawl",
+                "--index-root",
+                args.index_root,
+                "--state-path",
+                args.state_path,
+                "--host",
+                host,
+                "--owner",
+                owner,
+                "--repo",
+                repo,
+                "--write",
+                "--json",
+            ]
             if args.synthesize:
                 crawl_command.extend(
                     [
@@ -1495,9 +1477,7 @@ def main() -> int:
     repos_with_adjudication = sum(
         1 for item in crawls if int(item.get("adjudicationCalls") or 0) > 0
     )
-    adjudication_rate = (
-        repos_with_adjudication / len(crawls) if crawls else 0.0
-    )
+    adjudication_rate = repos_with_adjudication / len(crawls) if crawls else 0.0
 
     if written > 0:
         run(["cargo", "run", "-q", "-p", "dotrepo-cli", "--", "validate-index"])

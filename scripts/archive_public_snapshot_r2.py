@@ -59,7 +59,11 @@ def content_type(path: Path) -> str:
 
 
 def cache_control(relative_path: str) -> str:
-    return MUTABLE_CACHE_CONTROL if relative_path == "v0/snapshots/log.json" else IMMUTABLE_CACHE_CONTROL
+    return (
+        MUTABLE_CACHE_CONTROL
+        if relative_path == "v0/snapshots/log.json"
+        else IMMUTABLE_CACHE_CONTROL
+    )
 
 
 def upload_command(bucket: str, public_root: Path, path: Path) -> list[str]:

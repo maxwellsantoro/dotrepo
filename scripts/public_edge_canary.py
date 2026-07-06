@@ -177,8 +177,7 @@ def validate_pagedigest_stats(
         "stats pagedigest estimatedTokensAvoided is not an integer",
     )
     require(
-        pagedigest.get("recordsCovered")
-        == new_records + changed_records + unchanged_records,
+        pagedigest.get("recordsCovered") == new_records + changed_records + unchanged_records,
         "stats pagedigest record buckets do not add up",
     )
     require(
@@ -273,9 +272,7 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
     require(isinstance(paths, dict), "dotrepo meta is missing content-addressed paths")
     snapshot_id = meta.get("snapshotId")
     digest = meta.get("snapshotDigest")
-    require(
-        isinstance(snapshot_id, str) and snapshot_id, "dotrepo meta has no snapshotId"
-    )
+    require(isinstance(snapshot_id, str) and snapshot_id, "dotrepo meta has no snapshotId")
     require(
         isinstance(digest, str) and digest.startswith(snapshot_id),
         "snapshotId does not match snapshotDigest",
@@ -356,9 +353,7 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
             f"{record_path} disagrees with pointer",
         )
     archive_sample = (
-        archived_snapshot_sample(origin, log_entries, digest)
-        if sample_archived_snapshot
-        else None
+        archived_snapshot_sample(origin, log_entries, digest) if sample_archived_snapshot else None
     )
 
     homepage = fetch(origin, "/").decode("utf-8")
@@ -379,9 +374,7 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
     )
 
     manifest = fetch_json(origin, "/.well-known/pagedigest.json")
-    require(
-        manifest.get("version") == 1, "dotrepo pagedigest manifest is not version 1"
-    )
+    require(manifest.get("version") == 1, "dotrepo pagedigest manifest is not version 1")
     require(
         isinstance(manifest.get("site_rev"), int) and manifest["site_rev"] > 0,
         "dotrepo site_rev is invalid",
@@ -411,14 +404,10 @@ def check_pagedigest(origin: str, repo_root: Path | None) -> dict[str, Any]:
         "pagedigest.org site_rev is invalid",
     )
     for claim in ("Version 1, release candidate", "Rust generator", "Python consumer"):
-        require(
-            claim in homepage, f"pagedigest homepage is missing current claim: {claim}"
-        )
+        require(claim in homepage, f"pagedigest homepage is missing current claim: {claim}")
 
     if repo_root is not None:
-        local_manifest = json.loads(
-            (repo_root / "site/.well-known/pagedigest.json").read_text()
-        )
+        local_manifest = json.loads((repo_root / "site/.well-known/pagedigest.json").read_text())
         require(
             local_manifest.get("version") == manifest.get("version"),
             "pagedigest live and repository versions disagree",
@@ -439,9 +428,7 @@ def main() -> int:
     try:
         report = {
             "checkedAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-            "dotrepo": check_dotrepo(
-                args.dotrepo_origin, args.sample_archived_snapshot
-            ),
+            "dotrepo": check_dotrepo(args.dotrepo_origin, args.sample_archived_snapshot),
             "pagedigest": check_pagedigest(
                 args.pagedigest_origin,
                 Path(args.pagedigest_repo_root) if args.pagedigest_repo_root else None,

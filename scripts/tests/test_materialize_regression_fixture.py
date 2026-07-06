@@ -237,9 +237,7 @@ def test_resolve_capture_args_requires_matching_repository_for_ambiguous_stub(
         raise AssertionError("expected ambiguous stub to require --repo")
 
     args = capture.resolve_capture_args(
-        capture.parse_args(
-            ["--stub", str(stub), "--repo", "github.com/example/another"]
-        )
+        capture.parse_args(["--stub", str(stub), "--repo", "github.com/example/another"])
     )
     assert args.repo == "github.com/example/another"
 

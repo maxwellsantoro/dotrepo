@@ -142,10 +142,16 @@ jobs:
           else
             echo "mold unavailable; using default linker"
           fi
+      - name: Install cargo-deny
+        run: cargo install cargo-deny --version 0.19.9 --locked
       - name: Check formatting, linting, tests, and seeded flows
         run: |
           cargo fmt --all -- --check
-          cargo clippy --workspace --all-targets -- -D clippy::correctness -W clippy::perf
+          cargo clippy --workspace --all-targets -- -D warnings
+          cargo deny check advisories licenses bans sources
+          uv run ruff check
+          uv run ruff format --check
+          uv run python scripts/check_toolchain_manifest_parity.py
           cargo test --workspace
           uv run pytest
           cargo run -p dotrepo-cli -- --root examples/native-minimal validate
@@ -517,6 +523,9 @@ jobs:
         run: |
           cargo fmt --all -- --check
           cargo clippy --workspace --all-targets -- -D warnings
+          uv run ruff check
+          uv run ruff format --check
+          uv run python scripts/check_toolchain_manifest_parity.py
           cargo test --workspace
           uv run pytest
           cargo run -p dotrepo-cli -- validate-index

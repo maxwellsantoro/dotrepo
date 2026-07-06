@@ -113,9 +113,7 @@ DEFAULT_SAMPLE_SIZE = 20
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description=(
-            "Draw a randomized, risk-weighted audit sample from checked-in index records."
-        )
+        description=("Draw a randomized, risk-weighted audit sample from checked-in index records.")
     )
     parser.add_argument(
         "--index-root",
@@ -198,7 +196,9 @@ def inferred_language_family(record: dict[str, Any]) -> str:
     # minor vendored/dependency language into the wrong family; this exact
     # bug is what this sampler surfaced for docker/awesome-compose and
     # firecrawl/firecrawl).
-    languages = [str(language).lower() for language in record.get("repo", {}).get("languages") or []]
+    languages = [
+        str(language).lower() for language in record.get("repo", {}).get("languages") or []
+    ]
     dominant = languages[0] if languages else ""
     if dominant == "rust":
         return "Rust"
@@ -261,8 +261,7 @@ def family_completeness_averages(records: list[dict[str, Any]]) -> dict[str, flo
     for record in records:
         totals[record["languageFamily"]].append(record["completenessCount"])
     return {
-        family: (sum(values) / len(values) if values else 0.0)
-        for family, values in totals.items()
+        family: (sum(values) / len(values) if values else 0.0) for family, values in totals.items()
     }
 
 
@@ -418,7 +417,11 @@ def render_markdown(report: dict[str, Any]) -> str:
     for record in report["sample"]:
         lines.append(
             f"- `{record['identity']}`: `{record['recordPath']}`"
-            + (f", `{record['evidencePath']}`" if record["evidencePath"] else " (no evidence.md found)")
+            + (
+                f", `{record['evidencePath']}`"
+                if record["evidencePath"]
+                else " (no evidence.md found)"
+            )
         )
     return "\n".join(lines).rstrip() + "\n"
 

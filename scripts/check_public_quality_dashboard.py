@@ -121,11 +121,7 @@ def is_generic_name(value: object) -> bool:
 
 def generic_text_reasons(value: object) -> list[str]:
     text = str(value or "")
-    return [
-        pattern.pattern
-        for pattern in GENERIC_TEXT_PATTERNS
-        if pattern.search(text)
-    ]
+    return [pattern.pattern for pattern in GENERIC_TEXT_PATTERNS if pattern.search(text)]
 
 
 def profile_identity(profile: dict[str, Any], path: Path) -> str:
@@ -215,9 +211,7 @@ def summarize(public_root: Path, max_items: int, thresholds: dict[str, int]) -> 
     confidence_counts = Counter(profile["confidence"] for profile in profiles)
     duplicate_groups = duplicate_description_groups(profiles)
     duplicated_identities = {
-        identity
-        for group in duplicate_groups
-        for identity in group["repositories"]
+        identity for group in duplicate_groups for identity in group["repositories"]
     }
     generic_examples = [
         {
@@ -271,9 +265,7 @@ def summarize(public_root: Path, max_items: int, thresholds: dict[str, int]) -> 
         "statusCounts": dict(sorted(status_counts.items())),
         "confidenceCounts": dict(sorted(confidence_counts.items())),
         "signalCounts": dict(sorted(signal_counts.items())),
-        "genericFieldHitCount": sum(
-            len(profile["genericFindings"]) for profile in profiles
-        ),
+        "genericFieldHitCount": sum(len(profile["genericFindings"]) for profile in profiles),
         "genericRecordCount": len(generic_examples),
         "duplicatedDescriptionValueCount": len(duplicate_groups),
         "duplicateDescriptionRecordCount": len(duplicated_identities),
@@ -288,8 +280,7 @@ def summarize(public_root: Path, max_items: int, thresholds: dict[str, int]) -> 
         "maxGenericFieldHits": {
             "threshold": thresholds["maxGenericFieldHits"],
             "actual": summary["genericFieldHitCount"],
-            "passed": summary["genericFieldHitCount"]
-            <= thresholds["maxGenericFieldHits"],
+            "passed": summary["genericFieldHitCount"] <= thresholds["maxGenericFieldHits"],
         },
         "maxDuplicatedDescriptionValues": {
             "threshold": thresholds["maxDuplicatedDescriptionValues"],
@@ -306,8 +297,7 @@ def summarize(public_root: Path, max_items: int, thresholds: dict[str, int]) -> 
         "maxBadLookingRecords": {
             "threshold": thresholds["maxBadLookingRecords"],
             "actual": summary["badLookingRecordCount"],
-            "passed": summary["badLookingRecordCount"]
-            <= thresholds["maxBadLookingRecords"],
+            "passed": summary["badLookingRecordCount"] <= thresholds["maxBadLookingRecords"],
         },
     }
     return {
@@ -350,27 +340,21 @@ def render_markdown(report: dict[str, Any]) -> str:
     ]
     for name, gate in gates.items():
         result = "pass" if gate["passed"] else "fail"
-        lines.append(
-            f"- `{name}`: {gate['actual']} / {gate['threshold']} ({result})"
-        )
+        lines.append(f"- `{name}`: {gate['actual']} / {gate['threshold']} ({result})")
     lines.extend(["", "## Generic field examples", ""])
     if not report["genericFieldExamples"]:
         lines.append("- None.")
     else:
         for item in report["genericFieldExamples"]:
             fields = ", ".join(f"{f['field']}:{f['reason']}" for f in item["findings"])
-            lines.append(
-                f"- `{item['identity']}` — name `{item['name']}`; findings {fields}"
-            )
+            lines.append(f"- `{item['identity']}` — name `{item['name']}`; findings {fields}")
     lines.extend(["", "## Duplicated descriptions", ""])
     if not report["duplicatedDescriptions"]:
         lines.append("- None.")
     else:
         for item in report["duplicatedDescriptions"]:
             repos = ", ".join(f"`{repo}`" for repo in item["repositories"])
-            lines.append(
-                f"- {item['count']} records: “{item['description']}” — {repos}"
-            )
+            lines.append(f"- {item['count']} records: “{item['description']}” — {repos}")
     lines.extend(["", "## Bad-looking records", ""])
     if not report["badLookingRecords"]:
         lines.append("- None.")

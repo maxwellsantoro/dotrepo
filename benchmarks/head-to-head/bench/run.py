@@ -11,7 +11,7 @@ import yaml
 
 from .cache import ResponseCache
 from .fields import FIELDS_BY_ID
-from .model import Answer, GoldItem, Outcome, FieldClass, score_answer
+from .model import Answer, GoldItem, Outcome, score_answer
 from .arms.base import Http
 from .arms.github_arm import GitHubArm
 from .arms.dotrepo_arm import DotrepoArm
@@ -61,7 +61,9 @@ def run(gold: List[GoldItem], arm) -> Dict:
             arm.prefetch(repo)
         except Exception as e:
             for g in items:
-                rows.append(_row(repo, g, Answer(None, None, f"prefetch-error:{e}"), Outcome.ABSTAINED))
+                rows.append(
+                    _row(repo, g, Answer(None, None, f"prefetch-error:{e}"), Outcome.ABSTAINED)
+                )
             continue
         for g in items:
             field = FIELDS_BY_ID.get(g.field_id)
@@ -76,20 +78,28 @@ def run(gold: List[GoldItem], arm) -> Dict:
 def _row(repo, g, ans: Answer, out: Outcome):
     f = FIELDS_BY_ID.get(g.field_id)
     return {
-        "repo": repo, "field": g.field_id,
+        "repo": repo,
+        "field": g.field_id,
         "field_class": f.field_class.value if f else "?",
-        "gold": g.gold, "got": ans.value, "confidence": ans.confidence,
-        "outcome": out.value, "source": ans.source,
-        "bytes": ans.bytes_over_wire, "latency_ms": round(ans.latency_ms, 1),
+        "gold": g.gold,
+        "got": ans.value,
+        "confidence": ans.confidence,
+        "outcome": out.value,
+        "source": ans.source,
+        "bytes": ans.bytes_over_wire,
+        "latency_ms": round(ans.latency_ms, 1),
     }
 
 
 def summarize(rows: List[dict]) -> dict:
     scored = [r for r in rows if r["outcome"] != Outcome.NO_GOLD.value]
     n = len(scored) or 1
-    c = lambda o: sum(1 for r in scored if r["outcome"] == o)
-    correct = c(Outcome.CORRECT.value)
-    cwrong = c(Outcome.CONFIDENTLY_WRONG.value)
+
+    def count_outcome(outcome: str) -> int:
+        return sum(1 for r in scored if r["outcome"] == outcome)
+
+    correct = count_outcome(Outcome.CORRECT.value)
+    cwrong = count_outcome(Outcome.CONFIDENTLY_WRONG.value)
     answered = sum(1 for r in scored if r["outcome"] != Outcome.ABSTAINED.value)
 
     def bucket(fc):
@@ -103,13 +113,13 @@ def summarize(rows: List[dict]) -> dict:
 
     return {
         "n_scored": len(scored),
-        "accuracy": round(correct / n, 3),                       # correct / all scored
-        "precision": round(correct / (answered or 1), 3),         # correct / answered
-        "coverage": round(answered / n, 3),                       # answered / all scored
+        "accuracy": round(correct / n, 3),  # correct / all scored
+        "precision": round(correct / (answered or 1), 3),  # correct / answered
+        "coverage": round(answered / n, 3),  # answered / all scored
         "confidently_wrong": cwrong,
-        "confidently_wrong_rate": round(cwrong / n, 3),           # the trust-critical metric
-        "wrong_hedged": c(Outcome.WRONG_HEDGED.value),
-        "abstained": c(Outcome.ABSTAINED.value),
+        "confidently_wrong_rate": round(cwrong / n, 3),  # the trust-critical metric
+        "wrong_hedged": count_outcome(Outcome.WRONG_HEDGED.value),
+        "abstained": count_outcome(Outcome.ABSTAINED.value),
         "total_bytes": sum(r["bytes"] for r in rows),
         "approx_tokens": round(sum(r["bytes"] for r in rows) / 4),
         "total_latency_ms": round(sum(r["latency_ms"] for r in rows), 1),
@@ -121,6 +131,7 @@ def markdown(results: List[Dict]) -> str:
     L = ["# dotrepo benchmark — head-to-head", ""]
     L.append("| metric | " + " | ".join(r["arm"] for r in results) + " |")
     L.append("|" + "---|" * (len(results) + 1))
+
     def line(label, key, pct=False, sub=None):
         vals = []
         for r in results:
@@ -128,6 +139,7 @@ def markdown(results: List[Dict]) -> str:
             v = s[sub][key] if sub else s[key]
             vals.append(f"{v:.1%}" if pct else str(v))
         L.append(f"| {label} | " + " | ".join(vals) + " |")
+
     line("scored questions", "n_scored")
     line("accuracy (correct / all)", "accuracy", pct=True)
     line("precision (correct / answered)", "precision", pct=True)
@@ -140,16 +152,22 @@ def markdown(results: List[Dict]) -> str:
     L += ["", "### Buried fields only (dotrepo's thesis)", ""]
     L.append("| metric | " + " | ".join(r["arm"] for r in results) + " |")
     L.append("|" + "---|" * (len(results) + 1))
+
     def bline(label, key, pct=False):
         vals = []
         for r in results:
             v = r["summary"]["by_class"]["buried"][key]
             vals.append(f"{v:.1%}" if pct else str(v))
         L.append(f"| {label} | " + " | ".join(vals) + " |")
+
     bline("buried accuracy", "accuracy", pct=True)
     bline("buried confidently-wrong", "confidently_wrong")
-    L += ["", "_A win for dotrepo is: higher buried accuracy AND fewer confidently-wrong "
-          "answers AND fewer tokens. If it doesn't clear all three, it isn't paying rent._", ""]
+    L += [
+        "",
+        "_A win for dotrepo is: higher buried accuracy AND fewer confidently-wrong "
+        "answers AND fewer tokens. If it doesn't clear all three, it isn't paying rent._",
+        "",
+    ]
     return "\n".join(L)
 
 
