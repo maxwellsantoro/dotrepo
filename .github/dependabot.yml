@@ -1,0 +1,12 @@
+# Keeps SHA-pinned action references current: Dependabot reads the trailing
+# `# <tag>` comments on pinned `uses:` lines and proposes updated pins.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - "*"

@@ -164,6 +164,12 @@ MCP and LSP have inline tests in their respective `main.rs` files that verify pa
 
 Index-only or other public-surface-only changes route to `public-surface-gate` without paying the full release-bundle path. Rust toolchain, docs, or RFC changes route through `rust-and-index` and `release-gate`.
 
+All third-party actions in workflows are pinned to full commit SHAs with a
+trailing `# <tag>` comment; Dependabot (`.github/dependabot.yml`) proposes pin
+updates weekly. Keep new `uses:` references SHA-pinned in the same format.
+`dtolnay/rust-toolchain` cannot select the toolchain from a SHA ref, so those
+steps pass an explicit `toolchain:` input.
+
 ## Version Constants
 
 Do not copy protocol or schema version constants into new documentation. Read

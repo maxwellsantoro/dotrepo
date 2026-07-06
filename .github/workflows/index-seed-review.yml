@@ -36,17 +36,19 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ github.token }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - name: Create and sync Python environment
         run: |
           uv venv
           uv sync --dev --locked
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
       - name: Cache cargo artifacts
-        uses: actions/cache@v5
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         with:
           path: |
             ~/.cargo/registry
@@ -164,7 +166,7 @@ jobs:
           fi
       - name: Upload candidate seed review artifacts
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: index-seed-review
           path: index-seed-review/
@@ -234,7 +236,7 @@ jobs:
         id: seed_pr
         if: steps.auto_batch.outputs.selected == 'true'
         continue-on-error: true
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
           branch: ${{ steps.auto_batch.outputs.branch }}
           title: ${{ steps.auto_batch.outputs.title }}
@@ -263,7 +265,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload seed auto-PR execution artifacts
         if: always() && steps.auto_batch.outputs.selected == 'true'
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: index-seed-review-auto-pr
           path: index-seed-review/

@@ -20,7 +20,7 @@ jobs:
       run_release_gate: ${{ steps.scope.outputs.run_release_gate }}
       run_minimal_gate: ${{ steps.scope.outputs.run_minimal_gate }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           fetch-depth: 0
       - name: Classify changed files
@@ -123,17 +123,19 @@ jobs:
     if: needs.change-scope.outputs.run_rust_ci == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - name: Create and sync Python environment
         run: |
           uv venv
           uv sync --dev --locked
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
       - name: Cache cargo artifacts
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Enable faster linker when mold is available
         run: |
           if sudo apt-get install -y mold; then
@@ -408,17 +410,19 @@ jobs:
       (needs.rust-and-index.result == 'success' || needs.rust-and-index.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - name: Create and sync Python environment
         run: |
           uv venv
           uv sync --dev --locked
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
       - name: Cache cargo artifacts
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Enable faster linker when mold is available
         run: |
           if sudo apt-get install -y mold; then
@@ -430,14 +434,14 @@ jobs:
       - name: Run explicit maintainer/operator claim gate
         run: uv run python scripts/check_operator_claim_gate.py --output-root operator-gate
       - name: Upload operator gate inspection artifacts
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: operator-gate-claim-reports
           path: operator-gate/
           if-no-files-found: error
           retention-days: 14
       - name: Upload staged live-handoff public export
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: operator-gate-live-seed-handoff-public
           path: operator-gate/live-seed-handoff-public/
@@ -452,17 +456,19 @@ jobs:
       (needs.rust-and-index.result == 'success' || needs.rust-and-index.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - name: Create and sync Python environment
         run: |
           uv venv
           uv sync --dev --locked
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
       - name: Cache cargo artifacts
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Enable faster linker when mold is available
         run: |
           if sudo apt-get install -y mold; then
@@ -472,7 +478,7 @@ jobs:
             echo "mold unavailable; using default linker"
           fi
       - name: Set up Node.js 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -491,14 +497,14 @@ jobs:
       - name: Run lightweight public-surface gate
         run: uv run python scripts/check_release_gate.py --output-root release-gate --skip-release-bundle --skip-vsix
       - name: Upload static public export artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: public-export-v0-lightweight
           path: release-gate/public/
           if-no-files-found: error
           retention-days: 7
       - name: Upload public export bundle
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: public-export-v0-bundle-lightweight
           path: release-gate/public-bundle/*.tar.gz
@@ -510,17 +516,19 @@ jobs:
     if: needs.change-scope.outputs.run_minimal_gate == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - name: Create and sync Python environment
         run: |
           uv venv
           uv sync --dev --locked
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
       - name: Cache cargo artifacts
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Enable faster linker when mold is available
         run: |
           if sudo apt-get install -y mold; then
@@ -551,17 +559,19 @@ jobs:
       (needs.rust-and-index.result == 'success' || needs.rust-and-index.result == 'skipped')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - name: Create and sync Python environment
         run: |
           uv venv
           uv sync --dev --locked
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
       - name: Cache cargo artifacts
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Enable faster linker when mold is available
         run: |
           if sudo apt-get install -y mold; then
@@ -571,7 +581,7 @@ jobs:
             echo "mold unavailable; using default linker"
           fi
       - name: Set up Node.js 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -581,21 +591,21 @@ jobs:
       - name: Run explicit release-surface gate
         run: uv run python scripts/check_release_gate.py --output-root release-gate
       - name: Upload static public export artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: public-export-v0
           path: release-gate/public/
           if-no-files-found: error
           retention-days: 14
       - name: Upload public export bundle
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: public-export-v0-bundle
           path: release-gate/public-bundle/*.tar.gz
           if-no-files-found: error
           retention-days: 14
       - name: Upload release-style install bundles
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: release-gate-install-bundles
           path: |
@@ -604,7 +614,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
       - name: Upload release-style VSIX
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: release-gate-vscode-vsix
           path: release-gate/vsix/*.vsix
