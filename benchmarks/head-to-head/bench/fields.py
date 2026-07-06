@@ -81,7 +81,7 @@ FIELDS = [
         "min_toolchain",
         "Minimum required toolchain / runtime version (MSRV, Node, Python).",
         FieldClass.BURIED,
-        "categorical",
+        "version",
         "repo.toolchain.min",
         "scrape README/rust-toolchain/.nvmrc/pyproject",
     ),

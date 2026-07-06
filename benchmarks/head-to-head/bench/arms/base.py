@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Optional
 
 import requests
 
+from ..cache import ReplayCacheMiss
 from ..model import Answer, Field
 
 if TYPE_CHECKING:
@@ -28,6 +29,10 @@ class Arm:
     def answer(self, repo: str, field: Field) -> Answer:
         raise NotImplementedError
 
+    def configuration(self) -> dict:
+        """Return non-secret run settings needed to audit an arm's result."""
+        return {}
+
 
 class Http:
     """Thin requests wrapper that counts response bytes and latency, with an
@@ -45,6 +50,8 @@ class Http:
             hit = self.cache.get(url)
             if hit is not None:
                 return hit["status"], hit["text"], len(hit["text"].encode()), 0.0
+            if self.cache.mode == "replay":
+                raise ReplayCacheMiss(f"replay cache miss: {url}")
         t0 = time.perf_counter()
         r = self.s.get(url, headers=headers or {}, timeout=self.timeout)
         dt = (time.perf_counter() - t0) * 1000.0

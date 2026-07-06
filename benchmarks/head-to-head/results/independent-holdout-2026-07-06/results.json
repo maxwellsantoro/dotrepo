@@ -1,0 +1,4522 @@
+[
+  {
+    "arm": "github",
+    "configuration": {
+      "extractor": "llm",
+      "provider": "openrouter",
+      "model": "google/gemma-4-26b-a4b-it"
+    },
+    "rows": [
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": [
+          "Serialization framework for Rust",
+          "framework for serializing and deserializing Rust data structures"
+        ],
+        "gold_note": "GitHub and README maintainer descriptions are both accepted.",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".description plus pinned README project summary",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/serde-rs/serde/blob/1023d077510b4aef36a41ef56fdb7798568a2654/README.md"
+        },
+        "got": "Serialization framework for Rust",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6204,
+        "latency_ms": 364.8
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Apache-2.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Apache-2.0",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Rust",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://serde.rs/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://serde.rs/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No single canonical clean-checkout build command in the pinned maintainer docs.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 6931,
+        "latency_ms": 700.2
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo +nightly test --features unstable",
+        "gold_note": "Full test suite command, run from test_suite/.",
+        "gold_evidence": {
+          "url": "https://github.com/serde-rs/serde/blob/1023d077510b4aef36a41ef56fdb7798568a2654/CONTRIBUTING.md",
+          "locator": "Running the test suite / test_suite directory",
+          "checked_at": "2026-07-06"
+        },
+        "got": "cargo +nightly test --features unstable",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 130.3
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "1.56",
+        "gold_note": "MSRV of the primary serde crate; serde_derive separately declares 1.71.",
+        "gold_evidence": {
+          "url": "https://github.com/serde-rs/serde/blob/1023d077510b4aef36a41ef56fdb7798568a2654/serde/Cargo.toml",
+          "locator": "package.rust-version",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Rust 1.56 (serde), Rust 1.71 (serde_derive)",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 120.6
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": [
+          "The Rust package manager",
+          "downloads your Rust project's dependencies and compiles your project"
+        ],
+        "gold_note": "GitHub and README maintainer descriptions are both accepted.",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".description plus pinned README project summary",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/README.md"
+        },
+        "got": "The Rust package manager",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6277,
+        "latency_ms": 333.4
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Apache-2.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Apache-2.0",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Rust",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://doc.rust-lang.org/cargo",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://doc.rust-lang.org/cargo",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "cargo build --release",
+          "cargo build --workspace"
+        ],
+        "gold_note": "The README release build and full workspace build are both valid clean-checkout builds.",
+        "gold_evidence": {
+          "url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/README.md",
+          "locator": "Compiling from source plus root workspace members",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/Cargo.toml"
+        },
+        "got": null,
+        "confidence": "high",
+        "outcome": "abstained",
+        "source": "github:build-docs:llm",
+        "bytes": 15612,
+        "latency_ms": 772.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo test",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/src/doc/contrib/src/tests/running.md",
+          "locator": "Running Tests opening paragraph",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": "high",
+        "outcome": "abstained",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No repository-local security reporting destination in the pinned sources.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 138.4
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "1.96",
+        "gold_note": "The cargo package requires 1.96; workspace support crates declare 1.94.",
+        "gold_evidence": {
+          "url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/Cargo.toml",
+          "locator": "package cargo rust-version",
+          "checked_at": "2026-07-06"
+        },
+        "got": "rust-version = \"1.96\"",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 123.4
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": [
+          "Python micro framework",
+          "lightweight WSGI web application framework"
+        ],
+        "gold_note": "GitHub and README maintainer descriptions are both accepted.",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".description plus pinned README project summary",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/pallets/flask/blob/36e4a824f340fdee7ed50937ba8e7f6bc7d17f81/README.md"
+        },
+        "got": "The Python micro framework for building web applications.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6243,
+        "latency_ms": 397.4
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "BSD-3-Clause",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "BSD-3-Clause",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://flask.palletsprojects.com",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://flask.palletsprojects.com",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "Build backend is declared, but no canonical contributor build command is stated.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 8594,
+        "latency_ms": 911.2
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "tox",
+          "python -m pytest"
+        ],
+        "gold_note": "The tox default invokes pytest; both documented runner layers are accepted.",
+        "gold_evidence": {
+          "url": "https://github.com/pallets/flask/blob/36e4a824f340fdee7ed50937ba8e7f6bc7d17f81/pyproject.toml",
+          "locator": "tool.tox env_list, env_run_base, and tool.pytest",
+          "checked_at": "2026-07-06"
+        },
+        "got": "pytest -v --tb=short --basetemp={env_tmp_dir}",
+        "confidence": "medium",
+        "outcome": "wrong_hedged",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No repository-local security reporting destination at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 120.5
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.10",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/pallets/flask/blob/36e4a824f340fdee7ed50937ba8e7f6bc7d17f81/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python >=3.10",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 117.9
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "simple, yet elegant, HTTP library",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "A simple, yet elegant, HTTP library.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6082,
+        "latency_ms": 379.2
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Apache-2.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Apache-2.0",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://requests.readthedocs.io/en/latest/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://requests.readthedocs.io/en/latest/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "The Makefile build command is release-only, not the canonical development build.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "medium",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 10662,
+        "latency_ms": 773.2
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "python -m pytest tests",
+          "python -m pytest"
+        ],
+        "gold_note": "Explicit tests path and pytest discovery are equivalent for this tree.",
+        "gold_evidence": {
+          "url": "https://github.com/psf/requests/blob/23953c0c875219a715f081cf3de7c149a7629ccf/Makefile",
+          "locator": "test target plus pinned pytest configuration",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/psf/requests/blob/23953c0c875219a715f081cf3de7c149a7629ccf/pyproject.toml"
+        },
+        "got": "python -m pytest tests",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "https://github.com/psf/requests/security/advisories/new",
+          "open a draft Security Advisory via GitHub"
+        ],
+        "gold_note": "The canonical URL and the policy's explicit reporting instruction are equivalent.",
+        "gold_evidence": {
+          "url": "https://github.com/psf/requests/blob/23953c0c875219a715f081cf3de7c149a7629ccf/.github/SECURITY.md",
+          "locator": "Vulnerability Disclosure",
+          "checked_at": "2026-07-06"
+        },
+        "got": "open a draft Security Advisory via GitHub",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:llm",
+        "bytes": 3958,
+        "latency_ms": 181.9
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.10",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/psf/requests/blob/23953c0c875219a715f081cf3de7c149a7629ccf/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python >=3.10",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 133.1
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Web framework for perfectionists with deadlines",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "The Web framework for perfectionists with deadlines.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6209,
+        "latency_ms": 337.8
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "BSD-3-Clause",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "BSD-3-Clause",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://www.djangoproject.com/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://www.djangoproject.com/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No canonical clean-checkout build command in the contributor sources.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 5910,
+        "latency_ms": 5435.7
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "tox",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/django/django/blob/73dd0169a54f4bbcb41b29bf7d51a36f86c89afe/docs/internals/contributing/writing-code/unit-tests.txt",
+          "locator": "Running tests using tox",
+          "checked_at": "2026-07-06"
+        },
+        "got": "grunt test --verbose",
+        "confidence": "high",
+        "outcome": "confidently_wrong",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://www.djangoproject.com/security/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/django/django/blob/73dd0169a54f4bbcb41b29bf7d51a36f86c89afe/.github/SECURITY.md",
+          "locator": "Django Security Policies",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://www.djangoproject.com/security/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:llm",
+        "bytes": 94,
+        "latency_ms": 1843.3
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.12",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/django/django/blob/73dd0169a54f4bbcb41b29bf7d51a36f86c89afe/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python >= 3.12",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 336.6
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Fast, unopinionated, minimalist web framework for node",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Fast, unopinionated, minimalist web framework for node.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6368,
+        "latency_ms": 278.5
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "MIT",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "JavaScript",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "JavaScript",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://expressjs.com",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://expressjs.com",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No distinct project build command is documented.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "medium",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 13298,
+        "latency_ms": 5868.5
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "npm test",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/expressjs/express/blob/ba006766fb964571723138708eacaba0f55759cd/Readme.md",
+          "locator": "Contributing / Running Tests",
+          "checked_at": "2026-07-06"
+        },
+        "got": "npm test",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/expressjs/express/security/policy",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/expressjs/express/blob/ba006766fb964571723138708eacaba0f55759cd/Readme.md",
+          "locator": "Contributing / Security Issues",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 1513.4
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "18",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/expressjs/express/blob/ba006766fb964571723138708eacaba0f55759cd/package.json",
+          "locator": "engines.node",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Node.js >= 18",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 473.2
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "FastAPI framework, high performance",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6400,
+        "latency_ms": 300.4
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "MIT",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://fastapi.tiangolo.com/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://fastapi.tiangolo.com/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "Build backend is declared, but no canonical contributor build command is stated.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 34513,
+        "latency_ms": 1824.6
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "pytest",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/fastapi/fastapi/blob/dd17e4f723a23854cfe4b9b6258e31efd86ea523/pyproject.toml",
+          "locator": "tests dependency group and tool.pytest",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": "low",
+        "outcome": "abstained",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No repository-local security reporting destination at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 177.7
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.10",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/fastapi/fastapi/blob/dd17e4f723a23854cfe4b9b6258e31efd86ea523/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python >=3.10",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 276.1
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "pytest framework",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "The pytest framework makes it easy to write small tests, yet scales to support complex functional testing",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6450,
+        "latency_ms": 326.7
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "MIT",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://pytest.org",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://pytest.org",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No canonical contributor build command is stated.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "medium",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 52132,
+        "latency_ms": 3635.1
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "tox -e linting,py",
+          "tox -e linting,py313",
+          "pytest",
+          "python -m pytest"
+        ],
+        "gold_note": "The contributor guide documents generic and Python-3.13 tox gates plus direct pytest workflows.",
+        "gold_evidence": {
+          "url": "https://github.com/pytest-dev/pytest/blob/83b022078855ea64c5c53bc50bd9299a5a1f1dc0/CONTRIBUTING.rst",
+          "locator": "patch checklist, Run all the tests, and direct pytest workflow",
+          "checked_at": "2026-07-06"
+        },
+        "got": "tox -e linting,py313",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/pytest-dev/pytest/security/advisories/new",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/pytest-dev/pytest/blob/83b022078855ea64c5c53bc50bd9299a5a1f1dc0/SECURITY.md",
+          "locator": "security risk reporting paragraph",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://github.com/pytest-dev/pytest/security/advisories/new",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:llm",
+        "bytes": 294,
+        "latency_ms": 126.3
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.10",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/pytest-dev/pytest/blob/83b022078855ea64c5c53bc50bd9299a5a1f1dc0/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python >=3.10",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 553.4
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "next generation HTTP client for Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "A next generation HTTP client for Python. \ud83e\udd8b",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6133,
+        "latency_ms": 352.9
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "BSD-3-Clause",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "BSD-3-Clause",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "https://www.python-httpx.org/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://www.python-httpx.org/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "scripts/install",
+        "gold_note": "Maintainer-documented clean-checkout development bootstrap.",
+        "gold_evidence": {
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/.github/CONTRIBUTING.md",
+          "locator": "install the project and its dependencies",
+          "checked_at": "2026-07-06"
+        },
+        "got": "git clone https://github.com/YOUR-USERNAME/httpx && cd httpx && scripts/install",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "github:build-docs:llm",
+        "bytes": 17052,
+        "latency_ms": 1209.9
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "scripts/test",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/.github/CONTRIBUTING.md",
+          "locator": "Testing and Linting",
+          "checked_at": "2026-07-06"
+        },
+        "got": "scripts/test",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 260.8
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "3.9",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python >=3.9",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 165.7
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Python library for rich text",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Rich is a Python library for rich text and beautiful formatting in the terminal.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6488,
+        "latency_ms": 286.4
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "MIT",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "https://rich.readthedocs.io/en/latest/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://rich.readthedocs.io/en/latest/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "poetry install",
+        "gold_note": "Maintainer-documented development installation step.",
+        "gold_evidence": {
+          "url": "https://github.com/Textualize/rich/blob/9d8f9a372cc5916fd4781fec207ced7ddac2f08f/CONTRIBUTING.md",
+          "locator": "Prerequisites",
+          "checked_at": "2026-07-06"
+        },
+        "got": "poetry install",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:build-docs:llm",
+        "bytes": 24993,
+        "latency_ms": 1957.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "make test",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/Textualize/rich/blob/9d8f9a372cc5916fd4781fec207ced7ddac2f08f/CONTRIBUTING.md",
+          "locator": "Tests",
+          "checked_at": "2026-07-06"
+        },
+        "got": "make test",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "https://tidelift.com/security",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/Textualize/rich/blob/9d8f9a372cc5916fd4781fec207ced7ddac2f08f/SECURITY.md",
+          "locator": "Security contact information",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://tidelift.com/security",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:llm",
+        "bytes": 193,
+        "latency_ms": 183.4
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "3.9.0",
+        "gold_note": "Pinned pyproject supersedes stale README text claiming Python 3.8.",
+        "gold_evidence": {
+          "url": "https://github.com/Textualize/rich/blob/9d8f9a372cc5916fd4781fec207ced7ddac2f08f/pyproject.toml",
+          "locator": "tool.poetry.dependencies.python",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python >=3.9.0",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 1118.1
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Just a command runner",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "\ud83e\udd16 Just a command runner",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 4960,
+        "latency_ms": 218.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "CC0-1.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "CC0-1.0",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Rust",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "https://just.systems",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://just.systems",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "just build",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/casey/just/blob/0bd02b83863027667f40fa306a9d910e23673aef/justfile",
+          "locator": "build recipe",
+          "checked_at": "2026-07-06"
+        },
+        "got": "cargo install just",
+        "confidence": "high",
+        "outcome": "confidently_wrong",
+        "source": "github:build-docs:llm",
+        "bytes": 169150,
+        "latency_ms": 866.6
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": [
+          "just test",
+          "just ci"
+        ],
+        "gold_note": "The task file defines the test suite; maintainer docs recommend the broader CI gate before submission.",
+        "gold_evidence": {
+          "url": "https://github.com/casey/just/blob/0bd02b83863027667f40fa306a9d910e23673aef/justfile",
+          "locator": "test and ci recipes",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/casey/just/blob/0bd02b83863027667f40fa306a9d910e23673aef/README.md"
+        },
+        "got": "just test",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 695.1
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "1.89.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/casey/just/blob/0bd02b83863027667f40fa306a9d910e23673aef/Cargo.toml",
+          "locator": "package.rust-version",
+          "checked_at": "2026-07-06"
+        },
+        "got": "rust-version = \"1.89.0\"",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 165.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "tool for glamorous shell scripts",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/charmbracelet/gum",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "A tool for glamorous shell scripts \ud83c\udf80",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 6368,
+        "latency_ms": 297.8
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/charmbracelet/gum",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "MIT",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Go",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/charmbracelet/gum",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Go",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No GitHub homepage configured at curation time.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/charmbracelet/gum",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository-local canonical build command; CI delegates to an external reusable workflow.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 16542,
+        "latency_ms": 5729.6
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository-local canonical test command; CI delegates to an external reusable workflow.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 163.1
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "1.25.8",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/charmbracelet/gum/blob/716d8b5d0221558f944b5a078dbbcca8572534fb/go.mod",
+          "locator": "go directive",
+          "checked_at": "2026-07-06"
+        },
+        "got": "go 1.25.8",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 200.4
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "datetime library for Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/BurntSushi/jiff",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "A datetime library for Rust that encourages you to jump into the pit of success.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 5398,
+        "latency_ms": 209.2
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Unlicense",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/BurntSushi/jiff",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Unlicense",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/BurntSushi/jiff",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Rust",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No GitHub homepage configured at curation time.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/BurntSushi/jiff",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "active",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:rest",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No canonical clean-checkout build command in maintainer docs.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "github:build-docs:llm",
+        "bytes": 23617,
+        "latency_ms": 2358.1
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No canonical full-suite command in maintainer docs.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "github:test-docs:llm",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 821.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "1.70.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/BurntSushi/jiff/blob/8a131027f79b004c5b88af0da2845d7b2b92d352/README.md",
+          "locator": "Minimum Rust version policy",
+          "checked_at": "2026-07-06"
+        },
+        "got": "rust-version = \"1.70\"",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "github:toolchain-docs:llm",
+        "bytes": 28,
+        "latency_ms": 251.1
+      }
+    ],
+    "summary": {
+      "n_scored": 96,
+      "accuracy": 0.927,
+      "precision": 0.967,
+      "coverage": 0.958,
+      "confidently_wrong": 2,
+      "confidently_wrong_rate": 0.021,
+      "wrong_hedged": 1,
+      "abstained": 4,
+      "total_bytes": 483741,
+      "approx_tokens": 120935,
+      "total_latency_ms": 46514.0,
+      "by_class": {
+        "github_native": {
+          "n": 63,
+          "accuracy": 1.0,
+          "confidently_wrong": 0
+        },
+        "buried": {
+          "n": 33,
+          "accuracy": 0.788,
+          "confidently_wrong": 2
+        }
+      },
+      "by_cohort": {
+        "holdout_unindexed": {
+          "n_scored": 35,
+          "accuracy": 0.971,
+          "precision": 0.971,
+          "coverage": 1.0,
+          "confidently_wrong": 1,
+          "confidently_wrong_rate": 0.029,
+          "wrong_hedged": 0,
+          "abstained": 0,
+          "total_bytes": 281146,
+          "approx_tokens": 70286,
+          "total_latency_ms": 17509.2,
+          "by_class": {
+            "github_native": {
+              "n": 23,
+              "accuracy": 1.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 12,
+              "accuracy": 0.917,
+              "confidently_wrong": 1
+            }
+          }
+        },
+        "indexed_independent": {
+          "n_scored": 61,
+          "accuracy": 0.902,
+          "precision": 0.965,
+          "coverage": 0.934,
+          "confidently_wrong": 1,
+          "confidently_wrong_rate": 0.016,
+          "wrong_hedged": 1,
+          "abstained": 4,
+          "total_bytes": 202595,
+          "approx_tokens": 50649,
+          "total_latency_ms": 29004.8,
+          "by_class": {
+            "github_native": {
+              "n": 40,
+              "accuracy": 1.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 21,
+              "accuracy": 0.714,
+              "confidently_wrong": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "arm": "dotrepo",
+    "configuration": {
+      "base_url": "https://dotrepo.org"
+    },
+    "rows": [
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": [
+          "Serialization framework for Rust",
+          "framework for serializing and deserializing Rust data structures"
+        ],
+        "gold_note": "GitHub and README maintainer descriptions are both accepted.",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".description plus pinned README project summary",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/serde-rs/serde/blob/1023d077510b4aef36a41ef56fdb7798568a2654/README.md"
+        },
+        "got": "Serde is a framework for *ser*ializing and *de*serializing Rust data structures efficiently and generically.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 16435,
+        "latency_ms": 395.6
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Apache-2.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Apache-2.0",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Rust",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://serde.rs/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://serde.rs/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/serde-rs/serde",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "False",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No single canonical clean-checkout build command in the pinned maintainer docs.",
+        "gold_evidence": {},
+        "got": "cargo build --workspace",
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo +nightly test --features unstable",
+        "gold_note": "Full test suite command, run from test_suite/.",
+        "gold_evidence": {
+          "url": "https://github.com/serde-rs/serde/blob/1023d077510b4aef36a41ef56fdb7798568a2654/CONTRIBUTING.md",
+          "locator": "Running the test suite / test_suite directory",
+          "checked_at": "2026-07-06"
+        },
+        "got": "cargo test --workspace",
+        "confidence": "high",
+        "outcome": "confidently_wrong",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/serde-rs/serde",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "1.56",
+        "gold_note": "MSRV of the primary serde crate; serde_derive separately declares 1.71.",
+        "gold_evidence": {
+          "url": "https://github.com/serde-rs/serde/blob/1023d077510b4aef36a41ef56fdb7798568a2654/serde/Cargo.toml",
+          "locator": "package.rust-version",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": [
+          "The Rust package manager",
+          "downloads your Rust project's dependencies and compiles your project"
+        ],
+        "gold_note": "GitHub and README maintainer descriptions are both accepted.",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".description plus pinned README project summary",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/README.md"
+        },
+        "got": "Cargo downloads your Rust project\u2019s dependencies and compiles your project.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 16511,
+        "latency_ms": 196.7
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Apache-2.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Apache-2.0",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Rust",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://doc.rust-lang.org/cargo",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://doc.rust-lang.org/cargo",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/rust-lang/cargo",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "False",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "cargo build --release",
+          "cargo build --workspace"
+        ],
+        "gold_note": "The README release build and full workspace build are both valid clean-checkout builds.",
+        "gold_evidence": {
+          "url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/README.md",
+          "locator": "Compiling from source plus root workspace members",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/Cargo.toml"
+        },
+        "got": "cargo build --workspace",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo test",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/src/doc/contrib/src/tests/running.md",
+          "locator": "Running Tests opening paragraph",
+          "checked_at": "2026-07-06"
+        },
+        "got": "cargo test --workspace",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No repository-local security reporting destination in the pinned sources.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/rust-lang/cargo",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "1.96",
+        "gold_note": "The cargo package requires 1.96; workspace support crates declare 1.94.",
+        "gold_evidence": {
+          "url": "https://github.com/rust-lang/cargo/blob/b26e1b2f78d5afc79e6cda4abf2de32cfe89446e/Cargo.toml",
+          "locator": "package cargo rust-version",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": [
+          "Python micro framework",
+          "lightweight WSGI web application framework"
+        ],
+        "gold_note": "GitHub and README maintainer descriptions are both accepted.",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".description plus pinned README project summary",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/pallets/flask/blob/36e4a824f340fdee7ed50937ba8e7f6bc7d17f81/README.md"
+        },
+        "got": "Flask is a lightweight [WSGI] web application framework.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 16380,
+        "latency_ms": 186.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "BSD-3-Clause",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "BSD-3-Clause",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://flask.palletsprojects.com",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://flask.palletsprojects.com",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pallets/flask",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "False",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "Build backend is declared, but no canonical contributor build command is stated.",
+        "gold_evidence": {},
+        "got": "python -m build",
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "tox",
+          "python -m pytest"
+        ],
+        "gold_note": "The tox default invokes pytest; both documented runner layers are accepted.",
+        "gold_evidence": {
+          "url": "https://github.com/pallets/flask/blob/36e4a824f340fdee7ed50937ba8e7f6bc7d17f81/pyproject.toml",
+          "locator": "tool.tox env_list, env_run_base, and tool.pytest",
+          "checked_at": "2026-07-06"
+        },
+        "got": "python -m pytest",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No repository-local security reporting destination at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pallets/flask",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.10",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/pallets/flask/blob/36e4a824f340fdee7ed50937ba8e7f6bc7d17f81/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "simple, yet elegant, HTTP library",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "**Requests** is a simple, yet elegant, HTTP library.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 18595,
+        "latency_ms": 181.8
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Apache-2.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Apache-2.0",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://requests.readthedocs.io/en/latest/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://requests.readthedocs.io/en/latest/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/psf/requests",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "False",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "The Makefile build command is release-only, not the canonical development build.",
+        "gold_evidence": {},
+        "got": "python -m build",
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "python -m pytest tests",
+          "python -m pytest"
+        ],
+        "gold_note": "Explicit tests path and pytest discovery are equivalent for this tree.",
+        "gold_evidence": {
+          "url": "https://github.com/psf/requests/blob/23953c0c875219a715f081cf3de7c149a7629ccf/Makefile",
+          "locator": "test target plus pinned pytest configuration",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/psf/requests/blob/23953c0c875219a715f081cf3de7c149a7629ccf/pyproject.toml"
+        },
+        "got": "python -m pytest",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "https://github.com/psf/requests/security/advisories/new",
+          "open a draft Security Advisory via GitHub"
+        ],
+        "gold_note": "The canonical URL and the policy's explicit reporting instruction are equivalent.",
+        "gold_evidence": {
+          "url": "https://github.com/psf/requests/blob/23953c0c875219a715f081cf3de7c149a7629ccf/.github/SECURITY.md",
+          "locator": "Vulnerability Disclosure",
+          "checked_at": "2026-07-06"
+        },
+        "got": "python-maint@redhat.com",
+        "confidence": "high",
+        "outcome": "confidently_wrong",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/psf/requests",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.10",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/psf/requests/blob/23953c0c875219a715f081cf3de7c149a7629ccf/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Web framework for perfectionists with deadlines",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "The Web framework for perfectionists with deadlines.",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 19892,
+        "latency_ms": 174.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "BSD-3-Clause",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "BSD-3-Clause",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://www.djangoproject.com/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://www.djangoproject.com/",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/django/django",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "False",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No canonical clean-checkout build command in the contributor sources.",
+        "gold_evidence": {},
+        "got": "python -m build",
+        "confidence": "medium",
+        "outcome": "no_gold",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "tox",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/django/django/blob/73dd0169a54f4bbcb41b29bf7d51a36f86c89afe/docs/internals/contributing/writing-code/unit-tests.txt",
+          "locator": "Running tests using tox",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": "medium",
+        "outcome": "abstained",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://www.djangoproject.com/security/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/django/django/blob/73dd0169a54f4bbcb41b29bf7d51a36f86c89afe/.github/SECURITY.md",
+          "locator": "Django Security Policies",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://www.djangoproject.com/security/",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/django/django",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.12",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/django/django/blob/73dd0169a54f4bbcb41b29bf7d51a36f86c89afe/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Fast, unopinionated, minimalist web framework for node",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Fast, unopinionated, minimalist web framework for node.",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 17119,
+        "latency_ms": 167.3
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "MIT",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "JavaScript",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "JavaScript",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://expressjs.com",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://expressjs.com",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/expressjs/express",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "False",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No distinct project build command is documented.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "npm test",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/expressjs/express/blob/ba006766fb964571723138708eacaba0f55759cd/Readme.md",
+          "locator": "Contributing / Running Tests",
+          "checked_at": "2026-07-06"
+        },
+        "got": "npm test",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/expressjs/express/security/policy",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/expressjs/express/blob/ba006766fb964571723138708eacaba0f55759cd/Readme.md",
+          "locator": "Contributing / Security Issues",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/expressjs/express",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "18",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/expressjs/express/blob/ba006766fb964571723138708eacaba0f55759cd/package.json",
+          "locator": "engines.node",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "FastAPI framework, high performance",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 16583,
+        "latency_ms": 158.5
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "MIT",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://fastapi.tiangolo.com/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://fastapi.tiangolo.com/",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/fastapi/fastapi",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "False",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "Build backend is declared, but no canonical contributor build command is stated.",
+        "gold_evidence": {},
+        "got": "python -m build",
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "pytest",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/fastapi/fastapi/blob/dd17e4f723a23854cfe4b9b6258e31efd86ea523/pyproject.toml",
+          "locator": "tests dependency group and tool.pytest",
+          "checked_at": "2026-07-06"
+        },
+        "got": "python -m pytest",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No repository-local security reporting destination at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/fastapi/fastapi",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.10",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/fastapi/fastapi/blob/dd17e4f723a23854cfe4b9b6258e31efd86ea523/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "pytest framework",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": "The pytest framework makes it easy to write small tests, yet scales to support complex functional testing",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 20763,
+        "latency_ms": 178.4
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": "MIT",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": "Python",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "https://pytest.org",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://pytest.org",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "indexed_independent",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/pytest-dev/pytest",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": "False",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": null,
+        "gold_note": "No canonical contributor build command is stated.",
+        "gold_evidence": {},
+        "got": "python -m build",
+        "confidence": "high",
+        "outcome": "no_gold",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "tox -e linting,py",
+          "tox -e linting,py313",
+          "pytest",
+          "python -m pytest"
+        ],
+        "gold_note": "The contributor guide documents generic and Python-3.13 tox gates plus direct pytest workflows.",
+        "gold_evidence": {
+          "url": "https://github.com/pytest-dev/pytest/blob/83b022078855ea64c5c53bc50bd9299a5a1f1dc0/CONTRIBUTING.rst",
+          "locator": "patch checklist, Run all the tests, and direct pytest workflow",
+          "checked_at": "2026-07-06"
+        },
+        "got": "python -m pytest",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/pytest-dev/pytest/security/advisories/new",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/pytest-dev/pytest/blob/83b022078855ea64c5c53bc50bd9299a5a1f1dc0/SECURITY.md",
+          "locator": "security risk reporting paragraph",
+          "checked_at": "2026-07-06"
+        },
+        "got": "https://github.com/pytest-dev/pytest/security/advisories/new",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pytest-dev/pytest",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "3.10",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/pytest-dev/pytest/blob/83b022078855ea64c5c53bc50bd9299a5a1f1dc0/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "next generation HTTP client for Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 3146,
+        "latency_ms": 121.1
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "BSD-3-Clause",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "https://www.python-httpx.org/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/encode/httpx",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "scripts/install",
+        "gold_note": "Maintainer-documented clean-checkout development bootstrap.",
+        "gold_evidence": {
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/.github/CONTRIBUTING.md",
+          "locator": "install the project and its dependencies",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "scripts/test",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/.github/CONTRIBUTING.md",
+          "locator": "Testing and Linting",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/encode/httpx",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "3.9",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/encode/httpx/blob/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/pyproject.toml",
+          "locator": "project.requires-python",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Python library for rich text",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 3200,
+        "latency_ms": 118.2
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Python",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "https://rich.readthedocs.io/en/latest/",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/Textualize/rich",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "poetry install",
+        "gold_note": "Maintainer-documented development installation step.",
+        "gold_evidence": {
+          "url": "https://github.com/Textualize/rich/blob/9d8f9a372cc5916fd4781fec207ced7ddac2f08f/CONTRIBUTING.md",
+          "locator": "Prerequisites",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "make test",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/Textualize/rich/blob/9d8f9a372cc5916fd4781fec207ced7ddac2f08f/CONTRIBUTING.md",
+          "locator": "Tests",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "https://tidelift.com/security",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/Textualize/rich/blob/9d8f9a372cc5916fd4781fec207ced7ddac2f08f/SECURITY.md",
+          "locator": "Security contact information",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/Textualize/rich",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "3.9.0",
+        "gold_note": "Pinned pyproject supersedes stale README text claiming Python 3.8.",
+        "gold_evidence": {
+          "url": "https://github.com/Textualize/rich/blob/9d8f9a372cc5916fd4781fec207ced7ddac2f08f/pyproject.toml",
+          "locator": "tool.poetry.dependencies.python",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Just a command runner",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 3110,
+        "latency_ms": 98.9
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "CC0-1.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "https://just.systems",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".homepage",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/casey/just",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "just build",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/casey/just/blob/0bd02b83863027667f40fa306a9d910e23673aef/justfile",
+          "locator": "build recipe",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": [
+          "just test",
+          "just ci"
+        ],
+        "gold_note": "The task file defines the test suite; maintainer docs recommend the broader CI gate before submission.",
+        "gold_evidence": {
+          "url": "https://github.com/casey/just/blob/0bd02b83863027667f40fa306a9d910e23673aef/justfile",
+          "locator": "test and ci recipes",
+          "checked_at": "2026-07-06",
+          "alternative_url": "https://github.com/casey/just/blob/0bd02b83863027667f40fa306a9d910e23673aef/README.md"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/casey/just",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "1.89.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/casey/just/blob/0bd02b83863027667f40fa306a9d910e23673aef/Cargo.toml",
+          "locator": "package.rust-version",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "tool for glamorous shell scripts",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/charmbracelet/gum",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 3236,
+        "latency_ms": 96.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "MIT",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/charmbracelet/gum",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Go",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/charmbracelet/gum",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No GitHub homepage configured at curation time.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/charmbracelet/gum",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository-local canonical build command; CI delegates to an external reusable workflow.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository-local canonical test command; CI delegates to an external reusable workflow.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/charmbracelet/gum",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "1.25.8",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/charmbracelet/gum/blob/716d8b5d0221558f944b5a078dbbcca8572534fb/go.mod",
+          "locator": "go directive",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "description",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "datetime library for Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/BurntSushi/jiff",
+          "locator": ".description",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 3200,
+        "latency_ms": 104.3
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "license",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Unlicense",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/BurntSushi/jiff",
+          "locator": ".license.spdx_id",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "language",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "Rust",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/BurntSushi/jiff",
+          "locator": ".language",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "homepage",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No GitHub homepage configured at curation time.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "archived",
+        "field_class": "github_native",
+        "cohort": "holdout_unindexed",
+        "gold": "active",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://api.github.com/repos/BurntSushi/jiff",
+          "locator": ".archived=false",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No canonical clean-checkout build command in maintainer docs.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No canonical full-suite command in maintainer docs.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": null,
+        "gold_note": "No repository security reporting policy at the pinned revision.",
+        "gold_evidence": {},
+        "got": null,
+        "confidence": null,
+        "outcome": "no_gold",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/BurntSushi/jiff",
+        "field": "min_toolchain",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "1.70.0",
+        "gold_note": "",
+        "gold_evidence": {
+          "url": "https://github.com/BurntSushi/jiff/blob/8a131027f79b004c5b88af0da2845d7b2b92d352/README.md",
+          "locator": "Minimum Rust version policy",
+          "checked_at": "2026-07-06"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      }
+    ],
+    "summary": {
+      "n_scored": 96,
+      "accuracy": 0.51,
+      "precision": 0.961,
+      "coverage": 0.531,
+      "confidently_wrong": 2,
+      "confidently_wrong_rate": 0.021,
+      "wrong_hedged": 0,
+      "abstained": 45,
+      "total_bytes": 158170,
+      "approx_tokens": 39542,
+      "total_latency_ms": 2176.8,
+      "by_class": {
+        "github_native": {
+          "n": 63,
+          "accuracy": 0.635,
+          "confidently_wrong": 0
+        },
+        "buried": {
+          "n": 33,
+          "accuracy": 0.273,
+          "confidently_wrong": 2
+        }
+      },
+      "by_cohort": {
+        "holdout_unindexed": {
+          "n_scored": 35,
+          "accuracy": 0.0,
+          "precision": 0.0,
+          "coverage": 0.0,
+          "confidently_wrong": 0,
+          "confidently_wrong_rate": 0.0,
+          "wrong_hedged": 0,
+          "abstained": 35,
+          "total_bytes": 15892,
+          "approx_tokens": 3973,
+          "total_latency_ms": 538.5,
+          "by_class": {
+            "github_native": {
+              "n": 23,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 12,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            }
+          }
+        },
+        "indexed_independent": {
+          "n_scored": 61,
+          "accuracy": 0.803,
+          "precision": 0.961,
+          "coverage": 0.836,
+          "confidently_wrong": 2,
+          "confidently_wrong_rate": 0.033,
+          "wrong_hedged": 0,
+          "abstained": 10,
+          "total_bytes": 142278,
+          "approx_tokens": 35570,
+          "total_latency_ms": 1638.3,
+          "by_class": {
+            "github_native": {
+              "n": 40,
+              "accuracy": 1.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 21,
+              "accuracy": 0.429,
+              "confidently_wrong": 2
+            }
+          }
+        }
+      }
+    }
+  }
+]

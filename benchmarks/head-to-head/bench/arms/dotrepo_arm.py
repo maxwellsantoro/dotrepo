@@ -45,6 +45,9 @@ class DotrepoArm(Arm):
         self._results: dict = {}  # path -> result dict (or error)
         self._cost = (0, 0.0)
 
+    def configuration(self) -> dict:
+        return {"base_url": self.base}
+
     def prefetch(self, repo: str):
         from ..fields import FIELDS
 

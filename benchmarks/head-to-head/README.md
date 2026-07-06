@@ -63,7 +63,38 @@ automatic `.env` loading. Anthropic direct remains available via
 keys out of committed fixtures and shell history.
 
 Output: `results/report.md` (the table) and `results/results.json` (every
-per-field row with value, confidence, source, bytes, latency — auditable).
+per-field row with value, confidence, source, bytes, latency, cohort, and gold
+evidence — auditable).
+
+### Independent gold and frozen holdouts
+
+`gold.independent.yaml` is the benchmark's independence check. It contains
+eight indexed repositories that do not appear in the original curated sample
+and five repositories that were absent from the index at snapshot `45f13d33`.
+Every scored answer cites an upstream maintainer-controlled URL, locator, and
+check date; buried-field sources are pinned to exact upstream commits. The file
+fails closed at load time if a scored value lacks that evidence.
+
+```bash
+GITHUB_TOKEN=$(gh auth token) uv run --with requests --with pyyaml python -m bench.run \
+  --gold gold.independent.yaml --arms github,dotrepo --extractor llm \
+  --base-url https://dotrepo.org \
+  --cache-mode freeze \
+  --cache-dir results/independent-holdout-2026-07-06/fixtures \
+  --out results/independent-holdout-2026-07-06
+```
+
+The baseline probes common real-world source variants (`README.rst`,
+`.github/SECURITY.md`, `.github/CONTRIBUTING.md`, package manifests, Go
+modules, Makefiles, and justfiles) rather than treating non-`README.md` projects
+as undocumented. Replay mode fails closed on a missing frozen response, so an
+"offline" rerun cannot silently touch the network.
+
+Freeze mode also records each parsed LLM value and confidence under a key that
+binds the provider, model, and exact prompt. Replay therefore makes no model or
+HTTP calls and fails closed if either frozen input is missing. Network and model
+latency remain properties of the original live run; replay validates answers and
+scores, not historical timing.
 
 ### Frozen fixtures (reproducible artifact)
 
@@ -193,6 +224,39 @@ uses roughly half the approximate wire-token count. This is still a curated
 sample, not adoption, but it is the first larger head-to-head where dotrepo
 clears the accuracy, honesty, and token bars simultaneously.
 
+### Independent-gold result
+
+`results/independent-holdout-2026-07-06/` is the first result whose gold was
+curated without consulting dotrepo records, crawler evidence, or query output.
+The baseline used OpenRouter model `google/gemma-4-26b-a4b-it`; the model name,
+parsed outputs, HTTP inputs, and scoring evidence are all frozen with the result.
+It reverses the earlier perfect-score story on the cohort that matters:
+
+- On the eight independently curated **indexed** repos, GitHub+LLM scores 90.2%
+  overall accuracy versus dotrepo's 80.3%, with one confidently-wrong answer
+  versus dotrepo's two.
+- On indexed **buried fields**, GitHub+LLM scores 71.4% versus dotrepo's 42.9%,
+  with one confidently-wrong answer versus two. dotrepo therefore does not
+  clear the benchmark's accuracy or honesty bars on independent gold, despite
+  using about one third of the aggregate wire tokens.
+- On the five frozen **unindexed holdouts**, dotrepo answers 0/35 scored
+  questions and has zero confidently-wrong answers. That is the desired trust
+  behavior: no overlay means clean abstention, not degraded guessing.
+
+The surviving dotrepo witnesses are concrete: Serde publishes
+`cargo test --workspace` instead of the maintainer's nightly unstable full-suite
+command, and Requests publishes an unrelated `python-maint@redhat.com` address
+instead of its GitHub draft-advisory reporting path. The baseline's surviving
+witnesses are also retained: it selects Django's JavaScript-only Grunt test
+instead of the documented tox suite, and treats `cargo install just` as Just's
+clean-checkout build command.
+
+Acceptable alternatives in the gold are explicit and evidenced (for example,
+`just test` and the broader `just ci`). They were audited before the final
+score, and the frozen model outputs were rescored rather than regenerated. The
+result is intentionally unflattering: holdout trust behavior passes, but the
+independent indexed thesis result does not.
+
 ### Offline self-test
 
 ```bash
@@ -206,11 +270,17 @@ doesn't, the scorer is broken.
 
 ## Curating gold
 
-`gold.yaml` ships with a small curated starter set. Fill or revise buried fields
-from each repo's **own docs**, not memory — the experiment is only as honest as
-the gold. Add repos that are in the dotrepo index so both arms have something to
-answer. Leave a field `null` when the upstream docs do not expose a canonical
-answer; null fields are excluded from scoring.
+`gold.yaml` ships with the original curated starter set. Fill or revise buried
+fields from each repo's **own docs**, not memory — the experiment is only as
+honest as the gold. Leave a field `null` when the upstream docs do not expose a
+canonical answer; null fields are excluded from scoring.
+
+For thesis claims, prefer the stricter `gold.independent.yaml` shape: freeze
+index membership and upstream revisions, identify indexed and unindexed
+cohorts, cite evidence for every scored value, and list multiple accepted values
+when maintainer sources document genuinely equivalent commands. Never turn a
+holdout abstention into an accuracy failure; read its answer rate and
+confidently-wrong count instead.
 
 ## One assumption to verify
 

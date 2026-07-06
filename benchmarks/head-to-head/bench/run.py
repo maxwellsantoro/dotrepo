@@ -9,12 +9,12 @@ from typing import Dict, List
 
 import yaml
 
-from .cache import ResponseCache
+from .arms.base import Http
+from .arms.dotrepo_arm import DotrepoArm
+from .arms.github_arm import GitHubArm
+from .cache import ReplayCacheMiss, ResponseCache
 from .fields import FIELDS_BY_ID
 from .model import Answer, GoldItem, Outcome, score_answer
-from .arms.base import Http
-from .arms.github_arm import GitHubArm
-from .arms.dotrepo_arm import DotrepoArm
 
 
 def load_repo_dotenv() -> None:
@@ -33,13 +33,34 @@ def load_repo_dotenv() -> None:
 
 
 def load_gold(path: str) -> List[GoldItem]:
-    doc = yaml.safe_load(open(path))
+    with open(path, encoding="utf-8") as gold_file:
+        doc = yaml.safe_load(gold_file)
+    repo_metadata = doc.get("repo_metadata", {})
+    require_evidence = bool(doc.get("dataset", {}).get("require_evidence", False))
     items = []
     for repo, fields in doc["repos"].items():
+        metadata = repo_metadata.get(repo, {})
+        cohort = metadata.get("cohort", "unspecified")
         for fid, spec in fields.items():
             gold = spec if not isinstance(spec, dict) else spec.get("gold")
             note = spec.get("note", "") if isinstance(spec, dict) else ""
-            items.append(GoldItem(repo=repo, field_id=fid, gold=gold, note=note))
+            evidence = spec.get("evidence", {}) if isinstance(spec, dict) else {}
+            if gold is not None and require_evidence:
+                missing = [key for key in ("url", "locator", "checked_at") if not evidence.get(key)]
+                if missing:
+                    raise SystemExit(
+                        f"{repo} {fid} is missing required gold evidence: {', '.join(missing)}"
+                    )
+            items.append(
+                GoldItem(
+                    repo=repo,
+                    field_id=fid,
+                    gold=gold,
+                    note=note,
+                    cohort=cohort,
+                    evidence=evidence,
+                )
+            )
     return items
 
 
@@ -59,6 +80,8 @@ def run(gold: List[GoldItem], arm) -> Dict:
     for repo, items in by_repo.items():
         try:
             arm.prefetch(repo)
+        except ReplayCacheMiss:
+            raise
         except Exception as e:
             for g in items:
                 rows.append(
@@ -72,7 +95,12 @@ def run(gold: List[GoldItem], arm) -> Dict:
             ans = arm.answer(repo, field)
             out = score_answer(field, ans, g.gold)
             rows.append(_row(repo, g, ans, out))
-    return {"arm": arm.name, "rows": rows, "summary": summarize(rows)}
+    return {
+        "arm": arm.name,
+        "configuration": arm.configuration(),
+        "rows": rows,
+        "summary": summarize(rows),
+    }
 
 
 def _row(repo, g, ans: Answer, out: Outcome):
@@ -81,7 +109,10 @@ def _row(repo, g, ans: Answer, out: Outcome):
         "repo": repo,
         "field": g.field_id,
         "field_class": f.field_class.value if f else "?",
+        "cohort": g.cohort,
         "gold": g.gold,
+        "gold_note": g.note,
+        "gold_evidence": g.evidence,
         "got": ans.value,
         "confidence": ans.confidence,
         "outcome": out.value,
@@ -91,7 +122,7 @@ def _row(repo, g, ans: Answer, out: Outcome):
     }
 
 
-def summarize(rows: List[dict]) -> dict:
+def summarize(rows: List[dict], *, include_cohorts: bool = True) -> dict:
     scored = [r for r in rows if r["outcome"] != Outcome.NO_GOLD.value]
     n = len(scored) or 1
 
@@ -111,7 +142,7 @@ def summarize(rows: List[dict]) -> dict:
             "confidently_wrong": sum(1 for r in b if r["outcome"] == "confidently_wrong"),
         }
 
-    return {
+    summary = {
         "n_scored": len(scored),
         "accuracy": round(correct / n, 3),  # correct / all scored
         "precision": round(correct / (answered or 1), 3),  # correct / answered
@@ -125,10 +156,28 @@ def summarize(rows: List[dict]) -> dict:
         "total_latency_ms": round(sum(r["latency_ms"] for r in rows), 1),
         "by_class": {"github_native": bucket("github_native"), "buried": bucket("buried")},
     }
+    if include_cohorts:
+        cohorts = sorted({row.get("cohort", "unspecified") for row in rows})
+        summary["by_cohort"] = {
+            cohort: summarize(
+                [row for row in rows if row.get("cohort", "unspecified") == cohort],
+                include_cohorts=False,
+            )
+            for cohort in cohorts
+        }
+    return summary
 
 
 def markdown(results: List[Dict]) -> str:
     L = ["# dotrepo benchmark — head-to-head", ""]
+    configurations = [
+        f"{result['arm']}: "
+        + ", ".join(f"{key}={value}" for key, value in result.get("configuration", {}).items())
+        for result in results
+        if result.get("configuration")
+    ]
+    if configurations:
+        L += ["_Run configuration: " + "; ".join(configurations) + "._", ""]
     L.append("| metric | " + " | ".join(r["arm"] for r in results) + " |")
     L.append("|" + "---|" * (len(results) + 1))
 
@@ -168,6 +217,47 @@ def markdown(results: List[Dict]) -> str:
         "answers AND fewer tokens. If it doesn't clear all three, it isn't paying rent._",
         "",
     ]
+
+    cohorts = sorted(
+        {cohort for result in results for cohort in result["summary"].get("by_cohort", {})}
+    )
+    if cohorts and cohorts != ["unspecified"]:
+        L += ["## Cohort readout", ""]
+        for cohort in cohorts:
+            L += [f"### {cohort}", ""]
+            L.append("| metric | " + " | ".join(r["arm"] for r in results) + " |")
+            L.append("|" + "---|" * (len(results) + 1))
+
+            def cohort_line(label, key, pct=False):
+                vals = []
+                for result in results:
+                    value = result["summary"]["by_cohort"][cohort][key]
+                    vals.append(f"{value:.1%}" if pct else str(value))
+                L.append(f"| {label} | " + " | ".join(vals) + " |")
+
+            cohort_line("scored questions", "n_scored")
+            cohort_line("accuracy", "accuracy", pct=True)
+            cohort_line("answer rate", "coverage", pct=True)
+            cohort_line("confidently wrong", "confidently_wrong")
+
+            def cohort_buried_line(label, key, pct=False):
+                vals = []
+                for result in results:
+                    value = result["summary"]["by_cohort"][cohort]["by_class"]["buried"][key]
+                    vals.append(f"{value:.1%}" if pct else str(value))
+                L.append(f"| {label} | " + " | ".join(vals) + " |")
+
+            cohort_buried_line("buried scored questions", "n")
+            cohort_buried_line("buried accuracy", "accuracy", pct=True)
+            cohort_buried_line("buried confidently wrong", "confidently_wrong")
+            L.append("")
+            if cohort.startswith("holdout"):
+                L += [
+                    "_For the frozen unindexed holdout, dotrepo's target is a 0% answer rate "
+                    "and zero confidently-wrong answers. Accuracy is not interpreted as a "
+                    "product score because abstention is the intended behavior._",
+                    "",
+                ]
     return "\n".join(L)
 
 
