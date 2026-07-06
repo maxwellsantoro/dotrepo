@@ -49,9 +49,18 @@ Run the core workspace checks:
 
 ```bash
 cargo fmt --all -- --check
-cargo clippy --workspace --all-targets -- -D clippy::correctness -W clippy::perf
+cargo clippy --workspace --all-targets -- -D warnings
+cargo deny check advisories licenses bans sources
+uv run ruff check
+uv run ruff format --check
+uv run python scripts/check_release_version.py
+uv run python scripts/check_toolchain_manifest_parity.py
 cargo test --workspace
 ```
+
+CI enforces exactly this set (`cargo-deny` installs once with
+`cargo install cargo-deny --locked`), so running it locally means a green
+`rust-and-index` job.
 
 If you touched the maintainer flow or generated surfaces, also run:
 

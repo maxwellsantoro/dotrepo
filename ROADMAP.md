@@ -331,6 +331,9 @@ coverage:
 
 - list the MCP server in the registries and directories where agent builders
   discover tools, and keep those listings current
+- keep the reference toolchain installable from the registries developers
+  already use: all seven crates (including the `dotrepo` CLI alias) are
+  published to crates.io, and tagged releases republish them automatically
 - publish the scrape-versus-dotrepo efficiency benchmark as a public,
   regeneratable page — measured tokens, bytes, and requests saved per task is
   the pitch, and the audience for it is exactly the consumer the index needs
@@ -358,13 +361,12 @@ what pagedigest makes cheap to detect.
 The projects stay independent, but point the same direction through three
 concrete commitments:
 
-1. **dotrepo publishes pagedigest.** The static public export already emits
-   `v0/files.json` with per-file digests and a snapshot digest — the same
-   pattern as a pagedigest manifest in a bespoke shape. The export should also
-   emit `/.well-known/pagedigest.json` so mirrors and agent caches can use the
-   standard change-detection protocol instead of a dotrepo-specific manifest.
-   This makes dotrepo pagedigest's first production publisher and gives each
-   project the other as a live proof.
+1. **dotrepo publishes pagedigest.** Shipped: the static public export emits
+   `/.well-known/pagedigest.json` alongside `v0/files.json`, the hosted site
+   serves it live, and each deploy fetches the currently deployed manifest as
+   a fail-closed baseline so per-URL revisions and `site_rev` advance
+   monotonically. dotrepo is pagedigest's first production publisher, and each
+   project gives the other a live proof.
 2. **dotrepo consumes pagedigest.** Where non-GitHub evidence sources publish a
    manifest, the crawler's work-avoidance ladder should honor it before
    materializing anything, exactly as it honors cached heads today.
@@ -591,10 +593,10 @@ describe the destination; this section decides what runs now.
 4. Select coverage from demand signals and ecosystem gaps, not raw count alone.
 
 **In parallel — capture demand through distribution.** Execute the
-distribution strategy above: emit `/.well-known/pagedigest.json` from the
-public export, list the MCP server where agent builders discover tools,
-publish the scrape-versus-dotrepo efficiency benchmark as a public page, and
-pursue one external consumer integration. The checkpoint is sustained hosted
+distribution strategy above: with the pagedigest manifest and crates.io
+publication shipped, keep the MCP server listed where agent builders discover
+tools, publish the scrape-versus-dotrepo efficiency benchmark as a public
+page, and pursue one external consumer integration. The checkpoint is sustained hosted
 or MCP traffic from non-operator consumers; that traffic also bootstraps the
 lookup-miss telemetry Milestone 4's demand-driven discovery depends on.
 Distribution outranks maintainer-adoption polish until captured demand exists:
@@ -618,20 +620,22 @@ completion so the protocol does not overfit the reference implementation.
 **Goal:** keep the shipped CLI/MCP/LSP/core codebase navigable as the index and
 surfaces grow past v0.1.
 
-**Status:** in progress. The first structural splits, contributor docs, and
-rustdoc examples for the three high-traffic repository APIs are landed. LSP/MCP
-extraction and documented dispositions for the remaining oversized source files
-remain open.
+**Status:** delivered; now maintained as a standing gate. The structural
+splits (core `import/`, `public/`, and `surfaces/` module extraction, MCP
+tool/handler/dispatch extraction, LSP protocol/state/diagnostics extraction,
+crawler command split), contributor docs, and rustdoc examples for the three
+high-traffic repository APIs are landed, and every remaining source file above
+the size threshold carries a documented disposition in
+[`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md).
 
-Deliver:
+Delivered:
 
 - domain-scoped facade integration tests under `dotrepo-core/src/facade_tests/`
 - extracted MCP remote-lookup policy in `dotrepo-mcp/src/lookup.rs`
 - contributor onboarding for the internal crawler crate
 - rustdoc examples on high-traffic public APIs (`validate_repository`,
   `query_repository`, `trust_repository`)
-- LSP and remaining MCP handler module extraction without transport behavior
-  changes
+- LSP and MCP handler module extraction without transport behavior changes
 - a documented split plan or explicit retain rationale for every
   reference-toolchain source file above the size threshold
 

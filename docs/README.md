@@ -31,6 +31,7 @@ project tooling rather than additional plan documents.
 ## Develop the reference toolchain
 
 - [`toolchain-maintainability.md`](./toolchain-maintainability.md)
+- [`import-baseline-audit.md`](./import-baseline-audit.md) - import fixture rationale and regression barrier
 - [`../crates/dotrepo-crawler/README.md`](../crates/dotrepo-crawler/README.md)
 
 ## Operate the system
@@ -40,6 +41,7 @@ project tooling rather than additional plan documents.
 - [`public-release-checklist.md`](./public-release-checklist.md)
 - [`mcp-registry-publishing.md`](./mcp-registry-publishing.md)
 - [`cloudflare-deploy.md`](./cloudflare-deploy.md)
+- [`public-edge-canary-history.md`](./public-edge-canary-history.md) - operator log of notable canary runs
 - [`maintainer-claim-review-workflow.md`](./maintainer-claim-review-workflow.md)
 
 Generated overlays use machine publication gates. The index review checklist is
