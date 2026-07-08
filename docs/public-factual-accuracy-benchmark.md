@@ -38,11 +38,10 @@ across repositories, ecosystems, and field classes as coverage expands toward
 ### Ecosystem and abstention breakdown
 
 Each assertion's target repository is classified into one of the language
-families used by `scripts/render_index_growth_status.py`
-(`Rust`, `TypeScript / JavaScript`, `Python`, `Go`, `Other`), reusing the same
-`inferred_language_family` heuristic (duplicated locally per
-`scripts/README.md`'s standalone-script convention, with a sync comment) so
-both scripts agree on ecosystem boundaries. The report's
+families in `scripts/language_family.py`
+(`Rust`, `TypeScript / JavaScript`, `Python`, `Go`, `Other`), shared with
+growth status, audit sampling, and intent scorecards so ecosystem boundaries
+stay aligned. The report's
 `summary.ecosystemSummaries` gives a per-family `assertionCount`,
 `correctCount`, `missingCount`, `mismatchCount`, `accuracyRate`,
 `missingRate`, and `mismatchRate`, and `--min-ecosystem-accuracy-rate

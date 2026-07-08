@@ -2,7 +2,7 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
-- Left `repo.test` unset because `.github/workflows/backend_tests.yml` and `.github/workflows/code_quality.yml` suggested conflicting test commands.
+- Left `repo.test` unset because `.github/workflows/backend_tests.yml` and `.github/workflows/code_quality.yml` suggested conflicting test commands; the conflict is recorded as an inferred multi-command situation rather than a single verified primary test command.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.test` to `mvn clean test` from `.github/workflows/backend_tests.yml` after deterministic escalation.

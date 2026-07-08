@@ -40,6 +40,8 @@ def synthetic_runs() -> list[dict]:
                     "networkBytes": 40000,
                     "tokensUsed": 1200,
                     "adjudicationCalls": 2,
+                    "cpuTimeMs": 500,
+                    "peakMemoryBytes": 120_000_000,
                 },
                 {
                     "repository": "github.com/example/nova",
@@ -52,6 +54,8 @@ def synthetic_runs() -> list[dict]:
                     "networkBytes": 30000,
                     "tokensUsed": 0,
                     "adjudicationCalls": 0,
+                    "cpuTimeMs": 300,
+                    "peakMemoryBytes": 80_000_000,
                 },
             ],
         },
@@ -126,10 +130,12 @@ def test_build_report_computes_per_category_means() -> None:
     # comet never produced JSON output, so it contributes no network sample.
     assert changed["networkBytes"]["sampled"] == 1
 
-    # CPU/memory are a documented gap, never fabricated as zero.
-    assert improved["cpuTimeMs"]["mean"] is None
-    assert improved["cpuTimeMs"]["sampled"] == 0
-    assert improved["peakMemoryBytes"]["note"] == "not collected"
+    assert improved["cpuTimeMs"]["mean"] == 500.0
+    assert improved["cpuTimeMs"]["sampled"] == 1
+    assert improved["peakMemoryBytes"]["mean"] == 120_000_000.0
+    # Legacy entry without CPU/RSS (comet) keeps sampled count honest.
+    assert changed["cpuTimeMs"]["sampled"] == 1
+    assert changed["peakMemoryBytes"]["sampled"] == 1
 
 
 def test_load_runs_reads_ndjson_fixture(tmp_path: Path) -> None:
@@ -153,7 +159,8 @@ def test_render_markdown_includes_category_table_and_documented_gap() -> None:
     assert "| unchanged |" in markdown
     assert "| changed |" in markdown
     assert "| improved |" in markdown
-    assert "not currently collected" in markdown
+    assert "RUSAGE" in markdown or "process-group" in markdown
+    assert "mean CPU" in markdown
 
 
 def test_main_writes_json_and_markdown_outputs(tmp_path: Path) -> None:

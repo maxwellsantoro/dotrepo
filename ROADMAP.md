@@ -4,6 +4,23 @@ This document defines both the long-range direction and the active execution
 order for dotrepo. Shipped capabilities live in [`README.md`](./README.md);
 release history lives in [`CHANGELOG.md`](./CHANGELOG.md).
 
+**How to use this document**
+
+| Need | Read |
+| --- | --- |
+| What to do next | [Active execution order](#active-execution-order) |
+| Why the system exists | [Mission](#mission), [Core thesis](#core-thesis), [Non-negotiable principles](#non-negotiable-principles) |
+| Capability gates | [Product milestones](#product-milestones) |
+| Live numbers | Generated artifacts (`scripts/render_index_growth_status.py`, intent scorecard, unit-cost report) — not this file |
+| Operator procedures | [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md), [`docs/distribution.md`](./docs/distribution.md), [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md) |
+
+Date-stamped counts below are **snapshots**. They fix direction and compare
+progress; they do not redefine strategy when the index moves. Prefer growth,
+coverage, promotion, telemetry, and scorecard outputs for live values.
+
+Stable installs track the **`1.0.x`** release line. Development on `main` is
+**`2.0.0-alpha.x`** (public Rust API breaks). See [`docs/install.md`](./docs/install.md).
+
 ## Mission
 
 Make repository understanding reusable infrastructure.
@@ -317,46 +334,56 @@ Coverage selection combines ecosystem balance with demonstrated utility:
 - maintainer interest, without making interest a prerequisite
 
 Star bands and curated catalogs remain useful sampling tools, but they are not
-the sole definition of demand. Until live lookup-miss telemetry exists,
-package-registry download rankings (npm, PyPI, crates.io, the Go module proxy)
-are the best available proxy for the repositories agents actually resolve most
-often, and should be the primary cohort selector for Milestone 4 growth.
+the sole definition of demand.
+
+**Demand signal stack (preferred order once volume exists):**
+
+1. Hosted lookup misses — Worker emits `DOTREPO_LOOKUP_MISS` log lines on
+   repository-not-found; aggregate with
+   `scripts/aggregate_lookup_misses.py` (see
+   [`docs/distribution.md`](./docs/distribution.md)).
+2. Repeated scrape-fallback or agent-client telemetry from non-operator consumers
+   (when an external integration reports it).
+3. Package-registry download rankings (npm, PyPI, crates.io, Go module proxy) as
+   the best *proxy* until miss volume is meaningful — still the primary cohort
+   selector for early Milestone 4 growth.
+4. Ecosystem/layout gaps, relationship centrality, benchmark/canary needs, then
+   maintainer interest (never a prerequisite).
 
 ### Distribution strategy
 
 Index quality creates the value; distribution captures it. Agents check dotrepo
 first only when dotrepo is present in toolchains they already use, so
 distribution is a workstream with its own gates, not a hoped-for side effect of
-coverage:
+coverage. Operator checklist:
+[`docs/distribution.md`](./docs/distribution.md); integration template:
+[`docs/external-consumer-integration.md`](./docs/external-consumer-integration.md).
 
-- list the MCP server in the registries and directories where agent builders
-  discover tools, and keep those listings current
-- keep the reference toolchain installable from the registries developers
-  already use: all seven crates (including the `dotrepo` CLI alias) are
-  published to crates.io, and tagged releases republish them automatically
-- publish the scrape-versus-dotrepo efficiency benchmark as a public,
-  regeneratable page — measured tokens, bytes, and requests saved per task is
-  the pitch, and the audience for it is exactly the consumer the index needs
-- land at least one integration in an external agent framework, crawler, or
-  developer tool that resolves repository questions through the public surface
-- measure captured demand directly: hosted-API and MCP requests originating
-  from non-operator consumers are the honest version of "agents check dotrepo
-  first", and they generate the lookup-miss telemetry that demand-driven
-  discovery is designed around
+| Lever | Status | Next step |
+| --- | --- | --- |
+| Hosted public API + Worker | Live | Keep deploy-coherence and canaries green |
+| MCP server + registry packaging | Shipped (`1.0.x` stable; NDJSON framing in 1.0.1) | Keep listings current on each stable tag |
+| crates.io toolchain | Shipped (seven packages; auto-publish on tag) | Point production consumers at stable `1.0.x` |
+| Efficiency benchmark page | Live (`/efficiency/`) | Refresh on deploy; use as the external pitch |
+| pagedigest publisher | Live | Consume manifests in the crawler when non-GitHub sources appear |
+| Lookup-miss telemetry | Emission shipped | Export Worker logs and feed aggregates into M4 selection |
+| External non-operator consumer | Open | Land one real integration; measure non-operator traffic |
 
 ### Shared direction with pagedigest
 
-dotrepo and [pagedigest](https://pagedigest.org) (a sibling protocol,
-pre-release: a one-request `/.well-known/pagedigest.json` manifest of
-monotonic per-URL revisions and optional digests for site-level change
-detection) are two layers of one goal: a cooperation layer that lets automated consumers stop re-deriving what a
-publisher — or a trustworthy overlay — can declare once. pagedigest answers
-*"what changed?"* for any published URL set with a one-request manifest of
-monotonic revisions and optional digests; dotrepo answers *"what is this and
-how do I use it?"* for software repositories with a trust-aware semantic
-record. pagedigest is the general-web form of dotrepo's tier −1 (skip unchanged
-work via cached identity and digests); dotrepo is the deep-semantics form of
-what pagedigest makes cheap to detect.
+dotrepo and [pagedigest](https://pagedigest.org) (sibling protocol, pre-release)
+are two layers of one goal: a cooperation layer that lets automated consumers
+stop re-deriving what a publisher — or a trustworthy overlay — can declare once.
+
+- **pagedigest** answers *"what changed?"* for any published URL set via a
+  one-request `/.well-known/pagedigest.json` of monotonic revisions and optional
+  digests.
+- **dotrepo** answers *"what is this and how do I use it?"* for software
+  repositories with a trust-aware semantic record.
+
+pagedigest is the general-web form of dotrepo's tier −1 (skip unchanged work via
+cached identity and digests); dotrepo is the deep-semantics form of what
+pagedigest makes cheap to detect.
 
 The projects stay independent, but point the same direction through three
 concrete commitments:
@@ -392,228 +419,162 @@ proximity, surprising completeness vs. language-family peers) and draws a
 seedable, risk-weighted random sample for a human or future automated pass to
 inspect against `index/review-checklist.md`. It does not call any model or
 adjudication provider, does not touch the network, and does not act on
-findings — the fixture/fix/calibration/policy conversion loop is still future
-work once this tool has actually run and produced findings.
+findings. Cadence and conversion expectations are documented in
+`docs/factual-crawl-automation.md` (Audit cadence). Lookup-miss demand from
+the hosted Worker (`DOTREPO_LOOKUP_MISS` log lines +
+`scripts/aggregate_lookup_misses.py`) feeds Milestone 4 cohort selection once
+logs are exported.
 
 ### Status discipline
 
-`ROADMAP.md` owns stable direction, gates, and execution order. Date-stamped
-counts are snapshots sourced from the repository's growth, coverage, promotion,
-accuracy, and telemetry reports. Operational dashboards and generated artifacts
-own live values so changing counts do not silently redefine strategy.
+`ROADMAP.md` owns stable direction, gates, and **execution order**. It is not a
+changelog of every investigation: long-form operator narratives belong in
+`CHANGELOG.md`, commit history, or `docs/*` procedures.
+
+Date-stamped counts are snapshots sourced from growth, coverage, promotion,
+accuracy, and telemetry reports. Regenerated dashboards and artifacts own live
+values so moving numbers do not silently redefine strategy. When a snapshot and
+a script disagree, **trust the script**, then update the snapshot.
 
 ## Product milestones
 
 Milestones are capability and quality gates, not release dates.
 
-**v0.1 implementation status: complete.** The protocol and native/overlay record
-contracts, Rust CLI/MCP/LSP reference toolchain, autonomous index factory,
-public lookup/search/compare/relations surfaces, growth tooling, and M1–M3 gate
-implementations are shipped. Milestone 1's strict multi-run operational proof is
-still pending; Milestones 2 and 3 have passed their shipped-surface and coverage
-gates. Remaining roadmap work is production proof, operational scale, continuous
-quality calibration, and maintainer uptake.
+| Milestone | Goal | Status |
+| --- | --- | --- |
+| **M0** Working protocol and proof surface | Protocol + toolchain + public origin | **Complete** |
+| **M1** Autonomous index factory | Generation/refresh without human queue | **Implementation complete; operational proof nearly closed** |
+| **M2** Useful shared semantic cache | ≥500 high-signal profiles + lookup contracts | **Complete** |
+| **M3** Research substrate | Search, compare, relations, optional synthesis | **Complete** (calibration ongoing) |
+| **M4** Index at ecosystem scale | 1k→10k+ with cost/freshness gates | **Next scale phase** |
+| **M5** Maintainer adoption flywheel | Native ownership without blocking overlays | **In parallel** (does not gate M4) |
+| **M6** Open metadata standard | Independent producers/consumers | **Later** |
 
-**Checked-in index snapshot (2026-06-29):** 613 overlay records, 516 high-signal
-public profiles (103.2% of the Milestone 2 target), 514 `verified` records, and 1
-accepted maintainer claim. The 500-profile Milestone 2 coverage gate is
-complete. *High-signal* here is profile-level coverage (a quality-signal
-aggregate over each exported `profile.json`), distinct from the 514 record-level
-`verified` statuses; a few profiles are high-signal before their record reaches
-`verified`. The next priority is quality hardening across the larger index, not
-raw record growth. Live counts come from the generated growth, coverage,
-promotion, and telemetry artifacts and refresh with each run; this snapshot fixes
-direction, not numbers.
+**v0.1 surfaces are shipped.** Remaining work is operational proof (final M1
+gap), quality hardening at current corpus size, distribution/demand capture,
+then gated cohort growth (M4).
+
+**Checked-in index snapshot (2026-07-08)** — refresh with
+`scripts/render_index_growth_status.py`:
+
+| Metric | Value |
+| --- | ---: |
+| Overlay records | 613 |
+| `verified` / high confidence | 572 |
+| `inferred` / `imported` | 24 / 17 |
+| Record-level high-signal vs M2 target (500) | 572 (114%) |
+| Missing build / test / security | 239 / 242 / 402 |
+| Quality-hardening queue | 473 |
+| Stale or missing `generated_at` | 0 (0%) |
+| Max refresh overdue | 0 days |
+| Accepted maintainer claims | 1 |
+
+*High-signal* here is the growth-status record-level aggregate (status ×
+confidence), not a separate profile-export count. Milestone 2’s 500-profile
+coverage gate is already complete; the priority is **quality and utility
+hardening**, not raw record growth, until M4 cohorts open.
 
 ### Active execution order
 
-This is the operative ordering across milestones. Detailed milestone sections
-describe the destination; this section decides what runs now.
+This section decides what runs **now**. Milestone sections below describe
+destination gates; do not treat their “current status” lists as the work queue.
 
-**Now — prove, measure, and harden the autonomous factory (Milestone 1).**
+#### Status at a glance
 
-1. **Done.** `check_autonomous_telemetry_gate.py` passes without `--warn-only`
-   at three consecutive scheduled-run checkpoints. This required two fixes
-   surfaced by running real scheduled batches: the worst-run rate window is
-   now bounded to the last `WORST_RUN_WINDOW_SIZE` (10) runs
-   (`scripts/run_autonomous_index_batch.py`) so a single historic failure
-   cannot pin the gate red forever while still failing the gate for the next
-   10 runs after any real bad run; and the crawler no longer silently
-   downgrades an already-`verified` record on routine refresh
-   (`guard_against_unjustified_downgrade` in
-   `crates/dotrepo-core/src/promotion.rs`, wired into
-   `crates/dotrepo-crawler/src/pipeline.rs`) — previously a refresh that only
-   gained a new, imperfectly-scored field (not a real regression) could drop
-   `verified`/`high` back to `inferred`/`medium`.
-2. **Partially done.** A first bounded canary confirmed the deterministic-to-
-   model escalation path fires correctly end to end: real GitHub repositories
-   almost never contain genuinely conflicting build/test candidates (of
-   ~145 repositories refreshed while proving the strict telemetry gate,
-   zero triggered model escalation), so a throwaway public GitHub repository
-   was deliberately engineered with two same-tier conflicting build-command
-   workflows, crawled with `dotrepo-crawler crawl` against the live GitHub
-   API and the local OpenRouter adjudication sidecar
-   (`scripts/adjudication_openrouter_sidecar.py`), and produced exactly the
-   expected result: `deterministicRequests: 1`, `modelCalls: 1`,
-   `modelResolved: 1`, `tokensUsed: 300`, resolving `repo.build` to the
-   manifest-tier candidate with the conflict honestly recorded in
-   `evidence.md`. This proves the primary-tier escalation path, not merely
-   that it exists unused. A second canary attempted to force second-opinion
-   escalation with a genuinely tied three-way build-command conflict; the
-   primary model correctly identified the tie and returned a *confident*
-   abstention (`value: null`, `confidence: high`), which by the escalation
-   ladder's own design does not warrant a second opinion — only a
-   *low*-confidence primary response should. This is itself valid evidence
-   (correct abstention on a tied case, not a gap). Investigating it further
-   found a real design gap, since fixed
-   (`crates/dotrepo-core/src/import/escalation.rs`): an `Absent` outcome
-   (model explicitly declines to answer) was treated as final regardless of
-   confidence, unlike a `Rejected` outcome (wrong-value guess), which
-   already escalated when low-confidence. A genuinely uncertain "I don't
-   know" now also continues up the tier ladder; a confident one still
-   terminates immediately, preserving correct abstention. The tier-4 model
-   was also upgraded from a marginally larger same-family model
-   (`google/gemma-4-31b-it`) to `z-ai/glm-5.2`, a qualitatively stronger
-   model, per operator request. Re-testing the known-hard repositories
-   (`astral-sh/ruff`, `oven-sh/bun`, `django/django`, and others) with both
-   changes active confirmed their abstentions are still confident and
-   correct even under a stronger model — these are genuinely polyglot
-   repositories with no single honest answer, not cases the escalation
-   ladder was failing to reach. Both fixes remain necessary infrastructure
-   for the next genuinely low-confidence case; the second-opinion and
-   strong-remote-escalation tiers are proven wired but still await a live
-   call from a *genuinely uncertain* (not merely ambiguous) primary
-   response, which remains open, lower-priority work.
-3. Add versioned unit-cost reports for unchanged, changed, and usefully improved
-   records — network, CPU, memory, wall time, model calls, tokens, and provider
-   cost — with cache hits and avoided work as first-class outcomes. Wall time,
-   network request/byte counting, and unchanged/changed/improved
-   classification are implemented (`crates/dotrepo-crawler/src/github.rs`,
-   `scripts/run_autonomous_index_batch.py`,
-   `scripts/render_unit_cost_report.py`); process-level CPU time and peak
-   memory remain a documented gap (no `libc`/`getrusage` dependency has been
-   added yet).
-4. Establish intent- and ecosystem-level quality scorecards with explicit error
-   budgets for incorrect facts, missing facts, and correct abstention.
-5. **Done for build/test; security confirmed as honest absence.**
-   Investigating individual missing-signal records (rather than blindly
-   re-crawling) found that routine refresh alone never moves the
-   missing-build/test/security ceilings, because `SUPPLEMENTAL_ROOT_FILES`
-   (`crates/dotrepo-crawler/src/github.rs`) only ever fetched
-   `Cargo.toml`/`package.json`/`pyproject.toml`/`go.mod` from GitHub, even
-   though `dotrepo-core`'s import parser has had working support for Maven,
-   Gradle, Composer, Mix, Rebar, CMake presets, Makefile, justfile,
-   Rakefile, and setup.py/setup.cfg all along — those parsers were simply
-   never fed a file to parse. Fixed by fetching every ecosystem file the
-   parser already supports (plus a new root `.csproj` directory listing
-   for arbitrarily-named .NET project files). Re-crawled the 23 known
-   non-verified records plus all 298 already-`verified` records still
-   missing build/test (sampled 30 first to confirm ~23% real yield before
-   committing to the full run): missing build 278→238, missing test
-   285→241, quality queue 501→477, verified 574→580, with zero
-   status/confidence regressions across all 321 touched records (spot-checked
-   every one against its prior committed value). This full-population
-   re-crawl also surfaced and fixed a real, unrelated bug: GitHub's
-   maintainer-set repository "Website" field can point at a different
-   repository entirely (e.g. a renamed/duplicated project left pointing at
-   its original), which `merge_snapshot_fields` previously trusted
-   unconditionally, producing two records whose `repo.homepage` failed
-   `validate-index`'s cross-identity check; fixed by skipping the merge
-   when the reported homepage resolves to a different repository identity
-   (`homepage_conflicts_with_identity` in
-   `crates/dotrepo-crawler/src/pipeline.rs`). Investigated
-   `owners.security_contact` (408 missing) separately using GitHub's
-   `community/profile` API, which resolves a repository's security policy
-   across every location GitHub itself recognizes (root, `.github/`,
-   `docs/`, and org-level default community health files) in one call — 0
-   of 50 randomly sampled missing records had a security policy anywhere
-   GitHub could find one across two independent samples. This confirms
-   honest absence rather than a fetch gap; no code change is warranted,
-   and per the roadmap's non-goals, hiding that absence to look complete
-   would be the wrong fix anyway.
-6. Process the current promotion headroom through the normal validation path;
-   consult `promotion-report` and the growth-status renderer for live candidate
-   counts.
-7. **First real conversions landed.** `scripts/audit_index_sample.py`
-   produces the read-only, risk-weighted sample (see "Audit strategy"
-   above); running it against the live index surfaced two real,
-   deterministic bugs that were fixed and re-verified this pass:
-   - `crates/dotrepo-crawler/src/github.rs` fetched GitHub's `/languages`
-     endpoint (byte counts per language) into a `BTreeMap`, then discarded
-     the byte counts via `.into_keys()` — `BTreeMap` iterates
-     alphabetically, so `repo.languages` was silently stored in
-     alphabetical order instead of byte-count-descending order for every
-     crawled repository. Fixed with `languages_by_byte_count_descending()`.
-   - `inferred_language_family` (duplicated in three scripts) classified by
-     whether a language appeared *anywhere* in `repo.languages` rather than
-     the dominant one, so a repo with a single minor vendored Rust file
-     could be misclassified as "Rust" family over its actual dominant
-     language. Fixed to classify by `repo.languages[0]` in all three
-     copies, with regression tests added to each.
+| Workstream | State | Blocker or next proof |
+| --- | --- | --- |
+| M1 reliability (strict telemetry gate) | **Done** — three consecutive strict checkpoints | Keep green on schedule |
+| M1 unit cost (unchanged/changed/improved) | **Done** — wall, network, tokens, CPU, RSS | Optional: provider $ cost from sidecar |
+| M1 primary-tier model canary | **Done** — live primary resolution | — |
+| M1 second-opinion / strong-remote canary | **Open** | Live low-confidence primary; see [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md) |
+| Intent/ecosystem scorecards | **Tooling shipped** | Use as soft budgets; harden only after stable |
+| Execution-field completeness | **Hardening** | ~39% missing build/test; use coverage-gap report |
+| Distribution / non-operator demand | **Open** | One external consumer + exported miss logs |
+| M4 first 1k profiles | **Queued** after M1 open items + demand path | 50–100 repo cohorts |
+| M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |
 
-   A full-population re-crawl (602/613 records) applying the corrected
-   ordering shifted language-family counts substantially (Other 105→197,
-   Python 171→111, Go 85→70, Rust 74→51), confirming a large fraction of
-   the index was misclassified before. 10 repositories initially regressed
-   because the downgrade guard correctly identified a genuine (not
-   stale-config) build/test conflict that no model tier could honestly
-   resolve to a single command — the repositories are genuinely polyglot
-   (e.g. a Rust and a Python component in the same repo). Investigating why
-   even a second-opinion/strong-remote pass couldn't help these surfaced a
-   third real gap, now also fixed: the escalation ladder treated *any*
-   confidence level of "no answer" as final, so a genuinely low-confidence
-   punt from the cheap tier could never get a second opinion (only a
-   low-confidence *wrong guess* escalated); and the tier-4 model was
-   upgraded from a marginally larger same-family model to `z-ai/glm-5.2`, a
-   qualitatively stronger one. Neither change flips these 10 repositories'
-   outcome specifically — their abstentions are confident and correct, not
-   low-confidence — but a fourth, structural finding did: **~4% of the
-   index (23/613 records) shows this exact genuine multi-ecosystem-tie
-   pattern**, not a rare edge case, so `repo.build_candidates` /
-   `repo.test_candidates` (RFC 0020) were added to preserve the concrete
-   candidate commands with inferred ecosystem labels whenever `build`/`test`
-   is left honestly unset for this reason, instead of discarding them. All
-   10 repositories were re-crawled to backfill this: same status change as
-   before (`verified`→`imported`/`inferred`), but now with real, structured
-   data instead of nothing. Continuing to run the sampler repeatedly and
-   convert further findings remains open work.
-8. Preserve the gated profile floors (valid profiles, high-signal ratio, zero
-   malformed) and the current factual-accuracy floors during hardening; the
-   release-gate baseline owns the pinned thresholds.
+#### Now — close Milestone 1 and harden quality
 
-**Next — begin the first ecosystem-scale cohorts (Milestone 4).**
+Do these before opening large M4 growth batches:
 
-1. Expand in gated 50–100 repository cohorts until the index reaches 1,000
-   incrementally maintained profiles.
-2. Keep stale or missing `generated_at` records at or below 10% and maximum
-   refresh overdue latency at or below 7 days, using the existing 30-day stale
-   threshold.
-3. Require each cohort to remain inside accuracy, abstention, throughput,
-   resource, model-tier, and unit-cost budgets before increasing batch size.
-4. Select coverage from demand signals and ecosystem gaps, not raw count alone.
+1. **Close the escalation-ladder proof gap.** Primary tier is proven live;
+   second-opinion and strong-remote are wired (models: `qwen/qwen3.5-9b`,
+   `z-ai/glm-5.2`) and correctly skip *confident* abstention. Still need one
+   live path where a *low-confidence* primary continues up the ladder.
+   Procedure: [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md).
+2. **Work the quality-hardening queue** without inventing completeness.
+   - Prioritize: `scripts/render_coverage_gaps.py` and growth-status “Next
+     Quality Targets”.
+   - Score: `scripts/render_intent_quality_scorecard.py` (soft budgets;
+     `--fail-on-budget` only when a cohort is ready).
+   - Expectation: many security gaps are honest absence (sampled via GitHub
+     community profile API); multi-ecosystem ties should keep
+     `build_candidates` / `test_candidates` (RFC 0020), not a fake primary.
+3. **Drain promotion headroom** via normal validation
+   (`dotrepo promotion-report`, growth-status lift candidates) — no special
+   path that bypasses gates.
+4. **Keep audit conversion running.** Weekly risk-weighted sample
+   (`scripts/audit_index_sample.py`); every finding → fixture, parser fix,
+   calibration, or policy note. Cadence:
+   [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md).
+5. **Hold release floors** during hardening: profile/high-signal baselines and
+   factual-accuracy ceilings in the release gate must not regress.
 
-**In parallel — capture demand through distribution.** Execute the
-distribution strategy above: with the pagedigest manifest and crates.io
-publication shipped, keep the MCP server listed where agent builders discover
-tools, publish the scrape-versus-dotrepo efficiency benchmark as a public
-page, and pursue one external consumer integration. The checkpoint is sustained hosted
-or MCP traffic from non-operator consumers; that traffic also bootstraps the
-lookup-miss telemetry Milestone 4's demand-driven discovery depends on.
-Distribution outranks maintainer-adoption polish until captured demand exists:
-adoption follows consumers, not the reverse.
+#### Done recently (do not re-litigate)
 
-**In parallel — improve maintainer authority and adoption (Milestone 5).**
-Publish adoption-funnel telemetry and reach an initial checkpoint of 10
-maintainer-owned native records and 5 accepted overlay-to-native handoffs. These
-outcomes improve authority and durability, but neither target gates autonomous
-index growth or the usefulness of unclaimed overlay records.
+Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md).
 
-**Later — broaden scale, adoption, and interoperability.** Expand from 1,000 to
-10,000 profiles only after the first scale gates hold, then advance toward all
-publicly processable repositories through successively larger gated cohorts.
-Deepen the maintainer flywheel in parallel. Begin a minimal Milestone 6
-conformance suite and independent-consumer test before full ecosystem-scale
-completion so the protocol does not overfit the reference implementation.
+- Strict autonomous telemetry gate (rolling worst-run window of 10; unjustified
+  verified downgrade guard on refresh).
+- Supplemental manifest fetch for every ecosystem the importer already parses
+  (Maven/Gradle/Composer/Mix/Rebar/CMake/Makefile/justfile/Rakefile/setup.py
+  and root `.csproj` listing) — closed a large silent build/test gap.
+- Homepage identity guard (`homepage_conflicts_with_identity`).
+- Language ordering by byte count; shared dominant-language family classifier
+  (`scripts/language_family.py`).
+- Escalation: low-confidence `Absent` continues the ladder; confident abstention
+  still terminates; polyglot candidates preserved (RFC 0020).
+- Unit-cost columns including process CPU and peak RSS
+  (`scripts/process_resources.py`).
+- Intent scorecard + coverage-gap operator scripts.
+- Hosted `DOTREPO_LOOKUP_MISS` emission + aggregate script.
+
+#### Next — Milestone 4 cohorts (after Now items 1–5 are healthy)
+
+1. Expand in gated **50–100** repository cohorts toward **1,000** maintained
+   profiles.
+2. Freshness: stale/missing `generated_at` ≤ **10%**; max refresh overdue ≤
+   **7 days** (30-day stale threshold).
+3. Each cohort must stay inside accuracy, abstention, throughput, resource,
+   model-tier, and unit-cost budgets before batch size increases.
+4. Select coverage from the [demand signal stack](#demand-and-coverage-strategy)
+   and ecosystem gaps — not raw count alone.
+
+#### In parallel — distribution (outranks M5 polish)
+
+Checkpoint: **sustained hosted or MCP traffic from non-operator consumers**,
+plus exported lookup-miss volume that can steer M4 selection.
+
+1. Keep MCP registry listings and stable `1.0.x` install paths current.
+2. Keep the efficiency page as the external pitch (tokens/bytes/requests saved).
+3. Export Worker logs → `aggregate_lookup_misses.py` on a fixed cadence.
+4. Land **one** external consumer integration
+   ([template](./docs/external-consumer-integration.md)).
+
+Adoption follows consumers, not the reverse.
+
+#### In parallel — Milestone 5 (authority, not coverage)
+
+Target checkpoint: **10** maintainer-owned native records and **5** accepted
+overlay-to-native handoffs, with adoption-funnel telemetry. Neither target gates
+overlay usefulness or M4 growth.
+
+#### Later
+
+1k → 10k only after M4 gates hold; then broader public coverage through larger
+cohorts. Start a minimal M6 conformance suite and independent-consumer test
+before full ecosystem-scale completion so the protocol does not overfit the
+reference implementation.
 
 ### Reference toolchain maintainability
 
@@ -666,21 +627,15 @@ utility, and adoption.
 
 **Goal:** make autonomous generation and refresh the default operating model.
 
-**Core implementation status: complete; operational proof status: partially
-demonstrated.** Scheduled planning, bounded adjudication, gate-passed
-writeback, retained telemetry, proof gates, and deploy coherence are
-implemented. The retained multi-run proof gate now passes in strict mode
-(three consecutive scheduled-run checkpoints, see the active execution order
-above) and versioned unit-cost reports are in place for wall time, network,
-tokens, and model calls (CPU/memory remain a documented gap). A first bounded
-adjudication canary exercised and proved the primary-tier (cheap-model)
-escalation path with a real live model call, and the escalation ladder now
-correctly forwards genuinely low-confidence abstentions (not just
-low-confidence wrong guesses) to the second-opinion and strong-remote tiers,
-which are now backed by `qwen/qwen3.5-9b` and `z-ai/glm-5.2` respectively
-(see the active execution order above); those two tiers are proven wired but
-still await a live call from a genuinely uncertain (not merely ambiguous)
-primary response, so the milestone is not yet complete.
+**Implementation: complete. Operational proof: nearly closed.** Scheduled
+planning, bounded adjudication, gate-passed writeback, retained telemetry,
+strict multi-run proof gates, deploy coherence, and unit-cost reporting
+(including CPU/RSS) are in place. The **only remaining M1 exit-criteria gap** is
+exercising the second-opinion and strong-remote tiers with a live
+*low-confidence* primary (confident abstention is correct and does not count).
+Operator procedure: [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md).
+Day-to-day hardening work is listed under
+[Active execution order](#active-execution-order).
 
 Deliver:
 
@@ -741,28 +696,26 @@ Implemented operational controls:
   `dotrepo-crawler crawl --json`; the autonomous batch orchestrator tags every
   outcome as `unchanged` (scheduler-skipped, zero cost by construction),
   `changed` (re-crawled, no status-ladder gain), or `improved` (re-crawled with
-  a status-ladder gain), and `scripts/render_unit_cost_report.py` renders
-  versioned per-category unit-cost summaries from the retained NDJSON history
+  a status-ladder gain), samples child CPU/RSS via
+  `scripts/process_resources.py`, and
+  `scripts/render_unit_cost_report.py` renders versioned per-category unit-cost
+  summaries from the retained NDJSON history
+- intent-level soft scorecards and coverage-gap prioritization
+  (`scripts/render_intent_quality_scorecard.py`,
+  `scripts/render_coverage_gaps.py`)
+- risk-weighted audit sampling with documented conversion cadence
+  (`scripts/audit_index_sample.py`,
+  [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md))
 
-Current Milestone 1 work queue (subordinate to the cross-milestone execution
-order above):
+**Open M1 work** is only the escalation canary plus ongoing quality hardening
+listed in [Active execution order](#active-execution-order). Do not grow the
+index into M4-scale batches until those items stay healthy.
 
-1. Work down the quality-hardening queue through bounded autonomous batches and
-   targeted re-crawls; ratchet its missing build/test/security ceilings (reported
-   by the growth-status renderer) downward. The index currently has no stale or
-   overdue records.
-2. Convert the discovery-wave failure corpus into deterministic parser fixes and
-   checked-in regression fixtures, beginning with noisy README relation targets
-   that fail repository-identity validation.
-3. Improve lookup completeness, especially the security and execution intents,
-   without weakening honest abstention (workload volume comes from the generated
-   lookup workload).
-4. Continue bounded autonomous discovery only to preserve ecosystem balance or
-   replace records lost to staleness, archive state, or validation failures.
-
-Milestone 1 is complete when autonomous runs are repeatable, bounded, directly
-publish gate-passed records, improve quality without a human queue, and expose
-enough retained telemetry to support cost and regression claims.
+Milestone 1 is complete when autonomous runs are repeatable, bounded, publish
+gate-passed records without a human queue, expose unit-cost and tier telemetry
+that support regression claims, and the full adjudication ladder has been
+exercised under live conditions (primary **and** at least one higher tier from a
+genuine low-confidence primary).
 
 ### Milestone 2: Useful shared semantic cache
 
@@ -893,9 +846,12 @@ Current status (shipped capabilities; production calibration is ongoing):
   success, rank quality, inventory-only vs fanout task rates, freshness, gates)
   and `scripts/measure_public_factual_accuracy.py` (exact cited assertion
   accuracy with separate missing and mismatch rates under versioned ceilings,
-  plus a per-ecosystem breakdown reusing the growth-status renderer's language
-  family classifier and an explicit correct-abstention count/rate alongside
-  incorrect- and missing-fact counts)
+  plus a per-ecosystem breakdown via the shared
+  `scripts/language_family.py` classifier and explicit correct-abstention
+  counts alongside incorrect- and missing-fact counts)
+- intent soft scorecards
+  (`scripts/render_intent_quality_scorecard.py`) complement release-gate
+  accuracy samples for continuous calibration
 - production-scale ranking calibration and sustained synthesis runs with measured
   quality and cost remain ongoing operational work
 
@@ -929,24 +885,28 @@ Deliver:
 - randomized and risk-weighted system audits
 - public operational status and coverage telemetry
 
-Current status:
+Current status (pre-scale scaffolding; growth batches not yet opened at M4 size):
 
 - `scripts/render_index_growth_status.py` reports record growth, tranche
   coverage, quality queues, language-family coverage, stale-or-missing
   `generated_at` rate, maximum record age, overdue refresh latency, and optional
   operational gates for tranche coverage, missing targets, lower-confidence
-  backlog, stale freshness backlog, and maximum refresh overdue days.
-- refresh cost and stale-record rate are tracked as first-class Milestone 4
-  metrics from the generated status and coverage artifacts rather than inferred
-  from profile count alone
-- release-gate baselines ratchet profile volume and high-signal floors so index
-  growth does not silently regress lookup completeness or factual accuracy
-- the first quantitative scale checkpoint is 1,000 maintained profiles with a
-  stale-or-missing record rate at or below 10%, maximum refresh overdue latency
-  at or below 7 days, and a published refresh-cost baseline
-- the 1,000-profile checkpoint will be reached through 50–100 repository cohorts;
-  larger batch sizes are unlocked by passing cohort gates rather than by elapsed
-  time or operator preference
+  backlog, stale freshness backlog, and maximum refresh overdue days
+- unit-cost and intent scorecards exist for cohort entry/exit reporting
+  (`render_unit_cost_report.py`, `render_intent_quality_scorecard.py`,
+  `render_coverage_gaps.py`)
+- lookup-miss emission is live on the Worker; miss *volume* becomes a selection
+  input only after logs are exported and aggregated
+  (`aggregate_lookup_misses.py`)
+- refresh cost and stale-record rate are first-class metrics from generated
+  artifacts, not inferred from profile count alone
+- release-gate baselines ratchet profile volume and high-signal floors so growth
+  does not silently regress lookup completeness or factual accuracy
+- first quantitative scale checkpoint: **1,000** maintained profiles, stale or
+  missing `generated_at` ≤ **10%**, max refresh overdue ≤ **7 days**, published
+  refresh-cost baseline
+- path to 1,000: gated **50–100** repository cohorts; larger batches unlock only
+  by passing cohort gates, not by calendar time
 
 Exit criteria:
 
@@ -1092,8 +1052,11 @@ remains canonical and directly accessible.
 
 - field-level precision and abstention rate
 - incorrect-assertion, missing-fact, and correct-abstention rates by user intent
-  and ecosystem
-- verified profile count and percentage
+  and ecosystem (factual-accuracy workload +
+  `render_intent_quality_scorecard.py`)
+- verified / high-signal counts and ratios (`render_index_growth_status.py`)
+- missing build/test/security and honest execution abstentions
+  (`render_coverage_gaps.py`)
 - unresolved and conflicting field rates
 - stale-record rate and refresh latency
 - regression failures by parser, ecosystem, and model tier
@@ -1181,13 +1144,17 @@ native adoption independently improves authority and long-term maintenance.
 
 ## Related documents
 
-- [`README.md`](./README.md) - shipped capabilities and project entrypoint
-- [`CHANGELOG.md`](./CHANGELOG.md) - release history
-- [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md) - crawler and escalation design
-- [`docs/public-surface.md`](./docs/public-surface.md) - hosted public contract
-- [`docs/maintainer-happy-path.md`](./docs/maintainer-happy-path.md) - native adoption workflow
-- [`docs/trust-model.md`](./docs/trust-model.md) - authority, provenance, and confidence semantics
-- [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md) - reference toolchain structure and refactor gates
-- [`crates/dotrepo-crawler/README.md`](./crates/dotrepo-crawler/README.md) - internal autonomous index crate orientation
-- [pagedigest](https://pagedigest.org) - sibling protocol for site-level change
-  detection (pre-release); see "Shared direction with pagedigest" above
+- [`README.md`](./README.md) — shipped capabilities and project entrypoint
+- [`CHANGELOG.md`](./CHANGELOG.md) — release history
+- [`docs/install.md`](./docs/install.md) — stable `1.0.x` vs `2.0.0-alpha` install lines
+- [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md) — crawler, telemetry, audit cadence
+- [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md) — second-opinion / strong-remote live proof
+- [`docs/distribution.md`](./docs/distribution.md) — distribution checklist and demand signals
+- [`docs/external-consumer-integration.md`](./docs/external-consumer-integration.md) — non-operator integration template
+- [`docs/public-surface.md`](./docs/public-surface.md) — hosted public contract
+- [`docs/maintainer-happy-path.md`](./docs/maintainer-happy-path.md) — native adoption workflow
+- [`docs/trust-model.md`](./docs/trust-model.md) — authority, provenance, and confidence semantics
+- [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md) — structure gates and oversized-file plans
+- [`crates/dotrepo-crawler/README.md`](./crates/dotrepo-crawler/README.md) — internal autonomous index crate
+- [pagedigest](https://pagedigest.org) — sibling change-detection protocol; see
+  [Shared direction with pagedigest](#shared-direction-with-pagedigest)

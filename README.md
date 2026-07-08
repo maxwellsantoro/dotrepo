@@ -79,9 +79,11 @@ you why that answer should be trusted.
 
 ## Quick start
 
-1. Install `dotrepo` from the latest GitHub release bundle, or with
-   `cargo install dotrepo-cli`. See [`docs/install.md`](docs/install.md) for
-   platform bundles and the VS Code extension package.
+1. Install `dotrepo` from the latest **stable** GitHub release bundle (`1.0.x`),
+   or with `cargo install dotrepo-cli` (pin a `1.0.x` version for production).
+   The `main` branch tracks a `2.0.0-alpha` development line with public API
+   changes. See [`docs/install.md`](docs/install.md) for platform bundles and
+   the VS Code extension package.
 2. Start a record in your repository:
 
 ```bash

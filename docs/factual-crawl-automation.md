@@ -471,10 +471,12 @@ because their head SHA is unchanged are recorded separately under each run's
 `uv run python scripts/render_unit_cost_report.py --runs
 index/telemetry/autonomous-runs.ndjson` to render a versioned per-category
 (`unchanged`/`changed`/`improved`) unit-cost summary — counts and mean/median
-wall time, network bytes/requests, tokens, and model calls — from the
-retained history. CPU time and peak memory are process-level and not yet
-collected anywhere in the pipeline; the report surfaces that as a documented
-gap rather than fabricating a zero.
+wall time, network bytes/requests, tokens, model calls, CPU time, and peak RSS
+— from the retained history. CPU time and peak memory are collected per crawl
+subprocess by `scripts/process_resources.py` (child `RUSAGE` CPU deltas plus
+best-effort process-group RSS sampling via `ps`) and stored on each `crawls`
+entry as `cpuTimeMs` / `peakMemoryBytes`. Legacy telemetry without those fields
+still reports `n/a` rather than fabricating a zero.
 
 Each recurring failure is also classified by **ecosystem** (rust, node, python,
 go, jvm, ruby, php, dotnet, elixir, erlang, cpp, or `unknown`) inferred from the
@@ -597,6 +599,37 @@ fixtures, deterministic fixes, calibration changes, or policy updates is a
 separate, not-yet-built step. See the module docstring in
 `scripts/audit_index_sample.py` for the exact weighting formula and its
 stated limits.
+
+### Audit cadence
+
+Run a risk-weighted sample on a fixed cadence so findings keep converting into
+fixtures and deterministic fixes:
+
+```bash
+# Weekly (or after any full-population recrawl): draw and archive a sample
+uv run python scripts/audit_index_sample.py \
+  --index-root index \
+  --output-json "index/telemetry/audit-sample-$(date -u +%Y%m%d).json" \
+  --output-md "index/telemetry/audit-sample-$(date -u +%Y%m%d).md"
+```
+
+Inspect the sample against `index/review-checklist.md`. Every actionable
+finding should become one of: a checked-in regression fixture, a parser or
+promotion fix, a calibration change, or an explicit policy note. Do not open a
+per-record human approval queue for routine overlays.
+
+Complementary scorecards (not a substitute for sampling):
+
+```bash
+uv run python scripts/render_intent_quality_scorecard.py --index-root index
+uv run python scripts/render_coverage_gaps.py --index-root index --limit 50
+```
+
+### Escalation canary
+
+See [`docs/m1-escalation-canary.md`](./m1-escalation-canary.md) for the
+procedure that closes the second-opinion / strong-remote live-call proof gap
+without treating confident polyglot abstention as a ladder failure.
 
 ## Non-goals
 

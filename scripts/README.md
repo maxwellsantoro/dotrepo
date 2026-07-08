@@ -30,8 +30,12 @@ under [`../docs/`](../docs/).
 | Autonomous index batch | `run_autonomous_index_batch.py`, `adjudication_openrouter_sidecar.py`, `check_autonomous_telemetry_gate.py`, `materialize_regression_fixture.py`, `test_adjudication_env.py` |
 | Review-batch planning | `plan_refresh_review_batches.py`, `plan_seed_review_batches.py`, `plan_index_growth_tranche.py`, `select_review_batch.py`, `render_review_batch_pull_request.py`, `render_seed_review_summary.py`, `render_refresh_plan_summary.py` |
 | Public surface | `fetch_pagedigest_baseline.py`, `render_public_pages_landing.py`, `render_index_growth_status.py`, `check_public_profile_coverage.py`, `check_public_quality_dashboard.py`, `build_public_lookup_workload.py`, `measure_public_lookup_efficiency.py`, `measure_public_factual_accuracy.py`, `diff_public_export_files.py`, `smoke_cloudflare_public_deploy.py`, `sync_cloudflare_public_snapshot.py` |
+| Quality scorecards | `render_intent_quality_scorecard.py`, `render_coverage_gaps.py`, `render_unit_cost_report.py`, `aggregate_lookup_misses.py` |
 | Audit sampling | `audit_index_sample.py` (read-only, local-only; see `docs/factual-crawl-automation.md`'s "Audit sampling" section) |
 | Operator gates | `check_operator_claim_gate.py` |
 | Shell helpers | `recrawl-batch.sh`, `use_runner_node22.sh` |
+| Shared modules | `language_family.py` (dominant-language ecosystem classifier), `process_resources.py` (CPU/RSS sampling for crawl subprocesses), `public_site_content.py` |
 
 Shared fixtures live under `scripts/fixtures/` and tests under `scripts/tests/`.
+Scripts may import sibling modules from this directory (add `scripts/` to
+`sys.path` when loaded via `importlib` in tests).

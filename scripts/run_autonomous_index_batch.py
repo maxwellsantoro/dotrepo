@@ -15,6 +15,12 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+_SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+from process_resources import run_with_resource_sample  # noqa: E402
+
 # Canonical way to invoke Python helpers under the uv-managed environment.
 # This makes the AGENTS.md "uv run" contract explicit and auditable.
 UV_PYTHON: list[str] = ["uv", "run", "python"]
@@ -262,6 +268,8 @@ def unchanged_skips_from_refresh_plan(refresh_plan_stdout: str) -> list[dict]:
                 "networkBytes": 0,
                 "adjudicationCalls": 0,
                 "tokensUsed": 0,
+                "cpuTimeMs": 0,
+                "peakMemoryBytes": 0,
             }
         )
     return unchanged
@@ -1421,17 +1429,20 @@ def main() -> int:
                     ]
                 )
             command_started = time.monotonic()
-            proc = run(
-                crawl_command,
-                check=False,
-                env=crawl_env,
-            )
+            print("+", " ".join(crawl_command), flush=True)
+            proc, resource_sample = run_with_resource_sample(crawl_command, env=crawl_env)
             # Always available (success or failure): the wall time of the
             # whole `cargo run ... crawl` subprocess as observed from this
             # orchestrator, including process startup overhead that the
             # narrower in-process `wallTimeMs`/`totalWallTimeMs` (reported
             # only on success, from dotrepo-crawler itself) excludes.
             entry["commandWallTimeMs"] = round((time.monotonic() - command_started) * 1000)
+            if resource_sample.cpu_time_ms is not None:
+                entry["cpuTimeMs"] = resource_sample.cpu_time_ms
+            if resource_sample.peak_memory_bytes is not None:
+                entry["peakMemoryBytes"] = resource_sample.peak_memory_bytes
+            if resource_sample.note:
+                entry["resourceSampleNote"] = resource_sample.note
             entry["category"] = "changed"
             if proc.returncode == 0:
                 payload = json.loads(proc.stdout)

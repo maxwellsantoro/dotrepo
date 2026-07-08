@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { handleRequest } from "../src/worker.mjs";
+import { handleRequest, logLookupMiss } from "../src/worker.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..", "..", "..");
@@ -960,4 +960,28 @@ test("preserves equal-authority conflict values from the snapshot", async () => 
     json.links.self,
     "/dotrepo/v0/repos/github.com/example/orbit/query?path=repo.description"
   );
+});
+
+test("logLookupMiss emits structured DOTREPO_LOOKUP_MISS lines", () => {
+  const lines = [];
+  const original = console.log;
+  console.log = (...args) => {
+    lines.push(args.join(" "));
+  };
+  try {
+    logLookupMiss(
+      { host: "github.com", owner: "acme", repo: "widgets" },
+      "query"
+    );
+  } finally {
+    console.log = original;
+  }
+  assert.equal(lines.length, 1);
+  assert.match(lines[0], /^DOTREPO_LOOKUP_MISS \{/);
+  const payload = JSON.parse(lines[0].slice("DOTREPO_LOOKUP_MISS ".length));
+  assert.equal(payload.host, "github.com");
+  assert.equal(payload.owner, "acme");
+  assert.equal(payload.repo, "widgets");
+  assert.equal(payload.route, "query");
+  assert.ok(payload.ts);
 });

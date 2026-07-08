@@ -1220,7 +1220,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
   </div>
   <script>
     (() => {{
-      const RESULT_LIMIT = 60;
+      const RESULT_PAGE = 60;
       const catalog = document.querySelector("[data-inventory-url]");
       const input = document.getElementById("repository-search");
       const grid = document.getElementById("repository-grid");
@@ -1228,6 +1228,8 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
       const noResults = document.getElementById("repository-no-results");
       const inventoryUrl = catalog.dataset.inventoryUrl;
       let repositories = [];
+      let visibleLimit = RESULT_PAGE;
+      let loadMoreButton = null;
 
       function compactText(value, limit) {{
         const cleaned = String(value || "").trim().replace(/\\s+/g, " ");
@@ -1322,12 +1324,32 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
         return article;
       }}
 
-      function updateResults() {{
+      function ensureLoadMore() {{
+        if (loadMoreButton) {{
+          return loadMoreButton;
+        }}
+        loadMoreButton = document.createElement("button");
+        loadMoreButton.type = "button";
+        loadMoreButton.className = "cta cta--secondary";
+        loadMoreButton.id = "repository-load-more";
+        loadMoreButton.style.marginTop = "16px";
+        loadMoreButton.addEventListener("click", () => {{
+          visibleLimit += RESULT_PAGE;
+          updateResults({{ preserveLimit: true }});
+        }});
+        grid.parentElement.appendChild(loadMoreButton);
+        return loadMoreButton;
+      }}
+
+      function updateResults(options = {{}}) {{
         const query = input.value.trim().toLowerCase();
+        if (!options.preserveLimit) {{
+          visibleLimit = RESULT_PAGE;
+        }}
         const matches = query
           ? repositories.filter((entry) => entry.searchIndex.includes(query))
           : repositories;
-        const visible = matches.slice(0, RESULT_LIMIT);
+        const visible = matches.slice(0, visibleLimit);
         grid.replaceChildren(...visible.map(renderCard));
         const total = matches.length;
         const shown = visible.length;
@@ -1342,6 +1364,14 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
         }}
         noResults.hidden = total !== 0;
 
+        const more = ensureLoadMore();
+        if (shown < total) {{
+          more.hidden = false;
+          more.textContent = `Show more (${{Math.min(RESULT_PAGE, total - shown)}} of ${{total - shown}} remaining)`;
+        }} else {{
+          more.hidden = true;
+        }}
+
         const url = new URL(window.location.href);
         if (query) {{
           url.searchParams.set("q", query);
@@ -1351,7 +1381,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
         window.history.replaceState(null, "", url);
       }}
 
-      input.addEventListener("input", updateResults);
+      input.addEventListener("input", () => updateResults());
 
       fetch(inventoryUrl)
         .then((response) => {{

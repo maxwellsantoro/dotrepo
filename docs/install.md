@@ -21,9 +21,21 @@ a different published release explicitly.
 
 ## Preferred install path
 
-Download the latest matching release bundle for your platform from the GitHub
-release assets for the current tag, then extract it and put the binaries from
-`bin/` on your `PATH`.
+Download the latest matching **stable** release bundle for your platform from
+the GitHub release assets (currently the `v1.0.x` line, for example `v1.0.1`),
+then extract it and put the binaries from `bin/` on your `PATH`.
+
+### Stable vs development line
+
+| Line | Where | Who should use it |
+|------|--------|-------------------|
+| **Stable `1.0.x`** | Latest non-prerelease GitHub release and crates.io versions `1.0.x` | End users, CI pins, MCP clients in production |
+| **Development `2.0.0-alpha.x`** | `main` and prerelease tags only | Contributors and early adopters accepting public Rust API changes (for example `FieldConfidence::Suspect`) |
+
+Do not install crates.io `2.0.0-alpha.0` (or build `main`) into production agent
+toolchains unless you intend to track breaking API changes. The default
+`dotrepo ci init` scaffold pins the latest **stable** published release, not
+the version of a local development binary used to generate the workflow.
 
 ## Install from crates.io
 
@@ -31,9 +43,15 @@ The toolchain crates are published to crates.io, so a Rust toolchain is the
 only prerequisite:
 
 ```bash
-cargo install dotrepo        # installs `dotrepo`
+cargo install dotrepo        # installs `dotrepo` (prefer latest 1.0.x for production)
 cargo install dotrepo-mcp    # installs `dotrepo-mcp`
 cargo install dotrepo-lsp    # installs `dotrepo-lsp`
+```
+
+Pin explicitly when you need reproducibility:
+
+```bash
+cargo install dotrepo --version 1.0.1
 ```
 
 `dotrepo` is a thin alias for `dotrepo-cli`; install `dotrepo-cli` instead if

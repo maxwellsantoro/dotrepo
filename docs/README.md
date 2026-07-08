@@ -25,6 +25,8 @@ project tooling rather than additional plan documents.
 - [`public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
 - [`public-factual-accuracy-benchmark.md`](./public-factual-accuracy-benchmark.md)
 - [`public-search-quality-benchmark.md`](./public-search-quality-benchmark.md)
+- [`distribution.md`](./distribution.md) - how agents and tools discover and use the public surface
+- [`external-consumer-integration.md`](./external-consumer-integration.md) - template for non-operator integrations
 - [`../benchmarks/head-to-head/`](../benchmarks/head-to-head/) - falsifiable GitHub-baseline vs dotrepo benchmark harness
 - [`../index/README.md`](../index/README.md)
 
@@ -37,6 +39,7 @@ project tooling rather than additional plan documents.
 ## Operate the system
 
 - [`factual-crawl-automation.md`](./factual-crawl-automation.md)
+- [`m1-escalation-canary.md`](./m1-escalation-canary.md) - second-opinion / strong-remote live proof procedure
 - [`public-export-workflow.md`](./public-export-workflow.md)
 - [`public-release-checklist.md`](./public-release-checklist.md)
 - [`mcp-registry-publishing.md`](./mcp-registry-publishing.md)

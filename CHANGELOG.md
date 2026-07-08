@@ -5,12 +5,35 @@
 The post-1.0 tree includes public Rust API changes, including the new
 `FieldConfidence::Suspect` variant. Development therefore continues on a 2.0
 prerelease line so the source at `main` cannot be confused with the immutable
-`v1.0.1` release and crates.io packages.
+`v1.0.1` release and crates.io packages. Production installs should stay on
+stable `1.0.x` — see [`docs/install.md`](./docs/install.md).
 
 Post-1.0 growth, hardening, and operational-proof work toward the roadmap
 milestones. Direction and gates live in [`ROADMAP.md`](./ROADMAP.md); the counts
 below are a 2026-06-29 snapshot and refresh with each run from the generated
 growth, coverage, promotion, and telemetry artifacts.
+
+### Operator quality and distribution tooling
+
+- Intent-level quality scorecard with soft error budgets
+  (`scripts/render_intent_quality_scorecard.py`) covering overview, execution,
+  documentation, security, ownership, and discovery intents by language family
+- Coverage-gap report for build/test/security recrawl prioritization
+  (`scripts/render_coverage_gaps.py`)
+- Shared `scripts/language_family.py` classifier (deduplicated across growth,
+  audit, factual-accuracy, and scorecard scripts)
+- Process-level CPU and peak-RSS sampling on autonomous crawl subprocesses
+  (`scripts/process_resources.py`) wired into unit-cost reports
+- Hosted lookup-miss demand telemetry: Worker emits `DOTREPO_LOOKUP_MISS` log
+  lines; `scripts/aggregate_lookup_misses.py` builds top-miss reports
+- Distribution and external-consumer docs
+  (`docs/distribution.md`, `docs/external-consumer-integration.md`)
+- Milestone 1 escalation canary procedure (`docs/m1-escalation-canary.md`)
+- Public repositories catalog: paginated “Show more”, URL `?q=` search restore
+- Documented split plans for `import/escalation.rs` and `crawler/pipeline.rs`
+- Install docs clarify stable `1.0.x` vs `2.0.0-alpha` development line
+- `ROADMAP.md` rewritten for scannable active execution order, current index
+  snapshot, and aligned M1/distribution/demand status
 
 ### Index growth
 

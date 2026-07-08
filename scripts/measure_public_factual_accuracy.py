@@ -2,42 +2,19 @@
 
 import argparse
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+_SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+from language_family import inferred_language_family  # noqa: E402
 
 SCHEMA = "dotrepo-public-factual-accuracy/v0"
 WORKLOAD_SCHEMA = "dotrepo-public-factual-accuracy-workload/v0"
-
-# Keep in sync with LANGUAGE_FAMILIES / inferred_language_family in
-# scripts/render_index_growth_status.py. Scripts under scripts/ are standalone
-# (see scripts/README.md), so this classifier is duplicated rather than
-# imported; both copies must classify manifests into the same families.
-LANGUAGE_FAMILIES = ("Rust", "TypeScript / JavaScript", "Python", "Go", "Other")
-
-
-def inferred_language_family(manifest: Any) -> str:
-    # Classifies by the *dominant* language only (repo.languages[0]), not by
-    # whether a language appears anywhere in the list -- see the matching
-    # comment in render_index_growth_status.py's copy of this function for
-    # the full rationale (an any-occurrence check misclassified repos with a
-    # minor vendored/dependency language into the wrong family).
-    if not isinstance(manifest, dict):
-        return "Other"
-    languages = [
-        str(language).lower() for language in manifest.get("repo", {}).get("languages") or []
-    ]
-    dominant = languages[0] if languages else ""
-    if dominant == "rust":
-        return "Rust"
-    if dominant == "go":
-        return "Go"
-    if dominant in {"python", "cython"}:
-        return "Python"
-    if dominant in {"typescript", "javascript", "tsx", "jsx", "vue", "svelte"}:
-        return "TypeScript / JavaScript"
-    return "Other"
 
 
 def parse_args() -> argparse.Namespace:

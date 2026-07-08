@@ -89,7 +89,9 @@ class PublicPageRendererTests(unittest.TestCase):
         self.assertIn('id="repository-result-count"', rendered)
         self.assertIn('data-inventory-url="/v0/repos/index.json"', rendered)
         self.assertIn("fetch(inventoryUrl)", rendered)
-        self.assertIn("const RESULT_LIMIT = 60", rendered)
+        self.assertIn("const RESULT_PAGE = 60", rendered)
+        self.assertIn("repository-load-more", rendered)
+        self.assertIn('searchParams.get("q")', rendered)
         self.assertIn("queryInputHref(item)", rendered)
         self.assertNotIn('data-search-index="', rendered)
 

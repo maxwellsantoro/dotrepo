@@ -20,10 +20,11 @@ category:
   advanced on that ladder — a real completeness/quality gain, not just
   avoided or repeated work.
 
-CPU time and peak memory are process-level (see ROADMAP Milestone 1 item 4)
-and are not currently collected anywhere in the pipeline, so those columns
-are reported as ``null``/"not collected" rather than fabricated; this is a
-documented gap, not an oversight.
+CPU time and peak memory are collected by
+``scripts/run_autonomous_index_batch.py`` via ``process_resources`` (child
+``RUSAGE`` CPU deltas plus best-effort process-group RSS sampling). Older
+telemetry lines without those fields still report ``null``/"not collected"
+rather than fabricating zero.
 """
 
 from __future__ import annotations
@@ -129,10 +130,33 @@ def summarize_category(category: str, entries: list[dict]) -> dict[str, Any]:
         for value in (number_or_none(entry.get("adjudicationCalls")) for entry in entries)
         if value is not None
     ]
-    # CPU time / peak memory are process-level (ROADMAP Milestone 1 item 4)
-    # and are not collected by any layer of the pipeline today; report the
-    # gap explicitly rather than defaulting to zero, which would look like a
-    # real (and misleadingly cheap) measurement.
+    cpu_times = [
+        value
+        for value in (number_or_none(entry.get("cpuTimeMs")) for entry in entries)
+        if value is not None
+    ]
+    peak_memory = [
+        value
+        for value in (number_or_none(entry.get("peakMemoryBytes")) for entry in entries)
+        if value is not None
+    ]
+    # Prefer real samples from process_resources. When a category has no
+    # samples (legacy telemetry), keep mean null with an explicit note rather
+    # than inventing zero cost.
+    cpu_summary: dict[str, Any] = {
+        "mean": mean_or_none(cpu_times),
+        "median": median_or_none(cpu_times),
+        "sampled": len(cpu_times),
+    }
+    if not cpu_times:
+        cpu_summary["note"] = "not collected"
+    peak_summary: dict[str, Any] = {
+        "mean": mean_or_none(peak_memory),
+        "median": median_or_none(peak_memory),
+        "sampled": len(peak_memory),
+    }
+    if not peak_memory:
+        peak_summary["note"] = "not collected"
     return {
         "count": len(entries),
         "wallTimeMs": {
@@ -147,8 +171,8 @@ def summarize_category(category: str, entries: list[dict]) -> dict[str, Any]:
         },
         "tokensUsed": {"mean": mean_or_none(tokens), "sampled": len(tokens)},
         "modelCalls": {"mean": mean_or_none(model_calls), "sampled": len(model_calls)},
-        "cpuTimeMs": {"mean": None, "sampled": 0, "note": "not collected"},
-        "peakMemoryBytes": {"mean": None, "sampled": 0, "note": "not collected"},
+        "cpuTimeMs": cpu_summary,
+        "peakMemoryBytes": peak_summary,
     }
 
 
@@ -182,19 +206,21 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- runs inspected: {report['runCount']}",
         f"- repository outcomes inspected: {report['totalEntries']}",
         "",
-        "| category | count | mean wall (ms) | median wall (ms) | mean net bytes | mean net requests | mean tokens | mean model calls |",
-        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| category | count | mean wall (ms) | median wall (ms) | mean CPU (ms) | mean peak RSS (bytes) | mean net bytes | mean net requests | mean tokens | mean model calls |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for category in CATEGORIES:
         summary = report["categories"].get(category)
         if summary is None:
             continue
         lines.append(
-            "| {category} | {count} | {wall_mean} | {wall_median} | {net_bytes} | {net_requests} | {tokens} | {model_calls} |".format(
+            "| {category} | {count} | {wall_mean} | {wall_median} | {cpu_mean} | {rss_mean} | {net_bytes} | {net_requests} | {tokens} | {model_calls} |".format(
                 category=category,
                 count=summary["count"],
                 wall_mean=format_number(summary["wallTimeMs"]["mean"]),
                 wall_median=format_number(summary["wallTimeMs"]["median"]),
+                cpu_mean=format_number(summary["cpuTimeMs"]["mean"]),
+                rss_mean=format_number(summary["peakMemoryBytes"]["mean"], digits=0),
                 net_bytes=format_number(summary["networkBytes"]["mean"], digits=0),
                 net_requests=format_number(summary["networkRequests"]["mean"], digits=1),
                 tokens=format_number(summary["tokensUsed"]["mean"], digits=0),
@@ -203,9 +229,10 @@ def render_markdown(report: dict[str, Any]) -> str:
         )
     lines.append("")
     lines.append(
-        "CPU time and peak memory are process-level and are not currently collected anywhere "
-        "in the pipeline (documented gap; see ROADMAP Milestone 1 item 4), so those columns are "
-        "omitted from this table rather than reported as zero."
+        "CPU time is measured from child `RUSAGE` deltas; peak RSS is best-effort "
+        "process-group sampling via `ps` during each crawl subprocess "
+        "(`scripts/process_resources.py`). Legacy telemetry without those fields "
+        "shows `n/a` rather than fabricated zeros."
     )
     lines.append("")
     return "\n".join(lines)

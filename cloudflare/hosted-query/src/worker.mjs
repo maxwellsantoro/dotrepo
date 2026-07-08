@@ -10,6 +10,30 @@ export const PUBLIC_ERROR_CODES = {
   internalError: "internal_error"
 };
 
+/**
+ * Emit a structured log line for repository-not-found traffic so operators can
+ * aggregate demand signals (see scripts/aggregate_lookup_misses.py).
+ *
+ * Format:
+ *   DOTREPO_LOOKUP_MISS {"host":"...","owner":"...","repo":"...","route":"...","ts":"..."}
+ */
+export function logLookupMiss(identity, route) {
+  const host = identity?.host ?? "";
+  const owner = identity?.owner ?? "";
+  const repo = identity?.repo ?? "";
+  if (!host || !owner || !repo) {
+    return;
+  }
+  const payload = {
+    host,
+    owner,
+    repo,
+    route: route ?? "unknown",
+    ts: new Date().toISOString()
+  };
+  console.log(`DOTREPO_LOOKUP_MISS ${JSON.stringify(payload)}`);
+}
+
 function normalizeHost(host) {
   return (host ?? "").trim().toLowerCase();
 }
@@ -338,7 +362,8 @@ async function loadInventorySnapshot(env, request) {
   return response.json();
 }
 
-function repositoryNotFoundMessage(identity) {
+function repositoryNotFoundMessage(identity, route = "repository") {
+  logLookupMiss(identity, route);
   return `repository not found in index: repos/${identity.host}/${identity.owner}/${identity.repo}/record.toml`;
 }
 
@@ -1239,7 +1264,7 @@ export async function handleRequest(request, env) {
           requestedPath,
           fallbackFreshness,
           PUBLIC_ERROR_CODES.repositoryNotFound,
-          `repository not found in index: repos/${identity.host}/${identity.owner}/${identity.repo}/record.toml`
+          repositoryNotFoundMessage(identity, "query")
         )
       );
     }

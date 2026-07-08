@@ -79,12 +79,18 @@ import argparse
 import json
 import math
 import random
+import sys
 import tomllib
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+_SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+from language_family import inferred_language_family  # noqa: E402
 
 SCHEMA = "dotrepo/audit-sample/v0.1"
 
@@ -186,29 +192,6 @@ def identity_from_record_path(index_root: Path, path: Path) -> str:
     relative = path.relative_to(index_root / "repos")
     host, owner, repo, _record = relative.parts
     return f"{host}/{owner}/{repo}"
-
-
-def inferred_language_family(record: dict[str, Any]) -> str:
-    # Classifies by the *dominant* language only (repo.languages[0]), not by
-    # whether a language appears anywhere in the list -- see the matching
-    # comment in render_index_growth_status.py's copy of this function for
-    # the full rationale (an any-occurrence check misclassified repos with a
-    # minor vendored/dependency language into the wrong family; this exact
-    # bug is what this sampler surfaced for docker/awesome-compose and
-    # firecrawl/firecrawl).
-    languages = [
-        str(language).lower() for language in record.get("repo", {}).get("languages") or []
-    ]
-    dominant = languages[0] if languages else ""
-    if dominant == "rust":
-        return "Rust"
-    if dominant == "go":
-        return "Go"
-    if dominant in {"python", "cython"}:
-        return "Python"
-    if dominant in {"typescript", "javascript", "tsx", "jsx", "vue", "svelte"}:
-        return "TypeScript / JavaScript"
-    return "Other"
 
 
 def load_records(index_root: Path) -> list[dict[str, Any]]:
