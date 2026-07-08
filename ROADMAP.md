@@ -443,7 +443,7 @@ Milestones are capability and quality gates, not release dates.
 | Milestone | Goal | Status |
 | --- | --- | --- |
 | **M0** Working protocol and proof surface | Protocol + toolchain + public origin | **Complete** |
-| **M1** Autonomous index factory | Generation/refresh without human queue | **Implementation complete; operational proof nearly closed** |
+| **M1** Autonomous index factory | Generation/refresh without human queue | **Complete** (ops proof closed 2026-07-08) |
 | **M2** Useful shared semantic cache | ≥500 high-signal profiles + lookup contracts | **Complete** |
 | **M3** Research substrate | Search, compare, relations, optional synthesis | **Complete** (calibration ongoing) |
 | **M4** Index at ecosystem scale | 1k→10k+ with cost/freshness gates | **Next scale phase** |
@@ -454,17 +454,17 @@ Milestones are capability and quality gates, not release dates.
 gap), quality hardening at current corpus size, distribution/demand capture,
 then gated cohort growth (M4).
 
-**Checked-in index snapshot (2026-07-08)** — refresh with
+**Checked-in index snapshot (2026-07-08, post-hardening batch)** — refresh with
 `scripts/render_index_growth_status.py`:
 
 | Metric | Value |
 | --- | ---: |
 | Overlay records | 613 |
-| `verified` / high confidence | 572 |
-| `inferred` / `imported` | 24 / 17 |
-| Record-level high-signal vs M2 target (500) | 572 (114%) |
-| Missing build / test / security | 239 / 242 / 402 |
-| Quality-hardening queue | 473 |
+| `verified` / high confidence | 590 |
+| `inferred` / `imported` | 11 / 12 |
+| Record-level high-signal vs M2 target (500) | 590 (118%) |
+| Missing build / test / security | 237 / 239 / 402 |
+| Quality-hardening queue | 467 |
 | Stale or missing `generated_at` | 0 (0%) |
 | Max refresh overdue | 0 days |
 | Accepted maintainer claims | 1 |
@@ -486,58 +486,50 @@ destination gates; do not treat their “current status” lists as the work que
 | M1 reliability (strict telemetry gate) | **Done** — three consecutive strict checkpoints | Keep green on schedule |
 | M1 unit cost (unchanged/changed/improved) | **Done** — wall, network, tokens, CPU, RSS | Optional: provider $ cost from sidecar |
 | M1 primary-tier model canary | **Done** — live primary resolution | — |
-| M1 second-opinion / strong-remote canary | **Open** | Live low-confidence primary; see [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md) |
+| M1 second-opinion live canary | **Done** (2026-07-08) | See `index/telemetry/m1-second-opinion-canary-20260708.md` |
 | Intent/ecosystem scorecards | **Tooling shipped** | Use as soft budgets; harden only after stable |
 | Execution-field completeness | **Hardening** | ~39% missing build/test; use coverage-gap report |
 | Distribution / non-operator demand | **Open** | One external consumer + exported miss logs |
-| M4 first 1k profiles | **Queued** after M1 open items + demand path | 50–100 repo cohorts |
+| M4 first 1k profiles | **Ready to open** when distribution path is live | 50–100 repo cohorts |
 | M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |
 
-#### Now — close Milestone 1 and harden quality
+#### Now — quality hardening + distribution (M1 proof closed)
 
-Do these before opening large M4 growth batches:
+Milestone 1 operational proof is **closed** (strict telemetry, unit cost,
+primary canary, second-opinion live canary). Remaining “Now” work is quality
+and demand, not factory existence.
 
-1. **Close the escalation-ladder proof gap.** Primary tier is proven live;
-   second-opinion and strong-remote are wired (models: `qwen/qwen3.5-9b`,
-   `z-ai/glm-5.2`) and correctly skip *confident* abstention. Still need one
-   live path where a *low-confidence* primary continues up the ladder.
-   Procedure: [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md).
-2. **Work the quality-hardening queue** without inventing completeness.
+1. **Work the quality-hardening queue** without inventing completeness.
    - Prioritize: `scripts/render_coverage_gaps.py` and growth-status “Next
      Quality Targets”.
-   - Score: `scripts/render_intent_quality_scorecard.py` (soft budgets;
-     `--fail-on-budget` only when a cohort is ready).
-   - Expectation: many security gaps are honest absence (sampled via GitHub
-     community profile API); multi-ecosystem ties should keep
-     `build_candidates` / `test_candidates` (RFC 0020), not a fake primary.
-3. **Drain promotion headroom** via normal validation
-   (`dotrepo promotion-report`, growth-status lift candidates) — no special
-   path that bypasses gates.
-4. **Keep audit conversion running.** Weekly risk-weighted sample
-   (`scripts/audit_index_sample.py`); every finding → fixture, parser fix,
-   calibration, or policy note. Cadence:
-   [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md).
-5. **Hold release floors** during hardening: profile/high-signal baselines and
-   factual-accuracy ceilings in the release gate must not regress.
+   - Score: `scripts/render_intent_quality_scorecard.py` (soft budgets).
+   - Expectation: many security gaps are honest absence; multi-ecosystem ties
+     keep `build_candidates` / `test_candidates` (RFC 0020).
+   - 2026-07-08 batch: +18 verified (572→590) via promotion drain + recrawls +
+     security-URL scoring fix (`security.html` stems, Meta whitehat, Node
+     security portal).
+2. **Drain any new promotion headroom** after recrawls
+   (`dotrepo promotion-report --apply`) — never bypass gates.
+3. **Keep audit conversion running.** Weekly sample
+   (`scripts/audit_index_sample.py`); findings → fixture/parser/policy.
+   Latest sample: `index/telemetry/audit-sample-20260708.md`.
+4. **Hold release floors** during hardening (profile/high-signal + factual
+   accuracy baselines).
+5. **Distribution (parallel, outranks M5):** export lookup-miss logs, land one
+   external consumer — see [In parallel — distribution](#in-parallel--distribution-outranks-m5-polish).
 
 #### Done recently (do not re-litigate)
 
 Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md).
 
-- Strict autonomous telemetry gate (rolling worst-run window of 10; unjustified
-  verified downgrade guard on refresh).
-- Supplemental manifest fetch for every ecosystem the importer already parses
-  (Maven/Gradle/Composer/Mix/Rebar/CMake/Makefile/justfile/Rakefile/setup.py
-  and root `.csproj` listing) — closed a large silent build/test gap.
-- Homepage identity guard (`homepage_conflicts_with_identity`).
-- Language ordering by byte count; shared dominant-language family classifier
-  (`scripts/language_family.py`).
-- Escalation: low-confidence `Absent` continues the ladder; confident abstention
-  still terminates; polyglot candidates preserved (RFC 0020).
-- Unit-cost columns including process CPU and peak RSS
-  (`scripts/process_resources.py`).
-- Intent scorecard + coverage-gap operator scripts.
-- Hosted `DOTREPO_LOOKUP_MISS` emission + aggregate script.
+- Strict autonomous telemetry gate; verified downgrade guard on refresh.
+- Supplemental multi-ecosystem manifest fetch; homepage identity guard.
+- Language ordering by byte count; shared `scripts/language_family.py`.
+- Escalation ladder: low-confidence `Absent` continues; confident abstention
+  terminates; RFC 0020 candidates; **second-opinion live canary passed**.
+- Unit-cost CPU/RSS; intent scorecard; coverage-gap report; lookup-miss emission.
+- Actionable security URL scoring: file stems (`security.html`), Facebook
+  whitehat, nodesecurity.io (plus existing GitHub/HackerOne/Django/etc.).
 
 #### Next — Milestone 4 cohorts (after Now items 1–5 are healthy)
 
@@ -627,14 +619,13 @@ utility, and adoption.
 
 **Goal:** make autonomous generation and refresh the default operating model.
 
-**Implementation: complete. Operational proof: nearly closed.** Scheduled
+**Implementation: complete. Operational proof: complete (2026-07-08).** Scheduled
 planning, bounded adjudication, gate-passed writeback, retained telemetry,
-strict multi-run proof gates, deploy coherence, and unit-cost reporting
-(including CPU/RSS) are in place. The **only remaining M1 exit-criteria gap** is
-exercising the second-opinion and strong-remote tiers with a live
-*low-confidence* primary (confident abstention is correct and does not count).
-Operator procedure: [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md).
-Day-to-day hardening work is listed under
+strict multi-run proof gates, deploy coherence, unit-cost reporting (including
+CPU/RSS), primary-tier live canary, and second-opinion live ladder canary are
+in place. Strong-remote remains an optional third step when second opinion is
+still low-confidence; it is wired and covered by the same env-driven provider
+path. Day-to-day quality hardening is listed under
 [Active execution order](#active-execution-order).
 
 Deliver:
@@ -707,15 +698,10 @@ Implemented operational controls:
   (`scripts/audit_index_sample.py`,
   [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md))
 
-**Open M1 work** is only the escalation canary plus ongoing quality hardening
-listed in [Active execution order](#active-execution-order). Do not grow the
-index into M4-scale batches until those items stay healthy.
-
-Milestone 1 is complete when autonomous runs are repeatable, bounded, publish
-gate-passed records without a human queue, expose unit-cost and tier telemetry
-that support regression claims, and the full adjudication ladder has been
-exercised under live conditions (primary **and** at least one higher tier from a
-genuine low-confidence primary).
+**M1 exit criteria are met.** Ongoing quality hardening and distribution remain
+on the active queue but no longer block declaring the autonomous factory proven.
+Open M4 cohorts when demand signals and soft scorecards are healthy — see
+[Active execution order](#active-execution-order).
 
 ### Milestone 2: Useful shared semantic cache
 

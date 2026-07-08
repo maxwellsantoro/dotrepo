@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/langchain-ai/langchain"
-generated_at = "2026-07-06T18:50:38.767045Z"
+generated_at = "2026-07-08T22:51:14.270829Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
-    "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/_compile_integration_test.yml`. Inferred `repo.build` from `.github/workflows/_compile_integration_test.yml`. Left `repo.test` unset because `.github/workflows/_compile_integration_test.yml`, `.github/workflows/_test.yml`, `.github/workflows/_test_pydantic.yml`, and `.github/workflows/_test_vcr.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `.github/workflows/_test.yml` after model escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "langchain"
@@ -29,7 +29,7 @@ languages = [
     "Dockerfile",
     "JavaScript",
 ]
-build = "uv run pytest -m compile tests/integration_tests"
+test = "make test PYTEST_EXTRA=-q"
 topics = [
     "ai",
     "anthropic",
@@ -53,22 +53,6 @@ topics = [
     "typescript",
 ]
 
-[[repo.test_candidates]]
-command = "uv run pytest -m compile tests/integration_tests"
-source = ".github/workflows/_compile_integration_test.yml"
-
-[[repo.test_candidates]]
-command = "make test PYTEST_EXTRA=-q"
-source = ".github/workflows/_test.yml"
-
-[[repo.test_candidates]]
-command = "make test"
-source = ".github/workflows/_test_pydantic.yml"
-
-[[repo.test_candidates]]
-command = "make test_vcr"
-source = ".github/workflows/_test_vcr.yml"
-
 [owners]
 maintainers = [
     "@ccurme",
@@ -84,6 +68,6 @@ archived = false
 clone_url = "https://github.com/langchain-ai/langchain.git"
 default_branch = "master"
 fork = false
-head_sha = "2d8100c4faef2e4a0ec7ab74536fe7a9d9ae551e"
+head_sha = "123d83282a6d864a0711c314e9cf55bd143aacba"
 html_url = "https://github.com/langchain-ai/langchain"
-stars = 141107
+stars = 141317

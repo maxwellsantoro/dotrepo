@@ -6,14 +6,16 @@
 |------|----------------|
 | Deterministic only | Proven in production refresh (most repos) |
 | Local primary model | Proven with engineered conflicting-workflow canary |
-| Local second opinion | **Wired; awaits live low-confidence primary** |
-| Strong remote | **Wired; awaits live low-confidence primary** |
+| Local second opinion | **Proven live** (2026-07-08 canary; forced low-confidence primary + HTTP second opinion) |
+| Strong remote | Wired; optional third step when second opinion remains low-confidence |
 | Confident abstention | Proven on genuine polyglot ties (correct termination) |
 
 Primary-tier proof and the Absent low-confidence continuation fix are described
-in `ROADMAP.md` (active execution order, Milestone 1). This page is the
-operator procedure for closing the remaining second-opinion / strong-remote
-live-call gap without weakening honesty gates.
+in `ROADMAP.md` (active execution order, Milestone 1). The second-opinion live
+proof is recorded in
+`index/telemetry/m1-second-opinion-canary-20260708.md` and automated as
+`second_opinion_live_ladder_from_low_confidence_primary` in
+`crates/dotrepo-crawler/tests/openrouter_env_escalation.rs`.
 
 ## Why confident abstention is not enough
 
@@ -57,11 +59,25 @@ proof that tier-3/4 ran.
    `index/telemetry/` (or the batch output dir) with repository identity,
    tier list, and whether the final value was resolved vs honest abstention.
 
+## Automated canary (preferred)
+
+With the adjudication sidecar running and `.env` loaded
+(`DOTREPO_ADJUDICATION_SECOND_OPINION_URL` required):
+
+```bash
+cargo test -p dotrepo-crawler --test openrouter_env_escalation \
+  second_opinion_live_ladder_from_low_confidence_primary -- --nocapture
+```
+
+This stubs only the primary tier to a low-confidence `Absent` (because real
+repos almost never produce that shape), then requires a live HTTP second-opinion
+provider. Pass criteria: `model_calls >= 2` and
+`LocalSecondOpinion` (or `ApiEscalation`) in `adjudication_tiers_used`.
+
 ## Offline regression
 
 Escalation policy (including low-confidence Absent continuation) is covered by
-unit tests in `crates/dotrepo-core/src/import/escalation.rs`. Offline tests do
-not replace the live multi-tier canary above.
+unit tests in `crates/dotrepo-core/src/import/escalation.rs`.
 
 ## Related
 

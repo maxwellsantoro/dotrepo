@@ -35,6 +35,20 @@ growth, coverage, promotion, and telemetry artifacts.
 - `ROADMAP.md` rewritten for scannable active execution order, current index
   snapshot, and aligned M1/distribution/demand status
 
+### Index hardening batch (2026-07-08)
+
+- Drained promotion headroom: **+18 verified** overlays (572→590), including
+  django, langchain, ruff, next.js, imgui, rust-analyzer, react, zstd, and others
+- Targeted recrawls of non-verified / quality-queue repositories with live
+  GitHub + adjudication sidecar (several `local_primary` resolutions)
+- Security URL scoring: treat `security.html` path stems, Meta
+  `facebook.com/whitehat`, and `nodesecurity.io` as actionable reporting surfaces
+- **M1 second-opinion live canary passed**
+  (`second_opinion_live_ladder_from_low_confidence_primary`; record in
+  `index/telemetry/m1-second-opinion-canary-20260708.md`)
+- Risk-weighted audit sample archived at
+  `index/telemetry/audit-sample-20260708.md`
+
 ### Index growth
 
 - Five bounded discovery waves across non-overlapping GitHub star bands brought

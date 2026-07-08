@@ -105,6 +105,14 @@ pub(crate) fn is_actionable_security_url(url: &str) -> bool {
         || lower.contains("chromium.org/") && lower.contains("security")
         || lower.contains("notion.site/") && lower.contains("vulnerability")
         || lower.contains("contribute.freecodecamp.org/") && lower.contains("security")
+        // Meta / Facebook coordinated disclosure.
+        || lower.contains("facebook.com/whitehat")
+        || lower.contains("www.facebook.com/whitehat")
+        // Historical Node security reporting portal.
+        || lower.contains("nodesecurity.io/")
+        // Project books/docs with a dedicated security page (stem match).
+        || lower.contains("/security.html")
+        || lower.ends_with("security.html")
     {
         return true;
     }
@@ -112,12 +120,7 @@ pub(crate) fn is_actionable_security_url(url: &str) -> bool {
     // Generic first-party policy URLs with an explicit security path segment.
     if let Some(host) = security_url_host(&lower) {
         if !is_generic_issue_or_homepage_path(&lower, host)
-            && security_path_segments(&lower).any(|segment| {
-                matches!(
-                    segment,
-                    "security" | "vulnerability" | "vulnerabilities" | "responsible-disclosure"
-                )
-            })
+            && security_path_segments(&lower).any(|segment| is_security_path_token(segment))
         {
             return true;
         }
@@ -153,9 +156,24 @@ fn security_url_host(lower: &str) -> Option<&str> {
 }
 
 fn security_path_segments(lower: &str) -> impl Iterator<Item = &str> {
+    // Keep bare path tokens and file stems such as `security.html` (the old
+    // filter dropped any segment containing `.`, which silently rejected real
+    // first-party security doc URLs like rust-analyzer's security.html page).
     lower
         .split(['/', '?', '#'])
-        .filter(|segment| !segment.is_empty() && !segment.contains('.'))
+        .filter(|segment| !segment.is_empty())
+        .filter(|segment| !segment.contains(':')) // drop scheme leftovers
+}
+
+fn is_security_path_token(segment: &str) -> bool {
+    let token = segment
+        .rsplit_once('.')
+        .map(|(stem, _ext)| stem)
+        .unwrap_or(segment);
+    matches!(
+        token,
+        "security" | "vulnerability" | "vulnerabilities" | "responsible-disclosure" | "whitehat"
+    )
 }
 
 fn is_generic_issue_or_homepage_path(lower: &str, host: &str) -> bool {

@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/pgmq/pgmq"
-generated_at = "2026-07-06T18:56:42.714855Z"
+generated_at = "2026-07-08T22:51:38.675705Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Left `repo.test` unset because `.github/workflows/client-tests.yml`, `.github/workflows/crate_ci.yml`, and `.github/workflows/extension_upgrade.yml` suggested conflicting test commands. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `.github/workflows/client-tests.yml` after model escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "pgmq"
@@ -28,19 +29,8 @@ languages = [
     "Shell",
     "Ruby",
 ]
+test = "uv run pytest test.py -v"
 topics = ["message-queue"]
-
-[[repo.test_candidates]]
-command = "uv run pytest test.py -v"
-source = ".github/workflows/client-tests.yml"
-
-[[repo.test_candidates]]
-command = "make check.fmt"
-source = ".github/workflows/crate_ci.yml"
-
-[[repo.test_candidates]]
-command = "UPGRADE_PHASE=pre uv run pytest upgrade_test.py -v"
-source = ".github/workflows/extension_upgrade.yml"
 
 [repo.toolchain]
 min = "3.10"
@@ -62,6 +52,6 @@ archived = false
 clone_url = "https://github.com/pgmq/pgmq.git"
 default_branch = "main"
 fork = false
-head_sha = "80d273a399631f37a6a2b136a615dd673cd4e90a"
+head_sha = "e67a9c27037036c40f8793ca2966bf7d56484194"
 html_url = "https://github.com/pgmq/pgmq"
-stars = 5003
+stars = 5007

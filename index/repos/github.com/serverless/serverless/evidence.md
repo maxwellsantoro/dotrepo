@@ -6,7 +6,7 @@
 - Imported repo.test from package.json as `npm test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk. Preserved 2 candidate command(s) in `repo.build_candidates` instead of discarding them.
+- Left `repo.build` unset after model escalation: Both candidates are primary CI workflows of equal tier and functional importance; no clear hierarchy exists to prefer one over the other.. Preserved 2 candidate command(s) in `repo.build_candidates` instead of discarding them.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

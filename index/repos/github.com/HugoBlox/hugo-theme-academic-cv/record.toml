@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/HugoBlox/hugo-theme-academic-cv"
 generated_at = "2026-07-06T18:28:10.151165Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `package.json`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `package.json`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `package.json`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `package.json`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "hugo-theme-academic-cv"

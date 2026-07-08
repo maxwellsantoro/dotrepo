@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/qbittorrent/qBittorrent"
-generated_at = "2026-07-06T18:57:42.274393Z"
+generated_at = "2026-07-08T22:56:57.029588Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `.github/workflows/ci_ubuntu.yaml`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `.github/workflows/ci_macos.yaml`, `.github/workflows/ci_python.yaml`, `.github/workflows/ci_ubuntu.yaml`, `.github/workflows/ci_windows.yaml`, and `.github/workflows/coverity-scan.yaml` suggested conflicting build commands. Inferred `repo.test` from `.github/workflows/ci_ubuntu.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `.github/workflows/ci_macos.yaml`, and `.github/workflows/ci_ubuntu.yaml`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci_macos.yaml`. Inferred `repo.test` from `.github/workflows/ci_ubuntu.yaml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "qBittorrent"
@@ -33,6 +34,7 @@ languages = [
     "Just",
     "Shell",
 ]
+build = "cmake --build build"
 test = "cmake --build build --target check"
 topics = [
     "c-plus-plus",
@@ -42,18 +44,6 @@ topics = [
     "bittorrent-client",
     "torrent-client",
 ]
-
-[[repo.build_candidates]]
-command = '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \'
-source = ".github/workflows/ci_macos.yaml"
-
-[[repo.build_candidates]]
-command = "python -m compileall $PY_FILES"
-source = ".github/workflows/ci_python.yaml"
-
-[[repo.build_candidates]]
-command = "cmake --build build"
-source = ".github/workflows/coverity-scan.yaml"
 
 [owners]
 maintainers = []
@@ -69,4 +59,4 @@ default_branch = "master"
 fork = false
 head_sha = "378f8f9b8fdf53211ef0eacd36395a0ff9586c72"
 html_url = "https://github.com/qbittorrent/qBittorrent"
-stars = 38626
+stars = 38668

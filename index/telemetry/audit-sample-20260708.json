@@ -1,0 +1,124 @@
+{
+  "schema": "dotrepo/audit-sample/v0.1",
+  "generatedAt": "2026-07-08T22:58:25Z",
+  "indexRoot": "index",
+  "seed": 20260708,
+  "populationSize": 613,
+  "sampleSize": 8,
+  "requestedSampleSize": 8,
+  "sample": [
+    {
+      "identity": "github.com/awolfly9/IPProxyTool",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.6585,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/awolfly9/IPProxyTool/record.toml",
+      "evidencePath": "index/repos/github.com/awolfly9/IPProxyTool/evidence.md"
+    },
+    {
+      "identity": "github.com/max-mapper/art-of-node",
+      "languageFamily": "TypeScript / JavaScript",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.5615,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/max-mapper/art-of-node/record.toml",
+      "evidencePath": "index/repos/github.com/max-mapper/art-of-node/evidence.md"
+    },
+    {
+      "identity": "github.com/BurntSushi/toml",
+      "languageFamily": "Go",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.4781,
+      "riskFactors": [
+        "missing:security_contact",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/BurntSushi/toml/record.toml",
+      "evidencePath": "index/repos/github.com/BurntSushi/toml/evidence.md"
+    },
+    {
+      "identity": "github.com/forkingdog/UITableView-FDTemplateLayoutCell",
+      "languageFamily": "Other",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.45,
+      "riskFactors": [
+        "missing:build",
+        "missing:test",
+        "missing:security_contact",
+        "missing:docs",
+        "surprising-completeness:low"
+      ],
+      "recordPath": "index/repos/github.com/forkingdog/UITableView-FDTemplateLayoutCell/record.toml",
+      "evidencePath": "index/repos/github.com/forkingdog/UITableView-FDTemplateLayoutCell/evidence.md"
+    },
+    {
+      "identity": "github.com/itsfatduck/optimizerDuck",
+      "languageFamily": "Other",
+      "status": "inferred",
+      "confidence": "medium",
+      "riskWeight": 0.2893,
+      "riskFactors": [
+        "confidence:medium",
+        "missing:build",
+        "missing:test"
+      ],
+      "recordPath": "index/repos/github.com/itsfatduck/optimizerDuck/record.toml",
+      "evidencePath": "index/repos/github.com/itsfatduck/optimizerDuck/evidence.md"
+    },
+    {
+      "identity": "github.com/AvaloniaUI/Avalonia",
+      "languageFamily": "Other",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.225,
+      "riskFactors": [
+        "missing:build",
+        "missing:test"
+      ],
+      "recordPath": "index/repos/github.com/AvaloniaUI/Avalonia/record.toml",
+      "evidencePath": "index/repos/github.com/AvaloniaUI/Avalonia/evidence.md"
+    },
+    {
+      "identity": "github.com/dotnet/maui",
+      "languageFamily": "Other",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.225,
+      "riskFactors": [
+        "missing:build",
+        "missing:test"
+      ],
+      "recordPath": "index/repos/github.com/dotnet/maui/record.toml",
+      "evidencePath": "index/repos/github.com/dotnet/maui/evidence.md"
+    },
+    {
+      "identity": "github.com/nginx-proxy/nginx-proxy",
+      "languageFamily": "Python",
+      "status": "verified",
+      "confidence": "high",
+      "riskWeight": 0.1881,
+      "riskFactors": [
+        "missing:security_contact"
+      ],
+      "recordPath": "index/repos/github.com/nginx-proxy/nginx-proxy/record.toml",
+      "evidencePath": "index/repos/github.com/nginx-proxy/nginx-proxy/evidence.md"
+    }
+  ]
+}

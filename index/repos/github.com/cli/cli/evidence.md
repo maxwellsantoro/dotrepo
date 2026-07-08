@@ -4,7 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@cli/code-reviewers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.build from .github/workflows/go.yml as `go build -v ./cmd/gh`.
+- Inferred repo.build from go.mod as `go build ./...`.
 - Imported repo.test from Makefile as `go test ./...`.
 - Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
 - This is an overlay record, not a maintainer-controlled canonical record.

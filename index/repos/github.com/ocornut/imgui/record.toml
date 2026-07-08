@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/ocornut/imgui"
 generated_at = "2026-07-06T18:55:17.057808Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `.github/workflows/build.yml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `.github/workflows/build.yml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/build.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "imgui"

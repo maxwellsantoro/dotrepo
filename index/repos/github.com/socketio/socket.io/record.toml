@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/socketio/socket.io"
-generated_at = "2026-07-06T19:02:07.845434Z"
+generated_at = "2026-07-08T22:57:11.768034Z"
 
 [record.trust]
 confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/build-examples.yml`, `.github/workflows/ci-engine.io-client.yml`, `.github/workflows/ci-engine.io-parser.yml`, `.github/workflows/ci-engine.io.yml`, `.github/workflows/ci-socket.io-adapter.yml`, `.github/workflows/ci-socket.io-client.yml`, `.github/workflows/ci-socket.io-cluster-adapter.yml`, and `.github/workflows/ci-socket.io-cluster-engine.yml` suggested conflicting build commands. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+provenance = [
+    "imported",
+    "inferred",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `.github/workflows/build-examples.yml`, and `CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-examples.yml`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "socket.io"
@@ -24,6 +27,7 @@ languages = [
     "HTML",
     "CSS",
 ]
+build = "npm run build"
 test = "npm test -ws"
 topics = [
     "javascript",
@@ -31,22 +35,6 @@ topics = [
     "socket-io",
     "websocket",
 ]
-
-[[repo.build_candidates]]
-command = "npm run build"
-source = ".github/workflows/build-examples.yml"
-
-[[repo.build_candidates]]
-command = 'npm run compile \'
-source = ".github/workflows/ci-engine.io-client.yml"
-
-[[repo.build_candidates]]
-command = "npm run compile --workspace=engine.io-parser"
-source = ".github/workflows/ci-engine.io-parser.yml"
-
-[[repo.build_candidates]]
-command = "npm run compile --workspace=socket.io-adapter"
-source = ".github/workflows/ci-socket.io-adapter.yml"
 
 [owners]
 maintainers = []
@@ -62,4 +50,4 @@ default_branch = "main"
 fork = false
 head_sha = "d2d753fed4435015c2d83fe62e676b44e07fa3f7"
 html_url = "https://github.com/socketio/socket.io"
-stars = 63201
+stars = 63213

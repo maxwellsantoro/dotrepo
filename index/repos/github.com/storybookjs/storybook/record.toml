@@ -4,12 +4,12 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/storybookjs/storybook"
-generated_at = "2026-07-06T19:03:10.420529Z"
+generated_at = "2026-07-08T22:57:17.843676Z"
 
 [record.trust]
 confidence = "medium"
 provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml` and `.github/workflows/fork-checks.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Storybook"
@@ -56,14 +56,6 @@ topics = [
     "stories",
 ]
 
-[[repo.build_candidates]]
-command = "yarn nx run-many --targets compile --no-cloud"
-source = ".github/workflows/copilot-setup-steps.yml"
-
-[[repo.build_candidates]]
-command = "yarn task --task compile --start-from=compile"
-source = ".github/workflows/fork-checks.yml"
-
 [owners]
 maintainers = [
     "@kylegach",
@@ -79,6 +71,6 @@ archived = false
 clone_url = "https://github.com/storybookjs/storybook.git"
 default_branch = "next"
 fork = false
-head_sha = "fac05a57415eec36b0a72b383befd7ef5071572c"
+head_sha = "cbf8e4f41c84da8f1789d215006bbe436cdb086b"
 html_url = "https://github.com/storybookjs/storybook"
-stars = 90495
+stars = 90516

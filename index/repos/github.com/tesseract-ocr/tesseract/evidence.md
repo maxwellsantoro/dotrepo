@@ -5,7 +5,7 @@
 - Inferred repo.test from .github/workflows/autotools-macos.yml as `make check`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Left `repo.build` unset after deterministic escalation: no unique build/test candidate after deterministic tier walk. Preserved 2 candidate command(s) in `repo.build_candidates` instead of discarding them.
+- Set `repo.build` to `cmake --build build --config Release --target install` from `.github/workflows/cmake.yml` after model escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -13,3 +13,7 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Auto-promotion
+
+Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.

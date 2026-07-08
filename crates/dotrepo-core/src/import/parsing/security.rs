@@ -648,6 +648,9 @@ mod security_url_tests {
             "https://go.dev/security/policy",
             "https://kubernetes.io/docs/reference/issues-security/security/#report-a-vulnerability",
             "https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability",
+            "https://rust-analyzer.github.io/book/security.html",
+            "https://www.facebook.com/whitehat",
+            "https://nodesecurity.io/report",
         ] {
             assert!(is_actionable_security_url(url), "expected actionable: {url}");
         }
@@ -662,6 +665,9 @@ mod security_url_tests {
             "https://github.com/LadybirdBrowser/ladybird/issues/new?template=bug_report.yml",
             "https://discord.gg/NtAbbGn",
             "https://x.com/openai",
+            "https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=traefik",
+            "https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck",
+            "https://bitwarden.com/contact",
         ] {
             assert!(!is_actionable_security_url(url), "expected rejected: {url}");
         }
