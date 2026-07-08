@@ -48,6 +48,16 @@ growth, coverage, promotion, and telemetry artifacts.
   `index/telemetry/m1-second-opinion-canary-20260708.md`)
 - Risk-weighted audit sample archived at
   `index/telemetry/audit-sample-20260708.md`
+- Security import: reject non-actionable SECURITY.md URLs (Discord, bare repo
+  homepage, issue forms, personal sites) so they become honest `unknown` /
+  absence instead of medium-confidence promotion blockers; treat gRPC-style
+  `*-cve-process.md` docs as actionable
+- Quality pass: normalize 18 non-actionable index contacts + scheme-less
+  homepages (clap, moment); **+21 verified** via gate-passed promotion
+  (590→611; 2 remaining imported with honest build/test conflicts)
+- Audit disposition: `index/telemetry/audit-sample-20260708-disposition.md`
+- Distribution: `scripts/fixtures/lookup_miss_sample.log` + aggregator E2E;
+  template-complete `examples/external-consumer/` lookup-before-scrape client
 
 ### Index growth
 

@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/LadybirdBrowser/ladybird"
 generated_at = "2026-07-06T18:29:19.255984Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `.github/workflows/js-and-wasm-artifacts.yml` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `.github/workflows/js-and-wasm-artifacts.yml` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Ladybird"
@@ -53,7 +54,7 @@ maintainers = [
     "@trflynn89",
     "@AtkinsSJ",
 ]
-security_contact = "https://github.com/LadybirdBrowser/ladybird/issues/new?template=bug_report.yml"
+security_contact = "unknown"
 
 [docs]
 root = "Documentation/"

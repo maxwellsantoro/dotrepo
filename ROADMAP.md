@@ -366,8 +366,8 @@ coverage. Operator checklist:
 | crates.io toolchain | Shipped (seven packages; auto-publish on tag) | Point production consumers at stable `1.0.x` |
 | Efficiency benchmark page | Live (`/efficiency/`) | Refresh on deploy; use as the external pitch |
 | pagedigest publisher | Live | Consume manifests in the crawler when non-GitHub sources appear |
-| Lookup-miss telemetry | Emission shipped | Export Worker logs and feed aggregates into M4 selection |
-| External non-operator consumer | Open | Land one real integration; measure non-operator traffic |
+| Lookup-miss telemetry | Emission + fixture aggregation | Export live Worker logs on cadence; feed M4 selection |
+| External non-operator consumer | In-repo reference landed | Third-party traffic still open; see `examples/external-consumer/` |
 
 ### Shared direction with pagedigest
 
@@ -489,7 +489,7 @@ destination gates; do not treat their “current status” lists as the work que
 | M1 second-opinion live canary | **Done** (2026-07-08) | See `index/telemetry/m1-second-opinion-canary-20260708.md` |
 | Intent/ecosystem scorecards | **Tooling shipped** | Use as soft budgets; harden only after stable |
 | Execution-field completeness | **Hardening** | ~39% missing build/test; use coverage-gap report |
-| Distribution / non-operator demand | **Open** | One external consumer + exported miss logs |
+| Distribution / non-operator demand | **Path landed** | In-repo consumer + miss fixture; live third-party traffic still open |
 | M4 first 1k profiles | **Ready to open** when distribution path is live | 50–100 repo cohorts |
 | M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |
 
@@ -508,15 +508,22 @@ and demand, not factory existence.
    - 2026-07-08 batch: +18 verified (572→590) via promotion drain + recrawls +
      security-URL scoring fix (`security.html` stems, Meta whitehat, Node
      security portal).
+   - Later 2026-07-08 quality pass: non-actionable security contacts →
+     `unknown` (parser + index cleanup), scheme-less homepage normalize,
+     **+21 verified** (590→611) via gate-passed `promotion-report --apply`.
 2. **Drain any new promotion headroom** after recrawls
-   (`dotrepo promotion-report --apply`) — never bypass gates.
+   (`dotrepo promotion-report --apply`) — never bypass gates. Headroom after
+   the quality pass: **0** promotion candidates (2 remaining imported with
+   honest intra-tier build/test conflicts).
 3. **Keep audit conversion running.** Weekly sample
    (`scripts/audit_index_sample.py`); findings → fixture/parser/policy.
-   Latest sample: `index/telemetry/audit-sample-20260708.md`.
+   Latest sample: `index/telemetry/audit-sample-20260708.md`; disposition:
+   `index/telemetry/audit-sample-20260708-disposition.md`.
 4. **Hold release floors** during hardening (profile/high-signal + factual
    accuracy baselines).
-5. **Distribution (parallel, outranks M5):** export lookup-miss logs, land one
-   external consumer — see [In parallel — distribution](#in-parallel--distribution-outranks-m5-polish).
+5. **Distribution (parallel, outranks M5):** lookup-miss fixture + aggregator
+   E2E; template-complete `examples/external-consumer/` — see
+   [In parallel — distribution](#in-parallel--distribution-outranks-m5-polish).
 
 #### Done recently (do not re-litigate)
 
@@ -530,6 +537,11 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
 - Unit-cost CPU/RSS; intent scorecard; coverage-gap report; lookup-miss emission.
 - Actionable security URL scoring: file stems (`security.html`), Facebook
   whitehat, nodesecurity.io (plus existing GitHub/HackerOne/Django/etc.).
+- Non-actionable SECURITY.md URLs no longer stored as medium-confidence
+  `security_contact` (honest `unknown` / absence); gRPC-style `cve-process`
+  docs treated as actionable; +21 gate-passed promotions (verified 611/613).
+- Audit sample disposition archived; lookup-miss sample fixture; external
+  consumer reference client under `examples/external-consumer/`.
 
 #### Next — Milestone 4 cohorts (after Now items 1–5 are healthy)
 
@@ -549,9 +561,12 @@ plus exported lookup-miss volume that can steer M4 selection.
 
 1. Keep MCP registry listings and stable `1.0.x` install paths current.
 2. Keep the efficiency page as the external pitch (tokens/bytes/requests saved).
-3. Export Worker logs → `aggregate_lookup_misses.py` on a fixed cadence.
+3. Export Worker logs → `aggregate_lookup_misses.py` on a fixed cadence
+   (offline proof: `scripts/fixtures/lookup_miss_sample.log`).
 4. Land **one** external consumer integration
-   ([template](./docs/external-consumer-integration.md)).
+   ([template](./docs/external-consumer-integration.md);
+   in-repo reference: [`examples/external-consumer/`](./examples/external-consumer/)).
+   Live third-party non-operator traffic remains the open success signal.
 
 Adoption follows consumers, not the reverse.
 

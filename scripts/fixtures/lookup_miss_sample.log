@@ -1,0 +1,7 @@
+2026-07-08T12:00:01Z info: DOTREPO_LOOKUP_MISS {"host":"github.com","owner":"acme","repo":"widgets","route":"query","ts":"2026-07-08T12:00:01Z"}
+2026-07-08T12:00:02Z info: DOTREPO_LOOKUP_MISS {"host":"github.com","owner":"acme","repo":"widgets","route":"query","ts":"2026-07-08T12:00:02Z"}
+2026-07-08T12:00:03Z info: DOTREPO_LOOKUP_MISS {"host":"github.com","owner":"acme","repo":"widgets","route":"index","ts":"2026-07-08T12:00:03Z"}
+2026-07-08T12:01:00Z info: DOTREPO_LOOKUP_MISS {"host":"github.com","owner":"octo","repo":"missing-lib","route":"query","ts":"2026-07-08T12:01:00Z"}
+2026-07-08T12:02:00Z info: DOTREPO_LOOKUP_MISS {"host":"gitlab.com","owner":"group","repo":"tool","route":"batch","ts":"2026-07-08T12:02:00Z"}
+2026-07-08T12:03:00Z noise line that should be ignored
+{"host":"github.com","owner":"ndjson","repo":"only","route":"query","ts":"2026-07-08T12:03:00Z"}

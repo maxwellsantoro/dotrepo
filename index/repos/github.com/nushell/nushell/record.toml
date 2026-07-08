@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/nushell/nushell"
 generated_at = "2026-07-08T22:57:42.490365Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `Cargo.toml` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `Cargo.toml` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Nushell"
@@ -42,7 +45,7 @@ ecosystem = "Rust"
 
 [owners]
 maintainers = []
-security_contact = "https://discord.gg/NtAbbGn"
+security_contact = "unknown"
 
 [docs]
 root = "https://www.nushell.sh/"

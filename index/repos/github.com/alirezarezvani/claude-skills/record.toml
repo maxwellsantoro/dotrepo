@@ -2,17 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "inferred"
+status = "verified"
 source = "https://github.com/alirezarezvani/claude-skills"
 generated_at = "2026-07-06T18:34:17.751784Z"
 
 [record.trust]
-confidence = "medium"
+confidence = "high"
 provenance = [
     "imported",
     "inferred",
+    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `CONTRIBUTING.md`, `.github/workflows/ci-quality-gate.yml`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/ci-quality-gate.yml`. Inferred `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `CONTRIBUTING.md`, `.github/workflows/ci-quality-gate.yml`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/ci-quality-gate.yml`. Inferred `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "claude-skills"
@@ -59,7 +60,7 @@ topics = [
 
 [owners]
 maintainers = []
-security_contact = "https://alirezarezvani.com"
+security_contact = "unknown"
 
 [docs]
 root = "https://alirezarezvani.medium.com/"

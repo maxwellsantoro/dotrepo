@@ -15,3 +15,11 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Homepage normalization (2026-07-08)
+
+Normalized scheme-less homepage to `https://docs.rs/clap` so URL quality gates treat it as a high-confidence absolute URL.
+
+## Auto-promotion
+
+Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.

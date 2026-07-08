@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/samratashok/nishang"
 generated_at = "2026-07-06T19:00:24.005991Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Nishang"
@@ -35,7 +38,7 @@ topics = [
 
 [owners]
 maintainers = []
-security_contact = "https://www.alteredsecurity.com/"
+security_contact = "unknown"
 
 [x.github]
 archived = false

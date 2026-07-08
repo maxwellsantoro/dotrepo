@@ -3,6 +3,7 @@
 use super::super::push_unique;
 use super::super::types::SecurityImportMetadata;
 use super::markdown::{extract_markdown_links, rewrite_markdown_links};
+use super::urls::is_actionable_security_url;
 
 pub(crate) fn parse_security_contact(contents: &str) -> Option<String> {
     match find_mailto_or_email(contents) {
@@ -14,9 +15,13 @@ pub(crate) fn parse_security_contact(contents: &str) -> Option<String> {
             // routinely list downstream packagers, credits, or moderation
             // contacts far from the actual reporting instruction. A scored
             // security-reporting URL is the actionable channel in that case.
-            find_best_security_url(contents).or(Some(email))
+            // Non-actionable URLs must not win over a real mailbox.
+            match find_best_security_url(contents).filter(|url| is_actionable_security_url(url)) {
+                Some(url) => Some(url),
+                None => Some(email),
+            }
         }
-        None => find_first_url(contents),
+        None => find_first_url(contents).filter(|url| is_actionable_security_url(url)),
     }
 }
 
@@ -62,14 +67,19 @@ pub(crate) fn parse_security_import_metadata(contents: &str) -> SecurityImportMe
             contact: Some(contact),
             note: None,
         },
-        Some(contact) => SecurityImportMetadata {
+        Some(contact) if is_actionable_security_url(&contact) => SecurityImportMetadata {
             contact: Some(contact),
             note: Some(
                 "SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL."
                     .to_string(),
             ),
         },
-        None => SecurityImportMetadata::default(),
+        // Non-actionable URLs (Discord, bare repo homepages, issue forms,
+        // personal sites) are not security reporting channels. Leave contact
+        // unset so the importer can record honest `unknown` when SECURITY.md
+        // exists, rather than storing medium-confidence junk that blocks
+        // promotion forever.
+        Some(_) | None => SecurityImportMetadata::default(),
     }
 }
 
@@ -651,9 +661,30 @@ mod security_url_tests {
             "https://rust-analyzer.github.io/book/security.html",
             "https://www.facebook.com/whitehat",
             "https://nodesecurity.io/report",
+            "https://github.com/grpc/proposal/blob/master/P4-grpc-cve-process.md",
         ] {
             assert!(is_actionable_security_url(url), "expected actionable: {url}");
         }
+    }
+
+    #[test]
+    fn non_actionable_security_md_urls_do_not_become_contacts() {
+        // SECURITY.md that only links a Discord / homepage / issue form must
+        // not produce a medium-confidence security_contact value.
+        let discord_only = "# Security\n\nJoin us on https://discord.gg/NtAbbGn\n";
+        assert_eq!(super::parse_security_contact(discord_only), None);
+        assert!(super::parse_security_import_metadata(discord_only)
+            .contact
+            .is_none());
+
+        let bare_repo = "# Security\n\nSee https://github.com/junegunn/fzf for details.\n";
+        assert_eq!(super::parse_security_contact(bare_repo), None);
+
+        let actionable = "# Security\n\nReport at https://github.com/axios/axios/security\n";
+        assert_eq!(
+            super::parse_security_contact(actionable).as_deref(),
+            Some("https://github.com/axios/axios/security"),
+        );
     }
 
     #[test]

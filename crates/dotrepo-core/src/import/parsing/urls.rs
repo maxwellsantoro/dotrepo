@@ -172,8 +172,14 @@ fn is_security_path_token(segment: &str) -> bool {
         .unwrap_or(segment);
     matches!(
         token,
-        "security" | "vulnerability" | "vulnerabilities" | "responsible-disclosure" | "whitehat"
-    )
+        "security"
+            | "vulnerability"
+            | "vulnerabilities"
+            | "responsible-disclosure"
+            | "whitehat"
+            // Coordinated CVE process docs (e.g. gRPC P4-grpc-cve-process.md).
+            | "cve-process"
+    ) || token.ends_with("-cve-process") || token.contains("cve-process")
 }
 
 fn is_generic_issue_or_homepage_path(lower: &str, host: &str) -> bool {

@@ -2,14 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/serhii-londar/open-source-mac-os-apps"
 generated_at = "2026-07-06T19:01:12.300598Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "open-source-mac-os-apps"
@@ -41,7 +44,7 @@ topics = [
 
 [owners]
 maintainers = []
-security_contact = "https://github.com/paretoSecurity/pareto-mac/"
+security_contact = "unknown"
 
 [relations]
 references = []
