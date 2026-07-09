@@ -995,6 +995,87 @@ cargo nextest run -E 'test(test_name)'
     }
 
     #[test]
+    fn makefile_unit_test_target_outranks_composite_test() {
+        use super::super::types::ImportedFile;
+        use super::extraction::infer_makefile_commands;
+
+        let makefile = ImportedFile {
+            path: "Makefile".into(),
+            contents: "\
+unit-test:\n\
+\tgo test ./... -short\n\
+\n\
+test: unit-test integration-test-all\n\
+\n\
+integration-test-all:\n\
+\tgo test pkg/integration/clients/*.go\n\
+"
+            .into(),
+        };
+        let candidate = infer_makefile_commands(&makefile).expect("Makefile commands");
+        assert_eq!(
+            candidate.test.as_deref(),
+            Some("go test ./... -short"),
+            "unit-test one-liner must unwrap before composite make test"
+        );
+    }
+
+    #[test]
+    fn makefile_preferred_over_justfile_on_task_script_conflict() {
+        use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+        use super::policy::resolve_command_field;
+
+        let candidates = [
+            ImportedCommandCandidate {
+                source_path: "Makefile".into(),
+                source_tier: CommandSourceTier::TaskScript,
+                build: Some("make build".into()),
+                test: Some("make test".into()),
+            },
+            ImportedCommandCandidate {
+                source_path: "justfile".into(),
+                source_tier: CommandSourceTier::TaskScript,
+                build: Some("just build".into()),
+                test: Some("just test".into()),
+            },
+        ];
+        let mut notes = Vec::new();
+        let mut evidence = Vec::new();
+        let mut inferred = Vec::new();
+        let test = resolve_command_field(
+            &candidates,
+            "repo.test",
+            false,
+            &mut notes,
+            &mut evidence,
+            &mut inferred,
+        )
+        .expect("test resolves");
+        assert_eq!(test.command, "make test");
+        assert_eq!(test.source_path, "Makefile");
+    }
+
+    #[test]
+    fn specialized_go_ci_coverdir_is_not_a_workflow_test_command() {
+        use super::extraction::first_matching_workflow_command;
+
+        let ci = vec![
+            r#"go test ./... -short -cover -args "-test.gocoverdir=/tmp/code_coverage""#
+                .to_string(),
+        ];
+        assert_eq!(
+            first_matching_workflow_command(&ci, false),
+            None,
+            "CI coverdir go test must not become repo.test"
+        );
+        let plain = vec!["go test ./...".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&plain, false).as_deref(),
+            Some("go test ./...")
+        );
+    }
+
+    #[test]
     fn docs_reject_package_narrowed_go_test_examples() {
         use super::super::types::ImportedFile;
         use super::extraction::infer_contributing_commands;

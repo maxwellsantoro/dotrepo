@@ -2,7 +2,7 @@
 
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
-- Imported repo.build from Makefile as `make build`.
+- Imported repo.build from Makefile as `make all`.
 - Imported repo.test from Makefile as `make test`.
 - Imported repo.toolchain.min from go.mod as `1.15` (Go).
 - Discovered related relation to github.com/cli/cli from README cross-link.

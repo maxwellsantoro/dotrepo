@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/spf13/cobra"
-generated_at = "2026-07-05T22:55:53.521317Z"
+generated_at = "2026-07-09T05:33:52.142398Z"
 
 [record.trust]
 confidence = "high"
@@ -25,7 +25,7 @@ languages = [
     "Go",
     "Makefile",
 ]
-build = "make build"
+build = "make all"
 test = "make test"
 topics = [
     "cobra",
@@ -79,4 +79,4 @@ default_branch = "main"
 fork = false
 head_sha = "ad460ea8f249db69c943a365fb84f3a59042d54e"
 html_url = "https://github.com/spf13/cobra"
-stars = 44206
+stars = 44226

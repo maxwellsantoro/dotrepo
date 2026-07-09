@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/joke2k/faker"
-generated_at = "2026-07-06T18:48:57.747582Z"
+generated_at = "2026-07-09T05:30:42.953867Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `Makefile`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `tox.ini`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `tox.ini`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "faker"
@@ -26,7 +26,7 @@ languages = [
     "Makefile",
     "Shell",
 ]
-test = "make test"
+test = "tox"
 topics = [
     "python",
     "fake",
@@ -49,4 +49,4 @@ default_branch = "master"
 fork = false
 head_sha = "bb62df7a94c54e203aa61ab4bd46c327798a72d8"
 html_url = "https://github.com/joke2k/faker"
-stars = 19295
+stars = 19299

@@ -463,11 +463,39 @@ fn resolve_preferred_command_candidate(
         return resolve_preferred_workflow_command_candidate(present);
     }
 
+    if let Some(preferred) = resolve_preferred_task_script_command_candidate(present) {
+        return Some(preferred);
+    }
+
     if select_build {
         return resolve_preferred_ecosystem_default_build_candidate(present);
     }
 
     None
+}
+
+/// Prefer Makefile over justfile when both publish task-script wrappers for the
+/// same field (common dual-maintainer surface in Go repos such as lazygit).
+fn resolve_preferred_task_script_command_candidate(
+    present: &[(String, String)],
+) -> Option<(String, String)> {
+    let only_make_and_just = present.iter().all(|(_, path)| {
+        let base = path.rsplit('/').next().unwrap_or(path);
+        matches!(
+            base,
+            "Makefile" | "makefile" | "GNUmakefile" | "justfile" | "Justfile"
+        )
+    });
+    if !only_make_and_just || present.len() < 2 {
+        return None;
+    }
+    present
+        .iter()
+        .find(|(_, path)| {
+            let base = path.rsplit('/').next().unwrap_or(path);
+            matches!(base, "Makefile" | "makefile" | "GNUmakefile")
+        })
+        .map(|(command, path)| (command.clone(), path.clone()))
 }
 
 fn resolve_preferred_workflow_command_candidate(

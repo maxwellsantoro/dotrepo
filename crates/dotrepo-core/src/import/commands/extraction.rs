@@ -544,7 +544,12 @@ pub(crate) fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCom
         })
     };
     let build = pick(&["build", "all", "compile", "dist", "package"], true);
-    let test = pick(&["test", "check", "verify", "spec"], false);
+    // Prefer focused unit-test targets before composite `test` entrypoints that
+    // chain integration suites (e.g. lazygit: unit-test then integration-test-all).
+    let test = pick(
+        &["unit-test", "test-unit", "test", "check", "verify", "spec"],
+        false,
+    );
     if build.is_none() && test.is_none() {
         return None;
     }
@@ -569,7 +574,7 @@ pub(crate) fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCom
         })
     };
     let build = pick(&["build", "all"], true);
-    let test = pick(&["test", "check"], false);
+    let test = pick(&["unit-test", "test-unit", "test", "check"], false);
     if build.is_none() && test.is_none() {
         return None;
     }
@@ -1120,6 +1125,9 @@ pub(crate) fn first_matching_workflow_command(
                     {
                         return None;
                     }
+                    if prefix == "go test" && is_specialized_go_workflow_test_command(trimmed) {
+                        return None;
+                    }
                     return Some(trimmed.to_string());
                 }
             }
@@ -1189,7 +1197,7 @@ pub(crate) fn first_matching_workflow_command(
             }
             if lower.contains("cargo test")
                 && !is_specialized_cargo_workflow_command(trimmed, "test")
-                || lower.contains("go test")
+                || (lower.contains("go test") && !is_specialized_go_workflow_test_command(trimmed))
                 || lower.contains("pytest")
                 || lower.trim() == "pytest"
             {
@@ -1198,6 +1206,30 @@ pub(crate) fn first_matching_workflow_command(
         }
 
         None
+    })
+}
+
+/// CI-only go test lines (coverage dirs, -args passthrough, etc.) are not
+/// developer-facing repo.test values.
+fn is_specialized_go_workflow_test_command(command: &str) -> bool {
+    let lower = command.to_ascii_lowercase();
+    if !lower.contains("go test") {
+        return false;
+    }
+    lower.split_whitespace().any(|token| {
+        matches!(
+            token,
+            "-args"
+                | "-coverprofile"
+                | "-covermode"
+                | "-bench"
+                | "-benchmem"
+                | "-fuzz"
+                | "-fuzztime"
+        ) || token.starts_with("-coverprofile=")
+            || token.starts_with("-covermode=")
+            || token.contains("gocoverdir")
+            || token.starts_with("-test.gocoverdir")
     })
 }
 

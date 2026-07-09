@@ -501,8 +501,9 @@ size, **distribution / demand capture** (miss emission live; non-operator
 traffic still open), then gated cohort growth (M4). M5 stays parallel and lower
 priority.
 
-**Checked-in index snapshot (2026-07-09)** — refresh with
-`scripts/render_index_growth_status.py` and `dotrepo promotion-report`:
+**Checked-in index snapshot (2026-07-09, post unit-test preference batch)** —
+refresh with `scripts/render_index_growth_status.py` and
+`dotrepo promotion-report`:
 
 | Metric | Value |
 | --- | ---: |
@@ -514,6 +515,7 @@ priority.
 | Verified-but-ineligible residual | 0 |
 | Missing build / test / security | 221 / 226 / 420 |
 | Quality-hardening queue | ~460 (refresh via scripts) |
+| Intent scorecard within soft budgets | yes (execution missing 36.4% / budget 50%) |
 | Stale or missing `generated_at` | 0 (0%) |
 | Max refresh overdue | 0 days |
 | Accepted maintainer claims | 1 |
@@ -547,8 +549,8 @@ Keep [platform integrity](#platform-integrity) green as a standing constraint
 | M1 factory + ops proof | **Done** (2026-07-08) | Keep green; do not reopen as a gate |
 | Platform integrity | **Closed** (2026-07-09) | Standing keep-green only ([table](#platform-integrity)) |
 | Intent/ecosystem scorecards | **Tooling shipped** | Soft budgets; harden only after stable |
-| Execution-field completeness | **Hardening** | ~36% missing build, ~37% missing test (`221`/`226` of 613); coverage-gap report |
-| Distribution / demand capture | **Emission live** | Static published-leaf + dynamic miss logs deployed on Worker; **sustained non-operator traffic** + cadence export of real volume still open |
+| Execution-field completeness | **Hardening** | Missing build/test still `221`/`226` (many honest absences); recent batch improved command *quality* (Makefile `unit-test` preference) rather than vanity fills |
+| Distribution / demand capture | **Emission + export path live** | Production Worker miss logs + `export_lookup_miss_demand.py` proven; **sustained non-operator traffic** still open |
 | M4 first 1k profiles | **Ready when demand volume is useful** | 50–100 repo cohorts; prefer exported live misses (or registry proxies) + soft scorecards green |
 | Maintainability hotspots | **Mostly closed** | Remaining: `crawler/github.rs` on next materialization feature; CLI test / facade import tests on next expansion |
 | M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |
@@ -570,11 +572,18 @@ check the public surface before scraping**.
      keep `build_candidates` / `test_candidates` (RFC 0020).
    - Residual missing build/test ~**221/226**. Prefer coverage-gap recrawl only
      where evidence can improve fields (guides, awesome-lists, and polyglot
-     monorepos often stay honestly partial).
+     monorepos often stay honestly partial). Do not invent commands for empty
+     `package.json` scripts or host-package CI noise.
+   - **2026-07-09 quality batch:** prefer Makefile/justfile `unit-test` over
+     composite `test`; prefer Makefile over justfile on dual task-script
+     conflict; reject specialized Go CI coverdir/`-args` as `repo.test`.
+     Recrawl: `jesseduffield/lazygit` → `go test ./... -short` (was CI
+     coverdir / conflict-unresolved). Other gap candidates re-confirmed honest
+     absence (no invent).
 2. **Drain any new promotion headroom** after recrawls
    (`dotrepo promotion-report --apply`) — never bypass gates. Corpus is
-   **613/613 verified** and **613/613 re-score eligible** (no verified-but-
-   ineligible residual after ray re-promotion and pyenv host-package parser fix).
+   **613/613 verified** and **613/613 re-score eligible** (0 verified-but-
+   ineligible residual).
 3. **Keep audit conversion running.** Weekly sample
    (`scripts/audit_index_sample.py`); findings → fixture/parser/policy.
    Latest closed sample: `index/telemetry/audit-sample-20260708.md` +
@@ -582,11 +591,10 @@ check the public surface before scraping**.
 4. **Hold release floors** during hardening (profile/high-signal + factual
    accuracy baselines). Prefer pinned stable **`1.0.x`** for production
    consumers; keep `main` on `2.0.0-alpha` without marketing alpha as drop-in stable.
-5. **Distribution (parallel, outranks M5):** miss **emission is live** on
-   production Worker for published static leaves
-   (`index.json`/`profile.json`/`trust.json`/`relations.json`) and dynamic
-   not-found paths. Remaining: export volume on cadence, land one external
-   non-operator consumer — see
+5. **Distribution (parallel, outranks M5):** miss **emission and operator export
+   path are live** (production Worker + `export_lookup_miss_demand.py` / weekly
+   workflow). Remaining open: cadence with non-operator volume, one external
+   consumer — see
    [In parallel — distribution](#in-parallel--distribution-outranks-m5-polish).
 
 #### Standing maintainability (when touching hotspots)
@@ -611,12 +619,14 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
 - Index quality: monorepo command inference waves (.NET / JS-TS / Python tox /
   Rust nested Cargo / workflow preference); corpus **613/613 verified** and
   promotion re-score eligible; ray re-promotion; pyenv host-package
-  `build-essential` false-conflict fix.
+  `build-essential` false-conflict fix; Makefile `unit-test` preference +
+  Makefile-over-justfile resolution + Go CI coverdir rejection (lazygit).
 - Distribution demand path: Worker emits `DOTREPO_LOOKUP_MISS` on published
   static leaves and dynamic not-found; **deployed to production** (restrict
   unknown leaves so bare `/summary` typos are not demand); weekly
   `lookup-miss-demand.yml` + `export_lookup_miss_demand.py`; live tail → export
-  proof works; external-consumer template landed; third-party traffic still open.
+  proof works (all four published leaves); external-consumer template landed;
+  third-party traffic still open.
 - Operator tooling: intent scorecard, coverage-gap, unit-cost, audit sample
   disposition, language-family classifier.
 
