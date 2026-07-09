@@ -2,14 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/emqx/MQTTX"
-generated_at = "2026-07-08T22:57:23.692476Z"
+generated_at = "2026-07-09T03:20:30.08203Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/units_test_cli.yaml` and `.github/workflows/units_test_desktop.yaml` suggested conflicting test commands. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `package.json`, and `.github/workflows/units_test_cli.yaml`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/units_test_cli.yaml`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "MQTTX"
@@ -27,6 +31,7 @@ languages = [
     "Dockerfile",
 ]
 build = "npm run build"
+test = "yarn test:coverage"
 topics = [
     "mqtt-tool",
     "mqtt",
@@ -49,14 +54,6 @@ topics = [
     "mosquitto",
     "emqx",
 ]
-
-[[repo.test_candidates]]
-command = "yarn test:coverage"
-source = ".github/workflows/units_test_cli.yaml"
-
-[[repo.test_candidates]]
-command = "yarn test:unit"
-source = ".github/workflows/units_test_desktop.yaml"
 
 [repo.toolchain]
 min = "18"

@@ -270,6 +270,68 @@ mod tests {
     }
 
     #[test]
+    fn resolve_unique_command_candidate_prefers_generic_over_monorepo_slice_workflows() {
+        use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+        use super::policy::resolve_unique_command_candidate;
+
+        // MQTTX-style: CLI vs desktop unit workflows at equal (non-ci.yml) rank.
+        let test_candidates = [
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/units_test_desktop.yaml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: None,
+                test: Some("npm run test:e2e".into()),
+            },
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/units_test_cli.yaml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: None,
+                test: Some("npm run test:cli".into()),
+            },
+        ];
+        let test_refs: Vec<&ImportedCommandCandidate> = test_candidates.iter().collect();
+        match resolve_unique_command_candidate(&test_refs, false) {
+            super::policy::UniqueCommandResolution::Unique {
+                command,
+                source_path,
+            } => {
+                assert_eq!(command, "npm run test:cli");
+                assert_eq!(source_path, ".github/workflows/units_test_cli.yaml");
+            }
+            other => panic!("expected CLI workflow preferred over desktop, got {other:?}"),
+        }
+
+        // Serverless-style: framework CI vs binary-installer CI.
+        let build_candidates = [
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/ci-binary-installer.yml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: Some("npm run build:binary".into()),
+                test: None,
+            },
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/ci-framework.yml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: Some("npm run build".into()),
+                test: None,
+            },
+        ];
+        let build_refs: Vec<&ImportedCommandCandidate> = build_candidates.iter().collect();
+        match resolve_unique_command_candidate(&build_refs, true) {
+            super::policy::UniqueCommandResolution::Unique {
+                command,
+                source_path,
+            } => {
+                assert_eq!(command, "npm run build");
+                assert_eq!(source_path, ".github/workflows/ci-framework.yml");
+            }
+            other => {
+                panic!("expected framework workflow preferred over binary-installer, got {other:?}")
+            }
+        }
+    }
+
+    #[test]
     fn workflow_inference_skips_shell_assignments_and_prefers_bazel_build() {
         use super::super::types::ImportedFile;
         use super::extraction::{

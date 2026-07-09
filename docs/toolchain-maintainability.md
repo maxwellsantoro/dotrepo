@@ -34,7 +34,7 @@ directional and should be refreshed when this table is used to schedule work.
 | Dual CLI entrypoints (`crates/dotrepo` + `dotrepo-cli` mains) | **Done:** both binaries call `dotrepo_cli::main()` / `dotrepo_cli::run()` so install-alias dispatch cannot drift. |
 | `dotrepo-core/src/facade_tests/import_repository.rs` | Split on next import-fixture expansion into parsing, evidence, escalation, and manifest-assembly test modules. |
 | `dotrepo-core/src/import/escalation.rs` (~1,473 lines) | **Done:** split into `import/escalation/` — `deterministic.rs` (command-tier walk, deepen, apply plan), `model_ladder.rs` (tier loop / Absent-vs-Rejected policy), `report.rs` (report + summary recompute), `mod.rs` (`run_import_escalation` orchestration + tests). Public re-exports unchanged via `import/mod.rs`. |
-| `dotrepo-crawler/src/pipeline.rs` (~1,462 lines) | **Split plan (next pipeline feature):** extract (1) GitHub snapshot merge + identity guards (`homepage_conflicts_with_identity`, language ordering consumers) into `pipeline/merge.rs`, (2) import/verify/score/escalate sequence into `pipeline/factual.rs`, (3) writeback eligibility + downgrade guard wiring into `pipeline/writeback_gate.rs`. Keep `pipeline.rs` (or `pipeline/mod.rs`) as the single `crawl_repository` entry used by commands. |
+| `dotrepo-crawler/src/pipeline.rs` (~1,462 lines) | **Done:** split into `pipeline/` — `merge.rs` (snapshot merge + homepage identity guards), `writeback_gate.rs` (verified auto-promotion + downgrade guard), `synthesis.rs` (optional bounded synthesis), `mod.rs` (`crawl_repository_*` entry + tests). |
 
 New files that cross the threshold must be added here before the maintainability
 exit criterion can pass.

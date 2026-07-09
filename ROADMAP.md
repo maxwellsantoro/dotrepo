@@ -500,17 +500,17 @@ Milestones are capability and quality gates, not release dates.
 **quality hardening** at current corpus size, **distribution / demand capture**,
 then gated cohort growth (M4). M5 stays parallel and lower priority.
 
-**Checked-in index snapshot (2026-07-09)** — refresh with
+**Checked-in index snapshot (2026-07-09, post monorepo preference)** — refresh with
 `scripts/render_index_growth_status.py`:
 
 | Metric | Value |
 | --- | ---: |
 | Overlay records | 613 |
-| `verified` / high confidence | 611 / 611 |
-| `imported` (honest partial / conflict) | 2 |
-| Record-level high-signal vs M2 target (500) | 611 (122%) |
-| Missing build / test / security | 237 / 239 / 420 |
-| Quality-hardening queue | 466 |
+| `verified` / high confidence | 613 / 613 |
+| `imported` / `inferred` | 0 / 0 |
+| Record-level high-signal vs M2 target (500) | 613 (123%) |
+| Missing build / test / security | 236 / 238 / 420 |
+| Quality-hardening queue | 465 |
 | Stale or missing `generated_at` | 0 (0%) |
 | Max refresh overdue | 0 days |
 | Accepted maintainer claims | 1 |
@@ -546,7 +546,7 @@ platform integrity
 | Execution-field completeness | **Hardening** | ~39% missing build/test; use coverage-gap report |
 | Distribution / non-operator demand | **Path landed** | Live third-party traffic + exported miss volume still open |
 | M4 first 1k profiles | **Ready when demand path is live** | 50–100 repo cohorts; prefer live lookup-miss export + soft scorecards green |
-| Maintainability hotspots | **Tracked** | Split `import/escalation.rs` and `crawler/pipeline.rs` before large features |
+| Maintainability hotspots | **Closed** (escalation + pipeline splits) | Remaining: CLI test split / facade import tests on next expansion |
 | M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |
 
 #### Now — platform integrity first, then quality + distribution
@@ -562,13 +562,12 @@ risk is operating it safely and usefully at the next scale step.
    - Score: `scripts/render_intent_quality_scorecard.py` (soft budgets).
    - Expectation: many security gaps are honest absence; multi-ecosystem ties
      keep `build_candidates` / `test_candidates` (RFC 0020).
-   - Remaining **`imported` (honest conflicts, do not invent):**
-     - `github.com/emqx/MQTTX` — conflicting workflow test commands
-       (`units_test_cli` vs `units_test_desktop`); build present from package.json
-     - `github.com/serverless/serverless` — conflicting workflow build commands
-       (`ci-binary-installer` vs `ci-framework`); test present from package.json
-   - Promotion headroom: **0** until new evidence or a deterministic preference
-     rule for monorepo workflow families (keep candidates; do not pick at random).
+   - **Monorepo workflow preference (2026-07-09):** deprioritize desktop/binary/
+     installer/electron/wasm/nightly/canary workflow filenames when resolving
+     equal-rank workflow conflicts. Recrawl + gate-passed promotion closed the
+     last two non-verified overlays (`MQTTX`, `serverless`) → **613/613 verified**.
+   - Residual blockers may still appear as medium fields on verified records
+     (e.g. honest missing build on some profiles); work via coverage-gap report.
 2. **Drain any new promotion headroom** after recrawls
    (`dotrepo promotion-report --apply`) — never bypass gates.
 3. **Keep audit conversion running.** Weekly sample
@@ -589,7 +588,6 @@ Do not expand these modules without executing the documented splits first
 
 | Hotspot | Plan |
 | --- | --- |
-| `dotrepo-crawler/src/pipeline.rs` (~1.5k) | Split merge/identity guards, factual sequence, writeback-gate wiring |
 | `dotrepo-cli/src/tests.rs` | Split by command domain on next test-family expansion |
 | `facade_tests/import_repository.rs` | Split on next import-fixture expansion |
 
@@ -613,6 +611,9 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
   shared CLI entry, pinned `mcp-publisher` v1.7.9, `import/escalation/` split.
 - Lookup-miss export operator path: `scripts/export_lookup_miss_demand.py`
   (fixture-backed offline proof).
+- Monorepo workflow preference + recrawl: last `imported` overlays promoted;
+  corpus **613/613 verified**.
+- Crawler `pipeline/` split (merge / writeback_gate / synthesis / mod).
 
 #### Next — Milestone 4 cohorts (after Now items 0–5 are healthy)
 
@@ -686,14 +687,16 @@ Delivered:
 - LSP and MCP handler module extraction without transport behavior changes
 - documented split plans for remaining oversized orchestration modules
 
-Open (do before large features in these modules):
+Open (on next expansion in these areas):
 
-- execute splits for `import/escalation.rs` and `crawler/pipeline.rs`
+- `dotrepo-cli/src/tests.rs` — split by command domain when the next test family lands
+- `facade_tests/import_repository.rs` — split on next import-fixture expansion
 
 Done recently (maintainability hygiene):
 
 - dual CLI entrypoints collapsed onto `dotrepo_cli::run` / `dotrepo_cli::main`
 - Dependabot expanded to cargo + npm (`cloudflare/hosted-query`, `editors/vscode`)
+- `import/escalation/` and `crawler/pipeline/` oversized-module splits executed
 
 Exit criteria:
 

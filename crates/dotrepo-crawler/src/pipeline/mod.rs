@@ -1,3 +1,14 @@
+//! Factual crawl planning: materialize → import → escalate → promote → optional synthesis.
+//!
+//! Split for maintainability:
+//! - [`merge`] — GitHub snapshot field merge and homepage identity guards
+//! - [`writeback_gate`] — verified auto-promotion and downgrade preservation
+//! - [`synthesis`] — optional bounded synthesis after factual planning
+
+mod merge;
+mod synthesis;
+mod writeback_gate;
+
 use crate::adjudication::{
     import_escalation_options_from_env, resolve_adjudication_providers_from_env,
 };
@@ -5,24 +16,26 @@ use crate::github::{GitHubClient, HttpGitHubClient};
 use crate::materialize::{
     materialize_repository, MaterializeRepositoryInput, MaterializedRepository,
 };
-use crate::synth::synthesize_repository_impl;
 use crate::{
     CrawlDiagnostic, CrawlRepositoryReport, CrawlRepositoryRequest, CrawlStateRecord,
     CrawlWritebackPlan, FactualWritebackPlan, GitHubRepositorySnapshot, RepositoryRef,
-    SynthesisFailureClass, SynthesisFailureMetadata, SynthesizeRepositoryRequest,
 };
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
-    current_timestamp_rfc3339, guard_against_unjustified_downgrade, import_repository_with_options,
-    infer_docs_root_from_external_homepage, promote_to_verified, repository_identity,
-    run_import_escalation, score_import_fields, validate_manifest, verify_import_plan,
-    AdjudicationProvider, GitHubSnapshotFacts, ImportMode, ImportOptions,
-    TieredAdjudicationProviders,
+    current_timestamp_rfc3339, import_repository_with_options, run_import_escalation,
+    score_import_fields, validate_manifest, verify_import_plan, AdjudicationProvider,
+    GitHubSnapshotFacts, ImportMode, ImportOptions, TieredAdjudicationProviders,
 };
 use dotrepo_schema::{render_manifest, Manifest};
 use std::fs;
 use std::path::Path;
-use toml::Value;
+
+use merge::{
+    append_github_evidence, manifest_is_missing_description, merge_snapshot_fields,
+    trimmed_non_empty,
+};
+use synthesis::{maybe_attempt_synthesis, synthesis_sources_from_materialized};
+use writeback_gate::apply_promotion_and_downgrade_guard;
 
 pub(crate) fn crawl_repository_impl(
     request: &CrawlRepositoryRequest,
@@ -185,58 +198,12 @@ pub(crate) fn crawl_repository_from_snapshot(
     import_plan.evidence_text =
         append_github_evidence(import_plan.evidence_text, &import_plan.manifest, snapshot);
 
-    let promotion = promote_to_verified(&mut import_plan.manifest, &field_scores);
-    if promotion.promoted {
-        diagnostics.push(CrawlDiagnostic::info(
-            "pipeline.auto_promoted",
-            format!(
-                "auto-promoted record from {} to verified: {}",
-                promotion.previous_status, promotion.reason,
-            ),
-        ));
-        import_plan.manifest_text = render_manifest(&import_plan.manifest)?;
-        if let Some(ref mut evidence) = import_plan.evidence_text {
-            evidence.push_str("\n## Auto-promotion\n\nAll fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.\n");
-        }
-    }
-
-    // The import above rebuilds the manifest from scratch, so a previously
-    // verified record can otherwise silently drop to a lower status/
-    // confidence purely from re-scoring noise (e.g. a newly gained field
-    // scoring below high confidence). Guard against that, while still
-    // allowing genuine field regressions to surface honestly.
-    if let Some(guard_outcome) =
-        guard_against_unjustified_downgrade(previous_manifest.as_ref(), &mut import_plan.manifest)
-    {
-        if guard_outcome.preserved {
-            diagnostics.push(CrawlDiagnostic::info(
-                "pipeline.downgrade_guard_preserved",
-                "preserved prior verified status: no previously present field regressed in this refresh"
-                    .to_string(),
-            ));
-            import_plan.manifest_text = render_manifest(&import_plan.manifest)?;
-            if let Some(ref mut evidence) = import_plan.evidence_text {
-                evidence.push_str(
-                    "\n## Downgrade guard\n\nA prior verified status was preserved because no previously present field regressed in this refresh.\n",
-                );
-            }
-        } else {
-            diagnostics.push(CrawlDiagnostic::info(
-                "pipeline.downgrade_guard_allowed",
-                format!(
-                    "allowed downgrade from a prior verified status: {} field(s) regressed: {}",
-                    guard_outcome.regressed_fields.len(),
-                    guard_outcome.regressed_fields.join(", "),
-                ),
-            ));
-            if let Some(ref mut evidence) = import_plan.evidence_text {
-                evidence.push_str(&format!(
-                    "\n## Downgrade guard\n\nStatus dropped from a prior verified record because the following previously present field(s) regressed: {}.\n",
-                    guard_outcome.regressed_fields.join(", "),
-                ));
-            }
-        }
-    }
+    apply_promotion_and_downgrade_guard(
+        &mut import_plan,
+        &field_scores,
+        previous_manifest.as_ref(),
+        &mut diagnostics,
+    )?;
 
     let synthesis_sources = synthesis_sources_from_materialized(materialized);
     let (synthesis, synthesis_failure, synthesis_diagnostics) = maybe_attempt_synthesis(
@@ -290,7 +257,6 @@ pub(crate) fn crawl_repository_from_snapshot(
         network: crate::NetworkUsage::default(),
     })
 }
-
 fn validate_repository_identity(repository: &RepositoryRef) -> Result<()> {
     dotrepo_core::validate_repository_identity_segments(
         &repository.host,
@@ -322,397 +288,16 @@ fn resolve_source_url(
         .unwrap_or_else(|| request.repository.source_url())
 }
 
-fn merge_snapshot_fields(
-    repository: &RepositoryRef,
-    source_url: &str,
-    manifest: &mut Manifest,
-    snapshot: &GitHubRepositorySnapshot,
-) -> Vec<CrawlDiagnostic> {
-    let mut diagnostics = Vec::new();
-    let mut merged_fields = Vec::new();
-
-    if manifest.repo.name.trim().is_empty() {
-        manifest.repo.name = repository.repo.clone();
-        merged_fields.push("repo.name");
-    }
-
-    if let Some(description) = trimmed_non_empty(snapshot.description.as_deref()) {
-        if trimmed_non_empty(Some(manifest.repo.description.as_str())) != Some(description) {
-            manifest.repo.description = description.to_string();
-            merged_fields.push("repo.description");
-        }
-    }
-
-    let current_homepage = trimmed_non_empty(manifest.repo.homepage.as_deref());
-    let should_replace_homepage =
-        current_homepage.is_none() || current_homepage == Some(source_url.trim());
-    if should_replace_homepage {
-        if let Some(homepage) = trimmed_non_empty(snapshot.homepage.as_deref()) {
-            // GitHub's repository "Website" field is maintainer-set free text
-            // and occasionally points at a different repository entirely
-            // (e.g. a renamed/duplicated project left pointing at its
-            // original). validate_manifest() rejects a repo.homepage that
-            // resolves to a different code-host identity than the record
-            // itself, so merging such a value here would write an overlay
-            // that immediately fails validate-index. Skip the merge (keep
-            // the existing, self-consistent value) rather than write an
-            // inconsistent record.
-            let conflicts_with_identity = homepage_conflicts_with_identity(repository, homepage);
-            if conflicts_with_identity {
-                diagnostics.push(CrawlDiagnostic::warning(
-                    "pipeline.homepage_identity_conflict",
-                    format!(
-                        "skipped GitHub-reported homepage {homepage:?}: resolves to a different repository identity than github.com/{}/{}",
-                        repository.owner, repository.repo
-                    ),
-                ));
-            } else {
-                manifest.repo.homepage = Some(homepage.to_string());
-                merged_fields.push("repo.homepage");
-            }
-        }
-    }
-
-    if let Some(license) = trimmed_non_empty(snapshot.license.as_deref()) {
-        manifest.repo.license = Some(license.to_string());
-        merged_fields.push("repo.license");
-    }
-
-    if let Some(visibility) = trimmed_non_empty(snapshot.visibility.as_deref()) {
-        manifest.repo.visibility = Some(visibility.to_string());
-        merged_fields.push("repo.visibility");
-    }
-
-    let languages = normalized_list(&snapshot.languages);
-    if !languages.is_empty() {
-        manifest.repo.languages = languages;
-        merged_fields.push("repo.languages");
-    }
-
-    let topics = normalized_list(&snapshot.topics);
-    if !topics.is_empty() {
-        manifest.repo.topics = topics;
-        merged_fields.push("repo.topics");
-    }
-
-    if infer_docs_root_from_external_homepage(manifest) {
-        merged_fields.push("docs.root");
-    }
-
-    manifest
-        .x
-        .insert("github".into(), github_extension(snapshot, source_url));
-    diagnostics.push(CrawlDiagnostic::info(
-        "pipeline.github_extension",
-        "recorded GitHub crawler metadata under x.github",
-    ));
-
-    if !merged_fields.is_empty() {
-        diagnostics.push(CrawlDiagnostic::info(
-            "pipeline.github_merge",
-            format!(
-                "augmented {} from GitHub repository metadata",
-                merged_fields.join(", ")
-            ),
-        ));
-    }
-
-    diagnostics
-}
-
-fn append_github_evidence(
-    evidence_text: Option<String>,
-    manifest: &Manifest,
-    snapshot: &GitHubRepositorySnapshot,
-) -> Option<String> {
-    let mut evidence = evidence_text?;
-    let mut bullets = Vec::new();
-    let description_constrained = trimmed_non_empty(Some(manifest.repo.description.as_str()))
-        == trimmed_non_empty(snapshot.description.as_deref());
-
-    let homepage = trimmed_non_empty(manifest.repo.homepage.as_deref());
-    if homepage.is_some() && homepage == trimmed_non_empty(snapshot.homepage.as_deref()) {
-        bullets.push("Augmented repo.homepage from GitHub repository metadata.".to_string());
-    }
-    if manifest.repo.license.as_deref() == trimmed_non_empty(snapshot.license.as_deref()) {
-        bullets.push("Augmented repo.license from GitHub repository metadata.".to_string());
-    }
-    if manifest.repo.visibility.as_deref() == trimmed_non_empty(snapshot.visibility.as_deref()) {
-        bullets.push("Augmented repo.visibility from GitHub repository metadata.".to_string());
-    }
-    if !manifest.repo.languages.is_empty()
-        && manifest.repo.languages == normalized_list(&snapshot.languages)
-    {
-        bullets.push("Augmented repo.languages from GitHub repository metadata.".to_string());
-    }
-    if !manifest.repo.topics.is_empty() && manifest.repo.topics == normalized_list(&snapshot.topics)
-    {
-        bullets.push("Augmented repo.topics from GitHub repository metadata.".to_string());
-    }
-    if description_constrained {
-        evidence = remove_readme_description_claim(evidence);
-        bullets.push("Constrained repo.description with GitHub repository metadata.".to_string());
-    }
-    bullets.push(
-        "Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state)."
-            .to_string(),
-    );
-
-    if !evidence.ends_with('\n') {
-        evidence.push('\n');
-    }
-    for bullet in bullets {
-        evidence.push_str("- ");
-        evidence.push_str(&bullet);
-        evidence.push('\n');
-    }
-    Some(evidence)
-}
-
-fn remove_readme_description_claim(mut evidence: String) -> String {
-    for readme_path in ["README.md", "README.mdx"] {
-        evidence = evidence.replace(
-            &format!(
-                "- Imported repository name, description, and docs entry points from {readme_path}.\n"
-            ),
-            &format!("- Imported repository name and docs entry points from {readme_path}.\n"),
-        );
-        evidence = evidence.replace(
-            &format!(
-                "- Imported repository description and docs entry points from {readme_path}.\n"
-            ),
-            &format!("- Imported repository docs entry points from {readme_path}.\n"),
-        );
-        evidence = evidence.replace(
-            &format!("- Imported repository name and description from {readme_path}.\n"),
-            &format!("- Imported repository name from {readme_path}.\n"),
-        );
-        evidence = evidence.replace(
-            &format!("- Imported repository description from {readme_path}.\n"),
-            "",
-        );
-    }
-    evidence
-}
-
-fn maybe_attempt_synthesis(
-    request: &CrawlRepositoryRequest,
-    record_root: &Path,
-    manifest: &dotrepo_schema::Manifest,
-    sources: Vec<crate::SynthesisSourceDocument>,
-    source_commit: Option<&str>,
-    occurred_at: &str,
-) -> (
-    Option<crate::SynthesisPlan>,
-    Option<SynthesisFailureMetadata>,
-    Vec<CrawlDiagnostic>,
-) {
-    if !request.synthesize {
-        return (None, None, Vec::new());
-    }
-
-    let model = match trimmed_non_empty(request.synthesis_model.as_deref()) {
-        Some(value) => value.to_string(),
-        None => {
-            let failure = SynthesisFailureMetadata {
-                class: SynthesisFailureClass::EmptyRequiredField,
-                message: "synthesis requested but synthesis_model was empty".into(),
-                occurred_at: Some(occurred_at.into()),
-                model: None,
-                provider: request.synthesis_provider.clone(),
-            };
-            return (
-                None,
-                Some(failure),
-                vec![CrawlDiagnostic::warning(
-                    "pipeline.synthesis_missing_model",
-                    "synthesis requested without a model; factual writeback continues",
-                )],
-            );
-        }
-    };
-    let provider = match trimmed_non_empty(request.synthesis_provider.as_deref()) {
-        Some(value) => value.to_string(),
-        None => {
-            let failure = SynthesisFailureMetadata {
-                class: SynthesisFailureClass::EmptyRequiredField,
-                message: "synthesis requested but synthesis_provider was empty".into(),
-                occurred_at: Some(occurred_at.into()),
-                model: Some(model.clone()),
-                provider: None,
-            };
-            return (
-                None,
-                Some(failure),
-                vec![CrawlDiagnostic::warning(
-                    "pipeline.synthesis_missing_provider",
-                    "synthesis requested without a provider; factual writeback continues",
-                )],
-            );
-        }
-    };
-
-    let synth_request = SynthesizeRepositoryRequest {
-        record_root: record_root.to_path_buf(),
-        repository: request.repository.clone(),
-        manifest: manifest.clone(),
-        sources,
-        generated_at: Some(occurred_at.into()),
-        source_commit: source_commit.map(str::to_string),
-        model: model.clone(),
-        provider: provider.clone(),
-    };
-
-    match synthesize_repository_impl(&synth_request) {
-        Ok(report) => (report.synthesis, report.failure, report.diagnostics),
-        Err(err) => {
-            let failure = classify_synthesis_failure(&err, occurred_at, &model, &provider);
-            (
-                None,
-                Some(failure),
-                vec![CrawlDiagnostic::warning(
-                    "pipeline.synthesis_failed",
-                    "synthesis failed; factual writeback continues",
-                )],
-            )
-        }
-    }
-}
-
-fn synthesis_sources_from_materialized(
-    materialized: &crate::materialize::MaterializedRepository,
-) -> Vec<crate::SynthesisSourceDocument> {
-    materialized
-        .written_files
-        .iter()
-        .take(12)
-        .filter_map(|file| {
-            let path = materialized.repository_root.join(&file.relative_path);
-            let contents = std::fs::read_to_string(path).ok()?;
-            let contents = contents.chars().take(32_000).collect::<String>();
-            Some(crate::SynthesisSourceDocument {
-                path: file.relative_path.to_string_lossy().replace('\\', "/"),
-                contents,
-            })
-        })
-        .scan(0usize, |total, source| {
-            let remaining = 128_000usize.saturating_sub(*total);
-            if remaining == 0 {
-                return None;
-            }
-            let contents = source.contents.chars().take(remaining).collect::<String>();
-            *total += contents.chars().count();
-            Some(crate::SynthesisSourceDocument { contents, ..source })
-        })
-        .collect()
-}
-
-fn classify_synthesis_failure(
-    err: &anyhow::Error,
-    occurred_at: &str,
-    model: &str,
-    provider: &str,
-) -> SynthesisFailureMetadata {
-    let message = err.to_string();
-    let class = if message.contains("unsafe shell-like value") {
-        SynthesisFailureClass::UnsafeShellLikeValue
-    } else if message.contains("conflicts with factual") {
-        SynthesisFailureClass::FactualConflict
-    } else if message.contains("must not be empty") {
-        SynthesisFailureClass::EmptyRequiredField
-    } else if message.contains("schema")
-        || message.contains("invalid JSON")
-        || message.contains("unknown field")
-    {
-        SynthesisFailureClass::InvalidSchemaOutput
-    } else if message.contains("not grounded") || message.contains("safe relative path") {
-        SynthesisFailureClass::GroundingViolation
-    } else if message.contains("bound")
-        || message.contains("too long")
-        || message.contains("must not exceed")
-        || message.contains("more than")
-    {
-        SynthesisFailureClass::FieldBoundsViolation
-    } else if message.contains("rate limit") || message.contains("HTTP 429") {
-        SynthesisFailureClass::RateLimited
-    } else {
-        SynthesisFailureClass::TransportError
-    };
-
-    SynthesisFailureMetadata {
-        class,
-        message,
-        occurred_at: Some(occurred_at.into()),
-        model: Some(model.into()),
-        provider: Some(provider.into()),
-    }
-}
-
-fn github_extension(snapshot: &GitHubRepositorySnapshot, source_url: &str) -> Value {
-    let mut github = toml::map::Map::new();
-    github.insert("html_url".into(), Value::String(source_url.to_string()));
-    github.insert(
-        "clone_url".into(),
-        Value::String(snapshot.clone_url.clone()),
-    );
-    github.insert(
-        "default_branch".into(),
-        Value::String(snapshot.default_branch.clone()),
-    );
-    github.insert("archived".into(), Value::Boolean(snapshot.archived));
-    github.insert("fork".into(), Value::Boolean(snapshot.fork));
-    if let Some(head_sha) = trimmed_non_empty(snapshot.head_sha.as_deref()) {
-        github.insert("head_sha".into(), Value::String(head_sha.to_string()));
-    }
-    if let Some(stars) = snapshot.stars {
-        github.insert("stars".into(), Value::Integer(stars as i64));
-    }
-    Value::Table(github)
-}
-
-fn manifest_is_missing_description(manifest: &Manifest) -> bool {
-    let description = manifest.repo.description.trim();
-    description.is_empty()
-        || description == "Imported repository metadata; review and refine before relying on it."
-}
-
-fn normalized_list(values: &[String]) -> Vec<String> {
-    let mut normalized = Vec::new();
-    for value in values {
-        if let Some(value) = trimmed_non_empty(Some(value.as_str())) {
-            if !normalized.iter().any(|existing| existing == value) {
-                normalized.push(value.to_string());
-            }
-        }
-    }
-    normalized
-}
-
-fn trimmed_non_empty(value: Option<&str>) -> Option<&str> {
-    value.map(str::trim).filter(|value| !value.is_empty())
-}
-
-// Must match dotrepo_core::validation's code-host list used by the
-// repo.homepage identity check in validate_manifest().
-const CODE_HOSTS: &[&str] = &["github.com", "gitlab.com", "bitbucket.org"];
-
-/// True when `homepage` is a code-host URL that resolves to a repository
-/// identity different from `repository` itself.
-fn homepage_conflicts_with_identity(repository: &RepositoryRef, homepage: &str) -> bool {
-    repository_identity(homepage).is_some_and(|(host, owner, repo)| {
-        CODE_HOSTS.contains(&host.as_str())
-            && (host != repository.host || owner != repository.owner || repo != repository.repo)
-    })
-}
-
 #[cfg(test)]
 mod tests {
+    use super::merge::homepage_conflicts_with_identity;
     use super::*;
     use crate::materialize::{
         materialize_repository, ConventionalRepositoryFiles, MaterializeRepositoryInput,
         RepositoryTextFile,
     };
     use crate::writeback::apply_writeback_plan;
+    use crate::{SynthesisFailureClass, SynthesisFailureMetadata};
     use dotrepo_core::validate_index_root;
     use dotrepo_schema::{parse_manifest, RecordStatus};
     use std::fs;

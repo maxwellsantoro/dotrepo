@@ -2,14 +2,18 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "verified"
 source = "https://github.com/serverless/serverless"
-generated_at = "2026-07-08T22:57:04.284684Z"
+generated_at = "2026-07-09T03:20:48.533436Z"
 
 [record.trust]
-confidence = "medium"
-provenance = ["imported"]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/ci-binary-installer.yml` and `.github/workflows/ci-framework.yml` suggested conflicting build commands. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+confidence = "high"
+provenance = [
+    "imported",
+    "inferred",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `.github/workflows/ci-framework.yml`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/ci-framework.yml`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Serverless Framework"
@@ -30,6 +34,7 @@ languages = [
     "HCL",
     "Makefile",
 ]
+build = "npm run build"
 test = "npm test"
 topics = [
     "serverless",
@@ -42,14 +47,6 @@ topics = [
     "microservice",
     "aws-dynamodb",
 ]
-
-[[repo.build_candidates]]
-command = "make build-prod"
-source = ".github/workflows/ci-binary-installer.yml"
-
-[[repo.build_candidates]]
-command = "npm run build"
-source = ".github/workflows/ci-framework.yml"
 
 [owners]
 maintainers = []

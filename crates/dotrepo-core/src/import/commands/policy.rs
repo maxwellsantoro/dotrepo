@@ -533,13 +533,42 @@ fn workflow_source_preference(file: &str) -> i32 {
         return 6;
     }
 
+    // Platform, packaging, and monorepo-slice workflows lose to generic CI when
+    // two workflow-tier commands would otherwise conflict (e.g. units_test_cli
+    // vs units_test_desktop, or ci-framework vs ci-binary-installer).
     const DEPRIORITIZED: &[&str] = &[
-        "android", "ios", "windows", "macos", "freebsd", "gcc", "clang", "cross", "release",
-        "bindings", "packages", "preview", "apk", "docker", "helm", "npm", "nuget", "pypi",
-        "crates", "openapi", "ui",
+        "android",
+        "ios",
+        "windows",
+        "macos",
+        "freebsd",
+        "desktop",
+        "electron",
+        "binary",
+        "installer",
+        "gcc",
+        "clang",
+        "cross",
+        "release",
+        "bindings",
+        "packages",
+        "preview",
+        "apk",
+        "docker",
+        "helm",
+        "npm",
+        "nuget",
+        "pypi",
+        "crates",
+        "openapi",
+        "ui",
+        "wasm",
+        "nightly",
+        "canary",
     ];
+    let lower = file.to_ascii_lowercase();
     for (index, keyword) in DEPRIORITIZED.iter().enumerate() {
-        if file.contains(keyword) {
+        if lower.contains(keyword) {
             return 100 + index as i32;
         }
     }
