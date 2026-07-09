@@ -82,6 +82,7 @@ pub(crate) trait GitHubClient {
         &self,
         repository: &RepositoryRef,
         default_branch: &str,
+        languages: &[String],
     ) -> Result<ConventionalRepositoryFiles>;
 
     /// Cumulative network requests/bytes observed while servicing this
@@ -372,14 +373,20 @@ impl HttpGitHubClient {
         Ok(files)
     }
 
-    /// Materialize .NET entrypoints: root `.sln` / `.csproj` when present, else
-    /// a small set of shallow monorepo project files from the git tree. Paths
-    /// are preserved so `dotrepo-core` import can rank non-test projects.
+    /// Materialize .NET entrypoints when C#/F# is a primary language signal.
+    /// Root `.sln` / `.csproj` always win; nested tree walks run only when
+    /// .NET is among the top languages so secondary SDK projects (e.g.
+    /// `apps/dot-net-sdk` in a TypeScript monorepo) do not become `repo.build`.
     fn fetch_dotnet_manifest_files(
         &self,
         repository: &RepositoryRef,
         default_branch: &str,
+        languages: &[String],
     ) -> Result<Vec<RepositoryTextFile>> {
+        if !dotnet_language_signal(languages) {
+            return Ok(Vec::new());
+        }
+
         let mut files = Vec::new();
         let mut root_contents_url = self.api_url(repository, &["contents"])?;
         root_contents_url
@@ -398,20 +405,17 @@ impl HttpGitHubClient {
         }
 
         if files.iter().any(|file| {
-            file.relative_path
-                .to_string_lossy()
-                .to_ascii_lowercase()
-                .ends_with(".csproj")
-                || file
-                    .relative_path
-                    .to_string_lossy()
-                    .to_ascii_lowercase()
-                    .ends_with(".sln")
+            let lower = file.relative_path.to_string_lossy().to_ascii_lowercase();
+            lower.ends_with(".csproj") || lower.ends_with(".sln")
         }) {
             return Ok(files);
         }
 
-        // Monorepo fallback: recursive tree, bounded selection.
+        // Nested monorepo walk only when .NET ranks in the top languages.
+        if !dotnet_is_primary_language(languages) {
+            return Ok(files);
+        }
+
         let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
         tree_url.query_pairs_mut().append_pair("recursive", "1");
         let tree = self
@@ -569,6 +573,7 @@ impl GitHubClient for HttpGitHubClient {
         &self,
         repository: &RepositoryRef,
         default_branch: &str,
+        languages: &[String],
     ) -> Result<ConventionalRepositoryFiles> {
         let mut extra_files = Vec::new();
         for relative_path in SUPPLEMENTAL_ROOT_FILES {
@@ -579,7 +584,11 @@ impl GitHubClient for HttpGitHubClient {
             }
         }
         extra_files.extend(self.fetch_workflow_files(repository, default_branch)?);
-        extra_files.extend(self.fetch_dotnet_manifest_files(repository, default_branch)?);
+        extra_files.extend(self.fetch_dotnet_manifest_files(
+            repository,
+            default_branch,
+            languages,
+        )?);
 
         Ok(ConventionalRepositoryFiles {
             readme: self.fetch_first_available_file(
@@ -859,6 +868,13 @@ fn select_dotnet_paths_from_tree(entries: &[GitTreeEntry], limit: usize) -> Vec<
             (lower.ends_with(".csproj") || lower.ends_with(".sln"))
                 && !lower.contains("/obj/")
                 && !lower.contains("/bin/")
+                // Secondary SDK / sample trees in polyglot monorepos.
+                && !lower.contains("/sdk/")
+                && !lower.contains("-sdk/")
+                && !lower.contains("dot-net-sdk")
+                && !lower.contains("/bindings/")
+                && !lower.contains("/examples/")
+                && !lower.contains("/samples/")
                 && path.matches('/').count() <= 3
         })
         .collect();
@@ -879,6 +895,23 @@ fn is_likely_test_dotnet_path(path: &str) -> bool {
         || lower.contains("/test/")
         || lower.ends_with("tests.csproj")
         || lower.ends_with("test.csproj")
+}
+
+fn is_dotnet_language(name: &str) -> bool {
+    matches!(name, "C#" | "F#" | "Visual Basic")
+}
+
+/// Any .NET language signal in the repository language list.
+fn dotnet_language_signal(languages: &[String]) -> bool {
+    languages.iter().any(|lang| is_dotnet_language(lang))
+}
+
+/// .NET ranks among the top languages (by GitHub byte-count order).
+fn dotnet_is_primary_language(languages: &[String]) -> bool {
+    languages
+        .iter()
+        .take(3)
+        .any(|lang| is_dotnet_language(lang))
 }
 
 #[cfg(test)]
@@ -971,11 +1004,38 @@ mod tests {
                 path: "App.sln".into(),
                 entry_type: "blob".into(),
             },
+            GitTreeEntry {
+                path: "apps/dot-net-sdk/Firecrawl/Firecrawl.csproj".into(),
+                entry_type: "blob".into(),
+            },
         ];
         assert_eq!(
             select_dotnet_paths_from_tree(&tree, 2),
             vec!["App.sln".to_string(), "src/Lib/Lib.csproj".to_string()]
         );
+        // SDK trees are excluded entirely (polyglot monorepo guard).
+        assert!(!select_dotnet_paths_from_tree(&tree, 10)
+            .iter()
+            .any(|path| path.contains("dot-net-sdk")));
+    }
+
+    #[test]
+    fn dotnet_primary_language_requires_top_rank() {
+        assert!(dotnet_is_primary_language(&[
+            "C#".into(),
+            "PowerShell".into()
+        ]));
+        assert!(!dotnet_is_primary_language(&[
+            "TypeScript".into(),
+            "Python".into(),
+            "Rust".into(),
+            "C#".into()
+        ]));
+        assert!(dotnet_language_signal(&["TypeScript".into(), "C#".into()]));
+        assert!(!dotnet_language_signal(&[
+            "TypeScript".into(),
+            "Python".into()
+        ]));
     }
 
     #[test]
@@ -1104,6 +1164,7 @@ mod tests {
             &self,
             _repository: &RepositoryRef,
             _default_branch: &str,
+            _languages: &[String],
         ) -> Result<ConventionalRepositoryFiles> {
             unreachable!("not used in refresh candidate planning tests")
         }

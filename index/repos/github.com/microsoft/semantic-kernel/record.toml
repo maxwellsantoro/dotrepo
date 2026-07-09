@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/semantic-kernel"
-generated_at = "2026-07-06T18:52:53.656825Z"
+generated_at = "2026-07-09T03:31:56.310291Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/dotnet-build-and-test.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `dotnet/samples/Concepts/Concepts.csproj`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `dotnet/samples/Concepts/Concepts.csproj`. Inferred `repo.test` from `dotnet/samples/Concepts/Concepts.csproj`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Semantic Kernel"
@@ -37,6 +38,8 @@ languages = [
     "Shell",
     "Batchfile",
 ]
+build = "dotnet build"
+test = "dotnet test"
 topics = [
     "ai",
     "artificial-intelligence",
@@ -62,6 +65,6 @@ archived = false
 clone_url = "https://github.com/microsoft/semantic-kernel.git"
 default_branch = "main"
 fork = false
-head_sha = "f6391ad8b6b47b6de44e80d54ce9f3ffe4f3ed42"
+head_sha = "35ba23e1b3092271c778ca057afe1a796e16e70e"
 html_url = "https://github.com/microsoft/semantic-kernel"
-stars = 28271
+stars = 28286

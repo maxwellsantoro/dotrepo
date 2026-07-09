@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/infiniflow/ragflow"
-generated_at = "2026-07-06T19:08:14.073898Z"
+generated_at = "2026-07-09T03:32:33.853728Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, `go.mod`, and `pyproject.toml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because `.github/workflows/sep-tests.yml` suggested an unsafe shell-like command. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, `go.mod`, and `pyproject.toml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `go.mod`. Left `repo.test` unset because `.github/workflows/sep-tests.yml` suggested an unsafe shell-like command. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh.'
 
 [repo]
 name = "ragflow"
@@ -79,6 +79,6 @@ archived = false
 clone_url = "https://github.com/infiniflow/ragflow.git"
 default_branch = "main"
 fork = false
-head_sha = "d8cefcf052e5f16340da9a60b098f20b8b41ef91"
+head_sha = "1430d0e431ac3a045ec1a6f534678f7714186dab"
 html_url = "https://github.com/infiniflow/ragflow"
-stars = 84417
+stars = 84634

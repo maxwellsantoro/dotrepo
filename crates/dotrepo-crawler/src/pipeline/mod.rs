@@ -51,7 +51,11 @@ pub(crate) fn crawl_repository_with_client<C: GitHubClient>(
     validate_repository_identity(&request.repository)?;
 
     let snapshot = client.fetch_repository_snapshot(&request.repository)?;
-    let files = client.fetch_repository_files(&request.repository, &snapshot.default_branch)?;
+    let files = client.fetch_repository_files(
+        &request.repository,
+        &snapshot.default_branch,
+        &snapshot.languages,
+    )?;
     let materialized = materialize_repository(&MaterializeRepositoryInput {
         repository: request.repository.clone(),
         files,
@@ -373,6 +377,7 @@ mod tests {
             &self,
             _repository: &RepositoryRef,
             _default_branch: &str,
+            _languages: &[String],
         ) -> Result<ConventionalRepositoryFiles> {
             Ok(self.files.clone())
         }

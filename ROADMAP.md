@@ -509,8 +509,8 @@ then gated cohort growth (M4). M5 stays parallel and lower priority.
 | `verified` / high confidence | 613 / 613 |
 | `imported` / `inferred` | 0 / 0 |
 | Record-level high-signal vs M2 target (500) | 613 (123%) |
-| Missing build / test / security | 228 / 232 / 420 |
-| Quality-hardening queue | ~465 (refresh via scripts) |
+| Missing build / test / security | 227 / 231 / 420 |
+| Quality-hardening queue | ~464 (refresh via scripts) |
 | Stale or missing `generated_at` | 0 (0%) |
 | Max refresh overdue | 0 days |
 | Accepted maintainer claims | 1 |
@@ -569,8 +569,14 @@ risk is operating it safely and usefully at the next scale step.
    - **.NET monorepo materialization (2026-07-09):** fetch root `.sln`/`.csproj`
      or shallow tree paths; import walks nested projects (depth ≤4) and treats
      solution files as `dotnet build`/`dotnet test` entrypoints. Recrawl lifted
-     Avalonia, CliWrap, jellyfin, Certify, v2rayN, DevToys, ShareX, ScreenToGif
-     build/test where evidence exists (missing build **236→228**).
+     Avalonia, CliWrap, jellyfin, Certify, v2rayN, DevToys, ShareX, ScreenToGif,
+     semantic-kernel where evidence exists.
+   - **Polyglot guard:** nested .NET tree walks only when C#/F# is in the top-3
+     languages; exclude `sdk`/`bindings`/`samples` paths so secondary SDKs (e.g.
+     firecrawl `apps/dot-net-sdk`) do not become `repo.build`.
+   - Coverage-gap recrawl batch (Python/TS/Go): modest gains where root
+     manifests exist; many high-star targets remain honest absences (no single
+     package entrypoint). Missing build/test ~**226/231** after pass.
    - Residual gaps remain (guides, awesome-lists, polyglot monorepos); prefer
      coverage-gap + honest abstention over invented commands.
 2. **Drain any new promotion headroom** after recrawls
@@ -620,6 +626,8 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
   corpus **613/613 verified**.
 - Crawler `pipeline/` split (merge / writeback_gate / synthesis / mod).
 - .NET monorepo build/test recovery + weekly lookup-miss demand workflow.
+- Polyglot .NET language gate + coverage-gap recrawl batch (semantic-kernel,
+  ragflow, pgmq, firecrawl correction).
 
 #### Next — Milestone 4 cohorts (after Now items 0–5 are healthy)
 

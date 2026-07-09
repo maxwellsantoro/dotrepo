@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pgmq/pgmq"
-generated_at = "2026-07-08T22:51:38.675705Z"
+generated_at = "2026-07-09T03:32:25.266275Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `.github/workflows/client-tests.yml` after model escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `.github/workflows/client-tests.yml` after model escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "pgmq"
