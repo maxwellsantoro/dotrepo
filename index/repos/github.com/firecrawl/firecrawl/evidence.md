@@ -2,6 +2,8 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
+- Imported repo.build from apps/api/package.json as `pnpm build`.
+- Imported repo.test from apps/api/package.json as `pnpm test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `firecrawl` from `GitHub API` after deterministic escalation.

@@ -1,6 +1,8 @@
 # Evidence
 
 - Imported repository name from README.md.
+- Imported repo.build from main/manager-mobile/package.json as `pnpm build`.
+- Imported repo.toolchain.min from main/manager-mobile/package.json as `18` (Node.js).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

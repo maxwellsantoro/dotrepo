@@ -373,6 +373,82 @@ impl HttpGitHubClient {
         Ok(files)
     }
 
+    /// Nested `package.json` files for JS/TS monorepos when root scripts are
+    /// absent or incomplete. Selection prefers apps/api, server, web over SDK
+    /// and example packages (mirrors `load_best_package_json` ranking).
+    fn fetch_node_manifest_files(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+        languages: &[String],
+    ) -> Result<Vec<RepositoryTextFile>> {
+        if !js_ts_is_primary_language(languages) {
+            return Ok(Vec::new());
+        }
+
+        // Root package.json is already fetched via SUPPLEMENTAL_ROOT_FILES.
+        // Only tree-walk when monorepo layout is likely.
+        let monorepo_markers = [
+            "pnpm-workspace.yaml",
+            "pnpm-workspace.yml",
+            "lerna.json",
+            "nx.json",
+            "turbo.json",
+            "rush.json",
+        ];
+        let mut has_marker = false;
+        for marker in monorepo_markers {
+            if self
+                .fetch_optional_repository_file(repository, default_branch, marker)?
+                .is_some()
+            {
+                has_marker = true;
+                break;
+            }
+        }
+
+        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
+        tree_url.query_pairs_mut().append_pair("recursive", "1");
+        let tree = self
+            .get_optional_json::<GitTreeResponse>(tree_url)?
+            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+        let package_paths: Vec<String> = tree
+            .tree
+            .iter()
+            .filter(|entry| entry.entry_type == "blob")
+            .map(|entry| entry.path.clone())
+            .filter(|path| path.ends_with("package.json"))
+            .collect();
+        if package_paths.is_empty() {
+            return Ok(Vec::new());
+        }
+        // Nested packages only when a monorepo marker exists or multiple package.json files.
+        if !has_marker && package_paths.len() <= 1 {
+            return Ok(Vec::new());
+        }
+
+        let mut ranked = package_paths;
+        ranked.sort_by(|left, right| {
+            node_package_json_path_preference(left)
+                .cmp(&node_package_json_path_preference(right))
+                .then_with(|| left.cmp(right))
+        });
+        ranked.truncate(6);
+
+        let mut files = Vec::new();
+        for path in ranked {
+            if path == "package.json" {
+                continue; // already materialized via supplemental list
+            }
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
+    }
+
     /// Materialize .NET entrypoints when C#/F# is a primary language signal.
     /// Root `.sln` / `.csproj` always win; nested tree walks run only when
     /// .NET is among the top languages so secondary SDK projects (e.g.
@@ -584,6 +660,11 @@ impl GitHubClient for HttpGitHubClient {
             }
         }
         extra_files.extend(self.fetch_workflow_files(repository, default_branch)?);
+        extra_files.extend(self.fetch_node_manifest_files(
+            repository,
+            default_branch,
+            languages,
+        )?);
         extra_files.extend(self.fetch_dotnet_manifest_files(
             repository,
             default_branch,
@@ -914,6 +995,69 @@ fn dotnet_is_primary_language(languages: &[String]) -> bool {
         .any(|lang| is_dotnet_language(lang))
 }
 
+fn is_js_ts_language(name: &str) -> bool {
+    matches!(
+        name,
+        "JavaScript" | "TypeScript" | "Vue" | "Svelte" | "Astro"
+    )
+}
+
+fn js_ts_is_primary_language(languages: &[String]) -> bool {
+    languages.iter().take(3).any(|lang| is_js_ts_language(lang))
+}
+
+/// Lower is better; keep in sync with core `package_json_path_preference`.
+fn node_package_json_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "package.json" {
+        return 0;
+    }
+    if lower.contains("/examples/")
+        || lower.contains("/samples/")
+        || lower.contains("/fixtures/")
+        || lower.contains("/example/")
+    {
+        return 200;
+    }
+    if lower.contains("test-suite")
+        || lower.contains("test-site")
+        || lower.contains("/tests/")
+        || lower.contains("/__tests__/")
+        || lower.contains("/e2e/")
+    {
+        return 180;
+    }
+    if lower.contains("/sdk/")
+        || lower.contains("-sdk/")
+        || lower.contains("/js-sdk/")
+        || lower.contains("/python-sdk/")
+    {
+        return 150;
+    }
+    if lower.contains("/native/") {
+        return 140;
+    }
+    if lower == "server/package.json" || lower.ends_with("/server/package.json") {
+        return 10;
+    }
+    if lower == "api/package.json"
+        || lower.ends_with("/api/package.json")
+        || lower.contains("/apps/api/")
+    {
+        return 11;
+    }
+    if lower == "web/package.json" || lower.ends_with("/web/package.json") {
+        return 12;
+    }
+    if lower.contains("/apps/") {
+        return 20;
+    }
+    if lower.contains("/packages/") {
+        return 25;
+    }
+    50
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1017,6 +1161,23 @@ mod tests {
         assert!(!select_dotnet_paths_from_tree(&tree, 10)
             .iter()
             .any(|path| path.contains("dot-net-sdk")));
+    }
+
+    #[test]
+    fn node_package_json_path_preference_ranks_apps_over_sdks() {
+        assert!(
+            node_package_json_path_preference("server/package.json")
+                < node_package_json_path_preference("apps/js-sdk/package.json")
+        );
+        assert!(
+            node_package_json_path_preference("apps/api/package.json")
+                < node_package_json_path_preference("examples/demo/package.json")
+        );
+        assert!(js_ts_is_primary_language(&[
+            "TypeScript".into(),
+            "Python".into()
+        ]));
+        assert!(!js_ts_is_primary_language(&["Python".into(), "Go".into()]));
     }
 
     #[test]

@@ -3,7 +3,9 @@
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from CODEOWNERS; `owners.team` is `@polarsource/engineering` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
-- Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml` suggested an unsafe shell-like command.
+- Imported repo.build from clients/apps/web/package.json as `npm run build`.
+- Imported repo.test from clients/apps/web/package.json as `npm test`.
+- Imported repo.toolchain.min from clients/apps/web/package.json as `24` (Node.js).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

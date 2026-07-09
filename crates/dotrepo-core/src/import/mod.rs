@@ -43,8 +43,8 @@ pub use types::{
 };
 
 use commands::{
-    load_first_existing_file, load_first_file_with_extension, load_workflow_import_files,
-    sanitize_import_command,
+    load_best_package_json, load_first_existing_file, load_first_file_with_extension,
+    load_workflow_import_files, sanitize_import_command,
 };
 
 #[allow(unused_imports)]
@@ -230,7 +230,9 @@ pub fn import_repository_with_options(
     let cargo_toml = load_first_existing_file(root, &["Cargo.toml"])?;
     let rust_toolchain_toml = load_first_existing_file(root, &["rust-toolchain.toml"])?;
     let rust_toolchain = load_first_existing_file(root, &["rust-toolchain"])?;
-    let package_json = load_first_existing_file(root, &["package.json"])?;
+    // Prefer a monorepo package with real build/test scripts over a root
+    // workspace package.json that only hosts format scripts.
+    let package_json = load_best_package_json(root)?;
     let pyproject_toml = load_first_existing_file(root, &["pyproject.toml"])?;
     let setup_py = load_first_existing_file(root, &["setup.py"])?;
     let setup_cfg = load_first_existing_file(root, &["setup.cfg"])?;

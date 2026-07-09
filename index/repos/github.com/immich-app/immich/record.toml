@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/immich-app/immich"
-generated_at = "2026-07-09T03:31:31.948714Z"
+generated_at = "2026-07-09T03:37:43.483582Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `server/package.json`. Imported `repo.build` from `server/package.json`. Imported `repo.test` from `server/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "immich"
@@ -43,6 +43,8 @@ languages = [
     "Go Template",
     "Objective-C",
 ]
+build = "npm run build"
+test = "npm test"
 topics = [
     "backup-tool",
     "mobile-app",
@@ -82,4 +84,4 @@ default_branch = "main"
 fork = false
 head_sha = "c5222c7579c5268c862621ba68a128346ca3d06d"
 html_url = "https://github.com/immich-app/immich"
-stars = 106953
+stars = 106954

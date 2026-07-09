@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/polarsource/polar"
-generated_at = "2026-07-09T03:31:22.335336Z"
+generated_at = "2026-07-09T03:37:56.598592Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@polarsource/engineering` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `.github/workflows/copilot-setup-steps.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `clients/apps/web/package.json`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@polarsource/engineering` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `clients/apps/web/package.json`. Imported `repo.test` from `clients/apps/web/package.json`. Imported `repo.toolchain.min` from `clients/apps/web/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Polar"
@@ -36,6 +36,8 @@ languages = [
     "Nix",
     "Ruby",
 ]
+build = "npm run build"
+test = "npm test"
 topics = [
     "fastapi",
     "nextjs",
@@ -52,6 +54,10 @@ topics = [
     "payments-platform",
     "usage-billing",
 ]
+
+[repo.toolchain]
+min = "24"
+ecosystem = "Node.js"
 
 [owners]
 maintainers = [

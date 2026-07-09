@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/firecrawl/firecrawl"
-generated_at = "2026-07-09T03:34:03.302466Z"
+generated_at = "2026-07-09T03:37:49.799574Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `apps/api/package.json`. Imported `repo.build` from `apps/api/package.json`. Imported `repo.test` from `apps/api/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "firecrawl"
@@ -41,6 +41,8 @@ languages = [
     "HTML",
     "Procfile",
 ]
+build = "pnpm build"
+test = "pnpm test"
 topics = [
     "ai",
     "crawler",
@@ -83,4 +85,4 @@ default_branch = "main"
 fork = false
 head_sha = "e93c1c75019cd262261437b9adabdcc373640708"
 html_url = "https://github.com/firecrawl/firecrawl"
-stars = 147921
+stars = 147922

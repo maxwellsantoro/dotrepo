@@ -58,6 +58,134 @@ pub(super) fn load_first_existing_file(
     Ok(None)
 }
 
+/// Load the best `package.json` for command inference: root first when it has
+/// usable scripts, otherwise a nested monorepo package preferred over SDKs /
+/// examples / test harnesses.
+pub(super) fn load_best_package_json(root: &Path) -> Result<Option<ImportedFile>> {
+    let mut matches = Vec::new();
+    collect_files_named(root, root, "package.json", 4, 1, &mut matches)?;
+    matches.sort_by(|left, right| {
+        package_json_path_preference(&left.0)
+            .cmp(&package_json_path_preference(&right.0))
+            .then_with(|| left.0.cmp(&right.0))
+    });
+
+    for (relative, path) in matches {
+        let contents = fs::read_to_string(&path)
+            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let file = ImportedFile {
+            path: relative,
+            contents,
+        };
+        if extraction::infer_package_json_commands(&file).is_some() {
+            return Ok(Some(file));
+        }
+    }
+    Ok(None)
+}
+
+/// Lower is better. Used for monorepo package.json selection.
+pub(super) fn package_json_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "package.json" {
+        return 0;
+    }
+    if lower.contains("/examples/")
+        || lower.contains("/samples/")
+        || lower.contains("/fixtures/")
+        || lower.contains("/example/")
+    {
+        return 200;
+    }
+    if lower.contains("test-suite")
+        || lower.contains("test-site")
+        || lower.contains("/tests/")
+        || lower.contains("/__tests__/")
+        || lower.contains("/e2e/")
+    {
+        return 180;
+    }
+    if lower.contains("/sdk/")
+        || lower.contains("-sdk/")
+        || lower.contains("/js-sdk/")
+        || lower.contains("/python-sdk/")
+    {
+        return 150;
+    }
+    if lower.contains("/native/") {
+        return 140;
+    }
+    if lower == "server/package.json" || lower.ends_with("/server/package.json") {
+        return 10;
+    }
+    if lower == "api/package.json"
+        || lower.ends_with("/api/package.json")
+        || lower.contains("/apps/api/")
+    {
+        return 11;
+    }
+    if lower == "web/package.json" || lower.ends_with("/web/package.json") {
+        return 12;
+    }
+    if lower.contains("/apps/") {
+        return 20;
+    }
+    if lower.contains("/packages/") {
+        return 25;
+    }
+    50
+}
+
+fn collect_files_named(
+    root: &Path,
+    dir: &Path,
+    file_name: &str,
+    max_depth: usize,
+    depth: usize,
+    out: &mut Vec<(String, PathBuf)>,
+) -> Result<()> {
+    if depth > max_depth {
+        return Ok(());
+    }
+    let entries =
+        fs::read_dir(dir).map_err(|err| anyhow!("failed to read {}: {}", dir.display(), err))?;
+    for entry in entries.filter_map(|entry| entry.ok()) {
+        let path = entry.path();
+        if path.is_dir() {
+            let name = path
+                .file_name()
+                .and_then(|value| value.to_str())
+                .unwrap_or("");
+            if name.starts_with('.')
+                || name.eq_ignore_ascii_case("node_modules")
+                || name.eq_ignore_ascii_case("dist")
+                || name.eq_ignore_ascii_case("build")
+                || name.eq_ignore_ascii_case("target")
+            {
+                continue;
+            }
+            collect_files_named(root, &path, file_name, max_depth, depth + 1, out)?;
+            continue;
+        }
+        if !path.is_file() {
+            continue;
+        }
+        if !path
+            .file_name()
+            .and_then(|value| value.to_str())
+            .is_some_and(|name| name.eq_ignore_ascii_case(file_name))
+        {
+            continue;
+        }
+        let relative = path
+            .strip_prefix(root)
+            .map(|value| value.to_string_lossy().replace('\\', "/"))
+            .unwrap_or_else(|_| file_name.to_string());
+        out.push((relative, path));
+    }
+    Ok(())
+}
+
 /// Find the first file with `extension` within `max_depth` directory levels
 /// (depth 1 = root only). Prefers non-test paths when ranking. Relative path
 /// is preserved so monorepo layouts (e.g. `src/Foo/Foo.csproj`) remain honest.
@@ -346,6 +474,38 @@ mod tests {
             }
             other => panic!("expected unique test resolution, got {other:?}"),
         }
+    }
+
+    #[test]
+    fn load_best_package_json_prefers_server_app_over_root_format_only() {
+        use super::load_best_package_json;
+        use std::fs;
+        use std::time::{SystemTime, UNIX_EPOCH};
+
+        let unique = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("clock")
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!("dotrepo-pkg-json-{unique}"));
+        let _ = fs::remove_dir_all(&root);
+        fs::create_dir_all(root.join("server")).expect("server dir");
+        fs::write(
+            root.join("package.json"),
+            r#"{"scripts":{"format":"prettier ."}}"#,
+        )
+        .expect("root package");
+        fs::write(
+            root.join("server/package.json"),
+            r#"{"scripts":{"build":"nest build","test":"vitest run"}}"#,
+        )
+        .expect("server package");
+
+        let best = load_best_package_json(&root)
+            .expect("load succeeds")
+            .expect("selects a package.json");
+        assert_eq!(best.path, "server/package.json");
+        assert!(best.contents.contains("nest build"));
+        let _ = fs::remove_dir_all(&root);
     }
 
     #[test]
