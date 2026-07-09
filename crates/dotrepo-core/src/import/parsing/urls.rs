@@ -120,7 +120,7 @@ pub(crate) fn is_actionable_security_url(url: &str) -> bool {
     // Generic first-party policy URLs with an explicit security path segment.
     if let Some(host) = security_url_host(&lower) {
         if !is_generic_issue_or_homepage_path(&lower, host)
-            && security_path_segments(&lower).any(|segment| is_security_path_token(segment))
+            && security_path_segments(&lower).any(is_security_path_token)
         {
             return true;
         }

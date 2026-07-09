@@ -11,8 +11,10 @@ release history lives in [`CHANGELOG.md`](./CHANGELOG.md).
 | What to do next | [Active execution order](#active-execution-order) |
 | Why the system exists | [Mission](#mission), [Core thesis](#core-thesis), [Non-negotiable principles](#non-negotiable-principles) |
 | Capability gates | [Product milestones](#product-milestones) |
+| Safety / ops integrity backlog | [Platform integrity](#platform-integrity) and Now items 0–2 under Active execution order |
 | Live numbers | Generated artifacts (`scripts/render_index_growth_status.py`, intent scorecard, unit-cost report) — not this file |
 | Operator procedures | [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md), [`docs/distribution.md`](./docs/distribution.md), [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md) |
+| Toolchain structure debt | [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md) |
 
 Date-stamped counts below are **snapshots**. They fix direction and compare
 progress; they do not redefine strategy when the index moves. Prefer growth,
@@ -284,6 +286,21 @@ Required protections include:
 Automation may promote eligible records to `verified`. It does not mint
 maintainer authority, `reviewed`, or `canonical` status.
 
+Additional platform protections required as the public surface and scheduled
+writeback path carry real traffic:
+
+- remote MCP lookup stays on allowlisted origins; snapshot path pointers cannot
+  retarget host via protocol-relative or absolute URLs
+- custom lookup bases keep an explicit private-IP / metadata denylist (including
+  CGNAT and common cloud-metadata hosts), with no redirects and DNS pinning
+- multi-file index writeback is multi-artifact durable (stage then swap, or
+  roll back) so a failed evidence write cannot leave a new `record.toml` without
+  its sibling artifacts
+- hosted search and relations stay inside default request budgets so inventory
+  growth cannot become unbounded Worker cost
+- autonomous automation is **fail-closed**: unset enablement means no scheduled
+  writeback; scheduled jobs honor the gate rather than skipping it
+
 ## Operating strategy
 
 The roadmap advances through parallel workstreams. Maintainer adoption improves
@@ -292,14 +309,15 @@ adoption occurs.
 
 | Workstream | Immediate objective | Success criterion or scale gate |
 | --- | --- | --- |
-| Reliability | Prove repeated autonomous refresh and safe partial failure | Strict telemetry SLOs pass for consecutive scheduled runs |
+| Platform integrity | Fail-closed automation, origin-bound remote fetches, multi-file writeback durability, Worker cost bounds | Scheduled index writeback cannot land without explicit enablement; remote clients cannot leave allowlisted origin via snapshot pointers; partial writeback cannot strand half-updated records; search/relations stay inside request budgets |
+| Reliability | Keep repeated autonomous refresh and safe partial failure green | Strict telemetry SLOs pass for consecutive scheduled runs (fail the run, not warn-only, once baselines are stable) |
 | Accuracy | Improve factual precision and honest abstention by intent and ecosystem | No intent or ecosystem cohort regresses beyond its error budget |
 | Efficiency | Avoid unchanged work and route unresolved fields to the cheapest sufficient method | No-op, changed-record, and improved-record unit costs are measured and within budget |
 | Throughput | Increase repositories processed per unit of wall time and compute | Cohort completes within latency, memory, rate-limit, and failure-isolation budgets |
 | Utility | Answer representative lookup, execution, documentation, security, and discovery tasks | Intent-level hit-rate and exact-value gates pass |
 | Authority and adoption | Make native ownership and canonical handoff easy | Conversion and retention improve; this workstream does not block overlay coverage |
 | Distribution | Put the lookup surface in the default toolchains agents already use | Hosted and MCP traffic from non-operator consumers exists and grows; at least one external integration ships |
-| Maintainability | Keep the reference implementation safe to change | Structural gates and focused tests remain healthy |
+| Maintainability | Keep the reference implementation safe to change | Structural gates and focused tests remain healthy; oversized orchestration modules split before large features |
 
 ### Cohort-based expansion
 
@@ -361,9 +379,9 @@ coverage. Operator checklist:
 
 | Lever | Status | Next step |
 | --- | --- | --- |
-| Hosted public API + Worker | Live | Keep deploy-coherence and canaries green |
-| MCP server + registry packaging | Shipped (`1.0.x` stable; NDJSON framing in 1.0.1) | Keep listings current on each stable tag |
-| crates.io toolchain | Shipped (seven packages; auto-publish on tag) | Point production consumers at stable `1.0.x` |
+| Hosted public API + Worker | Live | Keep canaries green; add default search/relations cost bounds before M4 inventory growth |
+| MCP server + registry packaging | Shipped (`1.0.x` stable; NDJSON framing in 1.0.1) | Keep listings current on each stable tag; origin-bind snapshot path fetches |
+| crates.io toolchain | Shipped (seven packages; auto-publish on tag) | Point production consumers at stable `1.0.x` only |
 | Efficiency benchmark page | Live (`/efficiency/`) | Refresh on deploy; use as the external pitch |
 | pagedigest publisher | Live | Consume manifests in the crawler when non-GitHub sources appear |
 | Lookup-miss telemetry | Emission + fixture aggregation | Export live Worker logs on cadence; feed M4 selection |
@@ -425,11 +443,39 @@ the hosted Worker (`DOTREPO_LOOKUP_MISS` log lines +
 `scripts/aggregate_lookup_misses.py`) feeds Milestone 4 cohort selection once
 logs are exported.
 
+### Platform integrity
+
+M1 proved that autonomous generation can run without a human queue. Scale and
+distribution still require the factory to be **safe by default** under token
+compromise, hostile snapshot metadata, partial disk failure, and Worker load.
+
+| Control | Status | Notes |
+| --- | --- | --- |
+| Scheduled autonomous enablement | **Closed** | Workflow requires `vars.INDEX_AUTOMATION_ENABLED == 'true'`; no env default to enabled; scheduled job honors enablement (no `--skip-automation-enabled-check`); script/env defaults fail closed; `.env.example` is `false` |
+| Multi-file writeback | **Closed** | Crawler stages all `*.tmp` artifacts then renames; missing evidence cannot leave a lone new `record.toml` |
+| MCP snapshot path binding | **Closed** | `resolve_same_origin_path_url` rejects `//`, schemes, and `..`; join result must keep base origin; unit tests cover host escape |
+| Custom-base SSRF denylist | **Closed** | CGNAT `100.64.0.0/10`, documentation ranges, multicast/broadcast, IPv6 docs, cloud-metadata hostnames |
+| Worker cost bounds | **Closed** | Search default limit 50 / max 200; reverse relations inventory scan only when ≤64 peers (prefer `relations.json`) |
+| Writeback path (PR vs direct push) | **Open** | Autonomous refresh still commits to the default branch when enabled; draft-PR or environment protection remains preferred before wider M4 automation |
+| Telemetry SLO on schedule | **Open** | Telemetry gate remains `--warn-only` with batch `continue-on-error`; promote to strict fail once baselines stay green |
+| CI / supply chain hygiene | **Open** | Least-privilege `ci.yml` permissions; Dependabot for cargo + npm; pin mcp-publisher binary |
+| Dual CLI entrypoint | **Open** | Collapse `crates/dotrepo` + `dotrepo-cli` to one shared `run()` |
+
+Closed rows landed 2026-07-09. Remaining open rows still outrank raw corpus growth when
+they conflict with unattended M4 batch expansion.
+
+Primary surfaces: `.github/workflows/index-autonomous-refresh.yml`,
+`scripts/run_autonomous_index_batch.py`, `crates/dotrepo-mcp/src/{handlers,lookup}.rs`,
+`crates/dotrepo-crawler/src/writeback.rs`, `cloudflare/hosted-query/`,
+`.github/workflows/ci.yml`, `crates/dotrepo/src/main.rs`.
+
 ### Status discipline
 
 `ROADMAP.md` owns stable direction, gates, and **execution order**. It is not a
 changelog of every investigation: long-form operator narratives belong in
-`CHANGELOG.md`, commit history, or `docs/*` procedures.
+`CHANGELOG.md`, commit history, or `docs/*` procedures. Whole-project reviews
+feed this file only as **gates, workstream rows, and Now/Next bullets** — not as
+unstructured audit dumps.
 
 Date-stamped counts are snapshots sourced from growth, coverage, promotion,
 accuracy, and telemetry reports. Regenerated dashboards and artifacts own live
@@ -446,104 +492,133 @@ Milestones are capability and quality gates, not release dates.
 | **M1** Autonomous index factory | Generation/refresh without human queue | **Complete** (ops proof closed 2026-07-08) |
 | **M2** Useful shared semantic cache | ≥500 high-signal profiles + lookup contracts | **Complete** |
 | **M3** Research substrate | Search, compare, relations, optional synthesis | **Complete** (calibration ongoing) |
-| **M4** Index at ecosystem scale | 1k→10k+ with cost/freshness gates | **Next scale phase** |
+| **M4** Index at ecosystem scale | 1k→10k+ with cost/freshness gates | **Next scale phase** (after integrity + demand path) |
 | **M5** Maintainer adoption flywheel | Native ownership without blocking overlays | **In parallel** (does not gate M4) |
 | **M6** Open metadata standard | Independent producers/consumers | **Later** |
 
-**v0.1 surfaces are shipped.** Remaining work is operational proof (final M1
-gap), quality hardening at current corpus size, distribution/demand capture,
-then gated cohort growth (M4).
+**v0.1 surfaces and M1–M3 capability gates are shipped.** Active work is
+**platform integrity** (fail-closed automation and remote/writeback durability),
+**quality hardening** at current corpus size, **distribution / demand capture**,
+then gated cohort growth (M4). M5 stays parallel and lower priority.
 
-**Checked-in index snapshot (2026-07-08, post-hardening batch)** — refresh with
+**Checked-in index snapshot (2026-07-09)** — refresh with
 `scripts/render_index_growth_status.py`:
 
 | Metric | Value |
 | --- | ---: |
 | Overlay records | 613 |
-| `verified` / high confidence | 590 |
-| `inferred` / `imported` | 11 / 12 |
-| Record-level high-signal vs M2 target (500) | 590 (118%) |
-| Missing build / test / security | 237 / 239 / 402 |
-| Quality-hardening queue | 467 |
+| `verified` / high confidence | 611 / 611 |
+| `imported` (honest partial / conflict) | 2 |
+| Record-level high-signal vs M2 target (500) | 611 (122%) |
+| Missing build / test / security | 237 / 239 / 420 |
+| Quality-hardening queue | 466 |
 | Stale or missing `generated_at` | 0 (0%) |
 | Max refresh overdue | 0 days |
 | Accepted maintainer claims | 1 |
 
 *High-signal* here is the growth-status record-level aggregate (status ×
 confidence), not a separate profile-export count. Milestone 2’s 500-profile
-coverage gate is already complete; the priority is **quality and utility
-hardening**, not raw record growth, until M4 cohorts open.
+coverage gate is already complete; until M4 cohorts open, prioritize
+**platform integrity**, then **quality and utility hardening**, not raw record
+growth.
 
 ### Active execution order
 
 This section decides what runs **now**. Milestone sections below describe
 destination gates; do not treat their “current status” lists as the work queue.
 
+Priority when workstreams conflict:
+
+```text
+platform integrity
+  -> quality hardening (honest fields)
+  -> distribution / demand capture
+  -> M4 cohorts
+  -> M5 adoption polish
+```
+
 #### Status at a glance
 
 | Workstream | State | Blocker or next proof |
 | --- | --- | --- |
-| M1 reliability (strict telemetry gate) | **Done** — three consecutive strict checkpoints | Keep green on schedule |
-| M1 unit cost (unchanged/changed/improved) | **Done** — wall, network, tokens, CPU, RSS | Optional: provider $ cost from sidecar |
-| M1 primary-tier model canary | **Done** — live primary resolution | — |
-| M1 second-opinion live canary | **Done** (2026-07-08) | See `index/telemetry/m1-second-opinion-canary-20260708.md` |
-| Intent/ecosystem scorecards | **Tooling shipped** | Use as soft budgets; harden only after stable |
+| M1 factory + ops proof | **Done** (2026-07-08) | Keep green; do not reopen as a gate |
+| Platform integrity | **Mostly closed** (2026-07-09) | Fail-closed automation, MCP origin bind, multi-file writeback, Worker bounds shipped; open: PR writeback, strict telemetry, CI hygiene, dual CLI ([table](#platform-integrity)) |
+| Intent/ecosystem scorecards | **Tooling shipped** | Soft budgets; harden only after stable |
 | Execution-field completeness | **Hardening** | ~39% missing build/test; use coverage-gap report |
-| Distribution / non-operator demand | **Path landed** | In-repo consumer + miss fixture; live third-party traffic still open |
-| M4 first 1k profiles | **Ready to open** when distribution path is live | 50–100 repo cohorts |
+| Distribution / non-operator demand | **Path landed** | Live third-party traffic + exported miss volume still open |
+| M4 first 1k profiles | **Unblocked on core integrity; still needs demand path** | 50–100 repo cohorts after Now 0–5 healthy (strict telemetry + live miss export preferred) |
+| Maintainability hotspots | **Tracked** | Split `import/escalation.rs` and `crawler/pipeline.rs` before large features |
 | M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |
 
-#### Now — quality hardening + distribution (M1 proof closed)
+#### Now — platform integrity first, then quality + distribution
 
-Milestone 1 operational proof is **closed** (strict telemetry, unit cost,
-primary canary, second-opinion live canary). Remaining “Now” work is quality
-and demand, not factory existence.
+Milestone 1 operational proof is **closed**. The factory exists; the remaining
+risk is operating it safely and usefully at the next scale step.
 
+0. **Platform integrity** (core controls **closed** 2026-07-09; residual open rows
+   in [Platform integrity](#platform-integrity) still outrank unattended scale):
+   - **Done:** fail-closed scheduled enablement; MCP same-origin snapshot paths;
+     multi-file staged writeback; Worker search limits + bounded reverse-relations scan
+   - **Still open before heavy unattended automation:** draft-PR writeback (or env
+     protection), strict telemetry gate on schedule, CI least-privilege / Dependabot
+     cargo+npm, dual-CLI dispatch collapse
 1. **Work the quality-hardening queue** without inventing completeness.
    - Prioritize: `scripts/render_coverage_gaps.py` and growth-status “Next
-     Quality Targets”.
+     Quality Targets” (e.g. remaining `imported` medium-confidence rows).
    - Score: `scripts/render_intent_quality_scorecard.py` (soft budgets).
    - Expectation: many security gaps are honest absence; multi-ecosystem ties
      keep `build_candidates` / `test_candidates` (RFC 0020).
-   - 2026-07-08 batch: +18 verified (572→590) via promotion drain + recrawls +
-     security-URL scoring fix (`security.html` stems, Meta whitehat, Node
-     security portal).
-   - Later 2026-07-08 quality pass: non-actionable security contacts →
-     `unknown` (parser + index cleanup), scheme-less homepage normalize,
-     **+21 verified** (590→611) via gate-passed `promotion-report --apply`.
+   - Recent quality passes (2026-07-08): security-URL scoring, non-actionable
+     contact rejection, scheme-less homepage normalize → **611 verified / 613**
+     via gate-passed promotion; **0** promotion headroom remaining until new evidence.
 2. **Drain any new promotion headroom** after recrawls
-   (`dotrepo promotion-report --apply`) — never bypass gates. Headroom after
-   the quality pass: **0** promotion candidates (2 remaining imported with
-   honest intra-tier build/test conflicts).
+   (`dotrepo promotion-report --apply`) — never bypass gates. Two remaining
+   `imported` records hold honest intra-tier build/test conflicts.
 3. **Keep audit conversion running.** Weekly sample
    (`scripts/audit_index_sample.py`); findings → fixture/parser/policy.
-   Latest sample: `index/telemetry/audit-sample-20260708.md`; disposition:
-   `index/telemetry/audit-sample-20260708-disposition.md`.
+   Latest closed sample: `index/telemetry/audit-sample-20260708.md` +
+   `audit-sample-20260708-disposition.md`.
 4. **Hold release floors** during hardening (profile/high-signal + factual
-   accuracy baselines).
-5. **Distribution (parallel, outranks M5):** lookup-miss fixture + aggregator
-   E2E; template-complete `examples/external-consumer/` — see
+   accuracy baselines). Prefer pinned stable **`1.0.x`** for production
+   consumers; keep `main` on `2.0.0-alpha` without marketing alpha as drop-in stable.
+5. **Distribution (parallel, outranks M5):** export live lookup-miss volume;
+   land one external non-operator consumer — see
    [In parallel — distribution](#in-parallel--distribution-outranks-m5-polish).
+
+#### Standing maintainability (when touching hotspots)
+
+Do not expand these modules without executing the documented splits first
+([`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md)):
+
+| Hotspot | Plan |
+| --- | --- |
+| `dotrepo-core/src/import/escalation.rs` (~1.5k) | Split deterministic tier resolution, model ladder, and report assembly |
+| `dotrepo-crawler/src/pipeline.rs` (~1.5k) | Split merge/identity guards, factual sequence, writeback-gate wiring |
+| `crates/dotrepo` vs `dotrepo-cli` | Collapse to one shared `run()` to stop install-alias dispatch drift |
+| `dotrepo-cli/src/tests.rs` | Split by command domain on next test-family expansion |
+| `facade_tests/import_repository.rs` | Split on next import-fixture expansion |
 
 #### Done recently (do not re-litigate)
 
 Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md).
 
-- Strict autonomous telemetry gate; verified downgrade guard on refresh.
-- Supplemental multi-ecosystem manifest fetch; homepage identity guard.
-- Language ordering by byte count; shared `scripts/language_family.py`.
+- M1 closed: strict multi-run telemetry proof, unit cost (wall/network/tokens/CPU/RSS),
+  primary + second-opinion live canaries, verified downgrade guard on refresh.
+- Supplemental multi-ecosystem manifest fetch; homepage identity guard; language
+  ordering by byte count; shared `scripts/language_family.py`.
 - Escalation ladder: low-confidence `Absent` continues; confident abstention
-  terminates; RFC 0020 candidates; **second-opinion live canary passed**.
-- Unit-cost CPU/RSS; intent scorecard; coverage-gap report; lookup-miss emission.
-- Actionable security URL scoring: file stems (`security.html`), Facebook
-  whitehat, nodesecurity.io (plus existing GitHub/HackerOne/Django/etc.).
-- Non-actionable SECURITY.md URLs no longer stored as medium-confidence
-  `security_contact` (honest `unknown` / absence); gRPC-style `cve-process`
-  docs treated as actionable; +21 gate-passed promotions (verified 611/613).
-- Audit sample disposition archived; lookup-miss sample fixture; external
-  consumer reference client under `examples/external-consumer/`.
+  terminates; RFC 0020 candidates.
+- Intent scorecard; coverage-gap report; lookup-miss emission + fixture aggregator.
+- Security import hardening: actionable URL scoring + non-actionable contact rejection;
+  verified **611/613**; audit disposition closed.
+- Distribution path: `examples/external-consumer/`, efficiency page, MCP/crates
+  install lines documented as stable `1.0.x` vs alpha `main`.
 
-#### Next — Milestone 4 cohorts (after Now items 1–5 are healthy)
+#### Next — Milestone 4 cohorts (after Now items 0–5 are healthy)
+
+Core platform-integrity controls for item 0 are closed. Do **not** open large
+unattended M4 growth while residual integrity rows (PR writeback, strict
+telemetry) are still open **and** lookup-miss demand remains unexported.
 
 1. Expand in gated **50–100** repository cohorts toward **1,000** maintained
    profiles.
@@ -553,13 +628,16 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
    model-tier, and unit-cost budgets before batch size increases.
 4. Select coverage from the [demand signal stack](#demand-and-coverage-strategy)
    and ecosystem gaps — not raw count alone.
+5. On schedule, promote the autonomous telemetry gate from warn-only to
+   **strict fail** once baselines stay green (Reliability workstream).
 
 #### In parallel — distribution (outranks M5 polish)
 
 Checkpoint: **sustained hosted or MCP traffic from non-operator consumers**,
 plus exported lookup-miss volume that can steer M4 selection.
 
-1. Keep MCP registry listings and stable `1.0.x` install paths current.
+1. Keep MCP registry listings and stable `1.0.x` install paths current (pin
+   versions in docs and scaffolds; never treat crates.io alpha as production default).
 2. Keep the efficiency page as the external pitch (tokens/bytes/requests saved).
 3. Export Worker logs → `aggregate_lookup_misses.py` on a fixed cadence
    (offline proof: `scripts/fixtures/lookup_miss_sample.log`).
@@ -581,40 +659,51 @@ overlay usefulness or M4 growth.
 1k → 10k only after M4 gates hold; then broader public coverage through larger
 cohorts. Start a minimal M6 conformance suite and independent-consumer test
 before full ecosystem-scale completion so the protocol does not overfit the
-reference implementation.
+reference implementation. Adjudication sidecars should refuse non-loopback bind
+without an explicit opt-in before multi-tenant or shared-runner use expands.
 
 ### Reference toolchain maintainability
 
 **Goal:** keep the shipped CLI/MCP/LSP/core codebase navigable as the index and
 surfaces grow past v0.1.
 
-**Status:** delivered; now maintained as a standing gate. The structural
-splits (core `import/`, `public/`, and `surfaces/` module extraction, MCP
-tool/handler/dispatch extraction, LSP protocol/state/diagnostics extraction,
-crawler command split), contributor docs, and rustdoc examples for the three
-high-traffic repository APIs are landed, and every remaining source file above
-the size threshold carries a documented disposition in
+**Status:** structural baseline delivered; standing gate with **open hotspot
+work** listed under [Active execution order](#active-execution-order). Core
+`import/`, `public/`, and `surfaces/` extraction, MCP tool/handler/dispatch
+extraction, LSP protocol/state/diagnostics extraction, crawler command split,
+contributor docs, and rustdoc on the three high-traffic repository APIs are
+landed. Every file above the size threshold has a disposition in
 [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md).
 
 Delivered:
 
 - domain-scoped facade integration tests under `dotrepo-core/src/facade_tests/`
-- extracted MCP remote-lookup policy in `dotrepo-mcp/src/lookup.rs`
+- extracted MCP remote-lookup policy in `dotrepo-mcp/src/lookup.rs` (SSRF
+  allowlist, no redirects, DNS pin — further origin-binding is platform integrity)
 - contributor onboarding for the internal crawler crate
 - rustdoc examples on high-traffic public APIs (`validate_repository`,
   `query_repository`, `trust_repository`)
 - LSP and MCP handler module extraction without transport behavior changes
-- a documented split plan or explicit retain rationale for every
-  reference-toolchain source file above the size threshold
+- documented split plans for remaining oversized orchestration modules
+
+Open (do before large features in these modules):
+
+- execute splits for `import/escalation.rs` and `crawler/pipeline.rs`
+- collapse dual CLI entrypoints (`crates/dotrepo` + `dotrepo-cli`) into one
+  shared dispatch
+- expand Dependabot beyond GitHub Actions (cargo + `cloudflare/hosted-query` npm
+  and VS Code extension) as supply-chain hygiene, not a product milestone
 
 Exit criteria:
 
 - no reference-toolchain source file exceeds ~1,500 lines without a documented
   split plan or retain rationale in
   [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md)
-- facade tests can be exercised by domain without loading the full 5k-line module
+- facade tests can be exercised by domain without loading a multi-thousand-line
+  test module
 - new contributors can orient to crawler and server crates without reading entire
   `main.rs` entrypoints
+- install-alias and workspace CLI cannot silently diverge on new subcommands
 
 ### Milestone 0: Working protocol and proof surface
 
@@ -713,10 +802,12 @@ Implemented operational controls:
   (`scripts/audit_index_sample.py`,
   [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md))
 
-**M1 exit criteria are met.** Ongoing quality hardening and distribution remain
-on the active queue but no longer block declaring the autonomous factory proven.
-Open M4 cohorts when demand signals and soft scorecards are healthy — see
-[Active execution order](#active-execution-order).
+**M1 exit criteria are met.** The factory is proven. Residual operational
+hardening (fail-closed scheduled enablement, strict rather than warn-only
+telemetry on the schedule, multi-file writeback durability) is tracked under
+[Platform integrity](#platform-integrity) and does **not** reopen M1. Open M4
+cohorts only when platform-integrity Now item 0, demand signals, and soft
+scorecards are healthy — see [Active execution order](#active-execution-order).
 
 ### Milestone 2: Useful shared semantic cache
 
@@ -908,6 +999,11 @@ Current status (pre-scale scaffolding; growth batches not yet opened at M4 size)
   refresh-cost baseline
 - path to 1,000: gated **50–100** repository cohorts; larger batches unlock only
   by passing cohort gates, not by calendar time
+- **entry preconditions:** core platform-integrity controls closed (fail-closed
+  automation, MCP origin bind, multi-file writeback, Worker cost bounds);
+  residual integrity rows (PR writeback, strict telemetry) preferred before
+  large unattended batches; live or regularly exported lookup-miss demand; soft
+  intent scorecards not in regression
 
 Exit criteria:
 
@@ -1070,6 +1166,11 @@ remains canonical and directly accessible.
 - stale backlog, maximum overdue latency, and backlog drain time
 - provider, host-API, and infrastructure failure rates
 - recovery time without loss of valid completed work
+- autonomous enablement fail-closed (scheduled run skipped when unset/disabled)
+- multi-file writeback failure rate and half-updated record detections
+  (`validate-index` post-batch must stay green without manual repair)
+- Worker request budgets: default search limit hits; relations served from
+  precomputed snapshots vs inventory fanout rate
 
 ### Efficiency
 
@@ -1097,6 +1198,15 @@ remains canonical and directly accessible.
 - lookup misses and scrape fallbacks that become future coverage demand
 - agent tasks completed without repository scraping
 - bytes, tokens, requests, latency, and error reduction versus scrape-from-scratch
+- non-operator hosted/MCP traffic share (distribution checkpoint)
+
+### Platform integrity
+
+- MCP remote fetch origin violations (should stay zero; cover `//` and absolute
+  snapshot path cases in regression tests)
+- custom-base SSRF denylist coverage for CGNAT and cloud-metadata hosts
+- scheduled automation skips when enablement is unset (expected) vs unexpected runs
+- dual-CLI dispatch drift (subcommand parity check in release-version or CI gate)
 
 ### Adoption
 
@@ -1124,6 +1234,8 @@ throughput, and marginal cost remain inside their budgets.
 - optimizing raw repository count at the expense of accuracy or refreshability
 - treating maintainer adoption as a prerequisite for public-index usefulness
 - spending model or compute budget merely to avoid publishing an honest unknown
+- scaling cohort size while platform-integrity controls remain fail-open
+- treating crates.io / `main` prereleases as the production install default
 
 ## Strategic test
 
@@ -1147,6 +1259,7 @@ native adoption independently improves authority and long-term maintenance.
 
 - [`README.md`](./README.md) — shipped capabilities and project entrypoint
 - [`CHANGELOG.md`](./CHANGELOG.md) — release history
+- [`AGENTS.md`](./AGENTS.md) — agent-facing repo commands and architecture rules
 - [`docs/install.md`](./docs/install.md) — stable `1.0.x` vs `2.0.0-alpha` install lines
 - [`docs/factual-crawl-automation.md`](./docs/factual-crawl-automation.md) — crawler, telemetry, audit cadence
 - [`docs/m1-escalation-canary.md`](./docs/m1-escalation-canary.md) — second-opinion / strong-remote live proof
@@ -1156,6 +1269,7 @@ native adoption independently improves authority and long-term maintenance.
 - [`docs/maintainer-happy-path.md`](./docs/maintainer-happy-path.md) — native adoption workflow
 - [`docs/trust-model.md`](./docs/trust-model.md) — authority, provenance, and confidence semantics
 - [`docs/toolchain-maintainability.md`](./docs/toolchain-maintainability.md) — structure gates and oversized-file plans
+- [`index/README.md`](./index/README.md) — index layout and automation policy
 - [`crates/dotrepo-crawler/README.md`](./crates/dotrepo-crawler/README.md) — internal autonomous index crate
 - [pagedigest](https://pagedigest.org) — sibling change-detection protocol; see
   [Shared direction with pagedigest](#shared-direction-with-pagedigest)

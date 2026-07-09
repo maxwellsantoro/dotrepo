@@ -28,11 +28,12 @@ concurrency:
 jobs:
   autonomous-refresh:
     runs-on: ubuntu-latest
-    if: vars.INDEX_AUTOMATION_ENABLED != 'false'
+    # Fail closed: only run when the repository variable is explicitly true.
+    if: vars.INDEX_AUTOMATION_ENABLED == 'true'
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-      INDEX_AUTOMATION_ENABLED: ${{ vars.INDEX_AUTOMATION_ENABLED || 'true' }}
+      INDEX_AUTOMATION_ENABLED: ${{ vars.INDEX_AUTOMATION_ENABLED }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -132,8 +133,7 @@ jobs:
             --limit "${{ github.event.inputs.limit || '20' }}" \
             --adjudication-call-budget "${INDEX_MAX_BATCH_ADJUDICATION_CALLS:-0}" \
             --discovery-limit "${{ vars.INDEX_DISCOVERY_LIMIT || github.event.inputs.batch_size || '5' }}" \
-            --output-dir index-autonomous-batch \
-            --skip-automation-enabled-check
+            --output-dir index-autonomous-batch
       - name: Evaluate autonomous telemetry gate
         id: telemetry_gate
         if: always()

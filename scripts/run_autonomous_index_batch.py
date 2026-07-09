@@ -1274,9 +1274,14 @@ def write_telemetry_outputs(
 def main() -> int:
     args = parse_args()
     if not args.skip_automation_enabled_check and os.environ.get(
-        "INDEX_AUTOMATION_ENABLED", "true"
-    ).lower() not in {"1", "true", "yes"}:
-        print("INDEX_AUTOMATION_ENABLED is not true; skipping autonomous batch", file=sys.stderr)
+        "INDEX_AUTOMATION_ENABLED", ""
+    ).strip().lower() not in {"1", "true", "yes"}:
+        print(
+            "INDEX_AUTOMATION_ENABLED is not true; skipping autonomous batch "
+            "(fail closed — set INDEX_AUTOMATION_ENABLED=true or pass "
+            "--skip-automation-enabled-check for explicit local opt-in)",
+            file=sys.stderr,
+        )
         return 0
 
     output_dir = Path(args.output_dir)

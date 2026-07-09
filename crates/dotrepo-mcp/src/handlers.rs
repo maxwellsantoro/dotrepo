@@ -9,7 +9,8 @@
 use crate::lookup::{
     allow_custom_lookup_base_url, build_remote_lookup_client, fetch_remote_json,
     normalize_public_base_url, remote_public_root, remote_query_url, remote_repository_url,
-    resolve_lookup_target, ALLOWED_LOOKUP_BASE_URLS, DEFAULT_PUBLIC_BASE_URL,
+    resolve_lookup_target, resolve_same_origin_path_url, ALLOWED_LOOKUP_BASE_URLS,
+    DEFAULT_PUBLIC_BASE_URL,
 };
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
@@ -18,7 +19,6 @@ use dotrepo_core::{
     query_repository, record_summary, resolve_claim_directory, resolve_workspace_repository_root,
     trust_repository, validate_repository, write_import_outputs, ImportMode, ImportOptions,
 };
-use reqwest::Url;
 use serde_json::{json, to_value, Value};
 use std::path::{Path, PathBuf};
 
@@ -74,23 +74,21 @@ pub(crate) fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
     let snapshot_root = snapshot
         .pointer("/paths/root")
         .and_then(Value::as_str)
-        .filter(|path| path.starts_with('/') && !path.contains(".."));
-    let pointer_url = |path: &str| -> Option<String> {
-        Url::parse(&base_url)
-            .ok()?
-            .join(path)
-            .ok()
-            .map(|url| url.to_string())
-    };
-    let summary_url = match snapshot_root {
-        Some(root) => pointer_url(&format!(
-            "{}/repos/{}/{}/{}/index.json",
-            root.trim_end_matches('/'),
-            target.host,
-            target.owner,
-            target.repo
-        ))
-        .ok_or_else(|| anyhow!("remote snapshot root is not a valid URL path"))?,
+        .and_then(|path| {
+            // Reject host-escaping paths before join; invalid roots fall back to defaults.
+            resolve_same_origin_path_url(&base_url, path)
+                .ok()
+                .map(|_| path.trim_end_matches('/').to_string())
+        });
+    let summary_url = match snapshot_root.as_deref() {
+        Some(root) => resolve_same_origin_path_url(
+            &base_url,
+            &format!(
+                "{}/repos/{}/{}/{}/index.json",
+                root, target.host, target.owner, target.repo
+            ),
+        )
+        .map_err(|err| anyhow!("remote snapshot root is not a valid URL path: {}", err))?,
         None => remote_repository_url(
             &base_url,
             &target.host,
@@ -99,15 +97,15 @@ pub(crate) fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
             "index.json",
         ),
     };
-    let trust_url = match snapshot_root {
-        Some(root) => pointer_url(&format!(
-            "{}/repos/{}/{}/{}/trust.json",
-            root.trim_end_matches('/'),
-            target.host,
-            target.owner,
-            target.repo
-        ))
-        .ok_or_else(|| anyhow!("remote snapshot root is not a valid URL path"))?,
+    let trust_url = match snapshot_root.as_deref() {
+        Some(root) => resolve_same_origin_path_url(
+            &base_url,
+            &format!(
+                "{}/repos/{}/{}/{}/trust.json",
+                root, target.host, target.owner, target.repo
+            ),
+        )
+        .map_err(|err| anyhow!("remote snapshot root is not a valid URL path: {}", err))?,
         None => remote_repository_url(
             &base_url,
             &target.host,
@@ -119,8 +117,7 @@ pub(crate) fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
     let inventory_url = snapshot
         .pointer("/paths/inventory")
         .and_then(Value::as_str)
-        .filter(|path| path.starts_with('/') && !path.contains(".."))
-        .and_then(pointer_url)
+        .and_then(|path| resolve_same_origin_path_url(&base_url, path).ok())
         .unwrap_or_else(|| format!("{}/v0/repos/index.json", remote_public_root(&base_url)));
 
     let summary = fetch_remote_json(&client, &summary_url)?;

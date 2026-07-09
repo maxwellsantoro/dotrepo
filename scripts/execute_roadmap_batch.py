@@ -251,9 +251,14 @@ def validate_index() -> None:
 def main() -> int:
     args = parse_args()
     if not args.skip_automation_enabled_check and os.environ.get(
-        "INDEX_AUTOMATION_ENABLED", "true"
-    ).lower() not in {"1", "true", "yes"}:
-        print("INDEX_AUTOMATION_ENABLED is not true; skipping roadmap batch", file=sys.stderr)
+        "INDEX_AUTOMATION_ENABLED", ""
+    ).strip().lower() not in {"1", "true", "yes"}:
+        print(
+            "INDEX_AUTOMATION_ENABLED is not true; skipping roadmap batch "
+            "(fail closed — set INDEX_AUTOMATION_ENABLED=true or pass "
+            "--skip-automation-enabled-check for explicit local opt-in)",
+            file=sys.stderr,
+        )
         return 0
 
     repo_root = Path.cwd()

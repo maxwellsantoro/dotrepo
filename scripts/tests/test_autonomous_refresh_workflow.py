@@ -23,6 +23,16 @@ def test_scheduled_refresh_retains_telemetry_before_propagating_batch_failure() 
     assert "steps.validate_index.outcome == 'success'" in workflow[commit:propagate]
     assert "index-autonomous-batch/telemetry.json" in workflow[commit:propagate]
     assert "steps.autonomous_batch.outcome == 'failure'" in workflow[propagate:]
+    assert "--skip-automation-enabled-check" not in workflow[batch:gate]
+
+
+def test_scheduled_refresh_is_fail_closed_on_automation_enablement() -> None:
+    workflow = WORKFLOW.read_text()
+
+    assert "vars.INDEX_AUTOMATION_ENABLED == 'true'" in workflow
+    assert "vars.INDEX_AUTOMATION_ENABLED != 'false'" not in workflow
+    assert "INDEX_AUTOMATION_ENABLED || 'true'" not in workflow
+    assert "INDEX_AUTOMATION_ENABLED: ${{ vars.INDEX_AUTOMATION_ENABLED }}" in workflow
 
 
 def test_gate_report_is_created_before_batch_artifact_upload() -> None:

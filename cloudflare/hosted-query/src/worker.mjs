@@ -2,6 +2,16 @@ export const PUBLIC_API_VERSION = "v0";
 export const PUBLIC_BATCH_MAX_IDENTITIES = 50;
 export const PUBLIC_BATCH_MAX_PATHS = 25;
 export const PUBLIC_BATCH_MAX_QUERY_RESULTS = 500;
+/** Default search page size when clients omit `limit` (platform-integrity cost bound). */
+export const PUBLIC_SEARCH_DEFAULT_LIMIT = 50;
+/** Hard cap on search `limit` even when clients request more. */
+export const PUBLIC_SEARCH_MAX_LIMIT = 200;
+/**
+ * When pre-exported relations.json is missing, scan at most this many inventory
+ * peers for reverse/incoming links. Larger inventories require export-time
+ * relations snapshots (the normal production path).
+ */
+export const PUBLIC_RELATIONS_INCOMING_SCAN_MAX = 64;
 
 export const PUBLIC_ERROR_CODES = {
   queryPathNotFound: "query_path_not_found",
@@ -576,7 +586,17 @@ function searchItemFromProfile(profile, matched = ["relation"]) {
   };
 }
 
+function clampSearchLimit(rawLimit) {
+  if (!Number.isInteger(rawLimit) || rawLimit < 0) {
+    return PUBLIC_SEARCH_DEFAULT_LIMIT;
+  }
+  return Math.min(rawLimit, PUBLIC_SEARCH_MAX_LIMIT);
+}
+
 function parseSearchOptions(url) {
+  const rawLimit = url.searchParams.has("limit")
+    ? Number.parseInt(url.searchParams.get("limit"), 10)
+    : null;
   return {
     query: url.searchParams.get("q"),
     languages: url.searchParams.getAll("language").filter((value) => value.trim() !== ""),
@@ -588,7 +608,7 @@ function parseSearchOptions(url) {
     requireDocs: url.searchParams.has("requireDocs") || url.searchParams.has("require-docs"),
     requireSecurityContact: url.searchParams.has("requireSecurityContact") || url.searchParams.has("require-security-contact"),
     requireLicense: url.searchParams.has("requireLicense") || url.searchParams.has("require-license"),
-    limit: url.searchParams.has("limit") ? Number.parseInt(url.searchParams.get("limit"), 10) : null
+    limit: clampSearchLimit(rawLimit)
   };
 }
 
@@ -646,9 +666,7 @@ async function buildSearchResponse(env, request, url, freshness) {
     );
   });
   const matchedCount = results.length;
-  if (Number.isInteger(options.limit) && options.limit >= 0) {
-    results = results.slice(0, options.limit);
-  }
+  results = results.slice(0, options.limit);
   return {
     apiVersion: PUBLIC_API_VERSION,
     freshness,
@@ -663,7 +681,7 @@ async function buildSearchResponse(env, request, url, freshness) {
       requireDocs: options.requireDocs,
       requireSecurityContact: options.requireSecurityContact,
       requireLicense: options.requireLicense,
-      ...(options.limit === null ? {} : { limit: options.limit })
+      limit: options.limit
     },
     totalRepositoryCount: inventory.repositoryCount ?? profiles.length,
     matchedCount,
@@ -838,47 +856,53 @@ async function buildRelationsResponse(env, request, identity, freshness, basePat
     await appendItem(relation, relation.target, "outgoing");
   }
 
+  // Reverse/incoming links are precomputed into relations.json for production
+  // exports. Inventory scans are only used as a bounded fallback for tiny
+  // snapshots (tests / incomplete mirrors) — never full-index walks at M4 size.
   const selectedKey = `${identity.host}/${identity.owner}/${identity.repo}`;
   const inventory = await loadInventorySnapshot(env, request);
-  for (const entry of inventory.repositories ?? []) {
-    const candidate = entry.identity ?? {};
-    const candidateKey = `${candidate.host}/${candidate.owner}/${candidate.repo}`;
-    if (candidateKey === selectedKey) continue;
-    const candidateSnapshot = await loadQueryInputSnapshot(
-      env,
-      request,
-      candidate.host,
-      candidate.owner,
-      candidate.repo
-    );
-    if (candidateSnapshot === null) continue;
-    const candidateRelations = candidateSnapshot.selection?.manifest?.relations ?? {};
-    const links = (candidateRelations.references ?? []).map((target) => ({
-      relationship: "reference",
-      inverseRelationship: "referenced_by",
-      target
-    }));
-    for (const link of candidateRelations.links ?? []) {
-      const names = relationNames[link.kind];
-      if (!names) continue;
-      links.push({
-        relationship: names[0],
-        inverseRelationship: names[1],
-        target: link.target,
-        ...(link.notes ? { notes: link.notes } : {}),
-        ...(link.trust ? { trust: link.trust } : {})
-      });
-    }
-    for (const link of links) {
-      const parsed = parseRepositoryParam(link.target);
-      if (parsed.error) continue;
-      const targetKey = `${parsed.identity.host}/${parsed.identity.owner}/${parsed.identity.repo}`;
-      if (targetKey !== selectedKey) continue;
-      await appendItem(
-        { ...link, relationship: link.inverseRelationship },
-        candidateKey,
-        "incoming"
+  const inventoryEntries = Array.isArray(inventory.repositories) ? inventory.repositories : [];
+  if (inventoryEntries.length <= PUBLIC_RELATIONS_INCOMING_SCAN_MAX) {
+    for (const entry of inventoryEntries) {
+      const candidate = entry.identity ?? {};
+      const candidateKey = `${candidate.host}/${candidate.owner}/${candidate.repo}`;
+      if (candidateKey === selectedKey) continue;
+      const candidateSnapshot = await loadQueryInputSnapshot(
+        env,
+        request,
+        candidate.host,
+        candidate.owner,
+        candidate.repo
       );
+      if (candidateSnapshot === null) continue;
+      const candidateRelations = candidateSnapshot.selection?.manifest?.relations ?? {};
+      const links = (candidateRelations.references ?? []).map((target) => ({
+        relationship: "reference",
+        inverseRelationship: "referenced_by",
+        target
+      }));
+      for (const link of candidateRelations.links ?? []) {
+        const names = relationNames[link.kind];
+        if (!names) continue;
+        links.push({
+          relationship: names[0],
+          inverseRelationship: names[1],
+          target: link.target,
+          ...(link.notes ? { notes: link.notes } : {}),
+          ...(link.trust ? { trust: link.trust } : {})
+        });
+      }
+      for (const link of links) {
+        const parsed = parseRepositoryParam(link.target);
+        if (parsed.error) continue;
+        const targetKey = `${parsed.identity.host}/${parsed.identity.owner}/${parsed.identity.repo}`;
+        if (targetKey !== selectedKey) continue;
+        await appendItem(
+          { ...link, relationship: link.inverseRelationship },
+          candidateKey,
+          "incoming"
+        );
+      }
     }
   }
   items.sort((left, right) =>

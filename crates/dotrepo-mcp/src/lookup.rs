@@ -167,17 +167,34 @@ fn is_blocked_lookup_ip(addr: &IpAddr) -> bool {
 
     match addr {
         IpAddr::V4(v4) => {
+            let octets = v4.octets();
+            // CGNAT / shared address space (RFC 6598): 100.64.0.0/10
+            let is_cgnat = octets[0] == 100 && (octets[1] & 0xc0) == 0x40;
+            // Documentation / benchmarking (RFC 5737): 192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24
+            let is_documentation = matches!(
+                (octets[0], octets[1], octets[2]),
+                (192, 0, 2) | (198, 51, 100) | (203, 0, 113)
+            );
             v4.is_private()
                 || v4.is_loopback()
                 || v4.is_link_local()
                 || v4.is_unspecified()
-                || (v4.octets()[0] == 169 && v4.octets()[1] == 254)
+                || v4.is_broadcast()
+                || v4.is_multicast()
+                || is_cgnat
+                || is_documentation
+                || (octets[0] == 169 && octets[1] == 254)
         }
         IpAddr::V6(v6) => {
+            let segments = v6.segments();
+            // Unique local (fc00::/7), link-local (fe80::/10), multicast (ff00::/8),
+            // documentation (2001:db8::/32).
             v6.is_loopback()
                 || v6.is_unspecified()
-                || (v6.segments()[0] & 0xfe00) == 0xfc00
-                || (v6.segments()[0] & 0xffc0) == 0xfe80
+                || v6.is_multicast()
+                || (segments[0] & 0xfe00) == 0xfc00
+                || (segments[0] & 0xffc0) == 0xfe80
+                || (segments[0] == 0x2001 && segments[1] == 0x0db8)
         }
     }
 }
@@ -214,7 +231,57 @@ fn is_blocked_lookup_host(host: &str) -> bool {
         return is_blocked_lookup_ip(&addr);
     }
 
-    matches!(host.as_str(), "metadata.google.internal" | "metadata.goog")
+    matches!(
+        host.as_str(),
+        "metadata.google.internal"
+            | "metadata.goog"
+            | "metadata"
+            | "metadata.aws.internal"
+            | "instance-data"
+            | "kubernetes.default"
+            | "kubernetes.default.svc"
+            | "kubernetes.default.svc.cluster.local"
+    )
+}
+
+/// Resolve a snapshot meta path against an allowlisted lookup base URL without
+/// allowing host escape via protocol-relative (`//evil`) or absolute URLs.
+pub(crate) fn resolve_same_origin_path_url(base_url: &str, path: &str) -> Result<String> {
+    let path = path.trim();
+    if path.is_empty() {
+        bail!("snapshot path must not be empty");
+    }
+    if path.contains("://") || path.starts_with("//") {
+        bail!(
+            "snapshot path must be a same-origin absolute path, not a full or protocol-relative URL"
+        );
+    }
+    if !path.starts_with('/') {
+        bail!("snapshot path must start with /");
+    }
+    if path.split('/').any(|segment| segment == "..") {
+        bail!("snapshot path must not contain '..' segments");
+    }
+
+    let base = Url::parse(base_url)
+        .map_err(|err| anyhow!("invalid lookup base URL `{}`: {}", base_url, err))?;
+    let joined = base
+        .join(path)
+        .map_err(|err| anyhow!("invalid snapshot path `{}`: {}", path, err))?;
+    if joined.scheme() != base.scheme() || joined.host_str() != base.host_str() {
+        bail!(
+            "snapshot path `{}` must remain on the lookup base origin {}",
+            path,
+            remote_public_root(base_url)
+        );
+    }
+    if joined.port_or_known_default() != base.port_or_known_default() {
+        bail!(
+            "snapshot path `{}` must not change the lookup base port",
+            path
+        );
+    }
+    Ok(joined.as_str().to_string())
 }
 
 fn resolve_safe_lookup_addresses(url: &str) -> Result<Vec<SocketAddr>> {
@@ -500,5 +567,64 @@ mod tests {
             .expect("hosted repo url parses"),
             ("github.com".into(), "tokio-rs".into(), "tokio".into())
         );
+    }
+
+    #[test]
+    fn resolve_same_origin_path_url_keeps_allowlisted_origin() {
+        let _env_guard = lock_lookup_base_url_env();
+        assert_eq!(
+            resolve_same_origin_path_url("https://dotrepo.org", "/v0/repos/index.json")
+                .expect("relative path joins"),
+            "https://dotrepo.org/v0/repos/index.json"
+        );
+    }
+
+    #[test]
+    fn resolve_same_origin_path_url_rejects_protocol_relative_and_absolute() {
+        let _env_guard = lock_lookup_base_url_env();
+        let err = resolve_same_origin_path_url("https://dotrepo.org", "//evil.example/v0/x")
+            .expect_err("protocol-relative path must be rejected");
+        assert!(err.to_string().contains("same-origin"));
+
+        let err = resolve_same_origin_path_url(
+            "https://dotrepo.org",
+            "https://evil.example/v0/repos/index.json",
+        )
+        .expect_err("absolute URL path must be rejected");
+        assert!(err.to_string().contains("same-origin"));
+    }
+
+    #[test]
+    fn resolve_same_origin_path_url_rejects_parent_segments() {
+        let _env_guard = lock_lookup_base_url_env();
+        let err = resolve_same_origin_path_url("https://dotrepo.org", "/v0/../secret")
+            .expect_err(".. segments must be rejected");
+        assert!(err.to_string().contains(".."));
+    }
+
+    #[test]
+    fn is_blocked_lookup_ip_covers_cgnat_and_documentation_ranges() {
+        let _env_guard = lock_lookup_base_url_env();
+        assert!(is_blocked_lookup_ip(
+            &"100.64.0.1".parse().expect("cgnat address")
+        ));
+        assert!(is_blocked_lookup_ip(
+            &"192.0.2.1".parse().expect("documentation address")
+        ));
+        assert!(is_blocked_lookup_ip(
+            &"224.0.0.1".parse().expect("multicast address")
+        ));
+        assert!(!is_blocked_lookup_ip(
+            &"93.184.216.34".parse().expect("public address")
+        ));
+    }
+
+    #[test]
+    fn is_blocked_lookup_host_covers_cloud_metadata_names() {
+        let _env_guard = lock_lookup_base_url_env();
+        assert!(is_blocked_lookup_host("metadata.google.internal"));
+        assert!(is_blocked_lookup_host("metadata"));
+        assert!(is_blocked_lookup_host("instance-data"));
+        assert!(!is_blocked_lookup_host("dotrepo.org"));
     }
 }

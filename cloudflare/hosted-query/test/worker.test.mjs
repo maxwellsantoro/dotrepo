@@ -291,6 +291,43 @@ test("serves hosted profile search from staged profiles", async () => {
   assert.equal(json.returnedCount, 1);
   assert.equal(json.results[0].identity.repo, "orbit");
   assert.equal(json.filters.requireDocs, true);
+  assert.equal(json.filters.limit, 50);
+});
+
+test("applies default and max search limit cost bounds", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "meta.json"),
+        "utf8"
+      )
+    ],
+    [
+      "/v0/repos/index.json",
+      await readFile(
+        fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "index.json"),
+        "utf8"
+      )
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/dotrepo" };
+
+  const defaultResponse = await handleRequest(
+    new Request("https://example.test/dotrepo/v0/search?q=orbit"),
+    env
+  );
+  const defaultJson = await defaultResponse.json();
+  assert.equal(defaultResponse.status, 200);
+  assert.equal(defaultJson.filters.limit, 50);
+
+  const cappedResponse = await handleRequest(
+    new Request("https://example.test/dotrepo/v0/search?q=orbit&limit=9999"),
+    env
+  );
+  const cappedJson = await cappedResponse.json();
+  assert.equal(cappedResponse.status, 200);
+  assert.equal(cappedJson.filters.limit, 200);
 });
 
 test("serves simple hosted profile search from inventory without profile fan-out", async () => {
@@ -322,6 +359,7 @@ test("serves simple hosted profile search from inventory without profile fan-out
   assert.equal(json.returnedCount, 1);
   assert.equal(json.results[0].identity.repo, "orbit");
   assert.equal(json.results[0].purpose, "Reviewed orbital tooling metadata.");
+  assert.equal(json.filters.limit, 50);
 });
 
 test("serves hosted factual compare from staged profiles", async () => {
