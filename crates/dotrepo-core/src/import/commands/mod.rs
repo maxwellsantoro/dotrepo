@@ -4,7 +4,7 @@
 //! `ImportedCommandMetadata`.
 use anyhow::{anyhow, Result};
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use super::types::{ImportSources, ImportedCommandMetadata, ImportedFile};
 
@@ -17,11 +17,24 @@ pub(crate) use policy::sanitize_import_command;
 pub(crate) use extraction::infer_pyproject_commands;
 
 use extraction::{
-    infer_cargo_manifest_commands, infer_cmake_workflow_commands, infer_composer_commands,
-    infer_contributing_commands, infer_dotnet_commands, infer_go_module_commands,
-    infer_gradle_commands, infer_justfile_commands, infer_makefile_commands, infer_maven_commands,
-    infer_mix_commands, infer_package_json_commands, infer_rakefile_commands,
-    infer_readme_commands, infer_rebar_commands, infer_setup_cfg_commands, infer_setup_py_commands,
+    infer_cargo_manifest_commands,
+    infer_cmake_workflow_commands,
+    infer_composer_commands,
+    infer_contributing_commands,
+    infer_dotnet_commands,
+    infer_go_module_commands,
+    // infer_dotnet_commands also handles .sln
+    infer_gradle_commands,
+    infer_justfile_commands,
+    infer_makefile_commands,
+    infer_maven_commands,
+    infer_mix_commands,
+    infer_package_json_commands,
+    infer_rakefile_commands,
+    infer_readme_commands,
+    infer_rebar_commands,
+    infer_setup_cfg_commands,
+    infer_setup_py_commands,
     infer_workflow_commands,
 };
 use policy::resolve_command_field;
@@ -45,34 +58,97 @@ pub(super) fn load_first_existing_file(
     Ok(None)
 }
 
-pub(super) fn load_first_root_file_with_extension(
+/// Find the first file with `extension` within `max_depth` directory levels
+/// (depth 1 = root only). Prefers non-test paths when ranking. Relative path
+/// is preserved so monorepo layouts (e.g. `src/Foo/Foo.csproj`) remain honest.
+pub(super) fn load_first_file_with_extension(
     root: &Path,
     extension: &str,
+    max_depth: usize,
 ) -> Result<Option<ImportedFile>> {
-    let mut matches = fs::read_dir(root)
-        .map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
-        .filter_map(|entry| entry.ok())
-        .filter_map(|entry| {
-            let path = entry.path();
-            let file_name = path.file_name()?.to_str()?.to_string();
-            let matches_extension = path
-                .extension()
-                .and_then(|value| value.to_str())
-                .is_some_and(|value| value.eq_ignore_ascii_case(extension));
-            (path.is_file() && matches_extension).then_some((file_name, path))
-        })
-        .collect::<Vec<_>>();
-    matches.sort_by(|left, right| left.0.cmp(&right.0));
+    let mut matches = Vec::new();
+    collect_files_with_extension(root, root, extension, max_depth, 1, &mut matches)?;
+    matches.sort_by(|left, right| {
+        let left_test = is_likely_test_project_path(&left.0);
+        let right_test = is_likely_test_project_path(&right.0);
+        left_test
+            .cmp(&right_test)
+            .then_with(|| left.0.cmp(&right.0))
+    });
 
-    let Some((file_name, path)) = matches.into_iter().next() else {
+    let Some((relative, path)) = matches.into_iter().next() else {
         return Ok(None);
     };
     let contents = fs::read_to_string(&path)
         .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
     Ok(Some(ImportedFile {
-        path: file_name,
+        path: relative,
         contents,
     }))
+}
+
+fn is_likely_test_project_path(relative: &str) -> bool {
+    let lower = relative.to_ascii_lowercase();
+    lower.contains(".tests.")
+        || lower.contains(".test.")
+        || lower.contains("/tests/")
+        || lower.contains("/test/")
+        || lower.ends_with("tests.csproj")
+        || lower.ends_with("test.csproj")
+}
+
+fn collect_files_with_extension(
+    root: &Path,
+    dir: &Path,
+    extension: &str,
+    max_depth: usize,
+    depth: usize,
+    out: &mut Vec<(String, PathBuf)>,
+) -> Result<()> {
+    if depth > max_depth {
+        return Ok(());
+    }
+    let entries = match fs::read_dir(dir) {
+        Ok(entries) => entries,
+        Err(err) => {
+            return Err(anyhow!("failed to read {}: {}", dir.display(), err));
+        }
+    };
+    for entry in entries.filter_map(|entry| entry.ok()) {
+        let path = entry.path();
+        if path.is_dir() {
+            let name = path
+                .file_name()
+                .and_then(|value| value.to_str())
+                .unwrap_or("");
+            if name.starts_with('.') || name.eq_ignore_ascii_case("node_modules") {
+                continue;
+            }
+            collect_files_with_extension(root, &path, extension, max_depth, depth + 1, out)?;
+            continue;
+        }
+        if !path.is_file() {
+            continue;
+        }
+        let matches_extension = path
+            .extension()
+            .and_then(|value| value.to_str())
+            .is_some_and(|value| value.eq_ignore_ascii_case(extension));
+        if !matches_extension {
+            continue;
+        }
+        let relative = path
+            .strip_prefix(root)
+            .map(|value| value.to_string_lossy().replace('\\', "/"))
+            .unwrap_or_else(|_| {
+                path.file_name()
+                    .and_then(|value| value.to_str())
+                    .unwrap_or("unknown")
+                    .to_string()
+            });
+        out.push((relative, path));
+    }
+    Ok(())
 }
 
 pub(super) fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile>> {
@@ -145,7 +221,10 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.composer_json.and_then(infer_composer_commands) {
         candidates.push(candidate);
     }
-    if let Some(candidate) = sources.csproj.and_then(infer_dotnet_commands) {
+    // Prefer solution files when present (monorepo entrypoint); otherwise csproj.
+    if let Some(candidate) = sources.solution.and_then(infer_dotnet_commands) {
+        candidates.push(candidate);
+    } else if let Some(candidate) = sources.csproj.and_then(infer_dotnet_commands) {
         candidates.push(candidate);
     }
     if let Some(candidate) = sources.mix_exs.and_then(infer_mix_commands) {
@@ -925,6 +1004,7 @@ RUFF_UPDATE_SCHEMA=1 cargo test
             gradle_wrapper: false,
             composer_json: None,
             csproj: None,
+            solution: None,
             mix_exs: None,
             rebar_config: None,
             cmake_presets_json: None,

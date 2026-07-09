@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/2dust/v2rayN"
-generated_at = "2026-07-06T19:09:10.325547Z"
+generated_at = "2026-07-09T03:27:13.009879Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `v2rayN/v2rayN.sln`. Inferred `repo.build` from `v2rayN/v2rayN.sln`. Inferred `repo.test` from `v2rayN/v2rayN.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "v2rayN"
@@ -24,6 +25,8 @@ languages = [
     "C#",
     "Shell",
 ]
+build = "dotnet build"
+test = "dotnet test"
 topics = [
     "windows",
     "proxy",
@@ -46,6 +49,6 @@ archived = false
 clone_url = "https://github.com/2dust/v2rayN.git"
 default_branch = "master"
 fork = false
-head_sha = "66b48c231f3665185345ec73c2303176f9f85263"
+head_sha = "ad12a6c456f689ed7f7ad733abeb7fb99524b2b1"
 html_url = "https://github.com/2dust/v2rayN"
-stars = 110709
+stars = 110878

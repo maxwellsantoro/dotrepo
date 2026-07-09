@@ -305,6 +305,7 @@ pub(crate) struct ImportSources<'a> {
     pub(crate) gradle_wrapper: bool,
     pub(crate) composer_json: Option<&'a ImportedFile>,
     pub(crate) csproj: Option<&'a ImportedFile>,
+    pub(crate) solution: Option<&'a ImportedFile>,
     pub(crate) mix_exs: Option<&'a ImportedFile>,
     pub(crate) rebar_config: Option<&'a ImportedFile>,
     pub(crate) cmake_presets_json: Option<&'a ImportedFile>,

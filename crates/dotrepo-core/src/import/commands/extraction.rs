@@ -343,6 +343,17 @@ fn has_nonempty_composer_script(value: &serde_json::Value) -> bool {
 }
 
 pub(crate) fn infer_dotnet_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let lower = file.path.to_ascii_lowercase();
+    if lower.ends_with(".sln") {
+        // Solution files are the primary entrypoint for many .NET monorepos.
+        return Some(ImportedCommandCandidate {
+            source_path: file.path.clone(),
+            source_tier: CommandSourceTier::EcosystemDefault,
+            build: Some("dotnet build".into()),
+            test: Some("dotnet test".into()),
+        });
+    }
+
     let document = roxmltree::Document::parse(&file.contents).ok()?;
     if document.root_element().tag_name().name() != "Project" {
         return None;
@@ -354,11 +365,16 @@ pub(crate) fn infer_dotnet_commands(file: &ImportedFile) -> Option<ImportedComma
             && node
                 .text()
                 .is_some_and(|value| value.trim().eq_ignore_ascii_case("true"))
-    });
+    }) || lower.contains(".tests.")
+        || lower.ends_with("tests.csproj")
+        || lower.ends_with("test.csproj");
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::EcosystemDefault,
         build: Some("dotnet build".into()),
+        // Non-test projects still use `dotnet test` at solution/repo scope in
+        // common workflows; keep test only when the project itself is a test
+        // assembly so we do not invent coverage for pure libraries.
         test: is_test_project.then(|| "dotnet test".into()),
     })
 }

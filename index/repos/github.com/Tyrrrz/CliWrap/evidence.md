@@ -1,8 +1,9 @@
 # Evidence
 
-- No README.md, CODEOWNERS, or SECURITY.md content was imported; this record needs manual completion.
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
+- Inferred repo.build from CliWrap.Benchmarks/CliWrap.Benchmarks.csproj as `dotnet build`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+- Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.

@@ -4,23 +4,25 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Tyrrrz/CliWrap"
-generated_at = "2026-07-06T18:32:55.099737Z"
+generated_at = "2026-07-09T03:27:00.143121Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
+    "imported",
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `CliWrap.Benchmarks/CliWrap.Benchmarks.csproj`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `CliWrap.Benchmarks/CliWrap.Benchmarks.csproj`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "CliWrap"
 description = "Library for interacting with command-line interfaces"
-homepage = "https://github.com/Tyrrrz/CliWrap"
+homepage = "https://nuget.org/packages/CliWrap"
 license = "MIT"
 visibility = "public"
 languages = ["C#"]
+build = "dotnet build"
 topics = [
     "command-line",
     "cli",
@@ -39,6 +41,9 @@ topics = [
     "dotnet-standard",
 ]
 
+[docs]
+root = "https://nuget.org/packages/CliWrap"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/Tyrrrz/CliWrap.git"
@@ -46,4 +51,4 @@ default_branch = "prime"
 fork = false
 head_sha = "9faa26f2a68a182bdd0ac0d5f67b1bd45e81ba62"
 html_url = "https://github.com/Tyrrrz/CliWrap"
-stars = 4989
+stars = 4991

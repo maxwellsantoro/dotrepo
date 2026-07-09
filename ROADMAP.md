@@ -509,8 +509,8 @@ then gated cohort growth (M4). M5 stays parallel and lower priority.
 | `verified` / high confidence | 613 / 613 |
 | `imported` / `inferred` | 0 / 0 |
 | Record-level high-signal vs M2 target (500) | 613 (123%) |
-| Missing build / test / security | 236 / 238 / 420 |
-| Quality-hardening queue | 465 |
+| Missing build / test / security | 228 / 232 / 420 |
+| Quality-hardening queue | ~465 (refresh via scripts) |
 | Stale or missing `generated_at` | 0 (0%) |
 | Max refresh overdue | 0 days |
 | Accepted maintainer claims | 1 |
@@ -566,8 +566,13 @@ risk is operating it safely and usefully at the next scale step.
      installer/electron/wasm/nightly/canary workflow filenames when resolving
      equal-rank workflow conflicts. Recrawl + gate-passed promotion closed the
      last two non-verified overlays (`MQTTX`, `serverless`) → **613/613 verified**.
-   - Residual blockers may still appear as medium fields on verified records
-     (e.g. honest missing build on some profiles); work via coverage-gap report.
+   - **.NET monorepo materialization (2026-07-09):** fetch root `.sln`/`.csproj`
+     or shallow tree paths; import walks nested projects (depth ≤4) and treats
+     solution files as `dotnet build`/`dotnet test` entrypoints. Recrawl lifted
+     Avalonia, CliWrap, jellyfin, Certify, v2rayN, DevToys, ShareX, ScreenToGif
+     build/test where evidence exists (missing build **236→228**).
+   - Residual gaps remain (guides, awesome-lists, polyglot monorepos); prefer
+     coverage-gap + honest abstention over invented commands.
 2. **Drain any new promotion headroom** after recrawls
    (`dotrepo promotion-report --apply`) — never bypass gates.
 3. **Keep audit conversion running.** Weekly sample
@@ -614,6 +619,7 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
 - Monorepo workflow preference + recrawl: last `imported` overlays promoted;
   corpus **613/613 verified**.
 - Crawler `pipeline/` split (merge / writeback_gate / synthesis / mod).
+- .NET monorepo build/test recovery + weekly lookup-miss demand workflow.
 
 #### Next — Milestone 4 cohorts (after Now items 0–5 are healthy)
 
@@ -638,9 +644,9 @@ plus exported lookup-miss volume that can steer M4 selection.
 1. Keep MCP registry listings and stable `1.0.x` install paths current (pin
    versions in docs and scaffolds; never treat crates.io alpha as production default).
 2. Keep the efficiency page as the external pitch (tokens/bytes/requests saved).
-3. **Cadence:** export Worker logs with
-   `scripts/export_lookup_miss_demand.py` (or
-   `aggregate_lookup_misses.py` directly); offline proof via
+3. **Cadence:** scheduled `.github/workflows/lookup-miss-demand.yml` (fixture
+   offline; optional live log artifact) or local
+   `scripts/export_lookup_miss_demand.py`; offline proof via
    `scripts/fixtures/lookup_miss_sample.log`.
 4. Land **one** external consumer integration
    ([template](./docs/external-consumer-integration.md);

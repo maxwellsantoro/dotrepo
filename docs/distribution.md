@@ -21,9 +21,12 @@ concrete surfaces that make agents and tools check dotrepo before scraping.
 2. **Efficiency pitch** — regenerate the public efficiency page on deploy
    (`scripts/render_public_efficiency_page.py` via the release/public gate).
    Share measured tokens/bytes/requests saved, not coverage vanity metrics.
-3. **Lookup-miss demand (fixed cadence)** — weekly or after each public deploy,
-   sample Worker logs for `DOTREPO_LOOKUP_MISS` lines and export a demand
-   report:
+3. **Lookup-miss demand (fixed cadence)** — weekly scheduled workflow
+   `.github/workflows/lookup-miss-demand.yml` (Mondays 07:30 UTC) or manual
+   `workflow_dispatch`. Offline by default (fixture proof); attach a live log
+   artifact and set `log_artifact_name` for real Worker demand.
+
+   Local path:
 
    ```bash
    # Capture live lines (Cloudflare Logpush, dashboard, or):

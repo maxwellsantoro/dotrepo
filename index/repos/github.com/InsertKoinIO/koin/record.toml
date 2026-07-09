@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/InsertKoinIO/koin"
-generated_at = "2026-07-06T18:28:30.211334Z"
+generated_at = "2026-07-09T03:23:59.411516Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. Left `repo.build` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "koin"
@@ -46,4 +46,4 @@ default_branch = "main"
 fork = false
 head_sha = "dc86ef8dd8fbe8564fb7453c03f5b738da3450bb"
 html_url = "https://github.com/InsertKoinIO/koin"
-stars = 9998
+stars = 9999

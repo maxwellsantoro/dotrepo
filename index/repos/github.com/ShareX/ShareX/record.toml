@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ShareX/ShareX"
-generated_at = "2026-07-06T18:31:22.702022Z"
+generated_at = "2026-07-09T03:27:22.293555Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/SECURITY.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `ShareX.ImageEditor.sln`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `ShareX.ImageEditor.sln`. Inferred `repo.test` from `ShareX.ImageEditor.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "ShareX Banner"
@@ -27,6 +28,8 @@ languages = [
     "CSS",
     "HTML",
 ]
+build = "dotnet build"
+test = "dotnet test"
 topics = [
     "screen-capture",
     "screen-recorder",
@@ -62,6 +65,6 @@ archived = false
 clone_url = "https://github.com/ShareX/ShareX.git"
 default_branch = "develop"
 fork = false
-head_sha = "77de3ec66b2c958b6b3db1de1648904a257f0f18"
+head_sha = "58125d7fa624dc8b02d209235a0316ddc41c05a8"
 html_url = "https://github.com/ShareX/ShareX"
-stars = 38444
+stars = 38476

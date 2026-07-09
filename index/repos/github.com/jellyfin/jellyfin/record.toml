@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jellyfin/jellyfin"
-generated_at = "2026-07-06T18:48:17.726943Z"
+generated_at = "2026-07-09T03:27:04.452457Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@jellyfin/core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Jellyfin.sln`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@jellyfin/core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `Jellyfin.sln`. Inferred `repo.test` from `Jellyfin.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Jellyfin"
@@ -26,6 +27,8 @@ languages = [
     "Shell",
     "CSS",
 ]
+build = "dotnet build"
+test = "dotnet test"
 topics = [
     "jellyfin",
     "csharp",
@@ -64,6 +67,6 @@ archived = false
 clone_url = "https://github.com/jellyfin/jellyfin.git"
 default_branch = "master"
 fork = false
-head_sha = "e31f168e9bc132b4f830e39b0781cac550c08b85"
+head_sha = "53aafcd38e1f4558ff18f5258d0d46b3a0565783"
 html_url = "https://github.com/jellyfin/jellyfin"
-stars = 54023
+stars = 54114

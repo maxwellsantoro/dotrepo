@@ -1,0 +1,96 @@
+name: lookup-miss-demand
+
+# Weekly (or manual) export of hosted lookup-miss demand signals for M4 cohort
+# selection. Offline by default (fixture); pass live Worker log artifacts via
+# workflow_dispatch inputs when operators export DOTREPO_LOOKUP_MISS lines.
+on:
+  schedule:
+    - cron: "30 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      log_artifact_name:
+        description: Optional Actions artifact name containing Worker miss logs
+        required: false
+        default: ""
+      top:
+        description: Top-N misses in the report
+        required: false
+        default: "50"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lookup-miss-demand
+  cancel-in-progress: true
+
+jobs:
+  export-demand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Install uv
+        uses: astral-sh/setup-uv@d31148d669074a8d0a63714ba94f3201e7020bc3 # v8.3.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
+      - name: Download optional live miss logs
+        id: logs
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.log_artifact_name != '' }}
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ github.event.inputs.log_artifact_name }}
+          path: lookup-miss-logs
+        continue-on-error: true
+      - name: Export lookup-miss demand report
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp="$(date -u +%Y%m%d)"
+          mkdir -p lookup-miss-demand
+          inputs=()
+          if [ -d lookup-miss-logs ]; then
+            while IFS= read -r -d '' f; do
+              inputs+=(--input "$f")
+            done < <(find lookup-miss-logs -type f -print0)
+          fi
+          if [ "${#inputs[@]}" -eq 0 ]; then
+            echo "No live miss logs attached; using offline fixture proof path"
+            inputs=(--input scripts/fixtures/lookup_miss_sample.log)
+          fi
+          uv run python scripts/export_lookup_miss_demand.py \
+            "${inputs[@]}" \
+            --output-dir lookup-miss-demand \
+            --stamp "$stamp" \
+            --top "${{ github.event.inputs.top || '50' }}"
+          # Keep a stable copy name for the artifact tree
+          cp -f "lookup-miss-demand/lookup-miss-demand-${stamp}.json" \
+            lookup-miss-demand/report.json
+          cp -f "lookup-miss-demand/lookup-miss-demand-${stamp}.md" \
+            lookup-miss-demand/report.md
+      - name: Upload demand report
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: lookup-miss-demand
+          path: lookup-miss-demand/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish step summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "# Lookup-miss demand export"
+            echo
+            if [ -f lookup-miss-demand/report.md ]; then
+              cat lookup-miss-demand/report.md
+            else
+              echo "Report not produced"
+            fi
+            echo
+            echo "## Operator notes"
+            echo "- Live path: export Worker \`DOTREPO_LOOKUP_MISS\` lines, upload as an artifact, re-run with \`log_artifact_name\`."
+            echo "- Offline path uses \`scripts/fixtures/lookup_miss_sample.log\` (proof only)."
+            echo "- Feed repeated misses into \`scripts/plan_index_growth_tranche.py\` after ecosystem balancing."
+          } >> "$GITHUB_STEP_SUMMARY"

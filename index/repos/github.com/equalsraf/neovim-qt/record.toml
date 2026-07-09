@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/equalsraf/neovim-qt"
-generated_at = "2026-07-06T18:40:39.660963Z"
+generated_at = "2026-07-09T03:24:35.535595Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Left `repo.build` unset because `.github/workflows/build-test-win.yml` and `.github/workflows/build-test.yml` suggested conflicting build commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Neovim Qt"

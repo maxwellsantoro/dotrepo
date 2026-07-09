@@ -43,7 +43,7 @@ pub use types::{
 };
 
 use commands::{
-    load_first_existing_file, load_first_root_file_with_extension, load_workflow_import_files,
+    load_first_existing_file, load_first_file_with_extension, load_workflow_import_files,
     sanitize_import_command,
 };
 
@@ -240,7 +240,9 @@ pub fn import_repository_with_options(
     let build_gradle = load_first_existing_file(root, &["build.gradle", "build.gradle.kts"])?;
     let gradle_wrapper = root.join("gradlew").is_file();
     let composer_json = load_first_existing_file(root, &["composer.json"])?;
-    let csproj = load_first_root_file_with_extension(root, "csproj")?;
+    // Prefer root .csproj, then shallow monorepo layout (src/**/*.csproj).
+    let csproj = load_first_file_with_extension(root, "csproj", 4)?;
+    let solution = load_first_file_with_extension(root, "sln", 2)?;
     let mix_exs = load_first_existing_file(root, &["mix.exs"])?;
     let rebar_config = load_first_existing_file(root, &["rebar.config"])?;
     let cmake_presets_json = load_first_existing_file(root, &["CMakePresets.json"])?;
@@ -372,6 +374,7 @@ pub fn import_repository_with_options(
         gradle_wrapper,
         composer_json: composer_json.as_ref(),
         csproj: csproj.as_ref(),
+        solution: solution.as_ref(),
         mix_exs: mix_exs.as_ref(),
         rebar_config: rebar_config.as_ref(),
         cmake_presets_json: cmake_presets_json.as_ref(),

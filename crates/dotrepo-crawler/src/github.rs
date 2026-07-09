@@ -31,8 +31,8 @@ const README_CANDIDATES: &[&str] = &[
 // dotrepo-core already knows how to parse (Maven, Gradle, Composer, Mix,
 // Rebar, CMake presets, Makefile, justfile, Rakefile, setup.py/setup.cfg)
 // was silently starved of the one file it needed. CONTRIBUTING files feed
-// doc-declared command extraction. `.csproj` is handled separately in
-// `fetch_root_csproj_file` because its filename is not fixed.
+// doc-declared command extraction. `.csproj` / `.sln` are handled in
+// `fetch_dotnet_manifest_files` because their filenames are not fixed.
 const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
     "Cargo.toml",
     "CONTRIBUTING.md",
@@ -372,18 +372,15 @@ impl HttpGitHubClient {
         Ok(files)
     }
 
-    /// `.csproj` project files carry an arbitrary, repository-specific name
-    /// (unlike `Cargo.toml` or `go.mod`), so finding one requires a root
-    /// directory listing rather than a fixed-path fetch. Mirrors
-    /// `fetch_workflow_files`'s listing pattern; only the first (by sorted
-    /// name) root-level `.csproj` is materialized, matching
-    /// `dotrepo-core::import::mod::load_first_root_file_with_extension`'s
-    /// single-file expectation.
-    fn fetch_root_csproj_file(
+    /// Materialize .NET entrypoints: root `.sln` / `.csproj` when present, else
+    /// a small set of shallow monorepo project files from the git tree. Paths
+    /// are preserved so `dotrepo-core` import can rank non-test projects.
+    fn fetch_dotnet_manifest_files(
         &self,
         repository: &RepositoryRef,
         default_branch: &str,
-    ) -> Result<Option<RepositoryTextFile>> {
+    ) -> Result<Vec<RepositoryTextFile>> {
+        let mut files = Vec::new();
         let mut root_contents_url = self.api_url(repository, &["contents"])?;
         root_contents_url
             .query_pairs_mut()
@@ -392,10 +389,42 @@ impl HttpGitHubClient {
             .get_optional_json::<Vec<ContentsEntry>>(root_contents_url)?
             .unwrap_or_default();
 
-        match first_root_csproj_path(entries) {
-            Some(path) => self.fetch_optional_repository_file(repository, default_branch, &path),
-            None => Ok(None),
+        for path in first_root_paths_with_suffixes(&entries, &[".sln", ".csproj"], 4) {
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
         }
+
+        if files.iter().any(|file| {
+            file.relative_path
+                .to_string_lossy()
+                .to_ascii_lowercase()
+                .ends_with(".csproj")
+                || file
+                    .relative_path
+                    .to_string_lossy()
+                    .to_ascii_lowercase()
+                    .ends_with(".sln")
+        }) {
+            return Ok(files);
+        }
+
+        // Monorepo fallback: recursive tree, bounded selection.
+        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
+        tree_url.query_pairs_mut().append_pair("recursive", "1");
+        let tree = self
+            .get_optional_json::<GitTreeResponse>(tree_url)?
+            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+        for path in select_dotnet_paths_from_tree(&tree.tree, 4) {
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
     }
 
     fn send_with_retry(&self, url: Url) -> Result<Response> {
@@ -550,7 +579,7 @@ impl GitHubClient for HttpGitHubClient {
             }
         }
         extra_files.extend(self.fetch_workflow_files(repository, default_branch)?);
-        extra_files.extend(self.fetch_root_csproj_file(repository, default_branch)?);
+        extra_files.extend(self.fetch_dotnet_manifest_files(repository, default_branch)?);
 
         Ok(ConventionalRepositoryFiles {
             readme: self.fetch_first_available_file(
@@ -786,19 +815,70 @@ struct ContentsEntry {
     path: String,
 }
 
-/// Selects the first (by sorted path) root-level `.csproj` file entry, if
-/// any, matching `dotrepo-core::import::mod::load_first_root_file_with_extension`'s
-/// single-file expectation. `.csproj` filenames are repository-specific, so
-/// finding one requires listing root contents rather than a fixed-path fetch.
-fn first_root_csproj_path(entries: Vec<ContentsEntry>) -> Option<String> {
-    let mut csproj_paths: Vec<String> = entries
-        .into_iter()
+#[derive(Debug, Deserialize)]
+struct GitTreeResponse {
+    #[serde(default)]
+    tree: Vec<GitTreeEntry>,
+}
+
+#[derive(Debug, Deserialize)]
+struct GitTreeEntry {
+    path: String,
+    #[serde(rename = "type")]
+    entry_type: String,
+}
+
+/// Selects root-level paths ending with any of `suffixes`, sorted, capped.
+fn first_root_paths_with_suffixes(
+    entries: &[ContentsEntry],
+    suffixes: &[&str],
+    limit: usize,
+) -> Vec<String> {
+    let mut paths: Vec<String> = entries
+        .iter()
         .filter(|entry| entry.entry_type == "file")
-        .filter(|entry| entry.path.to_ascii_lowercase().ends_with(".csproj"))
-        .map(|entry| entry.path)
+        .map(|entry| entry.path.clone())
+        .filter(|path| {
+            let lower = path.to_ascii_lowercase();
+            suffixes.iter().any(|suffix| lower.ends_with(suffix))
+        })
         .collect();
-    csproj_paths.sort();
-    csproj_paths.into_iter().next()
+    paths.sort();
+    paths.truncate(limit);
+    paths
+}
+
+/// Prefer non-test `.sln` / `.csproj` blobs from a recursive git tree.
+fn select_dotnet_paths_from_tree(entries: &[GitTreeEntry], limit: usize) -> Vec<String> {
+    let mut paths: Vec<String> = entries
+        .iter()
+        .filter(|entry| entry.entry_type == "blob")
+        .map(|entry| entry.path.clone())
+        .filter(|path| {
+            let lower = path.to_ascii_lowercase();
+            (lower.ends_with(".csproj") || lower.ends_with(".sln"))
+                && !lower.contains("/obj/")
+                && !lower.contains("/bin/")
+                && path.matches('/').count() <= 3
+        })
+        .collect();
+    paths.sort_by(|left, right| {
+        let left_test = is_likely_test_dotnet_path(left);
+        let right_test = is_likely_test_dotnet_path(right);
+        left_test.cmp(&right_test).then_with(|| left.cmp(right))
+    });
+    paths.truncate(limit);
+    paths
+}
+
+fn is_likely_test_dotnet_path(path: &str) -> bool {
+    let lower = path.to_ascii_lowercase();
+    lower.contains(".tests.")
+        || lower.contains(".test.")
+        || lower.contains("/tests/")
+        || lower.contains("/test/")
+        || lower.ends_with("tests.csproj")
+        || lower.ends_with("test.csproj")
 }
 
 #[cfg(test)]
@@ -843,7 +923,7 @@ mod tests {
     }
 
     #[test]
-    fn first_root_csproj_path_picks_first_by_sorted_name() {
+    fn first_root_paths_with_suffixes_picks_sorted_csproj_and_sln() {
         let entries = vec![
             ContentsEntry {
                 entry_type: "dir".into(),
@@ -859,35 +939,43 @@ mod tests {
             },
             ContentsEntry {
                 entry_type: "file".into(),
+                path: "App.sln".into(),
+            },
+            ContentsEntry {
+                entry_type: "file".into(),
                 path: "README.md".into(),
             },
         ];
-
         assert_eq!(
-            first_root_csproj_path(entries),
-            Some("Alpha.csproj".to_string())
+            first_root_paths_with_suffixes(&entries, &[".csproj", ".sln"], 4),
+            vec![
+                "Alpha.csproj".to_string(),
+                "App.sln".to_string(),
+                "Zeta.csproj".to_string()
+            ]
         );
     }
 
     #[test]
-    fn first_root_csproj_path_ignores_directories_and_non_csproj_files() {
-        let entries = vec![
-            ContentsEntry {
-                entry_type: "dir".into(),
-                path: "Project.csproj".into(),
+    fn select_dotnet_paths_from_tree_prefers_non_test_projects() {
+        let tree = vec![
+            GitTreeEntry {
+                path: "tests/Unit.Tests.csproj".into(),
+                entry_type: "blob".into(),
             },
-            ContentsEntry {
-                entry_type: "file".into(),
-                path: "notes.txt".into(),
+            GitTreeEntry {
+                path: "src/Lib/Lib.csproj".into(),
+                entry_type: "blob".into(),
+            },
+            GitTreeEntry {
+                path: "App.sln".into(),
+                entry_type: "blob".into(),
             },
         ];
-
-        assert_eq!(first_root_csproj_path(entries), None);
-    }
-
-    #[test]
-    fn first_root_csproj_path_returns_none_for_empty_listing() {
-        assert_eq!(first_root_csproj_path(Vec::new()), None);
+        assert_eq!(
+            select_dotnet_paths_from_tree(&tree, 2),
+            vec!["App.sln".to_string(), "src/Lib/Lib.csproj".to_string()]
+        );
     }
 
     #[test]

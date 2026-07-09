@@ -1,7 +1,6 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Left `repo.build` unset because `.github/workflows/build-test-win.yml` and `.github/workflows/build-test.yml` suggested conflicting build commands.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

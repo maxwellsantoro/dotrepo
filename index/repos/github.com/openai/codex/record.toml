@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/openai/codex"
-generated_at = "2026-07-06T18:55:43.900611Z"
+generated_at = "2026-07-09T03:24:04.640197Z"
 
 [record.trust]
 confidence = "high"
@@ -30,8 +30,8 @@ languages = [
     "JavaScript",
     "Jupyter Notebook",
     "HTML",
-    "Just",
     "Smarty",
+    "Just",
     "Nix",
     "Dockerfile",
     "C",
@@ -53,6 +53,6 @@ archived = false
 clone_url = "https://github.com/openai/codex.git"
 default_branch = "main"
 fork = false
-head_sha = "a86d525e4d28b299d2522cbef844675203e86084"
+head_sha = "2342b2c2a66b5ac2a07278afb4f5f38700be452e"
 html_url = "https://github.com/openai/codex"
-stars = 95854
+stars = 96375

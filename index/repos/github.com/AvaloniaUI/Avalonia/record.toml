@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/AvaloniaUI/Avalonia"
-generated_at = "2026-07-06T19:09:28.250107Z"
+generated_at = "2026-07-09T03:26:54.541262Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `nukebuild/_build.csproj`. Inferred `repo.build` from `nukebuild/_build.csproj`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "Avalonia"
@@ -35,6 +36,7 @@ languages = [
     "CSS",
     "Batchfile",
 ]
+build = "dotnet build"
 topics = [
     "c-sharp",
     "xaml",
@@ -70,6 +72,6 @@ archived = false
 clone_url = "https://github.com/AvaloniaUI/Avalonia.git"
 default_branch = "master"
 fork = false
-head_sha = "04e8b20e4767ce7a607ec61efe7699af514242ac"
+head_sha = "a6dbeb7d9cbe50bcbc978c0b2485036f6134e208"
 html_url = "https://github.com/AvaloniaUI/Avalonia"
-stars = 31122
+stars = 31137
