@@ -1087,12 +1087,23 @@ function withCacheControl(response, cacheControl) {
 }
 
 /**
- * Parse `/v0/repos/{host}/{owner}/{repo}/...` static export paths.
- * Returns null for inventory files such as `/v0/repos/index.json` (not three
- * identity segments).
+ * Known per-repository static export leaves under
+ * `/v0/repos/{host}/{owner}/{repo}/`. Typo paths such as bare `summary` are not
+ * demand signals (summary content ships as `index.json`).
+ */
+const STATIC_REPOSITORY_SURFACES = new Map([
+  ["index.json", "summary"],
+  ["profile.json", "profile"],
+  ["trust.json", "trust"],
+  ["relations.json", "relations"]
+]);
+
+/**
+ * Parse `/v0/repos/{host}/{owner}/{repo}/{surface}` static export paths.
+ * Returns null for inventory files and unknown leaves.
  */
 export function parseStaticRepositoryAssetPath(pathname) {
-  const match = /^\/v0\/repos\/([^/]+)\/([^/]+)\/([^/]+)(?:\/(.*))?$/.exec(
+  const match = /^\/v0\/repos\/([^/]+)\/([^/]+)\/([^/]+)\/([^/]+)$/.exec(
     pathname ?? ""
   );
   if (match === null) {
@@ -1101,9 +1112,11 @@ export function parseStaticRepositoryAssetPath(pathname) {
   const host = match[1];
   const owner = match[2];
   const repo = match[3];
-  const rest = (match[4] ?? "").replace(/\/+$/, "");
-  const leaf = rest === "" ? "repository" : rest.split("/").pop() || "repository";
-  const route = leaf.replace(/\.json$/, "") || "repository";
+  const leaf = match[4];
+  const route = STATIC_REPOSITORY_SURFACES.get(leaf);
+  if (route === undefined) {
+    return null;
+  }
   return {
     identity: { host, owner, repo },
     route
@@ -1141,9 +1154,9 @@ async function serveStaticAsset(request, env, strippedPath) {
     ? await fetchSnapshotAssetOrArchive(env, assetRequest, assetPath)
     : await env.ASSETS.fetch(assetRequest);
 
-  // Static export 404s for per-repository surfaces are the primary human/agent
-  // lookup path. Emit the same demand signal used by dynamic query routes so
-  // Milestone 4 cohort selection is not blind to summary/profile/trust misses.
+  // Static export 404s for published per-repository leaves are a primary
+  // agent lookup path. Emit the same demand signal used by dynamic query
+  // routes so Milestone 4 cohort selection sees profile/trust/summary misses.
   if (response.status === 404 && strippedPath.startsWith("/v0/repos/")) {
     const parsed = parseStaticRepositoryAssetPath(strippedPath);
     if (parsed !== null) {

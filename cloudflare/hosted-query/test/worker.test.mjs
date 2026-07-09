@@ -1031,7 +1031,7 @@ test("logLookupMiss emits structured DOTREPO_LOOKUP_MISS lines", () => {
 test("parseStaticRepositoryAssetPath extracts host/owner/repo surfaces", () => {
   assert.deepEqual(
     parseStaticRepositoryAssetPath(
-      "/v0/repos/github.com/acme/widgets/summary"
+      "/v0/repos/github.com/acme/widgets/index.json"
     ),
     {
       identity: { host: "github.com", owner: "acme", repo: "widgets" },
@@ -1046,6 +1046,13 @@ test("parseStaticRepositoryAssetPath extracts host/owner/repo surfaces", () => {
       identity: { host: "github.com", owner: "acme", repo: "widgets" },
       route: "profile"
     }
+  );
+  // Bare "summary" is not a published leaf; do not treat as demand.
+  assert.equal(
+    parseStaticRepositoryAssetPath(
+      "/v0/repos/github.com/acme/widgets/summary"
+    ),
+    null
   );
   assert.equal(parseStaticRepositoryAssetPath("/v0/repos/index.json"), null);
   assert.equal(parseStaticRepositoryAssetPath("/v0/meta.json"), null);
@@ -1070,11 +1077,19 @@ test("static repository surface 404 emits DOTREPO_LOOKUP_MISS", async () => {
   try {
     const response = await handleRequest(
       new Request(
-        "https://example.test/v0/repos/github.com/acme/missing-static/summary"
+        "https://example.test/v0/repos/github.com/acme/missing-static/profile.json"
       ),
       env
     );
     assert.equal(response.status, 404);
+    // Typo path must not emit demand for an unknown leaf.
+    const typo = await handleRequest(
+      new Request(
+        "https://example.test/v0/repos/github.com/BurntSushi/ripgrep/summary"
+      ),
+      env
+    );
+    assert.equal(typo.status, 404);
   } finally {
     console.log = original;
   }
@@ -1084,5 +1099,5 @@ test("static repository surface 404 emits DOTREPO_LOOKUP_MISS", async () => {
   assert.equal(payload.host, "github.com");
   assert.equal(payload.owner, "acme");
   assert.equal(payload.repo, "missing-static");
-  assert.equal(payload.route, "summary");
+  assert.equal(payload.route, "profile");
 });

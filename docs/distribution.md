@@ -27,9 +27,11 @@ concrete surfaces that make agents and tools check dotrepo before scraping.
    artifact and set `log_artifact_name` for real Worker demand.
 
    The hosted Worker emits `DOTREPO_LOOKUP_MISS` on **static** repository-surface
-   404s (`/v0/repos/{host}/{owner}/{repo}/summary|profile|trust|…`) and on
-   dynamic not-found paths (query/batch/compare/relations). Deploy the Worker
-   after that change before treating live tail/Logpush volume as complete.
+   404s for published leaves
+   (`/v0/repos/{host}/{owner}/{repo}/{index,profile,trust,relations}.json`) and
+   on dynamic not-found paths (query/batch/compare/relations). Summary content
+   is `index.json` (not a bare `/summary` path). Deploy the Worker after that
+   change before treating live tail/Logpush volume as complete.
 
    Local path:
 
