@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pyenv/pyenv"
-generated_at = "2026-07-09T04:58:44.662668Z"
+generated_at = "2026-07-09T05:09:35.72212Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Makefile`. Filled `repo.description` with inferred defaults. Left `repo.build` unset: CI workflows only install host packages (`apt`/`build-essential`), not a repository build command. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Makefile`. Filled `repo.description` with inferred defaults. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Simple Python Version Management: pyenv"

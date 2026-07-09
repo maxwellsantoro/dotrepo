@@ -546,7 +546,7 @@ platform integrity
 | Platform integrity | **Closed** (2026-07-09) | Fail-closed automation, draft-PR landing, strict telemetry, MCP origin bind, multi-file writeback, Worker bounds, CI least-privilege, Dependabot cargo/npm, shared CLI entry ([table](#platform-integrity)) |
 | Intent/ecosystem scorecards | **Tooling shipped** | Soft budgets; harden only after stable |
 | Execution-field completeness | **Hardening** | ~39% missing build/test; use coverage-gap report |
-| Distribution / non-operator demand | **Path landed** | Live third-party traffic + exported miss volume still open |
+| Distribution / non-operator demand | **Path landed** | Static-route miss logging fixed in Worker (deploy to activate); live third-party traffic still open |
 | M4 first 1k profiles | **Ready when demand path is live** | 50–100 repo cohorts; prefer live lookup-miss export + soft scorecards green |
 | Maintainability hotspots | **Mostly closed** | Remaining: `crawler/github.rs` split plan; CLI test / facade import tests on next expansion |
 | M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |

@@ -1086,6 +1086,30 @@ function withCacheControl(response, cacheControl) {
   });
 }
 
+/**
+ * Parse `/v0/repos/{host}/{owner}/{repo}/...` static export paths.
+ * Returns null for inventory files such as `/v0/repos/index.json` (not three
+ * identity segments).
+ */
+export function parseStaticRepositoryAssetPath(pathname) {
+  const match = /^\/v0\/repos\/([^/]+)\/([^/]+)\/([^/]+)(?:\/(.*))?$/.exec(
+    pathname ?? ""
+  );
+  if (match === null) {
+    return null;
+  }
+  const host = match[1];
+  const owner = match[2];
+  const repo = match[3];
+  const rest = (match[4] ?? "").replace(/\/+$/, "");
+  const leaf = rest === "" ? "repository" : rest.split("/").pop() || "repository";
+  const route = leaf.replace(/\.json$/, "") || "repository";
+  return {
+    identity: { host, owner, repo },
+    route
+  };
+}
+
 async function serveStaticAsset(request, env, strippedPath) {
   let assetPath = strippedPath === "/" ? "/" : strippedPath;
   let cacheControl = null;
@@ -1116,6 +1140,26 @@ async function serveStaticAsset(request, env, strippedPath) {
   const response = assetPath.startsWith("/v0/snapshots/")
     ? await fetchSnapshotAssetOrArchive(env, assetRequest, assetPath)
     : await env.ASSETS.fetch(assetRequest);
+
+  // Static export 404s for per-repository surfaces are the primary human/agent
+  // lookup path. Emit the same demand signal used by dynamic query routes so
+  // Milestone 4 cohort selection is not blind to summary/profile/trust misses.
+  if (response.status === 404 && strippedPath.startsWith("/v0/repos/")) {
+    const parsed = parseStaticRepositoryAssetPath(strippedPath);
+    if (parsed !== null) {
+      try {
+        validateRepositoryIdentity(
+          parsed.identity.host,
+          parsed.identity.owner,
+          parsed.identity.repo
+        );
+        logLookupMiss(parsed.identity, parsed.route);
+      } catch {
+        // Invalid identity segments are not demand signals.
+      }
+    }
+  }
+
   return cacheControl === null ? response : withCacheControl(response, cacheControl);
 }
 

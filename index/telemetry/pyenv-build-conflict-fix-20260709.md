@@ -32,5 +32,6 @@ eligible, so status and re-score disagreed.
 
 - Updated pyenv `record.toml` notes + `evidence.md` to honest absence of build
   (host package install, not conflict).
-- Live recrawl deferred on GitHub API 502 during this session; re-crawl when
-  API is healthy to refresh `generated_at` / head SHA only.
+- Live recrawl completed 2026-07-09 after API recovery: `generated_at`
+  refreshed, notes no longer mention conflict, `test = make test`, status
+  `verified`, promotion re-score 613/613 eligible.

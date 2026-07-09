@@ -4,7 +4,11 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { handleRequest, logLookupMiss } from "../src/worker.mjs";
+import {
+  handleRequest,
+  logLookupMiss,
+  parseStaticRepositoryAssetPath
+} from "../src/worker.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..", "..", "..");
@@ -1022,4 +1026,63 @@ test("logLookupMiss emits structured DOTREPO_LOOKUP_MISS lines", () => {
   assert.equal(payload.repo, "widgets");
   assert.equal(payload.route, "query");
   assert.ok(payload.ts);
+});
+
+test("parseStaticRepositoryAssetPath extracts host/owner/repo surfaces", () => {
+  assert.deepEqual(
+    parseStaticRepositoryAssetPath(
+      "/v0/repos/github.com/acme/widgets/summary"
+    ),
+    {
+      identity: { host: "github.com", owner: "acme", repo: "widgets" },
+      route: "summary"
+    }
+  );
+  assert.deepEqual(
+    parseStaticRepositoryAssetPath(
+      "/v0/repos/github.com/acme/widgets/profile.json"
+    ),
+    {
+      identity: { host: "github.com", owner: "acme", repo: "widgets" },
+      route: "profile"
+    }
+  );
+  assert.equal(parseStaticRepositoryAssetPath("/v0/repos/index.json"), null);
+  assert.equal(parseStaticRepositoryAssetPath("/v0/meta.json"), null);
+});
+
+test("static repository surface 404 emits DOTREPO_LOOKUP_MISS", async () => {
+  const files = new Map([
+    [
+      "/v0/meta.json",
+      JSON.stringify({
+        apiVersion: "dotrepo/public/v0",
+        paths: { root: "/v0/" }
+      })
+    ]
+  ]);
+  const env = { ASSETS: makeAssets(files), BASE_PATH: "/" };
+  const lines = [];
+  const original = console.log;
+  console.log = (...args) => {
+    lines.push(args.join(" "));
+  };
+  try {
+    const response = await handleRequest(
+      new Request(
+        "https://example.test/v0/repos/github.com/acme/missing-static/summary"
+      ),
+      env
+    );
+    assert.equal(response.status, 404);
+  } finally {
+    console.log = original;
+  }
+  const missLines = lines.filter((line) => line.startsWith("DOTREPO_LOOKUP_MISS "));
+  assert.equal(missLines.length, 1, `expected one miss log, got: ${lines.join(" | ")}`);
+  const payload = JSON.parse(missLines[0].slice("DOTREPO_LOOKUP_MISS ".length));
+  assert.equal(payload.host, "github.com");
+  assert.equal(payload.owner, "acme");
+  assert.equal(payload.repo, "missing-static");
+  assert.equal(payload.route, "summary");
 });

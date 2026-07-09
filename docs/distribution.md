@@ -26,11 +26,16 @@ concrete surfaces that make agents and tools check dotrepo before scraping.
    `workflow_dispatch`. Offline by default (fixture proof); attach a live log
    artifact and set `log_artifact_name` for real Worker demand.
 
+   The hosted Worker emits `DOTREPO_LOOKUP_MISS` on **static** repository-surface
+   404s (`/v0/repos/{host}/{owner}/{repo}/summary|profile|trust|…`) and on
+   dynamic not-found paths (query/batch/compare/relations). Deploy the Worker
+   after that change before treating live tail/Logpush volume as complete.
+
    Local path:
 
    ```bash
    # Capture live lines (Cloudflare Logpush, dashboard, or):
-   #   npx wrangler tail --format pretty  # filter/save DOTREPO_LOOKUP_MISS
+   #   cd cloudflare/hosted-query && npx wrangler tail --format pretty
    # Then standardize outputs under index/telemetry/:
    uv run python scripts/export_lookup_miss_demand.py \
      --input /tmp/lookup-misses.log
