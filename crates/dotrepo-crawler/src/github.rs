@@ -42,6 +42,7 @@ const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
     "go.mod",
     "setup.py",
     "setup.cfg",
+    "tox.ini",
     "pom.xml",
     "build.gradle",
     "build.gradle.kts",
@@ -373,6 +374,70 @@ impl HttpGitHubClient {
         Ok(files)
     }
 
+    /// Nested Python manifests (`python/setup.py`, nested `pyproject.toml`) when
+    /// Python is a primary language and root files do not already provide commands.
+    fn fetch_python_manifest_files(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+        languages: &[String],
+    ) -> Result<Vec<RepositoryTextFile>> {
+        if !python_is_primary_language(languages) {
+            return Ok(Vec::new());
+        }
+
+        // Root pyproject/setup/tox already in SUPPLEMENTAL_ROOT_FILES.
+        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
+        tree_url.query_pairs_mut().append_pair("recursive", "1");
+        let tree = self
+            .get_optional_json::<GitTreeResponse>(tree_url)?
+            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+
+        let mut paths: Vec<String> = tree
+            .tree
+            .iter()
+            .filter(|entry| entry.entry_type == "blob")
+            .map(|entry| entry.path.clone())
+            .filter(|path| {
+                let lower = path.to_ascii_lowercase();
+                let name = path.rsplit('/').next().unwrap_or(path);
+                matches!(
+                    name,
+                    "pyproject.toml" | "setup.py" | "setup.cfg" | "tox.ini"
+                ) && path.matches('/').count() <= 2
+                    && !lower.contains("/examples/")
+                    && !lower.contains("/samples/")
+                    && !lower.contains("/benchmarks/")
+                    && !lower.contains("/tests/")
+                    && !lower.contains("/release/")
+                    && !lower.starts_with("release/")
+                    && !lower.contains("/packaging/")
+            })
+            .collect();
+        paths.sort_by(|left, right| {
+            python_manifest_path_preference(left)
+                .cmp(&python_manifest_path_preference(right))
+                .then_with(|| left.cmp(right))
+        });
+        paths.truncate(5);
+
+        let mut files = Vec::new();
+        for path in paths {
+            if matches!(
+                path.as_str(),
+                "pyproject.toml" | "setup.py" | "setup.cfg" | "tox.ini"
+            ) {
+                continue;
+            }
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
+    }
+
     /// Nested `package.json` files for JS/TS monorepos when root scripts are
     /// absent or incomplete. Selection prefers apps/api, server, web over SDK
     /// and example packages (mirrors `load_best_package_json` ranking).
@@ -661,6 +726,11 @@ impl GitHubClient for HttpGitHubClient {
         }
         extra_files.extend(self.fetch_workflow_files(repository, default_branch)?);
         extra_files.extend(self.fetch_node_manifest_files(
+            repository,
+            default_branch,
+            languages,
+        )?);
+        extra_files.extend(self.fetch_python_manifest_files(
             repository,
             default_branch,
             languages,
@@ -1006,6 +1076,44 @@ fn js_ts_is_primary_language(languages: &[String]) -> bool {
     languages.iter().take(3).any(|lang| is_js_ts_language(lang))
 }
 
+fn python_is_primary_language(languages: &[String]) -> bool {
+    languages
+        .iter()
+        .take(3)
+        .any(|lang| lang == "Python" || lang == "Jupyter Notebook")
+}
+
+fn python_manifest_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if matches!(
+        lower.as_str(),
+        "pyproject.toml" | "setup.py" | "setup.cfg" | "tox.ini"
+    ) {
+        return 0;
+    }
+    if lower.contains("/examples/") || lower.contains("/samples/") || lower.contains("/benchmarks/")
+    {
+        return 200;
+    }
+    if lower.starts_with("release/")
+        || lower.contains("/release/")
+        || lower.contains("/packaging/")
+        || lower.contains("/ci/")
+    {
+        return 160;
+    }
+    if lower.starts_with("python/") || lower.contains("/python/") {
+        return 10;
+    }
+    if lower.starts_with("src/") {
+        return 20;
+    }
+    if lower.contains("/packages/") {
+        return 30;
+    }
+    50
+}
+
 /// Lower is better; keep in sync with core `package_json_path_preference`.
 fn node_package_json_path_preference(path: &str) -> i32 {
     let lower = path.replace('\\', "/").to_ascii_lowercase();
@@ -1259,6 +1367,7 @@ mod tests {
             "go.mod",
             "setup.py",
             "setup.cfg",
+            "tox.ini",
             "pom.xml",
             "build.gradle",
             "build.gradle.kts",

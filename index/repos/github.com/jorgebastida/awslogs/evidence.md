@@ -1,7 +1,7 @@
 # Evidence
 
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.test from setup.py as `python -m unittest discover`.
+- Imported repo.test from tox.ini as `tox`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

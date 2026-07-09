@@ -1,6 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
+- Imported repo.test from tox.ini as `tox`.
 - Discovered related relation to github.com/jazzband/django-silk from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.

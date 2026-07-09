@@ -15,4 +15,4 @@
 
 ## Downgrade guard
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Status dropped from a prior verified record because the following previously present field(s) regressed: repo.test.

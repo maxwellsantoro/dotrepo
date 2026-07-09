@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jazzband/django-silk"
-generated_at = "2026-07-09T03:31:15.77603Z"
+generated_at = "2026-07-09T03:42:11.746425Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `tox.ini`. Imported `repo.test` from `tox.ini`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Silk"
@@ -27,6 +27,7 @@ languages = [
     "CSS",
     "SCSS",
 ]
+test = "tox"
 topics = []
 
 [relations]

@@ -509,8 +509,8 @@ then gated cohort growth (M4). M5 stays parallel and lower priority.
 | `verified` / high confidence | 613 / 613 |
 | `imported` / `inferred` | 0 / 0 |
 | Record-level high-signal vs M2 target (500) | 613 (123%) |
-| Missing build / test / security | 223 / 228 / 420 |
-| Quality-hardening queue | ~460 (refresh via scripts) |
+| Missing build / test / security | 223 / 227 / 420 |
+| Quality-hardening queue | ~458 (refresh via scripts) |
 | Stale or missing `generated_at` | 0 (0%) |
 | Max refresh overdue | 0 days |
 | Accepted maintainer claims | 1 |
@@ -581,7 +581,10 @@ risk is operating it safely and usefully at the next scale step.
      `package.json` materialization when JS/TS is primary + monorepo markers;
      `load_best_package_json` prefers server/api/web/apps over sdk/examples.
      Recrawl: immich, firecrawl, polar, xiaozhi-esp32-server gained build/test.
-     Missing build/test ~**223/228**.
+   - **Python tox.ini + nested manifests (2026-07-09):** materialize/import
+     `tox.ini` as Manifest-tier `tox`; prefer nested `python/setup.py` /
+     `pyproject.toml`; deprioritize `release/` packaging trees. Recrawl:
+     django-silk, boto3, awslogs → `tox`. Missing build/test ~**223/227**.
    - Residual gaps remain (guides, awesome-lists, polyglot monorepos); prefer
      coverage-gap + honest abstention over invented commands.
 2. **Drain any new promotion headroom** after recrawls
@@ -634,6 +637,7 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
 - Polyglot .NET language gate + coverage-gap recrawl batch (semantic-kernel,
   ragflow, pgmq, firecrawl correction).
 - JS/TS monorepo nested package.json selection (immich/firecrawl/polar lifts).
+- Python `tox.ini` + nested pyproject/setup selection (django-silk/boto3/ray).
 
 #### Next — Milestone 4 cohorts (after Now items 0–5 are healthy)
 

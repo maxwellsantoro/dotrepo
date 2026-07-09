@@ -3,7 +3,7 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.test from pyproject.toml as `python -m pytest`.
+- Imported repo.test from tox.ini as `tox`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

@@ -161,6 +161,35 @@ pub(crate) fn infer_setup_py_commands(file: &ImportedFile) -> Option<ImportedCom
     })
 }
 
+/// Classic `tox.ini` is the strongest honest signal for multi-env Python tests.
+pub(crate) fn infer_tox_ini_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let mut has_tox = false;
+    let mut has_testenv = false;
+    for line in file.contents.lines() {
+        let trimmed = line.trim();
+        if !trimmed.starts_with('[') || !trimmed.ends_with(']') {
+            continue;
+        }
+        let section = trimmed[1..trimmed.len() - 1]
+            .split(':')
+            .next()
+            .unwrap_or("")
+            .trim()
+            .to_ascii_lowercase();
+        has_tox |= section == "tox";
+        has_testenv |= section == "testenv" || section.starts_with("testenv");
+    }
+    if !has_tox && !has_testenv {
+        return None;
+    }
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: None,
+        test: Some("tox".into()),
+    })
+}
+
 pub(crate) fn infer_setup_cfg_test_command(contents: &str) -> Option<String> {
     let mut current_section: Option<String> = None;
     let mut has_pytest_section = false;

@@ -43,8 +43,8 @@ pub use types::{
 };
 
 use commands::{
-    load_best_package_json, load_first_existing_file, load_first_file_with_extension,
-    load_workflow_import_files, sanitize_import_command,
+    load_best_package_json, load_best_python_manifest, load_first_existing_file,
+    load_first_file_with_extension, load_workflow_import_files, sanitize_import_command,
 };
 
 #[allow(unused_imports)]
@@ -233,9 +233,10 @@ pub fn import_repository_with_options(
     // Prefer a monorepo package with real build/test scripts over a root
     // workspace package.json that only hosts format scripts.
     let package_json = load_best_package_json(root)?;
-    let pyproject_toml = load_first_existing_file(root, &["pyproject.toml"])?;
-    let setup_py = load_first_existing_file(root, &["setup.py"])?;
-    let setup_cfg = load_first_existing_file(root, &["setup.cfg"])?;
+    let pyproject_toml = load_best_python_manifest(root, "pyproject.toml")?;
+    let setup_py = load_best_python_manifest(root, "setup.py")?;
+    let setup_cfg = load_best_python_manifest(root, "setup.cfg")?;
+    let tox_ini = load_first_existing_file(root, &["tox.ini"])?;
     let go_mod = load_first_existing_file(root, &["go.mod"])?;
     let pom_xml = load_first_existing_file(root, &["pom.xml"])?;
     let maven_wrapper = root.join("mvnw").is_file();
@@ -369,6 +370,7 @@ pub fn import_repository_with_options(
         pyproject_toml: pyproject_toml.as_ref(),
         setup_py: setup_py.as_ref(),
         setup_cfg: setup_cfg.as_ref(),
+        tox_ini: tox_ini.as_ref(),
         go_mod: go_mod.as_ref(),
         pom_xml: pom_xml.as_ref(),
         maven_wrapper,

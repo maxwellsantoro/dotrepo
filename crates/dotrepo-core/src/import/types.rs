@@ -298,6 +298,7 @@ pub(crate) struct ImportSources<'a> {
     pub(crate) pyproject_toml: Option<&'a ImportedFile>,
     pub(crate) setup_py: Option<&'a ImportedFile>,
     pub(crate) setup_cfg: Option<&'a ImportedFile>,
+    pub(crate) tox_ini: Option<&'a ImportedFile>,
     pub(crate) go_mod: Option<&'a ImportedFile>,
     pub(crate) pom_xml: Option<&'a ImportedFile>,
     pub(crate) maven_wrapper: bool,

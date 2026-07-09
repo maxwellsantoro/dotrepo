@@ -35,6 +35,7 @@ use extraction::{
     infer_rebar_commands,
     infer_setup_cfg_commands,
     infer_setup_py_commands,
+    infer_tox_ini_commands,
     infer_workflow_commands,
 };
 use policy::resolve_command_field;
@@ -56,6 +57,79 @@ pub(super) fn load_first_existing_file(
     }
 
     Ok(None)
+}
+
+/// Load the best named Python manifest (`pyproject.toml` / `setup.py` /
+/// `setup.cfg`) for command inference, preferring root then `python/` layouts.
+pub(super) fn load_best_python_manifest(
+    root: &Path,
+    file_name: &str,
+) -> Result<Option<ImportedFile>> {
+    let mut matches = Vec::new();
+    collect_files_named(root, root, file_name, 3, 1, &mut matches)?;
+    matches.sort_by(|left, right| {
+        python_manifest_path_preference(&left.0)
+            .cmp(&python_manifest_path_preference(&right.0))
+            .then_with(|| left.0.cmp(&right.0))
+    });
+
+    for (relative, path) in matches {
+        let contents = fs::read_to_string(&path)
+            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let file = ImportedFile {
+            path: relative.clone(),
+            contents,
+        };
+        let usable = match file_name {
+            "pyproject.toml" => extraction::infer_pyproject_commands(&file).is_some(),
+            "setup.py" => extraction::infer_setup_py_commands(&file).is_some(),
+            "setup.cfg" => extraction::infer_setup_cfg_commands(&file).is_some(),
+            _ => false,
+        };
+        if usable {
+            return Ok(Some(file));
+        }
+    }
+    // Fall back to root file even if scripts are incomplete (toolchain / metadata).
+    let root_name: &'static str = match file_name {
+        "pyproject.toml" => "pyproject.toml",
+        "setup.py" => "setup.py",
+        "setup.cfg" => "setup.cfg",
+        _ => return Ok(None),
+    };
+    load_first_existing_file(root, &[root_name])
+}
+
+fn python_manifest_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "pyproject.toml" || lower == "setup.py" || lower == "setup.cfg" {
+        return 0;
+    }
+    if lower.contains("/examples/") || lower.contains("/samples/") || lower.contains("/benchmarks/")
+    {
+        return 200;
+    }
+    if lower.contains("/tests/") || lower.contains("/test/") {
+        return 180;
+    }
+    // Packaging/release helper trees are rarely the project entrypoint.
+    if lower.starts_with("release/")
+        || lower.contains("/release/")
+        || lower.contains("/packaging/")
+        || lower.contains("/ci/")
+    {
+        return 160;
+    }
+    if lower.starts_with("python/") || lower.contains("/python/") {
+        return 10;
+    }
+    if lower.starts_with("src/") {
+        return 20;
+    }
+    if lower.contains("/packages/") {
+        return 30;
+    }
+    50
 }
 
 /// Load the best `package.json` for command inference: root first when it has
@@ -322,6 +396,9 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.package_json.and_then(infer_package_json_commands) {
         candidates.push(candidate);
     }
+    if let Some(candidate) = sources.tox_ini.and_then(infer_tox_ini_commands) {
+        candidates.push(candidate);
+    }
     if let Some(candidate) = sources.pyproject_toml.and_then(infer_pyproject_commands) {
         candidates.push(candidate);
     }
@@ -474,6 +551,20 @@ mod tests {
             }
             other => panic!("expected unique test resolution, got {other:?}"),
         }
+    }
+
+    #[test]
+    fn infer_tox_ini_commands_detects_testenv() {
+        use super::super::types::ImportedFile;
+        use super::extraction::infer_tox_ini_commands;
+
+        let file = ImportedFile {
+            path: "tox.ini".into(),
+            contents: "[tox]\nenvlist = py310\n[testenv]\ncommands = pytest\n".into(),
+        };
+        let candidate = infer_tox_ini_commands(&file).expect("tox.ini yields test");
+        assert_eq!(candidate.test.as_deref(), Some("tox"));
+        assert!(candidate.build.is_none());
     }
 
     #[test]
@@ -1157,6 +1248,7 @@ RUFF_UPDATE_SCHEMA=1 cargo test
             pyproject_toml: Some(&pyproject),
             setup_py: Some(&setup_py),
             setup_cfg: None,
+            tox_ini: None,
             go_mod: None,
             pom_xml: None,
             maven_wrapper: false,
