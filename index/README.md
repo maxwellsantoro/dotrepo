@@ -119,9 +119,9 @@ it as production automation, not a passive report:
   it runs only when the repository variable is explicitly `true` (unset or any
   other value skips the job). Local batch scripts treat unset as disabled unless
   you pass `--skip-automation-enabled-check`
-- prefer branch protection and draft-PR landing for automation when possible;
-  the current direct-push path still requires the same public-surface and
-  release-gate artifacts as maintainer changes once enabled
+- land index updates through a **draft PR** (not a direct push to the default
+  branch). The PR opens only after `validate-index` and the **strict** autonomous
+  telemetry gate pass. Review CI / release floors before merging
 - rotate sidecar credentials and monitor workflow logs for unexpected index churn
 - remember that writeback uses `autonomous_writeback_eligible` (verification
   passed) rather than the stricter `eligible_for_auto_publish` gate used for

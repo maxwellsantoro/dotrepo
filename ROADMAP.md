@@ -456,13 +456,12 @@ compromise, hostile snapshot metadata, partial disk failure, and Worker load.
 | MCP snapshot path binding | **Closed** | `resolve_same_origin_path_url` rejects `//`, schemes, and `..`; join result must keep base origin; unit tests cover host escape |
 | Custom-base SSRF denylist | **Closed** | CGNAT `100.64.0.0/10`, documentation ranges, multicast/broadcast, IPv6 docs, cloud-metadata hostnames |
 | Worker cost bounds | **Closed** | Search default limit 50 / max 200; reverse relations inventory scan only when ≤64 peers (prefer `relations.json`) |
-| Writeback path (PR vs direct push) | **Open** | Autonomous refresh still commits to the default branch when enabled; draft-PR or environment protection remains preferred before wider M4 automation |
-| Telemetry SLO on schedule | **Open** | Telemetry gate remains `--warn-only` with batch `continue-on-error`; promote to strict fail once baselines stay green |
-| CI / supply chain hygiene | **Open** | Least-privilege `ci.yml` permissions; Dependabot for cargo + npm; pin mcp-publisher binary |
-| Dual CLI entrypoint | **Open** | Collapse `crates/dotrepo` + `dotrepo-cli` to one shared `run()` |
+| Writeback path (PR vs direct push) | **Closed** | Autonomous refresh opens a **draft PR** via `peter-evans/create-pull-request` (no direct `git push` to default branch); requires telemetry + validate-index |
+| Telemetry SLO on schedule | **Closed** | Telemetry gate is **strict** (no `--warn-only`); failed gate fails the job and blocks draft PR open |
+| CI / supply chain hygiene | **Closed** (mcp-publisher pin residual) | `ci.yml` has top-level `permissions: contents: read`; Dependabot covers github-actions, cargo, and npm (`cloudflare/hosted-query`, `editors/vscode`). Pinning the mcp-publisher binary remains optional supply-chain polish |
+| Dual CLI entrypoint | **Closed** | Shared `dotrepo_cli::run` / `dotrepo_cli::main`; workspace and install alias binaries are thin wrappers |
 
-Closed rows landed 2026-07-09. Remaining open rows still outrank raw corpus growth when
-they conflict with unattended M4 batch expansion.
+Core integrity + residual rows closed 2026-07-09. Optional polish (mcp-publisher binary pin) does not block M4 entry.
 
 Primary surfaces: `.github/workflows/index-autonomous-refresh.yml`,
 `scripts/run_autonomous_index_batch.py`, `crates/dotrepo-mcp/src/{handlers,lookup}.rs`,
@@ -542,11 +541,11 @@ platform integrity
 | Workstream | State | Blocker or next proof |
 | --- | --- | --- |
 | M1 factory + ops proof | **Done** (2026-07-08) | Keep green; do not reopen as a gate |
-| Platform integrity | **Mostly closed** (2026-07-09) | Fail-closed automation, MCP origin bind, multi-file writeback, Worker bounds shipped; open: PR writeback, strict telemetry, CI hygiene, dual CLI ([table](#platform-integrity)) |
+| Platform integrity | **Closed** (2026-07-09) | Fail-closed automation, draft-PR landing, strict telemetry, MCP origin bind, multi-file writeback, Worker bounds, CI least-privilege, Dependabot cargo/npm, shared CLI entry ([table](#platform-integrity)) |
 | Intent/ecosystem scorecards | **Tooling shipped** | Soft budgets; harden only after stable |
 | Execution-field completeness | **Hardening** | ~39% missing build/test; use coverage-gap report |
 | Distribution / non-operator demand | **Path landed** | Live third-party traffic + exported miss volume still open |
-| M4 first 1k profiles | **Unblocked on core integrity; still needs demand path** | 50–100 repo cohorts after Now 0–5 healthy (strict telemetry + live miss export preferred) |
+| M4 first 1k profiles | **Ready when demand path is live** | 50–100 repo cohorts; prefer live lookup-miss export + soft scorecards green |
 | Maintainability hotspots | **Tracked** | Split `import/escalation.rs` and `crawler/pipeline.rs` before large features |
 | M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |
 
@@ -555,13 +554,10 @@ platform integrity
 Milestone 1 operational proof is **closed**. The factory exists; the remaining
 risk is operating it safely and usefully at the next scale step.
 
-0. **Platform integrity** (core controls **closed** 2026-07-09; residual open rows
-   in [Platform integrity](#platform-integrity) still outrank unattended scale):
-   - **Done:** fail-closed scheduled enablement; MCP same-origin snapshot paths;
-     multi-file staged writeback; Worker search limits + bounded reverse-relations scan
-   - **Still open before heavy unattended automation:** draft-PR writeback (or env
-     protection), strict telemetry gate on schedule, CI least-privilege / Dependabot
-     cargo+npm, dual-CLI dispatch collapse
+0. **Platform integrity** — **closed** 2026-07-09 (see [Platform integrity](#platform-integrity)):
+   fail-closed enablement, draft-PR landing, strict telemetry, MCP same-origin
+   paths, multi-file writeback, Worker cost bounds, CI least-privilege, Dependabot
+   cargo/npm, shared CLI entry. Optional: pin mcp-publisher binary.
 1. **Work the quality-hardening queue** without inventing completeness.
    - Prioritize: `scripts/render_coverage_gaps.py` and growth-status “Next
      Quality Targets” (e.g. remaining `imported` medium-confidence rows).
@@ -594,7 +590,6 @@ Do not expand these modules without executing the documented splits first
 | --- | --- |
 | `dotrepo-core/src/import/escalation.rs` (~1.5k) | Split deterministic tier resolution, model ladder, and report assembly |
 | `dotrepo-crawler/src/pipeline.rs` (~1.5k) | Split merge/identity guards, factual sequence, writeback-gate wiring |
-| `crates/dotrepo` vs `dotrepo-cli` | Collapse to one shared `run()` to stop install-alias dispatch drift |
 | `dotrepo-cli/src/tests.rs` | Split by command domain on next test-family expansion |
 | `facade_tests/import_repository.rs` | Split on next import-fixture expansion |
 
@@ -616,9 +611,9 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
 
 #### Next — Milestone 4 cohorts (after Now items 0–5 are healthy)
 
-Core platform-integrity controls for item 0 are closed. Do **not** open large
-unattended M4 growth while residual integrity rows (PR writeback, strict
-telemetry) are still open **and** lookup-miss demand remains unexported.
+Platform-integrity item 0 is closed. Prefer opening M4 cohorts only once
+lookup-miss demand is exported on cadence (or package-registry proxies stand in)
+and soft intent scorecards are not in regression.
 
 1. Expand in gated **50–100** repository cohorts toward **1,000** maintained
    profiles.
@@ -689,10 +684,11 @@ Delivered:
 Open (do before large features in these modules):
 
 - execute splits for `import/escalation.rs` and `crawler/pipeline.rs`
-- collapse dual CLI entrypoints (`crates/dotrepo` + `dotrepo-cli`) into one
-  shared dispatch
-- expand Dependabot beyond GitHub Actions (cargo + `cloudflare/hosted-query` npm
-  and VS Code extension) as supply-chain hygiene, not a product milestone
+
+Done recently (maintainability hygiene):
+
+- dual CLI entrypoints collapsed onto `dotrepo_cli::run` / `dotrepo_cli::main`
+- Dependabot expanded to cargo + npm (`cloudflare/hosted-query`, `editors/vscode`)
 
 Exit criteria:
 
@@ -704,6 +700,7 @@ Exit criteria:
 - new contributors can orient to crawler and server crates without reading entire
   `main.rs` entrypoints
 - install-alias and workspace CLI cannot silently diverge on new subcommands
+  (**met** via shared `dotrepo_cli::main`)
 
 ### Milestone 0: Working protocol and proof surface
 
@@ -999,11 +996,10 @@ Current status (pre-scale scaffolding; growth batches not yet opened at M4 size)
   refresh-cost baseline
 - path to 1,000: gated **50–100** repository cohorts; larger batches unlock only
   by passing cohort gates, not by calendar time
-- **entry preconditions:** core platform-integrity controls closed (fail-closed
-  automation, MCP origin bind, multi-file writeback, Worker cost bounds);
-  residual integrity rows (PR writeback, strict telemetry) preferred before
-  large unattended batches; live or regularly exported lookup-miss demand; soft
-  intent scorecards not in regression
+- **entry preconditions:** platform-integrity controls closed (including
+  draft-PR landing and strict telemetry); live or regularly exported lookup-miss
+  demand (or interim package-registry proxies); soft intent scorecards not in
+  regression
 
 Exit criteria:
 

@@ -5,6 +5,11 @@ on:
   push:
     branches: [main]
 
+# Least privilege for a read-only validation pipeline. Jobs that need write
+# access must set permissions explicitly (none currently do).
+permissions:
+  contents: read
+
 env:
   # Faster, smaller dev/test builds in CI; local `cargo` is unaffected.
   CARGO_INCREMENTAL: "0"

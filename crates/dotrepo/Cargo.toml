@@ -26,6 +26,4 @@ name = "dotrepo"
 path = "src/main.rs"
 
 [dependencies]
-anyhow = "1"
-clap = { version = "4", features = ["derive"] }
 dotrepo-cli = { version = "2.0.0-alpha.0", path = "../dotrepo-cli" }

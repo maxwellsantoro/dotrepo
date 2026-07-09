@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: index-autonomous-refresh
@@ -139,12 +140,13 @@ jobs:
         if: always()
         shell: bash
         run: |
+          mkdir -p index-autonomous-batch
           if [ -f index/telemetry/autonomous-summary.json ]; then
+            # Strict: proof gates must pass before a draft PR can open.
             uv run python scripts/check_autonomous_telemetry_gate.py \
               --summary index/telemetry/autonomous-summary.json \
               --output-json index-autonomous-batch/autonomous-telemetry-gate.json \
-              --output-md index-autonomous-batch/autonomous-telemetry-gate.md \
-              --warn-only
+              --output-md index-autonomous-batch/autonomous-telemetry-gate.md
           else
             echo "No retained telemetry summary yet; skipping telemetry gate"
           fi
@@ -160,23 +162,75 @@ jobs:
           path: index-autonomous-batch/
           if-no-files-found: warn
           retention-days: 14
-      - name: Commit and push index updates
+      - name: Prepare draft pull request metadata
+        id: pr_meta
         if: always() && steps.telemetry_gate.outcome == 'success' && steps.validate_index.outcome == 'success'
         shell: bash
         run: |
           if [ ! -f index-autonomous-batch/telemetry.json ]; then
-            echo "No completed batch telemetry; refusing to land partial state"
+            echo "No completed batch telemetry; refusing to open a draft PR for partial state"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           if git diff --quiet -- index; then
             echo "No index changes to land"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git config user.name "dotrepo-automation"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index
-          git commit -m "chore(index): autonomous refresh batch ${{ github.event.inputs.batch_id || 'refresh-batch-01' }}"
-          git push
+          batch_id="${{ github.event.inputs.batch_id || 'refresh-batch-01' }}"
+          branch="automation/index-autonomous/${batch_id}-${{ github.run_id }}"
+          title="chore(index): autonomous refresh batch ${batch_id}"
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          {
+            echo "# Autonomous index refresh"
+            echo
+            echo "Automated draft PR from \`index-autonomous-refresh\`."
+            echo "Review index diffs, release floors, and telemetry before merge."
+            echo
+            echo "- batch: \`${batch_id}\`"
+            echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            if [ -f index-autonomous-batch/telemetry.json ]; then
+              uv run python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("index-autonomous-batch/telemetry.json").read_text())
+          print()
+          print("## Batch telemetry")
+          print(f"- crawled: {data.get('crawled', 0)}")
+          print(f"- written: {data.get('written', 0)}")
+          print(f"- skipped: {data.get('skipped', 0)}")
+          print(f"- failed: {data.get('failed', 0)}")
+          print(f"- adjudication calls: {data.get('adjudicationCalls', 0)}")
+          print(f"- tokens used: {data.get('tokensUsed', 0)}")
+          PY
+            fi
+            if [ -f index-autonomous-batch/autonomous-telemetry-gate.md ]; then
+              echo
+              cat index-autonomous-batch/autonomous-telemetry-gate.md
+            fi
+          } > index-autonomous-batch/pr-body.md
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "title=$title" >> "$GITHUB_OUTPUT"
+      - name: Create draft pull request for index updates
+        id: autonomous_pr
+        if: >-
+          always()
+          && steps.telemetry_gate.outcome == 'success'
+          && steps.validate_index.outcome == 'success'
+          && steps.pr_meta.outcome == 'success'
+          && steps.pr_meta.outputs.skip == 'false'
+        continue-on-error: true
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.pr_meta.outputs.branch }}
+          title: ${{ steps.pr_meta.outputs.title }}
+          commit-message: ${{ steps.pr_meta.outputs.title }}
+          body-path: index-autonomous-batch/pr-body.md
+          draft: true
+          delete-branch: true
+          add-paths: |
+            index/**
       - name: Publish step summary
         if: always()
         shell: bash
@@ -249,7 +303,7 @@ jobs:
                   gate = json.loads(gate_path.read_text())
                   print()
                   print("## Autonomous Telemetry Gate")
-                  print(f"- result: {'pass' if gate.get('passed') else 'not yet'}")
+                  print(f"- result: {'pass' if gate.get('passed') else 'fail (strict)'}")
                   check_summary = gate.get("checkSummary", {})
                   if check_summary:
                       print(f"- checks: {check_summary.get('passed', 0)}/{check_summary.get('total', 0)} passed")
@@ -262,9 +316,25 @@ jobs:
             else
               echo "- telemetry: unavailable"
             fi
+            echo
+            echo "## Landing"
+            if [ "${{ steps.autonomous_pr.outcome }}" = "success" ] && [ -n "${{ steps.autonomous_pr.outputs.pull-request-url }}" ]; then
+              echo "- draft PR: ${{ steps.autonomous_pr.outputs.pull-request-url }}"
+            elif [ "${{ steps.pr_meta.outcome }}" = "success" ]; then
+              echo "- draft PR creation was blocked, skipped (no index changes), or failed after branch push"
+              echo "- branch: \`${{ steps.pr_meta.outputs.branch }}\`"
+              echo "- enable 'Allow GitHub Actions to create and approve pull requests' if PR creation is required"
+            else
+              echo "- no draft PR attempted (telemetry gate, validate-index, or missing prerequisites)"
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Preserve autonomous batch failure result
         if: always() && steps.autonomous_batch.outcome == 'failure'
         run: |
           echo "Autonomous batch reported one or more failures after retaining telemetry" >&2
+          exit 1
+      - name: Fail closed on strict telemetry gate
+        if: always() && steps.telemetry_gate.outcome == 'failure'
+        run: |
+          echo "Autonomous telemetry gate failed under strict mode; draft PR not opened" >&2
           exit 1
