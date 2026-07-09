@@ -7,7 +7,7 @@
 - Imported repo.toolchain.min from pyproject.toml as `3.12` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
 
-- Set `repo.test` to `npm test` from `package.json` after model escalation.
+- Set `repo.test` to `tox` from `tox.ini` after model escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
@@ -16,6 +16,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Downgrade guard
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+A prior verified status was preserved because no previously present field regressed in this refresh.

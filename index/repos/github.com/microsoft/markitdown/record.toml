@@ -4,15 +4,16 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/markitdown"
-generated_at = "2026-07-06T18:52:47.200102Z"
+generated_at = "2026-07-09T04:25:27.108664Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `packages/markitdown-mcp/pyproject.toml`. Inferred `repo.build` from `packages/markitdown-mcp/pyproject.toml`. Inferred `repo.test` from `packages/markitdown-mcp/pyproject.toml`. Imported `repo.toolchain.min` from `packages/markitdown-mcp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "MarkItDown"
@@ -24,6 +25,8 @@ languages = [
     "Python",
     "Dockerfile",
 ]
+build = "python -m build"
+test = "python -m pytest"
 topics = [
     "langchain",
     "openai",
@@ -33,6 +36,10 @@ topics = [
     "microsoft-office",
     "pdf",
 ]
+
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
 
 [owners]
 maintainers = []
@@ -60,4 +67,4 @@ default_branch = "main"
 fork = false
 head_sha = "e144e0a2be95b34df17433bac904e635f2c5e551"
 html_url = "https://github.com/microsoft/markitdown"
-stars = 163400
+stars = 164120

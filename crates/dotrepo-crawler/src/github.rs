@@ -374,6 +374,66 @@ impl HttpGitHubClient {
         Ok(files)
     }
 
+    /// Nested `Cargo.toml` for Rust monorepos when the workspace lives under
+    /// `*-rs/`, `rust/`, or `crates/` rather than the repository root.
+    fn fetch_rust_manifest_files(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+        languages: &[String],
+    ) -> Result<Vec<RepositoryTextFile>> {
+        if !rust_is_primary_language(languages) {
+            return Ok(Vec::new());
+        }
+        // Root Cargo.toml already in SUPPLEMENTAL_ROOT_FILES.
+        if self
+            .fetch_optional_repository_file(repository, default_branch, "Cargo.toml")?
+            .is_some()
+        {
+            return Ok(Vec::new());
+        }
+
+        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
+        tree_url.query_pairs_mut().append_pair("recursive", "1");
+        let tree = self
+            .get_optional_json::<GitTreeResponse>(tree_url)?
+            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+
+        let mut paths: Vec<String> = tree
+            .tree
+            .iter()
+            .filter(|entry| entry.entry_type == "blob")
+            .map(|entry| entry.path.clone())
+            .filter(|path| {
+                let lower = path.to_ascii_lowercase();
+                lower.ends_with("cargo.toml")
+                    && path.matches('/').count() <= 2
+                    && !lower.contains("/examples/")
+                    && !lower.contains("/benches/")
+                    && !lower.contains("/tests/")
+                    && !lower.contains("/fuzz/")
+                    && !lower.contains("/sdk/")
+                    && !lower.starts_with("sdk/")
+            })
+            .collect();
+        paths.sort_by(|left, right| {
+            cargo_toml_path_preference(left)
+                .cmp(&cargo_toml_path_preference(right))
+                .then_with(|| left.cmp(right))
+        });
+        paths.truncate(4);
+
+        let mut files = Vec::new();
+        for path in paths {
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
+    }
+
     /// Nested Python manifests (`python/setup.py`, nested `pyproject.toml`) when
     /// Python is a primary language and root files do not already provide commands.
     fn fetch_python_manifest_files(
@@ -412,6 +472,10 @@ impl HttpGitHubClient {
                     && !lower.contains("/release/")
                     && !lower.starts_with("release/")
                     && !lower.contains("/packaging/")
+                    && !lower.contains("/sdk/")
+                    && !lower.contains("-sdk/")
+                    && !lower.contains("/sdks/")
+                    && !lower.starts_with("sdk/")
             })
             .collect();
         paths.sort_by(|left, right| {
@@ -731,6 +795,11 @@ impl GitHubClient for HttpGitHubClient {
             languages,
         )?);
         extra_files.extend(self.fetch_python_manifest_files(
+            repository,
+            default_branch,
+            languages,
+        )?);
+        extra_files.extend(self.fetch_rust_manifest_files(
             repository,
             default_branch,
             languages,
@@ -1083,6 +1152,36 @@ fn python_is_primary_language(languages: &[String]) -> bool {
         .any(|lang| lang == "Python" || lang == "Jupyter Notebook")
 }
 
+fn rust_is_primary_language(languages: &[String]) -> bool {
+    languages.iter().take(3).any(|lang| lang == "Rust")
+}
+
+fn cargo_toml_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "cargo.toml" {
+        return 0;
+    }
+    if lower.contains("/examples/")
+        || lower.contains("/benches/")
+        || lower.contains("/tests/")
+        || lower.contains("/fuzz/")
+    {
+        return 200;
+    }
+    if lower.contains("/sdk/") || lower.contains("-sdk/") || lower.starts_with("sdk/") {
+        return 170;
+    }
+    if lower.ends_with("-rs/cargo.toml")
+        || lower.contains("/rust/")
+        || lower.starts_with("rust/")
+        || lower.contains("/crates/")
+        || lower.starts_with("crates/")
+    {
+        return 10;
+    }
+    50
+}
+
 fn python_manifest_path_preference(path: &str) -> i32 {
     let lower = path.replace('\\', "/").to_ascii_lowercase();
     if matches!(
@@ -1095,6 +1194,13 @@ fn python_manifest_path_preference(path: &str) -> i32 {
     {
         return 200;
     }
+    if lower.contains("/sdk/")
+        || lower.contains("-sdk/")
+        || lower.contains("/sdks/")
+        || lower.starts_with("sdk/")
+    {
+        return 170;
+    }
     if lower.starts_with("release/")
         || lower.contains("/release/")
         || lower.contains("/packaging/")
@@ -1102,7 +1208,11 @@ fn python_manifest_path_preference(path: &str) -> i32 {
     {
         return 160;
     }
-    if lower.starts_with("python/") || lower.contains("/python/") {
+    if lower == "python/pyproject.toml"
+        || lower == "python/setup.py"
+        || lower == "python/setup.cfg"
+        || lower.starts_with("python/")
+    {
         return 10;
     }
     if lower.starts_with("src/") {

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/django/django"
-generated_at = "2026-07-08T22:51:23.458423Z"
+generated_at = "2026-07-09T04:26:05.618682Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `package.json` after model escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `tox.ini` after model escalation. Preserved prior verified status: no previously present field regressed in this refresh."
 
 [repo]
 name = "django"
@@ -31,7 +31,7 @@ languages = [
     "Procfile",
 ]
 build = "python -m build"
-test = "npm test"
+test = "tox"
 topics = [
     "python",
     "django",
@@ -62,4 +62,4 @@ default_branch = "main"
 fork = false
 head_sha = "b34b834378adc590a771cccd44b9fb0b953cdca2"
 html_url = "https://github.com/django/django"
-stars = 88005
+stars = 88006

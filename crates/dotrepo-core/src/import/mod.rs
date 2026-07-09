@@ -43,8 +43,9 @@ pub use types::{
 };
 
 use commands::{
-    load_best_package_json, load_best_python_manifest, load_first_existing_file,
-    load_first_file_with_extension, load_workflow_import_files, sanitize_import_command,
+    load_best_cargo_toml, load_best_package_json, load_best_python_manifest,
+    load_first_existing_file, load_first_file_with_extension, load_workflow_import_files,
+    sanitize_import_command,
 };
 
 #[allow(unused_imports)]
@@ -227,7 +228,7 @@ pub fn import_repository_with_options(
     let readme = load_first_existing_file(root, IMPORT_README_CANDIDATES)?;
     let codeowners = load_first_existing_file(root, &[".github/CODEOWNERS", "CODEOWNERS"])?;
     let security = load_first_existing_file(root, &[".github/SECURITY.md", "SECURITY.md"])?;
-    let cargo_toml = load_first_existing_file(root, &["Cargo.toml"])?;
+    let cargo_toml = load_best_cargo_toml(root)?;
     let rust_toolchain_toml = load_first_existing_file(root, &["rust-toolchain.toml"])?;
     let rust_toolchain = load_first_existing_file(root, &["rust-toolchain"])?;
     // Prefer a monorepo package with real build/test scripts over a root

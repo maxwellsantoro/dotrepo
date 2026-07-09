@@ -59,6 +59,58 @@ pub(super) fn load_first_existing_file(
     Ok(None)
 }
 
+/// Load the best `Cargo.toml` for command inference: root workspace first,
+/// else a nested crate/workspace preferred over examples/benches.
+pub(super) fn load_best_cargo_toml(root: &Path) -> Result<Option<ImportedFile>> {
+    let mut matches = Vec::new();
+    collect_files_named(root, root, "Cargo.toml", 3, 1, &mut matches)?;
+    matches.sort_by(|left, right| {
+        cargo_toml_path_preference(&left.0)
+            .cmp(&cargo_toml_path_preference(&right.0))
+            .then_with(|| left.0.cmp(&right.0))
+    });
+
+    for (relative, path) in matches {
+        let contents = fs::read_to_string(&path)
+            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let file = ImportedFile {
+            path: relative,
+            contents,
+        };
+        if extraction::infer_cargo_manifest_commands(&file).is_some() {
+            return Ok(Some(file));
+        }
+    }
+    load_first_existing_file(root, &["Cargo.toml"])
+}
+
+fn cargo_toml_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "cargo.toml" {
+        return 0;
+    }
+    if lower.contains("/examples/")
+        || lower.contains("/benches/")
+        || lower.contains("/tests/")
+        || lower.contains("/fuzz/")
+    {
+        return 200;
+    }
+    if lower.contains("/sdk/") || lower.contains("-sdk/") || lower.starts_with("sdk/") {
+        return 170;
+    }
+    // Common monorepo roots for the primary Rust crate tree.
+    if lower.ends_with("-rs/cargo.toml")
+        || lower.contains("/rust/")
+        || lower.starts_with("rust/")
+        || lower.contains("/crates/")
+        || lower.starts_with("crates/")
+    {
+        return 10;
+    }
+    50
+}
+
 /// Load the best named Python manifest (`pyproject.toml` / `setup.py` /
 /// `setup.cfg`) for command inference, preferring root then `python/` layouts.
 pub(super) fn load_best_python_manifest(
@@ -112,6 +164,14 @@ fn python_manifest_path_preference(path: &str) -> i32 {
     if lower.contains("/tests/") || lower.contains("/test/") {
         return 180;
     }
+    // Secondary language SDKs in polyglot monorepos (e.g. openai/codex).
+    if lower.contains("/sdk/")
+        || lower.contains("-sdk/")
+        || lower.contains("/sdks/")
+        || lower.starts_with("sdk/")
+    {
+        return 170;
+    }
     // Packaging/release helper trees are rarely the project entrypoint.
     if lower.starts_with("release/")
         || lower.contains("/release/")
@@ -120,7 +180,12 @@ fn python_manifest_path_preference(path: &str) -> i32 {
     {
         return 160;
     }
-    if lower.starts_with("python/") || lower.contains("/python/") {
+    // Prefer a top-level python/ package package, but not nested under sdk/.
+    if lower == "python/pyproject.toml"
+        || lower == "python/setup.py"
+        || lower == "python/setup.cfg"
+        || lower.starts_with("python/")
+    {
         return 10;
     }
     if lower.starts_with("src/") {
