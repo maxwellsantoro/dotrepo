@@ -967,6 +967,34 @@ cargo nextest run -E 'test(test_name)'
     }
 
     #[test]
+    fn host_package_install_with_build_essential_is_not_a_build_command() {
+        use super::extraction::first_matching_workflow_command;
+
+        // pyenv CI: apt installs list `make` and `build-essential` as packages.
+        let apt = vec![
+            "sudo apt-get update -q; sudo apt install -yq make build-essential libssl-dev zlib1g-dev \\"
+                .to_string(),
+        ];
+        assert_eq!(
+            first_matching_workflow_command(&apt, true),
+            None,
+            "apt install of build-essential must not become repo.build"
+        );
+
+        let make_build = vec!["make build".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&make_build, true).as_deref(),
+            Some("make build")
+        );
+
+        let make_all = vec!["make all".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&make_all, true).as_deref(),
+            Some("make all")
+        );
+    }
+
+    #[test]
     fn docs_reject_package_narrowed_go_test_examples() {
         use super::super::types::ImportedFile;
         use super::extraction::infer_contributing_commands;

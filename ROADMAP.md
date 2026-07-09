@@ -500,8 +500,8 @@ Milestones are capability and quality gates, not release dates.
 **quality hardening** at current corpus size, **distribution / demand capture**,
 then gated cohort growth (M4). M5 stays parallel and lower priority.
 
-**Checked-in index snapshot (2026-07-09, post monorepo preference)** — refresh with
-`scripts/render_index_growth_status.py`:
+**Checked-in index snapshot (2026-07-09, post ray re-promotion)** — refresh with
+`scripts/render_index_growth_status.py` and `dotrepo promotion-report`:
 
 | Metric | Value |
 | --- | ---: |
@@ -509,8 +509,10 @@ then gated cohort growth (M4). M5 stays parallel and lower priority.
 | `verified` / high confidence | 613 / 613 |
 | `imported` / `inferred` | 0 / 0 |
 | Record-level high-signal vs M2 target (500) | 613 (123%) |
+| Promotion-eligible (re-score) | 613 / 613 |
+| Verified-but-ineligible residual | 0 |
 | Missing build / test / security | 221 / 226 / 420 |
-| Quality-hardening queue | ~456 (refresh via scripts) |
+| Quality-hardening queue | ~460 (refresh via scripts) |
 | Stale or missing `generated_at` | 0 (0%) |
 | Max refresh overdue | 0 days |
 | Accepted maintainer claims | 1 |
@@ -546,7 +548,7 @@ platform integrity
 | Execution-field completeness | **Hardening** | ~39% missing build/test; use coverage-gap report |
 | Distribution / non-operator demand | **Path landed** | Live third-party traffic + exported miss volume still open |
 | M4 first 1k profiles | **Ready when demand path is live** | 50–100 repo cohorts; prefer live lookup-miss export + soft scorecards green |
-| Maintainability hotspots | **Closed** (escalation + pipeline splits) | Remaining: CLI test split / facade import tests on next expansion |
+| Maintainability hotspots | **Mostly closed** | Remaining: `crawler/github.rs` split plan; CLI test / facade import tests on next expansion |
 | M5 adoption checkpoint (10 native / 5 handoffs) | **Parallel, lower priority** | Does not block overlays or M4 |
 
 #### Now — platform integrity first, then quality + distribution
@@ -594,6 +596,15 @@ risk is operating it safely and usefully at the next scale step.
      commands.
 2. **Drain any new promotion headroom** after recrawls
    (`dotrepo promotion-report --apply`) — never bypass gates.
+   - **2026-07-09:** re-promoted `github.com/ray-project/ray` (prior
+     downgrade on `repo.test` regression; current scoring is high-confidence
+     absent build/test) → **613/613 verified**.
+   - **2026-07-09:** closed `pyenv` verified-but-ineligible residual. Root
+     cause: workflow extraction treated `apt install … make build-essential`
+     as a `make build` conflict; sanitize then scored high-confidence absent
+     while notes still claimed conflict. Fix: reject host package installs,
+     token-aware `make` task matching, sanitize before conflict resolution,
+     and align import scoring with conflict notes.
 3. **Keep audit conversion running.** Weekly sample
    (`scripts/audit_index_sample.py`); findings → fixture/parser/policy.
    Latest closed sample: `index/telemetry/audit-sample-20260708.md` +
@@ -612,6 +623,7 @@ Do not expand these modules without executing the documented splits first
 
 | Hotspot | Plan |
 | --- | --- |
+| `dotrepo-crawler/src/github.rs` | Split on next materialization/API feature (client/HTTP, discovery, monorepo path selection) |
 | `dotrepo-cli/src/tests.rs` | Split by command domain on next test-family expansion |
 | `facade_tests/import_repository.rs` | Split on next import-fixture expansion |
 
@@ -637,6 +649,10 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
   (fixture-backed offline proof).
 - Monorepo workflow preference + recrawl: last `imported` overlays promoted;
   corpus **613/613 verified**.
+- Ray re-promotion after unjustified-looking post-downgrade state: gate-passed
+  `promotion-report --apply` restored verified with honest absent build/test.
+- Parser fix for host-package CI lines misread as `make build` (pyenv); import
+  scoring now agrees with promotion re-score on conflict notes.
 - Crawler `pipeline/` split (merge / writeback_gate / synthesis / mod).
 - .NET monorepo build/test recovery + weekly lookup-miss demand workflow.
 - Polyglot .NET language gate + coverage-gap recrawl batch (semantic-kernel,

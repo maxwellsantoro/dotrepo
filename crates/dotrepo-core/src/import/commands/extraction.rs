@@ -1074,6 +1074,11 @@ pub(crate) fn first_matching_workflow_command(
         ) {
             return None;
         }
+        // Host package installs often list `make` / `build-essential` as packages
+        // (pyenv CI). Those are not repository build commands.
+        if is_host_package_install_command(trimmed) {
+            return None;
+        }
 
         // Direct clean prefixes (preserve previous behavior for simple cases)
         if select_build {
@@ -1150,14 +1155,8 @@ pub(crate) fn first_matching_workflow_command(
             if lower.contains("bazel ") && lower.contains("build") {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("make ")
-                && (lower.contains(" build")
-                    || lower.trim_start().starts_with("make build")
-                    || lower.contains(" all"))
-            {
-                return Some(trimmed.to_string());
-            }
-            if lower.starts_with("make ") && lower.contains("build") {
+            // Token-aware: do not treat Debian package `build-essential` as `make build`.
+            if make_invocation_has_task(&lower, &["build", "all"]) {
                 return Some(trimmed.to_string());
             }
         } else {
@@ -1185,10 +1184,7 @@ pub(crate) fn first_matching_workflow_command(
             {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("make ") && (lower.contains(" test") || lower.contains("check")) {
-                return Some(trimmed.to_string());
-            }
-            if lower.starts_with("make ") && (lower.contains("test") || lower.contains("check")) {
+            if make_invocation_has_task(&lower, &["test", "check"]) {
                 return Some(trimmed.to_string());
             }
             if lower.contains("cargo test")
@@ -1203,6 +1199,51 @@ pub(crate) fn first_matching_workflow_command(
 
         None
     })
+}
+
+/// `apt-get install … make build-essential` is a host dependency install, not
+/// a repository build. Also covers `sudo apt …` and sibling package managers.
+fn is_host_package_install_command(command: &str) -> bool {
+    let mut tokens = command.split_whitespace();
+    let mut first = tokens.next().unwrap_or("");
+    if first == "sudo" {
+        first = tokens.next().unwrap_or("");
+    }
+    matches!(
+        first,
+        "apt" | "apt-get" | "yum" | "dnf" | "pacman" | "apk" | "brew" | "choco" | "zypper" | "pkg"
+    )
+}
+
+/// True when a `make` invocation includes one of `tasks` as a whole make target
+/// token (not a package name like `build-essential` or a substring of another
+/// word).
+fn make_invocation_has_task(lower_command: &str, tasks: &[&str]) -> bool {
+    let mut rest = lower_command;
+    while let Some(idx) = rest.find("make") {
+        let after_make = &rest[idx + 4..];
+        // Require a token boundary after `make` (`make build`, not `makefile`).
+        let after_make = match after_make.chars().next() {
+            None => return false,
+            Some(ch) if ch.is_whitespace() => after_make.trim_start(),
+            _ => {
+                rest = after_make;
+                continue;
+            }
+        };
+        for token in after_make.split_whitespace() {
+            // Stop at shell operators if present on the same logical line.
+            if token.starts_with('#') {
+                break;
+            }
+            let task = token.trim_matches(|c| matches!(c, ';' | '&' | '|' | '`' | '\'' | '"'));
+            if tasks.iter().any(|wanted| *wanted == task) {
+                return true;
+            }
+        }
+        rest = after_make;
+    }
+    false
 }
 
 fn is_specialized_cargo_workflow_command(command: &str, subcommand: &str) -> bool {

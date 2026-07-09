@@ -3,7 +3,7 @@
 - Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Left `repo.build` unset because `.github/workflows/modified_scripts_build.yml` and `.github/workflows/ubuntu_build.yml` suggested conflicting build commands.
+- Left `repo.build` unset: workflow steps only install host packages (`apt`/`build-essential`) and are not repository build commands (parser fix 2026-07-09).
 - Imported repo.test from Makefile as `make test`.
 - Discovered related relation to github.com/rbenv/rbenv from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

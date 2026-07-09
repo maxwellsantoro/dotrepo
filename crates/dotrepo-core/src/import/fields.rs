@@ -111,12 +111,26 @@ pub fn score_import_fields(
     }
 
     // repo.build
+    // Trust notes may still record an intra-tier conflict even when candidate
+    // sanitization left verification.absent_fields set. Prefer unresolved so
+    // crawl auto-promote cannot disagree with score_index_record_for_promotion.
+    let trust_notes = plan
+        .manifest
+        .record
+        .trust
+        .as_ref()
+        .and_then(|trust| trust.notes.as_deref())
+        .unwrap_or("");
+    let build_conflict_note = trust_notes.contains("Left `repo.build` unset because")
+        && trust_notes.contains("conflicting build commands");
     let build_unresolved = verification
         .unresolved_fields
-        .contains(&"repo.build".to_string());
+        .contains(&"repo.build".to_string())
+        || build_conflict_note;
     let build_absent = verification
         .absent_fields
-        .contains(&"repo.build".to_string());
+        .contains(&"repo.build".to_string())
+        && !build_conflict_note;
     if let Some(ref build) = plan.manifest.repo.build {
         let is_ecosystem_default = plan
             .command_candidates
@@ -168,7 +182,11 @@ pub fn score_import_fields(
             confidence: FieldConfidence::Unresolved,
             source: None,
             value: None,
-            reason: "conflicting candidates, no clear winner".into(),
+            reason: if build_conflict_note {
+                "intra-tier conflict left field unset during import".into()
+            } else {
+                "conflicting candidates, no clear winner".into()
+            },
         });
     } else if build_absent {
         scores.push(FieldScore {
@@ -181,12 +199,16 @@ pub fn score_import_fields(
     }
 
     // repo.test
+    let test_conflict_note = trust_notes.contains("Left `repo.test` unset because")
+        && trust_notes.contains("conflicting test commands");
     let test_unresolved = verification
         .unresolved_fields
-        .contains(&"repo.test".to_string());
+        .contains(&"repo.test".to_string())
+        || test_conflict_note;
     let test_absent = verification
         .absent_fields
-        .contains(&"repo.test".to_string());
+        .contains(&"repo.test".to_string())
+        && !test_conflict_note;
     if let Some(ref test) = plan.manifest.repo.test {
         let is_ecosystem_default = plan
             .command_candidates
@@ -238,7 +260,11 @@ pub fn score_import_fields(
             confidence: FieldConfidence::Unresolved,
             source: None,
             value: None,
-            reason: "conflicting candidates, no clear winner".into(),
+            reason: if test_conflict_note {
+                "intra-tier conflict left field unset during import".into()
+            } else {
+                "conflicting candidates, no clear winner".into()
+            },
         });
     } else if test_absent {
         scores.push(FieldScore {

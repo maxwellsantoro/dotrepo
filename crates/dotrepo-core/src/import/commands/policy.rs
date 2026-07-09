@@ -405,8 +405,14 @@ pub(crate) fn resolve_unique_command_candidate(
         } else {
             candidate.test.as_deref()
         };
-        if let Some(command) = command.filter(|value| !value.trim().is_empty()) {
-            present.push((command.to_string(), candidate.source_path.clone()));
+        // Only shell-safe commands participate in unique/conflict resolution.
+        // Unsafe CI glue (e.g. `apt-get …; …`) must not mint conflict notes that
+        // later disagree with high-confidence-absent scoring after sanitize.
+        if let Some(command) = command
+            .filter(|value| !value.trim().is_empty())
+            .and_then(sanitize_import_command)
+        {
+            present.push((command, candidate.source_path.clone()));
         }
     }
 

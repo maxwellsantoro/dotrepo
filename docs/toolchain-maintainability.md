@@ -35,6 +35,7 @@ directional and should be refreshed when this table is used to schedule work.
 | `dotrepo-core/src/facade_tests/import_repository.rs` | Split on next import-fixture expansion into parsing, evidence, escalation, and manifest-assembly test modules. |
 | `dotrepo-core/src/import/escalation.rs` (~1,473 lines) | **Done:** split into `import/escalation/` — `deterministic.rs` (command-tier walk, deepen, apply plan), `model_ladder.rs` (tier loop / Absent-vs-Rejected policy), `report.rs` (report + summary recompute), `mod.rs` (`run_import_escalation` orchestration + tests). Public re-exports unchanged via `import/mod.rs`. |
 | `dotrepo-crawler/src/pipeline.rs` (~1,462 lines) | **Done:** split into `pipeline/` — `merge.rs` (snapshot merge + homepage identity guards), `writeback_gate.rs` (verified auto-promotion + downgrade guard), `synthesis.rs` (optional bounded synthesis), `mod.rs` (`crawl_repository_*` entry + tests). |
+| `dotrepo-crawler/src/github.rs` (~1,596 lines) | **Split on next materialization/API feature** (above the ~1,500-line threshold). Proposed layout: `github/client.rs` (HTTP client, auth, rate-limit, error compaction); `github/discovery.rs` (search/star-band discovery + refresh candidates); `github/materialize_paths.rs` (supplemental root files, monorepo path preference for .NET/JS/Python/Rust, tree walks); `github/types.rs` (API response DTOs); `github/mod.rs` re-exports `GitHubClient` / `HttpGitHubClient` unchanged. Do not grow monorepo selectors in the monolith file. |
 
 New files that cross the threshold must be added here before the maintainability
 exit criterion can pass.
@@ -44,9 +45,10 @@ exit criterion can pass.
 1. **Facade test domains** — keep one concern per file; run a single domain with `cargo test -p dotrepo-core --lib tests::<domain>`.
 
 The LSP split, MCP tools module split, `public.rs` split, `import/` splits, and
-crawler command split are all complete (see the oversized-file dispositions
-table above and the "Current layout" table). Facade test domains are the only
-remaining item from this list.
+crawler command/pipeline splits are all complete (see the oversized-file
+dispositions table above and the "Current layout" table). Remaining production
+hotspot: `crawler/github.rs` split on next materialization feature. Remaining
+test-only: facade import domains and CLI tests on next expansion.
 
 ## Public API documentation
 

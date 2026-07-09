@@ -16,3 +16,7 @@
 ## Downgrade guard
 
 Status dropped from a prior verified record because the following previously present field(s) regressed: repo.test.
+
+## Auto-promotion
+
+Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.

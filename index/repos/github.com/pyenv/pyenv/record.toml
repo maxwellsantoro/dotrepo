@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pyenv/pyenv"
-generated_at = "2026-07-06T18:57:29.06119Z"
+generated_at = "2026-07-09T04:58:44.662668Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Makefile`. Filled `repo.description` with inferred defaults. Left `repo.build` unset because `.github/workflows/modified_scripts_build.yml` and `.github/workflows/ubuntu_build.yml` suggested conflicting build commands. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `Makefile`. Filled `repo.description` with inferred defaults. Left `repo.build` unset: CI workflows only install host packages (`apt`/`build-essential`), not a repository build command. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Simple Python Version Management: pyenv"
@@ -62,6 +62,6 @@ archived = false
 clone_url = "https://github.com/pyenv/pyenv.git"
 default_branch = "master"
 fork = false
-head_sha = "790bedd821e8c27a86a69509ec2501cf105d6438"
+head_sha = "e4c462dc70951c8714d069522448c9583a38c913"
 html_url = "https://github.com/pyenv/pyenv"
-stars = 44930
+stars = 44934
