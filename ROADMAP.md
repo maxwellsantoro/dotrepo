@@ -458,10 +458,10 @@ compromise, hostile snapshot metadata, partial disk failure, and Worker load.
 | Worker cost bounds | **Closed** | Search default limit 50 / max 200; reverse relations inventory scan only when ≤64 peers (prefer `relations.json`) |
 | Writeback path (PR vs direct push) | **Closed** | Autonomous refresh opens a **draft PR** via `peter-evans/create-pull-request` (no direct `git push` to default branch); requires telemetry + validate-index |
 | Telemetry SLO on schedule | **Closed** | Telemetry gate is **strict** (no `--warn-only`); failed gate fails the job and blocks draft PR open |
-| CI / supply chain hygiene | **Closed** (mcp-publisher pin residual) | `ci.yml` has top-level `permissions: contents: read`; Dependabot covers github-actions, cargo, and npm (`cloudflare/hosted-query`, `editors/vscode`). Pinning the mcp-publisher binary remains optional supply-chain polish |
+| CI / supply chain hygiene | **Closed** | `ci.yml` least-privilege `contents: read`; Dependabot for actions/cargo/npm; `mcp-publisher` **v1.7.9** pinned with SHA-256 verify in release + registry workflows |
 | Dual CLI entrypoint | **Closed** | Shared `dotrepo_cli::run` / `dotrepo_cli::main`; workspace and install alias binaries are thin wrappers |
 
-Core integrity + residual rows closed 2026-07-09. Optional polish (mcp-publisher binary pin) does not block M4 entry.
+Platform integrity closed 2026-07-09 (including mcp-publisher pin and escalation module split).
 
 Primary surfaces: `.github/workflows/index-autonomous-refresh.yml`,
 `scripts/run_autonomous_index_batch.py`, `crates/dotrepo-mcp/src/{handlers,lookup}.rs`,
@@ -554,22 +554,23 @@ platform integrity
 Milestone 1 operational proof is **closed**. The factory exists; the remaining
 risk is operating it safely and usefully at the next scale step.
 
-0. **Platform integrity** — **closed** 2026-07-09 (see [Platform integrity](#platform-integrity)):
-   fail-closed enablement, draft-PR landing, strict telemetry, MCP same-origin
-   paths, multi-file writeback, Worker cost bounds, CI least-privilege, Dependabot
-   cargo/npm, shared CLI entry. Optional: pin mcp-publisher binary.
+0. **Platform integrity** — **closed** 2026-07-09 (see [Platform integrity](#platform-integrity)),
+   including mcp-publisher pin and `import/escalation/` split.
 1. **Work the quality-hardening queue** without inventing completeness.
    - Prioritize: `scripts/render_coverage_gaps.py` and growth-status “Next
-     Quality Targets” (e.g. remaining `imported` medium-confidence rows).
+     Quality Targets”.
    - Score: `scripts/render_intent_quality_scorecard.py` (soft budgets).
    - Expectation: many security gaps are honest absence; multi-ecosystem ties
      keep `build_candidates` / `test_candidates` (RFC 0020).
-   - Recent quality passes (2026-07-08): security-URL scoring, non-actionable
-     contact rejection, scheme-less homepage normalize → **611 verified / 613**
-     via gate-passed promotion; **0** promotion headroom remaining until new evidence.
+   - Remaining **`imported` (honest conflicts, do not invent):**
+     - `github.com/emqx/MQTTX` — conflicting workflow test commands
+       (`units_test_cli` vs `units_test_desktop`); build present from package.json
+     - `github.com/serverless/serverless` — conflicting workflow build commands
+       (`ci-binary-installer` vs `ci-framework`); test present from package.json
+   - Promotion headroom: **0** until new evidence or a deterministic preference
+     rule for monorepo workflow families (keep candidates; do not pick at random).
 2. **Drain any new promotion headroom** after recrawls
-   (`dotrepo promotion-report --apply`) — never bypass gates. Two remaining
-   `imported` records hold honest intra-tier build/test conflicts.
+   (`dotrepo promotion-report --apply`) — never bypass gates.
 3. **Keep audit conversion running.** Weekly sample
    (`scripts/audit_index_sample.py`); findings → fixture/parser/policy.
    Latest closed sample: `index/telemetry/audit-sample-20260708.md` +
@@ -588,7 +589,6 @@ Do not expand these modules without executing the documented splits first
 
 | Hotspot | Plan |
 | --- | --- |
-| `dotrepo-core/src/import/escalation.rs` (~1.5k) | Split deterministic tier resolution, model ladder, and report assembly |
 | `dotrepo-crawler/src/pipeline.rs` (~1.5k) | Split merge/identity guards, factual sequence, writeback-gate wiring |
 | `dotrepo-cli/src/tests.rs` | Split by command domain on next test-family expansion |
 | `facade_tests/import_repository.rs` | Split on next import-fixture expansion |
@@ -608,6 +608,11 @@ Summaries only; detail lives in Git history and [`CHANGELOG.md`](./CHANGELOG.md)
   verified **611/613**; audit disposition closed.
 - Distribution path: `examples/external-consumer/`, efficiency page, MCP/crates
   install lines documented as stable `1.0.x` vs alpha `main`.
+- Platform integrity batch: draft-PR landing, strict telemetry, MCP origin bind,
+  multi-file writeback, Worker bounds, CI least-privilege, Dependabot cargo/npm,
+  shared CLI entry, pinned `mcp-publisher` v1.7.9, `import/escalation/` split.
+- Lookup-miss export operator path: `scripts/export_lookup_miss_demand.py`
+  (fixture-backed offline proof).
 
 #### Next — Milestone 4 cohorts (after Now items 0–5 are healthy)
 
@@ -623,8 +628,6 @@ and soft intent scorecards are not in regression.
    model-tier, and unit-cost budgets before batch size increases.
 4. Select coverage from the [demand signal stack](#demand-and-coverage-strategy)
    and ecosystem gaps — not raw count alone.
-5. On schedule, promote the autonomous telemetry gate from warn-only to
-   **strict fail** once baselines stay green (Reliability workstream).
 
 #### In parallel — distribution (outranks M5 polish)
 
@@ -634,8 +637,10 @@ plus exported lookup-miss volume that can steer M4 selection.
 1. Keep MCP registry listings and stable `1.0.x` install paths current (pin
    versions in docs and scaffolds; never treat crates.io alpha as production default).
 2. Keep the efficiency page as the external pitch (tokens/bytes/requests saved).
-3. Export Worker logs → `aggregate_lookup_misses.py` on a fixed cadence
-   (offline proof: `scripts/fixtures/lookup_miss_sample.log`).
+3. **Cadence:** export Worker logs with
+   `scripts/export_lookup_miss_demand.py` (or
+   `aggregate_lookup_misses.py` directly); offline proof via
+   `scripts/fixtures/lookup_miss_sample.log`.
 4. Land **one** external consumer integration
    ([template](./docs/external-consumer-integration.md);
    in-repo reference: [`examples/external-consumer/`](./examples/external-consumer/)).

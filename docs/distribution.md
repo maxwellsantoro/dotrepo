@@ -21,16 +21,19 @@ concrete surfaces that make agents and tools check dotrepo before scraping.
 2. **Efficiency pitch** — regenerate the public efficiency page on deploy
    (`scripts/render_public_efficiency_page.py` via the release/public gate).
    Share measured tokens/bytes/requests saved, not coverage vanity metrics.
-3. **Lookup-miss demand** — after deploys, sample Worker logs for
-   `DOTREPO_LOOKUP_MISS` lines and aggregate:
+3. **Lookup-miss demand (fixed cadence)** — weekly or after each public deploy,
+   sample Worker logs for `DOTREPO_LOOKUP_MISS` lines and export a demand
+   report:
 
    ```bash
-   wrangler tail # or Logpush export
-   # save matching lines to /tmp/lookup-misses.log
-   uv run python scripts/aggregate_lookup_misses.py \
-     --input /tmp/lookup-misses.log \
-     --output-json /tmp/lookup-miss-report.json \
-     --output-md /tmp/lookup-miss-report.md
+   # Capture live lines (Cloudflare Logpush, dashboard, or):
+   #   npx wrangler tail --format pretty  # filter/save DOTREPO_LOOKUP_MISS
+   # Then standardize outputs under index/telemetry/:
+   uv run python scripts/export_lookup_miss_demand.py \
+     --input /tmp/lookup-misses.log
+
+   # Offline proof (fixture):
+   uv run python scripts/export_lookup_miss_demand.py
    ```
 
    Feed repeated misses into Milestone 4 cohort selection after ecosystem
