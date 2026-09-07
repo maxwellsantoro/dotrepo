@@ -130,6 +130,14 @@ it as production automation, not a passive report:
 See [`docs/factual-crawl-automation.md`](../docs/factual-crawl-automation.md) for
 the writeback vs auto-publish distinction.
 
+Scheduled reviewer-facing seed/refresh workflows are also fail closed:
+
+- `DOTREPO_INDEX_SEED_REVIEW_ENABLED` for `index-seed-review`
+- `DOTREPO_INDEX_REFRESH_REVIEW_ENABLED` for `index-refresh-review`
+
+Unset or any value other than `true` skips the scheduled job; `workflow_dispatch`
+still works for manual runs.
+
 ## Local validation
 
 Run:

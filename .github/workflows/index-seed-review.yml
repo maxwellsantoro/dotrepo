@@ -33,6 +33,7 @@ concurrency:
 jobs:
   candidate-seed-review:
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || vars.DOTREPO_INDEX_SEED_REVIEW_ENABLED == 'true'
     env:
       GITHUB_TOKEN: ${{ github.token }}
     steps:

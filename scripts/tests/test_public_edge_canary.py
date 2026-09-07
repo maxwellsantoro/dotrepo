@@ -140,3 +140,22 @@ def test_validate_health_rejects_stale_repository_count() -> None:
             {"repositories": [{"identity": {"repo": "alpha"}}]},
             stats(),
         )
+
+
+def test_validate_pagedigest_homepage_accepts_current_public_copy() -> None:
+    homepage = """
+    <p>Publish at <code>/.well-known/pagedigest.json</code>.</p>
+    <p>PageDigest version 1 is final.</p>
+    <p>A Rust generator and a Python consumer library exist today.</p>
+    """
+    canary.validate_pagedigest_homepage(homepage)
+
+
+def test_validate_pagedigest_homepage_rejects_stale_rc_copy() -> None:
+    homepage = """
+    <p>Version 1, release candidate</p>
+    <p>Rust generator</p>
+    <p>Python consumer</p>
+    """
+    with pytest.raises(canary.CanaryFailure, match="manifest path"):
+        canary.validate_pagedigest_homepage(homepage)

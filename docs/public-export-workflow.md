@@ -203,11 +203,12 @@ upstream native `.repo`.
 - verifies a deterministic public sample from `v0/files.json` against reviewed
   byte counts and SHA-256 hashes, covering the core contract files plus the
   first repository's exported JSON
-- a separate scheduled `public-edge-canary.yml` checks the homepage, pointer,
+- a separate scheduled `public-edge-canary.yml` (daily at 14:00 UTC when
+  `DOTREPO_PUBLIC_EDGE_CANARY_ENABLED=true`) checks the homepage, pointer,
   canonical inventory, canonical file manifest, two records, both pagedigest
   manifests, snapshot log, stats document, and pagedigest.org's shipped-artifact
-  claims; repeated failures update one GitHub issue instead of opening an issue
-  storm
+  claims; repeated failures update one GitHub issue at most once per day instead
+  of opening an issue storm
 
 The export tree is the source of truth for the current snapshot. Historical
 payload retention belongs to the archive layer; the static asset bundle should
