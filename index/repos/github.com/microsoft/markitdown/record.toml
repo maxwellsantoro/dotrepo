@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/microsoft/markitdown"
-generated_at = "2026-07-09T04:25:27.108664Z"
+generated_at = "2026-09-16T16:34:58.031987Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `packages/markitdown-mcp/pyproject.toml`. Inferred `repo.build` from `packages/markitdown-mcp/pyproject.toml`. Inferred `repo.test` from `packages/markitdown-mcp/pyproject.toml`. Imported `repo.toolchain.min` from `packages/markitdown-mcp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `packages/markitdown-mcp/pyproject.toml`, and `.github/workflows/tests.yml`. Inferred `repo.build` from `packages/markitdown-mcp/pyproject.toml`. Inferred `repo.test` from `.github/workflows/tests.yml`. Imported `repo.toolchain.min` from `packages/markitdown-mcp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "MarkItDown"
@@ -26,7 +25,7 @@ languages = [
     "Dockerfile",
 ]
 build = "python -m build"
-test = "python -m pytest"
+test = "pip install ./packages/markitdown ./packages/markitdown-ocr pytest"
 topics = [
     "langchain",
     "openai",
@@ -60,11 +59,88 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "high"
+method = "extracted"
+reason = "direct email or mailing list"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"secure@microsoft.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "packages/markitdown-mcp/pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Python tool for converting files and office documents to Markdown."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/microsoft/markitdown"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"MarkItDown"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:34:58.031987Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/tests.yml"
+state = "present"
+valueJson = '"pip install ./packages/markitdown ./packages/markitdown-ocr pytest"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/microsoft/markitdown.git"
 default_branch = "main"
 fork = false
-head_sha = "e144e0a2be95b34df17433bac904e635f2c5e551"
+head_sha = "eb31b5c9453628def5e6758a27a8e3a87b4ab101"
 html_url = "https://github.com/microsoft/markitdown"
-stars = 164120
+stars = 184736

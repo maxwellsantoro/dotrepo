@@ -527,6 +527,21 @@ coverage gate is already complete; until M4 cohorts open, prioritize
 
 ### Active execution order
 
+
+The September 16 product review makes the next proof sequence explicit:
+
+1. Restore and sustain factual record freshness; export recency is insufficient.
+2. Evaluate independently selected upstream facts across ecosystems, preserving
+   incorrect assertions, correct abstentions, and missing answers separately.
+3. Measure complete consumer tasks with fallback and maintenance costs included.
+4. Obtain a consenting independent consumer's integration and sustained outcomes.
+5. Expand cohorts only while these quality and operating budgets hold.
+
+The homepage leads with repository facts and lookup. Claim handoffs, PageDigest,
+and AI interviews support that story; they do not substitute for consumer proof.
+Implementation-complete milestones below do not imply these outcome gates pass.
+
+
 This section decides what runs **now**. Milestone sections below describe
 destination gates; do not treat their “current status” lists as the work queue.
 

@@ -11,6 +11,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
+from public_product_content import render_record_freshness, render_profile_example
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 REPO_BLOB_PREFIX = "https://github.com/maxwellsantoro/dotrepo/blob/main/"
@@ -645,7 +646,7 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
         current public tree was rendered before the first stats-bearing
         export. Once <code>/v0/stats.json</code> is present, this section will
         publish records covered, skipped fetches, avoided bytes, and estimated
-        tokens avoided directly from the export.
+        potential transfer savings from the export.
       </p>
       <p class="section__note">
         Contract endpoint: <code>/v0/stats.json</code>.
@@ -680,8 +681,8 @@ def render_pagedigest_stats_dashboard(stats: dict, base_path: str) -> str:
           <span>Payload bytes skipped this cycle out of {bytes_covered} covered.</span>
         </div>
         <div class="stat">
-          <strong>{tokens_avoided} tokens avoided</strong>
-          <span>Coarse bytes ÷ 4 estimate for agent-context savings.</span>
+          <strong>{tokens_avoided} token-equivalent bytes</strong>
+          <span>Bytes ÷ 4 estimate; not measured model tokens or task savings.</span>
         </div>
         <div class="stat">
           <strong>site_rev {site_rev}</strong>
@@ -839,17 +840,17 @@ def render_lookup_panel(base_path: str) -> str:
       <div class="lookup-shell">
         <article class="lookup-card">
           <h3>Paste a repository URL or identity</h3>
-          <p class="section__intro">Open the live hosted summary or trust surface directly from the current public index. The same public origin also powers the MCP <code>dotrepo.lookup</code> tool.</p>
+          <p class="section__intro">Get the available facts, record age, evidence, and unknowns. If a repository is missing, use its upstream documentation.</p>
           <form class="lookup-form" id="repo-lookup-form">
             <label class="lookup-field" for="repo-lookup-input">
               <span>Repository</span>
               <input id="repo-lookup-input" name="repository" type="text" placeholder="github.com/BurntSushi/ripgrep" autocomplete="off" spellcheck="false" required>
             </label>
             <div class="lookup-actions">
-              <button class="cta cta--primary lookup-button" type="submit">Open summary</button>
+              <button class="cta cta--primary lookup-button" type="submit">Open profile</button>
               <button class="cta cta--secondary lookup-button" type="button" id="repo-lookup-trust">Open trust</button>
             </div>
-            <p class="lookup-feedback" id="repo-lookup-feedback">Accepted inputs: <code>owner/repo</code>, <code>host/owner/repo</code>, a GitHub URL, or a hosted dotrepo summary or trust URL.</p>
+            <p class="lookup-feedback" id="repo-lookup-feedback">Accepted inputs: <code>owner/repo</code>, <code>host/owner/repo</code>, a GitHub URL, or a hosted dotrepo profile, summary, or trust URL.</p>
           </form>
         </article>
         <article class="lookup-card">
@@ -869,7 +870,7 @@ def render_lookup_panel(base_path: str) -> str:
             </div>
             <div class="endpoint">
               <code>https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/index.json</code>
-              <span>Hosted summary or trust URL pasted back into the lookup box.</span>
+              <span>Hosted profile, summary, or trust URL pasted back into the lookup box.</span>
             </div>
           </div>
         </article>
@@ -900,7 +901,7 @@ def render_lookup_panel(base_path: str) -> str:
             }}
 
             if (value.includes("/v0/repos/")) {{
-              const hostedMatch = value.match(/\\/v0\\/repos\\/([^/]+)\\/([^/]+)\\/([^/]+)\\/(?:index|trust)\\.json$/);
+              const hostedMatch = value.match(/\\/v0\\/repos\\/([^/]+)\\/([^/]+)\\/([^/]+)\\/(?:index|trust|profile)\\.json$/);
               if (hostedMatch) {{
                 return {{
                   host: assertSegment("host", hostedMatch[1]),
@@ -948,7 +949,7 @@ def render_lookup_panel(base_path: str) -> str:
           }}
 
           function buildDestination(kind, target) {{
-            const suffix = kind === "trust" ? "trust.json" : "index.json";
+            const suffix = kind === "trust" ? "trust.json" : "profile.json";
             return `${{basePath}}/v0/repos/${{encodeURIComponent(target.host)}}/${{encodeURIComponent(target.owner)}}/${{encodeURIComponent(target.repo)}}/${{suffix}}`;
           }}
 
@@ -966,7 +967,7 @@ def render_lookup_panel(base_path: str) -> str:
 
           form.addEventListener("submit", (event) => {{
             event.preventDefault();
-            openLookup("summary");
+            openLookup("profile");
           }});
 
           trustButton.addEventListener("click", () => {{
@@ -2186,14 +2187,11 @@ def main() -> int:
     args = parse_args()
     validate_first_party_document_links()
     input_dir = Path(args.input_dir)
-    index_root = Path(args.index_root)
     meta = load_json(input_dir / "v0" / "meta.json")
     inventory = load_json(input_dir / "v0" / "repos" / "index.json")
     stats = load_optional_json(input_dir / "v0" / "stats.json")
     base_path = detect_site_base_path(inventory)
-    progress = load_index_progress(index_root)
 
-    snapshot_digest = str(meta.get("snapshotDigest", "unknown"))
     generated_at = str(meta.get("generatedAt", "unknown"))
     generated_at_human = format_timestamp_for_humans(generated_at)
     stale_after = meta.get("staleAfter")
@@ -2201,13 +2199,6 @@ def main() -> int:
     first_query, first_query_input, query_example = build_query_example(input_dir, inventory)
     featured_trust = build_featured_trust_example(input_dir, inventory)
     homepage_snapshot_state = build_homepage_snapshot_state(meta, inventory)
-    reviewed_or_better_count = progress["reviewedOrBetterCount"]
-    imported_or_inferred_count = progress["importedOrInferredCount"]
-    language_mix = str(progress["languageMix"])
-    accepted_claim_count = progress["acceptedClaimCount"]
-    accepted_claim_label = (
-        "accepted claim example" if accepted_claim_count == 1 else "accepted claim examples"
-    )
     stale_line = (
         f"<span>{html.escape(format_timestamp_for_humans(str(stale_after)))}</span>"
         if stale_after
@@ -2221,7 +2212,7 @@ def main() -> int:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>dotrepo</title>
-  <meta name="description" content="Reusable, trust-aware repository understanding for humans, tools, and agents.">
+  <meta name="description" content="Structured repository facts, build and test commands, docs, evidence, and freshness for agents and tools.">
   <style>
     :root {{
       color-scheme: light;
@@ -2563,7 +2554,7 @@ def main() -> int:
       color: var(--muted);
       line-height: 1.7;
     }}
-    .api-card pre {{
+    .section pre {{
       margin: 14px 0 0;
       padding: 16px;
       overflow-x: auto;
@@ -2741,86 +2732,67 @@ def main() -> int:
 
     <section class="hero">
       <div class="panel hero__copy">
-        <p class="eyebrow">Live public surface</p>
-        <h1>Repository understanding, made reusable.</h1>
-        <p class="hero__lede">
-          dotrepo is a trust contract for repository metadata. The important
-          part is not that a <code>.repo</code> file exists. The important part
-          is that hosted answers carry selection reason, provenance, and claim
-          context instead of pretending repository metadata is conflict-free.
-        </p>
+        <p class="eyebrow">Repository facts for agents and tools</p>
+        <h1>Repository facts your agents can reuse.</h1>
+        <p class="hero__lede">Get structured project metadata, build and test commands,
+          documentation links, and ownership information through HTTP or MCP.
+          Inspect the evidence and record age, then fetch additional source material when needed.</p>
         <div class="cta-row">
-          <a class="cta cta--primary" href="{html.escape(featured_trust["trustUrl"])}">See the live trust handoff</a>
-          <a class="cta cta--secondary" href="{site_href(base_path, "/v0/repos/index.json")}">Explore the public index</a>
-          <a class="cta cta--secondary" href="{site_href(base_path, "/docs/")}">Read the docs</a>
-          <a class="cta cta--secondary" href="https://github.com/maxwellsantoro/dotrepo">Read the code</a>
+          <a class="cta cta--primary" href="#lookup">Look up a repository</a>
+          <a class="cta cta--secondary" href="#integrate">Connect your agent</a>
+          <a class="cta cta--secondary" href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md">Maintain your own record</a>
         </div>
+        <p>Works with indexed repositories before maintainers adopt <code>.repo</code>.
+          Coverage is partial. Metadata helps with orientation; architecture and code changes still require source inspection.</p>
       </div>
-
       <aside class="panel hero__meta">
-        <h2>Growth and snapshot</h2>
+        <h2>Coverage and record age</h2>
         <div class="stat-grid">
-          <div class="stat">
-            <strong>{html.escape(str(repository_count))} repositories</strong>
-            <span>Published in the current validated export.</span>
-          </div>
-          <div class="stat">
-            <strong>{html.escape(str(reviewed_or_better_count))} reviewed or verified</strong>
-            <span>{html.escape(str(imported_or_inferred_count))} records remain imported or inferred.</span>
-          </div>
-          <div class="stat">
-            <strong>{html.escape(language_mix)}</strong>
-            <span>Primary language-family mix in checked-in index records.</span>
-          </div>
-          <div class="stat">
-            <strong>{html.escape(str(accepted_claim_count))} {accepted_claim_label}</strong>
-            <span>Accepted maintainer-owned claim examples in the checked-in index.</span>
-          </div>
-          <div class="stat">
-            <strong>{html.escape(generated_at_human)}</strong>
-            <span>Snapshot generated at.</span>
-          </div>
-          <div class="stat">
-            <strong><code>{html.escape(shorten_digest(snapshot_digest))}</code></strong>
-            <span>Snapshot digest <code>{html.escape(snapshot_digest)}</code>.</span>
-          </div>
-          <div class="stat">
-            <strong>Stale after</strong>
-            {stale_line}
-          </div>
+          <div class="stat"><strong>{html.escape(str(repository_count))} repositories</strong>
+            <span>Published profiles. Presence does not guarantee task completeness or factual correctness.</span></div>
+          {render_record_freshness(input_dir, inventory, generated_at)}
+          <div class="stat"><strong>Exported {html.escape(generated_at_human)}</strong>
+            <span>This is the snapshot publication time, not the last upstream check.</span></div>
+          <div class="stat"><strong>Snapshot revalidation due</strong>{stale_line}</div>
         </div>
       </aside>
     </section>
 
+    <section class="panel section" id="lookup">
+      <h2>Look up a repository</h2>
+      {render_lookup_panel(base_path)}
+    </section>
+
+    {render_profile_example(input_dir, inventory, base_path)}
+
+    <section class="panel section" id="integrate">
+      <h2>Use a profile in your tool</h2>
+      <p>Request a profile, check the underlying record age and requested fields,
+        and fall back to upstream sources on a miss, stale record, or conflict.</p>
+      <pre><code>curl https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/profile.json</code></pre>
+      <p>With the <code>dotrepo-mcp</code> server installed, call <code>dotrepo.lookup</code>
+        with <code>repositoryUrl</code> and an optional field <code>path</code>.</p>
+      <div class="cta-row">
+        <a class="cta cta--primary" href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/external-consumer-integration.md">Integration and fallback guide</a>
+        <a class="cta cta--secondary" href="{site_href(base_path, "/efficiency/")}">Coverage and benchmark limitations</a>
+      </div>
+      <p>Task completeness measures available fields. Independent accuracy tests measure correctness.
+        Modeled request savings do not measure total agent cost. External adoption remains to be demonstrated.</p>
+    </section>
+
     <section class="panel section">
-      <h2>Two layers of cooperative automation</h2>
-      <p class="section__intro">
-        PageDigest prevents redundant fetching. dotrepo prevents redundant repository interpretation.
-        Together, they are publisher-declared state for automated clients: fetch less,
-        infer less, and preserve provenance.
-      </p>
+      <h2>One format, three uses</h2>
       <div class="three-up">
-        <article class="feature">
-          <h3><a href="https://pagedigest.org">PageDigest</a></h3>
-          <p>One manifest tells automated clients what changed before they spend requests on unchanged pages.</p>
-        </article>
-        <article class="feature">
-          <h3>dotrepo</h3>
-          <p>One trust-aware record tells automated clients what a repository is, how to use it, and why the answer won.</p>
-        </article>
-        <article class="feature">
-          <h3>Together</h3>
-          <p>Fetch less. Re-interpret less. Preserve provenance across repeated machine work.</p>
-        </article>
+        <article class="feature"><h3>Agents and tools</h3><p>Reuse basic facts across sessions and retrieve additional sources only when the task needs them.</p></article>
+        <article class="feature"><h3>Maintainers</h3><p>Publish an authoritative native record and keep supported documentation blocks consistent with it.</p></article>
+        <article class="feature"><h3>Researchers</h3><p>Orient yourself, find documentation, and compare available project facts with their limitations visible.</p></article>
       </div>
     </section>
 
-    {render_pagedigest_stats_dashboard(stats, base_path)}
-
     <section class="panel section">
-      <h2>Trust proof</h2>
+      <h2>How maintainer authority works</h2>
       <p class="section__intro">
-        The strongest live artifact on this site is not a generic field lookup. It is a claim-aware trust response that shows accepted maintainer state, preserved reviewed overlay context, and canonical handoff without silently flattening history away.
+        Maintainers can take authority over a generated overlay. This example preserves the earlier overlay and the accepted claim so consumers can inspect the handoff. A verified overlay means the pipeline resolved its checks; it does not mean human review, complete coverage, or guaranteed correctness.
       </p>
       <div class="api-grid">
         <article class="api-card">
@@ -2853,102 +2825,10 @@ def main() -> int:
         </article>
         <article class="api-card">
           <h3>What the live trust surface returns</h3>
-          <p>This excerpt comes from the current exported snapshot and keeps the handoff visible. That is the product proof most metadata layers cannot show.</p>
+          <p>This excerpt shows the selected record and maintainer claim from this export.</p>
           <pre><code>{featured_trust["proofJson"]}</code></pre>
           <p class="api-card__caption">Review path: <code>{html.escape(str(featured_trust["reviewPath"] or "unknown"))}</code> · Evidence path: <code>{html.escape(str(featured_trust["evidencePath"] or "unknown"))}</code></p>
         </article>
-      </div>
-    </section>
-
-    <section class="panel section">
-      <h2>Repo lookup</h2>
-      <p class="section__intro">
-        Paste a repository URL and jump straight to the hosted summary or trust
-        surface. This keeps the human path aligned with the shipped
-        <code>dotrepo.lookup</code> MCP tool instead of inventing a separate browse product.
-      </p>
-      {render_lookup_panel(base_path)}
-    </section>
-
-    <section class="panel section">
-      <h2>Why dotrepo</h2>
-      <div class="three-up">
-        <article class="feature">
-          <h3>For maintainers</h3>
-          <p>Keep essential repository facts in one trustworthy layer instead of scattering them across README files, CI, platform settings, and tribal knowledge.</p>
-        </article>
-        <article class="feature">
-          <h3>For users</h3>
-          <p>Inspect what a project is, how it should be trusted, and where claims came from without cloning the index or reading every supporting file first.</p>
-        </article>
-        <article class="feature">
-          <h3>For agents and tools</h3>
-          <p>Query stable JSON and same-origin endpoints directly instead of guessing intent from prose, conventions, and partially structured repository surfaces.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="panel section">
-      <h2>Docs</h2>
-      <p class="section__intro">
-        The public site now keeps the documentation entrypoint on the first-party domain. Detailed working docs still live in the repository, but the navigation no longer treats the site as a thin wrapper around GitHub.
-      </p>
-      <div class="three-up">
-        <article class="feature">
-          <h3>Product and status</h3>
-          <p>Start with the project overview, install guide, and maintainer path before diving into RFC history or operator detail.</p>
-        </article>
-        <article class="feature">
-          <h3>Protocol and trust</h3>
-          <p>The trust model, public surface architecture, and roadmap explain how reusable facts remain honest: provenance, precedence, freshness, and visible conflict.</p>
-        </article>
-        <article class="feature">
-          <h3>Autonomous index</h3>
-          <p>The roadmap, index rules, and maintainer-claim docs show how evidence-backed overlays scale without confusing generated facts with maintainer authority.</p>
-        </article>
-      </div>
-      <p class="section__note">
-        Start at <a href="{site_href(base_path, "/docs/")}">the first-party docs landing page</a>.
-      </p>
-    </section>
-
-    <section class="panel section">
-      <h2>Interview-backed priorities</h2>
-      <p class="section__intro">
-        A 9-model, 12-session interview round on dotrepo's current shape converged on three
-        priorities: grow coverage until checking dotrepo is the cheap default,
-        preserve trust and freshness, and keep the core contract focused.
-      </p>
-      <div class="three-up">
-        <article class="feature">
-          <h3>Broaden coverage</h3>
-          <p>Remote lookup has shipped. The next bar is broader ecosystem coverage with measurable field quality.</p>
-        </article>
-        <article class="feature">
-          <h3>Automate the conveyor</h3>
-          <p>Deterministic parsers do the common work, unresolved fields escalate through bounded model tiers, and machine gates publish or abstain without a routine human queue.</p>
-        </article>
-        <article class="feature">
-          <h3>Keep it small</h3>
-          <p>The trust model, freshness semantics, hosted lookup, and compact schema remain the differentiators. Discovery should be built on profile quality, not used to disguise its absence.</p>
-        </article>
-      </div>
-      <p class="section__note">
-        Read the on-site write-up:
-        <a href="{site_href(base_path, "/writing/what-the-ais-think-about-dotrepo/")}">What the AIs Think About dotrepo</a>.
-        Working repo notes remain in
-        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/ai-tool-interviews.md">docs/ai-tool-interviews.md</a>.
-      </p>
-    </section>
-
-    <section class="panel section">
-      <h2>Writing</h2>
-      <p class="section__intro">
-        Ongoing field reports, launch notes, and research syntheses from the protocol,
-        public surface, and agent-facing product work.
-      </p>
-      <div class="repo-grid">
-        {render_writing_cards(base_path)}
       </div>
     </section>
 
@@ -3011,10 +2891,16 @@ def main() -> int:
       <p class="section__note"><a href="{site_href(base_path, "/repositories/")}">Browse all {html.escape(str(repository_count))} repositories</a></p>
     </section>
 
+    <details class="panel section">
+      <summary>Optional incremental fetching with PageDigest</summary>
+      <p>PageDigest identifies changed published files. Its figures model a consumer
+        synchronizing the covered set; they are not measured savings from agent tasks.</p>
+      {render_pagedigest_stats_dashboard(stats, base_path)}
+    </details>
+
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
       <span>Homepage lookup resolves the same hosted surface used by MCP <code>dotrepo.lookup</code>.</span>
-      <span>Staging remains the deployed <code>workers.dev</code> Worker.</span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>
   </div>

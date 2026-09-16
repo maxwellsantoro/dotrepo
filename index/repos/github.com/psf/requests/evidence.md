@@ -4,7 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred repo.build from .github/workflows/publish.yml as `python -m build`.
-- Imported repo.test from Makefile as `python -m pytest tests`.
+- Imported repo.test from tox.ini as `tox`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -15,6 +15,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

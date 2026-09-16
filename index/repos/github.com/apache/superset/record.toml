@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/apache/superset"
-generated_at = "2026-07-01T17:24:45.292944Z"
+generated_at = "2026-09-16T16:08:07.804406Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `pyproject.toml`, and `superset-frontend/packages/generator-superset/package.json`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `superset-frontend/packages/generator-superset/package.json`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Superset"
@@ -22,22 +21,22 @@ homepage = "https://superset.apache.org/"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
-    "TypeScript",
     "Python",
-    "Jupyter Notebook",
+    "TypeScript",
     "HTML",
+    "Jupyter Notebook",
     "JavaScript",
     "Shell",
+    "Go Template",
     "Dockerfile",
     "Jinja",
-    "Go Template",
     "Makefile",
     "CSS",
     "Pug",
     "Mako",
 ]
 build = "python -m build"
-test = "python -m pytest"
+test = "npm test"
 topics = [
     "superset",
     "apache",
@@ -59,23 +58,26 @@ topics = [
     "flask",
 ]
 
+[repo.toolchain]
+min = "3.11"
+ecosystem = "Python"
+
 [owners]
 maintainers = [
-    "@mistercrunch",
-    "@michael-s-molina",
-    "@betodealmeida",
-    "@eschutho",
-    "@sadpandajoe",
-    "@geido",
-    "@kgabryje",
-    "@craig-rueda",
-    "@dpgaspar",
     "@villebro",
-    "@nytai",
+    "@geido",
+    "@eschutho",
     "@rusackas",
-    "@Antonio-RiveroMartnez",
+    "@betodealmeida",
+    "@nytai",
+    "@mistercrunch",
+    "@kgabryje",
+    "@sha174n",
+    "@dpgaspar",
+    "@sadpandajoe",
     "@hainenber",
-    "@sfirke",
+    "@Antonio-RiveroMartnez",
+    "@michael-s-molina",
 ]
 security_contact = "security@superset.apache.org"
 
@@ -83,11 +85,87 @@ security_contact = "security@superset.apache.org"
 root = "https://superset.apache.org/docs/configuration/feature-flags"
 getting_started = "https://superset.apache.org/docs/quickstart/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://superset.apache.org/docs/quickstart/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://superset.apache.org/docs/configuration/feature-flags"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@superset.apache.org"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Apache Superset is a Data Visualization and Data Exploration Platform"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://superset.apache.org/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Superset"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:08:07.804406Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "superset-frontend/packages/generator-superset/package.json"
+state = "present"
+valueJson = '"npm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/apache/superset.git"
 default_branch = "master"
 fork = false
-head_sha = "b3c709b3d5ef52ee6740b0c8edf17f9c996d9b49"
+head_sha = "0db1b47de796b52b3da2c8013a7d32fb1b1e88cf"
 html_url = "https://github.com/apache/superset"
-stars = 73613
+stars = 74787

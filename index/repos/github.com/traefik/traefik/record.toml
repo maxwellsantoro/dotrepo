@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/traefik/traefik"
-generated_at = "2026-07-08T22:52:08.938517Z"
+generated_at = "2026-09-16T16:33:17.193733Z"
 
 [record.trust]
 confidence = "high"
@@ -32,7 +32,7 @@ languages = [
     "Dockerfile",
 ]
 build = "make dist"
-test = "make test"
+test = "make test-unit"
 topics = [
     "microservice",
     "docker",
@@ -51,7 +51,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.25.0"
+min = "1.26.0"
 ecosystem = "Go"
 
 [owners]
@@ -61,11 +61,88 @@ security_contact = "https://github.com/traefik/traefik/security/advisories"
 [docs]
 root = "https://traefik.io"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://traefik.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"https://github.com/traefik/traefik/security/advisories"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make dist"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The Cloud Native Application Proxy"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://traefik.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Traefik"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:33:17.193733Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test-unit"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/traefik/traefik.git"
 default_branch = "master"
 fork = false
-head_sha = "db21cbae1ad4d2b0e8a8d3648adecdeadcb57ffb"
+head_sha = "e75250a31ae773e50e9c16514e3aebcb92059042"
 html_url = "https://github.com/traefik/traefik"
-stars = 63911
+stars = 64867

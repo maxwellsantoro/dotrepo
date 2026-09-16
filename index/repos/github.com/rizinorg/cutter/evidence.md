@@ -2,7 +2,6 @@
 
 - Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Left `repo.build` unset because `.github/workflows/ci.yml` suggested an unsafe shell-like command.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

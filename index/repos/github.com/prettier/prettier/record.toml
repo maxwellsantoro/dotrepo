@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/prettier/prettier"
-generated_at = "2026-07-01T18:22:37.626108Z"
+generated_at = "2026-09-16T16:15:46.521427Z"
 
 [record.trust]
 confidence = "high"
@@ -12,23 +12,19 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Opinionated Code Formatter"
-description = "JavaScript · TypeScript · Flow · JSX · JSON"
+name = "prettier"
+description = "Prettier is an opinionated code formatter."
 homepage = "https://prettier.io"
 license = "MIT"
 visibility = "public"
 languages = [
     "JavaScript",
-    "TypeScript",
-    "HTML",
     "CSS",
-    "SCSS",
-    "Less",
     "Vue",
-    "Handlebars",
+    "HTML",
     "MDX",
     "Shell",
 ]
@@ -55,6 +51,10 @@ topics = [
     "angular",
 ]
 
+[repo.toolchain]
+min = "22"
+ecosystem = "Node.js"
+
 [owners]
 maintainers = []
 security_contact = "https://tidelift.com/security"
@@ -62,11 +62,87 @@ security_contact = "https://tidelift.com/security"
 [docs]
 root = "https://prettier.io/docs/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://prettier.io/docs/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://tidelift.com/security"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"yarn build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Prettier is an opinionated code formatter."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://prettier.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"prettier"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:15:46.521427Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"yarn test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/prettier/prettier.git"
 default_branch = "main"
 fork = false
-head_sha = "cf7db3500a89faeb24ad0af45c6b9a0e7b074a03"
+head_sha = "79e74c405bd9628ec69894ff2522aa734b2689c0"
 html_url = "https://github.com/prettier/prettier"
-stars = 52028
+stars = 52331

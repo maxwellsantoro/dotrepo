@@ -1,0 +1,146 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "verified"
+source = "https://github.com/titanwings/distilly"
+generated_at = "2026-09-16T20:50:12.193847Z"
+
+[record.trust]
+confidence = "high"
+provenance = [
+    "imported",
+    "verified",
+]
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+
+[repo]
+name = "Distilly"
+description = "Distilly — Distill how they think into reusable Skills for any Agent or Bot. Formerly Colleague Skill（原同事 Skill）."
+homepage = "https://github.com/titanwings/distilly"
+license = "MIT"
+visibility = "public"
+languages = [
+    "Python",
+    "JavaScript",
+    "Shell",
+]
+topics = [
+    "agent-skills",
+    "ai-agent",
+    "claude-code",
+    "codex",
+    "hermes-agent",
+    "knowledge-distillation",
+    "meta-skill",
+    "openclaw",
+    "agentic-ai",
+    "ai-persona",
+    "codex-skills",
+    "deepseek-harness",
+    "digital-human",
+    "llm-agent",
+    "ai-agents",
+    "ai-assistants",
+    "claude-skills",
+    "opencode",
+    "dsh-plugin",
+]
+
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/titanwings/distilly"
+notes = "Declared repository in package.json."
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "manifest",
+]
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Distilly — Distill how they think into reusable Skills for any Agent or Bot. Formerly Colleague Skill（原同事 Skill）."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/titanwings/distilly"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Distilly"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T20:50:12.193847Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.github]
+archived = false
+clone_url = "https://github.com/titanwings/distilly.git"
+default_branch = "dot-skill"
+fork = false
+head_sha = "b830d3dcbde006370f141155795b89021e3a947b"
+html_url = "https://github.com/titanwings/distilly"
+stars = 24798

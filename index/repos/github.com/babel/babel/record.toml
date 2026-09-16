@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/babel/babel"
-generated_at = "2026-07-01T17:25:35.465211Z"
+generated_at = "2026-09-16T16:08:35.457564Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Impor
 
 [repo]
 name = "babel"
-description = "The compiler for writing next generation JavaScript."
+description = "🐠 Babel is a compiler for writing next generation JavaScript."
 homepage = "https://babel.dev"
 license = "MIT"
 visibility = "public"
@@ -47,11 +47,87 @@ security_contact = "security@babeljs.io"
 [docs]
 root = "https://babel.dev"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://babel.dev"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@babeljs.io"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"yarn build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"🐠 Babel is a compiler for writing next generation JavaScript."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://babel.dev"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"babel"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:08:35.457564Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"yarn test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/babel/babel.git"
 default_branch = "main"
 fork = false
-head_sha = "f3f63270eca6838bad132a1dc2e97dfca93727af"
+head_sha = "87fee9e69f624f9636d4cd538baa286dcaf4ec0d"
 html_url = "https://github.com/babel/babel"
-stars = 43944
+stars = 43997

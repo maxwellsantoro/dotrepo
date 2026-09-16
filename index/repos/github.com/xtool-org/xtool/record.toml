@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/xtool-org/xtool"
-generated_at = "2026-07-06T19:07:11.707076Z"
+generated_at = "2026-09-16T16:31:10.399492Z"
 
 [record.trust]
 confidence = "high"
@@ -23,9 +23,9 @@ visibility = "public"
 languages = [
     "Swift",
     "Makefile",
-    "C",
     "Shell",
     "JavaScript",
+    "C",
     "Dockerfile",
     "Ruby",
 ]
@@ -47,11 +47,87 @@ security_contact = "https://github.com/xtool-org/xtool/security/advisories/new"
 root = "https://xtool.sh"
 getting_started = "https://xtool.sh/documentation/xtooldocs/installation-linux"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://xtool.sh/documentation/xtooldocs/installation-linux"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://xtool.sh"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"https://github.com/xtool-org/xtool/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make all"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Cross-platform Xcode replacement. Build and deploy iOS apps with SwiftPM on Linux, Windows, macOS."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://xtool.sh"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"xtool"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:10.399492Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/xtool-org/xtool.git"
 default_branch = "main"
 fork = false
-head_sha = "7f151a9c66c98cd84a4de635cd0de6ddb09e9cf4"
+head_sha = "c4d8c42f9a20482cbf6d17dbcb33d595e6f7b3e6"
 html_url = "https://github.com/xtool-org/xtool"
-stars = 5004
+stars = 5461

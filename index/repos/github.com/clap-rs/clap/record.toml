@@ -2,22 +2,22 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/clap-rs/clap"
-generated_at = "2026-07-08T22:57:31.787486Z"
+generated_at = "2026-09-16T16:33:26.615497Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `Cargo.toml` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "clap"
 description = "A full featured, fast Command Line Argument Parser for Rust"
-homepage = "https://docs.rs/clap"
+homepage = "docs.rs/clap"
 license = "Apache-2.0"
 visibility = "public"
 languages = [
@@ -25,8 +25,8 @@ languages = [
     "Shell",
     "PowerShell",
     "Nushell",
-    "Elvish",
     "Roff",
+    "Elvish",
     "Makefile",
 ]
 build = "cargo build --workspace"
@@ -46,11 +46,87 @@ topics = [
 min = "1.85"
 ecosystem = "Rust"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo build --workspace"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A full featured, fast Command Line Argument Parser for Rust"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "medium"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"docs.rs/clap"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"clap"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:33:26.615497Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo test --workspace"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/clap-rs/clap.git"
 default_branch = "master"
 fork = false
-head_sha = "d3e59a9ab214910b9dad02921b7ef42c6400de9b"
+head_sha = "2cb76fdf385396f86f37af49784504da560b6e47"
 html_url = "https://github.com/clap-rs/clap"
-stars = 16548
+stars = 16707

@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/meilisearch/meilisearch"
-generated_at = "2026-07-01T18:14:36.970807Z"
+generated_at = "2026-09-16T16:14:32.483263Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `Cargo.toml`, and `CONTRIBUTING.md`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "meilisearch"
-description = "⚡ A lightning-fast search engine that fits effortlessly into your apps, websites, and workflow 🔍"
+description = "A lightning-fast search engine API bringing AI-powered hybrid search to your sites and applications."
 homepage = "https://www.meilisearch.com"
 license = "NOASSERTION"
 visibility = "public"
@@ -26,7 +26,7 @@ languages = [
     "Dockerfile",
 ]
 build = "cargo build --workspace"
-test = "cargo test --workspace"
+test = "cargo test"
 topics = [
     "search-engine",
     "typo-tolerance",
@@ -72,11 +72,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://www.meilisearch.com/docs?utm_campaign=oss&utm_source=github&utm_medium=meilisearch&utm_content=nav"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@meilisearch.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo build --workspace"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A lightning-fast search engine API bringing AI-powered hybrid search to your sites and applications."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.meilisearch.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"meilisearch"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:14:32.483263Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"cargo test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/meilisearch/meilisearch.git"
 default_branch = "main"
 fork = false
-head_sha = "148f4adfdf6966a84ef6a95bdf1ac46c530a45c1"
+head_sha = "bae5f5658eb988358f01ba6186d08015723ecc60"
 html_url = "https://github.com/meilisearch/meilisearch"
-stars = 58361
+stars = 59302

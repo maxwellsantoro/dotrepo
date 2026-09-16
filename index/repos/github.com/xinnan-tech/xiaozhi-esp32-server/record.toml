@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/xinnan-tech/xiaozhi-esp32-server"
-generated_at = "2026-07-09T03:38:06.187616Z"
+generated_at = "2026-09-16T16:34:27.745056Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `main/manager-mobile/package.json`. Imported `repo.build` from `main/manager-mobile/package.json`. Imported `repo.toolchain.min` from `main/manager-mobile/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `main/manager-mobile/package.json`, and `Makefile`. Imported `repo.build` from `main/manager-mobile/package.json`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `main/manager-mobile/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "xiaozhi-esp32-server"
@@ -22,17 +22,19 @@ license = "MIT"
 visibility = "public"
 languages = [
     "JavaScript",
+    "Java",
     "Vue",
     "Python",
-    "Java",
     "TypeScript",
     "HTML",
     "CSS",
     "Shell",
     "SCSS",
+    "Makefile",
     "Lua",
 ]
 build = "pnpm build"
+test = "make test"
 topics = [
     "dify",
     "esp32",
@@ -50,11 +52,87 @@ ecosystem = "Node.js"
 [docs]
 root = "http://xiaozhi.biz"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"http://xiaozhi.biz"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "main/manager-mobile/package.json"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"本项目为xiaozhi-esp32提供后端服务，帮助您快速搭建ESP32设备控制服务器。Backend service for xiaozhi-esp32, helps you quickly build an ESP32 device control server."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"http://xiaozhi.biz"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"xiaozhi-esp32-server"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:34:27.745056Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/xinnan-tech/xiaozhi-esp32-server.git"
 default_branch = "main"
 fork = false
-head_sha = "8808b69303c01135378d35750a9b6ddb0fbba183"
+head_sha = "6afc54a17def47578a4b3efc4680873689d3168b"
 html_url = "https://github.com/xinnan-tech/xiaozhi-esp32-server"
-stars = 10007
+stars = 10591

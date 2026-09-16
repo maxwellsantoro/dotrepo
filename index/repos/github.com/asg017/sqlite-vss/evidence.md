@@ -2,7 +2,6 @@
 
 - Imported repository name and docs entry points from README.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.build from .github/workflows/site.yaml as `make site-build`.
 - Imported repo.test from Makefile as `make test`.
 - Discovered related relation to github.com/asg017/sqlite-vec from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -13,6 +12,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Auto-promotion
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

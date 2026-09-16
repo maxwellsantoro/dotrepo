@@ -2,22 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/boto/boto3"
-generated_at = "2026-07-09T03:42:31.540552Z"
+generated_at = "2026-09-16T16:34:41.618178Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS`, `.github/SECURITY.md`, and `tox.ini`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `tox.ini`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `.github/CODEOWNERS`, `.github/SECURITY.md`, and `tox.ini`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.test` from `tox.ini`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "boto3"
-description = "Boto3, an AWS SDK for Python"
+description = "AWS SDK for Python (Boto3)"
 homepage = "https://aws.amazon.com/sdk-for-python/"
 license = "Apache-2.0"
 visibility = "public"
@@ -39,11 +38,87 @@ security_contact = "aws-security@amazon.com"
 [docs]
 root = "https://aws.amazon.com/sdk-for-python/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://aws.amazon.com/sdk-for-python/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "high"
+method = "extracted"
+reason = "direct email or mailing list"
+source = ".github/SECURITY.md"
+state = "present"
+valueJson = '"aws-security@amazon.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@boto/sync-team-aws-python-sdk-cli-team"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"AWS SDK for Python (Boto3)"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://aws.amazon.com/sdk-for-python/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "medium"
+method = "inferred"
+reason = "fell back to directory name or GitHub API"
+source = ".github/CODEOWNERS"
+state = "present"
+valueJson = '"boto3"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:34:41.618178Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "tox.ini"
+state = "present"
+valueJson = '"tox"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/boto/boto3.git"
 default_branch = "develop"
 fork = false
-head_sha = "1b69a0681e5bd05d3469b33bd27169d44cbb78a6"
+head_sha = "238d6ecf828482808e1a2135dba4dcb92284ed4f"
 html_url = "https://github.com/boto/boto3"
-stars = 9851
+stars = 9901

@@ -1,17 +1,20 @@
 # Evidence
 
-- Imported repository name, description, and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.build from build.gradle as `./gradlew build`.
-- Imported repo.test from build.gradle as `./gradlew test`.
+- Imported repo.build from ui/packages/api-client/package.json as `npm run build`.
+- Inferred repo.test from build.gradle as `./gradlew test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.name` to `halo` from `GitHub API` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

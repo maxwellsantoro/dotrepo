@@ -5,6 +5,7 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
+- Imported repo.toolchain.min from ries-py/pyproject.toml as `3.8` (Python).
 - Discovered related relation to github.com/maxwellsantoro/ries-rs from Cargo.toml repository.
 - Discovered related relation to github.com/clsn/ries from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

@@ -94,3 +94,22 @@ contract and reference scenarios.
 For the autonomous promotion rules that can mint `verified` overlays, see
 [`factual-crawl-automation.md`](./factual-crawl-automation.md) and
 [`ROADMAP.md`](../ROADMAP.md).
+
+## Field assessments and the meaning of verified
+
+`verified` means the pipeline resolved its required checks against inspected
+material. It is not a calibrated probability, a guarantee of correctness, human
+review, complete coverage, or a recent upstream check. Record authority, factual
+correctness, completeness, and age must be evaluated separately.
+
+Fresh crawler records retain `x.dotrepo.field_evidence`. Public profiles expose
+matching entries as `fieldEvidence`, keyed by manifest dot-path. Each contains an
+assessment state, confidence, method, reason, check time, and source where known.
+`not_found` means not found in inspected sources; it is not proof that the fact
+cannot be found elsewhere. `inferred` is distinct from `extracted`; `unspecified`
+is used when a field source was not retained. Scores are pipeline assessments,
+not independently calibrated correctness probabilities.
+
+Evidence is bound to the exact serialized value and record check timestamp.
+Export drops an entry if either no longer matches. Legacy records without retained
+field assessments do not inherit them from a record-wide high-confidence label.

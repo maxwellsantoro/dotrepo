@@ -1,0 +1,179 @@
+dataset:
+  name: September independent buried-field audit
+  checked_at: '2026-09-16'
+  require_evidence: true
+  selection: Eight identities selected for ecosystem variety before reading dotrepo
+    answers. Seventeen documented commands and security contacts curated from pinned
+    upstream sources. Not a representative random sample; no model extraction. Gold
+    frozen before scoring. No claim of total project build/test coverage.
+repo_metadata:
+  github.com/nushell/nushell:
+    cohort: indexed_independent
+  github.com/eza-community/eza:
+    cohort: holdout_unindexed
+  github.com/gohugoio/hugo:
+    cohort: indexed_independent
+  github.com/pypa/hatch:
+    cohort: holdout_unindexed
+  github.com/pnpm/pnpm:
+    cohort: indexed_independent
+  github.com/redis/redis:
+    cohort: indexed_independent
+  github.com/spring-projects/spring-boot:
+    cohort: indexed_independent
+  github.com/dotnet/runtime:
+    cohort: holdout_unindexed
+repos:
+  github.com/nushell/nushell:
+    build:
+      gold: cargo build
+      note: Repository-root development build.
+      evidence:
+        url: https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/CONTRIBUTING.md
+        locator: L115-L122
+        checked_at: '2026-09-16'
+        source_revision: 45aa739595bfd51cd28bbc3454f81f1762662a88
+    test:
+      gold: cargo test --workspace
+      note: Workspace tests; standard-library tests are a separate command.
+      evidence:
+        url: https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/CONTRIBUTING.md
+        locator: L78-L83
+        checked_at: '2026-09-16'
+        source_revision: 45aa739595bfd51cd28bbc3454f81f1762662a88
+    security_contact:
+      gold: https://github.com/nushell/nushell/security/advisories/new
+      note: Private GitHub reporting path; Discord also permitted.
+      evidence:
+        url: https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/SECURITY.md
+        locator: L12-L15
+        checked_at: '2026-09-16'
+        source_revision: 45aa739595bfd51cd28bbc3454f81f1762662a88
+  github.com/eza-community/eza:
+    build:
+      gold: nix build
+      note: Recommended Nix development build.
+      evidence:
+        url: https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/CONTRIBUTING.md
+        locator: L40-L49
+        checked_at: '2026-09-16'
+        source_revision: 471bfbc7b03cbac8c738e8d9050edb06ee79132a
+    test:
+      gold:
+      - nix build .#test
+      - cargo test
+      note: Two explicitly documented test commands.
+      evidence:
+        url: https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/CONTRIBUTING.md
+        locator: L47,L104
+        checked_at: '2026-09-16'
+        source_revision: 471bfbc7b03cbac8c738e8d9050edb06ee79132a
+    security_contact:
+      gold: christina@cafkafk.com
+      note: Private email with encryption instructions.
+      evidence:
+        url: https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/SECURITY.md
+        locator: L19-L21
+        checked_at: '2026-09-16'
+        source_revision: 471bfbc7b03cbac8c738e8d9050edb06ee79132a
+  github.com/gohugoio/hugo:
+    security_contact:
+      gold: bjorn.erik.pedersen@gmail.com
+      note: Email after confirming the problem belongs to Hugo.
+      evidence:
+        url: https://github.com/gohugoio/hugo/blob/ec57bb7d348989513b919c7ea9ff08fed0bec327/SECURITY.md
+        locator: L7-L9
+        checked_at: '2026-09-16'
+        source_revision: ec57bb7d348989513b919c7ea9ff08fed0bec327
+  github.com/pypa/hatch:
+    security_contact:
+      gold: https://github.com/pypa/hatch/security/advisories/new
+      note: Private advisory form.
+      evidence:
+        url: https://github.com/pypa/hatch/blob/47f333a98228c326786d3919f346bd7b74d9cf8f/SECURITY.md
+        locator: L10-L16
+        checked_at: '2026-09-16'
+        source_revision: 47f333a98228c326786d3919f346bd7b74d9cf8f
+  github.com/pnpm/pnpm:
+    build:
+      gold: pnpm run compile
+      note: Repository-root TypeScript build after installing prerequisites.
+      evidence:
+        url: https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/CONTRIBUTING.md
+        locator: L29-L35
+        checked_at: '2026-09-16'
+        source_revision: 68597dd0a3b58a6fdffb9353179337851c4c7fdd
+    test:
+      gold: pnpm run test-all
+      note: Whole TypeScript suite from repository root. Bare pnpm test is package-local;
+        Rust suites are separate.
+      evidence:
+        url: https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/CONTRIBUTING.md
+        locator: L36
+        checked_at: '2026-09-16'
+        source_revision: 68597dd0a3b58a6fdffb9353179337851c4c7fdd
+    security_contact:
+      gold: https://github.com/pnpm/pnpm/security/advisories
+      note: Exact documented advisory URL.
+      evidence:
+        url: https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/SECURITY.md
+        locator: L12-L14
+        checked_at: '2026-09-16'
+        source_revision: 68597dd0a3b58a6fdffb9353179337851c4c7fdd
+  github.com/redis/redis:
+    build:
+      gold:
+      - make
+      - make build
+      - make all
+      note: Core build; modules-update populates optional modules first.
+      evidence:
+        url: https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/README.md
+        locator: L345-L350
+        checked_at: '2026-09-16'
+        source_revision: 07a33b919581e2b0663e34731a490d768e553dfa
+    test:
+      gold: make test
+      note: Default tests.
+      evidence:
+        url: https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/README.md
+        locator: L381-L386
+        checked_at: '2026-09-16'
+        source_revision: 07a33b919581e2b0663e34731a490d768e553dfa
+    security_contact:
+      gold:
+      - https://redis.io/redis-responsible-vulnerability-disclosure/
+      - https://github.com/redis/redis/security/advisories/new
+      - security@redis.com
+      note: Disclosure program, GitHub reporting, or direct security-team contact.
+      evidence:
+        url: https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/SECURITY.md
+        locator: L26-L40
+        checked_at: '2026-09-16'
+        source_revision: 07a33b919581e2b0663e34731a490d768e553dfa
+  github.com/spring-projects/spring-boot:
+    test:
+      gold: ./gradlew check
+      note: Repository-root verification includes tests and Checkstyle.
+      evidence:
+        url: https://github.com/spring-projects/spring-boot/blob/683d41b3232b98bb10d7b60705abe300af1c5e20/CONTRIBUTING.adoc
+        locator: L54-L55
+        checked_at: '2026-09-16'
+        source_revision: 683d41b3232b98bb10d7b60705abe300af1c5e20
+    security_contact:
+      gold: https://spring.io/security-policy
+      note: Documented responsible disclosure policy.
+      evidence:
+        url: https://github.com/spring-projects/spring-boot/blob/683d41b3232b98bb10d7b60705abe300af1c5e20/CONTRIBUTING.adoc
+        locator: L25-L28
+        checked_at: '2026-09-16'
+        source_revision: 683d41b3232b98bb10d7b60705abe300af1c5e20
+  github.com/dotnet/runtime:
+    security_contact:
+      gold: https://msrc.microsoft.com/report/vulnerability/new
+      note: MSRC private report form.
+      evidence:
+        url: https://github.com/dotnet/runtime/blob/8e4f2a927f4ff15de201a45151aad689fa3942f5/SECURITY.md
+        locator: L7-L15
+        checked_at: '2026-09-16'
+        source_revision: 8e4f2a927f4ff15de201a45151aad689fa3942f5

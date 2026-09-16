@@ -1,6 +1,12 @@
 name: ci
 
 on:
+  workflow_dispatch:
+    inputs:
+      base_sha:
+        description: Optional base commit for a scoped automation check
+        required: false
+        type: string
   pull_request:
   push:
     branches: [main]
@@ -31,12 +37,21 @@ jobs:
       - name: Classify changed files
         id: scope
         shell: bash
+        env:
+          DISPATCH_BASE_SHA: ${{ inputs.base_sha }}
         run: |
           set -euo pipefail
 
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             base="${{ github.event.pull_request.base.sha }}"
             head="${{ github.event.pull_request.head.sha }}"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            base="$DISPATCH_BASE_SHA"
+            head="${{ github.sha }}"
+            if [ -n "$base" ] && ! [[ "$base" =~ ^[0-9a-f]{40}$ ]]; then
+              echo "Invalid base commit" >&2
+              exit 1
+            fi
           else
             base="${{ github.event.before }}"
             head="${{ github.sha }}"

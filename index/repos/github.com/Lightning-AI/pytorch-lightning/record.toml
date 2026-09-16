@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/Lightning-AI/pytorch-lightning"
-generated_at = "2026-07-01T17:19:25.455384Z"
+generated_at = "2026-09-16T16:05:50.450249Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `pyproject.toml`, and `.github/CONTRIBUTING.md`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `.github/CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Lightning"
-description = "The deep learning framework to pretrain and finetune AI models."
+description = "Pretrain, finetune ANY AI model of ANY size on 1 or 10,000+ GPUs with zero code changes."
 homepage = "https://lightning.ai/pytorch-lightning/?utm_source=ptl_readme&utm_medium=referral&utm_campaign=ptl_readme"
 license = "Apache-2.0"
 visibility = "public"
@@ -26,7 +26,7 @@ languages = [
     "Makefile",
 ]
 build = "python -m build"
-test = "python -m pytest"
+test = "python -m pytest tests/.../test_file.py::test_explain_what_is_being_tested -v --capture=no"
 topics = [
     "python",
     "deep-learning",
@@ -50,11 +50,87 @@ security_contact = "developer@lightning.ai"
 [docs]
 root = "https://pytorch-lightning.readthedocs.io/en/stable/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://pytorch-lightning.readthedocs.io/en/stable/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"developer@lightning.ai"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Pretrain, finetune ANY AI model of ANY size on 1 or 10,000+ GPUs with zero code changes."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://lightning.ai/pytorch-lightning/?utm_source=ptl_readme&utm_medium=referral&utm_campaign=ptl_readme"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Lightning"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:05:50.450249Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = ".github/CONTRIBUTING.md"
+state = "present"
+valueJson = '"python -m pytest tests/.../test_file.py::test_explain_what_is_being_tested -v --capture=no"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/Lightning-AI/pytorch-lightning.git"
 default_branch = "master"
 fork = false
-head_sha = "fe6b1cc4e80ae0396e2e404c16e6b6968ad5437e"
+head_sha = "320e79704a9e921b3a11d8a1d1ba685e6b7ebc69"
 html_url = "https://github.com/Lightning-AI/pytorch-lightning"
-stars = 31215
+stars = 31346

@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/astral-sh/uv"
-generated_at = "2026-07-05T14:35:59.100799Z"
+generated_at = "2026-09-16T16:17:20.779888Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `.github/workflows/build-dev-binaries.yml`, `CONTRIBUTING.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-dev-binaries.yml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `.github/workflows/build-dev-binaries.yml`, `CONTRIBUTING.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-dev-binaries.yml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "uv"
@@ -25,15 +24,16 @@ languages = [
     "Rust",
     "Python",
     "Shell",
+    "PowerShell",
     "Batchfile",
     "Dockerfile",
     "Nushell",
-    "PowerShell",
+    "Xonsh",
     "Jupyter Notebook",
     "C",
     "RenderScript",
 ]
-build = "cargo build --profile no-debug"
+build = "cargo build --profile no-debug-nightly -Z checksum-freshness"
 test = "cargo nextest run"
 topics = [
     "packaging",
@@ -43,7 +43,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.94.0"
+min = "1.96.0"
 ecosystem = "Rust"
 
 [owners]
@@ -54,11 +54,87 @@ security_contact = "https://github.com/astral-sh/.github/blob/main/SECURITY.md"
 root = "https://trio.readthedocs.io/"
 getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://trio.readthedocs.io/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/astral-sh/.github/blob/main/SECURITY.md"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/build-dev-binaries.yml"
+state = "present"
+valueJson = '"cargo build --profile no-debug-nightly -Z checksum-freshness"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"An extremely fast Python package and project manager, written in Rust."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://docs.astral.sh/uv"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"uv"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:17:20.779888Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"cargo nextest run"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/astral-sh/uv.git"
 default_branch = "main"
 fork = false
-head_sha = "32194f49ab65672f54e892192150d861a0569ce9"
+head_sha = "044be3d231af6c940c01bc76dec6728b4bb5d4a6"
 html_url = "https://github.com/astral-sh/uv"
-stars = 87098
+stars = 89871

@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/apache/kafka"
-generated_at = "2026-07-01T17:24:40.045215Z"
+generated_at = "2026-09-16T16:07:53.001184Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `build.gradle`. Imported `repo.build` from `build.gradle`. Imported `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `build.gradle`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `build.gradle`. Left `repo.test` unset because `tests/setup.py`, `tests/setup.cfg`, and `build.gradle` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "kafka"
-description = "Follow instructions in https://kafka.apache.org/quickstart"
+description = "Apache Kafka - A distributed event streaming platform"
 homepage = "https://kafka.apache.org/"
 license = "Apache-2.0"
 visibility = "public"
@@ -31,13 +31,22 @@ languages = [
     "HTML",
 ]
 build = "./gradlew build"
-test = "./gradlew test"
 topics = [
     "scala",
     "kafka",
     "java",
     "streaming",
 ]
+
+[[repo.test_candidates]]
+command = "python -m pytest"
+ecosystem = "Python"
+source = "tests/setup.py"
+
+[[repo.test_candidates]]
+command = "./gradlew test"
+ecosystem = "Java/Kotlin (Gradle)"
+source = "build.gradle"
 
 [owners]
 maintainers = []
@@ -61,11 +70,86 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://kafka.apache.org/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@kafka.apache.org"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "build.gradle"
+state = "present"
+valueJson = '"./gradlew build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Apache Kafka - A distributed event streaming platform"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://kafka.apache.org/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"kafka"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:07:53.001184Z"
+confidence = "low"
+method = "not_found_in_inspected_sources"
+reason = "intra-tier conflict left field unset during import"
+state = "unresolved"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/apache/kafka.git"
 default_branch = "trunk"
 fork = false
-head_sha = "be4d31c869ab56d8473d78b6512773cfb78b798b"
+head_sha = "fbbcc1afde582db29cdcdddd9ace573a9c899eb7"
 html_url = "https://github.com/apache/kafka"
-stars = 33055
+stars = 33739

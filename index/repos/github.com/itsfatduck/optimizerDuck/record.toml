@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/itsfatduck/optimizerDuck"
-generated_at = "2026-07-06T18:47:40.755785Z"
+generated_at = "2026-09-16T16:25:07.279081Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = 'Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `optimizerDuck/optimizerDuck.csproj`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `optimizerDuck/optimizerDuck.csproj`. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
 
 [repo]
 name = "optimizerDuck Banner"
@@ -24,11 +23,9 @@ visibility = "public"
 languages = [
     "C#",
     "Python",
-    "JavaScript",
-    "HTML",
-    "Shell",
     "Batchfile",
 ]
+build = "dotnet build"
 topics = [
     "optimizer",
     "performance",
@@ -54,11 +51,101 @@ security_contact = "unknown"
 root = "https://optimizerduck.vercel.app/"
 getting_started = "https://optimizerduck.vercel.app/docs/guides/getting-started"
 
+[relations]
+references = []
+
+[[relations.links]]
+kind = "related"
+target = "github.com/itsfatduck/optimizerDuck"
+notes = "Cross-link from README: ![CI"
+
+[relations.links.trust]
+confidence = "low"
+provenance = [
+    "declared",
+    "readme",
+]
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://optimizerduck.vercel.app/docs/guides/getting-started"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://optimizerduck.vercel.app/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "high"
+method = "unspecified"
+reason = "explicitly unknown"
+state = "not_found"
+valueJson = '"unknown"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "optimizerDuck/optimizerDuck.csproj"
+state = "present"
+valueJson = '"dotnet build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Free, open-source Windows optimization tool for performance, privacy, and simplicity."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://optimizerduck.vercel.app/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"optimizerDuck Banner"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:25:07.279081Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/itsfatduck/optimizerDuck.git"
 default_branch = "master"
 fork = false
-head_sha = "b35bb4eda32b97305b24f3e0cd00cba552a64c50"
+head_sha = "b628871fd0ebf4dd5489eb248196c6197d62090b"
 html_url = "https://github.com/itsfatduck/optimizerDuck"
-stars = 5185
+stars = 9563

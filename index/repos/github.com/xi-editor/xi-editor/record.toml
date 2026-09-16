@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/xi-editor/xi-editor"
-generated_at = "2026-07-09T04:26:19.914272Z"
+generated_at = "2026-09-16T16:35:10.568386Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`. Imported `repo.build` from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `rust/Cargo.toml`. Imported `repo.build` from `README.md`. Inferred `repo.test` from `rust/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Xi editor"
@@ -28,6 +28,7 @@ languages = [
     "Shell",
 ]
 build = "cargo build"
+test = "cargo test --workspace"
 topics = []
 
 [docs]
@@ -48,6 +49,82 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://xi-editor.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "README.md"
+state = "present"
+valueJson = '"cargo build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A modern editor with a backend written in Rust."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://xi-editor.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Xi editor"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:35:10.568386Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "rust/Cargo.toml"
+state = "present"
+valueJson = '"cargo test --workspace"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/xi-editor/xi-editor.git"
@@ -55,4 +132,4 @@ default_branch = "master"
 fork = false
 head_sha = "a2dea3059312795c77caadc639df49bf8a7008eb"
 html_url = "https://github.com/xi-editor/xi-editor"
-stars = 19816
+stars = 19819

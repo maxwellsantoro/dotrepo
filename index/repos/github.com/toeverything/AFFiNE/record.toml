@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/toeverything/AFFiNE"
-generated_at = "2026-07-01T18:33:10.338253Z"
+generated_at = "2026-09-16T16:16:49.080544Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `SECURITY.md`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@toeverything/blocksuite-core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Left `repo.test` unset because `Cargo.toml` and `package.json` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. Filled `repo.name` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@toeverything/blocksuite-core` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "AFFiNE"
-description = "A privacy-focused, local-first, open-source, and ready-to-use alternative for Notion & Miro."
+description = "There can be more than Notion and Miro. AFFiNE(pronounced [ə‘fain]) is a next-gen knowledge base that brings planning, sorting and creating all together. Privacy first, open-source, customizable and ready to use."
 homepage = "https://affine.pro"
 license = "NOASSERTION"
 visibility = "public"
@@ -25,21 +26,22 @@ languages = [
     "Rust",
     "Swift",
     "Kotlin",
-    "JavaScript",
     "PLpgSQL",
+    "JavaScript",
     "C",
     "HTML",
-    "CSS",
     "Shell",
+    "CSS",
     "Vue",
     "Metal",
     "Ruby",
     "Java",
+    "Dockerfile",
     "Objective-C",
     "NSIS",
 ]
 build = "yarn build"
-test = "yarn affine @affine/server test:copilot:coverage --forbid-only"
+test = "yarn test"
 topics = [
     "editor",
     "crdt",
@@ -60,6 +62,10 @@ topics = [
     "notes",
     "electron",
 ]
+
+[repo.toolchain]
+min = "22.12.0"
+ecosystem = "Node.js"
 
 [owners]
 maintainers = ["@toeverything/blocksuite-core"]
@@ -84,11 +90,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.affine.pro/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@toeverything.info"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@toeverything/blocksuite-core"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"yarn build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"There can be more than Notion and Miro. AFFiNE(pronounced [ə‘fain]) is a next-gen knowledge base that brings planning, sorting and creating all together. Privacy first, open-source, customizable and ready to use."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://affine.pro"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"AFFiNE"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:16:49.080544Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"yarn test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/toeverything/AFFiNE.git"
 default_branch = "canary"
 fork = false
-head_sha = "e5d44b8ff27e88fb8a47bdee177501840b0c140a"
+head_sha = "2af30773aecd567f09b346e7b72fc69143144057"
 html_url = "https://github.com/toeverything/AFFiNE"
-stars = 69957
+stars = 72675

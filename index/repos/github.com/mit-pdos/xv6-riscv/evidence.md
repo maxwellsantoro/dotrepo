@@ -10,10 +10,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-Status dropped from a prior verified record because the following previously present field(s) regressed: repo.test.
-
-## Auto-promotion
-
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

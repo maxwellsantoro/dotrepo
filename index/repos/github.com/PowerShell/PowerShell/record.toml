@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/PowerShell/PowerShell"
-generated_at = "2026-07-06T18:30:23.18498Z"
+generated_at = "2026-09-16T16:19:19.8241Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/SECURITY.md`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@PowerShell/powershell-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `PowerShell.sln`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@PowerShell/powershell-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `PowerShell.sln`. Inferred `repo.test` from `PowerShell.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "logo][] PowerShell"
@@ -31,6 +30,8 @@ languages = [
     "Dockerfile",
     "Batchfile",
 ]
+build = "dotnet build"
+test = "dotnet test"
 topics = [
     "powershell",
     "windows",
@@ -73,11 +74,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://learn.microsoft.com/powershell/scripting/learn/more-powershell-learning"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://microsoft.com/PowerShell"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://msrc.microsoft.com/create-report"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@PowerShell/powershell-maintainers"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "PowerShell.sln"
+state = "present"
+valueJson = '"dotnet build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"PowerShell for every system!"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://microsoft.com/PowerShell"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"logo][] PowerShell"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:19:19.8241Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "PowerShell.sln"
+state = "present"
+valueJson = '"dotnet test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/PowerShell/PowerShell.git"
 default_branch = "master"
 fork = false
-head_sha = "36cd02b333d7cecb89d5d336c9a798287fe4736b"
+head_sha = "5e35e5ac892815ec4991f74425989e38ce71ccd0"
 html_url = "https://github.com/PowerShell/PowerShell"
-stars = 54308
+stars = 55427

@@ -4,39 +4,39 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/screenpipe/screenpipe"
-generated_at = "2026-07-06T19:00:49.393414Z"
+generated_at = "2026-09-16T16:29:13.258442Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/workflows/e2e-test.yml`, and `CONTRIBUTING.md`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `.github/workflows/e2e-test.yml`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `apps/screenpipe-app-tauri/package.json`. Imported `repo.build` from `apps/screenpipe-app-tauri/package.json`. Imported `repo.test` from `apps/screenpipe-app-tauri/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "screenpipe"
-description = "YC (S26) | AI that knows what you've seen, said, or heard. Records everything you do, say, hear 24/7, local, private, secure. Connect to OpenClaw, Hermes agent and 100+ apps"
+name = "DOWNLOAD SCREENPIPE"
+description = "YC (S26) | Open Computer History | Record your screen continuously locally and provide context to your agents (Claude, Codex, Openclaw, Hermes, Runner...)"
 homepage = "https://screenpipe.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
-    "Rust",
     "TypeScript",
-    "JavaScript",
+    "Rust",
     "Swift",
-    "Python",
+    "JavaScript",
     "Shell",
-    "HTML",
-    "PowerShell",
     "CSS",
-    "Dockerfile",
+    "Python",
+    "PowerShell",
     "NSIS",
+    "HTML",
+    "Bicep",
     "C",
+    "Dockerfile",
 ]
-build = "sudo glib-compile-schemas /usr/share/glib-2.0/schemas"
-test = "cargo test"
+build = "bun run build"
+test = "bun run test"
 topics = [
     "ai",
     "computer-vision",
@@ -63,11 +63,87 @@ topics = [
 [docs]
 root = "https://docs.screenpi.pe"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.screenpi.pe"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "apps/screenpipe-app-tauri/package.json"
+state = "present"
+valueJson = '"bun run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"YC (S26) | Open Computer History | Record your screen continuously locally and provide context to your agents (Claude, Codex, Openclaw, Hermes, Runner...)"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://screenpipe.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"DOWNLOAD SCREENPIPE"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:29:13.258442Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "apps/screenpipe-app-tauri/package.json"
+state = "present"
+valueJson = '"bun run test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/screenpipe/screenpipe.git"
 default_branch = "main"
 fork = false
-head_sha = "ca8b00273d5579480e24a1cafbedbc6c66ff63c5"
+head_sha = "4c406e9d9e985ba793a341ef846a00c30b7b5d70"
 html_url = "https://github.com/screenpipe/screenpipe"
-stars = 19672
+stars = 21596

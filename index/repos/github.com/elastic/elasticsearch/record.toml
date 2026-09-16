@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/elastic/elasticsearch"
-generated_at = "2026-07-06T20:23:26.28911Z"
+generated_at = "2026-09-16T16:32:21.344622Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `build.gradle`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `build.gradle`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `build.gradle`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `build.gradle`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "elasticsearch"
@@ -23,19 +22,18 @@ license = "NOASSERTION"
 visibility = "public"
 languages = [
     "Java",
+    "C++",
     "Groovy",
     "StringTemplate",
-    "C++",
     "TypeScript",
-    "Rust",
     "Shell",
     "ANTLR",
     "Dockerfile",
     "Batchfile",
-    "Python",
     "Makefile",
-    "PowerShell",
+    "Python",
     "C",
+    "PowerShell",
     "CSS",
     "Emacs Lisp",
     "AMPL",
@@ -59,9 +57,10 @@ maintainers = [
     "@elastic/logstash",
     "@elastic/kibana-security",
     "@elastic/response-ops",
+    "@elastic/kibana-cases",
+    "@elastic/context-eng",
     "@elastic/obs-ds-intake-services",
     "@elastic/es-storage-engine",
-    "@elastic/es-delivery",
     "@elastic/es-core-infra",
     "@elastic/es-security",
     "@elastic/core-docs",
@@ -72,11 +71,87 @@ maintainers = [
 [docs]
 root = "https://www.elastic.co/products/elasticsearch"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://www.elastic.co/products/elasticsearch"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "build.gradle"
+state = "present"
+valueJson = '"./gradlew build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Free and Open Source, Distributed, RESTful Search Engine"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.elastic.co/products/elasticsearch"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "medium"
+method = "inferred"
+reason = "fell back to directory name or GitHub API"
+source = ".github/CODEOWNERS"
+state = "present"
+valueJson = '"elasticsearch"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:32:21.344622Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "build.gradle"
+state = "present"
+valueJson = '"./gradlew test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/elastic/elasticsearch.git"
 default_branch = "main"
 fork = false
-head_sha = "d266892ba8f40a983c7e35588b3c46eaf5fc6659"
+head_sha = "5b76afd44152b279951e0648a16db879bd69a0dc"
 html_url = "https://github.com/elastic/elasticsearch"
-stars = 77453
+stars = 77921

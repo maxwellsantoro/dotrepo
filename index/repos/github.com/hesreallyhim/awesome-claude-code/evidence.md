@@ -4,6 +4,7 @@
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.test from Makefile as `make test`.
+- Discovered related relation to github.com/anthropics/claude-code from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `awesome-claude-code` from `GitHub API` after deterministic escalation.

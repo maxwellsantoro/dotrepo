@@ -90,6 +90,14 @@ fn public_export_fixture_pack_matches_checked_in_outputs() {
     })
     .collect::<BTreeMap<_, _>>();
 
+    if std::env::var("UPDATE_DOTREPO_PUBLIC_GOLDENS").as_deref() == Ok("1") {
+        fs::remove_dir_all(&expected_root).expect("remove old generated golden tree");
+        for (relative, contents) in &generated {
+            let path = expected_root.join(relative);
+            fs::create_dir_all(path.parent().unwrap()).expect("create golden directory");
+            fs::write(path, contents).expect("write golden output");
+        }
+    }
     let expected = read_tree(&expected_root);
     assert_eq!(generated, expected, "public export fixture pack drifted");
 }

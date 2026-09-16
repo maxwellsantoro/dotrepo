@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tensorflow/tensorflow"
-generated_at = "2026-07-06T19:03:54.202139Z"
+generated_at = "2026-09-16T16:30:07.978103Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `CONTRIBUTING.md`. Left `repo.test` unset because `CONTRIBUTING.md` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "tensorflow"
@@ -24,8 +24,8 @@ languages = [
     "C++",
     "Python",
     "MLIR",
-    "HTML",
     "Starlark",
+    "HTML",
     "Go",
     "C",
     "Java",
@@ -38,14 +38,14 @@ languages = [
     "Smarty",
     "Swift",
     "Dockerfile",
-    "C#",
     "Ruby",
+    "Batchfile",
     "Perl",
     "Cython",
     "Linker Script",
-    "Batchfile",
     "Makefile",
     "CSS",
+    "PowerShell",
     "Vim Snippet",
 ]
 build = "bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package"
@@ -78,11 +78,87 @@ security_contact = "https://g.co/vulnz"
 [docs]
 root = "https://tensorflow.org"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://tensorflow.org"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"https://g.co/vulnz"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"bazel build --config=dbg //tensorflow/tools/pip_package:build_pip_package"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"An Open Source Machine Learning Framework for Everyone"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://tensorflow.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"tensorflow"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:30:07.978103Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/tensorflow/tensorflow.git"
 default_branch = "master"
 fork = false
-head_sha = "e155e55d0024c7d98b2674b6246508a9cfedb103"
+head_sha = "807664dac96207f9343a69aa719478c8dffe6209"
 html_url = "https://github.com/tensorflow/tensorflow"
-stars = 196100
+stars = 200134

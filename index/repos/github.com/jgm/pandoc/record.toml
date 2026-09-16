@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jgm/pandoc"
-generated_at = "2026-07-01T18:09:51.462712Z"
+generated_at = "2026-09-16T16:14:09.937405Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. Imported 
 
 [repo]
 name = "Pandoc"
-description = "Pandoc is a Haskell library for converting from one markup format to another, and a command-line tool that uses this library."
+description = "Universal markup converter"
 homepage = "https://pandoc.org"
 license = "GPL-2.0"
 visibility = "public"
@@ -32,12 +32,13 @@ languages = [
     "Makefile",
     "Python",
     "Shell",
-    "TeX",
+    "BBCode",
     "Nix",
+    "TeX",
     "CSS",
     "Perl",
-    "Smarty",
     "Emacs Lisp",
+    "Smarty",
     "Ruby",
 ]
 build = "make build"
@@ -61,11 +62,87 @@ security_contact = "jgm@berkeley.edu"
 [docs]
 root = "https://pandoc.org"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://pandoc.org"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"jgm@berkeley.edu"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Universal markup converter"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://pandoc.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Pandoc"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:14:09.937405Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/jgm/pandoc.git"
 default_branch = "main"
 fork = false
-head_sha = "4f5226df4faa0d66dd2c089465b13886360ab3c2"
+head_sha = "42d137398b40a48646b930423c03d9cad3439cc8"
 html_url = "https://github.com/jgm/pandoc"
-stars = 45160
+stars = 46302

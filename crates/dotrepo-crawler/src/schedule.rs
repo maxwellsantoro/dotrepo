@@ -17,6 +17,7 @@ pub(crate) fn schedule_refresh_impl(
             &request.state.repositories,
             request.synthesize,
             request.synthesis_model.as_deref(),
+            request.now.as_deref(),
         );
 
         match reason {
@@ -57,6 +58,7 @@ fn refresh_reason(
     records: &[CrawlStateRecord],
     synthesize: bool,
     synthesis_model: Option<&str>,
+    now: Option<&str>,
 ) -> Option<RefreshReason> {
     let Some(state) = records
         .iter()
@@ -67,6 +69,24 @@ fn refresh_reason(
 
     if state.last_factual_crawl_at.is_none() {
         return Some(RefreshReason::MissingFactualCrawl);
+    }
+
+    // Start before the public 30-day expiry: 613 records at 50/day need 13 days.
+    // HEAD equality does not revalidate mutable host metadata or old parser decisions.
+    use time::{format_description::well_known::Rfc3339, OffsetDateTime};
+    let now = match now {
+        Some(value) => OffsetDateTime::parse(value, &Rfc3339).ok(),
+        None => Some(OffsetDateTime::now_utc()),
+    };
+    let checked = state
+        .last_factual_crawl_at
+        .as_deref()
+        .and_then(|value| OffsetDateTime::parse(value, &Rfc3339).ok());
+    if checked
+        .zip(now)
+        .is_none_or(|(checked, now)| checked > now || now - checked >= time::Duration::days(14))
+    {
+        return Some(RefreshReason::StaleFactualCrawl);
     }
 
     if candidate.head_sha.is_some() && candidate.head_sha != state.head_sha {
@@ -96,6 +116,7 @@ fn refresh_reason(
 
 fn refresh_reason_label(reason: RefreshReason) -> &'static str {
     match reason {
+        RefreshReason::StaleFactualCrawl => "stale factual crawl",
         RefreshReason::MissingFactualCrawl => "missing factual crawl",
         RefreshReason::HeadChanged => "head changed",
         RefreshReason::MissingSynthesis => "missing synthesis",
@@ -106,6 +127,7 @@ fn refresh_reason_label(reason: RefreshReason) -> &'static str {
 
 fn refresh_reason_rank(reason: RefreshReason) -> u8 {
     match reason {
+        RefreshReason::StaleFactualCrawl => 0,
         RefreshReason::MissingFactualCrawl => 0,
         RefreshReason::HeadChanged => 1,
         RefreshReason::PreviousSynthesisFailed => 2,
@@ -127,6 +149,41 @@ mod tests {
             host: "github.com".into(),
             owner: "example".into(),
             repo: repo.into(),
+        }
+    }
+
+    #[test]
+    fn unchanged_head_still_refreshes_expired_or_invalid_factual_records() {
+        let candidate = RefreshCandidate {
+            repository: repository("old"),
+            default_branch: None,
+            head_sha: Some("same".into()),
+        };
+        for checked in [
+            "2026-07-01T00:00:00Z",
+            "2026-09-02T00:00:00Z",
+            "invalid",
+            "2026-09-17T00:00:00Z",
+        ] {
+            let state = CrawlStateRecord {
+                repository: repository("old"),
+                default_branch: None,
+                head_sha: Some("same".into()),
+                last_factual_crawl_at: Some(checked.into()),
+                last_synthesis_success_at: None,
+                last_synthesis_failure: None,
+                synthesis_model: None,
+            };
+            assert_eq!(
+                refresh_reason(
+                    &candidate,
+                    &[state],
+                    false,
+                    None,
+                    Some("2026-09-16T00:00:00Z")
+                ),
+                Some(RefreshReason::StaleFactualCrawl)
+            );
         }
     }
 
@@ -177,7 +234,7 @@ mod tests {
     #[test]
     fn schedule_refresh_requests_synthesis_after_failure_or_model_change() {
         let request = ScheduleRefreshRequest {
-            now: None,
+            now: Some("2026-03-17T12:00:00Z".into()),
             limit: 10,
             synthesize: true,
             synthesis_model: Some("gpt-5.4".into()),
@@ -238,7 +295,7 @@ mod tests {
     #[test]
     fn schedule_refresh_prioritizes_factual_work_when_limit_is_tight() {
         let request = ScheduleRefreshRequest {
-            now: None,
+            now: Some("2026-03-17T12:00:00Z".into()),
             limit: 1,
             synthesize: true,
             synthesis_model: Some("gpt-5.4".into()),

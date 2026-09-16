@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/chaitin/PandaWiki"
-generated_at = "2026-07-06T18:36:58.53279Z"
+generated_at = "2026-09-16T16:21:38.37759Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `.github/workflows/web.yml`. Filled `repo.name` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "https://github.com/chaitin/PandaWiki/security/advisories"` is intentional. Inferred `repo.build` from `.github/workflows/web.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh.'
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `web/package.json`. Filled `repo.name` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `web/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
 
 [repo]
 name = "PandaWiki"
@@ -32,7 +32,7 @@ languages = [
     "Dockerfile",
     "Shell",
 ]
-build = "pnpm run build"
+build = "pnpm build"
 topics = [
     "ai",
     "document",
@@ -47,16 +47,91 @@ topics = [
 
 [owners]
 maintainers = []
-security_contact = "https://github.com/chaitin/PandaWiki/security/advisories"
+security_contact = "unknown"
 
 [docs]
 root = "https://pandawiki.docs.baizhi.cloud/"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://pandawiki.docs.baizhi.cloud/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "unspecified"
+reason = "explicitly unknown"
+state = "not_found"
+valueJson = '"unknown"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "web/package.json"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"PandaWiki 是一款 AI 大模型驱动的开源知识库搭建系统，帮助你快速构建智能化的 产品文档、技术文档、FAQ、博客系统，借助大模型的力量为你提供 AI 创作、AI 问答、AI 搜索等能力。"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://pandawiki.docs.baizhi.cloud/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"PandaWiki"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:21:38.37759Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/chaitin/PandaWiki.git"
 default_branch = "main"
 fork = false
-head_sha = "b571a26dda030fcd34d3d5a3dc3d916c0a3a6a8d"
+head_sha = "9ab7d6f95dfc38a10019e8a5903743e3e7a84ae1"
 html_url = "https://github.com/chaitin/PandaWiki"
-stars = 9905
+stars = 10261

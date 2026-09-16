@@ -1,8 +1,10 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported repo.test from package.json as `npm test`.
-- Discovered related relation to github.com/moment/moment from package.json repository.
+- Imported maintainer candidates from CODEOWNERS.
+- Imported the security reporting channel from SECURITY.md.
+- Imported repo.build from package.json as `pnpm build`.
+- Imported repo.test from package.json as `pnpm test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `moment` from `GitHub API` after deterministic escalation.
@@ -13,10 +15,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Homepage normalization (2026-07-08)
-
-Normalized scheme-less homepage to `https://momentjs.com` so URL quality gates treat it as a high-confidence absolute URL.
-
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

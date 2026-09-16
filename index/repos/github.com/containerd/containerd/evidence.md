@@ -1,16 +1,19 @@
 # Evidence
 
-- Imported repository name and description from README.md.
-- Imported repo.build from go.mod as `go build ./...`.
-- Imported repo.test from go.mod as `go test ./...`.
+- Imported repository name from README.md.
+- Imported repo.build from Makefile as `make build`.
+- Imported repo.test from Makefile as `make test`.
+- Imported repo.toolchain.min from go.mod as `1.26.6` (Go).
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Deepened `owners.security_contact` from `README.md` during deterministic escalation.
+- Set `repo.name` to `containerd` from `GitHub API` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

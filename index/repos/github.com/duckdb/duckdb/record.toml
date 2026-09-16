@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/duckdb/duckdb"
-generated_at = "2026-07-01T17:52:59.972945Z"
+generated_at = "2026-09-16T16:13:09.779568Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "discord"
-description = "DuckDB is a high-performance analytical database system."
+name = "duckdb"
+description = "DuckDB is an analytical in-process SQL database management system"
 homepage = "http://www.duckdb.org"
 license = "MIT"
 visibility = "public"
@@ -24,17 +24,15 @@ languages = [
     "C++",
     "Python",
     "C",
-    "Julia",
     "Swift",
     "CMake",
     "HTML",
-    "Shell",
     "Makefile",
+    "Shell",
     "TSQL",
     "CSS",
 ]
-build = "make build"
-test = "make test"
+build = "make all"
 topics = [
     "sql",
     "database",
@@ -51,11 +49,86 @@ security_contact = "https://github.com/duckdb/duckdb/security/advisories/new"
 root = "https://duckdb.org/docs/current/sql/introduction"
 getting_started = "https://duckdb.org/docs/installation/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://duckdb.org/docs/installation/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://duckdb.org/docs/current/sql/introduction"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/duckdb/duckdb/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make all"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"DuckDB is an analytical in-process SQL database management system"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"http://www.duckdb.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"duckdb"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:13:09.779568Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/duckdb/duckdb.git"
-default_branch = "main"
+default_branch = "v2.0-cyanoptera"
 fork = false
-head_sha = "d9a775e4c03b23ecb3784f879196aa81adf0ac1c"
+head_sha = "3886b04f3bb381af7c0508f7bdfe4be6d866a391"
 html_url = "https://github.com/duckdb/duckdb"
-stars = 39131
+stars = 41312

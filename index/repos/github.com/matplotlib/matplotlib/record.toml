@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/matplotlib/matplotlib"
-generated_at = "2026-07-01T18:14:05.670742Z"
+generated_at = "2026-09-16T16:14:24.046818Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `.github/workflows/cibuildwheel.yml`, `tox.ini`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/cibuildwheel.yml`. Imported `repo.test` from `tox.ini`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
-name = "Install"
-description = "You've discovered a bug or something else you want to change — excellent!"
+name = "matplotlib"
+description = "matplotlib: plotting with Python"
 homepage = "https://matplotlib.org/stable/"
 visibility = "public"
 languages = [
@@ -33,8 +33,8 @@ languages = [
     "TeX",
     "Lua",
 ]
-build = "python -m build"
-test = "python -m pytest"
+build = "python -m build --sdist"
+test = "tox"
 topics = [
     "matplotlib",
     "data-visualization",
@@ -46,6 +46,10 @@ topics = [
     "plotting",
     "tk",
 ]
+
+[repo.toolchain]
+min = "3.12"
+ecosystem = "Python"
 
 [owners]
 maintainers = []
@@ -69,11 +73,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://matplotlib.org/stable/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://tidelift.com/security"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/cibuildwheel.yml"
+state = "present"
+valueJson = '"python -m build --sdist"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"matplotlib: plotting with Python"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://matplotlib.org/stable/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"matplotlib"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:14:24.046818Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "tox.ini"
+state = "present"
+valueJson = '"tox"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/matplotlib/matplotlib.git"
 default_branch = "main"
 fork = false
-head_sha = "c0a08db5a17bfcd080dc9054ce0c2a8c67f83173"
+head_sha = "cfa473e42fa41572d9acbd8d6b7be6f1489dee46"
 html_url = "https://github.com/matplotlib/matplotlib"
-stars = 22945
+stars = 23219

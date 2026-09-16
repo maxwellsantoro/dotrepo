@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/metabrainz/picard"
-generated_at = "2026-07-06T18:52:25.13891Z"
+generated_at = "2026-09-16T16:26:34.607082Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/workflows/package-pypi.yml`, `CONTRIBUTING.md`, and `pyproject.toml`. Inferred `repo.build` from `.github/workflows/package-pypi.yml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `CONTRIBUTING.md`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "MusicBrainz Picard"
@@ -27,7 +26,7 @@ languages = [
     "C",
     "PowerShell",
 ]
-build = "python -m build --sdist"
+build = "python -m build"
 test = "pytest -n auto"
 topics = [
     "python",
@@ -49,11 +48,87 @@ ecosystem = "Python"
 [docs]
 root = "https://picard-docs.musicbrainz.org/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://picard-docs.musicbrainz.org/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Picard is a cross-platform music tagger powered by the MusicBrainz database"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://picard.musicbrainz.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"MusicBrainz Picard"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:26:34.607082Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"pytest -n auto"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/metabrainz/picard.git"
 default_branch = "master"
 fork = false
-head_sha = "b2aeb8c0aea284fcd7af526215da5fcd3ba88128"
+head_sha = "39da53554fe1f26caec8349a5bb350ad22880722"
 html_url = "https://github.com/metabrainz/picard"
-stars = 4998
+stars = 5203

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/etcd-io/etcd"
-generated_at = "2026-07-01T18:00:52.973104Z"
+generated_at = "2026-09-16T16:13:18.886775Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, `Makefile`, `CONTRIBUTING.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "etcd"
-description = "**Note**: The `main branch may be in an *unstable or even broken state* during development."
+description = "Distributed reliable key-value store for the most critical data of a distributed system"
 homepage = "https://etcd.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -28,8 +28,8 @@ languages = [
     "Procfile",
     "Dockerfile",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make build"
+test = "go test -v -c -count 1"
 topics = [
     "etcd",
     "raft",
@@ -43,6 +43,10 @@ topics = [
     "cncf",
 ]
 
+[repo.toolchain]
+min = "1.27"
+ecosystem = "Go"
+
 [owners]
 maintainers = []
 security_contact = "https://github.com/etcd-io/etcd/blob/main/security/README.md"
@@ -50,11 +54,87 @@ security_contact = "https://github.com/etcd-io/etcd/blob/main/security/README.md
 [docs]
 root = "https://etcd.io"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://etcd.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/etcd-io/etcd/blob/main/security/README.md"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Distributed reliable key-value store for the most critical data of a distributed system"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://etcd.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"etcd"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:13:18.886775Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"go test -v -c -count 1"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/etcd-io/etcd.git"
 default_branch = "main"
 fork = false
-head_sha = "f7b23bbd3c61262e185c002079c3c4efd84a8bbd"
+head_sha = "0da1b60a2bb26b47f9680748a2acce1374ed2ea1"
 html_url = "https://github.com/etcd-io/etcd"
-stars = 51924
+stars = 52267

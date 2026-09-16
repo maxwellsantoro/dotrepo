@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/grpc-ecosystem/grpc-gateway"
-generated_at = "2026-07-06T18:45:09.207782Z"
+generated_at = "2026-09-16T16:24:11.825958Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, `Makefile`, and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/workflows/ci.yml`, `Makefile`, and `go.mod`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "gRPC-Gateway"
@@ -39,17 +38,93 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.25.0"
+min = "1.26.0"
 ecosystem = "Go"
 
 [docs]
 root = "https://grpc.io/docs/"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://grpc.io/docs/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/ci.yml"
+state = "present"
+valueJson = '"go build ./..."'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"gRPC to JSON proxy generator following the gRPC HTTP spec"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://grpc-ecosystem.github.io/grpc-gateway/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"gRPC-Gateway"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:24:11.825958Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/grpc-ecosystem/grpc-gateway.git"
 default_branch = "main"
 fork = false
-head_sha = "e1c5f8deb96d0b3a1143959f40a09c71c543f07e"
+head_sha = "5c6bd9b58d0c2ec26fdadb5fd303948ee335b915"
 html_url = "https://github.com/grpc-ecosystem/grpc-gateway"
-stars = 19946
+stars = 20002

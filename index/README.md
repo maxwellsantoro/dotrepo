@@ -242,3 +242,11 @@ planned target file, so already-indexed candidates do not consume growth slots.
 Those workflows read the checked-in profile-coverage and tranche baselines and
 pass the same Milestone 2 capacity fields to the planner that the canonical
 release gate uses.
+
+### Repository identity migrations
+
+`identity-migrations.json` records verified upstream renames/transfers. Each entry
+retains the old and new identities, numeric GitHub repository ID, and check time.
+The new identity is freshly crawled before the old overlay is removed. Old lookup
+paths become misses; consumers can follow the upstream repository redirect and
+retry the current identity. Crawler state does not resurrect removed identities.

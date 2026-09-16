@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/influxdata/influxdb"
-generated_at = "2026-07-01T18:08:37.519855Z"
+generated_at = "2026-09-16T16:13:59.934478Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `CONTRIBUTING.md`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "InfluxDB 3 Core"
-description = "Open source time series database for real-time events, analytics, and monitoring--powered by Apache Arrow, DataFusion, and Parquet."
+description = "Scalable datastore for metrics, events, and real-time analytics"
 homepage = "https://influxdata.com"
 license = "Apache-2.0"
 visibility = "public"
@@ -29,8 +29,8 @@ languages = [
     "HTML",
     "Dockerfile",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "cargo build"
+test = "cargo nextest run"
 topics = [
     "influxdb",
     "monitoring",
@@ -50,11 +50,87 @@ security_contact = "security@influxdata.com"
 root = "https://influxdata.com"
 getting_started = "https://docs.influxdata.com/influxdb3/core/get-started/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.influxdata.com/influxdb3/core/get-started/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://influxdata.com"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@influxdata.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"cargo build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Scalable datastore for metrics, events, and real-time analytics"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://influxdata.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"InfluxDB 3 Core"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:13:59.934478Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"cargo nextest run"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/influxdata/influxdb.git"
 default_branch = "main"
 fork = false
-head_sha = "d7834110b3680ba8e53d16333d158b18b8847bc7"
+head_sha = "693b1fd1b96cdcb980cf76a1004c0b3f1b46db48"
 html_url = "https://github.com/influxdata/influxdb"
-stars = 31596
+stars = 31745

@@ -1,7 +1,6 @@
 # Evidence
 
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
-- Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

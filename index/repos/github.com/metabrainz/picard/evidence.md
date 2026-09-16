@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Inferred repo.build from .github/workflows/package-pypi.yml as `python -m build --sdist`.
+- Inferred repo.build from pyproject.toml as `python -m build`.
 - Imported repo.test from CONTRIBUTING.md as `pytest -n auto`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -13,6 +13,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

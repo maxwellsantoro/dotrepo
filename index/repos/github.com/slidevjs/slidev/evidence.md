@@ -3,7 +3,7 @@
 - Imported repository name and docs entry points from README.md.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
-- Imported repo.toolchain.min from package.json as `20.12.0` (Node.js).
+- Imported repo.toolchain.min from package.json as `22.12.0` (Node.js).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

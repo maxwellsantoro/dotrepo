@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/usememos/memos"
-generated_at = "2026-07-01T18:35:02.318495Z"
+generated_at = "2026-09-16T16:16:58.865794Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, `.github/workflows/frontend-tests.yml`, and `go.mod`. Inferred `repo.build` from `.github/workflows/frontend-tests.yml`. Inferred `repo.test` from `.github/workflows/frontend-tests.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Warp"
-description = "Warp is an agentic development environment."
+name = "Memos"
+description = "Open-source, self-hosted note-taking tool built for quick capture. Markdown-native, lightweight, and fully yours."
 homepage = "https://usememos.com"
 license = "MIT"
 visibility = "public"
@@ -25,11 +25,12 @@ languages = [
     "TypeScript",
     "Shell",
     "CSS",
+    "JavaScript",
     "Dockerfile",
     "HTML",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "pnpm build"
+test = "pnpm test"
 topics = [
     "react",
     "go",
@@ -46,6 +47,10 @@ topics = [
     "own-your-data",
 ]
 
+[repo.toolchain]
+min = "1.27.0"
+ecosystem = "Go"
+
 [owners]
 maintainers = ["@usememos/moderators"]
 team = "@usememos/moderators"
@@ -54,11 +59,88 @@ security_contact = "dev@usememos.com"
 [docs]
 root = "https://usememos.com/docs"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://usememos.com/docs"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"dev@usememos.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "high"
+method = "extracted"
+reason = "clear CODEOWNERS team"
+source = "CODEOWNERS"
+state = "present"
+valueJson = '"@usememos/moderators"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/frontend-tests.yml"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Open-source, self-hosted note-taking tool built for quick capture. Markdown-native, lightweight, and fully yours."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://usememos.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Memos"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:16:58.865794Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/frontend-tests.yml"
+state = "present"
+valueJson = '"pnpm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/usememos/memos.git"
 default_branch = "main"
 fork = false
-head_sha = "0e1d821fb84310feff40b90d899403d45bced596"
+head_sha = "14d3c689dd29f00b715a7850084fb8273644288e"
 html_url = "https://github.com/usememos/memos"
-stars = 61185
+stars = 63110

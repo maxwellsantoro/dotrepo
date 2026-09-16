@@ -4,19 +4,20 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/streamlit/streamlit"
-generated_at = "2026-07-01T18:31:22.370703Z"
+generated_at = "2026-09-16T16:16:28.610175Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Makefile`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@streamlit/open-source-release-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `frontend/app/package.json`, and `lib/pyproject.toml`. Filled `repo.name` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@streamlit/open-source-release-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `frontend/app/package.json`. Imported `repo.test` from `frontend/app/package.json`. Imported `repo.toolchain.min` from `lib/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "streamlit"
-description = "A faster way to build and share data apps."
+description = "Streamlit — A faster way to build and share data apps."
 homepage = "https://streamlit.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -27,12 +28,11 @@ languages = [
     "Makefile",
     "Shell",
     "HTML",
-    "SCSS",
-    "Dockerfile",
     "CSS",
+    "Dockerfile",
 ]
-build = "make build"
-test = "make test"
+build = "npm run build"
+test = "npm test"
 topics = [
     "python",
     "machine-learning",
@@ -44,6 +44,10 @@ topics = [
     "developer-tools",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [owners]
 maintainers = ["@streamlit/open-source-release-team"]
 team = "@streamlit/open-source-release-team"
@@ -52,11 +56,87 @@ security_contact = "https://hackerone.com/snowflake?type=team"
 [docs]
 root = "https://docs.streamlit.io"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.streamlit.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://hackerone.com/snowflake?type=team"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@streamlit/open-source-release-team"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "frontend/app/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Streamlit — A faster way to build and share data apps."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://streamlit.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"streamlit"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:16:28.610175Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "frontend/app/package.json"
+state = "present"
+valueJson = '"npm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/streamlit/streamlit.git"
 default_branch = "develop"
 fork = false
-head_sha = "89cab1ad197b9197a6eacee93c4bbfca736c5dd3"
+head_sha = "b7d37f78ca7f24b6d460a212865f24f4e741e70c"
 html_url = "https://github.com/streamlit/streamlit"
-stars = 45123
+stars = 45767

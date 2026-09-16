@@ -10,6 +10,7 @@ use crate::validation::collect_record_dirs;
 
 mod compare;
 mod error;
+mod evidence;
 mod export;
 mod pagedigest;
 mod profile;

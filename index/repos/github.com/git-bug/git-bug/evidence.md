@@ -1,9 +1,9 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported repo.build from Makefile as `make build`.
-- Imported repo.test from Makefile as `go test -v -bench=. ./...`.
-- Imported repo.toolchain.min from go.mod as `1.25.0` (Go).
+- Imported repo.build from CONTRIBUTING.md as `make`.
+- Imported repo.test from CONTRIBUTING.md as `make test`.
+- Imported repo.toolchain.min from go.mod as `1.26.0` (Go).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

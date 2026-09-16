@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/OpenMined/PySyft"
-generated_at = "2026-07-06T18:30:11.781109Z"
+generated_at = "2026-09-16T16:19:19.467635Z"
 
 [record.trust]
 confidence = "high"
@@ -27,10 +27,10 @@ languages = [
     "HTML",
     "CSS",
     "HCL",
+    "Shell",
     "JavaScript",
     "Dockerfile",
     "Jinja",
-    "Shell",
 ]
 build = "just build"
 test = "pytest tests/unit/ -v"
@@ -51,13 +51,89 @@ min = "3.10"
 ecosystem = "Python"
 
 [docs]
-root = "https://www.openmined.org/"
+root = "https://github.com/OpenMined/PySyft/blob/dev/docs/API.md"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://github.com/OpenMined/PySyft/blob/dev/docs/API.md"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "justfile"
+state = "present"
+valueJson = '"just build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = """"Perform data science on data that remains in someone else's server""""
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.openmined.org/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"PySyft v2"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:19:19.467635Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"pytest tests/unit/ -v"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/OpenMined/PySyft.git"
 default_branch = "dev"
 fork = false
-head_sha = "e1c2b2f3c1bfdf3e2488a03d26fc8dc070dc6e8e"
+head_sha = "9bfbb6e8dceaf8cd1f4d065551d3d9f77b314d26"
 html_url = "https://github.com/OpenMined/PySyft"
-stars = 9918
+stars = 10031

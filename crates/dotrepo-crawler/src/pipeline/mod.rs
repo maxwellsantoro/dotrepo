@@ -5,6 +5,7 @@
 //! - [`writeback_gate`] — verified auto-promotion and downgrade preservation
 //! - [`synthesis`] — optional bounded synthesis after factual planning
 
+mod evidence;
 mod merge;
 mod synthesis;
 mod writeback_gate;
@@ -37,6 +38,32 @@ use merge::{
 use synthesis::{maybe_attempt_synthesis, synthesis_sources_from_materialized};
 use writeback_gate::apply_promotion_and_downgrade_guard;
 
+fn validate_snapshot_identity(
+    repository: &RepositoryRef,
+    snapshot: &GitHubRepositorySnapshot,
+) -> Result<()> {
+    let actual = dotrepo_core::repository_identity(&snapshot.html_url);
+    let expected = (
+        repository.host.to_lowercase(),
+        repository.owner.to_lowercase(),
+        repository.repo.to_lowercase(),
+    );
+    if actual
+        .map(|(h, o, r)| (h.to_lowercase(), o.to_lowercase(), r.to_lowercase()))
+        .as_ref()
+        != Some(&expected)
+    {
+        bail!(
+            "upstream repository identity changed to {}; refusing writeback under {}/{}/{}",
+            snapshot.html_url,
+            repository.host,
+            repository.owner,
+            repository.repo
+        );
+    }
+    Ok(())
+}
+
 pub(crate) fn crawl_repository_impl(
     request: &CrawlRepositoryRequest,
 ) -> Result<CrawlRepositoryReport> {
@@ -51,6 +78,7 @@ pub(crate) fn crawl_repository_with_client<C: GitHubClient>(
     validate_repository_identity(&request.repository)?;
 
     let snapshot = client.fetch_repository_snapshot(&request.repository)?;
+    validate_snapshot_identity(&request.repository, &snapshot)?;
     let files = client.fetch_repository_files(
         &request.repository,
         snapshot
@@ -100,6 +128,7 @@ pub(crate) fn crawl_repository_from_snapshot(
     materialized: &MaterializedRepository,
 ) -> Result<CrawlRepositoryReport> {
     validate_repository_identity(&request.repository)?;
+    validate_snapshot_identity(&request.repository, snapshot)?;
 
     let generated_at = request
         .generated_at
@@ -222,6 +251,9 @@ pub(crate) fn crawl_repository_from_snapshot(
         previous_manifest.as_ref(),
         &mut diagnostics,
     )?;
+
+    evidence::retain_field_evidence(&mut import_plan, &field_scores);
+    import_plan.manifest_text = render_manifest(&import_plan.manifest)?;
 
     let synthesis_sources = synthesis_sources_from_materialized(materialized);
     let (synthesis, synthesis_failure, synthesis_diagnostics) = maybe_attempt_synthesis(
@@ -946,6 +978,22 @@ description = "Prior verified description."
         };
 
         let report = crawl_repository_with_client(&request, &client).expect("crawl succeeds");
+        let transferred = FakeGitHubClient {
+            snapshot: GitHubRepositorySnapshot {
+                html_url: "https://github.com/example/renamed".into(),
+                ..client.snapshot.clone()
+            },
+            files: client.files.clone(),
+        };
+        assert!(crawl_repository_with_client(&request, &transferred)
+            .unwrap_err()
+            .to_string()
+            .contains("upstream repository identity changed"));
+        assert!(!request
+            .repository
+            .record_root(&index_root)
+            .join("record.toml")
+            .exists());
         let missing_head = FakeGitHubClient {
             snapshot: GitHubRepositorySnapshot {
                 head_sha: None,

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/firecrawl/firecrawl"
-generated_at = "2026-07-09T03:37:49.799574Z"
+generated_at = "2026-09-16T16:34:29.837338Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `apps/api/pack
 
 [repo]
 name = "firecrawl"
-description = "The API to search, scrape, and interact with the web at scale. 🔥"
+description = "The context API to search, scrape, and interact with the web at scale. 🔥"
 homepage = "https://firecrawl.dev"
 license = "AGPL-3.0"
 visibility = "public"
@@ -26,11 +26,12 @@ languages = [
     "Rust",
     "Java",
     "PHP",
-    "C#",
-    "Elixir",
     "Go",
+    "Elixir",
+    "C#",
     "Ruby",
     "Astro",
+    "PLpgSQL",
     "JavaScript",
     "Jupyter Notebook",
     "Shell",
@@ -78,11 +79,87 @@ maintainers = [
 [docs]
 root = "https://docs.firecrawl.dev"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.firecrawl.dev"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "apps/api/package.json"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The context API to search, scrape, and interact with the web at scale. 🔥"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://firecrawl.dev"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"firecrawl"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:34:29.837338Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "apps/api/package.json"
+state = "present"
+valueJson = '"pnpm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/firecrawl/firecrawl.git"
 default_branch = "main"
 fork = false
-head_sha = "e93c1c75019cd262261437b9adabdcc373640708"
+head_sha = "ad3188385c71439376658a940efc1068626f80f9"
 html_url = "https://github.com/firecrawl/firecrawl"
-stars = 147922
+stars = 181174

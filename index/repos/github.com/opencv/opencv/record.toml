@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/opencv/opencv"
-generated_at = "2026-07-06T18:55:54.323636Z"
+generated_at = "2026-09-16T16:27:38.894813Z"
 
 [record.trust]
 confidence = "high"
@@ -22,8 +22,8 @@ license = "Apache-2.0"
 visibility = "public"
 languages = [
     "C++",
-    "C",
     "Python",
+    "C",
     "CMake",
     "Java",
     "Objective-C++",
@@ -31,15 +31,15 @@ languages = [
     "Swift",
     "JavaScript",
     "Objective-C",
+    "CSS",
     "HTML",
     "Shell",
-    "Perl",
     "PowerShell",
-    "Kotlin",
     "TeX",
-    "Batchfile",
+    "Kotlin",
     "Prolog",
     "Dockerfile",
+    "Batchfile",
 ]
 topics = [
     "opencv",
@@ -71,11 +71,86 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://opencv.org"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "extracted"
+reason = "direct email or mailing list"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"security@opencv.org"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Open Source Computer Vision Library"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://opencv.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"OpenCV"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:27:38.894813Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/opencv/opencv.git"
-default_branch = "4.x"
+default_branch = "5.x"
 fork = false
-head_sha = "f6be96989ee057f9bc030a519d1a5bc12cb32d27"
+head_sha = "d28b36000412a433958be9e7ba6e0b83cdbe9741"
 html_url = "https://github.com/opencv/opencv"
-stars = 89613
+stars = 90858

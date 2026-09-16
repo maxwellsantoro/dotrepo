@@ -2,30 +2,32 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/cssnano/cssnano"
-generated_at = "2026-07-09T05:30:31.422476Z"
+generated_at = "2026-09-16T16:35:36.61451Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, `.github/workflows/pages.yml`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/pages.yml`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "cssnano"
-description = "A modular minifier, built on top of the PostCSS ecosystem."
+description = "A modular CSS minifier, built on top of the PostCSS ecosystem."
 homepage = "https://cssnano.github.io/cssnano/"
 license = "MIT"
 visibility = "public"
 languages = [
     "CSS",
     "JavaScript",
-    "Nunjucks",
+    "Astro",
+    "TypeScript",
 ]
-test = "pnpm test"
+build = "pnpm -C site build"
+test = "npm test"
 topics = [
     "postcss",
     "cssnano",
@@ -35,18 +37,99 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "22.11"
+min = "22.22.3"
 ecosystem = "Node.js"
+
+[owners]
+maintainers = []
+security_contact = "https://github.com/cssnano/cssnano/security/advisories/new"
 
 [docs]
 root = "https://cssnano.github.io/cssnano/"
 getting_started = "https://cssnano.github.io/cssnano/docs/getting-started"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://cssnano.github.io/cssnano/docs/getting-started"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://cssnano.github.io/cssnano/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
+state = "present"
+valueJson = '"https://github.com/cssnano/cssnano/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/pages.yml"
+state = "present"
+valueJson = '"pnpm -C site build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A modular CSS minifier, built on top of the PostCSS ecosystem."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://cssnano.github.io/cssnano/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"cssnano"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:35:36.61451Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/cssnano/cssnano.git"
-default_branch = "master"
+default_branch = "main"
 fork = false
-head_sha = "b0c6ed241c619c593a9d8ef8f8b64f73daff79d9"
+head_sha = "fbf63ee04703acdb4399e3f38c84d50a5ecf845e"
 html_url = "https://github.com/cssnano/cssnano"
-stars = 4971
+stars = 4976

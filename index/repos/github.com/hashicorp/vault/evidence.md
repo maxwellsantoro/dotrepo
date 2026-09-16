@@ -3,8 +3,8 @@
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Imported repo.build from Makefile as `make build`.
-- Imported repo.test from README.md as `go test -run 'TestRaft_Configuration_Docker' ./vault/external_tests/raft/raft_binary`.
-- Imported repo.toolchain.min from go.mod as `1.26.3` (Go).
+- Imported repo.test from Makefile as `make test`.
+- Imported repo.toolchain.min from go.mod as `1.27.1` (Go).
 - Discovered related relation to github.com/hashicorp/vault from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

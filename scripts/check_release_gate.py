@@ -186,6 +186,17 @@ def public_quality_dashboard_command(
     ]
 
 
+def current_high_signal_count(repo_root: Path) -> int:
+    count = 0
+    for path in (repo_root / "index/repos").glob("*/*/*/record.toml"):
+        record = tomllib.loads(path.read_text())["record"]
+        if record.get("status") in {"reviewed", "verified", "canonical"} and record.get(
+            "trust", {}
+        ).get("confidence") in {"medium", "high"}:
+            count += 1
+    return count
+
+
 def index_growth_tranche_command(repo_root: Path, output_root: Path) -> list[str]:
     baseline_path = repo_root / "scripts/fixtures/index_growth_tranche_baseline.json"
     baseline = json.loads(baseline_path.read_text())
@@ -197,7 +208,7 @@ def index_growth_tranche_command(repo_root: Path, output_root: Path) -> list[str
         raise SystemExit(
             f"invalid public profile coverage baseline schema: {profile_baseline_path}"
         )
-    current_high_signal = int(profile_baseline["minHighSignal"])
+    current_high_signal = current_high_signal_count(repo_root)
     min_selected = int(baseline["minSelected"])
     milestone_target = int(baseline["milestoneHighSignalTarget"])
     return [
@@ -1074,6 +1085,21 @@ def main() -> int:
     ]
     run(export_command, cwd=repo_root)
     run(
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/check_public_record_freshness.py",
+            "--public-root",
+            str(public_dir),
+            "--max-stale-or-unknown-rate",
+            "0.1",
+            "--output-json",
+            str(output_root / "public-record-freshness.json"),
+        ],
+        cwd=repo_root,
+    )
+    run(
         [sys.executable, "scripts/render_public_pages_landing.py", "--input", str(public_dir)],
         cwd=repo_root,
     )
@@ -1086,6 +1112,33 @@ def main() -> int:
         run(command, cwd=repo_root)
     run(
         public_factual_accuracy_command(repo_root, public_dir, output_root, args.generated_at),
+        cwd=repo_root,
+    )
+    run(
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/measure_public_factual_accuracy.py",
+            "--public-root",
+            str(public_dir),
+            "--workload",
+            "scripts/fixtures/public_upstream_accuracy_workload.json",
+            "--min-assertions",
+            "123",
+            "--min-repositories",
+            "32",
+            "--min-accuracy-rate",
+            "1.0",
+            "--max-missing-rate",
+            "0",
+            "--max-mismatch-rate",
+            "0",
+            "--output-json",
+            str(output_root / "independent-upstream-accuracy.json"),
+            "--output-md",
+            str(output_root / "independent-upstream-accuracy.md"),
+        ],
         cwd=repo_root,
     )
     run(

@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/modelcontextprotocol/servers"
-generated_at = "2026-07-01T18:17:05.91581Z"
+generated_at = "2026-09-16T16:15:01.980816Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Left `repo.test` unset because `.github/workflows/python.yml` and `.github/workflows/typescript.yml` suggested conflicting test commands. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `package.json`, `.github/workflows/typescript.yml`, and `src/fetch/pyproject.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/typescript.yml`. Imported `repo.toolchain.min` from `src/fetch/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Model Context Protocol servers"
@@ -24,12 +23,15 @@ visibility = "public"
 languages = [
     "TypeScript",
     "Python",
-    "JavaScript",
     "Dockerfile",
 ]
 build = "npm run build"
 test = "npm test --if-present"
 topics = []
+
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
 
 [owners]
 maintainers = []
@@ -39,11 +41,87 @@ security_contact = "https://docs.github.com/en/code-security/security-advisories
 root = "https://modelcontextprotocol.io"
 getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://modelcontextprotocol.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Model Context Protocol Servers"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://modelcontextprotocol.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Model Context Protocol servers"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:15:01.980816Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/typescript.yml"
+state = "present"
+valueJson = '"npm test --if-present"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/modelcontextprotocol/servers.git"
 default_branch = "main"
 fork = false
-head_sha = "b2a94a21a53f99bee21cef9485ed50b0991c350c"
+head_sha = "d73f99efbfd40c3aa1b61e88728b3d49fb52608f"
 html_url = "https://github.com/modelcontextprotocol/servers"
-stars = 87927
+stars = 90385

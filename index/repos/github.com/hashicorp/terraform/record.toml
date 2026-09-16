@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/hashicorp/terraform"
-generated_at = "2026-07-06T18:45:56.060844Z"
+generated_at = "2026-09-16T16:24:22.129298Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `go.mod`, and `.github/CONTRIBUTING.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/terraform-core` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.build` from `go.mod`. Imported `repo.test` from `.github/CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `go.mod`, and `.github/CONTRIBUTING.md`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/terraform-core` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.build` from `go.mod`. Imported `repo.test` from `.github/CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Terraform"
@@ -39,7 +38,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.26.4"
+min = "1.26.8"
 ecosystem = "Go"
 
 [owners]
@@ -57,11 +56,88 @@ team = "@hashicorp/terraform-core"
 root = "https://developer.hashicorp.com/terraform/docs"
 getting_started = "https://learn.hashicorp.com/terraform#getting-started"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://learn.hashicorp.com/terraform#getting-started"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://developer.hashicorp.com/terraform/docs"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "high"
+method = "extracted"
+reason = "clear CODEOWNERS team"
+source = "CODEOWNERS"
+state = "present"
+valueJson = '"@hashicorp/terraform-core"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
+state = "present"
+valueJson = '"go build ./..."'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Terraform enables you to safely and predictably create, change, and improve infrastructure. It is a source-available tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"http://developer.hashicorp.com/terraform"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Terraform"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:24:22.129298Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = ".github/CONTRIBUTING.md"
+state = "present"
+valueJson = '"go test ./..."'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/hashicorp/terraform.git"
 default_branch = "main"
 fork = false
-head_sha = "144d42f23d8b4fedd787724ae7ff50fbfba5ea04"
+head_sha = "f8e7458f5e427027f5b25e24a433c56f049aed3d"
 html_url = "https://github.com/hashicorp/terraform"
-stars = 48835
+stars = 49669

@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `pnpm build`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
