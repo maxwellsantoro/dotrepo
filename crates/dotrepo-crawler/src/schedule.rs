@@ -71,6 +71,7 @@ fn refresh_reason(
         return Some(RefreshReason::MissingFactualCrawl);
     }
 
+    // Start before the public 30-day expiry: 613 records at 50/day need 13 days.
     // HEAD equality does not revalidate mutable host metadata or old parser decisions.
     use time::{format_description::well_known::Rfc3339, OffsetDateTime};
     let now = match now {
@@ -83,7 +84,7 @@ fn refresh_reason(
         .and_then(|value| OffsetDateTime::parse(value, &Rfc3339).ok());
     if checked
         .zip(now)
-        .is_none_or(|(checked, now)| checked > now || now - checked > time::Duration::days(30))
+        .is_none_or(|(checked, now)| checked > now || now - checked >= time::Duration::days(14))
     {
         return Some(RefreshReason::StaleFactualCrawl);
     }
@@ -158,7 +159,12 @@ mod tests {
             default_branch: None,
             head_sha: Some("same".into()),
         };
-        for checked in ["2026-07-01T00:00:00Z", "invalid", "2026-09-17T00:00:00Z"] {
+        for checked in [
+            "2026-07-01T00:00:00Z",
+            "2026-09-02T00:00:00Z",
+            "invalid",
+            "2026-09-17T00:00:00Z",
+        ] {
             let state = CrawlStateRecord {
                 repository: repository("old"),
                 default_branch: None,

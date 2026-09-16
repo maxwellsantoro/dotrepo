@@ -655,8 +655,8 @@ without treating confident polyglot abstention as a ladder failure.
 Scheduled refresh now runs daily with a bounded 50-record inspection and crawl
 budget. At 613 records this gives approximately 13 days of nominal rotation
 capacity, leaving headroom within the 30-day record-age target. Throughput is a
-capacity estimate, not proof of successful refreshes. Records beyond 30 days
-qualify even if HEAD is unchanged; index membership takes precedence over stale
+capacity estimate, not proof of successful refreshes. Records at 14 days qualify even if HEAD is unchanged, so the full rotation can
+finish before the 30-day public freshness limit; index membership takes precedence over stale
 crawler-state identities. Redirected identities fail before writeback.
 
 For an explicitly requested catch-up, run:

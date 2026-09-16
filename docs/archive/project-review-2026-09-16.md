@@ -110,3 +110,7 @@ Automatic public deployment now follows successful default-branch CI.
 Python validation increased to 240 passing tests, including landing failure and
 race checks. Remote deployment and enablement results are recorded in the task
 that performs publication; the earlier local-only results above remain historical.
+
+The full local canonical release gate also passed with VSIX packaging and install
+smoke checks. Same-HEAD records become refresh-eligible at 14 days, leaving time
+for the 13-day nominal rotation before the public 30-day age limit.
