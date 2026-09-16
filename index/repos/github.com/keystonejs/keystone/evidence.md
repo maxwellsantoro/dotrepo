@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name, description, and docs entry points from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from package.json as `pnpm build`.
 - Inferred repo.test from .github/workflows/tests_ci.yml as `pnpm test:filters`.
@@ -11,8 +11,9 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

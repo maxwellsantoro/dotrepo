@@ -4,7 +4,7 @@
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.test from package.json as `npm test`.
-- Imported repo.toolchain.min from package.json as `6` (Node.js).
+- Imported repo.toolchain.min from package.json as `18` (Node.js).
 - Discovered related relation to github.com/sintaxi/harp from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

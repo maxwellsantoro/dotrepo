@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/openobserve/openobserve"
-generated_at = "2026-07-01T18:20:27.517956Z"
+generated_at = "2026-09-16T16:15:32.891481Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `web/package.json`, and `.github/workflows/api-testing.yml`. Imported `repo.build` from `web/package.json`. Inferred `repo.test` from `.github/workflows/api-testing.yml`. Imported `repo.toolchain.min` from `web/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "OpenObserve"
-description = "Open source Datadog alternative for logs, metrics, traces, and frontend monitoring."
+description = "Open source observability platform for logs, metrics, traces, RUM, Session replay, pipelines, SLO and LLM observability. A sophisticated, simple and highly performant alternative to Datadog, Splunk, and Elasticsearch with 140x lower storage costs and single binary deployment."
 homepage = "https://openobserve.ai"
 license = "AGPL-3.0"
 visibility = "public"
@@ -26,15 +26,19 @@ languages = [
     "Vue",
     "JavaScript",
     "Python",
-    "SCSS",
     "CSS",
     "Shell",
-    "Dockerfile",
     "HTML",
+    "Kotlin",
+    "Swift",
+    "Objective-C",
+    "Dockerfile",
+    "Ruby",
+    "Objective-C++",
     "Makefile",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "npm run build"
+test = "rye run pytest --ignore=tests/regression --ignore=tests/query_agent --ignore=tests/vortex --junitxml=junit-integration.xml"
 topics = [
     "logs",
     "metrics",
@@ -58,13 +62,17 @@ topics = [
     "rust-lang",
 ]
 
+[repo.toolchain]
+min = "20"
+ecosystem = "Node.js"
+
 [owners]
 maintainers = []
 security_contact = "security@openobserve.ai"
 
 [docs]
-root = "https://openobserve.ai/docs/#project-status-features-and-roadmap"
-getting_started = "https://openobserve.ai/docs/quickstart"
+root = "https://openobserve.ai/docs/"
+getting_started = "https://openobserve.ai/docs/quickstart/"
 
 [relations]
 references = []
@@ -81,11 +89,87 @@ provenance = [
     "manifest",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://openobserve.ai/docs/quickstart/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://openobserve.ai/docs/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@openobserve.ai"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "web/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Open source observability platform for logs, metrics, traces, RUM, Session replay, pipelines, SLO and LLM observability. A sophisticated, simple and highly performant alternative to Datadog, Splunk, and Elasticsearch with 140x lower storage costs and single binary deployment."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://openobserve.ai"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"OpenObserve"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:15:32.891481Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/api-testing.yml"
+state = "present"
+valueJson = '"rye run pytest --ignore=tests/regression --ignore=tests/query_agent --ignore=tests/vortex --junitxml=junit-integration.xml"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/openobserve/openobserve.git"
 default_branch = "main"
 fork = false
-head_sha = "da5c9a930452314273d0b093b538a5d2b1b1cd84"
+head_sha = "f18ef5cf343d573c7150b90018be090e705c60e3"
 html_url = "https://github.com/openobserve/openobserve"
-stars = 19654
+stars = 21960

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pingcap/tidb"
-generated_at = "2026-07-01T18:21:21.296091Z"
+generated_at = "2026-09-16T16:15:35.376313Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `Makefile`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "TiDB, a distributed SQL database"
-description = "Learn more details about TiDB architecture in our Docs."
+description = "TiDB is built for agentic workloads that grow unpredictably, with ACID guarantees and native support for transactions, analytics, and vector search. No data silos. No noisy neighbors. No infrastructure ceiling."
 homepage = "https://www.tidb.io/"
 license = "Apache-2.0"
 visibility = "public"
@@ -33,8 +33,8 @@ languages = [
     "Ragel",
     "Go Template",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "make all"
+test = "make test"
 topics = [
     "distributed-database",
     "distributed-transactions",
@@ -56,6 +56,10 @@ topics = [
     "ai",
     "memory",
 ]
+
+[repo.toolchain]
+min = "1.25.12"
+ecosystem = "Go"
 
 [owners]
 maintainers = [
@@ -83,11 +87,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart?utm_source=github&utm_medium=tidb"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.pingcap.com/tidb/stable/tidb-architecture?utm_source=github&utm_medium=tidb"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@pingcap.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make all"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"TiDB is built for agentic workloads that grow unpredictably, with ACID guarantees and native support for transactions, analytics, and vector search. No data silos. No noisy neighbors. No infrastructure ceiling."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.tidb.io/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"TiDB, a distributed SQL database"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:15:35.376313Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/pingcap/tidb.git"
 default_branch = "master"
 fork = false
-head_sha = "f3fe821673800f3b7829abf2fb40add8edb0ea8e"
+head_sha = "b82bed1eca2fcbe58f0fc074fff53e1fc49daa8c"
 html_url = "https://github.com/pingcap/tidb"
-stars = 40235
+stars = 40534

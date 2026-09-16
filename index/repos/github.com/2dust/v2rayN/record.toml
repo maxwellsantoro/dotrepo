@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/2dust/v2rayN"
-generated_at = "2026-07-09T03:27:13.009879Z"
+generated_at = "2026-09-16T16:34:06.065866Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `v2rayN/v2rayN.sln`. Inferred `repo.build` from `v2rayN/v2rayN.sln`. Inferred `repo.test` from `v2rayN/v2rayN.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `v2rayN/v2rayN.sln`. Inferred `repo.build` from `v2rayN/v2rayN.sln`. Inferred `repo.test` from `v2rayN/v2rayN.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "v2rayN"
@@ -44,11 +43,87 @@ topics = [
 [docs]
 root = "https://v2rayn.2dust.link"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://v2rayn.2dust.link"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "v2rayN/v2rayN.sln"
+state = "present"
+valueJson = '"dotnet build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A GUI client for Windows, Linux and macOS, support Xray and sing-box and others"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://v2rayn.2dust.link"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"v2rayN"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:34:06.065866Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "v2rayN/v2rayN.sln"
+state = "present"
+valueJson = '"dotnet test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/2dust/v2rayN.git"
 default_branch = "master"
 fork = false
-head_sha = "ad12a6c456f689ed7f7ad733abeb7fb99524b2b1"
+head_sha = "cef40d38eec545dbe5a736602549d2b72c4f64bc"
 html_url = "https://github.com/2dust/v2rayN"
-stars = 110878
+stars = 116300

@@ -4,78 +4,73 @@
 [![Latest Release](https://img.shields.io/github/v/release/maxwellsantoro/dotrepo)](https://github.com/maxwellsantoro/dotrepo/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e.svg)](LICENSE)
 
-**dotrepo** is an open metadata protocol and shared semantic cache for software
-repositories. It makes repository understanding reusable instead of forcing
-every human and agent to fetch, parse, and infer the same basic facts again.
+**Repository facts your agents can reuse.**
 
-It packages that into three aligned surfaces:
-- **maintainers** get one structured source of truth and tools that keep supported repository surfaces from drifting
-- **users** get consistent, evidence-linked project orientation and an increasingly useful research index
-- **agents and tools** get compact, trust-aware repository facts before resorting to cloning or scraping
+**dotrepo** provides structured project metadata, build and test commands,
+documentation links, and ownership information through an HTTP API, MCP server,
+and CLI. Records carry provenance, evidence pointers, conflicts, and record age
+so tools can decide what to use and when to inspect upstream sources.
 
-Repositories that have not adopted dotrepo can still receive autonomously
-generated overlays. The pipeline uses deterministic parsers first, escalates
-only unresolved fields through progressively stronger model tiers, validates
-all output against evidence, and publishes uncertainty instead of inventing
-certainty. Maintainers can later publish a native `.repo` and become the
-canonical authority.
+The immediate use is repository orientation and operational metadata. Architecture
+research, suitability decisions, debugging, and code changes still require source
+inspection. Making that basic orientation reusable is the first step toward the
+longer-term mission of reusable repository understanding.
 
-The goal is not to replace project documentation or character. It is to pay the
-cost of basic repository understanding when a project changes, then reuse that
-understanding across future tools, users, and research tasks.
+## Try a lookup
 
-Project site and hosted public surface:
-[dotrepo.org](https://dotrepo.org/)
-
-## See it in 60 seconds
-
-This repository now ships its own native [`.repo`](.repo). A minimal slice of
-that record looks like:
-
-```toml
-schema = "dotrepo/v0.1"
-
-[record]
-mode = "native"
-status = "canonical"
-
-[record.trust]
-confidence = "high"
-provenance = ["declared", "verified"]
-notes = "Maintainer-controlled source of truth."
-
-[repo]
-name = "dotrepo"
-description = "Open metadata protocol for software repositories"
-build = "cargo build --workspace"
-test = "cargo test --workspace"
-
-[repo.toolchain]
-min = "1.90.0"
-ecosystem = "Rust"
-```
-
-What the CLI gives you once `dotrepo` is on your `PATH`:
+No installation or maintainer adoption is required for an indexed repository:
 
 ```bash
-dotrepo --root examples/native-minimal validate
-dotrepo --root examples/native-minimal query repo.build --raw
-dotrepo --root examples/native-minimal trust
+curl -sS https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/profile.json
 ```
 
-```text
-manifest valid
-cargo build
-selected: .repo (Native, Canonical)
-selection reason: only matching record
-source: none
-confidence: high
-provenance: declared, verified
-notes: Maintainer-controlled source of truth.
+The profile groups purpose, execution, documentation, ownership, completeness,
+and trust. Check `record.generatedAt` and `record.freshnessStatus` before using a
+value. The top-level `freshness.generatedAt` dates the export, not the upstream
+facts. Refreshed records also expose `fieldEvidence`: source, extraction method,
+assessment, reason, and check time where the crawler retained them. Older records
+do not acquire field-level evidence simply by being re-exported.
+
+With `dotrepo-mcp` installed, call:
+
+```json
+{
+  "name": "dotrepo.lookup",
+  "arguments": {
+    "repositoryUrl": "https://github.com/BurntSushi/ripgrep",
+    "path": "repo.test"
+  }
+}
 ```
 
-That is the wedge: dotrepo does not just answer a repository question, it tells
-you why that answer should be trusted.
+Use dotrepo as a first lookup with explicit fallback. A found profile can still
+be stale, incomplete, or conflicting. See the
+[integration guide](docs/external-consumer-integration.md) and the runnable
+[consumer example](examples/external-consumer/) for task-specific checks.
+
+## What is proven today
+
+The reference toolchain and hosted lookup surface are implemented. Coverage and
+quality are still partial. The [live measurement page](https://dotrepo.org/efficiency/)
+reports field presence and modeled requests; presence is not accuracy, and modeled
+requests are not measured end-to-end agent savings.
+
+The [independent head-to-head benchmark](benchmarks/head-to-head/) retains both
+wins and losses. Fixing the examples it exposed is regression evidence, not proof
+of generalization. A native maintainer record, record-wide verification, and
+field-level correctness are different properties.
+
+Sustained independent consumer adoption remains an open success criterion.
+In-repository clients and AI interviews demonstrate or explore an integration;
+they do not establish external demand.
+
+## For maintainers
+
+A native `.repo` gives you a structured source of truth and tools to keep supported
+documentation blocks consistent. You can start from existing files or a generated
+overlay, inspect the result, and publish your own authoritative record. Overlays
+make indexed repositories usable before adoption; native records provide
+maintainer control without being required for coverage.
 
 ## Quick start
 
@@ -109,7 +104,7 @@ If you want to contribute to the protocol, toolchain, or public index, start wit
 
 ## What dotrepo is
 
-dotrepo has three inseparable parts:
+dotrepo has three cooperating parts:
 
 1. **A protocol**
    A versioned `.repo` schema for essential repository metadata, provenance, trust, and synchronization hints.
@@ -271,7 +266,6 @@ Those are separate version lines on purpose:
 - a seeded `index/` tree with real overlay layout and validation rules
 - GitHub Actions workflows for workspace CI, operator-gate claim checks,
   release-gate packaging, and Cloudflare deployment
-- public-facing docs with a balanced tone around ambition, safety, and practicality
 
 ## What dotrepo does not claim yet
 

@@ -346,3 +346,16 @@ def test_inferred_language_family_uses_dominant_language_not_any_occurrence() ->
 
     manifest = {"repo": {"languages": ["Rust", "Go"]}}
     assert accuracy.inferred_language_family(manifest) == "Rust"
+
+
+def test_missing_repository_is_not_a_correct_abstention(tmp_path):
+    assertion = {
+        "id": "missing-repo",
+        "repository": "github.com/example/absent",
+        "path": "repo.test",
+        "expected": None,
+        "source": {"url": "https://example.invalid", "locator": "test", "checkedAt": "2026-09-16"},
+    }
+    result = accuracy.analyze_assertion(assertion, tmp_path, {})
+    assert result["outcome"] == "missing"
+    assert not result["correctAbstention"]

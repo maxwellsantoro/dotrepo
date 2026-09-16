@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/gohugoio/hugo"
-generated_at = "2026-07-01T18:04:19.761301Z"
+generated_at = "2026-09-16T16:13:42.800892Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Hugo"
-description = "A fast and flexible static site generator built with love by [bep][], [spf13][], and [friends][] in Go."
+description = "The world’s fastest framework for building websites."
 homepage = "https://gohugo.io"
 license = "Apache-2.0"
 visibility = "public"
@@ -43,6 +43,10 @@ topics = [
     "documentation-tool",
 ]
 
+[repo.toolchain]
+min = "1.27.0"
+ecosystem = "Go"
+
 [owners]
 maintainers = []
 security_contact = "bjorn.erik.pedersen@gmail.com"
@@ -51,11 +55,87 @@ security_contact = "bjorn.erik.pedersen@gmail.com"
 root = "https://gohugo.io/documentation"
 getting_started = "https://gohugo.io/installation"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://gohugo.io/installation"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://gohugo.io/documentation"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"bjorn.erik.pedersen@gmail.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
+state = "present"
+valueJson = '"go build ./..."'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The world’s fastest framework for building websites."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://gohugo.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Hugo"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:13:42.800892Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
+state = "present"
+valueJson = '"go test ./..."'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/gohugoio/hugo.git"
 default_branch = "master"
 fork = false
-head_sha = "a5ec54239312c160b82e303f159c4bdb2e030ab5"
+head_sha = "ec57bb7d348989513b919c7ea9ff08fed0bec327"
 html_url = "https://github.com/gohugoio/hugo"
-stars = 88808
+stars = 89843

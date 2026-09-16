@@ -51,16 +51,24 @@ pub(crate) fn infer_package_json_commands(file: &ImportedFile) -> Option<Importe
             .and_then(serde_json::Value::as_str),
     );
 
-    let build = pick_node_script_command(scripts, &["build", "compile", "dist", "bundle"], || {
-        runner.build_command()
-    });
-    let test =
-        pick_node_script_command(scripts, &["test"], || runner.test_command()).filter(|_| {
-            scripts
-                .get("test")
-                .and_then(serde_json::Value::as_str)
-                .is_none_or(|v| !is_placeholder_package_json_test_script(v))
+    let build =
+        pick_node_script_command(scripts, &["build", "compile", "dist", "bundle"], |name| {
+            runner.script_command(name)
         });
+    // A monorepo may only declare test-all. Never turn that into an absent
+    // root test script or a package-local example from its contribution guide.
+    let tests = scripts
+        .iter()
+        .filter(|(_, value)| {
+            value
+                .as_str()
+                .is_some_and(|v| !is_placeholder_package_json_test_script(v))
+        })
+        .map(|(k, v)| (k.clone(), v.clone()))
+        .collect();
+    let test = pick_node_script_command(&tests, &["test", "test-all"], |name| {
+        runner.script_command(name)
+    });
 
     if build.is_none() && test.is_none() {
         return None;

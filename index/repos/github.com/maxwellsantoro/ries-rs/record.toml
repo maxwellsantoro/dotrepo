@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/maxwellsantoro/ries-rs"
-generated_at = "2026-07-06T19:08:19.998986Z"
+generated_at = "2026-09-16T16:31:27.131449Z"
 
 [record.trust]
 confidence = "high"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `package.json`, and `ries-py/pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `ries-py/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "ries-rs"
@@ -41,6 +41,10 @@ topics = [
     "wasm",
     "inverse-symbolic-calculator",
 ]
+
+[repo.toolchain]
+min = "3.8"
+ecosystem = "Python"
 
 [owners]
 maintainers = ["@maxwellsantoro"]
@@ -75,6 +79,83 @@ provenance = [
     "declared",
     "readme",
 ]
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://maxwellsantoro.com/projects/ries-rs/app/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
+state = "present"
+valueJson = '"https://github.com/maxwellsantoro/ries-rs/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"High-performance Rust reimplementation of Robert Munafo’s RIES (RILYBOT Inverse Equation Solver). Given any target number, it discovers elegant algebraic expressions and equations that evaluate exactly to it — now with parallel search, PSLQ integer relations, Python bindings, and WebAssembly support."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://maxwellsantoro.com/projects/ries-rs/app/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"ries-rs"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:27.131449Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm test"'
 
 [x.github]
 archived = false

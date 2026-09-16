@@ -1,11 +1,11 @@
 # Evidence
 
+- Imported repository docs entry points from README.md.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `pnpm build`.
 - Imported repo.test from package.json as `pnpm test`.
-- Imported repo.toolchain.min from package.json as `22.18.0` (Node.js).
+- Imported repo.toolchain.min from package.json as `24` (Node.js).
 - Discovered related relation to github.com/gitkraken/vscode-gitlens from package.json repository.
-- Discovered related relation to github.com/gitkraken/gitlens-docs from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

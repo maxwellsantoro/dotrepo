@@ -1,8 +1,8 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Inferred repo.build from pyproject.toml as `python -m build`.
-- Imported repo.test from Makefile as `make test`.
+- Imported repo.build from managed_agents/roadtrip_planner/package.json as `npm run build`.
+- Imported repo.test from tox.ini as `tox`.
 - Imported repo.toolchain.min from pyproject.toml as `3.11` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
@@ -11,6 +11,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Auto-promotion
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/shadcn-ui/ui"
-generated_at = "2026-07-01T18:28:37.719591Z"
+generated_at = "2026-09-16T16:16:17.81759Z"
 
 [record.trust]
 confidence = "high"
@@ -16,7 +16,7 @@ notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECUR
 
 [repo]
 name = "shadcn/ui"
-description = "A set of beautifully designed components that you can customize, extend, and build on."
+description = "Composable, accessible components with thoughtful defaults. Build your own component library with code you can customize, extend, and make your own."
 homepage = "https://ui.shadcn.com"
 license = "MIT"
 visibility = "public"
@@ -44,6 +44,8 @@ topics = [
     "laravel",
     "tanstack",
     "vite",
+    "react-aria",
+    "react-aria-components",
 ]
 
 [owners]
@@ -53,11 +55,87 @@ security_contact = "https://github.com/shadcn-ui/ui/security/advisories/new"
 [docs]
 root = "https://ui.shadcn.com"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://ui.shadcn.com"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/shadcn-ui/ui/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Composable, accessible components with thoughtful defaults. Build your own component library with code you can customize, extend, and make your own."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://ui.shadcn.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"shadcn/ui"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:16:17.81759Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/shadcn-ui/ui.git"
 default_branch = "main"
 fork = false
-head_sha = "dbf9c5ebc430888ffae9baea9502c44c29b97304"
+head_sha = "f5bb039c749afd2d111ad970dfaa9ab30bd90b3b"
 html_url = "https://github.com/shadcn-ui/ui"
-stars = 117772
+stars = 123961

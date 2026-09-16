@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/Kludex/starlette"
-generated_at = "2026-07-06T18:29:03.785068Z"
+generated_at = "2026-09-16T16:18:45.228305Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Starlette"
@@ -57,11 +56,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://asgi.readthedocs.io/en/latest/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The little ASGI framework that shines. 🌟"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://starlette.dev"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Starlette"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:18:45.228305Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m pytest"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/Kludex/starlette.git"
 default_branch = "main"
 fork = false
-head_sha = "5174d4c8358a6f06aa8056bafd14c2272dab8dd1"
+head_sha = "03f12b7fcf0a3e21a8da648ca0900c79472e9efe"
 html_url = "https://github.com/Kludex/starlette"
-stars = 12457
+stars = 12616

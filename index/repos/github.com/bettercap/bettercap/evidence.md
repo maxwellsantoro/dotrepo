@@ -18,10 +18,3 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
-
-## Security contact evidence refresh (2026-09-16)
-
-- Replaced `owners.security_contact = "unknown"` with `evilsocket@gmail.com`.
-- Source: [SECURITY.md at `8eca2820f3c41d2004434ed5a291d87462caeeb7`](https://github.com/bettercap/bettercap/blob/8eca2820f3c41d2004434ed5a291d87462caeeb7/SECURITY.md), fetched at the pinned commit on 2026-09-16.
-- Normalized the explicitly documented mailbox `evilsocket AT gmail DOT com` to `evilsocket@gmail.com`; no address was guessed.
-- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

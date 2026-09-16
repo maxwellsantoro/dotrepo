@@ -2,7 +2,7 @@
 
 - Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS.
-- Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from Makefile as `make build`.
 - Imported repo.test from Makefile as `make test`.
@@ -17,17 +17,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Security contact normalization (2026-07-08)
-
-Replaced non-actionable `security_contact` value `https://github.com/junegunn/fzf` with `unknown`. The prior URL was not an email or actionable vulnerability-reporting surface (promotion scoring: medium-present). Honest absence unblocks auto-publish without inventing a reporting channel.
-
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
-
-## Security contact evidence refresh (2026-09-16)
-
-- Replaced `owners.security_contact = "unknown"` with `junegunn.c@gmail.com`.
-- Source: [SECURITY.md at `b1be3a8be1b833ce5b92fbbac11637643d60a046`](https://github.com/junegunn/fzf/blob/b1be3a8be1b833ce5b92fbbac11637643d60a046/SECURITY.md), fetched at the pinned commit on 2026-09-16.
-- Normalized the explicitly documented mailbox `junegunn.c AT gmail DOT com` to `junegunn.c@gmail.com`; no address was guessed.
-- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

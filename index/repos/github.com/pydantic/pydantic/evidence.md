@@ -1,8 +1,9 @@
 # Evidence
 
-- Imported repository name, description, and docs entry points from README.md.
-- Imported repo.build from pyproject.toml as `python -m build`.
-- Imported repo.test from pyproject.toml as `python -m pytest`.
+- Imported repository name and docs entry points from README.md.
+- Imported repo.build from Makefile as `make all`.
+- Imported repo.test from Makefile as `make test`.
+- Imported repo.toolchain.min from pydantic-core/Cargo.toml as `1.88` (Rust).
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Deepened `owners.security_contact` from `README.md` during deterministic escalation.
@@ -11,6 +12,7 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

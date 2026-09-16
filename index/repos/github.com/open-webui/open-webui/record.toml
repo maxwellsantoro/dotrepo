@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/open-webui/open-webui"
-generated_at = "2026-07-06T19:08:26.032485Z"
+generated_at = "2026-09-16T16:31:30.776744Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `package.json`, `.github/workflows/frontend.yaml`, and `pyproject.toml`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/frontend.yaml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `package.json`, `.github/workflows/frontend.yaml`, and `pyproject.toml`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/frontend.yaml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Open WebUI 👋"
@@ -81,11 +80,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.openwebui.com/getting-started/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://openwebui.com"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/open-webui/open-webui/security"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"User-friendly AI Interface (Supports Ollama, OpenAI API, ...)"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://openwebui.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Open WebUI 👋"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:30.776744Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/frontend.yaml"
+state = "present"
+valueJson = '"npm run test:frontend"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/open-webui/open-webui.git"
 default_branch = "main"
 fork = false
-head_sha = "ecd48e2f718220a6400ecf49eafd4867a38feb10"
+head_sha = "0a7c15832fb30b1903753e83f81dc7d27e5b0944"
 html_url = "https://github.com/open-webui/open-webui"
-stars = 144445
+stars = 152278

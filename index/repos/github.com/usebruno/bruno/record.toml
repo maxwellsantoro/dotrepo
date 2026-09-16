@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/usebruno/bruno"
-generated_at = "2026-07-06T19:05:38.968095Z"
+generated_at = "2026-09-16T16:30:35.773239Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/flaky-test-detector.yml`. Inferred `repo.build` from `.github/workflows/flaky-test-detector.yml`. Inferred `repo.test` from `.github/workflows/flaky-test-detector.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `packages/bruno-app/package.json`. Imported `repo.build` from `packages/bruno-app/package.json`. Imported `repo.test` from `packages/bruno-app/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Bruno"
@@ -29,10 +28,11 @@ languages = [
     "CSS",
     "Shell",
     "Dockerfile",
+    "MDX",
     "NSIS",
 ]
-build = "npm run build:graphql-docs"
-test = "xvfb-run npm run test:e2e"
+build = "npm run build"
+test = "npm test"
 topics = [
     "api-client",
     "git",
@@ -59,17 +59,94 @@ maintainers = [
     "@sid-bruno",
     "@vijayh-bruno",
     "@utkarsh-bruno",
+    "@sachin-thakur-bruno",
     "@sanish-bruno",
 ]
 
 [docs]
 root = "https://docs.usebruno.com"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.usebruno.com"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "packages/bruno-app/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = """"Opensource IDE For Exploring and Testing API's (lightweight alternative to Postman/Insomnia)""""
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.usebruno.com/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Bruno"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:30:35.773239Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "packages/bruno-app/package.json"
+state = "present"
+valueJson = '"npm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/usebruno/bruno.git"
 default_branch = "main"
 fork = false
-head_sha = "cbed13a3468eef6768a610e2ae7cccaab03f84ae"
+head_sha = "c022c215f58c3af2f827ec1d202ddc3561e89dad"
 html_url = "https://github.com/usebruno/bruno"
-stars = 45390
+stars = 46989

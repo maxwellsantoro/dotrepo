@@ -122,7 +122,7 @@ def test_threshold_gates_mark_report_failed() -> None:
     }
     assert report["gates"]["maxDotrepoToScrapeProxyRatio"] == {
         "threshold": 1.0,
-        "actual": 6.4617,
+        "actual": 6.5501,
         "passed": False,
     }
     assert report["gates"]["minTasks"]["passed"] is False

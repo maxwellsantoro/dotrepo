@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/astral-sh/ruff"
-generated_at = "2026-07-06T19:08:59.154843Z"
+generated_at = "2026-09-16T16:31:43.878137Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Cargo.toml`, and `CONTRIBUTING.md`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `Cargo.toml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `playground/ruff/package.json`, `CONTRIBUTING.md`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `playground/ruff/package.json`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Ruff"
@@ -29,10 +28,9 @@ languages = [
     "CSS",
     "HTML",
     "Dockerfile",
-    "JavaScript",
     "RenderScript",
 ]
-build = "cargo build --workspace"
+build = "npm run build"
 test = "cargo test"
 topics = [
     "linter",
@@ -49,7 +47,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.94"
+min = "1.96"
 ecosystem = "Rust"
 
 [owners]
@@ -89,11 +87,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.astral.sh/ruff/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "playground/ruff/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"An extremely fast Python linter and code formatter, written in Rust."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://docs.astral.sh/ruff"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Ruff"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:43.878137Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"cargo test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/astral-sh/ruff.git"
 default_branch = "main"
 fork = false
-head_sha = "d2bba25f69db4ff08b55a8c7d0e9c963121af684"
+head_sha = "9e5ac057c9ea01e0358e79bace5249199352e528"
 html_url = "https://github.com/astral-sh/ruff"
-stars = 48452
+stars = 49651

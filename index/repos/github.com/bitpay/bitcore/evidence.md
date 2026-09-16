@@ -2,6 +2,7 @@
 
 - Imported repository name from README.md.
 - Imported repo.build from package.json as `npm run build`.
+- Imported repo.toolchain.min from package.json as `22` (Node.js).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

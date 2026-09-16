@@ -18,6 +18,41 @@ from bench.model import Answer, Outcome, score_answer, values_match  # noqa: E40
 from bench.run import load_gold, run, summarize  # noqa: E402
 
 
+def test_lookup_first_counts_lookup_and_fallback_without_using_stale_values():
+    import json
+    from bench.arms.lookup_first import LookupFirstArm
+
+    class ProfileHttp:
+        def get(self, url):
+            body = json.dumps(
+                {
+                    "identity": {"host": "github.com", "owner": "example", "repo": "test"},
+                    "record": {"generatedAt": "2000-01-01T00:00:00Z"},
+                    "execution": {"test": "wrong old command"},
+                }
+            )
+            return 200, body, 100, 10
+
+    class Fallback:
+        calls = 0
+
+        def prefetch(self, repo):
+            self.calls += 1
+
+        def answer(self, repo, field):
+            return Answer("cargo test", "medium", "upstream", 200, 20)
+
+    arm = LookupFirstArm(ProfileHttp(), "https://example.invalid")
+    arm.fallback = Fallback()
+    arm.prefetch("github.com/example/test")
+    answer = arm.answer("github.com/example/test", FIELDS_BY_ID["test"])
+    assert answer.value == "cargo test"
+    assert answer.bytes_over_wire == 300
+    assert answer.latency_ms == 30
+    assert arm.fallback.calls == 1
+    assert arm.events[0]["fallbackReasons"] == ["stale-record"]
+
+
 def test_independent_gold_has_evidence_and_frozen_cohorts() -> None:
     items = load_gold(str(BENCH_ROOT / "gold.independent.yaml"))
 

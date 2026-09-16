@@ -74,8 +74,7 @@ uv run python examples/external-consumer/lookup_before_scrape.py \
 ```
 
 Live non-operator production traffic remains an ops follow-up after a third-party
-framework adopts the reference pattern. The in-repo client is not operator CI
-smoke; it is the integration template.
+framework adopts the reference pattern. The in-repo client is a reference implementation, not an independent consumer.
 
 ## Success signal
 
@@ -83,3 +82,17 @@ Sustained hosted-API or MCP traffic from **non-operator** consumers, plus a
 growing lookup-miss list that is not empty only because logs were never
 exported. Distribution outranks maintainer-adoption polish until that signal
 exists.
+
+## Evidence required before claiming adoption or savings
+
+Keep reference runs separate from independent consumers. A pilot report must
+identify a consenting external consumer, its integration URL, workload selection,
+time window, and whether traffic is operator-generated. Record attempted tasks,
+usable answers, fallback reasons, successful outcomes, incorrect answers, request
+counts, transferred bytes, latency, actual model usage if available, and allocated
+refresh cost. Do not infer model tokens from response bytes.
+
+The integration example now emits `usableTaskCount`, `fallbackRequiredCount`, and
+per-request bytes/latency. The end-to-end benchmark includes upstream fallback;
+its in-repository run is still not adoption evidence. See
+[`consumer-pilot.md`](consumer-pilot.md) for the handoff and acceptance contract.

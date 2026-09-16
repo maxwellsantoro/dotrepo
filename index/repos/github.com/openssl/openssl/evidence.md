@@ -2,7 +2,6 @@
 
 - Imported maintainer candidates from CODEOWNERS.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
-- Inferred repo.build from .github/workflows/ci.yml as `make -s build_generated`.
 - Inferred repo.test from .github/workflows/ci.yml as `! make test TESTS="test_external_gost_engine"`.
 - Discovered related relation to github.com/openssl/openssl from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -14,6 +13,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

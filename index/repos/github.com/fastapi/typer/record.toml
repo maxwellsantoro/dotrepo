@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/fastapi/typer"
-generated_at = "2026-07-06T18:41:57.302188Z"
+generated_at = "2026-09-16T16:23:12.228709Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `pyproject.toml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Typer"
@@ -45,12 +44,89 @@ ecosystem = "Python"
 
 [docs]
 root = "https://rich.readthedocs.io/en/stable/index.html"
+getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://rich.readthedocs.io/en/stable/index.html"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Typer, build great CLIs. Easy to code. Based on Python type hints."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://typer.tiangolo.com/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Typer"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:23:12.228709Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m pytest"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/fastapi/typer.git"
 default_branch = "master"
 fork = false
-head_sha = "7fb978fbf44c776ca7d9441b47c5e64b00740b40"
+head_sha = "a80f6e5ecd74f32b983cca336a2f3cba98d9853a"
 html_url = "https://github.com/fastapi/typer"
-stars = 19696
+stars = 19991

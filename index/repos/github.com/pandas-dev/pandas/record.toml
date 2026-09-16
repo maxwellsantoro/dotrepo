@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/pandas-dev/pandas"
-generated_at = "2026-07-06T18:56:31.980386Z"
+generated_at = "2026-09-16T16:27:48.914465Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `pyproject.toml`. Filled `repo.description` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "pandas"
@@ -26,10 +25,10 @@ languages = [
     "Cython",
     "C",
     "HTML",
+    "C++",
     "Meson",
     "CSS",
     "Go Template",
-    "C++",
     "XSLT",
     "Smarty",
 ]
@@ -76,11 +75,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://pandas.pydata.org"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Flexible and powerful data analysis / manipulation library for Python, providing labeled data structures similar to R data.frame objects, statistical functions, and much more"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://pandas.pydata.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"pandas"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:27:48.914465Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m pytest"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/pandas-dev/pandas.git"
 default_branch = "main"
 fork = false
-head_sha = "f61290f0b0231e2cc07a00389496cffaff9d9acd"
+head_sha = "664e52c16cc8906471128b75ef757df88f870507"
 html_url = "https://github.com/pandas-dev/pandas"
-stars = 49142
+stars = 49734

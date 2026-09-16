@@ -292,7 +292,11 @@ pub fn score_import_fields(
             scores.push(FieldScore {
                 field: "owners.security_contact".into(),
                 confidence: FieldConfidence::HighConfidencePresent,
-                source: plan.imported_sources.first().cloned(),
+                source: plan
+                    .imported_sources
+                    .iter()
+                    .find(|source| source.to_ascii_lowercase().ends_with("security.md"))
+                    .cloned(),
                 value: Some(contact.into()),
                 reason: "direct email or mailing list".into(),
             });
@@ -300,7 +304,11 @@ pub fn score_import_fields(
             scores.push(FieldScore {
                 field: "owners.security_contact".into(),
                 confidence: FieldConfidence::HighConfidencePresent,
-                source: plan.imported_sources.first().cloned(),
+                source: plan
+                    .imported_sources
+                    .iter()
+                    .find(|source| source.to_ascii_lowercase().ends_with("security.md"))
+                    .cloned(),
                 value: Some(contact.into()),
                 reason: "actionable security reporting URL".into(),
             });
@@ -308,7 +316,11 @@ pub fn score_import_fields(
             scores.push(FieldScore {
                 field: "owners.security_contact".into(),
                 confidence: FieldConfidence::MediumConfidencePresent,
-                source: plan.imported_sources.first().cloned(),
+                source: plan
+                    .imported_sources
+                    .iter()
+                    .find(|source| source.to_ascii_lowercase().ends_with("security.md"))
+                    .cloned(),
                 value: Some(contact.into()),
                 reason: "policy URL or non-email contact".into(),
             });

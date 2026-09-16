@@ -88,6 +88,11 @@ The workflow reads those values directly when it runs `wrangler deploy`.
 
 ## What the workflow does after deploy
 
+The workflow runs after successful default-branch push CI, or through explicit
+manual dispatch. The CI-triggered path checks out the tested commit. Index
+automation explicitly dispatches it after its own checked fast-forward because
+`GITHUB_TOKEN` pushes do not trigger downstream workflows.
+
 The workflow in `.github/workflows/public-cloudflare.yml` now:
 
 - builds the validated export snapshot

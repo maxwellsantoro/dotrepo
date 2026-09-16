@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/RunaCapital/awesome-oss-alternatives"
-generated_at = "2026-07-06T18:31:17.72153Z"
+generated_at = "2026-09-16T16:19:36.249756Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/workflows/deploy.yml`. Inferred `repo.build` from `.github/workflows/deploy.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `.github/workflows/deploy.yml`. Inferred `repo.build` from `.github/workflows/deploy.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "awesome-oss-alternatives"
@@ -44,6 +43,81 @@ topics = [
 [docs]
 root = "https://aws.amazon.com/config/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://aws.amazon.com/config/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/deploy.yml"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Awesome list of open-source startup alternatives to well-known SaaS products 🚀"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://runacap.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"awesome-oss-alternatives"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:19:36.249756Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/RunaCapital/awesome-oss-alternatives.git"
@@ -51,4 +125,4 @@ default_branch = "main"
 fork = false
 head_sha = "e5a1bd6153c602404c6f25a97b178228b755aebb"
 html_url = "https://github.com/RunaCapital/awesome-oss-alternatives"
-stars = 19326
+stars = 19656

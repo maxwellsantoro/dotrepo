@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/langgenius/dify"
-generated_at = "2026-07-01T18:12:29.879264Z"
+generated_at = "2026-09-16T16:14:24.980278Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Makefile`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `web/package.json`, and `dify-agent/pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `web/package.json`. Imported `repo.test` from `web/package.json`. Imported `repo.toolchain.min` from `dify-agent/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "chat on Discord"
-description = "Before installing Dify, make sure your machine meets the following minimum system requirements:"
+name = "dify"
+description = "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack."
 homepage = "https://dify.ai"
 license = "NOASSERTION"
 visibility = "public"
@@ -24,33 +24,29 @@ languages = [
     "TypeScript",
     "Python",
     "JavaScript",
-    "MDX",
+    "Go",
     "CSS",
     "HTML",
     "Shell",
-    "Dockerfile",
-    "Makefile",
-    "PowerShell",
     "Gherkin",
+    "Makefile",
+    "Dockerfile",
+    "PowerShell",
     "PHP",
     "Mako",
 ]
-build = "make build"
-test = "make test"
+build = "npm run build"
+test = "npm test"
 topics = [
     "ai",
     "gpt",
     "llm",
     "openai",
     "python",
-    "rag",
-    "orchestration",
-    "gpt-4",
     "agent",
     "nextjs",
     "workflow",
     "genai",
-    "gemini",
     "automation",
     "low-code",
     "mcp",
@@ -58,7 +54,14 @@ topics = [
     "agentic-ai",
     "agentic-framework",
     "agentic-workflow",
+    "claude",
+    "skills",
+    "deepseek",
 ]
+
+[repo.toolchain]
+min = "3.12"
+ecosystem = "Python"
 
 [owners]
 maintainers = [
@@ -67,17 +70,16 @@ maintainers = [
     "@hyoban",
     "@lyzno1",
     "@GareArc",
+    "@BeautyyuYanli",
     "@QuantumGhost",
-    "@Nov1c444",
     "@JohnJyong",
     "@WH-2099",
     "@CourTeous33",
-    "@Mairuis",
     "@hj24",
     "@zyssyz123",
-    "@GarfieldDai",
     "@snakevash",
     "@MRZHUH",
+    "@Mairuis",
     "@iamjoel",
     "@zxhlyh",
     "@JzoNgKVO",
@@ -85,7 +87,6 @@ maintainers = [
     "@WTW0313",
     "@zhsama",
     "@Yessenia-d",
-    "@douxc",
     "@CodingOnStar",
 ]
 security_contact = "https://github.com/langgenius/dify/security/advisories/new"
@@ -94,11 +95,87 @@ security_contact = "https://github.com/langgenius/dify/security/advisories/new"
 root = "https://docs.dify.ai"
 getting_started = "https://docs.dify.ai/getting-started/install-self-hosted"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.dify.ai/getting-started/install-self-hosted"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.dify.ai"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/langgenius/dify/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "web/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://dify.ai"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"dify"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:14:24.980278Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "web/package.json"
+state = "present"
+valueJson = '"npm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/langgenius/dify.git"
 default_branch = "main"
 fork = false
-head_sha = "ca8b68032292f12387bcfaa5495d2bdb3fcc5bbd"
+head_sha = "9c6c48b50ba99512801873350702326a44dc62de"
 html_url = "https://github.com/langgenius/dify"
-stars = 147269
+stars = 155958

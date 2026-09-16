@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/django/django"
-generated_at = "2026-07-09T04:26:05.618682Z"
+generated_at = "2026-09-16T16:35:10.401225Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `tox.ini` after model escalation. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `.github/SECURITY.md` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `pyproject.toml`. Left `repo.test` unset because `package.json` and `pyproject.toml` suggested conflicting test commands. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "django"
@@ -31,7 +30,6 @@ languages = [
     "Procfile",
 ]
 build = "python -m build"
-test = "tox"
 topics = [
     "python",
     "django",
@@ -44,6 +42,20 @@ topics = [
     "apps",
 ]
 
+[[repo.test_candidates]]
+command = "npm test"
+ecosystem = "Node.js"
+source = "package.json"
+
+[[repo.test_candidates]]
+command = "tox"
+source = "tox.ini"
+
+[[repo.test_candidates]]
+command = "python -m pytest"
+ecosystem = "Python"
+source = "pyproject.toml"
+
 [repo.toolchain]
 min = "3.12"
 ecosystem = "Python"
@@ -55,11 +67,87 @@ security_contact = "https://www.djangoproject.com/security/"
 [docs]
 root = "https://www.djangoproject.com/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://www.djangoproject.com/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
+state = "present"
+valueJson = '"https://www.djangoproject.com/security/"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The Web framework for perfectionists with deadlines."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.djangoproject.com/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "medium"
+method = "inferred"
+reason = "fell back to directory name or GitHub API"
+source = ".github/SECURITY.md"
+state = "present"
+valueJson = '"django"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:35:10.401225Z"
+confidence = "low"
+method = "not_found_in_inspected_sources"
+reason = "intra-tier conflict left field unset during import"
+state = "unresolved"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/django/django.git"
 default_branch = "main"
 fork = false
-head_sha = "b34b834378adc590a771cccd44b9fb0b953cdca2"
+head_sha = "8cbdd4a814397f81adf0129288f32b615bd1f94f"
 html_url = "https://github.com/django/django"
-stars = 88006
+stars = 91066

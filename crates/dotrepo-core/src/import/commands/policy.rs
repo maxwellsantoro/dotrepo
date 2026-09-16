@@ -619,21 +619,14 @@ pub(crate) enum NodePackageRunner {
 }
 
 impl NodePackageRunner {
-    pub(crate) fn build_command(self) -> String {
-        match self {
-            Self::Npm => "npm run build".into(),
-            Self::Pnpm => "pnpm build".into(),
-            Self::Yarn => "yarn build".into(),
-            Self::Bun => "bun run build".into(),
-        }
-    }
-
-    pub(crate) fn test_command(self) -> String {
-        match self {
-            Self::Npm => "npm test".into(),
-            Self::Pnpm => "pnpm test".into(),
-            Self::Yarn => "yarn test".into(),
-            Self::Bun => "bun run test".into(),
+    pub(crate) fn script_command(self, script: &str) -> String {
+        match (self, script) {
+            (Self::Npm, "test") => "npm test".into(),
+            (Self::Pnpm, "build" | "test") => format!("pnpm {script}"),
+            (Self::Yarn, _) => format!("yarn {script}"),
+            (Self::Npm, _) => format!("npm run {script}"),
+            (Self::Pnpm, _) => format!("pnpm run {script}"),
+            (Self::Bun, _) => format!("bun run {script}"),
         }
     }
 }
@@ -658,12 +651,12 @@ pub(crate) fn is_placeholder_package_json_test_script(script: &str) -> bool {
 pub(crate) fn pick_node_script_command(
     scripts: &serde_json::Map<String, serde_json::Value>,
     names: &[&str],
-    make_cmd: impl FnOnce() -> String,
+    make_cmd: impl Fn(&str) -> String,
 ) -> Option<String> {
     for name in names {
         if let Some(v) = scripts.get(*name).and_then(serde_json::Value::as_str) {
             if !v.trim().is_empty() {
-                return Some(make_cmd());
+                return Some(make_cmd(name));
             }
         }
     }

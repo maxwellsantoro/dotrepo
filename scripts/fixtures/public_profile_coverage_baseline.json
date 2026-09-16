@@ -1,16 +1,32 @@
 {
   "schema": "dotrepo-public-profile-coverage-baseline/v0",
   "minProfiles": 613,
-  "minHighSignal": 514,
-  "minHighSignalRatio": 0.838,
+  "minHighSignal": 0,
+  "minHighSignalRatio": 0.0,
   "maxConflictRate": 0.0,
   "maxMalformedProfiles": 0,
   "minSignal": {
     "hasBuild": 328,
     "hasDocs": 361,
-    "hasLicense": 559,
-    "hasOwnershipSignal": 118,
+    "hasLicense": 558,
+    "hasOwnershipSignal": 116,
     "hasSecurityContact": 205,
     "hasTest": 323
+  },
+  "authorityPolicy": "Status and confidence counts are reported, not release incentives. Factual accuracy, record freshness, valid profiles, and field completeness are gated separately.",
+  "ownershipRebaseline": {
+    "checkedAt": "2026-09-16",
+    "reason": "Fresh upstream snapshots no longer contain CODEOWNERS at root, .github, or docs for three prior ownership records; one other record gained ownership. Do not retain removed owners to satisfy an old count.",
+    "removedSources": {
+      "sunnypilot/sunnypilot": "a5f44653d7f43ad57fef2f546f3916ec4cbf3c56",
+      "dotnet/maui": "1cd2e15ba4750f1cbacb629e648cd7abc9a5b5d2",
+      "moby/moby": "f4fcf8597da0ff816a6daa991c3382e999894397"
+    }
+  },
+  "licenseRebaseline": {
+    "checkedAt": "2026-09-16",
+    "reason": "The identity migration to nvm-windows/nvm revealed a rewritten upstream without a root license; GitHub license API returns 404. Retaining the old MIT declaration would misrepresent the current revision.",
+    "repository": "nvm-windows/nvm",
+    "sourceRevision": "336a8bb46387d193a41dcb324cb1eaf4ad813d19"
   }
 }

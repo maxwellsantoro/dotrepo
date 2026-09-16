@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/michaelbromley/angularUtils"
-generated_at = "2026-07-06T18:52:30.06155Z"
+generated_at = "2026-09-16T16:26:34.077655Z"
 
 [record.trust]
 confidence = "high"
@@ -27,6 +27,80 @@ languages = [
 ]
 topics = []
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A place where I will collect useful re-usable Angular components that I make"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/michaelbromley/angularUtils"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"angularUtils"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:26:34.077655Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/michaelbromley/angularUtils.git"
@@ -34,4 +108,4 @@ default_branch = "master"
 fork = false
 head_sha = "e531bfa4f138ca9f2878f1aa5175d396a9926114"
 html_url = "https://github.com/michaelbromley/angularUtils"
-stars = 1994
+stars = 1995

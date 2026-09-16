@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/skylot/jadx"
-generated_at = "2026-07-01T18:29:14.231586Z"
+generated_at = "2026-09-16T16:16:14.121489Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `build.gradle.kts`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `build.gradle.kts`. Imported `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `build.gradle.kts`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `build.gradle.kts`. Inferred `repo.test` from `build.gradle.kts`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "JADX"
-description = "**jadx** - Dex to Java decompiler"
+description = "Dex to Java decompiler"
 homepage = "https://github.com/skylot/jadx"
 license = "Apache-2.0"
 visibility = "public"
@@ -40,11 +40,87 @@ topics = [
 maintainers = []
 security_contact = "https://github.com/skylot/jadx/security/advisories/new"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/skylot/jadx/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "build.gradle.kts"
+state = "present"
+valueJson = '"./gradlew build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Dex to Java decompiler"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/skylot/jadx"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"JADX"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:16:14.121489Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "build.gradle.kts"
+state = "present"
+valueJson = '"./gradlew test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/skylot/jadx.git"
 default_branch = "master"
 fork = false
-head_sha = "aaec137830f217ab5f69d2b64279433c1775a22a"
+head_sha = "2fb1b16386941660fda07e9017285aec40fcb37f"
 html_url = "https://github.com/skylot/jadx"
-stars = 49294
+stars = 50484

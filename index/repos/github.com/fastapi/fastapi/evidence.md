@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Inferred repo.build from pyproject.toml as `python -m build`.
 - Inferred repo.test from pyproject.toml as `python -m pytest`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
@@ -13,6 +13,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

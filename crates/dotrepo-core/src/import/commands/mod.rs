@@ -633,6 +633,27 @@ mod tests {
     }
 
     #[test]
+    fn package_commands_preserve_the_declared_script_name() {
+        use super::{infer_package_json_commands, ImportedFile};
+        for runner in ["npm", "pnpm", "yarn", "bun"] {
+            let file = ImportedFile {
+                path: "package.json".into(),
+                contents: format!(
+                    r#"{{"packageManager":"{runner}@1.0.0","scripts":{{"compile":"tsc -b","test-all":"test-runner --all"}}}}"#
+                ),
+            };
+            let candidate = infer_package_json_commands(&file).unwrap();
+            let prefix = if runner == "yarn" {
+                "yarn".to_string()
+            } else {
+                format!("{runner} run")
+            };
+            assert_eq!(candidate.build, Some(format!("{prefix} compile")));
+            assert_eq!(candidate.test, Some(format!("{prefix} test-all")));
+        }
+    }
+
+    #[test]
     fn load_best_package_json_prefers_server_app_over_root_format_only() {
         use super::load_best_package_json;
         use std::fs;

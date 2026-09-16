@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/gcla/termshark"
-generated_at = "2026-07-06T18:43:07.866143Z"
+generated_at = "2026-09-16T16:23:31.760063Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/workflows/go.yml`, and `go.mod`. Inferred `repo.build` from `.github/workflows/go.yml`. Inferred `repo.test` from `.github/workflows/go.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md` and `go.mod`. Inferred `repo.build` from `go.mod`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Termshark"
@@ -25,8 +24,8 @@ languages = [
     "Go",
     "Shell",
 ]
-build = "go build -v ./..."
-test = "go test -v ./..."
+build = "go build ./..."
+test = "go test ./..."
 topics = [
     "tshark",
     "wireshark",
@@ -42,6 +41,82 @@ topics = [
 min = "1.13"
 ecosystem = "Go"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
+state = "present"
+valueJson = '"go build ./..."'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A terminal UI for tshark, inspired by Wireshark"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/gcla/termshark"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Termshark"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:23:31.760063Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
+state = "present"
+valueJson = '"go test ./..."'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/gcla/termshark.git"
@@ -49,4 +124,4 @@ default_branch = "master"
 fork = false
 head_sha = "e8a1ec6e4f2d517f646d3bba35a2ec4926e0202c"
 html_url = "https://github.com/gcla/termshark"
-stars = 9926
+stars = 10010

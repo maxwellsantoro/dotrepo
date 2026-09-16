@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import time
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List
@@ -12,6 +13,7 @@ import yaml
 from .arms.base import Http
 from .arms.dotrepo_arm import DotrepoArm
 from .arms.github_arm import GitHubArm
+from .arms.lookup_first import LookupFirstArm
 from .cache import ReplayCacheMiss, ResponseCache
 from .fields import FIELDS_BY_ID
 from .model import Answer, GoldItem, Outcome, score_answer
@@ -69,10 +71,17 @@ def build_arm(name: str, http: Http, base_url: str, extractor: str):
         return GitHubArm(http, extractor=extractor)
     if name == "dotrepo":
         return DotrepoArm(http, base_url=base_url)
+    if name == "lookup-first":
+        return LookupFirstArm(http, base_url, extractor)
     raise SystemExit(f"unknown arm: {name}")
 
 
 def run(gold: List[GoldItem], arm) -> Dict:
+    started = time.perf_counter()
+    http = getattr(arm, "http", None)
+    before = {
+        key: getattr(http, key, 0) for key in ("request_count", "response_bytes", "cache_hits")
+    }
     by_repo: Dict[str, List[GoldItem]] = defaultdict(list)
     for g in gold:
         by_repo[g.repo].append(g)
@@ -100,6 +109,9 @@ def run(gold: List[GoldItem], arm) -> Dict:
         "configuration": arm.configuration(),
         "rows": rows,
         "summary": summarize(rows),
+        "consumer_events": getattr(arm, "events", []),
+        "transport": {key: getattr(http, key, 0) - value for key, value in before.items()},
+        "elapsedMs": round((time.perf_counter() - started) * 1000, 3),
     }
 
 
@@ -169,7 +181,14 @@ def summarize(rows: List[dict], *, include_cohorts: bool = True) -> dict:
 
 
 def markdown(results: List[Dict]) -> str:
-    L = ["# dotrepo benchmark — head-to-head", ""]
+    L = [
+        "# dotrepo benchmark — head-to-head",
+        "",
+        "Response bytes and bytes ÷ 4 are payload measurements/estimates, not model usage. "
+        "Legacy per-field latency excludes model inference; whole-arm elapsed time includes it. Index maintenance is not included; "
+        "this report does not establish net end-to-end cost savings.",
+        "",
+    ]
     configurations = [
         f"{result['arm']}: "
         + ", ".join(f"{key}={value}" for key, value in result.get("configuration", {}).items())
@@ -196,8 +215,18 @@ def markdown(results: List[Dict]) -> str:
     line("**confidently wrong** (count)", "confidently_wrong")
     line("**confidently-wrong rate**", "confidently_wrong_rate", pct=True)
     line("abstained", "abstained")
-    line("approx tokens over wire", "approx_tokens")
-    line("total latency (ms)", "total_latency_ms")
+    for label, key in [
+        ("HTTP requests including prefetch/fallback", "request_count"),
+        ("decoded response bytes including prefetch/fallback", "response_bytes"),
+        ("response cache hits", "cache_hits"),
+    ]:
+        vals = [str(r.get("transport", {}).get(key, "not measured")) for r in results]
+        L.append(f"| {label} | " + " | ".join(vals) + " |")
+    L.append(
+        "| whole-arm elapsed (ms) | "
+        + " | ".join(str(r.get("elapsedMs", "not measured")) for r in results)
+        + " |"
+    )
     L += ["", "### Buried fields only (dotrepo's thesis)", ""]
     L.append("| metric | " + " | ".join(r["arm"] for r in results) + " |")
     L.append("|" + "---|" * (len(results) + 1))
@@ -213,8 +242,8 @@ def markdown(results: List[Dict]) -> str:
     bline("buried confidently-wrong", "confidently_wrong")
     L += [
         "",
-        "_A win for dotrepo is: higher buried accuracy AND fewer confidently-wrong "
-        "answers AND fewer tokens. If it doesn't clear all three, it isn't paying rent._",
+        "_Adoption evidence needs useful answers without a worse incorrect-answer rate, "
+        "plus measured latency or cost improvement under comparable conditions, including fallback and maintenance._",
         "",
     ]
 

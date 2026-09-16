@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/rclone/rclone"
-generated_at = "2026-07-06T18:58:14.428178Z"
+generated_at = "2026-09-16T16:28:18.410437Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/workflows/build.yml`, `CONTRIBUTING.md`, and `go.mod`. Inferred `repo.build` from `.github/workflows/build.yml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `go.mod`, and `CONTRIBUTING.md`. Inferred `repo.build` from `go.mod`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Rclone"
@@ -34,7 +33,7 @@ languages = [
     "PHP",
     "Batchfile",
 ]
-build = "make compile_all"
+build = "go build ./..."
 test = "go test -v ./..."
 topics = [
     "golang",
@@ -60,7 +59,7 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.25.0"
+min = "1.26.0"
 ecosystem = "Go"
 
 [owners]
@@ -90,11 +89,87 @@ maintainers = [
 root = "https://rclone.org/docs/"
 getting_started = "https://rclone.org/install/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://rclone.org/install/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://rclone.org/docs/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "go.mod"
+state = "present"
+valueJson = '"go build ./..."'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"\"rsync for cloud storage\" - Google Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Wasabi, Google Cloud Storage, Azure Blob, Azure Files, Yandex Files"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://rclone.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Rclone"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:28:18.410437Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"go test -v ./..."'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/rclone/rclone.git"
 default_branch = "master"
 fork = false
-head_sha = "2e2a50cc441dfab989ec4f3a73448f40ceb873f3"
+head_sha = "c8d60a67fc5326d5b2fb811cc9036d0103fd5e37"
 html_url = "https://github.com/rclone/rclone"
-stars = 58198
+stars = 59788

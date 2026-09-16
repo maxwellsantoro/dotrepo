@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vectordotdev/vector"
-generated_at = "2026-07-01T18:35:17.609989Z"
+generated_at = "2026-09-16T16:17:05.844662Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@vectordotdev/vector` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `Makefile`, and `Cargo.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@vectordotdev/vector` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Vector"
-description = "Quickstart &bull; Docs &bull; Guides &bull; Integrations &bull; Chat &bull; Download &bull; Rust Crate Docs"
+description = "A high-performance observability data pipeline."
 homepage = "https://vector.dev"
 license = "MPL-2.0"
 visibility = "public"
@@ -27,9 +27,9 @@ languages = [
     "TypeScript",
     "JavaScript",
     "Shell",
-    "Dockerfile",
-    "Sass",
     "CSS",
+    "Sass",
+    "Dockerfile",
     "Lua",
     "Python",
     "Go Template",
@@ -39,8 +39,8 @@ languages = [
     "DIGITAL Command Language",
     "PureBasic",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "make build"
+test = "make test"
 topics = [
     "logs",
     "metrics",
@@ -62,11 +62,14 @@ topics = [
     "telemetry",
 ]
 
+[repo.toolchain]
+min = "1.95"
+ecosystem = "Rust"
+
 [owners]
 maintainers = [
     "@vectordotdev/vector",
     "@vectordotdev/single-machine-performance",
-    "@vectordotdev/vector-website",
     "@vectordotdev/documentation",
 ]
 team = "@vectordotdev/vector"
@@ -76,11 +79,87 @@ security_contact = "security@datadoghq.com"
 root = "https://vector.dev/docs/"
 getting_started = "https://vector.dev/docs/setup/quickstart/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://vector.dev/docs/setup/quickstart/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://vector.dev/docs/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@datadoghq.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@vectordotdev/vector"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A high-performance observability data pipeline."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://vector.dev"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Vector"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:17:05.844662Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/vectordotdev/vector.git"
 default_branch = "master"
 fork = false
-head_sha = "a5c43350db0b8595c727ad01a15672d79792e933"
+head_sha = "bdb87aeaa4c4ff27c0ba643c1c77b21bf2ef4013"
 html_url = "https://github.com/vectordotdev/vector"
-stars = 22117
+stars = 22573

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pytorch/pytorch"
-generated_at = "2026-07-06T18:57:36.035292Z"
+generated_at = "2026-09-16T16:28:09.860477Z"
 
 [record.trust]
 confidence = "high"
@@ -26,8 +26,8 @@ languages = [
     "Cuda",
     "C",
     "Objective-C++",
-    "CMake",
     "Metal",
+    "CMake",
     "Shell",
     "Assembly",
     "HIP",
@@ -67,73 +67,69 @@ ecosystem = "Python"
 
 [owners]
 maintainers = [
-    "@fmassa",
+    "@zou3519",
+    "@chillee",
+    "@kshitij12345",
     "@ezyang",
-    "@malfet",
-    "@albanD",
-    "@soulitzer",
-    "@jbschlosser",
-    "@mikaylagawarecki",
-    "@janeyx99",
-    "@larryliu0820",
+    "@Chillee",
+    "@bdhirsh",
+    "@aorenste",
+    "@lezcano",
+    "@nikitaved",
+    "@drisspg",
+    "@slayton58",
+    "@amjames",
+    "@pearu",
     "@salilsdesai",
-    "@kimishpatel",
     "@digantdesai",
     "@jianyuh",
+    "@janeyx99",
+    "@albanD",
+    "@soulitzer",
+    "@bohnstingl",
+    "@larryliu0820",
+    "@egienvalue",
+    "@eqy",
+    "@syed-ahmed",
+    "@Aidyn-A",
+    "@malfet",
+    "@EikanWang",
+    "@gujinghui",
+    "@jeffdaily",
+    "@jithunnair-amd",
+    "@XuehaiPan",
+    "@jbschlosser",
+    "@divyanshk",
+    "@ramanishsingh",
+    "@scotts",
+    "@aelavender",
+    "@liangel-02",
+    "@fmassa",
+    "@titaiwangms",
+    "@xadupre",
+    "@justinchuby",
     "@jerryzh168",
-    "@hdcharles",
+    "@ryanzhang22",
+    "@pytorch/pytorch-dev-infra",
+    "@desertfire",
+    "@eellison",
+    "@jataylo",
+    "@pruthvistony",
     "@jiayisuse",
-    "@osalpekar",
     "@lw",
     "@d4l3k",
     "@fduwjj",
     "@kapilsh",
     "@kwen2501",
     "@weifengpy",
-    "@titaiwangms",
-    "@xadupre",
-    "@justinchuby",
-    "@pytorch/pytorch-dev-infra",
-    "@jeffdaily",
-    "@desertfire",
-    "@Chillee",
-    "@eellison",
-    "@shunting314",
-    "@bertmaher",
-    "@jataylo",
-    "@jithunnair-amd",
-    "@pruthvistony",
-    "@EikanWang",
-    "@gujinghui",
-    "@mruberry",
-    "@lezcano",
-    "@nikitaved",
-    "@zou3519",
-    "@chillee",
-    "@kshitij12345",
-    "@aorenste",
     "@tugsbayasgalan",
     "@ydwu4",
-    "@bdhirsh",
-    "@egienvalue",
-    "@scotts",
-    "@ryanzhang22",
-    "@divyanshk",
-    "@ramanishsingh",
-    "@aelavender",
     "@avikchaudhuri",
     "@zhxchen17",
     "@angelayi",
     "@SherlockNoMad",
     "@laithsakka",
-    "@eqy",
-    "@syed-ahmed",
-    "@Aidyn-A",
-    "@XuehaiPan",
-    "@drisspg",
-    "@slayton58",
-    "@amjames",
-    "@pearu",
+    "@guan404ming",
 ]
 team = "@pytorch/pytorch-dev-infra"
 security_contact = "https://github.com/pytorch/pytorch/security/advisories/new"
@@ -156,11 +152,89 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://pytorch.org/docs/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"https://github.com/pytorch/pytorch/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "extracted"
+reason = "clear CODEOWNERS team"
+source = "CODEOWNERS"
+state = "present"
+valueJson = '"@pytorch/pytorch-dev-infra"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make all"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Tensors and Dynamic neural networks in Python with strong GPU acceleration"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://pytorch.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"More About PyTorch"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:28:09.860477Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"pytest test/test_nn.py -k Loss -v"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/pytorch/pytorch.git"
 default_branch = "main"
 fork = false
-head_sha = "e3fc47c58c1a8744ac780fd6ed729262607d27b1"
+head_sha = "a9be55373f650e3be4f1133792f2265841d39901"
 html_url = "https://github.com/pytorch/pytorch"
-stars = 101537
+stars = 103057

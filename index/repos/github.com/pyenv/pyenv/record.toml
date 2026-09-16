@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pyenv/pyenv"
-generated_at = "2026-07-09T05:09:35.72212Z"
+generated_at = "2026-09-16T16:35:21.072911Z"
 
 [record.trust]
 confidence = "high"
@@ -30,7 +30,7 @@ languages = [
     "Dockerfile",
     "Vim Script",
 ]
-test = "make test"
+test = "make test-unit"
 topics = [
     "python",
     "shell",
@@ -57,11 +57,86 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Simple Python version management"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/pyenv/pyenv"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Simple Python Version Management: pyenv"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:35:21.072911Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "Makefile"
+state = "present"
+valueJson = '"make test-unit"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/pyenv/pyenv.git"
 default_branch = "master"
 fork = false
-head_sha = "e4c462dc70951c8714d069522448c9583a38c913"
+head_sha = "676b71e7b52d1a094c6659213c23649b9e290455"
 html_url = "https://github.com/pyenv/pyenv"
-stars = 44934
+stars = 45103

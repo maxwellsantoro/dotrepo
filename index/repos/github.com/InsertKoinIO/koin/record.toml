@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/InsertKoinIO/koin"
-generated_at = "2026-07-09T03:32:19.668493Z"
+generated_at = "2026-09-16T16:34:15.122506Z"
 
 [record.trust]
 confidence = "high"
@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. Left `repo.test` unset because `.github/workflows/build.yml` suggested an unsafe shell-like command. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "koin"
@@ -39,6 +39,80 @@ topics = [
 [docs]
 root = "https://insert-koin.io"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://insert-koin.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Koin - a pragmatic lightweight dependency injection framework for Kotlin & Kotlin Multiplatform"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://insert-koin.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"koin"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:34:15.122506Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/InsertKoinIO/koin.git"
@@ -46,4 +120,4 @@ default_branch = "main"
 fork = false
 head_sha = "dc86ef8dd8fbe8564fb7453c03f5b738da3450bb"
 html_url = "https://github.com/InsertKoinIO/koin"
-stars = 9999
+stars = 10022

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/tikv/tikv"
-generated_at = "2026-07-01T18:32:39.941091Z"
+generated_at = "2026-09-16T16:16:37.003715Z"
 
 [record.trust]
 confidence = "high"
@@ -13,10 +13,10 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tikv/tikv-configuration-reviewer` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `Cargo.toml`. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `CONTRIBUTING.md`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tikv/tikv-configuration-reviewer` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Governance"
+name = "tikv"
 description = "Distributed transactional key-value database, originally created to complement TiDB"
 homepage = "https://tikv.org"
 license = "Apache-2.0"
@@ -25,13 +25,13 @@ languages = [
     "Rust",
     "Python",
     "Perl",
-    "Makefile",
     "Shell",
+    "Makefile",
     "C",
     "Dockerfile",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "make build"
+test = "make test"
 topics = [
     "distributed-transactions",
     "raft",
@@ -68,11 +68,87 @@ provenance = [
     "manifest",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://tikv.org/docs/latest/concepts/overview/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"tikv-security@lists.cncf.io"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@tikv/tikv-configuration-reviewer"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"make build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Distributed transactional key-value database, originally created to complement TiDB"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://tikv.org"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"tikv"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:16:37.003715Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"make test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/tikv/tikv.git"
 default_branch = "master"
 fork = false
-head_sha = "f8cd7fabb5ec3c2bbf855aa6935e63daf726d84e"
+head_sha = "147601ba52fd8a19a2be7344639df2757e8ed5b3"
 html_url = "https://github.com/tikv/tikv"
-stars = 16753
+stars = 16850

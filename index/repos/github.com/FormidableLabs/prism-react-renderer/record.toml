@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/FormidableLabs/prism-react-renderer"
-generated_at = "2026-07-06T18:27:28.203617Z"
+generated_at = "2026-09-16T16:18:19.115637Z"
 
 [record.trust]
 confidence = "high"
@@ -49,6 +49,82 @@ provenance = [
     "manifest",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"🖌️ Renders highlighted Prism output to React (+ theming & vendored Prism)"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/FormidableLabs/prism-react-renderer"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Prism React Renderer"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:18:19.115637Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/FormidableLabs/prism-react-renderer.git"
@@ -56,4 +132,4 @@ default_branch = "master"
 fork = false
 head_sha = "e1c83a468b05df7f452b3ad7e4ae5ab874574d4e"
 html_url = "https://github.com/FormidableLabs/prism-react-renderer"
-stars = 1994
+stars = 1993

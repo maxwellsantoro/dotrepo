@@ -26,6 +26,32 @@ sys.modules[SPEC.name] = consumer
 SPEC.loader.exec_module(consumer)
 
 
+def test_task_policy_rejects_fresh_export_with_stale_record_and_allows_explicit_fields():
+    from datetime import datetime, timezone
+
+    payload = {
+        "identity": {"host": "github.com", "owner": "example", "repo": "test"},
+        "record": {"generatedAt": "2026-07-06T00:00:00Z"},
+        "freshness": {"generatedAt": "2026-09-16T00:00:00Z"},
+        "purpose": "An example",
+        "execution": {"build": "cargo build"},
+        "trust": {"confidence": "high", "selectedStatus": "verified"},
+    }
+    result = consumer.interpret_http_response(
+        identity="github.com/example/test", status_code=200, body=json.dumps(payload)
+    )
+    now = datetime(2026, 9, 16, tzinfo=timezone.utc)
+    consumer.evaluate_for_task(result, now=now, required_fields=["repo.build", "repo.test"])
+    assert result.hit and not result.usable
+    assert result.fallback_reasons == ["stale-record", "missing:repo.test"]
+    result.profile["record"]["generatedAt"] = "2026-09-15T00:00:00Z"
+    consumer.evaluate_for_task(result, now=now, required_fields=["repo.build"])
+    assert result.usable
+    result.profile["fieldEvidence"] = {"repo.build": {"state": "suspect"}}
+    consumer.evaluate_for_task(result, now=now, required_fields=["repo.build"])
+    assert result.fallback_reasons == ["unresolved:repo.build"]
+
+
 class _FakeResponse:
     def __init__(self, status: int, body: bytes) -> None:
         self.status = status
@@ -192,3 +218,22 @@ def test_main_writes_miss_log_and_json(tmp_path: Path) -> None:
         assert len(calls) == 2
     finally:
         consumer.fetch_profile = original  # type: ignore[assignment]
+
+
+def test_inferred_commands_require_source_fallback():
+    from datetime import datetime, timezone
+
+    payload = {
+        "identity": {"host": "github.com", "owner": "example", "repo": "demo"},
+        "record": {"generatedAt": "2026-09-16T00:00:00Z"},
+        "execution": {"test": "./gradlew test"},
+        "fieldEvidence": {"repo.test": {"state": "present", "method": "inferred"}},
+    }
+    result = consumer.interpret_http_response(
+        identity="github.com/example/demo", status_code=200, body=json.dumps(payload)
+    )
+    consumer.evaluate_for_task(
+        result, required_fields=["repo.test"], now=datetime(2026, 9, 16, tzinfo=timezone.utc)
+    )
+    assert not result.usable
+    assert result.fallback_reasons == ["inferred-command:repo.test"]

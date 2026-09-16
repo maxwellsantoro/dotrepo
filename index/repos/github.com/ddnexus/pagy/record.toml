@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ddnexus/pagy"
-generated_at = "2026-07-06T18:39:16.070537Z"
+generated_at = "2026-09-16T16:22:16.569456Z"
 
 [record.trust]
 confidence = "high"
@@ -51,11 +51,85 @@ security_contact = "dd.nexus@gmail.com"
 [docs]
 root = "https://ddnexus.github.io/pagy/toolbox/configuration/initializer"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://ddnexus.github.io/pagy/toolbox/configuration/initializer"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"dd.nexus@gmail.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Agnostic pagination in plain ruby"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://ddnexus.github.io/pagy/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"pagy"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:22:16.569456Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/ddnexus/pagy.git"
 default_branch = "master"
 fork = false
-head_sha = "e3eff8f19307eded6ad929e039c495873c8bb98f"
+head_sha = "e85430530be38b76d4329c2fea7d870dee60e94f"
 html_url = "https://github.com/ddnexus/pagy"
-stars = 4973
+stars = 4992

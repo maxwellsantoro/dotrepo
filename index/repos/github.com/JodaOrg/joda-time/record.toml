@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/JodaOrg/joda-time"
-generated_at = "2026-07-01T17:18:28.46166Z"
+generated_at = "2026-09-16T16:05:29.747267Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `pom.xml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pom.xml`. Imported `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, and `pom.xml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `pom.xml`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Joda-Time"
-description = "Joda-Time provides a quality replacement for the Java date and time classes."
+description = "Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8."
 homepage = "http://www.joda.org/joda-time/"
 license = "Apache-2.0"
 visibility = "public"
@@ -25,8 +25,8 @@ languages = [
     "HTML",
     "CSS",
 ]
-build = "./mvnw package"
-test = "./mvnw test"
+build = "mvn package"
+test = "mvn test"
 topics = [
     "java",
     "joda",
@@ -57,11 +57,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://www.joda.org/joda-time/quickstart.html"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"http://www.joda.org/joda-time/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://tidelift.com/security"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pom.xml"
+state = "present"
+valueJson = '"mvn package"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"http://www.joda.org/joda-time/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Joda-Time"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:05:29.747267Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pom.xml"
+state = "present"
+valueJson = '"mvn test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/JodaOrg/joda-time.git"
 default_branch = "main"
 fork = false
-head_sha = "d6ba4f03c242c12feac308ac25b841a8c9457674"
+head_sha = "b80254120c5b40626a31aefafefba51f6998b8c7"
 html_url = "https://github.com/JodaOrg/joda-time"
-stars = 4984
+stars = 4982

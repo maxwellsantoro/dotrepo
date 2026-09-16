@@ -230,8 +230,6 @@ def summarize(public_root: Path, max_items: int, thresholds: dict[str, int]) -> 
             reasons.append("generic-field")
         if profile["identity"] in duplicated_identities:
             reasons.append("duplicated-description")
-        if profile["confidence"] in {"low", "unknown", "suspect"}:
-            reasons.append(f"{profile['confidence']}-confidence")
         if profile["conflictCount"] > 0:
             reasons.append("selected-record-conflict")
         if reasons:
@@ -270,6 +268,9 @@ def summarize(public_root: Path, max_items: int, thresholds: dict[str, int]) -> 
         "duplicatedDescriptionValueCount": len(duplicate_groups),
         "duplicateDescriptionRecordCount": len(duplicated_identities),
         "badLookingRecordCount": len(bad_records),
+        "lowConfidenceRecordCount": sum(
+            profile["confidence"] in {"low", "unknown", "suspect"} for profile in profiles
+        ),
     }
     gates = {
         "minProfiles": {

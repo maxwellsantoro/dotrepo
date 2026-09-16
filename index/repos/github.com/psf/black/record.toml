@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/psf/black"
-generated_at = "2026-07-01T18:23:01.626738Z"
+generated_at = "2026-09-16T16:15:48.26447Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `pyproject.toml`, and `tox.ini`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `tox.ini`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
-name = "The Uncompromising Code Formatter"
-description = "_Black_ is the uncompromising Python code formatter."
+name = "black"
+description = "The uncompromising Python code formatter"
 homepage = "https://black.readthedocs.io/en/stable/"
 license = "MIT"
 visibility = "public"
@@ -27,7 +27,7 @@ languages = [
     "Dockerfile",
 ]
 build = "python -m build"
-test = "python -m pytest"
+test = "tox"
 topics = [
     "python",
     "code",
@@ -40,6 +40,10 @@ topics = [
     "hacktoberfest",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [owners]
 maintainers = []
 security_contact = "https://tidelift.com/security"
@@ -47,11 +51,87 @@ security_contact = "https://tidelift.com/security"
 [docs]
 root = "https://black.readthedocs.io/en/stable"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://black.readthedocs.io/en/stable"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://tidelift.com/security"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The uncompromising Python code formatter"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://black.readthedocs.io/en/stable/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"black"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:15:48.26447Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "tox.ini"
+state = "present"
+valueJson = '"tox"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/psf/black.git"
 default_branch = "main"
 fork = false
-head_sha = "c4c9a93111309459a3f0e1e268160f7ef2159077"
+head_sha = "acd6198877ced2d8126b9b3958bb17f4a65ef0d1"
 html_url = "https://github.com/psf/black"
-stars = 41660
+stars = 41842

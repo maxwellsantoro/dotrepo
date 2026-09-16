@@ -649,3 +649,47 @@ without treating confident polyglot abstention as a ladder failure.
 - [`ROADMAP.md`](../ROADMAP.md) — direction and active execution order
 - [`index/review-checklist.md`](../index/review-checklist.md) — review
   standards for overlay records
+
+## Factual freshness and catch-up
+
+Scheduled refresh now runs daily with a bounded 50-record inspection and crawl
+budget. At 613 records this gives approximately 13 days of nominal rotation
+capacity, leaving headroom within the 30-day record-age target. Throughput is a
+capacity estimate, not proof of successful refreshes. Records beyond 30 days
+qualify even if HEAD is unchanged; index membership takes precedence over stale
+crawler-state identities. Redirected identities fail before writeback.
+
+For an explicitly requested catch-up, run:
+
+```bash
+uv run python scripts/refresh_stale_index.py --limit 1000 \
+  --output-dir /tmp/dotrepo-stale-catchup
+```
+
+This uses four workers, validates after each 50-record cohort, isolates worker
+state, records failures, and disables model calls and discovery. Repository
+credentials must already be configured. Timestamps change only after real crawls.
+
+Routine generated overlays use the repository's built-in `GITHUB_TOKEN` with
+contents, pull-request, and actions write permissions. No personal token or
+per-record human approval is required. After local telemetry and public-surface
+gates, `land_autonomous_index.py`:
+
+1. Verifies the same-repository automation PR contains only index changes and
+   matches the expected head and base commits.
+2. Explicitly dispatches CI on that head and waits for the returned run ID,
+   requiring the public-surface gate to succeed for the expected commit.
+3. Rechecks the PR and default branch, then fast-forwards the default branch to
+   exactly the tested commit with `force: false`. A concurrent divergent update
+   or branch protection rejects the operation rather than bypassing checks.
+4. Explicitly dispatches deployment and waits for its deploy job and smoke check.
+
+Explicit dispatch is necessary because ordinary pushes made with `GITHUB_TOKEN`
+do not start downstream push workflows. Repository Actions must be allowed to
+create PRs, and `INDEX_AUTOMATION_ENABLED=true` remains required. The workflow
+reports failure if CI, landing, or deployment fails; a successful crawl alone is
+not evidence of publication. Re-run the deployment workflow if publication landed
+but deployment failed. If the base advanced, regenerate the refresh batch.
+
+The release gate fails when more than 10% of exported records are stale or have
+unknown ages. A fresh export alone cannot satisfy this gate.

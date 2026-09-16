@@ -2,7 +2,7 @@
 
 - Imported maintainer candidates from CODEOWNERS.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
-- Imported repo.test from Makefile as `make test`.
+- Imported repo.test from Makefile as `make test-unit`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

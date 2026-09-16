@@ -1,8 +1,8 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported repo.build from package.json as `npm run build`.
-- Discovered related relation to github.com/mehrdadrafiee/animated-header from README cross-link.
+- Imported repo.build from package.json as `pnpm build`.
+- Discovered related relation to github.com/orwa-mahmoud/adapttable from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

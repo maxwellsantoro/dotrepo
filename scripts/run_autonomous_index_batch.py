@@ -1495,9 +1495,6 @@ def main() -> int:
     )
     adjudication_rate = repos_with_adjudication / len(crawls) if crawls else 0.0
 
-    if written > 0:
-        run(["cargo", "run", "-q", "-p", "dotrepo-cli", "--", "validate-index"])
-
     telemetry = {
         "batchId": args.batch_id,
         "crawled": len(crawls),
@@ -1523,6 +1520,9 @@ def main() -> int:
         "unchangedSkips": unchanged_skips,
     }
     write_telemetry_outputs(telemetry, args, telemetry_path)
+    if written > 0:
+        # Preserve completed work and its diagnostics even when validation fails.
+        run(["cargo", "run", "-q", "-p", "dotrepo-cli", "--", "validate-index"])
     print(json.dumps(telemetry, indent=2, sort_keys=True))
     return 0 if failed == 0 else 1
 

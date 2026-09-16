@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/pgmq/pgmq"
-generated_at = "2026-07-09T03:32:25.266275Z"
+generated_at = "2026-09-16T16:34:17.308607Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `.github/workflows/client-tests.yml` after model escalation. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `pgmq-rs/Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `pgmq-rs/Cargo.toml`. Imported `repo.toolchain.min` from `pgmq-rs/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `pgmq-rs/Cargo.toml` after deterministic escalation."
 
 [repo]
 name = "pgmq"
@@ -22,19 +21,20 @@ homepage = "https://pgmq.github.io/pgmq/"
 license = "PostgreSQL"
 visibility = "public"
 languages = [
-    "PLpgSQL",
     "Rust",
+    "PLpgSQL",
     "Python",
     "Makefile",
     "Shell",
     "Ruby",
 ]
-test = "uv run pytest test.py -v"
+build = "cargo build"
+test = "cargo test"
 topics = ["message-queue"]
 
 [repo.toolchain]
-min = "3.10"
-ecosystem = "Python"
+min = "1.94.0"
+ecosystem = "Rust"
 
 [owners]
 maintainers = [
@@ -47,11 +47,87 @@ maintainers = [
 [docs]
 root = "https://pgmq.github.io/pgmq/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://pgmq.github.io/pgmq/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pgmq-rs/Cargo.toml"
+state = "present"
+valueJson = '"cargo build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A lightweight message queue. Like AWS SQS and RSMQ but on Postgres."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://pgmq.github.io/pgmq/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "medium"
+method = "inferred"
+reason = "fell back to directory name or GitHub API"
+source = ".github/CODEOWNERS"
+state = "present"
+valueJson = '"pgmq"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:34:17.308607Z"
+confidence = "medium"
+method = "extracted"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pgmq-rs/Cargo.toml"
+state = "present"
+valueJson = '"cargo test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/pgmq/pgmq.git"
 default_branch = "main"
 fork = false
-head_sha = "e67a9c27037036c40f8793ca2966bf7d56484194"
+head_sha = "80817f4324c20f1a522b35fdcf4bb901dbb966d4"
 html_url = "https://github.com/pgmq/pgmq"
-stars = 5007
+stars = 5274

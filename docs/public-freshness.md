@@ -152,3 +152,17 @@ It is independent from snapshot freshness:
 Use snapshot freshness to understand the public export and record freshness to
 understand the underlying factual data. Do not conflate the two when reviewing
 trust, conflicts, or stale metadata.
+
+## Profile record policy
+
+`profile.json` includes `record.freshnessStatus` (`fresh`, `stale`, or `unknown`),
+`record.ageDays` when calculable, and `record.staleAfterDays`. The current record
+policy is 30 days, evaluated at export time. Missing, malformed, or future record
+timestamps produce `unknown`; a new export never updates a record timestamp.
+Consumers must recalculate age against their current clock when using cached
+profiles. `record.sourceRevision` identifies the upstream Git revision when known;
+it does not date mutable GitHub metadata.
+
+The homepage shows fresh/stale/unknown counts from the exported profiles, beside
+the independently labeled export time. The daily autonomous refresh plans the
+oldest records first, including unchanged HEADs beyond the record-age limit.

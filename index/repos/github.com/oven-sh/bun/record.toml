@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/oven-sh/bun"
-generated_at = "2026-07-06T19:08:33.556681Z"
+generated_at = "2026-09-16T16:31:33.737167Z"
 
 [record.trust]
 confidence = "high"
@@ -29,19 +29,16 @@ languages = [
     "Shell",
     "Python",
     "PowerShell",
-    "Objective-C",
     "CSS",
-    "HTML",
     "Perl",
     "Dockerfile",
-    "Ruby",
     "HCL",
     "Linker Script",
     "Nix",
     "Svelte",
+    "HTML",
     "Makefile",
     "MDX",
-    "RenderScript",
 ]
 build = "npm run build"
 test = "npm test"
@@ -69,13 +66,90 @@ security_contact = "security@bun.com"
 
 [docs]
 root = "https://bun.com/docs"
-getting_started = "https://bun.com/docs/installation#cpu-requirements-and-baseline-builds"
+getting_started = "https://bun.com/docs/installation#cpu-requirements"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://bun.com/docs/installation#cpu-requirements"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://bun.com/docs"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "extracted"
+reason = "direct email or mailing list"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"security@bun.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Incredibly fast JavaScript runtime, bundler, test runner, and package manager – all in one"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://bun.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Bun"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:33.737167Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/oven-sh/bun.git"
 default_branch = "main"
 fork = false
-head_sha = "48ff9eb2fdab9269c63889d4093f26f442a40c72"
+head_sha = "c6b7fcb5bb8112685b3fb844ec771720b858c700"
 html_url = "https://github.com/oven-sh/bun"
-stars = 93602
+stars = 95970

@@ -2,10 +2,10 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
-- Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
 - Inferred repo.test from Cargo.toml as `cargo test --workspace`.
-- Imported repo.toolchain.min from Cargo.toml as `1.94.0` (Rust).
+- Imported repo.toolchain.min from Cargo.toml as `1.96.1` (Rust).
 - Discovered related relation to github.com/dani-garcia/vaultwarden from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
@@ -17,10 +17,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Security contact normalization (2026-07-08)
+## Fresh verification
 
-Replaced non-actionable `security_contact` value `https://github.com/dani-garcia/vaultwarden/issues` with `unknown`. The prior URL was not an email or actionable vulnerability-reporting surface (promotion scoring: medium-present). Honest absence unblocks auto-publish without inventing a reporting channel.
-
-## Auto-promotion
-
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

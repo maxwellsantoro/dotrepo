@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/hyperium/hyper"
-generated_at = "2026-07-05T22:55:49.374411Z"
+generated_at = "2026-09-16T16:17:29.647612Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `Cargo.toml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Cargo.toml`. Filled `repo.description` with inferred defaults. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "hyper"
@@ -61,11 +60,87 @@ provenance = [
     "manifest",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://hyper.rs"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/hyperium/hyper/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"An HTTP library for Rust"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://hyper.rs"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"hyper"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:17:29.647612Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/hyperium/hyper.git"
 default_branch = "master"
 fork = false
-head_sha = "e0d14d19a0a87962efe92acdaa029253be54a612"
+head_sha = "74a39081ff1496970fb75da75c5282b23a9b69e5"
 html_url = "https://github.com/hyperium/hyper"
-stars = 16202
+stars = 16324

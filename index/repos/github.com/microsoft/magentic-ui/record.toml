@@ -2,21 +2,21 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/microsoft/magentic-ui"
-generated_at = "2026-07-01T18:15:18.79198Z"
+generated_at = "2026-09-16T16:14:42.46816Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `pyproject.toml`. Imported `repo.build` from `pyproject.toml`. Imported `repo.test` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `CONTRIBUTING.md`, `pyproject.toml`, and `.github/workflows/checks.yaml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `.github/workflows/checks.yaml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
-name = "MagenticLite"
-description = "Big tasks. Small models."
+name = "magentic-ui"
+description = "MagenticLite is an experimental agent that works across the browser and local file system"
 homepage = "https://www.microsoft.com/en-us/research/blog/magenticlite-magenticbrain-fara1-5-an-agentic-experience-optimized-for-small-models/"
 license = "MIT"
 visibility = "public"
@@ -29,7 +29,7 @@ languages = [
     "HTML",
 ]
 build = "python -m build"
-test = "python -m pytest"
+test = "pytest tests --cov=src --cov-report=xml --cov-report=term-missing"
 topics = [
     "agents",
     "ai",
@@ -44,6 +44,10 @@ topics = [
     "magenticlite",
 ]
 
+[repo.toolchain]
+min = "3.12"
+ecosystem = "Python"
+
 [owners]
 maintainers = []
 security_contact = "secure@microsoft.com"
@@ -52,11 +56,87 @@ security_contact = "secure@microsoft.com"
 root = "./docs/configuration.md"
 getting_started = "./docs/installation.md"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"./docs/installation.md"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"./docs/configuration.md"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"secure@microsoft.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"MagenticLite is an experimental agent that works across the browser and local file system"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.microsoft.com/en-us/research/blog/magenticlite-magenticbrain-fara1-5-an-agentic-experience-optimized-for-small-models/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"magentic-ui"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:14:42.46816Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/checks.yaml"
+state = "present"
+valueJson = '"pytest tests --cov=src --cov-report=xml --cov-report=term-missing"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/microsoft/magentic-ui.git"
 default_branch = "main"
 fork = false
-head_sha = "36fa15838bb288a4a5e6b2850d540e3f0cdd5a0b"
+head_sha = "d3c9d13c39288257286a66daabf7c5b5fb72ee69"
 html_url = "https://github.com/microsoft/magentic-ui"
-stars = 9931
+stars = 10091

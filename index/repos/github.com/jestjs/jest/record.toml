@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/jestjs/jest"
-generated_at = "2026-07-01T18:09:46.345315Z"
+generated_at = "2026-09-16T16:14:12.680463Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Follow on Twitter"
-description = "**👩🏻‍💻 Developer Ready**: A comprehensive JavaScript testing solution."
+name = "jest"
+description = "Delightful JavaScript Testing."
 homepage = "https://jestjs.io"
 license = "MIT"
 visibility = "public"
@@ -41,6 +41,10 @@ topics = [
     "snapshot",
 ]
 
+[repo.toolchain]
+min = "18.14.0"
+ecosystem = "Node.js"
+
 [owners]
 maintainers = []
 security_contact = "security@lists.openjsf.org"
@@ -63,11 +67,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://jestjs.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@lists.openjsf.org"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"yarn build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Delightful JavaScript Testing."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://jestjs.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"jest"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:14:12.680463Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"yarn test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/jestjs/jest.git"
 default_branch = "main"
 fork = false
-head_sha = "f49721c78e195558b40913977c9230f5b7f559d8"
+head_sha = "121c2ae6d5796917d90024514c9f7ddb5a76df83"
 html_url = "https://github.com/jestjs/jest"
-stars = 45400
+stars = 45455

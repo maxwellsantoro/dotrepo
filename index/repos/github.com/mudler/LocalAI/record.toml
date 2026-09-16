@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mudler/LocalAI"
-generated_at = "2026-07-01T18:17:14.562602Z"
+generated_at = "2026-09-16T16:15:03.529489Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `go.mod`. Imported `repo.build` from `go.mod`. Imported `repo.test` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `core/http/react-ui/package.json`, `CONTRIBUTING.md`, and `go.mod`. Imported `repo.build` from `core/http/react-ui/package.json`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "LocalAI stars"
-description = "**LocalAI** is the open-source AI engine."
+name = "Follow LocalAI_API"
+description = "LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required."
 homepage = "https://localai.io"
 license = "MIT"
 visibility = "public"
@@ -24,10 +24,10 @@ languages = [
     "Go",
     "JavaScript",
     "Python",
-    "HTML",
     "C++",
-    "Shell",
+    "HTML",
     "CSS",
+    "Shell",
     "Makefile",
     "CMake",
     "C",
@@ -36,8 +36,8 @@ languages = [
     "Nix",
     "Go Template",
 ]
-build = "go build ./..."
-test = "go test ./..."
+build = "npm run build"
+test = "make test"
 topics = [
     "llama",
     "ai",
@@ -59,6 +59,10 @@ topics = [
     "agents",
 ]
 
+[repo.toolchain]
+min = "1.26.0"
+ecosystem = "Go"
+
 [owners]
 maintainers = []
 security_contact = "security@localai.io"
@@ -67,11 +71,87 @@ security_contact = "security@localai.io"
 root = "https://localai.io/"
 getting_started = "https://localai.io/basics/getting_started/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://localai.io/basics/getting_started/"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://localai.io/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@localai.io"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "core/http/react-ui/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"LocalAI is the open-source AI engine. Run any model - LLMs, vision, voice, image, video - on any hardware. No GPU required."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://localai.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Follow LocalAI_API"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:15:03.529489Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "CONTRIBUTING.md"
+state = "present"
+valueJson = '"make test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/mudler/LocalAI.git"
 default_branch = "master"
 fork = false
-head_sha = "0d8adfc59ab3b0d14f8ceb1c68880c46793823c3"
+head_sha = "2d30d28f32863a765325f6d45a5f05d22fb01362"
 html_url = "https://github.com/mudler/LocalAI"
-stars = 47254
+stars = 49134

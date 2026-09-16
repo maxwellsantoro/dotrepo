@@ -1,11 +1,11 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
-- Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from CODEOWNERS; `owners.team` is `@sunnypilot/dev-internal` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.
+- Imported repository metadata and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Imported repo.build from pyproject.toml as `python -m build`.
-- Imported repo.test from pyproject.toml as `python -m pytest`.
+- Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
+- Inferred repo.build from pyproject.toml as `python -m build`.
+- Inferred repo.test from pyproject.toml as `python -m pytest`.
+- Imported repo.toolchain.min from pyproject.toml as `3.12.3` (Python).
 - Discovered related relation to github.com/sunnyhaibin/sunnypilot from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -13,9 +13,9 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

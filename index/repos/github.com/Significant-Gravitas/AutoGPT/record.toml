@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/Significant-Gravitas/AutoGPT"
-generated_at = "2026-07-06T18:31:34.709202Z"
+generated_at = "2026-09-16T16:19:38.547299Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `.github/workflows/classic-autogpt-ci.yml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.test` from `.github/workflows/classic-autogpt-ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `autogpt_platform/autogpt_libs/pyproject.toml`, and `.github/workflows/classic-autogpt-ci.yml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Inferred `repo.build` from `autogpt_platform/autogpt_libs/pyproject.toml`. Inferred `repo.test` from `.github/workflows/classic-autogpt-ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "AutoGPT"
@@ -28,12 +27,15 @@ languages = [
     "PLpgSQL",
     "Shell",
     "Jinja",
-    "CSS",
-    "Batchfile",
     "Dockerfile",
+    "CSS",
+    "C",
+    "Batchfile",
     "Makefile",
     "Elixir",
+    "HCL",
 ]
+build = "python -m build"
 test = 'poetry run pytest -vv \'
 topics = [
     "ai",
@@ -59,32 +61,93 @@ maintainers = [
     "@Significant-Gravitas/admins",
 ]
 team = "@Significant-Gravitas/maintainers"
-security_contact = "https://github.com/Significant-Gravitas/AutoGPT/security/advisories/new"
+security_contact = "security@agpt.co"
 
 [docs]
 root = "https://docs.agpt.co"
-getting_started = "https://agpt.co/docs/platform/getting-started/getting-started"
+getting_started = "https://docs.agpt.co/platform/getting-started"
 
-[relations]
-references = []
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.agpt.co/platform/getting-started"'
 
-[[relations.links]]
-kind = "related"
-target = "github.com/Significant-Gravitas/AutoGPT"
-notes = "Cross-link from README: Forge"
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.agpt.co"'
 
-[relations.links.trust]
-confidence = "low"
-provenance = [
-    "declared",
-    "readme",
-]
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@agpt.co"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@Significant-Gravitas/maintainers"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "autogpt_platform/autogpt_libs/pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://agpt.co"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"AutoGPT"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:19:38.547299Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/classic-autogpt-ci.yml"
+state = "present"
+valueJson = '"poetry run pytest -vv \\"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/Significant-Gravitas/AutoGPT.git"
 default_branch = "master"
 fork = false
-head_sha = "e2711b1748bdc3fe702ab4e44c6a11df98458c53"
+head_sha = "98381ab27f733468bfe1f9c4f4942b4b416d9a8b"
 html_url = "https://github.com/Significant-Gravitas/AutoGPT"
-stars = 185403
+stars = 187385

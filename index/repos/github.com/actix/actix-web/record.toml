@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/actix/actix-web"
-generated_at = "2026-07-06T18:33:23.281376Z"
+generated_at = "2026-09-16T16:20:13.299582Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `Cargo.toml` and `justfile`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Imported `repo.test` from `justfile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `Cargo.toml` and `justfile`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `Cargo.toml`. Imported `repo.test` from `justfile`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "actix-web"
@@ -46,11 +45,87 @@ ecosystem = "Rust"
 [docs]
 root = "https://actix.rs"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://actix.rs"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo build --workspace"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://actix.rs"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "medium"
+method = "inferred"
+reason = "fell back to directory name or GitHub API"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"actix-web"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:20:13.299582Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "justfile"
+state = "present"
+valueJson = '"just test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/actix/actix-web.git"
 default_branch = "main"
 fork = false
-head_sha = "c6249cc00c757083ae1b29a3c4e1748185f43071"
+head_sha = "1a41c774ec829174608b4d6cff6e8ff3c2151a41"
 html_url = "https://github.com/actix/actix-web"
-stars = 24710
+stars = 24825
