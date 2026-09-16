@@ -563,12 +563,18 @@ function profileQueryMatches(profile, query) {
   return matched;
 }
 
-function searchProfileFromInventoryEntry(entry) {
+function searchRanking(profile, matched) {
+  const completenessSignalCount = ["hasBuild", "hasTest", "hasDocs", "hasSecurityContact", "hasOwnershipSignal", "hasLicense"]
+    .filter((key) => profile.completeness?.[key]).length;
+  const confidence = normalizeSearchValue(profile.trust?.confidence);
+  const trustBoost = confidence === "high" ? 3 : confidence === "medium" ? 1 : 0;
   return {
-    identity: entry.identity,
-    name: entry.name,
-    purpose: entry.description,
-    links: entry.links
+    score: matched.length * 10 + completenessSignalCount + trustBoost,
+    matchedFieldCount: matched.length,
+    completenessSignalCount,
+    basis: [...(matched.length ? ["matchedFields"] : []),
+      ...(completenessSignalCount ? ["profileCompleteness"] : []),
+      ...(trustBoost ? ["trustConfidence"] : [])]
   };
 }
 
@@ -582,6 +588,7 @@ function searchItemFromProfile(profile, matched = ["relation"]) {
     completeness: profile.completeness,
     trust: profile.trust,
     matched,
+    ranking: searchRanking(profile, matched),
     links: profile.links
   };
 }
@@ -612,41 +619,19 @@ function parseSearchOptions(url) {
   };
 }
 
-function searchRequiresProfileSnapshots(options) {
-  return (
-    options.languages.length > 0 ||
-    options.topics.length > 0 ||
-    options.statuses.length > 0 ||
-    options.confidences.length > 0 ||
-    options.requireBuild ||
-    options.requireTest ||
-    options.requireDocs ||
-    options.requireSecurityContact ||
-    options.requireLicense
-  );
-}
-
-async function loadInventoryProfiles(env, request) {
-  const inventory = await loadInventorySnapshot(env, request);
-  const repositories = Array.isArray(inventory.repositories) ? inventory.repositories : [];
-  const profiles = [];
-  for (const entry of repositories) {
-    const identity = entry.identity ?? {};
-    const profile = await loadProfileSnapshot(env, request, identity.host, identity.owner, identity.repo);
-    if (profile !== null) {
-      profiles.push(profile);
-    }
-  }
-  return { inventory, profiles };
-}
-
-async function buildSearchResponse(env, request, url, freshness) {
+async function buildSearchResponse(env, request, url, meta) {
   const options = parseSearchOptions(url);
-  const inventory = await loadInventorySnapshot(env, request);
-  const repositories = Array.isArray(inventory.repositories) ? inventory.repositories : [];
-  const profiles = searchRequiresProfileSnapshots(options)
-    ? (await loadInventoryProfiles(env, request)).profiles
-    : repositories.map(searchProfileFromInventoryEntry);
+  const response = await fetchInternalAsset(env, request,
+    snapshotAssetPath(meta, "/repos/search.json", "/v0/repos/search.json"));
+  if (!response.ok) {
+    throw new Error(`search index unavailable: ${response.status}; regenerate the public export`);
+  }
+  const inventory = await response.json();
+  if (inventory.apiVersion !== PUBLIC_API_VERSION || !Array.isArray(inventory.profiles)) {
+    throw new Error("invalid search index");
+  }
+  const profiles = inventory.profiles;
+  const freshness = inventory.freshness;
   let results = [];
   for (const profile of profiles) {
     if (!profileMatchesFilters(profile, options)) {
@@ -659,11 +644,15 @@ async function buildSearchResponse(env, request, url, freshness) {
     results.push(searchItemFromProfile(profile, matched));
   }
   results.sort((left, right) => {
+    const score = right.ranking.score - left.ranking.score;
+    if (score !== 0) return score;
     const matched = right.matched.length - left.matched.length;
     if (matched !== 0) return matched;
-    return `${left.identity.host}/${left.identity.owner}/${left.identity.repo}`.localeCompare(
-      `${right.identity.host}/${right.identity.owner}/${right.identity.repo}`
-    );
+    for (const key of ["host", "owner", "repo"]) {
+      if (left.identity[key] < right.identity[key]) return -1;
+      if (left.identity[key] > right.identity[key]) return 1;
+    }
+    return 0;
   });
   const matchedCount = results.length;
   results = results.slice(0, options.limit);
@@ -1204,7 +1193,12 @@ export async function handleRequest(request, env) {
   if (strippedPath === "/v0/search") {
     const meta = await loadMeta(env, request);
     const freshness = buildFreshnessFromMeta(meta);
-    return jsonResponse(200, await buildSearchResponse(env, request, url, freshness));
+    try {
+      return jsonResponse(200, await buildSearchResponse(env, request, url, meta));
+    } catch (error) {
+      return jsonResponse(503, { apiVersion: PUBLIC_API_VERSION, freshness,
+        error: buildPublicErrorDetail(PUBLIC_ERROR_CODES.internalError, error.message) });
+    }
   }
 
   if (strippedPath === "/v0/compare") {

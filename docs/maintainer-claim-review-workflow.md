@@ -232,3 +232,10 @@ cargo run -p dotrepo-cli -- --root index claim-event \
 - public site or API presentation of claim history
 
 This is an operator workflow first, not a public product flow.
+
+State-changing `corrected` events include explicit `from` and `to` transitions.
+Corrections that only amend metadata may omit the transition. Index validation
+replays every event from draft, checks transition continuity and legality, and
+requires the replayed state to match `claim.state`. Older state-changing
+corrections without a transition need their intended transition documented
+before the history can pass validation.

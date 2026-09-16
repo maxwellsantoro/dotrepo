@@ -20,3 +20,10 @@ Replaced non-actionable `security_contact` value `https://x.com/storybookjs` wit
 ## Auto-promotion
 
 Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `https://github.com/storybookjs/storybook/security/advisories/new`.
+- Source: [SECURITY.md at `4f66ceeb2410de4bcefe3ba3919267495cc40f37`](https://github.com/storybookjs/storybook/blob/4f66ceeb2410de4bcefe3ba3919267495cc40f37/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- The policy explicitly directs private GitHub advisory reporting. The read-only GitHub API `GET /repos/storybookjs/storybook/private-vulnerability-reporting` returned `{"enabled":true}` on 2026-09-16. Resolved the documented repository reporting workflow to `https://github.com/storybookjs/storybook/security/advisories/new`.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

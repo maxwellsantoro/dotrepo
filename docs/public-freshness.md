@@ -45,21 +45,24 @@ became invalid at that time.
 
 ### `validators`
 
-`meta.json` also carries cache validators derived from `snapshotDigest`:
+`meta.json` carries distinct source and payload validators:
 
 - `validators.snapshot` is the digest in explicit `sha256:<digest>` form
-- `validators.etag` is the recommended strong ETag value for the exported
-  snapshot family
+- `validators.etag` is derived from `snapshotId`, identifying the exact exported
+  payload family, including freshness metadata
 
-Consumers can compare either validator with a previously seen value before
-refetching profile, trust, query-input, or inventory files.
+Compare `snapshotId` or `validators.etag` before reusing exported files. The
+source validator alone does not detect changed export timestamps or formats.
 
 ### Content-addressed paths
 
 `/v0/meta.json` is the primary mutable snapshot pointer. Its `snapshotId` is
-the first 12 hexadecimal characters of `snapshotDigest`, and its `paths` object
-names the immutable snapshot root, inventory, file manifest, stats document,
-snapshot log, and internal query-input root.
+a SHA-256 of the serialized payload paths and bytes, including freshness,
+search data, and generated links. Identical payloads reuse an ID; changed
+export timestamps, base paths, or output formats produce a new ID even if
+`snapshotDigest` stays the same. Its `paths` object names the immutable snapshot
+root, inventory, file manifest, stats document, snapshot log, and internal
+query-input root.
 
 Canonical snapshot responses are served with a one-year `immutable` cache
 policy. Compatibility paths such as `/v0/repos/index.json` remain available,
@@ -76,7 +79,7 @@ Snapshot retention is part of the public trust surface:
 - every published snapshot is expected to remain retrievable from the archive
   path, backed by the Worker `SNAPSHOT_ARCHIVE` R2 binding when configured
 - `/v0/snapshots/log.json` is append-only and never pruned; it lists every
-  published digest with `generatedAt`, `repositoryCount`, and `fileCount`
+  published snapshot ID with its source digest, `generatedAt`, `repositoryCount`, and `fileCount`
 
 The static asset bundle is intentionally not the historical archive. Workers
 static asset deployments replace the deployed asset manifest, so retaining every
@@ -106,7 +109,7 @@ lists each exported payload file, excluding `files.json` itself, with:
 - SHA-256 of the emitted file contents
 
 Consumers fetch `meta.json`, follow `paths.files`, and need no further work if
-the snapshot digest is unchanged. When it changes, the file manifest provides
+the snapshot ID is unchanged. When it changes, the file manifest provides
 the exact immutable payload set and hashes.
 
 The deployed export currently promises a seven-day `staleAfter` window. That

@@ -23,6 +23,7 @@ public/
     files.json
     repos/
       index.json
+      search.json
       <host>/
         <owner>/
           <repo>/
@@ -275,3 +276,14 @@ For a cut/review checklist, see
 - [`rfcs/0018-static-public-serving-and-freshness.md`](../rfcs/0018-static-public-serving-and-freshness.md)
 - [`rfcs/0019-public-trust-and-query-wrappers.md`](../rfcs/0019-public-trust-and-query-wrappers.md)
 - [`README.md`](../README.md)
+
+### Hosted search data
+
+The exporter writes `repos/search.json` in each immutable snapshot. It contains
+compact profiles with the searchable fields, completeness, trust, and links
+needed for filtering and ranking. Both filtered and unfiltered hosted searches
+read this same document after reading the snapshot pointer: two asset reads,
+independent of repository count. Matching still scans the compact document in
+memory; the result limit bounds response size, not that scan. Deploy the Worker
+and regenerated export together. A missing search document returns a service
+error rather than fetching every individual profile.

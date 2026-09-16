@@ -23,3 +23,10 @@ Replaced non-actionable `security_contact` value `https://github.com/LadybirdBro
 ## Auto-promotion
 
 Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `https://github.com/LadybirdBrowser/ladybird/security/advisories/new`.
+- Source: [SECURITY.md at `9425ccfac4061c8d5cc8bd5db7e6dfa4a6eac135`](https://github.com/LadybirdBrowser/ladybird/blob/9425ccfac4061c8d5cc8bd5db7e6dfa4a6eac135/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- The policy explicitly directs private GitHub advisory reporting. The read-only GitHub API `GET /repos/LadybirdBrowser/ladybird/private-vulnerability-reporting` returned `{"enabled":true}` on 2026-09-16. Resolved the documented repository reporting workflow to `https://github.com/LadybirdBrowser/ladybird/security/advisories/new`.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

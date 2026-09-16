@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `.github/workflows/build-ilspy.yml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `.github/workflows/build-ilspy.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh.'
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `.github/workflows/build-ilspy.yml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "christoph.wille@gmail.com"` is intentional. Inferred `repo.build` from `.github/workflows/build-ilspy.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh.'
 
 [repo]
 name = "ILSpy"
@@ -53,7 +53,7 @@ topics = [
 
 [owners]
 maintainers = []
-security_contact = "unknown"
+security_contact = "christoph.wille@gmail.com"
 
 [relations]
 references = []

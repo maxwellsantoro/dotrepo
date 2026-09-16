@@ -857,55 +857,31 @@ fn score_index_record_for_promotion_treats_command_conflict_as_unresolved() {
 }
 
 #[test]
-fn downgrade_guard_preserves_verified_status_when_only_new_field_scores_lower() {
+fn downgrade_guard_requires_fresh_verification_even_for_unchanged_values() {
     let previous = make_verified_manifest_with_security_contact();
+    for build in [previous.repo.build.clone(), Some("make maybe".into())] {
+        let mut fresh = previous.clone();
+        fresh.record.status = RecordStatus::Inferred;
+        fresh.record.trust.as_mut().unwrap().confidence = Some("medium".into());
+        fresh.repo.build = build;
+        let outcome = guard_against_unjustified_downgrade(Some(&previous), &mut fresh).unwrap();
+        assert!(!outcome.preserved);
+        assert_eq!(fresh.record.status, RecordStatus::Inferred);
+        assert_eq!(
+            fresh.record.trust.as_ref().unwrap().confidence.as_deref(),
+            Some("medium")
+        );
+    }
+}
 
-    // Fresh refresh keeps every field the previous verified record had, and
-    // gains a new `docs.root` value -- exactly the boto3/ray shape observed
-    // in a live batch run, where a routine refresh should not silently
-    // regress an already-verified record just because it learned something
-    // new that happens to score below high confidence.
+#[test]
+fn downgrade_guard_never_inherits_canonical_authority() {
+    let mut previous = make_verified_manifest_with_security_contact();
+    previous.record.status = RecordStatus::Canonical;
     let mut fresh = previous.clone();
-    fresh.record.status = RecordStatus::Inferred;
-    fresh.record.trust = Some(dotrepo_schema::Trust {
-        confidence: Some("medium".into()),
-        provenance: vec!["imported".into(), "inferred".into()],
-        notes: Some("Bootstrapped from CODEOWNERS and SECURITY.md.".into()),
-    });
-    fresh.docs = Some(dotrepo_schema::Docs {
-        root: Some("https://example.com/docs".into()),
-        getting_started: None,
-        architecture: None,
-        api: None,
-    });
-
-    let outcome = guard_against_unjustified_downgrade(Some(&previous), &mut fresh)
-        .expect("guard should evaluate a previously verified record");
-
-    assert!(
-        outcome.preserved,
-        "no field regressed, so verified status must be restored"
-    );
-    assert!(outcome.regressed_fields.is_empty());
-    assert_eq!(fresh.record.status, RecordStatus::Verified);
-    assert_eq!(
-        fresh.record.trust.as_ref().unwrap().confidence.as_deref(),
-        Some("high")
-    );
-    assert!(fresh
-        .record
-        .trust
-        .as_ref()
-        .unwrap()
-        .notes
-        .as_ref()
-        .unwrap()
-        .contains("Preserved prior verified status"));
-    // The newly gained field is not discarded by the guard.
-    assert_eq!(
-        fresh.docs.as_ref().unwrap().root.as_deref(),
-        Some("https://example.com/docs")
-    );
+    fresh.record.status = RecordStatus::Imported;
+    assert!(guard_against_unjustified_downgrade(Some(&previous), &mut fresh).is_none());
+    assert_eq!(fresh.record.status, RecordStatus::Imported);
 }
 
 #[test]

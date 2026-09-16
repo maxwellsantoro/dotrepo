@@ -17,3 +17,10 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `security@ant.design`.
+- Source: [SECURITY.md at `745b6d11a132573a5127eaf19860b8a5f2f6d263`](https://github.com/ant-design/ant-design/blob/745b6d11a132573a5127eaf19860b8a5f2f6d263/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- The policy explicitly identifies `security@ant.design` as a vulnerability reporting channel.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

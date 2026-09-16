@@ -379,3 +379,38 @@ fn import_options_can_populate_record_generated_at() {
         "generated_at should be rendered into the imported manifest",
     );
 }
+
+#[test]
+fn immutable_export_identity_changes_with_payload_and_retains_history() {
+    let root = temp_dir("immutable-reexport");
+    let first = deterministic_freshness(Some(24));
+    let outputs = export_public_index_static(&fixture_index_root(), &root, first.clone()).unwrap();
+    for (path, text) in &outputs {
+        fs::create_dir_all(path.parent().unwrap()).unwrap();
+        fs::write(path, text).unwrap();
+    }
+    let meta: Value =
+        serde_json::from_str(&fs::read_to_string(root.join("v0/meta.json")).unwrap()).unwrap();
+    let mut second = first.clone();
+    second.generated_at = "2026-03-10T19:30:00Z".into();
+    let next = export_outputs_map(
+        export_public_index_static(&fixture_index_root(), &root, second).unwrap(),
+        &root,
+    );
+    let next_meta: Value = serde_json::from_str(&next["v0/meta.json"]).unwrap();
+    assert_eq!(meta["snapshotDigest"], next_meta["snapshotDigest"]);
+    assert_ne!(meta["snapshotId"], next_meta["snapshotId"]);
+    let log: Value = serde_json::from_str(&next["v0/snapshots/log.json"]).unwrap();
+    assert_eq!(log["snapshotCount"], 2);
+    let repeated = export_outputs_map(
+        export_public_index_static(&fixture_index_root(), &root, first).unwrap(),
+        &root,
+    );
+    for (path, bytes) in outputs {
+        let key = path.strip_prefix(&root).unwrap().to_str().unwrap();
+        if key.starts_with("v0/snapshots/") && !key.ends_with("log.json") {
+            assert_eq!(&repeated[key], &bytes);
+        }
+    }
+    fs::remove_dir_all(root).unwrap();
+}

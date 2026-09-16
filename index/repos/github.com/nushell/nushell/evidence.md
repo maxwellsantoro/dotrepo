@@ -26,3 +26,10 @@ Replaced non-actionable `security_contact` value `https://discord.gg/NtAbbGn` wi
 ## Auto-promotion
 
 Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `https://github.com/nushell/nushell/security/advisories/new`.
+- Source: [SECURITY.md at `0667685083650a32d4affc0303584fc1cf20888a`](https://github.com/nushell/nushell/blob/0667685083650a32d4affc0303584fc1cf20888a/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- The policy explicitly identifies `https://github.com/nushell/nushell/security/advisories/new` as a vulnerability reporting channel.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

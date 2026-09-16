@@ -21,3 +21,10 @@ Replaced non-actionable `security_contact` value `https://cve.mitre.org/cgi-bin/
 ## Auto-promotion
 
 Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `https://github.com/traefik/traefik/security/advisories`.
+- Source: [SECURITY.md at `e75250a31ae773e50e9c16514e3aebcb92059042`](https://github.com/traefik/traefik/blob/e75250a31ae773e50e9c16514e3aebcb92059042/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- The policy explicitly identifies `https://github.com/traefik/traefik/security/advisories` as a vulnerability reporting channel.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

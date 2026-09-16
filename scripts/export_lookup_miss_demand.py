@@ -51,9 +51,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     repo_root = Path(__file__).resolve().parents[1]
-    inputs = args.input or [
-        str(repo_root / "scripts" / "fixtures" / "lookup_miss_sample.log")
-    ]
+    inputs = args.input or [str(repo_root / "scripts" / "fixtures" / "lookup_miss_sample.log")]
     stamp = args.stamp.strip() or datetime.now(timezone.utc).strftime("%Y%m%d")
     out_dir = Path(args.output_dir)
     if not out_dir.is_absolute():

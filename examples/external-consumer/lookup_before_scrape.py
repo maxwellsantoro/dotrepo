@@ -21,7 +21,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 import urllib.error
 import urllib.request
 from dataclasses import asdict, dataclass, field
@@ -79,7 +78,9 @@ def parse_repository_identity(url_or_identity: str) -> tuple[str, str, str]:
     raise ValueError(f"cannot parse repository identity: {url_or_identity}")
 
 
-def profile_url(base_url: str, host: str, owner: str, repo: str, *, surface: str = "profile") -> str:
+def profile_url(
+    base_url: str, host: str, owner: str, repo: str, *, surface: str = "profile"
+) -> str:
     base = base_url.rstrip("/")
     name = "profile.json" if surface == "profile" else "index.json"
     return f"{base}/v0/repos/{host}/{owner}/{repo}/{name}"
@@ -95,7 +96,9 @@ def _nonempty(value: Any) -> bool:
     return True
 
 
-def extract_trust_and_freshness(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any], str | None]:
+def extract_trust_and_freshness(
+    payload: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any], str | None]:
     """Pull trust/status/freshness without inventing values.
 
     Supports both the public ``profile.json`` envelope and the ``index.json``
@@ -139,9 +142,7 @@ def extract_trust_and_freshness(payload: dict[str, Any]) -> tuple[dict[str, Any]
         raw_trust = record.get("trust")
         if isinstance(raw_trust, dict):
             trust = {
-                k: raw_trust[k]
-                for k in ("confidence", "provenance", "notes")
-                if k in raw_trust
+                k: raw_trust[k] for k in ("confidence", "provenance", "notes") if k in raw_trust
             }
         if record_status is None and isinstance(record.get("status"), str):
             record_status = record["status"]

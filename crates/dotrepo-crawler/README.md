@@ -55,3 +55,16 @@ uv run python scripts/run_autonomous_index_batch.py \
 - [`docs/factual-crawl-automation.md`](../../docs/factual-crawl-automation.md) — pipeline design and gates
 - [`index/README.md`](../../index/README.md) — overlay layout and autonomous rules
 - [`ROADMAP.md`](../../ROADMAP.md) — Milestone 1 factory and Milestone 4 scale gates
+### Refresh and writeback integrity
+
+Repository content reads use the captured head commit, and a missing head SHA
+aborts the crawl. Fresh field scores determine promotion to verified; a previous
+verified status cannot override lower current confidence. Autonomous planning
+and writeback reject native, reviewed, and canonical records.
+
+Writeback takes a per-record `.writeback.lock`, stages all artifacts, and backs
+up existing files before committing. An I/O failure rolls back committed files.
+This is not a crash-atomic transaction. After a process or machine crash, inspect
+the lock, staged files, and `*.backup` siblings and restore a consistent set
+before removing the lock and retrying. A rollback failure retains backups and
+reports their paths for recovery.

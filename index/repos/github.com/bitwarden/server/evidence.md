@@ -22,3 +22,10 @@ Replaced non-actionable `security_contact` value `https://bitwarden.com/contact`
 ## Auto-promotion
 
 Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `https://hackerone.com/bitwarden/`.
+- Source: [SECURITY.md at `2294b786bc771290059137468d1ec3b1fc2c71c2`](https://github.com/bitwarden/server/blob/2294b786bc771290059137468d1ec3b1fc2c71c2/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- The policy explicitly identifies `https://hackerone.com/bitwarden/` as a vulnerability reporting channel.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

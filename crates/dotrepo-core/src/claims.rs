@@ -715,7 +715,7 @@ fn event_transition_for(
     next: &ClaimState,
     kind: &ClaimEventKind,
 ) -> Option<ClaimTransition> {
-    if matches!(kind, ClaimEventKind::Corrected) {
+    if matches!(kind, ClaimEventKind::Corrected) && current == next {
         return None;
     }
 
@@ -1193,7 +1193,8 @@ pub(crate) fn validate_claim_event_history(
     }
 
     let mut expected_sequence = 1_u32;
-    for loaded in events {
+    let mut replayed_state = ClaimState::Draft;
+    for (index, loaded) in events.iter().enumerate() {
         let event = &loaded.event;
         if event.event.sequence != expected_sequence {
             findings.push(index_error(
@@ -1206,6 +1207,38 @@ pub(crate) fn validate_claim_event_history(
             expected_sequence = event.event.sequence.saturating_add(1);
         } else {
             expected_sequence += 1;
+        }
+
+        if let Some(transition) = &event.transition {
+            if transition.from != replayed_state {
+                findings.push(index_error(
+                    relative_claim.to_path_buf(),
+                    format!(
+                        "{} starts from {:?}, but preceding history resolves to {:?}",
+                        loaded.path, transition.from, replayed_state
+                    ),
+                ));
+            }
+        }
+        let corrected = event.transition.as_ref().map(|transition| &transition.to);
+        match next_claim_state(&replayed_state, &event.event.kind, index > 0, corrected) {
+            Ok(next) => {
+                if event
+                    .transition
+                    .as_ref()
+                    .is_some_and(|transition| transition.to != next)
+                {
+                    findings.push(index_error(
+                        relative_claim.to_path_buf(),
+                        format!("{} has an invalid transition destination", loaded.path),
+                    ));
+                }
+                replayed_state = next;
+            }
+            Err(error) => findings.push(index_error(
+                relative_claim.to_path_buf(),
+                format!("{}: {}", loaded.path, error),
+            )),
         }
 
         let requires_transition = !matches!(event.event.kind, ClaimEventKind::Corrected);
@@ -1240,22 +1273,14 @@ pub(crate) fn validate_claim_event_history(
         }
     }
 
-    if let Some(last) = events.last() {
-        let terminal_state = last
-            .event
-            .transition
-            .as_ref()
-            .map(|transition| transition.to.clone())
-            .unwrap_or_else(|| claim.claim.state.clone());
-        if terminal_state != claim.claim.state {
-            findings.push(index_error(
-                relative_claim.to_path_buf(),
-                format!(
-                    "claim.state is {:?}, but the last event in {} resolves to {:?}",
-                    claim.claim.state, last.path, terminal_state
-                ),
-            ));
-        }
+    if replayed_state != claim.claim.state {
+        findings.push(index_error(
+            relative_claim.to_path_buf(),
+            format!(
+                "claim.state is {:?}, but replayed event history resolves to {:?}",
+                claim.claim.state, replayed_state
+            ),
+        ));
     }
 
     findings

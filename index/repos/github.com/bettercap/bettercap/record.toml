@@ -13,7 +13,7 @@ provenance = [
     "inferred",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, `Makefile`, and `go.mod`. Filled `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "evilsocket@gmail.com"` is intentional. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
 
 [repo]
 name = "BetterCap"
@@ -59,7 +59,7 @@ ecosystem = "Go"
 
 [owners]
 maintainers = []
-security_contact = "unknown"
+security_contact = "evilsocket@gmail.com"
 
 [docs]
 root = "https://www.bettercap.org/"

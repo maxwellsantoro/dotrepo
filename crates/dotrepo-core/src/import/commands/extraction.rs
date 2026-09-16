@@ -1269,7 +1269,7 @@ fn make_invocation_has_task(lower_command: &str, tasks: &[&str]) -> bool {
                 break;
             }
             let task = token.trim_matches(|c| matches!(c, ';' | '&' | '|' | '`' | '\'' | '"'));
-            if tasks.iter().any(|wanted| *wanted == task) {
+            if tasks.contains(&task) {
                 return true;
             }
         }

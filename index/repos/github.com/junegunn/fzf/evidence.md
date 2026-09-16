@@ -24,3 +24,10 @@ Replaced non-actionable `security_contact` value `https://github.com/junegunn/fz
 ## Auto-promotion
 
 Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `junegunn.c@gmail.com`.
+- Source: [SECURITY.md at `b1be3a8be1b833ce5b92fbbac11637643d60a046`](https://github.com/junegunn/fzf/blob/b1be3a8be1b833ce5b92fbbac11637643d60a046/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- Normalized the explicitly documented mailbox `junegunn.c AT gmail DOT com` to `junegunn.c@gmail.com`; no address was guessed.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

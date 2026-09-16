@@ -191,7 +191,7 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
         meta["validators"]["etag"],
         Value::String(format!(
             "\"dotrepo-v0-{}\"",
-            meta["snapshotDigest"].as_str().unwrap()
+            meta["snapshotId"].as_str().unwrap()
         ))
     );
     assert_eq!(
@@ -213,7 +213,7 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
             .expect("file manifest output"),
     )
     .expect("file manifest parses");
-    assert_eq!(files["fileCount"], Value::from(11));
+    assert_eq!(files["fileCount"], Value::from(12));
     let file_entries = files["files"].as_array().expect("file manifest entries");
     let snapshot_id = meta["snapshotId"].as_str().expect("snapshot id");
     assert!(file_entries.iter().any(|entry| {
@@ -257,7 +257,7 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
         meta["snapshotDigest"].clone()
     );
     assert_eq!(log["entries"][0]["repositoryCount"], Value::from(2));
-    assert_eq!(log["entries"][0]["fileCount"], Value::from(11));
+    assert_eq!(log["entries"][0]["fileCount"], Value::from(12));
 
     let stats =
         serde_json::from_str::<Value>(generated.get("v0/stats.json").expect("stats output"))
@@ -270,13 +270,13 @@ fn public_export_fixture_pack_covers_plain_and_claim_aware_identities() {
     assert_eq!(stats["snapshotCount"], Value::from(1));
     assert_eq!(stats["pagedigest"]["version"], Value::from(1));
     assert_eq!(stats["pagedigest"]["siteRev"], Value::from(1));
-    assert_eq!(stats["pagedigest"]["recordsCovered"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["recordsCovered"], Value::from(10));
     assert_eq!(stats["pagedigest"]["newRecords"], Value::from(0));
     assert_eq!(stats["pagedigest"]["changedRecords"], Value::from(0));
-    assert_eq!(stats["pagedigest"]["unchangedRecords"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["unchangedRecords"], Value::from(10));
     assert_eq!(stats["pagedigest"]["removedRecords"], Value::from(0));
     assert_eq!(stats["pagedigest"]["recordsNeedingFetch"], Value::from(0));
-    assert_eq!(stats["pagedigest"]["fetchesAvoided"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["fetchesAvoided"], Value::from(10));
     assert!(stats["pagedigest"]["manifestBytes"]
         .as_u64()
         .is_some_and(|bytes| bytes > 0));
@@ -360,11 +360,11 @@ fn public_export_pagedigest_stats_report_cold_start_fetch_cost() {
     let stats =
         serde_json::from_str::<Value>(generated.get("v0/stats.json").expect("stats output"))
             .expect("stats parses");
-    assert_eq!(stats["pagedigest"]["recordsCovered"], Value::from(9));
-    assert_eq!(stats["pagedigest"]["newRecords"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["recordsCovered"], Value::from(10));
+    assert_eq!(stats["pagedigest"]["newRecords"], Value::from(10));
     assert_eq!(stats["pagedigest"]["changedRecords"], Value::from(0));
     assert_eq!(stats["pagedigest"]["unchangedRecords"], Value::from(0));
-    assert_eq!(stats["pagedigest"]["recordsNeedingFetch"], Value::from(9));
+    assert_eq!(stats["pagedigest"]["recordsNeedingFetch"], Value::from(10));
     assert_eq!(stats["pagedigest"]["fetchesAvoided"], Value::from(0));
     assert_eq!(stats["pagedigest"]["bytesAvoided"], Value::from(0));
     assert_eq!(

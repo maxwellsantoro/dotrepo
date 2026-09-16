@@ -826,6 +826,8 @@ def smoke_test_cloudflare_worker(worker_dir: Path, base_path: str) -> None:
                 host,
                 "--port",
                 port,
+                "--var",
+                "CANONICAL_HOST:",
                 "--show-interactive-dev-session",
                 "false",
             ],
@@ -876,6 +878,8 @@ def prepare_worker_smoke_assets(source_root: Path, output_root: Path) -> None:
         path = paths.get(key)
         if isinstance(path, str):
             copy_path(path)
+
+    copy_path(f"{snapshot_root}/repos/search.json")
 
     inventory = json.loads((source_root / "v0/repos/index.json").read_text())
     repositories = inventory.get("repositories")
@@ -933,6 +937,16 @@ def run_cloudflare_worker_smoke(
     if status != 200:
         raise SystemExit(f"Cloudflare Worker meta smoke failed ({status}) for {meta_url}: {body}")
     meta = json.loads(body)
+    for query in ["limit=1", "requireLicense&limit=1"]:
+        search_url = f"http://{server_addr}{base}/v0/search?{query}"
+        status, body = http_get_text(search_url)
+        if status != 200:
+            raise SystemExit(f"Cloudflare Worker search smoke failed ({status}): {body}")
+        result = json.loads(body)
+        if result.get("returnedCount") != 1 or not result.get("results", [{}])[0].get("ranking"):
+            raise SystemExit("Cloudflare Worker search smoke returned no ranked result")
+        verify_freshness(result, meta, search_url)
+
     stats_url = f"http://{server_addr}{base}/v0/stats.json"
     status, body = http_get_text(stats_url)
     if status != 200:

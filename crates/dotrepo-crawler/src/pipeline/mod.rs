@@ -53,7 +53,11 @@ pub(crate) fn crawl_repository_with_client<C: GitHubClient>(
     let snapshot = client.fetch_repository_snapshot(&request.repository)?;
     let files = client.fetch_repository_files(
         &request.repository,
-        &snapshot.default_branch,
+        snapshot
+            .head_sha
+            .as_deref()
+            .filter(|sha| !sha.trim().is_empty())
+            .ok_or_else(|| anyhow!("cannot crawl repository files without a captured head SHA"))?,
         &snapshot.languages,
     )?;
     let materialized = materialize_repository(&MaterializeRepositoryInput {
@@ -105,6 +109,16 @@ pub(crate) fn crawl_repository_from_snapshot(
     let source_url = resolve_source_url(request, snapshot);
     let record_root = request.repository.record_root(&request.index_root);
     let previous_manifest = read_previous_manifest(&record_root);
+    if previous_manifest.as_ref().is_some_and(|manifest| {
+        manifest.record.mode == dotrepo_schema::RecordMode::Native
+            || matches!(
+                manifest.record.status,
+                dotrepo_schema::RecordStatus::Canonical | dotrepo_schema::RecordStatus::Reviewed
+            )
+    }) {
+        bail!("autonomous refresh cannot replace maintainer-owned or human-reviewed records");
+    }
+
     let mut diagnostics = materialized.diagnostics.clone();
     if !materialized.written_files.is_empty() {
         diagnostics.push(CrawlDiagnostic::info(
@@ -376,9 +390,15 @@ mod tests {
         fn fetch_repository_files(
             &self,
             _repository: &RepositoryRef,
-            _default_branch: &str,
+            revision: &str,
             _languages: &[String],
         ) -> Result<ConventionalRepositoryFiles> {
+            assert_eq!(
+                Some(revision),
+                self.snapshot.head_sha.as_deref(),
+                "files must be fetched at the captured commit"
+            );
+            assert_ne!(revision, self.snapshot.default_branch);
             Ok(self.files.clone())
         }
     }
@@ -644,7 +664,7 @@ mod tests {
     }
 
     #[test]
-    fn crawl_repository_from_snapshot_preserves_prior_verified_status_without_regression() {
+    fn crawl_repository_from_snapshot_requires_fresh_verification_for_prior_verified_record() {
         let index_root = temp_dir("downgrade-guard-preserve");
         let record_root = repository().record_root(&index_root);
         fs::create_dir_all(&record_root).expect("record root created");
@@ -709,29 +729,25 @@ description = "Prior verified description."
         )
         .expect("crawl succeeds");
 
-        // Two conflicting build-command workflows make repo.build Unresolved
-        // in the fresh import, which alone would leave the record below
-        // verified. The previous record never had repo.build present either
-        // (it was absent), so this is not a genuine regression -- the guard
-        // must restore verified/high rather than let this routine refresh
-        // silently downgrade the record over an unrelated ambiguity.
+        // The newly conflicting build commands must remain unresolved even if
+        // the previous verified record had no build command at all.
         let manifest = &report.writeback_plan.factual.import_plan.manifest;
-        assert_eq!(manifest.record.status, RecordStatus::Verified);
-        assert_eq!(
-            manifest
-                .record
-                .trust
-                .as_ref()
-                .and_then(|trust| trust.confidence.as_deref()),
-            Some("high")
-        );
+        assert!(!report.field_scores.summary.eligible_for_auto_publish);
+        assert_ne!(manifest.record.status, RecordStatus::Verified);
+        assert!(!manifest
+            .record
+            .trust
+            .as_ref()
+            .unwrap()
+            .provenance
+            .contains(&"verified".to_string()));
         assert!(report
             .writeback_plan
             .factual
             .import_plan
             .evidence_text
             .as_deref()
-            .is_some_and(|text| text.contains("Downgrade guard")));
+            .is_some_and(|text| text.contains("Fresh verification")));
 
         fs::remove_dir_all(materialized.temp_root).expect("materialized temp removed");
         fs::remove_dir_all(index_root).expect("index temp removed");
@@ -930,6 +946,18 @@ description = "Prior verified description."
         };
 
         let report = crawl_repository_with_client(&request, &client).expect("crawl succeeds");
+        let missing_head = FakeGitHubClient {
+            snapshot: GitHubRepositorySnapshot {
+                head_sha: None,
+                ..client.snapshot.clone()
+            },
+            files: client.files.clone(),
+        };
+        assert!(crawl_repository_with_client(&request, &missing_head)
+            .unwrap_err()
+            .to_string()
+            .contains("captured head SHA"));
+
         assert_eq!(
             report
                 .writeback_plan

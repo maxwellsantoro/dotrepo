@@ -105,8 +105,17 @@ fn public_snapshot_metadata_with_base(
     freshness: PublicFreshness,
     base_path: &str,
 ) -> PublicSnapshotMetadata {
-    let validators = public_cache_validators(&freshness.snapshot_digest);
     let snapshot_id = snapshot_id(&freshness.snapshot_digest);
+    public_snapshot_metadata_for_id(freshness, base_path, snapshot_id)
+}
+
+fn public_snapshot_metadata_for_id(
+    freshness: PublicFreshness,
+    base_path: &str,
+    snapshot_id: String,
+) -> PublicSnapshotMetadata {
+    let mut validators = public_cache_validators(&freshness.snapshot_digest);
+    validators.etag = format!("\"dotrepo-v0-{snapshot_id}\"");
     let base_path = base_path.trim().trim_end_matches('/');
     let root = format!("{base_path}/v0/snapshots/{snapshot_id}");
     PublicSnapshotMetadata {
@@ -203,10 +212,11 @@ fn public_snapshot_log(
     freshness: &PublicFreshness,
     repository_count: usize,
     file_count: usize,
+    snapshot_id: &str,
 ) -> Result<PublicSnapshotLog> {
     let mut entries = load_snapshot_log(out_root)?;
     let current = PublicSnapshotLogEntry {
-        snapshot_id: snapshot_id(&freshness.snapshot_digest),
+        snapshot_id: snapshot_id.to_string(),
         snapshot_digest: freshness.snapshot_digest.clone(),
         generated_at: freshness.generated_at.clone(),
         repository_count,
@@ -214,7 +224,7 @@ fn public_snapshot_log(
     };
     match entries
         .iter()
-        .position(|entry| entry.snapshot_digest == current.snapshot_digest)
+        .position(|entry| entry.snapshot_id == current.snapshot_id)
     {
         Some(index) => entries[index] = current,
         None => entries.push(current),
@@ -359,14 +369,6 @@ pub fn export_public_index_static_with_options(
     use rayon::prelude::*;
 
     let mut outputs = Vec::new();
-    outputs.push((
-        out_root.join("v0/meta.json"),
-        serde_json::to_string_pretty(&public_snapshot_metadata_with_base(
-            freshness.clone(),
-            base_path,
-        ))?,
-    ));
-
     let identities = list_index_repository_identities(index_root)?;
 
     // Each repository's exported files are computed in parallel. The per-repo
@@ -375,10 +377,15 @@ pub fn export_public_index_static_with_options(
     // collected in identity order and emitted serially so the `outputs` vector,
     // and therefore the derived `files.json` manifest, stays byte-identical to
     // the serial exporter.
-    let per_repo: Vec<(PublicRepositoryInventoryEntry, Vec<(PathBuf, String)>)> = identities
+    struct ExportedRepository {
+        inventory: PublicRepositoryInventoryEntry,
+        search_profile: serde_json::Value,
+        files: Vec<(PathBuf, String)>,
+    }
+    let per_repo: Vec<ExportedRepository> = identities
         .par_iter()
         .map(
-            |identity| -> Result<(PublicRepositoryInventoryEntry, Vec<(PathBuf, String)>)> {
+            |identity| -> Result<ExportedRepository> {
                 let repo_base = out_root
                     .join("v0/repos")
                     .join(&identity.host)
@@ -466,15 +473,23 @@ pub fn export_public_index_static_with_options(
                         )?,
                     ),
                 ];
-                Ok((inventory, files))
+                let search_profile = serde_json::json!({
+                    "identity": profile.identity, "name": profile.name, "purpose": profile.purpose,
+                    "homepage": profile.homepage, "license": profile.license,
+                    "languages": profile.languages, "topics": profile.topics,
+                    "completeness": profile.completeness, "trust": profile.trust, "links": profile.links,
+                });
+                Ok(ExportedRepository { inventory, search_profile, files })
             },
         )
         .collect::<Result<Vec<_>>>()?;
 
     let mut inventory = Vec::with_capacity(per_repo.len());
-    for (entry, files) in per_repo {
-        outputs.extend(files);
-        inventory.push(entry);
+    let mut search_profiles = Vec::with_capacity(per_repo.len());
+    for repository in per_repo {
+        search_profiles.push(repository.search_profile);
+        outputs.extend(repository.files);
+        inventory.push(repository.inventory);
     }
 
     let repository_count = inventory.len();
@@ -487,10 +502,41 @@ pub fn export_public_index_static_with_options(
             repositories: inventory,
         })?,
     ));
+    outputs.push((
+        out_root.join("v0/repos/search.json"),
+        serde_json::to_string_pretty(&serde_json::json!({
+            "apiVersion": PUBLIC_API_VERSION, "freshness": freshness,
+            "repositoryCount": repository_count, "profiles": search_profiles,
+        }))?,
+    ));
+    // Address the exact serialized payload, including freshness, links and exporter
+    // format changes. The index digest remains the source-tree identity.
+    let mut hasher = Sha256::new();
+    for (path, contents) in &outputs {
+        hasher.update(
+            path.strip_prefix(out_root)?
+                .to_string_lossy()
+                .replace('\\', "/")
+                .as_bytes(),
+        );
+        hasher.update([0]);
+        hasher.update(contents.as_bytes());
+        hasher.update([0xff]);
+    }
+    let export_id = format!("{:x}", hasher.finalize());
+    outputs.insert(
+        0,
+        (
+            out_root.join("v0/meta.json"),
+            serde_json::to_string_pretty(&public_snapshot_metadata_for_id(
+                freshness.clone(),
+                base_path,
+                export_id.clone(),
+            ))?,
+        ),
+    );
     let generated_at = freshness.generated_at.clone();
-    let snapshot_root = out_root
-        .join("v0/snapshots")
-        .join(snapshot_id(&freshness.snapshot_digest));
+    let snapshot_root = out_root.join("v0/snapshots").join(&export_id);
     let canonical_outputs = outputs
         .iter()
         .filter_map(|(path, contents)| {
@@ -519,6 +565,7 @@ pub fn export_public_index_static_with_options(
         &file_manifest.freshness,
         repository_count,
         canonical_file_count,
+        &export_id,
     )?;
     outputs.push((
         snapshot_log_path(out_root),

@@ -23,3 +23,10 @@ Replaced non-actionable `security_contact` value `https://pkg.go.dev/golang.org/
 ## Auto-promotion
 
 Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `https://hackerone.com/github`.
+- Source: [.github/SECURITY.md at `0cf1092493af067646fc5f3db9421c6a6ec9c938`](https://github.com/cli/cli/blob/0cf1092493af067646fc5f3db9421c6a6ec9c938/.github/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- The policy explicitly identifies `https://hackerone.com/github` as a vulnerability reporting channel.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.

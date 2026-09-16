@@ -251,6 +251,7 @@ test("serves hosted batch query responses with path-level item errors", async ()
 
 test("serves hosted profile search from staged profiles", async () => {
   const files = new Map([
+    ["/v0/repos/search.json", await readFile(fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "search.json"), "utf8")],
     [
       "/v0/meta.json",
       await readFile(
@@ -300,6 +301,7 @@ test("serves hosted profile search from staged profiles", async () => {
 
 test("applies default and max search limit cost bounds", async () => {
   const files = new Map([
+    ["/v0/repos/search.json", await readFile(fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "search.json"), "utf8")],
     [
       "/v0/meta.json",
       await readFile(
@@ -334,8 +336,9 @@ test("applies default and max search limit cost bounds", async () => {
   assert.equal(cappedJson.filters.limit, 200);
 });
 
-test("serves simple hosted profile search from inventory without profile fan-out", async () => {
+test("serves hosted search from the exported search index without profile fan-out", async () => {
   const files = new Map([
+    ["/v0/repos/search.json", await readFile(fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "search.json"), "utf8")],
     [
       "/v0/meta.json",
       await readFile(
@@ -1100,4 +1103,48 @@ test("static repository surface 404 emits DOTREPO_LOOKUP_MISS", async () => {
   assert.equal(payload.owner, "acme");
   assert.equal(payload.repo, "missing-static");
   assert.equal(payload.route, "profile");
+});
+
+test("search preserves profile semantics and bounds asset reads independently of result count", async () => {
+  const freshness = { generatedAt: "2026-09-16T10:00:00Z", snapshotDigest: "source" };
+  const profiles = Array.from({ length: 1000 }, (_, index) => ({
+    identity: { host: "github.com", owner: "example", repo: `project-${index}` },
+    name: "Library", purpose: "General library", homepage: "https://example.dev",
+    license: "MIT", languages: ["Rust"], topics: ["parsing"],
+    completeness: { hasBuild: true, hasDocs: true },
+    trust: { selectedStatus: "verified", confidence: "high" }, links: {}
+  }));
+  const meta = { ...freshness, paths: { root: "/v0/snapshots/content" } };
+  let reads = 0;
+  const env = { ASSETS: { async fetch(input) {
+    reads++;
+    const pathname = new URL(input.url ?? input).pathname;
+    if (pathname === "/v0/meta.json") return Response.json(meta);
+    assert.equal(pathname, "/v0/snapshots/content/repos/search.json", "no profile fan-out");
+    return Response.json({ apiVersion: "v0", freshness, repositoryCount: profiles.length, profiles });
+  } } };
+  for (const query of ["q=rust", "q=rust&language=Rust", "q=parsing", "q=MIT", "q=example.dev", "requireBuild"]) {
+    reads = 0;
+    const response = await handleRequest(new Request(`https://example.test/v0/search?${query}&limit=1`), env);
+    const result = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(result.matchedCount, 1000);
+    assert.equal(result.returnedCount, 1);
+    assert.equal(reads, 2);
+    assert.equal(result.results[0].ranking.score, 15);
+    assert.deepEqual(result.freshness, freshness);
+  }
+});
+
+test("search reports a missing exported index without an unbounded fallback", async () => {
+  let reads = 0;
+  const env = { ASSETS: { async fetch(input) {
+    reads++;
+    return new URL(input.url ?? input).pathname === "/v0/meta.json"
+      ? Response.json({ generatedAt: "now", snapshotDigest: "source" })
+      : new Response("not found", { status: 404 });
+  } } };
+  const response = await handleRequest(new Request("https://example.test/v0/search?q=Rust"), env);
+  assert.equal(response.status, 503);
+  assert.equal(reads, 2);
 });

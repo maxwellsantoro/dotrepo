@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `package.json`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "security@ant.design"` is intentional. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
 
 [repo]
 name = "Ant Design"
@@ -42,7 +42,7 @@ topics = [
 
 [owners]
 maintainers = []
-security_contact = "unknown"
+security_contact = "security@ant.design"
 
 [docs]
 root = "https://ant.design"

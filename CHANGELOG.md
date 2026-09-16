@@ -13,6 +13,27 @@ milestones. Direction and gates live in [`ROADMAP.md`](./ROADMAP.md); the counts
 below are a 2026-06-29 snapshot and refresh with each run from the generated
 growth, coverage, promotion, and telemetry artifacts.
 
+### Trust, export, and crawler correctness
+
+- Require fresh verification for refreshed overlays and protect native,
+  reviewed, and canonical records from autonomous replacement.
+- Replay persisted claim transitions through the claim state machine; record
+  explicit transitions for state-changing corrections.
+- Derive immutable export IDs and ETags from serialized payloads, and retain
+  distinct exports of the same source digest in snapshot history.
+- Pin crawl file reads to the captured commit and roll back writeback artifacts
+  on commit errors, retaining backups if recovery fails.
+- Export compact search data so hosted filtering and free-text search share
+  fields and ranking without fetching every repository profile.
+- Restore strict Clippy and Python lint/format checks.
+- Refresh the Wrangler development-tool lockfile to resolve reported transitive
+  dependency vulnerabilities.
+- Filter non-actionable security URLs before ranking so incidental contact pages
+  cannot hide a valid disclosure channel.
+- Restore security-contact coverage for 13 overlays using commit-pinned policy
+  evidence, including explicitly documented mailboxes and private advisory
+  workflows; retain the existing release coverage threshold.
+
 ### Operator quality and distribution tooling
 
 - Intent-level quality scorecard with soft error budgets

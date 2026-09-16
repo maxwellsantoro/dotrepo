@@ -23,3 +23,10 @@ Replaced non-actionable `security_contact` value `https://github.com/pytorch/pyt
 ## Auto-promotion
 
 Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+
+## Security contact evidence refresh (2026-09-16)
+
+- Replaced `owners.security_contact = "unknown"` with `https://github.com/pytorch/pytorch/security/advisories/new`.
+- Source: [SECURITY.md at `631c7144bcc09352ab9445d8c367286835f92af0`](https://github.com/pytorch/pytorch/blob/631c7144bcc09352ab9445d8c367286835f92af0/SECURITY.md), fetched at the pinned commit on 2026-09-16.
+- The policy explicitly identifies `https://github.com/pytorch/pytorch/security/advisories/new` as a vulnerability reporting channel.
+- This is a field-scoped correction supported by the above evidence, not a full repository recrawl. Existing crawl timestamps and GitHub head metadata describe the earlier full crawl. This supersedes the earlier contact-absence conclusion; record authority is unchanged.
