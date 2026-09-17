@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/meilisearch/meilisearch"
-generated_at = "2026-09-16T16:14:32.483263Z"
+generated_at = "2026-09-17T06:10:42.81562884Z"
 
 [record.trust]
 confidence = "medium"
@@ -73,7 +73,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -81,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -89,15 +89,16 @@ state = "present"
 valueJson = '"https://www.meilisearch.com/docs?utm_campaign=oss&utm_source=github&utm_medium=meilisearch&utm_content=nav"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@meilisearch.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -105,7 +106,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -114,7 +115,7 @@ state = "present"
 valueJson = '"cargo build --workspace"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -123,7 +124,7 @@ state = "present"
 valueJson = '"A lightning-fast search engine API bringing AI-powered hybrid search to your sites and applications."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -131,7 +132,7 @@ state = "present"
 valueJson = '"https://www.meilisearch.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README heading with post-cleaners"
@@ -140,7 +141,7 @@ state = "present"
 valueJson = '"meilisearch"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:14:32.483263Z"
+checkedAt = "2026-09-17T06:10:42.81562884Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -153,6 +154,6 @@ archived = false
 clone_url = "https://github.com/meilisearch/meilisearch.git"
 default_branch = "main"
 fork = false
-head_sha = "bae5f5658eb988358f01ba6186d08015723ecc60"
+head_sha = "b5e076ca9814d82b602e9079f1f75e5034073076"
 html_url = "https://github.com/meilisearch/meilisearch"
-stars = 59302
+stars = 59309

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/halo-dev/halo"
-generated_at = "2026-09-16T16:13:51.031167Z"
+generated_at = "2026-09-17T06:09:45.406045379Z"
 
 [record.trust]
 confidence = "medium"
@@ -55,7 +55,7 @@ security_contact = "hi@halo.run"
 root = "https://www.halo.run"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -63,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -71,15 +71,16 @@ state = "present"
 valueJson = '"https://www.halo.run"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"hi@halo.run"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,7 +88,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -96,7 +97,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +106,7 @@ state = "present"
 valueJson = '"Halo 是一款强大易用的开源建站工具，从个人博客、知识库，到企业官网、在线商城，Halo 都能助您轻松实现，一站式满足您的多样化建站需求。"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,7 +114,7 @@ state = "present"
 valueJson = '"https://www.halo.run"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -122,7 +123,7 @@ state = "present"
 valueJson = '"halo"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:13:51.031167Z"
+checkedAt = "2026-09-17T06:09:45.406045379Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -137,4 +138,4 @@ default_branch = "main"
 fork = false
 head_sha = "ea7636ab58a13e387463a75cb09618b443a2f2eb"
 html_url = "https://github.com/halo-dev/halo"
-stars = 39760
+stars = 39769

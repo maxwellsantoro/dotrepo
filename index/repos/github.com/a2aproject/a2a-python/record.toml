@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/a2aproject/a2a-python"
-generated_at = "2026-09-16T16:07:03.846717Z"
+generated_at = "2026-09-17T06:08:53.07137346Z"
 
 [record.trust]
 confidence = "medium"
@@ -54,7 +54,7 @@ security_contact = "https://github.com/a2aproject/a2a-python/security/advisories
 root = "https://a2a-protocol.org/latest/sdk/python/api/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -62,7 +62,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -70,15 +70,16 @@ state = "present"
 valueJson = '"https://a2a-protocol.org/latest/sdk/python/api/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/a2aproject/a2a-python/security/advisories"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -86,7 +87,7 @@ state = "present"
 valueJson = '"@a2aproject/google-a2a-eng"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -95,7 +96,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -104,7 +105,7 @@ state = "present"
 valueJson = '"Official Python SDK for the Agent2Agent (A2A) Protocol"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -112,7 +113,7 @@ state = "present"
 valueJson = '"https://a2a-protocol.org/latest/sdk/python/api/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -121,7 +122,7 @@ state = "present"
 valueJson = '"A2A Python SDK"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:07:03.846717Z"
+checkedAt = "2026-09-17T06:08:53.07137346Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"

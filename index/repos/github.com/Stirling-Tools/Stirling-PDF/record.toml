@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "imported"
 source = "https://github.com/Stirling-Tools/Stirling-PDF"
-generated_at = "2026-09-16T16:06:41.690321Z"
+generated_at = "2026-09-17T06:04:16.493307464Z"
 
 [record.trust]
 confidence = "medium"
@@ -105,7 +105,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -113,7 +113,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -121,15 +121,16 @@ state = "present"
 valueJson = '"https://docs.stirlingpdf.com"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@stirlingpdf.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -137,7 +138,7 @@ state = "present"
 valueJson = '"@Stirling-Tools/maintainers"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "low"
 method = "not_found_in_inspected_sources"
 reason = "intra-tier conflict left field unset during import"
@@ -145,7 +146,7 @@ state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -154,7 +155,7 @@ state = "present"
 valueJson = '"#1 PDF Application on GitHub that lets you edit PDFs on any device anywhere"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -162,7 +163,7 @@ state = "present"
 valueJson = '"https://stirling.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -171,7 +172,7 @@ state = "present"
 valueJson = '"Stirling PDF"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:06:41.690321Z"
+checkedAt = "2026-09-17T06:04:16.493307464Z"
 confidence = "low"
 method = "not_found_in_inspected_sources"
 reason = "intra-tier conflict left field unset during import"
@@ -183,6 +184,6 @@ archived = false
 clone_url = "https://github.com/Stirling-Tools/Stirling-PDF.git"
 default_branch = "main"
 fork = false
-head_sha = "c5d84586c1866063314614737d08fd584547074f"
+head_sha = "40748502e2870ce9b4c5aff6f0f7545a6a2be1c7"
 html_url = "https://github.com/Stirling-Tools/Stirling-PDF"
-stars = 92328
+stars = 92385

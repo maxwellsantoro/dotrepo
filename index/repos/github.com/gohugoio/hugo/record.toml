@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/gohugoio/hugo"
-generated_at = "2026-09-16T16:13:42.800892Z"
+generated_at = "2026-09-17T06:09:36.557455716Z"
 
 [record.trust]
 confidence = "medium"
@@ -56,7 +56,7 @@ root = "https://gohugo.io/documentation"
 getting_started = "https://gohugo.io/installation"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -64,7 +64,7 @@ state = "present"
 valueJson = '"https://gohugo.io/installation"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -72,15 +72,16 @@ state = "present"
 valueJson = '"https://gohugo.io/documentation"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"bjorn.erik.pedersen@gmail.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -88,7 +89,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -97,7 +98,7 @@ state = "present"
 valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -106,7 +107,7 @@ state = "present"
 valueJson = '"The world’s fastest framework for building websites."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -114,7 +115,7 @@ state = "present"
 valueJson = '"https://gohugo.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -123,7 +124,7 @@ state = "present"
 valueJson = '"Hugo"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:13:42.800892Z"
+checkedAt = "2026-09-17T06:09:36.557455716Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -138,4 +139,4 @@ default_branch = "master"
 fork = false
 head_sha = "ec57bb7d348989513b919c7ea9ff08fed0bec327"
 html_url = "https://github.com/gohugoio/hugo"
-stars = 89843
+stars = 89851

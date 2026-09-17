@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/modelcontextprotocol/servers"
-generated_at = "2026-09-16T16:15:01.980816Z"
+generated_at = "2026-09-17T06:11:04.697639249Z"
 
 [record.trust]
 confidence = "medium"
@@ -42,7 +42,7 @@ root = "https://modelcontextprotocol.io"
 getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -50,7 +50,7 @@ state = "present"
 valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -58,15 +58,16 @@ state = "present"
 valueJson = '"https://modelcontextprotocol.io"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -74,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -83,7 +84,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -92,7 +93,7 @@ state = "present"
 valueJson = '"Model Context Protocol Servers"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -100,7 +101,7 @@ state = "present"
 valueJson = '"https://modelcontextprotocol.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -109,7 +110,7 @@ state = "present"
 valueJson = '"Model Context Protocol servers"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:15:01.980816Z"
+checkedAt = "2026-09-17T06:11:04.697639249Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -124,4 +125,4 @@ default_branch = "main"
 fork = false
 head_sha = "d73f99efbfd40c3aa1b61e88728b3d49fb52608f"
 html_url = "https://github.com/modelcontextprotocol/servers"
-stars = 90385
+stars = 90399

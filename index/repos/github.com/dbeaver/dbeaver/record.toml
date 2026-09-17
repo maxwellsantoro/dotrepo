@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/dbeaver/dbeaver"
-generated_at = "2026-09-16T16:12:58.999863Z"
+generated_at = "2026-09-17T06:06:18.648539774Z"
 
 [record.trust]
 confidence = "medium"
@@ -62,7 +62,7 @@ security_contact = "security@dbeaver.com"
 root = "https://dbeaver.io"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -70,7 +70,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -78,15 +78,16 @@ state = "present"
 valueJson = '"https://dbeaver.io"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@dbeaver.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -94,7 +95,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -103,7 +104,7 @@ state = "present"
 valueJson = '"mvn package"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -112,7 +113,7 @@ state = "present"
 valueJson = '"Free universal database tool and SQL client"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -120,7 +121,7 @@ state = "present"
 valueJson = '"https://dbeaver.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -129,7 +130,7 @@ state = "present"
 valueJson = '"DBeaver"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:12:58.999863Z"
+checkedAt = "2026-09-17T06:06:18.648539774Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -142,6 +143,6 @@ archived = false
 clone_url = "https://github.com/dbeaver/dbeaver.git"
 default_branch = "devel"
 fork = false
-head_sha = "cf0b96004a28bbad6572545738d52850496f92a4"
+head_sha = "c74ce65ee4a4f9fadea7c697f5cd02b0d2cc0f74"
 html_url = "https://github.com/dbeaver/dbeaver"
-stars = 51779
+stars = 51785

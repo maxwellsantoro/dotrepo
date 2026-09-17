@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/JetBrains/kotlin"
-generated_at = "2026-09-16T16:05:21.099756Z"
+generated_at = "2026-09-17T06:03:47.755221855Z"
 
 [record.trust]
 confidence = "medium"
@@ -66,7 +66,7 @@ security_contact = "https://kotlinlang.org/docs/security.html"
 root = "https://kotlinlang.org"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -74,7 +74,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -82,7 +82,7 @@ state = "present"
 valueJson = '"https://kotlinlang.org"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "high"
 method = "extracted"
 reason = "actionable security reporting URL"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"https://kotlinlang.org/docs/security.html"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -99,7 +99,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -117,7 +117,7 @@ state = "present"
 valueJson = '"The Kotlin Programming Language."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -125,7 +125,7 @@ state = "present"
 valueJson = '"https://kotlinlang.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -134,7 +134,7 @@ state = "present"
 valueJson = '"kotlin"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:05:21.099756Z"
+checkedAt = "2026-09-17T06:03:47.755221855Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -147,6 +147,6 @@ archived = false
 clone_url = "https://github.com/JetBrains/kotlin.git"
 default_branch = "master"
 fork = false
-head_sha = "a1eddda7cd51dbefec2ddcfc51a3f8f8040e302b"
+head_sha = "9303195be9d766b7f617e3b091612138fd80bc05"
 html_url = "https://github.com/JetBrains/kotlin"
-stars = 53415
+stars = 53420

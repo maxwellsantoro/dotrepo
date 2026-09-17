@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/istio/istio"
-generated_at = "2026-09-16T16:14:04.512541Z"
+generated_at = "2026-09-17T06:09:59.032288726Z"
 
 [record.trust]
 confidence = "medium"
@@ -97,7 +97,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -105,7 +105,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -113,15 +113,16 @@ state = "present"
 valueJson = '"https://istio.io/latest/docs/reference/config/networking/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/istio/community/blob/master/EARLY-DISCLOSURE.md#membership"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -129,7 +130,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -138,7 +139,7 @@ state = "present"
 valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -147,7 +148,7 @@ state = "present"
 valueJson = '"Connect, secure, control, and observe services."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -155,7 +156,7 @@ state = "present"
 valueJson = '"https://istio.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -164,7 +165,7 @@ state = "present"
 valueJson = '"Istio"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:14:04.512541Z"
+checkedAt = "2026-09-17T06:09:59.032288726Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -177,6 +178,6 @@ archived = false
 clone_url = "https://github.com/istio/istio.git"
 default_branch = "master"
 fork = false
-head_sha = "0f75bb868f8b2f43e10f7a8c3a88769b4f279ae2"
+head_sha = "4d88e36175599f90859587aa0d9e8728a29d0e92"
 html_url = "https://github.com/istio/istio"
-stars = 38390
+stars = 38392

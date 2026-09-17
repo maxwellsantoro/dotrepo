@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/hoppscotch/hoppscotch"
-generated_at = "2026-09-16T16:13:56.593443Z"
+generated_at = "2026-09-17T06:09:53.535970553Z"
 
 [record.trust]
 confidence = "medium"
@@ -89,7 +89,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"https://docs.hoppscotch.io/documentation/self-host/getting-started"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -105,15 +105,16 @@ state = "present"
 valueJson = '"https://docs.hoppscotch.io"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"support@hoppscotch.io"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -121,7 +122,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -130,7 +131,7 @@ state = "present"
 valueJson = '"pnpm tauri build --verbose --target x86_64-apple-darwin"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -139,7 +140,7 @@ state = "present"
 valueJson = '"Open-Source API Development Ecosystem • https://hoppscotch.io • Offline, On-Prem & Cloud • Web, Desktop & CLI • Open-Source Alternative to Postman, Insomnia"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -147,7 +148,7 @@ state = "present"
 valueJson = '"https://hoppscotch.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -156,7 +157,7 @@ state = "present"
 valueJson = '"Hoppscotch"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:13:56.593443Z"
+checkedAt = "2026-09-17T06:09:53.535970553Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -171,4 +172,4 @@ default_branch = "main"
 fork = false
 head_sha = "d86e59f6e9574c69f01b300691b9f4396eeb38d2"
 html_url = "https://github.com/hoppscotch/hoppscotch"
-stars = 80320
+stars = 80326

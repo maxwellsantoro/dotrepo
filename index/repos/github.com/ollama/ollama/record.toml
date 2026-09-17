@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ollama/ollama"
-generated_at = "2026-09-16T16:15:27.433347Z"
+generated_at = "2026-09-17T06:11:46.99808961Z"
 
 [record.trust]
 confidence = "medium"
@@ -70,7 +70,7 @@ root = "https://docs.ollama.com/cli"
 getting_started = "https://docs.ollama.com/quickstart"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -78,7 +78,7 @@ state = "present"
 valueJson = '"https://docs.ollama.com/quickstart"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -86,15 +86,16 @@ state = "present"
 valueJson = '"https://docs.ollama.com/cli"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"hello@ollama.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -102,7 +103,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -111,7 +112,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -120,7 +121,7 @@ state = "present"
 valueJson = '"Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -128,7 +129,7 @@ state = "present"
 valueJson = '"https://ollama.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -137,7 +138,7 @@ state = "present"
 valueJson = '"ollama"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:15:27.433347Z"
+checkedAt = "2026-09-17T06:11:46.99808961Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -150,6 +151,6 @@ archived = false
 clone_url = "https://github.com/ollama/ollama.git"
 default_branch = "main"
 fork = false
-head_sha = "a43fad18b088095de20fbd7a8f0de50824cf5d27"
+head_sha = "5ed8dde3a7a5bf4c9047a8a91906b4f6788f60b9"
 html_url = "https://github.com/ollama/ollama"
-stars = 181122
+stars = 181211

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/browser-use/browser-use"
-generated_at = "2026-09-16T16:09:08.782656Z"
+generated_at = "2026-09-17T06:09:21.354384829Z"
 
 [record.trust]
 confidence = "medium"
@@ -66,7 +66,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -74,7 +74,7 @@ state = "present"
 valueJson = '"https://docs.browser-use.com/cloud/agent/quickstart"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -82,15 +82,16 @@ state = "present"
 valueJson = '"https://browser-use.com"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/browser-use/browser-use/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -98,7 +99,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -107,7 +108,7 @@ state = "present"
 valueJson = '"python -m build --wheel"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -116,7 +117,7 @@ state = "present"
 valueJson = '"Agents that use the browser."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -124,7 +125,7 @@ state = "present"
 valueJson = '"https://browser-use.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -133,7 +134,7 @@ state = "present"
 valueJson = '"browser-use"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:09:08.782656Z"
+checkedAt = "2026-09-17T06:09:21.354384829Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -148,4 +149,4 @@ default_branch = "main"
 fork = false
 head_sha = "d8110c5ff87ccba887aaa726cdb780f2f84bef8d"
 html_url = "https://github.com/browser-use/browser-use"
-stars = 114803
+stars = 114872

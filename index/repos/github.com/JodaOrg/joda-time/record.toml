@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/JodaOrg/joda-time"
-generated_at = "2026-09-16T16:05:29.747267Z"
+generated_at = "2026-09-17T06:08:09.474119291Z"
 
 [record.trust]
 confidence = "medium"
@@ -58,7 +58,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -66,7 +66,7 @@ state = "present"
 valueJson = '"https://www.joda.org/joda-time/quickstart.html"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -74,15 +74,16 @@ state = "present"
 valueJson = '"http://www.joda.org/joda-time/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"https://tidelift.com/security"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -90,7 +91,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -99,7 +100,7 @@ state = "present"
 valueJson = '"mvn package"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -108,7 +109,7 @@ state = "present"
 valueJson = '"Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -116,7 +117,7 @@ state = "present"
 valueJson = '"http://www.joda.org/joda-time/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -125,7 +126,7 @@ state = "present"
 valueJson = '"Joda-Time"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:05:29.747267Z"
+checkedAt = "2026-09-17T06:08:09.474119291Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"

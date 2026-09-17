@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/gogs/gogs"
-generated_at = "2026-09-16T16:13:40.70116Z"
+generated_at = "2026-09-17T06:09:28.801713471Z"
 
 [record.trust]
 confidence = "medium"
@@ -61,7 +61,7 @@ root = "https://gogs.io/api-reference"
 getting_started = "https://gogs.io/getting-started/installation"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -69,7 +69,7 @@ state = "present"
 valueJson = '"https://gogs.io/getting-started/installation"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -77,15 +77,16 @@ state = "present"
 valueJson = '"https://gogs.io/api-reference"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@gogs.io"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -93,7 +94,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -102,7 +103,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -111,7 +112,7 @@ state = "present"
 valueJson = '"The painless way to host your own Git service"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -119,7 +120,7 @@ state = "present"
 valueJson = '"https://gogs.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -128,7 +129,7 @@ state = "present"
 valueJson = '"Gogs"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:13:40.70116Z"
+checkedAt = "2026-09-17T06:09:28.801713471Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -143,4 +144,4 @@ default_branch = "main"
 fork = false
 head_sha = "dbbd717e923694c36f41b0360515b4374bbe6ee0"
 html_url = "https://github.com/gogs/gogs"
-stars = 47817
+stars = 47818

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nlohmann/json"
-generated_at = "2026-09-16T16:15:26.133153Z"
+generated_at = "2026-09-17T06:11:38.950339716Z"
 
 [record.trust]
 confidence = "high"
@@ -78,7 +78,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -86,7 +86,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -94,15 +94,16 @@ state = "present"
 valueJson = '"https://json.nlohmann.me"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/nlohmann/json/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -110,7 +111,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -119,7 +120,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -128,7 +129,7 @@ state = "present"
 valueJson = '"JSON for Modern C++"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -136,7 +137,7 @@ state = "present"
 valueJson = '"https://json.nlohmann.me"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -145,7 +146,7 @@ state = "present"
 valueJson = '"json"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:15:26.133153Z"
+checkedAt = "2026-09-17T06:11:38.950339716Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -157,6 +158,6 @@ archived = false
 clone_url = "https://github.com/nlohmann/json.git"
 default_branch = "develop"
 fork = false
-head_sha = "c72f37a40d36220255ee9eb097e74ee8950a2681"
+head_sha = "c41152e62092c16cf4fc4625becacc3eb9d9319f"
 html_url = "https://github.com/nlohmann/json"
-stars = 50620
+stars = 50621

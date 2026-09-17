@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/apache/dubbo"
-generated_at = "2026-09-16T16:07:40.71003Z"
+generated_at = "2026-09-17T06:09:07.019245196Z"
 
 [record.trust]
 confidence = "medium"
@@ -55,7 +55,7 @@ security_contact = "security@dubbo.apache.org"
 root = "https://dubbo.apache.org/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -63,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -71,15 +71,16 @@ state = "present"
 valueJson = '"https://dubbo.apache.org/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@dubbo.apache.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -87,7 +88,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -96,7 +97,7 @@ state = "present"
 valueJson = '"./mvnw package"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +106,7 @@ state = "present"
 valueJson = '"The java implementation of Apache Dubbo. An RPC and microservice framework."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,7 +114,7 @@ state = "present"
 valueJson = '"https://dubbo.apache.org/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -122,7 +123,7 @@ state = "present"
 valueJson = '"Apache Dubbo Project"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:07:40.71003Z"
+checkedAt = "2026-09-17T06:09:07.019245196Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -137,4 +138,4 @@ default_branch = "3.3"
 fork = false
 head_sha = "df9c5e13bc014ef492ec20824f8623a5e092a5b1"
 html_url = "https://github.com/apache/dubbo"
-stars = 41569
+stars = 41568

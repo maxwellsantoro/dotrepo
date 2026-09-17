@@ -10,13 +10,13 @@
     "unknown": 1
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-09-16T21:27:37Z",
-  "lastRunAt": "2026-09-16T21:27:37Z",
+  "generatedAt": "2026-09-17T06:11:47Z",
+  "lastRunAt": "2026-09-17T06:11:47Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
-    "adjudicationCallBudget": 8,
+    "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 38,
+    "crawled": 35,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -28,21 +28,21 @@
     "zeroModelRate": 1.0
   },
   "previousWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 1
+    "deterministic": 3
   },
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.0015174506828528073,
-    "promotionRate": 0.8679817905918058,
-    "writeRate": 0.9984825493171472,
+    "failureRate": 0.0014104372355430183,
+    "promotionRate": 0.8251057827926658,
+    "writeRate": 0.998589562764457,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 486,
+    "crawled": 531,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -54,32 +54,32 @@
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 124
+    "deterministic": 136
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [],
   "regressionFixtureCandidates": [],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 139
+    "deterministic": 153
   },
-  "runCount": 25,
+  "runCount": 26,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 659,
+    "crawled": 709,
     "discoveryQueued": 0,
     "failed": 1,
-    "promoted": 572,
-    "qualityReprocessQueued": 634,
+    "promoted": 585,
+    "qualityReprocessQueued": 661,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
     "tokensUsed": 0,
-    "written": 658,
-    "zeroModelRuns": 659
+    "written": 708,
+    "zeroModelRuns": 709
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,
