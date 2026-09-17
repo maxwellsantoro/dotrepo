@@ -15,6 +15,16 @@ growth, coverage, promotion, and telemetry artifacts.
 
 ### Trust, export, and crawler correctness
 
+- Disable standalone `promotion-report --apply` before any write; it cannot
+  establish source inspection. Read-only analysis now uses value-bound retained
+  field assessments instead of record-wide provenance and nonempty values.
+- Require explicit high-confidence extracted command assessments, a source, and
+  a matching check timestamp in the reference consumer. Missing or invalidated
+  assessments trigger fallback, as do unsupported responses and non-string fields.
+- Leave missing field confidence unknown in the lookup-first benchmark. Add
+  policy-aware coverage beside presence metrics; correctness and task completion
+  remain explicitly unmeasured by that coverage report.
+
 - Require fresh verification for refreshed overlays and protect native,
   reviewed, and canonical records from autonomous replacement.
 - Replay persisted claim transitions through the claim state machine; record

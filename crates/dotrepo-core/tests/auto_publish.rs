@@ -3,7 +3,7 @@ use dotrepo_core::{
     import_repository, promote_to_verified, score_import_fields, verify_import_plan,
     FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary, ImportMode,
 };
-use dotrepo_schema::{parse_manifest, Manifest, Owners, Record, RecordMode, RecordStatus, Repo};
+use dotrepo_schema::{Manifest, Owners, Record, RecordMode, RecordStatus, Repo};
 use std::fs;
 
 fn make_verified_manifest_with_security_contact() -> Manifest {
@@ -634,8 +634,8 @@ references = []
     let report = analyze_index_promotion(&root).expect("promotion analysis succeeds");
 
     assert_eq!(report.summary.total_records, 3);
-    assert_eq!(report.summary.eligible_count, 2);
-    assert_eq!(report.summary.promotion_candidate_count, 1);
+    assert_eq!(report.summary.eligible_count, 0);
+    assert_eq!(report.summary.promotion_candidate_count, 0);
 
     let malformed = report
         .records
@@ -656,101 +656,85 @@ references = []
 }
 
 #[test]
-fn apply_index_promotions_promotes_candidates_with_limit() {
-    let root = temp_dir("apply-index-promotions");
-    let repos_root = root.join("repos/github.com/example");
-
-    for repo in ["one", "two", "already-verified"] {
-        fs::create_dir_all(repos_root.join(repo)).expect("record dir");
-        fs::write(repos_root.join(repo).join("evidence.md"), "# Evidence\n").expect("evidence");
+fn standalone_apply_cannot_mint_evidence_for_an_invented_command() {
+    let root = temp_dir("disabled-promotion");
+    let dir = root.join("repos/github.com/example/invented");
+    fs::create_dir_all(&dir).unwrap();
+    let mut manifest = make_imported_manifest();
+    manifest.repo.build = Some("invented-build-command --trust-me".into());
+    let contents = dotrepo_schema::render_manifest(&manifest).unwrap();
+    fs::write(dir.join("record.toml"), &contents).unwrap();
+    for existing_evidence in [false, true] {
+        if existing_evidence {
+            fs::write(dir.join("evidence.md"), "# Original evidence\n").unwrap();
+        }
+        let error = apply_index_promotions(&root, Some(1)).unwrap_err();
+        assert!(error
+            .to_string()
+            .contains("standalone promotion is disabled"));
+        assert_eq!(
+            fs::read_to_string(dir.join("record.toml")).unwrap(),
+            contents
+        );
+        if existing_evidence {
+            assert_eq!(
+                fs::read_to_string(dir.join("evidence.md")).unwrap(),
+                "# Original evidence\n"
+            );
+        } else {
+            assert!(!dir.join("evidence.md").exists());
+        }
     }
+    fs::remove_dir_all(root).unwrap();
+}
 
-    for repo in ["one", "two"] {
-        fs::write(
-            repos_root.join(repo).join("record.toml"),
-            format!(
-                r#"schema = "dotrepo/v0.1"
+#[test]
+fn retained_assessments_cannot_outlive_their_values_or_check_times() {
+    use dotrepo_core::score_index_record_for_promotion;
+    let mut manifest: Manifest = toml::from_str(
+        r#"
+schema = "dotrepo/v0.1"
 [record]
 mode = "overlay"
 status = "imported"
-source = "https://github.com/example/{repo}"
-
-[record.trust]
-confidence = "medium"
-provenance = ["imported"]
-
-[repo]
-name = "{repo}"
-description = "{repo}"
-homepage = "https://github.com/example/{repo}"
-languages = []
-topics = []
-
-[relations]
-references = []
-"#
-            ),
-        )
-        .expect("candidate record");
-    }
-
-    fs::write(
-        repos_root.join("already-verified").join("record.toml"),
-        r#"schema = "dotrepo/v0.1"
-[record]
-mode = "overlay"
-status = "verified"
-source = "https://github.com/example/already-verified"
-
+generated_at = "2026-09-16T00:00:00Z"
 [record.trust]
 confidence = "high"
-provenance = ["verified"]
-
+provenance = ["imported", "verified"]
 [repo]
-name = "already-verified"
-description = "already verified"
-homepage = "https://github.com/example/already-verified"
-languages = []
-topics = []
-
-[relations]
-references = []
+name = "Example"
+description = "Example"
+build = "make build"
+[x.dotrepo.field_evidence."repo.build"]
+valueJson = '"make build"'
+checkedAt = "2026-09-16T00:00:00Z"
+state = "present"
+method = "extracted"
+confidence = "high"
+source = "Makefile"
 "#,
     )
-    .expect("verified record");
-
-    let report = apply_index_promotions(&root, Some(1)).expect("apply succeeds");
-
-    assert_eq!(report.promoted_records.len(), 1);
-    assert_eq!(report.skipped_eligible_count, 1);
-
-    let promoted_path = root.join("repos").join(&report.promoted_records[0].path);
-    let promoted_text = fs::read_to_string(&promoted_path).expect("promoted record read");
-    let promoted = parse_manifest(&promoted_text).expect("promoted record parses");
-    assert_eq!(promoted.record.status, RecordStatus::Verified);
+    .unwrap();
+    let build_score = |manifest: &Manifest| {
+        score_index_record_for_promotion(manifest)
+            .into_iter()
+            .find(|s| s.field == "repo.build")
+            .unwrap()
+            .confidence
+    };
     assert_eq!(
-        promoted
-            .record
-            .trust
-            .as_ref()
-            .and_then(|trust| trust.confidence.as_deref()),
-        Some("high")
+        build_score(&manifest),
+        FieldConfidence::HighConfidencePresent
     );
-    assert!(promoted
-        .record
-        .trust
-        .as_ref()
-        .is_some_and(|trust| trust.provenance.contains(&"verified".to_string())));
-    let evidence_text = fs::read_to_string(
-        promoted_path
-            .parent()
-            .expect("promoted record parent")
-            .join("evidence.md"),
-    )
-    .expect("promoted evidence read");
-    assert!(evidence_text.contains("auto-promoted to verified"));
-
-    fs::remove_dir_all(&root).expect("cleanup");
+    manifest.repo.build = Some("invented-command".into());
+    assert_eq!(build_score(&manifest), FieldConfidence::Unresolved);
+    manifest.repo.build = Some("make build".into());
+    manifest.record.generated_at = Some("2026-09-17T00:00:00Z".into());
+    assert_eq!(build_score(&manifest), FieldConfidence::Unresolved);
+    manifest.x.clear();
+    assert!(score_index_record_for_promotion(&manifest)
+        .iter()
+        .all(|s| s.confidence == FieldConfidence::Unresolved));
 }
 
 #[test]
@@ -812,10 +796,8 @@ fn contributing_make_lint_is_not_imported_as_build() {
     fs::remove_dir_all(&root).expect("cleanup");
 }
 
-// Regression test for the narrow conflict-note detection in score_index_record_for_promotion.
-// A manifest whose import left repo.build unset because of an intra-tier conflict must
-// produce Unresolved (so the record is ineligible for auto-promotion) even though the
-// field value itself is absent.
+// An absent command plus prose notes is not evidence of verified absence.
+// Without a bound field assessment, conflicts remain unresolved in the report.
 #[test]
 fn score_index_record_for_promotion_treats_command_conflict_as_unresolved() {
     use dotrepo_core::score_index_record_for_promotion;
@@ -843,7 +825,7 @@ fn score_index_record_for_promotion_treats_command_conflict_as_unresolved() {
         FieldConfidence::Unresolved,
         "build conflict must surface as Unresolved for promotion analysis"
     );
-    assert!(build.reason.contains("intra-tier conflict"));
+    assert!(build.reason.contains("fresh inspection required"));
 
     let test = scores
         .iter()

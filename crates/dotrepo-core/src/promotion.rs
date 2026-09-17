@@ -1,11 +1,9 @@
 use anyhow::{bail, Result};
-use dotrepo_schema::{render_manifest, Manifest, RecordStatus};
+use dotrepo_schema::{Manifest, RecordStatus};
 use std::fs;
 use std::path::Path;
 
-use crate::import::{
-    is_actionable_security_url, is_quality_url, FieldConfidence, FieldScore, FieldScoreReport,
-};
+use crate::import::{FieldConfidence, FieldScore, FieldScoreReport};
 use crate::validation::collect_record_paths;
 
 #[derive(Debug, Clone)]
@@ -180,350 +178,65 @@ pub fn promote_to_verified(manifest: &mut Manifest, report: &FieldScoreReport) -
     }
 }
 
-fn field_score_report_from_scores(scores: &[FieldScore]) -> FieldScoreReport {
-    let mut high_confidence_present = Vec::new();
-    let mut medium_confidence_present = Vec::new();
-    let mut high_confidence_absent = Vec::new();
-    let mut suspect = Vec::new();
-    let mut unresolved = Vec::new();
-
-    for score in scores {
-        match score.confidence {
-            FieldConfidence::HighConfidencePresent => {
-                high_confidence_present.push(score.field.clone())
-            }
-            FieldConfidence::MediumConfidencePresent => {
-                medium_confidence_present.push(score.field.clone())
-            }
-            FieldConfidence::Suspect => suspect.push(score.field.clone()),
-            FieldConfidence::HighConfidenceAbsent => {
-                high_confidence_absent.push(score.field.clone())
-            }
-            FieldConfidence::Unresolved => unresolved.push(score.field.clone()),
-        }
-    }
-
-    FieldScoreReport {
-        scores: scores.to_vec(),
-        summary: crate::import::FieldScoreSummary {
-            eligible_for_auto_publish: unresolved.is_empty()
-                && medium_confidence_present.is_empty()
-                && suspect.is_empty(),
-            high_confidence_present,
-            medium_confidence_present,
-            suspect,
-            high_confidence_absent,
-            unresolved,
-        },
-    }
-}
-
+/// Inspect retained, value-bound assessments. This does not inspect upstream sources
+/// and cannot authorize standalone promotion; use a fresh crawler verification.
 pub fn score_index_record_for_promotion(manifest: &Manifest) -> Vec<FieldScore> {
-    let mut scores = Vec::new();
-    let provenance = manifest
-        .record
-        .trust
-        .as_ref()
-        .map(|t| t.provenance.clone())
-        .unwrap_or_default();
-
-    // repo.name — always high confidence if present (post-cleaners guarantee)
-    scores.push(FieldScore {
-        field: "repo.name".into(),
-        confidence: if manifest.repo.name.is_empty() {
-            FieldConfidence::Unresolved
-        } else {
-            FieldConfidence::HighConfidencePresent
-        },
-        source: None,
-        value: if manifest.repo.name.is_empty() {
-            None
-        } else {
-            Some(manifest.repo.name.clone())
-        },
-        reason: if manifest.repo.name.is_empty() {
-            "name not set".into()
-        } else {
-            "post-cleaners guarantee quality".into()
-        },
-    });
-
-    // repo.description — high confidence if present
-    scores.push(FieldScore {
-        field: "repo.description".into(),
-        confidence: if manifest.repo.description.is_empty() {
-            FieldConfidence::Unresolved
-        } else {
-            FieldConfidence::HighConfidencePresent
-        },
-        source: None,
-        value: if manifest.repo.description.is_empty() {
-            None
-        } else {
-            Some(manifest.repo.description.clone())
-        },
-        reason: if manifest.repo.description.is_empty() {
-            "description not set".into()
-        } else {
-            "post-cleaners guarantee quality".into()
-        },
-    });
-
-    // repo.homepage
-    if let Some(ref homepage) = manifest.repo.homepage {
-        let is_github_url = homepage.contains("github.com");
-        scores.push(FieldScore {
-            field: "repo.homepage".into(),
-            confidence: if is_quality_url(homepage) {
+    let evidence = crate::public::field_evidence(manifest);
+    [
+        "repo.name",
+        "repo.description",
+        "repo.homepage",
+        "repo.build",
+        "repo.test",
+        "owners.security_contact",
+        "owners.team",
+        "docs.root",
+        "docs.getting_started",
+    ]
+    .into_iter()
+    .map(|field| {
+        let value = crate::query_manifest_value(manifest, field).unwrap_or_default();
+        let assessment = evidence.get(field);
+        let get = |key| {
+            assessment
+                .and_then(|a| a.get(key))
+                .and_then(serde_json::Value::as_str)
+        };
+        let source = get("source")
+            .filter(|s| !s.trim().is_empty())
+            .map(str::to_owned);
+        let confidence = match (get("state"), get("confidence"), get("method")) {
+            (Some("present"), Some("high"), Some("extracted"))
+                if value.as_str().is_some_and(|v| !v.trim().is_empty()) && source.is_some() =>
+            {
                 FieldConfidence::HighConfidencePresent
-            } else {
+            }
+            (Some("present"), Some("medium"), Some("extracted" | "inferred"))
+                if value.as_str().is_some_and(|v| !v.trim().is_empty()) =>
+            {
                 FieldConfidence::MediumConfidencePresent
-            },
-            source: None,
-            value: Some(homepage.clone()),
-            reason: if is_github_url {
-                "GitHub repo URL, no dedicated site found".into()
-            } else {
-                "quality URL".into()
-            },
-        });
-    } else {
-        scores.push(FieldScore {
-            field: "repo.homepage".into(),
-            confidence: FieldConfidence::HighConfidenceAbsent,
-            source: None,
-            value: None,
-            reason: "no homepage".into(),
-        });
-    }
-
-    // repo.build / repo.test — score primarily from provenance.
-    // We still perform a narrow, exact-phrase check against trust.notes to detect
-    // intra-tier command conflicts (the only remaining case that should surface as
-    // Unresolved for promotion analysis). This is the single documented exception to
-    // "do not parse notes for scoring". When a machine-readable conflict marker is
-    // added to Trust/Record we can remove the notes check entirely.
-    let has_imported_provenance = provenance.iter().any(|p| p == "imported");
-    let has_inferred_provenance = provenance.iter().any(|p| p == "inferred");
-    let trust_notes = manifest
-        .record
-        .trust
-        .as_ref()
-        .and_then(|t| t.notes.as_deref())
-        .unwrap_or("");
-
-    if let Some(ref build) = manifest.repo.build {
-        scores.push(FieldScore {
-            field: "repo.build".into(),
-            confidence: if has_imported_provenance {
-                FieldConfidence::HighConfidencePresent
-            } else if has_inferred_provenance {
-                FieldConfidence::MediumConfidencePresent
-            } else {
-                FieldConfidence::HighConfidencePresent
-            },
-            source: None,
-            value: Some(build.clone()),
-            reason: if has_imported_provenance {
-                "from manifest source".into()
-            } else if has_inferred_provenance {
-                "from workflow or inferred fallback".into()
-            } else {
-                "present, provenance not specified".into()
-            },
-        });
-    } else {
-        let is_conflict = trust_notes.contains("Left `repo.build` unset because")
-            && trust_notes.contains("conflicting build commands");
-        scores.push(FieldScore {
-            field: "repo.build".into(),
-            confidence: if is_conflict {
-                FieldConfidence::Unresolved
-            } else {
+            }
+            (Some("not_found"), Some("high"), Some("not_found_in_inspected_sources"))
+                if value.is_null() =>
+            {
                 FieldConfidence::HighConfidenceAbsent
-            },
-            source: None,
-            value: None,
-            reason: if is_conflict {
-                "intra-tier conflict left field unset during import".into()
+            }
+            _ => FieldConfidence::Unresolved,
+        };
+        FieldScore {
+            field: field.into(),
+            confidence: confidence.clone(),
+            source,
+            value: value.as_str().map(str::to_owned),
+            reason: if confidence == FieldConfidence::Unresolved {
+                "missing, invalidated, or insufficient field assessment; fresh inspection required"
+                    .into()
             } else {
-                "no build command sources".into()
+                "retained field assessment only; fresh inspection required for promotion".into()
             },
-        });
-    }
-
-    if let Some(ref test) = manifest.repo.test {
-        scores.push(FieldScore {
-            field: "repo.test".into(),
-            confidence: if has_imported_provenance {
-                FieldConfidence::HighConfidencePresent
-            } else if has_inferred_provenance {
-                FieldConfidence::MediumConfidencePresent
-            } else {
-                FieldConfidence::HighConfidencePresent
-            },
-            source: None,
-            value: Some(test.clone()),
-            reason: if has_imported_provenance {
-                "from manifest source".into()
-            } else if has_inferred_provenance {
-                "from workflow or inferred fallback".into()
-            } else {
-                "present, provenance not specified".into()
-            },
-        });
-    } else {
-        let is_conflict = trust_notes.contains("Left `repo.test` unset because")
-            && trust_notes.contains("conflicting test commands");
-        scores.push(FieldScore {
-            field: "repo.test".into(),
-            confidence: if is_conflict {
-                FieldConfidence::Unresolved
-            } else {
-                FieldConfidence::HighConfidenceAbsent
-            },
-            source: None,
-            value: None,
-            reason: if is_conflict {
-                "intra-tier conflict left field unset during import".into()
-            } else {
-                "no test command sources".into()
-            },
-        });
-    }
-
-    // owners.security_contact
-    let owners = manifest.owners.as_ref();
-    let security = owners.and_then(|o| o.security_contact.as_deref());
-    if let Some(contact) = security {
-        if contact == "unknown" {
-            scores.push(FieldScore {
-                field: "owners.security_contact".into(),
-                confidence: FieldConfidence::HighConfidenceAbsent,
-                source: None,
-                value: Some(contact.into()),
-                reason: "explicitly unknown".into(),
-            });
-        } else if contact.contains('@') {
-            scores.push(FieldScore {
-                field: "owners.security_contact".into(),
-                confidence: FieldConfidence::HighConfidencePresent,
-                source: None,
-                value: Some(contact.into()),
-                reason: "direct email or mailing list".into(),
-            });
-        } else if is_actionable_security_url(contact) {
-            scores.push(FieldScore {
-                field: "owners.security_contact".into(),
-                confidence: FieldConfidence::HighConfidencePresent,
-                source: None,
-                value: Some(contact.into()),
-                reason: "actionable security reporting URL".into(),
-            });
-        } else {
-            scores.push(FieldScore {
-                field: "owners.security_contact".into(),
-                confidence: FieldConfidence::MediumConfidencePresent,
-                source: None,
-                value: Some(contact.into()),
-                reason: "policy URL or non-email contact".into(),
-            });
         }
-    } else {
-        scores.push(FieldScore {
-            field: "owners.security_contact".into(),
-            confidence: FieldConfidence::HighConfidenceAbsent,
-            source: None,
-            value: None,
-            reason: "no security contact sources found".into(),
-        });
-    }
-
-    // owners.team
-    let team = owners.and_then(|o| o.team.as_deref());
-    scores.push(FieldScore {
-        field: "owners.team".into(),
-        confidence: if team.is_some() {
-            FieldConfidence::HighConfidencePresent
-        } else {
-            FieldConfidence::HighConfidenceAbsent
-        },
-        source: None,
-        value: team.map(|t| t.to_string()),
-        reason: if team.is_some() {
-            "clear CODEOWNERS team".into()
-        } else {
-            "no single clear team".into()
-        },
-    });
-
-    // docs.root
-    if let Some(ref docs) = &manifest.docs {
-        if let Some(ref root) = docs.root {
-            scores.push(FieldScore {
-                field: "docs.root".into(),
-                confidence: if is_quality_url(root) {
-                    FieldConfidence::HighConfidencePresent
-                } else {
-                    FieldConfidence::MediumConfidencePresent
-                },
-                source: None,
-                value: Some(root.clone()),
-                reason: "docs URL present".into(),
-            });
-        } else {
-            scores.push(FieldScore {
-                field: "docs.root".into(),
-                confidence: FieldConfidence::HighConfidenceAbsent,
-                source: None,
-                value: None,
-                reason: "no docs site".into(),
-            });
-        }
-    } else {
-        scores.push(FieldScore {
-            field: "docs.root".into(),
-            confidence: FieldConfidence::HighConfidenceAbsent,
-            source: None,
-            value: None,
-            reason: "no docs detected".into(),
-        });
-    }
-
-    // docs.getting_started
-    if let Some(ref docs) = &manifest.docs {
-        if let Some(ref gs) = docs.getting_started {
-            scores.push(FieldScore {
-                field: "docs.getting_started".into(),
-                confidence: if is_quality_url(gs) {
-                    FieldConfidence::HighConfidencePresent
-                } else {
-                    FieldConfidence::MediumConfidencePresent
-                },
-                source: None,
-                value: Some(gs.clone()),
-                reason: "getting started URL present".into(),
-            });
-        } else {
-            scores.push(FieldScore {
-                field: "docs.getting_started".into(),
-                confidence: FieldConfidence::HighConfidenceAbsent,
-                source: None,
-                value: None,
-                reason: "no getting started link".into(),
-            });
-        }
-    } else {
-        scores.push(FieldScore {
-            field: "docs.getting_started".into(),
-            confidence: FieldConfidence::HighConfidenceAbsent,
-            source: None,
-            value: None,
-            reason: "no docs detected".into(),
-        });
-    }
-
-    scores
+    })
+    .collect()
 }
 
 pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
@@ -645,84 +358,11 @@ pub fn analyze_index_promotion(index_root: &Path) -> Result<PromotionReport> {
     })
 }
 
+/// Standalone manifests cannot establish that the claimed checks actually ran.
+/// Keep the facade compatible, but fail before any record or evidence file write.
 pub fn apply_index_promotions(
-    index_root: &Path,
-    limit: Option<usize>,
+    _index_root: &Path,
+    _limit: Option<usize>,
 ) -> Result<PromotionApplyReport> {
-    let repos_dir = index_root.join("repos");
-    if !repos_dir.exists() {
-        bail!("index repos directory not found: {}", repos_dir.display());
-    }
-
-    let mut record_paths = Vec::new();
-    collect_record_paths(&repos_dir, &mut record_paths)?;
-    record_paths.sort();
-
-    let mut promoted_records = Vec::new();
-    let mut skipped_eligible_count = 0;
-    let max_promotions = limit.unwrap_or(usize::MAX);
-
-    for path in record_paths {
-        let contents = fs::read_to_string(&path)?;
-        let mut manifest: Manifest = toml::from_str(&contents)?;
-        let scores = score_index_record_for_promotion(&manifest);
-        let score_report = field_score_report_from_scores(&scores);
-        let eligible = score_report.summary.eligible_for_auto_publish;
-        let is_candidate = matches!(
-            manifest.record.status,
-            RecordStatus::Draft | RecordStatus::Imported | RecordStatus::Inferred
-        );
-        if !eligible || !is_candidate {
-            continue;
-        }
-
-        if promoted_records.len() >= max_promotions {
-            skipped_eligible_count += 1;
-            continue;
-        }
-
-        let outcome = promote_to_verified(&mut manifest, &score_report);
-        if !outcome.promoted {
-            continue;
-        }
-        let rendered = render_manifest(&manifest)?;
-        fs::write(&path, rendered)?;
-        append_auto_promotion_evidence(&path)?;
-        let relative = path
-            .strip_prefix(&repos_dir)
-            .unwrap_or(&path)
-            .to_string_lossy()
-            .to_string();
-        promoted_records.push(PromotionAppliedRecord {
-            path: relative,
-            previous_status: outcome.previous_status,
-            reason: outcome.reason,
-        });
-    }
-
-    Ok(PromotionApplyReport {
-        promoted_records,
-        skipped_eligible_count,
-    })
-}
-
-fn append_auto_promotion_evidence(record_path: &Path) -> Result<()> {
-    let evidence_path = record_path
-        .parent()
-        .map(|parent| parent.join("evidence.md"))
-        .unwrap_or_else(|| Path::new("evidence.md").to_path_buf());
-    let section = "\n## Auto-promotion\n\nRecord auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.\n";
-    match fs::read_to_string(&evidence_path) {
-        Ok(existing) if existing.contains("auto-promoted to verified") => Ok(()),
-        Ok(mut existing) => {
-            existing.push_str(section);
-            fs::write(evidence_path, existing)?;
-            Ok(())
-        }
-        Err(err) if err.kind() == std::io::ErrorKind::NotFound => {
-            fs::write(evidence_path, section.trim_start())?;
-            Ok(())
-        }
-        Err(err) => Err(err.into()),
-    }
+    bail!("standalone promotion is disabled: run a fresh crawler verification against inspected sources; retained assessments and record-wide provenance cannot authorize --apply")
 }

@@ -11,6 +11,7 @@ use crate::validation::collect_record_dirs;
 mod compare;
 mod error;
 mod evidence;
+pub(crate) use evidence::field_evidence;
 mod export;
 mod pagedigest;
 mod profile;
