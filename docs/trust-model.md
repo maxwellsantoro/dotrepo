@@ -113,3 +113,12 @@ not independently calibrated correctness probabilities.
 Evidence is bound to the exact serialized value and record check timestamp.
 Export drops an entry if either no longer matches. Legacy records without retained
 field assessments do not inherit them from a record-wide high-confidence label.
+
+## Standalone promotion is disabled
+
+`promotion-report --apply` fails before writing records or evidence. It cannot
+establish source inspection from a standalone manifest, record-wide provenance,
+or a newly written evidence note. Read-only promotion analysis now uses retained
+assessments bound to the exact field value and record check time; missing or
+invalidated assessments remain unresolved. This analysis is not a fresh check.
+Use the crawler's inspection and verification path to mint `verified` overlays.

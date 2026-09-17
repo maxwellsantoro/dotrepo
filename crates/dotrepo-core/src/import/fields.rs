@@ -113,7 +113,7 @@ pub fn score_import_fields(
     // repo.build
     // Trust notes may still record an intra-tier conflict even when candidate
     // sanitization left verification.absent_fields set. Prefer unresolved so
-    // crawl auto-promote cannot disagree with score_index_record_for_promotion.
+    // fresh crawler verification cannot turn a conflict into verified absence.
     let trust_notes = plan
         .manifest
         .record

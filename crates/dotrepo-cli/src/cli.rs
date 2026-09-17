@@ -49,15 +49,15 @@ pub enum Command {
         #[arg(long, default_value = "index")]
         index_root: PathBuf,
     },
-    /// Analyze index records for promotion eligibility to verified status.
+    /// Inspect retained field assessments; fresh crawler verification is required to promote.
     PromotionReport {
         /// Index root to analyze.
         #[arg(long, default_value = "index")]
         index_root: PathBuf,
-        /// Apply eligible draft/imported/inferred promotions after reporting.
+        /// Disabled: standalone records cannot establish source verification.
         #[arg(long)]
         apply: bool,
-        /// Maximum number of promotions to apply.
+        /// Reserved for compatibility; standalone application is disabled.
         #[arg(long, requires = "apply")]
         limit: Option<usize>,
         /// Emit the full report as JSON.

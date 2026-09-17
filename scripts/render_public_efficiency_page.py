@@ -12,6 +12,8 @@ import html
 import json
 from pathlib import Path
 
+from measure_public_policy_coverage import measure as measure_policy_coverage
+
 from render_public_pages_landing import (
     detect_site_base_path,
     format_timestamp_for_humans,
@@ -66,7 +68,36 @@ def render_intent_rows(intent_summaries: dict) -> str:
     return "\n          ".join(rows)
 
 
-def render_efficiency_page(report: dict, base_path: str) -> str:
+def render_policy_coverage(report: dict | None, base_path: str) -> str:
+    if report is None:
+        return ""
+    rows = []
+    for task, counts in report["tasks"].items():
+        rows.append(
+            f"<tr><td>{html.escape(task)}</td>"
+            f"<td>{counts['presentCount']} ({percent(counts['presenceRate'])})</td>"
+            f"<td>{counts['acceptableCount']} ({percent(counts['acceptableRate'])})</td>"
+            "<td>Not measured</td><td>Not measured</td></tr>"
+        )
+    raw = site_href(base_path, "/benchmarks/policy-coverage.json")
+    return f"""<section class="panel">
+      <h2>Which tasks can use a profile without fallback?</h2>
+      <p>These counts apply the reference consumer to all {report["profileCount"]} indexed
+      primary profiles at export time. Commands require an explicit, high-confidence extraction,
+      a source, and a matching check timestamp. Missing, invalidated, inferred, or weaker
+      assessments require upstream fallback. Candidate commands do not replace primary commands.</p>
+      <div class="table-scroll" role="region" aria-label="Consumer policy coverage" tabindex="0">
+      <table><thead><tr><th>Task</th><th>Values present</th><th>Policy acceptable</th>
+      <th>Independently correct</th><th>Task completed</th></tr></thead>
+      <tbody>{"".join(rows)}</tbody></table></div>
+      <p>Presence, policy acceptance, correctness, and completion are separate outcomes.
+      The last two require independent evidence; this coverage measurement leaves them unknown.
+      An acceptable command is metadata for planning, not permission to execute it.</p>
+      <p><a href="{raw}">Policy, per-repository decisions, and fallback reasons (JSON)</a></p>
+    </section>"""
+
+
+def render_efficiency_page(report: dict, base_path: str, policy_report: dict | None = None) -> str:
     summary = report.get("summary", {})
     generated_at = format_timestamp_for_humans(str(report.get("generatedAt", "unknown")))
     repository_count = summary.get("repositoryCount", 0)
@@ -81,6 +112,7 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
     proxy_mb = float(summary.get("scrapeProxyBytes", 0)) / (1024 * 1024)
     intent_rows = render_intent_rows(summary.get("intentSummaries", {}))
     raw_href = site_href(base_path, "/benchmarks/lookup-efficiency.json")
+    policy_section = render_policy_coverage(policy_report, base_path)
 
     return f"""<!doctype html>
 <html lang="en">
@@ -89,7 +121,7 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>Efficiency · dotrepo</title>
-  <meta name="description" content="Measured lookup efficiency of the dotrepo public index versus per-repository scraping: request reduction, hit rates, and honest abstention.">
+  <meta name="description" content="Field presence, consumer-policy acceptance, modeled requests, and measured payload sizes for the dotrepo public index.">
   <style>
     :root {{
       color-scheme: light;
@@ -213,8 +245,10 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
       </div>
     </div>
 
+    {policy_section}
+
     <section class="panel">
-      <h2>Per-intent results</h2>
+      <h2>Per-intent presence results</h2>
       <p>The workload asks the same four questions of every repository, chosen before
       looking at which answers exist — so the numbers cannot flatter the index by only
       asking questions it can answer.</p>
@@ -294,7 +328,15 @@ def main() -> int:
             "regenerate them locally with scripts/measure_public_lookup_efficiency.py"
         )
 
-    write_text(input_dir / "efficiency" / "index.html", render_efficiency_page(report, base_path))
+    policy_report = measure_policy_coverage(input_dir)
+    write_text(
+        input_dir / "efficiency" / "index.html",
+        render_efficiency_page(report, base_path, policy_report),
+    )
+    write_text(
+        input_dir / "benchmarks" / "policy-coverage.json",
+        json.dumps(policy_report, indent=2) + "\n",
+    )
     write_text(
         input_dir / "benchmarks" / "lookup-efficiency.json",
         json.dumps(report, indent=2, sort_keys=True) + "\n",

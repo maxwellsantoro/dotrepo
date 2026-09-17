@@ -595,10 +595,11 @@ check the public surface before scraping**.
      Recrawl: `jesseduffield/lazygit` → `go test ./... -short` (was CI
      coverdir / conflict-unresolved). Other gap candidates re-confirmed honest
      absence (no invent).
-2. **Drain any new promotion headroom** after recrawls
-   (`dotrepo promotion-report --apply`) — never bypass gates. Corpus is
-   **613/613 verified** and **613/613 re-score eligible** (0 verified-but-
-   ineligible residual).
+2. **Require fresh source verification for promotion.** Standalone
+   `dotrepo promotion-report --apply` is disabled; a record and its retained
+   assessments cannot establish that inspection occurred. Use the crawler
+   verification path. The July all-verified counts above are historical, not a
+   target to restore. Measure consumer-policy acceptance separately from presence.
 3. **Keep audit conversion running.** Weekly sample
    (`scripts/audit_index_sample.py`); findings → fixture/parser/policy.
    Latest closed sample: `index/telemetry/audit-sample-20260708.md` +
@@ -901,8 +902,8 @@ Current status (shipped capabilities; release history in [`CHANGELOG.md`](./CHAN
   balanced, crawler-ready target files; the completed tranche-two expansion
   supplied the path to the 500-profile gate, and the seed-review workflows retain
   the catalog as the reproducible record
-- `dotrepo promotion-report` separates total eligible records from promotion
-  candidates, exposing deterministic auto-promotion headroom; the growth-status
+- `dotrepo promotion-report` inspects value-bound retained assessments;
+  standalone `--apply` is disabled pending source-verification support; the growth-status
   renderer separates advisory high-signal lift candidates from the broader
   quality-hardening queue
 - `is_actionable_security_url()` recognizes GitHub security surfaces,

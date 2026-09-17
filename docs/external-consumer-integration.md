@@ -97,3 +97,20 @@ The example never executes returned commands. It reports fallback requirements;
 the application decides how to inspect its upstream sources. Its request bytes
 and elapsed time are real client measurements. They exclude subsequent fallback
 and index maintenance and must not be advertised as total task savings.
+
+## Positive command acceptance
+
+The reference consumer accepts a requested primary build/test command only when
+it is a nonempty string with an explicit `present`, `extracted`, high-confidence
+field assessment, a nonempty source, and a check timestamp matching the record.
+Missing, invalidated, malformed, unspecified, inferred, or weaker assessments
+require upstream fallback. Record-wide confidence and maintainer status do not
+substitute for this contract; no maintainer-authority exemption is implemented.
+Unsupported response versions and non-string requested values also require
+fallback. Acceptance is metadata suitability, not permission to execute a command.
+The benchmark leaves field confidence unknown when absent.
+
+Policy coverage is published on the efficiency page and in its linked JSON.
+It distinguishes value presence, policy acceptance, independently established
+correctness, and completed tasks. The last two remain unmeasured in the coverage
+report; they require the existing benchmark and independent pilot evidence.

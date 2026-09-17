@@ -38,6 +38,7 @@ class LookupFirstArm(Arm):
             "consumer_class": "in-repository-reference",
             "model_usage_measured": False,
             "maintenance_cost_included": False,
+            "command_policy": consumer.COMMAND_POLICY,
         }
 
     def prefetch(self, repo):
@@ -68,12 +69,16 @@ class LookupFirstArm(Arm):
             value = self.result.profile
             for key in consumer.FIELD_PATHS[path]:
                 value = value[key]
-            assessment = self.result.profile.get("fieldEvidence", {}).get(path, {})
-            confidence = assessment.get("confidence") or (self.result.trust or {}).get("confidence")
+            evidence = self.result.profile.get("fieldEvidence")
+            assessment = evidence.get(path) if isinstance(evidence, dict) else None
+            assessment = assessment if isinstance(assessment, dict) else {}
+            confidence = assessment.get("confidence")
+            if confidence not in ("high", "medium", "low"):
+                confidence = None
             return Answer(
                 str(value) if not isinstance(value, (dict, list)) else json.dumps(value),
                 confidence,
-                "profile:" + assessment.get("method", "record-level-only"),
+                "profile:" + str(assessment.get("method") or "unknown"),
                 size,
                 elapsed,
             )

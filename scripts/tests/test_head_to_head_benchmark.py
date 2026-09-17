@@ -26,6 +26,7 @@ def test_lookup_first_counts_lookup_and_fallback_without_using_stale_values():
         def get(self, url):
             body = json.dumps(
                 {
+                    "apiVersion": "v0",
                     "identity": {"host": "github.com", "owner": "example", "repo": "test"},
                     "record": {"generatedAt": "2000-01-01T00:00:00Z"},
                     "execution": {"test": "wrong old command"},
@@ -50,7 +51,7 @@ def test_lookup_first_counts_lookup_and_fallback_without_using_stale_values():
     assert answer.bytes_over_wire == 300
     assert answer.latency_ms == 30
     assert arm.fallback.calls == 1
-    assert arm.events[0]["fallbackReasons"] == ["stale-record"]
+    assert "stale-record" in arm.events[0]["fallbackReasons"]
 
 
 def test_independent_gold_has_evidence_and_frozen_cohorts() -> None:
@@ -160,3 +161,48 @@ def test_github_baseline_probes_real_world_source_variants() -> None:
     assert DOC_PATHS["package"] == ("package.json",)
     assert DOC_PATHS["go_mod"] == ("go.mod",)
     assert "Justfile" in DOC_PATHS["justfile"]
+
+
+def test_lookup_first_does_not_inherit_record_confidence_for_unassessed_fields():
+    import json
+    from datetime import datetime, timezone
+    from bench.arms.lookup_first import LookupFirstArm
+
+    class ProfileHttp:
+        def get(self, url):
+            return (
+                200,
+                json.dumps(
+                    {
+                        "apiVersion": "v0",
+                        "identity": {"host": "github.com", "owner": "example", "repo": "demo"},
+                        "record": {"generatedAt": datetime.now(timezone.utc).isoformat()},
+                        "purpose": "Example project",
+                        "execution": {"test": "invented command"},
+                        "trust": {"confidence": "high", "selectedStatus": "verified"},
+                    }
+                ),
+                100,
+                10,
+            )
+
+    class Fallback:
+        calls = 0
+
+        def prefetch(self, repo):
+            self.calls += 1
+
+        def answer(self, repo, field):
+            return Answer("real test command", "medium", "upstream", 50, 5)
+
+    arm = LookupFirstArm(ProfileHttp(), "https://example.invalid")
+    arm.fallback = Fallback()
+    arm.prefetch("github.com/example/demo")
+    description = next(f for f in FIELDS_BY_ID.values() if f.dotrepo_path == "repo.description")
+    answer = arm.answer("github.com/example/demo", description)
+    assert answer.value == "Example project"
+    assert answer.confidence is None
+    command = arm.answer("github.com/example/demo", FIELDS_BY_ID["test"])
+    assert command.value == "real test command"
+    assert arm.fallback.calls == 1
+    assert arm.events[-1]["fallbackReasons"] == ["missing-command-assessment:repo.test"]

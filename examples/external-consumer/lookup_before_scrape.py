@@ -212,6 +212,17 @@ FIELD_PATHS = {
     "owners.security_contact": ("ownership", "securityContact"),
 }
 
+# Consumer compatibility and policy identifiers, not record-wide trust levels.
+SUPPORTED_API_VERSIONS = ("v0",)
+COMMAND_POLICY = "explicit-high-confidence-extraction"
+
+
+def profile_field(payload: dict[str, Any], path: str) -> Any:
+    value = payload
+    for key in FIELD_PATHS[path]:
+        value = value.get(key) if isinstance(value, dict) else None
+    return value
+
 
 def evaluate_for_task(
     result: LookupResult,
@@ -226,16 +237,22 @@ def evaluate_for_task(
         raise ValueError("invalid task policy")
     reasons = []
     payload = result.profile or {}
+    result.record_generated_at = None
+    result.record_age_days = None
     if not result.hit:
         reasons.append(result.error or "lookup-failed")
     else:
-        identity = payload.get("identity", {})
+        if payload.get("apiVersion") not in SUPPORTED_API_VERSIONS:
+            reasons.append("unsupported-api-version")
+        identity = payload.get("identity")
+        identity = identity if isinstance(identity, dict) else {}
         actual = "/".join(str(identity.get(k, "")) for k in ("host", "owner", "repo"))
         if actual.lower() != result.identity.lower():
             reasons.append("identity-mismatch-or-missing")
         if payload.get("conflicts"):
             reasons.append("conflicting-records")
-        record = payload.get("record", {})
+        record = payload.get("record")
+        record = record if isinstance(record, dict) else {}
         result.record_generated_at = record.get("generatedAt")
         try:
             checked = datetime.fromisoformat(result.record_generated_at.replace("Z", "+00:00"))
@@ -248,16 +265,32 @@ def evaluate_for_task(
         except (ValueError, AttributeError, TypeError):
             reasons.append("unknown-record-age")
         for path in required_fields:
-            value = payload
-            for key in FIELD_PATHS[path]:
-                value = value.get(key) if isinstance(value, dict) else None
+            value = profile_field(payload, path)
             if not _nonempty(value):
                 reasons.append("missing:" + path)
-            assessment = payload.get("fieldEvidence", {}).get(path, {})
-            if assessment.get("state") in {"suspect", "unresolved"}:
+                continue
+            if not isinstance(value, str):
+                reasons.append("invalid-field-type:" + path)
+                continue
+            evidence = payload.get("fieldEvidence")
+            assessment = evidence.get(path) if isinstance(evidence, dict) else None
+            assessment = assessment if isinstance(assessment, dict) else {}
+            if assessment.get("state") in ("suspect", "unresolved"):
                 reasons.append("unresolved:" + path)
-            if path in {"repo.build", "repo.test"} and assessment.get("method") == "inferred":
-                reasons.append("inferred-command:" + path)
+            if path in {"repo.build", "repo.test"}:
+                if assessment.get("method") == "inferred":
+                    reasons.append("inferred-command:" + path)
+                elif not assessment:
+                    reasons.append("missing-command-assessment:" + path)
+                elif not (
+                    assessment.get("state") == "present"
+                    and assessment.get("method") == "extracted"
+                    and assessment.get("confidence") == "high"
+                    and isinstance(assessment.get("source"), str)
+                    and assessment["source"].strip()
+                    and assessment.get("checkedAt") == result.record_generated_at
+                ):
+                    reasons.append("insufficient-command-assessment:" + path)
     result.fallback_reasons = reasons
     result.usable = not reasons
     return result

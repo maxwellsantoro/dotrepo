@@ -25,7 +25,7 @@ pub(super) fn record_age(record: Option<&str>, exported: &str) -> (String, Optio
     }
 }
 
-pub(super) fn field_evidence(manifest: &Manifest) -> BTreeMap<String, Value> {
+pub(crate) fn field_evidence(manifest: &Manifest) -> BTreeMap<String, Value> {
     let Some(fields) = manifest
         .x
         .get("dotrepo")
@@ -46,9 +46,9 @@ pub(super) fn field_evidence(manifest: &Manifest) -> BTreeMap<String, Value> {
                 return None;
             }
             // Do not carry an earlier assessment across a later record refresh.
-            if object.get("checkedAt").and_then(Value::as_str)
-                != manifest.record.generated_at.as_deref()
-            {
+            let checked = object.get("checkedAt")?.as_str()?;
+            OffsetDateTime::parse(checked, &Rfc3339).ok()?;
+            if Some(checked) != manifest.record.generated_at.as_deref() {
                 return None;
             }
             // Older field scorers used the first imported file as a security

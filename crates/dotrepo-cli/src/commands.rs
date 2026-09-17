@@ -313,7 +313,7 @@ pub fn cmd_promotion_report(
 
     let s = &report.summary;
     println!(
-        "promotion analysis: {}/{} records eligible for verified auto-publish; {} can increase high-signal count",
+        "assessment analysis: {}/{} records have complete retained assessments; {} are draft/imported/inferred (fresh crawler verification required; --apply disabled)",
         s.eligible_count, s.total_records, s.promotion_candidate_count
     );
     println!();

@@ -1105,11 +1105,39 @@ def main() -> int:
     )
     run(public_profile_coverage_command(repo_root, public_dir, output_root), cwd=repo_root)
     run(public_quality_dashboard_command(repo_root, public_dir, output_root), cwd=repo_root)
+    run(
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/measure_public_policy_coverage.py",
+            "--public-root",
+            str(public_dir),
+            "--output-json",
+            str(output_root / "public-policy-coverage.json"),
+            "--output-md",
+            str(output_root / "public-policy-coverage.md"),
+        ],
+        cwd=repo_root,
+    )
     run(index_growth_tranche_command(repo_root, output_root), cwd=repo_root)
     for command in public_lookup_benchmark_commands(
         repo_root, public_dir, output_root, args.generated_at
     ):
         run(command, cwd=repo_root)
+    run(
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/render_public_efficiency_page.py",
+            "--input",
+            str(public_dir),
+            "--benchmark",
+            str(output_root / "public-lookup-efficiency.json"),
+        ],
+        cwd=repo_root,
+    )
     run(
         public_factual_accuracy_command(repo_root, public_dir, output_root, args.generated_at),
         cwd=repo_root,
@@ -1260,6 +1288,7 @@ def main() -> int:
     print(f"  public tree: {public_dir}")
     print(f"  public bundle: {public_bundle}")
     print(f"  profile coverage: {output_root / 'public-profile-coverage.json'}")
+    print(f"  consumer policy coverage: {output_root / 'public-policy-coverage.json'}")
     print(f"  public quality: {output_root / 'public-quality-dashboard.json'}")
     print(f"  index growth plan: {output_root / 'index-growth-plan.json'}")
     print(f"  lookup workload: {output_root / 'public-lookup-workload.json'}")
