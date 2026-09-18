@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/pocketbase/pocketbase"
-generated_at = "2026-09-16T16:15:41.537652Z"
+generated_at = "2026-09-18T06:05:42.667180147Z"
 
 [record.trust]
 confidence = "medium"
@@ -63,7 +63,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -71,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -79,15 +79,16 @@ state = "present"
 valueJson = '"https://pocketbase.io"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/pocketbase/pocketbase/security/policy"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -95,7 +96,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -104,7 +105,7 @@ state = "present"
 valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -113,7 +114,7 @@ state = "present"
 valueJson = '"Open Source realtime backend in 1 file"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -121,7 +122,7 @@ state = "present"
 valueJson = '"https://pocketbase.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -130,7 +131,7 @@ state = "present"
 valueJson = '"PocketBase"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:15:41.537652Z"
+checkedAt = "2026-09-18T06:05:42.667180147Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -145,4 +146,4 @@ default_branch = "master"
 fork = false
 head_sha = "5cec579da984436a258602a46a96302fbd31f77c"
 html_url = "https://github.com/pocketbase/pocketbase"
-stars = 61055
+stars = 61076

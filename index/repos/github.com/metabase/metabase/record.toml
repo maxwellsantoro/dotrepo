@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/metabase/metabase"
-generated_at = "2026-09-16T16:14:36.264269Z"
+generated_at = "2026-09-18T06:03:46.497754825Z"
 
 [record.trust]
 confidence = "high"
@@ -94,7 +94,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -102,7 +102,7 @@ state = "present"
 valueJson = '"https://www.metabase.com/docs/latest/installation-and-operation/installing-metabase"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -110,15 +110,16 @@ state = "present"
 valueJson = '"https://metabase.com"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@metabase.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -126,7 +127,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -135,7 +136,7 @@ state = "present"
 valueJson = '"bun run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -144,7 +145,7 @@ state = "present"
 valueJson = '"The easy-to-use open source Business Intelligence and Embedded Analytics tool that lets everyone work with data :bar_chart:"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -152,7 +153,7 @@ state = "present"
 valueJson = '"https://metabase.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -161,7 +162,7 @@ state = "present"
 valueJson = '"Metabase"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:14:36.264269Z"
+checkedAt = "2026-09-18T06:03:46.497754825Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -174,6 +175,6 @@ archived = false
 clone_url = "https://github.com/metabase/metabase.git"
 default_branch = "master"
 fork = false
-head_sha = "f02360567a51fe492c696149d2072883439c918d"
+head_sha = "188c8f412f704ab446728524fe810d869cd8bc73"
 html_url = "https://github.com/metabase/metabase"
-stars = 49288
+stars = 49324

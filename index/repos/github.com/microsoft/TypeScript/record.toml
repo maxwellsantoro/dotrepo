@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/TypeScript"
-generated_at = "2026-09-16T16:14:37.528454Z"
+generated_at = "2026-09-18T06:03:52.871925562Z"
 
 [record.trust]
 confidence = "high"
@@ -63,7 +63,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -71,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -79,15 +79,16 @@ state = "present"
 valueJson = '"https://www.typescriptlang.org"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://msrc.microsoft.com/create-report"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -95,7 +96,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -104,7 +105,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -113,7 +114,7 @@ state = "present"
 valueJson = '"TypeScript is a superset of JavaScript that compiles to clean JavaScript output."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -121,7 +122,7 @@ state = "present"
 valueJson = '"https://www.typescriptlang.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -130,7 +131,7 @@ state = "present"
 valueJson = '"TypeScript"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:14:37.528454Z"
+checkedAt = "2026-09-18T06:03:52.871925562Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -143,6 +144,6 @@ archived = false
 clone_url = "https://github.com/microsoft/TypeScript.git"
 default_branch = "main"
 fork = false
-head_sha = "cf8cf4f6c17ada5e920949ad984791ceb9ce06df"
+head_sha = "c975de5011fb7dfb32a491cf3fcf02d4f811f50e"
 html_url = "https://github.com/microsoft/TypeScript"
-stars = 111070
+stars = 111095

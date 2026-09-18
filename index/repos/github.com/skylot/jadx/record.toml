@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/skylot/jadx"
-generated_at = "2026-09-16T16:16:14.121489Z"
+generated_at = "2026-09-18T06:05:50.113647984Z"
 
 [record.trust]
 confidence = "medium"
@@ -41,7 +41,7 @@ maintainers = []
 security_contact = "https://github.com/skylot/jadx/security/advisories/new"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no docs detected"
@@ -49,7 +49,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no docs detected"
@@ -57,15 +57,16 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/skylot/jadx/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -73,7 +74,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -82,7 +83,7 @@ state = "present"
 valueJson = '"./gradlew build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -91,7 +92,7 @@ state = "present"
 valueJson = '"Dex to Java decompiler"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -99,7 +100,7 @@ state = "present"
 valueJson = '"https://github.com/skylot/jadx"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -108,7 +109,7 @@ state = "present"
 valueJson = '"JADX"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:16:14.121489Z"
+checkedAt = "2026-09-18T06:05:50.113647984Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -123,4 +124,4 @@ default_branch = "master"
 fork = false
 head_sha = "2fb1b16386941660fda07e9017285aec40fcb37f"
 html_url = "https://github.com/skylot/jadx"
-stars = 50484
+stars = 50503

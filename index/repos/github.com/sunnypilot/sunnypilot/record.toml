@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/sunnypilot/sunnypilot"
-generated_at = "2026-09-16T16:16:28.99895Z"
+generated_at = "2026-09-18T06:06:02.921162794Z"
 
 [record.trust]
 confidence = "medium"
@@ -83,7 +83,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"https://community.sunnypilot.ai/t/getting-started-using-sunnypilot-in-your-supported-car/251"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -99,15 +99,16 @@ state = "present"
 valueJson = '"https://www.sunnypilot.ai"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"adeeb@comma.ai"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -115,7 +116,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -124,7 +125,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -133,7 +134,7 @@ state = "present"
 valueJson = """"sunnypilot is an open source driver assistance system. sunnypilot offers the user a unique driving experience for over 350 supported car makes and models with modified behaviors of driving assist engagements. sunnypilot complies with the safety policy from comma.ai's openpilot as accurately as possible.""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -141,7 +142,7 @@ state = "present"
 valueJson = '"https://www.sunnypilot.ai"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README heading with post-cleaners"
@@ -150,7 +151,7 @@ state = "present"
 valueJson = '"sunnypilot"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:16:28.99895Z"
+checkedAt = "2026-09-18T06:06:02.921162794Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -165,4 +166,4 @@ default_branch = "master"
 fork = false
 head_sha = "a5f44653d7f43ad57fef2f546f3916ec4cbf3c56"
 html_url = "https://github.com/sunnypilot/sunnypilot"
-stars = 2098
+stars = 2099

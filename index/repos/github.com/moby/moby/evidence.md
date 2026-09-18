@@ -4,7 +4,7 @@
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from Makefile as `make build`.
 - Imported repo.test from Makefile as `make test-unit`.
-- Imported repo.toolchain.min from go.mod as `1.26.3` (Go).
+- Imported repo.toolchain.min from go.mod as `1.26.6` (Go).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

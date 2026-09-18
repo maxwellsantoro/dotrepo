@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mui/material-ui"
-generated_at = "2026-09-16T16:15:05.304997Z"
+generated_at = "2026-09-18T06:04:15.028235533Z"
 
 [record.trust]
 confidence = "high"
@@ -49,7 +49,7 @@ root = "https://mui.com/material-ui/"
 getting_started = "https://mui.com/material-ui/getting-started/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -57,7 +57,7 @@ state = "present"
 valueJson = '"https://mui.com/material-ui/getting-started/"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -65,15 +65,16 @@ state = "present"
 valueJson = '"https://mui.com/material-ui/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@mui.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -81,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -90,7 +91,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -99,7 +100,7 @@ state = "present"
 valueJson = """"Material UI: Comprehensive React component library that implements Google's Material Design. Free forever.""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -107,7 +108,7 @@ state = "present"
 valueJson = '"https://mui.com/material-ui/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -116,7 +117,7 @@ state = "present"
 valueJson = '"Material UI"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:15:05.304997Z"
+checkedAt = "2026-09-18T06:04:15.028235533Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -129,6 +130,6 @@ archived = false
 clone_url = "https://github.com/mui/material-ui.git"
 default_branch = "master"
 fork = false
-head_sha = "ecd59b96e807cce6498260931793210ea307d03c"
+head_sha = "554f7cf7371d17a5d7b33dd3a979d4de4e954801"
 html_url = "https://github.com/mui/material-ui"
-stars = 99048
+stars = 99052

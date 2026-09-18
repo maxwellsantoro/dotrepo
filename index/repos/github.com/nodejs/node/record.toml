@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/nodejs/node"
-generated_at = "2026-09-16T16:15:35.242653Z"
+generated_at = "2026-09-18T06:04:32.79314411Z"
 
 [record.trust]
 confidence = "high"
@@ -98,7 +98,7 @@ security_contact = "security@lists.openjsf.org"
 root = "https://nodejs.org"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -106,7 +106,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -114,15 +114,16 @@ state = "present"
 valueJson = '"https://nodejs.org"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@lists.openjsf.org"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -130,7 +131,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -139,7 +140,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -148,7 +149,7 @@ state = "present"
 valueJson = '"Node.js JavaScript runtime ✨🐢🚀✨"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -156,7 +157,7 @@ state = "present"
 valueJson = '"https://nodejs.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -165,7 +166,7 @@ state = "present"
 valueJson = '"Node.js"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:15:35.242653Z"
+checkedAt = "2026-09-18T06:04:32.79314411Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -178,6 +179,6 @@ archived = false
 clone_url = "https://github.com/nodejs/node.git"
 default_branch = "main"
 fork = false
-head_sha = "67e66b8e054a842a68fa3d1ea71709953141172a"
+head_sha = "7c01b98cfa181af71413a3c80ef3a7013533fbc0"
 html_url = "https://github.com/nodejs/node"
-stars = 121987
+stars = 121983

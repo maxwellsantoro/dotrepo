@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/syncthing/syncthing"
-generated_at = "2026-09-16T16:16:33.366986Z"
+generated_at = "2026-09-18T06:06:07.719126926Z"
 
 [record.trust]
 confidence = "medium"
@@ -68,7 +68,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -76,7 +76,7 @@ state = "present"
 valueJson = '"https://docs.syncthing.net/intro/getting-started.html"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -84,15 +84,16 @@ state = "present"
 valueJson = '"https://syncthing.net/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"security@syncthing.net"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -100,7 +101,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -109,7 +110,7 @@ state = "present"
 valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -118,7 +119,7 @@ state = "present"
 valueJson = '"Open Source Continuous File Synchronization"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -126,7 +127,7 @@ state = "present"
 valueJson = '"https://syncthing.net/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -135,7 +136,7 @@ state = "present"
 valueJson = '"syncthing"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:16:33.366986Z"
+checkedAt = "2026-09-18T06:06:07.719126926Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -150,4 +151,4 @@ default_branch = "main"
 fork = false
 head_sha = "bb19c017ae672b766338e21ab8c4d8ef6024fae3"
 html_url = "https://github.com/syncthing/syncthing"
-stars = 88651
+stars = 88688

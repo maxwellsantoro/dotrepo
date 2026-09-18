@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/freeCodeCamp/freeCodeCamp"
-generated_at = "2026-09-16T16:13:31.82711Z"
+generated_at = "2026-09-18T06:03:12.424734946Z"
 
 [record.trust]
 confidence = "high"
@@ -84,7 +84,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -92,7 +92,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -100,7 +100,7 @@ state = "present"
 valueJson = '"https://contribute.freecodecamp.org"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "unspecified"
 reason = "actionable security reporting URL"
@@ -108,7 +108,7 @@ state = "present"
 valueJson = '"https://contribute.freecodecamp.org/#/security"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -116,7 +116,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -125,7 +125,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -134,7 +134,7 @@ state = "present"
 valueJson = """"freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -142,7 +142,7 @@ state = "present"
 valueJson = '"https://contribute.freecodecamp.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -151,7 +151,7 @@ state = "present"
 valueJson = """"freeCodeCamp.org's open-source codebase and curriculum""""
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:13:31.82711Z"
+checkedAt = "2026-09-18T06:03:12.424734946Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -164,6 +164,6 @@ archived = false
 clone_url = "https://github.com/freeCodeCamp/freeCodeCamp.git"
 default_branch = "main"
 fork = false
-head_sha = "ad0bd29beb67863afd6cba2f38e98ec786a40f84"
+head_sha = "7c89ecc3830d5b1cc127a95a4273fd8544143eab"
 html_url = "https://github.com/freeCodeCamp/freeCodeCamp"
-stars = 455587
+stars = 455705

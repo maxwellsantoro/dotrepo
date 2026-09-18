@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pingcap/tidb"
-generated_at = "2026-09-16T16:15:35.376313Z"
+generated_at = "2026-09-18T06:04:41.698983731Z"
 
 [record.trust]
 confidence = "high"
@@ -88,7 +88,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -96,7 +96,7 @@ state = "present"
 valueJson = '"https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart?utm_source=github&utm_medium=tidb"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -104,15 +104,16 @@ state = "present"
 valueJson = '"https://docs.pingcap.com/tidb/stable/tidb-architecture?utm_source=github&utm_medium=tidb"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@pingcap.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -120,7 +121,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -129,7 +130,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -138,7 +139,7 @@ state = "present"
 valueJson = '"TiDB is built for agentic workloads that grow unpredictably, with ACID guarantees and native support for transactions, analytics, and vector search. No data silos. No noisy neighbors. No infrastructure ceiling."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -146,7 +147,7 @@ state = "present"
 valueJson = '"https://www.tidb.io/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -155,7 +156,7 @@ state = "present"
 valueJson = '"TiDB, a distributed SQL database"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:15:35.376313Z"
+checkedAt = "2026-09-18T06:04:41.698983731Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -168,6 +169,6 @@ archived = false
 clone_url = "https://github.com/pingcap/tidb.git"
 default_branch = "master"
 fork = false
-head_sha = "b82bed1eca2fcbe58f0fc074fff53e1fc49daa8c"
+head_sha = "dc52119f4a5489f58f394eb65b4bd4a3e700e4a8"
 html_url = "https://github.com/pingcap/tidb"
-stars = 40534
+stars = 40542

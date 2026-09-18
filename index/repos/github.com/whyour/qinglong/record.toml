@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/whyour/qinglong"
-generated_at = "2026-09-16T16:17:08.638905Z"
+generated_at = "2026-09-18T06:06:31.589562268Z"
 
 [record.trust]
 confidence = "medium"
@@ -64,7 +64,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "high"
 method = "unspecified"
 reason = "getting started URL present"
@@ -72,7 +72,7 @@ state = "present"
 valueJson = '"https://qinglong.online/guide/getting-started/installation-guide"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -80,15 +80,16 @@ state = "present"
 valueJson = '"https://qinglong.online"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/whyour/qinglong/security"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -96,7 +97,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -105,7 +106,7 @@ state = "present"
 valueJson = '"pnpm build:back"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -114,7 +115,7 @@ state = "present"
 valueJson = '"支持 Python3、JavaScript、Shell、Typescript 的定时任务管理平台（Timed task management platform supporting Python3, JavaScript, Shell, Typescript）"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -122,7 +123,7 @@ state = "present"
 valueJson = '"https://qinglong.online"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README heading with post-cleaners"
@@ -131,7 +132,7 @@ state = "present"
 valueJson = '"qinglong"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:17:08.638905Z"
+checkedAt = "2026-09-18T06:06:31.589562268Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -146,4 +147,4 @@ default_branch = "develop"
 fork = false
 head_sha = "4eb27427f809b565202f0b1bfa8129073f3fe5bd"
 html_url = "https://github.com/whyour/qinglong"
-stars = 19879
+stars = 19888

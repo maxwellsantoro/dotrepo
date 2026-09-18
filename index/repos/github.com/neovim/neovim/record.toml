@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/neovim/neovim"
-generated_at = "2026-09-16T16:15:16.177708Z"
+generated_at = "2026-09-18T06:04:24.338295789Z"
 
 [record.trust]
 confidence = "high"
@@ -74,7 +74,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -90,15 +90,16 @@ state = "present"
 valueJson = '"https://neovim.io/doc/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/neovim/neovim/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -106,7 +107,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -115,7 +116,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -124,7 +125,7 @@ state = "present"
 valueJson = '"Vim-fork focused on extensibility and usability"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -132,7 +133,7 @@ state = "present"
 valueJson = '"https://neovim.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README heading with post-cleaners"
@@ -141,7 +142,7 @@ state = "present"
 valueJson = '"neovim"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:15:16.177708Z"
+checkedAt = "2026-09-18T06:04:24.338295789Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -154,6 +155,6 @@ archived = false
 clone_url = "https://github.com/neovim/neovim.git"
 default_branch = "master"
 fork = false
-head_sha = "ff039bb024ca0a8753c6591fa8cb98312090f739"
+head_sha = "4b5dcbccd752a95f4b7268e031f90c18924513b4"
 html_url = "https://github.com/neovim/neovim"
-stars = 102369
+stars = 102400

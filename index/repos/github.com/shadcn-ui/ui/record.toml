@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/shadcn-ui/ui"
-generated_at = "2026-09-16T16:16:17.81759Z"
+generated_at = "2026-09-18T06:05:34.105837708Z"
 
 [record.trust]
 confidence = "high"
@@ -56,7 +56,7 @@ security_contact = "https://github.com/shadcn-ui/ui/security/advisories/new"
 root = "https://ui.shadcn.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -64,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -72,15 +72,16 @@ state = "present"
 valueJson = '"https://ui.shadcn.com"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/shadcn-ui/ui/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -88,7 +89,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -97,7 +98,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -106,7 +107,7 @@ state = "present"
 valueJson = '"Composable, accessible components with thoughtful defaults. Build your own component library with code you can customize, extend, and make your own."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -114,7 +115,7 @@ state = "present"
 valueJson = '"https://ui.shadcn.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -123,7 +124,7 @@ state = "present"
 valueJson = '"shadcn/ui"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:16:17.81759Z"
+checkedAt = "2026-09-18T06:05:34.105837708Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -136,6 +137,6 @@ archived = false
 clone_url = "https://github.com/shadcn-ui/ui.git"
 default_branch = "main"
 fork = false
-head_sha = "f5bb039c749afd2d111ad970dfaa9ab30bd90b3b"
+head_sha = "a87a63b2ca25143d26c8bd0903e4e9bc77b3f824"
 html_url = "https://github.com/shadcn-ui/ui"
-stars = 123961
+stars = 124087
