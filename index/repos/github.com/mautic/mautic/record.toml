@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/mautic/mautic"
-generated_at = "2026-09-16T16:14:32.473267Z"
+generated_at = "2026-09-19T06:04:15.95498647Z"
 
 [record.trust]
 confidence = "high"
@@ -56,7 +56,7 @@ security_contact = "https://docs.github.com/en/code-security/security-advisories
 root = "https://www.mautic.org"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -64,7 +64,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -72,15 +72,16 @@ state = "present"
 valueJson = '"https://www.mautic.org"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -88,7 +89,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -97,7 +98,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -106,7 +107,7 @@ state = "present"
 valueJson = '"Mautic: Open Source Marketing Automation Software."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -114,7 +115,7 @@ state = "present"
 valueJson = '"https://www.mautic.org"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -123,7 +124,7 @@ state = "present"
 valueJson = '"Mautic Open Source Marketing Automation"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:14:32.473267Z"
+checkedAt = "2026-09-19T06:04:15.95498647Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -136,6 +137,6 @@ archived = false
 clone_url = "https://github.com/mautic/mautic.git"
 default_branch = "7.x"
 fork = false
-head_sha = "44f76686ae35bf76de4f09ce9083253a59bfd6af"
+head_sha = "7912edbd7ede249ddbb2721abd6def94bee52f3e"
 html_url = "https://github.com/mautic/mautic"
-stars = 10518
+stars = 10531

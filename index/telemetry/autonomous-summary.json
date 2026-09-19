@@ -1,22 +1,22 @@
 {
   "budgetExhaustedRuns": 0,
   "failureClasses": {
-    "infrastructure": 1
+    "infrastructure": 2
   },
   "failureClassesByEcosystem": {
-    "infrastructure/unknown": 1
+    "infrastructure/unknown": 2
   },
   "failureEcosystems": {
-    "unknown": 1
+    "unknown": 2
   },
   "firstRunAt": "2026-06-29T00:55:19Z",
-  "generatedAt": "2026-09-18T06:06:43Z",
-  "lastRunAt": "2026-09-18T06:06:43Z",
+  "generatedAt": "2026-09-19T06:11:31Z",
+  "lastRunAt": "2026-09-19T06:11:31Z",
   "previousWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 500,
+    "crawled": 486,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
@@ -28,63 +28,63 @@
     "zeroModelRate": 1.0
   },
   "previousWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 125
+    "deterministic": 124
   },
   "previousWindowRunCount": 3,
   "rates": {
     "adjudicationRate": 0.0,
-    "failureRate": 0.0013175230566534915,
-    "promotionRate": 0.8089591567852438,
-    "writeRate": 0.9986824769433466,
+    "failureRate": 0.002472187886279357,
+    "promotionRate": 0.8071693448702101,
+    "writeRate": 0.9975278121137207,
     "zeroModelRate": 1.0
   },
   "recentWindowCosts": {
     "adjudicationBudgetUseRate": 0.0,
     "adjudicationCallBudget": 0,
     "adjudicationCalls": 0,
-    "crawled": 101,
+    "crawled": 150,
     "tokensPerCrawled": 0.0,
     "tokensUsed": 0
   },
   "recentWindowRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.0,
+    "failureRate": 0.006667,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },
   "recentWindowRepositoriesByAdjudicationTier": {
-    "deterministic": 28
+    "deterministic": 36
   },
   "recentWindowRunCount": 3,
   "recurringFailures": [],
   "regressionFixtureCandidates": [],
   "repositoriesByAdjudicationTier": {
-    "deterministic": 167
+    "deterministic": 175
   },
-  "runCount": 27,
+  "runCount": 28,
   "schema": "dotrepo/autonomous-telemetry-summary/v0.1",
   "synthesisFailureClasses": {},
   "totals": {
     "adjudicationCallBudget": 68,
     "adjudicationCalls": 0,
-    "crawled": 759,
+    "crawled": 809,
     "discoveryQueued": 0,
-    "failed": 1,
-    "promoted": 614,
-    "qualityReprocessQueued": 677,
+    "failed": 2,
+    "promoted": 653,
+    "qualityReprocessQueued": 709,
     "skipped": 0,
     "synthesisFailed": 0,
     "synthesisRequested": 0,
     "synthesisSucceeded": 0,
     "tokensUsed": 0,
-    "written": 758,
-    "zeroModelRuns": 759
+    "written": 807,
+    "zeroModelRuns": 809
   },
   "worstRunRates": {
     "adjudicationRate": 0.0,
     "apiEscalationRate": 0.0,
-    "failureRate": 0.0,
+    "failureRate": 0.02,
     "secondOpinionRate": 0.0,
     "zeroModelRate": 1.0
   },

@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported maintainer candidates from CODEOWNERS.
+- Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
 - Discovered related relation to github.com/sponsors/Homebrew from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

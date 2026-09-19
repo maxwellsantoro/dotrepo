@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/streamlit/streamlit"
-generated_at = "2026-09-16T16:16:28.610175Z"
+generated_at = "2026-09-19T06:05:05.388134124Z"
 
 [record.trust]
 confidence = "high"
@@ -57,7 +57,7 @@ security_contact = "https://hackerone.com/snowflake?type=team"
 root = "https://docs.streamlit.io"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -65,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -73,15 +73,16 @@ state = "present"
 valueJson = '"https://docs.streamlit.io"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://hackerone.com/snowflake?type=team"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -89,7 +90,7 @@ state = "present"
 valueJson = '"@streamlit/open-source-release-team"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -98,7 +99,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -107,7 +108,7 @@ state = "present"
 valueJson = '"Streamlit — A faster way to build and share data apps."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -115,7 +116,7 @@ state = "present"
 valueJson = '"https://streamlit.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
 method = "inferred"
 reason = "extracted from README heading with post-cleaners"
@@ -124,7 +125,7 @@ state = "present"
 valueJson = '"streamlit"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:16:28.610175Z"
+checkedAt = "2026-09-19T06:05:05.388134124Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -137,6 +138,6 @@ archived = false
 clone_url = "https://github.com/streamlit/streamlit.git"
 default_branch = "develop"
 fork = false
-head_sha = "b7d37f78ca7f24b6d460a212865f24f4e741e70c"
+head_sha = "a807ca5f8274de0eb708729cb40266f6321b82cc"
 html_url = "https://github.com/streamlit/streamlit"
-stars = 45767
+stars = 45786

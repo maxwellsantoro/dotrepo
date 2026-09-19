@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/Asabeneh/30-Days-Of-JavaScript"
-generated_at = "2026-09-16T16:17:55.278823Z"
+generated_at = "2026-09-19T06:08:26.476448834Z"
 
 [record.trust]
 confidence = "low"
@@ -44,7 +44,7 @@ topics = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no docs detected"
@@ -52,7 +52,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no docs detected"
@@ -60,7 +60,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -68,7 +68,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -76,7 +76,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -84,7 +84,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -93,7 +93,7 @@ state = "present"
 valueJson = '"30 days of JavaScript programming challenge is a step-by-step guide to learn JavaScript programming language in 30 days. This challenge may take more than 100 days,  please just follow your own pace. These videos may help too: https://www.youtube.com/channel/UC7PNRuno1rzYPb1xLa4yktw"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -101,7 +101,7 @@ state = "present"
 valueJson = '"https://github.com/Asabeneh/30-Days-Of-JavaScript"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "medium"
 method = "inferred"
 reason = "fell back to directory name or GitHub API"
@@ -109,7 +109,7 @@ state = "present"
 valueJson = '"30-Days-Of-JavaScript"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:17:55.278823Z"
+checkedAt = "2026-09-19T06:08:26.476448834Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -123,4 +123,4 @@ default_branch = "master"
 fork = false
 head_sha = "b143737586aa17d7afc2e31d0b257c40512913d7"
 html_url = "https://github.com/Asabeneh/30-Days-Of-JavaScript"
-stars = 46822
+stars = 46826

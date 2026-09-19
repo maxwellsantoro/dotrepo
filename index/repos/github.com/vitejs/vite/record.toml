@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/vitejs/vite"
-generated_at = "2026-09-16T16:17:32.314331Z"
+generated_at = "2026-09-19T06:06:37.186160401Z"
 
 [record.trust]
 confidence = "high"
@@ -73,7 +73,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -81,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -89,15 +89,16 @@ state = "present"
 valueJson = '"http://vite.dev"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = ".github/SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/vitejs/vite/security"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -105,7 +106,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -114,7 +115,7 @@ state = "present"
 valueJson = '"pnpm build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -123,7 +124,7 @@ state = "present"
 valueJson = """"Next generation frontend tooling. It's fast!""""
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -131,7 +132,7 @@ state = "present"
 valueJson = '"http://vite.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -140,7 +141,7 @@ state = "present"
 valueJson = '"vite"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:17:32.314331Z"
+checkedAt = "2026-09-19T06:06:37.186160401Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -153,6 +154,6 @@ archived = false
 clone_url = "https://github.com/vitejs/vite.git"
 default_branch = "main"
 fork = false
-head_sha = "bd3a3a96552a900f31c56b0d8be229dcd20618f4"
+head_sha = "e9078f865cdff6bed77cd729214a7e2868f126b5"
 html_url = "https://github.com/vitejs/vite"
-stars = 82852
+stars = 82886

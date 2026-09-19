@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/JDAI-CV/FaceX-Zoo"
-generated_at = "2026-09-16T16:18:37.005642Z"
+generated_at = "2026-09-19T06:11:04.181227646Z"
 
 [record.trust]
 confidence = "high"
@@ -58,7 +58,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -66,7 +66,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -74,7 +74,7 @@ state = "present"
 valueJson = '"https://arxiv.org/pdf/2101.04407.pdf"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -90,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -98,7 +98,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -107,7 +107,7 @@ state = "present"
 valueJson = '"A PyTorch Toolbox for Face Recognition"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -115,7 +115,7 @@ state = "present"
 valueJson = '"https://arxiv.org/pdf/2101.04407.pdf"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -124,7 +124,7 @@ state = "present"
 valueJson = '"FaceX-Zoo"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:18:37.005642Z"
+checkedAt = "2026-09-19T06:11:04.181227646Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"

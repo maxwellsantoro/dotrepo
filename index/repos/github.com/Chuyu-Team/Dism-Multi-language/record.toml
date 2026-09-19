@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Chuyu-Team/Dism-Multi-language"
-generated_at = "2026-09-16T16:18:01.455986Z"
+generated_at = "2026-09-19T06:08:34.646908035Z"
 
 [record.trust]
 confidence = "high"
@@ -31,7 +31,7 @@ languages = [
 topics = []
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no docs detected"
@@ -39,7 +39,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no docs detected"
@@ -47,7 +47,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -55,7 +55,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -63,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -71,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -80,7 +80,7 @@ state = "present"
 valueJson = '"Dism++ Multi-language Support & BUG Report"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -88,7 +88,7 @@ state = "present"
 valueJson = '"https://github.com/Chuyu-Team/Dism-Multi-language"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"Dism-Multi-language"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:18:01.455986Z"
+checkedAt = "2026-09-19T06:08:34.646908035Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -111,4 +111,4 @@ default_branch = "master"
 fork = false
 head_sha = "0db395ef46de8c5a3d64016580417438c5d32497"
 html_url = "https://github.com/Chuyu-Team/Dism-Multi-language"
-stars = 20391
+stars = 20409

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/Alfred1984/interesting-python"
-generated_at = "2026-09-16T16:17:46.391072Z"
+generated_at = "2026-09-19T06:07:49.193516974Z"
 
 [record.trust]
 confidence = "high"
@@ -41,7 +41,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no docs detected"
@@ -49,7 +49,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no docs detected"
@@ -57,7 +57,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -65,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -73,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -81,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -90,7 +90,7 @@ state = "present"
 valueJson = '"有趣的Python爬虫和Python数据分析小项目(Some interesting Python crawlers and data analysis projects)"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -98,7 +98,7 @@ state = "present"
 valueJson = '"https://github.com/Alfred1984/interesting-python"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -107,7 +107,7 @@ state = "present"
 valueJson = '"interesting-python"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:17:46.391072Z"
+checkedAt = "2026-09-19T06:07:49.193516974Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -121,4 +121,4 @@ default_branch = "master"
 fork = false
 head_sha = "3a2e7136353693b2d08bd8675510055f71f83b94"
 html_url = "https://github.com/Alfred1984/interesting-python"
-stars = 5007
+stars = 5005

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/ETCExtensions/Edit-This-Cookie"
-generated_at = "2026-09-16T16:18:16.195611Z"
+generated_at = "2026-09-19T06:09:35.965106278Z"
 
 [record.trust]
 confidence = "high"
@@ -31,7 +31,7 @@ topics = []
 root = "http://www.editthiscookie.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -39,7 +39,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -47,7 +47,7 @@ state = "present"
 valueJson = '"http://www.editthiscookie.com"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -55,7 +55,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -63,7 +63,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -71,7 +71,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -80,7 +80,7 @@ state = "present"
 valueJson = '"EditThisCookie is the famous Google Chrome/Chromium extension for editing cookies"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -88,7 +88,7 @@ state = "present"
 valueJson = '"http://www.editthiscookie.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -97,7 +97,7 @@ state = "present"
 valueJson = '"EditThisCookie"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:18:16.195611Z"
+checkedAt = "2026-09-19T06:09:35.965106278Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"

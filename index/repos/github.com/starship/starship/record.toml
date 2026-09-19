@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/starship/starship"
-generated_at = "2026-09-16T16:17:31.068719Z"
+generated_at = "2026-09-19T06:04:52.359068606Z"
 
 [record.trust]
 confidence = "medium"
@@ -74,7 +74,7 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no getting started link detected"
@@ -82,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "high"
 method = "unspecified"
 reason = "docs URL present"
@@ -90,15 +90,16 @@ state = "present"
 valueJson = '"https://starship.rs/config/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://github.com/starship/starship/security/advisories/new"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -106,7 +107,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -115,7 +116,7 @@ state = "present"
 valueJson = '"cargo build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -124,7 +125,7 @@ state = "present"
 valueJson = '"☄🌌️  The minimal, blazing-fast, and infinitely customizable prompt for any shell!"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -132,7 +133,7 @@ state = "present"
 valueJson = '"https://starship.rs"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "high"
 method = "extracted"
 reason = "extracted from README heading with post-cleaners"
@@ -141,7 +142,7 @@ state = "present"
 valueJson = '"Starship"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:17:31.068719Z"
+checkedAt = "2026-09-19T06:04:52.359068606Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -154,6 +155,6 @@ archived = false
 clone_url = "https://github.com/starship/starship.git"
 default_branch = "main"
 fork = false
-head_sha = "6fedb3219bd9aa26b28e48743b3c50e733362d82"
+head_sha = "4ff40d066af2dd316dcb4742544254436e7e8190"
 html_url = "https://github.com/starship/starship"
-stars = 59918
+stars = 59947
