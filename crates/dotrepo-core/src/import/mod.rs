@@ -15,6 +15,7 @@ mod commands;
 mod escalation;
 mod evidence;
 mod fields;
+mod inputs;
 mod parsing;
 mod toolchain;
 mod types;
@@ -42,11 +43,7 @@ pub use types::{
     VerificationCheck, VerificationReport, VerificationSeverity,
 };
 
-use commands::{
-    load_best_cargo_toml, load_best_package_json, load_best_python_manifest,
-    load_first_existing_file, load_first_file_with_extension, load_workflow_import_files,
-    sanitize_import_command,
-};
+use commands::sanitize_import_command;
 
 #[allow(unused_imports)]
 pub(crate) use commands::{infer_imported_commands, infer_pyproject_commands};
@@ -63,11 +60,13 @@ pub(crate) use parsing::{
 
 use evidence::{
     build_imported_docs, build_imported_owners, discover_relations_from_github_facts,
-    discover_relations_from_manifest_files, native_import_github_compat, render_import_evidence,
+    discover_relations_from_manifest_files, infer_security_contact_and_note,
+    native_import_github_compat, render_import_evidence, retain_imported_docs_evidence,
     ImportEvidenceNotes,
 };
 use toolchain::infer_toolchain_metadata;
-pub(crate) use types::{ImportSources, ImportedFile, SecurityImportMetadata};
+#[cfg(test)]
+pub(crate) use types::{ImportSources, ImportedFile};
 
 pub(crate) const IMPORT_README_CANDIDATES: &[&str] = &[
     "README.md",
@@ -225,54 +224,19 @@ pub fn import_repository_with_options(
     source: Option<&str>,
     options: &ImportOptions,
 ) -> Result<ImportPlan> {
-    let readme = load_first_existing_file(root, IMPORT_README_CANDIDATES)?;
-    let codeowners = load_first_existing_file(root, &[".github/CODEOWNERS", "CODEOWNERS"])?;
-    let security = load_first_existing_file(root, &[".github/SECURITY.md", "SECURITY.md"])?;
-    let cargo_toml = load_best_cargo_toml(root)?;
-    let rust_toolchain_toml = load_first_existing_file(root, &["rust-toolchain.toml"])?;
-    let rust_toolchain = load_first_existing_file(root, &["rust-toolchain"])?;
-    // Prefer a monorepo package with real build/test scripts over a root
-    // workspace package.json that only hosts format scripts.
-    let package_json = load_best_package_json(root)?;
-    let pyproject_toml = load_best_python_manifest(root, "pyproject.toml")?;
-    let setup_py = load_best_python_manifest(root, "setup.py")?;
-    let setup_cfg = load_best_python_manifest(root, "setup.cfg")?;
-    let tox_ini = load_first_existing_file(root, &["tox.ini"])?;
-    let go_mod = load_first_existing_file(root, &["go.mod"])?;
-    let pom_xml = load_first_existing_file(root, &["pom.xml"])?;
-    let maven_wrapper = root.join("mvnw").is_file();
-    let build_gradle = load_first_existing_file(root, &["build.gradle", "build.gradle.kts"])?;
-    let gradle_wrapper = root.join("gradlew").is_file();
-    let composer_json = load_first_existing_file(root, &["composer.json"])?;
-    // Prefer root .csproj, then shallow monorepo layout (src/**/*.csproj).
-    let csproj = load_first_file_with_extension(root, "csproj", 4)?;
-    let solution = load_first_file_with_extension(root, "sln", 2)?;
-    let mix_exs = load_first_existing_file(root, &["mix.exs"])?;
-    let rebar_config = load_first_existing_file(root, &["rebar.config"])?;
-    let cmake_presets_json = load_first_existing_file(root, &["CMakePresets.json"])?;
-    let workflow_files = load_workflow_import_files(root)?;
-    let contributing =
-        load_first_existing_file(root, &["CONTRIBUTING.md", ".github/CONTRIBUTING.md"])?;
-    let makefile = load_first_existing_file(root, &["GNUmakefile", "Makefile", "makefile"])?;
-    let justfile = load_first_existing_file(root, &["justfile", "Justfile"])?;
-    let rakefile = load_first_existing_file(root, &["Rakefile", "rakefile"])?;
-    let security_issue_template = load_first_existing_file(
-        root,
-        &[
-            ".github/ISSUE_TEMPLATE/security.md",
-            ".github/ISSUE_TEMPLATE/SECURITY.md",
-            ".github/ISSUE_TEMPLATE/security.yml",
-        ],
-    )?;
-    let pull_request_template = load_first_existing_file(
-        root,
-        &[
-            ".github/pull_request_template.md",
-            ".github/PULL_REQUEST_TEMPLATE.md",
-            "pull_request_template.md",
-            "PULL_REQUEST_TEMPLATE.md",
-        ],
-    )?;
+    let inputs = inputs::ImportInputs::load(root)?;
+    let import_sources = inputs.command_sources();
+    let imported_commands = infer_imported_commands(&import_sources);
+    let imported_toolchain = infer_toolchain_metadata(&import_sources);
+    let inputs::ImportInputs {
+        readme,
+        codeowners,
+        security,
+        contributing,
+        security_issue_template,
+        pull_request_template,
+        ..
+    } = inputs;
 
     let readme_metadata = readme
         .as_ref()
@@ -304,94 +268,6 @@ pub fn import_repository_with_options(
         has_template_security,
     );
 
-    /// Centralizes the decision tree for security_contact + accompanying note.
-    /// This reduces duplication between the primary import path and any preview/evidence synthesis.
-    fn infer_security_contact_and_note(
-        security: Option<&ImportedFile>,
-        parsed: &SecurityImportMetadata,
-        from_contributing: Option<String>,
-        from_template: Option<String>,
-        has_contrib: bool,
-        has_template: bool,
-    ) -> (Option<String>, Option<String>) {
-        let contact = parsed
-            .contact
-            .clone()
-            .or(from_contributing.clone())
-            .or(from_template.clone())
-            .or_else(|| {
-                if security.is_some() {
-                    Some("unknown".into())
-                } else {
-                    None
-                }
-            });
-
-        let note = if security.is_some() {
-            if parsed.contact.is_some() {
-                parsed.note.clone()
-            } else if has_contrib {
-                Some(
-                "SECURITY.md did not expose a direct mailbox or reporting URL. `security_contact` was extracted from CONTRIBUTING.md instead."
-                    .to_string(),
-            )
-            } else if has_template {
-                Some(
-                "SECURITY.md did not expose a direct mailbox or reporting URL. `security_contact` was extracted from an issue template instead."
-                    .to_string(),
-            )
-            } else {
-                Some(
-                "SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional."
-                    .to_string(),
-            )
-            }
-        } else if has_contrib {
-            Some(
-                "`security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found)."
-                    .to_string(),
-            )
-        } else if has_template {
-            Some(
-                "`security_contact` was extracted from an issue template (no SECURITY.md found)."
-                    .to_string(),
-            )
-        } else {
-            None
-        };
-
-        (contact, note)
-    }
-    let import_sources = ImportSources {
-        readme: readme.as_ref(),
-        cargo_toml: cargo_toml.as_ref(),
-        rust_toolchain_toml: rust_toolchain_toml.as_ref(),
-        rust_toolchain: rust_toolchain.as_ref(),
-        package_json: package_json.as_ref(),
-        pyproject_toml: pyproject_toml.as_ref(),
-        setup_py: setup_py.as_ref(),
-        setup_cfg: setup_cfg.as_ref(),
-        tox_ini: tox_ini.as_ref(),
-        go_mod: go_mod.as_ref(),
-        pom_xml: pom_xml.as_ref(),
-        maven_wrapper,
-        build_gradle: build_gradle.as_ref(),
-        gradle_wrapper,
-        composer_json: composer_json.as_ref(),
-        csproj: csproj.as_ref(),
-        solution: solution.as_ref(),
-        mix_exs: mix_exs.as_ref(),
-        rebar_config: rebar_config.as_ref(),
-        cmake_presets_json: cmake_presets_json.as_ref(),
-        makefile: makefile.as_ref(),
-        justfile: justfile.as_ref(),
-        rakefile: rakefile.as_ref(),
-        contributing: contributing.as_ref(),
-        workflow_files: &workflow_files,
-    };
-    let imported_commands = infer_imported_commands(&import_sources);
-    let imported_toolchain = infer_toolchain_metadata(&import_sources);
-
     let mut imported_sources = Vec::new();
     let mut inferred_defaults = Vec::new();
 
@@ -405,8 +281,8 @@ pub fn import_repository_with_options(
     // import_quality_gate and expectations track when "repo.name" is inferred.
     // Root at filesystem root or odd paths will produce the generic default.
 
-    let repo_name = match readme_metadata.title {
-        Some(ref title) => {
+    let repo_name = match readme_metadata.title.as_ref() {
+        Some(title) => {
             if let Some(r) = &readme {
                 note_import(&mut imported_sources, &r.path);
             }
@@ -424,8 +300,8 @@ pub fn import_repository_with_options(
         }
     };
 
-    let description = match readme_metadata.description {
-        Some(ref description) => {
+    let description = match readme_metadata.description.as_ref() {
+        Some(description) => {
             if let Some(r) = &readme {
                 note_import(&mut imported_sources, &r.path);
             }
@@ -447,6 +323,14 @@ pub fn import_repository_with_options(
         importable_docs_entry(root, mode, readme_metadata.docs_root.as_deref()),
         importable_docs_entry(root, mode, readme_metadata.docs_getting_started.as_deref()),
     );
+    if imported_docs.is_some()
+        || readme_metadata.docs_root_ambiguous
+        || readme_metadata.docs_getting_started_ambiguous
+    {
+        if let Some(file) = &readme {
+            note_import(&mut imported_sources, &file.path);
+        }
+    }
 
     if !codeowners_metadata.owners.is_empty() || codeowners_metadata.team.is_some() {
         if let Some(file) = &codeowners {
@@ -639,13 +523,15 @@ pub fn import_repository_with_options(
         }
     }
 
+    let docs_evidence =
+        retain_imported_docs_evidence(&mut manifest, readme.as_ref(), &readme_metadata);
     validate_manifest(root, &manifest)?;
     let manifest_text = render_manifest(&manifest)?;
-
-    let evidence_bullets = combined_import_notes(
+    let mut evidence_bullets = combined_import_notes(
         &imported_commands.evidence_bullets,
         &imported_toolchain.evidence_bullets,
     );
+    evidence_bullets.extend(docs_evidence);
     let (evidence_path, evidence_text) = match mode {
         ImportMode::Native => (None, None),
         ImportMode::Overlay => (

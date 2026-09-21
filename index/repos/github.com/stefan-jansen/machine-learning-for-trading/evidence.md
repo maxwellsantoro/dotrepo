@@ -16,3 +16,9 @@
 ## Fresh verification
 
 Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Withheld docs.root; rejected `https://jupytext.readthedocs.io/` because Jupytext tooling reference is not documentation for this book repository. Source: [README.md:333](https://github.com/stefan-jansen/machine-learning-for-trading/blob/567b1040016ca3a91dbaa80dede040dc045b1ea0/README.md#L333). No replacement was established by this correction.
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

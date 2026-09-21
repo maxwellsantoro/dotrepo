@@ -1,6 +1,51 @@
 use super::common::*;
 
 #[test]
+fn docs_selection_ignores_license_images_and_catalogue_links() {
+    for text in [
+        "Documentation is under the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/).",
+        "[![Getting Started book](https://cdn.example/book.png)](https://book.example)",
+        "- iTerm: [Source](https://github.com/other/term) and [Documentation](https://other.example/docs).",
+        "- [Grid](https://github.com/other/grid) - [demo](https://other.example/) - [docs](https://other.example/docs/).",
+    ] {
+        let parsed = parse_readme_metadata(text);
+        assert!(parsed.docs_root.is_none(), "{text}");
+        assert!(parsed.docs_getting_started.is_none(), "{text}");
+    }
+    for text in [
+        "**Documentation**: [https://brand.example](https://brand.example)",
+        "**Documentation**: <a href=\"https://brand.example\">https://brand.example</a>",
+        "## Docs\n\nYou can read our docs at:\n\n- https://brand.example",
+    ] {
+        let parsed = parse_readme_metadata(text);
+        assert_eq!(
+            parsed.docs_root.as_deref(),
+            Some("https://brand.example"),
+            "{text}"
+        );
+    }
+}
+
+#[test]
+fn docs_selection_requires_a_declaration_and_abstains_on_ambiguity() {
+    let metadata = parse_readme_metadata("# Project\n\nUseful project.\n\n[Dependency](https://trio.readthedocs.io/)\n[Other](https://other.example/docs/)\n[Example](https://other.example/installation)\n");
+    assert!(metadata.docs_root.is_none());
+    assert!(metadata.docs_getting_started.is_none());
+    let metadata = parse_readme_metadata("# Project\n\nUseful project.\n\n[Docs](https://one.example/) [Documentation](https://two.example/)\n");
+    assert!(metadata.docs_root.is_none());
+    let metadata = parse_readme_metadata("# Project\n\nUseful project.\n\n[Reference](https://dependency.example/reference)\n\n## Documentation\n\nAvailable [here](https://unrelated-brand.example/manual/).\n");
+    assert_eq!(
+        metadata.docs_root.as_deref(),
+        Some("https://unrelated-brand.example/manual/")
+    );
+    let metadata = parse_readme_metadata("# Project\n\nUseful project.\n\n~~~md\n[Docs](https://example-in-code.example/)\n~~~\n[Documentation](https://actual.example/)\n");
+    assert_eq!(
+        metadata.docs_root.as_deref(),
+        Some("https://actual.example/")
+    );
+}
+
+#[test]
 fn parse_readme_docs_metadata_extracts_docs_and_getting_started_links() {
     let signal = parse_readme_docs_signal(
         "[Docs](./docs/) · [Getting Started](./docs/getting-started.md) · [API](./docs/api.md)",

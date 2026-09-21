@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/microsoft/semantic-kernel"
-generated_at = "2026-09-16T16:34:16.973926Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -69,15 +69,16 @@ security_contact = "https://msrc.microsoft.com/create-report"
 
 [docs]
 root = "https://learn.microsoft.com/en-us/dotnet/api/microsoft.semantickernel?view=semantic-kernel-dotnet"
-getting_started = "https://docs.trychroma.com/docs/overview/getting-started"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:34:16.973926Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.trychroma.com/docs/overview/getting-started"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Chroma integration link is not Semantic Kernel getting-started documentation; inspected README.md:32 at commit ca40aa7226531d28a721d0ca0e451d0aaf86dafc"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://docs.trychroma.com/docs/overview/getting-started\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-16T16:34:16.973926Z"

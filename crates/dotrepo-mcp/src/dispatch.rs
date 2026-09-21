@@ -58,7 +58,16 @@ pub(crate) fn handle_request(state: &mut ServerState, request: JsonRpcRequest) -
 
     let result = match dispatch_request(state, &method, params) {
         Ok(result) => jsonrpc_response(id, result),
-        Err(err) => jsonrpc_error_response(id, -32603, err.to_string(), None),
+        Err(err) => jsonrpc_error_response(
+            id,
+            if err.is::<MethodNotFound>() {
+                -32601
+            } else {
+                -32603
+            },
+            err.to_string(),
+            None,
+        ),
     };
 
     Some(result)
@@ -69,6 +78,17 @@ fn handle_notification(state: &mut ServerState, method: String, _params: Value) 
         state.initialized = true;
     }
 }
+
+#[derive(Debug)]
+struct MethodNotFound(String);
+
+impl std::fmt::Display for MethodNotFound {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "method not found: {}", self.0)
+    }
+}
+
+impl std::error::Error for MethodNotFound {}
 
 fn dispatch_request(state: &mut ServerState, method: &str, params: Value) -> Result<Value> {
     match method {
@@ -82,7 +102,7 @@ fn dispatch_request(state: &mut ServerState, method: &str, params: Value) -> Res
             ensure_initialized(state)?;
             handle_tool_call(params)
         }
-        _ => bail!("method not found: {}", method),
+        _ => Err(MethodNotFound(method.into()).into()),
     }
 }
 

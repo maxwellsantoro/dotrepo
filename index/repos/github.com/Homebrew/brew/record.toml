@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/Homebrew/brew"
-generated_at = "2026-09-19T06:10:15.514096191Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. Documentation-only correction did not freshly verify other fields; prior verified authority is no longer asserted."
 
 [repo]
 name = "Homebrew"
@@ -49,7 +49,7 @@ maintainers = [
 security_contact = "https://github.com/Homebrew/.github/blob/HEAD/SECURITY.md"
 
 [docs]
-root = "https://creativecommons.org/licenses/by/4.0/"
+root = "https://docs.brew.sh/"
 getting_started = "https://docs.brew.sh/Installation"
 
 [relations]
@@ -76,12 +76,14 @@ state = "present"
 valueJson = '"https://docs.brew.sh/Installation"'
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-19T06:10:15.514096191Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "documentation license URL is not the documentation entry point; inspected README.md:28 at commit 2f1c682db046d37c4b6c09aa43837be6ff270c39"
+source = "README.md"
 state = "present"
-valueJson = '"https://creativecommons.org/licenses/by/4.0/"'
+valueJson = "\"https://docs.brew.sh/\""
+rejectedValueJson = "\"https://creativecommons.org/licenses/by/4.0/\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-19T06:10:15.514096191Z"

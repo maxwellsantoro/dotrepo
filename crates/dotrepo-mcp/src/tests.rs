@@ -25,6 +25,26 @@ use std::thread;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 #[test]
+fn unknown_method_returns_method_not_found_and_ping_still_works() {
+    let (mut state, _) = initialized_state();
+    let response = handle_request(&mut state, request(2, "missing", json!({}))).expect("response");
+    assert_eq!(response["id"], 2);
+    assert_eq!(response["error"]["code"], -32601);
+    let response = handle_request(&mut state, request(3, "ping", json!({}))).expect("response");
+    assert_eq!(response["result"], json!({}));
+    assert!(handle_request(
+        &mut state,
+        JsonRpcRequest {
+            jsonrpc: JSONRPC_VERSION.into(),
+            id: None,
+            method: "missing".into(),
+            params: json!({})
+        }
+    )
+    .is_none());
+}
+
+#[test]
 fn initialize_and_list_tools() {
     let (mut state, init_response) = initialized_state();
     assert_eq!(init_response["result"]["protocolVersion"], "2025-11-25");

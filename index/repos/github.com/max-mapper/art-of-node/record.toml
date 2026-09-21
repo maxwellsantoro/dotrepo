@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/max-mapper/art-of-node"
-generated_at = "2026-09-16T16:26:25.868615Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. Documentation correction withheld an unresolved docs field; prior verified authority is no longer asserted."
 
 [repo]
 name = "art-of-node"
@@ -23,9 +23,6 @@ visibility = "public"
 languages = ["JavaScript"]
 topics = []
 
-[docs]
-root = "http://python-guide.readthedocs.org/en/latest/dev/virtualenvs/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:26:25.868615Z"
 confidence = "high"
@@ -35,12 +32,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:26:25.868615Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"http://python-guide.readthedocs.org/en/latest/dev/virtualenvs/"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Python virtualenv reference is not documentation for this Node guide; inspected readme.md:427 at commit 71d0aba060532c5b4f075c1cd0fad746515f3808"
+source = "readme.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"http://python-guide.readthedocs.org/en/latest/dev/virtualenvs/\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:26:25.868615Z"

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/modelcontextprotocol/servers"
-generated_at = "2026-09-17T06:11:04.697639249Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -39,15 +39,16 @@ security_contact = "https://docs.github.com/en/code-security/security-advisories
 
 [docs]
 root = "https://modelcontextprotocol.io"
-getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:11:04.697639249Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "uv package-manager installation is not a getting-started guide for the server collection; inspected README.md:77 at commit d73f99efbfd40c3aa1b61e88728b3d49fb52608f"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-17T06:11:04.697639249Z"

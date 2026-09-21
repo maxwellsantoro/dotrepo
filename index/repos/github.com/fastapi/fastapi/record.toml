@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/fastapi/fastapi"
-generated_at = "2026-09-16T16:23:14.751141Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -57,24 +57,27 @@ min = "3.10"
 ecosystem = "Python"
 
 [docs]
-root = "https://pydantic.dev/docs/"
-getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
+root = "https://fastapi.tiangolo.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "uv package-manager installation is not FastAPI installation documentation; inspected README.md:131 at commit 50113da16fec53b66b80d75e80a89296de4fa5a5"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:23:14.751141Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Pydantic dependency link is not FastAPI documentation; inspected README.md:24 at commit 50113da16fec53b66b80d75e80a89296de4fa5a5"
+source = "README.md"
 state = "present"
-valueJson = '"https://pydantic.dev/docs/"'
+valueJson = "\"https://fastapi.tiangolo.com\""
+rejectedValueJson = "\"https://pydantic.dev/docs/\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:23:14.751141Z"

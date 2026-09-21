@@ -13,3 +13,9 @@
 - Augmented repo.languages from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Withheld docs.getting_started; rejected `https://docs.astral.sh/uv/getting-started/installation/` because uv package-manager installation is not a getting-started guide for the server collection. Source: [README.md:77](https://github.com/modelcontextprotocol/servers/blob/d73f99efbfd40c3aa1b61e88728b3d49fb52608f/README.md#L77). No replacement was established by this correction.
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/fastapi/typer"
-generated_at = "2026-09-16T16:23:12.228709Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -43,24 +43,27 @@ min = "3.10"
 ecosystem = "Python"
 
 [docs]
-root = "https://rich.readthedocs.io/en/stable/index.html"
-getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
+root = "https://typer.tiangolo.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "uv package-manager installation is not Typer installation documentation; inspected README.md:46 at commit a80f6e5ecd74f32b983cca336a2f3cba98d9853a"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:23:12.228709Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Rich dependency link is not Typer documentation; inspected README.md:21 at commit a80f6e5ecd74f32b983cca336a2f3cba98d9853a"
+source = "README.md"
 state = "present"
-valueJson = '"https://rich.readthedocs.io/en/stable/index.html"'
+valueJson = "\"https://typer.tiangolo.com\""
+rejectedValueJson = "\"https://rich.readthedocs.io/en/stable/index.html\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:23:12.228709Z"

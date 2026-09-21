@@ -15,3 +15,9 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Corrected evidence for docs.getting_started as `https://docs.langflow.org/get-started-installation#install-and-run-the-langflow-oss-python-package`: uv package-manager installation is not Langflow installation documentation. Source: [README.md:50](https://github.com/langflow-ai/langflow/blob/5621dcfd84e11108e4cc1ecb0c51f41053c4211c/README.md#L50).
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

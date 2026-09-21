@@ -16,3 +16,9 @@
 ## Fresh verification
 
 Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Withheld docs.root; rejected `https://code.claude.com/docs` because Claude Code integration link is not MoneyPrinterTurbo documentation. Source: [README.md:190](https://github.com/harry0703/MoneyPrinterTurbo/blob/a76b61da5969bfc2bb8d9e169aa8609d9258273f/README.md#L190). No replacement was established by this correction.
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

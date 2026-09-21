@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/langflow-ai/langflow"
-generated_at = "2026-09-17T06:10:25.469535256Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -54,15 +54,17 @@ security_contact = "https://hackerone.com/ibm"
 
 [docs]
 root = "http://www.langflow.org"
-getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
+getting_started = "https://docs.langflow.org/get-started-installation#install-and-run-the-langflow-oss-python-package"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-17T06:10:25.469535256Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "uv package-manager installation is not Langflow installation documentation; inspected README.md:50 at commit 5621dcfd84e11108e4cc1ecb0c51f41053c4211c"
+source = "README.md"
 state = "present"
-valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
+valueJson = "\"https://docs.langflow.org/get-started-installation#install-and-run-the-langflow-oss-python-package\""
+rejectedValueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-17T06:10:25.469535256Z"

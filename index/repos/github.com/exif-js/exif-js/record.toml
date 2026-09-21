@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/exif-js/exif-js"
-generated_at = "2026-09-16T16:35:26.968154Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. Documentation correction withheld an unresolved docs field; prior verified authority is no longer asserted."
 
 [repo]
 name = "Exif.js"
@@ -25,9 +25,6 @@ languages = [
     "HTML",
 ]
 topics = []
-
-[docs]
-getting_started = "https://www.npmjs.com/#getting-started"
 
 [relations]
 references = []
@@ -45,12 +42,14 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:35:26.968154Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://www.npmjs.com/#getting-started"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "NPM package-manager instructions are not an exif-js getting-started guide; inspected README.md:11 at commit 51a8f7d2f3aa71cb03463c84088067c9a4ebe8cb"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://www.npmjs.com/#getting-started\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-16T16:35:26.968154Z"

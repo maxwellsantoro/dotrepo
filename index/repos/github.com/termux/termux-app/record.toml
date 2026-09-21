@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/termux/termux-app"
-generated_at = "2026-09-18T06:06:11.487968317Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -42,9 +42,6 @@ topics = [
 maintainers = []
 security_contact = "https://termux.dev/security"
 
-[docs]
-root = "https://iterm2.com/documentation.html"
-
 [relations]
 references = []
 
@@ -69,12 +66,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:06:11.487968317Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://iterm2.com/documentation.html"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "iTerm2 documentation belongs to a different terminal application; inspected README.md:189 at commit 084d709fbf23ea83b5cb85fd3d795c775be06676"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://iterm2.com/documentation.html\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-18T06:06:11.487968317Z"

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/RunaCapital/awesome-oss-alternatives"
-generated_at = "2026-09-16T16:19:36.249756Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -40,9 +40,6 @@ topics = [
     "alternatives",
 ]
 
-[docs]
-root = "https://aws.amazon.com/config/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:19:36.249756Z"
 confidence = "high"
@@ -52,12 +49,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:19:36.249756Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://aws.amazon.com/config/"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "AWS Config product link in an alternatives table is not repository documentation; inspected README.md:84 at commit e5a1bd6153c602404c6f25a97b178228b755aebb"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://aws.amazon.com/config/\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:19:36.249756Z"

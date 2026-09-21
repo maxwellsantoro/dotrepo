@@ -13,7 +13,9 @@ pub(super) fn retain_field_evidence(plan: &mut ImportPlan, scores: &FieldScoreRe
             FieldConfidence::Suspect => ("suspect", "low"),
             FieldConfidence::Unresolved => ("unresolved", "low"),
         };
-        let method = if value.is_null() {
+        let method = if value.is_null() && score.confidence == FieldConfidence::Unresolved {
+            "unresolved"
+        } else if value.is_null() {
             "not_found_in_inspected_sources"
         } else if plan.inferred_fields.contains(&score.field) {
             "inferred"

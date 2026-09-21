@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/grpc-ecosystem/grpc-gateway"
-generated_at = "2026-09-16T16:24:11.825958Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -42,7 +42,7 @@ min = "1.26.0"
 ecosystem = "Go"
 
 [docs]
-root = "https://grpc.io/docs/"
+root = "https://grpc-ecosystem.github.io/grpc-gateway/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:24:11.825958Z"
@@ -53,12 +53,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:24:11.825958Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "gRPC service documentation is not the gRPC-Gateway docs entry point; inspected README.md:35 at commit 5c6bd9b58d0c2ec26fdadb5fd303948ee335b915"
+source = "README.md"
 state = "present"
-valueJson = '"https://grpc.io/docs/"'
+valueJson = "\"https://grpc-ecosystem.github.io/grpc-gateway/\""
+rejectedValueJson = "\"https://grpc.io/docs/\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:24:11.825958Z"

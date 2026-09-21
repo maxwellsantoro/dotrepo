@@ -17,3 +17,9 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Corrected evidence for docs.root as `https://docs.rs/tracing`: tracing-futures subcrate reference is not the main tracing crate documentation. Source: [README.md:15](https://github.com/tokio-rs/tracing/blob/d9d4c542de10f5d3a711b7a45ffe450fd0666437/README.md#L15).
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

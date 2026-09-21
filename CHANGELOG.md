@@ -15,6 +15,22 @@ growth, coverage, promotion, and telemetry artifacts.
 
 ### Trust, export, and crawler correctness
 
+- Select documentation links from explicit declarations instead of URL shapes,
+  retain value-bound source context, and abstain on competing declarations.
+  Correct or withhold documentation values in 34 indexed repositories using
+  pinned README evidence; downgrade verified records with unresolved fields.
+- Add full-index documentation evidence and URL-association signals to the audit
+  sampler independently of random selection. These signals request source
+  inspection rather than automatically rejecting custom documentation domains.
+- Keep LSP sessions alive after malformed messages, invalid parameters, unsupported
+  document URIs, and notification errors; preserve JSON-RPC notification semantics.
+  Return method-not-found errors for unknown MCP methods.
+- Apply the MCP remote-lookup IPv4 denylist to IPv4-mapped IPv6 destinations,
+  including mixed DNS answer sets, while preserving explicit local-test opt-in.
+- Extract generation orchestration behind unchanged facade exports and share
+  GitHub output planning across generation, drift checks, and previews. Separate
+  import input loading and security evidence selection from the main orchestrator.
+
 - Disable standalone `promotion-report --apply` before any write; it cannot
   establish source inspection. Read-only analysis now uses value-bound retained
   field assessments instead of record-wide provenance and nonempty values.

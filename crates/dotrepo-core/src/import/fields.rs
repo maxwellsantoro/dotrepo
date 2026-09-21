@@ -10,6 +10,63 @@ use super::types::{
 };
 use super::{ImportPlan, VerificationReport};
 
+fn score_docs_field(plan: &ImportPlan, field: &str, value: Option<&str>) -> FieldScore {
+    let evidence = plan
+        .manifest
+        .x
+        .get("dotrepo")
+        .and_then(|extension| extension.get("field_evidence"))
+        .and_then(|fields| fields.get(field));
+    if value.is_none()
+        && evidence
+            .and_then(|entry| entry.get("state"))
+            .and_then(toml::Value::as_str)
+            == Some("unresolved")
+    {
+        return FieldScore {
+            field: field.into(),
+            confidence: FieldConfidence::Unresolved,
+            value: None,
+            source: evidence
+                .and_then(|entry| entry.get("source"))
+                .and_then(toml::Value::as_str)
+                .map(str::to_string),
+            reason: "conflicting documentation declarations; no target selected".into(),
+        };
+    }
+    let grounded = value.and_then(|value| {
+        let evidence = evidence?;
+        let recorded: serde_json::Value =
+            serde_json::from_str(evidence.get("valueJson")?.as_str()?).ok()?;
+        let source = evidence.get("source")?.as_str()?;
+        let reason = evidence.get("reason")?.as_str()?;
+        (recorded.as_str() == Some(value)
+            && evidence.get("method")?.as_str() == Some("extracted")
+            && plan.imported_sources.iter().any(|path| path == source)
+            && !reason.is_empty())
+        .then_some((source, reason))
+    });
+    FieldScore {
+        field: field.into(),
+        confidence: match value {
+            None => FieldConfidence::HighConfidenceAbsent,
+            Some(value) if grounded.is_some() && is_quality_url(value) => {
+                FieldConfidence::HighConfidencePresent
+            }
+            Some(_) => FieldConfidence::MediumConfidencePresent,
+        },
+        source: grounded.map(|(source, _)| source.to_string()),
+        value: value.map(str::to_string),
+        reason: match (value, grounded) {
+            (_, Some((_, reason))) => reason.to_string(),
+            (Some(_), None) => {
+                "documentation target present without a retained source declaration".into()
+            }
+            (None, _) => "no unambiguous documentation declaration detected".into(),
+        },
+    }
+}
+
 pub fn score_import_fields(
     plan: &ImportPlan,
     verification: &VerificationReport,
@@ -359,70 +416,23 @@ pub fn score_import_fields(
         });
     }
 
-    // docs.root
-    if let Some(ref docs) = &plan.manifest.docs {
-        if let Some(ref root) = docs.root {
-            scores.push(FieldScore {
-                field: "docs.root".into(),
-                confidence: if is_quality_url(root) {
-                    FieldConfidence::HighConfidencePresent
-                } else {
-                    FieldConfidence::MediumConfidencePresent
-                },
-                source: None,
-                value: Some(root.clone()),
-                reason: "docs URL present".into(),
-            });
-        } else {
-            scores.push(FieldScore {
-                field: "docs.root".into(),
-                confidence: FieldConfidence::HighConfidenceAbsent,
-                source: None,
-                value: None,
-                reason: "no docs site detected".into(),
-            });
-        }
-    } else {
-        scores.push(FieldScore {
-            field: "docs.root".into(),
-            confidence: FieldConfidence::HighConfidenceAbsent,
-            source: None,
-            value: None,
-            reason: "no docs detected".into(),
-        });
-    }
-
-    // docs.getting_started
-    if let Some(ref docs) = &plan.manifest.docs {
-        if let Some(ref gs) = docs.getting_started {
-            scores.push(FieldScore {
-                field: "docs.getting_started".into(),
-                confidence: if is_quality_url(gs) {
-                    FieldConfidence::HighConfidencePresent
-                } else {
-                    FieldConfidence::MediumConfidencePresent
-                },
-                source: None,
-                value: Some(gs.clone()),
-                reason: "getting started URL present".into(),
-            });
-        } else {
-            scores.push(FieldScore {
-                field: "docs.getting_started".into(),
-                confidence: FieldConfidence::HighConfidenceAbsent,
-                source: None,
-                value: None,
-                reason: "no getting started link detected".into(),
-            });
-        }
-    } else {
-        scores.push(FieldScore {
-            field: "docs.getting_started".into(),
-            confidence: FieldConfidence::HighConfidenceAbsent,
-            source: None,
-            value: None,
-            reason: "no docs detected".into(),
-        });
+    for (field, value) in [
+        (
+            "docs.root",
+            plan.manifest
+                .docs
+                .as_ref()
+                .and_then(|docs| docs.root.as_deref()),
+        ),
+        (
+            "docs.getting_started",
+            plan.manifest
+                .docs
+                .as_ref()
+                .and_then(|docs| docs.getting_started.as_deref()),
+        ),
+    ] {
+        scores.push(score_docs_field(plan, field, value));
     }
 
     let high_confidence_present: Vec<_> = scores

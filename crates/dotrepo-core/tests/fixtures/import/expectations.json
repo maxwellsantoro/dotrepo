@@ -476,5 +476,62 @@
     "native_trust_note_contains": ["Bootstrapped from", "`README.md`"],
     "overlay_trust_note_contains": ["Bootstrapped from", "`README.md`", "This is an overlay bootstrap, not a maintainer-controlled canonical record."],
     "overlay_evidence_contains": ["Imported repository name and description from README.md.", "Imported repo.test from CONTRIBUTING.md as `cargo +nightly test --features unstable`."]
+  },
+  {
+    "fixture": "docs-third-party-readme",
+    "repo_name": "uv",
+    "repo_description": "An extremely fast Python package and project manager, written in Rust.",
+    "overlay_docs_root": "https://docs.astral.sh/uv",
+    "overlay_docs_getting_started": "https://docs.astral.sh/uv/getting-started/installation/",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md`."
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "Imported docs.root as `https://docs.astral.sh/uv`.",
+      "README.md:11:",
+      "Imported docs.getting_started as `https://docs.astral.sh/uv/getting-started/installation/`.",
+      "README.md:7:"
+    ]
+  },
+  {
+    "fixture": "docs-ambiguous-readme",
+    "repo_name": "Orbit",
+    "repo_description": "A documentation ambiguity fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from `README.md`."
+    ],
+    "overlay_trust_note_contains": [
+      "This is an overlay bootstrap"
+    ],
+    "overlay_evidence_contains": [
+      "Conflicting documentation declarations in README.md; abstained from docs.root."
+    ]
   }
 ]

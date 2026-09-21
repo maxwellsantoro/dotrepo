@@ -212,12 +212,25 @@ pub(crate) struct ReadmeMetadata {
     pub(crate) description: Option<String>,
     pub(crate) docs_root: Option<String>,
     pub(crate) docs_getting_started: Option<String>,
+    pub(crate) docs_root_evidence: Option<ReadmeDocEvidence>,
+    pub(crate) docs_getting_started_evidence: Option<ReadmeDocEvidence>,
+    pub(crate) docs_root_ambiguous: bool,
+    pub(crate) docs_getting_started_ambiguous: bool,
 }
 
 #[derive(Default)]
 pub(crate) struct ReadmeDocsMetadata {
     pub(crate) root: Option<String>,
     pub(crate) getting_started: Option<String>,
+    pub(crate) root_evidence: Option<ReadmeDocEvidence>,
+    pub(crate) getting_started_evidence: Option<ReadmeDocEvidence>,
+    pub(crate) root_ambiguous: bool,
+    pub(crate) getting_started_ambiguous: bool,
+}
+
+pub(crate) struct ReadmeDocEvidence {
+    pub(crate) line: usize,
+    pub(crate) context: String,
 }
 
 pub(crate) struct ImportedFile {

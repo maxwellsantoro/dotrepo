@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/tokio-rs/tracing"
-generated_at = "2026-09-18T06:06:18.249404328Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -49,7 +49,7 @@ team = "@tokio-rs/tracing"
 security_contact = "security@tokio.rs"
 
 [docs]
-root = "https://docs.rs/tracing-futures"
+root = "https://docs.rs/tracing"
 
 [relations]
 references = []
@@ -75,12 +75,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:06:18.249404328Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "tracing-futures subcrate reference is not the main tracing crate documentation; inspected README.md:15 at commit d9d4c542de10f5d3a711b7a45ffe450fd0666437"
+source = "README.md"
 state = "present"
-valueJson = '"https://docs.rs/tracing-futures"'
+valueJson = "\"https://docs.rs/tracing\""
+rejectedValueJson = "\"https://docs.rs/tracing-futures\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-18T06:06:18.249404328Z"

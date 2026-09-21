@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/vuejs/v2.vuejs.org"
-generated_at = "2026-09-16T16:30:46.909005Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. Documentation correction withheld an unresolved docs field; prior verified authority is no longer asserted."
 
 [repo]
 name = "v2.vuejs.org"
@@ -34,9 +34,6 @@ topics = []
 [repo.toolchain]
 min = "14.0.0"
 ecosystem = "Node.js"
-
-[docs]
-root = "https://github.com/vuejs-id/docs"
 
 [relations]
 references = []
@@ -62,12 +59,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:30:46.909005Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://github.com/vuejs-id/docs"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Indonesian translation repository link is not the main documentation entry point; inspected README.md:121 at commit e468cc04e4da67ea758682609fc85e721916e7cf"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://github.com/vuejs-id/docs\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:30:46.909005Z"

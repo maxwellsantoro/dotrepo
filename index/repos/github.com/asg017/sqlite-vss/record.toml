@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/asg017/sqlite-vss"
-generated_at = "2026-09-16T16:20:53.310415Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Filled `repo.description` with inferred defaults. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Filled `repo.description` with inferred defaults. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. Documentation correction withheld an unresolved docs field; prior verified authority is no longer asserted."
 
 [repo]
 name = "sqlite-vss"
@@ -44,9 +43,6 @@ topics = [
     "faiss",
 ]
 
-[docs]
-getting_started = "https://huggingface.co/blog/getting-started-with-embeddings#1-embedding-a-dataset"
-
 [relations]
 references = []
 
@@ -63,12 +59,14 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:20:53.310415Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://huggingface.co/blog/getting-started-with-embeddings#1-embedding-a-dataset"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "third-party embeddings tutorial is not a sqlite-vss getting-started guide; inspected README.md:34 at commit 8d3c6ff2fca651104563779a0d927ea4fba40347"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://huggingface.co/blog/getting-started-with-embeddings#1-embedding-a-dataset\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-16T16:20:53.310415Z"

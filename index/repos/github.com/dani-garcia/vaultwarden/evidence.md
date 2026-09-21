@@ -20,3 +20,9 @@
 ## Fresh verification
 
 Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Withheld docs.getting_started; rejected `https://bitwarden.com/help/getting-started-organizations/` because Bitwarden organizations feature documentation is not Vaultwarden installation documentation. Source: [README.md:38](https://github.com/dani-garcia/vaultwarden/blob/eb212e23fad88e6136723f43e5b73543fa7026d3/README.md#L38). No replacement was established by this correction.
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

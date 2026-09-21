@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/dani-garcia/vaultwarden"
-generated_at = "2026-09-16T16:22:15.089032Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -53,9 +53,6 @@ maintainers = [
 ]
 security_contact = "unknown"
 
-[docs]
-getting_started = "https://bitwarden.com/help/getting-started-organizations/"
-
 [relations]
 references = []
 
@@ -72,12 +69,14 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:22:15.089032Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://bitwarden.com/help/getting-started-organizations/"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Bitwarden organizations feature documentation is not Vaultwarden installation documentation; inspected README.md:38 at commit eb212e23fad88e6136723f43e5b73543fa7026d3"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://bitwarden.com/help/getting-started-organizations/\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-16T16:22:15.089032Z"

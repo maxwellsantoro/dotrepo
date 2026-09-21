@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/Avaiga/taipy"
-generated_at = "2026-09-16T16:04:42.092295Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `frontend/taipy-gui/package.json`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `frontend/taipy-gui/package.json`. Imported `repo.test` from `frontend/taipy-gui/package.json`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `frontend/taipy-gui/package.json`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `frontend/taipy-gui/package.json`. Imported `repo.test` from `frontend/taipy-gui/package.json`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. Documentation-only correction did not freshly verify other fields; prior verified authority is no longer asserted."
 
 [repo]
 name = "Taipy"
@@ -66,15 +66,17 @@ security_contact = "https://github.com/Avaiga/taipy/security"
 
 [docs]
 root = "https://docs.taipy.io/en/latest/refmans/"
-getting_started = "https://cdn.sanity.io/images/12yo38rb/production/f1ffeaabe94c5605d20321f0f417fef69b8d48f8-1860x600.png"
+getting_started = "https://docs.taipy.io/en/latest/tutorials/getting_started/installation/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:04:42.092295Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "book announcement image is not an installation guide; inspected README.md:118 at commit 5bcb5749521f9ddcc725c009aca00a88ff724e87"
+source = "README.md"
 state = "present"
-valueJson = '"https://cdn.sanity.io/images/12yo38rb/production/f1ffeaabe94c5605d20321f0f417fef69b8d48f8-1860x600.png"'
+valueJson = "\"https://docs.taipy.io/en/latest/tutorials/getting_started/installation/\""
+rejectedValueJson = "\"https://cdn.sanity.io/images/12yo38rb/production/f1ffeaabe94c5605d20321f0f417fef69b8d48f8-1860x600.png\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-16T16:04:42.092295Z"

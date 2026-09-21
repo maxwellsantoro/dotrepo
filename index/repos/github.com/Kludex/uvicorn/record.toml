@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/Kludex/uvicorn"
-generated_at = "2026-09-16T16:18:47.323485Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -39,7 +39,7 @@ min = "3.10"
 ecosystem = "Python"
 
 [docs]
-root = "https://asgi.readthedocs.io/en/latest/"
+root = "https://uvicorn.dev"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:18:47.323485Z"
@@ -50,12 +50,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:18:47.323485Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "ASGI specification documentation is not Uvicorn documentation; inspected README.md:18 at commit 21f39ef7988366f77fb3172569bd235ac5de34cc"
+source = "README.md"
 state = "present"
-valueJson = '"https://asgi.readthedocs.io/en/latest/"'
+valueJson = "\"https://uvicorn.dev\""
+rejectedValueJson = "\"https://asgi.readthedocs.io/en/latest/\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:18:47.323485Z"

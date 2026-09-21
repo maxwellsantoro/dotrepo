@@ -1,7 +1,7 @@
 //! Shared, ecosystem-agnostic markdown/text normalization: HTML entity and
 //! tag stripping, markdown link/reference-link extraction, and README
 //! docs-signal (docs root / getting-started) detection.
-use super::super::types::ReadmeDocsMetadata;
+use super::super::types::{ReadmeDocEvidence, ReadmeDocsMetadata};
 use super::readme::parse_html_attr;
 use super::security::extract_link_destination;
 use std::collections::HashMap;
@@ -79,107 +79,181 @@ fn strip_html_tags(line: &str) -> String {
     out
 }
 
-pub(crate) fn parse_readme_docs_metadata(lines: &[&str]) -> ReadmeDocsMetadata {
-    let mut docs = ReadmeDocsMetadata::default();
-    let reference_definitions = markdown_reference_definitions(lines);
-    let mut in_code_block = false;
+// Rank declarations, not URL shapes: a dependency can use any docs host.
+struct DocsCandidate {
+    url: String,
+    rank: u8,
+    evidence: ReadmeDocEvidence,
+}
 
-    for line in lines {
-        let trimmed = line.trim();
-        if trimmed.starts_with("```") {
-            in_code_block = !in_code_block;
+fn select_docs_candidate(candidates: Vec<DocsCandidate>) -> (Option<DocsCandidate>, bool) {
+    let Some(rank) = candidates.iter().map(|candidate| candidate.rank).max() else {
+        return (None, false);
+    };
+    let mut strongest = candidates
+        .into_iter()
+        .filter(|candidate| candidate.rank == rank);
+    let Some(selected) = strongest.next() else {
+        return (None, false);
+    };
+    // Equally explicit declarations of different targets require resolution;
+    // source order is not evidence that the first target belongs to this repo.
+    if strongest.all(|candidate| candidate.url == selected.url) {
+        (Some(selected), false)
+    } else {
+        (None, true)
+    }
+}
+
+pub(crate) fn parse_readme_docs_metadata(
+    lines: &[&str],
+    project_name: Option<&str>,
+) -> ReadmeDocsMetadata {
+    let definitions = markdown_reference_definitions(lines);
+    let mut roots = Vec::new();
+    let mut getting_started = Vec::new();
+    let mut fence: Option<char> = None;
+    let mut docs_intro = false;
+
+    for (index, line) in lines.iter().enumerate() {
+        let line = line.trim();
+        if line.starts_with("```") || line.starts_with("~~~") {
+            let marker = line.chars().next();
+            if fence.is_none() {
+                fence = marker;
+            } else if fence == marker {
+                fence = None;
+            }
             continue;
         }
-        if in_code_block {
+        if fence.is_some() || line.is_empty() {
             continue;
         }
-
-        let signal = parse_readme_docs_signal_with_references(trimmed, &reference_definitions);
-        if docs.root.is_none() {
-            docs.root = signal.root;
+        if line.starts_with('#') {
+            let heading = line.trim_matches('#').trim().to_ascii_lowercase();
+            docs_intro = matches!(heading.as_str(), "docs" | "documentation" | "document");
+            continue;
         }
-        if docs.getting_started.is_none() {
-            docs.getting_started = signal.getting_started;
+        if is_markdown_reference_definition(line) {
+            continue;
         }
+        let mut links = extract_markdown_links(line);
+        links.extend(extract_markdown_reference_links(line, &definitions));
+        links.extend(extract_html_links(line));
+        let lower_line = strip_html_tags(line)
+            .replace("**", "")
+            .replace("__", "")
+            .to_ascii_lowercase();
+        let prefix = lower_line.starts_with("docs:") || lower_line.starts_with("documentation:");
+        if links.is_empty() && (docs_intro || prefix) {
+            for word in line.split_whitespace() {
+                let url = word.trim_matches(|ch| matches!(ch, '<' | '>' | '`'));
+                if url.starts_with("https://") || url.starts_with("http://") {
+                    links.push(("Documentation".into(), url.into()));
+                }
+            }
+        }
+        let single_link = links.len() == 1;
+        let mut remainder = strip_html_tags(&rewrite_markdown_links(line));
+        for (label, _) in &links {
+            remainder = remainder.replace(label, "");
+        }
+        // Reference-style navigation may include unresolved neighbours such
+        // as [Website][]. Ignore their bracketed labels, not surrounding prose.
+        let mut bracket_depth = 0usize;
+        let navigation = remainder.chars().all(|ch| match ch {
+            '[' => {
+                bracket_depth += 1;
+                true
+            }
+            ']' if bracket_depth > 0 => {
+                bracket_depth -= 1;
+                true
+            }
+            _ if bracket_depth > 0 => true,
+            _ => ch.is_whitespace() || "|·•:/-()*".contains(ch),
+        }) && bracket_depth == 0;
+        let declaration = single_link
+            && (docs_intro || prefix || lower_line.contains("documentation is available at"));
+        docs_intro = docs_intro
+            && links.is_empty()
+            && lower_line.contains("docs")
+            && lower_line.ends_with(':');
 
-        if docs.root.is_some() && docs.getting_started.is_some() {
-            break;
+        for (label, url) in links {
+            if is_badge_asset_url(&url) {
+                continue;
+            }
+            // Generic labels in a dependency catalogue or prose with several
+            // project links do not identify this repository's documentation.
+            if !single_link && !navigation {
+                continue;
+            }
+            let label = label.to_ascii_lowercase();
+            let is_start = label.contains("getting started")
+                || label.contains("quickstart")
+                || label == "installation"
+                || label == "installation guide"
+                || label == "installation documentation"
+                || (single_link
+                    && (lower_line.starts_with("getting started:")
+                        || lower_line.starts_with("quickstart:")));
+            let rank = if declaration {
+                3
+            } else if matches!(label.as_str(), "docs" | "documentation")
+                || project_name.is_some_and(|name| {
+                    label == format!("{} documentation", name.to_ascii_lowercase())
+                })
+            {
+                2
+            } else if matches!(
+                label.as_str(),
+                "configuration" | "reference" | "api reference"
+            ) {
+                1
+            } else {
+                0
+            };
+            let candidate = DocsCandidate {
+                url,
+                rank,
+                evidence: ReadmeDocEvidence {
+                    line: index + 1,
+                    context: line.to_string(),
+                },
+            };
+            if is_start {
+                getting_started.push(candidate);
+            } else if rank > 0 {
+                roots.push(candidate);
+            }
         }
     }
-
-    docs
+    let (root, root_ambiguous) = select_docs_candidate(roots);
+    let (start, getting_started_ambiguous) = select_docs_candidate(getting_started);
+    ReadmeDocsMetadata {
+        root: root.as_ref().map(|candidate| candidate.url.clone()),
+        getting_started: start.as_ref().map(|candidate| candidate.url.clone()),
+        root_evidence: root.map(|candidate| candidate.evidence),
+        getting_started_evidence: start.map(|candidate| candidate.evidence),
+        root_ambiguous,
+        getting_started_ambiguous,
+    }
 }
 
 #[allow(dead_code)]
 pub(crate) fn parse_readme_docs_signal(line: &str) -> ReadmeDocsMetadata {
-    parse_readme_docs_signal_with_references(line, &HashMap::new())
-}
-
-fn parse_readme_docs_signal_with_references(
-    line: &str,
-    reference_definitions: &HashMap<String, String>,
-) -> ReadmeDocsMetadata {
-    let mut docs = ReadmeDocsMetadata::default();
-    let lower_line = strip_html_tags(line).to_ascii_lowercase();
-
-    let mut links = extract_markdown_links(line);
-    links.extend(extract_markdown_reference_links(
-        line,
-        reference_definitions,
-    ));
-    links.extend(extract_html_links(line));
-
-    for (label, url) in links {
-        let lower_label = label.to_ascii_lowercase();
-        let lower_url = url.to_ascii_lowercase();
-
-        let is_getting_started = lower_label.contains("getting started")
-            || lower_label.contains("quickstart")
-            || lower_label == "installation"
-            || lower_line.starts_with("getting started:")
-            || lower_line.starts_with("quickstart:")
-            || lower_url.contains("getting-started")
-            || lower_url.contains("/installation")
-            || lower_url.contains("quickstart");
-
-        if is_badge_asset_url(&url) {
-            continue;
-        }
-
-        if docs.getting_started.is_none() && is_getting_started {
-            docs.getting_started = Some(url.clone());
-        }
-
-        let is_docs_root = !is_getting_started
-            && (lower_label == "docs"
-                || lower_label == "documentation"
-                || lower_label == "configuration"
-                || lower_label.contains("reference")
-                || lower_line.starts_with("docs:")
-                || lower_line.starts_with("documentation:")
-                || lower_line.starts_with("documentation ")
-                || lower_url.contains("/config/")
-                || lower_url.contains("/configuration/")
-                || lower_url == "./docs/"
-                || lower_url == "docs/"
-                || lower_url.ends_with("/docs/")
-                || lower_url.ends_with("/docs")
-                || lower_url.contains("readthedocs.io")
-                || lower_url.contains("readthedocs.org"));
-
-        if docs.root.is_none() && is_docs_root {
-            docs.root = Some(url);
-        }
-    }
-
-    docs
+    parse_readme_docs_metadata(&[line], None)
 }
 
 fn is_badge_asset_url(url: &str) -> bool {
     let lower = url.to_ascii_lowercase();
+    let path = lower.split(['?', '#']).next().unwrap_or(&lower);
     lower.contains("badge")
         || lower.contains("shields.io")
-        || lower.ends_with(".svg")
+        || [".svg", ".png", ".jpg", ".jpeg", ".gif", ".webp"]
+            .iter()
+            .any(|extension| path.ends_with(extension))
         || lower.contains("status.svg")
 }
 

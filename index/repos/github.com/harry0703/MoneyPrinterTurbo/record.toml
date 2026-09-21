@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/harry0703/MoneyPrinterTurbo"
-generated_at = "2026-09-16T16:24:18.316619Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -55,9 +55,6 @@ ecosystem = "Python"
 maintainers = []
 security_contact = "unknown"
 
-[docs]
-root = "https://code.claude.com/docs"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:24:18.316619Z"
 confidence = "high"
@@ -67,12 +64,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:24:18.316619Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://code.claude.com/docs"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Claude Code integration link is not MoneyPrinterTurbo documentation; inspected README.md:190 at commit a76b61da5969bfc2bb8d9e169aa8609d9258273f"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://code.claude.com/docs\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:24:18.316619Z"

@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/shmilylty/OneForAll"
-generated_at = "2026-09-16T16:29:26.757992Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. Documentation correction withheld an unresolved docs field; prior verified authority is no longer asserted."
 
 [repo]
 name = "OneForAll"
@@ -49,15 +49,16 @@ topics = [
 
 [docs]
 root = "https://github.com/shmilylty/OneForAll/tree/master/config/setting.py"
-getting_started = "https://pythonguidecn.readthedocs.io/zh/latest/starting/installation.html#python-3"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:29:26.757992Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://pythonguidecn.readthedocs.io/zh/latest/starting/installation.html#python-3"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Python prerequisite installation is not OneForAll getting-started documentation; inspected README.md:22 at commit e5255ae7009d12779d98be192b099c3c300dfd8a"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://pythonguidecn.readthedocs.io/zh/latest/starting/installation.html#python-3\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-16T16:29:26.757992Z"

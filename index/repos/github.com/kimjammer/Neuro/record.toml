@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/kimjammer/Neuro"
-generated_at = "2026-09-16T16:25:43.055831Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. Documentation correction withheld an unresolved docs field; prior verified authority is no longer asserted."
 
 [repo]
 name = "Neuro"
@@ -23,9 +23,6 @@ visibility = "public"
 languages = ["Python"]
 topics = []
 
-[docs]
-root = "https://pytwitchapi.dev/en/stable/index.html#user-authentication"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:25:43.055831Z"
 confidence = "high"
@@ -35,12 +32,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:25:43.055831Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://pytwitchapi.dev/en/stable/index.html#user-authentication"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Twitch API authentication documentation belongs to a dependency; inspected README.md:124 at commit 5e4b4241c41bb40983aee2cb60d65d6bb481842b"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://pytwitchapi.dev/en/stable/index.html#user-authentication\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:25:43.055831Z"

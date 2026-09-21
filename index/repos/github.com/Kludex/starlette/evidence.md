@@ -18,3 +18,9 @@
 ## Fresh verification
 
 Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Corrected evidence for docs.root as `https://starlette.dev/`: ASGI specification documentation is not Starlette documentation. Source: [README.md:22](https://github.com/Kludex/starlette/blob/03f12b7fcf0a3e21a8da648ca0900c79472e9efe/README.md#L22).
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

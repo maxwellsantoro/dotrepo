@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/openai/whisper"
-generated_at = "2026-09-16T16:27:37.505006Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -29,16 +29,15 @@ topics = []
 min = "3.8"
 ecosystem = "Python"
 
-[docs]
-getting_started = "https://www.rust-lang.org/learn/get-started"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:27:37.505006Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://www.rust-lang.org/learn/get-started"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Rust prerequisite installation is not Whisper getting-started documentation; inspected README.md:51 at commit 86098128c0b4f24f0e2aa2994de830614b474227"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://www.rust-lang.org/learn/get-started\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-16T16:27:37.505006Z"

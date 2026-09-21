@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/AlistGo/alist"
-generated_at = "2026-09-16T16:31:42.345112Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -42,7 +42,7 @@ min = "1.25.0"
 ecosystem = "Go"
 
 [docs]
-root = "http://contrib.nn.ci/api?repo=alist-org/alist&repo=alist-org/alist-web&repo=alist-org/docs"
+root = "https://alistgo.com/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:31:42.345112Z"
@@ -53,12 +53,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:31:42.345112Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "contributor image is not documentation; inspected README.md:104 at commit b497664a3a097c756319c00935c9c84894661080"
+source = "README.md"
 state = "present"
-valueJson = '"http://contrib.nn.ci/api?repo=alist-org/alist&repo=alist-org/alist-web&repo=alist-org/docs"'
+valueJson = "\"https://alistgo.com/\""
+rejectedValueJson = "\"http://contrib.nn.ci/api?repo=alist-org/alist&repo=alist-org/alist-web&repo=alist-org/docs\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:31:42.345112Z"

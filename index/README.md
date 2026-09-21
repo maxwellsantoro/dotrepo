@@ -48,6 +48,23 @@ index/
 - `validate-index` fails on structural and identity errors, and warns when public-index records use non-reference trust vocabulary or thin evidence.
 - `evidence.md` should say what was imported, what was inferred, where build and test commands came from, and why any `unknown` placeholders are intentional.
 
+## Documentation audit
+
+Run the deterministic full-index documentation audit independently of sampling:
+
+```bash
+uv run python scripts/audit_index_sample.py --sample-size 0 --seed 1 --output-json /tmp/dotrepo-docs-audit.json --output-md /tmp/dotrepo-docs-audit.md
+```
+
+The `docsAudit` report checks every populated documentation field for matching
+field evidence and a specific evidence note. It also flags unconfirmed URL
+identity, differing docs origins, and targets matching another repository's
+homepage. These are source-inspection signals, not automatic rejection rules:
+custom domains and shared documentation can be legitimate. Ordinary sampled
+runs include the same full audit and increase the sampling weight of flagged
+records. Imports retain the selected URL's source line and context; conflicting
+declarations remain unresolved rather than gaining confidence from URL syntax.
+
 ## Evidence rubric
 
 Reference-quality `evidence.md` files should make a record auditable without
@@ -58,6 +75,8 @@ At minimum, every overlay evidence file should:
 - state what was inferred and explain the reasoning path
 - explain where `repo.build` came from, even when the answer is "inferred from project layout"
 - explain where `repo.test` came from, even when the answer is "inferred from project layout"
+- identify each selected `docs.*` value and cite its supporting source declaration;
+  a documentation-shaped URL or dependency link alone does not establish ownership
 - explain why any intentional `unknown` placeholders remain, especially security contacts
 - end with the reminder that the record is an overlay, not a maintainer-controlled canonical record
 

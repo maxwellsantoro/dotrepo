@@ -8,6 +8,7 @@ use std::sync::Arc;
 
 mod adoption;
 mod claims;
+mod generation;
 mod import;
 mod promotion;
 mod public;
@@ -18,6 +19,8 @@ mod surfaces;
 mod synthesis;
 mod util;
 mod validation;
+
+pub use generation::{generate_check_repository, github_outputs, managed_outputs};
 
 pub use adoption::{
     adoption_status_repository, canonical_mirror_path_for_claim_path, native_repository_identity,
@@ -42,12 +45,6 @@ pub use util::{
     index_record_mirror_path, normalize_rfc3339, parse_rfc3339, record_status_name, render_rfc3339,
     repository_identity, resolve_workspace_repository_root, source_digest,
     validate_repository_identity_segments,
-};
-
-pub(crate) use surfaces::{
-    ensure_native_managed_surface_record, inspect_managed_surface, merge_managed_region,
-    render_managed_markdown, render_managed_output, render_readme_body, ManagedOutput,
-    ManagedSurface,
 };
 
 pub use surfaces::adopt_managed_surface;
@@ -135,11 +132,6 @@ pub use validation::{
     validate_index_root, validate_manifest, validate_manifest_diagnostics, validate_repository,
     IndexFinding, IndexFindingSeverity, RepositoryDiagnostic, ValidateReport, ValidationDiagnostic,
     ValidationDiagnosticSeverity,
-};
-
-pub(crate) use render::{
-    generated_banner, render_contributing, render_contributing_body, render_pull_request_template,
-    render_security_body, CommentStyle,
 };
 
 #[cfg(test)]
@@ -476,299 +468,6 @@ pub fn trust_repository(root: &Path) -> Result<TrustReport> {
             })
             .collect(),
         claim_load_warnings,
-    })
-}
-
-pub fn generate_check_repository(root: &Path) -> Result<GenerateCheckReport> {
-    let document = load_manifest_document(root)?;
-    validate_manifest(root, &document.manifest)?;
-    ensure_native_managed_surface_record(&document.manifest, "generate-check")?;
-    let mut rendered_outputs = Vec::new();
-    let mut stale = Vec::new();
-
-    rendered_outputs.push(generate_check_managed_surface(
-        root,
-        ManagedSurface::Readme,
-        &document.manifest,
-        &document.raw,
-    )?);
-
-    let digest = source_digest(&document.raw);
-    if let Some(compat) = &document.manifest.compat {
-        if let Some(github) = &compat.github {
-            if matches!(github.codeowners, Some(CompatMode::Generate)) {
-                let owners = document
-                    .manifest
-                    .owners
-                    .as_ref()
-                    .map(|o| o.maintainers.join(" "))
-                    .unwrap_or_else(|| "@maintainers".into());
-                rendered_outputs.push(generate_check_output(
-                    root,
-                    root.join(".github/CODEOWNERS"),
-                    format!(
-                        "{}\n* {}\n",
-                        generated_banner(CommentStyle::Hash, &document.manifest, &digest),
-                        owners
-                    ),
-                )?);
-            }
-            if matches!(github.security, Some(CompatMode::Generate)) {
-                rendered_outputs.push(generate_check_managed_surface(
-                    root,
-                    ManagedSurface::Security,
-                    &document.manifest,
-                    &document.raw,
-                )?);
-            }
-            if matches!(github.contributing, Some(CompatMode::Generate)) {
-                rendered_outputs.push(generate_check_managed_surface(
-                    root,
-                    ManagedSurface::Contributing,
-                    &document.manifest,
-                    &document.raw,
-                )?);
-            }
-            if matches!(github.pull_request_template, Some(CompatMode::Generate)) {
-                rendered_outputs.push(generate_check_output(
-                    root,
-                    root.join(".github/pull_request_template.md"),
-                    render_pull_request_template(&document.manifest, &digest),
-                )?);
-            }
-        }
-    }
-
-    for output in &rendered_outputs {
-        if output.stale {
-            stale.push(output.path.clone());
-        }
-    }
-
-    Ok(GenerateCheckReport {
-        root: display_root(root)?,
-        checked: rendered_outputs.len(),
-        stale,
-        outputs: rendered_outputs,
-    })
-}
-
-pub fn managed_outputs(
-    root: &Path,
-    manifest: &Manifest,
-    source_bytes: &[u8],
-) -> Result<Vec<(PathBuf, String)>> {
-    ensure_native_managed_surface_record(manifest, "generate")?;
-    let mut outputs = Vec::new();
-    if let Some(output) =
-        render_managed_output(root, ManagedSurface::Readme, manifest, source_bytes)?
-    {
-        outputs.push(output);
-    }
-
-    let digest = source_digest(source_bytes);
-    if let Some(compat) = &manifest.compat {
-        if let Some(github) = &compat.github {
-            if matches!(github.codeowners, Some(CompatMode::Generate)) {
-                let owners = manifest
-                    .owners
-                    .as_ref()
-                    .map(|o| o.maintainers.join(" "))
-                    .unwrap_or_else(|| "@maintainers".into());
-                let path = root.join(".github/CODEOWNERS");
-                let expected = format!(
-                    "{}\n* {}\n",
-                    generated_banner(CommentStyle::Hash, manifest, &digest),
-                    owners
-                );
-                outputs.push(ManagedOutput {
-                    contents: preserve_matching_generated_output(&path, expected)?,
-                    path,
-                });
-            }
-            if matches!(github.security, Some(CompatMode::Generate)) {
-                if let Some(output) =
-                    render_managed_output(root, ManagedSurface::Security, manifest, source_bytes)?
-                {
-                    outputs.push(output);
-                }
-            }
-            if matches!(github.contributing, Some(CompatMode::Generate)) {
-                if let Some(output) = render_managed_output(
-                    root,
-                    ManagedSurface::Contributing,
-                    manifest,
-                    source_bytes,
-                )? {
-                    outputs.push(output);
-                }
-            }
-            if matches!(github.pull_request_template, Some(CompatMode::Generate)) {
-                let path = root.join(".github/pull_request_template.md");
-                let expected = render_pull_request_template(manifest, &digest);
-                outputs.push(ManagedOutput {
-                    contents: preserve_matching_generated_output(&path, expected)?,
-                    path,
-                });
-            }
-        }
-    }
-
-    Ok(outputs
-        .into_iter()
-        .map(|output| (output.path, output.contents))
-        .collect())
-}
-
-fn preserve_matching_generated_output(path: &Path, expected: String) -> Result<String> {
-    match fs::read_to_string(path) {
-        Ok(current) if crate::render::generated_output_matches(&current, &expected) => Ok(current),
-        Ok(_) => Ok(expected),
-        Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(expected),
-        Err(error) => Err(anyhow!("failed to read {}: {}", path.display(), error)),
-    }
-}
-
-pub fn github_outputs(manifest: &Manifest, source_bytes: &[u8]) -> Vec<(PathBuf, String)> {
-    let mut outputs = Vec::new();
-    let digest = source_digest(source_bytes);
-    if let Some(compat) = &manifest.compat {
-        if let Some(github) = &compat.github {
-            if matches!(github.codeowners, Some(CompatMode::Generate)) {
-                let owners = manifest
-                    .owners
-                    .as_ref()
-                    .map(|o| o.maintainers.join(" "))
-                    .unwrap_or_else(|| "@maintainers".into());
-                outputs.push((
-                    PathBuf::from(".github/CODEOWNERS"),
-                    format!(
-                        "{}\n* {}\n",
-                        generated_banner(CommentStyle::Hash, manifest, &digest),
-                        owners
-                    ),
-                ));
-            }
-            if matches!(github.security, Some(CompatMode::Generate)) {
-                outputs.push((
-                    PathBuf::from(".github/SECURITY.md"),
-                    render_managed_markdown(
-                        generated_banner(CommentStyle::Html, manifest, &digest),
-                        &render_security_body(manifest),
-                    ),
-                ));
-            }
-            if matches!(github.contributing, Some(CompatMode::Generate)) {
-                outputs.push((
-                    PathBuf::from("CONTRIBUTING.md"),
-                    render_contributing(manifest, &digest),
-                ));
-            }
-            if matches!(github.pull_request_template, Some(CompatMode::Generate)) {
-                outputs.push((
-                    PathBuf::from(".github/pull_request_template.md"),
-                    render_pull_request_template(manifest, &digest),
-                ));
-            }
-        }
-    }
-    outputs
-}
-
-fn generate_check_output(
-    root: &Path,
-    path: PathBuf,
-    expected: String,
-) -> Result<GenerateCheckOutput> {
-    let (current, missing) = match fs::read_to_string(&path) {
-        Ok(content) => (content, false),
-        Err(e) if e.kind() == std::io::ErrorKind::NotFound => (String::new(), true),
-        Err(e) => return Err(anyhow!("failed to read {}: {}", path.display(), e)),
-    };
-    let relative = display_path(root, &path)?;
-    let is_stale = !crate::render::generated_output_matches(&current, &expected);
-    let expected = if is_stale { expected } else { current.clone() };
-    Ok(GenerateCheckOutput {
-        path: relative,
-        state: if missing {
-            ManagedFileState::Missing
-        } else {
-            ManagedFileState::FullyGenerated
-        },
-        stale: is_stale,
-        expected,
-        current: if is_stale { Some(current) } else { None },
-        message: None,
-    })
-}
-
-fn generate_check_managed_surface(
-    root: &Path,
-    surface: ManagedSurface,
-    manifest: &Manifest,
-    source_bytes: &[u8],
-) -> Result<GenerateCheckOutput> {
-    let digest = source_digest(source_bytes);
-    let status = inspect_managed_surface(root, surface)?;
-    let body = match surface {
-        ManagedSurface::Readme => render_readme_body(root, manifest)?,
-        ManagedSurface::Security => render_security_body(manifest),
-        ManagedSurface::Contributing => render_contributing_body(manifest),
-    };
-    let full_expected = match surface {
-        ManagedSurface::Readme => render_readme(root, manifest, source_bytes)?,
-        ManagedSurface::Security => render_managed_markdown(
-            generated_banner(CommentStyle::Html, manifest, &digest),
-            &body,
-        ),
-        ManagedSurface::Contributing => render_managed_markdown(
-            generated_banner(CommentStyle::Html, manifest, &digest),
-            &body,
-        ),
-    };
-    let expected = match status.state {
-        ManagedFileState::PartiallyManaged => {
-            let current = status.current.as_deref().ok_or_else(|| {
-                anyhow!(
-                    "partially managed file {} is missing current contents",
-                    status.path.display()
-                )
-            })?;
-            merge_managed_region(&status.path, surface, current, &body)?
-        }
-        ManagedFileState::Unmanaged => status.current.clone().ok_or_else(|| {
-            anyhow!(
-                "unmanaged file {} is missing current contents",
-                status.path.display()
-            )
-        })?,
-        _ => full_expected,
-    };
-    let current = status.current.clone();
-    let stale = match status.state {
-        ManagedFileState::Missing => true,
-        ManagedFileState::FullyGenerated | ManagedFileState::PartiallyManaged => {
-            match current.as_deref() {
-                None => true,
-                Some(current) => !crate::render::generated_output_matches(current, &expected),
-            }
-        }
-        ManagedFileState::Unmanaged => false,
-        ManagedFileState::MalformedManaged | ManagedFileState::Unsupported => true,
-    };
-    let expected = if stale {
-        expected
-    } else {
-        current.clone().unwrap_or(expected)
-    };
-
-    Ok(GenerateCheckOutput {
-        path: display_path(root, &status.path)?,
-        state: status.state,
-        stale,
-        expected,
-        current: if stale { current } else { None },
-        message: status.message,
     })
 }
 

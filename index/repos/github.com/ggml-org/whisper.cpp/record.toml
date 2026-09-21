@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ggml-org/whisper.cpp"
-generated_at = "2026-09-16T16:32:24.483666Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -55,9 +55,6 @@ topics = [
     "speech-recognition",
 ]
 
-[docs]
-getting_started = "https://wiki.libsdl.org/SDL2/Installation"
-
 [relations]
 references = []
 
@@ -74,12 +71,14 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:32:24.483666Z"
-confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
-state = "present"
-valueJson = '"https://wiki.libsdl.org/SDL2/Installation"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "SDL2 dependency installation is not whisper.cpp installation documentation; inspected README.md:610 at commit da54572229bcf64ba367d96c7ef15770376c4280"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://wiki.libsdl.org/SDL2/Installation\""
 
 [x.dotrepo.field_evidence."docs.root"]
 checkedAt = "2026-09-16T16:32:24.483666Z"

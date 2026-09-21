@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/astral-sh/uv"
-generated_at = "2026-09-18T06:06:36.392319997Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -51,24 +51,27 @@ maintainers = []
 security_contact = "https://github.com/astral-sh/.github/blob/main/SECURITY.md"
 
 [docs]
-root = "https://trio.readthedocs.io/"
+root = "https://docs.astral.sh/uv"
 getting_started = "https://docs.astral.sh/uv/getting-started/installation/"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "getting started URL present"
+method = "extracted"
+reason = "retain the explicitly declared uv installation documentation; inspected README.md:76 at commit a5a0b62c4912157bf5e8802453588ef6c0be5a88"
+source = "README.md"
 state = "present"
-valueJson = '"https://docs.astral.sh/uv/getting-started/installation/"'
+valueJson = "\"https://docs.astral.sh/uv/getting-started/installation/\""
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-18T06:06:36.392319997Z"
+checkedAt = "2026-09-21T04:36:55.205964Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Trio benchmark caption link is not uv documentation; inspected README.md:81 at commit a5a0b62c4912157bf5e8802453588ef6c0be5a88"
+source = "README.md"
 state = "present"
-valueJson = '"https://trio.readthedocs.io/"'
+valueJson = "\"https://docs.astral.sh/uv\""
+rejectedValueJson = "\"https://trio.readthedocs.io/\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-18T06:06:36.392319997Z"

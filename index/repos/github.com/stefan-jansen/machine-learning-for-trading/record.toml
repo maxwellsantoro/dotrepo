@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/stefan-jansen/machine-learning-for-trading"
-generated_at = "2026-09-16T16:29:45.029903Z"
+generated_at = "2026-09-21T04:36:55.205964Z"
 
 [record.trust]
 confidence = "medium"
@@ -55,9 +55,6 @@ topics = [
 min = "3.14"
 ecosystem = "Python"
 
-[docs]
-root = "https://jupytext.readthedocs.io/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
 checkedAt = "2026-09-16T16:29:45.029903Z"
 confidence = "high"
@@ -67,12 +64,14 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:29:45.029903Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://jupytext.readthedocs.io/"'
+checkedAt = "2026-09-21T04:36:55.205964Z"
+confidence = "low"
+method = "rejected"
+reason = "Jupytext tooling reference is not documentation for this book repository; inspected README.md:333 at commit 567b1040016ca3a91dbaa80dede040dc045b1ea0"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
+rejectedValueJson = "\"https://jupytext.readthedocs.io/\""
 
 [x.dotrepo.field_evidence."owners.security_contact"]
 checkedAt = "2026-09-16T16:29:45.029903Z"
