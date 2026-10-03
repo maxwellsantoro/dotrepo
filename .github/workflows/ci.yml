@@ -608,6 +608,9 @@ jobs:
           cache-dependency-path: |
             cloudflare/hosted-query/package-lock.json
             editors/vscode/package-lock.json
+      - name: Test VS Code extension lifecycle
+        working-directory: editors/vscode
+        run: npm test
       - name: Run explicit release-surface gate
         run: uv run python scripts/check_release_gate.py --output-root release-gate
       - name: Upload static public export artifact
