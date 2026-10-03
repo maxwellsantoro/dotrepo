@@ -79,12 +79,12 @@ def freshness(value: dict[str, Any], context: str) -> dict[str, Any]:
 
 
 def archived_snapshot_sample(
-    origin: str, log_entries: list[Any], latest_digest: str
+    origin: str, log_entries: list[Any], latest_snapshot_id: str
 ) -> dict[str, Any] | None:
     candidates = [
         entry
         for entry in log_entries
-        if isinstance(entry, dict) and entry.get("snapshotDigest") != latest_digest
+        if isinstance(entry, dict) and entry.get("snapshotId") != latest_snapshot_id
     ]
     if not candidates:
         return None
@@ -266,26 +266,54 @@ def validate_health(
     }
 
 
-def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]:
-    meta = fetch_json(origin, "/v0/meta.json")
+def validate_snapshot_metadata(meta: dict[str, Any]) -> tuple[str, str, dict[str, Any]]:
+    """Check separate export-payload and source-index identities from the producer."""
     paths = meta.get("paths")
     require(isinstance(paths, dict), "dotrepo meta is missing content-addressed paths")
     snapshot_id = meta.get("snapshotId")
     digest = meta.get("snapshotDigest")
-    require(isinstance(snapshot_id, str) and snapshot_id, "dotrepo meta has no snapshotId")
+    # Static exports hash the serialized public payload for snapshotId. The
+    # snapshotDigest independently identifies the input index tree.
     require(
-        isinstance(digest, str) and digest.startswith(snapshot_id),
-        "snapshotId does not match snapshotDigest",
+        isinstance(snapshot_id, str) and re.fullmatch(r"[0-9a-f]{64}", snapshot_id) is not None,
+        "dotrepo snapshotId is not a sha256 hex digest",
+    )
+    require(
+        isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest) is not None,
+        "dotrepo snapshotDigest is not a sha256 hex digest",
+    )
+    validators = meta.get("validators")
+    require(isinstance(validators, dict), "dotrepo meta is missing validators")
+    require(
+        validators.get("snapshot") == f"sha256:{digest}",
+        "snapshot validator disagrees with source-index digest",
+    )
+    require(
+        validators.get("etag") == f'"dotrepo-v0-{snapshot_id}"',
+        "snapshot etag disagrees with export snapshotId",
     )
     root = paths.get("root")
-    inventory_path = paths.get("inventory")
-    files_path = paths.get("files")
     require(
         isinstance(root, str) and root.endswith(f"/v0/snapshots/{snapshot_id}"),
         "dotrepo snapshot root does not match snapshotId",
     )
-    require(isinstance(inventory_path, str), "dotrepo meta has no inventory path")
-    require(isinstance(files_path, str), "dotrepo meta has no files path")
+    require(
+        paths.get("inventory") == f"{root}/repos/index.json",
+        "dotrepo inventory path does not match snapshotId",
+    )
+    require(
+        paths.get("files") == f"{root}/files.json",
+        "dotrepo files path does not match snapshotId",
+    )
+    return snapshot_id, digest, paths
+
+
+def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]:
+    meta = fetch_json(origin, "/v0/meta.json")
+    snapshot_id, digest, paths = validate_snapshot_metadata(meta)
+    root = paths["root"]
+    inventory_path = paths["inventory"]
+    files_path = paths["files"]
 
     inventory = fetch_json(origin, inventory_path)
     files = fetch_json(origin, files_path)
@@ -313,6 +341,10 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
     require(isinstance(log_entries, list) and log_entries, "snapshot log is empty")
     latest_log = log_entries[-1]
     require(
+        latest_log.get("snapshotId") == snapshot_id,
+        "snapshot log latest ID disagrees with pointer",
+    )
+    require(
         latest_log.get("snapshotDigest") == digest,
         "snapshot log latest digest disagrees with pointer",
     )
@@ -323,6 +355,10 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
     require(
         latest_log.get("fileCount") == files.get("fileCount"),
         "snapshot log file count disagrees",
+    )
+    require(
+        stats.get("latest", {}).get("snapshotId") == snapshot_id,
+        "stats latest ID disagrees with pointer",
     )
     require(
         stats.get("latest", {}).get("snapshotDigest") == digest,
@@ -353,7 +389,9 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
             f"{record_path} disagrees with pointer",
         )
     archive_sample = (
-        archived_snapshot_sample(origin, log_entries, digest) if sample_archived_snapshot else None
+        archived_snapshot_sample(origin, log_entries, snapshot_id)
+        if sample_archived_snapshot
+        else None
     )
 
     homepage = fetch(origin, "/").decode("utf-8")

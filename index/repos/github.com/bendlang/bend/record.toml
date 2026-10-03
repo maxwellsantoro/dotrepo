@@ -1,0 +1,133 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "overlay"
+status = "imported"
+source = "https://github.com/bendlang/bend"
+generated_at = "2026-10-03T19:36:40.49116326Z"
+
+[record.trust]
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `tools/bend-fmt-lsp/package.json`. Imported `repo.build` from `tools/bend-fmt-lsp/package.json`. Imported `repo.test` from `tools/bend-fmt-lsp/package.json`. Imported `repo.toolchain.min` from `tools/bend-fmt-lsp/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+
+[repo]
+name = "Bend"
+description = "Bend 2: a fast language that blocks AI mistakes via proof. Install: curl -fsSL https://bend-lang.com/install.sh | sh"
+homepage = "https://bend-lang.com"
+license = "Apache-2.0"
+visibility = "public"
+languages = [
+    "TypeScript",
+    "C",
+    "Typst",
+    "JavaScript",
+    "TeX",
+    "Nix",
+    "HTML",
+]
+build = "npm run build"
+test = "npm test"
+topics = [
+    "bend",
+    "cuda",
+    "dependent-types",
+    "gpu",
+    "metal",
+    "parallel",
+    "programming-language",
+    "proof",
+    "theorem-proving",
+]
+
+[repo.toolchain]
+min = "22"
+ecosystem = "Node.js"
+
+[docs]
+root = "https://bend-lang.com"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no unambiguous documentation declaration detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "medium"
+method = "unspecified"
+reason = "documentation target present without a retained source declaration"
+state = "present"
+valueJson = '"https://bend-lang.com"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "tools/bend-fmt-lsp/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Bend 2: a fast language that blocks AI mistakes via proof. Install: curl -fsSL https://bend-lang.com/install.sh | sh"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://bend-lang.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Bend"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-10-03T19:36:40.49116326Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "tools/bend-fmt-lsp/package.json"
+state = "present"
+valueJson = '"npm test"'
+
+[x.github]
+archived = false
+clone_url = "https://github.com/bendlang/bend.git"
+default_branch = "main"
+fork = false
+head_sha = "a3f1782a11ad5ee8778d26438f254bf3873bf0f1"
+html_url = "https://github.com/bendlang/bend"
+stars = 23306

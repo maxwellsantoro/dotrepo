@@ -159,3 +159,107 @@ def test_validate_pagedigest_homepage_rejects_stale_rc_copy() -> None:
     """
     with pytest.raises(canary.CanaryFailure, match="manifest path"):
         canary.validate_pagedigest_homepage(homepage)
+
+
+def snapshot_meta() -> dict:
+    snapshot_id = "a" * 64
+    digest = "b" * 64
+    root = f"/v0/snapshots/{snapshot_id}"
+    return {
+        "snapshotId": snapshot_id,
+        "snapshotDigest": digest,
+        "validators": {"snapshot": f"sha256:{digest}", "etag": f'"dotrepo-v0-{snapshot_id}"'},
+        "paths": {
+            "root": root,
+            "inventory": f"{root}/repos/index.json",
+            "files": f"{root}/files.json",
+        },
+    }
+
+
+def test_snapshot_metadata_accepts_independent_payload_and_index_digests():
+    snapshot_id, digest, paths = canary.validate_snapshot_metadata(snapshot_meta())
+    assert snapshot_id == "a" * 64
+    assert digest == "b" * 64
+    assert snapshot_id != digest
+    assert paths["root"].endswith(snapshot_id)
+
+
+@pytest.mark.parametrize("field", ["snapshotId", "snapshotDigest"])
+def test_snapshot_metadata_rejects_non_sha256_identities(field):
+    meta = snapshot_meta()
+    meta[field] = "not-a-sha256"
+    with pytest.raises(canary.CanaryFailure, match=field):
+        canary.validate_snapshot_metadata(meta)
+
+
+@pytest.mark.parametrize("field", ["snapshot", "etag"])
+def test_snapshot_metadata_rejects_mismatched_validators(field):
+    meta = snapshot_meta()
+    meta["validators"][field] = "incorrect"
+    with pytest.raises(canary.CanaryFailure, match="validator|etag"):
+        canary.validate_snapshot_metadata(meta)
+
+
+@pytest.mark.parametrize("field", ["root", "inventory", "files"])
+def test_snapshot_metadata_rejects_paths_from_another_export(field):
+    meta = snapshot_meta()
+    meta["paths"][field] = meta["paths"][field].replace("a" * 64, "c" * 64)
+    with pytest.raises(canary.CanaryFailure, match="match snapshotId"):
+        canary.validate_snapshot_metadata(meta)
+
+
+def test_archive_sampling_checks_an_older_payload_with_same_index_digest(monkeypatch):
+    old_id = "a" * 64
+    latest_id = "b" * 64
+    digest = "c" * 64
+    entries = [
+        {"snapshotId": old_id, "snapshotDigest": digest},
+        {"snapshotId": latest_id, "snapshotDigest": digest},
+    ]
+    fetched = []
+    monkeypatch.setattr(
+        canary,
+        "fetch_json",
+        lambda origin, path: {"files": [{"path": f"v0/snapshots/{old_id}/repos/index.json"}]},
+    )
+    monkeypatch.setattr(canary, "fetch", lambda origin, path: fetched.append(path))
+    result = canary.archived_snapshot_sample("https://dotrepo.org", entries, latest_id)
+    assert result["snapshotId"] == old_id
+    assert fetched == [f"/v0/snapshots/{old_id}/repos/index.json"]
+
+
+@pytest.mark.parametrize("target", ["log", "stats"])
+def test_live_checks_reject_different_export_id_even_when_source_digest_matches(
+    monkeypatch, target
+):
+    meta = snapshot_meta()
+    meta["generatedAt"] = "2026-10-03T19:00:00Z"
+    freshness = {key: meta[key] for key in ("generatedAt", "snapshotDigest")}
+    latest = {
+        "snapshotId": meta["snapshotId"],
+        "snapshotDigest": meta["snapshotDigest"],
+        "repositoryCount": 2,
+        "fileCount": 1,
+    }
+    log = {"entries": [dict(latest)], "snapshotCount": 1}
+    stats_document = {"latest": dict(latest), "snapshotCount": 1}
+    if target == "log":
+        log["entries"][0]["snapshotId"] = "c" * 64
+    else:
+        stats_document["latest"]["snapshotId"] = "c" * 64
+    responses = {
+        "/v0/meta.json": meta,
+        meta["paths"]["inventory"]: {
+            "freshness": freshness,
+            "repositoryCount": 2,
+            "repositories": [{}, {}],
+        },
+        meta["paths"]["files"]: {"freshness": freshness, "fileCount": 1, "files": []},
+        "/v0/snapshots/log.json": log,
+        "/v0/stats.json": stats_document,
+        "/v0/health.json": {},
+    }
+    monkeypatch.setattr(canary, "fetch_json", lambda origin, path: responses[path])
+    with pytest.raises(canary.CanaryFailure, match="ID disagrees with pointer"):
+        canary.check_dotrepo("https://dotrepo.org", False)
