@@ -7,12 +7,13 @@ on:
     - cron: "0 14 * * *"
 
 permissions:
+  actions: read # Read latest run ordering without per-run report edits.
   contents: read
   issues: write
 
 concurrency:
   group: public-edge-canary
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   canary:
@@ -31,6 +32,8 @@ jobs:
           uv venv
           uv sync --dev --locked
       - name: Check both public edges
+        id: edge_check
+        shell: bash
         env:
           DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED: ${{ vars.DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED }}
         run: |
@@ -41,33 +44,25 @@ jobs:
           uv run python scripts/public_edge_canary.py \
             --pagedigest-repo-root sibling-pagedigest \
             --output public-edge-canary.json \
-            "${archive_args[@]}"
+            "${archive_args[@]}" 2>&1 | tee public-edge-canary.log
       - name: Upload canary report
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: public-edge-canary
-          path: public-edge-canary.json
+          path: |
+            public-edge-canary.json
+            public-edge-canary.log
           if-no-files-found: ignore
-      - name: Open or update failure issue
-        if: failure()
+      - name: Update the durable canary report on result changes
+        if: always() && (steps.edge_check.outcome == 'success' || steps.edge_check.outcome == 'failure')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          title="Public edge consistency canary is failing"
-          existing="$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number // empty')"
-          body="The scheduled public-edge canary failed: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          if [ -n "$existing" ]; then
-            last_comment_at="$(gh api "repos/$GITHUB_REPOSITORY/issues/$existing/comments" --paginate --jq '.[-1].created_at // empty')"
-            if [ -n "$last_comment_at" ]; then
-              now_epoch="$(date -u +%s)"
-              last_epoch="$(date -u -d "$last_comment_at" +%s)"
-              if [ "$((now_epoch - last_epoch))" -lt 82800 ]; then
-                echo "Skipping duplicate failure comment; last update was within 23 hours"
-                exit 0
-              fi
-            fi
-            gh issue comment "$existing" --body "$body"
-          else
-            gh issue create --title "$title" --body "The dotrepo × pagedigest public-edge canary failed: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          fi
+          uv run python scripts/report_public_edge_canary.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --status "${{ steps.edge_check.outcome }}" \
+            --run-id "$GITHUB_RUN_ID" \
+            --run-number "$GITHUB_RUN_NUMBER" \
+            --run-attempt "$GITHUB_RUN_ATTEMPT" \
+            --details-file public-edge-canary.log

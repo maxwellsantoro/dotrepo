@@ -208,8 +208,10 @@ upstream native `.repo`.
   `DOTREPO_PUBLIC_EDGE_CANARY_ENABLED=true`) checks the homepage, pointer,
   canonical inventory, canonical file manifest, two records, both pagedigest
   manifests, snapshot log, stats document, and pagedigest.org's shipped-artifact
-  claims; repeated failures update one GitHub issue at most once per day instead
-  of opening an issue storm
+  claims. One bot-owned report comment records changed failure reasons and
+  recovery; identical repeated results add no comments or edits. The reporter
+  reuses the existing issue across recurrences and retains historical comments.
+  Recovery does not automatically close the issue; an operator verifies closure.
 
 The export tree is the source of truth for the current snapshot. Historical
 payload retention belongs to the archive layer; the static asset bundle should

@@ -27,6 +27,13 @@
       "githubRepositoryId": 24268127,
       "checkedAt": "2026-09-16T20:51:57.725269+00:00",
       "evidence": "Both GitHub repository endpoints resolve to the same numeric repository ID. Destination was freshly crawled before removing the old overlay."
+    },
+    {
+      "previousIdentity": "github.com/HigherOrderCO/Bend",
+      "currentIdentity": "github.com/bendlang/bend",
+      "githubRepositoryId": 684776900,
+      "checkedAt": "2026-10-03T19:39:52Z",
+      "evidence": "The old GitHub endpoint redirects to numeric repository 684776900, which matches bendlang/bend. Destination freshly crawled at 2026-10-03T19:36:40.49116326Z before removing the old overlay; generated record and evidence retained from https://github.com/maxwellsantoro/dotrepo/actions/runs/37148475397."
     }
   ]
 }
