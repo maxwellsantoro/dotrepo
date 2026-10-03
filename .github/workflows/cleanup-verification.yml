@@ -1,0 +1,98 @@
+# Temporary verification only. Remove this file before merging the cleanup PR.
+name: cleanup-verification
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/cleanup-verification.yml"
+      - ".github/workflows/public-edge-canary.yml"
+      - "scripts/public_edge_canary.py"
+      - "index/**"
+      - "scripts/fixtures/public_upstream_accuracy_workload.json"
+      - "benchmarks/head-to-head/upstream-2026-10-03/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cleanup-verification-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  fresh-bend-crawl:
+    if: github.head_ref == 'fix/dotrepo-maintenance-2026-10-03' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: stable
+      - name: Freshly crawl the verified Bend destination
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/bend-crawl"
+          cargo run -p dotrepo-crawler -- crawl \
+            --index-root "$RUNNER_TEMP/bend-crawl" \
+            --owner bendlang --repo bend --write --json \
+            > "$RUNNER_TEMP/bend-crawl-report.json"
+          test -s "$RUNNER_TEMP/bend-crawl/repos/github.com/bendlang/bend/record.toml"
+          test -s "$RUNNER_TEMP/bend-crawl/repos/github.com/bendlang/bend/evidence.md"
+      - name: Upload fresh Bend files
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: cleanup-bend-crawl
+          path: |
+            ${{ runner.temp }}/bend-crawl/repos/github.com/bendlang/bend/
+            ${{ runner.temp }}/bend-crawl-report.json
+          if-no-files-found: error
+          retention-days: 7
+
+  live-public-edge-canary:
+    if: github.head_ref == 'fix/dotrepo-maintenance-2026-10-03' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: maxwellsantoro/pagedigest
+          path: sibling-pagedigest
+          persist-credentials: false
+      - name: Install uv
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - name: Create and sync Python environment
+        run: |
+          uv venv
+          uv sync --dev --locked
+      - name: Check both public edges
+        env:
+          DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED: ${{ vars.DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED }}
+        run: |
+          git rev-parse HEAD > cleanup-canary-revisions.txt
+          git -C sibling-pagedigest rev-parse HEAD >> cleanup-canary-revisions.txt
+          archive_args=()
+          if [ "$DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED" = "true" ]; then
+            archive_args+=(--sample-archived-snapshot)
+          fi
+          uv run python scripts/public_edge_canary.py \
+            --pagedigest-repo-root sibling-pagedigest \
+            --output public-edge-canary.json \
+            "${archive_args[@]}"
+      - name: Upload current canary report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: cleanup-public-edge-canary
+          path: |
+            public-edge-canary.json
+            cleanup-canary-revisions.txt
+          if-no-files-found: error
+          retention-days: 7
