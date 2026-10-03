@@ -29,11 +29,13 @@ documentation, and a security contact. It caught and drove deterministic fixes
 for a logo-derived name, promotional announcement descriptions, and a badge
 asset misclassified as documentation.
 
-The current release baseline requires 20/20 exact matches, zero missing sampled
+The original regression baseline requires 20/20 exact matches, zero missing sampled
 facts, and zero mismatched sampled facts. This is sampled accuracy evidence, not
-a universal claim about every field in every profile. The workload should grow
-across repositories, ecosystems, and field classes as coverage expands toward
-500 profiles.
+a universal claim about every field in every profile. A separate September upstream workload now adds 123 independently sourced
+assertions across 32 preselected repositories. Its frozen primary-source extracts
+and identity selection live under `benchmarks/head-to-head/`. This second release
+gate requires exact matches for structured metadata; it does not substitute for
+the separate buried-field head-to-head benchmark.
 
 ### Ecosystem and abstention breakdown
 

@@ -62,11 +62,11 @@ Likewise, `scrapeProxyRequests` is a conservative local proxy, while
 `dotrepoBatchQueryRequests` models the public batch-query surface that agents
 can cache and reuse.
 
-## Current production-export result
+## Historical production-export snapshot
 
 The canonical release gate builds the research workload from all 613 current
 profiles and applies the versioned baseline in
-`scripts/fixtures/public_lookup_efficiency_baseline.json`. Its current result is:
+`scripts/fixtures/public_lookup_efficiency_baseline.json`. The pre-September-refresh result was:
 
 | Metric | Value |
 | --- | ---: |
@@ -121,3 +121,35 @@ Against the checked-in public export fixture and workload, the harness reports:
 
 The fixture remains a deterministic unit-scale contract. Production thresholds
 come from the full generated export above, not from these two repositories.
+
+## Release policy after the September review
+
+Authority labels are reported without a minimum verified-count incentive. The
+release still gates profile validity, field completeness, conflicts, generic or
+duplicated content, and factual accuracy. Independent structured metadata adds
+123 exact assertions across 32 preselected repositories. Factual record age has a
+separate hard gate: at most 10% stale or unknown at export time. Lower confidence
+is visible in the quality dashboard and is not itself classified as malformed or
+incorrect content. This policy allows honest partial publication without
+inflating status to retain a coverage badge.
+
+## Consumer-policy coverage
+
+The release gate also runs:
+
+```sh
+uv run python scripts/measure_public_policy_coverage.py --public-root public \
+  --output-json /tmp/policy-coverage.json --output-md /tmp/policy-coverage.md
+```
+
+This applies the shipped reference consumer to each primary profile for
+repository-description, documentation, build, test, and combined build/test
+requests. Snapshot copies and candidate commands are excluded. It retains the
+presence metric and separately reports policy-acceptable counts, denominators,
+and per-repository fallback reasons. Evaluation defaults to the export timestamp;
+`--evaluated-at` permits a later age check. The efficiency page publishes the same
+measurement. No lower bound on acceptance encourages weakening the policy.
+
+Independent correctness and completed-task counts are null, not zero or inferred
+from acceptance. The structured assertion suites and head-to-head answer scoring
+remain separate evidence; actual consumer task completion belongs to the pilot.

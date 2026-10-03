@@ -1,14 +1,12 @@
 # Evidence
 
-- Imported repository name and description from README.md.
+- Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from README.md as `cargo build`.
 - Imported repo.test from README.md as `cargo test`.
 - Imported repo.toolchain.min from Cargo.toml as `1.90.0` (Rust).
 - Discovered related relation to github.com/sharkdp/fd from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
-
-- Set `repo.description` to `A simple, fast and user-friendly alternative to 'find'` from `GitHub API` after deterministic escalation.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.

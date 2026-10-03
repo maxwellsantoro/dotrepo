@@ -625,13 +625,20 @@ fn load_refresh_state_for_plan(
     state_path: &Path,
 ) -> Result<(CrawlerStateSnapshot, RefreshPlanStateSource)> {
     let state = load_crawler_state(state_path)?;
-    if !state.repositories.is_empty() {
-        return Ok((state, RefreshPlanStateSource::CrawlerState));
-    }
-
     let index_root = state_path.parent().unwrap_or_else(|| Path::new("."));
-    let derived = derive_refresh_state_from_index(index_root)?;
+    let mut derived = derive_refresh_state_from_index(index_root)?;
     if !derived.repositories.is_empty() {
+        // The index owns membership and factual age. Retain synthesis retry
+        // context, but do not resurrect deleted/transferred identities from state.
+        for record in &mut derived.repositories {
+            if let Some(saved) = state
+                .repositories
+                .iter()
+                .find(|saved| saved.repository == record.repository)
+            {
+                record.last_synthesis_failure = saved.last_synthesis_failure.clone();
+            }
+        }
         return Ok((derived, RefreshPlanStateSource::IndexRecords));
     }
 
@@ -929,6 +936,21 @@ how_to_contribute = "Open a PR"
             Some("2026-03-20T05:10:00Z")
         );
         assert_eq!(record.synthesis_model.as_deref(), Some("gpt-5.4"));
+
+        // A stale operational state must not revive an identity removed from the index,
+        // nor replace the factual timestamp read from its current record.
+        let mut saved = state.clone();
+        saved.repositories[0].last_factual_crawl_at = Some("2025-01-01T00:00:00Z".into());
+        let mut removed = saved.repositories[0].clone();
+        removed.repository.repo = "removed".into();
+        saved.repositories.push(removed);
+        std::fs::write(&state_path, toml::to_string(&saved).unwrap()).unwrap();
+        let (reloaded, _) = load_refresh_state_for_plan(&state_path).unwrap();
+        assert_eq!(reloaded.repositories.len(), 1);
+        assert_eq!(
+            reloaded.repositories[0].last_factual_crawl_at,
+            record.last_factual_crawl_at
+        );
 
         std::fs::remove_dir_all(root).expect("temp dir removed");
     }

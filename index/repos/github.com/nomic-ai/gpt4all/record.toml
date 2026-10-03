@@ -2,17 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/nomic-ai/gpt4all"
-generated_at = "2026-07-06T18:54:32.83853Z"
+generated_at = "2026-09-16T16:27:20.243643Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `gpt4all-chat/pyproject.toml`. Inferred `repo.test` from `gpt4all-chat/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "GPT4All"
@@ -35,6 +35,7 @@ languages = [
     "Objective-C++",
     "CSS",
 ]
+test = "python -m pytest"
 topics = [
     "llm-inference",
     "ai-chat",
@@ -44,6 +45,81 @@ topics = [
 root = "https://docs.gpt4all.io"
 getting_started = "https://docs.gpt4all.io/gpt4all_desktop/quickstart.html#quickstart"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://docs.gpt4all.io/gpt4all_desktop/quickstart.html#quickstart"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.gpt4all.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"GPT4All: Run Local LLMs on Any Device. Open-source and available for commercial use."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://nomic.ai/gpt4all"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"GPT4All"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:27:20.243643Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "gpt4all-chat/pyproject.toml"
+state = "present"
+valueJson = '"python -m pytest"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/nomic-ai/gpt4all.git"
@@ -51,4 +127,4 @@ default_branch = "main"
 fork = false
 head_sha = "b666d16db5aeab8b91aaf7963adcee9c643734d7"
 html_url = "https://github.com/nomic-ai/gpt4all"
-stars = 77388
+stars = 77397

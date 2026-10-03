@@ -1,8 +1,8 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported repo.build from package.json as `npm run build`.
-- Imported repo.test from package.json as `npm test`.
+- Imported repo.build from package.json as `yarn build`.
+- Imported repo.test from package.json as `yarn test`.
 - Imported repo.toolchain.min from package.json as `18` (Node.js).
 - Discovered related relation to github.com/testing-library/react-testing-library from package.json repository.
 - Discovered related relation to github.com/testing-library/testing-library-docs from README cross-link.

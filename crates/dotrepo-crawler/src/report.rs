@@ -153,6 +153,7 @@ pub(crate) enum RefreshPlanStateSource {
 pub(crate) fn refresh_reason_label(reason: RefreshReason) -> &'static str {
     match reason {
         RefreshReason::MissingFactualCrawl => "missing factual crawl",
+        RefreshReason::StaleFactualCrawl => "stale factual crawl",
         RefreshReason::HeadChanged => "head changed",
         RefreshReason::MissingSynthesis => "missing synthesis",
         RefreshReason::PreviousSynthesisFailed => "previous synthesis failed",

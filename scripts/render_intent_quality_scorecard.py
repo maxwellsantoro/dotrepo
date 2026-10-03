@@ -260,7 +260,8 @@ def build_scorecard(
 ) -> dict[str, Any]:
     by_intent: dict[str, dict[str, Any]] = {intent: empty_intent_bucket() for intent in INTENTS}
     by_intent_ecosystem: dict[str, dict[str, dict[str, Any]]] = {
-        intent: {family: empty_intent_bucket() for family in LANGUAGE_FAMILIES} for intent in INTENTS
+        intent: {family: empty_intent_bucket() for family in LANGUAGE_FAMILIES}
+        for intent in INTENTS
     }
     status_counts: Counter[str] = Counter()
     family_counts: Counter[str] = Counter()
@@ -389,8 +390,7 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"- incorrect (mismatch): {_pct(fa.get('mismatchRate'))} "
                 f"(budget {_pct(fa.get('maxIncorrectRateBudget'))})",
                 f"- correct abstention: {_pct(fa.get('correctAbstentionRate'))}",
-                f"- within incorrect budget: "
-                f"{'yes' if fa.get('withinIncorrectBudget') else 'no'}",
+                f"- within incorrect budget: {'yes' if fa.get('withinIncorrectBudget') else 'no'}",
                 "",
             ]
         )
@@ -437,7 +437,9 @@ def main() -> int:
     budgets = {**DEFAULT_MAX_MISSING_RATE, **overrides}
     generated_at = args.generated_at or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     records = load_index_records(Path(args.index_root))
-    factual = load_factual_accuracy(Path(args.factual_accuracy_json) if args.factual_accuracy_json else None)
+    factual = load_factual_accuracy(
+        Path(args.factual_accuracy_json) if args.factual_accuracy_json else None
+    )
     report = build_scorecard(
         records,
         missing_budgets=budgets,

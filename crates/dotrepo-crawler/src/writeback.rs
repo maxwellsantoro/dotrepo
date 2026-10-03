@@ -16,16 +16,45 @@ struct StagedWrite {
     final_path: PathBuf,
 }
 
-/// Apply a crawl writeback plan with multi-artifact durability:
-/// 1. stage every artifact as `*.tmp` (no finals updated yet)
-/// 2. rename all staged files to their finals
-///
-/// This prevents the partial-update case where a new `record.toml` lands and a
-/// later evidence write fails, leaving the index half-updated.
+/// Stage all artifacts, then commit with backups and rollback on I/O errors.
+/// A per-record lock prevents concurrent writers from sharing staging paths.
+/// This is not a crash-atomic filesystem transaction; failed rollback retains
+/// backups for operator recovery instead of discarding the previous data.
 pub(crate) fn apply_writeback_plan(plan: &CrawlWritebackPlan) -> Result<WritebackReport> {
     fs::create_dir_all(&plan.record_root)
         .with_context(|| format!("failed to create {}", plan.record_root.display()))?;
 
+    let lock_path = plan.record_root.join(".writeback.lock");
+    let _lock_file = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&lock_path)
+        .with_context(|| {
+            format!(
+                "writeback already locked or lock unavailable: {}",
+                lock_path.display()
+            )
+        })?;
+    struct LockGuard(PathBuf);
+    impl Drop for LockGuard {
+        fn drop(&mut self) {
+            let _ = fs::remove_file(&self.0);
+        }
+    }
+    let _lock = LockGuard(lock_path);
+    if let Ok(text) = fs::read_to_string(&plan.factual.manifest_path) {
+        if let Ok(manifest) = dotrepo_schema::parse_manifest(&text) {
+            if manifest.record.mode == dotrepo_schema::RecordMode::Native
+                || matches!(
+                    manifest.record.status,
+                    dotrepo_schema::RecordStatus::Canonical
+                        | dotrepo_schema::RecordStatus::Reviewed
+                )
+            {
+                bail!("autonomous writeback cannot replace maintainer-owned or human-reviewed records");
+            }
+        }
+    }
     let mut staged: Vec<StagedWrite> = Vec::new();
 
     let manifest_tmp = plan.factual.manifest_path.with_extension("toml.tmp");
@@ -48,8 +77,11 @@ pub(crate) fn apply_writeback_plan(plan: &CrawlWritebackPlan) -> Result<Writebac
     ) {
         (Some(path), Some(text)) => {
             let evidence_tmp = path.with_extension("md.tmp");
-            stage_write(&evidence_tmp, text, path, &mut staged)
-                .with_context(|| format!("failed to stage evidence {}", path.display()))?;
+            if let Err(error) = stage_write(&evidence_tmp, text, path, &mut staged) {
+                cleanup_staged(&staged);
+                return Err(error)
+                    .with_context(|| format!("failed to stage evidence {}", path.display()));
+            }
         }
         (Some(_), None) => {
             cleanup_staged(&staged);
@@ -104,8 +136,11 @@ fn stage_write(
     final_path: &Path,
     staged: &mut Vec<StagedWrite>,
 ) -> Result<()> {
-    fs::write(tmp_path, contents)
-        .with_context(|| format!("failed to write temp file {}", tmp_path.display()))?;
+    if let Err(error) = fs::write(tmp_path, contents) {
+        let _ = fs::remove_file(tmp_path);
+        return Err(error)
+            .with_context(|| format!("failed to write temp file {}", tmp_path.display()));
+    }
     staged.push(StagedWrite {
         tmp_path: tmp_path.to_path_buf(),
         final_path: final_path.to_path_buf(),
@@ -114,18 +149,73 @@ fn stage_write(
 }
 
 fn commit_staged(staged: &[StagedWrite]) -> Result<()> {
-    for item in staged {
-        if let Err(err) = fs::rename(&item.tmp_path, &item.final_path) {
-            // Best-effort: remove any remaining temps so a retry starts clean.
+    let mut backups: Vec<Option<PathBuf>> = Vec::new();
+    // Preflight every destination and back up every existing file before changing any.
+    let prepare = (|| -> Result<()> {
+        for item in staged {
+            match fs::symlink_metadata(&item.final_path) {
+                Ok(metadata) if metadata.file_type().is_file() => {
+                    let backup = item.tmp_path.with_extension("backup");
+                    // Never overwrite backups left by an interrupted transaction.
+                    let mut output = fs::OpenOptions::new()
+                        .write(true)
+                        .create_new(true)
+                        .open(&backup)?;
+                    backups.push(Some(backup));
+                    let mut input = fs::File::open(&item.final_path)?;
+                    std::io::copy(&mut input, &mut output)?;
+                    output.sync_all()?;
+                }
+                Ok(_) => bail!(
+                    "writeback destination is not a regular file: {}",
+                    item.final_path.display()
+                ),
+                Err(error) if error.kind() == std::io::ErrorKind::NotFound => backups.push(None),
+                Err(error) => return Err(error.into()),
+            }
+        }
+        Ok(())
+    })();
+    if let Err(error) = prepare {
+        for backup in backups.iter().flatten() {
+            let _ = fs::remove_file(backup);
+        }
+        cleanup_staged(staged);
+        return Err(error);
+    }
+    for (committed, item) in staged.iter().enumerate() {
+        if let Err(error) = fs::rename(&item.tmp_path, &item.final_path) {
+            let mut recovery_errors = Vec::new();
+            for index in (0..committed).rev() {
+                let result = match &backups[index] {
+                    Some(backup) => fs::rename(backup, &staged[index].final_path),
+                    None => fs::remove_file(&staged[index].final_path),
+                };
+                if let Err(rollback) = result {
+                    recovery_errors.push(rollback.to_string());
+                }
+            }
             cleanup_staged(staged);
-            return Err(err).with_context(|| {
+            if !recovery_errors.is_empty() {
+                bail!(
+                    "writeback failed: {error}; rollback failed: {}; retained backups: {:?}",
+                    recovery_errors.join("; "),
+                    backups
+                );
+            }
+            for backup in backups.iter().flatten() {
+                let _ = fs::remove_file(backup);
+            }
+            return Err(error).with_context(|| {
                 format!(
-                    "failed to rename {} to {}",
-                    item.tmp_path.display(),
+                    "failed to commit {}; previous artifacts restored",
                     item.final_path.display()
                 )
             });
         }
+    }
+    for backup in backups.iter().flatten() {
+        let _ = fs::remove_file(backup);
     }
     Ok(())
 }
@@ -158,6 +248,46 @@ mod tests {
         ));
         fs::create_dir_all(&path).expect("temp dir");
         path
+    }
+
+    #[test]
+    fn commit_failure_restores_existing_artifacts_and_removes_new_ones() {
+        let root = temp_dir("rollback");
+        let paths = [
+            root.join("record.toml"),
+            root.join("new.md"),
+            root.join("evidence.md"),
+        ];
+        fs::write(&paths[0], "old record").unwrap();
+        fs::write(&paths[2], "old evidence").unwrap();
+        let mut staged = Vec::new();
+        for path in &paths {
+            stage_write(&path.with_extension("tmp"), "new", path, &mut staged).unwrap();
+        }
+        // Fail the last rename after two successful commits.
+        fs::remove_file(&staged[2].tmp_path).unwrap();
+        assert!(commit_staged(&staged).is_err());
+        assert_eq!(fs::read_to_string(&paths[0]).unwrap(), "old record");
+        assert!(!paths[1].exists());
+        assert_eq!(fs::read_to_string(&paths[2]).unwrap(), "old evidence");
+        assert_eq!(fs::read_dir(&root).unwrap().count(), 2);
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn invalid_destination_does_not_change_any_final_artifacts() {
+        let root = temp_dir("preflight");
+        let record = root.join("record.toml");
+        let evidence = root.join("evidence.md");
+        fs::write(&record, "old").unwrap();
+        fs::create_dir(&evidence).unwrap();
+        let mut staged = Vec::new();
+        for path in [&record, &evidence] {
+            stage_write(&path.with_extension("tmp"), "new", path, &mut staged).unwrap();
+        }
+        assert!(commit_staged(&staged).is_err());
+        assert_eq!(fs::read_to_string(record).unwrap(), "old");
+        fs::remove_dir_all(root).unwrap();
     }
 
     #[test]
@@ -229,6 +359,20 @@ mod tests {
             !evidence_path.with_extension("md.tmp").exists(),
             "evidence temp cleaned by rename"
         );
+
+        // Human authority remains untouched even when a public writeback caller
+        // bypasses crawl planning.
+        for status in [
+            dotrepo_schema::RecordStatus::Reviewed,
+            dotrepo_schema::RecordStatus::Canonical,
+        ] {
+            let mut protected = plan.factual.import_plan.manifest.clone();
+            protected.record.status = status;
+            let text = dotrepo_schema::render_manifest(&protected).unwrap();
+            fs::write(&manifest_path, &text).unwrap();
+            assert!(apply_writeback_plan(&plan).is_err());
+            assert_eq!(fs::read_to_string(&manifest_path).unwrap(), text);
+        }
 
         fs::remove_dir_all(index_root).expect("cleanup");
     }

@@ -1,10 +1,10 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported repo.build from Makefile as `make build`.
+- Imported repo.build from web/frpc/package.json as `npm run build`.
 - Imported repo.test from Makefile as `make test`.
 - Imported repo.toolchain.min from go.mod as `1.25.0` (Go).
-- Discovered related relation to github.com/fatedier/frp from README cross-link.
+- Discovered related relation to github.com/sponsors/fatedier from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

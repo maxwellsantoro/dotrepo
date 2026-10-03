@@ -15,6 +15,12 @@ model or adjudication provider, write to `index/repos/*`, or act on findings
 itself — that conversion step is deliberately out of scope for this first
 slice.
 
+Every run also audits all documentation fields for value-bound evidence,
+specific evidence notes, URL identity hints, conflicting documentation origins,
+and targets matching another indexed repository's homepage. The `docsAudit`
+report is complete even with `--sample-size 0`; signals require source inspection
+and never automatically invalidate records or custom documentation domains.
+
 ## Risk-weighting heuristic (read this before trusting the numbers)
 
 This is a heuristic, not a calibrated model. There is no historical
@@ -63,6 +69,8 @@ Per-record risk weight is the sum of:
   rather than being dominated by whichever family happens to be largest.
   This is a deliberately mild, easy-to-explain correction, not a
   proportional-allocation quota system.
+- **Documentation audit signal** (+1.5 before ecosystem dampening): at least
+  one documentation field needs source inspection or more specific evidence.
 
 Given these weights, the sample is drawn via weighted random sampling
 without replacement (repeatedly drawing one record with probability
@@ -91,6 +99,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from language_family import inferred_language_family  # noqa: E402
+from audit_index_docs import audit_cross_record_targets, audit_docs  # noqa: E402
 
 SCHEMA = "dotrepo/audit-sample/v0.1"
 
@@ -221,6 +230,11 @@ def load_records(index_root: Path) -> list[dict[str, Any]]:
             "securityContactPresent": bool(security_contact) and security_contact != "unknown",
             "licensePresent": bool(repo.get("license")),
             "docsPresent": bool(docs.get("root")),
+            "homepageUrl": repo.get("homepage") or "",
+            "docsUrls": {key: value for key, value in docs.items() if isinstance(value, str)},
+            "docsAuditFindings": audit_docs(
+                document, identity, evidence_path.read_text() if evidence_path.is_file() else ""
+            ),
             "topicsPresent": bool(repo.get("topics")),
         }
         entry["completenessCount"] = sum(
@@ -236,6 +250,7 @@ def load_records(index_root: Path) -> list[dict[str, Any]]:
             if present
         )
         records.append(entry)
+    audit_cross_record_targets(records)
     return records
 
 
@@ -300,6 +315,10 @@ def risk_factors_and_weight(
         direction = "high" if delta > 0 else "low"
         factors.append(f"surprising-completeness:{direction}")
 
+    if record.get("docsAuditFindings"):
+        weight += 1.5
+        factors.append("docs-evidence-or-association-needs-audit")
+
     if family_population > 0:
         weight = weight / math.sqrt(family_population)
 
@@ -356,6 +375,11 @@ def build_report(
         "populationSize": len(records),
         "sampleSize": len(sample_sorted),
         "requestedSampleSize": sample_size,
+        "docsAudit": {
+            "recordsScanned": len(records),
+            "recordsFlagged": sum(bool(record["docsAuditFindings"]) for record in records),
+            "findings": [finding for record in records for finding in record["docsAuditFindings"]],
+        },
         "sample": [
             {
                 "identity": record["identity"],
@@ -395,6 +419,21 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"| {record['confidence']} | {record['riskWeight']} | {factors} |"
         )
     lines.append("")
+    lines.extend(
+        [
+            "## Full-index documentation audit",
+            "",
+            f"Scanned {report['docsAudit']['recordsScanned']} records; "
+            f"flagged {report['docsAudit']['recordsFlagged']} for source inspection.",
+            "These are evidence gaps and association signals, not contamination verdicts.",
+            "",
+        ]
+    )
+    for finding in report["docsAudit"]["findings"]:
+        lines.append(
+            f"- `{finding['identity']}` `{finding['field']}`: "
+            f"`{finding['value']}` — {', '.join(finding['signals'])}"
+        )
     lines.append("## Inspection pointers")
     lines.append("")
     for record in report["sample"]:

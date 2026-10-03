@@ -2,9 +2,9 @@
 
 - Imported repository metadata from README.md.
 - Inferred fallback values for `repo.name` and `repo.description` because the imported files did not provide enough structured metadata.
-- Inferred repo.build from Cargo.toml as `cargo build --workspace`.
-- Inferred repo.test from .github/workflows/ci.yaml as `xvfb-run npm test`.
-- Imported repo.toolchain.min from Cargo.toml as `1.95` (Rust).
+- Imported repo.build from editors/code/package.json as `npm run build`.
+- Imported repo.test from editors/code/package.json as `npm test`.
+- Imported repo.toolchain.min from Cargo.toml as `1.98` (Rust).
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Deepened `owners.security_contact` from `README.md` during deterministic escalation.
@@ -18,4 +18,4 @@
 
 ## Auto-promotion
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

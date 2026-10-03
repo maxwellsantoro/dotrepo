@@ -134,7 +134,8 @@ def analyze_assertion(
         manifests[repository] = resolve_dot_path(document, "selection.manifest")
     actual = resolve_dot_path(manifests[repository], assertion["path"])
     expected = assertion["expected"]
-    passed = actual == expected
+    # A missing repository is not evidence for a correctly absent field.
+    passed = isinstance(manifests[repository], dict) and actual == expected
     if passed:
         outcome = "correct"
     elif actual is None:

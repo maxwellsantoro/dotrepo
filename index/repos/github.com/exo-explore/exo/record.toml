@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/exo-explore/exo"
-generated_at = "2026-07-06T18:40:55.512163Z"
+generated_at = "2026-09-16T16:22:51.182525Z"
 
 [record.trust]
 confidence = "high"
@@ -64,11 +64,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "justfile"
+state = "present"
+valueJson = '"just all"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Run frontier AI locally."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/exo-explore/exo"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"exo"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:22:51.182525Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "justfile"
+state = "present"
+valueJson = '"just test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/exo-explore/exo.git"
 default_branch = "main"
 fork = false
-head_sha = "b5375f8cee4368d09e1ce96a56b9f81fb0bc81aa"
+head_sha = "21a54c5ea0230a3bec1e1a786d200126c7e34ec6"
 html_url = "https://github.com/exo-explore/exo"
-stars = 45983
+stars = 47463

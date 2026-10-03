@@ -1,6 +1,8 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
+- Inferred repo.build from QuantConnect.Lean.sln as `dotnet build`.
+- Inferred repo.test from QuantConnect.Lean.sln as `dotnet test`.
 - Discovered related relation to github.com/QuantConnect/Lean from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -11,6 +13,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

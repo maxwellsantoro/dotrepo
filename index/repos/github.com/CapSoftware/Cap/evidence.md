@@ -1,8 +1,8 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported repo.build from package.json as `pnpm build`.
-- Imported repo.test from package.json as `pnpm test`.
+- Imported repo.build from package.json as `bun run build`.
+- Imported repo.test from package.json as `bun run test`.
 - Imported repo.toolchain.min from package.json as `20` (Node.js).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

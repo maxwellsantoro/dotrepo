@@ -4,25 +4,27 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/KeygraphHQ/shannon"
-generated_at = "2026-07-06T18:28:54.448642Z"
+generated_at = "2026-09-16T16:18:45.774845Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
+    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `package.json`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
-name = "Shannon"
-description = "Shannon is an autonomous, white-box AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production."
+name = "shannon"
+description = "Shannon is an AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production."
 homepage = "https://keygraph.io/"
 license = "AGPL-3.0"
 visibility = "public"
 languages = [
     "TypeScript",
-    "JavaScript",
+    "Handlebars",
+    "Typst",
     "Dockerfile",
     "Shell",
 ]
@@ -33,16 +35,106 @@ topics = [
     "security-audit",
     "security-automation",
     "security-tools",
+    "ai-penetration-testing",
+    "ai-security",
+    "cybersecurity",
+    "ethical-hacking",
+    "offensive-security",
+    "pentesting-tools",
+    "red-teaming",
+    "security",
+    "security-testing",
+    "api-security",
+    "appsec",
+    "devsecops",
+    "owasp",
+    "sarif",
+    "ci-cd",
 ]
 
 [docs]
 root = "https://keygraph.io/"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://keygraph.io/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Shannon is an AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://keygraph.io/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"shannon"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:18:45.774845Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
 
 [x.github]
 archived = false
 clone_url = "https://github.com/KeygraphHQ/shannon.git"
 default_branch = "main"
 fork = false
-head_sha = "00e56455dfb0f2626b63e7e9231980cfb48e2fe2"
+head_sha = "25b90b0611f15ab945e051dfee8ae78600d3a002"
 html_url = "https://github.com/KeygraphHQ/shannon"
-stars = 45465
+stars = 48061

@@ -2,23 +2,22 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/yzhao062/pyod"
-generated_at = "2026-07-06T19:07:29.604134Z"
+generated_at = "2026-09-16T16:31:12.405158Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `.github/workflows/testing.yml`, `.github/workflows/testing-cron.yml`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `.github/workflows/testing.yml`. Inferred `repo.test` from `.github/workflows/testing-cron.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = 'Bootstrapped from `SECURITY.md`, `.github/workflows/testing.yml`, `.github/workflows/testing-cron.yml`, and `pyproject.toml`. Filled `repo.name` and `repo.description` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Inferred `repo.build` from `.github/workflows/testing.yml`. Inferred `repo.test` from `.github/workflows/testing-cron.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
 
 [repo]
 name = "pyod"
 description = "A Python library for anomaly detection across tabular, time series, graph, text, image, and audio data. 60+ detectors, benchmark-backed ADEngine orchestration, and an agentic workflow for AI agents."
-homepage = "http://pyod.readthedocs.io"
+homepage = "https://pyod.dev/"
 license = "BSD-2-Clause"
 visibility = "public"
 languages = [
@@ -53,14 +52,94 @@ topics = [
 min = "3.9"
 ecosystem = "Python"
 
+[owners]
+maintainers = []
+security_contact = "unknown"
+
 [docs]
-root = "http://pyod.readthedocs.io"
+root = "https://pyod.dev/"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://pyod.dev/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "high"
+method = "unspecified"
+reason = "explicitly unknown"
+state = "not_found"
+valueJson = '"unknown"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/testing.yml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"A Python library for anomaly detection across tabular, time series, graph, text, image, and audio data. 60+ detectors, benchmark-backed ADEngine orchestration, and an agentic workflow for AI agents."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://pyod.dev/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "medium"
+method = "inferred"
+reason = "fell back to directory name or GitHub API"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"pyod"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:12.405158Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/testing-cron.yml"
+state = "present"
+valueJson = '"pip install pytest"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/yzhao062/pyod.git"
 default_branch = "master"
 fork = false
-head_sha = "d9db50aa09e015e4fdb22d9a7cebe287d671e07b"
+head_sha = "8261bd3e766a34c8f0bf222d5e614ad51a763c4c"
 html_url = "https://github.com/yzhao062/pyod"
-stars = 9905
+stars = 10008

@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/stoplightio/prism"
-generated_at = "2026-07-06T19:03:04.125056Z"
+generated_at = "2026-09-16T16:29:47.754876Z"
 
 [record.trust]
 confidence = "high"
@@ -69,11 +69,87 @@ provenance = [
     "manifest",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"./docs/getting-started/01-installation.md"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://docs.stoplight.io/docs/prism/674b27b261c3c-prism-overview"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@stoplightio/prism-engineers"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Turn any OpenAPI2/3 and Postman Collection file into an API server with mocking, transformations and validations."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://stoplight.io/open-source/prism"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Prism Overview"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:29:47.754876Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/stoplightio/prism.git"
-default_branch = "master"
+default_branch = "main"
 fork = false
-head_sha = "b1d5e928a5704495a5b1819fac8a929b6fb75e53"
+head_sha = "f1bfdfdf22fc4ed428d35d70f10f50c9dbadd56e"
 html_url = "https://github.com/stoplightio/prism"
-stars = 4981
+stars = 5030

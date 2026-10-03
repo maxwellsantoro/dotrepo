@@ -51,16 +51,24 @@ pub(crate) fn infer_package_json_commands(file: &ImportedFile) -> Option<Importe
             .and_then(serde_json::Value::as_str),
     );
 
-    let build = pick_node_script_command(scripts, &["build", "compile", "dist", "bundle"], || {
-        runner.build_command()
-    });
-    let test =
-        pick_node_script_command(scripts, &["test"], || runner.test_command()).filter(|_| {
-            scripts
-                .get("test")
-                .and_then(serde_json::Value::as_str)
-                .is_none_or(|v| !is_placeholder_package_json_test_script(v))
+    let build =
+        pick_node_script_command(scripts, &["build", "compile", "dist", "bundle"], |name| {
+            runner.script_command(name)
         });
+    // A monorepo may only declare test-all. Never turn that into an absent
+    // root test script or a package-local example from its contribution guide.
+    let tests = scripts
+        .iter()
+        .filter(|(_, value)| {
+            value
+                .as_str()
+                .is_some_and(|v| !is_placeholder_package_json_test_script(v))
+        })
+        .map(|(k, v)| (k.clone(), v.clone()))
+        .collect();
+    let test = pick_node_script_command(&tests, &["test", "test-all"], |name| {
+        runner.script_command(name)
+    });
 
     if build.is_none() && test.is_none() {
         return None;
@@ -158,6 +166,35 @@ pub(crate) fn infer_setup_py_commands(file: &ImportedFile) -> Option<ImportedCom
         source_tier: CommandSourceTier::EcosystemDefault,
         build: None,
         test: Some(test),
+    })
+}
+
+/// Classic `tox.ini` is the strongest honest signal for multi-env Python tests.
+pub(crate) fn infer_tox_ini_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let mut has_tox = false;
+    let mut has_testenv = false;
+    for line in file.contents.lines() {
+        let trimmed = line.trim();
+        if !trimmed.starts_with('[') || !trimmed.ends_with(']') {
+            continue;
+        }
+        let section = trimmed[1..trimmed.len() - 1]
+            .split(':')
+            .next()
+            .unwrap_or("")
+            .trim()
+            .to_ascii_lowercase();
+        has_tox |= section == "tox";
+        has_testenv |= section == "testenv" || section.starts_with("testenv");
+    }
+    if !has_tox && !has_testenv {
+        return None;
+    }
+    Some(ImportedCommandCandidate {
+        source_path: file.path.clone(),
+        source_tier: CommandSourceTier::Manifest,
+        build: None,
+        test: Some("tox".into()),
     })
 }
 
@@ -343,6 +380,17 @@ fn has_nonempty_composer_script(value: &serde_json::Value) -> bool {
 }
 
 pub(crate) fn infer_dotnet_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
+    let lower = file.path.to_ascii_lowercase();
+    if lower.ends_with(".sln") {
+        // Solution files are the primary entrypoint for many .NET monorepos.
+        return Some(ImportedCommandCandidate {
+            source_path: file.path.clone(),
+            source_tier: CommandSourceTier::EcosystemDefault,
+            build: Some("dotnet build".into()),
+            test: Some("dotnet test".into()),
+        });
+    }
+
     let document = roxmltree::Document::parse(&file.contents).ok()?;
     if document.root_element().tag_name().name() != "Project" {
         return None;
@@ -354,11 +402,16 @@ pub(crate) fn infer_dotnet_commands(file: &ImportedFile) -> Option<ImportedComma
             && node
                 .text()
                 .is_some_and(|value| value.trim().eq_ignore_ascii_case("true"))
-    });
+    }) || lower.contains(".tests.")
+        || lower.ends_with("tests.csproj")
+        || lower.ends_with("test.csproj");
     Some(ImportedCommandCandidate {
         source_path: file.path.clone(),
         source_tier: CommandSourceTier::EcosystemDefault,
         build: Some("dotnet build".into()),
+        // Non-test projects still use `dotnet test` at solution/repo scope in
+        // common workflows; keep test only when the project itself is a test
+        // assembly so we do not invent coverage for pure libraries.
         test: is_test_project.then(|| "dotnet test".into()),
     })
 }
@@ -499,7 +552,12 @@ pub(crate) fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCom
         })
     };
     let build = pick(&["build", "all", "compile", "dist", "package"], true);
-    let test = pick(&["test", "check", "verify", "spec"], false);
+    // Prefer focused unit-test targets before composite `test` entrypoints that
+    // chain integration suites (e.g. lazygit: unit-test then integration-test-all).
+    let test = pick(
+        &["unit-test", "test-unit", "test", "check", "verify", "spec"],
+        false,
+    );
     if build.is_none() && test.is_none() {
         return None;
     }
@@ -524,7 +582,7 @@ pub(crate) fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCom
         })
     };
     let build = pick(&["build", "all"], true);
-    let test = pick(&["test", "check"], false);
+    let test = pick(&["unit-test", "test-unit", "test", "check"], false);
     if build.is_none() && test.is_none() {
         return None;
     }
@@ -1029,6 +1087,11 @@ pub(crate) fn first_matching_workflow_command(
         ) {
             return None;
         }
+        // Host package installs often list `make` / `build-essential` as packages
+        // (pyenv CI). Those are not repository build commands.
+        if is_host_package_install_command(trimmed) {
+            return None;
+        }
 
         // Direct clean prefixes (preserve previous behavior for simple cases)
         if select_build {
@@ -1070,6 +1133,9 @@ pub(crate) fn first_matching_workflow_command(
                     {
                         return None;
                     }
+                    if prefix == "go test" && is_specialized_go_workflow_test_command(trimmed) {
+                        return None;
+                    }
                     return Some(trimmed.to_string());
                 }
             }
@@ -1105,14 +1171,8 @@ pub(crate) fn first_matching_workflow_command(
             if lower.contains("bazel ") && lower.contains("build") {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("make ")
-                && (lower.contains(" build")
-                    || lower.trim_start().starts_with("make build")
-                    || lower.contains(" all"))
-            {
-                return Some(trimmed.to_string());
-            }
-            if lower.starts_with("make ") && lower.contains("build") {
+            // Token-aware: do not treat Debian package `build-essential` as `make build`.
+            if make_invocation_has_task(&lower, &["build", "all"]) {
                 return Some(trimmed.to_string());
             }
         } else {
@@ -1140,15 +1200,12 @@ pub(crate) fn first_matching_workflow_command(
             {
                 return Some(trimmed.to_string());
             }
-            if lower.contains("make ") && (lower.contains(" test") || lower.contains("check")) {
-                return Some(trimmed.to_string());
-            }
-            if lower.starts_with("make ") && (lower.contains("test") || lower.contains("check")) {
+            if make_invocation_has_task(&lower, &["test", "check"]) {
                 return Some(trimmed.to_string());
             }
             if lower.contains("cargo test")
                 && !is_specialized_cargo_workflow_command(trimmed, "test")
-                || lower.contains("go test")
+                || (lower.contains("go test") && !is_specialized_go_workflow_test_command(trimmed))
                 || lower.contains("pytest")
                 || lower.trim() == "pytest"
             {
@@ -1158,6 +1215,75 @@ pub(crate) fn first_matching_workflow_command(
 
         None
     })
+}
+
+/// CI-only go test lines (coverage dirs, -args passthrough, etc.) are not
+/// developer-facing repo.test values.
+fn is_specialized_go_workflow_test_command(command: &str) -> bool {
+    let lower = command.to_ascii_lowercase();
+    if !lower.contains("go test") {
+        return false;
+    }
+    lower.split_whitespace().any(|token| {
+        matches!(
+            token,
+            "-args"
+                | "-coverprofile"
+                | "-covermode"
+                | "-bench"
+                | "-benchmem"
+                | "-fuzz"
+                | "-fuzztime"
+        ) || token.starts_with("-coverprofile=")
+            || token.starts_with("-covermode=")
+            || token.contains("gocoverdir")
+            || token.starts_with("-test.gocoverdir")
+    })
+}
+
+/// `apt-get install … make build-essential` is a host dependency install, not
+/// a repository build. Also covers `sudo apt …` and sibling package managers.
+fn is_host_package_install_command(command: &str) -> bool {
+    let mut tokens = command.split_whitespace();
+    let mut first = tokens.next().unwrap_or("");
+    if first == "sudo" {
+        first = tokens.next().unwrap_or("");
+    }
+    matches!(
+        first,
+        "apt" | "apt-get" | "yum" | "dnf" | "pacman" | "apk" | "brew" | "choco" | "zypper" | "pkg"
+    )
+}
+
+/// True when a `make` invocation includes one of `tasks` as a whole make target
+/// token (not a package name like `build-essential` or a substring of another
+/// word).
+fn make_invocation_has_task(lower_command: &str, tasks: &[&str]) -> bool {
+    let mut rest = lower_command;
+    while let Some(idx) = rest.find("make") {
+        let after_make = &rest[idx + 4..];
+        // Require a token boundary after `make` (`make build`, not `makefile`).
+        let after_make = match after_make.chars().next() {
+            None => return false,
+            Some(ch) if ch.is_whitespace() => after_make.trim_start(),
+            _ => {
+                rest = after_make;
+                continue;
+            }
+        };
+        for token in after_make.split_whitespace() {
+            // Stop at shell operators if present on the same logical line.
+            if token.starts_with('#') {
+                break;
+            }
+            let task = token.trim_matches(|c| matches!(c, ';' | '&' | '|' | '`' | '\'' | '"'));
+            if tasks.contains(&task) {
+                return true;
+            }
+        }
+        rest = after_make;
+    }
+    false
 }
 
 fn is_specialized_cargo_workflow_command(command: &str, subcommand: &str) -> bool {

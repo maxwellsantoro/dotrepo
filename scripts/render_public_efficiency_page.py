@@ -12,6 +12,8 @@ import html
 import json
 from pathlib import Path
 
+from measure_public_policy_coverage import measure as measure_policy_coverage
+
 from render_public_pages_landing import (
     detect_site_base_path,
     format_timestamp_for_humans,
@@ -66,7 +68,36 @@ def render_intent_rows(intent_summaries: dict) -> str:
     return "\n          ".join(rows)
 
 
-def render_efficiency_page(report: dict, base_path: str) -> str:
+def render_policy_coverage(report: dict | None, base_path: str) -> str:
+    if report is None:
+        return ""
+    rows = []
+    for task, counts in report["tasks"].items():
+        rows.append(
+            f"<tr><td>{html.escape(task)}</td>"
+            f"<td>{counts['presentCount']} ({percent(counts['presenceRate'])})</td>"
+            f"<td>{counts['acceptableCount']} ({percent(counts['acceptableRate'])})</td>"
+            "<td>Not measured</td><td>Not measured</td></tr>"
+        )
+    raw = site_href(base_path, "/benchmarks/policy-coverage.json")
+    return f"""<section class="panel">
+      <h2>Which tasks can use a profile without fallback?</h2>
+      <p>These counts apply the reference consumer to all {report["profileCount"]} indexed
+      primary profiles at export time. Commands require an explicit, high-confidence extraction,
+      a source, and a matching check timestamp. Missing, invalidated, inferred, or weaker
+      assessments require upstream fallback. Candidate commands do not replace primary commands.</p>
+      <div class="table-scroll" role="region" aria-label="Consumer policy coverage" tabindex="0">
+      <table><thead><tr><th>Task</th><th>Values present</th><th>Policy acceptable</th>
+      <th>Independently correct</th><th>Task completed</th></tr></thead>
+      <tbody>{"".join(rows)}</tbody></table></div>
+      <p>Presence, policy acceptance, correctness, and completion are separate outcomes.
+      The last two require independent evidence; this coverage measurement leaves them unknown.
+      An acceptable command is metadata for planning, not permission to execute it.</p>
+      <p><a href="{raw}">Policy, per-repository decisions, and fallback reasons (JSON)</a></p>
+    </section>"""
+
+
+def render_efficiency_page(report: dict, base_path: str, policy_report: dict | None = None) -> str:
     summary = report.get("summary", {})
     generated_at = format_timestamp_for_humans(str(report.get("generatedAt", "unknown")))
     repository_count = summary.get("repositoryCount", 0)
@@ -81,6 +112,7 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
     proxy_mb = float(summary.get("scrapeProxyBytes", 0)) / (1024 * 1024)
     intent_rows = render_intent_rows(summary.get("intentSummaries", {}))
     raw_href = site_href(base_path, "/benchmarks/lookup-efficiency.json")
+    policy_section = render_policy_coverage(policy_report, base_path)
 
     return f"""<!doctype html>
 <html lang="en">
@@ -89,7 +121,7 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='20' fill='%23141414'/%3E%3C/svg%3E">
   <title>Efficiency · dotrepo</title>
-  <meta name="description" content="Measured lookup efficiency of the dotrepo public index versus per-repository scraping: request reduction, hit rates, and honest abstention.">
+  <meta name="description" content="Field presence, consumer-policy acceptance, modeled requests, and measured payload sizes for the dotrepo public index.">
   <style>
     :root {{
       color-scheme: light;
@@ -153,6 +185,8 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
     .panel h2 {{ margin: 0 0 12px; font-size: 1.3rem; }}
     .panel p {{ margin: 0 0 12px; color: var(--muted); line-height: 1.6; max-width: 84ch; }}
     .panel p:last-child {{ margin-bottom: 0; }}
+    .table-scroll {{ overflow-x: auto; }}
+    code {{ overflow-wrap: anywhere; }}
     table {{ width: 100%; border-collapse: collapse; font-size: 0.98rem; }}
     th, td {{ text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }}
     th {{ font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }}
@@ -184,20 +218,18 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
     {render_site_header(base_path, active="efficiency")}
 
     <section class="hero">
-      <h1>Lookup efficiency, measured</h1>
-      <p>Agents that need basic repository facts — what a project is, how to build and
-      test it, where the docs and security policy live — usually re-scrape and re-read
-      each repository from scratch. This benchmark measures the alternative: answering a
-      fixed research workload of {html.escape(str(task_count))} tasks across all
-      {html.escape(str(repository_count))} indexed repositories from the dotrepo public
-      surface alone.</p>
+      <h1>Lookup coverage and modeled efficiency</h1>
+      <p>This deterministic workload checks field presence for {html.escape(str(task_count))}
+      tasks across {html.escape(str(repository_count))} indexed repositories.
+      It measures completeness and payload sizes, and models batch requests.
+      It does not establish factual accuracy, current upstream verification, or end-to-end agent savings.</p>
       <p class="stamp">Report generated {html.escape(generated_at)} · regenerated with each release gate · <a href="{raw_href}"><code>raw JSON</code></a></p>
     </section>
 
     <div class="metrics">
       <div class="metric">
         <div class="metric__value metric__value--accent">{html.escape(request_reduction)}</div>
-        <div class="metric__label">fewer requests: {html.escape(str(dotrepo_requests))} cacheable batch lookups replace {html.escape(str(scrape_requests))} per-repository fetches</div>
+        <div class="metric__label">modeled request reduction: {html.escape(str(dotrepo_requests))} batch lookups versus {html.escape(str(scrape_requests))} local proxy fetches</div>
       </div>
       <div class="metric">
         <div class="metric__value">{html.escape(task_hit_rate)}</div>
@@ -205,45 +237,46 @@ def render_efficiency_page(report: dict, base_path: str) -> str:
       </div>
       <div class="metric">
         <div class="metric__value">{html.escape(field_hit_rate)}</div>
-        <div class="metric__label">field hit rate — individual requested fields resolved to real values</div>
+        <div class="metric__label">field hit rate — individual requested fields contained nonempty values</div>
       </div>
       <div class="metric">
         <div class="metric__value">{html.escape(abstention_rate)}</div>
-        <div class="metric__label">honest abstention — fields left explicitly empty instead of fabricated</div>
+        <div class="metric__label">missing fields — absence alone does not establish correct abstention</div>
       </div>
     </div>
 
+    {policy_section}
+
     <section class="panel">
-      <h2>Per-intent results</h2>
+      <h2>Per-intent presence results</h2>
       <p>The workload asks the same four questions of every repository, chosen before
       looking at which answers exist — so the numbers cannot flatter the index by only
       asking questions it can answer.</p>
+      <div class="table-scroll" role="region" aria-label="Per-intent results" tabindex="0">
       <table>
         <thead>
-          <tr><th>Intent</th><th>Tasks</th><th>Task hit rate</th><th>Field hit rate</th><th>Abstention</th></tr>
+          <tr><th>Intent</th><th>Tasks</th><th>Task hit rate</th><th>Field hit rate</th><th>Missing fields</th></tr>
         </thead>
         <tbody>
           {intent_rows}
         </tbody>
       </table>
+      </div>
     </section>
 
     <section class="panel">
       <h2>What the numbers mean — and what they don't claim</h2>
-      <p>The request reduction is the headline: one agent research pass over the whole
-      index needs {html.escape(str(dotrepo_requests))} cacheable GET requests instead of
-      {html.escape(str(scrape_requests))}+ per-repository fetches, before counting the
-      many requests a real scrape spends on READMEs, manifests, and CI files per
-      repository.</p>
-      <p>The payload comparison is deliberately conservative. The compact dotrepo
-      payload for the full workload is {dotrepo_mb:.1f}&nbsp;MB; the scrape proxy it is
-      compared against is {proxy_mb:.1f}&nbsp;MB of already-extracted local records —
-      not the far larger cost of fetching and model-reading raw repository material.
-      dotrepo's structured payload includes trust, provenance, evidence pointers, and
-      freshness context that raw scraping does not produce at any cost.</p>
-      <p>Abstention is counted as a feature, not padded over: when the index does not
-      know a build command or security contact, it says so. A fabricated answer would
-      score better here and be worse everywhere it matters.</p>
+      <p>The request model estimates {html.escape(str(dotrepo_requests))} batch GETs
+      versus {html.escape(str(scrape_requests))} local record/evidence file fetches.
+      It excludes source fallback, refresh work, cache behavior, retries, and model inference.</p>
+      <p>The dotrepo payload is {dotrepo_mb:.1f}&nbsp;MB; the local normalized proxy is
+      {proxy_mb:.1f}&nbsp;MB. These are measured artifact sizes, not live GitHub traffic.
+      Evidence and freshness metadata have a payload cost; other extraction systems can preserve them too.</p>
+      <p>Correct abstention and factual accuracy require independently sourced expected answers.
+      The <a href="https://github.com/maxwellsantoro/dotrepo/tree/main/benchmarks/head-to-head">head-to-head benchmark</a>
+      retains favorable and unfavorable results. Historical fixes do not establish current out-of-sample accuracy.</p>
+      <p>Actual task cost must include fallback requests, source bytes, latency, model usage,
+      and an allocated share of index maintenance. No measured end-to-end savings claim is made here.</p>
     </section>
 
     <section class="panel">
@@ -295,7 +328,15 @@ def main() -> int:
             "regenerate them locally with scripts/measure_public_lookup_efficiency.py"
         )
 
-    write_text(input_dir / "efficiency" / "index.html", render_efficiency_page(report, base_path))
+    policy_report = measure_policy_coverage(input_dir)
+    write_text(
+        input_dir / "efficiency" / "index.html",
+        render_efficiency_page(report, base_path, policy_report),
+    )
+    write_text(
+        input_dir / "benchmarks" / "policy-coverage.json",
+        json.dumps(policy_report, indent=2) + "\n",
+    )
     write_text(
         input_dir / "benchmarks" / "lookup-efficiency.json",
         json.dumps(report, indent=2, sort_keys=True) + "\n",

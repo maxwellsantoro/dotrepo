@@ -1,9 +1,12 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
+- Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.name` to `react-native` from `GitHub API` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

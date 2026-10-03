@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/kortix-ai/suna"
-generated_at = "2026-07-06T18:50:22.921569Z"
+generated_at = "2026-09-16T16:25:54.40472Z"
 
 [record.trust]
 confidence = "high"
@@ -16,28 +16,26 @@ notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `package.json`
 
 [repo]
 name = "suna"
-description = "The Company AI Command Center"
+description = "The open-source AI Management System"
 homepage = "https://www.kortix.com"
 license = "NOASSERTION"
 visibility = "public"
 languages = [
     "TypeScript",
-    "Python",
-    "Shell",
     "MDX",
-    "HCL",
-    "PLpgSQL",
     "JavaScript",
+    "Shell",
+    "PLpgSQL",
+    "HCL",
+    "Python",
     "CSS",
-    "HTML",
     "Dockerfile",
-    "Go Template",
-    "TeX",
+    "HTML",
+    "Go",
     "Kotlin",
-    "Makefile",
     "Ruby",
     "Swift",
-    "Go",
+    "Elixir",
     "C",
 ]
 build = "pnpm build"
@@ -54,11 +52,87 @@ maintainers = ["@markokraemer"]
 [docs]
 root = "https://kortix.com/docs"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://kortix.com/docs"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The open-source AI Management System"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.kortix.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"suna"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:25:54.40472Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/kortix-ai/suna.git"
 default_branch = "main"
 fork = false
-head_sha = "eb23048abd572087ccf8b90a39349ebca0176201"
+head_sha = "fd612fe8b7214593d9bab3227ff9499e2c41de26"
 html_url = "https://github.com/kortix-ai/suna"
-stars = 19920
+stars = 20210

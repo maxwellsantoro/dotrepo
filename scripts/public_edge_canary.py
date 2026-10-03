@@ -395,6 +395,20 @@ def check_dotrepo(origin: str, sample_archived_snapshot: bool) -> dict[str, Any]
     }
 
 
+def validate_pagedigest_homepage(homepage: str) -> None:
+    """Assert the live homepage still advertises the protocol surface we ship against."""
+    require(
+        "/.well-known/pagedigest.json" in homepage,
+        "pagedigest homepage is missing the manifest path",
+    )
+    require(
+        "version 1" in homepage.lower(),
+        "pagedigest homepage is missing the version 1 protocol claim",
+    )
+    for claim in ("Rust generator", "Python consumer"):
+        require(claim in homepage, f"pagedigest homepage is missing current claim: {claim}")
+
+
 def check_pagedigest(origin: str, repo_root: Path | None) -> dict[str, Any]:
     homepage = fetch(origin, "/").decode("utf-8")
     manifest = fetch_json(origin, "/.well-known/pagedigest.json")
@@ -403,8 +417,7 @@ def check_pagedigest(origin: str, repo_root: Path | None) -> dict[str, Any]:
         isinstance(manifest.get("site_rev"), int) and manifest["site_rev"] > 0,
         "pagedigest.org site_rev is invalid",
     )
-    for claim in ("Version 1, release candidate", "Rust generator", "Python consumer"):
-        require(claim in homepage, f"pagedigest homepage is missing current claim: {claim}")
+    validate_pagedigest_homepage(homepage)
 
     if repo_root is not None:
         local_manifest = json.loads((repo_root / "site/.well-known/pagedigest.json").read_text())

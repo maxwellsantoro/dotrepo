@@ -31,8 +31,8 @@ const README_CANDIDATES: &[&str] = &[
 // dotrepo-core already knows how to parse (Maven, Gradle, Composer, Mix,
 // Rebar, CMake presets, Makefile, justfile, Rakefile, setup.py/setup.cfg)
 // was silently starved of the one file it needed. CONTRIBUTING files feed
-// doc-declared command extraction. `.csproj` is handled separately in
-// `fetch_root_csproj_file` because its filename is not fixed.
+// doc-declared command extraction. `.csproj` / `.sln` are handled in
+// `fetch_dotnet_manifest_files` because their filenames are not fixed.
 const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
     "Cargo.toml",
     "CONTRIBUTING.md",
@@ -42,6 +42,7 @@ const SUPPLEMENTAL_ROOT_FILES: &[&str] = &[
     "go.mod",
     "setup.py",
     "setup.cfg",
+    "tox.ini",
     "pom.xml",
     "build.gradle",
     "build.gradle.kts",
@@ -82,6 +83,7 @@ pub(crate) trait GitHubClient {
         &self,
         repository: &RepositoryRef,
         default_branch: &str,
+        languages: &[String],
     ) -> Result<ConventionalRepositoryFiles>;
 
     /// Cumulative network requests/bytes observed while servicing this
@@ -372,18 +374,225 @@ impl HttpGitHubClient {
         Ok(files)
     }
 
-    /// `.csproj` project files carry an arbitrary, repository-specific name
-    /// (unlike `Cargo.toml` or `go.mod`), so finding one requires a root
-    /// directory listing rather than a fixed-path fetch. Mirrors
-    /// `fetch_workflow_files`'s listing pattern; only the first (by sorted
-    /// name) root-level `.csproj` is materialized, matching
-    /// `dotrepo-core::import::mod::load_first_root_file_with_extension`'s
-    /// single-file expectation.
-    fn fetch_root_csproj_file(
+    /// Nested `Cargo.toml` for Rust monorepos when the workspace lives under
+    /// `*-rs/`, `rust/`, or `crates/` rather than the repository root.
+    fn fetch_rust_manifest_files(
         &self,
         repository: &RepositoryRef,
         default_branch: &str,
-    ) -> Result<Option<RepositoryTextFile>> {
+        languages: &[String],
+    ) -> Result<Vec<RepositoryTextFile>> {
+        if !rust_is_primary_language(languages) {
+            return Ok(Vec::new());
+        }
+        // Root Cargo.toml already in SUPPLEMENTAL_ROOT_FILES.
+        if self
+            .fetch_optional_repository_file(repository, default_branch, "Cargo.toml")?
+            .is_some()
+        {
+            return Ok(Vec::new());
+        }
+
+        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
+        tree_url.query_pairs_mut().append_pair("recursive", "1");
+        let tree = self
+            .get_optional_json::<GitTreeResponse>(tree_url)?
+            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+
+        let mut paths: Vec<String> = tree
+            .tree
+            .iter()
+            .filter(|entry| entry.entry_type == "blob")
+            .map(|entry| entry.path.clone())
+            .filter(|path| {
+                let lower = path.to_ascii_lowercase();
+                lower.ends_with("cargo.toml")
+                    && path.matches('/').count() <= 2
+                    && !lower.contains("/examples/")
+                    && !lower.contains("/benches/")
+                    && !lower.contains("/tests/")
+                    && !lower.contains("/fuzz/")
+                    && !lower.contains("/sdk/")
+                    && !lower.starts_with("sdk/")
+            })
+            .collect();
+        paths.sort_by(|left, right| {
+            cargo_toml_path_preference(left)
+                .cmp(&cargo_toml_path_preference(right))
+                .then_with(|| left.cmp(right))
+        });
+        paths.truncate(4);
+
+        let mut files = Vec::new();
+        for path in paths {
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
+    }
+
+    /// Nested Python manifests (`python/setup.py`, nested `pyproject.toml`) when
+    /// Python is a primary language and root files do not already provide commands.
+    fn fetch_python_manifest_files(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+        languages: &[String],
+    ) -> Result<Vec<RepositoryTextFile>> {
+        if !python_is_primary_language(languages) {
+            return Ok(Vec::new());
+        }
+
+        // Root pyproject/setup/tox already in SUPPLEMENTAL_ROOT_FILES.
+        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
+        tree_url.query_pairs_mut().append_pair("recursive", "1");
+        let tree = self
+            .get_optional_json::<GitTreeResponse>(tree_url)?
+            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+
+        let mut paths: Vec<String> = tree
+            .tree
+            .iter()
+            .filter(|entry| entry.entry_type == "blob")
+            .map(|entry| entry.path.clone())
+            .filter(|path| {
+                let lower = path.to_ascii_lowercase();
+                let name = path.rsplit('/').next().unwrap_or(path);
+                matches!(
+                    name,
+                    "pyproject.toml" | "setup.py" | "setup.cfg" | "tox.ini"
+                ) && path.matches('/').count() <= 2
+                    && !lower.contains("/examples/")
+                    && !lower.contains("/samples/")
+                    && !lower.contains("/benchmarks/")
+                    && !lower.contains("/tests/")
+                    && !lower.contains("/release/")
+                    && !lower.starts_with("release/")
+                    && !lower.contains("/packaging/")
+                    && !lower.contains("/sdk/")
+                    && !lower.contains("-sdk/")
+                    && !lower.contains("/sdks/")
+                    && !lower.starts_with("sdk/")
+            })
+            .collect();
+        paths.sort_by(|left, right| {
+            python_manifest_path_preference(left)
+                .cmp(&python_manifest_path_preference(right))
+                .then_with(|| left.cmp(right))
+        });
+        paths.truncate(5);
+
+        let mut files = Vec::new();
+        for path in paths {
+            if matches!(
+                path.as_str(),
+                "pyproject.toml" | "setup.py" | "setup.cfg" | "tox.ini"
+            ) {
+                continue;
+            }
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
+    }
+
+    /// Nested `package.json` files for JS/TS monorepos when root scripts are
+    /// absent or incomplete. Selection prefers apps/api, server, web over SDK
+    /// and example packages (mirrors `load_best_package_json` ranking).
+    fn fetch_node_manifest_files(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+        languages: &[String],
+    ) -> Result<Vec<RepositoryTextFile>> {
+        if !js_ts_is_primary_language(languages) {
+            return Ok(Vec::new());
+        }
+
+        // Root package.json is already fetched via SUPPLEMENTAL_ROOT_FILES.
+        // Only tree-walk when monorepo layout is likely.
+        let monorepo_markers = [
+            "pnpm-workspace.yaml",
+            "pnpm-workspace.yml",
+            "lerna.json",
+            "nx.json",
+            "turbo.json",
+            "rush.json",
+        ];
+        let mut has_marker = false;
+        for marker in monorepo_markers {
+            if self
+                .fetch_optional_repository_file(repository, default_branch, marker)?
+                .is_some()
+            {
+                has_marker = true;
+                break;
+            }
+        }
+
+        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
+        tree_url.query_pairs_mut().append_pair("recursive", "1");
+        let tree = self
+            .get_optional_json::<GitTreeResponse>(tree_url)?
+            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+        let package_paths: Vec<String> = tree
+            .tree
+            .iter()
+            .filter(|entry| entry.entry_type == "blob")
+            .map(|entry| entry.path.clone())
+            .filter(|path| path.ends_with("package.json"))
+            .collect();
+        if package_paths.is_empty() {
+            return Ok(Vec::new());
+        }
+        // Nested packages only when a monorepo marker exists or multiple package.json files.
+        if !has_marker && package_paths.len() <= 1 {
+            return Ok(Vec::new());
+        }
+
+        let mut ranked = package_paths;
+        ranked.sort_by(|left, right| {
+            node_package_json_path_preference(left)
+                .cmp(&node_package_json_path_preference(right))
+                .then_with(|| left.cmp(right))
+        });
+        ranked.truncate(6);
+
+        let mut files = Vec::new();
+        for path in ranked {
+            if path == "package.json" {
+                continue; // already materialized via supplemental list
+            }
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
+    }
+
+    /// Materialize .NET entrypoints when C#/F# is a primary language signal.
+    /// Root `.sln` / `.csproj` always win; nested tree walks run only when
+    /// .NET is among the top languages so secondary SDK projects (e.g.
+    /// `apps/dot-net-sdk` in a TypeScript monorepo) do not become `repo.build`.
+    fn fetch_dotnet_manifest_files(
+        &self,
+        repository: &RepositoryRef,
+        default_branch: &str,
+        languages: &[String],
+    ) -> Result<Vec<RepositoryTextFile>> {
+        if !dotnet_language_signal(languages) {
+            return Ok(Vec::new());
+        }
+
+        let mut files = Vec::new();
         let mut root_contents_url = self.api_url(repository, &["contents"])?;
         root_contents_url
             .query_pairs_mut()
@@ -392,10 +601,39 @@ impl HttpGitHubClient {
             .get_optional_json::<Vec<ContentsEntry>>(root_contents_url)?
             .unwrap_or_default();
 
-        match first_root_csproj_path(entries) {
-            Some(path) => self.fetch_optional_repository_file(repository, default_branch, &path),
-            None => Ok(None),
+        for path in first_root_paths_with_suffixes(&entries, &[".sln", ".csproj"], 4) {
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
         }
+
+        if files.iter().any(|file| {
+            let lower = file.relative_path.to_string_lossy().to_ascii_lowercase();
+            lower.ends_with(".csproj") || lower.ends_with(".sln")
+        }) {
+            return Ok(files);
+        }
+
+        // Nested monorepo walk only when .NET ranks in the top languages.
+        if !dotnet_is_primary_language(languages) {
+            return Ok(files);
+        }
+
+        let mut tree_url = self.api_url(repository, &["git", "trees", default_branch])?;
+        tree_url.query_pairs_mut().append_pair("recursive", "1");
+        let tree = self
+            .get_optional_json::<GitTreeResponse>(tree_url)?
+            .unwrap_or(GitTreeResponse { tree: Vec::new() });
+        for path in select_dotnet_paths_from_tree(&tree.tree, 4) {
+            if let Some(file) =
+                self.fetch_optional_repository_file(repository, default_branch, &path)?
+            {
+                files.push(file);
+            }
+        }
+        Ok(files)
     }
 
     fn send_with_retry(&self, url: Url) -> Result<Response> {
@@ -540,6 +778,7 @@ impl GitHubClient for HttpGitHubClient {
         &self,
         repository: &RepositoryRef,
         default_branch: &str,
+        languages: &[String],
     ) -> Result<ConventionalRepositoryFiles> {
         let mut extra_files = Vec::new();
         for relative_path in SUPPLEMENTAL_ROOT_FILES {
@@ -550,7 +789,26 @@ impl GitHubClient for HttpGitHubClient {
             }
         }
         extra_files.extend(self.fetch_workflow_files(repository, default_branch)?);
-        extra_files.extend(self.fetch_root_csproj_file(repository, default_branch)?);
+        extra_files.extend(self.fetch_node_manifest_files(
+            repository,
+            default_branch,
+            languages,
+        )?);
+        extra_files.extend(self.fetch_python_manifest_files(
+            repository,
+            default_branch,
+            languages,
+        )?);
+        extra_files.extend(self.fetch_rust_manifest_files(
+            repository,
+            default_branch,
+            languages,
+        )?);
+        extra_files.extend(self.fetch_dotnet_manifest_files(
+            repository,
+            default_branch,
+            languages,
+        )?);
 
         Ok(ConventionalRepositoryFiles {
             readme: self.fetch_first_available_file(
@@ -786,19 +1044,236 @@ struct ContentsEntry {
     path: String,
 }
 
-/// Selects the first (by sorted path) root-level `.csproj` file entry, if
-/// any, matching `dotrepo-core::import::mod::load_first_root_file_with_extension`'s
-/// single-file expectation. `.csproj` filenames are repository-specific, so
-/// finding one requires listing root contents rather than a fixed-path fetch.
-fn first_root_csproj_path(entries: Vec<ContentsEntry>) -> Option<String> {
-    let mut csproj_paths: Vec<String> = entries
-        .into_iter()
+#[derive(Debug, Deserialize)]
+struct GitTreeResponse {
+    #[serde(default)]
+    tree: Vec<GitTreeEntry>,
+}
+
+#[derive(Debug, Deserialize)]
+struct GitTreeEntry {
+    path: String,
+    #[serde(rename = "type")]
+    entry_type: String,
+}
+
+/// Selects root-level paths ending with any of `suffixes`, sorted, capped.
+fn first_root_paths_with_suffixes(
+    entries: &[ContentsEntry],
+    suffixes: &[&str],
+    limit: usize,
+) -> Vec<String> {
+    let mut paths: Vec<String> = entries
+        .iter()
         .filter(|entry| entry.entry_type == "file")
-        .filter(|entry| entry.path.to_ascii_lowercase().ends_with(".csproj"))
-        .map(|entry| entry.path)
+        .map(|entry| entry.path.clone())
+        .filter(|path| {
+            let lower = path.to_ascii_lowercase();
+            suffixes.iter().any(|suffix| lower.ends_with(suffix))
+        })
         .collect();
-    csproj_paths.sort();
-    csproj_paths.into_iter().next()
+    paths.sort();
+    paths.truncate(limit);
+    paths
+}
+
+/// Prefer non-test `.sln` / `.csproj` blobs from a recursive git tree.
+fn select_dotnet_paths_from_tree(entries: &[GitTreeEntry], limit: usize) -> Vec<String> {
+    let mut paths: Vec<String> = entries
+        .iter()
+        .filter(|entry| entry.entry_type == "blob")
+        .map(|entry| entry.path.clone())
+        .filter(|path| {
+            let lower = path.to_ascii_lowercase();
+            (lower.ends_with(".csproj") || lower.ends_with(".sln"))
+                && !lower.contains("/obj/")
+                && !lower.contains("/bin/")
+                // Secondary SDK / sample trees in polyglot monorepos.
+                && !lower.contains("/sdk/")
+                && !lower.contains("-sdk/")
+                && !lower.contains("dot-net-sdk")
+                && !lower.contains("/bindings/")
+                && !lower.contains("/examples/")
+                && !lower.contains("/samples/")
+                && path.matches('/').count() <= 3
+        })
+        .collect();
+    paths.sort_by(|left, right| {
+        let left_test = is_likely_test_dotnet_path(left);
+        let right_test = is_likely_test_dotnet_path(right);
+        left_test.cmp(&right_test).then_with(|| left.cmp(right))
+    });
+    paths.truncate(limit);
+    paths
+}
+
+fn is_likely_test_dotnet_path(path: &str) -> bool {
+    let lower = path.to_ascii_lowercase();
+    lower.contains(".tests.")
+        || lower.contains(".test.")
+        || lower.contains("/tests/")
+        || lower.contains("/test/")
+        || lower.ends_with("tests.csproj")
+        || lower.ends_with("test.csproj")
+}
+
+fn is_dotnet_language(name: &str) -> bool {
+    matches!(name, "C#" | "F#" | "Visual Basic")
+}
+
+/// Any .NET language signal in the repository language list.
+fn dotnet_language_signal(languages: &[String]) -> bool {
+    languages.iter().any(|lang| is_dotnet_language(lang))
+}
+
+/// .NET ranks among the top languages (by GitHub byte-count order).
+fn dotnet_is_primary_language(languages: &[String]) -> bool {
+    languages
+        .iter()
+        .take(3)
+        .any(|lang| is_dotnet_language(lang))
+}
+
+fn is_js_ts_language(name: &str) -> bool {
+    matches!(
+        name,
+        "JavaScript" | "TypeScript" | "Vue" | "Svelte" | "Astro"
+    )
+}
+
+fn js_ts_is_primary_language(languages: &[String]) -> bool {
+    languages.iter().take(3).any(|lang| is_js_ts_language(lang))
+}
+
+fn python_is_primary_language(languages: &[String]) -> bool {
+    languages
+        .iter()
+        .take(3)
+        .any(|lang| lang == "Python" || lang == "Jupyter Notebook")
+}
+
+fn rust_is_primary_language(languages: &[String]) -> bool {
+    languages.iter().take(3).any(|lang| lang == "Rust")
+}
+
+fn cargo_toml_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "cargo.toml" {
+        return 0;
+    }
+    if lower.contains("/examples/")
+        || lower.contains("/benches/")
+        || lower.contains("/tests/")
+        || lower.contains("/fuzz/")
+    {
+        return 200;
+    }
+    if lower.contains("/sdk/") || lower.contains("-sdk/") || lower.starts_with("sdk/") {
+        return 170;
+    }
+    if lower.ends_with("-rs/cargo.toml")
+        || lower.contains("/rust/")
+        || lower.starts_with("rust/")
+        || lower.contains("/crates/")
+        || lower.starts_with("crates/")
+    {
+        return 10;
+    }
+    50
+}
+
+fn python_manifest_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if matches!(
+        lower.as_str(),
+        "pyproject.toml" | "setup.py" | "setup.cfg" | "tox.ini"
+    ) {
+        return 0;
+    }
+    if lower.contains("/examples/") || lower.contains("/samples/") || lower.contains("/benchmarks/")
+    {
+        return 200;
+    }
+    if lower.contains("/sdk/")
+        || lower.contains("-sdk/")
+        || lower.contains("/sdks/")
+        || lower.starts_with("sdk/")
+    {
+        return 170;
+    }
+    if lower.starts_with("release/")
+        || lower.contains("/release/")
+        || lower.contains("/packaging/")
+        || lower.contains("/ci/")
+    {
+        return 160;
+    }
+    if lower == "python/pyproject.toml"
+        || lower == "python/setup.py"
+        || lower == "python/setup.cfg"
+        || lower.starts_with("python/")
+    {
+        return 10;
+    }
+    if lower.starts_with("src/") {
+        return 20;
+    }
+    if lower.contains("/packages/") {
+        return 30;
+    }
+    50
+}
+
+/// Lower is better; keep in sync with core `package_json_path_preference`.
+fn node_package_json_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "package.json" {
+        return 0;
+    }
+    if lower.contains("/examples/")
+        || lower.contains("/samples/")
+        || lower.contains("/fixtures/")
+        || lower.contains("/example/")
+    {
+        return 200;
+    }
+    if lower.contains("test-suite")
+        || lower.contains("test-site")
+        || lower.contains("/tests/")
+        || lower.contains("/__tests__/")
+        || lower.contains("/e2e/")
+    {
+        return 180;
+    }
+    if lower.contains("/sdk/")
+        || lower.contains("-sdk/")
+        || lower.contains("/js-sdk/")
+        || lower.contains("/python-sdk/")
+    {
+        return 150;
+    }
+    if lower.contains("/native/") {
+        return 140;
+    }
+    if lower == "server/package.json" || lower.ends_with("/server/package.json") {
+        return 10;
+    }
+    if lower == "api/package.json"
+        || lower.ends_with("/api/package.json")
+        || lower.contains("/apps/api/")
+    {
+        return 11;
+    }
+    if lower == "web/package.json" || lower.ends_with("/web/package.json") {
+        return 12;
+    }
+    if lower.contains("/apps/") {
+        return 20;
+    }
+    if lower.contains("/packages/") {
+        return 25;
+    }
+    50
 }
 
 #[cfg(test)]
@@ -843,7 +1318,7 @@ mod tests {
     }
 
     #[test]
-    fn first_root_csproj_path_picks_first_by_sorted_name() {
+    fn first_root_paths_with_suffixes_picks_sorted_csproj_and_sln() {
         let entries = vec![
             ContentsEntry {
                 entry_type: "dir".into(),
@@ -859,35 +1334,87 @@ mod tests {
             },
             ContentsEntry {
                 entry_type: "file".into(),
+                path: "App.sln".into(),
+            },
+            ContentsEntry {
+                entry_type: "file".into(),
                 path: "README.md".into(),
             },
         ];
-
         assert_eq!(
-            first_root_csproj_path(entries),
-            Some("Alpha.csproj".to_string())
+            first_root_paths_with_suffixes(&entries, &[".csproj", ".sln"], 4),
+            vec![
+                "Alpha.csproj".to_string(),
+                "App.sln".to_string(),
+                "Zeta.csproj".to_string()
+            ]
         );
     }
 
     #[test]
-    fn first_root_csproj_path_ignores_directories_and_non_csproj_files() {
-        let entries = vec![
-            ContentsEntry {
-                entry_type: "dir".into(),
-                path: "Project.csproj".into(),
+    fn select_dotnet_paths_from_tree_prefers_non_test_projects() {
+        let tree = vec![
+            GitTreeEntry {
+                path: "tests/Unit.Tests.csproj".into(),
+                entry_type: "blob".into(),
             },
-            ContentsEntry {
-                entry_type: "file".into(),
-                path: "notes.txt".into(),
+            GitTreeEntry {
+                path: "src/Lib/Lib.csproj".into(),
+                entry_type: "blob".into(),
+            },
+            GitTreeEntry {
+                path: "App.sln".into(),
+                entry_type: "blob".into(),
+            },
+            GitTreeEntry {
+                path: "apps/dot-net-sdk/Firecrawl/Firecrawl.csproj".into(),
+                entry_type: "blob".into(),
             },
         ];
-
-        assert_eq!(first_root_csproj_path(entries), None);
+        assert_eq!(
+            select_dotnet_paths_from_tree(&tree, 2),
+            vec!["App.sln".to_string(), "src/Lib/Lib.csproj".to_string()]
+        );
+        // SDK trees are excluded entirely (polyglot monorepo guard).
+        assert!(!select_dotnet_paths_from_tree(&tree, 10)
+            .iter()
+            .any(|path| path.contains("dot-net-sdk")));
     }
 
     #[test]
-    fn first_root_csproj_path_returns_none_for_empty_listing() {
-        assert_eq!(first_root_csproj_path(Vec::new()), None);
+    fn node_package_json_path_preference_ranks_apps_over_sdks() {
+        assert!(
+            node_package_json_path_preference("server/package.json")
+                < node_package_json_path_preference("apps/js-sdk/package.json")
+        );
+        assert!(
+            node_package_json_path_preference("apps/api/package.json")
+                < node_package_json_path_preference("examples/demo/package.json")
+        );
+        assert!(js_ts_is_primary_language(&[
+            "TypeScript".into(),
+            "Python".into()
+        ]));
+        assert!(!js_ts_is_primary_language(&["Python".into(), "Go".into()]));
+    }
+
+    #[test]
+    fn dotnet_primary_language_requires_top_rank() {
+        assert!(dotnet_is_primary_language(&[
+            "C#".into(),
+            "PowerShell".into()
+        ]));
+        assert!(!dotnet_is_primary_language(&[
+            "TypeScript".into(),
+            "Python".into(),
+            "Rust".into(),
+            "C#".into()
+        ]));
+        assert!(dotnet_language_signal(&["TypeScript".into(), "C#".into()]));
+        assert!(!dotnet_language_signal(&[
+            "TypeScript".into(),
+            "Python".into()
+        ]));
     }
 
     #[test]
@@ -950,6 +1477,7 @@ mod tests {
             "go.mod",
             "setup.py",
             "setup.cfg",
+            "tox.ini",
             "pom.xml",
             "build.gradle",
             "build.gradle.kts",
@@ -1016,6 +1544,7 @@ mod tests {
             &self,
             _repository: &RepositoryRef,
             _default_branch: &str,
+            _languages: &[String],
         ) -> Result<ConventionalRepositoryFiles> {
             unreachable!("not used in refresh candidate planning tests")
         }

@@ -10,6 +10,8 @@ import importlib.util
 import io
 import json
 import sys
+
+import pytest
 from pathlib import Path
 
 CLIENT = (
@@ -24,6 +26,44 @@ consumer = importlib.util.module_from_spec(SPEC)
 # dataclasses requires the module to be present in sys.modules during class body exec
 sys.modules[SPEC.name] = consumer
 SPEC.loader.exec_module(consumer)
+
+
+def test_task_policy_rejects_fresh_export_with_stale_record_and_allows_explicit_fields():
+    from datetime import datetime, timezone
+
+    payload = {
+        "apiVersion": "v0",
+        "identity": {"host": "github.com", "owner": "example", "repo": "test"},
+        "record": {"generatedAt": "2026-07-06T00:00:00Z"},
+        "freshness": {"generatedAt": "2026-09-16T00:00:00Z"},
+        "purpose": "An example",
+        "execution": {"build": "cargo build"},
+        "fieldEvidence": {
+            "repo.build": {
+                "state": "present",
+                "method": "extracted",
+                "confidence": "high",
+                "source": "Cargo.toml",
+                "checkedAt": "2026-07-06T00:00:00Z",
+            }
+        },
+        "trust": {"confidence": "high", "selectedStatus": "verified"},
+    }
+    result = consumer.interpret_http_response(
+        identity="github.com/example/test", status_code=200, body=json.dumps(payload)
+    )
+    now = datetime(2026, 9, 16, tzinfo=timezone.utc)
+    consumer.evaluate_for_task(result, now=now, required_fields=["repo.build", "repo.test"])
+    assert result.hit and not result.usable
+    assert result.fallback_reasons == ["stale-record", "missing:repo.test"]
+    result.profile["record"]["generatedAt"] = "2026-09-15T00:00:00Z"
+    result.profile["fieldEvidence"]["repo.build"]["checkedAt"] = "2026-09-15T00:00:00Z"
+    consumer.evaluate_for_task(result, now=now, required_fields=["repo.build"])
+    assert result.usable
+    result.profile["fieldEvidence"] = {"repo.build": {"state": "suspect"}}
+    consumer.evaluate_for_task(result, now=now, required_fields=["repo.build"])
+    assert "unresolved:repo.build" in result.fallback_reasons
+    assert not result.usable
 
 
 class _FakeResponse:
@@ -82,6 +122,7 @@ def test_parse_repository_identity_from_url_and_short_form() -> None:
 def test_hit_surfaces_trust_freshness_and_honest_missing_fields() -> None:
     # Real public profile.json shape (subset)
     payload = {
+        "apiVersion": "v0",
         "freshness": {
             "generatedAt": "2026-07-08T00:00:00Z",
             "snapshotDigest": "abc",
@@ -192,3 +233,128 @@ def test_main_writes_miss_log_and_json(tmp_path: Path) -> None:
         assert len(calls) == 2
     finally:
         consumer.fetch_profile = original  # type: ignore[assignment]
+
+
+def test_inferred_commands_require_source_fallback():
+    from datetime import datetime, timezone
+
+    payload = {
+        "apiVersion": "v0",
+        "identity": {"host": "github.com", "owner": "example", "repo": "demo"},
+        "record": {"generatedAt": "2026-09-16T00:00:00Z"},
+        "execution": {"test": "./gradlew test"},
+        "fieldEvidence": {"repo.test": {"state": "present", "method": "inferred"}},
+    }
+    result = consumer.interpret_http_response(
+        identity="github.com/example/demo", status_code=200, body=json.dumps(payload)
+    )
+    consumer.evaluate_for_task(
+        result, required_fields=["repo.test"], now=datetime(2026, 9, 16, tzinfo=timezone.utc)
+    )
+    assert not result.usable
+    assert result.fallback_reasons == ["inferred-command:repo.test"]
+
+
+def command_profile():
+    from datetime import datetime, timezone
+
+    checked = datetime.now(timezone.utc).isoformat()
+    return {
+        "apiVersion": "v0",
+        "identity": {"host": "github.com", "owner": "example", "repo": "demo"},
+        "record": {"generatedAt": checked},
+        "execution": {"build": "make build", "test": "make test"},
+        "trust": {"confidence": "high", "selectedStatus": "verified"},
+        "fieldEvidence": {
+            path: {
+                "state": "present",
+                "method": "extracted",
+                "confidence": "high",
+                "source": "Makefile",
+                "checkedAt": checked,
+            }
+            for path in ["repo.build", "repo.test"]
+        },
+    }
+
+
+@pytest.mark.parametrize("field", ["build", "test"])
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "remove-assessment",
+        "empty-assessment",
+        "malformed-assessment",
+        "remove-state",
+        "remove-method",
+        "remove-confidence",
+        "remove-source",
+        "remove-checkedAt",
+        "unspecified",
+        "inferred",
+        "low",
+        "medium",
+        "old-check",
+        "unresolved",
+        "wrong-value-type",
+        "wrong-api",
+        "missing-api",
+        "malformed-api",
+        "malformed-evidence",
+    ],
+)
+def test_http_client_requires_positive_command_evidence(field, mutation):
+    payload = command_profile()
+    path = "repo." + field
+
+    def fetch():
+        return consumer.fetch_profile(
+            "github.com/example/demo", opener=_FakeOpener(200, payload), required_fields=[path]
+        )
+
+    assert fetch().usable
+    assessment = payload["fieldEvidence"][path]
+    if mutation == "remove-assessment":
+        # This is also the public export's result after a value/time binding changes.
+        del payload["fieldEvidence"][path]
+    elif mutation == "empty-assessment":
+        payload["fieldEvidence"][path] = {}
+    elif mutation == "malformed-assessment":
+        payload["fieldEvidence"][path] = ["high"]
+    elif mutation.startswith("remove-"):
+        del assessment[mutation.removeprefix("remove-")]
+    elif mutation in {"unspecified", "inferred"}:
+        assessment["method"] = mutation
+    elif mutation in {"low", "medium"}:
+        assessment["confidence"] = mutation
+    elif mutation == "old-check":
+        assessment["checkedAt"] = "2020-01-01T00:00:00Z"
+    elif mutation == "unresolved":
+        assessment["state"] = "unresolved"
+    elif mutation == "wrong-value-type":
+        payload["execution"][field] = ["invented command"]
+    elif mutation == "wrong-api":
+        payload["apiVersion"] = "unsupported"
+    elif mutation == "missing-api":
+        del payload["apiVersion"]
+    elif mutation == "malformed-api":
+        payload["apiVersion"] = []
+    elif mutation == "malformed-evidence":
+        payload["fieldEvidence"] = ["invalid"]
+    result = fetch()
+    assert result.hit and not result.usable
+    assert result.fallback_reasons
+
+
+def test_removing_inferred_assessment_cannot_turn_rejection_into_acceptance():
+    payload = command_profile()
+    payload["fieldEvidence"]["repo.build"]["method"] = "inferred"
+    for remove in [False, True]:
+        if remove:
+            del payload["fieldEvidence"]["repo.build"]
+        result = consumer.fetch_profile(
+            "github.com/example/demo",
+            opener=_FakeOpener(200, payload),
+            required_fields=["repo.build"],
+        )
+        assert not result.usable

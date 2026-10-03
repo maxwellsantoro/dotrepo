@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/nv-tlabs/vipe"
-generated_at = "2026-07-06T18:55:01.236627Z"
+generated_at = "2026-09-16T16:27:23.415587Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `.github/workflows/ci.yml`. Inferred `repo.build` from `pyproject.toml`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "ViPE"
@@ -37,17 +36,93 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "3.10"
+min = "3.11"
 ecosystem = "Python"
 
 [docs]
 root = "https://research.nvidia.com/labs/toronto-ai/vipe"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://research.nvidia.com/labs/toronto-ai/vipe"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"ViPE: Video Pose Engine for Geometric 3D Perception"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://research.nvidia.com/labs/toronto-ai/vipe"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"ViPE"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:27:23.415587Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/ci.yml"
+state = "present"
+valueJson = '"uv run --no-sync pytest -q"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/nv-tlabs/vipe.git"
 default_branch = "main"
 fork = false
-head_sha = "95a8816947602ddc26fcb7a80bea4f9313059578"
+head_sha = "8c9f36144e08d8f8c8cf60d20ad70c100d9cff07"
 html_url = "https://github.com/nv-tlabs/vipe"
-stars = 2008
+stars = 2116

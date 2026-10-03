@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/MoienTajik/AspNetCore-Developer-Roadmap"
-generated_at = "2026-07-06T18:29:50.434968Z"
+generated_at = "2026-09-16T16:19:00.768787Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "inferred",
-    "verified",
-]
-notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+confidence = "low"
+provenance = ["inferred"]
+notes = "Bootstrapped from inferred defaults because no README.md, CODEOWNERS, or SECURITY.md content was imported. Filled `repo.name` and `repo.description` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "AspNetCore-Developer-Roadmap"
@@ -32,6 +29,79 @@ topics = [
     "razor",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Roadmap to becoming an ASP.NET Core developer in 2026"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/MoienTajik/AspNetCore-Developer-Roadmap"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "medium"
+method = "inferred"
+reason = "fell back to directory name or GitHub API"
+state = "present"
+valueJson = '"AspNetCore-Developer-Roadmap"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:19:00.768787Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no test command sources found"
+state = "not_found"
+valueJson = "null"
+
 [x.github]
 archived = false
 clone_url = "https://github.com/MoienTajik/AspNetCore-Developer-Roadmap.git"
@@ -39,4 +109,4 @@ default_branch = "master"
 fork = false
 head_sha = "f45e355f8829633b918a92b8d7845bcb0c8576c2"
 html_url = "https://github.com/MoienTajik/AspNetCore-Developer-Roadmap"
-stars = 19622
+stars = 19637

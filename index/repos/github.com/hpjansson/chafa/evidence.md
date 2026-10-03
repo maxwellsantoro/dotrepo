@@ -2,7 +2,6 @@
 
 - Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Left `repo.test` unset because `.github/workflows/c-cpp.yml` suggested an unsafe shell-like command.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `chafa` from `GitHub API` after deterministic escalation.

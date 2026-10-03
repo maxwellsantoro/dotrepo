@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/microsoft/terminal"
-generated_at = "2026-07-06T18:52:59.77726Z"
+generated_at = "2026-09-16T16:26:43.874756Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `SECURITY.md`. Filled `repo.name` with inferred defaults. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Scratch.sln`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `Scratch.sln`. Inferred `repo.test` from `Scratch.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "terminal"
@@ -35,6 +34,8 @@ languages = [
     "JavaScript",
     "HTML",
 ]
+build = "dotnet build"
+test = "dotnet test"
 topics = [
     "console",
     "terminal",
@@ -68,11 +69,88 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "high"
+method = "extracted"
+reason = "direct email or mailing list"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"secure@microsoft.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Scratch.sln"
+state = "present"
+valueJson = '"dotnet build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The new Windows Terminal and the original Windows console host, all in the same place!"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/microsoft/terminal"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"terminal"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:26:43.874756Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Scratch.sln"
+state = "present"
+valueJson = '"dotnet test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/microsoft/terminal.git"
 default_branch = "main"
 fork = false
-head_sha = "e58bd4bdab46f7b0de02b6b3494be5a81e4940ad"
+head_sha = "9694946ae22420a30691b7610c31f5723d9a5ff8"
 html_url = "https://github.com/microsoft/terminal"
-stars = 103847
+stars = 104908
