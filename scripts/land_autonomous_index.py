@@ -50,8 +50,19 @@ def wait_run(repository, run_id, expected_head, required_job):
     if run.get("conclusion") != "success" or run.get("head_sha") != expected_head:
         raise RuntimeError("Workflow did not succeed for the expected commit")
     jobs = api(f"repos/{repository}/actions/runs/{run_id}/jobs?per_page=100")["jobs"]
-    if not any(job["name"] == required_job and job.get("conclusion") == "success" for job in jobs):
+    successful = [
+        job for job in jobs if job["name"] == required_job and job.get("conclusion") == "success"
+    ]
+    if not successful:
         raise RuntimeError(f"Required job {required_job} did not run successfully")
+    if required_job == "deploy":
+        for step_name in ("Deploy Worker", "Smoke deployed Worker"):
+            if not any(
+                step.get("name") == step_name and step.get("conclusion") == "success"
+                for job in successful
+                for step in job.get("steps", [])
+            ):
+                raise RuntimeError(f"Publication step {step_name} did not run successfully")
 
 
 def validate_pull(pull, repository, default_branch, expected_head, expected_base):

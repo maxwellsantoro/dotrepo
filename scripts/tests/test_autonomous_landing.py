@@ -100,3 +100,38 @@ def test_success_for_another_commit_or_skipped_job_is_not_publication(
     )
     with pytest.raises(RuntimeError):
         landing.wait_run(REPOSITORY, 20, HEAD, "deploy")
+
+
+@pytest.mark.parametrize(
+    "publication,smoke,passed",
+    [
+        ("success", "success", True),
+        ("skipped", "skipped", False),
+        ("success", "skipped", False),
+        (None, None, False),
+    ],
+)
+def test_green_deploy_job_requires_actual_publication_and_smoke(
+    monkeypatch, publication, smoke, passed
+):
+    monkeypatch.setattr(landing.subprocess, "run", lambda *a, **kw: None)
+    steps = (
+        []
+        if publication is None
+        else [
+            {"name": "Deploy Worker", "conclusion": publication},
+            {"name": "Smoke deployed Worker", "conclusion": smoke},
+        ]
+    )
+    monkeypatch.setattr(
+        landing,
+        "api",
+        lambda path: {"jobs": [{"name": "deploy", "conclusion": "success", "steps": steps}]}
+        if "/jobs?" in path
+        else {"conclusion": "success", "head_sha": HEAD},
+    )
+    if passed:
+        landing.wait_run(REPOSITORY, 20, HEAD, "deploy")
+    else:
+        with pytest.raises(RuntimeError, match="Publication step"):
+            landing.wait_run(REPOSITORY, 20, HEAD, "deploy")
