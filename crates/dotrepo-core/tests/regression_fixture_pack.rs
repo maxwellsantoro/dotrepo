@@ -214,7 +214,10 @@ fn assert_metadata_matches(expectation: &RegressionExpectation, root: &std::path
                     expectation.fixture, captured_file, err
                 )
             });
-            let actual = format!("{:x}", Sha256::digest(bytes));
+            let actual = Sha256::digest(bytes)
+                .iter()
+                .map(|byte| format!("{byte:02x}"))
+                .collect::<String>();
             assert_eq!(
                 actual, *expected,
                 "regression fixture `{}` captured file `{}` digest",

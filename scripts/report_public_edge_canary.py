@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import subprocess
 from typing import Any
+from urllib.parse import urlencode
 
 
 TITLE = "Public edge consistency canary is failing"
@@ -98,20 +99,27 @@ def publish_report(
     log: str = "",
 ) -> str:
     root = f"repos/{repository}"
-    # Comment state intentionally changes only on transitions. Ask Actions for
-    # its independent high-water mark so old reruns cannot overwrite a newer
-    # unchanged result without adding a notification/write on every run.
-    runs = github.request(
-        "GET", f"{root}/actions/workflows/public-edge-canary.yml/runs?per_page=1"
-    ).get("workflow_runs", [])
-    if not runs:
-        raise RuntimeError("Cannot establish latest canary run; refusing report mutation")
-    latest = runs[0]
-    latest_sequence = (int(latest["run_number"]), int(latest["run_attempt"]))
-    if latest_sequence > (run_number, run_attempt):
+    # Comment state intentionally changes only on transitions. Query a bounded
+    # created-since window instead of relying on undocumented result ordering.
+    current_run = github.request("GET", f"{root}/actions/runs/{run_id}")
+    requested_sequence = (run_number, run_attempt)
+    if (current_run.get("run_number"), current_run.get("run_attempt")) != requested_sequence:
+        raise RuntimeError("Current canary run does not match the requested result")
+    query = urlencode({"created": f">={current_run['created_at']}", "per_page": 100})
+    window = github.request(
+        "GET", f"{root}/actions/workflows/{current_run['workflow_id']}/runs?{query}"
+    )
+    runs = window.get("workflow_runs", [])
+    sequences = [(int(run["run_number"]), int(run["run_attempt"])) for run in runs]
+    if any(sequence > requested_sequence for sequence in sequences):
         return "ignored stale workflow result"
-    if latest_sequence != (run_number, run_attempt):
-        raise RuntimeError("Current canary run is not visible yet; refusing report mutation")
+    # Usually this window contains only the current run. If an older rerun has
+    # more than one page and no newer result is visible, refuse to guess.
+    if window.get("total_count") != len(runs) or not any(
+        str(run.get("id")) == run_id and sequence == requested_sequence
+        for run, sequence in zip(runs, sequences)
+    ):
+        raise RuntimeError("Cannot establish latest canary run; refusing report mutation")
     issues = github.request("GET", f"{root}/issues?state=all&per_page=100", paginate=True)
     matches = [
         issue

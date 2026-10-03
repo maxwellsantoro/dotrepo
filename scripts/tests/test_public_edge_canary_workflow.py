@@ -22,6 +22,9 @@ class FakeGitHub:
         self.calls = []
         self.latest_run_number = 0
         self.latest_run_attempt = 1
+        self.run_attempts = {}
+        self.workflow_runs_override = None
+        self.workflow_total_override = None
 
     @property
     def writes(self):
@@ -30,14 +33,26 @@ class FakeGitHub:
     def request(self, method, endpoint, payload=None, *, paginate=False):
         self.calls.append((method, endpoint, payload, paginate))
         if method == "GET":
-            if "/actions/workflows/" in endpoint:
+            if "/actions/runs/" in endpoint:
+                number = int(endpoint.rsplit("/", 1)[1]) - 1000
                 return {
-                    "workflow_runs": [
-                        {
-                            "run_number": self.latest_run_number,
-                            "run_attempt": self.latest_run_attempt,
-                        }
-                    ]
+                    "id": 1000 + number,
+                    "run_number": number,
+                    "run_attempt": self.run_attempts.get(number, 1),
+                    "created_at": "2026-10-03T19:00:00Z",
+                    "workflow_id": 306357068,
+                }
+            if "/actions/workflows/" in endpoint:
+                runs = self.workflow_runs_override or [
+                    {
+                        "id": 1000 + self.latest_run_number,
+                        "run_number": self.latest_run_number,
+                        "run_attempt": self.latest_run_attempt,
+                    }
+                ]
+                return {
+                    "workflow_runs": runs,
+                    "total_count": self.workflow_total_override or len(runs),
                 }
             assert paginate
             if "/comments?" in endpoint:
@@ -80,6 +95,7 @@ def legacy_issue(state="open"):
 
 
 def publish(client, status="failure", run_number=10, run_attempt=1, reason="bad metadata"):
+    client.run_attempts[run_number] = run_attempt
     if run_number > client.latest_run_number:
         client.latest_run_number = run_number
         client.latest_run_attempt = run_attempt
@@ -224,9 +240,27 @@ class CanaryReporterTests(unittest.TestCase):
     def test_latest_run_read_failure_refuses_to_mutate(self):
         client = FakeGitHub([legacy_issue()])
         with patch.object(client, "request", return_value={"workflow_runs": []}):
-            with self.assertRaisesRegex(RuntimeError, "latest canary run"):
+            with self.assertRaises(RuntimeError):
                 publish(client)
         self.assertEqual(client.writes, [])
+
+    def test_run_guard_does_not_rely_on_newest_first_ordering(self):
+        client = FakeGitHub([legacy_issue()])
+        client.workflow_runs_override = [
+            {"id": 1010, "run_number": 10, "run_attempt": 1},
+            {"id": 1011, "run_number": 11, "run_attempt": 1},
+        ]
+        self.assertEqual(publish(client), "ignored stale workflow result")
+        self.assertEqual(client.writes, [])
+
+    def test_incomplete_run_window_fails_closed_without_report_write(self):
+        client = FakeGitHub([legacy_issue()])
+        client.workflow_total_override = 101
+        with self.assertRaisesRegex(RuntimeError, "latest canary run"):
+            publish(client)
+        self.assertEqual(client.writes, [])
+        run_list_call = next(call for call in client.calls if "/actions/workflows/" in call[1])
+        self.assertIn("created=%3E%3D2026-10-03T19%3A00%3A00Z", run_list_call[1])
 
     def test_only_bot_owned_marked_comments_are_changed(self):
         other = {"id": 1, "body": reporter.MARKER + "\n", "user": {"login": "someone"}}
