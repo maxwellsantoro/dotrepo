@@ -4,6 +4,11 @@ This document describes the crawler's factual extraction and adjudication
 architecture. Product sequencing and milestone gates live in
 [`ROADMAP.md`](../ROADMAP.md).
 
+Implementation details here follow unreleased `main`. Stable `v1.0.1` does not
+include all of its promotion and evidence safeguards; see
+[release compatibility](release-compatibility.md) before applying these claims
+to installed binaries or older records.
+
 The design follows these durable constraints:
 
 - deterministic extraction remains the default path
@@ -50,10 +55,11 @@ Deterministic verification
         │
         ▼
 Field-level scoring
-  Each field gets one of four scores:
+  Each field gets one of five scores:
     high-confidence present
     medium-confidence present
     high-confidence absent/unknown
+    suspect (a present value with a detected quality problem)
     unresolved
         │
         ▼
@@ -85,7 +91,8 @@ Autonomous index writeback uses a different gate than promotion to `verified`:
   `verification.passed`. The crawler may persist honestly partial overlays when
   verification succeeds but field scoring still has unresolved entries.
 - **Auto-publish to `verified`** (`FieldScoreSummary::eligible_for_auto_publish`):
-  requires no unresolved fields and no medium-confidence-only present fields.
+  requires no unresolved fields, no suspect fields, and no
+  medium-confidence-only present fields.
 
 A record can therefore be written to the index as `imported` or `inferred` while
 promotion abstains until scoring is exhaustive. That is intentional: publish

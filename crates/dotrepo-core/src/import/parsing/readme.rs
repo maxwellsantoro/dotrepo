@@ -87,7 +87,9 @@ pub(crate) fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
                 idx += 1;
                 continue;
             }
-            if let Some(title) = parse_setext_heading(&lines, idx) {
+            if let Some(title) = parse_setext_heading(&lines, idx)
+                .filter(|heading| !is_non_project_heading(heading))
+            {
                 metadata.title = Some(title);
                 idx += 2;
                 continue;
@@ -131,9 +133,16 @@ fn parse_readme_logo_title(line: &str) -> Option<String> {
     let lower = line.to_ascii_lowercase();
     let image_start = lower.find("<img")?;
     let image = &line[image_start..];
-    let image_lower = &lower[image_start..];
-    let title = parse_html_attr(image, image_lower, "alt")?;
-    credible_logo_alt_title(&title)
+    // Keep attributes scoped to this image, not a following link or image.
+    let image_end = image.find('>').unwrap_or(image.len());
+    let image = &image[..image_end];
+    let image_lower = &lower[image_start..image_start + image_end];
+    // Some project banners deliberately use an empty alt attribute and put
+    // the project name in title instead. Do not fall through to later sponsor
+    // logos merely because the banner has no nonempty alt text.
+    let title = parse_html_attr(image, image_lower, "alt")
+        .or_else(|| parse_html_attr(image, image_lower, "title"))?;
+    credible_logo_title(&title)
 }
 
 fn try_parse_multiline_html_image_title(lines: &[&str], idx: usize) -> Option<(String, usize)> {
@@ -154,9 +163,7 @@ fn try_parse_multiline_html_image_title(lines: &[&str], idx: usize) -> Option<(S
             accumulated.push_str(next);
         }
         if next.contains('>') {
-            let lower_accumulated = accumulated.to_ascii_lowercase();
-            let title = parse_html_attr(&accumulated, &lower_accumulated, "alt")?;
-            return credible_logo_alt_title(&title).map(|value| (value, lines_consumed));
+            return parse_readme_logo_title(&accumulated).map(|value| (value, lines_consumed));
         }
         scan += 1;
     }
@@ -174,7 +181,7 @@ pub(crate) fn parse_html_attr(image: &str, image_lower: &str, attr: &str) -> Opt
     normalize_readme_text(&image[value_start..value_end])
 }
 
-fn credible_logo_alt_title(title: &str) -> Option<String> {
+fn credible_logo_title(title: &str) -> Option<String> {
     let lowered = title.to_ascii_lowercase();
     let badge_words = [
         "badge", "build", "ci", "coverage", "docs", "image", "license", "logo", "package",
@@ -227,8 +234,14 @@ fn is_promo_link_heading(text: &str) -> bool {
 
 pub(crate) fn is_non_project_heading(heading: &str) -> bool {
     let lowered = heading.to_ascii_lowercase();
-    let trimmed = lowered.trim();
-    if NON_PROJECT_HEADINGS.contains(&trimmed) {
+    // Decorative emoji and partial emphasis wrappers must not hide a section
+    // label or call to action (for example, "_Support a project_ 💖").
+    let trimmed = lowered.trim_matches(|ch: char| !ch.is_alphanumeric());
+    if NON_PROJECT_HEADINGS.contains(&trimmed)
+        || NON_PROJECT_HEADING_LEADS
+            .iter()
+            .any(|lead| trimmed.starts_with(lead))
+    {
         return true;
     }
     NON_PROJECT_HEADING_KEYWORDS
@@ -251,11 +264,16 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "credits",
     "documentation",
     "donate",
+    "donation",
+    "donations",
+    "download",
+    "downloads",
     "example",
     "examples",
     "faq",
     "features",
     "flags",
+    "funding",
     "getting started",
     "installation",
     "installing",
@@ -277,9 +295,23 @@ const NON_PROJECT_HEADINGS: &[&str] = &[
     "table of contents",
     "usage",
     "website",
+    "wiki",
 ];
 
 const NON_PROJECT_HEADING_KEYWORDS: &[&str] = &["sponsors", "sponsor", "backed by", "supported by"];
+
+const NON_PROJECT_HEADING_LEADS: &[&str] = &[
+    "support ",
+    "support:",
+    "donate ",
+    "donate:",
+    "donation ",
+    "donations ",
+    "funding ",
+    "help fund ",
+    "buy me a ",
+    "buy us a ",
+];
 
 fn parse_setext_heading(lines: &[&str], idx: usize) -> Option<String> {
     let line = lines.get(idx)?.trim();
@@ -565,7 +597,7 @@ pub(crate) fn clean_project_name(raw: &str, _repo_dir_fallback: &str) -> Option<
     }
 
     // Reject generic phrases that somehow passed the heading skip-list.
-    if is_generic_phrase(&cleaned) {
+    if is_non_project_heading(&cleaned) || is_generic_phrase(&cleaned) {
         return None;
     }
 

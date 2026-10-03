@@ -9,9 +9,15 @@ dotrepo keeps active project-level facts in three places:
 Code and tested contracts outrank prose. Detailed tasks belong in issues or
 project tooling rather than additional plan documents.
 
+This checkout follows unreleased `main`. For stable `v1.0.1` binaries, start with
+[release compatibility](release-compatibility.md), which links the tag's docs
+and separates shipped behavior from newer safeguards.
+
 ## Use dotrepo
 
 - [`install.md`](./install.md)
+- [`release-compatibility.md`](./release-compatibility.md) - stable vs development behavior and version-matched docs
+- [`reference-overview.md`](./reference-overview.md) - detailed tool, protocol, and source inventory
 - [`maintainer-happy-path.md`](./maintainer-happy-path.md)
 - [`sync-boundaries.md`](./sync-boundaries.md)
 - [`trust-model.md`](./trust-model.md)

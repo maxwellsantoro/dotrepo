@@ -1,6 +1,61 @@
 use super::common::*;
 
 #[test]
+fn import_repository_uses_banner_title_before_donation_and_sponsor_sections() {
+    let root = temp_dir("import-banner-title");
+    fs::write(
+        root.join("README.md"),
+        r#"<div align="center">
+<picture>
+<img alt="" title="Beacon" src="header.png"/>
+</picture>
+
+Application to comfortably monitor your network traffic.
+</div>
+
+## _Support Beacon's development_ 💖
+
+Help keep this project free and open source.
+
+<img alt="Acme" src="sponsor.png"/>
+
+## Download
+"#,
+    )
+    .expect("README written");
+
+    for mode in [ImportMode::Native, ImportMode::Overlay] {
+        let plan = import_repository(&root, mode, Some("https://github.com/example/beacon"))
+            .expect("import succeeds");
+        assert_eq!(plan.manifest.repo.name, "Beacon");
+        assert_eq!(
+            plan.manifest.repo.description,
+            "Application to comfortably monitor your network traffic."
+        );
+        assert_eq!(plan.imported_sources, vec!["README.md"]);
+        assert!(!plan.inferred_fields.iter().any(|field| field == "repo.name"));
+        if matches!(mode, ImportMode::Overlay) {
+            assert!(plan.evidence_text.as_deref().is_some_and(|text| {
+                text.contains("Imported repository name and description from README.md.")
+            }));
+            let verification =
+                verify_import_plan(&root, &plan, "https://github.com/example/beacon");
+            let report = score_import_fields(&plan, &verification);
+            let name = report
+                .scores
+                .iter()
+                .find(|score| score.field == "repo.name")
+                .expect("name score exists");
+            assert_eq!(name.value.as_deref(), Some("Beacon"));
+            assert_eq!(name.source.as_deref(), Some("README.md"));
+            assert_eq!(name.reason, "extracted from README title with post-cleaners");
+        }
+    }
+
+    fs::remove_dir_all(root).expect("temp dir removed");
+}
+
+#[test]
 fn import_repository_accepts_readme_variants_and_preserves_their_paths() {
     let root = temp_dir("import-readme-variant");
     fs::write(

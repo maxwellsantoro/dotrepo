@@ -44,8 +44,8 @@ This surface provides:
 - a bundle-level repository inventory for navigation
 - repository summary, profile, and trust responses reusing the same local
   selection, conflict, and claim-visibility semantics
-- a local and release-reviewed same-origin hosted-query runtime over the same
-  snapshot family
+- a local and release-reviewed same-origin query runtime using the same set of
+  exported files
 - a live accepted maintainer claim in the checked-in index for
   `github.com/maxwellsantoro/ries-rs`, linked to the published upstream `.repo`
   and surfaced with `superseded` handoff state
@@ -58,7 +58,8 @@ are intentionally gitignored. They can be regenerated from the checked-in
 and deployed immutable snapshots are archived separately.
 
 Not yet in scope:
-- structured discovery, ranking, and comparison APIs
+- production-scale ranking calibration (search and factual comparison routes
+  already exist; see [public examples](public-export-examples.md))
 - live mutation or submission APIs
 
 ## Local review loop

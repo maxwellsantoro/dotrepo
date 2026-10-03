@@ -16,6 +16,7 @@ ARTICLES = [
         ),
         "body_html": """
 <div class="article-callout">
+  <p><strong>Historical note:</strong> These interviews describe the project in March 2026. Remote MCP lookup has since shipped, and the index has grown. Model opinions here are qualitative feedback, not an independent accuracy benchmark. For current capabilities and limits, see <a href="/docs/">the getting-started guide</a>.</p>
   <p>This is the dotrepo-side synthesis of the interview round. The companion essay on MaxwellSantoro.com covers the broader framing and why this experiment was worth running at all.</p>
   <p><a href="https://maxwellsantoro.com/writing/i-asked-9-ai-models-what-they-want-from-a-repository-metadata-protocol/">Read the sister article</a></p>
 </div>

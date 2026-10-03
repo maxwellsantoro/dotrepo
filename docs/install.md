@@ -1,102 +1,97 @@
 # Install
 
-dotrepo now has a release-artifact path for the core toolchain binaries. The
-intended install surface is:
+For a stable installation, use the
+[`v1.0.1` release](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.1).
+It provides `dotrepo`, `dotrepo-public-query`, `dotrepo-lsp`, and `dotrepo-mcp`.
+The current `main` source is the unreleased `2.0.0-alpha.0` development line.
 
-- `dotrepo`
-- `dotrepo-public-query`
-- `dotrepo-lsp`
-- `dotrepo-mcp`
+Read [release compatibility](release-compatibility.md) before relying on safety
+claims from `main`: stable `promotion-report --apply` can write records and
+evidence, and the newer field-evidence and MCP target checks are unreleased.
+Version-matched stable docs are linked there.
 
-These are built and packaged by `.github/workflows/release-artifacts.yml`.
+## Download a stable bundle
 
-For native repos that want the canonical maintainer CI loop, `dotrepo ci init`
-scaffolds a GitHub Actions workflow that downloads one pinned release bundle
-and runs `validate`, `query`, `trust`, `doctor`, and `generate --check`.
-The current scaffold target is `ubuntu-latest` with the
-`x86_64-unknown-linux-gnu` release bundle.
-The default pin is the latest published stable release, not the version of a
-development build used to generate the file. Pass `--version <release>` to pin
-a different published release explicitly.
+Choose the asset for your platform from the
+[release page](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.1),
+verify it against its matching `.sha256` file, extract it, and put the binaries
+from `bin/` on your `PATH`.
 
-## Preferred install path
+Bundle names include the version and target, for example:
 
-Download the latest matching **stable** release bundle for your platform from
-the GitHub release assets (currently the `v1.0.x` line, for example `v1.0.1`),
-then extract it and put the binaries from `bin/` on your `PATH`.
+- `dotrepo-1.0.1-x86_64-unknown-linux-gnu.tar.gz`
+- `dotrepo-1.0.1-aarch64-apple-darwin.tar.gz`
 
-### Stable vs development line
-
-| Line | Where | Who should use it |
-|------|--------|-------------------|
-| **Stable `1.0.x`** | Latest non-prerelease GitHub release and crates.io versions `1.0.x` | End users, CI pins, MCP clients in production |
-| **Development `2.0.0-alpha.x`** | `main` and prerelease tags only | Contributors and early adopters accepting public Rust API changes (for example `FieldConfidence::Suspect`) |
-
-Do not install crates.io `2.0.0-alpha.0` (or build `main`) into production agent
-toolchains unless you intend to track breaking API changes. The default
-`dotrepo ci init` scaffold pins the latest **stable** published release, not
-the version of a local development binary used to generate the workflow.
+Use an asset that is actually listed for your platform; the source build below
+is the alternative when no matching prebuilt bundle is available.
 
 ## Install from crates.io
 
-The toolchain crates are published to crates.io, so a Rust toolchain is the
-only prerequisite:
+With a Rust toolchain, pin the stable packages explicitly:
 
 ```bash
-cargo install dotrepo        # installs `dotrepo` (prefer latest 1.0.x for production)
-cargo install dotrepo-mcp    # installs `dotrepo-mcp`
-cargo install dotrepo-lsp    # installs `dotrepo-lsp`
+cargo install dotrepo-cli --version 1.0.1 --locked
+cargo install dotrepo-mcp --version 1.0.1 --locked
+cargo install dotrepo-lsp --version 1.0.1 --locked
 ```
 
-Pin explicitly when you need reproducibility:
+Install only the tools you need. `dotrepo-cli` supplies both the `dotrepo` and
+`dotrepo-public-query` executables. The separate `dotrepo` alias package in the
+current source tree was added after `v1.0.1`; the commands above use the package
+names present in that tag. Do not install both CLI packages, since they provide
+the same `dotrepo` executable.
 
-```bash
-cargo install dotrepo --version 1.0.1
-```
-
-`dotrepo` is a thin alias for `dotrepo-cli`; install `dotrepo-cli` instead if
-you also want the `dotrepo-public-query` binary. Install one or the other, not
-both — they provide the same `dotrepo` binary.
-
-Published crate versions track tagged releases: the crates.io source for a
-version matches the GitHub release tag of the same version, not the tip of
-`main`.
-
-Release bundles are named like:
-
-- `dotrepo-<version>-x86_64-unknown-linux-gnu.tar.gz`
-- `dotrepo-<version>-aarch64-apple-darwin.tar.gz`
-
-Each bundle also includes a matching `.sha256` file.
-
-The same workflow also publishes a VS Code extension package named like:
-
-- `dotrepo-vscode-v1.0.0.vsix`
-
-Install that in VS Code with `Extensions: Install from VSIX...` if you want the
-thin editor shell without loading the workspace extension directly.
+Avoid unpinned install examples when reproducibility matters. A package's latest
+README can describe a different source version from the binary you installed.
 
 ## Build from source
 
-If you are developing dotrepo itself or want a local debug build:
+For a reproducible stable source build, use a separate checkout of the release
+tag:
 
 ```bash
-cargo build -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
-export PATH="/path/to/dotrepo/target/debug:$PATH"
+git clone --branch v1.0.1 --depth 1 https://github.com/maxwellsantoro/dotrepo.git dotrepo-1.0.1
+cd dotrepo-1.0.1
+cargo build --locked --release -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
+export PATH="$PWD/target/release:$PATH"
 ```
 
-For release-style local binaries:
+For contributor builds in an existing checkout:
 
 ```bash
-cargo build --release -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
-export PATH="/path/to/dotrepo/target/release:$PATH"
+cargo build --locked -p dotrepo-cli --bins -p dotrepo-lsp -p dotrepo-mcp
+export PATH="$PWD/target/debug:$PATH"
 ```
 
-## VS Code shell
+Building `main` opts into unreleased behavior and breaking Rust API changes,
+including `FieldConfidence::Suspect`. Passing `--release` changes optimization;
+it does not turn development source into a published stable release.
 
-The VS Code extension remains thin. It expects `dotrepo` and `dotrepo-lsp` on
-`PATH` by default, so the release-artifact bundles are the preferred runtime
-dependency even when the extension itself is still loaded from the workspace.
+## Maintainer CI
 
-See [`editors/vscode/README.md`](../editors/vscode/README.md) for the extension
-shell details and settings overrides.
+`dotrepo ci init --version 1.0.1` creates a GitHub Actions workflow that downloads
+one pinned release bundle and runs `validate`, `query`, `trust`, `doctor`, and
+`generate --check`. It targets `ubuntu-latest` and the
+`x86_64-unknown-linux-gnu` bundle.
+
+Pass the version explicitly for a reproducible workflow. Stable `v1.0.1` defaults
+to its own package version. Development `main` uses the stable version pinned in
+its source, currently `1.0.1`; it does not discover the latest release at runtime.
+
+## MCP clients
+
+After installing `dotrepo-mcp`, configure it as a stdio server. See the
+[consumer integration guide](external-consumer-integration.md) for a configuration
+example and lookup arguments, and [MCP network policy](release-compatibility.md#mcp-network-policy)
+for default origins and opt-in overrides.
+
+## VS Code extension
+
+Install the `.vsix` listed with the matching GitHub release using
+`Extensions: Install from VSIX...`. The extension expects `dotrepo` and
+`dotrepo-lsp` on `PATH` by default, so install those binaries too.
+
+See the
+[stable extension guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.1/editors/vscode/README.md)
+for that release's settings, or the [development guide](../editors/vscode/README.md)
+when loading the extension from this checkout.

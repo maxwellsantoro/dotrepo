@@ -120,7 +120,7 @@ The live smoke checks:
   traversal routes for the first reviewed repository
 
 That keeps local review, pre-deploy smoke, and post-deploy smoke aligned on one
-snapshot family.
+set of exported files and its snapshot ID.
 
 ## Snapshot retention and archive
 

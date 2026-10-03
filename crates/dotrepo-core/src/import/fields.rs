@@ -97,7 +97,7 @@ pub fn score_import_fields(
         reason: if name_conflict {
             "README-derived name conflicts with GitHub repository name".into()
         } else if name_has_readme_source {
-            "extracted from README heading with post-cleaners".into()
+            "extracted from README title with post-cleaners".into()
         } else {
             "fell back to directory name or GitHub API".into()
         },

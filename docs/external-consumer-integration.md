@@ -47,9 +47,12 @@ Tool call:
 }
 ```
 
-Install the **stable** `dotrepo-mcp` binary from the latest `1.0.x` release
-bundle or `cargo install dotrepo-mcp --version 1.0.1`. See
-[`docs/install.md`](./install.md).
+Install the **stable** `dotrepo-mcp` binary from the
+[`v1.0.1` release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.1)
+or `cargo install dotrepo-mcp --version 1.0.1 --locked`. See
+[installation](./install.md) and [release compatibility](release-compatibility.md).
+Stable lookup returns summary, trust, snapshot metadata, and optional query;
+profile inclusion and newer target checks described on `main` are unreleased.
 
 ## Integration acceptance criteria
 
@@ -79,6 +82,11 @@ When a **third-party** integration lands, link it from
 next ROADMAP snapshot. Live non-operator traffic remains an ops follow-up.
 
 ## Task policy and measurements
+
+The reference client below follows the current source branch, including stricter
+field-evidence checks. Installing the stable MCP binary does not install this
+client or give stable records those assessments. Unsupported or older responses
+must fall back to upstream inspection.
 
 ```bash
 uv run python examples/external-consumer/lookup_before_scrape.py \

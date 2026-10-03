@@ -103,3 +103,43 @@ def render_profile_example(public_root: Path, inventory: dict, base_path: str) -
       Verification records pipeline checks, not human review or a guarantee of correctness.</p>
       <p>{evidence_link} · <a href="{html.escape(base_path + "/v0/repos/" + label + "/profile.json", quote=True)}">Full profile JSON</a></p>
       </section>'''
+
+
+def render_lookup_example(public_root: Path, inventory: dict, base_path: str, now: str) -> str:
+    """Show a real exported command with provenance and age, including honest gaps."""
+    candidates = list(profiles(public_root, inventory))
+    profile = next(
+        (
+            p
+            for p in candidates
+            if p.get("identity", {}).get("owner") == "BurntSushi"
+            and p.get("identity", {}).get("repo") == "ripgrep"
+        ),
+        candidates[0] if candidates else None,
+    )
+    if profile is None:
+        return '<aside class="panel lookup-example"><h2>Try a repository lookup</h2><p>No profile is available in this export. Inspect the upstream repository when a lookup misses.</p></aside>'
+    identity = profile["identity"]
+    label = "/".join(identity[key] for key in ("host", "owner", "repo"))
+    record = profile.get("record", {})
+    status, age = record_status(record, now)
+    age_text = f"{age} days at export" if age is not None else "unknown"
+    command = (
+        profile.get("execution", {}).get("test") or "Unknown — inspect upstream test instructions"
+    )
+    evidence = record.get("evidencePath")
+    evidence_link = (
+        f'<a href="https://github.com/maxwellsantoro/dotrepo/blob/main/index/{html.escape(evidence, quote=True)}">Source evidence</a>'
+        if evidence
+        else "Source evidence unavailable"
+    )
+    profile_url = base_path + "/v0/repos/" + label + "/profile.json"
+    return f'''<aside class="panel lookup-example" aria-label="Real lookup example">
+      <p class="eyebrow">A real lookup from this export</p>
+      <h2>“How do I test {html.escape(identity["repo"])}?”</h2>
+      <dl><dt>Recorded test command</dt><dd><code>{html.escape(command)}</code></dd>
+      <dt>Source</dt><dd>{html.escape(label)} · {evidence_link}</dd>
+      <dt>Record age</dt><dd>{age_text} · {html.escape(status)}. Generated {html.escape(record.get("generatedAt") or "at an unknown time")}.</dd>
+      <dt>Before using it</dt><dd>Inspect the evidence and local environment. If the field is missing, stale, conflicting, or insufficient for your task, read the upstream instructions.</dd></dl>
+      <p><a href="{html.escape(profile_url, quote=True)}">Inspect the full profile →</a></p>
+      </aside>'''

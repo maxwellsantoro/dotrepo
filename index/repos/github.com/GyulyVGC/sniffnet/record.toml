@@ -15,7 +15,7 @@ provenance = [
 notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `.github/workflows/rust.yml`. Inferred `repo.build` from `.github/workflows/rust.yml`. Inferred `repo.test` from `.github/workflows/rust.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
-name = "Support Sniffnet's development_ 💖"
+name = "Sniffnet"
 description = "Comfortably monitor your network traffic 🕵️‍♂️"
 homepage = "https://sniffnet.app"
 license = "Apache-2.0"
@@ -121,13 +121,13 @@ state = "present"
 valueJson = '"https://sniffnet.app"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-17T06:08:03.340130315Z"
+checkedAt = "2026-10-03T22:15:01Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README banner image title; support heading excluded"
 source = "README.md"
 state = "present"
-valueJson = """"Support Sniffnet's development_ 💖""""
+valueJson = '"Sniffnet"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-17T06:08:03.340130315Z"
