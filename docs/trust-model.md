@@ -1,6 +1,11 @@
 # Trust model
 
-The trust model is one of dotrepo's core ideas.
+This page describes the current source branch. Stable `v1.0.1` has important
+differences: standalone promotion can write records, and the newer retained
+field-evidence checks are absent. See [release compatibility](release-compatibility.md)
+for the comparison and
+[the stable trust document](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.1/docs/trust-model.md)
+for version-matched reference material.
 
 A `.repo` record should not imply that all facts are equally authoritative. Instead, dotrepo should communicate where a record came from, how it was derived, and how much confidence downstream consumers should place in it.
 
@@ -102,7 +107,8 @@ material. It is not a calibrated probability, a guarantee of correctness, human
 review, complete coverage, or a recent upstream check. Record authority, factual
 correctness, completeness, and age must be evaluated separately.
 
-Fresh crawler records retain `x.dotrepo.field_evidence`. Public profiles expose
+**Unreleased on `main`:** fresh crawler records retain `x.dotrepo.field_evidence`.
+Public profiles produced by this version expose
 matching entries as `fieldEvidence`, keyed by manifest dot-path. Each contains an
 assessment state, confidence, method, reason, check time, and source where known.
 `not_found` means not found in inspected sources; it is not proof that the fact
@@ -114,11 +120,21 @@ Evidence is bound to the exact serialized value and record check timestamp.
 Export drops an entry if either no longer matches. Legacy records without retained
 field assessments do not inherit them from a record-wide high-confidence label.
 
-## Standalone promotion is disabled
+## Standalone promotion differs by release
 
-`promotion-report --apply` fails before writing records or evidence. It cannot
+**Stable `v1.0.1`:** `promotion-report --apply` can change eligible records to
+`verified` and write both the manifest and evidence notes. Its scoring uses
+manifest values and record-wide provenance; it does not freshly inspect upstream
+sources. A stable-generated `verified` label does not establish that the newer
+per-field checks ran. Omit `--apply` for read-only analysis.
+
+**Unreleased on `main`:** `promotion-report --apply` fails before writing records
+or evidence. It cannot
 establish source inspection from a standalone manifest, record-wide provenance,
 or a newly written evidence note. Read-only promotion analysis now uses retained
 assessments bound to the exact field value and record check time; missing or
 invalidated assessments remain unresolved. This analysis is not a fresh check.
 Use the crawler's inspection and verification path to mint `verified` overlays.
+These safeguards do not change already-installed stable binaries or retroactively
+recheck older records. Source links and MCP guard differences are in
+[release compatibility](release-compatibility.md).

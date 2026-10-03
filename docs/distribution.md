@@ -2,6 +2,8 @@
 
 Index quality creates value; distribution captures it. This checklist tracks the
 concrete surfaces that make agents and tools check dotrepo before scraping.
+It follows the current source branch; consult
+[release compatibility](release-compatibility.md) for stable binary behavior.
 
 ## Shipped surfaces
 
@@ -9,7 +11,7 @@ concrete surfaces that make agents and tools check dotrepo before scraping.
 |---------|--------|-------|
 | Hosted public API (`https://dotrepo.org/v0/...`) | Live | Static export + Cloudflare hosted-query Worker |
 | MCP server (`dotrepo-mcp`) | Shipped | Stdio; NDJSON framing (1.0.1); registry package path documented |
-| crates.io (`dotrepo`, `dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, …) | Shipped | Prefer stable `1.0.x` for consumers; `main` is `2.0.0-alpha` |
+| crates.io (`dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, …) | Stable package path | Pin `1.0.1` for consumers; `main` is unreleased `2.0.0-alpha.0`; the separate `dotrepo` alias was added after the stable tag |
 | Lookup-efficiency benchmark page | Live | `/efficiency/` on the public site |
 | pagedigest publisher | Live | `/.well-known/pagedigest.json` |
 

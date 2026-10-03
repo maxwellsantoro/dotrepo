@@ -248,6 +248,99 @@ fn is_non_project_heading_rejects_sponsor_compound() {
 }
 
 #[test]
+fn support_and_donation_headings_are_not_project_names() {
+    for heading in [
+        "_Support Beacon's development_ 💖",
+        "💖 Support Beacon",
+        "Support: ongoing development",
+        "Donate to Beacon",
+        "Donations for development",
+        "Funding the project",
+        "Help fund development",
+        "Buy me a coffee",
+        "Buy us a coffee",
+        "💝 Donations 💝",
+    ] {
+        assert!(is_non_project_heading(heading), "{heading:?}");
+        assert!(
+            clean_project_name(heading, "beacon").is_none(),
+            "{heading:?}"
+        );
+
+        for section in [
+            format!("## {heading}"),
+            format!("<h2>{heading}</h2>"),
+            format!("<h2>\n{heading}\n</h2>"),
+            format!("{heading}\n================"),
+            format!("{heading}\n----------------"),
+        ] {
+            assert!(
+                parse_readme_metadata(&section).title.is_none(),
+                "{section:?} alone must not supply a project name"
+            );
+            let readme = format!(
+                "{section}\n\nHelp keep development going.\n\n# Beacon\n\nA network traffic monitoring application.\n"
+            );
+            let metadata = parse_readme_metadata(&readme);
+            assert_eq!(metadata.title.as_deref(), Some("Beacon"), "{section:?}");
+            assert_eq!(
+                metadata.description.as_deref(),
+                Some("A network traffic monitoring application."),
+                "{section:?}"
+            );
+        }
+    }
+
+    for name in ["SupportKit", "DonationTracker", "Donatello", "rust-support"] {
+        assert!(!is_non_project_heading(name), "{name:?}");
+        assert_eq!(clean_project_name(name, "fallback").as_deref(), Some(name));
+    }
+}
+
+#[test]
+fn readme_image_title_fills_empty_alt_before_support_sections() {
+    for banner in [
+        r#"<img alt="" title="Beacon" src="header.png"/>"#,
+        r#"<img title="Beacon" src="header.png"/>"#,
+        "<img\nalt=\"\"\ntitle=\"Beacon\"\nsrc=\"header.png\"/>",
+    ] {
+        let readme = format!(
+            "{banner}\n\nA network traffic monitoring application.\n\n## _Support Beacon's development_ 💖\n\n<img alt=\"Sponsor Company\" src=\"sponsor.png\"/>\n"
+        );
+        let metadata = parse_readme_metadata(&readme);
+        assert_eq!(metadata.title.as_deref(), Some("Beacon"), "{banner:?}");
+        assert_eq!(
+            metadata.description.as_deref(),
+            Some("A network traffic monitoring application.")
+        );
+    }
+}
+
+#[test]
+fn readme_image_title_does_not_override_alt_or_accept_badges_and_navigation() {
+    let metadata = parse_readme_metadata(
+        r#"<img alt="" title="Download" src="download.svg"/>
+<img alt="" title="Build status" src="badge.svg"/>
+<img alt="Release badge" title="Advertisement" src="release.svg"/>
+<img alt="Beacon" title="Different name" src="header.png"/>
+
+A network traffic monitoring application.
+"#,
+    );
+    assert_eq!(metadata.title.as_deref(), Some("Beacon"));
+
+    let metadata = parse_readme_metadata(
+        r#"<img alt="" src="separator.png"/><a title="Unrelated link">Link</a>
+
+# Beacon
+
+A network traffic monitoring application.
+"#,
+    );
+    assert_eq!(metadata.title.as_deref(), Some("Beacon"));
+}
+
+#[test]
 fn parse_readme_title_line_rejects_promo_link_heading() {
     assert!(parse_readme_title_line(
         "### [Warp, the AI terminal for devs](https://www.warp.dev/cobra)"

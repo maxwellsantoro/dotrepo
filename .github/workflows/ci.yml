@@ -613,6 +613,20 @@ jobs:
         run: npm test
       - name: Run explicit release-surface gate
         run: uv run python scripts/check_release_gate.py --output-root release-gate
+      - name: Install pinned browser test tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/dotrepo-browser" --no-save playwright@1.62.1
+          "$RUNNER_TEMP/dotrepo-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify desktop and mobile public presentation
+        run: NODE_PATH="$RUNNER_TEMP/dotrepo-browser/node_modules" node scripts/check_public_presentation.cjs release-gate/public release-gate/browser-qa
+      - name: Upload browser screenshots and results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: public-presentation-browser-qa
+          path: release-gate/browser-qa/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Upload static public export artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:

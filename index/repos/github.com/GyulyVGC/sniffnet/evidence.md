@@ -1,6 +1,7 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name `Sniffnet` from the header image's `title` attribute in [README.md at the recorded HEAD](https://github.com/GyulyVGC/sniffnet/blob/592a62a5ad2fb2e9f8470a6174ab9f18dc86997a/README.md#L3).
+- Rechecked and corrected `repo.name` on 2026-10-03 against that pinned source. The later support/development heading is a donation call to action, not the project name. The original snapshot timestamp is retained in `record.generated_at` and the assessment's `checkedAt` binding; no other fields were refreshed.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred repo.build from .github/workflows/rust.yml as `cargo build --verbose`.
 - Inferred repo.test from .github/workflows/rust.yml as `cargo test --verbose -- --nocapture`.

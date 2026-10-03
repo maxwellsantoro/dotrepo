@@ -38,3 +38,47 @@ def test_missing_profile_counts_as_unknown_and_export_dates_are_not_substituted(
     )
     summary = freshness_summary(tmp_path, inventory, "2026-09-16T00:00:00Z")
     assert (summary["fresh"], summary["stale"], summary["unknown"]) == (0, 1, 1)
+
+
+def test_lookup_example_uses_record_command_source_and_age(tmp_path):
+    from public_product_content import render_lookup_example
+
+    inventory = {
+        "repositoryCount": 1,
+        "repositories": [{"identity": {"host": "github.com", "owner": "example", "repo": "tool"}}],
+    }
+    root = tmp_path / "v0/repos/github.com/example/tool"
+    root.mkdir(parents=True)
+    profile = {
+        "identity": inventory["repositories"][0]["identity"],
+        "record": {
+            "generatedAt": "2026-07-06T00:00:00Z",
+            "evidencePath": "repos/github.com/example/tool/evidence.md",
+        },
+        "execution": {"test": "run-tests --target '<example>'"},
+    }
+    (root / "profile.json").write_text(json.dumps(profile))
+    rendered = render_lookup_example(tmp_path, inventory, "/preview", "2026-09-16T00:00:00Z")
+    assert "72 days at export" in rendered
+    assert "stale" in rendered
+    assert "run-tests --target &#x27;&lt;example&gt;&#x27;" in rendered
+    assert "Source evidence" in rendered
+    assert "/preview/v0/repos/github.com/example/tool/profile.json" in rendered
+    assert "read the upstream instructions" in rendered
+    assert "<example>" not in rendered
+
+
+def test_lookup_example_handles_absent_profiles_and_commands(tmp_path):
+    from public_product_content import render_lookup_example
+
+    assert "No profile is available" in render_lookup_example(tmp_path, {}, "", "unknown")
+    inventory = {"repositories": [{"identity": {"host": "github.com", "owner": "x", "repo": "y"}}]}
+    root = tmp_path / "v0/repos/github.com/x/y"
+    root.mkdir(parents=True)
+    (root / "profile.json").write_text(
+        json.dumps({"identity": inventory["repositories"][0]["identity"]})
+    )
+    rendered = render_lookup_example(tmp_path, inventory, "", "unknown")
+    assert "Unknown — inspect upstream test instructions" in rendered
+    assert "Source evidence unavailable" in rendered
+    assert "at an unknown time" in rendered

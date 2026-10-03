@@ -4,307 +4,126 @@
 [![Latest Release](https://img.shields.io/github/v/release/maxwellsantoro/dotrepo)](https://github.com/maxwellsantoro/dotrepo/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0f766e.svg)](LICENSE)
 
-**Repository facts your agents can reuse.**
+**Look up a repository's purpose, build and test commands, docs, and owners.**
 
-**dotrepo** provides structured project metadata, build and test commands,
-documentation links, and ownership information through an HTTP API, MCP server,
-and CLI. Records carry provenance, evidence pointers, conflicts, and record age
-so tools can decide what to use and when to inspect upstream sources.
+dotrepo gives agents and tools those facts as JSON, through MCP, or from a local
+`.repo` file. Each record includes source and trust context so you can decide
+whether to use an answer or inspect upstream.
 
-The immediate use is repository orientation and operational metadata. Architecture
-research, suitability decisions, debugging, and code changes still require source
-inspection. Making that basic orientation reusable is the first step toward the
-longer-term mission of reusable repository understanding.
+## Try it: orient yourself in ripgrep
 
-## Try a lookup
-
-No installation or maintainer adoption is required for an indexed repository:
+Fetch the indexed profile without installing anything or cloning the repository:
 
 ```bash
 curl -sS https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/profile.json
 ```
 
-The profile groups purpose, execution, documentation, ownership, completeness,
-and trust. Check `record.generatedAt` and `record.freshnessStatus` before using a
-value. The top-level `freshness.generatedAt` dates the export, not the upstream
-facts. Refreshed records also expose `fieldEvidence`: source, extraction method,
-assessment, reason, and check time where the crawler retained them. Older records
-do not acquire field-level evidence simply by being re-exported.
+The response groups purpose, execution, documentation, and ownership. Check
+`record.generatedAt`, `record.freshnessStatus`, conflicts, and the fields your
+task needs. `freshness.generatedAt` dates the export, not the source facts.
+A missing, old, or conflicting answer needs an upstream check. Returned commands
+are data to review, not permission to execute them.
 
-With `dotrepo-mcp` installed, call:
+## Connect your agent
+
+Install the stable MCP server with a Rust toolchain, or use the
+[stable release bundle](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.1):
+
+```bash
+cargo install dotrepo-mcp --version 1.0.1 --locked
+```
+
+For clients that use an `mcpServers` configuration:
 
 ```json
 {
-  "name": "dotrepo.lookup",
-  "arguments": {
-    "repositoryUrl": "https://github.com/BurntSushi/ripgrep",
-    "path": "repo.test"
+  "mcpServers": {
+    "dotrepo": { "command": "dotrepo-mcp", "args": [] }
   }
 }
 ```
 
-Use dotrepo as a first lookup with explicit fallback. A found profile can still
-be stale, incomplete, or conflicting. See the
-[integration guide](docs/external-consumer-integration.md) and the runnable
-[consumer example](examples/external-consumer/) for task-specific checks.
+Ask the client to call `dotrepo.lookup` with these arguments:
 
-## What is proven today
-
-The reference toolchain and hosted lookup surface are implemented. Coverage and
-quality are still partial. The [live measurement page](https://dotrepo.org/efficiency/)
-reports field presence and modeled requests; presence is not accuracy, and modeled
-requests are not measured end-to-end agent savings.
-
-The [independent head-to-head benchmark](benchmarks/head-to-head/) retains both
-wins and losses. Fixing the examples it exposed is regression evidence, not proof
-of generalization. A native maintainer record, record-wide verification, and
-field-level correctness are different properties.
-
-Sustained independent consumer adoption remains an open success criterion.
-In-repository clients and AI interviews demonstrate or explore an integration;
-they do not establish external demand.
-
-## For maintainers
-
-A native `.repo` gives you a structured source of truth and tools to keep supported
-documentation blocks consistent. You can start from existing files or a generated
-overlay, inspect the result, and publish your own authoritative record. Overlays
-make indexed repositories usable before adoption; native records provide
-maintainer control without being required for coverage.
-
-## Quick start
-
-1. Install `dotrepo` from the latest **stable** GitHub release bundle (`1.0.x`),
-   or with `cargo install dotrepo-cli` (pin a `1.0.x` version for production).
-   The `main` branch tracks a `2.0.0-alpha` development line with public API
-   changes. See [`docs/install.md`](docs/install.md) for platform bundles and
-   the VS Code extension package.
-2. Start a record in your repository:
-
-```bash
-dotrepo --root <repo> init
-# or bootstrap from existing README.md / CODEOWNERS / SECURITY.md:
-dotrepo --root <repo> import
+```json
+{
+  "repositoryUrl": "https://github.com/BurntSushi/ripgrep",
+  "path": "repo.test"
+}
 ```
 
-3. Run the canonical maintainer loop:
+See [installation](docs/install.md) for the CLI, LSP, and VS Code extension, and
+[consumer integration](docs/external-consumer-integration.md) for fallback rules
+and a runnable client.
+
+**Version matters:** the stable release is `v1.0.1`; this branch is unreleased
+`2.0.0-alpha.0`. In particular, stable `promotion-report --apply` can write files;
+its replacement on `main` is disabled. New field-evidence and MCP safeguards on
+`main` are not guarantees of the stable binaries. Use the
+[version comparison and stable documentation](docs/release-compatibility.md).
+
+## What you can use it for
+
+- **Repository orientation:** get purpose, docs, owners, and reported commands
+  before deciding what source files to inspect
+- **Agent integrations:** make a first lookup, retain trust and age, then fall
+  back to upstream when the answer does not meet your task's needs
+- **Maintainer metadata:** keep a native `.repo` file and supported documentation
+  blocks consistent with validation and generated-surface checks
+- **Repository discovery:** search, compare factual profiles, and traverse
+  repository relationships through the [public API](docs/public-export-examples.md)
+
+Indexed overlays are generated from public source material, so maintainers do
+not need to adopt dotrepo for their repository to appear. A native `.repo`
+provides maintainer control. Routine generated records are machine-checked;
+`verified` does not mean human-reviewed or correct in every field.
+
+## Add a record to your repository
+
+Install the stable CLI from the release bundle or with
+`cargo install dotrepo-cli --version 1.0.1 --locked`, then:
 
 ```bash
+# Start from existing README.md, CODEOWNERS, and SECURITY.md:
+dotrepo --root <repo> import
+# Review the generated .repo, then:
 dotrepo --root <repo> validate
 dotrepo --root <repo> query repo.build --raw
 dotrepo --root <repo> trust
 dotrepo --root <repo> generate --check
 ```
 
-For the full maintainer flow, see
-[`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md).
+Use `init` instead of `import` to start from a blank scaffold. The
+[stable maintainer guide](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.1/docs/maintainer-happy-path.md)
+walks through adoption; [sync boundaries](docs/sync-boundaries.md) explain which
+files and regions dotrepo can manage.
 
-If you want to contribute to the protocol, toolchain, or public index, start with
-[`CONTRIBUTING.md`](CONTRIBUTING.md).
+## Limits and evidence
 
-## What dotrepo is
-
-dotrepo has three cooperating parts:
-
-1. **A protocol**
-   A versioned `.repo` schema for essential repository metadata, provenance, trust, and synchronization hints.
-2. **A reference toolchain**
-   A Rust CLI, stdio MCP server, and related integrations for importing, validating, querying, syncing, and generating compatible repository surfaces.
-3. **An index**
-   A public, Git-backed collection of evidence-backed overlays, trust context,
-   and maintainer handoffs that makes repositories mechanically visible before
-   native adoption.
-
-The current index is generated and refreshed through an autonomous conveyor.
-Routine generated records do not require per-record human review. Humans set
-policy, improve gates and parsers, monitor aggregate health, and handle
-maintainer authority claims.
-
-## Why it matters for agents
-
-`dotrepo-mcp` is a thin stdio MCP server that exposes the same trust-aware core
-used by the CLI. It gives agent clients structured tools instead of forcing them
-to scrape README prose.
-
-Current MCP tools:
-- `dotrepo.validate`
-- `dotrepo.query`
-- `dotrepo.trust`
-- `dotrepo.adoption_status`
-- `dotrepo.lookup`
-- `dotrepo.claim_inspect`
-- `dotrepo.generate_check`
-- `dotrepo.import_preview`
-- `dotrepo.import_write`
-
-Tool execution errors are returned as MCP tool results with
-`isError: true` and machine-readable `structuredContent`. Protocol-level
-mistakes, such as calling an unknown tool name, still use normal JSON-RPC
-errors.
-
-Example local MCP tool call:
-
-```json
-{
-  "name": "dotrepo.query",
-  "arguments": {
-    "root": "examples/native-minimal",
-    "path": "repo.build"
-  }
-}
-```
-
-That returns the selected value together with record status, provenance, and
-conflict context.
-
-`dotrepo validate` intentionally checks only the root `.repo` or root
-`record.toml` for the selected repository. Use `dotrepo validate-index` for
-descendant `index/repos/**/record.toml` overlays; `query` and `trust` still
-load matching descendant candidates when resolving conflict-aware answers.
-
-Example hosted lookup call:
-
-```json
-{
-  "name": "dotrepo.lookup",
-  "arguments": {
-    "repositoryUrl": "https://github.com/BurntSushi/ripgrep",
-    "path": "repo.description"
-  }
-}
-```
-
-That resolves the repository against `https://dotrepo.org/`, returns the hosted
-summary, profile, trust, and query entrypoints, and optionally includes the live
-query result for the requested dot-path. See
-[`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md) for the
-tool contract.
-
-For repeated known-repository access, the reference CLI and hosted public
-surface also expose batch profile/field lookup, structured profile search,
-factual profile comparison, and relationship traversal as cacheable GET
-routes:
-
-```bash
-cargo run -p dotrepo-cli -- public batch-profiles --repo github.com/sharkdp/fd
-curl -s "https://dotrepo.org/v0/batch/profiles?repo=github.com/sharkdp/fd"
-```
-
-See [`docs/public-export-examples.md`](docs/public-export-examples.md) for the
-full set of batch, search, compare, relations, lookup-efficiency, and coverage
-examples, and for the operator-facing measurement scripts.
-
-The repository also includes a falsifiable
-[head-to-head benchmark harness](benchmarks/head-to-head/) that compares
-dotrepo lookups against a GitHub API + README baseline on accuracy, abstention,
-confidently-wrong answers, latency, and bytes over the wire. It is intentionally
-allowed to make dotrepo lose; that is the measurement point.
-
-## Why now
-
-Repository metadata is fragmented. Some facts live in README files. Some live in `CODEOWNERS`, `SECURITY.md`, CI config, or platform settings. Some are nowhere except tribal knowledge.
-
-That is annoying for maintainers, confusing for users, and expensive for coding agents. Today, basic questions like these often require heuristics or LLM interpretation:
-- What is this repo?
-- Who owns it?
-- How do I build and test it?
-- Where are the real docs?
-- What policies or constraints apply?
-
-A structured `.repo` record does not replace code or good documentation. It
-provides a stable layer of essential facts that humans can maintain and machines
-can query directly. The public index extends that stable shape to repositories
-that have not adopted the protocol yet.
-
-## Core principles
-
-- **Protocol first**: dotrepo is a shared metadata protocol, not just a CLI.
-- **Trust matters**: all records should communicate provenance and trust level clearly.
-- **Respect the source**: overlays must distinguish declared facts, imported facts, and inferred facts.
-- **Useful before adoption**: the index and overlay model make dotrepo valuable even for repos that do not use it natively.
-- **Deterministic first**: parsers and evidence checks do the common work; model intelligence escalates only when needed.
-- **Honest automation**: generated overlays publish confidence, provenance, conflicts, and explicit unknowns without a routine human review queue.
-- **Practical, not doctrinaire**: dotrepo should work with existing files and conventions, not demand an all-or-nothing migration.
-- **Machine-readable, human-legible**: the protocol should help agents and tools without making projects feel sterile.
-
-## Current protocol decisions
-
-- **Canonical in-repo v0.1 form**: a single root `.repo` file in TOML format
-- **Bundle mode**: reserved for a future version
-- **Overlay records**: separate TOML records in the index, with explicit provenance and trust metadata
-- **Query support**: first-class CLI support for querying structured fields
-- **Mode-aware validation**: native records and overlays validate differently
-- **Generated outputs**: supported, but not the sole editing surface
-- **Extension namespace**: `x.*` is reserved for non-core extensions
-- **Repository relations**: explicit directed links carry their own trust;
-  workspace-specific relation kinds remain reserved for future work
-
-## Versioning note
-
-The project release, manifest schema, claim schema, MCP protocol, and hosted API
-have independent version lines. Read tool versions from GitHub releases,
-manifest versions from the manifest itself, and the hosted API version from
-[`meta.json`](https://dotrepo.org/v0/meta.json) instead of copying them into
-additional status documents.
-
-Those are separate version lines on purpose:
-- the release version tracks the shipped reference toolchain
-- the schema version tracks the `.repo` document contract
-- the public API version tracks the hosted JSON response surface
-
-## What the repo includes today
-
-- a Rust workspace with `dotrepo-schema`, `dotrepo-core`, `dotrepo-cli`, `dotrepo-mcp`, `dotrepo-lsp`, and the shared internal `dotrepo-transport`
-- a thin VS Code extension shell under [`editors/vscode/`](editors/vscode/)
-- a thin import path for bootstrapping records from `README.md`, `CODEOWNERS`, and `SECURITY.md`
-- a thin stdio MCP server exposing trust-aware validate/query/trust/generate-check/import tools
-- an autonomous crawler with deterministic verification, field scoring,
-  progressive adjudication providers, optional bounded synthesis sidecars,
-  promotion, refresh planning, and batch telemetry
-- updated RFCs that reflect the protocol + toolchain + index model
-- example native and overlay records
-- a seeded `index/` tree with real overlay layout and validation rules
-- GitHub Actions workflows for workspace CI, operator-gate claim checks,
-  release-gate packaging, and Cloudflare deployment
-
-## What dotrepo does not claim yet
-
-This repo ships the current dotrepo protocol and reference toolchain surface.
-The crates implement import, validation, querying, generated-surface checks,
-index validation, claims, public export, and an MCP server.
-
-The current public site includes exact lookup, ranked repository search,
-factual profile comparison, relationship lookup, and optional bounded research
-synthesis. What remains intentionally deferred is production-scale ranking
-calibration, public mutation APIs, bundle mode, first-class workspace semantics,
-broad editor automation, and arbitrary prose round-tripping.
+- Metadata supports orientation. Architecture research, suitability decisions,
+  debugging, and code changes still require source inspection
+- Coverage, correctness, completeness, and freshness are separate. Records can
+  be incomplete, stale, or wrong even when marked `verified`; retained
+  field-level evidence is available only where the producing version and crawl
+  saved it. See the [trust model](docs/trust-model.md)
+- The [measurement page](https://dotrepo.org/efficiency/) reports field presence
+  and modeled requests. Those are not accuracy or measured end-to-end agent
+  savings
+- The [head-to-head benchmark](benchmarks/head-to-head/) keeps wins and losses
+  against a GitHub API + README baseline. Fixing its examples is regression
+  evidence, not proof of generalization
+- Sustained independent consumer adoption remains an open success criterion.
+  In-repository clients and AI interviews do not establish external demand
 
 ## Read next
 
-For strategy and active execution:
-- [`ROADMAP.md`](ROADMAP.md)
-- [`docs/README.md`](docs/README.md)
+- [Documentation map](docs/README.md) and [release compatibility](docs/release-compatibility.md)
+- [Toolchain and protocol reference](docs/reference-overview.md), including MCP
+  tools, validation scope, and version boundaries
+- [Hosted API examples](docs/public-export-examples.md), [public architecture](docs/public-surface.md),
+  and [consumer pilot](docs/consumer-pilot.md)
+- [Trust model](docs/trust-model.md) and [authority rules](rfcs/0004-index-and-trust-model.md)
+- [Roadmap](ROADMAP.md), [contributing](CONTRIBUTING.md), and [index operations](index/README.md)
 
-If you are adopting dotrepo in a repository:
-- [`docs/install.md`](docs/install.md)
-- [`docs/maintainer-happy-path.md`](docs/maintainer-happy-path.md)
-- [`docs/sync-boundaries.md`](docs/sync-boundaries.md)
-
-If you are consuming the hosted public surface or building agent tooling:
-- [`docs/public-export-examples.md`](docs/public-export-examples.md)
-- [`docs/public-surface.md`](docs/public-surface.md)
-- [`docs/ai-tool-interviews.md`](docs/ai-tool-interviews.md)
-- [`rfcs/0006-mcp-server-contract.md`](rfcs/0006-mcp-server-contract.md)
-
-If you want the protocol and trust model:
-- [`docs/trust-model.md`](docs/trust-model.md)
-- [`rfcs/0001-protocol-and-ecosystem.md`](rfcs/0001-protocol-and-ecosystem.md)
-- [`rfcs/0004-index-and-trust-model.md`](rfcs/0004-index-and-trust-model.md)
-
-If you want to contribute:
-- [`CONTRIBUTING.md`](CONTRIBUTING.md)
-- [`index/README.md`](index/README.md)
-- [`index/review-checklist.md`](index/review-checklist.md)
-
-Repository Python tooling is managed exclusively with `uv`: run `uv venv`,
-`uv sync --dev --locked`, then invoke scripts and tests through `uv run`.
+Repository Python tooling uses `uv`: run `uv venv`, `uv sync --dev --locked`,
+then invoke scripts and tests through `uv run`.

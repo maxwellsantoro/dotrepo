@@ -11,10 +11,51 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from public_site_content import ARTICLES
-from public_product_content import render_record_freshness, render_profile_example
+from public_product_content import (
+    render_record_freshness,
+    render_profile_example,
+    render_lookup_example,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 REPO_BLOB_PREFIX = "https://github.com/maxwellsantoro/dotrepo/blob/main/"
+
+PUBLIC_PAGE_STYLES = """<style>
+  h1 { font-size: clamp(2.25rem, 4.6vw, 4rem); line-height: 1.04; letter-spacing: -.045em; max-width: 19ch; }
+  h2, .section h2, .hero__meta h2 { font-size: 1.5rem; letter-spacing: -.02em; text-transform: none; color: var(--ink); }
+  .panel { box-shadow: none; }
+  .hero { align-items: start; }
+  .hero__copy { padding: 30px; }
+  .hero__lede { font-size: 1.05rem; line-height: 1.6; }
+  .section { margin-top: 24px; }
+  .api-card, .feature { background: transparent; box-shadow: none; border-radius: 0; }
+  pre { max-width: 100%; overflow-x: auto; font-size: .85rem; line-height: 1.55; }
+  p, li, .repo-card__path { overflow-wrap: anywhere; }
+  summary { cursor: pointer; font-weight: 700; color: var(--accent-strong, #116466); padding: 12px 0; }
+  .start-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 28px 0 12px; }
+  .start-paths a { padding: 18px 0; border-top: 2px solid #116466; }
+  .start-paths strong, .start-paths span { display: block; }
+  .start-paths span { margin-top: 10px; line-height: 1.5; color: var(--muted); }
+  .snapshot-strip { margin: 20px 0; padding: 0 8px; color: var(--muted); font-size: .88rem; }
+  .snapshot-strip p { margin: 6px 0; }
+  .snapshot-strip .stat { padding: 0; border: 0; background: transparent; }
+  .snapshot-strip .stat strong, .snapshot-strip .stat span { display: inline; font-size: inherit; }
+  .lookup-example { padding: 28px; border-top: 4px solid #116466; }
+  .lookup-example h2 { font-size: 1.4rem; line-height: 1.25; margin: 8px 0 20px; }
+  .lookup-example dl { margin: 0; }
+  .lookup-example dt { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: 16px; }
+  .lookup-example dd { margin: 5px 0 0; line-height: 1.5; }
+  .lookup-example code { overflow-wrap: anywhere; }
+  .authority-flow { list-style: none; padding: 0; counter-reset: step; }
+  .authority-flow li { position: relative; padding: 0 0 24px 36px; border-left: 2px solid #116466; margin-left: 12px; }
+  .authority-flow li:last-child { border-left-color: transparent; }
+  .authority-flow li:before { counter-increment: step; content: counter(step); position: absolute; left: -13px; top: 0; width: 24px; height: 24px; border-radius: 50%; text-align: center; background: #116466; color: white; font-size: .9rem; }
+  .authority-flow strong, .authority-flow span { display: block; }
+  .authority-flow span { margin-top: 6px; color: var(--muted); line-height: 1.5; }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid #116466; outline-offset: 4px; }
+  @media(max-width: 720px) { .start-paths { grid-template-columns: 1fr; gap: 4px; } .hero__copy, .lookup-example, .section { padding: 22px; } h1 { font-size: 2.45rem; } .api-grid, .three-up { grid-template-columns: 1fr; } }
+</style>"""
+
 
 DOCS_SECTIONS = [
     {
@@ -1189,6 +1230,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
       .result-count {{ padding-bottom: 0; }}
     }}
   </style>
+  {PUBLIC_PAGE_STYLES}
 </head>
 <body>
   <div class="page">
@@ -1196,7 +1238,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
     <section class="panel hero">
       <p class="eyebrow">Public inventory</p>
       <h1>Find a repository.</h1>
-      <p>Search the current validated export by project, owner, host, or description, then open its summary, trust report, or static query-input data.</p>
+      <p>Search the current validated export by project, owner, host, or description, then open its summary, trust report, or field-query data.</p>
     </section>
     <section class="panel catalog" data-inventory-url="{inventory_href}">
       <div class="catalog-tools">
@@ -1208,7 +1250,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
       </div>
       <div class="repo-grid" id="repository-grid" aria-live="polite"></div>
       <p class="no-results" id="repository-no-results" hidden>No repositories match this search.</p>
-      <p class="catalog-note">Showing a capped result set for speed. Search by name, owner, host, or description to narrow the current validated export.</p>
+      <p class="catalog-note" id="repository-cap-note" hidden>More matches are available. Select “Show more” or narrow your search.</p>
       <noscript>
         <p class="catalog-note">JavaScript is required for the searchable catalog. The complete machine-readable inventory is available at <a href="{inventory_href}">/v0/repos/index.json</a>.</p>
       </noscript>
@@ -1227,6 +1269,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
       const grid = document.getElementById("repository-grid");
       const count = document.getElementById("repository-result-count");
       const noResults = document.getElementById("repository-no-results");
+      const capNote = document.getElementById("repository-cap-note");
       const inventoryUrl = catalog.dataset.inventoryUrl;
       let repositories = [];
       let visibleLimit = RESULT_PAGE;
@@ -1364,6 +1407,7 @@ def render_repositories_index(inventory: dict, base_path: str) -> str:
             : `Showing ${{shown}} of ${{total}} repositories`;
         }}
         noResults.hidden = total !== 0;
+        capNote.hidden = shown >= total;
 
         const more = ensureLoadMore();
         if (shown < total) {{
@@ -1624,13 +1668,14 @@ def render_writing_index(base_path: str) -> str:
       }}
     }}
   </style>
+  {PUBLIC_PAGE_STYLES}
 </head>
 <body>
   <div class="page">
     {render_site_header(base_path, "writing")}
     <section class="panel hero">
       <p class="eyebrow">Writing</p>
-      <h1>Field reports from the protocol getting real.</h1>
+      <h1>How dotrepo works, and what we’re learning.</h1>
       <p>Essays, research syntheses, and launch notes from dotrepo as the public surface, index, and agent-facing workflows get exercised in the open.</p>
     </section>
     <section class="panel section">
@@ -1641,7 +1686,7 @@ def render_writing_index(base_path: str) -> str:
     </section>
     <footer class="footer">
       <span>Canonical public origin: <a href="https://dotrepo.org/">dotrepo.org</a></span>
-      <span>Local review root: <a href="{site_href(base_path, "/")}">homepage</a></span>
+      <span>Explore: <a href="{site_href(base_path, "/")}">homepage</a></span>
       <span>Source: <a href="https://github.com/maxwellsantoro/dotrepo">github.com/maxwellsantoro/dotrepo</a></span>
     </footer>
   </div>
@@ -1860,14 +1905,21 @@ def render_docs_index(base_path: str) -> str:
       }}
     }}
   </style>
+  {PUBLIC_PAGE_STYLES}
 </head>
 <body>
   <div class="page">
     {render_site_header(base_path, "docs")}
     <section class="panel hero">
       <p class="eyebrow">Docs</p>
-      <h1>The first-party entry to the protocol, product, and live proof surface.</h1>
-      <p>This page keeps the documentation front door on <code>dotrepo.org</code>. Detailed working docs still live in the repository for now, but the canonical entrypoint, public API links, and product framing stay first-party.</p>
+      <h1>Get started with dotrepo.</h1>
+      <p>Look up repository facts, connect an agent, or publish a record you maintain.</p>
+      <nav class="start-paths" aria-label="Choose a getting-started path">
+        <a href="{site_href(base_path, "/")}#lookup"><strong>1. Look up a repository</strong><span>Find facts, sources, and record age. No installation needed.</span></a>
+        <a href="{site_href(base_path, "/")}#integrate"><strong>2. Connect your agent</strong><span>Install the MCP server or use the HTTP API.</span></a>
+        <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/maintainer-happy-path.md"><strong>3. Maintain your record</strong><span>Import, validate, and publish a native .repo file.</span></a>
+      </nav>
+      <p class="version-note">Using a released binary? Check <a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">stable vs. development behavior</a>. Repository docs below track main.</p>
     </section>
     {render_docs_cards(base_path)}
     <footer class="footer">
@@ -2155,6 +2207,7 @@ def render_article_page(article: dict, base_path: str) -> str:
       table {{ min-width: 560px; }}
     }}
   </style>
+  {PUBLIC_PAGE_STYLES}
 </head>
 <body>
   <div class="page">
@@ -2724,6 +2777,7 @@ def main() -> int:
       }}
     }}
   </style>
+  {PUBLIC_PAGE_STYLES}
 </head>
 <body>
   <script id="dotrepo-homepage-snapshot" type="application/json">{homepage_snapshot_state}</script>
@@ -2745,18 +2799,14 @@ def main() -> int:
         <p>Works with indexed repositories before maintainers adopt <code>.repo</code>.
           Coverage is partial. Metadata helps with orientation; architecture and code changes still require source inspection.</p>
       </div>
-      <aside class="panel hero__meta">
-        <h2>Coverage and record age</h2>
-        <div class="stat-grid">
-          <div class="stat"><strong>{html.escape(str(repository_count))} repositories</strong>
-            <span>Published profiles. Presence does not guarantee task completeness or factual correctness.</span></div>
-          {render_record_freshness(input_dir, inventory, generated_at)}
-          <div class="stat"><strong>Exported {html.escape(generated_at_human)}</strong>
-            <span>This is the snapshot publication time, not the last upstream check.</span></div>
-          <div class="stat"><strong>Snapshot revalidation due</strong>{stale_line}</div>
-        </div>
-      </aside>
+      {render_lookup_example(input_dir, inventory, base_path, generated_at)}
     </section>
+
+    <div class="snapshot-strip" aria-label="Current export status">
+      <p><strong>{html.escape(str(repository_count))} repositories</strong> · exported {html.escape(generated_at_human)} · partial coverage</p>
+      {render_record_freshness(input_dir, inventory, generated_at)}
+      <p>Snapshot revalidation due: {stale_line}. Export time is not the last upstream check.</p>
+    </div>
 
     <section class="panel section" id="lookup">
       <h2>Look up a repository</h2>
@@ -2770,8 +2820,16 @@ def main() -> int:
       <p>Request a profile, check the underlying record age and requested fields,
         and fall back to upstream sources on a miss, stale record, or conflict.</p>
       <pre><code>curl https://dotrepo.org/v0/repos/github.com/BurntSushi/ripgrep/profile.json</code></pre>
-      <p>With the <code>dotrepo-mcp</code> server installed, call <code>dotrepo.lookup</code>
-        with <code>repositoryUrl</code> and an optional field <code>path</code>.</p>
+      <h3>Connect over MCP</h3>
+      <p>With Rust installed, install the stable server:</p>
+      <pre><code>cargo install dotrepo-mcp --version 1.0.1 --locked</code></pre>
+      <p>Add this stdio server to your MCP client’s configuration (the surrounding configuration format may vary):</p>
+      <pre><code>{{"mcpServers": {{"dotrepo": {{"command": "dotrepo-mcp", "args": []}}}}}}</code></pre>
+      <p>Restart the client, then ask it to call <code>dotrepo.lookup</code> with
+        <code>repositoryUrl: "https://github.com/BurntSushi/ripgrep"</code> and
+        <code>path: "repo.test"</code>. The stable server returns a field query with trust context;
+        profile output and additional safeguards on main are unreleased.</p>
+      <p><a href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/release-compatibility.md">Version-specific behavior and safety limits</a></p>
       <div class="cta-row">
         <a class="cta cta--primary" href="https://github.com/maxwellsantoro/dotrepo/blob/main/docs/external-consumer-integration.md">Integration and fallback guide</a>
         <a class="cta cta--secondary" href="{site_href(base_path, "/efficiency/")}">Coverage and benchmark limitations</a>
@@ -2824,9 +2882,13 @@ def main() -> int:
           </div>
         </article>
         <article class="api-card">
-          <h3>What the live trust surface returns</h3>
-          <p>This excerpt shows the selected record and maintainer claim from this export.</p>
-          <pre><code>{featured_trust["proofJson"]}</code></pre>
+          <h3>Keep the source trail</h3>
+          <ol class="authority-flow" aria-label="How maintainer authority is selected">
+            <li><strong>Generated record</strong><span>Facts gathered from upstream files, with evidence preserved.</span></li>
+            <li><strong>Maintainer claim</strong><span>A claim identifies the maintainer-owned record. Acceptance is reviewed separately.</span></li>
+            <li><strong>Selected record</strong><span>The selection explains which record wins; earlier evidence and conflicts remain inspectable.</span></li>
+          </ol>
+          <details><summary>Inspect this export’s selection JSON</summary><pre><code>{featured_trust["proofJson"]}</code></pre></details>
           <p class="api-card__caption">Review path: <code>{html.escape(str(featured_trust["reviewPath"] or "unknown"))}</code> · Evidence path: <code>{html.escape(str(featured_trust["evidencePath"] or "unknown"))}</code></p>
         </article>
       </div>
@@ -2837,7 +2899,7 @@ def main() -> int:
       <div class="api-grid">
         <article class="api-card">
           <h3>Stable entry points</h3>
-          <p>The public surface is export-first. Summary, trust, inventory, freshness, and query responses all come from the same validated snapshot family.</p>
+          <p>The public surface is export-first. Summary, trust, inventory, freshness, and query responses all come from the same published snapshot.</p>
           <div class="endpoint-list">
             <div class="endpoint">
               <code>{html.escape(site_href(base_path, "/v0/meta.json"))}</code>
@@ -2876,7 +2938,7 @@ def main() -> int:
             <code>{html.escape(first_query)}</code>
             <span>Hosted query route for <code>repo.description</code>; static preview data: <a href="{html.escape(first_query_input)}"><code>query-input JSON</code></a>.</span>
           </div>
-          <pre><code>{query_example}</code></pre>
+          <details><summary>Inspect the example query response</summary><pre><code>{query_example}</code></pre></details>
           <p class="api-card__caption">Full responses also include freshness, repository identity, and navigation links.</p>
         </article>
       </div>
