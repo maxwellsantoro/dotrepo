@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/cockroachdb/cockroach"
-generated_at = "2026-07-06T18:38:02.545805Z"
+generated_at = "2026-09-16T16:21:58.509554Z"
 
 [record.trust]
 confidence = "high"
@@ -108,11 +108,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://www.cockroachlabs.com/docs/cockroachcloud/quickstart.html"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://www.cockroachlabs.com"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "GNUmakefile"
+state = "present"
+valueJson = '"make build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"CockroachDB — the cloud native, distributed SQL database designed for high availability, effortless scale, and control over data placement."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.cockroachlabs.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"cockroach"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:21:58.509554Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "GNUmakefile"
+state = "present"
+valueJson = '"make test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/cockroachdb/cockroach.git"
 default_branch = "master"
 fork = false
-head_sha = "8ba72f3434ea5547293eb034cebd689000d5f777"
+head_sha = "60798776b9ed23f24c7f281e197098aaba039181"
 html_url = "https://github.com/cockroachdb/cockroach"
-stars = 32253
+stars = 32468

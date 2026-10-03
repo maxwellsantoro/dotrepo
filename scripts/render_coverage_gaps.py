@@ -95,7 +95,9 @@ def build_report(index_root: Path, *, limit: int) -> dict[str, Any]:
         "missingTest": sum(1 for r in records if r["missingTest"]),
         "missingSecurity": sum(1 for r in records if r["missingSecurity"]),
         "honestExecutionAbstention": sum(1 for r in records if r["honestExecutionAbstention"]),
-        "missingToolchainEcosystem": sum(1 for r in records if not present(r.get("toolchainEcosystem"))),
+        "missingToolchainEcosystem": sum(
+            1 for r in records if not present(r.get("toolchainEcosystem"))
+        ),
     }
 
     by_family: dict[str, dict[str, int]] = {}
@@ -167,7 +169,15 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"| {family} | {row['records']} | {row['missingBuild']} | {row['missingTest']} | "
             f"{row['missingSecurity']} | {row['honestExecutionAbstention']} |"
         )
-    lines.extend(["", "## Recrawl candidates", "", "| identity | status | family | missing |", "| --- | --- | --- | --- |"])
+    lines.extend(
+        [
+            "",
+            "## Recrawl candidates",
+            "",
+            "| identity | status | family | missing |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
     for entry in report["recrawlCandidates"]:
         missing = []
         if entry["missingBuild"]:

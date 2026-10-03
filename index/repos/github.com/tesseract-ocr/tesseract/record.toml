@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/tesseract-ocr/tesseract"
-generated_at = "2026-07-08T22:51:46.217089Z"
+generated_at = "2026-09-16T16:33:14.66862Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/workflows/autotools-macos.yml`. Inferred `repo.test` from `.github/workflows/autotools-macos.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.build` from `.github/workflows/cmake.yml` after model escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `.github/workflows/autotools-macos.yml`. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Left `repo.build` unset because `.github/workflows/cmake-win64.yml`, `.github/workflows/cmake.yml`, and `.github/workflows/codeql-analysis.yml` suggested conflicting build commands. Inferred `repo.test` from `.github/workflows/autotools-macos.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record.'
 
 [repo]
 name = "Tesseract OCR"
@@ -32,7 +31,6 @@ languages = [
     "M4",
     "Python",
 ]
-build = "cmake --build build --config Release --target install"
 test = "make check"
 topics = [
     "tesseract",
@@ -44,15 +42,106 @@ topics = [
     "hacktoberfest",
 ]
 
+[[repo.build_candidates]]
+command = "cmake --build build --target install"
+source = ".github/workflows/cmake-win64.yml"
+
+[[repo.build_candidates]]
+command = "cmake --build build --config Release --target install"
+source = ".github/workflows/cmake.yml"
+
+[[repo.build_candidates]]
+command = "make all training"
+source = ".github/workflows/codeql-analysis.yml"
+
+[owners]
+maintainers = []
+security_contact = "unknown"
+
 [docs]
 root = "https://tesseract-ocr.github.io/tessdoc/Command-Line-Usage.html#simplest-invocation-to-ocr-an-image"
 getting_started = "https://tesseract-ocr.github.io/tessdoc/Installation.html"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://tesseract-ocr.github.io/tessdoc/Installation.html"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://tesseract-ocr.github.io/tessdoc/Command-Line-Usage.html#simplest-invocation-to-ocr-an-image"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "high"
+method = "unspecified"
+reason = "explicitly unknown"
+state = "not_found"
+valueJson = '"unknown"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "low"
+method = "not_found_in_inspected_sources"
+reason = "intra-tier conflict left field unset during import"
+state = "unresolved"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Tesseract Open Source OCR Engine (main repository)"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://tesseract-ocr.github.io/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Tesseract OCR"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:33:14.66862Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/autotools-macos.yml"
+state = "present"
+valueJson = '"make check"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/tesseract-ocr/tesseract.git"
 default_branch = "main"
 fork = false
-head_sha = "245ad55147fe8fc408a134873fd723857c6741b8"
+head_sha = "8ae68101439b3f7df123499a784e8896c805179d"
 html_url = "https://github.com/tesseract-ocr/tesseract"
-stars = 75191
+stars = 76518

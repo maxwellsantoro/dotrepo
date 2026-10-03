@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported repo.test from CONTRIBUTING.md as `pytest`.
+- Imported repo.test from tox.ini as `tox`.
 - Discovered related relation to github.com/skycocker/chromebrew from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.

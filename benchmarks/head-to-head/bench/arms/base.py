@@ -44,19 +44,25 @@ class Http:
         self.s.headers["User-Agent"] = "dotrepo-bench/0.1 (+falsifiable head-to-head)"
         self.cache = cache
         self.timeout = timeout
+        self.request_count = 0
+        self.response_bytes = 0
+        self.cache_hits = 0
 
     def get(self, url: str, headers: Optional[dict] = None):
         if self.cache is not None:
             hit = self.cache.get(url)
             if hit is not None:
+                self.cache_hits += 1
                 return hit["status"], hit["text"], len(hit["text"].encode()), 0.0
             if self.cache.mode == "replay":
                 raise ReplayCacheMiss(f"replay cache miss: {url}")
         t0 = time.perf_counter()
+        self.request_count += 1
         r = self.s.get(url, headers=headers or {}, timeout=self.timeout)
         dt = (time.perf_counter() - t0) * 1000.0
         text = r.text
         nbytes = len(r.content)
+        self.response_bytes += nbytes
         if self.cache is not None:
             self.cache.put(url, r.status_code, text)
         return r.status_code, text, nbytes, dt

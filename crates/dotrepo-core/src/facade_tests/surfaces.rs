@@ -1040,6 +1040,50 @@ description = "Fast local-first sync engine"
 }
 
 #[test]
+fn generation_check_and_github_preview_agree_on_all_enabled_outputs() {
+    let root = temp_dir("generation-parity");
+    let source = r#"
+schema = "dotrepo/v0.1"
+[record]
+mode = "native"
+status = "draft"
+[repo]
+name = "orbit"
+description = "Generation parity fixture"
+[owners]
+maintainers = ["@orbit"]
+security_contact = "security@example.com"
+[compat.github]
+codeowners = "generate"
+security = "generate"
+contributing = "generate"
+pull_request_template = "generate"
+"#;
+    fs::write(root.join(".repo"), source).expect("manifest written");
+    let manifest = parse_manifest(source).expect("manifest");
+    let outputs = managed_outputs(&root, &manifest, source.as_bytes()).expect("generation");
+    let check = generate_check_repository(&root).expect("check");
+    assert_eq!(outputs.len(), 5);
+    assert_eq!(check.checked, 5);
+    for (relative, contents) in github_outputs(&manifest, source.as_bytes()) {
+        assert!(outputs.contains(&(root.join(&relative), contents.clone())));
+        assert!(check
+            .outputs
+            .iter()
+            .any(|output| Path::new(&output.path) == relative && output.expected == contents));
+    }
+    for (path, contents) in outputs {
+        fs::create_dir_all(path.parent().expect("parent")).expect("create output directory");
+        fs::write(path, contents).expect("write output");
+    }
+    assert!(generate_check_repository(&root)
+        .expect("check generated files")
+        .stale
+        .is_empty());
+    fs::remove_dir_all(root).expect("remove temp dir");
+}
+
+#[test]
 fn github_outputs_generate_remaining_compat_files() {
     let manifest = parse_manifest(
         r#"

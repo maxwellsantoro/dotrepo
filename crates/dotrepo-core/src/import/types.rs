@@ -212,12 +212,25 @@ pub(crate) struct ReadmeMetadata {
     pub(crate) description: Option<String>,
     pub(crate) docs_root: Option<String>,
     pub(crate) docs_getting_started: Option<String>,
+    pub(crate) docs_root_evidence: Option<ReadmeDocEvidence>,
+    pub(crate) docs_getting_started_evidence: Option<ReadmeDocEvidence>,
+    pub(crate) docs_root_ambiguous: bool,
+    pub(crate) docs_getting_started_ambiguous: bool,
 }
 
 #[derive(Default)]
 pub(crate) struct ReadmeDocsMetadata {
     pub(crate) root: Option<String>,
     pub(crate) getting_started: Option<String>,
+    pub(crate) root_evidence: Option<ReadmeDocEvidence>,
+    pub(crate) getting_started_evidence: Option<ReadmeDocEvidence>,
+    pub(crate) root_ambiguous: bool,
+    pub(crate) getting_started_ambiguous: bool,
+}
+
+pub(crate) struct ReadmeDocEvidence {
+    pub(crate) line: usize,
+    pub(crate) context: String,
 }
 
 pub(crate) struct ImportedFile {
@@ -298,6 +311,7 @@ pub(crate) struct ImportSources<'a> {
     pub(crate) pyproject_toml: Option<&'a ImportedFile>,
     pub(crate) setup_py: Option<&'a ImportedFile>,
     pub(crate) setup_cfg: Option<&'a ImportedFile>,
+    pub(crate) tox_ini: Option<&'a ImportedFile>,
     pub(crate) go_mod: Option<&'a ImportedFile>,
     pub(crate) pom_xml: Option<&'a ImportedFile>,
     pub(crate) maven_wrapper: bool,
@@ -305,6 +319,7 @@ pub(crate) struct ImportSources<'a> {
     pub(crate) gradle_wrapper: bool,
     pub(crate) composer_json: Option<&'a ImportedFile>,
     pub(crate) csproj: Option<&'a ImportedFile>,
+    pub(crate) solution: Option<&'a ImportedFile>,
     pub(crate) mix_exs: Option<&'a ImportedFile>,
     pub(crate) rebar_config: Option<&'a ImportedFile>,
     pub(crate) cmake_presets_json: Option<&'a ImportedFile>,

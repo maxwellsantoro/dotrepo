@@ -4,16 +4,18 @@
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from CODEOWNERS; `owners.team` is `@tikv/tikv-configuration-reviewer` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md.
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
-- Imported repo.build from Cargo.toml as `cargo build --workspace`.
-- Imported repo.test from Cargo.toml as `cargo test --workspace`.
+- Imported repo.build from CONTRIBUTING.md as `make build`.
+- Imported repo.test from CONTRIBUTING.md as `make test`.
 - Discovered related relation to github.com/tikv/tikv from Cargo.toml repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+- Set `repo.name` to `tikv` from `GitHub API` after deterministic escalation.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.
 - Augmented repo.languages from GitHub repository metadata.
 - Augmented repo.topics from GitHub repository metadata.
-- Filled repo.description from GitHub repository metadata when the README surface did not provide one.
+- Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
 ## Auto-promotion

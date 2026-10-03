@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported repo.build from package.json as `pnpm build`.
+- Imported repo.build from package.json as `pnpm run compile`.
 - Imported repo.test from package.json as `pnpm test`.
 - Imported repo.toolchain.min from package.json as `14` (Node.js).
 - This is an overlay record, not a maintainer-controlled canonical record.

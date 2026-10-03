@@ -213,7 +213,7 @@ fn find_first_url(contents: &str) -> Option<String> {
 
     for destination in security_link_destinations(contents) {
         if let Some(url) = extract_url_candidate(&destination) {
-            if looks_like_security_url(&url) {
+            if looks_like_security_url(&url) && is_actionable_security_url(&url) {
                 return Some(url);
             }
         }
@@ -221,7 +221,7 @@ fn find_first_url(contents: &str) -> Option<String> {
 
     for token in rewritten.split_whitespace() {
         if let Some(url) = extract_url_candidate(token) {
-            if looks_like_security_url(&url) {
+            if looks_like_security_url(&url) && is_actionable_security_url(&url) {
                 return Some(url);
             }
         }
@@ -246,6 +246,11 @@ fn find_best_security_url(contents: &str) -> Option<String> {
         }
 
         for url in security_urls_in_line(trimmed) {
+            // Filter before ranking: a public issue form or incidental contact
+            // page must not hide a usable disclosure channel elsewhere.
+            if !is_actionable_security_url(&url) {
+                continue;
+            }
             let score = security_reporting_score(&current_heading, trimmed, &url);
             if score <= 0 {
                 continue;
@@ -587,6 +592,19 @@ pub(crate) fn looks_like_email(token: &str) -> bool {
 #[cfg(test)]
 mod security_contact_tests {
     use super::parse_security_contact;
+
+    #[test]
+    fn non_actionable_winner_does_not_hide_reporting_url() {
+        for incidental in ["", "\n## Credits\nPackaged by packager@example.org.\n"] {
+            let contents = format!(
+                "# Security\nhttps://hackerone.com/example\n\n## Reporting\nContact us to report at https://example.org/contact\n{incidental}"
+            );
+            assert_eq!(
+                parse_security_contact(&contents).as_deref(),
+                Some("https://hackerone.com/example")
+            );
+        }
+    }
 
     #[test]
     fn reporting_url_beats_incidental_downstream_packager_email() {

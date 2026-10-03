@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run python
 """Reference external consumer: hosted dotrepo lookup before scrape.
 
-This is a template-complete, non-operator-style client that implements the
+This is an in-repository reference client that implements the
 acceptance bullets in ``docs/external-consumer-integration.md``:
 
 1. Prefer hosted lookup before any clone/scrape fallback. Default surface is
@@ -11,7 +11,7 @@ acceptance bullets in ``docs/external-consumer-integration.md``:
 3. Missing fields stay missing — the client does not invent build/test commands.
 4. HTTP 404 is counted as a lookup miss (client-side metrics suitable for
    feeding ``scripts/aggregate_lookup_misses.py``).
-5. This client is an integration example, not operator CI smoke.
+5. This client is an integration example, not evidence of independent adoption.
 
 Live traffic against ``https://dotrepo.org`` is optional (``--base-url``).
 Unit tests exercise the real parse/decision path with fixture HTTP responses.
@@ -21,7 +21,8 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
+import time
+from datetime import datetime, timezone
 import urllib.error
 import urllib.request
 from dataclasses import asdict, dataclass, field
@@ -53,6 +54,12 @@ class LookupResult:
     record_status: str | None = None
     missing_fields: list[str] = field(default_factory=list)
     error: str | None = None
+    usable: bool = False
+    fallback_reasons: list[str] = field(default_factory=list)
+    record_generated_at: str | None = None
+    record_age_days: float | None = None
+    response_bytes: int = 0
+    elapsed_ms: float = 0.0
 
 
 def parse_repository_identity(url_or_identity: str) -> tuple[str, str, str]:
@@ -79,7 +86,9 @@ def parse_repository_identity(url_or_identity: str) -> tuple[str, str, str]:
     raise ValueError(f"cannot parse repository identity: {url_or_identity}")
 
 
-def profile_url(base_url: str, host: str, owner: str, repo: str, *, surface: str = "profile") -> str:
+def profile_url(
+    base_url: str, host: str, owner: str, repo: str, *, surface: str = "profile"
+) -> str:
     base = base_url.rstrip("/")
     name = "profile.json" if surface == "profile" else "index.json"
     return f"{base}/v0/repos/{host}/{owner}/{repo}/{name}"
@@ -95,7 +104,9 @@ def _nonempty(value: Any) -> bool:
     return True
 
 
-def extract_trust_and_freshness(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any], str | None]:
+def extract_trust_and_freshness(
+    payload: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any], str | None]:
     """Pull trust/status/freshness without inventing values.
 
     Supports both the public ``profile.json`` envelope and the ``index.json``
@@ -139,9 +150,7 @@ def extract_trust_and_freshness(payload: dict[str, Any]) -> tuple[dict[str, Any]
         raw_trust = record.get("trust")
         if isinstance(raw_trust, dict):
             trust = {
-                k: raw_trust[k]
-                for k in ("confidence", "provenance", "notes")
-                if k in raw_trust
+                k: raw_trust[k] for k in ("confidence", "provenance", "notes") if k in raw_trust
             }
         if record_status is None and isinstance(record.get("status"), str):
             record_status = record["status"]
@@ -190,6 +199,101 @@ def missing_high_value_fields(payload: dict[str, Any]) -> list[str]:
     if not _nonempty(security):
         missing.append("owners.security_contact")
     return missing
+
+
+FIELD_PATHS = {
+    "repo.name": ("name",),
+    "repo.description": ("purpose",),
+    "repo.homepage": ("homepage",),
+    "repo.license": ("license",),
+    "repo.build": ("execution", "build"),
+    "repo.test": ("execution", "test"),
+    "docs.root": ("docs", "root"),
+    "owners.security_contact": ("ownership", "securityContact"),
+}
+
+# Consumer compatibility and policy identifiers, not record-wide trust levels.
+SUPPORTED_API_VERSIONS = ("v0",)
+COMMAND_POLICY = "explicit-high-confidence-extraction"
+
+
+def profile_field(payload: dict[str, Any], path: str) -> Any:
+    value = payload
+    for key in FIELD_PATHS[path]:
+        value = value.get(key) if isinstance(value, dict) else None
+    return value
+
+
+def evaluate_for_task(
+    result: LookupResult,
+    *,
+    required_fields: list[str] | None = None,
+    max_record_age_days: int = 30,
+    now: datetime | None = None,
+) -> LookupResult:
+    """A found document is not necessarily a usable task answer. Never run commands."""
+    required_fields = required_fields if required_fields is not None else ["repo.description"]
+    if max_record_age_days < 0 or any(p not in FIELD_PATHS for p in required_fields):
+        raise ValueError("invalid task policy")
+    reasons = []
+    payload = result.profile or {}
+    result.record_generated_at = None
+    result.record_age_days = None
+    if not result.hit:
+        reasons.append(result.error or "lookup-failed")
+    else:
+        if payload.get("apiVersion") not in SUPPORTED_API_VERSIONS:
+            reasons.append("unsupported-api-version")
+        identity = payload.get("identity")
+        identity = identity if isinstance(identity, dict) else {}
+        actual = "/".join(str(identity.get(k, "")) for k in ("host", "owner", "repo"))
+        if actual.lower() != result.identity.lower():
+            reasons.append("identity-mismatch-or-missing")
+        if payload.get("conflicts"):
+            reasons.append("conflicting-records")
+        record = payload.get("record")
+        record = record if isinstance(record, dict) else {}
+        result.record_generated_at = record.get("generatedAt")
+        try:
+            checked = datetime.fromisoformat(result.record_generated_at.replace("Z", "+00:00"))
+            current = now or datetime.now(timezone.utc)
+            if checked.tzinfo is None or current.tzinfo is None or checked > current:
+                raise ValueError("invalid record timestamp")
+            result.record_age_days = (current - checked).total_seconds() / 86400
+            if result.record_age_days > max_record_age_days:
+                reasons.append("stale-record")
+        except (ValueError, AttributeError, TypeError):
+            reasons.append("unknown-record-age")
+        for path in required_fields:
+            value = profile_field(payload, path)
+            if not _nonempty(value):
+                reasons.append("missing:" + path)
+                continue
+            if not isinstance(value, str):
+                reasons.append("invalid-field-type:" + path)
+                continue
+            evidence = payload.get("fieldEvidence")
+            assessment = evidence.get(path) if isinstance(evidence, dict) else None
+            assessment = assessment if isinstance(assessment, dict) else {}
+            if assessment.get("state") in ("suspect", "unresolved"):
+                reasons.append("unresolved:" + path)
+            if path in {"repo.build", "repo.test"}:
+                if assessment.get("method") == "inferred":
+                    reasons.append("inferred-command:" + path)
+                elif not assessment:
+                    reasons.append("missing-command-assessment:" + path)
+                elif not (
+                    assessment.get("state") == "present"
+                    and assessment.get("method") == "extracted"
+                    and assessment.get("confidence") == "high"
+                    and isinstance(assessment.get("source"), str)
+                    and assessment["source"].strip()
+                    and assessment.get("checkedAt") == result.record_generated_at
+                ):
+                    reasons.append("insufficient-command-assessment:" + path)
+    result.fallback_reasons = reasons
+    result.usable = not reasons
+    return result
 
 
 def interpret_http_response(
@@ -248,16 +352,19 @@ def interpret_http_response(
         )
 
     trust, freshness, record_status = extract_trust_and_freshness(payload)
-    return LookupResult(
-        identity=identity,
-        status_code=status_code,
-        hit=True,
-        miss=False,
-        profile=payload,
-        trust=trust or None,
-        freshness=freshness or None,
-        record_status=record_status,
-        missing_fields=missing_high_value_fields(payload),
+    return evaluate_for_task(
+        LookupResult(
+            identity=identity,
+            status_code=status_code,
+            hit=True,
+            miss=False,
+            profile=payload,
+            trust=trust or None,
+            freshness=freshness or None,
+            record_status=record_status,
+            missing_fields=missing_high_value_fields(payload),
+            response_bytes=len(body.encode("utf-8") if isinstance(body, str) else body),
+        )
     )
 
 
@@ -268,6 +375,8 @@ def fetch_profile(
     surface: str = "profile",
     opener: Any | None = None,
     timeout: float = 20.0,
+    required_fields: list[str] | None = None,
+    max_record_age_days: int = 30,
 ) -> LookupResult:
     """Lookup-first path. ``opener`` is injectable for tests (must have ``open``)."""
     host, owner, repo = parse_repository_identity(url_or_identity)
@@ -283,22 +392,36 @@ def fetch_profile(
         method="GET",
     )
 
+    started = time.perf_counter()
+
+    def finish(result):
+        result.elapsed_ms = round((time.perf_counter() - started) * 1000, 3)
+        return evaluate_for_task(
+            result, required_fields=required_fields, max_record_age_days=max_record_age_days
+        )
+
     open_fn = opener.open if opener is not None else urllib.request.urlopen
     try:
         with open_fn(request, timeout=timeout) as response:
             status = getattr(response, "status", None) or response.getcode()
             body = response.read()
-            return interpret_http_response(identity=identity, status_code=int(status), body=body)
+            return finish(
+                interpret_http_response(identity=identity, status_code=int(status), body=body)
+            )
     except urllib.error.HTTPError as exc:
         body = exc.read() if hasattr(exc, "read") else None
-        return interpret_http_response(identity=identity, status_code=int(exc.code), body=body)
+        return finish(
+            interpret_http_response(identity=identity, status_code=int(exc.code), body=body)
+        )
     except Exception as exc:  # network / DNS / timeout
-        return LookupResult(
-            identity=identity,
-            status_code=0,
-            hit=False,
-            miss=False,
-            error=f"transport:{type(exc).__name__}:{exc}",
+        return finish(
+            LookupResult(
+                identity=identity,
+                status_code=0,
+                hit=False,
+                miss=False,
+                error=f"transport:{type(exc).__name__}:{exc}",
+            )
         )
 
 
@@ -337,6 +460,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--output-json")
     parser.add_argument(
+        "--require", action="append", choices=sorted(FIELD_PATHS), dest="required_fields"
+    )
+    parser.add_argument("--max-record-age-days", type=int, default=30)
+    parser.add_argument(
         "--miss-log",
         help="Append DOTREPO_LOOKUP_MISS lines for 404s (aggregate with scripts/aggregate_lookup_misses.py)",
     )
@@ -345,7 +472,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Print a scrape-fallback hint on miss (still does not scrape itself)",
     )
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if args.max_record_age_days < 0:
+        parser.error("--max-record-age-days must be nonnegative")
+    return args
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -354,7 +484,13 @@ def main(argv: list[str] | None = None) -> int:
     miss_lines: list[str] = []
 
     for repo in args.repositories:
-        result = fetch_profile(repo, base_url=args.base_url, surface=args.surface)
+        result = fetch_profile(
+            repo,
+            base_url=args.base_url,
+            surface=args.surface,
+            required_fields=args.required_fields,
+            max_record_age_days=args.max_record_age_days,
+        )
         payload = asdict(result)
         if result.hit and result.profile is not None:
             payload["profile_keys"] = sorted(result.profile.keys())
@@ -364,6 +500,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"## {result.identity}")
         print(f"- status_code: {result.status_code}")
         print(f"- hit: {result.hit}  miss: {result.miss}")
+        print(f"- usable_for_task: {result.usable}; fallback_reasons: {result.fallback_reasons}")
         if result.record_status:
             print(f"- record.status: {result.record_status}")
         if result.trust:
@@ -374,8 +511,10 @@ def main(argv: list[str] | None = None) -> int:
             print(f"- missing_fields (honest): {', '.join(result.missing_fields)}")
         if result.error:
             print(f"- error: {result.error}")
-        if result.miss and args.allow_scrape_fallback:
-            print("- fallback: clone/scrape permitted only after countable miss")
+        if not result.usable and args.allow_scrape_fallback:
+            print(
+                "- fallback: inspect upstream sources; this example does not execute commands or scrape"
+            )
 
         miss = result_to_miss(result)
         if miss is not None:
@@ -391,7 +530,18 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.output_json:
         with open(args.output_json, "w", encoding="utf-8") as handle:
-            json.dump({"results": results, "missCount": len(miss_lines)}, handle, indent=2)
+            json.dump(
+                {
+                    "results": results,
+                    "missCount": len(miss_lines),
+                    "usableTaskCount": sum(r["usable"] for r in results),
+                    "fallbackRequiredCount": sum(not r["usable"] for r in results),
+                    "consumerClass": "in-repository-reference",
+                    "externalAdoption": False,
+                },
+                handle,
+                indent=2,
+            )
             handle.write("\n")
 
     # Exit 0 even on misses: misses are a successful observation, not a client crash.

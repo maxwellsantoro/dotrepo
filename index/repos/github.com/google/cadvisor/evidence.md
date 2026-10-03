@@ -3,7 +3,7 @@
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Imported repo.build from Makefile as `make build`.
 - Imported repo.test from Makefile as `make test`.
-- Imported repo.toolchain.min from go.mod as `1.24.0` (Go).
+- Imported repo.toolchain.min from go.mod as `1.25.0` (Go).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

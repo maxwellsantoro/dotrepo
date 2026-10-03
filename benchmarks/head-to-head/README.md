@@ -289,3 +289,59 @@ the exact JSON keys of the `/v0/batch/query` envelope. `bench/arms/dotrepo_arm.p
 tries a priority list (`VALUE_KEYS`/`CONF_KEYS`/`PROV_KEYS`). Run one live
 `curl "$BASE/v0/batch/query?repo=github.com/sharkdp/fd&path=repo.description"`,
 confirm the keys, and pin them there if needed. Nothing else depends on the shape.
+
+## Complete lookup-first path
+
+The `lookup-first` arm uses the generic consumer's identity, record-age, conflict,
+and required-field policy. Rejected fields trigger the GitHub baseline and include
+its work. Both arms use the same extractor setting. No returned command is run.
+
+```bash
+uv run python -m bench.run --gold gold.independent.yaml \
+  --arms github,lookup-first --extractor heuristic --base-url https://dotrepo.org \
+  --out results/consumer-pilot
+```
+
+`transport.request_count` and `transport.response_bytes` count actual HTTP work,
+including prefetched responses and fallback. `elapsedMs` measures the whole arm.
+`cache_hits` must be reported separately; replay timings are not live latency.
+The legacy per-field latency excludes model inference, and bytes divided by four
+is only a payload estimate. Actual model usage and allocated maintenance costs
+are unknown unless supplied by a consumer pilot; do not report net cost savings
+from these numbers alone. This is an in-repository experiment, not adoption.
+
+## Independent structured-metadata audit
+
+`metadata-sample.txt` freezes 32 identities selected by a salted SHA-256 ordering
+before upstream capture and evaluation. `scripts/capture_upstream_accuracy_sample.py`
+reads only primary GitHub metadata to create a separate cited workload and frozen
+source extracts. This audit tests description, license where SPDX is known,
+visibility, and archived status. It does not establish build/test/security accuracy;
+the independent buried-field cohort remains a separate report.
+
+## September buried-field audit
+
+`gold.september.yaml` freezes 17 command/security-contact answers for eight
+preselected projects, citing exact upstream commits. Five projects were indexed
+and three were unindexed. The gold was frozen before examining dotrepo answers.
+The sample covers ecosystem variety; it is small and not statistically representative.
+
+`results/september-2026-09-16/` retains the initial result, including two
+high-confidence script errors in pnpm. This was a heuristic source baseline, not
+a repeat of the July strong-model comparison. It used live upstream HTTP, a local
+dotrepo server, and no response cache. Those different network locations prevent
+using its wall times as a hosted latency comparison.
+
+The `transport` block counts all requests and decoded response bytes, including
+prefetch and fallback, while `elapsedMs` times the whole arm. Prefer those over
+legacy per-field payload/latency allocations. Model token usage and allocated
+maintenance cost remain unmeasured. A correction rerun against this same gold is
+regression evidence, not another independent result.
+
+`results/september-correction-2026-09-16/` is that correction rerun. Script-name
+preservation fixed the two high-confidence errors; the generic client now falls
+back on explicitly inferred commands. Lookup-first answered 12/17 correctly,
+with one low-confidence wrong fallback answer and four abstentions. It made
+84 HTTP requests versus the source baseline's 114, with 170,463 versus 326,618
+decoded response bytes. These are measurements of this small heuristic/local
+experiment, not evidence of external adoption or net production savings.

@@ -13,8 +13,8 @@ def test_scheduled_refresh_retains_telemetry_before_propagating_batch_failure() 
     gate = workflow.index("- name: Evaluate autonomous telemetry gate")
     validate = workflow.index("- name: Validate autonomous index state")
     upload = workflow.index("- name: Upload batch telemetry")
-    pr_meta = workflow.index("- name: Prepare draft pull request metadata")
-    create_pr = workflow.index("- name: Create draft pull request for index updates")
+    pr_meta = workflow.index("- name: Prepare pull request metadata")
+    create_pr = workflow.index("- name: Create pull request for index updates")
     propagate = workflow.index("- name: Preserve autonomous batch failure result")
     strict_fail = workflow.index("- name: Fail closed on strict telemetry gate")
 
@@ -25,7 +25,7 @@ def test_scheduled_refresh_retains_telemetry_before_propagating_batch_failure() 
     assert "steps.telemetry_gate.outcome == 'success'" in workflow[pr_meta:create_pr]
     assert "steps.validate_index.outcome == 'success'" in workflow[pr_meta:create_pr]
     assert "peter-evans/create-pull-request@" in workflow[create_pr:propagate]
-    assert "draft: true" in workflow[create_pr:propagate]
+    assert "draft: false" in workflow[create_pr:propagate]
     assert "add-paths: |" in workflow[create_pr:propagate]
     assert "index/**" in workflow[create_pr:propagate]
     assert "git push" not in workflow
@@ -52,3 +52,15 @@ def test_gate_report_is_created_before_batch_artifact_upload() -> None:
     assert gate < upload
     assert "autonomous-telemetry-gate.json" in workflow[gate:upload]
     assert "autonomous-telemetry-gate.md" in workflow[gate:upload]
+
+
+def test_daily_capacity_and_automatic_landing_do_not_require_routine_human_review():
+    workflow = WORKFLOW.read_text()
+    assert 'cron: "0 6 * * *"' in workflow
+    assert "github.event.inputs.batch_size || '50'" in workflow
+    assert "--disable-discovery" in workflow
+    assert "scripts/land_autonomous_index.py" in workflow
+    assert "actions: write" in workflow
+    assert "secrets.GITHUB_TOKEN" in workflow
+    assert "INDEX_AUTOMATION_TOKEN" not in workflow
+    assert "steps.autonomous_pr.outputs.pull-request-head-sha" in workflow

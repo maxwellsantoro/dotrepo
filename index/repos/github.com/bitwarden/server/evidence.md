@@ -15,10 +15,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Security contact normalization (2026-07-08)
+## Fresh verification
 
-Replaced non-actionable `security_contact` value `https://bitwarden.com/contact` with `unknown`. The prior URL was not an email or actionable vulnerability-reporting surface (promotion scoring: medium-present). Honest absence unblocks auto-publish without inventing a reporting channel.
-
-## Auto-promotion
-
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

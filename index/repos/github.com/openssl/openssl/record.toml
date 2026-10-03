@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/openssl/openssl"
-generated_at = "2026-07-06T18:56:04.593742Z"
+generated_at = "2026-09-16T16:27:46.077215Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/ci.yml`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `.github/workflows/ci.yml`. Filled `repo.name` with inferred defaults. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "openssl"
@@ -26,20 +25,19 @@ languages = [
     "Perl",
     "C++",
     "Assembly",
-    "Raku",
     "Go Template",
+    "Raku",
     "Shell",
     "Python",
     "M4",
+    "Pawn",
     "CMake",
     "eC",
     "DIGITAL Command Language",
-    "Pawn",
     "Dockerfile",
     "Ruby",
     "sed",
 ]
-build = "make -s build_generated"
 test = '! make test TESTS="test_external_gost_engine"'
 topics = [
     "cryptography",
@@ -71,11 +69,86 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://openssl-library.org/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no build command sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"General purpose TLS and crypto library"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://openssl-library.org/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "high"
+method = "inferred"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"openssl"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:27:46.077215Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/ci.yml"
+state = "present"
+valueJson = '"! make test TESTS=\"test_external_gost_engine\""'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/openssl/openssl.git"
 default_branch = "master"
 fork = false
-head_sha = "a89400969d49d42eb8699c6afaf2f613f917fc5b"
+head_sha = "9138c69ceec002dac9d2e435afd8e626b6e33486"
 html_url = "https://github.com/openssl/openssl"
-stars = 30422
+stars = 30787

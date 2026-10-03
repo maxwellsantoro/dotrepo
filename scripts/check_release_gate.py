@@ -186,6 +186,17 @@ def public_quality_dashboard_command(
     ]
 
 
+def current_high_signal_count(repo_root: Path) -> int:
+    count = 0
+    for path in (repo_root / "index/repos").glob("*/*/*/record.toml"):
+        record = tomllib.loads(path.read_text())["record"]
+        if record.get("status") in {"reviewed", "verified", "canonical"} and record.get(
+            "trust", {}
+        ).get("confidence") in {"medium", "high"}:
+            count += 1
+    return count
+
+
 def index_growth_tranche_command(repo_root: Path, output_root: Path) -> list[str]:
     baseline_path = repo_root / "scripts/fixtures/index_growth_tranche_baseline.json"
     baseline = json.loads(baseline_path.read_text())
@@ -197,7 +208,7 @@ def index_growth_tranche_command(repo_root: Path, output_root: Path) -> list[str
         raise SystemExit(
             f"invalid public profile coverage baseline schema: {profile_baseline_path}"
         )
-    current_high_signal = int(profile_baseline["minHighSignal"])
+    current_high_signal = current_high_signal_count(repo_root)
     min_selected = int(baseline["minSelected"])
     milestone_target = int(baseline["milestoneHighSignalTarget"])
     return [
@@ -826,6 +837,8 @@ def smoke_test_cloudflare_worker(worker_dir: Path, base_path: str) -> None:
                 host,
                 "--port",
                 port,
+                "--var",
+                "CANONICAL_HOST:",
                 "--show-interactive-dev-session",
                 "false",
             ],
@@ -876,6 +889,8 @@ def prepare_worker_smoke_assets(source_root: Path, output_root: Path) -> None:
         path = paths.get(key)
         if isinstance(path, str):
             copy_path(path)
+
+    copy_path(f"{snapshot_root}/repos/search.json")
 
     inventory = json.loads((source_root / "v0/repos/index.json").read_text())
     repositories = inventory.get("repositories")
@@ -933,6 +948,16 @@ def run_cloudflare_worker_smoke(
     if status != 200:
         raise SystemExit(f"Cloudflare Worker meta smoke failed ({status}) for {meta_url}: {body}")
     meta = json.loads(body)
+    for query in ["limit=1", "requireLicense&limit=1"]:
+        search_url = f"http://{server_addr}{base}/v0/search?{query}"
+        status, body = http_get_text(search_url)
+        if status != 200:
+            raise SystemExit(f"Cloudflare Worker search smoke failed ({status}): {body}")
+        result = json.loads(body)
+        if result.get("returnedCount") != 1 or not result.get("results", [{}])[0].get("ranking"):
+            raise SystemExit("Cloudflare Worker search smoke returned no ranked result")
+        verify_freshness(result, meta, search_url)
+
     stats_url = f"http://{server_addr}{base}/v0/stats.json"
     status, body = http_get_text(stats_url)
     if status != 200:
@@ -1060,18 +1085,88 @@ def main() -> int:
     ]
     run(export_command, cwd=repo_root)
     run(
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/check_public_record_freshness.py",
+            "--public-root",
+            str(public_dir),
+            "--max-stale-or-unknown-rate",
+            "0.1",
+            "--output-json",
+            str(output_root / "public-record-freshness.json"),
+        ],
+        cwd=repo_root,
+    )
+    run(
         [sys.executable, "scripts/render_public_pages_landing.py", "--input", str(public_dir)],
         cwd=repo_root,
     )
     run(public_profile_coverage_command(repo_root, public_dir, output_root), cwd=repo_root)
     run(public_quality_dashboard_command(repo_root, public_dir, output_root), cwd=repo_root)
+    run(
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/measure_public_policy_coverage.py",
+            "--public-root",
+            str(public_dir),
+            "--output-json",
+            str(output_root / "public-policy-coverage.json"),
+            "--output-md",
+            str(output_root / "public-policy-coverage.md"),
+        ],
+        cwd=repo_root,
+    )
     run(index_growth_tranche_command(repo_root, output_root), cwd=repo_root)
     for command in public_lookup_benchmark_commands(
         repo_root, public_dir, output_root, args.generated_at
     ):
         run(command, cwd=repo_root)
     run(
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/render_public_efficiency_page.py",
+            "--input",
+            str(public_dir),
+            "--benchmark",
+            str(output_root / "public-lookup-efficiency.json"),
+        ],
+        cwd=repo_root,
+    )
+    run(
         public_factual_accuracy_command(repo_root, public_dir, output_root, args.generated_at),
+        cwd=repo_root,
+    )
+    run(
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/measure_public_factual_accuracy.py",
+            "--public-root",
+            str(public_dir),
+            "--workload",
+            "scripts/fixtures/public_upstream_accuracy_workload.json",
+            "--min-assertions",
+            "123",
+            "--min-repositories",
+            "32",
+            "--min-accuracy-rate",
+            "1.0",
+            "--max-missing-rate",
+            "0",
+            "--max-mismatch-rate",
+            "0",
+            "--output-json",
+            str(output_root / "independent-upstream-accuracy.json"),
+            "--output-md",
+            str(output_root / "independent-upstream-accuracy.md"),
+        ],
         cwd=repo_root,
     )
     run(
@@ -1193,6 +1288,7 @@ def main() -> int:
     print(f"  public tree: {public_dir}")
     print(f"  public bundle: {public_bundle}")
     print(f"  profile coverage: {output_root / 'public-profile-coverage.json'}")
+    print(f"  consumer policy coverage: {output_root / 'public-policy-coverage.json'}")
     print(f"  public quality: {output_root / 'public-quality-dashboard.json'}")
     print(f"  index growth plan: {output_root / 'index-growth-plan.json'}")
     print(f"  lookup workload: {output_root / 'public-lookup-workload.json'}")

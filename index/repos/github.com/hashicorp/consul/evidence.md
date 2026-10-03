@@ -2,9 +2,9 @@
 
 - Imported repository name from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates.
-- Imported repo.build from Makefile as `make all`.
-- Imported repo.test from Makefile as `make test`.
-- Imported repo.toolchain.min from go.mod as `1.26` (Go).
+- Imported repo.build from ui/packages/consul-ui/package.json as `npm run build`.
+- Imported repo.test from ui/packages/consul-ui/package.json as `npm test`.
+- Imported repo.toolchain.min from ui/packages/consul-ui/package.json as `24` (Node.js).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

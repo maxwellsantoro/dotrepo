@@ -20,9 +20,12 @@ Publishing is fully automated on version tags; no stored secrets are involved.
    binary per platform via `platform_overrides`), attaches it to the release,
    and rewrites `server.json` with the release-asset URL and the bundle's
    `fileSha256`.
-3. The `mcp-registry` job then authenticates with `mcp-publisher login
+3. The `mcp-registry` job then installs a **version-pinned** `mcp-publisher`
+   binary (checksum-verified; see `MCP_PUBLISHER_VERSION` /
+   `MCP_PUBLISHER_SHA256` in `.github/workflows/release-artifacts.yml` and
+   `mcp-registry-publish.yml`), authenticates with `mcp-publisher login
    github-oidc` (GitHub Actions OIDC proves control of the
-   `io.github.maxwellsantoro` namespace) and runs `mcp-publisher publish`
+   `io.github.maxwellsantoro` namespace), and runs `mcp-publisher publish`
    against the updated `server.json`.
 
 The checked-in [`server.json`](../server.json) is the template: its

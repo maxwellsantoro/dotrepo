@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/pnpm/pnpm"
-generated_at = "2026-07-01T18:21:30.624083Z"
+generated_at = "2026-09-16T16:43:05.770779Z"
 
 [record.trust]
 confidence = "high"
@@ -12,11 +12,11 @@ provenance = [
     "imported",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `Cargo.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `Cargo.toml` and `package.json` suggested conflicting build commands. Imported `repo.test` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `package.json`. Imported `repo.test` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "pnpm"
-description = "Fast, disk space efficient package manager:"
+description = "Fast, disk space efficient package manager"
 homepage = "https://pnpm.io"
 license = "MIT"
 visibility = "public"
@@ -25,12 +25,16 @@ languages = [
     "TypeScript",
     "JavaScript",
     "Shell",
-    "Dockerfile",
+    "Python",
+    "NASL",
     "Just",
+    "HTML",
+    "Dockerfile",
+    "PowerShell",
     "Batchfile",
 ]
-build = "cargo build --workspace"
-test = "cargo test --workspace"
+build = "pnpm run compile"
+test = "pnpm run test-all"
 topics = [
     "npm",
     "dependency-manager",
@@ -56,11 +60,88 @@ security_contact = "https://github.com/pnpm/pnpm/security/advisories"
 root = "https://pnpm.io"
 getting_started = "https://pnpm.io/installation"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://pnpm.io/installation"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://pnpm.io"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"https://github.com/pnpm/pnpm/security/advisories"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm run compile"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Fast, disk space efficient package manager"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://pnpm.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"pnpm"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:43:05.770779Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm run test-all"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/pnpm/pnpm.git"
 default_branch = "main"
 fork = false
-head_sha = "ddbb4899c252efabce5bbf4e519df83c07b891bf"
+head_sha = "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
 html_url = "https://github.com/pnpm/pnpm"
-stars = 35662
+stars = 36538

@@ -23,6 +23,7 @@ public/
     files.json
     repos/
       index.json
+      search.json
       <host>/
         <owner>/
           <repo>/
@@ -203,11 +204,12 @@ upstream native `.repo`.
 - verifies a deterministic public sample from `v0/files.json` against reviewed
   byte counts and SHA-256 hashes, covering the core contract files plus the
   first repository's exported JSON
-- a separate scheduled `public-edge-canary.yml` checks the homepage, pointer,
+- a separate scheduled `public-edge-canary.yml` (daily at 14:00 UTC when
+  `DOTREPO_PUBLIC_EDGE_CANARY_ENABLED=true`) checks the homepage, pointer,
   canonical inventory, canonical file manifest, two records, both pagedigest
   manifests, snapshot log, stats document, and pagedigest.org's shipped-artifact
-  claims; repeated failures update one GitHub issue instead of opening an issue
-  storm
+  claims; repeated failures update one GitHub issue at most once per day instead
+  of opening an issue storm
 
 The export tree is the source of truth for the current snapshot. Historical
 payload retention belongs to the archive layer; the static asset bundle should
@@ -274,3 +276,14 @@ For a cut/review checklist, see
 - [`rfcs/0018-static-public-serving-and-freshness.md`](../rfcs/0018-static-public-serving-and-freshness.md)
 - [`rfcs/0019-public-trust-and-query-wrappers.md`](../rfcs/0019-public-trust-and-query-wrappers.md)
 - [`README.md`](../README.md)
+
+### Hosted search data
+
+The exporter writes `repos/search.json` in each immutable snapshot. It contains
+compact profiles with the searchable fields, completeness, trust, and links
+needed for filtering and ranking. Both filtered and unfiltered hosted searches
+read this same document after reading the snapshot pointer: two asset reads,
+independent of repository count. Matching still scans the compact document in
+memory; the result limit bounds response size, not that scan. Deploy the Worker
+and regenerated export together. A missing search document returns a service
+error rather than fetching every individual profile.

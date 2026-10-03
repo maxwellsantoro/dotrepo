@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/supabase/supabase"
-generated_at = "2026-07-06T19:03:24.084059Z"
+generated_at = "2026-09-16T16:29:54.031636Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `package.json`, and `.github/workflows/ai-tests.yml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/ai-tests.yml`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `package.json`, and `.github/workflows/ai-tests.yml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `package.json`. Inferred `repo.test` from `.github/workflows/ai-tests.yml`. Imported `repo.toolchain.min` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Supabase"
@@ -29,6 +28,7 @@ languages = [
     "Shell",
     "Vue",
     "PLpgSQL",
+    "Astro",
     "Makefile",
     "Dockerfile",
     "Smarty",
@@ -61,20 +61,20 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "22"
+min = "22.13"
 ecosystem = "Node.js"
 
 [owners]
 maintainers = [
     "@supabase/design",
     "@supabase/billing",
-    "@supabase/growth-eng",
     "@supabase/Dashboard",
+    "@supabase/docs",
+    "@supabase/growth-eng",
     "@supabase/marketing",
     "@supabase/cli",
     "@supabase/self-hosted",
     "@supabase/security",
-    "@supabase/infra",
     "@supabase/platform",
 ]
 
@@ -97,11 +97,87 @@ provenance = [
     "manifest",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"./DEVELOPERS.md"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://supabase.com/docs/guides/database"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"pnpm build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://supabase.com"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Supabase"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:29:54.031636Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/ai-tests.yml"
+state = "present"
+valueJson = '"pnpm run test"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/supabase/supabase.git"
 default_branch = "master"
 fork = false
-head_sha = "c790bd44a338f82119e5176647f89aa6915be653"
+head_sha = "795b67b6112dd8d2e953d93d41703e95fb6d1369"
 html_url = "https://github.com/supabase/supabase"
-stars = 105820
+stars = 109494

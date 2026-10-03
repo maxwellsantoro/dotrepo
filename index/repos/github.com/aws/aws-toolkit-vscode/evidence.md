@@ -2,7 +2,7 @@
 
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@aws/aws-toolkits-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
-- Imported repo.build from package.json as `npm run build`.
+- Imported repo.build from package.json as `npm run compile`.
 - Imported repo.test from package.json as `npm test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

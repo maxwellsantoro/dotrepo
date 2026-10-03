@@ -1,0 +1,1459 @@
+[
+  {
+    "arm": "github",
+    "configuration": {
+      "extractor": "heuristic"
+    },
+    "rows": [
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo build",
+        "gold_note": "Repository-root development build.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/CONTRIBUTING.md",
+          "locator": "L115-L122",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "cargo build",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "github:build-docs:heuristic",
+        "bytes": 47637,
+        "latency_ms": 1852.6
+      },
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo test --workspace",
+        "gold_note": "Workspace tests; standard-library tests are a separate command.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/CONTRIBUTING.md",
+          "locator": "L78-L83",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "- `cargo test --workspace` to check that all tests pass (on Windows make sure to enable [developer mode](https://learn.microsoft.com/en-us/windows/apps/get-started/developer-mode-features-and-debugging))",
+        "confidence": "low",
+        "outcome": "correct",
+        "source": "github:test-docs:heuristic",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/nushell/nushell/security/advisories/new",
+        "gold_note": "Private GitHub reporting path; Discord also permitted.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/SECURITY.md",
+          "locator": "L12-L15",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "https://github.com/nushell/nushell/security/advisories/new).",
+        "confidence": "low",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:heuristic",
+        "bytes": 2681,
+        "latency_ms": 213.5
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "nix build",
+        "gold_note": "Recommended Nix development build.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/CONTRIBUTING.md",
+          "locator": "L40-L49",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": "fix(hyperlinks)!: TextCell building of detailed grid view, hyperlink, icon options",
+        "confidence": "low",
+        "outcome": "wrong_hedged",
+        "source": "github:build-docs:heuristic",
+        "bytes": 34401,
+        "latency_ms": 1400.6
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": [
+          "nix build .#test",
+          "cargo test"
+        ],
+        "gold_note": "Two explicitly documented test commands.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/CONTRIBUTING.md",
+          "locator": "L47,L104",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "github:test-docs:heuristic",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "christina@cafkafk.com",
+        "gold_note": "Private email with encryption instructions.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/SECURITY.md",
+          "locator": "L19-L21",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": "christina@cafkafk.com",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:heuristic",
+        "bytes": 645,
+        "latency_ms": 152.6
+      },
+      {
+        "repo": "github.com/gohugoio/hugo",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "bjorn.erik.pedersen@gmail.com",
+        "gold_note": "Email after confirming the problem belongs to Hugo.",
+        "gold_evidence": {
+          "url": "https://github.com/gohugoio/hugo/blob/ec57bb7d348989513b919c7ea9ff08fed0bec327/SECURITY.md",
+          "locator": "L7-L9",
+          "checked_at": "2026-09-16",
+          "source_revision": "ec57bb7d348989513b919c7ea9ff08fed0bec327"
+        },
+        "got": "bjorn.erik.pedersen@gmail.com",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:heuristic",
+        "bytes": 710,
+        "latency_ms": 215.8
+      },
+      {
+        "repo": "github.com/pypa/hatch",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "https://github.com/pypa/hatch/security/advisories/new",
+        "gold_note": "Private advisory form.",
+        "gold_evidence": {
+          "url": "https://github.com/pypa/hatch/blob/47f333a98228c326786d3919f346bd7b74d9cf8f/SECURITY.md",
+          "locator": "L10-L16",
+          "checked_at": "2026-09-16",
+          "source_revision": "47f333a98228c326786d3919f346bd7b74d9cf8f"
+        },
+        "got": "https://github.com/pypa/hatch/security/advisories/new",
+        "confidence": "low",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:heuristic",
+        "bytes": 413,
+        "latency_ms": 181.0
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "pnpm run compile",
+        "gold_note": "Repository-root TypeScript build after installing prerequisites.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/CONTRIBUTING.md",
+          "locator": "L29-L35",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "sudo dnf install make automake gcc gcc-c++ kernel-devel",
+        "confidence": "medium",
+        "outcome": "wrong_hedged",
+        "source": "github:build-docs:heuristic",
+        "bytes": 68119,
+        "latency_ms": 1399.7
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "pnpm run test-all",
+        "gold_note": "Whole TypeScript suite from repository root. Bare pnpm test is package-local; Rust suites are separate.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/CONTRIBUTING.md",
+          "locator": "L36",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "git commit -a",
+        "confidence": "medium",
+        "outcome": "wrong_hedged",
+        "source": "github:test-docs:heuristic",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/pnpm/pnpm/security/advisories",
+        "gold_note": "Exact documented advisory URL.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/SECURITY.md",
+          "locator": "L12-L14",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "https://github.com/pnpm/pnpm/security/advisories",
+        "confidence": "low",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:heuristic",
+        "bytes": 5735,
+        "latency_ms": 136.5
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "make",
+          "make build",
+          "make all"
+        ],
+        "gold_note": "Core build; modules-update populates optional modules first.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/README.md",
+          "locator": "L345-L350",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "docker build -f docker/Dockerfile.noble -t redis-build:noble .",
+        "confidence": "medium",
+        "outcome": "wrong_hedged",
+        "source": "github:build-docs:heuristic",
+        "bytes": 46645,
+        "latency_ms": 1349.6
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "make test",
+        "gold_note": "Default tests.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/README.md",
+          "locator": "L381-L386",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "docker run -d -p 6379:6379 redis:latest",
+        "confidence": "low",
+        "outcome": "wrong_hedged",
+        "source": "github:test-docs:heuristic",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "https://redis.io/redis-responsible-vulnerability-disclosure/",
+          "https://github.com/redis/redis/security/advisories/new",
+          "security@redis.com"
+        ],
+        "gold_note": "Disclosure program, GitHub reporting, or direct security-team contact.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/SECURITY.md",
+          "locator": "L26-L40",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "security@redis.com",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "github:SECURITY.md:heuristic",
+        "bytes": 3860,
+        "latency_ms": 145.1
+      },
+      {
+        "repo": "github.com/spring-projects/spring-boot",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "./gradlew check",
+        "gold_note": "Repository-root verification includes tests and Checkstyle.",
+        "gold_evidence": {
+          "url": "https://github.com/spring-projects/spring-boot/blob/683d41b3232b98bb10d7b60705abe300af1c5e20/CONTRIBUTING.adoc",
+          "locator": "L54-L55",
+          "checked_at": "2026-09-16",
+          "source_revision": "683d41b3232b98bb10d7b60705abe300af1c5e20"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "github:no-doc",
+        "bytes": 196,
+        "latency_ms": 2062.7
+      },
+      {
+        "repo": "github.com/spring-projects/spring-boot",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://spring.io/security-policy",
+        "gold_note": "Documented responsible disclosure policy.",
+        "gold_evidence": {
+          "url": "https://github.com/spring-projects/spring-boot/blob/683d41b3232b98bb10d7b60705abe300af1c5e20/CONTRIBUTING.adoc",
+          "locator": "L25-L28",
+          "checked_at": "2026-09-16",
+          "source_revision": "683d41b3232b98bb10d7b60705abe300af1c5e20"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "github:no-doc",
+        "bytes": 28,
+        "latency_ms": 273.4
+      },
+      {
+        "repo": "github.com/dotnet/runtime",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "https://msrc.microsoft.com/report/vulnerability/new",
+        "gold_note": "MSRC private report form.",
+        "gold_evidence": {
+          "url": "https://github.com/dotnet/runtime/blob/8e4f2a927f4ff15de201a45151aad689fa3942f5/SECURITY.md",
+          "locator": "L7-L15",
+          "checked_at": "2026-09-16",
+          "source_revision": "8e4f2a927f4ff15de201a45151aad689fa3942f5"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "github:SECURITY.md:heuristic",
+        "bytes": 1210,
+        "latency_ms": 172.5
+      }
+    ],
+    "summary": {
+      "n_scored": 17,
+      "accuracy": 0.471,
+      "precision": 0.615,
+      "coverage": 0.765,
+      "confidently_wrong": 0,
+      "confidently_wrong_rate": 0.0,
+      "wrong_hedged": 5,
+      "abstained": 4,
+      "total_bytes": 212280,
+      "approx_tokens": 53070,
+      "total_latency_ms": 9555.6,
+      "by_class": {
+        "github_native": {
+          "n": 0,
+          "accuracy": 0.0,
+          "confidently_wrong": 0
+        },
+        "buried": {
+          "n": 17,
+          "accuracy": 0.471,
+          "confidently_wrong": 0
+        }
+      },
+      "by_cohort": {
+        "holdout_unindexed": {
+          "n_scored": 5,
+          "accuracy": 0.4,
+          "precision": 0.667,
+          "coverage": 0.6,
+          "confidently_wrong": 0,
+          "confidently_wrong_rate": 0.0,
+          "wrong_hedged": 1,
+          "abstained": 2,
+          "total_bytes": 36669,
+          "approx_tokens": 9167,
+          "total_latency_ms": 1906.7,
+          "by_class": {
+            "github_native": {
+              "n": 0,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 5,
+              "accuracy": 0.4,
+              "confidently_wrong": 0
+            }
+          }
+        },
+        "indexed_independent": {
+          "n_scored": 12,
+          "accuracy": 0.5,
+          "precision": 0.6,
+          "coverage": 0.833,
+          "confidently_wrong": 0,
+          "confidently_wrong_rate": 0.0,
+          "wrong_hedged": 4,
+          "abstained": 2,
+          "total_bytes": 175611,
+          "approx_tokens": 43903,
+          "total_latency_ms": 7648.9,
+          "by_class": {
+            "github_native": {
+              "n": 0,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 12,
+              "accuracy": 0.5,
+              "confidently_wrong": 0
+            }
+          }
+        }
+      }
+    },
+    "consumer_events": [],
+    "transport": {
+      "request_count": 114,
+      "response_bytes": 326618,
+      "cache_hits": 0
+    },
+    "elapsedMs": 20523.812
+  },
+  {
+    "arm": "dotrepo",
+    "configuration": {
+      "base_url": "http://127.0.0.1:8767"
+    },
+    "rows": [
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo build",
+        "gold_note": "Repository-root development build.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/CONTRIBUTING.md",
+          "locator": "L115-L122",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "cargo build --workspace",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 21318,
+        "latency_ms": 9.1
+      },
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo test --workspace",
+        "gold_note": "Workspace tests; standard-library tests are a separate command.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/CONTRIBUTING.md",
+          "locator": "L78-L83",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "cargo test --workspace",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/nushell/nushell/security/advisories/new",
+        "gold_note": "Private GitHub reporting path; Discord also permitted.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/SECURITY.md",
+          "locator": "L12-L15",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "https://github.com/nushell/nushell/security/advisories/new",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "nix build",
+        "gold_note": "Recommended Nix development build.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/CONTRIBUTING.md",
+          "locator": "L40-L49",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 3218,
+        "latency_ms": 4.0
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": [
+          "nix build .#test",
+          "cargo test"
+        ],
+        "gold_note": "Two explicitly documented test commands.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/CONTRIBUTING.md",
+          "locator": "L47,L104",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "christina@cafkafk.com",
+        "gold_note": "Private email with encryption instructions.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/SECURITY.md",
+          "locator": "L19-L21",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/gohugoio/hugo",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "bjorn.erik.pedersen@gmail.com",
+        "gold_note": "Email after confirming the problem belongs to Hugo.",
+        "gold_evidence": {
+          "url": "https://github.com/gohugoio/hugo/blob/ec57bb7d348989513b919c7ea9ff08fed0bec327/SECURITY.md",
+          "locator": "L7-L9",
+          "checked_at": "2026-09-16",
+          "source_revision": "ec57bb7d348989513b919c7ea9ff08fed0bec327"
+        },
+        "got": "bjorn.erik.pedersen@gmail.com",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 19856,
+        "latency_ms": 2.0
+      },
+      {
+        "repo": "github.com/pypa/hatch",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "https://github.com/pypa/hatch/security/advisories/new",
+        "gold_note": "Private advisory form.",
+        "gold_evidence": {
+          "url": "https://github.com/pypa/hatch/blob/47f333a98228c326786d3919f346bd7b74d9cf8f/SECURITY.md",
+          "locator": "L10-L16",
+          "checked_at": "2026-09-16",
+          "source_revision": "47f333a98228c326786d3919f346bd7b74d9cf8f"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 3092,
+        "latency_ms": 3.7
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "pnpm run compile",
+        "gold_note": "Repository-root TypeScript build after installing prerequisites.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/CONTRIBUTING.md",
+          "locator": "L29-L35",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "pnpm run compile",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 18939,
+        "latency_ms": 2.0
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "pnpm run test-all",
+        "gold_note": "Whole TypeScript suite from repository root. Bare pnpm test is package-local; Rust suites are separate.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/CONTRIBUTING.md",
+          "locator": "L36",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "pnpm run test-all",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/pnpm/pnpm/security/advisories",
+        "gold_note": "Exact documented advisory URL.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/SECURITY.md",
+          "locator": "L12-L14",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "https://github.com/pnpm/pnpm/security/advisories",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "make",
+          "make build",
+          "make all"
+        ],
+        "gold_note": "Core build; modules-update populates optional modules first.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/README.md",
+          "locator": "L345-L350",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "make",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 18621,
+        "latency_ms": 2.0
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "make test",
+        "gold_note": "Default tests.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/README.md",
+          "locator": "L381-L386",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "make test",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "https://redis.io/redis-responsible-vulnerability-disclosure/",
+          "https://github.com/redis/redis/security/advisories/new",
+          "security@redis.com"
+        ],
+        "gold_note": "Disclosure program, GitHub reporting, or direct security-team contact.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/SECURITY.md",
+          "locator": "L26-L40",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "security@redis.com",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "dotrepo:['imported', 'inferred', 'verified']",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/spring-projects/spring-boot",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "./gradlew check",
+        "gold_note": "Repository-root verification includes tests and Checkstyle.",
+        "gold_evidence": {
+          "url": "https://github.com/spring-projects/spring-boot/blob/683d41b3232b98bb10d7b60705abe300af1c5e20/CONTRIBUTING.adoc",
+          "locator": "L54-L55",
+          "checked_at": "2026-09-16",
+          "source_revision": "683d41b3232b98bb10d7b60705abe300af1c5e20"
+        },
+        "got": "./gradlew test",
+        "confidence": "medium",
+        "outcome": "wrong_hedged",
+        "source": "dotrepo:['imported', 'inferred']",
+        "bytes": 17494,
+        "latency_ms": 1.9
+      },
+      {
+        "repo": "github.com/spring-projects/spring-boot",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://spring.io/security-policy",
+        "gold_note": "Documented responsible disclosure policy.",
+        "gold_evidence": {
+          "url": "https://github.com/spring-projects/spring-boot/blob/683d41b3232b98bb10d7b60705abe300af1c5e20/CONTRIBUTING.adoc",
+          "locator": "L25-L28",
+          "checked_at": "2026-09-16",
+          "source_revision": "683d41b3232b98bb10d7b60705abe300af1c5e20"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/dotnet/runtime",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "https://msrc.microsoft.com/report/vulnerability/new",
+        "gold_note": "MSRC private report form.",
+        "gold_evidence": {
+          "url": "https://github.com/dotnet/runtime/blob/8e4f2a927f4ff15de201a45151aad689fa3942f5/SECURITY.md",
+          "locator": "L7-L15",
+          "checked_at": "2026-09-16",
+          "source_revision": "8e4f2a927f4ff15de201a45151aad689fa3942f5"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "dotrepo:missing",
+        "bytes": 3164,
+        "latency_ms": 3.7
+      }
+    ],
+    "summary": {
+      "n_scored": 17,
+      "accuracy": 0.588,
+      "precision": 0.909,
+      "coverage": 0.647,
+      "confidently_wrong": 0,
+      "confidently_wrong_rate": 0.0,
+      "wrong_hedged": 1,
+      "abstained": 6,
+      "total_bytes": 105702,
+      "approx_tokens": 26426,
+      "total_latency_ms": 28.4,
+      "by_class": {
+        "github_native": {
+          "n": 0,
+          "accuracy": 0.0,
+          "confidently_wrong": 0
+        },
+        "buried": {
+          "n": 17,
+          "accuracy": 0.588,
+          "confidently_wrong": 0
+        }
+      },
+      "by_cohort": {
+        "holdout_unindexed": {
+          "n_scored": 5,
+          "accuracy": 0.0,
+          "precision": 0.0,
+          "coverage": 0.0,
+          "confidently_wrong": 0,
+          "confidently_wrong_rate": 0.0,
+          "wrong_hedged": 0,
+          "abstained": 5,
+          "total_bytes": 9474,
+          "approx_tokens": 2368,
+          "total_latency_ms": 11.4,
+          "by_class": {
+            "github_native": {
+              "n": 0,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 5,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            }
+          }
+        },
+        "indexed_independent": {
+          "n_scored": 12,
+          "accuracy": 0.833,
+          "precision": 0.909,
+          "coverage": 0.917,
+          "confidently_wrong": 0,
+          "confidently_wrong_rate": 0.0,
+          "wrong_hedged": 1,
+          "abstained": 1,
+          "total_bytes": 96228,
+          "approx_tokens": 24057,
+          "total_latency_ms": 17.0,
+          "by_class": {
+            "github_native": {
+              "n": 0,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 12,
+              "accuracy": 0.833,
+              "confidently_wrong": 0
+            }
+          }
+        }
+      }
+    },
+    "consumer_events": [],
+    "transport": {
+      "request_count": 8,
+      "response_bytes": 105702,
+      "cache_hits": 0
+    },
+    "elapsedMs": 29.085
+  },
+  {
+    "arm": "lookup-first",
+    "configuration": {
+      "base_url": "http://127.0.0.1:8767",
+      "fallback": {
+        "extractor": "heuristic"
+      },
+      "max_record_age_days": 30,
+      "consumer_class": "in-repository-reference",
+      "model_usage_measured": false,
+      "maintenance_cost_included": false
+    },
+    "rows": [
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo build",
+        "gold_note": "Repository-root development build.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/CONTRIBUTING.md",
+          "locator": "L115-L122",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "cargo build",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "fallback:github:build-docs:heuristic",
+        "bytes": 52004,
+        "latency_ms": 950.2
+      },
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "cargo test --workspace",
+        "gold_note": "Workspace tests; standard-library tests are a separate command.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/CONTRIBUTING.md",
+          "locator": "L78-L83",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "- `cargo test --workspace` to check that all tests pass (on Windows make sure to enable [developer mode](https://learn.microsoft.com/en-us/windows/apps/get-started/developer-mode-features-and-debugging))",
+        "confidence": "low",
+        "outcome": "correct",
+        "source": "fallback:github:test-docs:heuristic",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/nushell/nushell",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/nushell/nushell/security/advisories/new",
+        "gold_note": "Private GitHub reporting path; Discord also permitted.",
+        "gold_evidence": {
+          "url": "https://github.com/nushell/nushell/blob/45aa739595bfd51cd28bbc3454f81f1762662a88/SECURITY.md",
+          "locator": "L12-L15",
+          "checked_at": "2026-09-16",
+          "source_revision": "45aa739595bfd51cd28bbc3454f81f1762662a88"
+        },
+        "got": "https://github.com/nushell/nushell/security/advisories/new",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "profile:extracted",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "nix build",
+        "gold_note": "Recommended Nix development build.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/CONTRIBUTING.md",
+          "locator": "L40-L49",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": "fix(hyperlinks)!: TextCell building of detailed grid view, hyperlink, icon options",
+        "confidence": "low",
+        "outcome": "wrong_hedged",
+        "source": "fallback:github:build-docs:heuristic",
+        "bytes": 34410,
+        "latency_ms": 833.9
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": [
+          "nix build .#test",
+          "cargo test"
+        ],
+        "gold_note": "Two explicitly documented test commands.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/CONTRIBUTING.md",
+          "locator": "L47,L104",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "fallback:github:test-docs:heuristic",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/eza-community/eza",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "christina@cafkafk.com",
+        "gold_note": "Private email with encryption instructions.",
+        "gold_evidence": {
+          "url": "https://github.com/eza-community/eza/blob/471bfbc7b03cbac8c738e8d9050edb06ee79132a/SECURITY.md",
+          "locator": "L19-L21",
+          "checked_at": "2026-09-16",
+          "source_revision": "471bfbc7b03cbac8c738e8d9050edb06ee79132a"
+        },
+        "got": "christina@cafkafk.com",
+        "confidence": "medium",
+        "outcome": "correct",
+        "source": "fallback:github:SECURITY.md:heuristic",
+        "bytes": 645,
+        "latency_ms": 146.2
+      },
+      {
+        "repo": "github.com/gohugoio/hugo",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "bjorn.erik.pedersen@gmail.com",
+        "gold_note": "Email after confirming the problem belongs to Hugo.",
+        "gold_evidence": {
+          "url": "https://github.com/gohugoio/hugo/blob/ec57bb7d348989513b919c7ea9ff08fed0bec327/SECURITY.md",
+          "locator": "L7-L9",
+          "checked_at": "2026-09-16",
+          "source_revision": "ec57bb7d348989513b919c7ea9ff08fed0bec327"
+        },
+        "got": "bjorn.erik.pedersen@gmail.com",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "profile:unspecified",
+        "bytes": 4419,
+        "latency_ms": 2.7
+      },
+      {
+        "repo": "github.com/pypa/hatch",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "https://github.com/pypa/hatch/security/advisories/new",
+        "gold_note": "Private advisory form.",
+        "gold_evidence": {
+          "url": "https://github.com/pypa/hatch/blob/47f333a98228c326786d3919f346bd7b74d9cf8f/SECURITY.md",
+          "locator": "L10-L16",
+          "checked_at": "2026-09-16",
+          "source_revision": "47f333a98228c326786d3919f346bd7b74d9cf8f"
+        },
+        "got": "https://github.com/pypa/hatch/security/advisories/new",
+        "confidence": "low",
+        "outcome": "correct",
+        "source": "fallback:github:SECURITY.md:heuristic",
+        "bytes": 422,
+        "latency_ms": 101.9
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "pnpm run compile",
+        "gold_note": "Repository-root TypeScript build after installing prerequisites.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/CONTRIBUTING.md",
+          "locator": "L29-L35",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "pnpm run compile",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "profile:extracted",
+        "bytes": 4515,
+        "latency_ms": 3.0
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "pnpm run test-all",
+        "gold_note": "Whole TypeScript suite from repository root. Bare pnpm test is package-local; Rust suites are separate.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/CONTRIBUTING.md",
+          "locator": "L36",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "pnpm run test-all",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "profile:extracted",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/pnpm/pnpm",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://github.com/pnpm/pnpm/security/advisories",
+        "gold_note": "Exact documented advisory URL.",
+        "gold_evidence": {
+          "url": "https://github.com/pnpm/pnpm/blob/68597dd0a3b58a6fdffb9353179337851c4c7fdd/SECURITY.md",
+          "locator": "L12-L14",
+          "checked_at": "2026-09-16",
+          "source_revision": "68597dd0a3b58a6fdffb9353179337851c4c7fdd"
+        },
+        "got": "https://github.com/pnpm/pnpm/security/advisories",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "profile:extracted",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "build",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "make",
+          "make build",
+          "make all"
+        ],
+        "gold_note": "Core build; modules-update populates optional modules first.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/README.md",
+          "locator": "L345-L350",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "make",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "profile:extracted",
+        "bytes": 4667,
+        "latency_ms": 2.5
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "make test",
+        "gold_note": "Default tests.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/README.md",
+          "locator": "L381-L386",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "make test",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "profile:extracted",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/redis/redis",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": [
+          "https://redis.io/redis-responsible-vulnerability-disclosure/",
+          "https://github.com/redis/redis/security/advisories/new",
+          "security@redis.com"
+        ],
+        "gold_note": "Disclosure program, GitHub reporting, or direct security-team contact.",
+        "gold_evidence": {
+          "url": "https://github.com/redis/redis/blob/07a33b919581e2b0663e34731a490d768e553dfa/SECURITY.md",
+          "locator": "L26-L40",
+          "checked_at": "2026-09-16",
+          "source_revision": "07a33b919581e2b0663e34731a490d768e553dfa"
+        },
+        "got": "security@redis.com",
+        "confidence": "high",
+        "outcome": "correct",
+        "source": "profile:unspecified",
+        "bytes": 0,
+        "latency_ms": 0.0
+      },
+      {
+        "repo": "github.com/spring-projects/spring-boot",
+        "field": "test",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "./gradlew check",
+        "gold_note": "Repository-root verification includes tests and Checkstyle.",
+        "gold_evidence": {
+          "url": "https://github.com/spring-projects/spring-boot/blob/683d41b3232b98bb10d7b60705abe300af1c5e20/CONTRIBUTING.adoc",
+          "locator": "L54-L55",
+          "checked_at": "2026-09-16",
+          "source_revision": "683d41b3232b98bb10d7b60705abe300af1c5e20"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "fallback:github:no-doc",
+        "bytes": 4821,
+        "latency_ms": 1523.3
+      },
+      {
+        "repo": "github.com/spring-projects/spring-boot",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "indexed_independent",
+        "gold": "https://spring.io/security-policy",
+        "gold_note": "Documented responsible disclosure policy.",
+        "gold_evidence": {
+          "url": "https://github.com/spring-projects/spring-boot/blob/683d41b3232b98bb10d7b60705abe300af1c5e20/CONTRIBUTING.adoc",
+          "locator": "L25-L28",
+          "checked_at": "2026-09-16",
+          "source_revision": "683d41b3232b98bb10d7b60705abe300af1c5e20"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "fallback:github:no-doc",
+        "bytes": 28,
+        "latency_ms": 203.5
+      },
+      {
+        "repo": "github.com/dotnet/runtime",
+        "field": "security_contact",
+        "field_class": "buried",
+        "cohort": "holdout_unindexed",
+        "gold": "https://msrc.microsoft.com/report/vulnerability/new",
+        "gold_note": "MSRC private report form.",
+        "gold_evidence": {
+          "url": "https://github.com/dotnet/runtime/blob/8e4f2a927f4ff15de201a45151aad689fa3942f5/SECURITY.md",
+          "locator": "L7-L15",
+          "checked_at": "2026-09-16",
+          "source_revision": "8e4f2a927f4ff15de201a45151aad689fa3942f5"
+        },
+        "got": null,
+        "confidence": null,
+        "outcome": "abstained",
+        "source": "fallback:github:SECURITY.md:heuristic",
+        "bytes": 1219,
+        "latency_ms": 105.9
+      }
+    ],
+    "summary": {
+      "n_scored": 17,
+      "accuracy": 0.706,
+      "precision": 0.923,
+      "coverage": 0.765,
+      "confidently_wrong": 0,
+      "confidently_wrong_rate": 0.0,
+      "wrong_hedged": 1,
+      "abstained": 4,
+      "total_bytes": 107150,
+      "approx_tokens": 26788,
+      "total_latency_ms": 3873.1,
+      "by_class": {
+        "github_native": {
+          "n": 0,
+          "accuracy": 0.0,
+          "confidently_wrong": 0
+        },
+        "buried": {
+          "n": 17,
+          "accuracy": 0.706,
+          "confidently_wrong": 0
+        }
+      },
+      "by_cohort": {
+        "holdout_unindexed": {
+          "n_scored": 5,
+          "accuracy": 0.4,
+          "precision": 0.667,
+          "coverage": 0.6,
+          "confidently_wrong": 0,
+          "confidently_wrong_rate": 0.0,
+          "wrong_hedged": 1,
+          "abstained": 2,
+          "total_bytes": 36696,
+          "approx_tokens": 9174,
+          "total_latency_ms": 1187.9,
+          "by_class": {
+            "github_native": {
+              "n": 0,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 5,
+              "accuracy": 0.4,
+              "confidently_wrong": 0
+            }
+          }
+        },
+        "indexed_independent": {
+          "n_scored": 12,
+          "accuracy": 0.833,
+          "precision": 1.0,
+          "coverage": 0.833,
+          "confidently_wrong": 0,
+          "confidently_wrong_rate": 0.0,
+          "wrong_hedged": 0,
+          "abstained": 2,
+          "total_bytes": 70454,
+          "approx_tokens": 17614,
+          "total_latency_ms": 2685.2,
+          "by_class": {
+            "github_native": {
+              "n": 0,
+              "accuracy": 0.0,
+              "confidently_wrong": 0
+            },
+            "buried": {
+              "n": 12,
+              "accuracy": 0.833,
+              "confidently_wrong": 0
+            }
+          }
+        }
+      }
+    },
+    "consumer_events": [
+      {
+        "repository": "github.com/nushell/nushell",
+        "field": "build",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "inferred-command:repo.build"
+        ]
+      },
+      {
+        "repository": "github.com/nushell/nushell",
+        "field": "test",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "inferred-command:repo.test"
+        ]
+      },
+      {
+        "repository": "github.com/nushell/nushell",
+        "field": "security_contact",
+        "usedProfile": true,
+        "fallbackReasons": []
+      },
+      {
+        "repository": "github.com/eza-community/eza",
+        "field": "build",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      {
+        "repository": "github.com/eza-community/eza",
+        "field": "test",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      {
+        "repository": "github.com/eza-community/eza",
+        "field": "security_contact",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      {
+        "repository": "github.com/gohugoio/hugo",
+        "field": "security_contact",
+        "usedProfile": true,
+        "fallbackReasons": []
+      },
+      {
+        "repository": "github.com/pypa/hatch",
+        "field": "security_contact",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      },
+      {
+        "repository": "github.com/pnpm/pnpm",
+        "field": "build",
+        "usedProfile": true,
+        "fallbackReasons": []
+      },
+      {
+        "repository": "github.com/pnpm/pnpm",
+        "field": "test",
+        "usedProfile": true,
+        "fallbackReasons": []
+      },
+      {
+        "repository": "github.com/pnpm/pnpm",
+        "field": "security_contact",
+        "usedProfile": true,
+        "fallbackReasons": []
+      },
+      {
+        "repository": "github.com/redis/redis",
+        "field": "build",
+        "usedProfile": true,
+        "fallbackReasons": []
+      },
+      {
+        "repository": "github.com/redis/redis",
+        "field": "test",
+        "usedProfile": true,
+        "fallbackReasons": []
+      },
+      {
+        "repository": "github.com/redis/redis",
+        "field": "security_contact",
+        "usedProfile": true,
+        "fallbackReasons": []
+      },
+      {
+        "repository": "github.com/spring-projects/spring-boot",
+        "field": "test",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "inferred-command:repo.test"
+        ]
+      },
+      {
+        "repository": "github.com/spring-projects/spring-boot",
+        "field": "security_contact",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "missing:owners.security_contact"
+        ]
+      },
+      {
+        "repository": "github.com/dotnet/runtime",
+        "field": "security_contact",
+        "usedProfile": false,
+        "fallbackReasons": [
+          "repository-not-found"
+        ]
+      }
+    ],
+    "transport": {
+      "request_count": 84,
+      "response_bytes": 170463,
+      "cache_hits": 0
+    },
+    "elapsedMs": 8980.303
+  }
+]

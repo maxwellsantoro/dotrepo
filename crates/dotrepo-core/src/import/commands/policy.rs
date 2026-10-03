@@ -405,8 +405,14 @@ pub(crate) fn resolve_unique_command_candidate(
         } else {
             candidate.test.as_deref()
         };
-        if let Some(command) = command.filter(|value| !value.trim().is_empty()) {
-            present.push((command.to_string(), candidate.source_path.clone()));
+        // Only shell-safe commands participate in unique/conflict resolution.
+        // Unsafe CI glue (e.g. `apt-get …; …`) must not mint conflict notes that
+        // later disagree with high-confidence-absent scoring after sanitize.
+        if let Some(command) = command
+            .filter(|value| !value.trim().is_empty())
+            .and_then(sanitize_import_command)
+        {
+            present.push((command, candidate.source_path.clone()));
         }
     }
 
@@ -457,11 +463,39 @@ fn resolve_preferred_command_candidate(
         return resolve_preferred_workflow_command_candidate(present);
     }
 
+    if let Some(preferred) = resolve_preferred_task_script_command_candidate(present) {
+        return Some(preferred);
+    }
+
     if select_build {
         return resolve_preferred_ecosystem_default_build_candidate(present);
     }
 
     None
+}
+
+/// Prefer Makefile over justfile when both publish task-script wrappers for the
+/// same field (common dual-maintainer surface in Go repos such as lazygit).
+fn resolve_preferred_task_script_command_candidate(
+    present: &[(String, String)],
+) -> Option<(String, String)> {
+    let only_make_and_just = present.iter().all(|(_, path)| {
+        let base = path.rsplit('/').next().unwrap_or(path);
+        matches!(
+            base,
+            "Makefile" | "makefile" | "GNUmakefile" | "justfile" | "Justfile"
+        )
+    });
+    if !only_make_and_just || present.len() < 2 {
+        return None;
+    }
+    present
+        .iter()
+        .find(|(_, path)| {
+            let base = path.rsplit('/').next().unwrap_or(path);
+            matches!(base, "Makefile" | "makefile" | "GNUmakefile")
+        })
+        .map(|(command, path)| (command.clone(), path.clone()))
 }
 
 fn resolve_preferred_workflow_command_candidate(
@@ -533,13 +567,42 @@ fn workflow_source_preference(file: &str) -> i32 {
         return 6;
     }
 
+    // Platform, packaging, and monorepo-slice workflows lose to generic CI when
+    // two workflow-tier commands would otherwise conflict (e.g. units_test_cli
+    // vs units_test_desktop, or ci-framework vs ci-binary-installer).
     const DEPRIORITIZED: &[&str] = &[
-        "android", "ios", "windows", "macos", "freebsd", "gcc", "clang", "cross", "release",
-        "bindings", "packages", "preview", "apk", "docker", "helm", "npm", "nuget", "pypi",
-        "crates", "openapi", "ui",
+        "android",
+        "ios",
+        "windows",
+        "macos",
+        "freebsd",
+        "desktop",
+        "electron",
+        "binary",
+        "installer",
+        "gcc",
+        "clang",
+        "cross",
+        "release",
+        "bindings",
+        "packages",
+        "preview",
+        "apk",
+        "docker",
+        "helm",
+        "npm",
+        "nuget",
+        "pypi",
+        "crates",
+        "openapi",
+        "ui",
+        "wasm",
+        "nightly",
+        "canary",
     ];
+    let lower = file.to_ascii_lowercase();
     for (index, keyword) in DEPRIORITIZED.iter().enumerate() {
-        if file.contains(keyword) {
+        if lower.contains(keyword) {
             return 100 + index as i32;
         }
     }
@@ -556,21 +619,14 @@ pub(crate) enum NodePackageRunner {
 }
 
 impl NodePackageRunner {
-    pub(crate) fn build_command(self) -> String {
-        match self {
-            Self::Npm => "npm run build".into(),
-            Self::Pnpm => "pnpm build".into(),
-            Self::Yarn => "yarn build".into(),
-            Self::Bun => "bun run build".into(),
-        }
-    }
-
-    pub(crate) fn test_command(self) -> String {
-        match self {
-            Self::Npm => "npm test".into(),
-            Self::Pnpm => "pnpm test".into(),
-            Self::Yarn => "yarn test".into(),
-            Self::Bun => "bun run test".into(),
+    pub(crate) fn script_command(self, script: &str) -> String {
+        match (self, script) {
+            (Self::Npm, "test") => "npm test".into(),
+            (Self::Pnpm, "build" | "test") => format!("pnpm {script}"),
+            (Self::Yarn, _) => format!("yarn {script}"),
+            (Self::Npm, _) => format!("npm run {script}"),
+            (Self::Pnpm, _) => format!("pnpm run {script}"),
+            (Self::Bun, _) => format!("bun run {script}"),
         }
     }
 }
@@ -595,12 +651,12 @@ pub(crate) fn is_placeholder_package_json_test_script(script: &str) -> bool {
 pub(crate) fn pick_node_script_command(
     scripts: &serde_json::Map<String, serde_json::Value>,
     names: &[&str],
-    make_cmd: impl FnOnce() -> String,
+    make_cmd: impl Fn(&str) -> String,
 ) -> Option<String> {
     for name in names {
         if let Some(v) = scripts.get(*name).and_then(serde_json::Value::as_str) {
             if !v.trim().is_empty() {
-                return Some(make_cmd());
+                return Some(make_cmd(name));
             }
         }
     }

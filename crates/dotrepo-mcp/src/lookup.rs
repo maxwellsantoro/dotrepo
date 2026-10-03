@@ -186,6 +186,11 @@ fn is_blocked_lookup_ip(addr: &IpAddr) -> bool {
                 || (octets[0] == 169 && octets[1] == 254)
         }
         IpAddr::V6(v6) => {
+            // Mapped sockets reach IPv4 destinations; apply the same policy
+            // before considering native IPv6 ranges.
+            if let Some(v4) = v6.to_ipv4_mapped() {
+                return is_blocked_lookup_ip(&IpAddr::V4(v4));
+            }
             let segments = v6.segments();
             // Unique local (fc00::/7), link-local (fe80::/10), multicast (ff00::/8),
             // documentation (2001:db8::/32).
@@ -626,5 +631,59 @@ mod tests {
         assert!(is_blocked_lookup_host("metadata"));
         assert!(is_blocked_lookup_host("instance-data"));
         assert!(!is_blocked_lookup_host("dotrepo.org"));
+    }
+
+    #[test]
+    fn mapped_ipv6_addresses_follow_ipv4_policy() {
+        let _env_guard = lock_lookup_base_url_env();
+        for address in [
+            "127.0.0.1",
+            "10.0.0.1",
+            "172.16.0.1",
+            "192.168.0.1",
+            "169.254.169.254",
+            "0.0.0.0",
+            "255.255.255.255",
+            "224.0.0.1",
+            "100.64.0.1",
+            "192.0.2.1",
+            "198.51.100.1",
+            "203.0.113.1",
+        ] {
+            let mapped = format!("::ffff:{address}").parse().expect("mapped IP");
+            assert!(is_blocked_lookup_ip(&mapped), "{address}");
+        }
+        assert!(is_blocked_lookup_ip(
+            &"::ffff:7f00:1".parse().expect("hex mapped IP")
+        ));
+        for address in ["::ffff:93.184.216.34", "2606:4700:4700::1111"] {
+            assert!(!is_blocked_lookup_ip(&address.parse().expect("public IP")));
+        }
+    }
+
+    #[test]
+    fn mixed_resolution_rejects_mapped_private_addresses() {
+        let _env_guard = lock_lookup_base_url_env();
+        let public = "93.184.216.34:443".parse().expect("public socket");
+        let mapped = "[::ffff:127.0.0.1]:443".parse().expect("mapped socket");
+        for addresses in [vec![public, mapped], vec![mapped, public]] {
+            assert!(validate_lookup_addresses("example.test", addresses).is_err());
+        }
+        let mapped_public = "[::ffff:93.184.216.34]:443"
+            .parse()
+            .expect("public mapped socket");
+        assert!(validate_lookup_addresses("example.test", vec![public, mapped_public]).is_ok());
+    }
+
+    #[test]
+    fn unsafe_local_override_still_allows_mapped_private_addresses() {
+        let _env_guard = lock_lookup_base_url_env();
+        // SAFETY: all lookup environment tests hold the shared guard.
+        unsafe {
+            std::env::set_var("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL", "1");
+        }
+        assert!(!is_blocked_lookup_ip(
+            &"::ffff:127.0.0.1".parse().expect("mapped IP")
+        ));
     }
 }

@@ -4,7 +4,7 @@
 //! `ImportedCommandMetadata`.
 use anyhow::{anyhow, Result};
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use super::types::{ImportSources, ImportedCommandMetadata, ImportedFile};
 
@@ -17,11 +17,25 @@ pub(crate) use policy::sanitize_import_command;
 pub(crate) use extraction::infer_pyproject_commands;
 
 use extraction::{
-    infer_cargo_manifest_commands, infer_cmake_workflow_commands, infer_composer_commands,
-    infer_contributing_commands, infer_dotnet_commands, infer_go_module_commands,
-    infer_gradle_commands, infer_justfile_commands, infer_makefile_commands, infer_maven_commands,
-    infer_mix_commands, infer_package_json_commands, infer_rakefile_commands,
-    infer_readme_commands, infer_rebar_commands, infer_setup_cfg_commands, infer_setup_py_commands,
+    infer_cargo_manifest_commands,
+    infer_cmake_workflow_commands,
+    infer_composer_commands,
+    infer_contributing_commands,
+    infer_dotnet_commands,
+    infer_go_module_commands,
+    // infer_dotnet_commands also handles .sln
+    infer_gradle_commands,
+    infer_justfile_commands,
+    infer_makefile_commands,
+    infer_maven_commands,
+    infer_mix_commands,
+    infer_package_json_commands,
+    infer_rakefile_commands,
+    infer_readme_commands,
+    infer_rebar_commands,
+    infer_setup_cfg_commands,
+    infer_setup_py_commands,
+    infer_tox_ini_commands,
     infer_workflow_commands,
 };
 use policy::resolve_command_field;
@@ -45,34 +59,363 @@ pub(super) fn load_first_existing_file(
     Ok(None)
 }
 
-pub(super) fn load_first_root_file_with_extension(
+/// Load the best `Cargo.toml` for command inference: root workspace first,
+/// else a nested crate/workspace preferred over examples/benches.
+pub(super) fn load_best_cargo_toml(root: &Path) -> Result<Option<ImportedFile>> {
+    let mut matches = Vec::new();
+    collect_files_named(root, root, "Cargo.toml", 3, 1, &mut matches)?;
+    matches.sort_by(|left, right| {
+        cargo_toml_path_preference(&left.0)
+            .cmp(&cargo_toml_path_preference(&right.0))
+            .then_with(|| left.0.cmp(&right.0))
+    });
+
+    for (relative, path) in matches {
+        let contents = fs::read_to_string(&path)
+            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let file = ImportedFile {
+            path: relative,
+            contents,
+        };
+        if extraction::infer_cargo_manifest_commands(&file).is_some() {
+            return Ok(Some(file));
+        }
+    }
+    load_first_existing_file(root, &["Cargo.toml"])
+}
+
+fn cargo_toml_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "cargo.toml" {
+        return 0;
+    }
+    if lower.contains("/examples/")
+        || lower.contains("/benches/")
+        || lower.contains("/tests/")
+        || lower.contains("/fuzz/")
+    {
+        return 200;
+    }
+    if lower.contains("/sdk/") || lower.contains("-sdk/") || lower.starts_with("sdk/") {
+        return 170;
+    }
+    // Common monorepo roots for the primary Rust crate tree.
+    if lower.ends_with("-rs/cargo.toml")
+        || lower.contains("/rust/")
+        || lower.starts_with("rust/")
+        || lower.contains("/crates/")
+        || lower.starts_with("crates/")
+    {
+        return 10;
+    }
+    50
+}
+
+/// Load the best named Python manifest (`pyproject.toml` / `setup.py` /
+/// `setup.cfg`) for command inference, preferring root then `python/` layouts.
+pub(super) fn load_best_python_manifest(
+    root: &Path,
+    file_name: &str,
+) -> Result<Option<ImportedFile>> {
+    let mut matches = Vec::new();
+    collect_files_named(root, root, file_name, 3, 1, &mut matches)?;
+    matches.sort_by(|left, right| {
+        python_manifest_path_preference(&left.0)
+            .cmp(&python_manifest_path_preference(&right.0))
+            .then_with(|| left.0.cmp(&right.0))
+    });
+
+    for (relative, path) in matches {
+        let contents = fs::read_to_string(&path)
+            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let file = ImportedFile {
+            path: relative.clone(),
+            contents,
+        };
+        let usable = match file_name {
+            "pyproject.toml" => extraction::infer_pyproject_commands(&file).is_some(),
+            "setup.py" => extraction::infer_setup_py_commands(&file).is_some(),
+            "setup.cfg" => extraction::infer_setup_cfg_commands(&file).is_some(),
+            _ => false,
+        };
+        if usable {
+            return Ok(Some(file));
+        }
+    }
+    // Fall back to root file even if scripts are incomplete (toolchain / metadata).
+    let root_name: &'static str = match file_name {
+        "pyproject.toml" => "pyproject.toml",
+        "setup.py" => "setup.py",
+        "setup.cfg" => "setup.cfg",
+        _ => return Ok(None),
+    };
+    load_first_existing_file(root, &[root_name])
+}
+
+fn python_manifest_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "pyproject.toml" || lower == "setup.py" || lower == "setup.cfg" {
+        return 0;
+    }
+    if lower.contains("/examples/") || lower.contains("/samples/") || lower.contains("/benchmarks/")
+    {
+        return 200;
+    }
+    if lower.contains("/tests/") || lower.contains("/test/") {
+        return 180;
+    }
+    // Secondary language SDKs in polyglot monorepos (e.g. openai/codex).
+    if lower.contains("/sdk/")
+        || lower.contains("-sdk/")
+        || lower.contains("/sdks/")
+        || lower.starts_with("sdk/")
+    {
+        return 170;
+    }
+    // Packaging/release helper trees are rarely the project entrypoint.
+    if lower.starts_with("release/")
+        || lower.contains("/release/")
+        || lower.contains("/packaging/")
+        || lower.contains("/ci/")
+    {
+        return 160;
+    }
+    // Prefer a top-level python/ package package, but not nested under sdk/.
+    if lower == "python/pyproject.toml"
+        || lower == "python/setup.py"
+        || lower == "python/setup.cfg"
+        || lower.starts_with("python/")
+    {
+        return 10;
+    }
+    if lower.starts_with("src/") {
+        return 20;
+    }
+    if lower.contains("/packages/") {
+        return 30;
+    }
+    50
+}
+
+/// Load the best `package.json` for command inference: root first when it has
+/// usable scripts, otherwise a nested monorepo package preferred over SDKs /
+/// examples / test harnesses.
+pub(super) fn load_best_package_json(root: &Path) -> Result<Option<ImportedFile>> {
+    let mut matches = Vec::new();
+    collect_files_named(root, root, "package.json", 4, 1, &mut matches)?;
+    matches.sort_by(|left, right| {
+        package_json_path_preference(&left.0)
+            .cmp(&package_json_path_preference(&right.0))
+            .then_with(|| left.0.cmp(&right.0))
+    });
+
+    for (relative, path) in matches {
+        let contents = fs::read_to_string(&path)
+            .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
+        let file = ImportedFile {
+            path: relative,
+            contents,
+        };
+        if extraction::infer_package_json_commands(&file).is_some() {
+            return Ok(Some(file));
+        }
+    }
+    Ok(None)
+}
+
+/// Lower is better. Used for monorepo package.json selection.
+pub(super) fn package_json_path_preference(path: &str) -> i32 {
+    let lower = path.replace('\\', "/").to_ascii_lowercase();
+    if lower == "package.json" {
+        return 0;
+    }
+    if lower.contains("/examples/")
+        || lower.contains("/samples/")
+        || lower.contains("/fixtures/")
+        || lower.contains("/example/")
+    {
+        return 200;
+    }
+    if lower.contains("test-suite")
+        || lower.contains("test-site")
+        || lower.contains("/tests/")
+        || lower.contains("/__tests__/")
+        || lower.contains("/e2e/")
+    {
+        return 180;
+    }
+    if lower.contains("/sdk/")
+        || lower.contains("-sdk/")
+        || lower.contains("/js-sdk/")
+        || lower.contains("/python-sdk/")
+    {
+        return 150;
+    }
+    if lower.contains("/native/") {
+        return 140;
+    }
+    if lower == "server/package.json" || lower.ends_with("/server/package.json") {
+        return 10;
+    }
+    if lower == "api/package.json"
+        || lower.ends_with("/api/package.json")
+        || lower.contains("/apps/api/")
+    {
+        return 11;
+    }
+    if lower == "web/package.json" || lower.ends_with("/web/package.json") {
+        return 12;
+    }
+    if lower.contains("/apps/") {
+        return 20;
+    }
+    if lower.contains("/packages/") {
+        return 25;
+    }
+    50
+}
+
+fn collect_files_named(
+    root: &Path,
+    dir: &Path,
+    file_name: &str,
+    max_depth: usize,
+    depth: usize,
+    out: &mut Vec<(String, PathBuf)>,
+) -> Result<()> {
+    if depth > max_depth {
+        return Ok(());
+    }
+    let entries =
+        fs::read_dir(dir).map_err(|err| anyhow!("failed to read {}: {}", dir.display(), err))?;
+    for entry in entries.filter_map(|entry| entry.ok()) {
+        let path = entry.path();
+        if path.is_dir() {
+            let name = path
+                .file_name()
+                .and_then(|value| value.to_str())
+                .unwrap_or("");
+            if name.starts_with('.')
+                || name.eq_ignore_ascii_case("node_modules")
+                || name.eq_ignore_ascii_case("dist")
+                || name.eq_ignore_ascii_case("build")
+                || name.eq_ignore_ascii_case("target")
+            {
+                continue;
+            }
+            collect_files_named(root, &path, file_name, max_depth, depth + 1, out)?;
+            continue;
+        }
+        if !path.is_file() {
+            continue;
+        }
+        if !path
+            .file_name()
+            .and_then(|value| value.to_str())
+            .is_some_and(|name| name.eq_ignore_ascii_case(file_name))
+        {
+            continue;
+        }
+        let relative = path
+            .strip_prefix(root)
+            .map(|value| value.to_string_lossy().replace('\\', "/"))
+            .unwrap_or_else(|_| file_name.to_string());
+        out.push((relative, path));
+    }
+    Ok(())
+}
+
+/// Find the first file with `extension` within `max_depth` directory levels
+/// (depth 1 = root only). Prefers non-test paths when ranking. Relative path
+/// is preserved so monorepo layouts (e.g. `src/Foo/Foo.csproj`) remain honest.
+pub(super) fn load_first_file_with_extension(
     root: &Path,
     extension: &str,
+    max_depth: usize,
 ) -> Result<Option<ImportedFile>> {
-    let mut matches = fs::read_dir(root)
-        .map_err(|err| anyhow!("failed to read {}: {}", root.display(), err))?
-        .filter_map(|entry| entry.ok())
-        .filter_map(|entry| {
-            let path = entry.path();
-            let file_name = path.file_name()?.to_str()?.to_string();
-            let matches_extension = path
-                .extension()
-                .and_then(|value| value.to_str())
-                .is_some_and(|value| value.eq_ignore_ascii_case(extension));
-            (path.is_file() && matches_extension).then_some((file_name, path))
-        })
-        .collect::<Vec<_>>();
-    matches.sort_by(|left, right| left.0.cmp(&right.0));
+    let mut matches = Vec::new();
+    collect_files_with_extension(root, root, extension, max_depth, 1, &mut matches)?;
+    matches.sort_by(|left, right| {
+        let left_test = is_likely_test_project_path(&left.0);
+        let right_test = is_likely_test_project_path(&right.0);
+        left_test
+            .cmp(&right_test)
+            .then_with(|| left.0.cmp(&right.0))
+    });
 
-    let Some((file_name, path)) = matches.into_iter().next() else {
+    let Some((relative, path)) = matches.into_iter().next() else {
         return Ok(None);
     };
     let contents = fs::read_to_string(&path)
         .map_err(|err| anyhow!("failed to read {}: {}", path.display(), err))?;
     Ok(Some(ImportedFile {
-        path: file_name,
+        path: relative,
         contents,
     }))
+}
+
+fn is_likely_test_project_path(relative: &str) -> bool {
+    let lower = relative.to_ascii_lowercase();
+    lower.contains(".tests.")
+        || lower.contains(".test.")
+        || lower.contains("/tests/")
+        || lower.contains("/test/")
+        || lower.ends_with("tests.csproj")
+        || lower.ends_with("test.csproj")
+}
+
+fn collect_files_with_extension(
+    root: &Path,
+    dir: &Path,
+    extension: &str,
+    max_depth: usize,
+    depth: usize,
+    out: &mut Vec<(String, PathBuf)>,
+) -> Result<()> {
+    if depth > max_depth {
+        return Ok(());
+    }
+    let entries = match fs::read_dir(dir) {
+        Ok(entries) => entries,
+        Err(err) => {
+            return Err(anyhow!("failed to read {}: {}", dir.display(), err));
+        }
+    };
+    for entry in entries.filter_map(|entry| entry.ok()) {
+        let path = entry.path();
+        if path.is_dir() {
+            let name = path
+                .file_name()
+                .and_then(|value| value.to_str())
+                .unwrap_or("");
+            if name.starts_with('.') || name.eq_ignore_ascii_case("node_modules") {
+                continue;
+            }
+            collect_files_with_extension(root, &path, extension, max_depth, depth + 1, out)?;
+            continue;
+        }
+        if !path.is_file() {
+            continue;
+        }
+        let matches_extension = path
+            .extension()
+            .and_then(|value| value.to_str())
+            .is_some_and(|value| value.eq_ignore_ascii_case(extension));
+        if !matches_extension {
+            continue;
+        }
+        let relative = path
+            .strip_prefix(root)
+            .map(|value| value.to_string_lossy().replace('\\', "/"))
+            .unwrap_or_else(|_| {
+                path.file_name()
+                    .and_then(|value| value.to_str())
+                    .unwrap_or("unknown")
+                    .to_string()
+            });
+        out.push((relative, path));
+    }
+    Ok(())
 }
 
 pub(super) fn load_workflow_import_files(root: &Path) -> Result<Vec<ImportedFile>> {
@@ -118,6 +461,9 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.package_json.and_then(infer_package_json_commands) {
         candidates.push(candidate);
     }
+    if let Some(candidate) = sources.tox_ini.and_then(infer_tox_ini_commands) {
+        candidates.push(candidate);
+    }
     if let Some(candidate) = sources.pyproject_toml.and_then(infer_pyproject_commands) {
         candidates.push(candidate);
     }
@@ -145,7 +491,10 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     if let Some(candidate) = sources.composer_json.and_then(infer_composer_commands) {
         candidates.push(candidate);
     }
-    if let Some(candidate) = sources.csproj.and_then(infer_dotnet_commands) {
+    // Prefer solution files when present (monorepo entrypoint); otherwise csproj.
+    if let Some(candidate) = sources.solution.and_then(infer_dotnet_commands) {
+        candidates.push(candidate);
+    } else if let Some(candidate) = sources.csproj.and_then(infer_dotnet_commands) {
         candidates.push(candidate);
     }
     if let Some(candidate) = sources.mix_exs.and_then(infer_mix_commands) {
@@ -266,6 +615,135 @@ mod tests {
                 assert_eq!(source_path, ".github/workflows/ci.yml");
             }
             other => panic!("expected unique test resolution, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn infer_tox_ini_commands_detects_testenv() {
+        use super::super::types::ImportedFile;
+        use super::extraction::infer_tox_ini_commands;
+
+        let file = ImportedFile {
+            path: "tox.ini".into(),
+            contents: "[tox]\nenvlist = py310\n[testenv]\ncommands = pytest\n".into(),
+        };
+        let candidate = infer_tox_ini_commands(&file).expect("tox.ini yields test");
+        assert_eq!(candidate.test.as_deref(), Some("tox"));
+        assert!(candidate.build.is_none());
+    }
+
+    #[test]
+    fn package_commands_preserve_the_declared_script_name() {
+        use super::{infer_package_json_commands, ImportedFile};
+        for runner in ["npm", "pnpm", "yarn", "bun"] {
+            let file = ImportedFile {
+                path: "package.json".into(),
+                contents: format!(
+                    r#"{{"packageManager":"{runner}@1.0.0","scripts":{{"compile":"tsc -b","test-all":"test-runner --all"}}}}"#
+                ),
+            };
+            let candidate = infer_package_json_commands(&file).unwrap();
+            let prefix = if runner == "yarn" {
+                "yarn".to_string()
+            } else {
+                format!("{runner} run")
+            };
+            assert_eq!(candidate.build, Some(format!("{prefix} compile")));
+            assert_eq!(candidate.test, Some(format!("{prefix} test-all")));
+        }
+    }
+
+    #[test]
+    fn load_best_package_json_prefers_server_app_over_root_format_only() {
+        use super::load_best_package_json;
+        use std::fs;
+        use std::time::{SystemTime, UNIX_EPOCH};
+
+        let unique = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("clock")
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!("dotrepo-pkg-json-{unique}"));
+        let _ = fs::remove_dir_all(&root);
+        fs::create_dir_all(root.join("server")).expect("server dir");
+        fs::write(
+            root.join("package.json"),
+            r#"{"scripts":{"format":"prettier ."}}"#,
+        )
+        .expect("root package");
+        fs::write(
+            root.join("server/package.json"),
+            r#"{"scripts":{"build":"nest build","test":"vitest run"}}"#,
+        )
+        .expect("server package");
+
+        let best = load_best_package_json(&root)
+            .expect("load succeeds")
+            .expect("selects a package.json");
+        assert_eq!(best.path, "server/package.json");
+        assert!(best.contents.contains("nest build"));
+        let _ = fs::remove_dir_all(&root);
+    }
+
+    #[test]
+    fn resolve_unique_command_candidate_prefers_generic_over_monorepo_slice_workflows() {
+        use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+        use super::policy::resolve_unique_command_candidate;
+
+        // MQTTX-style: CLI vs desktop unit workflows at equal (non-ci.yml) rank.
+        let test_candidates = [
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/units_test_desktop.yaml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: None,
+                test: Some("npm run test:e2e".into()),
+            },
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/units_test_cli.yaml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: None,
+                test: Some("npm run test:cli".into()),
+            },
+        ];
+        let test_refs: Vec<&ImportedCommandCandidate> = test_candidates.iter().collect();
+        match resolve_unique_command_candidate(&test_refs, false) {
+            super::policy::UniqueCommandResolution::Unique {
+                command,
+                source_path,
+            } => {
+                assert_eq!(command, "npm run test:cli");
+                assert_eq!(source_path, ".github/workflows/units_test_cli.yaml");
+            }
+            other => panic!("expected CLI workflow preferred over desktop, got {other:?}"),
+        }
+
+        // Serverless-style: framework CI vs binary-installer CI.
+        let build_candidates = [
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/ci-binary-installer.yml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: Some("npm run build:binary".into()),
+                test: None,
+            },
+            ImportedCommandCandidate {
+                source_path: ".github/workflows/ci-framework.yml".into(),
+                source_tier: CommandSourceTier::Workflow,
+                build: Some("npm run build".into()),
+                test: None,
+            },
+        ];
+        let build_refs: Vec<&ImportedCommandCandidate> = build_candidates.iter().collect();
+        match resolve_unique_command_candidate(&build_refs, true) {
+            super::policy::UniqueCommandResolution::Unique {
+                command,
+                source_path,
+            } => {
+                assert_eq!(command, "npm run build");
+                assert_eq!(source_path, ".github/workflows/ci-framework.yml");
+            }
+            other => {
+                panic!("expected framework workflow preferred over binary-installer, got {other:?}")
+            }
         }
     }
 
@@ -506,6 +984,115 @@ cargo nextest run -E 'test(test_name)'
         assert_eq!(
             first_matching_workflow_command(&real_gradle, true).as_deref(),
             Some("./gradlew assembleDebug")
+        );
+    }
+
+    #[test]
+    fn host_package_install_with_build_essential_is_not_a_build_command() {
+        use super::extraction::first_matching_workflow_command;
+
+        // pyenv CI: apt installs list `make` and `build-essential` as packages.
+        let apt = vec![
+            "sudo apt-get update -q; sudo apt install -yq make build-essential libssl-dev zlib1g-dev \\"
+                .to_string(),
+        ];
+        assert_eq!(
+            first_matching_workflow_command(&apt, true),
+            None,
+            "apt install of build-essential must not become repo.build"
+        );
+
+        let make_build = vec!["make build".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&make_build, true).as_deref(),
+            Some("make build")
+        );
+
+        let make_all = vec!["make all".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&make_all, true).as_deref(),
+            Some("make all")
+        );
+    }
+
+    #[test]
+    fn makefile_unit_test_target_outranks_composite_test() {
+        use super::super::types::ImportedFile;
+        use super::extraction::infer_makefile_commands;
+
+        let makefile = ImportedFile {
+            path: "Makefile".into(),
+            contents: "\
+unit-test:\n\
+\tgo test ./... -short\n\
+\n\
+test: unit-test integration-test-all\n\
+\n\
+integration-test-all:\n\
+\tgo test pkg/integration/clients/*.go\n\
+"
+            .into(),
+        };
+        let candidate = infer_makefile_commands(&makefile).expect("Makefile commands");
+        assert_eq!(
+            candidate.test.as_deref(),
+            Some("go test ./... -short"),
+            "unit-test one-liner must unwrap before composite make test"
+        );
+    }
+
+    #[test]
+    fn makefile_preferred_over_justfile_on_task_script_conflict() {
+        use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+        use super::policy::resolve_command_field;
+
+        let candidates = [
+            ImportedCommandCandidate {
+                source_path: "Makefile".into(),
+                source_tier: CommandSourceTier::TaskScript,
+                build: Some("make build".into()),
+                test: Some("make test".into()),
+            },
+            ImportedCommandCandidate {
+                source_path: "justfile".into(),
+                source_tier: CommandSourceTier::TaskScript,
+                build: Some("just build".into()),
+                test: Some("just test".into()),
+            },
+        ];
+        let mut notes = Vec::new();
+        let mut evidence = Vec::new();
+        let mut inferred = Vec::new();
+        let test = resolve_command_field(
+            &candidates,
+            "repo.test",
+            false,
+            &mut notes,
+            &mut evidence,
+            &mut inferred,
+        )
+        .expect("test resolves");
+        assert_eq!(test.command, "make test");
+        assert_eq!(test.source_path, "Makefile");
+    }
+
+    #[test]
+    fn specialized_go_ci_coverdir_is_not_a_workflow_test_command() {
+        use super::extraction::first_matching_workflow_command;
+
+        let ci = vec![
+            r#"go test ./... -short -cover -args "-test.gocoverdir=/tmp/code_coverage""#
+                .to_string(),
+        ];
+        assert_eq!(
+            first_matching_workflow_command(&ci, false),
+            None,
+            "CI coverdir go test must not become repo.test"
+        );
+        let plain = vec!["go test ./...".to_string()];
+        assert_eq!(
+            first_matching_workflow_command(&plain, false).as_deref(),
+            Some("go test ./...")
         );
     }
 
@@ -856,6 +1443,7 @@ RUFF_UPDATE_SCHEMA=1 cargo test
             pyproject_toml: Some(&pyproject),
             setup_py: Some(&setup_py),
             setup_cfg: None,
+            tox_ini: None,
             go_mod: None,
             pom_xml: None,
             maven_wrapper: false,
@@ -863,6 +1451,7 @@ RUFF_UPDATE_SCHEMA=1 cargo test
             gradle_wrapper: false,
             composer_json: None,
             csproj: None,
+            solution: None,
             mix_exs: None,
             rebar_config: None,
             cmake_presets_json: None,

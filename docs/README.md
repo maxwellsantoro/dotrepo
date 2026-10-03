@@ -27,6 +27,7 @@ project tooling rather than additional plan documents.
 - [`public-search-quality-benchmark.md`](./public-search-quality-benchmark.md)
 - [`distribution.md`](./distribution.md) - how agents and tools discover and use the public surface
 - [`external-consumer-integration.md`](./external-consumer-integration.md) - template for non-operator integrations
+- [`consumer-pilot.md`](./consumer-pilot.md) - generic agent package, fallback policy, and outcome measurement
 - [`../benchmarks/head-to-head/`](../benchmarks/head-to-head/) - falsifiable GitHub-baseline vs dotrepo benchmark harness
 - [`../index/README.md`](../index/README.md)
 

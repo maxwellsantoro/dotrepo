@@ -125,7 +125,15 @@ fn record_mode_name(mode: &dotrepo_schema::RecordMode) -> &'static str {
     }
 }
 
-fn public_research_record(index_root: &Path, selected: &CandidateManifest) -> PublicResearchRecord {
+fn public_research_record(
+    index_root: &Path,
+    selected: &CandidateManifest,
+    freshness: &PublicFreshness,
+) -> PublicResearchRecord {
+    let (freshness_status, age_days) = super::evidence::record_age(
+        selected.manifest.record.generated_at.as_deref(),
+        &freshness.generated_at,
+    );
     PublicResearchRecord {
         manifest_path: display_path(index_root, &selected.path)
             .unwrap_or_else(|_| selected.path.display().to_string()),
@@ -134,6 +142,16 @@ fn public_research_record(index_root: &Path, selected: &CandidateManifest) -> Pu
         generated_at: selected.manifest.record.generated_at.clone(),
         evidence_path: public_record_artifacts(index_root, selected)
             .and_then(|artifacts| artifacts.evidence_path),
+        freshness_status,
+        age_days,
+        stale_after_days: 30,
+        source_revision: selected
+            .manifest
+            .x
+            .get("github")
+            .and_then(|v| v.get("head_sha"))
+            .and_then(|v| v.as_str())
+            .map(str::to_string),
     }
 }
 
@@ -425,9 +443,9 @@ pub(crate) fn public_repository_profile_with_candidates(
 
     Ok(PublicResearchProfileResponse {
         api_version: PUBLIC_API_VERSION,
+        record: public_research_record(index_root, selected, &freshness),
         freshness,
         identity: public_identity(host, owner, repo, selected),
-        record: public_research_record(index_root, selected),
         purpose: selected.manifest.repo.description.clone(),
         name: selected.manifest.repo.name.clone(),
         homepage: non_empty_value(selected.manifest.repo.homepage.as_deref()),
@@ -446,6 +464,7 @@ pub(crate) fn public_repository_profile_with_candidates(
         docs,
         ownership,
         trust: public_research_trust(selected, reason),
+        field_evidence: super::evidence::field_evidence(&selected.manifest),
         synthesis,
         conflicts,
         links: public_links_with_base(host, owner, repo, PublicLinkKind::Profile, None, base_path)?,

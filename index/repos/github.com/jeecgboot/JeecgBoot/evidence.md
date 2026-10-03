@@ -1,7 +1,10 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Discovered related relation to github.com/jeecgboot/skills from README cross-link.
+- Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Imported repo.build from jeecgboot-vue3/package.json as `npm run build`.
+- Imported repo.toolchain.min from jeecgboot-vue3/package.json as `18` (Node.js).
+- Discovered related relation to github.com/jeecgboot/JeecgUniapp from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.

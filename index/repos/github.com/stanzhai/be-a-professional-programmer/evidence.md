@@ -13,3 +13,10 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Withheld docs.root; rejected `http://hadoop.readthedocs.org/en/latest/` because Hadoop resource in a reading list is not documentation for this collection. Source: [README.md:163](https://github.com/stanzhai/be-a-professional-programmer/blob/ad207abd04286568354f2a533979ebdd8906eaa0/README.md#L163). No replacement was established by this correction.
+- Downgraded prior `verified` status to `inferred`: the withheld documentation field remains unresolved; prior verification is not inherited.
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

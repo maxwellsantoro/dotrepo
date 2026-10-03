@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/comet-ml/opik"
-generated_at = "2026-07-06T18:38:15.523288Z"
+generated_at = "2026-09-16T16:21:58.945718Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md` and `.github/CODEOWNERS`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `.github/workflows/backend_tests.yml` after deterministic escalation. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `apps/opik-frontend/package.json`, and `sdks/opik_optimizer/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `apps/opik-frontend/package.json`. Imported `repo.test` from `apps/opik-frontend/package.json`. Imported `repo.toolchain.min` from `sdks/opik_optimizer/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "Opik"
@@ -27,14 +26,16 @@ languages = [
     "Shell",
     "Jupyter Notebook",
     "PowerShell",
-    "SCSS",
     "JavaScript",
-    "Makefile",
+    "SCSS",
     "Dockerfile",
+    "Makefile",
     "Go Template",
+    "CSS",
     "HTML",
 ]
-test = "mvn clean test"
+build = "npm run build"
+test = "npm test"
 topics = [
     "open-source",
     "langchain",
@@ -51,6 +52,10 @@ topics = [
     "evaluation",
 ]
 
+[repo.toolchain]
+min = "3.10"
+ecosystem = "Python"
+
 [owners]
 maintainers = [
     "@comet-ml/comet-opik-devs",
@@ -61,16 +66,93 @@ maintainers = [
     "@comet-ml/comet-opik-optimizer-devs",
 ]
 team = "@comet-ml/comet-opik-devs"
+security_contact = "https://github.com/comet-ml/opik/security/advisories/new"
 
 [docs]
 root = "https://www.comet.com/docs/opik/?from=llm&utm_source=opik&utm_medium=github&utm_content=docs_button&utm_campaign=opik"
 getting_started = "https://www.comet.com/docs/opik/quickstart/?from=llm&utm_source=opik&utm_medium=github&utm_content=quickstart_link&utm_campaign=opik"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "unspecified"
+reason = "getting started URL present"
+state = "present"
+valueJson = '"https://www.comet.com/docs/opik/quickstart/?from=llm&utm_source=opik&utm_medium=github&utm_content=quickstart_link&utm_campaign=opik"'
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://www.comet.com/docs/opik/?from=llm&utm_source=opik&utm_medium=github&utm_content=docs_button&utm_campaign=opik"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "unspecified"
+reason = "actionable security reporting URL"
+state = "present"
+valueJson = '"https://github.com/comet-ml/opik/security/advisories/new"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "unspecified"
+reason = "clear CODEOWNERS team"
+state = "present"
+valueJson = '"@comet-ml/comet-opik-devs"'
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "apps/opik-frontend/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Debug, evaluate, and monitor your LLM applications, RAG systems, and agentic workflows with comprehensive tracing, automated evaluations, and production-ready dashboards."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://www.comet.com/docs/opik/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Opik"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:21:58.945718Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "apps/opik-frontend/package.json"
+state = "present"
+valueJson = '"npm test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/comet-ml/opik.git"
 default_branch = "main"
 fork = false
-head_sha = "bfbcb6feb3fd262332ad70a0986ff3f7ef0296f9"
+head_sha = "4546b5e66e49bdfa2d65b7ed06fdfb6ddfb74e5e"
 html_url = "https://github.com/comet-ml/opik"
-stars = 20359
+stars = 22066

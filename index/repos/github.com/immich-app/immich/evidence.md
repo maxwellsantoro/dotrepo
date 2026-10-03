@@ -2,6 +2,8 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
+- Imported repo.build from server/package.json as `npm run build`.
+- Imported repo.test from server/package.json as `npm test`.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `immich` from `GitHub API` after deterministic escalation.

@@ -92,7 +92,8 @@ def test_dashboard_counts_generic_duplicates_and_low_confidence(tmp_path: Path) 
     assert report["summary"]["genericFieldHitCount"] == 2
     assert report["summary"]["duplicatedDescriptionValueCount"] == 1
     assert report["summary"]["duplicateDescriptionRecordCount"] == 2
-    assert report["summary"]["badLookingRecordCount"] == 4
+    assert report["summary"]["badLookingRecordCount"] == 3
+    assert report["summary"]["lowConfidenceRecordCount"] == 1
     assert report["genericFieldExamples"][0]["identity"] == "github.com/example/forum"
 
 
@@ -102,7 +103,7 @@ def test_dashboard_gate_fails_when_bad_looking_records_regress(tmp_path: Path) -
         public_root,
         "example",
         "low",
-        name="low",
+        name="discussions",
         purpose="A real-looking but low confidence project.",
         confidence="low",
     )
@@ -121,3 +122,22 @@ def test_dashboard_gate_fails_when_bad_looking_records_regress(tmp_path: Path) -
 
     assert report["passed"] is False
     assert report["gates"]["maxBadLookingRecords"]["actual"] == 1
+
+
+def test_lower_confidence_alone_is_reported_without_incentivizing_inflation(tmp_path):
+    write_profile(
+        tmp_path, "example", "careful", name="careful", purpose="A useful project", confidence="low"
+    )
+    report = quality.summarize(
+        tmp_path,
+        10,
+        {
+            "minProfiles": 1,
+            "maxGenericFieldHits": 0,
+            "maxDuplicatedDescriptionValues": 0,
+            "maxDuplicateDescriptionRecords": 0,
+            "maxBadLookingRecords": 0,
+        },
+    )
+    assert report["passed"]
+    assert report["summary"]["lowConfidenceRecordCount"] == 1

@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Inferred repo.build from .github/workflows/examples.yml as `cargo build`.
+- Inferred repo.build from Cargo.toml as `cargo build --workspace`.
 - Left `repo.test` unset because `.github/workflows/sqlx-cli.yml` and `.github/workflows/sqlx.yml` suggested conflicting test commands.
 - Imported repo.toolchain.min from Cargo.toml as `1.94.0` (Rust).
 - Discovered related relation to github.com/rusqlite/rusqlite from README cross-link.
@@ -15,6 +15,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

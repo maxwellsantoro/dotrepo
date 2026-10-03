@@ -13,6 +13,53 @@ milestones. Direction and gates live in [`ROADMAP.md`](./ROADMAP.md); the counts
 below are a 2026-06-29 snapshot and refresh with each run from the generated
 growth, coverage, promotion, and telemetry artifacts.
 
+### Trust, export, and crawler correctness
+
+- Select documentation links from explicit declarations instead of URL shapes,
+  retain value-bound source context, and abstain on competing declarations.
+  Correct or withhold documentation values in 34 indexed repositories using
+  pinned README evidence; downgrade verified records with unresolved fields.
+- Add full-index documentation evidence and URL-association signals to the audit
+  sampler independently of random selection. These signals request source
+  inspection rather than automatically rejecting custom documentation domains.
+- Keep LSP sessions alive after malformed messages, invalid parameters, unsupported
+  document URIs, and notification errors; preserve JSON-RPC notification semantics.
+  Return method-not-found errors for unknown MCP methods.
+- Apply the MCP remote-lookup IPv4 denylist to IPv4-mapped IPv6 destinations,
+  including mixed DNS answer sets, while preserving explicit local-test opt-in.
+- Extract generation orchestration behind unchanged facade exports and share
+  GitHub output planning across generation, drift checks, and previews. Separate
+  import input loading and security evidence selection from the main orchestrator.
+
+- Disable standalone `promotion-report --apply` before any write; it cannot
+  establish source inspection. Read-only analysis now uses value-bound retained
+  field assessments instead of record-wide provenance and nonempty values.
+- Require explicit high-confidence extracted command assessments, a source, and
+  a matching check timestamp in the reference consumer. Missing or invalidated
+  assessments trigger fallback, as do unsupported responses and non-string fields.
+- Leave missing field confidence unknown in the lookup-first benchmark. Add
+  policy-aware coverage beside presence metrics; correctness and task completion
+  remain explicitly unmeasured by that coverage report.
+
+- Require fresh verification for refreshed overlays and protect native,
+  reviewed, and canonical records from autonomous replacement.
+- Replay persisted claim transitions through the claim state machine; record
+  explicit transitions for state-changing corrections.
+- Derive immutable export IDs and ETags from serialized payloads, and retain
+  distinct exports of the same source digest in snapshot history.
+- Pin crawl file reads to the captured commit and roll back writeback artifacts
+  on commit errors, retaining backups if recovery fails.
+- Export compact search data so hosted filtering and free-text search share
+  fields and ranking without fetching every repository profile.
+- Restore strict Clippy and Python lint/format checks.
+- Refresh the Wrangler development-tool lockfile to resolve reported transitive
+  dependency vulnerabilities.
+- Filter non-actionable security URLs before ranking so incidental contact pages
+  cannot hide a valid disclosure channel.
+- Restore security-contact coverage for 13 overlays using commit-pinned policy
+  evidence, including explicitly documented mailboxes and private advisory
+  workflows; retain the existing release coverage threshold.
+
 ### Operator quality and distribution tooling
 
 - Intent-level quality scorecard with soft error budgets

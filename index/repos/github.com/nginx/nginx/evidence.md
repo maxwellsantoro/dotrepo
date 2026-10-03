@@ -1,7 +1,7 @@
 # Evidence
 
 - Imported repository name and docs entry points from README.md.
-- Imported the security reporting channel from SECURITY.md.
+- Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Discovered related relation to github.com/nginx/nginx from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
