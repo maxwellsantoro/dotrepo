@@ -33,7 +33,10 @@ Help keep this project free and open source.
             "Application to comfortably monitor your network traffic."
         );
         assert_eq!(plan.imported_sources, vec!["README.md"]);
-        assert!(!plan.inferred_fields.iter().any(|field| field == "repo.name"));
+        assert!(!plan
+            .inferred_fields
+            .iter()
+            .any(|field| field == "repo.name"));
         if matches!(mode, ImportMode::Overlay) {
             assert!(plan.evidence_text.as_deref().is_some_and(|text| {
                 text.contains("Imported repository name and description from README.md.")
@@ -48,7 +51,10 @@ Help keep this project free and open source.
                 .expect("name score exists");
             assert_eq!(name.value.as_deref(), Some("Beacon"));
             assert_eq!(name.source.as_deref(), Some("README.md"));
-            assert_eq!(name.reason, "extracted from README title with post-cleaners");
+            assert_eq!(
+                name.reason,
+                "extracted from README title with post-cleaners"
+            );
         }
     }
 

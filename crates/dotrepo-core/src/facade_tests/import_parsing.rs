@@ -262,7 +262,10 @@ fn support_and_donation_headings_are_not_project_names() {
         "💝 Donations 💝",
     ] {
         assert!(is_non_project_heading(heading), "{heading:?}");
-        assert!(clean_project_name(heading, "beacon").is_none(), "{heading:?}");
+        assert!(
+            clean_project_name(heading, "beacon").is_none(),
+            "{heading:?}"
+        );
 
         for section in [
             format!("## {heading}"),

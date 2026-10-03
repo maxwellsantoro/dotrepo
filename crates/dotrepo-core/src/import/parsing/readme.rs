@@ -87,8 +87,8 @@ pub(crate) fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
                 idx += 1;
                 continue;
             }
-            if let Some(title) = parse_setext_heading(&lines, idx)
-                .filter(|heading| !is_non_project_heading(heading))
+            if let Some(title) =
+                parse_setext_heading(&lines, idx).filter(|heading| !is_non_project_heading(heading))
             {
                 metadata.title = Some(title);
                 idx += 2;
