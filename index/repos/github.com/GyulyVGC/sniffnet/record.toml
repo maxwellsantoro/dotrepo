@@ -121,10 +121,10 @@ state = "present"
 valueJson = '"https://sniffnet.app"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-10-03T22:15:01Z"
+checkedAt = "2026-09-17T06:08:03.340130315Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README banner image title; support heading excluded"
+reason = "corrected on 2026-10-03 from README banner image title at the recorded HEAD; support heading excluded; assessment bound to the original snapshot"
 source = "README.md"
 state = "present"
 valueJson = '"Sniffnet"'
