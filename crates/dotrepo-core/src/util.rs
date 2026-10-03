@@ -172,10 +172,21 @@ pub(crate) fn manifest_path(root: &Path) -> PathBuf {
     }
 }
 
+/// Encode bytes as lowercase hexadecimal, including leading zeroes.
+pub(crate) fn hex_lower(bytes: &[u8]) -> String {
+    const DIGITS: &[u8; 16] = b"0123456789abcdef";
+    let mut encoded = String::with_capacity(bytes.len() * 2);
+    for &byte in bytes {
+        encoded.push(DIGITS[usize::from(byte >> 4)] as char);
+        encoded.push(DIGITS[usize::from(byte & 0x0f)] as char);
+    }
+    encoded
+}
+
 pub fn source_digest(source_bytes: &[u8]) -> String {
     let mut hasher = Sha256::new();
     hasher.update(source_bytes);
-    format!("{:x}", hasher.finalize())
+    hex_lower(&hasher.finalize())
 }
 
 /// Parses `https://host/owner/repo` style URLs into identity triples.
@@ -325,8 +336,35 @@ fn walk_dir_entries_impl(
 
 #[cfg(test)]
 mod tests {
-    use super::{contains_unsafe_shell_like_value, resolve_workspace_repository_root};
+    use super::{
+        contains_unsafe_shell_like_value, hex_lower, resolve_workspace_repository_root,
+        source_digest,
+    };
     use std::fs;
+
+    #[test]
+    fn hex_lower_preserves_leading_zeroes_and_lowercase() {
+        assert_eq!(hex_lower(&[]), "");
+        assert_eq!(hex_lower(&[0x00, 0x0f, 0x10, 0xab, 0xff]), "000f10abff");
+        let bytes = (u8::MIN..=u8::MAX).collect::<Vec<_>>();
+        let expected = bytes
+            .iter()
+            .map(|byte| format!("{byte:02x}"))
+            .collect::<String>();
+        assert_eq!(hex_lower(&bytes), expected);
+    }
+
+    #[test]
+    fn source_digest_matches_sha256_vectors() {
+        assert_eq!(
+            source_digest(b""),
+            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        );
+        assert_eq!(
+            source_digest(b"abc"),
+            "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+        );
+    }
 
     #[test]
     fn resolve_workspace_repository_root_accepts_missing_subdirectory() {

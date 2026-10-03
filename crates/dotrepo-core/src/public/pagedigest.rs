@@ -26,6 +26,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use super::normalize_public_base_path;
+use crate::util::hex_lower;
 
 /// Manifest location relative to the export root, per the pagedigest
 /// specification's normative discovery point.
@@ -169,7 +170,7 @@ pub fn build_pagedigest_manifest(
 fn sha256_hex(bytes: &[u8]) -> String {
     let mut hasher = Sha256::new();
     hasher.update(bytes);
-    format!("{:x}", hasher.finalize())
+    hex_lower(&hasher.finalize())
 }
 
 /// Hash the material content of an exported JSON document: the parsed value
