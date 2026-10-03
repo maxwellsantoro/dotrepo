@@ -8,12 +8,12 @@ const { LanguageClient } = require('vscode-languageclient/node');
 let client;
 let outputChannel;
 
-function activate(context) {
-  outputChannel = vscode.window.createOutputChannel('dotrepo');
+async function activate(context) {
+  outputChannel = vscode.window.createOutputChannel('dotrepo', { log: true });
   context.subscriptions.push(outputChannel);
 
   client = createLanguageClient();
-  context.subscriptions.push(client.start());
+  context.subscriptions.push(client);
 
   context.subscriptions.push(
     vscode.commands.registerCommand('dotrepo.validateCurrentManifest', () =>
@@ -29,6 +29,8 @@ function activate(context) {
       runCliCommand('generate --check', ['generate', '--check'], { requiresNativeManifest: true })
     )
   );
+
+  await client.start();
 }
 
 function deactivate() {

@@ -6,7 +6,7 @@
   "publisher": "dotrepo",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.90.0"
+    "vscode": "^1.91.0"
   },
   "categories": [
     "Programming Languages",
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/maxwellsantoro/dotrepo#readme",
   "scripts": {
+    "test": "node --test extension.test.js",
     "build": "esbuild extension.js --bundle --platform=node --format=cjs --external:vscode --minify --outfile=dist/extension.js",
     "package": "npm run build && npm run package:vsix -- --output dotrepo-vscode.vsix",
     "package:vsix": "uv run python ../../scripts/package_vscode_extension.py --extension-root ."
