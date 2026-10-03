@@ -192,6 +192,11 @@ upstream native `.repo`.
 - preserves the previous staged immutable snapshot when one exists locally, so
   the static asset bundle carries current+previous for rollback tolerance
 - deploys to `dotrepo.org`
+- serializes complete publication workflows with a shared concurrency group and
+  a multi-run queue, so late CI completions cannot evict the latest pending build
+- verifies the CI event's exact source SHA against the live default-branch ref
+  before building and again before R2 archival or Worker publication; superseded
+  revisions skip publication, and lookup failures fail closed
 - uses a seven-day freshness promise until end-to-end daily automation has
   demonstrated a reliable cadence
 - smoke-tests the deployed custom domain when it resolves, otherwise falls back
