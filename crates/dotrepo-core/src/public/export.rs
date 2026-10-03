@@ -4,7 +4,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use time::{Duration, OffsetDateTime};
 
-use crate::util::{parse_rfc3339, render_rfc3339};
+use crate::util::{hex_lower, parse_rfc3339, render_rfc3339};
 
 use super::*;
 
@@ -31,7 +31,7 @@ pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
         hasher.update([0xff]);
     }
 
-    Ok(format!("{:x}", hasher.finalize()))
+    Ok(hex_lower(&hasher.finalize()))
 }
 
 pub fn build_public_freshness(
@@ -156,7 +156,7 @@ pub fn public_cache_validators(snapshot_digest: &str) -> PublicCacheValidators {
 fn sha256_hex(bytes: &[u8]) -> String {
     let mut hasher = Sha256::new();
     hasher.update(bytes);
-    format!("{:x}", hasher.finalize())
+    hex_lower(&hasher.finalize())
 }
 
 pub fn public_export_file_manifest(
@@ -523,7 +523,7 @@ pub fn export_public_index_static_with_options(
         hasher.update(contents.as_bytes());
         hasher.update([0xff]);
     }
-    let export_id = format!("{:x}", hasher.finalize());
+    let export_id = hex_lower(&hasher.finalize());
     outputs.insert(
         0,
         (
