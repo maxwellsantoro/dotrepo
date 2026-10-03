@@ -12,9 +12,11 @@ def test_public_edge_canary_is_fail_closed_and_daily() -> None:
     assert "vars.DOTREPO_PUBLIC_EDGE_CANARY_ENABLED == 'true'" in workflow
     assert "github.event_name == 'workflow_dispatch'" in workflow
     assert "group: public-edge-canary" in workflow
-    assert "cancel-in-progress: true" in workflow
+    assert "cancel-in-progress: false" in workflow
     assert "uv sync --dev --locked" in workflow
-    assert "Skipping duplicate failure comment" in workflow
+    assert "report_public_edge_canary.py" in workflow
+    assert "gh issue comment" not in workflow
+    assert "actions: read" in workflow
 
 
 def test_index_seed_review_schedule_is_fail_closed() -> None:

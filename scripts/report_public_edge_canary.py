@@ -98,9 +98,27 @@ def publish_report(
     log: str = "",
 ) -> str:
     root = f"repos/{repository}"
+    # Comment state intentionally changes only on transitions. Ask Actions for
+    # its independent high-water mark so old reruns cannot overwrite a newer
+    # unchanged result without adding a notification/write on every run.
+    runs = github.request(
+        "GET", f"{root}/actions/workflows/public-edge-canary.yml/runs?per_page=1"
+    ).get("workflow_runs", [])
+    if not runs:
+        raise RuntimeError("Cannot establish latest canary run; refusing report mutation")
+    latest = runs[0]
+    latest_sequence = (int(latest["run_number"]), int(latest["run_attempt"]))
+    if latest_sequence > (run_number, run_attempt):
+        return "ignored stale workflow result"
+    if latest_sequence != (run_number, run_attempt):
+        raise RuntimeError("Current canary run is not visible yet; refusing report mutation")
     issues = github.request("GET", f"{root}/issues?state=all&per_page=100", paginate=True)
     matches = [
-        issue for issue in issues if issue.get("title") == TITLE and "pull_request" not in issue
+        issue
+        for issue in issues
+        if issue.get("title") == TITLE
+        and issue.get("user", {}).get("login") == BOT_LOGIN
+        and "pull_request" not in issue
     ]
     # Reuse an open report first, then the original closed report on recurrence.
     # Never create another issue just because somebody closed the previous one.
@@ -133,7 +151,8 @@ def publish_report(
         and comment.get("body", "").startswith(MARKER + "\n")
     ]
     report = min(reports, key=lambda value: value["id"]) if reports else None
-    previous = read_state(report["body"]) if report else read_state(issue.get("body", ""))
+    # Issue bodies may contain copied or user-edited state; never trust them.
+    previous = read_state(report["body"]) if report else None
     if previous:
         old_sequence = (previous["runNumber"], previous["runAttempt"])
         if old_sequence > (run_number, run_attempt):

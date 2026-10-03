@@ -7,6 +7,7 @@ on:
     - cron: "0 14 * * *"
 
 permissions:
+  actions: read # Read latest run ordering without per-run report edits.
   contents: read
   issues: write
 

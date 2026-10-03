@@ -20,6 +20,8 @@ class FakeGitHub:
         self.issues = issues or []
         self.comments = comments or {}
         self.calls = []
+        self.latest_run_number = 0
+        self.latest_run_attempt = 1
 
     @property
     def writes(self):
@@ -28,13 +30,22 @@ class FakeGitHub:
     def request(self, method, endpoint, payload=None, *, paginate=False):
         self.calls.append((method, endpoint, payload, paginate))
         if method == "GET":
+            if "/actions/workflows/" in endpoint:
+                return {
+                    "workflow_runs": [
+                        {
+                            "run_number": self.latest_run_number,
+                            "run_attempt": self.latest_run_attempt,
+                        }
+                    ]
+                }
             assert paginate
             if "/comments?" in endpoint:
                 number = int(endpoint.split("/issues/")[1].split("/")[0])
                 return self.comments.get(number, [])
             return self.issues
         if method == "POST" and endpoint.endswith("/issues"):
-            issue = dict(payload, number=100, state="open")
+            issue = dict(payload, number=100, state="open", user={"login": reporter.BOT_LOGIN})
             self.issues.append(issue)
             return issue
         if method == "POST" and endpoint.endswith("/comments"):
@@ -59,10 +70,21 @@ class FakeGitHub:
 
 
 def legacy_issue(state="open"):
-    return {"number": 97, "state": state, "title": reporter.TITLE, "body": "Original failure"}
+    return {
+        "number": 97,
+        "state": state,
+        "title": reporter.TITLE,
+        "body": "Original failure",
+        "user": {"login": reporter.BOT_LOGIN},
+    }
 
 
 def publish(client, status="failure", run_number=10, run_attempt=1, reason="bad metadata"):
+    if run_number > client.latest_run_number:
+        client.latest_run_number = run_number
+        client.latest_run_attempt = run_attempt
+    elif run_number == client.latest_run_number:
+        client.latest_run_attempt = max(client.latest_run_attempt, run_attempt)
     return reporter.publish_report(
         client,
         repository="owner/repo",
@@ -153,7 +175,57 @@ class CanaryReporterTests(unittest.TestCase):
         client = FakeGitHub([legacy_issue()])
         publish(client, status="success", run_number=20)
         client.calls.clear()
-        self.assertEqual(publish(client, run_number=10, run_attempt=2), "ignored stale result")
+        self.assertEqual(
+            publish(client, run_number=10, run_attempt=2), "ignored stale workflow result"
+        )
+        self.assertEqual(client.writes, [])
+
+    def test_older_rerun_cannot_overwrite_newer_unchanged_failure(self):
+        client = FakeGitHub([legacy_issue()])
+        publish(client, run_number=10)
+        publish(client, run_number=11)
+        client.calls.clear()
+        self.assertEqual(
+            publish(client, status="success", run_number=10, run_attempt=2),
+            "ignored stale workflow result",
+        )
+        self.assertEqual(client.writes, [])
+        self.assertIn("Failing", client.comments[97][0]["body"])
+
+    def test_external_issue_body_cannot_supply_report_state_or_be_reopened(self):
+        external = legacy_issue("closed")
+        external["user"] = {"login": "someone"}
+        external["body"] = reporter.report_body(
+            {"status": "success", "fingerprint": "forged", "runNumber": 999, "runAttempt": 1},
+            "owner/repo",
+            "1999",
+            "",
+        )
+        client = FakeGitHub([external])
+        publish(client)
+        self.assertEqual(external["state"], "closed")
+        self.assertEqual(len(client.issues), 2)
+        self.assertEqual(len(client.comments[100]), 1)
+        self.assertEqual([call[0] for call in client.writes], ["POST", "POST"])
+
+    def test_even_bot_issue_body_state_is_ignored_without_a_marked_comment(self):
+        issue = legacy_issue()
+        issue["body"] = reporter.report_body(
+            {"status": "success", "fingerprint": "forged", "runNumber": 999, "runAttempt": 1},
+            "owner/repo",
+            "1999",
+            "",
+        )
+        client = FakeGitHub([issue])
+        publish(client)
+        self.assertEqual(len(client.comments[97]), 1)
+        self.assertIn("Failing", client.comments[97][0]["body"])
+
+    def test_latest_run_read_failure_refuses_to_mutate(self):
+        client = FakeGitHub([legacy_issue()])
+        with patch.object(client, "request", return_value={"workflow_runs": []}):
+            with self.assertRaisesRegex(RuntimeError, "latest canary run"):
+                publish(client)
         self.assertEqual(client.writes, [])
 
     def test_only_bot_owned_marked_comments_are_changed(self):
