@@ -33,6 +33,7 @@ concurrency:
 jobs:
   refresh-review:
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || vars.DOTREPO_INDEX_REFRESH_REVIEW_ENABLED == 'true'
     env:
       GITHUB_TOKEN: ${{ github.token }}
     steps:

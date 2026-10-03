@@ -19,6 +19,30 @@ use std::time::{SystemTime, UNIX_EPOCH};
 use url::Url;
 
 #[test]
+fn failed_initialize_preserves_state_and_null_id_gets_a_response() {
+    let mut state = ServerState::default();
+    for params in [
+        json!({"rootUri":"untitled:workspace"}),
+        json!({"workspaceFolders":42}),
+        json!({"workspaceFolders":[{}]}),
+        json!(false),
+    ] {
+        let response = handle_request(&mut state, json!(1), "initialize", params).expect("handled");
+        assert_eq!(response[0]["error"]["code"], -32602);
+        assert!(!state.initialized);
+        assert!(state.workspace_roots.is_empty());
+    }
+    let response = handle_message(
+        &mut state,
+        br#"{"jsonrpc":"2.0","id":null,"method":"initialize","params":{}}"#,
+    )
+    .expect("handled");
+    assert_eq!(response.len(), 1);
+    assert!(response[0]["id"].is_null());
+    assert!(state.initialized);
+}
+
+#[test]
 fn diagnostics_for_invalid_overlay_manifest_reuse_core_messages() {
     let root = temp_dir("lsp-overlay");
     let path = root.join("record.toml");

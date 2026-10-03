@@ -27,9 +27,27 @@ def test_parse_prefixed_log_line() -> None:
 
 def test_build_report_ranks_top_misses() -> None:
     misses = [
-        {"host": "github.com", "owner": "a", "repo": "one", "identity": "github.com/a/one", "route": "query"},
-        {"host": "github.com", "owner": "a", "repo": "one", "identity": "github.com/a/one", "route": "query"},
-        {"host": "github.com", "owner": "b", "repo": "two", "identity": "github.com/b/two", "route": "batch"},
+        {
+            "host": "github.com",
+            "owner": "a",
+            "repo": "one",
+            "identity": "github.com/a/one",
+            "route": "query",
+        },
+        {
+            "host": "github.com",
+            "owner": "a",
+            "repo": "one",
+            "identity": "github.com/a/one",
+            "route": "query",
+        },
+        {
+            "host": "github.com",
+            "owner": "b",
+            "repo": "two",
+            "identity": "github.com/b/two",
+            "route": "batch",
+        },
     ]
     report = agg.build_report(misses, top=10)
     assert report["missCount"] == 3

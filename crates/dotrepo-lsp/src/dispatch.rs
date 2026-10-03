@@ -13,10 +13,10 @@ use crate::protocol::{
     PublishDiagnosticsParams, TextDocumentPositionParams,
 };
 use crate::state::{
-    ensure_manifest_in_workspace, is_supported_manifest_path, manifest_path_from_uri,
-    workspace_roots_from_initialize, OpenDocument, ServerState,
+    document_for_request, ensure_manifest_in_workspace, is_supported_manifest_path,
+    manifest_path_from_uri, workspace_roots_from_initialize, OpenDocument, ServerState,
 };
-use anyhow::{Context, Result};
+use anyhow::Result;
 use dotrepo_transport::{jsonrpc_error_response, jsonrpc_response, JSONRPC_VERSION};
 use serde_json::{json, Value};
 use std::fs;
@@ -33,26 +33,70 @@ pub(crate) struct DiagnosticSnapshot {
 }
 
 pub(crate) fn handle_message(state: &mut ServerState, payload: &[u8]) -> Result<Vec<Value>> {
-    let message =
-        serde_json::from_slice::<JsonRpcMessage>(payload).context("failed to parse LSP message")?;
-    if message.jsonrpc != JSONRPC_VERSION {
-        return Ok(message
-            .id
-            .map(|id| {
-                vec![jsonrpc_error_response(
-                    id,
-                    -32600,
-                    format!("unsupported jsonrpc version: {}", message.jsonrpc),
-                    None,
-                )]
-            })
-            .unwrap_or_default());
-    }
+    let value: Value = match serde_json::from_slice(payload) {
+        Ok(value) => value,
+        Err(err) => {
+            return Ok(vec![jsonrpc_error_response(
+                Value::Null,
+                -32700,
+                err.to_string(),
+                None,
+            )])
+        }
+    };
+    let id = value.get("id").cloned();
+    let valid_id = id
+        .as_ref()
+        .is_none_or(|id| id.is_null() || id.is_string() || id.is_i64() || id.is_u64());
+    let mut message = match serde_json::from_value::<JsonRpcMessage>(value) {
+        Ok(message) if message.jsonrpc == JSONRPC_VERSION && valid_id => message,
+        _ => {
+            return Ok(vec![jsonrpc_error_response(
+                if valid_id {
+                    id.unwrap_or(Value::Null)
+                } else {
+                    Value::Null
+                },
+                -32600,
+                "invalid request".into(),
+                None,
+            )])
+        }
+    };
+    // An explicit null id is still a request, not a notification.
+    message.id = id;
 
     match message.id {
         Some(id) => handle_request(state, id, &message.method, message.params),
-        None => handle_notification(state, &message.method, message.params),
+        None => match handle_notification(state, &message.method, message.params) {
+            Ok(outgoing) => Ok(outgoing),
+            Err(err) => {
+                // Notifications never receive JSON-RPC error responses. A bad
+                // document or failed file read must not terminate the session.
+                eprintln!("LSP notification {} failed: {err}", message.method);
+                Ok(Vec::new())
+            }
+        },
     }
+}
+
+#[derive(Debug)]
+struct InvalidParams(String);
+
+impl std::fmt::Display for InvalidParams {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(&self.0)
+    }
+}
+
+impl std::error::Error for InvalidParams {}
+
+fn invalid_params(err: impl std::fmt::Display) -> anyhow::Error {
+    InvalidParams(err.to_string()).into()
+}
+
+fn request_params<T: serde::de::DeserializeOwned>(params: Value) -> Result<T> {
+    serde_json::from_value(params).map_err(invalid_params)
 }
 
 pub(crate) fn handle_request(
@@ -61,10 +105,32 @@ pub(crate) fn handle_request(
     method: &str,
     params: Value,
 ) -> Result<Vec<Value>> {
+    match dispatch_request(state, id.clone(), method, params) {
+        Ok(outgoing) => Ok(outgoing),
+        Err(err) => Ok(vec![jsonrpc_error_response(
+            id,
+            if err.is::<InvalidParams>() {
+                -32602
+            } else {
+                -32603
+            },
+            err.to_string(),
+            None,
+        )]),
+    }
+}
+
+fn dispatch_request(
+    state: &mut ServerState,
+    id: Value,
+    method: &str,
+    params: Value,
+) -> Result<Vec<Value>> {
     let response = match method {
         "initialize" => {
+            let roots = workspace_roots_from_initialize(&params).map_err(invalid_params)?;
+            state.workspace_roots = roots;
             state.initialized = true;
-            state.workspace_roots = workspace_roots_from_initialize(&params)?;
             jsonrpc_response(
                 id,
                 json!({
@@ -90,11 +156,13 @@ pub(crate) fn handle_request(
             jsonrpc_response(id, Value::Null)
         }
         "textDocument/completion" => {
-            let params: TextDocumentPositionParams = serde_json::from_value(params)?;
+            let params: TextDocumentPositionParams = request_params(params)?;
+            document_for_request(state, &params.text_document.uri).map_err(invalid_params)?;
             jsonrpc_response(id, serde_json::to_value(completion_items(state, &params)?)?)
         }
         "textDocument/hover" => {
-            let params: TextDocumentPositionParams = serde_json::from_value(params)?;
+            let params: TextDocumentPositionParams = request_params(params)?;
+            document_for_request(state, &params.text_document.uri).map_err(invalid_params)?;
             match serde_json::to_value(hover_response(state, &params)?) {
                 Ok(value) => jsonrpc_response(id, value),
                 Err(err) => jsonrpc_error_response(
@@ -106,7 +174,8 @@ pub(crate) fn handle_request(
             }
         }
         "textDocument/codeAction" => {
-            let params: CodeActionParams = serde_json::from_value(params)?;
+            let params: CodeActionParams = request_params(params)?;
+            document_for_request(state, &params.text_document.uri).map_err(invalid_params)?;
             jsonrpc_response(id, serde_json::to_value(code_actions(state, &params)?)?)
         }
         _ => jsonrpc_error_response(id, -32601, format!("method not found: {}", method), None),

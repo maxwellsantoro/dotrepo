@@ -113,6 +113,13 @@ pub struct PublicResearchRecord {
     pub generated_at: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub evidence_path: Option<String>,
+    /// Record age at export time; independent of snapshot freshness.
+    pub freshness_status: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub age_days: Option<i64>,
+    pub stale_after_days: u32,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub source_revision: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -290,6 +297,9 @@ pub struct PublicResearchProfileResponse {
     pub ownership: PublicResearchOwnership,
     pub completeness: PublicResearchCompleteness,
     pub trust: PublicResearchTrust,
+    /// Field assessments retained by the crawler; absent for legacy records.
+    #[serde(skip_serializing_if = "std::collections::BTreeMap::is_empty")]
+    pub field_evidence: std::collections::BTreeMap<String, Value>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub synthesis: Option<PublicResearchSynthesis>,
     pub conflicts: Vec<PublicConflictReport>,

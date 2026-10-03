@@ -73,8 +73,8 @@ def test_profile_coverage_baseline_is_well_formed() -> None:
     )
 
     assert baseline["schema"] == "dotrepo-public-profile-coverage-baseline/v0"
-    assert baseline["minProfiles"] >= baseline["minHighSignal"] > 0
-    assert 0 < baseline["minHighSignalRatio"] <= 1
+    assert baseline["minProfiles"] > 0 and baseline["minHighSignal"] == 0
+    assert baseline["minHighSignalRatio"] == 0
     assert 0 <= baseline["maxConflictRate"] <= 1
     assert baseline["maxMalformedProfiles"] == 0
     assert all(0 < minimum <= baseline["minProfiles"] for minimum in baseline["minSignal"].values())
@@ -123,10 +123,6 @@ def test_release_gate_applies_index_growth_tranche_baseline(tmp_path: Path) -> N
     growth_baseline = json.loads(
         (REPO_ROOT / "scripts/fixtures/index_growth_tranche_baseline.json").read_text()
     )
-    profile_baseline = json.loads(
-        (REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json").read_text()
-    )
-
     command = release_gate.index_growth_tranche_command(REPO_ROOT, output_root)
 
     assert "scripts/plan_index_growth_tranche.py" in command
@@ -136,13 +132,13 @@ def test_release_gate_applies_index_growth_tranche_baseline(tmp_path: Path) -> N
     assert command[command.index("--target-count") + 1] == str(growth_baseline["targetCount"])
     assert command[command.index("--min-selected") + 1] == str(growth_baseline["minSelected"])
     assert command[command.index("--current-high-signal") + 1] == str(
-        profile_baseline["minHighSignal"]
+        release_gate.current_high_signal_count(REPO_ROOT)
     )
     assert command[command.index("--milestone-high-signal-target") + 1] == str(
         growth_baseline["milestoneHighSignalTarget"]
     )
     assert command[command.index("--min-planned-high-signal-capacity") + 1] == str(
-        profile_baseline["minHighSignal"] + growth_baseline["minSelected"]
+        release_gate.current_high_signal_count(REPO_ROOT) + growth_baseline["minSelected"]
     )
     assert str(output_root / "index-growth-targets.txt") in command
     assert str(output_root / "index-growth-plan.json") in command

@@ -12,6 +12,12 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+
+## Documentation correction (2026-09-21T04:36:55.205964Z)
+
+- Withheld docs.getting_started; rejected `https://wiki.libsdl.org/SDL2/Installation` because SDL2 dependency installation is not whisper.cpp installation documentation. Source: [README.md:610](https://github.com/ggml-org/whisper.cpp/blob/da54572229bcf64ba367d96c7ef15770376c4280/README.md#L610). No replacement was established by this correction.
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

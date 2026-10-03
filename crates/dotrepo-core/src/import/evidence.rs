@@ -14,7 +14,7 @@ use crate::render::{
 use crate::surfaces::is_banner_line;
 
 use super::parsing::{extract_markdown_links, is_quality_url};
-use super::types::{GitHubSnapshotFacts, ImportedFile};
+use super::types::{GitHubSnapshotFacts, ImportedFile, ReadmeMetadata, SecurityImportMetadata};
 use super::{human_join, IMPORT_README_CANDIDATES};
 
 pub(crate) fn build_imported_owners(
@@ -49,8 +49,99 @@ pub(crate) fn build_imported_docs(
     }
 }
 
+/// Keep the selected value tied to its declaration so later scoring cannot
+/// mistake URL syntax (or a replacement value) for source evidence.
+pub(crate) fn retain_imported_docs_evidence(
+    manifest: &mut Manifest,
+    readme: Option<&ImportedFile>,
+    metadata: &ReadmeMetadata,
+) -> Vec<String> {
+    let Some(readme) = readme else {
+        return Vec::new();
+    };
+    let mut fields = toml::map::Map::new();
+    let mut notes = Vec::new();
+    for (field, value, evidence, ambiguous) in [
+        (
+            "docs.root",
+            manifest.docs.as_ref().and_then(|docs| docs.root.as_ref()),
+            metadata.docs_root_evidence.as_ref(),
+            metadata.docs_root_ambiguous,
+        ),
+        (
+            "docs.getting_started",
+            manifest
+                .docs
+                .as_ref()
+                .and_then(|docs| docs.getting_started.as_ref()),
+            metadata.docs_getting_started_evidence.as_ref(),
+            metadata.docs_getting_started_ambiguous,
+        ),
+    ] {
+        let (reason, method, state, recorded) = if ambiguous {
+            let reason = format!(
+                "Conflicting documentation declarations in {}; abstained from {field}.",
+                readme.path
+            );
+            notes.push(reason.clone());
+            (reason, "ambiguous", "unresolved", serde_json::Value::Null)
+        } else if let (Some(value), Some(evidence)) = (value, evidence) {
+            let reason = format!(
+                "Explicit documentation link at {}:{}: {}",
+                readme.path, evidence.line, evidence.context
+            );
+            notes.push(format!("Imported {field} as `{value}`. {reason}"));
+            (
+                reason,
+                "extracted",
+                "present",
+                serde_json::Value::String(value.clone()),
+            )
+        } else {
+            continue;
+        };
+        let mut entry = toml::map::Map::new();
+        for (key, value) in [
+            ("source", readme.path.clone()),
+            ("method", method.into()),
+            ("state", state.into()),
+            ("confidence", if ambiguous { "low" } else { "high" }.into()),
+            ("reason", reason.clone()),
+            ("valueJson", recorded.to_string()),
+        ] {
+            entry.insert(key.into(), toml::Value::String(value));
+        }
+        if let Some(checked_at) = &manifest.record.generated_at {
+            entry.insert("checkedAt".into(), toml::Value::String(checked_at.clone()));
+        }
+        fields.insert(field.into(), toml::Value::Table(entry));
+    }
+    if !fields.is_empty() {
+        let extension = manifest
+            .x
+            .entry("dotrepo".into())
+            .or_insert_with(|| toml::Value::Table(toml::map::Map::new()));
+        if let Some(extension) = extension.as_table_mut() {
+            extension.insert("field_evidence".into(), toml::Value::Table(fields));
+        }
+    }
+    notes
+}
+
 /// When README parsing found no docs site, treat a non-forge homepage as docs root.
 pub fn infer_docs_root_from_external_homepage(manifest: &mut Manifest) -> bool {
+    // A generic homepage fallback must not erase an explicit abstention.
+    if manifest
+        .x
+        .get("dotrepo")
+        .and_then(|extension| extension.get("field_evidence"))
+        .and_then(|fields| fields.get("docs.root"))
+        .and_then(|evidence| evidence.get("state"))
+        .and_then(toml::Value::as_str)
+        == Some("unresolved")
+    {
+        return false;
+    }
     if manifest
         .docs
         .as_ref()
@@ -613,6 +704,65 @@ fn extract_github_target_from_str(s: &str) -> Option<String> {
     } else {
         None
     }
+}
+
+/// Centralizes the decision tree for security_contact + accompanying note.
+/// This reduces duplication between the primary import path and any preview/evidence synthesis.
+pub(crate) fn infer_security_contact_and_note(
+    security: Option<&ImportedFile>,
+    parsed: &SecurityImportMetadata,
+    from_contributing: Option<String>,
+    from_template: Option<String>,
+    has_contrib: bool,
+    has_template: bool,
+) -> (Option<String>, Option<String>) {
+    let contact = parsed
+        .contact
+        .clone()
+        .or(from_contributing.clone())
+        .or(from_template.clone())
+        .or_else(|| {
+            if security.is_some() {
+                Some("unknown".into())
+            } else {
+                None
+            }
+        });
+
+    let note = if security.is_some() {
+        if parsed.contact.is_some() {
+            parsed.note.clone()
+        } else if has_contrib {
+            Some(
+            "SECURITY.md did not expose a direct mailbox or reporting URL. `security_contact` was extracted from CONTRIBUTING.md instead."
+                .to_string(),
+        )
+        } else if has_template {
+            Some(
+            "SECURITY.md did not expose a direct mailbox or reporting URL. `security_contact` was extracted from an issue template instead."
+                .to_string(),
+        )
+        } else {
+            Some(
+            "SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional."
+                .to_string(),
+        )
+        }
+    } else if has_contrib {
+        Some(
+            "`security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found)."
+                .to_string(),
+        )
+    } else if has_template {
+        Some(
+            "`security_contact` was extracted from an issue template (no SECURITY.md found)."
+                .to_string(),
+        )
+    } else {
+        None
+    };
+
+    (contact, note)
 }
 
 #[cfg(test)]

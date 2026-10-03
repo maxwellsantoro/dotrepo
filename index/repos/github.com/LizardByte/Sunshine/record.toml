@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/LizardByte/Sunshine"
-generated_at = "2026-07-06T19:07:59.963232Z"
+generated_at = "2026-09-16T16:31:27.280727Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `package.json`, and `pyproject.toml`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `package.json`, and `pyproject.toml`. Imported `repo.build` from `package.json`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Sunshine icon"
@@ -23,21 +22,22 @@ license = "GPL-3.0"
 visibility = "public"
 languages = [
     "C++",
-    "HTML",
-    "CMake",
     "Vue",
+    "CMake",
     "Objective-C++",
     "CSS",
     "Shell",
     "PowerShell",
+    "JavaScript",
     "Ruby",
     "Objective-C",
-    "JavaScript",
-    "Dockerfile",
+    "HTML",
     "Cuda",
     "HLSL",
     "Batchfile",
+    "Dockerfile",
     "GLSL",
+    "HCL",
     "AppleScript",
     "C",
 ]
@@ -59,7 +59,7 @@ topics = [
     "pacman-pkg",
     "replicator-custom-issues",
     "flathub-pkg",
-    "maintainer-wanted",
+    "cpm",
 ]
 
 [repo.toolchain]
@@ -69,11 +69,87 @@ ecosystem = "Python"
 [docs]
 root = "http://app.lizardbyte.dev/Sunshine/"
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"http://app.lizardbyte.dev/Sunshine/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Self-hosted game stream host for Moonlight."'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"http://app.lizardbyte.dev/Sunshine/"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Sunshine icon"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:27.280727Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m pytest"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/LizardByte/Sunshine.git"
 default_branch = "master"
 fork = false
-head_sha = "cfe812534080ec7e0ee2fa3a968d11777abae024"
+head_sha = "d23336dc4ddcae025252e550d59d0f50ad500b97"
 html_url = "https://github.com/LizardByte/Sunshine"
-stars = 38997
+stars = 41272

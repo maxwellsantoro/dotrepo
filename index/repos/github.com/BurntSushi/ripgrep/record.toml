@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/BurntSushi/ripgrep"
-generated_at = "2026-07-08T22:58:02.648848Z"
+generated_at = "2026-09-16T16:33:43.757856Z"
 
 [record.trust]
 confidence = "high"
@@ -27,6 +27,7 @@ languages = [
     "Shell",
     "Roff",
     "Ruby",
+    "Lua",
 ]
 build = "cargo build --release"
 test = "cargo test --all"
@@ -44,12 +45,8 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.85"
+min = "1.96"
 ecosystem = "Rust"
-
-[owners]
-maintainers = []
-security_contact = "unknown"
 
 [relations]
 references = []
@@ -78,11 +75,87 @@ provenance = [
     "readme",
 ]
 
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no docs detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "README.md"
+state = "present"
+valueJson = '"cargo build --release"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "inferred"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"ripgrep recursively searches directories for a regex pattern while respecting your gitignore"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/BurntSushi/ripgrep"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"ripgrep"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:33:43.757856Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "README.md"
+state = "present"
+valueJson = '"cargo test --all"'
+
 [x.github]
 archived = false
 clone_url = "https://github.com/BurntSushi/ripgrep.git"
 default_branch = "master"
 fork = false
-head_sha = "f2f3d00df7b51c9581a07b7373353cf7eef08dd8"
+head_sha = "3fce3b5bb0236da2df6d99672afb8a719642eca7"
 html_url = "https://github.com/BurntSushi/ripgrep"
-stars = 65925
+stars = 68324

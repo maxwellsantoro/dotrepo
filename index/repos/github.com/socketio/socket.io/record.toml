@@ -4,16 +4,15 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/socketio/socket.io"
-generated_at = "2026-07-08T22:57:11.768034Z"
+generated_at = "2026-09-16T16:33:26.155745Z"
 
 [record.trust]
 confidence = "high"
 provenance = [
     "imported",
-    "inferred",
     "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `.github/workflows/build-examples.yml`, and `CONTRIBUTING.md`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `.github/workflows/build-examples.yml`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `examples/basic-crud-application/server/package.json`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `examples/basic-crud-application/server/package.json`. Imported `repo.test` from `examples/basic-crud-application/server/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
 
 [repo]
 name = "socket.io"
@@ -29,7 +28,7 @@ languages = [
     "CSS",
 ]
 build = "npm run build"
-test = "npm test -ws"
+test = "npm test"
 topics = [
     "javascript",
     "nodejs",
@@ -39,16 +38,93 @@ topics = [
 
 [owners]
 maintainers = []
-security_contact = "unknown"
+security_contact = "https://github.com/socketio/socket.io/security/advisories/GHSA-677m-j7p3-52f9"
 
 [docs]
 root = "https://socket.io/docs/v4/"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://socket.io/docs/v4/"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "extracted"
+reason = "actionable security reporting URL"
+source = "SECURITY.md"
+state = "present"
+valueJson = '"https://github.com/socketio/socket.io/security/advisories/GHSA-677m-j7p3-52f9"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "examples/basic-crud-application/server/package.json"
+state = "present"
+valueJson = '"npm run build"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Bidirectional and low-latency communication for every platform"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://socket.io"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"socket.io"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:33:26.155745Z"
+confidence = "high"
+method = "extracted"
+reason = "from declared repository source"
+source = "examples/basic-crud-application/server/package.json"
+state = "present"
+valueJson = '"npm test"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/socketio/socket.io.git"
 default_branch = "main"
 fork = false
-head_sha = "d2d753fed4435015c2d83fe62e676b44e07fa3f7"
+head_sha = "b5da079228666fcabd97166486d5f6a110826bc8"
 html_url = "https://github.com/socketio/socket.io"
-stars = 63213
+stars = 63197

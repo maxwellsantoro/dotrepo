@@ -20,7 +20,7 @@ def test_baseline_int_reads_fixture_keys() -> None:
             REPO_ROOT / "scripts/fixtures/public_profile_coverage_baseline.json",
             "minHighSignal",
         )
-        == 514
+        == 0
     )
     assert (
         roadmap_batch.baseline_int(

@@ -313,23 +313,29 @@ pub(crate) fn workspace_uri_to_path(uri: &str) -> Result<PathBuf> {
 }
 
 pub(crate) fn workspace_roots_from_initialize(params: &serde_json::Value) -> Result<Vec<PathBuf>> {
+    #[derive(serde::Deserialize)]
+    #[serde(rename_all = "camelCase")]
+    struct InitializeParams {
+        workspace_folders: Option<Vec<WorkspaceFolder>>,
+        root_uri: Option<String>,
+        root_path: Option<String>,
+    }
+    #[derive(serde::Deserialize)]
+    struct WorkspaceFolder {
+        uri: String,
+    }
+    let params: InitializeParams = serde_json::from_value(params.clone())?;
     let mut roots = Vec::new();
-
-    if let Some(folders) = params
-        .get("workspaceFolders")
-        .and_then(serde_json::Value::as_array)
-    {
+    if let Some(folders) = params.workspace_folders {
         for folder in folders {
-            if let Some(uri) = folder.get("uri").and_then(serde_json::Value::as_str) {
-                roots.push(workspace_uri_to_path(uri)?);
-            }
+            roots.push(workspace_uri_to_path(&folder.uri)?);
         }
     }
 
     if roots.is_empty() {
-        if let Some(uri) = params.get("rootUri").and_then(serde_json::Value::as_str) {
-            roots.push(workspace_uri_to_path(uri)?);
-        } else if let Some(path) = params.get("rootPath").and_then(serde_json::Value::as_str) {
+        if let Some(uri) = params.root_uri {
+            roots.push(workspace_uri_to_path(&uri)?);
+        } else if let Some(path) = params.root_path {
             roots.push(PathBuf::from(path));
         }
     }

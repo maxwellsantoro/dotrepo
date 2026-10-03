@@ -49,7 +49,7 @@ def merge_snapshot_logs(input_dir: Path, previous_dir: Path | None, output_dir: 
             continue
         log = load_json(root / "v0/snapshots/log.json")
         for entry in log.get("entries", []):
-            digest = entry.get("snapshotDigest")
+            digest = entry.get("snapshotId") or entry.get("snapshotDigest")
             if isinstance(digest, str) and digest:
                 merged[digest] = entry
     entries = sorted(

@@ -2,6 +2,7 @@
 
 - Imported repository name from README.md.
 - Inferred repo.build from .github/workflows/build-exe.yml as `npm run build`.
+- Discovered related relation to github.com/chi111i/BypassAIGC from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `BypassAIGC` from `GitHub API` after deterministic escalation.
@@ -11,6 +12,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

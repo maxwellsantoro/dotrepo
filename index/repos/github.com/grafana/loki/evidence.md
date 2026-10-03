@@ -4,7 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@grafana/loki-team` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Imported repo.build from README.md as `go build ./cmd/loki`.
 - Imported repo.test from CONTRIBUTING.md as `make test`.
-- Imported repo.toolchain.min from go.mod as `1.26.4` (Go).
+- Imported repo.toolchain.min from go.mod as `1.26.6` (Go).
 - Discovered related relation to github.com/grafana/alloy from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 

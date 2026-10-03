@@ -116,9 +116,13 @@ pub(crate) fn parse_readme_metadata(contents: &str) -> ReadmeMetadata {
         metadata.description = parse_readme_description(&lines, 0).map(|(value, _)| value);
     }
 
-    let docs = parse_readme_docs_metadata(&lines);
+    let docs = parse_readme_docs_metadata(&lines, metadata.title.as_deref());
     metadata.docs_root = docs.root;
     metadata.docs_getting_started = docs.getting_started;
+    metadata.docs_root_evidence = docs.root_evidence;
+    metadata.docs_getting_started_evidence = docs.getting_started_evidence;
+    metadata.docs_root_ambiguous = docs.root_ambiguous;
+    metadata.docs_getting_started_ambiguous = docs.getting_started_ambiguous;
 
     metadata
 }

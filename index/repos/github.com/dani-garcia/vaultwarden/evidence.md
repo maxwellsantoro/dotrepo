@@ -2,10 +2,10 @@
 
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS.
-- Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
+- Imported SECURITY.md, but no explicit contact channel was parsed, so security_contact = "unknown" is intentional.
 - Inferred repo.build from Cargo.toml as `cargo build --workspace`.
 - Inferred repo.test from Cargo.toml as `cargo test --workspace`.
-- Imported repo.toolchain.min from Cargo.toml as `1.94.0` (Rust).
+- Imported repo.toolchain.min from Cargo.toml as `1.96.1` (Rust).
 - Discovered related relation to github.com/dani-garcia/vaultwarden from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
@@ -17,10 +17,12 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Security contact normalization (2026-07-08)
+## Fresh verification
 
-Replaced non-actionable `security_contact` value `https://github.com/dani-garcia/vaultwarden/issues` with `unknown`. The prior URL was not an email or actionable vulnerability-reporting surface (promotion scoring: medium-present). Honest absence unblocks auto-publish without inventing a reporting channel.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.
 
-## Auto-promotion
+## Documentation correction (2026-09-21T04:36:55.205964Z)
 
-Record auto-promoted to verified: all fields are honestly resolved by deterministic promotion scoring.
+- Withheld docs.getting_started; rejected `https://bitwarden.com/help/getting-started-organizations/` because Bitwarden organizations feature documentation is not Vaultwarden installation documentation. Source: [README.md:38](https://github.com/dani-garcia/vaultwarden/blob/eb212e23fad88e6136723f43e5b73543fa7026d3/README.md#L38). No replacement was established by this correction.
+- This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
+- This is an overlay record, not a maintainer-controlled canonical record.

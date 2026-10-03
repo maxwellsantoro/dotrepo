@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported repo.build from justfile as `just build`.
 - Imported repo.test from CONTRIBUTING.md as `pytest tests/unit/ -v`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).

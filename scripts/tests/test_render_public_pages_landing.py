@@ -118,7 +118,7 @@ class PublicPageRendererTests(unittest.TestCase):
         self.assertIn("31 needing fetch", rendered)
         self.assertIn("3,035 fetches avoided", rendered)
         self.assertIn("39.3 MB avoided", rendered)
-        self.assertIn("~9.8M tokens avoided", rendered)
+        self.assertIn("~9.8M token-equivalent bytes", rendered)
         self.assertIn("site_rev 3", rendered)
         self.assertIn("/v0/stats.json", rendered)
 

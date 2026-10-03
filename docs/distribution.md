@@ -21,16 +21,29 @@ concrete surfaces that make agents and tools check dotrepo before scraping.
 2. **Efficiency pitch** — regenerate the public efficiency page on deploy
    (`scripts/render_public_efficiency_page.py` via the release/public gate).
    Share measured tokens/bytes/requests saved, not coverage vanity metrics.
-3. **Lookup-miss demand** — after deploys, sample Worker logs for
-   `DOTREPO_LOOKUP_MISS` lines and aggregate:
+3. **Lookup-miss demand (fixed cadence)** — weekly scheduled workflow
+   `.github/workflows/lookup-miss-demand.yml` (Mondays 07:30 UTC) or manual
+   `workflow_dispatch`. Offline by default (fixture proof); attach a live log
+   artifact and set `log_artifact_name` for real Worker demand.
+
+   The hosted Worker emits `DOTREPO_LOOKUP_MISS` on **static** repository-surface
+   404s for published leaves
+   (`/v0/repos/{host}/{owner}/{repo}/{index,profile,trust,relations}.json`) and
+   on dynamic not-found paths (query/batch/compare/relations). Summary content
+   is `index.json` (not a bare `/summary` path). Deploy the Worker after that
+   change before treating live tail/Logpush volume as complete.
+
+   Local path:
 
    ```bash
-   wrangler tail # or Logpush export
-   # save matching lines to /tmp/lookup-misses.log
-   uv run python scripts/aggregate_lookup_misses.py \
-     --input /tmp/lookup-misses.log \
-     --output-json /tmp/lookup-miss-report.json \
-     --output-md /tmp/lookup-miss-report.md
+   # Capture live lines (Cloudflare Logpush, dashboard, or):
+   #   cd cloudflare/hosted-query && npx wrangler tail --format pretty
+   # Then standardize outputs under index/telemetry/:
+   uv run python scripts/export_lookup_miss_demand.py \
+     --input /tmp/lookup-misses.log
+
+   # Offline proof (fixture):
+   uv run python scripts/export_lookup_miss_demand.py
    ```
 
    Feed repeated misses into Milestone 4 cohort selection after ecosystem
@@ -61,8 +74,7 @@ uv run python examples/external-consumer/lookup_before_scrape.py \
 ```
 
 Live non-operator production traffic remains an ops follow-up after a third-party
-framework adopts the reference pattern. The in-repo client is not operator CI
-smoke; it is the integration template.
+framework adopts the reference pattern. The in-repo client is a reference implementation, not an independent consumer.
 
 ## Success signal
 
@@ -70,3 +82,17 @@ Sustained hosted-API or MCP traffic from **non-operator** consumers, plus a
 growing lookup-miss list that is not empty only because logs were never
 exported. Distribution outranks maintainer-adoption polish until that signal
 exists.
+
+## Evidence required before claiming adoption or savings
+
+Keep reference runs separate from independent consumers. A pilot report must
+identify a consenting external consumer, its integration URL, workload selection,
+time window, and whether traffic is operator-generated. Record attempted tasks,
+usable answers, fallback reasons, successful outcomes, incorrect answers, request
+counts, transferred bytes, latency, actual model usage if available, and allocated
+refresh cost. Do not infer model tokens from response bytes.
+
+The integration example now emits `usableTaskCount`, `fallbackRequiredCount`, and
+per-request bytes/latency. The end-to-end benchmark includes upstream fallback;
+its in-repository run is still not adoption evidence. See
+[`consumer-pilot.md`](consumer-pilot.md) for the handoff and acceptance contract.

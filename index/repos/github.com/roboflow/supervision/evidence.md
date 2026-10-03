@@ -4,7 +4,7 @@
 - Imported maintainer candidates from CODEOWNERS.
 - Inferred fallback values for `repo.name` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from pyproject.toml as `python -m build`.
-- Inferred repo.test from .github/workflows/ci-tests.yml as `pytest src/ tests/ --cov=supervision --cov-report=xml`.
+- Imported repo.test from tox.ini as `tox`.
 - Imported repo.toolchain.min from pyproject.toml as `3.10` (Python).
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -15,6 +15,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Downgrade guard
+## Fresh verification
 
-A prior verified status was preserved because no previously present field regressed in this refresh.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

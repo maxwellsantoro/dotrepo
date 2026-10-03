@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/redis/redis-py"
-generated_at = "2026-07-06T18:58:44.944922Z"
+generated_at = "2026-09-16T16:28:26.63853Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `CONTRIBUTING.md`, `.github/workflows/pypi-publish.yaml`, and `pyproject.toml`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Inferred `repo.build` from `.github/workflows/pypi-publish.yaml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `CONTRIBUTING.md`, `.github/workflows/pypi-publish.yaml`, and `pyproject.toml`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Inferred `repo.build` from `.github/workflows/pypi-publish.yaml`. Inferred `repo.test` from `pyproject.toml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "redis-py"
@@ -41,16 +40,92 @@ ecosystem = "Python"
 
 [owners]
 maintainers = ["@dmaier-redislabs"]
-security_contact = "oss@redis.com"
+security_contact = "security@redis.com"
 
 [docs]
 root = "https://redis.readthedocs.io/en/stable/examples.html"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://redis.readthedocs.io/en/stable/examples.html"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "high"
+method = "unspecified"
+reason = "direct email or mailing list"
+state = "present"
+valueJson = '"security@redis.com"'
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/pypi-publish.yaml"
+state = "present"
+valueJson = '"python -m build ."'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"Redis Python client"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://github.com/redis/redis-py"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"redis-py"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:28:26.63853Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m pytest"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/redis/redis-py.git"
 default_branch = "master"
 fork = false
-head_sha = "ef83cd8aac814481f18e30921736a7222daa6b7d"
+head_sha = "27225cf0dcc683ce963437495b07ad7fdc83fc83"
 html_url = "https://github.com/redis/redis-py"
-stars = 13584
+stars = 13642

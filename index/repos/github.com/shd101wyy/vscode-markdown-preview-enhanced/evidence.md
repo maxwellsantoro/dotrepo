@@ -1,8 +1,8 @@
 # Evidence
 
 - Imported repository name from README.md.
-- Imported repo.build from package.json as `npm run build`.
-- Imported repo.test from package.json as `npm test`.
+- Imported repo.build from package.json as `pnpm build`.
+- Imported repo.test from package.json as `pnpm test`.
 - Discovered related relation to github.com/shd101wyy/vscode-markdown-preview-enhanced from package.json repository.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.

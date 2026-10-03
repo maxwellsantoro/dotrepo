@@ -413,3 +413,54 @@ fn reviewer_workflow_helpers_match_golden_claim_fixtures() {
     );
     fs::remove_dir_all(&corrected_root).expect("temp dir removed");
 }
+
+#[test]
+fn index_validation_replays_claim_transition_sources() {
+    let root = temp_root("illegal-transition");
+    copy_seed_repo("accepted-clean", &root);
+    let source = claim_dir(
+        &fixture_root().join("accepted-clean"),
+        "2026-03-10-maintainer-claim-01",
+    );
+    let target = claim_dir(&root, "2026-03-10-maintainer-claim-01");
+    fs::create_dir_all(target.join("events")).unwrap();
+    for file in [
+        "claim.toml",
+        "review.md",
+        "events/0001-submitted.toml",
+        "events/0002-accepted.toml",
+    ] {
+        fs::copy(source.join(file), target.join(file)).unwrap();
+    }
+    let event = target.join("events/0002-accepted.toml");
+    let text = fs::read_to_string(&event).unwrap();
+    fs::write(
+        &event,
+        text.replace("from = \"submitted\"", "from = \"rejected\""),
+    )
+    .unwrap();
+    let findings = validate_index_root(&root).unwrap();
+    assert!(findings
+        .iter()
+        .any(|f| f.message.contains("preceding history")));
+    // A contiguous history must also obey legal edges: acceptance after a
+    // rejection requires an explicit correction, not an accepted event.
+    fs::write(
+        &event,
+        text.replace("kind = \"accepted\"", "kind = \"rejected\"")
+            .replace("to = \"accepted\"", "to = \"rejected\""),
+    )
+    .unwrap();
+    fs::write(
+        target.join("events/0003-accepted.toml"),
+        text.replace("sequence = 2", "sequence = 3")
+            .replace("from = \"submitted\"", "from = \"rejected\""),
+    )
+    .unwrap();
+    let findings = validate_index_root(&root).unwrap();
+    assert!(findings
+        .iter()
+        .any(|f| f.message.contains("accepted events are only valid")));
+
+    fs::remove_dir_all(root).unwrap();
+}

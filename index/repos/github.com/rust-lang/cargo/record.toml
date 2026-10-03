@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "inferred"
 source = "https://github.com/rust-lang/cargo"
-generated_at = "2026-07-06T19:23:55.432562Z"
+generated_at = "2026-09-16T16:31:52.874334Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Cargo.toml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `Cargo.toml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Preserved prior verified status: no previously present field regressed in this refresh."
+notes = "Bootstrapped from `README.md`, `Cargo.toml`, and `.github/workflows/main.yml`. Inferred `repo.build` from `Cargo.toml`. Inferred `repo.test` from `.github/workflows/main.yml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Cargo"
@@ -31,7 +30,7 @@ languages = [
     "RenderScript",
 ]
 build = "cargo build --workspace"
-test = "cargo test --workspace"
+test = "cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests"
 topics = [
     "rust",
     "package-manager",
@@ -39,17 +38,93 @@ topics = [
 ]
 
 [repo.toolchain]
-min = "1.96"
+min = "1.98"
 ecosystem = "Rust"
 
 [docs]
 root = "https://doc.rust-lang.org/cargo"
+
+[x.dotrepo.field_evidence."docs.getting_started"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no getting started link detected"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."docs.root"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "high"
+method = "unspecified"
+reason = "docs URL present"
+state = "present"
+valueJson = '"https://doc.rust-lang.org/cargo"'
+
+[x.dotrepo.field_evidence."owners.security_contact"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no SECURITY.md or security contact sources found"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."owners.team"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "high"
+method = "not_found_in_inspected_sources"
+reason = "no single clear team in CODEOWNERS"
+state = "not_found"
+valueJson = "null"
+
+[x.dotrepo.field_evidence."repo.build"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "Cargo.toml"
+state = "present"
+valueJson = '"cargo build --workspace"'
+
+[x.dotrepo.field_evidence."repo.description"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "high"
+method = "extracted"
+reason = "constrained by GitHub repository metadata"
+source = "GitHub API"
+state = "present"
+valueJson = '"The Rust package manager"'
+
+[x.dotrepo.field_evidence."repo.homepage"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "high"
+method = "unspecified"
+reason = "set and passes quality check"
+state = "present"
+valueJson = '"https://doc.rust-lang.org/cargo"'
+
+[x.dotrepo.field_evidence."repo.name"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "high"
+method = "extracted"
+reason = "extracted from README heading with post-cleaners"
+source = "README.md"
+state = "present"
+valueJson = '"Cargo"'
+
+[x.dotrepo.field_evidence."repo.test"]
+checkedAt = "2026-09-16T16:31:52.874334Z"
+confidence = "medium"
+method = "inferred"
+reason = "from workflow fallback"
+source = ".github/workflows/main.yml"
+state = "present"
+valueJson = '"cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests"'
 
 [x.github]
 archived = false
 clone_url = "https://github.com/rust-lang/cargo.git"
 default_branch = "master"
 fork = false
-head_sha = "28fa7f2a3d8cbc62256aaf0d8464f9ecc96248ff"
+head_sha = "495c385d0875c4ba51eb72ea0448a2d4c018b8d4"
 html_url = "https://github.com/rust-lang/cargo"
-stars = 15203
+stars = 15483

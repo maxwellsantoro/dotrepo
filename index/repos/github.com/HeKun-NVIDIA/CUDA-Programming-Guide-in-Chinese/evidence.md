@@ -7,7 +7,3 @@
 - Augmented repo.visibility from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Downgrade guard
-
-A prior verified status was preserved because no previously present field regressed in this refresh.

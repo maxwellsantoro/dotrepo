@@ -115,6 +115,17 @@ def build_mixed_index(tmp_path: Path) -> Path:
     return index_root
 
 
+def test_documentation_audit_covers_records_outside_random_sample(tmp_path: Path):
+    index_root = build_mixed_index(tmp_path)
+    report = audit_index_sample.build_report(
+        index_root, 0, 1, datetime(2026, 9, 21, tzinfo=timezone.utc)
+    )
+    assert report["sample"] == []
+    assert report["docsAudit"]["recordsScanned"] == 4
+    assert report["docsAudit"]["recordsFlagged"] == 3
+    assert len({finding["identity"] for finding in report["docsAudit"]["findings"]}) == 3
+
+
 def test_risk_factors_missing_fields_outrank_complete_verified_record(tmp_path: Path) -> None:
     index_root = build_mixed_index(tmp_path)
     records = audit_index_sample.load_records(index_root)

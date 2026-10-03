@@ -33,3 +33,31 @@ def test_write_stats_preserves_pagedigest_economics(tmp_path: Path) -> None:
     stats = json.loads((tmp_path / "v0/stats.json").read_text(encoding="utf-8"))
     assert stats["pagedigest"] == pagedigest
     assert stats["latest"]["snapshotId"] == "abc123"
+
+
+def test_merge_retains_distinct_exports_of_the_same_source(tmp_path: Path) -> None:
+    from sync_cloudflare_public_snapshot import merge_snapshot_logs
+
+    previous, current, output = (tmp_path / name for name in ("previous", "current", "output"))
+    for root, snapshot, timestamp in [
+        (previous, "first-payload", "2026-09-16T10:00:00Z"),
+        (current, "second-payload", "2026-09-16T11:00:00Z"),
+    ]:
+        path = root / "v0/snapshots/log.json"
+        path.parent.mkdir(parents=True)
+        path.write_text(
+            json.dumps(
+                {
+                    "entries": [
+                        {
+                            "snapshotId": snapshot,
+                            "snapshotDigest": "same-source",
+                            "generatedAt": timestamp,
+                        }
+                    ]
+                }
+            )
+        )
+    merge_snapshot_logs(current, previous, output)
+    log = json.loads((output / "v0/snapshots/log.json").read_text())
+    assert [entry["snapshotId"] for entry in log["entries"]] == ["first-payload", "second-payload"]
