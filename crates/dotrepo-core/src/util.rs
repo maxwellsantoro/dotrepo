@@ -337,7 +337,8 @@ fn walk_dir_entries_impl(
 #[cfg(test)]
 mod tests {
     use super::{
-        contains_unsafe_shell_like_value, hex_lower, resolve_workspace_repository_root, source_digest,
+        contains_unsafe_shell_like_value, hex_lower, resolve_workspace_repository_root,
+        source_digest,
     };
     use std::fs;
 
