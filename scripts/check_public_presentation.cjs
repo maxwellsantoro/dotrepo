@@ -10,6 +10,7 @@ const { chromium } = require('playwright');
   const root = path.resolve(process.argv[2] || 'release-gate/public');
   const evidence = path.resolve(process.argv[3] || 'release-gate/browser-qa');
   fs.mkdirSync(evidence, { recursive: true });
+  const repositoryCount = JSON.parse(fs.readFileSync(path.join(root, 'v0/repos/index.json'), 'utf8')).repositoryCount;
   const server = http.createServer((req, res) => {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     const file = path.resolve(root, `.${pathname}`, pathname.endsWith('/') ? 'index.html' : '');
@@ -27,12 +28,15 @@ const { chromium } = require('playwright');
     browser = await chromium.launch();
     for (const [device, width, height] of [['desktop', 1440, 1000], ['mobile', 390, 844]]) {
       const page = await browser.newPage({ viewport: { width, height } });
+      page.setDefaultTimeout(10_000);
       const errors = [];
       page.on('pageerror', e => errors.push(e.message));
       page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
       for (const route of ['/', '/docs/', '/writing/', '/writing/what-the-ais-think-about-dotrepo/', '/repositories/', '/efficiency/']) {
         await page.goto(origin + route);
         await page.waitForLoadState('networkidle');
+        // Keep diagnostic pixels even if an assertion below stops this run.
+        await page.screenshot({ path: path.join(evidence, `${device}-${route.replaceAll('/', '-') || 'home'}-initial.png`), fullPage: true });
         assert.equal(new URL(page.url()).pathname, route);
         assert.match(await page.title(), /dotrepo/i);
         assert.ok((await page.locator('h1').textContent()).trim());
@@ -57,8 +61,13 @@ const { chromium } = require('playwright');
           assert.equal(await cap.isVisible(), true);
           await page.locator('#repository-load-more').click();
           await page.locator('#repository-load-more').click();
-          assert.equal(await page.locator('.repo-card').count(), 180);
-          while (await page.locator('#repository-load-more').isVisible()) await page.locator('#repository-load-more').click();
+          assert.equal(await page.locator('.repo-card').count(), Math.min(180, repositoryCount));
+          for (let remainingPages = Math.ceil(repositoryCount / 60); await page.locator('#repository-load-more').isVisible(); remainingPages--) {
+            assert.ok(remainingPages > 0, 'Pagination must terminate');
+            const before = await page.locator('.repo-card').count();
+            await page.locator('#repository-load-more').click();
+            assert.equal(await page.locator('.repo-card').count(), Math.min(before + 60, repositoryCount), 'Every pagination click must make progress');
+          }
           assert.equal(await cap.isVisible(), false);
           await search.fill('BurntSushi/ripgrep');
           assert.equal(await page.locator('.repo-card').count(), 1);
