@@ -41,3 +41,8 @@ third-party actions, declaring the pinned Rust action's toolchain explicitly,
 and using locked binary builds. Cross-platform execution still requires CI.
 The release gate's Python subprocesses use `uv run python`, matching the current
 repository tooling convention; its command-prefix contract is updated accordingly.
+
+The candidate targets the `codex/stable-1.0` maintenance branch, leaving `main`
+on its development version. Maintenance CI pins its actions and exposes the same
+scoped `ci-gate` aggregate, with push checks enabled for this branch. Merging the
+backport does not publish a tag, change install defaults, or release artifacts.
