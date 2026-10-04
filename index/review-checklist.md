@@ -20,6 +20,12 @@ that path uses the machine gates in [`ROADMAP.md`](../ROADMAP.md) and
 - The evidence says what was inferred and explains the reasoning path.
 - The evidence explains where `repo.build` came from.
 - The evidence explains where `repo.test` came from.
+- Scalar build/test commands are repository defaults rather than setup steps or
+  component commands. Any context is bound to the exact command and supported
+  by evidence for directory, scope, prerequisites, and source; absence remains
+  unassessed under [RFC 0021](../rfcs/0021-value-bound-execution-context.md).
+- Selected `docs.*` URLs have supporting declarations; URL shape and dependency
+  links alone do not establish project documentation ownership.
 - The evidence explains any intentional `unknown` placeholders, especially security contacts.
 - The evidence ends with the overlay disclaimer.
 
@@ -28,6 +34,8 @@ that path uses the machine gates in [`ROADMAP.md`](../ROADMAP.md) and
 - The record status and `record.trust.provenance` match the story told in `evidence.md`.
 - Imported claims do not sound maintainer-verified unless the source justifies that wording.
 - Inferred claims are not presented as canonical facts.
+- `verified` records cite fresh pipeline inspection; copied confidence, old labels,
+  or standalone promotion analysis do not establish a new source check.
 - Non-reference trust vocabulary, if present, is preserved deliberately and not introduced casually.
 
 ## Maintainer claim checks

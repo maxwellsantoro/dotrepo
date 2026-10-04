@@ -54,17 +54,8 @@ The [pilot guide](../../docs/consumer-pilot.md) and
 outcome telemetry. Unknown costs stay null. External adoption needs an independent
 team's deployment and outcomes, not execution of this example by the operator.
 
-When a requested build/test field is explicitly marked `inferred`, the reference
-policy requires source fallback. A conventional tool default is not enough to
-confirm a repository-specific command. The client never executes commands.
-
-## Command acceptance and coverage
-
-Use the [reference consumer policy](../../docs/external-consumer-integration.md#positive-command-acceptance) for the
-exact positive command checks, incomplete/scope screens, and fallback behavior.
-Record-wide confidence or maintainer status cannot substitute for matching
-field evidence. Acceptance does not grant permission to execute a command.
-
-Policy coverage reports presence and acceptance separately. Independently
-established correctness and completed-task counts remain unmeasured by that
-report; the benchmark and external pilot supply those separate evidence levels.
+The [reference consumer policy](../../docs/external-consumer-integration.md#positive-command-acceptance)
+owns exact command checks, inference/scope rejection, and fallback behavior.
+Context-aware component consumption remains separate evaluation work. Policy
+acceptance does not establish command execution success, task completion, or
+permission to execute.

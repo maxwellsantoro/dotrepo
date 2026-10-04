@@ -98,8 +98,8 @@ submissions and audits. The autonomous conveyor uses the gates documented in
 [`docs/factual-crawl-automation.md`](../docs/factual-crawl-automation.md).
 The machine-readable [`index/tranche-one-targets.txt`](tranche-one-targets.txt)
 is retained for reproducible first-tranche crawler runs.
-[`index/tranche-two-targets.txt`](tranche-two-targets.txt) is the completed
-second-tranche catalog (106/106 targets exhausted). Further corpus growth
+[`index/tranche-two-targets.txt`](tranche-two-targets.txt) retains the completed
+second-tranche catalog as historical evidence. Further corpus growth
 requires a new evidence-backed candidate list; until one is checked in, seed
 workflows and the roadmap batch read the current catalog from
 `scripts/fixtures/index_growth_tranche_baseline.json`.
@@ -133,37 +133,18 @@ manifest and retained assessments rather than relying on an old status summary:
 These are source-linked examples, not proof that every field is correct or that
 maintainer acceptance itself published a canonical mirror.
 
-## Autonomous refresh operator controls
+## Operator entrypoint
 
-The scheduled `index-autonomous-refresh` workflow can commit generated overlays
-with `contents: write`, `GITHUB_TOKEN`, and optional `OPENROUTER_API_KEY`. Treat
-it as production automation, not a passive report:
+Use [factual crawl automation](../docs/factual-crawl-automation.md) for scheduled
+refresh, enablement variables, credentials, exact-head automatic landing,
+telemetry, and failure recovery. Scheduled writeback honors explicit enablement;
+only an explicitly requested local batch may opt in with
+`--skip-automation-enabled-check`.
 
-- keep `INDEX_AUTOMATION_ENABLED` off until policy, parsers, and release gates
-  are ready for unattended writeback. The scheduled workflow is **fail closed**:
-  it runs only when the repository variable is explicitly `true` (unset or any
-  other value skips the job). Local batch scripts treat unset as disabled unless
-  you pass `--skip-automation-enabled-check`
-- the workflow opens a non-draft index-only automation PR after strict telemetry,
-  `validate-index`, and public gates pass. The landing helper explicitly tests
-  that exact commit, rechecks head/base, fast-forwards without force, and dispatches
-  deployment. Branch protection and divergence can reject landing; human merge
-  approval is not a routine generated-record tier
-- rotate sidecar credentials and monitor workflow logs for unexpected index churn
-- remember that writeback uses `autonomous_writeback_eligible` (verification
-  passed) rather than the stricter `eligible_for_auto_publish` gate used for
-  promotion to `verified`
-
-See [`docs/factual-crawl-automation.md`](../docs/factual-crawl-automation.md) for
-the writeback vs auto-publish distinction.
-
-Scheduled reviewer-facing seed/refresh workflows are also fail closed:
-
-- `DOTREPO_INDEX_SEED_REVIEW_ENABLED` for `index-seed-review`
-- `DOTREPO_INDEX_REFRESH_REVIEW_ENABLED` for `index-refresh-review`
-
-Unset or any value other than `true` skips the scheduled job; `workflow_dispatch`
-still works for manual runs.
+Writeback eligibility permits validated partial records; promotion to `verified`
+requires the stricter fresh-inspection gate. Do not turn manual review into a
+routine generated-record approval tier. Claim review remains a separate
+[authority workflow](../docs/maintainer-claim-review-workflow.md).
 
 ## Local validation
 
@@ -193,17 +174,10 @@ trust semantics, autonomous publication gates, or the manual contribution bar.
 
 ## Growth status
 
-Use the growth-status renderer when you need a quick read on record-level
-high-signal progress, active-tranche capacity, tranche coverage, language mix,
-claim examples, high-signal lift candidates, stale or missing `generated_at`
-metadata, and which lower-confidence records should be hardened next:
-
-```bash
-uv run python scripts/render_index_growth_status.py \
-  --milestone-high-signal-target 500
-```
-
-For strict operational checks, add freshness gates such as:
+Generate current counts, ecosystem mix, incomplete-field queues, and record-age
+reports rather than copying metrics into documentation. The high-signal and
+capacity counts are advisory; they do not establish accuracy, freshness, or
+consumer usefulness.
 
 ```bash
 uv run python scripts/render_index_growth_status.py \
@@ -212,17 +186,9 @@ uv run python scripts/render_index_growth_status.py \
   --max-refresh-overdue-days 7
 ```
 
-The scheduled seed and refresh review workflows include this same readout in
-their GitHub step summaries and uploaded artifacts. The active-tranche capacity
-line is an upper bound: missing tranche targets still need to be crawled,
-validated, exported, and measured before they count toward public-profile
-coverage. The high-signal lift queue is also advisory; it highlights records
-with medium/high confidence plus build, test, and security signals that still
-need the normal validation and promotion path before they can increase the
-high-signal count. The record-level potential line shows how far the checked-in
-index could move if those candidates pass that path. Freshness lines report the
-stale-or-missing `generated_at` rate, maximum record age, and overdue refresh
-latency so operators can separate scale growth from refresh health.
+The [public freshness gate](../docs/public-freshness.md#profile-record-policy)
+evaluates exported factual age independently at the current clock. Use the
+[roadmap](../ROADMAP.md) to decide which improvement or growth work may start.
 
 Use the core promotion report for read-only analysis of retained value-bound
 assessments (it does not inspect upstream or authorize a new promotion):

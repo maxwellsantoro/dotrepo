@@ -3,6 +3,13 @@
 ## Status
 Draft
 
+## Implementation scope
+
+The lifecycle is implemented in the Git-native claim workflow; external identity
+proof and self-service submission remain deferred. Use the
+[operator workflow](../docs/maintainer-claim-review-workflow.md) for executable
+commands and [the roadmap](../ROADMAP.md) for active priorities.
+
 ## Summary
 
 This RFC defines the first product-level lifecycle for maintainer claims in the

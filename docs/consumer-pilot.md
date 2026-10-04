@@ -11,16 +11,26 @@ operator evidence even when it uses this package.
 - Executable fallback experiment: `lookup-first` arm in `benchmarks/head-to-head`.
 - Structured outcome template: `examples/external-consumer/pilot-report.example.json`.
 
-## Integration contract
+## Preparation and handoff
 
-1. Normalize the repository identity and select the fields the task needs.
-2. Fetch its profile with a bounded timeout.
-3. Check the returned identity, conflicts, record age, requested fields, and any
-   field-specific unresolved assessments. Inferred build/test commands require
-   source fallback. A 200 response is not task success.
-4. On rejection, inspect upstream sources. Retain both the fallback reason and
-   source evidence; never execute a returned command merely because it is present.
-5. Record the final task outcome, not just whether a lookup was served.
+Follow the [roadmap](../ROADMAP.md) for start conditions and priority. Prepare
+these independently owned outputs in parallel before an external team is ready:
+
+| Package | Reviewable output | Dependency |
+| --- | --- | --- |
+| Workload and rubric | Frozen tasks selected before checking index coverage; upstream answers and task-success rubric with source/check dates | No consumer deployment required |
+| Integration adapter | Bounded lookup, identity/age/conflict checks, upstream fallback, and outcome telemetry exercised with fixtures | Use the existing [consumer policy](external-consumer-integration.md#positive-command-acceptance) |
+| Measurement harness | Source-first and lookup-first runs with cache state, actual usage, fallback work, and maintenance-cost allocation | Freeze the rubric before scoring |
+| External handoff | Consenting team, deployed integration URL, observation window, and retained outcome report | Authorized outreach and a participating team |
+
+The coordinator fixes the workload and policy versions, checks adapter/harness
+compatibility, and integrates the results. Keep unfavorable tasks and unresolved
+costs visible. A blocked external handoff need not block fixture-backed adapter
+and harness work. Reference runs remain operator evidence.
+
+For lookup and command acceptance, use the
+[integration contract](external-consumer-integration.md). Record the final task
+outcome as well as lookup and fallback results; a 200 response is not task success.
 
 ## Pilot design
 
@@ -47,13 +57,6 @@ on reference examples, operator traffic, model interviews, or repository count.
 
 Outreach or submission to another project is a separate explicit action.
 
-## Command acceptance and coverage
-
-Use the [reference consumer policy](external-consumer-integration.md#positive-command-acceptance) for the
-exact positive command checks, incomplete/scope screens, and fallback behavior.
-Record-wide confidence or maintainer status cannot substitute for matching
-field evidence. Acceptance does not grant permission to execute a command.
-
-Policy coverage reports presence and acceptance separately. Independently
-established correctness and completed-task counts remain unmeasured by that
-report; the benchmark and external pilot supply those separate evidence levels.
+Policy-coverage reports measure presence and policy acceptance. They do not
+establish correctness or completed tasks; the independently scored workload and
+external pilot supply those evidence levels.

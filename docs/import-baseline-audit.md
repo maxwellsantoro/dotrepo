@@ -43,6 +43,14 @@ Security fixtures cover:
 - `mailto:` query parameters
 - policy files with no parseable contact
 
+Execution fixtures cover repository defaults, nested manifests and CI working
+directories, component instructions, required setup, placeholders, continuations,
+and setup-only test flags. They pin withholding an unsuitable scalar command
+as well as extracting suitable commands. The additive
+[execution-context contract](../rfcs/0021-value-bound-execution-context.md) does
+not authorize restoring nested imports before complete context extraction and
+consumer evaluation.
+
 The fallback fixture contains no conventional import surfaces.
 
 ## Intentional incompleteness

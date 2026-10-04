@@ -3,6 +3,13 @@
 ## Status
 Draft
 
+## Implementation scope
+
+The command foundation below is implemented and has grown additional authoring,
+index, and public helpers. This is a design record, not an implementation queue.
+Use [the reference guide](../docs/reference-overview.md) and current CLI help for
+available commands, and [the roadmap](../ROADMAP.md) for remaining work.
+
 ## Commands
 
 ### `dotrepo init`

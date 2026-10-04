@@ -254,51 +254,24 @@ inverse names (`depended_on_by`, `successor`, `forked_by`, and
 provenance, and notes. When the target exists in the same index, the response
 also includes a compact linked profile and profile/trust/query links.
 
-## 15. Measure known-repository lookup efficiency
+## 15. Evaluate lookup and search
 
-```bash
-uv run python scripts/build_public_lookup_workload.py \
-  --public-root public \
-  --mode research \
-  --limit 0 \
-  --output /tmp/dotrepo-public-lookup-workload.json
+Use the focused harness documentation for reproducible commands and measurement
+limits:
 
-uv run python scripts/measure_public_lookup_efficiency.py \
-  --public-root public \
-  --index-root index \
-  --workload /tmp/dotrepo-public-lookup-workload.json \
-  --output-json /tmp/dotrepo-lookup-efficiency.json \
-  --output-md /tmp/dotrepo-lookup-efficiency.md
-```
+- [Lookup efficiency](public-lookup-efficiency-benchmark.md): field presence,
+  local payload/source proxies, and modeled batch requests
+- [Factual accuracy](public-factual-accuracy-benchmark.md): independent exact
+  values, missing answers, and abstention by ecosystem
+- [Search quality](public-search-quality-benchmark.md): discovery success and rank;
+  legacy cost fields do not measure the current Worker
+- [Consumer pilot](consumer-pilot.md): completed tasks including fallback,
+  actual model usage, cache state, and allocated index maintenance
 
-The research workload asks fixed overview, execution, documentation, and
-security questions for every exported repository without inspecting field
-completeness first. The benchmark reports aggregate and per-intent task hit
-rate, field hit rate, compact public payload bytes, deterministic
-source/evidence proxy bytes, and cacheable batch-query request reduction. See
-[`docs/public-lookup-efficiency-benchmark.md`](./public-lookup-efficiency-benchmark.md)
-for interpretation notes.
+These are separate evidence levels. A presence or policy-acceptance count cannot
+stand in for independently established correctness or task savings.
 
-The separate cited exact-value sample is documented in
-[`docs/public-factual-accuracy-benchmark.md`](./public-factual-accuracy-benchmark.md).
-
-## 16. Measure public search quality
-
-```bash
-uv run python scripts/measure_public_search_quality.py \
-  --public-root public \
-  --workload scripts/fixtures/public_search_workload.json \
-  --output-json /tmp/dotrepo-search-quality.json \
-  --output-md /tmp/dotrepo-search-quality.md
-```
-
-The search-quality benchmark reports discovery success rate, mean reciprocal
-rank, average first expected rank, searched profile bytes, and profile freshness
-for representative search workloads. See
-[`docs/public-search-quality-benchmark.md`](./public-search-quality-benchmark.md)
-for interpretation notes.
-
-## 17. Compare two public export manifests
+## 16. Compare two public export manifests
 
 ```bash
 uv run python scripts/diff_public_export_files.py \
@@ -311,7 +284,7 @@ uv run python scripts/diff_public_export_files.py \
 The delta report gives consumers the exact files to refetch from the new
 snapshot and the byte ratio of that refetch set.
 
-## 18. Measure public profile coverage
+## 17. Measure public profile coverage
 
 ```bash
 uv run python scripts/check_public_profile_coverage.py \
@@ -340,35 +313,11 @@ high-signal authority counts without a minimum floor; validity, completeness,
 conflicts, record freshness, and accuracy are separately gated. Read the
 versioned baseline rather than copying historical milestone thresholds.
 
-## 19. Plan the next growth tranche
+## 18. Plan growth after outcome gates
 
-Tranche two is complete; use this planner with a new evidence-backed candidate
-catalog when preparing the next growth wave. The checked-in
-`index/tranche-two-targets.txt` remains the reproducible record of the
-completed second tranche.
-
-```bash
-uv run python scripts/plan_index_growth_tranche.py \
-  --candidate-file /tmp/dotrepo-next-candidates.txt \
-  --target-count 50 \
-  --min-selected 50 \
-  --output-targets /tmp/dotrepo-growth-targets.txt \
-  --output-json /tmp/dotrepo-growth-plan.json \
-  --output-md /tmp/dotrepo-growth-plan.md
-```
-
-Create the candidate file with one identity per line and `#` ecosystem-group
-comments. The completed tranche-two catalog cannot satisfy a positive new-target
-floor. The planner is a pre-crawl control point for coverage growth. It excludes
-repositories already present in the checked-in index, balances eligible targets
-across candidate groups in candidate-file order, and emits a crawler target
-file plus JSON/Markdown evidence. Its Milestone 2 capacity section reports the
-current high-signal floor plus selected targets as an upper bound, not as
-completed profile coverage. The profile coverage gate remains authoritative
-after those targets are actually crawled and exported. The scheduled
-seed-review workflows use this planner before crawling so already-indexed
-candidates do not consume batch slots. The canonical release gate applies the
-versioned floor in
-`scripts/fixtures/index_growth_tranche_baseline.json` and publishes
-`index-growth-plan.json`, `index-growth-plan.md`, and `index-growth-targets.txt`
-with its other artifacts.
+Use the [index growth planner](../index/README.md#growth-tranche-planning) with a
+new source-backed candidate catalog. The historical tranche-two list remains
+reproducibility evidence. A plan's capacity is an upper bound; targets count as
+maintained coverage only after crawling, validation, export, and evaluation.
+The [roadmap](../ROADMAP.md) owns growth start conditions. The release gate's
+policy input is `scripts/fixtures/index_growth_tranche_baseline.json`.

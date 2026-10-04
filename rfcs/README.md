@@ -7,6 +7,14 @@ for installed binaries, and [the roadmap](../ROADMAP.md) for execution order.
 Code, fixture contracts, and the public compatibility manifest define executable
 behavior. An implementation does not retroactively mark a draft accepted.
 
+For agent execution, take a dependency-ready packet from
+[the roadmap](../ROADMAP.md) and use [the team execution guide](../docs/agent-execution.md).
+Read only the design records for the contract that packet changes: schema and
+execution use 0002/0020/0021, selection and claims use 0004/0008–0012, generation
+uses 0005, transports use 0003/0006/0007, and public wire/export behavior uses
+0016–0019. Consult the linked current guides and executable fixtures before
+treating an RFC's illustrative payload, phase, or command as shipped behavior.
+
 | RFC | Recorded status | Scope and current use |
 | --- | --- | --- |
 | [0001: Protocol/ecosystem](0001-protocol-and-ecosystem.md) | Draft | Three-part model and single root manifest |

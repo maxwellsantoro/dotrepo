@@ -3,6 +3,9 @@
 These examples are non-normative. They illustrate the query and trust response
 contract described in [`RFC 0003`](../rfcs/0003-cli-and-query-contract.md) and
 [`RFC 0006`](../rfcs/0006-mcp-server-contract.md).
+Selection precedence and claim tie-breaking are defined in
+[the trust model](trust-model.md#selection-tie-breaking). The examples show
+selected fields rather than exhaustive response schemas.
 
 ## Shared model
 

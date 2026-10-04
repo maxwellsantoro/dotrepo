@@ -4,7 +4,9 @@ Use documentation for the binary you installed. The latest stable release is
 [`v1.0.1`](https://github.com/maxwellsantoro/dotrepo/releases/tag/v1.0.1).
 The current `main` source identifies itself as `2.0.0-alpha.0`; it is unreleased
 development work, including public Rust API changes. A change merged on `main`
-does not change an existing release bundle or installed crate.
+does not change an existing release bundle or installed crate. The
+[`codex/stable-1.0` maintenance branch](https://github.com/maxwellsantoro/dotrepo/tree/codex/stable-1.0)
+contains the merged 1.0.2 candidate; no 1.0.2 tag or artifacts have been published.
 
 ## Version-matched documentation
 
@@ -42,8 +44,13 @@ evidence that the newer per-field checks ran. Review the retained sources and
 record age for the fact you need.
 
 The development implementation disables this standalone write path entirely;
-new promotion must go through crawler inspection and verification. That guard
-is unreleased and has not been backported by documenting it here.
+new promotion must go through crawler inspection and verification. The same
+no-write guard is merged into the unreleased 1.0.2 maintenance source.
+The [backport preparation record](https://github.com/maxwellsantoro/dotrepo/blob/codex/stable-1.0/docs/stable-promotion-backport.md)
+defines its narrow scope: promotion apply is disabled, generated CI stays pinned
+to published 1.0.1, and four dependency lock entries are updated. It does not
+backport `main`'s field-evidence schema or newer MCP lookup behavior. Existing
+1.0.1 installations retain the behavior in the table until a replacement ships.
 
 Source comparison:
 [stable CLI dispatch](https://github.com/maxwellsantoro/dotrepo/blob/v1.0.1/crates/dotrepo-cli/src/commands.rs),

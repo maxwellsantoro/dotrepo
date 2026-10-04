@@ -45,8 +45,8 @@ Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `mediu
 - Agents and tools should prefer canonical records when available.
 - Imported and inferred overlays are useful, but should be consumed with awareness of their status.
 - Consumers that specifically require human review should check for `reviewed`
-  status or provenance instead of treating `verified` as a synonym for human
-  approval.
+  status and the recorded reviewer evidence rather than interpreting `verified`
+  provenance or confidence as human approval.
 - Conflicts between sources should surface explicitly rather than being quietly flattened.
 - Claim and supersede are authority handoff semantics, not a requirement for a full
   productized maintainer workflow before precedence can be defined.
@@ -101,9 +101,9 @@ actual shell might interpret. Treat imported commands as untrusted until a
 maintainer reviews them in a native record, and never run them outside an
 isolated environment without explicit review.
 
-See [`RFC 0004`](../rfcs/0004-index-and-trust-model.md) and the worked examples in
-[`authority-handoff-examples.md`](./authority-handoff-examples.md) for the normative
-contract and reference scenarios.
+See [`RFC 0004`](../rfcs/0004-index-and-trust-model.md) for the design contract and
+[`authority-handoff-examples.md`](./authority-handoff-examples.md) for illustrative
+scenarios. Code and tested selection contracts own shipped behavior.
 
 For the autonomous promotion rules that can mint `verified` overlays, see
 [`factual-crawl-automation.md`](./factual-crawl-automation.md) and

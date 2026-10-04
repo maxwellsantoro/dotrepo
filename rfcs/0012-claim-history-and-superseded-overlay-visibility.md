@@ -3,6 +3,14 @@
 ## Status
 Draft
 
+## Implementation scope
+
+Claim inspection and claim-aware selection are implemented. The payloads below
+illustrate the design rather than define the complete current wire shape. Use
+the [operator workflow](../docs/maintainer-claim-review-workflow.md),
+[public compatibility contract](../docs/public-api-compatibility.md), and their
+fixtures for executable behavior; public submission remains deferred.
+
 ## Summary
 
 This RFC defines how claim history and superseded overlays should remain visible

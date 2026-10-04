@@ -8,7 +8,9 @@ The current `main` source is the unreleased `2.0.0-alpha.0` development line.
 Read [release compatibility](release-compatibility.md) before relying on safety
 claims from `main`: stable `promotion-report --apply` can write records and
 evidence, and the newer field-evidence and MCP target checks are unreleased.
-Version-matched stable docs are linked there.
+Version-matched stable docs are linked there. The merged 1.0.2 maintenance
+candidate is source-only; keep these published 1.0.1 pins until replacement
+artifacts exist.
 
 ## Download a stable bundle
 

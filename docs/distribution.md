@@ -87,16 +87,12 @@ growing lookup-miss list that is not empty only because logs were never
 exported. Distribution outranks maintainer-adoption polish until that signal
 exists.
 
-## Evidence required before claiming adoption or savings
+## Evidence handoff
 
-Keep reference runs separate from independent consumers. A pilot report must
-identify a consenting external consumer, its integration URL, workload selection,
-time window, and whether traffic is operator-generated. Record attempted tasks,
-usable answers, fallback reasons, successful outcomes, incorrect answers, request
-counts, transferred bytes, latency, actual model usage if available, and allocated
-refresh cost. Do not infer model tokens from response bytes.
-
-The integration example now emits `usableTaskCount`, `fallbackRequiredCount`, and
-per-request bytes/latency. The end-to-end benchmark includes upstream fallback;
-its in-repository run is still not adoption evidence. See
-[`consumer-pilot.md`](consumer-pilot.md) for the handoff and acceptance contract.
+Use [the pilot plan](consumer-pilot.md) for preparation packages, outcome telemetry,
+and adoption/savings acceptance. Use
+[the integration contract](external-consumer-integration.md) for lookup suitability.
+The reference client reports usable answers, fallback requirements, and lookup
+bytes/latency; the end-to-end harness includes upstream fallback. Neither an
+operator run nor the reference client's lookup-only timings establishes
+independent adoption or total task savings.

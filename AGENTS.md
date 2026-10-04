@@ -65,6 +65,22 @@ filter a test. Public export and autonomous writeback commands live in
 An explicit local batch can opt in with `--skip-automation-enabled-check`;
 scheduled jobs must honor enablement.
 
+## Team execution
+
+For roadmap implementation, use a coordinator and concurrent workers when the
+user requests a team or the task is otherwise authorized for delegation. Use
+[the execution guide](docs/agent-execution.md) for dispatch, ownership, handoffs,
+and integration; [the project skill](.agents/skills/roadmap-coordination/SKILL.md)
+is its discoverable entrypoint. Small isolated fixes need no team ceremony.
+
+Assign one writer per file or index identity and transfer ownership before shared
+contract changes. Keep the coordinator available for decisions and combined gates;
+workers return patches, sources, focused checks, and unresolved dependencies.
+Use isolated worktrees for incompatible dependencies or release lines, and unique
+outputs for concurrent runs. Keep ready packets moving across external waits.
+Coding-agent models inherit user configuration; crawler adjudication policy does
+not assign worker models.
+
 Root `public/`, `release-gate/`, `operator-gate/`, and `dist/` are generated,
 gitignored outputs. Keep source inputs and golden contracts in `index/` and
 fixture packs. Do not edit generated output to fix its source.
@@ -138,6 +154,12 @@ and full release checks; index-only changes use the lighter public gate unless
 claims also require the operator gate. Root-only metadata/docs can route to the
 minimal gate. Scoped jobs may be skipped intentionally.
 
+Workers run focused checks, then the coordinator runs the combined required
+gates on the integrated state. Require `ci-gate` when landing and inspect actual
+branch settings rather than assuming the workflow enforces merges. Reuse prior
+successful checks only for unchanged inputs; retained evidence does not cover
+a later patch or a newly evaluated record-age gate.
+
 The standalone CLI alias is outside workspace checks and has separate locked
 CI checks. Tag publication validates version parity and publishes the release
 packages; the crawler stays internal. All third-party `uses:` actions must be
@@ -154,3 +176,9 @@ Read versions from their owners: Cargo for release versions, `validation.rs` for
 manifest support, `claims.rs` for claim schemas, MCP `dispatch.rs` for negotiation,
 and `public/` for public wrappers. Update the owning contract and fixtures
 when semantics change; do not scatter copied protocol constants in new prose.
+
+Project skills live under `.agents/skills/`. Keep them narrow and route to the
+owning guide; do not duplicate repository policy or embed changing model/version
+inventories. Keep `CLAUDE.md` as a pointer. Archive dated reviews and completed
+plans without rewriting their original evidence; prune repeated live guidance
+by linking to its owner.

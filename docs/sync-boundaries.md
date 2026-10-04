@@ -5,7 +5,7 @@ practical companion to [`RFC 0005`](../rfcs/0005-sync-and-generated-artifacts.md
 
 The most important rule is unchanged:
 
-**The root `.repo` file is the only source of truth.** Managed sync exists to
+**The root `.repo` file is the source for native generated surfaces.** Managed sync exists to
 keep selected conventional files aligned with `.repo` without pretending that
 dotrepo can safely round-trip arbitrary prose.
 

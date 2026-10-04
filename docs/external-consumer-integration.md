@@ -78,8 +78,9 @@ the distribution success signal.
 - Benchmarks under `benchmarks/head-to-head/` — scrape-versus-dotrepo evidence
 
 When a **third-party** integration lands, link it from
-[`docs/distribution.md`](./distribution.md) and note non-operator traffic in the
-next ROADMAP snapshot. Live non-operator traffic remains an ops follow-up.
+[`docs/distribution.md`](./distribution.md) and retain dated non-operator traffic
+and task outcomes in the pilot report. The roadmap owns sequencing and gates,
+not live metrics.
 
 ## Task policy and measurements
 
@@ -124,6 +125,14 @@ because a scalar command does not carry working directory, component, or
 prerequisites. `.github/CONTRIBUTING.md` is treated as a repository contribution
 guide; its commands still pass the same incomplete-example checks. This is a
 conservative suitability screen, not proof that a root-sourced command works.
+
+The development profile can carry optional value-bound `buildContext`,
+`testContext`, and candidate `context` objects. The reference client does not
+use these additions to accept component commands. Evaluate context-aware
+consumption separately against the
+[execution-context contract](../rfcs/0021-value-bound-execution-context.md):
+check the exact command, directory, scope, prerequisites, source, and age.
+An assessment for the command string alone does not establish the context.
 
 Policy coverage is published on the efficiency page and in its linked JSON.
 It distinguishes value presence, policy acceptance, independently established

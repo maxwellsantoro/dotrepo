@@ -14,6 +14,15 @@ See [export operations](public-export-workflow.md) for individual commands and
 [Cloudflare setup](cloudflare-deploy.md) for publication and archive restoration.
 Fixed historical timestamps are for deterministic review, not a fresh deploy.
 
+## Coordinator handoff
+
+Collect each lane's changed paths, immutable source revision, contract changes,
+and narrow-check results. Run the complete gate on the combined revision once;
+repeat affected checks after integration changes. Assign one release owner for
+tagging, registry publication, and hosted deployment. Artifact preparation can
+run alongside consumer work, but installed-version claims require actual
+publication and consumer proof requires independent outcomes.
+
 ## Source and release identity
 
 - Validate index structure and claim history; preserve evidence and explicit
@@ -21,7 +30,9 @@ Fixed historical timestamps are for deterministic review, not a fresh deploy.
 - Check release-version and root toolchain parity. A tag, every package, and
   every release asset must identify the same version.
 - Validate the stable release/backport against its immutable tag and dependency
-  graph. Branch-only safeguards must stay labeled until actually released.
+  graph. The 1.0.2 candidate is merged into `codex/stable-1.0`, not published;
+  use [release compatibility](release-compatibility.md) for its scope. Preserve
+  branch-only labels and published 1.0.1 install defaults until artifacts ship.
 - After publishing a stable tag, advance workspace and standalone alias to the
   next appropriate prerelease; do not reuse the published version for new source.
 - Advance `DEFAULT_CI_RELEASE_VERSION` in `adoption.rs` and regenerate the native

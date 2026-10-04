@@ -2,6 +2,10 @@
 
 These examples are non-normative. They illustrate the claim, supersede, and conflict
 rules from [`RFC 0004`](../rfcs/0004-index-and-trust-model.md).
+Use [the trust model](trust-model.md#selection-tie-breaking) for current precedence
+and tie-breaking, and [the reviewer workflow](maintainer-claim-review-workflow.md)
+for executable handoff steps. These short TOML fragments illustrate status;
+they are not complete valid manifests.
 
 ## 1. Overlay only
 

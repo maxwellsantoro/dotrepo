@@ -3,6 +3,13 @@
 ## Status
 Draft
 
+## Implementation scope
+
+This proposal remains deferred. Current public export and release archives do
+not implement the bundle manifest or artifact-container protocol described
+below. Begin bundle work only when [the roadmap](../ROADMAP.md) admits it based
+on usage; existing packaging alone does not establish completion.
+
 ## Summary
 
 This RFC frames bundle mode as a future transport and packaging layer for
