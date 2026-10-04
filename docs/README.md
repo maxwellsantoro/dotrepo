@@ -16,6 +16,7 @@ The hosted export can advance independently of client releases.
 | Use HTTP/CLI public routes | [Public examples](public-export-examples.md), [architecture](public-surface.md) |
 | Contribute code or records | [Contributing](../CONTRIBUTING.md), [index guide](../index/README.md) |
 | Find active work and gates | [Roadmap](../ROADMAP.md#active-execution-order) |
+| Coordinate concurrent implementation | [Agent execution](agent-execution.md), [project coordination skill](../.agents/skills/roadmap-coordination/SKILL.md) |
 
 ## Develop and operate
 
@@ -63,3 +64,10 @@ Code and tested contracts outrank prose. Keep active sequencing in the roadmap,
 current measurements in generated reports, and historical evidence immutable.
 Routine generated overlays use machine gates; the manual contribution checklist
 and claim review are distinct workflows.
+
+Use one owner for each instruction: roadmap packets/dependencies in the roadmap,
+team dispatch/handoffs in the execution guide, invariant rules in `AGENTS.md`,
+and commands in the relevant workflow guide. Update the owner and link to it;
+do not copy its model choices, version constants, status tables, or gate output
+into additional docs. Draft RFCs and archived implementation sequences are design
+context rather than another ready-work queue.

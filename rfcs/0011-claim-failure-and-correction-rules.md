@@ -3,6 +3,13 @@
 ## Status
 Draft
 
+## Implementation scope
+
+Failure states, legal transitions, and append-only corrections are implemented
+and fixture-tested. Use the [operator workflow](../docs/maintainer-claim-review-workflow.md)
+for current event commands. Retain the recorded design below; its follow-on
+lists are not the active implementation queue.
+
 ## Summary
 
 This RFC defines the rules for disputed, rejected, withdrawn, and corrected

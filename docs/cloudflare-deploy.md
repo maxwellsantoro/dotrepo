@@ -2,7 +2,7 @@
 
 This doc covers how to configure the dotrepo Cloudflare Worker deployment.
 
-It separates three concerns:
+Configure these three concerns independently:
 
 - Worker runtime bindings for local `wrangler dev`
 - local Cloudflare authentication for manual deploys
@@ -20,7 +20,7 @@ It separates three concerns:
 For local `wrangler dev`, the runtime variables currently used are `BASE_PATH`
 and `CANONICAL_HOST`.
 
-The Worker already defaults that in `wrangler.jsonc`:
+The defaults in `wrangler.jsonc` are:
 
 ```jsonc
 "vars": {
@@ -75,7 +75,7 @@ Set these in GitHub repository settings under Variables:
 - `CLOUDFLARE_PUBLIC_DEPLOY_ENABLED=true`
 - `DOTREPO_PUBLIC_BASE_PATH=/`
 
-`DOTREPO_PUBLIC_BASE_PATH` is optional; the workflow now defaults to `/`.
+`DOTREPO_PUBLIC_BASE_PATH` defaults to `/`; configured custom domains require `/`.
 `DOTREPO_PUBLIC_STATE_BASE_URL` optionally selects the currently deployed HTTPS
 origin used to restore snapshot history; it defaults to `https://dotrepo.org`.
 Set it to the existing `workers.dev` origin when deploying a separate mirror.
@@ -98,7 +98,12 @@ automation explicitly dispatches it after its own checked fast-forward because
 landing sequence and failure recovery are documented in
 [crawl automation](factual-crawl-automation.md#scheduled-enablement-and-landing).
 
-The workflow in `.github/workflows/public-cloudflare.yml` now:
+The workflow serializes eligibility, build, and publication across trigger types.
+It rejects an event whose commit no longer matches the default branch and rechecks
+immediately before archive/deploy, so parallel agents must hand publication to
+one coordinator rather than dispatch competing source revisions.
+
+The workflow:
 
 - restores the deployed snapshot log and current public payloads before building,
   including archive history when an R2 bucket is configured
@@ -121,7 +126,6 @@ The live smoke checks:
   core contract files and the first reviewed repository's exported JSON, matches
   the reviewed byte counts and SHA-256 hashes
 - the homepage embedded snapshot state matches the deployed public JSON
-- `/<base>/v0/meta.json`
 - one emitted `queryTemplate` resolved with `repo.description`
 - batch profile lookup, batch field lookup, search, compare, and relation
   traversal routes for the first reviewed repository
@@ -213,48 +217,25 @@ exist, set GitHub variable `DOTREPO_PUBLIC_ARCHIVE_CANARY_ENABLED=true` to make
 the scheduled canary sample an older immutable snapshot URL. That prevents
 archive rot from hiding behind a healthy current edge snapshot.
 
-## Published shape
+## Public origins
 
-The Worker config publishes to `workers.dev`.
+[`wrangler.jsonc`](../cloudflare/hosted-query/wrangler.jsonc) configures
+`dotrepo.org` and `www.dotrepo.org` as custom domains, plus `workers.dev` serving.
+The Worker permanently redirects `www` to `dotrepo.org` while preserving path
+and query. Production links use `https://dotrepo.org/`.
 
-It also now declares `dotrepo.org` as the production custom domain in
-`cloudflare/hosted-query/wrangler.jsonc`.
-
-The Worker also declares `www.dotrepo.org` and redirects it permanently to
-`dotrepo.org`, preserving path and query string. That keeps one canonical host
-for the future homepage and the hosted public API.
-
-That means the Cloudflare workflow can publish to:
-
-```text
-https://dotrepo.org/
-```
-
-and continue to keep a `workers.dev` staging origin such as:
-
-```text
-https://dotrepo-public-hosted-query.<account-subdomain>.workers.dev/
-```
-
-The workflow now prefers the custom domain for the post-deploy smoke check when
-one is declared in the Wrangler config. If the custom domain does not resolve
-yet from CI, the workflow falls back to the deployed `workers.dev` URL until
-Cloudflare DNS and certificate provisioning complete.
-
-## Production shape
-
-The production public origin is now `https://dotrepo.org/`.
-
-`workers.dev` remains useful as a staging origin and as a fallback smoke target
-while custom-domain DNS or certificate provisioning catches up during deploys,
-but it is not the canonical public host.
+Post-deploy smoke prefers a configured custom domain. If DNS/certificate
+provisioning is incomplete, it can fall back to the emitted `workers.dev` URL.
+Record which origin passed; a successful fallback is not proof that the custom
+domain is healthy. Verify live state from the deploy/canary artifacts rather than
+from this configuration alone.
 
 ## Recommended first run
 
 1. Run the release gate locally:
 
 ```bash
-uv run python scripts/check_release_gate.py --skip-vsix
+uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-cloudflare-review --skip-vsix
 ```
 
 2. Confirm the Worker dry-run passes locally.

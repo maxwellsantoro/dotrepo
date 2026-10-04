@@ -3,6 +3,14 @@
 ## Status
 Draft
 
+## Implementation scope
+
+Claim artifacts and replay validation are implemented. The examples below
+preserve the original design; schema versions and accepted fields are owned by
+`crates/dotrepo-core/src/claims.rs` and its fixtures. Use the
+[operator workflow](../docs/maintainer-claim-review-workflow.md) to create or
+advance claims rather than copying illustrative files.
+
 ## Summary
 
 This RFC defines the first index-side claim request record shape and audit trail

@@ -3,6 +3,14 @@
 ## Status
 Draft
 
+## Implementation scope
+
+The reference toolchain derives handoff state from validated claim history and
+explicit canonical links. This records the design, not a separate queue of
+handoff features. Use the [operator workflow](../docs/maintainer-claim-review-workflow.md)
+and its contract fixtures for current behavior; broader claim-product work
+follows [the roadmap](../ROADMAP.md).
+
 ## Summary
 
 This RFC defines the handoff states and review outcomes that connect maintainer

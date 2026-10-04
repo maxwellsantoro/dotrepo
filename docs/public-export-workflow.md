@@ -3,64 +3,32 @@
 This doc covers the operator and reviewer loop for the read-only public JSON
 tree and its hosted deployment.
 
-## What exists now
+## Inputs and outputs
 
-The current deployed public surface is a Cloudflare Worker-hosted JSON tree on
-`https://dotrepo.org/`, rooted at:
+Generate the read-only JSON tree and website from `index/` and the checked-in
+fixture contracts. [Public architecture](public-surface.md) owns capabilities and
+runtime bounds; [public examples](public-export-examples.md) owns routes.
 
 ```text
 public/
-  index.html
-  docs/
-  repositories/
-  writing/
-  query-input/
-    <host>/
-      <owner>/
-        <repo>.json
+  index.html, docs/, repositories/, writing/
+  query-input/<host>/<owner>/<repo>.json
   v0/
-    meta.json
-    files.json
-    repos/
-      index.json
-      search.json
-      <host>/
-        <owner>/
-          <repo>/
-            index.json
-            profile.json
-            trust.json
-    stats.json
-    snapshots/
-      log.json
-      <snapshotId>/
-        files.json
-        repos/
-        query-input/
+    meta.json, files.json, stats.json
+    repos/{index,search}.json
+    repos/<host>/<owner>/<repo>/index.json, profile.json, trust.json, relations.json
+    snapshots/log.json
+    snapshots/<snapshotId>/files.json, repos/, query-input/
 ```
 
-This surface provides:
-- identity-first, trust-aware repository inspection via the hosted deployment
-- a bundle-level repository inventory for navigation
-- repository summary, profile, and trust responses reusing the same local
-  selection, conflict, and claim-visibility semantics
-- a local and release-reviewed same-origin query runtime using the same set of
-  exported files
-- a live accepted maintainer claim in the checked-in index for
-  `github.com/maxwellsantoro/ries-rs`, linked to the published upstream `.repo`
-  and surfaced with `superseded` handoff state
-- local review and CI artifacts sharing the same exported tree
-- repo-scoped `query-input/` artifacts for Worker-backed hosted query serving
+`public/`, `release-gate/`, and `dist/` are gitignored review outputs.
+Private `query-input/` powers the runtime and is blocked from public serving.
+CI review artifacts have bounded retention; deployed immutable history belongs
+in the separately provisioned archive.
 
-The root `public/` and `release-gate/` directories are generated outputs and
-are intentionally gitignored. They can be regenerated from the checked-in
-`index/`, scripts, and fixture contracts; CI uploads bounded review artifacts,
-and deployed immutable snapshots are archived separately.
-
-Not yet in scope:
-- production-scale ranking calibration (search and factual comparison routes
-  already exist; see [public examples](public-export-examples.md))
-- live mutation or submission APIs
+Agents working on fixtures, runtime routes, and presentation can proceed in
+parallel with separate output roots. One coordinator runs the integrated gate
+and owns deployment after source, contract, and freshness evidence agree.
 
 ## Local review loop
 
@@ -97,7 +65,8 @@ records, see [`docs/public-freshness.md`](./public-freshness.md).
 ### 2. Deterministic local export from the real index
 
 For review artifacts outside the fixture pack, use fixed timestamps so repeated
-runs on the same input stay byte-stable:
+runs on the same input stay byte-stable. These historical review timestamps do
+not refresh source facts or satisfy the current-time record freshness gate:
 
 ```bash
 cargo run -p dotrepo-cli -- public export \
@@ -143,43 +112,31 @@ root and point at the exported `index.json` / `profile.json` / `trust.json`
 files. The current Cloudflare custom-domain deployment on `dotrepo.org` uses
 `--base-path /`.
 
-## CI artifacts
+## Integrated gate and CI artifacts
 
-The canonical release review entrypoint is `scripts/check_release_gate.py`. The
-main CI workflow runs that script, which builds the public tree from the
-`index/`, packages the release-style install assets, smoke tests the release
-binaries, smoke tests same-origin hosted-query resolution from the shipped
-`dotrepo-public-query` binary against the exported tree, stages that same
-validated export into the Cloudflare Worker, smoke tests `queryTemplate`
-resolution through `wrangler dev`, and uploads the resulting artifacts.
+Run the canonical review entrypoint on the integrated changes:
 
-Current behavior:
-- the artifact is generated from the real `index/` tree
-- CI exercises both the canonical root-path Cloudflare deployment and the
-  release-gate `/dotrepo` hosted-path review surface
-- CI records generation timestamps in review artifacts; explicit fixed timestamps
-  are available for deterministic contract review
-- CI also packages a versioned review bundle from the exported tree
-- CI also packages a Linux install bundle and a tagged-style VSIX as release-gate artifacts
-- CI smoke tests the release binaries from the extracted tarball
-- CI smoke tests that an emitted `queryTemplate` can resolve against the
-  shipped hosted-query runtime on the same origin
-- CI also smoke tests that the same emitted `queryTemplate` resolves through
-  the Cloudflare Worker route backed by the staged export snapshot
-- CI also smoke tests hosted search, compare, and relation traversal through
-  the Cloudflare Worker route backed by the staged export snapshot
-- artifact retention is 14 days
-- export generation failures fail CI directly
+```bash
+uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate
+```
 
-Separate from the release-surface artifacts, the `operator-gate` CI job uploads:
-- `operator-gate-claim-reports`
-- `operator-gate-live-seed-handoff-public`
+The gate builds from the real index, validates public contracts and quality,
+packages the public tree and native install assets, smoke-tests extracted binaries
+and the local same-origin runtime, then stages that export for Worker route smoke.
+CI also checks VS Code lifecycle and desktop/mobile presentation. Root-path
+Cloudflare and `/dotrepo` review-path exports are both exercised.
 
-Those artifacts demonstrate the overlay-to-claim handoff path exported through
-the same public JSON contracts with canonical links. The live checked-in index
-already demonstrates the corrected accepted-claim path through
-`github.com/maxwellsantoro/ries-rs`, with `superseded` handoff linked to the
-upstream native `.repo`.
+`--skip-release-bundle --skip-vsix` selects the lightweight public-only path.
+`--skip-vsix` omits extension packaging only; report that omission and run full
+packaging before declaring release completion. Index-only CI uses the lightweight
+path; toolchain and `docs/` or `rfcs/` changes currently select the full gate through
+[the scope classifier](../.github/workflows/ci.yml).
+
+CI uploads the public tree/bundle and applicable install/VSIX artifacts. Full
+release artifacts retain 14 days; lightweight public artifacts retain seven.
+The separate operator gate uploads claim reports and the live seed-handoff public
+tree. These are review evidence, not publication or independent-consumer proof.
+Use [the release checklist](public-release-checklist.md) for publication evidence.
 
 ## Deployment and runtime
 
@@ -199,49 +156,19 @@ export for both text and filtered matching, scanning that document in memory.
 It does not fan out to every repository profile. A missing search document fails
 rather than switching to unbounded reads. See [architecture](public-surface.md).
 
-## What should stay stable vs variable
+## Contract review
 
-Stable for the same input tree and fixed review timestamps:
-- file layout under `public/v0/`
-- bundle-level repository inventory
-- field names and response envelopes
-- selection/conflict and claim-visibility semantics
-- link structure and artifact locators
-- `snapshotDigest`
-- `validators`
-- file paths, byte sizes, and digests in `v0/files.json`
+For identical source inputs and fixed review timestamps, layout, serialized
+responses, links, validators, and snapshot files/hashes remain deterministic.
+Ordinary exports intentionally vary freshness timestamps and resulting snapshot
+identity. [Freshness definitions](public-freshness.md) distinguish source digest,
+snapshot identity, export time, and factual record age.
 
-Intentionally variable in ordinary export runs:
-- `generatedAt`
-- `staleAfter`
-
-`generatedAt`, `snapshotDigest`, `staleAfter`, validators, `files.json`, and
-`record.generated_at` are defined in
-[`docs/public-freshness.md`](./public-freshness.md).
-
-## How to reason about changes
-
-When the public export changes, ask:
-
-1. Did the source index change?
-2. Did the response contract change?
-3. Did claim visibility or selection behavior change?
-4. Did only review-time freshness metadata change?
-
-The fixture pack is best for contract review. The CI artifact is best for
-inspecting the current index output as a whole.
-
-The compatibility manifest/test is best for catching accidental key renames,
-link-key drift, or error-code drift inside the same `apiVersion`.
-
-For release review, start with `scripts/check_release_gate.py`; use the
-individual commands above only when you are isolating one specific part of the
-public/export flow.
-
-For concrete usage snippets, see
-[`docs/public-export-examples.md`](./public-export-examples.md).
-For a cut/review checklist, see
-[`docs/public-release-checklist.md`](./public-release-checklist.md).
+Classify a change as source facts, response/selection/claim contract, or export-only
+metadata before choosing expectations. The fixture pack pins exact outputs;
+[wire compatibility](public-api-compatibility.md) catches key/link/error drift;
+the integrated gate reviews current index output. Never change frozen source
+captures to make a new parser pass.
 
 ## Related docs
 

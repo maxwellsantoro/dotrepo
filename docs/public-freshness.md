@@ -95,8 +95,8 @@ append-only snapshot log. It exposes the latest snapshot, the retained history,
 and count deltas between adjacent snapshots. It also carries the current
 PageDigest economics block: records covered, records that must be fetched,
 records skipped, covered bytes, avoided bytes, and a coarse token-avoidance
-estimate. Phase 2 dashboard and essay work should build from this document
-rather than scraping individual payload paths.
+estimate. Consumers of these metrics should read this document rather than
+scraping individual payload paths. The token estimate is not billed model usage.
 
 ### `files.json`
 
@@ -112,12 +112,11 @@ Consumers fetch `meta.json`, follow `paths.files`, and need no further work if
 the snapshot ID is unchanged. When it changes, the file manifest provides
 the exact immutable payload set and hashes.
 
-The deployed export currently promises a seven-day `staleAfter` window. That
-matches the cadence the project can sustain without pretending a push-driven
-deployment is a daily refresh service. Use the scheduled public-edge canary to verify pointer, payload, and history
-coherence. A configured schedule or earlier pass streak is not evidence of
-current successful operation; phase-era closure history belongs in retained
-reports rather than the freshness contract.
+The export workflow configures a seven-day `staleAfter` window. Read the actual
+response timestamps and use the public-edge canary to verify pointer, payload,
+and history coherence. A configured schedule or earlier pass streak is not
+evidence of current successful operation; dated operational results belong in
+retained reports rather than this contract.
 
 For local review, mirrors, or agent caches, use the deterministic delta helper:
 
@@ -165,5 +164,17 @@ profiles. `record.sourceRevision` identifies the upstream Git revision when know
 it does not date mutable GitHub metadata.
 
 The homepage shows fresh/stale/unknown counts from the exported profiles, beside
-the independently labeled export time. The daily autonomous refresh plans the
-oldest records first, including unchanged HEADs beyond the record-age limit.
+the independently labeled export time. The autonomous refresh planner prioritizes
+old records, including unchanged HEADs beyond the record-age limit; a configured
+daily schedule does not establish successful daily inspections.
+
+The release gate independently recalculates age at its current evaluation time,
+with at most 10% stale or unknown records and maximum refresh overdue of seven
+days. Its report retains export time separately. Fixed export timestamps used in
+fixtures cannot make the live index fresh. Run the same check directly with:
+
+```bash
+uv run python scripts/check_public_record_freshness.py --public-root public \
+  --max-stale-or-unknown-rate 0.1 --max-refresh-overdue-days 7 \
+  --output-json /tmp/dotrepo-record-freshness.json
+```

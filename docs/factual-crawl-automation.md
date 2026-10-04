@@ -55,8 +55,12 @@ cases and exact regression expectations.
 
 Ambiguous ecosystem commands can remain in additive candidate arrays, with
 primary build/test unset. [RFC 0020](../rfcs/0020-multi-ecosystem-command-candidates.md)
-describes that subset; candidates do not supply working directory, scope, or
-prerequisites. Command screening is heuristic, not a sandbox or proof of execution.
+describes the candidate subset. [RFC 0021](../rfcs/0021-value-bound-execution-context.md)
+adds explicit value-bound context to scalar defaults and candidates. Validation
+and profile export support it; the importer currently leaves context unset.
+Populate context only from inspected directory, scope, prerequisite, and source
+facts. Missing context remains unassessed. Command screening is heuristic, not a
+sandbox or proof of execution.
 Sandbox verification is not a routine implemented crawler stage.
 
 ## Scoring and publication gates
@@ -150,19 +154,10 @@ report, and subsequent tiers may run within the same attempt budget. Unknown
 usage is not estimated. Logs are separate from aggregate batch token telemetry.
 Historical model results and frozen benchmark inputs remain unchanged.
 
-The [October 4 integration canary](../benchmarks/model-adjudication/2026-10-04/requests.json)
-retains three synthetic cases, both prompt revisions, and the initial and follow-up
-results. Luna passed all three initial cases. GLM first chose a broader command
-without evidence of primacy; after clarifying the abstention rule it passed all
-three. Muse was rejected before inference by the configured account's paid-model
-training restriction. Muse was then removed from the active configuration in
-favor of Qwen3.8 Flash, preserving the account policy. These
-small provider checks do not establish real-repository accuracy or consumer proof.
-The [Qwen second-opinion follow-up](../benchmarks/model-adjudication/2026-10-04/qwen-second-opinion-reasoning-canary.json)
-passed all three cases using the bounded reasoning profile. Its initial run without
-reasoning conservatively abstained on the normal-CI-versus-release case; that
-[initial result](../benchmarks/model-adjudication/2026-10-04/qwen-second-opinion-canary.json)
-is also retained.
+Provider selection evidence and the dated July ladder proof live in the
+[escalation canary guide](m1-escalation-canary.md). Synthetic provider checks
+establish integration behavior; they do not replace real-repository quality or
+consumer evaluation. Retain unsuccessful attempts when changing models or prompts.
 
 ### Optional synthesis
 
@@ -212,6 +207,16 @@ uv run python scripts/refresh_stale_index.py --limit 1000 \
 Catch-up uses four workers, isolated worker state, and validation after each
 50-record cohort; models and discovery are disabled. Credentials must already
 be configured. Record timestamps change only after actual crawls.
+
+### Concurrent operator work
+
+Assign one owner to index writeback, crawler state, and telemetry publication for
+an overlapping repository set. Parser and provider agents can develop against
+isolated fixtures while that owner performs freshness catch-up. Partition any
+concurrent live batches by repository identity, use separate output/state roots,
+and integrate reports before validating the combined index. A per-record lock
+prevents overlapping persistence; it does not coordinate batch budgets, telemetry,
+or deployment. The coordinator owns exact-commit landing and publication.
 
 ### Scheduled enablement and landing
 

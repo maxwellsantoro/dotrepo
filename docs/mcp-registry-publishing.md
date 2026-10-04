@@ -1,14 +1,18 @@
 # MCP registry publishing
 
-dotrepo's MCP server is listed in the official MCP registry
+The release workflow publishes dotrepo's MCP server to the official MCP registry
 (`registry.modelcontextprotocol.io`) as `io.github.maxwellsantoro/dotrepo`,
-distributed as an MCPB bundle attached to GitHub releases. This is part of the
+distributed as an MCPB bundle attached to GitHub releases. Verify the live listing
+with the command below before reporting its version or availability. This is part of the
 distribution workstream in [`ROADMAP.md`](../ROADMAP.md): the lookup surface
 has to live where agent builders discover tools.
 
 ## How a release reaches the registry
 
-Publishing is fully automated on version tags; no stored secrets are involved.
+Registry publishing is automated on version tags through GitHub OIDC, without
+stored registry credentials. Release preparation can run alongside other roadmap
+work; assign tag, release-asset upload, and registry publication to one owner.
+A merged maintenance candidate does not trigger publication.
 
 1. Pushing a `v*` tag runs `.github/workflows/release-artifacts.yml` as before:
    per-platform binary tarballs and the VSIX are built and attached to the

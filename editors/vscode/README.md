@@ -32,7 +32,7 @@ repository root.
 
 ## Non-goals
 
-The first release does **not** provide:
+The current extension does **not** provide:
 
 - managed-region marker authoring
 - README, `SECURITY.md`, `CODEOWNERS`, or `evidence.md` semantic editing
@@ -58,7 +58,7 @@ default.
 One workable local path is:
 
 ```bash
-cargo build -p dotrepo-lsp -p dotrepo-cli
+cargo build --locked -p dotrepo-lsp -p dotrepo-cli
 export PATH="/path/to/dotrepo/target/debug:$PATH"
 ```
 
@@ -66,7 +66,11 @@ Then, in this `editors/vscode/` directory:
 
 ```bash
 npm ci
+npm test
 ```
+
+The Node tests cover extension lifecycle and command behavior without launching
+VS Code. The coordinator's complete release gate verifies VSIX packaging.
 
 Open the `editors/vscode/` folder in VS Code and run the extension in an
 Extension Development Host.

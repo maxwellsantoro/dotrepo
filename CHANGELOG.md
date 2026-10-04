@@ -15,6 +15,10 @@ generated growth, coverage, promotion, and telemetry artifacts own live values.
 
 ### Documentation maintenance
 
+- Replace the serial roadmap queue with dependency-ready work packets, explicit
+  outcome joins, and a bounded consumer checkpoint. Add a coordinator/worker
+  execution guide and project skill; consolidate repeated runbooks, correct
+  source-only stable release guidance, and protect historical benchmark outputs.
 - Consolidate the roadmap around current proof priorities, clarify version and
   authority boundaries in agent guidance, and reconcile operator/public guides
   with tested automatic landing, compact hosted search, and consumer policy.

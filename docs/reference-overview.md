@@ -66,7 +66,7 @@ selected repository. Use `dotrepo validate-index` for descendant
 descendant candidates when resolving conflict-aware answers.
 
 Supported generated Markdown regions include README, SECURITY, and CONTRIBUTING.
-CODEOWNERS can be fully generated but is not partially managed. See
+CODEOWNERS and PR templates support full generation only. See
 [sync boundaries](sync-boundaries.md) and the
 [maintainer guide](maintainer-happy-path.md) before adopting an existing file.
 
@@ -108,7 +108,7 @@ calibration remain deferred. See [the roadmap](../ROADMAP.md).
 ## Source inventory
 
 - Rust workspace: `dotrepo-schema`, `dotrepo-core`, `dotrepo-cli`, `dotrepo-mcp`,
-  `dotrepo-lsp`, `dotrepo-crawler`, and shared internal `dotrepo-transport`
+  `dotrepo-lsp`, internal `dotrepo-crawler`, and shared `dotrepo-transport`
 - Current development alias package: [`crates/dotrepo/`](../crates/dotrepo/)
 - [VS Code extension](../editors/vscode/) and [native/overlay examples](../examples/)
 - [Crawler](../crates/dotrepo-crawler/README.md) for discovery, verification,

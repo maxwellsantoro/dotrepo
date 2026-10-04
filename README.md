@@ -126,5 +126,9 @@ files and regions dotrepo can manage.
 - [Trust model](docs/trust-model.md) and [authority rules](rfcs/0004-index-and-trust-model.md)
 - [Roadmap](ROADMAP.md), [contributing](CONTRIBUTING.md), and [index operations](index/README.md)
 
+For implementation, start with the [roadmap packets](ROADMAP.md#active-execution-order)
+and [team execution guide](docs/agent-execution.md). [Repository guidance](AGENTS.md)
+owns contracts; generated reports and dated archives own outcome evidence.
+
 Repository Python tooling uses `uv`: run `uv venv`, `uv sync --dev --locked`,
 then invoke scripts and tests through `uv run`.

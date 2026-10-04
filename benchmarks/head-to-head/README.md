@@ -44,12 +44,16 @@ actual model usage, upstream fallback, and allocated index maintenance.
 
 Run these commands from `benchmarks/head-to-head/`; `uv` discovers the repository
 environment. Frozen result directories are historical artifacts; choose a new
-output directory for a fresh run.
+output directory for a fresh run. Create a new scratch root for these examples;
+copy reviewed run artifacts into a new dated directory only after the run.
 
 ```bash
+BENCH_RUN_ROOT=$(mktemp -d /tmp/dotrepo-bench.XXXXXX)
+
 # live run (needs a token: unauthenticated GitHub is 60 req/hr and will starve)
 GITHUB_TOKEN=$(gh auth token) uv run --with requests --with pyyaml python -m bench.run \
-  --gold gold.yaml --arms github,dotrepo --base-url https://dotrepo.org --out results
+  --gold gold.yaml --arms github,dotrepo --base-url https://dotrepo.org \
+  --out "$BENCH_RUN_ROOT/live"
 
 # stronger baseline: let an LLM read the READMEs instead of regex.
 # Local runs automatically load dotrepo/.env; OPENROUTER_API_KEY is preferred.
@@ -57,7 +61,7 @@ GITHUB_TOKEN=$(gh auth token) uv run --with requests --with pyyaml python -m ben
 # silently falls back to the heuristic extractor.
 uv run --with requests --with pyyaml python -m bench.run \
   --gold gold.yaml --arms github,dotrepo --extractor llm \
-  --base-url https://dotrepo.org --out results/llm-2026-07-05
+  --base-url https://dotrepo.org --out "$BENCH_RUN_ROOT/llm"
 ```
 
 Set `OPENROUTER_MODEL` to override the OpenRouter model for this benchmark; if
@@ -77,7 +81,7 @@ answers; these logs do not change historical wire-byte estimates into token cost
 The direct Anthropic fallback defaults to `claude-sonnet-5-5`, with adaptive
 thinking and low effort. Historical frozen results retain their original models.
 
-Output: `results/report.md` (the table) and `results/results.json` (every
+Output: `<out>/report.md` (the table) and `<out>/results.json` (every
 per-field row with value, confidence, source, bytes, latency, cohort, and gold
 evidence — auditable).
 
@@ -95,8 +99,8 @@ GITHUB_TOKEN=$(gh auth token) uv run --with requests --with pyyaml python -m ben
   --gold gold.independent.yaml --arms github,dotrepo --extractor llm \
   --base-url https://dotrepo.org \
   --cache-mode freeze \
-  --cache-dir results/independent-holdout-2026-07-06/fixtures \
-  --out results/independent-holdout-2026-07-06
+  --cache-dir "$BENCH_RUN_ROOT/independent/fixtures" \
+  --out "$BENCH_RUN_ROOT/independent"
 ```
 
 The baseline probes common real-world source variants (`README.rst`,
@@ -114,8 +118,12 @@ scores, not historical timing.
 ### Frozen fixtures (reproducible artifact)
 
 ```bash
-uv run --with requests --with pyyaml python -m bench.run --gold gold.yaml --cache-mode freeze
-uv run --with requests --with pyyaml python -m bench.run --gold gold.yaml --cache-mode replay
+uv run --with requests --with pyyaml python -m bench.run --gold gold.yaml \
+  --cache-mode freeze --cache-dir "$BENCH_RUN_ROOT/frozen/fixtures" \
+  --out "$BENCH_RUN_ROOT/frozen"
+uv run --with requests --with pyyaml python -m bench.run --gold gold.yaml \
+  --cache-mode replay --cache-dir "$BENCH_RUN_ROOT/frozen/fixtures" \
+  --out "$BENCH_RUN_ROOT/replay"
 ```
 
 Commit the fixture dir and a regression becomes a frozen record you can diff and
@@ -178,12 +186,16 @@ independent indexed thesis result does not.
 
 ### Offline self-test
 
+Replay the checked-in synthetic fixtures without regenerating their inputs.
+`seed_fixtures.py` rewrites `results/fixtures` and `gold.fixture.yaml`; reserve it
+for intentional fixture maintenance.
+
 ```bash
-uv run --with pyyaml python seed_fixtures.py
-uv run --with requests --with pyyaml python -m bench.run --gold gold.fixture.yaml --cache-mode replay --cache-dir results/fixtures
+uv run --with requests --with pyyaml python -m bench.run --gold gold.fixture.yaml \
+  --cache-mode replay --cache-dir results/fixtures --out "$BENCH_RUN_ROOT/self-test"
 ```
 
-The seeded scenario makes dotrepo confidently wrong on one field on purpose; the
+The synthetic scenario makes dotrepo confidently wrong on one field on purpose; the
 report should show `confidently wrong (count) | 1` for the dotrepo arm. If it
 doesn't, the scorer is broken.
 
@@ -220,7 +232,7 @@ its work. Both arms use the same extractor setting. No returned command is run.
 ```bash
 uv run python -m bench.run --gold gold.independent.yaml \
   --arms github,lookup-first --extractor heuristic --base-url https://dotrepo.org \
-  --out results/consumer-pilot
+  --out "$BENCH_RUN_ROOT/consumer-pilot"
 ```
 
 `transport.request_count` and `transport.response_bytes` count actual HTTP work,

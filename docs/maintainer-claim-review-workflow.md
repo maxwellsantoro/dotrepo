@@ -4,6 +4,7 @@ This doc describes the first Git-native maintainer-claim review loop for index
 operators.
 
 It assumes:
+
 - the index root is available locally
 - the target repository already exists under `repos/<host>/<owner>/<repo>/`
 - reviewers use the current CLI helpers rather than hand-editing claim files by
@@ -100,15 +101,11 @@ The first command shows current state, claimant, target, derived handoff, and
 event history. The second confirms the claim directory still satisfies layout,
 identity, event ordering, and handoff rules.
 
-The operator gate script writes inspectable reports for the accepted, corrected,
-and invalid-history fixture paths under `operator-gate/`, and it stages one
-accepted-handoff example with canonical links through `public export`.
-The live index also includes
-`repos/github.com/maxwellsantoro/ries-rs/claims/2026-03-16-maintainer-claim-01/`
-as a checked-in accepted claim that was later corrected to link the published
-upstream `.repo`, so the release bar is not just "tests pass" but "the
-documented reviewer and public surfaces still look right on both live and
-staged claim paths."
+The operator gate writes inspectable accepted, corrected, and invalid-history
+fixture reports, and stages an accepted handoff through public export. The
+[index examples](../index/README.md#reference-examples) link checked-in claim
+evidence. A fixture pass or operator-owned claim is not independent maintainer
+adoption proof.
 
 ### 5. Record the terminal review outcome
 

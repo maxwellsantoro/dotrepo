@@ -12,6 +12,12 @@ snapshot:
 
 ## Local workflow
 
+For a Worker-only change, run `npm ci` and `npm test` in this directory first.
+Use the lightweight public gate to review export integration; the coordinator
+runs complete packaging on the integrated change as required by
+[CONTRIBUTING](../../CONTRIBUTING.md#local-checks). Concurrent agents use separate
+export/staging roots; only the deployment owner writes the shared staged snapshot.
+
 1. Generate or refresh a public export.
 2. Stage that export into `public-snapshot/`.
 3. Run tests or `wrangler dev`.
@@ -19,10 +25,10 @@ snapshot:
 Typical commands from the repo root:
 
 ```bash
-uv run python scripts/check_release_gate.py --skip-vsix
+uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-worker-review --skip-release-bundle --skip-vsix
 
 uv run python scripts/sync_cloudflare_public_snapshot.py \
-  --input release-gate/public \
+  --input /tmp/dotrepo-worker-review/public \
   --output cloudflare/hosted-query/public-snapshot
 
 cd cloudflare/hosted-query

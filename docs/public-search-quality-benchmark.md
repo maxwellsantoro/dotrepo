@@ -22,8 +22,8 @@ The report includes:
 - task success rate: all expected repositories appear within each task limit
 - mean reciprocal rank and average first expected rank
 - candidate profile count and searched profile bytes
-- inventory-only versus profile-fanout task counts and rates, mirroring the
-  hosted Worker's cheaper text-query path
+- inventory-only versus profile-fanout task counts and rates from the
+  legacy retrieval model rather than the current Worker's asset reads
 - inventory bytes and profile bytes per fanout task
 - snapshot freshness summary from the evaluated profiles
 - optional pass/fail gates for success rate, MRR, and first-rank ceiling

@@ -1,6 +1,10 @@
 # Milestone 1: escalation ladder canary
 
-## Status
+This guide separates a dated live ladder proof from current provider integration.
+Use [crawl operations](factual-crawl-automation.md#model-integration-and-budgets)
+for active configuration, attempt budgets, and publication gates.
+
+## Retained ladder proof (July 2026)
 
 | Tier | Proof status |
 |------|----------------|
@@ -17,6 +21,26 @@ recorded in [the retained canary](../index/telemetry/m1-second-opinion-canary-20
 and automated as
 `second_opinion_live_ladder_from_low_confidence_primary` in
 `crates/dotrepo-crawler/tests/openrouter_env_escalation.rs`.
+
+## Current provider integration (October 4, 2026)
+
+The active local sample selects Luna primary, Qwen3.8 Flash second opinion, and
+GLM5.3 Flash tail. Hosted scheduled tiers still require explicit repository
+variables and credentials; sample configuration does not enable them.
+
+The [retained integration requests](../benchmarks/model-adjudication/2026-10-04/requests.json)
+cover three synthetic candidate-selection cases. Luna passed all three initial
+cases. GLM initially chose a broader command without primacy evidence, then passed
+all three after the abstention rule was clarified. Qwen initially abstained on
+normal CI versus release; its [bounded-reasoning follow-up](../benchmarks/model-adjudication/2026-10-04/qwen-second-opinion-reasoning-canary.json)
+passed all three. The [initial Qwen result](../benchmarks/model-adjudication/2026-10-04/qwen-second-opinion-canary.json)
+remains retained. Muse was rejected before inference by the account's paid-model
+training restriction and is excluded from active configuration.
+
+These checks establish provider/request compatibility on the retained cases.
+They do not establish a live three-tier crawler run, independent factual accuracy,
+or complete-task savings. A coordinator can run offline policy tests alongside
+parser work; live canaries need one owner and a bounded shared spend budget.
 
 ## Why confident abstention is not enough
 
@@ -58,7 +82,9 @@ proof that tier-3/4 ran.
 
 5. **Record** — append a short note under
    `index/telemetry/` (or the batch output dir) with repository identity,
+   revision, run time, actual model/provider IDs, request policy, token/cost usage,
    tier list, and whether the final value was resolved vs honest abstention.
+   Preserve failures and unavailable usage; do not infer a tier from configuration.
 
 ## Automated canary (preferred)
 

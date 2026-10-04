@@ -34,6 +34,14 @@ not a sandbox boundary, when adding write flows.
 - Keep trust, provenance, and conflict surfacing explicit. dotrepo should not
   silently flatten competing records or overstate confidence.
 
+## Coordinated implementation
+
+Use the [roadmap's execution plan](ROADMAP.md#active-execution-order) to select
+ready work and [the execution guide](docs/agent-execution.md) for packet dispatch,
+single-writer ownership, handoffs, and integration. Workers run focused checks;
+the coordinator runs the required gates on the combined result. External consent,
+publication, and observed operating history remain distinct evidence gates.
+
 ## Local checks
 
 Create the locked Python environment before running repository tooling. All
@@ -45,7 +53,8 @@ uv sync --dev --locked
 uv run pytest
 ```
 
-Run the core workspace checks:
+Start with the affected crate, fixture pack, or script tests while editing.
+Before integrating a toolchain change, run the core workspace checks:
 
 ```bash
 cargo fmt --all -- --check
@@ -68,29 +77,42 @@ The workflow supplies the check; merge enforcement requires repository settings.
 Passing the local list covers the core checks; it does not establish that every
 CI job or release artifact passes.
 
-If you touched the maintainer flow or generated surfaces, also run:
+The integration checks follow the changed scope:
+
+| Changed scope | Additional checks |
+| --- | --- |
+| Maintainer flow or generated surfaces | Native validation, query, trust, doctor, and `generate --check` below |
+| Index records, claims, or evidence | `validate-index`; operator gate for claims or evidence semantics |
+| Index-only public output | Lightweight public gate: `--skip-release-bundle --skip-vsix` |
+| Public export, hosted surface, release packaging, docs/RFCs, or toolchain | Complete release gate; include VSIX for packaging completion |
+| Standalone alias | Locked alias check; the package is excluded from workspace checks |
 
 ```bash
+# Maintainer surface checks
 cargo run -p dotrepo-cli -- --root examples/native-minimal validate
 cargo run -p dotrepo-cli -- --root examples/native-minimal query repo.build --raw
 cargo run -p dotrepo-cli -- --root examples/native-minimal trust
 cargo run -p dotrepo-cli -- --root examples/native-minimal doctor
 cargo run -p dotrepo-cli -- --root examples/native-minimal generate --check
-```
 
-If you touched the public index, claims, or evidence rules, also run:
-
-```bash
+# Index and operator checks
 cargo run -p dotrepo-cli -- validate-index --index-root index
 uv run python scripts/check_operator_claim_gate.py --output-root /tmp/dotrepo-operator-gate
+
+# Complete packaging and public checks
+uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate
+
+# Standalone alias checks
+cargo fmt --manifest-path crates/dotrepo/Cargo.toml -- --check
+cargo check --locked --manifest-path crates/dotrepo/Cargo.toml
 ```
 
-If you touched public export, release packaging, or the hosted public surface,
-also run:
-
-```bash
-uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
-```
+Use a task-specific output root for each concurrent export or operator gate.
+A local `--skip-vsix` run is useful during iteration; record the omission and run
+the complete gate before calling release packaging complete. The exact CI scope
+classifier in [ci.yml](.github/workflows/ci.yml) governs required merge checks;
+root-only documentation can take the minimal path, while `docs/` and `rfcs/`
+currently select Rust and full release validation.
 
 ## Public index contributions
 

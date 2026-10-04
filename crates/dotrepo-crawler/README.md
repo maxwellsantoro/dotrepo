@@ -50,12 +50,22 @@ uv run python scripts/run_autonomous_index_batch.py \
   --output-dir /tmp/dotrepo-autonomous-batch
 ```
 
+## Concurrent work
+
+Separate ownership for GitHub/materialization, pipeline/verification, providers,
+and reports/tests. Preserve the core facade and crawler command wiring; name one
+owner for changes to shared orchestration. Develop with offline fixtures before
+live canaries. Partition live batches by repository identity and use independent
+state/output paths; writeback locks do not coordinate telemetry or model budgets.
+The coordinator validates the combined index and owns landing/publication.
+
 ## Related documentation
 
 - [`docs/factual-crawl-automation.md`](../../docs/factual-crawl-automation.md) — pipeline design and gates
 - [`index/README.md`](../../index/README.md) — overlay layout and autonomous rules
 - [`ROADMAP.md`](../../ROADMAP.md) — Milestone 1 factory and Milestone 4 scale gates
-### Refresh and writeback integrity
+
+## Refresh and writeback integrity
 
 Repository content reads use the captured head commit, and a missing head SHA
 aborts the crawl. Fresh field scores determine promotion to verified; a previous
