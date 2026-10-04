@@ -1,6 +1,12 @@
 import importlib.util
+import json
+import subprocess
+import sys
 from pathlib import Path
 
+import pytest
+
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 SCRIPT = Path(__file__).resolve().parents[1] / "archive_public_snapshot_r2.py"
 SPEC = importlib.util.spec_from_file_location("archive_public_snapshot_r2", SCRIPT)
@@ -56,3 +62,43 @@ def test_upload_command_marks_snapshot_log_mutable(tmp_path: Path) -> None:
     command = archive.upload_command("dotrepo-archive", public_root, path)
 
     assert command[command.index("--cache-control") + 1] == "no-cache"
+
+
+def test_archive_retains_remote_history_and_uploads_log_last(tmp_path: Path, monkeypatch) -> None:
+    public_root = tmp_path / "public"
+    snapshot = public_root / "v0/snapshots/current"
+    snapshot.mkdir(parents=True)
+    (snapshot / "files.json").write_text("{}")
+    current = {"snapshotId": "current", "generatedAt": "2026-10-03T12:00:00Z"}
+    previous = {"snapshotId": "previous", "generatedAt": "2026-10-02T12:00:00Z"}
+    (public_root / "v0/snapshots/log.json").write_text(json.dumps({"entries": [current]}))
+    monkeypatch.setattr(archive, "read_archive_log", lambda *_: {"entries": [previous]})
+    uploaded = []
+
+    def upload(command, **kwargs):
+        uploaded.append((command[5], Path(command[command.index("--file") + 1]).read_text()))
+
+    monkeypatch.setattr(archive.subprocess, "run", upload)
+    assert archive.archive_snapshots(public_root, "archive", tmp_path) == 2
+    assert uploaded[-1][0] == "archive/v0/snapshots/log.json"
+    assert json.loads(uploaded[-1][1])["entries"] == [previous, current]
+    with pytest.raises(ValueError, match="omits archive history"):
+        archive.archive_snapshots(public_root, "archive", tmp_path, require_complete_history=True)
+
+
+def test_archive_read_treats_only_a_missing_object_as_empty(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(
+        archive.subprocess,
+        "run",
+        lambda *_args, **_kwargs: subprocess.CompletedProcess([], 1, "", "Authentication error"),
+    )
+    with pytest.raises(RuntimeError, match="Authentication error"):
+        archive.read_archive_log("archive", tmp_path)
+    monkeypatch.setattr(
+        archive.subprocess,
+        "run",
+        lambda *_args, **_kwargs: subprocess.CompletedProcess(
+            [], 1, "", "The specified key does not exist."
+        ),
+    )
+    assert archive.read_archive_log("archive", tmp_path) == {}

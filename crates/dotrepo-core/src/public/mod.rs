@@ -1,5 +1,6 @@
 use anyhow::{anyhow, bail, Result};
 use std::{
+    collections::HashSet,
     fs,
     path::{Path, PathBuf},
 };
@@ -352,6 +353,7 @@ pub fn list_index_repository_identities(
     record_dirs.sort();
 
     let mut identities = Vec::new();
+    let mut identity_keys = HashSet::new();
     for record_dir in record_dirs {
         let relative = match record_dir.strip_prefix(&repos_root) {
             Ok(relative) => relative,
@@ -370,14 +372,11 @@ pub fn list_index_repository_identities(
             repo: segments[2].clone(),
             source: None,
         };
-        if !identities
-            .iter()
-            .any(|existing: &PublicRepositoryIdentity| {
-                existing.host == identity.host
-                    && existing.owner == identity.owner
-                    && existing.repo == identity.repo
-            })
-        {
+        if identity_keys.insert((
+            identity.host.clone(),
+            identity.owner.clone(),
+            identity.repo.clone(),
+        )) {
             identities.push(identity);
         }
     }

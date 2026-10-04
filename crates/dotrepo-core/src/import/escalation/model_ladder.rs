@@ -51,16 +51,18 @@ pub(crate) fn run_model_escalation(
                 continue;
             };
 
+            // Failed requests may still incur model spend, so every attempted
+            // provider invocation consumes the shared cap and is reported.
+            remaining_calls -= 1;
+            report.model_calls += 1;
+            if !report.adjudication_tiers_used.contains(&tier) {
+                report.adjudication_tiers_used.push(tier);
+            }
             let provider_response = match provider.adjudicate(&request) {
                 Ok(response) => response,
                 Err(_) => continue,
             };
-            remaining_calls -= 1;
-            report.model_calls += 1;
             report.tokens_used += provider_response.tokens_used;
-            if !report.adjudication_tiers_used.contains(&tier) {
-                report.adjudication_tiers_used.push(tier);
-            }
 
             let result = apply_adjudication_response(&provider_response.response, &request);
             let is_low_confidence =

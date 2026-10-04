@@ -200,7 +200,7 @@ jobs:
         # workflow performs the real publish at tag time.
         run: |
           cargo fmt --manifest-path crates/dotrepo/Cargo.toml -- --check
-          cargo check --manifest-path crates/dotrepo/Cargo.toml
+          cargo check --locked --manifest-path crates/dotrepo/Cargo.toml
       - name: Smoke test MCP stdio server
         run: |
           uv run python - <<'PY'

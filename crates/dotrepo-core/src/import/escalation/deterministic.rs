@@ -216,23 +216,43 @@ pub fn apply_adjudication_to_import_plan(
     escalation_label: &str,
 ) {
     for (request, result) in requests.iter().zip(results.iter()) {
+        // These helpers are public, so do not assume every result came through
+        // the model-response post-check or that callers preserved its pairing.
+        if result.field != request.field
+            || !matches!(
+                request.field.as_str(),
+                "repo.build" | "repo.test" | "repo.name" | "repo.description"
+            )
+        {
+            continue;
+        }
         match &result.outcome {
             AdjudicationOutcome::Resolved { value, .. } => {
-                let is_command_field = result.field == "repo.build" || result.field == "repo.test";
+                // Derive evidence and provenance from the strongest grounded
+                // source for this value, including when multiple sources agree.
+                let Some(candidate) = ESCALATION_TIERS.iter().find_map(|tier| {
+                    request.candidates.iter().find(|candidate| {
+                        candidate.value == *value && candidate.source_tier == *tier
+                    })
+                }) else {
+                    continue;
+                };
+                let is_command_field =
+                    request.field == "repo.build" || request.field == "repo.test";
                 let safe_value = if is_command_field {
                     match sanitize_import_command(value) {
                         Some(command) => command,
                         None => {
-                            if result.field == "repo.build" {
+                            if request.field == "repo.build" {
                                 plan.manifest.repo.build = None;
                                 plan.command_candidates.selected_build = None;
-                            } else if result.field == "repo.test" {
+                            } else if request.field == "repo.test" {
                                 plan.manifest.repo.test = None;
                                 plan.command_candidates.selected_test = None;
                             }
                             if let Some(ref mut evidence) = plan.evidence_text {
                                 evidence.push_str("\n- Left `");
-                                evidence.push_str(&result.field);
+                                evidence.push_str(&request.field);
                                 evidence.push_str("` unset after ");
                                 evidence.push_str(escalation_label);
                                 evidence.push_str(
@@ -246,18 +266,8 @@ pub fn apply_adjudication_to_import_plan(
                 } else {
                     value.clone()
                 };
-                let source_path = request
-                    .candidates
-                    .iter()
-                    .find(|candidate| candidate.value == *value)
-                    .map(|candidate| candidate.source_path.clone())
-                    .unwrap_or_else(|| "adjudicated".into());
-                let source_tier = request
-                    .candidates
-                    .iter()
-                    .find(|candidate| candidate.value == *value)
-                    .map(|candidate| candidate.source_tier)
-                    .unwrap_or(CommandSourceTier::Workflow);
+                let source_path = candidate.source_path.clone();
+                let source_tier = candidate.source_tier;
                 let provenance = if matches!(
                     source_tier,
                     CommandSourceTier::GitHubApi
@@ -277,39 +287,39 @@ pub fn apply_adjudication_to_import_plan(
                 };
                 let bullet = format!(
                     "Set `{}` to `{}` from `{}` after {} escalation.",
-                    result.field, safe_value, source_path, escalation_label
+                    request.field, safe_value, source_path, escalation_label
                 );
-                if result.field == "repo.build" {
+                if request.field == "repo.build" {
                     plan.manifest.repo.build = Some(safe_value);
                     plan.command_candidates.selected_build = Some(selection);
-                } else if result.field == "repo.test" {
+                } else if request.field == "repo.test" {
                     plan.manifest.repo.test = Some(safe_value);
                     plan.command_candidates.selected_test = Some(selection);
-                } else if result.field == "repo.name" {
+                } else if request.field == "repo.name" {
                     plan.manifest.repo.name = safe_value;
-                } else if result.field == "repo.description" {
+                } else if request.field == "repo.description" {
                     plan.manifest.repo.description = safe_value;
                 }
                 if let Some(ref mut evidence) = plan.evidence_text {
                     evidence.push_str("\n- ");
                     evidence.push_str(&bullet);
                 }
-                note_trust_resolution(plan, &result.field, &source_path, escalation_label);
+                note_trust_resolution(plan, &request.field, &source_path, escalation_label);
             }
             AdjudicationOutcome::Absent { reason } => {
                 let preserved_candidates = distinct_command_candidates(&request.candidates);
-                if result.field == "repo.build" {
+                if request.field == "repo.build" {
                     plan.manifest.repo.build = None;
                     plan.command_candidates.selected_build = None;
                     plan.manifest.repo.build_candidates = preserved_candidates.clone();
-                } else if result.field == "repo.test" {
+                } else if request.field == "repo.test" {
                     plan.manifest.repo.test = None;
                     plan.command_candidates.selected_test = None;
                     plan.manifest.repo.test_candidates = preserved_candidates.clone();
                 }
                 if let Some(ref mut evidence) = plan.evidence_text {
                     evidence.push_str("\n- Left `");
-                    evidence.push_str(&result.field);
+                    evidence.push_str(&request.field);
                     evidence.push_str("` unset after ");
                     evidence.push_str(escalation_label);
                     evidence.push_str(" escalation: ");
@@ -319,7 +329,7 @@ pub fn apply_adjudication_to_import_plan(
                         evidence.push_str(" Preserved ");
                         evidence.push_str(&preserved_candidates.len().to_string());
                         evidence.push_str(" candidate command(s) in `");
-                        evidence.push_str(&result.field);
+                        evidence.push_str(&request.field);
                         evidence.push_str("_candidates` instead of discarding them.");
                     }
                 }

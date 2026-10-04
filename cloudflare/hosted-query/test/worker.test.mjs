@@ -69,6 +69,108 @@ function makeR2Archive(files) {
   };
 }
 
+test("resolves GitHub casing across static, immutable, query and batch routes", async () => {
+  const fixtureRoot = ["crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public"];
+  const meta = await readJson(...fixtureRoot, "v0", "meta.json");
+  const root = meta.paths.root;
+  const identity = { host: "github.com", owner: "BurntSushi", repo: "CodeTool" };
+  const files = new Map([["/v0/meta.json", JSON.stringify(meta)]]);
+  const inventory = await readJson(...fixtureRoot, "v0", "repos", "index.json");
+  inventory.repositories = [{ identity }];
+  files.set(`${root}/repos/index.json`, JSON.stringify(inventory));
+  for (const leaf of ["index.json", "profile.json", "trust.json", "relations.json"]) {
+    const payload = await readJson(...fixtureRoot, "v0", "repos", "github.com", "example", "orbit", leaf);
+    payload.identity = identity;
+    files.set(`${root}/repos/github.com/BurntSushi/CodeTool/${leaf}`, JSON.stringify(payload));
+  }
+  const query = await readJson(...fixtureRoot, "query-input", "github.com", "example", "orbit.json");
+  query.identity = identity;
+  files.set(`${root}/query-input/github.com/BurntSushi/CodeTool.json`, JSON.stringify(query));
+  const assets = makeAssets(files);
+  let inventoryReads = 0;
+  const env = {
+    ASSETS: {
+      async fetch(input) {
+        if (new URL(input instanceof Request ? input.url : input.toString()).pathname === `${root}/repos/index.json`) {
+          inventoryReads++;
+        }
+        return assets.fetch(input);
+      }
+    },
+    BASE_PATH: "/dotrepo"
+  };
+  const misses = [];
+  const originalLog = console.log;
+  console.log = (line) => misses.push(line);
+  try {
+    for (const leaf of ["index.json", "profile.json", "trust.json", "relations.json"]) {
+      for (const prefix of ["/v0", root]) {
+        const response = await handleRequest(new Request(
+          `https://example.test/dotrepo${prefix}/repos/GITHUB.COM/burntsushi/codetool/${leaf}`
+        ), env);
+        assert.equal(response.status, 200, `${prefix}/${leaf}`);
+        assert.deepEqual((await response.json()).identity, identity);
+      }
+    }
+    for (const suffix of ["query?path=repo.name", "relations"]) {
+      const response = await handleRequest(new Request(
+        `https://example.test/dotrepo/v0/repos/github.com/burntsushi/CODETOOL/${suffix}`
+      ), env);
+      assert.equal(response.status, 200, suffix);
+      assert.deepEqual((await response.json()).identity, identity);
+    }
+    for (const suffix of ["batch/profiles", "batch/query", "compare"]) {
+      const response = await handleRequest(new Request(
+        `https://example.test/dotrepo/v0/${suffix}?repo=GITHUB.COM/BURNTSUSHI/codetool&path=repo.name`
+      ), env);
+      assert.equal(response.status, 200, suffix);
+      const payload = await response.json();
+      assert.equal(payload.results[0].error, undefined);
+      assert.deepEqual(payload.results[0].identity, identity);
+    }
+    const privateInput = await handleRequest(new Request(
+      `https://example.test/dotrepo${root}/query-input/GITHUB.COM/burntsushi/codetool.json`
+    ), env);
+    assert.equal(privateInput.status, 404);
+    assert.equal(inventoryReads, 1);
+    assert.deepEqual(misses, []);
+  } finally {
+    console.log = originalLog;
+  }
+});
+
+test("keeps non-GitHub repository paths case sensitive", async () => {
+  const meta = { paths: { root: "/v0/snapshots/example" } };
+  const files = new Map([
+    ["/v0/meta.json", JSON.stringify(meta)],
+    ["/v0/snapshots/example/repos/gitlab.com/Mixed/Repo/profile.json", "{}"]
+  ]);
+  const originalLog = console.log;
+  console.log = () => {};
+  try {
+    const response = await handleRequest(new Request(
+      "https://example.test/v0/repos/gitlab.com/mixed/repo/profile.json"
+    ), { ASSETS: makeAssets(files) });
+    assert.equal(response.status, 404);
+  } finally {
+    console.log = originalLog;
+  }
+});
+
+test("resolves GitHub casing from the inventory of an archived snapshot", async () => {
+  const identity = { host: "github.com", owner: "MixedOwner", repo: "MixedRepo" };
+  const archived = new Map([
+    ["v0/snapshots/older/repos/index.json", JSON.stringify({ repositories: [{ identity }] })],
+    ["v0/snapshots/older/repos/github.com/MixedOwner/MixedRepo/profile.json", JSON.stringify({ identity })]
+  ]);
+  const response = await handleRequest(new Request(
+    "https://example.test/v0/snapshots/older/repos/github.com/mixedowner/mixedrepo/profile.json"
+  ), { ASSETS: makeAssets(new Map()), SNAPSHOT_ARCHIVE: makeR2Archive(archived) });
+  assert.equal(response.status, 200);
+  assert.deepEqual((await response.json()).identity, identity);
+  assert.equal(response.headers.get("x-dotrepo-snapshot-source"), "archive");
+});
+
 test("serves query responses from exported query-input fixtures", async () => {
   const files = new Map([
     [

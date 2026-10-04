@@ -138,7 +138,7 @@ impl DocumentIndex {
                 .or_insert_with(|| byte_span_to_range(text, child.span.start, child.span.end));
 
             if child.as_table().is_some() {
-                if let Some(range) = section_header_range(text, key.span, child.span) {
+                if let Some(range) = section_header_range(text, &path, key.span, child.span) {
                     self.sections.entry(path.clone()).or_insert(range);
                 }
                 self.populate_from_spanned(text, Some(&path), child);
@@ -204,7 +204,12 @@ impl DocumentIndex {
     }
 }
 
-fn section_header_range(text: &str, key_span: TomlSpan, value_span: TomlSpan) -> Option<LspRange> {
+fn section_header_range(
+    text: &str,
+    path: &str,
+    key_span: TomlSpan,
+    value_span: TomlSpan,
+) -> Option<LspRange> {
     if value_span.start > key_span.start {
         return None;
     }
@@ -219,11 +224,25 @@ fn section_header_range(text: &str, key_span: TomlSpan, value_span: TomlSpan) ->
         .unwrap_or(text.len());
     let line = &text[line_start..line_end];
     let trimmed = line.trim();
-    if trimmed.starts_with('[') && trimmed.ends_with(']') {
-        Some(byte_span_to_range(text, line_start, line_end))
-    } else {
-        None
+    if !trimmed.starts_with('[') {
+        return None;
     }
+
+    // An implicit parent table can inherit its key span from a child header.
+    // Parse the header alone to distinguish [repo] from [repo.toolchain],
+    // including quoted keys and trailing comments.
+    let header = parse_toml_spanned(line).ok()?;
+    let mut table = header.as_table()?;
+    let mut components = Vec::new();
+    while table.len() == 1 {
+        let (key, value) = table.iter().next()?;
+        components.push(key.name.as_ref());
+        table = value.as_table()?;
+    }
+    if !table.is_empty() || components.join(".") != path {
+        return None;
+    }
+    Some(byte_span_to_range(text, line_start, line_end))
 }
 
 fn narrowest_path_match(paths: &BTreeMap<String, LspRange>, position: LspPosition) -> Option<&str> {

@@ -576,6 +576,19 @@ pub fn apply_adjudication_response(
     response: &AdjudicationModelResponse,
     request: &AdjudicationRequest,
 ) -> AdjudicationResult {
+    if response.field != request.field {
+        return AdjudicationResult {
+            field: request.field.clone(),
+            outcome: AdjudicationOutcome::Rejected {
+                model_value: response.value.clone().unwrap_or_default(),
+                reason: format!(
+                    "model responded for field {:?}, expected {:?}",
+                    response.field, request.field
+                ),
+            },
+        };
+    }
+
     let candidate_values: Vec<&str> = request
         .candidates
         .iter()
@@ -585,8 +598,23 @@ pub fn apply_adjudication_response(
     match &response.value {
         Some(value) => {
             if candidate_values.iter().any(|c| *c == value) {
+                if let Some(source) = &response.source {
+                    if !request.candidates.iter().any(|candidate| {
+                        candidate.value == *value && candidate.source_path == *source
+                    }) {
+                        return AdjudicationResult {
+                            field: request.field.clone(),
+                            outcome: AdjudicationOutcome::Rejected {
+                                model_value: value.clone(),
+                                reason: format!(
+                                    "model cited source {source:?} without the proposed candidate value"
+                                ),
+                            },
+                        };
+                    }
+                }
                 AdjudicationResult {
-                    field: response.field.clone(),
+                    field: request.field.clone(),
                     outcome: AdjudicationOutcome::Resolved {
                         value: value.clone(),
                         confidence: FieldConfidence::MediumConfidencePresent,
@@ -595,7 +623,7 @@ pub fn apply_adjudication_response(
                 }
             } else {
                 AdjudicationResult {
-                    field: response.field.clone(),
+                    field: request.field.clone(),
                     outcome: AdjudicationOutcome::Rejected {
                         model_value: value.clone(),
                         reason: format!(
@@ -607,7 +635,7 @@ pub fn apply_adjudication_response(
             }
         }
         None => AdjudicationResult {
-            field: response.field.clone(),
+            field: request.field.clone(),
             outcome: AdjudicationOutcome::Absent {
                 reason: response.reason.clone(),
             },
@@ -620,6 +648,12 @@ pub fn apply_adjudication_results(report: &mut FieldScoreReport, results: &[Adju
         let Some(score) = report.scores.iter_mut().find(|s| s.field == result.field) else {
             continue;
         };
+        if !matches!(
+            score.confidence,
+            FieldConfidence::Unresolved | FieldConfidence::Suspect
+        ) {
+            continue;
+        }
         match &result.outcome {
             AdjudicationOutcome::Resolved {
                 value,

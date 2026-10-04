@@ -2,6 +2,7 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
@@ -61,3 +62,12 @@ def test_merge_retains_distinct_exports_of_the_same_source(tmp_path: Path) -> No
     merge_snapshot_logs(current, previous, output)
     log = json.loads((output / "v0/snapshots/log.json").read_text())
     assert [entry["snapshotId"] for entry in log["entries"]] == ["first-payload", "second-payload"]
+
+
+def test_log_merge_rejects_changes_to_published_history() -> None:
+    from sync_cloudflare_public_snapshot import merge_log_documents
+
+    original = {"snapshotId": "published", "fileCount": 12}
+    changed = {"snapshotId": "published", "fileCount": 13}
+    with pytest.raises(ValueError, match="already published entry"):
+        merge_log_documents({"entries": [original]}, {"entries": [changed]})

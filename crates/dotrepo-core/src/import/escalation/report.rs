@@ -6,6 +6,7 @@ pub struct ImportEscalationReport {
     pub deterministic_requests: usize,
     pub deterministic_resolved: usize,
     pub security_owners_deepened: usize,
+    /// Provider invocation attempts, including failed requests and timeouts.
     pub model_calls: usize,
     pub model_resolved: usize,
     pub tokens_used: u64,

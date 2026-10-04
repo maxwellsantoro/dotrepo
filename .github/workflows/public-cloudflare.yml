@@ -86,6 +86,9 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: cloudflare/hosted-query/package-lock.json
+      - name: Install Worker dependencies
+        working-directory: cloudflare/hosted-query
+        run: npm ci
       - name: Resolve hosted base path
         id: base_path
         shell: bash
@@ -115,6 +118,23 @@ jobs:
           uv run python scripts/fetch_pagedigest_baseline.py \
             --url "$baseline_url" \
             --output "$RUNNER_TEMP/pagedigest-previous.json"
+      - name: Restore deployed snapshot and append-only history
+        shell: bash
+        env:
+          PUBLIC_STATE_BASE_URL: ${{ vars.DOTREPO_PUBLIC_STATE_BASE_URL }}
+          PUBLIC_ARCHIVE_BUCKET: ${{ vars.DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          state_url="${PUBLIC_STATE_BASE_URL:-https://dotrepo.org}"
+          args=(--base-url "$state_url"
+            --base-path "${{ steps.base_path.outputs.value }}"
+            --export-root release-gate/public
+            --staging-root cloudflare/hosted-query/public-snapshot)
+          if [ -n "$PUBLIC_ARCHIVE_BUCKET" ]; then
+            args+=(--archive-bucket "$PUBLIC_ARCHIVE_BUCKET")
+          fi
+          uv run python scripts/restore_cloudflare_public_state.py "${args[@]}"
       - name: Build reviewed public tree for Cloudflare
         run: |
           cargo run -p dotrepo-cli -- public export \
@@ -146,9 +166,6 @@ jobs:
           uv run python scripts/sync_cloudflare_public_snapshot.py \
             --input release-gate/public \
             --output cloudflare/hosted-query/public-snapshot
-      - name: Install Worker dependencies
-        working-directory: cloudflare/hosted-query
-        run: npm ci
       - name: Run Worker tests
         working-directory: cloudflare/hosted-query
         run: npm test
@@ -168,7 +185,8 @@ jobs:
         run: |
           uv run python scripts/archive_public_snapshot_r2.py \
             --public-root release-gate/public \
-            --bucket "$DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET"
+            --bucket "$DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET" \
+            --require-complete-history
       - name: Resolve smoke origin
         if: steps.publish_revision.outputs.eligible == 'true'
         id: smoke_origin

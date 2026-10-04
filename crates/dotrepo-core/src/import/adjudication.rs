@@ -68,6 +68,7 @@ impl<'a> TieredAdjudicationProviders<'a> {
 /// Caps and feature flags for model escalation during import.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct ImportEscalationOptions {
+    /// Maximum provider invocation attempts, including failures and timeouts.
     pub max_adjudication_calls: usize,
     pub enable_second_opinion: bool,
     pub enable_api_escalation: bool,
