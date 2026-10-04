@@ -21,3 +21,9 @@
 - Corrected evidence for docs.getting_started as `https://docs.langflow.org/get-started-installation#install-and-run-the-langflow-oss-python-package`: uv package-manager installation is not Langflow installation documentation. Source: [README.md:50](https://github.com/langflow-ai/langflow/blob/5621dcfd84e11108e4cc1ecb0c51f41053c4211c/README.md#L50).
 - This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+## Command semantic correction (2026-10-03)
+
+2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
+
+- Withheld `repo.build` previously extracted from `docs/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.

@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/chaitin/PandaWiki"
 generated_at = "2026-09-16T16:21:38.37759Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = 'Bootstrapped from `README.md`, `SECURITY.md`, and `web/package.json`. Filled `repo.name` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = "unknown"` is intentional. Imported `repo.build` from `web/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved.'
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `web/package.json`. Filled `repo.name` with inferred defaults. SECURITY.md did not expose a direct mailbox or reporting URL, so `security_contact = \"unknown\"` is intentional. Imported `repo.build` from `web/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "PandaWiki"
@@ -32,7 +31,6 @@ languages = [
     "Dockerfile",
     "Shell",
 ]
-build = "pnpm build"
 topics = [
     "ai",
     "document",
@@ -86,12 +84,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:21:38.37759Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "web/package.json"
-state = "present"
-valueJson = '"pnpm build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:21:38.37759Z"

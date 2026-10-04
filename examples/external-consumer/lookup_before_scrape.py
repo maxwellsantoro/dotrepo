@@ -278,6 +278,33 @@ def evaluate_for_task(
             if assessment.get("state") in ("suspect", "unresolved"):
                 reasons.append("unresolved:" + path)
             if path in {"repo.build", "repo.test"}:
+                tokens = value.split()
+                if (
+                    value.rstrip().endswith("\\")
+                    or tokens[0] in {"cd", "echo", "printf", "chmod", "mkdir", "touch", "env"}
+                    or "=" in tokens[0]
+                    or " ".join(tokens[:2])
+                    in {"npm install", "npm ci", "pnpm install", "yarn install", "uv sync"}
+                    or any(
+                        "..." in token and token != "./..." and not token.startswith("//")
+                        for token in tokens
+                    )
+                    or any(
+                        marker in value
+                        for marker in ("<", ">", "test_explain_what_is_being_tested")
+                    )
+                    or any(flag in tokens for flag in ("--collect-only", "--no-run"))
+                ):
+                    reasons.append("incomplete-command:" + path)
+                source = assessment.get("source", "")
+                if (
+                    isinstance(source, str)
+                    and "/" in source.replace("\\", "/")
+                    and source != ".github/CONTRIBUTING.md"
+                ):
+                    # Legacy scalar commands omit component scope and cwd. Even
+                    # high-confidence extraction cannot establish usability.
+                    reasons.append("scoped-command-source:" + path)
                 if assessment.get("method") == "inferred":
                     reasons.append("inferred-command:" + path)
                 elif not assessment:

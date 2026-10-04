@@ -18,3 +18,10 @@
 ## Fresh verification
 
 Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+
+## Command semantic correction (2026-10-03)
+
+2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
+
+- Withheld `repo.build` previously extracted from `src/crates/Cargo.toml` as `cargo build --workspace`. Component command lacks repository-default scope and working directory.
+- Withheld `repo.test` previously extracted from `.github/workflows/credential-file-tests.yml` as `go test -race -count=1 ./pkg/credentialfile ./pkg/web ./pkg/tlscfg \`. Command is an incomplete example or setup-only step.

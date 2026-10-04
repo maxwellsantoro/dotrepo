@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `docs/package.json`, `.github/workflows/ci.yml`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `docs/package.json`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `docs/package.json`, `.github/workflows/ci.yml`, and `pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `docs/package.json`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "langflow"
@@ -33,7 +33,6 @@ languages = [
     "HTML",
     "Mako",
 ]
-build = "npm run build"
 test = "uv run pytest src/backend/tests/unit/template/test_starter_projects.py -v -n auto"
 topics = [
     "react-flow",
@@ -93,12 +92,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-17T06:10:25.469535256Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "docs/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-17T06:10:25.469535256Z"

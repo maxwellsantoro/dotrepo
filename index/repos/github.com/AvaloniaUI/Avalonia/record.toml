@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `nukebuild/_build.csproj`. Inferred `repo.build` from `nukebuild/_build.csproj`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `nukebuild/_build.csproj`. Inferred `repo.build` from `nukebuild/_build.csproj`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Avalonia"
@@ -35,7 +35,6 @@ languages = [
     "CSS",
     "Batchfile",
 ]
-build = "dotnet build"
 topics = [
     "c-sharp",
     "xaml",
@@ -101,12 +100,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:33:58.083598Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "nukebuild/_build.csproj"
-state = "present"
-valueJson = '"dotnet build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:33:58.083598Z"

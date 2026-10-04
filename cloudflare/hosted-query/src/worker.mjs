@@ -312,10 +312,9 @@ async function loadQueryInputSnapshot(env, request, host, owner, repo) {
   return response.json();
 }
 
-async function loadProfileSnapshot(env, request, host, owner, repo) {
-  const pathname = await currentSnapshotAssetPath(
-    env,
-    request,
+async function loadProfileSnapshot(env, request, host, owner, repo, meta) {
+  const pathname = snapshotAssetPath(
+    meta ?? await loadMeta(env, request),
     `/repos/${host}/${owner}/${repo}/profile.json`,
     `/v0/repos/${host}/${owner}/${repo}/profile.json`
   );
@@ -739,19 +738,24 @@ function compareSignals(items) {
   };
 }
 
-async function buildCompareResponse(env, request, repoParams, freshness) {
+async function buildCompareResponse(env, request, repoParams, freshness, meta) {
   const results = [];
+  const seen = new Set();
   for (const repoParam of repoParams) {
     const parsed = parseRepositoryParam(repoParam);
     if (parsed.error) {
       throw new Error(parsed.error.message);
     }
+    const key = JSON.stringify(parsed.identity);
+    if (seen.has(key)) continue;
+    seen.add(key);
     const profile = await loadProfileSnapshot(
       env,
       request,
       parsed.identity.host,
       parsed.identity.owner,
-      parsed.identity.repo
+      parsed.identity.repo,
+      meta
     );
     if (profile === null) {
       throw new Error(repositoryNotFoundMessage(parsed.identity));
@@ -1206,10 +1210,15 @@ export async function handleRequest(request, env) {
     if (repoParams.length === 0) {
       return textResponse(400, "missing query parameter `repo`");
     }
+    try {
+      validateBatchRepos(repoParams);
+    } catch (error) {
+      return textResponse(400, error.message);
+    }
     const meta = await loadMeta(env, request);
     const freshness = buildFreshnessFromMeta(meta);
     try {
-      return jsonResponse(200, await buildCompareResponse(env, request, repoParams, freshness));
+      return jsonResponse(200, await buildCompareResponse(env, request, repoParams, freshness, meta));
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       return jsonResponse(

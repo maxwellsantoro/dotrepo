@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `pyproject.toml`, and `CONTRIBUTING.md`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `pyproject.toml`, and `CONTRIBUTING.md`. Filled `repo.name` with inferred defaults. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "LMCache"
@@ -36,7 +36,6 @@ languages = [
     "CMake",
 ]
 build = "python -m build"
-test = 'pytest -xvs --ignore=tests/disagg \'
 topics = [
     "amd",
     "cuda",
@@ -165,12 +164,12 @@ valueJson = '"LMCache"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-17T06:04:05.269577372Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Command is an incomplete example or setup-only step."
 source = "CONTRIBUTING.md"
-state = "present"
-valueJson = '"pytest -xvs --ignore=tests/disagg \\"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

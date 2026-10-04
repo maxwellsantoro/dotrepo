@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `react-rust-postgres/backend/Cargo.toml`. Inferred `repo.build` from `react-rust-postgres/backend/Cargo.toml`. Inferred `repo.test` from `react-rust-postgres/backend/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `react-rust-postgres/backend/Cargo.toml`. Inferred `repo.build` from `react-rust-postgres/backend/Cargo.toml`. Inferred `repo.test` from `react-rust-postgres/backend/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Awesome Compose"
@@ -37,8 +37,6 @@ languages = [
     "Shell",
     "PHP",
 ]
-build = "cargo build"
-test = "cargo test"
 topics = [
     "awesome-list",
     "awesome",
@@ -82,12 +80,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:22:25.067453Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "react-rust-postgres/backend/Cargo.toml"
-state = "present"
-valueJson = '"cargo build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:22:25.067453Z"
@@ -117,12 +115,12 @@ valueJson = '"Awesome Compose"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:22:25.067453Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "react-rust-postgres/backend/Cargo.toml"
-state = "present"
-valueJson = '"cargo test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

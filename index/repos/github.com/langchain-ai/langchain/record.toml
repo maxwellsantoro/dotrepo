@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `libs/core/pyproject.toml`. Inferred `repo.build` from `libs/core/pyproject.toml`. Imported `repo.toolchain.min` from `libs/core/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `libs/core/pyproject.toml` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `libs/core/pyproject.toml`. Inferred `repo.build` from `libs/core/pyproject.toml`. Imported `repo.toolchain.min` from `libs/core/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Resolved `repo.test` from `libs/core/pyproject.toml` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "langchain"
@@ -29,8 +29,6 @@ languages = [
     "Dockerfile",
     "JavaScript",
 ]
-build = "python -m build"
-test = "python -m pytest"
 topics = [
     "ai",
     "anthropic",
@@ -102,12 +100,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:33:13.876674Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "libs/core/pyproject.toml"
-state = "present"
-valueJson = '"python -m build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:33:13.876674Z"
@@ -137,12 +135,12 @@ valueJson = '"langchain"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:33:13.876674Z"
-confidence = "medium"
+confidence = "low"
 method = "extracted"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "libs/core/pyproject.toml"
-state = "present"
-valueJson = '"python -m pytest"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

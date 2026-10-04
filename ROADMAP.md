@@ -528,7 +528,24 @@ coverage gate is already complete; until M4 cohorts open, prioritize
 ### Active execution order
 
 
-The September 16 product review makes the next proof sequence explicit:
+The October 3 semantic review adds the following immediate work ahead of the
+consumer proof sequence. The parser, consumer, Worker, LSP, and claim regressions
+are covered by code fixes; command usefulness remains a separate evaluation gate.
+
+- Keep nested and incomplete commands withheld as repository defaults. Design
+  command text, repository-relative working directory, component scope, and
+  prerequisites as one value-bound contract before restoring these commands.
+- Enforce the existing CI at merge time through repository settings. Select
+  required checks that account for scoped jobs; do not require jobs that are
+  intentionally skipped by the change-scope classifier.
+- Prepare a stable-line backport and release after validating dependencies and
+  compatibility against the immutable stable tag. Keep the generated CI default
+  on a published stable release until a replacement has shipped.
+- Run a fresh end-to-end evaluation with independent upstream answers, fallback
+  costs, measured model use, and index maintenance costs. Then obtain one
+  consenting external consumer's repeated usage before expanding the index.
+
+The September 16 product review defines the continuing proof sequence:
 
 1. Restore and sustain factual record freshness; export recency is insufficient.
 2. Evaluate independently selected upstream facts across ecosystems, preserving

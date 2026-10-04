@@ -17,3 +17,9 @@
 ## Auto-promotion
 
 All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+
+## Command semantic correction (2026-10-03)
+
+2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
+
+- Withheld `repo.build` previously extracted from `core/http/react-ui/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.

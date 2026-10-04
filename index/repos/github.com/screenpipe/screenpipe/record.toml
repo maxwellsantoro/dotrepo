@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/screenpipe/screenpipe"
 generated_at = "2026-09-16T16:29:13.258442Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `apps/screenpipe-app-tauri/package.json`. Imported `repo.build` from `apps/screenpipe-app-tauri/package.json`. Imported `repo.test` from `apps/screenpipe-app-tauri/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `apps/screenpipe-app-tauri/package.json`. Imported `repo.build` from `apps/screenpipe-app-tauri/package.json`. Imported `repo.test` from `apps/screenpipe-app-tauri/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "DOWNLOAD SCREENPIPE"
@@ -35,8 +34,6 @@ languages = [
     "C",
     "Dockerfile",
 ]
-build = "bun run build"
-test = "bun run test"
 topics = [
     "ai",
     "computer-vision",
@@ -97,12 +94,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:29:13.258442Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "apps/screenpipe-app-tauri/package.json"
-state = "present"
-valueJson = '"bun run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:29:13.258442Z"
@@ -132,12 +129,12 @@ valueJson = '"DOWNLOAD SCREENPIPE"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:29:13.258442Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "apps/screenpipe-app-tauri/package.json"
-state = "present"
-valueJson = '"bun run test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

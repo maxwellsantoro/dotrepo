@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/johnkerl/miller"
 generated_at = "2026-09-16T16:25:26.694196Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, `Makefile`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, `Makefile`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "miller"
@@ -38,7 +37,6 @@ languages = [
     "ASL",
 ]
 build = "make"
-test = "go test github.com/johnkerl/miller/v6/pkg/..."
 topics = [
     "data-processing",
     "data-cleaning",
@@ -153,12 +151,12 @@ valueJson = '"miller"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:25:26.694196Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Command is an incomplete example or setup-only step."
 source = "Makefile"
-state = "present"
-valueJson = '"go test github.com/johnkerl/miller/v6/pkg/..."'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

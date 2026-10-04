@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, `ui/packages/api-client/package.json`, and `build.gradle`. Imported `repo.build` from `ui/packages/api-client/package.json`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, `ui/packages/api-client/package.json`, and `build.gradle`. Imported `repo.build` from `ui/packages/api-client/package.json`. Inferred `repo.test` from `build.gradle`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "halo"
@@ -35,7 +35,6 @@ languages = [
     "Makefile",
     "Smarty",
 ]
-build = "npm run build"
 test = "./gradlew test"
 topics = [
     "halo",
@@ -89,12 +88,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-17T06:09:45.406045379Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "ui/packages/api-client/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-17T06:09:45.406045379Z"

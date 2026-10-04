@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/immich-app/immich"
 generated_at = "2026-09-16T16:34:25.842092Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `server/package.json`. Imported `repo.build` from `server/package.json`. Imported `repo.test` from `server/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, and `server/package.json`. Imported `repo.build` from `server/package.json`. Imported `repo.test` from `server/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "immich"
@@ -41,8 +40,6 @@ languages = [
     "Go Template",
     "Objective-C",
 ]
-build = "npm run build"
-test = "npm test"
 topics = [
     "backup-tool",
     "mobile-app",
@@ -110,12 +107,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:34:25.842092Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "server/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:34:25.842092Z"
@@ -145,12 +142,12 @@ valueJson = '"immich"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:34:25.842092Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "server/package.json"
-state = "present"
-valueJson = '"npm test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/firecrawl/firecrawl"
 generated_at = "2026-09-16T16:34:29.837338Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `apps/api/package.json`. Imported `repo.build` from `apps/api/package.json`. Imported `repo.test` from `apps/api/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, and `apps/api/package.json`. Imported `repo.build` from `apps/api/package.json`. Imported `repo.test` from `apps/api/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "firecrawl"
@@ -42,8 +41,6 @@ languages = [
     "HTML",
     "Procfile",
 ]
-build = "pnpm build"
-test = "pnpm test"
 topics = [
     "ai",
     "crawler",
@@ -113,12 +110,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:34:29.837338Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "apps/api/package.json"
-state = "present"
-valueJson = '"pnpm build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:34:29.837338Z"
@@ -148,12 +145,12 @@ valueJson = '"firecrawl"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:34:29.837338Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "apps/api/package.json"
-state = "present"
-valueJson = '"pnpm test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

@@ -800,6 +800,56 @@ fn claim_directories_for_candidate(candidate: &CandidateManifest) -> Option<Vec<
     Some(claim_dirs)
 }
 
+fn load_validated_candidate_claim(root: &Path, claim_dir: &Path) -> Result<LoadedClaimDirectory> {
+    let loaded = load_claim_directory(root, claim_dir)?;
+    // Derive the index root from the physical claim layout so this validation
+    // also works when query/trust is called at one repository's directory.
+    let index_root = claim_dir
+        .ancestors()
+        .nth(6)
+        .ok_or_else(|| anyhow!("invalid claim directory layout"))?;
+    let identity = claim_directory_identity(index_root, claim_dir)?;
+    let relative = Path::new(&loaded.claim_path);
+    let mut findings = validate_claim_identity_alignment(relative, &identity, &loaded.claim);
+    findings.extend(validate_claim_event_history(
+        relative,
+        &loaded.claim,
+        &loaded.events,
+    ));
+    findings.extend(validate_claim_resolution_consistency(
+        relative,
+        &loaded.claim,
+    ));
+    if !findings.is_empty() {
+        bail!(
+            "invalid claim: {}",
+            findings
+                .iter()
+                .map(|finding| finding.message.as_str())
+                .collect::<Vec<_>>()
+                .join("; ")
+        );
+    }
+    Ok(loaded)
+}
+
+pub(crate) fn candidate_claim_selection_boost(root: &Path, candidate: &CandidateManifest) -> u8 {
+    claim_directories_for_candidate(candidate)
+        .unwrap_or_default()
+        .into_iter()
+        .filter_map(|dir| load_validated_candidate_claim(root, &dir).ok())
+        .filter(|loaded| {
+            claim_matches_candidate(&loaded.claim, &candidate.manifest_path, candidate)
+        })
+        .map(|loaded| match loaded.claim.claim.state {
+            ClaimState::Accepted => 2,
+            ClaimState::InReview => 1,
+            _ => 0,
+        })
+        .max()
+        .unwrap_or(0)
+}
+
 pub(crate) fn claim_directory_load_warnings(
     root: &Path,
     candidate: &CandidateManifest,
@@ -810,13 +860,16 @@ pub(crate) fn claim_directory_load_warnings(
 
     claim_dirs
         .into_iter()
-        .filter_map(|claim_dir| match load_claim_directory(root, &claim_dir) {
-            Ok(_) => None,
-            Err(error) => Some(format!(
-                "failed to load claim directory {}: {error}",
-                display_path(root, &claim_dir).unwrap_or_else(|_| claim_dir.display().to_string())
-            )),
-        })
+        .filter_map(
+            |claim_dir| match load_validated_candidate_claim(root, &claim_dir) {
+                Ok(_) => None,
+                Err(error) => Some(format!(
+                    "failed to load claim directory {}: {error}",
+                    display_path(root, &claim_dir)
+                        .unwrap_or_else(|_| claim_dir.display().to_string())
+                )),
+            },
+        )
         .collect()
 }
 
@@ -828,7 +881,7 @@ pub(crate) fn candidate_claim_context(
     let manifest_path = candidate.manifest_path.as_str();
     let mut matching = claim_dirs
         .into_iter()
-        .filter_map(|claim_dir| load_claim_directory(root, &claim_dir).ok())
+        .filter_map(|claim_dir| load_validated_candidate_claim(root, &claim_dir).ok())
         .filter_map(|loaded| {
             let handoff = derived_claim_handoff(&loaded.claim)?;
             if matches!(

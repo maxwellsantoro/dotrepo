@@ -22,3 +22,9 @@ All fields are high-confidence present or high-confidence absent. Record auto-pr
 - Rechecked only `x.github.archived` against `https://api.github.com/repos/SolaceLabs/solace-agent-mesh` at `2026-10-03T18:16:33Z`; the upstream API now reports `archived: true`.
 - Preserved the September crawl timestamps and all other imported fields; this is a scoped factual correction, not a full recrawl.
 - Retained the new independent API capture in `benchmarks/head-to-head/upstream-2026-10-03/SolaceLabs--solace-agent-mesh.json`. The original September capture remains unchanged.
+
+## Command semantic correction (2026-10-03)
+
+2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged.
+
+- Withheld `repo.build` previously extracted from `client/webui/frontend/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.

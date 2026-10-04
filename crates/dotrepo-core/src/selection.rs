@@ -9,10 +9,9 @@ use super::{
     load_manifest_file, record_summary, LoadedManifest, PublicSelectedRecord, SelectedRecord,
     SelectionReason,
 };
-use crate::claims::{candidate_claim_context, ClaimState};
+use crate::claims::{candidate_claim_context, candidate_claim_selection_boost};
 use crate::public::public_record_artifacts;
 use crate::query::{manifest_to_json, query_manifest_value_from_json};
-use crate::validation::collect_record_dirs;
 use crate::validation::validate_manifest_diagnostics;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -157,7 +156,16 @@ fn try_load_root_candidate(root: &Path, name: &str) -> Option<CandidateManifest>
 
 fn load_descendant_candidates(root: &Path) -> Result<Vec<CandidateManifest>> {
     let mut record_dirs = Vec::new();
-    collect_record_dirs(root, &mut record_dirs)?;
+    crate::util::walk_dir_entries_bounded(root, |path, file_type| {
+        if file_type.is_file()
+            && path.file_name().and_then(|name| name.to_str()) == Some("record.toml")
+        {
+            if let Some(parent) = path.parent() {
+                record_dirs.push(parent.to_path_buf());
+            }
+        }
+        Ok(file_type.is_dir())
+    })?;
     record_dirs.sort();
 
     let root_record = root.join("record.toml");
@@ -296,13 +304,7 @@ pub(crate) fn sort_candidates(candidates: &mut [CandidateManifest], root: &Path)
 }
 
 fn claim_selection_boost(root: &Path, candidate: &CandidateManifest) -> u8 {
-    candidate_claim_context(root, candidate)
-        .map(|context| match context.state {
-            ClaimState::Accepted => 2,
-            ClaimState::InReview => 1,
-            _ => 0,
-        })
-        .unwrap_or(0)
+    candidate_claim_selection_boost(root, candidate)
 }
 
 pub(crate) fn selected_record(root: &Path, candidate: &CandidateManifest) -> SelectedRecord {

@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `rust/Cargo.toml`. Imported `repo.build` from `README.md`. Inferred `repo.test` from `rust/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `rust/Cargo.toml`. Imported `repo.build` from `README.md`. Inferred `repo.test` from `rust/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Xi editor"
@@ -28,7 +28,6 @@ languages = [
     "Shell",
 ]
 build = "cargo build"
-test = "cargo test --workspace"
 topics = []
 
 [docs]
@@ -118,12 +117,12 @@ valueJson = '"Xi editor"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:35:10.568386Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "rust/Cargo.toml"
-state = "present"
-valueJson = '"cargo test --workspace"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

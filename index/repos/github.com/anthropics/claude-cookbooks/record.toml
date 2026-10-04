@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/anthropics/claude-cookbooks"
 generated_at = "2026-09-16T16:20:48.801277Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, `managed_agents/roadtrip_planner/package.json`, `tox.ini`, and `pyproject.toml`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Imported `repo.build` from `managed_agents/roadtrip_planner/package.json`. Imported `repo.test` from `tox.ini`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, `managed_agents/roadtrip_planner/package.json`, `tox.ini`, and `pyproject.toml`. `security_contact` was extracted from CONTRIBUTING.md (no SECURITY.md found). Imported `repo.build` from `managed_agents/roadtrip_planner/package.json`. Imported `repo.test` from `tox.ini`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Claude Cookbooks"
@@ -31,7 +30,6 @@ languages = [
     "JavaScript",
     "C",
 ]
-build = "npm run build"
 test = "tox"
 topics = []
 
@@ -80,12 +78,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:20:48.801277Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "managed_agents/roadtrip_planner/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:20:48.801277Z"

@@ -536,3 +536,30 @@ text = "Rejected claim."
 
     fs::remove_dir_all(root).expect("temp dir removed");
 }
+
+#[test]
+fn valid_root_record_survives_unrelated_deep_descendants() {
+    let root = temp_dir("root-deep-descendants");
+    fs::write(
+        root.join(".repo"),
+        r#"
+schema = "dotrepo/v0.1"
+[record]
+mode = "native"
+status = "draft"
+[repo]
+name = "orbit"
+description = "Valid root with unrelated deeply nested files"
+homepage = "https://github.com/example/orbit"
+"#,
+    )
+    .unwrap();
+    let mut descendant = root.clone();
+    for _ in 0..25 {
+        descendant.push("unrelated");
+    }
+    fs::create_dir_all(descendant).unwrap();
+    assert_eq!(query_repository(&root, "repo.name").unwrap().value, "orbit");
+    assert_eq!(trust_repository(&root).unwrap().manifest_path, ".repo");
+    fs::remove_dir_all(root).unwrap();
+}

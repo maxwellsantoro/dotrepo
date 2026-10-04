@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/prometheus/prometheus"
 generated_at = "2026-09-18T06:04:51.653013039Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, `web/ui/mantine-ui/package.json`, and `go.mod`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@prometheus/default-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `web/ui/mantine-ui/package.json`. Imported `repo.test` from `web/ui/mantine-ui/package.json`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CODEOWNERS`, `SECURITY.md`, `web/ui/mantine-ui/package.json`, and `go.mod`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@prometheus/default-maintainers` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `web/ui/mantine-ui/package.json`. Imported `repo.test` from `web/ui/mantine-ui/package.json`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Prometheus"
@@ -34,8 +33,6 @@ languages = [
     "Dockerfile",
     "Go Template",
 ]
-build = "npm run build"
-test = "npm test"
 topics = [
     "monitoring",
     "metrics",
@@ -123,12 +120,12 @@ valueJson = '"@prometheus/default-maintainers"'
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-18T06:04:51.653013039Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "web/ui/mantine-ui/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-18T06:04:51.653013039Z"
@@ -158,12 +155,12 @@ valueJson = '"Prometheus"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-18T06:04:51.653013039Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "web/ui/mantine-ui/package.json"
-state = "present"
-valueJson = '"npm test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

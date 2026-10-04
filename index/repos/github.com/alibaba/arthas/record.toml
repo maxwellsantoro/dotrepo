@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `labs/arthas-grpc-web-proxy/ui/package.json`, and `pom.xml`. Imported `repo.build` from `labs/arthas-grpc-web-proxy/ui/package.json`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `labs/arthas-grpc-web-proxy/ui/package.json`, and `pom.xml`. Imported `repo.build` from `labs/arthas-grpc-web-proxy/ui/package.json`. Inferred `repo.test` from `pom.xml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Arthas"
@@ -39,7 +39,6 @@ languages = [
     "AngelScript",
     "SCSS",
 ]
-build = "npm run build"
 test = "./mvnw test"
 topics = [
     "java",
@@ -106,12 +105,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:32:15.867143Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "labs/arthas-grpc-web-proxy/ui/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:32:15.867143Z"

@@ -83,8 +83,14 @@ accepted claim in flight.
 
 ## Imported command safety checks
 
-When dotrepo imports `repo.build` or `repo.test` commands from README or manifest
-material, validation runs a lightweight shell-safety check that rejects obvious
+Legacy scalar `repo.build` and `repo.test` fields describe repository defaults.
+The importer abstains from nested manifest commands, documented directory
+changes, component-scoped CI working directories, incomplete placeholders,
+dangling continuations, and setup-only test flags. Environment prerequisites
+must not be stripped to manufacture a standalone command. Source extraction
+confidence alone does not prove that a command applies to the repository.
+
+When dotrepo imports commands from README or manifest material, validation runs a lightweight shell-safety check that rejects obvious
 metacharacters and expansion forms (newlines, backticks, `$()`, `${`, `;`, `|`,
 `&`, `<`, `>`). This check is heuristic: it does not parse full shell grammar,
 does not sandbox execution, and cannot catch every quoting or escape sequence an

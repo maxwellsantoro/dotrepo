@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/comet-ml/opik"
 generated_at = "2026-09-16T16:21:58.945718Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `apps/opik-frontend/package.json`, and `sdks/opik_optimizer/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `apps/opik-frontend/package.json`. Imported `repo.test` from `apps/opik-frontend/package.json`. Imported `repo.toolchain.min` from `sdks/opik_optimizer/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `apps/opik-frontend/package.json`, and `sdks/opik_optimizer/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@comet-ml/comet-opik-devs` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `apps/opik-frontend/package.json`. Imported `repo.test` from `apps/opik-frontend/package.json`. Imported `repo.toolchain.min` from `sdks/opik_optimizer/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Opik"
@@ -34,8 +33,6 @@ languages = [
     "CSS",
     "HTML",
 ]
-build = "npm run build"
-test = "npm test"
 topics = [
     "open-source",
     "langchain",
@@ -106,12 +103,12 @@ valueJson = '"@comet-ml/comet-opik-devs"'
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:21:58.945718Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "apps/opik-frontend/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:21:58.945718Z"
@@ -141,12 +138,12 @@ valueJson = '"Opik"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:21:58.945718Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "apps/opik-frontend/package.json"
-state = "present"
-valueJson = '"npm test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

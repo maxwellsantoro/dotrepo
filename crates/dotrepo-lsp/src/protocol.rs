@@ -154,6 +154,7 @@ pub(crate) struct CodeAction {
 }
 
 #[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
 pub(crate) struct WorkspaceEdit {
     #[serde(skip_serializing_if = "BTreeMap::is_empty", default)]
     pub(crate) changes: BTreeMap<String, Vec<TextEdit>>,
@@ -170,7 +171,8 @@ pub(crate) enum DocumentChange {
 
 #[derive(Debug, Serialize, Clone, PartialEq, Eq)]
 pub(crate) struct CreateFileChange {
-    #[serde(rename = "createFile")]
+    pub(crate) kind: String,
+    #[serde(flatten)]
     pub(crate) create_file: CreateFileOptions,
 }
 
@@ -182,6 +184,7 @@ pub(crate) struct CreateFileOptions {
 }
 
 #[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
 pub(crate) struct CreateFileOpts {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub(crate) overwrite: Option<bool>,
@@ -190,6 +193,7 @@ pub(crate) struct CreateFileOpts {
 }
 
 #[derive(Debug, Serialize, Clone, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
 pub(crate) struct TextDocumentEdit {
     pub(crate) text_document: WorkspaceTextDocumentIdentifier,
     pub(crate) edits: Vec<TextEdit>,

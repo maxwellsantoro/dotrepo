@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `qwen-vl-utils/pyproject.toml`. Inferred `repo.build` from `qwen-vl-utils/pyproject.toml`. Inferred `repo.test` from `qwen-vl-utils/pyproject.toml`. Imported `repo.toolchain.min` from `qwen-vl-utils/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `qwen-vl-utils/pyproject.toml`. Inferred `repo.build` from `qwen-vl-utils/pyproject.toml`. Inferred `repo.test` from `qwen-vl-utils/pyproject.toml`. Imported `repo.toolchain.min` from `qwen-vl-utils/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Qwen3-VL"
@@ -25,8 +25,6 @@ languages = [
     "Python",
     "Shell",
 ]
-build = "python -m build"
-test = "python -m pytest"
 topics = []
 
 [repo.toolchain]
@@ -67,12 +65,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:19:25.405156Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "qwen-vl-utils/pyproject.toml"
-state = "present"
-valueJson = '"python -m build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:19:25.405156Z"
@@ -102,12 +100,12 @@ valueJson = '"Qwen3-VL"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:19:25.405156Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "qwen-vl-utils/pyproject.toml"
-state = "present"
-valueJson = '"python -m pytest"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `CONTRIBUTING.md`, and `eng/eng.sln`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `eng/eng.sln`. Inferred `repo.test` from `eng/eng.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `CONTRIBUTING.md`, and `eng/eng.sln`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Inferred `repo.build` from `eng/eng.sln`. Inferred `repo.test` from `eng/eng.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "roslyn"
@@ -37,8 +37,6 @@ languages = [
     "Dockerfile",
     "F#",
 ]
-build = "dotnet build"
-test = "dotnet test"
 topics = [
     "roslyn",
     "visual-basic",
@@ -97,12 +95,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:22:37.470562Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "eng/eng.sln"
-state = "present"
-valueJson = '"dotnet build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:22:37.470562Z"
@@ -132,12 +130,12 @@ valueJson = '"roslyn"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:22:37.470562Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "eng/eng.sln"
-state = "present"
-valueJson = '"dotnet test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/apache/airflow"
 generated_at = "2026-09-17T06:04:36.134919375Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `dev/react-plugin-tools/react_plugin_template/package.json`, and `pyproject.toml`. Imported `repo.build` from `dev/react-plugin-tools/react_plugin_template/package.json`. Imported `repo.test` from `dev/react-plugin-tools/react_plugin_template/package.json`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `dev/react-plugin-tools/react_plugin_template/package.json`, and `pyproject.toml`. Imported `repo.build` from `dev/react-plugin-tools/react_plugin_template/package.json`. Imported `repo.test` from `dev/react-plugin-tools/react_plugin_template/package.json`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Apache Airflow"
@@ -39,8 +38,6 @@ languages = [
     "HCL",
     "Just",
 ]
-build = "pnpm build"
-test = "pnpm test"
 topics = [
     "airflow",
     "apache",
@@ -165,12 +162,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-17T06:04:36.134919375Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "dev/react-plugin-tools/react_plugin_template/package.json"
-state = "present"
-valueJson = '"pnpm build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-17T06:04:36.134919375Z"
@@ -200,12 +197,12 @@ valueJson = '"Apache Airflow"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-17T06:04:36.134919375Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "dev/react-plugin-tools/react_plugin_template/package.json"
-state = "present"
-valueJson = '"pnpm test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

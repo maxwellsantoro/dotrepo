@@ -1148,3 +1148,37 @@ test("search reports a missing exported index without an unbounded fallback", as
   assert.equal(response.status, 503);
   assert.equal(reads, 2);
 });
+
+
+test("compare caps raw inputs before asset reads", async () => {
+  let reads = 0;
+  const env = { ASSETS: { fetch() { reads++; throw new Error("unexpected asset read"); } } };
+  for (const count of [51, 650]) {
+    const url = new URL("https://example.test/v0/compare");
+    for (let i = 0; i < count; i++) url.searchParams.append("repo", "github.com/example/orbit");
+    const response = await handleRequest(new Request(url), env);
+    assert.equal(response.status, 400);
+    assert.match(await response.text(), /maximum of 50/);
+  }
+  assert.equal(reads, 0);
+});
+
+test("compare deduplicates normalized identities and loads metadata once", async () => {
+  const files = new Map([
+    ["/v0/meta.json", await readFile(fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "meta.json"), "utf8")],
+    ["/v0/repos/github.com/example/orbit/profile.json", await readFile(fixturePath("crates", "dotrepo-core", "tests", "fixtures", "public-export", "expected", "public", "v0", "repos", "github.com", "example", "orbit", "profile.json"), "utf8")]
+  ]);
+  const assets = makeAssets(files);
+  const reads = [];
+  const env = { ASSETS: { fetch(input) { reads.push(new URL(input instanceof Request ? input.url : input.toString()).pathname); return assets.fetch(input); } } };
+  const url = new URL("https://example.test/v0/compare");
+  for (let i = 0; i < 50; i++) url.searchParams.append("repo", i % 2 ? "https://github.com/example/orbit" : "github.com/example/orbit");
+  const response = await handleRequest(new Request(url), env);
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.repositoryCount, 1);
+  assert.equal(body.results.length, 1);
+  assert.equal(body.signals.hasBuild.length, 1);
+  assert.equal(reads.length, 2);
+  assert.equal(reads.filter(path => path === "/v0/meta.json").length, 1);
+});

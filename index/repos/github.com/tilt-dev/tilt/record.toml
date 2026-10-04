@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/tilt-dev/tilt"
 generated_at = "2026-09-19T06:05:31.501472585Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `web/package.json`. Imported `repo.build` from `web/package.json`. Imported `repo.test` from `web/package.json`. Imported `repo.toolchain.min` from `web/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `web/package.json`. Imported `repo.build` from `web/package.json`. Imported `repo.test` from `web/package.json`. Imported `repo.toolchain.min` from `web/package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Tilt"
@@ -33,8 +32,6 @@ languages = [
     "HTML",
     "JavaScript",
 ]
-build = "yarn build"
-test = "yarn test"
 topics = [
     "kubernetes",
     "development-environment",
@@ -86,12 +83,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-19T06:05:31.501472585Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "web/package.json"
-state = "present"
-valueJson = '"yarn build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-19T06:05:31.501472585Z"
@@ -121,12 +118,12 @@ valueJson = '"Tilt"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-19T06:05:31.501472585Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "web/package.json"
-state = "present"
-valueJson = '"yarn test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

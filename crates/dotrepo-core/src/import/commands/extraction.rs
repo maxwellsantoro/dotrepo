@@ -786,16 +786,33 @@ fn infer_markdown_doc_commands(file: &ImportedFile) -> Option<ImportedCommandCan
     let mut test: Option<String> = None;
     let mut in_code_block = false;
     let mut current_heading = String::new();
+    let mut headings: Vec<(usize, String)> = Vec::new();
+    let mut changed_directory = false;
     for line in file.contents.lines() {
         let trimmed = line.trim();
         if trimmed.starts_with("```") || trimmed.starts_with("~~~") {
             in_code_block = !in_code_block;
+            changed_directory = false;
             continue;
         }
         if !in_code_block {
             if let Some(heading) = markdown_heading_text(trimmed) {
-                current_heading = heading;
+                let level = trimmed.chars().take_while(|ch| *ch == '#').count();
+                headings.retain(|(ancestor_level, _)| *ancestor_level < level);
+                headings.push((level, heading));
+                current_heading = headings
+                    .iter()
+                    .map(|(_, heading)| heading.as_str())
+                    .collect::<Vec<_>>()
+                    .join(" ");
             }
+            continue;
+        }
+        let unprompted = trimmed.trim_start_matches(['$', '>', '%', '❯']).trim();
+        if unprompted == "cd" || unprompted.starts_with("cd ") {
+            changed_directory = true;
+        }
+        if changed_directory {
             continue;
         }
         let Some(command) = normalize_documented_command_line(trimmed) else {
@@ -825,6 +842,19 @@ fn markdown_heading_text(line: &str) -> Option<String> {
 }
 
 fn doc_heading_allows_command(heading: &str, select_build: bool) -> bool {
+    if [
+        "playground",
+        "extension",
+        "example",
+        "benchmark",
+        "single test",
+        "specific test",
+    ]
+    .iter()
+    .any(|component| heading.contains(component))
+    {
+        return false;
+    }
     let development = heading.contains("develop") || heading.contains("contribut");
     if select_build {
         development || heading.contains("build") || heading.contains("compile")
@@ -851,15 +881,13 @@ fn normalize_documented_command_line(line: &str) -> Option<String> {
         return None;
     }
 
-    let mut parts = trimmed.split_whitespace().collect::<Vec<_>>();
-    if parts.first().is_some_and(|part| *part == "env") {
-        parts.remove(0);
-    }
-    while parts
+    let parts = trimmed.split_whitespace().collect::<Vec<_>>();
+    // Environment setup is a prerequisite, not disposable decoration.
+    if parts
         .first()
-        .is_some_and(|part| is_env_assignment_token(part))
+        .is_some_and(|part| *part == "env" || is_env_assignment_token(part))
     {
-        parts.remove(0);
+        return None;
     }
     if parts.is_empty() {
         return None;
@@ -980,6 +1008,16 @@ fn starts_with_command_prefix(command: &str, prefix: &str) -> bool {
 
 pub(crate) fn infer_workflow_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
     if workflow_file_is_specialized_noncanonical(&file.path) {
+        return None;
+    }
+    // Until working directory and prerequisites have an explicit contract,
+    // component CI steps cannot be promoted to repository defaults.
+    if file.contents.lines().any(|line| {
+        let line = line.trim().strip_prefix("- ").unwrap_or(line.trim());
+        line.strip_prefix("working-directory:")
+            .is_some_and(|value| !matches!(strip_matching_yaml_quotes(value.trim()), "." | "./"))
+            || line.starts_with("cd ")
+    }) {
         return None;
     }
     let run_commands = extract_workflow_run_commands(&file.contents);

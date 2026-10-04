@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `v2rayN/v2rayN.sln`. Inferred `repo.build` from `v2rayN/v2rayN.sln`. Inferred `repo.test` from `v2rayN/v2rayN.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `v2rayN/v2rayN.sln`. Inferred `repo.build` from `v2rayN/v2rayN.sln`. Inferred `repo.test` from `v2rayN/v2rayN.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "v2rayN"
@@ -24,8 +24,6 @@ languages = [
     "C#",
     "Shell",
 ]
-build = "dotnet build"
-test = "dotnet test"
 topics = [
     "windows",
     "proxy",
@@ -77,12 +75,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:34:06.065866Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "v2rayN/v2rayN.sln"
-state = "present"
-valueJson = '"dotnet build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:34:06.065866Z"
@@ -112,12 +110,12 @@ valueJson = '"v2rayN"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:34:06.065866Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "v2rayN/v2rayN.sln"
-state = "present"
-valueJson = '"dotnet test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `python/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `python/pyproject.toml` and `dotnet/src/SemanticKernel.Abstractions/SemanticKernel.Abstractions.csproj` suggested conflicting build commands. Inferred `repo.test` from `python/pyproject.toml`. Imported `repo.toolchain.min` from `python/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, and `python/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Left `repo.build` unset because `python/pyproject.toml` and `dotnet/src/SemanticKernel.Abstractions/SemanticKernel.Abstractions.csproj` suggested conflicting build commands. Inferred `repo.test` from `python/pyproject.toml`. Imported `repo.toolchain.min` from `python/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Semantic Kernel"
@@ -36,7 +36,6 @@ languages = [
     "Shell",
     "Batchfile",
 ]
-test = "python -m pytest"
 topics = [
     "ai",
     "artificial-intelligence",
@@ -141,12 +140,12 @@ valueJson = '"Semantic Kernel"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:34:16.973926Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "python/pyproject.toml"
-state = "present"
-valueJson = '"python -m pytest"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

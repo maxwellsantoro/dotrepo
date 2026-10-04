@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/langgenius/dify"
 generated_at = "2026-09-18T06:03:35.440324551Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `web/package.json`, and `dify-agent/pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `web/package.json`. Imported `repo.test` from `web/package.json`. Imported `repo.toolchain.min` from `dify-agent/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `web/package.json`, and `dify-agent/pyproject.toml`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `web/package.json`. Imported `repo.test` from `web/package.json`. Imported `repo.toolchain.min` from `dify-agent/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "dify"
@@ -35,8 +34,6 @@ languages = [
     "PHP",
     "Mako",
 ]
-build = "npm run build"
-test = "npm test"
 topics = [
     "ai",
     "gpt",
@@ -129,12 +126,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-18T06:03:35.440324551Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "web/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-18T06:03:35.440324551Z"
@@ -164,12 +161,12 @@ valueJson = '"dify"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-18T06:03:35.440324551Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "web/package.json"
-state = "present"
-valueJson = '"npm test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `codex-rs/Cargo.toml`, and `justfile`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `codex-rs/Cargo.toml`. Imported `repo.test` from `justfile`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `codex-rs/Cargo.toml`, and `justfile`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `codex-rs/Cargo.toml`. Imported `repo.test` from `justfile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Codex CLI splash"
@@ -37,7 +37,6 @@ languages = [
     "Batchfile",
     "C",
 ]
-build = "cargo build --workspace"
 test = "just test"
 topics = []
 
@@ -81,12 +80,12 @@ valueJson = '"@openai/codex-core-agent-team"'
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:35:21.055416Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "codex-rs/Cargo.toml"
-state = "present"
-valueJson = '"cargo build --workspace"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:35:21.055416Z"

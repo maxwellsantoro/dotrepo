@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `front-end/chat-ai-admin-vue/package.json`, and `go.mod`. Imported `repo.build` from `front-end/chat-ai-admin-vue/package.json`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `front-end/chat-ai-admin-vue/package.json`, and `go.mod`. Imported `repo.build` from `front-end/chat-ai-admin-vue/package.json`. Inferred `repo.test` from `go.mod`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "chatwiki"
@@ -34,7 +34,6 @@ languages = [
     "Shell",
     "Batchfile",
 ]
-build = "pnpm build"
 test = "go test ./..."
 topics = [
     "llm",
@@ -86,12 +85,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:31:21.518903Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "front-end/chat-ai-admin-vue/package.json"
-state = "present"
-valueJson = '"pnpm build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:31:21.518903Z"

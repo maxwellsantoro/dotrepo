@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `src/crates/Cargo.toml`, and `.github/workflows/credential-file-tests.yml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `src/crates/Cargo.toml`. Inferred `repo.test` from `.github/workflows/credential-file-tests.yml`. Imported `repo.toolchain.min` from `src/crates/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `src/crates/Cargo.toml`, and `.github/workflows/credential-file-tests.yml`. Filled `repo.description` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@netdata/agent-sre` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. Inferred `repo.build` from `src/crates/Cargo.toml`. Inferred `repo.test` from `.github/workflows/credential-file-tests.yml`. Imported `repo.toolchain.min` from `src/crates/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Netdata"
@@ -43,8 +43,6 @@ languages = [
     "TSQL",
     "Assembly",
 ]
-build = "cargo build --workspace"
-test = 'go test -race -count=1 ./pkg/credentialfile ./pkg/web ./pkg/tlscfg \'
 topics = [
     "monitoring",
     "docker",
@@ -125,12 +123,12 @@ valueJson = '"@netdata/agent-sre"'
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:27:05.550597Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "src/crates/Cargo.toml"
-state = "present"
-valueJson = '"cargo build --workspace"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:27:05.550597Z"
@@ -160,12 +158,12 @@ valueJson = '"Netdata"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:27:05.550597Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "from workflow fallback"
+reason = "Command is an incomplete example or setup-only step."
 source = ".github/workflows/credential-file-tests.yml"
-state = "present"
-valueJson = '"go test -race -count=1 ./pkg/credentialfile ./pkg/web ./pkg/tlscfg \\"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

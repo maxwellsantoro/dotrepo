@@ -23,3 +23,12 @@ All fields are high-confidence present or high-confidence absent. Record auto-pr
 - Corrected evidence for docs.getting_started as `https://docs.taipy.io/en/latest/tutorials/getting_started/installation/`: book announcement image is not an installation guide. Source: [README.md:118](https://github.com/Avaiga/taipy/blob/5bcb5749521f9ddcc725c009aca00a88ff724e87/README.md#L118).
 - This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+## Command semantic correction (2026-10-03)
+
+2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
+
+- Withheld `repo.build` previously extracted from `frontend/taipy-gui/package.json` as `npm run build`. Component command lacks repository-default scope and working directory.
+- Withheld `repo.test` previously extracted from `frontend/taipy-gui/package.json` as `npm test`. Component command lacks repository-default scope and working directory.
+
+Other retained field provenance includes inferred defaults; this correction does not verify their usability.

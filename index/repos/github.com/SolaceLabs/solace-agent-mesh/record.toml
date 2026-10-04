@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/SolaceLabs/solace-agent-mesh"
 generated_at = "2026-09-16T16:19:46.890227Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `client/webui/frontend/package.json`, and `pyproject.toml`. Imported `repo.build` from `client/webui/frontend/package.json`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `client/webui/frontend/package.json`, and `pyproject.toml`. Imported `repo.build` from `client/webui/frontend/package.json`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Solace Agent Mesh"
@@ -31,7 +30,6 @@ languages = [
     "Mako",
     "Shell",
 ]
-build = "npm run build"
 test = "pytest"
 topics = [
     "agentframework",
@@ -97,12 +95,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:19:46.890227Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "client/webui/frontend/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:19:46.890227Z"

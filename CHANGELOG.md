@@ -15,6 +15,17 @@ growth, coverage, promotion, and telemetry artifacts.
 
 ### Trust, export, and crawler correctness
 
+- Withhold component-scoped and incomplete imported commands as repository
+  defaults, retain explicit uncertainty in affected overlays, and add consumer
+  fallback tests for placeholders, continuations, scope, and setup-only steps.
+- Bound hosted compare inputs, deduplicate repository identities, and load
+  snapshot metadata once per comparison.
+- Correct LSP file-creation and workspace-edit JSON, and share the CLI's
+  published stable version default for generated CI workflows.
+- Validate claim identity, event history, and resolution before using authority
+  context; restore in-review tie-breaking and bound query candidate discovery
+  without failing on unrelated deeply nested directories.
+
 - Select documentation links from explicit declarations instead of URL shapes,
   retain value-bound source context, and abstain on competing declarations.
   Correct or withhold documentation values in 34 indexed repositories using

@@ -118,6 +118,13 @@ Unsupported response versions and non-string requested values also require
 fallback. Acceptance is metadata suitability, not permission to execute a command.
 The benchmark leaves field confidence unknown when absent.
 
+The client also rejects literal placeholders, dangling continuations, and
+setup-only test flags. A nested manifest or workflow source requires fallback
+because a scalar command does not carry working directory, component, or
+prerequisites. `.github/CONTRIBUTING.md` is treated as a repository contribution
+guide; its commands still pass the same incomplete-example checks. This is a
+conservative suitability screen, not proof that a root-sourced command works.
+
 Policy coverage is published on the efficiency page and in its linked JSON.
 It distinguishes value presence, policy acceptance, independently established
 correctness, and completed tasks. The last two remain unmeasured in the coverage

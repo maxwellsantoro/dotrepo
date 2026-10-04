@@ -7,7 +7,7 @@ use crate::protocol::{
 };
 use crate::state::{document_for_request, DocumentIndex, OpenDocument, ServerState};
 use anyhow::Result;
-use dotrepo_core::render_dotrepo_ci_workflow;
+use dotrepo_core::{render_dotrepo_ci_workflow, DEFAULT_CI_RELEASE_VERSION};
 use std::collections::BTreeMap;
 use std::path::Path;
 use url::Url;
@@ -78,6 +78,7 @@ fn ci_workflow_code_action(document: &OpenDocument, diagnostic: LspDiagnostic) -
             changes: BTreeMap::new(),
             document_changes: Some(vec![
                 DocumentChange::Create(CreateFileChange {
+                    kind: "create".into(),
                     create_file: CreateFileOptions {
                         uri: workflow_uri.clone(),
                         options: Some(CreateFileOpts {
@@ -93,7 +94,7 @@ fn ci_workflow_code_action(document: &OpenDocument, diagnostic: LspDiagnostic) -
                     },
                     edits: vec![TextEdit {
                         range: insertion_range(0),
-                        new_text: render_dotrepo_ci_workflow(env!("CARGO_PKG_VERSION")),
+                        new_text: render_dotrepo_ci_workflow(DEFAULT_CI_RELEASE_VERSION),
                     }],
                 }),
             ]),

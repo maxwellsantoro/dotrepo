@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `CODEOWNERS`, `Tools/ci/MLAgents.Cookbook.csproj`, and `.github/workflows/nightly.yml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `Tools/ci/MLAgents.Cookbook.csproj`. Inferred `repo.test` from `.github/workflows/nightly.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `CODEOWNERS`, `Tools/ci/MLAgents.Cookbook.csproj`, and `.github/workflows/nightly.yml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `Tools/ci/MLAgents.Cookbook.csproj`. Inferred `repo.test` from `.github/workflows/nightly.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "ml-agents"
@@ -30,8 +30,6 @@ languages = [
     "Dockerfile",
     "C",
 ]
-build = "dotnet build"
-test = 'pytest --cov=ml-agents --cov=ml-agents-envs \'
 topics = [
     "reinforcement-learning",
     "unity3d",
@@ -84,12 +82,12 @@ valueJson = '"@unity/behavior-authoring"'
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:20:06.711672Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "Tools/ci/MLAgents.Cookbook.csproj"
-state = "present"
-valueJson = '"dotnet build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:20:06.711672Z"
@@ -119,12 +117,12 @@ valueJson = '"ml-agents"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:20:06.711672Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "from workflow fallback"
+reason = "Command is an incomplete example or setup-only step."
 source = ".github/workflows/nightly.yml"
-state = "present"
-valueJson = '"pytest --cov=ml-agents --cov=ml-agents-envs \\"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `pgmq-rs/Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `pgmq-rs/Cargo.toml`. Imported `repo.toolchain.min` from `pgmq-rs/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `pgmq-rs/Cargo.toml` after deterministic escalation."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `pgmq-rs/Cargo.toml`. Filled `repo.name` and `repo.description` with inferred defaults. Inferred `repo.build` from `pgmq-rs/Cargo.toml`. Imported `repo.toolchain.min` from `pgmq-rs/Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.test` from `pgmq-rs/Cargo.toml` after deterministic escalation. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "pgmq"
@@ -28,8 +28,6 @@ languages = [
     "Shell",
     "Ruby",
 ]
-build = "cargo build"
-test = "cargo test"
 topics = ["message-queue"]
 
 [repo.toolchain]
@@ -81,12 +79,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:34:17.308607Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "pgmq-rs/Cargo.toml"
-state = "present"
-valueJson = '"cargo build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:34:17.308607Z"
@@ -116,12 +114,12 @@ valueJson = '"pgmq"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:34:17.308607Z"
-confidence = "medium"
+confidence = "low"
 method = "extracted"
-reason = "inferred ecosystem default from build-tool metadata"
+reason = "Component command lacks repository-default scope and working directory."
 source = "pgmq-rs/Cargo.toml"
-state = "present"
-valueJson = '"cargo test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

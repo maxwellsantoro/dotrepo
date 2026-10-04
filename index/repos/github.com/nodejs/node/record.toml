@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/nodejs/node"
 generated_at = "2026-09-18T06:04:32.79314411Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `deps/amaro/package.json`, and `tools/gyp/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `deps/amaro/package.json`. Imported `repo.test` from `deps/amaro/package.json`. Imported `repo.toolchain.min` from `tools/gyp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `deps/amaro/package.json`, and `tools/gyp/pyproject.toml`. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `deps/amaro/package.json`. Imported `repo.test` from `deps/amaro/package.json`. Imported `repo.toolchain.min` from `tools/gyp/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Node.js"
@@ -37,8 +36,6 @@ languages = [
     "Go Template",
     "TypeScript",
 ]
-build = "npm run build"
-test = "npm test"
 topics = [
     "nodejs",
     "javascript",
@@ -132,12 +129,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-18T06:04:32.79314411Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "deps/amaro/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-18T06:04:32.79314411Z"
@@ -167,12 +164,12 @@ valueJson = '"Node.js"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-18T06:04:32.79314411Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "deps/amaro/package.json"
-state = "present"
-valueJson = '"npm test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

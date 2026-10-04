@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `tools/test-helper/package.json`, `.github/workflows/ci.yml`, and `Cargo.toml`. Imported `repo.build` from `tools/test-helper/package.json`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `tools/test-helper/package.json`, `.github/workflows/ci.yml`, and `Cargo.toml`. Imported `repo.build` from `tools/test-helper/package.json`. Inferred `repo.test` from `.github/workflows/ci.yml`. Imported `repo.toolchain.min` from `Cargo.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "Typst"
@@ -28,8 +28,6 @@ languages = [
     "CSS",
     "Dockerfile",
 ]
-build = "npm run build"
-test = "cargo test --workspace --no-run"
 topics = [
     "typesetting",
     "compiler",
@@ -78,12 +76,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:30:24.556478Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "tools/test-helper/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:30:24.556478Z"
@@ -113,12 +111,12 @@ valueJson = '"Typst"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-16T16:30:24.556478Z"
-confidence = "medium"
+confidence = "low"
 method = "inferred"
-reason = "from workflow fallback"
+reason = "Command is an incomplete example or setup-only step."
 source = ".github/workflows/ci.yml"
-state = "present"
-valueJson = '"cargo test --workspace --no-run"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

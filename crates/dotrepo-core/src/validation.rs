@@ -584,6 +584,9 @@ fn overlay_has_accepted_claim(index_root: &Path, record_dir: &Path) -> bool {
             if file_type.is_symlink() || !file_type.is_dir() {
                 return false;
             }
+            if !validate_claim_directory(index_root, &path).is_empty() {
+                return false;
+            }
             load_claim_directory(index_root, &path)
                 .ok()
                 .is_some_and(|loaded| loaded.claim.claim.state == ClaimState::Accepted)

@@ -358,3 +358,48 @@ def test_removing_inferred_assessment_cannot_turn_rejection_into_acceptance():
             required_fields=["repo.build"],
         )
         assert not result.usable
+
+
+@pytest.mark.parametrize(
+    "command",
+    [
+        "pytest tests/.../test_file.py::test_explain_what_is_being_tested",
+        "pytest tests/ \\",
+        "cargo test --no-run",
+        "pytest --collect-only",
+        "pytest <test_file>",
+        "npm install",
+        "uv sync",
+        "echo pytest",
+        "cd playground",
+    ],
+)
+def test_consumer_abstains_from_incomplete_commands(command):
+    payload = command_profile()
+    payload["execution"]["test"] = command
+    result = consumer.interpret_http_response(
+        identity="github.com/example/demo", status_code=200, body=json.dumps(payload)
+    )
+    consumer.evaluate_for_task(result, required_fields=["repo.test"])
+    assert not result.usable
+    assert "incomplete-command:repo.test" in result.fallback_reasons
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "playground/package.json",
+        "editors/code/package.json",
+        "python/pyproject.toml",
+        ".github/workflows/test.yml",
+    ],
+)
+def test_consumer_abstains_from_unrepresented_component_scope(source):
+    payload = command_profile()
+    payload["fieldEvidence"]["repo.build"]["source"] = source
+    result = consumer.interpret_http_response(
+        identity="github.com/example/demo", status_code=200, body=json.dumps(payload)
+    )
+    consumer.evaluate_for_task(result, required_fields=["repo.build"])
+    assert not result.usable
+    assert "scoped-command-source:repo.build" in result.fallback_reasons

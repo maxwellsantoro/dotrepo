@@ -2,18 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/streamlit/streamlit"
 generated_at = "2026-09-19T06:05:05.388134124Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
     "inferred",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `frontend/app/package.json`, and `lib/pyproject.toml`. Filled `repo.name` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@streamlit/open-source-release-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `frontend/app/package.json`. Imported `repo.test` from `frontend/app/package.json`. Imported `repo.toolchain.min` from `lib/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `frontend/app/package.json`, and `lib/pyproject.toml`. Filled `repo.name` with inferred defaults. Maintainer information was imported from CODEOWNERS; `owners.team` is `@streamlit/open-source-release-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `frontend/app/package.json`. Imported `repo.test` from `frontend/app/package.json`. Imported `repo.toolchain.min` from `lib/pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
 
 [repo]
 name = "streamlit"
@@ -31,8 +30,6 @@ languages = [
     "CSS",
     "Dockerfile",
 ]
-build = "npm run build"
-test = "npm test"
 topics = [
     "python",
     "machine-learning",
@@ -91,12 +88,12 @@ valueJson = '"@streamlit/open-source-release-team"'
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-19T06:05:05.388134124Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "frontend/app/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-19T06:05:05.388134124Z"
@@ -126,12 +123,12 @@ valueJson = '"streamlit"'
 
 [x.dotrepo.field_evidence."repo.test"]
 checkedAt = "2026-09-19T06:05:05.388134124Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "frontend/app/package.json"
-state = "present"
-valueJson = '"npm test"'
+state = "unresolved"
+valueJson = "null"
 
 [x.github]
 archived = false

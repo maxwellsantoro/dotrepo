@@ -535,6 +535,23 @@ pub(crate) fn infer_imported_commands(sources: &ImportSources) -> ImportedComman
     );
 
     let mut metadata = ImportedCommandMetadata::default();
+    // Legacy scalar fields describe commands from the repository root. A nested
+    // manifest only describes its own component; ranking cannot establish that
+    // it is the repository's primary entrypoint.
+    candidates.retain(|candidate| {
+        let path = candidate.source_path.replace('\\', "/");
+        let root_scoped = !path.contains('/')
+            || path.starts_with(".github/workflows/")
+            || path == ".github/CONTRIBUTING.md";
+        if !root_scoped {
+            let note =
+                format!("Ignored component-scoped commands from `{path}` as repository defaults.");
+            metadata.notes.push(note.clone());
+            metadata.evidence_bullets.push(note);
+        }
+        root_scoped
+    });
+
     metadata.build = resolve_command_field(
         &candidates,
         "repo.build",
@@ -779,8 +796,8 @@ jobs:
     }
 
     #[test]
-    fn readme_doc_commands_extract_development_build_and_test() {
-        use super::super::types::{CommandSourceTier, ImportedFile};
+    fn readme_doc_commands_abstain_after_directory_change() {
+        use super::super::types::ImportedFile;
         use super::extraction::infer_readme_commands;
 
         let readme = ImportedFile {
@@ -805,10 +822,7 @@ cargo test
             .into(),
         };
 
-        let candidate = infer_readme_commands(&readme).expect("README commands");
-        assert_eq!(candidate.source_tier, CommandSourceTier::ContribDoc);
-        assert_eq!(candidate.build.as_deref(), Some("cargo build --bins"));
-        assert_eq!(candidate.test.as_deref(), Some("cargo test"));
+        assert!(infer_readme_commands(&readme).is_none());
     }
 
     #[test]
@@ -1242,7 +1256,7 @@ cargo +nightly test --features unstable
     }
 
     #[test]
-    fn docs_strip_leading_env_assignments_from_test_commands() {
+    fn docs_abstain_when_environment_prerequisite_would_be_lost() {
         use super::super::types::ImportedFile;
         use super::extraction::infer_contributing_commands;
 
@@ -1258,8 +1272,7 @@ RUFF_UPDATE_SCHEMA=1 cargo test
             .into(),
         };
 
-        let candidate = infer_contributing_commands(&contributing).expect("CONTRIBUTING commands");
-        assert_eq!(candidate.test.as_deref(), Some("cargo test"));
+        assert!(infer_contributing_commands(&contributing).is_none());
     }
 
     #[test]

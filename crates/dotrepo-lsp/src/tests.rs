@@ -404,6 +404,36 @@ homepage = "https://github.com/acme/orbit"
         .new_text
         .contains("dotrepo --root . adoption-status"));
     assert!(text_edit.edits[0].new_text.contains("DOTREPO_VERSION"));
+    let request = json!({
+        "jsonrpc": JSONRPC_VERSION, "id": 42, "method": "textDocument/codeAction",
+        "params": {
+            "textDocument": { "uri": Url::from_file_path(root.join(".repo")).unwrap().to_string() },
+            "range": actions[0].diagnostics[0].range,
+            "context": { "diagnostics": actions[0].diagnostics }
+        }
+    });
+    let outgoing = handle_message(&mut state, &serde_json::to_vec(&request).unwrap())
+        .expect("request handled");
+    let wire = &outgoing[0]["result"][0];
+    let changes = &wire["edit"]["documentChanges"];
+    assert_eq!(
+        changes[0],
+        serde_json::json!({
+            "kind": "create", "uri": workflow_uri,
+            "options": { "overwrite": false, "ignoreIfExists": false }
+        })
+    );
+    assert_eq!(
+        changes[1]["textDocument"],
+        serde_json::json!({
+            "uri": workflow_uri, "version": null
+        })
+    );
+    assert_eq!(
+        changes[1]["edits"][0]["newText"],
+        dotrepo_core::render_dotrepo_ci_workflow(dotrepo_core::DEFAULT_CI_RELEASE_VERSION)
+    );
+    assert!(wire["edit"].get("document_changes").is_none());
 
     fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
 }

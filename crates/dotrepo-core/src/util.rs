@@ -303,15 +303,28 @@ pub(crate) fn walk_dir_entries<F>(dir: &Path, mut on_entry: F) -> Result<()>
 where
     F: FnMut(&Path, fs::FileType) -> Result<bool>,
 {
-    walk_dir_entries_impl(dir, 0, &mut on_entry)
+    walk_dir_entries_impl(dir, 0, &mut on_entry, true)
+}
+
+/// Candidate discovery ignores descendants beyond its search horizon. Exhaustive
+/// index validation retains the strict walker and reports an exceeded limit.
+pub(crate) fn walk_dir_entries_bounded<F>(dir: &Path, mut on_entry: F) -> Result<()>
+where
+    F: FnMut(&Path, fs::FileType) -> Result<bool>,
+{
+    walk_dir_entries_impl(dir, 0, &mut on_entry, false)
 }
 
 fn walk_dir_entries_impl(
     dir: &Path,
     depth: u32,
     on_entry: &mut dyn FnMut(&Path, fs::FileType) -> Result<bool>,
+    strict: bool,
 ) -> Result<()> {
     if depth > 20 {
+        if !strict {
+            return Ok(());
+        }
         bail!(
             "directory traversal depth exceeded at {} — possible symlink cycle",
             dir.display()
@@ -328,7 +341,7 @@ fn walk_dir_entries_impl(
         }
         let should_recurse = on_entry(&path, file_type)?;
         if should_recurse && file_type.is_dir() {
-            walk_dir_entries_impl(&path, depth + 1, on_entry)?;
+            walk_dir_entries_impl(&path, depth + 1, on_entry, strict)?;
         }
     }
     Ok(())

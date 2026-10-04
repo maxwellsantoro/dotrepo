@@ -533,5 +533,194 @@
     "overlay_evidence_contains": [
       "Conflicting documentation declarations in README.md; abstained from docs.root."
     ]
+  },
+  {
+    "fixture": "command-placeholder",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-continuation",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-setup-only",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-component-doc",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-component-manifest",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-component-workflow",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
+  },
+  {
+    "fixture": "command-root-with-component",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "repo_build": "cargo build --workspace",
+    "repo_test": "cargo test --workspace",
+    "imported_sources": [
+      "README.md",
+      "Cargo.toml"
+    ],
+    "inferred_fields": [
+      "repo.build",
+      "repo.test"
+    ],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "inferred",
+    "trust_provenance": [
+      "imported",
+      "inferred"
+    ],
+    "native_trust_note_contains": [
+      "Ignored component-scoped commands from `playground/package.json`"
+    ],
+    "overlay_trust_note_contains": [
+      "Ignored component-scoped commands from `playground/package.json`"
+    ],
+    "overlay_evidence_contains": [
+      "Ignored component-scoped commands from `playground/package.json`"
+    ]
   }
 ]

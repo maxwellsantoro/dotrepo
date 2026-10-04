@@ -21,11 +21,25 @@ pub(crate) enum UniqueCommandResolution {
 }
 
 pub(crate) fn sanitize_import_command(command: &str) -> Option<String> {
-    if contains_unsafe_shell_like_value(command) {
+    if contains_unsafe_shell_like_value(command) || command_is_incomplete(command) {
         None
     } else {
         Some(command.to_string())
     }
+}
+
+fn command_is_incomplete(command: &str) -> bool {
+    command.trim().is_empty()
+        || command.trim_end().ends_with('\\')
+        || command.contains('<')
+        || command.contains('>')
+        || command
+            .split_whitespace()
+            .any(|token| token.contains("...") && token != "./..." && !token.starts_with("//"))
+        || command.contains("test_explain_what_is_being_tested")
+        || command
+            .split_whitespace()
+            .any(|token| matches!(token, "--collect-only" | "--no-run"))
 }
 
 pub(crate) fn resolve_command_field(
@@ -644,7 +658,20 @@ pub(crate) fn detect_node_package_runner(package_manager: Option<&str>) -> NodeP
 }
 
 pub(crate) fn is_placeholder_package_json_test_script(script: &str) -> bool {
-    script.to_ascii_lowercase().contains("no test specified")
+    let normalized = script.trim().to_ascii_lowercase();
+    normalized.contains("no test specified")
+        || command_is_incomplete(script)
+        || (!normalized.contains("&&")
+            && !normalized.contains(';')
+            && [
+                "npm install",
+                "npm ci",
+                "pnpm install",
+                "yarn install",
+                "uv sync",
+            ]
+            .iter()
+            .any(|setup| normalized == *setup || normalized.starts_with(&format!("{setup} "))))
 }
 
 /// Return a runner-wrapped command if any of the candidate script names exists and is non-empty.
@@ -655,7 +682,7 @@ pub(crate) fn pick_node_script_command(
 ) -> Option<String> {
     for name in names {
         if let Some(v) = scripts.get(*name).and_then(serde_json::Value::as_str) {
-            if !v.trim().is_empty() {
+            if !v.trim().is_empty() && !command_is_incomplete(v) {
                 return Some(make_cmd(name));
             }
         }

@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `docs/package.json`, `.github/workflows/backend_test.yml`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `docs/package.json`. Inferred `repo.test` from `.github/workflows/backend_test.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md`, `docs/package.json`, `.github/workflows/backend_test.yml`, and `go.mod`. Filled `repo.name` with inferred defaults. Imported `repo.build` from `docs/package.json`. Inferred `repo.test` from `.github/workflows/backend_test.yml`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
 
 [repo]
 name = "digger"
@@ -32,7 +32,6 @@ languages = [
     "PLpgSQL",
     "Dockerfile",
 ]
-build = "npm run build"
 test = "go test ./..."
 topics = [
     "infrastructure-as-code",
@@ -88,12 +87,12 @@ valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
 checkedAt = "2026-09-16T16:22:26.636029Z"
-confidence = "high"
+confidence = "low"
 method = "extracted"
-reason = "from declared repository source"
+reason = "Component command lacks repository-default scope and working directory."
 source = "docs/package.json"
-state = "present"
-valueJson = '"npm run build"'
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:22:26.636029Z"

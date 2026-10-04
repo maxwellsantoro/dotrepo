@@ -464,3 +464,81 @@ fn index_validation_replays_claim_transition_sources() {
 
     fs::remove_dir_all(root).unwrap();
 }
+
+fn copy_tree(source: &Path, destination: &Path) {
+    fs::create_dir_all(destination).expect("destination created");
+    for entry in fs::read_dir(source).expect("source directory").flatten() {
+        let target = destination.join(entry.file_name());
+        if entry.file_type().expect("entry type").is_dir() {
+            copy_tree(&entry.path(), &target);
+        } else {
+            fs::copy(entry.path(), target).expect("fixture copied");
+        }
+    }
+}
+
+#[test]
+fn authority_resolution_rejects_invalid_claims_at_index_and_repository_scope() {
+    for mutation in [
+        "missing-events",
+        "sequence-gap",
+        "identity-mismatch",
+        "invalid-resolution",
+    ] {
+        let root = temp_root(mutation);
+        copy_tree(&fixture_root().join("accepted-clean"), &root);
+        let dir = claim_dir(&root, "2026-03-10-maintainer-claim-01");
+        match mutation {
+            "missing-events" => fs::remove_dir_all(dir.join("events")).unwrap(),
+            "sequence-gap" => fs::remove_file(dir.join("events/0001-submitted.toml")).unwrap(),
+            "identity-mismatch" => {
+                let text =
+                    read(&dir.join("claim.toml")).replace("owner = \"acme\"", "owner = \"other\"");
+                fs::write(dir.join("claim.toml"), text).unwrap();
+            }
+            "invalid-resolution" => {
+                let text = read(&dir.join("claim.toml"))
+                    .replace("result_event = \"events/0002-accepted.toml\"", "");
+                fs::write(dir.join("claim.toml"), text).unwrap();
+            }
+            _ => unreachable!(),
+        }
+        for scope in [&root, &root.join("repos/github.com/acme/widget")] {
+            let trust = dotrepo_core::trust_repository(scope).expect("valid record still resolves");
+            assert!(trust.selection.record.claim.is_none(), "{mutation}");
+            assert!(!trust.claim_load_warnings.is_empty(), "{mutation}");
+            let query = dotrepo_core::query_repository(scope, "repo.name").expect("query resolves");
+            assert!(query.selection.record.claim.is_none(), "{mutation}");
+        }
+        fs::remove_dir_all(root).unwrap();
+    }
+}
+
+#[test]
+fn valid_in_review_claim_breaks_equal_rank_ties_before_path_order() {
+    let root = temp_root("in-review-tie");
+    copy_tree(&fixture_root().join("accepted-clean"), &root);
+    let repo_dir = root.join("repos/github.com/acme/widget");
+    // The unclaimed root candidate would win the lexicographic tie.
+    fs::copy(repo_dir.join("record.toml"), root.join(".repo")).unwrap();
+    let dir = claim_dir(&root, "2026-03-10-maintainer-claim-01");
+    let text = read(&dir.join("claim.toml"));
+    let text = text
+        .split("[resolution]")
+        .next()
+        .unwrap()
+        .replace("state = \"accepted\"", "state = \"in_review\"");
+    fs::write(dir.join("claim.toml"), text).unwrap();
+    let event = read(&dir.join("events/0002-accepted.toml"))
+        .replace("kind = \"accepted\"", "kind = \"review_started\"")
+        .replace("to = \"accepted\"", "to = \"in_review\"");
+    fs::write(dir.join("events/0002-accepted.toml"), event).unwrap();
+    let report = dotrepo_core::trust_repository(&root).expect("tie resolves");
+    assert_eq!(
+        report.manifest_path,
+        "repos/github.com/acme/widget/record.toml"
+    );
+    // Active review does not pretend a canonical handoff has happened.
+    assert!(report.selection.record.claim.is_none());
+    fs::remove_dir_all(root).unwrap();
+}

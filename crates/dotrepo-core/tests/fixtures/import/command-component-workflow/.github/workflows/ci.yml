@@ -1,0 +1,8 @@
+jobs:
+  extension:
+    defaults:
+      run:
+        working-directory: editors/code
+    steps:
+      - run: npm run build
+      - run: npm test

@@ -26,3 +26,9 @@ Prior verified authority was not inherited: this refresh must qualify using its 
 - Withheld docs.getting_started; rejected `https://docs.trychroma.com/docs/overview/getting-started` because Chroma integration link is not Semantic Kernel getting-started documentation. Source: [README.md:32](https://github.com/microsoft/semantic-kernel/blob/ca40aa7226531d28a721d0ca0e451d0aaf86dafc/README.md#L32). No replacement was established by this correction.
 - This documentation-only correction advances the record timestamp. Older assessments for other fields retain their original check times and are invalidated by public export until fresh verification; their values were not refreshed.
 - This is an overlay record, not a maintainer-controlled canonical record.
+
+## Command semantic correction (2026-10-03)
+
+2026-10-03 semantic audit withheld repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
+
+- Withheld `repo.test` previously extracted from `python/pyproject.toml` as `python -m pytest`. Component command lacks repository-default scope and working directory.
