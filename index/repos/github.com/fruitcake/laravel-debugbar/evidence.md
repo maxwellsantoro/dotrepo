@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name, description, and docs entry points from readme.md.
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from composer.json as `composer run-script test`.
+- Imported docs.root as `https://php-debugbar.com/docs`. Explicit documentation link at readme.md:13: Read the [documentation](https://php-debugbar.com/docs) for more configuration options.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `laravel-debugbar` from `GitHub API` after deterministic escalation.

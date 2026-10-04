@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/akaunting/akaunting"
-generated_at = "2026-09-16T16:20:24.554461Z"
+generated_at = "2026-10-04T07:52:53.111928329Z"
 
 [record.trust]
 confidence = "high"
@@ -56,31 +56,33 @@ security_contact = "security@akaunting.com"
 root = "https://akaunting.com/hc/docs"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:11: * [Documentation](https://akaunting.com/hc/docs) - Learn how to use"
+source = "README.md"
 state = "present"
 valueJson = '"https://akaunting.com/hc/docs"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@akaunting.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -88,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -96,7 +98,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -105,7 +107,7 @@ state = "present"
 valueJson = '"Online Accounting Software"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -113,16 +115,16 @@ state = "present"
 valueJson = '"https://akaunting.com"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"akaunting"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:20:24.554461Z"
+checkedAt = "2026-10-04T07:52:53.111928329Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -135,6 +137,6 @@ archived = false
 clone_url = "https://github.com/akaunting/akaunting.git"
 default_branch = "master"
 fork = false
-head_sha = "b41c30f2f00a9e0aecc9fcd8d71e7d775488ec5e"
+head_sha = "e74a94e562b1743483f0b897f282d759d3e53bbc"
 html_url = "https://github.com/akaunting/akaunting"
-stars = 10123
+stars = 10161

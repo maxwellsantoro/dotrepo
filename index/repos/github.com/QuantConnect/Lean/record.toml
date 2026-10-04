@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/QuantConnect/Lean"
-generated_at = "2026-09-16T16:19:20.512043Z"
+generated_at = "2026-10-04T07:50:20.515215923Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `QuantConnect.Lean.sln`. Inferred `repo.build` from `QuantConnect.Lean.sln`. Inferred `repo.test` from `QuantConnect.Lean.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `readme.md` and `QuantConnect.Lean.sln`. Inferred `repo.build` from `QuantConnect.Lean.sln`. Inferred `repo.test` from `QuantConnect.Lean.sln`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "lean-header"
@@ -53,39 +53,25 @@ topics = [
 [docs]
 root = "https://www.lean.io/docs/"
 
-[relations]
-references = []
-
-[[relations.links]]
-kind = "related"
-target = "github.com/QuantConnect/Lean"
-notes = "Cross-link from README: ![Build Status"
-
-[relations.links.trust]
-confidence = "low"
-provenance = [
-    "declared",
-    "readme",
-]
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at readme.md:12: [Lean Home][1] | [Documentation][2] | [Download Zip][3] | [Docker Hub][8] | [Nuget][9]"
+source = "readme.md"
 state = "present"
 valueJson = '"https://www.lean.io/docs/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -93,7 +79,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -101,7 +87,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -110,7 +96,7 @@ state = "present"
 valueJson = '"dotnet build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -119,7 +105,7 @@ state = "present"
 valueJson = '"Lean Algorithmic Trading Engine by QuantConnect (Python, C#)"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -127,16 +113,16 @@ state = "present"
 valueJson = '"https://lean.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
-source = "README.md"
+reason = "extracted from README title with post-cleaners"
+source = "readme.md"
 state = "present"
 valueJson = '"lean-header"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:19:20.512043Z"
+checkedAt = "2026-10-04T07:50:20.515215923Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -149,6 +135,6 @@ archived = false
 clone_url = "https://github.com/QuantConnect/Lean.git"
 default_branch = "master"
 fork = false
-head_sha = "f9107abdf26121c5ce159f561bd27fead01d30e1"
+head_sha = "705b9551be1aaa821c7f77896a7eb8fcd07b92ee"
 html_url = "https://github.com/QuantConnect/Lean"
-stars = 21645
+stars = 21854

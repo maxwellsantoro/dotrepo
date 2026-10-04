@@ -1,7 +1,6 @@
 # Evidence
 
-- Imported repository name from README.md.
-- Discovered related relation to github.com/sindresorhus/awesome from README cross-link.
+- Imported repository name and description from readme.md.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.license from GitHub repository metadata.
 - Augmented repo.visibility from GitHub repository metadata.

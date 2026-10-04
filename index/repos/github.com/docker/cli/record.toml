@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/docker/cli"
-generated_at = "2026-09-16T16:13:08.895528Z"
+generated_at = "2026-10-04T07:53:06.871288979Z"
 
 [record.trust]
 confidence = "high"
@@ -46,31 +46,32 @@ team = "@docker/runtime-owners"
 security_contact = "security@docker.com"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "direct email or mailing list"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"security@docker.com"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
 method = "unspecified"
 reason = "clear CODEOWNERS team"
@@ -78,7 +79,7 @@ state = "present"
 valueJson = '"@docker/runtime-owners"'
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -87,7 +88,7 @@ state = "present"
 valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -96,7 +97,7 @@ state = "present"
 valueJson = '"The Docker CLI"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -104,16 +105,16 @@ state = "present"
 valueJson = '"https://github.com/docker/cli"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Docker CLI"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:13:08.895528Z"
+checkedAt = "2026-10-04T07:53:06.871288979Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -126,6 +127,6 @@ archived = false
 clone_url = "https://github.com/docker/cli.git"
 default_branch = "master"
 fork = false
-head_sha = "4a63305d74332de5ceba7fcbccbc3cbb7412f5ba"
+head_sha = "75d1d1a9e62f89d8284ad0b4b8678b936ae5bed9"
 html_url = "https://github.com/docker/cli"
-stars = 6061
+stars = 6081

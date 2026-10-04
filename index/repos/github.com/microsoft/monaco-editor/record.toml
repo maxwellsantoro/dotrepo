@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/microsoft/monaco-editor"
-generated_at = "2026-09-16T16:14:45.871405Z"
+generated_at = "2026-10-04T07:53:30.166979865Z"
 
 [record.trust]
 confidence = "high"
@@ -43,7 +43,7 @@ maintainers = []
 security_contact = "https://aka.ms/SECURITY.md"
 
 [docs]
-root = "https://microsoft.github.io/monaco-editor/"
+root = "./samples/"
 
 [relations]
 references = []
@@ -73,31 +73,33 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:68: - Learn how to integrate the editor with these [complete samples](./samples/)."
+source = "README.md"
 state = "present"
-valueJson = '"https://microsoft.github.io/monaco-editor/"'
+valueJson = '"./samples/"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
-method = "unspecified"
+method = "extracted"
 reason = "actionable security reporting URL"
+source = "SECURITY.md"
 state = "present"
 valueJson = '"https://aka.ms/SECURITY.md"'
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -105,7 +107,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -114,7 +116,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -123,7 +125,7 @@ state = "present"
 valueJson = '"A browser based code editor"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -131,16 +133,16 @@ state = "present"
 valueJson = '"https://microsoft.github.io/monaco-editor/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Monaco Editor"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:14:45.871405Z"
+checkedAt = "2026-10-04T07:53:30.166979865Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -153,6 +155,6 @@ archived = false
 clone_url = "https://github.com/microsoft/monaco-editor.git"
 default_branch = "main"
 fork = false
-head_sha = "d620ca0c03d24a51c05ae4dca8a9d5923a4aeb9c"
+head_sha = "fdf1ee75a63b85433a591db4e1184022cad8483b"
 html_url = "https://github.com/microsoft/monaco-editor"
-stars = 46747
+stars = 46831

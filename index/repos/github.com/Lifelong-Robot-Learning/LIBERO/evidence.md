@@ -1,6 +1,7 @@
 # Evidence
 
 - Imported repository name from README.md.
+- Conflicting documentation declarations in README.md; abstained from docs.getting_started.
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `LIBERO` from `GitHub API` after deterministic escalation.
@@ -11,6 +12,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

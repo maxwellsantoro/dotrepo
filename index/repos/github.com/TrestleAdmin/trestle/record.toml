@@ -2,17 +2,14 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/TrestleAdmin/trestle"
-generated_at = "2026-09-16T16:20:00.005239Z"
+generated_at = "2026-10-04T07:51:37.432408226Z"
 
 [record.trust]
-confidence = "high"
-provenance = [
-    "imported",
-    "verified",
-]
-notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+confidence = "medium"
+provenance = ["imported"]
+notes = "Bootstrapped from `README.md` and `package.json`. Imported `repo.build` from `package.json`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Trestle"
@@ -54,23 +51,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
-confidence = "high"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
+confidence = "medium"
 method = "unspecified"
-reason = "docs URL present"
+reason = "documentation target present without a retained source declaration"
 state = "present"
 valueJson = '"https://trestle.io"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -78,7 +75,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -86,7 +83,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -95,7 +92,7 @@ state = "present"
 valueJson = '"npm run build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -104,7 +101,7 @@ state = "present"
 valueJson = '"A modern, responsive admin framework for Ruby on Rails"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -112,16 +109,16 @@ state = "present"
 valueJson = '"https://trestle.io"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Trestle"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:20:00.005239Z"
+checkedAt = "2026-10-04T07:51:37.432408226Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -135,4 +132,4 @@ default_branch = "main"
 fork = false
 head_sha = "bd7443b3a893a681f1ab0d03af65cdd412458189"
 html_url = "https://github.com/TrestleAdmin/trestle"
-stars = 1991
+stars = 1992

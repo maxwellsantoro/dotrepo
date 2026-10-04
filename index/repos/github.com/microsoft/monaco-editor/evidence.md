@@ -1,9 +1,10 @@
 # Evidence
 
-- Imported repository name from README.md.
+- Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
+- Imported docs.root as `./samples/`. Explicit documentation link at README.md:68: - Learn how to integrate the editor with these [complete samples](./samples/).
 - Discovered related relation to github.com/microsoft/monaco-editor from package.json repository.
 - Discovered related relation to github.com/microsoft/vscode from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

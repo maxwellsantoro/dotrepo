@@ -6,6 +6,7 @@
 - Inferred fallback values for `repo.description` because the imported files did not provide enough structured metadata.
 - Inferred repo.build from PowerShell.sln as `dotnet build`.
 - Inferred repo.test from PowerShell.sln as `dotnet test`.
+- Imported docs.getting_started as `https://learn.microsoft.com/powershell/scripting/learn/more-powershell-learning`. Explicit documentation link at README.md:21: If you are new to PowerShell and want to learn more, we recommend reviewing the [getting started][] documentation.
 - Discovered related relation to github.com/discussions/quickstart from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
@@ -15,7 +16,3 @@
 - Augmented repo.topics from GitHub repository metadata.
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
-
-## Fresh verification
-
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.

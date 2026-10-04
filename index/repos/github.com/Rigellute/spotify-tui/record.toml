@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/Rigellute/spotify-tui"
-generated_at = "2026-09-16T16:19:27.696748Z"
+generated_at = "2026-10-04T07:50:39.824721441Z"
 
 [record.trust]
 confidence = "medium"
@@ -64,23 +64,23 @@ provenance = [
 ]
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -88,7 +88,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -96,7 +96,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -105,7 +105,7 @@ state = "present"
 valueJson = '"cargo build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -114,7 +114,7 @@ state = "present"
 valueJson = '"Spotify for the terminal written in Rust 🚀"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -122,16 +122,16 @@ state = "present"
 valueJson = '"https://github.com/Rigellute/spotify-tui"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Spotify TUI"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:19:27.696748Z"
+checkedAt = "2026-10-04T07:50:39.824721441Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -146,4 +146,4 @@ default_branch = "master"
 fork = false
 head_sha = "c4dcf6b9fd8318017acbdd7ec005955e26cf2794"
 html_url = "https://github.com/Rigellute/spotify-tui"
-stars = 19350
+stars = 19361

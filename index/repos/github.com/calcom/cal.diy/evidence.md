@@ -2,7 +2,7 @@
 
 - Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
-- Imported repo.build from package.json as `yarn build`.
+- Imported repo.build from CONTRIBUTING.md as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
 - Discovered related relation to github.com/nvm-sh/nvm from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.
@@ -14,6 +14,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.
