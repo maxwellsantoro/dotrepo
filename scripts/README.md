@@ -6,21 +6,24 @@ published crates.
 
 ## Requirements
 
-These scripts are **standard-library only** — they have no third-party
-dependencies beyond the locked development tools.
+Most runtime scripts use the standard library; upstream accuracy capture uses
+`requests`, and tests/benchmarks use additional packages from the locked
+development environment. Sync that environment rather than assuming every
+script is dependency-free. Node-based packaging and Worker checks also require
+the runtime documented in their respective guides.
 
 - **Python >= 3.12** is required (the packaging scripts use modern f-string syntax).
 - Create and sync the repository environment, then run through `uv`:
 
   ```bash
   uv venv
-  uv sync --dev
+  uv sync --dev --locked
   uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
   ```
 
 The canonical invocations (with their exact flags) are documented in
-[`../AGENTS.md`](../AGENTS.md) under **Commands** and in the relevant files
-under [`../docs/`](../docs/).
+[the contributing guide](../CONTRIBUTING.md), [agent guidance](../AGENTS.md),
+and the task-specific [documentation map](../docs/README.md).
 
 ## What lives here
 
@@ -30,9 +33,9 @@ under [`../docs/`](../docs/).
 | Autonomous index batch | `run_autonomous_index_batch.py`, `adjudication_openrouter_sidecar.py`, `check_autonomous_telemetry_gate.py`, `materialize_regression_fixture.py`, `test_adjudication_env.py` |
 | Review-batch planning | `plan_refresh_review_batches.py`, `plan_seed_review_batches.py`, `plan_index_growth_tranche.py`, `select_review_batch.py`, `render_review_batch_pull_request.py`, `render_seed_review_summary.py`, `render_refresh_plan_summary.py` |
 | Public surface | `fetch_pagedigest_baseline.py`, `render_public_pages_landing.py`, `render_index_growth_status.py`, `check_public_profile_coverage.py`, `check_public_quality_dashboard.py`, `build_public_lookup_workload.py`, `measure_public_lookup_efficiency.py`, `measure_public_factual_accuracy.py`, `diff_public_export_files.py`, `smoke_cloudflare_public_deploy.py`, `sync_cloudflare_public_snapshot.py` |
-| Quality scorecards | `render_intent_quality_scorecard.py`, `render_coverage_gaps.py`, `render_unit_cost_report.py`, `aggregate_lookup_misses.py` |
-| Audit sampling | `audit_index_sample.py` (read-only, local-only; see `docs/factual-crawl-automation.md`'s "Audit sampling" section) |
-| Operator gates | `check_operator_claim_gate.py` |
+| Quality scorecards | `render_intent_quality_scorecard.py`, `render_coverage_gaps.py`, `render_unit_cost_report.py`, `measure_public_policy_coverage.py`, `check_public_record_freshness.py`, `aggregate_lookup_misses.py`, `export_lookup_miss_demand.py` |
+| Audit sampling | `audit_index_sample.py` (read-only, local-only; see [audit cadence](../docs/factual-crawl-automation.md#audit-cadence)) |
+| Operator gates and landing | `check_operator_claim_gate.py`, `land_autonomous_index.py`, `refresh_stale_index.py` |
 | Shell helpers | `recrawl-batch.sh`, `use_runner_node22.sh` |
 | Shared modules | `language_family.py` (dominant-language ecosystem classifier), `process_resources.py` (CPU/RSS sampling for crawl subprocesses), `public_site_content.py` |
 

@@ -1,167 +1,91 @@
 # Public surface
 
-## What it is
+The public surface distributes the index as a read-only, export-backed JSON
+service and human-readable website. It shares core selection, trust, conflicts,
+and claim semantics with local tools. This guide describes source architecture;
+[release compatibility](release-compatibility.md) separates client releases from
+independently deployed hosted snapshots.
 
-The dotrepo public surface is a human-readable website backed by a hosted,
-read-only JSON tree and thin query contract. It provides repository identity,
-trust context, and claim-aware selection without requiring local tooling or
-index access.
+## Components and capabilities
 
-The public surface consists of:
-- the deployed `v0/` JSON tree and same-origin query route at
-  `https://dotrepo.org/`
-- the homepage, documentation, writing, and searchable repository catalog
-- the local and release-reviewed same-origin hosted-query runtime
-  `dotrepo-public-query`
-- export-time `query-input/` artifacts that capture repo-scoped hosted-query
-  snapshot inputs without runtime TOML traversal
-- an in-repo Cloudflare Worker project that serves the same `v0` query route
-  from those snapshot inputs during local review, release-gate smoke, and the
-  deployed `dotrepo.org` public origin
-- the CI-generated `public-export-v0` and `public-export-v0-bundle` artifacts
-- the Cloudflare deployment workflow in `.github/workflows/public-cloudflare.yml`
-- the `v0` public contracts defined in RFCs 0016 through 0019
+- Static inventory, repository summary, compact profile, trust, and typed
+  relations responses under the public export
+- Dynamic field queries, batches, search, comparison, and relations routes from
+  the same exported snapshot inputs
+- Homepage, searchable catalog, documentation, writing, and measurement pages
+- `dotrepo-public-query` for local same-origin review and a
+  [Cloudflare Worker](../cloudflare/hosted-query/README.md) for hosted serving
+- CI-generated public tree and versioned bundle for inspectable release artifacts
 
-## Why this architecture
+[Public examples](public-export-examples.md) give HTTP and CLI routes.
+Profiles expose purpose, execution, docs, ownership, trust, conflicts, record age,
+and retained field evidence where available. Optional `synthesis.toml` guidance
+stays separate from factual fields. Claim context exposes handoff links without
+turning acceptance into proof of canonical publication.
 
-The export-first hosted surface is the right default because it:
-- stays fully downstream of the exported JSON tree
-- gives humans and agents one inspectable surface immediately
-- keeps deployed hosting, local runtime review, and CI artifacts sharing the
-  same files and contracts
-- avoids inventing a second runtime-specific truth model
+The repository website is an inspection/integration surface; raw JSON remains
+directly accessible. Metadata supports orientation, while debugging, architecture
+research, and suitability decisions still require source inspection.
 
-## What ships
+## Snapshot architecture
 
-### For humans
+`meta.json` points at a content-addressed tree under
+`/v0/snapshots/<snapshotId>/`. Its immutable file manifest lists hashes and byte
+sizes for selective refetch; compatibility paths resolve through the current
+pointer. Snapshot identity includes serialized payloads and freshness metadata,
+while source digest identifies index inputs. They are distinct validators.
 
-- a searchable repository catalog at `https://dotrepo.org/repositories/`
-- product, protocol, and trust documentation on the same origin
-- hosted repository summary, compact profile, and trust responses at stable
-  URLs
-- a deployed same-origin query runtime on the public origin
-- the CI artifact `public-export-v0` for offline inspection
-- the CI artifact `public-export-v0-bundle` for versioned review snapshots
-- the operator loop in [`docs/public-export-workflow.md`](./public-export-workflow.md),
-  with `scripts/check_release_gate.py` as the canonical release review entrypoint
-- the accepted `v0` public contracts in RFCs 0016 through 0019
-- the `v0` compatibility note in
-  [`docs/public-api-compatibility.md`](./public-api-compatibility.md)
-- the canonical freshness reference in
-  [`docs/public-freshness.md`](./public-freshness.md)
+The static edge retains current and previous snapshots. Older immutable paths
+can fall through to a configured R2 archive. The snapshot log is append-only;
+`stats.json` derives history/count deltas and PageDigest instrumentation from it.
+Archive availability depends on operator provisioning.
 
-### For agents
+`/.well-known/pagedigest.json` publishes per-URL change revisions and digests for
+public records. Material-content digests exclude volatile export freshness so
+unchanged facts do not churn revisions. Replacement deploys validate and restore
+prior manifest/snapshot history instead of resetting it. The instrumentation's
+coarse token estimates are not billed usage or measured agent savings.
 
-The hosted and local public surface gives agents read-only, identity-first,
-trust-aware access to the indexed understanding: repository summary, compact
-research profiles, trust/conflict context, batch profile and field lookup,
-structured profile search, factual profile comparison, and relationship
-traversal (including semantic reverse edges such as `depended_on_by` and
-`forked_by`) — all through both the reference CLI/core contract and matching
-hosted GET routes. Optional profile `synthesis` sections (from validated
-`synthesis.toml` sidecars) stay separate from factual fields. A live accepted
-maintainer-claim example (`github.com/maxwellsantoro/ries-rs`) demonstrates
-claim-aware visibility end to end.
+See [freshness](public-freshness.md) for cache and retention semantics and
+[Cloudflare deployment](cloudflare-deploy.md) for restoration/archive setup.
 
-Snapshot-level mechanics for agents and mirrors:
-- `meta.json` is the one mutable pointer to a content-addressed tree under
-  `/v0/snapshots/<snapshotId>/`; its canonical `files.json`
-  (per-file SHA-256 and byte size) support cheap revalidation and selective
-  refetch; `scripts/diff_public_export_files.py` turns two `files.json`
-  manifests into a delta report
-- `meta.json` also publishes the retention contract. The hot edge path carries
-  the current and previous immutable snapshots; older immutable snapshot URLs
-  fall through to the configured R2 archive binding; `/v0/snapshots/log.json`
-  is append-only and never pruned. `/v0/stats.json` derives latest/history/count
-  deltas from that log and publishes PageDigest economics for Phase 2
-  instrumentation: covered records, skipped fetches, avoided bytes, and a
-  coarse token-avoidance estimate.
-- `/.well-known/pagedigest.json` publishes the same change-detection signal
-  through the standard pagedigest protocol (v1 RC): monotonic per-URL
-  revisions and auditable SHA-256 digests covering the `/v0/repos/` tree, so
-  generic pagedigest consumers can skip unchanged records with one manifest
-  request. Revisions track material content change (the volatile `freshness`
-  block is excluded), so a re-export with an unchanged index does not churn
-  revisions; each entry's `content_digest` extension field carries that state
-  forward between exports. Before building a replacement export, the deploy
-  workflow fetches and validates the currently deployed
-  `/.well-known/pagedigest.json`, then passes that manifest to
-  `public export --pagedigest-previous`. A missing or malformed baseline fails
-  the deploy rather than resetting revision history
-- `scripts/check_public_profile_coverage.py` reports profile-count and
-  high-signal coverage gates
-- deterministic lookup-efficiency and search-quality benchmark harnesses
-  measure hit rate, rank quality, and payload bytes against representative
-  workloads
-- a stable `queryTemplate` contract resolves same-origin on `dotrepo.org`
+## Runtime bounds
 
-For the exact command and route shape of every capability above, see
-[`docs/public-export-examples.md`](./public-export-examples.md). For the
-operator/CI loop that produces and reviews this surface, see
-[`docs/public-export-workflow.md`](./public-export-workflow.md).
+Queries reconstruct core reports from private repo-scoped `query-input/` files
+rather than traversing TOML at request time. Batch and comparison limits bound
+request work and preserve per-item errors.
 
-## What the public surface provides
+Hosted search reads the snapshot pointer and `repos/search.json`, a compact
+export with fields needed for both free-text matching and filters. It uses two
+asset reads independent of repository count; matching scans the document in
+memory. Default/max result limits bound response size, not scan cost. A missing
+search document fails rather than fetching all profile files.
 
-The hosted public surface is read-only and downstream of the exported JSON
-tree: it does not add a second semantic layer beyond what's described above.
-One deployable snapshot serves local review, CI artifacts, and the deployed
-Worker route alike, backed by repo-scoped `query-input/` artifacts validated
-against that same snapshot.
+Relations prefer precomputed `relations.json`; any legacy reverse traversal
+fallback remains bounded. Search ranking is separate from factual trust;
+comparison is a factual matrix, not a recommendation.
 
-Freshness on the hosted JSON is snapshot-first:
-- `freshness.generatedAt`, `freshness.snapshotDigest`, and `freshness.staleAfter`
-  follow the public freshness reference in
-  [`docs/public-freshness.md`](./public-freshness.md)
-- per-record crawl freshness remains a record concern via `record.generated_at`,
-  not a separate public truth model
+## Publication and validation
 
-The operator-gate CI artifact separately demonstrates the overlay-to-claim
-handoff path with canonical links exported through the same public JSON
-contracts.
+The [export workflow](public-export-workflow.md) owns generation, packaging,
+local runtime review, and CI artifacts. The [release checklist](public-release-checklist.md)
+owns publication checks. Generated `public/`, `release-gate/`, and `dist/` outputs
+are gitignored; `index/` and fixtures are source inputs.
 
-## What is not yet in scope
+The [wire compatibility manifest/test](public-api-compatibility.md) pins required
+keys, links, and errors. Fresh export time does not refresh underlying records;
+release gates independently check record age, correctness samples, validity,
+conflicts, completeness, quality, and policy acceptance reporting.
 
-The public surface does not yet include:
-- production synthesis generation or richer semantic relationship classes beyond
-  reference/referenced-by traversal
-- live mutation or submission APIs
-- public SLA expectations
-- a fully provisioned public R2 archive in every environment; the Worker and
-  contract are archive-aware, but bucket provisioning remains an operator step
+## Boundaries and remaining proof
 
-## How to use it
+Public mutation/submission APIs, authenticated maintainer submission, public
+SLAs, and operational workspace semantics remain deferred. Typed research
+relations and search/comparison are implemented; production-scale ranking and
+synthesis calibration, maintained freshness, complete task evaluation, and
+independent consumer outcomes remain active proof work.
 
-The primary deployed consumption path is now `https://dotrepo.org/`. For local
-review or CI inspection, start with the canonical release gate:
-
-```bash
-uv run python scripts/check_release_gate.py --output-root release-gate
-```
-
-The root `public/` and `release-gate/` trees are generated and gitignored.
-Durable review copies live in CI artifacts, immutable R2 archives, and the
-deployed public origin; the checked-in `index/` and fixture packs remain the
-source inputs and regression contracts.
-
-Then, if needed:
-
-1. Review the deterministic fixture pack if the contract changed.
-2. Review the CI artifact if the current index output changed.
-3. Regenerate the tree locally when you need a fresh export from `index/`.
-
-Start with:
-- [`docs/public-export-workflow.md`](./public-export-workflow.md)
-- [`rfcs/0017-public-repository-summary-response.md`](../rfcs/0017-public-repository-summary-response.md)
-- [`rfcs/0018-static-public-serving-and-freshness.md`](../rfcs/0018-static-public-serving-and-freshness.md)
-- [`rfcs/0019-public-trust-and-query-wrappers.md`](../rfcs/0019-public-trust-and-query-wrappers.md)
-
-## Next steps
-
-The next public-surface work is hardening freshness and caching, scaling profile
-coverage through planned crawl tranches, running the lookup-efficiency benchmark
-on a larger representative workload, and eventually building discovery and
-comparison on top of the trusted index. See
-[`ROADMAP.md`](../ROADMAP.md) for the active sequence. For the freshness
-definitions that apply to responses, see
-[`docs/public-freshness.md`](./public-freshness.md). For deployment operations,
-see [`docs/cloudflare-deploy.md`](./cloudflare-deploy.md).
+Use [the roadmap](../ROADMAP.md#active-execution-order) for priorities and
+[the consumer pilot](consumer-pilot.md) before claiming external adoption or net
+savings. Benchmark presence, policy acceptance, correctness, and task completion
+remain distinct measurements.

@@ -7,7 +7,7 @@ snapshot:
 - live `v0` query responses reconstructed from `query-input/*.json`
 - live `v0` batch profile and batch query responses from the same staged
   snapshot
-- live hosted profile search, factual profile compare, and declared-reference
+- live hosted profile search, factual profile compare, and typed
   relation traversal from the same staged snapshot
 
 ## Local workflow

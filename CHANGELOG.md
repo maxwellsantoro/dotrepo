@@ -9,11 +9,52 @@ prerelease line so the source at `main` cannot be confused with the immutable
 stable `1.0.x` — see [`docs/install.md`](./docs/install.md).
 
 Post-1.0 growth, hardening, and operational-proof work toward the roadmap
-milestones. Direction and gates live in [`ROADMAP.md`](./ROADMAP.md); the counts
-below are a 2026-06-29 snapshot and refresh with each run from the generated
-growth, coverage, promotion, and telemetry artifacts.
+milestones. Direction and gates live in [`ROADMAP.md`](./ROADMAP.md). Counts
+below are historical snapshots from the dated work, not current dashboards;
+generated growth, coverage, promotion, and telemetry artifacts own live values.
+
+### Documentation maintenance
+
+- Consolidate the roadmap around current proof priorities, clarify version and
+  authority boundaries in agent guidance, and reconcile operator/public guides
+  with tested automatic landing, compact hosted search, and consumer policy.
+- Add an RFC scope index, preserve historical benchmark reports, and remove
+  duplicated policies, exhausted-catalog examples, and obsolete release incentives.
 
 ### Trust, export, and crawler correctness
+
+- Configure Luna primary, Qwen3.8 Flash second opinion, and GLM-5.3
+  Flash tail adjudication. Share model-specific reasoning, output budgets, and
+  required parameter support across the sidecar and benchmark; constrain reviewed
+  adjudication models with candidate JSON schemas. Retain billed failure usage
+  through the HTTP provider and escalation report, and archive per-call usage logs.
+  Replace the deprecated direct Anthropic benchmark default with Sonnet 5.5 while
+  preserving historical model results and frozen fixtures.
+- Reject dependency installation as a build/test command, match actual pytest
+  invocations, and retain a pinned Sonnet CI regression source. Correct Sonnet's
+  setup-only scalar and retain its limited test invocation with explicit context
+  and prerequisites, preserving other facts' inspection age.
+- Split command-orchestration unit tests into their own module before expanding
+  the parser; keep extraction and policy in their existing focused modules.
+- Pin generated maintainer CI's checkout action to its full SHA and preserve the
+  existing published artifact default independently of development package versions.
+- Evaluate release record freshness at check time, retain export age separately,
+  and enforce the seven-day maximum refresh overdue budget alongside the stale
+  or unknown percentage. Report overdue repository identities.
+- Add optional exact-command execution context for scalar defaults and
+  candidates, with explicit working directory, component scope, prerequisites,
+  source, core validation, query, and public export. Imported context remains
+  unassessed; component commands remain withheld as scalar defaults.
+- Add a stable `ci-gate` result that requires all scoped validation jobs selected
+  by the classifier to succeed while accepting intentional skips.
+- Bind upstream accuracy capture provenance to its actual input identity list
+  rather than claiming every capture used the historical September sample.
+- Correct git-bug's description using a fresh upstream API capture, remove its
+  outdated field assessment, and supersede prior verified authority without
+  resetting other facts' inspection age. Retain the original sample results.
+- Gate the unchanged 32-repository accuracy cohort against the dated October 4
+  upstream recapture, retaining previous workloads and the 100% exact-value
+  requirement rather than pinning live metadata forever to an older answer.
 
 - Reject symlink and shared-hardlink targets during forced import writes, verify
   every output before overwriting, and preserve existing ownership and ACLs.

@@ -10,7 +10,7 @@ This RFC adds two optional, additive `[repo]` fields:
 - `build_candidates`: an array of `{ command, ecosystem, source }` entries
 - `test_candidates`: same shape, for `test`
 
-These are populated only when no single `repo.build` or `repo.test` command
+Automatic adjudication populates these when no single `repo.build` or `repo.test` command
 could be honestly chosen as primary because the repository has more than one
 legitimate, mutually exclusive command at the same tier (typically a genuinely
 polyglot repository, e.g. a Rust component and a Node.js component in the same
@@ -18,6 +18,11 @@ repo). In that case `repo.build`/`repo.test` remain `None` -- that absence is
 still the honest top-level answer -- but the concrete candidate commands that
 were actually found are preserved in structured form instead of being
 discarded.
+
+Source-inspected authoring may also retain a withheld component or
+prerequisite-dependent command as a candidate with the complete explicit
+[RFC 0021 context](0021-value-bound-execution-context.md). This does not restore
+it as a scalar default or enable automatic component-context extraction.
 
 ## Why
 
@@ -69,7 +74,7 @@ ecosystem = "Node.js"
 source = "package.json"
 
 [[repo.test_candidates]]
-command = "python -m pytest"
+command = "uv run pytest"
 ecosystem = "Python"
 source = "pyproject.toml"
 ```
@@ -89,7 +94,7 @@ fixture remains byte-identical until a repository actually needs this field.
 
 ### Population point
 
-Both arrays are populated in one place: `apply_adjudication_to_import_plan`'s
+Automatic imports populate both arrays in one place: `apply_adjudication_to_import_plan`'s
 `AdjudicationOutcome::Absent` branch, in `dotrepo-core`. This function is the
 single choke point for every escalation outcome (deterministic tier walk,
 primary/second-opinion/API model tiers, and any future tier), so this covers
@@ -105,11 +110,16 @@ command into these fields either.
 
 ## Public surface
 
-`profile.json`'s `research.execution` section gains the same two arrays
+`profile.json`'s top-level `execution` section gains the same two arrays
 (`buildCandidates`/`testCandidates`, camelCase per the existing public
 convention) with the same `{ command, ecosystem, source }` shape. This makes
 the preserved candidates visible to the same consumers (CLI query, MCP tools,
 public API, website) that already read `execution.build`/`execution.test`.
+
+Candidate commands carry source/ambiguity context and must not be treated as
+executable repository defaults. [RFC 0021](0021-value-bound-execution-context.md)
+adds optional explicit working-directory, component-scope, and prerequisite
+context; automatic imports leave it absent until those facts are established.
 
 ## Non-goals
 

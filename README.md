@@ -6,7 +6,8 @@
 
 **Look up a repository's purpose, build and test commands, docs, and owners.**
 
-dotrepo gives agents and tools those facts as JSON, through MCP, or from a local
+dotrepo is an open repository metadata protocol with a reference toolchain and
+public index. It gives agents and tools those facts as JSON, through MCP, or from a local
 `.repo` file. Each record includes source and trust context so you can decide
 whether to use an answer or inspect upstream.
 

@@ -47,6 +47,7 @@
     "linkKeys": ["self", "trust", "profile", "queryTemplate", "indexPath"]
   },
   "profile": {
+    "executionOptionalKeys": ["build", "test", "buildContext", "testContext", "buildCandidates", "testCandidates"],
     "requiredKeys": [
       "apiVersion",
       "freshness",
@@ -63,6 +64,11 @@
       "links"
     ],
     "linkKeys": ["self", "repository", "trust", "queryTemplate", "indexPath"]
+  },
+  "executionContext": {
+    "requiredKeys": ["command", "workingDirectory", "scope", "prerequisites", "source"],
+    "optionalKeys": ["component"],
+    "scopeValues": ["repository", "component"]
   },
   "batchProfile": {
     "requiredKeys": ["apiVersion", "freshness", "resultCount", "results"],

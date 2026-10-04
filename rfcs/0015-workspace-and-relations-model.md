@@ -3,6 +3,14 @@
 ## Status
 Draft
 
+## Implementation scope
+
+The research relation subset described below is implemented; workspace kinds
+remain proposals. Later dependency/fork/related assertions and deterministic
+relation discovery supersede the initial deferrals for those research uses.
+Use [public examples](../docs/public-export-examples.md#14-traverse-repository-relations)
+for current traversal behavior.
+
 ## Summary
 
 This RFC defines the intended direction for future workspace and relations

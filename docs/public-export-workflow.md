@@ -157,7 +157,8 @@ Current behavior:
 - the artifact is generated from the real `index/` tree
 - CI exercises both the canonical root-path Cloudflare deployment and the
   release-gate `/dotrepo` hosted-path review surface
-- CI uses fixed review timestamps for inspectable, stable output
+- CI records generation timestamps in review artifacts; explicit fixed timestamps
+  are available for deterministic contract review
 - CI also packages a versioned review bundle from the exported tree
 - CI also packages a Linux install bundle and a tagged-style VSIX as release-gate artifacts
 - CI smoke tests the release binaries from the extracted tarball
@@ -180,60 +181,23 @@ already demonstrates the corrected accepted-claim path through
 `github.com/maxwellsantoro/ries-rs`, with `superseded` handoff linked to the
 upstream native `.repo`.
 
-## Current deployed hosting
+## Deployment and runtime
 
-`.github/workflows/public-cloudflare.yml`:
+[Cloudflare setup](cloudflare-deploy.md) owns authentication, opt-in workflow
+variables, restoration of deployed/archived history, publication serialization,
+exact-source checks, and post-deploy smoke verification. Deploy the Worker and
+its regenerated export together. A separate scheduled edge canary checks live
+coherence; its artifacts establish actual run outcomes.
 
-- validates the index
-- fetches and validates the deployed PageDigest manifest as the prior revision
-  baseline; it fails closed if that baseline cannot be trusted
-- restores the deployed snapshot log and hash-verified public immutable payloads
-  into the fresh runner, and merges existing R2 history when configured
-- exports the public tree with the Cloudflare base path
-- renders a root landing page with `scripts/render_public_pages_landing.py`
-- stages the snapshot into the in-repo Worker project
-- preserves the restored deployed snapshot as the previous immutable snapshot,
-  so clean CI runs carry current+previous for rollback tolerance
-- deploys to `dotrepo.org`
-- serializes complete publication workflows with a shared concurrency group and
-  a multi-run queue, so late CI completions cannot evict the latest pending build
-- verifies the CI event's exact source SHA against the live default-branch ref
-  before building and again before R2 archival or Worker publication; superseded
-  revisions skip publication, and lookup failures fail closed
-- uses a seven-day freshness promise until end-to-end daily automation has
-  demonstrated a reliable cadence
-- smoke-tests the deployed custom domain when it resolves, otherwise falls back
-  to the deployed `workers.dev` staging origin
-- verifies the deployed `meta.json`, `files.json`, and repository inventory are
-  byte-for-byte JSON-equivalent to the reviewed export snapshot before route
-  smoke checks pass
-- verifies `v0/snapshots/log.json` and `v0/stats.json` agree with the deployed
-  pointer and current file/repository counts
-- verifies a deterministic public sample from `v0/files.json` against reviewed
-  byte counts and SHA-256 hashes, covering the core contract files plus the
-  first repository's exported JSON
-- a separate scheduled `public-edge-canary.yml` (daily at 14:00 UTC when
-  `DOTREPO_PUBLIC_EDGE_CANARY_ENABLED=true`) checks the homepage, pointer,
-  canonical inventory, canonical file manifest, two records, both pagedigest
-  manifests, snapshot log, stats document, and pagedigest.org's shipped-artifact
-  claims. One bot-owned report comment records changed failure reasons and
-  recovery; identical repeated results add no comments or edits. The reporter
-  reuses the existing issue across recurrences and retains historical comments.
-  Recovery does not automatically close the issue; an operator verifies closure.
+The static edge retains the current and previous immutable snapshots; historical
+payloads belong in the configured archive. Private `query-input/` files serve
+the runtime and are not restored from the public origin.
 
-The export tree is the source of truth for the current snapshot. Historical
-payload retention belongs to the archive layer; the static asset bundle should
-only be expected to carry the current and immediately previous immutable
-snapshot.
-
-For local same-origin review, `dotrepo-public-query` can now serve that
-exported `public/` tree together with the hosted query route from one process.
-The Cloudflare Worker path can now also serve the same exported snapshot
-locally after staging the reviewed tree into the Worker project, including
-hosted search, compare, and relation traversal. Search ranking now has a
-deterministic quality harness for workload-based review. The remaining
-operational work is snapshot scaling, production-scale profile coverage,
-production search-quality workloads, and richer discovery on `dotrepo.org`.
+`dotrepo-public-query` serves local static files and dynamic routes from one
+process. Hosted search reads the pointer plus the compact `repos/search.json`
+export for both text and filtered matching, scanning that document in memory.
+It does not fan out to every repository profile. A missing search document fails
+rather than switching to unbounded reads. See [architecture](public-surface.md).
 
 ## What should stay stable vs variable
 
@@ -286,14 +250,3 @@ For a cut/review checklist, see
 - [`rfcs/0018-static-public-serving-and-freshness.md`](../rfcs/0018-static-public-serving-and-freshness.md)
 - [`rfcs/0019-public-trust-and-query-wrappers.md`](../rfcs/0019-public-trust-and-query-wrappers.md)
 - [`README.md`](../README.md)
-
-### Hosted search data
-
-The exporter writes `repos/search.json` in each immutable snapshot. It contains
-compact profiles with the searchable fields, completeness, trust, and links
-needed for filtering and ranking. Both filtered and unfiltered hosted searches
-read this same document after reading the snapshot pointer: two asset reads,
-independent of repository count. Matching still scans the compact document in
-memory; the result limit bounds response size, not that scan. Deploy the Worker
-and regenerated export together. A missing search document returns a service
-error rather than fetching every individual profile.

@@ -50,7 +50,8 @@ for the current managed-sync contract. They are intended for scripts, MCP
 clients, and editor helpers that need the same ownership model humans see in
 the CLI.
 
-These JSON reports are semi-stable within the current v1 line:
+These reports follow the current source branch. Use [release compatibility](release-compatibility.md)
+for installed binaries; changing documented fields requires compatibility review:
 
 - field names and enum vocabularies should be treated as stable enough for
   maintainer tooling

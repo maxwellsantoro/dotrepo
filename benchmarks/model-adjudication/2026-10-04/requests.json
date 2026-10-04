@@ -1,0 +1,180 @@
+{
+  "date": "2026-10-04",
+  "scope": "synthetic HTTP and request-parameter canary, not a quality ranking or consumer proof",
+  "requests": [
+    {
+      "name": "primary-over-release",
+      "promptV1": "You are a narrow factual adjudicator for repository metadata import.\nChoose exactly one candidate value for the field, or return null if no single primary value is honest.\nRules:\n- value MUST be one of the listed candidate values, or null\n- do not invent commands or sources\n- prefer manifest/CI primary workflows over release-only workflows when both exist\n- if candidates are genuinely tied, return null with high confidence\n\nField: repo.build\nCandidates:\n- value='cargo build' source='.github/workflows/check.yml' tier='ci'\n- value='cargo build --release' source='.github/workflows/release.yml' tier='ci'\n\nRespond with JSON only, no markdown:\n{\"field\":\"...\", \"value\":\"...\" or null, \"confidence\":\"high|medium|low\", \"reason\":\"...\", \"source\":\"...\" or null}",
+      "promptV2": "You are a narrow factual adjudicator for repository metadata import.\nChoose exactly one candidate value for the field, or return null if no single primary value is honest.\nRules:\n- value MUST be one of the listed candidate values, or null\n- do not invent commands or sources\n- prefer manifest/CI primary workflows over release-only workflows when both exist\n- broader command coverage (such as --workspace) does not establish a repository default\n- ordinary workflow names such as check or verify do not establish primacy\n- conflicting same-tier normal CI workflows are tied unless evidence identifies a primary\n- if candidates are genuinely tied, return null with high confidence\n- when value is null, source must also be null\n\nField: repo.build\nCandidates:\n- value='cargo build' source='.github/workflows/check.yml' tier='ci'\n- value='cargo build --release' source='.github/workflows/release.yml' tier='ci'\n\nRespond with JSON only, no markdown:\n{\"field\":\"...\", \"value\":\"...\" or null, \"confidence\":\"high|medium|low\", \"reason\":\"...\", \"source\":\"...\" or null}",
+      "responseSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "value",
+          "confidence",
+          "reason",
+          "source"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": [
+              "repo.build"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "cargo build",
+              "cargo build --release",
+              null
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              ".github/workflows/check.yml",
+              ".github/workflows/release.yml",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "equal-workflows-abstain",
+      "promptV1": "You are a narrow factual adjudicator for repository metadata import.\nChoose exactly one candidate value for the field, or return null if no single primary value is honest.\nRules:\n- value MUST be one of the listed candidate values, or null\n- do not invent commands or sources\n- prefer manifest/CI primary workflows over release-only workflows when both exist\n- if candidates are genuinely tied, return null with high confidence\n\nField: repo.build\nCandidates:\n- value='cargo build' source='.github/workflows/check.yml' tier='ci'\n- value='cargo build --workspace' source='.github/workflows/verify.yml' tier='ci'\n\nRespond with JSON only, no markdown:\n{\"field\":\"...\", \"value\":\"...\" or null, \"confidence\":\"high|medium|low\", \"reason\":\"...\", \"source\":\"...\" or null}",
+      "promptV2": "You are a narrow factual adjudicator for repository metadata import.\nChoose exactly one candidate value for the field, or return null if no single primary value is honest.\nRules:\n- value MUST be one of the listed candidate values, or null\n- do not invent commands or sources\n- prefer manifest/CI primary workflows over release-only workflows when both exist\n- broader command coverage (such as --workspace) does not establish a repository default\n- ordinary workflow names such as check or verify do not establish primacy\n- conflicting same-tier normal CI workflows are tied unless evidence identifies a primary\n- if candidates are genuinely tied, return null with high confidence\n- when value is null, source must also be null\n\nField: repo.build\nCandidates:\n- value='cargo build' source='.github/workflows/check.yml' tier='ci'\n- value='cargo build --workspace' source='.github/workflows/verify.yml' tier='ci'\n\nRespond with JSON only, no markdown:\n{\"field\":\"...\", \"value\":\"...\" or null, \"confidence\":\"high|medium|low\", \"reason\":\"...\", \"source\":\"...\" or null}",
+      "responseSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "value",
+          "confidence",
+          "reason",
+          "source"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": [
+              "repo.build"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "cargo build",
+              "cargo build --workspace",
+              null
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              ".github/workflows/check.yml",
+              ".github/workflows/verify.yml",
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "no-evidence-abstain",
+      "promptV1": "You are a narrow factual adjudicator for repository metadata import.\nChoose exactly one candidate value for the field, or return null if no single primary value is honest.\nRules:\n- value MUST be one of the listed candidate values, or null\n- do not invent commands or sources\n- prefer manifest/CI primary workflows over release-only workflows when both exist\n- if candidates are genuinely tied, return null with high confidence\n\nField: repo.test\nCandidates:\n\nRespond with JSON only, no markdown:\n{\"field\":\"...\", \"value\":\"...\" or null, \"confidence\":\"high|medium|low\", \"reason\":\"...\", \"source\":\"...\" or null}",
+      "promptV2": "You are a narrow factual adjudicator for repository metadata import.\nChoose exactly one candidate value for the field, or return null if no single primary value is honest.\nRules:\n- value MUST be one of the listed candidate values, or null\n- do not invent commands or sources\n- prefer manifest/CI primary workflows over release-only workflows when both exist\n- broader command coverage (such as --workspace) does not establish a repository default\n- ordinary workflow names such as check or verify do not establish primacy\n- conflicting same-tier normal CI workflows are tied unless evidence identifies a primary\n- if candidates are genuinely tied, return null with high confidence\n- when value is null, source must also be null\n\nField: repo.test\nCandidates:\n\nRespond with JSON only, no markdown:\n{\"field\":\"...\", \"value\":\"...\" or null, \"confidence\":\"high|medium|low\", \"reason\":\"...\", \"source\":\"...\" or null}",
+      "responseSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "value",
+          "confidence",
+          "reason",
+          "source"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": [
+              "repo.test"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              null
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              null
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Three synthetic cases per model do not establish real repository accuracy.",
+    "The initial prompt failed GLM tie abstention; those results are retained.",
+    "Muse Contributor calls were rejected by the existing account paid-model training restriction.",
+    "No account privacy settings or scheduled model variables were changed.",
+    "Reported costs are retained in the caller usage logs; these result files contain token totals only."
+  ]
+}

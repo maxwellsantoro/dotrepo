@@ -114,9 +114,10 @@ the exact immutable payload set and hashes.
 
 The deployed export currently promises a seven-day `staleAfter` window. That
 matches the cadence the project can sustain without pretending a push-driven
-deployment is a daily refresh service. The scheduled public-edge canary must
-stay green for seven consecutive days before Phase 0 is declared
-operationally complete.
+deployment is a daily refresh service. Use the scheduled public-edge canary to verify pointer, payload, and history
+coherence. A configured schedule or earlier pass streak is not evidence of
+current successful operation; phase-era closure history belongs in retained
+reports rather than the freshness contract.
 
 For local review, mirrors, or agent caches, use the deterministic delta helper:
 

@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-04",
+  "scope": "synthetic provider integration; not a quality ranking",
+  "accountPolicyChanged": false,
+  "modelPolicy": {
+    "model": "qwen/qwen3.8-flash",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Return strict JSON only. Never wrap in markdown fences."
+      },
+      {
+        "role": "user",
+        "content": ""
+      }
+    ],
+    "max_tokens": 4096,
+    "response_format": {
+      "type": "json_object"
+    },
+    "provider": {
+      "require_parameters": true,
+      "max_price": {
+        "prompt": 0.15,
+        "completion": 0.47
+      }
+    },
+    "reasoning": {
+      "max_tokens": 1024
+    },
+    "temperature": 0
+  },
+  "cases": [
+    {
+      "name": "primary-over-release",
+      "field": "repo.build",
+      "expected": "cargo build",
+      "candidates": [
+        {
+          "value": "cargo build",
+          "sourcePath": ".github/workflows/check.yml",
+          "sourceTier": "ci"
+        },
+        {
+          "value": "cargo build --release",
+          "sourcePath": ".github/workflows/release.yml",
+          "sourceTier": "ci"
+        }
+      ]
+    },
+    {
+      "name": "equal-workflows-abstain",
+      "field": "repo.build",
+      "expected": null,
+      "candidates": [
+        {
+          "value": "cargo build",
+          "sourcePath": ".github/workflows/check.yml",
+          "sourceTier": "ci"
+        },
+        {
+          "value": "cargo build --workspace",
+          "sourcePath": ".github/workflows/verify.yml",
+          "sourceTier": "ci"
+        }
+      ]
+    },
+    {
+      "name": "no-evidence-abstain",
+      "field": "repo.test",
+      "expected": null,
+      "candidates": []
+    }
+  ],
+  "results": [
+    {
+      "model": "qwen/qwen3.8-flash",
+      "case": "primary-over-release",
+      "answer": {
+        "field": "repo.build",
+        "value": "cargo build",
+        "confidence": "high",
+        "reason": "check.yml is a CI primary workflow while release.yml is a release-only workflow; the rules explicitly prefer CI primary workflows over release-only workflows when both exist.",
+        "source": ".github/workflows/check.yml"
+      },
+      "tokensUsed": 662,
+      "passed": true,
+      "usage": {
+        "completionTokens": 374,
+        "cost": 0.00021898,
+        "event": "openrouter-completion",
+        "finishReason": "stop",
+        "generationId": "gen-1791124594-p1BNcqaQeSqVewA8Xx4r",
+        "model": "qwen/qwen3.8-flash",
+        "outcome": "answered",
+        "promptTokens": 288,
+        "provider": "Alibaba",
+        "reasoningTokens": 314,
+        "requestedModel": "qwen/qwen3.8-flash",
+        "tokensUsed": 662
+      },
+      "wallTimeSeconds": 8.314
+    },
+    {
+      "model": "qwen/qwen3.8-flash",
+      "case": "equal-workflows-abstain",
+      "answer": {
+        "field": "repo.build",
+        "value": null,
+        "confidence": "high",
+        "reason": "Both candidates are same-tier CI workflows. Neither 'check' nor 'verify' establishes primacy, and broader coverage (--workspace) does not establish a repository default. The candidates are genuinely tied.",
+        "source": null
+      },
+      "tokensUsed": 523,
+      "passed": true,
+      "usage": {
+        "completionTokens": 234,
+        "cost": 0.00015333,
+        "event": "openrouter-completion",
+        "finishReason": "stop",
+        "generationId": "gen-1791124602-FdyCCmGpqKRPZ7ROksHC",
+        "model": "qwen/qwen3.8-flash",
+        "outcome": "answered",
+        "promptTokens": 289,
+        "provider": "Alibaba",
+        "reasoningTokens": 172,
+        "requestedModel": "qwen/qwen3.8-flash",
+        "tokensUsed": 523
+      },
+      "wallTimeSeconds": 4.871
+    },
+    {
+      "model": "qwen/qwen3.8-flash",
+      "case": "no-evidence-abstain",
+      "answer": {
+        "field": "repo.test",
+        "value": null,
+        "confidence": "high",
+        "reason": "No candidate values were provided for adjudication. Without any candidates to evaluate, no value can be selected.",
+        "source": null
+      },
+      "tokensUsed": 369,
+      "passed": true,
+      "usage": {
+        "completionTokens": 121,
+        "cost": 9.407e-05,
+        "event": "openrouter-completion",
+        "finishReason": "stop",
+        "generationId": "gen-1791124607-FewYKHdT9jAYVDt1cBry",
+        "model": "qwen/qwen3.8-flash",
+        "outcome": "answered",
+        "promptTokens": 248,
+        "provider": "Alibaba",
+        "reasoningTokens": 73,
+        "requestedModel": "qwen/qwen3.8-flash",
+        "tokensUsed": 369
+      },
+      "wallTimeSeconds": 3.868
+    }
+  ]
+}

@@ -8,14 +8,15 @@ Records enter through two paths:
 
 - the autonomous factory publishes generated overlays after deterministic
   extraction, narrow model adjudication when needed, and machine validation
-- optional `synthesis.toml` guidance may be generated through the bounded
-  synthesis sidecar after factual validation; it never controls factual fields
 - maintainers and contributors can submit native claims or evidence-backed
   overlays through the normal pull-request path
 
 Routine generated overlays do not require human approval. Humans define the
 policy and audit the system; maintainers can supersede overlays by publishing
 native `.repo` metadata and completing the claim flow.
+
+Optional bounded `synthesis.toml` guidance is a separate artifact, not a third
+authority path; it cannot control factual fields.
 
 ## Layout
 
@@ -117,15 +118,20 @@ live canonical examples exist.
 
 ## Reference examples
 
-These index entries are useful reference examples for v0.1:
-- [`github.com/BurntSushi/ripgrep`](repos/github.com/BurntSushi/ripgrep/) shows a trust-aware overlay with inferred build and test commands plus an intentional `unknown` security contact.
-- [`github.com/cli/cli`](repos/github.com/cli/cli/) shows a heavily imported overlay with build, test, license, and security claims tied to specific upstream sources.
-- [`github.com/maxwellsantoro/ries-rs`](repos/github.com/maxwellsantoro/ries-rs/) shows a reviewed Rust overlay with a live accepted maintainer-owned claim now linked to the upstream native `.repo`, so the public claim context derives `superseded` while the checked-in seed record remains overlay-only.
-- [`github.com/sharkdp/bat`](repos/github.com/sharkdp/bat/) shows a curated Rust overlay with maintainer handles, imported development commands, and explicit security reporting evidence.
-- [`github.com/sharkdp/fd`](repos/github.com/sharkdp/fd/) shows the same evidence standard on a second repository with similar project shape, so contributors can compare patterns across examples.
+Use these entries to inspect different evidence shapes; read their current
+manifest and retained assessments rather than relying on an old status summary:
 
-These entries should be strong enough to serve as model contributions for future
-overlay submissions, not just as structurally valid records.
+- [ripgrep](repos/github.com/BurntSushi/ripgrep/): README command declarations
+  and Cargo toolchain evidence
+- [GitHub CLI](repos/github.com/cli/cli/): manifest inference, task-script tests,
+  ownership, and a security-reporting URL
+- [ries-rs](repos/github.com/maxwellsantoro/ries-rs/): accepted claim linked to
+  upstream native metadata; the checked-in record remains an overlay
+- [bat](repos/github.com/sharkdp/bat/) and [fd](repos/github.com/sharkdp/fd/):
+  related Rust project shapes with different security evidence/absence
+
+These are source-linked examples, not proof that every field is correct or that
+maintainer acceptance itself published a canonical mirror.
 
 ## Autonomous refresh operator controls
 
@@ -138,9 +144,11 @@ it as production automation, not a passive report:
   it runs only when the repository variable is explicitly `true` (unset or any
   other value skips the job). Local batch scripts treat unset as disabled unless
   you pass `--skip-automation-enabled-check`
-- land index updates through a **draft PR** (not a direct push to the default
-  branch). The PR opens only after `validate-index` and the **strict** autonomous
-  telemetry gate pass. Review CI / release floors before merging
+- the workflow opens a non-draft index-only automation PR after strict telemetry,
+  `validate-index`, and public gates pass. The landing helper explicitly tests
+  that exact commit, rechecks head/base, fast-forwards without force, and dispatches
+  deployment. Branch protection and divergence can reject landing; human merge
+  approval is not a routine generated-record tier
 - rotate sidecar credentials and monitor workflow logs for unexpected index churn
 - remember that writeback uses `autonomous_writeback_eligible` (verification
   passed) rather than the stricter `eligible_for_auto_publish` gate used for
@@ -216,8 +224,8 @@ index could move if those candidates pass that path. Freshness lines report the
 stale-or-missing `generated_at` rate, maximum record age, and overdue refresh
 latency so operators can separate scale growth from refresh health.
 
-Use the core promotion report when you need the authoritative auto-promotion
-view:
+Use the core promotion report for read-only analysis of retained value-bound
+assessments (it does not inspect upstream or authorize a new promotion):
 
 ```bash
 cargo run -p dotrepo-cli -- promotion-report --index-root index --json
@@ -225,8 +233,9 @@ cargo run -p dotrepo-cli -- promotion-report --index-root index --json
 
 The JSON summary separates `eligibleCount` from `promotionCandidateCount`.
 `eligibleCount` includes already verified records; `promotionCandidateCount`
-counts only eligible draft/imported/inferred records that could actually raise
-the high-signal profile count if promoted through the verified auto-publish path.
+counts eligible draft/imported/inferred records. Fresh crawler verification is
+required to mint verified status; standalone `--apply` is disabled on this branch.
+High-signal counts are advisory, not a release incentive.
 
 ## Growth tranche planning
 
@@ -239,28 +248,23 @@ audit report:
 
 ```bash
 uv run python scripts/plan_index_growth_tranche.py \
-  --candidate-file index/tranche-two-targets.txt \
-  --target-count 100 \
-  --min-selected 100 \
-  --current-high-signal 107 \
-  --milestone-high-signal-target 500 \
-  --min-planned-high-signal-capacity 207 \
+  --candidate-file /tmp/dotrepo-next-candidates.txt \
+  --target-count 50 \
+  --min-selected 50 \
   --output-targets /tmp/dotrepo-growth-targets.txt \
   --output-json /tmp/dotrepo-growth-plan.json \
   --output-md /tmp/dotrepo-growth-plan.md
 ```
 
-The emitted targets can be passed to `dotrepo-crawler seed --targets-file`.
-Planning a tranche is only an operational input; its Milestone 2 capacity
-section reports current high-signal coverage plus selected targets as an upper
-bound, not as completed coverage. The Milestone 2 gate is still the exported
-profile coverage report, which counts valid high-signal profiles after records
-are crawled, validated, exported, and measured.
-The scheduled seed-review workflows now run this planner first and crawl the
-planned target file, so already-indexed candidates do not consume growth slots.
-Those workflows read the checked-in profile-coverage and tranche baselines and
-pass the same Milestone 2 capacity fields to the planner that the canonical
-release gate uses.
+Prepare `/tmp/dotrepo-next-candidates.txt` as one identity per line, with `#`
+comments naming ecosystem groups. The completed tranche-two catalog is exhausted
+and cannot satisfy a positive new-target floor. The active baseline intentionally
+requests zero growth until new evidence-backed candidates and roadmap gates exist.
+
+The emitted targets can feed `dotrepo-crawler seed --targets-file`. Planner
+capacity fields are advisory; they do not establish valid published profiles,
+accuracy, freshness, or consumer utility. The release gate reads its planning
+policy from `scripts/fixtures/index_growth_tranche_baseline.json`.
 
 ### Repository identity migrations
 

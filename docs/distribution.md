@@ -22,7 +22,9 @@ It follows the current source branch; consult
    with the latest stable release; re-publish on each stable tag.
 2. **Efficiency pitch** — regenerate the public efficiency page on deploy
    (`scripts/render_public_efficiency_page.py` via the release/public gate).
-   Share measured tokens/bytes/requests saved, not coverage vanity metrics.
+   Label presence and policy acceptance separately; request reduction is modeled.
+   Use complete consumer measurements before claiming token, latency, or net
+   cost savings ([methodology](public-lookup-efficiency-benchmark.md)).
 3. **Lookup-miss demand (fixed cadence)** — weekly scheduled workflow
    `.github/workflows/lookup-miss-demand.yml` (Mondays 07:30 UTC) or manual
    `workflow_dispatch`. Offline by default (fixture proof); attach a live log
@@ -32,8 +34,8 @@ It follows the current source branch; consult
    404s for published leaves
    (`/v0/repos/{host}/{owner}/{repo}/{index,profile,trust,relations}.json`) and
    on dynamic not-found paths (query/batch/compare/relations). Summary content
-   is `index.json` (not a bare `/summary` path). Deploy the Worker after that
-   change before treating live tail/Logpush volume as complete.
+   is `index.json` (not a bare `/summary` path). Verify the deployed Worker
+   version before treating exported demand as complete.
 
    Local path:
 

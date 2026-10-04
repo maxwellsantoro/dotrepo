@@ -64,7 +64,7 @@ can cache and reuse.
 
 ## Historical production-export snapshot
 
-The canonical release gate builds the research workload from all 613 current
+The canonical release gate builds the research workload from all exported
 profiles and applies the versioned baseline in
 `scripts/fixtures/public_lookup_efficiency_baseline.json`. The pre-September-refresh result was:
 
@@ -88,14 +88,14 @@ profiles and applies the versioned baseline in
 | scrape proxy requests | 1226 |
 | request reduction rate | 0.9894 |
 
-Security and execution are the clearest current bottlenecks: both dropped
+In that historical snapshot, security and execution were the clearest bottlenecks: both dropped
 substantially as coverage grew from 157 to 613 profiles (execution 0.7134 ->
 0.4666, security 0.6624 -> 0.3507), while documentation and overview shifted
 (documentation 0.3312 -> 0.5432; overview 0.9045 -> 0.7406). This tracks the
 quality-hardening queue reported by `scripts/render_index_growth_status.py`
 (285 missing build, 290 missing test, 408 missing security as of this
-snapshot): growth outpaced quality hardening, and closing that queue is the
-direct lever for these intents. The byte ratio is also reported without
+snapshot). These figures describe presence, not factual correctness or current
+consumer acceptance. Regenerate reports before prioritizing the present queue. The byte ratio is also reported without
 dressing it up: profile plus query-input JSON is larger than the
 already-normalized local record/evidence proxy. That proxy is not live GitHub
 or documentation scraping, so the report does not claim a 2.42x live network

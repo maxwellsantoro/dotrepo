@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-04",
+  "scope": "synthetic provider integration; not a quality benchmark",
+  "cases": [
+    {
+      "name": "primary-over-release",
+      "field": "repo.build",
+      "expected": "cargo build",
+      "candidates": [
+        {
+          "value": "cargo build",
+          "sourcePath": ".github/workflows/check.yml",
+          "sourceTier": "ci"
+        },
+        {
+          "value": "cargo build --release",
+          "sourcePath": ".github/workflows/release.yml",
+          "sourceTier": "ci"
+        }
+      ]
+    },
+    {
+      "name": "equal-workflows-abstain",
+      "field": "repo.build",
+      "expected": null,
+      "candidates": [
+        {
+          "value": "cargo build",
+          "sourcePath": ".github/workflows/check.yml",
+          "sourceTier": "ci"
+        },
+        {
+          "value": "cargo build --workspace",
+          "sourcePath": ".github/workflows/verify.yml",
+          "sourceTier": "ci"
+        }
+      ]
+    },
+    {
+      "name": "no-evidence-abstain",
+      "field": "repo.test",
+      "expected": null,
+      "candidates": []
+    }
+  ],
+  "results": [
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "primary-over-release",
+      "answer": {
+        "field": "repo.build",
+        "value": "cargo build",
+        "confidence": "high",
+        "reason": "The check workflow is the primary CI workflow; prefer it over the release-only build command.",
+        "source": ".github/workflows/check.yml"
+      },
+      "tokensUsed": 393,
+      "passed": true,
+      "wallTimeSeconds": 3.561
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "equal-workflows-abstain",
+      "answer": {
+        "field": "repo.build",
+        "value": null,
+        "confidence": "high",
+        "reason": "Both candidates come from CI workflows, and no information establishes either workflow as the primary build source.",
+        "source": null
+      },
+      "tokensUsed": 445,
+      "passed": true,
+      "wallTimeSeconds": 2.19
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "case": "no-evidence-abstain",
+      "answer": {
+        "field": "repo.test",
+        "value": null,
+        "confidence": "high",
+        "reason": "No candidate values were provided, so no primary test workflow can be selected.",
+        "source": null
+      },
+      "tokensUsed": 273,
+      "passed": true,
+      "wallTimeSeconds": 1.406
+    },
+    {
+      "model": "meta/muse-spark-1.3-contributor",
+      "case": "primary-over-release",
+      "error": "OpenRouter HTTP 404: {\"error\":{\"message\":\"0 endpoints out of 1 requested are available matching your guardrail restrictions and data policy. We removed them for the following reasons (an endpoint may have matched multiple reasons):\\nPaid model training violation (account settings): 1 endpoint excluded; configurable at https://openrouter.ai/settings/privacy\",\"code\":404,\"metadata\":{\"input_endpoint_count\":1,\"ineligibility_reasons\":[{\"reason\":\"paid-model-training-violation-by-account\",\"endpoint_count\":1,\"configure_url\":\"https://openrouter.ai/settings/privacy\"}],\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Filter by Guardrails\"}}}",
+      "passed": false,
+      "wallTimeSeconds": 0.112
+    },
+    {
+      "model": "meta/muse-spark-1.3-contributor",
+      "case": "equal-workflows-abstain",
+      "error": "OpenRouter HTTP 404: {\"error\":{\"message\":\"0 endpoints out of 1 requested are available matching your guardrail restrictions and data policy. We removed them for the following reasons (an endpoint may have matched multiple reasons):\\nPaid model training violation (account settings): 1 endpoint excluded; configurable at https://openrouter.ai/settings/privacy\",\"code\":404,\"metadata\":{\"input_endpoint_count\":1,\"ineligibility_reasons\":[{\"reason\":\"paid-model-training-violation-by-account\",\"endpoint_count\":1,\"configure_url\":\"https://openrouter.ai/settings/privacy\"}],\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Filter by Guardrails\"}}}",
+      "passed": false,
+      "wallTimeSeconds": 0.871
+    },
+    {
+      "model": "meta/muse-spark-1.3-contributor",
+      "case": "no-evidence-abstain",
+      "error": "OpenRouter HTTP 404: {\"error\":{\"message\":\"0 endpoints out of 1 requested are available matching your guardrail restrictions and data policy. We removed them for the following reasons (an endpoint may have matched multiple reasons):\\nPaid model training violation (account settings): 1 endpoint excluded; configurable at https://openrouter.ai/settings/privacy\",\"code\":404,\"metadata\":{\"input_endpoint_count\":1,\"ineligibility_reasons\":[{\"reason\":\"paid-model-training-violation-by-account\",\"endpoint_count\":1,\"configure_url\":\"https://openrouter.ai/settings/privacy\"}],\"routing_funnel\":[{\"step\":\"Initial Endpoints\",\"endpoint_count\":1}],\"failed_routing_step\":\"Filter by Guardrails\"}}}",
+      "passed": false,
+      "wallTimeSeconds": 0.05
+    },
+    {
+      "model": "z-ai/glm-5.3-flash",
+      "case": "primary-over-release",
+      "answer": {
+        "field": "repo.build",
+        "value": "cargo build",
+        "confidence": "high",
+        "reason": "Both candidates are CI-tier, but check.yml represents the primary CI workflow while release.yml is release-only; rules prefer the primary CI workflow over release-only workflows.",
+        "source": ".github/workflows/check.yml"
+      },
+      "tokensUsed": 283,
+      "passed": true,
+      "wallTimeSeconds": 0.719
+    },
+    {
+      "model": "z-ai/glm-5.3-flash",
+      "case": "equal-workflows-abstain",
+      "answer": {
+        "field": "repo.build",
+        "value": "cargo build --workspace",
+        "confidence": "medium",
+        "reason": "Both candidates are CI-tier workflows; the verify.yml workspace build is the more comprehensive primary verification workflow and subsumes the plain build, so it is preferred over the narrower check.yml build.",
+        "source": ".github/workflows/verify.yml"
+      },
+      "tokensUsed": 347,
+      "passed": false,
+      "wallTimeSeconds": 0.748
+    },
+    {
+      "model": "z-ai/glm-5.3-flash",
+      "case": "no-evidence-abstain",
+      "answer": {
+        "field": "repo.test",
+        "value": null,
+        "confidence": "high",
+        "reason": "No candidate values were provided, so no single primary value can be selected.",
+        "source": null
+      },
+      "tokensUsed": 198,
+      "passed": true,
+      "wallTimeSeconds": 6.342
+    }
+  ]
+}

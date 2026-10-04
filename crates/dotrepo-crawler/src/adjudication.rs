@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use dotrepo_core::{
-    AdjudicationProvider, AdjudicationProviderResponse, AdjudicationRequest, AdjudicationTier,
-    AdjudicationTierProvider,
+    AdjudicationProvider, AdjudicationProviderError, AdjudicationProviderResponse,
+    AdjudicationRequest, AdjudicationTier, AdjudicationTierProvider,
 };
 use reqwest::blocking::Client;
 use serde::{Deserialize, Serialize};
@@ -69,6 +69,14 @@ struct AdjudicationHttpResponse {
     tokens_used: Option<u64>,
 }
 
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct AdjudicationHttpError {
+    error: String,
+    #[serde(default)]
+    tokens_used: u64,
+}
+
 impl AdjudicationProvider for HttpAdjudicationProvider {
     fn tier(&self) -> AdjudicationTier {
         self.tier
@@ -98,9 +106,22 @@ impl AdjudicationProvider for HttpAdjudicationProvider {
 
         let response = builder
             .send()
-            .with_context(|| format!("adjudication request to {} failed", self.endpoint))?
-            .error_for_status()
-            .with_context(|| format!("adjudication provider {} returned an error", self.endpoint))?
+            .with_context(|| format!("adjudication request to {} failed", self.endpoint))?;
+        if !response.status().is_success() {
+            let status = response.status();
+            let failure = response.json::<AdjudicationHttpError>().ok();
+            return Err(AdjudicationProviderError {
+                tokens_used: failure.as_ref().map_or(0, |error| error.tokens_used),
+                message: format!(
+                    "adjudication provider {} returned {}: {}",
+                    self.endpoint,
+                    status,
+                    failure.map_or_else(|| "invalid error response".into(), |error| error.error),
+                ),
+            }
+            .into());
+        }
+        let response = response
             .json::<AdjudicationHttpResponse>()
             .with_context(|| {
                 format!(

@@ -13,6 +13,20 @@ assert SPEC.loader is not None
 SPEC.loader.exec_module(release_gate)
 
 
+def test_release_gate_uses_dated_upstream_capture_without_weakening_accuracy(tmp_path):
+    command = release_gate.public_upstream_accuracy_command(tmp_path / "public", tmp_path)
+    workload_path = command[command.index("--workload") + 1]
+    workload = json.loads((REPO_ROOT / workload_path).read_text())
+    assert command[:3] == ["uv", "run", "python"]
+    assert int(command[command.index("--min-assertions") + 1]) == len(workload["assertions"])
+    assert int(command[command.index("--min-repositories") + 1]) == len(
+        {assertion["repository"] for assertion in workload["assertions"]}
+    )
+    assert command[command.index("--min-accuracy-rate") + 1] == "1.0"
+    assert command[command.index("--max-missing-rate") + 1] == "0"
+    assert command[command.index("--max-mismatch-rate") + 1] == "0"
+
+
 def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path) -> None:
     public_dir = tmp_path / "public"
     output_root = tmp_path / "release-gate"

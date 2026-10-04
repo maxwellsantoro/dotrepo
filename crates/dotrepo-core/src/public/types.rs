@@ -47,6 +47,10 @@ pub struct PublicResearchExecution {
     pub build: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub test: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub build_context: Option<PublicExecutionContext>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub test_context: Option<PublicExecutionContext>,
     /// Candidate build commands preserved when no single command could be
     /// honestly chosen as primary (e.g. a genuinely polyglot repository).
     /// See `dotrepo_schema::Repo::build_candidates` and RFC 0020.
@@ -63,6 +67,20 @@ pub struct PublicCommandCandidate {
     pub command: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ecosystem: Option<String>,
+    pub source: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub context: Option<PublicExecutionContext>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PublicExecutionContext {
+    pub command: String,
+    pub working_directory: String,
+    pub scope: dotrepo_schema::ExecutionScope,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub component: Option<String>,
+    pub prerequisites: Vec<String>,
     pub source: String,
 }
 

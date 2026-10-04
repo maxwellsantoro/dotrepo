@@ -57,6 +57,16 @@ fn public_research_execution(manifest: &Manifest) -> PublicResearchExecution {
     PublicResearchExecution {
         build: non_empty_value(manifest.repo.build.as_deref()),
         test: non_empty_value(manifest.repo.test.as_deref()),
+        build_context: manifest
+            .repo
+            .build_context
+            .as_ref()
+            .map(public_execution_context),
+        test_context: manifest
+            .repo
+            .test_context
+            .as_ref()
+            .map(public_execution_context),
         build_candidates: public_command_candidates(&manifest.repo.build_candidates),
         test_candidates: public_command_candidates(&manifest.repo.test_candidates),
     }
@@ -71,8 +81,20 @@ fn public_command_candidates(
             command: candidate.command.clone(),
             ecosystem: candidate.ecosystem.clone(),
             source: candidate.source.clone(),
+            context: candidate.context.as_ref().map(public_execution_context),
         })
         .collect()
+}
+
+fn public_execution_context(context: &dotrepo_schema::ExecutionContext) -> PublicExecutionContext {
+    PublicExecutionContext {
+        command: context.command.clone(),
+        working_directory: context.working_directory.clone(),
+        scope: context.scope.clone(),
+        component: context.component.clone(),
+        prerequisites: context.prerequisites.clone(),
+        source: context.source.clone(),
+    }
 }
 
 fn public_research_docs(manifest: &Manifest) -> PublicResearchDocs {

@@ -1,0 +1,35 @@
+schema = "dotrepo/v0.1"
+
+[record]
+mode = "native"
+status = "draft"
+source = "https://github.com/example/context"
+
+[record.trust]
+confidence = "medium"
+provenance = ["authored"]
+
+[repo]
+name = "context"
+description = "Explicit execution context fixture"
+build = "cargo build --workspace"
+
+[repo.build_context]
+command = "cargo build --workspace"
+working_directory = "."
+scope = "repository"
+prerequisites = ["Install the Rust toolchain"]
+source = "README.md"
+
+[[repo.test_candidates]]
+command = "npm test"
+ecosystem = "Node.js"
+source = "packages/ui/package.json"
+
+[repo.test_candidates.context]
+command = "npm test"
+working_directory = "packages/ui"
+scope = "component"
+component = "packages/ui"
+prerequisites = ["Install Node.js and run npm ci in packages/ui"]
+source = "README.md"

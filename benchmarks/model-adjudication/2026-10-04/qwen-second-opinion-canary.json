@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-04",
+  "scope": "synthetic provider integration; not a quality ranking",
+  "accountPolicyChanged": false,
+  "modelPolicy": {
+    "model": "qwen/qwen3.8-flash",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Return strict JSON only. Never wrap in markdown fences."
+      },
+      {
+        "role": "user",
+        "content": ""
+      }
+    ],
+    "max_tokens": 1024,
+    "response_format": {
+      "type": "json_object"
+    },
+    "provider": {
+      "require_parameters": true,
+      "max_price": {
+        "prompt": 0.15,
+        "completion": 0.47
+      }
+    },
+    "reasoning": {
+      "enabled": false
+    },
+    "temperature": 0
+  },
+  "cases": [
+    {
+      "name": "primary-over-release",
+      "field": "repo.build",
+      "expected": "cargo build",
+      "candidates": [
+        {
+          "value": "cargo build",
+          "sourcePath": ".github/workflows/check.yml",
+          "sourceTier": "ci"
+        },
+        {
+          "value": "cargo build --release",
+          "sourcePath": ".github/workflows/release.yml",
+          "sourceTier": "ci"
+        }
+      ]
+    },
+    {
+      "name": "equal-workflows-abstain",
+      "field": "repo.build",
+      "expected": null,
+      "candidates": [
+        {
+          "value": "cargo build",
+          "sourcePath": ".github/workflows/check.yml",
+          "sourceTier": "ci"
+        },
+        {
+          "value": "cargo build --workspace",
+          "sourcePath": ".github/workflows/verify.yml",
+          "sourceTier": "ci"
+        }
+      ]
+    },
+    {
+      "name": "no-evidence-abstain",
+      "field": "repo.test",
+      "expected": null,
+      "candidates": []
+    }
+  ],
+  "results": [
+    {
+      "model": "qwen/qwen3.8-flash",
+      "case": "primary-over-release",
+      "answer": {
+        "field": "repo.build",
+        "value": null,
+        "confidence": "high",
+        "reason": "The candidates represent conflicting same-tier CI workflows (check.yml vs release.yml). The rules state that ordinary workflow names like 'check' do not establish primacy, and release-only workflows are not preferred over primary manifest/CI workflows when both exist in a way that creates ambiguity without clear hierarchy. Since neither is explicitly designated as the primary build command for general development versus release artifacts in a non-conflicting manner, and they are tied at the CI tier, no single honest primary value exists.",
+        "source": null
+      },
+      "tokensUsed": 400,
+      "passed": false,
+      "usage": {
+        "completionTokens": 136,
+        "cost": 0.00010352,
+        "event": "openrouter-completion",
+        "finishReason": "stop",
+        "generationId": "gen-1791124491-8CN7Oka0mmNQOfxRiUSr",
+        "model": "qwen/qwen3.8-flash",
+        "outcome": "answered",
+        "promptTokens": 264,
+        "provider": "Alibaba",
+        "reasoningTokens": 0,
+        "requestedModel": "qwen/qwen3.8-flash",
+        "tokensUsed": 400
+      },
+      "wallTimeSeconds": 3.601
+    },
+    {
+      "model": "qwen/qwen3.8-flash",
+      "case": "equal-workflows-abstain",
+      "answer": {
+        "field": "repo.build",
+        "value": null,
+        "confidence": "high",
+        "reason": "Both candidates are CI-tier workflows. The rules state that broader command coverage (--workspace) does not establish a repository default, and ordinary workflow names (check vs verify) do not establish primacy. Since there is no evidence to identify one as primary over the other, they are tied.",
+        "source": null
+      },
+      "tokensUsed": 361,
+      "passed": true,
+      "usage": {
+        "completionTokens": 96,
+        "cost": 8.487e-05,
+        "event": "openrouter-completion",
+        "finishReason": "stop",
+        "generationId": "gen-1791124495-IaRKwb4ReKq3Ty0HuTyF",
+        "model": "qwen/qwen3.8-flash",
+        "outcome": "answered",
+        "promptTokens": 265,
+        "provider": "Alibaba",
+        "reasoningTokens": 0,
+        "requestedModel": "qwen/qwen3.8-flash",
+        "tokensUsed": 361
+      },
+      "wallTimeSeconds": 2.129
+    },
+    {
+      "model": "qwen/qwen3.8-flash",
+      "case": "no-evidence-abstain",
+      "answer": {
+        "field": "repo.test",
+        "value": null,
+        "confidence": "high",
+        "reason": "No candidate values were provided in the input list.",
+        "source": null
+      },
+      "tokensUsed": 260,
+      "passed": true,
+      "usage": {
+        "completionTokens": 36,
+        "cost": 5.052e-05,
+        "event": "openrouter-completion",
+        "finishReason": "stop",
+        "generationId": "gen-1791124497-LgioEBUkAgE6A1ktP5Ez",
+        "model": "qwen/qwen3.8-flash",
+        "outcome": "answered",
+        "promptTokens": 224,
+        "provider": "Alibaba",
+        "reasoningTokens": 0,
+        "requestedModel": "qwen/qwen3.8-flash",
+        "tokensUsed": 260
+      },
+      "wallTimeSeconds": 1.404
+    }
+  ]
+}

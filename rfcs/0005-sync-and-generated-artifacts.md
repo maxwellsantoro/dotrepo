@@ -3,6 +3,12 @@
 ## Status
 Draft
 
+## Implementation scope
+
+Managed regions are implemented in the reference toolchain. The historical
+phase names and illustrative IDs below do not define installed-version support;
+use [sync boundaries](../docs/sync-boundaries.md) for current IDs, states, and limits.
+
 ## Summary
 
 Generated repository surfaces are useful, but dotrepo should not promise magical round-tripping for arbitrary prose.

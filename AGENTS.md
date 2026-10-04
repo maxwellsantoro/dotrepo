@@ -1,178 +1,156 @@
 # AGENTS.md
 
-This file provides guidance to coding agents when working with code in this repository.
+Repository guidance for coding agents. `CLAUDE.md` points here; keep instructions
+in this file rather than duplicating them across tool-specific files.
 
-## What This Is
+## Project and documentation authority
 
-dotrepo is an open metadata protocol for software repositories. It has three interlinked deliverables:
+dotrepo is an open repository metadata protocol, a Rust reference toolchain,
+and a Git-backed public overlay index at `index/repos/<host>/<owner>/<repo>/`.
+It exposes repository facts with evidence, trust, conflicts, and age through
+local `.repo` files, JSON, and MCP. Native adoption is optional for index coverage.
 
-1. **A `.repo` schema** — versioned TOML manifests that encode provenance, trust, owners, docs, and build/test metadata
-2. **A reference toolchain** — Rust CLI, stdio MCP server, and LSP for importing, validating, querying, syncing, and generating compatible surfaces
-3. **A public index** — a Git-backed collection of evidence-backed overlays and maintainer authority context at `index/repos/<host>/<owner>/<repo>/` that makes public repos mechanically visible whether or not maintainers have adopted dotrepo natively
+- `README.md`: shipped behavior and entrypoints
+- `ROADMAP.md`: strategy, active execution order, and milestone gates
+- `CHANGELOG.md`: release history
+- `docs/README.md`: documentation map
+- `rfcs/README.md`: design records, implementation scope, and deferred proposals
 
-The public overlay index is generated and refreshed through an autonomous,
-evidence-constrained conveyor. Deterministic parsers run first; unresolved fields
-may escalate through progressively stronger model tiers; routine generated
-records do not wait for human review.
-
-## Documentation Authority
-
-- `README.md` — project overview and shipped capabilities
-- `ROADMAP.md` — strategy, active execution order, and milestone gates
-- `CHANGELOG.md` — release history
-- `docs/README.md` — documentation map
-- RFCs — design records and accepted contracts, not live task lists
-
-When documentation conflicts, prefer current code and contracts, then
-`README.md` for shipped behavior and `ROADMAP.md` for direction.
+Code and tested contracts outrank prose. Use version-matched docs for installed
+binaries; this checkout includes safeguards absent from the pinned stable release.
+Do not describe implementation completion or operator traffic as consumer proof.
 
 ## Commands
 
-All Python tooling in this repository uses `uv`. Create the repository environment
-with `uv venv`, then run Python commands, scripts, and tests with `uv run`. Never
-invoke `python`, `python3`, `pip`, or `pytest` directly, and preserve this convention
-in documentation, automation, subprocesses, and examples.
+All repository Python tooling uses `uv`. Never invoke `python`, `python3`, `pip`,
+or `pytest` directly. Preserve this convention in scripts, subprocesses,
+automation, and examples. Upstream commands retained as evidence are source data,
+not instructions to rewrite a project's own workflow.
 
 ```bash
-uv venv                              # Create the repository Python environment
-uv sync --dev                       # Install locked Python development dependencies
-cargo fmt --all -- --check          # Format check (CI enforced)
-cargo test --workspace              # Run all tests
-cargo build -p <crate-name>        # Build specific crate
-uv run python scripts/check_release_version.py  # Release-version parity
+uv venv
+uv sync --dev --locked
+uv run pytest
+uv run ruff check
+uv run ruff format --check
+uv run python scripts/check_release_version.py
+uv run python scripts/check_toolchain_manifest_parity.py
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo deny check advisories licenses bans sources
+cargo test --workspace
 
-# CLI
+# Local CLI and index checks
 cargo run -p dotrepo-cli -- --root <path> validate
 cargo run -p dotrepo-cli -- --root <path> query repo.name
 cargo run -p dotrepo-cli -- --root <path> import --mode native
 cargo run -p dotrepo-cli -- --root <path> generate --check
 cargo run -p dotrepo-cli -- --root <path> trust
 cargo run -p dotrepo-cli -- --root <path> doctor
-cargo run -p dotrepo-cli -- validate-index
-cargo run -p dotrepo-cli -- public export --index-root index --out-dir public --generated-at <time> --stale-after <time>
+cargo run -p dotrepo-cli -- validate-index --index-root index
 
-# MCP server (stdio JSON-RPC)
+# Stdio servers
 cargo run -p dotrepo-mcp
-
-# LSP server (stdio JSON-RPC)
 cargo run -p dotrepo-lsp
 
-# Public export packaging
-uv run python scripts/package_public_export.py --input public --output-dir dist
-
-# Autonomous index batch (local, explicit opt-in)
-uv run python scripts/run_autonomous_index_batch.py --skip-automation-enabled-check --output-dir /tmp/dotrepo-autonomous-batch
-
-# Canonical public release gate
+# Public gate; omit --skip-vsix for complete packaging
 uv run python scripts/check_release_gate.py --output-root /tmp/dotrepo-release-gate --skip-vsix
-
-# Python tests
-uv run pytest
 ```
 
-Root `public/`, `release-gate/`, `operator-gate/`, and `dist/` directories are
-generated review/deployment outputs and are intentionally gitignored. The
-checked-in `index/` tree and fixture packs remain the source inputs and golden
-contracts.
+Use the narrowest relevant checks first, then the required gates in
+`CONTRIBUTING.md`. A single fixture gate runs with
+`cargo test -p dotrepo-core --test import_quality_gate`; append `-- test_name` to
+filter a test. Public export and autonomous writeback commands live in
+`docs/public-export-workflow.md` and `docs/factual-crawl-automation.md`.
+An explicit local batch can opt in with `--skip-automation-enabled-check`;
+scheduled jobs must honor enablement.
 
-Run a single test file: `cargo test -p dotrepo-core --test import_fixture_pack`
+Root `public/`, `release-gate/`, `operator-gate/`, and `dist/` are generated,
+gitignored outputs. Keep source inputs and golden contracts in `index/` and
+fixture packs. Do not edit generated output to fix its source.
 
-Run a single test function: `cargo test -p dotrepo-core --test import_quality_gate -- test_name`
+## Architecture
 
-## Crate Architecture
+| Crate | Responsibility |
+| --- | --- |
+| `dotrepo-schema` | Types and TOML parsing |
+| `dotrepo-core` | Validation, selection, trust, import, generation, claims, public export |
+| `dotrepo-transport` | Shared JSON-RPC transport |
+| `dotrepo-cli` | Thin clap CLI over core |
+| `dotrepo-mcp` | Stdio tools, dispatch, and remote lookup policy |
+| `dotrepo-lsp` | Diagnostics, hover, completion, and adoption code actions |
+| `dotrepo-crawler` | Internal discovery, materialization, verification orchestration, refresh, telemetry, writeback |
+| `dotrepo` | Standalone CLI install alias, excluded from workspace because its binary name collides |
 
-```
-dotrepo-schema   → types only (Manifest, Record, Repo, Trust, etc.), TOML parsing, no logic
-dotrepo-core     → all validation, query, trust analysis, import heuristics, public export
-dotrepo-transport → JSON-RPC transport helpers shared by MCP and LSP
-dotrepo-cli      → clap-based CLI, delegates to core
-dotrepo-mcp      → stdio MCP 2025-11-25 server, delegates to core
-dotrepo-lsp      → stdio LSP server with diagnostics/hover/completion, delegates to core
-dotrepo-crawler  → discovery, factual crawl, verification, scoring, escalation, promotion, refresh planning, and autonomous writeback
-dotrepo          → standalone installable alias for dotrepo-cli (crates/dotrepo, excluded from the workspace because both emit a `dotrepo` binary)
-```
+Validation and trust logic belong in `dotrepo-core`; transports delegate.
+Place behavior in the appropriate focused module, preserving existing `lib.rs`
+facade imports when extending it. Public helpers live in `src/public/`, import
+in `src/import/`, surfaces in `src/surfaces/`, and generation orchestration in
+`generation.rs`. Facade tests live in `src/facade_tests/`.
 
-**Key rule**: No validation or trust logic is duplicated across CLI/MCP/LSP. All business logic lives in `dotrepo-core`.
+MCP modules are `tools`, `handlers`, `dispatch`, and `lookup`; LSP modules are
+`protocol`, `state`, `diagnostics`, `completions`, `code_actions`, and `dispatch`.
+Both entrypoints wire the stdio loop; tests live in `src/tests.rs`.
+Read `crates/dotrepo-crawler/README.md` for crawler layout and
+`docs/toolchain-maintainability.md` before expanding a documented hotspot.
 
-`dotrepo-core` is split across focused modules under `src/` (`adoption.rs`, `claims.rs`, `import/` with `commands/` and `parsing/` submodule directories, `surfaces/`, `public/`, `promotion.rs`, `query.rs`, `render.rs`, `selection.rs`, `synthesis.rs`, `util.rs`, `validation.rs`) plus a thin `lib.rs` facade that re-exports the complete public API. Facade integration tests live in `src/facade_tests/` (domain-scoped modules with shared helpers in `common.rs`). When adding new functionality, place it in the most appropriate module (or create a small new focused one if none fits). Keep the public surface in `lib.rs` unchanged so that all existing `use dotrepo_core::...` sites continue to work.
+## Contracts to preserve
 
-`dotrepo-mcp` extracts remote lookup policy into `src/lookup.rs`. `dotrepo-lsp` module extraction is tracked in `docs/toolchain-maintainability.md`. The internal crawler crate is documented in `crates/dotrepo-crawler/README.md`.
+- **Records and selection:** `native` is a root `.repo`; `overlay` is an external
+  record. Canonical native outranks canonical mirror, then verified, reviewed,
+  imported, inferred, and draft statuses regardless of mode. Accepted/in-review
+  claims break equal-rank ties before lexical manifest path. Native mode alone
+  does not outrank an overlay. Preserve conflicts; never silently blend fields.
+- **Trust:** `reviewed` means human review; `verified` means required pipeline
+  checks resolved against inspected evidence. Neither status nor confidence
+  guarantees correctness, completeness, or recent upstream inspection.
+- **Autonomy:** deterministic parsing first, bounded candidate-constrained
+  escalation, post-checks, partial publication or abstention. Automation never
+  mints `reviewed` or `canonical`, and rejects replacement of native/reviewed/
+  canonical records. Fresh verification governs refresh; old labels cannot win.
+- **Execution:** scalar build/test commands represent repository defaults.
+  Withhold nested scope, incomplete examples, and missing prerequisites;
+  shell-safety screening is not execution validation or permission.
+- **Claims:** append-only events, legal state transitions, replayed history, and
+  identity alignment. Accepted claims without canonical links remain pending.
+  Corrections amend state through explicit events rather than rewriting history.
+- **Generation:** manage supported README/SECURITY/CONTRIBUTING regions;
+  preserve surrounding prose. CODEOWNERS and PR templates support full generation
+  only. Refuse malformed or ambiguous layouts.
+- **Public freshness:** export time and snapshot identity differ from factual
+  record age. Retained field evidence is value- and timestamp-bound; never invent
+  assessments for legacy records. Keep synthesis separate from facts.
+- **MCP lookup:** allowlisted origins, same-origin snapshot paths, no redirects,
+  private-address checks and DNS pinning. Local/custom-base overrides are
+  deliberate opt-ins. Read `src/lookup.rs` and release compatibility for details.
 
-## Core Concepts
+## Tests and CI
 
-**Record modes**: `native` (`.repo` at repo root, maintainer-owned) vs `overlay` (index records, autonomously generated or contributed)
+Importer changes use fixtures plus exact expectations in
+`crates/dotrepo-core/tests/fixtures/import/expectations.json`. Claim, public export,
+compatibility, and regression fixture packs pin their own contracts. Update the
+relevant expectations with intentional behavior changes; never rewrite frozen
+benchmark results or source evidence to make a new implementation pass.
 
-**Trust / status ladder**: `draft` → `imported` → `inferred` → `reviewed` → `verified` → `canonical`. `reviewed` denotes human review. `verified` may be minted by exhaustive machine verification and does not imply human approval. Confidence levels: `low` / `medium` / `high`. Provenance arrays like `["declared"]`, `["declared", "verified"]`, `["inferred"]`.
+`.github/workflows/ci.yml` classifies changes into Rust/index, operator,
+public-surface, release, or minimal gates. Docs/RFC changes route through Rust
+and full release checks; index-only changes use the lighter public gate unless
+claims also require the operator gate. Root-only metadata/docs can route to the
+minimal gate. Scoped jobs may be skipped intentionally.
 
-**Conflict resolution**: native beats overlay; higher status wins; explicit selection overrides. The `query` and `trust` commands surface conflicts.
+The standalone CLI alias is outside workspace checks and has separate locked
+CI checks. Tag publication validates version parity and publishes the release
+packages; the crawler stays internal. All third-party `uses:` actions must be
+full-SHA-pinned with a trailing tag comment. Pinned `dtolnay/rust-toolchain`
+steps also pass an explicit `toolchain:` input.
 
-**Managed regions**: delimited blocks in supported Markdown surfaces (`README.md`, `SECURITY.md`, `CONTRIBUTING.md`) that `generate` syncs from the manifest. `CODEOWNERS` may be fully generated but is not partially managed.
+## Documentation maintenance
 
-**Autonomous index rule**: Routine generated overlays have no human review tier. Uncertainty ends in deterministic resolution, bounded model escalation, honest partial publication, or abstention. Models may choose only from grounded candidates and never bypass post-checks or validation. Automation may mint `verified`, but never `reviewed` or `canonical`.
+Keep live counts in generated reports, completed work in the changelog, and
+active sequencing in the roadmap. Keep frozen benchmark results, fixture inputs,
+index evidence, and archived reports as historical/source artifacts.
 
-**Claim workflow**: Maintainers submit a claim directory to upgrade an overlay record to native/canonical. Claim lifecycle is append-only event log with state machine enforcement (Draft → Submitted → InReview → Accepted/Rejected/Withdrawn/Disputed). A `corrected` event type allows recovering from terminal states.
-
-**Public export**: Static JSON tree at `public/v0/` summarizing all index records, trust context, and conflicts for AI-readable access. Every response carries a `freshness` block with `generatedAt`, `snapshotDigest` (SHA-256 of the index tree), and optional `staleAfter`. Built in CI and served statically.
-
-## Key Report Types
-
-CLI, MCP, and LSP all consume the same core report structs. The main ones:
-
-- `ValidateReport` — diagnostics list + per-record results from `validate_repository()`
-- `QueryReport` — resolved value + selection report + conflicts from `query_repository()`
-- `TrustReport` — selected record + selection reason + conflicts from `trust_repository()`
-- `AdoptionStatusReport` — native maintainer readiness checks from `adoption_status_repository()`
-
-MCP also exposes `dotrepo.lookup` for remote trust-aware queries without a local clone.
-The tool accepts `repositoryUrl` or `host`/`owner`/`repo`, an optional `path`, and an
-optional `baseUrl` (defaults to `https://dotrepo.org`). Only allowlisted hosted snapshot
-origins are permitted unless `DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL=1` is set. Additional
-operator flags: `DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL` (permit loopback/private hosts),
-`DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT` (permit absolute local roots on other tools). Lookup
-requests reject private-network targets, disable redirects, and validate resolved IPs to
-limit SSRF and DNS rebinding risk.
-- `GenerateCheckReport` — per-file drift detection from `generate_check_repository()`
-- `ImportPlan` — manifest text + evidence text + imported sources + inferred fields from `import_repository()`
-- `ClaimInspectionReport` — claim state + event history + validation from `inspect_claim_directory()`
-- `PublicRepositorySummaryResponse`, `PublicTrustResponse`, `PublicQueryResponse` — public export wrappers with freshness metadata
-
-## Index Conventions
-
-Overlay records live at `index/repos/<host>/<owner>/<repo>/record.toml` with an accompanying `evidence.md`. See `index/README.md` for layout and autonomous operations. `index/review-checklist.md` is the manual contribution and audit rubric, not a required approval gate for routine generated records.
-
-## Testing
-
-Tests are **fixture-based with golden outputs** and live in `crates/dotrepo-core/tests/`. Key test files:
-
-- `import_fixture_pack.rs` — import heuristic accuracy across all fixtures
-- `import_quality_gate.rs` — regression gate: loads `expectations.json` and asserts exact field values (repo name, description, status, sources, trust provenance, evidence substrings) for every import fixture
-- `claim_fixture_pack.rs` — claim lifecycle with scenario fixtures and golden-path workflow tests
-- `public_export_fixture_pack.rs` — runs `export_public_index_static()` and asserts the generated JSON tree matches golden expected output exactly
-
-**Testing pattern**: Each fixture directory under `tests/fixtures/` contains input files (README.md, CODEOWNERS, etc.). An `expectations.json` file drives the quality gate, defining exact expected outputs per fixture. When adding a new fixture, create the fixture directory and add its expectations to `expectations.json`.
-
-MCP and LSP have inline tests in their respective `main.rs` files that verify parity with core functions using temp directories.
-
-## CI Pipeline
-
-`.github/workflows/ci.yml` classifies changed files in a `change-scope` job, then runs scoped downstream jobs:
-
-1. **`rust-and-index`** — `cargo fmt`, strict `cargo clippy`, `cargo deny`, `ruff check`, `ruff format --check`, release-version parity, root `.repo`/Cargo toolchain parity, `cargo test`, CLI smoke (validate + generate-check on `examples/native-minimal`, validate-index on `index/`), `cargo publish --dry-run` for the 6 published workspace crates plus a local check of the standalone `dotrepo` alias package (`dotrepo-crawler` is internal orchestration and is not published), MCP stdio smoke test, LSP stdio smoke test. Tagged releases first prove that the tag and every Cargo release surface identify the same version, then publish all 7 crates to crates.io through the `publish-crates` job in `release-artifacts.yml`
-2. **`operator-gate`** — maintainer-claim inspection and handoff regression (`scripts/check_operator_claim_gate.py`)
-3. **`public-surface-gate`** — lightweight public export gate for index/public-surface-only changes (`check_release_gate.py --skip-release-bundle --skip-vsix`)
-4. **`release-gate`** — full release packaging, VSIX, and hosted-query Worker smoke
-
-Index-only or other public-surface-only changes route to `public-surface-gate` without paying the full release-bundle path. Rust toolchain, docs, or RFC changes route through `rust-and-index` and `release-gate`.
-
-All third-party actions in workflows are pinned to full commit SHAs with a
-trailing `# <tag>` comment; Dependabot (`.github/dependabot.yml`) proposes pin
-updates weekly. Keep new `uses:` references SHA-pinned in the same format.
-`dtolnay/rust-toolchain` cannot select the toolchain from a SHA ref, so those
-steps pass an explicit `toolchain:` input.
-
-## Version Constants
-
-Do not copy protocol or schema version constants into new documentation. Read
-them from their owning implementations: manifest validation in `validation.rs`,
-claims in `claims.rs`, MCP negotiation in `dotrepo-mcp`, and public API wrappers
-in `public.rs`.
+Read versions from their owners: Cargo for release versions, `validation.rs` for
+manifest support, `claims.rs` for claim schemas, MCP `dispatch.rs` for negotiation,
+and `public/` for public wrappers. Update the owning contract and fixtures
+when semantics change; do not scatter copied protocol constants in new prose.

@@ -12,6 +12,7 @@ sys.path.insert(0, str(BENCH_ROOT))
 
 from bench.arms.base import Http  # noqa: E402
 from bench.arms.github_arm import DOC_PATHS, GitHubArm  # noqa: E402
+from bench.arms.github_arm import model_policy  # noqa: E402
 from bench.cache import ReplayCacheMiss, ResponseCache  # noqa: E402
 from bench.fields import FIELDS_BY_ID  # noqa: E402
 from bench.model import Answer, Outcome, score_answer, values_match  # noqa: E402
@@ -152,6 +153,64 @@ def test_llm_replay_cache_is_prompt_and_model_specific(tmp_path: Path) -> None:
     assert arm._cached_llm_result(provider, model, prompt) == ("tox", "high")
     with pytest.raises(RuntimeError, match="replay cache miss"):
         arm._cached_llm_result(provider, model, "a different prompt")
+
+
+def test_new_model_cache_binds_reasoning_settings_without_changing_historical_keys(monkeypatch):
+    import hashlib
+
+    prompt = "extract a test command"
+    model = model_policy.DEFAULT_PRIMARY_MODEL
+    original = GitHubArm._llm_cache_key("openrouter", model, prompt)
+    monkeypatch.setitem(model_policy.MODEL_POLICIES, model, (8192, {"effort": "high"}, False))
+    assert GitHubArm._llm_cache_key("openrouter", model, prompt) != original
+    legacy = "google/gemma-4-26b-a4b-it"
+    assert GitHubArm._llm_cache_key("openrouter", legacy, prompt) == (
+        f"benchmark-llm://openrouter/{legacy}/{hashlib.sha256(prompt.encode()).hexdigest()}"
+    )
+
+
+def test_benchmark_uses_luna_capabilities_for_live_openrouter_calls(monkeypatch, capsys):
+    import requests
+
+    sent = []
+
+    class Response:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {
+                "choices": [
+                    {
+                        "message": {"content": '{"value":"cargo test","confidence":"high"}'},
+                        "finish_reason": "stop",
+                    }
+                ],
+                "usage": {"total_tokens": 120, "cost": 0.00006},
+            }
+
+    def post(url, **kwargs):
+        sent.append(kwargs["json"])
+        return Response()
+
+    monkeypatch.setattr(requests, "post", post)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test-key")
+    monkeypatch.setenv("OPENROUTER_MODEL", model_policy.DEFAULT_PRIMARY_MODEL)
+    arm = GitHubArm(Http(), extractor="llm")
+    assert arm._openrouter_extract(FIELDS_BY_ID["test"], "Run cargo test") == ("cargo test", "high")
+    assert "temperature" not in sent[0]
+    assert sent[0]["reasoning"] == {"effort": "low"}
+    assert '"tokensUsed": 120' in capsys.readouterr().err
+
+
+def test_anthropic_default_and_legacy_override_use_compatible_settings():
+    body = model_policy.build_anthropic_body(model_policy.DEFAULT_ANTHROPIC_MODEL, "prompt")
+    assert body["model"] == "claude-sonnet-5-5"
+    assert body["thinking"] == {"type": "adaptive"}
+    assert body["output_config"] == {"effort": "low"}
+    legacy = model_policy.build_anthropic_body("claude-sonnet-4-5-20250929", "prompt")
+    assert "thinking" not in legacy
+    assert "output_config" not in legacy
 
 
 def test_github_baseline_probes_real_world_source_variants() -> None:

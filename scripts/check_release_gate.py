@@ -325,6 +325,35 @@ def public_factual_accuracy_command(
     ]
 
 
+def public_upstream_accuracy_command(public_dir: Path, output_root: Path) -> list[str]:
+    # Reuse the independently selected cohort with a new dated upstream capture.
+    # Previous captures/results remain frozen; exact-value requirements hold.
+    return [
+        "uv",
+        "run",
+        "python",
+        "scripts/measure_public_factual_accuracy.py",
+        "--public-root",
+        str(public_dir),
+        "--workload",
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "--min-assertions",
+        "123",
+        "--min-repositories",
+        "32",
+        "--min-accuracy-rate",
+        "1.0",
+        "--max-missing-rate",
+        "0",
+        "--max-mismatch-rate",
+        "0",
+        "--output-json",
+        str(output_root / "independent-upstream-accuracy.json"),
+        "--output-md",
+        str(output_root / "independent-upstream-accuracy.md"),
+    ]
+
+
 def ensure_file(path: Path) -> None:
     if not path.is_file():
         raise SystemExit(f"expected file was not created: {path}")
@@ -1142,33 +1171,7 @@ def main() -> int:
         public_factual_accuracy_command(repo_root, public_dir, output_root, args.generated_at),
         cwd=repo_root,
     )
-    run(
-        [
-            "uv",
-            "run",
-            "python",
-            "scripts/measure_public_factual_accuracy.py",
-            "--public-root",
-            str(public_dir),
-            "--workload",
-            "scripts/fixtures/public_upstream_accuracy_workload.json",
-            "--min-assertions",
-            "123",
-            "--min-repositories",
-            "32",
-            "--min-accuracy-rate",
-            "1.0",
-            "--max-missing-rate",
-            "0",
-            "--max-mismatch-rate",
-            "0",
-            "--output-json",
-            str(output_root / "independent-upstream-accuracy.json"),
-            "--output-md",
-            str(output_root / "independent-upstream-accuracy.md"),
-        ],
-        cwd=repo_root,
-    )
+    run(public_upstream_accuracy_command(public_dir, output_root), cwd=repo_root)
     run(
         [
             sys.executable,

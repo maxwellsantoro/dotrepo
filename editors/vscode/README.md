@@ -1,6 +1,8 @@
 # dotrepo VS Code extension
 
-This is the first thin VS Code shell for dotrepo.
+This is the thin VS Code shell for dotrepo on the current source branch. For
+installed stable binaries, use [release compatibility](../../docs/release-compatibility.md)
+and the version-matched extension guide linked there.
 
 It does three things:
 
@@ -12,7 +14,7 @@ It does **not** try to invent editor-only semantics. The extension is a shell
 over the existing Rust binaries and follows the scope in
 [`rfcs/0007-lsp-and-vscode-scope.md`](../../rfcs/0007-lsp-and-vscode-scope.md).
 
-## First release features
+## Features
 
 - diagnostics for invalid `.repo` files and overlay `record.toml` files
 - hover help for core schema fields and trust vocabulary
@@ -35,7 +37,8 @@ The first release does **not** provide:
 - managed-region marker authoring
 - README, `SECURITY.md`, `CODEOWNERS`, or `evidence.md` semantic editing
 - authority-conflict resolution UI
-- semantic autofix or code actions
+- general semantic autofix (the current LSP provides limited native-adoption
+  quick fixes for a homepage placeholder and starter CI)
 - bundle/workspace authoring support
 
 ## Install
@@ -62,7 +65,7 @@ export PATH="/path/to/dotrepo/target/debug:$PATH"
 Then, in this `editors/vscode/` directory:
 
 ```bash
-npm install
+npm ci
 ```
 
 Open the `editors/vscode/` folder in VS Code and run the extension in an

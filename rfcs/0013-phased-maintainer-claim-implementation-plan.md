@@ -3,6 +3,13 @@
 ## Status
 Draft
 
+## Implementation scope
+
+The durable-artifact, read-only inspection, and reviewer phases are implemented.
+This is historical sequencing, not the active queue; self-service submission
+and external identity proof remain deferred. Use [the roadmap](../ROADMAP.md)
+and [operator workflow](../docs/maintainer-claim-review-workflow.md) for current work.
+
 ## Summary
 
 This RFC breaks the maintainer-claim workflow into deliberate implementation
@@ -208,11 +215,10 @@ index-side claim workflow.
 
 ## Relationship to the roadmap
 
-Within the current roadmap shape:
-- `v0.3c` should begin with Phases 1 through 3
-- public-facing claim UX belongs after those phases have proven stable
-- public index site and query API work should not assume claim-product maturity
-  before the index-side workflow exists
+The original phase sequence is retained as design history. Phases 1 through 3
+now have executable artifacts, inspection, and reviewer helpers. Broader
+maintainer submission stays behind those contracts; active priorities live in
+[the roadmap](../ROADMAP.md#active-execution-order).
 
 ## Relationship to follow-on work
 

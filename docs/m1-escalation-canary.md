@@ -5,15 +5,16 @@
 | Tier | Proof status |
 |------|----------------|
 | Deterministic only | Proven in production refresh (most repos) |
-| Local primary model | Proven with engineered conflicting-workflow canary |
-| Local second opinion | **Proven live** (2026-07-08 canary; forced low-confidence primary + HTTP second opinion) |
+| Primary model tier | Proven with engineered conflicting-workflow canary |
+| Second-opinion tier | **Proven live** (2026-07-08 canary; forced low-confidence primary + HTTP second opinion) |
 | Strong remote | Wired; optional third step when second opinion remains low-confidence |
 | Confident abstention | Proven on genuine polyglot ties (correct termination) |
 
-Primary-tier proof and the Absent low-confidence continuation fix are described
-in `ROADMAP.md` (active execution order, Milestone 1). The second-opinion live
-proof is recorded in
-`index/telemetry/m1-second-opinion-canary-20260708.md` and automated as
+These proof statuses describe the retained July run, not current provider
+configuration or a complete strong-remote live proof. A hosted primary provider
+does not establish local-model execution. The second-opinion live proof is
+recorded in [the retained canary](../index/telemetry/m1-second-opinion-canary-20260708.md)
+and automated as
 `second_opinion_live_ladder_from_low_confidence_primary` in
 `crates/dotrepo-crawler/tests/openrouter_env_escalation.rs`.
 
@@ -77,7 +78,7 @@ provider. Pass criteria: `model_calls >= 2` and
 ## Offline regression
 
 Escalation policy (including low-confidence Absent continuation) is covered by
-unit tests in `crates/dotrepo-core/src/import/escalation.rs`.
+unit tests in [`import/escalation/`](../crates/dotrepo-core/src/import/escalation/).
 
 ## Related
 

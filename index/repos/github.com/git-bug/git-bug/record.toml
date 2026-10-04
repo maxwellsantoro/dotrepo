@@ -2,21 +2,20 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/git-bug/git-bug"
 generated_at = "2026-09-16T16:23:40.061692Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, and `go.mod`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `CONTRIBUTING.md`, and `go.mod`. Imported `repo.build` from `CONTRIBUTING.md`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-04 scoped API check corrected repo.description and superseded prior auto-promotion. Full-record source inspection timestamps are unchanged; the prior description assessment was removed."
 
 [repo]
 name = "git-bug"
-description = "Distributed, offline-first bug tracker embedded in git"
+description = "Distributed, offline-first bug tracker integrated in git"
 homepage = "https://github.com/git-bug/git-bug"
 license = "GPL-3.0"
 visibility = "public"
@@ -86,15 +85,6 @@ reason = "from declared repository source"
 source = "CONTRIBUTING.md"
 state = "present"
 valueJson = '"make"'
-
-[x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:23:40.061692Z"
-confidence = "high"
-method = "extracted"
-reason = "constrained by GitHub repository metadata"
-source = "GitHub API"
-state = "present"
-valueJson = '"Distributed, offline-first bug tracker embedded in git"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
 checkedAt = "2026-09-16T16:23:40.061692Z"

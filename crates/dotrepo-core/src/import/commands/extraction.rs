@@ -6,7 +6,8 @@
 //! candidates lives in `policy`.
 use super::super::types::{CommandSourceTier, ImportedCommandCandidate, ImportedFile};
 use super::policy::{
-    detect_node_package_runner, is_placeholder_package_json_test_script, pick_node_script_command,
+    detect_node_package_runner, is_placeholder_package_json_test_script, is_setup_only_command,
+    pick_node_script_command,
 };
 use crate::util::contains_unsafe_shell_like_value;
 
@@ -1127,7 +1128,7 @@ pub(crate) fn first_matching_workflow_command(
         }
         // Host package installs often list `make` / `build-essential` as packages
         // (pyenv CI). Those are not repository build commands.
-        if is_host_package_install_command(trimmed) {
+        if is_host_package_install_command(trimmed) || is_setup_only_command(trimmed) {
             return None;
         }
 
@@ -1143,7 +1144,7 @@ pub(crate) fn first_matching_workflow_command(
                 "yarn build",
                 "bun run build",
             ] {
-                if trimmed.starts_with(prefix) {
+                if starts_with_command_prefix(trimmed, prefix) {
                     if prefix == "cargo build"
                         && is_specialized_cargo_workflow_command(trimmed, "build")
                     {
@@ -1165,7 +1166,7 @@ pub(crate) fn first_matching_workflow_command(
                 "yarn test",
                 "bun run test",
             ] {
-                if trimmed.starts_with(prefix) {
+                if starts_with_command_prefix(trimmed, prefix) {
                     if prefix == "cargo test"
                         && is_specialized_cargo_workflow_command(trimmed, "test")
                     {
@@ -1244,8 +1245,7 @@ pub(crate) fn first_matching_workflow_command(
             if lower.contains("cargo test")
                 && !is_specialized_cargo_workflow_command(trimmed, "test")
                 || (lower.contains("go test") && !is_specialized_go_workflow_test_command(trimmed))
-                || lower.contains("pytest")
-                || lower.trim() == "pytest"
+                || python_test_invocation(trimmed)
             {
                 return Some(trimmed.to_string());
             }
@@ -1253,6 +1253,26 @@ pub(crate) fn first_matching_workflow_command(
 
         None
     })
+}
+
+/// Recognize an invoked runner, not its name in another command's arguments.
+fn python_test_invocation(command: &str) -> bool {
+    let tokens = command.split_whitespace().collect::<Vec<_>>();
+    let tokens = match tokens.as_slice() {
+        ["uv", "run", rest @ ..] => {
+            let offset = rest
+                .iter()
+                .take_while(|token| matches!(**token, "--locked" | "--offline" | "--no-sync"))
+                .count();
+            &rest[offset..]
+        }
+        ["poetry" | "pdm", "run", rest @ ..] => rest,
+        _ => tokens.as_slice(),
+    };
+    matches!(
+        tokens,
+        ["pytest", ..] | ["python" | "python3", "-m", "pytest", ..]
+    )
 }
 
 /// CI-only go test lines (coverage dirs, -args passthrough, etc.) are not

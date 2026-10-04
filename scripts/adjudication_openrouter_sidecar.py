@@ -13,6 +13,13 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
+from openrouter_request_policy import (
+    CompletionError,
+    build_completion_body,
+    completion_text,
+    completion_usage,
+    log_completion,
+)
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 DEFAULT_HOST = "127.0.0.1"
@@ -48,7 +55,11 @@ def build_prompt(payload: dict[str, Any]) -> str:
         "- value MUST be one of the listed candidate values, or null",
         "- do not invent commands or sources",
         "- prefer manifest/CI primary workflows over release-only workflows when both exist",
+        "- broader command coverage (such as --workspace) does not establish a repository default",
+        "- ordinary workflow names such as check or verify do not establish primacy",
+        "- conflicting same-tier normal CI workflows are tied unless evidence identifies a primary",
         "- if candidates are genuinely tied, return null with high confidence",
+        "- when value is null, source must also be null",
         "",
         f"Field: {field}",
         "Candidates:",
@@ -77,7 +88,34 @@ def extract_json_object(text: str) -> dict[str, Any]:
     end = text.rfind("}")
     if start == -1 or end == -1 or end <= start:
         raise ValueError("model response did not contain JSON object")
-    return json.loads(text[start : end + 1])
+    parsed = json.loads(text[start : end + 1])
+    if not isinstance(parsed, dict):
+        raise ValueError("model response must be a JSON object")
+    return parsed
+
+
+def adjudication_schema(payload: dict[str, Any]) -> dict[str, Any]:
+    candidates = payload.get("candidates") or []
+    values = sorted({candidate["value"] for candidate in candidates})
+    sources = sorted(
+        {
+            candidate.get("sourcePath") or candidate.get("source_path")
+            for candidate in candidates
+            if candidate.get("sourcePath") or candidate.get("source_path")
+        }
+    )
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "required": ["field", "value", "confidence", "reason", "source"],
+        "properties": {
+            "field": {"type": "string", "enum": [payload["field"]]},
+            "value": {"type": ["string", "null"], "enum": [*values, None]},
+            "confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+            "reason": {"type": "string"},
+            "source": {"type": ["string", "null"], "enum": [*sources, None]},
+        },
+    }
 
 
 def call_openrouter(
@@ -85,23 +123,9 @@ def call_openrouter(
     api_key: str,
     model: str,
     prompt: str,
-    disable_reasoning: bool,
+    response_schema: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], int]:
-    body: dict[str, Any] = {
-        "model": model,
-        "messages": [
-            {
-                "role": "system",
-                "content": "Return strict JSON only. Never wrap in markdown fences.",
-            },
-            {"role": "user", "content": prompt},
-        ],
-        "temperature": 0,
-        "max_tokens": 300,
-        "response_format": {"type": "json_object"},
-    }
-    if disable_reasoning:
-        body["reasoning"] = {"enabled": False}
+    body = build_completion_body(model, prompt, response_schema=response_schema)
 
     request = urllib.request.Request(
         OPENROUTER_URL,
@@ -121,11 +145,14 @@ def call_openrouter(
         detail = exc.read().decode("utf-8", errors="replace")
         raise RuntimeError(f"OpenRouter HTTP {exc.code}: {detail}") from exc
 
-    content = payload["choices"][0]["message"]["content"]
-    parsed = extract_json_object(content)
-    usage = payload.get("usage") or {}
-    tokens_used = int(usage.get("total_tokens") or 0)
-    return parsed, tokens_used
+    usage = completion_usage(payload)
+    try:
+        parsed = extract_json_object(completion_text(payload))
+    except (ValueError, CompletionError) as exc:
+        log_completion(usage, requested_model=model, outcome="invalid-answer")
+        raise CompletionError(str(exc), usage) from exc
+    log_completion(usage, requested_model=model, outcome="answered")
+    return parsed, usage["tokensUsed"]
 
 
 def normalize_response(
@@ -160,15 +187,11 @@ def make_handler(api_key: str):
                 model = payload.get("model")
                 if not model:
                     raise ValueError("request missing model")
-                disable_reasoning = payload.get("tier") in {
-                    "local_primary",
-                    "local_second_opinion",
-                }
                 parsed, tokens_used = call_openrouter(
                     api_key=api_key,
                     model=model,
                     prompt=build_prompt(payload),
-                    disable_reasoning=disable_reasoning,
+                    response_schema=adjudication_schema(payload),
                 )
                 response = normalize_response(payload, parsed, tokens_used)
                 body = json.dumps(response).encode("utf-8")
@@ -178,7 +201,10 @@ def make_handler(api_key: str):
                 self.end_headers()
                 self.wfile.write(body)
             except Exception as exc:  # noqa: BLE001 - surface provider errors to client
-                body = json.dumps({"error": str(exc)}).encode("utf-8")
+                error = {"error": str(exc)}
+                if isinstance(exc, CompletionError):
+                    error.update(exc.usage)
+                body = json.dumps(error).encode("utf-8")
                 self.send_response(502)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Content-Length", str(len(body)))

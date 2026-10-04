@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-04",
+  "scope": "synthetic provider integration; not a quality benchmark",
+  "cases": [
+    {
+      "name": "primary-over-release",
+      "field": "repo.build",
+      "expected": "cargo build",
+      "candidates": [
+        {
+          "value": "cargo build",
+          "sourcePath": ".github/workflows/check.yml",
+          "sourceTier": "ci"
+        },
+        {
+          "value": "cargo build --release",
+          "sourcePath": ".github/workflows/release.yml",
+          "sourceTier": "ci"
+        }
+      ]
+    },
+    {
+      "name": "equal-workflows-abstain",
+      "field": "repo.build",
+      "expected": null,
+      "candidates": [
+        {
+          "value": "cargo build",
+          "sourcePath": ".github/workflows/check.yml",
+          "sourceTier": "ci"
+        },
+        {
+          "value": "cargo build --workspace",
+          "sourcePath": ".github/workflows/verify.yml",
+          "sourceTier": "ci"
+        }
+      ]
+    },
+    {
+      "name": "no-evidence-abstain",
+      "field": "repo.test",
+      "expected": null,
+      "candidates": []
+    }
+  ],
+  "results": [
+    {
+      "model": "z-ai/glm-5.3-flash",
+      "case": "primary-over-release",
+      "answer": {
+        "field": "repo.build",
+        "value": "cargo build",
+        "confidence": "medium",
+        "reason": "Both candidates are CI-tier, but the release workflow is release-only; the check workflow's plain 'cargo build' is the ordinary CI build and is preferred over the release-only workflow per the rules.",
+        "source": ".github/workflows/check.yml"
+      },
+      "tokensUsed": 356,
+      "passed": true,
+      "wallTimeSeconds": 0.861
+    },
+    {
+      "model": "z-ai/glm-5.3-flash",
+      "case": "equal-workflows-abstain",
+      "answer": {
+        "field": "repo.build",
+        "value": null,
+        "confidence": "high",
+        "reason": "Two same-tier CI workflows (check.yml and verify.yml) provide conflicting build commands with no evidence identifying a primary workflow; broader --workspace coverage does not establish primacy, so the candidates are tied.",
+        "source": null
+      },
+      "tokensUsed": 333,
+      "passed": true,
+      "wallTimeSeconds": 0.545
+    },
+    {
+      "model": "z-ai/glm-5.3-flash",
+      "case": "no-evidence-abstain",
+      "answer": {
+        "field": "repo.test",
+        "value": null,
+        "confidence": "high",
+        "reason": "No candidate values were provided and no repository evidence is available to select a primary test command.",
+        "source": null
+      },
+      "tokensUsed": 265,
+      "passed": true,
+      "wallTimeSeconds": 6.345
+    }
+  ]
+}
