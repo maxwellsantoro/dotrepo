@@ -399,6 +399,8 @@ fn distinct_command_candidates(candidates: &[AdjudicationCandidate]) -> Vec<Buil
             command,
             ecosystem: ecosystem_for_source_path(&candidate.source_path),
             source: candidate.source_path.clone(),
+            // Extraction has not established cwd, component, or prerequisites.
+            context: None,
         });
     }
     result

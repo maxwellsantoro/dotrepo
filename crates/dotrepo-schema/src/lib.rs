@@ -89,6 +89,12 @@ pub struct Repo {
     pub build: Option<String>,
     #[serde(default)]
     pub test: Option<String>,
+    /// Explicit, value-bound context for the scalar repository default.
+    /// Absence leaves working directory and prerequisites unassessed.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub build_context: Option<ExecutionContext>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub test_context: Option<ExecutionContext>,
     /// Candidate build commands preserved when no single command could be
     /// honestly chosen as primary -- e.g. a genuinely polyglot repository
     /// with more than one legitimate build system. `build` remains `None`
@@ -111,7 +117,7 @@ pub struct Repo {
     pub topics: Vec<String>,
 }
 
-/// One preserved candidate command for an ambiguous `build`/`test` field.
+/// One preserved candidate for an ambiguous or explicitly scoped command.
 /// See `Repo::build_candidates` / `Repo::test_candidates`.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct BuildTestCandidate {
@@ -123,6 +129,32 @@ pub struct BuildTestCandidate {
     pub ecosystem: Option<String>,
     /// Repository-relative path the candidate command was found in.
     pub source: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub context: Option<ExecutionContext>,
+}
+
+/// Context describes the exact command, not permission or proof of execution.
+/// All fields except `component` are required so omission cannot imply a root
+/// working directory, repository scope, or an empty prerequisite list.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct ExecutionContext {
+    pub command: String,
+    pub working_directory: String,
+    pub scope: ExecutionScope,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub component: Option<String>,
+    /// Source-grounded descriptions; these are not shell commands to execute.
+    pub prerequisites: Vec<String>,
+    /// Repository-relative file declaring this context.
+    pub source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "lowercase")]
+pub enum ExecutionScope {
+    Repository,
+    Component,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
@@ -501,6 +533,8 @@ pub fn scaffold_manifest(repo_name: &str) -> Result<String, RenderError> {
             languages: Vec::new(),
             build: None,
             test: None,
+            build_context: None,
+            test_context: None,
             build_candidates: Vec::new(),
             test_candidates: Vec::new(),
             toolchain: None,

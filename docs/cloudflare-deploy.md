@@ -94,7 +94,9 @@ The workflow reads those values directly when it runs `wrangler deploy`.
 The workflow runs after successful default-branch push CI, or through explicit
 manual dispatch. The CI-triggered path checks out the tested commit. Index
 automation explicitly dispatches it after its own checked fast-forward because
-`GITHUB_TOKEN` pushes do not trigger downstream workflows.
+`GITHUB_TOKEN` pushes do not trigger downstream workflows. The exact-commit
+landing sequence and failure recovery are documented in
+[crawl automation](factual-crawl-automation.md#scheduled-enablement-and-landing).
 
 The workflow in `.github/workflows/public-cloudflare.yml` now:
 

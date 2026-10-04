@@ -30,6 +30,7 @@ pub(crate) fn sanitize_import_command(command: &str) -> Option<String> {
 
 fn command_is_incomplete(command: &str) -> bool {
     command.trim().is_empty()
+        || is_setup_only_command(command)
         || command.trim_end().ends_with('\\')
         || command.contains('<')
         || command.contains('>')
@@ -40,6 +41,27 @@ fn command_is_incomplete(command: &str) -> bool {
         || command
             .split_whitespace()
             .any(|token| matches!(token, "--collect-only" | "--no-run"))
+}
+
+/// A dependency install is a prerequisite, even when package names mention a
+/// build/test runner. Compound task scripts are left to existing shell policy.
+pub(crate) fn is_setup_only_command(command: &str) -> bool {
+    if command.contains(['&', ';', '|', '\n']) {
+        return false;
+    }
+    let tokens = command.split_whitespace().collect::<Vec<_>>();
+    let tokens = tokens.strip_prefix(&["sudo"]).unwrap_or(&tokens);
+    let tokens = match tokens {
+        ["python" | "python3", "-m", "pip", rest @ ..] => rest,
+        ["uv", "pip", rest @ ..] => rest,
+        ["pip" | "pip3" | "pipx", rest @ ..] => rest,
+        ["npm" | "pnpm" | "yarn" | "bun" | "poetry" | "pdm" | "bundle" | "composer", rest @ ..] => {
+            rest
+        }
+        ["uv", "sync", ..] => return true,
+        _ => return false,
+    };
+    matches!(tokens.first(), Some(&"install" | &"ci" | &"sync" | &"add"))
 }
 
 pub(crate) fn resolve_command_field(
@@ -659,19 +681,7 @@ pub(crate) fn detect_node_package_runner(package_manager: Option<&str>) -> NodeP
 
 pub(crate) fn is_placeholder_package_json_test_script(script: &str) -> bool {
     let normalized = script.trim().to_ascii_lowercase();
-    normalized.contains("no test specified")
-        || command_is_incomplete(script)
-        || (!normalized.contains("&&")
-            && !normalized.contains(';')
-            && [
-                "npm install",
-                "npm ci",
-                "pnpm install",
-                "yarn install",
-                "uv sync",
-            ]
-            .iter()
-            .any(|setup| normalized == *setup || normalized.starts_with(&format!("{setup} "))))
+    normalized.contains("no test specified") || command_is_incomplete(script)
 }
 
 /// Return a runner-wrapped command if any of the candidate script names exists and is non-empty.

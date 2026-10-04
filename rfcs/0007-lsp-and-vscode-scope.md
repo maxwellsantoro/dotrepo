@@ -3,6 +3,13 @@
 ## Status
 Draft
 
+## Implementation scope
+
+This records the initial editor scope. The current LSP additionally supplies
+limited native-adoption hints and code actions; general autofix remains deferred.
+See [the maintainer guide](../docs/maintainer-happy-path.md) and
+[extension guide](../editors/vscode/README.md) for current/version-matched behavior.
+
 ## Summary
 
 dotrepo should provide a thin editor layer for the canonical manifest surface,

@@ -30,6 +30,10 @@ Within `apiVersion = "v0"`:
   from factual fields and must not change their precedence semantics
 - typed relation items may add optional relation-local `trust` and `notes`;
   legacy reference items retain the original required item keys
+- profile execution may add optional `buildContext`/`testContext` and candidate
+  `context`; [RFC 0021](../rfcs/0021-value-bound-execution-context.md) defines
+  their value binding, scope, directory, prerequisites, and source. Missing
+  context remains unassessed and does not receive inferred defaults.
 
 That means `v0` may still grow, but it should not silently reshuffle existing
 JSON contracts.

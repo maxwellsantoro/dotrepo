@@ -3,6 +3,15 @@
 ## Status
 Draft
 
+## Implementation scope
+
+The contribution workflow below describes manual submissions. Routine generated
+overlays now use machine-gated automatic landing, documented in
+[crawl operations](../docs/factual-crawl-automation.md#scheduled-enablement-and-landing).
+Below canonical status, selection ranks status regardless of native/overlay mode;
+claim context only breaks equal-rank ties. See [trust semantics](../docs/trust-model.md)
+and the selection implementation for current behavior.
+
 ## Summary
 
 The dotrepo index is a Git-backed, PR-driven collection of repository records. It is both a practical contribution surface and the connective layer that makes the protocol useful across the ecosystem.

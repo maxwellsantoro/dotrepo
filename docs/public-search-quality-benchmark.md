@@ -33,7 +33,14 @@ matched public fields and factual completeness signals. Trust status and
 confidence can still be used as filters, but they do not make a result more
 relevant.
 
-Cost reporting is intentionally local and deterministic. Text-only tasks are
+Cost reporting is local and deterministic. Its `inventoryOnly*` and
+`profileFanout*` fields describe a legacy retrieval model: the current Worker
+reads the pointer plus `repos/search.json` for all searches, including filters.
+Those report fields do not measure current hosted asset reads or Worker cost.
+Matching still scans the compact search document; result limits bound response
+size. See [public architecture](public-surface.md#runtime-bounds).
+
+Under the legacy model, text-only tasks are
 classified as inventory-only eligible; tasks that use language, topic, trust, or
 completeness filters are classified as profile fan-out because they need richer
 profile fields.

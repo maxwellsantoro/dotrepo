@@ -8,6 +8,8 @@ use dotrepo_crawler::{
     import_escalation_options_from_env, resolve_adjudication_providers_from_env,
 };
 use std::fs;
+use std::io::{BufRead, BufReader, Read, Write};
+use std::net::TcpListener;
 use std::path::{Path, PathBuf};
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -201,4 +203,87 @@ fn conflict_fixture_dir(label: &str) -> PathBuf {
     )
     .expect("verify");
     root
+}
+
+#[test]
+fn billed_http_failure_counts_tokens_and_attempt_before_second_opinion() {
+    let listener = TcpListener::bind("127.0.0.1:0").expect("bind");
+    let endpoint = format!(
+        "http://{}/adjudicate",
+        listener.local_addr().expect("address")
+    );
+    let server = std::thread::spawn(move || {
+        let (mut stream, _) = listener.accept().expect("accept");
+        stream
+            .set_read_timeout(Some(std::time::Duration::from_secs(5)))
+            .expect("timeout");
+        let mut reader = BufReader::new(&stream);
+        let mut length = 0;
+        loop {
+            let mut line = String::new();
+            reader.read_line(&mut line).expect("header");
+            if line == "\r\n" {
+                break;
+            }
+            if let Some(value) = line.to_ascii_lowercase().strip_prefix("content-length:") {
+                length = value.trim().parse::<usize>().expect("length");
+            }
+        }
+        let mut request = vec![0; length];
+        reader.read_exact(&mut request).expect("body");
+        let body =
+            r#"{"error":"OpenRouter finish_reason=length","tokensUsed":350,"cost":0.000155}"#;
+        write!(stream, "HTTP/1.1 502 Bad Gateway\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{}", body.len(), body).expect("response");
+    });
+    let provider = dotrepo_crawler::HttpAdjudicationProvider::new(
+        endpoint,
+        AdjudicationTier::LocalPrimary,
+        "openrouter",
+        Some("openai/gpt-6-luna".into()),
+        None,
+    )
+    .expect("provider");
+    let root = conflict_fixture_dir("billed-failure");
+    let source = "https://github.com/example/billed-failure";
+    let mut plan = import_repository(&root, ImportMode::Overlay, Some(source)).expect("import");
+    let verification = verify_import_plan(&root, &plan, source);
+    let mut scores = score_import_fields(&plan, &verification);
+    let second = StubAdjudicationProvider::new(
+        AdjudicationTier::LocalSecondOpinion,
+        vec![AdjudicationProviderResponse {
+            response: AdjudicationModelResponse {
+                field: "repo.build".into(),
+                value: Some("cargo build --workspace".into()),
+                confidence: AdjudicationModelConfidence::High,
+                reason: "workspace CI".into(),
+                source: Some(".github/workflows/check.yml".into()),
+            },
+            tokens_used: 80,
+        }],
+    );
+    let report = run_import_escalation(
+        &root,
+        &mut plan,
+        &verification,
+        &mut scores,
+        &ImportEscalationOptions {
+            max_adjudication_calls: 2,
+            enable_second_opinion: true,
+            ..Default::default()
+        },
+        TieredAdjudicationProviders {
+            local_primary: Some(&provider),
+            local_second_opinion: Some(&second),
+            api_escalation: None,
+        },
+    );
+    server.join().expect("server");
+    assert_eq!(report.model_calls, 2);
+    assert_eq!(report.tokens_used, 430);
+    assert_eq!(report.model_resolved, 1);
+    assert_eq!(
+        plan.manifest.repo.build.as_deref(),
+        Some("cargo build --workspace")
+    );
+    fs::remove_dir_all(root).expect("cleanup");
 }

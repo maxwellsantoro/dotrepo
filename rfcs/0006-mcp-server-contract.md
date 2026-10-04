@@ -106,11 +106,11 @@ Inputs:
 
 Returns:
 - the preview manifest
-- `manifest_path`
-- `evidence_path` when present
-- preview `evidence` text for overlay imports
-- `imported_sources`
-- `inferred_fields`
+- `manifestPath`
+- `evidencePath` when present
+- preview `evidenceText` for overlay imports
+- `importedSources`
+- `inferredFields`
 
 This should wrap the same thin import pipeline as `dotrepo import`, using `README.md`, `CODEOWNERS`, and `SECURITY.md` when available.
 
@@ -150,8 +150,11 @@ Inputs:
 - `baseUrl` (optional hosted public snapshot origin; defaults to `https://dotrepo.org`)
 
 Returns:
-- hosted snapshot metadata plus `summary`, `trust`, and optional `query` payloads resolved
-  against the public export instead of a local repository root
+- hosted snapshot metadata plus `summary`, `trust`, and optional `query` payloads
+  resolved against the public export instead of a local repository root
+- current source also includes `profile` and follows valid immutable snapshot
+  paths; stable binaries differ as documented in
+  [release compatibility](../docs/release-compatibility.md)
 
 Security constraints:
 - `baseUrl` must match the server's allowlisted hosted snapshot origins unless
@@ -160,6 +163,10 @@ Security constraints:
   development only
 - the server rejects private-network and non-HTTP(S) lookup targets, disables HTTP redirects,
   and validates resolved destination IPs to limit SSRF and DNS rebinding
+- current source additionally binds snapshot paths to the selected origin;
+  target/address protections and profile following vary by release
+- a custom local server requires both custom-origin and unsafe-local overrides;
+  the local override does not remove the origin allowlist
 
 ## Response shape guidance
 

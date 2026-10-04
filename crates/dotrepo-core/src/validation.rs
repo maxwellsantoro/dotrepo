@@ -295,6 +295,9 @@ pub fn validate_manifest_diagnostics(
     }
 
     diagnostics.extend(validate_readme_sections(manifest));
+    diagnostics.extend(crate::execution::validate_execution_contexts(
+        root, manifest,
+    ));
     diagnostics.extend(validate_relations(manifest));
 
     if matches!(manifest.record.mode, RecordMode::Native) {

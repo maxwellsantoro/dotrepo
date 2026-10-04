@@ -1,0 +1,966 @@
+use super::policy::sanitize_import_command;
+
+#[test]
+fn sanitize_import_command_rejects_shell_like_values() {
+    assert!(sanitize_import_command("cargo test").is_some());
+    assert!(sanitize_import_command("npm run build").is_some());
+    assert!(sanitize_import_command("echo $(whoami)").is_none());
+    assert!(sanitize_import_command("cargo test\nrm -rf /").is_none());
+    assert!(sanitize_import_command("echo `id`").is_none());
+    assert!(sanitize_import_command("cargo test; curl attacker").is_none());
+    assert!(sanitize_import_command("cargo test && rm -rf /").is_none());
+    assert!(sanitize_import_command("cargo test | sh").is_none());
+    assert!(sanitize_import_command("cargo test > /tmp/out").is_none());
+}
+
+#[test]
+fn dependency_installation_is_not_a_build_or_test_command() {
+    use super::extraction::first_matching_workflow_command;
+    for command in [
+        "pip install pytest pytest-xdist",
+        "python -m pip install pytest",
+        "python3 -m pip install --upgrade build",
+        "uv pip install pytest",
+        "sudo pip3 install pytest",
+        "npm install build test",
+        "pnpm add vitest",
+        "uv sync --dev",
+    ] {
+        assert!(sanitize_import_command(command).is_none(), "{command}");
+        let commands = [command.to_string()];
+        assert!(first_matching_workflow_command(&commands, true).is_none());
+        assert!(first_matching_workflow_command(&commands, false).is_none());
+    }
+}
+
+#[test]
+fn workflow_python_runner_must_be_an_invocation() {
+    use super::extraction::first_matching_workflow_command;
+    for command in [
+        "pytest-xdist --version",
+        "download pytest",
+        "check python -m pytest",
+    ] {
+        assert!(first_matching_workflow_command(&[command.into()], false).is_none());
+    }
+    for command in [
+        "pytest tests",
+        "python3 -m pytest",
+        "uv run --locked pytest",
+        "poetry run pytest",
+    ] {
+        assert_eq!(
+            first_matching_workflow_command(&[command.into()], false).as_deref(),
+            Some(command)
+        );
+    }
+}
+
+#[test]
+fn sonnet_workflow_skips_setup_before_the_actual_runner() {
+    use super::extraction::{extract_workflow_run_commands, first_matching_workflow_command};
+    let commands = extract_workflow_run_commands(include_str!(
+        "../../../tests/fixtures/command-audit/sonnet-ci.yml"
+    ));
+    assert_eq!(
+        first_matching_workflow_command(&commands, false).as_deref(),
+        Some("pytest -n auto sonnet --ignore=sonnet/src/conformance/")
+    );
+    assert!(first_matching_workflow_command(&commands, true).is_none());
+}
+
+#[test]
+fn resolve_unique_command_candidate_prefers_primary_ci_workflow() {
+    use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+    use super::policy::resolve_unique_command_candidate;
+
+    let candidates = [
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/build-release-apk.yml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: Some("./gradlew assembleRelease".into()),
+            test: Some("./gradlew testReleaseUnitTest".into()),
+        },
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/ci.yml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: Some("npm run build".into()),
+            test: Some("npm test".into()),
+        },
+    ];
+    let refs: Vec<&ImportedCommandCandidate> = candidates.iter().collect();
+
+    let build = resolve_unique_command_candidate(&refs, true);
+    match build {
+        super::policy::UniqueCommandResolution::Unique {
+            command,
+            source_path,
+        } => {
+            assert_eq!(command, "npm run build");
+            assert_eq!(source_path, ".github/workflows/ci.yml");
+        }
+        other => panic!("expected unique build resolution, got {other:?}"),
+    }
+
+    let test = resolve_unique_command_candidate(&refs, false);
+    match test {
+        super::policy::UniqueCommandResolution::Unique {
+            command,
+            source_path,
+        } => {
+            assert_eq!(command, "npm test");
+            assert_eq!(source_path, ".github/workflows/ci.yml");
+        }
+        other => panic!("expected unique test resolution, got {other:?}"),
+    }
+}
+
+#[test]
+fn infer_tox_ini_commands_detects_testenv() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_tox_ini_commands;
+
+    let file = ImportedFile {
+        path: "tox.ini".into(),
+        contents: "[tox]\nenvlist = py310\n[testenv]\ncommands = pytest\n".into(),
+    };
+    let candidate = infer_tox_ini_commands(&file).expect("tox.ini yields test");
+    assert_eq!(candidate.test.as_deref(), Some("tox"));
+    assert!(candidate.build.is_none());
+}
+
+#[test]
+fn package_commands_preserve_the_declared_script_name() {
+    use super::{infer_package_json_commands, ImportedFile};
+    for runner in ["npm", "pnpm", "yarn", "bun"] {
+        let file = ImportedFile {
+            path: "package.json".into(),
+            contents: format!(
+                r#"{{"packageManager":"{runner}@1.0.0","scripts":{{"compile":"tsc -b","test-all":"test-runner --all"}}}}"#
+            ),
+        };
+        let candidate = infer_package_json_commands(&file).unwrap();
+        let prefix = if runner == "yarn" {
+            "yarn".to_string()
+        } else {
+            format!("{runner} run")
+        };
+        assert_eq!(candidate.build, Some(format!("{prefix} compile")));
+        assert_eq!(candidate.test, Some(format!("{prefix} test-all")));
+    }
+}
+
+#[test]
+fn load_best_package_json_prefers_server_app_over_root_format_only() {
+    use super::load_best_package_json;
+    use std::fs;
+    use std::time::{SystemTime, UNIX_EPOCH};
+
+    let unique = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("clock")
+        .as_nanos();
+    let root = std::env::temp_dir().join(format!("dotrepo-pkg-json-{unique}"));
+    let _ = fs::remove_dir_all(&root);
+    fs::create_dir_all(root.join("server")).expect("server dir");
+    fs::write(
+        root.join("package.json"),
+        r#"{"scripts":{"format":"prettier ."}}"#,
+    )
+    .expect("root package");
+    fs::write(
+        root.join("server/package.json"),
+        r#"{"scripts":{"build":"nest build","test":"vitest run"}}"#,
+    )
+    .expect("server package");
+
+    let best = load_best_package_json(&root)
+        .expect("load succeeds")
+        .expect("selects a package.json");
+    assert_eq!(best.path, "server/package.json");
+    assert!(best.contents.contains("nest build"));
+    let _ = fs::remove_dir_all(&root);
+}
+
+#[test]
+fn resolve_unique_command_candidate_prefers_generic_over_monorepo_slice_workflows() {
+    use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+    use super::policy::resolve_unique_command_candidate;
+
+    // MQTTX-style: CLI vs desktop unit workflows at equal (non-ci.yml) rank.
+    let test_candidates = [
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/units_test_desktop.yaml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: None,
+            test: Some("npm run test:e2e".into()),
+        },
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/units_test_cli.yaml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: None,
+            test: Some("npm run test:cli".into()),
+        },
+    ];
+    let test_refs: Vec<&ImportedCommandCandidate> = test_candidates.iter().collect();
+    match resolve_unique_command_candidate(&test_refs, false) {
+        super::policy::UniqueCommandResolution::Unique {
+            command,
+            source_path,
+        } => {
+            assert_eq!(command, "npm run test:cli");
+            assert_eq!(source_path, ".github/workflows/units_test_cli.yaml");
+        }
+        other => panic!("expected CLI workflow preferred over desktop, got {other:?}"),
+    }
+
+    // Serverless-style: framework CI vs binary-installer CI.
+    let build_candidates = [
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/ci-binary-installer.yml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: Some("npm run build:binary".into()),
+            test: None,
+        },
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/ci-framework.yml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: Some("npm run build".into()),
+            test: None,
+        },
+    ];
+    let build_refs: Vec<&ImportedCommandCandidate> = build_candidates.iter().collect();
+    match resolve_unique_command_candidate(&build_refs, true) {
+        super::policy::UniqueCommandResolution::Unique {
+            command,
+            source_path,
+        } => {
+            assert_eq!(command, "npm run build");
+            assert_eq!(source_path, ".github/workflows/ci-framework.yml");
+        }
+        other => {
+            panic!("expected framework workflow preferred over binary-installer, got {other:?}")
+        }
+    }
+}
+
+#[test]
+fn workflow_inference_skips_shell_assignments_and_prefers_bazel_build() {
+    use super::super::types::ImportedFile;
+    use super::extraction::{
+        extract_workflow_run_commands, first_matching_workflow_command, infer_workflow_commands,
+    };
+
+    let workflow = ImportedFile {
+        path: ".github/workflows/bazel.yml".into(),
+        contents: r#"
+jobs:
+  build:
+steps:
+  - run: bazel_wrapper_args+=(--windows-cross-compile)
+  - run: bazel build //...
+"#
+        .into(),
+    };
+
+    let commands = extract_workflow_run_commands(&workflow.contents);
+    assert_eq!(commands.len(), 2);
+    assert!(first_matching_workflow_command(&["# setup only".to_string()], true).is_none());
+    assert_eq!(
+        first_matching_workflow_command(&commands, true).as_deref(),
+        Some("bazel build //...")
+    );
+
+    let candidate = infer_workflow_commands(&workflow).expect("workflow");
+    assert_eq!(candidate.build.as_deref(), Some("bazel build //..."));
+}
+
+#[test]
+fn readme_doc_commands_abstain_after_directory_change() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_readme_commands;
+
+    let readme = ImportedFile {
+        path: "README.md".into(),
+        contents: r#"
+# bat
+
+## Development
+
+```bash
+# Recursive clone to retrieve all submodules
+git clone --recursive https://github.com/sharkdp/bat
+
+# Build (debug version)
+cd bat
+cargo build --bins
+
+# Run unit tests and integration tests
+cargo test
+```
+"#
+        .into(),
+    };
+
+    assert!(infer_readme_commands(&readme).is_none());
+}
+
+#[test]
+fn docs_nextest_examples_publish_runner_not_specific_selector() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_contributing_commands;
+
+    let contributing = ImportedFile {
+        path: "CONTRIBUTING.md".into(),
+        contents: r#"
+# Contributing
+
+For running tests, we recommend nextest.
+
+```shell
+cargo nextest run -E 'test(test_name)'
+```
+"#
+        .into(),
+    };
+
+    let candidate = infer_contributing_commands(&contributing).expect("CONTRIBUTING commands");
+    assert_eq!(candidate.test.as_deref(), Some("cargo nextest run"));
+}
+
+#[test]
+fn workflow_cargo_selectors_do_not_outrank_workspace_defaults() {
+    use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+    use super::policy::resolve_command_field;
+
+    let candidates = [
+        ImportedCommandCandidate {
+            source_path: "Cargo.toml".into(),
+            source_tier: CommandSourceTier::EcosystemDefault,
+            build: Some("cargo build --workspace".into()),
+            test: Some("cargo test --workspace".into()),
+        },
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/main.yml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: Some("cargo build".into()),
+            test: Some("'cargo test -p cargo --test testsuite -- fix::'".into()),
+        },
+    ];
+    let mut notes = Vec::new();
+    let mut evidence = Vec::new();
+    let mut inferred = Vec::new();
+
+    let build = resolve_command_field(
+        &candidates,
+        "repo.build",
+        true,
+        &mut notes,
+        &mut evidence,
+        &mut inferred,
+    )
+    .expect("build resolves");
+    assert_eq!(build.command, "cargo build --workspace");
+    assert_eq!(build.source_path, "Cargo.toml");
+
+    let test = resolve_command_field(
+        &candidates,
+        "repo.test",
+        false,
+        &mut notes,
+        &mut evidence,
+        &mut inferred,
+    )
+    .expect("test resolves");
+    assert_eq!(test.command, "cargo test --workspace");
+    assert_eq!(test.source_path, "Cargo.toml");
+}
+
+#[test]
+fn workflow_go_selectors_do_not_outrank_module_defaults() {
+    use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+    use super::policy::resolve_command_field;
+
+    let candidates = [
+        ImportedCommandCandidate {
+            source_path: "go.mod".into(),
+            source_tier: CommandSourceTier::EcosystemDefault,
+            build: Some("go build ./...".into()),
+            test: Some("go test ./...".into()),
+        },
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/ci.yml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: None,
+            test: Some("go test -race -coverprofile=coverage.txt -covermode=atomic ./...".into()),
+        },
+    ];
+    let mut notes = Vec::new();
+    let mut evidence = Vec::new();
+    let mut inferred = Vec::new();
+
+    let test = resolve_command_field(
+        &candidates,
+        "repo.test",
+        false,
+        &mut notes,
+        &mut evidence,
+        &mut inferred,
+    )
+    .expect("test resolves");
+    assert_eq!(test.command, "go test ./...");
+    assert_eq!(test.source_path, "go.mod");
+}
+
+#[test]
+fn workflow_gradle_tasks_defer_to_wrapper_defaults() {
+    use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+    use super::policy::resolve_command_field;
+
+    let candidates = [
+        ImportedCommandCandidate {
+            source_path: "build.gradle".into(),
+            source_tier: CommandSourceTier::EcosystemDefault,
+            build: Some("./gradlew build".into()),
+            test: Some("./gradlew test".into()),
+        },
+        ImportedCommandCandidate {
+            source_path: ".github/workflows/ci.yml".into(),
+            source_tier: CommandSourceTier::Workflow,
+            build: Some("./gradlew clean publish --stacktrace".into()),
+            test: Some("./gradlew systemTest".into()),
+        },
+    ];
+    let mut notes = Vec::new();
+    let mut evidence = Vec::new();
+    let mut inferred = Vec::new();
+
+    let build = resolve_command_field(
+        &candidates,
+        "repo.build",
+        true,
+        &mut notes,
+        &mut evidence,
+        &mut inferred,
+    )
+    .expect("build resolves");
+    assert_eq!(build.command, "./gradlew build");
+    assert_eq!(build.source_path, "build.gradle");
+
+    let test = resolve_command_field(
+        &candidates,
+        "repo.test",
+        false,
+        &mut notes,
+        &mut evidence,
+        &mut inferred,
+    )
+    .expect("test resolves");
+    assert_eq!(test.command, "./gradlew test");
+}
+
+#[test]
+fn workflow_wrapper_chmod_is_not_a_build_command() {
+    use super::extraction::first_matching_workflow_command;
+
+    let chmod = vec!["chmod +x gradlew".to_string()];
+    assert_eq!(first_matching_workflow_command(&chmod, true), None);
+
+    let echoed_runner = vec!["echo go test -test.run=DontRunTests -fuzz=$ff".to_string()];
+    assert_eq!(first_matching_workflow_command(&echoed_runner, false), None);
+
+    let compile_only = vec!["echo compile step done".to_string()];
+    assert_eq!(first_matching_workflow_command(&compile_only, true), None);
+
+    let real_gradle = vec!["./gradlew assembleDebug".to_string()];
+    assert_eq!(
+        first_matching_workflow_command(&real_gradle, true).as_deref(),
+        Some("./gradlew assembleDebug")
+    );
+}
+
+#[test]
+fn host_package_install_with_build_essential_is_not_a_build_command() {
+    use super::extraction::first_matching_workflow_command;
+
+    // pyenv CI: apt installs list `make` and `build-essential` as packages.
+    let apt = vec![
+        "sudo apt-get update -q; sudo apt install -yq make build-essential libssl-dev zlib1g-dev \\"
+            .to_string(),
+    ];
+    assert_eq!(
+        first_matching_workflow_command(&apt, true),
+        None,
+        "apt install of build-essential must not become repo.build"
+    );
+
+    let make_build = vec!["make build".to_string()];
+    assert_eq!(
+        first_matching_workflow_command(&make_build, true).as_deref(),
+        Some("make build")
+    );
+
+    let make_all = vec!["make all".to_string()];
+    assert_eq!(
+        first_matching_workflow_command(&make_all, true).as_deref(),
+        Some("make all")
+    );
+}
+
+#[test]
+fn makefile_unit_test_target_outranks_composite_test() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_makefile_commands;
+
+    let makefile = ImportedFile {
+        path: "Makefile".into(),
+        contents: "\
+unit-test:\n\
+\tgo test ./... -short\n\
+\n\
+test: unit-test integration-test-all\n\
+\n\
+integration-test-all:\n\
+\tgo test pkg/integration/clients/*.go\n\
+"
+        .into(),
+    };
+    let candidate = infer_makefile_commands(&makefile).expect("Makefile commands");
+    assert_eq!(
+        candidate.test.as_deref(),
+        Some("go test ./... -short"),
+        "unit-test one-liner must unwrap before composite make test"
+    );
+}
+
+#[test]
+fn makefile_preferred_over_justfile_on_task_script_conflict() {
+    use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+    use super::policy::resolve_command_field;
+
+    let candidates = [
+        ImportedCommandCandidate {
+            source_path: "Makefile".into(),
+            source_tier: CommandSourceTier::TaskScript,
+            build: Some("make build".into()),
+            test: Some("make test".into()),
+        },
+        ImportedCommandCandidate {
+            source_path: "justfile".into(),
+            source_tier: CommandSourceTier::TaskScript,
+            build: Some("just build".into()),
+            test: Some("just test".into()),
+        },
+    ];
+    let mut notes = Vec::new();
+    let mut evidence = Vec::new();
+    let mut inferred = Vec::new();
+    let test = resolve_command_field(
+        &candidates,
+        "repo.test",
+        false,
+        &mut notes,
+        &mut evidence,
+        &mut inferred,
+    )
+    .expect("test resolves");
+    assert_eq!(test.command, "make test");
+    assert_eq!(test.source_path, "Makefile");
+}
+
+#[test]
+fn specialized_go_ci_coverdir_is_not_a_workflow_test_command() {
+    use super::extraction::first_matching_workflow_command;
+
+    let ci = vec![
+        r#"go test ./... -short -cover -args "-test.gocoverdir=/tmp/code_coverage""#.to_string(),
+    ];
+    assert_eq!(
+        first_matching_workflow_command(&ci, false),
+        None,
+        "CI coverdir go test must not become repo.test"
+    );
+    let plain = vec!["go test ./...".to_string()];
+    assert_eq!(
+        first_matching_workflow_command(&plain, false).as_deref(),
+        Some("go test ./...")
+    );
+}
+
+#[test]
+fn docs_reject_package_narrowed_go_test_examples() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_contributing_commands;
+
+    // Shaped like milvus-io/milvus: the contributor doc walks through
+    // testing one package; that example is not the repository test command.
+    let contributing = ImportedFile {
+        path: "CONTRIBUTING.md".into(),
+        contents:
+            "# Contributing\n\n## Testing\n\n```shell\ngo test ./internal/datanode -cover\n```\n"
+                .into(),
+    };
+    assert!(infer_contributing_commands(&contributing).is_none());
+
+    // The module-wide form is still accepted.
+    let module_wide = ImportedFile {
+        path: "CONTRIBUTING.md".into(),
+        contents: "# Contributing\n\n## Testing\n\n```shell\ngo test ./...\n```\n".into(),
+    };
+    let candidate = infer_contributing_commands(&module_wide).expect("CONTRIBUTING commands");
+    assert_eq!(candidate.test.as_deref(), Some("go test ./..."));
+}
+
+#[test]
+fn workflow_run_commands_shed_inline_yaml_quotes() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_workflow_commands;
+
+    let workflow = ImportedFile {
+        path: ".github/workflows/ci.yml".into(),
+        contents: "jobs:\n  test:\n    steps:\n      - run: 'go test ./...'\n".into(),
+    };
+    let candidate = infer_workflow_commands(&workflow).expect("workflow commands");
+    assert_eq!(candidate.test.as_deref(), Some("go test ./..."));
+}
+
+#[test]
+fn package_json_test_conflicts_with_python_test_default() {
+    use super::super::types::{CommandSourceTier, ImportedCommandCandidate};
+    use super::policy::resolve_command_field;
+
+    let candidates = [
+        ImportedCommandCandidate {
+            source_path: "package.json".into(),
+            source_tier: CommandSourceTier::Manifest,
+            build: None,
+            test: Some("npm test".into()),
+        },
+        ImportedCommandCandidate {
+            source_path: "pyproject.toml".into(),
+            source_tier: CommandSourceTier::EcosystemDefault,
+            build: Some("python -m build".into()),
+            test: Some("tox".into()),
+        },
+    ];
+    let mut notes = Vec::new();
+    let mut evidence = Vec::new();
+    let mut inferred = Vec::new();
+
+    let test = resolve_command_field(
+        &candidates,
+        "repo.test",
+        false,
+        &mut notes,
+        &mut evidence,
+        &mut inferred,
+    );
+
+    assert!(test.is_none());
+    assert!(
+        notes
+            .iter()
+            .any(|note| note.contains("package.json") && note.contains("pyproject.toml")),
+        "expected cross-ecosystem conflict note, got: {notes:?}",
+    );
+}
+
+#[test]
+fn makefile_commands_name_only_targets_that_exist() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_makefile_commands;
+
+    // Shaped like psf/requests: `ci` and `test-readme` targets exist, but
+    // there is no `build` target, so no build command may be published.
+    let makefile = ImportedFile {
+        path: "Makefile".into(),
+        contents: ".PHONY: docs\ninit:\n\tpython -m pip install -r requirements-dev.txt\ntest:\n\tpython -m pytest tests\n\nci:\n\tpython -m pytest tests --junitxml=report.xml\n\ntest-readme:\n\techo check\n".into(),
+    };
+    let candidate = infer_makefile_commands(&makefile).expect("Makefile commands");
+    assert_eq!(candidate.build, None);
+    assert_eq!(candidate.test.as_deref(), Some("python -m pytest tests"));
+
+    // A Makefile whose only build-ish target is `all` publishes `make all`
+    // when the recipe is project-specific rather than a canonical
+    // developer command that can stand alone.
+    let all_only = ImportedFile {
+        path: "Makefile".into(),
+        contents: "all:\n\tgcc -o app main.c\n\ncheck:\n\t./run-tests.sh\n".into(),
+    };
+    let candidate = infer_makefile_commands(&all_only).expect("Makefile commands");
+    assert_eq!(candidate.build.as_deref(), Some("make all"));
+    assert_eq!(candidate.test.as_deref(), Some("make check"));
+
+    // Multi-step recipes remain wrapper commands because the target is the
+    // audited entrypoint for the sequence.
+    let multi_step = ImportedFile {
+        path: "Makefile".into(),
+        contents: "test:\n\tpython -m pip install -e .\n\tpython -m pytest tests\n".into(),
+    };
+    let candidate = infer_makefile_commands(&multi_step).expect("Makefile commands");
+    assert_eq!(candidate.test.as_deref(), Some("make test"));
+}
+
+#[test]
+fn docs_accept_cargo_toolchain_override_and_keep_it_in_the_command() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_contributing_commands;
+
+    // Shaped like serde-rs/serde: the full-suite command pins a toolchain
+    // and lives under a directory-specific subheading of the test section.
+    let contributing = ImportedFile {
+        path: "CONTRIBUTING.md".into(),
+        contents: r#"
+# Contributing
+
+## Running the test suite
+
+##### In the [`test_suite`] directory
+
+```sh
+# Run the full test suite, including tests of unstable functionality
+cargo +nightly test --features unstable
+```
+"#
+        .into(),
+    };
+
+    let candidate = infer_contributing_commands(&contributing).expect("CONTRIBUTING commands");
+    assert_eq!(
+        candidate.test.as_deref(),
+        Some("cargo +nightly test --features unstable")
+    );
+    assert_eq!(candidate.build, None);
+}
+
+#[test]
+fn docs_abstain_when_environment_prerequisite_would_be_lost() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_contributing_commands;
+
+    let contributing = ImportedFile {
+        path: "CONTRIBUTING.md".into(),
+        contents: r#"
+# Contributing
+
+```shell
+RUFF_UPDATE_SCHEMA=1 cargo test
+```
+"#
+        .into(),
+    };
+
+    assert!(infer_contributing_commands(&contributing).is_none());
+}
+
+#[test]
+fn workflow_inference_ignores_specialized_cargo_commands() {
+    use super::super::types::ImportedFile;
+    use super::extraction::first_matching_workflow_command;
+    use super::extraction::infer_workflow_commands;
+
+    let target_specific = vec!["cargo build --bin ruff".to_string()];
+    assert_eq!(
+        first_matching_workflow_command(&target_specific, true),
+        None
+    );
+
+    let equals_target_specific = vec!["cargo build --profile=profiling --bin=ty".to_string()];
+    assert_eq!(
+        first_matching_workflow_command(&equals_target_specific, true),
+        None
+    );
+
+    let release_build = vec!["cargo build --release".to_string()];
+    assert_eq!(
+        first_matching_workflow_command(&release_build, true).as_deref(),
+        Some("cargo build --release")
+    );
+
+    let target_features_build =
+        vec!["cargo build --target x86_64-fortanix-unknown-sgx --features rt,sync".to_string()];
+    assert_eq!(
+        first_matching_workflow_command(&target_features_build, true),
+        None
+    );
+
+    let doc_only_test = vec!["cargo test --doc --features full".to_string()];
+    assert_eq!(first_matching_workflow_command(&doc_only_test, false), None);
+
+    let fuzz_workflow = ImportedFile {
+        path: ".github/workflows/daily_fuzz.yaml".into(),
+        contents: "jobs:\n  fuzz:\n    steps:\n      - run: cargo build --locked\n".into(),
+    };
+    assert!(infer_workflow_commands(&fuzz_workflow).is_none());
+
+    let format_workflow = ImportedFile {
+        path: ".github/workflows/format-workflow.yml".into(),
+        contents: "jobs:\n  format:\n    steps:\n      - run: npm run build\n".into(),
+    };
+    assert!(infer_workflow_commands(&format_workflow).is_none());
+
+    let release_workflow = ImportedFile {
+        path: ".github/workflows/release.yml".into(),
+        contents: "jobs:\n  release:\n    steps:\n      - run: npm run build\n".into(),
+    };
+    assert!(infer_workflow_commands(&release_workflow).is_none());
+}
+
+#[test]
+fn workflow_and_makefile_inference_improvements_do_not_regress_safety() {
+    // The improvements to workflow matching and makefile target detection
+    // must continue to respect sanitize_import_command. Compound shell is
+    // rejected (defense in depth); clean tool invocations are kept.
+    assert!(sanitize_import_command("./mvnw -B package").is_some());
+    assert!(sanitize_import_command("make test").is_some());
+    assert!(sanitize_import_command("pnpm test").is_some());
+    assert!(sanitize_import_command("npm ci && npm run build").is_none());
+}
+
+#[test]
+fn infer_gradle_commands_uses_wrapper_only_when_present() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_gradle_commands;
+    let groovy = ImportedFile {
+        path: "build.gradle".into(),
+        contents: "plugins { id 'java' }".into(),
+    };
+    let kts = ImportedFile {
+        path: "build.gradle.kts".into(),
+        contents: "plugins { java }".into(),
+    };
+    let g1 = infer_gradle_commands(&groovy, true).expect("groovy");
+    let g2 = infer_gradle_commands(&kts, false).expect("kts");
+    assert_eq!(g1.build.as_deref(), Some("./gradlew build"));
+    assert_eq!(g2.test.as_deref(), Some("gradle test"));
+}
+
+#[test]
+fn infer_setup_commands_provide_pytest_for_classic_python() {
+    use super::super::types::ImportedFile;
+    use super::extraction::{infer_setup_cfg_commands, infer_setup_py_commands};
+    let setup_py = ImportedFile {
+        path: "setup.py".into(),
+        contents: "from setuptools import setup\nsetup(tests_require=['pytest'])".into(),
+    };
+    let setup_cfg = ImportedFile {
+        path: "setup.cfg".into(),
+        contents: "[tool:pytest]\naddopts = -q".into(),
+    };
+    let p = infer_setup_py_commands(&setup_py).expect("setup.py");
+    let c = infer_setup_cfg_commands(&setup_cfg).expect("setup.cfg");
+    assert_eq!(p.test.as_deref(), Some("python -m pytest"));
+    assert_eq!(c.test.as_deref(), Some("python -m pytest"));
+}
+
+#[test]
+fn infer_setup_py_abstains_without_test_signals() {
+    use super::super::types::ImportedFile;
+    use super::extraction::{infer_setup_py_commands, infer_setup_py_test_command};
+    let minimal = ImportedFile {
+        path: "setup.py".into(),
+        contents: "from setuptools import setup\nsetup(name='demo')".into(),
+    };
+    let contest = ImportedFile {
+        path: "setup.py".into(),
+        contents: "from setuptools import setup\nsetup(name='contest-kit')".into(),
+    };
+    assert!(infer_setup_py_test_command(&minimal.contents).is_none());
+    assert!(infer_setup_py_test_command(&contest.contents).is_none());
+    assert!(infer_setup_py_commands(&minimal).is_none());
+    assert!(infer_setup_py_commands(&contest).is_none());
+}
+
+#[test]
+fn infer_setup_py_prefers_unittest_when_pytest_is_absent() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_setup_py_commands;
+    let setup_py = ImportedFile {
+        path: "setup.py".into(),
+        contents: "from setuptools import setup\nsetup(test_suite='tests')".into(),
+    };
+    let candidate = infer_setup_py_commands(&setup_py).expect("setup.py");
+    assert_eq!(
+        candidate.test.as_deref(),
+        Some("python -m unittest discover")
+    );
+}
+
+#[test]
+fn infer_setup_cfg_abstains_on_unrelated_test_substrings() {
+    use super::super::types::ImportedFile;
+    use super::extraction::{infer_setup_cfg_commands, infer_setup_cfg_test_command};
+    let metadata_only = ImportedFile {
+        path: "setup.cfg".into(),
+        contents: "[metadata]\nname = latest-contest-kit\n".into(),
+    };
+    assert!(infer_setup_cfg_test_command(&metadata_only.contents).is_none());
+    assert!(infer_setup_cfg_commands(&metadata_only).is_none());
+}
+
+#[test]
+fn infer_setup_cfg_detects_extras_require_test_pytest() {
+    use super::super::types::ImportedFile;
+    use super::extraction::infer_setup_cfg_commands;
+    let setup_cfg = ImportedFile {
+        path: "setup.cfg".into(),
+        contents: "[options.extras_require]\ntest = pytest>=7\n".into(),
+    };
+    let candidate = infer_setup_cfg_commands(&setup_cfg).expect("setup.cfg");
+    assert_eq!(candidate.test.as_deref(), Some("python -m pytest"));
+}
+
+#[test]
+fn pyproject_tox_conflicts_with_setup_py_pytest_instead_of_losing() {
+    use super::super::types::ImportedFile;
+    use super::infer_imported_commands;
+    use crate::import::ImportSources;
+
+    let pyproject = ImportedFile {
+        path: "pyproject.toml".into(),
+        contents: "[build-system]\nrequires = [\"setuptools\"]\n[tool.tox]\n".into(),
+    };
+    let setup_py = ImportedFile {
+        path: "setup.py".into(),
+        contents: "from setuptools import setup\nsetup(tests_require=['pytest'])".into(),
+    };
+
+    let result = infer_imported_commands(&ImportSources {
+        readme: None,
+        cargo_toml: None,
+        rust_toolchain_toml: None,
+        rust_toolchain: None,
+        package_json: None,
+        pyproject_toml: Some(&pyproject),
+        setup_py: Some(&setup_py),
+        setup_cfg: None,
+        tox_ini: None,
+        go_mod: None,
+        pom_xml: None,
+        maven_wrapper: false,
+        build_gradle: None,
+        gradle_wrapper: false,
+        composer_json: None,
+        csproj: None,
+        solution: None,
+        mix_exs: None,
+        rebar_config: None,
+        cmake_presets_json: None,
+        makefile: None,
+        justfile: None,
+        rakefile: None,
+        contributing: None,
+        workflow_files: &[],
+    });
+
+    assert!(
+        result.test.is_none(),
+        "pyproject tox and setup.py pytest should conflict: {:?}",
+        result.test
+    );
+    assert!(
+        result.notes.iter().any(|note| note.contains("conflicting")),
+        "expected conflict note, got: {:?}",
+        result.notes
+    );
+}

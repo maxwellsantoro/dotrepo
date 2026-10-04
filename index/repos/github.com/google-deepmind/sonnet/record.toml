@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md` and `.github/workflows/ci.yml`. Inferred `repo.test` from `.github/workflows/ci.yml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `README.md` and `.github/workflows/ci.yml`. A scoped October 4 source check withheld the erroneous setup-only repo.test and retained the actual CI invocation as a component candidate with prerequisites. Other facts retain their original inspection age. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Sonnet"
@@ -25,7 +25,6 @@ languages = [
     "Starlark",
     "Shell",
 ]
-test = "pip install pytest pytest-xdist"
 topics = [
     "machine-learning",
     "artificial-intelligence",
@@ -33,6 +32,23 @@ topics = [
     "deep-learning",
     "tensorflow",
 ]
+
+[[repo.test_candidates]]
+command = "pytest -n auto sonnet --ignore=sonnet/src/conformance/"
+ecosystem = "Python"
+source = ".github/workflows/ci.yml"
+
+[repo.test_candidates.context]
+command = "pytest -n auto sonnet --ignore=sonnet/src/conformance/"
+working_directory = "."
+scope = "component"
+component = "sonnet"
+prerequisites = [
+    "The inspected CI job uses Ubuntu and Python 3.9, 3.10, or 3.11.",
+    "Install the dependencies declared by requirements.txt, requirements-tf.txt, and requirements-test.txt, then install the repository package, as the CI dependency step specifies.",
+    "Install pytest and pytest-xdist before invoking the test runner, as the CI test step specifies.",
+]
+source = ".github/workflows/ci.yml"
 
 [docs]
 root = "https://sonnet.readthedocs.io/"
@@ -102,15 +118,6 @@ reason = "extracted from README heading with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Sonnet"'
-
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:23:58.236304Z"
-confidence = "medium"
-method = "inferred"
-reason = "from workflow fallback"
-source = ".github/workflows/ci.yml"
-state = "present"
-valueJson = '"pip install pytest pytest-xdist"'
 
 [x.github]
 archived = false

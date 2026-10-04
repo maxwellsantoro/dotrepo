@@ -1,702 +1,340 @@
-# Factual Crawl Automation
+# Factual crawl automation
 
-This document describes the crawler's factual extraction and adjudication
-architecture. Product sequencing and milestone gates live in
-[`ROADMAP.md`](../ROADMAP.md).
+This guide describes the current source branch's factual pipeline and operator
+controls. [The roadmap](../ROADMAP.md#active-execution-order) owns product
+sequencing. [Release compatibility](release-compatibility.md) explains safeguards
+absent from stable binaries and older records.
 
-Implementation details here follow unreleased `main`. Stable `v1.0.1` does not
-include all of its promotion and evidence safeguards; see
-[release compatibility](release-compatibility.md) before applying these claims
-to installed binaries or older records.
+Deterministic extraction is the default; source materials remain primary, models
+choose grounded candidates, and synthesis cannot overwrite facts. Routine
+generated records use machine gates. Humans define policy, audit the system,
+and review maintainer authority claims.
 
-The design follows these durable constraints:
+## Pipeline and source boundaries
 
-- deterministic extraction remains the default path
-- synthesis remains optional and subordinate
-- source materials remain primary; overlays must not claim more certainty than
-  their provenance supports
-
-See [`docs/trust-model.md`](./trust-model.md) for the record status ladder,
-provenance categories, and authority handoff rules that constrain this design.
-See [`docs/import-baseline-audit.md`](./import-baseline-audit.md) for the
-fixture pack that defines correct importer behavior, including intentionally
-incomplete cases.
-
-## Implemented pipeline
-
-The crawler fetches, materializes, imports, and writes back overlay records
-for public GitHub repositories. The import heuristics in `dotrepo-core` extract
-name, description, build/test commands, owners, security contact, and docs
-links from README, CODEOWNERS, SECURITY.md, manifest files, and workflow YAML.
-Post-cleaners run after extraction to catch cross-repository error patterns.
-Regression behavior belongs in the fixture pack rather than a copied scorecard
-in this document.
-
-Missing fields are often legitimately absent. The fixture audit treats
-`security_contact = "unknown"` and `owners.team = none` as intentionally
-incomplete in some cases. See
-[`docs/import-baseline-audit.md`](./import-baseline-audit.md) under
-"Intentionally incomplete cases" for the canonical examples.
-
-## Pipeline
-
-```
-Deterministic crawl
-  GitHub API fetch → materialize → import heuristics → post-cleaners
-  → merge GitHub metadata → validate → write back
-        │
-        ▼
-Deterministic verification
-  identity/path/homepage consistency
-  source-file existence checks
-  candidate provenance checks
-  exact-match verification for contacts, owners, docs links
-  workflow/manifest agreement checks
-        │
-        ▼
-Field-level scoring
-  Each field gets one of five scores:
-    high-confidence present
-    medium-confidence present
-    high-confidence absent/unknown
-    suspect (a present value with a detected quality problem)
-    unresolved
-        │
-        ▼
-Narrow adjudication (only on unresolved fields)
-  Model sees: field name + candidate values + short source snippets
-  Model returns: { value, confidence, reason } or null
-  Model must not invent values outside the candidate set.
-        │
-        ▼
-Deterministic post-check
-  Chosen value must come from the candidate set.
-  Cited snippet must actually exist in fetched files.
-  Normalized value must parse.
-  Sandbox execution upgrades provenance, does not replace it.
-        │
-        ▼
-Publish
-  verified overlay:   every field is high-confidence present OR
-                      high-confidence absent/unknown
-  imported/inferred:  unresolved fields remain
-  reviewed:           human-reviewed only
+```text
+discover or schedule
+  -> capture repository identity and HEAD
+  -> materialize bounded evidence at that commit
+  -> core import and GitHub metadata reconciliation
+  -> deterministic verification and field scoring
+  -> bounded escalation for unresolved fields
+  -> candidate/source/field post-checks and validation
+  -> partial writeback, verified promotion, or abstention
+  -> retain telemetry, validate index, gate public export
+  -> test exact automation commit, land, deploy, verify
 ```
 
-### Writeback vs auto-publish gates
-
-Autonomous index writeback uses a different gate than promotion to `verified`:
-
-- **Writeback** (`autonomous_writeback_eligible`): requires deterministic
-  `verification.passed`. The crawler may persist honestly partial overlays when
-  verification succeeds but field scoring still has unresolved entries.
-- **Auto-publish to `verified`** (`FieldScoreSummary::eligible_for_auto_publish`):
-  requires no unresolved fields, no suspect fields, and no
-  medium-confidence-only present fields.
-
-A record can therefore be written to the index as `imported` or `inferred` while
-promotion abstains until scoring is exhaustive. That is intentional: publish
-uncertainty instead of inventing certainty.
-
-### Key design rules
-
-1. **Never spend tokens to answer a question the filesystem, GitHub API, or a
-   sandbox can answer more reliably.**
-2. **Treat "confidently absent" as a success state.** A repo without a SECURITY.md
-   that gets `security_contact` scored as high-confidence absent is resolved, not
-   broken.
-3. **Do not coerce general signals into specific fields.** A general support
-   channel is not a security contact. A broad multi-team CODEOWNERS file is not
-   a single `owners.team`.
-4. **Keep synthesis subordinate.** Optional whole-repository synthesis is
-   stored separately and cannot alter factual fields; factual adjudication
-   remains candidate-bound.
-5. **Preserve visible incompleteness.** The fixture audit and import baseline
-  both treat some absences as intentional. Scoring and auto-publish must not
-  quietly normalize those away.
-
-## Field-specific plans
-
-### Name and description
-
-No LLM involvement was needed in the 50-repository audit. The pipeline (README
-parser + post-cleaners + GitHub API fallback) produced correct results for that
-baseline. Future improvements to the README parser or post-cleaners should
-continue to be deterministic.
-
-### Build and test
-
-This is primarily a source-trust ranking problem, not an LLM problem. The
-current approach leaves fields unset when multiple candidates conflict. A trust
-hierarchy resolves most of these without any model:
-
-1. Direct project manifest / top-level tool config
-   (`Cargo.toml`, `package.json`, `pyproject.toml`, `go.mod`)
-2. Repo-local contributor docs (`CONTRIBUTING.md`, `BUILDING.md`)
-3. Root-level task scripts (`Makefile`, `Justfile`)
-4. CI workflow files as corroboration or fallback
-5. Language/stack sanity checks
-6. Sandbox execution as the strongest verifier
-
-The hierarchy avoids over-trusting CI when CI tests only sub-packages or
-matrices, but also avoids under-trusting it when CI is the only real evidence.
-
-When candidates genuinely tie across mutually exclusive ecosystems (e.g. a
-repository with both a `Cargo.toml` and a `package.json` build), `build`/`test`
-remain honestly unset, but the concrete candidate commands are preserved in
-`repo.build_candidates`/`repo.test_candidates` rather than discarded. See
-[RFC 0020](../rfcs/0020-multi-ecosystem-command-candidates.md).
-
-When the hierarchy still leaves multiple candidates, the field stays unresolved
-and may be escalated to narrow adjudication.
-
-### Security contact
-
-Broaden detection conservatively:
-
-- Add `CONTRIBUTING.md` as a source
-- Add `.github/ISSUE_TEMPLATE/security.md` and similar issue templates
-- Add GitHub security policy links when exposed in fetched materials
-
-Maintain a three-way distinction:
-
-- **Private mailbox** (email address) — highest confidence
-- **Policy/reporting URL** (security advisory page, disclosure form) — medium
-- **Explicitly unknown** — honest absence, not a failure
-
-Do not coerce general support channels, mailing lists, or social media accounts
-into security contacts.
-
-### Owners and team
-
-This deserves to be a first-class ambiguity class. The fixture audit has cases
-where `owners.team` should intentionally remain unset because ownership is
-genuinely broad and multi-team. Score that as **high-confidence absent**, not
-low-confidence failure.
-
-When CODEOWNERS has a clear repo-wide team, score `owners.team` as
-high-confidence present. When CODEOWNERS has competing broad teams, score as
-high-confidence absent with justification in evidence.
-
-### Docs links
-
-Keep URL quality checks (localhost, anchor-only, bare domain rejection). Add
-"confidently absent" scoring: a repo without good docs links is not necessarily
-unresolved.
-
-## Field scoring rules
-
-Each field is scored independently. The score determines the field's
-disposition in the publish step.
-
-### High-confidence present
-
-The field value came from a direct, unambiguous source with no competing
-candidates:
-
-- `repo.name` from a README `#` heading that passed the skip list and
-  post-cleaners
-- `repo.test` from `Cargo.toml` with no conflicting CI candidates
-- `owners.security_contact` from a `mailto:` link in SECURITY.md
-
-### Medium-confidence present
-
-The field value came from a plausible source but with some ambiguity:
-
-- `repo.description` from the GitHub API because README parsing failed
-- `repo.test` from a CI workflow when the manifest had no test command
-- `owners.security_contact` as a policy URL rather than a direct mailbox
-
-### High-confidence absent/unknown
-
-The field was not found, but the absence is honestly resolved:
-
-- `owners.security_contact = "unknown"` when no SECURITY.md exists
-- `owners.team` unset when CODEOWNERS has competing broad teams
-- `repo.build` unset when the project is a library with no documented build
-  command
-- `docs.root` absent when no docs site exists
-
-### Unresolved
-
-The field has multiple competing candidates and no clear winner:
-
-- `repo.test` when `Cargo.toml` says `cargo test` and CI says
-  `cargo test --all-features` and the trust hierarchy does not resolve it
-- `repo.build` when both `Makefile` and `Cargo.toml` provide build commands
-  and neither is clearly primary
-
-Unresolved fields may be escalated to narrow model adjudication. After
-adjudication and post-check, they become either present or absent at the
-model's confidence level.
-
-## Model integration
-
-### When the model runs
-
-Only for unresolved fields. The model never sees the whole repo. It sees:
-
-- the field name
-- the candidate values and their sources
-- short source snippets (a few lines of CI config, a SECURITY.md excerpt)
-
-### What the model returns
-
-```json
-{
-  "field": "repo.test",
-  "value": "cargo test --all-features",
-  "confidence": "medium",
-  "reason": "CI workflow runs this as the primary check command",
-  "source": "ci.yaml"
-}
-```
-
-Or:
-
-```json
-{
-  "field": "repo.test",
-  "value": null,
-  "confidence": "high",
-  "reason": "candidates test different sub-crates; no single primary command"
-}
-```
-
-### What happens after
-
-Deterministic post-check:
-
-- The chosen value must come from the candidate set.
-- The cited source snippet must actually exist in the fetched files.
-- If the model proposes something outside the candidate space, reject it.
-- If the model returns null, score the field as high-confidence absent.
-
-### Provider tiers and budgets
-
-Routing is capability-based rather than tied to model names:
-
-1. deterministic extraction and candidate generation
-2. lowest-cost local adjudicator that satisfies the structured-output contract
-3. independent second opinion when confidence or agreement policy requires it
-4. stronger remote adjudicator for the bounded difficult tail
-
-Provider choices and prices are runtime configuration. The durable contract is
-that every run enforces model-call and cost ceilings, records tier and usage,
-and stops escalation when a budget is exhausted. Most repositories should use
-no model at all.
-
-The scheduled autonomous refresh workflow starts OpenRouter-backed adjudication
-sidecars only when `OPENROUTER_API_KEY` and tier-specific model variables are
-configured. `DOTREPO_ADJUDICATION_MODEL` enables the primary tier,
-`DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL` enables the independent
-second-opinion tier, and `DOTREPO_ADJUDICATION_API_MODEL` enables the stronger
-remote escalation tier. The batch runner enforces a batch-wide hard ceiling
-with `INDEX_MAX_BATCH_ADJUDICATION_CALLS` (or `--adjudication-call-budget`) and
-caps each repository's `INDEX_MAX_ADJUDICATION_CALLS` to the remaining budget.
-Once the budget is exhausted, provider URLs are removed for the rest of the
-batch so deterministic refresh and writeback can continue without additional
-model calls.
-
-### Optional research synthesis
-
-The crawler can request bounded, non-factual research synthesis after factual
-import and validation. Configure a JSON sidecar with `DOTREPO_SYNTHESIS_URL`,
-then opt in with `dotrepo-crawler crawl --synthesize --synthesis-model <model>
---synthesis-provider <provider>`. `DOTREPO_SYNTHESIS_API_KEY` is sent as a
-Bearer token when present.
-
-The sidecar request contains the repository identity, the validated factual
-manifest, at most 12 materialized source documents, the model, and the provider.
-Each document is capped at 32,000 characters and aggregate context at 128,000
-characters. The response contract is:
-
-```json
-{
-  "architecture": {
-    "summary": "A shared core powers the protocol surfaces.",
-    "entryPoints": ["src/lib.rs"],
-    "keyConcepts": ["factual authority"]
-  },
-  "forAgents": {
-    "howToContribute": "Update fixtures with behavior.",
-    "gotchas": ["Keep synthesis separate from facts."]
-  },
-  "tokensUsed": 321
-}
-```
-
-The crawler supplies `generatedAt`, source commit, model/provider provenance,
-and factual build/test commands itself. Unknown response fields are rejected,
-and every proposed entry point must be a safe relative path cited by or equal to
-a supplied source document. It validates those grounding rules, schema bounds,
-and command safety before planning `synthesis.toml`; the provider cannot
-overwrite facts. Provider, grounding, schema, bounds, or transport failures are
-recorded in crawler state and telemetry while factual publication continues.
-
-Autonomous batches use the same path with `--synthesize`; model and provider can
-come from `--synthesis-model` / `--synthesis-provider` or
-`DOTREPO_SYNTHESIS_MODEL` / `DOTREPO_SYNTHESIS_PROVIDER`. Retained telemetry
-reports synthesis requests, successes, failures, and failure classes.
-
-Autonomous refresh batches prefer head-aware scheduled refreshes, then fill any
-open batch slots with lower-confidence checked-in records from the quality
-queue. This sends `draft`, `inferred`, `imported`, low/medium-confidence, or
-missing build/test/security records back through the same crawl, verification,
-promotion, writeback, and telemetry conveyor instead of creating a separate
-manual review path. The selected-batch metadata records any
-`qualityReprocessSupplement` entries that were added. Refresh planning bounds
-GitHub head inspection to `--limit` repositories and checks the oldest factual
-crawls first. The quality queue likewise orders eligible records by their
-generation timestamp before quality severity, so successful but still-partial
-records move behind older candidates instead of monopolizing every open slot.
-
-If batch slots remain after refresh and quality reprocessing, discovery can add
-new repositories directly to the same target list. Newly discovered candidates
-are skipped when a `record.toml` already exists, and any accepted candidates are
-recorded in selected-batch metadata as a `discoverySupplement`. They are then
-crawled with `--write`, so only records passing the autonomous writeback gate
-land in the index.
-
-## Publish semantics
-
-### Auto-promote to verified overlay
-
-A record auto-promotes to `verified` when **every** field is either:
-
-- high-confidence present, or
-- high-confidence absent/unknown with explicit justification
-
-This is the key condition. It is not "all fields are filled." It is "all fields
-are honestly resolved."
-
-Once promoted, the record sits above `reviewed` overlays in the precedence ladder
-(see "Automated verified precedence contract" below). This means an auto-minted
-`verified` overlay will be preferred over a human-reviewed overlay for the same
-repository. Consumers that need human-reviewed records should check provenance for
-the `"reviewed"` tag rather than relying on status alone.
-
-### Remain as imported/inferred
-
-A record stays at its crawl-determined status when unresolved fields remain.
-It still publishes. The index is useful through trustworthy partial records,
-not through universal perfection.
-
-### Reviewed
-
-Reserved for human-reviewed records. The automation pipeline does not mint
-`reviewed` status. That requires a human contributor or curator.
-
-### Canonical
-
-Reserved for maintainer-controlled in-repo records. Not in scope for this
-automation plan.
-
-## Implemented invariants
-
-The test suite verifies that:
-
-- The deterministic verification pass catches all identity/path/homepage
-  inconsistencies that `validate-index` currently catches, plus source-file
-  provenance checks.
-- Field scoring produces one of four states for every field on every crawled
-  repo, with "high-confidence absent" properly distinguished from "unresolved."
-- The build/test 4-tier trust hierarchy (Manifest > ContribDoc > TaskScript >
-  Workflow) resolves manifest-vs-workflow conflicts deterministically.
-- Security contact detection covers CONTRIBUTING.md and issue templates without
-  coercing general channels into security contacts.
-- Narrow adjudication with deterministic post-check rejects out-of-candidate
-  values and maps null responses to absent.
-- Auto-promoted `verified` records pass the same `validate-index` checks that
-  imported records pass.
-- No auto-promoted record claims `reviewed` or `canonical` status.
-- Promotion never rewrites field values, erases provenance origins, or changes
-  record authority semantics (mode, source). See invariant tests in
-  `crates/dotrepo-core/tests/auto_publish.rs`.
-
-## Automated verified precedence contract
-
-The automation pipeline can mint `verified` status without human involvement.
-This has a protocol-level consequence that consumers must understand:
-
-**Precedence ladder** (from [`docs/trust-model.md`](./trust-model.md)):
-canonical `.repo` → canonical mirror → **verified overlay** → reviewed overlay → imported overlay → inferred overlay → draft
-
-An auto-verified overlay **outranks a reviewed overlay**. This is intentional and
-correct because:
-
-1. **Auto-verified means "all fields honestly resolved by the deterministic pipeline,"** not "human-reviewed." The verification standard is exhaustive field-level scoring where every field is either high-confidence present or high-confidence absent with justification.
-
-2. **Reviewed means "a human looked at this."** Human review is valuable for nuance and judgment calls, but does not guarantee the same exhaustive field-level coverage that the automated pipeline enforces.
-
-3. **Canonical still outranks both.** A maintainer-owned `.repo` file at the repository root always wins. The automated pipeline never mints canonical status.
-
-4. **Promotion is one-directional.** The pipeline never downgrades an existing `reviewed` or `canonical` record. If a record already has higher authority, the promotion function is a no-op. See the invariant test family in `crates/dotrepo-core/tests/auto_publish.rs` for the contract enforcement.
-
-5. **Provenance is preserved.** Promotion appends `"verified"` to the provenance array and upgrades confidence to `"high"`, but never erases existing provenance origins. A record that was `["imported"]` becomes `["imported", "verified"]`.
-
-### Promotion telemetry
-
-These metrics should be tracked as the pipeline operates at scale:
-
-- **Eligible count over time**: how many records per crawl batch are promotion-eligible
-- **Blocker histogram over time**: which fields most commonly prevent promotion (unresolved or medium-confidence)
-- **Promotion rate by refresh batch**: what fraction of crawled records are promoted
-- **Adjudication invocation rate**: how often the model path is needed
-- **Zero-model-use fraction**: how many verified records were created without any model involvement
-
-Scheduled autonomous batches retain these run metrics in
-`index/telemetry/autonomous-runs.ndjson` and publish an aggregate summary in
-`index/telemetry/autonomous-summary.json`. The retained summary tracks total
-crawls, writes, failures, quality-reprocess queue entries, discovery queue
-entries, adjudication calls, token use, zero-model rate, promotion rate,
-optional synthesis requests, successes, failures, and failure classes,
-repositories by adjudication tier, model-budget exhaustion runs, grouped failure
-classes, worst retained-run failure/adjudication/escalation rates, worst
-retained-run zero-model rate, recent and previous three-run adjudication tier
-counts, and repeated failure fingerprints with suggested regression fixture
-slugs. Repeated
-scheduled runs can demonstrate cost, resolution, and regression trends instead
-of only exposing a short-lived artifact for the latest run, and recurring
-failures can be converted into deterministic parser or fixture work. The runner
-also writes the recurring failure backlog to
-`index/telemetry/regression-fixture-candidates.json` and
-`index/telemetry/regression-fixture-candidates.md` for review and fixture
-creation. It also creates one checked-in stub directory per recurring failure
-under `index/telemetry/regression-fixture-stubs/`; each stub contains
-machine-readable metadata, the bounded set of repositories that exhibited the
-fingerprint, and a materialization checklist so the failure can be turned into
-a real source fixture and deterministic fix.
-
-Each `crawls` entry also carries unit-cost fields: `wallTimeMs`/
-`totalWallTimeMs` (in-process timing from `dotrepo-crawler crawl --json`),
-`networkRequests`/`networkBytes` (from `HttpGitHubClient::network_usage`),
-and a `category` of `changed` or `improved` (status-ladder advancement proxy
-for "usefully improved"). Repositories the refresh scheduler skips entirely
-because their head SHA is unchanged are recorded separately under each run's
-`unchangedSkips` list with all costs pinned at zero. Run
-`uv run python scripts/render_unit_cost_report.py --runs
-index/telemetry/autonomous-runs.ndjson` to render a versioned per-category
-(`unchanged`/`changed`/`improved`) unit-cost summary — counts and mean/median
-wall time, network bytes/requests, tokens, model calls, CPU time, and peak RSS
-— from the retained history. CPU time and peak memory are collected per crawl
-subprocess by `scripts/process_resources.py` (child `RUSAGE` CPU deltas plus
-best-effort process-group RSS sampling via `ps`) and stored on each `crawls`
-entry as `cpuTimeMs` / `peakMemoryBytes`. Legacy telemetry without those fields
-still reports `n/a` rather than fabricating a zero.
-
-Each recurring failure is also classified by **ecosystem** (rust, node, python,
-go, jvm, ruby, php, dotnet, elixir, erlang, cpp, or `unknown`) inferred from the
-manifest and language signals in the failure text, and by **fixture
-eligibility**. Only `parser`, `evidence`, and `validation` defects are
-fixture-eligible — they can be reproduced by a checked-in source fixture run
-through the deterministic import pipeline. `provider`, `infrastructure`, and
-`writeback` defects are environmental and are tracked for operator awareness
-without becoming source fixtures. The aggregate summary cross-tabulates failures
-as `failureClassesByEcosystem` and `failureEcosystems` so recurring
-deterministic defects can be prioritized by ecosystem.
-
-The stub-to-fixture loop is now completable end to end:
-
-1. Telemetry emits a recurring-failure stub with its ecosystem, eligibility,
-   fingerprint, suggested fixture slug, and up to 20 sorted repository
-   identities observed for that fingerprint.
-2. `scripts/materialize_regression_fixture.py --stub
-   index/telemetry/regression-fixture-stubs/<fixture>` validates the stub and
-   fills in its repository, slug, ecosystem, and fingerprint. A single retained
-   repository is selected automatically; when several repositories exhibited
-   the failure, pass `--repo <host/owner/repo>` to choose one of the listed
-   identities. Explicit values that conflict with stub provenance are rejected.
-   The script captures the conventional source files the crawler materializes
-   (README, CODEOWNERS, SECURITY, manifests, workflows) into a checked-in
-   fixture directory and derives an `expectation.json` by running the overlay
-   import pipeline in a throwaway copy and parsing the result with `tomllib`, so
-   the fixture pins the conveyor's actual parser behavior.
-3. `crates/dotrepo-core/tests/regression_fixture_pack.rs` discovers each
-   checked-in fixture and replays the offline overlay import path against it,
-   asserting the pinned fields. The harness requires at least one fixture for
-   every named classifier ecosystem and asserts only the fields each
-   `expectation.json` declares. New captures also record
-   `captured_at`, `captured_files`, and SHA-256 digests for each captured file.
-   When lineage metadata is present, the harness validates the repository
-   identity, failure fingerprint, timestamp, source-file inventory, and exact
-   file content, so captured canaries keep their telemetry context as they move
-   from stub to checked-in regression fixture.
-
-Older stubs without retained repository metadata remain usable by passing
-`--repo` explicitly. Provider, infrastructure, and writeback stubs are rejected
-by `--stub` materialization because they cannot be reproduced by source files.
-
-The deterministic import canary pack currently covers Rust/Cargo, Node package
-scripts, Python/pyproject, Go modules, JVM/Maven, PHP/Composer, .NET, and
-Elixir/Mix, Erlang/Rebar, Ruby/Rake, and C++/CMake projects.
-Maven POMs are parsed as XML before conventional `mvn package` and `mvn test`
-commands are admitted as manifest-backed candidates. Composer manifests are
-parsed as JSON, and only declared, nonempty `build` and `test` scripts become
-`composer run-script` candidates.
-Root `.csproj` files are parsed as XML and always provide `dotnet build`; they
-provide `dotnet test` only when `<IsTestProject>true</IsTestProject>` is
-declared.
-Mix manifests provide `mix compile` and `mix test` only when the source contains
-a module that uses `Mix.Project` and defines its `project` function; comments
-alone cannot trigger command inference.
-Rebar manifests provide `rebar3 compile` and `rebar3 eunit` only when an
-uncommented Erlang configuration term is present.
-Rake task files contribute `rake build` and `rake test` independently and only
-for explicit task declarations; a `Gemfile` alone never invents commands.
-CMake commands come only from schema-version-6-or-newer workflow presets with
-safe names: build workflows require configure and build steps, while test
-workflows additionally require a test step. Raw `CMakeLists.txt` presence does
-not invent a shell chain or assume a build directory.
-
-`scripts/check_autonomous_telemetry_gate.py` evaluates the retained summary
-against the Milestone 1 proof thresholds: repeated runs, processed repository
-volume, direct writeback activity, verified promotion activity, failure rate,
-model adjudication rate, second-opinion adjudication rate, strong remote
-escalation rate, exhausted adjudication budgets, fixture-eligible recurring
-failures, and zero-model deterministic rate. The gate also verifies that it is
-reading the current retained-summary schema and required proof fields before
-treating aggregate rates as proof, and checks worst retained-run failure,
-adjudication, second-opinion, strong remote escalation, and zero-model rates so
-a bad run cannot be hidden by favorable aggregate totals. The retained summary also
-publishes recent and previous three-run windows. The gate checks the recent
-window's rate ceilings and compares failure, adjudication, second-opinion, and
-strong-remote-escalation drift against the previous window when it exists,
-falling back to the aggregate baseline while history is still short. It also
-checks for a recent zero-model-rate drop, so a shift away from deterministic
-resolution is visible even while the absolute minimum still passes. This
-catches a worsening tail before it can be masked by older successful runs. The
-JSON and Markdown gate reports include the configured threshold set, recent and
-previous adjudication tier-count windows, and a pass/fail check summary, so a
-retained artifact can be audited without recovering the original CI command
-line.
-Environmental recurrences such as provider or infrastructure failures remain
-visible in the retained summary, but strict proof requires parser, evidence, and
-validation recurrences to be fixed or converted into checked-in fixtures instead
-of remaining as unresolved fixture candidates. Scheduled runs publish the gate in
-warn-only mode while evidence is accumulating; a strict run without
-`--warn-only` is the release-quality proof that the autonomous factory is
-operating inside its stated bounds.
-
-The scheduled workflow retains completed batch telemetry and any valid partial
-writebacks even when one or more repositories fail. It validates the resulting
-index before committing, uploads the gate report with the batch artifact, and
-then restores the failed workflow result after the evidence has landed. This
-allows recurring failures to accumulate into actionable fixture candidates
-without turning repository failures into silent green runs or discarding the
-history needed to identify them.
-
-These surfaces show whether optional synthesis would address a real bottleneck
-or duplicate work the factual pipeline already handles.
-
-### Audit sampling (read-only)
-
-The roadmap's audit strategy (see `ROADMAP.md`) calls for randomized,
-risk-weighted system audits instead of a routine human approval tier.
-`scripts/audit_index_sample.py` is the first slice of that loop: it loads
-every checked-in `index/repos/<host>/<owner>/<repo>/record.toml`, computes a
-heuristic per-record risk weight from confidence, missing build/test/security
-fields, proximity to the `verified` promotion threshold, and surprising
-field-completeness relative to language-family peers, then draws a seedable,
-reproducible random sample sized for a human or future automated pass to
-inspect against `index/review-checklist.md`. It is read-only and local-only —
-no network calls, no model/adjudication provider, and no writes under
-`index/repos/*` — and it only produces the sample; converting findings into
-fixtures, deterministic fixes, calibration changes, or policy updates is a
-separate, not-yet-built step. See the module docstring in
-`scripts/audit_index_sample.py` for the exact weighting formula and its
-stated limits.
-
-### Audit cadence
-
-Run a risk-weighted sample on a fixed cadence so findings keep converting into
-fixtures and deterministic fixes:
+Missing HEAD or redirected repository identity aborts the crawl. File reads use
+the captured commit; mutable GitHub metadata has separate retrieval context.
+Fresh assessments govern refresh outcomes; a previous verified label cannot
+preserve facts that no longer pass. Autonomous planning/writeback reject native,
+reviewed, and canonical records.
+
+Core owns import, verification, scoring, and promotion. The
+[crawler](../crates/dotrepo-crawler/README.md) wires GitHub, materialization,
+providers, telemetry, and writeback. The
+[import fixture guide](import-baseline-audit.md) explains intentional incomplete
+cases and exact regression expectations.
+
+### Extraction policy
+
+- Name and description use deterministic parsing/cleaning and GitHub metadata
+  reconciliation. Keep promotional headings and incidental links out of facts.
+- Build/test candidates use the source hierarchy: manifest, contributor docs,
+  root task script, workflow. A source tier does not prove repository-wide scope.
+  Scalar defaults withhold nested commands, documented directory changes,
+  component CI working directories, placeholders, dangling continuations, and
+  setup-only flags; preserve prerequisites rather than stripping them away.
+- Security extraction distinguishes actionable private reporting channels from
+  support, issue, and social channels. `unknown` remains an honest result.
+- Ownership retains explicit maintainers/team context; competing broad teams
+  must not become an invented single team.
+- Documentation requires a supporting declaration and retained context;
+  URL shape or a dependency link alone does not establish project ownership.
+
+Ambiguous ecosystem commands can remain in additive candidate arrays, with
+primary build/test unset. [RFC 0020](../rfcs/0020-multi-ecosystem-command-candidates.md)
+describes that subset; candidates do not supply working directory, scope, or
+prerequisites. Command screening is heuristic, not a sandbox or proof of execution.
+Sandbox verification is not a routine implemented crawler stage.
+
+## Scoring and publication gates
+
+The scorer has five dispositions, defined in
+[`import/types.rs`](../crates/dotrepo-core/src/import/types.rs) and applied in
+[`import/fields.rs`](../crates/dotrepo-core/src/import/fields.rs):
+
+| Disposition | Meaning | Verified promotion |
+| --- | --- | --- |
+| High-confidence present | Supported value at the pipeline's highest assessment level | Allowed |
+| Medium-confidence present | Plausible value with remaining inference/ambiguity | Blocks |
+| High-confidence absent | No supported value found in inspected material | Allowed |
+| Suspect | Present value with a detected quality problem | Blocks |
+| Unresolved | Conflict or insufficient evidence | Blocks |
+
+Not-found means absent from inspected sources, not universally absent. Confidence
+is a pipeline assessment, not a calibrated correctness probability. Conventional
+ecosystem defaults are inference; direct manifest presence does not make every
+command extracted or high-confidence.
+
+**Writeback** (`autonomous_writeback_eligible`) requires deterministic verification
+and permits honestly partial overlays. **Promotion**
+(`eligible_for_auto_publish`) additionally requires no unresolved, suspect, or
+medium-confidence fields. Promotion preserves facts and provenance, appends
+verification context, and never mints reviewed/canonical authority. Reviewed and
+canonical records are protected rather than autonomously replaced.
+
+Fresh crawls retain value- and timestamp-bound field evidence. Export drops
+assessments that no longer match; legacy high-confidence labels cannot substitute
+for retained evidence. Read-only `promotion-report` uses those assessments;
+standalone `--apply` is disabled on this branch. See
+[trust semantics](trust-model.md#field-assessments-and-the-meaning-of-verified)
+for the release distinction, selection precedence, and consumer implications.
+
+## Model integration and budgets
+
+Only unresolved fields escalate. Providers receive the requested field, allowed
+candidate values/sources, and bounded source excerpts. A selected value must
+match a grounded candidate and the requested field; invented values or sources
+fail deterministic post-checks. Confident absence can terminate escalation;
+low-confidence absence/rejection continues when policy and budget permit.
+See [`import/escalation/`](../crates/dotrepo-core/src/import/escalation/).
+
+The tier order is deterministic resolution, bounded primary adjudicator,
+independent second opinion, then stronger remote adjudicator. Provider/model
+identity is runtime configuration, not a protocol constant. Most repositories
+should require no model. Failed/timed-out attempts count against call budgets.
+
+The scheduled workflow starts OpenRouter sidecars when `OPENROUTER_API_KEY` and
+tier-specific model variables exist:
+
+- `DOTREPO_ADJUDICATION_MODEL`: primary tier
+- `DOTREPO_ADJUDICATION_SECOND_OPINION_MODEL`: second opinion
+- `DOTREPO_ADJUDICATION_API_MODEL`: stronger remote tier
+
+The batch hard ceiling is `INDEX_MAX_BATCH_ADJUDICATION_CALLS` or
+`--adjudication-call-budget`; each repository's `INDEX_MAX_ADJUDICATION_CALLS`
+is capped by the remaining budget. On exhaustion the runner removes provider
+URLs for remaining repositories, allowing deterministic partial progress.
+Configuration and provider contracts live in
+[`adjudication.rs`](../crates/dotrepo-crawler/src/adjudication.rs) and
+[the sidecar](../scripts/adjudication_openrouter_sidecar.py).
+A configured hosted primary tier is not evidence that a local model ran.
+
+The local sample configuration uses `openai/gpt-6-luna` for primary adjudication,
+`qwen/qwen3.8-flash` for second opinions, and `z-ai/glm-5.3-flash`
+for tail escalation. These are operator selections, not measured quality rankings.
+GitHub Actions still requires explicit repository variables; `.env.example` does
+not enable remote tiers or replace call-budget and automation opt-ins.
+
+The sidecar and head-to-head benchmark share
+[`openrouter_request_policy.py`](../scripts/openrouter_request_policy.py).
+Luna uses low reasoning effort with a 4,096-token total completion cap. Qwen's
+second opinion requests a 1,024-token reasoning budget within 4,096 total tokens;
+GLM's tail uses high effort with 8,192 tokens. Reasoning shares the output budget.
+Mandatory reasoning is never disabled, and Luna omits temperature. Gemini3.8 Flash
+has an alternative profile for explicit model overrides.
+The three selected tiers also enforce provider price ceilings at their reviewed
+rates; unavailable cheap routes fail instead of silently spending more on fallback.
+Reviewed models use candidate-constrained JSON schemas for adjudication and
+require providers to support requested parameters. Core still checks the selected
+source/value pair; schema validation alone cannot establish factual correctness.
+
+Per-call logs retain returned model/provider, generation ID, finish reason,
+input/output/reasoning tokens, and cost when reported. Logs exclude candidates,
+prompts, and credentials, and scheduled artifact uploads retain sidecar logs.
+Billed truncated, empty, or malformed answers are provider failures rather than
+honest absence: their returned token usage survives HTTP errors into the crawl
+report, and subsequent tiers may run within the same attempt budget. Unknown
+usage is not estimated. Logs are separate from aggregate batch token telemetry.
+Historical model results and frozen benchmark inputs remain unchanged.
+
+The [October 4 integration canary](../benchmarks/model-adjudication/2026-10-04/requests.json)
+retains three synthetic cases, both prompt revisions, and the initial and follow-up
+results. Luna passed all three initial cases. GLM first chose a broader command
+without evidence of primacy; after clarifying the abstention rule it passed all
+three. Muse was rejected before inference by the configured account's paid-model
+training restriction. Muse was then removed from the active configuration in
+favor of Qwen3.8 Flash, preserving the account policy. These
+small provider checks do not establish real-repository accuracy or consumer proof.
+The [Qwen second-opinion follow-up](../benchmarks/model-adjudication/2026-10-04/qwen-second-opinion-reasoning-canary.json)
+passed all three cases using the bounded reasoning profile. Its initial run without
+reasoning conservatively abstained on the normal-CI-versus-release case; that
+[initial result](../benchmarks/model-adjudication/2026-10-04/qwen-second-opinion-canary.json)
+is also retained.
+
+### Optional synthesis
+
+Configure `DOTREPO_SYNTHESIS_URL` and opt in with crawler/batch `--synthesize`,
+`--synthesis-model`, and `--synthesis-provider` (or the corresponding
+`DOTREPO_SYNTHESIS_MODEL` / `DOTREPO_SYNTHESIS_PROVIDER` variables).
+`DOTREPO_SYNTHESIS_API_KEY` supplies a Bearer token when present.
+
+The request includes validated facts and at most 12 documents, each capped at
+32,000 characters and 128,000 aggregate characters. The sidecar may return
+`architecture` and `forAgents` guidance plus token usage. Crawler-owned time,
+revision, provider context, and factual commands cannot be overridden. Unknown
+fields, unsafe/ungrounded entry points, fact conflicts, and schema/bounds failures
+are rejected before `synthesis.toml` writeback. Failures are retained while factual
+publication continues. See [the implementation](../crates/dotrepo-crawler/src/synth.rs)
+for exact request/response types and validation.
+
+## Scheduling and local operation
+
+Refresh prioritizes oldest factual crawls and inspects at most `--limit`
+repositories. Same-HEAD records qualify after 14 days, leaving headroom before
+the public 30-day record-age policy. Index membership takes precedence over stale
+crawler-state identities. Identity migrations are separately evidenced in
+[`index/identity-migrations.json`](../index/identity-migrations.json).
+
+Open batch slots can take oldest quality-queue records, then discovery candidates
+when discovery is enabled. Selection metadata retains `qualityReprocessSupplement`
+and `discoverySupplement`; partial records share the same pipeline rather than a
+separate review queue. The scheduled workflow currently disables discovery.
+
+An explicit local batch writes index/telemetry state and eligible records:
 
 ```bash
-# Weekly (or after any full-population recrawl): draw and archive a sample
-uv run python scripts/audit_index_sample.py \
-  --index-root index \
-  --output-json "index/telemetry/audit-sample-$(date -u +%Y%m%d).json" \
-  --output-md "index/telemetry/audit-sample-$(date -u +%Y%m%d).md"
+uv run python scripts/run_autonomous_index_batch.py \
+  --skip-automation-enabled-check \
+  --disable-discovery \
+  --output-dir /tmp/dotrepo-autonomous-batch
 ```
 
-Inspect the sample against `index/review-checklist.md`. Every actionable
-finding should become one of: a checked-in regression fixture, a parser or
-promotion fix, a calibration change, or an explicit policy note. Do not open a
-per-record human approval queue for routine overlays.
-
-Complementary scorecards (not a substitute for sampling):
-
-```bash
-uv run python scripts/render_intent_quality_scorecard.py --index-root index
-uv run python scripts/render_coverage_gaps.py --index-root index --limit 50
-```
-
-### Escalation canary
-
-See [`docs/m1-escalation-canary.md`](./m1-escalation-canary.md) for the
-procedure that closes the second-opinion / strong-remote live-call proof gap
-without treating confident polyglot abstention as a ladder failure.
-
-## Non-goals
-
-- README/name/description LLM adjudication (already solved deterministically)
-- Whole-repo model analysis or open-ended generation
-- Auto-merge to `reviewed` or `canonical` status
-- Structured discovery or ranking semantics
-- Schema expansion driven only by crawler convenience
-- Bundle mode, workspace, or relations support
-
-## Related docs
-
-- [`docs/trust-model.md`](./trust-model.md) — record status ladder and
-  provenance categories
-- [`docs/import-baseline-audit.md`](./import-baseline-audit.md) — fixture pack,
-  intentionally incomplete cases
-- [`ROADMAP.md`](../ROADMAP.md) — direction and active execution order
-- [`index/review-checklist.md`](../index/review-checklist.md) — review
-  standards for overlay records
-
-## Factual freshness and catch-up
-
-Scheduled refresh now runs daily with a bounded 50-record inspection and crawl
-budget. At 613 records this gives approximately 13 days of nominal rotation
-capacity, leaving headroom within the 30-day record-age target. Throughput is a
-capacity estimate, not proof of successful refreshes. Records at 14 days qualify even if HEAD is unchanged, so the full rotation can
-finish before the 30-day public freshness limit; index membership takes precedence over stale
-crawler-state identities. Redirected identities fail before writeback.
-
-For an explicitly requested catch-up, run:
+For explicitly requested stale catch-up:
 
 ```bash
 uv run python scripts/refresh_stale_index.py --limit 1000 \
   --output-dir /tmp/dotrepo-stale-catchup
 ```
 
-This uses four workers, validates after each 50-record cohort, isolates worker
-state, records failures, and disables model calls and discovery. Repository
-credentials must already be configured. Timestamps change only after real crawls.
+Catch-up uses four workers, isolated worker state, and validation after each
+50-record cohort; models and discovery are disabled. Credentials must already
+be configured. Record timestamps change only after actual crawls.
 
-Routine generated overlays use the repository's built-in `GITHUB_TOKEN` with
-contents, pull-request, and actions write permissions. No personal token or
-per-record human approval is required. After local telemetry and public-surface
-gates, `land_autonomous_index.py`:
+### Scheduled enablement and landing
 
-1. Verifies the same-repository automation PR contains only index changes and
-   matches the expected head and base commits.
-2. Explicitly dispatches CI on that head and waits for the returned run ID,
-   requiring the public-surface gate to succeed for the expected commit.
-3. Rechecks the PR and default branch, then fast-forwards the default branch to
-   exactly the tested commit with `force: false`. A concurrent divergent update
-   or branch protection rejects the operation rather than bypassing checks.
-4. Explicitly dispatches deployment and waits for its deploy job and smoke check.
+[`index-autonomous-refresh.yml`](../.github/workflows/index-autonomous-refresh.yml)
+runs daily at 06:00 UTC with a default 50-record inspection/crawl budget, only
+when `INDEX_AUTOMATION_ENABLED=true`. Unset disables the workflow. Local runners
+also default disabled unless explicitly opted in. The built-in `GITHUB_TOKEN`
+needs contents, pull-request, and actions write permissions; repository Actions
+must be allowed to create PRs.
 
-Explicit dispatch is necessary because ordinary pushes made with `GITHUB_TOKEN`
-do not start downstream push workflows. Repository Actions must be allowed to
-create PRs, and `INDEX_AUTOMATION_ENABLED=true` remains required. The workflow
-reports failure if CI, landing, or deployment fails; a successful crawl alone is
-not evidence of publication. Re-run the deployment workflow if publication landed
-but deployment failed. If the base advanced, regenerate the refresh batch.
+The workflow retains telemetry and valid partial writes even when repositories
+fail. Strict telemetry, index validation, and the public-surface gate must pass
+before opening a non-draft automation PR. There is no routine human merge tier.
+[`land_autonomous_index.py`](../scripts/land_autonomous_index.py):
 
-The release gate fails when more than 10% of exported records are stale or have
-unknown ages. A fresh export alone cannot satisfy this gate.
+1. Requires a same-repository, index-only PR matching expected head and base.
+2. Dispatches CI explicitly, waits for its run, and requires the public gate to
+   succeed for that exact commit.
+3. Rechecks the PR/default branch and fast-forwards with `force: false`.
+   Divergence or branch protection rejects landing; it does not bypass settings.
+4. Dispatches deployment and waits for the deploy job and smoke check.
+
+Explicit dispatch is necessary because ordinary `GITHUB_TOKEN` pushes do not
+start downstream push workflows. A successful crawl is not publication proof.
+If the base advanced, regenerate the batch. If landing succeeded but deployment
+failed, rerun deployment. The workflow restores the failed batch result after
+retaining evidence; partial progress does not silently turn a failure green.
+
+A nominal 50-record daily capacity is not proof of successful rotation.
+Monitor actual cadence and backlog. Release freshness fails when over 10% of
+exported records are stale or unknown; a new export cannot reset factual age.
+The gate evaluates at the current check time and also fails if any known record
+age exceeds the 30-day policy by more than seven days. Reports retain export and
+evaluation timestamps separately and identify overdue repositories. Use
+`check_public_record_freshness.py --now <timestamp-with-timezone>` for a
+reproducible historical evaluation; this override does not refresh facts.
+
+### Writeback recovery
+
+Persistence uses a per-record `.writeback.lock`, stages sibling artifacts, and
+backs up existing files before commit. I/O failure triggers rollback; rollback
+failure retains backups and reports recovery paths. This is not crash-atomic.
+After a crash inspect the lock, staged files, and backup siblings, restore a
+consistent artifact set, then remove the lock and retry. See
+[`writeback.rs`](../crates/dotrepo-crawler/src/writeback.rs).
+
+## Telemetry and quality feedback
+
+Runs append to `index/telemetry/autonomous-runs.ndjson`; the retained aggregate
+is `autonomous-summary.json`. The runner records crawl/write/failure outcomes,
+selection supplements, promotion, model calls/tokens/tier mix, exhausted budgets,
+synthesis outcomes, and repeated failure fingerprints. Summary schema and
+required proof fields are validated by
+[`check_autonomous_telemetry_gate.py`](../scripts/check_autonomous_telemetry_gate.py).
+
+The gate checks aggregate, worst-run, and recent-window failure/tier rates and
+compares recent to previous windows. Fixture-eligible recurrent defects require
+fixes or fixtures. Scheduled runs use strict mode; `--warn-only` is a diagnostic
+option and does not establish release-quality proof. Run/gate artifacts retain
+thresholds and checks for later audit.
+
+### Unit costs
+
+```bash
+uv run python scripts/render_unit_cost_report.py \
+  --runs index/telemetry/autonomous-runs.ndjson
+```
+
+Per-crawl telemetry includes wall time, GitHub requests/bytes, child CPU, and
+best-effort peak process-group RSS. Legacy missing resource fields remain `n/a`.
+Categories are `unchanged` (scheduler skip), `changed` (recrawl without status
+advance), and `improved` (status advance). These are proxies: zero-cost skip rows
+exclude planning/head checks, and status advancement is not a field-quality or
+task-success measurement. Include those omitted costs in scale and consumer proof.
+
+### Regression conversion
+
+Failure classes retain ecosystem tags and fixture eligibility. Parser, evidence,
+and validation defects can become source fixtures; provider, infrastructure, and
+writeback defects remain operational issues. Backlog/stubs live under
+`index/telemetry/regression-fixture-candidates.*` and `regression-fixture-stubs/`.
+
+```bash
+uv run python scripts/materialize_regression_fixture.py \
+  --stub index/telemetry/regression-fixture-stubs/<fixture> \
+  --repo <host/owner/repo>
+```
+
+One retained identity can be selected automatically; multiple identities require
+an explicit choice, and conflicting provenance is rejected. Captures retain
+source files, timestamps, hashes, and expectations from the overlay import path.
+`regression_fixture_pack.rs` replays them offline and checks lineage where present.
+A capture pins behavior; inspect its expected facts before treating it as a fix.
+The deterministic pack covers Rust, JS/TS, Python, Go, JVM, Ruby, PHP, .NET,
+Elixir, Erlang, and CMake. Ecosystem-specific extraction rules live in
+[`commands/extraction.rs`](../crates/dotrepo-core/src/import/commands/extraction.rs).
+
+### Audit cadence
+
+Weekly or after a full-population recrawl, draw a reproducible risk-weighted
+sample. The sampler is read-only/local-only; it performs no model adjudication
+or automatic correction:
+
+```bash
+uv run python scripts/audit_index_sample.py \
+  --index-root index \
+  --output-json "index/telemetry/audit-sample-$(date -u +%Y%m%d).json" \
+  --output-md "index/telemetry/audit-sample-$(date -u +%Y%m%d).md"
+```
+
+Inspect against [the manual audit rubric](../index/review-checklist.md).
+Convert actionable findings into fixtures, deterministic fixes, calibration,
+or an explicit policy disposition; do not create per-record approval queues.
+The full-index documentation audit also runs independently of random sampling:
+
+```bash
+uv run python scripts/audit_index_sample.py --sample-size 0 --seed 1 \
+  --output-json /tmp/dotrepo-docs-audit.json --output-md /tmp/dotrepo-docs-audit.md
+uv run python scripts/render_intent_quality_scorecard.py --index-root index
+uv run python scripts/render_coverage_gaps.py --index-root index --limit 50
+```
+
+Documentation evidence/origin flags are source-inspection signals; custom/shared
+domains can be legitimate. Scorecards complement sampling and independent
+accuracy tests. See [the escalation canary](m1-escalation-canary.md) for live
+tier proof and [distribution](distribution.md) for exported lookup-miss demand.

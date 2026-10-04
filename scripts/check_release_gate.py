@@ -10,7 +10,6 @@ import shlex
 import shutil
 import socket
 import subprocess
-import sys
 import tarfile
 import tempfile
 import time
@@ -133,7 +132,9 @@ def public_profile_coverage_command(
     if baseline.get("schema") != "dotrepo-public-profile-coverage-baseline/v0":
         raise SystemExit(f"invalid public profile coverage baseline schema: {baseline_path}")
     command = [
-        sys.executable,
+        "uv",
+        "run",
+        "python",
         "scripts/check_public_profile_coverage.py",
         "--public-root",
         str(public_dir),
@@ -165,7 +166,9 @@ def public_quality_dashboard_command(
     if baseline.get("schema") != "dotrepo-public-quality-baseline/v0":
         raise SystemExit(f"invalid public quality baseline schema: {baseline_path}")
     return [
-        sys.executable,
+        "uv",
+        "run",
+        "python",
         "scripts/check_public_quality_dashboard.py",
         "--public-root",
         str(public_dir),
@@ -212,7 +215,9 @@ def index_growth_tranche_command(repo_root: Path, output_root: Path) -> list[str
     min_selected = int(baseline["minSelected"])
     milestone_target = int(baseline["milestoneHighSignalTarget"])
     return [
-        sys.executable,
+        "uv",
+        "run",
+        "python",
         "scripts/plan_index_growth_tranche.py",
         "--candidate-file",
         str(repo_root / baseline["candidateFile"]),
@@ -247,7 +252,9 @@ def public_lookup_benchmark_commands(
         raise SystemExit(f"invalid public lookup efficiency baseline schema: {baseline_path}")
     workload_path = output_root / "public-lookup-workload.json"
     build_command = [
-        sys.executable,
+        "uv",
+        "run",
+        "python",
         "scripts/build_public_lookup_workload.py",
         "--public-root",
         str(public_dir),
@@ -259,7 +266,9 @@ def public_lookup_benchmark_commands(
         str(workload_path),
     ]
     measure_command = [
-        sys.executable,
+        "uv",
+        "run",
+        "python",
         "scripts/measure_public_lookup_efficiency.py",
         "--public-root",
         str(public_dir),
@@ -300,7 +309,9 @@ def public_factual_accuracy_command(
     if baseline.get("schema") != "dotrepo-public-factual-accuracy-baseline/v0":
         raise SystemExit(f"invalid public factual accuracy baseline schema: {baseline_path}")
     return [
-        sys.executable,
+        "uv",
+        "run",
+        "python",
         "scripts/measure_public_factual_accuracy.py",
         "--public-root",
         str(public_dir),
@@ -322,6 +333,35 @@ def public_factual_accuracy_command(
         str(output_root / "public-factual-accuracy.json"),
         "--output-md",
         str(output_root / "public-factual-accuracy.md"),
+    ]
+
+
+def public_upstream_accuracy_command(public_dir: Path, output_root: Path) -> list[str]:
+    # Reuse the independently selected cohort with a new dated upstream capture.
+    # Previous captures/results remain frozen; exact-value requirements hold.
+    return [
+        "uv",
+        "run",
+        "python",
+        "scripts/measure_public_factual_accuracy.py",
+        "--public-root",
+        str(public_dir),
+        "--workload",
+        "benchmarks/head-to-head/upstream-2026-10-04/workload.json",
+        "--min-assertions",
+        "123",
+        "--min-repositories",
+        "32",
+        "--min-accuracy-rate",
+        "1.0",
+        "--max-missing-rate",
+        "0",
+        "--max-mismatch-rate",
+        "0",
+        "--output-json",
+        str(output_root / "independent-upstream-accuracy.json"),
+        "--output-md",
+        str(output_root / "independent-upstream-accuracy.md"),
     ]
 
 
@@ -1100,7 +1140,14 @@ def main() -> int:
         cwd=repo_root,
     )
     run(
-        [sys.executable, "scripts/render_public_pages_landing.py", "--input", str(public_dir)],
+        [
+            "uv",
+            "run",
+            "python",
+            "scripts/render_public_pages_landing.py",
+            "--input",
+            str(public_dir),
+        ],
         cwd=repo_root,
     )
     run(public_profile_coverage_command(repo_root, public_dir, output_root), cwd=repo_root)
@@ -1142,36 +1189,12 @@ def main() -> int:
         public_factual_accuracy_command(repo_root, public_dir, output_root, args.generated_at),
         cwd=repo_root,
     )
+    run(public_upstream_accuracy_command(public_dir, output_root), cwd=repo_root)
     run(
         [
             "uv",
             "run",
             "python",
-            "scripts/measure_public_factual_accuracy.py",
-            "--public-root",
-            str(public_dir),
-            "--workload",
-            "scripts/fixtures/public_upstream_accuracy_workload.json",
-            "--min-assertions",
-            "123",
-            "--min-repositories",
-            "32",
-            "--min-accuracy-rate",
-            "1.0",
-            "--max-missing-rate",
-            "0",
-            "--max-mismatch-rate",
-            "0",
-            "--output-json",
-            str(output_root / "independent-upstream-accuracy.json"),
-            "--output-md",
-            str(output_root / "independent-upstream-accuracy.md"),
-        ],
-        cwd=repo_root,
-    )
-    run(
-        [
-            sys.executable,
             "scripts/sync_cloudflare_public_snapshot.py",
             "--input",
             str(public_dir),
@@ -1182,7 +1205,9 @@ def main() -> int:
     )
     run(
         [
-            sys.executable,
+            "uv",
+            "run",
+            "python",
             "scripts/package_public_export.py",
             "--input",
             str(public_dir),
@@ -1218,7 +1243,9 @@ def main() -> int:
         target = host_target(repo_root)
         run(
             [
-                sys.executable,
+                "uv",
+                "run",
+                "python",
                 "scripts/package_release_binaries.py",
                 "--bin-dir",
                 "target/release",

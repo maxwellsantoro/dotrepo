@@ -60,7 +60,13 @@ pub(crate) fn run_model_escalation(
             }
             let provider_response = match provider.adjudicate(&request) {
                 Ok(response) => response,
-                Err(_) => continue,
+                Err(error) => {
+                    if let Some(failure) = error.downcast_ref::<crate::AdjudicationProviderError>()
+                    {
+                        report.tokens_used += failure.tokens_used;
+                    }
+                    continue;
+                }
             };
             report.tokens_used += provider_response.tokens_used;
 

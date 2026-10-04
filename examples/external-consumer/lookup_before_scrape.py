@@ -33,6 +33,34 @@ from urllib.parse import urlparse
 DEFAULT_BASE_URL = "https://dotrepo.org"
 
 
+def _setup_only_command(tokens: list[str]) -> bool:
+    if tokens[:1] == ["sudo"]:
+        tokens = tokens[1:]
+    if tokens[:3] in (["python", "-m", "pip"], ["python3", "-m", "pip"]):
+        tokens = tokens[3:]
+    elif tokens[:2] == ["uv", "pip"]:
+        tokens = tokens[2:]
+    elif tokens[:2] == ["uv", "sync"]:
+        return True
+    elif tokens[:1] and tokens[0] in {
+        "pip",
+        "pip3",
+        "pipx",
+        "npm",
+        "pnpm",
+        "yarn",
+        "bun",
+        "poetry",
+        "pdm",
+        "bundle",
+        "composer",
+    }:
+        tokens = tokens[1:]
+    else:
+        return False
+    return bool(tokens) and tokens[0] in {"install", "ci", "sync", "add"}
+
+
 @dataclass
 class LookupMiss:
     host: str
@@ -283,8 +311,7 @@ def evaluate_for_task(
                     value.rstrip().endswith("\\")
                     or tokens[0] in {"cd", "echo", "printf", "chmod", "mkdir", "touch", "env"}
                     or "=" in tokens[0]
-                    or " ".join(tokens[:2])
-                    in {"npm install", "npm ci", "pnpm install", "yarn install", "uv sync"}
+                    or _setup_only_command(tokens)
                     or any(
                         "..." in token and token != "./..." and not token.startswith("//")
                         for token in tokens

@@ -1,240 +1,121 @@
 # Maintainer happy path
 
-This is the canonical v0.1 maintainer flow for a repository that wants an
-in-repo `.repo` file as its source of truth.
+Use a root `.repo` as the structured source for the metadata and documentation
+you choose to manage. This guide follows the current source branch; installed
+binaries need [release compatibility](release-compatibility.md) and the linked
+stable guide. [Installation](install.md) covers pinned binaries and CI versions.
 
-This guide assumes `dotrepo` is installed and on your `PATH`.
-If you are working inside the dotrepo workspace itself, replace `dotrepo` with
-`cargo run -p dotrepo-cli --`.
+The [native example](../examples/native-minimal/) contains a canonical manifest,
+generated surfaces, and [starter CI](../examples/native-minimal/.github/workflows/dotrepo-check.yml).
+When developing inside dotrepo, replace `dotrepo` with `cargo run -p dotrepo-cli --`.
 
-Use [`examples/native-minimal/`](../examples/native-minimal/) as the reference
-repository while reading this guide. It already contains:
-- a canonical root [`.repo`](../examples/native-minimal/.repo)
-- generated conventional surfaces such as [`README.md`](../examples/native-minimal/README.md)
-- a starter CI workflow at [`.github/workflows/dotrepo-check.yml`](../examples/native-minimal/.github/workflows/dotrepo-check.yml)
+## 1. Bootstrap and review
 
-## Start the record
+Choose one starting point:
 
-Choose one bootstrap path:
-- `dotrepo --root <repo> init` if you want to author a canonical `.repo` from scratch.
-- `dotrepo --root <repo> import` if you want to bootstrap from existing `README.md`, `CODEOWNERS`, and `SECURITY.md` content first.
-- `dotrepo --root <repo> adopt-overlay <path-to-record.toml>` if you found an
-  existing public index overlay and want to convert its current facts into a
-  native draft `.repo` starting point.
+- `dotrepo --root <repo> init`: author a starter native manifest
+- `dotrepo --root <repo> import`: import conventional repository material
+- `dotrepo --root <repo> adopt-overlay <path-to-record.toml>`: copy an overlay's
+  facts into a native draft
 
-After that first step, treat the root `.repo` as the source of truth and keep
-generated compatibility surfaces in sync from it.
+Review the facts, sources, commands, and trust metadata before relying on them.
+`adopt-overlay` clears overlay authority fields and status; it does not claim
+canonical authority. Native mode alone does not win record selection.
 
-`adopt-overlay` does not claim canonical authority or preserve overlay review
-status. It writes a native `draft` record, clears overlay authority fields, and
-adds a trust note reminding maintainers to review the imported facts before
-submitting a claim.
-
-After reviewing the native `.repo`, you can scaffold the public-index claim from
-that record:
+## 2. Inspect and choose documentation ownership
 
 ```bash
+dotrepo --root <repo> validate
+dotrepo --root <repo> trust
 dotrepo --root <repo> adoption-status
-dotrepo --root <repo> claim-from-native \
-  --index-root <index> \
-  --claim-id <claim-id> \
-  --claimant-name "<maintainer name>" \
-  --review-md
-dotrepo --root <repo> claim-submit-native \
-  --index-root <index> \
-  --claim-id <claim-id>
-```
-
-`adoption-status` is a read-only onboarding summary for maintainers. It reports
-whether the repository has a native record, validates cleanly, has a
-claim-from-native identity from `repo.homepage`, has the starter CI workflow,
-and has generated or managed surfaces in sync. Use `--json` when an editor,
-script, or MCP client needs the same readiness checks. MCP clients can call
-`dotrepo.adoption_status` for the same structured report.
-
-When editing `.repo` through the LSP, native records also get adoption hints for
-missing `repo.homepage` and the starter CI workflow. The `repo.homepage` hint
-includes a quick fix that inserts a placeholder field, and the CI hint can
-create the starter workflow.
-
-`claim-from-native` derives the target identity and canonical repository URL
-from `repo.homepage`, then creates the same draft claim directory that
-`claim-init` would create with explicit `--host`, `--owner`, `--repo`,
-`--record-source`, and `--canonical-repo-url` flags.
-
-`claim-submit-native` derives the claim directory from `repo.homepage` and
-`--claim-id`, then appends the audited `submitted` event without requiring the
-maintainer to spell the full index-relative path.
-
-After the claim is submitted and reviewed, the reviewer can record the accepted
-handoff without retyping canonical paths:
-
-```bash
-dotrepo --root <repo> claim-accept-native \
-  --index-root <index> \
-  --claim-id <claim-id>
-```
-
-`claim-accept-native` appends an accepted event with `canonical_record_path =
-".repo"` and the matching `canonical_mirror_path` under the index. Pass the
-index-relative claim path instead of `--claim-id` when accepting a claim whose
-path should not be derived from the native record.
-
-To scaffold the native-repo CI check loop, run:
-
-```bash
-dotrepo --root <repo> ci init
-```
-
-That writes `.github/workflows/dotrepo-check.yml` with the same release-binary
-workflow shape used by the native example repo. Pass `--version <x.y.z>` when
-you want to pin a different dotrepo release than the current CLI version, or
-`--force` to overwrite an existing workflow file.
-
-Current scope and constraints:
-- `ci init` is supported only for native records with a valid root `.repo`.
-- the scaffold currently targets GitHub Actions on `ubuntu-latest`
-- it installs the `x86_64-unknown-linux-gnu` release bundle and runs `dotrepo`
-  from `PATH`
-
-Native import now chooses `compat.github.*` conservatively from on-disk files:
-- it enables `generate` only when the checked-in surface already matches the
-  current dotrepo renderer closely enough that full ownership is honest
-- richer handwritten surfaces stay `skip` until you inspect them with `doctor`
-  and `preview`, then adopt them explicitly if needed
-
-Do not assume every conventional community file should immediately be marked
-`generate`.
-
-- `generate` is honest only when dotrepo can reproduce the full file from the
-  current manifest and renderer.
-- For rich handwritten `README.md`, `SECURITY.md`, or `CONTRIBUTING.md` files,
-  prefer managed regions when you want dotrepo to own one canonical block while
-  preserving surrounding prose.
-- For `CODEOWNERS` and pull request templates, partial management is not
-  supported today. Use `generate` only if the current dotrepo template is the
-  file you actually want; otherwise leave the file unmanaged.
-
-## Canonical local loop
-
-Run the same loop the example repo uses locally:
-
-```bash
-dotrepo --root examples/native-minimal validate
-dotrepo --root examples/native-minimal query repo.build --raw
-dotrepo --root examples/native-minimal trust
-dotrepo --root examples/native-minimal adoption-status
-dotrepo --root examples/native-minimal doctor
-dotrepo --root examples/native-minimal generate --check
-```
-
-What each command answers:
-- `validate` confirms that the current `.repo` is structurally valid.
-- `query` gives scripts and tools a stable way to read specific fields from the manifest.
-- `trust` is the human-facing inspection surface for status, provenance, authority handoff, and competing records.
-- `adoption-status` summarizes whether the maintainer-owned loop is ready for CI, managed surfaces, and claim handoff.
-- `doctor` reports whether supported conventional surfaces are `fully_generated`, `partially_managed`, `unmanaged`, `malformed_managed`, or in an unsupported state.
-- `generate --check` fails on semantic drift inside fully generated or partially
-  managed surfaces, but does not fail solely because an unmanaged file exists
-  or because only the generator version in an otherwise identical banner changed.
-
-## Inspect authority handoff and conflicts
-
-Use `trust` when you need to understand why one record won:
-
-```bash
-dotrepo --root <repo-or-index-scope> trust
-dotrepo --root <repo-or-index-scope> trust --json
-```
-
-The human-facing output should tell you:
-- which record was selected
-- why it won
-- which competing records remain visible
-- whether those competing records are `superseded` or `parallel`
-- the source, confidence, provenance, and notes attached to each record
-
-Use `trust --json` when MCP clients, scripts, or tests need the same
-conflict-aware structure returned by `dotrepo-core`.
-
-If you need one field together with the same selection context, use:
-
-```bash
-dotrepo --root <repo-or-index-scope> query repo.build --json
-```
-
-`query --raw` remains available for single-record scalar lookups, but it now
-refuses when competing records exist so scripts do not silently discard trust
-context.
-
-## Source-of-truth rule
-
-For the example repo, the root `.repo` is authoritative. Generated files such as
-`README.md`, `.github/CODEOWNERS`, `.github/SECURITY.md`, `CONTRIBUTING.md`, and
-the pull request template are compatibility surfaces, not the primary editing
-surface. If `generate --check` fails, update the generated files from `.repo`
-rather than patching them by hand.
-
-`doctor` is the guardrail before enabling more generated surfaces in an existing
-repository. It now distinguishes:
-- `fully_generated`: the whole file is dotrepo-owned
-- `partially_managed`: only the marked region is dotrepo-owned
-- `unmanaged`: the file exists outside dotrepo management
-- `malformed_managed`: markers are broken and must be fixed
-
-That makes it possible to adopt managed regions incrementally without treating
-every existing Markdown file as drift.
-
-Use `doctor` before switching a surface to `generate` in an existing repo. The
-important maintainer question is not just "is this file valid?" but "can
-dotrepo truthfully reproduce the file we want from `.repo`?" If the answer is
-"only a narrow stub," prefer managed regions for supported Markdown files or
-leave the file unmanaged.
-
-For supported Markdown surfaces, the incremental adoption loop is now explicit:
-
-```bash
 dotrepo --root <repo> doctor --json
 dotrepo --root <repo> preview --surface contributing --json
+```
+
+Native import enables full generation only when existing files match the
+renderer closely enough. Rich handwritten surfaces remain skipped until
+explicitly adopted. `preview` shows proposed content and whether prose would be
+dropped; `doctor` reports ownership/layout states.
+
+For supported Markdown files, use a managed region to retain surrounding prose:
+
+```bash
+# Set compat.github.contributing = "generate" in .repo first.
 dotrepo --root <repo> manage contributing --adopt
 dotrepo --root <repo> generate --check
 ```
 
-- `preview --surface ...` shows the current file, the proposed managed result,
-  whether unmanaged prose would be dropped, and which ownership mode is
-  recommended.
-- `doctor --json` and `preview --json` are also the semi-stable machine-facing
-  adoption reports for scripts, editors, and MCP clients. The field-level
-  contract is documented in [`sync-boundaries.md`](./sync-boundaries.md).
-- `manage <surface> --adopt` is the explicit conversion path for
-  `README.md`, `SECURITY.md`, and `CONTRIBUTING.md`. It preserves the current
-  prose and inserts one canonical managed region instead of guessing through
-  malformed or unsupported layouts.
-- For `SECURITY.md` and `CONTRIBUTING.md`, set `compat.github.<surface> =
-  "generate"` before adoption so the managed block participates in the normal
-  generate / generate-check loop.
+README, SECURITY, and CONTRIBUTING support partial management. SECURITY and
+CONTRIBUTING need their corresponding `compat.github.* = "generate"` setting.
+CODEOWNERS and PR templates support full generation only; enable them only when
+the renderer produces the whole file you want. Malformed or ambiguous layouts
+require repair before generation. The exact states, JSON reports, and limits
+live in [sync boundaries](sync-boundaries.md).
 
-For the concrete boundary between supported sync, unmanaged files, malformed
-markers, and unsupported layouts, see
-[`sync-boundaries.md`](./sync-boundaries.md).
-
-## CI
-
-The example workflow and `dotrepo ci init` use the same command contract in CI.
-The checked-in example file also includes the release-binary install step:
+## 3. Keep the local and CI loop green
 
 ```bash
-dotrepo --root . validate
-dotrepo --root . query repo.build --raw
-dotrepo --root . trust
-dotrepo --root . adoption-status
-dotrepo --root . doctor
-dotrepo --root . generate --check
+dotrepo --root <repo> validate
+dotrepo --root <repo> query repo.build --json
+dotrepo --root <repo> trust
+dotrepo --root <repo> adoption-status
+dotrepo --root <repo> doctor
+dotrepo --root <repo> generate --check
 ```
 
-That is the intended v0.1 contract for a native repo:
-- validate the canonical record
-- make one or more machine-facing queries succeed
-- surface trust metadata and any authority conflicts explicitly
-- inspect conventional surface states explicitly
-- fail the build if fully generated or partially managed surfaces drift
+`validate` checks structure; `query` and `trust` preserve selection/conflicts;
+`adoption-status` checks native validation, claim identity, starter CI, and surface
+readiness. `generate --check` fails on managed/generated drift while preserving
+unmanaged prose. Generator-version-only banner changes are not semantic drift.
+
+Use `query --raw` for scalar scripting only when a single matching record exists;
+it refuses competing records to avoid discarding trust context. When drift is
+intentional, change `.repo` and run `generate`, then inspect the resulting diff.
+
+Create the starter GitHub Actions workflow with a published stable version:
+
+```bash
+dotrepo --root <repo> ci init --version 1.0.1
+```
+
+The native-only scaffold installs a pinned Linux release bundle on
+`ubuntu-latest`. Pass `--force` to replace an existing workflow deliberately.
+The default version differs by binary release; see [installation](install.md#maintainer-ci).
+Configure repository required checks separately; writing a workflow does not
+make it mandatory at merge time.
+
+MCP exposes the same readiness report as `dotrepo.adoption_status`. Current LSP
+adoption hints and quick fixes can add a homepage placeholder and starter CI;
+they do not verify maintainer identity or accept claims.
+
+## 4. Request public-index authority handoff
+
+After reviewing the native manifest and setting `repo.homepage` to the repository
+identity, scaffold and submit a claim:
+
+```bash
+dotrepo --root <repo> claim-from-native \
+  --index-root <index> --claim-id <claim-id> \
+  --claimant-name "<maintainer name>" --review-md
+dotrepo --root <repo> claim-submit-native \
+  --index-root <index> --claim-id <claim-id>
+```
+
+These helpers derive identity and claim paths from the native record. Submission
+does not grant canonical authority; the operator must review the claim and its
+evidence. Once that review permits acceptance, the reviewer can record links:
+
+```bash
+dotrepo --root <repo> claim-accept-native \
+  --index-root <index> --claim-id <claim-id>
+```
+
+Acceptance records a canonical `.repo` path and matching index mirror path; it
+does not fetch, create, or publish those artifacts. Accepted claims without
+canonical links remain pending. Verify the actual upstream record and inspect
+claim state/history using [the operator workflow](maintainer-claim-review-workflow.md).
+
+Use `trust --json` or `query <path> --json` to inspect selection, superseded or
+parallel records, provenance, and conflicts after handoff. A canonical record
+wins only for the matching identity; missing fields are not silently backfilled
+from an overlay.

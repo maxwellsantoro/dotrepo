@@ -14,6 +14,13 @@ Compatibility rule:
 For the exact checked-in `v0` wire-compatibility surface, see
 [`docs/public-api-compatibility.md`](../docs/public-api-compatibility.md).
 
+## Implementation scope
+
+This preserves the initial identity-first launch design. Search, comparison,
+batch lookup, and typed relations were implemented subsequently; their current
+routes live in [public examples](../docs/public-export-examples.md). Public
+mutation and self-service maintainer submission remain deferred.
+
 ## Summary
 
 This RFC defines the intended direction for the first public index site and

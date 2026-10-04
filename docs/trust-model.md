@@ -36,9 +36,9 @@ public trust block.
   constrained adjudication with post-checks, human review, or explicit
   maintainer validation
 
-These are the reference provenance values for v0.1, not a closed enum. Tools should preserve unknown provenance strings even if they only interpret the reference vocabulary directly.
+These are reference provenance values, not a closed enum. Tools should preserve unknown provenance strings even if they only interpret the reference vocabulary directly.
 
-Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `medium`, and `high` in v0.1, but remains an open string so the protocol can evolve without forcing an immediate schema break.
+Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `medium`, and `high`, but remains an open string so the protocol can evolve without forcing an immediate schema break.
 
 ## Trust implications
 
@@ -59,8 +59,11 @@ Likewise, `record.trust.confidence` uses a reference vocabulary of `low`, `mediu
 - Claim and supersede are identity-level operations. They only apply when the
   repository identity surface matches across the canonical upstream path, any overlay
   `record.source`, and any corresponding index path.
-- The default precedence ladder is: canonical `.repo`, canonical mirror, verified
-  overlay, reviewed overlay, imported overlay, inferred overlay, then draft.
+- The default precedence ladder is: canonical native `.repo`, canonical mirror,
+  then verified, reviewed, imported, inferred, and draft records regardless of
+  mode. Native mode alone receives no precedence bonus below canonical status.
+  The [selection implementation](../crates/dotrepo-core/src/selection.rs) owns
+  this order; it is not a required lifecycle progression.
 - Precedence chooses a default record; it does not authorize silent field-level
   blending across records.
 - A missing or intentionally `unknown` field in a higher-authority record should stay

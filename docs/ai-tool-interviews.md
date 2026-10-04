@@ -20,9 +20,10 @@ Public-facing synthesis:
 ### Broader index coverage
 
 The original interviews identified coverage as the primary product constraint.
-That remains true, but the operating model is now autonomous rather than a
-queue of human-reviewed records. The first tranche is complete; the next
-milestone is useful, honestly scored coverage across a broader technology mix.
+That was a hypothesis from the interviews. Current priorities require factual
+freshness, independent accuracy, and complete consumer outcomes before larger
+coverage cohorts. The operating model uses machine-gated generated overlays,
+with human review reserved for contributions, audits, and authority claims.
 
 ### Remote agent lookup
 
@@ -36,12 +37,12 @@ Trust, freshness, provenance, and conflict semantics remain the foundation.
 New surfaces should reuse those contracts instead of creating a parallel truth
 model.
 
-## Current implications
+## Implications to test
 
 - Make the autonomous index factory observable, bounded, and cheap.
 - Resolve deterministic evidence first and escalate only unresolved fields to
   progressively stronger models.
-- Harden existing records while expanding coverage.
+- Harden existing records; expand coverage after the roadmap proof gates pass.
 - Use the compact research profile and batch lookup contracts so one indexed
   result can replace repeated repository scraping across many agent sessions.
 - Treat discovery and ranking as products built on trusted profiles, not as a

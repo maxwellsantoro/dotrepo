@@ -55,6 +55,7 @@ The v0.1 reference tool accepts `dotrepo/v0.1` exactly. Future tooling should tr
 - `build`
 - `test`
 - `build_candidates` / `test_candidates`
+- `build_context` / `test_context` (optional explicit execution context)
 - `[repo.toolchain]`
 - `topics`
 
@@ -65,6 +66,9 @@ The v0.1 reference tool accepts `dotrepo/v0.1` exactly. Future tooling should tr
 command could be honestly chosen (e.g. a genuinely polyglot repository with
 more than one legitimate command). See
 [RFC 0020](./0020-multi-ecosystem-command-candidates.md).
+Scalar commands and candidates may carry the optional exact-command context
+defined in [RFC 0021](./0021-value-bound-execution-context.md). Missing context
+leaves directory, scope, and prerequisites unassessed.
 
 `[repo.toolchain]` is optional and intentionally narrow. `min` records the
 single primary minimum toolchain version only when root package metadata states

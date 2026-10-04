@@ -8,6 +8,7 @@ use std::sync::Arc;
 
 mod adoption;
 mod claims;
+mod execution;
 mod generation;
 mod import;
 mod promotion;
@@ -88,14 +89,15 @@ pub use public::{
     public_repository_trust_or_error_with_base, public_repository_trust_with_base,
     public_snapshot_metadata, PagedigestCoverage, PagedigestEntry, PagedigestManifest,
     PublicBatchProfileItem, PublicBatchProfileResponse, PublicBatchQueryItem,
-    PublicBatchQueryResponse, PublicCacheValidators, PublicConflictReport, PublicErrorCode,
-    PublicErrorDetail, PublicErrorResponse, PublicExportFileEntry, PublicExportFileManifest,
-    PublicFreshness, PublicProfileCompareBoolValue, PublicProfileCompareItem,
-    PublicProfileCompareResponse, PublicProfileCompareSignals, PublicProfileCompareTextValue,
-    PublicProfileSearchAppliedFilters, PublicProfileSearchItem, PublicProfileSearchOptions,
-    PublicProfileSearchResponse, PublicQueryInputConflict, PublicQueryInputSelection,
-    PublicQueryInputSnapshot, PublicQueryResponse, PublicRecordArtifacts, PublicRelationItem,
-    PublicRelationTrust, PublicRelationsResponse, PublicRepositoryFields, PublicRepositoryIdentity,
+    PublicBatchQueryResponse, PublicCacheValidators, PublicCommandCandidate, PublicConflictReport,
+    PublicErrorCode, PublicErrorDetail, PublicErrorResponse, PublicExecutionContext,
+    PublicExportFileEntry, PublicExportFileManifest, PublicFreshness,
+    PublicProfileCompareBoolValue, PublicProfileCompareItem, PublicProfileCompareResponse,
+    PublicProfileCompareSignals, PublicProfileCompareTextValue, PublicProfileSearchAppliedFilters,
+    PublicProfileSearchItem, PublicProfileSearchOptions, PublicProfileSearchResponse,
+    PublicQueryInputConflict, PublicQueryInputSelection, PublicQueryInputSnapshot,
+    PublicQueryResponse, PublicRecordArtifacts, PublicRelationItem, PublicRelationTrust,
+    PublicRelationsResponse, PublicRepositoryFields, PublicRepositoryIdentity,
     PublicRepositoryInventoryEntry, PublicRepositoryInventoryResponse, PublicRepositoryLinks,
     PublicRepositorySummaryResponse, PublicResearchCompleteness, PublicResearchDocs,
     PublicResearchExecution, PublicResearchOwnership, PublicResearchProfileResponse,
@@ -112,13 +114,14 @@ pub use import::{
     import_repository_with_options, infer_docs_root_from_external_homepage, run_import_escalation,
     score_import_fields, verify_import_plan, write_import_outputs, AdjudicationCandidate,
     AdjudicationModelConfidence, AdjudicationModelResponse, AdjudicationOutcome,
-    AdjudicationProvider, AdjudicationProviderResponse, AdjudicationRequest, AdjudicationResult,
-    AdjudicationTier, AdjudicationTierProvider, CandidateProvenance, CommandCandidateSelection,
-    CommandCandidateSummary, CommandSourceTier, FieldConfidence, FieldScore, FieldScoreReport,
-    FieldScoreSummary, GitHubSnapshotFacts, ImportCommandCandidates, ImportEscalationOptions,
-    ImportEscalationReport, ImportMode, ImportOptions, ImportPlan, ImportPreviewReport,
-    ImportedCommandProvenance, NoopAdjudicationProvider, StubAdjudicationProvider,
-    TieredAdjudicationProviders, VerificationCheck, VerificationReport, VerificationSeverity,
+    AdjudicationProvider, AdjudicationProviderError, AdjudicationProviderResponse,
+    AdjudicationRequest, AdjudicationResult, AdjudicationTier, AdjudicationTierProvider,
+    CandidateProvenance, CommandCandidateSelection, CommandCandidateSummary, CommandSourceTier,
+    FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary, GitHubSnapshotFacts,
+    ImportCommandCandidates, ImportEscalationOptions, ImportEscalationReport, ImportMode,
+    ImportOptions, ImportPlan, ImportPreviewReport, ImportedCommandProvenance,
+    NoopAdjudicationProvider, StubAdjudicationProvider, TieredAdjudicationProviders,
+    VerificationCheck, VerificationReport, VerificationSeverity,
 };
 
 pub use promotion::{

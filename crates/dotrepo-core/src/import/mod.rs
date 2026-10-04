@@ -22,9 +22,9 @@ mod types;
 mod write;
 
 pub use adjudication::{
-    AdjudicationProvider, AdjudicationProviderResponse, AdjudicationTier, AdjudicationTierProvider,
-    ImportEscalationOptions, NoopAdjudicationProvider, StubAdjudicationProvider,
-    TieredAdjudicationProviders,
+    AdjudicationProvider, AdjudicationProviderError, AdjudicationProviderResponse,
+    AdjudicationTier, AdjudicationTierProvider, ImportEscalationOptions, NoopAdjudicationProvider,
+    StubAdjudicationProvider, TieredAdjudicationProviders,
 };
 pub use escalation::{
     adjudicate_requests_deterministic, apply_adjudication_to_import_plan,
@@ -442,6 +442,8 @@ pub fn import_repository_with_options(
             // Populated later by escalation (see
             // apply_adjudication_to_import_plan's Absent branch) if a
             // genuine multi-ecosystem tie is found for build or test.
+            build_context: None,
+            test_context: None,
             build_candidates: Vec::new(),
             test_candidates: Vec::new(),
             toolchain: imported_toolchain.min.as_ref().map(|min| Toolchain {

@@ -722,5 +722,31 @@
     "overlay_evidence_contains": [
       "Ignored component-scoped commands from `playground/package.json`"
     ]
+  },
+  {
+    "fixture": "command-python-setup-only",
+    "repo_name": "Signal",
+    "repo_description": "Repository orientation regression fixture.",
+    "imported_sources": [
+      "README.md"
+    ],
+    "inferred_fields": [],
+    "maintainers": [],
+    "team": null,
+    "security_contact": null,
+    "native_status": "draft",
+    "overlay_status": "imported",
+    "trust_provenance": [
+      "imported"
+    ],
+    "native_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_trust_note_contains": [
+      "Bootstrapped from"
+    ],
+    "overlay_evidence_contains": [
+      "Imported repository name and description from README.md."
+    ]
   }
 ]

@@ -1,69 +1,61 @@
-# Reference Toolchain Maintainability
+# Reference toolchain maintainability
 
-This document tracks structural health of the shipped v0.1 reference
-toolchain. Product sequencing lives in [`ROADMAP.md`](../ROADMAP.md).
-
-## Architecture rule
-
-CLI, MCP, and LSP must remain thin transports over `dotrepo-core`. When
-adding behavior, extend core first and delegate from the surface crate.
+The CLI, MCP, and LSP are thin transports over `dotrepo-core`. Extend core
+behavior first, preserve facade imports, and put new work in focused modules.
+Product priorities live in [the roadmap](../ROADMAP.md#active-execution-order).
 
 ## Current layout
 
-| Area | Status |
-|------|--------|
-| `dotrepo-core` business logic | Focused modules under `src/`; public API re-exported from `lib.rs`. `public.rs` is further split into `src/public/{mod,types,profile,search,compare,relations,export,error}.rs` behind unchanged facade exports |
-| `dotrepo-core` facade tests | Split into `src/facade_tests/` by domain (selection, public, claims, import, surfaces, validation, relations) |
-| Generation orchestration | `generation.rs` owns generation, drift checks, and GitHub output planning behind unchanged `lib.rs` re-exports. All three paths share one GitHub output plan, including CODEOWNERS rendering and enabled-surface selection. |
-| `dotrepo-mcp` | `lookup.rs` (remote lookup policy and SSRF protections), `tools.rs` (MCP tool schema declarations), `handlers.rs` (tool handler bodies calling into `dotrepo-core`/`lookup`), `dispatch.rs` (JSON-RPC request/notification routing and MCP lifecycle); `main.rs` reduced to module wiring plus the stdio `main()`/`run()` loop |
-| `dotrepo-lsp` | Split into `protocol.rs` (JSON-RPC/LSP message and type definitions), `state.rs` (server state, open-document tracking, and the `DocumentIndex` byte/UTF-16 offset mapping), `diagnostics.rs` (parse/validation/adoption-status diagnostics), `completions.rs` (completion and hover support over the schema catalog), `code_actions.rs` (adoption-status quick fixes), and `dispatch.rs` (JSON-RPC request/notification routing); `main.rs` retains only the stdio read/write loop and module wiring |
-| `dotrepo-crawler` | Documented in [`crates/dotrepo-crawler/README.md`](../crates/dotrepo-crawler/README.md) |
+| Area | Source and responsibility |
+| --- | --- |
+| Core facade | `src/lib.rs` re-exports domain APIs; `src/facade_tests/` covers selection, public, claims, import, surfaces, validation, and relations |
+| Import | `src/import/`: inputs, types, evidence, fields, toolchain, write; `commands/`, `parsing/`, and `escalation/` separate extraction, policy, and model routing |
+| Public API | `src/public/`: types, profiles, evidence, search, compare, relations, export, PageDigest, errors |
+| Generation | `generation.rs` shares output planning across generation, drift checks, and previews; `surfaces/` owns file states and renderers |
+| MCP | `tools.rs`, `handlers.rs`, `dispatch.rs`, `lookup.rs`; `main.rs` wires stdio, `tests.rs` and `test_support.rs` exercise parity |
+| LSP | `protocol.rs`, `state.rs`, `diagnostics.rs`, `completions.rs`, `code_actions.rs`, `dispatch.rs`; `main.rs` wires stdio, `tests.rs` covers server behavior |
+| CLI packages | Workspace and standalone alias binaries call `dotrepo_cli::main()` / `run()` |
+| Crawler | [Crate guide](../crates/dotrepo-crawler/README.md); `pipeline/` separates merge, evidence, writeback gate, and synthesis |
 
-## Oversized-file dispositions
+Completed extraction history belongs in [the changelog](../CHANGELOG.md), not a
+second task list here. Rustdoc examples cover high-traffic repository entrypoints;
+expand them when extending batch/public APIs.
 
-The roadmap requires a split plan or explicit retain rationale for every
-reference-toolchain Rust source file above roughly 1,500 lines. Line counts are
-directional and should be refreshed when this table is used to schedule work.
+## Hotspot dispositions
 
-| File | Current disposition |
-|------|---------------------|
-| `dotrepo-core/src/import/mod.rs` | Reduced to import orchestration and re-exports (~950 lines). Repository file loading and the borrowed command/toolchain input view live in `import/inputs.rs`. Security-contact selection and its evidence notes live in `import/evidence.rs` alongside owners/docs/compat construction, documentation-source retention, evidence.md rendering, and relation discovery. Data types live in `import/types.rs`; field scoring/adjudication reconciliation lives in `import/fields.rs`. |
-| `dotrepo-core/src/import/parsing.rs` | Done: split into `import/parsing/` (~2,050 lines total, largest file 754 lines). README title/description/name parsing in `readme.rs`; shared markdown/text normalization and link extraction in `markdown.rs`; URL quality gates in `urls.rs`; CODEOWNERS parsing in `codeowners.rs`; security-contact parsing in `security.rs`; `mod.rs` is a thin re-export hub. |
-| `dotrepo-core/src/import/commands.rs` | Done: split into `import/commands/` (~1,590 lines total, largest file 814 lines). Ecosystem-specific candidate *extraction* (Cargo/npm/pyproject/setup.py/go.mod/Maven/Gradle/Composer/.csproj/Mix/Rebar/CMake/Makefile/justfile/Rakefile/CONTRIBUTING/workflows) lives in `extraction.rs`; command sanitization and build/test ranking policy (incl. Node package-runner detection) lives in `policy.rs`; `mod.rs` holds file loading and the `infer_imported_commands` orchestration entrypoint. |
-| `dotrepo-crawler/src/main.rs` | Done: `main.rs` now holds only clap argument/subcommand definitions, `main()`, and top-level dispatch; command execution moved to `src/commands.rs` and report/output rendering moved to `src/report.rs`. |
-| `dotrepo-cli/src/tests.rs` | Retain temporarily: this is test-only code with no production navigation cost; split by CLI command domain when the next test family is added. |
-| Dual CLI entrypoints (`crates/dotrepo` + `dotrepo-cli` mains) | **Done:** both binaries call `dotrepo_cli::main()` / `dotrepo_cli::run()` so install-alias dispatch cannot drift. |
-| `dotrepo-core/src/facade_tests/import_repository.rs` | Split on next import-fixture expansion into parsing, evidence, escalation, and manifest-assembly test modules. |
-| `dotrepo-core/src/import/escalation.rs` (~1,473 lines) | **Done:** split into `import/escalation/` — `deterministic.rs` (command-tier walk, deepen, apply plan), `model_ladder.rs` (tier loop / Absent-vs-Rejected policy), `report.rs` (report + summary recompute), `mod.rs` (`run_import_escalation` orchestration + tests). Public re-exports unchanged via `import/mod.rs`. |
-| `dotrepo-crawler/src/pipeline.rs` (~1,462 lines) | **Done:** split into `pipeline/` — `merge.rs` (snapshot merge + homepage identity guards), `writeback_gate.rs` (verified auto-promotion + downgrade guard), `synthesis.rs` (optional bounded synthesis), `mod.rs` (`crawl_repository_*` entry + tests). |
-| `dotrepo-crawler/src/github.rs` (~1,596 lines) | **Split on next materialization/API feature** (above the ~1,500-line threshold). Proposed layout: `github/client.rs` (HTTP client, auth, rate-limit, error compaction); `github/discovery.rs` (search/star-band discovery + refresh candidates); `github/materialize_paths.rs` (supplemental root files, monorepo path preference for .NET/JS/Python/Rust, tree walks); `github/types.rs` (API response DTOs); `github/mod.rs` re-exports `GitHubClient` / `HttpGitHubClient` unchanged. Do not grow monorepo selectors in the monolith file. |
+Every reference-toolchain Rust source above roughly 1,500 lines needs a split
+plan or explicit retain rationale. The October 3 source audit found these three
+above the threshold; counts are diagnostic snapshots, not permanent baselines.
 
-New files that cross the threshold must be added here before the maintainability
-exit criterion can pass.
+| File | Disposition |
+| --- | --- |
+| `crates/dotrepo-crawler/src/github.rs` | 1,596 lines. Split before the next materialization/API feature: `github/client.rs` for HTTP/auth/rate limits; `discovery.rs` for discovery/refresh candidates; `materialize_paths.rs` for root/monorepo selectors; `types.rs` for DTOs; `mod.rs` preserves client re-exports. |
+| `crates/dotrepo-cli/src/tests.rs` | 1,610 lines, test-only. Split by CLI command domain when adding the next test family. |
+| `crates/dotrepo-core/src/facade_tests/import_repository.rs` | 1,608 lines, test-only. Split evidence, escalation, and assembly domains on the next import-fixture expansion; parsing already has its own module. |
 
-## Targeted refactors
+The command orchestrator's unit tests now live in `import/commands/tests.rs`,
+keeping `mod.rs` focused on loading and assembly. `claims.rs` remains near the
+threshold. Check sizes when expanding them; do not rely on former counts.
+Refresh the inventory with:
 
-1. **Facade test domains** — keep one concern per file; run a single domain with `cargo test -p dotrepo-core --lib tests::<domain>`.
+```bash
+uv run python - <<'PY'
+from pathlib import Path
+for path in sorted(Path("crates").glob("*/src/**/*.rs")):
+    lines = len(path.read_text().splitlines())
+    if lines > 1500:
+        print(f"{lines:5} {path}")
+PY
+```
 
-The LSP split, MCP tools module split, `public.rs` split, `import/` splits, and
-crawler command/pipeline splits are all complete (see the oversized-file
-dispositions table above and the "Current layout" table). Remaining production
-hotspot: `crawler/github.rs` split on next materialization feature. Remaining
-test-only: facade import domains and CLI tests on next expansion.
+Facade domains can run independently, for example
+`cargo test -p dotrepo-core --lib tests::selection`.
 
-## Public API documentation
+## Operational maintainability
 
-High-traffic entrypoints (`validate_repository`, `query_repository`,
-`trust_repository`) carry rustdoc examples. Expand coverage to batch/public
-helpers as those surfaces stabilize.
-
-## Index scale operations
-
-At 613+ overlay records, maintainability includes operational observability:
-
-- `scripts/render_index_growth_status.py` — growth, quality queue, stale freshness
-- release-gate baselines — ratcheted profile counts and high-signal floors
-- Milestone 4 metrics — refresh latency, stale-record rate, cost per maintained profile
-
-See **Metrics that matter** in [`ROADMAP.md`](../ROADMAP.md) for the full
-operational scorecard.
+Index size does not establish operational health. Use growth/freshness reports,
+coverage and accuracy gates, risk-weighted audit dispositions, and retained
+unit-cost telemetry. Release floors gate validity, completeness, accuracy, and
+record age; verified/high-signal counts are advisory rather than incentives to
+inflate authority. See [crawl operations](factual-crawl-automation.md) and
+[measurement interpretation](public-lookup-efficiency-benchmark.md).

@@ -47,19 +47,13 @@ on reference examples, operator traffic, model interviews, or repository count.
 
 Outreach or submission to another project is a separate explicit action.
 
-## Positive command acceptance
+## Command acceptance and coverage
 
-The reference consumer accepts a requested primary build/test command only when
-it is a nonempty string with an explicit `present`, `extracted`, high-confidence
-field assessment, a nonempty source, and a check timestamp matching the record.
-Missing, invalidated, malformed, unspecified, inferred, or weaker assessments
-require upstream fallback. Record-wide confidence and maintainer status do not
-substitute for this contract; no maintainer-authority exemption is implemented.
-Unsupported response versions and non-string requested values also require
-fallback. Acceptance is metadata suitability, not permission to execute a command.
-The benchmark leaves field confidence unknown when absent.
+Use the [reference consumer policy](external-consumer-integration.md#positive-command-acceptance) for the
+exact positive command checks, incomplete/scope screens, and fallback behavior.
+Record-wide confidence or maintainer status cannot substitute for matching
+field evidence. Acceptance does not grant permission to execute a command.
 
-Policy coverage is published on the efficiency page and in its linked JSON.
-It distinguishes value presence, policy acceptance, independently established
-correctness, and completed tasks. The last two remain unmeasured in the coverage
-report; they require the existing benchmark and independent pilot evidence.
+Policy coverage reports presence and acceptance separately. Independently
+established correctness and completed-task counts remain unmeasured by that
+report; the benchmark and external pilot supply those separate evidence levels.

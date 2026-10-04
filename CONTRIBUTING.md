@@ -58,9 +58,15 @@ uv run python scripts/check_toolchain_manifest_parity.py
 cargo test --workspace
 ```
 
-CI enforces exactly this set (`cargo-deny` installs once with
-`cargo install cargo-deny --locked`), so running it locally means a green
-`rust-and-index` job.
+CI runs these checks plus packaging, standalone-alias checks, and stdio smoke
+tests. Install `cargo-deny` with `cargo install cargo-deny --locked` if needed.
+Require the `ci-gate` check in repository branch protection or rulesets. It runs
+after every scoped job and requires each job selected by `change-scope` to
+succeed; intentionally skipped jobs are accepted. A missing scope output,
+failed classifier, cancelled job, or skipped required job fails the aggregate.
+The workflow supplies the check; merge enforcement requires repository settings.
+Passing the local list covers the core checks; it does not establish that every
+CI job or release artifact passes.
 
 If you touched the maintainer flow or generated surfaces, also run:
 

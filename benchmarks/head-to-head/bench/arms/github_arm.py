@@ -10,8 +10,10 @@ extracted from README/SECURITY.md/CONTRIBUTING with either a regex heuristic
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import os
+from pathlib import Path
 import re
 from typing import Optional
 
@@ -21,6 +23,13 @@ from .base import Arm, Http
 
 API = "https://api.github.com"
 RAW = "https://raw.githubusercontent.com"
+
+# Share reviewed request capabilities with the production sidecar. Like the
+# reference consumer, this module must also load when run from the bench directory.
+POLICY_PATH = Path(__file__).resolve().parents[4] / "scripts/openrouter_request_policy.py"
+POLICY_SPEC = importlib.util.spec_from_file_location("dotrepo_openrouter_policy", POLICY_PATH)
+model_policy = importlib.util.module_from_spec(POLICY_SPEC)
+POLICY_SPEC.loader.exec_module(model_policy)
 
 _FENCE = re.compile(r"```(?:bash|sh|console|shell|text)?\n(.*?)```", re.S | re.I)
 
@@ -79,7 +88,9 @@ class GitHubArm(Arm):
             config.update(
                 {
                     "provider": "anthropic",
-                    "model": os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929"),
+                    "model": os.environ.get(
+                        "ANTHROPIC_MODEL", model_policy.DEFAULT_ANTHROPIC_MODEL
+                    ),
                 }
             )
         return config
@@ -294,34 +305,18 @@ class GitHubArm(Arm):
                 "http-referer": "https://github.com/maxwellsantoro/dotrepo",
                 "x-title": "dotrepo-head-to-head-benchmark",
             },
-            json={
-                "model": model,
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": "Return strict JSON only. Never wrap in markdown fences.",
-                    },
-                    {"role": "user", "content": prompt},
-                ],
-                "temperature": 0,
-                "max_tokens": 400,
-                "response_format": {"type": "json_object"},
-                "reasoning": {"enabled": False},
-            },
-            timeout=60,
+            json=model_policy.build_completion_body(model, prompt),
+            timeout=120,
         )
         r.raise_for_status()
         data = r.json()
-        choice = data["choices"][0]
-        txt = choice["message"].get("content")
-        if isinstance(txt, list):
-            txt = "".join(part.get("text", "") for part in txt if isinstance(part, dict))
-        if not txt:
-            raise RuntimeError(
-                "OpenRouter returned an empty LLM extraction response "
-                f"for {field.id}; finish_reason={choice.get('finish_reason')!r}"
-            )
-        result = _parse_llm_json(field, txt)
+        usage = model_policy.completion_usage(data)
+        try:
+            result = _parse_llm_json(field, model_policy.completion_text(data))
+        except Exception:
+            model_policy.log_completion(usage, requested_model=model, outcome="invalid-answer")
+            raise
+        model_policy.log_completion(usage, requested_model=model, outcome="answered")
         self._freeze_llm_result("openrouter", model, prompt, result)
         return result
 
@@ -329,7 +324,7 @@ class GitHubArm(Arm):
         import requests as rq
 
         api_key = os.environ["ANTHROPIC_API_KEY"]
-        model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929")
+        model = os.environ.get("ANTHROPIC_MODEL", model_policy.DEFAULT_ANTHROPIC_MODEL)
         prompt = self._llm_prompt(field, blob)
         cached = self._cached_llm_result("anthropic", model, prompt)
         if cached is not None:
@@ -341,12 +336,8 @@ class GitHubArm(Arm):
                 "x-api-key": api_key,
                 "anthropic-version": "2023-06-01",
             },
-            json={
-                "model": model,
-                "max_tokens": 400,
-                "messages": [{"role": "user", "content": prompt}],
-            },
-            timeout=40,
+            json=model_policy.build_anthropic_body(model, prompt),
+            timeout=120,
         )
         r.raise_for_status()
         data = r.json()
@@ -382,6 +373,19 @@ class GitHubArm(Arm):
 
     @staticmethod
     def _llm_cache_key(provider: str, model: str, prompt: str) -> str:
+        # Preserve historical model keys for frozen baseline replay. New model
+        # calls bind their request policy too, so tuning effort cannot reuse an
+        # answer produced under different settings.
+        if provider == "openrouter" and model in {
+            model_policy.DEFAULT_PRIMARY_MODEL,
+            model_policy.DEFAULT_SECOND_OPINION_MODEL,
+            model_policy.DEFAULT_TAIL_MODEL,
+            "google/gemini-3.8-flash",
+            "anthropic/claude-sonnet-5.5",
+        }:
+            prompt = json.dumps(model_policy.build_completion_body(model, prompt), sort_keys=True)
+        elif provider == "anthropic" and model == model_policy.DEFAULT_ANTHROPIC_MODEL:
+            prompt = json.dumps(model_policy.build_anthropic_body(model, prompt), sort_keys=True)
         digest = hashlib.sha256(prompt.encode()).hexdigest()
         return f"benchmark-llm://{provider}/{model}/{digest}"
 

@@ -9,6 +9,22 @@ pub struct AdjudicationProviderResponse {
     pub tokens_used: u64,
 }
 
+/// A provider failure with measured spend, such as a billed truncated answer.
+/// Unknown spend remains zero; it is never inferred from a token budget.
+#[derive(Debug)]
+pub struct AdjudicationProviderError {
+    pub message: String,
+    pub tokens_used: u64,
+}
+
+impl std::fmt::Display for AdjudicationProviderError {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str(&self.message)
+    }
+}
+
+impl std::error::Error for AdjudicationProviderError {}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum AdjudicationTier {

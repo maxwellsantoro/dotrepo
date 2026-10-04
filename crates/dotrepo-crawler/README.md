@@ -25,7 +25,7 @@ materialized trees, telemetry, and index writeback.
 | `discover.rs` | Candidate discovery and target selection |
 | `github.rs` | GitHub API client and repository snapshots |
 | `materialize.rs` | Bounded file materialization into temp roots |
-| `pipeline.rs` | End-to-end crawl orchestration |
+| `pipeline/` | Crawl orchestration, snapshot merge, field evidence, writeback gate, optional synthesis |
 | `adjudication.rs` | Env-driven model provider wiring |
 | `synth.rs` | Optional bounded synthesis sidecar |
 | `writeback.rs` | Atomic overlay persistence |

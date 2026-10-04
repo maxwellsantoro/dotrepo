@@ -9,8 +9,7 @@ origin when needed.
 ## 1. Fetch hosted snapshot metadata
 
 ```bash
-# Replace BASE_URL with the current hosted public URL (for example
-# https://dotrepo.org today)
+BASE_URL=https://dotrepo.org
 curl -s "$BASE_URL/v0/meta.json" | uv run python -c "
 import json, sys
 meta = json.load(sys.stdin)
@@ -35,7 +34,8 @@ for entry in inventory['repositories']:
 
 ## 3. Generate a local export
 
-For local review or development:
+For deterministic local review (these fixed dates are illustrative, not fresh
+publication timestamps):
 
 ```bash
 cargo run -p dotrepo-cli -- public export \
@@ -316,12 +316,6 @@ snapshot and the byte ratio of that refetch set.
 ```bash
 uv run python scripts/check_public_profile_coverage.py \
   --public-root public \
-  --min-profiles 500 \
-  --min-high-signal 500 \
-  --max-conflict-rate 0.0 \
-  --min-signal hasBuild=500 \
-  --min-signal hasTest=500 \
-  --min-signal hasDocs=500 \
   --output-json /tmp/dotrepo-profile-coverage.json \
   --output-md /tmp/dotrepo-profile-coverage.md
 ```
@@ -341,8 +335,10 @@ toward the same profile-count target.
 
 The canonical release gate applies the versioned floor in
 `scripts/fixtures/public_profile_coverage_baseline.json` and publishes JSON and
-Markdown coverage evidence with its other artifacts. Raising that baseline is
-the incremental path from current coverage to the 500-profile milestone.
+Markdown coverage evidence with its other artifacts. It currently reports
+high-signal authority counts without a minimum floor; validity, completeness,
+conflicts, record freshness, and accuracy are separately gated. Read the
+versioned baseline rather than copying historical milestone thresholds.
 
 ## 19. Plan the next growth tranche
 
@@ -353,18 +349,17 @@ completed second tranche.
 
 ```bash
 uv run python scripts/plan_index_growth_tranche.py \
-  --candidate-file index/tranche-two-targets.txt \
-  --target-count 100 \
-  --min-selected 100 \
-  --current-high-signal 107 \
-  --milestone-high-signal-target 500 \
-  --min-planned-high-signal-capacity 207 \
+  --candidate-file /tmp/dotrepo-next-candidates.txt \
+  --target-count 50 \
+  --min-selected 50 \
   --output-targets /tmp/dotrepo-growth-targets.txt \
   --output-json /tmp/dotrepo-growth-plan.json \
   --output-md /tmp/dotrepo-growth-plan.md
 ```
 
-The planner is a pre-crawl control point for coverage growth. It excludes
+Create the candidate file with one identity per line and `#` ecosystem-group
+comments. The completed tranche-two catalog cannot satisfy a positive new-target
+floor. The planner is a pre-crawl control point for coverage growth. It excludes
 repositories already present in the checked-in index, balances eligible targets
 across candidate groups in candidate-file order, and emits a crawler target
 file plus JSON/Markdown evidence. Its Milestone 2 capacity section reports the

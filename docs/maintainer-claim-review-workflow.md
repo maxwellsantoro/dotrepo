@@ -229,7 +229,8 @@ cargo run -p dotrepo-cli -- --root index claim-event \
 - public maintainer submission UX
 - automatic canonical `.repo` generation from accepted claims
 - automatic review-note generation
-- public site or API presentation of claim history
+- full public claim-ledger or self-service submission UX (ordinary public
+  responses already expose relevant claim context and artifact links)
 
 This is an operator workflow first, not a public product flow.
 
