@@ -1,6 +1,6 @@
 # Evidence
 
-- Imported repository name and docs entry points from README.md.
+- Imported repository name from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.build from package.json as `npm run build`.
 - Imported repo.test from package.json as `npm test`.
@@ -16,6 +16,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

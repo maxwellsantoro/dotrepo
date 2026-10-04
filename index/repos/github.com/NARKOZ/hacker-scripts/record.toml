@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "verified"
 source = "https://github.com/NARKOZ/hacker-scripts"
-generated_at = "2026-09-16T16:19:03.615181Z"
+generated_at = "2026-10-04T07:49:50.955930036Z"
 
 [record.trust]
 confidence = "high"
@@ -41,23 +41,23 @@ languages = [
 topics = []
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no docs detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -65,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -73,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no build command sources found"
@@ -81,7 +81,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "inferred"
 reason = "constrained by GitHub repository metadata"
@@ -90,7 +90,7 @@ state = "present"
 valueJson = '"Based on a true story"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -98,16 +98,16 @@ state = "present"
 valueJson = '"https://github.com/NARKOZ/hacker-scripts"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Hacker Scripts"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:19:03.615181Z"
+checkedAt = "2026-10-04T07:49:50.955930036Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no test command sources found"
@@ -121,4 +121,4 @@ default_branch = "master"
 fork = false
 head_sha = "b14a0a89bdf743c63ca4cc9cbcd866e050d7b3b0"
 html_url = "https://github.com/NARKOZ/hacker-scripts"
-stars = 49825
+stars = 49844

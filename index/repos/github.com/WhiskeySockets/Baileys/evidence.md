@@ -5,6 +5,7 @@
 - Imported repo.build from package.json as `yarn build`.
 - Imported repo.test from package.json as `yarn test`.
 - Imported repo.toolchain.min from package.json as `20.0.0` (Node.js).
+- Imported docs.root as `https://baileys.wiki/docs/intro/`. Explicit documentation link at README.md:75: - [Docs](https://baileys.wiki/docs/intro/)
 - Discovered related relation to github.com/WhiskeySockets/Baileys from package.json homepage.
 - Discovered related relation to github.com/pokearaujo/multidevice from README cross-link.
 - This is an overlay record, not a maintainer-controlled canonical record.

@@ -3,8 +3,8 @@
 - Imported repository name and docs entry points from README.md.
 - Imported maintainer candidates from CODEOWNERS. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@Significant-Gravitas/maintainers` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates.
 - Imported the security reporting channel from SECURITY.md.
-- Inferred repo.build from autogpt_platform/autogpt_libs/pyproject.toml as `python -m build`.
-- Inferred repo.test from .github/workflows/classic-autogpt-ci.yml as `poetry run pytest -vv \`.
+- Ignored component-scoped commands from `autogpt_platform/autogpt_libs/pyproject.toml` as repository defaults.
+- Imported docs.root as `https://docs.agpt.co`. Explicit documentation link at README.md:21: <a href="https://docs.agpt.co">Docs</a>
 - This is an overlay record, not a maintainer-controlled canonical record.
 - Augmented repo.homepage from GitHub repository metadata.
 - Augmented repo.license from GitHub repository metadata.
@@ -14,13 +14,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Fresh verification
+## Auto-promotion
 
-Prior verified authority was not inherited: this refresh must qualify using its current field scores.
-
-## Command semantic correction (2026-10-03)
-
-2026-10-03 semantic audit withheld repo.build, repo.test pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged.
-
-- Withheld `repo.build` previously extracted from `autogpt_platform/autogpt_libs/pyproject.toml` as `python -m build`. Component command lacks repository-default scope and working directory.
-- Withheld `repo.test` previously extracted from `.github/workflows/classic-autogpt-ci.yml` as `poetry run pytest -vv \`. Command is an incomplete example or setup-only step.
+All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.

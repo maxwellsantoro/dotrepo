@@ -3,6 +3,7 @@
 - Imported repository name and docs entry points from README.md.
 - Imported the security reporting channel from SECURITY.md.
 - Imported repo.test from composer.json as `composer run-script test`.
+- Imported docs.root as `https://akaunting.com/hc/docs`. Explicit documentation link at README.md:11: * [Documentation](https://akaunting.com/hc/docs) - Learn how to use
 - This is an overlay record, not a maintainer-controlled canonical record.
 
 - Set `repo.name` to `akaunting` from `GitHub API` after deterministic escalation.

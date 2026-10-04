@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/ahmetb/kubectx"
-generated_at = "2026-09-16T16:20:21.217907Z"
+generated_at = "2026-10-04T07:52:41.727933268Z"
 
 [record.trust]
 confidence = "medium"
@@ -41,23 +41,23 @@ ecosystem = "Go"
 root = "https://kubectx.dev"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
-confidence = "high"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
+confidence = "medium"
 method = "unspecified"
-reason = "docs URL present"
+reason = "documentation target present without a retained source declaration"
 state = "present"
 valueJson = '"https://kubectx.dev"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -65,7 +65,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -73,7 +73,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -82,7 +82,7 @@ state = "present"
 valueJson = '"go build ./..."'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -91,7 +91,7 @@ state = "present"
 valueJson = '"Faster way to switch between clusters and namespaces in kubectl"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -99,16 +99,16 @@ state = "present"
 valueJson = '"https://kubectx.dev"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
 confidence = "high"
 method = "inferred"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"kubectx"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:20:21.217907Z"
+checkedAt = "2026-10-04T07:52:41.727933268Z"
 confidence = "medium"
 method = "inferred"
 reason = "from workflow fallback"
@@ -123,4 +123,4 @@ default_branch = "master"
 fork = false
 head_sha = "12ad6fb22e8c546ee2b54e7de38aa51c906832f7"
 html_url = "https://github.com/ahmetb/kubectx"
-stars = 19987
+stars = 20027

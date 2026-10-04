@@ -2,16 +2,17 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "imported"
+status = "inferred"
 source = "https://github.com/SolaceLabs/solace-agent-mesh"
-generated_at = "2026-09-16T16:19:46.890227Z"
+generated_at = "2026-10-04T07:51:04.214417518Z"
 
 [record.trust]
 confidence = "medium"
 provenance = [
     "imported",
+    "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `client/webui/frontend/package.json`, and `pyproject.toml`. Imported `repo.build` from `client/webui/frontend/package.json`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; prior auto-promotion is superseded. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md` and `pyproject.toml`. Filled `repo.description` with inferred defaults. Ignored component-scoped commands from `client/webui/frontend/package.json` as repository defaults. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `README.md`. Imported `repo.toolchain.min` from `pyproject.toml`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
 
 [repo]
 name = "Solace Agent Mesh"
@@ -30,6 +31,7 @@ languages = [
     "Mako",
     "Shell",
 ]
+build = "python -m build"
 test = "pytest"
 topics = [
     "agentframework",
@@ -58,27 +60,26 @@ topics = [
 min = "3.10.16"
 ecosystem = "Python"
 
-[docs]
-root = "https://solacelabs.github.io/solace-agent-mesh/"
-
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
-confidence = "high"
-method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
-state = "not_found"
+checkedAt = "2026-10-04T07:51:04.214417518Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
-confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
-state = "present"
-valueJson = '"https://solacelabs.github.io/solace-agent-mesh/"'
+checkedAt = "2026-10-04T07:51:04.214417518Z"
+confidence = "low"
+method = "unresolved"
+reason = "conflicting documentation declarations; no target selected"
+source = "README.md"
+state = "unresolved"
+valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
+checkedAt = "2026-10-04T07:51:04.214417518Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -86,7 +87,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
+checkedAt = "2026-10-04T07:51:04.214417518Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -94,25 +95,25 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
-confidence = "low"
-method = "extracted"
-reason = "Component command lacks repository-default scope and working directory."
-source = "client/webui/frontend/package.json"
-state = "unresolved"
-valueJson = "null"
+checkedAt = "2026-10-04T07:51:04.214417518Z"
+confidence = "medium"
+method = "inferred"
+reason = "inferred ecosystem default from build-tool metadata"
+source = "pyproject.toml"
+state = "present"
+valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
+checkedAt = "2026-10-04T07:51:04.214417518Z"
 confidence = "high"
-method = "extracted"
+method = "inferred"
 reason = "constrained by GitHub repository metadata"
 source = "GitHub API"
 state = "present"
 valueJson = '"An event-driven framework designed to build and orchestrate multi-agent AI systems. It enables seamless integration of AI agents with real-world data sources and systems, facilitating complex, multi-step workflows."'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
+checkedAt = "2026-10-04T07:51:04.214417518Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -120,16 +121,16 @@ state = "present"
 valueJson = '"https://solacelabs.github.io/solace-agent-mesh/"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
+checkedAt = "2026-10-04T07:51:04.214417518Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"Solace Agent Mesh"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:19:46.890227Z"
+checkedAt = "2026-10-04T07:51:04.214417518Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
@@ -144,4 +145,4 @@ default_branch = "main"
 fork = false
 head_sha = "f71e744842a66331a7dbb33e5fba8319dc892d12"
 html_url = "https://github.com/SolaceLabs/solace-agent-mesh"
-stars = 4924
+stars = 4919
