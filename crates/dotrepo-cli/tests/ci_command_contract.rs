@@ -171,14 +171,11 @@ build = "cargo build --locked"
     )
     .expect(".repo written");
 
-    let version = env!("CARGO_PKG_VERSION");
     let output = run_dotrepo(&[
         "--root",
         root.to_str().expect("temp path is utf-8"),
         "ci",
         "init",
-        "--version",
-        version,
     ]);
 
     assert!(output.status.success(), "ci init should succeed");

@@ -3,7 +3,7 @@ use dotrepo_core::{
     import_repository, promote_to_verified, score_import_fields, verify_import_plan,
     FieldConfidence, FieldScore, FieldScoreReport, FieldScoreSummary, ImportMode,
 };
-use dotrepo_schema::{parse_manifest, Manifest, Owners, Record, RecordMode, RecordStatus, Repo};
+use dotrepo_schema::{Manifest, Owners, Record, RecordMode, RecordStatus, Repo};
 use std::fs;
 
 fn make_verified_manifest_with_security_contact() -> Manifest {
@@ -650,7 +650,7 @@ references = []
 }
 
 #[test]
-fn apply_index_promotions_promotes_candidates_with_limit() {
+fn standalone_apply_refuses_promotion_without_touching_records_or_evidence() {
     let root = temp_dir("apply-index-promotions");
     let repos_root = root.join("repos/github.com/example");
 
@@ -713,36 +713,41 @@ references = []
     )
     .expect("verified record");
 
-    let report = apply_index_promotions(&root, Some(1)).expect("apply succeeds");
-
-    assert_eq!(report.promoted_records.len(), 1);
-    assert_eq!(report.skipped_eligible_count, 1);
-
-    let promoted_path = root.join("repos").join(&report.promoted_records[0].path);
-    let promoted_text = fs::read_to_string(&promoted_path).expect("promoted record read");
-    let promoted = parse_manifest(&promoted_text).expect("promoted record parses");
-    assert_eq!(promoted.record.status, RecordStatus::Verified);
+    // Legacy analysis remains available and would identify these two records
+    // as candidates. Neither that heuristic nor the limit authorizes a write.
     assert_eq!(
-        promoted
-            .record
-            .trust
-            .as_ref()
-            .and_then(|trust| trust.confidence.as_deref()),
-        Some("high")
+        analyze_index_promotion(&root)
+            .unwrap()
+            .summary
+            .promotion_candidate_count,
+        2
     );
-    assert!(promoted
-        .record
-        .trust
-        .as_ref()
-        .is_some_and(|trust| trust.provenance.contains(&"verified".to_string())));
-    let evidence_text = fs::read_to_string(
-        promoted_path
-            .parent()
-            .expect("promoted record parent")
-            .join("evidence.md"),
-    )
-    .expect("promoted evidence read");
-    assert!(evidence_text.contains("auto-promoted to verified"));
+    let before = ["one", "two", "already-verified"]
+        .into_iter()
+        .flat_map(|repo| {
+            ["record.toml", "evidence.md"].map(|name| repos_root.join(repo).join(name))
+        })
+        .map(|path| {
+            let contents = fs::read(&path).unwrap();
+            (path, contents)
+        })
+        .collect::<Vec<_>>();
+    for limit in [None, Some(0), Some(1)] {
+        let error = apply_index_promotions(&root, limit).unwrap_err();
+        assert!(error
+            .to_string()
+            .contains("standalone promotion is disabled"));
+        for (path, contents) in &before {
+            assert_eq!(&fs::read(path).unwrap(), contents);
+        }
+    }
+    // Even an absent index fails with the guard, before filesystem inspection.
+    let absent = root.join("not-created");
+    let error = apply_index_promotions(&absent, None).unwrap_err();
+    assert!(error
+        .to_string()
+        .contains("standalone promotion is disabled"));
+    assert!(!absent.exists());
 
     fs::remove_dir_all(&root).expect("cleanup");
 }

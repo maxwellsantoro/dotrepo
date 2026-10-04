@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Linux x86_64 release bundle only; use cargo install on other platforms.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - name: Install dotrepo
         env:
-          DOTREPO_VERSION: "1.0.0"
-          DOTREPO_ASSET: "dotrepo-1.0.0-x86_64-unknown-linux-gnu.tar.gz"
-          DOTREPO_RELEASE_BASE: "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.0"
+          DOTREPO_VERSION: "1.0.1"
+          DOTREPO_ASSET: "dotrepo-1.0.1-x86_64-unknown-linux-gnu.tar.gz"
+          DOTREPO_RELEASE_BASE: "https://github.com/maxwellsantoro/dotrepo/releases/download/v1.0.1"
         run: |
           set -euo pipefail
           mkdir -p "$HOME/.local/bin"

@@ -24,7 +24,8 @@ def test_release_gate_applies_versioned_profile_coverage_baseline(tmp_path: Path
         REPO_ROOT, public_dir, output_root
     )
 
-    assert command[1:4] == [
+    assert command[:3] == ["uv", "run", "python"]
+    assert command[3:6] == [
         "scripts/check_public_profile_coverage.py",
         "--public-root",
         str(public_dir),

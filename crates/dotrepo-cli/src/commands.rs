@@ -208,12 +208,12 @@ pub fn cmd_promotion_report(
     json: bool,
     verbose: bool,
 ) -> Result<()> {
-    let report = analyze_index_promotion(&index_root)?;
     let apply_report = if apply {
         Some(apply_index_promotions(&index_root, limit)?)
     } else {
         None
     };
+    let report = analyze_index_promotion(&index_root)?;
 
     if json {
         #[derive(Serialize)]
@@ -553,7 +553,7 @@ pub fn cmd_ci_init(root: PathBuf, force: bool, version: Option<String>) -> Resul
         );
     }
 
-    let version = version.unwrap_or_else(|| env!("CARGO_PKG_VERSION").to_string());
+    let version = version.unwrap_or_else(|| dotrepo_core::DEFAULT_CI_RELEASE_VERSION.to_string());
     let workflow = render_dotrepo_ci_workflow(&version);
     if let Some(parent) = workflow_path.parent() {
         fs::create_dir_all(parent)?;
