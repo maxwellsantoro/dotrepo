@@ -8,6 +8,9 @@ use dotrepo_schema::{Manifest, RecordMode};
 use serde::Serialize;
 use std::path::Path;
 
+/// Published artifact used by generated CI until a replacement is released.
+pub const DEFAULT_CI_RELEASE_VERSION: &str = "1.0.1";
+
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdoptionStatusItem {
@@ -235,7 +238,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Linux x86_64 release bundle only; use cargo install on other platforms.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - name: Install dotrepo
         env:
           DOTREPO_VERSION: "{version}"

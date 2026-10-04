@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.2 candidate — unreleased
+
+- Disable standalone `promotion-report --apply` before any record or evidence
+  access. Retained metadata and heuristic scores cannot authorize verification.
+  Fresh crawler inspection remains the path for verification; read-only reports
+  and the public Rust function signature remain available.
+- Keep generated maintainer CI on published 1.0.1 until a replacement artifact
+  ships, pin its checkout action to a full SHA, and align the native example with
+  that default. This also repairs the example mismatch present at the 1.0.1 tag.
+- Preserve the stable schema, public JSON contracts, and Rust data types. Update
+  only the advisory-affected anyhow, crossbeam-epoch, rustls, and rustls-webpki
+  lock entries after auditing the immutable stable dependency graph.
+  Development-only confidence and execution-context changes
+  are excluded from this backport.
+
 ## Unreleased
 
 Post-1.0 growth, hardening, and operational-proof work toward the roadmap
