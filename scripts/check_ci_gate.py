@@ -5,7 +5,6 @@ import json
 import os
 import sys
 
-
 SCOPED_JOBS = {
     "rust-and-index": "run_rust_ci",
     "operator-gate": "run_operator_gate",
@@ -41,7 +40,7 @@ def main() -> int:
     try:
         needs = json.loads(os.environ["CI_NEEDS"])
         if not isinstance(needs, dict):
-            raise ValueError("CI_NEEDS must be an object")
+            raise TypeError("CI_NEEDS must be an object")
         errors = check_results(needs)
     except (KeyError, ValueError, TypeError, AttributeError) as err:
         errors = [f"invalid CI needs data: {err}"]
