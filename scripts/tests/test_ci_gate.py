@@ -4,7 +4,6 @@ from pathlib import Path
 import sys
 
 import pytest
-import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from check_ci_gate import SCOPED_JOBS, check_results, main
@@ -15,10 +14,14 @@ def needs_for(*selected):
         "change-scope": {
             "result": "success",
             "outputs": {
-                output: str(job in selected).lower() for job, output in SCOPED_JOBS.items()
+                output: str(job in selected).lower()
+                for job, output in SCOPED_JOBS.items()
             },
         },
-        **{job: {"result": "success" if job in selected else "skipped"} for job in SCOPED_JOBS},
+        **{
+            job: {"result": "success" if job in selected else "skipped"}
+            for job in SCOPED_JOBS
+        },
     }
 
 
@@ -69,12 +72,15 @@ def test_main_rejects_malformed_needs(monkeypatch):
 
 
 def test_workflow_gate_always_runs_and_covers_every_scoped_job():
-    workflow = yaml.safe_load(
-        (Path(__file__).resolve().parents[2] / ".github/workflows/ci.yml").read_text()
+    workflow = (
+        Path(__file__).resolve().parents[2] / ".github/workflows/ci.yml"
+    ).read_text()
+    gate = workflow.split("  ci-gate:", 1)[1].split("  change-scope:", 1)[0]
+    needs_line = next(
+        line for line in gate.splitlines() if line.strip().startswith("needs:")
     )
-    gate = workflow["jobs"]["ci-gate"]
-    assert gate["if"] == "always()"
-    assert set(gate["needs"]) == {"change-scope", *SCOPED_JOBS}
-    step = next(step for step in gate["steps"] if "check_ci_gate.py" in step.get("run", ""))
-    assert step["env"]["CI_NEEDS"] == "${{ toJSON(needs) }}"
-    assert step["run"].startswith("uv run python ")
+    needs = needs_line.partition("[")[2].partition("]")[0]
+    assert {name.strip() for name in needs.split(",")} == {"change-scope", *SCOPED_JOBS}
+    assert "if: always()" in gate
+    assert "CI_NEEDS: ${{ toJSON(needs) }}" in gate
+    assert "run: uv run python scripts/check_ci_gate.py" in gate
