@@ -187,11 +187,13 @@ upstream native `.repo`.
 - validates the index
 - fetches and validates the deployed PageDigest manifest as the prior revision
   baseline; it fails closed if that baseline cannot be trusted
+- restores the deployed snapshot log and hash-verified public immutable payloads
+  into the fresh runner, and merges existing R2 history when configured
 - exports the public tree with the Cloudflare base path
 - renders a root landing page with `scripts/render_public_pages_landing.py`
 - stages the snapshot into the in-repo Worker project
-- preserves the previous staged immutable snapshot when one exists locally, so
-  the static asset bundle carries current+previous for rollback tolerance
+- preserves the restored deployed snapshot as the previous immutable snapshot,
+  so clean CI runs carry current+previous for rollback tolerance
 - deploys to `dotrepo.org`
 - serializes complete publication workflows with a shared concurrency group and
   a multi-run queue, so late CI completions cannot evict the latest pending build

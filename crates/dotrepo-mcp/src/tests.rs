@@ -321,6 +321,7 @@ fn tools_require_initialized_notification() {
 
 #[test]
 fn validate_accepts_missing_repository_subdirectory() {
+    let _cwd_guard = cwd_test_lock().lock().expect("cwd test lock");
     let cwd = std::env::current_dir().expect("cwd available");
     let parent = cwd.join(format!(
         "dotrepo-mcp-validate-missing-root-{}-{}",
@@ -384,7 +385,86 @@ fn import_write_respects_force_flag() {
         .expect("error string")
         .contains("already exists"));
 
+    let response = call_tool(
+        "dotrepo.import_write",
+        json!({
+            "root": root.display().to_string(), "mode": "native", "force": true,
+        }),
+    );
+    assert_ne!(response["result"]["isError"], true, "{response}");
+    assert!(
+        validate_repository(&root).valid,
+        "forced import writes a valid manifest"
+    );
+    assert_ne!(
+        fs::read_to_string(root.join(".repo")).expect("imported manifest"),
+        "preexisting\n"
+    );
+
     fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
+}
+
+#[cfg(unix)]
+#[test]
+fn forced_import_write_rejects_workspace_symlinks_without_absolute_root_override() {
+    use std::os::unix::fs::symlink;
+
+    let _cwd_guard = cwd_test_lock().lock().expect("cwd test lock");
+    let _env_guard = env_test_lock().lock().expect("env test lock");
+    let previous_cwd = std::env::current_dir().expect("cwd available");
+    let previous_override = std::env::var_os("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT");
+    // SAFETY: all tests that mutate this flag hold the shared environment lock.
+    unsafe {
+        std::env::remove_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT");
+    }
+    let mut responses = Vec::new();
+    let root = temp_dir("force-symlink");
+    let external = root.join("outside");
+    fs::write(&external, "outside sentinel").expect("sentinel written");
+    for (name, mode) in [
+        (".repo", "native"),
+        ("record.toml", "overlay"),
+        ("evidence.md", "overlay"),
+    ] {
+        let workspace = root.join(name.trim_start_matches('.'));
+        fs::create_dir(&workspace).expect("workspace created");
+        fs::write(
+            workspace.join("README.md"),
+            "# Example\n\nImported description.\n",
+        )
+        .expect("README written");
+        symlink(&external, workspace.join(name)).expect("external output symlink");
+        std::env::set_current_dir(&workspace).expect("workspace cwd set");
+        let (mut state, _) = initialized_state();
+        let response = handle_request(&mut state, request(2, "tools/call", json!({
+            "name": "dotrepo.import_write",
+            "arguments": {"root": ".", "mode": mode, "source": "https://github.com/example/project", "force": true}
+        }))).expect("tool response");
+        responses.push(response);
+    }
+    std::env::set_current_dir(previous_cwd).expect("cwd restored");
+    // SAFETY: shared environment lock is still held.
+    unsafe {
+        if let Some(value) = previous_override {
+            std::env::set_var("DOTREPO_MCP_ALLOW_ABSOLUTE_ROOT", value);
+        }
+    }
+    for response in responses {
+        assert_eq!(response["result"]["isError"], true);
+        assert!(response["result"]["structuredContent"]["error"]
+            .as_str()
+            .expect("error text")
+            .contains("regular file"));
+    }
+    assert_eq!(
+        fs::read_to_string(external).expect("sentinel retained"),
+        "outside sentinel"
+    );
+    assert!(
+        !root.join("evidence.md/record.toml").exists(),
+        "overlay manifest was not partially written"
+    );
+    fs::remove_dir_all(root).expect("temp directory removed");
 }
 
 #[test]
@@ -627,16 +707,8 @@ fn import_preview_tool_matches_core_report() {
     fs::remove_dir_all(root).unwrap_or_else(|e| panic!("temp dir removed: {e}"));
 }
 
-#[test]
-fn lookup_tool_fetches_hosted_summary_trust_and_query() {
-    let _env_guard = env_test_lock().lock().expect("env test lock");
-    // SAFETY: test-only env flags for the local mock HTTP server.
-    unsafe {
-        std::env::set_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL", "1");
-        std::env::set_var("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL", "1");
-    }
-
-    let routes = vec![
+fn lookup_test_routes() -> Vec<(&'static str, Value)> {
+    vec![
         (
             "/v0/meta.json",
             json!({
@@ -763,7 +835,19 @@ fn lookup_tool_fetches_hosted_summary_trust_and_query() {
                 },
             }),
         ),
-    ];
+    ]
+}
+
+#[test]
+fn lookup_tool_fetches_hosted_summary_trust_and_query() {
+    let _env_guard = env_test_lock().lock().expect("env test lock");
+    // SAFETY: test-only env flags for the local mock HTTP server.
+    unsafe {
+        std::env::set_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL", "1");
+        std::env::set_var("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL", "1");
+    }
+
+    let routes = lookup_test_routes();
     let (_server, base_url) = start_json_server(routes);
 
     let response = call_tool_unlocked(
@@ -803,6 +887,111 @@ fn lookup_tool_fetches_hosted_summary_trust_and_query() {
         structured["links"]["inventory"],
         Value::String(format!("{base_url}/v0/snapshots/abc123/repos/index.json"))
     );
+}
+
+#[test]
+fn lookup_tool_rejects_inconsistent_snapshots_identities_and_query_paths() {
+    let _env_guard = env_test_lock().lock().expect("env test lock");
+    // SAFETY: test-only flags are protected by the shared environment lock.
+    unsafe {
+        std::env::set_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL", "1");
+        std::env::set_var("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL", "1");
+    }
+    for (route, pointer, value, error) in [
+        (
+            1,
+            "/freshness/snapshotDigest",
+            "other-snapshot",
+            "snapshotDigest",
+        ),
+        (
+            2,
+            "/freshness/snapshotDigest",
+            "other-snapshot",
+            "snapshotDigest",
+        ),
+        (
+            3,
+            "/freshness/snapshotDigest",
+            "other-snapshot",
+            "snapshotDigest",
+        ),
+        (1, "/identity/repo", "another-repository", "identity"),
+        (2, "/identity/owner", "another-owner", "identity"),
+        (3, "/identity/host", "another-host.example", "identity"),
+        (3, "/path", "repo.build", "query path"),
+    ] {
+        let mut routes = lookup_test_routes();
+        *routes[route].1.pointer_mut(pointer).expect("fixture field") = json!(value);
+        let (_server, base_url) = start_json_server(routes);
+        let response = call_tool_unlocked(
+            "dotrepo.lookup",
+            json!({
+                "repositoryUrl": "https://github.com/example/orbit",
+                "path": "repo.description",
+                "baseUrl": base_url,
+            }),
+        );
+        assert_eq!(response["result"]["isError"], true, "{route}: {pointer}");
+        assert!(
+            response["result"]["structuredContent"]["error"]
+                .as_str()
+                .expect("error text")
+                .contains(error),
+            "{response}"
+        );
+    }
+}
+
+#[test]
+fn lookup_tool_retries_whole_lookup_when_a_deployment_advances() {
+    let _env_guard = env_test_lock().lock().expect("env test lock");
+    // SAFETY: test-only flags are protected by the shared environment lock.
+    unsafe {
+        std::env::set_var("DOTREPO_MCP_ALLOW_CUSTOM_BASE_URL", "1");
+        std::env::set_var("DOTREPO_MCP_UNSAFE_ALLOW_LOCAL_BASE_URL", "1");
+    }
+    let routes = lookup_test_routes();
+    let mut meta_requests = 0;
+    let (_server, base_url) = start_json_server_with_responses(move |path| {
+        if path == "/v0/meta.json" {
+            meta_requests += 1;
+        }
+        let canonical = path.replace("/def456/", "/abc123/");
+        let mut response = routes
+            .iter()
+            .find(|(route, _)| *route == canonical)
+            .map(|(_, body)| body.clone())?;
+        if meta_requests > 1 || path.contains("/query?") {
+            // The mutable query has advanced, but first-attempt summary/trust
+            // remain on their captured immutable URLs.
+            response = serde_json::from_str(
+                &serde_json::to_string(&response)
+                    .expect("JSON")
+                    .replace("abc123", "def456"),
+            )
+            .expect("JSON");
+        }
+        Some(response)
+    });
+    let response = call_tool_unlocked(
+        "dotrepo.lookup",
+        json!({
+            "repositoryUrl": "https://github.com/example/orbit",
+            "path": "repo.description",
+            "baseUrl": base_url,
+        }),
+    );
+    assert_ne!(response["result"]["isError"], true, "{response}");
+    let structured = &response["result"]["structuredContent"];
+    assert_eq!(structured["snapshot"]["snapshotDigest"], "def456");
+    for payload in ["summary", "trust", "query"] {
+        assert_eq!(structured[payload]["freshness"]["snapshotDigest"], "def456");
+    }
+    assert!(structured["links"]["summary"]
+        .as_str()
+        .expect("summary URL")
+        .contains("/def456/"));
 }
 
 #[test]
@@ -975,6 +1164,17 @@ impl Drop for TestServer {
 }
 
 fn start_json_server(routes: Vec<(&'static str, Value)>) -> (TestServer, String) {
+    start_json_server_with_responses(move |path| {
+        routes
+            .iter()
+            .find(|(route, _)| *route == path)
+            .map(|(_, body)| body.clone())
+    })
+}
+
+fn start_json_server_with_responses(
+    mut response_for_path: impl FnMut(&str) -> Option<Value> + Send + 'static,
+) -> (TestServer, String) {
     let listener = TcpListener::bind("127.0.0.1:0").expect("listener binds");
     listener
         .set_nonblocking(true)
@@ -982,19 +1182,8 @@ fn start_json_server(routes: Vec<(&'static str, Value)>) -> (TestServer, String)
     let address = listener.local_addr().expect("listener address");
     let shutdown = Arc::new(AtomicBool::new(false));
     let thread_shutdown = Arc::clone(&shutdown);
-    let routes = routes
-        .into_iter()
-        .map(|(path, body)| {
-            (
-                path.to_string(),
-                serde_json::to_string(&body).expect("route JSON serializes"),
-            )
-        })
-        .collect::<Vec<_>>();
-    let expected_requests = routes.len();
     let handle = thread::spawn(move || {
-        let mut handled_requests = 0;
-        while handled_requests < expected_requests && !thread_shutdown.load(Ordering::Relaxed) {
+        while !thread_shutdown.load(Ordering::Relaxed) {
             let (mut stream, _) = match listener.accept() {
                 Ok(accepted) => accepted,
                 Err(err) if err.kind() == std::io::ErrorKind::WouldBlock => {
@@ -1006,7 +1195,6 @@ fn start_json_server(routes: Vec<(&'static str, Value)>) -> (TestServer, String)
             stream
                 .set_nonblocking(false)
                 .expect("accepted stream can block for reads");
-            handled_requests += 1;
             let mut buffer = [0_u8; 4096];
             let mut bytes_read = 0;
             let read_deadline = Duration::from_secs(5);
@@ -1031,10 +1219,8 @@ fn start_json_server(routes: Vec<(&'static str, Value)>) -> (TestServer, String)
                 .nth(1)
                 .expect("request path")
                 .to_string();
-            let body = routes
-                .iter()
-                .find(|(candidate, _)| *candidate == path)
-                .map(|(_, body)| body.clone());
+            let body = response_for_path(&path)
+                .map(|body| serde_json::to_string(&body).expect("route JSON serializes"));
             let (status_line, response_body) = if let Some(body) = body {
                 ("HTTP/1.1 200 OK", body)
             } else {

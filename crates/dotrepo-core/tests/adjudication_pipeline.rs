@@ -154,6 +154,74 @@ fn post_check_rejects_out_of_candidate_value() {
 }
 
 #[test]
+fn post_check_rejects_response_for_another_field_including_abstention() {
+    let request = AdjudicationRequest {
+        field: "repo.build".into(),
+        candidates: vec![AdjudicationCandidate {
+            value: "cargo build".into(),
+            source_path: "Cargo.toml".into(),
+            source_tier: CommandSourceTier::Manifest,
+        }],
+    };
+
+    for value in [Some("cargo build".into()), None] {
+        let response = AdjudicationModelResponse {
+            field: "repo.test".into(),
+            value,
+            confidence: AdjudicationModelConfidence::High,
+            reason: "response for the wrong request".into(),
+            source: None,
+        };
+
+        let result = apply_adjudication_response(&response, &request);
+        assert_eq!(result.field, "repo.build");
+        match result.outcome {
+            AdjudicationOutcome::Rejected { reason, .. } => {
+                assert!(reason.contains("repo.test"));
+                assert!(reason.contains("repo.build"));
+            }
+            other => panic!("expected Rejected, got {other:?}"),
+        }
+    }
+}
+
+#[test]
+fn post_check_requires_cited_source_to_support_selected_value() {
+    let request = AdjudicationRequest {
+        field: "repo.build".into(),
+        candidates: vec![
+            AdjudicationCandidate {
+                value: "cargo build --workspace".into(),
+                source_path: ".github/workflows/check.yml".into(),
+                source_tier: CommandSourceTier::Workflow,
+            },
+            AdjudicationCandidate {
+                value: "cargo build".into(),
+                source_path: ".github/workflows/release.yml".into(),
+                source_tier: CommandSourceTier::Workflow,
+            },
+        ],
+    };
+
+    for source in ["Cargo.toml", ".github/workflows/release.yml"] {
+        let response = AdjudicationModelResponse {
+            field: request.field.clone(),
+            value: Some("cargo build --workspace".into()),
+            confidence: AdjudicationModelConfidence::High,
+            reason: "incorrect source attribution".into(),
+            source: Some(source.into()),
+        };
+
+        let result = apply_adjudication_response(&response, &request);
+        assert_eq!(result.field, request.field);
+        assert!(matches!(
+            result.outcome,
+            AdjudicationOutcome::Rejected { .. }
+        ));
+    }
+}
+
+#[test]
 fn post_check_maps_null_to_absent() {
     let request = AdjudicationRequest {
         field: "repo.build".into(),

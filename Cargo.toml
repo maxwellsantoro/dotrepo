@@ -26,6 +26,7 @@ homepage = "https://dotrepo.org/"
 [workspace.dependencies]
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
+libc = "0.2"
 rayon = "1"
 dotrepo-core = { version = "2.0.0-alpha.0", path = "crates/dotrepo-core" }
 dotrepo-schema = { version = "2.0.0-alpha.0", path = "crates/dotrepo-schema" }
@@ -38,3 +39,4 @@ sha2 = "0.11"
 time = { version = "0.3", features = ["formatting", "parsing"] }
 toml = "0.8"
 thiserror = "2"
+windows-sys = "0.61"

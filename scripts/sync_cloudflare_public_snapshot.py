@@ -43,30 +43,44 @@ def copy_snapshot(root: Path, snapshot: str, destination: Path) -> None:
 
 
 def merge_snapshot_logs(input_dir: Path, previous_dir: Path | None, output_dir: Path) -> None:
-    merged: dict[str, dict] = {}
-    for root in [previous_dir, input_dir]:
-        if root is None:
-            continue
-        log = load_json(root / "v0/snapshots/log.json")
-        for entry in log.get("entries", []):
-            digest = entry.get("snapshotId") or entry.get("snapshotDigest")
-            if isinstance(digest, str) and digest:
-                merged[digest] = entry
-    entries = sorted(
-        merged.values(),
-        key=lambda entry: (entry.get("generatedAt", ""), entry.get("snapshotDigest", "")),
-    )
-    if not entries:
+    logs = [
+        load_json(root / "v0/snapshots/log.json")
+        for root in [previous_dir, input_dir]
+        if root is not None
+    ]
+    output_log = merge_log_documents(*logs)
+    if not output_log["entries"]:
         return
-    output_log = {
-        "apiVersion": "v0",
-        "snapshotCount": len(entries),
-        "entries": entries,
-    }
     path = output_dir / "v0/snapshots/log.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(output_log, indent=2, sort_keys=False) + "\n", encoding="utf-8")
     write_stats(output_dir, output_log, load_json(input_dir / "v0/stats.json").get("pagedigest"))
+
+
+def merge_log_documents(*logs: dict) -> dict:
+    """Union history without silently replacing an already published entry."""
+    merged: dict[str, dict] = {}
+    for log in logs:
+        if not isinstance(log, dict) or not isinstance(log.get("entries", []), list):
+            raise ValueError("snapshot log must be an object with an entries array")
+        for entry in log.get("entries", []):
+            if not isinstance(entry, dict):
+                raise ValueError("snapshot log entries must be objects")
+            digest = entry.get("snapshotId") or entry.get("snapshotDigest")
+            if not isinstance(digest, str) or not digest:
+                raise ValueError("snapshot log entry is missing snapshotId")
+            if digest in merged and merged[digest] != entry:
+                raise ValueError(f"snapshot log changes an already published entry: {digest}")
+            merged[digest] = entry
+    entries = sorted(
+        merged.values(),
+        key=lambda entry: (entry.get("generatedAt", ""), entry.get("snapshotDigest", "")),
+    )
+    return {
+        "apiVersion": "v0",
+        "snapshotCount": len(entries),
+        "entries": entries,
+    }
 
 
 def write_stats(output_dir: Path, log: dict, pagedigest: dict | None = None) -> None:

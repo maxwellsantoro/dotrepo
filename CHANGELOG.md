@@ -15,6 +15,21 @@ growth, coverage, promotion, and telemetry artifacts.
 
 ### Trust, export, and crawler correctness
 
+- Reject symlink and shared-hardlink targets during forced import writes, verify
+  every output before overwriting, and preserve existing ownership and ACLs.
+- Bind model adjudication to its requested field and grounded source/value pair;
+  count failed and timed-out provider attempts against the escalation budget.
+- Restore deployed public snapshots and append-only history before clean CI
+  exports, merge archive history, and publish archive logs after payload uploads.
+- Check snapshot, repository, and query-path coherence in MCP lookup and retry
+  the complete lookup when deployment advances. Resolve GitHub identity casing
+  through the relevant snapshot inventory across hosted repository routes.
+- Cache selected repository records and reverse relationships once per public
+  export, preserving existing serialized output while avoiding repeated scans.
+- Insert LSP homepage quick fixes at actual TOML table boundaries, including
+  dotted and inline repo tables, nested toolchains, and multiline values.
+- Refresh the standalone alias lockfile and enforce locked dependency checks in CI.
+
 - Withhold component-scoped and incomplete imported commands as repository
   defaults, retain explicit uncertainty in affected overlays, and add consumer
   fallback tests for placeholders, continuations, scope, and setup-only steps.

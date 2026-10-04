@@ -289,17 +289,72 @@ async function currentSnapshotAssetPath(env, request, suffix, legacyPath) {
   return snapshotAssetPath(meta, suffix, legacyPath);
 }
 
+// GitHub identities are case insensitive. Resolve a missing spelling against
+// the inventory from the same immutable snapshot, keeping its published casing.
+// Cache per asset binding and snapshot so batch lookups only read it once.
+const githubIdentityCaches = new WeakMap();
+
+async function canonicalGitHubIdentity(env, request, identity, meta) {
+  if (identity.host.toLowerCase() !== "github.com") return identity;
+  const inventoryPath = snapshotAssetPath(meta, "/repos/index.json", "/v0/repos/index.json");
+  let snapshots = githubIdentityCaches.get(env.ASSETS);
+  if (snapshots === undefined) {
+    snapshots = new Map();
+    githubIdentityCaches.set(env.ASSETS, snapshots);
+  }
+  let pending = snapshots.get(inventoryPath);
+  if (pending === undefined) {
+    pending = (async () => {
+      const response = await fetchSnapshotAssetOrArchive(env, request, inventoryPath);
+      const identities = new Map();
+      if (response.status === 404) return identities;
+      if (!response.ok) throw new Error(`failed to load repository inventory: ${response.status}`);
+      const inventory = await response.json();
+      for (const entry of inventory.repositories ?? []) {
+        const candidate = entry.identity;
+        if (candidate?.host?.toLowerCase() !== "github.com") continue;
+        validateRepositoryIdentity(candidate.host, candidate.owner, candidate.repo);
+        const key = `${candidate.owner}/${candidate.repo}`.toLowerCase();
+        if (!identities.has(key)) identities.set(key, candidate);
+      }
+      return identities;
+    })();
+    snapshots.set(inventoryPath, pending);
+    if (snapshots.size > 4) snapshots.delete(snapshots.keys().next().value);
+  }
+  try {
+    const identities = await pending;
+    return identities.get(`${identity.owner}/${identity.repo}`.toLowerCase()) ?? identity;
+  } catch (error) {
+    snapshots.delete(inventoryPath);
+    throw error;
+  }
+}
+
+async function fetchRepositorySnapshotAsset(env, request, identity, meta, surface) {
+  function assetPath(candidate) {
+    const repository = [candidate.host, candidate.owner, candidate.repo]
+      .map(encodeURIComponent).join("/");
+    const suffix = surface === "query-input"
+      ? `/query-input/${repository}.json`
+      : `/repos/${repository}/${surface}`;
+    const legacy = surface === "query-input" ? suffix : `/v0${suffix}`;
+    return snapshotAssetPath(meta, suffix, legacy);
+  }
+  const pathname = assetPath(identity);
+  const response = await fetchSnapshotAssetOrArchive(env, request, pathname);
+  if (response.status !== 404) return response;
+  const canonical = await canonicalGitHubIdentity(env, request, identity, meta);
+  const canonicalPath = assetPath(canonical);
+  return canonicalPath === pathname
+    ? response
+    : fetchSnapshotAssetOrArchive(env, request, canonicalPath);
+}
+
 async function loadQueryInputSnapshot(env, request, host, owner, repo) {
-  const pathname = await currentSnapshotAssetPath(
-    env,
-    request,
-    `/query-input/${host}/${owner}/${repo}.json`,
-    `/query-input/${host}/${owner}/${repo}.json`
-  );
-  const response = await fetchInternalAsset(
-    env,
-    request,
-    pathname
+  const meta = await loadMeta(env, request);
+  const response = await fetchRepositorySnapshotAsset(
+    env, request, { host, owner, repo }, meta, "query-input"
   );
   if (response.status === 404) {
     return null;
@@ -313,15 +368,8 @@ async function loadQueryInputSnapshot(env, request, host, owner, repo) {
 }
 
 async function loadProfileSnapshot(env, request, host, owner, repo, meta) {
-  const pathname = snapshotAssetPath(
-    meta ?? await loadMeta(env, request),
-    `/repos/${host}/${owner}/${repo}/profile.json`,
-    `/v0/repos/${host}/${owner}/${repo}/profile.json`
-  );
-  const response = await fetchInternalAsset(
-    env,
-    request,
-    pathname
+  const response = await fetchRepositorySnapshotAsset(
+    env, request, { host, owner, repo }, meta ?? await loadMeta(env, request), "profile.json"
   );
   if (response.status === 404) {
     return null;
@@ -335,16 +383,9 @@ async function loadProfileSnapshot(env, request, host, owner, repo, meta) {
 }
 
 async function loadRelationsSnapshot(env, request, host, owner, repo) {
-  const pathname = await currentSnapshotAssetPath(
-    env,
-    request,
-    `/repos/${host}/${owner}/${repo}/relations.json`,
-    `/v0/repos/${host}/${owner}/${repo}/relations.json`
-  );
-  const response = await fetchInternalAsset(
-    env,
-    request,
-    pathname
+  const meta = await loadMeta(env, request);
+  const response = await fetchRepositorySnapshotAsset(
+    env, request, { host, owner, repo }, meta, "relations.json"
   );
   if (response.status === 404) {
     return null;
@@ -1119,6 +1160,16 @@ export function parseStaticRepositoryAssetPath(pathname) {
 async function serveStaticAsset(request, env, strippedPath) {
   let assetPath = strippedPath === "/" ? "/" : strippedPath;
   let cacheControl = null;
+  let repositoryResponse = null;
+  async function fetchRepositorySurface(pathname, meta) {
+    const parsed = parseStaticRepositoryAssetPath(pathname);
+    if (parsed === null) return null;
+    const identity = decodeRepositoryIdentity(parsed.identity);
+    validateRepositoryIdentity(identity.host, identity.owner, identity.repo);
+    return fetchRepositorySnapshotAsset(
+      env, request, identity, meta, pathname.slice(pathname.lastIndexOf("/") + 1)
+    );
+  }
   if (strippedPath === "/v0/meta.json") {
     cacheControl = "public, max-age=60, must-revalidate";
   } else if (strippedPath === "/v0/stats.json" || strippedPath === "/v0/snapshots/log.json") {
@@ -1133,6 +1184,7 @@ async function serveStaticAsset(request, env, strippedPath) {
           : strippedPath.slice("/v0".length),
         strippedPath
       );
+      repositoryResponse = await fetchRepositorySurface(strippedPath, meta);
     } catch {
       // Legacy and local fixture exports may not yet have a pointer. Serving
       // their thin mutable copy preserves compatibility during migration.
@@ -1141,11 +1193,21 @@ async function serveStaticAsset(request, env, strippedPath) {
     cacheControl = "no-cache";
   } else if (strippedPath.startsWith("/v0/snapshots/")) {
     cacheControl = "public, max-age=31536000, immutable";
+    const snapshotRepository = /^\/v0\/snapshots\/([^/]+)(\/repos\/.*)$/.exec(strippedPath);
+    if (snapshotRepository !== null) {
+      try {
+        repositoryResponse = await fetchRepositorySurface(`/v0${snapshotRepository[2]}`, {
+          paths: { root: `/v0/snapshots/${snapshotRepository[1]}` }
+        });
+      } catch {
+        // Invalid identity segments retain normal static asset handling.
+      }
+    }
   }
   const assetRequest = new Request(new URL(assetPath, request.url), request);
-  const response = assetPath.startsWith("/v0/snapshots/")
+  const response = repositoryResponse ?? (assetPath.startsWith("/v0/snapshots/")
     ? await fetchSnapshotAssetOrArchive(env, assetRequest, assetPath)
-    : await env.ASSETS.fetch(assetRequest);
+    : await env.ASSETS.fetch(assetRequest));
 
   // Static export 404s for published per-repository leaves are a primary
   // agent lookup path. Emit the same demand signal used by dynamic query

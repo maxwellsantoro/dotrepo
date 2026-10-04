@@ -9,8 +9,8 @@
 use crate::lookup::{
     allow_custom_lookup_base_url, build_remote_lookup_client, fetch_remote_json,
     normalize_public_base_url, remote_public_root, remote_query_url, remote_repository_url,
-    resolve_lookup_target, resolve_same_origin_path_url, ALLOWED_LOOKUP_BASE_URLS,
-    DEFAULT_PUBLIC_BASE_URL,
+    resolve_lookup_target, resolve_same_origin_path_url, validate_lookup_snapshot,
+    ALLOWED_LOOKUP_BASE_URLS, DEFAULT_PUBLIC_BASE_URL,
 };
 use anyhow::{anyhow, bail, Result};
 use dotrepo_core::{
@@ -69,111 +69,125 @@ pub(crate) fn tool_lookup(arguments: Value) -> Result<(String, Value)> {
     let base_url = normalize_public_base_url(&base_url)?;
     let client = build_remote_lookup_client(&base_url)?;
 
-    let snapshot_url = format!("{}/v0/meta.json", remote_public_root(&base_url));
-    let snapshot = fetch_remote_json(&client, &snapshot_url)?;
-    let snapshot_root = snapshot
-        .pointer("/paths/root")
-        .and_then(Value::as_str)
-        .and_then(|path| {
-            // Reject host-escaping paths before join; invalid roots fall back to defaults.
-            resolve_same_origin_path_url(&base_url, path)
-                .ok()
-                .map(|_| path.trim_end_matches('/').to_string())
+    // A deployment can advance while the mutable query endpoint is fetched.
+    // Retry the whole lookup once so every returned payload uses one snapshot.
+    for attempt in 0..2 {
+        let snapshot_url = format!("{}/v0/meta.json", remote_public_root(&base_url));
+        let snapshot = fetch_remote_json(&client, &snapshot_url)?;
+        let snapshot_root = snapshot
+            .pointer("/paths/root")
+            .and_then(Value::as_str)
+            .and_then(|path| {
+                // Reject host-escaping paths before join; invalid roots fall back to defaults.
+                resolve_same_origin_path_url(&base_url, path)
+                    .ok()
+                    .map(|_| path.trim_end_matches('/').to_string())
+            });
+        let summary_url = match snapshot_root.as_deref() {
+            Some(root) => resolve_same_origin_path_url(
+                &base_url,
+                &format!(
+                    "{}/repos/{}/{}/{}/index.json",
+                    root, target.host, target.owner, target.repo
+                ),
+            )
+            .map_err(|err| anyhow!("remote snapshot root is not a valid URL path: {}", err))?,
+            None => remote_repository_url(
+                &base_url,
+                &target.host,
+                &target.owner,
+                &target.repo,
+                "index.json",
+            ),
+        };
+        let trust_url = match snapshot_root.as_deref() {
+            Some(root) => resolve_same_origin_path_url(
+                &base_url,
+                &format!(
+                    "{}/repos/{}/{}/{}/trust.json",
+                    root, target.host, target.owner, target.repo
+                ),
+            )
+            .map_err(|err| anyhow!("remote snapshot root is not a valid URL path: {}", err))?,
+            None => remote_repository_url(
+                &base_url,
+                &target.host,
+                &target.owner,
+                &target.repo,
+                "trust.json",
+            ),
+        };
+        let inventory_url = snapshot
+            .pointer("/paths/inventory")
+            .and_then(Value::as_str)
+            .and_then(|path| resolve_same_origin_path_url(&base_url, path).ok())
+            .unwrap_or_else(|| format!("{}/v0/repos/index.json", remote_public_root(&base_url)));
+
+        let summary = fetch_remote_json(&client, &summary_url)?;
+        let trust = fetch_remote_json(&client, &trust_url)?;
+        let query_template = summary
+            .get("links")
+            .and_then(|links| links.get("queryTemplate"))
+            .and_then(Value::as_str)
+            .map(str::to_string)
+            .ok_or_else(|| anyhow!("remote lookup summary is missing links.queryTemplate"))?;
+
+        let query = if let Some(path) = target.path.as_deref() {
+            let query_url =
+                remote_query_url(&base_url, &target.host, &target.owner, &target.repo, path)?;
+            Some(fetch_remote_json(&client, query_url.as_str())?)
+        } else {
+            None
+        };
+
+        if let Err(err) =
+            validate_lookup_snapshot(&snapshot, &summary, &trust, query.as_ref(), &target)
+        {
+            if attempt == 0 {
+                continue;
+            }
+            return Err(err);
+        }
+
+        let custom_base_url = allow_custom_lookup_base_url()
+            && !ALLOWED_LOOKUP_BASE_URLS
+                .iter()
+                .any(|allowed| base_url.eq_ignore_ascii_case(allowed));
+
+        let structured = json!({
+            "baseUrl": remote_public_root(&base_url),
+            "customBaseUrl": custom_base_url,
+            "identity": {
+                "host": target.host,
+                "owner": target.owner,
+                "repo": target.repo,
+            },
+            "lookup": {
+                "source": target.source,
+                "repositoryUrl": target.repository_url,
+                "requestedPath": target.path,
+            },
+            "links": {
+                "snapshot": snapshot_url,
+                "inventory": inventory_url,
+                "summary": summary_url,
+                "trust": trust_url,
+                "queryTemplate": query_template,
+            },
+            "snapshot": snapshot,
+            "summary": summary,
+            "trust": trust,
+            "query": query,
         });
-    let summary_url = match snapshot_root.as_deref() {
-        Some(root) => resolve_same_origin_path_url(
-            &base_url,
-            &format!(
-                "{}/repos/{}/{}/{}/index.json",
-                root, target.host, target.owner, target.repo
+        return Ok((
+            format!(
+                "resolved hosted lookup for {}/{}/{}",
+                target.host, target.owner, target.repo
             ),
-        )
-        .map_err(|err| anyhow!("remote snapshot root is not a valid URL path: {}", err))?,
-        None => remote_repository_url(
-            &base_url,
-            &target.host,
-            &target.owner,
-            &target.repo,
-            "index.json",
-        ),
-    };
-    let trust_url = match snapshot_root.as_deref() {
-        Some(root) => resolve_same_origin_path_url(
-            &base_url,
-            &format!(
-                "{}/repos/{}/{}/{}/trust.json",
-                root, target.host, target.owner, target.repo
-            ),
-        )
-        .map_err(|err| anyhow!("remote snapshot root is not a valid URL path: {}", err))?,
-        None => remote_repository_url(
-            &base_url,
-            &target.host,
-            &target.owner,
-            &target.repo,
-            "trust.json",
-        ),
-    };
-    let inventory_url = snapshot
-        .pointer("/paths/inventory")
-        .and_then(Value::as_str)
-        .and_then(|path| resolve_same_origin_path_url(&base_url, path).ok())
-        .unwrap_or_else(|| format!("{}/v0/repos/index.json", remote_public_root(&base_url)));
-
-    let summary = fetch_remote_json(&client, &summary_url)?;
-    let trust = fetch_remote_json(&client, &trust_url)?;
-    let query_template = summary
-        .get("links")
-        .and_then(|links| links.get("queryTemplate"))
-        .and_then(Value::as_str)
-        .map(str::to_string)
-        .ok_or_else(|| anyhow!("remote lookup summary is missing links.queryTemplate"))?;
-
-    let query = if let Some(path) = target.path.as_deref() {
-        let query_url =
-            remote_query_url(&base_url, &target.host, &target.owner, &target.repo, path)?;
-        Some(fetch_remote_json(&client, query_url.as_str())?)
-    } else {
-        None
-    };
-
-    let custom_base_url = allow_custom_lookup_base_url()
-        && !ALLOWED_LOOKUP_BASE_URLS
-            .iter()
-            .any(|allowed| base_url.eq_ignore_ascii_case(allowed));
-
-    let structured = json!({
-        "baseUrl": remote_public_root(&base_url),
-        "customBaseUrl": custom_base_url,
-        "identity": {
-            "host": target.host,
-            "owner": target.owner,
-            "repo": target.repo,
-        },
-        "lookup": {
-            "source": target.source,
-            "repositoryUrl": target.repository_url,
-            "requestedPath": target.path,
-        },
-        "links": {
-            "snapshot": snapshot_url,
-            "inventory": inventory_url,
-            "summary": summary_url,
-            "trust": trust_url,
-            "queryTemplate": query_template,
-        },
-        "snapshot": snapshot,
-        "summary": summary,
-        "trust": trust,
-        "query": query,
-    });
-    Ok((
-        format!(
-            "resolved hosted lookup for {}/{}/{}",
-            target.host, target.owner, target.repo
-        ),
-        structured,
-    ))
+            structured,
+        ));
+    }
+    unreachable!("the final lookup attempt returns a result")
 }
 
 pub(crate) fn tool_claim_inspect(arguments: Value) -> Result<(String, Value)> {

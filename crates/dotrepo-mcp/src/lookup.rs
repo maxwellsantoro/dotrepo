@@ -379,6 +379,61 @@ pub(crate) fn remote_public_root(base_url: &str) -> String {
     base_url.trim_end_matches('/').to_string()
 }
 
+pub(crate) fn validate_lookup_snapshot(
+    snapshot: &Value,
+    summary: &Value,
+    trust: &Value,
+    query: Option<&Value>,
+    target: &LookupTarget,
+) -> Result<()> {
+    let digest = snapshot
+        .get("snapshotDigest")
+        .and_then(Value::as_str)
+        .filter(|value| !value.is_empty())
+        .ok_or_else(|| anyhow!("remote lookup snapshot is missing snapshotDigest"))?;
+    for (label, payload) in [
+        ("summary", Some(summary)),
+        ("trust", Some(trust)),
+        ("query", query),
+    ] {
+        let Some(payload) = payload else { continue };
+        if payload
+            .pointer("/freshness/snapshotDigest")
+            .and_then(Value::as_str)
+            != Some(digest)
+        {
+            bail!(
+                "remote lookup {label} does not match snapshotDigest {digest}; retry after deployment completes"
+            );
+        }
+        let identity = payload.get("identity");
+        let matches = |field: &str, expected: &str| {
+            identity
+                .and_then(|identity| identity.get(field))
+                .and_then(Value::as_str)
+                .is_some_and(|actual| {
+                    if target.host.eq_ignore_ascii_case("github.com") {
+                        actual.eq_ignore_ascii_case(expected)
+                    } else {
+                        actual == expected
+                    }
+                })
+        };
+        if !matches("host", &target.host)
+            || !matches("owner", &target.owner)
+            || !matches("repo", &target.repo)
+        {
+            bail!("remote lookup {label} identity does not match the requested repository");
+        }
+    }
+    if let Some(query) = query {
+        if query.get("path").and_then(Value::as_str) != target.path.as_deref() {
+            bail!("remote lookup query path does not match the requested path");
+        }
+    }
+    Ok(())
+}
+
 pub(crate) fn remote_repository_url(
     base_url: &str,
     host: &str,

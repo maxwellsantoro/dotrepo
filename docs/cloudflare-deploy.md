@@ -76,6 +76,9 @@ Set these in GitHub repository settings under Variables:
 - `DOTREPO_PUBLIC_BASE_PATH=/`
 
 `DOTREPO_PUBLIC_BASE_PATH` is optional; the workflow now defaults to `/`.
+`DOTREPO_PUBLIC_STATE_BASE_URL` optionally selects the currently deployed HTTPS
+origin used to restore snapshot history; it defaults to `https://dotrepo.org`.
+Set it to the existing `workers.dev` origin when deploying a separate mirror.
 
 ### Repository secrets
 
@@ -95,7 +98,9 @@ automation explicitly dispatches it after its own checked fast-forward because
 
 The workflow in `.github/workflows/public-cloudflare.yml` now:
 
-- builds the validated export snapshot
+- restores the deployed snapshot log and current public payloads before building,
+  including archive history when an R2 bucket is configured
+- builds the validated export snapshot with that history already present
 - stages that snapshot into `cloudflare/hosted-query/public-snapshot`
 - runs Worker tests
 - deploys the Worker with Wrangler
@@ -137,6 +142,27 @@ Worker attempts to read the same key from that binding before returning 404.
 This keeps the hot path fast while avoiding the static-asset file-count ceiling
 for historical snapshots.
 
+Every deployment restores the live metadata, append-only log, and current
+immutable file manifest into the clean runner. It checks public payload byte
+counts and SHA-256 hashes before staging them as the next deployment's previous
+snapshot. Private `query-input` files remain hidden and are not fetched from the
+public origin. The exporter receives the restored log before computing stats,
+so the reviewed export and deployed history remain identical. A missing or
+inconsistent deployed state fails the deployment instead of resetting history.
+
+For a manual deployment, run restoration before `public export`:
+
+```bash
+uv run python scripts/restore_cloudflare_public_state.py \
+  --base-url https://dotrepo.org \
+  --base-path / \
+  --export-root release-gate/public \
+  --staging-root cloudflare/hosted-query/public-snapshot
+```
+
+Initial deployment to an origin with no existing snapshot requires building and
+staging its first export locally. Subsequent CI deployments restore that state.
+
 Bucket creation and binding configuration are operator-owned setup steps:
 
 ```bash
@@ -163,8 +189,12 @@ uv run python scripts/archive_public_snapshot_r2.py \
   --bucket "$DOTREPO_PUBLIC_R2_ARCHIVE_BUCKET"
 ```
 
-Use `--dry-run` locally to inspect the exact `wrangler r2 object put` commands
-before uploading.
+Use `--dry-run` locally to inspect the `wrangler r2 object put` commands before
+uploading. Real uploads first read and merge the existing archive log, reject
+changes to published entries, and upload the log after all payloads succeed.
+The deployment workflow also passes `--require-complete-history`, which aborts
+publication if the reviewed export omitted archive entries. Standalone archive
+uploads preserve remote history even when their local export starts empty.
 
 Archive writes upload immutable snapshot objects under their public path keys,
 for example:

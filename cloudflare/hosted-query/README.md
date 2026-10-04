@@ -40,3 +40,12 @@ For Cloudflare auth and GitHub Actions setup, see
 
 The Worker expects the staged `public-snapshot/` tree to come from the same
 reviewed export snapshot that release review inspected.
+
+CI restores the deployed append-only history and current public snapshot before
+exporting, then stages that snapshot alongside the new export. Public payloads
+are verified against the immutable file manifest during restoration.
+
+GitHub repository routes accept owner, repository, and host casing variations.
+When a spelling misses, the Worker resolves it against the inventory for the
+same immutable snapshot and returns its canonical identity. The inventory is
+cached by snapshot for batch requests. Other hosts retain exact case matching.

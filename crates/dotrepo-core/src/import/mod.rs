@@ -4,7 +4,7 @@ use dotrepo_schema::{
     Relations, Repo, Toolchain, Trust,
 };
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 use crate::record_summary;
 use crate::util::{display_path, display_root, normalize_rfc3339};
@@ -19,6 +19,7 @@ mod inputs;
 mod parsing;
 mod toolchain;
 mod types;
+mod write;
 
 pub use adjudication::{
     AdjudicationProvider, AdjudicationProviderResponse, AdjudicationTier, AdjudicationTierProvider,
@@ -42,6 +43,8 @@ pub use types::{
     ImportMode, ImportOptions, ImportPlan, ImportPreviewReport, ImportedCommandProvenance,
     VerificationCheck, VerificationReport, VerificationSeverity,
 };
+
+pub use write::write_import_outputs;
 
 use commands::sanitize_import_command;
 
@@ -141,14 +144,14 @@ pub fn adopt_overlay_record(root: &Path, overlay_record_path: &Path) -> Result<I
         notes: Some({
             let mut note = match overlay_source {
                 Some(source) => format!(
-                "Bootstrapped from overlay record {} for {}; maintainers should review before claiming canonical authority.",
-                overlay_record_path.display(),
-                source
-            ),
+                    "Bootstrapped from overlay record {} for {}; maintainers should review before claiming canonical authority.",
+                    overlay_record_path.display(),
+                    source
+                ),
                 None => format!(
-                "Bootstrapped from overlay record {}; maintainers should review before claiming canonical authority.",
-                overlay_record_path.display()
-            ),
+                    "Bootstrapped from overlay record {}; maintainers should review before claiming canonical authority.",
+                    overlay_record_path.display()
+                ),
             };
             if omitted_doc_entries > 0 {
                 note.push_str(
@@ -733,76 +736,6 @@ pub fn verify_import_plan(root: &Path, plan: &ImportPlan, source_url: &str) -> V
     }
 }
 
-struct ReservedImportOutput {
-    path: PathBuf,
-    contents: String,
-    file: std::fs::File,
-}
-
-pub fn write_import_outputs(
-    outputs: Vec<(PathBuf, String)>,
-    force: bool,
-    force_hint: &str,
-) -> Result<()> {
-    use std::fs::OpenOptions;
-    use std::io::{ErrorKind, Write};
-
-    if force {
-        for (path, contents) in outputs {
-            if let Some(parent) = path.parent() {
-                fs::create_dir_all(parent)?;
-            }
-            fs::write(path, contents)?;
-        }
-        return Ok(());
-    }
-
-    let mut reserved: Vec<ReservedImportOutput> = Vec::new();
-    for (path, contents) in outputs {
-        if let Some(parent) = path.parent() {
-            fs::create_dir_all(parent)?;
-        }
-
-        let file = match OpenOptions::new().write(true).create_new(true).open(&path) {
-            Ok(file) => file,
-            Err(err) => {
-                for reserved in reserved {
-                    let _ = fs::remove_file(reserved.path);
-                }
-                return Err(match err.kind() {
-                    ErrorKind::AlreadyExists => anyhow::anyhow!(
-                        "{} already exists; rerun with {} to overwrite imported artifacts",
-                        path.display(),
-                        force_hint
-                    ),
-                    _ => err.into(),
-                });
-            }
-        };
-
-        reserved.push(ReservedImportOutput {
-            path,
-            contents,
-            file,
-        });
-    }
-
-    for output in &mut reserved {
-        if let Err(err) = output
-            .file
-            .write_all(output.contents.as_bytes())
-            .and_then(|_| output.file.flush())
-        {
-            for item in &reserved {
-                let _ = fs::remove_file(&item.path);
-            }
-            return Err(err.into());
-        }
-    }
-
-    Ok(())
-}
-
 pub(super) fn push_unique(values: &mut Vec<String>, value: String) {
     if !values.iter().any(|existing| existing == &value) {
         values.push(value);
@@ -900,59 +833,5 @@ pub(super) fn human_join(values: &[String]) -> String {
                 .join(", ");
             format!("{}, and `{}`", leading, last)
         }
-    }
-}
-
-#[cfg(test)]
-mod write_import_output_tests {
-    use super::write_import_outputs;
-    use std::fs;
-    use std::path::PathBuf;
-
-    fn temp_dir(label: &str) -> PathBuf {
-        let unique = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .expect("clock")
-            .as_nanos();
-        let path = std::env::temp_dir().join(format!("dotrepo-import-write-{label}-{unique}"));
-        fs::create_dir_all(&path).expect("temp dir created");
-        path
-    }
-
-    #[test]
-    fn write_import_outputs_rolls_back_when_second_write_fails() {
-        use std::os::unix::fs::PermissionsExt;
-
-        let root = temp_dir("rollback");
-        let first = root.join("record.toml");
-        let readonly_dir = root.join("readonly_dir");
-        fs::create_dir(&readonly_dir).expect("readonly dir created");
-        let mut permissions = fs::metadata(&readonly_dir)
-            .expect("readonly dir metadata")
-            .permissions();
-        permissions.set_mode(0o555);
-        fs::set_permissions(&readonly_dir, permissions).expect("readonly dir permissions set");
-
-        let err = write_import_outputs(
-            vec![
-                (first.clone(), "manifest\n".into()),
-                (readonly_dir.join("evidence.md"), "evidence\n".into()),
-            ],
-            false,
-            "--force",
-        )
-        .expect_err("second write should fail");
-
-        assert!(
-            !first.exists(),
-            "partial manifest should be rolled back: {err}"
-        );
-
-        let mut permissions = fs::metadata(&readonly_dir)
-            .expect("readonly dir metadata")
-            .permissions();
-        permissions.set_mode(0o755);
-        fs::set_permissions(&readonly_dir, permissions).expect("readonly dir permissions reset");
-        fs::remove_dir_all(root).expect("temp dir removed");
     }
 }

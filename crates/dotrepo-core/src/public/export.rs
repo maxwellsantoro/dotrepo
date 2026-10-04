@@ -6,6 +6,7 @@ use time::{Duration, OffsetDateTime};
 
 use crate::util::{hex_lower, parse_rfc3339, render_rfc3339};
 
+use super::relations::{PublicRelationIndex, RelationRepository};
 use super::*;
 
 pub fn index_snapshot_digest(index_root: &Path) -> Result<String> {
@@ -371,12 +372,50 @@ pub fn export_public_index_static_with_options(
     let mut outputs = Vec::new();
     let identities = list_index_repository_identities(index_root)?;
 
-    // Each repository's exported files are computed in parallel. The per-repo
-    // work is independent -- each reads only its own record and evidence from
-    // disk and shares no mutable state -- so it parallelizes safely. Results are
-    // collected in identity order and emitted serially so the `outputs` vector,
-    // and therefore the derived `files.json` manifest, stays byte-identical to
-    // the serial exporter.
+    struct LoadedRepository {
+        candidates: Vec<CandidateManifest>,
+        profile: PublicResearchProfileResponse,
+    }
+    // Resolve every repository once. Relation traversal shares these selected
+    // records and profiles rather than rereading every peer for every response.
+    let loaded = identities
+        .par_iter()
+        .map(|identity| -> Result<LoadedRepository> {
+            let candidates = resolve_repository_candidates(
+                index_root,
+                &identity.host,
+                &identity.owner,
+                &identity.repo,
+            )?;
+            let profile = public_repository_profile_with_candidates(
+                index_root,
+                &identity.host,
+                &identity.owner,
+                &identity.repo,
+                &candidates,
+                freshness.clone(),
+                base_path,
+            )?;
+            Ok(LoadedRepository {
+                candidates,
+                profile,
+            })
+        })
+        .collect::<Result<Vec<_>>>()?;
+    let relation_repositories = identities
+        .iter()
+        .zip(&loaded)
+        .map(|(identity, repository)| RelationRepository {
+            identity,
+            selected: &repository.candidates[0],
+            profile: &repository.profile,
+        })
+        .collect::<Vec<_>>();
+    let relation_index =
+        PublicRelationIndex::new(index_root, &relation_repositories, &freshness, base_path);
+
+    // Compute files in parallel against the immutable relation index. Results
+    // retain identity order so the payload and files.json stay byte-identical.
     struct ExportedRepository {
         inventory: PublicRepositoryInventoryEntry,
         search_profile: serde_json::Value,
@@ -384,25 +423,22 @@ pub fn export_public_index_static_with_options(
     }
     let per_repo: Vec<ExportedRepository> = identities
         .par_iter()
+        .zip(&loaded)
+        .enumerate()
         .map(
-            |identity| -> Result<ExportedRepository> {
+            |(repository_index, (identity, repository))| -> Result<ExportedRepository> {
                 let repo_base = out_root
                     .join("v0/repos")
                     .join(&identity.host)
                     .join(&identity.owner)
                     .join(&identity.repo);
-                let candidates = resolve_repository_candidates(
-                    index_root,
-                    &identity.host,
-                    &identity.owner,
-                    &identity.repo,
-                )?;
+                let candidates = &repository.candidates;
                 let summary = public_repository_summary_with_candidates(
                     index_root,
                     &identity.host,
                     &identity.owner,
                     &identity.repo,
-                    &candidates,
+                    candidates,
                     freshness.clone(),
                     base_path,
                 )?;
@@ -411,24 +447,14 @@ pub fn export_public_index_static_with_options(
                     &identity.host,
                     &identity.owner,
                     &identity.repo,
-                    &candidates,
+                    candidates,
                     freshness.clone(),
                     base_path,
                 )?;
-                let profile = public_repository_profile_with_candidates(
-                    index_root,
-                    &identity.host,
-                    &identity.owner,
-                    &identity.repo,
-                    &candidates,
-                    freshness.clone(),
-                    base_path,
-                )?;
-                let relations = public_repository_relations_with_base(
-                    index_root,
-                    &identity.host,
-                    &identity.owner,
-                    &identity.repo,
+                let profile = &repository.profile;
+                let relations = relation_index.response(
+                    repository_index,
+                    profile.identity.clone(),
                     freshness.clone(),
                     base_path,
                 )?;
@@ -467,7 +493,7 @@ pub fn export_public_index_static_with_options(
                                 &identity.host,
                                 &identity.owner,
                                 &identity.repo,
-                                &candidates,
+                                candidates,
                                 freshness.clone(),
                             )?,
                         )?,

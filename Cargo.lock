@@ -263,6 +263,7 @@ version = "2.0.0-alpha.0"
 dependencies = [
  "anyhow",
  "dotrepo-schema",
+ "libc",
  "rayon",
  "roxmltree",
  "serde",
@@ -270,6 +271,7 @@ dependencies = [
  "sha2",
  "time",
  "toml",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
