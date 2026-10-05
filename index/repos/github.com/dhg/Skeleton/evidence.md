@@ -9,6 +9,6 @@
 - Constrained repo.description with GitHub repository metadata.
 - Recorded GitHub-only crawl metadata under x.github (default branch, head SHA, stars, archive state, and fork state).
 
-## Auto-promotion
+## Fresh verification
 
-All fields are high-confidence present or high-confidence absent. Record auto-promoted to verified status.
+Prior verified authority was not inherited: this refresh must qualify using its current field scores.

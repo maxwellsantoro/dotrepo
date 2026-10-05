@@ -4,7 +4,7 @@ schema = "dotrepo/v0.1"
 mode = "overlay"
 status = "inferred"
 source = "https://github.com/coqui-ai/TTS"
-generated_at = "2026-09-16T16:22:05.298307Z"
+generated_at = "2026-10-05T06:12:58.524446937Z"
 
 [record.trust]
 confidence = "medium"
@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `Makefile`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
+notes = "Bootstrapped from `README.md`, `pyproject.toml`, and `CONTRIBUTING.md`. Inferred `repo.build` from `pyproject.toml`. Imported `repo.test` from `CONTRIBUTING.md`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Resolved `repo.name` from `GitHub API` after deterministic escalation."
 
 [repo]
 name = "TTS"
@@ -54,26 +54,27 @@ topics = [
 ]
 
 [docs]
-root = "https://tts.readthedocs.io/en/dev/models/xtts.html"
+root = "https://tts.readthedocs.io/en/dev/models/tortoise.html"
 
 [x.dotrepo.field_evidence."docs.getting_started"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
-reason = "no getting started link detected"
+reason = "no unambiguous documentation declaration detected"
 state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."docs.root"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "high"
-method = "unspecified"
-reason = "docs URL present"
+method = "extracted"
+reason = "Explicit documentation link at README.md:9: - 📣 🐸TTS now supports 🐢Tortoise with faster inference. [Docs](https://tts.readthedocs.io/en/dev/models/tortoise.html)"
+source = "README.md"
 state = "present"
-valueJson = '"https://tts.readthedocs.io/en/dev/models/xtts.html"'
+valueJson = '"https://tts.readthedocs.io/en/dev/models/tortoise.html"'
 
 [x.dotrepo.field_evidence."owners.security_contact"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no SECURITY.md or security contact sources found"
@@ -81,7 +82,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."owners.team"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "high"
 method = "not_found_in_inspected_sources"
 reason = "no single clear team in CODEOWNERS"
@@ -89,7 +90,7 @@ state = "not_found"
 valueJson = "null"
 
 [x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "medium"
 method = "inferred"
 reason = "inferred ecosystem default from build-tool metadata"
@@ -98,7 +99,7 @@ state = "present"
 valueJson = '"python -m build"'
 
 [x.dotrepo.field_evidence."repo.description"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "high"
 method = "extracted"
 reason = "constrained by GitHub repository metadata"
@@ -107,7 +108,7 @@ state = "present"
 valueJson = '"🐸💬 - a deep learning toolkit for Text-to-Speech, battle-tested in research and production"'
 
 [x.dotrepo.field_evidence."repo.homepage"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "high"
 method = "unspecified"
 reason = "set and passes quality check"
@@ -115,20 +116,20 @@ state = "present"
 valueJson = '"http://coqui.ai"'
 
 [x.dotrepo.field_evidence."repo.name"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "high"
 method = "extracted"
-reason = "extracted from README heading with post-cleaners"
+reason = "extracted from README title with post-cleaners"
 source = "README.md"
 state = "present"
 valueJson = '"TTS"'
 
 [x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:22:05.298307Z"
+checkedAt = "2026-10-05T06:12:58.524446937Z"
 confidence = "high"
 method = "extracted"
 reason = "from declared repository source"
-source = "Makefile"
+source = "CONTRIBUTING.md"
 state = "present"
 valueJson = '"make test"'
 
@@ -139,4 +140,4 @@ default_branch = "dev"
 fork = false
 head_sha = "dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e"
 html_url = "https://github.com/coqui-ai/TTS"
-stars = 46019
+stars = 46104
