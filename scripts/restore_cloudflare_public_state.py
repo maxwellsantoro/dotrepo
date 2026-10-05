@@ -12,8 +12,8 @@ import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path, PurePosixPath
 from urllib.parse import quote, urlsplit
-from urllib.request import Request, urlopen
 
+from public_deploy_http import fetch_public_bytes
 from archive_public_snapshot_r2 import read_archive_log
 from sync_cloudflare_public_snapshot import merge_log_documents
 
@@ -21,15 +21,7 @@ MAX_ASSET_BYTES = 32 * 1024 * 1024
 
 
 def fetch_bytes(url: str, timeout: float) -> bytes:
-    request = Request(
-        url,
-        headers={"Accept": "application/json", "Cache-Control": "no-cache"},
-    )
-    with urlopen(request, timeout=timeout) as response:
-        body = response.read(MAX_ASSET_BYTES + 1)
-    if len(body) > MAX_ASSET_BYTES:
-        raise ValueError(f"deployed asset exceeds {MAX_ASSET_BYTES} bytes: {url}")
-    return body
+    return fetch_public_bytes(url, timeout, max_bytes=MAX_ASSET_BYTES)
 
 
 def json_object(body: bytes, description: str) -> dict:

@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/shidenggui/easytrader"
 generated_at = "2026-09-16T16:34:45.933302Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md` and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "easytrader"
@@ -24,7 +23,7 @@ languages = [
     "Python",
     "Makefile",
 ]
-test = "pytest -vx --cov=easytrader tests"
+test = "make test"
 topics = []
 
 [docs]
@@ -96,14 +95,6 @@ source = "README.md"
 state = "present"
 valueJson = '"easytrader"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:34:45.933302Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"pytest -vx --cov=easytrader tests"'
 
 [x.github]
 archived = false

@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `codex-rs/Cargo.toml`, and `justfile`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `codex-rs/Cargo.toml`. Imported `repo.test` from `justfile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `SECURITY.md`, `codex-rs/Cargo.toml`, and `justfile`. Maintainer information was imported from CODEOWNERS; `owners.team` is `@openai/codex-core-agent-team` because it is the clearest imported team signal, but `owners.maintainers` still preserves narrower owner candidates. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Inferred `repo.build` from `codex-rs/Cargo.toml`. Imported `repo.test` from `justfile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-03 semantic audit withheld repo.build pending command context or usable upstream instructions; repository-default applicability remains unresolved. Source inspection timestamps are unchanged. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "Codex CLI splash"
@@ -37,7 +37,6 @@ languages = [
     "Batchfile",
     "C",
 ]
-test = "just test"
 topics = []
 
 [owners]
@@ -113,14 +112,6 @@ source = "README.md"
 state = "present"
 valueJson = '"Codex CLI splash"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-16T16:35:21.055416Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "justfile"
-state = "present"
-valueJson = '"just test"'
 
 [x.github]
 archived = false

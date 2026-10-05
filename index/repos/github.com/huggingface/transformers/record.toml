@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/huggingface/transformers"
 generated_at = "2026-09-17T06:07:55.930120327Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `SECURITY.md`, and `Makefile`. Imported `repo.test` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "Hugging Face Transformers Library"
@@ -27,7 +26,7 @@ languages = [
     "Shell",
     "Jsonnet",
 ]
-test = "python -m pytest -p random_order -n auto --dist=loadfile -s -v --random-order-bucket=module ./tests/"
+test = "make test"
 topics = [
     "nlp",
     "natural-language-processing",
@@ -124,14 +123,6 @@ source = "README.md"
 state = "present"
 valueJson = '"Hugging Face Transformers Library"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:07:55.930120327Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"python -m pytest -p random_order -n auto --dist=loadfile -s -v --random-order-bucket=module ./tests/"'
 
 [x.github]
 archived = false

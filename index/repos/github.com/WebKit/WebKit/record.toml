@@ -12,7 +12,7 @@ provenance = [
     "imported",
     "inferred",
 ]
-notes = "Bootstrapped from `.github/CODEOWNERS` and `Makefile`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record."
+notes = "Bootstrapped from `.github/CODEOWNERS` and `Makefile`. Filled `repo.name` and `repo.description` with inferred defaults. Maintainer information was imported from broad CODEOWNERS patterns with multiple team owners, so `owners.team` was left unset and `owners.maintainers` preserves the competing owner candidates. Imported `repo.build` from `Makefile`. This is an overlay bootstrap, not a maintainer-controlled canonical record. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "WebKit"
@@ -67,7 +67,6 @@ languages = [
     "Raku",
     "PostScript",
 ]
-build = "make all"
 topics = [
     "webkit",
     "browser",
@@ -156,14 +155,6 @@ reason = "no single clear team in CODEOWNERS"
 state = "not_found"
 valueJson = "null"
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-10-04T07:52:04.149695306Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"make all"'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-10-04T07:52:04.149695306Z"

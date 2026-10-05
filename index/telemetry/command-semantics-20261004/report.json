@@ -1,0 +1,1784 @@
+{
+  "checkedAt": "2026-10-05T00:18:45.046464Z",
+  "policy": "static-source-preservation; no upstream execution; no task-correctness claim",
+  "records": [
+    {
+      "identity": "github.com/LunarVim/LunarVim",
+      "revision": "aa51c20f3404cb482e9c6fd6e5e4a4bf5b1612aa",
+      "sources": [
+        {
+          "path": "sources/github.com/LunarVim/LunarVim/Makefile",
+          "url": "https://raw.githubusercontent.com/LunarVim/LunarVim/aa51c20f3404cb482e9c6fd6e5e4a4bf5b1612aa/Makefile",
+          "sha256": "7682cb74043287eabc685d1dc34d671adab147649d2e779dad70d77caeef9672"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/OpenMined/PySyft",
+      "revision": "36e65162ad2cfbae66d714db8d5c711e19a3a185",
+      "sources": [
+        {
+          "path": "sources/github.com/OpenMined/PySyft/Justfile",
+          "url": "https://raw.githubusercontent.com/OpenMined/PySyft/36e65162ad2cfbae66d714db8d5c711e19a3a185/Justfile",
+          "sha256": "2c0b88a1903508784cb709608fe1db76fae8feb4ed9ae49e371bc632e616778d"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Justfile",
+          "inspectedSource": "Justfile",
+          "previous": "just build",
+          "candidate": null,
+          "disposition": "withhold"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/StylishThemes/GitHub-Dark",
+      "revision": "e7b074353daf16db56040c4060765f8582f467e4",
+      "sources": [
+        {
+          "path": "sources/github.com/StylishThemes/GitHub-Dark/Makefile",
+          "url": "https://raw.githubusercontent.com/StylishThemes/GitHub-Dark/e7b074353daf16db56040c4060765f8582f467e4/Makefile",
+          "sha256": "516c92b2e18a4fef8dfbc10859f5c846b3b9e063d5c8cf3ceb9ebdaf2b06bd45"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/WebKit/WebKit",
+      "revision": "a8755fb056b8fa389e91787f86b8bc5f1919fbce",
+      "sources": [
+        {
+          "path": "sources/github.com/WebKit/WebKit/Makefile",
+          "url": "https://raw.githubusercontent.com/WebKit/WebKit/a8755fb056b8fa389e91787f86b8bc5f1919fbce/Makefile",
+          "sha256": "9c82af3da7ed02aada5c438f785520c989f6ca9b9934456bf2d59623985725f9"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": null,
+          "disposition": "withhold"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/actix/actix-web",
+      "revision": "714572c5eca7a012b771dd9a978767e7573697a8",
+      "sources": [
+        {
+          "path": "sources/github.com/actix/actix-web/justfile",
+          "url": "https://raw.githubusercontent.com/actix/actix-web/714572c5eca7a012b771dd9a978767e7573697a8/justfile",
+          "sha256": "2b952f94d06e8bfde2e081b5375a2a377137d5792d14237a99d910acb5058215"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "justfile",
+          "inspectedSource": "justfile",
+          "previous": "just test",
+          "candidate": "just test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/alacritty/alacritty",
+      "revision": "d692748d3f61253ebe9f5094320120d22f6a046f",
+      "sources": [
+        {
+          "path": "sources/github.com/alacritty/alacritty/Makefile",
+          "url": "https://raw.githubusercontent.com/alacritty/alacritty/d692748d3f61253ebe9f5094320120d22f6a046f/Makefile",
+          "sha256": "8e2865608685ece65f76698654d229cfc1d89313e5a55b7566ad8c3b30a86c66"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/asg017/sqlite-vss",
+      "revision": "8d3c6ff2fca651104563779a0d927ea4fba40347",
+      "sources": [
+        {
+          "path": "sources/github.com/asg017/sqlite-vss/Makefile",
+          "url": "https://raw.githubusercontent.com/asg017/sqlite-vss/8d3c6ff2fca651104563779a0d927ea4fba40347/Makefile",
+          "sha256": "1d2aa0959cc2b21faaedf1116a7150c4a1ecc2793077458c2ff8862a136cc373"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/bettercap/bettercap",
+      "revision": "8eca2820f3c41d2004434ed5a291d87462caeeb7",
+      "sources": [
+        {
+          "path": "sources/github.com/bettercap/bettercap/Makefile",
+          "url": "https://raw.githubusercontent.com/bettercap/bettercap/8eca2820f3c41d2004434ed5a291d87462caeeb7/Makefile",
+          "sha256": "f3d8393c6e9f31a62f7eaf565e9869e81094594df8d56f4563ea9591219ad753"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/celery/celery",
+      "revision": "9f5d35872cc64e0aa30bccd0a864d8c86d5e5337",
+      "sources": [
+        {
+          "path": "sources/github.com/celery/celery/Makefile",
+          "url": "https://raw.githubusercontent.com/celery/celery/9f5d35872cc64e0aa30bccd0a864d8c86d5e5337/Makefile",
+          "sha256": "04c2e3294b73fb178a6eb4e5b967ea1cc806a512de0f4c9c7cfbc5a016b7188e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/chidiwilliams/buzz",
+      "revision": "7d1929c58868bbcc9803b0df180fa3701103c040",
+      "sources": [
+        {
+          "path": "sources/github.com/chidiwilliams/buzz/Makefile",
+          "url": "https://raw.githubusercontent.com/chidiwilliams/buzz/7d1929c58868bbcc9803b0df180fa3701103c040/Makefile",
+          "sha256": "ca2d1c4bed7f1452ed7a9186c263153e5773a27bd19d2279b81ee96a4e80c058"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/cli/cli",
+      "revision": "0cf1092493af067646fc5f3db9421c6a6ec9c938",
+      "sources": [
+        {
+          "path": "sources/github.com/cli/cli/Makefile",
+          "url": "https://raw.githubusercontent.com/cli/cli/0cf1092493af067646fc5f3db9421c6a6ec9c938/Makefile",
+          "sha256": "992035f8f75939024cb8403dff1669032e059498841c9b4f01b0c309fff5d26f"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "go test ./...",
+          "candidate": "make test",
+          "disposition": "replace-wrapper"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/cockroachdb/cockroach",
+      "revision": "60798776b9ed23f24c7f281e197098aaba039181",
+      "sources": [
+        {
+          "path": "sources/github.com/cockroachdb/cockroach/GNUmakefile",
+          "url": "https://raw.githubusercontent.com/cockroachdb/cockroach/60798776b9ed23f24c7f281e197098aaba039181/GNUmakefile",
+          "sha256": "e1f6670ab66cde3c268ccc20d90266a70239077c05cbe25fdbfe1eb216acec99"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "GNUmakefile",
+          "inspectedSource": "GNUmakefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "GNUmakefile",
+          "inspectedSource": "GNUmakefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/containerd/containerd",
+      "revision": "7a233f38947b9ae1ca1732a55f0fb48be3efe65e",
+      "sources": [
+        {
+          "path": "sources/github.com/containerd/containerd/Makefile",
+          "url": "https://raw.githubusercontent.com/containerd/containerd/7a233f38947b9ae1ca1732a55f0fb48be3efe65e/Makefile",
+          "sha256": "437c2f7c6ef126af30ce3ae578d98f6882db95fbe01c2efc208234de8d56cf5c"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/coqui-ai/TTS",
+      "revision": "dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e",
+      "sources": [
+        {
+          "path": "sources/github.com/coqui-ai/TTS/Makefile",
+          "url": "https://raw.githubusercontent.com/coqui-ai/TTS/dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e/Makefile",
+          "sha256": "3a6ceb8aec2eaa3d07e2dec6f7c4729eb9434192110f87738410f09acd4d09db"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/docker/cli",
+      "revision": "75d1d1a9e62f89d8284ad0b4b8678b936ae5bed9",
+      "sources": [
+        {
+          "path": "sources/github.com/docker/cli/Makefile",
+          "url": "https://raw.githubusercontent.com/docker/cli/75d1d1a9e62f89d8284ad0b4b8678b936ae5bed9/Makefile",
+          "sha256": "b52cbe80122fe05e5c3629acfb4ac0b4481d0932b990e3cd4ce752c1d63c4be6"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test-unit",
+          "candidate": "make test-unit",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/duckdb/duckdb",
+      "revision": "8aae2b52b605292ec77489e320b7b0ded1c64b19",
+      "sources": [
+        {
+          "path": "sources/github.com/duckdb/duckdb/Makefile",
+          "url": "https://raw.githubusercontent.com/duckdb/duckdb/8aae2b52b605292ec77489e320b7b0ded1c64b19/Makefile",
+          "sha256": "1c1b96de91b8623e00f0bedef2eac8354d23c83751a4f01e5a9fe598812fd828"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/ejoy/ejoy2d",
+      "revision": "bf4af9140af2bf0692b96dbc78f7b1e89dfb6924",
+      "sources": [
+        {
+          "path": "sources/github.com/ejoy/ejoy2d/Makefile",
+          "url": "https://raw.githubusercontent.com/ejoy/ejoy2d/bf4af9140af2bf0692b96dbc78f7b1e89dfb6924/Makefile",
+          "sha256": "dea1143d73b32c46157f83de39ea78560041f21ac2810ff9bbad4f6901679afc"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/endrazine/wcc",
+      "revision": "0db1624a96e4b838bf2b0206f0b54d60c545eb7d",
+      "sources": [
+        {
+          "path": "sources/github.com/endrazine/wcc/Makefile",
+          "url": "https://raw.githubusercontent.com/endrazine/wcc/0db1624a96e4b838bf2b0206f0b54d60c545eb7d/Makefile",
+          "sha256": "57b9037bb3b8b3b9b269c92ff26c6eb3c80884b2659fc6781c40eb4e434fa156"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/etcd-io/etcd",
+      "revision": "f094b9834a5aa0ef748b91509b824e324dd65700",
+      "sources": [
+        {
+          "path": "sources/github.com/etcd-io/etcd/CONTRIBUTING.md",
+          "url": "https://raw.githubusercontent.com/etcd-io/etcd/f094b9834a5aa0ef748b91509b824e324dd65700/CONTRIBUTING.md",
+          "sha256": "d1ae174ef04744180ac0d739e1da09af597f4f42538977ebaa8420354a06c011"
+        },
+        {
+          "path": "sources/github.com/etcd-io/etcd/Makefile",
+          "url": "https://raw.githubusercontent.com/etcd-io/etcd/f094b9834a5aa0ef748b91509b824e324dd65700/Makefile",
+          "sha256": "f0734431ad13dbbefdb2e5ecf30f1e33b2adc6b468e6c4f0f2a22c1b318fc16e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "CONTRIBUTING.md",
+          "inspectedSource": "CONTRIBUTING.md",
+          "previous": "go test -v -c -count 1",
+          "candidate": "make test-unit",
+          "disposition": "replace-wrapper"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/ethereum/go-ethereum",
+      "revision": "af4e64e5f86cfccc230c019081bb64bb630b3929",
+      "sources": [
+        {
+          "path": "sources/github.com/ethereum/go-ethereum/Makefile",
+          "url": "https://raw.githubusercontent.com/ethereum/go-ethereum/af4e64e5f86cfccc230c019081bb64bb630b3929/Makefile",
+          "sha256": "d58d71c83e95b18618e0b0bc162a61af6040ce604309c356e8faba76366df3ef"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/exo-explore/exo",
+      "revision": "21a54c5ea0230a3bec1e1a786d200126c7e34ec6",
+      "sources": [
+        {
+          "path": "sources/github.com/exo-explore/exo/justfile",
+          "url": "https://raw.githubusercontent.com/exo-explore/exo/21a54c5ea0230a3bec1e1a786d200126c7e34ec6/justfile",
+          "sha256": "fe1bb719f231967e5a28a24e5f724a9ceb69f14c6064e2eda5f07183973773ec"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "justfile",
+          "inspectedSource": "justfile",
+          "previous": "just all",
+          "candidate": "just all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "justfile",
+          "inspectedSource": "justfile",
+          "previous": "just test",
+          "candidate": "just test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/explosion/spaCy",
+      "revision": "26b4d1dc04a812f426e4bef3e8a1b6f159d6f048",
+      "sources": [
+        {
+          "path": "sources/github.com/explosion/spaCy/Makefile",
+          "url": "https://raw.githubusercontent.com/explosion/spaCy/26b4d1dc04a812f426e4bef3e8a1b6f159d6f048/Makefile",
+          "sha256": "bb289928d4e2f9e3cfb2487c55b3c472e311c39d5394388b9b15d5639ed54533"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make package",
+          "candidate": null,
+          "disposition": "withhold"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/facebook/zstd",
+      "revision": "ee650ef23636145c97ded0440ca743a54362a3ab",
+      "sources": [
+        {
+          "path": "sources/github.com/facebook/zstd/Makefile",
+          "url": "https://raw.githubusercontent.com/facebook/zstd/ee650ef23636145c97ded0440ca743a54362a3ab/Makefile",
+          "sha256": "20340a3bfc8f86a7607ce38d677fa060aa6e7c76e298f14e455669cbae17a955"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/fatedier/frp",
+      "revision": "d20a232996007dfe6ab425abc0a39a3ae9a0889b",
+      "sources": [
+        {
+          "path": "sources/github.com/fatedier/frp/Makefile",
+          "url": "https://raw.githubusercontent.com/fatedier/frp/d20a232996007dfe6ab425abc0a39a3ae9a0889b/Makefile",
+          "sha256": "eb083748cb6e5eec66e196c1dc091df38729287c9f1147ea6da0929fb52ade5b"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/francoismichel/ssh3",
+      "revision": "5b4b242db02a5cfbb9ebf9dfc5aad2c32e10f245",
+      "sources": [
+        {
+          "path": "sources/github.com/francoismichel/ssh3/Makefile",
+          "url": "https://raw.githubusercontent.com/francoismichel/ssh3/5b4b242db02a5cfbb9ebf9dfc5aad2c32e10f245/Makefile",
+          "sha256": "bb6342dd4a6a6b00761b70310c5788ab7a0c8b92daa3c22848dcb6802711b042"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/ggml-org/llama.cpp",
+      "revision": "05f2dcfdba3879c55f735efa0f124b1a56f7ed11",
+      "sources": [
+        {
+          "path": "sources/github.com/ggml-org/llama.cpp/Makefile",
+          "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/05f2dcfdba3879c55f735efa0f124b1a56f7ed11/Makefile",
+          "sha256": "81cf8d21005a58822cdf457f1caab1da5f02d34ddcaa75e871b32f05e3e52efe"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": null,
+          "disposition": "withhold"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/ggml-org/whisper.cpp",
+      "revision": "da54572229bcf64ba367d96c7ef15770376c4280",
+      "sources": [
+        {
+          "path": "sources/github.com/ggml-org/whisper.cpp/Makefile",
+          "url": "https://raw.githubusercontent.com/ggml-org/whisper.cpp/da54572229bcf64ba367d96c7ef15770376c4280/Makefile",
+          "sha256": "651e28591f0d5f0e977bc6646e962a63da86600fcdc7429c2556dff7912c5151"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/gin-gonic/gin",
+      "revision": "5c6a15f8f9566612076bd209e623861bf92a6283",
+      "sources": [
+        {
+          "path": "sources/github.com/gin-gonic/gin/Makefile",
+          "url": "https://raw.githubusercontent.com/gin-gonic/gin/5c6a15f8f9566612076bd209e623861bf92a6283/Makefile",
+          "sha256": "58d93f266daf9913d629d2f4bac3830dde00220cec9668398b4759ddff95023d"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/go-gitea/gitea",
+      "revision": "f0d219599869d4b0971143ada3b12f9a9174bbbd",
+      "sources": [
+        {
+          "path": "sources/github.com/go-gitea/gitea/Makefile",
+          "url": "https://raw.githubusercontent.com/go-gitea/gitea/f0d219599869d4b0971143ada3b12f9a9174bbbd/Makefile",
+          "sha256": "db1b9114479c898ac52d61531417258ec9c41039d20807676c6c1173e3c264c0"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/golangci/golangci-lint",
+      "revision": "5573d88ff78251eba05ca31a1d5f530f3b02eb89",
+      "sources": [
+        {
+          "path": "sources/github.com/golangci/golangci-lint/Makefile",
+          "url": "https://raw.githubusercontent.com/golangci/golangci-lint/5573d88ff78251eba05ca31a1d5f530f3b02eb89/Makefile",
+          "sha256": "24b0eddc6b0035085452d6c13aa5fd026d9f2cf656ec53d905dd245866e1cfcf"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/google/cadvisor",
+      "revision": "5bf5d43ac6f60d7ee36a13b4d5b4a78ad2d0abc7",
+      "sources": [
+        {
+          "path": "sources/github.com/google/cadvisor/Makefile",
+          "url": "https://raw.githubusercontent.com/google/cadvisor/5bf5d43ac6f60d7ee36a13b4d5b4a78ad2d0abc7/Makefile",
+          "sha256": "d092330e3169f139ed3b921566f1494b92d89c15a15dc58dd055705e1f02c170"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/grpc/grpc",
+      "revision": "6bb4f82d9b9ab7296d98d5e1df61b0779c7bd4f7",
+      "sources": [
+        {
+          "path": "sources/github.com/grpc/grpc/Makefile",
+          "url": "https://raw.githubusercontent.com/grpc/grpc/6bb4f82d9b9ab7296d98d5e1df61b0779c7bd4f7/Makefile",
+          "sha256": "1cdff94acb08a069298e2ac2fa27cc085f05a470cea3263d4844d33154be6dc9"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": null,
+          "disposition": "withhold"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/grpc-ecosystem/grpc-gateway",
+      "revision": "5c6bd9b58d0c2ec26fdadb5fd303948ee335b915",
+      "sources": [
+        {
+          "path": "sources/github.com/grpc-ecosystem/grpc-gateway/Makefile",
+          "url": "https://raw.githubusercontent.com/grpc-ecosystem/grpc-gateway/5c6bd9b58d0c2ec26fdadb5fd303948ee335b915/Makefile",
+          "sha256": "372b562adf711aa7ffb96a7ebc4cbe79d30eff061cb7e80525af68a31b57e686"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/h2oai/h2o-llmstudio",
+      "revision": "b6c297bdcec697e717396a05431ffce042e71463",
+      "sources": [
+        {
+          "path": "sources/github.com/h2oai/h2o-llmstudio/Makefile",
+          "url": "https://raw.githubusercontent.com/h2oai/h2o-llmstudio/b6c297bdcec697e717396a05431ffce042e71463/Makefile",
+          "sha256": "ce89a2a9f32660e53ef0a5f207d55a528b6a0939e92273b14cf535c56fcb8cc7"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test-unit",
+          "candidate": "make test-unit",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/hashicorp/vault",
+      "revision": "804b018c89bab7a2c014f6e4aba61d53b770d2ee",
+      "sources": [
+        {
+          "path": "sources/github.com/hashicorp/vault/Makefile",
+          "url": "https://raw.githubusercontent.com/hashicorp/vault/804b018c89bab7a2c014f6e4aba61d53b770d2ee/Makefile",
+          "sha256": "59c9faac2b50307b6f8ad2e22bb5d41aab789ec077e98118d60c45a13a2cb4f9"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": null,
+          "disposition": "withhold"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/helm/helm",
+      "revision": "7fd3c5e8f2f096573b86a76fa5682ef905778c5a",
+      "sources": [
+        {
+          "path": "sources/github.com/helm/helm/Makefile",
+          "url": "https://raw.githubusercontent.com/helm/helm/7fd3c5e8f2f096573b86a76fa5682ef905778c5a/Makefile",
+          "sha256": "52789b67aacee4e1a6500b48d2d2170eb8e903afca4a1fbcff202e4d39f8c0b5"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test-unit",
+          "candidate": "make test-unit",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/hesreallyhim/awesome-claude-code",
+      "revision": "99950f262f91a5ccff512f5fe982e54a70c2e32f",
+      "sources": [
+        {
+          "path": "sources/github.com/hesreallyhim/awesome-claude-code/Makefile",
+          "url": "https://raw.githubusercontent.com/hesreallyhim/awesome-claude-code/99950f262f91a5ccff512f5fe982e54a70c2e32f/Makefile",
+          "sha256": "de170d0e84ae00a1eae91159884444117bf104df9ed11e867306306601187dba"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/huggingface/datasets",
+      "revision": "d336dcb84cdd6647a685cf4c9e0e8c26cc105b06",
+      "sources": [
+        {
+          "path": "sources/github.com/huggingface/datasets/Makefile",
+          "url": "https://raw.githubusercontent.com/huggingface/datasets/d336dcb84cdd6647a685cf4c9e0e8c26cc105b06/Makefile",
+          "sha256": "764297053a8a94ce747f08e6e95a76788047901c29a09686fb0bd6f0147f2211"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "python -m pytest -n auto --dist=loadfile -s -v ./tests/",
+          "candidate": "make test",
+          "disposition": "replace-wrapper"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/huggingface/transformers",
+      "revision": "da9d2c460c24cd9b1ee215d6e824601b48fbf9d4",
+      "sources": [
+        {
+          "path": "sources/github.com/huggingface/transformers/Makefile",
+          "url": "https://raw.githubusercontent.com/huggingface/transformers/da9d2c460c24cd9b1ee215d6e824601b48fbf9d4/Makefile",
+          "sha256": "ce5c5e40482f3f99599f9264d99e4547796b422960987954f2a7a681c43b8c3f"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "python -m pytest -p random_order -n auto --dist=loadfile -s -v --random-order-bucket=module ./tests/",
+          "candidate": "make test",
+          "disposition": "replace-wrapper"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/jesseduffield/lazygit",
+      "revision": "71d3e7dfa5f9278172013bfa1bb83d60d155436a",
+      "sources": [
+        {
+          "path": "sources/github.com/jesseduffield/lazygit/Makefile",
+          "url": "https://raw.githubusercontent.com/jesseduffield/lazygit/71d3e7dfa5f9278172013bfa1bb83d60d155436a/Makefile",
+          "sha256": "54f874f221b8de02e67903fd1adee84b84eee9502a71d30707845459a7b4a470"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "go build -gcflags='all=-N -l'",
+          "candidate": "make build",
+          "disposition": "replace-wrapper"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "go test ./... -short",
+          "candidate": "make unit-test",
+          "disposition": "replace-wrapper"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/jgm/pandoc",
+      "revision": "1c89cb8d4561388cc8df939df7ecd93bef88584f",
+      "sources": [
+        {
+          "path": "sources/github.com/jgm/pandoc/Makefile",
+          "url": "https://raw.githubusercontent.com/jgm/pandoc/1c89cb8d4561388cc8df939df7ecd93bef88584f/Makefile",
+          "sha256": "9f873648431ed331caefbb6651550890e94bf986ed4e6088e9bf9f9738c5bd4d"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/johnkerl/miller",
+      "revision": "07d4d1c36f6ecf8390c15e5daf15bb4c4a3281f1",
+      "sources": [
+        {
+          "path": "sources/github.com/johnkerl/miller/Makefile",
+          "url": "https://raw.githubusercontent.com/johnkerl/miller/07d4d1c36f6ecf8390c15e5daf15bb4c4a3281f1/Makefile",
+          "sha256": "53570db1380050e9a4314e9ef1c0f1df1c205cfe41c456beb9b4fb93220f1a07"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": null,
+          "candidate": "make unit-test",
+          "disposition": "preserve-existing-abstention"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/junegunn/fzf",
+      "revision": "b1be3a8be1b833ce5b92fbbac11637643d60a046",
+      "sources": [
+        {
+          "path": "sources/github.com/junegunn/fzf/Makefile",
+          "url": "https://raw.githubusercontent.com/junegunn/fzf/b1be3a8be1b833ce5b92fbbac11637643d60a046/Makefile",
+          "sha256": "e11a8b5d1425b45dc66fc50a1e2f9e83d3672e4a72a7424bc8b3193e6c6b89a1"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/juspay/hyperswitch",
+      "revision": "184ffd4c015fd3fea2f3868549f1a86ffa5f40da",
+      "sources": [
+        {
+          "path": "sources/github.com/juspay/hyperswitch/Makefile",
+          "url": "https://raw.githubusercontent.com/juspay/hyperswitch/184ffd4c015fd3fea2f3868549f1a86ffa5f40da/Makefile",
+          "sha256": "78b97c9ea6a5b6462fe2b18411f8d91ed37e21ca8a07a5806d04529e9afbbd64"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "cargo test --all-features",
+          "candidate": "make test",
+          "disposition": "replace-wrapper"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/kokke/tiny-AES-c",
+      "revision": "23856752fbd139da0b8ca6e471a13d5bcc99a08d",
+      "sources": [
+        {
+          "path": "sources/github.com/kokke/tiny-AES-c/Makefile",
+          "url": "https://raw.githubusercontent.com/kokke/tiny-AES-c/23856752fbd139da0b8ca6e471a13d5bcc99a08d/Makefile",
+          "sha256": "d405b233f086e8dfaf34357c0759701996cd460308cfe845f90b4eb09319bb84"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/luanfujun/deep-photo-styletransfer",
+      "revision": "4801fa2dca2e2b52847c377f451246a39eae154a",
+      "sources": [
+        {
+          "path": "sources/github.com/luanfujun/deep-photo-styletransfer/makefile",
+          "url": "https://raw.githubusercontent.com/luanfujun/deep-photo-styletransfer/4801fa2dca2e2b52847c377f451246a39eae154a/makefile",
+          "sha256": "7102ff0fd118f2ffc64b8ad5c8e3c415b86d28d8fc981834135eaf3c8128cdcf"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/lukas-reineke/indent-blankline.nvim",
+      "revision": "f1e186e44d3b7f9ae918008e2c28ce37c6023d2d",
+      "sources": [
+        {
+          "path": "sources/github.com/lukas-reineke/indent-blankline.nvim/Makefile",
+          "url": "https://raw.githubusercontent.com/lukas-reineke/indent-blankline.nvim/f1e186e44d3b7f9ae918008e2c28ce37c6023d2d/Makefile",
+          "sha256": "86a8f1801a99f8805ae8c0024de41a80f183aa827658ba75571f5ad44dd40e71"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/mandiant/speakeasy",
+      "revision": "1e6e622bb5cea2e4d843143fa15acf1043150291",
+      "sources": [
+        {
+          "path": "sources/github.com/mandiant/speakeasy/justfile",
+          "url": "https://raw.githubusercontent.com/mandiant/speakeasy/1e6e622bb5cea2e4d843143fa15acf1043150291/justfile",
+          "sha256": "79750174f1258669ef39e04fd78b7d9750157908f580f44cd597d3874a7a377e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "justfile",
+          "inspectedSource": "justfile",
+          "previous": "just test",
+          "candidate": "just test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/minio/minio",
+      "revision": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+      "sources": [
+        {
+          "path": "sources/github.com/minio/minio/Makefile",
+          "url": "https://raw.githubusercontent.com/minio/minio/7aac2a2c5b7c882e68c1ce017d8256be2feea27f/Makefile",
+          "sha256": "8b9d8d6ac3de0773c0a21e3284e28dff7bd81106ad4c5eff7ad974e35e1f397e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/moby/moby",
+      "revision": "a107266eefe66d015e0be9b79b38436e2af982f9",
+      "sources": [
+        {
+          "path": "sources/github.com/moby/moby/Makefile",
+          "url": "https://raw.githubusercontent.com/moby/moby/a107266eefe66d015e0be9b79b38436e2af982f9/Makefile",
+          "sha256": "f2dba066f9f4298e9a1a6d6ab79298021711a0b7161ea76f44e2bd479f0d93ac"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test-unit",
+          "candidate": "make test-unit",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/nektos/act",
+      "revision": "4f411281417e88660bea1c1a1749aa71ae0bd60f",
+      "sources": [
+        {
+          "path": "sources/github.com/nektos/act/Makefile",
+          "url": "https://raw.githubusercontent.com/nektos/act/4f411281417e88660bea1c1a1749aa71ae0bd60f/Makefile",
+          "sha256": "1d331bc92df226debd9ec5e2ca1ee59d2b1e81a42af92345682af9012a8734ff"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/neovim/neovim",
+      "revision": "4b5dcbccd752a95f4b7268e031f90c18924513b4",
+      "sources": [
+        {
+          "path": "sources/github.com/neovim/neovim/Makefile",
+          "url": "https://raw.githubusercontent.com/neovim/neovim/4b5dcbccd752a95f4b7268e031f90c18924513b4/Makefile",
+          "sha256": "7801c274d2cdcee5795d9ae39661376ee50790825232d9b7fb42a66ffb467de5"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/nginx-proxy/nginx-proxy",
+      "revision": "d1a44f574eb845f859c7e929d545e96ce8adf564",
+      "sources": [
+        {
+          "path": "sources/github.com/nginx-proxy/nginx-proxy/Makefile",
+          "url": "https://raw.githubusercontent.com/nginx-proxy/nginx-proxy/d1a44f574eb845f859c7e929d545e96ce8adf564/Makefile",
+          "sha256": "652aaddb8656d34e8fa5f3474acf264534fd8df7806f180d0f9b4e062120c504"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/nitrictech/nitric",
+      "revision": "892243986918fa188e8a52bf73d40a5383581d5c",
+      "sources": [
+        {
+          "path": "sources/github.com/nitrictech/nitric/Makefile",
+          "url": "https://raw.githubusercontent.com/nitrictech/nitric/892243986918fa188e8a52bf73d40a5383581d5c/Makefile",
+          "sha256": "561d9aa014a8f117e59735a88dcd20256b379577866b7a4f92848c452a74e17b"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": null,
+          "disposition": "withhold"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/nlohmann/json",
+      "revision": "c41152e62092c16cf4fc4625becacc3eb9d9319f",
+      "sources": [
+        {
+          "path": "sources/github.com/nlohmann/json/Makefile",
+          "url": "https://raw.githubusercontent.com/nlohmann/json/c41152e62092c16cf4fc4625becacc3eb9d9319f/Makefile",
+          "sha256": "20e8b221c959909168e6beefa13fbcb43e738e4ae31e150e2d6961b37a4dd4f6"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/openai/codex",
+      "revision": "da18000cae9884ab45f83b2d07fbd5a220a1de39",
+      "sources": [
+        {
+          "path": "sources/github.com/openai/codex/justfile",
+          "url": "https://raw.githubusercontent.com/openai/codex/da18000cae9884ab45f83b2d07fbd5a220a1de39/justfile",
+          "sha256": "69006391c914824d51d49ac7b1ec45caabb6df6a636fb59277fdbe02daf17d36"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "justfile",
+          "inspectedSource": "justfile",
+          "previous": "just test",
+          "candidate": null,
+          "disposition": "withhold"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/pingcap/tidb",
+      "revision": "dc52119f4a5489f58f394eb65b4bd4a3e700e4a8",
+      "sources": [
+        {
+          "path": "sources/github.com/pingcap/tidb/Makefile",
+          "url": "https://raw.githubusercontent.com/pingcap/tidb/dc52119f4a5489f58f394eb65b4bd4a3e700e4a8/Makefile",
+          "sha256": "545e3fdf75072d776d7d5e2110b37b02550668fbc3debeeffaf9a7f3b134fdb9"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/postgres/postgres",
+      "revision": "fcc0e27f45e2d8dc6046435908a48626c91d3d84",
+      "sources": [
+        {
+          "path": "sources/github.com/postgres/postgres/Makefile",
+          "url": "https://raw.githubusercontent.com/postgres/postgres/fcc0e27f45e2d8dc6046435908a48626c91d3d84/Makefile",
+          "sha256": "183b27ff04a17459c320ce2788879e8e77b25f63fc4d23a8403b587b69669526"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make check",
+          "candidate": "make check",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/pydantic/pydantic",
+      "revision": "c124df7fb7348a3d6779c41fb5f4e5a73531e678",
+      "sources": [
+        {
+          "path": "sources/github.com/pydantic/pydantic/Makefile",
+          "url": "https://raw.githubusercontent.com/pydantic/pydantic/c124df7fb7348a3d6779c41fb5f4e5a73531e678/Makefile",
+          "sha256": "bbb992ab1850b6e5cba49a5d03982b2a946cc7be71cf0b4abca10c6c7a068d13"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/pyenv/pyenv",
+      "revision": "676b71e7b52d1a094c6659213c23649b9e290455",
+      "sources": [
+        {
+          "path": "sources/github.com/pyenv/pyenv/Makefile",
+          "url": "https://raw.githubusercontent.com/pyenv/pyenv/676b71e7b52d1a094c6659213c23649b9e290455/Makefile",
+          "sha256": "2d45a20d93302e69ed9ec9eba4325957e4dee98b53eff7de625a3e730652b1ea"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test-unit",
+          "candidate": "make test-unit",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/pytorch/pytorch",
+      "revision": "a9be55373f650e3be4f1133792f2265841d39901",
+      "sources": [
+        {
+          "path": "sources/github.com/pytorch/pytorch/Makefile",
+          "url": "https://raw.githubusercontent.com/pytorch/pytorch/a9be55373f650e3be4f1133792f2265841d39901/Makefile",
+          "sha256": "b8d0878c5a98ec751175b791bc71b9d120ebf8a1080372cf28cb96278072d1fc"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/realm/SwiftLint",
+      "revision": "a510662cab2b27618433e50d3e0b3b3d1c5605b7",
+      "sources": [
+        {
+          "path": "sources/github.com/realm/SwiftLint/Makefile",
+          "url": "https://raw.githubusercontent.com/realm/SwiftLint/a510662cab2b27618433e50d3e0b3b3d1c5605b7/Makefile",
+          "sha256": "3c9f9b9dc9c190203a7a88a4fa4d4c2b5ef3793995787e4c6ad5708899a4ec32"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/redis/redis",
+      "revision": "16e021b465fbbc73d5f070b4da5ce9f5ee4baea1",
+      "sources": [
+        {
+          "path": "sources/github.com/redis/redis/Makefile",
+          "url": "https://raw.githubusercontent.com/redis/redis/16e021b465fbbc73d5f070b4da5ce9f5ee4baea1/Makefile",
+          "sha256": "5998d578a530e0ba58f0877c1f7262ca3a9c18e46c72f0dfec6b78f8e5ab2b48"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/scikit-learn/scikit-learn",
+      "revision": "914346f574cddd99904513dec5a5d655b954dc91",
+      "sources": [
+        {
+          "path": "sources/github.com/scikit-learn/scikit-learn/Makefile",
+          "url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/914346f574cddd99904513dec5a5d655b954dc91/Makefile",
+          "sha256": "799825e39eaa1bf0684e578bcc501032d9f112463dbba77132230bf4147b4023"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/shidenggui/easytrader",
+      "revision": "def5a8edc5ebd7d49bf92a9f39e9e30c9bf47101",
+      "sources": [
+        {
+          "path": "sources/github.com/shidenggui/easytrader/Makefile",
+          "url": "https://raw.githubusercontent.com/shidenggui/easytrader/def5a8edc5ebd7d49bf92a9f39e9e30c9bf47101/Makefile",
+          "sha256": "60ac9d993487ddf21209f04d284bad0b5e3274e40243cf6453973ea2939cf648"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "pytest -vx --cov=easytrader tests",
+          "candidate": "make test",
+          "disposition": "replace-wrapper"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/spf13/cobra",
+      "revision": "adbc8813901bba65827259daa8e22ff94ec1f30e",
+      "sources": [
+        {
+          "path": "sources/github.com/spf13/cobra/Makefile",
+          "url": "https://raw.githubusercontent.com/spf13/cobra/adbc8813901bba65827259daa8e22ff94ec1f30e/Makefile",
+          "sha256": "880eb1cbfbfda597ca3433cd731a0d2d6d9e7adeb55c0fd911bfdc6894fd4f79"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/traefik/traefik",
+      "revision": "e75250a31ae773e50e9c16514e3aebcb92059042",
+      "sources": [
+        {
+          "path": "sources/github.com/traefik/traefik/Makefile",
+          "url": "https://raw.githubusercontent.com/traefik/traefik/e75250a31ae773e50e9c16514e3aebcb92059042/Makefile",
+          "sha256": "571a4bd3de963db15682a79d59d0e6ab46496a9853c97b3cb5a95682499cfb88"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make dist",
+          "candidate": "make dist",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test-unit",
+          "candidate": "make test-unit",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/uutils/coreutils",
+      "revision": "d3673cea67cd99c534236090ca19828754b39584",
+      "sources": [
+        {
+          "path": "sources/github.com/uutils/coreutils/GNUmakefile",
+          "url": "https://raw.githubusercontent.com/uutils/coreutils/d3673cea67cd99c534236090ca19828754b39584/GNUmakefile",
+          "sha256": "7f73d09b0d3e264f00bb30f51d26d7adb7a3acb84ba4866652adf6c14c41cc2c"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "GNUmakefile",
+          "inspectedSource": "GNUmakefile",
+          "previous": "make build",
+          "candidate": "make all",
+          "disposition": "replace-wrapper"
+        },
+        {
+          "field": "repo.test",
+          "source": "GNUmakefile",
+          "inspectedSource": "GNUmakefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/vectordotdev/vector",
+      "revision": "c2d37ef05ddc2351333dc5a570b4f405db23034b",
+      "sources": [
+        {
+          "path": "sources/github.com/vectordotdev/vector/Makefile",
+          "url": "https://raw.githubusercontent.com/vectordotdev/vector/c2d37ef05ddc2351333dc5a570b4f405db23034b/Makefile",
+          "sha256": "04e3679b46f13a3c848c9e31887fe1ea9bb0a1c67f9e3997cbb32a5bf7e9d24e"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make build",
+          "candidate": "make build",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/wb2osz/direwolf",
+      "revision": "eda1383f5fa9d8ba3cb27f99db1d2c79494404c9",
+      "sources": [
+        {
+          "path": "sources/github.com/wb2osz/direwolf/Makefile",
+          "url": "https://raw.githubusercontent.com/wb2osz/direwolf/eda1383f5fa9d8ba3cb27f99db1d2c79494404c9/Makefile",
+          "sha256": "3505cd837419b1ed4ffd53986b11f9dacd7765de10f46de9b269eca96295adf0"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/xinnan-tech/xiaozhi-esp32-server",
+      "revision": "6afc54a17def47578a4b3efc4680873689d3168b",
+      "sources": [
+        {
+          "path": "sources/github.com/xinnan-tech/xiaozhi-esp32-server/Makefile",
+          "url": "https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/6afc54a17def47578a4b3efc4680873689d3168b/Makefile",
+          "sha256": "6ab306ab84c9a8eae280f6de8d38d544f61bf3ee6dfb1656a56669b35d2c84e3"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/xtool-org/xtool",
+      "revision": "c4d8c42f9a20482cbf6d17dbcb33d595e6f7b3e6",
+      "sources": [
+        {
+          "path": "sources/github.com/xtool-org/xtool/Makefile",
+          "url": "https://raw.githubusercontent.com/xtool-org/xtool/c4d8c42f9a20482cbf6d17dbcb33d595e6f7b3e6/Makefile",
+          "sha256": "6cbb69750007509b284a8aee4cf534db9b39c18c76e5c1e216c34907e7030618"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        }
+      ]
+    },
+    {
+      "identity": "github.com/yt-dlp/yt-dlp",
+      "revision": "c7fb478d21e9e59524befbe23f7801bb267fb880",
+      "sources": [
+        {
+          "path": "sources/github.com/yt-dlp/yt-dlp/Makefile",
+          "url": "https://raw.githubusercontent.com/yt-dlp/yt-dlp/c7fb478d21e9e59524befbe23f7801bb267fb880/Makefile",
+          "sha256": "ca03807670d8328c2815a66a51ed1a2ca3d0ec0464e5b7e17bedc36591266308"
+        }
+      ],
+      "fields": [
+        {
+          "field": "repo.build",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make all",
+          "candidate": "make all",
+          "disposition": "unchanged"
+        },
+        {
+          "field": "repo.test",
+          "source": "Makefile",
+          "inspectedSource": "Makefile",
+          "previous": "make test",
+          "candidate": "make test",
+          "disposition": "unchanged"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-10-05T00:24:48.637814+00:00",
+  "scope": "only dotrepo-owned harmless regression fixtures; no upstream execution",
+  "results": [
+    {
+      "fixture": "make-prerequisite",
+      "command": [
+        "sh",
+        "-c",
+        "test -f ready"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "fixture": "make-prerequisite",
+      "command": [
+        "make",
+        "test"
+      ],
+      "exitCode": 0,
+      "stdout": "test -f ready\n",
+      "stderr": ""
+    },
+    {
+      "fixture": "make-uppercase",
+      "command": [
+        "make",
+        "-n",
+        "build"
+      ],
+      "exitCode": 2,
+      "stdout": "",
+      "stderr": "make: *** No rule to make target `build'.  Stop.\n"
+    },
+    {
+      "fixture": "make-uppercase",
+      "command": [
+        "make",
+        "-n",
+        "BUILD"
+      ],
+      "exitCode": 0,
+      "stdout": "touch built\n",
+      "stderr": ""
+    }
+  ]
+}

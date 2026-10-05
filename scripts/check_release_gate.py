@@ -1086,6 +1086,8 @@ def main() -> int:
             "-p",
             "dotrepo-core",
             "--test",
+            "import_quality_gate",
+            "--test",
             "public_export_fixture_pack",
             "--test",
             "public_query_fixture_pack",

@@ -6,10 +6,9 @@
 //! candidates lives in `policy`.
 use super::super::types::{CommandSourceTier, ImportedCommandCandidate, ImportedFile};
 use super::policy::{
-    detect_node_package_runner, is_placeholder_package_json_test_script, is_setup_only_command,
-    pick_node_script_command,
+    detect_node_package_runner, is_nonexecuting_test_command,
+    is_placeholder_package_json_test_script, is_setup_only_command, pick_node_script_command,
 };
-use crate::util::contains_unsafe_shell_like_value;
 
 pub(crate) fn infer_cargo_manifest_commands(
     file: &ImportedFile,
@@ -538,27 +537,18 @@ fn cmake_workflow_has_step(workflow: &serde_json::Value, required: &str) -> bool
 
 pub(crate) fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
     let targets = parse_makefile_targets(&file.contents);
-    // The published command must name a target the Makefile actually
-    // declares. A `ci:` pipeline target or a prefixed variant like
-    // `test-readme:` is not a canonical build/test entrypoint and must not
-    // be rewritten to a `build`/`test` target that does not exist. If the
-    // target is a single safe canonical command wearing a Make wrapper, publish
-    // the underlying command; otherwise keep the wrapper as the audited
-    // entrypoint.
-    let pick = |names: &[&str], select_build: bool| {
+    // Preserve the entrypoint: prerequisites, variables, shell settings and
+    // directory changes belong to Make, even for a one-line recipe.
+    let pick = |names: &[&str]| {
         names.iter().find_map(|name| {
-            let target = targets.iter().find(|target| target.name == *name)?;
-            simple_task_script_command(&target.commands, select_build)
-                .or_else(|| Some(format!("make {}", target.name)))
+            targets
+                .iter()
+                .find(|target| target.eq_ignore_ascii_case(name))
+                .map(|target| format!("make {target}"))
         })
     };
-    let build = pick(&["build", "all", "compile", "dist", "package"], true);
-    // Prefer focused unit-test targets before composite `test` entrypoints that
-    // chain integration suites (e.g. lazygit: unit-test then integration-test-all).
-    let test = pick(
-        &["unit-test", "test-unit", "test", "check", "verify", "spec"],
-        false,
-    );
+    let build = pick(&["build", "all", "compile", "dist", "package"]);
+    let test = pick(&["unit-test", "test-unit", "test", "check", "verify", "spec"]);
     if build.is_none() && test.is_none() {
         return None;
     }
@@ -572,18 +562,16 @@ pub(crate) fn infer_makefile_commands(file: &ImportedFile) -> Option<ImportedCom
 
 pub(crate) fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
     let recipes = parse_justfile_recipes(&file.contents);
-    // Publish the recipe name that actually exists rather than assuming a
-    // `build`/`test` recipe. As with Makefiles, unwrap only one-line recipes
-    // that are themselves safe canonical developer commands.
-    let pick = |names: &[&str], select_build: bool| {
+    let pick = |names: &[&str]| {
         names.iter().find_map(|name| {
-            let recipe = recipes.iter().find(|recipe| recipe.name == *name)?;
-            simple_task_script_command(&recipe.commands, select_build)
-                .or_else(|| Some(format!("just {}", recipe.name)))
+            recipes
+                .iter()
+                .find(|recipe| recipe.eq_ignore_ascii_case(name))
+                .map(|recipe| format!("just {recipe}"))
         })
     };
-    let build = pick(&["build", "all"], true);
-    let test = pick(&["unit-test", "test-unit", "test", "check"], false);
+    let build = pick(&["build", "all"]);
+    let test = pick(&["unit-test", "test-unit", "test", "check"]);
     if build.is_none() && test.is_none() {
         return None;
     }
@@ -595,137 +583,109 @@ pub(crate) fn infer_justfile_commands(file: &ImportedFile) -> Option<ImportedCom
     })
 }
 
-#[derive(Debug, Clone)]
-struct TaskScriptTarget {
-    name: String,
-    commands: Vec<String>,
-}
-
-fn parse_makefile_targets(contents: &str) -> Vec<TaskScriptTarget> {
-    let mut targets: Vec<TaskScriptTarget> = Vec::new();
-    let mut active_target_indices: Vec<usize> = Vec::new();
-
+/// Static literal declarations only. Never evaluate upstream Make expressions.
+fn parse_makefile_targets(contents: &str) -> Vec<String> {
+    let mut targets = Vec::new();
+    let mut define_depth = 0usize;
+    let mut conditional_depth = 0usize;
+    let mut continued = false;
     for line in contents.lines() {
-        // Makefile targets are defined at the start of a line (column 0).
-        // Recipe bodies are indented (tab or spaces) and may contain ":" in
-        // shell expansions like ":-" or "$(var:pat=rep)".
-        if line.starts_with(|c: char| c.is_whitespace()) {
-            if active_target_indices.is_empty() {
-                continue;
-            }
-            if let Some(command) = normalize_task_script_recipe_line(line) {
-                for index in &active_target_indices {
-                    targets[*index].commands.push(command.clone());
-                }
-            }
+        let trimmed = line.split('#').next().unwrap_or("").trim();
+        let was_continued = continued;
+        continued = trimmed.ends_with('\\');
+        if line.starts_with('\t') || trimmed.is_empty() {
             continue;
         }
-
-        active_target_indices.clear();
-        let Some((lhs, rhs)) = line.trim().split_once(':') else {
+        let directive = trimmed.split_whitespace().next().unwrap_or("");
+        if matches!(
+            directive,
+            "define" | "override" | "export" | "private" | "unexport"
+        ) && trimmed.split_whitespace().any(|token| token == "define")
+        {
+            define_depth += 1;
+            continue;
+        }
+        if directive == "endef" {
+            define_depth = define_depth.saturating_sub(1);
+            continue;
+        }
+        if define_depth > 0 {
+            continue;
+        }
+        if matches!(directive, "ifdef" | "ifndef" | "ifeq" | "ifneq") {
+            conditional_depth += 1;
+            continue;
+        }
+        if directive == "endif" {
+            conditional_depth = conditional_depth.saturating_sub(1);
+            continue;
+        }
+        if conditional_depth > 0 || was_continued {
+            continue;
+        }
+        // A top-level diagnostic or changed recipe syntax prevents us from
+        // establishing any usable default with this conservative parser.
+        if trimmed.starts_with("$(error")
+            || trimmed.starts_with("${error")
+            || trimmed.starts_with(".RECIPEPREFIX")
+        {
+            return Vec::new();
+        }
+        if continued || line.starts_with(char::is_whitespace) {
+            continue;
+        }
+        let Some((lhs, rhs)) = trimmed.split_once(':') else {
             continue;
         };
-        // Variable assignments and special directives are not executable
-        // targets, even if they contain a colon.
-        if lhs.contains('=') || lhs.trim_start().starts_with('.') {
+        if rhs.starts_with(['=', ':']) || rhs.contains(':') || rhs.contains('=') {
             continue;
         }
-
-        for name in lhs.split_whitespace() {
-            let normalized = name.to_ascii_lowercase();
-            let index = targets.len();
-            targets.push(TaskScriptTarget {
-                name: normalized,
-                commands: Vec::new(),
-            });
-            active_target_indices.push(index);
+        let names = lhs.split_whitespace().collect::<Vec<_>>();
+        if names.is_empty() || !names.iter().all(|name| literal_task_name(name)) {
+            continue;
         }
-
-        if let Some((_, inline_command)) = rhs.split_once(';') {
-            if let Some(command) = normalize_task_script_recipe_line(inline_command) {
-                for index in &active_target_indices {
-                    targets[*index].commands.push(command.clone());
-                }
-            }
-        }
+        targets.extend(names.into_iter().map(str::to_string));
     }
-
     targets
 }
 
-fn parse_justfile_recipes(contents: &str) -> Vec<TaskScriptTarget> {
-    let mut recipes: Vec<TaskScriptTarget> = Vec::new();
-    let mut active_recipe: Option<usize> = None;
+fn literal_task_name(name: &str) -> bool {
+    name.chars()
+        .next()
+        .is_some_and(|ch| ch.is_ascii_alphabetic() || ch == '_')
+        && name
+            .chars()
+            .all(|ch| ch.is_ascii_alphanumeric() || matches!(ch, '_' | '-'))
+}
 
+fn parse_justfile_recipes(contents: &str) -> Vec<String> {
+    let mut recipes = Vec::new();
+    let mut attributed = false;
     for line in contents.lines() {
-        if line.starts_with(|c: char| c.is_whitespace()) {
-            let Some(index) = active_recipe else {
-                continue;
-            };
-            if let Some(command) = normalize_task_script_recipe_line(line) {
-                recipes[index].commands.push(command);
-            }
+        if line.starts_with(char::is_whitespace) {
             continue;
         }
-
-        active_recipe = None;
         let trimmed = line.trim();
-        // Skip ':=' assignments, aliases/settings/attributes, comments, and
-        // private helper recipes. Private helpers can still be called through a
-        // public wrapper, but they should not define top-level build/test facts.
-        if trimmed.is_empty()
-            || trimmed.starts_with('#')
-            || trimmed.contains(":=")
-            || trimmed.starts_with('[')
-            || trimmed.starts_with("alias ")
-            || trimmed.starts_with('_')
-        {
+        if trimmed.is_empty() || trimmed.starts_with('#') {
             continue;
         }
-        let Some(colon_pos) = trimmed.find(':') else {
-            continue;
-        };
-        let lhs = trimmed[..colon_pos].trim();
-        if lhs.contains('=') || lhs.is_empty() {
+        if trimmed.starts_with('[') {
+            attributed = true;
             continue;
         }
-        // Recipes may include parameters: "name arg:". The first token is the
-        // command users type.
-        let Some(name) = lhs.split_whitespace().next() else {
+        let skip = std::mem::take(&mut attributed);
+        let Some((lhs, rhs)) = trimmed.split_once(':') else {
             continue;
         };
-        let normalized = name.to_ascii_lowercase();
-        let index = recipes.len();
-        recipes.push(TaskScriptTarget {
-            name: normalized,
-            commands: Vec::new(),
-        });
-        active_recipe = Some(index);
+        let name = lhs.trim();
+        // Parameters (including defaults and variadics) require a richer
+        // invocation contract. Withhold them rather than guessing arguments.
+        if skip || rhs.starts_with('=') || name.starts_with('_') || !literal_task_name(name) {
+            continue;
+        }
+        recipes.push(name.to_string());
     }
-
     recipes
-}
-
-fn normalize_task_script_recipe_line(line: &str) -> Option<String> {
-    let mut trimmed = line.trim();
-    while let Some(rest) = trimmed.strip_prefix(['@', '-', '+']) {
-        trimmed = rest.trim_start();
-    }
-    normalize_documented_command_line(trimmed)
-}
-
-fn simple_task_script_command(commands: &[String], select_build: bool) -> Option<String> {
-    let [command] = commands else {
-        return None;
-    };
-    if contains_unsafe_shell_like_value(command) {
-        return None;
-    }
-    if select_build {
-        documented_build_command(command)
-    } else {
-        documented_test_command(command)
-    }
 }
 
 pub(crate) fn infer_rakefile_commands(file: &ImportedFile) -> Option<ImportedCommandCandidate> {
@@ -963,6 +923,9 @@ fn documented_build_command(command: &str) -> Option<String> {
 }
 
 fn documented_test_command(command: &str) -> Option<String> {
+    if is_nonexecuting_test_command(command) {
+        return None;
+    }
     let stripped = without_cargo_toolchain_override(command);
     let matchable = stripped.as_deref().unwrap_or(command);
     if starts_with_command_prefix(matchable, "cargo nextest run") {
@@ -1114,7 +1077,11 @@ pub(crate) fn first_matching_workflow_command(
 ) -> Option<String> {
     commands.iter().find_map(|command| {
         let trimmed = command.trim();
-        if trimmed.is_empty() || trimmed.starts_with('#') || looks_like_shell_assignment(trimmed) {
+        if trimmed.is_empty()
+            || trimmed.starts_with('#')
+            || looks_like_shell_assignment(trimmed)
+            || (!select_build && is_nonexecuting_test_command(trimmed))
+        {
             return None;
         }
         // Lines that merely print or prepare files can mention a runner

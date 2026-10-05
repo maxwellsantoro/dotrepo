@@ -1,0 +1,143 @@
+PREFIX=/usr/local
+INSTALLDIR=$(PREFIX)/bin
+
+# ================================================================
+# General-use targets
+
+# This must remain the first target in this file, which is what 'make' with no
+# arguments will run.
+build:
+	go build github.com/johnkerl/miller/v6/cmd/mlr
+	@echo "Build complete. The Miller executable is ./mlr (or .\mlr.exe on Windows)."
+	@echo "You can use 'make check' to run tests".
+
+quiet:
+	@go build github.com/johnkerl/miller/v6/cmd/mlr
+
+# For interactive use, 'mlr regtest' offers more options and transparency.
+check: unit-test regression-test
+	@echo "Tests complete. You can use 'make install' if you like, optionally preceded"
+	@echo "by './configure --prefix=/your/install/path' if you wish to install to"
+	@echo "somewhere other than /usr/local/bin -- the default prefix is /usr/local."
+
+# DESTDIR is for package installs; nominally blank when this is run interactively.
+# See also https://www.gnu.org/prep/standards/html_node/DESTDIR.html
+install: build
+	mkdir -p $(DESTDIR)/$(INSTALLDIR)
+	cp mlr $(DESTDIR)/$(INSTALLDIR)/
+	make -C man install
+
+# ================================================================
+# Dev targets
+
+# ----------------------------------------------------------------
+# Unit tests (small number)
+unit-test ut: build
+	go test github.com/johnkerl/miller/v6/pkg/...
+
+ut-lib:build
+	go test github.com/johnkerl/miller/v6/pkg/lib...
+ut-scan:build
+	go test github.com/johnkerl/miller/v6/pkg/scan/...
+ut-mlv:build
+	go test github.com/johnkerl/miller/v6/pkg/mlrval/...
+ut-bifs:build
+	go test github.com/johnkerl/miller/v6/pkg/bifs/...
+ut-input:build
+	go test github.com/johnkerl/miller/v6/pkg/input/...
+
+bench:build
+	go test -run=nonesuch -bench=. github.com/johnkerl/miller/v6/pkg/...
+bench-mlv:build
+	go test -run=nonesuch -bench=. github.com/johnkerl/miller/v6/pkg/mlrval/...
+bench-input:build
+	go test -run=nonesuch -bench=. github.com/johnkerl/miller/v6/pkg/input/...
+
+# ----------------------------------------------------------------
+# Regression tests (large number)
+#
+# See ./regression_test.go for information on how to get more details
+# for debugging.  TL;DR is for CI jobs, we have 'go test -v'; for
+# interactive use, instead of 'go test -v' simply use 'mlr regtest
+# -vvv' or 'mlr regtest -s 20'. See also pkg/terminals/regtest.
+regression-test: build
+	go test -v regression_test.go
+
+# ----------------------------------------------------------------
+# Formatting
+# go fmt ./... finds experimental C files which we want to ignore.
+fmt format:
+	-go fmt ./cmd/...
+	-go fmt ./pkg/...
+	-go fmt ./regression_test.go
+
+# ----------------------------------------------------------------
+# Static analysis
+
+# Needs first: go install honnef.co/go/tools/cmd/staticcheck@latest
+# See also: https://staticcheck.io
+staticcheck:
+	staticcheck ./pkg/... ./cmd/mlr/...
+
+# Needs first: https://golangci-lint.run/welcome/install/#local-installation
+# Config lives in .golangci.yml; same invocation as .github/workflows/golangci-lint.yml
+lint:
+	golangci-lint run ./cmd/mlr ./pkg/...
+
+# Needs first: go install github.com/securego/gosec/v2/cmd/gosec@latest
+# Rules excluded below don't apply to a CLI data-processing tool and are pure
+# noise here; see plans/security.md for the reasoning behind each:
+#   G104 unhandled errors            -- already tuned via errcheck in .golangci.yml
+#   G115 int overflow conversions    -- inherent to Mlrval's numeric-type handling
+#   G301/G302/G306 file permissions  -- 0644/0755 is expected for output data files
+#   G602 slice index out of range    -- gosec can't prove loop bounds; high false-positive rate
+gosec:
+	gosec -exclude=G104,G115,G301,G302,G306,G602 ./pkg/... ./cmd/mlr/...
+
+# ----------------------------------------------------------------
+# For developers before pushing to GitHub.
+#
+# These steps are done in a particular order:
+# go:
+# * builds the mlr executable
+# man:
+# * creates manpage mlr.1 and manpage.txt using mlr from the $PATH
+# * copies the latter to docs/src
+# docs:
+# * turns *.md.in into *.md (live code samples), using mlr from the $PATH
+# * note the man/manpage.txt becomes some of the HTML content
+# * turns *.md into docs/site HTML and CSS files
+dev: fmt build
+	make check
+	make -C man build
+	make -C docs/src forcebuild
+	make -C docs
+	@echo DONE
+
+docs: fmt build
+	make -C docs/src forcebuild
+	make -C docs
+
+man: fmt build
+	make -C man build
+
+# ----------------------------------------------------------------
+# Keystroke-savers
+
+sure: build check
+
+it: build check
+so: install
+
+mlr:
+	go build github.com/johnkerl/miller/v6/cmd/mlr
+
+# ----------------------------------------------------------------
+# Please see comments in ./create-release-tarball as well as
+# https://miller.readthedocs.io/en/latest/build/#creating-a-new-release-for-developers
+release_tarball release-tarball: build check
+	./create-release-tarball
+
+# ================================================================
+# Go does its own dependency management, outside of make.
+.PHONY: build mlr check unit_test regression_test bench fmt staticcheck lint dev docs man

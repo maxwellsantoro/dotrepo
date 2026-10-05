@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/hashicorp/vault"
 generated_at = "2026-09-16T16:24:27.31545Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Makefile`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/CODEOWNERS`, `Makefile`, and `go.mod`. Maintainer information was imported from broad CODEOWNERS patterns; `owners.team` prefers `@hashicorp/vault` from the repo-wide rule, and `owners.maintainers` preserves narrower owner candidates. Imported `repo.build` from `Makefile`. Imported `repo.test` from `Makefile`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "Vault"
@@ -35,7 +34,6 @@ languages = [
     "Batchfile",
     "HTML",
 ]
-build = "make build"
 test = "make test"
 topics = [
     "vault",
@@ -73,7 +71,7 @@ references = []
 [[relations.links]]
 kind = "related"
 target = "github.com/hashicorp/vault"
-notes = "Cross-link from README: ![build"
+notes = "Cross-link from README: ![build 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [relations.links.trust]
 confidence = "low"
@@ -114,14 +112,6 @@ reason = "clear CODEOWNERS team"
 state = "present"
 valueJson = '"@hashicorp/vault"'
 
-[x.dotrepo.field_evidence."repo.build"]
-checkedAt = "2026-09-16T16:24:27.31545Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "Makefile"
-state = "present"
-valueJson = '"make build"'
 
 [x.dotrepo.field_evidence."repo.description"]
 checkedAt = "2026-09-16T16:24:27.31545Z"

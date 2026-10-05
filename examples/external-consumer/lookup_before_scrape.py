@@ -318,9 +318,21 @@ def evaluate_for_task(
                     )
                     or any(
                         marker in value
-                        for marker in ("<", ">", "test_explain_what_is_being_tested")
+                        for marker in ("<", ">", "{{", "}}", "test_explain_what_is_being_tested")
                     )
                     or any(flag in tokens for flag in ("--collect-only", "--no-run"))
+                    or (
+                        any(tokens[i : i + 2] == ["go", "test"] for i in range(len(tokens) - 1))
+                        and any(
+                            token in {"-c", "-list"}
+                            or (
+                                token.startswith("-c=")
+                                and token[3:] not in {"false", "False", "FALSE", "0"}
+                            )
+                            or token.startswith("-list=")
+                            for token in tokens
+                        )
+                    )
                 ):
                     reasons.append("incomplete-command:" + path)
                 source = assessment.get("source", "")

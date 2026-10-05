@@ -19,3 +19,11 @@
 ## Fresh verification
 
 Prior verified authority was not inherited: this refresh must qualify using its current field scores.
+
+## 2026-10-04 command semantics correction
+
+The preceding import and auto-promotion entries are historical and superseded for the fields below. Pinned sources were inspected statically; upstream task recipes were not executed. This does not establish task correctness or refresh other facts. Prior affected field assessments were removed, and verified authority was superseded where necessary.
+
+- repo.test: `go test ./...` -> `make test` (inspected `Makefile`)
+
+Receipt and source hashes: [command-source audit](../../../../telemetry/command-semantics-20261004/report.json).

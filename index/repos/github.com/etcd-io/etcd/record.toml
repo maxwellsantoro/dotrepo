@@ -2,17 +2,16 @@ schema = "dotrepo/v0.1"
 
 [record]
 mode = "overlay"
-status = "verified"
+status = "imported"
 source = "https://github.com/etcd-io/etcd"
 generated_at = "2026-09-17T06:07:06.536766108Z"
 
 [record.trust]
-confidence = "high"
+confidence = "medium"
 provenance = [
     "imported",
-    "verified",
 ]
-notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, `Makefile`, `CONTRIBUTING.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved."
+notes = "Bootstrapped from `README.md`, `.github/SECURITY.md`, `Makefile`, `CONTRIBUTING.md`, and `go.mod`. SECURITY.md provided a policy or reporting URL rather than a direct mailbox, so `security_contact` preserves that URL. Imported `repo.build` from `Makefile`. Imported `repo.test` from `CONTRIBUTING.md`. Imported `repo.toolchain.min` from `go.mod`. This is an overlay bootstrap, not a maintainer-controlled canonical record. Auto-promoted to verified: all fields are honestly resolved. 2026-10-04 pinned command-source audit supersedes affected extraction assessments and prior auto-promotion. Corrected commands are unassessed pending full-record verification; unrelated inspection timestamps are unchanged. See index/telemetry/command-semantics-20261004/report.json."
 
 [repo]
 name = "etcd"
@@ -29,7 +28,7 @@ languages = [
     "Dockerfile",
 ]
 build = "make build"
-test = "go test -v -c -count 1"
+test = "make test-unit"
 topics = [
     "etcd",
     "raft",
@@ -122,14 +121,6 @@ source = "README.md"
 state = "present"
 valueJson = '"etcd"'
 
-[x.dotrepo.field_evidence."repo.test"]
-checkedAt = "2026-09-17T06:07:06.536766108Z"
-confidence = "high"
-method = "extracted"
-reason = "from declared repository source"
-source = "CONTRIBUTING.md"
-state = "present"
-valueJson = '"go test -v -c -count 1"'
 
 [x.github]
 archived = false
