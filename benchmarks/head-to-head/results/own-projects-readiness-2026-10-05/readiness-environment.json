@@ -1,0 +1,34 @@
+{
+  "operatorPlatform": "macOS-27.0.1-arm64-arm-64bit",
+  "reservedHost": false,
+  "concurrentWork": "Unreserved host: other compilation, standalone RamenOS validation, Python checks and separate SDK diagnostics overlapped parts of the run. No causal latency comparison.",
+  "preparedTools": {
+    "javaHome": "/opt/homebrew/opt/openjdk@21",
+    "javaVersion": "javac 21.0.12.1",
+    "zigVersion": "0.14.0",
+    "zigArchiveSha256": "b71e4b7c4b4be9953657877f7f9e6f7ee89114c716da7c070f4a238220e95d7e",
+    "zigDownloadIndexUrl": "https://ziglang.org/download/index.json",
+    "zigTarballUrl": "https://ziglang.org/download/0.14.0/zig-macos-aarch64-0.14.0.tar.xz",
+    "sourceVersionOwner": "Atlas .github/workflows/campaign.yml at 866fe127542178c35515f51afed30c41616bdd77"
+  },
+  "sourceReceipts": {
+    "ramen-justfile-source.txt": "ac3aefec64ea7c6cef2866b02cc88af7118e9f4564ec5339d8025ad8cf34e80a",
+    "atlas-campaign-source.txt": "a62b8f9d3673888e9d8d3e644d19f4b42a1893aed26da5229f12afa1b56f1823",
+    "ramen-proposed-fix.patch": "250f21a7e4a349ba5432c63d6967dc5b1f351aed1764cd6240d5f88fbce651dd",
+    "ries-native-source.txt": "5a8785f17614efd144743c83facac89665cad24feec47c1eee386d9242a04a12",
+    "pagedigest-agent-source.txt": "d58b9669394c449c026916863fef022450c84bfa2eed1fa4474f653ffde1f632"
+  },
+  "changesFromFirstStudy": [
+    "RamenOS proposed wrapper prerequisite commit",
+    "Java 21 added to task process PATH; CI-pinned Zig 0.14.0 downloaded to a task-local directory",
+    "Python shim prefers each fresh project virtual environment",
+    "Per-command limit increased from 300 to 900 seconds"
+  ],
+  "taskSubstitutions": false,
+  "coveragePreviouslyKnown": true,
+  "externalAdoption": false,
+  "allocatedPreparationCost": null,
+  "downloadedToolArchiveBytes": 45902412,
+  "prerequisiteFixPullRequest": "https://github.com/maxwellsantoro/RamenOS/pull/33",
+  "prerequisiteFixMergeStateAtFreeze": "proposed commit; not merged"
+}

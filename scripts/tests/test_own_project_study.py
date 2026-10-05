@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -10,7 +12,18 @@ import pytest
 
 BENCH = Path(__file__).resolve().parents[2] / "benchmarks/head-to-head"
 sys.path.insert(0, str(BENCH))
-from bench.own_projects import freeze, oracle, run, validate_fixed_tasks  # noqa: E402
+from bench.own_projects import (  # noqa: E402
+    REPEAT_REVISIONS,
+    freeze,
+    oracle,
+    python_shim,
+    run,
+    sdk_shim,
+    study_environment,
+    study_inputs,
+    validate_fixed_tasks,
+    zig_shim,
+)
 from bench.tasks import score  # noqa: E402
 
 
@@ -71,6 +84,133 @@ def test_unfamiliar_command_cannot_enter_fixed_runner():
     workload["tasks"][0]["acceptableInstructions"][0]["command"] = "arbitrary-upstream-command"
     with pytest.raises(ValueError, match="fixed source tasks"):
         validate_fixed_tasks(workload)
+
+
+def test_repeat_keeps_all_tasks_and_binds_proposed_wrapper_prerequisite():
+    workload = json.loads((BENCH / "results/own-projects-2026-10-04/workload.json").read_text())
+    workload["study"] = "readiness-repeat"
+    for task in workload["tasks"]:
+        task["revision"] = REPEAT_REVISIONS[task["identity"].split("/")[-1]]
+        task["timeoutSecondsPerCommand"] = 900
+    plan = workload["tasks"][1]["acceptableInstructions"][0]
+    plan["prerequisites"].insert(0, "just codegen (included by wrapper)")
+    validate_fixed_tasks(workload)
+    plan["prerequisites"].pop(0)
+    with pytest.raises(ValueError, match="fixed source tasks"):
+        validate_fixed_tasks(workload)
+    with pytest.raises(ValueError, match="unknown fixed study"):
+        study_inputs("substitute-easier-tasks")
+
+
+def test_uv_shim_uses_project_environment_and_falls_back_for_no_venv(tmp_path):
+    project = tmp_path / ".venv"
+    subprocess.run(["uv", "venv", "--python", sys.executable, str(project)], check=True)
+    shim = tmp_path / "python"
+    shim.write_text(python_shim())
+    shim.chmod(0o755)
+    env = {**os.environ, "DOTREPO_STUDY_PROJECT_PYTHON": str(project / "bin/python")}
+    command = [str(shim), "-c", "import sys; print(sys.prefix)"]
+    assert subprocess.check_output(command, env=env, text=True).strip() == str(project)
+    env["DOTREPO_STUDY_PROJECT_PYTHON"] = str(tmp_path / "absent")
+    assert subprocess.check_output(command, env=env, text=True).strip() == sys.prefix
+
+
+def test_sdk_followup_keeps_the_two_failed_tasks_and_requires_declared_setup():
+    workload = json.loads((BENCH / "results/own-projects-2026-10-04/workload.json").read_text())
+    workload["study"] = "atlas-sdk-followup"
+    workload["tasks"] = workload["tasks"][2:4]
+    for task in workload["tasks"]:
+        task["timeoutSecondsPerCommand"] = 900
+        plan = task["acceptableInstructions"][0]
+        plan["prerequisites"].append("task-local Zig 0.14 compatible SDK selection")
+        plan["environment"] = study_environment("atlas-sdk-followup")
+    validate_fixed_tasks(workload)
+    workload["tasks"][0]["acceptableInstructions"][0]["environment"] = {}
+    with pytest.raises(ValueError, match="fixed source tasks"):
+        validate_fixed_tasks(workload)
+
+
+def test_sdk_selector_overrides_only_the_declared_sdk_query(tmp_path):
+    shim = tmp_path / "xcrun"
+    shim.write_text(sdk_shim())
+    shim.chmod(0o755)
+    env = {**os.environ, "DOTREPO_STUDY_ZIG_SDK": str(tmp_path / "explicit-sdk")}
+    assert (
+        subprocess.check_output(
+            [str(shim), "--sdk", "macosx", "--show-sdk-path"], env=env, text=True
+        ).strip()
+        == env["DOTREPO_STUDY_ZIG_SDK"]
+    )
+    if sys.platform == "darwin":
+        expected = subprocess.check_output(["/usr/bin/xcrun", "--show-sdk-path"], text=True)
+        assert (
+            subprocess.check_output([str(shim), "--show-sdk-path"], env=env, text=True) == expected
+        )
+
+
+def test_readiness_packet_replays_without_erasing_its_sdk_failures():
+    packet = BENCH / "results/own-projects-readiness-2026-10-05"
+    scored = score(packet / "workload.json", packet / "observations.json")
+    assert scored == json.loads((packet / "results.json").read_bytes())
+    for arm in ("source-first", "lookup-first"):
+        summary = scored["summary"][arm]
+        assert summary["completedTask"] == 6
+        assert summary["failedAttempts"] == 2
+        assert summary["acceptedWrongAnswer"] == summary["policyAcceptedTasks"] == 0
+    assert scored["summary"]["lookup-first"]["fallbackAttempts"] == 8
+
+
+def test_sdk_selection_is_private_to_the_zig_child(tmp_path):
+    private = tmp_path / "private"
+    private.mkdir()
+    selector = private / "xcrun"
+    selector.write_text(sdk_shim())
+    selector.chmod(0o755)
+    probe = tmp_path / "probe-zig"
+    probe.write_text("#!/bin/sh\nexec xcrun --sdk macosx --show-sdk-path\n")
+    probe.chmod(0o755)
+    public = tmp_path / "public"
+    public.mkdir()
+    wrapper = public / "zig"
+    wrapper.write_text(zig_shim(probe, private))
+    wrapper.chmod(0o755)
+    env = {**os.environ, "DOTREPO_STUDY_ZIG_SDK": "declared-compat-sdk"}
+    env["PATH"] = str(public) + os.pathsep + env["PATH"]
+    assert (
+        subprocess.check_output([str(wrapper)], env=env, text=True).strip() == "declared-compat-sdk"
+    )
+    if sys.platform == "darwin":
+        command = ["xcrun", "--sdk", "macosx", "--show-sdk-path"]
+        expected = subprocess.check_output(["/usr/bin/xcrun", *command[1:]], text=True)
+        assert subprocess.check_output(command, env=env, text=True) == expected
+
+
+@pytest.mark.parametrize(
+    ("packet_name", "completed"),
+    [("own-projects-atlas-sdk-2026-10-05", 0), ("own-projects-atlas-scoped-sdk-2026-10-05", 2)],
+)
+def test_sdk_packets_replay_separately_with_the_complete_cohort(packet_name, completed):
+    packet = BENCH / "results" / packet_name
+    scored = score(packet / "workload.json", packet / "observations.json")
+    assert scored == json.loads((packet / "results.json").read_bytes())
+    for arm in ("source-first", "lookup-first"):
+        assert scored["summary"][arm]["completedTask"] == completed
+        assert scored["summary"][arm]["policyAcceptedTasks"] == 0
+    assert scored["summary"]["lookup-first"]["fallbackAttempts"] == 2
+    if completed:
+        for arm in ("source-first", "lookup-first"):
+            attempt = json.loads(
+                (
+                    packet / "attempts" / f"sha256-benchmark-atlas-correctness-{arm}-0.json"
+                ).read_bytes()
+            )
+            report = json.loads(attempt["commands"][-1]["stdout"])
+            assert report["passed"] and report["case_count"] >= 1000
+            assert len({item["id"] for item in report["implementations"]}) == 19
+            assert all(
+                item["ok"] and item["checked"] == report["case_count"] and item["failed"] == 0
+                for item in report["implementations"]
+            )
 
 
 def test_retained_live_packet_separates_mismatches_failures_and_unknown_costs():

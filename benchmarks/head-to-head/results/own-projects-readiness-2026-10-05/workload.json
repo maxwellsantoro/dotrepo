@@ -1,0 +1,319 @@
+{
+  "version": 1,
+  "study": "readiness-repeat",
+  "frozenAt": "2026-10-05T04:29:37.235999+00:00",
+  "selectionBeforeCoverageInspection": true,
+  "consumerClass": "operator-controlled",
+  "cacheState": "warm",
+  "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+  "consumerPolicy": "explicit-high-confidence-extraction",
+  "runnerSha256": "a10cbdfe334a06892f612b1e7342f9a1436dc487c286e755d8e6d91fe016a76b",
+  "toolVersions": {
+    "java": "javac 21.0.12.1",
+    "zig": "0.14.0"
+  },
+  "tasks": [
+    {
+      "id": "RamenOS-host-build",
+      "taskClass": "host-build",
+      "identity": "github.com/maxwellsantoro/RamenOS",
+      "revision": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "acceptableInstructions": [
+        {
+          "command": "just build-host",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "host components",
+          "prerequisites": [
+            "just codegen (included by wrapper)",
+            "pinned Rust nightly and just"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "docs/GETTING_STARTED.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "host-build",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/RamenOS/blob/4faea185ccd0b5bf310f2b949ce51b31fcbe0503/docs/GETTING_STARTED.md",
+          "locator": "just build-host",
+          "checkedAt": "2026-10-05T04:29:36.906175+00:00",
+          "sourceRevision": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
+          "sha256": "2853f434aa67088bb13423112f327938bd6bb2c7b1875bac874fba039fb6b990"
+        }
+      ]
+    },
+    {
+      "id": "RamenOS-host-proof",
+      "taskClass": "host-proof",
+      "identity": "github.com/maxwellsantoro/RamenOS",
+      "revision": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "acceptableInstructions": [
+        {
+          "command": "just foundry-agent-task-proof-rt",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "host task proof",
+          "prerequisites": [
+            "just codegen (included by wrapper)",
+            "pinned Rust nightly and just"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "host-proof",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/RamenOS/blob/4faea185ccd0b5bf310f2b949ce51b31fcbe0503/README.md",
+          "locator": "just foundry-agent-task-proof-rt",
+          "checkedAt": "2026-10-05T04:29:36.945082+00:00",
+          "sourceRevision": "4faea185ccd0b5bf310f2b949ce51b31fcbe0503",
+          "sha256": "f996ebfbf6a68b87ab3e7e69d97d603ce01738c8cca28b0505ec2c0fdf0dbae2"
+        }
+      ]
+    },
+    {
+      "id": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "identity": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "acceptableInstructions": [
+        {
+          "command": "uv run sha256-atlas build",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "setupCommands": [
+        "uv sync"
+      ],
+      "oracle": "build",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/sha256-benchmark-atlas/blob/866fe127542178c35515f51afed30c41616bdd77/README.md",
+          "locator": "uv run sha256-atlas build",
+          "checkedAt": "2026-10-05T04:29:36.984323+00:00",
+          "sourceRevision": "866fe127542178c35515f51afed30c41616bdd77",
+          "sha256": "8900b54f80e5daa46a356ae39d95ff8bbb142880c1462a29c6a7f778d839e33f"
+        }
+      ]
+    },
+    {
+      "id": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "identity": "github.com/maxwellsantoro/sha256-benchmark-atlas",
+      "revision": "866fe127542178c35515f51afed30c41616bdd77",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "acceptableInstructions": [
+        {
+          "command": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+          "workingDirectory": ".",
+          "scope": "repository",
+          "component": null,
+          "prerequisites": [
+            "uv sync",
+            "README quick-start compiler/toolchain prerequisites",
+            "uv run sha256-atlas build"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "README.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [
+        "uv sync",
+        "uv run sha256-atlas build"
+      ],
+      "oracle": "correctness",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/sha256-benchmark-atlas/blob/866fe127542178c35515f51afed30c41616bdd77/README.md",
+          "locator": "uv run sha256-atlas correctness --cases 1000 --skip-million",
+          "checkedAt": "2026-10-05T04:29:37.018259+00:00",
+          "sourceRevision": "866fe127542178c35515f51afed30c41616bdd77",
+          "sha256": "8900b54f80e5daa46a356ae39d95ff8bbb142880c1462a29c6a7f778d839e33f"
+        }
+      ]
+    },
+    {
+      "id": "ries-rs-core-build",
+      "taskClass": "core-build",
+      "identity": "github.com/maxwellsantoro/ries-rs",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "acceptableInstructions": [
+        {
+          "command": "cargo build",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "Rust core and CLI",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "CONTRIBUTING.md"
+          ],
+          "purpose": "build"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "core-build",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/CONTRIBUTING.md",
+          "locator": "cargo build",
+          "checkedAt": "2026-10-05T04:29:37.058727+00:00",
+          "sourceRevision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+          "sha256": "043dd0e848ff8ed4be6870d3072110a3dca786fa2e6e12a35743afff32816381"
+        }
+      ]
+    },
+    {
+      "id": "ries-rs-core-test",
+      "taskClass": "core-test",
+      "identity": "github.com/maxwellsantoro/ries-rs",
+      "revision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "acceptableInstructions": [
+        {
+          "command": "cargo test",
+          "workingDirectory": ".",
+          "scope": "component",
+          "component": "Rust core and CLI",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "core-test",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/ries-rs/blob/cfa959ed21a5a5e5f3d9538d9d1714c2401611e5/AGENTS.md",
+          "locator": "cargo test",
+          "checkedAt": "2026-10-05T04:29:37.098926+00:00",
+          "sourceRevision": "cfa959ed21a5a5e5f3d9538d9d1714c2401611e5",
+          "sha256": "66a187844b884767690b2a25939e2a3e29ae00a90ebca23c89a9cc17d13b76e5"
+        }
+      ]
+    },
+    {
+      "id": "pagedigest-consumer-test",
+      "taskClass": "consumer-test",
+      "identity": "github.com/maxwellsantoro/pagedigest",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "acceptableInstructions": [
+        {
+          "command": "uv run --locked python -m unittest discover -s tests -v",
+          "workingDirectory": "implementations/python-consumer",
+          "scope": "component",
+          "component": "Python consumer",
+          "prerequisites": [
+            "uv and locked consumer environment"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "consumer-test",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/pagedigest/blob/f880f813cc0df49603482dbd879ff4ef49b3a519/AGENTS.md",
+          "locator": "uv run --locked python -m unittest discover -s tests -v",
+          "checkedAt": "2026-10-05T04:29:37.133204+00:00",
+          "sourceRevision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+          "sha256": "d58b9669394c449c026916863fef022450c84bfa2eed1fa4474f653ffde1f632"
+        }
+      ]
+    },
+    {
+      "id": "pagedigest-generator-test",
+      "taskClass": "generator-test",
+      "identity": "github.com/maxwellsantoro/pagedigest",
+      "revision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+      "environmentId": "operator-macos-arm64-readiness-v2",
+      "acceptableInstructions": [
+        {
+          "command": "cargo test --locked",
+          "workingDirectory": "implementations/rust-generator",
+          "scope": "component",
+          "component": "Rust generator",
+          "prerequisites": [
+            "Rust/Cargo"
+          ],
+          "parameters": {},
+          "environment": {},
+          "sourcePaths": [
+            "AGENTS.md"
+          ],
+          "purpose": "test"
+        }
+      ],
+      "setupCommands": [],
+      "oracle": "generator-test",
+      "timeoutSecondsPerCommand": 900,
+      "evidence": [
+        {
+          "url": "https://github.com/maxwellsantoro/pagedigest/blob/f880f813cc0df49603482dbd879ff4ef49b3a519/AGENTS.md",
+          "locator": "cargo test --locked",
+          "checkedAt": "2026-10-05T04:29:37.235359+00:00",
+          "sourceRevision": "f880f813cc0df49603482dbd879ff4ef49b3a519",
+          "sha256": "d58b9669394c449c026916863fef022450c84bfa2eed1fa4474f653ffde1f632"
+        }
+      ]
+    }
+  ],
+  "selection": "Targeted readiness repeat of the original eight preregistered tasks. Original selection preceded coverage inspection; coverage is now known. No task substitutions. RamenOS uses the proposed prerequisite-fix commit; other revisions and commands are unchanged. This is not a held-out study.",
+  "measurementBoundary": "Warm shared tool/download caches; fresh checkout and build outputs per arm. Explicit source/profile HTTP, checkout, setup, command execution and oracle are timed. Clone/bootstrap/source adjudication and package-manager network counts are outside transport totals. No modeled or net-cost claim.",
+  "repeatOfWorkloadSha256": "1f294e164109631ac7e400ab86d06b6392c4350e50f8a8ca32a85fe225d5d1fd",
+  "knownCoverage": true
+}

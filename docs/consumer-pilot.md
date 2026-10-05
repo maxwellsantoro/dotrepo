@@ -27,6 +27,18 @@ The current checkpoint is reviewable paired outcomes and a disposition for every
 task. Later fixes receive a new dated run; preserve the first packet. Useful
 operator results can justify a later independent pilot, but do not close its gate.
 
+The [October 5 readiness repeat](../benchmarks/head-to-head/results/own-projects-readiness-2026-10-05/README.md)
+retains the same tasks after explicit prerequisite preparation. Its coverage is
+already known, and RamenOS uses an identified proposed fix rather than its original
+commit. Freeze the revised source pins, environment adapter, time budget, and
+snapshot before executing the repeat. This targeted follow-up cannot substitute
+for a held-out evaluation. Successful source fallback establishes task readiness;
+useful accepted answers and measured task benefit remain separate requirements.
+The separate [Atlas SDK follow-ups](../benchmarks/head-to-head/results/own-projects-atlas-scoped-sdk-2026-10-05/README.md)
+retain the failed broad selector before the Zig-only environment succeeds with
+the complete cohort. Their two-task denominator does not replace the eight-task
+repeat, and neither arm accepts an indexed command in these follow-ups.
+
 ## Deliverables
 
 - Dependency-free HTTP client: `examples/external-consumer/lookup_before_scrape.py`.

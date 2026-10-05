@@ -1,0 +1,17 @@
+{
+  "executable": "/tmp/dotrepo-readiness-20261005-Atlas/implementations/zig-std/zig-out/bin/sha256_runner",
+  "sha256": "c395210725579925d79b097a7c24ed440af578b593c77e160a02021653f885ab",
+  "cases": 3,
+  "verifiedOutputs": [
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+    "d414b085826eb06778483ba35564dc849e643359f69ed9747878ba6e54985bed"
+  ],
+  "caseDigests": [
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+    "d414b085826eb06778483ba35564dc849e643359f69ed9747878ba6e54985bed"
+  ],
+  "exitCode": 0,
+  "sdkSelection": "task-local tree uses unmodified Zig 0.14 libSystem.tbd with existing macOS 27 headers/frameworks; installed SDK untouched"
+}

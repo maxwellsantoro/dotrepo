@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "workloadSha256": "6dadb7ae0f461cb657ccf3f5df0702a2864ad252956703560d5f2cfe421bd0a1",
+  "consumerClass": "operator-controlled",
+  "snapshotId": "8384e75929143cbe8a6d8fb27e375d5863eb9c591105765eba1402783336b4cd",
+  "consumerPolicy": "explicit-high-confidence-extraction",
+  "cacheState": "warm",
+  "externalAdoption": false,
+  "independentlyVerifiedObservations": null,
+  "observationLimit": "Hashes bind supplied logs; this scorer does not independently witness external execution.",
+  "rows": [
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "arm": "source-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 102320.99995901808,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-build",
+      "taskClass": "build",
+      "arm": "lookup-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": false,
+      "elapsedMs": 66401.6353750194,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "arm": "lookup-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": false,
+      "valuePresent": false,
+      "fallbackAttempts": 1,
+      "correctFallback": false,
+      "elapsedMs": 104998.8618750067,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    {
+      "taskId": "sha256-benchmark-atlas-correctness",
+      "taskClass": "correctness",
+      "arm": "source-first",
+      "completedTask": false,
+      "failedAttempts": 1,
+      "acceptedWrongAnswer": 0,
+      "policyAccepted": null,
+      "valuePresent": null,
+      "fallbackAttempts": 0,
+      "correctFallback": false,
+      "elapsedMs": 176341.4162080153,
+      "transport": {
+        "httpRequests": 1,
+        "decodedBytes": 5216,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    }
+  ],
+  "summary": {
+    "source-first": {
+      "attemptedTasks": 2,
+      "completedTask": 0,
+      "failedAttempts": 2,
+      "acceptedWrongAnswer": 0,
+      "fallbackAttempts": 0,
+      "correctFallback": 0,
+      "policyAcceptedTasks": 0,
+      "elapsedMs": 278662.41616703337,
+      "transport": {
+        "httpRequests": 2,
+        "decodedBytes": 10432,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    },
+    "lookup-first": {
+      "attemptedTasks": 2,
+      "completedTask": 0,
+      "failedAttempts": 2,
+      "acceptedWrongAnswer": 0,
+      "fallbackAttempts": 2,
+      "correctFallback": 0,
+      "policyAcceptedTasks": 0,
+      "elapsedMs": 171400.4972500261,
+      "transport": {
+        "httpRequests": 4,
+        "decodedBytes": 10432,
+        "cacheHits": 0
+      },
+      "modelUsage": {
+        "inputTokens": null,
+        "outputTokens": null,
+        "cost": null
+      },
+      "allocatedMaintenanceCost": null
+    }
+  }
+}
